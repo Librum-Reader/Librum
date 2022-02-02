@@ -23,8 +23,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 
 # build
 add_library(controller SHARED
-                        controller.cpp
-                        controller.hpp
+                        
     )
 
 target_include_directories(model

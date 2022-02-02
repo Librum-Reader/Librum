@@ -23,8 +23,6 @@ FetchContent_MakeAvailable(googletest)
 # Build tests
 add_executable(all_tests
                     main.cpp
-                    modelTests.hpp
-                    controllerTests.hpp
     )
 
 target_link_libraries(all_tests
