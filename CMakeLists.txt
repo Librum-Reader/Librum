@@ -31,27 +31,21 @@ option(BUILD_TESTS ON)
 
 
 # Dependencies
-include(FetchContent)
 find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
-FetchContent_Declare(googletest
-                    GIT_REPOSITORY https://github.com/google/googletest.git
-                    GIT_TAG        f2d71f0be2ff2230789cfaf37d4c4f38db5b1c7c
-    )
-
-FetchContent_MakeAvailable(googletest)
+add_subdirectory(src)
 
 
 
 # build
 qt_add_executable(appLibrum
-    main.cpp
+    src/app/main.cpp
 )
 
 qt_add_qml_module(appLibrum
     URI Librum
     VERSION 1.0
-    QML_FILES main.qml 
+    QML_FILES ${QML_SOURCES}
 )
 
 target_compile_definitions(appLibrum
@@ -59,7 +53,7 @@ target_compile_definitions(appLibrum
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
     )
 target_link_libraries(appLibrum
-                    PRIVATE 
+                    PUBLIC 
                         Qt6::Quick
     )
 
@@ -67,5 +61,5 @@ target_link_libraries(appLibrum
 
 # tests
 if(BUILD_TESTS)
-
+    add_subdirectory(tests/)
 endif()

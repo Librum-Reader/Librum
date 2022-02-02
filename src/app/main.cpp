@@ -1,11 +1,10 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
 #include <QLocale>
 #include <QTranslator>
 
 int main(int argc, char *argv[])
-{
+{    
     QGuiApplication app(argc, argv);
     
     QTranslator translator;
@@ -19,7 +18,7 @@ int main(int argc, char *argv[])
     }
     
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/Librum/main.qml"_qs);
+    const QUrl url(u"qrc:/Librum/src/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
