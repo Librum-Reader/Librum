@@ -4,7 +4,6 @@ project(Librum VERSION 0.1 LANGUAGES CXX)
 list(APPEND CMAKE_PREFIX_PATH "/home/creapermann/Qt/6.2.3/gcc_64")  # remove
 
 
-
 # Qt
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -68,5 +67,5 @@ target_link_libraries(appLibrum
 
 # tests
 if(BUILD_TESTS)
-    
+
 endif()
