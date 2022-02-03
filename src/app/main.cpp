@@ -6,6 +6,9 @@
 int main(int argc, char *argv[])
 {    
     QGuiApplication app(argc, argv);
+    app.setOrganizationName("Etovex");
+    app.setOrganizationDomain("Etovex.com");
+    app.setApplicationName("Librum");
     
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
