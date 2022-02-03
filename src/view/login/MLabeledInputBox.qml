@@ -17,6 +17,7 @@ Item
     property string fontFamily : "Droid Sans Fallback"
     property int    textPadding : 15
     property string image : ""
+    property string toggleImage : ""
     property bool   addImageToRight : false
     
     function clearInput()
@@ -75,8 +76,8 @@ Item
                 
                 Button
                 {
-                    width:  25
-                    height: 25
+                    width:  20
+                    height: 18
                     visible: root.addImageToRight
                     anchors.verticalCenter: parent.verticalCenter
                     background: Rectangle
@@ -89,17 +90,23 @@ Item
                     Image
                     {
                         id: showImage
+                        width: parent.width
                         height: parent.height
                         source: root.image
-                        fillMode: Image.PreserveAspectFit
                     }
                     
                     onPressedChanged:
                     {
                         if(pressed)
+                        {
+                            showImage.source = root.toggleImage
                             inputField.echoMode = TextInput.Normal
+                        }
                         else
+                        {
+                            showImage.source = root.image
                             inputField.echoMode = TextInput.Password
+                        }
                     }
                     
                     Component.onCompleted:

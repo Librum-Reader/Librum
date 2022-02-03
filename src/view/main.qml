@@ -41,7 +41,7 @@ ApplicationWindow
     Component
     {
         id: loginPage
-        LoginPage
+        MLoginPage
         {
             anchors.centerIn: parent
         }
@@ -50,7 +50,7 @@ ApplicationWindow
     Component
     {
         id: registerPage
-        RegisterPage
+        MRegisterPage
         {
             anchors.centerIn: parent
         }
@@ -72,7 +72,7 @@ ApplicationWindow
     }
     
     
-    GlobalProperties
+    MGlobalProperties
     {
         id: properties
     }

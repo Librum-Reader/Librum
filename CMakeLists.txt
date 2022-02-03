@@ -40,6 +40,7 @@ add_subdirectory(src)
 # build
 qt_add_executable(appLibrum
     src/app/main.cpp
+    resources.qrc
 )
 
 qt_add_qml_module(appLibrum

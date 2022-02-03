@@ -2,11 +2,11 @@ cmake_minimum_required(VERSION 3.22)
 
 set(QML_SOURCES
                 src/view/main.qml
-                src/view/GlobalProperties.qml
-                src/view/login/CheckBox.qml
-                src/view/login/LoginButton.qml
-                src/view/login/LabeledInputBox.qml
-                src/view/login/LoginPage.qml
-                src/view/register/RegisterPage.qml
+                src/view/MGlobalProperties.qml
+                src/view/login/MCheckBox.qml
+                src/view/login/MLoginButton.qml
+                src/view/login/MLabeledInputBox.qml
+                src/view/login/MLoginPage.qml
+                src/view/register/MRegisterPage.qml
     PARENT_SCOPE
     )

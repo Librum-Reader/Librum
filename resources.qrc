@@ -1,2 +1,6 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>resources/images/eye.svg</file>
+        <file>resources/images/eye-off.svg</file>
+    </qresource>
+</RCC>

@@ -92,28 +92,29 @@ Page
                         width: parent.width
                         spacing: 0
                         
-                        LabeledInputBox 
+                        MLabeledInputBox 
                         {
                             id: emailInput
                             placeholderContent: "kaidoe@gmail.com"
                             headerText: "Email"
                         }
                         
-                        LabeledInputBox
+                        MLabeledInputBox
                         {
                             id: passwordInput
                             Layout.topMargin: 15
                             placeholderContent: ""
                             headerText: "Password"
                             addImageToRight: true
-                            // image: "/resources/app/images/show_password_eye.png"
+                            image: "/resources/images/eye.svg"
+                            toggleImage: "/resources/images/eye-off.svg"
                         }
                         
                         RowLayout
                         {
                             Layout.topMargin: 28
                             
-                            CheckBox
+                            MCheckBox
                             {
                                 width:  18
                                 height: 18
@@ -143,7 +144,7 @@ Page
                             }
                         }
                         
-                        LoginButton 
+                        MLoginButton 
                         {
                             id: loginButton
                             inputField1: emailInput
