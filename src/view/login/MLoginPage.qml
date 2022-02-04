@@ -8,7 +8,6 @@ Page
     id: root
     height: parent.height
     width: parent.width
-    
     background: Rectangle
     {
         anchors.fill: parent
@@ -23,7 +22,6 @@ Page
         id: layout
         anchors.centerIn: parent
         width: root.baseWidth
-        spacing: 0
         
         Rectangle
         {
@@ -51,7 +49,7 @@ Page
                 {
                     id: logo
                     height: 72
-                    width:  72
+                    width: 72
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                     color: properties.colorBasePurple
                     radius: 8
@@ -76,7 +74,7 @@ Page
                     color: properties.colorBaseText
                     font.bold: true
                     font.pointSize: 22
-                    font.family: "Droid Sans Fallback"
+                    font.family: properties.defaultFontFamily
                 }
                 
                 Label
@@ -87,7 +85,7 @@ Page
                     text: "Log into your account"
                     color: properties.colorLightText2
                     font.pointSize: 12
-                    font.family: "Droid Sans Fallback"
+                    font.family: properties.defaultFontFamily
                 }
                 
                 Item
@@ -123,6 +121,7 @@ Page
                         
                         RowLayout
                         {
+                            id: rememberMeRow
                             Layout.topMargin: 28
                             
                             MCheckBox
@@ -179,7 +178,7 @@ Page
         Label
         {
             Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: 18
+            Layout.topMargin: 14
             text: "Don't have an account? Register"
             font.pointSize: 10
             color: properties.colorBasePurple

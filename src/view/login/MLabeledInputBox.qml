@@ -11,10 +11,9 @@ FocusScope
     
     property string placeholderContent : "placeholder"
     property int    inputFontSize : 11
-    property color  placeholderColor : "#8E8EA9"
+    property color  placeholderColor : "black"
     property string headerText : "Header here"
-    property color  borderColor : "#DCDCE4"
-    property string fontFamily : "Droid Sans Fallback"
+    property color  borderColor : properties.colorLightBorder
     property int    textPadding : 15
     property string image : ""
     property string toggleImage : ""
@@ -31,7 +30,7 @@ FocusScope
             id: emailLabel
             text: root.headerText
             width: parent.width
-            font.family: root.fontFamily
+            font.family: properties.defaultFontFamily
             font.pointSize: 10
         }
         
@@ -73,6 +72,7 @@ FocusScope
                 
                 Button
                 {
+                    id: imageAtRight
                     width:  20
                     height: 18
                     visible: root.addImageToRight
@@ -86,7 +86,7 @@ FocusScope
                     
                     Image
                     {
-                        id: showImage
+                        id: image
                         width: parent.width
                         height: parent.height
                         source: root.image
@@ -96,12 +96,12 @@ FocusScope
                     {
                         if(pressed)
                         {
-                            showImage.source = root.toggleImage
+                            image.source = root.toggleImage
                             inputField.echoMode = TextInput.Normal
                         }
                         else
                         {
-                            showImage.source = root.image
+                            image.source = root.image
                             inputField.echoMode = TextInput.Password
                         }
                     }

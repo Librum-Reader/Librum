@@ -6,6 +6,9 @@ Item
     property color colorLightText2 : "#8A8AA0"
     property color colorBasePurple : "#946BDE"
     property color colorBaseText  : "#32324D"
+    property color colorLightBorder : "#DCDCE4"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
+    
+    property string defaultFontFamily : "Droid Sans Fallback"
 }
