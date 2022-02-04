@@ -4,7 +4,7 @@ set(QML_SOURCES
                 src/view/main.qml
                 src/view/MGlobalProperties.qml
                 src/view/login/MCheckBox.qml
-                src/view/components/MButton.qml
+                src/view/login/MLoginButton.qml
                 src/view/login/MLabeledInputBox.qml
                 src/view/login/MLoginPage.qml
                 src/view/register/MRegisterPage.qml

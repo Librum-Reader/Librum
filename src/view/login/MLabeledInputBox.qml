@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     width: parent.width
@@ -20,6 +20,10 @@ FocusScope
     property string toggleImage : ""
     property bool   addImageToRight : false
     
+    function clearInput()
+    {
+        inputField.clear();
+    }
     
     ColumnLayout
     {

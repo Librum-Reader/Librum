@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "../components"
+
 
 Page
 {
@@ -130,7 +130,7 @@ Page
                             }
                             
                             Item {
-                                width: 140
+                                width: 175
                                 height: 1
                             }
                             
@@ -144,17 +144,23 @@ Page
                             }
                         }
                         
-                        MButton 
+                        MLoginButton 
                         {
                             id: loginButton
-                            buttonHeight: 40
-                            buttonWidth: parent.width
-                            Layout.topMargin: 26
+                            inputField1: emailInput
+                            inputField2: passwordInput
+                            color: properties.colorBasePurple
                             
-                            backgroundColor: properties.colorBasePurple
-                            fontColor: "white"
-                            fontBold: true
-                            textContent: "Login"
+                            onClearInputs:
+                            {
+                                passwordInput.clearInput();
+                                emailInput.clearInput();
+                            }
+                            
+                            onClicked:
+                            {
+                                loadPage("RegisterPage");
+                            }
                         }
                     }
                 }
@@ -168,12 +174,6 @@ Page
             text: "Don't have an account? Register"
             font.pointSize: 9
             color: properties.colorBasePurple
-            
-            MouseArea
-            {
-                anchors.fill: parent
-                onClicked: loadPage("RegisterPage");
-            }
         }
     }
 }
