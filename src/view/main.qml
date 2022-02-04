@@ -66,7 +66,6 @@ ApplicationWindow
             break;
         case 'RegisterPage':
             mainStackView.replace(registerPage);
-            console.log(root.color);
             break;
         }
     }
