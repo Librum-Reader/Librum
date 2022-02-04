@@ -72,10 +72,10 @@ Page
                 Label
                 {
                     id: loginText
-                    Layout.topMargin: 6
+                    Layout.topMargin: 4
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     text: "Log into your account"
-                    color: "#A5A5BA"
+                    color: "#8E8EA9"
                     font.pointSize: 12
                     font.family: "Droid Sans Fallback"
                 }
@@ -84,7 +84,7 @@ Page
                 {
                     id: inputGroup
                     width: 400
-                    Layout.topMargin: 30
+                    Layout.topMargin: 28
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     
                     ColumnLayout
@@ -102,7 +102,7 @@ Page
                         MLabeledInputBox
                         {
                             id: passwordInput
-                            Layout.topMargin: 15
+                            Layout.topMargin: 22
                             placeholderContent: ""
                             headerText: "Password"
                             addImageToRight: true
@@ -116,8 +116,12 @@ Page
                             
                             MCheckBox
                             {
-                                width:  18
-                                height: 18
+                                id: rememberMeCheckBox
+                                checkboxHeight: 20
+                                checkboxWidth: 20
+                                imageSource: "/resources/images/check.svg"
+                                borderColor: "gray"
+                                borderRadius: 4
                             }
                             
                             Label
@@ -149,7 +153,7 @@ Page
                             id: loginButton
                             buttonHeight: 40
                             buttonWidth: parent.width
-                            Layout.topMargin: 26
+                            Layout.topMargin: 32
                             
                             backgroundColor: properties.colorBasePurple
                             fontColor: "white"
