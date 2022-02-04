@@ -38,13 +38,21 @@ ApplicationWindow
     Component
     {
         id: loginPage
-        MLoginPage{}
+        MLoginPage
+        {
+            height: root.height
+            width: root.width
+        }
     }
     
     Component
     {
         id: registerPage
-        MRegisterPage{}
+        MRegisterPage
+        {
+            height: root.height
+            width: root.width
+        }
     }
     
     
@@ -58,6 +66,8 @@ ApplicationWindow
             root.minimumWidth = 542
             break;
         case 'RegisterPage':
+            root.minimumHeight = 800
+            root.minimumWidth = 542
             mainStackView.replace(registerPage);
             break;
         }

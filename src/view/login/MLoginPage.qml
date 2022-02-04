@@ -6,8 +6,6 @@ import "../components"
 Page
 {
     id: root
-    height: parent.height
-    width: parent.width
     background: Rectangle
     {
         anchors.fill: parent
@@ -19,7 +17,6 @@ Page
         
     ColumnLayout
     {
-        id: layout
         anchors.centerIn: parent
         width: root.baseWidth
         
