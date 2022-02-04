@@ -38,19 +38,13 @@ ApplicationWindow
     Component
     {
         id: loginPage
-        MLoginPage
-        {
-            anchors.centerIn: parent
-        }
+        MLoginPage{}
     }
     
     Component
     {
         id: registerPage
-        MRegisterPage
-        {
-            anchors.centerIn: parent
-        }
+        MRegisterPage{}
     }
     
     
