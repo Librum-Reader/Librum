@@ -31,7 +31,7 @@ option(BUILD_TESTS ON)
 # Dependencies
 find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
-add_subdirectory(src)
+add_subdirectory(src/app)
 
 
 
@@ -48,7 +48,7 @@ qt_add_qml_module(appLibrum
 )
 
 target_compile_definitions(appLibrum
-                    PRIVATE 
+                    PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
     )
 target_link_libraries(appLibrum
