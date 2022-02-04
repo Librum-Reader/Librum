@@ -11,6 +11,6 @@ FocusScope
         width: parent.width
         radius: 4
         border.width: 1
-        color: "gray"
+        color: "transparent"
     }
 }
