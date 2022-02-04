@@ -55,6 +55,7 @@ FocusScope
                 {
                     id: inputField
                     width: parent.width
+                    selectByMouse: true
                     background: Rectangle
                     {
                         anchors.fill: parent
