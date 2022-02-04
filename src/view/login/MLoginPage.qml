@@ -6,23 +6,33 @@ import "../components"
 Page
 {
     id: root
-    width: 542
-    height: 550
+    height: parent.height
+    width: parent.width
+    
+    background: Rectangle
+    {
+        anchors.fill: parent
+        color: properties.loginWindowBackground
+    }
+    
+    property int baseHeight : 550
+    property int baseWidth : 542
         
     ColumnLayout
     {
         id: layout
-        width: parent.width
+        anchors.centerIn: parent
+        width: root.baseWidth
         spacing: 0
         
         Rectangle
         {
             id: containerRect
-            height: root.height
+            height: root.baseHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
             radius: 4
-            color: "white"
+            color: properties.loginContentBackground
             
             ColumnLayout
             {
@@ -53,7 +63,7 @@ Page
                         width: parent.width / 2
                         height: parent.height / 2
                         radius: width / 4
-                        color: "#F6F6F6"
+                        color: properties.loginContentBackground
                     }
                 }
                 
@@ -63,7 +73,7 @@ Page
                     Layout.topMargin: 24
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     text: "Welcome back!"
-                    color: "#32324D"
+                    color: properties.colorBaseText
                     font.bold: true
                     font.pointSize: 22
                     font.family: "Droid Sans Fallback"
@@ -75,7 +85,7 @@ Page
                     Layout.topMargin: 4
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     text: "Log into your account"
-                    color: "#8E8EA9"
+                    color: properties.colorLightText2
                     font.pointSize: 12
                     font.family: "Droid Sans Fallback"
                 }
@@ -96,6 +106,7 @@ Page
                         {
                             id: emailInput
                             placeholderContent: "kaidoe@gmail.com"
+                            placeholderColor: properties.colorLightText
                             headerText: "Email"
                         }
                         
@@ -134,7 +145,7 @@ Page
                             }
                             
                             Item {
-                                width: 140
+                                width: 131
                                 height: 1
                             }
                             
@@ -143,8 +154,8 @@ Page
                                 text: "Forgot password?"
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.leftMargin: 3
-                                font.pointSize: 9
-                                color: "#57575E"
+                                font.pointSize: 10
+                                color: properties.colorBasePurple
                             }
                         }
                         
@@ -170,7 +181,7 @@ Page
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 18
             text: "Don't have an account? Register"
-            font.pointSize: 9
+            font.pointSize: 10
             color: properties.colorBasePurple
             
             MouseArea

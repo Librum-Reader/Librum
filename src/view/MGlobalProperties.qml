@@ -2,6 +2,10 @@ import QtQuick
 
 Item
 {
+    property color colorLightText  : "#8E8EA9"
+    property color colorLightText2 : "#8A8AA0"
     property color colorBasePurple : "#946BDE"
-    property color brightBackground : "#efefef"
+    property color colorBaseText  : "#32324D"
+    property color loginWindowBackground  : "#efefef"
+    property color loginContentBackground : "white"
 }
