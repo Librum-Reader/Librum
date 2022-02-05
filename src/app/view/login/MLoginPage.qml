@@ -12,9 +12,10 @@ Page
         color: properties.loginWindowBackground
     }
     
+    
     property int baseHeight : 550
     property int baseWidth : 542
-        
+    
     ColumnLayout
     {
         anchors.centerIn: parent
@@ -23,7 +24,7 @@ Page
         Rectangle
         {
             id: backgroundRect
-            height: root.baseHeight
+            Layout.preferredHeight: root.baseHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
             radius: 4
@@ -39,14 +40,12 @@ Page
                     right: parent.right
                 }
                 
-                anchors.margins: 15
-                anchors.topMargin: 48
-                
                 Rectangle
                 {
                     id: logo
-                    height: 72
-                    width: 72
+                    Layout.preferredHeight: 72
+                    Layout.preferredWidth: 72
+                    Layout.topMargin: 48
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                     color: properties.colorBasePurple
                     radius: 8
@@ -88,7 +87,7 @@ Page
                 Item
                 {
                     id: inputGroup
-                    width: 400
+                    Layout.preferredWidth: 400
                     Layout.topMargin: 28
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     
@@ -142,12 +141,13 @@ Page
                             }
                             
                             Item {
-                                width: 131
-                                height: 1
+                                Layout.preferredWidth: 131
+                                Layout.preferredHeight: 1
                             }
                             
                             Label
                             {
+                                id: forgotPasswordLabel
                                 text: "Forgot password?"
                                 Layout.alignment: Qt.AlignVCenter
                                 Layout.leftMargin: 3
@@ -174,6 +174,7 @@ Page
         
         Label
         {
+            id: registerLinkLabel
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 14
             text: "Don't have an account? Register"

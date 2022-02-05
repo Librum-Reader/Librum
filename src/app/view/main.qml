@@ -11,7 +11,7 @@ ApplicationWindow
     id: root
     width: Screen.width
     height: Screen.height
-    minimumHeight: 550
+    minimumHeight: 590
     minimumWidth: 542
     visible: true
     title: qsTr("Hello World")
@@ -62,7 +62,7 @@ ApplicationWindow
         {
         case 'LoginPage':
             mainStackView.replace(loginPage);
-            root.minimumHeight = 550
+            root.minimumHeight = 590
             root.minimumWidth = 542
             break;
         case 'RegisterPage':
