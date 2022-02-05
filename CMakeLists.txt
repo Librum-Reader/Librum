@@ -31,7 +31,9 @@ option(BUILD_TESTS ON)
 # Dependencies
 find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
-add_subdirectory(src/app)
+add_subdirectory(src/app/model)
+add_subdirectory(src/app/view)
+add_subdirectory(src/app/controller)
 
 
 

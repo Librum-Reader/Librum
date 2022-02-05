@@ -22,7 +22,7 @@ Page
         
         Rectangle
         {
-            id: containerRect
+            id: backgroundRect
             height: root.baseHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
@@ -31,7 +31,7 @@ Page
             
             ColumnLayout
             {
-                id: inRectLayout
+                id: inContainerLayout
                 anchors
                 {
                     top:   parent.top
@@ -94,10 +94,11 @@ Page
                     
                     ColumnLayout
                     {
+                        id: inputLayout
                         width: parent.width
                         spacing: 0
                         
-                        MLabeledInputBox 
+                        MLabeledInputBox
                         {
                             id: emailInput
                             placeholderContent: "kaidoe@gmail.com"
@@ -135,9 +136,9 @@ Page
                             {
                                 text: "Remember me"
                                 Layout.alignment: Qt.AlignVCenter
-                                Layout.leftMargin: 3
+                                Layout.leftMargin: 4
                                 font.pointSize: 11
-                                color: "#505057"
+                                color: properties.colorMediumText
                             }
                             
                             Item {
@@ -161,9 +162,8 @@ Page
                             buttonHeight: 40
                             buttonWidth: parent.width
                             Layout.topMargin: 32
-                            
                             backgroundColor: properties.colorBasePurple
-                            fontColor: "white"
+                            fontColor: properties.colorBrightText
                             fontBold: true
                             textContent: "Login"
                         }

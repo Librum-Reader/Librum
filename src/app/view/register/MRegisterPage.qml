@@ -22,7 +22,7 @@ Page
         
         Rectangle
         {
-            id: containerRect
+            id: backgroundRect
             height: root.baseHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
@@ -90,36 +90,111 @@ Page
                     font.family: properties.defaultFontFamily
                 }
                 
-                RowLayout
+                Item
                 {
-                    spacing: 28
+                    id: inputGroup
+                    width: 400
                     Layout.topMargin: 40
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                    Layout.preferredWidth: 400
                     
-                    MLabeledInputBox
+                    ColumnLayout
                     {
-                        id: firstNameInput
-                        Layout.preferredWidth: 186
-                        Layout.preferredHeight: 50
-                        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                        headerText: "First name"
-                        placeholderContent: "John"
-                        placeholderColor: properties.colorLightText
-                    }
-                    
-                    MLabeledInputBox
-                    {
-                        id: lastNameInput
-                        Layout.preferredWidth: 186
-                        Layout.preferredHeight: 50
-                        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                        headerText: "Last name"
-                        placeholderContent: "Doe"
-                        placeholderColor: properties.colorLightText
+                        id: inputLayout
+                        width: parent.width
+                        spacing: 0
+                        
+                        RowLayout
+                        {
+                            id: namesInputRow
+                            spacing: 28
+                            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                            width: parent.width
+                            
+                            MLabeledInputBox
+                            {
+                                id: firstNameInput
+                                Layout.preferredWidth: 186
+                                Layout.preferredHeight: 50
+                                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                                headerText: "First name"
+                                placeholderContent: "Kai"
+                                placeholderColor: properties.colorLightText
+                            }
+                            
+                            MLabeledInputBox
+                            {
+                                id: lastNameInput
+                                Layout.preferredWidth: 186
+                                Layout.preferredHeight: 50
+                                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                                headerText: "Last name"
+                                placeholderContent: "Doe"
+                                placeholderColor: properties.colorLightText
+                            }
+                        }
+                        
+                        MLabeledInputBox 
+                        {
+                            id: emailInput
+                            Layout.topMargin: 30
+                            placeholderContent: "kaidoe@gmail.com"
+                            placeholderColor: properties.colorLightText
+                            headerText: "Email"
+                        }
+                        
+                        MLabeledInputBox 
+                        {
+                            id: passwordInput
+                            Layout.topMargin: 18
+                            placeholderContent: ""
+                            placeholderColor: properties.colorLightText
+                            headerText: "Password"
+                            addImageToRight: true
+                            image: "/resources/images/eye.svg"
+                            toggleImage: "/resources/images/eye-off.svg"
+                        }
+                        
+                        MLabeledInputBox 
+                        {
+                            id: passwordConfirmationInput
+                            Layout.topMargin: 18
+                            placeholderContent: ""
+                            placeholderColor: properties.colorLightText
+                            headerText: "Confirm password"
+                            addImageToRight: true
+                            image: "/resources/images/eye.svg"
+                            toggleImage: "/resources/images/eye-off.svg"
+                        }
+                        
+                        RowLayout
+                        {
+                            id: keepMeUpdatedRow
+                            Layout.preferredWidth: Layout.fillWidth
+                            Layout.topMargin: 30
+                            
+                            MCheckBox
+                            {
+                                checkboxHeight: 20
+                                checkboxWidth: 20
+                                imageSource: "/resources/images/check.svg"
+                                borderColor: "gray"
+                                borderRadius: 4
+                            }
+                            
+                            // Label
+                            // {
+                            //     Layout.preferredWidth: Layout.fillWidth
+                            //     text: "Keep me updated about the new features and upcoming improvements."
+                            //     wrapMode: Text.WordWrap
+                            //     Layout.alignment: Qt.AlignVCenter
+                            //     Layout.leftMargin: 4
+                            //     font.pointSize: 11
+                            //     color: "#505057"
+                            // }
+                        }
                     }
                 }
-            }    
+            }
         }
         
         Label

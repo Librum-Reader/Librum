@@ -1,0 +1,41 @@
+Librum:
+    Tabs:
+        Free books store (Gutenberg)
+        Manual syncing
+        Easy book grouping
+        Combining many documents to 1
+        Book type conversion
+    
+    
+    Reading View:
+        Bookmarks functionallity
+        Highlighting
+        Dictonary functionallity
+        Reading out text functionallity
+        Note taking functionallity
+        Priting functionallity
+    
+    
+    Settings:
+        Possible to set a password
+        Great themes available in settings
+        Ability to create own theme
+        Customizable
+        Optional relaistic page turning animation
+        Optional 2 page display
+        Searching functionallity
+    
+    
+    Properties:
+        Crossplattform
+        Free automatic syncing across devices
+        Simple and easy to use UI
+        Good looking UI
+        Non annoying ads
+        Big library
+        Good picture display
+        Good performance
+        optional Onedrive / Googledrive linkage
+        Able to open all book formats
+        Opensource
+        All features available for free
