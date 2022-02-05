@@ -40,25 +40,11 @@ Page
                     right: parent.right
                 }
                 
-                Rectangle
+                MLogo
                 {
                     id: logo
-                    Layout.preferredHeight: 72
-                    Layout.preferredWidth: 72
                     Layout.topMargin: 48
                     Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                    color: properties.colorBasePurple
-                    radius: 8
-                    antialiasing: true
-                    
-                    Rectangle
-                    {
-                        anchors.centerIn: parent
-                        width: parent.width / 2
-                        height: parent.height / 2
-                        radius: width / 4
-                        color: properties.loginContentBackground
-                    }
                 }
                 
                 Label
@@ -84,89 +70,84 @@ Page
                     font.family: properties.defaultFontFamily
                 }
                 
-                Item
+                ColumnLayout
                 {
-                    id: inputGroup
+                    id: inputColumn
                     Layout.preferredWidth: 400
+                    Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 28
-                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    spacing: 0
                     
-                    ColumnLayout
+                    MLabeledInputBox
                     {
-                        id: inputLayout
-                        width: parent.width
-                        spacing: 0
+                        id: emailInput
+                        placeholderContent: "kaidoe@gmail.com"
+                        placeholderColor: properties.colorLightText
+                        headerText: "Email"
+                    }
+                    
+                    MLabeledInputBox
+                    {
+                        id: passwordInput
+                        Layout.topMargin: 22
+                        placeholderContent: ""
+                        headerText: "Password"
+                        addImageToRight: true
+                        image: "/resources/images/eye.svg"
+                        toggleImage: "/resources/images/eye-off.svg"
+                    }
+                    
+                    RowLayout
+                    {
+                        id: rememberMeRow
+                        Layout.topMargin: 28
                         
-                        MLabeledInputBox
+                        MCheckBox
                         {
-                            id: emailInput
-                            placeholderContent: "kaidoe@gmail.com"
-                            placeholderColor: properties.colorLightText
-                            headerText: "Email"
+                            id: rememberMeCheckBox
+                            checkboxHeight: 20
+                            checkboxWidth: 20
+                            imageSource: "/resources/images/check.svg"
+                            borderColor: "gray"
+                            borderRadius: 4
                         }
                         
-                        MLabeledInputBox
+                        Label
                         {
-                            id: passwordInput
-                            Layout.topMargin: 22
-                            placeholderContent: ""
-                            headerText: "Password"
-                            addImageToRight: true
-                            image: "/resources/images/eye.svg"
-                            toggleImage: "/resources/images/eye-off.svg"
+                            id: rememberMeText
+                            text: "Remember me"
+                            Layout.alignment: Qt.AlignVCenter
+                            Layout.leftMargin: 4
+                            font.pointSize: 11
+                            color: properties.colorMediumText
                         }
                         
-                        RowLayout
-                        {
-                            id: rememberMeRow
-                            Layout.topMargin: 28
-                            
-                            MCheckBox
-                            {
-                                id: rememberMeCheckBox
-                                checkboxHeight: 20
-                                checkboxWidth: 20
-                                imageSource: "/resources/images/check.svg"
-                                borderColor: "gray"
-                                borderRadius: 4
-                            }
-                            
-                            Label
-                            {
-                                text: "Remember me"
-                                Layout.alignment: Qt.AlignVCenter
-                                Layout.leftMargin: 4
-                                font.pointSize: 11
-                                color: properties.colorMediumText
-                            }
-                            
-                            Item {
-                                Layout.preferredWidth: 131
-                                Layout.preferredHeight: 1
-                            }
-                            
-                            Label
-                            {
-                                id: forgotPasswordLabel
-                                text: "Forgot password?"
-                                Layout.alignment: Qt.AlignVCenter
-                                Layout.leftMargin: 3
-                                font.pointSize: 10
-                                color: properties.colorBasePurple
-                            }
+                        Item {
+                            Layout.preferredWidth: 131
+                            Layout.preferredHeight: 1
                         }
                         
-                        MButton 
+                        Label
                         {
-                            id: loginButton
-                            buttonHeight: 40
-                            buttonWidth: parent.width
-                            Layout.topMargin: 32
-                            backgroundColor: properties.colorBasePurple
-                            fontColor: properties.colorBrightText
-                            fontBold: true
-                            textContent: "Login"
+                            id: forgotPasswordLabel
+                            text: "Forgot password?"
+                            Layout.alignment: Qt.AlignVCenter
+                            Layout.leftMargin: 3
+                            font.pointSize: 10
+                            color: properties.colorBasePurple
                         }
+                    }
+                    
+                    MButton 
+                    {
+                        id: loginButton
+                        buttonHeight: 40
+                        buttonWidth: parent.width
+                        Layout.topMargin: 32
+                        backgroundColor: properties.colorBasePurple
+                        fontColor: properties.colorBrightText
+                        fontBold: true
+                        textContent: "Login"
                     }
                 }
             }
