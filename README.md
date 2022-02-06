@@ -20,8 +20,8 @@ Instructions to get Librum up and running in your environment.
 ### Prerequisites
 - cmake (at least 3.22)            https://cmake.org/download/
 - make (or any other build system) http://ftp.gnu.org/gnu/make/
-- Qt6 https://www.qt.io/download
-- Gcc (or any other c++ compiler) https://gcc.gnu.org/
+- Qt6                              https://www.qt.io/download
+- Gcc (or any other c++ compiler)  https://gcc.gnu.org/
 
 ### Installation
 1. Clone the repository.
@@ -39,7 +39,7 @@ Instructions to get Librum up and running in your environment.
     ```
 4. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DBUILD_TESTS -G "Unix Makefiles" ..
+    cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DBUILD_TESTS=On -G "Unix Makefiles" ..
     ```
 5. Build the project
     ```sh
