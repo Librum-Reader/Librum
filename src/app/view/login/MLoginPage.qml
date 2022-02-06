@@ -140,7 +140,6 @@ Page
                         }
                     }
                     
-                    
                     MButton 
                     {
                         id: loginButton
@@ -152,7 +151,10 @@ Page
                         fontBold: true
                         textContent: "Login"
                         
-                        onClicked: makeRequest();
+                        onClicked:
+                        {
+                            makeRequest();
+                        }
                     }
                 }
             }

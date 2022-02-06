@@ -101,7 +101,7 @@ Page
                                 Layout.preferredWidth: 186
                                 Layout.preferredHeight: 50
                                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                                headerText: "First name"
+                                headerText: 'First name<font color=' + properties.colorImportant + '>*</font>'
                                 placeholderContent: "Kai"
                                 placeholderColor: properties.colorLightText
                             }
@@ -123,9 +123,9 @@ Page
                             id: emailInput
                             Layout.fillWidth: true
                             Layout.topMargin: 26
+                            headerText: 'Email<font color=' + properties.colorImportant + '>*</font>'
                             placeholderContent: "kaidoe@gmail.com"
                             placeholderColor: properties.colorLightText
-                            headerText: "Email"
                         }
                         
                         MLabeledInputBox 
@@ -133,9 +133,9 @@ Page
                             id: passwordInput
                             Layout.fillWidth: true
                             Layout.topMargin: 16
+                            headerText: 'Password<font color=' + properties.colorImportant + '>*</font>'
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
-                            headerText: "Password"
                             addImageToRight: true
                             image: "/resources/images/eye.svg"
                             toggleImage: "/resources/images/eye-off.svg"
@@ -146,9 +146,9 @@ Page
                             id: passwordConfirmationInput
                             Layout.fillWidth: true
                             Layout.topMargin: 16
+                            headerText: 'Confirmation password<font color=' + properties.colorImportant + '>*</font>'
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
-                            headerText: "Confirm password"
                             addImageToRight: true
                             image: "/resources/images/eye.svg"
                             toggleImage: "/resources/images/eye-off.svg"
@@ -225,15 +225,15 @@ Page
                                 id: iAcceptTextFirst
                                 Layout.fillWidth: true
                                 Layout.leftMargin: 6
-                                text: 'I accept the <font color="' + properties.colorBasePurple + '">terms</font> 
-                                       and the <font color="' + properties.colorBasePurple + '">privacy policy.</font>'
+                                text: 'I accept the <font color=' + properties.colorBasePurple + '>terms</font> 
+                                       and the <font color=' + properties.colorBasePurple + '>privacy policy.</font>'
                                 textFormat: Text.RichText
                                 wrapMode: Text.WordWrap
                                 font.pointSize: 11
                                 color: properties.colorMediumText
                             }
                         }
-                    
+                        
                         MButton 
                         {
                             id: loginButton

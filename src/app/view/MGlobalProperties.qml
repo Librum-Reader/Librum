@@ -10,6 +10,8 @@ Item
     property color colorMediumText  : "#505057"
     property color colorLightBorder : "#DCDCE4"
     property color colorDarkBorder  : "#ADADB4"
+    property color colorImportant   : "red"
+    property color colorError       : "#DC4446"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
     
