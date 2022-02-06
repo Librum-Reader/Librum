@@ -18,13 +18,25 @@ Librum is a simple to use, crossplattform, state-saving bookreader with a lot of
     ```sh
     git clone https://github.com/Etovex/Librum.git
     ```
-2. Get inside the cloned project folder.
+2. Step into the cloned project folder.
     ```sh
-    cd project-name
+    cd Librum
     ```
-3. Install NPM packages.
+3. Create build folder and setp into it.
     ```sh
-    npm install
+    mkdir build-Debug
+    cd build-Debug
     ```
-
+4. Run cmake.
+    ```sh
+    cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DBUILD_TESTS -G "Unix Makefiles" ..
+    ```
+5. Build the project
+    ```sh
+    make
+    ```
+6. Run the app
+    ```sh
+    ./appLibrum
+    ```
 <br>
