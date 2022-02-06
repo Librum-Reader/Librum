@@ -9,6 +9,7 @@ Librum is a simple to use, crossplattform, state-saving bookreader with a lot of
 - Note taking functionality
 
 
+<br>
 <!-- INSTALLATION //////////////////////////////////////////////////////// -->
 
 ## Installation
