@@ -9,6 +9,7 @@ Item
     property color colorBaseText    : "#32324D"
     property color colorMediumText  : "#505057"
     property color colorLightBorder : "#DCDCE4"
+    property color colorDarkBorder  : "#ADADB4"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
     

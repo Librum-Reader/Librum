@@ -167,7 +167,7 @@ Page
                                 checkboxHeight: 20
                                 checkboxWidth: 20
                                 imageSource: "/resources/images/check.svg"
-                                borderColor: "gray"
+                                borderColor: properties.colorDarkBorder
                                 borderRadius: 4
                             }
                             
@@ -188,7 +188,7 @@ Page
                                         text: "Keep me updated about the new features and"
                                         wrapMode: Text.WordWrap
                                         font.pointSize: 11
-                                        color: "#505057"
+                                        color: properties.colorMediumText
                                     }
                                     
                                     Label
@@ -197,7 +197,7 @@ Page
                                         text: "upcoming improvements."
                                         wrapMode: Text.WordWrap
                                         font.pointSize: 11
-                                        color: "#505057"
+                                        color: properties.colorMediumText
                                     }
                                 }
                             }
@@ -216,7 +216,7 @@ Page
                                 checkboxHeight: 20
                                 checkboxWidth: 20
                                 imageSource: "/resources/images/check.svg"
-                                borderColor: "gray"
+                                borderColor: properties.colorDarkBorder
                                 borderRadius: 4
                             }
                             
@@ -230,7 +230,7 @@ Page
                                 textFormat: Text.RichText
                                 wrapMode: Text.WordWrap
                                 font.pointSize: 11
-                                color: "#505057"
+                                color: properties.colorMediumText
                             }
                         }
                     

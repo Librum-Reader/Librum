@@ -110,7 +110,7 @@ Page
                             checkboxHeight: 20
                             checkboxWidth: 20
                             imageSource: "/resources/images/check.svg"
-                            borderColor: "gray"
+                            borderColor: properties.colorDarkBorder
                             borderRadius: 4
                         }
                         
