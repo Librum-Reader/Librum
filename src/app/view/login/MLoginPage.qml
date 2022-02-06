@@ -81,6 +81,7 @@ Page
                     MLabeledInputBox
                     {
                         id: emailInput
+                        Layout.preferredWidth: parent.width
                         placeholderContent: "kaidoe@gmail.com"
                         placeholderColor: properties.colorLightText
                         headerText: "Email"
@@ -89,6 +90,7 @@ Page
                     MLabeledInputBox
                     {
                         id: passwordInput
+                        Layout.preferredWidth: parent.width
                         Layout.topMargin: 22
                         placeholderContent: ""
                         headerText: "Password"
@@ -117,7 +119,7 @@ Page
                             id: rememberMeText
                             text: "Remember me"
                             Layout.alignment: Qt.AlignVCenter
-                            Layout.leftMargin: 4
+                            Layout.leftMargin: 6
                             font.pointSize: 11
                             color: properties.colorMediumText
                         }
@@ -138,6 +140,7 @@ Page
                         }
                     }
                     
+                    
                     MButton 
                     {
                         id: loginButton
@@ -148,6 +151,8 @@ Page
                         fontColor: properties.colorBrightText
                         fontBold: true
                         textContent: "Login"
+                        
+                        onClicked: makeRequest();
                     }
                 }
             }

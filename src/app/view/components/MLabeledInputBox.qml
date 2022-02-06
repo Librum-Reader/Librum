@@ -6,7 +6,7 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    Layout.preferredWidth: parent.width
+    Layout.preferredWidth: 100
     Layout.preferredHeight: emailLabel.implicitHeight + inputBox.height
     
     property string placeholderContent : "placeholder"

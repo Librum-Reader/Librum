@@ -23,10 +23,20 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 
 # build
 add_library(controller SHARED
-                        
+                        testrequest.cpp
+                        testrequest.hpp
     )
 
-target_include_directories(model
+target_include_directories(controller
                     PUBLIC
                         ${CMAKE_CURRENT_SOURCE_DIR}/
+    )
+
+target_compile_definitions(controller
+                    PRIVATE
+                        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    )
+target_link_libraries(controller
+                    PUBLIC 
+                        Qt6::Quick
     )

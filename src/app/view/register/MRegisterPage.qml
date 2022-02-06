@@ -12,7 +12,7 @@ Page
         color: properties.loginWindowBackground
     }
     
-    property int baseHeight : 800
+    property int baseHeight : 770
     property int baseWidth : 542
     
     ColumnLayout
@@ -23,7 +23,7 @@ Page
         Rectangle
         {
             id: backgroundRect
-            height: root.baseHeight
+            Layout.preferredHeight: root.baseHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
             radius: 4
@@ -32,6 +32,8 @@ Page
             ColumnLayout
             {
                 id: inRectLayout
+                Layout.preferredWidth: parent.width
+                anchors.topMargin: 48
                 anchors
                 {
                     top:   parent.top
@@ -39,27 +41,10 @@ Page
                     right: parent.right
                 }
                 
-                anchors.margins: 15
-                anchors.topMargin: 48
-                
-                Rectangle
+                MLogo
                 {
                     id: logo
-                    height: 72
-                    width: 72
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                    color: properties.colorBasePurple
-                    radius: 8
-                    antialiasing: true
-                    
-                    Rectangle
-                    {
-                        anchors.centerIn: parent
-                        width: parent.width / 2
-                        height: parent.height / 2
-                        radius: width / 4
-                        color: properties.loginContentBackground
-                    }
+                    Layout.alignment: Qt.AlignHCenter
                 }
                 
                 Label
@@ -76,15 +61,14 @@ Page
                 
                 Label
                 {
-                    id: loginText
-                    Layout.topMargin: 8
-                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    id: accountStorageText
+                    Layout.topMargin: 6
+                    Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: 500
-                    wrapMode: "WordWrap"
                     text: "Your credentials are only used to authenticate yourself. " + 
                           "Everything will be stored in a secure database."
                     horizontalAlignment: Text.AlignHCenter
-                    
+                    wrapMode: "WordWrap"
                     color: properties.colorLightText2
                     font.pointSize: 12
                     font.family: properties.defaultFontFamily
@@ -93,9 +77,10 @@ Page
                 Item
                 {
                     id: inputGroup
-                    width: 400
-                    Layout.topMargin: 40
-                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    Layout.preferredWidth: 400
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: 36
+                    
                     
                     ColumnLayout
                     {
@@ -105,10 +90,10 @@ Page
                         
                         RowLayout
                         {
-                            id: namesInputRow
+                            id: nameInputRow
                             spacing: 28
-                            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                            width: parent.width
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
                             
                             MLabeledInputBox
                             {
@@ -136,7 +121,8 @@ Page
                         MLabeledInputBox 
                         {
                             id: emailInput
-                            Layout.topMargin: 30
+                            Layout.fillWidth: true
+                            Layout.topMargin: 26
                             placeholderContent: "kaidoe@gmail.com"
                             placeholderColor: properties.colorLightText
                             headerText: "Email"
@@ -145,7 +131,8 @@ Page
                         MLabeledInputBox 
                         {
                             id: passwordInput
-                            Layout.topMargin: 18
+                            Layout.fillWidth: true
+                            Layout.topMargin: 16
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             headerText: "Password"
@@ -157,7 +144,8 @@ Page
                         MLabeledInputBox 
                         {
                             id: passwordConfirmationInput
-                            Layout.topMargin: 18
+                            Layout.fillWidth: true
+                            Layout.topMargin: 16
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             headerText: "Confirm password"
@@ -169,11 +157,13 @@ Page
                         RowLayout
                         {
                             id: keepMeUpdatedRow
-                            Layout.preferredWidth: Layout.fillWidth
-                            Layout.topMargin: 30
+                            Layout.fillWidth: true
+                            Layout.topMargin: 28
+                            spacing: 4
                             
                             MCheckBox
                             {
+                                id: updatesCheckBox
                                 checkboxHeight: 20
                                 checkboxWidth: 20
                                 imageSource: "/resources/images/check.svg"
@@ -181,19 +171,83 @@ Page
                                 borderRadius: 4
                             }
                             
-                            // Label
-                            // {
-                            //     Layout.preferredWidth: Layout.fillWidth
-                            //     text: "Keep me updated about the new features and upcoming improvements."
-                            //     wrapMode: Text.WordWrap
-                            //     Layout.alignment: Qt.AlignVCenter
-                            //     Layout.leftMargin: 4
-                            //     font.pointSize: 11
-                            //     color: "#505057"
-                            // }
+                            Item
+                            {
+                                id: keepMeUpdatedText
+                                Layout.preferredHeight: keepMeUpdatedTextFirst.implicitHeight
+                                Layout.fillWidth: true
+                                Layout.leftMargin: 6
+                                
+                                Column
+                                {
+                                    spacing: 2
+                                    
+                                    Label
+                                    {
+                                        id: keepMeUpdatedTextFirst
+                                        text: "Keep me updated about the new features and"
+                                        wrapMode: Text.WordWrap
+                                        font.pointSize: 11
+                                        color: "#505057"
+                                    }
+                                    
+                                    Label
+                                    {
+                                        id: keepMeUpdatedTextSecond
+                                        text: "upcoming improvements."
+                                        wrapMode: Text.WordWrap
+                                        font.pointSize: 11
+                                        color: "#505057"
+                                    }
+                                }
+                            }
+                        }
+                    
+                        RowLayout
+                        {
+                            id: iAcceptRow
+                            Layout.fillWidth: true
+                            Layout.topMargin: 32
+                            spacing: 4
+                            
+                            MCheckBox
+                            {
+                                id: iAcceptCheckBox
+                                checkboxHeight: 20
+                                checkboxWidth: 20
+                                imageSource: "/resources/images/check.svg"
+                                borderColor: "gray"
+                                borderRadius: 4
+                            }
+                            
+                            Label
+                            {
+                                id: iAcceptTextFirst
+                                Layout.fillWidth: true
+                                Layout.leftMargin: 6
+                                text: 'I accept the <font color="' + properties.colorBasePurple + '">terms</font> 
+                                       and the <font color="' + properties.colorBasePurple + '">privacy policy.</font>'
+                                textFormat: Text.RichText
+                                wrapMode: Text.WordWrap
+                                font.pointSize: 11
+                                color: "#505057"
+                            }
+                        }
+                    
+                        MButton 
+                        {
+                            id: loginButton
+                            buttonHeight: 40
+                            buttonWidth: parent.width
+                            Layout.topMargin: 40
+                            backgroundColor: properties.colorBasePurple
+                            fontColor: properties.colorBrightText
+                            fontBold: true
+                            textContent: "Let's start"
                         }
                     }
                 }
+                
             }
         }
         

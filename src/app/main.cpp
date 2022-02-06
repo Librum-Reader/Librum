@@ -1,7 +1,11 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QLocale>
 #include <QTranslator>
+#include <QString>
+#include "testrequest.hpp"
+
 
 int main(int argc, char *argv[])
 {    
@@ -20,7 +24,11 @@ int main(int argc, char *argv[])
         }
     }
     
+    TestRequest testRequest;
+    
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextObject(&testRequest);
+    
     const QUrl url(u"qrc:/Librum/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

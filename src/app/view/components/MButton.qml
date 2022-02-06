@@ -7,6 +7,8 @@ FocusScope
 {
     id: root
     
+    height: buttonHeight
+    width: buttonWidth
     property int buttonWidth : 100
     property int buttonHeight : 40
     property int buttonRadius : 4

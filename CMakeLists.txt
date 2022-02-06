@@ -56,6 +56,7 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                     PUBLIC 
                         Qt6::Quick
+                        controller
     )
 
 
