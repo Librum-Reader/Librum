@@ -14,6 +14,7 @@ Librum is a simple to use, crossplattform, state-saving bookreader with a lot of
 
 ## Installation
 
+### For GNU/Linux
 1. Clone the repository.
     ```sh
     git clone https://github.com/Etovex/Librum.git
