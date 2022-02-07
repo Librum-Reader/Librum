@@ -6,8 +6,8 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    width: checkboxWidth
-    height: checkboxHeight
+    implicitWidth: checkboxWidth
+    implicitHeight: checkboxHeight
     
     property int checkboxHeight : 20
     property int checkboxWidth : 20

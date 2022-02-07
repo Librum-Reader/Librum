@@ -4,8 +4,8 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    height: 72
-    width: 72
+    implicitWidth: 72
+    implicitHeight: 72
     
     Rectangle
     {
@@ -23,6 +23,8 @@ FocusScope
             height: parent.height / 2
             radius: width / 4
             color: properties.loginContentBackground
+            
+            
         }
     }
 }

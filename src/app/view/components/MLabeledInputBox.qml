@@ -6,8 +6,8 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    Layout.preferredWidth: 100
-    Layout.preferredHeight: emailLabel.implicitHeight + inputBox.height
+    implicitWidth: 100
+    implicitHeight: emailLabel.implicitHeight + inputBox.height
     
     property string placeholderContent : "placeholder"
     property int    inputFontSize : 11
@@ -21,82 +21,88 @@ FocusScope
     property bool   addImageToRight : false
     property bool   isError : false
     
-    
-    ColumnLayout
+    Item
     {
-        spacing: 0
         width: parent.width
+        height: parent.height
         
-        Label
+        ColumnLayout
         {
-            id: emailLabel
-            text: root.headerText
-            textFormat: Text.RichText
+            spacing: 0
             width: parent.width
-            font.family: properties.defaultFontFamily
-            font.pointSize: 10
-        }
-        
-        Rectangle
-        {
-            id: inputBox
-            height: 40
-            width: parent.width
-            Layout.topMargin: 2
-            border.width: root.borderWidth
-            border.color: (root.isError ? properties.colorError : root.borderColor)
-            radius: 5
             
-            Row
+            Label
             {
+                id: emailLabel
+                text: root.headerText
+                textFormat: Text.RichText
                 width: parent.width
-                height: parent.height
-                spacing: 0
+                font.family: properties.defaultFontFamily
+                font.pointSize: 10
+            }
+            
+            Rectangle
+            {
+                id: inputBox
+                height: 40
+                width: parent.width
+                Layout.topMargin: 2
+                border.width: root.borderWidth
+                border.color: (root.isError ? properties.colorError : root.borderColor)
+                radius: 5
                 
-                TextField
+                Row
                 {
-                    id: inputField
-                    width: (addImageToRight ? parent.width - 30 : parent.width)
-                    selectByMouse: true
-                    background: Rectangle
+                    width: parent.width
+                    height: parent.height
+                    spacing: 0
+                    
+                    TextField
                     {
-                        anchors.fill: parent
-                        radius: 4
-                        color: "transparent"
+                        id: inputField
+                        focus: true
+                        width: (addImageToRight ? parent.width - 30 : parent.width)
+                        selectByMouse: true
+                        background: Rectangle
+                        {
+                            anchors.fill: parent
+                            radius: 4
+                            color: "transparent"
+                        }
+                        
+                        font.pointSize: root.inputFontSize
+                        padding: root.textPadding
+                        anchors.verticalCenter: parent.verticalCenter
+                        placeholderText: root.placeholderContent
+                        placeholderTextColor: root.placeholderColor
+                        echoMode: (!root.addImageToRight || imageAtRight.pressed ? TextInput.Normal : TextInput.Password)
+                        
+                        onTextEdited:
+                        {
+                            root.isError = false
+                        }
                     }
                     
-                    font.pointSize: root.inputFontSize
-                    padding: root.textPadding
-                    anchors.verticalCenter: parent.verticalCenter
-                    placeholderText: root.placeholderContent
-                    placeholderTextColor: root.placeholderColor
-                    echoMode: (!root.addImageToRight || imageAtRight.pressed ? TextInput.Normal : TextInput.Password)
-                    
-                    onTextEdited:
+                    Button
                     {
-                        root.isError = false
-                    }
-                }
-                
-                Button
-                {
-                    id: imageAtRight
-                    width:  20
-                    height: 18
-                    visible: root.addImageToRight
-                    anchors.verticalCenter: parent.verticalCenter
-                    background: Rectangle
-                    {
-                        anchors.fill: parent
-                        color: "transparent"
-                    }
-                    
-                    Image
-                    {
-                        id: image
-                        width: parent.width
-                        height: parent.height
-                        source: (imageAtRight.pressed ? root.toggleImage : root.image)
+                        id: imageAtRight
+                        width:  20
+                        height: 18
+                        visible: root.addImageToRight
+                        anchors.verticalCenter: parent.verticalCenter
+                        background: Rectangle
+                        {
+                            anchors.fill: parent
+                            color: "transparent"
+                        }
+                        
+                        Image
+                        {
+                            id: image
+                            width: parent.width
+                            height: parent.height
+                            source: (imageAtRight.pressed ? root.toggleImage : root.image)
+                        }
                     }
                 }
             }
