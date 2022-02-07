@@ -12,7 +12,7 @@ Librum is a simple to use, crossplattform, state-saving bookreader with a lot of
 
 # Getting started
 
-Instructions to get Librum up and running on your environment.
+Instructions to get Librum up and running in your environment.
 
 <br>
 
