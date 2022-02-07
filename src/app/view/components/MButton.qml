@@ -27,31 +27,25 @@ FocusScope
         id: prvt
         height: root.buttonHeight
         width:  root.buttonWidth
-        color: root.backgroundColor
         radius: root.buttonRadius
+        color: root.backgroundColor
+        opacity: (mouseArea.pressed ? 0.9 : 1)
         
         Label
         {
             id: loginButtonText
             anchors.centerIn: parent
             text: root.textContent
-            color: root.fontColor
             font.bold: root.fontBold
             font.pointSize: root.fontSize
+            color: root.fontColor
         }
         
         MouseArea
         {
+            id: mouseArea
             anchors.fill: parent
-            
             onClicked: root.clicked()
-            onPressedChanged:
-            {
-                if(pressed)
-                    loginButton.opacity = 0.9;
-                else
-                    loginButton.opacity = 1;
-            }
         }
     }
 }

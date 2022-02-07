@@ -153,7 +153,8 @@ Page
                         
                         onClicked:
                         {
-                            makeRequest();
+                            emailInput.isError = true
+//                            loadPage("LibraryPage");
                         }
                     }
                 }

@@ -33,9 +33,10 @@ FocusScope
         
         MouseArea
         {
+            id: mouseArea
             anchors.fill: parent
-            
-            onClicked: {
+            onClicked:
+            {
                 root.clicked();
                 image.visible = !image.visible;
             }

@@ -9,5 +9,6 @@ set(QML_SOURCES
                 src/app/view/components/MLabeledInputBox.qml
                 src/app/view/login/MLoginPage.qml
                 src/app/view/register/MRegisterPage.qml
+                src/app/view/library/MLibrary.qml
     PARENT_SCOPE
     )

@@ -4,6 +4,7 @@ import QtQuick.Layouts
 
 import "login"
 import "register"
+import "library"
 
 
 ApplicationWindow
@@ -44,11 +45,19 @@ ApplicationWindow
             width: root.width
         }
     }
-    
     Component
     {
         id: registerPage
         MRegisterPage
+        {
+            height: root.height
+            width: root.width
+        }
+    }
+    Component
+    {
+        id: libraryPage
+        MLibrary
         {
             height: root.height
             width: root.width
@@ -70,6 +79,13 @@ ApplicationWindow
             root.minimumWidth = 542
             mainStackView.replace(registerPage);
             break;
+        case 'LibraryPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(libraryPage);
+            break;
+        default:
+            console.log("A not existing page was called");
         }
     }
     

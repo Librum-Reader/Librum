@@ -19,19 +19,7 @@ FocusScope
     property string image : ""
     property string toggleImage : ""
     property bool   addImageToRight : false
-    
-    
-    signal error(string message)
-    
-    function setError()
-    {
-        inputBox.border.color = properties.colorError
-    }
-    
-    function removeError()
-    {
-        inputBox.border.color = root.borderColor
-    }
+    property bool   isError : false
     
     
     ColumnLayout
@@ -56,7 +44,7 @@ FocusScope
             width: parent.width
             Layout.topMargin: 2
             border.width: root.borderWidth
-            border.color: root.borderColor
+            border.color: (root.isError ? properties.colorError : root.borderColor)
             radius: 5
             
             Row
@@ -68,7 +56,7 @@ FocusScope
                 TextField
                 {
                     id: inputField
-                    width: parent.width
+                    width: (addImageToRight ? parent.width - 30 : parent.width)
                     selectByMouse: true
                     background: Rectangle
                     {
@@ -82,11 +70,11 @@ FocusScope
                     anchors.verticalCenter: parent.verticalCenter
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
-                    echoMode: (root.addImageToRight ? TextInput.Password : TextInput.Normal)
+                    echoMode: (!root.addImageToRight || imageAtRight.pressed ? TextInput.Normal : TextInput.Password)
                     
                     onTextEdited:
                     {
-                        removeError();
+                        root.isError = false
                     }
                 }
                 
@@ -100,7 +88,6 @@ FocusScope
                     background: Rectangle
                     {
                         anchors.fill: parent
-                        border.width: 0
                         color: "transparent"
                     }
                     
@@ -109,27 +96,7 @@ FocusScope
                         id: image
                         width: parent.width
                         height: parent.height
-                        source: root.image
-                    }
-                    
-                    onPressedChanged:
-                    {
-                        if(pressed)
-                        {
-                            image.source = root.toggleImage
-                            inputField.echoMode = TextInput.Normal
-                        }
-                        else
-                        {
-                            image.source = root.image
-                            inputField.echoMode = TextInput.Password
-                        }
-                    }
-                    
-                    Component.onCompleted:
-                    {
-                        if(root.addImageToRight)
-                            inputField.width = Qt.binding(function() { return inputBox.width - 30; })
+                        source: (imageAtRight.pressed ? root.toggleImage : root.image)
                     }
                 }
             }
