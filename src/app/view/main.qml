@@ -15,7 +15,7 @@ ApplicationWindow
     minimumHeight: 590
     minimumWidth: 542
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("Librum - Your ebook reader")
     
 
 
@@ -39,29 +39,17 @@ ApplicationWindow
     Component
     {
         id: loginPage
-        MLoginPage
-        {
-            height: root.height
-            width: root.width
-        }
+        MLoginPage {}
     }
     Component
     {
         id: registerPage
-        MRegisterPage
-        {
-            height: root.height
-            width: root.width
-        }
+        MRegisterPage {}
     }
     Component
     {
         id: libraryPage
-        MLibrary
-        {
-            height: root.height
-            width: root.width
-        }
+        MLibrary {}
     }
     
     

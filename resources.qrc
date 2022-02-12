@@ -9,5 +9,6 @@
         <file>resources/images/check.svg</file>
         <file>resources/images/eye.svg</file>
         <file>resources/images/eye-off.svg</file>
+        <file>resources/images/right_icon.svg</file>
     </qresource>
 </RCC>

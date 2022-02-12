@@ -244,6 +244,11 @@ Page
                             fontColor: properties.colorBrightText
                             fontBold: true
                             textContent: "Let's start"
+                            
+                            onClicked:
+                            {
+                                loadPage("LoginPage");
+                            }
                         }
                     }
                 }
