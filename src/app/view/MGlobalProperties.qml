@@ -11,6 +11,9 @@ Item
     property color colorLightBorder : "#DCDCE4"
     property color colorDarkBorder  : "#ADADB4"
     property color colorError       : "#DC4446"
+    property color colorBackground  : "#FFFFFF"
+    property color colorSidebarMark : "#F0F0FF"
+    property color colorSidebarSeparator  : "#EAEAEF"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
     

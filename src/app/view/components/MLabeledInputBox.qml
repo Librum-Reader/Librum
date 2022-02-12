@@ -9,6 +9,7 @@ FocusScope
     implicitWidth: 100
     implicitHeight: emailLabel.implicitHeight + inputBox.height
     
+    
     property string placeholderContent : "placeholder"
     property int    inputFontSize : 11
     property color  placeholderColor : "black"
@@ -60,8 +61,8 @@ FocusScope
                     TextField
                     {
                         id: inputField
-                        focus: true
                         width: (addImageToRight ? parent.width - 30 : parent.width)
+                        focus: true
                         selectByMouse: true
                         background: Rectangle
                         {

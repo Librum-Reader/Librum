@@ -1,7 +1,13 @@
 <RCC>
     <qresource prefix="/">
+        <file>resources/images/download-icon.svg</file>
+        <file>resources/images/home-icon.svg</file>
+        <file>resources/images/pieChart-icon.svg</file>
+        <file>resources/images/puzzle-icon.svg</file>
+        <file>resources/images/settings-icon.svg</file>
+        <file>resources/images/wrench-icon.svg</file>
+        <file>resources/images/check.svg</file>
         <file>resources/images/eye.svg</file>
         <file>resources/images/eye-off.svg</file>
-        <file>resources/images/check.svg</file>
     </qresource>
 </RCC>

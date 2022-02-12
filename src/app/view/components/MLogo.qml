@@ -23,8 +23,7 @@ FocusScope
             height: parent.height / 2
             radius: width / 4
             color: properties.loginContentBackground
-            
-            
+            antialiasing: true
         }
     }
 }
