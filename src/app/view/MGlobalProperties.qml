@@ -7,6 +7,7 @@ Item
     property color colorLightText2  : "#8A8AA0"
     property color colorBasePurple  : "#946BDE"
     property color colorBaseText    : "#32324D"
+    property color colorBaseTitle   : "#4A4A6A"
     property color colorMediumText  : "#505057"
     property color colorLightBorder : "#DCDCE4"
     property color colorDarkBorder  : "#ADADB4"
