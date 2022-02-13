@@ -180,10 +180,11 @@ FocusScope
                     Rectangle
                     {
                         id: expandButton
-                        Layout.preferredWidth: 24
-                        Layout.preferredHeight: 24
+                        Layout.preferredWidth: 22
+                        Layout.preferredHeight: 23
                         Layout.alignment: Qt.AlignVCenter
-                        Layout.leftMargin: 4
+                        Layout.leftMargin: 5
+                        radius: 2
                         border.width: 1
                         border.color: properties.colorLightBorder
                         
