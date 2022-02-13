@@ -11,7 +11,7 @@ FocusScope
     
     property int  closedWidth : 72
     property int  openedWidth : 232
-    property bool opened : false
+    property bool sidebarOpened : false
     
     Rectangle
     {
@@ -71,6 +71,7 @@ FocusScope
                 imageWidth: 45
                 imageHeight: 45
                 imageSource: "/resources/images/download-icon.svg"
+                labelContent: "Free books"
             }            
             
             Rectangle
@@ -91,6 +92,7 @@ FocusScope
                 imageWidth: 30
                 imageHeight: 28
                 imageSource: "/resources/images/home-icon.svg"
+                labelContent: "Home"
             }
             
             MSidebarItem
@@ -101,6 +103,7 @@ FocusScope
                 imageWidth: 28
                 imageHeight: 28
                 imageSource: "/resources/images/pieChart-icon.svg"
+                labelContent: "Statistics"
             }
             
             Rectangle
@@ -121,16 +124,18 @@ FocusScope
                 imageWidth: 30
                 imageHeight: 30
                 imageSource: "/resources/images/wrench-icon.svg"
+                labelContent: "Tools"
             }
             
             MSidebarItem
             {
-                id: extensionsButton
+                id: addOnButton
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 31
                 imageHeight: 31
                 imageSource: "/resources/images/puzzle-icon.svg"
+                labelContent: "Add-ons"
             }
             
             MSidebarItem
@@ -141,6 +146,7 @@ FocusScope
                 imageWidth: 36
                 imageHeight: 36
                 imageSource: "/resources/images/settings-icon.svg"
+                labelContent: "Settings"
             }
             
             Item
@@ -223,15 +229,15 @@ FocusScope
                             anchors.fill: parent
                             onClicked:
                             {
-                                if(root.opened)
+                                if(root.sidebarOpened)
                                 {
                                     closeAnim.start();
-                                    root.opened = false;
+                                    root.sidebarOpened = false;
                                 }
                                 else
                                 {
                                     openAnim.start();
-                                    root.opened = true;
+                                    root.sidebarOpened = true;
                                 }
                             }
                         }
@@ -276,6 +282,25 @@ FocusScope
                 duration: openAnim.defaultDuration
                 easing.type: openAnim.defaultEasingType
             }
+            
+            PropertyAnimation
+            {
+                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
+                property: "labelVisibility"
+                to: true
+                duration: openAnim.defaultDuration
+                easing.type: openAnim.defaultEasingType
+            }
+            
+            PropertyAnimation
+            {
+                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
+                property: "textOpacity"
+                from: 0
+                to: 1
+                duration: openAnim.defaultDuration * 2.5
+                easing.type: openAnim.defaultEasingType
+            }
         }
         
         
@@ -307,6 +332,15 @@ FocusScope
                 property: "visible"
                 to: false
                 duration: 50
+                easing.type: openAnim.defaultEasingType
+            }
+            
+            PropertyAnimation
+            {
+                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
+                property: "labelVisibility"
+                to: false
+                duration: openAnim.defaultDuration / 2
                 easing.type: openAnim.defaultEasingType
             }
         }
