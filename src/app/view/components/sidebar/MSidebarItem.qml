@@ -15,7 +15,8 @@ FocusScope
     property string imageSource : ""
     property string labelContent : "Content here"
     property alias  labelVisibility : label.visible
-    property real  textOpacity : 0
+    property real   textOpacity : 0
+    property bool   selected : false
     
     Rectangle
     {

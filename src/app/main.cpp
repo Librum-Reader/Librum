@@ -1,19 +1,21 @@
-#include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QGuiApplication>
 #include <QQmlContext>
-#include <QLocale>
 #include <QTranslator>
+#include <QLocale>
 #include <QString>
-#include "testrequest.hpp"
 
 
 int main(int argc, char *argv[])
 {    
+    // App
     QGuiApplication app(argc, argv);
     app.setOrganizationName("Etovex");
     app.setOrganizationDomain("Etovex.com");
     app.setApplicationName("Librum");
     
+    
+    // Translations
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
     for (const QString &locale : uiLanguages) {
@@ -24,11 +26,14 @@ int main(int argc, char *argv[])
         }
     }
     
-    TestRequest testRequest;
     
+    // Exposing C++ types
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextObject(&testRequest);
     
+    
+    
+    
+    // App
     const QUrl url(u"qrc:/Librum/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

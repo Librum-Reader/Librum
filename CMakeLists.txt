@@ -54,11 +54,10 @@ target_compile_definitions(appLibrum
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
     )
 target_link_libraries(appLibrum
-                    PUBLIC 
+                    PRIVATE
                         Qt6::Quick
                         controller
     )
-
 
 
 # tests
