@@ -32,9 +32,8 @@ int main(int argc, char *argv[])
     
     
     
-    
     // App
-    const QUrl url(u"qrc:/Librum/src/app/view/main.qml"_qs);
+    const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

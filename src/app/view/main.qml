@@ -4,7 +4,7 @@ import QtQuick.Layouts
 
 import "login"
 import "register"
-import "library"
+import "home"
 
 
 ApplicationWindow

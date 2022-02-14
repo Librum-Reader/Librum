@@ -11,4 +11,18 @@
         <file>resources/images/eye-off.svg</file>
         <file>resources/images/right_icon.svg</file>
     </qresource>
+    <qresource prefix="/sources">
+        <file>src/app/view/main.qml</file>
+        <file>src/app/view/login/MLoginPage.qml</file>
+        <file>src/app/view/home/MLibrary.qml</file>
+        <file>src/app/view/components/MButton.qml</file>
+        <file>src/app/view/register/MRegisterPage.qml</file>
+        <file>src/app/view/components/MLogo.qml</file>
+        <file>src/app/view/components/MLabeledInputBox.qml</file>
+        <file>src/app/view/components/sidebar/MSidebar.qml</file>
+        <file>src/app/view/components/sidebar/MSidebarAnimations.qml</file>
+        <file>src/app/view/components/sidebar/MSidebarItem.qml</file>
+        <file>src/app/view/MGlobalProperties.qml</file>
+        <file>src/app/view/components/MCheckBox.qml</file>
+    </qresource>
 </RCC>
