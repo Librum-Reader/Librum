@@ -20,6 +20,11 @@ FocusScope
         height: parent.height
         width: parent.width
         
+        MSidebarAnimations
+        {
+            id: animations
+        }
+        
         ColumnLayout
         {
             id: mainLayout
@@ -29,13 +34,14 @@ FocusScope
             
             RowLayout
             {
+                id: logo
                 Layout.topMargin: 14
                 Layout.leftMargin: 14
                 spacing: 0
                 
                 MLogo
                 {
-                    id: logo
+                    id: logoIcon
                     Layout.preferredWidth: 44
                     Layout.preferredHeight: 44
                 }
@@ -58,8 +64,8 @@ FocusScope
                 id: topSeparator
                 Layout.preferredWidth: root.width
                 Layout.preferredHeight: 2
-                Layout.topMargin: 16
-                Layout.alignment: Qt.AlignHCenter
+                Layout.alignment: Qt.AlignTop
+                Layout.topMargin: 15
                 color: properties.colorSidebarSeparator
             }
             
@@ -167,6 +173,8 @@ FocusScope
                 color: properties.colorSidebarSeparator
             }
             
+            
+            
             Rectangle
             {
                 id: profileBox
@@ -231,117 +239,18 @@ FocusScope
                             {
                                 if(root.sidebarOpened)
                                 {
-                                    closeAnim.start();
+                                    animations.closeAnimation.start();
                                     root.sidebarOpened = false;
                                 }
                                 else
                                 {
-                                    openAnim.start();
+                                    animations.openAnimation.start();
                                     root.sidebarOpened = true;
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
-        
-        
-        
-        
-        // Open and close animations
-        ParallelAnimation
-        {
-            id: openAnim
-            property int defaultDuration : 250
-            property int defaultEasingType : Easing.InOutQuad
-            
-            PropertyAnimation
-            {
-                target: root
-                property: "width"
-                to: root.openedWidth
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                target: rightArrowImage
-                property: "rotation"
-                to: 180
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                target: logoLabel
-                property: "visible"
-                to: true
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
-                property: "labelVisibility"
-                to: true
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
-                property: "textOpacity"
-                from: 0
-                to: 1
-                duration: openAnim.defaultDuration * 2.5
-                easing.type: openAnim.defaultEasingType
-            }
-        }
-        
-        
-        ParallelAnimation
-        {
-            id: closeAnim
-            
-            PropertyAnimation
-            {
-                target: root
-                property: "width"
-                to: root.closedWidth
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                target: rightArrowImage
-                property: "rotation"
-                to: 0
-                duration: openAnim.defaultDuration
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                target: logoLabel
-                property: "visible"
-                to: false
-                duration: 50
-                easing.type: openAnim.defaultEasingType
-            }
-            
-            PropertyAnimation
-            {
-                targets: [downloadButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
-                property: "labelVisibility"
-                to: false
-                duration: openAnim.defaultDuration / 2
-                easing.type: openAnim.defaultEasingType
             }
         }
     }

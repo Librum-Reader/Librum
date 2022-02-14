@@ -101,7 +101,7 @@ Page
                                 Layout.preferredWidth: 186
                                 Layout.preferredHeight: 50
                                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                                headerText: 'First name<font color=' + properties.colorError + '>*</font>'
+                                headerText: 'First name'
                                 placeholderContent: "Kai"
                                 placeholderColor: properties.colorLightText
                             }
@@ -123,7 +123,7 @@ Page
                             id: emailInput
                             Layout.fillWidth: true
                             Layout.topMargin: 26
-                            headerText: 'Email<font color=' + properties.colorError + '>*</font>'
+                            headerText: 'Email'
                             placeholderContent: "kaidoe@gmail.com"
                             placeholderColor: properties.colorLightText
                         }
@@ -133,7 +133,7 @@ Page
                             id: passwordInput
                             Layout.fillWidth: true
                             Layout.topMargin: 16
-                            headerText: 'Password<font color=' + properties.colorError + '>*</font>'
+                            headerText: 'Password'
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
@@ -146,7 +146,7 @@ Page
                             id: passwordConfirmationInput
                             Layout.fillWidth: true
                             Layout.topMargin: 16
-                            headerText: 'Confirmation password<font color=' + properties.colorError + '>*</font>'
+                            headerText: 'Confirmation password'
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true

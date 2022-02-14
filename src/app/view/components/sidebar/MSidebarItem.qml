@@ -60,15 +60,15 @@ FocusScope
                 color: properties.colorLightText3
             }
         }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
         
-        MouseArea
+        onClicked: 
         {
-            anchors.fill: parent
-            
-            onClicked: 
-            {
-                console.log(root.labelContent);
-            }
+            console.log(root.labelContent);
         }
     }
     
