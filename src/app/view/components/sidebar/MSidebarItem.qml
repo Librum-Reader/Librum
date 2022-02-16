@@ -15,15 +15,19 @@ FocusScope
     property string imageSource : ""
     property string labelContent : "Content here"
     property alias  labelVisibility : label.visible
+    property alias  openAnimation : openAnim
+    property alias  closeAnimation : closeAnim
     property real   textOpacity : 0
     property bool   selected : false
+    
+    signal clicked()
     
     Rectangle
     {
         id: content
         width:  root.closedWidth
         height: parent.height
-        color: "transparent"
+        color: (root.selected == true ? properties.colorSidebarMark : "transparent")
         radius: 4
         
         RowLayout
@@ -35,6 +39,7 @@ FocusScope
             {
                 Layout.preferredWidth: 52
                 Layout.preferredHeight: 44
+                radius: 4
                 color: "transparent"
                 
                 Image
@@ -65,11 +70,7 @@ FocusScope
     MouseArea
     {
         anchors.fill: parent
-        
-        onClicked: 
-        {
-            console.log(root.labelContent);
-        }
+        onClicked: root.clicked();
     }
     
     PropertyAnimation
@@ -79,6 +80,7 @@ FocusScope
         property: "width"
         to: openedWidth
         duration: 250
+        easing.type: Easing.InOutQuad
     }
     
     PropertyAnimation
@@ -88,5 +90,6 @@ FocusScope
         property: "width"
         to: closedWidth
         duration: 250
+        easing.type: Easing.InOutQuad
     }
 }

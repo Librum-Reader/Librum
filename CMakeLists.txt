@@ -39,6 +39,7 @@ add_subdirectory(src/app/controller)
 # build
 qt_add_executable(appLibrum
     src/app/main.cpp
+    src/app/view/extensions/sidebarState.hpp
     resources.qrc
 )
 
@@ -55,6 +56,10 @@ target_link_libraries(appLibrum
                     PRIVATE
                         Qt6::Quick
                         controller
+    )
+target_include_directories(appLibrum
+                    PRIVATE
+                        src/app/view/extensions/
     )
 
 

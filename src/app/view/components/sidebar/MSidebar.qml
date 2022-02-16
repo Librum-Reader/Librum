@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import librum.extensions.sidebar
 import "../"
 
 FocusScope
@@ -12,6 +13,8 @@ FocusScope
     property int  closedWidth : 72
     property int  openedWidth : 232
     property bool sidebarOpened : false
+    property int  selectedTab : SidebarState.Home
+    property MSidebarItem selectedTabRef : null
     
     Rectangle
     {
@@ -71,13 +74,18 @@ FocusScope
             
             MSidebarItem
             {
-                id: downloadButton
+                id: freeBooksButton
                 Layout.topMargin: 16
                 Layout.leftMargin: 10
                 imageWidth: 45
                 imageHeight: 45
                 imageSource: "/resources/images/download-icon.svg"
                 labelContent: "Free books"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("FreeBooksPage");
+                }
             }            
             
             Rectangle
@@ -99,6 +107,11 @@ FocusScope
                 imageHeight: 28
                 imageSource: "/resources/images/home-icon.svg"
                 labelContent: "Home"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("HomePage");
+                }
             }
             
             MSidebarItem
@@ -110,6 +123,11 @@ FocusScope
                 imageHeight: 28
                 imageSource: "/resources/images/pieChart-icon.svg"
                 labelContent: "Statistics"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("StatisticsPage");
+                }
             }
             
             Rectangle
@@ -131,6 +149,11 @@ FocusScope
                 imageHeight: 30
                 imageSource: "/resources/images/wrench-icon.svg"
                 labelContent: "Tools"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("ToolsPage");
+                }
             }
             
             MSidebarItem
@@ -142,6 +165,11 @@ FocusScope
                 imageHeight: 31
                 imageSource: "/resources/images/puzzle-icon.svg"
                 labelContent: "Add-ons"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("AddOnsPage");
+                }
             }
             
             MSidebarItem
@@ -153,6 +181,11 @@ FocusScope
                 imageHeight: 36
                 imageSource: "/resources/images/settings-icon.svg"
                 labelContent: "Settings"
+                
+                onClicked: {
+                    if(true)
+                        loadPage("SettingsPage");
+                }
             }
             
             Item
@@ -240,17 +273,50 @@ FocusScope
                                 if(root.sidebarOpened)
                                 {
                                     animations.closeAnimation.start();
+                                    root.selectedTabRef.closeAnimation.start();
                                     root.sidebarOpened = false;
                                 }
                                 else
                                 {
                                     animations.openAnimation.start();
+                                    root.selectedTabRef.openAnimation.start();
                                     root.sidebarOpened = true;
                                 }
                             }
                         }
                     }
                 }
+            }
+        }
+        
+        
+        Component.onCompleted: {
+            switch(root.selectedTab)
+            {
+            case SidebarState.FreeBooks:
+                freeBooksButton.selected = true;
+                root.selectedTabRef = freeBooksButton;
+                break;
+            case SidebarState.Home:
+                homeButton.selected = true;
+                root.selectedTabRef = homeButton;
+                break;
+            case SidebarState.Statistics:
+                statisticsButton.selected = true;
+                root.selectedTabRef = statisticsButton;
+                break;
+            case SidebarState.Tools:
+                toolsButton.selected = true;
+                root.selectedTabRef = toolsButton;
+                break;
+            case SidebarState.AddOns:
+                addOnButton.selected = true;
+                root.selectedTabRef = addOnButton;
+                break;
+            case SidebarState.Settings:
+                settingsButton.selected = true;
+                root.selectedTabRef = settingsButton;
+                break;
             }
         }
     }

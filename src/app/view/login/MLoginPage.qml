@@ -153,7 +153,7 @@ Page
                         
                         onClicked:
                         {
-                            loadPage("LibraryPage");
+                            loadPage("HomePage");
                         }
                     }
                 }

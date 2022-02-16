@@ -2,9 +2,14 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+import "home"
 import "login"
 import "register"
-import "home"
+import "freeBooks"
+import "settings"
+import "statistics"
+import "addOns"
+import "tools"
 
 
 ApplicationWindow
@@ -36,21 +41,15 @@ ApplicationWindow
         replaceExit: null
     }
 
-    Component
-    {
-        id: loginPage
-        MLoginPage {}
-    }
-    Component
-    {
-        id: registerPage
-        MRegisterPage {}
-    }
-    Component
-    {
-        id: libraryPage
-        MLibrary {}
-    }
+    Component { id: loginPage; MLoginPage {} }
+    Component { id: registerPage; MRegisterPage {} }
+    Component { id: homePage; MHome {} }
+    Component { id: freeBooksPage; MFreeBooks {} }
+    Component { id: settingsPage; MSettings {} }
+    Component { id: addOnsPage; MAddOns {} }
+    Component { id: toolsPage; MTools {} }
+    Component { id: statisticsPage; MStatistics {} }
+    
     
     
     function loadPage(page)
@@ -67,10 +66,35 @@ ApplicationWindow
             root.minimumWidth = 542
             mainStackView.replace(registerPage);
             break;
-        case 'LibraryPage':
+        case 'HomePage':
             root.minimumHeight = 0
             root.minimumWidth = 0
-            mainStackView.replace(libraryPage);
+            mainStackView.replace(homePage);
+            break;
+        case 'FreeBooksPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(freeBooksPage);
+            break;
+        case 'SettingsPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(settingsPage);
+            break;
+        case 'AddOnsPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(addOnsPage);
+            break;
+        case 'ToolsPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(toolsPage);
+            break;
+        case 'StatisticsPage':
+            root.minimumHeight = 0
+            root.minimumWidth = 0
+            mainStackView.replace(statisticsPage);
             break;
         default:
             console.log("A not existing page was called");

@@ -4,7 +4,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
-
+#include "sidebarState.hpp"
 
 int main(int argc, char *argv[])
 {    
@@ -28,11 +28,13 @@ int main(int argc, char *argv[])
     
     
     // Exposing C++ types
+    SidebarState sidebarState;
+    qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
+    
+    
+    
+    // Startup
     QQmlApplicationEngine engine;
-    
-    
-    
-    // App
     const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

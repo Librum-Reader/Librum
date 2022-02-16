@@ -14,7 +14,7 @@
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
         <file>src/app/view/login/MLoginPage.qml</file>
-        <file>src/app/view/home/MLibrary.qml</file>
+        <file>src/app/view/home/MHome.qml</file>
         <file>src/app/view/components/MButton.qml</file>
         <file>src/app/view/register/MRegisterPage.qml</file>
         <file>src/app/view/components/MLogo.qml</file>
@@ -24,5 +24,11 @@
         <file>src/app/view/components/sidebar/MSidebarItem.qml</file>
         <file>src/app/view/MGlobalProperties.qml</file>
         <file>src/app/view/components/MCheckBox.qml</file>
+        <file>src/app/view/freeBooks/MFreeBooks.qml</file>
+        <file>src/app/view/settings/MSettings.qml</file>
+        <file>src/app/view/addOns/MAddOns.qml</file>
+        <file>src/app/view/tools/MTools.qml</file>
+        <file>src/app/view/statistics/MStatistics.qml</file>
+        <file>src/app/view/extensions/sidebarState.hpp</file>
     </qresource>
 </RCC>
