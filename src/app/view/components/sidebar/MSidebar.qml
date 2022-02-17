@@ -7,12 +7,11 @@ import "../"
 FocusScope
 {
     id: root
-    implicitWidth: closedWidth
+    implicitWidth: closedWidth  
     implicitHeight: Window.height
     
     property int  closedWidth : 72
     property int  openedWidth : 232
-    property bool sidebarOpened : false
     property int  selectedTab : SidebarState.Home
     property MSidebarItem selectedTabRef : null
     
@@ -270,17 +269,17 @@ FocusScope
                             anchors.fill: parent
                             onClicked:
                             {
-                                if(root.sidebarOpened)
+                                if(SidebarState.currentState === SidebarState.Opened)
                                 {
                                     animations.closeAnimation.start();
                                     root.selectedTabRef.closeAnimation.start();
-                                    root.sidebarOpened = false;
+                                    SidebarState.currentState = SidebarState.Closed;
                                 }
                                 else
                                 {
                                     animations.openAnimation.start();
                                     root.selectedTabRef.openAnimation.start();
-                                    root.sidebarOpened = true;
+                                    SidebarState.currentState = SidebarState.Opened;
                                 }
                             }
                         }
@@ -290,7 +289,9 @@ FocusScope
         }
         
         
-        Component.onCompleted: {
+        Component.onCompleted:
+        {
+            // Handle current tab marker
             switch(root.selectedTab)
             {
             case SidebarState.FreeBooks:
@@ -317,6 +318,31 @@ FocusScope
                 settingsButton.selected = true;
                 root.selectedTabRef = settingsButton;
                 break;
+            }
+            
+            
+            // Handle that the sidebar keeps opened when switching the tab
+            if(SidebarState.currentState === SidebarState.Opened)
+            {
+                root.width = root.openedWidth;
+                rightArrowImage.rotation = 180;
+                logoLabel.visible = true;
+                
+                freeBooksButton.labelVisibility = true;
+                homeButton.labelVisibility = true;
+                statisticsButton.labelVisibility = true;
+                toolsButton.labelVisibility = true;
+                addOnButton.labelVisibility = true;
+                settingsButton.labelVisibility = true;
+                
+                freeBooksButton.textOpacity = 1;
+                homeButton.textOpacity = 1;
+                statisticsButton.textOpacity = 1;
+                toolsButton.textOpacity = 1;
+                addOnButton.textOpacity = 1;
+                settingsButton.textOpacity = 1;
+                
+                selectedTabRef.width = selectedTabRef.openedWidth;
             }
         }
     }

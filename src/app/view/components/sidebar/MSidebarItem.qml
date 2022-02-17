@@ -25,7 +25,7 @@ FocusScope
     Rectangle
     {
         id: content
-        width:  root.closedWidth
+        width:  root.width
         height: parent.height
         color: (root.selected == true ? properties.colorSidebarMark : "transparent")
         radius: 4

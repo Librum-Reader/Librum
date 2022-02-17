@@ -32,7 +32,6 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
     
     
-    
     // Startup
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
