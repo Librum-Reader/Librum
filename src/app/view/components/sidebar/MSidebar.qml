@@ -1,18 +1,24 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import librum.extensions.sidebar
 import "../"
 
 FocusScope
 {
     id: root
-    implicitWidth: closedWidth
-    implicitHeight: Window.height
+    width: closedWidth
+    height: Window.height
     
     property int  closedWidth : 72
     property int  openedWidth : 232
     property bool isOpened    : false
     property MSidebarItem selectedTab : homeButton
+    
+    onWidthChanged:
+    {
+        console.log("width: " + width);
+    }
     
     Rectangle
     {
@@ -280,17 +286,17 @@ FocusScope
                             anchors.fill: parent
                             onClicked:
                             {
-                                if(root.isOpened)
+                                if(SidebarState.currentState === SidebarState.Opened)
                                 {
                                     animations.closeAnimation.start();
                                     root.selectedTab.closeAnimation.start();
-                                    root.isOpened = false;
+                                    SidebarState.currentState = SidebarState.Closed;
                                 }
                                 else
                                 {
                                     animations.openAnimation.start();
                                     root.selectedTab.openAnimation.start();
-                                    root.isOpened = true;
+                                    SidebarState.currentState = SidebarState.Opened;
                                 }
                             }
                         }

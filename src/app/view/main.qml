@@ -33,21 +33,20 @@ ApplicationWindow
         MSidebar
         {
             id: sidebar
-            visible: stackView.pageHasSidebar
+            visible: pageManager.pageHasSidebar
             z: 1
             Layout.alignment: Qt.AlignTop
         }
         
         StackView
         {
-            id: stackView
+            id: pageManager
             Layout.preferredHeight: root.height
             Layout.preferredWidth: root.width - sidebar.width
             initialItem: loginPage
             
             property bool pageHasSidebar : false
             
-            // Transitions
             popEnter: null
             popExit: null
             pushEnter: null
@@ -73,43 +72,43 @@ ApplicationWindow
         switch (page)
         {
         case 'LoginPage':
-            stackView.replace(loginPage);
+            pageManager.replace(loginPage);
             root.minimumHeight = 590
             root.minimumWidth = 542
-            stackView.pageHasSidebar = false;
+            pageManager.pageHasSidebar = false;
             break;
         case 'RegisterPage':
             root.minimumHeight = 800
             root.minimumWidth = 542
-            stackView.pageHasSidebar = false;
-            stackView.replace(registerPage);
+            pageManager.pageHasSidebar = false;
+            pageManager.replace(registerPage);
             break;
         case 'HomePage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(homePage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(homePage);
             break;
         case 'FreeBooksPage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(freeBooksPage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(freeBooksPage);
             break;
         case 'SettingsPage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(settingsPage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(settingsPage);
             break;
         case 'AddOnsPage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(addOnsPage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(addOnsPage);
             break;
         case 'ToolsPage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(toolsPage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(toolsPage);
             break;
         case 'StatisticsPage':
-            stackView.pageHasSidebar = true;
-            stackView.replace(statisticsPage);
+            pageManager.pageHasSidebar = true;
+            pageManager.replace(statisticsPage);
             break;
         default:
-            console.log("A not existing page was called");
+            console.log("ERROR: You tried instantiating a not existing page");
         }
     }
     

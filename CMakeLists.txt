@@ -43,11 +43,6 @@ qt_add_executable(appLibrum
     resources.qrc
 )
 
-qt_add_qml_module(appLibrum
-    URI Librum.Extensions
-    VERSION 1.0
-)
-
 target_compile_definitions(appLibrum
                     PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
@@ -56,6 +51,7 @@ target_link_libraries(appLibrum
                     PRIVATE
                         Qt6::Quick
                         controller
+                        view
     )
 target_include_directories(appLibrum
                     PRIVATE

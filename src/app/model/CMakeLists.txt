@@ -30,3 +30,12 @@ target_include_directories(model
                     PUBLIC
                         ${CMAKE_CURRENT_SOURCE_DIR}/
     )
+
+target_compile_definitions(model
+                    PRIVATE
+                        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    )
+target_link_libraries(model
+                    PUBLIC 
+                        Qt6::Quick
+    )

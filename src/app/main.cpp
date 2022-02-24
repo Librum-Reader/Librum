@@ -4,6 +4,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
+#include "sidebarState.hpp"
 
 int main(int argc, char *argv[])
 {    
@@ -24,6 +25,11 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    
+    
+    // Type registering
+    SidebarState sidebarState;
+    qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
     
     
     // Startup
