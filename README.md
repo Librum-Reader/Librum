@@ -52,7 +52,7 @@ Instructions to get Librum up and running in your environment.
     ```sh
     cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DBUILD_TESTS=On -G "Unix Makefiles" ..
     ```
-6. Build the project
+6. Build the project (using make)
     ```sh
     make
     ```
