@@ -29,6 +29,5 @@
         <file>src/app/view/addOns/MAddOns.qml</file>
         <file>src/app/view/tools/MTools.qml</file>
         <file>src/app/view/statistics/MStatistics.qml</file>
-        <file>src/app/view/extensions/sidebarState.hpp</file>
     </qresource>
 </RCC>

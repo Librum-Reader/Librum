@@ -32,6 +32,7 @@ option(BUILD_TESTS ON)
 find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
 add_subdirectory(src/app/model)
+add_subdirectory(src/app/view)
 add_subdirectory(src/app/controller)
 
 
@@ -39,7 +40,6 @@ add_subdirectory(src/app/controller)
 # build
 qt_add_executable(appLibrum
     src/app/main.cpp
-    src/app/view/extensions/sidebarState.hpp
     resources.qrc
 )
 

@@ -7,20 +7,11 @@ Page
 {
     id: root
     
-    Rectangle
+    Label
     {
-        anchors.fill: parent
-        color: "red"
-        opacity: 0.7
-        border.width: 2
-        border.color: "blue"
-        
-        Label
-        {
-            anchors.centerIn: parent
-            text: "Home"
-            font.pointSize: 22
-            font.bold: true
-        }
+        anchors.centerIn: parent
+        text: "Home"
+        font.pointSize: 22
+        font.bold: true
     }
 }

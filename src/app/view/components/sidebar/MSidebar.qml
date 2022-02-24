@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import librum.extensions.sidebar
 import "../"
 
 FocusScope
@@ -14,13 +13,6 @@ FocusScope
     property int  openedWidth : 232
     property bool isOpened    : false
     property MSidebarItem selectedTab : homeButton
-    
-    function changeSelectedTab(newTab)
-    {
-        root.selectedTab.selected = false;
-        root.selectedTab = newTab;
-        root.selectedTab.selected = true;
-    }
     
     Rectangle
     {
@@ -87,10 +79,10 @@ FocusScope
                 imageHeight: 45
                 imageSource: "/resources/images/download-icon.svg"
                 labelContent: "Free books"
+                selected: root.selectedTab == freeBooksButton
                 
                 onClicked: {
-                    changeSelectedTab(freeBooksButton);
-                    
+                    root.selectedTab = freeBooksButton;
                     if(true)
                         loadPage("FreeBooksPage");
                 }
@@ -115,10 +107,10 @@ FocusScope
                 imageHeight: 28
                 imageSource: "/resources/images/home-icon.svg"
                 labelContent: "Home"
-                selected: true
+                selected: root.selectedTab == homeButton
                 
                 onClicked: {
-                    changeSelectedTab(homeButton);
+                    root.selectedTab = homeButton;
                     if(true)
                         loadPage("HomePage");
                 }
@@ -133,9 +125,10 @@ FocusScope
                 imageHeight: 28
                 imageSource: "/resources/images/pieChart-icon.svg"
                 labelContent: "Statistics"
+                selected: root.selectedTab == statisticsButton
                 
                 onClicked: {
-                    changeSelectedTab(statisticsButton);
+                    root.selectedTab = statisticsButton;
                     if(true)
                         loadPage("StatisticsPage");
                 }
@@ -160,9 +153,10 @@ FocusScope
                 imageHeight: 30
                 imageSource: "/resources/images/wrench-icon.svg"
                 labelContent: "Tools"
+                selected: root.selectedTab == toolsButton
                 
                 onClicked: {
-                    changeSelectedTab(toolsButton);
+                    root.selectedTab = toolsButton;
                     if(true)
                         loadPage("ToolsPage");
                 }
@@ -177,9 +171,10 @@ FocusScope
                 imageHeight: 31
                 imageSource: "/resources/images/puzzle-icon.svg"
                 labelContent: "Add-ons"
+                selected: root.selectedTab == addOnButton
                 
                 onClicked: {
-                    changeSelectedTab(addOnButton);
+                    root.selectedTab = addOnButton;
                     if(true)
                         loadPage("AddOnsPage");
                 }
@@ -194,9 +189,10 @@ FocusScope
                 imageHeight: 36
                 imageSource: "/resources/images/settings-icon.svg"
                 labelContent: "Settings"
+                selected: root.selectedTab == settingsButton
                 
                 onClicked: {
-                    changeSelectedTab(settingsButton);
+                    root.selectedTab = settingsButton;
                     if(true)
                         loadPage("SettingsPage");
                 }
