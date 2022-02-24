@@ -21,6 +21,7 @@ Item
         {
             target: root
             property: "implicitWidth"
+            from: closedWidth
             to: openedWidth
             duration: slowDuration
             easing.type: defaultEasingType
@@ -72,6 +73,7 @@ Item
         {
             target: root
             property: "implicitWidth"
+            from: openedWidth
             to: root.closedWidth
             duration: slowDuration
             easing.type: defaultEasingType

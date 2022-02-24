@@ -15,11 +15,6 @@ FocusScope
     property bool isOpened    : false
     property MSidebarItem selectedTab : homeButton
     
-    onWidthChanged:
-    {
-        console.log("width: " + width);
-    }
-    
     Rectangle
     {
         id: container

@@ -53,9 +53,13 @@ Page
         {
             id: leftSpacer
             Layout.preferredHeight: parent.height
-            Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ? 85 : 64)
+            Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ? 
+                                        openedSidebarMargin : closedSidebarMargin)
             Layout.alignment: Qt.AlignLeft
             color: "transparent"
+            
+            property int closedSidebarMargin : 64
+            property int openedSidebarMargin : 85
         }
         
         ColumnLayout
@@ -64,17 +68,25 @@ Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
+            Layout.topMargin: 213 - bookTopSpacing
             spacing: 0
+            
+            property int bookWidth : 185
+            property int bookHeight : 320
+            property int bookTopSpacing : 48
+            property int sidebarClosedBookSpacing : 53
+            property int sidebarOpenedBookSpacing : 68
             
             GridView
             {
+                
                 id: bookGrid
                 width: parent.width
                 height: parent.height
-                cellWidth: 201 + 53
-                cellHeight: 355 + 48
+                cellWidth: mainLayout.bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
+                                            mainLayout.sidebarOpenedBookSpacing : mainLayout.sidebarClosedBookSpacing)
+                cellHeight: mainLayout.bookHeight + mainLayout.bookTopSpacing
                 clip: true
-                
                 model: model
                 delegate: delegate
             }
