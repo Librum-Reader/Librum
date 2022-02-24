@@ -7,20 +7,27 @@ import "../"
 FocusScope
 {
     id: root
-    implicitWidth: closedWidth  
+    implicitWidth: closedWidth
     implicitHeight: Window.height
     
     property int  closedWidth : 72
     property int  openedWidth : 232
-    property int  selectedTab : SidebarState.Home
-    property MSidebarItem selectedTabRef : null
+    property bool isOpened    : false
+    property MSidebarItem selectedTab : homeButton
+    
+    function changeSelectedTab(newTab)
+    {
+        root.selectedTab.selected = false;
+        root.selectedTab = newTab;
+        root.selectedTab.selected = true;
+    }
     
     Rectangle
     {
         id: container
+        width: root.width
+        height: root.height
         color: properties.colorBackground
-        height: parent.height
-        width: parent.width
         
         MSidebarAnimations
         {
@@ -82,6 +89,8 @@ FocusScope
                 labelContent: "Free books"
                 
                 onClicked: {
+                    changeSelectedTab(freeBooksButton);
+                    
                     if(true)
                         loadPage("FreeBooksPage");
                 }
@@ -108,6 +117,7 @@ FocusScope
                 labelContent: "Home"
                 
                 onClicked: {
+                    changeSelectedTab(homeButton);
                     if(true)
                         loadPage("HomePage");
                 }
@@ -124,6 +134,7 @@ FocusScope
                 labelContent: "Statistics"
                 
                 onClicked: {
+                    changeSelectedTab(statisticsButton);
                     if(true)
                         loadPage("StatisticsPage");
                 }
@@ -150,6 +161,7 @@ FocusScope
                 labelContent: "Tools"
                 
                 onClicked: {
+                    changeSelectedTab(toolsButton);
                     if(true)
                         loadPage("ToolsPage");
                 }
@@ -166,6 +178,7 @@ FocusScope
                 labelContent: "Add-ons"
                 
                 onClicked: {
+                    changeSelectedTab(addOnButton);
                     if(true)
                         loadPage("AddOnsPage");
                 }
@@ -182,6 +195,7 @@ FocusScope
                 labelContent: "Settings"
                 
                 onClicked: {
+                    changeSelectedTab(settingsButton);
                     if(true)
                         loadPage("SettingsPage");
                 }
@@ -269,80 +283,22 @@ FocusScope
                             anchors.fill: parent
                             onClicked:
                             {
-                                if(SidebarState.currentState === SidebarState.Opened)
+                                if(root.isOpened)
                                 {
                                     animations.closeAnimation.start();
-                                    root.selectedTabRef.closeAnimation.start();
-                                    SidebarState.currentState = SidebarState.Closed;
+                                    root.selectedTab.closeAnimation.start();
+                                    root.isOpened = false;
                                 }
                                 else
                                 {
                                     animations.openAnimation.start();
-                                    root.selectedTabRef.openAnimation.start();
-                                    SidebarState.currentState = SidebarState.Opened;
+                                    root.selectedTab.openAnimation.start();
+                                    root.isOpened = true;
                                 }
                             }
                         }
                     }
                 }
-            }
-        }
-        
-        
-        Component.onCompleted:
-        {
-            // Handle current tab marker
-            switch(root.selectedTab)
-            {
-            case SidebarState.FreeBooks:
-                freeBooksButton.selected = true;
-                root.selectedTabRef = freeBooksButton;
-                break;
-            case SidebarState.Home:
-                homeButton.selected = true;
-                root.selectedTabRef = homeButton;
-                break;
-            case SidebarState.Statistics:
-                statisticsButton.selected = true;
-                root.selectedTabRef = statisticsButton;
-                break;
-            case SidebarState.Tools:
-                toolsButton.selected = true;
-                root.selectedTabRef = toolsButton;
-                break;
-            case SidebarState.AddOns:
-                addOnButton.selected = true;
-                root.selectedTabRef = addOnButton;
-                break;
-            case SidebarState.Settings:
-                settingsButton.selected = true;
-                root.selectedTabRef = settingsButton;
-                break;
-            }
-            
-            
-            // Handle that the sidebar keeps opened when switching the tab
-            if(SidebarState.currentState === SidebarState.Opened)
-            {
-                root.width = root.openedWidth;
-                rightArrowImage.rotation = 180;
-                logoLabel.visible = true;
-                
-                freeBooksButton.labelVisibility = true;
-                homeButton.labelVisibility = true;
-                statisticsButton.labelVisibility = true;
-                toolsButton.labelVisibility = true;
-                addOnButton.labelVisibility = true;
-                settingsButton.labelVisibility = true;
-                
-                freeBooksButton.textOpacity = 1;
-                homeButton.textOpacity = 1;
-                statisticsButton.textOpacity = 1;
-                toolsButton.textOpacity = 1;
-                addOnButton.textOpacity = 1;
-                settingsButton.textOpacity = 1;
-                
-                selectedTabRef.width = selectedTabRef.openedWidth;
             }
         }
     }

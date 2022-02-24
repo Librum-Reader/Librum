@@ -1,26 +1,26 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import librum.extensions.sidebar
-import "../components/sidebar"
 
 
 Page
 {
     id: root
     
-    MSidebar
+    Rectangle
     {
-        anchors.left: parent.left
-        focus: true
-        selectedTab: SidebarState.Home
-    }
-    
-    Label
-    {
-        anchors.centerIn: parent
-        text: "Home"
-        font.pointSize: 22
-        font.bold: true
+        anchors.fill: parent
+        color: "red"
+        opacity: 0.7
+        border.width: 2
+        border.color: "blue"
+        
+        Label
+        {
+            anchors.centerIn: parent
+            text: "Home"
+            font.pointSize: 22
+            font.bold: true
+        }
     }
 }

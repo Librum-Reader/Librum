@@ -1,7 +1,9 @@
 import QtQuick 
 import QtQuick.Controls
 import QtQuick.Layouts
+import librum.extensions.sidebar
 
+import "components/sidebar"
 import "home"
 import "login"
 import "register"
@@ -15,32 +17,45 @@ import "tools"
 ApplicationWindow
 {
     id: root
-    width: Screen.width
-    height: Screen.height
+    width: Screen.desktopAvailableWidth
+    height: Screen.desktopAvailableHeight
     minimumHeight: 590
     minimumWidth: 542
     visible: true
     title: qsTr("Librum - Your ebook reader")
-    
 
 
-    StackView
+    RowLayout
     {
-        id: mainStackView
-        width: root.width
-        height: root.height
+        id: mainlayout
+        anchors.fill: parent
+        spacing: 0
         
-        initialItem: loginPage
+        MSidebar
+        {
+            id: sidebar
+            z: 1
+            Layout.alignment: Qt.AlignTop
+        }
         
-        // Transitions
-        popEnter: null
-        popExit: null
-        pushEnter: null
-        pushExit: null
-        replaceEnter: null
-        replaceExit: null
+        StackView
+        {
+            id: mainStackView
+            Layout.preferredHeight: root.height
+            Layout.preferredWidth: root.width - sidebar.width
+            
+            initialItem: loginPage
+            
+            // Transitions
+            popEnter: null
+            popExit: null
+            pushEnter: null
+            pushExit: null
+            replaceEnter: null
+            replaceExit: null
+        }
     }
-
+    
     Component { id: loginPage; MLoginPage {} }
     Component { id: registerPage; MRegisterPage {} }
     Component { id: homePage; MHome {} }

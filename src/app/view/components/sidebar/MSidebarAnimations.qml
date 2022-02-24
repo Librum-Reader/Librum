@@ -5,7 +5,8 @@ import QtQuick.Layouts
 
 Item 
 {
-    property int defaultDuration : 250
+    property int slowDuration  : 250
+    property int fastDuration : 100
     property int defaultEasingType : Easing.InOutQuad
     
     property alias closeAnimation : closeAnim
@@ -19,9 +20,9 @@ Item
         PropertyAnimation
         {
             target: root
-            property: "width"
-            to: root.openedWidth
-            duration: defaultDuration
+            property: "implicitWidth"
+            to: openedWidth
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -30,7 +31,7 @@ Item
             target: rightArrowImage
             property: "rotation"
             to: 180
-            duration: defaultDuration
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -39,7 +40,7 @@ Item
             target: logoLabel
             property: "visible"
             to: true
-            duration: defaultDuration
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -48,7 +49,7 @@ Item
             targets: [freeBooksButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
             property: "labelVisibility"
             to: true
-            duration: defaultDuration
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -58,7 +59,7 @@ Item
             property: "textOpacity"
             from: 0
             to: 1
-            duration: defaultDuration * 2.5
+            duration: slowDuration * 2.5
             easing.type: defaultEasingType
         }
     }
@@ -70,9 +71,9 @@ Item
         PropertyAnimation
         {
             target: root
-            property: "width"
+            property: "implicitWidth"
             to: root.closedWidth
-            duration: defaultDuration
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -81,7 +82,7 @@ Item
             target: rightArrowImage
             property: "rotation"
             to: 0
-            duration: defaultDuration
+            duration: slowDuration
             easing.type: defaultEasingType
         }
         
@@ -90,7 +91,7 @@ Item
             target: logoLabel
             property: "visible"
             to: false
-            duration: 50
+            duration: fastDuration
             easing.type: defaultEasingType
         }
         
@@ -99,7 +100,7 @@ Item
             targets: [freeBooksButton, homeButton, statisticsButton, toolsButton, addOnButton, settingsButton]
             property: "labelVisibility"
             to: false
-            duration: defaultDuration / 2
+            duration: fastDuration
             easing.type: defaultEasingType
         }
     }
