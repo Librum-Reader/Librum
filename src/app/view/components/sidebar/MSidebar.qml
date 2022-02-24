@@ -115,6 +115,7 @@ FocusScope
                 imageHeight: 28
                 imageSource: "/resources/images/home-icon.svg"
                 labelContent: "Home"
+                selected: true
                 
                 onClicked: {
                     changeSelectedTab(homeButton);

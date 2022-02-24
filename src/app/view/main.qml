@@ -34,17 +34,19 @@ ApplicationWindow
         MSidebar
         {
             id: sidebar
+            visible: stackView.pageHasSidebar
             z: 1
             Layout.alignment: Qt.AlignTop
         }
         
         StackView
         {
-            id: mainStackView
+            id: stackView
             Layout.preferredHeight: root.height
             Layout.preferredWidth: root.width - sidebar.width
-            
             initialItem: loginPage
+            
+            property bool pageHasSidebar : false
             
             // Transitions
             popEnter: null
@@ -72,44 +74,40 @@ ApplicationWindow
         switch (page)
         {
         case 'LoginPage':
-            mainStackView.replace(loginPage);
+            stackView.replace(loginPage);
             root.minimumHeight = 590
             root.minimumWidth = 542
+            stackView.pageHasSidebar = false;
             break;
         case 'RegisterPage':
             root.minimumHeight = 800
             root.minimumWidth = 542
-            mainStackView.replace(registerPage);
+            stackView.pageHasSidebar = false;
+            stackView.replace(registerPage);
             break;
         case 'HomePage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(homePage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(homePage);
             break;
         case 'FreeBooksPage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(freeBooksPage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(freeBooksPage);
             break;
         case 'SettingsPage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(settingsPage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(settingsPage);
             break;
         case 'AddOnsPage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(addOnsPage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(addOnsPage);
             break;
         case 'ToolsPage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(toolsPage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(toolsPage);
             break;
         case 'StatisticsPage':
-            root.minimumHeight = 0
-            root.minimumWidth = 0
-            mainStackView.replace(statisticsPage);
+            stackView.pageHasSidebar = true;
+            stackView.replace(statisticsPage);
             break;
         default:
             console.log("A not existing page was called");
