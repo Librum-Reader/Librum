@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import librum.extensions.sidebar
+import "../components"
+
 
 
 Page
@@ -22,25 +24,6 @@ Page
         ListElement { color: "black"; text: "Eitht" }
         ListElement { color: "red"; text: "Nineth" }
         ListElement { color: "gray"; text: "Tenth" }
-    }
-    
-    Component
-    {
-        id: delegate
-        
-        Rectangle
-        {
-            implicitWidth: 201
-            implicitHeight: 355
-            color: model.color
-            
-            Label
-            {
-                anchors.centerIn: parent
-                text: model.text
-                font.pointSize: 12
-            }
-        }
     }
     
     RowLayout
@@ -68,27 +51,27 @@ Page
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
-            Layout.topMargin: 213 - bookTopSpacing
+            Layout.topMargin: 216
             spacing: 0
             
-            property int bookWidth : 185
+            property int bookWidth : 190
             property int bookHeight : 320
             property int bookTopSpacing : 48
-            property int sidebarClosedBookSpacing : 53
+            property int sidebarClosedBookSpacing : 64
             property int sidebarOpenedBookSpacing : 68
             
             GridView
             {
                 
                 id: bookGrid
-                width: parent.width
-                height: parent.height
+                Layout.preferredWidth: parent.width
+                Layout.preferredHeight: parent.height
                 cellWidth: mainLayout.bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
                                             mainLayout.sidebarOpenedBookSpacing : mainLayout.sidebarClosedBookSpacing)
                 cellHeight: mainLayout.bookHeight + mainLayout.bookTopSpacing
                 clip: true
                 model: model
-                delegate: delegate
+                delegate: MBook {}
             }
         }
     }

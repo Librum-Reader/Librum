@@ -10,6 +10,7 @@
         <file>resources/images/eye.svg</file>
         <file>resources/images/eye-off.svg</file>
         <file>resources/images/right_icon.svg</file>
+        <file>resources/images/dots-horizontal.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -29,5 +30,6 @@
         <file>src/app/view/addOns/MAddOns.qml</file>
         <file>src/app/view/tools/MTools.qml</file>
         <file>src/app/view/statistics/MStatistics.qml</file>
+        <file>src/app/view/components/MBook.qml</file>
     </qresource>
 </RCC>
