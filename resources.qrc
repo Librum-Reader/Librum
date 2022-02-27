@@ -11,6 +11,7 @@
         <file>resources/images/eye-off.svg</file>
         <file>resources/images/right_icon.svg</file>
         <file>resources/images/dots-horizontal.svg</file>
+        <file>resources/images/book-cover.png</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>

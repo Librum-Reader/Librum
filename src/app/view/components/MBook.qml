@@ -30,13 +30,30 @@ Item {
             Layout.preferredHeight: 230
             Layout.topMargin: -6
             color: "#DCDCE4"
+            
+            ColumnLayout
+            {
+                id: topLayout
+                anchors.centerIn: parent
+                spacing: 0
+                
+                Image
+                {
+                    id: bookCover
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: -10
+                    sourceSize.height: 241
+                    source: "/resources/images/book-cover.png"
+                    fillMode: Image.PreserveAspectFit
+                }
+            }
         }
         
         Rectangle
         {
             id: spacer
             Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 1
+            Layout.preferredHeight: 2
             color: "#E0E0DE"
         }
         
@@ -44,12 +61,12 @@ Item {
         {
             id: lowerRect
             Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 83
+            Layout.preferredHeight: 82
             color: "#FFFFFF"
             
             ColumnLayout
             {
-                id: inBookLayout
+                id: bottomLayout
                 width: parent.width - 14*2
                 spacing: 0
                 
@@ -60,7 +77,7 @@ Item {
                     id: bookName
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 4
-                    Layout.leftMargin: inBookLayout.inBookMargin
+                    Layout.leftMargin: bottomLayout.inBookMargin
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
                     color: properties.colorBaseTitle
@@ -75,7 +92,7 @@ Item {
                     id: authorName
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 1                    
-                    Layout.leftMargin: inBookLayout.inBookMargin
+                    Layout.leftMargin: bottomLayout.inBookMargin
                     text: "Stephan R. Covey"
                     font.weight: Font.Medium
                     color: properties.colorLightText
@@ -88,7 +105,7 @@ Item {
                 {
                     id: lowerRow
                     width: parent.width
-                    Layout.leftMargin: inBookLayout.inBookMargin
+                    Layout.leftMargin: bottomLayout.inBookMargin
                     spacing: 0
                     
                     Rectangle
@@ -112,7 +129,6 @@ Item {
                         }
                     }
 
-                    
                     Image
                     {
                         id: moreIcon
