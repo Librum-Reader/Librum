@@ -237,8 +237,8 @@ Page
                         MButton 
                         {
                             id: loginButton
-                            buttonHeight: 40
-                            buttonWidth: parent.width
+                            Layout.preferredHeight: 40
+                            Layout.preferredWidth: parent.width
                             Layout.topMargin: 40
                             backgroundColor: properties.colorBasePurple
                             fontColor: properties.colorBrightText

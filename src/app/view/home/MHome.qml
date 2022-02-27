@@ -9,6 +9,8 @@ import "../components"
 Page
 {
     id: root
+    width: Window.width
+    height: Window.height
     
     ListModel
     {
@@ -48,30 +50,61 @@ Page
         ColumnLayout
         {
             id: mainLayout
+            Layout.preferredWidth: parent.width - leftSpacer.width
             Layout.fillHeight: true
-            Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
-            Layout.topMargin: 216
             spacing: 0
             
-            property int bookWidth : 190
-            property int bookHeight : 320
-            property int bookTopSpacing : 48
-            property int sidebarClosedBookSpacing : 64
-            property int sidebarOpenedBookSpacing : 68
+            RowLayout
+            {
+                spacing: 0
+                Layout.bottomMargin: 150
+                Layout.preferredWidth: parent.width
+                
+                Label
+                {
+                    id: title
+                    Layout.topMargin: 35
+                    Layout.alignment: Qt.AlignTop
+                    text: "Home"
+                    font.weight: Font.Bold
+                    color: properties.colorBaseText
+                    font.pointSize: 25
+                    font.family: properties.defaultFontFamily
+                }
+                
+                MButton
+                {
+                    id: addBooksButton
+                    Layout.preferredWidth: 140
+                    Layout.preferredHeight: 40
+                    Layout.topMargin: 35
+                    Layout.alignment: Qt.AlignRight
+                    Layout.rightMargin: 71
+                    backgroundColor: properties.colorBasePurple
+                    textContent: "+ Add Books"
+                    fontColor: properties.colorBackground
+                    fontBold: true
+                }
+            }
             
             GridView
             {
-                
                 id: bookGrid
-                Layout.preferredWidth: parent.width
-                Layout.preferredHeight: parent.height
-                cellWidth: mainLayout.bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
-                                            mainLayout.sidebarOpenedBookSpacing : mainLayout.sidebarClosedBookSpacing)
-                cellHeight: mainLayout.bookHeight + mainLayout.bookTopSpacing
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                cellWidth: bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
+                                            sidebarOpenedBookSpacing : sidebarClosedBookSpacing)
+                cellHeight: bookHeight + bookTopSpacing
                 clip: true
                 model: model
                 delegate: MBook {}
+                
+                property int bookWidth : 190
+                property int bookHeight : 320
+                property int bookTopSpacing : 48
+                property int sidebarClosedBookSpacing : 64
+                property int sidebarOpenedBookSpacing : 68
             }
         }
     }

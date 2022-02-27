@@ -7,10 +7,8 @@ FocusScope
 {
     id: root
     
-    implicitWidth: buttonWidth
-    implicitHeight: buttonHeight
-    property int buttonWidth : 100
-    property int buttonHeight : 40
+    implicitWidth: 100
+    implicitHeight: 30
     property int buttonRadius : 4
     property color backgroundColor : "red"
     
@@ -25,8 +23,8 @@ FocusScope
     Rectangle
     {
         id: prvt
-        height: root.buttonHeight
-        width:  root.buttonWidth
+        height: root.height
+        width:  root.width
         radius: root.buttonRadius
         color: root.backgroundColor
         opacity: (mouseArea.pressed ? 0.9 : 1)

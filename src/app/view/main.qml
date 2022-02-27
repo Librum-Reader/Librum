@@ -42,7 +42,7 @@ ApplicationWindow
         {
             id: pageManager
             Layout.preferredHeight: root.height
-            Layout.preferredWidth: root.width - sidebar.width
+            Layout.preferredWidth: root.width - (pageHasSidebar ? sidebar.width : 0)
             initialItem: loginPage
             
             property bool pageHasSidebar : false
