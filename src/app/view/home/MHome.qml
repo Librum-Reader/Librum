@@ -38,7 +38,7 @@ Page
         {
             id: leftSpacer
             Layout.preferredHeight: parent.height
-            Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ? 
+            Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ?
                                         openedSidebarMargin : closedSidebarMargin)
             Layout.alignment: Qt.AlignLeft
             color: "transparent"
@@ -51,26 +51,44 @@ Page
         {
             id: mainLayout
             Layout.preferredWidth: parent.width - leftSpacer.width
-            Layout.fillHeight: true
+            Layout.preferredHeight: parent.height
             Layout.alignment: Qt.AlignLeft
             spacing: 0
             
             RowLayout
             {
+                id: headerRow
                 spacing: 0
                 Layout.bottomMargin: 150
                 Layout.preferredWidth: parent.width
                 
-                Label
+                ColumnLayout
                 {
-                    id: title
-                    Layout.topMargin: 35
-                    Layout.alignment: Qt.AlignTop
-                    text: "Home"
-                    font.weight: Font.Bold
-                    color: properties.colorBaseText
-                    font.pointSize: 25
-                    font.family: properties.defaultFontFamily
+                    id: titleColumn
+                    spacing: 0
+                    
+                    Label
+                    {
+                        id: title
+                        Layout.topMargin: 35
+                        Layout.alignment: Qt.AlignTop
+                        text: "Home"
+                        font.weight: Font.Bold
+                        color: properties.colorBaseText
+                        font.pointSize: 25
+                        font.family: properties.defaultFontFamily
+                    }
+                    
+                    Label
+                    {
+                        id: pageDescription
+                        Layout.topMargin: 2
+                        Layout.alignment: Qt.AlignTop
+                        text: "You have 10 books"
+                        color: properties.colorLightText3
+                        font.pointSize: 14
+                        font.family: properties.defaultFontFamily
+                    }
                 }
                 
                 MButton
@@ -82,9 +100,11 @@ Page
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 71
                     backgroundColor: properties.colorBasePurple
-                    textContent: "+ Add Books"
+                    textContent: "Add books"
                     fontColor: properties.colorBackground
                     fontBold: true
+                    fontSize: 11.8
+                    imageSource: "/resources/images/plus.svg"
                 }
             }
             

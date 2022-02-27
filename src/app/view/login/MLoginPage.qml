@@ -55,18 +55,17 @@ Page
                     text: "Welcome back!"
                     color: properties.colorBaseText
                     font.bold: true
-                    font.pointSize: 22
+                    font.pointSize: 26
                     font.family: properties.defaultFontFamily
                 }
                 
                 Label
                 {
                     id: loginText
-                    Layout.topMargin: 4
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
                     text: "Log into your account"
                     color: properties.colorLightText2
-                    font.pointSize: 12
+                    font.pointSize: 13
                     font.family: properties.defaultFontFamily
                 }
                 
@@ -119,7 +118,7 @@ Page
                             id: rememberMeText
                             text: "Remember me"
                             Layout.alignment: Qt.AlignVCenter
-                            Layout.leftMargin: 6
+                            Layout.leftMargin: 4
                             font.pointSize: 11
                             color: properties.colorMediumText
                         }

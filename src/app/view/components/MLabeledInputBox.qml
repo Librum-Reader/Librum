@@ -7,7 +7,7 @@ FocusScope
 {
     id: root
     implicitWidth: 100
-    implicitHeight: emailLabel.implicitHeight + inputBox.height
+    implicitHeight: label.implicitHeight + inputBox.height
     
     
     property string placeholderContent : "placeholder"
@@ -34,12 +34,13 @@ FocusScope
             
             Label
             {
-                id: emailLabel
+                id: label
                 text: root.headerText
                 textFormat: Text.RichText
                 width: parent.width
                 font.family: properties.defaultFontFamily
-                font.pointSize: 10
+                font.pointSize: 10.5
+                font.weight: Font.Medium
             }
             
             Rectangle

@@ -55,7 +55,7 @@ Page
                     text: "Welcome!"
                     color: properties.colorBaseText
                     font.bold: true
-                    font.pointSize: 22
+                    font.pointSize: 26
                     font.family: properties.defaultFontFamily
                 }
                 
@@ -70,7 +70,7 @@ Page
                     horizontalAlignment: Text.AlignHCenter
                     wrapMode: "WordWrap"
                     color: properties.colorLightText2
-                    font.pointSize: 12
+                    font.pointSize: 13
                     font.family: properties.defaultFontFamily
                 }
                 

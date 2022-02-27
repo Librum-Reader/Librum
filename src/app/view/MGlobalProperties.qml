@@ -20,5 +20,5 @@ Item
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
     
-    property string defaultFontFamily : "Droid Sans Fallback"
+    property string defaultFontFamily : "SF Pro Display"
 }

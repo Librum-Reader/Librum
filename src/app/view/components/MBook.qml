@@ -93,12 +93,10 @@ Item {
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 1                    
                     Layout.leftMargin: bottomLayout.inBookMargin
-                    text: "Stephan R. Covey"
-                    font.weight: Font.Medium
+                    text: "Stephen R. Covey"
                     color: properties.colorLightText
                     font.pointSize: 9
                     font.family: properties.defaultFontFamily
-                    wrapMode: TextInput.NoWrap
                 }
                 
                 RowLayout
@@ -121,11 +119,12 @@ Item {
                         {
                             id: percentageLabel
                             anchors.centerIn: parent
+                            horizontalAlignment: Text.AlignBottom
                             text: "27%"
                             font.weight: Font.Bold
                             color: properties.colorBaseTitle
-                            font.pixelSize: 12
-                            font.family: properties.colorBaseTitle
+                            font.pointSize: 10.3
+                            font.family: properties.defaultFontFamily
                         }
                     }
 
