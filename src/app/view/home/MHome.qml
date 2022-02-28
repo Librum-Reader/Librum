@@ -100,7 +100,7 @@ Page
                     id: addBooksButton
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 40
-                    Layout.topMargin: 35
+                    Layout.topMargin: 22
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 71
                     backgroundColor: properties.colorBasePurple

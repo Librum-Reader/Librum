@@ -5,7 +5,7 @@ import QtQuick.Layouts
 
 Item {
     width: 190
-    height: 324
+    height: 322
     
     ColumnLayout
     {
@@ -49,13 +49,6 @@ Item {
             }
         }
         
-        Rectangle
-        {
-            id: spacer
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 2
-            color: "#E0E0DE"
-        }
         
         Rectangle
         {
@@ -63,6 +56,8 @@ Item {
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 82
             color: "#FFFFFF"
+            border.width: 1
+            border.color: properties.colorLightBorder3
             
             ColumnLayout
             {

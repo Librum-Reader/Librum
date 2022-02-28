@@ -12,6 +12,7 @@ Item
     property color colorMediumText  : "#505057"
     property color colorLightBorder : "#DCDCE4"
     property color colorLightBorder2: "#C0C0CF"
+    property color colorLightBorder3: "#E0E0DE"
     property color colorDarkBorder  : "#ADADB4"
     property color colorError       : "#DC4446"
     property color colorBackground  : "#FFFFFF"
