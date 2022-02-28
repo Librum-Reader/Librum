@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import librum.extensions.sidebar
 import "../components"
+import "../components/toolbar"
 
 
 
@@ -11,6 +12,11 @@ Page
     id: root
     width: Window.width
     height: Window.height
+    background: Rectangle
+    {
+        anchors.fill: parent
+        color: properties.pagesBackground
+    }
     
     ListModel
     {
@@ -59,7 +65,6 @@ Page
             {
                 id: headerRow
                 spacing: 0
-                Layout.bottomMargin: 150
                 Layout.preferredWidth: parent.width
                 
                 ColumnLayout
@@ -70,19 +75,18 @@ Page
                     Label
                     {
                         id: title
-                        Layout.topMargin: 35
+                        Layout.topMargin: 40
                         Layout.alignment: Qt.AlignTop
                         text: "Home"
                         font.weight: Font.Bold
                         color: properties.colorBaseText
-                        font.pointSize: 25
+                        font.pointSize: 28
                         font.family: properties.defaultFontFamily
                     }
                     
                     Label
                     {
                         id: pageDescription
-                        Layout.topMargin: 2
                         Layout.alignment: Qt.AlignTop
                         text: "You have 10 books"
                         color: properties.colorLightText3
@@ -108,11 +112,19 @@ Page
                 }
             }
             
+            MToolbar
+            {
+                id: toolbar
+                Layout.alignment: Qt.AlignTop
+                Layout.topMargin: 45
+            }
+            
             GridView
             {
                 id: bookGrid
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.topMargin: 30
                 cellWidth: bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
                                             sidebarOpenedBookSpacing : sidebarClosedBookSpacing)
                 cellHeight: bookHeight + bookTopSpacing

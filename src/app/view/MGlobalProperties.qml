@@ -11,6 +11,7 @@ Item
     property color colorBaseTitle   : "#4A4A6A"
     property color colorMediumText  : "#505057"
     property color colorLightBorder : "#DCDCE4"
+    property color colorLightBorder2: "#C0C0CF"
     property color colorDarkBorder  : "#ADADB4"
     property color colorError       : "#DC4446"
     property color colorBackground  : "#FFFFFF"
@@ -19,6 +20,7 @@ Item
     property color colorSidebarSeparator  : "#EAEAEF"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
+    property color pagesBackground: "#F6F6F9"
     
     property string defaultFontFamily : "SF Pro Display"
 }
