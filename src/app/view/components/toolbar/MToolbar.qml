@@ -27,17 +27,14 @@ FocusScope
             border.color: properties.colorLightBorder
             radius: 5
             
-            Rectangle
+            MCheckBox
             {
-                id: selectedInnerRect
+                id: innerCheckBox
                 width: 22
                 height: 22
                 anchors.centerIn: parent
-                color: properties.colorBackground
-                border.width: 1
-                border.color: properties.colorLightBorder2
-                radius: 4
-                antialiasing: true
+                borderColor: properties.colorLightBorder2
+                borderWidth: 1
             }
         }
         

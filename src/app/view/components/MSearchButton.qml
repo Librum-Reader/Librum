@@ -38,7 +38,7 @@ FocusScope
                 Layout.alignment: Qt.AlignVCenter
                 leftPadding: 12
                 font.pointSize: 12
-                placeholderText: "Test"
+                placeholderText: "What should I search for you?"
                 placeholderTextColor: "gray"
                 background: Rectangle
                 {

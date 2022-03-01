@@ -106,10 +106,9 @@ Page
                         MCheckBox
                         {
                             id: rememberMeCheckBox
-                            checkboxHeight: 20
-                            checkboxWidth: 20
+                            Layout.preferredWidth: 20
+                            Layout.preferredHeight: 20
                             imageSource: "/resources/images/check.svg"
-                            borderColor: properties.colorDarkBorder
                             borderRadius: 4
                         }
                         

@@ -11,6 +11,7 @@ FocusScope
     implicitHeight: 30
     
     property int buttonRadius : 4
+    property color borderColor: properties.colorDarkBorder
     property color backgroundColor : "red"
     property color fontColor : "black"
     property string textContent : "Text here"
@@ -29,6 +30,7 @@ FocusScope
         height: root.height
         width:  root.width
         radius: root.buttonRadius
+        border.color: root.borderColor
         color: root.backgroundColor
         opacity: (mouseArea.pressed ? 0.9 : 1)
         

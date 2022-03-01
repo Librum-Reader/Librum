@@ -164,8 +164,8 @@ Page
                             MCheckBox
                             {
                                 id: updatesCheckBox
-                                checkboxHeight: 20
-                                checkboxWidth: 20
+                                Layout.preferredWidth: 20
+                                Layout.preferredHeight: 20
                                 imageSource: "/resources/images/check.svg"
                                 borderColor: properties.colorDarkBorder
                                 borderRadius: 4
@@ -213,8 +213,8 @@ Page
                             MCheckBox
                             {
                                 id: iAcceptCheckBox
-                                checkboxHeight: 20
-                                checkboxWidth: 20
+                                Layout.preferredWidth: 20
+                                Layout.preferredHeight: 20
                                 imageSource: "/resources/images/check.svg"
                                 borderColor: properties.colorDarkBorder
                                 borderRadius: 4

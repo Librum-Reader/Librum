@@ -6,16 +6,14 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    implicitWidth: checkboxWidth
-    implicitHeight: checkboxHeight
+    implicitWidth: 22
+    implicitHeight: 22
     
-    property int checkboxHeight : 20
-    property int checkboxWidth : 20
-    property color borderColor : "black"
-    property int borderRadius : 0
+    property color borderColor : properties.colorDarkBorder
+    property int borderRadius : 4
     property int borderWidth : 1
     property color backgroundColor : "transparent"
-    property string imageSource : ""
+    property string imageSource : "/resources/images/check.svg"
     property bool imageDefaultVisibility : false
     property bool activated : false
     
@@ -23,8 +21,8 @@ FocusScope
     
     Rectangle
     {
-        height: root.checkboxHeight
-        width: root.checkboxWidth
+        width: root.width
+        height: root.height
         antialiasing: true
         radius: root.borderRadius
         border.width: root.borderWidth
@@ -47,7 +45,7 @@ FocusScope
             id: image
             anchors.centerIn: parent
             visible: imageDefaultVisibility
-            width: parent.width - 2
+            sourceSize.width: parent.width - 8
             source: root.imageSource
             fillMode: Image.PreserveAspectFit
         }
