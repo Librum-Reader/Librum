@@ -38,5 +38,6 @@
         <file>src/app/view/statistics/MStatistics.qml</file>
         <file>src/app/view/components/MBook.qml</file>
         <file>src/app/view/components/toolbar/MToolbar.qml</file>
+        <file>src/app/view/components/MSearchButton.qml</file>
     </qresource>
 </RCC>

@@ -65,7 +65,7 @@ FocusScope
                         width: (addImageToRight ? parent.width - 30 : parent.width)
                         focus: true
                         selectByMouse: true
-                        background: Rectangle
+                        background: Rectangle   
                         {
                             anchors.fill: parent
                             radius: 4

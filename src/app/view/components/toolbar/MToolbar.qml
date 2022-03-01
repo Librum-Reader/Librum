@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import "../"
 
 FocusScope
 {
@@ -153,25 +154,9 @@ FocusScope
             Layout.fillWidth: true
         }
         
-        Rectangle
+        MSearchButton
         {
-            id: searchBar
-            Layout.preferredWidth: 38
-            Layout.preferredHeight: 36
-            color: properties.colorBackground
-            border.width: 1
-            border.color: properties.colorLightBorder
-            radius: 5
-            
-            Image
-            {
-                id: searchBarIcon
-                anchors.centerIn: parent
-                sourceSize.height: 16
-                source: "/resources/images/search-icon.svg"
-                fillMode: Image.PreserveAspectFit
-                antialiasing: false
-            }
+             id: searchButton
         }
     }
 }
