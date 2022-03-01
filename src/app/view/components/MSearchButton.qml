@@ -54,7 +54,6 @@ FocusScope
                 Layout.preferredHeight: parent.height
                 Layout.preferredWidth: root.defaultWidth
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                Layout.rightMargin: 12
                 
                 Image
                 {
