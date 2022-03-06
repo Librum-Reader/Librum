@@ -43,7 +43,7 @@ Instructions to get Librum up and running in your environment.
         ```sh
         list(APPEND CMAKE_PREFIX_PATH "/home/david/Qt/6.2.3/gcc_64")
         ```
-4. Create build folder and setp into it.
+4. Create the build folder and step into it.
     ```sh
     mkdir build-Debug
     cd build-Debug
