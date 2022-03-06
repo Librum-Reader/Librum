@@ -10,8 +10,9 @@ import "../components/toolbar"
 Page
 {
     id: root
-    width: Window.width
-    height: Window.height
+    width: parent.width
+    height: parent.height
+    
     background: Rectangle
     {
         anchors.fill: parent
@@ -58,8 +59,9 @@ Page
             id: mainLayout
             Layout.preferredWidth: parent.width - leftSpacer.width
             Layout.preferredHeight: parent.height
-            Layout.alignment: Qt.AlignLeft
             spacing: 0
+            
+            property int rightMargin : 71
             
             RowLayout
             {
@@ -76,7 +78,6 @@ Page
                     {
                         id: title
                         Layout.topMargin: 40
-                        Layout.alignment: Qt.AlignTop
                         text: "Home"
                         font.weight: Font.Bold
                         color: properties.colorBaseText
@@ -87,7 +88,6 @@ Page
                     Label
                     {
                         id: pageDescription
-                        Layout.alignment: Qt.AlignTop
                         text: "You have 10 books"
                         color: properties.colorLightText3
                         font.pointSize: 14
@@ -95,18 +95,14 @@ Page
                     }
                 }
                 
-                Rectangle
-                {
-                    Layout.fillWidth: true
-                }
-                
                 MButton
                 {
                     id: addBooksButton
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 40
+                    Layout.rightMargin: mainLayout.rightMargin
                     Layout.topMargin: 22
-                    Layout.rightMargin: 71
+                    Layout.alignment: Qt.AlignRight
                     backgroundColor: properties.colorBasePurple
                     textContent: "Add books"
                     fontColor: properties.colorBackground
@@ -119,7 +115,8 @@ Page
             MToolbar
             {
                 id: toolbar
-                Layout.alignment: Qt.AlignTop
+                Layout.preferredWidth: parent.width - mainLayout.rightMargin
+                Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
             }
             

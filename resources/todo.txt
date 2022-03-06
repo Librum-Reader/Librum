@@ -1,0 +1,2 @@
+- Fix add button Layout (Homepage)
+- Fix startup size for windows

@@ -42,7 +42,7 @@ ApplicationWindow
         {
             id: pageManager
             Layout.preferredHeight: root.height
-            Layout.preferredWidth: root.width - (pageHasSidebar ? sidebar.width : 0)
+            Layout.fillWidth: true
             initialItem: loginPage
             
             property bool pageHasSidebar : false
@@ -72,40 +72,40 @@ ApplicationWindow
         switch (page)
         {
         case 'LoginPage':
-            pageManager.replace(loginPage);
-            root.minimumHeight = 590
             root.minimumWidth = 542
+            root.minimumHeight = 590
+            pageManager.replace(loginPage);
             pageManager.pageHasSidebar = false;
             break;
         case 'RegisterPage':
             root.minimumHeight = 800
             root.minimumWidth = 542
-            pageManager.pageHasSidebar = false;
             pageManager.replace(registerPage);
+            pageManager.pageHasSidebar = false;
             break;
         case 'HomePage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(homePage);
+            pageManager.pageHasSidebar = true;
             break;
         case 'FreeBooksPage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(freeBooksPage);
+            pageManager.pageHasSidebar = true;
             break;
         case 'SettingsPage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(settingsPage);
+            pageManager.pageHasSidebar = true;
             break;
         case 'AddOnsPage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(addOnsPage);
+            pageManager.pageHasSidebar = true;
             break;
         case 'ToolsPage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(toolsPage);
+            pageManager.pageHasSidebar = true;
             break;
         case 'StatisticsPage':
-            pageManager.pageHasSidebar = true;
             pageManager.replace(statisticsPage);
+            pageManager.pageHasSidebar = true;
             break;
         default:
             console.log("ERROR: You tried instantiating a not existing page");

@@ -7,8 +7,8 @@ import "../"
 FocusScope
 {
     id: root
-    width: closedWidth
-    height: Window.height
+    implicitWidth: closedWidth
+    implicitHeight: Window.height
     
     property int  closedWidth : 72
     property int  openedWidth : 232
