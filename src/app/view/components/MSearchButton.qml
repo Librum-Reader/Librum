@@ -14,6 +14,8 @@ FocusScope
     property int closeAnimationDuration : 200
     property bool opened : false
     
+    signal triggered(string query)
+    
     Rectangle
     {
         id: searchBar
@@ -38,15 +40,24 @@ FocusScope
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignVCenter
                 leftPadding: 12
+                color: properties.colorBaseText
                 font.pointSize: 12
                 placeholderText: "What should I search for you?"
-                placeholderTextColor: "gray"
+                placeholderTextColor: properties.colorLightText2
                 background: Rectangle
                 {
                     anchors.fill: parent
                     radius: 4
                     color: "transparent"
-                }                
+                }
+                
+                Keys.onPressed: (event) => 
+                {
+                    if(event.key === Qt.Key_Return)
+                    {
+                        triggered(inputField.text);
+                    }
+                }
             }
             
             Item
@@ -76,7 +87,6 @@ FocusScope
                         if(root.opened)
                         {
                             inputField.clear();
-                            inputField.visible = false;
                             closeAnimation.start();
                         }
                         else
@@ -89,39 +99,47 @@ FocusScope
         }
     }
     
-    SequentialAnimation
+    
+    ParallelAnimation
     {
         id: openAnimation
         
-        ParallelAnimation
-        {   
-            PropertyAnimation
-            {
-                target: root
-                property: "width"
-                to: root.expensionWidth
-                duration: root.openAnimationDuration
-                easing.type: Easing.InOutQuad
-            }
-            
-            PropertyAnimation
-            {
-                target: root
-                property: "x"
-                to: root.x - root.expensionWidth + root.defaultWidth
-                duration: root.openAnimationDuration
-                easing.type: Easing.InOutQuad
-            }
-            
-            PropertyAnimation
-            {
-                target: inputField
-                property: "visible"
-                to: true
-                duration: root.openAnimationDuration - 50
-                easing.type: Easing.InOutQuad
-            }
+        PropertyAnimation
+        {
+            target: root
+            property: "width"
+            to: root.expensionWidth
+            duration: root.openAnimationDuration
+            easing.type: Easing.InOutQuad
         }
+        
+        PropertyAnimation
+        {
+            target: root
+            property: "x"
+            to: root.x - root.expensionWidth + root.defaultWidth
+            duration: root.openAnimationDuration
+            easing.type: Easing.InOutQuad
+        }
+        
+        PropertyAnimation
+        {
+            target: inputField
+            property: "visible"
+            to: true
+            duration: root.openAnimationDuration - 50
+            easing.type: Easing.InOutQuad
+        }
+        
+        PropertyAnimation
+        {
+            target: inputField
+            property: "opacity"
+            to: 1
+            duration: 0
+        }
+        
+        PauseAnimation { duration: root.openAnimationDuration }
         
         PropertyAnimation
         {
@@ -132,30 +150,48 @@ FocusScope
         }
     }
     
-    SequentialAnimation
+    
+    ParallelAnimation
     {
         id: closeAnimation
         
-        ParallelAnimation
-        {   
-            PropertyAnimation
-            {
-                target: root
-                property: "width"
-                to: root.defaultWidth
-                duration: root.closeAnimationDuration
-                easing.type: Easing.InOutQuad
-            }
-            
-            PropertyAnimation
-            {
-                target: root
-                property: "x"
-                to: root.x + root.expensionWidth - root.defaultWidth
-                duration: root.closeAnimationDuration
-                easing.type: Easing.InOutQuad
-            }
+        PropertyAnimation
+        {
+            target: root
+            property: "width"
+            to: root.defaultWidth
+            duration: root.closeAnimationDuration
+            easing.type: Easing.InOutQuad
         }
+        
+        PropertyAnimation
+        {
+            target: root
+            property: "x"
+            to: root.x + root.expensionWidth - root.defaultWidth
+            duration: root.closeAnimationDuration
+            easing.type: Easing.InOutQuad
+        }
+        
+        PropertyAnimation
+        {
+            target: inputField
+            property: "opacity"
+            to: 0
+            duration: root.closeAnimationDuration / 3
+            easing.type: Easing.InOutQuad
+        }
+        
+        PropertyAnimation
+        {
+            target: inputField
+            property: "visible"
+            to: false
+            duration: root.closeAnimationDuration / 2
+            easing.type: Easing.InOutQuad
+        }
+        
+        PauseAnimation { duration: root.closeAnimationDuration }
         
         PropertyAnimation
         {
@@ -165,6 +201,7 @@ FocusScope
             duration: root.closeAnimationDuration            
         }
     }
+    
     
     
     Component.onCompleted: 

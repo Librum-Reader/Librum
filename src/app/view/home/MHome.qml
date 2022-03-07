@@ -117,6 +117,11 @@ Page
                 Layout.preferredWidth: parent.width - mainLayout.rightMargin
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
+                
+                onSearchRequested: (query) => 
+                {
+                    console.log(query);
+                }
             }
             
             Grid

@@ -10,6 +10,8 @@ FocusScope
     implicitWidth:  1714
     implicitHeight: 36
     
+    signal searchRequested(string query)
+    
     RowLayout
     {
         id: mainLayout
@@ -154,6 +156,7 @@ FocusScope
         MSearchButton
         {
              id: searchButton
+             onTriggered: (query) => searchRequested(query);
         }
     }
 }

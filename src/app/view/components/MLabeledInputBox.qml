@@ -73,6 +73,7 @@ FocusScope
                             color: "transparent"
                         }
                         
+                        color: properties.colorBaseText
                         font.pointSize: root.inputFontSize
                         padding: root.textPadding
                         anchors.verticalCenter: parent.verticalCenter
