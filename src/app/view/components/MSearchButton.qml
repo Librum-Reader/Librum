@@ -86,7 +86,6 @@ FocusScope
                     {
                         if(root.opened)
                         {
-                            inputField.clear();
                             closeAnimation.start();
                         }
                         else
@@ -139,14 +138,9 @@ FocusScope
             duration: 0
         }
         
-        PauseAnimation { duration: root.openAnimationDuration }
-        
-        PropertyAnimation
+        onFinished:
         {
-            target: root
-            property: "opened"
-            to: true
-            duration: root.openAnimationDuration
+            root.opened = true;
         }
     }
     
@@ -191,14 +185,10 @@ FocusScope
             easing.type: Easing.InOutQuad
         }
         
-        PauseAnimation { duration: root.closeAnimationDuration }
-        
-        PropertyAnimation
+        onFinished:
         {
-            target: root
-            property: "opened"
-            to: false
-            duration: root.closeAnimationDuration            
+            root.opened = false;
+            inputField.clear();
         }
     }
     
