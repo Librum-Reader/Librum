@@ -9,8 +9,9 @@ FocusScope
     implicitHeight: 36
     
     property int defaultWidth : 0
-
     property int expensionWidth : 445
+    property int openAnimationDuration : 300
+    property int closeAnimationDuration : 200
     property bool opened : false
     
     Rectangle
@@ -74,14 +75,13 @@ FocusScope
                     {
                         if(root.opened)
                         {
-                            closeAnimation.start();
-                            root.opened = false;
                             inputField.clear();
+                            inputField.visible = false;
+                            closeAnimation.start();
                         }
                         else
                         {
                             openAnimation.start();
-                            root.opened = true;
                         }
                     }
                 }
@@ -89,69 +89,83 @@ FocusScope
         }
     }
     
-    ParallelAnimation
+    SequentialAnimation
     {
         id: openAnimation
         
-        PropertyAnimation
-        {
-            target: root
-            property: "width"
-            to: root.expensionWidth
-            duration: 300
-            easing.type: Easing.InOutQuad
+        ParallelAnimation
+        {   
+            PropertyAnimation
+            {
+                target: root
+                property: "width"
+                to: root.expensionWidth
+                duration: root.openAnimationDuration
+                easing.type: Easing.InOutQuad
+            }
+            
+            PropertyAnimation
+            {
+                target: root
+                property: "x"
+                to: root.x - root.expensionWidth + root.defaultWidth
+                duration: root.openAnimationDuration
+                easing.type: Easing.InOutQuad
+            }
+            
+            PropertyAnimation
+            {
+                target: inputField
+                property: "visible"
+                to: true
+                duration: root.openAnimationDuration - 50
+                easing.type: Easing.InOutQuad
+            }
         }
         
         PropertyAnimation
         {
             target: root
-            property: "x"
-            to: root.x - root.expensionWidth + root.defaultWidth
-            duration: 300
-            easing.type: Easing.InOutQuad
-        }
-        
-        PropertyAnimation
-        {
-            target: inputField
-            property: "visible"
+            property: "opened"
             to: true
-            duration: 250
-            easing.type: Easing.InOutQuad
+            duration: root.openAnimationDuration
         }
     }
     
-    ParallelAnimation
+    SequentialAnimation
     {
         id: closeAnimation
         
-        PropertyAnimation
-        {
-            target: root
-            property: "width"
-            to: root.defaultWidth
-            duration: 200
-            easing.type: Easing.InOutQuad
+        ParallelAnimation
+        {   
+            PropertyAnimation
+            {
+                target: root
+                property: "width"
+                to: root.defaultWidth
+                duration: root.closeAnimationDuration
+                easing.type: Easing.InOutQuad
+            }
+            
+            PropertyAnimation
+            {
+                target: root
+                property: "x"
+                to: root.x + root.expensionWidth - root.defaultWidth
+                duration: root.closeAnimationDuration
+                easing.type: Easing.InOutQuad
+            }
         }
         
         PropertyAnimation
         {
             target: root
-            property: "x"
-            to: root.x + root.expensionWidth - root.defaultWidth
-            duration: 200
-            easing.type: Easing.InOutQuad
-        }
-        
-        PropertyAnimation
-        {
-            target: inputField
-            property: "visible"
+            property: "opened"
             to: false
-            duration: 50
-            easing.type: Easing.InOutQuad
+            duration: root.closeAnimationDuration            
         }
     }
+    
     
     Component.onCompleted: 
     {
