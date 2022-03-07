@@ -41,6 +41,7 @@ FocusScope
                 font.family: properties.defaultFontFamily
                 font.pointSize: 10.5
                 font.weight: Font.Medium
+                color: properties.colorBaseTitle
             }
             
             Rectangle

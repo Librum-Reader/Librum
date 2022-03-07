@@ -16,13 +16,12 @@ import "tools"
 ApplicationWindow
 {
     id: root
-    width: Screen.desktopAvailableWidth
-    height: Screen.desktopAvailableHeight
+    width: Screen.width
+    height: Screen.height
     minimumHeight: 590
     minimumWidth: 542
     visible: true
     title: qsTr("Librum - Your ebook reader")
-
 
     RowLayout
     {
@@ -56,7 +55,7 @@ ApplicationWindow
         }
     }
     
-    Component { id: loginPage; MLoginPage {} }
+    Component { id: loginPage; MLoginPage {}}
     Component { id: registerPage; MRegisterPage {} }
     Component { id: homePage; MHome {} }
     Component { id: freeBooksPage; MFreeBooks {} }

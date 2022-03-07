@@ -46,12 +46,11 @@ Page
             id: leftSpacer
             Layout.preferredHeight: parent.height
             Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ?
-                                        openedSidebarMargin : closedSidebarMargin)
+                                        sidebarMargin : sidebarMargin)
             Layout.alignment: Qt.AlignLeft
             color: "transparent"
             
-            property int closedSidebarMargin : 64
-            property int openedSidebarMargin : 85
+            property int sidebarMargin : 64
         }
         
         ColumnLayout
@@ -61,7 +60,7 @@ Page
             Layout.preferredHeight: parent.height
             spacing: 0
             
-            property int rightMargin : 71
+            property int rightMargin : 70
             
             RowLayout
             {
@@ -120,24 +119,25 @@ Page
                 Layout.topMargin: 45
             }
             
-            GridView
+            Grid
             {
                 id: bookGrid
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.topMargin: 30
-                cellWidth: bookWidth + (SidebarState.currentState === SidebarState.Opened ? 
-                                            sidebarOpenedBookSpacing : sidebarClosedBookSpacing)
-                cellHeight: bookHeight + bookTopSpacing
+                width: parent.width - mainLayout.rightMargin
+                height: parent.height
+                columnSpacing: 64
+                rowSpacing: 48
+                columns: 0
                 clip: true
-                model: model
-                delegate: MBook {}
+                
+                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + 190);     // Formula to calculate the column numbers
+
+                Repeater
+                {
+                    model: model
+                    delegate: MBook {  }
+                }
                 
                 property int bookWidth : 190
-                property int bookHeight : 320
-                property int bookTopSpacing : 48
-                property int sidebarClosedBookSpacing : 64
-                property int sidebarOpenedBookSpacing : 68
             }
         }
     }
