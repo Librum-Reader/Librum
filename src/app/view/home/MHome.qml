@@ -129,15 +129,14 @@ Page
                 columns: 0
                 clip: true
                 
-                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + 190);     // Formula to calculate the column numbers
-
                 Repeater
                 {
                     model: model
-                    delegate: MBook {  }
+                    delegate: MBook { }
                 }
                 
                 property int bookWidth : 190
+                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);     // Formula to calculate the column numbers
             }
         }
     }

@@ -118,7 +118,7 @@ Item {
                             text: "27%"
                             font.weight: Font.Bold
                             color: properties.colorBaseTitle
-                            font.pointSize: 10.3
+                            font.pointSize: 10
                             font.family: properties.defaultFontFamily
                         }
                     }
