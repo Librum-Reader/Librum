@@ -175,7 +175,6 @@ FocusScope
     }
     
     
-    
     Component.onCompleted: 
     {
         root.defaultWidth = width;

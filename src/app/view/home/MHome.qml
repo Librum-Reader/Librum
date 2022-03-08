@@ -57,7 +57,7 @@ Page
         {
             id: mainLayout
             Layout.preferredWidth: parent.width - leftSpacer.width
-            Layout.preferredHeight: parent.height
+            Layout.alignment: Qt.AlignTop
             spacing: 0
             
             property int rightMargin : 70
@@ -76,7 +76,7 @@ Page
                     Label
                     {
                         id: title
-                        Layout.topMargin: 40
+                        Layout.topMargin: 44
                         text: "Home"
                         font.weight: Font.Bold
                         color: properties.colorBaseText
@@ -127,8 +127,8 @@ Page
             Grid
             {
                 id: bookGrid
-                width: parent.width - mainLayout.rightMargin
-                height: parent.height
+                Layout.preferredWidth: parent.width - mainLayout.rightMargin
+                Layout.topMargin: 30
                 columnSpacing: 64
                 rowSpacing: 48
                 columns: 0
