@@ -44,6 +44,9 @@ FocusScope
                 font.pointSize: 12
                 placeholderText: "What should I search for you?"
                 placeholderTextColor: properties.colorLightText2
+                
+                onVisibleChanged: if(visible == true) forceActiveFocus();
+                
                 background: Rectangle
                 {
                     anchors.fill: parent
@@ -54,9 +57,7 @@ FocusScope
                 Keys.onPressed: (event) => 
                 {
                     if(event.key === Qt.Key_Return)
-                    {
                         triggered(inputField.text);
-                    }
                 }
             }
             
@@ -80,18 +81,13 @@ FocusScope
                 MouseArea
                 {
                     anchors.fill: parent
-                    Layout.alignment: Qt.AlignRight
                     
                     onClicked:
                     {
                         if(root.opened)
-                        {
                             closeAnimation.start();
-                        }
                         else
-                        {
                             openAnimation.start();
-                        }
                     }
                 }
             }
