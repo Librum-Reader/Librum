@@ -106,17 +106,8 @@ FocusScope
         PropertyAnimation
         {
             target: root
-            property: "width"
+            property: "implicitWidth"
             to: root.expensionWidth
-            duration: root.openAnimationDuration
-            easing.type: Easing.InOutQuad
-        }
-        
-        PropertyAnimation
-        {
-            target: root
-            property: "x"
-            to: root.x - root.expensionWidth + root.defaultWidth
             duration: root.openAnimationDuration
             easing.type: Easing.InOutQuad
         }
@@ -152,17 +143,8 @@ FocusScope
         PropertyAnimation
         {
             target: root
-            property: "width"
+            property: "implicitWidth"
             to: root.defaultWidth
-            duration: root.closeAnimationDuration
-            easing.type: Easing.InOutQuad
-        }
-        
-        PropertyAnimation
-        {
-            target: root
-            property: "x"
-            to: root.x + root.expensionWidth - root.defaultWidth
             duration: root.closeAnimationDuration
             easing.type: Easing.InOutQuad
         }

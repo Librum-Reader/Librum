@@ -22,8 +22,9 @@ FocusScope
         Rectangle
         {
             id: selectedCheckBox
-            Layout.preferredWidth: 40
-            Layout.preferredHeight: 36
+            width: 40
+            height: 36
+            
             color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder
@@ -45,6 +46,7 @@ FocusScope
             id: sortBy
             Layout.preferredWidth: 100
             Layout.preferredHeight: 36
+            
             color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder
@@ -81,6 +83,7 @@ FocusScope
             id: filterBy
             Layout.preferredWidth: 100
             Layout.preferredHeight: 36
+            
             color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder
@@ -117,6 +120,7 @@ FocusScope
             id: tag
             Layout.preferredWidth: 100
             Layout.preferredHeight: 36
+            
             color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder
@@ -148,10 +152,7 @@ FocusScope
             }
         }
         
-        Item
-        {
-            Layout.fillWidth: true
-        }
+        Item { Layout.fillWidth: true }
         
         MSearchButton
         {

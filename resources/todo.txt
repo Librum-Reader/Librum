@@ -1,2 +1,8 @@
-- Fix add button Layout (Homepage)
-- Fix startup size for windows
+- Good resize management of book grid
+
+- Refactoring after everything is working as it should
+    - Abstract out
+    - Follow conventions
+    - Fix colors
+    - Instead of onFinished in animations to set overlap block, try "Animation.alwaysRunToEnd = true"
+    - Look into the usage of qml modules instead of hardcoded includes
