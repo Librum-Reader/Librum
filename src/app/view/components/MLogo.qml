@@ -9,7 +9,7 @@ FocusScope
     
     Rectangle
     {
-        id: logo
+        id: outerRect
         width: root.height
         height: root.width
         color: properties.colorBasePurple
@@ -18,12 +18,12 @@ FocusScope
         
         Rectangle
         {
-            id: inner
+            id: innerRect
             width: parent.width / 2
             height: parent.height / 2
             anchors.centerIn: parent
-            radius: width / 4
             color: properties.loginContentBackground
+            radius: width / 4
             antialiasing: true
         }
     }

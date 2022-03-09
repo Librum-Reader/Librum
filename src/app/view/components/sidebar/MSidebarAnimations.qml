@@ -27,10 +27,10 @@ Item
             easing.type: defaultEasingType
         }
         
-        PropertyAnimation
+        NumberAnimation
         {
-            target: rightArrowImage
-            property: "rotation"
+            target: profileBox
+            property: "arrowRotation"
             to: 180
             duration: slowDuration
             easing.type: defaultEasingType
@@ -79,10 +79,10 @@ Item
             easing.type: defaultEasingType
         }
         
-        PropertyAnimation
+        NumberAnimation
         {
-            target: rightArrowImage
-            property: "rotation"
+            target: profileBox
+            property: "arrowRotation"
             to: 0
             duration: slowDuration
             easing.type: defaultEasingType

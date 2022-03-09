@@ -2,12 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+
 FocusScope
 {
     id: root
-    implicitWidth: (labelVisibility ? openedWidth : closedWidth)
-    implicitHeight: 44
-    
     property int closedWidth : 52
     property int openedWidth : 177
     property int imageWidth : 30
@@ -19,24 +17,29 @@ FocusScope
     property alias  closeAnimation : closeAnim
     property real   textOpacity : 0
     property bool   selected : false
-    
     signal clicked()
+    
+    implicitWidth: (labelVisibility ? openedWidth : closedWidth)
+    implicitHeight: 44
+    
     
     Rectangle
     {
         id: content
-        width:  root.width
+        width:  parent.width
         height: parent.height
-        color: (root.selected == true ? properties.colorSidebarMark : "transparent")
+        color: (root.selected ? properties.colorSidebarMark : "transparent")
         radius: 4
         
         RowLayout
         {
+            id: layout
             height: parent.height
             spacing: 0
             
             Rectangle
             {
+                id: iconBox
                 Layout.preferredWidth: 52
                 Layout.preferredHeight: 44
                 radius: 4
@@ -44,8 +47,9 @@ FocusScope
                 
                 Image
                 {
-                    sourceSize.height: root.imageHeight
+                    id: icon
                     sourceSize.width: root.imageWidth
+                    sourceSize.height: root.imageHeight
                     anchors.centerIn: parent
                     source: root.imageSource
                     antialiasing: false                    
@@ -72,6 +76,7 @@ FocusScope
         anchors.fill: parent
         onClicked: root.clicked();
     }
+    
     
     PropertyAnimation
     {

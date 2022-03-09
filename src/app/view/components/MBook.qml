@@ -5,12 +5,13 @@ import QtQuick.Layouts
 
 FocusScope 
 {
+    id: root
     implicitWidth: 190
     implicitHeight: 322
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         width: parent.width
         height: parent.height
         spacing: 0
@@ -21,7 +22,7 @@ FocusScope
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 16
             radius: 4
-            color: "#DCDCE4"
+            color: properties.colorLightBorder
         }
         
         Rectangle
@@ -126,7 +127,7 @@ FocusScope
                     {
                         id: moreIcon
                         Layout.preferredHeight: 20
-                        Layout.leftMargin: 101
+                        Layout.leftMargin: 98
                         source: "/resources/images/dots-horizontal.svg"
                         fillMode: Image.PreserveAspectFit
                         antialiasing: false

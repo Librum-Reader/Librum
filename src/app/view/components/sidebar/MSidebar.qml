@@ -4,22 +4,23 @@ import QtQuick.Layouts
 import librum.extensions.sidebar
 import "../"
 
+
 FocusScope
 {
     id: root
-    implicitWidth: closedWidth
-    implicitHeight: Window.height
-    
     property int  closedWidth : 72
     property int  openedWidth : 232
+    property int  currentWidth : width
     property bool isOpened    : false
     property MSidebarItem selectedTab : homeButton
+    
+    implicitWidth: closedWidth
+    implicitHeight: Window.height
     
     Rectangle
     {
         id: container
-        width: root.width
-        height: root.height
+        anchors.fill: parent
         color: properties.colorBackground
         
         MSidebarAnimations
@@ -30,8 +31,7 @@ FocusScope
         ColumnLayout
         {
             id: mainLayout
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent            
             spacing: 0
             
             RowLayout
@@ -51,8 +51,8 @@ FocusScope
                 Label
                 {
                     id: logoLabel
-                    visible: false
                     Layout.leftMargin: 20
+                    visible: false
                     text: "Librum"
                     font.bold: true
                     font.family: properties.defaultFontFamily
@@ -66,7 +66,6 @@ FocusScope
                 id: topSeparator
                 Layout.preferredWidth: root.width
                 Layout.preferredHeight: 2
-                Layout.alignment: Qt.AlignTop
                 Layout.topMargin: 15
                 color: properties.colorSidebarSeparator
             }
@@ -205,7 +204,6 @@ FocusScope
                 Layout.preferredWidth: parent.width
                 Layout.fillHeight: true
                 Layout.minimumHeight: 30
-                Layout.alignment: Qt.AlignTop
             }
             
             Rectangle
@@ -213,90 +211,14 @@ FocusScope
                 id: bottomSeparator
                 Layout.preferredWidth: root.width
                 Layout.preferredHeight: 2
-                Layout.alignment: Qt.AlignBottom
                 color: properties.colorSidebarSeparator
             }
             
-            
-            
-            Rectangle
+            MProfileBox
             {
                 id: profileBox
-                Layout.preferredWidth: root.width
-                Layout.preferredHeight: 70
                 Layout.alignment: Qt.AlignBottom
-                color: "transparent"
-                
-                RowLayout
-                {
-                    width: root.width + expandButton.width / 2.2  // So the button goes over the border
-                    height: parent.height
-                    spacing: 0
-                    
-                    Rectangle
-                    {
-                        id: profilePicture
-                        Layout.preferredWidth: 36
-                        Layout.preferredHeight: 36
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                        Layout.leftMargin: 18
-                        radius: width
-                        antialiasing: true
-                        color: "#DBCE5F"
-                        
-                        Label
-                        {
-                            id: initials
-                            anchors.centerIn: parent
-                            text: "DL"
-                            font.pointSize: 12
-                            font.bold: true
-                            font.family: properties.defaultFontFamily
-                            color: properties.colorBrightText
-                        }
-                    }
-                    
-                    Rectangle
-                    {
-                        id: expandButton
-                        Layout.preferredWidth: 23
-                        Layout.preferredHeight: 24
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                        radius: 2
-                        border.width: 1
-                        border.color: properties.colorLightBorder
-                        
-                        Image
-                        {
-                            id: rightArrowImage
-                            sourceSize.width: 20
-                            sourceSize.height: 20
-                            anchors.centerIn: parent
-                            source: "/resources/images/right_icon.svg"
-                        }
-                        
-                        MouseArea
-                        {
-                            id: expandMouseArea
-                            anchors.fill: parent
-                            onClicked:
-                            {
-                                if(SidebarState.currentState === SidebarState.Opened)
-                                {
-                                    animations.closeAnimation.start();
-                                    root.selectedTab.closeAnimation.start();
-                                    SidebarState.currentState = SidebarState.Closed;
-                                }
-                                else
-                                {
-                                    animations.openAnimation.start();
-                                    root.selectedTab.openAnimation.start();
-                                    SidebarState.currentState = SidebarState.Opened;
-                                }
-                            }
-                        }
-                    }
-                }
+                Layout.topMargin: 2
             }
         }
     }

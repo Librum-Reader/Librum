@@ -26,8 +26,8 @@ FocusScope
     Rectangle
     {
         id: container
-        width:  root.width
-        height: root.height
+        width:  parent.width
+        height: parent.height
         color: root.backgroundColor
         border.color: root.borderColor
         radius: root.buttonRadius
@@ -35,7 +35,7 @@ FocusScope
         
         RowLayout
         {
-            id: mainLayout
+            id: layout
             anchors.centerIn: parent
             spacing: root.imageSpacing
             

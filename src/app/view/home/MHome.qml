@@ -20,45 +20,48 @@ Page
     {
         id: model
         
-        ListElement { color: "red"; text: "First" }
-        ListElement { color: "gray"; text: "Second" }
-        ListElement { color: "green"; text: "Third" }
-        ListElement { color: "cyan"; text: "Fourth" }
-        ListElement { color: "yellow"; text: "Fift" }
-        ListElement { color: "gray"; text: "Sixt" }
-        ListElement { color: "purple"; text: "Seventh" }
-        ListElement { color: "black"; text: "Eitht" }
-        ListElement { color: "red"; text: "Nineth" }
-        ListElement { color: "gray"; text: "Tenth" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
     }
     
     RowLayout
     {
         id: verticalLayout
-        anchors.fill: parent
+        property int leftSpacing : 64
+        
+        width: parent.width
         spacing: 0
         
         Item
         {
             id: leftSpacer
             Layout.fillHeight: true
-            Layout.preferredWidth: 64
+            Layout.preferredWidth: verticalLayout.leftSpacing
         }
         
         ColumnLayout
         {
-            id: mainLayout
-            Layout.preferredWidth: parent.width - leftSpacer.width
-            Layout.alignment: Qt.AlignTop
+            id: contentLayout
+            property int rightMargin : 70
+            
+            Layout.preferredWidth: parent.width - verticalLayout.leftSpacing
+            Layout.alignment: Qt.AlignLeft
             spacing: 0
             
-            property int rightMargin : 70
             
             RowLayout
             {
                 id: headerRow
-                spacing: 0
                 Layout.preferredWidth: parent.width
+                spacing: 0
                 
                 MTitle
                 {
@@ -75,7 +78,7 @@ Page
                     id: addBooksButton
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 40
-                    Layout.rightMargin: mainLayout.rightMargin
+                    Layout.rightMargin: contentLayout.rightMargin
                     Layout.topMargin: 22
                     backgroundColor: properties.colorBasePurple
                     textContent: "Add books"
@@ -89,22 +92,17 @@ Page
             MToolbar
             {
                 id: toolbar
-                Layout.preferredWidth: parent.width - mainLayout.rightMargin
+                Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
-                
-                onSearchRequested: (query) => 
-                {
-                    console.log(query);
-                }
-                
-                onCheckBoxClicked: console.log("clicked!");
             }
             
             Grid
             {
                 id: bookGrid
-                Layout.preferredWidth: parent.width - mainLayout.rightMargin
+                property int bookWidth : 190
+                
+                Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.topMargin: 30
                 columnSpacing: 64
                 rowSpacing: 48
@@ -117,8 +115,8 @@ Page
                     delegate: MBook { }
                 }
                 
-                property int bookWidth : 190
-                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);     // Formula to calculate the column numbers
+                // Calculate the amount of columns which can be displayed
+                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);
             }
         }
     }

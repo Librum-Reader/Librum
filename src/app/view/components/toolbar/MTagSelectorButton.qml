@@ -6,10 +6,10 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    signal tagChoosen()
+    
     implicitWidth: 100
     implicitHeight: 36
-    
-    signal tagChoosen()
     
     
     Rectangle
@@ -32,7 +32,6 @@ FocusScope
                 sourceSize.height: 18
                 source: "/resources/images/tag-icon.svg"
                 fillMode: Image.PreserveAspectFit
-                antialiasing: false
             }
             
             Label

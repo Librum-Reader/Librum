@@ -15,7 +15,6 @@ FocusScope
     {
         id: container
         anchors.fill: parent
-        
         color: properties.colorBackground
         border.width: 1
         border.color: properties.colorLightBorder

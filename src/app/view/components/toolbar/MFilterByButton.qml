@@ -5,6 +5,7 @@ import QtQuick.Controls
 
 FocusScope
 {
+    id: root
     implicitWidth: 100
     implicitHeight: 36
     
@@ -28,7 +29,6 @@ FocusScope
                 sourceSize.height: 14
                 source: "/resources/images/filter-icon.svg"
                 fillMode: Image.PreserveAspectFit
-                antialiasing: false
             }
             
             Label

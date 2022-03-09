@@ -6,18 +6,17 @@ import "../"
 FocusScope
 {
     id: root
+    signal searchRequested(string query)
+    signal checkBoxClicked()
     
     implicitWidth:  1714
     implicitHeight: 36
     
-    signal searchRequested(string query)
-    signal checkBoxClicked()
     
     RowLayout
     {
         id: mainLayout
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         spacing: 12
         
         MSelectCheckBox

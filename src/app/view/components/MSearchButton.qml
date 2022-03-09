@@ -19,9 +19,9 @@ FocusScope
     
     Rectangle
     {
-        id: searchBar
-        width: root.width
-        height: root.height
+        id: container
+        width: parent.width
+        height: parent.height
         color: properties.colorBackground
         border.width: 1
         border.color: properties.colorLightBorder
@@ -39,21 +39,20 @@ FocusScope
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignVCenter
-                leftPadding: 12
                 visible: false
+                leftPadding: 12
                 color: properties.colorBaseText
                 font.pointSize: 12
                 placeholderText: "What should I search for you?"
                 placeholderTextColor: properties.colorLightText2
-                
-                onVisibleChanged: if(visible) forceActiveFocus();
-                
                 background: Rectangle
                 {
                     anchors.fill: parent
                     radius: 4
                     color: "transparent"
                 }
+                
+                onVisibleChanged: if(visible) forceActiveFocus();
                 
                 Keys.onPressed: (event) => 
                 {

@@ -6,10 +6,10 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    signal sortQueryEmitted()
+    
     implicitWidth: 100
     implicitHeight: 36
-    
-    signal sortQueryEmitted()
     
     Rectangle
     {
@@ -41,7 +41,6 @@ FocusScope
                 sourceSize.height: 6
                 source: "/resources/images/arrow-filled-icon.svg"
                 fillMode: Image.PreserveAspectFit
-                antialiasing: false
             }
         }
     }

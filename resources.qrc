@@ -48,5 +48,6 @@
         <file>src/app/view/register/MKeepMeUpdated.qml</file>
         <file>src/app/view/register/MAcceptPolicy.qml</file>
         <file>src/app/view/login/MLoginOptions.qml</file>
+        <file>src/app/view/components/sidebar/MProfileBox.qml</file>
     </qresource>
 </RCC>
