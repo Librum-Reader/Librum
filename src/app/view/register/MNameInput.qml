@@ -7,24 +7,24 @@ import "../components"
 FocusScope
 {
     id: root
-    implicitWidth: nameInputRow.implicitWidth
-    implicitHeight: nameInputRow.implicitHeight
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
     
     RowLayout
     {
-        id: nameInputRow
-        spacing: 28
+        id: layout
         Layout.alignment: Qt.AlignHCenter
+        spacing: 28
         
         MLabeledInputBox
         {
             id: firstNameInput
             Layout.preferredWidth: 186
             Layout.preferredHeight: 50
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
             headerText: 'First name'
             placeholderContent: "Kai"
             placeholderColor: properties.colorLightText
+            autoFocus: true
         }
         
         MLabeledInputBox
@@ -32,7 +32,6 @@ FocusScope
             id: lastNameInput
             Layout.preferredWidth: 186
             Layout.preferredHeight: 50
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
             headerText: "Last name"
             placeholderContent: "Doe"
             placeholderColor: properties.colorLightText

@@ -17,6 +17,7 @@ FocusScope
     property string toggledImagePath : ""
     property bool   addImageToRight : false
     property bool   isError : false
+    property bool   autoFocus : false
     
     implicitWidth: 100
     implicitHeight: label.implicitHeight + inputBox.height
@@ -82,6 +83,12 @@ FocusScope
                         }
                         
                         onTextEdited: root.isError = false
+                        
+                        Component.onCompleted:
+                        {
+                            if(root.autoFocus)
+                                forceActiveFocus();
+                        }
                     }
                     
                     

@@ -7,13 +7,15 @@ import "../components"
 FocusScope
 {
     id: root
-    implicitWidth: keepMeUpdatedRow.width
-    implicitHeight: keepMeUpdatedRow.height    
+    property bool activated : false
+    
+    implicitWidth: layout.width
+    implicitHeight: layout.height    
     
     
     RowLayout
     {
-        id: keepMeUpdatedRow
+        id: layout
         Layout.fillWidth: true
         spacing: 4
         
@@ -25,13 +27,15 @@ FocusScope
             imagePath: "/resources/images/check.svg"
             borderColor: properties.colorDarkBorder
             borderRadius: 4
+            
+            onClicked: root.activated = !root.activated;            
         }
         
         Item
         {
             id: keepMeUpdatedText
-            Layout.preferredHeight: keepMeUpdatedTextFirst.implicitHeight
             Layout.fillWidth: true
+            Layout.preferredHeight: keepMeUpdatedTextFirst.implicitHeight
             Layout.leftMargin: 6
             
             Column

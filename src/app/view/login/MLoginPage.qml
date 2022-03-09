@@ -6,6 +6,9 @@ import "../components"
 Page
 {
     id: root
+    property int containerWidth : 542
+    property int containerHeight : 550
+    
     background: Rectangle
     {
         anchors.fill: parent
@@ -13,45 +16,38 @@ Page
     }
     
     
-    property int baseHeight : 550
-    property int baseWidth : 542
-    
     ColumnLayout
     {
+        id: layout
+        width: root.containerWidth
         anchors.centerIn: parent
-        width: root.baseWidth
         
         Rectangle
         {
             id: backgroundRect
-            Layout.preferredHeight: root.baseHeight
             Layout.fillWidth: true
+            Layout.preferredHeight: root.containerHeight
             Layout.alignment: Qt.AlignTop
-            radius: 4
             color: properties.loginContentBackground
+            radius: 4
             
             ColumnLayout
             {
-                id: inContainerLayout
-                anchors
-                {
-                    top:   parent.top
-                    left:  parent.left
-                    right: parent.right
-                }
+                id: inRectLayout
+                width: parent.width
                 
                 MLogo
                 {
                     id: logo
+                    Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 48
-                    Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 }
                 
                 Label
                 {
                     id: welcomeText
-                    Layout.topMargin: 24
                     Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    Layout.topMargin: 24
                     text: "Welcome back!"
                     color: properties.colorBaseText
                     font.bold: true
@@ -84,6 +80,7 @@ Page
                         placeholderContent: "kaidoe@gmail.com"
                         placeholderColor: properties.colorLightText
                         headerText: "Email"
+                        autoFocus: true
                     }
                     
                     MLabeledInputBox
@@ -98,61 +95,24 @@ Page
                         toggledImagePath: "/resources/images/eye-off.svg"
                     }
                     
-                    RowLayout
+                    MLoginOptions
                     {
-                        id: rememberMeRow
+                        id: loginOption
                         Layout.topMargin: 28
-                        
-                        MCheckBox
-                        {
-                            id: rememberMeCheckBox
-                            Layout.preferredWidth: 20
-                            Layout.preferredHeight: 20
-                            imagePath: "/resources/images/check.svg"
-                            borderRadius: 4
-                        }
-                        
-                        Label
-                        {
-                            id: rememberMeText
-                            text: "Remember me"
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.leftMargin: 4
-                            font.pointSize: 11
-                            color: properties.colorMediumText
-                        }
-                        
-                        Item {
-                            Layout.preferredWidth: 131
-                            Layout.preferredHeight: 1
-                        }
-                        
-                        Label
-                        {
-                            id: forgotPasswordLabel
-                            text: "Forgot password?"
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.leftMargin: 3
-                            font.pointSize: 10
-                            color: properties.colorBasePurple
-                        }
                     }
                     
                     MButton 
                     {
                         id: loginButton
-                        Layout.preferredHeight: 40
                         Layout.preferredWidth: parent.width
+                        Layout.preferredHeight: 40
                         Layout.topMargin: 32
                         backgroundColor: properties.colorBasePurple
                         fontColor: properties.colorBrightText
                         fontBold: true
                         textContent: "Login"
                         
-                        onClicked:
-                        {
-                            loadPage("HomePage");
-                        }
+                        onClicked: loadPage("HomePage");
                     }
                 }
             }

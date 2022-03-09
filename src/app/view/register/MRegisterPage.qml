@@ -8,9 +8,9 @@ Page
     id: root
     readonly property int containerWidth : 542
     readonly property int containerHeight : 770
+    
     width: Screen.width
     height: Screen.height
-
     background: Rectangle
     {
         anchors.fill: parent
@@ -25,11 +25,11 @@ Page
         Rectangle
         {
             id: backgroundRect
-            Layout.preferredHeight: root.containerHeight
             Layout.fillWidth: true
+            Layout.preferredHeight: root.containerHeight
             Layout.alignment: Qt.AlignTop
-            radius: 4
             color: properties.loginContentBackground
+            radius: 4
             
             ColumnLayout
             {
@@ -53,9 +53,9 @@ Page
                 {
                     id: welcomeText
                     Layout.topMargin: 24
-                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                    text: "Welcome!"
+                    Layout.alignment: Qt.AlignHCenter
                     color: properties.colorBaseText
+                    text: "Welcome!"
                     font.bold: true
                     font.pointSize: 26
                     font.family: properties.defaultFontFamily
@@ -64,16 +64,16 @@ Page
                 Label
                 {
                     id: accountStorageText
-                    Layout.topMargin: 6
-                    Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: 500
+                    Layout.alignment: Qt.AlignHCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.topMargin: 6
                     text: "Your credentials are only used to authenticate yourself. " + 
                           "Everything will be stored in a secure database."
-                    horizontalAlignment: Text.AlignHCenter
-                    wrapMode: "WordWrap"
-                    color: properties.colorLightText2
                     font.pointSize: 13
                     font.family: properties.defaultFontFamily
+                    color: properties.colorLightText2
+                    wrapMode: "WordWrap"
                 }
                 
                 Item
@@ -135,7 +135,7 @@ Page
                         MKeepMeUpdated
                         {
                             id: keepMeUpdated
-                            Layout.topMargin: 28                            
+                            Layout.topMargin: 28
                         }
                         
                         MAcceptPolicy
@@ -155,10 +155,7 @@ Page
                             fontBold: true
                             textContent: "Let's start"
                             
-                            onClicked:
-                            {
-                                loadPage("LoginPage");
-                            }
+                            onClicked: loadPage("LoginPage");
                         }
                     }
                 }
@@ -174,6 +171,7 @@ Page
             text: "Already have an account? Login"
             font.pointSize: 10
             color: properties.colorBasePurple
+            
             
             MouseArea
             {
