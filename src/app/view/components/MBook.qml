@@ -3,9 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-Item {
-    width: 190
-    height: 322
+FocusScope 
+{
+    implicitWidth: 190
+    implicitHeight: 322
     
     ColumnLayout
     {
@@ -16,7 +17,7 @@ Item {
         
         Rectangle
         {
-            id: upperRectRounder
+            id: upperBookPartRounding
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 16
             radius: 4
@@ -29,7 +30,7 @@ Item {
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 230
             Layout.topMargin: -6
-            color: "#DCDCE4"
+            color: properties.colorLightBorder
             
             ColumnLayout
             {
@@ -55,24 +56,24 @@ Item {
             id: lowerRect
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 82
-            color: "#FFFFFF"
+            color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder3
             
             ColumnLayout
             {
                 id: bottomLayout
-                width: parent.width - 14*2
-                spacing: 0
-                
                 property int inBookMargin : 14
+                
+                width: parent.width - inBookMargin*2
+                anchors.horizontalCenter: parent.horizontalCenter
+                spacing: 0
                 
                 Label
                 {
                     id: bookName
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 4
-                    Layout.leftMargin: bottomLayout.inBookMargin
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
                     color: properties.colorBaseTitle
@@ -87,7 +88,6 @@ Item {
                     id: authorName
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 1                    
-                    Layout.leftMargin: bottomLayout.inBookMargin
                     text: "Stephen R. Covey"
                     color: properties.colorLightText
                     font.pointSize: 9
@@ -98,7 +98,6 @@ Item {
                 {
                     id: lowerRow
                     width: parent.width
-                    Layout.leftMargin: bottomLayout.inBookMargin
                     spacing: 0
                     
                     Rectangle

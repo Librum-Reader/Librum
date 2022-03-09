@@ -18,9 +18,10 @@ FocusScope
         
         Rectangle
         {
-            anchors.centerIn: parent
+            id: inner
             width: parent.width / 2
             height: parent.height / 2
+            anchors.centerIn: parent
             radius: width / 4
             color: properties.loginContentBackground
             antialiasing: true

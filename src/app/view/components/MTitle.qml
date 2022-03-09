@@ -3,31 +3,34 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope {
+FocusScope 
+{
     id: root
-    implicitWidth: titleColumn.implicitWidth
-    implicitHeight: titleColumn.implicitHeight
     property string titleText: "Title"
     property string descriptionText: "Description"
     
+    implicitWidth: layout.implicitWidth
+    implicitHeight: layout.implicitHeight
+    
+    
     ColumnLayout
     {
-        id: titleColumn
+        id: layout
         spacing: 0
         
         Label
         {
             id: title
             text: root.titleText
-            font.weight: Font.Bold
             color: properties.colorBaseText
+            font.weight: Font.Bold
             font.pointSize: 28
             font.family: properties.defaultFontFamily
         }
         
         Label
         {
-            id: pageDescription
+            id: description
             text: root.descriptionText
             color: properties.colorLightText3
             font.pointSize: 14

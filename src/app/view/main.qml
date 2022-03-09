@@ -32,19 +32,19 @@ ApplicationWindow
         MSidebar
         {
             id: sidebar
-            visible: pageManager.pageHasSidebar
             z: 1
             Layout.alignment: Qt.AlignTop
+            visible: pageManager.pageHasSidebar
         }
         
         StackView
         {
             id: pageManager
-            Layout.preferredHeight: root.height
-            Layout.fillWidth: true
-            initialItem: loginPage
-            
             property bool pageHasSidebar : false
+            
+            Layout.fillWidth: true
+            Layout.preferredHeight: root.height
+            initialItem: loginPage
             
             popEnter: null
             popExit: null
@@ -112,8 +112,5 @@ ApplicationWindow
     }
     
     
-    MGlobalProperties
-    {
-        id: properties
-    }
+    MGlobalProperties { id: properties }
 }

@@ -2,19 +2,20 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
+
 FocusScope
 {
     id: root
-    implicitWidth: 38
-    implicitHeight: 36
-    
     property int defaultWidth : 0
     property int expensionWidth : 445
     property int openAnimationDuration : 300
     property int closeAnimationDuration : 200
     property bool opened : false
-    
     signal triggered(string query)
+    
+    implicitWidth: 38
+    implicitHeight: 36
+    
     
     Rectangle
     {
@@ -34,18 +35,18 @@ FocusScope
             TextField
             {
                 id: inputField
-                visible: false
                 z: 1
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignVCenter
                 leftPadding: 12
+                visible: false
                 color: properties.colorBaseText
                 font.pointSize: 12
                 placeholderText: "What should I search for you?"
                 placeholderTextColor: properties.colorLightText2
                 
-                onVisibleChanged: if(visible == true) forceActiveFocus();
+                onVisibleChanged: if(visible) forceActiveFocus();
                 
                 background: Rectangle
                 {
@@ -64,17 +65,17 @@ FocusScope
             Item
             {
                 id: searchBarDefaultBox
-                Layout.preferredHeight: parent.height
                 Layout.preferredWidth: root.defaultWidth
+                Layout.preferredHeight: parent.height
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 
                 Image
                 {
                     id: searchBarIcon
                     anchors.centerIn: parent
-                    sourceSize.height: 16
                     source: "/resources/images/search-icon.svg"
                     fillMode: Image.PreserveAspectFit
+                    sourceSize.height: 16
                     antialiasing: false
                 }
                 

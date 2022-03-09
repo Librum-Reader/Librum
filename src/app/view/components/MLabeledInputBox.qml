@@ -6,10 +6,6 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    implicitWidth: 100
-    implicitHeight: label.implicitHeight + inputBox.height
-    
-    
     property string placeholderContent : "placeholder"
     property int    inputFontSize : 11
     property color  placeholderColor : "black"
@@ -17,10 +13,14 @@ FocusScope
     property color  borderColor : properties.colorLightBorder
     property int    borderWidth : 2
     property int    textPadding : 15
-    property string image : ""
-    property string toggleImage : ""
+    property string imagePath : ""
+    property string toggledImagePath : ""
     property bool   addImageToRight : false
     property bool   isError : false
+    
+    implicitWidth: 100
+    implicitHeight: label.implicitHeight + inputBox.height
+    
     
     Item
     {
@@ -29,15 +29,15 @@ FocusScope
         
         ColumnLayout
         {
+            id: layout
             spacing: 0
             width: parent.width
             
             Label
             {
                 id: label
-                text: root.headerText
-                textFormat: Text.RichText
                 width: parent.width
+                text: root.headerText
                 font.family: properties.defaultFontFamily
                 font.pointSize: 10.5
                 font.weight: Font.Medium
@@ -47,8 +47,8 @@ FocusScope
             Rectangle
             {
                 id: inputBox
-                height: 40
                 width: parent.width
+                height: 40
                 Layout.topMargin: 2
                 border.width: root.borderWidth
                 border.color: (root.isError ? properties.colorError : root.borderColor)
@@ -56,6 +56,7 @@ FocusScope
                 
                 Row
                 {
+                    id: inBoxLayout
                     width: parent.width
                     height: parent.height
                     spacing: 0
@@ -66,6 +67,13 @@ FocusScope
                         width: (addImageToRight ? parent.width - 30 : parent.width)
                         focus: true
                         selectByMouse: true
+                        color: properties.colorBaseText
+                        font.pointSize: root.inputFontSize
+                        padding: root.textPadding
+                        anchors.verticalCenter: parent.verticalCenter
+                        placeholderText: root.placeholderContent
+                        placeholderTextColor: root.placeholderColor
+                        echoMode: (!root.addImageToRight || imageArea.pressed ? TextInput.Normal : TextInput.Password)
                         background: Rectangle   
                         {
                             anchors.fill: parent
@@ -73,39 +81,24 @@ FocusScope
                             color: "transparent"
                         }
                         
-                        color: properties.colorBaseText
-                        font.pointSize: root.inputFontSize
-                        padding: root.textPadding
-                        anchors.verticalCenter: parent.verticalCenter
-                        placeholderText: root.placeholderContent
-                        placeholderTextColor: root.placeholderColor
-                        echoMode: (!root.addImageToRight || imageAtRight.pressed ? TextInput.Normal : TextInput.Password)
-                        
-                        onTextEdited:
-                        {
-                            root.isError = false
-                        }
+                        onTextEdited: root.isError = false
                     }
                     
-                    Button
+                    
+                    
+                    Image
                     {
-                        id: imageAtRight
+                        id: image
                         width:  20
                         height: 18
-                        visible: root.addImageToRight
                         anchors.verticalCenter: parent.verticalCenter
-                        background: Rectangle
-                        {
-                            anchors.fill: parent
-                            color: "transparent"
-                        }
+                        visible: root.addImageToRight
+                        source: (imageArea.pressed ? root.toggledImagePath : root.imagePath)
                         
-                        Image
+                        MouseArea
                         {
-                            id: image
-                            width: parent.width
-                            height: parent.height
-                            source: (imageAtRight.pressed ? root.toggleImage : root.image)
+                            id: imageArea
+                            anchors.fill: parent
                         }
                     }
                 }

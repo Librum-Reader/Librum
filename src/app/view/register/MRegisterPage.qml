@@ -6,24 +6,26 @@ import "../components"
 Page
 {
     id: root
+    readonly property int containerWidth : 542
+    readonly property int containerHeight : 770
+    width: Screen.width
+    height: Screen.height
+
     background: Rectangle
     {
         anchors.fill: parent
         color: properties.loginWindowBackground
     }
     
-    property int baseHeight : 770
-    property int baseWidth : 542
-    
     ColumnLayout
     {
         anchors.centerIn: parent
-        width: root.baseWidth
+        width: root.containerWidth
         
         Rectangle
         {
             id: backgroundRect
-            Layout.preferredHeight: root.baseHeight
+            Layout.preferredHeight: root.containerHeight
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
             radius: 4
@@ -88,34 +90,10 @@ Page
                         width: parent.width
                         spacing: 0
                         
-                        RowLayout
+                        MNameInput
                         {
-                            id: nameInputRow
-                            spacing: 28
+                            id: nameInput
                             Layout.alignment: Qt.AlignHCenter
-                            Layout.fillWidth: true
-                            
-                            MLabeledInputBox
-                            {
-                                id: firstNameInput
-                                Layout.preferredWidth: 186
-                                Layout.preferredHeight: 50
-                                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                                headerText: 'First name'
-                                placeholderContent: "Kai"
-                                placeholderColor: properties.colorLightText
-                            }
-                            
-                            MLabeledInputBox
-                            {
-                                id: lastNameInput
-                                Layout.preferredWidth: 186
-                                Layout.preferredHeight: 50
-                                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                                headerText: "Last name"
-                                placeholderContent: "Doe"
-                                placeholderColor: properties.colorLightText
-                            }
                         }
                         
                         MLabeledInputBox 
@@ -137,8 +115,8 @@ Page
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
-                            image: "/resources/images/eye.svg"
-                            toggleImage: "/resources/images/eye-off.svg"
+                            imagePath: "/resources/images/eye.svg"
+                            toggledImagePath: "/resources/images/eye-off.svg"
                         }
                         
                         MLabeledInputBox 
@@ -150,88 +128,20 @@ Page
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
-                            image: "/resources/images/eye.svg"
-                            toggleImage: "/resources/images/eye-off.svg"
+                            imagePath: "/resources/images/eye.svg"
+                            toggledImagePath: "/resources/images/eye-off.svg"
                         }
                         
-                        RowLayout
+                        MKeepMeUpdated
                         {
-                            id: keepMeUpdatedRow
-                            Layout.fillWidth: true
-                            Layout.topMargin: 28
-                            spacing: 4
-                            
-                            MCheckBox
-                            {
-                                id: updatesCheckBox
-                                Layout.preferredWidth: 20
-                                Layout.preferredHeight: 20
-                                imageSource: "/resources/images/check.svg"
-                                borderColor: properties.colorDarkBorder
-                                borderRadius: 4
-                            }
-                            
-                            Item
-                            {
-                                id: keepMeUpdatedText
-                                Layout.preferredHeight: keepMeUpdatedTextFirst.implicitHeight
-                                Layout.fillWidth: true
-                                Layout.leftMargin: 6
-                                
-                                Column
-                                {
-                                    spacing: 2
-                                    
-                                    Label
-                                    {
-                                        id: keepMeUpdatedTextFirst
-                                        text: "Keep me updated about the new features and"
-                                        wrapMode: Text.WordWrap
-                                        font.pointSize: 11
-                                        color: properties.colorMediumText
-                                    }
-                                    
-                                    Label
-                                    {
-                                        id: keepMeUpdatedTextSecond
-                                        text: "upcoming improvements."
-                                        wrapMode: Text.WordWrap
-                                        font.pointSize: 11
-                                        color: properties.colorMediumText
-                                    }
-                                }
-                            }
+                            id: keepMeUpdated
+                            Layout.topMargin: 28                            
                         }
-                    
-                        RowLayout
+                        
+                        MAcceptPolicy
                         {
-                            id: iAcceptRow
-                            Layout.fillWidth: true
-                            Layout.topMargin: 32
-                            spacing: 4
-                            
-                            MCheckBox
-                            {
-                                id: iAcceptCheckBox
-                                Layout.preferredWidth: 20
-                                Layout.preferredHeight: 20
-                                imageSource: "/resources/images/check.svg"
-                                borderColor: properties.colorDarkBorder
-                                borderRadius: 4
-                            }
-                            
-                            Label
-                            {
-                                id: iAcceptTextFirst
-                                Layout.fillWidth: true
-                                Layout.leftMargin: 6
-                                text: 'I accept the <font color=' + properties.colorBasePurple + '>terms</font> 
-                                       and the <font color=' + properties.colorBasePurple + '>privacy policy.</font>'
-                                textFormat: Text.RichText
-                                wrapMode: Text.WordWrap
-                                font.pointSize: 11
-                                color: properties.colorMediumText
-                            }
+                            id: acceptPolicy
+                            Layout.topMargin: 32                            
                         }
                         
                         MButton 
@@ -258,6 +168,7 @@ Page
         
         Label
         {
+            id: loginRedirectionLabel
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: 14
             text: "Already have an account? Login"

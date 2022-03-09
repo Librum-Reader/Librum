@@ -40,5 +40,12 @@
         <file>src/app/view/components/toolbar/MToolbar.qml</file>
         <file>src/app/view/components/MSearchButton.qml</file>
         <file>src/app/view/components/MTitle.qml</file>
+        <file>src/app/view/components/toolbar/MSelectCheckBox.qml</file>
+        <file>src/app/view/components/toolbar/MSortByButton.qml</file>
+        <file>src/app/view/components/toolbar/MFilterByButton.qml</file>
+        <file>src/app/view/components/toolbar/MTagSelectorButton.qml</file>
+        <file>src/app/view/register/MNameInput.qml</file>
+        <file>src/app/view/register/MKeepMeUpdated.qml</file>
+        <file>src/app/view/register/MAcceptPolicy.qml</file>
     </qresource>
 </RCC>

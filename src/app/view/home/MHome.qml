@@ -9,8 +9,6 @@ import "../components/toolbar"
 Page
 {
     id: root
-    width: parent.width
-    height: parent.height
     
     background: Rectangle
     {
@@ -70,6 +68,8 @@ Page
                     descriptionText: "You have 10 books"
                 }
                 
+                Item { Layout.fillWidth: true }
+                
                 MButton
                 {
                     id: addBooksButton
@@ -77,13 +77,12 @@ Page
                     Layout.preferredHeight: 40
                     Layout.rightMargin: mainLayout.rightMargin
                     Layout.topMargin: 22
-                    Layout.alignment: Qt.AlignRight
                     backgroundColor: properties.colorBasePurple
                     textContent: "Add books"
                     fontColor: properties.colorBackground
                     fontBold: true
-                    fontSize: 11.8
-                    imageSource: "/resources/images/plus.svg"
+                    fontSize: 13
+                    imagePath: "/resources/images/plus.svg"
                 }
             }
             
@@ -98,6 +97,8 @@ Page
                 {
                     console.log(query);
                 }
+                
+                onCheckBoxClicked: console.log("clicked!");
             }
             
             Grid

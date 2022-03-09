@@ -94,8 +94,8 @@ Page
                         placeholderContent: ""
                         headerText: "Password"
                         addImageToRight: true
-                        image: "/resources/images/eye.svg"
-                        toggleImage: "/resources/images/eye-off.svg"
+                        imagePath: "/resources/images/eye.svg"
+                        toggledImagePath: "/resources/images/eye-off.svg"
                     }
                     
                     RowLayout
@@ -108,7 +108,7 @@ Page
                             id: rememberMeCheckBox
                             Layout.preferredWidth: 20
                             Layout.preferredHeight: 20
-                            imageSource: "/resources/images/check.svg"
+                            imagePath: "/resources/images/check.svg"
                             borderRadius: 4
                         }
                         

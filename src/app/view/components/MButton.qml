@@ -6,10 +6,6 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    
-    implicitWidth: 100
-    implicitHeight: 30
-    
     property int buttonRadius : 4
     property color borderColor: properties.colorDarkBorder
     property color backgroundColor : "red"
@@ -17,38 +13,39 @@ FocusScope
     property string textContent : "Text here"
     property bool fontBold : false
     property double fontSize : 11
-    property string imageSource : ""
-    property int spacing : 8
+    property string imagePath : ""
+    property int imageSpacing : 8
     property int imageSize : 15
+    
+    implicitWidth: 100
+    implicitHeight: 30
     
     signal clicked()
     
     
     Rectangle
     {
-        id: prvt
-        height: root.height
+        id: container
         width:  root.width
-        radius: root.buttonRadius
-        border.color: root.borderColor
+        height: root.height
         color: root.backgroundColor
+        border.color: root.borderColor
+        radius: root.buttonRadius
         opacity: (mouseArea.pressed ? 0.9 : 1)
         
         RowLayout
         {
             id: mainLayout
-            width: image.width + loginButtonText.width + root.spacing
             anchors.centerIn: parent
-            spacing: root.spacing
+            spacing: root.imageSpacing
             
             Image
             {
                 id: image
-                visible: root.imageSource != ""
-                source: root.imageSource
-                fillMode: Image.PreserveAspectFit
+                visible: root.imagePath.length > 0
+                source: root.imagePath
                 sourceSize.width: root.imageSize
-                antialiasing: false
+                fillMode: Image.PreserveAspectFit
             }
             
             Label
