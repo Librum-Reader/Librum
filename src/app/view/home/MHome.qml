@@ -6,7 +6,6 @@ import "../components"
 import "../components/toolbar"
 
 
-
 Page
 {
     id: root
@@ -41,16 +40,11 @@ Page
         anchors.fill: parent
         spacing: 0
         
-        Rectangle
+        Item
         {
             id: leftSpacer
-            Layout.preferredHeight: parent.height
-            Layout.preferredWidth: (SidebarState.currentState === SidebarState.Opened ?
-                                        sidebarMargin : sidebarMargin)
-            Layout.alignment: Qt.AlignLeft
-            color: "transparent"
-            
-            property int sidebarMargin : 64
+            Layout.fillHeight: true
+            Layout.preferredWidth: 64
         }
         
         ColumnLayout
@@ -68,30 +62,12 @@ Page
                 spacing: 0
                 Layout.preferredWidth: parent.width
                 
-                ColumnLayout
+                MTitle
                 {
-                    id: titleColumn
-                    spacing: 0
-                    
-                    Label
-                    {
-                        id: title
-                        Layout.topMargin: 44
-                        text: "Home"
-                        font.weight: Font.Bold
-                        color: properties.colorBaseText
-                        font.pointSize: 28
-                        font.family: properties.defaultFontFamily
-                    }
-                    
-                    Label
-                    {
-                        id: pageDescription
-                        text: "You have 10 books"
-                        color: properties.colorLightText3
-                        font.pointSize: 14
-                        font.family: properties.defaultFontFamily
-                    }
+                    id: title
+                    Layout.topMargin: 44
+                    titleText: "Home"
+                    descriptionText: "You have 10 books"
                 }
                 
                 MButton
