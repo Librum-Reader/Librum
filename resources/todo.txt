@@ -4,5 +4,5 @@
     - Abstract out
     - Follow conventions
     - Fix colors
-    - Instead of onFinished in animations to set overlap block, try "Animation.alwaysRunToEnd = true"
     - Look into the usage of qml modules instead of hardcoded includes
+    - Fix negative margin in "MBook"
