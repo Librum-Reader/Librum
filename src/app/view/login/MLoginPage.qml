@@ -108,6 +108,7 @@ Page
                         Layout.preferredHeight: 40
                         Layout.topMargin: 32
                         backgroundColor: properties.colorBasePurple
+                        fontSize: 12
                         fontColor: properties.colorBrightText
                         fontBold: true
                         textContent: "Login"

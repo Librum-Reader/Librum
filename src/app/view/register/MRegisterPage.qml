@@ -151,6 +151,7 @@ Page
                             Layout.preferredWidth: parent.width
                             Layout.topMargin: 40
                             backgroundColor: properties.colorBasePurple
+                            fontSize: 12                            
                             fontColor: properties.colorBrightText
                             fontBold: true
                             textContent: "Let's start"
