@@ -4,6 +4,7 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
+#include <QDebug>
 #include "sidebarState.hpp"
 
 int main(int argc, char *argv[])
@@ -13,6 +14,7 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Etovex");
     app.setOrganizationDomain("Etovex.com");
     app.setApplicationName("Librum");
+    
     
     
     // Translations
@@ -27,13 +29,17 @@ int main(int argc, char *argv[])
     }
     
     
+    
     // Type registering
     SidebarState sidebarState;
     qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
     
     
+    
     // Startup
     QQmlApplicationEngine engine;
+    engine.addImportPath("qrc:/sources/src/app/view/modules");
+    
     const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import "components/sidebar"
+import CustomComponents
 import "home"
 import "login"
 import "register"

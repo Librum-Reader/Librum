@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import librum.extensions.sidebar
-import "../"
+import CustomComponents
 
 
 FocusScope
@@ -200,8 +200,6 @@ FocusScope
             
             Item
             {
-                id: emptySpace
-                Layout.preferredWidth: parent.width
                 Layout.fillHeight: true
                 Layout.minimumHeight: 30
             }
