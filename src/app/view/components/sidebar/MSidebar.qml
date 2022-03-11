@@ -200,8 +200,6 @@ FocusScope
             
             Item
             {
-                id: emptySpace
-                Layout.preferredWidth: parent.width
                 Layout.fillHeight: true
                 Layout.minimumHeight: 30
             }

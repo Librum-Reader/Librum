@@ -1,0 +1,5 @@
+module components
+
+MBook 1.0 MBook.qml
+MButton 1.0 MButton.qml
+MTitle 1.0 MTitle.qml
