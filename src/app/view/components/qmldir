@@ -3,3 +3,9 @@ module components
 MBook 1.0 MBook.qml
 MButton 1.0 MButton.qml
 MTitle 1.0 MTitle.qml
+MSearchButton 1.0 MSearchButton.qml
+MLogo 1.0 MLogo.qml
+MLabeledInputBox 1.0 MLabeledInputBox.qml
+MCheckBox 1.0 MCheckBox.qml
+MToolbar 1.0 toolbar/MToolbar.qml
+MSidebar 1.0 sidebar/MSidebar.qml

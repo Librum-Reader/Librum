@@ -38,8 +38,7 @@ int main(int argc, char *argv[])
     
     // Startup
     QQmlApplicationEngine engine;
-    engine.addImportPath("qrc:/src/app/view/component");
-    qDebug() << engine.importPathList();
+    engine.addImportPath("qrc:/sources/src/app/view");
     
     const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

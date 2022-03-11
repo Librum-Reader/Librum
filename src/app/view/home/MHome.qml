@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import librum.extensions.sidebar
-import "../components/toolbar"
 import components
 
 
