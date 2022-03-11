@@ -1,4 +1,4 @@
-module components
+module CustomComponents
 
 MBook 1.0 MBook.qml
 MButton 1.0 MButton.qml
