@@ -5,7 +5,7 @@ project(Librum VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-#set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/app/view" CACHE STRING "")
+
 
 
 # Language
@@ -24,8 +24,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 
 # build
 add_library(view SHARED
-                        ${CMAKE_CURRENT_SOURCE_DIR}/extensions/sidebarState.cpp
-                        ${CMAKE_CURRENT_SOURCE_DIR}/extensions/sidebarState.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebarState.cpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebarState.hpp
     )
 
 target_compile_definitions(view
@@ -40,6 +40,6 @@ target_link_libraries(view
 
 target_include_directories(view
                     PUBLIC
-                        ${CMAKE_CURRENT_SOURCE_DIR}/extensions/
+                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/
 
     )
