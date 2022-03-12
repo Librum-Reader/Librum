@@ -117,6 +117,11 @@ Page
                 // Calculate the amount of columns which can be displayed
                 onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);
             }
+            
+            MIndexBar
+            {
+                Layout.topMargin: 50
+            }
         }
     }
 }

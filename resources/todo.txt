@@ -1,8 +1,5 @@
 - Good resize management of book grid
 
 - Refactoring after everything is working as it should
-    - Abstract out
-    - Follow conventions
+    - Fix file (including picture) naming
     - Fix colors
-    - Look into the usage of qml modules instead of hardcoded includes
-    - Fix negative margin in "MBook"

@@ -17,6 +17,7 @@
         <file>resources/images/arrow-filled-icon.svg</file>
         <file>resources/images/tag-icon.svg</file>
         <file>resources/images/search-icon.svg</file>
+        <file>resources/images/black_right_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -50,5 +51,6 @@
         <file>src/app/view/modules/CustomComponents/sidebar/MSidebar.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MSidebarAnimations.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MSidebarItem.qml</file>
+        <file>src/app/view/modules/CustomComponents/indexbar/MIndexBar.qml</file>
     </qresource>
 </RCC>
