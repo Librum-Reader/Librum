@@ -71,7 +71,7 @@ FocusScope
         Item
         {
             id: indexer
-            Layout.preferredWidth: 218
+            Layout.preferredWidth: /*218*/ 230
             Layout.preferredHeight: 32
             
             RowLayout
@@ -85,7 +85,7 @@ FocusScope
                     id: leftArrow
                     rotation: 180
                     source: "/resources/images/black_right_icon.svg"
-                    sourceSize.width: 32
+                    sourceSize.width: 30
                 }
                 
                 Rectangle
@@ -95,7 +95,7 @@ FocusScope
                     Layout.preferredHeight: 36
                     color: properties.colorBackground
                     border.color: properties.colorLightBorder                    
-                    radius: 4
+                    radius: 5
                     
                     Label
                     {
@@ -106,6 +106,93 @@ FocusScope
                         font.bold: true
                         color: properties.colorBasePurple
                     }
+                }
+                
+                Rectangle
+                {
+                    id: contentRect2
+                    Layout.preferredWidth: 36
+                    Layout.preferredHeight: 36
+                    color: "transparent"
+                    border.color: "transparent"               
+                    radius: 5
+                    
+                    Label
+                    {
+                        anchors.centerIn: parent
+                        text: "2"
+                        font.pointSize: 10.8
+                        font.family: properties.defaultFontFamily
+                        font.bold: false
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                Rectangle
+                {
+                    id: contentRect3
+                    Layout.preferredWidth: 36
+                    Layout.preferredHeight: 36
+                    color: "transparent"
+                    border.color: "transparent"               
+                    radius: 5
+                    
+                    Label
+                    {
+                        anchors.centerIn: parent
+                        text: "3"
+                        font.pointSize: 10.5
+                        font.family: properties.defaultFontFamily
+                        font.bold: false
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                Rectangle
+                {
+                    id: contentRect4
+                    Layout.preferredWidth: 36
+                    Layout.preferredHeight: 36
+                    color: "transparent"
+                    border.color: "transparent"               
+                    radius: 5
+                    
+                    Label
+                    {
+                        anchors.centerIn: parent
+                        text: "..."
+                        font.pointSize: 14
+                        font.family: properties.defaultFontFamily
+                        font.bold: false
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                Rectangle
+                {
+                    id: contentRect5
+                    Layout.preferredWidth: 36
+                    Layout.preferredHeight: 36
+                    color: "transparent"
+                    border.color: "transparent"               
+                    radius: 5
+                    
+                    Label
+                    {
+                        anchors.centerIn: parent
+                        text: "10"
+                        font.pointSize: 10.5
+                        font.family: properties.defaultFontFamily
+                        font.bold: false
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                Image
+                {
+                    id: rightArrow
+                    source: "/resources/images/black_right_icon.svg"
+                    sourceSize.width: 30
                 }
             }
         }

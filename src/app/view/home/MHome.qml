@@ -29,6 +29,10 @@ Page
         ListElement { spaceHolder: "" }
         ListElement { spaceHolder: "" }
         ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
+        ListElement { spaceHolder: "" }
     }
     
     RowLayout
@@ -120,6 +124,8 @@ Page
             
             MIndexBar
             {
+                id: indexBar
+                Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.topMargin: 50
             }
         }
