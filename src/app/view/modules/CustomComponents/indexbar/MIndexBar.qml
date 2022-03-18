@@ -15,44 +15,15 @@ FocusScope
     RowLayout
     {
         id: layout
+        property MContentRect current : contentRect1
+        
         height: parent.height
         width: parent.width
         spacing: 0
         
-        Rectangle
+        MBookCountSelector
         {
             id: bookCountSelector
-            Layout.preferredWidth: 58
-            Layout.fillHeight: true
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
-            
-            RowLayout
-            {
-                id: inBookCountSelectorLayout
-                anchors.centerIn: parent
-                spacing: 5
-                
-                Label
-                {
-                    id: bookCountLabel
-                    text: bookCount.toString()
-                    color: properties.colorBaseText
-                    font.family: properties.defaultFontFamily
-                    font.pointSize: 11
-                    font.bold: true
-                }
-                
-                Image
-                {
-                    id: drowDownArrowImage
-                    source: "/resources/images/arrow-filled-icon.svg"
-                    sourceSize.width: 8
-                    fillMode: Image.PreserveAspectFit
-                }
-            }
         }
     
         Label
@@ -71,7 +42,7 @@ FocusScope
         Item
         {
             id: indexer
-            Layout.preferredWidth: /*218*/ 230
+            Layout.preferredWidth: 230
             Layout.preferredHeight: 32
             
             RowLayout
@@ -80,77 +51,42 @@ FocusScope
                 height: parent.height
                 spacing: 0
                 
-                Image
+                MNavigationArrow
                 {
-                    id: leftArrow
-                    rotation: 180
-                    source: "/resources/images/black_right_icon.svg"
-                    sourceSize.width: 30
+                    id: leftNavigationArrow
+                    toLeft: true
+                    
+                    onClicked: layout.moveToLeft();
                 }
                 
-                Rectangle
+                MContentRect
                 {
                     id: contentRect1
-                    Layout.preferredWidth: 36
-                    Layout.preferredHeight: 36
-                    color: properties.colorBackground
-                    border.color: properties.colorLightBorder                    
-                    radius: 5
+                    pageNumber: 1
+                    selected: true
                     
-                    Label
-                    {
-                        anchors.centerIn: parent
-                        text: "1"
-                        font.pointSize: 12
-                        font.family: properties.defaultFontFamily
-                        font.bold: true
-                        color: properties.colorBasePurple
-                    }
+                    onClicked: layout.changeSelected(this)
                 }
                 
-                Rectangle
+                MContentRect
                 {
                     id: contentRect2
-                    Layout.preferredWidth: 36
-                    Layout.preferredHeight: 36
-                    color: "transparent"
-                    border.color: "transparent"               
-                    radius: 5
+                    pageNumber: 2
                     
-                    Label
-                    {
-                        anchors.centerIn: parent
-                        text: "2"
-                        font.pointSize: 10.8
-                        font.family: properties.defaultFontFamily
-                        font.bold: false
-                        color: properties.colorBaseText
-                    }
+                    onClicked: layout.changeSelected(this)
                 }
                 
-                Rectangle
+                MContentRect
                 {
                     id: contentRect3
-                    Layout.preferredWidth: 36
-                    Layout.preferredHeight: 36
-                    color: "transparent"
-                    border.color: "transparent"               
-                    radius: 5
+                    pageNumber: 3
                     
-                    Label
-                    {
-                        anchors.centerIn: parent
-                        text: "3"
-                        font.pointSize: 10.5
-                        font.family: properties.defaultFontFamily
-                        font.bold: false
-                        color: properties.colorBaseText
-                    }
+                    onClicked: layout.changeSelected(this)
                 }
                 
                 Rectangle
                 {
-                    id: contentRect4
+                    id: dotRect
                     Layout.preferredWidth: 36
                     Layout.preferredHeight: 36
                     color: "transparent"
@@ -168,32 +104,67 @@ FocusScope
                     }
                 }
                 
-                Rectangle
+                MContentRect
                 {
-                    id: contentRect5
-                    Layout.preferredWidth: 36
-                    Layout.preferredHeight: 36
-                    color: "transparent"
-                    border.color: "transparent"               
-                    radius: 5
+                    id: contentRect4
+                    pageNumber: 10
                     
-                    Label
-                    {
-                        anchors.centerIn: parent
-                        text: "10"
-                        font.pointSize: 10.5
-                        font.family: properties.defaultFontFamily
-                        font.bold: false
-                        color: properties.colorBaseText
-                    }
+                    onClicked: layout.changeSelected(this)
                 }
                 
-                Image
+                MNavigationArrow
                 {
-                    id: rightArrow
-                    source: "/resources/images/black_right_icon.svg"
-                    sourceSize.width: 30
+                    id: rightNavigationArrow
+                    
+                    onClicked: layout.moveToRight();
                 }
+            }
+        }
+        
+        
+        function changeSelected(newItem)
+        {
+            if(newItem === layout.current)
+                return;
+            
+            layout.current.selected = false;
+            layout.current = newItem;
+            layout.current.selected = true
+        }
+        
+        function moveToLeft()
+        {
+            switch(layout.current)
+            {
+            case contentRect1:
+                break;
+            case contentRect2:
+                changeSelected(contentRect1);
+                break;
+            case contentRect3:
+                changeSelected(contentRect2);
+                break;
+            case contentRect4:
+                changeSelected(contentRect3);
+                break;
+            }
+        }
+        
+        function moveToRight()
+        {
+            switch(layout.current)
+            {
+            case contentRect1:
+                changeSelected(contentRect2);
+                break;
+            case contentRect2:
+                changeSelected(contentRect3);
+                break;
+            case contentRect3:
+                changeSelected(contentRect4);
+                break;
+            case contentRect4:
+                break;
             }
         }
     }

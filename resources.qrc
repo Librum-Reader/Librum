@@ -52,5 +52,8 @@
         <file>src/app/view/modules/CustomComponents/sidebar/MSidebarAnimations.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MSidebarItem.qml</file>
         <file>src/app/view/modules/CustomComponents/indexbar/MIndexBar.qml</file>
+        <file>src/app/view/modules/CustomComponents/indexbar/MBookCountSelector.qml</file>
+        <file>src/app/view/modules/CustomComponents/indexbar/MContentRect.qml</file>
+        <file>src/app/view/modules/CustomComponents/indexbar/MNavigationArrow.qml</file>
     </qresource>
 </RCC>
