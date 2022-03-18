@@ -31,8 +31,6 @@ Page
         ListElement { spaceHolder: "" }
         ListElement { spaceHolder: "" }
         ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
     }
     
     RowLayout
