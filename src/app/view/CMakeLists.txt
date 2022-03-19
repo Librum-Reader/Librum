@@ -23,8 +23,8 @@ set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 
 # build
 add_library(view SHARED
-                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebarState.cpp
-                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebarState.hpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebar_state.cpp
+                        ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebar_state.hpp
     )
 
 target_compile_definitions(view

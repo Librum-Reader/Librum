@@ -5,7 +5,7 @@
 #include <QLocale>
 #include <QString>
 #include <QDebug>
-#include "sidebarState.hpp"
+#include "sidebar_state.hpp"
 
 int main(int argc, char *argv[])
 {    

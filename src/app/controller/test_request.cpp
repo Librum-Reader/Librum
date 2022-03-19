@@ -1,4 +1,4 @@
-#include "testrequest.hpp"
+#include "test_request.hpp"
 
 TestRequest::TestRequest(QObject *parent)
     : QObject{parent}, m_reply{nullptr}

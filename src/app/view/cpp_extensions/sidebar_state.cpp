@@ -1,4 +1,4 @@
-#include "sidebarState.hpp"
+#include "sidebar_state.hpp"
 
 
 SidebarState::SidebarState(QObject *parent)
