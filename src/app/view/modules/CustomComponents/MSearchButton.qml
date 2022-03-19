@@ -72,7 +72,7 @@ FocusScope
                 {
                     id: searchBarIcon
                     anchors.centerIn: parent
-                    source: "/resources/images/search-icon.svg"
+                    source: properties.iconSearch
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: 16
                     antialiasing: false

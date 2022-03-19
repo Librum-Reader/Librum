@@ -83,6 +83,7 @@ ApplicationWindow
             pageManager.pageHasSidebar = false;
             break;
         case 'HomePage':
+            root.minimumWidth = 904
             pageManager.replace(homePage);
             pageManager.pageHasSidebar = true;
             break;

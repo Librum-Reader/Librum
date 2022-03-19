@@ -19,7 +19,7 @@ FocusScope
             id: rememberMeCheckBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
-            imagePath: "/resources/images/check.svg"
+            imagePath: properties.iconCheck
             borderRadius: 4
         }
         

@@ -77,7 +77,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 45
                 imageHeight: 45
-                imageSource: "/resources/images/download-icon.svg"
+                imageSource: properties.iconDownload
                 labelContent: "Free books"
                 selected: root.selectedTab == freeBooksButton
                 
@@ -105,7 +105,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 28
-                imageSource: "/resources/images/home-icon.svg"
+                imageSource: properties.iconHome
                 labelContent: "Home"
                 selected: root.selectedTab == homeButton
                 
@@ -123,7 +123,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 28
                 imageHeight: 28
-                imageSource: "/resources/images/pieChart-icon.svg"
+                imageSource: properties.iconPieChart
                 labelContent: "Statistics"
                 selected: root.selectedTab == statisticsButton
                 
@@ -151,7 +151,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 30
-                imageSource: "/resources/images/wrench-icon.svg"
+                imageSource: properties.iconTool
                 labelContent: "Tools"
                 selected: root.selectedTab == toolsButton
                 
@@ -169,7 +169,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 31
                 imageHeight: 31
-                imageSource: "/resources/images/puzzle-icon.svg"
+                imageSource: properties.iconAddOns
                 labelContent: "Add-ons"
                 selected: root.selectedTab == addOnButton
                 
@@ -187,7 +187,7 @@ FocusScope
                 Layout.leftMargin: 10
                 imageWidth: 36
                 imageHeight: 36
-                imageSource: "/resources/images/settings-icon.svg"
+                imageSource: properties.iconSettings
                 labelContent: "Settings"
                 selected: root.selectedTab == settingsButton
                 

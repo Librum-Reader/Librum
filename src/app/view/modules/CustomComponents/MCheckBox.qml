@@ -10,7 +10,7 @@ FocusScope
     property int borderRadius : 4
     property int borderWidth : 1
     property color backgroundColor : "transparent"
-    property string imagePath : "/resources/images/check.svg"
+    property string imagePath : properties.iconCheck
     property bool imageDefaultVisibility : false
     property bool activated : false
     

@@ -45,7 +45,7 @@ FocusScope
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
                     sourceSize.height: 241
-                    source: "/resources/images/book-cover.png"
+                    source: properties.imageBookCover
                     fillMode: Image.PreserveAspectFit
                 }
             }
@@ -128,7 +128,7 @@ FocusScope
                         id: moreIcon
                         Layout.preferredHeight: 20
                         Layout.leftMargin: 98
-                        source: "/resources/images/dots-horizontal.svg"
+                        source: properties.iconDots
                         fillMode: Image.PreserveAspectFit
                         antialiasing: false
                     }

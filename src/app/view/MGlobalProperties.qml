@@ -24,4 +24,23 @@ Item
     property color pagesBackground: "#F6F6F9"
     
     property string defaultFontFamily : "SF Pro Display"
+    
+    property string iconHome : "/resources/images/home_icon.svg"
+    property string iconDownload : "/resources/images/download_icon.svg"
+    property string iconPieChart : "/resources/images/pieChart_icon.svg"
+    property string iconTool : "/resources/images/wrench_icon.svg"
+    property string iconAddOns : "/resources/images/puzzle_icon.svg"
+    property string iconSettings : "/resources/images/settings_icon.svg"
+    property string iconEyeOn : "/resources/images/eye_on_icon.svg"
+    property string iconEyeOff : "/resources/images/eye_off_icon.svg"
+    property string iconCheck : "/resources/images/check_icon.svg"
+    property string iconSearch : "/resources/images/search_icon.svg"
+    property string iconDots: "/resources/images/dots_icon.svg"
+    property string iconArrowRightHallow: "/resources/images/arrow_hallow_right_icon.svg"
+    property string iconArrowDownFilled: "/resources/images/arrow_filled_down_icon.svg"
+    property string iconPlus: "/resources/images/plus_icon.svg"    
+    property string iconTag: "/resources/images/tag_icon.svg"
+    property string iconFilter: "/resources/images/filter_icon.svg"
+    
+    property string imageBookCover: "/resources/images/book_cover.png"
 }

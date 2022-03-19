@@ -66,7 +66,7 @@ FocusScope
                     sourceSize.width: 20
                     sourceSize.height: 20
                     anchors.centerIn: parent
-                    source: "/resources/images/right_icon.svg"
+                    source: properties.iconArrowRightHallow
                 }
                 
                 MouseArea

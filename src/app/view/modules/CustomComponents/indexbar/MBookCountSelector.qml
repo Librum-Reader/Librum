@@ -38,7 +38,7 @@ FocusScope
             Image
             {
                 id: drowDownArrowImage
-                source: "/resources/images/arrow-filled-icon.svg"
+                source: properties.iconArrowDownFilled
                 sourceSize.width: 8
                 fillMode: Image.PreserveAspectFit
             }

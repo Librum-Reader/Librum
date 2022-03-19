@@ -27,7 +27,7 @@ FocusScope
             {
                 id: filterByArrowIcon
                 sourceSize.height: 14
-                source: "/resources/images/filter-icon.svg"
+                source: properties.iconFilter
                 fillMode: Image.PreserveAspectFit
             }
             

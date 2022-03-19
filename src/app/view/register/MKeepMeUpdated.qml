@@ -24,7 +24,7 @@ FocusScope
             id: updatesCheckBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
-            imagePath: "/resources/images/check.svg"
+            imagePath: properties.iconCheck
             borderColor: properties.colorDarkBorder
             borderRadius: 4
             

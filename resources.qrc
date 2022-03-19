@@ -1,22 +1,22 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources/images/download-icon.svg</file>
-        <file>resources/images/home-icon.svg</file>
-        <file>resources/images/pieChart-icon.svg</file>
-        <file>resources/images/puzzle-icon.svg</file>
-        <file>resources/images/settings-icon.svg</file>
-        <file>resources/images/wrench-icon.svg</file>
-        <file>resources/images/check.svg</file>
-        <file>resources/images/eye.svg</file>
-        <file>resources/images/eye-off.svg</file>
-        <file>resources/images/right_icon.svg</file>
-        <file>resources/images/dots-horizontal.svg</file>
-        <file>resources/images/book-cover.png</file>
-        <file>resources/images/plus.svg</file>
-        <file>resources/images/filter-icon.svg</file>
-        <file>resources/images/arrow-filled-icon.svg</file>
-        <file>resources/images/tag-icon.svg</file>
-        <file>resources/images/search-icon.svg</file>
+        <file>resources/images/download_icon.svg</file>
+        <file>resources/images/home_icon.svg</file>
+        <file>resources/images/pieChart_icon.svg</file>
+        <file>resources/images/puzzle_icon.svg</file>
+        <file>resources/images/settings_icon.svg</file>
+        <file>resources/images/wrench_icon.svg</file>
+        <file>resources/images/check_icon.svg</file>
+        <file>resources/images/eye_on_icon.svg</file>
+        <file>resources/images/eye_off_icon.svg</file>
+        <file>resources/images/arrow_hallow_right_icon.svg</file>
+        <file>resources/images/dots_icon.svg</file>
+        <file>resources/images/book_cover.png</file>
+        <file>resources/images/plus_icon.svg</file>
+        <file>resources/images/filter_icon.svg</file>
+        <file>resources/images/arrow_filled_down_icon.svg</file>
+        <file>resources/images/tag_icon.svg</file>
+        <file>resources/images/search_icon.svg</file>
         <file>resources/images/black_right_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">

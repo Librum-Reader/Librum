@@ -39,7 +39,7 @@ FocusScope
             {
                 id: sortByArrowIcon
                 sourceSize.height: 6
-                source: "/resources/images/arrow-filled-icon.svg"
+                source: properties.iconArrowDownFilled
                 fillMode: Image.PreserveAspectFit
             }
         }

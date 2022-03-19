@@ -30,7 +30,7 @@ FocusScope
             {
                 id: tagIcon
                 sourceSize.height: 18
-                source: "/resources/images/tag-icon.svg"
+                source: properties.iconTag
                 fillMode: Image.PreserveAspectFit
             }
             

@@ -115,8 +115,8 @@ Page
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
-                            imagePath: "/resources/images/eye.svg"
-                            toggledImagePath: "/resources/images/eye-off.svg"
+                            imagePath: properties.iconEyeOn
+                            toggledImagePath: properties.iconEyeOff
                         }
                         
                         MLabeledInputBox 
@@ -128,8 +128,8 @@ Page
                             placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
-                            imagePath: "/resources/images/eye.svg"
-                            toggledImagePath: "/resources/images/eye-off.svg"
+                            imagePath: properties.iconEyeOn
+                            toggledImagePath: properties.iconEyeOff
                         }
                         
                         MKeepMeUpdated

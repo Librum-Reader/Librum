@@ -86,7 +86,7 @@ Page
                     fontColor: properties.colorBackground
                     fontBold: true
                     fontSize: 13
-                    imagePath: "/resources/images/plus.svg"
+                    imagePath: properties.iconPlus
                 }
             }
             

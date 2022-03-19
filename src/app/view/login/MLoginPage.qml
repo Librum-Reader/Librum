@@ -91,8 +91,8 @@ Page
                         placeholderContent: ""
                         headerText: "Password"
                         addImageToRight: true
-                        imagePath: "/resources/images/eye.svg"
-                        toggledImagePath: "/resources/images/eye-off.svg"
+                        imagePath: properties.iconEyeOn
+                        toggledImagePath: properties.iconEyeOff
                     }
                     
                     MLoginOptions
