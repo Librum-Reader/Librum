@@ -58,5 +58,6 @@
         <file>src/app/view/modules/CustomComponents/indexbar/MBookCountSelector.qml</file>
         <file>src/app/view/modules/CustomComponents/indexbar/MContentRect.qml</file>
         <file>src/app/view/modules/CustomComponents/indexbar/MNavigationArrow.qml</file>
+        <file>src/app/view/home/MEmptyScreenContent.qml</file>
     </qresource>
 </RCC>
