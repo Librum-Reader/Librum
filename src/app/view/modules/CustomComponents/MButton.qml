@@ -8,6 +8,7 @@ FocusScope
     id: root
     property int buttonRadius : 4
     property color borderColor: properties.colorDarkBorder
+    property int borderWidth: 1
     property color backgroundColor : "red"
     property color fontColor : "black"
     property string textContent : "Text here"
@@ -29,6 +30,7 @@ FocusScope
         width:  parent.width
         height: parent.height
         color: root.backgroundColor
+        border.width: root.borderWidth
         border.color: root.borderColor
         radius: root.buttonRadius
         opacity: (mouseArea.pressed ? 0.9 : 1)

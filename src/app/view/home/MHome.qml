@@ -8,6 +8,7 @@ import CustomComponents
 Page
 {
     id: root
+    property bool empty : true 
     
     background: Rectangle
     {
@@ -86,13 +87,14 @@ Page
                     fontColor: properties.colorBackground
                     fontBold: true
                     fontSize: 13
-                    imagePath: properties.iconPlus
+                    imagePath: properties.iconPlusWhite
                 }
             }
             
             MToolbar
             {
                 id: toolbar
+                visible: !root.empty
                 Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
@@ -105,6 +107,7 @@ Page
                 
                 Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.topMargin: 30
+                visible: !root.empty
                 columnSpacing: 64
                 rowSpacing: 48
                 columns: 0
@@ -120,9 +123,75 @@ Page
                 onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);
             }
             
+            Item
+            {
+                id: emptyBackground
+                Layout.preferredWidth: parent.width - contentLayout.rightMargin
+                Layout.preferredHeight: emptyBackgroundImage.implicitHeight
+                Layout.topMargin: 32
+                
+                
+                Image
+                {
+                    id: emptyBackgroundImage
+                    visible: root.empty
+                    source: properties.imageEmptyHomeBackground
+                    sourceSize.width: parent.width
+                    fillMode: Image.PreserveAspectFit
+                    
+                    ColumnLayout
+                    {
+                        id: inEmptyBackgroundLayout
+                        width: parent.width
+                        
+                        Image
+                        {
+                            id: fileSwiftImage
+                            Layout.preferredWidth: 250
+                            Layout.preferredHeight: 135
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.topMargin: 225
+                            source: properties.imageFileSwift
+                        }
+                        
+                        Label
+                        {
+                            id: addBooksQuestion
+                            Layout.preferredWidth: 250
+                            Layout.alignment: Qt.AlignHCenter
+                            text: "Quiet empty here, what about importing your first book?"
+                            horizontalAlignment: Text.AlignHCenter
+                            font.pointSize: 14
+                            font.family: properties.defaultFontFamily
+                            font.weight: Font.DemiBold
+                            color: properties.colorLightText3
+                            wrapMode: Text.WordWrap
+                        }
+                        
+                        MButton
+                        {
+                            id: emptyAddBooksButton
+                            Layout.preferredWidth: 134
+                            Layout.preferredHeight: 42
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.topMargin: 20
+                            backgroundColor: properties.colorLightPurple
+                            borderColor: properties.colorMediumPurple
+                            textContent: "Add book"
+                            fontColor: properties.colorNeonBlue
+                            fontBold: true
+                            fontSize: 13.5
+                            imagePath: properties.iconPlusBlack
+                            imageSize: 16
+                        }
+                    }
+                }
+            }
+            
             MIndexBar
             {
                 id: indexBar
+                visible: !root.empty
                 Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.topMargin: 50
             }

@@ -12,12 +12,15 @@
         <file>resources/images/arrow_hallow_right_icon.svg</file>
         <file>resources/images/dots_icon.svg</file>
         <file>resources/images/book_cover.png</file>
-        <file>resources/images/plus_icon.svg</file>
         <file>resources/images/filter_icon.svg</file>
         <file>resources/images/arrow_filled_down_icon.svg</file>
         <file>resources/images/tag_icon.svg</file>
         <file>resources/images/search_icon.svg</file>
         <file>resources/images/black_right_icon.svg</file>
+        <file>resources/images/empty_home_background.svg</file>
+        <file>resources/images/file_swift.svg</file>
+        <file>resources/images/plus_black_icon.svg</file>
+        <file>resources/images/plus_white_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
