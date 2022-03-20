@@ -7,7 +7,6 @@ import CustomComponents
 FocusScope
 {
     id: root
-    property bool visibility : true
     signal clicked
     
     implicitWidth: 1713
@@ -17,7 +16,6 @@ FocusScope
     Image
     {
         id: emptyBackgroundImage
-        visible: root.visibility
         source: properties.imageEmptyHomeBackground
         sourceSize.width: parent.width
         fillMode: Image.PreserveAspectFit
@@ -70,7 +68,6 @@ FocusScope
                 
                 onClicked:
                 {
-                    root.visibility = false;
                     root.clicked();
                 }
             }

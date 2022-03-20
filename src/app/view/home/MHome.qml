@@ -126,9 +126,9 @@ Page
             MEmptyScreenContent
             {
                 id: emptyScreenContent
+                visible: root.empty
                 Layout.preferredWidth: parent.width - contentLayout.rightMargin
                 Layout.topMargin: 32
-                visibility: root.empty
                 
                 onClicked: root.empty = false
             }
