@@ -176,6 +176,7 @@ Page
                             Layout.alignment: Qt.AlignHCenter
                             Layout.topMargin: 20
                             backgroundColor: properties.colorLightPurple
+                            backgroundOpacityOnPressed: 0.75
                             borderColor: properties.colorMediumPurple
                             textContent: "Add book"
                             fontColor: properties.colorNeonBlue
@@ -183,6 +184,8 @@ Page
                             fontSize: 13.5
                             imagePath: properties.iconPlusBlack
                             imageSize: 16
+                            
+                            onClicked: root.empty = false
                         }
                     }
                 }

@@ -17,6 +17,7 @@ FocusScope
     property string imagePath : ""
     property int imageSpacing : 8
     property int imageSize : 15
+    property double backgroundOpacityOnPressed: 0.9
     
     implicitWidth: 100
     implicitHeight: 30
@@ -33,7 +34,7 @@ FocusScope
         border.width: root.borderWidth
         border.color: root.borderColor
         radius: root.buttonRadius
-        opacity: (mouseArea.pressed ? 0.9 : 1)
+        opacity: (mouseArea.pressed ? root.backgroundOpacityOnPressed : 1)
         
         RowLayout
         {
