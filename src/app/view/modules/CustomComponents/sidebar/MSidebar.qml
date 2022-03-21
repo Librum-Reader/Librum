@@ -212,11 +212,26 @@ FocusScope
                 color: properties.colorSidebarSeparator
             }
             
+            MProfilePopup
+            {
+                id: profilePopup
+                x: 12
+                y: root.height - 54 - implicitHeight
+            }
+            
             MProfileBox
             {
                 id: profileBox
                 Layout.alignment: Qt.AlignBottom
                 Layout.topMargin: 2
+                
+                onClicked:
+                {
+                    if(profilePopup.opened)
+                        profilePopup.close();
+                    else
+                        profilePopup.open();
+                }
             }
         }
     }

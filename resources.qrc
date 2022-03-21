@@ -17,10 +17,13 @@
         <file>resources/images/tag_icon.svg</file>
         <file>resources/images/search_icon.svg</file>
         <file>resources/images/black_right_icon.svg</file>
-        <file>resources/images/empty_home_background.svg</file>
+        <file>resources/images/empty_profile_background.svg</file>
         <file>resources/images/file_swift.svg</file>
         <file>resources/images/plus_black_icon.svg</file>
         <file>resources/images/plus_white_icon.svg</file>
+        <file>resources/images/log_out_icon.svg</file>
+        <file>resources/images/sync_icon.svg</file>
+        <file>resources/images/empty_home_background.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -59,5 +62,6 @@
         <file>src/app/view/modules/CustomComponents/indexbar/MContentRect.qml</file>
         <file>src/app/view/modules/CustomComponents/indexbar/MNavigationArrow.qml</file>
         <file>src/app/view/home/MEmptyScreenContent.qml</file>
+        <file>src/app/view/modules/CustomComponents/MProfilePopup.qml</file>
     </qresource>
 </RCC>

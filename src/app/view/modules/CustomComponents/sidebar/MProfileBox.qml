@@ -9,6 +9,7 @@ FocusScope
     id: root
     property int arrowRotation : 0
     property string initialLetters : "DL"
+    signal clicked
     
     implicitWidth: closedWidth
     implicitHeight: 60
@@ -46,6 +47,13 @@ FocusScope
                     font.bold: true
                     font.family: properties.defaultFontFamily
                     color: properties.colorBrightText
+                }
+                
+                MouseArea
+                {
+                    anchors.fill: parent
+                    
+                    onClicked: root.clicked()
                 }
             }
             
