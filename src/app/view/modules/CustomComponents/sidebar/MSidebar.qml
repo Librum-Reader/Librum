@@ -17,6 +17,7 @@ FocusScope
     implicitWidth: closedWidth
     implicitHeight: Window.height
     
+    
     Rectangle
     {
         id: container

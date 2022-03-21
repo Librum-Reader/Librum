@@ -63,5 +63,6 @@
         <file>src/app/view/modules/CustomComponents/indexbar/MNavigationArrow.qml</file>
         <file>src/app/view/home/MEmptyScreenContent.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopup.qml</file>
+        <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopupItem.qml</file>
     </qresource>
 </RCC>

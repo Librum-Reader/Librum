@@ -18,82 +18,65 @@ Popup
         antialiasing: true
     }
     
+    
+    MouseArea
+    {
+        id: closeManagement
+        anchors.fill: parent
+        hoverEnabled: true
+        
+        onContainsMouseChanged:
+        {
+            if(!containsMouse)
+                root.close();
+        }
+    }
+    
+    
     ColumnLayout
     {
         id: layout
+        width: parent.width
         
-        RowLayout
+        
+        MProfilePopupItem
         {
-            id: syncColumn
+            Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 18
-            
-            Image
-            {
-                id: syncIcon
-                source: properties.iconSync
-                fillMode: Image.PreserveAspectFit
-                sourceSize.width: 16
-            }
-            
-            Label
-            {
-                Layout.leftMargin: 9
-                text: "Sync"
-                color: properties.colorLightText3
-                font.family: properties.defaultFontFamily
-                font.pointSize: 10.5
-                font.weight: Font.Medium
-            }
+            imagePath: properties.iconSync
+            textContent: "Sync"
+            imageWidth: 16
+            textSpacing: 9
         }
         
-        RowLayout
+        
+        MProfilePopupItem
         {
-            id: profileColumn
+            Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 16
-            
-            Image
-            {
-                id: profileIcon
-                source: properties.iconEmptyProfile
-                fillMode: Image.PreserveAspectFit
-                sourceSize.width: 19
-            }
-            
-            Label
-            {
-                Layout.leftMargin: 8
-                text: "Manage Profile"
-                color: properties.colorLightText3
-                font.family: properties.defaultFontFamily
-                font.pointSize: 10.5
-                font.weight: Font.Medium
-            }
+            imagePath: properties.iconEmptyProfile
+            textContent: "Manage Profile"
+            imageWidth: 19
+            textSpacing: 8
         }
         
-        RowLayout
+        
+        MProfilePopupItem
         {
-            id: logoutColumn
+            Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 15
+            imagePath: properties.iconLogout
+            textContent: "Logout"
+            imageWidth: 20
+            textSpacing: 8
             
-            Image
+            onClicked:
             {
-                id: logoutIcon
-                source: properties.iconLogout
-                fillMode: Image.PreserveAspectFit
-                sourceSize.width: 20
-            }
-            
-            Label
-            {
-                Layout.leftMargin: 8
-                text: "Logout"
-                color: properties.colorLightText3
-                font.family: properties.defaultFontFamily
-                font.pointSize: 10.5
-                font.weight: Font.Medium
+                root.close();
+                loadPage("LoginPage");
             }
         }
     }
