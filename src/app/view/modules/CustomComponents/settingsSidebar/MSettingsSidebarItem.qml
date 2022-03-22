@@ -14,6 +14,7 @@ FocusScope
     property string textContent : "<Text here>"
     property string defaultIcon : "<icon here>"
     property string selectedIcon : "<icon here>"
+    signal clicked
     
     implicitWidth: 235
     implicitHeight: 32
@@ -39,7 +40,7 @@ FocusScope
                 Layout.leftMargin: root.imageLeftMargin
                 source: (root.selected ? root.selectedIcon : root.defaultIcon)
                 fillMode: Image.PreserveAspectFit
-                sourceSize.width: root.imageWidth
+                sourceSize.width: (root.selected ? root.imageWidth + 1 : root.imageWidth)
             }
             
             Label
@@ -49,7 +50,7 @@ FocusScope
                 Layout.leftMargin: root.labelLeftMargin
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
-                color: (root.selected ? "#271FE0" : properties.colorBaseText)
+                color: (root.selected ? properties.colorBasePurple : properties.colorBaseText)
                 font.pointSize: 13
                 font.family: properties.defaultFontFamily
                 font.weight: (root.selected ? Font.DemiBold : Font.Normal)
@@ -63,8 +64,15 @@ FocusScope
                 visible: root.selected
                 Layout.preferredWidth: 2
                 Layout.preferredHeight: parent.height
-                color: "#271FE0"
+                color: properties.colorBasePurple
             }
+        }
+       
+        MouseArea
+        {
+            anchors.fill: parent
+            
+            onClicked: root.clicked()
         }
     }
 }

@@ -33,6 +33,13 @@
         <file>resources/images/settings/account_gray.svg</file>
         <file>resources/images/settings/about_gray.svg</file>
         <file>resources/images/settings/about_purple.svg</file>
+        <file>resources/images/settings/account_purple.svg</file>
+        <file>resources/images/settings/appearance_purple.svg</file>
+        <file>resources/images/settings/settings_purple.svg</file>
+        <file>resources/images/settings/shortcuts_purple.svg</file>
+        <file>resources/images/settings/storage_purple.svg</file>
+        <file>resources/images/settings/support_us_purple.svg</file>
+        <file>resources/images/settings/updates_purple.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -75,5 +82,6 @@
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopupItem.qml</file>
         <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebar.qml</file>
         <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebarItem.qml</file>
+        <file>src/app/view/settings/MAboutPage.qml</file>
     </qresource>
 </RCC>

@@ -21,7 +21,10 @@ FocusScope
     ColumnLayout
     {
         id: layout
+        property MSettingsSidebarItem current : aboutItem
+        
         spacing: 0
+        
         
         Label
         {
@@ -70,6 +73,8 @@ FocusScope
             textContent: "About"
             defaultIcon: properties.iconSettingsAboutGray
             selectedIcon: properties.iconSettingsAboutPurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -84,6 +89,9 @@ FocusScope
             labelLeftMargin: 8
             textContent: "Appearance"
             defaultIcon: properties.iconSettingsAppearanceGray
+            selectedIcon: properties.iconSettingsAppearancePurple            
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -98,6 +106,9 @@ FocusScope
             labelLeftMargin: 9
             textContent: "Shortcuts"
             defaultIcon: properties.iconSettingsShortcutsGray
+            selectedIcon: properties.iconSettingsShortcutsPurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -112,6 +123,9 @@ FocusScope
             labelLeftMargin: 10
             textContent: "Updates"
             defaultIcon: properties.iconSettingsUpdatesGray
+            selectedIcon: properties.iconSettingsUpdatesPurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -126,6 +140,9 @@ FocusScope
             labelLeftMargin: 8
             textContent: "Advanced Settings"
             defaultIcon: properties.iconSettingsSettingsGray
+            selectedIcon: properties.iconSettingsSettingsPurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         
@@ -145,14 +162,17 @@ FocusScope
             id: accountItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
-            Layout.topMargin: 14
+            Layout.topMargin: 12
             Layout.leftMargin: 1
             imageLeftMargin: 25
-            imageWidth: 14
+            imageWidth: 13
             labelTopMargin: 2
-            labelLeftMargin: 12
+            labelLeftMargin: 13
             textContent: "Account"
             defaultIcon: properties.iconSettingsAccountGray
+            selectedIcon: properties.iconSettingsAccountPurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -167,6 +187,9 @@ FocusScope
             labelLeftMargin: 11
             textContent: "Storage"
             defaultIcon: properties.iconSettingsStorageGray
+            selectedIcon: properties.iconSettingsStoragePurple
+            
+            onClicked: layout.changeSelected(this)
         }
         
         MSettingsSidebarItem
@@ -181,6 +204,17 @@ FocusScope
             labelLeftMargin: 8
             textContent: "Support us"
             defaultIcon: properties.iconSettingsSupportUsGray
+            selectedIcon: properties.iconSettingsSupportUsPurple
+            
+            onClicked: layout.changeSelected(this)
+        }
+        
+        
+        function changeSelected(newItem)
+        {
+            current.selected = false;
+            current = newItem;
+            current.selected = true;
         }
     }
 }

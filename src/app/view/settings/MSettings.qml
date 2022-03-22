@@ -7,7 +7,6 @@ import CustomComponents
 Page
 {
     id: root
-    
     background: Rectangle
     {
         anchors.fill: parent
@@ -15,10 +14,28 @@ Page
     }
     
     
-    MSettingsSidebar
+    RowLayout
     {
-        height: parent.height
-        anchors.left: parent.left
-        anchors.top: parent.top
+        id: layout
+        anchors.fill: parent
+        
+        
+        MSettingsSidebar
+        {
+            id: sidebar
+            height: parent.height
+        }
+        
+//        StackView
+//        {
+//            id: pageManager
+//            Layout.fillWidth: true
+//            Layout.fillHeight: true
+//            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+//            initialItem: aboutPage
+//        }
     }
+    
+    
+//    Component { id: aboutPage; MAboutPage{} }
 }

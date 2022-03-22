@@ -60,6 +60,13 @@ Item
     property string iconSettingsSupportUsGray : "/resources/images/settings/support_us_gray.svg"
     property string iconSettingsUpdatesGray : "/resources/images/settings/updates_gray.svg"
     property string iconSettingsAboutPurple : "/resources/images/settings/about_purple.svg"
+    property string iconSettingsShortcutsPurple : "/resources/images/settings/shortcuts_purple.svg"    
+    property string iconSettingsAccountPurple : "/resources/images/settings/account_purple.svg"
+    property string iconSettingsAppearancePurple : "/resources/images/settings/appearance_purple.svg"
+    property string iconSettingsSettingsPurple : "/resources/images/settings/settings_purple.svg"
+    property string iconSettingsStoragePurple : "/resources/images/settings/storage_purple.svg"
+    property string iconSettingsSupportUsPurple : "/resources/images/settings/support_us_purple.svg"
+    property string iconSettingsUpdatesPurple : "/resources/images/settings/updates_purple.svg"
     
     property string imageBookCover: "/resources/images/book_cover.png"
     property string imageEmptyHomeBackground : "/resources/images/empty_home_background.svg"
