@@ -74,5 +74,6 @@
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopup.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopupItem.qml</file>
         <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebar.qml</file>
+        <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebarItem.qml</file>
     </qresource>
 </RCC>

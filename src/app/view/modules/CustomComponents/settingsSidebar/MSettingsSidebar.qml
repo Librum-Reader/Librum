@@ -55,240 +55,77 @@ FocusScope
             color: properties.colorLightText3
         }
         
-        Rectangle
+        
+        MSettingsSidebarItem
         {
-            id: about
+            id: aboutItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 14
             Layout.leftMargin: 1
-            color: "#F0F0FF"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 26
-                    source: properties.iconSettingsAboutPurple
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 14
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 12
-                    verticalAlignment: Text.AlignVCenter
-                    text: "About"
-                    color: "#271FE0"
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.DemiBold
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            selected: true
+            imageLeftMargin: 26
+            imageWidth: 14
+            labelLeftMargin: 12
+            textContent: "About"
+            defaultIcon: properties.iconSettingsAboutGray
+            selectedIcon: properties.iconSettingsAboutPurple
         }
         
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: appearance
+            id: appearanceItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 25
-                    source: properties.iconSettingsAppearanceGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 18
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 8
-                    verticalAlignment: Text.AlignVCenter
-                    text: "Appearance"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 25
+            imageWidth: 18
+            labelLeftMargin: 8
+            textContent: "Appearance"
+            defaultIcon: properties.iconSettingsAppearanceGray
         }
         
-        
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: shortcuts
+            id: shortcutsItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 26
-                    source: properties.iconSettingsShortcutsGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 16
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 9
-                    verticalAlignment: Text.AlignVCenter
-                    text: "Shortcuts"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 26
+            imageWidth: 16
+            labelLeftMargin: 9
+            textContent: "Shortcuts"
+            defaultIcon: properties.iconSettingsShortcutsGray
         }
         
-        
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: updates
+            id: updatesItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 25
-                    source: properties.iconSettingsUpdatesGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 16
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 10
-                    verticalAlignment: Text.AlignVCenter
-                    text: "Updates"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 25
+            imageWidth: 16
+            labelLeftMargin: 10
+            textContent: "Updates"
+            defaultIcon: properties.iconSettingsUpdatesGray
         }
         
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: advancedSettings
+            id: advancedSettingsItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 24
-                    source: properties.iconSettingsSettingsGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 19
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 8
-                    verticalAlignment: Text.AlignVCenter
-                    text: "Advanced Settings"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 24
+            imageWidth: 19
+            labelLeftMargin: 8
+            textContent: "Advanced Settings"
+            defaultIcon: properties.iconSettingsSettingsGray
         }
         
         
@@ -303,146 +140,47 @@ FocusScope
             color: properties.colorLightText3
         }
         
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: account
+            id: accountItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 14
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 25
-                    source: properties.iconSettingsAccountGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 14
-                }
-                
-                Label
-                {
-                    Layout.topMargin: 2
-                    Layout.leftMargin: 12
-                    verticalAlignment: Text.AlignBottom
-                    text: "Account"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 25
+            imageWidth: 14
+            labelTopMargin: 2
+            labelLeftMargin: 12
+            textContent: "Account"
+            defaultIcon: properties.iconSettingsAccountGray
         }
         
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: storage
+            id: storageItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 26
-                    source: properties.iconSettingsStorageGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 14
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 11
-                    verticalAlignment: Text.AlignBottom
-                    text: "Storage"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 26
+            imageWidth: 14
+            labelLeftMargin: 11
+            textContent: "Storage"
+            defaultIcon: properties.iconSettingsStorageGray
         }
         
-        Rectangle
+        MSettingsSidebarItem
         {
-            id: supportUs
+            id: supportUsItem
             Layout.preferredHeight: 32
             Layout.preferredWidth: root.width - 2
             Layout.topMargin: 5
             Layout.leftMargin: 1
-            color: "transparent"
-            
-            RowLayout
-            {
-                height: parent.height
-                width: parent.width
-                spacing: 0
-                
-                
-                Image
-                {
-                    Layout.leftMargin: 25
-                    source: properties.iconSettingsSupportUsGray
-                    fillMode: Image.PreserveAspectFit
-                    sourceSize.width: 18
-                }
-                
-                Label
-                {
-                    Layout.leftMargin: 8
-                    verticalAlignment: Text.AlignBottom
-                    text: "Support us"
-                    color: properties.colorBaseText
-                    font.pointSize: 13.3
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
-                }
-                
-                Item { Layout.fillWidth: true }
-                
-                Rectangle
-                {
-                    visible: false
-                    Layout.preferredWidth: 2
-                    Layout.preferredHeight: parent.height
-                    color: "#271FE0"
-                }
-            }
+            imageLeftMargin: 25
+            imageWidth: 18
+            labelLeftMargin: 8
+            textContent: "Support us"
+            defaultIcon: properties.iconSettingsSupportUsGray
         }
     }
 }
