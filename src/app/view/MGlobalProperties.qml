@@ -26,7 +26,9 @@ Item
     property color loginContentBackground : "white"
     property color pagesBackground: "#F6F6F9"
     
+    
     property string defaultFontFamily : "SF Pro Display"
+    
     
     property string iconHome : "/resources/images/home_icon.svg"
     property string iconDownload : "/resources/images/download_icon.svg"
@@ -48,6 +50,16 @@ Item
     property string iconSync : "/resources/images/sync_icon.svg"
     property string iconEmptyProfile : "/resources/images/empty_profile_background.svg"
     property string iconLogout : "/resources/images/log_out_icon.svg"
+    
+    property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
+    property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    
+    property string iconSettingsAccountGray : "/resources/images/settings/account_gray.svg"
+    property string iconSettingsAppearanceGray : "/resources/images/settings/appearance_gray.svg"
+    property string iconSettingsSettingsGray : "/resources/images/settings/settings_gray.svg"
+    property string iconSettingsStorageGray : "/resources/images/settings/storage_gray.svg"
+    property string iconSettingsSupportUsGray : "/resources/images/settings/support_us_gray.svg"
+    property string iconSettingsUpdatesGray : "/resources/images/settings/updates_gray.svg"
+    property string iconSettingsAboutPurple : "/resources/images/settings/about_purple.svg"
     
     property string imageBookCover: "/resources/images/book_cover.png"
     property string imageEmptyHomeBackground : "/resources/images/empty_home_background.svg"

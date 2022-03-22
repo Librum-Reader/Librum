@@ -1,18 +1,24 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-
+import CustomComponents
 
 
 Page
 {
     id: root
     
-    Label
+    background: Rectangle
     {
-        anchors.centerIn: parent
-        text: "Settings"
-        font.pointSize: 22
-        font.bold: true
+        anchors.fill: parent
+        color: properties.pagesBackground
+    }
+    
+    
+    MSettingsSidebar
+    {
+        height: parent.height
+        anchors.left: parent.left
+        anchors.top: parent.top
     }
 }

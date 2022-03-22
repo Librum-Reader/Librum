@@ -24,6 +24,15 @@
         <file>resources/images/log_out_icon.svg</file>
         <file>resources/images/sync_icon.svg</file>
         <file>resources/images/empty_home_background.svg</file>
+        <file>resources/images/settings/storage_gray.svg</file>
+        <file>resources/images/settings/updates_gray.svg</file>
+        <file>resources/images/settings/support_us_gray.svg</file>
+        <file>resources/images/settings/shortcuts_gray.svg</file>
+        <file>resources/images/settings/settings_gray.svg</file>
+        <file>resources/images/settings/appearance_gray.svg</file>
+        <file>resources/images/settings/account_gray.svg</file>
+        <file>resources/images/settings/about_gray.svg</file>
+        <file>resources/images/settings/about_purple.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -64,5 +73,6 @@
         <file>src/app/view/home/MEmptyScreenContent.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopup.qml</file>
         <file>src/app/view/modules/CustomComponents/sidebar/MProfilePopupItem.qml</file>
+        <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebar.qml</file>
     </qresource>
 </RCC>
