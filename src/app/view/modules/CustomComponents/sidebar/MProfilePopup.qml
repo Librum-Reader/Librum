@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import librum.extensions.sidebar
 
 
 Popup
@@ -73,11 +74,14 @@ Popup
             imageWidth: 20
             textSpacing: 8
             
-            onClicked:
-            {
-                root.close();
-                loadPage("LoginPage");
-            }
+            onClicked: root.logout()
         }
+    }
+    
+    function logout()
+    {
+        resetSidebar();
+        root.close();
+        loadPage("LoginPage");
     }
 }

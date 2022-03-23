@@ -12,6 +12,7 @@ FocusScope
     property int  openedWidth : 232
     property int  currentWidth : width
     property bool isOpened    : false
+    property MSidebarItem defaultTab : homeButton
     property MSidebarItem selectedTab : homeButton
     
     implicitWidth: closedWidth
@@ -235,5 +236,25 @@ FocusScope
                 }
             }
         }
+    }
+    
+    function openSidebar()
+    {
+        animations.openAnimation.start();
+        selectedTab.openAnimation.start();
+        SidebarState.currentState = SidebarState.Opened;
+    }
+    
+    function closeSidebar()
+    {
+        animations.closeAnimation.start();
+        selectedTab.closeAnimation.start();
+        SidebarState.currentState = SidebarState.Closed;
+    }
+    
+    function resetSidebar()
+    {
+        closeSidebar();
+        root.selectedTab = root.defaultTab;
     }
 }

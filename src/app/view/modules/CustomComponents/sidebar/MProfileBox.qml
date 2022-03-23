@@ -85,17 +85,9 @@ FocusScope
                     onClicked:
                     {
                         if(SidebarState.currentState === SidebarState.Opened)
-                        {
-                            animations.closeAnimation.start();
-                            selectedTab.closeAnimation.start();
-                            SidebarState.currentState = SidebarState.Closed;
-                        }
+                            closeSidebar();
                         else
-                        {
-                            animations.openAnimation.start();
-                            selectedTab.openAnimation.start();
-                            SidebarState.currentState = SidebarState.Opened;
-                        }
+                            openSidebar();
                     }
                 }
             }
