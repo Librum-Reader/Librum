@@ -16,14 +16,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
-# build options
+# Build options
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Og")
 set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 
 
 
-# option
+# Options
 option(BUILD_TESTS ON)
 
 
@@ -37,7 +37,7 @@ add_subdirectory(src/app/controller)
 
 
 
-# build
+# Building
 qt_add_executable(appLibrum
     src/app/main.cpp
     resources.qrc
@@ -59,7 +59,7 @@ target_include_directories(appLibrum
     )
 
 
-# tests
+# Tests
 if(BUILD_TESTS)
     add_subdirectory(tests/)
 endif()
