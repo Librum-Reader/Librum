@@ -78,7 +78,7 @@ Page
                 Label
                 {
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 20
+                    Layout.topMargin: 26
                     text: "The newest version is"
                     color: properties.colorLightText3
                     font.pointSize: 14.5
@@ -101,7 +101,7 @@ Page
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 34
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 18
+                    Layout.topMargin: 14
                     backgroundColor: properties.colorLightGrayBackground
                     imagePath: properties.iconArrowDownHallow
                     imageSize: 14
@@ -111,12 +111,13 @@ Page
                     fontBold: true
                     fontColor: properties.colorBaseText
                     borderColor: properties.colorLightBorder
+                    backgroundOpacityOnPressed: 0.8
                 }
                 
                 Label
                 {
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 25
+                    Layout.topMargin: 28
                     text: "See the exact changes on our website at:"
                     color: properties.colorLightText3
                     font.pointSize: 13.5
