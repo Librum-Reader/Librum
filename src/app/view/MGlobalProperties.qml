@@ -28,6 +28,7 @@ Item
     property color colorSidebarSeparator  : "#EAEAEF"
     property color loginWindowBackground  : "#efefef"
     property color loginContentBackground : "white"
+    property color colorLightGrayBackground : "#EAEAEF"
     property color pagesBackground: "#F6F6F9"
     
     
@@ -58,6 +59,7 @@ Item
     property string iconHeartGray : "/resources/images/heart_gray_icon.svg"
     property string iconSeed : "/resources/images/seed_icon.svg"
     property string iconCoffee : "/resources/images/coffee_icon.svg"
+    property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    
@@ -81,6 +83,7 @@ Item
     property string imageFileSwift : "/resources/images/file_swift.svg"
     
     property string currentVersion   : "v0.0.1 - alpha"
+    property string newestVersion    : "v1.14.3"
     property string currentQtVersion : "v6.2.2"
     property string companyName    : "Etovex"
     property string companyWebsite : "www.etovex.com"
