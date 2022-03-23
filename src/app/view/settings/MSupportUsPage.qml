@@ -38,7 +38,7 @@ Page
         
         Rectangle
         {
-            id: details
+            id: container
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 500
             Layout.topMargin: 32
@@ -68,13 +68,14 @@ Page
                 
                 RowLayout
                 {
+                    id: teamText
                     spacing: 0
                     
                     
                     Label
                     {
                         Layout.leftMargin: layout.inRectLeftMargin
-                        Layout.topMargin: 14
+                        Layout.topMargin: 15
                         text: "We are a small team of freelancing developers creating free apps for the community, we love\n" +
                               "working on fun projects, supporting our community and trying to make the world a better place."
                         color: properties.colorLightText3
@@ -96,8 +97,9 @@ Page
                 
                 Label
                 {
+                    id: workText
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 16
+                    Layout.topMargin: 18
                     text: "We are working in our own name, so we are not getting payed in any way."
                     color: properties.colorLightText3
                     font.pointSize: 14
@@ -106,7 +108,10 @@ Page
                 
                 RowLayout
                 {
+                    id: supportText
                     spacing: 0
+                    
+                    
                     Label
                     {
                         Layout.leftMargin: layout.inRectLeftMargin
@@ -130,8 +135,9 @@ Page
                 
                 Label
                 {
+                    id: coffeeText
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 30
+                    Layout.topMargin: 36
                     text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
                     color: properties.colorLightText3
                     font.pointSize: 14
@@ -140,19 +146,47 @@ Page
                 
                 MButton
                 {
-                    Layout.preferredWidth: 162
-                    Layout.preferredHeight: 34
-                    Layout.topMargin: 25
+                    id: coffeeButton
+                    Layout.preferredWidth: 168
+                    Layout.preferredHeight: 38
+                    Layout.topMargin: 18
                     Layout.leftMargin: layout.inRectLeftMargin
                     backgroundColor: properties.colorCoffeeBrown
                     borderColor: "transparent"
                     imagePath: properties.iconCoffee
-                    imageSize: 19
+                    imageSize: 20
                     imageSpacing: 10
                     textContent: "Buy us a coffee"
-                    fontSize: 11.5
+                    fontSize: 11.9
                     fontColor: properties.colorBaseTitle
                     buttonRadius: 4
+                }
+                
+                RowLayout
+                {
+                    id: heartColumn
+                    Layout.topMargin: 74
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    spacing: 0
+                    
+                    Image
+                    {
+                        id: heartImage
+                        Layout.alignment: Qt.AlignBottom
+                        source: properties.iconHeartGray
+                        sourceSize.width: 80
+                        fillMode: Image.PreserveAspectFit
+                    }
+                    
+                    Label
+                    {
+                        id: leaveText
+                        Layout.leftMargin: 16
+                        text: "If you dont, we hope you enjoy our app and wish you the best."
+                        color: properties.colorLightText3
+                        font.pointSize: 14
+                        font.family: properties.defaultFontFamily
+                    }
                 }
             }
         }
