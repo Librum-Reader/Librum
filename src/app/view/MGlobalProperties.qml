@@ -13,6 +13,7 @@ Item
     property color colorLightGreen   : "#EAFBE7"
     property color colorLightGreen2  : "#C6F0C2"
     property color colorMediumGreen  : "#5CB176"
+    property color colorCoffeeBrown  : "#E79535"
     property color colorBaseText     : "#32324D"
     property color colorBaseTitle    : "#4A4A6A"
     property color colorMediumText   : "#505057"
@@ -55,6 +56,8 @@ Item
     property string iconLogout : "/resources/images/log_out_icon.svg"
     property string iconCheckGreen : "/resources/images/check_green_icon.svg"
     property string iconHeartGray : "/resources/images/heart_gray_icon.svg"
+    property string iconSeed : "/resources/images/seed_icon.svg"
+    property string iconCoffee : "/resources/images/coffee_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    

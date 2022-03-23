@@ -42,6 +42,8 @@
         <file>resources/images/settings/updates_purple.svg</file>
         <file>resources/images/check_green_icon.svg</file>
         <file>resources/images/heart_gray_icon.svg</file>
+        <file>resources/images/seed_icon.svg</file>
+        <file>resources/images/coffee_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
