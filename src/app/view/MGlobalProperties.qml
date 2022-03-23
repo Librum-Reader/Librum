@@ -10,6 +10,9 @@ Item
     property color colorMediumPurple : "#D9D8FF"
     property color colorLightPurple  : "#F0F0FF"
     property color colorNeonBlue     : "#4945FF"
+    property color colorLightGreen   : "#EAFBE7"
+    property color colorLightGreen2  : "#C6F0C2"
+    property color colorMediumGreen  : "#5CB176"
     property color colorBaseText     : "#32324D"
     property color colorBaseTitle    : "#4A4A6A"
     property color colorMediumText   : "#505057"
@@ -50,6 +53,8 @@ Item
     property string iconSync : "/resources/images/sync_icon.svg"
     property string iconEmptyProfile : "/resources/images/empty_profile_background.svg"
     property string iconLogout : "/resources/images/log_out_icon.svg"
+    property string iconCheckGreen : "/resources/images/check_green_icon.svg"
+    property string iconHeartGray : "/resources/images/heart_gray_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    
@@ -68,7 +73,13 @@ Item
     property string iconSettingsSupportUsPurple : "/resources/images/settings/support_us_purple.svg"
     property string iconSettingsUpdatesPurple : "/resources/images/settings/updates_purple.svg"
     
-    property string imageBookCover: "/resources/images/book_cover.png"
+    property string imageBookCover : "/resources/images/book_cover.png"
     property string imageEmptyHomeBackground : "/resources/images/empty_home_background.svg"
-    property string imageFileSwift: "/resources/images/file_swift.svg"
+    property string imageFileSwift : "/resources/images/file_swift.svg"
+    
+    property string currentVersion   : "v0.0.1 - alpha"
+    property string currentQtVersion : "v6.2.2"
+    property string companyName    : "Etovex"
+    property string companyWebsite : "www.etovex.com"
+    property string companyEmail   : "support@etovex.com"
 }

@@ -1,5 +1,5 @@
 - Good resize management of book grid
 
 - Refactoring after everything is working as it should
-    - Fix file (including picture) naming
     - Fix colors
+    - Fix sidebar icons

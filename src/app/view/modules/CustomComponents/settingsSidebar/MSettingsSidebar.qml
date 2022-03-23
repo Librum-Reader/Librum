@@ -7,7 +7,7 @@ FocusScope
 {
     id: root
     implicitWidth: 238
-    implicitHeight: Screen.height
+    implicitHeight: Window.height
     
     Rectangle
     {
@@ -74,7 +74,11 @@ FocusScope
             defaultIcon: properties.iconSettingsAboutGray
             selectedIcon: properties.iconSettingsAboutPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("AboutPage");
+            }
         }
         
         MSettingsSidebarItem
@@ -91,7 +95,11 @@ FocusScope
             defaultIcon: properties.iconSettingsAppearanceGray
             selectedIcon: properties.iconSettingsAppearancePurple            
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("AppearancePage");
+            }
         }
         
         MSettingsSidebarItem
@@ -108,7 +116,11 @@ FocusScope
             defaultIcon: properties.iconSettingsShortcutsGray
             selectedIcon: properties.iconSettingsShortcutsPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("ShortcutsPage");
+            }
         }
         
         MSettingsSidebarItem
@@ -125,7 +137,11 @@ FocusScope
             defaultIcon: properties.iconSettingsUpdatesGray
             selectedIcon: properties.iconSettingsUpdatesPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("UpdatesPage");
+            }
         }
         
         MSettingsSidebarItem
@@ -142,7 +158,11 @@ FocusScope
             defaultIcon: properties.iconSettingsSettingsGray
             selectedIcon: properties.iconSettingsSettingsPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("AdvancedSettingsPage");
+            }
         }
         
         
@@ -172,7 +192,11 @@ FocusScope
             defaultIcon: properties.iconSettingsAccountGray
             selectedIcon: properties.iconSettingsAccountPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("AccountPage");
+            }
         }
         
         MSettingsSidebarItem
@@ -189,7 +213,11 @@ FocusScope
             defaultIcon: properties.iconSettingsStorageGray
             selectedIcon: properties.iconSettingsStoragePurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("StoragePage");
+            }
         }
         
         MSettingsSidebarItem
@@ -206,7 +234,11 @@ FocusScope
             defaultIcon: properties.iconSettingsSupportUsGray
             selectedIcon: properties.iconSettingsSupportUsPurple
             
-            onClicked: layout.changeSelected(this)
+            onClicked:
+            {
+                layout.changeSelected(this);
+                loadSettingsPage("SupportUsPage");
+            }
         }
         
         

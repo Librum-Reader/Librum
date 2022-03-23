@@ -40,6 +40,8 @@
         <file>resources/images/settings/storage_purple.svg</file>
         <file>resources/images/settings/support_us_purple.svg</file>
         <file>resources/images/settings/updates_purple.svg</file>
+        <file>resources/images/check_green_icon.svg</file>
+        <file>resources/images/heart_gray_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -83,5 +85,12 @@
         <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebar.qml</file>
         <file>src/app/view/modules/CustomComponents/settingsSidebar/MSettingsSidebarItem.qml</file>
         <file>src/app/view/settings/MAboutPage.qml</file>
+        <file>src/app/view/settings/MAppearancePage.qml</file>
+        <file>src/app/view/settings/MShortcutsPage.qml</file>
+        <file>src/app/view/settings/MUpdatesPage.qml</file>
+        <file>src/app/view/settings/MAdvancedSettingsPage.qml</file>
+        <file>src/app/view/settings/MAccountPage.qml</file>
+        <file>src/app/view/settings/MStoragePage.qml</file>
+        <file>src/app/view/settings/MSupportUsPage.qml</file>
     </qresource>
 </RCC>
