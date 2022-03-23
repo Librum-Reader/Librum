@@ -169,8 +169,8 @@ FocusScope
                 id: addOnButton
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
-                imageWidth: 31
-                imageHeight: 31
+                imageWidth: 30
+                imageHeight: 30
                 imageSource: properties.iconAddOns
                 labelContent: "Add-ons"
                 selected: root.selectedTab == addOnButton
