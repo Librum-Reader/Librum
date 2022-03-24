@@ -149,7 +149,7 @@ Page
                     id: coffeeButton
                     Layout.preferredWidth: 168
                     Layout.preferredHeight: 38
-                    Layout.topMargin: 18
+                    Layout.topMargin: 10
                     Layout.leftMargin: layout.inRectLeftMargin
                     backgroundColor: properties.colorCoffeeBrown
                     borderColor: "transparent"
@@ -162,10 +162,24 @@ Page
                     buttonRadius: 4
                 }
                 
+                Label
+                {
+                    id: otherPaymentsText
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.topMargin: 32
+                    text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
+                          "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
+                          + properties.companyWebsite + "/dontations</font>"
+                    textFormat: Text.RichText
+                    color: properties.colorLightText3
+                    font.pointSize: 14
+                    font.family: properties.defaultFontFamily
+                }
+                
                 RowLayout
                 {
                     id: heartColumn
-                    Layout.topMargin: 74
+                    Layout.topMargin: 36
                     Layout.leftMargin: layout.inRectLeftMargin
                     spacing: 0
                     
