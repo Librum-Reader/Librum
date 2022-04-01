@@ -40,7 +40,7 @@ Page
         {
             id: container
             Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 500
+            Layout.preferredHeight: 532
             Layout.topMargin: 32
             Layout.leftMargin: layout.marginToLeft
             color: properties.colorBackground
@@ -166,7 +166,7 @@ Page
                 {
                     id: otherPaymentsText
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 32
+                    Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                           "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
                           + properties.companyWebsite + "/dontations</font>"
@@ -179,7 +179,7 @@ Page
                 RowLayout
                 {
                     id: heartColumn
-                    Layout.topMargin: 36
+                    Layout.topMargin: 48
                     Layout.leftMargin: layout.inRectLeftMargin
                     spacing: 0
                     

@@ -117,7 +117,7 @@ Page
                 Label
                 {
                     Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 28
+                    Layout.topMargin: 42
                     text: "See the exact changes on our website at:"
                     color: properties.colorLightText3
                     font.pointSize: 13.5
