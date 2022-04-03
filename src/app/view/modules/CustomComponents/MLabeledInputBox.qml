@@ -8,12 +8,12 @@ FocusScope
     id: root
     property alias text : inputField.text
     property int boxHeight : 40
-    property int boxWidth : 100
     property string placeholderContent : "placeholder"
-    property int inputFontSize : 12
     property color placeholderColor : "black"
+    property int inputFontSize : 12
     property string headerText : "Header here"
     property double headerFontSize : 10.5
+    property color headerFontColor : properties.colorBaseTitle
     property int headerToBoxSpacing : 2
     property color borderColor : properties.colorLightBorder
     property int borderWidth : 2
@@ -24,8 +24,8 @@ FocusScope
     property bool isError : false
     property bool autoFocus : false
     
-    implicitWidth: boxWidth
-    implicitHeight: label.implicitHeight + inputBox.height
+    implicitWidth: 100
+    implicitHeight: header.implicitHeight + inputBox.height
     
     
     ColumnLayout
@@ -36,13 +36,13 @@ FocusScope
         
         Label
         {
-            id: label
+            id: header
             width: parent.width
             text: root.headerText
             font.family: properties.defaultFontFamily
             font.pointSize: root.headerFontSize
             font.weight: Font.Medium
-            color: properties.colorBaseTitle
+            color: root.headerFontColor
         }
         
         Rectangle
@@ -77,7 +77,7 @@ FocusScope
                     background: Rectangle   
                     {
                         anchors.fill: parent
-                        radius: 4
+                        radius: 5
                         color: "transparent"
                     }
                     
