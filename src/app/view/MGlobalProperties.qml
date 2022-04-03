@@ -9,6 +9,7 @@ Item
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"
     property color colorLightPurple  : "#F0F0FF"
+    property color colorLightGray    : "#F6F6F9"
     property color colorNeonBlue     : "#4945FF"
     property color colorLightGreen   : "#EAFBE7"
     property color colorLightGreen2  : "#C6F0C2"
@@ -60,7 +61,8 @@ Item
     property string iconHeartGray : "/resources/images/heart_gray_icon.svg"
     property string iconSeed : "/resources/images/seed_icon.svg"
     property string iconCoffee : "/resources/images/coffee_icon.svg"
-    property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon"
+    property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon.svg"
+    property string iconAddImage : "/resources/images/add_image_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    

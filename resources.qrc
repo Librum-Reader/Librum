@@ -46,6 +46,7 @@
         <file>resources/images/arrow_down_hallow_icon.svg</file>
         <file>resources/images/check_long_icon.svg</file>
         <file>resources/images/check_white_icon.svg</file>
+        <file>resources/images/add_image_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>

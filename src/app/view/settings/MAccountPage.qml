@@ -74,67 +74,120 @@ Page
             antialiasing: true
             
             
-            ColumnLayout
+            RowLayout
             {
-                id: inDetailsLayout
+                id: profileLayout
                 spacing: 0
                 
                 
-                Label
+                ColumnLayout
                 {
-                    id: detailsTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 24
-                    text: "Profile"
-                    color: properties.colorBaseText
-                    font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
-                    font.weight: Font.DemiBold
+                    id: profileInputColumn
+                    spacing: 0
+                    
+                    
+                    Label
+                    {
+                        id: profileTitle
+                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.topMargin: 24
+                        text: "Profile"
+                        color: properties.colorBaseText
+                        font.pointSize: 16.5
+                        font.family: properties.defaultFontFamily
+                        font.weight: Font.DemiBold
+                    }
+                    
+                    MLabeledInputBox
+                    {
+                        id: firstNameInput
+                        Layout.preferredWidth: 699
+                        boxHeight: 40
+                        Layout.topMargin: 26
+                        Layout.leftMargin: layout.inRectLeftMargin
+                        headerText: "First name"
+                        text: "Kai"
+                        headerToBoxSpacing: 3
+                        inputFontSize: 13
+                        borderWidth: 1
+                        borderRadius: 4
+                    }
+                    
+                    MLabeledInputBox
+                    {
+                        id: lastNameInput
+                        Layout.preferredWidth: 699
+                        boxHeight: 40
+                        Layout.topMargin: 18
+                        Layout.leftMargin: layout.inRectLeftMargin
+                        headerText: "Last name"
+                        text: "Doe"
+                        headerToBoxSpacing: 3
+                        inputFontSize: 13
+                        borderWidth: 1
+                        borderRadius: 4
+                    }
+                    
+                    MLabeledInputBox
+                    {
+                        id: emailInput
+                        Layout.preferredWidth: 699
+                        boxHeight: 40
+                        Layout.topMargin: 18
+                        Layout.leftMargin: layout.inRectLeftMargin
+                        headerText: "Email"
+                        text: "Kaidoe@gmail.com"
+                        headerToBoxSpacing: 3
+                        inputFontSize: 13
+                        borderWidth: 1
+                        borderRadius: 4
+                    }
                 }
                 
-                MLabeledInputBox
+                Rectangle
                 {
-                    id: firstNameInput
-                    Layout.preferredWidth: 699
-                    boxHeight: 40
-                    Layout.topMargin: 26
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    headerText: "First name"
-                    text: "Kai"
-                    headerToBoxSpacing: 3
-                    inputFontSize: 13
-                    borderWidth: 1
-                    borderRadius: 4
-                }
-                
-                MLabeledInputBox
-                {
-                    id: lastNameInput
-                    Layout.preferredWidth: 699
-                    boxHeight: 40
-                    Layout.topMargin: 18
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    headerText: "Last name"
-                    text: "Doe"
-                    headerToBoxSpacing: 3
-                    inputFontSize: 13
-                    borderWidth: 1
-                    borderRadius: 4
-                }
-                
-                MLabeledInputBox
-                {
-                    id: emailInput
-                    Layout.preferredWidth: 699
-                    boxHeight: 40
-                    Layout.topMargin: 18
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    headerText: "Email"
-                    text: "Kaidoe@gmail.com"
-                    headerToBoxSpacing: 3
-                    inputFontSize: 13
-                    borderWidth: 1
-                    borderRadius: 4
+                    id: dropArea
+                    Layout.preferredWidth: 312
+                    Layout.preferredHeight: 190
+                    Layout.topMargin: firstNameInput.y + 24
+                    Layout.leftMargin: 32
+                    color: properties.colorLightGray
+                    border.color: properties.colorLightBorder
+                    radius: 4
+                    
+                    
+                    ColumnLayout
+                    {
+                        id: dropAreaLayout
+                        width: parent.width
+                        spacing: 10
+                        
+                        
+                        Image
+                        {
+                            id: dropAreaIcon
+                            Layout.alignment: Qt.AlignCenter
+                            Layout.topMargin: 50
+                            source: properties.iconAddImage
+                            sourceSize.width: 40
+                            fillMode: Image.PreserveAspectFit
+                        }
+                        
+                        Label
+                        {
+                            id: dropAreaText
+                            Layout.preferredWidth: 237
+                            Layout.alignment: Qt.AlignCenter
+                            text: "Click to select an image or drag and drop in this area"
+                            horizontalAlignment: Qt.AlignHCenter
+                            wrapMode: Text.WordWrap
+                            color: properties.colorLightText2
+                            font.pointSize: 12
+                            font.family: properties.defaultFontFamily
+                            font.weight: Font.DemiBold
+                            lineHeight: 0.9
+                        }
+                    }
                 }
             }
         }
