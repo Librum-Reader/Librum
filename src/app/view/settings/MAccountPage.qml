@@ -96,11 +96,45 @@ Page
                 {
                     id: firstNameInput
                     Layout.preferredWidth: 699
-                    Layout.preferredHeight: 57
-                    Layout.leftMargin: layout.marginToLeft
-                    text: "Kai"
+                    boxHeight: 40
+                    Layout.topMargin: 26
+                    Layout.leftMargin: layout.inRectLeftMargin
                     headerText: "First name"
-                    inputFontSize: 16
+                    text: "Kai"
+                    headerToBoxSpacing: 3
+                    inputFontSize: 13
+                    borderWidth: 1
+                    borderRadius: 4
+                }
+                
+                MLabeledInputBox
+                {
+                    id: lastNameInput
+                    Layout.preferredWidth: 699
+                    boxHeight: 40
+                    Layout.topMargin: 18
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    headerText: "Last name"
+                    text: "Doe"
+                    headerToBoxSpacing: 3
+                    inputFontSize: 13
+                    borderWidth: 1
+                    borderRadius: 4
+                }
+                
+                MLabeledInputBox
+                {
+                    id: emailInput
+                    Layout.preferredWidth: 699
+                    boxHeight: 40
+                    Layout.topMargin: 18
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    headerText: "Email"
+                    text: "Kaidoe@gmail.com"
+                    headerToBoxSpacing: 3
+                    inputFontSize: 13
+                    borderWidth: 1
+                    borderRadius: 4
                 }
             }
         }

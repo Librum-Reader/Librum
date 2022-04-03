@@ -88,7 +88,6 @@ Page
                         id: passwordInput
                         Layout.preferredWidth: parent.width
                         Layout.topMargin: 22
-                        placeholderContent: ""
                         headerText: "Password"
                         addImageToRight: true
                         imagePath: properties.iconEyeOn

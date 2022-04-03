@@ -8,15 +8,17 @@ FocusScope
     id: root
     property alias text : inputField.text
     property int boxHeight : 40
-    property string placeholderContent : "placeholder"
+    property string placeholderContent : ""
     property color placeholderColor : "black"
     property int inputFontSize : 12
+    property color inputFontColor : properties.colorBaseText
     property string headerText : "Header here"
     property double headerFontSize : 10.5
     property color headerFontColor : properties.colorBaseTitle
     property int headerToBoxSpacing : 2
     property color borderColor : properties.colorLightBorder
     property int borderWidth : 2
+    property int borderRadius : 5
     property int textPadding : 15
     property string imagePath : ""
     property string toggledImagePath : ""
@@ -52,7 +54,7 @@ FocusScope
             height: root.boxHeight
             border.width: root.borderWidth
             border.color: (root.isError ? properties.colorError : root.borderColor)
-            radius: 5
+            radius: root.borderRadius
             
             Row
             {
@@ -66,7 +68,7 @@ FocusScope
                     id: inputField
                     width: (addImageToRight ? parent.width - 30 : parent.width)
                     selectByMouse: true
-                    color: properties.colorBaseText
+                    color: root.inputFontColor
                     font.pointSize: root.inputFontSize
                     font.family: properties.defaultFontFamily
                     padding: root.textPadding
@@ -75,9 +77,9 @@ FocusScope
                     placeholderTextColor: root.placeholderColor
                     echoMode: (!root.addImageToRight || imageArea.pressed ? TextInput.Normal : TextInput.Password)
                     background: Rectangle   
-                    {
+                    {   
                         anchors.fill: parent
-                        radius: 5
+                        radius: root.borderRadius
                         color: "transparent"
                     }
                     

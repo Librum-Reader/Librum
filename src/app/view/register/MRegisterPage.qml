@@ -110,7 +110,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             headerText: 'Password'
-                            placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
                             imagePath: properties.iconEyeOn
@@ -123,7 +122,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             headerText: 'Confirmation password'
-                            placeholderContent: ""
                             placeholderColor: properties.colorLightText
                             addImageToRight: true
                             imagePath: properties.iconEyeOn
