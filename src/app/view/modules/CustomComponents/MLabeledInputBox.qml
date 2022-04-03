@@ -6,20 +6,25 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
+    property alias text : inputField.text
+    property int boxHeight : 40
+    property int boxWidth : 100
     property string placeholderContent : "placeholder"
-    property int    inputFontSize : 11
-    property color  placeholderColor : "black"
+    property int inputFontSize : 12
+    property color placeholderColor : "black"
     property string headerText : "Header here"
-    property color  borderColor : properties.colorLightBorder
-    property int    borderWidth : 2
-    property int    textPadding : 15
+    property double headerFontSize : 10.5
+    property int headerToBoxSpacing : 2
+    property color borderColor : properties.colorLightBorder
+    property int borderWidth : 2
+    property int textPadding : 15
     property string imagePath : ""
     property string toggledImagePath : ""
-    property bool   addImageToRight : false
-    property bool   isError : false
-    property bool   autoFocus : false
+    property bool addImageToRight : false
+    property bool isError : false
+    property bool autoFocus : false
     
-    implicitWidth: 100
+    implicitWidth: boxWidth
     implicitHeight: label.implicitHeight + inputBox.height
     
     
@@ -27,7 +32,7 @@ FocusScope
     {
         id: layout
         width: parent.width
-        spacing: 0
+        spacing: root.headerToBoxSpacing
         
         Label
         {
@@ -35,7 +40,7 @@ FocusScope
             width: parent.width
             text: root.headerText
             font.family: properties.defaultFontFamily
-            font.pointSize: 10.5
+            font.pointSize: root.headerFontSize
             font.weight: Font.Medium
             color: properties.colorBaseTitle
         }
@@ -44,8 +49,7 @@ FocusScope
         {
             id: inputBox
             width: parent.width
-            height: 40
-            Layout.topMargin: 2
+            height: root.boxHeight
             border.width: root.borderWidth
             border.color: (root.isError ? properties.colorError : root.borderColor)
             radius: 5
@@ -64,6 +68,7 @@ FocusScope
                     selectByMouse: true
                     color: properties.colorBaseText
                     font.pointSize: root.inputFontSize
+                    font.family: properties.defaultFontFamily
                     padding: root.textPadding
                     anchors.verticalCenter: parent.verticalCenter
                     placeholderText: root.placeholderContent

@@ -6,7 +6,6 @@
         <file>resources/images/puzzle_icon.svg</file>
         <file>resources/images/settings_icon.svg</file>
         <file>resources/images/wrench_icon.svg</file>
-        <file>resources/images/check_icon.svg</file>
         <file>resources/images/eye_on_icon.svg</file>
         <file>resources/images/eye_off_icon.svg</file>
         <file>resources/images/arrow_hallow_right_icon.svg</file>
@@ -45,6 +44,8 @@
         <file>resources/images/seed_icon.svg</file>
         <file>resources/images/coffee_icon.svg</file>
         <file>resources/images/arrow_down_hallow_icon.svg</file>
+        <file>resources/images/check_long_icon.svg</file>
+        <file>resources/images/check_white_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>

@@ -57,6 +57,7 @@ FocusScope
                 text: root.textContent
                 font.bold: root.fontBold
                 font.pointSize: root.fontSize
+                font.family: properties.defaultFontFamily
                 color: root.fontColor
             }
         }

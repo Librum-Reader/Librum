@@ -24,7 +24,7 @@ FocusScope
             id: checkBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
-            imagePath: properties.iconCheck
+            imagePath: properties.iconCheckLong
             borderColor: properties.colorDarkBorder
             borderRadius: 4
             

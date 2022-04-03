@@ -7,10 +7,8 @@ Page
 {
     id: root
     readonly property int containerWidth : 542
-    readonly property int containerHeight : 770
-    
-    width: Screen.width
-    height: Screen.height
+    readonly property int containerHeight : 780
+
     background: Rectangle
     {
         anchors.fill: parent
@@ -149,7 +147,7 @@ Page
                             id: loginButton
                             Layout.preferredHeight: 40
                             Layout.preferredWidth: parent.width
-                            Layout.topMargin: 40
+                            Layout.topMargin: 32
                             backgroundColor: properties.colorBasePurple
                             fontSize: 12                            
                             fontColor: properties.colorBrightText
