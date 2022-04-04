@@ -9,32 +9,33 @@ FocusScope
     property color borderColor : properties.colorDarkBorder
     property int borderRadius : 4
     property int borderWidth : 1
-    property color backgroundColor : "transparent"
-    property string imagePath : properties.iconCheckLong
+    property color uncheckedBackgroundColor : "transparent"
+    property color checkedBackgroundColor : properties.colorBasePurple
+    property string imagePath : properties.iconCheckWhite
     property bool imageDefaultVisibility : false
-    property bool activated : false
+    property bool checked : false
+    signal clicked()
     
     implicitWidth: 22
     implicitHeight: 22
     
-    signal clicked()
-    
     
     Rectangle
     {
+        id: container
         anchors.fill: parent
-        antialiasing: true
         radius: root.borderRadius
-        border.width: root.borderWidth
+        border.width: (root.checked ? 0 : root.borderWidth)
         border.color: root.borderColor
-        color: root.backgroundColor
+        color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
+        antialiasing: true
         
         Image
         {
             id: image
             anchors.centerIn: parent
-            visible: imageDefaultVisibility
-            sourceSize.width: parent.width - 8
+            visible: (root.checked ? true : false)
+            sourceSize.width: parent.width - 10
             source: root.imagePath
             fillMode: Image.PreserveAspectFit
         }
@@ -46,7 +47,7 @@ FocusScope
             onClicked:
             {
                 root.clicked();
-                image.visible = !image.visible;
+                root.checked = !root.checked;
             }
         }
     }

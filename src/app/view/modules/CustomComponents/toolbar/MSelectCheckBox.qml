@@ -5,7 +5,7 @@ import CustomComponents
 FocusScope
 {
     id: root
-    property alias activated : innerCheckBox.activated
+    property alias activated : innerCheckBox.checked
     signal checked
 
     implicitWidth: 40

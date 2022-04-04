@@ -262,5 +262,81 @@ Page
                 }
             }
         }
+        
+        Rectangle
+        {
+            id: yourData
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 252
+            Layout.topMargin: 26
+            Layout.leftMargin: layout.marginToLeft
+            color: properties.colorBackground
+            border.color: properties.colorLightBorder
+            radius: 4
+            antialiasing: true
+            
+            
+            ColumnLayout
+            {
+                id: yourDataContentColumn
+                spacing: 0
+                
+                Label
+                {
+                    id: yourDataTitle
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.topMargin: 24
+                    text: "Your data"
+                    color: properties.colorBaseText
+                    font.pointSize: 16.5
+                    font.family: properties.defaultFontFamily
+                    font.weight: Font.DemiBold
+                }
+                
+                RowLayout
+                {
+                    Layout.topMargin: 30
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    spacing: 12
+                    
+                    MCheckBox
+                    {
+                        id: analysingCheckbox
+                        Layout.preferredWidth: 21
+                        Layout.preferredHeight: 21
+                    }
+                    
+                    Label
+                    {
+                        text: "Analyse your reading to make better recommendations"
+                        font.family: properties.defaultFontFamily
+                        font.pointSize: 13
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                RowLayout
+                {
+                    Layout.topMargin: 16
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    spacing: 12
+                    
+                    MCheckBox
+                    {
+                        id: shareBookTypesCheckbox
+                        Layout.preferredWidth: 21
+                        Layout.preferredHeight: 21
+                    }
+                    
+                    Label
+                    {
+                        text: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
+                        font.family: properties.defaultFontFamily
+                        font.pointSize: 13
+                        color: properties.colorBaseText
+                    }
+                }
+            }
+        }
     }
 }

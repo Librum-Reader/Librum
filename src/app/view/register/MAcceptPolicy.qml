@@ -24,9 +24,6 @@ FocusScope
             id: checkBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
-            imagePath: properties.iconCheckLong
-            borderColor: properties.colorDarkBorder
-            borderRadius: 4
             
             onClicked: root.activated = !root.activated;
         }

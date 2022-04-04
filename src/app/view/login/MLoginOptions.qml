@@ -19,8 +19,6 @@ FocusScope
             id: rememberMeCheckBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
-            imagePath: properties.iconCheckLong
-            borderRadius: 4
         }
         
         Label
