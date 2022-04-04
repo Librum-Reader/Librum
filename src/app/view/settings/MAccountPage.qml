@@ -101,7 +101,7 @@ Page
                     MLabeledInputBox
                     {
                         id: firstNameInput
-                        Layout.preferredWidth: 699
+                        Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 26
                         Layout.leftMargin: layout.inRectLeftMargin
@@ -116,7 +116,7 @@ Page
                     MLabeledInputBox
                     {
                         id: lastNameInput
-                        Layout.preferredWidth: 699
+                        Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
                         Layout.leftMargin: layout.inRectLeftMargin
@@ -131,7 +131,7 @@ Page
                     MLabeledInputBox
                     {
                         id: emailInput
-                        Layout.preferredWidth: 699
+                        Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
                         Layout.leftMargin: layout.inRectLeftMargin
