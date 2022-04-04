@@ -191,5 +191,76 @@ Page
                 }
             }
         }
+        
+        Rectangle
+        {
+            id: changePassword
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 187
+            Layout.topMargin: 26
+            Layout.leftMargin: layout.marginToLeft
+            color: properties.colorBackground
+            border.color: properties.colorLightBorder
+            radius: 4
+            antialiasing: true
+            
+            
+            ColumnLayout
+            {
+                id: passwordContentColumn
+                spacing: 0
+                
+                Label
+                {
+                    id: passwordTitle
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.topMargin: 24
+                    text: "Change password"
+                    color: properties.colorBaseText
+                    font.pointSize: 16.5
+                    font.family: properties.defaultFontFamily
+                    font.weight: Font.DemiBold
+                }
+                
+                RowLayout
+                {
+                    spacing: 32
+                    Layout.topMargin: 30
+                    
+                    MLabeledInputBox
+                    {
+                        id: passwordInput
+                        Layout.preferredWidth: 699
+                        boxHeight: 40
+                        Layout.leftMargin: layout.inRectLeftMargin
+                        headerText: "Password"
+                        text: ""
+                        headerToBoxSpacing: 3
+                        inputFontSize: 13
+                        borderWidth: 1
+                        borderRadius: 4
+                        addImageToRight: true
+                        imagePath: properties.iconEyeOn
+                        toggledImagePath: properties.iconEyeOff
+                    }
+                    
+                    MLabeledInputBox
+                    {
+                        id: passwordConfirmationInput
+                        Layout.preferredWidth: 699
+                        boxHeight: 40
+                        headerText: "Password confirmation"
+                        text: ""
+                        headerToBoxSpacing: 3
+                        inputFontSize: 13
+                        borderWidth: 1
+                        borderRadius: 4
+                        addImageToRight: true
+                        imagePath: properties.iconEyeOn
+                        toggledImagePath: properties.iconEyeOff
+                    }
+                }
+            }
+        }
     }
 }
