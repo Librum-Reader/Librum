@@ -208,6 +208,7 @@ Page
             ColumnLayout
             {
                 id: passwordContentColumn
+                width: parent.width
                 spacing: 0
                 
                 Label
@@ -224,13 +225,15 @@ Page
                 
                 RowLayout
                 {
+                    id: changePasswordInputLayout
+                    width: parent.width - layout.leftMargin*2
                     spacing: 32
                     Layout.topMargin: 30
                     
                     MLabeledInputBox
                     {
                         id: passwordInput
-                        Layout.preferredWidth: 699
+                        Layout.fillWidth: true
                         boxHeight: 40
                         Layout.leftMargin: layout.inRectLeftMargin
                         headerText: "Password"
@@ -247,7 +250,8 @@ Page
                     MLabeledInputBox
                     {
                         id: passwordConfirmationInput
-                        Layout.preferredWidth: 699
+                        Layout.fillWidth: true
+                        Layout.rightMargin: layout.inRectLeftMargin
                         boxHeight: 40
                         headerText: "Password confirmation"
                         text: ""
