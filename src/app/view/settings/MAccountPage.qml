@@ -237,7 +237,6 @@ Page
                         boxHeight: 40
                         Layout.leftMargin: layout.inRectLeftMargin
                         headerText: "Password"
-                        text: ""
                         headerToBoxSpacing: 3
                         inputFontSize: 13
                         borderWidth: 1
@@ -254,7 +253,6 @@ Page
                         Layout.rightMargin: layout.inRectLeftMargin
                         boxHeight: 40
                         headerText: "Password confirmation"
-                        text: ""
                         headerToBoxSpacing: 3
                         inputFontSize: 13
                         borderWidth: 1
