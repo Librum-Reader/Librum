@@ -59,6 +59,7 @@ Item
     property string iconCheckGreen : "/resources/images/check_green_icon.svg"
     property string iconCheckWhite : "/resources/images/check_white_icon.svg"    
     property string iconHeartGray : "/resources/images/heart_gray_icon.svg"
+    property string iconHeartWhite : "/resources/images/heart_white_icon.svg"
     property string iconSeed : "/resources/images/seed_icon.svg"
     property string iconCoffee : "/resources/images/coffee_icon.svg"
     property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon.svg"
