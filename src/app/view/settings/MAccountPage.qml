@@ -306,6 +306,7 @@ Page
                         id: analysingCheckbox
                         Layout.preferredWidth: 21
                         Layout.preferredHeight: 21
+                        checked: true
                     }
                     
                     Label
@@ -328,11 +329,56 @@ Page
                         id: shareBookTypesCheckbox
                         Layout.preferredWidth: 21
                         Layout.preferredHeight: 21
+                        checked: true
                     }
                     
                     Label
                     {
                         text: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
+                        font.family: properties.defaultFontFamily
+                        font.pointSize: 13
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                RowLayout
+                {
+                    Layout.topMargin: 16
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    spacing: 12
+                    
+                    MCheckBox
+                    {
+                        id: otherCheckbox1
+                        Layout.preferredWidth: 21
+                        Layout.preferredHeight: 21
+                    }
+                    
+                    Label
+                    {
+                        text: "Something else the user can agree on allowing"
+                        font.family: properties.defaultFontFamily
+                        font.pointSize: 13
+                        color: properties.colorBaseText
+                    }
+                }
+                
+                RowLayout
+                {
+                    Layout.topMargin: 16
+                    Layout.leftMargin: layout.inRectLeftMargin
+                    spacing: 12
+                    
+                    MCheckBox
+                    {
+                        id: otherCheckbox2
+                        Layout.preferredWidth: 21
+                        Layout.preferredHeight: 21
+                    }
+                    
+                    Label
+                    {
+                        text: "Something else the user can agree on allowing"
                         font.family: properties.defaultFontFamily
                         font.pointSize: 13
                         color: properties.colorBaseText

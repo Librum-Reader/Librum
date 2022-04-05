@@ -6,7 +6,7 @@ project(Librum VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/app/view/modules" CACHE STRING "paht to qml modules")
+#set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/app/view/modules" CACHE STRING "path to qml modules")
 
 
 # Language
