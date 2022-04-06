@@ -10,6 +10,7 @@ FocusScope
     property int expensionWidth : 445
     property int openAnimationDuration : 300
     property int closeAnimationDuration : 200
+    property int imageSize: 16
     property bool opened : false
     signal triggered(string query)
     
@@ -74,7 +75,7 @@ FocusScope
                     anchors.centerIn: parent
                     source: properties.iconSearch
                     fillMode: Image.PreserveAspectFit
-                    sourceSize.height: 16
+                    sourceSize.height: root.imageSize
                     antialiasing: false
                 }
                 

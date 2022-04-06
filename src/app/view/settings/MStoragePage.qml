@@ -157,7 +157,7 @@ Page
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
                           properties.colorBasePurple + ">upgrade your tier.</font> " +
-                          "To know why we offer different tier <font color=" + properties.colorBasePurple + " bold>click here.</font>"
+                          "To know why we offer different tiers <font color=" + properties.colorBasePurple + " bold>click here.</font>"
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
