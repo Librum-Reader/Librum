@@ -64,6 +64,8 @@ Item
     property string iconCoffee : "/resources/images/coffee_icon.svg"
     property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon.svg"
     property string iconAddImage : "/resources/images/add_image_icon.svg"
+    property string iconTrash : "/resources/images/trash_icon.svg"
+    property string iconEdit : "/resources/images/edit_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    

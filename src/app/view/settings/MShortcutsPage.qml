@@ -162,21 +162,25 @@ Page
                                 
                                 Item { Layout.fillWidth: true }
                                 
-                                Rectangle
+                                Image
                                 {
-                                    Layout.preferredWidth: 20
-                                    Layout.preferredHeight: 20
+                                    id: editIcon
                                     Layout.alignment: Qt.AlignVCenter
-                                    color: "red"
+                                    sourceSize.width: 21
+                                    source: properties.iconEdit
+                                    fillMode: Image.PreserveAspectFit
                                 }
                                 
-                                Rectangle
+                                
+                                Image
                                 {
-                                    Layout.preferredWidth: 20
-                                    Layout.preferredHeight: 20
-                                    Layout.leftMargin: 24
+                                    id: deleteIcon
+                                    Layout.leftMargin: 28
+                                    Layout.rightMargin: 6
                                     Layout.alignment: Qt.AlignVCenter
-                                    color: "red"
+                                    sourceSize.width: 18
+                                    source: properties.iconTrash
+                                    fillMode: Image.PreserveAspectFit
                                 }
                             }
                         }
