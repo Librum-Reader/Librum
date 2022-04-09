@@ -92,10 +92,43 @@ Page
                         id: searchButton
                         implicitWidth: 34
                         implicitHeight: 32
-//                        Layout.preferredWidth: 34
-//                        Layout.preferredHeight: 32
                         Layout.rightMargin: layout.marginToRight
                         imageSize: 14
+                    }
+                }
+            
+                ListView
+                {
+                    id: contentListView
+                    Layout.topMargin: 8
+                    Layout.leftMargin: layout.marginToLeft
+                    Layout.rightMargin: layout.marginToRight
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 500
+                    
+                    model: ListModel
+                    {
+                        ListElement { action: "Up"; shortcuts: "SCROLL-UP" }
+                        ListElement { action: "Down"; shortcuts: "SCROLL-DOWN" }
+                        ListElement { action: "Next page"; shortcuts: "ARROW-RIGHT" }
+                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                    }
+                    
+                    delegate: ColumnLayout
+                    {
+                        Rectangle
+                        {
+                            width: contentListView.width
+                            height: 60
+                            color: "red"
+                            
+                            Label
+                            {
+                                anchors.centerIn: parent
+                                font.pointSize: 12
+                                text: action
+                            }
+                        }
                     }
                 }
             }
