@@ -51,6 +51,7 @@ Page
             ColumnLayout
             {
                 id: inDetailsLayout
+                
                 width: parent.width
                 spacing: 0
                 
@@ -96,11 +97,11 @@ Page
                         imageSize: 14
                     }
                 }
-            
+                
                 ListView
                 {
                     id: contentListView
-                    Layout.topMargin: 8
+                    Layout.topMargin: 16
                     Layout.leftMargin: layout.marginToLeft
                     Layout.rightMargin: layout.marginToRight
                     Layout.fillWidth: true
@@ -114,19 +115,69 @@ Page
                         ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
                     }
                     
-                    delegate: ColumnLayout
+                    delegate: Item
                     {
-                        Rectangle
+                        id: shortcutDelegate
+                        height: 52
+                        width: parent.width
+                        
+                        ColumnLayout
                         {
-                            width: contentListView.width
-                            height: 60
-                            color: "red"
-                            
-                            Label
+                            height: parent.height
+                            width: parent.width
+                            spacing: 0
+
+                            Rectangle
                             {
-                                anchors.centerIn: parent
-                                font.pointSize: 12
-                                text: action
+                                id: topBorder
+                                Layout.preferredWidth: parent.width
+                                Layout.preferredHeight: 1
+                                color: properties.colorLightGray
+                            }
+                            
+                            RowLayout
+                            {
+                                id: contentRow
+                                Layout.preferredWidth: parent.width
+                                Layout.preferredHeight: parent.height
+                                spacing: 0
+                                
+                                Label
+                                {
+                                    Layout.leftMargin: 12
+                                    Layout.preferredWidth: 336
+                                    Layout.alignment: Qt.AlignVCenter
+                                    text: action
+                                    color: properties.colorBaseText
+                                    font.pointSize: 12.5
+                                }
+                                
+                                Label
+                                {
+                                    Layout.alignment: Qt.AlignVCenter
+                                    text: shortcuts
+                                    color: properties.colorBaseText
+                                    font.pointSize: 12.5
+                                }
+                                
+                                Item { Layout.fillWidth: true }
+                                
+                                Rectangle
+                                {
+                                    Layout.preferredWidth: 20
+                                    Layout.preferredHeight: 20
+                                    Layout.alignment: Qt.AlignVCenter
+                                    color: "red"
+                                }
+                                
+                                Rectangle
+                                {
+                                    Layout.preferredWidth: 20
+                                    Layout.preferredHeight: 20
+                                    Layout.leftMargin: 24
+                                    Layout.alignment: Qt.AlignVCenter
+                                    color: "red"
+                                }
                             }
                         }
                     }
