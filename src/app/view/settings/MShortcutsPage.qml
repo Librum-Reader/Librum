@@ -99,165 +99,173 @@ Page
                     }
                 }
                 
-                ListView
+                ScrollView
                 {
-                    id: listView
-                    property int moveSpeed : 600
-                    
                     Layout.topMargin: 20
                     Layout.leftMargin: layout.marginToLeft
-                    Layout.rightMargin: layout.marginToRight
+                    Layout.rightMargin: 17
                     Layout.bottomMargin: 75
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    clip: true
-                    interactive: false
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+
                     
-                    model: ListModel
+                    ListView
                     {
-                        ListElement { action: "Up"; shortcuts: "SCROLL-UP" }
-                        ListElement { action: "Down"; shortcuts: "SCROLL-DOWN" }
-                        ListElement { action: "Next page"; shortcuts: "ARROW-RIGHT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                    }
-                    
-                    delegate: Item
-                    {
-                        id: shortcutDelegate
-                        height: 52
-                        width: listView.width
+                        id: listView
+                        property int moveSpeed : 700
                         
-                        ColumnLayout
+                        anchors.rightMargin: 23
+                        anchors.fill: parent
+                        clip: true
+                        interactive: false
+                        
+                        model: ListModel
                         {
-                            height: parent.height
-                            width: parent.width
-                            spacing: 0
+                            ListElement { action: "Up"; shortcuts: "SCROLL-UP" }
+                            ListElement { action: "Down"; shortcuts: "SCROLL-DOWN" }
+                            ListElement { action: "Next page"; shortcuts: "ARROW-RIGHT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
+                        }
+                        
+                        delegate: Item
+                        {
+                            id: shortcutDelegate
+                            height: 52
+                            width: listView.width
                             
-                            Rectangle
+                            ColumnLayout
                             {
-                                id: topBorder
-                                Layout.preferredWidth: parent.width
-                                Layout.preferredHeight: 1
-                                color: properties.colorLightGray
-                            }
-                            
-                            RowLayout
-                            {
-                                id: contentRow
-                                Layout.preferredWidth: parent.width
-                                Layout.preferredHeight: parent.height
+                                height: parent.height
+                                width: parent.width
                                 spacing: 0
                                 
-                                Label
+                                Rectangle
                                 {
-                                    id: actionText
-                                    Layout.leftMargin: 12
-                                    Layout.preferredWidth: 336
-                                    Layout.alignment: Qt.AlignVCenter
-                                    text: action
-                                    color: properties.colorBaseText
-                                    font.pointSize: 12
-                                    font.family: properties.defaultFontFamily
-                                    font.weight: Font.DemiBold
+                                    id: topBorder
+                                    Layout.preferredWidth: parent.width
+                                    Layout.preferredHeight: 2
+                                    color: properties.colorLightGray
                                 }
-                                
-                                Label
-                                {
-                                    id: shortcutsText
-                                    Layout.alignment: Qt.AlignVCenter
-                                    text: shortcuts
-                                    color: properties.colorBaseText
-                                    font.pointSize: 12
-                                    font.family: properties.defaultFontFamily
-                                    font.weight: Font.DemiBold
-                                }
-                                
-                                Item { Layout.fillWidth: true }
-                                
-                                Image
-                                {
-                                    id: editIcon
-                                    Layout.alignment: Qt.AlignVCenter
-                                    sourceSize.width: 21
-                                    source: properties.iconEdit
-                                    fillMode: Image.PreserveAspectFit
-                                }
-                                
-                                
-                                Image
-                                {
-                                    id: deleteIcon
-                                    Layout.leftMargin: 28
-                                    Layout.rightMargin: 6
-                                    Layout.alignment: Qt.AlignVCenter
-                                    sourceSize.width: 18
-                                    source: properties.iconTrash
-                                    fillMode: Image.PreserveAspectFit
-                                }
-                            }
-                        }
-                    }
-                    
-                    footer: Item
-                    {
-                        width: parent.width
-                        height: footerLayout.height
-                        
-                        ColumnLayout
-                        {
-                            id: footerLayout
-                            width: parent.width
-                            spacing: 0
-                            
-                            
-                            Item { height: 10 }
-                            
-                            Rectangle
-                            {
-                                id: addShortcutButton
-                                Layout.preferredWidth: parent.width
-                                Layout.preferredHeight: 65
-                                color: properties.colorLightPurple
-                                radius: 4
                                 
                                 RowLayout
                                 {
-                                    height: parent.height
+                                    id: contentRow
+                                    Layout.preferredWidth: parent.width
+                                    Layout.preferredHeight: parent.height
+                                    spacing: 0
+                                    
+                                    Label
+                                    {
+                                        id: actionText
+                                        Layout.leftMargin: 12
+                                        Layout.preferredWidth: 336
+                                        Layout.alignment: Qt.AlignVCenter
+                                        text: action
+                                        color: properties.colorBaseText
+                                        font.pointSize: 12
+                                        font.family: properties.defaultFontFamily
+                                        font.weight: Font.DemiBold
+                                    }
+                                    
+                                    Label
+                                    {
+                                        id: shortcutsText
+                                        Layout.alignment: Qt.AlignVCenter
+                                        text: shortcuts
+                                        color: properties.colorBaseText
+                                        font.pointSize: 12
+                                        font.family: properties.defaultFontFamily
+                                        font.weight: Font.DemiBold
+                                    }
+                                    
+                                    Item { Layout.fillWidth: true }
+                                    
+                                    Image
+                                    {
+                                        id: editIcon
+                                        Layout.alignment: Qt.AlignVCenter
+                                        sourceSize.width: 21
+                                        source: properties.iconEdit
+                                        fillMode: Image.PreserveAspectFit
+                                    }
+                                    
+                                    
+                                    Image
+                                    {
+                                        id: deleteIcon
+                                        Layout.leftMargin: 28
+                                        Layout.rightMargin: 6
+                                        Layout.alignment: Qt.AlignVCenter
+                                        sourceSize.width: 18
+                                        source: properties.iconTrash
+                                        fillMode: Image.PreserveAspectFit
+                                    }
                                 }
                             }
                         }
-                    }
-                    
-                    MouseArea
-                    {
-                        anchors.fill: parent
                         
-                        onWheel: (wheel) =>
+                        footer: Item
                         {
-                            listView.moveContent( wheel.angleDelta.y>0 )
+                            width: parent.width
+                            height: footerLayout.height
+                            
+                            ColumnLayout
+                            {
+                                id: footerLayout
+                                width: parent.width
+                                spacing: 0
+                                
+                                
+                                Item { height: 10 }
+                                
+                                Rectangle
+                                {
+                                    id: addShortcutButton
+                                    Layout.preferredWidth: parent.width
+                                    Layout.preferredHeight: 65
+                                    color: properties.colorLightPurple
+                                    radius: 4
+                                    
+                                    RowLayout
+                                    {
+                                        height: parent.height
+                                    }
+                                }
+                            }
                         }
-                    }
-                    
-                    
-                    function moveContent(up)
-                    {
-                        listView.flick(0, up ? listView.moveSpeed : -listView.moveSpeed)
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            
+                            onWheel: (wheel) =>
+                                     {
+                                         listView.moveContent( wheel.angleDelta.y>0 )
+                                     }
+                        }
+                        
+                        
+                        function moveContent(up)
+                        {
+                            listView.flick(0, up ? listView.moveSpeed : -listView.moveSpeed)
+                        }
                     }
                 }
             }
