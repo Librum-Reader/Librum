@@ -82,6 +82,7 @@ Page
                     Layout.preferredHeight: 40
                     Layout.rightMargin: contentLayout.rightMargin
                     Layout.topMargin: 22
+                    Layout.alignment: Qt.AlignBottom
                     backgroundColor: properties.colorBasePurple
                     textContent: "Add books"
                     fontColor: properties.colorBackground

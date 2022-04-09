@@ -24,15 +24,39 @@ Page
         spacing: 0
         
         
-        MTitle
+        RowLayout
         {
-            id: title
-            Layout.topMargin: 64
-            Layout.leftMargin: layout.marginToLeft
-            titleText: "Shortcuts"
-            descriptionText: "Make your own experience"
-            titleSize: 25
-            descriptionSize: 13.25
+            id: headerRow
+            Layout.preferredWidth: parent.width
+            spacing: 0
+            
+            MTitle
+            {
+                id: title
+                Layout.topMargin: 64
+                Layout.leftMargin: layout.marginToLeft
+                titleText: "Shortcuts"
+                descriptionText: "Make your own experience"
+                titleSize: 25
+                descriptionSize: 13.25
+            }
+            
+            Item { Layout.fillWidth: true }
+            
+            MButton
+            {
+                id: addBooksButton
+                Layout.preferredWidth: 160
+                Layout.preferredHeight: 40
+                Layout.topMargin: 22
+                Layout.alignment: Qt.AlignBottom
+                backgroundColor: properties.colorBasePurple
+                textContent: "Add shortcut"
+                fontColor: properties.colorBackground
+                fontBold: true
+                fontSize: 13
+                imagePath: properties.iconPlusWhite
+            }
         }
         
         Rectangle
@@ -103,19 +127,19 @@ Page
                 {
                     Layout.topMargin: 20
                     Layout.leftMargin: layout.marginToLeft
-                    Layout.rightMargin: 17
+                    Layout.rightMargin: 20
                     Layout.bottomMargin: 75
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-
+                    
                     
                     ListView
                     {
                         id: listView
                         property int moveSpeed : 700
                         
-                        anchors.rightMargin: 23
+                        anchors.rightMargin: 28
                         anchors.fill: parent
                         clip: true
                         interactive: false
@@ -221,44 +245,14 @@ Page
                             }
                         }
                         
-                        footer: Item
-                        {
-                            width: parent.width
-                            height: footerLayout.height
-                            
-                            ColumnLayout
-                            {
-                                id: footerLayout
-                                width: parent.width
-                                spacing: 0
-                                
-                                
-                                Item { height: 10 }
-                                
-                                Rectangle
-                                {
-                                    id: addShortcutButton
-                                    Layout.preferredWidth: parent.width
-                                    Layout.preferredHeight: 65
-                                    color: properties.colorLightPurple
-                                    radius: 4
-                                    
-                                    RowLayout
-                                    {
-                                        height: parent.height
-                                    }
-                                }
-                            }
-                        }
-                        
                         MouseArea
                         {
                             anchors.fill: parent
                             
                             onWheel: (wheel) =>
-                                     {
-                                         listView.moveContent( wheel.angleDelta.y>0 )
-                                     }
+                            {
+                                listView.moveContent( wheel.angleDelta.y>0 )
+                            }
                         }
                         
                         
