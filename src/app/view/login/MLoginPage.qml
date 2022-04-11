@@ -34,6 +34,8 @@ Page
             ColumnLayout
             {
                 id: inRectLayout
+                property int inRectMargin: 71
+                
                 width: parent.width
                 
                 MLogo
@@ -68,15 +70,17 @@ Page
                 ColumnLayout
                 {
                     id: inputColumn
-                    Layout.preferredWidth: 400
-                    Layout.alignment: Qt.AlignHCenter
+                    Layout.fillWidth: true
+                    Layout.leftMargin: inRectLayout.inRectMargin
+                    Layout.rightMargin: inRectLayout.inRectMargin
                     Layout.topMargin: 28
+                    Layout.alignment: Qt.AlignHCenter
                     spacing: 0
                     
                     MLabeledInputBox
                     {
                         id: emailInput
-                        Layout.preferredWidth: parent.width
+                        Layout.fillWidth: true
                         placeholderContent: "kaidoe@gmail.com"
                         placeholderColor: properties.colorLightText
                         headerText: "Email"
@@ -86,7 +90,7 @@ Page
                     MLabeledInputBox
                     {
                         id: passwordInput
-                        Layout.preferredWidth: parent.width
+                        Layout.fillWidth: true
                         Layout.topMargin: 22
                         headerText: "Password"
                         addImageToRight: true
@@ -103,7 +107,7 @@ Page
                     MButton 
                     {
                         id: loginButton
-                        Layout.preferredWidth: parent.width
+                        Layout.fillWidth: true
                         Layout.preferredHeight: 40
                         Layout.topMargin: 32
                         backgroundColor: properties.colorBasePurple

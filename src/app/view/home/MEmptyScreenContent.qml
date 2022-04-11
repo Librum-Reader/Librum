@@ -60,7 +60,7 @@ FocusScope
                 backgroundOpacityOnPressed: 0.75
                 borderColor: properties.colorMediumPurple
                 textContent: "Add book"
-                fontColor: properties.colorNeonBlue
+                fontColor: properties.colorBasePurple
                 fontBold: true
                 fontSize: 13.5
                 imagePath: properties.iconPlusBlack

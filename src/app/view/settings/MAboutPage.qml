@@ -17,11 +17,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         spacing: 0
         
         
@@ -29,7 +28,7 @@ Page
         {
             id: title
             Layout.topMargin: 64
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             titleText: "About"
             descriptionText: "About this application"
             titleSize: 25
@@ -42,7 +41,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 232
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -57,7 +56,7 @@ Page
                 Label
                 {
                     id: detailsTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Details"
                     color: properties.colorBaseText
@@ -68,7 +67,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 15
                     text: "CURRENT VERSION"
                     color: properties.colorLightText3
@@ -79,7 +78,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.currentVersion
                     color: properties.colorBaseText
@@ -89,7 +88,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "QT VERSION"
                     color: properties.colorLightText3
@@ -100,7 +99,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.currentQtVersion
                     color: properties.colorBaseText
@@ -110,7 +109,7 @@ Page
                 
                 MButton
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 21
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 32
@@ -133,7 +132,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 242
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -148,7 +147,7 @@ Page
                 Label
                 {
                     id: creatorTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Creator"
                     color: properties.colorBaseText
@@ -159,7 +158,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 18
                     text: "COMPANY NAME"
                     color: properties.colorLightText3
@@ -170,7 +169,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.companyName
                     color: properties.colorBasePurple
@@ -180,7 +179,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "WEBSITE"
                     color: properties.colorLightText3
@@ -191,7 +190,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     text: properties.companyWebsite
                     color: properties.colorBasePurple
                     font.pointSize: 13.5
@@ -200,7 +199,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "CONTACT"
                     color: properties.colorLightText3
@@ -211,7 +210,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.companyEmail
                     color: properties.colorBasePurple
@@ -226,8 +225,9 @@ Page
             id: thisApp
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 218
+            Layout.minimumHeight: inThisAppLayout.height + 15
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -236,13 +236,14 @@ Page
             ColumnLayout
             {
                 id: inThisAppLayout
+                width: parent.width
                 spacing: 0
                 
                 
                 Label
                 {
                     id: thisAppTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "This App"
                     color: properties.colorBaseText
@@ -254,8 +255,9 @@ Page
                 RowLayout
                 {
                     spacing: 0
+                    Layout.preferredWidth: parent.width
                     Layout.topMargin: 40
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     
                     Image
                     {
@@ -267,9 +269,13 @@ Page
                     
                     Label
                     {
+                        id: thisAppText
+                        Layout.fillWidth: parent.width
+                        Layout.rightMargin: layout.inRectMargin
                         Layout.leftMargin: 22
                         text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
                               "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."
+                        wrapMode: Text.WordWrap
                         color: properties.colorBaseText
                         font.pointSize: 14.6
                         font.family: properties.defaultFontFamily
