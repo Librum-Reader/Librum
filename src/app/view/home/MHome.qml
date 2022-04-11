@@ -37,32 +37,27 @@ Page
     RowLayout
     {
         id: verticalLayout
-        property int leftSpacing : 64
+        property int outsideSpacing : 64
         
         width: parent.width
         spacing: 0
         
-        Item
-        {
-            id: leftSpacer
-            Layout.fillHeight: true
-            Layout.preferredWidth: verticalLayout.leftSpacing
-        }
+        Item { Layout.preferredWidth: verticalLayout.outsideSpacing }
         
         ColumnLayout
         {
             id: contentLayout
             property int rightMargin : 70
             
-            Layout.preferredWidth: parent.width - verticalLayout.leftSpacing
-            Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
+            Layout.rightMargin: contentLayout.rightMargin
             spacing: 0
             
             
             RowLayout
             {
                 id: headerRow
-                Layout.preferredWidth: parent.width
+                Layout.fillWidth: true
                 spacing: 0
                 
                 MTitle
@@ -80,7 +75,6 @@ Page
                     id: addBooksButton
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 40
-                    Layout.rightMargin: contentLayout.rightMargin
                     Layout.topMargin: 22
                     Layout.alignment: Qt.AlignBottom
                     backgroundColor: properties.colorBasePurple
@@ -96,7 +90,7 @@ Page
             {
                 id: toolbar
                 visible: !root.empty
-                Layout.preferredWidth: parent.width - contentLayout.rightMargin
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
             }
@@ -106,7 +100,7 @@ Page
                 id: bookGrid
                 property int bookWidth : 190
                 
-                Layout.preferredWidth: parent.width - contentLayout.rightMargin
+                Layout.fillWidth: true
                 Layout.topMargin: 30
                 visible: !root.empty
                 columnSpacing: 64
@@ -128,7 +122,7 @@ Page
             {
                 id: emptyScreenContent
                 visible: root.empty
-                Layout.preferredWidth: parent.width - contentLayout.rightMargin
+                Layout.fillWidth: true
                 Layout.topMargin: 32
                 
                 onClicked: root.empty = false
@@ -138,7 +132,7 @@ Page
             {
                 id: indexBar
                 visible: !root.empty
-                Layout.preferredWidth: parent.width - contentLayout.rightMargin
+                Layout.fillWidth: true
                 Layout.topMargin: 50
             }
         }

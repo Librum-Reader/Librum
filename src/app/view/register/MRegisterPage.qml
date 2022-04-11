@@ -32,7 +32,6 @@ Page
             ColumnLayout
             {
                 id: inRectLayout
-                Layout.preferredWidth: parent.width
                 anchors.topMargin: 48
                 anchors
                 {
@@ -143,8 +142,8 @@ Page
                         MButton 
                         {
                             id: loginButton
+                            Layout.fillWidth: true
                             Layout.preferredHeight: 40
-                            Layout.preferredWidth: parent.width
                             Layout.topMargin: 32
                             backgroundColor: properties.colorBasePurple
                             fontSize: 12                            

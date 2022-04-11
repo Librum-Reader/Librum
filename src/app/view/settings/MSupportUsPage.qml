@@ -20,7 +20,7 @@ Page
         property int outsideMargin: 48
         property int inRectMargin : 40
         
-        width: root.width - outsideMargin*2
+        width: root.width
         spacing: 0
         
         
@@ -38,10 +38,11 @@ Page
         Rectangle
         {
             id: container
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 532
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -69,13 +70,13 @@ Page
                 RowLayout
                 {
                     id: teamText
-//                    Layout.preferredWidth: parent.width
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
                     Label
                     {
-//                        Layout.preferredWidth: parent.width
+//                        Layout.maximumWidth: Layout
                         Layout.leftMargin: layout.inRectMargin
                         Layout.topMargin: 15
                         text: "We are a small team of freelancing developers creating free apps for the community, we love\n" +
@@ -97,7 +98,7 @@ Page
                         fillMode: Image.PreserveAspectFit
                     }
                     
-//                    Item { Layout.fillWidth: true }
+                    Item { Layout.fillWidth: true }
                 }
                 
                 Label
