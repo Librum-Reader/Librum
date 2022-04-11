@@ -20,7 +20,7 @@ Page
         property int outsideMargin: 48
         property int inRectMargin : 40
         
-        width: root.width - outsideMargin*2
+        width: root.width
         spacing: 0
         
         
@@ -38,10 +38,11 @@ Page
         Rectangle
         {
             id: container
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 342
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -56,7 +57,7 @@ Page
                 Label
                 {
                     id: newUpdateTitle
-                    Layout.preferredWidth: parent.width
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 32
                     text: "A new update is available!"

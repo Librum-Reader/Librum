@@ -19,7 +19,7 @@ FocusScope
         Rectangle
         {
             id: upperBookPartRounding
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 16
             radius: 4
             color: properties.colorLightBorder
@@ -28,7 +28,7 @@ FocusScope
         Rectangle
         {
             id: upperRect
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 230
             Layout.topMargin: -6
             color: properties.colorLightBorder
@@ -55,7 +55,7 @@ FocusScope
         Rectangle
         {
             id: lowerRect
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 82
             color: properties.colorBackground
             border.width: 1
@@ -73,7 +73,7 @@ FocusScope
                 Label
                 {
                     id: bookName
-                    Layout.preferredWidth: parent.width
+                    Layout.fillWidth: true
                     Layout.topMargin: 4
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
@@ -87,7 +87,7 @@ FocusScope
                 Label
                 {
                     id: authorName
-                    Layout.preferredWidth: parent.width
+                    Layout.fillWidth: true
                     Layout.topMargin: 1                    
                     text: "Stephen R. Covey"
                     color: properties.colorLightText
@@ -98,7 +98,7 @@ FocusScope
                 RowLayout
                 {
                     id: lowerRow
-                    width: parent.width
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     Rectangle
