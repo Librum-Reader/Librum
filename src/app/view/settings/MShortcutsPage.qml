@@ -21,6 +21,7 @@ Page
         property int inRectLeftMargin : 40
         
         width: root.width - marginToLeft - marginToRight
+        height: root.height
         spacing: 0
         
         
@@ -63,8 +64,9 @@ Page
         {
             id: details
             Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 809
+            Layout.fillHeight: true
             Layout.topMargin: 32
+            Layout.bottomMargin: 44
             Layout.leftMargin: layout.marginToLeft
             color: properties.colorBackground
             border.color: properties.colorLightBorder
