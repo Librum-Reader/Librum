@@ -17,11 +17,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         spacing: 0
         
         
@@ -29,7 +28,7 @@ Page
         {
             id: title
             Layout.topMargin: 64
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             titleText: "Support us"
             descriptionText: "Thanks for considering"
             titleSize: 25
@@ -42,7 +41,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 532
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -52,12 +51,13 @@ Page
             ColumnLayout
             {
                 id: inDetailsLayout
+                width: parent.width
                 spacing: 0
                 
                 Label
                 {
                     id: detailsTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Us"
                     color: properties.colorBaseText
@@ -69,15 +69,18 @@ Page
                 RowLayout
                 {
                     id: teamText
+//                    Layout.preferredWidth: parent.width
                     spacing: 0
                     
                     
                     Label
                     {
-                        Layout.leftMargin: layout.inRectLeftMargin
+//                        Layout.preferredWidth: parent.width
+                        Layout.leftMargin: layout.inRectMargin
                         Layout.topMargin: 15
                         text: "We are a small team of freelancing developers creating free apps for the community, we love\n" +
                               "working on fun projects, supporting our community and trying to make the world a better place."
+//                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
@@ -93,12 +96,14 @@ Page
                         sourceSize.width: 23
                         fillMode: Image.PreserveAspectFit
                     }
+                    
+//                    Item { Layout.fillWidth: true }
                 }
                 
                 Label
                 {
                     id: workText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 18
                     text: "We are working in our own name, so we are not getting payed in any way."
                     color: properties.colorLightText3
@@ -114,7 +119,7 @@ Page
                     
                     Label
                     {
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         text: "We are thankful for any support."
                         color: properties.colorLightText3
                         font.pointSize: 14
@@ -136,7 +141,7 @@ Page
                 Label
                 {
                     id: coffeeText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 36
                     text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
                     color: properties.colorLightText3
@@ -150,7 +155,7 @@ Page
                     Layout.preferredWidth: 168
                     Layout.preferredHeight: 38
                     Layout.topMargin: 10
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     backgroundColor: properties.colorCoffeeBrown
                     borderColor: "transparent"
                     imagePath: properties.iconCoffee
@@ -165,7 +170,7 @@ Page
                 Label
                 {
                     id: otherPaymentsText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                           "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
@@ -180,7 +185,7 @@ Page
                 {
                     id: heartColumn
                     Layout.topMargin: 48
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 0
                     
                     Image

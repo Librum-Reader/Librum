@@ -16,11 +16,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         height: root.height
         spacing: 0
         
@@ -35,7 +34,7 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.marginToLeft
+                Layout.leftMargin: layout.outsideMargin
                 titleText: "Shortcuts"
                 descriptionText: "Make your own experience"
                 titleSize: 25
@@ -67,7 +66,7 @@ Page
             Layout.fillHeight: true
             Layout.topMargin: 32
             Layout.bottomMargin: 44
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -120,7 +119,7 @@ Page
                         id: searchButton
                         implicitWidth: 34
                         implicitHeight: 32
-                        Layout.rightMargin: layout.marginToRight
+                        Layout.rightMargin: layout.outsideMargin
                         imageSize: 14
                     }
                 }
@@ -128,7 +127,7 @@ Page
                 ScrollView
                 {
                     Layout.topMargin: 20
-                    Layout.leftMargin: layout.marginToLeft
+                    Layout.leftMargin: layout.outsideMargin
                     Layout.rightMargin: 20
                     Layout.bottomMargin: 75
                     Layout.fillWidth: true

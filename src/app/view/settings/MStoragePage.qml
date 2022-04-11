@@ -17,11 +17,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         spacing: 0
         
         
@@ -35,7 +34,7 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.marginToLeft
+                Layout.leftMargin: layout.outsideMargin
                 titleText: "Storage"
                 descriptionText: "Your storage"
                 titleSize: 25
@@ -67,7 +66,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 565
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -83,7 +82,7 @@ Page
                 Label
                 {
                     id: storageTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Total storage"
                     color: properties.colorBaseText
@@ -95,7 +94,7 @@ Page
                 Label
                 {
                     id: maxStorageText
-                    Layout.leftMargin: layout.inRectLeftMargin + 15
+                    Layout.leftMargin: layout.inRectMargin + 15
                     Layout.topMargin: 10
                     text: "2GB"
                     color: properties.colorBaseText
@@ -107,7 +106,7 @@ Page
                 Label
                 {
                     id: approximateBooksText
-                    Layout.leftMargin: layout.inRectLeftMargin + 40
+                    Layout.leftMargin: layout.inRectMargin + 40
                     text: "This are approximately <font size=4 bold><b>1000</b></font> books."
                     color: properties.colorLightText3
                     font.pointSize: 15
@@ -118,7 +117,7 @@ Page
                 Label
                 {
                     id: availableStorageTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 50
                     text: "Available storage"
                     color: properties.colorBaseText
@@ -129,7 +128,7 @@ Page
                 
                 Image
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin + 15
+                    Layout.leftMargin: layout.inRectMargin + 15
                     Layout.topMargin: 20
                     source: properties.iconPieChart
                     sourceSize.width: 100
@@ -139,7 +138,7 @@ Page
                 Label
                 {
                     id: availableStorageText
-                    Layout.leftMargin: layout.inRectLeftMargin + 20
+                    Layout.leftMargin: layout.inRectMargin + 20
                     Layout.topMargin: 15
                     text: "You currently have <font size=4 color=" + properties.colorBasePurple + " bold><b>24</b></font> files stored " +
                           "and have <font size=4 color=" + properties.colorBasePurple + " bold><b>1.8GB</b></font> free!"
@@ -153,7 +152,7 @@ Page
                 {
                     id: upgradeText
                     Layout.preferredWidth: 610
-                    Layout.leftMargin: layout.inRectLeftMargin + 20
+                    Layout.leftMargin: layout.inRectMargin + 20
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
                           properties.colorBasePurple + ">upgrade your tier.</font> " +

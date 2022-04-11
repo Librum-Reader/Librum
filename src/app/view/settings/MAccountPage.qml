@@ -17,11 +17,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         spacing: 0
         
         
@@ -35,7 +34,7 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.marginToLeft
+                Layout.leftMargin: layout.outsideMargin
                 titleText: "Account"
                 descriptionText: "Kai Doe"
                 titleSize: 25
@@ -67,7 +66,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 334
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -89,7 +88,7 @@ Page
                     Label
                     {
                         id: profileTitle
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         Layout.topMargin: 24
                         text: "Profile"
                         color: properties.colorBaseText
@@ -104,7 +103,7 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 26
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         headerText: "First name"
                         text: "Kai"
                         headerToBoxSpacing: 3
@@ -119,7 +118,7 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         headerText: "Last name"
                         text: "Doe"
                         headerToBoxSpacing: 3
@@ -134,7 +133,7 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         headerText: "Email"
                         text: "Kaidoe@gmail.com"
                         headerToBoxSpacing: 3
@@ -198,7 +197,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 187
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -214,7 +213,7 @@ Page
                 Label
                 {
                     id: passwordTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Change password"
                     color: properties.colorBaseText
@@ -235,7 +234,7 @@ Page
                         id: passwordInput
                         Layout.fillWidth: true
                         boxHeight: 40
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        Layout.leftMargin: layout.inRectMargin
                         headerText: "Password"
                         headerToBoxSpacing: 3
                         inputFontSize: 13
@@ -250,7 +249,7 @@ Page
                     {
                         id: passwordConfirmationInput
                         Layout.fillWidth: true
-                        Layout.rightMargin: layout.inRectLeftMargin
+                        Layout.rightMargin: layout.inRectMargin
                         boxHeight: 40
                         headerText: "Password confirmation"
                         headerToBoxSpacing: 3
@@ -271,7 +270,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 252
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -286,7 +285,7 @@ Page
                 Label
                 {
                     id: yourDataTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Your data"
                     color: properties.colorBaseText
@@ -298,7 +297,7 @@ Page
                 RowLayout
                 {
                     Layout.topMargin: 30
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 12
                     
                     MCheckBox
@@ -321,7 +320,7 @@ Page
                 RowLayout
                 {
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 12
                     
                     MCheckBox
@@ -344,7 +343,7 @@ Page
                 RowLayout
                 {
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 12
                     
                     MCheckBox
@@ -366,7 +365,7 @@ Page
                 RowLayout
                 {
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 12
                     
                     MCheckBox

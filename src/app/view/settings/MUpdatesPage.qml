@@ -17,11 +17,10 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int outsideMargin: 48
+        property int inRectMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: root.width - outsideMargin*2
         spacing: 0
         
         
@@ -29,7 +28,7 @@ Page
         {
             id: title
             Layout.topMargin: 64
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             titleText: "Updates"
             descriptionText: "Anything new update?"
             titleSize: 25
@@ -42,7 +41,7 @@ Page
             Layout.preferredWidth: parent.width
             Layout.preferredHeight: 342
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
+            Layout.leftMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -51,14 +50,17 @@ Page
             ColumnLayout
             {
                 id: inDetailsLayout
+                width: parent.width
                 spacing: 0
                 
                 Label
                 {
                     id: newUpdateTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.preferredWidth: parent.width
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 32
-                    text: "There is a new update available!"
+                    text: "A new update is available!"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 23
                     font.family: properties.defaultFontFamily
@@ -67,7 +69,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 7
                     text: "Download it and get the great new improvements"
                     color: properties.colorLightText3
@@ -77,7 +79,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 26
                     text: "The newest version is"
                     color: properties.colorLightText3
@@ -87,7 +89,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     text: properties.newestVersion
                     color: properties.colorLightText3
                     font.pointSize: 14.2
@@ -100,7 +102,7 @@ Page
                     id: downloadButton
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 34
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 14
                     backgroundColor: properties.colorLightGrayBackground
                     imagePath: properties.iconArrowDownHallow
@@ -116,7 +118,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 42
                     text: "See the exact changes on our website at:"
                     color: properties.colorLightText3
@@ -126,7 +128,7 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.leftMargin: layout.inRectMargin
                     text: "www.etovex.com/new_updates"
                     font.underline: true
                     color: properties.colorBasePurple
