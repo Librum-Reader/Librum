@@ -58,7 +58,14 @@ FocusScope
                 Keys.onPressed: (event) => 
                 {
                     if(event.key === Qt.Key_Return)
+                    {
                         triggered(inputField.text);
+                    }
+                    else if(event.key === Qt.Key_Escape)
+                    {
+                        if(root.opened)
+                            root.close();
+                    }
                 }
             }
             
@@ -86,9 +93,9 @@ FocusScope
                     onClicked:
                     {
                         if(root.opened)
-                            closeAnimation.start();
+                            root.close();
                         else
-                            openAnimation.start();
+                            root.open();
                     }
                 }
             }
@@ -169,6 +176,17 @@ FocusScope
             root.opened = false;
             inputField.clear();
         }
+    }
+    
+    
+    function open()
+    {
+        openAnimation.start();
+    }
+        
+    function close()
+    {
+        closeAnimation.start();
     }
     
     
