@@ -20,13 +20,14 @@ Page
         property int outsideMargin: 48
         property int inRectMargin : 40
         
-        width: root.width - outsideMargin*2
+        width: parent.width
         spacing: 0
         
         
         RowLayout
         {
             id: titleRow
+            Layout.fillWidth: true
             spacing: 0
             
             
@@ -48,6 +49,7 @@ Page
                 id: saveButton
                 Layout.preferredWidth: 118
                 Layout.preferredHeight: 38
+                Layout.rightMargin: layout.outsideMargin
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: properties.colorBasePurple
@@ -63,10 +65,11 @@ Page
         Rectangle
         {
             id: container
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 565
+            Layout.fillWidth: true
+            Layout.preferredHeight: inContainerLayout.height + 55
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -76,15 +79,18 @@ Page
             ColumnLayout
             {
                 id: inContainerLayout
+                width: parent.width
                 spacing: 0
-                
+
                 
                 Label
                 {
                     id: storageTitle
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Total storage"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 21
                     font.family: properties.defaultFontFamily
@@ -94,9 +100,11 @@ Page
                 Label
                 {
                     id: maxStorageText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin + 15
                     Layout.topMargin: 10
                     text: "2GB"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 42
                     font.family: properties.defaultFontFamily
@@ -106,8 +114,10 @@ Page
                 Label
                 {
                     id: approximateBooksText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin + 40
                     text: "This are approximately <font size=4 bold><b>1000</b></font> books."
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
@@ -117,9 +127,11 @@ Page
                 Label
                 {
                     id: availableStorageTitle
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 50
                     text: "Available storage"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 21
                     font.family: properties.defaultFontFamily
@@ -138,10 +150,12 @@ Page
                 Label
                 {
                     id: availableStorageText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin + 20
                     Layout.topMargin: 15
                     text: "You currently have <font size=4 color=" + properties.colorBasePurple + " bold><b>24</b></font> files stored " +
                           "and have <font size=4 color=" + properties.colorBasePurple + " bold><b>1.8GB</b></font> free!"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
@@ -151,16 +165,16 @@ Page
                 Label
                 {
                     id: upgradeText
-                    Layout.preferredWidth: 610
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin + 20
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
-                          properties.colorBasePurple + ">upgrade your tier.</font> " +
+                          properties.colorBasePurple + ">upgrade your tier.</font><br>" +
                           "To know why we offer different tiers <font color=" + properties.colorBasePurple + " bold>click here.</font>"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
-                    wrapMode: Text.WordWrap
                     font.family: properties.defaultFontFamily
                 }
             }

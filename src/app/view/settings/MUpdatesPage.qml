@@ -70,9 +70,11 @@ Page
                 
                 Label
                 {
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 7
                     text: "Download it and get the great new improvements"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     font.family: properties.defaultFontFamily
@@ -80,9 +82,11 @@ Page
                 
                 Label
                 {
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 26
                     text: "The newest version is"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14.5
                     font.family: properties.defaultFontFamily
@@ -90,8 +94,10 @@ Page
                 
                 Label
                 {
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     text: properties.newestVersion
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14.2
                     font.bold: true
@@ -119,9 +125,11 @@ Page
                 
                 Label
                 {
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 42
                     text: "See the exact changes on our website at:"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 13.5
                     font.family: properties.defaultFontFamily
@@ -129,8 +137,10 @@ Page
                 
                 Label
                 {
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     text: "www.etovex.com/new_updates"
+                    wrapMode: Text.WordWrap
                     font.underline: true
                     color: properties.colorBasePurple
                     font.pointSize: 13.5

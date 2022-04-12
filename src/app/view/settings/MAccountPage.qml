@@ -20,13 +20,16 @@ Page
         property int outsideMargin: 48
         property int inRectMargin : 40
         
-        width: root.width - outsideMargin*2
+        width: root.width
         spacing: 0
         
         
         RowLayout
         {
             id: titleRow
+            Layout.fillWidth: true
+            Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             spacing: 0
             
             
@@ -34,7 +37,6 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.outsideMargin
                 titleText: "Account"
                 descriptionText: "Kai Doe"
                 titleSize: 25
@@ -63,10 +65,11 @@ Page
         Rectangle
         {
             id: profile
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 334
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -76,12 +79,14 @@ Page
             RowLayout
             {
                 id: profileLayout
+                width: parent.width
                 spacing: 0
                 
                 
                 ColumnLayout
                 {
                     id: profileInputColumn
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
@@ -146,8 +151,11 @@ Page
                 Rectangle
                 {
                     id: dropArea
-                    Layout.preferredWidth: 312
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 312
+                    Layout.alignment: Qt.AlignLeft
                     Layout.preferredHeight: 190
+                    Layout.rightMargin: 40
                     Layout.topMargin: firstNameInput.y + 24
                     Layout.leftMargin: 32
                     color: properties.colorLightGray
@@ -175,7 +183,8 @@ Page
                         Label
                         {
                             id: dropAreaText
-                            Layout.preferredWidth: 237
+                            Layout.fillWidth: true
+                            Layout.maximumWidth: 237
                             Layout.alignment: Qt.AlignCenter
                             text: "Click to select an image or drag and drop in this area"
                             horizontalAlignment: Qt.AlignHCenter
@@ -188,16 +197,19 @@ Page
                         }
                     }
                 }
+            
+                Item { Layout.fillWidth: true }
             }
         }
         
         Rectangle
         {
             id: changePassword
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 187
             Layout.topMargin: 26
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -267,10 +279,11 @@ Page
         Rectangle
         {
             id: yourData
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             Layout.preferredHeight: 252
             Layout.topMargin: 26
             Layout.leftMargin: layout.outsideMargin
+            Layout.rightMargin: layout.outsideMargin
             color: properties.colorBackground
             border.color: properties.colorLightBorder
             radius: 4
@@ -280,6 +293,7 @@ Page
             ColumnLayout
             {
                 id: yourDataContentColumn
+                width: parent.width
                 spacing: 0
                 
                 Label
@@ -310,7 +324,9 @@ Page
                     
                     Label
                     {
+                        Layout.fillWidth: true
                         text: "Analyse your reading to make better recommendations"
+                        wrapMode: Text.WordWrap
                         font.family: properties.defaultFontFamily
                         font.pointSize: 13
                         color: properties.colorBaseText
@@ -319,9 +335,11 @@ Page
                 
                 RowLayout
                 {
+                    Layout.fillWidth: true
                     Layout.topMargin: 16
                     Layout.leftMargin: layout.inRectMargin
                     spacing: 12
+                    
                     
                     MCheckBox
                     {
@@ -333,7 +351,10 @@ Page
                     
                     Label
                     {
+                        
+                        Layout.fillWidth: true
                         text: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
+                        wrapMode: Text.WordWrap
                         font.family: properties.defaultFontFamily
                         font.pointSize: 13
                         color: properties.colorBaseText
@@ -355,7 +376,9 @@ Page
                     
                     Label
                     {
+                        Layout.fillWidth: true
                         text: "Something else the user can agree on allowing"
+                        wrapMode: Text.WordWrap
                         font.family: properties.defaultFontFamily
                         font.pointSize: 13
                         color: properties.colorBaseText
@@ -377,7 +400,9 @@ Page
                     
                     Label
                     {
+                        Layout.fillWidth: true
                         text: "Something else the user can agree on allowing"
+                        wrapMode: Text.WordWrap
                         font.family: properties.defaultFontFamily
                         font.pointSize: 13
                         color: properties.colorBaseText
