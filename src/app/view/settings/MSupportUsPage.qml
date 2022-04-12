@@ -39,7 +39,7 @@ Page
         {
             id: container
             Layout.fillWidth: true
-            Layout.preferredHeight: 532
+            Layout.preferredHeight: inDetailsLayout.height + 38
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
             Layout.rightMargin: layout.outsideMargin
@@ -67,46 +67,45 @@ Page
                     font.weight: Font.DemiBold
                 }
                 
+                Label
+                {
+                    Layout.fillWidth: true
+                    Layout.leftMargin: layout.inRectMargin
+                    Layout.topMargin: 15
+                    text: "We are a small team of freelancing developers creating free apps for the community, we love"
+                    wrapMode: Text.WordWrap
+                    color: properties.colorLightText3
+                    font.pointSize: 14
+                    font.family: properties.defaultFontFamily
+                }
+                
                 RowLayout
                 {
-                    id: teamText
+                    id: teamTextColumn
                     Layout.fillWidth: true
                     spacing: 0
                     
-                    
+                                        
                     Label
                     {
-//                        Layout.maximumWidth: Layout
+                        Layout.fillWidth: true
                         Layout.leftMargin: layout.inRectMargin
-                        Layout.topMargin: 15
-                        text: "We are a small team of freelancing developers creating free apps for the community, we love\n" +
-                              "working on fun projects, supporting our community and trying to make the world a better place."
-//                        wrapMode: Text.WordWrap
+                        text: "working on fun projects, supporting our community and trying to make the world a better place."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
                     }
-                    
-                    Image
-                    {
-                        id: heartHandImage
-                        Layout.alignment: Qt.AlignBottom
-                        Layout.leftMargin: 8
-                        Layout.bottomMargin: 5
-                        source: properties.iconSettingsSupportUsGray
-                        sourceSize.width: 23
-                        fillMode: Image.PreserveAspectFit
-                    }
-                    
-                    Item { Layout.fillWidth: true }
                 }
                 
                 Label
                 {
                     id: workText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 18
                     text: "We are working in our own name, so we are not getting payed in any way."
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14
                     font.family: properties.defaultFontFamily
@@ -115,6 +114,7 @@ Page
                 RowLayout
                 {
                     id: supportText
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
@@ -122,6 +122,7 @@ Page
                     {
                         Layout.leftMargin: layout.inRectMargin
                         text: "We are thankful for any support."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
@@ -137,14 +138,18 @@ Page
                         sourceSize.width: 21
                         fillMode: Image.PreserveAspectFit
                     }
+                    
+                    Item { Layout.fillWidth: true }
                 }
                 
                 Label
                 {
                     id: coffeeText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 36
                     text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14
                     font.family: properties.defaultFontFamily
@@ -171,11 +176,13 @@ Page
                 Label
                 {
                     id: otherPaymentsText
+                    Layout.fillWidth: true
                     Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                           "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
                           + properties.companyWebsite + "/dontations</font>"
+                    wrapMode: Text.WordWrap
                     textFormat: Text.RichText
                     color: properties.colorLightText3
                     font.pointSize: 14
@@ -201,8 +208,10 @@ Page
                     Label
                     {
                         id: leaveText
+                        Layout.fillWidth: true                        
                         Layout.leftMargin: 16
                         text: "If you dont, we hope you enjoy our app and wish you the best."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
