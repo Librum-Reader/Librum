@@ -280,7 +280,7 @@ Page
         {
             id: yourData
             Layout.fillWidth: true
-            Layout.preferredHeight: 252
+            Layout.preferredHeight: yourDataContentColumn.height + 38
             Layout.topMargin: 26
             Layout.leftMargin: layout.outsideMargin
             Layout.rightMargin: layout.outsideMargin

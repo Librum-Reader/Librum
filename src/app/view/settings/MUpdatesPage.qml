@@ -39,7 +39,7 @@ Page
         {
             id: container
             Layout.fillWidth: true
-            Layout.preferredHeight: 342
+            Layout.preferredHeight: inDetailsLayout.height + 32
             Layout.topMargin: 32
             Layout.leftMargin: layout.outsideMargin
             Layout.rightMargin: layout.outsideMargin

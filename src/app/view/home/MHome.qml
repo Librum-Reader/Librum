@@ -101,6 +101,7 @@ Page
                 property int bookWidth : 190
                 
                 Layout.fillWidth: true
+                Layout.preferredHeight: 692
                 Layout.topMargin: 30
                 visible: !root.empty
                 columnSpacing: 64
