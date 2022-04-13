@@ -13,6 +13,13 @@ Page
         color: properties.pagesBackground
     }
     
+    onWidthChanged:
+    {
+        if(searchButton.opened)
+            searchButton.close();
+    }
+    
+    
     ColumnLayout
     {
         id: layout
@@ -76,6 +83,7 @@ Page
             ColumnLayout
             {
                 id: inDetailsLayout
+                property int gapWidth: 340
                 
                 width: parent.width
                 height: parent.height
@@ -104,9 +112,7 @@ Page
                     Item
                     { 
                         id: headerLabelSpacer
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 340
-                        Layout.minimumWidth: 100
+                        Layout.preferredWidth: inDetailsLayout.gapWidth + 90
                     }
                     
                     Label
@@ -118,25 +124,8 @@ Page
                         font.family: properties.defaultFontFamily
                         font.bold: true
                     }
-
-                    Item
-                    { 
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 340
-                        Layout.minimumWidth: 100
-                    }
                     
-                    Item 
-                    {
-                        id: headSpacer
-                        Layout.fillWidth: true
-                        
-                        onWidthChanged:
-                        {
-                            if(width == 0 && searchButton.opened)
-                                searchButton.close();
-                        }
-                    }
+                    Item { Layout.fillWidth: true }
                     
                     MSearchButton
                     {
@@ -145,7 +134,7 @@ Page
                         implicitHeight: 32
                         Layout.rightMargin: layout.outsideMargin
                         imageSize: 14
-                        expensionWidth: (445 < headSpacer.width ? 300 : headSpacer.width)
+                        expensionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
                     }
                 }
                 
@@ -238,6 +227,11 @@ Page
                                     {
                                         Layout.fillWidth: true
                                         Layout.maximumWidth: 247
+                                        
+                                        onWidthChanged:
+                                        {
+                                            inDetailsLayout.gapWidth = width;
+                                        }
                                     }
                                     
                                     Label
