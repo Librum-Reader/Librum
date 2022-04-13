@@ -61,3 +61,14 @@ Instructions to get Librum up and running in your environment.
     ./appLibrum
     ```
 <br>
+
+
+<br>
+
+## For Windows
+Not yet officially supported. Support coming soon!
+
+<br>
+
+## For MacOS
+Not yet officially supported. Support coming soon!
