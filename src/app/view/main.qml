@@ -77,7 +77,7 @@ ApplicationWindow
             pageManager.pageHasSidebar = false;
             break;
         case 'RegisterPage':
-            root.minimumHeight = 800
+            root.minimumHeight = 820
             root.minimumWidth = 542
             pageManager.replace(registerPage);
             pageManager.pageHasSidebar = false;

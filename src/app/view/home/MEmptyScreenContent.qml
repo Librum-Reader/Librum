@@ -18,7 +18,7 @@ FocusScope
         id: emptyBackgroundImage
         source: properties.imageEmptyHomeBackground
         sourceSize.width: parent.width
-        fillMode: Image.PreserveAspectFit
+        sourceSize.height: parent.height
         
         ColumnLayout
         {
