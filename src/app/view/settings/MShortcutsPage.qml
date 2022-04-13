@@ -101,18 +101,42 @@ Page
                         font.bold: true
                     }
                     
+                    Item
+                    { 
+                        id: headerLabelSpacer
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: 340
+                        Layout.minimumWidth: 100
+                    }
+                    
                     Label
                     {
                         id: shortcutsLabel
-                        Layout.leftMargin: 280
                         text: "SHORTCUTS"
                         color: properties.colorLightText3
                         font.pointSize: 10.25
                         font.family: properties.defaultFontFamily
                         font.bold: true
                     }
+
+                    Item
+                    { 
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: 340
+                        Layout.minimumWidth: 100
+                    }
                     
-                    Item { Layout.fillWidth: true }
+                    Item 
+                    {
+                        id: headSpacer
+                        Layout.fillWidth: true
+                        
+                        onWidthChanged:
+                        {
+                            if(width == 0 && searchButton.opened)
+                                searchButton.close();
+                        }
+                    }
                     
                     MSearchButton
                     {
@@ -121,6 +145,7 @@ Page
                         implicitHeight: 32
                         Layout.rightMargin: layout.outsideMargin
                         imageSize: 14
+                        expensionWidth: (445 < headSpacer.width ? 300 : headSpacer.width)
                     }
                 }
                 
@@ -200,7 +225,7 @@ Page
                                     {
                                         id: actionText
                                         Layout.leftMargin: 12
-                                        Layout.preferredWidth: 336
+                                        Layout.preferredWidth: 150
                                         Layout.alignment: Qt.AlignVCenter
                                         text: action
                                         color: properties.colorBaseText
@@ -209,9 +234,16 @@ Page
                                         font.weight: Font.DemiBold
                                     }
                                     
+                                    Item
+                                    {
+                                        Layout.fillWidth: true
+                                        Layout.maximumWidth: 247
+                                    }
+                                    
                                     Label
                                     {
                                         id: shortcutsText
+                                        Layout.preferredWidth: 172
                                         Layout.alignment: Qt.AlignVCenter
                                         text: shortcuts
                                         color: properties.colorBaseText
@@ -251,9 +283,9 @@ Page
                             anchors.fill: parent
                             
                             onWheel: (wheel) =>
-                            {
-                                listView.moveContent( wheel.angleDelta.y>0 )
-                            }
+                                     {
+                                         listView.moveContent( wheel.angleDelta.y>0 )
+                                     }
                         }
                         
                         
