@@ -11,6 +11,7 @@ import "settings"
 import "statistics"
 import "addOns"
 import "tools"
+import "forgotPassword"
 
 
 ApplicationWindow
@@ -55,7 +56,9 @@ ApplicationWindow
         }
     }
     
-    Component { id: loginPage; MLoginPage {}}
+    
+    Component { id: loginPage; MLoginPage {} }
+    Component { id: forgotPasswordPage; MForgotPasswordPage {} }
     Component { id: registerPage; MRegisterPage {} }
     Component { id: homePage; MHome {} }
     Component { id: freeBooksPage; MFreeBooks {} }
@@ -74,6 +77,12 @@ ApplicationWindow
             root.minimumWidth = 542
             root.minimumHeight = 590
             pageManager.replace(loginPage);
+            pageManager.pageHasSidebar = false;
+            break;
+        case 'ForgotPasswordPage':
+            root.minimumWidth = 542
+            root.minimumHeight = 590
+            pageManager.replace(forgotPasswordPage);
             pageManager.pageHasSidebar = false;
             break;
         case 'RegisterPage':
