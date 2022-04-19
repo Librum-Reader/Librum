@@ -111,6 +111,39 @@ Page
                     fontSize: 12.25
                     fontColor: properties.colorBrightText
                     fontBold: true
+                    
+                    onClicked: 
+                    {
+                        loadPage("LoginPage");
+                    }
+                }
+                
+                RowLayout
+                {
+                    id: backTextLayout
+                    Layout.topMargin: 24
+                    Layout.alignment: Qt.AlignHCenter
+                    spacing: 6
+                    
+                    
+                    Image
+                    {
+                        id: backIcon
+                        source: properties.iconArrowRightHallow
+                        sourceSize.width: 24
+                        fillMode: Image.PreserveAspectFit
+                        rotation: 180
+                    }
+                    
+                    Label
+                    {
+                        id: backText
+                        text: "Back to Login"
+                        color: properties.colorLightText2
+                        font.weight: Font.Medium
+                        font.pointSize: 11.5
+                        font.family: properties.defaultFontFamily
+                    }
                 }
             }
         }
