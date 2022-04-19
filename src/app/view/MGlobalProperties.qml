@@ -88,6 +88,7 @@ Item
     
     property string imageBookCover : "/resources/images/book_cover.png"
     property string imageEmptyHomeBackground : "/resources/images/empty_home_background.svg"
+    property string imageEyeCrossedSwift : "/resources/images/eye_crossed_image.png"
     property string imageFileSwift : "/resources/images/file_swift.svg"
     
     property string currentVersion   : "v0.0.1 - alpha"

@@ -44,6 +44,16 @@ FocusScope
             Layout.leftMargin: 3
             font.pointSize: 10
             color: properties.colorBasePurple
+            
+            MouseArea
+            {
+                anchors.fill: parent
+                
+                onClicked:
+                {
+                    loadPage("ForgotPasswordPage");
+                }
+            }
         }
     }
 }
