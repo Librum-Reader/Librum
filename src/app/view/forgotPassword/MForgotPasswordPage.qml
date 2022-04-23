@@ -47,7 +47,7 @@ Page
                 text: "Forgot Password"
                 color: properties.colorBaseText
                 font.bold: true
-                font.pointSize: 20
+                font.pointSize: 19
                 font.family: properties.defaultFontFamily
             }
             
@@ -63,7 +63,7 @@ Page
                 color: properties.colorLightText2
                 lineHeight: 1.1
                 font.weight: Font.Medium
-                font.pointSize: 13
+                font.pointSize: 12.5
                 font.family: properties.defaultFontFamily
             }
             
@@ -90,10 +90,23 @@ Page
                 Label
                 {
                     id: errorText
-                    Layout.topMargin: 12
+                    Layout.topMargin: 10
                     visible: false
-                    text: "We cannot find your email"
+                    text: "We couldn't find your email"
                     color: properties.colorError
+                    font.pointSize: 11.75
+                    font.family: properties.defaultFontFamily
+                }
+                
+                Label
+                {
+                    id: successText
+                    property string email : ""
+                    
+                    Layout.topMargin: 10
+                    visible: false
+                    text: "Email sent to " + email
+                    color: "green"
                     font.pointSize: 11.75
                     font.family: properties.defaultFontFamily
                 }
@@ -103,7 +116,7 @@ Page
                     id: sendEmailButton
                     Layout.fillWidth: true
                     Layout.preferredHeight: 42
-                    Layout.topMargin: (errorText.visible ? 45 : 60)
+                    Layout.topMargin: (errorText.visible || successText.visible ? 35 : 65)
                     Layout.alignment: Qt.AlignHCenter
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple
@@ -112,37 +125,57 @@ Page
                     fontColor: properties.colorBrightText
                     fontBold: true
                     
-                    onClicked: 
+                    onClicked:
                     {
-                        loadPage("LoginPage");
+                        successText.email = emailInput.text;
+                        successText.visible = true;
+                        emailInput.clearText();
                     }
                 }
                 
-                RowLayout
+                
+                Rectangle
                 {
-                    id: backTextLayout
-                    Layout.topMargin: 24
+                    id: backNavigation
+                    Layout.preferredWidth: backNavigationLayout.width + 10
+                    Layout.preferredHeight: backNavigationLayout.height + 5
+                    Layout.topMargin: 18
                     Layout.alignment: Qt.AlignHCenter
-                    spacing: 6
                     
                     
-                    Image
+                    RowLayout
                     {
-                        id: backIcon
-                        source: properties.iconArrowRightHallow
-                        sourceSize.width: 24
-                        fillMode: Image.PreserveAspectFit
-                        rotation: 180
+                        id: backNavigationLayout
+                        anchors.centerIn: parent
+                        spacing: 6
+                        
+                        
+                        Image
+                        {
+                            id: backIcon
+                            source: properties.iconArrowRightHallow
+                            sourceSize.width: 24
+                            fillMode: Image.PreserveAspectFit
+                            rotation: 180
+                        }
+                        
+                        Label
+                        {
+                            id: backText
+                            text: "Back to Login"
+                            color: properties.colorLightText2
+                            font.weight: Font.Medium
+                            font.pointSize: 11.5
+                            font.family: properties.defaultFontFamily
+                        }
                     }
                     
-                    Label
+                    MouseArea
                     {
-                        id: backText
-                        text: "Back to Login"
-                        color: properties.colorLightText2
-                        font.weight: Font.Medium
-                        font.pointSize: 11.5
-                        font.family: properties.defaultFontFamily
+                        width: parent.width
+                        height: parent.height
+                        
+                        onClicked: loadPage("LoginPage");
                     }
                 }
             }

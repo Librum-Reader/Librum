@@ -110,4 +110,9 @@ FocusScope
             }
         }
     }
+    
+    function clearText()
+    {
+        inputField.clear();
+    }
 }

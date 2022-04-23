@@ -61,6 +61,8 @@ Popup
             textContent: "Manage Profile"
             imageWidth: 19
             textSpacing: 8
+            
+            onClicked: loadPage("SettingsPage");
         }
         
         

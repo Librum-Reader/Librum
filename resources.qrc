@@ -103,5 +103,6 @@
         <file>src/app/view/settings/MStoragePage.qml</file>
         <file>src/app/view/settings/MSupportUsPage.qml</file>
         <file>src/app/view/forgotPassword/MForgotPasswordPage.qml</file>
+        <file>src/app/view/modules/CustomComponents/MMinimalBook.qml</file>
     </qresource>
 </RCC>
