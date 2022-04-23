@@ -6,6 +6,7 @@ import CustomComponents
 FocusScope
 {
     id: root
+    property bool showTagBox : true
     signal searchRequested(string query)
     signal checkBoxClicked()
     
@@ -45,6 +46,7 @@ FocusScope
         MTagSelectorButton
         {
             id: tagSelector
+            visible: root.showTagBox
         }
         
         Item
