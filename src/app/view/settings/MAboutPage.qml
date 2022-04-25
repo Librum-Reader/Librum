@@ -7,6 +7,7 @@ import CustomComponents
 Page
 {
     id: root
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -17,47 +18,49 @@ Page
     ColumnLayout
     {
         id: layout
-        property int outsideMargin: 48
-        property int inRectMargin : 40
+        property int insideMargin : 40
         
-        width: root.width - outsideMargin*2
-        spacing: 0
+        width: parent.width
+        spacing: 26
         
         
         MTitle
         {
             id: title
             Layout.topMargin: 64
-            Layout.leftMargin: layout.outsideMargin
             titleText: "About"
             descriptionText: "About this application"
             titleSize: 25
             descriptionSize: 13.25
         }
         
-        Rectangle
+        Pane
         {
             id: details
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 232
-            Layout.topMargin: 32
-            Layout.leftMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            Layout.fillWidth: true
+            Layout.topMargin: 6
+            topPadding: 24
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 21
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: inDetailsLayout
+                anchors.fill: parent
                 spacing: 0
+                
                 
                 Label
                 {
                     id: detailsTitle
-                    Layout.leftMargin: layout.inRectMargin
-                    Layout.topMargin: 24
                     text: "Details"
                     color: properties.colorBaseText
                     font.pointSize: 16.5
@@ -67,7 +70,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 15
                     text: "CURRENT VERSION"
                     color: properties.colorLightText3
@@ -78,7 +80,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.currentVersion
                     color: properties.colorBaseText
@@ -88,7 +89,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "QT VERSION"
                     color: properties.colorLightText3
@@ -99,7 +99,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.currentQtVersion
                     color: properties.colorBaseText
@@ -109,7 +108,6 @@ Page
                 
                 MButton
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 21
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 32
@@ -126,29 +124,32 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
             id: creator
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 242
-            Layout.topMargin: 26
-            Layout.leftMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            Layout.fillWidth: true
+            topPadding: 24
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 30
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: inCreatorLayout
+                anchors.fill: parent
                 spacing: 0
+                
                 
                 Label
                 {
                     id: creatorTitle
-                    Layout.leftMargin: layout.inRectMargin
-                    Layout.topMargin: 24
                     text: "Creator"
                     color: properties.colorBaseText
                     font.pointSize: 16.5
@@ -158,7 +159,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 18
                     text: "COMPANY NAME"
                     color: properties.colorLightText3
@@ -169,7 +169,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.companyName
                     color: properties.colorBasePurple
@@ -179,7 +178,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "WEBSITE"
                     color: properties.colorLightText3
@@ -190,7 +188,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     text: properties.companyWebsite
                     color: properties.colorBasePurple
                     font.pointSize: 13.5
@@ -199,7 +196,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 12
                     text: "CONTACT"
                     color: properties.colorLightText3
@@ -210,7 +206,6 @@ Page
                 
                 Label
                 {
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 1
                     text: properties.companyEmail
                     color: properties.colorBasePurple
@@ -219,32 +214,34 @@ Page
                 }
             }
         }
-    
-        Rectangle
+        
+        Pane
         {
             id: thisApp
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 218
+            Layout.fillWidth: true
             Layout.minimumHeight: inThisAppLayout.height + 15
-            Layout.topMargin: 26
-            Layout.leftMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 24
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 56
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
+            
             
             ColumnLayout
             {
                 id: inThisAppLayout
-                width: parent.width
+                anchors.fill: parent
                 spacing: 0
                 
                 
                 Label
                 {
                     id: thisAppTitle
-                    Layout.leftMargin: layout.inRectMargin
-                    Layout.topMargin: 24
                     text: "This App"
                     color: properties.colorBaseText
                     font.pointSize: 16.5
@@ -254,10 +251,11 @@ Page
                 
                 RowLayout
                 {
-                    spacing: 0
-                    Layout.preferredWidth: parent.width
+                    id: heartRow
+                    Layout.fillWidth: true
                     Layout.topMargin: 40
-                    Layout.leftMargin: layout.inRectMargin
+                    spacing: 0
+                    
                     
                     Image
                     {
@@ -270,8 +268,7 @@ Page
                     Label
                     {
                         id: thisAppText
-                        Layout.fillWidth: parent.width
-                        Layout.rightMargin: layout.inRectMargin
+                        Layout.fillWidth: true
                         Layout.leftMargin: 22
                         text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
                               "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."

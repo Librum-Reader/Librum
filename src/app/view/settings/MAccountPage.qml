@@ -87,13 +87,13 @@ Page
                 {
                     id: profileInputColumn
                     Layout.fillWidth: true
+                    Layout.leftMargin: layout.inRectMargin
                     spacing: 0
                     
                     
                     Label
                     {
                         id: profileTitle
-                        Layout.leftMargin: layout.inRectMargin
                         Layout.topMargin: 24
                         text: "Profile"
                         color: properties.colorBaseText
@@ -108,7 +108,6 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 26
-                        Layout.leftMargin: layout.inRectMargin
                         headerText: "First name"
                         text: "Kai"
                         headerToBoxSpacing: 3
@@ -123,7 +122,6 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectMargin
                         headerText: "Last name"
                         text: "Doe"
                         headerToBoxSpacing: 3
@@ -138,7 +136,6 @@ Page
                         Layout.preferredWidth: passwordInput.width
                         boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectMargin
                         headerText: "Email"
                         text: "Kaidoe@gmail.com"
                         headerToBoxSpacing: 3
