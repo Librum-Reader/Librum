@@ -105,5 +105,6 @@
         <file>src/app/view/forgotPassword/MForgotPasswordPage.qml</file>
         <file>src/app/view/modules/CustomComponents/MMinimalBook.qml</file>
         <file>src/app/view/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
+        <file>src/app/view/modules/CustomComponents/MLabeledCheckBox.qml</file>
     </qresource>
 </RCC>
