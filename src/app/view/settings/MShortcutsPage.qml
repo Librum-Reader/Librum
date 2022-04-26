@@ -7,6 +7,8 @@ import CustomComponents
 Page
 {
     id: root
+    topPadding: 64
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -23,25 +25,22 @@ Page
     ColumnLayout
     {
         id: layout
-        property int outsideMargin: 48
-        property int inRectMargin : 40
+        property int insideMargin : 48
+        property int outsideMargin : 48
         
-        width: root.width - outsideMargin*2
-        height: root.height
+        anchors.fill: parent
         spacing: 0
         
         
         RowLayout
         {
             id: headerRow
-            Layout.preferredWidth: parent.width
+            Layout.fillWidth: true
             spacing: 0
             
             MTitle
             {
                 id: title
-                Layout.topMargin: 64
-                Layout.leftMargin: layout.outsideMargin
                 titleText: "Shortcuts"
                 descriptionText: "Make your own experience"
                 titleSize: 25
@@ -66,18 +65,24 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
-            id: details
-            Layout.preferredWidth: parent.width
+            id: container
+            Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.topMargin: 32
             Layout.bottomMargin: 44
-            Layout.leftMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 60
+            leftPadding: layout.insideMargin
+            rightPadding: 0
+            verticalPadding: 0
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
@@ -85,23 +90,22 @@ Page
                 id: inDetailsLayout
                 property int gapWidth: 340
                 
-                width: parent.width
-                height: parent.height
+                anchors.fill: parent
                 spacing: 0
                 
                 
                 RowLayout
                 {
                     id: headerLayout
-                    Layout.preferredWidth: parent.width
-                    Layout.topMargin: 60
+                    Layout.fillWidth: true
+                    Layout.rightMargin: layout.outsideMargin
                     spacing: 0
                     
                     
                     Label
                     {
                         id: actionsLabel
-                        Layout.leftMargin: 60
+                        Layout.leftMargin: 12
                         text: "ACTION"
                         color: properties.colorLightText3
                         font.pointSize: 10.25
@@ -132,7 +136,6 @@ Page
                         id: searchButton
                         implicitWidth: 34
                         implicitHeight: 32
-                        Layout.rightMargin: layout.outsideMargin
                         imageSize: 14
                         expensionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
                     }
@@ -141,7 +144,6 @@ Page
                 ScrollView
                 {
                     Layout.topMargin: 20
-                    Layout.leftMargin: layout.outsideMargin
                     Layout.rightMargin: 20
                     Layout.bottomMargin: 75
                     Layout.fillWidth: true
@@ -152,7 +154,7 @@ Page
                     ListView
                     {
                         id: listView
-                        property int moveSpeed : 700
+                        property int moveSpeed : 550
                         
                         anchors.rightMargin: 28
                         anchors.fill: parent
@@ -191,14 +193,13 @@ Page
                             
                             ColumnLayout
                             {
-                                height: parent.height
-                                width: parent.width
+                                anchors.fill: parent
                                 spacing: 0
                                 
                                 Rectangle
                                 {
                                     id: topBorder
-                                    Layout.preferredWidth: parent.width
+                                    Layout.fillWidth: true
                                     Layout.preferredHeight: 2
                                     color: properties.colorLightGray
                                 }
@@ -206,8 +207,8 @@ Page
                                 RowLayout
                                 {
                                     id: contentRow
-                                    Layout.preferredWidth: parent.width
-                                    Layout.preferredHeight: parent.height
+                                    Layout.fillWidth: true
+                                    Layout.fillHeight: true
                                     spacing: 0
                                     
                                     Label
@@ -278,7 +279,7 @@ Page
                             
                             onWheel: (wheel) =>
                                      {
-                                         listView.moveContent( wheel.angleDelta.y>0 )
+                                         listView.moveContent( wheel.angleDelta.y > 0)
                                      }
                         }
                         
