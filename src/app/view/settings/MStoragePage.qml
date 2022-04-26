@@ -17,9 +17,7 @@ Page
     
     ColumnLayout
     {
-        id: layout
-        property int inRectMargin : 40
-        
+        id: layout        
         width: parent.width
         spacing: 0
         
@@ -65,7 +63,7 @@ Page
             id: container
             Layout.fillWidth: true
             Layout.topMargin: 32
-            horizontalPadding: layout.inRectMargin
+            horizontalPadding: 40
             topPadding: 0
             bottomPadding: 55
             background: Rectangle

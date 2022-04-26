@@ -7,6 +7,7 @@ import CustomComponents
 Page
 {
     id: root
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -16,11 +17,8 @@ Page
     
     ColumnLayout
     {
-        id: layout
-        property int outsideMargin: 48
-        property int inRectMargin : 40
-        
-        width: root.width
+        id: layout        
+        width: parent.width
         spacing: 0
         
         
@@ -28,25 +26,28 @@ Page
         {
             id: title
             Layout.topMargin: 64
-            Layout.leftMargin: layout.outsideMargin
             titleText: "Updates"
             descriptionText: "Anything new update?"
             titleSize: 25
             descriptionSize: 13.25
         }
         
-        Rectangle
+        Pane
         {
             id: container
             Layout.fillWidth: true
-            Layout.preferredHeight: inDetailsLayout.height + 32
             Layout.topMargin: 32
-            Layout.leftMargin: layout.outsideMargin
-            Layout.rightMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            horizontalPadding: 40
+            topPadding: 32
+            bottomPadding: 32
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
+            
             
             ColumnLayout
             {
@@ -58,8 +59,6 @@ Page
                 {
                     id: newUpdateTitle
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
-                    Layout.topMargin: 32
                     text: "A new update is available!"
                     wrapMode: Text.WordWrap
                     color: properties.colorBaseText
@@ -71,7 +70,6 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 7
                     text: "Download it and get the great new improvements"
                     wrapMode: Text.WordWrap
@@ -83,7 +81,6 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 26
                     text: "The newest version is"
                     wrapMode: Text.WordWrap
@@ -95,7 +92,6 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     text: properties.newestVersion
                     wrapMode: Text.WordWrap
                     color: properties.colorLightText3
@@ -109,7 +105,6 @@ Page
                     id: downloadButton
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 34
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 14
                     backgroundColor: properties.colorLightGrayBackground
                     imagePath: properties.iconArrowDownHallow
@@ -126,7 +121,6 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 42
                     text: "See the exact changes on our website at:"
                     wrapMode: Text.WordWrap
@@ -138,7 +132,6 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     text: "www.etovex.com/new_updates"
                     wrapMode: Text.WordWrap
                     font.underline: true
