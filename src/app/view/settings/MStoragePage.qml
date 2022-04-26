@@ -7,6 +7,7 @@ import CustomComponents
 Page
 {
     id: root
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -17,7 +18,6 @@ Page
     ColumnLayout
     {
         id: layout
-        property int outsideMargin: 48
         property int inRectMargin : 40
         
         width: parent.width
@@ -35,7 +35,6 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.outsideMargin
                 titleText: "Storage"
                 descriptionText: "Your storage"
                 titleSize: 25
@@ -49,7 +48,6 @@ Page
                 id: saveButton
                 Layout.preferredWidth: 118
                 Layout.preferredHeight: 38
-                Layout.rightMargin: layout.outsideMargin
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: properties.colorBasePurple
@@ -62,32 +60,34 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
             id: container
             Layout.fillWidth: true
-            Layout.preferredHeight: inContainerLayout.height + 55
             Layout.topMargin: 32
-            Layout.leftMargin: layout.outsideMargin
-            Layout.rightMargin: layout.outsideMargin
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            horizontalPadding: layout.inRectMargin
+            topPadding: 0
+            bottomPadding: 55
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: inContainerLayout
-                width: parent.width
+                anchors.fill: parent
                 spacing: 0
-
+                
                 
                 Label
                 {
                     id: storageTitle
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 24
                     text: "Total storage"
                     wrapMode: Text.WordWrap
@@ -101,7 +101,7 @@ Page
                 {
                     id: maxStorageText
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin + 15
+                    Layout.leftMargin: 15
                     Layout.topMargin: 10
                     text: "2GB"
                     wrapMode: Text.WordWrap
@@ -115,7 +115,7 @@ Page
                 {
                     id: approximateBooksText
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin + 40
+                    Layout.leftMargin: 40
                     text: "This are approximately <font size=4 bold><b>1000</b></font> books."
                     wrapMode: Text.WordWrap
                     color: properties.colorLightText3
@@ -128,7 +128,6 @@ Page
                 {
                     id: availableStorageTitle
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin
                     Layout.topMargin: 50
                     text: "Available storage"
                     wrapMode: Text.WordWrap
@@ -140,7 +139,8 @@ Page
                 
                 Image
                 {
-                    Layout.leftMargin: layout.inRectMargin + 15
+                    id: usedStorageChart
+                    Layout.leftMargin: 15
                     Layout.topMargin: 20
                     source: properties.iconPieChart
                     sourceSize.width: 100
@@ -151,7 +151,7 @@ Page
                 {
                     id: availableStorageText
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin + 20
+                    Layout.leftMargin: 20
                     Layout.topMargin: 15
                     text: "You currently have <font size=4 color=" + properties.colorBasePurple + " bold><b>24</b></font> files stored " +
                           "and have <font size=4 color=" + properties.colorBasePurple + " bold><b>1.8GB</b></font> free!"
@@ -166,7 +166,7 @@ Page
                 {
                     id: upgradeText
                     Layout.fillWidth: true
-                    Layout.leftMargin: layout.inRectMargin + 20
+                    Layout.leftMargin: 20
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
                           properties.colorBasePurple + ">upgrade your tier.</font><br>" +
