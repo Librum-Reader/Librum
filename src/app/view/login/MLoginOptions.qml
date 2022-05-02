@@ -31,7 +31,8 @@ FocusScope
             color: properties.colorMediumText
         }
         
-        Item {
+        Item
+        {
             Layout.preferredWidth: 131
             Layout.preferredHeight: 1
         }

@@ -6,7 +6,6 @@ import CustomComponents
 Page
 {
     id: root
-    
     background: Rectangle
     {
         anchors.fill: parent
@@ -20,14 +19,14 @@ Page
         width: 544
         anchors.centerIn: parent
         
+        
         Pane
         {
             id: backgroundRect
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
             topPadding: 48
-            bottomPadding: 42
             horizontalPadding: 71
+            bottomPadding: 42
             background: Rectangle
             {
                 color: properties.loginContentBackground
