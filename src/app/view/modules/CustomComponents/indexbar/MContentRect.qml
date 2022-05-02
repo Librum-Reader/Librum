@@ -6,7 +6,7 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
-    property int pageNumber : -1
+    property int pageNumber : 1
     property bool selected : false
     property int selectedFontSize : 12
     property int normalFontSize : 11
@@ -19,11 +19,11 @@ FocusScope
     Rectangle
     {
         id: contentRect1
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         color: (root.selected ? properties.colorBackground : "transparent")
         border.color: (root.selected ? properties.colorLightBorder : "transparent")
         radius: 5
+        
         
         Label
         {

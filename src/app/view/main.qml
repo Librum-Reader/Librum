@@ -44,7 +44,7 @@ ApplicationWindow
             property bool pageHasSidebar : false
             
             Layout.fillWidth: true
-            Layout.preferredHeight: root.height
+            Layout.fillHeight: true
             initialItem: loginPage
             
             popEnter: null

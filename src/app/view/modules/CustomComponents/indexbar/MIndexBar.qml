@@ -17,15 +17,16 @@ FocusScope
         id: layout
         property MContentRect current : contentRect1
         
-        height: parent.height
-        width: parent.width
+        anchors.fill: parent
         spacing: 0
+        
         
         MBookCountSelector
         {
             id: bookCountSelector
+            Layout.alignment: Qt.AlignVCenter
         }
-    
+        
         Label
         {
             id: descriptionLabel
@@ -39,87 +40,76 @@ FocusScope
         
         Item { Layout.fillWidth: true }
         
-        Item
+        
+        MNavigationArrow
         {
-            id: indexer
-            Layout.preferredWidth: 230
-            Layout.preferredHeight: 32
+            id: leftNavigationArrow
+            toLeft: true
+            Layout.rightMargin: 11
+            onClicked: layout.moveToLeft();
+        }
+        
+        MContentRect
+        {
+            id: contentRect1
+            pageNumber: 1
+            selected: true
             
-            RowLayout
+            onClicked: layout.changeSelected(this)
+        }
+        
+        MContentRect
+        {
+            id: contentRect2
+            pageNumber: 2
+            
+            onClicked: layout.changeSelected(this)
+        }
+        
+        MContentRect
+        {
+            id: contentRect3
+            pageNumber: 3
+            
+            onClicked: layout.changeSelected(this)
+        }
+        
+        Rectangle
+        {
+            id: dotsRect
+            Layout.preferredWidth: 36
+            Layout.preferredHeight: 36
+            color: "transparent"
+            border.color: "transparent"               
+            radius: 5
+            
+            Label
             {
-                id: indexerLayout
-                height: parent.height
-                spacing: 0
-                
-                MNavigationArrow
-                {
-                    id: leftNavigationArrow
-                    toLeft: true
-                    
-                    onClicked: layout.moveToLeft();
-                }
-                
-                MContentRect
-                {
-                    id: contentRect1
-                    pageNumber: 1
-                    selected: true
-                    
-                    onClicked: layout.changeSelected(this)
-                }
-                
-                MContentRect
-                {
-                    id: contentRect2
-                    pageNumber: 2
-                    
-                    onClicked: layout.changeSelected(this)
-                }
-                
-                MContentRect
-                {
-                    id: contentRect3
-                    pageNumber: 3
-                    
-                    onClicked: layout.changeSelected(this)
-                }
-                
-                Rectangle
-                {
-                    id: dotRect
-                    Layout.preferredWidth: 36
-                    Layout.preferredHeight: 36
-                    color: "transparent"
-                    border.color: "transparent"               
-                    radius: 5
-                    
-                    Label
-                    {
-                        anchors.centerIn: parent
-                        text: "..."
-                        font.pointSize: 14
-                        font.family: properties.defaultFontFamily
-                        font.bold: false
-                        color: properties.colorBaseText
-                    }
-                }
-                
-                MContentRect
-                {
-                    id: contentRect4
-                    pageNumber: 10
-                    
-                    onClicked: layout.changeSelected(this)
-                }
-                
-                MNavigationArrow
-                {
-                    id: rightNavigationArrow
-                    
-                    onClicked: layout.moveToRight();
-                }
+                anchors.centerIn: parent
+                text: "..."
+                font.pointSize: 14
+                font.family: properties.defaultFontFamily
+                font.bold: false
+                color: properties.colorBaseText
             }
         }
+        
+        MContentRect
+        {
+            id: contentRect4
+            pageNumber: root.bookCount
+            
+            onClicked: layout.changeSelected(this)
+        }
+        
+        MNavigationArrow
+        {
+            id: rightNavigationArrow
+            Layout.leftMargin: 6
+            
+            onClicked: layout.moveToRight();
+        }
+        
         
         
         function changeSelected(newItem)
