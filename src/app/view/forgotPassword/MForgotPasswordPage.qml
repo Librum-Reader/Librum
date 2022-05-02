@@ -14,14 +14,21 @@ Page
     }
     
     
-    Rectangle
+    Pane
     {
         id: backgroundRect
         width: 542
         height: 550
         anchors.centerIn: parent
-        color: properties.loginContentBackground
-        radius: 6
+        topPadding: 50
+        verticalPadding: 0
+        horizontalPadding: 0
+        background: Rectangle
+        {
+            color: properties.loginContentBackground
+            radius: 6
+        }
+        
         
         ColumnLayout
         {
@@ -32,7 +39,6 @@ Page
             
             Image
             {
-                Layout.topMargin: 50
                 Layout.alignment: Qt.AlignHCenter
                 source: properties.imageEyeCrossedSwift
                 sourceSize.width: 160
