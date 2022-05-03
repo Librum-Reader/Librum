@@ -7,6 +7,7 @@ import CustomComponents
 Page
 {
     id: root
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -16,18 +17,15 @@ Page
     
     ColumnLayout
     {
-        id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
-        
-        width: root.width - marginToLeft - marginToRight
+        id: layout        
+        width: parent.width
         spacing: 0
         
         
         RowLayout
         {
             id: titleRow
+            Layout.fillWidth: true
             spacing: 0
             
             
@@ -35,7 +33,6 @@ Page
             {
                 id: title
                 Layout.topMargin: 64
-                Layout.leftMargin: layout.marginToLeft
                 titleText: "Storage"
                 descriptionText: "Your storage"
                 titleSize: 25
@@ -61,31 +58,37 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
             id: container
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 565
+            Layout.fillWidth: true
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            horizontalPadding: 40
+            topPadding: 0
+            bottomPadding: 55
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: inContainerLayout
+                anchors.fill: parent
                 spacing: 0
                 
                 
                 Label
                 {
                     id: storageTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.fillWidth: true
                     Layout.topMargin: 24
                     text: "Total storage"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 21
                     font.family: properties.defaultFontFamily
@@ -95,9 +98,11 @@ Page
                 Label
                 {
                     id: maxStorageText
-                    Layout.leftMargin: layout.inRectLeftMargin + 15
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 15
                     Layout.topMargin: 10
                     text: "2GB"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 42
                     font.family: properties.defaultFontFamily
@@ -107,8 +112,10 @@ Page
                 Label
                 {
                     id: approximateBooksText
-                    Layout.leftMargin: layout.inRectLeftMargin + 40
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 40
                     text: "This are approximately <font size=4 bold><b>1000</b></font> books."
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
@@ -118,9 +125,10 @@ Page
                 Label
                 {
                     id: availableStorageTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.fillWidth: true
                     Layout.topMargin: 50
                     text: "Available storage"
+                    wrapMode: Text.WordWrap
                     color: properties.colorBaseText
                     font.pointSize: 21
                     font.family: properties.defaultFontFamily
@@ -129,7 +137,8 @@ Page
                 
                 Image
                 {
-                    Layout.leftMargin: layout.inRectLeftMargin + 15
+                    id: usedStorageChart
+                    Layout.leftMargin: 15
                     Layout.topMargin: 20
                     source: properties.iconPieChart
                     sourceSize.width: 100
@@ -139,10 +148,12 @@ Page
                 Label
                 {
                     id: availableStorageText
-                    Layout.leftMargin: layout.inRectLeftMargin + 20
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 20
                     Layout.topMargin: 15
                     text: "You currently have <font size=4 color=" + properties.colorBasePurple + " bold><b>24</b></font> files stored " +
                           "and have <font size=4 color=" + properties.colorBasePurple + " bold><b>1.8GB</b></font> free!"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
@@ -152,16 +163,16 @@ Page
                 Label
                 {
                     id: upgradeText
-                    Layout.preferredWidth: 610
-                    Layout.leftMargin: layout.inRectLeftMargin + 20
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 20
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
-                          properties.colorBasePurple + ">upgrade your tier.</font> " +
+                          properties.colorBasePurple + ">upgrade your tier.</font><br>" +
                           "To know why we offer different tiers <font color=" + properties.colorBasePurple + " bold>click here.</font>"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
-                    wrapMode: Text.WordWrap
                     font.family: properties.defaultFontFamily
                 }
             }

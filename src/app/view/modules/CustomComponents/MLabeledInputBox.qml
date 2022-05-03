@@ -27,19 +27,20 @@ FocusScope
     property bool autoFocus : false
     
     implicitWidth: 100
-    implicitHeight: header.implicitHeight + inputBox.height
+    implicitHeight: layout.height
     
     
     ColumnLayout
     {
         id: layout
         width: parent.width
+        height: header.implicitHeight + inputBox.height
         spacing: root.headerToBoxSpacing
         
         Label
         {
             id: header
-            width: parent.width
+            Layout.fillWidth: true
             text: root.headerText
             font.family: properties.defaultFontFamily
             font.pointSize: root.headerFontSize
@@ -47,32 +48,36 @@ FocusScope
             color: root.headerFontColor
         }
         
-        Rectangle
+        Pane
         {
             id: inputBox
-            width: parent.width
-            height: root.boxHeight
-            border.width: root.borderWidth
-            border.color: (root.isError ? properties.colorError : root.borderColor)
-            radius: root.borderRadius
+            Layout.fillWidth: true
+            Layout.preferredHeight: root.boxHeight
+            padding: 0
+            background: Rectangle
+            {
+                border.width: root.borderWidth
+                border.color: (root.isError ? properties.colorError : root.borderColor)
+                radius: root.borderRadius
+            }
             
-            Row
+            
+            RowLayout
             {
                 id: inBoxLayout
-                width: parent.width
-                height: parent.height
+                anchors.fill: parent
                 spacing: 0
                 
                 TextField
                 {
                     id: inputField
-                    width: (addImageToRight ? parent.width - 30 : parent.width)
+                    Layout.fillWidth: true
+                    leftPadding: root.textPadding
+                    rightPadding: root.textPadding
                     selectByMouse: true
                     color: root.inputFontColor
                     font.pointSize: root.inputFontSize
                     font.family: properties.defaultFontFamily
-                    padding: root.textPadding
-                    anchors.verticalCenter: parent.verticalCenter
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
                     echoMode: (!root.addImageToRight || imageArea.pressed ? TextInput.Normal : TextInput.Password)
@@ -95,9 +100,10 @@ FocusScope
                 Image
                 {
                     id: image
-                    width: 20
-                    height: 18
-                    anchors.verticalCenter: parent.verticalCenter
+                    Layout.preferredWidth: 20
+                    Layout.preferredHeight: 18
+                    Layout.rightMargin: 10
+                    Layout.alignment: Qt.AlignVCenter
                     visible: root.addImageToRight
                     source: (imageArea.pressed ? root.toggledImagePath : root.imagePath)
                     
@@ -109,5 +115,10 @@ FocusScope
                 }
             }
         }
+    }
+    
+    function clearText()
+    {
+        inputField.clear();
     }
 }

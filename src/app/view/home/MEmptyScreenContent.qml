@@ -18,7 +18,7 @@ FocusScope
         id: emptyBackgroundImage
         source: properties.imageEmptyHomeBackground
         sourceSize.width: parent.width
-        fillMode: Image.PreserveAspectFit
+        sourceSize.height: parent.height
         
         ColumnLayout
         {
@@ -60,7 +60,7 @@ FocusScope
                 backgroundOpacityOnPressed: 0.75
                 borderColor: properties.colorMediumPurple
                 textContent: "Add book"
-                fontColor: properties.colorNeonBlue
+                fontColor: properties.colorBasePurple
                 fontBold: true
                 fontSize: 13.5
                 imagePath: properties.iconPlusBlack

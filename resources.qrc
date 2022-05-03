@@ -48,6 +48,10 @@
         <file>resources/images/check_white_icon.svg</file>
         <file>resources/images/add_image_icon.svg</file>
         <file>resources/images/heart_white_icon.svg</file>
+        <file>resources/images/trash_icon.svg</file>
+        <file>resources/images/edit_icon.svg</file>
+        <file>resources/images/plus_purple_icon.svg</file>
+        <file>resources/images/eye_crossed_image.png</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/app/view/main.qml</file>
@@ -98,5 +102,9 @@
         <file>src/app/view/settings/MAccountPage.qml</file>
         <file>src/app/view/settings/MStoragePage.qml</file>
         <file>src/app/view/settings/MSupportUsPage.qml</file>
+        <file>src/app/view/forgotPassword/MForgotPasswordPage.qml</file>
+        <file>src/app/view/modules/CustomComponents/MMinimalBook.qml</file>
+        <file>src/app/view/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
+        <file>src/app/view/modules/CustomComponents/MLabeledCheckBox.qml</file>
     </qresource>
 </RCC>

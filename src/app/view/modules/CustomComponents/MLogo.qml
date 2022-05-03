@@ -10,8 +10,7 @@ FocusScope
     Rectangle
     {
         id: outerRect
-        width: root.height
-        height: root.width
+        anchors.fill: parent
         color: properties.colorBasePurple
         radius: 8
         antialiasing: true

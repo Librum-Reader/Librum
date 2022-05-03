@@ -6,40 +6,38 @@ import CustomComponents
 Page
 {
     id: root
-    readonly property int containerWidth : 542
-    readonly property int containerHeight : 780
-
     background: Rectangle
     {
         anchors.fill: parent
         color: properties.loginWindowBackground
     }
     
+    
     ColumnLayout
     {
+        width: 543
         anchors.centerIn: parent
-        width: root.containerWidth
         
-        Rectangle
+        
+        Pane
         {
             id: backgroundRect
             Layout.fillWidth: true
-            Layout.preferredHeight: root.containerHeight
-            Layout.alignment: Qt.AlignTop
-            color: properties.loginContentBackground
-            radius: 4
+            topPadding: 48
+            bottomPadding: 36
+            horizontalPadding: 52
+            background: Rectangle
+            {
+                color: properties.loginContentBackground
+                radius: 4
+            }
+            
             
             ColumnLayout
             {
-                id: inRectLayout
-                Layout.preferredWidth: parent.width
-                anchors.topMargin: 48
-                anchors
-                {
-                    top:   parent.top
-                    left:  parent.left
-                    right: parent.right
-                }
+                width: parent.width
+                spacing: 0
+                
                 
                 MLogo
                 {
@@ -62,10 +60,10 @@ Page
                 Label
                 {
                     id: accountStorageText
-                    Layout.preferredWidth: 500
+                    Layout.fillWidth: true
+                    Layout.topMargin: 8
                     Layout.alignment: Qt.AlignHCenter
                     horizontalAlignment: Text.AlignHCenter
-                    Layout.topMargin: 6
                     text: "Your credentials are only used to authenticate yourself. " + 
                           "Everything will be stored in a secure database."
                     font.pointSize: 13
@@ -74,12 +72,18 @@ Page
                     wrapMode: "WordWrap"
                 }
                 
-                Item
+                Pane
                 {
                     id: inputGroup
-                    Layout.preferredWidth: 400
+                    Layout.fillWidth: true
+                    Layout.topMargin: 38
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.topMargin: 36
+                    verticalPadding: 0
+                    horizontalPadding: 20
+                    background: Rectangle
+                    {
+                        color: "transparent"
+                    }
                     
                     
                     ColumnLayout
@@ -88,10 +92,11 @@ Page
                         width: parent.width
                         spacing: 0
                         
+                        
                         MNameInput
                         {
                             id: nameInput
-                            Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
                         }
                         
                         MLabeledInputBox 
@@ -145,9 +150,9 @@ Page
                         MButton 
                         {
                             id: loginButton
+                            Layout.fillWidth: true
                             Layout.preferredHeight: 40
-                            Layout.preferredWidth: parent.width
-                            Layout.topMargin: 32
+                            Layout.topMargin: 44
                             backgroundColor: properties.colorBasePurple
                             fontSize: 12                            
                             fontColor: properties.colorBrightText

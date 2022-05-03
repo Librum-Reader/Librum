@@ -7,6 +7,8 @@ import CustomComponents
 Page
 {
     id: root
+    horizontalPadding: 48
+    topPadding: 64
     background: Rectangle
     {
         anchors.fill: parent
@@ -17,25 +19,22 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
+        property int insideMargin : 40
         
-        width: root.width - marginToLeft - marginToRight
+        width: parent.width
         spacing: 0
         
         
         RowLayout
         {
             id: titleRow
+            Layout.fillWidth: true
             spacing: 0
             
             
             MTitle
             {
                 id: title
-                Layout.topMargin: 64
-                Layout.leftMargin: layout.marginToLeft
                 titleText: "Account"
                 descriptionText: "Kai Doe"
                 titleSize: 25
@@ -61,36 +60,40 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
             id: profile
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 334
+            Layout.fillWidth: true
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 25
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 40
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             RowLayout
             {
                 id: profileLayout
+                anchors.fill: parent
                 spacing: 0
                 
                 
                 ColumnLayout
                 {
                     id: profileInputColumn
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
                     Label
                     {
                         id: profileTitle
-                        Layout.leftMargin: layout.inRectLeftMargin
-                        Layout.topMargin: 24
                         text: "Profile"
                         color: properties.colorBaseText
                         font.pointSize: 16.5
@@ -102,9 +105,8 @@ Page
                     {
                         id: firstNameInput
                         Layout.preferredWidth: passwordInput.width
-                        boxHeight: 40
                         Layout.topMargin: 26
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        boxHeight: 40
                         headerText: "First name"
                         text: "Kai"
                         headerToBoxSpacing: 3
@@ -117,9 +119,8 @@ Page
                     {
                         id: lastNameInput
                         Layout.preferredWidth: passwordInput.width
-                        boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        boxHeight: 40
                         headerText: "Last name"
                         text: "Doe"
                         headerToBoxSpacing: 3
@@ -132,9 +133,8 @@ Page
                     {
                         id: emailInput
                         Layout.preferredWidth: passwordInput.width
-                        boxHeight: 40
                         Layout.topMargin: 18
-                        Layout.leftMargin: layout.inRectLeftMargin
+                        boxHeight: 40
                         headerText: "Email"
                         text: "Kaidoe@gmail.com"
                         headerToBoxSpacing: 3
@@ -144,16 +144,22 @@ Page
                     }
                 }
                 
-                Rectangle
+                Pane
                 {
                     id: dropArea
-                    Layout.preferredWidth: 312
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 312
                     Layout.preferredHeight: 190
-                    Layout.topMargin: firstNameInput.y + 24
+                    Layout.topMargin: 76
+                    Layout.rightMargin: 40
                     Layout.leftMargin: 32
-                    color: properties.colorLightGray
-                    border.color: properties.colorLightBorder
-                    radius: 4
+                    clip: true
+                    background: Rectangle
+                    {
+                        color: properties.colorLightGray
+                        border.color: properties.colorLightBorder
+                        radius: 4
+                    }
                     
                     
                     ColumnLayout
@@ -176,7 +182,8 @@ Page
                         Label
                         {
                             id: dropAreaText
-                            Layout.preferredWidth: 237
+                            Layout.fillWidth: true
+                            Layout.maximumWidth: 237
                             Layout.alignment: Qt.AlignCenter
                             text: "Click to select an image or drag and drop in this area"
                             horizontalAlignment: Qt.AlignHCenter
@@ -189,33 +196,37 @@ Page
                         }
                     }
                 }
+                
+                Item { Layout.fillWidth: true }
             }
         }
         
-        Rectangle
+        Pane
         {
             id: changePassword
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 187
+            Layout.fillWidth: true
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 24
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 50
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
-                id: passwordContentColumn
-                width: parent.width
+                id: passwordColumn
+                anchors.fill: parent
                 spacing: 0
                 
                 Label
                 {
                     id: passwordTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 24
                     text: "Change password"
                     color: properties.colorBaseText
                     font.pointSize: 16.5
@@ -226,7 +237,7 @@ Page
                 RowLayout
                 {
                     id: changePasswordInputLayout
-                    width: parent.width - layout.leftMargin*2
+                    Layout.fillWidth: true
                     spacing: 32
                     Layout.topMargin: 30
                     
@@ -235,7 +246,6 @@ Page
                         id: passwordInput
                         Layout.fillWidth: true
                         boxHeight: 40
-                        Layout.leftMargin: layout.inRectLeftMargin
                         headerText: "Password"
                         headerToBoxSpacing: 3
                         inputFontSize: 13
@@ -250,7 +260,6 @@ Page
                     {
                         id: passwordConfirmationInput
                         Layout.fillWidth: true
-                        Layout.rightMargin: layout.inRectLeftMargin
                         boxHeight: 40
                         headerText: "Password confirmation"
                         headerToBoxSpacing: 3
@@ -265,29 +274,33 @@ Page
             }
         }
         
-        Rectangle
+        Pane
         {
             id: yourData
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 252
+            Layout.fillWidth: true
             Layout.topMargin: 26
-            Layout.leftMargin: layout.marginToLeft
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 24
+            horizontalPadding: layout.insideMargin
+            bottomPadding: 38
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: yourDataContentColumn
+                anchors.fill: parent
                 spacing: 0
+                
                 
                 Label
                 {
                     id: yourDataTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 24
                     text: "Your data"
                     color: properties.colorBaseText
                     font.pointSize: 16.5
@@ -295,94 +308,54 @@ Page
                     font.weight: Font.DemiBold
                 }
                 
-                RowLayout
+                MLabeledCheckBox
                 {
+                    Layout.fillWidth: true
                     Layout.topMargin: 30
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    boxWidth: 21
+                    boxHeight: 21
+                    textContent: "Analyse your reading to make better recommendations"
+                    fontPointSize: 13
+                    fontColor: properties.colorBaseText
                     spacing: 12
-                    
-                    MCheckBox
-                    {
-                        id: analysingCheckbox
-                        Layout.preferredWidth: 21
-                        Layout.preferredHeight: 21
-                        checked: true
-                    }
-                    
-                    Label
-                    {
-                        text: "Analyse your reading to make better recommendations"
-                        font.family: properties.defaultFontFamily
-                        font.pointSize: 13
-                        color: properties.colorBaseText
-                    }
+                    checked: true
                 }
                 
-                RowLayout
+                MLabeledCheckBox
                 {
+                    Layout.fillWidth: true
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    boxWidth: 21
+                    boxHeight: 21
+                    textContent: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
+                    fontPointSize: 13
+                    fontColor: properties.colorBaseText
                     spacing: 12
-                    
-                    MCheckBox
-                    {
-                        id: shareBookTypesCheckbox
-                        Layout.preferredWidth: 21
-                        Layout.preferredHeight: 21
-                        checked: true
-                    }
-                    
-                    Label
-                    {
-                        text: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
-                        font.family: properties.defaultFontFamily
-                        font.pointSize: 13
-                        color: properties.colorBaseText
-                    }
+                    checked: true
                 }
                 
-                RowLayout
+                MLabeledCheckBox
                 {
+                    Layout.fillWidth: true
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    boxWidth: 21
+                    boxHeight: 21
+                    textContent: "Something else the user can agree on allowing"
+                    fontPointSize: 13
+                    fontColor: properties.colorBaseText
                     spacing: 12
-                    
-                    MCheckBox
-                    {
-                        id: otherCheckbox1
-                        Layout.preferredWidth: 21
-                        Layout.preferredHeight: 21
-                    }
-                    
-                    Label
-                    {
-                        text: "Something else the user can agree on allowing"
-                        font.family: properties.defaultFontFamily
-                        font.pointSize: 13
-                        color: properties.colorBaseText
-                    }
                 }
                 
-                RowLayout
+                MLabeledCheckBox
                 {
+                    Layout.fillWidth: true
                     Layout.topMargin: 16
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    boxWidth: 21
+                    boxHeight: 21
+                    textContent: "Something else the user can agree on allowing"
+                    fontPointSize: 13
+                    fontColor: properties.colorBaseText
                     spacing: 12
-                    
-                    MCheckBox
-                    {
-                        id: otherCheckbox2
-                        Layout.preferredWidth: 21
-                        Layout.preferredHeight: 21
-                    }
-                    
-                    Label
-                    {
-                        text: "Something else the user can agree on allowing"
-                        font.family: properties.defaultFontFamily
-                        font.pointSize: 13
-                        color: properties.colorBaseText
-                    }
                 }
             }
         }

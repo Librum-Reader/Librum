@@ -11,6 +11,7 @@ import "settings"
 import "statistics"
 import "addOns"
 import "tools"
+import "forgotPassword"
 
 
 ApplicationWindow
@@ -43,7 +44,7 @@ ApplicationWindow
             property bool pageHasSidebar : false
             
             Layout.fillWidth: true
-            Layout.preferredHeight: root.height
+            Layout.fillHeight: true
             initialItem: loginPage
             
             popEnter: null
@@ -55,7 +56,9 @@ ApplicationWindow
         }
     }
     
-    Component { id: loginPage; MLoginPage {}}
+    
+    Component { id: loginPage; MLoginPage {} }
+    Component { id: forgotPasswordPage; MForgotPasswordPage {} }
     Component { id: registerPage; MRegisterPage {} }
     Component { id: homePage; MHome {} }
     Component { id: freeBooksPage; MFreeBooks {} }
@@ -76,8 +79,14 @@ ApplicationWindow
             pageManager.replace(loginPage);
             pageManager.pageHasSidebar = false;
             break;
+        case 'ForgotPasswordPage':
+            root.minimumWidth = 542
+            root.minimumHeight = 590
+            pageManager.replace(forgotPasswordPage);
+            pageManager.pageHasSidebar = false;
+            break;
         case 'RegisterPage':
-            root.minimumHeight = 800
+            root.minimumHeight = 820
             root.minimumWidth = 542
             pageManager.replace(registerPage);
             pageManager.pageHasSidebar = false;

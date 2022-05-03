@@ -13,26 +13,30 @@ FocusScope
     property int imageSize: 16
     property bool opened : false
     signal triggered(string query)
-    
+
     implicitWidth: 38
     implicitHeight: 36
-    
-    
-    Rectangle
+
+
+    Pane
     {
         id: container
-        width: parent.width
-        height: parent.height
-        color: properties.colorBackground
-        border.width: 1
-        border.color: properties.colorLightBorder
-        radius: 5
-        
+        anchors.fill: parent
+        padding: 0
+        background: Rectangle
+        {
+            color: properties.colorBackground
+            border.width: 1
+            border.color: properties.colorLightBorder
+            radius: 5
+        }
+
+
         RowLayout
         {
             id: layout
             anchors.fill: parent
-            
+
             TextField
             {
                 id: inputField
@@ -50,28 +54,30 @@ FocusScope
                     radius: 4
                     color: "transparent"
                 }
-                
+
                 onVisibleChanged: if(visible) forceActiveFocus();
-                
-                Keys.onPressed: (event) => 
-                {
-                    if(event.key === Qt.Key_Return)
-                        triggered(inputField.text);
-                }
+
+                Keys.onPressed: (event) =>
+                                {
+                                    if(event.key === Qt.Key_Return)
+                                    {
+                                        triggered(inputField.text);
+                                    }
+                                    else if(event.key === Qt.Key_Escape)
+                                    {
+                                        if(root.opened)
+                                        root.close();
+                                    }
+                                }
             }
-            
+
             Item
             {
                 id: searchBarDefaultBox
                 Layout.preferredWidth: root.defaultWidth
-<<<<<<< Updated upstream
-                Layout.preferredHeight: parent.height
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-=======
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignRight
->>>>>>> Stashed changes
-                
+
                 Image
                 {
                     id: searchBarIcon
@@ -79,30 +85,29 @@ FocusScope
                     source: properties.iconSearch
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: root.imageSize
-                    antialiasing: false
                 }
-                
+
                 MouseArea
                 {
                     anchors.fill: parent
-                    
+
                     onClicked:
                     {
                         if(root.opened)
-                            closeAnimation.start();
+                            root.close();
                         else
-                            openAnimation.start();
+                            root.open();
                     }
                 }
             }
         }
     }
-    
-    
+
+
     ParallelAnimation
     {
         id: openAnimation
-        
+
         PropertyAnimation
         {
             target: root
@@ -111,7 +116,7 @@ FocusScope
             duration: root.openAnimationDuration
             easing.type: Easing.InOutQuad
         }
-        
+
         PropertyAnimation
         {
             target: inputField
@@ -120,7 +125,7 @@ FocusScope
             duration: root.openAnimationDuration - 50
             easing.type: Easing.InOutQuad
         }
-        
+
         PropertyAnimation
         {
             target: inputField
@@ -128,18 +133,18 @@ FocusScope
             to: 1
             duration: 0
         }
-        
+
         onFinished:
         {
             root.opened = true;
         }
     }
-    
-    
+
+
     ParallelAnimation
     {
         id: closeAnimation
-        
+
         PropertyAnimation
         {
             target: root
@@ -148,7 +153,7 @@ FocusScope
             duration: root.closeAnimationDuration
             easing.type: Easing.InOutQuad
         }
-        
+
         PropertyAnimation
         {
             target: inputField
@@ -157,7 +162,7 @@ FocusScope
             duration: root.closeAnimationDuration / 3
             easing.type: Easing.InOutQuad
         }
-        
+
         PropertyAnimation
         {
             target: inputField
@@ -166,16 +171,27 @@ FocusScope
             duration: root.closeAnimationDuration / 2
             easing.type: Easing.InOutQuad
         }
-        
+
         onFinished:
         {
             root.opened = false;
             inputField.clear();
         }
     }
-    
-    
-    Component.onCompleted: 
+
+
+    function open()
+    {
+        openAnimation.start();
+    }
+
+    function close()
+    {
+        closeAnimation.start();
+    }
+
+
+    Component.onCompleted:
     {
         root.defaultWidth = width;
     }

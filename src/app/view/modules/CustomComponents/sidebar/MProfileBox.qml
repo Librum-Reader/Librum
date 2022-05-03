@@ -14,16 +14,20 @@ FocusScope
     implicitWidth: closedWidth
     implicitHeight: 60
     
-    Rectangle
+    Pane
     {
         id: container
-        width: parent.width
-        height: parent.height
-        color: "transparent"
+        padding: 0
+        anchors.fill: parent
+        background: Rectangle
+        {
+            color: "transparent"
+        }
+        
         
         RowLayout
         {
-            width: currentWidth + expandButton.width / 2.2  // So that the button goes over the border
+            width: currentWidth + expandButton.width / 2.2  // Makes the button go over the border
             height: parent.height
             spacing: 0
             

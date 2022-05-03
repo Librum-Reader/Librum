@@ -7,8 +7,8 @@ import CustomComponents
 FocusScope
 {
     id: root
-    implicitWidth: layout.implicitWidth
-    implicitHeight: layout.implicitHeight
+    implicitWidth: 372
+    implicitHeight: 50
     
     RowLayout
     {
@@ -19,8 +19,8 @@ FocusScope
         MLabeledInputBox
         {
             id: firstNameInput
-            Layout.preferredWidth: 186
-            Layout.preferredHeight: 50
+            Layout.preferredWidth: root.width / 2 - layout.spacing / 2
+            Layout.preferredHeight: root.height
             headerText: 'First name'
             placeholderContent: "Kai"
             placeholderColor: properties.colorLightText
@@ -30,8 +30,8 @@ FocusScope
         MLabeledInputBox
         {
             id: lastNameInput
-            Layout.preferredWidth: 186
-            Layout.preferredHeight: 50
+            Layout.preferredWidth: root.width / 2 - layout.spacing / 2
+            Layout.preferredHeight: root.height
             headerText: "Last name"
             placeholderContent: "Doe"
             placeholderColor: properties.colorLightText

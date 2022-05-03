@@ -23,13 +23,17 @@ FocusScope
     implicitHeight: 44
     
     
-    Rectangle
+    Pane
     {
         id: content
-        width:  parent.width
-        height: parent.height
-        color: (root.selected ? properties.colorSidebarMark : "transparent")
-        radius: 4
+        anchors.fill: parent
+        padding: 0
+        background: Rectangle
+        {
+            color: (root.selected ? properties.colorSidebarMark : "transparent")
+            radius: 4
+        }
+        
         
         RowLayout
         {

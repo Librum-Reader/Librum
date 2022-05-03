@@ -8,6 +8,7 @@ Item
     property color colorLightText3   : "#666687"
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"
+    property color colorPinkPurple   : "#E3D6FF"
     property color colorLightPurple  : "#F0F0FF"
     property color colorLightGray    : "#F6F6F9"
     property color colorNeonBlue     : "#4945FF"
@@ -51,6 +52,7 @@ Item
     property string iconArrowDownFilled : "/resources/images/arrow_filled_down_icon.svg"
     property string iconPlusWhite : "/resources/images/plus_white_icon.svg"
     property string iconPlusBlack : "/resources/images/plus_black_icon.svg"
+    property string iconPlusPurple : "/resources/images/plus_purple_icon.svg"
     property string iconTag : "/resources/images/tag_icon.svg"
     property string iconFilter : "/resources/images/filter_icon.svg"
     property string iconSync : "/resources/images/sync_icon.svg"
@@ -64,6 +66,8 @@ Item
     property string iconCoffee : "/resources/images/coffee_icon.svg"
     property string iconArrowDownHallow : "/resources/images/arrow_down_hallow_icon.svg"
     property string iconAddImage : "/resources/images/add_image_icon.svg"
+    property string iconTrash : "/resources/images/trash_icon.svg"
+    property string iconEdit : "/resources/images/edit_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    
@@ -84,6 +88,7 @@ Item
     
     property string imageBookCover : "/resources/images/book_cover.png"
     property string imageEmptyHomeBackground : "/resources/images/empty_home_background.svg"
+    property string imageEyeCrossedSwift : "/resources/images/eye_crossed_image.png"
     property string imageFileSwift : "/resources/images/file_swift.svg"
     
     property string currentVersion   : "v0.0.1 - alpha"

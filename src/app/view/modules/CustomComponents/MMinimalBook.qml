@@ -7,12 +7,13 @@ FocusScope
 {
     id: root
     implicitWidth: 190
-    implicitHeight: 322
+    implicitHeight: 300
     
     ColumnLayout
     {
         id: layout
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
         spacing: 0
         
         Rectangle
@@ -55,7 +56,7 @@ FocusScope
         {
             id: lowerRect
             Layout.fillWidth: true
-            Layout.preferredHeight: 82
+            Layout.preferredHeight: 61
             color: properties.colorBackground
             border.width: 1
             border.color: properties.colorLightBorder3
@@ -87,50 +88,11 @@ FocusScope
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 1
+                    Layout.topMargin: 1                    
                     text: "Stephen R. Covey"
                     color: properties.colorLightText
                     font.pointSize: 9
                     font.family: properties.defaultFontFamily
-                }
-                
-                RowLayout
-                {
-                    id: lowerRow
-                    Layout.fillWidth: true
-                    spacing: 0
-                    
-                    Rectangle
-                    {
-                        id: percentageBox
-                        Layout.preferredWidth: 42
-                        Layout.preferredHeight: 16
-                        Layout.topMargin: 6
-                        color: properties.darkBackground
-                        radius: 2
-                        
-                        Label
-                        {
-                            id: percentageLabel
-                            anchors.centerIn: parent
-                            horizontalAlignment: Text.AlignBottom
-                            text: "27%"
-                            font.weight: Font.Bold
-                            color: properties.colorBaseTitle
-                            font.pointSize: 10
-                            font.family: properties.defaultFontFamily
-                        }
-                    }
-
-                    Image
-                    {
-                        id: moreIcon
-                        Layout.preferredHeight: 20
-                        Layout.leftMargin: 98
-                        source: properties.iconDots
-                        fillMode: Image.PreserveAspectFit
-                        antialiasing: false
-                    }
                 }
             }
         }

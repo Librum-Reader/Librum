@@ -9,21 +9,23 @@ FocusScope
     implicitWidth: 58
     implicitHeight: 32
     
+    
     Rectangle
     {
         id: container
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         color: properties.colorBackground
         border.color: properties.colorLightBorder
         radius: 4
         antialiasing: true
+        
         
         RowLayout
         {
             id: layout
             anchors.centerIn: parent
             spacing: 5
+            
             
             Label
             {
@@ -37,7 +39,7 @@ FocusScope
             
             Image
             {
-                id: drowDownArrowImage
+                id: dropDownArrowImage
                 source: properties.iconArrowDownFilled
                 sourceSize.width: 8
                 fillMode: Image.PreserveAspectFit

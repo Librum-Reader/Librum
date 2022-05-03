@@ -7,6 +7,8 @@ import CustomComponents
 Page
 {
     id: root
+    topPadding: 64
+    horizontalPadding: 48
     background: Rectangle
     {
         anchors.fill: parent
@@ -17,48 +19,45 @@ Page
     ColumnLayout
     {
         id: layout
-        property int marginToLeft: 48
-        property int marginToRight: 48
-        property int inRectLeftMargin : 40
-        
-        width: root.width - marginToLeft - marginToRight
+        width: parent.width
         spacing: 0
         
         
         MTitle
         {
             id: title
-            Layout.topMargin: 64
-            Layout.leftMargin: layout.marginToLeft
             titleText: "Support us"
             descriptionText: "Thanks for considering"
             titleSize: 25
             descriptionSize: 13.25
         }
         
-        Rectangle
+        Pane
         {
             id: container
-            Layout.preferredWidth: parent.width
-            Layout.preferredHeight: 532
+            Layout.fillWidth: true
             Layout.topMargin: 32
-            Layout.leftMargin: layout.marginToLeft
-            color: properties.colorBackground
-            border.color: properties.colorLightBorder
-            radius: 4
-            antialiasing: true
+            topPadding: 24
+            horizontalPadding: 40
+            bottomPadding: 38
+            background: Rectangle
+            {
+                color: properties.colorBackground
+                border.color: properties.colorLightBorder
+                radius: 4
+                antialiasing: true
+            }
             
             
             ColumnLayout
             {
                 id: inDetailsLayout
+                width: parent.width
                 spacing: 0
                 
                 Label
                 {
                     id: detailsTitle
-                    Layout.leftMargin: layout.inRectLeftMargin
-                    Layout.topMargin: 24
                     text: "Us"
                     color: properties.colorBaseText
                     font.pointSize: 20
@@ -66,41 +65,42 @@ Page
                     font.weight: Font.DemiBold
                 }
                 
+                Label
+                {
+                    Layout.fillWidth: true
+                    Layout.topMargin: 15
+                    text: "We are a small team of freelancing developers creating free apps for the community, we love"
+                    wrapMode: Text.WordWrap
+                    color: properties.colorLightText3
+                    font.pointSize: 14
+                    font.family: properties.defaultFontFamily
+                }
+                
                 RowLayout
                 {
-                    id: teamText
+                    id: teamTextColumn
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
                     Label
                     {
-                        Layout.leftMargin: layout.inRectLeftMargin
-                        Layout.topMargin: 15
-                        text: "We are a small team of freelancing developers creating free apps for the community, we love\n" +
-                              "working on fun projects, supporting our community and trying to make the world a better place."
+                        Layout.fillWidth: true
+                        text: "working on fun projects, supporting our community and trying to make the world a better place."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
-                    }
-                    
-                    Image
-                    {
-                        id: heartHandImage
-                        Layout.alignment: Qt.AlignBottom
-                        Layout.leftMargin: 8
-                        Layout.bottomMargin: 5
-                        source: properties.iconSettingsSupportUsGray
-                        sourceSize.width: 23
-                        fillMode: Image.PreserveAspectFit
                     }
                 }
                 
                 Label
                 {
                     id: workText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.fillWidth: true
                     Layout.topMargin: 18
                     text: "We are working in our own name, so we are not getting payed in any way."
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14
                     font.family: properties.defaultFontFamily
@@ -109,13 +109,14 @@ Page
                 RowLayout
                 {
                     id: supportText
+                    Layout.fillWidth: true
                     spacing: 0
                     
                     
                     Label
                     {
-                        Layout.leftMargin: layout.inRectLeftMargin
                         text: "We are thankful for any support."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily
@@ -131,14 +132,17 @@ Page
                         sourceSize.width: 21
                         fillMode: Image.PreserveAspectFit
                     }
+                    
+                    Item { Layout.fillWidth: true }
                 }
                 
                 Label
                 {
                     id: coffeeText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.fillWidth: true
                     Layout.topMargin: 36
                     text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
+                    wrapMode: Text.WordWrap
                     color: properties.colorLightText3
                     font.pointSize: 14
                     font.family: properties.defaultFontFamily
@@ -150,7 +154,6 @@ Page
                     Layout.preferredWidth: 168
                     Layout.preferredHeight: 38
                     Layout.topMargin: 10
-                    Layout.leftMargin: layout.inRectLeftMargin
                     backgroundColor: properties.colorCoffeeBrown
                     borderColor: "transparent"
                     imagePath: properties.iconCoffee
@@ -165,11 +168,12 @@ Page
                 Label
                 {
                     id: otherPaymentsText
-                    Layout.leftMargin: layout.inRectLeftMargin
+                    Layout.fillWidth: true
                     Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                           "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
                           + properties.companyWebsite + "/dontations</font>"
+                    wrapMode: Text.WordWrap
                     textFormat: Text.RichText
                     color: properties.colorLightText3
                     font.pointSize: 14
@@ -180,7 +184,6 @@ Page
                 {
                     id: heartColumn
                     Layout.topMargin: 48
-                    Layout.leftMargin: layout.inRectLeftMargin
                     spacing: 0
                     
                     Image
@@ -195,8 +198,10 @@ Page
                     Label
                     {
                         id: leaveText
+                        Layout.fillWidth: true                        
                         Layout.leftMargin: 16
                         text: "If you dont, we hope you enjoy our app and wish you the best."
+                        wrapMode: Text.WordWrap
                         color: properties.colorLightText3
                         font.pointSize: 14
                         font.family: properties.defaultFontFamily

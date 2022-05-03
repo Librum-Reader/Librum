@@ -4,7 +4,7 @@ Librum is a simple to use, cross-plattform, state-saving bookreader with a lot o
 - High appearance customization
 - A free in app book store
 - Book state syncing across devices
-- In app file conversion
+- In-app file conversion
 - Bookmarks / Highlighting
 - Note taking functionality
 
@@ -33,7 +33,8 @@ Instructions to get Librum up and running in your environment.
     cd Librum
     ```
 3. Add the Qt path to the CMakeLists.txt<br>
-    By default, Qt creator appends the path to Qt to the 'CMAKE_PREFIX_PATH' variable, you have 2 options for building Librum:<br>
+    By default, Qt creator appends the path to Qt to the 'CMAKE_PREFIX_PATH' variable, you have 2 options for building Librum:
+    <br>
     - Use Qt Creator to build the project (Simply open the CMakeLists.txt through Qt Creator, by clicking File -> Open File or Project...)
     - Add the path manually, for that, just copy this line
         ```sh
@@ -45,12 +46,12 @@ Instructions to get Librum up and running in your environment.
         ```
 4. Create the build folder and step into it.
     ```sh
-    mkdir build-Debug
+    mkdir build-Release
     cd build-Debug
     ```
 6. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE:STRING=Debug -DBUILD_TESTS=On -G "Unix Makefiles" ..
+    cmake -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_TESTS=On -G "Unix Makefiles" ..
     ```
 6. Build the project
     ```sh
@@ -61,3 +62,14 @@ Instructions to get Librum up and running in your environment.
     ./appLibrum
     ```
 <br>
+
+
+<br>
+
+## For Windows
+Not yet officially supported. Support coming soon!
+
+<br>
+
+## For MacOS
+Not yet officially supported. Support coming soon!

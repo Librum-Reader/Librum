@@ -6,11 +6,18 @@ import CustomComponents
 FocusScope
 {
     id: root
+    property bool showTagBox : true
     signal searchRequested(string query)
     signal checkBoxClicked()
     
     implicitWidth:  1714
     implicitHeight: 36
+    
+    onWidthChanged:
+    {
+        if(searchButton.opened)
+            searchButton.close();
+    }
     
     
     RowLayout
@@ -39,14 +46,20 @@ FocusScope
         MTagSelectorButton
         {
             id: tagSelector
+            visible: root.showTagBox
         }
         
-        Item { Layout.fillWidth: true }
+        Item
+        {
+            id: spacer
+            Layout.fillWidth: true
+        }
         
         MSearchButton
         {
              id: searchButton
              onTriggered: (query) => searchRequested(query);
+             expensionWidth: (spacer.width <= 445 ? spacer.width : 445)
         }
     }
 }

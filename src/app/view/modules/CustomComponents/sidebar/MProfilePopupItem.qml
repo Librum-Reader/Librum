@@ -16,39 +16,34 @@ FocusScope
     implicitHeight: layout.implicitHeight
     
     
-    Rectangle
+    RowLayout
     {
+        id: layout
         anchors.fill: parent
-        color: "transparent"
         
         
-        RowLayout
+        Image
         {
-            id: layout
-            
-            
-            Image
-            {
-                id: syncIcon
-                source: root.imagePath
-                fillMode: Image.PreserveAspectFit
-                sourceSize.width: root.imageWidth
-            }
-            
-            Label
-            {
-                Layout.leftMargin: root.textSpacing
-                text: root.textContent
-                color: properties.colorLightText3
-                font.family: properties.defaultFontFamily
-                font.pointSize: 10.5
-                font.weight: Font.Medium
-            }
+            id: syncIcon
+            source: root.imagePath
+            fillMode: Image.PreserveAspectFit
+            sourceSize.width: root.imageWidth
+        }
+        
+        Label
+        {
+            Layout.leftMargin: root.textSpacing
+            text: root.textContent
+            color: properties.colorLightText3
+            font.family: properties.defaultFontFamily
+            font.pointSize: 10.5
+            font.weight: Font.Medium
         }
         
         MouseArea
         {
-            anchors.fill: parent
+            Layout.fillWidth: true
+            Layout.fillHeight: true
             
             onClicked: root.clicked()
         }
