@@ -17,11 +17,10 @@ import "forgotPassword"
 ApplicationWindow
 {
     id: root
-    width: Screen.width
-    height: Screen.height
     minimumHeight: 590
     minimumWidth: 542
     visible: true
+    visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
 
     RowLayout
