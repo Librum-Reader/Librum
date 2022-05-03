@@ -107,4 +107,10 @@
         <file>src/app/view/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
         <file>src/app/view/modules/CustomComponents/MLabeledCheckBox.qml</file>
     </qresource>
+    <qresource prefix="/fonts">
+        <file>resources/fonts/SF-Pro-Display-Bold.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Regular.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Medium.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Semibold.otf</file>
+    </qresource>
 </RCC>
