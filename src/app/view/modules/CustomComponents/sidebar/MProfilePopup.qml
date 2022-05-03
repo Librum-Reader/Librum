@@ -33,7 +33,6 @@ Popup
         }
     }
     
-    
     ColumnLayout
     {
         id: layout

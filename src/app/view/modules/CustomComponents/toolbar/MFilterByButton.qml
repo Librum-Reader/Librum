@@ -9,14 +9,19 @@ FocusScope
     implicitWidth: 100
     implicitHeight: 36
     
-    Rectangle
+    Pane
     {
         id: container
         anchors.fill: parent
-        color: properties.colorBackground
-        border.width: 1
-        border.color: properties.colorLightBorder
-        radius: 5
+        padding: 0
+        background: Rectangle
+        {
+            color: properties.colorBackground
+            border.width: 1
+            border.color: properties.colorLightBorder
+            radius: 5
+        }
+        
         
         RowLayout
         {

@@ -18,15 +18,19 @@ FocusScope
     implicitHeight: 36
     
     
-    Rectangle
+    Pane
     {
         id: container
-        width: parent.width
-        height: parent.height
-        color: properties.colorBackground
-        border.width: 1
-        border.color: properties.colorLightBorder
-        radius: 5
+        anchors.fill: parent
+        padding: 0
+        background: Rectangle
+        {
+            color: properties.colorBackground
+            border.width: 1
+            border.color: properties.colorLightBorder
+            radius: 5
+        }
+        
         
         RowLayout
         {
@@ -56,24 +60,24 @@ FocusScope
                 onVisibleChanged: if(visible) forceActiveFocus();
                 
                 Keys.onPressed: (event) => 
-                {
-                    if(event.key === Qt.Key_Return)
-                    {
-                        triggered(inputField.text);
-                    }
-                    else if(event.key === Qt.Key_Escape)
-                    {
-                        if(root.opened)
-                            root.close();
-                    }
-                }
+                                {
+                                    if(event.key === Qt.Key_Return)
+                                    {
+                                        triggered(inputField.text);
+                                    }
+                                    else if(event.key === Qt.Key_Escape)
+                                    {
+                                        if(root.opened)
+                                        root.close();
+                                    }
+                                }
             }
             
             Item
             {
                 id: searchBarDefaultBox
                 Layout.preferredWidth: root.defaultWidth
-                Layout.preferredHeight: parent.height
+                Layout.fillHeight: true
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 
                 Image
@@ -83,7 +87,6 @@ FocusScope
                     source: properties.iconSearch
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: root.imageSize
-                    antialiasing: false
                 }
                 
                 MouseArea
@@ -183,7 +186,7 @@ FocusScope
     {
         openAnimation.start();
     }
-        
+    
     function close()
     {
         closeAnimation.start();

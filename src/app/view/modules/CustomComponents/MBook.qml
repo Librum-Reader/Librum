@@ -12,8 +12,7 @@ FocusScope
     ColumnLayout
     {
         id: layout
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         spacing: 0
         
         Rectangle
@@ -88,7 +87,7 @@ FocusScope
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 1                    
+                    Layout.topMargin: 1
                     text: "Stephen R. Covey"
                     color: properties.colorLightText
                     font.pointSize: 9

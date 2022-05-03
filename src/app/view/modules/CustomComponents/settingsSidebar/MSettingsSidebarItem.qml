@@ -29,8 +29,7 @@ FocusScope
         RowLayout
         {
             id: layout
-            height: parent.height
-            width: parent.width
+            anchors.fill: parent
             spacing: 0
             
             
@@ -63,7 +62,7 @@ FocusScope
                 id: sideBorder
                 visible: root.selected
                 Layout.preferredWidth: 2
-                Layout.preferredHeight: parent.height
+                Layout.fillHeight: true
                 color: properties.colorBasePurple
             }
         }

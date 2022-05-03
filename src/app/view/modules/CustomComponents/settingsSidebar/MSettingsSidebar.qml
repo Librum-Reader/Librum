@@ -12,8 +12,7 @@ FocusScope
     Rectangle
     {
         id: container
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         color: "transparent"
         border.color: properties.colorLightBorder
     }

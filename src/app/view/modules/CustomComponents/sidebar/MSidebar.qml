@@ -19,11 +19,16 @@ FocusScope
     implicitHeight: Window.height
     
     
-    Rectangle
+    Pane
     {
         id: container
         anchors.fill: parent
-        color: properties.colorBackground
+        padding: 0
+        background: Rectangle
+        {
+            color: properties.colorBackground
+        }
+        
         
         MSidebarAnimations
         {
@@ -41,7 +46,7 @@ FocusScope
                 id: logo
                 Layout.topMargin: 14
                 Layout.leftMargin: 14
-                spacing: 0
+                spacing: 20
                 
                 MLogo
                 {
@@ -53,7 +58,6 @@ FocusScope
                 Label
                 {
                     id: logoLabel
-                    Layout.leftMargin: 20
                     visible: false
                     text: "Librum"
                     font.bold: true
@@ -66,7 +70,7 @@ FocusScope
             Rectangle
             {
                 id: topSeparator
-                Layout.preferredWidth: root.width
+                Layout.fillWidth: true
                 Layout.preferredHeight: 2
                 Layout.topMargin: 15
                 color: properties.colorSidebarSeparator
@@ -209,7 +213,7 @@ FocusScope
             Rectangle
             {
                 id: bottomSeparator
-                Layout.preferredWidth: root.width
+                Layout.fillWidth: true
                 Layout.preferredHeight: 2
                 color: properties.colorSidebarSeparator
             }

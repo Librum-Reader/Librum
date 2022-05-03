@@ -28,8 +28,7 @@ FocusScope
     Rectangle
     {
         id: container
-        width:  parent.width
-        height: parent.height
+        anchors.fill: parent
         color: root.backgroundColor
         border.width: root.borderWidth
         border.color: root.borderColor
