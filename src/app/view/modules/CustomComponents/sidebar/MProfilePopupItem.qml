@@ -40,12 +40,13 @@ FocusScope
             font.weight: Font.Medium
         }
         
-        MouseArea
-        {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            
-            onClicked: root.clicked()
-        }
+        Item { Layout.fillWidth: true }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: root.clicked()
     }
 }

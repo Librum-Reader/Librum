@@ -5,6 +5,8 @@
 #include <QLocale>
 #include <QString>
 #include <QDebug>
+//#include <QFontDatabase>
+//#include <QDirIterator>
 #include "sidebar_state.hpp"
 
 int main(int argc, char *argv[])
