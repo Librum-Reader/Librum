@@ -9,14 +9,14 @@ FocusScope
     id: root
     property bool activated : false
     
-    implicitWidth: layout.width
+    implicitWidth: 200
     implicitHeight: layout.height
     
     
     RowLayout
     {
         id: layout
-        Layout.fillWidth: true
+        width: parent.width
         spacing: 10
         
         MCheckBox

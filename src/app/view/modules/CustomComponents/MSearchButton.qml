@@ -38,8 +38,6 @@ FocusScope
                 id: inputField
                 z: 1
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.alignment: Qt.AlignVCenter
                 visible: false
                 leftPadding: 12
                 color: properties.colorBaseText
@@ -66,8 +64,13 @@ FocusScope
             {
                 id: searchBarDefaultBox
                 Layout.preferredWidth: root.defaultWidth
+<<<<<<< Updated upstream
                 Layout.preferredHeight: parent.height
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+=======
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignRight
+>>>>>>> Stashed changes
                 
                 Image
                 {

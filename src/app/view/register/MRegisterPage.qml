@@ -131,13 +131,15 @@ Page
                         MKeepMeUpdated
                         {
                             id: keepMeUpdated
+                            Layout.fillWidth: true
                             Layout.topMargin: 28
                         }
                         
                         MAcceptPolicy
                         {
                             id: acceptPolicy
-                            Layout.topMargin: 32                            
+                            Layout.fillWidth: true
+                            Layout.topMargin: 32
                         }
                         
                         MButton 
