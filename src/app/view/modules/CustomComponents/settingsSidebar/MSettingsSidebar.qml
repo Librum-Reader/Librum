@@ -53,7 +53,7 @@ FocusScope
             text: "GLOBAL SETTINGS"
             font.pointSize: 10.2
             font.family: properties.defaultFontFamily
-            font.bold: true
+            font.weight: Font.Bold
             color: properties.colorLightText3
         }
         
