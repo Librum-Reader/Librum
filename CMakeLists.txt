@@ -20,6 +20,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Og")
 set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 
 
@@ -57,6 +58,16 @@ target_include_directories(appLibrum
                     PRIVATE
                         src/app/view/extensions/
     )
+
+
+
+# Move fonts into binary dir
+include(CopyRecursive)
+set(FONTS_OUT_DIR ${CMAKE_BINARY_DIR}/resources/fonts)
+file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
+message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
+copy_recursive(${CMAKE_CURRENT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
+
 
 
 # Tests

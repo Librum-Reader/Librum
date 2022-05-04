@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QFontDatabase>
 #include <QDirIterator>
+#include "qdiriterator.h"
+#include "qfontdatabase.h"
 #include "sidebar_state.hpp"
 
 int main(int argc, char *argv[])
@@ -32,12 +34,22 @@ int main(int argc, char *argv[])
     
     
     
-    // Fonts
-    QDirIterator it(":/fonts/resources/fonts", QDirIterator::Subdirectories);
-    while(it.hasNext())
+    // Loading fonts
+    const QString fontsPath = QGuiApplication::instance()->applicationDirPath() + "/resources/fonts/";
+    const QDir fontsDir(fontsPath);
+    if(!fontsDir.isEmpty() && fontsDir.exists())
     {
-        QFontDatabase::addApplicationFont(it.next());
+        QDirIterator it(fontsPath);
+        while(it.hasNext())
+        {
+            QFontDatabase::addApplicationFont(it.next());
+        }
     }
+    else
+    {
+        qWarning() << "Unable to load application fonts from " + fontsPath;
+    }
+    
     
     
     // Type registering

@@ -30,7 +30,7 @@ Page
             background: Rectangle
             {
                 color: properties.loginContentBackground
-                radius: 4
+                radius: 5
             }
             
             
@@ -110,7 +110,11 @@ Page
                     fontBold: true
                     textContent: "Login"
                     
-                    onClicked: loadPage("HomePage");
+                    onClicked:
+                    {
+                        
+                        loadPage("HomePage");
+                    }
                 }
             }
         }

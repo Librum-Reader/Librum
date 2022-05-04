@@ -29,7 +29,7 @@ Page
             background: Rectangle
             {
                 color: properties.loginContentBackground
-                radius: 4
+                radius: 5
             }
             
             
