@@ -78,7 +78,7 @@ Instructions to get Librum up and running in your environment.
     git clone https://github.com/Etovex/Librum.git
     ```
 2. Open the project in Qt creator by clicking on File -> Open File or Project... and selecting the CMakeLists.txt)
-3. Run the project
+3. Run Librum
 <br>
 
 <br>
