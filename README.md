@@ -67,7 +67,19 @@ Instructions to get Librum up and running in your environment.
 <br>
 
 ## For Windows
-Not yet officially supported. Support coming soon!
+### Prerequisites
+- cmake (at least 3.22)            https://cmake.org/download/
+- make (or any other build system) http://ftp.gnu.org/gnu/make/
+- Qt6                              https://www.qt.io/download
+- mingw                            https://sourceforge.net/projects/mingw/
+### Installation
+1. Clone the repository.
+    ```sh
+    git clone https://github.com/Etovex/Librum.git
+    ```
+2. Open the project in Qt creator by clicking on File -> Open File or Project... and selecting the CMakeLists.txt)
+3. Run the project
+<br>
 
 <br>
 
