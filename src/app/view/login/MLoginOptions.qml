@@ -13,6 +13,7 @@ FocusScope
     RowLayout
     {
         id: layout
+        width: parent.width
         
         MCheckBox
         {
@@ -33,8 +34,7 @@ FocusScope
         
         Item
         {
-            Layout.preferredWidth: 131
-            Layout.preferredHeight: 1
+            Layout.fillWidth: true
         }
         
         Label

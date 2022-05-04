@@ -95,6 +95,7 @@ Page
                 MLoginOptions
                 {
                     id: loginOption
+                    Layout.fillWidth: true
                     Layout.topMargin: 24
                 }
                 
