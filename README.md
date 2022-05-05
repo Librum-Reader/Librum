@@ -4,7 +4,7 @@ Librum is a simple to use, cross-plattform, state-saving bookreader with a lot o
 - High appearance customization
 - A free in app book store
 - Book state syncing across devices
-- In-app file conversion
+- In-app file manipulation
 - Bookmarks / Highlighting
 - Note taking functionality
 
