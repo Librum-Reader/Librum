@@ -1,12 +1,12 @@
 # Librum
 
-Librum is a simple to use, cross-plattform, state-saving bookreader with a lot of functionalities. Some of the functionalities include:
+Librum is a simple to use, cross-platform, state-saving book reader with a lot of functionalities. Some of the functionalities include:
 - High appearance customization
 - A free in app book store
 - Book state syncing across devices
 - In-app file conversion
 - Bookmarks / Highlighting
-- Note taking functionality
+- Note-taking functionality
 
 <br><br>
 
@@ -83,5 +83,5 @@ Instructions to get Librum up and running in your environment.
 
 <br>
 
-## For MacOS
+## For macOS
 Not yet officially supported. Support coming soon!

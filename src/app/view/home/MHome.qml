@@ -84,6 +84,7 @@ Page
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             Layout.topMargin: 45
+            z: 2
         }
         
         Grid

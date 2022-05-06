@@ -6,46 +6,67 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    property bool opened : false
     signal sortQueryEmitted()
     
     implicitWidth: 100
     implicitHeight: 36
     
-    Pane
+    
+    ColumnLayout
     {
-        id: container
         anchors.fill: parent
-        padding: 0
-        background: Rectangle
-        {
-            color: properties.colorBackground
-            border.width: 1
-            border.color: properties.colorLightBorder
-            radius: 5
-        }
+        spacing: 4
         
         
-        RowLayout
+        Pane
         {
-            anchors.centerIn: parent
-            spacing: 6
-            
-            Label
+            id: container
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            padding: 0
+            background: Rectangle
             {
-                id: sortByLabel
-                color: properties.colorBaseText
-                text: "Sort by"
-                font.pointSize: 12
-                font.family: properties.defaultFontFamily
-                font.weight: Font.Bold
+                color: properties.colorBackground
+                border.width: 1
+                border.color: properties.colorLightBorder
+                radius: 5
             }
             
-            Image
+            
+            RowLayout
             {
-                id: sortByArrowIcon
-                sourceSize.height: 6
-                source: properties.iconArrowDownFilled
-                fillMode: Image.PreserveAspectFit
+                anchors.centerIn: parent
+                spacing: 6
+                
+                Label
+                {
+                    id: sortByLabel
+                    color: properties.colorBaseText
+                    text: "Sort by"
+                    font.pointSize: 12
+                    font.family: properties.defaultFontFamily
+                    font.weight: Font.Bold
+                
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        
+                        onClicked:
+                        {
+                            root.opened = !root.opened
+                            console.log("Clicked"); 
+                        }
+                    }
+                }
+                
+                Image
+                {
+                    id: sortByArrowIcon
+                    sourceSize.height: 6
+                    source: properties.iconArrowDownFilled
+                    fillMode: Image.PreserveAspectFit
+                }
             }
         }
     }

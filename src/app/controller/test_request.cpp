@@ -1,9 +1,11 @@
 #include "test_request.hpp"
+#include <memory>
+#include <iostream>
+
 
 TestRequest::TestRequest(QObject *parent)
     : QObject{parent}, m_reply{nullptr}
 {
-    
 }
 
 void TestRequest::makeRequest()
