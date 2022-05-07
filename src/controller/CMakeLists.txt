@@ -19,11 +19,14 @@ add_library(controller
                     SHARED
                         test_request.cpp
                         test_request.hpp
+                        helper/sidebar_state.cpp
+                        helper/sidebar_state.hpp
 )
 
 target_include_directories(controller
                     PUBLIC
-                        ${CMAKE_CURRENT_SOURCE_DIR}/
+                        ${CMAKE_CURRENT_SOURCE_DIR}
+                        ${CMAKE_CURRENT_SOURCE_DIR}/helper
 )
 
 target_compile_definitions(controller

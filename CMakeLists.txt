@@ -29,7 +29,6 @@ option(BUILD_TESTS ON)
 # Dependencies
 find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
-add_subdirectory(src/presentation)
 add_subdirectory(src/controller)
 add_subdirectory(src/domain)
 add_subdirectory(src/application)
@@ -50,12 +49,7 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                     PRIVATE
                         Qt6::Quick
-                        controller
-                        presentation
-)
-target_include_directories(appLibrum
-                    PRIVATE
-                        src/presentation/extensions/
+                        controller      # For registration to QML engine
 )
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

@@ -22,7 +22,7 @@ ApplicationWindow
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
-
+    
     RowLayout
     {
         id: mainlayout
