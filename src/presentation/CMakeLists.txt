@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.21)
 project(Librum VERSION 0.1 LANGUAGES CXX)
 
 # Qt
@@ -14,31 +14,26 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
-# build options
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Og")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
-
-
-
 # build
-add_library(view SHARED
+add_library(presentation SHARED
                         ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebar_state.cpp
                         ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/sidebar_state.hpp
-    )
+)
 
-target_compile_definitions(view
+target_compile_definitions(presentation
                     PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-    )
+)
 
-target_link_libraries(view
+target_link_libraries(presentation
                     PUBLIC 
                         Qt6::Quick
-    )
+)
 
-target_include_directories(view
+target_include_directories(presentation
                     PUBLIC
                         ${CMAKE_CURRENT_SOURCE_DIR}/cpp_extensions/
 
-    )
+)
+target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

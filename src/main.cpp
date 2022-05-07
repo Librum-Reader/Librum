@@ -24,9 +24,11 @@ int main(int argc, char *argv[])
     // Translations
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
+    for (const QString &locale : uiLanguages)
+    {
         const QString baseName = "Librum_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
+        if (translator.load(":/i18n/" + baseName))
+        {
             QGuiApplication::installTranslator(&translator);
             break;
         }
@@ -60,9 +62,9 @@ int main(int argc, char *argv[])
     
     // Startup
     QQmlApplicationEngine engine;
-    engine.addImportPath("qrc:/sources/src/app/view/modules");
+    engine.addImportPath("qrc:/sources/src/presentation/modules");
     
-    const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
+    const QUrl url(u"qrc:/sources/src/presentation/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

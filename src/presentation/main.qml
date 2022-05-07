@@ -1,8 +1,8 @@
 import QtQuick 
 import QtQuick.Controls
 import QtQuick.Layouts
-
 import CustomComponents
+
 import "home"
 import "login"
 import "register"
@@ -55,7 +55,6 @@ ApplicationWindow
         }
     }
     
-    
     Component { id: loginPage; MLoginPage {} }
     Component { id: forgotPasswordPage; MForgotPasswordPage {} }
     Component { id: registerPage; MRegisterPage {} }
@@ -65,8 +64,7 @@ ApplicationWindow
     Component { id: addOnsPage; MAddOns {} }
     Component { id: toolsPage; MTools {} }
     Component { id: statisticsPage; MStatistics {} }
-    
-    
+
     
     function loadPage(page)
     {

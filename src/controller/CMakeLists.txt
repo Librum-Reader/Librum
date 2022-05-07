@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.21)
 
 # Qt
 set(CMAKE_AUTOUIC ON)
@@ -14,29 +14,26 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
-# build options
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Og")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
-
-
-
 # build
-add_library(controller SHARED
+add_library(controller 
+                    SHARED
                         test_request.cpp
                         test_request.hpp
-    )
+)
 
 target_include_directories(controller
                     PUBLIC
                         ${CMAKE_CURRENT_SOURCE_DIR}/
-    )
+)
 
 target_compile_definitions(controller
                     PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-    )
+)
 target_link_libraries(controller
                     PUBLIC 
                         Qt6::Quick
-    )
+                        infrastructure
+)
+target_compile_options(controller PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(controller PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

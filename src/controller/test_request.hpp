@@ -15,7 +15,7 @@ class TestRequest : public QObject
 {
     Q_OBJECT
 public:
-    TestRequest(QObject *parent = nullptr);
+    explicit TestRequest(QObject *parent = nullptr);
     
 public slots:
     void makeRequest();
