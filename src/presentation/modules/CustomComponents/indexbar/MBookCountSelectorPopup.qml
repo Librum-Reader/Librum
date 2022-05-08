@@ -6,8 +6,10 @@ import CustomComponents
 Popup
 {
     id: root
+    signal tagSelctionMade
+    
     padding: 0
-    implicitWidth: 151
+    implicitWidth: 58
     background: Rectangle
     {
         color: "transparent"
@@ -34,7 +36,7 @@ Popup
             Layout.fillHeight: true
             Layout.fillWidth: true
             verticalPadding: 8
-            horizontalPadding: 4
+            horizontalPadding: 8
             background: Rectangle
             {
                 color: properties.colorBackground
@@ -57,50 +59,61 @@ Popup
                 MDropDownListItem
                 {
                     Layout.fillWidth: true
-                    selected: true
-                    text: "Recently read"
+                    text: "2"
                     onClicked: itemLayout.changeSelected(this)
-                    
-                    Component.onCompleted: itemLayout.currentSelected = this
+                    padding: 12
                 }
                 
                 MDropDownListItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "Recently added"
+                    text: "4"
                     onClicked: itemLayout.changeSelected(this)
+                    padding: 12
                 }
                 
                 MDropDownListItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "By Percentage"
+                    text: "8"
                     onClicked: itemLayout.changeSelected(this)
+                    padding: 12
                 }
                 
                 MDropDownListItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "Book (A-Z)"
+                    text: "10"
                     onClicked: itemLayout.changeSelected(this)
+                    padding: 8
                 }
                 
                 MDropDownListItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "Author (A-Z)"
+                    text: "12"
                     onClicked: itemLayout.changeSelected(this)
+                    padding: 8
+                }
+                
+                MDropDownListItem
+                {
+                    Layout.fillWidth: true
+                    text: "14"
+                    onClicked: itemLayout.changeSelected(this)
+                    padding: 8
                 }
                 
                 function changeSelected(newSelected)
                 {
-                    itemLayout.currentSelected.selected = false;
+                    if(itemLayout.currentSelected != null)
+                    {
+                        itemLayout.currentSelected.selected = false;
+                    }
                     itemLayout.currentSelected = newSelected;
                     itemLayout.currentSelected.selected = true;
+                    
+                    root.tagSelctionMade();
                 }
             }
         }

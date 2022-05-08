@@ -8,6 +8,7 @@ FocusScope
     id: root
     property bool selected : false
     property string text : "My item"
+    property int padding : 10
     signal clicked
     
     implicitWidth: 137
@@ -19,7 +20,7 @@ FocusScope
         id: container
         anchors.fill: parent
         verticalPadding: 0
-        horizontalPadding: 10
+        horizontalPadding: root.padding
         background: Rectangle
         {
             color: (root.selected) ? properties.colorSidebarMark : properties.colorBackground
@@ -30,6 +31,7 @@ FocusScope
         
         Label
         {
+            id: content
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             leftPadding: 4

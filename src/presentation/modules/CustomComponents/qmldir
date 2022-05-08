@@ -13,3 +13,4 @@ MSettingsSidebar 1.0 settingsSidebar/MSettingsSidebar.qml
 MMinimalBook 1.0 MMinimalBook.qml
 MSaveBeforeLeavingPopup 1.0 MSaveBeforeLeavingPopup.qml
 MLabeledCheckBox 1.0 MLabeledCheckBox.qml
+MDropDownListItem 1.0 MDropDownListItem.qml

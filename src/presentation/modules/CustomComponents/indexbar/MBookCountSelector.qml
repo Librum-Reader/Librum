@@ -6,6 +6,8 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    signal selected
+    
     implicitWidth: 58
     implicitHeight: 32
     
@@ -45,5 +47,12 @@ FocusScope
                 fillMode: Image.PreserveAspectFit
             }
         }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: selected()
     }
 }

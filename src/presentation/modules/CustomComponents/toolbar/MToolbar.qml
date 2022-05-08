@@ -48,7 +48,6 @@ FocusScope
             {
                 id: sortByPopup
                 y: sortByButton.y + sortByButton.height + mainLayout.popUpTopSpacing
-                visible: false
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
             }
         }
@@ -63,7 +62,6 @@ FocusScope
             {
                 id: filterByPopup
                 y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
-                visible: false
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
                 
                 onFilterQuerySent:
@@ -85,7 +83,6 @@ FocusScope
             {
                 id: tagSelectorPopup
                 y: tagSelector.y + tagSelector.height + mainLayout.popUpTopSpacing
-                visible: false
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
                 
                 onTagSelctionMade:

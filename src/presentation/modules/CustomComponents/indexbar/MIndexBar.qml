@@ -25,6 +25,15 @@ FocusScope
         {
             id: bookCountSelector
             Layout.alignment: Qt.AlignVCenter
+            onSelected: (bookCountSelectorPopup.opened) ? bookCountSelectorPopup.close() : bookCountSelectorPopup.open()
+            
+            MBookCountSelectorPopup
+            {
+                id: bookCountSelectorPopup
+                x: parent.x
+                y: parent.y - bookCountSelectorPopup.height - 8
+                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+            }
         }
         
         Label

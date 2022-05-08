@@ -109,10 +109,10 @@
         <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByButton.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByItem.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorPopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorItem.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/MRemoveOptionButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/indexbar/MBookCountSelectorPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/MDropDownListItem.qml</file>
     </qresource>
 </RCC>

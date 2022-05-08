@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import CustomComponents
 
 Popup
 {
@@ -49,27 +50,27 @@ Popup
             ColumnLayout
             {
                 id: itemLayout
-                property MTagSelectorItem currentSelected : null
+                property MDropDownListItem currentSelected : null
                 
                 width: parent.width
                 spacing: 0
                 
                 
-                MTagSelectorItem
+                MDropDownListItem
                 {
                     Layout.fillWidth: true
                     text: "Technology"
                     onClicked: itemLayout.changeSelected(this)
                 }
                 
-                MTagSelectorItem
+                MDropDownListItem
                 {
                     Layout.fillWidth: true
                     text: "To read"
                     onClicked: itemLayout.changeSelected(this)
                 }
                 
-                MTagSelectorItem
+                MDropDownListItem
                 {
                     Layout.fillWidth: true
                     text: "Romance"
