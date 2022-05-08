@@ -10,8 +10,8 @@ FocusScope
     property color borderColor: properties.colorDarkBorder
     property int borderWidth: 1
     property color backgroundColor : "red"
-    property color fontColor : "black"
     property string textContent : "Text here"
+    property color fontColor : "black"
     property bool fontBold : false
     property double fontSize : 11
     property string imagePath : ""
@@ -34,6 +34,7 @@ FocusScope
         border.color: root.borderColor
         radius: root.buttonRadius
         opacity: (mouseArea.pressed ? root.backgroundOpacityOnPressed : 1)
+        antialiasing: true
         
         RowLayout
         {

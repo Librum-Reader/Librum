@@ -10,9 +10,10 @@ FocusScope
     property int boxHeight : 40
     property string placeholderContent : ""
     property color placeholderColor : "black"
-    property int inputFontSize : 12
+    property double inputFontSize : 12
     property color inputFontColor : properties.colorBaseText
     property string headerText : "Header here"
+    property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
     property color headerFontColor : properties.colorBaseTitle
     property int headerToBoxSpacing : 2
@@ -44,7 +45,7 @@ FocusScope
             text: root.headerText
             font.family: properties.defaultFontFamily
             font.pointSize: root.headerFontSize
-            font.weight: Font.Medium
+            font.weight: root.headerFontWeight
             color: root.headerFontColor
         }
         

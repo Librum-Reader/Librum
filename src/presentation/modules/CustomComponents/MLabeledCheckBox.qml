@@ -14,6 +14,7 @@ FocusScope
     property color uncheckedBackgroundColor : "transparent"
     property color checkedBackgroundColor : properties.colorBasePurple
     property string imagePath : properties.iconCheckWhite
+    property int imageSize: container.width - 10
     property bool imageDefaultVisibility : false
     property bool checked : false
     property int spacing : 5
@@ -48,7 +49,7 @@ FocusScope
                 id: image
                 anchors.centerIn: parent
                 visible: (root.checked ? true : false)
-                sourceSize.width: parent.width - 10
+                sourceSize.width: root.imageSize
                 source: root.imagePath
                 fillMode: Image.PreserveAspectFit
             }

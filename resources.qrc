@@ -52,6 +52,7 @@
         <file>resources/images/edit_icon.svg</file>
         <file>resources/images/plus_purple_icon.svg</file>
         <file>resources/images/eye_crossed_image.png</file>
+        <file>resources/images/arrow_filled_up_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/presentation/main.qml</file>
@@ -76,10 +77,7 @@
         <file>src/presentation/modules/CustomComponents/MCheckBox.qml</file>
         <file>src/presentation/modules/CustomComponents/MButton.qml</file>
         <file>src/presentation/modules/CustomComponents/MBook.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MFilterByButton.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/MSelectCheckBox.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MSortByButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MTagSelectorButton.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/MToolbar.qml</file>
         <file>src/presentation/modules/CustomComponents/sidebar/MProfileBox.qml</file>
         <file>src/presentation/modules/CustomComponents/sidebar/MSidebar.qml</file>
@@ -106,5 +104,11 @@
         <file>src/presentation/modules/CustomComponents/MMinimalBook.qml</file>
         <file>src/presentation/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/MLabeledCheckBox.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByItem.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByPopup.qml</file>
     </qresource>
 </RCC>

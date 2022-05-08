@@ -7,7 +7,7 @@ FocusScope
 {
     id: root
     property bool opened : false
-    signal sortQueryEmitted()
+    signal clicked()
     
     implicitWidth: 100
     implicitHeight: 36
@@ -47,17 +47,6 @@ FocusScope
                     font.pointSize: 12
                     font.family: properties.defaultFontFamily
                     font.weight: Font.Bold
-                
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        
-                        onClicked:
-                        {
-                            root.opened = !root.opened
-                            console.log("Clicked"); 
-                        }
-                    }
                 }
                 
                 Image
@@ -68,6 +57,17 @@ FocusScope
                     fillMode: Image.PreserveAspectFit
                 }
             }
+        }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked:
+        {
+            root.opened = !root.opened
+            root.clicked();
         }
     }
 }

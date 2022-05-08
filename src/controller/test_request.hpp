@@ -9,6 +9,7 @@
 #include <QByteArray>
 #include <QObject>
 #include <QDebug>
+#include "test_class.hpp"
 
 
 class TestRequest : public QObject

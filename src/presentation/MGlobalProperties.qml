@@ -2,7 +2,7 @@ import QtQuick
 
 Item
 {
-    property color colorBrightText   : "white"
+    property color colorBrightText   : "#FFFFFF"
     property color colorLightText    : "#8E8EA9"
     property color colorLightText2   : "#8A8AA0"
     property color colorLightText3   : "#666687"
@@ -50,6 +50,7 @@ Item
     property string iconDots : "/resources/images/dots_icon.svg"
     property string iconArrowRightHallow : "/resources/images/arrow_hallow_right_icon.svg"
     property string iconArrowDownFilled : "/resources/images/arrow_filled_down_icon.svg"
+    property string iconArrowUpFilled : "/resources/images/arrow_filled_up_icon.svg"    
     property string iconPlusWhite : "/resources/images/plus_white_icon.svg"
     property string iconPlusBlack : "/resources/images/plus_black_icon.svg"
     property string iconPlusPurple : "/resources/images/plus_purple_icon.svg"
