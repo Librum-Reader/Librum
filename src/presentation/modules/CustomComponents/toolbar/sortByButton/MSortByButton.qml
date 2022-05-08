@@ -6,7 +6,6 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
-    property bool opened : false
     signal clicked()
     
     implicitWidth: 100
@@ -66,7 +65,6 @@ FocusScope
         
         onClicked:
         {
-            root.opened = !root.opened
             root.clicked();
         }
     }

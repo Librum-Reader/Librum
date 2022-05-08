@@ -6,22 +6,23 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    property string text : "Reset Something"
     signal clicked()
     
-    implicitWidth: 100
+    implicitWidth: container.width
     implicitHeight: 36
     
     
     Pane
     {
         id: container
-        anchors.fill: parent
-        padding: 0
+        height: parent.height
+        padding: 12
         background: Rectangle
         {
-            color: properties.colorBackground
+            color: properties.colorLightPurple
             border.width: 1
-            border.color: properties.colorLightBorder
+            border.color: properties.colorMediumPurple
             radius: 5
         }
         
@@ -29,25 +30,26 @@ FocusScope
         RowLayout
         {
             anchors.centerIn: parent
-            spacing: 4
-            
-            Image
-            {
-                id: tagIcon
-                sourceSize.height: 18
-                source: properties.iconTag
-                fillMode: Image.PreserveAspectFit
-            }
+            spacing: 6
             
             Label
             {
-                id: tagLabel
-                color: properties.colorBaseText
-                text: "Tags"
+                id: filterByLabel
+                color: properties.colorBasePurple
+                text: root.text
                 font.pointSize: 12
                 font.family: properties.defaultFontFamily
                 font.weight: Font.Bold
             }
+            
+            Image
+            {
+                id: filterByArrowIcon
+                sourceSize.height: 11
+                source: properties.iconClosePurple
+                fillMode: Image.PreserveAspectFit
+            }
+            
         }
     }
     

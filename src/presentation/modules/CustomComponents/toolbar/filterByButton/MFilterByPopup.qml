@@ -6,10 +6,9 @@ import CustomComponents
 Popup
 {
     id: root
-    signal clicked
+    signal filterQuerySent
     
     padding: 0
-    implicitHeight: 250
     implicitWidth: 273
     background: Rectangle
     {
@@ -107,15 +106,15 @@ Popup
                             id: readBox
                             Layout.topMargin: 15
                             Layout.fillWidth: true
-                            boxWidth: 16
-                            boxHeight: 16
+                            boxWidth: 17
+                            boxHeight: 17
                             borderColor: properties.colorLightBorder2
                             spacing:  7
                             textContent: "Read"
-                            fontPointSize: 10
+                            fontPointSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: properties.colorLightText3
-                            imageSize: 8
+                            imageSize: 9
                         }
                         
                         MLabeledCheckBox
@@ -123,15 +122,15 @@ Popup
                             id: unreadBox
                             Layout.topMargin: 10
                             Layout.fillWidth: true
-                            boxWidth: 16
-                            boxHeight: 16
+                            boxWidth: 17
+                            boxHeight: 17
                             borderColor: properties.colorLightBorder2
                             spacing:  7
                             textContent: "Unread"
-                            fontPointSize: 10
+                            fontPointSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: properties.colorLightText3
-                            imageSize: 8
+                            imageSize: 9
                         }
                     }
                     
@@ -163,15 +162,15 @@ Popup
                             id: onlyBooksBox
                             Layout.topMargin: 15
                             Layout.fillWidth: true
-                            boxWidth: 16
-                            boxHeight: 16
+                            boxWidth: 17
+                            boxHeight: 17
                             borderColor: properties.colorLightBorder2
                             spacing:  7
                             textContent: "Only Books"
-                            fontPointSize: 10
+                            fontPointSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: properties.colorLightText3
-                            imageSize: 8
+                            imageSize: 9
                         }
                         
                         MLabeledCheckBox
@@ -179,15 +178,15 @@ Popup
                             id: onlyFilesBox
                             Layout.topMargin: 10
                             Layout.fillWidth: true
-                            boxWidth: 16
-                            boxHeight: 16
+                            boxWidth: 17
+                            boxHeight: 17
                             borderColor: properties.colorLightBorder2
-                            spacing:  7
+                            spacing: 7
                             textContent: "Only Files"
-                            fontPointSize: 10
+                            fontPointSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: properties.colorLightText3
-                            imageSize: 8
+                            imageSize: 9
                         }
                     }
                 }
@@ -197,16 +196,16 @@ Popup
                     id: applyButton
                     Layout.fillWidth: true
                     Layout.preferredHeight: 28
-                    Layout.topMargin: 6
+                    Layout.topMargin: 8
                     buttonRadius: 3
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple
                     textContent: "Apply Filter"
-                    fontSize: 10
+                    fontSize: 10.5
                     fontColor: properties.colorBrightText
                     fontBold: true
                     
-                    onClicked: root.clicked()
+                    onClicked: root.filterQuerySent()
                 }
             }
         }

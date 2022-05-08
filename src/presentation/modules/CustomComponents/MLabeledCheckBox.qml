@@ -19,7 +19,7 @@ FocusScope
     property bool checked : false
     property int spacing : 5
     property string textContent : "<text here>"
-    property int fontPointSize : 12
+    property double fontPointSize : 12
     property double fontWeight : 1
     property color fontColor : "black"
     signal clicked()

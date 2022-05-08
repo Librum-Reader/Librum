@@ -5,6 +5,8 @@ import QtQuick.Controls
 Popup
 {
     id: root
+    signal tagSelctionMade
+    
     padding: 0
     implicitWidth: 151
     background: Rectangle
@@ -47,59 +49,43 @@ Popup
             ColumnLayout
             {
                 id: itemLayout
-                property MSortByItem currentSelected : null
+                property MTagSelectorItem currentSelected : null
                 
                 width: parent.width
                 spacing: 0
                 
                 
-                MSortByItem
+                MTagSelectorItem
                 {
                     Layout.fillWidth: true
-                    selected: true
-                    text: "Recently read"
-                    onClicked: itemLayout.changeSelected(this)
-                    
-                    Component.onCompleted: itemLayout.currentSelected = this
-                }
-                
-                MSortByItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "Recently added"
+                    text: "Technology"
                     onClicked: itemLayout.changeSelected(this)
                 }
                 
-                MSortByItem
+                MTagSelectorItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "By Percentage"
+                    text: "To read"
                     onClicked: itemLayout.changeSelected(this)
                 }
                 
-                MSortByItem
+                MTagSelectorItem
                 {
                     Layout.fillWidth: true
-                    selected: false
-                    text: "Book (A-Z)"
-                    onClicked: itemLayout.changeSelected(this)
-                }
-                
-                MSortByItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "Author (A-Z)"
+                    text: "Romance"
                     onClicked: itemLayout.changeSelected(this)
                 }
                 
                 function changeSelected(newSelected)
                 {
-                    itemLayout.currentSelected.selected = false;
+                    if(itemLayout.currentSelected != null)
+                    {
+                        itemLayout.currentSelected.selected = false;
+                    }
                     itemLayout.currentSelected = newSelected;
                     itemLayout.currentSelected.selected = true;
+                    
+                    root.tagSelctionMade();
                 }
             }
         }

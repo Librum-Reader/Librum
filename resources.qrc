@@ -53,6 +53,7 @@
         <file>resources/images/plus_purple_icon.svg</file>
         <file>resources/images/eye_crossed_image.png</file>
         <file>resources/images/arrow_filled_up_icon.svg</file>
+        <file>resources/images/close_purple_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/presentation/main.qml</file>
@@ -110,5 +111,8 @@
         <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorButton.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByItem.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorItem.qml</file>
+        <file>src/presentation/modules/CustomComponents/toolbar/MRemoveOptionButton.qml</file>
     </qresource>
 </RCC>

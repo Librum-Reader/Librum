@@ -65,6 +65,12 @@ FocusScope
                 y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
                 visible: false
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+                
+                onFilterQuerySent:
+                {
+                    close();
+                    resetFiltersButton.visible = true;
+                }
             }
         }
         
@@ -72,6 +78,47 @@ FocusScope
         {
             id: tagSelector
             visible: root.showTagBox
+            
+            onClicked: (tagSelectorPopup.opened) ? tagSelectorPopup.close() : tagSelectorPopup.open()
+            
+            MTagSelectorPopup
+            {
+                id: tagSelectorPopup
+                y: tagSelector.y + tagSelector.height + mainLayout.popUpTopSpacing
+                visible: false
+                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+                
+                onTagSelctionMade:
+                {
+                    resetTagsButton.visible = true;
+                }
+            }
+        }
+        
+        MRemoveOptionButton
+        {
+            id: resetFiltersButton
+            visible: false
+            text: "Remove Filters"
+            
+            onClicked:
+            {
+                // Reset filters
+                visible = false;
+            }
+        }
+        
+        MRemoveOptionButton
+        {
+            id: resetTagsButton
+            visible: false
+            text: "Remove Tags"
+            
+            onClicked:
+            {
+                // Reset tags
+                visible = false;
+            }
         }
         
         Item

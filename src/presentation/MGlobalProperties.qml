@@ -69,6 +69,7 @@ Item
     property string iconAddImage : "/resources/images/add_image_icon.svg"
     property string iconTrash : "/resources/images/trash_icon.svg"
     property string iconEdit : "/resources/images/edit_icon.svg"
+    property string iconClosePurple : "/resources/images/close_purple_icon.svg"
     
     property string iconSettingsAboutGray : "/resources/images/settings/about_gray.svg"
     property string iconSettingsShortcutsGray : "/resources/images/settings/shortcuts_gray.svg"    
