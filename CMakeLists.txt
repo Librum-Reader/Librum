@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.21)
 project(Librum VERSION 0.1 LANGUAGES CXX)
 
 
@@ -6,7 +6,7 @@ project(Librum VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/app/view/modules" CACHE STRING "path to qml modules")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/presentation/modules" CACHE STRING "path to qml modules")
 
 
 # Language
@@ -17,9 +17,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Build options
-set(CMAKE_CXX_FLAGS "-Wall -Wextra")
-set(CMAKE_CXX_FLAGS_DEBUG "-g3 -Og")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -flto")
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
 
 
@@ -30,34 +27,32 @@ option(BUILD_TESTS ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Quick WebEngine LinguistTools REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick LinguistTools REQUIRED)
-add_subdirectory(src/app/model)
-add_subdirectory(src/app/view)
-add_subdirectory(src/app/controller)
+find_package(QT NAMES Qt6 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+add_subdirectory(src/controller)
+add_subdirectory(src/infrastructure)
+add_subdirectory(src/domain)
+add_subdirectory(src/application)
 
 
 
 # Building
 qt_add_executable(appLibrum
-    src/app/main.cpp
     resources.qrc
+    src/main.cpp
 )
 
 target_compile_definitions(appLibrum
                     PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-    )
+)
 target_link_libraries(appLibrum
-                    PRIVATE
-                        Qt6::Quick
-                        controller
-                        view
-    )
-target_include_directories(appLibrum
-                    PRIVATE
-                        src/app/view/extensions/
-    )
+                PRIVATE
+                    Qt6::Quick
+                    controller      # For registration to QML engine
+)
+target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 
 

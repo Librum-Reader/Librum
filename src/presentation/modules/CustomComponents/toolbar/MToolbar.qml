@@ -2,6 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import "filterByButton"
+import "sortByButton"
+import "tagSelector"
 
 FocusScope
 {
@@ -23,6 +26,8 @@ FocusScope
     RowLayout
     {
         id: mainLayout
+        property int popUpTopSpacing : 6
+        
         anchors.fill: parent
         spacing: 12
         
@@ -36,11 +41,31 @@ FocusScope
         MSortByButton
         {
             id: sortByButton
+            
+            onClicked: (sortByPopup.opened) ? sortByPopup.close() : sortByPopup.open()
+            
+            MSortByPopup
+            {
+                id: sortByPopup
+                y: sortByButton.y + sortByButton.height + mainLayout.popUpTopSpacing
+                visible: false
+                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+            }
         }
         
         MFilterByButton
         {
-            id: filterBy
+            id: filterByButton
+            
+            onClicked: (filterByPopup.opened) ? filterByPopup.close() : filterByPopup.open()
+            
+            MFilterByPopup
+            {
+                id: filterByPopup
+                y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
+                visible: false
+                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+            }
         }
         
         MTagSelectorButton

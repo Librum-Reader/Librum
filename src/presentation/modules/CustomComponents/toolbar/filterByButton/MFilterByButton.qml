@@ -6,8 +6,12 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    property bool opened : false
+    signal clicked()
+    
     implicitWidth: 100
     implicitHeight: 36
+    
     
     Pane
     {
@@ -46,5 +50,12 @@ FocusScope
                 font.weight: Font.Bold
             }
         }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: root.clicked()
     }
 }

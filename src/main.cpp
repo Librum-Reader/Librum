@@ -4,36 +4,38 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
-#include <QDebug>
-#include <QFontDatabase>
-#include <QDirIterator>
 #include "qdiriterator.h"
 #include "qfontdatabase.h"
 #include "sidebar_state.hpp"
+#include "test_request.hpp"
+
 
 int main(int argc, char *argv[])
 {    
     // App
     QGuiApplication app(argc, argv);
-    app.setOrganizationName("Etovex");
-    app.setOrganizationDomain("Etovex.com");
-    app.setApplicationName("Librum");
+    QGuiApplication::setOrganizationName("Etovex");
+    QGuiApplication::setOrganizationDomain("Etovex.com");
+    QGuiApplication::setApplicationName("Librum");
     
     
+    TestRequest tr;
     
     // Translations
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
+    for (const QString &locale : uiLanguages)
+    {
         const QString baseName = "Librum_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            app.installTranslator(&translator);
+        if (translator.load(":/i18n/" + baseName))
+        {
+            QGuiApplication::installTranslator(&translator);
             break;
         }
     }
-    
-    
-    
+
+
+
     // Loading fonts
     const QString fontsPath = QGuiApplication::instance()->applicationDirPath() + "/resources/fonts/";
     const QDir fontsDir(fontsPath);
@@ -49,26 +51,26 @@ int main(int argc, char *argv[])
     {
         qWarning() << "Unable to load application fonts from " + fontsPath;
     }
-    
-    
-    
+
+
+
     // Type registering
     SidebarState sidebarState;
     qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
-    
+
     
     
     // Startup
     QQmlApplicationEngine engine;
-    engine.addImportPath("qrc:/sources/src/app/view/modules");
+    engine.addImportPath("qrc:/sources/src/presentation/modules");
     
-    const QUrl url(u"qrc:/sources/src/app/view/main.qml"_qs);
+    const QUrl url(u"qrc:/sources/src/presentation/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-    
-    return app.exec();
+
+    return QGuiApplication::exec();
 }

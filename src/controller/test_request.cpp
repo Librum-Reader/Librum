@@ -1,9 +1,12 @@
 #include "test_request.hpp"
+#include "test_class.hpp"
+#include <memory>
+#include <iostream>
+
 
 TestRequest::TestRequest(QObject *parent)
     : QObject{parent}, m_reply{nullptr}
 {
-    
 }
 
 void TestRequest::makeRequest()
@@ -15,6 +18,8 @@ void TestRequest::makeRequest()
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
     sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
     request.setSslConfiguration(sslConfiguration);
+    
+    TestClass a;
     
     QJsonObject jsonObject;
     jsonObject["username"] = "DavidLazarescu";
