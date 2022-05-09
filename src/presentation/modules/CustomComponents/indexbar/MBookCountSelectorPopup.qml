@@ -6,7 +6,7 @@ import CustomComponents
 Popup
 {
     id: root
-    signal tagSelctionMade
+    signal bookCountSelctionMade(string content)
     
     padding: 0
     implicitWidth: 58
@@ -94,6 +94,8 @@ Popup
                     text: "12"
                     onClicked: itemLayout.changeSelected(this)
                     padding: 8
+                    
+                    Component.onCompleted: itemLayout.changeSelected(this)
                 }
                 
                 MDropDownListItem
@@ -113,7 +115,7 @@ Popup
                     itemLayout.currentSelected = newSelected;
                     itemLayout.currentSelected.selected = true;
                     
-                    root.tagSelctionMade();
+                    root.bookCountSelctionMade(itemLayout.currentSelected.text);
                 }
             }
         }

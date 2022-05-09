@@ -18,9 +18,7 @@ void TestRequest::makeRequest()
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
     sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
     request.setSslConfiguration(sslConfiguration);
-    
-    TestClass a;
-    
+        
     QJsonObject jsonObject;
     jsonObject["username"] = "DavidLazarescu";
     jsonObject["password"] = "12345";

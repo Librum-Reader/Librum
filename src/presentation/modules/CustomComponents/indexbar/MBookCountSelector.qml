@@ -6,6 +6,7 @@ import QtQuick.Controls
 FocusScope
 {
     id: root
+    property int amountOfDisplayedBooks : 12
     signal selected
     
     implicitWidth: 58
@@ -32,7 +33,7 @@ FocusScope
             Label
             {
                 id: bookCountLabel
-                text: bookCount.toString()
+                text: root.amountOfDisplayedBooks.toString()
                 color: properties.colorBaseText
                 font.family: properties.defaultFontFamily
                 font.pointSize: 11

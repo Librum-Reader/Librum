@@ -33,6 +33,12 @@ FocusScope
                 x: parent.x
                 y: parent.y - bookCountSelectorPopup.height - 8
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+                
+                onBookCountSelctionMade: content =>
+                {
+                    parent.amountOfDisplayedBooks = content;
+                    close();
+                }
             }
         }
         
