@@ -251,7 +251,6 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
-                        addImageToRight: true
                         imagePath: properties.iconEyeOn
                         toggledImagePath: properties.iconEyeOff
                     }
@@ -266,7 +265,6 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
-                        addImageToRight: true
                         imagePath: properties.iconEyeOn
                         toggledImagePath: properties.iconEyeOff
                     }

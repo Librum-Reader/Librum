@@ -87,7 +87,6 @@ Page
                     Layout.fillWidth: true
                     Layout.topMargin: 22
                     headerText: "Password"
-                    addImageToRight: true
                     imagePath: properties.iconEyeOn
                     toggledImagePath: properties.iconEyeOff
                 }

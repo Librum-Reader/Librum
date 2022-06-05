@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import librum.extensions.sidebar
 import CustomComponents
+import "toolbar"
+import "indexbar"
 
 
 Page

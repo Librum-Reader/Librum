@@ -23,7 +23,6 @@ FocusScope
     property int textPadding : 15
     property string imagePath : ""
     property string toggledImagePath : ""
-    property bool addImageToRight : false
     property bool isError : false
     property bool autoFocus : false
     
@@ -81,7 +80,7 @@ FocusScope
                     font.family: properties.defaultFontFamily
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
-                    echoMode: (!root.addImageToRight || imageArea.pressed ? TextInput.Normal : TextInput.Password)
+                    echoMode: (!root.imagePath.length > 0 || imageArea.pressed ? TextInput.Normal : TextInput.Password)
                     background: Rectangle   
                     {   
                         anchors.fill: parent
@@ -105,7 +104,7 @@ FocusScope
                     Layout.preferredHeight: 18
                     Layout.rightMargin: 10
                     Layout.alignment: Qt.AlignVCenter
-                    visible: root.addImageToRight
+                    visible: root.imagePath.length > 0
                     source: (imageArea.pressed ? root.toggledImagePath : root.imagePath)
                     
                     MouseArea

@@ -116,7 +116,6 @@ Page
                             Layout.topMargin: 16
                             headerText: 'Password'
                             placeholderColor: properties.colorLightText
-                            addImageToRight: true
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
                         }
@@ -128,7 +127,6 @@ Page
                             Layout.topMargin: 16
                             headerText: 'Confirmation password'
                             placeholderColor: properties.colorLightText
-                            addImageToRight: true
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
                         }

@@ -78,20 +78,7 @@
         <file>src/presentation/modules/CustomComponents/MCheckBox.qml</file>
         <file>src/presentation/modules/CustomComponents/MButton.qml</file>
         <file>src/presentation/modules/CustomComponents/MBook.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MToolbar.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MProfileBox.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MSidebar.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MSidebarAnimations.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MSidebarItem.qml</file>
-        <file>src/presentation/modules/CustomComponents/indexbar/MIndexBar.qml</file>
-        <file>src/presentation/modules/CustomComponents/indexbar/MBookCountSelector.qml</file>
-        <file>src/presentation/modules/CustomComponents/indexbar/MContentRect.qml</file>
-        <file>src/presentation/modules/CustomComponents/indexbar/MNavigationArrow.qml</file>
         <file>src/presentation/home/MEmptyScreenContent.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MProfilePopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/sidebar/MProfilePopupItem.qml</file>
-        <file>src/presentation/modules/CustomComponents/settingsSidebar/MSettingsSidebar.qml</file>
-        <file>src/presentation/modules/CustomComponents/settingsSidebar/MSettingsSidebarItem.qml</file>
         <file>src/presentation/settings/MAboutPage.qml</file>
         <file>src/presentation/settings/MAppearancePage.qml</file>
         <file>src/presentation/settings/MShortcutsPage.qml</file>
@@ -104,18 +91,31 @@
         <file>src/presentation/modules/CustomComponents/MMinimalBook.qml</file>
         <file>src/presentation/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/MLabeledCheckBox.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/sortByButton/MSortByPopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/filterByButton/MFilterByPopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/tagSelector/MTagSelectorPopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MRemoveOptionButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/indexbar/MBookCountSelectorPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/MDropDownListItem.qml</file>
         <file>src/presentation/freeBooks/explorerToolbar/MExplorerToolbar.qml</file>
         <file>src/presentation/modules/CustomComponents/MWrappedCheckBox.qml</file>
         <file>src/presentation/freeBooks/explorerToolbar/MExplorerFilterByButton.qml</file>
         <file>src/presentation/freeBooks/explorerToolbar/MExplorerFilterByPopup.qml</file>
+        <file>src/presentation/home/indexbar/MNavigationArrow.qml</file>
+        <file>src/presentation/home/indexbar/MIndexBar.qml</file>
+        <file>src/presentation/home/indexbar/MContentRect.qml</file>
+        <file>src/presentation/home/indexbar/MBookCountSelectorPopup.qml</file>
+        <file>src/presentation/home/indexbar/MBookCountSelector.qml</file>
+        <file>src/presentation/home/toolbar/MToolbar.qml</file>
+        <file>src/presentation/home/toolbar/MRemoveOptionButton.qml</file>
+        <file>src/presentation/home/toolbar/tagSelector/MTagSelectorButton.qml</file>
+        <file>src/presentation/home/toolbar/tagSelector/MTagSelectorPopup.qml</file>
+        <file>src/presentation/home/toolbar/sortByButton/MSortByButton.qml</file>
+        <file>src/presentation/home/toolbar/sortByButton/MSortByPopup.qml</file>
+        <file>src/presentation/home/toolbar/filterByButton/MFilterByButton.qml</file>
+        <file>src/presentation/home/toolbar/filterByButton/MFilterByPopup.qml</file>
+        <file>src/presentation/settings/settingsSidebar/MSettingsSidebarItem.qml</file>
+        <file>src/presentation/settings/settingsSidebar/MSettingsSidebar.qml</file>
+        <file>src/presentation/sidebar/MProfileBox.qml</file>
+        <file>src/presentation/sidebar/MProfilePopup.qml</file>
+        <file>src/presentation/sidebar/MProfilePopupItem.qml</file>
+        <file>src/presentation/sidebar/MSidebar.qml</file>
+        <file>src/presentation/sidebar/MSidebarAnimations.qml</file>
+        <file>src/presentation/sidebar/MSidebarItem.qml</file>
     </qresource>
 </RCC>
