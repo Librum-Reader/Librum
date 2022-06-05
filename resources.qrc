@@ -78,7 +78,6 @@
         <file>src/presentation/modules/CustomComponents/MCheckBox.qml</file>
         <file>src/presentation/modules/CustomComponents/MButton.qml</file>
         <file>src/presentation/modules/CustomComponents/MBook.qml</file>
-        <file>src/presentation/modules/CustomComponents/toolbar/MSelectCheckBox.qml</file>
         <file>src/presentation/modules/CustomComponents/toolbar/MToolbar.qml</file>
         <file>src/presentation/modules/CustomComponents/sidebar/MProfileBox.qml</file>
         <file>src/presentation/modules/CustomComponents/sidebar/MSidebar.qml</file>
@@ -114,5 +113,9 @@
         <file>src/presentation/modules/CustomComponents/toolbar/MRemoveOptionButton.qml</file>
         <file>src/presentation/modules/CustomComponents/indexbar/MBookCountSelectorPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/MDropDownListItem.qml</file>
+        <file>src/presentation/freeBooks/explorerToolbar/MExplorerToolbar.qml</file>
+        <file>src/presentation/modules/CustomComponents/MWrappedCheckBox.qml</file>
+        <file>src/presentation/freeBooks/explorerToolbar/MExplorerFilterByButton.qml</file>
+        <file>src/presentation/freeBooks/explorerToolbar/MExplorerFilterByPopup.qml</file>
     </qresource>
 </RCC>

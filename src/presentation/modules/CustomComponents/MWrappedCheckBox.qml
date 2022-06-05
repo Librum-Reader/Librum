@@ -1,6 +1,6 @@
 import QtQuick
-import CustomComponents
 import QtQuick.Controls
+import CustomComponents
 
 
 FocusScope

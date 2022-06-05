@@ -1,10 +1,10 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import CustomComponents
 import "filterByButton"
 import "sortByButton"
 import "tagSelector"
+import CustomComponents
 
 FocusScope
 {
@@ -31,7 +31,7 @@ FocusScope
         anchors.fill: parent
         spacing: 12
         
-        MSelectCheckBox
+        MWrappedCheckBox
         {
             id: checkBox
             
@@ -128,7 +128,7 @@ FocusScope
         {
              id: searchButton
              onTriggered: (query) => searchRequested(query);
-             expensionWidth: (spacer.width <= 445 ? spacer.width : 445)
+             expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
         }
     }
 }

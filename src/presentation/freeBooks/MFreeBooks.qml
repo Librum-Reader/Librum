@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import "explorerToolbar"
 import CustomComponents
 
 
@@ -71,13 +72,12 @@ Page
             
             Item { Layout.fillWidth: true }
             
-            MToolbar
+            MExplorerToolbar
             {
                 id: toolbar
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignLeft
                 Layout.topMargin: 45
-                showTagBox: false
             }
             
             Grid

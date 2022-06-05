@@ -137,7 +137,7 @@ Page
                         implicitWidth: 34
                         implicitHeight: 32
                         imageSize: 14
-                        expensionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
+                        expansionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
                     }
                 }
                 

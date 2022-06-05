@@ -7,7 +7,7 @@ FocusScope
 {
     id: root
     property int defaultWidth : 0
-    property int expensionWidth : 445
+    property int expansionWidth : 445
     property int openAnimationDuration : 300
     property int closeAnimationDuration : 200
     property int imageSize: 16
@@ -112,7 +112,7 @@ FocusScope
         {
             target: root
             property: "implicitWidth"
-            to: root.expensionWidth
+            to: root.expansionWidth
             duration: root.openAnimationDuration
             easing.type: Easing.InOutQuad
         }
