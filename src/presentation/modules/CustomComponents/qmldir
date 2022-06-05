@@ -11,3 +11,4 @@ MMinimalBook 1.0 MMinimalBook.qml
 MSaveBeforeLeavingPopup 1.0 MSaveBeforeLeavingPopup.qml
 MLabeledCheckBox 1.0 MLabeledCheckBox.qml
 MDropDownListItem 1.0 MDropDownListItem.qml
+MComboBox 1.0 ComboBox/MComboBox.qml

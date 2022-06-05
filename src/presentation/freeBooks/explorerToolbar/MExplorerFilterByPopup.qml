@@ -33,7 +33,6 @@ Popup
         Pane
         {
             id: container
-            Layout.fillHeight: true
             Layout.fillWidth: true
             padding: 14
             background: Rectangle
@@ -73,6 +72,7 @@ Popup
                 
                 RowLayout
                 {
+                    id: timeRange
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     spacing: 17
@@ -113,6 +113,14 @@ Popup
                         borderWidth: 1
                         borderRadius: 4
                     }
+                }
+                
+                MComboBox
+                {
+                    id: languagesComboBox
+                    Layout.fillWidth: true
+                    headerText: "Language"
+                    imagePath: properties.iconArrowDownFilled
                 }
                 
                 MButton
