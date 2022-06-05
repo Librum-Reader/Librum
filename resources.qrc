@@ -118,5 +118,7 @@
         <file>src/presentation/sidebar/MSidebarAnimations.qml</file>
         <file>src/presentation/sidebar/MSidebarItem.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBox.qml</file>
+        <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
     </qresource>
 </RCC>

@@ -19,6 +19,8 @@ Popup
     ColumnLayout
     {
         id: mainLayout
+        property int popUpTopSpacing: 6        
+        
         anchors.fill: parent
         spacing: 0
         

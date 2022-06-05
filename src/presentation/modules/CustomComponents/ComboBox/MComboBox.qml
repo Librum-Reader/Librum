@@ -5,24 +5,28 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
+    property int popupSpacing: 6
     property int radius: 4
     property string headerText : "Header here"
     property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
     property color headerFontColor : properties.colorBaseTitle
-    property int headerToBoxSpacing : 2    
+    property int headerToBoxSpacing : 2
     property string imagePath: "noPath"
     property int imageSpacing: 4
     property int imageSize: 6
+    signal clicked
     
     implicitWidth: 100
     implicitHeight: mainLayout.implicitHeight
+    
     
     ColumnLayout
     {
         id: mainLayout
         width: parent.width
         spacing: root.headerToBoxSpacing
+        
         
         Label
         {
@@ -62,7 +66,7 @@ FocusScope
                 {
                     id: sortByLabel
                     color: properties.colorBaseText
-                    text: "English"
+                    text: "Any"
                     font.pointSize: 11
                     font.family: properties.defaultFontFamily
                     font.weight: Font.Normal
@@ -76,8 +80,47 @@ FocusScope
                     sourceSize.height: root.imageSize
                     source: root.imagePath
                     fillMode: Image.PreserveAspectFit
+                    
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        
+                        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+                    }
                 }
             }
         }
+    }
+        
+    MComboBoxPopup
+    {
+        id: selectionPopup
+        y: mainLayout.y + mainLayout.height + root.popupSpacing
+        listContent: ListModel
+        {
+            ListElement { languageName: "English" }
+            ListElement { languageName: "German"  }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "German"  }
+            ListElement { languageName: "Italian" }
+            ListElement { languageName: "Italian" }
+        }
+        
+        width: parent.width
+        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
     }
 }

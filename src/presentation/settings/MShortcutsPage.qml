@@ -278,9 +278,9 @@ Page
                             anchors.fill: parent
                             
                             onWheel: (wheel) =>
-                                     {
-                                         listView.moveContent( wheel.angleDelta.y > 0)
-                                     }
+                            {
+                                listView.moveContent( wheel.angleDelta.y > 0)
+                            }
                         }
                         
                         
