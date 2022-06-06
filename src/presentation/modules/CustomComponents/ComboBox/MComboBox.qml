@@ -83,6 +83,26 @@ FocusScope
                     sourceSize.height: root.imageSize
                     source: root.imagePath
                     fillMode: Image.PreserveAspectFit
+                    
+                    NumberAnimation
+                    {
+                        id: closeAnim
+                        target: icon
+                        property: "rotation"
+                        to: 0
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
+                    
+                    NumberAnimation
+                    {
+                        id: openAnim
+                        target: icon
+                        property: "rotation"
+                        to: -180
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
@@ -103,5 +123,7 @@ FocusScope
         
         width: parent.width
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+        
+        onOpenedChanged: opened ? openAnim.start() : closeAnim.start()
     }
 }
