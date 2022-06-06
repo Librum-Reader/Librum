@@ -4,7 +4,9 @@ import QtQuick.Controls
 Item
 {
     property string content : languageName
-    width: listView.width
+    property ListView container
+    
+    width: container.width
     implicitHeight: label.implicitHeight + 8
     
     Rectangle
@@ -18,8 +20,8 @@ Item
             anchors.fill: parent
             onClicked:
             {
-                listView.currentIndex = index
-                selectionPopup.close();
+                container.currentIndex = index
+                closeComboBox();
             }
         }
         
@@ -36,4 +38,13 @@ Item
             font.weight: Font.Normal
         }
     }
+    
+    Keys.onPressed: (event) =>
+                    {
+                        if(event.key === Qt.Key_Return)
+                        {
+                            if(comobBoxIsOpened())
+                            closeComboBox();
+                        }
+                    }
 }

@@ -50,7 +50,7 @@ Popup
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: root.maxHeight      
                 model: sortedModel
-                delegate: MComboBoxItem { }                
+                delegate: MComboBoxItem { container: listView }                
                 maximumFlickVelocity: 550
                 currentIndex: 0
                 keyNavigationEnabled: true
@@ -68,14 +68,17 @@ Popup
                 }
             }
         }
-        
-        Keys.onPressed: (event) => 
-                        {
-                            if(event.key === Qt.Key_Return)
-                            {
-                                
-                                if(selectionPopup.opened) selectionPopup.close();
-                            }
-                        }
+    }
+    
+    
+    
+    function closeComboBox()
+    {
+        root.close();
+    }
+    
+    function comobBoxIsOpened()
+    {
+        return root.opened;
     }
 }

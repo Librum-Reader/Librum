@@ -46,6 +46,19 @@ FocusScope
             }
         }
         
+        MRemoveOptionButton
+        {
+            id: resetFiltersButton
+            visible: false
+            text: "Remove Filters"
+            
+            onClicked:
+            {
+                // Reset filters
+                visible = false;
+            }
+        }
+        
         Item
         {
             id: spacer

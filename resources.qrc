@@ -102,7 +102,6 @@
         <file>src/presentation/home/indexbar/MBookCountSelectorPopup.qml</file>
         <file>src/presentation/home/indexbar/MBookCountSelector.qml</file>
         <file>src/presentation/home/toolbar/MToolbar.qml</file>
-        <file>src/presentation/home/toolbar/MRemoveOptionButton.qml</file>
         <file>src/presentation/home/toolbar/tagSelector/MTagSelectorButton.qml</file>
         <file>src/presentation/home/toolbar/tagSelector/MTagSelectorPopup.qml</file>
         <file>src/presentation/home/toolbar/sortByButton/MSortByButton.qml</file>
@@ -121,5 +120,6 @@
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
         <file>src/presentation/modules/CustomComponents/MSortFilterModel.qml</file>
+        <file>src/presentation/modules/CustomComponents/MRemoveOptionButton.qml</file>
     </qresource>
 </RCC>
