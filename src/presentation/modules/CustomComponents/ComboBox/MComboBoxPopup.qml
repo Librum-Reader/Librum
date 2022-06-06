@@ -5,7 +5,7 @@ import QtQuick.Layouts
 Popup
 {
     id: root
-    property string selectedContent : listView.currentItem.content
+    property string selectedContent : listView.currentItem == null ? "None" : listView.currentItem.content
     property ListModel listContent
     property int maxHeight: 250
     property int radius : 5
@@ -24,9 +24,7 @@ Popup
     {
         id: container
         width: parent.width
-        implicitHeight: mainLayout.height
-        horizontalPadding: 8
-        verticalPadding: 0
+        padding: 8
         focus: true
         background: Rectangle
         {
@@ -37,42 +35,35 @@ Popup
             antialiasing: true
         }
         
+        
         ColumnLayout
         {
             id: mainLayout
             width: parent.width
             
             
-            Component
-            {
-                id: highlighter
-                Rectangle
-                {
-                    width: 180; height: 40
-                    color: "lightsteelblue"; radius: 5
-                }
-            }    
-            
             ListView 
             {
                 id: listView
-                property int moveSpeed: 450
-                
+                maximumFlickVelocity: 550
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: root.maxHeight      
-                
-                highlight: highlighter
-                highlightMoveDuration: 100
-                highlightMoveVelocity: 100
+                currentIndex: -1
                 keyNavigationEnabled: true
-                keyNavigationWraps: false                
                 clip: true
                 focus: true
-                currentIndex: 0
-                highlightFollowsCurrentItem: true
                 boundsBehavior: Flickable.StopAtBounds
+                highlightMoveDuration: 0
+                highlightFollowsCurrentItem: true
                 
+                highlight: Rectangle
+                {
+                    radius: 4
+                    color: properties.colorLightPurple
+                }
+                
+                ScrollBar.vertical: ScrollBar { }
                 model: root.listContent
                 delegate: MComboBoxItem { } 
             }

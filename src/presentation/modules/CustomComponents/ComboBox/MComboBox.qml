@@ -67,7 +67,8 @@ FocusScope
                 {
                     id: sortByLabel
                     color: properties.colorBaseText
-                    text: selectionPopup.selectedContent === null ? "Any" : selectionPopup.selectedContent
+                    // @disable-check M325
+                    text: selectionPopup.selectedContent == null ? "Any" : selectionPopup.selectedContent
                     font.pointSize: 11
                     font.family: properties.defaultFontFamily
                     font.weight: Font.Normal
@@ -86,6 +87,13 @@ FocusScope
         }
     }
     
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+    }
+    
     MComboBoxPopup
     {
         id: selectionPopup
@@ -94,12 +102,5 @@ FocusScope
         
         width: parent.width
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-    }
-    
-    MouseArea
-    {
-        anchors.fill: parent
-        
-        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
 }

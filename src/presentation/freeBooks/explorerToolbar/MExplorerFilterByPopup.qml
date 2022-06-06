@@ -129,23 +129,23 @@ Popup
                         ListElement { languageName: "English" }
                         ListElement { languageName: "German"  }
                         ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "German"  }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "French" }
+                        ListElement { languageName: "Romanian" }
+                        ListElement { languageName: "Spanish" }
+                        ListElement { languageName: "Mandarin" }
+                        ListElement { languageName: "Protugese" }
+                        ListElement { languageName: "Hindi" }
+                        ListElement { languageName: "Bengali" }
+                        ListElement { languageName: "Russian" }
+                        ListElement { languageName: "Arabic" }
+                        ListElement { languageName: "Japanese" }
+                        ListElement { languageName: "Indonesian" }
+                        ListElement { languageName: "Turkish" }
+                        ListElement { languageName: "Korean" }
+                        ListElement { languageName: "Hungarian" }
+                        ListElement { languageName: "Thai"  }
+                        ListElement { languageName: "Swahli" }
+                        ListElement { languageName: "Dutch" }
                     }
                 }
                 

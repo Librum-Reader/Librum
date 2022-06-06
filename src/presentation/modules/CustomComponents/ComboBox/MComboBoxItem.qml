@@ -16,10 +16,7 @@ Item
         MouseArea
         {
             anchors.fill: parent
-            onClicked:
-            {
-                listView.currentIndex = index
-            }
+            onClicked: listView.currentIndex = index
         }
         
         Label
