@@ -124,8 +124,12 @@ Popup
                     headerText: "Language"
                     imagePath: properties.iconArrowDownFilled
                     
-                    listContent: ListModel
+                    listContent: listModel
+                    
+                    ListModel
                     {
+                        id: listModel
+                        ListElement { languageName: "None" }
                         ListElement { languageName: "English" }
                         ListElement { languageName: "German"  }
                         ListElement { languageName: "Italian" }
@@ -133,7 +137,7 @@ Popup
                         ListElement { languageName: "Romanian" }
                         ListElement { languageName: "Spanish" }
                         ListElement { languageName: "Mandarin" }
-                        ListElement { languageName: "Protugese" }
+                        ListElement { languageName: "Portugese" }
                         ListElement { languageName: "Hindi" }
                         ListElement { languageName: "Bengali" }
                         ListElement { languageName: "Russian" }

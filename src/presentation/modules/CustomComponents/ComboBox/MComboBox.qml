@@ -5,7 +5,7 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
-    property ListModel listContent
+    property alias listContent : selectionPopup.listContent
     property int popupSpacing: 6
     property int radius: 4
     property string headerText : "Header here"

@@ -1,12 +1,13 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import CustomComponents
 
 Popup
 {
     id: root
-    property string selectedContent : listView.currentItem == null ? "None" : listView.currentItem.content
-    property ListModel listContent
+    property string selectedContent : listView.currentItem.content
+    property alias listContent : listView.model
     property int maxHeight: 250
     property int radius : 5
     
@@ -45,11 +46,13 @@ Popup
             ListView 
             {
                 id: listView
-                maximumFlickVelocity: 550
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: root.maxHeight      
-                currentIndex: -1
+                model: sortedModel
+                delegate: MComboBoxItem { }                
+                maximumFlickVelocity: 550
+                currentIndex: 0
                 keyNavigationEnabled: true
                 clip: true
                 focus: true
@@ -57,16 +60,22 @@ Popup
                 highlightMoveDuration: 0
                 highlightFollowsCurrentItem: true
                 
+                ScrollBar.vertical: ScrollBar { }
                 highlight: Rectangle
                 {
                     radius: 4
                     color: properties.colorLightPurple
                 }
-                
-                ScrollBar.vertical: ScrollBar { }
-                model: root.listContent
-                delegate: MComboBoxItem { } 
             }
         }
+        
+        Keys.onPressed: (event) => 
+                        {
+                            if(event.key === Qt.Key_Return)
+                            {
+                                
+                                if(selectionPopup.opened) selectionPopup.close();
+                            }
+                        }
     }
 }
