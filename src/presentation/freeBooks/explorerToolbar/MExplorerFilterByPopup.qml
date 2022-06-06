@@ -82,7 +82,7 @@ Popup
                     
                     MLabeledInputBox
                     {
-                        id: addedInput
+                        id: frominput
                         Layout.fillWidth: true
                         boxHeight: 30
                         headerToBoxSpacing: 2
@@ -98,9 +98,10 @@ Popup
                         borderRadius: 4
                     }
                     
+                    
                     MLabeledInputBox
                     {
-                        id: formatInput
+                        id: toInput
                         Layout.fillWidth: true
                         boxHeight: 30
                         headerToBoxSpacing: 2
@@ -123,6 +124,7 @@ Popup
                     Layout.fillWidth: true
                     headerText: "Language"
                     imagePath: properties.iconArrowDownFilled
+                    maxPopupHeight: 208
                     
                     listContent: listModel
                     

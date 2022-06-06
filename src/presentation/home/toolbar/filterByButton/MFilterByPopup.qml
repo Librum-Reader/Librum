@@ -138,23 +138,25 @@ Popup
                     {
                         Layout.fillWidth: true
                         
-                        
-                        MLabeledInputBox
+                        MComboBox
                         {
-                            id: formatInput
+                            id: formatInputComboBox
                             Layout.fillWidth: true
-                            boxHeight: 30
-                            headerToBoxSpacing: 2
-                            placeholderContent: "e.g. PDF"
-                            inputFontSize: 11
-                            placeholderColor: properties.colorLightText
+                            Layout.topMargin: 2
                             headerText: "Format"
-                            headerFontSize: 10.5
-                            headerFontWeight: Font.Bold
-                            headerFontColor: properties.colorLightText3
-                            textPadding: 8
-                            borderWidth: 1
-                            borderRadius: 4
+                            imagePath: properties.iconArrowDownFilled
+                            maxPopupHeight: 208
+                            
+                            listContent: listModel
+                            
+                            ListModel
+                            {
+                                id: listModel
+                                ListElement { languageName: "Any" }
+                                ListElement { languageName: "Pdf" }
+                                ListElement { languageName: "Epub"  }
+                                ListElement { languageName: "Mobi" }
+                            }
                         }
                         
                         MLabeledCheckBox

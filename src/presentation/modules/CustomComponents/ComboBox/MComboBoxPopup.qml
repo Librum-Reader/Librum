@@ -8,7 +8,7 @@ Popup
     id: root
     property string selectedContent : listView.currentItem.content
     property alias listContent : listView.model
-    property int maxHeight: 250
+    property int maxHeight: 200
     property int radius : 5
     
     padding: 0

@@ -6,12 +6,13 @@ FocusScope
 {
     id: root
     property alias listContent : selectionPopup.listContent
-    property int popupSpacing: 6
+    property int popupSpacing: 5
     property int radius: 4
+    property alias maxPopupHeight : selectionPopup.maxHeight
     property string headerText : "Header here"
-    property int headerFontWeight : Font.Medium
+    property int headerFontWeight : Font.Bold
     property double headerFontSize : 10.5
-    property color headerFontColor : properties.colorBaseTitle
+    property color headerFontColor : properties.colorLightText3
     property int headerToBoxSpacing : 2
     property string imagePath: "noPath"
     property int imageSpacing: 4
