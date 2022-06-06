@@ -5,11 +5,13 @@ import QtQuick.Layouts
 Popup
 {
     id: root
+    property string selectedContent : listView.currentItem.content
     property ListModel listContent
     property int maxHeight: 250
     property int radius : 5
     
     padding: 0
+    focus: true
     implicitWidth: 300
     implicitHeight: container.implicitHeight
     background: Rectangle
@@ -25,6 +27,7 @@ Popup
         implicitHeight: mainLayout.height
         horizontalPadding: 8
         verticalPadding: 0
+        focus: true
         background: Rectangle
         {
             color: properties.colorBackground
@@ -34,48 +37,44 @@ Popup
             antialiasing: true
         }
         
-        
         ColumnLayout
         {
             id: mainLayout
             width: parent.width
             
-            ScrollView
+            
+            Component
             {
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                id: highlighter
+                Rectangle
+                {
+                    width: 180; height: 40
+                    color: "lightsteelblue"; radius: 5
+                }
+            }    
+            
+            ListView 
+            {
+                id: listView
+                property int moveSpeed: 450
                 
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
-                Layout.maximumHeight: root.maxHeight
+                Layout.maximumHeight: root.maxHeight      
                 
+                highlight: highlighter
+                highlightMoveDuration: 100
+                highlightMoveVelocity: 100
+                keyNavigationEnabled: true
+                keyNavigationWraps: false                
+                clip: true
+                focus: true
+                currentIndex: 0
+                highlightFollowsCurrentItem: true
+                boundsBehavior: Flickable.StopAtBounds
                 
-                ListView
-                {
-                    id: listview
-                    property int moveSpeed: 450
-                    
-                    anchors.fill: parent
-                    anchors.rightMargin: 10
-                    clip: true
-                    
-                    model: root.listContent
-                    delegate: MComboBoxItem { }
-                    
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        
-                        onWheel: (wheel) =>
-                        {
-                            listview.moveContent(wheel.angleDelta.y > 0)
-                        }
-                    }
-                    
-                    function moveContent(up)
-                    {
-                        listview.flick(0, up ? listview.moveSpeed : -listview.moveSpeed)
-                    }
-                }
+                model: root.listContent
+                delegate: MComboBoxItem { } 
             }
         }
     }

@@ -36,7 +36,7 @@ FocusScope
             {
                 id: filterByPopup
                 y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
-                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+                closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                 
                 onFilterQuerySent:
                 {

@@ -5,6 +5,7 @@ import QtQuick.Layouts
 FocusScope
 {
     id: root
+    property ListModel listContent
     property int popupSpacing: 6
     property int radius: 4
     property string headerText : "Header here"
@@ -58,7 +59,7 @@ FocusScope
             RowLayout
             {
                 id: inContainerLayout
-                width: parent.width
+                anchors.fill: parent
                 spacing: root.imageSpacing
                 
                 
@@ -66,7 +67,7 @@ FocusScope
                 {
                     id: sortByLabel
                     color: properties.colorBaseText
-                    text: "Any"
+                    text: selectionPopup.selectedContent === null ? "Any" : selectionPopup.selectedContent
                     font.pointSize: 11
                     font.family: properties.defaultFontFamily
                     font.weight: Font.Normal
@@ -80,47 +81,25 @@ FocusScope
                     sourceSize.height: root.imageSize
                     source: root.imagePath
                     fillMode: Image.PreserveAspectFit
-                    
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        
-                        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
-                    }
                 }
             }
         }
     }
-        
+    
     MComboBoxPopup
     {
         id: selectionPopup
         y: mainLayout.y + mainLayout.height + root.popupSpacing
-        listContent: ListModel
-        {
-            ListElement { languageName: "English" }
-            ListElement { languageName: "German"  }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "German"  }
-            ListElement { languageName: "Italian" }
-            ListElement { languageName: "Italian" }
-        }
+        listContent: root.listContent
         
         width: parent.width
-        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
 }

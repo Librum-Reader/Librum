@@ -1,14 +1,26 @@
 import QtQuick
 import QtQuick.Controls
 
-Component
-{    
+Item
+{
+    property string content : languageName
+    width: listView.width
+    implicitHeight: label.implicitHeight + 8
+    
     Rectangle
     {
-        width: parent.width
-        implicitHeight: label.implicitHeight + 8
+        anchors.fill: parent
         radius: root.radius
         color: "transparent"
+        
+        MouseArea
+        {
+            anchors.fill: parent
+            onClicked:
+            {
+                listView.currentIndex = index
+            }
+        }
         
         Label
         {

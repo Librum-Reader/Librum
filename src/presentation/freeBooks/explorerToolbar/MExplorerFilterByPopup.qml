@@ -123,6 +123,30 @@ Popup
                     Layout.fillWidth: true
                     headerText: "Language"
                     imagePath: properties.iconArrowDownFilled
+                    
+                    listContent: ListModel
+                    {
+                        ListElement { languageName: "English" }
+                        ListElement { languageName: "German"  }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "German"  }
+                        ListElement { languageName: "Italian" }
+                        ListElement { languageName: "Italian" }
+                    }
                 }
                 
                 MButton
