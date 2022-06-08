@@ -89,6 +89,33 @@ Page
             z: 2
         }
         
+//        GridView
+//        {
+//            id: bookGrid
+//            property int bookWidth : 190
+            
+//            Layout.topMargin: 30
+//            visible: !root.empty
+//            columnSpacing: 64
+//            rowSpacing: 48
+            
+//            property int clms: bookGrid.width / (bookWidth + columnSpacing)
+//            columns: (bookGrid.width - (clms*columnSpacing)) / bookWidth
+            
+//            onWidthChanged:
+//            {
+//                console.log("clms: " + clms);
+//            }
+            
+//            clip: true
+            
+//            Repeater
+//            {
+//                model: model
+//                delegate: MBook { }
+//            }
+//        }
+        
         Grid
         {
             id: bookGrid
