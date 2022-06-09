@@ -79,6 +79,15 @@ Page
                     placeholderColor: properties.colorLightText
                     headerText: "Email"
                     autoFocus: true
+                    
+                    Keys.onPressed: 
+                        (event) =>
+                        {
+                            if(event.key === Qt.Key_Down || event.key === Qt.Key_Return)
+                            {
+                                passwordInput.giveFocus();
+                            }
+                        }
                 }
                 
                 MLabeledInputBox
@@ -89,13 +98,86 @@ Page
                     headerText: "Password"
                     imagePath: properties.iconEyeOn
                     toggledImagePath: properties.iconEyeOff
+                    
+                    Keys.onPressed: 
+                        (event) =>
+                        {
+                            if(event.key === Qt.Key_Up)
+                            {
+                                emailInput.giveFocus();
+                            }
+                            else if(event.key === Qt.Key_Down || event.key === Qt.Key_Return)
+                            {
+                                rememberMeCheckBox.giveFocus();
+                            }
+                        }
                 }
                 
-                MLoginOptions
+                RowLayout
                 {
-                    id: loginOption
+                    id: optionsLayout
+                    Layout.preferredWidth: parent.width
                     Layout.fillWidth: true
                     Layout.topMargin: 24
+                    
+                    MCheckBox
+                    {
+                        id: rememberMeCheckBox
+                        Layout.preferredWidth: 20
+                        Layout.preferredHeight: 20
+                        
+                        Keys.onPressed: 
+                            (event) =>
+                            {
+                                if(event.key === Qt.Key_Up)
+                                {
+                                    passwordInput.giveFocus();
+                                }
+                                else if(event.key === Qt.Key_Down)
+                                {
+                                    loginButton.giveFocus();
+                                }
+                                else if(event.key === Qt.Key_Return)
+                                {
+                                    checked = !checked;
+                                }
+                            }
+                    }
+                    
+                    Label
+                    {
+                        id: rememberMeText
+                        text: "Remember me"
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.leftMargin: 4
+                        font.pointSize: 11
+                        color: properties.colorMediumText
+                    }
+                    
+                    Item
+                    {
+                        Layout.fillWidth: true
+                    }
+                    
+                    Label
+                    {
+                        id: forgotPasswordLabel
+                        text: "Forgot password?"
+                        Layout.alignment: Qt.AlignVCenter
+                        Layout.leftMargin: 3
+                        font.pointSize: 10
+                        color: properties.colorBasePurple
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            
+                            onClicked:
+                            {
+                                loadPage("ForgotPasswordPage");
+                            }
+                        }
+                    }
                 }
                 
                 MButton 
@@ -110,11 +192,20 @@ Page
                     fontBold: true
                     textContent: "Login"
                     
-                    onClicked:
-                    {
-                        
-                        loadPage("HomePage");
-                    }
+                    onClicked: loadPage("HomePage");
+                    
+                    Keys.onPressed: 
+                        (event) =>
+                        {
+                            if(event.key === Qt.Key_Up)
+                            {
+                                rememberMeCheckBox.giveFocus();
+                            }
+                            else if(event.key === Qt.Key_Return)
+                            {
+                                loadPage("HomePage");
+                            }
+                        }
                 }
             }
         }
