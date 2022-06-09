@@ -26,7 +26,7 @@ Item
         anchors.fill: parent
         radius: root.borderRadius
         border.width: (root.checked ? 0 : root.borderWidth)
-        border.color: root.activeFocus ? properties.colorLightBorder2 : root.borderColor
+        border.color: root.activeFocus ? properties.colorLightBorder : root.borderColor
         color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
         antialiasing: true
         

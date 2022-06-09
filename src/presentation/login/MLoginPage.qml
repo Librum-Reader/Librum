@@ -128,17 +128,17 @@ Page
                         Keys.onPressed: 
                             (event) =>
                             {
-                                if(event.key === Qt.Key_Up)
+                                if(event.key === Qt.Key_Return)
+                                {
+                                    actionOnClicked();
+                                }
+                                else if(event.key === Qt.Key_Up)
                                 {
                                     passwordInput.giveFocus();
                                 }
                                 else if(event.key === Qt.Key_Down)
                                 {
                                     loginButton.giveFocus();
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    checked = !checked;
                                 }
                             }
                     }
