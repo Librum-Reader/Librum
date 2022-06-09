@@ -16,7 +16,7 @@ Item
         id: image
         anchors.right: parent.right
         rotation: (root.toLeft ? 180 : 0)
-        source: "/resources/images/black_right_icon.svg"
+        source: properties.iconArrowGrayRightFilled
         sourceSize.width: 9
     }
     

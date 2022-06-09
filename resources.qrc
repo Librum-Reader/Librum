@@ -15,7 +15,6 @@
         <file>resources/images/arrow_filled_down_icon.svg</file>
         <file>resources/images/tag_icon.svg</file>
         <file>resources/images/search_icon.svg</file>
-        <file>resources/images/black_right_icon.svg</file>
         <file>resources/images/empty_profile_background.svg</file>
         <file>resources/images/file_swift.svg</file>
         <file>resources/images/plus_black_icon.svg</file>
@@ -54,6 +53,7 @@
         <file>resources/images/eye_crossed_image.png</file>
         <file>resources/images/arrow_filled_up_icon.svg</file>
         <file>resources/images/close_purple_icon.svg</file>
+        <file>resources/images/arrow_gray_hallow_right_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/presentation/main.qml</file>
