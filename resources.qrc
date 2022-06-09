@@ -97,7 +97,7 @@
         <file>src/presentation/freeBooks/explorerToolbar/MExplorerFilterByPopup.qml</file>
         <file>src/presentation/home/indexbar/MNavigationArrow.qml</file>
         <file>src/presentation/home/indexbar/MIndexBar.qml</file>
-        <file>src/presentation/home/indexbar/MContentRect.qml</file>
+        <file>src/presentation/home/indexbar/MIndexBarItem.qml</file>
         <file>src/presentation/home/indexbar/MBookCountSelectorPopup.qml</file>
         <file>src/presentation/home/indexbar/MBookCountSelector.qml</file>
         <file>src/presentation/home/toolbar/MToolbar.qml</file>

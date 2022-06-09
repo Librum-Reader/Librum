@@ -15,7 +15,7 @@ Item
     RowLayout
     {
         id: layout
-        property MContentRect current : contentRect1
+        property MIndexBarItem current : contentRect1
         
         anchors.fill: parent
         spacing: 0
@@ -64,7 +64,7 @@ Item
             onClicked: layout.moveToLeft();
         }
         
-        MContentRect
+        MIndexBarItem
         {
             id: contentRect1
             pageNumber: 1
@@ -73,7 +73,7 @@ Item
             onClicked: layout.changeSelected(this)
         }
         
-        MContentRect
+        MIndexBarItem
         {
             id: contentRect2
             pageNumber: 2
@@ -81,7 +81,7 @@ Item
             onClicked: layout.changeSelected(this)
         }
         
-        MContentRect
+        MIndexBarItem
         {
             id: contentRect3
             pageNumber: 3
@@ -109,7 +109,7 @@ Item
             }
         }
         
-        MContentRect
+        MIndexBarItem
         {
             id: contentRect4
             pageNumber: root.bookCount
