@@ -78,7 +78,6 @@ Page
                     placeholderContent: "kaidoe@gmail.com"
                     placeholderColor: properties.colorLightText
                     headerText: "Email"
-                    autoFocus: true
                     
                     Keys.onPressed: 
                         (event) =>
@@ -226,4 +225,6 @@ Page
             }
         }
     }
+    
+    Component.onCompleted: emailInput.giveFocus();
 }

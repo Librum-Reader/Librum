@@ -66,7 +66,6 @@
         <file>src/presentation/addOns/MAddOns.qml</file>
         <file>src/presentation/tools/MTools.qml</file>
         <file>src/presentation/statistics/MStatistics.qml</file>
-        <file>src/presentation/register/MNameInput.qml</file>
         <file>src/presentation/register/MKeepMeUpdated.qml</file>
         <file>src/presentation/register/MAcceptPolicy.qml</file>
         <file>src/presentation/modules/CustomComponents/MTitle.qml</file>

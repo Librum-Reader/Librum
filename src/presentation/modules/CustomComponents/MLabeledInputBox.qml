@@ -24,7 +24,6 @@ Item
     property string imagePath : ""
     property string toggledImagePath : ""
     property bool isError : false
-    property bool autoFocus : false
     
     implicitWidth: 100
     implicitHeight: layout.height
@@ -89,12 +88,6 @@ Item
                     }
                     
                     onTextEdited: root.isError = false
-                    
-                    Component.onCompleted:
-                    {
-                        if(root.autoFocus)
-                            forceActiveFocus();
-                    }
                 }
                 
                 Image

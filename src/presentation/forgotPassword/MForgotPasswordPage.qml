@@ -90,7 +90,6 @@ Page
                     placeholderContent: "kaidoe@gmail.com"
                     placeholderColor: properties.colorLightText
                     headerText: ""
-                    autoFocus: true
                 }
                 
                 Label

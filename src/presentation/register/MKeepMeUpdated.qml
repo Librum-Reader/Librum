@@ -8,6 +8,8 @@ Item
 {
     id: root
     property bool activated : false
+    signal keyUp()
+    signal keyDown()
     
     implicitWidth: layout.width
     implicitHeight: layout.height    
@@ -25,7 +27,25 @@ Item
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
             
-            onClicked: root.activated = !root.activated;            
+            onClicked: root.activated = !root.activated;
+            
+            Keys.onPressed: 
+                (event) =>
+                {
+                    if(event.key === Qt.Key_Return)
+                    {
+                        updatesCheckBox.actionOnClicked();
+                        root.activated = !root.activated;
+                    }
+                    else if(event.key === Qt.Key_Down)
+                    {
+                        root.keyDown();
+                    }
+                    else if(event.key === Qt.Key_Up)
+                    {
+                        root.keyUp();
+                    }
+                }
         }
         
         Item
@@ -58,5 +78,10 @@ Item
                 }
             }
         }
+    }
+    
+    function giveFocus()
+    {
+        updatesCheckBox.giveFocus();
     }
 }

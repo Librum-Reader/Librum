@@ -8,6 +8,8 @@ Item
 {
     id: root
     property bool activated : false
+    signal keyUp()
+    signal keyDown()
     
     implicitWidth: 200
     implicitHeight: layout.height
@@ -21,11 +23,29 @@ Item
         
         MCheckBox
         {
-            id: checkBox
+            id: acceptCheckBox
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
             
             onClicked: root.activated = !root.activated;
+            
+            Keys.onPressed: 
+                (event) =>
+                {
+                    if(event.key === Qt.Key_Return)
+                    {
+                        acceptCheckBox.actionOnClicked();
+                        root.activated = !root.activated;
+                    }
+                    else if(event.key === Qt.Key_Down)
+                    {
+                        root.keyDown();
+                    }
+                    else if(event.key === Qt.Key_Up)
+                    {
+                        root.keyUp();
+                    }
+                }
         }
         
         Label
@@ -39,5 +59,11 @@ Item
             font.pointSize: 11
             color: properties.colorMediumText
         }
+    }
+    
+    
+    function giveFocus()
+    {
+        acceptCheckBox.forceActiveFocus();
     }
 }

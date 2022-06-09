@@ -139,5 +139,5 @@ Item
     function giveFocus()
     {
         root.forceActiveFocus();
-    }    
+    }
 }

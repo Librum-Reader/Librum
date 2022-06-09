@@ -44,14 +44,16 @@ Item
         {
             id: mouseArea
             anchors.fill: parent
-            onClicked:
-            {
-                root.clicked();
-                root.checked = !root.checked;
-            }
+            onClicked: actionOnClicked();
         }
     }
     
+    
+    function actionOnClicked()
+    {
+        root.clicked();
+        root.checked = !root.checked;
+    }
     
     function giveFocus()
     {

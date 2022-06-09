@@ -93,20 +93,78 @@ Page
                         spacing: 0
                         
                         
-                        MNameInput
+                        RowLayout
                         {
-                            id: nameInput
-                            Layout.fillWidth: true
+                            id: nameInputLayout
+                            Layout.preferredWidth: parent.width
+                            Layout.preferredHeight: firstNameInput.implicitHeight
+                            spacing: 28
+                            
+                            
+                            MLabeledInputBox
+                            {
+                                id: firstNameInput
+                                Layout.preferredWidth: parent.width / 2 - nameInputLayout.spacing / 2
+                                Layout.preferredHeight: parent.height
+                                headerText: 'First name'
+                                placeholderContent: "Kai"
+                                placeholderColor: properties.colorLightText
+                                
+                                Keys.onPressed: 
+                                    (event) =>
+                                    {
+                                        if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
+                                        {
+                                            lastNameInput.giveFocus();
+                                        }
+                                    }
+                            }
+                            
+                            MLabeledInputBox
+                            {
+                                id: lastNameInput
+                                Layout.preferredWidth: parent.width / 2 - nameInputLayout.spacing / 2
+                                Layout.preferredHeight: parent.height
+                                headerText: "Last name"
+                                placeholderContent: "Doe"
+                                placeholderColor: properties.colorLightText
+                                
+                                Keys.onPressed: 
+                                    (event) =>
+                                    {
+                                        if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
+                                        {
+                                            emailInput.giveFocus();
+                                        }
+                                        else if(event.key === Qt.Key_Up)
+                                        {
+                                            firstNameInput.giveFocus();
+                                        }
+                                    }
+                            }
                         }
                         
                         MLabeledInputBox 
                         {
                             id: emailInput
                             Layout.fillWidth: true
-                            Layout.topMargin: 26
+                            Layout.topMargin: 19
                             headerText: 'Email'
                             placeholderContent: "kaidoe@gmail.com"
                             placeholderColor: properties.colorLightText
+                            
+                            Keys.onPressed: 
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
+                                    {
+                                        passwordInput.giveFocus();
+                                    }
+                                    else if(event.key === Qt.Key_Up)
+                                    {
+                                        lastNameInput.giveFocus();
+                                    }
+                                }
                         }
                         
                         MLabeledInputBox 
@@ -118,6 +176,19 @@ Page
                             placeholderColor: properties.colorLightText
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
+                            
+                            Keys.onPressed: 
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
+                                    {
+                                        passwordConfirmationInput.giveFocus();
+                                    }
+                                    else if(event.key === Qt.Key_Up)
+                                    {
+                                        emailInput.giveFocus();
+                                    }
+                                }
                         }
                         
                         MLabeledInputBox 
@@ -129,6 +200,19 @@ Page
                             placeholderColor: properties.colorLightText
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
+                            
+                            Keys.onPressed: 
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
+                                    {
+                                        keepMeUpdated.giveFocus();
+                                    }
+                                    else if(event.key === Qt.Key_Up)
+                                    {
+                                        passwordInput.giveFocus();
+                                    }
+                                }
                         }
                         
                         MKeepMeUpdated
@@ -136,6 +220,9 @@ Page
                             id: keepMeUpdated
                             Layout.fillWidth: true
                             Layout.topMargin: 28
+                            
+                            onKeyUp: passwordConfirmationInput.giveFocus();
+                            onKeyDown: acceptPolicy.giveFocus();
                         }
                         
                         MAcceptPolicy
@@ -143,6 +230,9 @@ Page
                             id: acceptPolicy
                             Layout.fillWidth: true
                             Layout.topMargin: 32
+                            
+                            onKeyUp: keepMeUpdated.giveFocus();
+                            onKeyDown: loginButton.giveFocus();
                         }
                         
                         MButton 
@@ -158,6 +248,19 @@ Page
                             textContent: "Let's start"
                             
                             onClicked: loadPage("LoginPage");
+                            
+                            Keys.onPressed: 
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Return)
+                                    {
+                                        loadPage("LoginPage");
+                                    }
+                                    else if(event.key === Qt.Key_Up)
+                                    {
+                                        acceptPolicy.giveFocus();
+                                    }
+                                }
                         }
                     }
                 }
@@ -182,4 +285,6 @@ Page
             }
         }
     }
+    
+    Component.onCompleted: firstNameInput.giveFocus();
 }
