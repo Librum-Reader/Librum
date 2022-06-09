@@ -5,7 +5,7 @@ import librum.extensions.sidebar
 import CustomComponents
 
 
-FocusScope
+Item
 {
     id: root
     property int  closedWidth : 72
@@ -241,6 +241,12 @@ FocusScope
             }
         }
     }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
     
     function openSidebar()
     {

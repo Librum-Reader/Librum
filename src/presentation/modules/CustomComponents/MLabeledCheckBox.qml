@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property int boxWidth : 22
@@ -78,4 +78,9 @@ FocusScope
             wrapMode: Text.WordWrap
         }
     }
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }

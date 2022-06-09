@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property int defaultWidth : 0
@@ -195,4 +195,9 @@ FocusScope
     {
         root.defaultWidth = width;
     }
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }

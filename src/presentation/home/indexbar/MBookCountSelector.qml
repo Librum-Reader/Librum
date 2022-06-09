@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     property int amountOfDisplayedBooks : 12
@@ -55,5 +55,11 @@ FocusScope
         anchors.fill: parent
         
         onClicked: selected()
+    }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
     }
 }

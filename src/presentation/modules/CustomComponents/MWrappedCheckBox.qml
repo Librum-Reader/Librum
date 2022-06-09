@@ -3,7 +3,7 @@ import QtQuick.Controls
 import CustomComponents
 
 
-FocusScope
+Item
 {
     id: root
     property alias activated : innerCheckBox.checked
@@ -38,4 +38,10 @@ FocusScope
             onClicked: root.checked();
         }
     }
+    
+    
+    function giveFocus()
+    {
+        innerCheckBox.giveFocus();
+    }    
 }

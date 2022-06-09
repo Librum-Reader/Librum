@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     property bool opened : false
@@ -57,5 +57,11 @@ FocusScope
         anchors.fill: parent
         
         onClicked: root.clicked()
+    }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
     }
 }

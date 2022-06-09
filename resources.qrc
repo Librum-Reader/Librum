@@ -69,7 +69,6 @@
         <file>src/presentation/register/MNameInput.qml</file>
         <file>src/presentation/register/MKeepMeUpdated.qml</file>
         <file>src/presentation/register/MAcceptPolicy.qml</file>
-        <file>src/presentation/login/MLoginOptions.qml</file>
         <file>src/presentation/modules/CustomComponents/MTitle.qml</file>
         <file>src/presentation/modules/CustomComponents/MSearchButton.qml</file>
         <file>src/presentation/modules/CustomComponents/MLogo.qml</file>
@@ -119,7 +118,6 @@
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBox.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
-        <file>src/presentation/modules/CustomComponents/MSortFilterModel.qml</file>
         <file>src/presentation/modules/CustomComponents/MRemoveOptionButton.qml</file>
     </qresource>
 </RCC>

@@ -4,7 +4,7 @@ import QtQuick.Controls
 import librum.extensions.sidebar
 
 
-FocusScope
+Item
 {
     id: root
     property int arrowRotation : 0
@@ -97,4 +97,10 @@ FocusScope
             }
         }
     }
+    
+    
+    function giveFocus()
+        {
+            root.forceActiveFocus();
+        }    
 }

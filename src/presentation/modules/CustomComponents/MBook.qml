@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope 
+Item 
 {
     id: root
     implicitWidth: 190
@@ -135,4 +135,9 @@ FocusScope
             }
         }
     }
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }

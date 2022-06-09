@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     property int pageNumber : 1
@@ -18,7 +18,7 @@ FocusScope
     
     Rectangle
     {
-        id: contentRect1
+        id: contentRect
         anchors.fill: parent
         color: (root.selected ? properties.colorBackground : "transparent")
         border.color: (root.selected ? properties.colorLightBorder : "transparent")
@@ -42,5 +42,11 @@ FocusScope
         anchors.fill: parent
         
         onClicked: root.clicked()
+    }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
     }
 }

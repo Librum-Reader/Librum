@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-FocusScope
+Item
 {
     id: root
     property bool selected : false

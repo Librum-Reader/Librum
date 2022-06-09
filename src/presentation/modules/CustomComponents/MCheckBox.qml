@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property color borderColor : properties.colorDarkBorder
@@ -26,7 +26,7 @@ FocusScope
         anchors.fill: parent
         radius: root.borderRadius
         border.width: (root.checked ? 0 : root.borderWidth)
-        border.color: root.borderColor
+        border.color: root.activeFocus ? properties.colorLightBorder2 : root.borderColor
         color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
         antialiasing: true
         
@@ -50,5 +50,11 @@ FocusScope
                 root.checked = !root.checked;
             }
         }
+    }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
     }
 }

@@ -120,4 +120,10 @@ Popup
             }
         }
     }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }
 }

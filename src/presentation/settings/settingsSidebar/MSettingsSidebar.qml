@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     implicitWidth: 238

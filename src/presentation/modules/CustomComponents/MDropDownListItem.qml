@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property bool selected : false

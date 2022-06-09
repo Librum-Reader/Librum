@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     property int bookCount : 10
@@ -35,10 +35,10 @@ FocusScope
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
                 
                 onBookCountSelctionMade: content =>
-                {
-                    parent.amountOfDisplayedBooks = content;
-                    close();
-                }
+                                         {
+                                             parent.amountOfDisplayedBooks = content;
+                                             close();
+                                         }
             }
         }
         
@@ -126,6 +126,11 @@ FocusScope
         }
         
         
+        
+        function giveFocus()
+        {
+            root.forceActiveFocus();
+        }
         
         function changeSelected(newItem)
         {

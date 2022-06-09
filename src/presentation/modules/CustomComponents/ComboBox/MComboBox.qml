@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-FocusScope
+Item
 {
     id: root
     property alias listContent : selectionPopup.listContent
@@ -126,4 +126,10 @@ FocusScope
         
         onOpenedChanged: opened ? openAnim.start() : closeAnim.start()
     }
+    
+    
+    function giveFocus()
+        {
+            root.forceActiveFocus();
+        }
 }

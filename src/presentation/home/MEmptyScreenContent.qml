@@ -4,7 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 
 
-FocusScope
+Item
 {
     id: root
     signal clicked

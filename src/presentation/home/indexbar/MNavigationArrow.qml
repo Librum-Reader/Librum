@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 
 
-FocusScope
+Item
 {
     id: root
     property bool toLeft : false
@@ -25,5 +25,11 @@ FocusScope
         anchors.fill: parent
         
         onClicked: root.clicked()
+    }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
     }
 }

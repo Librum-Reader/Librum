@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property int buttonRadius : 4
@@ -33,7 +33,7 @@ FocusScope
         border.width: root.borderWidth
         border.color: root.borderColor
         radius: root.buttonRadius
-        opacity: (mouseArea.pressed ? root.backgroundOpacityOnPressed : 1)
+        opacity: (mouseArea.pressed || root.activeFocus ? root.backgroundOpacityOnPressed : 1)
         antialiasing: true
         
         RowLayout
@@ -69,4 +69,10 @@ FocusScope
             onClicked: root.clicked()
         }
     }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }

@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property alias text : inputField.text
@@ -115,6 +115,12 @@ FocusScope
                 }
             }
         }
+    }
+    
+    
+    function giveFocus()
+    {
+        inputField.forceActiveFocus();
     }
     
     function clearText()

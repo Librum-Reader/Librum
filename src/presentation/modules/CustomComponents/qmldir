@@ -13,5 +13,4 @@ MLabeledCheckBox 1.0 MLabeledCheckBox.qml
 MDropDownListItem 1.0 MDropDownListItem.qml
 MComboBox 1.0 ComboBox/MComboBox.qml
 MComboBoxPopup 1.0 ComboBox/MComboBoxPopup.qml
-MSortFilterModel 1.0 MSortFilterModel.qml
 MRemoveOptionButton 1.0 MRemoveOptionButton.qml

@@ -6,7 +6,7 @@ import "sortByButton"
 import "tagSelector"
 import CustomComponents
 
-FocusScope
+Item
 {
     id: root
     property bool showTagBox : true

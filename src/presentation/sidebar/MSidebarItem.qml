@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 
-FocusScope
+Item
 {
     id: root
     property int closedWidth : 52
@@ -101,4 +101,10 @@ FocusScope
         duration: 250
         easing.type: Easing.InOutQuad
     }
+    
+    
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }
