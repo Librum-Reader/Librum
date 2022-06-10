@@ -114,13 +114,12 @@ Page
                 anchors.fill: parent
                 cellWidth: bookWidth + horizontalSpacing
                 cellHeight: bookHeight + verticalSpacing
-                bottomMargin: -verticalSpacing
                 rightMargin: -horizontalSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
                 clip: true
                 
-                model: indexBar.bookCount
+                model: indexBar.selectedAmountOfBooks
                 delegate: MBook { }
             }
         }
