@@ -93,7 +93,7 @@ Page
         {
             id: bookGridContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 692
+            Layout.preferredHeight: 696
             Layout.topMargin: 30
             visible: !root.empty
             padding: 0
@@ -139,7 +139,7 @@ Page
             id: indexBar
             visible: !root.empty
             Layout.fillWidth: true
-            Layout.topMargin: 50
+            Layout.topMargin: 46
         }
     }
 }
