@@ -6,7 +6,7 @@ import QtQuick.Controls
 Item
 {
     id: root
-    property int bookCount : 10
+    property alias selectedAmountOfBooks : bookCountSelector.selectedAmountOfBooks
     
     implicitWidth: 1714
     implicitHeight: 32
@@ -24,6 +24,8 @@ Item
         MBookCountSelector
         {
             id: bookCountSelector
+            property int popupToSelectorSpacing: 8
+            
             Layout.alignment: Qt.AlignVCenter
             onSelected: (bookCountSelectorPopup.opened) ? bookCountSelectorPopup.close() : bookCountSelectorPopup.open()
             
@@ -31,14 +33,15 @@ Item
             {
                 id: bookCountSelectorPopup
                 x: parent.x
-                y: parent.y - bookCountSelectorPopup.height - 8
+                y: parent.y - bookCountSelectorPopup.height - bookCountSelector.popupToSelectorSpacing
                 closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
                 
-                onBookCountSelctionMade: content =>
-                                         {
-                                             parent.amountOfDisplayedBooks = content;
-                                             close();
-                                         }
+                onBookCountSelctionMade:
+                    (content) =>
+                    {
+                        parent.selectedAmountOfBooks = content;
+                        close();
+                    }
             }
         }
         
@@ -112,7 +115,7 @@ Item
         MIndexBarItem
         {
             id: contentRect4
-            pageNumber: root.bookCount
+            pageNumber: root.selectedAmountOfBooks
             
             onClicked: layout.changeSelected(this)
         }

@@ -89,55 +89,40 @@ Page
             z: 2
         }
         
-//        GridView
-//        {
-//            id: bookGrid
-//            property int bookWidth : 190
-            
-//            Layout.topMargin: 30
-//            visible: !root.empty
-//            columnSpacing: 64
-//            rowSpacing: 48
-            
-//            property int clms: bookGrid.width / (bookWidth + columnSpacing)
-//            columns: (bookGrid.width - (clms*columnSpacing)) / bookWidth
-            
-//            onWidthChanged:
-//            {
-//                console.log("clms: " + clms);
-//            }
-            
-//            clip: true
-            
-//            Repeater
-//            {
-//                model: model
-//                delegate: MBook { }
-//            }
-//        }
-        
-        Grid
+        Pane
         {
-            id: bookGrid
-            property int bookWidth : 190
-            
+            id: bookGridContainer
             Layout.fillWidth: true
             Layout.preferredHeight: 692
             Layout.topMargin: 30
             visible: !root.empty
-            columnSpacing: 64
-            rowSpacing: 48
-            columns: 0
-            clip: true
-            
-            Repeater
+            padding: 0
+            background: Rectangle
             {
-                model: model
-                delegate: MBook { }
+                color: "transparent"
             }
             
-            // Calculate the amount of columns which can be displayed
-            onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);
+            
+            GridView
+            {
+                id: bookGrid
+                property int bookWidth: 190
+                property int bookHeight: 300
+                property int horizontalSpacing: 64
+                property int verticalSpacing: 48
+                
+                anchors.fill: parent
+                cellWidth: bookWidth + horizontalSpacing
+                cellHeight: bookHeight + verticalSpacing
+                bottomMargin: -verticalSpacing
+                rightMargin: -horizontalSpacing
+                interactive: true
+                boundsBehavior: Flickable.StopAtBounds
+                clip: true
+                
+                model: indexBar.bookCount
+                delegate: MBook { }
+            }
         }
         
         MEmptyScreenContent

@@ -6,7 +6,7 @@ import QtQuick.Controls
 Item
 {
     id: root
-    property int amountOfDisplayedBooks : 12
+    property int selectedAmountOfBooks: 12
     signal selected
     
     implicitWidth: 58
@@ -33,7 +33,7 @@ Item
             Label
             {
                 id: bookCountLabel
-                text: root.amountOfDisplayedBooks.toString()
+                text: root.selectedAmountOfBooks.toString()
                 color: properties.colorBaseText
                 font.family: properties.defaultFontFamily
                 font.pointSize: 11
