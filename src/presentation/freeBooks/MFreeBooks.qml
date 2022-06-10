@@ -80,28 +80,39 @@ Page
                 Layout.topMargin: 45
             }
             
-            Grid
+            Pane
             {
-                id: bookGrid
-                property int bookWidth : 190
-                
+                id: bookGridContainer
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.preferredHeight: 759
                 Layout.topMargin: 30
                 visible: !root.empty
-                columnSpacing: 64
-                rowSpacing: 48
-                columns: 0
-                clip: true
-                
-                Repeater
+                padding: 0
+                background: Rectangle
                 {
-                    model: model
-                    delegate: MBook { }
+                    color: "transparent"
                 }
                 
-                // Calculate the amount of columns which can be displayed
-                onWidthChanged: columns = (width+columnSpacing) / (columnSpacing + bookWidth);
+                
+                GridView
+                {
+                    id: bookGrid
+                    property int bookWidth: 190
+                    property int bookHeight: 300
+                    property int horizontalSpacing: 64
+                    property int verticalSpacing: 48
+                    
+                    anchors.fill: parent
+                    cellWidth: bookWidth + horizontalSpacing
+                    cellHeight: bookHeight + verticalSpacing
+                    rightMargin: -horizontalSpacing
+                    interactive: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    clip: true
+                    
+                    model: 500
+                    delegate: MMinimalBook { }
+                }
             }
         }
     }
