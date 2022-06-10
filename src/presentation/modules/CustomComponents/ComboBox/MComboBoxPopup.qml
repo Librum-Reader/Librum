@@ -6,13 +6,17 @@ import CustomComponents
 Popup
 {
     id: root
-    property string selectedContent : listView.currentItem.content
-    property alias listContent : listView.model
+    property string selectedContent: listView.currentItem.content
+    property alias listContent: listView.model
     property int maxHeight: 200
-    property int radius : 5
+    property int radius: 5
+    
+    property int fontSize: 11
+    property color fontColor: properties.colorBaseText
+    property int fontWeight: Font.Normal
+    property string fontFamily: properties.defaultFontFamily
     
     padding: 0
-    focus: true
     implicitWidth: 300
     implicitHeight: container.implicitHeight
     background: Rectangle
@@ -26,7 +30,6 @@ Popup
         id: container
         width: parent.width
         padding: 8
-        focus: true
         background: Rectangle
         {
             color: properties.colorBackground
@@ -49,16 +52,22 @@ Popup
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: root.maxHeight      
-                model: sortedModel
-                delegate: MComboBoxItem { container: listView }                
                 maximumFlickVelocity: 550
                 currentIndex: 0
                 keyNavigationEnabled: true
                 clip: true
-                focus: true
                 boundsBehavior: Flickable.StopAtBounds
                 highlightMoveDuration: 0
                 highlightFollowsCurrentItem: true
+                
+                delegate: MComboBoxItem 
+                {
+                    container: listView
+                    fontSize: root.fontSize
+                    fontColor: root.fontColor
+                    fontWeight: root.fontWeight
+                    fontFamily: root.fontFamily
+                }                
                 
                 ScrollBar.vertical: ScrollBar { }
                 highlight: Rectangle

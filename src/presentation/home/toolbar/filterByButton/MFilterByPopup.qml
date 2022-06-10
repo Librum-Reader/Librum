@@ -87,6 +87,7 @@ Popup
                         {
                             id: addedInput
                             Layout.fillWidth: true
+                            Layout.topMargin: 2
                             boxHeight: 30
                             headerToBoxSpacing: 2
                             placeholderContent: "e.g. 2d ago"
@@ -104,7 +105,7 @@ Popup
                         MLabeledCheckBox
                         {
                             id: readBox
-                            Layout.topMargin: 15
+                            Layout.topMargin: 16
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17
@@ -162,7 +163,7 @@ Popup
                         MLabeledCheckBox
                         {
                             id: onlyBooksBox
-                            Layout.topMargin: 15
+                            Layout.topMargin: 16
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17

@@ -5,28 +5,41 @@ import QtQuick.Layouts
 Item
 {
     id: root
-    property alias listContent : selectionPopup.listContent
+    property alias listContent: selectionPopup.listContent
+    property int headerToBoxSpacing: 2
     property int popupSpacing: 5
-    property int radius: 4
-    property alias maxPopupHeight : selectionPopup.maxHeight
-    property string headerText : "Header here"
-    property int headerFontWeight : Font.Bold
-    property double headerFontSize : 10.5
-    property color headerFontColor : properties.colorLightText3
-    property int headerToBoxSpacing : 2
-    property string imagePath: "noPath"
+    property alias maxPopupHeight: selectionPopup.maxHeight
+    
+    property string headerText
+    property int headerFontWeight: Font.Bold
+    property double headerFontSize: 10.5
+    property color headerFontColor: properties.colorLightText3
+    
+    property string titleEmptyText: "Any"
+    property int titleFontWeight: Font.Normal
+    property int titleFontSize: 11
+    property color titleFontColor: properties.colorBaseText
+    
+    property alias contentFontSize: selectionPopup.fontSize
+    property alias contentFontColor: selectionPopup.fontColor
+    property alias contentFontWeight: selectionPopup.fontWeight
+    property alias contentFontFamily: selectionPopup.fontFamily
+    
+    property string imagePath
     property int imageSpacing: 4
     property int imageSize: 6
+    
+    property int radius: 4
     signal clicked
     
     implicitWidth: 100
-    implicitHeight: mainLayout.implicitHeight
+    implicitHeight: 47
     
     
     ColumnLayout
     {
         id: mainLayout
-        width: parent.width
+        anchors.fill: parent
         spacing: root.headerToBoxSpacing
         
         
@@ -45,6 +58,7 @@ Item
         {
             id: container
             Layout.fillWidth: true
+            Layout.preferredHeight: root.height - header.height
             verticalPadding: 6
             horizontalPadding: 8
             background: Rectangle
@@ -66,20 +80,20 @@ Item
                 
                 Label
                 {
-                    id: sortByLabel
-                    color: properties.colorBaseText
+                    id: title
+                    Layout.alignment: Qt.AlignLeft
                     // @disable-check M325
-                    text: selectionPopup.selectedContent == null ? "Any" : selectionPopup.selectedContent
-                    font.pointSize: 11
+                    text: selectionPopup.selectedContent == null ? root.titleEmptyText : selectionPopup.selectedContent
+                    font.pointSize: root.titleFontSize
                     font.family: properties.defaultFontFamily
-                    font.weight: Font.Normal
+                    font.weight: root.titleFontWeight
+                    color: root.titleFontColor
                 }
-                
-                Item { Layout.fillWidth: true }
                 
                 Image
                 {
                     id: icon
+                    Layout.alignment: Qt.AlignRight
                     sourceSize.height: root.imageSize
                     source: root.imagePath
                     fillMode: Image.PreserveAspectFit
@@ -119,7 +133,6 @@ Item
     {
         id: selectionPopup
         y: mainLayout.y + mainLayout.height + root.popupSpacing
-        listContent: root.listContent
         
         width: parent.width
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -129,7 +142,7 @@ Item
     
     
     function giveFocus()
-        {
-            root.forceActiveFocus();
-        }
+    {
+        root.forceActiveFocus();
+    }
 }

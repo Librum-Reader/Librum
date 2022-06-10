@@ -6,8 +6,15 @@ Item
     property string content : languageName
     property ListView container
     
-    width: container.width
+    property int fontSize
+    property color fontColor
+    property int fontWeight
+    property string fontFamily
+    
+    
+    implicitWidth: container.width
     implicitHeight: label.implicitHeight + 8
+    
     
     Rectangle
     {
@@ -20,7 +27,7 @@ Item
             anchors.fill: parent
             onClicked:
             {
-                container.currentIndex = index
+                container.currentIndex = index;
                 closeComboBox();
             }
         }
@@ -31,20 +38,23 @@ Item
             anchors.fill: parent
             anchors.margins: 4
             anchors.verticalCenter: parent.verticalCenter
-            color: properties.colorBaseText
+            color: root.fontColor
             text: languageName
-            font.pointSize: 11
-            font.family: properties.defaultFontFamily
-            font.weight: Font.Normal
+            font.pointSize: root.fontSize
+            font.family: root.fontFamily
+            font.weight: root.fontWeight
         }
     }
     
-    Keys.onPressed: (event) =>
-                    {
-                        if(event.key === Qt.Key_Return)
-                        {
-                            if(comobBoxIsOpened())
-                            closeComboBox();
-                        }
-                    }
+    Keys.onPressed: 
+        (event) =>
+        {
+            if(event.key === Qt.Key_Return)
+            {
+                if(comobBoxIsOpened())
+                {
+                    closeComboBox();
+                }
+            }
+        }
 }

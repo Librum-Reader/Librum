@@ -160,7 +160,7 @@ Popup
                     id: applyButton
                     Layout.fillWidth: true
                     Layout.preferredHeight: 28
-                    Layout.topMargin: 8
+                    Layout.topMargin: 10
                     buttonRadius: 3
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple
