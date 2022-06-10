@@ -108,6 +108,7 @@ Page
                     rightMargin: -horizontalSpacing
                     interactive: true
                     boundsBehavior: Flickable.StopAtBounds
+                    flickDeceleration: 10000
                     clip: true
                     
                     model: 500
