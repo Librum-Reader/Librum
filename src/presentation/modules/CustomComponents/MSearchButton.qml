@@ -46,7 +46,7 @@ Item
                 leftPadding: 12
                 color: properties.colorBaseText
                 font.pointSize: 12
-                placeholderText: "What should I search for you?"
+                placeholderText: "Search for entries"
                 placeholderTextColor: properties.colorLightText2
                 background: Rectangle
                 {
