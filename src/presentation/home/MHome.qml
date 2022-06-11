@@ -93,7 +93,7 @@ Page
         {
             id: bookGridContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 696
+            Layout.preferredHeight: 695
             Layout.topMargin: 30
             visible: !root.empty
             padding: 0
