@@ -6,6 +6,7 @@ Item
     id: root
     implicitWidth: 32
     implicitHeight: 32
+    signal clicked
     
     
     Pane
@@ -29,5 +30,12 @@ Item
             source: properties.iconCloseBlack
             fillMode: Image.PreserveAspectFit
         }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: root.clicked()
     }
 }

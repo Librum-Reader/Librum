@@ -275,10 +275,13 @@ Popup
                     Layout.alignment: Qt.AlignLeft
                     borderColor: properties.colorLightBorder
                     backgroundColor: properties.colorBackground
+                    backgroundOpacityOnPressed: 0.7
                     text: "Cancel"
                     fontColor: properties.colorBaseText
                     fontBold: true
                     fontSize: 12
+                    
+                    onClicked: root.close()
                 }
                 
                 MButton
@@ -295,6 +298,12 @@ Popup
                     fontSize: 12
                     imagePath: properties.iconDownloadWhite
                     imageSize: 18
+                    
+                    onClicked: 
+                    {
+                        // Download book
+                        root.close()
+                    }
                 }
             }
         }
