@@ -53,7 +53,7 @@ Popup
                 id: listView
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
-                Layout.maximumHeight: root.maxHeight      
+                Layout.maximumHeight: root.maxHeight
                 maximumFlickVelocity: 550
                 currentIndex: 0
                 keyNavigationEnabled: true
@@ -63,13 +63,14 @@ Popup
                 highlightMoveDuration: 0
                 highlightFollowsCurrentItem: true
                 
-                delegate: MComboBoxItem 
+                delegate: MComboBoxItem
                 {
                     container: listView
                     fontSize: root.fontSize
                     fontColor: root.fontColor
                     fontWeight: root.fontWeight
                     fontFamily: root.fontFamily
+                    radius: root.radius - 1
                 }
                 
                 ScrollBar.vertical: ScrollBar { }

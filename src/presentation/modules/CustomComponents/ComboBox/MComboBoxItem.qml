@@ -3,17 +3,18 @@ import QtQuick.Controls
 
 Item
 {
+    id: root
     property string content : languageName
     property ListView container
+    property int radius
     
     property int fontSize
     property color fontColor
     property int fontWeight
     property string fontFamily
     
-    
     implicitWidth: container.width
-    implicitHeight: label.implicitHeight + 8
+    implicitHeight: 28
     
     
     Rectangle
@@ -22,27 +23,28 @@ Item
         radius: root.radius
         color: "transparent"
         
-        MouseArea
-        {
-            anchors.fill: parent
-            onClicked:
-            {
-                container.currentIndex = index;
-                closeComboBox();
-            }
-        }
-        
         Label
         {
             id: label
             anchors.fill: parent
-            anchors.margins: 4
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 6
+            verticalAlignment: Text.AlignVCenter
             color: root.fontColor
             text: languageName
             font.pointSize: root.fontSize
             font.family: root.fontFamily
             font.weight: root.fontWeight
+        }
+    }
+    
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        onClicked:
+        {
+            container.currentIndex = index;
+            closeComboBox();
         }
     }
     
