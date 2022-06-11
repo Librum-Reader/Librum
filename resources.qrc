@@ -71,13 +71,10 @@
         <file>src/presentation/register/MKeepMeUpdated.qml</file>
         <file>src/presentation/register/MAcceptPolicy.qml</file>
         <file>src/presentation/modules/CustomComponents/MTitle.qml</file>
-        <file>src/presentation/modules/CustomComponents/MSearchButton.qml</file>
         <file>src/presentation/modules/CustomComponents/MLogo.qml</file>
         <file>src/presentation/modules/CustomComponents/qmldir</file>
         <file>src/presentation/modules/CustomComponents/MLabeledInputBox.qml</file>
         <file>src/presentation/modules/CustomComponents/MCheckBox.qml</file>
-        <file>src/presentation/modules/CustomComponents/MButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/MBook.qml</file>
         <file>src/presentation/home/MEmptyScreenContent.qml</file>
         <file>src/presentation/settings/MAboutPage.qml</file>
         <file>src/presentation/settings/MAppearancePage.qml</file>
@@ -88,7 +85,6 @@
         <file>src/presentation/settings/MStoragePage.qml</file>
         <file>src/presentation/settings/MSupportUsPage.qml</file>
         <file>src/presentation/forgotPassword/MForgotPasswordPage.qml</file>
-        <file>src/presentation/modules/CustomComponents/MMinimalBook.qml</file>
         <file>src/presentation/modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/MLabeledCheckBox.qml</file>
         <file>src/presentation/modules/CustomComponents/MDropDownListItem.qml</file>
@@ -119,8 +115,12 @@
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBox.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
-        <file>src/presentation/modules/CustomComponents/MRemoveOptionButton.qml</file>
         <file>src/presentation/freeBooks/MDownloadBookPopup.qml</file>
-        <file>src/presentation/modules/CustomComponents/MCloseButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/Buttons/MButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/Buttons/MCloseButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/Buttons/MRemoveOptionButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/Buttons/MSearchButton.qml</file>
+        <file>src/presentation/modules/CustomComponents/Books/MBook.qml</file>
+        <file>src/presentation/modules/CustomComponents/Books/MMinimalBook.qml</file>
     </qresource>
 </RCC>

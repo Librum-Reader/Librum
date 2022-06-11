@@ -231,6 +231,7 @@ Popup
                 Label
                 {
                     Layout.preferredWidth: parent.width
+                    Layout.topMargin: 2
                     text: "Your habits determine your character and later define your life." +
                            "Don’t blame outside factors when you fail in life. Also, don’t think" +
                            "that succeeding in one area of your life will mean that you’re destined for triumph."
