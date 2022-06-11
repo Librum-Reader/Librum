@@ -19,6 +19,7 @@ Popup
     padding: 0
     implicitWidth: 300
     implicitHeight: container.implicitHeight
+    focus: true
     background: Rectangle
     {
         color: "transparent"
@@ -30,6 +31,7 @@ Popup
         id: container
         width: parent.width
         padding: 8
+        focus: true
         background: Rectangle
         {
             color: properties.colorBackground
@@ -46,7 +48,7 @@ Popup
             width: parent.width
             
             
-            ListView 
+            ListView
             {
                 id: listView
                 Layout.fillWidth: true
@@ -56,6 +58,7 @@ Popup
                 currentIndex: 0
                 keyNavigationEnabled: true
                 clip: true
+                focus: true
                 boundsBehavior: Flickable.StopAtBounds
                 highlightMoveDuration: 0
                 highlightFollowsCurrentItem: true
@@ -67,7 +70,7 @@ Popup
                     fontColor: root.fontColor
                     fontWeight: root.fontWeight
                     fontFamily: root.fontFamily
-                }                
+                }
                 
                 ScrollBar.vertical: ScrollBar { }
                 highlight: Rectangle
@@ -80,6 +83,10 @@ Popup
     }
     
     
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }
     
     function closeComboBox()
     {

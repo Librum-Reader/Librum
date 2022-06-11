@@ -137,7 +137,18 @@ Item
         width: parent.width
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         
-        onOpenedChanged: opened ? openAnim.start() : closeAnim.start()
+        onOpenedChanged:
+        {
+            if(opened)
+            {
+                closeAnim.start();
+            }
+            else
+            {
+                giveFocus();
+                openAnim.start();
+            }
+        }
     }
     
     
