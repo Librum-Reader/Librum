@@ -103,24 +103,24 @@ Page
                     model: 500
                     delegate: MMinimalBook
                     {
-                        MouseArea
+                        MouseArea   
                         {
                             anchors.fill: parent
                             
                             onClicked: getBookPopup.open();
                         }
                     }
-                    
-                    
-                    MDownloadBookPopup
-                    {
-                        id: getBookPopup
-                        
-                        x: Math.trunc(bookGrid.width / 2) - Math.trunc(width / 2)
-                        y: 0
-                    }
                 }
             }
         }
+    }
+    
+    
+    MDownloadBookPopup
+    {
+        id: getBookPopup
+        
+        x: Math.trunc(root.width / 2) - Math.trunc(width / 2)
+        y: Math.trunc(root.height / 2) - Math.trunc(height / 2)
     }
 }

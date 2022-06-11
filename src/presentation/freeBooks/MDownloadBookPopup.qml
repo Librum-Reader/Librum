@@ -73,6 +73,8 @@ Popup
                 MCloseButton
                 {
                     Layout.alignment: Qt.AlignRight
+                    
+                    onClicked: root.close()
                 }
             }
         }
