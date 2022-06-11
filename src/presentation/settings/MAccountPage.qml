@@ -51,7 +51,7 @@ Page
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: properties.colorBasePurple
-                textContent: "Save"
+                text: "Save"
                 fontSize: 12
                 fontBold: true
                 fontColor: properties.colorBackground

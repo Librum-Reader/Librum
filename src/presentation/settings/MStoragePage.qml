@@ -49,7 +49,7 @@ Page
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: properties.colorBasePurple
-                textContent: "Upgrade"
+                text: "Upgrade"
                 fontSize: 12
                 fontBold: true
                 fontColor: properties.colorBackground

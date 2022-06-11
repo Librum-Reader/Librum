@@ -159,7 +159,7 @@ Page
                     imagePath: properties.iconCoffee
                     imageSize: 20
                     imageSpacing: 10
-                    textContent: "Buy us a coffee"
+                    text: "Buy us a coffee"
                     fontSize: 11.9
                     fontColor: properties.colorBaseTitle
                     buttonRadius: 4

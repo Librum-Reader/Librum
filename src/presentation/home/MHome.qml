@@ -71,7 +71,7 @@ Page
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 backgroundColor: properties.colorBasePurple
-                textContent: "Add books"
+                text: "Add books"
                 fontColor: properties.colorBackground
                 fontBold: true
                 fontSize: 13

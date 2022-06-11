@@ -59,7 +59,7 @@ Item
                 backgroundColor: properties.colorLightPurple
                 backgroundOpacityOnPressed: 0.75
                 borderColor: properties.colorMediumPurple
-                textContent: "Add book"
+                text: "Add book"
                 fontColor: properties.colorBasePurple
                 fontBold: true
                 fontSize: 13.5

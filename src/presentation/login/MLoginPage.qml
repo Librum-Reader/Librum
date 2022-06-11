@@ -189,7 +189,7 @@ Page
                     fontSize: 12
                     fontColor: properties.colorBrightText
                     fontBold: true
-                    textContent: "Login"
+                    text: "Login"
                     
                     onClicked: loadPage("HomePage");
                     

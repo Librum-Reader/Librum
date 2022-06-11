@@ -115,7 +115,7 @@ Page
                     backgroundColor: properties.colorLightGreen
                     imagePath: properties.iconCheckGreen
                     imageSize: 20
-                    textContent: "Up-to date"
+                    text: "Up-to date"
                     fontSize: 10.5
                     fontColor: properties.colorMediumGreen
                     imageSpacing: 6

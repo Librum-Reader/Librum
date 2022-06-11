@@ -245,7 +245,7 @@ Page
                             fontSize: 12                            
                             fontColor: properties.colorBrightText
                             fontBold: true
-                            textContent: "Let's start"
+                            text: "Let's start"
                             
                             onClicked: loadPage("LoginPage");
                             

@@ -57,7 +57,7 @@ Page
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 backgroundColor: properties.colorBasePurple
-                textContent: "Add shortcut"
+                text: "Add shortcut"
                 fontColor: properties.colorBackground
                 fontBold: true
                 fontSize: 13

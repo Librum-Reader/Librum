@@ -203,7 +203,7 @@ Popup
                     buttonRadius: 3
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple
-                    textContent: "Apply Filter"
+                    text: "Apply Filter"
                     fontSize: 10.5
                     fontColor: properties.colorBrightText
                     fontBold: true

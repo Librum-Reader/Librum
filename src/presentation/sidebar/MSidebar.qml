@@ -73,7 +73,7 @@ Item
                 Layout.fillWidth: true
                 Layout.preferredHeight: 2
                 Layout.topMargin: 15
-                color: properties.colorSidebarSeparator
+                color: properties.colorSeparator
             }
             
             MSidebarItem
@@ -101,7 +101,7 @@ Item
                 Layout.preferredHeight: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 16
-                color: properties.colorSidebarSeparator
+                color: properties.colorSeparator
             }
             
             MSidebarItem
@@ -147,7 +147,7 @@ Item
                 Layout.preferredHeight: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 15
-                color: properties.colorSidebarSeparator
+                color: properties.colorSeparator
             }
             
             MSidebarItem
@@ -215,7 +215,7 @@ Item
                 id: bottomSeparator
                 Layout.fillWidth: true
                 Layout.preferredHeight: 2
-                color: properties.colorSidebarSeparator
+                color: properties.colorSeparator
             }
             
             MProfilePopup

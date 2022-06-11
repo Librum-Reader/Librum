@@ -125,7 +125,7 @@ Page
                     Layout.alignment: Qt.AlignHCenter
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple
-                    textContent: "Send Email"
+                    text: "Send Email"
                     fontSize: 12.25
                     fontColor: properties.colorBrightText
                     fontBold: true

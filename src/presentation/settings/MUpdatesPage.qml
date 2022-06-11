@@ -110,7 +110,7 @@ Page
                     imagePath: properties.iconArrowDownHallow
                     imageSize: 14
                     imageSpacing: 6
-                    textContent: "Download"
+                    text: "Download"
                     fontSize: 11.7
                     fontBold: true
                     fontColor: properties.colorBaseText
