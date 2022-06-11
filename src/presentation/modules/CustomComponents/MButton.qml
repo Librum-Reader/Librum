@@ -9,12 +9,12 @@ Item
     property int buttonRadius : 4
     property color borderColor: properties.colorDarkBorder
     property int borderWidth: 1
-    property color backgroundColor : "red"
-    property string textContent : "Text here"
+    property color backgroundColor : "white"
+    property string text
     property color fontColor : "black"
     property bool fontBold : false
     property double fontSize : 11
-    property string imagePath : ""
+    property string imagePath
     property int imageSpacing : 8
     property int imageSize : 15
     property double backgroundOpacityOnPressed: 0.9
@@ -54,7 +54,7 @@ Item
             Label
             {
                 id: loginButtonText
-                text: root.textContent
+                text: root.text
                 font.bold: root.fontBold
                 font.pointSize: root.fontSize
                 font.family: properties.defaultFontFamily
