@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import "explorerToolbar"
 import CustomComponents
+import "explorerToolbar"
 
 
 Page
@@ -14,24 +14,13 @@ Page
         anchors.fill: parent
         color: properties.pagesBackground
     }
-
     
-    ListModel
+    onWidthChanged:
     {
-        id: model
-        
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
+        if(getBookPopup.opened)
+        {
+            getBookPopup.close();
+        }
     }
     
     
@@ -112,7 +101,24 @@ Page
                     clip: true
                     
                     model: 500
-                    delegate: MMinimalBook { }
+                    delegate: MMinimalBook
+                    {
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            
+                            onClicked: getBookPopup.open();
+                        }
+                    }
+                    
+                    
+                    MDownloadBookPopup
+                    {
+                        id: getBookPopup
+                        
+                        x: Math.trunc(bookGrid.width / 2) - Math.trunc(width / 2)
+                        y: 0
+                    }
                 }
             }
         }

@@ -54,6 +54,8 @@
         <file>resources/images/arrow_filled_up_icon.svg</file>
         <file>resources/images/close_purple_icon.svg</file>
         <file>resources/images/arrow_gray_hallow_right_icon.svg</file>
+        <file>resources/images/close_black_icon.svg</file>
+        <file>resources/images/download_icon_white.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/presentation/main.qml</file>
@@ -118,5 +120,7 @@
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
         <file>src/presentation/modules/CustomComponents/MRemoveOptionButton.qml</file>
+        <file>src/presentation/freeBooks/MDownloadBookPopup.qml</file>
+        <file>src/presentation/modules/CustomComponents/MCloseButton.qml</file>
     </qresource>
 </RCC>
