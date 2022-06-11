@@ -4,9 +4,11 @@ import QtQuick.Controls
 Item
 {
     id: root
+    property double backgroundOpacityOnPressed : 0.7
+    signal clicked
+    
     implicitWidth: 32
     implicitHeight: 32
-    signal clicked
     
     
     Pane
@@ -17,6 +19,7 @@ Item
         background: Rectangle
         {
             color: properties.colorBackground
+            opacity: (mouseArea.pressed || root.activeFocus ? root.backgroundOpacityOnPressed : 1)
             border.color: properties.colorLightBorder
             radius: 4
             antialiasing: true
@@ -34,6 +37,7 @@ Item
     
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
         
         onClicked: root.clicked()
