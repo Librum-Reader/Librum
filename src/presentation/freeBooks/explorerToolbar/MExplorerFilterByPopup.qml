@@ -122,6 +122,7 @@ Popup
                 {
                     id: languagesComboBox
                     Layout.fillWidth: true
+                    Layout.preferredHeight: 49
                     headerText: "Language"
                     imagePath: properties.iconArrowDownFilled
                     maxPopupHeight: 208
@@ -131,27 +132,27 @@ Popup
                     ListModel
                     {
                         id: listModel
-                        ListElement { languageName: "None" }
-                        ListElement { languageName: "English" }
-                        ListElement { languageName: "German"  }
-                        ListElement { languageName: "Italian" }
-                        ListElement { languageName: "French" }
-                        ListElement { languageName: "Romanian" }
-                        ListElement { languageName: "Spanish" }
-                        ListElement { languageName: "Mandarin" }
-                        ListElement { languageName: "Portugese" }
-                        ListElement { languageName: "Hindi" }
-                        ListElement { languageName: "Bengali" }
-                        ListElement { languageName: "Russian" }
-                        ListElement { languageName: "Arabic" }
-                        ListElement { languageName: "Japanese" }
-                        ListElement { languageName: "Indonesian" }
-                        ListElement { languageName: "Turkish" }
-                        ListElement { languageName: "Korean" }
-                        ListElement { languageName: "Hungarian" }
-                        ListElement { languageName: "Thai"  }
-                        ListElement { languageName: "Swahli" }
-                        ListElement { languageName: "Dutch" }
+                        ListElement { content: "None" }
+                        ListElement { content: "English" }
+                        ListElement { content: "German"  }
+                        ListElement { content: "Italian" }
+                        ListElement { content: "French" }
+                        ListElement { content: "Romanian" }
+                        ListElement { content: "Spanish" }
+                        ListElement { content: "Mandarin" }
+                        ListElement { content: "Portugese" }
+                        ListElement { content: "Hindi" }
+                        ListElement { content: "Bengali" }
+                        ListElement { content: "Russian" }
+                        ListElement { content: "Arabic" }
+                        ListElement { content: "Japanese" }
+                        ListElement { content: "Indonesian" }
+                        ListElement { content: "Turkish" }
+                        ListElement { content: "Korean" }
+                        ListElement { content: "Hungarian" }
+                        ListElement { content: "Thai"  }
+                        ListElement { content: "Swahli" }
+                        ListElement { content: "Dutch" }
                     }
                 }
                 
@@ -160,7 +161,7 @@ Popup
                     id: applyButton
                     Layout.fillWidth: true
                     Layout.preferredHeight: 28
-                    Layout.topMargin: 10
+                    Layout.topMargin: 8
                     buttonRadius: 3
                     borderWidth: 0
                     backgroundColor: properties.colorBasePurple

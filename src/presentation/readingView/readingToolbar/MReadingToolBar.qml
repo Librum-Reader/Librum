@@ -94,9 +94,10 @@ Pane
         {
             id: languagesComboBox
             Layout.preferredHeight: 32
-            Layout.preferredWidth: 79
+            Layout.preferredWidth: 84
             headerText: ""
-            imagePath: properties.iconArrowDownFilled
+            backgroundColor: properties.colorBaseGray
+            imagePath: properties.iconDropDownBlack
             imageSize: 9
             maxPopupHeight: 208
             
@@ -105,22 +106,22 @@ Pane
             ListModel
             {
                 id: listModel
-                ListElement { languageName: "12%" }
-                ListElement { languageName: "25%" }
-                ListElement { languageName: "33%" }
-                ListElement { languageName: "50%" }
-                ListElement { languageName: "66%" }
-                ListElement { languageName: "75%" }
-                ListElement { languageName: "100%" }
-                ListElement { languageName: "125%" }
-                ListElement { languageName: "150%" }
-                ListElement { languageName: "175%" }
-                ListElement { languageName: "200%" }
-                ListElement { languageName: "400%" }
-                ListElement { languageName: "800%" }
-                ListElement { languageName: "1000%" }
-                ListElement { languageName: "2000%" }
-                ListElement { languageName: "4000%" }
+                ListElement { content: "12%" }
+                ListElement { content: "25%" }
+                ListElement { content: "33%" }
+                ListElement { content: "50%" }
+                ListElement { content: "66%" }
+                ListElement { content: "75%" }
+                ListElement { content: "100%" }
+                ListElement { content: "125%" }
+                ListElement { content: "150%" }
+                ListElement { content: "175%" }
+                ListElement { content: "200%" }
+                ListElement { content: "400%" }
+                ListElement { content: "800%" }
+                ListElement { content: "1000%" }
+                ListElement { content: "2000%" }
+                ListElement { content: "4000%" }
             }
         }
         

@@ -143,6 +143,7 @@ Popup
                         {
                             id: formatInputComboBox
                             Layout.fillWidth: true
+                            Layout.preferredHeight: 49
                             Layout.topMargin: 2
                             headerText: "Format"
                             imagePath: properties.iconArrowDownFilled
@@ -153,17 +154,17 @@ Popup
                             ListModel
                             {
                                 id: listModel
-                                ListElement { languageName: "Any" }
-                                ListElement { languageName: "Pdf" }
-                                ListElement { languageName: "Epub"  }
-                                ListElement { languageName: "Mobi" }
+                                ListElement { content: "Any" }
+                                ListElement { content: "Pdf" }
+                                ListElement { content: "Epub"  }
+                                ListElement { content: "Mobi" }
                             }
                         }
                         
                         MLabeledCheckBox
                         {
                             id: onlyBooksBox
-                            Layout.topMargin: 16
+                            Layout.topMargin: 14
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17

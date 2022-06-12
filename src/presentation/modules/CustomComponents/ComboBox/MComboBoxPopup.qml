@@ -6,7 +6,8 @@ import CustomComponents
 Popup
 {
     id: root
-    property string selectedContent: listView.currentItem.content
+    property string selectedContent: listView.currentItem.itemContent
+    property color backgroundColor
     property alias listContent: listView.model
     property int maxHeight: 200
     property int radius: 5
@@ -34,7 +35,7 @@ Popup
         focus: true
         background: Rectangle
         {
-            color: properties.colorBackground
+            color: root.backgroundColor
             border.width: 1
             border.color: properties.colorLightBorder
             radius: root.radius

@@ -9,6 +9,7 @@ Item
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
     property alias maxPopupHeight: selectionPopup.maxHeight
+    property string backgroundColor: properties.colorBackground
     
     property string headerText
     property int headerFontWeight: Font.Bold
@@ -47,6 +48,7 @@ Item
         {
             id: header
             Layout.fillWidth: true
+            visible: root.headerText.length > 0
             text: root.headerText
             font.family: properties.defaultFontFamily
             font.pointSize: root.headerFontSize
@@ -58,12 +60,12 @@ Item
         {
             id: container
             Layout.fillWidth: true
-            Layout.preferredHeight: root.height - header.height
+            Layout.fillHeight: true
             verticalPadding: 6
             horizontalPadding: 8
             background: Rectangle
             {
-                color: properties.colorBackground
+                color: root.backgroundColor
                 border.width: 1
                 border.color: properties.colorLightBorder
                 radius: root.radius
@@ -81,7 +83,7 @@ Item
                 Label
                 {
                     id: title
-                    Layout.alignment: Qt.AlignLeft
+                    Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
                     // @disable-check M325
                     text: selectionPopup.selectedContent == null ? root.titleEmptyText : selectionPopup.selectedContent
                     font.pointSize: root.titleFontSize
@@ -94,7 +96,7 @@ Item
                 {
                     id: icon
                     Layout.alignment: Qt.AlignRight
-                    sourceSize.height: root.imageSize
+                    sourceSize.width: root.imageSize
                     source: root.imagePath
                     fillMode: Image.PreserveAspectFit
                     
@@ -133,6 +135,7 @@ Item
     {
         id: selectionPopup
         y: mainLayout.y + mainLayout.height + root.popupSpacing
+        backgroundColor: root.backgroundColor
         
         width: parent.width
         closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
