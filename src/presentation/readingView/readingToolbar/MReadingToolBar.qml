@@ -32,6 +32,8 @@ Pane
             imagePath: properties.iconArrowBlackHallowThin
             imageSize: 11
             opacityOnPressed: 0.7
+            
+            onClicked: loadPage("HomePage")
         }
         
         MButton
