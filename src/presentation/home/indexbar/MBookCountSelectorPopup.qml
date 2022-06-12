@@ -22,14 +22,6 @@ Popup
         anchors.fill: parent
         spacing: 0
         
-        
-        Image
-        {
-            Layout.leftMargin: 14
-            Layout.bottomMargin: -1
-            source: properties.iconArrowUpFilled
-        }
-        
         Pane
         {
             id: container
