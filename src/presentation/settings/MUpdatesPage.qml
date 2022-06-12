@@ -106,6 +106,7 @@ Page
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 34
                     Layout.topMargin: 14
+                    borderColor: properties.colorLightBorder
                     backgroundColor: properties.colorLightGrayBackground
                     imagePath: properties.iconArrowDownHallow
                     imageSize: 14
@@ -114,7 +115,6 @@ Page
                     fontSize: 11.7
                     fontBold: true
                     fontColor: properties.colorBaseText
-                    borderColor: properties.colorLightBorder
                     opacityOnPressed: 0.8
                 }
                 

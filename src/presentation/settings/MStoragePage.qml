@@ -43,7 +43,7 @@ Page
             
             MButton
             {
-                id: saveButton
+                id: upgradeButton
                 Layout.preferredWidth: 118
                 Layout.preferredHeight: 38
                 Layout.alignment: Qt.AlignBottom

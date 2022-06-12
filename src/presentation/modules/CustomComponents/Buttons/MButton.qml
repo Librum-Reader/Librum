@@ -7,7 +7,7 @@ Item
 {
     id: root
     property int buttonRadius : 4
-    property color borderColor: properties.colorDarkBorder
+    property color borderColor: "red"
     property int borderWidth: 1
     property color backgroundColor : "white"
     property string text

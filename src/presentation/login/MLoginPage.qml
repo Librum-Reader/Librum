@@ -185,6 +185,7 @@ Page
                     Layout.fillWidth: true
                     Layout.preferredHeight: 40
                     Layout.topMargin: 42
+                    borderWidth: 0
                     backgroundColor: properties.colorBasePurple
                     fontSize: 12
                     fontColor: properties.colorBrightText

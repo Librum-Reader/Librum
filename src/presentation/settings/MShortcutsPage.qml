@@ -56,6 +56,7 @@ Page
                 Layout.preferredHeight: 40
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
+                borderWidth: 0
                 backgroundColor: properties.colorBasePurple
                 text: "Add shortcut"
                 fontColor: properties.colorBackground

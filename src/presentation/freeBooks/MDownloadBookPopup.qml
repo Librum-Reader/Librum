@@ -297,7 +297,7 @@ Popup
                     Layout.preferredWidth: 137
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignRight
-                    borderColor: properties.colorLightBorder
+                    borderWidth: 0
                     backgroundColor: properties.colorBasePurple
                     text: "Download"
                     fontColor: properties.colorBrightText

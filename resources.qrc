@@ -119,7 +119,7 @@
         <file>src/presentation/modules/CustomComponents/Buttons/MButton.qml</file>
         <file>src/presentation/modules/CustomComponents/Buttons/MRemoveOptionButton.qml</file>
         <file>src/presentation/modules/CustomComponents/Buttons/MSearchButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/Books/MBook.qml</file>
-        <file>src/presentation/modules/CustomComponents/Books/MMinimalBook.qml</file>
+        <file>src/presentation/home/MBook.qml</file>
+        <file>src/presentation/freeBooks/MMinimalBook.qml</file>
     </qresource>
 </RCC>

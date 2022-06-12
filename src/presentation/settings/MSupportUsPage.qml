@@ -154,8 +154,8 @@ Page
                     Layout.preferredWidth: 168
                     Layout.preferredHeight: 38
                     Layout.topMargin: 10
+                    borderWidth: 0
                     backgroundColor: properties.colorCoffeeBrown
-                    borderColor: "transparent"
                     imagePath: properties.iconCoffee
                     imageSize: 20
                     imageSpacing: 10
