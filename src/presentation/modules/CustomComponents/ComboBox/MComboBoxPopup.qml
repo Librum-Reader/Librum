@@ -11,11 +11,13 @@ Popup
     property alias listContent: listView.model
     property int maxHeight: 200
     property int radius: 5
+    property int defaultIndex: 0
     
     property int fontSize: 11
     property color fontColor: properties.colorBaseText
     property int fontWeight: Font.Normal
     property string fontFamily: properties.defaultFontFamily
+    property string highlightColor: properties.colorLightPurple
     
     padding: 0
     implicitWidth: 300
@@ -56,7 +58,7 @@ Popup
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: root.maxHeight
                 maximumFlickVelocity: 550
-                currentIndex: 0
+                currentIndex: root.defaultIndex
                 keyNavigationEnabled: true
                 clip: true
                 focus: true
@@ -78,7 +80,7 @@ Popup
                 highlight: Rectangle
                 {
                     radius: 4
-                    color: properties.colorLightPurple
+                    color: root.highlightColor
                 }
             }
         }

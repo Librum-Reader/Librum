@@ -10,6 +10,8 @@ Item
     property int popupSpacing: 5
     property alias maxPopupHeight: selectionPopup.maxHeight
     property string backgroundColor: properties.colorBackground
+    property alias highlightColor: selectionPopup.highlightColor
+    property alias defaultIndex: selectionPopup.defaultIndex
     
     property string headerText
     property int headerFontWeight: Font.Bold

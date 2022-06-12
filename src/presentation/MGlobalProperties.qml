@@ -12,6 +12,7 @@ Item
     property color colorLightPurple  : "#F0F0FF"
     property color colorLightGray    : "#F6F6F9"
     property color colorLightGray2   : "#EDEDED"
+    property color colorLightGray3   : "#E2E2E2"
     property color colorNeonBlue     : "#4945FF"
     property color colorLightGreen   : "#EAFBE7"
     property color colorLightGreen2  : "#C6F0C2"

@@ -97,6 +97,8 @@ Pane
             Layout.preferredWidth: 84
             headerText: ""
             backgroundColor: properties.colorBaseGray
+            highlightColor: properties.colorLightGray3
+            defaultIndex: 6
             imagePath: properties.iconDropDownBlack
             imageSize: 9
             maxPopupHeight: 208
