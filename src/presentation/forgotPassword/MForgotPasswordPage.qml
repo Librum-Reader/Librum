@@ -128,7 +128,7 @@ Page
                     text: "Send Email"
                     fontSize: 12.25
                     fontColor: properties.colorBrightText
-                    fontBold: true
+                    fontWeight: Font.Bold
                     
                     onClicked:
                     {

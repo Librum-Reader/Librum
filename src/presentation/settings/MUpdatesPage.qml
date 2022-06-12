@@ -113,7 +113,7 @@ Page
                     imageSpacing: 6
                     text: "Download"
                     fontSize: 11.7
-                    fontBold: true
+                    fontWeight: Font.Bold
                     fontColor: properties.colorBaseText
                     opacityOnPressed: 0.8
                 }

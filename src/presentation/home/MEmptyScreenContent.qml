@@ -61,7 +61,7 @@ Item
                 borderColor: properties.colorMediumPurple
                 text: "Add book"
                 fontColor: properties.colorBasePurple
-                fontBold: true
+                fontWeight: Font.Bold
                 fontSize: 13.5
                 imagePath: properties.iconPlusBlack
                 imageSize: 16

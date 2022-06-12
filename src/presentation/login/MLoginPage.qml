@@ -189,7 +189,7 @@ Page
                     backgroundColor: properties.colorBasePurple
                     fontSize: 12
                     fontColor: properties.colorBrightText
-                    fontBold: true
+                    fontWeight: Font.Bold
                     text: "Login"
                     
                     onClicked: loadPage("HomePage");

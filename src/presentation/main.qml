@@ -12,6 +12,7 @@ import "statistics"
 import "addOns"
 import "tools"
 import "forgotPassword"
+import "readingView"
 
 
 ApplicationWindow
@@ -64,6 +65,7 @@ ApplicationWindow
     Component { id: addOnsPage; MAddOns {} }
     Component { id: toolsPage; MTools {} }
     Component { id: statisticsPage; MStatistics {} }
+    Component { id: readingViewPage; MReadingView {} }
 
     
     function loadPage(page)
@@ -112,6 +114,10 @@ ApplicationWindow
         case 'StatisticsPage':
             pageManager.replace(statisticsPage);
             pageManager.pageHasSidebar = true;
+            break;
+        case 'ReadingViewPage':
+            pageManager.replace(readingViewPage);
+            pageManager.pageHasSidebar = false;
             break;
         default:
             console.log("ERROR: You tried instantiating a not existing page");

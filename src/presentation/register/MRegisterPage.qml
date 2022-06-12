@@ -245,7 +245,7 @@ Page
                             backgroundColor: properties.colorBasePurple
                             fontSize: 12                            
                             fontColor: properties.colorBrightText
-                            fontBold: true
+                            fontWeight: Font.Bold
                             text: "Let's start"
                             
                             onClicked: loadPage("LoginPage");

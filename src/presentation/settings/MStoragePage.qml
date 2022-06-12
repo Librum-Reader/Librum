@@ -51,7 +51,7 @@ Page
                 backgroundColor: properties.colorBasePurple
                 text: "Upgrade"
                 fontSize: 12
-                fontBold: true
+                fontWeight: Font.Bold
                 fontColor: properties.colorBackground
                 imagePath: properties.iconHeartWhite
                 imageSize: 18

@@ -74,7 +74,7 @@ Page
                 backgroundColor: properties.colorBasePurple
                 text: "Add books"
                 fontColor: properties.colorBackground
-                fontBold: true
+                fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: properties.iconPlusWhite
             }
@@ -122,7 +122,7 @@ Page
                 clip: true
                 
                 model: indexBar.selectedAmountOfBooks
-                delegate: MBook { }
+                delegate: MBook { onClicked: loadPage("ReadingViewPage") }
             }
         }
         

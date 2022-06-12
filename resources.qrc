@@ -56,6 +56,19 @@
         <file>resources/images/arrow_gray_hallow_right_icon.svg</file>
         <file>resources/images/close_black_icon.svg</file>
         <file>resources/images/download_icon_white.svg</file>
+        <file>resources/images/readingView/arrow_black_hallow_left_thin_icon.svg</file>
+        <file>resources/images/readingView/arrow_purple_hallow_left_thin_icon.svg</file>
+        <file>resources/images/readingView/bookmark_black_icon.svg</file>
+        <file>resources/images/readingView/bookmark_purple_icon.svg</file>
+        <file>resources/images/readingView/maximize_black_icon.svg</file>
+        <file>resources/images/readingView/maximize_purple_icon.svg</file>
+        <file>resources/images/readingView/menu_black_icon.svg</file>
+        <file>resources/images/readingView/menu_purple_icon.svg</file>
+        <file>resources/images/readingView/search_black_thin_icon.svg</file>
+        <file>resources/images/readingView/search_purple_thin_icon.svg</file>
+        <file>resources/images/readingView/sidebar_black_icon.svg</file>
+        <file>resources/images/readingView/sidebar_purple_icon.svg</file>
+        <file>resources/images/dropdown_black_icon.svg</file>
     </qresource>
     <qresource prefix="/sources">
         <file>src/presentation/main.qml</file>
@@ -121,5 +134,7 @@
         <file>src/presentation/modules/CustomComponents/Buttons/MSearchButton.qml</file>
         <file>src/presentation/home/MBook.qml</file>
         <file>src/presentation/freeBooks/MMinimalBook.qml</file>
+        <file>src/presentation/readingView/MReadingView.qml</file>
+        <file>src/presentation/readingView/readingToolbar/MReadingToolBar.qml</file>
     </qresource>
 </RCC>

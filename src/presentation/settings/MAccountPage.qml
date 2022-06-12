@@ -53,7 +53,7 @@ Page
                 backgroundColor: properties.colorBasePurple
                 text: "Save"
                 fontSize: 12
-                fontBold: true
+                fontWeight: Font.Bold
                 fontColor: properties.colorBackground
                 imagePath: properties.iconCheckWhite
                 imageSize: 14

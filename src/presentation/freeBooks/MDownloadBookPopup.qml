@@ -285,7 +285,7 @@ Popup
                     opacityOnPressed: 0.7
                     text: "Cancel"
                     fontColor: properties.colorBaseText
-                    fontBold: true
+                    fontWeight: Font.Bold
                     fontSize: 12
                     
                     onClicked: root.close()
@@ -301,7 +301,7 @@ Popup
                     backgroundColor: properties.colorBasePurple
                     text: "Download"
                     fontColor: properties.colorBrightText
-                    fontBold: true
+                    fontWeight: Font.Bold
                     fontSize: 12
                     imagePath: properties.iconDownloadWhite
                     imageSize: 18

@@ -206,7 +206,7 @@ Popup
                     text: "Apply Filter"
                     fontSize: 10.5
                     fontColor: properties.colorBrightText
-                    fontBold: true
+                    fontWeight: Font.Bold
                     
                     onClicked: root.filterQuerySent()
                 }

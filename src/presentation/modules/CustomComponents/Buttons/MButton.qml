@@ -8,7 +8,7 @@ Item
     id: root
     property string text
     property color fontColor: "black"
-    property bool fontBold: false
+    property int fontWeight: Font.Bold
     property double fontSize: 11
     property color backgroundColor: "white"
     property double opacityOnPressed: 0.9
@@ -18,6 +18,7 @@ Item
     property string imagePath
     property int imageSpacing: 8
     property int imageSize: 15
+    property bool imageToRight: false
     
     implicitWidth: 100
     implicitHeight: 30
@@ -44,8 +45,8 @@ Item
             
             Image
             {
-                id: image
-                visible: root.imagePath.length > 0
+                id: imageToLeft
+                visible: root.imagePath.length > 0 && !root.imageToRight
                 source: root.imagePath
                 sourceSize.width: root.imageSize
                 fillMode: Image.PreserveAspectFit
@@ -56,10 +57,19 @@ Item
                 id: loginButtonText
                 visible: text.length > 0
                 text: root.text
-                font.bold: root.fontBold
+                font.weight: root.fontWeight
                 font.pointSize: root.fontSize
                 font.family: properties.defaultFontFamily
                 color: root.fontColor
+            }
+            
+            Image
+            {
+                id: imageToRight
+                visible: root.imagePath.length > 0 && root.imageToRight
+                source: root.imagePath
+                sourceSize.width: root.imageSize
+                fillMode: Image.PreserveAspectFit
             }
         }
         

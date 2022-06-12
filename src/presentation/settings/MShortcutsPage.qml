@@ -60,7 +60,7 @@ Page
                 backgroundColor: properties.colorBasePurple
                 text: "Add shortcut"
                 fontColor: properties.colorBackground
-                fontBold: true
+                fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: properties.iconPlusWhite
             }

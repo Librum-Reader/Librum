@@ -6,6 +6,8 @@ import QtQuick.Layouts
 Item 
 {
     id: root
+    signal clicked
+    
     implicitWidth: 190
     implicitHeight: 322
     
@@ -135,6 +137,14 @@ Item
             }
         }
     }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        onClicked: root.clicked()
+    }
+    
     
     function giveFocus()
     {
