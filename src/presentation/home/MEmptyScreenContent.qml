@@ -57,7 +57,7 @@ Item
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 20
                 backgroundColor: properties.colorLightPurple
-                backgroundOpacityOnPressed: 0.75
+                opacityOnPressed: 0.75
                 borderColor: properties.colorMediumPurple
                 text: "Add book"
                 fontColor: properties.colorBasePurple

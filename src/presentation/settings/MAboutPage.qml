@@ -119,7 +119,7 @@ Page
                     fontSize: 10.5
                     fontColor: properties.colorMediumGreen
                     imageSpacing: 6
-                    backgroundOpacityOnPressed: 0.8
+                    opacityOnPressed: 0.8
                 }
             }
         }

@@ -17,7 +17,7 @@ Item
     property string imagePath
     property int imageSpacing : 8
     property int imageSize : 15
-    property double backgroundOpacityOnPressed: 0.9
+    property double opacityOnPressed: 0.9
     
     implicitWidth: 100
     implicitHeight: 30
@@ -33,7 +33,7 @@ Item
         border.width: root.borderWidth
         border.color: root.borderColor
         radius: root.buttonRadius
-        opacity: (mouseArea.pressed || root.activeFocus ? root.backgroundOpacityOnPressed : 1)
+        opacity: (mouseArea.pressed || root.activeFocus ? root.opacityOnPressed : 1)
         antialiasing: true
         
         RowLayout
@@ -54,6 +54,7 @@ Item
             Label
             {
                 id: loginButtonText
+                visible: text.length > 0
                 text: root.text
                 font.bold: root.fontBold
                 font.pointSize: root.fontSize

@@ -115,7 +115,7 @@ Page
                     fontBold: true
                     fontColor: properties.colorBaseText
                     borderColor: properties.colorLightBorder
-                    backgroundOpacityOnPressed: 0.8
+                    opacityOnPressed: 0.8
                 }
                 
                 Label

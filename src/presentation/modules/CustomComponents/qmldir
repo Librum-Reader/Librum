@@ -14,4 +14,3 @@ MDropDownListItem 1.0 MDropDownListItem.qml
 MComboBox 1.0 ComboBox/MComboBox.qml
 MComboBoxPopup 1.0 ComboBox/MComboBoxPopup.qml
 MRemoveOptionButton 1.0 Buttons/MRemoveOptionButton.qml
-MCloseButton 1.0 Buttons/MCloseButton.qml

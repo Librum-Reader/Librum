@@ -117,7 +117,6 @@
         <file>src/presentation/modules/CustomComponents/ComboBox/MComboBoxItem.qml</file>
         <file>src/presentation/freeBooks/MDownloadBookPopup.qml</file>
         <file>src/presentation/modules/CustomComponents/Buttons/MButton.qml</file>
-        <file>src/presentation/modules/CustomComponents/Buttons/MCloseButton.qml</file>
         <file>src/presentation/modules/CustomComponents/Buttons/MRemoveOptionButton.qml</file>
         <file>src/presentation/modules/CustomComponents/Buttons/MSearchButton.qml</file>
         <file>src/presentation/modules/CustomComponents/Books/MBook.qml</file>

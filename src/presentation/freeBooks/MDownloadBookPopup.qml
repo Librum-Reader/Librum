@@ -69,10 +69,16 @@ Popup
                     font.pointSize: 14
                     color: properties.colorBaseTitle
                 }
-                
-                MCloseButton
+
+                MButton
                 {
+                    Layout.preferredWidth: 32
+                    Layout.preferredHeight: 32
                     Layout.alignment: Qt.AlignRight
+                    borderColor: properties.colorLightBorder
+                    imagePath: properties.iconCloseBlack
+                    imageSize: 12
+                    opacityOnPressed: 0.7
                     
                     onClicked: root.close()
                 }
@@ -276,7 +282,7 @@ Popup
                     Layout.alignment: Qt.AlignLeft
                     borderColor: properties.colorLightBorder
                     backgroundColor: properties.colorBackground
-                    backgroundOpacityOnPressed: 0.7
+                    opacityOnPressed: 0.7
                     text: "Cancel"
                     fontColor: properties.colorBaseText
                     fontBold: true
