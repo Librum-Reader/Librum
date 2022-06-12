@@ -6,7 +6,7 @@ import QtQuick.Controls
 Item
 {
     id: root
-    property string text : "Reset Something"
+    property string text
     signal clicked()
     
     implicitWidth: container.width

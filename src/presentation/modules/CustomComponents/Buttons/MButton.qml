@@ -6,18 +6,18 @@ import QtQuick.Layouts
 Item
 {
     id: root
-    property int buttonRadius : 4
-    property color borderColor: "red"
-    property int borderWidth: 1
-    property color backgroundColor : "white"
     property string text
-    property color fontColor : "black"
-    property bool fontBold : false
-    property double fontSize : 11
-    property string imagePath
-    property int imageSpacing : 8
-    property int imageSize : 15
+    property color fontColor: "black"
+    property bool fontBold: false
+    property double fontSize: 11
+    property color backgroundColor: "white"
     property double opacityOnPressed: 0.9
+    property int borderWidth: 1
+    property color borderColor: "red"
+    property int buttonRadius: 4
+    property string imagePath
+    property int imageSpacing: 8
+    property int imageSize: 15
     
     implicitWidth: 100
     implicitHeight: 30
