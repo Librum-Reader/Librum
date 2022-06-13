@@ -108,7 +108,7 @@ Page
                     Layout.topMargin: 14
                     borderColor: properties.colorLightBorder
                     backgroundColor: properties.colorLightGrayBackground
-                    imagePath: properties.iconArrowDownHallow
+                    imagePath: properties.iconArrowDownBlack
                     imageSize: 14
                     imageSpacing: 6
                     text: "Download"

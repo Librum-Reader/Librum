@@ -43,7 +43,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: properties.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconSidebarBlack
+            imagePath: properties.iconReadingViewSidebarBlack
             imageSize: 18
             opacityOnPressed: 0.7
         }
@@ -55,7 +55,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: properties.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconBookmarkBlack
+            imagePath: properties.iconReadingViewBookmarkBlack
             imageSize: 14
             opacityOnPressed: 0.7
         }
@@ -101,7 +101,7 @@ Pane
             backgroundColor: properties.colorBaseGray
             highlightColor: properties.colorLightGray3
             defaultIndex: 6
-            imagePath: properties.iconDropDownBlack
+            imagePath: properties.iconDropdownBlack
             imageSize: 9
             maxPopupHeight: 208
             
@@ -136,7 +136,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: properties.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconMaximizeBlack
+            imagePath: properties.iconReadingViewMaximizeBlack
             imageSize: 20
             opacityOnPressed: 0.7
         }
@@ -148,7 +148,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: properties.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconSearchBlackThin
+            imagePath: properties.iconReadingViewSearchBlackThin
             imageSize: 18
             opacityOnPressed: 0.7
         }
@@ -160,7 +160,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: properties.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconMenuBlack
+            imagePath: properties.iconReadingViewMenuBlack
             imageSize: 20
             opacityOnPressed: 0.7
         }

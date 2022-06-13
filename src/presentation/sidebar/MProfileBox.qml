@@ -78,7 +78,7 @@ Item
                     sourceSize.width: 20
                     sourceSize.height: 20
                     anchors.centerIn: parent
-                    source: properties.iconArrowRightHallow
+                    source: properties.iconArrowtopBlackRight
                 }
                 
                 MouseArea

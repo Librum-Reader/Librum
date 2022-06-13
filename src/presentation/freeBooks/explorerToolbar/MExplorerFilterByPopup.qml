@@ -29,7 +29,7 @@ Popup
         {
             Layout.leftMargin: 14
             Layout.bottomMargin: -1
-            source: properties.iconArrowUpFilled
+            source: properties.iconDropupLightGray
         }
         
         Pane
@@ -124,13 +124,11 @@ Popup
                     Layout.fillWidth: true
                     Layout.preferredHeight: 49
                     headerText: "Language"
-                    imagePath: properties.iconArrowDownFilled
+                    imagePath: properties.iconDropDownGray
                     imageSize: 9
                     maxPopupHeight: 208
                     
-                    listContent: listModel
-                    
-                    ListModel
+                    listContent: ListModel
                     {
                         id: listModel
                         ListElement { content: "None" }

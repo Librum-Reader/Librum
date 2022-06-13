@@ -131,7 +131,7 @@ Popup
                             id: bookCover
                             anchors.centerIn: parent
                             sourceSize.height: imageRect.height - 2
-                            source: properties.imageBookCover
+                            source: properties.illustrationBookCover
                             fillMode: Image.PreserveAspectFit
                         }
                     }

@@ -16,7 +16,7 @@ Item
         id: image
         anchors.right: parent.right
         rotation: (root.toLeft ? 180 : 0)
-        source: properties.iconArrowGrayRightFilled
+        source: properties.iconArrowtopGrayRight
         sourceSize.width: 9
     }
     

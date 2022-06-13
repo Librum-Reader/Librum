@@ -40,7 +40,7 @@ Page
             Image
             {
                 Layout.alignment: Qt.AlignHCenter
-                source: properties.imageEyeCrossedSwift
+                source: properties.illustrationEyeCrossedSwift
                 sourceSize.width: 160
                 fillMode: Image.PreserveAspectFit
             }
@@ -158,7 +158,7 @@ Page
                         Image
                         {
                             id: backIcon
-                            source: properties.iconArrowRightHallow
+                            source: properties.iconArrowtopBlackRight
                             sourceSize.width: 24
                             fillMode: Image.PreserveAspectFit
                             rotation: 180

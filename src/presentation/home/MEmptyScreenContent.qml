@@ -16,7 +16,7 @@ Item
     Image
     {
         id: emptyBackgroundImage
-        source: properties.imageEmptyHomeBackground
+        source: properties.illustrationEmptyHomeBackground
         sourceSize.width: parent.width
         sourceSize.height: parent.height
         
@@ -32,7 +32,7 @@ Item
                 Layout.preferredHeight: 135
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 225
-                source: properties.imageFileSwift
+                source: properties.illustrationFileSwift
             }
             
             Label

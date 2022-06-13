@@ -53,7 +53,7 @@ Page
                 fontSize: 12
                 fontWeight: Font.Bold
                 fontColor: properties.colorBackground
-                imagePath: properties.iconHeartWhite
+                imagePath: properties.iconHeartWhiteHallow
                 imageSize: 18
             }
         }

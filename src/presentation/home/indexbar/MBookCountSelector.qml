@@ -43,7 +43,7 @@ Item
             Image
             {
                 id: dropDownArrowImage
-                source: properties.iconArrowDownFilled
+                source: properties.iconDropDownGray
                 sourceSize.width: 8
                 fillMode: Image.PreserveAspectFit
             }

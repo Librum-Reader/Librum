@@ -45,7 +45,7 @@ Item
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
                     sourceSize.height: 241
-                    source: properties.imageBookCover
+                    source: properties.illustrationBookCover
                     fillMode: Image.PreserveAspectFit
                 }
             }

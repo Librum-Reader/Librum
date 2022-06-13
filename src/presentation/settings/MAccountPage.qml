@@ -174,7 +174,7 @@ Page
                             id: dropAreaIcon
                             Layout.alignment: Qt.AlignCenter
                             Layout.topMargin: 50
-                            source: properties.iconAddImage
+                            source: properties.illustrationAddImage
                             sourceSize.width: 40
                             fillMode: Image.PreserveAspectFit
                         }

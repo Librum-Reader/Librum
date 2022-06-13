@@ -27,7 +27,7 @@ Popup
         {
             Layout.leftMargin: 14
             Layout.bottomMargin: -1
-            source: properties.iconArrowUpFilled
+            source: properties.iconDropupLightGray
         }
         
         Pane

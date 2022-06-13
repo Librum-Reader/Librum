@@ -83,7 +83,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 45
                 imageHeight: 45
-                imageSource: properties.iconDownload
+                imageSource: properties.iconDownloadGray
                 labelContent: "Free books"
                 selected: root.selectedTab == freeBooksButton
                 
