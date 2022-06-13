@@ -125,6 +125,7 @@ Popup
                     Layout.preferredHeight: 49
                     headerText: "Language"
                     imagePath: properties.iconArrowDownFilled
+                    imageSize: 9
                     maxPopupHeight: 208
                     
                     listContent: listModel

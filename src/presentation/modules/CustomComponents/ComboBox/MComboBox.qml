@@ -100,6 +100,7 @@ Item
                     Layout.alignment: Qt.AlignRight
                     sourceSize.width: root.imageSize
                     source: root.imagePath
+                    rotation: 180
                     fillMode: Image.PreserveAspectFit
                     
                     NumberAnimation

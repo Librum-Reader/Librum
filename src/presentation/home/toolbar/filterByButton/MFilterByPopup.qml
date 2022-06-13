@@ -147,6 +147,7 @@ Popup
                             Layout.topMargin: 2
                             headerText: "Format"
                             imagePath: properties.iconArrowDownFilled
+                            imageSize: 9
                             maxPopupHeight: 208
                             
                             listContent: listModel
