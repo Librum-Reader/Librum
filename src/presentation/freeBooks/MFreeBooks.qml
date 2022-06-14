@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
 import "explorerToolbar"
 
@@ -12,7 +13,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     onWidthChanged:

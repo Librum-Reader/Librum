@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -17,8 +18,8 @@ Item
     {
         id: container
         anchors.fill: parent
-        color: properties.colorBackground
-        border.color: properties.colorLightBorder
+        color: Style.colorBackground
+        border.color: Style.colorLightBorder
         radius: 4
         antialiasing: true
         
@@ -34,8 +35,8 @@ Item
             {
                 id: bookCountLabel
                 text: root.selectedAmountOfBooks.toString()
-                color: properties.colorBaseText
-                font.family: properties.defaultFontFamily
+                color: Style.colorBaseText
+                font.family: Style.defaultFontFamily
                 font.pointSize: 11
                 font.bold: true
             }

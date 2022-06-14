@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -65,7 +66,7 @@ Item
                     text: "Keep me updated about the new features and"
                     wrapMode: Text.WordWrap
                     font.pointSize: 11
-                    color: properties.colorMediumText
+                    color: Style.colorMediumText
                 }
                 
                 Label
@@ -74,7 +75,7 @@ Item
                     text: "upcoming improvements."
                     wrapMode: Text.WordWrap
                     font.pointSize: 11
-                    color: properties.colorMediumText
+                    color: Style.colorMediumText
                 }
             }
         }

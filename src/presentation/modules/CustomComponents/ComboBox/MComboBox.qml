@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 Item
 {
@@ -9,19 +10,19 @@ Item
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
     property alias maxPopupHeight: selectionPopup.maxHeight
-    property string backgroundColor: properties.colorBackground
+    property string backgroundColor: Style.colorBackground
     property alias highlightColor: selectionPopup.highlightColor
     property alias defaultIndex: selectionPopup.defaultIndex
     
     property string headerText
     property int headerFontWeight: Font.Bold
     property double headerFontSize: 10.5
-    property color headerFontColor: properties.colorLightText3
+    property color headerFontColor: Style.colorLightText3
     
     property string titleEmptyText: "Any"
     property int titleFontWeight: Font.Normal
     property int titleFontSize: 11
-    property color titleFontColor: properties.colorBaseText
+    property color titleFontColor: Style.colorBaseText
     
     property alias contentFontSize: selectionPopup.fontSize
     property alias contentFontColor: selectionPopup.fontColor
@@ -52,7 +53,7 @@ Item
             Layout.fillWidth: true
             visible: root.headerText.length > 0
             text: root.headerText
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.pointSize: root.headerFontSize
             font.weight: root.headerFontWeight
             color: root.headerFontColor
@@ -69,7 +70,7 @@ Item
             {
                 color: root.backgroundColor
                 border.width: 1
-                border.color: properties.colorLightBorder
+                border.color: Style.colorLightBorder
                 radius: root.radius
                 antialiasing: true
             }
@@ -89,7 +90,7 @@ Item
                     // @disable-check M325
                     text: selectionPopup.selectedContent == null ? root.titleEmptyText : selectionPopup.selectedContent
                     font.pointSize: root.titleFontSize
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight
                     color: root.titleFontColor
                 }

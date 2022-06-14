@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -20,8 +21,8 @@ Item
     {
         id: contentRect
         anchors.fill: parent
-        color: (root.selected ? properties.colorBackground : "transparent")
-        border.color: (root.selected ? properties.colorLightBorder : "transparent")
+        color: (root.selected ? Style.colorBackground : "transparent")
+        border.color: (root.selected ? Style.colorLightBorder : "transparent")
         radius: 5
         
         
@@ -30,9 +31,9 @@ Item
             anchors.centerIn: parent
             text: root.pageNumber.toString()
             font.pointSize: (root.selected ? root.selectedFontSize : root.normalFontSize)
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.bold: root.selected
-            color: (root.selected ? properties.colorBasePurple : properties.colorBaseText)
+            color: (root.selected ? Style.colorBasePurple : Style.colorBaseText)
         }
     }
     

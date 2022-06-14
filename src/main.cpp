@@ -6,6 +6,7 @@
 #include <QString>
 #include "qdiriterator.h"
 #include "qfontdatabase.h"
+#include "qqml.h"
 #include "sidebar_state.hpp"
 #include "test_request.hpp"
 
@@ -55,8 +56,11 @@ int main(int argc, char *argv[])
 
 
     // Type registering
+    qmlRegisterSingletonType(QUrl(u"qrc:/sources/src/presentation/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
+    qmlRegisterSingletonType(QUrl(u"qrc:/sources/src/presentation/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
+    
     SidebarState sidebarState;
-    qmlRegisterSingletonInstance("librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
+    qmlRegisterSingletonInstance("Librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
 
     
     

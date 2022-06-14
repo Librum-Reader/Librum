@@ -1,6 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
+
 
 Item
 {
@@ -49,9 +51,9 @@ Item
                 Layout.leftMargin: root.labelLeftMargin
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
-                color: (root.selected ? properties.colorBasePurple : properties.colorBaseText)
+                color: (root.selected ? Style.colorBasePurple : Style.colorBaseText)
                 font.pointSize: 13
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.weight: (root.selected ? Font.DemiBold : Font.Normal)
             }
             
@@ -63,7 +65,7 @@ Item
                 visible: root.selected
                 Layout.preferredWidth: 2
                 Layout.fillHeight: true
-                color: properties.colorBasePurple
+                color: Style.colorBasePurple
             }
         }
        

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -20,9 +21,9 @@ Item
         padding: 12
         background: Rectangle
         {
-            color: properties.colorLightPurple
+            color: Style.colorLightPurple
             border.width: 1
-            border.color: properties.colorMediumPurple
+            border.color: Style.colorMediumPurple
             radius: 5
         }
         
@@ -35,10 +36,10 @@ Item
             Label
             {
                 id: filterByLabel
-                color: properties.colorBasePurple
+                color: Style.colorBasePurple
                 text: root.text
                 font.pointSize: 12
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.weight: Font.Bold
             }
             

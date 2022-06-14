@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
 
 
@@ -11,7 +12,7 @@ Pane
     padding: 8
     background: Rectangle
     {
-        color: properties.colorLightGray2
+        color: Style.colorLightGray2
         radius: 4
     }
     
@@ -27,7 +28,7 @@ Pane
             id: backButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconArrowBlackHallowThin
             imageSize: 11
@@ -41,7 +42,7 @@ Pane
             id: sidebarButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconReadingViewSidebarBlack
             imageSize: 18
@@ -53,7 +54,7 @@ Pane
             id: bookmarkButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconReadingViewBookmarkBlack
             imageSize: 14
@@ -65,7 +66,7 @@ Pane
             id: currentPageButton
             Layout.preferredWidth: 105
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             text: "(312 of 1486)"
             fontWeight: Font.Medium
@@ -80,10 +81,10 @@ Pane
         {
             Layout.alignment: Qt.AlignVCenter
             text: "C-Sharp_In_Depth: A Practical Guide - Librum"
-            color: properties.colorBaseTitle
+            color: Style.colorBaseTitle
             font
             {
-                family: properties.defaultFontFamily
+                family: Style.defaultFontFamily
                 weight: Font.DemiBold
                 pointSize: 12
             }
@@ -98,8 +99,8 @@ Pane
             Layout.preferredHeight: 32
             Layout.preferredWidth: 84
             headerText: ""
-            backgroundColor: properties.colorBaseGray
-            highlightColor: properties.colorLightGray3
+            backgroundColor: Style.colorBaseGray
+            highlightColor: Style.colorLightGray3
             defaultIndex: 6
             imagePath: properties.iconDropdownBlack
             imageSize: 9
@@ -134,7 +135,7 @@ Pane
             id: fullScreenButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconReadingViewMaximizeBlack
             imageSize: 20
@@ -146,7 +147,7 @@ Pane
             id: searchButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconReadingViewSearchBlackThin
             imageSize: 18
@@ -158,7 +159,7 @@ Pane
             id: optionsButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: properties.colorBaseGray
+            backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: properties.iconReadingViewMenuBlack
             imageSize: 20

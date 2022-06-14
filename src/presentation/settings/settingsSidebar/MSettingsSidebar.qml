@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -14,7 +15,7 @@ Item
         id: container
         anchors.fill: parent
         color: "transparent"
-        border.color: properties.colorLightBorder
+        border.color: Style.colorLightBorder
     }
     
     ColumnLayout
@@ -31,9 +32,9 @@ Item
             Layout.leftMargin: 25
             text: "Settings"
             font.pointSize: 19
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.bold: true
-            color: properties.colorBaseText
+            color: Style.colorBaseText
         }
         
         Rectangle
@@ -43,7 +44,7 @@ Item
             Layout.preferredHeight: 2
             Layout.topMargin: 15
             Layout.leftMargin: 26
-            color: properties.colorLightBorder
+            color: Style.colorLightBorder
         }
         
         Label
@@ -52,9 +53,9 @@ Item
             Layout.leftMargin: 25
             text: "GLOBAL SETTINGS"
             font.pointSize: 10.2
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.weight: Font.Bold
-            color: properties.colorLightText3
+            color: Style.colorLightText3
         }
         
         
@@ -171,9 +172,9 @@ Item
             Layout.leftMargin: 25
             text: "USER & ACCOUNT"
             font.pointSize: 10.2
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.bold: true
-            color: properties.colorLightText3
+            color: Style.colorLightText3
         }
         
         MSettingsSidebarItem

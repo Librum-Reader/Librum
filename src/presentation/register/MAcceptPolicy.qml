@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -52,12 +53,12 @@ Item
         {
             id: text
             Layout.fillWidth: true
-            text: 'I accept the <font color=' + properties.colorBasePurple + '>terms</font> 
-                   and the <font color=' + properties.colorBasePurple + '>privacy policy.</font>'
+            text: 'I accept the <font color=' + Style.colorBasePurple + '>terms</font> 
+                   and the <font color=' + Style.colorBasePurple + '>privacy policy.</font>'
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             font.pointSize: 11
-            color: properties.colorMediumText
+            color: Style.colorMediumText
         }
     }
     

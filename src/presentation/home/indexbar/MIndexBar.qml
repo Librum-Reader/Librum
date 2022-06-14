@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -51,9 +52,9 @@ Item
             Layout.alignment: Qt.AlignVCenter
             Layout.leftMargin: 8
             text: "Entries per page"
-            color: properties.colorLightText
+            color: Style.colorLightText
             font.pointSize: 11
-            font.family: properties.defaultFontFamily            
+            font.family: Style.defaultFontFamily            
         }
         
         Item { Layout.fillWidth: true }
@@ -106,9 +107,9 @@ Item
                 anchors.centerIn: parent
                 text: "..."
                 font.pointSize: 14
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.bold: false
-                color: properties.colorBaseText
+                color: Style.colorBaseText
             }
         }
         

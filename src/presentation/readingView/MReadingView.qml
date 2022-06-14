@@ -2,7 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import Librum.style
 import "readingToolbar"
+
 
 Page
 {
@@ -10,7 +12,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Page
@@ -9,7 +10,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     
@@ -18,6 +19,6 @@ Page
         anchors.centerIn: parent
         text: "Appearance"
         font.pointSize: 36
-        font.family: properties.defaultFontFamily
+        font.family: Style.defaultFontFamily
     }
 }

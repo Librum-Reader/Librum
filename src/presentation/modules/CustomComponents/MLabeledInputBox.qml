@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -11,13 +12,13 @@ Item
     property string placeholderContent : ""
     property color placeholderColor : "black"
     property double inputFontSize : 12
-    property color inputFontColor : properties.colorBaseText
+    property color inputFontColor : Style.colorBaseText
     property string headerText : "Header here"
     property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
-    property color headerFontColor : properties.colorBaseTitle
+    property color headerFontColor : Style.colorBaseTitle
     property int headerToBoxSpacing : 2
-    property color borderColor : properties.colorLightBorder
+    property color borderColor : Style.colorLightBorder
     property int borderWidth : 2
     property int borderRadius : 5
     property int textPadding : 15
@@ -41,7 +42,7 @@ Item
             id: header
             Layout.fillWidth: true
             text: root.headerText
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.pointSize: root.headerFontSize
             font.weight: root.headerFontWeight
             color: root.headerFontColor
@@ -76,7 +77,7 @@ Item
                     selectByMouse: true
                     color: root.inputFontColor
                     font.pointSize: root.inputFontSize
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
                     echoMode: (!root.imagePath.length > 0 || imageArea.pressed ? TextInput.Normal : TextInput.Password)

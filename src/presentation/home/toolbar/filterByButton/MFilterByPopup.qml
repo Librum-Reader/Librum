@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import Librum.style
 
 Popup
 {
@@ -38,9 +39,9 @@ Popup
             padding: 14
             background: Rectangle
             {
-                color: properties.colorBackground
+                color: Style.colorBackground
                 border.width: 1
-                border.color: properties.colorLightBorder
+                border.color: Style.colorLightBorder
                 radius: 6
                 antialiasing: true
             }
@@ -61,11 +62,11 @@ Popup
                     headerToBoxSpacing: 2
                     placeholderContent: "e.g. Uncle bob"
                     inputFontSize: 11
-                    placeholderColor: properties.colorLightText
+                    placeholderColor: Style.colorLightText
                     headerText: "Author"
                     headerFontSize: 10.5
                     headerFontWeight: Font.Bold
-                    headerFontColor: properties.colorLightText3
+                    headerFontColor: Style.colorLightText3
                     textPadding: 8
                     borderWidth: 1
                     borderRadius: 4
@@ -92,11 +93,11 @@ Popup
                             headerToBoxSpacing: 2
                             placeholderContent: "e.g. 2d ago"
                             inputFontSize: 11
-                            placeholderColor: properties.colorLightText
+                            placeholderColor: Style.colorLightText
                             headerText: "Added"
                             headerFontSize: 10.5
                             headerFontWeight: Font.Bold
-                            headerFontColor: properties.colorLightText3
+                            headerFontColor: Style.colorLightText3
                             textPadding: 8
                             borderWidth: 1
                             borderRadius: 4
@@ -109,12 +110,12 @@ Popup
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17
-                            borderColor: properties.colorLightBorder2
+                            borderColor: Style.colorLightBorder2
                             spacing:  7
                             textContent: "Read"
                             fontPointSize: 10.5
                             fontWeight: Font.Normal
-                            fontColor: properties.colorLightText3
+                            fontColor: Style.colorLightText3
                             imageSize: 9
                         }
                         
@@ -125,12 +126,12 @@ Popup
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17
-                            borderColor: properties.colorLightBorder2
+                            borderColor: Style.colorLightBorder2
                             spacing:  7
                             textContent: "Unread"
                             fontPointSize: 10.5
                             fontWeight: Font.Normal
-                            fontColor: properties.colorLightText3
+                            fontColor: Style.colorLightText3
                             imageSize: 9
                         }
                     }
@@ -169,12 +170,12 @@ Popup
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17
-                            borderColor: properties.colorLightBorder2
+                            borderColor: Style.colorLightBorder2
                             spacing:  7
                             textContent: "Only Books"
                             fontPointSize: 10.5
                             fontWeight: Font.Normal
-                            fontColor: properties.colorLightText3
+                            fontColor: Style.colorLightText3
                             imageSize: 9
                         }
                         
@@ -185,12 +186,12 @@ Popup
                             Layout.fillWidth: true
                             boxWidth: 17
                             boxHeight: 17
-                            borderColor: properties.colorLightBorder2
+                            borderColor: Style.colorLightBorder2
                             spacing: 7
                             textContent: "Only Files"
                             fontPointSize: 10.5
                             fontWeight: Font.Normal
-                            fontColor: properties.colorLightText3
+                            fontColor: Style.colorLightText3
                             imageSize: 9
                         }
                     }
@@ -204,10 +205,10 @@ Popup
                     Layout.topMargin: 8
                     buttonRadius: 3
                     borderWidth: 0
-                    backgroundColor: properties.colorBasePurple
+                    backgroundColor: Style.colorBasePurple
                     text: "Apply Filter"
                     fontSize: 10.5
-                    fontColor: properties.colorBrightText
+                    fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     
                     onClicked: root.filterQuerySent()

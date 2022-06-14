@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
+
 
 Popup
 {
@@ -32,9 +34,9 @@ Popup
             horizontalPadding: 8
             background: Rectangle
             {
-                color: properties.colorBackground
+                color: Style.colorBackground
                 border.width: 1
-                border.color: properties.colorLightBorder
+                border.color: Style.colorLightBorder
                 radius: 6
                 antialiasing: true
             }

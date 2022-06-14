@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -30,7 +31,7 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: (root.selected ? properties.colorSidebarMark : "transparent")
+            color: (root.selected ? Style.colorSidebarMark : "transparent")
             radius: 4
         }
         
@@ -67,10 +68,10 @@ Item
                 visible: false
                 opacity: root.textOpacity
                 text: root.labelContent
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.weight: Font.Medium
                 font.pointSize: 13
-                color: properties.colorLightText3
+                color: Style.colorLightText3
             }
         }
     }

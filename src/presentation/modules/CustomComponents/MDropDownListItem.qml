@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -23,7 +24,7 @@ Item
         horizontalPadding: root.padding
         background: Rectangle
         {
-            color: (root.selected) ? properties.colorSidebarMark : properties.colorBackground
+            color: (root.selected) ? Style.colorSidebarMark : Style.colorBackground
             radius: 4
             antialiasing: true
         }
@@ -35,11 +36,11 @@ Item
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             leftPadding: 4
-            color: (root.selected) ? properties.colorBasePurple : properties.colorLightText3
+            color: (root.selected) ? Style.colorBasePurple : Style.colorLightText3
             text: root.text
             font.pointSize: 10.75
             
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             font.weight: Font.DemiBold
         }
     }

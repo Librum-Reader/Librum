@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -34,8 +35,8 @@ Item
         {
             Layout.leftMargin: root.textSpacing
             text: root.textContent
-            color: properties.colorLightText3
-            font.family: properties.defaultFontFamily
+            color: Style.colorLightText3
+            font.family: Style.defaultFontFamily
             font.pointSize: 10.5
             font.weight: Font.Medium
         }

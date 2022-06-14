@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import librum.extensions.sidebar
+import Librum.extensions.sidebar
+import Librum.style
 
 
 Item
@@ -49,8 +50,8 @@ Item
                     text: root.initialLetters
                     font.pointSize: 12
                     font.bold: true
-                    font.family: properties.defaultFontFamily
-                    color: properties.colorBrightText
+                    font.family: Style.defaultFontFamily
+                    color: Style.colorBrightText
                 }
                 
                 MouseArea
@@ -69,7 +70,7 @@ Item
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 radius: 2
                 border.width: 1
-                border.color: properties.colorLightBorder
+                border.color: Style.colorLightBorder
                 
                 Image
                 {

@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
+
 
 Page
 {
@@ -10,7 +12,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.loginWindowBackground
+        color: Style.loginWindowBackground
     }
     
     
@@ -25,7 +27,7 @@ Page
         horizontalPadding: 0
         background: Rectangle
         {
-            color: properties.loginContentBackground
+            color: Style.loginContentBackground
             radius: 6
         }
         
@@ -51,10 +53,10 @@ Page
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 28
                 text: "Forgot Password"
-                color: properties.colorBaseText
+                color: Style.colorBaseText
                 font.bold: true
                 font.pointSize: 19
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
             }
             
             Label
@@ -66,11 +68,11 @@ Page
                 horizontalAlignment: Qt.AlignHCenter
                 text: "Enter your email and we'll send you a link to reset your password"
                 wrapMode: Text.WordWrap
-                color: properties.colorLightText2
+                color: Style.colorLightText2
                 lineHeight: 1.1
                 font.weight: Font.Medium
                 font.pointSize: 12.5
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
             }
             
             ColumnLayout
@@ -88,7 +90,7 @@ Page
                     id: emailInput
                     Layout.fillWidth: true
                     placeholderContent: "kaidoe@gmail.com"
-                    placeholderColor: properties.colorLightText
+                    placeholderColor: Style.colorLightText
                     headerText: ""
                 }
                 
@@ -98,9 +100,9 @@ Page
                     Layout.topMargin: 10
                     visible: false
                     text: "We couldn't find your email"
-                    color: properties.colorError
+                    color: Style.colorError
                     font.pointSize: 11.75
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -113,7 +115,7 @@ Page
                     text: "Email sent to " + email
                     color: "green"
                     font.pointSize: 11.75
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 MButton
@@ -124,10 +126,10 @@ Page
                     Layout.topMargin: (errorText.visible || successText.visible ? 35 : 65)
                     Layout.alignment: Qt.AlignHCenter
                     borderWidth: 0
-                    backgroundColor: properties.colorBasePurple
+                    backgroundColor: Style.colorBasePurple
                     text: "Send Email"
                     fontSize: 12.25
-                    fontColor: properties.colorBrightText
+                    fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     
                     onClicked:
@@ -168,10 +170,10 @@ Page
                         {
                             id: backText
                             text: "Back to Login"
-                            color: properties.colorLightText2
+                            color: Style.colorLightText2
                             font.weight: Font.Medium
                             font.pointSize: 11.5
-                            font.family: properties.defaultFontFamily
+                            font.family: Style.defaultFontFamily
                         }
                     }
                     

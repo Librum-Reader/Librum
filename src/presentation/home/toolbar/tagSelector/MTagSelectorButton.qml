@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 
 
 Item
@@ -19,9 +20,9 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: properties.colorBackground
+            color: Style.colorBackground
             border.width: 1
-            border.color: properties.colorLightBorder
+            border.color: Style.colorLightBorder
             radius: 5
         }
         
@@ -42,10 +43,10 @@ Item
             Label
             {
                 id: tagLabel
-                color: properties.colorBaseText
+                color: Style.colorBaseText
                 text: "Tags"
                 font.pointSize: 12
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.weight: Font.Bold
             }
         }

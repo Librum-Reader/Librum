@@ -1,16 +1,17 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
 {
     id: root
-    property color borderColor : properties.colorDarkBorder
+    property color borderColor : Style.colorDarkBorder
     property int borderRadius : 4
     property int borderWidth : 1
     property color uncheckedBackgroundColor : "transparent"
-    property color checkedBackgroundColor : properties.colorBasePurple
+    property color checkedBackgroundColor : Style.colorBasePurple
     property string imagePath : properties.iconCheckWhite
     property bool imageDefaultVisibility : false
     property bool checked : false
@@ -26,7 +27,7 @@ Item
         anchors.fill: parent
         radius: root.borderRadius
         border.width: (root.checked ? 0 : root.borderWidth)
-        border.color: root.activeFocus ? properties.colorLightBorder : root.borderColor
+        border.color: root.activeFocus ? Style.colorLightBorder : root.borderColor
         color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
         antialiasing: true
         

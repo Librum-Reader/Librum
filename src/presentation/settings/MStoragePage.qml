@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -11,7 +12,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     
@@ -48,11 +49,11 @@ Page
                 Layout.preferredHeight: 38
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
-                backgroundColor: properties.colorBasePurple
+                backgroundColor: Style.colorBasePurple
                 text: "Upgrade"
                 fontSize: 12
                 fontWeight: Font.Bold
-                fontColor: properties.colorBackground
+                fontColor: Style.colorBackground
                 imagePath: properties.iconHeartWhiteHallow
                 imageSize: 18
             }
@@ -68,8 +69,8 @@ Page
             bottomPadding: 55
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -89,9 +90,9 @@ Page
                     Layout.topMargin: 24
                     text: "Total storage"
                     wrapMode: Text.WordWrap
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 21
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -103,9 +104,9 @@ Page
                     Layout.topMargin: 10
                     text: "2GB"
                     wrapMode: Text.WordWrap
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 42
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.bold: true
                 }
                 
@@ -116,10 +117,10 @@ Page
                     Layout.leftMargin: 40
                     text: "This are approximately <font size=4 bold><b>1000</b></font> books."
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -129,9 +130,9 @@ Page
                     Layout.topMargin: 50
                     text: "Available storage"
                     wrapMode: Text.WordWrap
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 21
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -151,13 +152,13 @@ Page
                     Layout.fillWidth: true
                     Layout.leftMargin: 20
                     Layout.topMargin: 15
-                    text: "You currently have <font size=4 color=" + properties.colorBasePurple + " bold><b>24</b></font> files stored " +
-                          "and have <font size=4 color=" + properties.colorBasePurple + " bold><b>1.8GB</b></font> free!"
+                    text: "You currently have <font size=4 color=" + Style.colorBasePurple + " bold><b>24</b></font> files stored " +
+                          "and have <font size=4 color=" + Style.colorBasePurple + " bold><b>1.8GB</b></font> free!"
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -167,13 +168,13 @@ Page
                     Layout.leftMargin: 20
                     Layout.topMargin: 50
                     text: "If you want to have more storage space available <font color=" + 
-                          properties.colorBasePurple + ">upgrade your tier.</font><br>" +
-                          "To know why we offer different tiers <font color=" + properties.colorBasePurple + " bold>click here.</font>"
+                          Style.colorBasePurple + ">upgrade your tier.</font><br>" +
+                          "To know why we offer different tiers <font color=" + Style.colorBasePurple + " bold>click here.</font>"
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 15
                     textFormat: Text.RichText
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
             }
         }

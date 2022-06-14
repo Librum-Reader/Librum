@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -12,7 +13,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     
@@ -42,8 +43,8 @@ Page
             bottomPadding: 38
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -59,9 +60,9 @@ Page
                 {
                     id: detailsTitle
                     text: "Us"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 20
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -71,9 +72,9 @@ Page
                     Layout.topMargin: 15
                     text: "We are a small team of freelancing developers creating free apps for the community, we love"
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 14
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 RowLayout
@@ -88,9 +89,9 @@ Page
                         Layout.fillWidth: true
                         text: "working on fun projects, supporting our community and trying to make the world a better place."
                         wrapMode: Text.WordWrap
-                        color: properties.colorLightText3
+                        color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                     }
                 }
                 
@@ -101,9 +102,9 @@ Page
                     Layout.topMargin: 18
                     text: "We are working in our own name, so we are not getting payed in any way."
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 14
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 RowLayout
@@ -117,9 +118,9 @@ Page
                     {
                         text: "We are thankful for any support."
                         wrapMode: Text.WordWrap
-                        color: properties.colorLightText3
+                        color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                     }
                     
                     Image
@@ -143,9 +144,9 @@ Page
                     Layout.topMargin: 36
                     text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
                     wrapMode: Text.WordWrap
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 14
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 MButton
@@ -155,13 +156,13 @@ Page
                     Layout.preferredHeight: 38
                     Layout.topMargin: 10
                     borderWidth: 0
-                    backgroundColor: properties.colorCoffeeBrown
+                    backgroundColor: Style.colorCoffeeBrown
                     imagePath: properties.iconCoffee
                     imageSize: 20
                     imageSpacing: 10
                     text: "Buy us a coffee"
                     fontSize: 11.9
-                    fontColor: properties.colorBaseTitle
+                    fontColor: Style.colorBaseTitle
                     buttonRadius: 4
                 }
                 
@@ -171,13 +172,13 @@ Page
                     Layout.fillWidth: true
                     Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
-                          "feel free to check out our website. <font color=" + properties.colorBasePurple + "> " 
+                          "feel free to check out our website. <font color=" + Style.colorBasePurple + "> " 
                           + properties.companyWebsite + "/dontations</font>"
                     wrapMode: Text.WordWrap
                     textFormat: Text.RichText
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 14
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 RowLayout
@@ -202,9 +203,9 @@ Page
                         Layout.leftMargin: 16
                         text: "If you dont, we hope you enjoy our app and wish you the best."
                         wrapMode: Text.WordWrap
-                        color: properties.colorLightText3
+                        color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                     }
                 }
             }

@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import Librum.style
 
 Item
 {
@@ -11,7 +12,7 @@ Item
     {
         id: outerRect
         anchors.fill: parent
-        color: properties.colorBasePurple
+        color: Style.colorBasePurple
         radius: 8
         antialiasing: true
         
@@ -21,7 +22,7 @@ Item
             width: parent.width / 2
             height: parent.height / 2
             anchors.centerIn: parent
-            color: properties.loginContentBackground
+            color: Style.loginContentBackground
             radius: width / 4
             antialiasing: true
         }

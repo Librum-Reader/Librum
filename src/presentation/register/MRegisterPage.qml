@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
+
 
 Page
 {
@@ -9,7 +11,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.loginWindowBackground
+        color: Style.loginWindowBackground
     }
     
     
@@ -28,7 +30,7 @@ Page
             horizontalPadding: 52
             background: Rectangle
             {
-                color: properties.loginContentBackground
+                color: Style.loginContentBackground
                 radius: 5
             }
             
@@ -50,11 +52,11 @@ Page
                     id: welcomeText
                     Layout.topMargin: 24
                     Layout.alignment: Qt.AlignHCenter
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     text: "Welcome!"
                     font.bold: true
                     font.pointSize: 26
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -67,8 +69,8 @@ Page
                     text: "Your credentials are only used to authenticate yourself. " + 
                           "Everything will be stored in a secure database."
                     font.pointSize: 13
-                    font.family: properties.defaultFontFamily
-                    color: properties.colorLightText2
+                    font.family: Style.defaultFontFamily
+                    color: Style.colorLightText2
                     wrapMode: "WordWrap"
                 }
                 
@@ -108,7 +110,7 @@ Page
                                 Layout.preferredHeight: parent.height
                                 headerText: 'First name'
                                 placeholderContent: "Kai"
-                                placeholderColor: properties.colorLightText
+                                placeholderColor: Style.colorLightText
                                 
                                 Keys.onPressed: 
                                     (event) =>
@@ -127,7 +129,7 @@ Page
                                 Layout.preferredHeight: parent.height
                                 headerText: "Last name"
                                 placeholderContent: "Doe"
-                                placeholderColor: properties.colorLightText
+                                placeholderColor: Style.colorLightText
                                 
                                 Keys.onPressed: 
                                     (event) =>
@@ -151,7 +153,7 @@ Page
                             Layout.topMargin: 19
                             headerText: 'Email'
                             placeholderContent: "kaidoe@gmail.com"
-                            placeholderColor: properties.colorLightText
+                            placeholderColor: Style.colorLightText
                             
                             Keys.onPressed: 
                                 (event) =>
@@ -173,7 +175,7 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             headerText: 'Password'
-                            placeholderColor: properties.colorLightText
+                            placeholderColor: Style.colorLightText
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
                             
@@ -197,7 +199,7 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             headerText: 'Confirmation password'
-                            placeholderColor: properties.colorLightText
+                            placeholderColor: Style.colorLightText
                             imagePath: properties.iconEyeOn
                             toggledImagePath: properties.iconEyeOff
                             
@@ -242,9 +244,9 @@ Page
                             Layout.preferredHeight: 40
                             Layout.topMargin: 44
                             borderWidth: 0
-                            backgroundColor: properties.colorBasePurple
+                            backgroundColor: Style.colorBasePurple
                             fontSize: 12                            
-                            fontColor: properties.colorBrightText
+                            fontColor: Style.colorBrightText
                             fontWeight: Font.Bold
                             text: "Let's start"
                             
@@ -276,7 +278,7 @@ Page
             Layout.topMargin: 14
             text: "Already have an account? Login"
             font.pointSize: 10
-            color: properties.colorBasePurple
+            color: Style.colorBasePurple
             
             
             MouseArea

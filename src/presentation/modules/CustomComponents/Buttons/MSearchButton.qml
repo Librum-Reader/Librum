@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -26,9 +27,9 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: properties.colorBackground
+            color: Style.colorBackground
             border.width: 1
-            border.color: properties.colorLightBorder
+            border.color: Style.colorLightBorder
             radius: 5
         }
         
@@ -46,10 +47,10 @@ Item
                 z: 1
                 visible: false
                 leftPadding: 12
-                color: properties.colorBaseText
+                color: Style.colorBaseText
                 font.pointSize: 12
                 placeholderText: "Search for entries"
-                placeholderTextColor: properties.colorLightText2
+                placeholderTextColor: Style.colorLightText2
                 background: Rectangle
                 {
                     anchors.fill: parent

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -12,7 +13,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     
@@ -50,11 +51,11 @@ Page
                 Layout.preferredHeight: 38
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
-                backgroundColor: properties.colorBasePurple
+                backgroundColor: Style.colorBasePurple
                 text: "Save"
                 fontSize: 12
                 fontWeight: Font.Bold
-                fontColor: properties.colorBackground
+                fontColor: Style.colorBackground
                 imagePath: properties.iconCheckWhite
                 imageSize: 14
             }
@@ -70,8 +71,8 @@ Page
             bottomPadding: 40
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -95,9 +96,9 @@ Page
                     {
                         id: profileTitle
                         text: "Profile"
-                        color: properties.colorBaseText
+                        color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -156,8 +157,8 @@ Page
                     clip: true
                     background: Rectangle
                     {
-                        color: properties.colorLightGray
-                        border.color: properties.colorLightBorder
+                        color: Style.colorLightGray
+                        border.color: Style.colorLightBorder
                         radius: 4
                     }
                     
@@ -188,9 +189,9 @@ Page
                             text: "Click to select an image or drag and drop in this area"
                             horizontalAlignment: Qt.AlignHCenter
                             wrapMode: Text.WordWrap
-                            color: properties.colorLightText2
+                            color: Style.colorLightText2
                             font.pointSize: 12
-                            font.family: properties.defaultFontFamily
+                            font.family: Style.defaultFontFamily
                             font.weight: Font.DemiBold
                             lineHeight: 0.9
                         }
@@ -211,8 +212,8 @@ Page
             bottomPadding: 50
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -228,9 +229,9 @@ Page
                 {
                     id: passwordTitle
                     text: "Change password"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -282,8 +283,8 @@ Page
             bottomPadding: 38
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -300,9 +301,9 @@ Page
                 {
                     id: yourDataTitle
                     text: "Your data"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -314,7 +315,7 @@ Page
                     boxHeight: 21
                     textContent: "Analyse your reading to make better recommendations"
                     fontPointSize: 13
-                    fontColor: properties.colorBaseText
+                    fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
                 }
@@ -327,7 +328,7 @@ Page
                     boxHeight: 21
                     textContent: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
                     fontPointSize: 13
-                    fontColor: properties.colorBaseText
+                    fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
                 }
@@ -340,7 +341,7 @@ Page
                     boxHeight: 21
                     textContent: "Something else the user can agree on allowing"
                     fontPointSize: 13
-                    fontColor: properties.colorBaseText
+                    fontColor: Style.colorBaseText
                     spacing: 12
                 }
                 
@@ -352,7 +353,7 @@ Page
                     boxHeight: 21
                     textContent: "Something else the user can agree on allowing"
                     fontPointSize: 13
-                    fontColor: properties.colorBaseText
+                    fontColor: Style.colorBaseText
                     spacing: 12
                 }
             }

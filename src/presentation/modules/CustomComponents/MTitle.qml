@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item 
@@ -24,19 +25,19 @@ Item
         {
             id: title
             text: root.titleText
-            color: properties.colorBaseText
+            color: Style.colorBaseText
             font.weight: Font.Bold
             font.pointSize: root.titleSize
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
         }
         
         Label
         {
             id: description
             text: root.descriptionText
-            color: properties.colorLightText3
+            color: Style.colorLightText3
             font.pointSize: root.descriptionSize
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
         }
     }
 }

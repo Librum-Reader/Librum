@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import librum.extensions.sidebar
+import Librum.extensions.sidebar
+import Librum.style
 import CustomComponents
 
 
@@ -26,7 +27,7 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: properties.colorBackground
+            color: Style.colorBackground
         }
         
         
@@ -61,9 +62,9 @@ Item
                     visible: false
                     text: "Librum"
                     font.bold: true
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.pointSize: 16
-                    color: properties.colorBaseTitle
+                    color: Style.colorBaseTitle
                 }
             }
             
@@ -73,7 +74,7 @@ Item
                 Layout.fillWidth: true
                 Layout.preferredHeight: 2
                 Layout.topMargin: 15
-                color: properties.colorSeparator
+                color: Style.colorSeparator
             }
             
             MSidebarItem
@@ -101,7 +102,7 @@ Item
                 Layout.preferredHeight: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 16
-                color: properties.colorSeparator
+                color: Style.colorSeparator
             }
             
             MSidebarItem
@@ -147,7 +148,7 @@ Item
                 Layout.preferredHeight: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 15
-                color: properties.colorSeparator
+                color: Style.colorSeparator
             }
             
             MSidebarItem
@@ -215,7 +216,7 @@ Item
                 id: bottomSeparator
                 Layout.fillWidth: true
                 Layout.preferredHeight: 2
-                color: properties.colorSeparator
+                color: Style.colorSeparator
             }
             
             MProfilePopup

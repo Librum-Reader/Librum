@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
+
 
 Popup
 {
@@ -39,9 +41,9 @@ Popup
             padding: 14
             background: Rectangle
             {
-                color: properties.colorBackground
+                color: Style.colorBackground
                 border.width: 1
-                border.color: properties.colorLightBorder
+                border.color: Style.colorLightBorder
                 radius: 6
                 antialiasing: true
             }
@@ -62,11 +64,11 @@ Popup
                     headerToBoxSpacing: 2
                     placeholderContent: "e.g. Uncle bob"
                     inputFontSize: 11
-                    placeholderColor: properties.colorLightText
+                    placeholderColor: Style.colorLightText
                     headerText: "Author"
                     headerFontSize: 10.5
                     headerFontWeight: Font.Bold
-                    headerFontColor: properties.colorLightText3
+                    headerFontColor: Style.colorLightText3
                     textPadding: 8
                     borderWidth: 1
                     borderRadius: 4
@@ -88,11 +90,11 @@ Popup
                         headerToBoxSpacing: 2
                         placeholderContent: "Year from"
                         inputFontSize: 11
-                        placeholderColor: properties.colorLightText
+                        placeholderColor: Style.colorLightText
                         headerText: "From"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
-                        headerFontColor: properties.colorLightText3
+                        headerFontColor: Style.colorLightText3
                         textPadding: 8
                         borderWidth: 1
                         borderRadius: 4
@@ -107,11 +109,11 @@ Popup
                         headerToBoxSpacing: 2
                         placeholderContent: "Year to"
                         inputFontSize: 11
-                        placeholderColor: properties.colorLightText
+                        placeholderColor: Style.colorLightText
                         headerText: "To"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
-                        headerFontColor: properties.colorLightText3
+                        headerFontColor: Style.colorLightText3
                         textPadding: 8
                         borderWidth: 1
                         borderRadius: 4
@@ -163,10 +165,10 @@ Popup
                     Layout.topMargin: 8
                     buttonRadius: 3
                     borderWidth: 0
-                    backgroundColor: properties.colorBasePurple
+                    backgroundColor: Style.colorBasePurple
                     text: "Apply Filter"
                     fontSize: 10.5
-                    fontColor: properties.colorBrightText
+                    fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     
                     onClicked: root.filterQuerySent()

@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
+
 
 Popup
 {
@@ -14,10 +16,10 @@ Popup
     property int defaultIndex: 0
     
     property int fontSize: 11
-    property color fontColor: properties.colorBaseText
+    property color fontColor: Style.colorBaseText
     property int fontWeight: Font.Normal
-    property string fontFamily: properties.defaultFontFamily
-    property string highlightColor: properties.colorLightPurple
+    property string fontFamily: Style.defaultFontFamily
+    property string highlightColor: Style.colorLightPurple
     
     padding: 0
     implicitWidth: 300
@@ -39,7 +41,7 @@ Popup
         {
             color: root.backgroundColor
             border.width: 1
-            border.color: properties.colorLightBorder
+            border.color: Style.colorLightBorder
             radius: root.radius
             antialiasing: true
         }

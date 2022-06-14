@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import librum.extensions.sidebar
+import Librum.extensions.sidebar
+import Librum.style
 import CustomComponents
 import "toolbar"
 import "indexbar"
@@ -17,7 +18,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     ListModel
@@ -71,9 +72,9 @@ Page
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
-                backgroundColor: properties.colorBasePurple
+                backgroundColor: Style.colorBasePurple
                 text: "Add books"
-                fontColor: properties.colorBackground
+                fontColor: Style.colorBackground
                 fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: properties.iconPlusWhite

@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -12,7 +13,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     onWidthChanged:
@@ -57,9 +58,9 @@ Page
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
-                backgroundColor: properties.colorBasePurple
+                backgroundColor: Style.colorBasePurple
                 text: "Add shortcut"
-                fontColor: properties.colorBackground
+                fontColor: Style.colorBackground
                 fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: properties.iconPlusWhite
@@ -79,8 +80,8 @@ Page
             verticalPadding: 0
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -108,9 +109,9 @@ Page
                         id: actionsLabel
                         Layout.leftMargin: 12
                         text: "ACTION"
-                        color: properties.colorLightText3
+                        color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                         font.bold: true
                     }
                     
@@ -124,9 +125,9 @@ Page
                     {
                         id: shortcutsLabel
                         text: "SHORTCUTS"
-                        color: properties.colorLightText3
+                        color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                         font.bold: true
                     }
                     
@@ -202,7 +203,7 @@ Page
                                     id: topBorder
                                     Layout.fillWidth: true
                                     Layout.preferredHeight: 2
-                                    color: properties.colorLightGray
+                                    color: Style.colorLightGray
                                 }
                                 
                                 RowLayout
@@ -219,9 +220,9 @@ Page
                                         Layout.preferredWidth: 150
                                         Layout.alignment: Qt.AlignVCenter
                                         text: action
-                                        color: properties.colorBaseText
+                                        color: Style.colorBaseText
                                         font.pointSize: 12
-                                        font.family: properties.defaultFontFamily
+                                        font.family: Style.defaultFontFamily
                                         font.weight: Font.DemiBold
                                     }
                                     
@@ -242,9 +243,9 @@ Page
                                         Layout.preferredWidth: 172
                                         Layout.alignment: Qt.AlignVCenter
                                         text: shortcuts
-                                        color: properties.colorBaseText
+                                        color: Style.colorBaseText
                                         font.pointSize: 12
-                                        font.family: properties.defaultFontFamily
+                                        font.family: Style.defaultFontFamily
                                         font.weight: Font.DemiBold
                                     }
                                     

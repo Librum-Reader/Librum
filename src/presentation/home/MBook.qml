@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item 
@@ -23,7 +24,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: 16
             radius: 4
-            color: properties.colorLightBorder
+            color: Style.colorLightBorder
         }
         
         Rectangle
@@ -32,7 +33,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: 230
             Layout.topMargin: -6
-            color: properties.colorLightBorder
+            color: Style.colorLightBorder
             
             ColumnLayout
             {
@@ -58,9 +59,9 @@ Item
             id: lowerRect
             Layout.fillWidth: true
             Layout.preferredHeight: 82
-            color: properties.colorBackground
+            color: Style.colorBackground
             border.width: 1
-            border.color: properties.colorLightBorder3
+            border.color: Style.colorLightBorder3
             
             ColumnLayout
             {
@@ -78,9 +79,9 @@ Item
                     Layout.topMargin: 4
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
-                    color: properties.colorBaseTitle
+                    color: Style.colorBaseTitle
                     font.pixelSize: 14
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     lineHeight: 0.8
                     wrapMode: TextInput.WordWrap
                 }
@@ -91,9 +92,9 @@ Item
                     Layout.fillWidth: true
                     Layout.topMargin: 1
                     text: "Stephen R. Covey"
-                    color: properties.colorLightText
+                    color: Style.colorLightText
                     font.pointSize: 9
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 RowLayout
@@ -108,7 +109,7 @@ Item
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 16
                         Layout.topMargin: 6
-                        color: properties.darkBackground
+                        color: Style.darkBackground
                         radius: 2
                         
                         Label
@@ -118,9 +119,9 @@ Item
                             horizontalAlignment: Text.AlignBottom
                             text: "27%"
                             font.weight: Font.Bold
-                            color: properties.colorBaseTitle
+                            color: Style.colorBaseTitle
                             font.pointSize: 10
-                            font.family: properties.defaultFontFamily
+                            font.family: Style.defaultFontFamily
                         }
                     }
 

@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import librum.extensions.sidebar
+import Librum.extensions.sidebar
 
 
 Popup

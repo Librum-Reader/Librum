@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import Librum.style
 import CustomComponents
 
 
@@ -11,7 +12,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.pagesBackground
+        color: Style.pagesBackground
     }
     
     
@@ -44,8 +45,8 @@ Page
             bottomPadding: 21
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -62,9 +63,9 @@ Page
                 {
                     id: detailsTitle
                     text: "Details"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -72,9 +73,9 @@ Page
                 {
                     Layout.topMargin: 15
                     text: "CURRENT VERSION"
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 10.25
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
@@ -82,18 +83,18 @@ Page
                 {
                     Layout.topMargin: 1
                     text: properties.currentVersion
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 13.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
                 {
                     Layout.topMargin: 12
                     text: "QT VERSION"
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 10.25
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
@@ -101,9 +102,9 @@ Page
                 {
                     Layout.topMargin: 1
                     text: properties.currentQtVersion
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 13.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 MButton
@@ -111,13 +112,13 @@ Page
                     Layout.topMargin: 21
                     Layout.preferredWidth: 120
                     Layout.preferredHeight: 32
-                    borderColor: properties.colorLightGreen2
-                    backgroundColor: properties.colorLightGreen
+                    borderColor: Style.colorLightGreen2
+                    backgroundColor: Style.colorLightGreen
                     imagePath: properties.iconCheckGreen
                     imageSize: 20
                     text: "Up-to date"
                     fontSize: 10.5
-                    fontColor: properties.colorMediumGreen
+                    fontColor: Style.colorMediumGreen
                     imageSpacing: 6
                     opacityOnPressed: 0.8
                 }
@@ -133,8 +134,8 @@ Page
             bottomPadding: 30
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -151,9 +152,9 @@ Page
                 {
                     id: creatorTitle
                     text: "Creator"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -161,9 +162,9 @@ Page
                 {
                     Layout.topMargin: 18
                     text: "COMPANY NAME"
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 10.25
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
@@ -171,36 +172,36 @@ Page
                 {
                     Layout.topMargin: 1
                     text: properties.companyName
-                    color: properties.colorBasePurple
+                    color: Style.colorBasePurple
                     font.pointSize: 13.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
                 {
                     Layout.topMargin: 12
                     text: "WEBSITE"
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 10.25
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
                 Label
                 {
                     text: properties.companyWebsite
-                    color: properties.colorBasePurple
+                    color: Style.colorBasePurple
                     font.pointSize: 13.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
                 {
                     Layout.topMargin: 12
                     text: "CONTACT"
-                    color: properties.colorLightText3
+                    color: Style.colorLightText3
                     font.pointSize: 10.25
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
@@ -208,9 +209,9 @@ Page
                 {
                     Layout.topMargin: 1
                     text: properties.companyEmail
-                    color: properties.colorBasePurple
+                    color: Style.colorBasePurple
                     font.pointSize: 13.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
             }
         }
@@ -225,8 +226,8 @@ Page
             bottomPadding: 56
             background: Rectangle
             {
-                color: properties.colorBackground
-                border.color: properties.colorLightBorder
+                color: Style.colorBackground
+                border.color: Style.colorLightBorder
                 radius: 4
                 antialiasing: true
             }
@@ -243,9 +244,9 @@ Page
                 {
                     id: thisAppTitle
                     text: "This App"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.pointSize: 16.5
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.DemiBold
                 }
                 
@@ -273,9 +274,9 @@ Page
                         text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
                               "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."
                         wrapMode: Text.WordWrap
-                        color: properties.colorBaseText
+                        color: Style.colorBaseText
                         font.pointSize: 14.6
-                        font.family: properties.defaultFontFamily
+                        font.family: Style.defaultFontFamily
                         lineHeight: 1.05
                     }
                 }

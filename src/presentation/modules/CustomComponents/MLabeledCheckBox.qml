@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -8,11 +9,11 @@ Item
     id: root
     property int boxWidth : 22
     property int boxHeight : 22
-    property color borderColor : properties.colorDarkBorder
+    property color borderColor : Style.colorDarkBorder
     property int borderRadius : 4
     property int borderWidth : 1
     property color uncheckedBackgroundColor : "transparent"
-    property color checkedBackgroundColor : properties.colorBasePurple
+    property color checkedBackgroundColor : Style.colorBasePurple
     property string imagePath : properties.iconCheckWhite
     property int imageSize: container.width - 10
     property bool imageDefaultVisibility : false
@@ -73,7 +74,7 @@ Item
             text: root.textContent
             font.weight: root.fontWeight
             font.pointSize: root.fontPointSize
-            font.family: properties.defaultFontFamily
+            font.family: Style.defaultFontFamily
             color: root.fontColor
             wrapMode: Text.WordWrap
         }

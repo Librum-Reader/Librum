@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 
 
 Item
@@ -59,7 +60,7 @@ Item
                 text: root.text
                 font.weight: root.fontWeight
                 font.pointSize: root.fontSize
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 color: root.fontColor
             }
             

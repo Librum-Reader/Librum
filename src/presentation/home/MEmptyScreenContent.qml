@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
+import Librum.style
 
 
 Item
@@ -43,9 +44,9 @@ Item
                 text: "Quiet empty here, what about importing your first book?"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
-                font.family: properties.defaultFontFamily
+                font.family: Style.defaultFontFamily
                 font.weight: Font.DemiBold
-                color: properties.colorLightText3
+                color: Style.colorLightText3
                 wrapMode: Text.WordWrap
             }
             
@@ -56,11 +57,11 @@ Item
                 Layout.preferredHeight: 42
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 20
-                backgroundColor: properties.colorLightPurple
+                backgroundColor: Style.colorLightPurple
                 opacityOnPressed: 0.75
-                borderColor: properties.colorMediumPurple
+                borderColor: Style.colorMediumPurple
                 text: "Add book"
-                fontColor: properties.colorBasePurple
+                fontColor: Style.colorBasePurple
                 fontWeight: Font.Bold
                 fontSize: 13.5
                 imagePath: properties.iconPlusBlack

@@ -136,5 +136,7 @@
         <file>src/presentation/freeBooks/MMinimalBook.qml</file>
         <file>src/presentation/readingView/MReadingView.qml</file>
         <file>src/presentation/readingView/readingToolbar/MReadingToolBar.qml</file>
+        <file>src/presentation/StyleSheet.qml</file>
+        <file>src/presentation/IconSheet.qml</file>
     </qresource>
 </RCC>

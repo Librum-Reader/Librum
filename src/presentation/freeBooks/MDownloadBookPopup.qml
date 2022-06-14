@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
+
 
 Popup
 {
@@ -22,7 +24,7 @@ Popup
     background: Rectangle
     {
         radius: 4
-        color: properties.colorLightGray
+        color: Style.colorLightGray
     }
     
     
@@ -62,12 +64,12 @@ Popup
                     Layout.alignment: Qt.AlignLeft
                     text: "Get a new book"
                     verticalAlignment: Text.AlignBottom
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                     
                     
                     font.pointSize: 14
-                    color: properties.colorBaseTitle
+                    color: Style.colorBaseTitle
                 }
 
                 MButton
@@ -75,7 +77,7 @@ Popup
                     Layout.preferredWidth: 32
                     Layout.preferredHeight: 32
                     Layout.alignment: Qt.AlignRight
-                    borderColor: properties.colorLightBorder
+                    borderColor: Style.colorLightBorder
                     imagePath: properties.iconCloseBlack
                     imageSize: 12
                     opacityOnPressed: 0.7
@@ -85,7 +87,7 @@ Popup
             }
         }
         
-        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: properties.colorSeparator }
+        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
         
         Pane
         {
@@ -100,7 +102,7 @@ Popup
             
             background: Rectangle
             {
-                color: properties.colorBackground
+                color: Style.colorBackground
             }
             
             
@@ -123,7 +125,7 @@ Popup
                         id: imageRect
                         Layout.preferredWidth: 201
                         Layout.preferredHeight: 273
-                        color: properties.colorLightBorder
+                        color: Style.colorLightBorder
                         radius: 4
                         
                         Image
@@ -147,8 +149,8 @@ Popup
                         Label
                         {
                             text: "TITLE"
-                            color: properties.colorBaseTitle
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorBaseTitle
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12
                             font.weight: Font.Bold
                         }
@@ -156,8 +158,8 @@ Popup
                         Label
                         {
                             text: "The 7 habits of highly effective people"
-                            color: properties.colorLightText3
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorLightText3
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12.25
                             font.weight: Font.Medium
                         }
@@ -167,8 +169,8 @@ Popup
                         {
                             Layout.topMargin: 12
                             text: "AUTHOR"
-                            color: properties.colorBaseTitle
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorBaseTitle
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12
                             font.weight: Font.Bold
                         }
@@ -176,8 +178,8 @@ Popup
                         Label
                         {
                             text: "Stephen R. Covey"
-                            color: properties.colorLightText3
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorLightText3
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12.25
                             font.weight: Font.Medium
                         }
@@ -187,8 +189,8 @@ Popup
                         {
                             Layout.topMargin: 12
                             text: "PUBLICATION"
-                            color: properties.colorBaseTitle
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorBaseTitle
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12
                             font.weight: Font.Bold
                         }
@@ -196,8 +198,8 @@ Popup
                         Label
                         {
                             text: "United States: Dodd, Mead and Company, 1922."
-                            color: properties.colorLightText3
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorLightText3
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12.25
                             font.weight: Font.Medium
                         }
@@ -207,8 +209,8 @@ Popup
                         {
                             Layout.topMargin: 12
                             text: "LANGUAGE"
-                            color: properties.colorBaseTitle
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorBaseTitle
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12
                             font.weight: Font.Bold
                         }
@@ -216,8 +218,8 @@ Popup
                         Label
                         {
                             text: "English"
-                            color: properties.colorLightText3
-                            font.family: properties.defaultFontFamily
+                            color: Style.colorLightText3
+                            font.family: Style.defaultFontFamily
                             font.pointSize: 12.25
                             font.weight: Font.Medium
                         }
@@ -228,8 +230,8 @@ Popup
                 {
                     Layout.topMargin: 26
                     text: "CONTENTS:"
-                    color: properties.colorBaseTitle
-                    font.family: properties.defaultFontFamily
+                    color: Style.colorBaseTitle
+                    font.family: Style.defaultFontFamily
                     font.pointSize: 12
                     font.weight: Font.Bold
                 }
@@ -241,8 +243,8 @@ Popup
                     text: "Your habits determine your character and later define your life." +
                            "Don’t blame outside factors when you fail in life. Also, don’t think" +
                            "that succeeding in one area of your life will mean that you’re destined for triumph."
-                    color: properties.colorLightText3
-                    font.family: properties.defaultFontFamily
+                    color: Style.colorLightText3
+                    font.family: Style.defaultFontFamily
                     font.pointSize: 12.25
                     font.weight: Font.Medium
                     wrapMode: Text.WordWrap
@@ -250,7 +252,7 @@ Popup
             }
         }
         
-        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: properties.colorSeparator }
+        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
         
         Pane
         {
@@ -280,11 +282,11 @@ Popup
                     Layout.preferredWidth: 100
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignLeft
-                    borderColor: properties.colorLightBorder
-                    backgroundColor: properties.colorBackground
+                    borderColor: Style.colorLightBorder
+                    backgroundColor: Style.colorBackground
                     opacityOnPressed: 0.7
                     text: "Cancel"
-                    fontColor: properties.colorBaseText
+                    fontColor: Style.colorBaseText
                     fontWeight: Font.Bold
                     fontSize: 12
                     
@@ -298,9 +300,9 @@ Popup
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignRight
                     borderWidth: 0
-                    backgroundColor: properties.colorBasePurple
+                    backgroundColor: Style.colorBasePurple
                     text: "Download"
-                    fontColor: properties.colorBrightText
+                    fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     fontSize: 12
                     imagePath: properties.iconDownloadWhite

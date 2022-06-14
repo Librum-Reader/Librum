@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.style
 import CustomComponents
 
 Page
@@ -9,7 +10,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: properties.loginWindowBackground
+        color: Style.loginWindowBackground
     }
     
     
@@ -29,7 +30,7 @@ Page
             bottomPadding: 42
             background: Rectangle
             {
-                color: properties.loginContentBackground
+                color: Style.loginContentBackground
                 radius: 5
             }
             
@@ -52,10 +53,10 @@ Page
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 24
                     text: "Welcome back!"
-                    color: properties.colorBaseText
+                    color: Style.colorBaseText
                     font.bold: true
                     font.pointSize: 26
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -64,9 +65,9 @@ Page
                     Layout.topMargin: 4
                     Layout.alignment: Qt.AlignHCenter
                     text: "Log into your account"
-                    color: properties.colorLightText2
+                    color: Style.colorLightText2
                     font.pointSize: 13
-                    font.family: properties.defaultFontFamily
+                    font.family: Style.defaultFontFamily
                 }
                 
                 
@@ -76,7 +77,7 @@ Page
                     Layout.fillWidth: true
                     Layout.topMargin: 32
                     placeholderContent: "kaidoe@gmail.com"
-                    placeholderColor: properties.colorLightText
+                    placeholderColor: Style.colorLightText
                     headerText: "Email"
                     
                     Keys.onPressed: 
@@ -150,7 +151,7 @@ Page
                         Layout.alignment: Qt.AlignVCenter
                         Layout.leftMargin: 4
                         font.pointSize: 11
-                        color: properties.colorMediumText
+                        color: Style.colorMediumText
                     }
                     
                     Item
@@ -165,7 +166,7 @@ Page
                         Layout.alignment: Qt.AlignVCenter
                         Layout.leftMargin: 3
                         font.pointSize: 10
-                        color: properties.colorBasePurple
+                        color: Style.colorBasePurple
                         
                         MouseArea
                         {
@@ -186,9 +187,9 @@ Page
                     Layout.preferredHeight: 40
                     Layout.topMargin: 42
                     borderWidth: 0
-                    backgroundColor: properties.colorBasePurple
+                    backgroundColor: Style.colorBasePurple
                     fontSize: 12
-                    fontColor: properties.colorBrightText
+                    fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     text: "Login"
                     
@@ -217,7 +218,7 @@ Page
             Layout.topMargin: 14
             text: "Don't have an account? Register"
             font.pointSize: 10
-            color: properties.colorBasePurple
+            color: Style.colorBasePurple
             
             MouseArea
             {
