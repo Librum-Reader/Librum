@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -44,7 +45,7 @@ Item
             Image
             {
                 id: dropDownArrowImage
-                source: properties.iconDropDownGray
+                source: Icons.dropDownGray
                 sourceSize.width: 8
                 fillMode: Image.PreserveAspectFit
             }

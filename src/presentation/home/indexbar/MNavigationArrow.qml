@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import Librum.icons
 
 
 Item
@@ -16,7 +17,7 @@ Item
         id: image
         anchors.right: parent.right
         rotation: (root.toLeft ? 180 : 0)
-        source: properties.iconArrowtopGrayRight
+        source: Icons.arrowtopGrayRight
         sourceSize.width: 9
     }
     

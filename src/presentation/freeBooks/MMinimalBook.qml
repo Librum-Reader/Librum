@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.icons
 
 
 Item 
@@ -46,7 +47,7 @@ Item
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
                     sourceSize.height: 241
-                    source: properties.illustrationBookCover
+                    source: Icons.bookCover
                     fillMode: Image.PreserveAspectFit
                 }
             }

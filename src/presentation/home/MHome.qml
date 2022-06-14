@@ -2,8 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.extensions.sidebar
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 import "toolbar"
 import "indexbar"
 
@@ -77,7 +78,7 @@ Page
                 fontColor: Style.colorBackground
                 fontWeight: Font.Bold
                 fontSize: 13
-                imagePath: properties.iconPlusWhite
+                imagePath: Icons.plusWhite
             }
         }
         

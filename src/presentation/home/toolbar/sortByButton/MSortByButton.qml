@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -53,7 +54,7 @@ Item
                 {
                     id: sortByArrowIcon
                     sourceSize.height: 6
-                    source: properties.iconDropDownGray
+                    source: Icons.dropDownGray
                     fillMode: Image.PreserveAspectFit
                 }
             }

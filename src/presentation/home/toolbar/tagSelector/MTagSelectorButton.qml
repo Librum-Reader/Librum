@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -36,7 +37,7 @@ Item
             {
                 id: tagIcon
                 sourceSize.height: 18
-                source: properties.iconTag
+                source: Icons.tag
                 fillMode: Image.PreserveAspectFit
             }
             

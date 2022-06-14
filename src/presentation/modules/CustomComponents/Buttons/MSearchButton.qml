@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -88,7 +89,7 @@ Item
                 {
                     id: searchBarIcon
                     anchors.centerIn: parent
-                    source: properties.iconSearch
+                    source: Icons.search
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: root.imageSize
                 }

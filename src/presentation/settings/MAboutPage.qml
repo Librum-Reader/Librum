@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -114,7 +115,7 @@ Page
                     Layout.preferredHeight: 32
                     borderColor: Style.colorLightGreen2
                     backgroundColor: Style.colorLightGreen
-                    imagePath: properties.iconCheckGreen
+                    imagePath: Icons.checkGreen
                     imageSize: 20
                     text: "Up-to date"
                     fontSize: 10.5
@@ -261,7 +262,7 @@ Page
                     Image
                     {
                         id: heartImage
-                        source: properties.iconHeartGray
+                        source: Icons.heartGray
                         fillMode: Image.PreserveAspectFit
                         sourceSize.width: 80
                     }

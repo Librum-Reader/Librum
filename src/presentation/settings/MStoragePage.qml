@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -54,7 +55,7 @@ Page
                 fontSize: 12
                 fontWeight: Font.Bold
                 fontColor: Style.colorBackground
-                imagePath: properties.iconHeartWhiteHallow
+                imagePath: Icons.heartWhiteHallow
                 imageSize: 18
             }
         }
@@ -141,7 +142,7 @@ Page
                     id: usedStorageChart
                     Layout.leftMargin: 15
                     Layout.topMargin: 20
-                    source: properties.iconPieChart
+                    source: Icons.pieChart
                     sourceSize.width: 100
                     fillMode: Image.PreserveAspectFit
                 }

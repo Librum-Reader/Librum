@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -71,8 +72,8 @@ Item
             imageWidth: 14
             labelLeftMargin: 12
             textContent: "About"
-            defaultIcon: properties.iconSettingsAboutGray
-            selectedIcon: properties.iconSettingsAboutPurple
+            defaultIcon: Icons.settingsAboutGray
+            selectedIcon: Icons.settingsAboutPurple
             
             onClicked:
             {
@@ -92,8 +93,8 @@ Item
             imageWidth: 18
             labelLeftMargin: 8
             textContent: "Appearance"
-            defaultIcon: properties.iconSettingsAppearanceGray
-            selectedIcon: properties.iconSettingsAppearancePurple            
+            defaultIcon: Icons.settingsAppearanceGray
+            selectedIcon: Icons.settingsAppearancePurple            
             
             onClicked:
             {
@@ -113,8 +114,8 @@ Item
             imageWidth: 16
             labelLeftMargin: 9
             textContent: "Shortcuts"
-            defaultIcon: properties.iconSettingsShortcutsGray
-            selectedIcon: properties.iconSettingsShortcutsPurple
+            defaultIcon: Icons.settingsShortcutsGray
+            selectedIcon: Icons.settingsShortcutsPurple
             
             onClicked:
             {
@@ -134,8 +135,8 @@ Item
             imageWidth: 16
             labelLeftMargin: 10
             textContent: "Updates"
-            defaultIcon: properties.iconSettingsUpdatesGray
-            selectedIcon: properties.iconSettingsUpdatesPurple
+            defaultIcon: Icons.settingsUpdatesGray
+            selectedIcon: Icons.settingsUpdatesPurple
             
             onClicked:
             {
@@ -155,8 +156,8 @@ Item
             imageWidth: 19
             labelLeftMargin: 8
             textContent: "Advanced Settings"
-            defaultIcon: properties.iconSettingsSettingsGray
-            selectedIcon: properties.iconSettingsSettingsPurple
+            defaultIcon: Icons.settingsSettingsGray
+            selectedIcon: Icons.settingsSettingsPurple
             
             onClicked:
             {
@@ -189,8 +190,8 @@ Item
             labelTopMargin: 2
             labelLeftMargin: 13
             textContent: "Account"
-            defaultIcon: properties.iconSettingsAccountGray
-            selectedIcon: properties.iconSettingsAccountPurple
+            defaultIcon: Icons.settingsAccountGray
+            selectedIcon: Icons.settingsAccountPurple
             
             onClicked:
             {
@@ -210,8 +211,8 @@ Item
             imageWidth: 14
             labelLeftMargin: 11
             textContent: "Storage"
-            defaultIcon: properties.iconSettingsStorageGray
-            selectedIcon: properties.iconSettingsStoragePurple
+            defaultIcon: Icons.settingsStorageGray
+            selectedIcon: Icons.settingsStoragePurple
             
             onClicked:
             {
@@ -231,8 +232,8 @@ Item
             imageWidth: 18
             labelLeftMargin: 8
             textContent: "Support us"
-            defaultIcon: properties.iconSettingsSupportUsGray
-            selectedIcon: properties.iconSettingsSupportUsPurple
+            defaultIcon: Icons.settingsSupportUsGray
+            selectedIcon: Icons.settingsSupportUsPurple
             
             onClicked:
             {

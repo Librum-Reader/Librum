@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -176,8 +177,8 @@ Page
                             Layout.topMargin: 16
                             headerText: 'Password'
                             placeholderColor: Style.colorLightText
-                            imagePath: properties.iconEyeOn
-                            toggledImagePath: properties.iconEyeOff
+                            imagePath: Icons.eyeOn
+                            toggledImagePath: Icons.eyeOff
                             
                             Keys.onPressed: 
                                 (event) =>
@@ -200,8 +201,8 @@ Page
                             Layout.topMargin: 16
                             headerText: 'Confirmation password'
                             placeholderColor: Style.colorLightText
-                            imagePath: properties.iconEyeOn
-                            toggledImagePath: properties.iconEyeOff
+                            imagePath: Icons.eyeOn
+                            toggledImagePath: Icons.eyeOff
                             
                             Keys.onPressed: 
                                 (event) =>

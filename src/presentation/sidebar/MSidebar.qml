@@ -2,8 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.extensions.sidebar
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Item
@@ -84,7 +85,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 45
                 imageHeight: 45
-                imageSource: properties.iconDownloadGray
+                imageSource: Icons.downloadGray
                 labelContent: "Free books"
                 selected: root.selectedTab == freeBooksButton
                 
@@ -112,7 +113,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 28
-                imageSource: properties.iconHome
+                imageSource: Icons.home
                 labelContent: "Home"
                 selected: root.selectedTab == homeButton
                 
@@ -130,7 +131,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 28
                 imageHeight: 28
-                imageSource: properties.iconPieChart
+                imageSource: Icons.pieChart
                 labelContent: "Statistics"
                 selected: root.selectedTab == statisticsButton
                 
@@ -158,7 +159,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 30
-                imageSource: properties.iconTool
+                imageSource: Icons.tool
                 labelContent: "Tools"
                 selected: root.selectedTab == toolsButton
                 
@@ -176,7 +177,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 30
-                imageSource: properties.iconAddOns
+                imageSource: Icons.addOns
                 labelContent: "Add-ons"
                 selected: root.selectedTab == addOnButton
                 
@@ -194,7 +195,7 @@ Item
                 Layout.leftMargin: 10
                 imageWidth: 36
                 imageHeight: 36
-                imageSource: properties.iconSettings
+                imageSource: Icons.settings
                 labelContent: "Settings"
                 selected: root.selectedTab == settingsButton
                 

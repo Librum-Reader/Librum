@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -129,7 +130,7 @@ Page
                         Layout.alignment: Qt.AlignBottom
                         Layout.leftMargin: 2
                         Layout.bottomMargin: 3
-                        source: properties.iconSeed
+                        source: Icons.seed
                         sourceSize.width: 21
                         fillMode: Image.PreserveAspectFit
                     }
@@ -157,7 +158,7 @@ Page
                     Layout.topMargin: 10
                     borderWidth: 0
                     backgroundColor: Style.colorCoffeeBrown
-                    imagePath: properties.iconCoffee
+                    imagePath: Icons.coffee
                     imageSize: 20
                     imageSpacing: 10
                     text: "Buy us a coffee"
@@ -191,7 +192,7 @@ Page
                     {
                         id: heartImage
                         Layout.alignment: Qt.AlignBottom
-                        source: properties.iconHeartGray
+                        source: Icons.heartGray
                         sourceSize.width: 80
                         fillMode: Image.PreserveAspectFit
                     }

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.extensions.sidebar
+import Librum.icons
 
 
 Popup
@@ -44,7 +45,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 18
-            imagePath: properties.iconSync
+            imagePath: Icons.sync
             textContent: "Sync"
             imageWidth: 16
             textSpacing: 9
@@ -56,7 +57,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 16
-            imagePath: properties.iconEmptyProfile
+            imagePath: Icons.emptyProfile
             textContent: "Manage Profile"
             imageWidth: 19
             textSpacing: 8
@@ -70,7 +71,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 15
-            imagePath: properties.iconLogout
+            imagePath: Icons.logout
             textContent: "Logout"
             imageWidth: 20
             textSpacing: 8

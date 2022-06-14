@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -17,7 +18,7 @@ Item
     Image
     {
         id: emptyBackgroundImage
-        source: properties.illustrationEmptyHomeBackground
+        source: Icons.emptyHomeBackground
         sourceSize.width: parent.width
         sourceSize.height: parent.height
         
@@ -33,7 +34,7 @@ Item
                 Layout.preferredHeight: 135
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 225
-                source: properties.illustrationFileSwift
+                source: Icons.fileSwift
             }
             
             Label
@@ -64,7 +65,7 @@ Item
                 fontColor: Style.colorBasePurple
                 fontWeight: Font.Bold
                 fontSize: 13.5
-                imagePath: properties.iconPlusBlack
+                imagePath: Icons.plusBlack
                 imageSize: 16
                 
                 onClicked:

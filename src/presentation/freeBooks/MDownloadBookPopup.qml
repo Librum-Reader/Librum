@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Popup
@@ -78,7 +79,7 @@ Popup
                     Layout.preferredHeight: 32
                     Layout.alignment: Qt.AlignRight
                     borderColor: Style.colorLightBorder
-                    imagePath: properties.iconCloseBlack
+                    imagePath: Icons.closeBlack
                     imageSize: 12
                     opacityOnPressed: 0.7
                     
@@ -133,7 +134,7 @@ Popup
                             id: bookCover
                             anchors.centerIn: parent
                             sourceSize.height: imageRect.height - 2
-                            source: properties.illustrationBookCover
+                            source: Icons.bookCover
                             fillMode: Image.PreserveAspectFit
                         }
                     }
@@ -305,7 +306,7 @@ Popup
                     fontColor: Style.colorBrightText
                     fontWeight: Font.Bold
                     fontSize: 12
-                    imagePath: properties.iconDownloadWhite
+                    imagePath: Icons.downloadWhite
                     imageSize: 18
                     
                     onClicked: 

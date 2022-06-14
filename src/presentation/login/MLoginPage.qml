@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 Page
 {
@@ -96,8 +97,8 @@ Page
                     Layout.fillWidth: true
                     Layout.topMargin: 22
                     headerText: "Password"
-                    imagePath: properties.iconEyeOn
-                    toggledImagePath: properties.iconEyeOff
+                    imagePath: Icons.eyeOn
+                    toggledImagePath: Icons.eyeOff
                     
                     Keys.onPressed: 
                         (event) =>

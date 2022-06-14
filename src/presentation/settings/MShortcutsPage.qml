@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -63,7 +64,7 @@ Page
                 fontColor: Style.colorBackground
                 fontWeight: Font.Bold
                 fontSize: 13
-                imagePath: properties.iconPlusWhite
+                imagePath: Icons.plusWhite
             }
         }
         
@@ -256,7 +257,7 @@ Page
                                         id: editIcon
                                         Layout.alignment: Qt.AlignVCenter
                                         sourceSize.width: 21
-                                        source: properties.iconEdit
+                                        source: Icons.edit
                                         fillMode: Image.PreserveAspectFit
                                     }
                                     
@@ -268,7 +269,7 @@ Page
                                         Layout.rightMargin: 6
                                         Layout.alignment: Qt.AlignVCenter
                                         sourceSize.width: 18
-                                        source: properties.iconTrash
+                                        source: Icons.trash
                                         fillMode: Image.PreserveAspectFit
                                     }
                                 }

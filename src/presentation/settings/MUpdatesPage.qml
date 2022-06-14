@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -109,7 +110,7 @@ Page
                     Layout.topMargin: 14
                     borderColor: Style.colorLightBorder
                     backgroundColor: Style.colorLightGrayBackground
-                    imagePath: properties.iconArrowDownBlack
+                    imagePath: Icons.arrowDownBlack
                     imageSize: 14
                     imageSpacing: 6
                     text: "Download"

@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.extensions.sidebar
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -79,7 +80,7 @@ Item
                     sourceSize.width: 20
                     sourceSize.height: 20
                     anchors.centerIn: parent
-                    source: properties.iconArrowtopBlackRight
+                    source: Icons.arrowtopBlackRight
                 }
                 
                 MouseArea

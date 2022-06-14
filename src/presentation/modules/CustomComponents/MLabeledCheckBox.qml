@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -14,7 +15,7 @@ Item
     property int borderWidth : 1
     property color uncheckedBackgroundColor : "transparent"
     property color checkedBackgroundColor : Style.colorBasePurple
-    property string imagePath : properties.iconCheckWhite
+    property string imagePath : Icons.checkWhite
     property int imageSize: container.width - 10
     property bool imageDefaultVisibility : false
     property bool checked : false

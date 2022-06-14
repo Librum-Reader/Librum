@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -42,7 +43,7 @@ Page
             Image
             {
                 Layout.alignment: Qt.AlignHCenter
-                source: properties.illustrationEyeCrossedSwift
+                source: Icons.eyeCrossedSwift
                 sourceSize.width: 160
                 fillMode: Image.PreserveAspectFit
             }
@@ -160,7 +161,7 @@ Page
                         Image
                         {
                             id: backIcon
-                            source: properties.iconArrowtopBlackRight
+                            source: Icons.arrowtopBlackRight
                             sourceSize.width: 24
                             fillMode: Image.PreserveAspectFit
                             rotation: 180

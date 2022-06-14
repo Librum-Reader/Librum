@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 
 Item
@@ -37,7 +38,7 @@ Item
             {
                 id: filterByArrowIcon
                 sourceSize.height: 14
-                source: properties.iconFilter
+                source: Icons.filter
                 fillMode: Image.PreserveAspectFit
             }
             

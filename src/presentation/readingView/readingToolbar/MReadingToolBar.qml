@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Pane
@@ -30,7 +31,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconArrowBlackHallowThin
+            imagePath: Icons.arrowBlackHallowThin
             imageSize: 11
             opacityOnPressed: 0.7
             
@@ -44,7 +45,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconReadingViewSidebarBlack
+            imagePath: Icons.readingViewSidebarBlack
             imageSize: 18
             opacityOnPressed: 0.7
         }
@@ -56,7 +57,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconReadingViewBookmarkBlack
+            imagePath: Icons.readingViewBookmarkBlack
             imageSize: 14
             opacityOnPressed: 0.7
         }
@@ -102,7 +103,7 @@ Pane
             backgroundColor: Style.colorBaseGray
             highlightColor: Style.colorLightGray3
             defaultIndex: 6
-            imagePath: properties.iconDropdownBlack
+            imagePath: Icons.dropdownBlack
             imageSize: 9
             maxPopupHeight: 208
             
@@ -137,7 +138,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconReadingViewMaximizeBlack
+            imagePath: Icons.readingViewMaximizeBlack
             imageSize: 20
             opacityOnPressed: 0.7
         }
@@ -149,7 +150,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconReadingViewSearchBlackThin
+            imagePath: Icons.readingViewSearchBlackThin
             imageSize: 18
             opacityOnPressed: 0.7
         }
@@ -161,7 +162,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: properties.iconReadingViewMenuBlack
+            imagePath: Icons.readingViewMenuBlack
             imageSize: 20
             opacityOnPressed: 0.7
         }

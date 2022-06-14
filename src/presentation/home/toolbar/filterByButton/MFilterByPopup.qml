@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
 import Librum.style
+import Librum.icons
+
 
 Popup
 {
@@ -28,7 +30,7 @@ Popup
         {
             Layout.leftMargin: 14
             Layout.bottomMargin: -1
-            source: properties.iconDropupLightGray
+            source: Icons.dropupLightGray
         }
         
         Pane
@@ -147,7 +149,7 @@ Popup
                             Layout.preferredHeight: 49
                             Layout.topMargin: 2
                             headerText: "Format"
-                            imagePath: properties.iconDropDownGray
+                            imagePath: Icons.dropDownGray
                             imageSize: 9
                             maxPopupHeight: 208
                             

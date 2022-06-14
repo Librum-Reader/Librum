@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Page
@@ -56,7 +57,7 @@ Page
                 fontSize: 12
                 fontWeight: Font.Bold
                 fontColor: Style.colorBackground
-                imagePath: properties.iconCheckWhite
+                imagePath: Icons.checkWhite
                 imageSize: 14
             }
         }
@@ -175,7 +176,7 @@ Page
                             id: dropAreaIcon
                             Layout.alignment: Qt.AlignCenter
                             Layout.topMargin: 50
-                            source: properties.illustrationAddImage
+                            source: Icons.addImage
                             sourceSize.width: 40
                             fillMode: Image.PreserveAspectFit
                         }
@@ -252,8 +253,8 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
-                        imagePath: properties.iconEyeOn
-                        toggledImagePath: properties.iconEyeOff
+                        imagePath: Icons.eyeOn
+                        toggledImagePath: Icons.eyeOff
                     }
                     
                     MLabeledInputBox
@@ -266,8 +267,8 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
-                        imagePath: properties.iconEyeOn
-                        toggledImagePath: properties.iconEyeOff
+                        imagePath: Icons.eyeOn
+                        toggledImagePath: Icons.eyeOff
                     }
                 }
             }
