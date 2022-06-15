@@ -14,6 +14,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
+# Dependencies
+find_package(QT NAMES Qt6 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+
+
+
 # Build
 add_library(infrastructure
                 SHARED
@@ -31,8 +37,7 @@ target_compile_definitions(infrastructure
 )
 target_link_libraries(infrastructure
                 PUBLIC
-                    Qt6::Quick
-                    # application
+                    Qt6::Network
 )
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

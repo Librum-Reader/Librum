@@ -9,6 +9,7 @@
 #include "qqml.h"
 #include "sidebar_state.hpp"
 #include "test_request.hpp"
+#include "test_class.hpp"
 
 
 int main(int argc, char *argv[])
@@ -18,9 +19,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
-    
-    
-    TestRequest tr;
+
     
     // Translations
     QTranslator translator;

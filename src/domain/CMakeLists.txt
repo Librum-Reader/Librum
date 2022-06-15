@@ -8,6 +8,12 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
+# Dependencies
+find_package(QT NAMES Qt6 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+
+
+
 # Build
 add_library(domain
                 SHARED
