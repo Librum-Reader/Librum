@@ -20,3 +20,8 @@ void SidebarState::setCurrentState(SidebarState::State newState)
     m_currentState = newState;
     emit currentStateChanged();
 }
+
+SidebarState::~SidebarState()
+{
+    
+}

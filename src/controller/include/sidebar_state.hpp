@@ -21,6 +21,8 @@ public:
     State currentState() const;
     void setCurrentState(State newState);
     
+    virtual ~SidebarState();
+    
 signals:
     void currentStateChanged();
     

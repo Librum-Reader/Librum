@@ -4,23 +4,21 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
-#include "qdiriterator.h"
-#include "qfontdatabase.h"
-#include "qqml.h"
+#include <qdiriterator.h>
+#include <qfontdatabase.h>
+#include <qqml.h>
 #include "sidebar_state.hpp"
-#include "test_request.hpp"
-#include "test_class.hpp"
 
 
 int main(int argc, char *argv[])
-{    
+{
     // App
     QGuiApplication app(argc, argv);
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
 
-    
+
     // Translations
     QTranslator translator;
     const QStringList uiLanguages = QLocale::system().uiLanguages();
@@ -55,8 +53,8 @@ int main(int argc, char *argv[])
 
 
     // Type registering
-    qmlRegisterSingletonType(QUrl(u"qrc:/sources/src/presentation/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
-    qmlRegisterSingletonType(QUrl(u"qrc:/sources/src/presentation/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
+    qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
+    qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
     
     SidebarState sidebarState;
     qmlRegisterSingletonInstance("Librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
@@ -65,9 +63,9 @@ int main(int argc, char *argv[])
     
     // Startup
     QQmlApplicationEngine engine;
-    engine.addImportPath("qrc:/sources/src/presentation/modules");
+    engine.addImportPath("qrc:/modules");
     
-    const QUrl url(u"qrc:/sources/src/presentation/main.qml"_qs);
+    const QUrl url(u"qrc:/main.qml"_qs);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)

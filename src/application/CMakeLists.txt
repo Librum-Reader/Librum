@@ -1,22 +1,36 @@
-cmake_minimum_required(VERSION 3.21)
+# Dependencies
+find_package(QT NAMES Qt6 COMPONENTS Core Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 
-## Build
-#add_library(application
-#                SHARED
-#)
+# Qt
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
-#target_include_directories(application
-#                PUBLIC
-#                    ${CMAKE_CURRENT_SOURCE_DIR}/
-#)
-#target_compile_definitions(controller
-#                PRIVATE
-#                    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
-#)
-#target_link_libraries(application
-#                PUBLIC
-#                    domain
-#)
-#target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
-#target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+# Build
+add_library(application
+                SHARED
+                    placeholder.cpp
+                    include/placeholder.hpp
+                    include/app_information.hpp
+)
+
+target_include_directories(application
+                PRIVATE
+                    ${CMAKE_CURRENT_SOURCE_DIR}/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+target_compile_definitions(application
+                PRIVATE
+                    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+)
+target_link_libraries(application
+                PRIVATE
+                    Qt6::Network
+                    Qt6::Core
+)
+target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

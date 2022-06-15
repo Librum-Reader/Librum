@@ -1,7 +1,6 @@
-#include "test_request.hpp"
-#include "test_class.hpp"
 #include <memory>
 #include <iostream>
+#include "test_request.hpp"
 
 
 TestRequest::TestRequest(QObject *parent)

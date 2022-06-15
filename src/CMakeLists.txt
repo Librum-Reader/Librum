@@ -9,6 +9,4 @@ copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
 # Add subdirectories
 add_subdirectory(presentation/)
 add_subdirectory(controller/)
-add_subdirectory(infrastructure/)
 add_subdirectory(application/)
-add_subdirectory(domain/)
