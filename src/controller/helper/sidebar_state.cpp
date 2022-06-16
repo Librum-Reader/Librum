@@ -4,7 +4,6 @@
 SidebarState::SidebarState(QObject *parent)
     : QObject{parent}
 {
-    
 }
 
 SidebarState::State SidebarState::currentState() const

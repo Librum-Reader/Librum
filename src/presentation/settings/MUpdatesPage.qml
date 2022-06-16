@@ -4,6 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.appInformation
 
 
 Page
@@ -94,7 +95,7 @@ Page
                 Label
                 {
                     Layout.fillWidth: true
-                    text: properties.newestVersion
+                    text: AppInformation.newestVersion
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 14.2

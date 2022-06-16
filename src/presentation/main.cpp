@@ -8,6 +8,7 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "sidebar_state.hpp"
+#include "app_information.hpp"
 
 
 int main(int argc, char *argv[])
@@ -58,6 +59,9 @@ int main(int argc, char *argv[])
     
     SidebarState sidebarState;
     qmlRegisterSingletonInstance("Librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);
+    
+    application::AppInformation appInformation;
+    qmlRegisterSingletonInstance("Librum.appInformation", 1, 0, "AppInformation", &appInformation);
 
     
     
