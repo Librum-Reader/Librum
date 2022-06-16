@@ -66,5 +66,7 @@
         <file>readingView/readingToolbar/MReadingToolBar.qml</file>
         <file>StyleSheet.qml</file>
         <file>IconSheet.qml</file>
+        <file>readingView/MChapterSidebar.qml</file>
+        <file>readingView/MBookmarksSidebar.qml</file>
     </qresource>
 </RCC>

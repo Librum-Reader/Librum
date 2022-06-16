@@ -1,11 +1,11 @@
-# Configuration
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/src/presentation/modules" CACHE STRING "path to qml modules")
-
-
 # Qt
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
+
+# Configuration
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/modules" CACHE STRING "path to qml modules")
 
 
 
