@@ -9,6 +9,12 @@ import Librum.icons
 Pane
 {
     id: root
+    signal chapterButtonClicked
+    signal bookMarkButtonClicked
+    signal fullScreenButtonClicked
+    signal searchButtonClicked
+    signal optionsButtonClicked
+    
     implicitHeight: 48
     padding: 8
     background: Rectangle
@@ -40,7 +46,7 @@ Pane
         
         MButton
         {
-            id: sidebarButton
+            id: chapterButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
@@ -48,6 +54,8 @@ Pane
             imagePath: Icons.readingViewSidebarBlack
             imageSize: 18
             opacityOnPressed: 0.7
+            
+            onClicked: root.chapterButtonClicked()
         }
         
         MButton
@@ -60,6 +68,8 @@ Pane
             imagePath: Icons.readingViewBookmarkBlack
             imageSize: 14
             opacityOnPressed: 0.7
+            
+            onClicked: root.bookMarkButtonClicked()
         }
         
         MButton
@@ -96,7 +106,7 @@ Pane
         
         MComboBox
         {
-            id: languagesComboBox
+            id: zoomComboBox
             Layout.preferredHeight: 32
             Layout.preferredWidth: 84
             headerText: ""
@@ -141,6 +151,8 @@ Pane
             imagePath: Icons.readingViewMaximizeBlack
             imageSize: 20
             opacityOnPressed: 0.7
+            
+            onClicked: root.fullScreenButtonClicked()
         }
         
         MButton
@@ -153,6 +165,8 @@ Pane
             imagePath: Icons.readingViewSearchBlackThin
             imageSize: 18
             opacityOnPressed: 0.7
+            
+            onClicked: root.searchButtonClicked()
         }
         
         MButton
@@ -165,6 +179,8 @@ Pane
             imagePath: Icons.readingViewMenuBlack
             imageSize: 20
             opacityOnPressed: 0.7
+            
+            onClicked: root.optionsButtonClicked()
         }
     }
 }
