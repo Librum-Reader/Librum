@@ -1,5 +1,8 @@
 #include "placeholder.hpp"
 
+namespace application
+{
+
 Placeholder::Placeholder()
 {
 }
@@ -10,4 +13,6 @@ void Placeholder::doSomething(int x)
     
     for(int i { 0 }; i < x; ++i)
         ;
+}
+
 }

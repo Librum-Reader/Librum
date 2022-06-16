@@ -1,6 +1,9 @@
 #pragma once
 
 
+namespace application
+{
+
 class Placeholder
 {
 public:
@@ -8,3 +11,5 @@ public:
     
     void doSomething(int x);
 };
+
+}

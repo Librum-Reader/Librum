@@ -4,6 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.appInformation
 
 
 Page
@@ -83,7 +84,7 @@ Page
                 Label
                 {
                     Layout.topMargin: 1
-                    text: properties.currentVersion
+                    text: AppInformation.currentVersion
                     color: Style.colorBaseText
                     font.pointSize: 13.5
                     font.family: Style.defaultFontFamily
@@ -102,7 +103,7 @@ Page
                 Label
                 {
                     Layout.topMargin: 1
-                    text: properties.currentQtVersion
+                    text: AppInformation.currentQtVersion
                     color: Style.colorBaseText
                     font.pointSize: 13.5
                     font.family: Style.defaultFontFamily
@@ -172,7 +173,7 @@ Page
                 Label
                 {
                     Layout.topMargin: 1
-                    text: properties.companyName
+                    text: AppInformation.companyName
                     color: Style.colorBasePurple
                     font.pointSize: 13.5
                     font.family: Style.defaultFontFamily
@@ -190,7 +191,7 @@ Page
                 
                 Label
                 {
-                    text: properties.companyWebsite
+                    text: AppInformation.companyWebsite
                     color: Style.colorBasePurple
                     font.pointSize: 13.5
                     font.family: Style.defaultFontFamily
@@ -209,7 +210,7 @@ Page
                 Label
                 {
                     Layout.topMargin: 1
-                    text: properties.companyEmail
+                    text: AppInformation.companyEmail
                     color: Style.colorBasePurple
                     font.pointSize: 13.5
                     font.family: Style.defaultFontFamily

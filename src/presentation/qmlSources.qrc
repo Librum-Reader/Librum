@@ -1,11 +1,9 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
+<RCC>
     <qresource prefix="/">
         <file>main.qml</file>
         <file>login/MLoginPage.qml</file>
         <file>home/MHome.qml</file>
         <file>register/MRegisterPage.qml</file>
-        <file>MGlobalProperties.qml</file>
         <file>freeBooks/MFreeBooks.qml</file>
         <file>settings/MSettings.qml</file>
         <file>addOns/MAddOns.qml</file>

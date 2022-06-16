@@ -29,10 +29,12 @@ target_compile_definitions(appLibrum
 target_include_directories(appLibrum
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}/../controller/include
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/include
 )
 target_link_libraries(appLibrum
                 PRIVATE
                     controller
+                    application
                     Qt6::Quick
 )
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

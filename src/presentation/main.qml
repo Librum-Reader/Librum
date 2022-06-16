@@ -123,7 +123,4 @@ ApplicationWindow
             console.log("ERROR: You tried instantiating a not existing page");
         }
     }
-    
-    
-    MGlobalProperties { id: properties }
 }
