@@ -4,6 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.appInformation
 
 
 Page
@@ -174,7 +175,7 @@ Page
                     Layout.topMargin: 40
                     text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                           "feel free to check out our website. <font color=" + Style.colorBasePurple + "> " 
-                          + properties.companyWebsite + "/dontations</font>"
+                          + AppInformation.companyWebsite + "/dontations</font>"
                     wrapMode: Text.WordWrap
                     textFormat: Text.RichText
                     color: Style.colorLightText3
