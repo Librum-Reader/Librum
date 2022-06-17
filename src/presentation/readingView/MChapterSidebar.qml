@@ -16,4 +16,9 @@ Item
         anchors.fill: parent
         color: Style.colorBackground
     }
+    
+    TreeView
+    {
+        
+    }
 }
