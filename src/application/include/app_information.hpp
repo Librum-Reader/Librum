@@ -34,7 +34,7 @@ public:
 private:
     constexpr static std::string_view m_currentVersion { "v0.0.1" };
     constexpr static std::string_view m_newestVersion { "v0.0.1" };
-    constexpr static std::string_view m_currentQtVersion { "v6.3.0" };
+    constexpr static std::string_view m_currentQtVersion { "v6.3.1" };
     constexpr static std::string_view m_companyName { "Etovex" };
     constexpr static std::string_view m_companyWebsite { "https://librumreader.netlify.app/" };
     constexpr static std::string_view m_companyEmail { "support@etovex.com" };

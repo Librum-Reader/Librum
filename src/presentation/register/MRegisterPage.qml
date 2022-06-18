@@ -100,15 +100,13 @@ Page
                         {
                             id: nameInputLayout
                             Layout.preferredWidth: parent.width
-                            Layout.preferredHeight: firstNameInput.implicitHeight
                             spacing: 28
                             
                             
                             MLabeledInputBox
                             {
                                 id: firstNameInput
-                                Layout.preferredWidth: parent.width / 2 - nameInputLayout.spacing / 2
-                                Layout.preferredHeight: parent.height
+                                Layout.fillWidth: true
                                 headerText: 'First name'
                                 placeholderContent: "Kai"
                                 placeholderColor: Style.colorLightText
@@ -126,8 +124,7 @@ Page
                             MLabeledInputBox
                             {
                                 id: lastNameInput
-                                Layout.preferredWidth: parent.width / 2 - nameInputLayout.spacing / 2
-                                Layout.preferredHeight: parent.height
+                                Layout.fillWidth: true
                                 headerText: "Last name"
                                 placeholderContent: "Doe"
                                 placeholderColor: Style.colorLightText

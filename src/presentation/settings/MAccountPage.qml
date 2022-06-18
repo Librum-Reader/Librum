@@ -82,6 +82,8 @@ Page
             RowLayout
             {
                 id: profileLayout
+                property int horizontalSpacing: 32
+                
                 anchors.fill: parent
                 spacing: 0
                 
@@ -89,6 +91,7 @@ Page
                 ColumnLayout
                 {
                     id: profileInputColumn
+                    Layout.maximumWidth: Math.round(profileLayout.width - profileLayout.horizontalSpacing) / 2
                     Layout.fillWidth: true
                     spacing: 0
                     
@@ -106,7 +109,7 @@ Page
                     MLabeledInputBox
                     {
                         id: firstNameInput
-                        Layout.preferredWidth: passwordInput.width
+                        Layout.fillWidth: true
                         Layout.topMargin: 26
                         boxHeight: 40
                         headerText: "First name"
@@ -120,7 +123,7 @@ Page
                     MLabeledInputBox
                     {
                         id: lastNameInput
-                        Layout.preferredWidth: passwordInput.width
+                        Layout.fillWidth: true
                         Layout.topMargin: 18
                         boxHeight: 40
                         headerText: "Last name"
@@ -134,7 +137,7 @@ Page
                     MLabeledInputBox
                     {
                         id: emailInput
-                        Layout.preferredWidth: passwordInput.width
+                        Layout.fillWidth: true
                         Layout.topMargin: 18
                         boxHeight: 40
                         headerText: "Email"
@@ -240,7 +243,7 @@ Page
                 {
                     id: changePasswordInputLayout
                     Layout.fillWidth: true
-                    spacing: 32
+                    spacing: profileLayout.horizontalSpacing
                     Layout.topMargin: 30
                     
                     MLabeledInputBox
