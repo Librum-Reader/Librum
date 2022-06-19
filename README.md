@@ -8,9 +8,10 @@ Librum is a modern and simple to use book reader which is available on all major
 - Bookmarks / Highlighting
 - Note-taking functionality
 
-We set our focus on being completely <b>opensource</b>, <b>free</b>, <b>performant</b> and <b>modern</b>.</br>
+Librum's focus is on being completely <b>opensource</b>, <b>free</b>, <b>performant</b> and <b>modern</b>.</br>
+Everyone can download, modify and redistribute the source-code since we are using a completely copyleft license.
 
-We plan to support all major platforms, including:
+you will be able to use Librum across all major platforms, including:
 - Windows
 - GNU/Linux
 - MacOS
