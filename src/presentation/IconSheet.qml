@@ -46,7 +46,7 @@ Item
     property string readingViewSearchBlackThin : "/resources/images/readingView/search_black_thin_icon.svg"
     property string readingViewSearchPurpleThin : "/resources/images/readingView/search_purple_thin_icon.svg"
     property string readingViewSidebarBlack : "/resources/images/readingView/sidebar_black_icon.svg"
-    property string readingViewSidebarPurple : "/resources/images/readingView/purple_purple_icon.svg"
+    property string readingViewSidebarPurple : "/resources/images/readingView/sidebar_purple_icon.svg"
     
     // Setting-icons
     property string settingsAboutGray : "/resources/images/settings/about_gray_icon.svg"

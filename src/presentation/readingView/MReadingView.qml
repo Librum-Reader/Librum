@@ -80,19 +80,24 @@ Page
                 bookmarksSidebar.visible = true;
             }
             
+            onCurrentPageButtonClicked:
+            {
+                currentPageButton.active = !currentPageButton.active;
+            }
+            
             onFullScreenButtonClicked:
             {
-                
+                fullScreenButton.active = !fullScreenButton.active;
             }
             
             onSearchButtonClicked:
             {
-                
+                searchButton.active = !searchButton.active;
             }
             
             onOptionsButtonClicked:
             {
-                
+                optionsButton.active = !optionsButton.active
             }
         }
         

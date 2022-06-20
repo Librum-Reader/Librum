@@ -12,11 +12,14 @@ Pane
     property alias chapterButton: chapterButton
     property alias bookmarkButton: bookmarkButton
     property alias searchButton: searchButton
+    property alias currentPageButton: currentPageButton
     property alias fullScreenButton: fullScreenButton
+    property alias optionsButton: optionsButton
     signal chapterButtonClicked
     signal bookMarkButtonClicked
-    signal fullScreenButtonClicked
     signal searchButtonClicked
+    signal currentPageButtonClicked
+    signal fullScreenButtonClicked
     signal optionsButtonClicked
     
     implicitHeight: 48
@@ -55,7 +58,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.readingViewSidebarBlack
+            imagePath: active ? Icons.readingViewSidebarPurple : Icons.readingViewSidebarBlack
             imageSize: 18
             opacityOnPressed: 0.7
             
@@ -69,7 +72,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.readingViewBookmarkBlack
+            imagePath: active ? Icons.readingViewBookmarkPurple : Icons.readingViewBookmarkBlack
             imageSize: 14
             opacityOnPressed: 0.7
             
@@ -84,9 +87,12 @@ Pane
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
             text: "(312 of 1486)"
+            fontColor: active ? Style.colorBasePurple : Style.colorBaseText
             fontWeight: Font.Medium
             fontSize: 10.5
             opacityOnPressed: 0.7
+            
+            onClicked: root.currentPageButtonClicked()
         }
         
         
@@ -152,7 +158,8 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.readingViewMaximizeBlack
+            imagePath: active ? Icons.readingViewMaximizePurple : Icons.readingViewMaximizeBlack
+            
             imageSize: 20
             opacityOnPressed: 0.7
             
@@ -166,7 +173,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.readingViewSearchBlackThin
+            imagePath: active ? Icons.readingViewSearchPurpleThin : Icons.readingViewSearchBlackThin
             imageSize: 18
             opacityOnPressed: 0.7
             
@@ -180,7 +187,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.readingViewMenuBlack
+            imagePath: active ? Icons.readingViewMenuPurple : Icons.readingViewMenuBlack
             imageSize: 20
             opacityOnPressed: 0.7
             
