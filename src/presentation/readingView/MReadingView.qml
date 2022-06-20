@@ -30,22 +30,54 @@ Page
             
             onChapterButtonClicked:
             {
-                if(!chapterSidebar.visible && !bookmarksSidebar.visible)
+                // close
+                if(chapterButton.active)
                 {
+                    chapterButton.active = false;
+                    chapterSidebar.visible = false;
+                    return;
+                }
+
+                // close bookmarks sidebar and open
+                if(bookmarkButton.active)
+                {
+                    bookmarkButton.active = false;
+                    bookmarksSidebar.visible = false;
+                    
+                    chapterButton.active = true;
                     chapterSidebar.visible = true;
                     return;
                 }
-                chapterSidebar.visible = false;
+                
+                // open
+                chapterButton.active = true;
+                chapterSidebar.visible = true;
             }
             
             onBookMarkButtonClicked:
             {
-                if(!bookmarksSidebar.visible && !chapterSidebar.visible)
+                // close
+                if(bookmarkButton.active)
                 {
+                    bookmarkButton.active = false;
+                    bookmarksSidebar.visible = false;
+                    return;
+                }
+
+                // close chapters sidebar and open
+                if(chapterButton.active)
+                {
+                    chapterButton.active = false;
+                    chapterSidebar.visible = false;
+                    
+                    bookmarkButton.active = true;
                     bookmarksSidebar.visible = true;
                     return;
                 }
-                bookmarksSidebar.visible = false;
+                
+                // open
+                bookmarkButton.active = true;
+                bookmarksSidebar.visible = true;
             }
             
             onFullScreenButtonClicked:
@@ -97,7 +129,7 @@ Page
                 }
             }
             
-            MChapterSidebar
+            MBookmarksSidebar
             {
                 id: bookmarksSidebar
                 SplitView.preferredWidth: 280

@@ -7,6 +7,7 @@ import Librum.style
 Item
 {
     id: root
+    property bool active: false
     property string text
     property color fontColor: "black"
     property int fontWeight: Font.Bold

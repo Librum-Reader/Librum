@@ -15,6 +15,15 @@ Item
     {
         anchors.fill: parent
         color: Style.colorBackground
+        
+        
+        Label
+        {
+            anchors.centerIn: parent
+            text: "Chapters"
+            font.pointSize: 14
+            font.weight: Font.Bold
+        }
     }
     
     TreeView

@@ -9,6 +9,10 @@ import Librum.icons
 Pane
 {
     id: root
+    property alias chapterButton: chapterButton
+    property alias bookmarkButton: bookmarkButton
+    property alias searchButton: searchButton
+    property alias fullScreenButton: fullScreenButton
     signal chapterButtonClicked
     signal bookMarkButtonClicked
     signal fullScreenButtonClicked
