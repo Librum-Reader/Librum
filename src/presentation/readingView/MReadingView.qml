@@ -93,6 +93,7 @@ Page
             onSearchButtonClicked:
             {
                 searchButton.active = !searchButton.active;
+                searchbar.visible = !searchbar.visible;
             }
             
             onOptionsButtonClicked:
@@ -196,6 +197,8 @@ Page
     
         MReadingSearchbar
         {
+            id: searchbar
+            visible: false
             Layout.fillWidth: true
         }
     }

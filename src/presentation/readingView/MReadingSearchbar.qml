@@ -9,7 +9,7 @@ import Librum.icons
 Item
 {
     id: root
-    implicitHeight: 49
+    implicitHeight: 48
     implicitWidth: 1000
     
     
@@ -52,7 +52,7 @@ Item
                 {
                     id: closeButton
                     Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 30
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
                     borderWidth: 0
@@ -65,9 +65,9 @@ Item
                 {
                     id: optionsButton
                     Layout.preferredWidth: 100
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 30
                     text: "Options"
-                    fontSize: 13
+                    fontSize: 12
                     fontColor: Style.colorLightText3
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
@@ -80,10 +80,9 @@ Item
                 {
                     id: inputFieldContainer
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 30
                     horizontalPadding: 12
                     verticalPadding: 0
-//                    verticalPadding: 9
                     background: Rectangle
                     {
                         color: Style.colorBackground
@@ -125,6 +124,8 @@ Item
                                 anchors.fill: parent
                                 color: "transparent"
                             }
+                            
+                            Component.onCompleted: forceActiveFocus()
                         }
                     }
                 }
@@ -133,9 +134,9 @@ Item
                 {
                     id: nextButton
                     Layout.preferredWidth: 81
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 30
                     text: "Next"
-                    fontSize: 13
+                    fontSize: 12
                     fontColor: Style.colorLightText3
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
@@ -151,9 +152,9 @@ Item
                 {
                     id: previousButton
                     Layout.preferredWidth: 110
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 30
                     text: "Previous"
-                    fontSize: 13
+                    fontSize: 12
                     fontColor: Style.colorLightText3
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
