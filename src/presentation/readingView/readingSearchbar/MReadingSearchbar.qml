@@ -9,6 +9,11 @@ import Librum.icons
 Item
 {
     id: root
+    signal closeButtonClicked
+    signal textChanged(string newText)
+    signal nextButtonWasClicked
+    signal previousButtonWasClicked
+    
     implicitHeight: 48
     implicitWidth: 1000
     
@@ -59,12 +64,14 @@ Item
                     buttonRadius: 4
                     imagePath: Icons.closePurple
                     imageSize: 12
+                    
+                    onClicked: root.closeButtonClicked()
                 }
                 
                 MButton
                 {
                     id: optionsButton
-                    Layout.preferredWidth: 100
+                    Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
                     text: "Options"
                     fontSize: 12
@@ -74,6 +81,8 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     buttonRadius: 4
+                    
+                    onClicked: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open()
                 }
                 
                 Pane
@@ -96,7 +105,7 @@ Item
                     {
                         id: inInputLayout
                         anchors.fill: parent
-                        spacing: 8
+                        spacing: 6
                         
                         
                         Image
@@ -125,6 +134,8 @@ Item
                                 color: "transparent"
                             }
                             
+                            onTextChanged: root.textChanged(text)
+                            
                             Component.onCompleted: forceActiveFocus()
                         }
                     }
@@ -146,6 +157,8 @@ Item
                     imagePath: Icons.arrowtopPurpleDown
                     imageSize: 13
                     imageSpacing: 10
+                    
+                    onClicked: root.nextButtonWasClicked()
                 }
                 
                 MButton
@@ -164,8 +177,17 @@ Item
                     imagePath: Icons.arrowtopPurpleUp
                     imageSize: 13
                     imageSpacing: 10
+                    
+                    onClicked: root.previousButtonWasClicked()
                 }
             }
         }
+    }
+    
+    MReadingSearchbarOptionsPopup
+    {
+        id: optionsPopup
+        x: optionsButton.x + 8
+        y: -optionsPopup.height - 1
     }
 }

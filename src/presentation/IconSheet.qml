@@ -8,7 +8,7 @@ Item
     property string arrowtopBlackRight: "/resources/images/arrows/arrowtop_black_right_icon.svg"
     property string arrowtopGrayRight: "/resources/images/arrows/arrowtop_gray_right_icon.svg"
     property string dropdownBlack: "/resources/images/arrows/dropdown_black_icon.svg"
-    property string dropDownGray: "/resources/images/arrows/dropdown_gray_icon.svg"
+    property string dropdownGray: "/resources/images/arrows/dropdown_gray_icon.svg"
     property string dropupLightGray: "/resources/images/arrows/dropup_lightgray_icon.svg"
     
     // Decision-icons

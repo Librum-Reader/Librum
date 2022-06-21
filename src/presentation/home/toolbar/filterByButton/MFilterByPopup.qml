@@ -114,8 +114,8 @@ Popup
                             boxHeight: 17
                             borderColor: Style.colorLightBorder2
                             spacing:  7
-                            textContent: "Read"
-                            fontPointSize: 10.5
+                            text: "Read"
+                            fontSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: Style.colorLightText3
                             imageSize: 9
@@ -130,8 +130,8 @@ Popup
                             boxHeight: 17
                             borderColor: Style.colorLightBorder2
                             spacing:  7
-                            textContent: "Unread"
-                            fontPointSize: 10.5
+                            text: "Unread"
+                            fontSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: Style.colorLightText3
                             imageSize: 9
@@ -149,7 +149,7 @@ Popup
                             Layout.preferredHeight: 49
                             Layout.topMargin: 2
                             headerText: "Format"
-                            imagePath: Icons.dropDownGray
+                            imagePath: Icons.dropdownGray
                             imageSize: 9
                             maxPopupHeight: 208
                             
@@ -174,8 +174,8 @@ Popup
                             boxHeight: 17
                             borderColor: Style.colorLightBorder2
                             spacing:  7
-                            textContent: "Only Books"
-                            fontPointSize: 10.5
+                            text: "Only Books"
+                            fontSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: Style.colorLightText3
                             imageSize: 9
@@ -190,8 +190,8 @@ Popup
                             boxHeight: 17
                             borderColor: Style.colorLightBorder2
                             spacing: 7
-                            textContent: "Only Files"
-                            fontPointSize: 10.5
+                            text: "Only Files"
+                            fontSize: 10.5
                             fontWeight: Font.Normal
                             fontColor: Style.colorLightText3
                             imageSize: 9

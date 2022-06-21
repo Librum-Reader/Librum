@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import "readingToolbar"
+import "readingSearchbar"
 
 
 Page

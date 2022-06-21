@@ -18,11 +18,11 @@ Item
     property string imagePath : Icons.checkWhite
     property int imageSize: container.width - 10
     property bool imageDefaultVisibility : false
-    property bool checked : false
+    property bool checked : imageDefaultVisibility
     property int spacing : 5
-    property string textContent : "<text here>"
-    property double fontPointSize : 12
-    property double fontWeight : 1
+    property string text : "text here"
+    property double fontSize : 12
+    property double fontWeight : Font.Normal
     property color fontColor : "black"
     signal clicked()
     
@@ -72,9 +72,9 @@ Item
         {
             id: text
             Layout.preferredWidth: root.width
-            text: root.textContent
+            text: root.text
             font.weight: root.fontWeight
-            font.pointSize: root.fontPointSize
+            font.pointSize: root.fontSize
             font.family: Style.defaultFontFamily
             color: root.fontColor
             wrapMode: Text.WordWrap
