@@ -70,5 +70,6 @@
         <file>readingView/MBookmarksSidebar.qml</file>
         <file>readingView/readingSearchbar/MReadingSearchbar.qml</file>
         <file>readingView/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
+        <file>readingView/readingToolbar/MOptionsPopup.qml</file>
     </qresource>
 </RCC>
