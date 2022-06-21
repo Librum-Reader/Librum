@@ -68,5 +68,6 @@
         <file>IconSheet.qml</file>
         <file>readingView/MChapterSidebar.qml</file>
         <file>readingView/MBookmarksSidebar.qml</file>
+        <file>readingView/MReadingSearchbar.qml</file>
     </qresource>
 </RCC>

@@ -44,7 +44,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            imagePath: Icons.arrowBlackHallowThin
+            imagePath: Icons.arrowtopBlackLeft
             imageSize: 11
             opacityOnPressed: 0.7
             

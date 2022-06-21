@@ -33,8 +33,6 @@
         <file>resources/images/illustrations/empty_home_background.svg</file>
         <file>resources/images/illustrations/eye_crossed_illustration.png</file>
         <file>resources/images/illustrations/file_swift_illustration.svg</file>
-        <file>resources/images/readingView/arrowtop_black_left_thin_icon.svg</file>
-        <file>resources/images/readingView/arrowtop_purple_left_thin_icon.svg</file>
         <file>resources/images/settings/about_gray_icon.svg</file>
         <file>resources/images/settings/about_purple_icon.svg</file>
         <file>resources/images/settings/account_gray_icon.svg</file>
@@ -65,9 +63,13 @@
         <file>resources/images/utility/eye_on_icon.svg</file>
         <file>resources/images/utility/filter_icon.svg</file>
         <file>resources/images/utility/log_out_icon.svg</file>
-        <file>resources/images/utility/search_icon.svg</file>
         <file>resources/images/utility/sync_icon.svg</file>
         <file>resources/images/utility/tag_icon.svg</file>
         <file>resources/images/utility/trash_icon.svg</file>
+        <file>resources/images/utility/search_black_icon.svg</file>
+        <file>resources/images/utility/search_gray_icon.svg</file>
+        <file>resources/images/readingView/arrowtop_purple_down_icon.svg</file>
+        <file>resources/images/readingView/arrowtop_black_left_icon.svg</file>
+        <file>resources/images/readingView/arrowtop_purple_up_icon.svg</file>
     </qresource>
 </RCC>

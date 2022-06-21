@@ -114,6 +114,7 @@ Page
                 implicitWidth: 8
                 color: "transparent"
             }
+            smooth: true
             
             
             MChapterSidebar
@@ -191,6 +192,11 @@ Page
                     }
                 }
             }
+        }
+    
+        MReadingSearchbar
+        {
+            Layout.fillWidth: true
         }
     }
 }
