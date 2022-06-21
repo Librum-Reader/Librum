@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import "readingToolbar"
+import "readingSearchbar"
 
 
 Page
@@ -15,6 +16,14 @@ Page
         color: Style.pagesBackground
     }
     
+    Keys.onPressed:
+        (event) =>
+        {
+            if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
+            {
+                searchbar.visible = !searchbar.visible;
+            }
+        }
     
     ColumnLayout
     {
@@ -30,37 +39,74 @@ Page
             
             onChapterButtonClicked:
             {
-                if(!chapterSidebar.visible && !bookmarksSidebar.visible)
+                // close
+                if(chapterButton.active)
                 {
+                    chapterButton.active = false;
+                    chapterSidebar.visible = false;
+                    return;
+                }
+                
+                // close bookmarks sidebar and open
+                if(bookmarkButton.active)
+                {
+                    bookmarkButton.active = false;
+                    bookmarksSidebar.visible = false;
+                    
+                    chapterButton.active = true;
                     chapterSidebar.visible = true;
                     return;
                 }
-                chapterSidebar.visible = false;
+                
+                // open
+                chapterButton.active = true;
+                chapterSidebar.visible = true;
             }
             
             onBookMarkButtonClicked:
             {
-                if(!bookmarksSidebar.visible && !chapterSidebar.visible)
+                // close
+                if(bookmarkButton.active)
                 {
+                    bookmarkButton.active = false;
+                    bookmarksSidebar.visible = false;
+                    return;
+                }
+                
+                // close chapters sidebar and open
+                if(chapterButton.active)
+                {
+                    chapterButton.active = false;
+                    chapterSidebar.visible = false;
+                    
+                    bookmarkButton.active = true;
                     bookmarksSidebar.visible = true;
                     return;
                 }
-                bookmarksSidebar.visible = false;
+                
+                // open
+                bookmarkButton.active = true;
+                bookmarksSidebar.visible = true;
+            }
+            
+            onCurrentPageButtonClicked:
+            {
+                currentPageButton.active = !currentPageButton.active;
             }
             
             onFullScreenButtonClicked:
             {
-                
+                fullScreenButton.active = !fullScreenButton.active;
             }
             
             onSearchButtonClicked:
             {
-                
+                searchbar.visible = !searchbar.visible;
             }
             
             onOptionsButtonClicked:
             {
-                
+                optionsButton.active = !optionsButton.active
             }
         }
         
@@ -77,6 +123,7 @@ Page
                 implicitWidth: 8
                 color: "transparent"
             }
+            smooth: true
             
             
             MChapterSidebar
@@ -97,7 +144,7 @@ Page
                 }
             }
             
-            MChapterSidebar
+            MBookmarksSidebar
             {
                 id: bookmarksSidebar
                 SplitView.preferredWidth: 280
@@ -155,5 +202,16 @@ Page
                 }
             }
         }
+        
+        MReadingSearchbar
+        {
+            id: searchbar
+            visible: false
+            Layout.fillWidth: true
+            
+            onVisibleChanged: toolbar.searchButton.active = visible;
+        }
     }
+    
+    Component.onCompleted: root.forceActiveFocus()
 }

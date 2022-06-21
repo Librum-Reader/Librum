@@ -317,8 +317,8 @@ Page
                     Layout.topMargin: 30
                     boxWidth: 21
                     boxHeight: 21
-                    textContent: "Analyse your reading to make better recommendations"
-                    fontPointSize: 13
+                    text: "Analyse your reading to make better recommendations"
+                    fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
@@ -330,8 +330,8 @@ Page
                     Layout.topMargin: 16
                     boxWidth: 21
                     boxHeight: 21
-                    textContent: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
-                    fontPointSize: 13
+                    text: "Share the book types (e.g. ePub, Pdf) to help us improve Librum"
+                    fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
@@ -343,8 +343,8 @@ Page
                     Layout.topMargin: 16
                     boxWidth: 21
                     boxHeight: 21
-                    textContent: "Something else the user can agree on allowing"
-                    fontPointSize: 13
+                    text: "Something else the user can agree on allowing"
+                    fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
                 }
@@ -355,8 +355,8 @@ Page
                     Layout.topMargin: 16
                     boxWidth: 21
                     boxHeight: 21
-                    textContent: "Something else the user can agree on allowing"
-                    fontPointSize: 13
+                    text: "Something else the user can agree on allowing"
+                    fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
                 }

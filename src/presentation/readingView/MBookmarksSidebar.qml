@@ -15,5 +15,14 @@ Item
     {
         anchors.fill: parent
         color: Style.colorBackground
+        
+        
+        Label
+        {
+            anchors.centerIn: parent
+            text: "Bookmarks"
+            font.pointSize: 14
+            font.weight: Font.Bold
+        }
     }
 }

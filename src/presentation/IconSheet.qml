@@ -8,7 +8,7 @@ Item
     property string arrowtopBlackRight: "/resources/images/arrows/arrowtop_black_right_icon.svg"
     property string arrowtopGrayRight: "/resources/images/arrows/arrowtop_gray_right_icon.svg"
     property string dropdownBlack: "/resources/images/arrows/dropdown_black_icon.svg"
-    property string dropDownGray: "/resources/images/arrows/dropdown_gray_icon.svg"
+    property string dropdownGray: "/resources/images/arrows/dropdown_gray_icon.svg"
     property string dropupLightGray: "/resources/images/arrows/dropup_lightgray_icon.svg"
     
     // Decision-icons
@@ -35,8 +35,9 @@ Item
     property string fileSwift : "/resources/images/illustrations/file_swift_illustration.svg"
     
     // ReadingView-icons
-    property string arrowBlackHallowThin : "/resources/images/readingView/arrowtop_black_left_thin_icon.svg"
-    property string arrowPurpleHallowThin : "/resources/images/readingView/arrowtop_purple_left_thin_icon.svg"
+    property string arrowtopBlackLeft : "/resources/images/readingView/arrowtop_black_left_icon.svg"
+    property string arrowtopPurpleDown : "/resources/images/readingView/arrowtop_purple_down_icon.svg"
+    property string arrowtopPurpleUp : "/resources/images/readingView/arrowtop_purple_up_icon.svg"
     property string readingViewBookmarkBlack : "/resources/images/readingView/bookmark_black_icon.svg"
     property string readingViewBookmarkPurple : "/resources/images/readingView/bookmark_purple_icon.svg"
     property string readingViewMaximizeBlack : "/resources/images/readingView/maximize_black_icon.svg"
@@ -46,7 +47,7 @@ Item
     property string readingViewSearchBlackThin : "/resources/images/readingView/search_black_thin_icon.svg"
     property string readingViewSearchPurpleThin : "/resources/images/readingView/search_purple_thin_icon.svg"
     property string readingViewSidebarBlack : "/resources/images/readingView/sidebar_black_icon.svg"
-    property string readingViewSidebarPurple : "/resources/images/readingView/purple_purple_icon.svg"
+    property string readingViewSidebarPurple : "/resources/images/readingView/sidebar_purple_icon.svg"
     
     // Setting-icons
     property string settingsAboutGray : "/resources/images/settings/about_gray_icon.svg"
@@ -83,7 +84,8 @@ Item
     property string eyeOn : "/resources/images/utility/eye_on_icon.svg"
     property string filter : "/resources/images/utility/filter_icon.svg"
     property string logout : "/resources/images/utility/log_out_icon.svg"
-    property string search : "/resources/images/utility/search_icon.svg"
+    property string searchBlack : "/resources/images/utility/search_black_icon.svg"
+    property string searchGray : "/resources/images/utility/search_gray_icon.svg"
     property string sync : "/resources/images/utility/sync_icon.svg"
     property string tag : "/resources/images/utility/tag_icon.svg"
     property string trash : "/resources/images/utility/trash_icon.svg"

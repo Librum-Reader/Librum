@@ -163,6 +163,7 @@ Page
                     imageSize: 20
                     imageSpacing: 10
                     text: "Buy us a coffee"
+                    fontWeight: Font.DemiBold
                     fontSize: 11.9
                     fontColor: Style.colorBaseTitle
                     buttonRadius: 4

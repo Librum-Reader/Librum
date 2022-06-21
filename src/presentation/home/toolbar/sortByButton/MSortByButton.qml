@@ -54,7 +54,7 @@ Item
                 {
                     id: sortByArrowIcon
                     sourceSize.height: 6
-                    source: Icons.dropDownGray
+                    source: Icons.dropdownGray
                     fillMode: Image.PreserveAspectFit
                 }
             }

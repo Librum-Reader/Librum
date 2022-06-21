@@ -45,7 +45,7 @@ Item
             Image
             {
                 id: dropDownArrowImage
-                source: Icons.dropDownGray
+                source: Icons.dropdownGray
                 sourceSize.width: 8
                 fillMode: Image.PreserveAspectFit
             }

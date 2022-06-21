@@ -127,7 +127,7 @@ Popup
                     Layout.fillWidth: true
                     Layout.preferredHeight: 49
                     headerText: "Language"
-                    imagePath: Icons.dropDownGray
+                    imagePath: Icons.dropdownGray
                     imageSize: 9
                     maxPopupHeight: 208
                     

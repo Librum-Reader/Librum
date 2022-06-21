@@ -89,7 +89,7 @@ Item
                 {
                     id: searchBarIcon
                     anchors.centerIn: parent
-                    source: Icons.search
+                    source: Icons.searchBlack
                     fillMode: Image.PreserveAspectFit
                     sourceSize.height: root.imageSize
                 }
