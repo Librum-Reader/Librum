@@ -93,7 +93,6 @@ Page
             
             onSearchButtonClicked:
             {
-                searchButton.active = !searchButton.active;
                 searchbar.visible = !searchbar.visible;
             }
             
@@ -201,6 +200,8 @@ Page
             id: searchbar
             visible: false
             Layout.fillWidth: true
+            
+            onVisibleChanged: toolbar.searchButton.active = visible;
         }
     }
 }

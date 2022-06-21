@@ -17,6 +17,12 @@ Item
     implicitHeight: 48
     implicitWidth: 1000
     
+    Keys.onPressed:
+        (event) =>
+        {
+            if(event.key === Qt.Key_Escape)
+                root.visible = false;
+        }
     
     ColumnLayout
     {
@@ -140,7 +146,7 @@ Item
                         }
                     }
                 }
-            
+                
                 MButton
                 {
                     id: nextButton
@@ -184,10 +190,17 @@ Item
         }
     }
     
+    
     MReadingSearchbarOptionsPopup
     {
         id: optionsPopup
         x: optionsButton.x + 8
         y: -optionsPopup.height - 1
+    }
+    
+    
+    function giveFocus()
+    {
+        inputField.forceActiveFocus();
     }
 }
