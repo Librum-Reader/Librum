@@ -21,7 +21,10 @@ Item
         (event) =>
         {
             if(event.key === Qt.Key_Escape)
+            {
                 root.visible = false;
+                event.accepted = true;
+            }
         }
     
     ColumnLayout

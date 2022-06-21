@@ -16,6 +16,14 @@ Page
         color: Style.pagesBackground
     }
     
+    Keys.onPressed:
+        (event) =>
+        {
+            if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
+            {
+                searchbar.visible = !searchbar.visible;
+            }
+        }
     
     ColumnLayout
     {
@@ -38,7 +46,7 @@ Page
                     chapterSidebar.visible = false;
                     return;
                 }
-
+                
                 // close bookmarks sidebar and open
                 if(bookmarkButton.active)
                 {
@@ -64,7 +72,7 @@ Page
                     bookmarksSidebar.visible = false;
                     return;
                 }
-
+                
                 // close chapters sidebar and open
                 if(chapterButton.active)
                 {
@@ -194,7 +202,7 @@ Page
                 }
             }
         }
-    
+        
         MReadingSearchbar
         {
             id: searchbar
@@ -204,4 +212,6 @@ Page
             onVisibleChanged: toolbar.searchButton.active = visible;
         }
     }
+    
+    Component.onCompleted: root.forceActiveFocus()
 }
