@@ -71,5 +71,10 @@
         <file>resources/images/readingView/arrowtop_purple_down_icon.svg</file>
         <file>resources/images/readingView/arrowtop_black_left_icon.svg</file>
         <file>resources/images/readingView/arrowtop_purple_up_icon.svg</file>
+        <file>resources/images/utility/download_black_icon.svg</file>
+        <file>resources/images/utility/printer_black_icon.svg</file>
+        <file>resources/images/utility/settings_gray_hallow_icon.svg</file>
+        <file>resources/images/utility/share_black_icon.svg</file>
+        <file>resources/images/utility/sun_gray_icon.svg</file>
     </qresource>
 </RCC>
