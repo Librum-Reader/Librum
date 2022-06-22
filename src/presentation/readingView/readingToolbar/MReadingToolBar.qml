@@ -20,7 +20,7 @@ Pane
     signal searchButtonClicked
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
-    signal optionsButtonClicked
+    signal optionsPopupVisibileChanged
     
     implicitHeight: 48
     padding: 8
@@ -191,7 +191,19 @@ Pane
             imageSize: 20
             opacityOnPressed: 0.7
             
-            onClicked: root.optionsButtonClicked()
+            onClicked:
+            {
+                optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
+            }
         }
+    }
+    
+    MOptionsPopup
+    {
+        id: optionsPopup
+        x: optionsButton.x - width + optionsButton.width
+        y: optionsButton.height + 12
+        
+        onOpenedChanged: root.optionsPopupVisibileChanged()
     }
 }

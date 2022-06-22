@@ -20,7 +20,10 @@ Item
     property string imagePath
     property int imageSpacing: 8
     property int imageSize: 15
+    property int imageLeftMargin: 0
     property bool imageToRight: false
+    property bool centerContentVertically: true
+    property bool centerContentHorizontally: true
     
     implicitWidth: 100
     implicitHeight: 30
@@ -42,12 +45,14 @@ Item
         RowLayout
         {
             id: layout
-            anchors.centerIn: parent
+            anchors.verticalCenter: root.centerContentVertically ? parent.verticalCenter : undefined
+            anchors.horizontalCenter: root.centerContentHorizontally ? parent.horizontalCenter : undefined
             spacing: root.imageSpacing
             
             Image
             {
                 id: imageToLeft
+                Layout.leftMargin: root.imageLeftMargin
                 visible: root.imagePath.length > 0 && !root.imageToRight
                 source: root.imagePath
                 sourceSize.width: root.imageSize

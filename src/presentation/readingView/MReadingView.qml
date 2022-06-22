@@ -104,7 +104,7 @@ Page
                 searchbar.visible = !searchbar.visible;
             }
             
-            onOptionsButtonClicked:
+            onOptionsPopupVisibileChanged:
             {
                 optionsButton.active = !optionsButton.active
             }

@@ -23,6 +23,7 @@ Item
     property string text : "text here"
     property double fontSize : 12
     property double fontWeight : Font.Normal
+    property int verticalTextOffset: 0
     property color fontColor : "black"
     signal clicked()
     
@@ -72,6 +73,7 @@ Item
         {
             id: text
             Layout.preferredWidth: root.width
+            Layout.topMargin: root.verticalTextOffset
             text: root.text
             font.weight: root.fontWeight
             font.pointSize: root.fontSize

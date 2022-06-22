@@ -9,7 +9,6 @@ import Librum.icons
 Item
 {
     id: root
-    signal closeButtonClicked
     signal textChanged(string newText)
     signal nextButtonWasClicked
     signal previousButtonWasClicked
@@ -74,7 +73,7 @@ Item
                     imagePath: Icons.closePurple
                     imageSize: 12
                     
-                    onClicked: root.closeButtonClicked()
+                    onClicked: root.visible = false
                 }
                 
                 MButton
