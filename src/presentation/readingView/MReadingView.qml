@@ -10,6 +10,8 @@ import "readingSearchbar"
 Page
 {
     id: root
+    property bool fullScreenMode: false
+    
     background: Rectangle
     {
         anchors.fill: parent
@@ -19,11 +21,17 @@ Page
     Keys.onPressed:
         (event) =>
         {
-            if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
+            if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier && (event.modifiers & Qt.AltModifier)))
+            {
+                // @disable-check M127
+                root.fullScreenMode ? stopFullScreenAnim.start() : startFullScreenAnim.start();
+            }
+            else if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
             {
                 searchbar.visible = !searchbar.visible;
             }
         }
+    
     
     ColumnLayout
     {
@@ -34,8 +42,9 @@ Page
         
         MReadingToolBar
         {
-            id: toolbar
+            id: toolbar            
             Layout.fillWidth: true
+            fullScreenButton.active: root.fullScreenMode
             
             onChapterButtonClicked:
             {
@@ -96,7 +105,10 @@ Page
             
             onFullScreenButtonClicked:
             {
-                fullScreenButton.active = !fullScreenButton.active;
+                if(root.fullScreen)
+                    stopFullScreenAnim.start();
+                else
+                    startFullScreenAnim.start();
             }
             
             onSearchButtonClicked:
@@ -167,11 +179,46 @@ Page
                 id: readingSpace
                 padding: 0
                 SplitView.fillWidth: true
+                SplitView.fillHeight: true
                 background: Rectangle
                 {
                     color: "transparent"
                 }
                 
+                
+                Rectangle
+                {
+                    id: temp
+                    visible: root.fullScreenMode
+                    width: parent.width
+                    height: 30
+                    z: 1
+                    color: "red"
+                    
+                    
+                    MouseArea
+                    {
+                        property bool exitedAtLeastOnce: false
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        
+                        
+                        onEntered:
+                        {
+                            if(exitedAtLeastOnce)
+                            {
+                                stopFullScreenAnim.start();
+                            }
+                        }
+                        
+                        onExited:
+                        {
+                            startFullScreenAnim.start();
+                            
+                            exitedAtLeastOnce = true;
+                        }
+                    }
+                }
                 
                 Rectangle
                 {
@@ -212,6 +259,31 @@ Page
             onVisibleChanged: toolbar.searchButton.active = visible;
         }
     }
+    
+    
+    
+    PropertyAnimation
+    {
+        id: startFullScreenAnim
+        target: toolbar
+        property: "Layout.topMargin"
+        to: -toolbar.height
+        duration: 150
+        
+        onStarted: root.fullScreenMode = true
+    }
+    
+    PropertyAnimation
+    {
+        id: stopFullScreenAnim
+        target: toolbar
+        property: "Layout.topMargin"
+        to: 0
+        duration: 150
+        
+        onStarted: root.fullScreenMode = false
+    }
+    
     
     Component.onCompleted: root.forceActiveFocus()
 }
