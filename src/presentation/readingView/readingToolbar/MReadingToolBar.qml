@@ -9,6 +9,7 @@ import Librum.icons
 Pane
 {
     id: root
+    property bool fullScreenMode: false
     property alias chapterButton: chapterButton
     property alias bookmarkButton: bookmarkButton
     property alias searchButton: searchButton
@@ -101,7 +102,7 @@ Pane
         Label
         {
             Layout.alignment: Qt.AlignVCenter
-            text: "C-Sharp_In_Depth: A Practical Guide - Librum"
+            text: "C-Sharp_In_Depth: A Practical Guide"
             color: Style.colorBaseTitle
             font
             {
