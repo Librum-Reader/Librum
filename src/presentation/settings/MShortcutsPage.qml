@@ -36,7 +36,7 @@ Page
         
         RowLayout
         {
-            id: headerRow
+            id: titleRow
             Layout.fillWidth: true
             spacing: 0
             
@@ -191,8 +191,12 @@ Page
                         delegate: Item
                         {
                             id: shortcutDelegate
+                            required property string action
+                            required property string shortcuts
+                            
                             height: 52
                             width: listView.width
+                            
                             
                             ColumnLayout
                             {
@@ -220,7 +224,7 @@ Page
                                         Layout.leftMargin: 12
                                         Layout.preferredWidth: 150
                                         Layout.alignment: Qt.AlignVCenter
-                                        text: action
+                                        text: shortcutDelegate.action
                                         color: Style.colorBaseText
                                         font.pointSize: 12
                                         font.family: Style.defaultFontFamily
@@ -243,7 +247,7 @@ Page
                                         id: shortcutsText
                                         Layout.preferredWidth: 172
                                         Layout.alignment: Qt.AlignVCenter
-                                        text: shortcuts
+                                        text: shortcutDelegate.shortcuts
                                         color: Style.colorBaseText
                                         font.pointSize: 12
                                         font.family: Style.defaultFontFamily

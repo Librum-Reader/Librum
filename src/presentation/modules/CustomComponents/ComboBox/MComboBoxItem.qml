@@ -4,7 +4,8 @@ import QtQuick.Controls
 Item
 {
     id: root
-    property string itemContent : content
+    required property string content
+    required property int index
     property ListView container
     property int radius
     
@@ -30,7 +31,7 @@ Item
             anchors.leftMargin: 6
             verticalAlignment: Text.AlignVCenter
             color: root.fontColor
-            text: content
+            text: root.content
             font.pointSize: root.fontSize
             font.family: root.fontFamily
             font.weight: root.fontWeight
