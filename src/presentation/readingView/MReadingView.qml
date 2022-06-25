@@ -23,7 +23,7 @@ Page
             {
                 // @disable-check M127
                 toolbar.visible ? fullScreenAnimation.start() : partScreenAnimation.start();
-                toolbarReactivationDetector.notFirstExist = true;
+                toolbarReactivationDetector.notFirstMouseExit = true;
             }
             else if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
             {
@@ -189,17 +189,17 @@ Page
                     
                     // When closing the toolbar, the mouse ends up in this mouseArea, this check makes sure that
                     // the toolbar doesnt get opened directly again, because "onEntered" will be triggered directly
-                    property bool notFirstExist: false
+                    property bool notFirstMouseExit: false
                     
                     width: parent.width
                     height: 40
                     visible: !toolbar.visible
-                    z: 1
+                    z: 5
                     hoverEnabled: true
                     
-                    onExited: notFirstExist = true
-                    onEntered: if(notFirstExist) partScreenAnimation.start()
-                    onVisibleChanged: if(!visible) notFirstExist = false
+                    onExited: notFirstMouseExit = true
+                    onEntered: if(notFirstMouseExit) partScreenAnimation.start()
+                    onVisibleChanged: if(!visible) notFirstMouseExit = false
                 }
                 
                 Rectangle
@@ -248,8 +248,9 @@ Page
             target: toolbar
             property: "opacity"
             to: 0
+            duration: 0
             
-            onStarted: toolbar.fullScreenButton.active = true;
+            onStarted:toolbar.fullScreenButton.active = true
             onFinished: toolbar.visible = false
         }
         
