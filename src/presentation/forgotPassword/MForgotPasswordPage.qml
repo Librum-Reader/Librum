@@ -60,7 +60,7 @@ Page
                 {
                     id: forgotPasswordText
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.topMargin: 28
+                    Layout.topMargin: 32
                     text: "Forgot Password"
                     color: Style.colorBaseText
                     font.bold: true
