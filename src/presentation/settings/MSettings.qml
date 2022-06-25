@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.style
 import CustomComponents
 import "settingsSidebar"
+import "shortcutsPage"
 
 
 Page

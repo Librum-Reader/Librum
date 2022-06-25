@@ -9,7 +9,7 @@ import Librum.icons
 Page
 {
     id: root
-    
+    bottomPadding: 50
     background: Rectangle
     {
         anchors.fill: parent
@@ -17,173 +17,160 @@ Page
     }
     
     
-    Pane
+    ColumnLayout
     {
-        id: backgroundRect
-        width: 542
-        height: 550
+        id: mainLayout
         anchors.centerIn: parent
-        topPadding: 50
-        verticalPadding: 0
-        horizontalPadding: 0
-        background: Rectangle
+        spacing: -92
+        
+        
+        Image
         {
-            color: Style.loginContentBackground
-            radius: 6
+            id: lockIllustration
+            z: 2
+            Layout.alignment: Qt.AlignHCenter
+            source: Icons.lockProtected
+            sourceSize.width: 250
+            fillMode: Image.PreserveAspectFit
         }
         
-        
-        ColumnLayout
+        Pane
         {
-            id: inRectLayout
-            property int inRectMargin: 71
-            
-            width: parent.width
-            
-            Image
+            id: backgroundRect
+            Layout.preferredWidth: 542
+            topPadding: 86
+            bottomPadding: 28
+            horizontalPadding: 0
+            background: Rectangle
             {
-                Layout.alignment: Qt.AlignHCenter
-                source: Icons.eyeCrossedSwift
-                sourceSize.width: 160
-                fillMode: Image.PreserveAspectFit
+                color: Style.loginContentBackground
+                radius: 6
             }
             
-            Label
-            {
-                id: forgotPasswordText
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 28
-                text: "Forgot Password"
-                color: Style.colorBaseText
-                font.bold: true
-                font.pointSize: 19
-                font.family: Style.defaultFontFamily
-            }
-            
-            Label
-            {
-                id: resetText
-                Layout.preferredWidth: 450
-                Layout.topMargin: 8
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Qt.AlignHCenter
-                text: "Enter your email and we'll send you a link to reset your password"
-                wrapMode: Text.WordWrap
-                color: Style.colorLightText2
-                lineHeight: 1.1
-                font.weight: Font.Medium
-                font.pointSize: 12.5
-                font.family: Style.defaultFontFamily
-            }
             
             ColumnLayout
             {
-                id: inputColumn
-                Layout.fillWidth: true
-                Layout.leftMargin: inRectLayout.inRectMargin
-                Layout.rightMargin: inRectLayout.inRectMargin
-                Layout.topMargin: 12
-                Layout.alignment: Qt.AlignHCenter
-                spacing: 0
+                id: inRectLayout
+                property int inRectMargin: 71
                 
-                MLabeledInputBox
-                {
-                    id: emailInput
-                    Layout.fillWidth: true
-                    placeholderContent: "kaidoe@gmail.com"
-                    placeholderColor: Style.colorLightText
-                    headerText: ""
-                }
+                width: parent.width
+                
                 
                 Label
                 {
-                    id: errorText
-                    Layout.topMargin: 10
-                    visible: false
-                    text: "We couldn't find your email"
-                    color: Style.colorError
-                    font.pointSize: 11.75
+                    id: forgotPasswordText
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: 32
+                    text: "Forgot Password"
+                    color: Style.colorBaseText
+                    font.bold: true
+                    font.pointSize: 19
                     font.family: Style.defaultFontFamily
                 }
                 
                 Label
                 {
-                    id: successText
-                    property string email : ""
-                    
-                    Layout.topMargin: 10
-                    visible: false
-                    text: "Email sent to " + email
-                    color: "green"
-                    font.pointSize: 11.75
+                    id: resetText
+                    Layout.preferredWidth: 450
+                    Layout.topMargin: 8
+                    Layout.alignment: Qt.AlignHCenter
+                    horizontalAlignment: Qt.AlignHCenter
+                    text: "Enter your email and we'll send you a link to reset your password"
+                    wrapMode: Text.WordWrap
+                    color: Style.colorLightText2
+                    lineHeight: 1.1
+                    font.weight: Font.Medium
+                    font.pointSize: 12.5
                     font.family: Style.defaultFontFamily
                 }
                 
-                MButton
+                ColumnLayout
                 {
-                    id: sendEmailButton
+                    id: inputColumn
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 42
-                    Layout.topMargin: (errorText.visible || successText.visible ? 35 : 65)
+                    Layout.leftMargin: inRectLayout.inRectMargin
+                    Layout.rightMargin: inRectLayout.inRectMargin
+                    Layout.topMargin: 12
                     Layout.alignment: Qt.AlignHCenter
-                    borderWidth: 0
-                    backgroundColor: Style.colorBasePurple
-                    text: "Send Email"
-                    fontSize: 12.25
-                    fontColor: Style.colorBrightText
-                    fontWeight: Font.Bold
+                    spacing: 0
                     
-                    onClicked:
+                    MLabeledInputBox
                     {
-                        successText.email = emailInput.text;
-                        successText.visible = true;
-                        emailInput.clearText();
-                    }
-                }
-                
-                
-                Rectangle
-                {
-                    id: backNavigation
-                    Layout.preferredWidth: backNavigationLayout.width + 10
-                    Layout.preferredHeight: backNavigationLayout.height + 5
-                    Layout.topMargin: 18
-                    Layout.alignment: Qt.AlignHCenter
-                    
-                    
-                    RowLayout
-                    {
-                        id: backNavigationLayout
-                        anchors.centerIn: parent
-                        spacing: 6
-                        
-                        
-                        Image
-                        {
-                            id: backIcon
-                            source: Icons.arrowtopBlackRight
-                            sourceSize.width: 24
-                            fillMode: Image.PreserveAspectFit
-                            rotation: 180
-                        }
-                        
-                        Label
-                        {
-                            id: backText
-                            text: "Back to Login"
-                            color: Style.colorLightText2
-                            font.weight: Font.Medium
-                            font.pointSize: 11.5
-                            font.family: Style.defaultFontFamily
-                        }
+                        id: emailInput
+                        Layout.fillWidth: true
+                        placeholderContent: "kaidoe@gmail.com"
+                        placeholderColor: Style.colorLightText
+                        headerText: ""
                     }
                     
-                    MouseArea
+                    Label
                     {
-                        width: parent.width
-                        height: parent.height
+                        id: errorText
+                        Layout.topMargin: 10
+                        visible: false
+                        text: "We couldn't find your email"
+                        color: Style.colorError
+                        font.pointSize: 11.75
+                        font.family: Style.defaultFontFamily
+                    }
+                    
+                    Label
+                    {
+                        id: successText
+                        property string email : ""
                         
-                        onClicked: loadPage("LoginPage");
+                        Layout.topMargin: 10
+                        visible: false
+                        text: "Email sent to: " + email
+                        color: "green"
+                        font.pointSize: 11.75
+                        font.family: Style.defaultFontFamily
+                    }
+                    
+                    MButton
+                    {
+                        id: sendEmailButton
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 42
+                        Layout.topMargin: (errorText.visible || successText.visible ? 32 : 56)
+                        Layout.alignment: Qt.AlignHCenter
+                        borderWidth: 0
+                        backgroundColor: Style.colorBasePurple
+                        text: "Send Email"
+                        fontSize: 12.25
+                        fontColor: Style.colorBrightText
+                        fontWeight: Font.Bold
+                        
+                        onClicked:
+                        {
+                            successText.email = emailInput.text;
+                            successText.visible = true;
+                            emailInput.clearText();
+                        }
+                    }
+                    
+                    
+                    MButton
+                    {
+                        id: backButton
+                        Layout.preferredWidth: implicitWidth + 10
+                        Layout.preferredHeight: 42
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 18
+                        centerContentHorizontally: false
+                        borderWidth: 0
+                        backgroundColor: "transparent"
+                        opacityOnPressed: 0.7
+                        text: "Back to Login"
+                        fontSize: 12.20
+                        fontWeight: Font.Medium
+                        fontColor: Style.colorLightText2
+                        imagePath: Icons.arrowtopBlackRight
+                        imageSize: 28
+                        imageRotation: 180
+                        imageSpacing: 4
+                        
+                        onClicked:  loadPage("LoginPage")
                     }
                 }
             }

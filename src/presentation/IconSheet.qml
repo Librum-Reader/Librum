@@ -33,6 +33,9 @@ Item
     property string emptyHomeBackground: "/resources/images/illustrations/empty_home_background.svg"
     property string eyeCrossedSwift: "/resources/images/illustrations/eye_crossed_illustration.png"
     property string fileSwift: "/resources/images/illustrations/file_swift_illustration.svg"
+    property string lockProtected: "/resources/images/illustrations/lock_protected_illustration.svg"
+    property string attention: "/resources/images/illustrations/attention_illustration.svg"
+    
     
     // ReadingView-icons
     property string arrowtopBlackLeft: "/resources/images/readingView/arrowtop_black_left_icon.svg"

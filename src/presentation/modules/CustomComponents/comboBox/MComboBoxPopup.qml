@@ -8,7 +8,7 @@ import CustomComponents
 Popup
 {
     id: root
-    property string selectedContent: listView.currentItem.itemContent
+    property string selectedContent: listView.currentItem.content
     property color backgroundColor
     property alias listContent: listView.model
     property int maxHeight: 200
