@@ -1,7 +1,7 @@
 module CustomComponents
-MButton 1.0 Buttons/MButton.qml
+MButton 1.0 buttons/MButton.qml
 MTitle 1.0 MTitle.qml
-MSearchButton 1.0 Buttons/MSearchButton.qml
+MSearchButton 1.0 buttons/MSearchButton.qml
 MLogo 1.0 MLogo.qml
 MLabeledInputBox 1.0 MLabeledInputBox.qml
 MCheckBox 1.0 MCheckBox.qml
@@ -9,6 +9,5 @@ MWrappedCheckBox 1.0 MWrappedCheckBox.qml
 MSaveBeforeLeavingPopup 1.0 MSaveBeforeLeavingPopup.qml
 MLabeledCheckBox 1.0 MLabeledCheckBox.qml
 MDropDownListItem 1.0 MDropDownListItem.qml
-MComboBox 1.0 ComboBox/MComboBox.qml
-MComboBoxPopup 1.0 ComboBox/MComboBoxPopup.qml
-MRemoveOptionButton 1.0 Buttons/MRemoveOptionButton.qml
+MComboBox 1.0 comboBox/MComboBox.qml
+MRemoveOptionButton 1.0 buttons/MRemoveOptionButton.qml
