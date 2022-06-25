@@ -9,9 +9,7 @@ import "readingSearchbar"
 
 Page
 {
-    id: root
-    property bool fullScreenMode: false
-    
+    id: root    
     background: Rectangle
     {
         anchors.fill: parent
@@ -24,7 +22,8 @@ Page
             if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier && (event.modifiers & Qt.AltModifier)))
             {
                 // @disable-check M127
-                root.fullScreenMode ? stopFullScreenAnim.start() : startFullScreenAnim.start();
+                toolbar.visible ? fullScreenAnimation.start() : partScreenAnimation.start();
+                toolbarReactivationDetector.notFirstExist = true;
             }
             else if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
             {
@@ -44,7 +43,6 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            fullScreenButton.active: root.fullScreenMode
             
             onChapterButtonClicked:
             {
@@ -106,9 +104,9 @@ Page
             onFullScreenButtonClicked:
             {
                 if(root.fullScreen)
-                    stopFullScreenAnim.start();
+                    partScreenAnimation.start();
                 else
-                    startFullScreenAnim.start();
+                    fullScreenAnimation.start();
             }
             
             onSearchButtonClicked:
@@ -121,7 +119,6 @@ Page
                 optionsButton.active = !optionsButton.active
             }
         }
-        
         
         SplitView
         {
@@ -186,38 +183,23 @@ Page
                 }
                 
                 
-                Rectangle
+                MouseArea
                 {
-                    id: temp
-                    visible: root.fullScreenMode
+                    id: toolbarReactivationDetector
+                    
+                    // When closing the toolbar, the mouse ends up in this mouseArea, this check makes sure that
+                    // the toolbar doesnt get opened directly again, because "onEntered" will be triggered directly
+                    property bool notFirstExist: false
+                    
                     width: parent.width
-                    height: 30
+                    height: 40
+                    visible: !toolbar.visible
                     z: 1
-                    color: "red"
+                    hoverEnabled: true
                     
-                    
-                    MouseArea
-                    {
-                        property bool exitedAtLeastOnce: false
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        
-                        
-                        onEntered:
-                        {
-                            if(exitedAtLeastOnce)
-                            {
-                                stopFullScreenAnim.start();
-                            }
-                        }
-                        
-                        onExited:
-                        {
-                            startFullScreenAnim.start();
-                            
-                            exitedAtLeastOnce = true;
-                        }
-                    }
+                    onExited: notFirstExist = true
+                    onEntered: if(notFirstExist) partScreenAnimation.start()
+                    onVisibleChanged: if(!visible) notFirstExist = false
                 }
                 
                 Rectangle
@@ -258,32 +240,35 @@ Page
             
             onVisibleChanged: toolbar.searchButton.active = visible;
         }
-    }
-    
-    
-    
-    PropertyAnimation
-    {
-        id: startFullScreenAnim
-        target: toolbar
-        property: "Layout.topMargin"
-        to: -toolbar.height
-        duration: 150
         
-        onStarted: root.fullScreenMode = true
-    }
-    
-    PropertyAnimation
-    {
-        id: stopFullScreenAnim
-        target: toolbar
-        property: "Layout.topMargin"
-        to: 0
-        duration: 150
         
-        onStarted: root.fullScreenMode = false
+        PropertyAnimation
+        {
+            id: fullScreenAnimation
+            target: toolbar
+            property: "opacity"
+            to: 0
+            
+            onStarted: toolbar.fullScreenButton.active = true;
+            onFinished: toolbar.visible = false
+        }
+        
+        PropertyAnimation
+        {
+            id: partScreenAnimation
+            target: toolbar
+            property: "opacity"
+            to: 1
+            duration: 200
+            
+            onStarted:
+            {
+                onStarted: toolbar.fullScreenButton.active = false;
+                toolbar.visible = true;
+            }
+        }
+        
+        
+        Component.onCompleted: root.forceActiveFocus()
     }
-    
-    
-    Component.onCompleted: root.forceActiveFocus()
 }
