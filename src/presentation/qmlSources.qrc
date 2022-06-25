@@ -19,7 +19,6 @@
         <file>home/MEmptyScreenContent.qml</file>
         <file>settings/MAboutPage.qml</file>
         <file>settings/MAppearancePage.qml</file>
-        <file>settings/MShortcutsPage.qml</file>
         <file>settings/MUpdatesPage.qml</file>
         <file>settings/MAdvancedSettingsPage.qml</file>
         <file>settings/MAccountPage.qml</file>
@@ -71,5 +70,7 @@
         <file>readingView/readingSearchbar/MReadingSearchbar.qml</file>
         <file>readingView/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
         <file>readingView/readingToolbar/MOptionsPopup.qml</file>
+        <file>settings/shortcutsPage/MShortcutsPage.qml</file>
+        <file>settings/shortcutsPage/MShortcutDelegate.qml</file>
     </qresource>
 </RCC>
