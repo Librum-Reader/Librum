@@ -21,11 +21,12 @@ Item
     property int imageSpacing: 8
     property int imageSize: 15
     property int imageLeftMargin: 0
+    property int imageRotation: 0
     property bool imageToRight: false
     property bool centerContentVertically: true
     property bool centerContentHorizontally: true
     
-    implicitWidth: 100
+    implicitWidth: layout.width
     implicitHeight: 30
     
     signal clicked()
@@ -57,6 +58,7 @@ Item
                 source: root.imagePath
                 sourceSize.width: root.imageSize
                 fillMode: Image.PreserveAspectFit
+                rotation: root.imageRotation
             }
             
             Label

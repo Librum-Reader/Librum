@@ -76,5 +76,7 @@
         <file>resources/images/utility/settings_gray_hallow_icon.svg</file>
         <file>resources/images/utility/share_black_icon.svg</file>
         <file>resources/images/utility/sun_gray_icon.svg</file>
+        <file>resources/images/illustrations/attention_illustration.svg</file>
+        <file>resources/images/illustrations/lock_protected_illustration.svg</file>
     </qresource>
 </RCC>
