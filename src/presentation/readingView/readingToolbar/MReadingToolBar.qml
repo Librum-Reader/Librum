@@ -31,6 +31,9 @@ Pane
         radius: 4
     }
     
+    onVisibleChanged: if(optionsPopup.opened) optionsPopup.close()
+    
+    
     RowLayout
     {
         id: mainLayout
