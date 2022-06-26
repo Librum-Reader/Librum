@@ -199,7 +199,7 @@ Page
                     
                     onExited: notFirstMouseExit = true
                     onEntered: if(notFirstMouseExit) partScreenAnimation.start()
-                    onVisibleChanged: if(!visible) notFirstMouseExit = false
+                    onVisibleChanged: notFirstMouseExit = false
                 }
                 
                 Rectangle
@@ -250,7 +250,7 @@ Page
             to: 0
             duration: 0
             
-            onStarted:toolbar.fullScreenButton.active = true
+            onStarted: toolbar.fullScreenButton.active = true
             onFinished: toolbar.visible = false
         }
         
