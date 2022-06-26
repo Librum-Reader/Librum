@@ -9,21 +9,42 @@ import "readingSearchbar"
 
 Page
 {
-    id: root    
+    id: root
+    property bool fullScreen: false
+    
     background: Rectangle
     {
         anchors.fill: parent
         color: Style.pagesBackground
     }
     
+    Item
+    {
+        id: toolbarReactivationContainer
+        width: parent.width
+        height: toolbar.height
+        z: 1
+        
+        HoverHandler
+        {
+            id: toolbarReactivationArea
+            enabled: true
+            onHoveredChanged:
+            {
+                if(hovered)
+                    root.exitFullScreen();
+            }
+        }
+    }
+    
+    
     Keys.onPressed:
         (event) =>
         {
             if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier && (event.modifiers & Qt.AltModifier)))
             {
-                // @disable-check M127
-                toolbar.visible ? fullScreenAnimation.start() : partScreenAnimation.start();
-                toolbarReactivationDetector.notFirstMouseExit = true;
+                if(root.fullScreen) root.exitFullScreen();
+                else root.enterFullScreen();
             }
             else if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
             {
@@ -103,10 +124,8 @@ Page
             
             onFullScreenButtonClicked:
             {
-                if(root.fullScreen)
-                    partScreenAnimation.start();
-                else
-                    fullScreenAnimation.start();
+                if(root.fullScreen) root.exitFullScreen();
+                else root.enterFullScreen();
             }
             
             onSearchButtonClicked:
@@ -117,6 +136,29 @@ Page
             onOptionsPopupVisibileChanged:
             {
                 optionsButton.active = !optionsButton.active
+            }
+            
+            
+            PropertyAnimation
+            {
+                id: hideToolbar
+                target: toolbar
+                property: "opacity"
+                to: 0
+                duration: 150
+                
+                onFinished: toolbar.visible = false
+            }
+            
+            PropertyAnimation
+            {
+                id: showToolbar
+                target: toolbar
+                property: "opacity"
+                to: 1
+                duration: 200
+                
+                onStarted: toolbar.visible = true
             }
         }
         
@@ -182,26 +224,6 @@ Page
                     color: "transparent"
                 }
                 
-                
-                MouseArea
-                {
-                    id: toolbarReactivationDetector
-                    
-                    // When closing the toolbar, the mouse ends up in this mouseArea, this check makes sure that
-                    // the toolbar doesnt get opened directly again, because "onEntered" will be triggered directly
-                    property bool notFirstMouseExit: false
-                    
-                    width: parent.width
-                    height: 40
-                    visible: !toolbar.visible
-                    z: 5
-                    hoverEnabled: true
-                    
-                    onExited: notFirstMouseExit = true
-                    onEntered: if(notFirstMouseExit) partScreenAnimation.start()
-                    onVisibleChanged: notFirstMouseExit = false
-                }
-                
                 Rectangle
                 {
                     id: page
@@ -240,36 +262,25 @@ Page
             
             onVisibleChanged: toolbar.searchButton.active = visible;
         }
+    }
+    
+    
+    Component.onCompleted: root.forceActiveFocus()
+    
+    
+    function enterFullScreen()
+    {
+        fullScreen = true;
         
+        if(toolbar.visible)
+            hideToolbar.start();
+    }
+    
+    function exitFullScreen()
+    {
+        fullScreen = false;
         
-        PropertyAnimation
-        {
-            id: fullScreenAnimation
-            target: toolbar
-            property: "opacity"
-            to: 0
-            duration: 0
-            
-            onStarted: toolbar.fullScreenButton.active = true
-            onFinished: toolbar.visible = false
-        }
-        
-        PropertyAnimation
-        {
-            id: partScreenAnimation
-            target: toolbar
-            property: "opacity"
-            to: 1
-            duration: 200
-            
-            onStarted:
-            {
-                onStarted: toolbar.fullScreenButton.active = false;
-                toolbar.visible = true;
-            }
-        }
-        
-        
-        Component.onCompleted: root.forceActiveFocus()
+        if(!toolbar.visible)
+            showToolbar.start();
     }
 }
