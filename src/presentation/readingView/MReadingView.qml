@@ -145,7 +145,7 @@ Page
                 target: toolbar
                 property: "opacity"
                 to: 0
-                duration: 150
+                duration: 100
                 
                 onFinished: toolbar.visible = false
             }
