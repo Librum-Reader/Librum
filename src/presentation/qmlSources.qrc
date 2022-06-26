@@ -25,7 +25,6 @@
         <file>settings/MStoragePage.qml</file>
         <file>settings/MSupportUsPage.qml</file>
         <file>forgotPassword/MForgotPasswordPage.qml</file>
-        <file>modules/CustomComponents/MSaveBeforeLeavingPopup.qml</file>
         <file>modules/CustomComponents/MLabeledCheckBox.qml</file>
         <file>modules/CustomComponents/MDropDownListItem.qml</file>
         <file>freeBooks/explorerToolbar/MExplorerToolbar.qml</file>
@@ -72,5 +71,6 @@
         <file>modules/CustomComponents/comboBox/MComboBox.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxItem.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
+        <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
     </qresource>
 </RCC>

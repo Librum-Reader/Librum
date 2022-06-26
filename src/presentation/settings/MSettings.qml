@@ -26,7 +26,7 @@ Page
         
         MSettingsSidebar
         {
-            id: sidebar
+            id: settingsSidebar
             height: parent.height
         }
 

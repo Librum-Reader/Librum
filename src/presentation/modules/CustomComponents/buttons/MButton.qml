@@ -30,7 +30,7 @@ Item
     implicitHeight: 30
     
     signal clicked()
-    
+        
     
     Rectangle
     {

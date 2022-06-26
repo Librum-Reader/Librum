@@ -59,6 +59,8 @@ Page
                 fontColor: Style.colorBackground
                 imagePath: Icons.checkWhite
                 imageSize: 14
+                
+                onClicked: forgotToSaveChangesDialog.open();
             }
         }
         
@@ -362,5 +364,18 @@ Page
                 }
             }
         }
+    }
+    
+    
+    MForgotToSaveChangesPopup
+    {
+        id: forgotToSaveChangesDialog
+        property int xPosition: Math.round(root.width / 2 - width / 2 - settingsSidebar.width / 2 - root.horizontalPadding / 2)
+        property int yPosition: Math.round(root.height / 2 - height / 2 - root.topPadding)
+        
+        onOpenedChanged: forgotToSaveChangesDialog.giveFocus()
+        
+        x: xPosition
+        y: yPosition - 30
     }
 }
