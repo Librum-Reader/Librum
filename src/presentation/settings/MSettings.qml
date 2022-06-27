@@ -70,8 +70,10 @@ Page
     {
         if(settingsPageManager.currentItem instanceof MAccountPage)
         {
-            return settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page, sidebarItem);
+            if(!settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page, sidebarItem))
+                return false;
         }
+        
         return true;
     }
     

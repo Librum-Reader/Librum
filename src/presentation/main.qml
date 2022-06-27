@@ -71,18 +71,26 @@ ApplicationWindow
     
     function loadPage(page, sidebarItem)
     {
+        if(!terminateActionOfPreviousPage(page, sidebarItem))
+            return;
+
+        switchPage(page, sidebarItem);
+    }
+    
+    function terminateActionOfPreviousPage(page, sidebarItem)
+    {
         if(pageManager.currentItem instanceof MSettings)
         {
             if(!pageManager.currentItem.ensureSettingPageIsSaved(switchPage, page, sidebarItem))
-                return;
+                return false;
         }
         
-        switchPage(page, sidebarItem);
+        return true;
     }
     
     function switchPage(page, sidebarItem)
     {
-        if(pageManager.currentItem === page)
+        if(sidebar.currentItem === sidebarItem && sidebar.hasChangedAtLeastOnce)
             return;
         
         pageManager.replace(page);
