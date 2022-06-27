@@ -82,8 +82,8 @@ Popup
     
     function logout()
     {
-        resetSidebar();
-        root.close();
         loadPage(loginPage);
+        root.close();
+        resetSidebar();
     }
 }
