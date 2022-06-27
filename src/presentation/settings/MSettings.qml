@@ -58,22 +58,25 @@ Page
     Component { id: storagePage; MStoragePage{} }
     Component { id: supportUsPage; MSupportUsPage{} }
     
-    function loadSettingsPage(page)
+    function loadSettingsPage(page, sidebarItem)
     {
-        if(!ensureAccountSettingsAreSaved())
+        if(!ensureAccountSettingsAreSaved(page, sidebarItem))
             return false;
         
         switchPage(page);
+        moveSidebarMarker(sidebarItem);
         return true;
     }
     
-    function ensureAccountSettingsAreSaved()
+    function ensureAccountSettingsAreSaved(page, sidebarItem)
     {
         // Opens the "Forgot to save" popup, when switching from Account settings to
         // another page without having saved (if there is anything to save)
         if(settingsPageManager.currentItem instanceof MAccountPage && settingsPageManager.currentItem.unsavedChanges)
         {
             settingsPageManager.currentItem.forgotToSaveChangesDialog.open();
+            settingsPageManager.currentItem.forgotToSaveChangesDialog.decisionMade.connect(() => 
+                                                                                           loadSettingsPage(page, sidebarItem));
             return false;
         }
         return true;
@@ -118,5 +121,10 @@ Page
         default:
             console.log("ERROR: You tried instantiating a not existing settings page");
         }
+    }
+    
+    function moveSidebarMarker(sidebarItem)
+    {
+        settingsSidebar.changeSelectedPage(sidebarItem);
     }
 }

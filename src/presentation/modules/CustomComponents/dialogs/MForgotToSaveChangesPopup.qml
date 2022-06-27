@@ -118,6 +118,7 @@ Popup
                         {
                             root.saveMethod();
                             root.close();
+                            root.decisionMade();
                         }
                                                 
                         Keys.onPressed:
@@ -153,6 +154,7 @@ Popup
                         {
                             root.dontSaveMethod();
                             root.close();
+                            root.decisionMade();
                         }
                         
                         Keys.onPressed:

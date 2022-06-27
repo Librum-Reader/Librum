@@ -8,6 +8,8 @@ import Librum.icons
 Item
 {
     id: root
+    property MSettingsSidebarItem current : aboutItem
+    
     implicitWidth: 238
     implicitHeight: Window.height
     
@@ -22,8 +24,6 @@ Item
     ColumnLayout
     {
         id: layout
-        property MSettingsSidebarItem current : aboutItem
-        
         spacing: 0
         
         
@@ -77,8 +77,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("AboutPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("AboutPage", this);
             }
         }
         
@@ -98,8 +97,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("AppearancePage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("AppearancePage", this);
             }
         }
         
@@ -119,8 +117,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("ShortcutsPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("ShortcutsPage", this);
             }
         }
         
@@ -140,8 +137,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("UpdatesPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("UpdatesPage", this);
             }
         }
         
@@ -161,8 +157,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("AdvancedSettingsPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("AdvancedSettingsPage", this);
             }
         }
         
@@ -195,8 +190,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("AccountPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("AccountPage", this);
             }
         }
         
@@ -216,8 +210,7 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("StoragePage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("StoragePage", this);
             }
         }
         
@@ -237,17 +230,15 @@ Item
             
             onClicked:
             {
-                if(loadSettingsPage("SupportUsPage"))
-                    layout.changeSelected(this);
+                loadSettingsPage("SupportUsPage", this);
             }
         }
-        
-        
-        function changeSelected(newItem)
-        {
-            current.selected = false;
-            current = newItem;
-            current.selected = true;
-        }
+    }
+    
+    function changeSelectedPage(newItem)
+    {
+        current.selected = false;
+        current = newItem;
+        current.selected = true;
     }
 }
