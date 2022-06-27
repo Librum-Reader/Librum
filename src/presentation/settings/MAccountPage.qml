@@ -9,7 +9,9 @@ import Librum.icons
 Page
 {
     id: root
+    property alias pageCleanup: pageCleanup
     property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
+    readonly property bool hasCleanup: true
     property bool unsavedChanges: true
     
     horizontalPadding: 48
@@ -380,25 +382,29 @@ Page
         y: root.height / 2 - implicitHeight / 2 - root.topPadding - 25
         saveMethod: saveAccountSettings
         dontSaveMethod: () => { root.unsavedChanges = false; }
-                
+        
         onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
+    }
+    
+    MPageCleanup
+    {
+        id: pageCleanup
+        action: () =>
+                {
+                    if(root.unsavedChanges)
+                    {
+                        forgotToSaveChangesDialog.open();
+                        return true;
+                    }
+                    return false;
+                }
+        
+        signalToBindTo: forgotToSaveChangesDialog.decisionMade
     }
     
     
     function saveAccountSettings()
     {
         root.unsavedChanges = false;
-    }
-    
-    function checkSettingsAreSaved(switchPage, page, sidebarItem)
-    {
-        if(root.unsavedChanges)
-        {
-            forgotToSaveChangesDialog.open();
-            forgotToSaveChangesDialog.decisionMade.connect(() => switchPage(page, sidebarItem));
-            return false;
-        }
-        
-        return true;
     }
 }

@@ -72,5 +72,6 @@
         <file>modules/CustomComponents/comboBox/MComboBoxItem.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
+        <file>modules/CustomComponents/MPageCleanup.qml</file>
     </qresource>
 </RCC>

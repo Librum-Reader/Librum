@@ -69,10 +69,10 @@ Page
     
     function ensureSettingsPageIsSaved(switchPageFunction, page, sidebarItem)
     {
-        if(settingsPageManager.currentItem instanceof MAccountPage)
+        if(settingsPageManager.currentItem.hasCleanup)
         {
-            if(!settingsPageManager.currentItem.checkSettingsAreSaved(switchPageFunction, page, sidebarItem))
-                return false;
+            settingsPageManager.currentItem.pageCleanup.callbackMethod = () => switchPageFunction(page, sidebarItem);
+            return settingsPageManager.currentItem.pageCleanup.cleanUp();
         }
         
         return true;
