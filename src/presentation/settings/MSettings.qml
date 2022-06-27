@@ -60,71 +60,83 @@ Page
     
     function loadSettingsPage(page, sidebarItem)
     {
-        if(!ensureAccountSettingsAreSaved(page, sidebarItem))
-            return false;
+        if(!ensureSettingPageIsSaved(switchSettingsPage, page))
+            return;
         
-        switchPage(page);
-        moveSidebarMarker(sidebarItem);
-        return true;
+        switchSettingsPage(page);
     }
     
-    function ensureAccountSettingsAreSaved(page, sidebarItem)
+    function ensureSettingPageIsSaved(switchPageFunction, page)
     {
-        // Opens the "Forgot to save" popup, when switching from Account settings to
-        // another page without having saved (if there is anything to save)
-        if(settingsPageManager.currentItem instanceof MAccountPage && settingsPageManager.currentItem.unsavedChanges)
+        if(settingsPageManager.currentItem instanceof MAccountPage)
         {
-            settingsPageManager.currentItem.forgotToSaveChangesDialog.open();
-            settingsPageManager.currentItem.forgotToSaveChangesDialog.decisionMade.connect(() => 
-                                                                                           loadSettingsPage(page, sidebarItem));
-            return false;
+            return settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page);
         }
         return true;
     }
     
-    function switchPage(page)
+    function switchSettingsPage(page)
     {
         switch (page)
         {
         case 'AboutPage':
-            if(!(settingsPageManager.currentItem instanceof MAboutPage))
-                settingsPageManager.replace(aboutPage);
+            if(settingsPageManager.currentItem instanceof MAboutPage)
+                break;
+            
+            settingsPageManager.replace(aboutPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.aboutItem);
             break;
         case 'AppearancePage':
-            if(!(settingsPageManager.currentItem instanceof MAppearancePage))
-                settingsPageManager.replace(appearancePage);
+            if(settingsPageManager.currentItem instanceof MAppearancePage)
+                break;
+
+            settingsPageManager.replace(appearancePage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.appearanceItem);
             break;
         case 'ShortcutsPage':
-            if(!(settingsPageManager.currentItem instanceof MShortcutsPage))
-                settingsPageManager.replace(shortcutsPage);
+            if(settingsPageManager.currentItem instanceof MShortcutsPage)
+                break;
+            
+            settingsPageManager.replace(shortcutsPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.shortcutsItem);
             break;
         case 'UpdatesPage':
-            if(!(settingsPageManager.currentItem instanceof MUpdatesPage))
-                settingsPageManager.replace(updatesPage);
+            if(settingsPageManager.currentItem instanceof MUpdatesPage)
+                break;
+            
+            settingsPageManager.replace(updatesPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.updatesItem);
             break;
         case 'AdvancedSettingsPage':
-            if(!(settingsPageManager.currentItem instanceof MAdvancedSettingsPage))
-                settingsPageManager.replace(advancedSettingsPage);
+            if(settingsPageManager.currentItem instanceof MAdvancedSettingsPage)
+                break;
+            
+            settingsPageManager.replace(advancedSettingsPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.advancedSettingsItem);
             break;
         case 'AccountPage':
-            if(!(settingsPageManager.currentItem instanceof MAccountPage))
-                settingsPageManager.replace(accountPage);
+            if(settingsPageManager.currentItem instanceof MAccountPage)
+                break;
+            
+            settingsPageManager.replace(accountPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.accountItem);
             break;
         case 'StoragePage':
-            if(!(settingsPageManager.currentItem instanceof MStoragePage))
-                settingsPageManager.replace(storagePage);
+            if(settingsPageManager.currentItem instanceof MStoragePage)
+                break;
+            
+            settingsPageManager.replace(storagePage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.storageItem);
             break;
         case 'SupportUsPage':
-            if(!(settingsPageManager.currentItem instanceof MSupportUsPage))
-                settingsPageManager.replace(supportUsPage);
+            if(settingsPageManager.currentItem instanceof MSupportUsPage)
+                break;
+            
+            settingsPageManager.replace(supportUsPage);
+            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.supportUsItem);
             break;
         default:
             console.log("ERROR: You tried instantiating a not existing settings page");
         }
-    }
-    
-    function moveSidebarMarker(sidebarItem)
-    {
-        settingsSidebar.changeSelectedPage(sidebarItem);
     }
 }

@@ -71,52 +71,99 @@ ApplicationWindow
     
     function loadPage(page)
     {
+        if(pageManager.currentItem instanceof MSettings)
+        {
+            if(!pageManager.currentItem.ensureSettingPageIsSaved(switchPage, page))
+                return;
+        }
+
+        switchPage(page);
+    }
+    
+    function switchPage(page)
+    {
         switch (page)
         {
         case 'LoginPage':
+            if(pageManager.currentItem instanceof MLoginPage)
+                break;
+            
             root.minimumWidth = 542
             root.minimumHeight = 590
             pageManager.replace(loginPage);
             pageManager.pageHasSidebar = false;
             break;
         case 'ForgotPasswordPage':
+            if(pageManager.currentItem instanceof MForgotPasswordPage)
+                break;
+            
             root.minimumWidth = 542
             root.minimumHeight = 590
             pageManager.replace(forgotPasswordPage);
             pageManager.pageHasSidebar = false;
             break;
         case 'RegisterPage':
+            if(pageManager.currentItem instanceof MRegisterPage)
+                break;
+            
             root.minimumHeight = 820
             root.minimumWidth = 542
             pageManager.replace(registerPage);
             pageManager.pageHasSidebar = false;
             break;
         case 'HomePage':
+            if(pageManager.currentItem instanceof MHome)
+                break;
+            
             root.minimumWidth = 904
             pageManager.replace(homePage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.homeItem;
             break;
         case 'FreeBooksPage':
+            if(pageManager.currentItem instanceof MFreeBooks)
+                break;
+            
             pageManager.replace(freeBooksPage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.freeBooksItem;
             break;
         case 'SettingsPage':
+            if(pageManager.currentItem instanceof MSettings)
+                break;
+            
             pageManager.replace(settingsPage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.settingsItem;
             break;
         case 'AddOnsPage':
+            if(pageManager.currentItem instanceof MAddOns)
+                break;
+            
             pageManager.replace(addOnsPage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.addOnsItem;
             break;
         case 'ToolsPage':
+            if(pageManager.currentItem instanceof MTools)
+                break;
+            
             pageManager.replace(toolsPage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.toolsItem;
             break;
         case 'StatisticsPage':
+            if(pageManager.currentItem instanceof MStatistics)
+                break;
+            
             pageManager.replace(statisticsPage);
             pageManager.pageHasSidebar = true;
+            sidebar.selectedTab = sidebar.statisticsItem;
             break;
         case 'ReadingViewPage':
+            if(pageManager.currentItem instanceof MReadingView)
+                break;
+            
             pageManager.replace(readingViewPage);
             pageManager.pageHasSidebar = false;
             break;

@@ -10,12 +10,18 @@ import Librum.icons
 Item
 {
     id: root
-    property int  closedWidth : 72
-    property int  openedWidth : 232
-    property int  currentWidth : width
-    property bool isOpened    : false
-    property MSidebarItem defaultTab : homeButton
-    property MSidebarItem selectedTab : homeButton
+    property int  closedWidth: 72
+    property int  openedWidth: 232
+    property int  currentWidth: width
+    property bool isOpened: false
+    property alias freeBooksItem: freeBooksButton
+    property alias homeItem: homeButton
+    property alias statisticsItem: statisticsButton
+    property alias toolsItem: toolsButton
+    property alias addOnsItem: addOnButton
+    property alias settingsItem: settingsButton
+    property MSidebarItem defaultTab: homeButton
+    property MSidebarItem selectedTab: defaultTab
     
     implicitWidth: closedWidth
     implicitHeight: Window.height
@@ -89,10 +95,7 @@ Item
                 labelContent: "Free books"
                 selected: root.selectedTab == freeBooksButton
                 
-                onClicked: {
-                    root.selectedTab = freeBooksButton;
-                    loadPage("FreeBooksPage");
-                }
+                onClicked: loadPage("FreeBooksPage")
             }            
             
             Rectangle
@@ -116,10 +119,7 @@ Item
                 labelContent: "Home"
                 selected: root.selectedTab == homeButton
                 
-                onClicked: {
-                    root.selectedTab = homeButton;
-                    loadPage("HomePage");
-                }
+                onClicked: loadPage("HomePage")
             }
             
             MSidebarItem
@@ -133,10 +133,7 @@ Item
                 labelContent: "Statistics"
                 selected: root.selectedTab == statisticsButton
                 
-                onClicked: {
-                    root.selectedTab = statisticsButton;
-                    loadPage("StatisticsPage");
-                }
+                onClicked: loadPage("StatisticsPage")
             }
             
             Rectangle
@@ -160,10 +157,7 @@ Item
                 labelContent: "Tools"
                 selected: root.selectedTab == toolsButton
                 
-                onClicked: {
-                    root.selectedTab = toolsButton;
-                    loadPage("ToolsPage");
-                }
+                onClicked: loadPage("ToolsPage")
             }
             
             MSidebarItem
@@ -177,10 +171,7 @@ Item
                 labelContent: "Add-ons"
                 selected: root.selectedTab == addOnButton
                 
-                onClicked: {
-                    root.selectedTab = addOnButton;
-                    loadPage("AddOnsPage");
-                }
+                onClicked: loadPage("AddOnsPage")
             }
             
             MSidebarItem
@@ -194,10 +185,7 @@ Item
                 labelContent: "Settings"
                 selected: root.selectedTab == settingsButton
                 
-                onClicked: {
-                    root.selectedTab = settingsButton;
-                    loadPage("SettingsPage");
-                }
+                onClicked: loadPage("SettingsPage")
             }
             
             Item

@@ -8,6 +8,16 @@ import Librum.icons
 Item
 {
     id: root
+    property MSettingsSidebarItem aboutItem: aboutItem
+    property MSettingsSidebarItem appearanceItem: appearanceItem
+    property MSettingsSidebarItem shortcutsItem: shortcutsItem
+    property MSettingsSidebarItem updatesItem: updatesItem
+    property MSettingsSidebarItem advancedSettingsItem: advancedSettingsItem
+    property MSettingsSidebarItem accountItem: accountItem
+    property MSettingsSidebarItem storageItem: storageItem
+    property MSettingsSidebarItem supportUsItem: supportUsItem
+    
+    
     property MSettingsSidebarItem current : aboutItem
     
     implicitWidth: 238
@@ -95,10 +105,7 @@ Item
             defaultIcon: Icons.settingsAppearanceGray
             selectedIcon: Icons.settingsAppearancePurple            
             
-            onClicked:
-            {
-                loadSettingsPage("AppearancePage", this);
-            }
+            onClicked: loadSettingsPage("AppearancePage")
         }
         
         MSettingsSidebarItem
@@ -115,10 +122,7 @@ Item
             defaultIcon: Icons.settingsShortcutsGray
             selectedIcon: Icons.settingsShortcutsPurple
             
-            onClicked:
-            {
-                loadSettingsPage("ShortcutsPage", this);
-            }
+            onClicked: loadSettingsPage("ShortcutsPage")
         }
         
         MSettingsSidebarItem
@@ -135,10 +139,7 @@ Item
             defaultIcon: Icons.settingsUpdatesGray
             selectedIcon: Icons.settingsUpdatesPurple
             
-            onClicked:
-            {
-                loadSettingsPage("UpdatesPage", this);
-            }
+            onClicked: loadSettingsPage("UpdatesPage")
         }
         
         MSettingsSidebarItem
@@ -155,10 +156,7 @@ Item
             defaultIcon: Icons.settingsSettingsGray
             selectedIcon: Icons.settingsSettingsPurple
             
-            onClicked:
-            {
-                loadSettingsPage("AdvancedSettingsPage", this);
-            }
+            onClicked: loadSettingsPage("AdvancedSettingsPage")
         }
         
         
@@ -189,9 +187,7 @@ Item
             selectedIcon: Icons.settingsAccountPurple
             
             onClicked:
-            {
-                loadSettingsPage("AccountPage", this);
-            }
+                loadSettingsPage("AccountPage")
         }
         
         MSettingsSidebarItem
@@ -208,10 +204,7 @@ Item
             defaultIcon: Icons.settingsStorageGray
             selectedIcon: Icons.settingsStoragePurple
             
-            onClicked:
-            {
-                loadSettingsPage("StoragePage", this);
-            }
+            onClicked: loadSettingsPage("StoragePage")
         }
         
         MSettingsSidebarItem
@@ -228,17 +221,14 @@ Item
             defaultIcon: Icons.settingsSupportUsGray
             selectedIcon: Icons.settingsSupportUsPurple
             
-            onClicked:
-            {
-                loadSettingsPage("SupportUsPage", this);
-            }
+            onClicked: loadSettingsPage("SupportUsPage")
         }
     }
     
-    function changeSelectedPage(newItem)
+    function changeSelectedSettingsPage(newItem)
     {
-        current.selected = false;
-        current = newItem;
-        current.selected = true;
+        root.current.selected = false;
+        root.current = newItem;
+        root.current.selected = true;
     }
 }

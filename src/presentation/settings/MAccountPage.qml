@@ -387,7 +387,18 @@ Page
     
     function saveAccountSettings()
     {
-        console.log("Account settings saved");
-        root.unsavedChanges = false
+        root.unsavedChanges = false;
+    }
+    
+    function saveSettingsBeforePageSwitch(switchPage, page)
+    {
+        if(root.unsavedChanges)
+        {
+            forgotToSaveChangesDialog.open();
+            forgotToSaveChangesDialog.decisionMade.connect(() => switchPage(page));
+            return false;
+        }
+        
+        return true;
     }
 }
