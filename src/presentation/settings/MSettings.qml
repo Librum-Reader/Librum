@@ -58,19 +58,20 @@ Page
     Component { id: storagePage; MStoragePage{} }
     Component { id: supportUsPage; MSupportUsPage{} }
     
+    
     function loadSettingsPage(page, sidebarItem)
     {
-        if(!ensureSettingPageIsSaved(switchSettingsPage, page, sidebarItem))
+        if(!ensureSettingsPageIsSaved(switchSettingsPage, page, sidebarItem))
             return;
         
         switchSettingsPage(page, sidebarItem);
     }
     
-    function ensureSettingPageIsSaved(switchPageFunction, page, sidebarItem)
+    function ensureSettingsPageIsSaved(switchPageFunction, page, sidebarItem)
     {
         if(settingsPageManager.currentItem instanceof MAccountPage)
         {
-            if(!settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page, sidebarItem))
+            if(!settingsPageManager.currentItem.checkSettingsAreSaved(switchPageFunction, page, sidebarItem))
                 return false;
         }
         
@@ -81,7 +82,7 @@ Page
     {
         if(settingsPageManager.currentItem === page)
             return;
-
+        
         settingsPageManager.replace(page);
         settingsSidebar.changeSelectedSettingsItem(sidebarItem);
     }

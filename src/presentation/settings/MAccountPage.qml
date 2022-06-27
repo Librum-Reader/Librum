@@ -390,7 +390,7 @@ Page
         root.unsavedChanges = false;
     }
     
-    function saveSettingsBeforePageSwitch(switchPage, page, sidebarItem)
+    function checkSettingsAreSaved(switchPage, page, sidebarItem)
     {
         if(root.unsavedChanges)
         {
