@@ -71,10 +71,18 @@ ApplicationWindow
     
     function loadPage(page, sidebarItem)
     {
+        if(newPageIsTheSameAsOldPage(sidebarItem))
+            return;
+                
         if(!terminateActionOfPreviousPage(page, sidebarItem))
             return;
-
+        
         switchPage(page, sidebarItem);
+    }
+    
+    function newPageIsTheSameAsOldPage(sidebarItem)
+    {
+        return sidebar.currentItem === sidebarItem && sidebar.hasChangedAtLeastOnce;
     }
     
     function terminateActionOfPreviousPage(page, sidebarItem)
@@ -90,9 +98,6 @@ ApplicationWindow
     
     function switchPage(page, sidebarItem)
     {
-        if(sidebar.currentItem === sidebarItem && sidebar.hasChangedAtLeastOnce)
-            return;
-        
         pageManager.replace(page);
         pageManager.pageHasSidebar = sidebarItem === undefined ? false : true;
         if(sidebarItem !== undefined) sidebar.changeSelectedItem(sidebarItem);

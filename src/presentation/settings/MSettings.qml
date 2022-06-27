@@ -61,6 +61,9 @@ Page
     
     function loadSettingsPage(page, sidebarItem)
     {
+        if(settingsSidebar.currentItem === sidebarItem)
+            return;
+        
         if(!ensureSettingsPageIsSaved(switchSettingsPage, page, sidebarItem))
             return;
         
@@ -80,9 +83,6 @@ Page
     
     function switchSettingsPage(page, sidebarItem)
     {
-        if(settingsPageManager.currentItem === page)
-            return;
-        
         settingsPageManager.replace(page);
         settingsSidebar.changeSelectedSettingsItem(sidebarItem);
     }

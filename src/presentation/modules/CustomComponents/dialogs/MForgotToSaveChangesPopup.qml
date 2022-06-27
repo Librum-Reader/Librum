@@ -14,6 +14,7 @@ Popup
     signal decisionMade
     
     implicitWidth: 660
+    closePolicy: Popup.NoAutoClose
     background: Rectangle
     {
         color: "transparent"
