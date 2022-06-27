@@ -175,7 +175,7 @@ Page
                             
                             onClicked:
                             {
-                                loadPage("ForgotPasswordPage");
+                                loadPage(forgotPasswordPage);
                             }
                         }
                     }
@@ -194,7 +194,7 @@ Page
                     fontWeight: Font.Bold
                     text: "Login"
                     
-                    onClicked: loadPage("HomePage");
+                    onClicked: loadPage(homePage, sidebar.homeItem);
                     
                     Keys.onPressed: 
                         (event) =>
@@ -205,7 +205,7 @@ Page
                             }
                             else if(event.key === Qt.Key_Return)
                             {
-                                loadPage("HomePage");
+                                loadPage(homePage, sidebar.homeItem);
                             }
                         }
                 }
@@ -224,7 +224,7 @@ Page
             MouseArea
             {
                 anchors.fill: parent
-                onClicked: loadPage("RegisterPage");
+                onClicked: loadPage(registerPage);
             }
         }
     }

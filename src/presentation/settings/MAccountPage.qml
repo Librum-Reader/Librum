@@ -390,12 +390,12 @@ Page
         root.unsavedChanges = false;
     }
     
-    function saveSettingsBeforePageSwitch(switchPage, page)
+    function saveSettingsBeforePageSwitch(switchPage, page, sidebarItem)
     {
         if(root.unsavedChanges)
         {
             forgotToSaveChangesDialog.open();
-            forgotToSaveChangesDialog.decisionMade.connect(() => switchPage(page));
+            forgotToSaveChangesDialog.decisionMade.connect(() => switchPage(page, sidebarItem));
             return false;
         }
         

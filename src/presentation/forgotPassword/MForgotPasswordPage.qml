@@ -170,7 +170,7 @@ Page
                         imageRotation: 180
                         imageSpacing: 4
                         
-                        onClicked: loadPage("LoginPage")
+                        onClicked: loadPage(loginPage)
                     }
                 }
             }

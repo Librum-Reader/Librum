@@ -124,7 +124,10 @@ Page
                 clip: true
                 
                 model: indexBar.selectedAmountOfBooks
-                delegate: MBook { onClicked: loadPage("ReadingViewPage") }
+                delegate: MBook
+                { 
+                    onClicked: loadPage(readingViewPage)
+                }
             }
         }
         

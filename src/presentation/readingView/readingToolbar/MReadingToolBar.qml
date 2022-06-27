@@ -52,7 +52,7 @@ Pane
             imageSize: 11
             opacityOnPressed: 0.7
             
-            onClicked: loadPage("HomePage")
+            onClicked: loadPage(homePage, sidebar.homeItem)
         }
         
         MButton

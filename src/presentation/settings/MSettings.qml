@@ -60,90 +60,27 @@ Page
     
     function loadSettingsPage(page, sidebarItem)
     {
-        if(!ensureSettingPageIsSaved(switchSettingsPage, page))
+        if(!ensureSettingPageIsSaved(switchSettingsPage, page, sidebarItem))
             return;
         
-        switchSettingsPage(page);
+        switchSettingsPage(page, sidebarItem);
     }
     
-    function ensureSettingPageIsSaved(switchPageFunction, page)
+    function ensureSettingPageIsSaved(switchPageFunction, page, sidebarItem)
     {
         if(settingsPageManager.currentItem instanceof MAccountPage)
         {
-            return settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page);
+            return settingsPageManager.currentItem.saveSettingsBeforePageSwitch(switchPageFunction, page, sidebarItem);
         }
         return true;
     }
     
-    function switchSettingsPage(page)
+    function switchSettingsPage(page, sidebarItem)
     {
-        switch (page)
-        {
-        case 'AboutPage':
-            if(settingsPageManager.currentItem instanceof MAboutPage)
-                break;
-            
-            settingsPageManager.replace(aboutPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.aboutItem);
-            break;
-            
-        case 'AppearancePage':
-            if(settingsPageManager.currentItem instanceof MAppearancePage)
-                break;
+        if(settingsPageManager.currentItem === page)
+            return;
 
-            settingsPageManager.replace(appearancePage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.appearanceItem);
-            break;
-            
-        case 'ShortcutsPage':
-            if(settingsPageManager.currentItem instanceof MShortcutsPage)
-                break;
-            
-            settingsPageManager.replace(shortcutsPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.shortcutsItem);
-            break;
-            
-        case 'UpdatesPage':
-            if(settingsPageManager.currentItem instanceof MUpdatesPage)
-                break;
-            
-            settingsPageManager.replace(updatesPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.updatesItem);
-            break;
-            
-        case 'AdvancedSettingsPage':
-            if(settingsPageManager.currentItem instanceof MAdvancedSettingsPage)
-                break;
-            
-            settingsPageManager.replace(advancedSettingsPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.advancedSettingsItem);
-            break;
-            
-        case 'AccountPage':
-            if(settingsPageManager.currentItem instanceof MAccountPage)
-                break;
-            
-            settingsPageManager.replace(accountPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.accountItem);
-            break;
-            
-        case 'StoragePage':
-            if(settingsPageManager.currentItem instanceof MStoragePage)
-                break;
-            
-            settingsPageManager.replace(storagePage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.storageItem);
-            break;
-            
-        case 'SupportUsPage':
-            if(settingsPageManager.currentItem instanceof MSupportUsPage)
-                break;
-            
-            settingsPageManager.replace(supportUsPage);
-            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.supportUsItem);
-            break;
-        default:
-            console.log("ERROR: You tried instantiating a not existing settings page");
-        }
+        settingsPageManager.replace(page);
+        settingsSidebar.changeSelectedSettingsItem(sidebarItem);
     }
 }

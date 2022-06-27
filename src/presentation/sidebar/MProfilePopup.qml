@@ -62,7 +62,7 @@ Popup
             imageWidth: 19
             textSpacing: 8
             
-            onClicked: loadPage("SettingsPage");
+            onClicked: loadPage(settingsPage, sidebar.settingsItem);
         }
         
         
@@ -84,6 +84,6 @@ Popup
     {
         resetSidebar();
         root.close();
-        loadPage("LoginPage");
+        loadPage(loginPage);
     }
 }

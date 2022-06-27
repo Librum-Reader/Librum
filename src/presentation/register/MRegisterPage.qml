@@ -248,14 +248,14 @@ Page
                             fontWeight: Font.Bold
                             text: "Let's start"
                             
-                            onClicked: loadPage("LoginPage");
+                            onClicked: loadPage(loginPage);
                             
                             Keys.onPressed: 
                                 (event) =>
                                 {
                                     if(event.key === Qt.Key_Return)
                                     {
-                                        loadPage("LoginPage");
+                                        loadPage(loginPage);
                                     }
                                     else if(event.key === Qt.Key_Up)
                                     {
@@ -282,7 +282,7 @@ Page
             MouseArea
             {
                 anchors.fill: parent
-                onClicked: loadPage("LoginPage");
+                onClicked: loadPage(loginPage);
             }
         }
     }

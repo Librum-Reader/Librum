@@ -84,10 +84,7 @@ Item
             defaultIcon: Icons.settingsAboutGray
             selectedIcon: Icons.settingsAboutPurple
             
-            onClicked:
-            {
-                loadSettingsPage("AboutPage", this);
-            }
+            onClicked: loadSettingsPage(aboutPage, root.aboutItem);
         }
         
         MSettingsSidebarItem
@@ -104,7 +101,7 @@ Item
             defaultIcon: Icons.settingsAppearanceGray
             selectedIcon: Icons.settingsAppearancePurple            
             
-            onClicked: loadSettingsPage("AppearancePage")
+            onClicked: loadSettingsPage(appearancePage, root.appearanceItem)
         }
         
         MSettingsSidebarItem
@@ -121,7 +118,7 @@ Item
             defaultIcon: Icons.settingsShortcutsGray
             selectedIcon: Icons.settingsShortcutsPurple
             
-            onClicked: loadSettingsPage("ShortcutsPage")
+            onClicked: loadSettingsPage(shortcutsPage, root.shortcutsItem)
         }
         
         MSettingsSidebarItem
@@ -138,7 +135,7 @@ Item
             defaultIcon: Icons.settingsUpdatesGray
             selectedIcon: Icons.settingsUpdatesPurple
             
-            onClicked: loadSettingsPage("UpdatesPage")
+            onClicked: loadSettingsPage(updatesPage, root.updatesItem)
         }
         
         MSettingsSidebarItem
@@ -155,7 +152,7 @@ Item
             defaultIcon: Icons.settingsSettingsGray
             selectedIcon: Icons.settingsSettingsPurple
             
-            onClicked: loadSettingsPage("AdvancedSettingsPage")
+            onClicked: loadSettingsPage(advancedSettingsPage, root.advancedSettingsItem)
         }
         
         
@@ -186,7 +183,7 @@ Item
             selectedIcon: Icons.settingsAccountPurple
             
             onClicked:
-                loadSettingsPage("AccountPage")
+                loadSettingsPage(accountPage, root.accountItem)
         }
         
         MSettingsSidebarItem
@@ -203,7 +200,7 @@ Item
             defaultIcon: Icons.settingsStorageGray
             selectedIcon: Icons.settingsStoragePurple
             
-            onClicked: loadSettingsPage("StoragePage")
+            onClicked: loadSettingsPage(storagePage, root.storageItem)
         }
         
         MSettingsSidebarItem
@@ -220,7 +217,7 @@ Item
             defaultIcon: Icons.settingsSupportUsGray
             selectedIcon: Icons.settingsSupportUsPurple
             
-            onClicked: loadSettingsPage("SupportUsPage")
+            onClicked: loadSettingsPage(supportUsPage, root.supportUsItem)
         }
     }
     

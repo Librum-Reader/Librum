@@ -96,7 +96,7 @@ Item
                 imageSource: Icons.downloadGray
                 labelContent: "Free books"
                 
-                onClicked: loadPage("FreeBooksPage")
+                onClicked: loadPage(freeBooksPage, root.freeBooksItem)
             }            
             
             Rectangle
@@ -119,7 +119,7 @@ Item
                 imageSource: Icons.home
                 labelContent: "Home"
                 
-                onClicked: loadPage("HomePage")
+                onClicked: loadPage(homePage, root.homeItem)
             }
             
             MSidebarItem
@@ -132,7 +132,7 @@ Item
                 imageSource: Icons.pieChart
                 labelContent: "Statistics"
                 
-                onClicked: loadPage("StatisticsPage")
+                onClicked: loadPage(statisticsPage, root.statisticsItem)
             }
             
             Rectangle
@@ -155,7 +155,7 @@ Item
                 imageSource: Icons.tool
                 labelContent: "Tools"
                 
-                onClicked: loadPage("ToolsPage")
+                onClicked: loadPage(toolsPage, root.toolsItem)
             }
             
             MSidebarItem
@@ -168,7 +168,7 @@ Item
                 imageSource: Icons.addOns
                 labelContent: "Add-ons"
                 
-                onClicked: loadPage("AddOnsPage")
+                onClicked: loadPage(addOnsPage, root.addOnsItem)
             }
             
             MSidebarItem
@@ -181,7 +181,7 @@ Item
                 imageSource: Icons.settings
                 labelContent: "Settings"
                 
-                onClicked: loadPage("SettingsPage")
+                onClicked: loadPage(settingsPage, root.settingsItem)
             }
             
             Item
@@ -229,11 +229,6 @@ Item
         root.currentItem.selected = true;
     }
     
-    function giveFocus()
-    {
-        root.forceActiveFocus();
-    }    
-    
     function openSidebar()
     {
         animations.openAnimation.start();
@@ -251,6 +246,11 @@ Item
     function resetSidebar()
     {
         closeSidebar();
-        root.currentItem = root.defaultItem;
+        changeSelectedItem(root.defaultItem);
     }
+
+    function giveFocus()
+    {
+        root.forceActiveFocus();
+    }    
 }
