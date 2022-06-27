@@ -60,6 +60,27 @@ Page
     
     function loadSettingsPage(page)
     {
+        if(!ensureAccountSettingsAreSaved())
+            return false;
+        
+        switchPage(page);
+        return true;
+    }
+    
+    function ensureAccountSettingsAreSaved()
+    {
+        // Opens the "Forgot to save" popup, when switching from Account settings to
+        // another page without having saved (if there is anything to save)
+        if(settingsPageManager.currentItem instanceof MAccountPage && settingsPageManager.currentItem.unsavedChanges)
+        {
+            settingsPageManager.currentItem.forgotToSaveChangesDialog.open();
+            return false;
+        }
+        return true;
+    }
+    
+    function switchPage(page)
+    {
         switch (page)
         {
         case 'AboutPage':
@@ -97,16 +118,5 @@ Page
         default:
             console.log("ERROR: You tried instantiating a not existing settings page");
         }
-    }
-    
-    
-    MForgotToSaveChangesPopup
-    {
-        id: forgotToSaveChangesDialog
-        
-        onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
-        
-        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - 48
-        y: root.height / 2 - implicitHeight / 2 - 64 - 25
     }
 }

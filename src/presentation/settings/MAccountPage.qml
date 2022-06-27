@@ -9,6 +9,7 @@ import Librum.icons
 Page
 {
     id: root
+    property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
     property bool unsavedChanges: true
     
     horizontalPadding: 48
@@ -62,7 +63,10 @@ Page
                 imagePath: Icons.checkWhite
                 imageSize: 14
                 
-                onClicked: root.unsavedChanges = false
+                onClicked:
+                {
+                    root.saveAccountSettings();
+                }
             }
         }
         
@@ -366,5 +370,24 @@ Page
                 }
             }
         }
+    }
+    
+    
+    MForgotToSaveChangesPopup
+    {
+        id: forgotToSaveChangesDialog
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - root.horizontalPadding / 2
+        y: root.height / 2 - implicitHeight / 2 - root.topPadding - 25
+        saveMethod: saveAccountSettings
+        dontSaveMethod: () => { root.unsavedChanges = false; }
+                
+        onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
+    }
+    
+    
+    function saveAccountSettings()
+    {
+        console.log("Account settings saved");
+        root.unsavedChanges = false
     }
 }

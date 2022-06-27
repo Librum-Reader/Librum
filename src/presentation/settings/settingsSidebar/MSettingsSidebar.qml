@@ -77,8 +77,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("AboutPage");
+                if(loadSettingsPage("AboutPage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -98,8 +98,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("AppearancePage");
+                if(loadSettingsPage("AppearancePage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -119,8 +119,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("ShortcutsPage");
+                if(loadSettingsPage("ShortcutsPage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -140,8 +140,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("UpdatesPage");
+                if(loadSettingsPage("UpdatesPage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -161,8 +161,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("AdvancedSettingsPage");
+                if(loadSettingsPage("AdvancedSettingsPage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -195,8 +195,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("AccountPage");
+                if(loadSettingsPage("AccountPage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -216,8 +216,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("StoragePage");
+                if(loadSettingsPage("StoragePage"))
+                    layout.changeSelected(this);
             }
         }
         
@@ -237,8 +237,8 @@ Item
             
             onClicked:
             {
-                layout.changeSelected(this);
-                loadSettingsPage("SupportUsPage");
+                if(loadSettingsPage("SupportUsPage"))
+                    layout.changeSelected(this);
             }
         }
         

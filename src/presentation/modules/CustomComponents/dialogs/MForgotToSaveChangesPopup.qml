@@ -9,6 +9,9 @@ import Librum.icons
 Popup
 {
     id: root
+    property var saveMethod
+    property var dontSaveMethod
+    signal decisionMade
     
     implicitWidth: 660
     background: Rectangle
@@ -111,7 +114,11 @@ Popup
                         fontWeight: Font.Bold
                         fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                         
-                        onClicked: root.close()
+                        onClicked:
+                        {
+                            root.saveMethod();
+                            root.close();
+                        }
                                                 
                         Keys.onPressed:
                             (event) =>
@@ -142,7 +149,11 @@ Popup
                         fontWeight: Font.Bold
                         fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
                         
-                        onClicked: root.close()
+                        onClicked:
+                        {
+                            root.dontSaveMethod();
+                            root.close();
+                        }
                         
                         Keys.onPressed:
                             (event) =>

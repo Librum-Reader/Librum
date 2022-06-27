@@ -91,8 +91,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = freeBooksButton;
-                    if(true)
-                        loadPage("FreeBooksPage");
+                    loadPage("FreeBooksPage");
                 }
             }            
             
@@ -119,8 +118,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = homeButton;
-                    if(true)
-                        loadPage("HomePage");
+                    loadPage("HomePage");
                 }
             }
             
@@ -137,8 +135,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = statisticsButton;
-                    if(true)
-                        loadPage("StatisticsPage");
+                    loadPage("StatisticsPage");
                 }
             }
             
@@ -165,8 +162,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = toolsButton;
-                    if(true)
-                        loadPage("ToolsPage");
+                    loadPage("ToolsPage");
                 }
             }
             
@@ -183,8 +179,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = addOnButton;
-                    if(true)
-                        loadPage("AddOnsPage");
+                    loadPage("AddOnsPage");
                 }
             }
             
@@ -201,8 +196,7 @@ Item
                 
                 onClicked: {
                     root.selectedTab = settingsButton;
-                    if(true)
-                        loadPage("SettingsPage");
+                    loadPage("SettingsPage");
                 }
             }
             
