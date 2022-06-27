@@ -84,56 +84,63 @@ Page
                 break;
             
             settingsPageManager.replace(aboutPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.aboutItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.aboutItem);
             break;
+            
         case 'AppearancePage':
             if(settingsPageManager.currentItem instanceof MAppearancePage)
                 break;
 
             settingsPageManager.replace(appearancePage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.appearanceItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.appearanceItem);
             break;
+            
         case 'ShortcutsPage':
             if(settingsPageManager.currentItem instanceof MShortcutsPage)
                 break;
             
             settingsPageManager.replace(shortcutsPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.shortcutsItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.shortcutsItem);
             break;
+            
         case 'UpdatesPage':
             if(settingsPageManager.currentItem instanceof MUpdatesPage)
                 break;
             
             settingsPageManager.replace(updatesPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.updatesItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.updatesItem);
             break;
+            
         case 'AdvancedSettingsPage':
             if(settingsPageManager.currentItem instanceof MAdvancedSettingsPage)
                 break;
             
             settingsPageManager.replace(advancedSettingsPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.advancedSettingsItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.advancedSettingsItem);
             break;
+            
         case 'AccountPage':
             if(settingsPageManager.currentItem instanceof MAccountPage)
                 break;
             
             settingsPageManager.replace(accountPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.accountItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.accountItem);
             break;
+            
         case 'StoragePage':
             if(settingsPageManager.currentItem instanceof MStoragePage)
                 break;
             
             settingsPageManager.replace(storagePage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.storageItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.storageItem);
             break;
+            
         case 'SupportUsPage':
             if(settingsPageManager.currentItem instanceof MSupportUsPage)
                 break;
             
             settingsPageManager.replace(supportUsPage);
-            settingsSidebar.changeSelectedSettingsPage(settingsSidebar.supportUsItem);
+            settingsSidebar.changeSelectedSettingsItem(settingsSidebar.supportUsItem);
             break;
         default:
             console.log("ERROR: You tried instantiating a not existing settings page");

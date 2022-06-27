@@ -114,12 +114,7 @@ Popup
                         fontWeight: Font.Bold
                         fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                         
-                        onClicked:
-                        {
-                            root.saveMethod();
-                            root.close();
-                            root.decisionMade();
-                        }
+                        onClicked: buttonAction()
                                                 
                         Keys.onPressed:
                             (event) =>
@@ -130,9 +125,16 @@ Popup
                                 }
                                 else if(event.key === Qt.Key_Return)
                                 {
-                                    root.close();
+                                    buttonAction();
                                 }
                             }
+                        
+                        function buttonAction()
+                        {
+                            root.saveMethod();
+                            root.close();
+                            root.decisionMade();
+                        }
                     }
                     
                     MButton
@@ -150,12 +152,7 @@ Popup
                         fontWeight: Font.Bold
                         fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
                         
-                        onClicked:
-                        {
-                            root.dontSaveMethod();
-                            root.close();
-                            root.decisionMade();
-                        }
+                        onClicked: buttonAction()
                         
                         Keys.onPressed:
                             (event) =>
@@ -166,9 +163,16 @@ Popup
                                 }
                                 else if(event.key === Qt.Key_Return)
                                 {
-                                    root.close();
+                                    buttonAction();
                                 }
                             }
+                        
+                        function buttonAction()
+                        {
+                            root.dontSaveMethod();
+                            root.close();
+                            root.decisionMade();
+                        }
                     }
                 }
             }

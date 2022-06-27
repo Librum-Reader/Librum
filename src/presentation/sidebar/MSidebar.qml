@@ -14,14 +14,16 @@ Item
     property int  openedWidth: 232
     property int  currentWidth: width
     property bool isOpened: false
-    property alias freeBooksItem: freeBooksButton
-    property alias homeItem: homeButton
-    property alias statisticsItem: statisticsButton
-    property alias toolsItem: toolsButton
+    
+    property alias freeBooksItem: freeBooksItem
+    property alias homeItem: homeItem
+    property alias statisticsItem: statisticsItem
+    property alias toolsItem: toolsItem
     property alias addOnsItem: addOnButton
-    property alias settingsItem: settingsButton
-    property MSidebarItem defaultTab: homeButton
-    property MSidebarItem selectedTab: defaultTab
+    property alias settingsItem: settingsItem
+    
+    property MSidebarItem defaultItem: homeItem
+    property MSidebarItem currentItem: defaultItem
     
     implicitWidth: closedWidth
     implicitHeight: Window.height
@@ -86,14 +88,13 @@ Item
             
             MSidebarItem
             {
-                id: freeBooksButton
+                id: freeBooksItem
                 Layout.topMargin: 16
                 Layout.leftMargin: 10
                 imageWidth: 45
                 imageHeight: 45
                 imageSource: Icons.downloadGray
                 labelContent: "Free books"
-                selected: root.selectedTab == freeBooksButton
                 
                 onClicked: loadPage("FreeBooksPage")
             }            
@@ -110,28 +111,26 @@ Item
             
             MSidebarItem
             {
-                id: homeButton
+                id: homeItem
                 Layout.topMargin: 15
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 28
                 imageSource: Icons.home
                 labelContent: "Home"
-                selected: root.selectedTab == homeButton
                 
                 onClicked: loadPage("HomePage")
             }
             
             MSidebarItem
             {
-                id: statisticsButton
+                id: statisticsItem
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 28
                 imageHeight: 28
                 imageSource: Icons.pieChart
                 labelContent: "Statistics"
-                selected: root.selectedTab == statisticsButton
                 
                 onClicked: loadPage("StatisticsPage")
             }
@@ -148,14 +147,13 @@ Item
             
             MSidebarItem
             {
-                id: toolsButton
+                id: toolsItem
                 Layout.topMargin: 15
                 Layout.leftMargin: 10
                 imageWidth: 30
                 imageHeight: 30
                 imageSource: Icons.tool
                 labelContent: "Tools"
-                selected: root.selectedTab == toolsButton
                 
                 onClicked: loadPage("ToolsPage")
             }
@@ -169,21 +167,19 @@ Item
                 imageHeight: 30
                 imageSource: Icons.addOns
                 labelContent: "Add-ons"
-                selected: root.selectedTab == addOnButton
                 
                 onClicked: loadPage("AddOnsPage")
             }
             
             MSidebarItem
             {
-                id: settingsButton
+                id: settingsItem
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 36
                 imageHeight: 36
                 imageSource: Icons.settings
                 labelContent: "Settings"
-                selected: root.selectedTab == settingsButton
                 
                 onClicked: loadPage("SettingsPage")
             }
@@ -226,6 +222,12 @@ Item
         }
     }
     
+    function changeSelectedItem(newItem)
+    {
+        root.currentItem.selected = false;
+        root.currentItem = newItem;
+        root.currentItem.selected = true;
+    }
     
     function giveFocus()
     {
@@ -235,20 +237,20 @@ Item
     function openSidebar()
     {
         animations.openAnimation.start();
-        selectedTab.openAnimation.start();
+        currentItem.openAnimation.start();
         SidebarState.currentState = SidebarState.Opened;
     }
     
     function closeSidebar()
     {
         animations.closeAnimation.start();
-        selectedTab.closeAnimation.start();
+        currentItem.closeAnimation.start();
         SidebarState.currentState = SidebarState.Closed;
     }
     
     function resetSidebar()
     {
         closeSidebar();
-        root.selectedTab = root.defaultTab;
+        root.currentItem = root.defaultItem;
     }
 }

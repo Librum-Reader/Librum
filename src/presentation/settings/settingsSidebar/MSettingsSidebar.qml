@@ -17,8 +17,7 @@ Item
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
     
-    
-    property MSettingsSidebarItem current : aboutItem
+    property MSettingsSidebarItem currentItem : aboutItem
     
     implicitWidth: 238
     implicitHeight: Window.height
@@ -225,10 +224,10 @@ Item
         }
     }
     
-    function changeSelectedSettingsPage(newItem)
+    function changeSelectedSettingsItem(newItem)
     {
-        root.current.selected = false;
-        root.current = newItem;
-        root.current.selected = true;
+        root.currentItem.selected = false;
+        root.currentItem = newItem;
+        root.currentItem.selected = true;
     }
 }
