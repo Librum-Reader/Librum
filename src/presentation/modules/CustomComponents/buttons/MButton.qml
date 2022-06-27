@@ -40,7 +40,7 @@ Item
         border.width: root.borderWidth
         border.color: root.borderColor
         radius: root.buttonRadius
-        opacity: (mouseArea.pressed || root.activeFocus ? root.opacityOnPressed : 1)
+        opacity: (mouseArea.pressed ? root.opacityOnPressed : 1)
         antialiasing: true
         
         RowLayout

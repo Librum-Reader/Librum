@@ -9,7 +9,7 @@ import Librum.icons
 Popup
 {
     id: root
-    implicitWidth: 680
+    implicitWidth: 660
     background: Rectangle
     {
         color: "transparent"
@@ -34,6 +34,7 @@ Popup
             id: attentionIllustration
             z: 2
             Layout.alignment: Qt.AlignHCenter
+            Layout.rightMargin: 10
             source: Icons.attention
             sourceSize.width: 250
             fillMode: Image.PreserveAspectFit
@@ -45,7 +46,7 @@ Popup
             Layout.fillWidth: true
             topPadding: 86
             horizontalPadding: 72
-            bottomPadding: 48
+            bottomPadding: 40
             background: Rectangle
             {
                 color: Style.colorBackground
@@ -91,7 +92,7 @@ Popup
                     id: buttonRow
                     Layout.preferredWidth: parent.width
                     Layout.preferredHeight: acceptButton.height
-                    Layout.topMargin: 72
+                    Layout.topMargin: 56
                     spacing: 0
                     
                     MButton
@@ -103,6 +104,7 @@ Popup
                         borderWidth: activeFocus ? 0 : 1
                         borderColor: Style.colorLightBorder2
                         backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
+                        opacityOnPressed: 0.7
                         text: "Save"
                         fontSize: 12.75
                         fontWeight: Font.Bold
@@ -133,6 +135,7 @@ Popup
                         borderWidth: focus ? 0 : 1
                         borderColor: Style.colorLightBorder2
                         backgroundColor: focus ? Style.colorBasePurple : "transparent"
+                        opacityOnPressed: 0.7
                         text: "Don't save"
                         fontSize: 12.75
                         fontWeight: Font.Bold
