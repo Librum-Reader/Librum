@@ -9,6 +9,7 @@ import Librum.icons
 Popup
 {
     id: root
+    
     implicitWidth: 660
     background: Rectangle
     {
@@ -45,7 +46,7 @@ Popup
             id: backgroundRect
             Layout.fillWidth: true
             topPadding: 86
-            horizontalPadding: 72
+            horizontalPadding: 64
             bottomPadding: 40
             background: Rectangle
             {

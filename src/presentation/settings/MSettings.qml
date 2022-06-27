@@ -9,7 +9,8 @@ import "shortcutsPage"
 
 Page
 {
-    id: root
+    id: settingsManager
+    
     background: Rectangle
     {
         anchors.fill: parent
@@ -29,7 +30,7 @@ Page
             id: settingsSidebar
             height: parent.height
         }
-
+        
         StackView
         {
             id: settingsPageManager
@@ -53,7 +54,7 @@ Page
     Component { id: shortcutsPage; MShortcutsPage{} }
     Component { id: updatesPage; MUpdatesPage{} }
     Component { id: advancedSettingsPage; MAdvancedSettingsPage{} }
-    Component { id: accountPage; MAccountPage{} }
+    Component { id: accountPage; MAccountPage {} }
     Component { id: storagePage; MStoragePage{} }
     Component { id: supportUsPage; MSupportUsPage{} }
     
@@ -62,31 +63,50 @@ Page
         switch (page)
         {
         case 'AboutPage':
-            settingsPageManager.replace(aboutPage);
+            if(!(settingsPageManager.currentItem instanceof MAboutPage))
+                settingsPageManager.replace(aboutPage);
             break;
         case 'AppearancePage':
-            settingsPageManager.replace(appearancePage);
+            if(!(settingsPageManager.currentItem instanceof MAppearancePage))
+                settingsPageManager.replace(appearancePage);
             break;
         case 'ShortcutsPage':
-            settingsPageManager.replace(shortcutsPage);
+            if(!(settingsPageManager.currentItem instanceof MShortcutsPage))
+                settingsPageManager.replace(shortcutsPage);
             break;
         case 'UpdatesPage':
-            settingsPageManager.replace(updatesPage);
+            if(!(settingsPageManager.currentItem instanceof MUpdatesPage))
+                settingsPageManager.replace(updatesPage);
             break;
         case 'AdvancedSettingsPage':
-            settingsPageManager.replace(advancedSettingsPage);
+            if(!(settingsPageManager.currentItem instanceof MAdvancedSettingsPage))
+                settingsPageManager.replace(advancedSettingsPage);
             break;
         case 'AccountPage':
-            settingsPageManager.replace(accountPage);
+            if(!(settingsPageManager.currentItem instanceof MAccountPage))
+                settingsPageManager.replace(accountPage);
             break;
         case 'StoragePage':
-            settingsPageManager.replace(storagePage);
+            if(!(settingsPageManager.currentItem instanceof MStoragePage))
+                settingsPageManager.replace(storagePage);
             break;
         case 'SupportUsPage':
-            settingsPageManager.replace(supportUsPage);
+            if(!(settingsPageManager.currentItem instanceof MSupportUsPage))
+                settingsPageManager.replace(supportUsPage);
             break;
         default:
             console.log("ERROR: You tried instantiating a not existing settings page");
         }
+    }
+    
+    
+    MForgotToSaveChangesPopup
+    {
+        id: forgotToSaveChangesDialog
+        
+        onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
+        
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - 48
+        y: root.height / 2 - implicitHeight / 2 - 64 - 25
     }
 }

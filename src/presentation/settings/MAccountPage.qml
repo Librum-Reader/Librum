@@ -9,6 +9,8 @@ import Librum.icons
 Page
 {
     id: root
+    property bool unsavedChanges: true
+    
     horizontalPadding: 48
     topPadding: 64
     background: Rectangle
@@ -60,7 +62,7 @@ Page
                 imagePath: Icons.checkWhite
                 imageSize: 14
                 
-                onClicked: forgotToSaveChangesDialog.open();
+                onClicked: root.unsavedChanges = false
             }
         }
         
@@ -364,16 +366,5 @@ Page
                 }
             }
         }
-    }
-    
-    
-    MForgotToSaveChangesPopup
-    {
-        id: forgotToSaveChangesDialog
-        
-        onOpenedChanged: forgotToSaveChangesDialog.giveFocus()
-        
-        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - root.horizontalPadding / 2
-        y: root.height / 2 - implicitHeight / 2 - root.topPadding
     }
 }
