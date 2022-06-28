@@ -9,7 +9,7 @@ Item
 {
     id: root
     property int selectedAmountOfBooks: 12
-    signal selected
+    signal selectedBookCount(int amount)
     
     implicitWidth: 58
     implicitHeight: 32
@@ -56,7 +56,22 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selected()
+        onClicked: selectorPopup.open()
+    }
+    
+    MBookCountSelectorPopup
+    {
+        id: selectorPopup
+        y: -implicitHeight - 6
+        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+        
+        onSelected:
+            (content) =>
+            {
+                root.selectedAmountOfBooks = content;
+                root.selectedBookCount(content);
+                close();
+            }
     }
     
     

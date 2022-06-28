@@ -82,7 +82,7 @@ Popup
                         ListElement { text: "Psychology" }
                     }
                     
-                    delegate: MDropDownListItem
+                    delegate: MBaseListItem
                     {
                         width: parent.width
                         containingListview: listView

@@ -8,7 +8,7 @@ MCheckBox 1.0 MCheckBox.qml
 MWrappedCheckBox 1.0 MWrappedCheckBox.qml
 MSaveBeforeLeavingPopup 1.0 MSaveBeforeLeavingPopup.qml
 MLabeledCheckBox 1.0 MLabeledCheckBox.qml
-MDropDownListItem 1.0 MDropDownListItem.qml
+MBaseListItem 1.0 MBaseListItem.qml
 MComboBox 1.0 comboBox/MComboBox.qml
 MRemoveOptionButton 1.0 buttons/MRemoveOptionButton.qml
 MForgotToSaveChangesPopup 1.0 dialogs/MForgotToSaveChangesPopup.qml

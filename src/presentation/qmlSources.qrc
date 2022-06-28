@@ -26,7 +26,7 @@
         <file>settings/MSupportUsPage.qml</file>
         <file>forgotPassword/MForgotPasswordPage.qml</file>
         <file>modules/CustomComponents/MLabeledCheckBox.qml</file>
-        <file>modules/CustomComponents/MDropDownListItem.qml</file>
+        <file>modules/CustomComponents/MBaseListItem.qml</file>
         <file>freeBooks/explorerToolbar/MExplorerToolbar.qml</file>
         <file>modules/CustomComponents/MWrappedCheckBox.qml</file>
         <file>freeBooks/explorerToolbar/MExplorerFilterByButton.qml</file>
@@ -73,5 +73,6 @@
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
         <file>modules/CustomComponents/MPageCleanup.qml</file>
+        <file>home/indexbar/MBookCountSelectorItem.qml</file>
     </qresource>
 </RCC>

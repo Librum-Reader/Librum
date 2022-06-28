@@ -81,7 +81,7 @@ Popup
                         ListElement { text: "Author (A-Z)" }
                     }
                     
-                    delegate: MDropDownListItem
+                    delegate: MBaseListItem
                     {
                         width: parent.width
                         containingListview: listView

@@ -28,22 +28,6 @@ Item
             property int popupToSelectorSpacing: 8
             
             Layout.alignment: Qt.AlignVCenter
-            onSelected: (bookCountSelectorPopup.opened) ? bookCountSelectorPopup.close() : bookCountSelectorPopup.open()
-            
-            MBookCountSelectorPopup
-            {
-                id: bookCountSelectorPopup
-                x: parent.x
-                y: parent.y - bookCountSelectorPopup.height - bookCountSelector.popupToSelectorSpacing
-                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-                
-                onBookCountSelctionMade:
-                    (content) =>
-                    {
-                        parent.selectedAmountOfBooks = content;
-                        close();
-                    }
-            }
         }
         
         Label
