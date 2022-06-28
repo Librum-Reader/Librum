@@ -194,7 +194,7 @@ Page
                     fontWeight: Font.Bold
                     text: "Login"
                     
-                    onClicked: loadPage(homePage, sidebar.homeItem);
+                    onClicked: loadPage(homePage, sidebar.homeItem, false);
                     
                     Keys.onPressed: 
                         (event) =>
@@ -205,7 +205,7 @@ Page
                             }
                             else if(event.key === Qt.Key_Return)
                             {
-                                loadPage(homePage, sidebar.homeItem);
+                                loadPage(homePage, sidebar.homeItem, false);
                             }
                         }
                 }

@@ -13,7 +13,6 @@ Item
     property int  closedWidth: 72
     property int  openedWidth: 232
     property int  currentWidth: width
-    property bool hasChangedAtLeastOnce
     property bool isOpened: false
     
     property alias freeBooksItem: freeBooksItem
@@ -228,8 +227,6 @@ Item
         root.currentItem.selected = false;
         root.currentItem = newItem;
         root.currentItem.selected = true;
-        
-        root.hasChangedAtLeastOnce = true;
     }
     
     function openSidebar()
@@ -250,8 +247,6 @@ Item
     {
         closeSidebar();
         changeSelectedItem(root.defaultItem);
-        
-        root.hasChangedAtLeastOnce = false;
     }
 
     function giveFocus()

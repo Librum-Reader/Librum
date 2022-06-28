@@ -69,9 +69,9 @@ ApplicationWindow
     Component { id: readingViewPage; MReadingView {} }
     
     
-    function loadPage(page, sidebarItem)
+    function loadPage(page, sidebarItem, doSamePageCheck = true)
     {
-        if(newPageIsTheSameAsOldPage(sidebarItem))
+        if(newPageIsTheSameAsOldPage(sidebarItem) && doSamePageCheck)
             return;
                 
         if(!terminateActionOfPreviousPage(page, sidebarItem))
@@ -82,7 +82,7 @@ ApplicationWindow
     
     function newPageIsTheSameAsOldPage(sidebarItem)
     {
-        return sidebar.currentItem === sidebarItem && sidebar.hasChangedAtLeastOnce;
+        return sidebar.currentItem === sidebarItem;
     }
     
     function terminateActionOfPreviousPage(page, sidebarItem)

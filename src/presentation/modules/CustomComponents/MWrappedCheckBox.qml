@@ -1,7 +1,8 @@
 import QtQuick
 import QtQuick.Controls
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Item
@@ -34,6 +35,9 @@ Item
             height: 22
             anchors.centerIn: parent
             borderColor: Style.colorLightBorder2
+            checkedBorderWidth: 1
+            checkedBackgroundColor: "transparent"
+            imagePath: Icons.checkBlackThin
             borderWidth: 1
             
             onClicked: root.checked();

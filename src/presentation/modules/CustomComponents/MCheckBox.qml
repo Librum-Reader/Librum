@@ -8,14 +8,16 @@ import Librum.icons
 Item
 {
     id: root
-    property color borderColor : Style.colorDarkBorder
-    property int borderRadius : 4
-    property int borderWidth : 1
-    property color uncheckedBackgroundColor : "transparent"
-    property color checkedBackgroundColor : Style.colorBasePurple
-    property string imagePath : Icons.checkWhite
-    property bool imageDefaultVisibility : false
-    property bool checked : false
+    property color borderColor: Style.colorDarkBorder
+    property color checkedBorderColor: Style.colorLightBorder
+    property int borderRadius: 4
+    property int borderWidth: 1
+    property int checkedBorderWidth: 0
+    property color uncheckedBackgroundColor: "transparent"
+    property color checkedBackgroundColor: Style.colorBasePurple
+    property string imagePath: Icons.checkWhite
+    property bool imageDefaultVisibility: false
+    property bool checked: false
     signal clicked()
     
     implicitWidth: 22
@@ -27,9 +29,9 @@ Item
         id: container
         anchors.fill: parent
         radius: root.borderRadius
-        border.width: (root.checked ? 0 : root.borderWidth)
-        border.color: root.activeFocus ? Style.colorLightBorder : root.borderColor
-        color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
+        border.width: root.checked ? root.checkedBorderWidth : root.borderWidth
+        border.color: root.activeFocus ? root.checkedBorderColor : root.borderColor
+        color: root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor
         antialiasing: true
         
         Image
