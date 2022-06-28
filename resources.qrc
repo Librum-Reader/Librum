@@ -78,5 +78,6 @@
         <file>resources/images/utility/sun_gray_icon.svg</file>
         <file>resources/images/illustrations/attention_illustration.svg</file>
         <file>resources/images/illustrations/lock_protected_illustration.svg</file>
+        <file>resources/images/decision/check_purple_icon.svg</file>
     </qresource>
 </RCC>

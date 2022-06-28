@@ -15,6 +15,7 @@ Item
     property string checkBlackThin: "/resources/images/decision/check_black_thin_icon.svg"
     property string checkGreen: "/resources/images/decision/check_green_icon.svg"
     property string checkWhite: "/resources/images/decision/check_white_icon.svg"
+    property string checkPurple: "/resources/images/decision/check_purple_icon.svg"
     property string closeBlack: "/resources/images/decision/close_black_icon.svg"
     property string closePurple: "/resources/images/decision/close_purple_icon.svg"
     property string plusBlack: "/resources/images/decision/plus_black_icon.svg"

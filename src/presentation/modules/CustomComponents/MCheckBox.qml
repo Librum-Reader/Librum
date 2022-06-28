@@ -16,6 +16,7 @@ Item
     property color uncheckedBackgroundColor: "transparent"
     property color checkedBackgroundColor: Style.colorBasePurple
     property string imagePath: Icons.checkWhite
+    property int imageSize: container.width - 10
     property bool imageDefaultVisibility: false
     property bool checked: false
     signal clicked()
@@ -39,7 +40,7 @@ Item
             id: image
             anchors.centerIn: parent
             visible: (root.checked ? true : false)
-            sourceSize.width: parent.width - 10
+            sourceSize.width: root.imageSize
             source: root.imagePath
             fillMode: Image.PreserveAspectFit
         }
