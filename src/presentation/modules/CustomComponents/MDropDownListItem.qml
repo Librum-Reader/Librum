@@ -7,10 +7,12 @@ import Librum.style
 Item
 {
     id: root
-    property bool selected : false
-    property string text : "My item"
+    required property ListView containingListview
+    property bool selected: containingListview.currentItem === this
+    required property string text
+    required property int index
     property int padding : 10
-    signal clicked
+    signal clicked(int index)
     
     implicitWidth: 137
     implicitHeight: 36
@@ -49,6 +51,6 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: root.clicked()
+        onClicked: root.clicked(index)
     }
 }

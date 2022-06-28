@@ -9,12 +9,17 @@ import Librum.icons
 Popup
 {
     id: root
+    property int maxHeight: 200
+    
     padding: 0
+    focus: true
     implicitWidth: 151
     background: Rectangle
     {
         color: "transparent"
     }
+    
+    onOpenedChanged: if(opened) listView.forceActiveFocus();
     
     
     ColumnLayout
@@ -50,60 +55,51 @@ Popup
             
             ColumnLayout
             {
-                id: itemLayout
-                property MDropDownListItem currentSelected : null
-                
                 width: parent.width
-                spacing: 0
                 
                 
-                MDropDownListItem
+                ListView
                 {
+                    id: listView
                     Layout.fillWidth: true
-                    selected: true
-                    text: "Recently read"
-                    onClicked: itemLayout.changeSelected(this)
+                    Layout.preferredHeight: contentHeight
+                    Layout.maximumHeight: root.maxHeight
+                    maximumFlickVelocity: 550
+                    currentIndex: 0
+                    keyNavigationEnabled: true
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
                     
-                    Component.onCompleted: itemLayout.currentSelected = this
-                }
-                
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "Recently added"
-                    onClicked: itemLayout.changeSelected(this)
-                }
-                
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "By Percentage"
-                    onClicked: itemLayout.changeSelected(this)
-                }
-                
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "Book (A-Z)"
-                    onClicked: itemLayout.changeSelected(this)
-                }
-                
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    selected: false
-                    text: "Author (A-Z)"
-                    onClicked: itemLayout.changeSelected(this)
-                }
-                
-                function changeSelected(newSelected)
-                {
-                    itemLayout.currentSelected.selected = false;
-                    itemLayout.currentSelected = newSelected;
-                    itemLayout.currentSelected.selected = true;
+                    model: ListModel
+                    {
+                        ListElement { text: "Recently read" }
+                        ListElement { text: "Recently added" }
+                        ListElement { text: "By Percentage" }
+                        ListElement { text: "Book (A-Z)" }
+                        ListElement { text: "Author (A-Z)" }
+                    }
+                    
+                    delegate: MDropDownListItem
+                    {
+                        width: parent.width
+                        containingListview: listView
+                        
+                        onClicked:
+                            (index) =>
+                            {
+                                listView.currentIndex = index;
+                                root.close();
+                            }
+                    }
+                    
+                    Keys.onPressed: 
+                        (event) =>
+                        {
+                            if(event.key === Qt.Key_Return)
+                            {
+                                root.close();
+                            }
+                        }
                 }
             }
         }

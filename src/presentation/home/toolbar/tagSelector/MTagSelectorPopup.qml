@@ -50,48 +50,48 @@ Popup
             }
             
             
-            ColumnLayout
-            {
-                id: itemLayout
-                property MDropDownListItem currentSelected : null
+//            ColumnLayout
+//            {
+//                id: itemLayout
+//                property MDropDownListItem currentSelected : null
                 
-                width: parent.width
-                spacing: 0
+//                width: parent.width
+//                spacing: 0
                 
                 
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    text: "Technology"
-                    onClicked: itemLayout.changeSelected(this)
-                }
+//                MDropDownListItem
+//                {
+//                    Layout.fillWidth: true
+//                    text: "Technology"
+//                    onClicked: itemLayout.changeSelected(this)
+//                }
                 
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    text: "To read"
-                    onClicked: itemLayout.changeSelected(this)
-                }
+//                MDropDownListItem
+//                {
+//                    Layout.fillWidth: true
+//                    text: "To read"
+//                    onClicked: itemLayout.changeSelected(this)
+//                }
                 
-                MDropDownListItem
-                {
-                    Layout.fillWidth: true
-                    text: "Romance"
-                    onClicked: itemLayout.changeSelected(this)
-                }
+//                MDropDownListItem
+//                {
+//                    Layout.fillWidth: true
+//                    text: "Romance"
+//                    onClicked: itemLayout.changeSelected(this)
+//                }
                 
-                function changeSelected(newSelected)
-                {
-                    if(itemLayout.currentSelected != null)
-                    {
-                        itemLayout.currentSelected.selected = false;
-                    }
-                    itemLayout.currentSelected = newSelected;
-                    itemLayout.currentSelected.selected = true;
+//                function changeSelected(newSelected)
+//                {
+//                    if(itemLayout.currentSelected != null)
+//                    {
+//                        itemLayout.currentSelected.selected = false;
+//                    }
+//                    itemLayout.currentSelected = newSelected;
+//                    itemLayout.currentSelected.selected = true;
                     
-                    root.tagSelctionMade();
-                }
-            }
+//                    root.tagSelctionMade();
+//                }
+//            }
         }
     }
 }
