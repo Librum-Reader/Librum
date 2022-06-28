@@ -1,70 +1,22 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>login/MLoginPage.qml</file>
-        <file>home/MHome.qml</file>
-        <file>register/MRegisterPage.qml</file>
-        <file>freeBooks/MFreeBooks.qml</file>
-        <file>settings/MSettings.qml</file>
-        <file>addOns/MAddOns.qml</file>
-        <file>tools/MTools.qml</file>
-        <file>statistics/MStatistics.qml</file>
-        <file>register/MKeepMeUpdated.qml</file>
-        <file>register/MAcceptPolicy.qml</file>
         <file>modules/CustomComponents/MTitle.qml</file>
         <file>modules/CustomComponents/MLogo.qml</file>
         <file>modules/CustomComponents/qmldir</file>
         <file>modules/CustomComponents/MLabeledInputBox.qml</file>
         <file>modules/CustomComponents/MCheckBox.qml</file>
-        <file>home/MEmptyScreenContent.qml</file>
-        <file>settings/MAboutPage.qml</file>
-        <file>settings/MAppearancePage.qml</file>
-        <file>settings/MUpdatesPage.qml</file>
-        <file>settings/MAdvancedSettingsPage.qml</file>
-        <file>settings/MAccountPage.qml</file>
-        <file>settings/MStoragePage.qml</file>
-        <file>settings/MSupportUsPage.qml</file>
-        <file>forgotPassword/MForgotPasswordPage.qml</file>
         <file>modules/CustomComponents/MLabeledCheckBox.qml</file>
         <file>modules/CustomComponents/MBaseListItem.qml</file>
-        <file>freeBooks/explorerToolbar/MExplorerToolbar.qml</file>
         <file>modules/CustomComponents/MWrappedCheckBox.qml</file>
-        <file>freeBooks/explorerToolbar/MExplorerFilterByButton.qml</file>
-        <file>freeBooks/explorerToolbar/MExplorerFilterByPopup.qml</file>
-        <file>home/indexbar/MNavigationArrow.qml</file>
-        <file>home/indexbar/MIndexBar.qml</file>
-        <file>home/indexbar/MIndexBarItem.qml</file>
-        <file>home/indexbar/MBookCountSelectorPopup.qml</file>
-        <file>home/indexbar/MBookCountSelector.qml</file>
-        <file>home/toolbar/MToolbar.qml</file>
-        <file>home/toolbar/tagSelector/MTagSelectorButton.qml</file>
-        <file>home/toolbar/tagSelector/MTagSelectorPopup.qml</file>
-        <file>home/toolbar/sortByButton/MSortByButton.qml</file>
-        <file>home/toolbar/sortByButton/MSortByPopup.qml</file>
-        <file>home/toolbar/filterByButton/MFilterByButton.qml</file>
-        <file>home/toolbar/filterByButton/MFilterByPopup.qml</file>
-        <file>settings/settingsSidebar/MSettingsSidebarItem.qml</file>
-        <file>settings/settingsSidebar/MSettingsSidebar.qml</file>
         <file>sidebar/MProfileBox.qml</file>
         <file>sidebar/MProfilePopup.qml</file>
         <file>sidebar/MProfilePopupItem.qml</file>
         <file>sidebar/MSidebar.qml</file>
         <file>sidebar/MSidebarAnimations.qml</file>
         <file>sidebar/MSidebarItem.qml</file>
-        <file>freeBooks/MDownloadBookPopup.qml</file>
-        <file>home/MBook.qml</file>
-        <file>freeBooks/MMinimalBook.qml</file>
-        <file>readingView/MReadingView.qml</file>
-        <file>readingView/readingToolbar/MReadingToolBar.qml</file>
         <file>StyleSheet.qml</file>
         <file>IconSheet.qml</file>
-        <file>readingView/MChapterSidebar.qml</file>
-        <file>readingView/MBookmarksSidebar.qml</file>
-        <file>readingView/readingSearchbar/MReadingSearchbar.qml</file>
-        <file>readingView/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
-        <file>readingView/readingToolbar/MOptionsPopup.qml</file>
-        <file>settings/shortcutsPage/MShortcutsPage.qml</file>
-        <file>settings/shortcutsPage/MShortcutDelegate.qml</file>
         <file>modules/CustomComponents/buttons/MButton.qml</file>
         <file>modules/CustomComponents/buttons/MRemoveOptionButton.qml</file>
         <file>modules/CustomComponents/buttons/MSearchButton.qml</file>
@@ -73,6 +25,54 @@
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
         <file>modules/CustomComponents/MPageCleanup.qml</file>
-        <file>home/indexbar/MBookCountSelectorItem.qml</file>
+        <file>addOnsPage/MAddOnsPage.qml</file>
+        <file>forgotPasswordPage/MForgotPasswordPage.qml</file>
+        <file>freeBooksPage/MFreeBooksPage.qml</file>
+        <file>freeBooksPage/explorerToolbar/MExplorerFilterByButton.qml</file>
+        <file>freeBooksPage/explorerToolbar/MExplorerFilterByPopup.qml</file>
+        <file>freeBooksPage/explorerToolbar/MExplorerToolbar.qml</file>
+        <file>freeBooksPage/MDownloadBookPopup.qml</file>
+        <file>freeBooksPage/MMinimalBook.qml</file>
+        <file>homePage/MBook.qml</file>
+        <file>homePage/MEmptyScreenContent.qml</file>
+        <file>homePage/MHomePage.qml</file>
+        <file>homePage/toolbar/MToolbar.qml</file>
+        <file>homePage/toolbar/tagSelector/MTagSelectorPopup.qml</file>
+        <file>homePage/toolbar/tagSelector/MTagSelectorButton.qml</file>
+        <file>homePage/toolbar/sortByButton/MSortByButton.qml</file>
+        <file>homePage/toolbar/sortByButton/MSortByPopup.qml</file>
+        <file>homePage/toolbar/filterByButton/MFilterByButton.qml</file>
+        <file>homePage/toolbar/filterByButton/MFilterByPopup.qml</file>
+        <file>homePage/indexbar/MBookCountSelector.qml</file>
+        <file>homePage/indexbar/MBookCountSelectorItem.qml</file>
+        <file>homePage/indexbar/MBookCountSelectorPopup.qml</file>
+        <file>homePage/indexbar/MIndexBar.qml</file>
+        <file>homePage/indexbar/MIndexBarItem.qml</file>
+        <file>homePage/indexbar/MNavigationArrow.qml</file>
+        <file>loginPage/MLoginPage.qml</file>
+        <file>readingPage/MBookmarksSidebar.qml</file>
+        <file>readingPage/MChapterSidebar.qml</file>
+        <file>readingPage/MReadingPage.qml</file>
+        <file>readingPage/readingToolbar/MOptionsPopup.qml</file>
+        <file>readingPage/readingToolbar/MReadingToolBar.qml</file>
+        <file>readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
+        <file>readingPage/readingSearchbar/MReadingSearchbar.qml</file>
+        <file>registerPage/MAcceptPolicy.qml</file>
+        <file>registerPage/MKeepMeUpdated.qml</file>
+        <file>registerPage/MRegisterPage.qml</file>
+        <file>settingsPage/MAboutPage.qml</file>
+        <file>settingsPage/MAccountPage.qml</file>
+        <file>settingsPage/MAdvancedSettingsPage.qml</file>
+        <file>settingsPage/MAppearancePage.qml</file>
+        <file>settingsPage/MSettingsPage.qml</file>
+        <file>settingsPage/MStoragePage.qml</file>
+        <file>settingsPage/MSupportUsPage.qml</file>
+        <file>settingsPage/MUpdatesPage.qml</file>
+        <file>settingsPage/settingsSidebar/MSettingsSidebar.qml</file>
+        <file>settingsPage/settingsSidebar/MSettingsSidebarItem.qml</file>
+        <file>settingsPage/shortcutsPage/MShortcutDelegate.qml</file>
+        <file>settingsPage/shortcutsPage/MShortcutsPage.qml</file>
+        <file>toolsPage/MToolsPage.qml</file>
+        <file>statisticsPage/MStatisticsPage.qml</file>
     </qresource>
 </RCC>

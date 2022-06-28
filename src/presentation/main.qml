@@ -3,16 +3,16 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import "sidebar"
-import "home"
-import "login"
-import "register"
-import "freeBooks"
-import "settings"
-import "statistics"
-import "addOns"
-import "tools"
-import "forgotPassword"
-import "readingView"
+import "homePage"
+import "loginPage"
+import "registerPage"
+import "freeBooksPage"
+import "settingsPage"
+import "statisticsPage"
+import "addOnsPage"
+import "toolsPage"
+import "forgotPasswordPage"
+import "readingPage"
 
 
 ApplicationWindow
@@ -60,13 +60,13 @@ ApplicationWindow
     Component { id: loginPage; MLoginPage {} }
     Component { id: forgotPasswordPage; MForgotPasswordPage {} }
     Component { id: registerPage; MRegisterPage {} }
-    Component { id: homePage; MHome {} }
-    Component { id: freeBooksPage; MFreeBooks {} }
-    Component { id: settingsPage; MSettings {} }
-    Component { id: addOnsPage; MAddOns {} }
-    Component { id: toolsPage; MTools {} }
-    Component { id: statisticsPage; MStatistics {} }
-    Component { id: readingViewPage; MReadingView {} }
+    Component { id: homePage; MHomePage {} }
+    Component { id: freeBooksPage; MFreeBooksPage {} }
+    Component { id: settingsPage; MSettingsPage {} }
+    Component { id: addOnsPage; MAddOnsPage {} }
+    Component { id: toolsPage; MToolsPage {} }
+    Component { id: statisticsPage; MStatisticsPage {} }
+    Component { id: readingViewPage; MReadingPage {} }
     
     
     function loadPage(page, sidebarItem, doSamePageCheck = true)
@@ -87,7 +87,7 @@ ApplicationWindow
     
     function terminateActionOfPreviousPage(page, sidebarItem)
     {
-        if(pageManager.currentItem instanceof MSettings)
+        if(pageManager.currentItem instanceof MSettingsPage)
         {
             if(!pageManager.currentItem.ensureSettingsPageIsSaved(switchPage, page, sidebarItem))
                 return false;
