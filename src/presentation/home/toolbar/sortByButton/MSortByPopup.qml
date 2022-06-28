@@ -11,8 +11,8 @@ Popup
     id: root
     property int maxHeight: 200
     
-    padding: 0
     focus: true
+    padding: 0
     implicitWidth: 151
     background: Rectangle
     {
@@ -63,12 +63,13 @@ Popup
                     id: listView
                     Layout.fillWidth: true
                     Layout.preferredHeight: contentHeight
-                    Layout.maximumHeight: root.maxHeight
+                    Layout.maximumHeight: 200
                     maximumFlickVelocity: 550
                     currentIndex: 0
                     keyNavigationEnabled: true
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
+                    ScrollBar.vertical: ScrollBar { }
                     
                     model: ListModel
                     {
