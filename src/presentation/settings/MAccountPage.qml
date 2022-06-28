@@ -12,7 +12,7 @@ Page
     property alias pageCleanup: pageCleanup
     property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
     readonly property bool hasCleanup: true
-    property bool unsavedChanges: true
+    property bool unsavedChanges: false
     
     horizontalPadding: 48
     topPadding: 64
@@ -128,6 +128,8 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
+                        
+                        onEdited: root.unsavedChanges = true
                     }
                     
                     MLabeledInputBox
@@ -142,6 +144,8 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
+                        
+                        onEdited: root.unsavedChanges = true
                     }
                     
                     MLabeledInputBox
@@ -156,6 +160,8 @@ Page
                         inputFontSize: 13
                         borderWidth: 1
                         borderRadius: 4
+                        
+                        onEdited: root.unsavedChanges = true
                     }
                 }
                 
@@ -268,6 +274,8 @@ Page
                         borderRadius: 4
                         imagePath: Icons.eyeOn
                         toggledImagePath: Icons.eyeOff
+                        
+                        onEdited: root.unsavedChanges = true
                     }
                     
                     MLabeledInputBox
@@ -282,6 +290,8 @@ Page
                         borderRadius: 4
                         imagePath: Icons.eyeOn
                         toggledImagePath: Icons.eyeOff
+                        
+                        onEdited: root.unsavedChanges = true
                     }
                 }
             }
@@ -332,6 +342,8 @@ Page
                     fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
+                    
+                    onClicked: root.unsavedChanges = true
                 }
                 
                 MLabeledCheckBox
@@ -345,6 +357,8 @@ Page
                     fontColor: Style.colorBaseText
                     spacing: 12
                     checked: true
+                    
+                    onClicked: root.unsavedChanges = true
                 }
                 
                 MLabeledCheckBox
@@ -357,6 +371,8 @@ Page
                     fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
+                    
+                    onClicked: root.unsavedChanges = true
                 }
                 
                 MLabeledCheckBox
@@ -369,6 +385,8 @@ Page
                     fontSize: 13
                     fontColor: Style.colorBaseText
                     spacing: 12
+                    
+                    onClicked: root.unsavedChanges = true
                 }
             }
         }
@@ -378,8 +396,9 @@ Page
     MForgotToSaveChangesPopup
     {
         id: forgotToSaveChangesDialog
-        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - root.horizontalPadding / 2
-        y: root.height / 2 - implicitHeight / 2 - root.topPadding - 25
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding
+        y: root.height / 2 - implicitHeight / 2 - root.topPadding - 50
+        
         saveMethod: saveAccountSettings
         dontSaveMethod: () => { root.unsavedChanges = false; }
         

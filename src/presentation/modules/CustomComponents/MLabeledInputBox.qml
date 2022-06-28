@@ -24,7 +24,7 @@ Item
     property int textPadding : 15
     property string imagePath : ""
     property string toggledImagePath : ""
-    property bool isError : false
+    signal edited
     
     implicitWidth: 100
     implicitHeight: layout.height
@@ -57,7 +57,7 @@ Item
             background: Rectangle
             {
                 border.width: root.borderWidth
-                border.color: (root.isError ? properties.colorError : root.borderColor)
+                border.color: root.borderColor
                 radius: root.borderRadius
             }
             
@@ -88,7 +88,7 @@ Item
                         color: "transparent"
                     }
                     
-                    onTextEdited: root.isError = false
+                    onTextEdited: root.edited()
                 }
                 
                 Image
