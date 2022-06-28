@@ -27,6 +27,7 @@ Popup
         opacity: 1
     }
     
+    
     ColumnLayout
     {
         id: mainLayout
@@ -51,7 +52,7 @@ Popup
             Layout.fillWidth: true
             topPadding: 86
             horizontalPadding: 64
-            bottomPadding: 40
+            bottomPadding: 62
             background: Rectangle
             {
                 color: Style.colorBackground
@@ -97,15 +98,15 @@ Popup
                     id: buttonRow
                     Layout.preferredWidth: parent.width
                     Layout.preferredHeight: acceptButton.height
-                    Layout.topMargin: 56
-                    spacing: 0
+                    Layout.topMargin: 24
+                    spacing: 46
                     
                     MButton
                     {
                         id: acceptButton
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 40
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
+                        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                         borderWidth: activeFocus ? 0 : 1
                         borderColor: Style.colorLightBorder2
                         backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
@@ -143,7 +144,7 @@ Popup
                         id: declineButton
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 40
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                        Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
                         borderWidth: focus ? 0 : 1
                         borderColor: Style.colorLightBorder2
                         backgroundColor: focus ? Style.colorBasePurple : "transparent"
