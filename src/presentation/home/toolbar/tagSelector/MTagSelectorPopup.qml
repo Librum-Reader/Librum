@@ -64,7 +64,7 @@ Popup
                     Layout.preferredHeight: contentHeight
                     Layout.maximumHeight: 200
                     maximumFlickVelocity: 550
-                    currentIndex: 0
+                    currentIndex: -1
                     keyNavigationEnabled: true
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
