@@ -87,6 +87,7 @@ Item
                 
                 onTagSelctionMade:
                 {
+                    close();
                     resetTagsButton.visible = true;
                 }
             }

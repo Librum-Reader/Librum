@@ -11,12 +11,15 @@ Popup
     id: root
     signal tagSelctionMade
     
+    focus: true
     padding: 0
     implicitWidth: 151
     background: Rectangle
     {
         color: "transparent"
     }
+    
+    onOpenedChanged: if(opened) listView.forceActiveFocus();
     
     
     ColumnLayout
@@ -50,48 +53,58 @@ Popup
             }
             
             
-//            ColumnLayout
-//            {
-//                id: itemLayout
-//                property MDropDownListItem currentSelected : null
+            ColumnLayout
+            {
+                width: parent.width
                 
-//                width: parent.width
-//                spacing: 0
-                
-                
-//                MDropDownListItem
-//                {
-//                    Layout.fillWidth: true
-//                    text: "Technology"
-//                    onClicked: itemLayout.changeSelected(this)
-//                }
-                
-//                MDropDownListItem
-//                {
-//                    Layout.fillWidth: true
-//                    text: "To read"
-//                    onClicked: itemLayout.changeSelected(this)
-//                }
-                
-//                MDropDownListItem
-//                {
-//                    Layout.fillWidth: true
-//                    text: "Romance"
-//                    onClicked: itemLayout.changeSelected(this)
-//                }
-                
-//                function changeSelected(newSelected)
-//                {
-//                    if(itemLayout.currentSelected != null)
-//                    {
-//                        itemLayout.currentSelected.selected = false;
-//                    }
-//                    itemLayout.currentSelected = newSelected;
-//                    itemLayout.currentSelected.selected = true;
+                ListView
+                {
+                    id: listView
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: contentHeight
+                    Layout.maximumHeight: 200
+                    maximumFlickVelocity: 550
+                    currentIndex: 0
+                    keyNavigationEnabled: true
+                    clip: true
+                    boundsBehavior: Flickable.StopAtBounds
+                    ScrollBar.vertical: ScrollBar { }
                     
-//                    root.tagSelctionMade();
-//                }
-//            }
+                    model: ListModel
+                    {
+                        ListElement { text: "Technology" }
+                        ListElement { text: "Favourite" }
+                        ListElement { text: "Romance" }
+                        ListElement { text: "Comedy" }
+                        ListElement { text: "Sports" }
+                        ListElement { text: "Physics" }
+                        ListElement { text: "Blockchain" }
+                        ListElement { text: "Psychology" }
+                    }
+                    
+                    delegate: MDropDownListItem
+                    {
+                        width: parent.width
+                        containingListview: listView
+                        
+                        onClicked:
+                            (index) =>
+                            {
+                                listView.currentIndex = index;
+                                root.tagSelctionMade();
+                            }
+                    }
+                    
+                    Keys.onPressed: 
+                        (event) =>
+                        {
+                            if(event.key === Qt.Key_Return)
+                            {
+                                root.tagSelctionMade();
+                            }
+                        }
+                }
+            }
         }
     }
 }
