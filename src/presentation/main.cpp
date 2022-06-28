@@ -1,5 +1,7 @@
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QInputDialog>
+#include <QtWidgets/QMessageBox>
 #include <QQmlApplicationEngine>
-#include <QGuiApplication>
 #include <QQmlContext>
 #include <QTranslator>
 #include <QLocale>
@@ -7,14 +9,17 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
+#include "qwindowdefs.h"
 #include "sidebar_state.hpp"
 #include "app_information.hpp"
 
 
 int main(int argc, char *argv[])
 {
+    
+    
     // App
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");

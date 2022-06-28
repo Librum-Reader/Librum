@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt.labs.platform
 import Librum.extensions.sidebar
 import CustomComponents
 import Librum.style
@@ -79,6 +80,8 @@ Page
                 fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: Icons.plusWhite
+                
+                onClicked: fileDialog.open()
             }
         }
         
@@ -148,5 +151,11 @@ Page
             Layout.fillWidth: true
             Layout.topMargin: 46
         }
+    }
+    
+    FileDialog
+    {
+        id: fileDialog
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }
 }
