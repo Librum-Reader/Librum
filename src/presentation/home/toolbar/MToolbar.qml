@@ -9,7 +9,6 @@ import CustomComponents
 Item
 {
     id: root
-    property bool showTagBox : true
     signal searchRequested(string query)
     signal checkBoxClicked()
     
@@ -26,7 +25,6 @@ Item
     RowLayout
     {
         id: mainLayout
-        property int popUpTopSpacing : 6
         
         anchors.fill: parent
         spacing: 12
@@ -41,56 +39,20 @@ Item
         MSortByButton
         {
             id: sortByButton
-            
-            onClicked: (sortByPopup.opened) ? sortByPopup.close() : sortByPopup.open()
-            
-            MSortByPopup
-            {
-                id: sortByPopup
-                y: sortByButton.y + sortByButton.height + mainLayout.popUpTopSpacing
-                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-            }
         }
         
         MFilterByButton
         {
             id: filterByButton
             
-            onClicked: (filterByPopup.opened) ? filterByPopup.close() : filterByPopup.open()
-            
-            MFilterByPopup
-            {
-                id: filterByPopup
-                y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
-                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-                
-                onFilterQuerySent:
-                {
-                    close();
-                    resetFiltersButton.visible = true;
-                }
-            }
+            onFilterSelected: resetFiltersButton.visible = true;        
         }
         
         MTagSelectorButton
         {
             id: tagSelector
-            visible: root.showTagBox
             
-            onClicked: (tagSelectorPopup.opened) ? tagSelectorPopup.close() : tagSelectorPopup.open()
-            
-            MTagSelectorPopup
-            {
-                id: tagSelectorPopup
-                y: tagSelector.y + tagSelector.height + mainLayout.popUpTopSpacing
-                closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-                
-                onTagSelctionMade:
-                {
-                    close();
-                    resetTagsButton.visible = true;
-                }
-            }
+            onTagSelected: resetTagsButton.visible = true;
         }
         
         MRemoveOptionButton

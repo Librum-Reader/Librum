@@ -8,7 +8,7 @@ import Librum.icons
 Item
 {
     id: root
-    signal clicked()
+    signal tagSelected
     
     implicitWidth: 100
     implicitHeight: 36
@@ -57,7 +57,20 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: root.clicked()
+        onClicked: selectorPopup.open()
+    }
+    
+    MTagSelectorPopup
+    {
+        id: selectorPopup
+        y: root.height + 6
+        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+        
+        onSelected:
+        {
+            close();
+            root.tagSelected();
+        }
     }
     
     

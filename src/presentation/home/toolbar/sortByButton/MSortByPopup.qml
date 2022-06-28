@@ -10,6 +10,7 @@ Popup
 {
     id: root
     property int maxHeight: 200
+    signal selected
     
     focus: true
     padding: 0
@@ -89,7 +90,7 @@ Popup
                             (index) =>
                             {
                                 listView.currentIndex = index;
-                                root.close();
+                                root.selected();
                             }
                     }
                     
@@ -98,7 +99,7 @@ Popup
                         {
                             if(event.key === Qt.Key_Return)
                             {
-                                root.close();
+                                root.selected();
                             }
                         }
                 }

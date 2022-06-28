@@ -8,7 +8,7 @@ import Librum.icons
 Item
 {
     id: root
-    signal clicked()
+    signal sortBySelected
     
     implicitWidth: 100
     implicitHeight: 36
@@ -65,9 +65,19 @@ Item
     {
         anchors.fill: parent
         
-        onClicked:
+        onClicked: sortByPopup.open()
+    }
+    
+    MSortByPopup
+    {
+        id: sortByPopup
+        y: root.height + 6
+        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+        
+        onSelected:
         {
-            root.clicked();
+            root.sortBySelected();
+            close();
         }
     }
     

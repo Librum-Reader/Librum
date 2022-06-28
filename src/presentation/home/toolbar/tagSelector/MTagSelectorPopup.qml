@@ -9,7 +9,7 @@ import Librum.icons
 Popup
 {
     id: root
-    signal tagSelctionMade
+    signal selected
     
     focus: true
     padding: 0
@@ -91,7 +91,7 @@ Popup
                             (index) =>
                             {
                                 listView.currentIndex = index;
-                                root.tagSelctionMade();
+                                root.selected();
                             }
                     }
                     
@@ -100,7 +100,7 @@ Popup
                         {
                             if(event.key === Qt.Key_Return)
                             {
-                                root.tagSelctionMade();
+                                root.selected();
                             }
                         }
                 }

@@ -9,7 +9,7 @@ Item
 {
     id: root
     property bool opened : false
-    signal clicked()
+    signal filterSelected
     
     implicitWidth: 100
     implicitHeight: 36
@@ -58,7 +58,20 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: root.clicked()
+        onClicked: selectionPopup.open()
+    }
+    
+    MFilterByPopup
+    {
+        id: selectionPopup
+        y: root.height + 6
+        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+        
+        onFilterQuerySent:
+        {
+            close();
+            root.filterSelected();
+        }
     }
     
     
