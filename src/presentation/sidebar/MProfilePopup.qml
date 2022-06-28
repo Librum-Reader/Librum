@@ -62,7 +62,12 @@ Popup
             imageWidth: 19
             textSpacing: 8
             
-            onClicked: loadPage(settingsPage, sidebar.settingsItem);
+            onClicked:
+            {
+                loadPage(settingsPage, sidebar.settingsItem);
+                pageManager.currentItem.loadSettingsAccountPage();
+                root.close();
+            }
         }
         
         

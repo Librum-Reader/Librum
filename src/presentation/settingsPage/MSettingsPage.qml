@@ -86,4 +86,10 @@ Page
         settingsPageManager.replace(page);
         settingsSidebar.changeSelectedSettingsItem(sidebarItem);
     }
+
+    
+    function loadSettingsAccountPage()
+    {
+        loadSettingsPage(accountPage, settingsSidebar.accountItem);
+    }
 }
