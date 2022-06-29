@@ -156,6 +156,12 @@ Page
     FileDialog
     {
         id: fileDialog
+        acceptLabel: "Import"
+        fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+        nameFilters: ["Text files (*.txt)", "PDF files (*.pdf)", "MOBI files (*.pdf)",
+                       "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
+                       "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
+                       "DJVU files (*.djvu)"]
     }
 }
