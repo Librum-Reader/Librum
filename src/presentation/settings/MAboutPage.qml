@@ -123,6 +123,8 @@ Page
                     fontColor: Style.colorMediumGreen
                     imageSpacing: 6
                     opacityOnPressed: 0.8
+                    
+                    onClicked: loadSettingsPage(updatesPage, settingsSidebar.updatesItem)
                 }
             }
         }
