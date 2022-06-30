@@ -74,5 +74,7 @@
         <file>settings/shortcutsPage/MShortcutsPage.qml</file>
         <file>settings/settingsSidebar/MSettingsSidebar.qml</file>
         <file>settings/settingsSidebar/MSettingsSidebarItem.qml</file>
+        <file>settings/updatesPage/MUpdatesAvailable.qml</file>
+        <file>settings/updatesPage/MUpToDate.qml</file>
     </qresource>
 </RCC>
