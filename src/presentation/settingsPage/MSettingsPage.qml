@@ -10,6 +10,15 @@ import "shortcutsPage"
 Page
 {
     id: settingsManager
+    property alias settingsSidebar: settingsSidebar
+    property alias aboutPage: aboutPage
+    property alias appearancePage: appearancePage
+    property alias shortcutsPage: shortcutsPage
+    property alias updatesPage: updatesPage
+    property alias advancedSettingsPage: advancedSettingsPage
+    property alias accountPage: accountPage
+    property alias storagePage: storagePage
+    property alias supportUsPage: supportUsPage
     
     background: Rectangle
     {
@@ -85,11 +94,5 @@ Page
     {
         settingsPageManager.replace(page);
         settingsSidebar.changeSelectedSettingsItem(sidebarItem);
-    }
-
-    
-    function loadSettingsAccountPage()
-    {
-        loadSettingsPage(accountPage, settingsSidebar.accountItem);
     }
 }

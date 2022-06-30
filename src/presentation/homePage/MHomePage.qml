@@ -129,7 +129,7 @@ Page
                 model: indexBar.selectedAmountOfBooks
                 delegate: MBook
                 { 
-                    onClicked: loadPage(readingViewPage)
+                    onClicked: loadPage(readingPage)
                 }
             }
         }

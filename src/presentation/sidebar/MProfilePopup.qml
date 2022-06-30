@@ -64,8 +64,7 @@ Popup
             
             onClicked:
             {
-                loadPage(settingsPage, sidebar.settingsItem);
-                pageManager.currentItem.loadSettingsAccountPage();
+                loadSettingsAccountPage();
                 root.close();
             }
         }

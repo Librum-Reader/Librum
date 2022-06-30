@@ -226,6 +226,13 @@ Popup
                         imageSize: 20
                         imageLeftMargin: 1
                         imageSpacing: 8
+                        
+
+                        onClicked:
+                        {
+                            loadSettingsAppearancePage();
+                            root.close();
+                        }                   
                     }
                 }
             }

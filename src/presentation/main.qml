@@ -18,6 +18,8 @@ import "readingPage"
 ApplicationWindow
 {
     id: root
+    property alias pageManager: pageManager
+    
     minimumHeight: 590
     minimumWidth: 542
     visible: true
@@ -66,14 +68,14 @@ ApplicationWindow
     Component { id: addOnsPage; MAddOnsPage {} }
     Component { id: toolsPage; MToolsPage {} }
     Component { id: statisticsPage; MStatisticsPage {} }
-    Component { id: readingViewPage; MReadingPage {} }
+    Component { id: readingPage; MReadingPage {} }
     
     
     function loadPage(page, sidebarItem, doSamePageCheck = true)
     {
         if(newPageIsTheSameAsOldPage(sidebarItem) && doSamePageCheck)
             return;
-                
+        
         if(!terminateActionOfPreviousPage(page, sidebarItem))
             return;
         
@@ -101,5 +103,25 @@ ApplicationWindow
         pageManager.replace(page);
         pageManager.pageHasSidebar = sidebarItem === undefined ? false : true;
         if(sidebarItem !== undefined) sidebar.changeSelectedItem(sidebarItem);
+    }
+    
+    
+    
+    // Deep navigation
+    
+    function loadSettingsAccountPage()
+    {
+        loadPage(settingsPage, sidebar.settingsItem, false);
+        
+        let page = pageManager.currentItem;
+        page.loadSettingsPage(page.accountPage, page.settingsSidebar.accountItem);
+    }
+    
+    function loadSettingsAppearancePage()
+    {
+        loadPage(settingsPage, sidebar.settingsItem, false);
+        
+        let page = pageManager.currentItem;
+        page.loadSettingsPage(page.appearancePage, page.settingsSidebar.appearanceItem);
     }
 }
