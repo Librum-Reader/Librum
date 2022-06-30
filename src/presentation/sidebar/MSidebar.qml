@@ -181,7 +181,7 @@ Item
                 imageSource: Icons.settings
                 labelContent: "Settings"
                 
-                onClicked: loadPage(settingsPage, root.settingsItem)
+                onClicked: loadPage(settings, root.settingsItem)
             }
             
             Item

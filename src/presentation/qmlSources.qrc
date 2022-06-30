@@ -60,19 +60,19 @@
         <file>registerPage/MAcceptPolicy.qml</file>
         <file>registerPage/MKeepMeUpdated.qml</file>
         <file>registerPage/MRegisterPage.qml</file>
-        <file>settingsPage/MAboutPage.qml</file>
-        <file>settingsPage/MAccountPage.qml</file>
-        <file>settingsPage/MAdvancedSettingsPage.qml</file>
-        <file>settingsPage/MAppearancePage.qml</file>
-        <file>settingsPage/MSettingsPage.qml</file>
-        <file>settingsPage/MStoragePage.qml</file>
-        <file>settingsPage/MSupportUsPage.qml</file>
-        <file>settingsPage/MUpdatesPage.qml</file>
-        <file>settingsPage/settingsSidebar/MSettingsSidebar.qml</file>
-        <file>settingsPage/settingsSidebar/MSettingsSidebarItem.qml</file>
-        <file>settingsPage/shortcutsPage/MShortcutDelegate.qml</file>
-        <file>settingsPage/shortcutsPage/MShortcutsPage.qml</file>
         <file>toolsPage/MToolsPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
+        <file>settings/MAboutPage.qml</file>
+        <file>settings/MAccountPage.qml</file>
+        <file>settings/MAdvancedSettingsPage.qml</file>
+        <file>settings/MAppearancePage.qml</file>
+        <file>settings/MSettings.qml</file>
+        <file>settings/MStoragePage.qml</file>
+        <file>settings/MSupportUsPage.qml</file>
+        <file>settings/updatesPage/MUpdatesPage.qml</file>
+        <file>settings/shortcutsPage/MShortcutDelegate.qml</file>
+        <file>settings/shortcutsPage/MShortcutsPage.qml</file>
+        <file>settings/settingsSidebar/MSettingsSidebar.qml</file>
+        <file>settings/settingsSidebar/MSettingsSidebarItem.qml</file>
     </qresource>
 </RCC>

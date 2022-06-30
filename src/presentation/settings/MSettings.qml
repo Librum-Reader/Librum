@@ -5,6 +5,7 @@ import Librum.style
 import CustomComponents
 import "settingsSidebar"
 import "shortcutsPage"
+import "updatesPage"
 
 
 Page

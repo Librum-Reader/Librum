@@ -30,7 +30,7 @@ Page
             id: title
             Layout.topMargin: 64
             titleText: "Updates"
-            descriptionText: "Anything new update?"
+            descriptionText: "Any new update?"
             titleSize: 25
             descriptionSize: 13.25
         }

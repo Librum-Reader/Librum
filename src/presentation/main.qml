@@ -7,7 +7,7 @@ import "homePage"
 import "loginPage"
 import "registerPage"
 import "freeBooksPage"
-import "settingsPage"
+import "settings"
 import "statisticsPage"
 import "addOnsPage"
 import "toolsPage"
@@ -64,7 +64,7 @@ ApplicationWindow
     Component { id: registerPage; MRegisterPage {} }
     Component { id: homePage; MHomePage {} }
     Component { id: freeBooksPage; MFreeBooksPage {} }
-    Component { id: settingsPage; MSettingsPage {} }
+    Component { id: settings; MSettings {} }
     Component { id: addOnsPage; MAddOnsPage {} }
     Component { id: toolsPage; MToolsPage {} }
     Component { id: statisticsPage; MStatisticsPage {} }
@@ -89,7 +89,7 @@ ApplicationWindow
     
     function terminateActionOfPreviousPage(page, sidebarItem)
     {
-        if(pageManager.currentItem instanceof MSettingsPage)
+        if(pageManager.currentItem instanceof MSettings)
         {
             if(!pageManager.currentItem.ensureSettingsPageIsSaved(switchPage, page, sidebarItem))
                 return false;
@@ -107,11 +107,11 @@ ApplicationWindow
     
     
     
-    // Deep navigation
+    // Nested settings navigation
     
     function loadSettingsAccountPage()
     {
-        loadPage(settingsPage, sidebar.settingsItem, false);
+        loadPage(settings, sidebar.settingsItem, false);
         
         let page = pageManager.currentItem;
         page.loadSettingsPage(page.accountPage, page.settingsSidebar.accountItem);
@@ -119,7 +119,7 @@ ApplicationWindow
     
     function loadSettingsAppearancePage()
     {
-        loadPage(settingsPage, sidebar.settingsItem, false);
+        loadPage(settings, sidebar.settingsItem, false);
         
         let page = pageManager.currentItem;
         page.loadSettingsPage(page.appearancePage, page.settingsSidebar.appearanceItem);
