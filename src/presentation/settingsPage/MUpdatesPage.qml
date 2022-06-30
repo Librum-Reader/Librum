@@ -106,18 +106,18 @@ Page
                 MButton
                 {
                     id: downloadButton
-                    Layout.preferredWidth: 120
-                    Layout.preferredHeight: 34
+                    Layout.preferredWidth: 132
+                    Layout.preferredHeight: 36
                     Layout.topMargin: 14
-                    borderColor: Style.colorLightBorder
-                    backgroundColor: Style.colorLightGrayBackground
-                    imagePath: Icons.arrowDownBlack
-                    imageSize: 14
-                    imageSpacing: 6
+                    borderWidth: 0
+                    backgroundColor: Style.colorBasePurple
+                    imagePath: Icons.downloadWhite
+                    imageSize: 16
+                    imageSpacing: 8
                     text: "Download"
-                    fontSize: 11.7
+                    fontSize: 12
                     fontWeight: Font.Bold
-                    fontColor: Style.colorBaseText
+                    fontColor: Style.colorBrightText
                     opacityOnPressed: 0.8
                 }
                 
