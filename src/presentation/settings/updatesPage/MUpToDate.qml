@@ -67,7 +67,7 @@ Item
                 {
                     Layout.fillWidth: true
                     Layout.topMargin: 7
-                    text: "Make sure to check for updates regularly, so you dont miss out any great features."
+                    text: "Make sure to check for updates regularly, so you dont miss out on any great features."
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 15
@@ -77,7 +77,7 @@ Item
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.topMargin: 26
+                    Layout.topMargin: 24
                     text: "Your current version is:"
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
@@ -100,8 +100,8 @@ Item
                 {
                     id: checkIllustration
                     z: -1
-                    Layout.topMargin: 5
-                    Layout.leftMargin: -40
+                    Layout.topMargin: 8
+                    Layout.leftMargin: -20
                     source: Icons.checkBubbleIllustration
                     sourceSize.width: 320
                     fillMode: Image.PreserveAspectFit
@@ -111,7 +111,7 @@ Item
                 Label
                 {
                     Layout.fillWidth: true
-                    Layout.topMargin: 20
+                    Layout.topMargin: 32
                     text: "See our latest changes at:"
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
