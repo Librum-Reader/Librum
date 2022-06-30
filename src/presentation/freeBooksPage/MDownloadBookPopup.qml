@@ -88,7 +88,7 @@ Popup
             }
         }
         
-        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
+//        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
         
         Pane
         {
@@ -98,7 +98,7 @@ Popup
             Layout.maximumHeight: 434
             Layout.minimumHeight: 360
             Layout.leftMargin: 1
-            verticalPadding: 32
+            verticalPadding: 34
             horizontalPadding: 25
             
             background: Rectangle
@@ -253,7 +253,7 @@ Popup
             }
         }
         
-        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
+//        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
         
         Pane
         {
