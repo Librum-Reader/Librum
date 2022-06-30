@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt.labs.platform
 import CustomComponents
 import Librum.style
 import Librum.icons
@@ -89,6 +90,8 @@ Popup
                         borderWidth: 0
                         imagePath: Icons.downloadBlack
                         imageSize: 22
+                        
+                        onClicked: downloadFileDialog.open()
                     }
                     
                     MButton
@@ -237,5 +240,13 @@ Popup
                 }
             }
         }
+    }
+    
+    FileDialog
+    {
+        id: downloadFileDialog
+        acceptLabel: "Save"
+        fileMode: FileDialog.SaveFile
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }
 }
