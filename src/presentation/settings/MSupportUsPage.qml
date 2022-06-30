@@ -72,7 +72,7 @@ Page
                 {
                     Layout.fillWidth: true
                     Layout.topMargin: 15
-                    text: "We are a small team of freelancing developers creating free apps for the community, we love"
+                    text: "We are a small team of freelancing developers creating free apps for the community. We love"
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 14
