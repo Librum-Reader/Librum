@@ -121,7 +121,7 @@ Page
     {
         id: getBookPopup
         
-        x: Math.trunc(root.width / 2) - Math.trunc(width / 2)
-        y: Math.trunc(root.height / 2) - Math.trunc(height / 2)
+        x: Math.trunc(root.width / 2) - Math.trunc(width / 2) - 30
+        y: Math.trunc(root.height / 2) - Math.trunc(height / 2) - 15
     }
 }

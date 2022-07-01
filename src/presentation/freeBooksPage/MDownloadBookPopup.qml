@@ -43,8 +43,8 @@ Popup
             id: closeButton
             Layout.preferredHeight: 32
             Layout.preferredWidth: 32
-            Layout.topMargin: 16
-            Layout.rightMargin: 18
+            Layout.topMargin: 12
+            Layout.rightMargin: 14
             Layout.alignment: Qt.AlignTop | Qt.AlignRight
             backgroundColor: "transparent"
             opacityOnPressed: 0.7
@@ -53,6 +53,8 @@ Popup
             borderColorOnPressed: Style.colorLightBorder
             imagePath: Icons.closeBlack
             imageSize: 14
+            
+            onClicked: root.close()
         }
         
         Pane
@@ -259,28 +261,32 @@ Popup
                     MButton
                     {
                         id: downloadButton
-                        Layout.preferredWidth: 137
+                        Layout.preferredWidth: 140
                         Layout.preferredHeight: 38
                         active: true
                         borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder2
+                        borderColor: Style.colorLightBorder
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         text: "Download"
-                        fontColor: active ? Style.colorBackground : Style.colorBaseTitle
+                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
                         fontWeight: Font.Bold
                         fontSize: 12
-                        imagePath: active ? Icons.downloadWhite : Icons.downloadBlack
+                        imagePath: active ? Icons.downloadWhite : Icons.downloadGray
                         imageSize: 18
                         
                         onClicked: root.close()
                         
-                        Keys.onPressed: 
+                        Keys.onPressed:
                             (event) =>
                             {
                                 if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
                                 {
                                     downloadButton.active = false;
                                     cancelButton.active = true;
+                                }
+                                else if(event.key === Qt.Key_Return)
+                                {
+                                    root.close();
                                 }
                             }
                         
@@ -291,14 +297,14 @@ Popup
                     MButton
                     {
                         id: cancelButton
-                        Layout.preferredWidth: 100
+                        Layout.preferredWidth: 140
                         Layout.preferredHeight: 38
                         borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder2
+                        borderColor: Style.colorLightBorder
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         opacityOnPressed: 0.7
                         text: "Cancel"
-                        fontColor: active ? Style.colorBackground : Style.colorBaseTitle
+                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
                         fontWeight: Font.Bold
                         fontSize: 12
                         
@@ -311,6 +317,10 @@ Popup
                                 {
                                     cancelButton.active = false;
                                     downloadButton.active = true;
+                                }
+                                else if(event.key === Qt.Key_Return)
+                                {
+                                    root.close();
                                 }
                             }
                         
