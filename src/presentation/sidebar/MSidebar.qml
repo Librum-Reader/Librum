@@ -91,8 +91,7 @@ Item
                 id: freeBooksItem
                 Layout.topMargin: 16
                 Layout.leftMargin: 10
-                imageWidth: 45
-                imageHeight: 45
+                imageWidth: 31
                 imageSource: Icons.downloadGray
                 labelContent: "Free books"
                 
@@ -115,6 +114,7 @@ Item
                 Layout.topMargin: 15
                 Layout.leftMargin: 10
                 imageWidth: 30
+                preserveImageFit: false
                 imageHeight: 28
                 imageSource: Icons.home
                 labelContent: "Home"
@@ -128,7 +128,6 @@ Item
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 28
-                imageHeight: 28
                 imageSource: Icons.pieChart
                 labelContent: "Statistics"
                 
@@ -151,7 +150,6 @@ Item
                 Layout.topMargin: 15
                 Layout.leftMargin: 10
                 imageWidth: 30
-                imageHeight: 30
                 imageSource: Icons.tool
                 labelContent: "Tools"
                 
@@ -164,7 +162,6 @@ Item
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 30
-                imageHeight: 30
                 imageSource: Icons.addOns
                 labelContent: "Add-ons"
                 
@@ -177,7 +174,6 @@ Item
                 Layout.topMargin: 13
                 Layout.leftMargin: 10
                 imageWidth: 36
-                imageHeight: 36
                 imageSource: Icons.settings
                 labelContent: "Settings"
                 

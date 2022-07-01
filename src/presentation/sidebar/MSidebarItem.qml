@@ -10,7 +10,8 @@ Item
     property int closedWidth : 52
     property int openedWidth : 177
     property int imageWidth : 30
-    property int imageHeight : 30
+    property int imageHeight : 0
+    property bool preserveImageFit: true
     property string imageSource : ""
     property string labelContent : "Content here"
     property alias  labelVisibility : label.visible
@@ -55,6 +56,7 @@ Item
                     id: icon
                     sourceSize.width: root.imageWidth
                     sourceSize.height: root.imageHeight
+                    fillMode: root.preserveImageFit ? Image.PreserveAspectFit : Image.Stretch
                     anchors.centerIn: parent
                     source: root.imageSource
                     antialiasing: false                    
