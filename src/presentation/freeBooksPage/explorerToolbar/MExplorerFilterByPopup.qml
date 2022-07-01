@@ -164,7 +164,7 @@ Popup
                     Layout.fillWidth: true
                     Layout.preferredHeight: 28
                     Layout.topMargin: 8
-                    buttonRadius: 3
+                    radius: 3
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Apply Filter"

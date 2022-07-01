@@ -11,8 +11,8 @@ Popup
     id: root
     property int contentPadding: 16
     
-    implicitWidth: 829
-    implicitHeight: 566
+    implicitWidth: 751
+    focus: true
     padding: 0
     
     modal: true
@@ -24,9 +24,11 @@ Popup
     
     background: Rectangle
     {
-        radius: 4
-        color: Style.colorLightGray
+        radius: 6
+        color: Style.colorBackground
     }
+    
+    onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
     
     
     ColumnLayout
@@ -36,74 +38,35 @@ Popup
         spacing: 0
         
         
-        Pane
+        MButton
         {
-            id: header
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.maximumHeight: 64
-            Layout.minimumHeight: 36
-            horizontalPadding: root.contentPadding
-            
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-            
-            
-            RowLayout
-            {
-                id: headerLayout
-                anchors.fill: parent
-                spacing: 0
-                
-                
-                Label
-                {
-                    id: title
-                    
-                    Layout.alignment: Qt.AlignLeft
-                    text: "Get a new book"
-                    verticalAlignment: Text.AlignBottom
-                    font.family: Style.defaultFontFamily
-                    font.weight: Font.Bold
-                    
-                    
-                    font.pointSize: 14
-                    color: Style.colorBaseTitle
-                }
-
-                MButton
-                {
-                    Layout.preferredWidth: 32
-                    Layout.preferredHeight: 32
-                    Layout.alignment: Qt.AlignRight
-                    borderColor: Style.colorLightBorder
-                    imagePath: Icons.closeBlack
-                    imageSize: 12
-                    opacityOnPressed: 0.7
-                    
-                    onClicked: root.close()
-                }
-            }
+            id: closeButton
+            Layout.preferredHeight: 32
+            Layout.preferredWidth: 32
+            Layout.topMargin: 16
+            Layout.rightMargin: 18
+            Layout.alignment: Qt.AlignTop | Qt.AlignRight
+            backgroundColor: "transparent"
+            opacityOnPressed: 0.7
+            borderColor: "transparent"
+            radius: 6
+            borderColorOnPressed: Style.colorLightBorder
+            imagePath: Icons.closeBlack
+            imageSize: 14
         }
-        
-//        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
         
         Pane
         {
             id: content
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.maximumHeight: 434
-            Layout.minimumHeight: 360
-            Layout.leftMargin: 1
-            verticalPadding: 34
-            horizontalPadding: 25
-            
+            Layout.topMargin: 10
+            topPadding: 0
+            horizontalPadding: 52
+            bottomPadding: 42
             background: Rectangle
             {
-                color: Style.colorBackground
+                color: "transparent"
+                radius: 6
             }
             
             
@@ -113,19 +76,29 @@ Popup
                 width: parent.width
                 spacing: 0
                 
+                Label
+                {
+                    id: title
+                    text: "Download book"
+                    font.weight: Font.Bold
+                    font.pointSize: 17
+                    font.family: Style.defaultFontFamily
+                    color: Style.colorBaseTitle
+                }
                 
                 RowLayout
                 {
-                    id: informationLayout
+                    id: bookInformation
+                    spacing: 28
                     Layout.fillWidth: true
-                    spacing: 22
+                    Layout.topMargin: 32
                     
                     
                     Rectangle
                     {
-                        id: imageRect
-                        Layout.preferredWidth: 201
-                        Layout.preferredHeight: 273
+                        id: bookCoverContainer
+                        Layout.preferredWidth: 198
+                        Layout.preferredHeight: 258
                         color: Style.colorLightBorder
                         radius: 4
                         
@@ -133,7 +106,8 @@ Popup
                         {
                             id: bookCover
                             anchors.centerIn: parent
-                            sourceSize.height: imageRect.height - 2
+                            Layout.alignment: Qt.AlignHCenter
+                            sourceSize.height: bookCoverContainer.height - 2
                             source: Icons.bookCover
                             fillMode: Image.PreserveAspectFit
                         }
@@ -141,178 +115,207 @@ Popup
                     
                     ColumnLayout
                     {
-                        id: factLayout
+                        id: bookDetails
                         Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignTop
-                        spacing: 2
+                        spacing: 16
                         
                         
-                        Label
+                        MLabeledInputBox
                         {
-                            text: "TITLE"
-                            color: Style.colorBaseTitle
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12
-                            font.weight: Font.Bold
-                        }
-                        
-                        Label
-                        {
+                            id: titleField
+                            Layout.fillWidth: true
+                            Layout.topMargin: -5
+                            boxHeight: 34
+                            headerText: "Title"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
                             text: "The 7 habits of highly effective people"
-                            color: Style.colorLightText3
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12.25
-                            font.weight: Font.Medium
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            textPadding: 12
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
                         }
                         
-                        
-                        Label
+                        MLabeledInputBox
                         {
-                            Layout.topMargin: 12
-                            text: "AUTHOR"
-                            color: Style.colorBaseTitle
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12
-                            font.weight: Font.Bold
-                        }
-                        
-                        Label
-                        {
+                            id: authorField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Author"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
                             text: "Stephen R. Covey"
-                            color: Style.colorLightText3
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12.25
-                            font.weight: Font.Medium
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
                         }
                         
-                        
-                        Label
+                        MLabeledInputBox
                         {
-                            Layout.topMargin: 12
-                            text: "PUBLICATION"
-                            color: Style.colorBaseTitle
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12
-                            font.weight: Font.Bold
+                            id: publicationField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Publication"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "United States: Dodd, Mead and Company,1922."
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
                         }
                         
-                        Label
+                        MLabeledInputBox
                         {
-                            text: "United States: Dodd, Mead and Company, 1922."
-                            color: Style.colorLightText3
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12.25
-                            font.weight: Font.Medium
-                        }
-                        
-                        
-                        Label
-                        {
-                            Layout.topMargin: 12
-                            text: "LANGUAGE"
-                            color: Style.colorBaseTitle
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12
-                            font.weight: Font.Bold
-                        }
-                        
-                        Label
-                        {
+                            id: languageField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Language"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
                             text: "English"
-                            color: Style.colorLightText3
-                            font.family: Style.defaultFontFamily
-                            font.pointSize: 12.25
-                            font.weight: Font.Medium
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
                         }
                     }
                 }
                 
-                Label
-                {
-                    Layout.topMargin: 26
-                    text: "CONTENTS:"
-                    color: Style.colorBaseTitle
-                    font.family: Style.defaultFontFamily
-                    font.pointSize: 12
-                    font.weight: Font.Bold
-                }
                 
-                Label
+                ColumnLayout
                 {
-                    Layout.preferredWidth: parent.width
-                    Layout.topMargin: 2
-                    text: "Your habits determine your character and later define your life." +
-                           "Don’t blame outside factors when you fail in life. Also, don’t think" +
-                           "that succeeding in one area of your life will mean that you’re destined for triumph."
-                    color: Style.colorLightText3
-                    font.family: Style.defaultFontFamily
-                    font.pointSize: 12.25
-                    font.weight: Font.Medium
-                    wrapMode: Text.WordWrap
-                }
-            }
-        }
-        
-//        Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorSeparator }
-        
-        Pane
-        {
-            id: footer
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.maximumHeight: 64
-            Layout.minimumHeight: 36
-            horizontalPadding: root.contentPadding
-            
-            background: Rectangle
-            {
-                color: "transparent"
-            }
-            
-            
-            RowLayout
-            {
-                id: footerLayout
-                anchors.fill: parent
-                spacing: 0
-                
-                
-                MButton
-                {
-                    id: cancelButton
-                    Layout.preferredWidth: 100
-                    Layout.preferredHeight: 38
-                    Layout.alignment: Qt.AlignLeft
-                    borderColor: Style.colorLightBorder
-                    backgroundColor: Style.colorBackground
-                    opacityOnPressed: 0.7
-                    text: "Cancel"
-                    fontColor: Style.colorBaseText
-                    fontWeight: Font.Bold
-                    fontSize: 12
+                    id: contentFieldLayout
+                    Layout.fillWidth: true
+                    Layout.topMargin: 28
+                    spacing: 3
                     
-                    onClicked: root.close()
-                }
-                
-                MButton
-                {
-                    id: downloadButton
-                    Layout.preferredWidth: 137
-                    Layout.preferredHeight: 38
-                    Layout.alignment: Qt.AlignRight
-                    borderWidth: 0
-                    backgroundColor: Style.colorBasePurple
-                    text: "Download"
-                    fontColor: Style.colorBrightText
-                    fontWeight: Font.Bold
-                    fontSize: 12
-                    imagePath: Icons.downloadWhite
-                    imageSize: 18
                     
-                    onClicked: 
+                    Label
                     {
-                        // Download book
-                        root.close()
+                        id: contentFieldHeader
+                        Layout.fillWidth: true
+                        text: "Content"
+                        font.family: Style.defaultFontFamily
+                        font.pointSize: 11.5
+                        font.weight: Font.Bold
+                        color: Style.colorBaseTitle
+                    }
+                    
+                    Rectangle
+                    {
+                        id: contentField
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 78
+                        color: "transparent"
+                        radius: 5
+                        border.width: 1
+                        border.color: Style.colorLightBorder
+                        
+                        
+                        TextArea
+                        {
+                            id: contentTextArea
+                            anchors.fill: parent
+                            leftPadding: 12
+                            rightPadding: 12
+                            topPadding: 8
+                            bottomPadding: 8
+                            selectByMouse: true
+                            text: "Your habits determine your character and later define your life. Don’t blame outside factors when you fail in life. Also, don’t think that succeeding in one area of your life will mean that you’re destined for triumph."
+                            wrapMode: Text.WordWrap
+                            color: Style.colorLightText3
+                            font.pointSize: 12
+                            font.family: Style.defaultFontFamily
+                            readOnly: true
+                            background: Rectangle   
+                            {   
+                                anchors.fill: parent
+                                radius: contentField.radius
+                                color: "transparent"
+                            }
+                        }
+                    }
+                }
+                
+                
+                RowLayout
+                {
+                    id: buttonLayout
+                    Layout.topMargin: 42
+                    spacing: 16
+                    
+                    
+                    MButton
+                    {
+                        id: downloadButton
+                        Layout.preferredWidth: 137
+                        Layout.preferredHeight: 38
+                        active: true
+                        borderWidth: active ? 0 : 1
+                        borderColor: Style.colorLightBorder2
+                        backgroundColor: active ? Style.colorBasePurple : "transparent"
+                        text: "Download"
+                        fontColor: active ? Style.colorBackground : Style.colorBaseTitle
+                        fontWeight: Font.Bold
+                        fontSize: 12
+                        imagePath: active ? Icons.downloadWhite : Icons.downloadBlack
+                        imageSize: 18
+                        
+                        onClicked: root.close()
+                        
+                        Keys.onPressed: 
+                            (event) =>
+                            {
+                                if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
+                                {
+                                    downloadButton.active = false;
+                                    cancelButton.active = true;
+                                }
+                            }
+                        
+                        KeyNavigation.right: cancelButton
+                        KeyNavigation.tab: cancelButton
+                    }
+                    
+                    MButton
+                    {
+                        id: cancelButton
+                        Layout.preferredWidth: 100
+                        Layout.preferredHeight: 38
+                        borderWidth: active ? 0 : 1
+                        borderColor: Style.colorLightBorder2
+                        backgroundColor: active ? Style.colorBasePurple : "transparent"
+                        opacityOnPressed: 0.7
+                        text: "Cancel"
+                        fontColor: active ? Style.colorBackground : Style.colorBaseTitle
+                        fontWeight: Font.Bold
+                        fontSize: 12
+                        
+                        onClicked: root.close()
+                        
+                        Keys.onPressed: 
+                            (event) =>
+                            {
+                                if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
+                                {
+                                    cancelButton.active = false;
+                                    downloadButton.active = true;
+                                }
+                            }
+                        
+                        KeyNavigation.left: downloadButton
+                        KeyNavigation.tab: downloadButton
                     }
                 }
             }

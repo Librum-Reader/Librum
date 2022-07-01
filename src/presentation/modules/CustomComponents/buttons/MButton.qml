@@ -16,7 +16,8 @@ Item
     property double opacityOnPressed: 0.9
     property int borderWidth: 1
     property color borderColor: "red"
-    property int buttonRadius: 4
+    property color borderColorOnPressed: borderColor
+    property int radius: 4
     property string imagePath
     property int imageSpacing: 8
     property int imageSize: 15
@@ -38,9 +39,9 @@ Item
         anchors.fill: parent
         color: root.backgroundColor
         border.width: root.borderWidth
-        border.color: root.borderColor
-        radius: root.buttonRadius
-        opacity: (mouseArea.pressed ? root.opacityOnPressed : 1)
+        border.color: mouseArea.pressed ? root.borderColorOnPressed : root.borderColor
+        radius: root.radius
+        opacity: mouseArea.pressed ? root.opacityOnPressed : 1
         antialiasing: true
         
         RowLayout

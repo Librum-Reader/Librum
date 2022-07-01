@@ -13,6 +13,8 @@ Item
     property color placeholderColor : "black"
     property double inputFontSize : 12
     property color inputFontColor : Style.colorBaseText
+    property bool readOnly: false
+    property int inputFontWeight: Font.Normal
     property string headerText : "Header here"
     property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
@@ -75,9 +77,11 @@ Item
                     leftPadding: root.textPadding
                     rightPadding: root.textPadding
                     selectByMouse: true
+                    readOnly: root.readOnly
                     color: root.inputFontColor
                     font.pointSize: root.inputFontSize
                     font.family: Style.defaultFontFamily
+                    font.weight: root.inputFontWeight
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
                     echoMode: (!root.imagePath.length > 0 || imageArea.pressed ? TextInput.Normal : TextInput.Password)

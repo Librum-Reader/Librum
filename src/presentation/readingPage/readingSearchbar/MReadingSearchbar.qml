@@ -69,7 +69,7 @@ Item
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
                     borderWidth: 0
-                    buttonRadius: 4
+                    radius: 4
                     imagePath: Icons.closePurple
                     imageSize: 12
                     
@@ -88,7 +88,7 @@ Item
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
                     borderWidth: 0
-                    buttonRadius: 4
+                    radius: 4
                     
                     onClicked: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open()
                 }
@@ -161,7 +161,7 @@ Item
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
                     borderWidth: 0
-                    buttonRadius: 4
+                    radius: 4
                     imagePath: Icons.arrowtopPurpleDown
                     imageSize: 13
                     imageSpacing: 10
@@ -181,7 +181,7 @@ Item
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
                     borderWidth: 0
-                    buttonRadius: 4
+                    radius: 4
                     imagePath: Icons.arrowtopPurpleUp
                     imageSize: 13
                     imageSpacing: 10

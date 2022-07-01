@@ -166,7 +166,7 @@ Page
                     fontWeight: Font.DemiBold
                     fontSize: 11.9
                     fontColor: Style.colorBaseTitle
-                    buttonRadius: 4
+                    radius: 4
                 }
                 
                 Label
