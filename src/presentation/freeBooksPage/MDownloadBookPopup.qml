@@ -61,7 +61,7 @@ Popup
         {
             id: content
             Layout.fillWidth: true
-            Layout.topMargin: 10
+            Layout.topMargin: 18
             topPadding: 0
             horizontalPadding: 52
             bottomPadding: 42
