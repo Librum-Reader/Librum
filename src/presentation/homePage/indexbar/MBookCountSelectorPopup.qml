@@ -11,6 +11,7 @@ Popup
     signal selected(int content)
     
     focus: true
+    implicitWidth: 58
     padding: 0
     background: Rectangle
     {
