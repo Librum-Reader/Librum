@@ -14,18 +14,17 @@ Popup
     implicitWidth: 751
     focus: true
     padding: 0
+    background: Rectangle
+    {
+        radius: 6
+        color: Style.colorBackground
+    }
     
     modal: true
     Overlay.modal: Rectangle
     {
         color: "#aa32324D"
         opacity: 1
-    }
-    
-    background: Rectangle
-    {
-        radius: 6
-        color: Style.colorBackground
     }
     
     onOpenedChanged: if(opened) downloadButton.forceActiveFocus()

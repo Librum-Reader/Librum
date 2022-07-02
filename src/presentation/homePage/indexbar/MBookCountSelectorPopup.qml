@@ -12,7 +12,6 @@ Popup
     
     focus: true
     padding: 0
-    implicitWidth: 58
     background: Rectangle
     {
         color: "transparent"

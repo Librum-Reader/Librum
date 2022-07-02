@@ -15,7 +15,7 @@ Popup
     property int radius: 5
     property int defaultIndex: 0
     
-    property int fontSize: 11
+    property double fontSize: 11
     property color fontColor: Style.colorBaseText
     property int fontWeight: Font.Normal
     property string fontFamily: Style.defaultFontFamily

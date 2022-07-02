@@ -21,8 +21,9 @@ Item
     
     property string titleEmptyText: "Any"
     property int titleFontWeight: Font.Normal
-    property int titleFontSize: 11
+    property double titleFontSize: 11
     property color titleFontColor: Style.colorBaseText
+    property int titleSpacing: 0
     
     property alias contentFontSize: selectionPopup.fontSize
     property alias contentFontColor: selectionPopup.fontColor
@@ -87,6 +88,8 @@ Item
                 {
                     id: title
                     Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
+                    leftPadding: root.titleSpacing
+                    rightPadding: root.titleSpacing
                     // @disable-check M325
                     text: selectionPopup.selectedContent == null ? root.titleEmptyText : selectionPopup.selectedContent
                     font.pointSize: root.titleFontSize
