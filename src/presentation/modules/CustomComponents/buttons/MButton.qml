@@ -27,7 +27,6 @@ Item
     property bool centerContentVertically: true
     property bool centerContentHorizontally: true
     
-    implicitWidth: layout.width
     implicitHeight: 30
     
     signal clicked()

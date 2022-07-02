@@ -8,7 +8,8 @@ import CustomComponents
 Popup
 {
     id: root
-    property string selectedContent: listView.currentItem.content
+    property var selectedItem: listView.currentItem
+    property int itemHeight: 28
     property color backgroundColor
     property alias listContent: listView.model
     property int maxHeight: 200
@@ -70,6 +71,7 @@ Popup
                 
                 delegate: MComboBoxItem
                 {
+                    height: root.itemHeight
                     container: listView
                     fontSize: root.fontSize
                     fontColor: root.fontColor

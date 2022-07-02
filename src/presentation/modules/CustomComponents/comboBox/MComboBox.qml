@@ -29,6 +29,7 @@ Item
     property alias contentFontColor: selectionPopup.fontColor
     property alias contentFontWeight: selectionPopup.fontWeight
     property alias contentFontFamily: selectionPopup.fontFamily
+    property alias itemHeight: selectionPopup.itemHeight
     
     property string imagePath
     property int imageSpacing: 4
@@ -37,7 +38,7 @@ Item
     property int radius: 4
     signal clicked
     
-    implicitWidth: 100
+    
     implicitHeight: 47
     
     
@@ -90,8 +91,7 @@ Item
                     Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
                     leftPadding: root.titleSpacing
                     rightPadding: root.titleSpacing
-                    // @disable-check M325
-                    text: selectionPopup.selectedContent == null ? root.titleEmptyText : selectionPopup.selectedContent
+                    text: selectionPopup.selectedItem == null ? root.titleEmptyText : selectionPopup.selectedItem.content
                     font.pointSize: root.titleFontSize
                     font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight

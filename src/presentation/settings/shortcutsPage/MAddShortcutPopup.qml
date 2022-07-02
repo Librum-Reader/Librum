@@ -31,7 +31,7 @@ Popup
     ColumnLayout
     {
         id: mainLayout
-        anchors.fill: parent
+        width: parent.width
         spacing: 0
         
         
@@ -99,15 +99,18 @@ Popup
                         id: actionComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
+                        itemHeight: 30
                         headerText: "Action"
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
                         headerFontWeight: Font.DemiBold
-                        titleFontColor: Style.colorLightText2
+                        titleFontColor: Style.colorLightText3
                         titleFontSize: 12.5
                         titleSpacing: 3
                         titleEmptyText: "None selected"
-                        contentFontSize: 12.5
+                        contentFontColor: Style.colorLightText3
+                        contentFontSize: 12.75
+                        defaultIndex: -1
                         
                         imagePath: Icons.dropdownGray
                         imageSize: 11
@@ -118,10 +121,11 @@ Popup
                         ListModel
                         {
                             id: listModel
-                            ListElement { content: "Any" }
                             ListElement { content: "Pdf" }
                             ListElement { content: "Any" }
                             ListElement { content: "Pdf" }
+                            ListElement { content: "Epub"  }
+                            ListElement { content: "Mobi" }
                             ListElement { content: "Epub"  }
                             ListElement { content: "Mobi" }
                             ListElement { content: "Epub"  }
@@ -129,35 +133,11 @@ Popup
                         }
                     }
                     
-                    ColumnLayout
+                    
+                    MRecordKeyBox
                     {
-                        id: keyInputButton
-                        spacing: 2
-                        
-                        Label
-                        {
-                            id: recordText
-                            Layout.fillWidth: true
-                            text: "Key"
-                            font.weight: Font.DemiBold
-                            font.pointSize: 12
-                            font.family: Style.defaultFontFamily
-                            color: Style.colorBaseTitle
-                        }
-                        
-                        MButton
-                        {
-                            id: recordButton
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 38
-                            radius: 4
-                            borderColor: Style.colorLightBorder
-                            backgroundColor: "transparent"
-                            text: "Press to record"
-                            fontSize: 13
-                            fontColor: Style.colorBrightText
-                            fontWeight: Font.Bold
-                        }
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 60
                     }
                 }
             }
