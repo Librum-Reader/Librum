@@ -153,7 +153,7 @@ Page
                     MButton
                     {
                         id: backButton
-                        Layout.preferredWidth: implicitWidth + 10
+                        Layout.preferredWidth: 145
                         Layout.preferredHeight: 42
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
