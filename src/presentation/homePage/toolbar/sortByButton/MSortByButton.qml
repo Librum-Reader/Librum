@@ -65,12 +65,12 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: sortByPopup.open()
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
     
     MSortByPopup
     {
-        id: sortByPopup
+        id: selectionPopup
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         

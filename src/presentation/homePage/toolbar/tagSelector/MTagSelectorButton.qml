@@ -57,12 +57,12 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selectorPopup.open()
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
     
     MTagSelectorPopup
     {
-        id: selectorPopup
+        id: selectionPopup
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         

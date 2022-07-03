@@ -58,7 +58,7 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selectionPopup.open()
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
     
     MFilterByPopup

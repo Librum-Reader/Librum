@@ -56,7 +56,7 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selectorPopup.open()
+        onClicked: selectorPopup.opened ? selectorPopup.close() : selectorPopup.open()
     }
     
     MBookCountSelectorPopup
