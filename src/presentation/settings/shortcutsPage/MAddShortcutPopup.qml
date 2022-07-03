@@ -19,13 +19,14 @@ Popup
         color: Style.colorBackground
         radius: 6
     }
-    
     modal: true
     Overlay.modal: Rectangle
     {
         color: "#aa32324D"
         opacity: 1
     }
+    
+    onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
     
     
     ColumnLayout
@@ -138,6 +139,82 @@ Popup
                     {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
+                    }
+                }
+                
+                RowLayout
+                {
+                    id: decisionLayout
+                    Layout.topMargin: 96
+                    spacing: 16
+                    
+                    
+                    MButton
+                    {
+                        id: downloadButton
+                        Layout.preferredWidth: 120
+                        Layout.preferredHeight: 38
+                        active: true
+                        borderWidth: active ? 0 : 1
+                        borderColor: Style.colorLightBorder
+                        backgroundColor: active ? Style.colorBasePurple : "transparent"
+                        text: "Apply"
+                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                        fontWeight: Font.Bold
+                        fontSize: 12
+                        
+                        onClicked: root.close()
+                        
+                        Keys.onPressed:
+                            (event) =>
+                            {
+                                if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
+                                {
+                                    downloadButton.active = false;
+                                    cancelButton.active = true;
+                                }
+                                else if(event.key === Qt.Key_Return)
+                                {
+                                    root.close();
+                                }
+                            }
+                        
+                        KeyNavigation.right: cancelButton
+                        KeyNavigation.tab: cancelButton
+                    }
+                    
+                    MButton
+                    {
+                        id: cancelButton
+                        Layout.preferredWidth: 120
+                        Layout.preferredHeight: 38
+                        borderWidth: active ? 0 : 1
+                        borderColor: Style.colorLightBorder
+                        backgroundColor: active ? Style.colorBasePurple : "transparent"
+                        opacityOnPressed: 0.7
+                        text: "Cancel"
+                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                        fontWeight: Font.Bold
+                        fontSize: 12
+                        
+                        onClicked: root.close()
+                        
+                        Keys.onPressed: 
+                            (event) =>
+                            {
+                                if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
+                                {
+                                    cancelButton.active = false;
+                                    downloadButton.active = true;
+                                }
+                                else if(event.key === Qt.Key_Return)
+                                {
+                                    root.close();
+                                }
+                            }
+                        
+                        KeyNavigation.left: downloadButton
+                        KeyNavigation.tab: downloadButton
                     }
                 }
             }

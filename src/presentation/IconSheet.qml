@@ -99,4 +99,5 @@ Item
     property string settingsGrayHallow: "/resources/images/utility/settings_gray_hallow_icon.svg"
     property string share: "/resources/images/utility/share_black_icon.svg"
     property string sun: "/resources/images/utility/sun_gray_icon.svg"
+    property string microphone: "/resources/images/utility/microphone_icon.svg"
 }
