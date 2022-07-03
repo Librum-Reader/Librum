@@ -10,8 +10,8 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/modules" CACHE STRING "path to 
 
 
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Quick Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Quick Widgets Core5Compat REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets Core5Compat REQUIRED)
 
 
 
@@ -37,6 +37,7 @@ target_link_libraries(appLibrum
                     application
                     Qt6::Quick
                     Qt6::Widgets
+                    Qt6::Core5Compat
 )
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

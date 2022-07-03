@@ -13,6 +13,7 @@ Popup
     
     implicitWidth: 594
     focus: true
+    closePolicy: Popup.CloseOnPressOutside
     padding: 0
     background: Rectangle
     {
@@ -100,7 +101,7 @@ Popup
                         id: actionComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
-                        itemHeight: 30
+                        itemHeight: 32
                         headerText: "Action"
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
@@ -110,7 +111,7 @@ Popup
                         titleSpacing: 3
                         titleEmptyText: "None selected"
                         contentFontColor: Style.colorLightText3
-                        contentFontSize: 12.75
+                        contentFontSize: 12.5
                         defaultIndex: -1
                         
                         imagePath: Icons.dropdownGray
@@ -122,7 +123,7 @@ Popup
                         ListModel
                         {
                             id: listModel
-                            ListElement { content: "Pdf" }
+                            ListElement { content: "Page adsdsa asd asd af fda sasd" }
                             ListElement { content: "Any" }
                             ListElement { content: "Pdf" }
                             ListElement { content: "Epub"  }
@@ -199,7 +200,7 @@ Popup
                         
                         onClicked: root.close()
                         
-                        Keys.onPressed: 
+                        Keys.onPressed:
                             (event) =>
                             {
                                 if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)

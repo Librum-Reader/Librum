@@ -35,6 +35,7 @@ Item
             font.pointSize: root.fontSize
             font.family: root.fontFamily
             font.weight: root.fontWeight
+            elide: Text.ElideRight
         }
     }
     

@@ -88,6 +88,7 @@ Item
                 Label
                 {
                     id: title
+                    Layout.fillWidth: true
                     Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
                     leftPadding: root.titleSpacing
                     rightPadding: root.titleSpacing
@@ -96,6 +97,7 @@ Item
                     font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight
                     color: root.titleFontColor
+                    elide: Text.ElideRight
                 }
                 
                 Image

@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
-
+    
 
     // Translations
     QTranslator translator;
