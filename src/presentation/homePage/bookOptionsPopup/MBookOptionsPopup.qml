@@ -11,26 +11,27 @@ Popup
     implicitWidth: 170
     focus: true
     horizontalPadding: 0
-    verticalPadding: 8
+    verticalPadding: 6
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     background: Rectangle
     {
         color: Style.colorBackground
         border.color: Style.colorLightBorder
-        radius: 4
+        radius: 3
     }
     
     
     ColumnLayout
     {
         width: parent.width
-        spacing: 4
+        spacing: 0
         
         
         MBookOptionsItem
         {
             Layout.fillWidth: true
             imagePath: Icons.book_open
+            imageSize: 17
             text: "Read book"
         }
         
@@ -45,8 +46,9 @@ Popup
         MBookOptionsItem
         {
             Layout.fillWidth: true
+            Layout.bottomMargin: 4
             imagePath: Icons.add_file
-            imageSize: 15
+            imageSize: 14
             text: "Save to disk"
         }
         
@@ -55,8 +57,9 @@ Popup
         MBookOptionsItem
         {
             Layout.fillWidth: true
+            Layout.topMargin: 4
             imagePath: Icons.tag_gray
-            imageSize: 17
+            imageSize: 16
             text: "Add tag"
         }
         
@@ -64,6 +67,7 @@ Popup
         {
             Layout.fillWidth: true
             imagePath: Icons.check_circle
+            imageSize: 17
             text: "Mark as read"
         }
         
@@ -71,7 +75,7 @@ Popup
         {
             Layout.fillWidth: true
             imagePath: Icons.trash_gray
-            imageSize: 17
+            imageSize: 16
             text: "Delete book"
         }
     }
