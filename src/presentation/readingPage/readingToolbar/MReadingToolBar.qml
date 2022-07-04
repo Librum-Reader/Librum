@@ -202,7 +202,7 @@ Pane
         }
     }
     
-    MOptionsPopup
+    MReadingOptionsPopup
     {
         id: optionsPopup
         x: optionsButton.x - width + optionsButton.width

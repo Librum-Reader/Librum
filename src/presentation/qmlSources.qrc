@@ -53,7 +53,7 @@
         <file>readingPage/MBookmarksSidebar.qml</file>
         <file>readingPage/MChapterSidebar.qml</file>
         <file>readingPage/MReadingPage.qml</file>
-        <file>readingPage/readingToolbar/MOptionsPopup.qml</file>
+        <file>readingPage/readingToolbar/MReadingOptionsPopup.qml</file>
         <file>readingPage/readingToolbar/MReadingToolBar.qml</file>
         <file>readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
         <file>readingPage/readingSearchbar/MReadingSearchbar.qml</file>
