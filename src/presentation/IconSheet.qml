@@ -21,6 +21,7 @@ Item
     property string plusBlack: "/resources/images/decision/plus_black_icon.svg"
     property string plusPurple: "/resources/images/decision/plus_purple_icon.svg"
     property string plusWhite: "/resources/images/decision/plus_white_icon.svg"
+    property string check_circle: "/resources/images/decision/check_circle_icon.svg"
     
     // Decoration-icons
     property string coffee: "/resources/images/decoration/coffee_icon.svg"
@@ -100,4 +101,9 @@ Item
     property string share: "/resources/images/utility/share_black_icon.svg"
     property string sun: "/resources/images/utility/sun_gray_icon.svg"
     property string microphone: "/resources/images/utility/microphone_icon.svg"
+    property string trash_gray: "/resources/images/utility/trash_gray_icon.svg"
+    property string tag_gray: "/resources/images/utility/tag_gray_icon.svg"
+    property string book_open: "/resources/images/utility/book_open_icon.svg"
+    property string book: "/resources/images/utility/book_icon.svg"
+    property string add_file: "/resources/images/utility/add_file_icon.svg"
 }

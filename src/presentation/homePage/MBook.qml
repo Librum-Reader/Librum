@@ -7,11 +7,10 @@ import Librum.icons
 
 Item 
 {
-    id: root
-    signal clicked
-    
+    id: root    
     implicitWidth: 190
     implicitHeight: 322
+    
     
     ColumnLayout
     {
@@ -138,13 +137,6 @@ Item
                 }
             }
         }
-    }
-    
-    MouseArea
-    {
-        anchors.fill: parent
-        
-        onClicked: root.clicked()
     }
     
     

@@ -81,5 +81,11 @@
         <file>resources/images/decision/check_purple_icon.svg</file>
         <file>resources/images/illustrations/check_bubble_illustration.svg</file>
         <file>resources/images/utility/microphone_icon.svg</file>
+        <file>resources/images/utility/add_file_icon.svg</file>
+        <file>resources/images/utility/book_icon.svg</file>
+        <file>resources/images/utility/book_open_icon.svg</file>
+        <file>resources/images/utility/tag_gray_icon.svg</file>
+        <file>resources/images/utility/trash_gray_icon.svg</file>
+        <file>resources/images/decision/check_circle_icon.svg</file>
     </qresource>
 </RCC>

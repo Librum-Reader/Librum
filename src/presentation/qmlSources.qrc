@@ -78,5 +78,7 @@
         <file>settings/updatesPage/MUpToDate.qml</file>
         <file>settings/shortcutsPage/MAddShortcutPopup.qml</file>
         <file>settings/shortcutsPage/MRecordKeyBox.qml</file>
+        <file>homePage/bookOptionsPopup/MBookOptionsItem.qml</file>
+        <file>homePage/bookOptionsPopup/MBookOptionsPopup.qml</file>
     </qresource>
 </RCC>

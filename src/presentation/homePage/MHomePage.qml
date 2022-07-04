@@ -8,6 +8,7 @@ import Librum.style
 import Librum.icons
 import "toolbar"
 import "indexbar"
+import "bookOptionsPopup"
 
 
 Page
@@ -129,7 +130,24 @@ Page
                 model: indexBar.selectedAmountOfBooks
                 delegate: MBook
                 { 
-                    onClicked: loadPage(readingPage)
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        acceptedButtons: Qt.LeftButton | Qt.RightButton                       
+                        
+                        onClicked:
+                            (mouse) =>
+                            {
+                                if(mouse.button === Qt.LeftButton)
+                                {
+                                    loadPage(readingPage);
+                                }
+                                else if(mouse.button === Qt.RightButton)
+                                {
+                                    bookOptionsPopup.visible = !bookOptionsPopup.visible;
+                                }
+                            }
+                    }
                 }
             }
         }
@@ -153,6 +171,7 @@ Page
         }
     }
     
+    
     FileDialog
     {
         id: fileDialog
@@ -160,8 +179,17 @@ Page
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         nameFilters: ["Text files (*.txt)", "PDF files (*.pdf)", "MOBI files (*.pdf)",
-                       "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
-                       "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
-                       "DJVU files (*.djvu)"]
+            "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
+            "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
+            "DJVU files (*.djvu)"]
+    }
+    
+    
+    MBookOptionsPopup
+    {
+        id: bookOptionsPopup
+        x: 600
+        y: 400
+        visible: false
     }
 }
