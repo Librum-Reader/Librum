@@ -101,6 +101,7 @@ Item
     property string share: "/resources/images/utility/share_black_icon.svg"
     property string sun: "/resources/images/utility/sun_gray_icon.svg"
     property string microphone: "/resources/images/utility/microphone_icon.svg"
+    property string active_microphone: "/resources/images/utility/active_microphone_icon.svg"
     property string trash_gray: "/resources/images/utility/trash_gray_icon.svg"
     property string book_open: "/resources/images/utility/book_open_icon.svg"
     property string book: "/resources/images/utility/book_icon.svg"

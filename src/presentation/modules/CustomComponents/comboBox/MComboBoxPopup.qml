@@ -66,8 +66,6 @@ Popup
                 clip: true
                 focus: true
                 boundsBehavior: Flickable.StopAtBounds
-                highlightMoveDuration: 0
-                highlightFollowsCurrentItem: true
                 
                 delegate: MComboBoxItem
                 {
@@ -81,11 +79,6 @@ Popup
                 }
                 
                 ScrollBar.vertical: ScrollBar { }
-                highlight: Rectangle
-                {
-                    radius: 4
-                    color: root.highlightColor
-                }
             }
         }
     }

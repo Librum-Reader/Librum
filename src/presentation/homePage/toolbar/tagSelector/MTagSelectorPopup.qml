@@ -87,6 +87,7 @@ Popup
                         width: parent.width
                         containingListview: listView
                         
+                        
                         onClicked:
                             (index) =>
                             {
