@@ -65,7 +65,6 @@
         <file>resources/images/utility/log_out_icon.svg</file>
         <file>resources/images/utility/sync_icon.svg</file>
         <file>resources/images/utility/tag_icon.svg</file>
-        <file>resources/images/utility/trash_icon.svg</file>
         <file>resources/images/utility/search_black_icon.svg</file>
         <file>resources/images/utility/search_gray_icon.svg</file>
         <file>resources/images/readingView/arrowtop_purple_down_icon.svg</file>
@@ -85,7 +84,7 @@
         <file>resources/images/utility/book_icon.svg</file>
         <file>resources/images/utility/book_open_icon.svg</file>
         <file>resources/images/utility/tag_gray_icon.svg</file>
-        <file>resources/images/utility/trash_gray_icon.svg</file>
         <file>resources/images/decision/check_circle_icon.svg</file>
+        <file>resources/images/utility/trash_gray_icon.svg</file>
     </qresource>
 </RCC>

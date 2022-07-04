@@ -75,7 +75,7 @@ Item
             {
                 id: editIcon
                 Layout.alignment: Qt.AlignVCenter
-                sourceSize.width: 21
+                sourceSize.width: 23
                 source: Icons.edit
                 fillMode: Image.PreserveAspectFit
             }
@@ -87,8 +87,8 @@ Item
                 Layout.leftMargin: 28
                 Layout.rightMargin: 6
                 Layout.alignment: Qt.AlignVCenter
-                sourceSize.width: 18
-                source: Icons.trash
+                sourceSize.width: 21
+                source: Icons.trash_gray
                 fillMode: Image.PreserveAspectFit
             }
         }
