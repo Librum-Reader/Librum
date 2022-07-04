@@ -127,6 +127,7 @@ Page
                 flickDeceleration: 10000
                 clip: true
                 
+                
                 model: indexBar.selectedAmountOfBooks
                 delegate: MBook
                 { 
@@ -144,9 +145,47 @@ Page
                                 }
                                 else if(mouse.button === Qt.RightButton)
                                 {
+                                    let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
+                                    let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
+                                    
+                                    bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x);
+                                    bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y);
                                     bookOptionsPopup.visible = !bookOptionsPopup.visible;
                                 }
                             }
+                    }
+                }
+                
+                MBookOptionsPopup
+                {
+                    id: bookOptionsPopup
+                    visible: false
+                    
+                    function getBookOptionsPopupXCoord(currentXPosition, absoluteXPosition)
+                    {
+                        if(spaceToRootWidth(absoluteXPosition) <= 0)
+                            return currentXPosition + spaceToRootWidth(absoluteXPosition);
+                        
+                        return currentXPosition;
+                    }
+                    
+                    function spaceToRootWidth(xCoord)
+                    {
+                        return root.width - (xCoord + implicitWidth);
+                    }
+                    
+                    
+                    function getBookOptionsPopupYCoord(currentYPosition, absoluteYPosition)
+                    {
+                        if(spaceToRootHeight(absoluteYPosition) <= 0)
+                            return currentYPosition + spaceToRootHeight(absoluteYPosition);
+                        
+                        return currentYPosition;
+                    }
+                    
+                    function spaceToRootHeight(yCoord)
+                    {
+                        return root.height - (yCoord + implicitHeight);
                     }
                 }
             }
@@ -182,14 +221,5 @@ Page
             "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
-    }
-    
-    
-    MBookOptionsPopup
-    {
-        id: bookOptionsPopup
-        x: 600
-        y: 400
-        visible: false
     }
 }

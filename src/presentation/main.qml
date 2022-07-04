@@ -17,7 +17,7 @@ import "readingPage"
 
 ApplicationWindow
 {
-    id: root
+    id: baseRoot
     property alias pageManager: pageManager
     
     minimumHeight: 600
