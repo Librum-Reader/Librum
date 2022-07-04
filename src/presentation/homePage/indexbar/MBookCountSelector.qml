@@ -65,6 +65,8 @@ Item
         y: -implicitHeight - 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
+        onOpenedChanged: opened ? closeAnim.start() : openAnim.start()
+        
         onSelected:
             (content) =>
             {
@@ -78,5 +80,26 @@ Item
     function giveFocus()
     {
         root.forceActiveFocus();
+    }
+    
+    
+    NumberAnimation
+    {
+        id: closeAnim
+        target: dropDownArrowImage
+        property: "rotation"
+        to: -180
+        duration: 175
+        easing.type: Easing.InOutQuad
+    }
+    
+    NumberAnimation
+    {
+        id: openAnim
+        target: dropDownArrowImage
+        property: "rotation"
+        to: 0
+        duration: 175
+        easing.type: Easing.InOutQuad
     }
 }
