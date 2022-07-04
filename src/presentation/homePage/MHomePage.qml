@@ -139,8 +139,8 @@ Page
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
-                            bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x);
-                            bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y);
+                            bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x) + 2;
+                            bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y) + 2;
                             bookOptionsPopup.visible = !bookOptionsPopup.visible;
                         }
                     
@@ -154,6 +154,7 @@ Page
                             bookOptionsPopup.visible = !bookOptionsPopup.visible;
                         }
                 }
+                
                 
                 MBookOptionsPopup
                 {

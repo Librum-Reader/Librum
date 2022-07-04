@@ -16,6 +16,8 @@ Item
     implicitHeight: 32
     implicitWidth: 100
     
+    onVisibleChanged: selected = false
+    
     
     Pane
     {
