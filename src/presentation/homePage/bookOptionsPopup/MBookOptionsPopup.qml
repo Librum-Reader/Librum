@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt.labs.platform
 import Librum.style
 import Librum.icons
 
@@ -33,6 +34,12 @@ Popup
             imagePath: Icons.book_open
             imageSize: 17
             text: "Read book"
+            
+            onClicked:
+            {
+                root.close();
+                loadPage(readingPage);
+            }
         }
         
         MBookOptionsItem
@@ -41,6 +48,11 @@ Popup
             imagePath: Icons.book
             imageSize: 14
             text: "Book details"
+            
+            onClicked:
+            {
+                root.close();
+            }
         }
         
         MBookOptionsItem
@@ -49,7 +61,13 @@ Popup
             Layout.bottomMargin: 4
             imagePath: Icons.add_file
             imageSize: 14
-            text: "Save to disk"
+            text: "Save to files"
+            
+            onClicked:
+            {
+                downloadFileDialog.open();
+                root.close();
+            }
         }
         
         Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Style.colorLightBorder }
@@ -61,6 +79,11 @@ Popup
             imagePath: Icons.tag_gray
             imageSize: 16
             text: "Add tag"
+            
+            onClicked:
+            {
+                root.close();
+            }
         }
         
         MBookOptionsItem
@@ -69,6 +92,11 @@ Popup
             imagePath: Icons.check_circle
             imageSize: 17
             text: "Mark as read"
+            
+            onClicked:
+            {
+                root.close();
+            }
         }
         
         MBookOptionsItem
@@ -77,6 +105,20 @@ Popup
             imagePath: Icons.trash_gray
             imageSize: 16
             text: "Delete book"
+            
+            onClicked:
+            {
+                root.close();
+            }
         }
+    }
+    
+    
+    FileDialog
+    {
+        id: downloadFileDialog
+        acceptLabel: "Save"
+        fileMode: FileDialog.SaveFile
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }
 }
