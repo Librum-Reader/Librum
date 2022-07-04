@@ -131,29 +131,28 @@ Page
                 model: indexBar.selectedAmountOfBooks
                 delegate: MBook
                 { 
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        acceptedButtons: Qt.LeftButton | Qt.RightButton                       
-                        
-                        onClicked:
-                            (mouse) =>
-                            {
-                                if(mouse.button === Qt.LeftButton)
-                                {
-                                    loadPage(readingPage);
-                                }
-                                else if(mouse.button === Qt.RightButton)
-                                {
-                                    let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                                    let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
-                                    
-                                    bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x);
-                                    bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y);
-                                    bookOptionsPopup.visible = !bookOptionsPopup.visible;
-                                }
-                            }
-                    }
+                    onLeftButtonClicked: loadPage(readingPage);
+                    
+                    onRightButtonClicked:
+                        (index, mouse) =>
+                        {
+                            let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
+                            let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
+                            
+                            bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x);
+                            bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y);
+                            bookOptionsPopup.visible = !bookOptionsPopup.visible;
+                        }
+                    
+                    onMoreOptionClicked:
+                        (index, mouse) =>
+                        {
+                            let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
+                            
+                            bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
+                            bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
+                            bookOptionsPopup.visible = !bookOptionsPopup.visible;
+                        }
                 }
                 
                 MBookOptionsPopup

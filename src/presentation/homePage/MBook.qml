@@ -7,7 +7,13 @@ import Librum.icons
 
 Item 
 {
-    id: root    
+    id: root
+    signal leftButtonClicked(int index)
+    signal rightButtonClicked(int index, var mouse)
+    signal moreOptionClicked(int index, var mouse)
+    
+    required property int index
+    
     implicitWidth: 190
     implicitHeight: 322
     
@@ -133,10 +139,40 @@ Item
                         source: Icons.dots
                         fillMode: Image.PreserveAspectFit
                         antialiasing: false
+                        
+                        MouseArea
+                        {
+                            id: moreMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                        }
                     }
                 }
             }
         }
+    }
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        acceptedButtons: Qt.AllButtons
+        
+        onClicked:
+            (mouse) =>
+            {
+                if(mouse.button === Qt.LeftButton)
+                {
+                    if(moreMouseArea.containsMouse)
+                    {
+                        root.moreOptionClicked(root.index, mouse);
+                        return;
+                    }
+
+                    root.leftButtonClicked(root.index);
+                }
+                
+                else if(mouse.button === Qt.RightButton) root.rightButtonClicked(root.index, mouse);
+            }
     }
     
     
