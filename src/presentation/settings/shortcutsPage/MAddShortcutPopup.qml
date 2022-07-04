@@ -140,6 +140,7 @@ Popup
                     {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
+                        itemToRedirectFocusTo: downloadButton
                     }
                 }
                 

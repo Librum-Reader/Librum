@@ -10,6 +10,7 @@ import Librum.icons
 Item
 {
     id: root
+    property var itemToRedirectFocusTo
     property bool recording: false
     
     
@@ -58,7 +59,7 @@ Item
             border.color: root.recording ? "#E8B9BA" : Style.colorLightBorder
             opacity: mouseArea.pressed ? 0.8 : 1
             
-            onActiveFocusChanged: if(!activeFocus) root.stopRecording();
+            onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()
             
             
             RowLayout
@@ -99,7 +100,6 @@ Item
                     if(event.key === Qt.Key_Return)
                     {
                         stopRecording();
-                        root.forceActiveFocus();
                         return;
                     }
                         
@@ -235,6 +235,7 @@ Item
     
     function stopRecording()
     {
+        itemToRedirectFocusTo.forceActiveFocus();
         root.recording = false;
         buttonPulsatingAnimation.stop();
     }
