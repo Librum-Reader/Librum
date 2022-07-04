@@ -16,7 +16,7 @@ Item
     Glow
     {
         id: backgroundGlow
-        visible: false
+        visible: root.recording
         width: button.width
         height: button.height
         x: button.x
@@ -55,7 +55,7 @@ Item
             Layout.preferredHeight: 38
             radius: 4
             color: Style.colorBackground
-            border.color: Style.colorLightBorder
+            border.color: root.recording ? "#E8B9BA" : Style.colorLightBorder
             opacity: mouseArea.pressed ? 0.8 : 1
             
             onActiveFocusChanged: if(!activeFocus) root.stopRecording();
@@ -85,7 +85,7 @@ Item
                     id: microphoneIcon
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 12
-                    source: Icons.microphone
+                    source: root.recording ? Icons.active_microphone : Icons.microphone
                     sourceSize.width: 18
                     fillMode: Image.PreserveAspectFit
                 }
@@ -230,16 +230,12 @@ Item
     function startRecording()
     {
         root.recording = true;
-        button.border.color = "#E8B9BA";
-        backgroundGlow.visible = true;
         buttonPulsatingAnimation.start();
     }
     
     function stopRecording()
     {
         root.recording = false;
-        button.border.color = Style.colorLightBorder;
-        backgroundGlow.visible = false;
         buttonPulsatingAnimation.stop();
     }
 }
