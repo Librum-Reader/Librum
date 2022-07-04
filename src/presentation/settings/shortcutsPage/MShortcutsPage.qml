@@ -191,13 +191,16 @@ Page
                         }
                         
                         delegate: MShortcutDelegate
-                        { 
+                        {
                             onGapWidthChanged: (newWidth) => inDetailsLayout.gapWidth = newWidth
+                            onEditClicked: addShortcutPopup.open()
+                            onDeleteClicked: console.log("delete")
                         }
                         
                         MouseArea
                         {
                             anchors.fill: parent
+                            propagateComposedEvents: true
                             
                             onWheel: (wheel) =>
                             {

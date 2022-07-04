@@ -11,6 +11,8 @@ Item
     required property string action
     required property string shortcuts
     signal gapWidthChanged(int newWidth)
+    signal editClicked
+    signal deleteClicked
     
     height: 52
     width: listView.width
@@ -20,6 +22,7 @@ Item
     {
         anchors.fill: parent
         spacing: 0
+        
         
         Rectangle
         {
@@ -35,6 +38,7 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             spacing: 0
+            
             
             Label
             {
@@ -78,6 +82,13 @@ Item
                 sourceSize.width: 23
                 source: Icons.edit
                 fillMode: Image.PreserveAspectFit
+                
+                MouseArea
+                {
+                    anchors.fill: parent
+                    
+                    onClicked: root.editClicked()
+                }
             }
             
             
@@ -90,6 +101,13 @@ Item
                 sourceSize.width: 21
                 source: Icons.trash_gray
                 fillMode: Image.PreserveAspectFit
+                
+                MouseArea
+                {
+                    anchors.fill: parent
+                    
+                    onClicked: root.deleteClicked()
+                }
             }
         }
     }
