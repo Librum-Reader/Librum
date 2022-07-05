@@ -17,6 +17,19 @@ Page
     }
     
     
+    Shortcut
+    {
+        sequence: "Ctrl+Return"
+        onActivated: sendEmailButton.buttonTriggeredAction()
+    }
+    
+    Shortcut
+    {
+        sequence: "Ctrl+Backspace"
+        onActivated: backButton.buttonTriggeredAction()
+    }
+    
+    
     ColumnLayout
     {
         id: mainLayout
@@ -141,7 +154,10 @@ Page
                         fontColor: Style.colorBrightText
                         fontWeight: Font.Bold
                         
-                        onClicked:
+                        onClicked: buttonTriggeredAction()
+                        
+                        
+                        function buttonTriggeredAction()
                         {
                             successText.email = emailInput.text;
                             successText.visible = true;
@@ -170,7 +186,12 @@ Page
                         imageRotation: 180
                         imageSpacing: 4
                         
-                        onClicked: loadPage(loginPage)
+                        onClicked: buttonTriggeredAction()
+                        
+                        function buttonTriggeredAction()
+                        {
+                            loadPage(loginPage)
+                        }
                     }
                 }
             }

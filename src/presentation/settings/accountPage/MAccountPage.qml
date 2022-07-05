@@ -24,6 +24,13 @@ Page
     }
     
     
+    Shortcut
+    {
+        sequence: StandardKey.Save
+        onActivated: root.saveAccountSettings()
+    }
+    
+    
     ColumnLayout
     {
         id: layout
@@ -124,7 +131,7 @@ Page
                         Layout.topMargin: 26
                         boxHeight: 40
                         headerText: "First name"
-                        text: "Kai"
+                        text: Globals.firstName
                         headerToBoxSpacing: 3
                         inputFontSize: 13
                         borderWidth: 1
@@ -140,7 +147,7 @@ Page
                         Layout.topMargin: 18
                         boxHeight: 40
                         headerText: "Last name"
-                        text: "Doe"
+                        text: Globals.lastName
                         headerToBoxSpacing: 3
                         inputFontSize: 13
                         borderWidth: 1
@@ -156,7 +163,7 @@ Page
                         Layout.topMargin: 18
                         boxHeight: 40
                         headerText: "Email"
-                        text: "Kaidoe@gmail.com"
+                        text: Globals.email
                         headerToBoxSpacing: 3
                         inputFontSize: 13
                         borderWidth: 1

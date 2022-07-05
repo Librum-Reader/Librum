@@ -13,6 +13,19 @@ Item
     implicitHeight: 32
     
     
+    Shortcut
+    {
+        sequence: "Right"
+        onActivated: layout.moveToRight()
+    }
+    
+    Shortcut
+    {
+        sequence: "Left"
+        onActivated: layout.moveToLeft()
+    }
+    
+    
     RowLayout
     {
         id: layout

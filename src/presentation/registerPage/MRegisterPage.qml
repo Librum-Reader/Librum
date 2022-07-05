@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.globals
 
 
 Page
@@ -13,6 +14,13 @@ Page
     {
         anchors.fill: parent
         color: Style.loginWindowBackground
+    }
+    
+    
+    Shortcut
+    {
+        sequence: "Ctrl+Return"
+        onActivated: registerButton.buttonTriggeredAction()
     }
     
     
@@ -232,12 +240,12 @@ Page
                             Layout.topMargin: 32
                             
                             onKeyUp: keepMeUpdated.giveFocus();
-                            onKeyDown: loginButton.giveFocus();
+                            onKeyDown: registerButton.giveFocus();
                         }
                         
                         MButton 
                         {
-                            id: loginButton
+                            id: registerButton
                             Layout.fillWidth: true
                             Layout.preferredHeight: 40
                             Layout.topMargin: 44
@@ -248,20 +256,25 @@ Page
                             fontWeight: Font.Bold
                             text: "Let's start"
                             
-                            onClicked: loadPage(loginPage);
+                            onClicked:
+                            {
+                                root.saveEntries();
+                                loadPage(loginPage);
+                            }
                             
                             Keys.onPressed: 
                                 (event) =>
                                 {
-                                    if(event.key === Qt.Key_Return)
-                                    {
-                                        loadPage(loginPage);
-                                    }
-                                    else if(event.key === Qt.Key_Up)
-                                    {
-                                        acceptPolicy.giveFocus();
-                                    }
+                                    if(event.key === Qt.Key_Return) buttonTriggeredAction();
+                                    else if(event.key === Qt.Key_Up) acceptPolicy.giveFocus();
                                 }
+                            
+                            
+                            function buttonTriggeredAction()
+                            {
+                                root.saveEntries();
+                                loadPage(loginPage);
+                            }
                         }
                     }
                 }
@@ -288,4 +301,15 @@ Page
     }
     
     Component.onCompleted: firstNameInput.giveFocus();
+    
+    
+    function saveEntries()
+    {
+        if(firstNameInput.text.length >= 2)
+            Globals.firstName = firstNameInput.text;
+        if(lastNameInput.text.length >= 2)
+            Globals.lastName = lastNameInput.text;
+        if(emailInput.text.length >= 5)
+            Globals.email = emailInput.text;
+    }
 }

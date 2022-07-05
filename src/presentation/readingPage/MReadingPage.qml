@@ -38,21 +38,6 @@ Page
     }
     
     
-    Keys.onPressed:
-        (event) =>
-        {
-            if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier && (event.modifiers & Qt.AltModifier)))
-            {
-                if(root.fullScreen) root.exitFullScreen();
-                else root.enterFullScreen();
-            }
-            else if((event.key === Qt.Key_F) && (event.modifiers & Qt.ControlModifier))
-            {
-                searchbar.visible = !searchbar.visible;
-            }
-        }
-    
-    
     ColumnLayout
     {
         id: mainLayout

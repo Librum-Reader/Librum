@@ -29,6 +29,48 @@ Page
     }
     
     
+    Shortcut
+    {
+        sequence: "Shift+1"
+        onActivated: loadSettingsPage(aboutPage, settingsSidebar.aboutItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+2"
+        onActivated: loadSettingsPage(appearancePage, settingsSidebar.appearanceItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+3"
+        onActivated: loadSettingsPage(shortcutsPage, settingsSidebar.shortcutsItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+4"
+        onActivated: loadSettingsPage(updatesPage, settingsSidebar.updatesItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+5"
+        onActivated: loadSettingsPage(advancedSettingsPage, settingsSidebar.advancedSettingsItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+6"
+        onActivated: loadSettingsPage(accountPage, settingsSidebar.accountItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+7"
+        onActivated: loadSettingsPage(storagePage, settingsSidebar.storageItem)
+    }
+    Shortcut
+    {
+        sequence: "Shift+8"
+        onActivated: loadSettingsPage(supportUsPage, settingsSidebar.supportUsItem)
+    }
+    
+    
     RowLayout
     {
         id: layout

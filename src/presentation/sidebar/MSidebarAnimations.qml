@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.extensions.sidebar
 
 
 Item 
@@ -63,6 +64,8 @@ Item
             duration: slowDuration * 2.5
             easing.type: defaultEasingType
         }
+        
+        onFinished: SidebarState.currentState = SidebarState.Opened
     }
     
     ParallelAnimation
@@ -104,5 +107,7 @@ Item
             duration: fastDuration
             easing.type: defaultEasingType
         }
+        
+        onFinished: SidebarState.currentState = SidebarState.Closed
     }
 }

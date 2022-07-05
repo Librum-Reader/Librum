@@ -24,6 +24,14 @@ Page
         color: Style.pagesBackground
     }
     
+    
+    Shortcut
+    {
+        sequence: StandardKey.New
+        onActivated: fileDialog.open()
+    }
+    
+    
     ListModel
     {
         id: model
@@ -221,5 +229,8 @@ Page
             "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
+    
+        onAccepted: root.empty = false
+        onRejected: root.empty = false
     }
 }

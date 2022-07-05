@@ -34,6 +34,38 @@ Pane
     onVisibleChanged: if(optionsPopup.opened) optionsPopup.close()
     
     
+    Shortcut
+    {
+        sequence: "Ctrl+Backspace"
+        onActivated: backButton.buttonTriggeredAction()
+    }
+    Shortcut
+    {
+        sequence: "Tab"
+        onActivated: chapterButton.buttonTriggeredAction()
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+B"
+        onActivated: bookmarkButton.buttonTriggeredAction()
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+F"
+        onActivated: searchButton.buttonTriggeredAction()
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+Alt+F"
+        onActivated: fullScreenButton.buttonTriggeredAction()
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+Alt+O"
+        onActivated: optionsButton.buttonTriggeredAction()
+    }
+    
+    
     RowLayout
     {
         id: mainLayout
@@ -52,7 +84,13 @@ Pane
             imageSize: 11
             opacityOnPressed: 0.7
             
-            onClicked: loadPage(homePage, sidebar.homeItem, false)
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                loadPage(homePage, sidebar.homeItem, false);
+            }
         }
         
         MButton
@@ -66,7 +104,13 @@ Pane
             imageSize: 18
             opacityOnPressed: 0.7
             
-            onClicked: root.chapterButtonClicked()
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                root.chapterButtonClicked();
+            }
         }
         
         MButton
@@ -80,7 +124,13 @@ Pane
             imageSize: 14
             opacityOnPressed: 0.7
             
-            onClicked: root.bookMarkButtonClicked()
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                root.bookMarkButtonClicked();
+            }
         }
         
         MButton
@@ -96,7 +146,13 @@ Pane
             fontSize: 10.5
             opacityOnPressed: 0.7
             
-            onClicked: root.currentPageButtonClicked()
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                root.currentPageButtonClicked();
+            }
         }
         
         
@@ -167,7 +223,13 @@ Pane
             imageSize: 20
             opacityOnPressed: 0.7
             
-            onClicked: root.fullScreenButtonClicked()
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                root.fullScreenButtonClicked();
+            }
         }
         
         MButton
@@ -181,7 +243,13 @@ Pane
             imageSize: 18
             opacityOnPressed: 0.7
             
-            onClicked: root.searchButtonClicked()
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
+            {
+                root.searchButtonClicked();
+            }
         }
         
         MButton
@@ -195,8 +263,12 @@ Pane
             imageSize: 20
             opacityOnPressed: 0.7
             
-            onClicked:
+            onClicked: buttonTriggeredAction()
+            
+            
+            function buttonTriggeredAction()
             {
+                // @disable-check M127
                 optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
             }
         }

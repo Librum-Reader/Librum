@@ -29,6 +29,41 @@ Item
     implicitHeight: Window.height
     
     
+    Shortcut
+    {
+        sequence: "Ctrl+O"
+        onActivated:
+        {
+            SidebarState.currentState === SidebarState.Opened ? root.closeSidebar() : root.openSidebar()
+        }
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+1"
+        onActivated: loadPage(freeBooksPage, root.freeBooksItem)
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+2"
+        onActivated: loadPage(homePage, root.homeItem)
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+3"
+        onActivated: loadPage(statisticsPage, root.statisticsItem)
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+4"
+        onActivated: loadPage(addOnsPage, root.addOnsItem)
+    }
+    Shortcut
+    {
+        sequence: "Ctrl+5"
+        onActivated: loadPage(settings, root.settingsItem)
+    }
+    
+    
     Pane
     {
         id: container
@@ -230,14 +265,12 @@ Item
     {
         animations.openAnimation.start();
         currentItem.openAnimation.start();
-        SidebarState.currentState = SidebarState.Opened;
     }
     
     function closeSidebar()
     {
         animations.closeAnimation.start();
         currentItem.closeAnimation.start();
-        SidebarState.currentState = SidebarState.Closed;
     }
     
     function resetSidebar()

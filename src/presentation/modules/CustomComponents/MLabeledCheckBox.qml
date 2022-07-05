@@ -30,21 +30,27 @@ Item
     implicitWidth: 100
     implicitHeight: layout.height
     
+    
     RowLayout
     {
         id: layout
         spacing: root.spacing
         
-        Rectangle
+        
+        Pane
         {
             id: container
             Layout.preferredWidth: root.boxWidth
             Layout.preferredHeight: root.boxHeight
-            radius: root.borderRadius
-            border.width: (root.checked ? 0 : root.borderWidth)
-            border.color: root.borderColor
-            color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
-            antialiasing: true
+            padding: 0
+            background: Rectangle
+            {
+                radius: root.borderRadius
+                border.width: (root.checked ? 0 : root.borderWidth)
+                border.color: root.borderColor
+                color: (root.checked ? root.checkedBackgroundColor : root.uncheckedBackgroundColor)
+                antialiasing: true
+            }
             
             
             Image
@@ -68,7 +74,7 @@ Item
                 }
             }
         }
-    
+        
         Label
         {
             id: text

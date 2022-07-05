@@ -229,6 +229,7 @@ Item
     
     function startRecording()
     {
+        button.forceActiveFocus();
         root.recording = true;
         buttonPulsatingAnimation.start();
     }
