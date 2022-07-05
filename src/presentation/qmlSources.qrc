@@ -81,5 +81,6 @@
         <file>homePage/bookOptionsPopup/MBookOptionsPopup.qml</file>
         <file>settings/accountPage/MAccountPage.qml</file>
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
+        <file>Globals.qml</file>
     </qresource>
 </RCC>

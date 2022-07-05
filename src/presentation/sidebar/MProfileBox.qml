@@ -4,6 +4,7 @@ import QtQuick.Controls
 import Librum.extensions.sidebar
 import Librum.style
 import Librum.icons
+import Librum.globals
 
 
 Item
@@ -40,19 +41,32 @@ Item
                 Layout.preferredHeight: 36
                 Layout.alignment: Qt.AlignVCenter
                 Layout.leftMargin: 18
+                clip: true
                 radius: width
                 antialiasing: true
-                color: "#DBCE5F"
+                color: Globals.profilePicture.length === 0 ? "#DBCE5F" : "transparent"
                 
                 Label
                 {
                     id: initials
                     anchors.centerIn: parent
+                    visible: Globals.profilePicture.length === 0
                     text: root.initialLetters
                     font.pointSize: 12
                     font.bold: true
                     font.family: Style.defaultFontFamily
                     color: Style.colorBrightText
+                }
+                
+                Image
+                {
+                    id: image
+                    visible: Globals.profilePicture.length > 0
+                    anchors.centerIn: parent
+                    Layout.leftMargin: 18
+                    source: Globals.profilePicture
+                    sourceSize.height: parent.height
+                    fillMode: Image.PreserveAspectFit
                 }
                 
                 MouseArea
@@ -102,7 +116,7 @@ Item
     
     
     function giveFocus()
-        {
-            root.forceActiveFocus();
-        }    
+    {
+        root.forceActiveFocus();
+    }
 }

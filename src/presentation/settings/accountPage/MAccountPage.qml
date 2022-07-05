@@ -4,6 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.globals
 
 
 Page
@@ -167,6 +168,7 @@ Page
                 
                 MSelectProfilePictureArea
                 {
+                    id: profilePictureArea
                     Layout.fillWidth: true
                     Layout.maximumWidth: 312
                     Layout.preferredHeight: 190
@@ -383,6 +385,9 @@ Page
     
     function saveAccountSettings()
     {
+        if(profilePictureArea.imagePath !== Globals.profilePicture)
+            Globals.profilePicture = profilePictureArea.imagePath;
+        
         root.unsavedChanges = false;
     }
 }
