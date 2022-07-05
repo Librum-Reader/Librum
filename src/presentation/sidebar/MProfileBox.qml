@@ -11,7 +11,6 @@ Item
 {
     id: root
     property int arrowRotation : 0
-    property string initialLetters : "DL"
     signal clicked
     
     implicitWidth: closedWidth
@@ -51,7 +50,7 @@ Item
                     id: initials
                     anchors.centerIn: parent
                     visible: Globals.profilePicture.length === 0
-                    text: root.initialLetters
+                    text: Globals.firstName[0].toUpperCase() + Globals.lastName[0].toUpperCase() 
                     font.pointSize: 12
                     font.bold: true
                     font.family: Style.defaultFontFamily

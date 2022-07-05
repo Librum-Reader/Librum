@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.globals
 
 
 Page
@@ -248,13 +249,18 @@ Page
                             fontWeight: Font.Bold
                             text: "Let's start"
                             
-                            onClicked: loadPage(loginPage);
+                            onClicked:
+                            {
+                                root.saveEntries();
+                                loadPage(loginPage);
+                            }
                             
                             Keys.onPressed: 
                                 (event) =>
                                 {
                                     if(event.key === Qt.Key_Return)
                                     {
+                                        root.saveEntries();
                                         loadPage(loginPage);
                                     }
                                     else if(event.key === Qt.Key_Up)
@@ -288,4 +294,12 @@ Page
     }
     
     Component.onCompleted: firstNameInput.giveFocus();
+
+
+    function saveEntries()
+    {
+        Globals.firstName = firstNameInput.text;
+        Globals.lastName = lastNameInput.text;
+        Globals.email = emailInput.text;
+    }
 }
