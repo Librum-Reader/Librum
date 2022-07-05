@@ -165,57 +165,16 @@ Page
                     }
                 }
                 
-                Pane
+                MSelectProfilePictureArea
                 {
-                    id: dropArea
                     Layout.fillWidth: true
                     Layout.maximumWidth: 312
                     Layout.preferredHeight: 190
                     Layout.topMargin: 76
                     Layout.rightMargin: 40
                     Layout.leftMargin: 32
-                    clip: true
-                    background: Rectangle
-                    {
-                        color: Style.colorLightGray
-                        border.color: Style.colorLightBorder
-                        radius: 4
-                    }
                     
-                    
-                    ColumnLayout
-                    {
-                        id: dropAreaLayout
-                        width: parent.width
-                        spacing: 10
-                        
-                        
-                        Image
-                        {
-                            id: dropAreaIcon
-                            Layout.alignment: Qt.AlignCenter
-                            Layout.topMargin: 50
-                            source: Icons.addImage
-                            sourceSize.width: 40
-                            fillMode: Image.PreserveAspectFit
-                        }
-                        
-                        Label
-                        {
-                            id: dropAreaText
-                            Layout.fillWidth: true
-                            Layout.maximumWidth: 237
-                            Layout.alignment: Qt.AlignCenter
-                            text: "Click to select an image or drag and drop in this area"
-                            horizontalAlignment: Qt.AlignHCenter
-                            wrapMode: Text.WordWrap
-                            color: Style.colorLightText2
-                            font.pointSize: 12
-                            font.family: Style.defaultFontFamily
-                            font.weight: Font.DemiBold
-                            lineHeight: 0.9
-                        }
-                    }
+                    onImageSelectedChanged: root.unsavedChanges = true
                 }
                 
                 Item { Layout.fillWidth: true }

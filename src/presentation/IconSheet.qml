@@ -38,6 +38,7 @@ Item
     property string lockProtected: "/resources/images/illustrations/lock_protected_illustration.svg"
     property string attention: "/resources/images/illustrations/attention_illustration.svg"
     property string checkBubbleIllustration: "/resources/images/illustrations/check_bubble_illustration.svg"
+    property string addFileIllustration: "/resources/images/illustrations/add_file_illustration.svg"
     
     
     // ReadingView-icons

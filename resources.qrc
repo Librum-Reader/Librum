@@ -87,5 +87,6 @@
         <file>resources/images/decision/check_circle_icon.svg</file>
         <file>resources/images/utility/trash_gray_icon.svg</file>
         <file>resources/images/utility/active_microphone_icon.svg</file>
+        <file>resources/images/illustrations/add_file_illustration.svg</file>
     </qresource>
 </RCC>

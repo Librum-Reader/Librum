@@ -6,6 +6,7 @@ import CustomComponents
 import "settingsSidebar"
 import "shortcutsPage"
 import "updatesPage"
+import "accountPage"
 
 
 Page
