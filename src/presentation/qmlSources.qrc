@@ -63,7 +63,6 @@
         <file>toolsPage/MToolsPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
         <file>settings/MAboutPage.qml</file>
-        <file>settings/MAccountPage.qml</file>
         <file>settings/MAdvancedSettingsPage.qml</file>
         <file>settings/MAppearancePage.qml</file>
         <file>settings/MSettings.qml</file>
@@ -80,5 +79,8 @@
         <file>settings/shortcutsPage/MRecordKeyBox.qml</file>
         <file>homePage/bookOptionsPopup/MBookOptionsItem.qml</file>
         <file>homePage/bookOptionsPopup/MBookOptionsPopup.qml</file>
+        <file>settings/accountPage/MAccountPage.qml</file>
+        <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
+        <file>Globals.qml</file>
     </qresource>
 </RCC>

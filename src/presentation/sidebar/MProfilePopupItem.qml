@@ -25,7 +25,7 @@ Item
         
         Image
         {
-            id: syncIcon
+            id: icon
             source: root.imagePath
             fillMode: Image.PreserveAspectFit
             sourceSize.width: root.imageWidth

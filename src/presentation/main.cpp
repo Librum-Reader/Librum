@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
     // Type registering
     qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
     qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
+    qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
     
     SidebarState sidebarState;
     qmlRegisterSingletonInstance("Librum.extensions.sidebar", 1, 0, "SidebarState", &sidebarState);

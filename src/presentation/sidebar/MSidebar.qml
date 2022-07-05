@@ -194,13 +194,6 @@ Item
                 color: Style.colorSeparator
             }
             
-            MProfilePopup
-            {
-                id: profilePopup
-                x: 12
-                y: root.height - 54 - implicitHeight
-            }
-            
             MProfileBox
             {
                 id: profileBox
@@ -214,6 +207,14 @@ Item
                     else
                         profilePopup.open();
                 }
+            }
+            
+            
+            MProfilePopup
+            {
+                id: profilePopup
+                x: 12
+                y: root.height - 54 - implicitHeight
             }
         }
     }
