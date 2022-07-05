@@ -24,6 +24,13 @@ Page
     }
     
     
+    Shortcut
+    {
+        sequence: StandardKey.Save
+        onActivated: root.saveAccountSettings()
+    }
+    
+    
     ColumnLayout
     {
         id: layout

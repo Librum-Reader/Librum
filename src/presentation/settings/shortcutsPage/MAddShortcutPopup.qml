@@ -30,6 +30,13 @@ Popup
     onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
     
     
+    Shortcut
+    {
+        sequence: "Ctrl+R"
+        onActivated: recordBox.startRecording()
+    }
+    
+    
     ColumnLayout
     {
         id: mainLayout
@@ -138,6 +145,7 @@ Popup
                     
                     MRecordKeyBox
                     {
+                        id: recordBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemToRedirectFocusTo: downloadButton

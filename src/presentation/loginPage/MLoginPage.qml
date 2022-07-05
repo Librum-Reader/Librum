@@ -14,6 +14,11 @@ Page
         color: Style.loginWindowBackground
     }
     
+    Shortcut
+    {
+        sequence: "Ctrl+Return"
+        onActivated: loginButton.buttonTriggeredAction()
+    }
     
     ColumnLayout
     {
@@ -199,15 +204,15 @@ Page
                     Keys.onPressed: 
                         (event) =>
                         {
-                            if(event.key === Qt.Key_Up)
-                            {
-                                rememberMeCheckBox.giveFocus();
-                            }
-                            else if(event.key === Qt.Key_Return)
-                            {
-                                loadPage(homePage, sidebar.homeItem, false);
-                            }
+                            if(event.key === Qt.Key_Up) rememberMeCheckBox.giveFocus();
+                            else if(event.key === Qt.Key_Return) buttonTriggeredAction();
                         }
+                    
+                    
+                    function buttonTriggeredAction()
+                    {
+                        loadPage(homePage, sidebar.homeItem, false);
+                    }
                 }
             }
         }

@@ -24,6 +24,13 @@ Page
     }
     
     
+    Shortcut
+    {
+        sequence: StandardKey.New
+        onActivated: addShortcutPopup.open()
+    }
+    
+    
     ColumnLayout
     {
         id: layout

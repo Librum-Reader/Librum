@@ -21,6 +21,13 @@ Item
     implicitHeight: 36
     
     
+    Shortcut
+    {
+        sequence: StandardKey.Find
+        onActivated: root.opened ? root.close() : root.open()
+    }
+    
+    
     Pane
     {
         id: container
