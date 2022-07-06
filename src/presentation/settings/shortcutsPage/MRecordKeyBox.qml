@@ -5,6 +5,7 @@ import CustomComponents
 import Qt5Compat.GraphicalEffects
 import Librum.style
 import Librum.icons
+import Librum.QmlComponents
 
 
 Item
@@ -12,6 +13,7 @@ Item
     id: root
     property var itemToRedirectFocusTo
     property bool recording: false
+    property string originalSequence: ""
     
     
     Glow
@@ -50,7 +52,6 @@ Item
         Rectangle
         {
             id: button
-            property var pressedKeys: undefined
             
             Layout.fillWidth: true
             Layout.preferredHeight: 38
@@ -60,6 +61,15 @@ Item
             opacity: mouseArea.pressed ? 0.8 : 1
             
             onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()
+            
+            
+            KeySequenceRecorder
+            {
+                id: keySequenceRecorder
+                originalSequence: root.originalSequence
+                
+                onCurrentSequenceChanged: recordLabel.text = currentSequence
+            }
             
             
             RowLayout
@@ -74,7 +84,7 @@ Item
                     id: recordLabel
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
-                    text: button.pressedKeys ? button.pressedKeys : "Press to record"
+                    text: keySequenceRecorder.originalSequence === "" ? "Press to record" : keySequenceRecorder.originalSequence
                     font.pointSize: 13
                     font.family: Style.defaultFontFamily
                     color: Style.colorLightText3
@@ -91,95 +101,6 @@ Item
                     fillMode: Image.PreserveAspectFit
                 }
             }
-            
-            Keys.onPressed: 
-                (event) =>
-                {
-                    event.accepted = true;
-                    
-                    if(event.key === Qt.Key_Return)
-                    {
-                        stopRecording();
-                        return;
-                    }
-                        
-                    button.pressedKeys = getStringFromInput(event);
-                }
-            
-            function getStringFromInput(event)
-            {
-                let result = "";
-                
-                if(event.modifiers & Qt.ShiftModifier)
-                    result += "SHIFT+";
-                if(event.modifiers & Qt.ControlModifier)
-                    result += "CTRL+";
-                if(event.modifiers & Qt.AltModifier)
-                    result += "ALT+";
-                if(event.modifiers & Qt.MetaModifier)
-                    result += "META+";
-                if(event.key === Qt.Key_Left)
-                    result += "LEFT+"
-                if(event.key === Qt.Key_Right)
-                    result += "RIGHT+"
-                if(event.key === Qt.Key_Up)
-                    result += "UP+"
-                if(event.key === Qt.Key_Down)
-                    result += "DOWN+"
-                if(event.key === Qt.Key_Escape)
-                    result += "ESC+"
-                if(event.key === Qt.Key_Delete)
-                    result += "DELETE+"
-                if(event.key === Qt.Key_Insert)
-                    result += "INSERT+"
-                if(event.key === Qt.Key_Home)
-                    result += "HOME+"
-                if(event.key === Qt.Key_PageUp)
-                    result += "PAGE UP+"
-                if(event.key === Qt.Key_PageUp)
-                    result += "PAGE DOWN+"
-                if(event.key === Qt.Key_F1)
-                    result += "F1+"
-                if(event.key === Qt.Key_F2)
-                    result += "F2+"
-                if(event.key === Qt.Key_F3)
-                    result += "F3+"
-                if(event.key === Qt.Key_F4)
-                    result += "F4+"
-                if(event.key === Qt.Key_F5)
-                    result += "F5+"
-                if(event.key === Qt.Key_F6)
-                    result += "F6+"
-                if(event.key === Qt.Key_F7)
-                    result += "F7+"
-                if(event.key === Qt.Key_F8)
-                    result += "F8+"
-                if(event.key === Qt.Key_F9)
-                    result += "F9+"
-                if(event.key === Qt.Key_F10)
-                    result += "F10+"
-                if(event.key === Qt.Key_F11)
-                    result += "F11+"
-                if(event.key === Qt.Key_F12)
-                    result += "F12+"
-                if(event.key === Qt.Key_F13)
-                    result += "F13+"
-                if(event.key === Qt.Key_F14)
-                    result += "F14+"
-                if(event.key === Qt.Key_F15)
-                    result += "F15+"
-                if(event.key === Qt.Key_F16)
-                    result += "F16+"
-                if(event.key === Qt.Key_F17)
-                    result += "F17+"
-                if(event.key === Qt.Key_F18)
-                    result += "F18+"
-                
-                if(event.text !== "")
-                    result += event.text.toUpperCase() + "+";
-                
-                return result.substring(0, result.length - 1);
-            }
         }
     }
     
@@ -189,7 +110,7 @@ Item
         anchors.fill: parent
         
         onClicked:
-        {
+        {            
             if(root.recording)
             {
                 stopRecording();
@@ -229,7 +150,8 @@ Item
     
     function startRecording()
     {
-        button.forceActiveFocus();
+        keySequenceRecorder.forceActiveFocus();
+        //        button.forceActiveFocus();
         root.recording = true;
         buttonPulsatingAnimation.start();
     }

@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Quick Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
 
 
 # Qt
@@ -18,6 +18,8 @@ add_library(application
                     sidebar_state.cpp
                     include/sidebar_state.hpp
                     include/test_request.hpp
+                    key_sequence_recorder.cpp
+                    include/key_sequence_recorder.hpp
 )
 
 target_include_directories(application
@@ -33,6 +35,15 @@ target_link_libraries(application
                 PRIVATE
                     Qt6::Core
                     Qt6::Network
+                    Qt6::Quick
 )
 target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+
+# Qml-Module
+qt6_add_qml_module(application
+  URI "Librum.QmlComponents"
+  VERSION 1.0
+)
