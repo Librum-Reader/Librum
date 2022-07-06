@@ -50,9 +50,17 @@ void KeySequenceRecorder::keyPressEvent(QKeyEvent* event)
         int modifiers(0);
         
         if(event->key() == Qt::Key_Return)
+        {
             emit returnPressed();
-        if(event->key() == Qt::Key_Return)
+            event->accept();
+            return;
+        }
+        if(event->key() == Qt::Key_Escape)
+        {
             emit escapePressed();
+            event->accept();
+            return;
+        }
         if (event->modifiers().testFlag(Qt::ControlModifier))
             modifiers |= Qt::CTRL;
         if (event->modifiers().testFlag(Qt::ShiftModifier))
