@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 
 # Qt
@@ -13,9 +13,11 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(application
                 SHARED
-                    placeholder.cpp
-                    include/placeholder.hpp
                     include/app_information.hpp
+                    test_request.cpp
+                    sidebar_state.cpp
+                    include/sidebar_state.hpp
+                    include/test_request.hpp
 )
 
 target_include_directories(application
@@ -30,6 +32,7 @@ target_compile_definitions(application
 target_link_libraries(application
                 PRIVATE
                     Qt6::Core
+                    Qt6::Network
 )
 target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
