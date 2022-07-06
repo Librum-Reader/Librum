@@ -26,7 +26,7 @@ Item
         horizontalPadding: root.padding
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : Style.colorBackground
+            color: root.selected ? Style.colorSidebarMark : mouseArea.containsMouse ? Style.colorLightGray : Style.colorBackground
             radius: 4
             antialiasing: true
         }
@@ -47,7 +47,9 @@ Item
     
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         
         onClicked: root.clicked(index)
     }
