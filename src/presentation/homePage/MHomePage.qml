@@ -219,6 +219,15 @@ Page
     }
     
     
+    MBookDetailsPopup
+    {
+        id: bookDetailsPopup
+        
+        x: root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding
+        y: root.height / 2 - implicitHeight / 2 - root.topPadding - 30
+    }
+    
+    
     FileDialog
     {
         id: fileDialog

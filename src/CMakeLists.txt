@@ -6,7 +6,9 @@ set(CMAKE_AUTORCC ON)
 
 
 # Configuration
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/modules" CACHE STRING "path to qml modules")
+list(APPEND QML_MODULE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules")
+list(APPEND QML_MODULE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/application")
+set(QML_IMPORT_PATH "${QML_MODULE_DIRS}" CACHE STRING "path to qml modules")
 
 
 

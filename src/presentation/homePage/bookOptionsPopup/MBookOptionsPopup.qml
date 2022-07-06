@@ -51,6 +51,7 @@ Popup
             
             onClicked:
             {
+                bookDetailsPopup.open();
                 root.close();
             }
         }

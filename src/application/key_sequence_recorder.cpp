@@ -1,5 +1,6 @@
 #include <QKeyEvent>
 #include "key_sequence_recorder.hpp"
+#include "qnamespace.h"
 
 
 QString KeySequenceRecorder::originalSequence() const
@@ -33,7 +34,7 @@ void KeySequenceRecorder::setCurrentSequence(const QString& newSequence)
 
 bool KeySequenceRecorder::sequenceIsAllModifiers(int keySequence)
 {
-    return keySequence >= Qt::Key_Shift && keySequence <= Qt::Key_Meta;
+    return keySequence >= Qt::Key_Shift && keySequence <= Qt::Key_Alt;
 }
 
 void KeySequenceRecorder::resetSequence()
