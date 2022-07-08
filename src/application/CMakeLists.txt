@@ -44,6 +44,6 @@ target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 # Qml-Module
 qt6_add_qml_module(application
-  URI "Librum.QmlComponents"
+  URI "Librum.Elements"
   VERSION 1.0
 )

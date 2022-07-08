@@ -6,9 +6,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # Configuration
-list(APPEND QML_MODULE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules")
-list(APPEND QML_MODULE_DIRS "${CMAKE_CURRENT_SOURCE_DIR}/application")
-set(QML_IMPORT_PATH "${QML_MODULE_DIRS}" CACHE STRING "path to qml modules")
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules" CACHE STRING "Qml modules")
 
 
 
@@ -54,7 +52,7 @@ target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 
 
-# Move fonts into binary dir
+# Move fonts into binary dir    
 include(CopyRecursive)
 set(FONTS_OUT_DIR ${PROJECT_BINARY_DIR}/resources/fonts)
 file(MAKE_DIRECTORY ${FONTS_OUT_DIR})

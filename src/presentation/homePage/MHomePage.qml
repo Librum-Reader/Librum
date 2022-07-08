@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Qt.labs.platform
-import Librum.extensions.sidebar
+import Librum.Elements
 import CustomComponents
 import Librum.style
 import Librum.icons

@@ -2,10 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import Librum.Elements
 import Qt5Compat.GraphicalEffects
 import Librum.style
 import Librum.icons
-import Librum.QmlComponents
 
 
 Item
@@ -27,7 +27,6 @@ Item
         y: button.y
         spread: 0
         transparentBorder: true
-        z: -1
         color: "#A92224"
         
         source: button

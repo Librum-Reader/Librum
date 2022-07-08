@@ -1,4 +1,5 @@
 #pragma once
+#include <QQmlEngine>
 #include <QObject>
 #include <string_view>
 
@@ -14,6 +15,8 @@ class AppInformation : public QObject
     Q_PROPERTY(QString companyName READ getCompanyNameAsQString CONSTANT)
     Q_PROPERTY(QString companyWebsite READ getCompanyWebsiteAsQString CONSTANT)
     Q_PROPERTY(QString companyEmail READ getCompanyEmailAsQString CONSTANT)
+    QML_ELEMENT
+    QML_SINGLETON
     
 public:
     constexpr static std::string_view getCurrentVersion() { return m_currentVersion; }
