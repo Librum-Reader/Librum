@@ -163,6 +163,12 @@ Item
         }
     }
     
+    function closeDropDown()
+    {
+        if(selectionPopup.opened)
+            selectionPopup.close();
+    }
+    
     
     function giveFocus()
     {

@@ -209,15 +209,27 @@ Popup
                     anchors.leftMargin: 26
                     contentWidth: width
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                    ScrollBar.vertical.policy: ScrollBar.AsNeeded
-                    ScrollBar.vertical.stepSize: 0.001
+                    ScrollBar.vertical: ScrollBar
+                    {
+                        parent: inputSideLayout
+                        x: inputSideLayout.width
+                        y: inputSideLayout.topPadding
+                        height: inputSideLayout.availableHeight
+                        onActiveChanged: inputSideLayout.scrolling()
+                    }
+                    
+                    function scrolling()
+                    {
+                        languageComboBox.closeDropDown();
+                        tagsComboBox.closeDropDown();
+                    }
                     
                     
                     ColumnLayout
                     {
                         id: inputLayout
                         anchors.fill: parent
-                        //                        anchors.rightMargin: 16
+                        anchors.rightMargin: 8
                         spacing: 15
                         
                         
@@ -272,37 +284,71 @@ Popup
                             readOnly: true
                         }
                         
-                        MLabeledInputBox
+                        MComboBox
                         {
-                            id: tagsField
+                            id: tagsComboBox
                             Layout.fillWidth: true
-                            boxHeight: 34
+                            Layout.preferredHeight: 53
                             headerText: "Tags"
                             headerFontWeight: Font.Bold
                             headerFontSize: 11.5
-                            text: "4 Tags"
-                            headerToBoxSpacing: 3
-                            inputFontSize: 12
-                            inputFontColor: Style.colorLightText3
-                            borderWidth: 1
-                            borderRadius: 4
-                            readOnly: true
+                            headerFontColor: Style.colorBaseTitle
+                            imagePath: Icons.dropdownGray
+                            imageSize: 9
+                            maxPopupHeight: 200
+                            defaultIndex: 3
+                            
+                            listContent: ListModel
+                            {
+                                ListElement { content: "Technology" }
+                                ListElement { content: "Favourite" }
+                                ListElement { content: "Romance" }
+                                ListElement { content: "Comedy" }
+                                ListElement { content: "Sports" }
+                                ListElement { content: "Physics" }
+                                ListElement { content: "Blockchain" }
+                                ListElement { content: "Psychology" }
+                            }
                         }
                         
-                        MLabeledInputBox
+                        MComboBox
                         {
-                            id: languageField
+                            id: languageComboBox
                             Layout.fillWidth: true
-                            boxHeight: 34
+                            Layout.preferredHeight: 53
                             headerText: "Language"
                             headerFontWeight: Font.Bold
                             headerFontSize: 11.5
-                            text: "English"
-                            headerToBoxSpacing: 3
-                            inputFontSize: 12
-                            inputFontColor: Style.colorLightText3
-                            borderWidth: 1
-                            borderRadius: 4
+                            headerFontColor: Style.colorBaseTitle
+                            imagePath: Icons.dropdownGray
+                            imageSize: 9
+                            maxPopupHeight: 200
+                            defaultIndex: 3
+                            
+                            listContent: ListModel
+                            {
+                                ListElement { content: "None" }
+                                ListElement { content: "English" }
+                                ListElement { content: "German"  }
+                                ListElement { content: "Italian" }
+                                ListElement { content: "French" }
+                                ListElement { content: "Romanian" }
+                                ListElement { content: "Spanish" }
+                                ListElement { content: "Mandarin" }
+                                ListElement { content: "Portugese" }
+                                ListElement { content: "Hindi" }
+                                ListElement { content: "Bengali" }
+                                ListElement { content: "Russian" }
+                                ListElement { content: "Arabic" }
+                                ListElement { content: "Japanese" }
+                                ListElement { content: "Indonesian" }
+                                ListElement { content: "Turkish" }
+                                ListElement { content: "Korean" }
+                                ListElement { content: "Hungarian" }
+                                ListElement { content: "Thai"  }
+                                ListElement { content: "Swahli" }
+                                ListElement { content: "Dutch" }
+                            }
                         }
                         
                         MLabeledInputBox
@@ -438,7 +484,7 @@ Popup
                 
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
-
+                
                 
                 KeyNavigation.right: cancelButton
                 KeyNavigation.tab: cancelButton
@@ -489,7 +535,7 @@ Popup
                 
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
-
+                
                 KeyNavigation.left: cancelButton
                 KeyNavigation.tab: applyButton
             }
