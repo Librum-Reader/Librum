@@ -8,6 +8,7 @@ Item
 {
     id: root
     property bool active: false
+    property bool currentlyHovered: mouseArea.containsMouse
     property string text
     property color fontColor: "black"
     property int fontWeight: Font.Bold
@@ -88,6 +89,8 @@ Item
         {
             id: mouseArea
             anchors.fill: parent
+            hoverEnabled: true
+            
             onClicked: root.clicked()
         }
     }

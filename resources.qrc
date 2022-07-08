@@ -88,5 +88,6 @@
         <file>resources/images/utility/trash_gray_icon.svg</file>
         <file>resources/images/utility/active_microphone_icon.svg</file>
         <file>resources/images/illustrations/add_file_illustration.svg</file>
+        <file>resources/images/utility/trash_white_icon.svg</file>
     </qresource>
 </RCC>

@@ -11,8 +11,10 @@ Popup
 {
     id: root
     property int contentPadding: 16
+    property MButton lastFocusedButton: applyButton
     
     implicitWidth: 751
+    implicitHeight: mainLayout.implicitHeight
     focus: true
     padding: 0
     background: Rectangle
@@ -25,6 +27,17 @@ Popup
     {
         color: "#aa32324D"
         opacity: 1
+    }
+    
+    Component.onCompleted: applyButton.forceActiveFocus()
+    
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        propagateComposedEvents: true
+        onClicked: lastFocusedButton.forceActiveFocus()
     }
     
     
@@ -204,7 +217,7 @@ Popup
                     {
                         id: inputLayout
                         anchors.fill: parent
-                        anchors.rightMargin: 16
+                        //                        anchors.rightMargin: 16
                         spacing: 15
                         
                         
@@ -400,43 +413,32 @@ Popup
         RowLayout
         {
             id: buttonLayout
+            Layout.preferredWidth: parent.width
             Layout.topMargin: 65
             Layout.bottomMargin: 42
             Layout.leftMargin: 52
+            Layout.rightMargin: 52
             spacing: 16
             
             
             MButton
             {
-                id: downloadButton
+                id: applyButton
                 Layout.preferredWidth: 140
                 Layout.preferredHeight: 38
+                Layout.alignment: Qt.AlignLeft
                 active: true
-                borderWidth: active ? 0 : 1
+                borderWidth: activeFocus || currentlyHovered ? 0 : 1
                 borderColor: Style.colorLightBorder
-                backgroundColor: active ? Style.colorBasePurple : "transparent"
-                text: "Download"
-                fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                backgroundColor: activeFocus || currentlyHovered ? Style.colorBasePurple : "transparent"
+                text: "Apply"
+                fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText2
                 fontWeight: Font.Bold
                 fontSize: 12
-                imagePath: active ? Icons.downloadWhite : Icons.downloadGray
-                imageSize: 18
                 
+                onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
-                
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                        {
-                            downloadButton.active = false;
-                            cancelButton.active = true;
-                        }
-                        else if(event.key === Qt.Key_Return)
-                        {
-                            root.close();
-                        }
-                    }
+
                 
                 KeyNavigation.right: cancelButton
                 KeyNavigation.tab: cancelButton
@@ -447,33 +449,49 @@ Popup
                 id: cancelButton
                 Layout.preferredWidth: 140
                 Layout.preferredHeight: 38
-                borderWidth: active ? 0 : 1
+                Layout.alignment: Qt.AlignLeft
+                borderWidth: activeFocus  || currentlyHovered ? 0 : 1
                 borderColor: Style.colorLightBorder
-                backgroundColor: active ? Style.colorBasePurple : "transparent"
+                backgroundColor: activeFocus || currentlyHovered ? Style.colorBasePurple : "transparent"
                 opacityOnPressed: 0.7
                 text: "Cancel"
-                fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText2
                 fontWeight: Font.Bold
                 fontSize: 12
                 
+                onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
-                Keys.onPressed: 
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                        {
-                            cancelButton.active = false;
-                            downloadButton.active = true;
-                        }
-                        else if(event.key === Qt.Key_Return)
-                        {
-                            root.close();
-                        }
-                    }
+                KeyNavigation.left: applyButton
+                KeyNavigation.right: deleteButton
+                KeyNavigation.tab: deleteButton
+            }
+            
+            Item { Layout.fillWidth: true }
+            
+            MButton
+            {
+                id: deleteButton
+                Layout.preferredWidth: 140
+                Layout.preferredHeight: 38
+                Layout.alignment: Qt.AlignRight
+                borderWidth: activeFocus  || currentlyHovered ? 0 : 1
+                borderColor: Style.colorLightBorder
+                backgroundColor: activeFocus || currentlyHovered ? "#D84B4D" : "transparent"
+                opacityOnPressed: 0.7
+                text: "Delete"
+                fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText
+                fontWeight: Font.Bold
+                fontSize: 12
+                imagePath: activeFocus || currentlyHovered ? Icons.trash_white : Icons.trash_gray
+                imageSize: 17
+                imageSpacing: 10
                 
-                KeyNavigation.left: downloadButton
-                KeyNavigation.tab: downloadButton
+                onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
+                onClicked: root.close()
+
+                KeyNavigation.left: cancelButton
+                KeyNavigation.tab: applyButton
             }
         }
     }
