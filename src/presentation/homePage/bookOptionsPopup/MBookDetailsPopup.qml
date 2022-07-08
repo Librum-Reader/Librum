@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt.labs.platform
 import CustomComponents
 import Librum.style
 import Librum.icons
@@ -19,7 +20,6 @@ Popup
         radius: 6
         color: Style.colorBackground
     }
-    
     modal: true
     Overlay.modal: Rectangle
     {
@@ -27,13 +27,11 @@ Popup
         opacity: 1
     }
     
-    onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
-    
     
     ColumnLayout
     {
         id: mainLayout
-        anchors.fill: parent
+        width: parent.width
         spacing: 0
         
         
@@ -56,50 +54,78 @@ Popup
             onClicked: root.close()
         }
         
-        Pane
+        Label
         {
-            id: content
+            id: title
+            Layout.topMargin: 20
+            Layout.leftMargin: 52
+            text: "Book details"
+            font.weight: Font.Bold
+            font.pointSize: 17
+            font.family: Style.defaultFontFamily
+            color: Style.colorBaseTitle
+        }
+        
+        SplitView
+        {
+            id: splitView
             Layout.fillWidth: true
-            Layout.topMargin: 18
-            topPadding: 0
-            horizontalPadding: 52
-            bottomPadding: 42
-            background: Rectangle
+            Layout.preferredHeight: 320
+            Layout.topMargin: 36
+            Layout.leftMargin: 52
+            Layout.rightMargin: 52
+            orientation: Qt.Horizontal
+            spacing: 10
+            smooth: true
+            handle: RowLayout
             {
-                color: "transparent"
-                radius: 6
+                width: 9
+                spacing: 0
+                
+                
+                Rectangle
+                {
+                    Layout.preferredWidth: 4
+                    Layout.fillHeight: true
+                    color: "transparent"
+                }
+                
+                Rectangle
+                {
+                    Layout.preferredWidth: 1
+                    Layout.fillHeight: true
+                    color: Style.colorLightBorder
+                }
+                
+                Rectangle
+                {
+                    Layout.preferredWidth: 4
+                    Layout.fillHeight: true
+                    color: "transparent"
+                }
             }
             
             
-            ColumnLayout
+            Item
             {
-                id: contentLayout
-                width: parent.width
-                spacing: 0
+                id: bookCoverSide
+                SplitView.preferredWidth: 218
+                SplitView.minimumWidth: 80
+                SplitView.maximumWidth: 260
                 
-                Label
+                ColumnLayout
                 {
-                    id: title
-                    text: "Download book"
-                    font.weight: Font.Bold
-                    font.pointSize: 17
-                    font.family: Style.defaultFontFamily
-                    color: Style.colorBaseTitle
-                }
-                
-                RowLayout
-                {
-                    id: bookInformation
-                    spacing: 28
-                    Layout.fillWidth: true
-                    Layout.topMargin: 32
+                    id: bookCoverSideLayout
+                    width: parent.width - 20
+                    anchors.verticalCenter: parent.verticalCenter
+                    spacing: 0
                     
                     
                     Rectangle
                     {
                         id: bookCoverContainer
-                        Layout.preferredWidth: 198
-                        Layout.preferredHeight: 258
+                        Layout.preferredWidth: parent.width
+                        Layout.preferredHeight: Layout.preferredWidth * 1.30
                         color: Style.colorLightBorder
                         radius: 4
                         
@@ -114,18 +140,79 @@ Popup
                         }
                     }
                     
+                    RowLayout
+                    {
+                        id: bookButtons
+                        Layout.topMargin: 28
+                        spacing: 14
+                        
+                        
+                        MButton
+                        {
+                            id: changeButton
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 34
+                            borderWidth: 1
+                            borderColor: Style.colorLightBorder
+                            backgroundColor: "transparent"
+                            opacityOnPressed: 0.8
+                            text: "Change"
+                            fontColor: Style.colorBaseText
+                            fontWeight: Font.DemiBold
+                            fontSize: 11.5
+                        }
+                        
+                        MButton
+                        {
+                            id: resetButton
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 34
+                            borderWidth: 1
+                            borderColor: Style.colorLightBorder
+                            backgroundColor: "transparent"
+                            opacityOnPressed: 0.8
+                            text: "Reset"
+                            fontColor: Style.colorBaseText
+                            fontWeight: Font.DemiBold
+                            fontSize: 11.5
+                        }
+                    }
+                }
+            }
+            
+            Item
+            {
+                id: inputSide
+                SplitView.minimumWidth: 100
+                SplitView.fillWidth: true
+                
+                
+                ScrollView
+                {
+                    id: inputSideLayout
+                    property int moveSpeed : 550
+                    
+                    anchors.fill: parent
+                    anchors.leftMargin: 26
+                    contentWidth: width
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                    ScrollBar.vertical.policy: ScrollBar.AsNeeded
+                    ScrollBar.vertical.stepSize: 0.001
+                    
+                    
                     ColumnLayout
                     {
-                        id: bookDetails
-                        Layout.fillWidth: true
-                        spacing: 16
+                        id: inputLayout
+                        anchors.fill: parent
+                        anchors.rightMargin: 16
+                        spacing: 15
                         
                         
                         MLabeledInputBox
                         {
                             id: titleField
                             Layout.fillWidth: true
-                            Layout.topMargin: -5
+                            Layout.topMargin: -3
                             boxHeight: 34
                             headerText: "Title"
                             headerFontWeight: Font.Bold
@@ -137,7 +224,6 @@ Popup
                             textPadding: 12
                             borderWidth: 1
                             borderRadius: 4
-                            readOnly: true
                         }
                         
                         MLabeledInputBox
@@ -145,10 +231,26 @@ Popup
                             id: authorField
                             Layout.fillWidth: true
                             boxHeight: 34
-                            headerText: "Author"
+                            headerText: "Authors"
                             headerFontWeight: Font.Bold
                             headerFontSize: 11.5
-                            text: "Stephen R. Covey"
+                            text: "Stephen R. Covey, Jeff N. Murray"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                        }
+                        
+                        MLabeledInputBox
+                        {
+                            id: pagesField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Pages"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "431"
                             headerToBoxSpacing: 3
                             inputFontSize: 12
                             inputFontColor: Style.colorLightText3
@@ -159,13 +261,13 @@ Popup
                         
                         MLabeledInputBox
                         {
-                            id: publicationField
+                            id: tagsField
                             Layout.fillWidth: true
                             boxHeight: 34
-                            headerText: "Publication"
+                            headerText: "Tags"
                             headerFontWeight: Font.Bold
                             headerFontSize: 11.5
-                            text: "United States: Dodd, Mead and Company,1922."
+                            text: "4 Tags"
                             headerToBoxSpacing: 3
                             inputFontSize: 12
                             inputFontColor: Style.colorLightText3
@@ -188,146 +290,200 @@ Popup
                             inputFontColor: Style.colorLightText3
                             borderWidth: 1
                             borderRadius: 4
-                            readOnly: true
                         }
-                    }
-                }
-                
-                
-                ColumnLayout
-                {
-                    id: contentFieldLayout
-                    Layout.fillWidth: true
-                    Layout.topMargin: 28
-                    spacing: 3
-                    
-                    
-                    Label
-                    {
-                        id: contentFieldHeader
-                        Layout.fillWidth: true
-                        text: "Content"
-                        font.family: Style.defaultFontFamily
-                        font.pointSize: 11.5
-                        font.weight: Font.Bold
-                        color: Style.colorBaseTitle
-                    }
-                    
-                    Rectangle
-                    {
-                        id: contentField
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 78
-                        color: "transparent"
-                        radius: 5
-                        border.width: 1
-                        border.color: Style.colorLightBorder
                         
-                        
-                        TextArea
+                        MLabeledInputBox
                         {
-                            id: contentTextArea
-                            anchors.fill: parent
-                            leftPadding: 12
-                            rightPadding: 12
-                            topPadding: 8
-                            bottomPadding: 8
-                            selectByMouse: true
-                            text: "Your habits determine your character and later define your life. Don’t blame outside factors when you fail in life. Also, don’t think that succeeding in one area of your life will mean that you’re destined for triumph."
-                            wrapMode: Text.WordWrap
-                            color: Style.colorLightText3
-                            font.pointSize: 12
-                            font.family: Style.defaultFontFamily
-                            readOnly: true
-                            background: Rectangle   
-                            {   
-                                anchors.fill: parent
-                                radius: contentField.radius
-                                color: "transparent"
-                            }
+                            id: publicationField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Publication"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "United States: Dodd, Mead and Company,1922."
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
                         }
-                    }
-                }
-                
-                
-                RowLayout
-                {
-                    id: buttonLayout
-                    Layout.topMargin: 42
-                    spacing: 16
-                    
-                    
-                    MButton
-                    {
-                        id: downloadButton
-                        Layout.preferredWidth: 140
-                        Layout.preferredHeight: 38
-                        active: true
-                        borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder
-                        backgroundColor: active ? Style.colorBasePurple : "transparent"
-                        text: "Download"
-                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
-                        fontWeight: Font.Bold
-                        fontSize: 12
-                        imagePath: active ? Icons.downloadWhite : Icons.downloadGray
-                        imageSize: 18
                         
-                        onClicked: root.close()
+                        MLabeledInputBox
+                        {
+                            id: releaseDateField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Release date"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "24.02.2006"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                        }
                         
-                        Keys.onPressed:
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                                {
-                                    downloadButton.active = false;
-                                    cancelButton.active = true;
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    root.close();
-                                }
-                            }
+                        MLabeledInputBox
+                        {
+                            id: formatField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Format"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "PDF"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
+                        }
                         
-                        KeyNavigation.right: cancelButton
-                        KeyNavigation.tab: cancelButton
-                    }
-                    
-                    MButton
-                    {
-                        id: cancelButton
-                        Layout.preferredWidth: 140
-                        Layout.preferredHeight: 38
-                        borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder
-                        backgroundColor: active ? Style.colorBasePurple : "transparent"
-                        opacityOnPressed: 0.7
-                        text: "Cancel"
-                        fontColor: active ? Style.colorBrightText : Style.colorLightText2
-                        fontWeight: Font.Bold
-                        fontSize: 12
+                        MLabeledInputBox
+                        {
+                            id: sizeField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Size"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "124 MB"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
+                        }
                         
-                        onClicked: root.close()
+                        MLabeledInputBox
+                        {
+                            id: addedField
+                            Layout.fillWidth: true
+                            boxHeight: 34
+                            headerText: "Added"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "20.08.2021"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
+                        }
                         
-                        Keys.onPressed: 
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                                {
-                                    cancelButton.active = false;
-                                    downloadButton.active = true;
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    root.close();
-                                }
-                            }
-                        
-                        KeyNavigation.left: downloadButton
-                        KeyNavigation.tab: downloadButton
+                        MLabeledInputBox
+                        {
+                            id: lastOpenedField
+                            Layout.fillWidth: true
+                            Layout.bottomMargin: 3
+                            boxHeight: 34
+                            headerText: "Last opened"
+                            headerFontWeight: Font.Bold
+                            headerFontSize: 11.5
+                            text: "4 days ago"
+                            headerToBoxSpacing: 3
+                            inputFontSize: 12
+                            inputFontColor: Style.colorLightText3
+                            borderWidth: 1
+                            borderRadius: 4
+                            readOnly: true
+                        }
                     }
                 }
             }
+        }              
+        
+        RowLayout
+        {
+            id: buttonLayout
+            Layout.topMargin: 65
+            Layout.bottomMargin: 42
+            Layout.leftMargin: 52
+            spacing: 16
+            
+            
+            MButton
+            {
+                id: downloadButton
+                Layout.preferredWidth: 140
+                Layout.preferredHeight: 38
+                active: true
+                borderWidth: active ? 0 : 1
+                borderColor: Style.colorLightBorder
+                backgroundColor: active ? Style.colorBasePurple : "transparent"
+                text: "Download"
+                fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                fontWeight: Font.Bold
+                fontSize: 12
+                imagePath: active ? Icons.downloadWhite : Icons.downloadGray
+                imageSize: 18
+                
+                onClicked: root.close()
+                
+                Keys.onPressed:
+                    (event) =>
+                    {
+                        if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
+                        {
+                            downloadButton.active = false;
+                            cancelButton.active = true;
+                        }
+                        else if(event.key === Qt.Key_Return)
+                        {
+                            root.close();
+                        }
+                    }
+                
+                KeyNavigation.right: cancelButton
+                KeyNavigation.tab: cancelButton
+            }
+            
+            MButton
+            {
+                id: cancelButton
+                Layout.preferredWidth: 140
+                Layout.preferredHeight: 38
+                borderWidth: active ? 0 : 1
+                borderColor: Style.colorLightBorder
+                backgroundColor: active ? Style.colorBasePurple : "transparent"
+                opacityOnPressed: 0.7
+                text: "Cancel"
+                fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                fontWeight: Font.Bold
+                fontSize: 12
+                
+                onClicked: root.close()
+                
+                Keys.onPressed: 
+                    (event) =>
+                    {
+                        if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
+                        {
+                            cancelButton.active = false;
+                            downloadButton.active = true;
+                        }
+                        else if(event.key === Qt.Key_Return)
+                        {
+                            root.close();
+                        }
+                    }
+                
+                KeyNavigation.left: downloadButton
+                KeyNavigation.tab: downloadButton
+            }
         }
+    }
+    
+    
+    FileDialog
+    {
+        id: downloadFileDialog
+        acceptLabel: "Choose"
+        fileMode: FileDialog.SaveFile
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }
 }

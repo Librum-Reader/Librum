@@ -65,11 +65,13 @@ Item
             {
                 id: loginButtonText
                 visible: text.length > 0
+                Layout.preferredWidth: container.width < implicitWidth ? container.width : implicitWidth
                 text: root.text
                 font.weight: root.fontWeight
                 font.pointSize: root.fontSize
                 font.family: Style.defaultFontFamily
                 color: root.fontColor
+                elide: Text.ElideRight
             }
             
             Image
