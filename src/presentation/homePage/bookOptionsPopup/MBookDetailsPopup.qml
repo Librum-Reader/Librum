@@ -29,6 +29,11 @@ Popup
         opacity: 1
     }
     
+    onAboutToHide:
+    {
+        applyButton.forceActiveFocus();
+    }
+    
     Component.onCompleted: applyButton.forceActiveFocus()
     
     
@@ -169,10 +174,12 @@ Popup
                             borderColor: Style.colorLightBorder
                             backgroundColor: "transparent"
                             opacityOnPressed: 0.8
-                            text: "Change"
+                            text: "Choose"
                             fontColor: Style.colorBaseText
                             fontWeight: Font.DemiBold
                             fontSize: 11.5
+                            
+                            onClicked: chooseImageDialog.open()
                         }
                         
                         MButton
@@ -215,6 +222,7 @@ Popup
                         x: inputSideLayout.width
                         y: inputSideLayout.topPadding
                         height: inputSideLayout.availableHeight
+                        policy: ScrollBar.AlwaysOn
                         onActiveChanged: inputSideLayout.scrolling()
                     }
                     
@@ -485,6 +493,11 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
+                Keys.onPressed:
+                    (event) =>
+                    {
+                        if(event.key === Qt.Key_Return) root.close();
+                    }
                 
                 KeyNavigation.right: cancelButton
                 KeyNavigation.tab: cancelButton
@@ -507,6 +520,12 @@ Popup
                 
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
+                
+                Keys.onPressed:
+                    (event) =>
+                    {
+                        if(event.key === Qt.Key_Return) root.close();
+                    }
                 
                 KeyNavigation.left: applyButton
                 KeyNavigation.right: deleteButton
@@ -536,6 +555,12 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
+                Keys.onPressed:
+                    (event) =>
+                    {
+                        if(event.key === Qt.Key_Return) root.close();
+                    }
+                
                 KeyNavigation.left: cancelButton
                 KeyNavigation.tab: applyButton
             }
@@ -545,9 +570,10 @@ Popup
     
     FileDialog
     {
-        id: downloadFileDialog
+        id: chooseImageDialog
         acceptLabel: "Choose"
-        fileMode: FileDialog.SaveFile
+        fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+        nameFilters: ["png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
     }
 }
