@@ -219,6 +219,14 @@ Page
     }
     
     
+    MAcceptDeletionPopup
+    {
+        id: acceptDeletionPopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+    }
+    
+    
     MBookDetailsPopup
     {
         id: bookDetailsPopup

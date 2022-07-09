@@ -6,8 +6,8 @@ set(CMAKE_AUTORCC ON)
 
 
 # Configuration
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules" CACHE STRING "Qml modules")
-
+set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
+set(QML_IMPORT_TRACE "1")
 
 
 # Dependencies

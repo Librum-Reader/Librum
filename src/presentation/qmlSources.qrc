@@ -86,5 +86,6 @@
         <file>modules/CustomComponents/multiComboBox/MMultiComboBox.qml</file>
         <file>modules/CustomComponents/multiComboBox/MMultiComboBoxItem.qml</file>
         <file>modules/CustomComponents/multiComboBox/MMultiComboBoxPopup.qml</file>
+        <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
     </qresource>
 </RCC>

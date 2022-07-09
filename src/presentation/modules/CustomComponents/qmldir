@@ -13,4 +13,5 @@ MComboBox 1.0 comboBox/MComboBox.qml
 MMultiComboBox 1.0 multiComboBox/MMultiComboBox.qml
 MRemoveOptionButton 1.0 buttons/MRemoveOptionButton.qml
 MForgotToSaveChangesPopup 1.0 dialogs/MForgotToSaveChangesPopup.qml
+MAcceptDeletionPopup 1.0 dialogs/MAcceptDeletionPopup.qml
 MPageCleanup 1.0 MPageCleanup.qml

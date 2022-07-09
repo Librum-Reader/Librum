@@ -500,11 +500,7 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: root.close();
                 
                 KeyNavigation.right: cancelButton
                 KeyNavigation.tab: cancelButton
@@ -528,11 +524,7 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: root.close();
                 
                 KeyNavigation.left: applyButton
                 KeyNavigation.right: deleteButton
@@ -560,13 +552,9 @@ Popup
                 imageSpacing: 10
                 
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
-                onClicked: root.close()
+                onClicked: acceptDeletionPopup.open();
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: acceptDeletionPopup.open();
                 
                 KeyNavigation.left: cancelButton
                 KeyNavigation.tab: applyButton
@@ -574,6 +562,15 @@ Popup
         }
     }
     
+    
+    MAcceptDeletionPopup
+    {
+        id: acceptDeletionPopup
+        x: root.width / 2 - implicitWidth / 2
+        y: root.height / 2 - implicitHeight / 2 - 30
+        
+        onDeleteChoosed: root.close()
+    }
     
     FileDialog
     {

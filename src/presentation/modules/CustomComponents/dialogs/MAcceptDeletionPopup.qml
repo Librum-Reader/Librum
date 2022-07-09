@@ -12,6 +12,8 @@ Popup
     property var saveMethod
     property var dontSaveMethod
     signal decisionMade
+    signal keepChoosed
+    signal deleteChoosed
     
     implicitWidth: 646
     closePolicy: Popup.NoAutoClose
@@ -27,6 +29,8 @@ Popup
         opacity: 1
     }
     
+    onOpened: keepButton.forceActiveFocus()
+        
     
     ColumnLayout
     {
@@ -52,7 +56,7 @@ Popup
             Layout.fillWidth: true
             topPadding: 86
             horizontalPadding: 62
-            bottomPadding: 62
+            bottomPadding: 66
             background: Rectangle
             {
                 color: Style.colorBackground
@@ -72,7 +76,7 @@ Popup
                     id: whoops
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 18
-                    text: "Whoops"
+                    text: "Are you sure?"
                     color: Style.colorBaseTitle
                     font.weight: Font.Medium
                     font.pointSize: 42
@@ -85,7 +89,7 @@ Popup
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
-                    text: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
+                    text: "Deleting this file will permanentaly remove this book from your library!"
                     horizontalAlignment: Qt.AlignHCenter
                     color: Style.colorLightText3
                     font.weight: Font.Medium
@@ -97,88 +101,74 @@ Popup
                 {
                     id: buttonRow
                     Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: acceptButton.height
-                    Layout.topMargin: 24
+                    Layout.preferredHeight: keepButton.height
+                    Layout.topMargin: 32
                     spacing: 42
                     
                     MButton
                     {
-                        id: acceptButton
-                        Layout.preferredWidth: 120
+                        id: keepButton
+                        Layout.preferredWidth: 180
                         Layout.preferredHeight: 40
                         Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                         borderWidth: activeFocus ? 0 : 1
                         borderColor: Style.colorLightBorder2
                         backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                         opacityOnPressed: 0.7
-                        text: "Save"
+                        text: "No, Keep Book"
                         fontSize: 12.75
                         fontWeight: Font.Bold
                         fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                         
                         onClicked: buttonAction()
                                                 
-                        Keys.onPressed:
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                                {
-                                    declineButton.forceActiveFocus();
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    buttonAction();
-                                }
-                            }
+                        KeyNavigation.tab: deleteButton
+                        KeyNavigation.right: deleteButton
+                        Keys.onReturnPressed: buttonAction()
                         
                         function buttonAction()
                         {
-                            root.saveMethod();
+                            root.keepChoosed();
                             root.close();
-                            root.decisionMade();
                         }
                     }
                     
                     MButton
                     {
-                        id: declineButton
-                        Layout.preferredWidth: 120
+                        id: deleteButton
+                        Layout.preferredWidth: 180
                         Layout.preferredHeight: 40
                         Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
-                        borderWidth: focus ? 0 : 1
+                        borderWidth: activeFocus ? 0 : 1
                         borderColor: Style.colorLightBorder2
-                        backgroundColor: focus ? Style.colorBasePurple : "transparent"
+                        backgroundColor: activeFocus ? Style.colorBaseRed : "transparent"
                         opacityOnPressed: 0.7
-                        text: "Don't save"
+                        text: "Yes, Delete Book"
                         fontSize: 12.75
                         fontWeight: Font.Bold
-                        fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
+                        fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                         
                         onClicked: buttonAction()
                         
-                        Keys.onPressed:
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                                {
-                                    acceptButton.forceActiveFocus();
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    buttonAction();
-                                }
-                            }
+                        KeyNavigation.tab: keepButton
+                        KeyNavigation.left: keepButton
+                        Keys.onReturnPressed: buttonAction()
                         
                         function buttonAction()
                         {
-                            root.dontSaveMethod();
+                            root.deleteChoosed();
                             root.close();
-                            root.decisionMade();
+                            root.deleteMethod();
                         }
                     }
                 }
             }
         }
+    }
+    
+    function deleteMethod()
+    {
+        
     }
     
     function giveFocus()

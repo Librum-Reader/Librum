@@ -36,7 +36,7 @@ Item
     property string eyeCrossedSwift: "/resources/images/illustrations/eye_crossed_illustration.png"
     property string fileSwift: "/resources/images/illustrations/file_swift_illustration.svg"
     property string lockProtected: "/resources/images/illustrations/lock_protected_illustration.svg"
-    property string attention: "/resources/images/illustrations/attention_illustration.svg"
+    property string attention_purple: "/resources/images/illustrations/attention_purple_illustration.svg"
     property string checkBubbleIllustration: "/resources/images/illustrations/check_bubble_illustration.svg"
     property string addFileIllustration: "/resources/images/illustrations/add_file_illustration.svg"
     
