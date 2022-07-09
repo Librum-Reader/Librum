@@ -292,7 +292,7 @@ Popup
                             readOnly: true
                         }
                         
-                        MComboBox
+                        MMultiComboBox
                         {
                             id: tagsComboBox
                             Layout.fillWidth: true
@@ -318,7 +318,7 @@ Popup
                             }
                         }
                         
-                        MComboBox
+                        MMultiComboBox
                         {
                             id: languageComboBox
                             Layout.fillWidth: true
