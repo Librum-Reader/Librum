@@ -83,5 +83,8 @@
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
         <file>Globals.qml</file>
         <file>homePage/bookOptionsPopup/MBookDetailsPopup.qml</file>
+        <file>modules/CustomComponents/multiComboBox/MMultiComboBox.qml</file>
+        <file>modules/CustomComponents/multiComboBox/MMultiComboBoxItem.qml</file>
+        <file>modules/CustomComponents/multiComboBox/MMultiComboBoxPopup.qml</file>
     </qresource>
 </RCC>

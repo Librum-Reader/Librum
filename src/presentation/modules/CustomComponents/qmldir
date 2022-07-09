@@ -10,6 +10,7 @@ MSaveBeforeLeavingPopup 1.0 MSaveBeforeLeavingPopup.qml
 MLabeledCheckBox 1.0 MLabeledCheckBox.qml
 MBaseListItem 1.0 MBaseListItem.qml
 MComboBox 1.0 comboBox/MComboBox.qml
+MMultiComboBox 1.0 multiComboBox/MMultiComboBox.qml
 MRemoveOptionButton 1.0 buttons/MRemoveOptionButton.qml
 MForgotToSaveChangesPopup 1.0 dialogs/MForgotToSaveChangesPopup.qml
 MPageCleanup 1.0 MPageCleanup.qml
