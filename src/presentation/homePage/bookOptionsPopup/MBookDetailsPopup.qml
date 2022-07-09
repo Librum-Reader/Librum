@@ -540,7 +540,7 @@ Popup
                 Layout.alignment: Qt.AlignRight
                 borderWidth: activeFocus  || currentlyHovered ? 0 : 1
                 borderColor: Style.colorLightBorder
-                backgroundColor: activeFocus || currentlyHovered ? "#D84B4D" : "transparent"
+                backgroundColor: activeFocus || currentlyHovered ? Style.colorBaseRed : "transparent"
                 opacityOnPressed: 0.7
                 text: "Delete"
                 fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText

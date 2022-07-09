@@ -21,6 +21,8 @@ Item
     implicitWidth: container.width
     implicitHeight: 28
     
+    Keys.onReturnPressed: root.close()
+    
     
     Rectangle
     {
@@ -56,13 +58,4 @@ Item
             root.close();
         }
     }
-    
-    Keys.onPressed: 
-        (event) =>
-        {
-            if(event.key === Qt.Key_Return)
-            {
-                root.close();
-            }
-        }
 }
