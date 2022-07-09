@@ -6,13 +6,12 @@ import Librum.style
 Item
 {
     id: root
-    property alias listContent: selectionPopup.listContent
+    property alias selectionPopup: selectionPopup
+    
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
-    property alias maxPopupHeight: selectionPopup.maxHeight
     property string backgroundColor: Style.colorBackground
-    property alias highlightColor: selectionPopup.highlightColor
-    property alias defaultIndex: selectionPopup.defaultIndex
+    property int radius: 4
     
     property string headerText
     property int headerFontWeight: Font.Bold
@@ -25,19 +24,11 @@ Item
     property color titleFontColor: Style.colorBaseText
     property int titleSpacing: 0
     
-    property alias contentFontSize: selectionPopup.fontSize
-    property alias contentFontColor: selectionPopup.fontColor
-    property alias contentFontWeight: selectionPopup.fontWeight
-    property alias contentFontFamily: selectionPopup.fontFamily
-    property alias itemHeight: selectionPopup.itemHeight
-    
     property string imagePath
     property int imageSpacing: 4
     property int imageSize: 6
     
-    property int radius: 4
     signal clicked
-    
     
     implicitHeight: 47
     
@@ -74,7 +65,6 @@ Item
                 border.width: 1
                 border.color: Style.colorLightBorder
                 radius: root.radius
-                antialiasing: true
             }
             
             
@@ -145,28 +135,15 @@ Item
         id: selectionPopup
         y: mainLayout.y + mainLayout.height + root.popupSpacing
         backgroundColor: root.backgroundColor
-        
         width: parent.width
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
         
         onOpenedChanged:
         {
             if(opened)
-            {
                 closeAnim.start();
-            }
             else
-            {
-                giveFocus();
                 openAnim.start();
-            }
         }
-    }
-    
-    function closeDropDown()
-    {
-        if(selectionPopup.opened)
-            selectionPopup.close();
     }
     
     

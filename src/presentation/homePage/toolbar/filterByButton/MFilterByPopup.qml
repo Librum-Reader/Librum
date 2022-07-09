@@ -151,13 +151,9 @@ Popup
                             headerText: "Format"
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 208
                             
-                            listContent: listModel
-                            
-                            ListModel
+                            selectionPopup.model: ListModel
                             {
-                                id: listModel
                                 ListElement { content: "Any" }
                                 ListElement { content: "Pdf" }
                                 ListElement { content: "Epub"  }

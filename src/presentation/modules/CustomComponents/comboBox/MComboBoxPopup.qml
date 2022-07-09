@@ -9,10 +9,10 @@ Popup
 {
     id: root
     property var selectedItem: listView.currentItem
+    property alias model: listView.model
     property int itemHeight: 28
     property color backgroundColor
-    property alias listContent: listView.model
-    property int maxHeight: 200
+    property int maxHeight: 208
     property int radius: 5
     property int defaultIndex: 0
     
@@ -22,64 +22,52 @@ Popup
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
     
-    padding: 0
     implicitWidth: 300
-    implicitHeight: container.implicitHeight
+    padding: 8
+    closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     focus: true
     background: Rectangle
     {
-        color: "transparent"
+        color: root.backgroundColor
+        border.width: 1
+        border.color: Style.colorLightBorder
+        radius: root.radius
+        antialiasing: true
     }
     
     
-    Pane
+    ColumnLayout
     {
-        id: container
+        id: mainLayout
         width: parent.width
-        padding: 8
-        focus: true
-        background: Rectangle
-        {
-            color: root.backgroundColor
-            border.width: 1
-            border.color: Style.colorLightBorder
-            radius: root.radius
-            antialiasing: true
-        }
         
-        
-        ColumnLayout
+        ListView
         {
-            id: mainLayout
-            width: parent.width
+            id: listView
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight
+            Layout.maximumHeight: root.maxHeight
+            maximumFlickVelocity: 550
+            currentIndex: root.defaultIndex
+            keyNavigationEnabled: true
+            clip: true
+            focus: true
+            boundsBehavior: Flickable.StopAtBounds
             
-            
-            ListView
+            delegate: MComboBoxItem
             {
-                id: listView
-                Layout.fillWidth: true
-                Layout.preferredHeight: contentHeight
-                Layout.maximumHeight: root.maxHeight
-                maximumFlickVelocity: 550
-                currentIndex: root.defaultIndex
-                keyNavigationEnabled: true
-                clip: true
-                focus: true
-                boundsBehavior: Flickable.StopAtBounds
+                height: root.itemHeight
+                container: listView
+                fontSize: root.fontSize
+                fontColor: root.fontColor
+                fontWeight: root.fontWeight
+                fontFamily: root.fontFamily
+                radius: root.radius - 1
                 
-                delegate: MComboBoxItem
-                {
-                    height: root.itemHeight
-                    container: listView
-                    fontSize: root.fontSize
-                    fontColor: root.fontColor
-                    fontWeight: root.fontWeight
-                    fontFamily: root.fontFamily
-                    radius: root.radius - 1
-                }
-                
-                ScrollBar.vertical: ScrollBar { }
+                onClose: root.close()
             }
+            
+            ScrollBar.vertical: ScrollBar { }
         }
     }
     
@@ -87,15 +75,5 @@ Popup
     function giveFocus()
     {
         root.forceActiveFocus();
-    }
-    
-    function closeComboBox()
-    {
-        root.close();
-    }
-    
-    function comobBoxIsOpened()
-    {
-        return root.opened;
     }
 }

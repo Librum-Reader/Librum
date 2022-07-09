@@ -228,8 +228,8 @@ Popup
                     
                     function scrolling()
                     {
-                        languageComboBox.closeDropDown();
-                        tagsComboBox.closeDropDown();
+                        languageComboBox.selectionPopup.close();
+                        tagsComboBox.selectionPopup.close();
                     }
                     
                     
@@ -298,15 +298,14 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
                             headerText: "Tags"
-                            headerFontWeight: Font.Bold
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 200
-                            defaultIndex: 3
+                            selectionPopup.maxHeight: 200
+                            selectionPopup.defaultIndex: 3
                             
-                            listContent: ListModel
+                            selectionPopup.model: ListModel
                             {
                                 ListElement { content: "Technology" }
                                 ListElement { content: "Favourite" }
@@ -325,15 +324,14 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
                             headerText: "Language"
-                            headerFontWeight: Font.Bold
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 200
-                            defaultIndex: 3
+                            selectionPopup.maxHeight: 200
+                            selectionPopup.defaultIndex: 3
                             
-                            listContent: ListModel
+                            selectionPopup.model: ListModel
                             {
                                 ListElement { content: "None" }
                                 ListElement { content: "English" }

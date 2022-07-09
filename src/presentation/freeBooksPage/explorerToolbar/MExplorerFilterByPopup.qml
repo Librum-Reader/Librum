@@ -129,11 +129,9 @@ Popup
                     headerText: "Language"
                     imagePath: Icons.dropdownGray
                     imageSize: 9
-                    maxPopupHeight: 208
                     
-                    listContent: ListModel
+                    selectionPopup.model: ListModel
                     {
-                        id: listModel
                         ListElement { content: "None" }
                         ListElement { content: "English" }
                         ListElement { content: "German"  }

@@ -181,17 +181,13 @@ Pane
             Layout.preferredWidth: 84
             headerText: ""
             backgroundColor: Style.colorBaseGray
-            highlightColor: Style.colorLightGray3
-            defaultIndex: 6
+            selectionPopup.highlightColor: Style.colorLightGray3
+            selectionPopup.defaultIndex: 6
             imagePath: Icons.dropdownBlack
             imageSize: 9
-            maxPopupHeight: 208
             
-            listContent: listModel
-            
-            ListModel
+            selectionPopup.model: ListModel
             {
-                id: listModel
                 ListElement { content: "12%" }
                 ListElement { content: "25%" }
                 ListElement { content: "33%" }

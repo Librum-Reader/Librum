@@ -16,6 +16,7 @@ Item
     property color fontColor
     property int fontWeight
     property string fontFamily
+    signal close
     
     implicitWidth: container.width
     implicitHeight: 28
@@ -52,7 +53,7 @@ Item
         onClicked:
         {
             container.currentIndex = index;
-            closeComboBox();
+            root.close();
         }
     }
     
@@ -61,10 +62,7 @@ Item
         {
             if(event.key === Qt.Key_Return)
             {
-                if(comobBoxIsOpened())
-                {
-                    closeComboBox();
-                }
+                root.close();
             }
         }
 }
