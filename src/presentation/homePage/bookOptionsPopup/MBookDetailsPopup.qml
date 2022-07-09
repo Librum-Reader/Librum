@@ -129,7 +129,7 @@ Popup
                 id: bookCoverSide
                 SplitView.preferredWidth: 218
                 SplitView.minimumWidth: 80
-                SplitView.maximumWidth: 260
+                SplitView.maximumWidth: 246
                 
                 ColumnLayout
                 {
@@ -291,6 +291,7 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
                             headerText: "Tags"
+                            titleEmptyText: "None"
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle
                             imagePath: Icons.dropdownGray
