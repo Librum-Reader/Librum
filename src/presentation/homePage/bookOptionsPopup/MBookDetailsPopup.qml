@@ -206,7 +206,6 @@ Popup
                 SplitView.minimumWidth: 100
                 SplitView.fillWidth: true
                 
-                
                 ScrollView
                 {
                     id: inputSideLayout
@@ -224,12 +223,6 @@ Popup
                         height: inputSideLayout.availableHeight
                         policy: ScrollBar.AlwaysOn
                         onActiveChanged: inputSideLayout.scrolling()
-                    }
-                    
-                    function scrolling()
-                    {
-                        languageComboBox.selectionPopup.close();
-                        tagsComboBox.selectionPopup.close();
                     }
                     
                     
@@ -457,6 +450,21 @@ Popup
                             borderRadius: 4
                             readOnly: true
                         }
+                    }
+                
+                
+                    Component.onCompleted:
+                    {
+                        // Set properties on the flickable contained in Scrollview.
+                        // The Flickable is by default the contentItem of the ScrollView.
+                        contentItem.maximumFlickVelocity = 600
+                    }
+                    
+                    
+                    function scrolling()
+                    {
+                        languageComboBox.selectionPopup.close();
+                        tagsComboBox.selectionPopup.close();
                     }
                 }
             }
