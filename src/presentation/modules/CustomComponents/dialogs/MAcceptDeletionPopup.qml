@@ -55,7 +55,7 @@ Popup
             id: backgroundRect
             Layout.fillWidth: true
             topPadding: 86
-            horizontalPadding: 62
+            horizontalPadding: 82
             bottomPadding: 66
             background: Rectangle
             {
@@ -76,7 +76,7 @@ Popup
                     id: whoops
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: 18
-                    text: "Are you sure?"
+                    text: "Delete book?"
                     color: Style.colorBaseTitle
                     font.weight: Font.Medium
                     font.pointSize: 42
@@ -89,7 +89,7 @@ Popup
                     Layout.alignment: Qt.AlignHCenter
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
-                    text: "Deleting this file will permanentaly remove this book from your library!"
+                    text: "Deleting a book is a permanent action, no one will be able to restore it afterwards!"
                     horizontalAlignment: Qt.AlignHCenter
                     color: Style.colorLightText3
                     font.weight: Font.Medium
@@ -102,7 +102,7 @@ Popup
                     id: buttonRow
                     Layout.preferredWidth: parent.width
                     Layout.preferredHeight: keepButton.height
-                    Layout.topMargin: 32
+                    Layout.topMargin: 36
                     spacing: 42
                     
                     MButton
