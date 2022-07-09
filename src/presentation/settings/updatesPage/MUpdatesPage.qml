@@ -4,7 +4,7 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
-import Librum.appInformation
+import Librum.Elements
 
 
 Page

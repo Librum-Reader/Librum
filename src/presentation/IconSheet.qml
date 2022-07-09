@@ -104,6 +104,7 @@ Item
     property string microphone: "/resources/images/utility/microphone_icon.svg"
     property string active_microphone: "/resources/images/utility/active_microphone_icon.svg"
     property string trash_gray: "/resources/images/utility/trash_gray_icon.svg"
+    property string trash_white: "/resources/images/utility/trash_white_icon.svg"
     property string book_open: "/resources/images/utility/book_open_icon.svg"
     property string book: "/resources/images/utility/book_icon.svg"
     property string add_file: "/resources/images/utility/add_file_icon.svg"

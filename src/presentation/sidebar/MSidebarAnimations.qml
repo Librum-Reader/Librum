@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.extensions.sidebar
+import Librum.Elements
 
 
 Item 

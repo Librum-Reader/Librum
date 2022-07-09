@@ -8,6 +8,7 @@ Item
 {
     id: root
     property bool active: false
+    property bool currentlyHovered: mouseArea.containsMouse
     property string text
     property color fontColor: "black"
     property int fontWeight: Font.Bold
@@ -65,11 +66,13 @@ Item
             {
                 id: loginButtonText
                 visible: text.length > 0
+                Layout.preferredWidth: container.width < implicitWidth ? container.width : implicitWidth
                 text: root.text
                 font.weight: root.fontWeight
                 font.pointSize: root.fontSize
                 font.family: Style.defaultFontFamily
                 color: root.fontColor
+                elide: Text.ElideRight
             }
             
             Image
@@ -86,6 +89,8 @@ Item
         {
             id: mouseArea
             anchors.fill: parent
+            hoverEnabled: true
+            
             onClicked: root.clicked()
         }
     }

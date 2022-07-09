@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Qt.labs.platform
-import Librum.extensions.sidebar
+import Librum.Elements
 import CustomComponents
 import Librum.style
 import Librum.icons
@@ -216,6 +216,15 @@ Page
             Layout.fillWidth: true
             Layout.topMargin: 46
         }
+    }
+    
+    
+    MBookDetailsPopup
+    {
+        id: bookDetailsPopup
+        
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
     
     

@@ -27,8 +27,8 @@ Popup
         opacity: 1
     }
     
-    onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
-    
+    onOpened: downloadButton.forceActiveFocus()
+    onClosed: recordBox.stopRecording()
     
     Shortcut
     {
@@ -149,6 +149,8 @@ Popup
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemToRedirectFocusTo: downloadButton
+                        
+                        onClose: root.close()
                     }
                 }
                 
