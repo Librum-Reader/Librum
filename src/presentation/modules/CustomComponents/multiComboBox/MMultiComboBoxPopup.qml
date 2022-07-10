@@ -15,10 +15,9 @@ Popup
     property int maxHeight: 208
     property int radius: 5
     property int defaultIndex: 0
-    signal itemsChanged
-    
     property int checkBoxSize: 18
     property int checkBoxImageSize: 10
+    signal itemsChanged
     
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
@@ -26,7 +25,6 @@ Popup
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
     
-    implicitWidth: 300
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     focus: true

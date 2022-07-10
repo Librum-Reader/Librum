@@ -285,9 +285,10 @@ Popup
                             readOnly: true
                         }
                         
-                        MMultiComboBox
+                        MComboBox
                         {
                             id: tagsComboBox
+                            multiSelect: true
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
                             headerText: "Tags"
@@ -297,8 +298,7 @@ Popup
                             imagePath: Icons.dropdownGray
                             imageSize: 9
                             selectionPopup.maxHeight: 200
-                            selectionPopup.defaultIndex: 3
-                            
+                            selectionPopup.defaultIndex: -1
                             selectionPopup.model: ListModel
                             {
                                 ListElement { text: "Technology" }
@@ -312,9 +312,10 @@ Popup
                             }
                         }
                         
-                        MMultiComboBox
+                        MComboBox
                         {
                             id: languageComboBox
+                            multiSelect: true
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
                             headerText: "Language"

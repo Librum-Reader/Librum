@@ -148,7 +148,7 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 49
                             Layout.topMargin: 2
-                            selectionPopup.defaultIndex: -1
+                            defaultIndex: -1
                             headerText: "Format"
                             titleEmptyText: "Any"
                             imagePath: Icons.dropdownGray

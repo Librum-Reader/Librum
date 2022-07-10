@@ -8,7 +8,7 @@ import CustomComponents
 Popup
 {
     id: root
-    property var selectedItem
+    property string selectedContents
     property alias model: listView.model
     property int itemHeight: 28
     property color backgroundColor
@@ -18,7 +18,7 @@ Popup
     property bool checkBoxStyle: true
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
-    
+    property bool multiSelect: false    
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
@@ -47,6 +47,7 @@ Popup
         {
             id: listView
             property MBaseListItem currentSelected
+            property var currentSelectedItems: []
             
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
@@ -74,28 +75,87 @@ Popup
                 onClicked:
                     (index) =>
                     {
-                        listView.changeSelected(index);
+                        if(root.multiSelect)
+                        {
+                            listView.addItemToList(index);
+                            listView.changeSelectedForMultiSelect(index);
+                            return;
+                        }
+                        
+                        listView.changeSelectedForSingleSelect(index);
                     }
             }
             
             Keys.onReturnPressed:
             {
                 if(listView.currentIndex !== -1)
-                    listView.changeSelected(listView.currentIndex)
+                {
+                    if(root.multiSelect)
+                    {
+                        addItemToList(listView.currentIndex);
+                        changeSelectedForMultiSelect(listView.currentIndex);
+                        return;
+                    }
+                    
+                    listView.changeSelectedForSingleSelect(listView.currentIndex);
+                }
+            }
+            
+            function addItemToList(index)
+            {
+                if(listView.currentSelectedItems.includes(listView.itemAtIndex(index).text))
+                {
+                    let text = listView.itemAtIndex(index).text;
+                    listView.currentSelectedItems = removeFromArray(listView.currentSelectedItems, text);
+                }
+                else
+                {
+                    let text = listView.itemAtIndex(index).text;
+                    listView.currentSelectedItems.push(text);
+                }
+                
+                let temp = "";
+                for(let i = 0; i < listView.currentSelectedItems.length; i++)
+                {
+                    temp += listView.currentSelectedItems[i];
+                    
+                    if(i < listView.currentSelectedItems.length - 1)
+                        temp += ", "
+                }
+                
+                root.selectedContents = temp;
             }
             
             
-            function changeSelected(index)
+            
+            function removeFromArray(arr, value)
+            { 
+                return arr.filter(function(ele){ 
+                    return ele !== value; 
+                });
+            }
+            
+            
+            
+            function changeSelectedForMultiSelect(index)
+            {
+                listView.currentIndex = index;
+                
+                listView.itemAtIndex(index).selected = !listView.itemAtIndex(index).selected;
+            }
+            
+            
+            function changeSelectedForSingleSelect(index)
             {
                 listView.currentIndex = index;
                 
                 if(listView.itemAtIndex(index) === listView.currentSelected)
                 {
                     listView.currentSelected.selected = false;
-                    root.selectedItem = null;
+                    root.selectedContents = "";
                     return;
                 }
-                    
+                
                 
                 if(listView.currentSelected != null)
                     listView.currentSelected.selected = false;
@@ -104,11 +164,25 @@ Popup
                 
                 listView.currentSelected = listView.itemAtIndex(index);
                 
-                root.selectedItem = listView.currentSelected;
+                root.selectedContents = listView.currentSelected.text;
             }
         }
         
-        Component.onCompleted: if(root.defaultIndex != -1) listView.changeSelected(root.defaultIndex)
+        Component.onCompleted:
+        {
+            
+            if(root.defaultIndex != -1)
+            {
+                if(root.multiSelect)
+                {
+                    listView.addItemToList(listView.currentIndex);
+                    listView.changeSelectedForMultiSelect(listView.currentIndex);
+                    return;
+                }
+                
+                listView.changeSelectedForSingleSelect(listView.currentIndex);
+            }
+        }
     }
     
     

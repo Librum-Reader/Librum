@@ -2,12 +2,18 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import "../multiComboBox"
 
 Item
 {
     id: root
     property alias selectionPopup: selectionPopup
     
+    property var model
+    property int maxPopupHeight
+    property int defaultIndex
+    
+    property bool multiSelect: false
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
     property string backgroundColor: Style.colorBackground
@@ -82,7 +88,7 @@ Item
                     Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
                     leftPadding: root.titleSpacing
                     rightPadding: root.titleSpacing
-                    text: selectionPopup.selectedItem == null ? root.titleEmptyText : selectionPopup.selectedItem.text
+                    text: selectionPopup.selectedContents === "" ? root.titleEmptyText : selectionPopup.selectedContents
                     font.pointSize: root.titleFontSize
                     font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight
@@ -127,7 +133,10 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+        onClicked:
+        {
+            selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+        }
     }
     
     MComboBoxPopup
@@ -136,6 +145,7 @@ Item
         y: mainLayout.y + mainLayout.height + root.popupSpacing
         backgroundColor: root.backgroundColor
         width: parent.width
+        multiSelect: root.multiSelect
         
         onOpenedChanged:
         {
@@ -145,6 +155,42 @@ Item
                 openAnim.start();
         }
     }
+    
+//    MMultiComboBoxPopup
+//    {
+//        id: multiSelectionPopup
+//        property string content
+        
+//        model: root.model
+//        maxHeight: root.maxPopupHeight
+//        defaultIndex: root.defaultIndex
+        
+//        y: mainLayout.y + mainLayout.height + root.popupSpacing
+//        backgroundColor: root.backgroundColor
+//        width: parent.width
+        
+//        onItemsChanged:
+//        {
+//            let temp = "";
+//            for(let i = 0; i < selectedItems.length; i++)
+//            {
+//                temp += selectedItems[i];
+                
+//                if(i < selectedItems.length - 1)
+//                    temp += ", "
+//            }
+            
+//            content = temp;
+//        }
+        
+//        onOpenedChanged:
+//        {
+//            if(opened)
+//                closeAnim.start();
+//            else
+//                openAnim.start();
+//        }
+//    }
     
     
     function giveFocus()
