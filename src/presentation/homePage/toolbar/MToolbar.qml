@@ -52,7 +52,8 @@ Item
         {
             id: tagSelector
             
-            onTagSelected: resetTagsButton.visible = true;
+            onTagsSelected: resetTagsButton.visible = true
+            onTagsRemoved: resetTagsButton.resetTags()
         }
         
         MRemoveOptionButton
@@ -74,9 +75,11 @@ Item
             visible: false
             text: "Remove Tags"
             
-            onClicked:
+            onClicked: resetTags()
+            
+            
+            function resetTags()
             {
-                // Reset tags
                 visible = false;
             }
         }

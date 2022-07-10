@@ -102,4 +102,15 @@ Popup
             }
         }
     }
+    
+    function hasAtLeastOneTagSelected()
+    {
+        for(let i = 0; i < listView.count; i++)
+        {
+            if(listView.itemAtIndex(i).selected === true)
+                return true;
+        }
+        
+        return false;
+    }
 }

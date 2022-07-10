@@ -8,7 +8,8 @@ import Librum.icons
 Item
 {
     id: root
-    signal tagSelected
+    signal tagsSelected
+    signal tagsRemoved
     
     implicitWidth: 104
     implicitHeight: 36
@@ -63,10 +64,18 @@ Item
     MTagSelectorPopup
     {
         id: selectionPopup
+        property var startingItems: []
+        
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
-        onClosed: root.tagSelected()
+        onClosed:
+        {
+            if(selectionPopup.hasAtLeastOneTagSelected())
+                root.tagsSelected();
+            else
+                root.tagsRemoved();
+        }
     }
     
     
