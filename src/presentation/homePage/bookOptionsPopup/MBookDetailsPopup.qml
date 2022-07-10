@@ -288,9 +288,9 @@ Popup
                         MComboBox
                         {
                             id: tagsComboBox
-                            multiSelect: true
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
+                            multiSelect: true
                             headerText: "Tags"
                             titleEmptyText: "None"
                             headerFontSize: 11.5
@@ -315,9 +315,9 @@ Popup
                         MComboBox
                         {
                             id: languageComboBox
-                            multiSelect: true
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
+                            multiSelect: true
                             headerText: "Language"
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle

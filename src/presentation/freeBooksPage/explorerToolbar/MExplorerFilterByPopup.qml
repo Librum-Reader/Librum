@@ -126,6 +126,7 @@ Popup
                     id: languagesComboBox
                     Layout.fillWidth: true
                     Layout.preferredHeight: 49
+                    multiSelect: true
                     headerText: "Language"
                     imagePath: Icons.dropdownGray
                     imageSize: 9

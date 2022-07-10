@@ -154,6 +154,7 @@ Popup
                             imagePath: Icons.dropdownGray
                             imageSize: 9
                             
+                            selectionPopup.checkBoxStyle: false
                             selectionPopup.checkBoxSize: 17
                             selectionPopup.checkBoxImageSize: 9
                             selectionPopup.itemHeight: 29

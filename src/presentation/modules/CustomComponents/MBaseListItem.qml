@@ -61,7 +61,7 @@ Item
                 id: content
                 horizontalAlignment: Text.AlignLeft
                 Layout.fillWidth: true
-                color: root.fontColor
+                color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
                 text: root.text
                 font.pointSize: root.fontSize
                 font.family: Style.defaultFontFamily
