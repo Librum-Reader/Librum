@@ -301,14 +301,14 @@ Popup
                             
                             selectionPopup.model: ListModel
                             {
-                                ListElement { content: "Technology" }
-                                ListElement { content: "Favourite" }
-                                ListElement { content: "Romance" }
-                                ListElement { content: "Comedy" }
-                                ListElement { content: "Sports" }
-                                ListElement { content: "Physics" }
-                                ListElement { content: "Blockchain" }
-                                ListElement { content: "Psychology" }
+                                ListElement { text: "Technology" }
+                                ListElement { text: "Favourite" }
+                                ListElement { text: "Romance" }
+                                ListElement { text: "Comedy" }
+                                ListElement { text: "Sports" }
+                                ListElement { text: "Physics" }
+                                ListElement { text: "Blockchain" }
+                                ListElement { text: "Psychology" }
                             }
                         }
                         
@@ -327,26 +327,26 @@ Popup
                             
                             selectionPopup.model: ListModel
                             {
-                                ListElement { content: "English" }
-                                ListElement { content: "German"  }
-                                ListElement { content: "Italian" }
-                                ListElement { content: "French" }
-                                ListElement { content: "Romanian" }
-                                ListElement { content: "Spanish" }
-                                ListElement { content: "Mandarin" }
-                                ListElement { content: "Portugese" }
-                                ListElement { content: "Hindi" }
-                                ListElement { content: "Bengali" }
-                                ListElement { content: "Russian" }
-                                ListElement { content: "Arabic" }
-                                ListElement { content: "Japanese" }
-                                ListElement { content: "Indonesian" }
-                                ListElement { content: "Turkish" }
-                                ListElement { content: "Korean" }
-                                ListElement { content: "Hungarian" }
-                                ListElement { content: "Thai"  }
-                                ListElement { content: "Swahli" }
-                                ListElement { content: "Dutch" }
+                                ListElement { text: "English" }
+                                ListElement { text: "German"  }
+                                ListElement { text: "Italian" }
+                                ListElement { text: "French" }
+                                ListElement { text: "Romanian" }
+                                ListElement { text: "Spanish" }
+                                ListElement { text: "Mandarin" }
+                                ListElement { text: "Portugese" }
+                                ListElement { text: "Hindi" }
+                                ListElement { text: "Bengali" }
+                                ListElement { text: "Russian" }
+                                ListElement { text: "Arabic" }
+                                ListElement { text: "Japanese" }
+                                ListElement { text: "Indonesian" }
+                                ListElement { text: "Turkish" }
+                                ListElement { text: "Korean" }
+                                ListElement { text: "Hungarian" }
+                                ListElement { text: "Thai"  }
+                                ListElement { text: "Swahli" }
+                                ListElement { text: "Dutch" }
                             }
                         }
                         

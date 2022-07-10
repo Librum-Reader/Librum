@@ -18,7 +18,7 @@ Popup
     signal itemsChanged
     
     property int checkBoxSize: 18
-    property int checkBoxImageSize: 18
+    property int checkBoxImageSize: 10
     
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
@@ -49,6 +49,8 @@ Popup
         ListView
         {
             id: listView
+            property MBaseListItem currentSelected
+            
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
             Layout.maximumHeight: root.maxHeight
@@ -58,43 +60,62 @@ Popup
             clip: true
             focus: true
             boundsBehavior: Flickable.StopAtBounds
+            ScrollBar.vertical: ScrollBar { }
             
-            delegate: MMultiComboBoxItem
+            delegate: MBaseListItem
             {
+                width: listView.width
                 height: root.itemHeight
-                container: listView
+                containingListview: listView
                 fontSize: root.fontSize
                 fontColor: root.fontColor
-                fontWeight: root.fontWeight
-                fontFamily: root.fontFamily
-                radius: root.radius - 1
+                checkBoxImageSize: root.checkBoxImageSize
+                checkBoxSize: root.checkBoxSize
                 
-                onItemSelected:
+                onClicked:
                     (index) =>
                     {
-                        let content = listView.itemAtIndex(index).content;
-                        root.selectedItems.push(content);
-                        root.itemsChanged();
+                        listView.addItemToList(index);
+                        listView.changeSelected(index);
                     }
-                
-                onItemDeselected:
-                    (index) =>
-                    {
-                        let content = listView.itemAtIndex(index).content;
-                        root.selectedItems = removeFromArray(root.selectedItems, content);
-                        root.itemsChanged();
-                    }
-                
-                
-                function removeFromArray(arr, value)
-                { 
-                    return arr.filter(function(ele){ 
-                        return ele !== value; 
-                    });
+            }
+            
+            Keys.onReturnPressed:
+            {
+                listView.addItemToList(listView.currentIndex);
+                listView.changeSelected(listView.currentIndex);
+            }
+            
+        
+            function addItemToList(index)
+            {
+                if(root.selectedItems.includes(listView.itemAtIndex(index).text))
+                {
+                    let text = listView.itemAtIndex(index).text;
+                    root.selectedItems = removeFromArray(root.selectedItems, text);
+                    root.itemsChanged();
+                }
+                else
+                {
+                    let text = listView.itemAtIndex(index).text;
+                    root.selectedItems.push(text);
+                    root.itemsChanged();
                 }
             }
             
-            ScrollBar.vertical: ScrollBar { }
+            function removeFromArray(arr, value)
+            { 
+                return arr.filter(function(ele){ 
+                    return ele !== value; 
+                });
+            }
+            
+            function changeSelected(index)
+            {
+                listView.currentIndex = index;
+                
+                listView.itemAtIndex(index).selected = !listView.itemAtIndex(index).selected;
+            }
         }
     }
     
