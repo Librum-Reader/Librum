@@ -41,8 +41,7 @@ Popup
             id: container
             Layout.fillHeight: true
             Layout.fillWidth: true
-            verticalPadding: 8
-            horizontalPadding: 4
+            padding: 6
             background: Rectangle
             {
                 color: Style.colorBackground

@@ -298,7 +298,6 @@ Popup
                             imagePath: Icons.dropdownGray
                             imageSize: 9
                             selectionPopup.maxHeight: 200
-                            selectionPopup.defaultIndex: -1
                             selectionPopup.model: ListModel
                             {
                                 ListElement { text: "Technology" }
@@ -324,7 +323,6 @@ Popup
                             imagePath: Icons.dropdownGray
                             imageSize: 9
                             selectionPopup.maxHeight: 200
-                            selectionPopup.defaultIndex: 3
                             
                             selectionPopup.model: ListModel
                             {
