@@ -65,7 +65,7 @@ Item
                 text: root.text
                 font.pointSize: root.fontSize
                 font.family: Style.defaultFontFamily
-                font.weight: root.selected ? Font.Medium : Font.Normal
+                font.weight: root.selected ? Font.DemiBold : Font.Medium
                 elide: Text.ElideRight
             }
         }

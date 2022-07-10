@@ -1,16 +1,15 @@
 function addItemToResult(index)
 {
-    // Functions can have properties (which work like static locals), so this creates an array on the function
-    addItemToResult.selectedItemsStore = [];
-    
     let newText = listView.itemAtIndex(index).text;
     
-    if(addItemToResult.selectedItemsStore.includes(newText))
-        addItemToResult.selectedItemsStore = removeFromArray(addItemToResult.selectedItemsStore, newText);
+    if(listView.selectedItemsStore.includes(newText))
+        listView.selectedItemsStore = removeFromArray(listView.selectedItemsStore, newText);
     else
-        addItemToResult.selectedItemsStore.push(newText);
+    {
+        listView.selectedItemsStore.push(newText);
+    }
     
-    root.selectedContents = formatArray(addItemToResult.selectedItemsStore);
+    root.selectedContents = formatArray(listView.selectedItemsStore);
 }
 
 function formatArray(arrayToComposeFrom)

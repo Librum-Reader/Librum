@@ -48,6 +48,7 @@ Popup
         {
             id: listView
             property MBaseListItem currentSelected
+            property var selectedItemsStore: []
             
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
@@ -74,6 +75,7 @@ Popup
                 
                 onClicked: (index) => listView.selectItem(index);
             }
+            
             
             Keys.onReturnPressed:
             {

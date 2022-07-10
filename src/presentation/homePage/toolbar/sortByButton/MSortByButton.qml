@@ -56,6 +56,27 @@ Item
                     sourceSize.height: 6
                     source: Icons.dropdownGray
                     fillMode: Image.PreserveAspectFit
+                    rotation: 180
+                    
+                    NumberAnimation
+                    {
+                        id: closeAnim
+                        target: sortByArrowIcon
+                        property: "rotation"
+                        to: 180
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
+                    
+                    NumberAnimation
+                    {
+                        id: openAnim
+                        target: sortByArrowIcon
+                        property: "rotation"
+                        to: 0
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
@@ -74,7 +95,12 @@ Item
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
-        onClosed: root.sortBySelected()
+        onOpened: openAnim.start()
+        onClosed:
+        {
+            closeAnim.start()
+            root.sortBySelected();
+        }
     }
     
     

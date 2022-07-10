@@ -15,7 +15,8 @@ Item
     property bool multiSelect: false
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
-    property string backgroundColor: Style.colorBackground
+    property string boxBackgroundColor: Style.colorBackground
+    property string popupBackgroundColor: Style.colorBackground
     property int radius: 4
     
     property string headerText
@@ -66,7 +67,7 @@ Item
             horizontalPadding: 8
             background: Rectangle
             {
-                color: root.backgroundColor
+                color: root.boxBackgroundColor
                 border.width: 1
                 border.color: Style.colorLightBorder
                 radius: root.radius
@@ -142,7 +143,7 @@ Item
     {
         id: selectionPopup
         y: mainLayout.y + mainLayout.height + root.popupSpacing
-        backgroundColor: root.backgroundColor
+        backgroundColor: root.popupBackgroundColor
         width: parent.width
         multiSelect: root.multiSelect
         

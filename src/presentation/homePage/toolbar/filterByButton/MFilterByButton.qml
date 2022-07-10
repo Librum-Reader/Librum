@@ -11,7 +11,7 @@ Item
     property bool opened : false
     signal filterSelected
     
-    implicitWidth: 100
+    implicitWidth: 104
     implicitHeight: 36
     
     
