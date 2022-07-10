@@ -327,7 +327,6 @@ Popup
                             
                             selectionPopup.model: ListModel
                             {
-                                ListElement { content: "None" }
                                 ListElement { content: "English" }
                                 ListElement { content: "German"  }
                                 ListElement { content: "Italian" }

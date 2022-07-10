@@ -36,11 +36,11 @@ Item
             anchors.fill: parent
             anchors.leftMargin: 6
             verticalAlignment: Text.AlignVCenter
-            color: root.fontColor
+            color: root.selected ? Style.colorBasePurple : root.fontColor
             text: root.content
             font.pointSize: root.fontSize
             font.family: root.fontFamily
-            font.weight: root.fontWeight
+            font.weight: root.selected ? Font.Medium : root.fontWeight
             elide: Text.ElideRight
         }
     }

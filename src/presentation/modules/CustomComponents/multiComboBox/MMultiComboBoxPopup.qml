@@ -10,7 +10,7 @@ Popup
     id: root
     property var selectedItems: []
     property alias model: listView.model
-    property int itemHeight: 28
+    property int itemHeight: 30
     property color backgroundColor
     property int maxHeight: 208
     property int radius: 5
@@ -18,7 +18,7 @@ Popup
     signal itemsChanged
     
     property double fontSize: 11
-    property color fontColor: Style.colorBaseText
+    property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple

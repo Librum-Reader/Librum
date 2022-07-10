@@ -1,5 +1,7 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts 1.0
+import CustomComponents
 import Librum.style
 
 
@@ -20,7 +22,7 @@ Item
     signal itemDeselected(int index)
     
     implicitWidth: container.width
-    implicitHeight: 28
+    implicitHeight: 30
     
     Keys.onReturnPressed:
     {
@@ -41,18 +43,34 @@ Item
         radius: root.radius
         color: root.selected ? Style.colorSidebarMark : mouseArea.containsMouse ? Style.colorLightGray : "transparent"
         
-        Label
+        RowLayout
         {
-            id: label
             anchors.fill: parent
-            anchors.leftMargin: 6
-            verticalAlignment: Text.AlignVCenter
-            color: root.fontColor
-            text: root.content
-            font.pointSize: root.fontSize
-            font.family: root.fontFamily
-            font.weight: root.fontWeight
-            elide: Text.ElideRight
+            anchors.leftMargin: 8
+            spacing: 9
+            
+            MCheckBox
+            {
+                id: checkBox
+                Layout.preferredWidth: 18
+                Layout.preferredHeight: 18
+                checked: root.selected
+                imageSize: 8
+            }
+            
+            
+            Label
+            {
+                id: label
+                Layout.fillWidth: true
+                verticalAlignment: Text.AlignVCenter
+                color: root.fontColor
+                text: root.content
+                font.pointSize: root.fontSize
+                font.family: root.fontFamily
+                font.weight: root.selected ? Font.Medium : root.fontWeight
+                elide: Text.ElideRight
+            }
         }
     }
     
