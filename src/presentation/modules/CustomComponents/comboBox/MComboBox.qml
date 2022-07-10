@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
-import "../multiComboBox"
 
 Item
 {
@@ -155,42 +154,6 @@ Item
                 openAnim.start();
         }
     }
-    
-//    MMultiComboBoxPopup
-//    {
-//        id: multiSelectionPopup
-//        property string content
-        
-//        model: root.model
-//        maxHeight: root.maxPopupHeight
-//        defaultIndex: root.defaultIndex
-        
-//        y: mainLayout.y + mainLayout.height + root.popupSpacing
-//        backgroundColor: root.backgroundColor
-//        width: parent.width
-        
-//        onItemsChanged:
-//        {
-//            let temp = "";
-//            for(let i = 0; i < selectedItems.length; i++)
-//            {
-//                temp += selectedItems[i];
-                
-//                if(i < selectedItems.length - 1)
-//                    temp += ", "
-//            }
-            
-//            content = temp;
-//        }
-        
-//        onOpenedChanged:
-//        {
-//            if(opened)
-//                closeAnim.start();
-//            else
-//                openAnim.start();
-//        }
-//    }
     
     
     function giveFocus()
