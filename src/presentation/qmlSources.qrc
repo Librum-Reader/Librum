@@ -83,5 +83,6 @@
         <file>Globals.qml</file>
         <file>homePage/bookOptionsPopup/MBookDetailsPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
+        <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
 import CustomComponents
+import "ComboBoxLogic.js" as Logic
 
 
 Popup
@@ -47,7 +48,6 @@ Popup
         {
             id: listView
             property MBaseListItem currentSelected
-            property var currentSelectedItems: []
             
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
@@ -72,122 +72,29 @@ Popup
                 checkBoxImageSize: root.checkBoxImageSize
                 checkBoxSize: root.checkBoxSize
                 
-                onClicked:
-                    (index) =>
-                    {
-                        if(root.multiSelect)
-                        {
-                            listView.addItemToList(index);
-                            listView.changeSelectedForMultiSelect(index);
-                            return;
-                        }
-                        
-                        listView.changeSelectedForSingleSelect(index);
-                    }
+                onClicked: (index) => listView.selectItem(index);
             }
             
             Keys.onReturnPressed:
             {
                 if(listView.currentIndex !== -1)
-                {
-                    if(root.multiSelect)
-                    {
-                        addItemToList(listView.currentIndex);
-                        changeSelectedForMultiSelect(listView.currentIndex);
-                        return;
-                    }
-                    
-                    listView.changeSelectedForSingleSelect(listView.currentIndex);
-                }
+                    selectItem(listView.currentIndex);
             }
             
-            function addItemToList(index)
+            Component.onCompleted:
             {
-                if(listView.currentSelectedItems.includes(listView.itemAtIndex(index).text))
-                {
-                    let text = listView.itemAtIndex(index).text;
-                    listView.currentSelectedItems = removeFromArray(listView.currentSelectedItems, text);
-                }
-                else
-                {
-                    let text = listView.itemAtIndex(index).text;
-                    listView.currentSelectedItems.push(text);
-                }
-                
-                let temp = "";
-                for(let i = 0; i < listView.currentSelectedItems.length; i++)
-                {
-                    temp += listView.currentSelectedItems[i];
-                    
-                    if(i < listView.currentSelectedItems.length - 1)
-                        temp += ", "
-                }
-                
-                root.selectedContents = temp;
+                if(root.defaultIndex != -1)
+                    selectItem(listView.currentIndex);
             }
             
             
-            
-            function removeFromArray(arr, value)
-            { 
-                return arr.filter(function(ele){ 
-                    return ele !== value; 
-                });
-            }
-            
-            
-            
-            function changeSelectedForMultiSelect(index)
-            {
-                listView.currentIndex = index;
-                
-                listView.itemAtIndex(index).selected = !listView.itemAtIndex(index).selected;
-            }
-            
-            
-            function changeSelectedForSingleSelect(index)
-            {
-                listView.currentIndex = index;
-                
-                if(listView.itemAtIndex(index) === listView.currentSelected)
-                {
-                    listView.currentSelected.selected = false;
-                    root.selectedContents = "";
-                    return;
-                }
-                
-                
-                if(listView.currentSelected != null)
-                    listView.currentSelected.selected = false;
-                
-                listView.itemAtIndex(index).selected = true;
-                
-                listView.currentSelected = listView.itemAtIndex(index);
-                
-                root.selectedContents = listView.currentSelected.text;
-            }
-        }
-        
-        Component.onCompleted:
-        {
-            
-            if(root.defaultIndex != -1)
+            function selectItem(index)
             {
                 if(root.multiSelect)
-                {
-                    listView.addItemToList(listView.currentIndex);
-                    listView.changeSelectedForMultiSelect(listView.currentIndex);
-                    return;
-                }
+                    Logic.addItemToResult(index);
                 
-                listView.changeSelectedForSingleSelect(listView.currentIndex);
+                Logic.changeSelectionMarker(index);
             }
         }
-    }
-    
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
     }
 }

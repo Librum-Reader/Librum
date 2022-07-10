@@ -34,7 +34,7 @@ Item
         background: Rectangle
         {
             color: root.selected ? Style.colorSidebarMark : 
-                                    mouseArea.containsMouse || containingListview.currentIndex == index
+                                    mouseArea.containsMouse || containingListview.currentIndex === index
                                         ? Style.colorLightGray : Style.colorBackground
             radius: 4
             antialiasing: true
