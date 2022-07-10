@@ -158,7 +158,7 @@ Popup
                             selectionPopup.checkBoxSize: 17
                             selectionPopup.checkBoxImageSize: 9
                             selectionPopup.itemHeight: 29
-                            selectionPopup.fontSize: 10.5
+                            selectionPopup.fontSize: 11
                             selectionPopup.model: ListModel
                             {
                                 ListElement { text: "Pdf" }
