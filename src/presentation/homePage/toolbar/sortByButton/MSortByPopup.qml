@@ -105,12 +105,17 @@ Popup
                     {
                         listView.currentIndex = index;
                         
+                        if(listView.currentSelected == listView.currentItem)
+                        {
+                            listView.currentItem.selected = !listView.currentItem.selected;
+                            return;
+                        }
+                        
                         if(listView.currentSelected != null)
                             listView.currentSelected.selected = false;
                         
-                        listView.itemAtIndex(index).selected = true;
-                        
-                        listView.currentSelected = listView.itemAtIndex(index);
+                        listView.currentItem.selected = true;
+                        listView.currentSelected = listView.currentItem;
                     }
                 }
             }
