@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import Librum.style
 
 
@@ -11,6 +12,7 @@ Item
     property bool selected: container.currentItem === this
     required property int index
     property int radius
+    property bool checkBoxStyle: false
     
     property int fontSize
     property color fontColor
@@ -30,18 +32,24 @@ Item
         radius: root.radius
         color: root.selected ? Style.colorSidebarMark : mouseArea.containsMouse ? Style.colorLightGray : "transparent"
         
-        Label
+        RowLayout
         {
-            id: label
             anchors.fill: parent
             anchors.leftMargin: 6
-            verticalAlignment: Text.AlignVCenter
-            color: root.selected ? Style.colorBasePurple : root.fontColor
-            text: root.content
-            font.pointSize: root.fontSize
-            font.family: root.fontFamily
-            font.weight: root.selected ? Font.Medium : root.fontWeight
-            elide: Text.ElideRight
+            spacing: 0
+            
+            Label
+            {
+                id: label
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
+                color: root.selected ? Style.colorBasePurple : root.fontColor
+                text: root.content
+                font.pointSize: root.fontSize
+                font.family: root.fontFamily
+                font.weight: root.selected ? Font.Medium : root.fontWeight
+                elide: Text.ElideRight
+            }
         }
     }
     

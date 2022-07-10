@@ -148,16 +148,21 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 49
                             Layout.topMargin: 2
+                            selectionPopup.defaultIndex: -1
                             headerText: "Format"
+                            titleEmptyText: "Any"
                             imagePath: Icons.dropdownGray
                             imageSize: 9
                             
+                            selectionPopup.checkBoxSize: 18
+                            selectionPopup.checkBoxImageSize: 10
+                            selectionPopup.fontSize: 10.5
                             selectionPopup.model: ListModel
                             {
-                                ListElement { content: "Any" }
-                                ListElement { content: "Pdf" }
-                                ListElement { content: "Epub"  }
-                                ListElement { content: "Mobi" }
+                                ListElement { text: "Pdf" }
+                                ListElement { text: "Epub"  }
+                                ListElement { text: "Mobi" }
+                                ListElement { text: "Txt" }
                             }
                         }
                         

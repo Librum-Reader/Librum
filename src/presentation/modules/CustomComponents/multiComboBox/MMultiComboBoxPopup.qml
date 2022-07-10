@@ -17,6 +17,9 @@ Popup
     property int defaultIndex: 0
     signal itemsChanged
     
+    property int checkBoxSize: 18
+    property int checkBoxImageSize: 18
+    
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal

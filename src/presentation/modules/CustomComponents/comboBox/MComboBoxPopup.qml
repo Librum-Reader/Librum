@@ -8,21 +8,23 @@ import CustomComponents
 Popup
 {
     id: root
-    property var selectedItem: listView.currentItem
+    property var selectedItem
     property alias model: listView.model
     property int itemHeight: 28
     property color backgroundColor
     property int maxHeight: 208
     property int radius: 5
-    property int defaultIndex: 0
+    property int defaultIndex: -1
+    property bool checkBoxStyle: true
+    property int checkBoxSize: 18
+    property int checkBoxImageSize: 9
     
     property double fontSize: 11
-    property color fontColor: Style.colorBaseText
+    property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
     
-    implicitWidth: 300
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     focus: true
@@ -44,6 +46,8 @@ Popup
         ListView
         {
             id: listView
+            property MBaseListItem currentSelected
+            
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
             Layout.maximumHeight: root.maxHeight
@@ -54,21 +58,57 @@ Popup
             focus: true
             boundsBehavior: Flickable.StopAtBounds
             
-            delegate: MComboBoxItem
+            ScrollBar.vertical: ScrollBar { }
+            
+            delegate: MBaseListItem
             {
+                width: listView.width
                 height: root.itemHeight
-                container: listView
+                containingListview: listView
                 fontSize: root.fontSize
                 fontColor: root.fontColor
-                fontWeight: root.fontWeight
-                fontFamily: root.fontFamily
-                radius: root.radius - 1
+                checkBoxStyle: root.checkBoxStyle
+                checkBoxImageSize: root.checkBoxImageSize
+                checkBoxSize: root.checkBoxSize
                 
-                onClose: root.close()
+                onClicked:
+                    (index) =>
+                    {
+                        listView.changeSelected(index);
+                    }
             }
             
-            ScrollBar.vertical: ScrollBar { }
+            Keys.onReturnPressed:
+            {
+                if(listView.currentIndex !== -1)
+                    listView.changeSelected(listView.currentIndex)
+            }
+            
+            
+            function changeSelected(index)
+            {
+                listView.currentIndex = index;
+                
+                if(listView.itemAtIndex(index) === listView.currentSelected)
+                {
+                    listView.currentSelected.selected = false;
+                    root.selectedItem = null;
+                    return;
+                }
+                    
+                
+                if(listView.currentSelected != null)
+                    listView.currentSelected.selected = false;
+                
+                listView.itemAtIndex(index).selected = true;
+                
+                listView.currentSelected = listView.itemAtIndex(index);
+                
+                root.selectedItem = listView.currentSelected;
+            }
         }
+        
+        Component.onCompleted: if(root.defaultIndex != -1) listView.changeSelected(root.defaultIndex)
     }
     
     

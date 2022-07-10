@@ -14,7 +14,10 @@ Item
     property bool selected: false
     property double fontSize: 10.75
     property color fontColor: Style.colorLightText3
-    property int padding : 10
+    property int checkBoxSize: 18
+    property int checkBoxImageSize: 9
+    property int padding : 8
+    property bool checkBoxStyle: true
     signal clicked(int index)
     signal hovered(int index)
     
@@ -40,17 +43,17 @@ Item
         RowLayout
         {
             anchors.fill: parent
-            anchors.leftMargin: 2
             spacing: 9
             
             
             MCheckBox
             {
                 id: checkBox
-                Layout.preferredWidth: 18
-                Layout.preferredHeight: 18
+                visible: root.checkBoxStyle
+                Layout.preferredWidth: root.checkBoxSize
+                Layout.preferredHeight: root.checkBoxSize
                 checked: root.selected
-                imageSize: 8
+                imageSize: root.checkBoxImageSize
             }
             
             Label
