@@ -10,7 +10,7 @@ Item
     id: root
     signal tagSelected
     
-    implicitWidth: 100
+    implicitWidth: 104
     implicitHeight: 36
     
     
@@ -31,7 +31,7 @@ Item
         RowLayout
         {
             anchors.centerIn: parent
-            spacing: 4
+            spacing: 6
             
             Image
             {
@@ -66,11 +66,7 @@ Item
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
-        onSelected:
-        {
-            close();
-            root.tagSelected();
-        }
+        onClosed: root.tagSelected()
     }
     
     

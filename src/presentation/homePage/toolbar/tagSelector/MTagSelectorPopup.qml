@@ -9,17 +9,15 @@ import Librum.icons
 Popup
 {
     id: root
-    signal selected
-    
     focus: true
     padding: 0
-    implicitWidth: 151
+    implicitWidth: 168
     background: Rectangle
     {
         color: "transparent"
     }
     
-    onOpenedChanged: if(opened) listView.forceActiveFocus();
+    onOpenedChanged: if(opened) listView.forceActiveFocus()
     
     
     ColumnLayout
@@ -92,7 +90,7 @@ Popup
                             (index) =>
                             {
                                 listView.currentIndex = index;
-                                root.selected();
+                                listView.currentItem.selected = !listView.currentItem.selected;
                             }
                     }
                     
@@ -101,7 +99,7 @@ Popup
                         {
                             if(event.key === Qt.Key_Return)
                             {
-                                root.selected();
+                                listView.currentItem.selected = !listView.currentItem.selected;
                             }
                         }
                 }
