@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import CustomComponents
 import QtQuick.Layouts
 import Librum.style
 
@@ -8,7 +9,7 @@ Item
 {
     id: root
     required property ListView containingListview
-    property bool selected: containingListview.currentItem === this
+    property bool selected: false
     required property string text
     required property int index
     property int padding : 10
@@ -27,24 +28,41 @@ Item
         horizontalPadding: root.padding
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : mouseArea.containsMouse ? Style.colorLightGray : Style.colorBackground
+            color: root.selected ? Style.colorSidebarMark : 
+                                    mouseArea.containsMouse || containingListview.currentIndex == index
+                                        ? Style.colorLightGray : Style.colorBackground
             radius: 4
             antialiasing: true
         }
         
-        
-        Label
+        RowLayout
         {
-            id: content
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            leftPadding: 4
-            color: (root.selected) ? Style.colorBasePurple : Style.colorLightText3
-            text: root.text
-            font.pointSize: 10.75
+            anchors.fill: parent
+            anchors.leftMargin: 2
+            spacing: 9
             
-            font.family: Style.defaultFontFamily
-            font.weight: Font.DemiBold
+            
+            MCheckBox
+            {
+                id: checkBox
+                Layout.preferredWidth: 18
+                Layout.preferredHeight: 18
+                checked: root.selected
+                imageSize: 8
+            }
+            
+            Label
+            {
+                id: content
+                horizontalAlignment: Text.AlignLeft
+                Layout.fillWidth: true
+                color: Style.colorLightText3
+                text: root.text
+                font.pointSize: 10.75
+                font.family: Style.defaultFontFamily
+                font.weight: root.selected ? Font.Medium : Font.Normal
+                elide: Text.ElideRight
+            }
         }
     }
     
@@ -54,6 +72,6 @@ Item
         anchors.fill: parent
         hoverEnabled: true
         
-        onClicked: root.clicked(root.index)
+        onClicked: root.clicked(root.index);
     }
 }
