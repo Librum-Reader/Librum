@@ -129,7 +129,7 @@ Popup
                 id: bookCoverSide
                 SplitView.preferredWidth: 218
                 SplitView.minimumWidth: 80
-                SplitView.maximumWidth: 260
+                SplitView.maximumWidth: 246
                 
                 ColumnLayout
                 {
@@ -206,7 +206,6 @@ Popup
                 SplitView.minimumWidth: 100
                 SplitView.fillWidth: true
                 
-                
                 ScrollView
                 {
                     id: inputSideLayout
@@ -224,12 +223,6 @@ Popup
                         height: inputSideLayout.availableHeight
                         policy: ScrollBar.AlwaysOn
                         onActiveChanged: inputSideLayout.scrolling()
-                    }
-                    
-                    function scrolling()
-                    {
-                        languageComboBox.closeDropDown();
-                        tagsComboBox.closeDropDown();
                     }
                     
                     
@@ -297,25 +290,25 @@ Popup
                             id: tagsComboBox
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
+                            multiSelect: true
                             headerText: "Tags"
-                            headerFontWeight: Font.Bold
+                            titleEmptyText: "None"
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 200
-                            defaultIndex: 3
-                            
-                            listContent: ListModel
+                            selectionPopup.maxHeight: 200
+                            selectionPopup.defaultIndex: -1
+                            selectionPopup.model: ListModel
                             {
-                                ListElement { content: "Technology" }
-                                ListElement { content: "Favourite" }
-                                ListElement { content: "Romance" }
-                                ListElement { content: "Comedy" }
-                                ListElement { content: "Sports" }
-                                ListElement { content: "Physics" }
-                                ListElement { content: "Blockchain" }
-                                ListElement { content: "Psychology" }
+                                ListElement { text: "Technology" }
+                                ListElement { text: "Favourite" }
+                                ListElement { text: "Romance" }
+                                ListElement { text: "Comedy" }
+                                ListElement { text: "Sports" }
+                                ListElement { text: "Physics" }
+                                ListElement { text: "Blockchain" }
+                                ListElement { text: "Psychology" }
                             }
                         }
                         
@@ -324,38 +317,37 @@ Popup
                             id: languageComboBox
                             Layout.fillWidth: true
                             Layout.preferredHeight: 53
+                            multiSelect: true
                             headerText: "Language"
-                            headerFontWeight: Font.Bold
                             headerFontSize: 11.5
                             headerFontColor: Style.colorBaseTitle
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 200
-                            defaultIndex: 3
+                            selectionPopup.maxHeight: 200
+                            selectionPopup.defaultIndex: 3
                             
-                            listContent: ListModel
+                            selectionPopup.model: ListModel
                             {
-                                ListElement { content: "None" }
-                                ListElement { content: "English" }
-                                ListElement { content: "German"  }
-                                ListElement { content: "Italian" }
-                                ListElement { content: "French" }
-                                ListElement { content: "Romanian" }
-                                ListElement { content: "Spanish" }
-                                ListElement { content: "Mandarin" }
-                                ListElement { content: "Portugese" }
-                                ListElement { content: "Hindi" }
-                                ListElement { content: "Bengali" }
-                                ListElement { content: "Russian" }
-                                ListElement { content: "Arabic" }
-                                ListElement { content: "Japanese" }
-                                ListElement { content: "Indonesian" }
-                                ListElement { content: "Turkish" }
-                                ListElement { content: "Korean" }
-                                ListElement { content: "Hungarian" }
-                                ListElement { content: "Thai"  }
-                                ListElement { content: "Swahli" }
-                                ListElement { content: "Dutch" }
+                                ListElement { text: "English" }
+                                ListElement { text: "German"  }
+                                ListElement { text: "Italian" }
+                                ListElement { text: "French" }
+                                ListElement { text: "Romanian" }
+                                ListElement { text: "Spanish" }
+                                ListElement { text: "Mandarin" }
+                                ListElement { text: "Portugese" }
+                                ListElement { text: "Hindi" }
+                                ListElement { text: "Bengali" }
+                                ListElement { text: "Russian" }
+                                ListElement { text: "Arabic" }
+                                ListElement { text: "Japanese" }
+                                ListElement { text: "Indonesian" }
+                                ListElement { text: "Turkish" }
+                                ListElement { text: "Korean" }
+                                ListElement { text: "Hungarian" }
+                                ListElement { text: "Thai"  }
+                                ListElement { text: "Swahli" }
+                                ListElement { text: "Dutch" }
                             }
                         }
                         
@@ -460,6 +452,21 @@ Popup
                             readOnly: true
                         }
                     }
+                
+                
+                    Component.onCompleted:
+                    {
+                        // Set properties on the flickable contained in Scrollview.
+                        // The Flickable is by default the contentItem of the ScrollView.
+                        contentItem.maximumFlickVelocity = 600
+                    }
+                    
+                    
+                    function scrolling()
+                    {
+                        languageComboBox.selectionPopup.close();
+                        tagsComboBox.selectionPopup.close();
+                    }
                 }
             }
         }              
@@ -493,11 +500,7 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: root.close();
                 
                 KeyNavigation.right: cancelButton
                 KeyNavigation.tab: cancelButton
@@ -521,11 +524,7 @@ Popup
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                 onClicked: root.close()
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: root.close();
                 
                 KeyNavigation.left: applyButton
                 KeyNavigation.right: deleteButton
@@ -542,7 +541,7 @@ Popup
                 Layout.alignment: Qt.AlignRight
                 borderWidth: activeFocus  || currentlyHovered ? 0 : 1
                 borderColor: Style.colorLightBorder
-                backgroundColor: activeFocus || currentlyHovered ? "#D84B4D" : "transparent"
+                backgroundColor: activeFocus || currentlyHovered ? Style.colorBaseRed : "transparent"
                 opacityOnPressed: 0.7
                 text: "Delete"
                 fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText
@@ -553,13 +552,9 @@ Popup
                 imageSpacing: 10
                 
                 onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
-                onClicked: root.close()
+                onClicked: acceptDeletionPopup.open();
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return) root.close();
-                    }
+                Keys.onReturnPressed: acceptDeletionPopup.open();
                 
                 KeyNavigation.left: cancelButton
                 KeyNavigation.tab: applyButton
@@ -567,6 +562,15 @@ Popup
         }
     }
     
+    
+    MAcceptDeletionPopup
+    {
+        id: acceptDeletionPopup
+        x: root.width / 2 - implicitWidth / 2
+        y: root.height / 2 - implicitHeight / 2 - 30
+        
+        onDeleteChoosed: root.close()
+    }
     
     FileDialog
     {

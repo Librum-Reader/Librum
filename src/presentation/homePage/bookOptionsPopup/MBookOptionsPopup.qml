@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import CustomComponents
 import Qt.labs.platform
 import Librum.style
 import Librum.icons
@@ -109,6 +110,7 @@ Popup
             
             onClicked:
             {
+                acceptDeletionPopup.open();
                 root.close();
             }
         }

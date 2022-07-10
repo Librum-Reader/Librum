@@ -126,35 +126,33 @@ Popup
                     id: languagesComboBox
                     Layout.fillWidth: true
                     Layout.preferredHeight: 49
+                    multiSelect: true
                     headerText: "Language"
                     imagePath: Icons.dropdownGray
                     imageSize: 9
-                    maxPopupHeight: 208
                     
-                    listContent: ListModel
+                    selectionPopup.model: ListModel
                     {
-                        id: listModel
-                        ListElement { content: "None" }
-                        ListElement { content: "English" }
-                        ListElement { content: "German"  }
-                        ListElement { content: "Italian" }
-                        ListElement { content: "French" }
-                        ListElement { content: "Romanian" }
-                        ListElement { content: "Spanish" }
-                        ListElement { content: "Mandarin" }
-                        ListElement { content: "Portugese" }
-                        ListElement { content: "Hindi" }
-                        ListElement { content: "Bengali" }
-                        ListElement { content: "Russian" }
-                        ListElement { content: "Arabic" }
-                        ListElement { content: "Japanese" }
-                        ListElement { content: "Indonesian" }
-                        ListElement { content: "Turkish" }
-                        ListElement { content: "Korean" }
-                        ListElement { content: "Hungarian" }
-                        ListElement { content: "Thai"  }
-                        ListElement { content: "Swahli" }
-                        ListElement { content: "Dutch" }
+                        ListElement { text: "English" }
+                        ListElement { text: "German"  }
+                        ListElement { text: "Italian" }
+                        ListElement { text: "French" }
+                        ListElement { text: "Romanian" }
+                        ListElement { text: "Spanish" }
+                        ListElement { text: "Mandarin" }
+                        ListElement { text: "Portugese" }
+                        ListElement { text: "Hindi" }
+                        ListElement { text: "Bengali" }
+                        ListElement { text: "Russian" }
+                        ListElement { text: "Arabic" }
+                        ListElement { text: "Japanese" }
+                        ListElement { text: "Indonesian" }
+                        ListElement { text: "Turkish" }
+                        ListElement { text: "Korean" }
+                        ListElement { text: "Hungarian" }
+                        ListElement { text: "Thai"  }
+                        ListElement { text: "Swahli" }
+                        ListElement { text: "Dutch" }
                     }
                 }
                 

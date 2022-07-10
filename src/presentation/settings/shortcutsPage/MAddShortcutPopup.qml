@@ -108,7 +108,7 @@ Popup
                         id: actionComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
-                        itemHeight: 32
+                        selectionPopup.itemHeight: 32
                         headerText: "Action"
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
@@ -117,19 +117,15 @@ Popup
                         titleFontSize: 12.5
                         titleSpacing: 3
                         titleEmptyText: "None selected"
-                        contentFontColor: Style.colorLightText3
-                        contentFontSize: 12.5
-                        defaultIndex: -1
+                        selectionPopup.fontColor: Style.colorLightText3
+                        selectionPopup.fontSize: 12.5
                         
                         imagePath: Icons.dropdownGray
                         imageSize: 11
-                        maxPopupHeight: 208
                         
-                        listContent: listModel
-                        
-                        ListModel
+                        selectionPopup.defaultIndex: -1
+                        selectionPopup.model: ListModel
                         {
-                            id: listModel
                             ListElement { content: "Page adsdsa asd asd af fda sasd" }
                             ListElement { content: "Any" }
                             ListElement { content: "Pdf" }

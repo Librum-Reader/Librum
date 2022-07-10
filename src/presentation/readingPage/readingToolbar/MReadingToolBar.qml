@@ -178,36 +178,34 @@ Pane
         {
             id: zoomComboBox
             Layout.preferredHeight: 32
-            Layout.preferredWidth: 84
+            Layout.preferredWidth: 92
             headerText: ""
-            backgroundColor: Style.colorBaseGray
-            highlightColor: Style.colorLightGray3
-            defaultIndex: 6
+            titleFontColor: Style.colorBaseTitle
+            boxBackgroundColor: Style.colorBaseGray
+            selectionPopup.highlightColor: Style.colorLightGray3
+            selectionPopup.defaultIndex: 6
             imagePath: Icons.dropdownBlack
             imageSize: 9
-            maxPopupHeight: 208
             
-            listContent: listModel
-            
-            ListModel
+            selectionPopup.checkBoxStyle: false
+            selectionPopup.model: ListModel
             {
-                id: listModel
-                ListElement { content: "12%" }
-                ListElement { content: "25%" }
-                ListElement { content: "33%" }
-                ListElement { content: "50%" }
-                ListElement { content: "66%" }
-                ListElement { content: "75%" }
-                ListElement { content: "100%" }
-                ListElement { content: "125%" }
-                ListElement { content: "150%" }
-                ListElement { content: "175%" }
-                ListElement { content: "200%" }
-                ListElement { content: "400%" }
-                ListElement { content: "800%" }
-                ListElement { content: "1000%" }
-                ListElement { content: "2000%" }
-                ListElement { content: "4000%" }
+                ListElement { text: "12%" }
+                ListElement { text: "25%" }
+                ListElement { text: "33%" }
+                ListElement { text: "50%" }
+                ListElement { text: "66%" }
+                ListElement { text: "75%" }
+                ListElement { text: "100%" }
+                ListElement { text: "125%" }
+                ListElement { text: "150%" }
+                ListElement { text: "175%" }
+                ListElement { text: "200%" }
+                ListElement { text: "400%" }
+                ListElement { text: "800%" }
+                ListElement { text: "1000%" }
+                ListElement { text: "2000%" }
+                ListElement { text: "4000%" }
             }
         }
         

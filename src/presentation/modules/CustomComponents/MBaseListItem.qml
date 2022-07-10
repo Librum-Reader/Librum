@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import CustomComponents
 import QtQuick.Layouts
 import Librum.style
 
@@ -8,10 +9,15 @@ Item
 {
     id: root
     required property ListView containingListview
-    property bool selected: containingListview.currentItem === this
     required property string text
     required property int index
-    property int padding : 10
+    property bool selected: false
+    property double fontSize: 10.75
+    property color fontColor: Style.colorLightText3
+    property int checkBoxSize: 18
+    property int checkBoxImageSize: 9
+    property int padding : 8
+    property bool checkBoxStyle: true
     signal clicked(int index)
     signal hovered(int index)
     
@@ -27,24 +33,41 @@ Item
         horizontalPadding: root.padding
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : mouseArea.containsMouse ? Style.colorLightGray : Style.colorBackground
+            color: root.selected ? Style.colorSidebarMark : 
+                                    mouseArea.containsMouse || containingListview.currentIndex === index
+                                        ? Style.colorLightGray : Style.colorBackground
             radius: 4
             antialiasing: true
         }
         
-        
-        Label
+        RowLayout
         {
-            id: content
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            leftPadding: 4
-            color: (root.selected) ? Style.colorBasePurple : Style.colorLightText3
-            text: root.text
-            font.pointSize: 10.75
+            anchors.fill: parent
+            spacing: 9
             
-            font.family: Style.defaultFontFamily
-            font.weight: Font.DemiBold
+            
+            MCheckBox
+            {
+                id: checkBox
+                visible: root.checkBoxStyle
+                Layout.preferredWidth: root.checkBoxSize
+                Layout.preferredHeight: root.checkBoxSize
+                checked: root.selected
+                imageSize: root.checkBoxImageSize
+            }
+            
+            Label
+            {
+                id: content
+                horizontalAlignment: Text.AlignLeft
+                Layout.fillWidth: true
+                color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
+                text: root.text
+                font.pointSize: root.fontSize
+                font.family: Style.defaultFontFamily
+                font.weight: root.selected ? Font.DemiBold : Font.Medium
+                elide: Text.ElideRight
+            }
         }
     }
     
@@ -54,6 +77,6 @@ Item
         anchors.fill: parent
         hoverEnabled: true
         
-        onClicked: root.clicked(root.index)
+        onClicked: root.clicked(root.index);
     }
 }

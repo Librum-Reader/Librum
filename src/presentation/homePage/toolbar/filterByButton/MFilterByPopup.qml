@@ -148,20 +148,23 @@ Popup
                             Layout.fillWidth: true
                             Layout.preferredHeight: 49
                             Layout.topMargin: 2
+                            defaultIndex: -1
                             headerText: "Format"
+                            titleEmptyText: "Any"
                             imagePath: Icons.dropdownGray
                             imageSize: 9
-                            maxPopupHeight: 208
                             
-                            listContent: listModel
-                            
-                            ListModel
+                            selectionPopup.checkBoxStyle: false
+                            selectionPopup.checkBoxSize: 17
+                            selectionPopup.checkBoxImageSize: 9
+                            selectionPopup.itemHeight: 29
+                            selectionPopup.fontSize: 11
+                            selectionPopup.model: ListModel
                             {
-                                id: listModel
-                                ListElement { content: "Any" }
-                                ListElement { content: "Pdf" }
-                                ListElement { content: "Epub"  }
-                                ListElement { content: "Mobi" }
+                                ListElement { text: "Pdf" }
+                                ListElement { text: "Epub"  }
+                                ListElement { text: "Mobi" }
+                                ListElement { text: "Txt" }
                             }
                         }
                         

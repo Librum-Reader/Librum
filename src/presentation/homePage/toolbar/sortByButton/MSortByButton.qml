@@ -10,7 +10,7 @@ Item
     id: root
     signal sortBySelected
     
-    implicitWidth: 100
+    implicitWidth: 104
     implicitHeight: 36
     
     
@@ -38,7 +38,7 @@ Item
             RowLayout
             {
                 anchors.centerIn: parent
-                spacing: 6
+                spacing: 8
                 
                 Label
                 {
@@ -56,6 +56,27 @@ Item
                     sourceSize.height: 6
                     source: Icons.dropdownGray
                     fillMode: Image.PreserveAspectFit
+                    rotation: 180
+                    
+                    NumberAnimation
+                    {
+                        id: closeAnim
+                        target: sortByArrowIcon
+                        property: "rotation"
+                        to: 180
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
+                    
+                    NumberAnimation
+                    {
+                        id: openAnim
+                        target: sortByArrowIcon
+                        property: "rotation"
+                        to: 0
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
@@ -74,10 +95,11 @@ Item
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
-        onSelected:
+        onOpened: openAnim.start()
+        onClosed:
         {
+            closeAnim.start()
             root.sortBySelected();
-            close();
         }
     }
     

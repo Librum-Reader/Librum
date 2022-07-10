@@ -21,7 +21,6 @@
         <file>modules/CustomComponents/buttons/MRemoveOptionButton.qml</file>
         <file>modules/CustomComponents/buttons/MSearchButton.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBox.qml</file>
-        <file>modules/CustomComponents/comboBox/MComboBoxItem.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
         <file>modules/CustomComponents/MPageCleanup.qml</file>
@@ -83,5 +82,7 @@
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
         <file>Globals.qml</file>
         <file>homePage/bookOptionsPopup/MBookDetailsPopup.qml</file>
+        <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
+        <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
     </qresource>
 </RCC>

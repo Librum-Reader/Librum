@@ -20,6 +20,7 @@ Item
     property color colorLightGreen   : "#EAFBE7"
     property color colorLightGreen2  : "#C6F0C2"
     property color colorMediumGreen  : "#5CB176"
+    property color colorBaseRed      : "#D84B4D"
     property color colorCoffeeBrown  : "#E79535"
     property color colorBaseText     : "#32324D"
     property color colorBaseTitle    : "#4A4A6A"
