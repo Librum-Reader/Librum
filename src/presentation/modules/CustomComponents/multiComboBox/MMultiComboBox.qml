@@ -21,7 +21,7 @@ Item
     property string titleEmptyText: "Any"
     property int titleFontWeight: Font.Normal
     property double titleFontSize: 11
-    property color titleFontColor: Style.colorBaseText
+    property color titleFontColor: Style.colorLightText3
     property int titleSpacing: 0
     
     property string imagePath
