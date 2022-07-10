@@ -9,9 +9,11 @@ Item
 {
     id: root
     required property ListView containingListview
-    property bool selected: false
     required property string text
     required property int index
+    property bool selected: false
+    property double fontSize: 10.75
+    property color fontColor: Style.colorLightText3
     property int padding : 10
     signal clicked(int index)
     signal hovered(int index)
@@ -56,9 +58,9 @@ Item
                 id: content
                 horizontalAlignment: Text.AlignLeft
                 Layout.fillWidth: true
-                color: Style.colorLightText3
+                color: root.fontColor
                 text: root.text
-                font.pointSize: 10.75
+                font.pointSize: root.fontSize
                 font.family: Style.defaultFontFamily
                 font.weight: root.selected ? Font.Medium : Font.Normal
                 elide: Text.ElideRight

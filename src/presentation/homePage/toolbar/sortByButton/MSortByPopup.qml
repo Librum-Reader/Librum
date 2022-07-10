@@ -10,11 +10,10 @@ Popup
 {
     id: root
     property int maxHeight: 200
-    signal selected
     
     focus: true
     padding: 0
-    implicitWidth: 151
+    implicitWidth: 176
     background: Rectangle
     {
         color: "transparent"
@@ -62,11 +61,13 @@ Popup
                 ListView
                 {
                     id: listView
+                    property MBaseListItem currentSelected: null
+                    
                     Layout.fillWidth: true
                     Layout.preferredHeight: contentHeight
                     Layout.maximumHeight: 200
                     maximumFlickVelocity: 550
-                    currentIndex: 0
+                    currentIndex: -1
                     keyNavigationEnabled: true
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
@@ -89,19 +90,28 @@ Popup
                         onClicked:
                             (index) =>
                             {
-                                listView.currentIndex = index;
-                                root.selected();
+                                listView.changeSelected(index);
                             }
                     }
                     
-                    Keys.onPressed: 
-                        (event) =>
-                        {
-                            if(event.key === Qt.Key_Return)
-                            {
-                                root.selected();
-                            }
-                        }
+                    Keys.onReturnPressed:
+                    {
+                        if(listView.currentIndex !== -1)
+                            listView.changeSelected(listView.currentIndex)
+                    }
+                    
+                    
+                    function changeSelected(index)
+                    {
+                        listView.currentIndex = index;
+                        
+                        if(listView.currentSelected != null)
+                            listView.currentSelected.selected = false;
+                        
+                        listView.itemAtIndex(index).selected = true;
+                        
+                        listView.currentSelected = listView.itemAtIndex(index);
+                    }
                 }
             }
         }

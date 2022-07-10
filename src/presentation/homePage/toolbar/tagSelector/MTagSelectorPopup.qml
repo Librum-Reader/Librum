@@ -94,14 +94,11 @@ Popup
                             }
                     }
                     
-                    Keys.onPressed: 
-                        (event) =>
-                        {
-                            if(event.key === Qt.Key_Return)
-                            {
-                                listView.currentItem.selected = !listView.currentItem.selected;
-                            }
-                        }
+                    Keys.onReturnPressed:
+                    {
+                        if(listView.currentItem != null)
+                            listView.currentItem.selected = !listView.currentItem.selected;
+                    }
                 }
             }
         }

@@ -10,7 +10,7 @@ Item
     id: root
     signal sortBySelected
     
-    implicitWidth: 100
+    implicitWidth: 104
     implicitHeight: 36
     
     
@@ -38,7 +38,7 @@ Item
             RowLayout
             {
                 anchors.centerIn: parent
-                spacing: 6
+                spacing: 8
                 
                 Label
                 {
@@ -74,11 +74,7 @@ Item
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
-        onSelected:
-        {
-            root.sortBySelected();
-            close();
-        }
+        onClosed: root.sortBySelected()
     }
     
     
