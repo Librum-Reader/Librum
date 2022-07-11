@@ -126,15 +126,15 @@ Popup
                         selectionPopup.defaultIndex: -1
                         selectionPopup.model: ListModel
                         {
-                            ListElement { content: "Page adsdsa asd asd af fda sasd" }
-                            ListElement { content: "Any" }
-                            ListElement { content: "Pdf" }
-                            ListElement { content: "Epub"  }
-                            ListElement { content: "Mobi" }
-                            ListElement { content: "Epub"  }
-                            ListElement { content: "Mobi" }
-                            ListElement { content: "Epub"  }
-                            ListElement { content: "Mobi" }
+                            ListElement { text: "Page adsdsa asd asd af fda sasd" }
+                            ListElement { text: "Any" }
+                            ListElement { text: "Pdf" }
+                            ListElement { text: "Epub"  }
+                            ListElement { text: "Mobi" }
+                            ListElement { text: "Epub"  }
+                            ListElement { text: "Mobi" }
+                            ListElement { text: "Epub"  }
+                            ListElement { text: "Mobi" }
                         }
                     }
                     
