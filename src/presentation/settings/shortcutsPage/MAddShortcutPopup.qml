@@ -12,6 +12,7 @@ Popup
     signal applied
     
     implicitWidth: 594
+    implicitHeight: mainLayout.implicitHeight
     focus: true
     closePolicy: Popup.CloseOnPressOutside
     padding: 0
@@ -27,7 +28,7 @@ Popup
         opacity: 1
     }
     
-    onOpened: downloadButton.forceActiveFocus()
+    onOpened: applyButton.forceActiveFocus()
     onClosed: recordBox.stopRecording()
     
     Shortcut
@@ -144,7 +145,7 @@ Popup
                         id: recordBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
-                        itemToRedirectFocusTo: downloadButton
+                        itemToRedirectFocusTo: applyButton
                         
                         onClose: root.close()
                     }
@@ -159,7 +160,7 @@ Popup
                     
                     MButton
                     {
-                        id: downloadButton
+                        id: applyButton
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 38
                         active: true
@@ -178,7 +179,7 @@ Popup
                             {
                                 if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
                                 {
-                                    downloadButton.active = false;
+                                    applyButton.active = false;
                                     cancelButton.active = true;
                                 }
                                 else if(event.key === Qt.Key_Return)
@@ -213,7 +214,7 @@ Popup
                                 if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
                                 {
                                     cancelButton.active = false;
-                                    downloadButton.active = true;
+                                    applyButton.active = true;
                                 }
                                 else if(event.key === Qt.Key_Return)
                                 {
@@ -221,11 +222,26 @@ Popup
                                 }
                             }
                         
-                        KeyNavigation.left: downloadButton
-                        KeyNavigation.tab: downloadButton
+                        KeyNavigation.left: applyButton
+                        KeyNavigation.tab: applyButton
                     }
                 }
             }
         }
+    }
+    
+    
+    MouseArea
+    {
+        anchors.fill: parent
+        
+        propagateComposedEvents: true
+        onClicked:
+            (mouse) =>
+            {
+                recordBox.stopRecording();
+                applyButton.forceActiveFocus();
+                mouse.accepted = false;
+            }
     }
 }

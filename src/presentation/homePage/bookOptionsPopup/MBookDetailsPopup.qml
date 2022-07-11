@@ -29,10 +29,7 @@ Popup
         opacity: 1
     }
     
-    onAboutToHide:
-    {
-        applyButton.forceActiveFocus();
-    }
+    onAboutToHide: applyButton.forceActiveFocus();
     
     Component.onCompleted: applyButton.forceActiveFocus()
     
@@ -450,8 +447,8 @@ Popup
                             readOnly: true
                         }
                     }
-                
-                
+                    
+                    
                     Component.onCompleted:
                     {
                         // Set properties on the flickable contained in Scrollview.

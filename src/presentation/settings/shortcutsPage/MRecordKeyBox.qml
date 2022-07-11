@@ -153,7 +153,6 @@ Item
     function startRecording()
     {
         keySequenceRecorder.forceActiveFocus();
-        //        button.forceActiveFocus();
         root.recording = true;
         buttonPulsatingAnimation.start();
     }
