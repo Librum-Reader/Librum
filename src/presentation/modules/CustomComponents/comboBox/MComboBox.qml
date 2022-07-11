@@ -27,7 +27,7 @@ Item
     property string titleEmptyText: "Any"
     property int titleFontWeight: Font.Normal
     property double titleFontSize: 11
-    property color titleFontColor: Style.colorLightText3
+    property color titleFontColor: Style.colorBaseText
     property int titleSpacing: 0
     
     property string imagePath
@@ -92,7 +92,7 @@ Item
                     font.pointSize: root.titleFontSize
                     font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight
-                    color: root.titleFontColor
+                    color: selectionPopup.selectedContents === "" ? Style.colorLightText3 : root.titleFontColor
                     elide: Text.ElideRight
                 }
                 
