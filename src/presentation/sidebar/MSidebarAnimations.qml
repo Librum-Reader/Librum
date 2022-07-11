@@ -48,7 +48,7 @@ Item
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, toolsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
             property: "labelVisibility"
             to: true
             duration: slowDuration
@@ -57,7 +57,7 @@ Item
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, toolsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
             property: "textOpacity"
             from: 0
             to: 1
@@ -101,7 +101,7 @@ Item
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, toolsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
             property: "labelVisibility"
             to: false
             duration: fastDuration

@@ -17,7 +17,6 @@ Item
     property alias freeBooksItem: freeBooksItem
     property alias homeItem: homeItem
     property alias statisticsItem: statisticsItem
-    property alias toolsItem: toolsItem
     property alias addOnsItem: addOnButton
     property alias settingsItem: settingsItem
     
@@ -176,18 +175,6 @@ Item
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 15
                 color: Style.colorSeparator
-            }
-            
-            MSidebarItem
-            {
-                id: toolsItem
-                Layout.topMargin: 15
-                Layout.leftMargin: 10
-                imageWidth: 30
-                imageSource: Icons.tool
-                labelContent: "Tools"
-                
-                onClicked: loadPage(toolsPage, root.toolsItem)
             }
             
             MSidebarItem

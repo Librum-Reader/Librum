@@ -59,7 +59,6 @@
         <file>registerPage/MAcceptPolicy.qml</file>
         <file>registerPage/MKeepMeUpdated.qml</file>
         <file>registerPage/MRegisterPage.qml</file>
-        <file>toolsPage/MToolsPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
         <file>settings/MAboutPage.qml</file>
         <file>settings/MAdvancedSettingsPage.qml</file>

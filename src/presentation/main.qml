@@ -10,7 +10,6 @@ import "freeBooksPage"
 import "settings"
 import "statisticsPage"
 import "addOnsPage"
-import "toolsPage"
 import "forgotPasswordPage"
 import "readingPage"
 
@@ -66,7 +65,6 @@ ApplicationWindow
     Component { id: freeBooksPage; MFreeBooksPage {} }
     Component { id: settings; MSettings {} }
     Component { id: addOnsPage; MAddOnsPage {} }
-    Component { id: toolsPage; MToolsPage {} }
     Component { id: statisticsPage; MStatisticsPage {} }
     Component { id: readingPage; MReadingPage {} }
     
