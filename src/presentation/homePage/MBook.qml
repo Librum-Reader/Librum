@@ -64,7 +64,7 @@ Item
         {
             id: lowerRect
             Layout.fillWidth: true
-            Layout.preferredHeight: 82
+            Layout.preferredHeight: 90
             color: Style.colorBackground
             border.width: 1
             border.color: Style.colorLightBorder3
@@ -82,11 +82,11 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
-                    Layout.topMargin: 4
+                    Layout.topMargin: 6
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
-                    font.pixelSize: 14
+                    font.pointSize: 11
                     font.family: Style.defaultFontFamily
                     lineHeight: 0.8
                     wrapMode: TextInput.WordWrap
@@ -96,10 +96,10 @@ Item
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 1
+                    Layout.topMargin: 2
                     text: "Stephen R. Covey"
                     color: Style.colorLightText
-                    font.pointSize: 9
+                    font.pointSize: 10
                     font.family: Style.defaultFontFamily
                 }
                 
@@ -113,9 +113,9 @@ Item
                     {
                         id: percentageBox
                         Layout.preferredWidth: 42
-                        Layout.preferredHeight: 16
-                        Layout.topMargin: 6
-                        color: Style.darkBackground
+                        Layout.preferredHeight: 18
+                        Layout.topMargin: 8
+                        color: Style.colorLightPurple2
                         radius: 2
                         
                         Label
