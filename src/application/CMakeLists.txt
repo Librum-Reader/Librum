@@ -13,18 +13,21 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(application
                 SHARED
-                    include/app_information.hpp
                     test_request.cpp
                     sidebar_state.cpp
+                    key_sequence_recorder.cpp
+                    chapter_tree/chapter_tree_model.cpp
+                    chapter_tree/chapter_tree_node.cpp
+                    include/key_sequence_recorder.hpp
+                    include/chapter_tree_model.hpp
+                    include/chapter_tree_node.hpp
+                    include/app_information.hpp
                     include/sidebar_state.hpp
                     include/test_request.hpp
-                    key_sequence_recorder.cpp
-                    include/key_sequence_recorder.hpp
 )
 
 target_include_directories(application
                 PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}/
                     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_compile_definitions(application

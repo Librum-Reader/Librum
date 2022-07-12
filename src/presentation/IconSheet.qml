@@ -5,6 +5,7 @@ Item
 {
     // Arrows-icons
     property string arrowDownBlack: "/resources/images/arrows/arrow_down_black_icon.svg"
+    property string arrowRightGray: "/resources/images/arrows/arrow_right_gray_icon.svg"
     property string arrowtopBlackRight: "/resources/images/arrows/arrowtop_black_right_icon.svg"
     property string arrowtopGrayRight: "/resources/images/arrows/arrowtop_gray_right_icon.svg"
     property string dropdownBlack: "/resources/images/arrows/dropdown_black_icon.svg"

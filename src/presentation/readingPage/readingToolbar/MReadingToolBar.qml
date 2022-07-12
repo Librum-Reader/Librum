@@ -36,11 +36,6 @@ Pane
     
     Shortcut
     {
-        sequence: "Ctrl+Backspace"
-        onActivated: backButton.buttonTriggeredAction()
-    }
-    Shortcut
-    {
         sequence: "Tab"
         onActivated: chapterButton.buttonTriggeredAction()
     }
