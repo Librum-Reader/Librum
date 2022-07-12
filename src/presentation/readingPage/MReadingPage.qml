@@ -165,7 +165,7 @@ Page
             MChapterSidebar
             {
                 id: chapterSidebar
-                SplitView.preferredWidth: 280
+                SplitView.preferredWidth: 300
                 SplitView.minimumWidth: 140
                 SplitView.maximumWidth: 480
                 visible: false

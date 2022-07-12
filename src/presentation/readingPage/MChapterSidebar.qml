@@ -9,13 +9,13 @@ import Librum.icons
 Item
 {
     id: root
-    implicitWidth: 250
+    implicitWidth: 300
     implicitHeight: 600
     
     Rectangle
     {
         anchors.fill: parent
-        color: Style.colorLightGray2
+        color: "transparent"
         
         
         ColumnLayout
@@ -76,8 +76,8 @@ Item
                 Layout.fillHeight: true
                 Layout.margins: 12
                 Layout.topMargin: 0
-                verticalPadding: 16
-                horizontalPadding: 10
+                verticalPadding: 6
+                horizontalPadding: 4
                 background: Rectangle
                 {
                     radius: 4
@@ -86,66 +86,76 @@ Item
                 }
                 
                 
-                TreeView
+                ScrollView
                 {
-                    id: treeView
                     anchors.fill: parent
                     
-                    model: ChapterTreeModel { id: model  }
-                    delegate: Item
+                    
+                    TreeView
                     {
-                        id: treeDelegate
-                        required property TreeView treeView
-                        required property int row
-                        required property bool isTreeNode
-                        required property bool expanded
-                        required property int hasChildren
-                        required property int depth
-                        readonly property real indent: 20
+                        id: treeView
+                        anchors.fill: parent
+                        boundsMovement: Flickable.StopAtBounds
+                        clip: true
                         
-                        implicitWidth: treeView.width
-                        implicitHeight: label.implicitHeight * 1.3
-                        
-                        
-                        RowLayout
+                        model: ChapterTreeModel { }
+                        delegate: Item
                         {
-                            id: deleagteLayout
-                            anchors.fill: parent
-                            anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
-                            spacing: 8
+                            id: treeDelegate
+                            required property TreeView treeView
+                            required property int row
+                            required property bool isTreeNode
+                            required property bool expanded
+                            required property int hasChildren
+                            required property int depth
+                            
+                            readonly property real indent: 16
+                            
+                            implicitWidth: treeView.width
+                            implicitHeight: label.implicitHeight * 1.3
                             
                             
-                            Image
+                            RowLayout
                             {
-                                id: indicator
-                                visible: treeDelegate.isTreeNode && treeDelegate.hasChildren
-                                source: Icons.arrowRightGray
-                                sourceSize.width: 7
-                                fillMode: Image.PreserveAspectFit
+                                id: deleagteLayout
+                                anchors.fill: parent
+                                anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
+                                spacing: 8
                                 
-                                rotation: treeDelegate.expanded ? 90 : 0
                                 
-                                TapHandler
+                                Item { Layout.fillHeight: true; Layout.preferredWidth: 2 }
+                                
+                                Image
                                 {
-                                    onTapped: treeView.toggleExpanded(row)
+                                    id: indicator
+                                    visible: treeDelegate.isTreeNode && treeDelegate.hasChildren
+                                    source: Icons.arrowRightGray
+                                    sourceSize.width: 7
+                                    fillMode: Image.PreserveAspectFit
+                                    rotation: treeDelegate.expanded ? 90 : 0
+                                    
+                                    TapHandler
+                                    {
+                                        onTapped: treeView.toggleExpanded(row)
+                                    }
+                                    
+                                    
+                                    Behavior on rotation
+                                    {
+                                        NumberAnimation { duration: 150 }
+                                    }
                                 }
                                 
-                                
-                                Behavior on rotation
+                                Label
                                 {
-                                    NumberAnimation { duration: 150 }
+                                    id: label
+                                    Layout.fillWidth: true
+                                    text: model.display
+                                    font.family: Style.defaultFontFamily
+                                    font.pointSize: 10.5
+                                    color: Style.colorBaseText
+                                    elide: Text.ElideRight
                                 }
-                            }
-                            
-                            Label
-                            {
-                                id: label
-                                Layout.fillWidth: true
-                                text: model.display
-                                font.family: Style.defaultFontFamily
-                                font.pointSize: 10.5
-                                color: Style.colorBaseText
-                                elide: Text.ElideRight
                             }
                         }
                     }

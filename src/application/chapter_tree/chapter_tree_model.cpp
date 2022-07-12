@@ -46,6 +46,12 @@ ChapterTreeModel::ChapterTreeModel(QObject* parent)
     m_rootNode->appendChild(firstLevel4);
     
     
+    for(int i = 0; i < 40; ++i)
+    {
+        QString value = "Filler";
+        value.append(QString::number(i));
+        m_rootNode->appendChild(new ChapterTreeNode(value, m_rootNode));
+    }
 }
 
 ChapterTreeModel::~ChapterTreeModel()
