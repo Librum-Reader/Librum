@@ -94,13 +94,15 @@ Item
                     TreeView
                     {
                         id: treeView
-                        property Item selectedItem
+                        property int selectedItemRow
+                        property int selectedItemDepth
                         
                         anchors.fill: parent
                         anchors.rightMargin: 12
                         boundsMovement: Flickable.StopAtBounds
-                        clip: true
                         maximumFlickVelocity: 550
+                        reuseItems: false
+                        clip: true
                         
                         model: ChapterTreeModel { }
                         delegate: Item
@@ -108,6 +110,7 @@ Item
                             id: treeDelegate
                             required property TreeView treeView
                             required property int row
+                            required property int column
                             required property bool isTreeNode
                             required property bool expanded
                             required property int hasChildren
@@ -143,12 +146,6 @@ Item
                                     {
                                         onTapped: treeView.toggleExpanded(row)
                                     }
-                                    
-                                    
-                                    Behavior on rotation
-                                    {
-                                        NumberAnimation { duration: 150 }
-                                    }
                                 }
                                 
                                 Rectangle
@@ -158,8 +155,8 @@ Item
                                     Layout.preferredHeight: 22
                                     
                                     color: treeDelegate.selected ? Style.colorSidebarMark
-                                                             : itemHoverDetector.containsMouse ? Style.colorLightGray 
-                                                                                               : "transparent"
+                                                                 : itemHoverDetector.containsMouse ? Style.colorLightGray 
+                                                                                                   : "transparent"
                                     radius: 2
                                     
                                     
@@ -191,15 +188,24 @@ Item
                                     }
                                 }
                             }
+                        
                             
+                            Component.onCompleted:
+                            {
+                                if(treeDelegate.depth == treeView.selectedItemDepth && treeDelegate.row == treeView.selectedItemRow)
+                                    treeDelegate.selected = true;
+                            }
                             
                             function changeSelectedItem(item)
-                            {
-                                if(treeView.selectedItem != null)
-                                    treeView.selectedItem.selected = false;
+                            {   
+                                let selectedItem = treeView.itemAtCell(treeView.selectedItemDepth, treeView.selectedItemRow);                                    
+                                
+                                if(selectedItem)
+                                    selectedItem.selected = false;
                                 
                                 item.selected = true;
-                                treeView.selectedItem = item;
+                                treeView.selectedItemRow = item.row;
+                                treeView.selectedItemDepth = item.depth;
                             }
                         }
                     }
