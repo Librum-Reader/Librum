@@ -31,7 +31,7 @@ Item
                 Layout.topMargin: 26
                 text: "Contents"
                 font.family: Style.defaultFontFamily
-                font.pointSize: 15
+                font.pointSize: 14
                 font.weight: Font.Medium
                 color: Style.colorBaseText
             }
@@ -94,9 +94,13 @@ Item
                     TreeView
                     {
                         id: treeView
+                        property Item selectedItem
+                        
                         anchors.fill: parent
+                        anchors.rightMargin: 12
                         boundsMovement: Flickable.StopAtBounds
                         clip: true
+                        maximumFlickVelocity: 550
                         
                         model: ChapterTreeModel { }
                         delegate: Item
@@ -110,9 +114,10 @@ Item
                             required property int depth
                             
                             readonly property real indent: 16
+                            property bool selected: false
                             
                             implicitWidth: treeView.width
-                            implicitHeight: label.implicitHeight * 1.3
+                            implicitHeight: labelBox.height
                             
                             
                             RowLayout
@@ -120,7 +125,7 @@ Item
                                 id: deleagteLayout
                                 anchors.fill: parent
                                 anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
-                                spacing: 8
+                                spacing: 4
                                 
                                 
                                 Item { Layout.fillHeight: true; Layout.preferredWidth: 2 }
@@ -146,16 +151,55 @@ Item
                                     }
                                 }
                                 
-                                Label
+                                Rectangle
                                 {
-                                    id: label
+                                    id: labelBox
                                     Layout.fillWidth: true
-                                    text: model.display
-                                    font.family: Style.defaultFontFamily
-                                    font.pointSize: 10.5
-                                    color: Style.colorBaseText
-                                    elide: Text.ElideRight
+                                    Layout.preferredHeight: 22
+                                    
+                                    color: treeDelegate.selected ? Style.colorSidebarMark
+                                                             : itemHoverDetector.containsMouse ? Style.colorLightGray 
+                                                                                               : "transparent"
+                                    radius: 2
+                                    
+                                    
+                                    Label
+                                    {
+                                        id: label
+                                        anchors.fill: parent
+                                        verticalAlignment: Text.AlignVCenter
+                                        horizontalAlignment: Text.AlignLeft
+                                        anchors.leftMargin: 4
+                                        text: model.display
+                                        font.family: Style.defaultFontFamily
+                                        font.pointSize: 10.5
+                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
+                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorBaseText
+                                        elide: Text.ElideRight
+                                    }
+                                    
+                                    MouseArea
+                                    {
+                                        id: itemHoverDetector
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        
+                                        onClicked:
+                                        {
+                                            treeDelegate.changeSelectedItem(treeDelegate);
+                                        }
+                                    }
                                 }
+                            }
+                            
+                            
+                            function changeSelectedItem(item)
+                            {
+                                if(treeView.selectedItem != null)
+                                    treeView.selectedItem.selected = false;
+                                
+                                item.selected = true;
+                                treeView.selectedItem = item;
                             }
                         }
                     }
