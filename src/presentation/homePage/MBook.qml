@@ -112,7 +112,7 @@ Item
                     Rectangle
                     {
                         id: percentageBox
-                        Layout.preferredWidth: 42
+                        Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
                         Layout.topMargin: 8
                         color: Style.colorLightPurple2
@@ -124,18 +124,20 @@ Item
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
                             text: "27%"
-                            font.weight: Font.Bold
+                            font.weight: Font.DemiBold
                             color: Style.colorBaseTitle
                             font.pointSize: 10
                             font.family: Style.defaultFontFamily
                         }
                     }
 
+                    Item { Layout.fillWidth: true }
+                    
                     Image
                     {
                         id: moreIcon
                         Layout.preferredHeight: 20
-                        Layout.leftMargin: 98
+                        Layout.rightMargin: -2
                         source: Icons.dots
                         fillMode: Image.PreserveAspectFit
                         antialiasing: false
