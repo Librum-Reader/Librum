@@ -6,6 +6,9 @@ import Librum.style
 import Librum.icons
 
 
+
+
+
 Page
 {
     id: root
@@ -87,7 +90,8 @@ Page
             topPadding: 60
             leftPadding: layout.insideMargin
             rightPadding: 0
-            verticalPadding: 0
+            bottomPadding: 0
+            clip: true
             background: Rectangle
             {
                 color: Style.colorBackground
@@ -157,10 +161,12 @@ Page
                 {
                     Layout.topMargin: 20
                     Layout.rightMargin: 20
-                    Layout.bottomMargin: 75
+                    Layout.bottomMargin: 32
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                    
+                    Component.onCompleted: contentItem.flickDeceleration = 2200;
                     
                     
                     ListView
@@ -210,9 +216,9 @@ Page
                             propagateComposedEvents: true
                             
                             onWheel: (wheel) =>
-                            {
-                                listView.moveContent( wheel.angleDelta.y > 0)
-                            }
+                                     {
+                                         listView.moveContent( wheel.angleDelta.y > 0)
+                                     }
                         }
                         
                         

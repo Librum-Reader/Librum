@@ -10,23 +10,13 @@ import Librum.Elements
 Item
 {
     id: root
+    height: layout.height
     
     ColumnLayout
     {
         id: layout        
         width: parent.width
         spacing: 0
-        
-        
-        MTitle
-        {
-            id: title
-            Layout.topMargin: 64
-            titleText: "Updates"
-            descriptionText: "Any new update?"
-            titleSize: 25
-            descriptionSize: 13.25
-        }
         
         Pane
         {

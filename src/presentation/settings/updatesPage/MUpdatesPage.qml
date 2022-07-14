@@ -7,23 +7,51 @@ import Librum.icons
 import Librum.Elements
 
 
-Page
+MFlickWrapper
 {
     id: root
-    horizontalPadding: 48
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    contentHeight: page.implicitHeight
     
-    Component { id: updatesAvailable; MUpdatesAvailable {} }
-    Component { id: upToDate; MUpToDate {} }
     
-    Loader
+    Page
     {
-        id: contentLoader
-        anchors.fill: parent
-        sourceComponent: AppInformation.currentVersion === AppInformation.newestVersion ? upToDate : updatesAvailable
+        id: page
+        width: parent.width
+        horizontalPadding: 48
+        bottomPadding: 22
+        background: Rectangle
+        {
+            anchors.fill: parent
+            color: Style.pagesBackground
+        }
+        
+        
+        ColumnLayout
+        {
+            spacing: 0
+            width: parent.width
+            
+            MTitle
+            {
+                id: title
+                Layout.topMargin: 64
+                titleText: "Updates"
+                descriptionText: "Any new update?"
+                titleSize: 25
+                descriptionSize: 13.25
+            }
+            
+            
+            Component { id: updatesAvailable; MUpdatesAvailable {} }
+            Component { id: upToDate; MUpToDate {} }
+            
+            Loader
+            {
+                id: contentLoader
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                sourceComponent: AppInformation.currentVersion === AppInformation.newestVersion ? upToDate : updatesAvailable
+            }
+        }
     }
 }

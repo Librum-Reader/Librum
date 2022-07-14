@@ -9,7 +9,6 @@ import "explorerToolbar"
 Page
 {
     id: root
-    
     background: Rectangle
     {
         anchors.fill: parent

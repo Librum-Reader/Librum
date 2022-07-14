@@ -7,9 +7,11 @@ import Librum.icons
 import Librum.Elements
 
 
+
 Item
 {
-    id: root
+    id: page
+    height: layout.height
     
     ColumnLayout
     {
@@ -17,16 +19,6 @@ Item
         width: parent.width
         spacing: 0
         
-        
-        MTitle
-        {
-            id: title
-            Layout.topMargin: 64
-            titleText: "Updates"
-            descriptionText: "Any new update?"
-            titleSize: 25
-            descriptionSize: 13.25
-        }
         
         Pane
         {

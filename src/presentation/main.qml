@@ -19,7 +19,7 @@ ApplicationWindow
     id: baseRoot
     property alias pageManager: pageManager
     
-    minimumHeight: 600
+    minimumHeight: 200
     minimumWidth: 800
     visible: true
     visibility: Window.Maximized
@@ -40,6 +40,7 @@ ApplicationWindow
             visible: pageManager.pageHasSidebar
         }
         
+        
         StackView
         {
             id: pageManager
@@ -57,6 +58,7 @@ ApplicationWindow
             replaceExit: null
         }
     }
+    
     
     Component { id: loginPage; MLoginPage {} }
     Component { id: forgotPasswordPage; MForgotPasswordPage {} }
