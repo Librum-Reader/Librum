@@ -14,7 +14,7 @@ import "bookOptionsPopup"
 
 Page
 {
-    id: page
+    id: root
     property bool empty : true
     
     horizontalPadding: 64
@@ -82,7 +82,7 @@ Page
         MToolbar
         {
             id: toolbar
-            visible: !page.empty
+            visible: !root.empty
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             z: 2
@@ -93,10 +93,10 @@ Page
             id: bookGridContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.maximumHeight: 695
+            Layout.maximumHeight: 700
             Layout.minimumHeight: 100
             Layout.topMargin: 30
-            visible: !page.empty
+            visible: !root.empty
             padding: 0
             background: Rectangle
             {
@@ -131,7 +131,7 @@ Page
                         (index, mouse) =>
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                            let absoluteMousePosition = mapToItem(page, mouse.x, mouse.y);
+                            let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
                             bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x) + 2;
                             bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y) + 2;
@@ -165,7 +165,7 @@ Page
                     
                     function spaceToRootWidth(xCoord)
                     {
-                        return page.width - (xCoord + implicitWidth);
+                        return root.width - (xCoord + implicitWidth);
                     }
                     
                     
@@ -179,7 +179,7 @@ Page
                     
                     function spaceToRootHeight(yCoord)
                     {
-                        return page.height - (yCoord + implicitHeight);
+                        return root.height - (yCoord + implicitHeight);
                     }
                 }
             }
@@ -188,11 +188,12 @@ Page
         MEmptyScreenContent
         {
             id: emptyScreenContent
-            visible: page.empty
+            visible: root.empty
             Layout.fillWidth: true
+            Layout.fillHeight: true
             Layout.topMargin: 32
             
-            onClicked: page.empty = false
+            onClicked: root.empty = false
         }
         
         Item { Layout.fillHeight: true }
@@ -200,7 +201,7 @@ Page
         MIndexBar
         {
             id: indexBar
-            visible: !page.empty
+            visible: !root.empty
             Layout.fillWidth: true
         }
     }
@@ -209,8 +210,8 @@ Page
     MAcceptDeletionPopup
     {
         id: acceptDeletionPopup
-        x: Math.round(page.width / 2 - implicitWidth / 2 - sidebar.width / 2 - page.horizontalPadding)
-        y: Math.round(page.height / 2 - implicitHeight / 2 - page.topPadding - 50)
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
     }
     
     
@@ -218,8 +219,8 @@ Page
     {
         id: bookDetailsPopup
         
-        x: Math.round(page.width / 2 - implicitWidth / 2 - sidebar.width / 2 - page.horizontalPadding)
-        y: Math.round(page.height / 2 - implicitHeight / 2 - page.topPadding - 30)
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
     
     
@@ -234,7 +235,7 @@ Page
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
         
-        onAccepted: page.empty = false
-        onRejected: page.empty = false
+        onAccepted: root.empty = false
+        onRejected: root.empty = false
     }
 }

@@ -11,9 +11,6 @@ Item
     id: root
     signal clicked
     
-    implicitWidth: 1713
-    implicitHeight: 873
-    
     
     Image
     {
@@ -25,15 +22,14 @@ Item
         ColumnLayout
         {
             id: inEmptyBackgroundLayout
-            width: parent.width
+            anchors.centerIn: parent
             
             Image
             {
                 id: fileSwiftImage
-                Layout.preferredWidth: 250
-                Layout.preferredHeight: 135
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 225
+                Layout.topMargin: -100
+                sourceSize.width: 250
+                sourceSize.height: 135
                 source: Icons.fileSwift
             }
             
@@ -68,10 +64,7 @@ Item
                 imagePath: Icons.plusBlack
                 imageSize: 16
                 
-                onClicked:
-                {
-                    root.clicked();
-                }
+                onClicked: root.clicked();
             }
         }
     }

@@ -20,7 +20,7 @@ ApplicationWindow
     property alias pageManager: pageManager
     
     minimumHeight: 400
-    minimumWidth: 800
+    minimumWidth: 904
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
