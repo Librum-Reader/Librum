@@ -202,6 +202,7 @@ Item
     function close()
     {
         closeAnimation.start();
+        root.forceActiveFocus();
     }
     
     
