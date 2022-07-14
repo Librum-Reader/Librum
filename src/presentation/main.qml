@@ -19,7 +19,7 @@ ApplicationWindow
     id: baseRoot
     property alias pageManager: pageManager
     
-    minimumHeight: 200
+    minimumHeight: 400
     minimumWidth: 800
     visible: true
     visibility: Window.Maximized

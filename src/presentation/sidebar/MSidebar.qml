@@ -30,10 +30,7 @@ Item
     Shortcut
     {
         sequence: "Ctrl+O"
-        onActivated:
-        {
-            SidebarState.currentState === SidebarState.Opened ? root.closeSidebar() : root.openSidebar()
-        }
+        onActivated: SidebarState.currentState === SidebarState.Opened ? root.closeSidebar() : root.openSidebar()
     }
     Shortcut
     {
@@ -78,165 +75,175 @@ Item
             id: animations
         }
         
-        ColumnLayout
+        
+        MFlickWrapper
         {
-            id: mainLayout
-            anchors.fill: parent            
-            spacing: 0
+            anchors.fill: parent
+            contentHeight: mainLayout.implicitHeight
             
-            RowLayout
+            
+            ColumnLayout
             {
-                id: logo
-                Layout.topMargin: 14
-                Layout.leftMargin: 14
-                spacing: 20
+                id: mainLayout
+                width: parent.width
+                height: container.height
+                spacing: 0
                 
-                MLogo
+                RowLayout
                 {
-                    id: logoIcon
-                    Layout.preferredWidth: 44
-                    Layout.preferredHeight: 44
+                    id: logo
+                    Layout.topMargin: 14
+                    Layout.leftMargin: 14
+                    spacing: 20
+                    
+                    MLogo
+                    {
+                        id: logoIcon
+                        Layout.preferredWidth: 44
+                        Layout.preferredHeight: 44
+                    }
+                    
+                    Label
+                    {
+                        id: logoLabel
+                        visible: false
+                        text: "Librum"
+                        font.bold: true
+                        font.family: Style.defaultFontFamily
+                        font.pointSize: 16
+                        color: Style.colorBaseTitle
+                    }
                 }
                 
-                Label
+                Rectangle
                 {
-                    id: logoLabel
-                    visible: false
-                    text: "Librum"
-                    font.bold: true
-                    font.family: Style.defaultFontFamily
-                    font.pointSize: 16
-                    color: Style.colorBaseTitle
+                    id: topSeparator
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 2
+                    Layout.topMargin: 15
+                    color: Style.colorSeparator
+                }
+                
+                MSidebarItem
+                {
+                    id: freeBooksItem
+                    Layout.topMargin: 16
+                    Layout.leftMargin: 10
+                    imageWidth: 31
+                    imageSource: Icons.downloadGray
+                    labelContent: "Free books"
+                    
+                    onClicked: loadPage(freeBooksPage, root.freeBooksItem)
+                }            
+                
+                Rectangle
+                {
+                    id: smallSeperator1
+                    Layout.preferredWidth: parent.width * 0.61
+                    Layout.preferredHeight: 2
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: 16
+                    color: Style.colorSeparator
+                }
+                
+                MSidebarItem
+                {
+                    id: homeItem
+                    Layout.topMargin: 15
+                    Layout.leftMargin: 10
+                    imageWidth: 30
+                    preserveImageFit: false
+                    imageHeight: 28
+                    imageSource: Icons.home
+                    labelContent: "Home"
+                    
+                    onClicked: loadPage(homePage, root.homeItem)
+                }
+                
+                MSidebarItem
+                {
+                    id: statisticsItem
+                    Layout.topMargin: 13
+                    Layout.leftMargin: 10
+                    imageWidth: 28
+                    imageSource: Icons.pieChart
+                    labelContent: "Statistics"
+                    
+                    onClicked: loadPage(statisticsPage, root.statisticsItem)
+                }
+                
+                Rectangle
+                {
+                    id: smallSeperator2
+                    Layout.preferredWidth: parent.width * 0.61
+                    Layout.preferredHeight: 2
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.topMargin: 15
+                    color: Style.colorSeparator
+                }
+                
+                MSidebarItem
+                {
+                    id: addOnButton
+                    Layout.topMargin: 13
+                    Layout.leftMargin: 10
+                    imageWidth: 30
+                    imageSource: Icons.addOns
+                    labelContent: "Add-ons"
+                    
+                    onClicked: loadPage(addOnsPage, root.addOnsItem)
+                }
+                
+                MSidebarItem
+                {
+                    id: settingsItem
+                    Layout.topMargin: 13
+                    Layout.leftMargin: 10
+                    imageWidth: 36
+                    imageSource: Icons.settings
+                    labelContent: "Settings"
+                    
+                    onClicked: loadPage(settings, root.settingsItem)
+                }
+                
+                Item
+                {
+                    Layout.fillHeight: true
+                    Layout.minimumHeight: 30
+                }
+                
+                Rectangle
+                {
+                    id: bottomSeparator
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 2
+                    color: Style.colorSeparator
+                }
+                
+                MProfileBox
+                {
+                    id: profileBox
+                    Layout.alignment: Qt.AlignBottom
+                    Layout.topMargin: 2
+                    
+                    onClicked:
+                    {
+                        if(profilePopup.opened)
+                            profilePopup.close();
+                        else
+                            profilePopup.open();
+                    }
+                }
+                
+                
+                MProfilePopup
+                {
+                    id: profilePopup
+                    x: 12
+                    y: profileBox.y - implicitHeight + 6
                 }
             }
             
-            Rectangle
-            {
-                id: topSeparator
-                Layout.fillWidth: true
-                Layout.preferredHeight: 2
-                Layout.topMargin: 15
-                color: Style.colorSeparator
-            }
-            
-            MSidebarItem
-            {
-                id: freeBooksItem
-                Layout.topMargin: 16
-                Layout.leftMargin: 10
-                imageWidth: 31
-                imageSource: Icons.downloadGray
-                labelContent: "Free books"
-                
-                onClicked: loadPage(freeBooksPage, root.freeBooksItem)
-            }            
-            
-            Rectangle
-            {
-                id: smallSeperator1
-                Layout.preferredWidth: parent.width * 0.61
-                Layout.preferredHeight: 2
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 16
-                color: Style.colorSeparator
-            }
-            
-            MSidebarItem
-            {
-                id: homeItem
-                Layout.topMargin: 15
-                Layout.leftMargin: 10
-                imageWidth: 30
-                preserveImageFit: false
-                imageHeight: 28
-                imageSource: Icons.home
-                labelContent: "Home"
-                
-                onClicked: loadPage(homePage, root.homeItem)
-            }
-            
-            MSidebarItem
-            {
-                id: statisticsItem
-                Layout.topMargin: 13
-                Layout.leftMargin: 10
-                imageWidth: 28
-                imageSource: Icons.pieChart
-                labelContent: "Statistics"
-                
-                onClicked: loadPage(statisticsPage, root.statisticsItem)
-            }
-            
-            Rectangle
-            {
-                id: smallSeperator2
-                Layout.preferredWidth: parent.width * 0.61
-                Layout.preferredHeight: 2
-                Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: 15
-                color: Style.colorSeparator
-            }
-            
-            MSidebarItem
-            {
-                id: addOnButton
-                Layout.topMargin: 13
-                Layout.leftMargin: 10
-                imageWidth: 30
-                imageSource: Icons.addOns
-                labelContent: "Add-ons"
-                
-                onClicked: loadPage(addOnsPage, root.addOnsItem)
-            }
-            
-            MSidebarItem
-            {
-                id: settingsItem
-                Layout.topMargin: 13
-                Layout.leftMargin: 10
-                imageWidth: 36
-                imageSource: Icons.settings
-                labelContent: "Settings"
-                
-                onClicked: loadPage(settings, root.settingsItem)
-            }
-            
-            Item
-            {
-                Layout.fillHeight: true
-                Layout.minimumHeight: 30
-            }
-            
-            Rectangle
-            {
-                id: bottomSeparator
-                Layout.fillWidth: true
-                Layout.preferredHeight: 2
-                color: Style.colorSeparator
-            }
-            
-            MProfileBox
-            {
-                id: profileBox
-                Layout.alignment: Qt.AlignBottom
-                Layout.topMargin: 2
-                
-                onClicked:
-                {
-                    if(profilePopup.opened)
-                        profilePopup.close();
-                    else
-                        profilePopup.open();
-                }
-            }
-            
-            
-            MProfilePopup
-            {
-                id: profilePopup
-                x: 12
-                y: root.height - 54 - implicitHeight
-            }
         }
     }
     
@@ -264,7 +271,7 @@ Item
         closeSidebar();
         changeSelectedItem(root.defaultItem);
     }
-
+    
     function giveFocus()
     {
         root.forceActiveFocus();

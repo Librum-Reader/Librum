@@ -10,18 +10,18 @@ import Librum.globals
 MFlickWrapper
 {
     id: root
+    property alias pageCleanup: pageCleanup
+    property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
+    readonly property bool hasCleanup: true
+    property bool unsavedChanges: false
+    
     contentHeight: page.implicitHeight
     
     
     Page
     {
         id: page
-        property alias pageCleanup: pageCleanup
-        property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
-        readonly property bool hasCleanup: true
-        property bool unsavedChanges: false
-        
-        width: parent.width
+        anchors.fill: parent
         horizontalPadding: 48
         topPadding: 64
         bottomPadding: 22
@@ -35,7 +35,7 @@ MFlickWrapper
         Shortcut
         {
             sequence: StandardKey.Save
-            onActivated: page.saveAccountSettings()
+            onActivated: root.saveAccountSettings()
         }
         
         
@@ -81,10 +81,7 @@ MFlickWrapper
                     imagePath: Icons.checkWhite
                     imageSize: 14
                     
-                    onClicked:
-                    {
-                        page.saveAccountSettings();
-                    }
+                    onClicked: root.saveAccountSettings();
                 }
             }
             
@@ -145,7 +142,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: page.unsavedChanges = true
+                            onEdited: root.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -161,7 +158,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: page.unsavedChanges = true
+                            onEdited: root.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -177,7 +174,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: page.unsavedChanges = true
+                            onEdited: root.unsavedChanges = true
                         }
                     }
                     
@@ -191,7 +188,7 @@ MFlickWrapper
                         Layout.rightMargin: 40
                         Layout.leftMargin: 32
                         
-                        onImageSelectedChanged: page.unsavedChanges = true
+                        onImageSelectedChanged: root.unsavedChanges = true
                     }
                     
                     Item { Layout.fillWidth: true }
@@ -251,7 +248,7 @@ MFlickWrapper
                             imagePath: Icons.eyeOn
                             toggledImagePath: Icons.eyeOff
                             
-                            onEdited: page.unsavedChanges = true
+                            onEdited: root.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -267,7 +264,7 @@ MFlickWrapper
                             imagePath: Icons.eyeOn
                             toggledImagePath: Icons.eyeOff
                             
-                            onEdited: page.unsavedChanges = true
+                            onEdited: root.unsavedChanges = true
                         }
                     }
                 }
@@ -319,7 +316,7 @@ MFlickWrapper
                         spacing: 12
                         checked: true
                         
-                        onClicked: page.unsavedChanges = true
+                        onClicked: root.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -334,7 +331,7 @@ MFlickWrapper
                         spacing: 12
                         checked: true
                         
-                        onClicked: page.unsavedChanges = true
+                        onClicked: root.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -348,7 +345,7 @@ MFlickWrapper
                         fontColor: Style.colorBaseText
                         spacing: 12
                         
-                        onClicked: page.unsavedChanges = true
+                        onClicked: root.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -362,22 +359,22 @@ MFlickWrapper
                         fontColor: Style.colorBaseText
                         spacing: 12
                         
-                        onClicked: page.unsavedChanges = true
+                        onClicked: root.unsavedChanges = true
                     }
                 }
             }
         }
-        
     }
+    
     
     MForgotToSaveChangesPopup
     {
         id: forgotToSaveChangesDialog
-        x: page.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - page.horizontalPadding
+        x: page.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2
         y: page.height / 2 - implicitHeight / 2 - page.topPadding - 50
         
-        saveMethod: saveAccountSettings
-        dontSaveMethod: () => { page.unsavedChanges = false; }
+        saveMethod: root.saveAccountSettings
+        dontSaveMethod: () => { root.unsavedChanges = false; }
         
         onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
     }
@@ -387,7 +384,7 @@ MFlickWrapper
         id: pageCleanup
         action: () =>
                 {
-                    if(page.unsavedChanges)
+                    if(root.unsavedChanges)
                     {
                         forgotToSaveChangesDialog.open();
                         return true;
@@ -404,6 +401,6 @@ MFlickWrapper
         if(profilePictureArea.imagePath !== Globals.profilePicture)
             Globals.profilePicture = profilePictureArea.imagePath;
         
-        page.unsavedChanges = false;
+        root.unsavedChanges = false;
     }
 }

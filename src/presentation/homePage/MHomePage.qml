@@ -11,13 +11,15 @@ import "indexbar"
 import "bookOptionsPopup"
 
 
+
 Page
 {
-    id: root
+    id: page
     property bool empty : true
     
     horizontalPadding: 64
     rightPadding: 70
+    bottomPadding: 15
     background: Rectangle
     {
         anchors.fill: parent
@@ -32,30 +34,11 @@ Page
     }
     
     
-    ListModel
-    {
-        id: model
-        
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-        ListElement { spaceHolder: "" }
-    }
-    
-    
     ColumnLayout
     {
         id: contentLayout
         
-        width: parent.width
+        anchors.fill: parent
         spacing: 0
         
         
@@ -94,13 +77,14 @@ Page
             }
         }
         
+        Item { Layout.fillHeight: true; Layout.maximumHeight: 45; Layout.minimumHeight: 8 }
+        
         MToolbar
         {
             id: toolbar
-            visible: !root.empty
+            visible: !page.empty
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
-            Layout.topMargin: 45
             z: 2
         }
         
@@ -108,9 +92,11 @@ Page
         {
             id: bookGridContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 695
+            Layout.fillHeight: true
+            Layout.maximumHeight: 695
+            Layout.minimumHeight: 100
             Layout.topMargin: 30
-            visible: !root.empty
+            visible: !page.empty
             padding: 0
             background: Rectangle
             {
@@ -136,7 +122,7 @@ Page
                 clip: true
                 
                 
-                model: indexBar.selectedAmountOfBooks
+                model: 12
                 delegate: MBook
                 { 
                     onLeftButtonClicked: loadPage(readingPage);
@@ -145,7 +131,7 @@ Page
                         (index, mouse) =>
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                            let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
+                            let absoluteMousePosition = mapToItem(page, mouse.x, mouse.y);
                             
                             bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x) + 2;
                             bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y) + 2;
@@ -179,7 +165,7 @@ Page
                     
                     function spaceToRootWidth(xCoord)
                     {
-                        return root.width - (xCoord + implicitWidth);
+                        return page.width - (xCoord + implicitWidth);
                     }
                     
                     
@@ -193,7 +179,7 @@ Page
                     
                     function spaceToRootHeight(yCoord)
                     {
-                        return root.height - (yCoord + implicitHeight);
+                        return page.height - (yCoord + implicitHeight);
                     }
                 }
             }
@@ -202,19 +188,20 @@ Page
         MEmptyScreenContent
         {
             id: emptyScreenContent
-            visible: root.empty
+            visible: page.empty
             Layout.fillWidth: true
             Layout.topMargin: 32
             
-            onClicked: root.empty = false
+            onClicked: page.empty = false
         }
+        
+        Item { Layout.fillHeight: true }
         
         MIndexBar
         {
             id: indexBar
-            visible: !root.empty
+            visible: !page.empty
             Layout.fillWidth: true
-            Layout.topMargin: 46
         }
     }
     
@@ -222,8 +209,8 @@ Page
     MAcceptDeletionPopup
     {
         id: acceptDeletionPopup
-        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
-        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        x: Math.round(page.width / 2 - implicitWidth / 2 - sidebar.width / 2 - page.horizontalPadding)
+        y: Math.round(page.height / 2 - implicitHeight / 2 - page.topPadding - 50)
     }
     
     
@@ -231,8 +218,8 @@ Page
     {
         id: bookDetailsPopup
         
-        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
-        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
+        x: Math.round(page.width / 2 - implicitWidth / 2 - sidebar.width / 2 - page.horizontalPadding)
+        y: Math.round(page.height / 2 - implicitHeight / 2 - page.topPadding - 30)
     }
     
     
@@ -246,8 +233,8 @@ Page
             "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
-    
-        onAccepted: root.empty = false
-        onRejected: root.empty = false
+        
+        onAccepted: page.empty = false
+        onRejected: page.empty = false
     }
 }
