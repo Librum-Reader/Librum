@@ -23,7 +23,7 @@ Item
         {
             id: inEmptyBackgroundLayout
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: -100
+            anchors.verticalCenterOffset: -90
             
             Image
             {
