@@ -23,11 +23,11 @@ Item
         {
             id: inEmptyBackgroundLayout
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: -110
             
             Image
             {
                 id: fileSwiftImage
-                Layout.topMargin: -100
                 sourceSize.width: 250
                 sourceSize.height: 135
                 source: Icons.fileSwift
