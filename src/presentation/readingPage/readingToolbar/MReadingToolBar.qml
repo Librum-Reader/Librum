@@ -151,22 +151,18 @@ Pane
         }
         
         
-        Item { Layout.fillWidth: true }
-        
         Label
         {
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
             text: "C-Sharp_In_Depth: A Practical Guide"
             color: Style.colorBaseTitle
-            font
-            {
-                family: Style.defaultFontFamily
-                weight: Font.DemiBold
-                pointSize: 12
-            }
+            font.family: Style.defaultFontFamily
+            font.weight: Font.DemiBold
+            font.pointSize: 12
+            elide: Text.ElideRight
         }
-        
-        Item { Layout.fillWidth: true }
         
         
         MComboBox
