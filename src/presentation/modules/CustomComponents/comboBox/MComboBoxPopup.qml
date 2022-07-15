@@ -25,6 +25,7 @@ Popup
     property int fontWeight: Font.Normal
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
+    signal itemChanged
     
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -59,7 +60,6 @@ Popup
             clip: true
             focus: true
             boundsBehavior: Flickable.StopAtBounds
-            
             ScrollBar.vertical: ScrollBar { }
             
             delegate: MBaseListItem
@@ -96,6 +96,7 @@ Popup
                     Logic.addItemToResult(index);
                 
                 Logic.changeSelectionMarker(index);
+                root.itemChanged();
             }
         }
     }

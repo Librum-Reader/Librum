@@ -170,6 +170,8 @@ Popup
                                     ListElement { text: "Mobi" }
                                     ListElement { text: "Txt" }
                                 }
+                                
+                                onItemChanged: selectionPopup.close()
                             }
                             
                             MLabeledCheckBox

@@ -35,6 +35,7 @@ Item
     property int imageSize: 6
     
     signal clicked
+    signal itemChanged
     
     implicitHeight: 47
     
@@ -154,6 +155,8 @@ Item
             else
                 openAnim.start();
         }
+        
+        onItemChanged: root.itemChanged()
     }
     
     
