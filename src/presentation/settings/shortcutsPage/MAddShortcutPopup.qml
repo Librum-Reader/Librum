@@ -12,7 +12,7 @@ Popup
     signal applied
     
     implicitWidth: 594
-    implicitHeight: mainLayout.implicitHeight
+    implicitHeight: layout.implicitHeight
     focus: true
     closePolicy: Popup.CloseOnPressOutside
     padding: 0
@@ -40,7 +40,7 @@ Popup
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         width: parent.width
         spacing: 0
         

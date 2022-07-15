@@ -16,6 +16,7 @@ Popup
     signal deleteChoosed
     
     implicitWidth: 646
+    implicitHeight: layout.height
     closePolicy: Popup.NoAutoClose
     background: Rectangle
     {
@@ -34,14 +35,13 @@ Popup
     
     MFlickWrapper
     {
-        width: parent.width
-        implicitHeight: mainLayout.height
-        contentHeight: mainLayout.implicitHeight
+        anchors.fill: parent
+        contentHeight: layout.height
         
         
         ColumnLayout
         {
-            id: mainLayout
+            id: layout
             width: parent.width
             spacing: -92
             

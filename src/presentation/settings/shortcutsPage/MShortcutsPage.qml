@@ -237,7 +237,7 @@ Page
     {
         id: addShortcutPopup
         
-        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding
-        y: root.height / 2 - implicitHeight / 2 - root.topPadding - 50
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
     }
 }

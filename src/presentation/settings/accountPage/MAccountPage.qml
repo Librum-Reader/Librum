@@ -370,8 +370,8 @@ MFlickWrapper
     MForgotToSaveChangesPopup
     {
         id: forgotToSaveChangesDialog
-        x: page.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2
-        y: page.height / 2 - implicitHeight / 2 - 100
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
         
         saveMethod: root.saveAccountSettings
         dontSaveMethod: () => { root.unsavedChanges = false; }

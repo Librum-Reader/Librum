@@ -14,6 +14,7 @@ Popup
     signal decisionMade
     
     implicitWidth: 646
+    implicitHeight: layout.height
     closePolicy: Popup.NoAutoClose
     background: Rectangle
     {
@@ -25,155 +26,160 @@ Popup
     {
         color: "#aa32324D"
         opacity: 1
-    }
+    }   
     
-    
-    ColumnLayout
+    MFlickWrapper
     {
-        id: mainLayout
-        width: parent.width
-        spacing: -92
+        anchors.fill: parent
+        contentHeight: layout.height
         
-        
-        Image
+        ColumnLayout
         {
-            id: attentionIllustration
-            z: 2
-            Layout.alignment: Qt.AlignHCenter
-            Layout.rightMargin: 10
-            source: Icons.attention_purple
-            sourceSize.width: 250
-            fillMode: Image.PreserveAspectFit
-        }
-
-        Pane
-        {
-            id: backgroundRect
-            Layout.fillWidth: true
-            topPadding: 86
-            horizontalPadding: 62
-            bottomPadding: 62
-            background: Rectangle
+            id: layout
+            width: parent.width
+            spacing: -92
+            
+            
+            Image
             {
-                color: Style.colorBackground
-                radius: 6
+                id: attentionIllustration
+                z: 2
+                Layout.alignment: Qt.AlignHCenter
+                Layout.rightMargin: 10
+                source: Icons.attention_purple
+                sourceSize.width: 250
+                fillMode: Image.PreserveAspectFit
             }
             
-            
-            ColumnLayout
+            Pane
             {
-                id: inRectLayout
-                width: parent.width
-                spacing: 22
-                
-                
-                Label
+                id: backgroundRect
+                Layout.fillWidth: true
+                topPadding: 86
+                horizontalPadding: 62
+                bottomPadding: 62
+                background: Rectangle
                 {
-                    id: whoops
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.topMargin: 18
-                    text: "Whoops"
-                    color: Style.colorBaseTitle
-                    font.weight: Font.Medium
-                    font.pointSize: 42
-                    font.family: Style.defaultFontFamily
+                    color: Style.colorBackground
+                    radius: 6
                 }
                 
-                Label
-                {
-                    id: explenation
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.fillWidth: true
-                    wrapMode: Text.WordWrap
-                    text: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
-                    horizontalAlignment: Qt.AlignHCenter
-                    color: Style.colorLightText3
-                    font.weight: Font.Medium
-                    font.pointSize: 15
-                    font.family: Style.defaultFontFamily
-                }
                 
-                RowLayout
+                ColumnLayout
                 {
-                    id: buttonRow
-                    Layout.preferredWidth: parent.width
-                    Layout.preferredHeight: acceptButton.height
-                    Layout.topMargin: 24
-                    spacing: 42
+                    id: inRectLayout
+                    width: parent.width
+                    spacing: 22
                     
-                    MButton
+                    
+                    Label
                     {
-                        id: acceptButton
-                        Layout.preferredWidth: 120
-                        Layout.preferredHeight: 40
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignRight
-                        borderWidth: activeFocus ? 0 : 1
-                        borderColor: Style.colorLightBorder2
-                        backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
-                        opacityOnPressed: 0.7
-                        text: "Save"
-                        fontSize: 12.75
-                        fontWeight: Font.Bold
-                        fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
-                        
-                        onClicked: buttonAction()
-                                                
-                        Keys.onPressed:
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                                {
-                                    declineButton.forceActiveFocus();
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    buttonAction();
-                                }
-                            }
-                        
-                        function buttonAction()
-                        {
-                            root.saveMethod();
-                            root.close();
-                            root.decisionMade();
-                        }
+                        id: whoops
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 18
+                        text: "Whoops"
+                        color: Style.colorBaseTitle
+                        font.weight: Font.Medium
+                        font.pointSize: 42
+                        font.family: Style.defaultFontFamily
                     }
                     
-                    MButton
+                    Label
                     {
-                        id: declineButton
-                        Layout.preferredWidth: 120
-                        Layout.preferredHeight: 40
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
-                        borderWidth: focus ? 0 : 1
-                        borderColor: Style.colorLightBorder2
-                        backgroundColor: focus ? Style.colorBasePurple : "transparent"
-                        opacityOnPressed: 0.7
-                        text: "Don't save"
-                        fontSize: 12.75
-                        fontWeight: Font.Bold
-                        fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
+                        id: explenation
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.fillWidth: true
+                        wrapMode: Text.WordWrap
+                        text: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
+                        horizontalAlignment: Qt.AlignHCenter
+                        color: Style.colorLightText3
+                        font.weight: Font.Medium
+                        font.pointSize: 15
+                        font.family: Style.defaultFontFamily
+                    }
+                    
+                    RowLayout
+                    {
+                        id: buttonRow
+                        Layout.preferredWidth: parent.width
+                        Layout.preferredHeight: acceptButton.height
+                        Layout.topMargin: 24
+                        spacing: 42
                         
-                        onClicked: buttonAction()
-                        
-                        Keys.onPressed:
-                            (event) =>
-                            {
-                                if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                                {
-                                    acceptButton.forceActiveFocus();
-                                }
-                                else if(event.key === Qt.Key_Return)
-                                {
-                                    buttonAction();
-                                }
-                            }
-                        
-                        function buttonAction()
+                        MButton
                         {
-                            root.dontSaveMethod();
-                            root.close();
-                            root.decisionMade();
+                            id: acceptButton
+                            Layout.preferredWidth: 120
+                            Layout.preferredHeight: 40
+                            Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                            borderWidth: activeFocus ? 0 : 1
+                            borderColor: Style.colorLightBorder2
+                            backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
+                            opacityOnPressed: 0.7
+                            text: "Save"
+                            fontSize: 12.75
+                            fontWeight: Font.Bold
+                            fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
+                            
+                            onClicked: buttonAction()
+                            
+                            Keys.onPressed:
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
+                                    {
+                                        declineButton.forceActiveFocus();
+                                    }
+                                    else if(event.key === Qt.Key_Return)
+                                    {
+                                        buttonAction();
+                                    }
+                                }
+                            
+                            function buttonAction()
+                            {
+                                root.saveMethod();
+                                root.close();
+                                root.decisionMade();
+                            }
+                        }
+                        
+                        MButton
+                        {
+                            id: declineButton
+                            Layout.preferredWidth: 120
+                            Layout.preferredHeight: 40
+                            Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
+                            borderWidth: focus ? 0 : 1
+                            borderColor: Style.colorLightBorder2
+                            backgroundColor: focus ? Style.colorBasePurple : "transparent"
+                            opacityOnPressed: 0.7
+                            text: "Don't save"
+                            fontSize: 12.75
+                            fontWeight: Font.Bold
+                            fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
+                            
+                            onClicked: buttonAction()
+                            
+                            Keys.onPressed:
+                                (event) =>
+                                {
+                                    if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
+                                    {
+                                        acceptButton.forceActiveFocus();
+                                    }
+                                    else if(event.key === Qt.Key_Return)
+                                    {
+                                        buttonAction();
+                                    }
+                                }
+                            
+                            function buttonAction()
+                            {
+                                root.dontSaveMethod();
+                                root.close();
+                                root.decisionMade();
+                            }
                         }
                     }
                 }
