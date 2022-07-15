@@ -17,7 +17,7 @@ Popup
     
     implicitWidth: 646
     implicitHeight: layout.height
-    closePolicy: Popup.NoAutoClose
+    padding: 0
     background: Rectangle
     {
         color: "transparent"
@@ -35,7 +35,8 @@ Popup
     
     MFlickWrapper
     {
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
         contentHeight: layout.height
         
         

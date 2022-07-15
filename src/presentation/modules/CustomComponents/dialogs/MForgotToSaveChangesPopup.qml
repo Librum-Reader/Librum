@@ -15,6 +15,7 @@ Popup
     
     implicitWidth: 646
     implicitHeight: layout.height
+    padding: 0
     closePolicy: Popup.NoAutoClose
     background: Rectangle
     {
