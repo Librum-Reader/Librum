@@ -371,7 +371,7 @@ MFlickWrapper
     {
         id: forgotToSaveChangesDialog
         x: page.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2
-        y: page.height / 2 - implicitHeight / 2 - page.topPadding - 50
+        y: page.height / 2 - implicitHeight / 2 - 100
         
         saveMethod: root.saveAccountSettings
         dontSaveMethod: () => { root.unsavedChanges = false; }
