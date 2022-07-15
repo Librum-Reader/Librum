@@ -8,7 +8,7 @@ import Librum.icons
 MFlickWrapper
 {
     id: root
-    contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
+    contentHeight: (Window.height < layout.implicitHeight ? layout.implicitHeight + page.bottomPadding : Window.height)
     
     
     Page
