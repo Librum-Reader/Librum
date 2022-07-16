@@ -203,6 +203,8 @@ Page
             id: indexBar
             visible: !root.empty
             Layout.fillWidth: true
+            
+            onSelectedAmountOfBooksChanged: bookGrid.model = selectedAmountOfBooks
         }
     }
     
