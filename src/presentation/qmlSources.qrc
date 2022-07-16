@@ -61,7 +61,6 @@
         <file>registerPage/MRegisterPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
         <file>settings/MAboutPage.qml</file>
-        <file>settings/MAdvancedSettingsPage.qml</file>
         <file>settings/MAppearancePage.qml</file>
         <file>settings/MSettings.qml</file>
         <file>settings/MStoragePage.qml</file>
@@ -84,5 +83,6 @@
         <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
         <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
+        <file>settings/MGeneralSettingsPage.qml</file>
     </qresource>
 </RCC>

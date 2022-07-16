@@ -13,7 +13,7 @@ Item
     property MSettingsSidebarItem appearanceItem: appearanceItem
     property MSettingsSidebarItem shortcutsItem: shortcutsItem
     property MSettingsSidebarItem updatesItem: updatesItem
-    property MSettingsSidebarItem advancedSettingsItem: advancedSettingsItem
+    property MSettingsSidebarItem generalSettingsItem: generalSettingsItem
     property MSettingsSidebarItem accountItem: accountItem
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
@@ -147,7 +147,7 @@ Item
             
             MSettingsSidebarItem
             {
-                id: advancedSettingsItem
+                id: generalSettingsItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: root.width - 2
                 Layout.topMargin: 5
@@ -155,11 +155,11 @@ Item
                 imageLeftMargin: 24
                 imageWidth: 19
                 labelLeftMargin: 8
-                textContent: "Advanced Settings"
+                textContent: "General Settings"
                 defaultIcon: Icons.settingsSettingsGray
                 selectedIcon: Icons.settingsSettingsPurple
                 
-                onClicked: loadSettingsPage(advancedSettingsPage, root.advancedSettingsItem)
+                onClicked: loadSettingsPage(generalSettingsPage, root.generalSettingsItem)
             }
             
             
