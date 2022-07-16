@@ -10,8 +10,6 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "qwindowdefs.h"
-#include "sidebar_state.hpp"
-#include "app_information.hpp"
 
 
 int main(int argc, char *argv[])

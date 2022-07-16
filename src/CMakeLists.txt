@@ -18,7 +18,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets Core5Compat REQUIRED
 
 # Add subdirectories
 add_subdirectory(application/)
-add_subdirectory(model/)
+add_subdirectory(data/)
 
 
 
@@ -35,8 +35,7 @@ target_compile_definitions(appLibrum
 )
 target_include_directories(appLibrum
                 PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}/controller/include
-                    ${CMAKE_CURRENT_SOURCE_DIR}/application/include
+                    ${CMAKE_CURRENT_SOURCE_DIR}/application
 )
 target_link_libraries(appLibrum
                 PRIVATE
