@@ -55,7 +55,7 @@ Item
                     rightPadding: 15
                     selectByMouse: true
                     color: Style.colorBaseText
-                    font.pointSize: 12
+                    font.pointSize: 11
                     font.family: Style.defaultFontFamily
                     font.weight: Font.Normal
                     placeholderText: "Search..."

@@ -161,42 +161,54 @@ Page
             }
             smooth: true
             
-            
-            MChapterSidebar
+            // Need to combine sidebars into one item, else rezising doesnt work properly
+            Item
             {
-                id: chapterSidebar
-                SplitView.preferredWidth: 300
+                SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth 
+                                                                 : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth 
+                                                                                            : 0
                 SplitView.minimumWidth: 140
                 SplitView.maximumWidth: 480
-                visible: false
                 
-                
-                Rectangle
+                MChapterSidebar
                 {
-                    width: 1
-                    height: parent.height
-                    color: Style.colorLightBorder
-                    anchors.right: parent.right
+                    id: chapterSidebar
+                    property int lastWidth: 300
+                    onVisibleChanged: if(!visible) lastWidth = width
+                    
+                    anchors.fill: parent
+                    visible: false
+                    
+                    
+                    Rectangle
+                    {
+                        width: 1
+                        height: parent.height
+                        color: Style.colorLightBorder
+                        anchors.right: parent.right
+                    }
+                }
+                
+                MBookmarksSidebar
+                {
+                    id: bookmarksSidebar
+                    property int lastWidth: 300
+                    onVisibleChanged: if(!visible) lastWidth = width
+                    
+                    anchors.fill: parent
+                    visible: false
+                    
+                    
+                    Rectangle
+                    {
+                        width: 1
+                        height: parent.height
+                        color: Style.colorLightBorder
+                        anchors.right: parent.right
+                    }
                 }
             }
             
-            MBookmarksSidebar
-            {
-                id: bookmarksSidebar
-                SplitView.preferredWidth: 280
-                SplitView.minimumWidth: 140
-                SplitView.maximumWidth: 480
-                visible: false
-                
-                
-                Rectangle
-                {
-                    width: 1
-                    height: parent.height
-                    color: Style.colorLightBorder
-                    anchors.right: parent.right
-                }
-            }
             
             Pane
             {
