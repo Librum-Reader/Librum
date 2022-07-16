@@ -123,6 +123,8 @@ Popup
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText3
                                 imageSize: 9
+                                
+                                onCheckedChanged: if(checked && unreadBox.checked) unreadBox.checked = false
                             }
                             
                             MLabeledCheckBox
@@ -139,6 +141,8 @@ Popup
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText3
                                 imageSize: 9
+                                
+                                onCheckedChanged: if(checked && readBox.checked) readBox.checked = false
                             }
                         }
                         
@@ -188,6 +192,8 @@ Popup
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText3
                                 imageSize: 9
+                            
+                                onCheckedChanged: if(checked && onlyFilesBox.checked) onlyFilesBox.checked = false
                             }
                             
                             MLabeledCheckBox
@@ -204,6 +210,8 @@ Popup
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText3
                                 imageSize: 9
+                                
+                                onCheckedChanged: if(checked && onlyBooksBox.checked) onlyBooksBox.checked = false
                             }
                         }
                     }
