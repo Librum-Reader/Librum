@@ -36,7 +36,7 @@ Pane
     
     Shortcut
     {
-        sequence: "Tab"
+        sequence: Qt.Key_Tab
         onActivated: chapterButton.buttonTriggeredAction()
     }
     Shortcut
@@ -51,7 +51,7 @@ Pane
     }
     Shortcut
     {
-        sequence: "Ctrl+Alt+F"
+        sequences: ["Ctrl+Alt+F"]
         onActivated: fullScreenButton.buttonTriggeredAction()
     }
     Shortcut
@@ -131,11 +131,14 @@ Pane
         MButton
         {
             id: currentPageButton
+            property int currentPage
+            property int maxPages
+            
             Layout.preferredWidth: 105
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            text: "(312 of 1486)"
+            text: "(" + currentPage.toString() + " of " + maxPages.toString() + ")"
             fontColor: active ? Style.colorBasePurple : Style.colorBaseText
             fontWeight: Font.Medium
             fontSize: 10.5

@@ -120,6 +120,7 @@ Item
                             property bool selected: false
                             
                             implicitWidth: treeView.width
+                            width: treeView.width
                             implicitHeight: labelBox.height
                             
                             

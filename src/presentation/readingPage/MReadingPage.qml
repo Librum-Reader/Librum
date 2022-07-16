@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Pdf
 import CustomComponents
 import Librum.style
 import "readingToolbar"
@@ -17,6 +18,24 @@ Page
         anchors.fill: parent
         color: Style.pagesBackground
     }
+    
+    
+    Shortcut
+    {
+        sequence: StandardKey.ZoomIn
+        onActivated: view.renderScale += 0.1
+    }
+    Shortcut
+    {
+        sequence: StandardKey.ZoomOut
+        onActivated: view.renderScale -= 0.1
+    }
+    Shortcut
+    {
+        sequence: "ESC"
+        onActivated: if(root.fullScreen) root.exitFullScreen();
+    }
+    
     
     Item
     {
@@ -225,7 +244,7 @@ Page
                 {
                     id: page
                     height: parent.height
-                    width: 800
+                    width: 1020
                     anchors.centerIn: parent
                     Layout.alignment: Qt.AlignCenter
                     color: Style.colorBackground
@@ -238,6 +257,32 @@ Page
                         height: parent.height
                         color: Style.colorLightBorder
                         anchors.left: parent.left
+                    }
+                    
+                    
+                    PdfDocument
+                    {
+                        id: document
+                        source: "file://home/creapermann/Me/resources/books/code-design/Clean_code.pdf"
+                        
+                        Component.onCompleted:
+                        {
+                            toolbar.currentPageButton.maxPages = pageCount
+                        }
+                    }
+                    
+                    PdfMultiPageView
+                    {
+                        id: view
+                        anchors.fill: parent
+                        anchors.centerIn: parent
+                        anchors.leftMargin: 1
+                        anchors.rightMargin: 1
+                        document: document
+                        clip: true
+                        renderScale: 1
+                        
+                        onCurrentPageChanged: toolbar.currentPageButton.currentPage = view.currentPage
                     }
                     
                     Rectangle

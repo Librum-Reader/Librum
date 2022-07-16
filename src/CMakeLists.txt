@@ -11,8 +11,8 @@ set(QML_IMPORT_TRACE "1")
 
 
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Quick Widgets Core5Compat REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets Core5Compat REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Quick Widgets Core5Compat Pdf REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets Core5Compat Pdf REQUIRED)
 
 
 
@@ -40,6 +40,7 @@ target_include_directories(appLibrum
 target_link_libraries(appLibrum
                 PRIVATE
                     application
+                    Qt6::Pdf
                     Qt6::Quick
                     Qt6::Widgets
                     Qt6::Core5Compat
