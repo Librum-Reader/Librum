@@ -84,6 +84,7 @@ Page
             ColumnLayout
             {
                 width: parent.width
+                spacing: 12
                 
                 MDualToggle
                 {
@@ -91,6 +92,11 @@ Page
                 }
                 
                 MSpinbox
+                {
+                    
+                }
+                
+                MRadioButton
                 {
                     
                 }
