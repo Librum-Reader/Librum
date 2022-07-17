@@ -19,3 +19,4 @@ MFlickWrapper 1.0 MFlickWrapper.qml
 MDualToggle 1.0 MDualToggle.qml
 MSpinbox 1.0 MSpinbox.qml
 MRadioButton 1.0 MRadioButton.qml
+MRadioButtonSelector 1.0 MRadioButtonSelector.qml

@@ -87,5 +87,6 @@
         <file>modules/CustomComponents/MDualToggle.qml</file>
         <file>modules/CustomComponents/MSpinbox.qml</file>
         <file>modules/CustomComponents/MRadioButton.qml</file>
+        <file>modules/CustomComponents/MRadioButtonSelector.qml</file>
     </qresource>
 </RCC>

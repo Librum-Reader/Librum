@@ -100,6 +100,11 @@ Page
                 {
                     
                 }
+                
+                MRadioButtonSelector
+                {
+                    options: ["Some", "Another", "Third"]
+                }
             }
         }
     }

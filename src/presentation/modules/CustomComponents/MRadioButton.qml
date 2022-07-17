@@ -2,13 +2,13 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
-import Librum.icons
 
 
 Item
 {
     id: root
     property bool selected: false
+    signal clicked
     
     implicitWidth: 24
     implicitHeight: 24
@@ -19,6 +19,7 @@ Item
         anchors.fill: parent
         radius: width
         border.color: root.selected ? Style.colorBasePurple: Style.colorLightBorder2
+        antialiasing: true
         
         
         Rectangle
@@ -29,6 +30,7 @@ Item
             anchors.centerIn: parent
             color: Style.colorBasePurple
             radius: width
+            antialiasing: true
         }
     }
     
@@ -36,6 +38,6 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: root.selected = !root.selected;
+        onClicked: root.clicked()
     }
 }
