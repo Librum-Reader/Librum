@@ -18,9 +18,10 @@ ApplicationWindow
 {
     id: baseRoot
     property alias pageManager: pageManager
+    property int defaultMinimumWidth: 904
     
     minimumHeight: 400
-    minimumWidth: 904
+    minimumWidth: defaultMinimumWidth
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
@@ -105,6 +106,8 @@ ApplicationWindow
         
         if(page === readingPage)
             baseRoot.minimumWidth = 550;
+        else
+            baseRoot.minimumWidth = baseRoot.defaultMinimumWidth;
             
     }
     
