@@ -17,7 +17,7 @@ Page
     Label
     {
         anchors.centerIn: parent
-        text: "General Settings"
+        text: "Advanced Settings"
         font.pointSize: 36
         font.family: Style.defaultFontFamily
     }
