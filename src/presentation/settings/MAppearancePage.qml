@@ -68,8 +68,7 @@ Page
         {
             id: details
             Layout.fillWidth: true
-            Layout.topMargin: 6
-            topPadding: 24
+            topPadding: 30
             horizontalPadding: layout.insideMargin
             bottomPadding: 21
             background: Rectangle
@@ -84,26 +83,137 @@ Page
             ColumnLayout
             {
                 width: parent.width
-                spacing: 12
+                spacing: 0
+                
+                
+                Label
+                {
+                    id: displayTitle
+                    Layout.fillWidth: true
+                    text: "Display"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 18
+                    font.weight: Font.Bold
+                    color: Style.colorBaseText
+                }
+                
+                
+                Label
+                {
+                    id: themeTitle
+                    Layout.fillWidth: true
+                    Layout.topMargin: 16
+                    text: "Theme"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 13
+                    font.weight: Font.DemiBold
+                    color: Style.colorBaseText
+                }
                 
                 MDualToggle
                 {
-                    
+                    id: themeSwitch
+                    Layout.topMargin: 6
+                    leftProperty: "Dark"
+                    rightProperty: "Light"
+                    selected: rightProperty
+                }
+                
+                Label
+                {
+                    id: fontFamilyTitle
+                    Layout.fillWidth: true
+                    Layout.topMargin: 14
+                    text: "Font family"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 13
+                    font.weight: Font.DemiBold
+                    color: Style.colorBaseText
+                }
+                
+                MComboBox
+                {
+                    id: fontFamilyComboBox
+                    Layout.topMargin: 6
+                    Layout.preferredHeight: 40
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 380
+                    titleEmptyText: "None"
+                    titleFontSize: 12
+                    titleSpacing: 4
+                    imagePath: Icons.dropdownGray
+                    imageSize: 9
+                    selectionPopup.itemHeight: 36
+                    selectionPopup.fontSize: 12
+                    selectionPopup.checkBoxStyle: false
+                    selectionPopup.maxHeight: 200
+                    selectionPopup.defaultIndex: 0
+                    selectionPopup.model: ListModel
+                    {
+                        ListElement { text: "Arial" }
+                        ListElement { text: "Helvetica" }
+                        ListElement { text: "Baskerville" }
+                        ListElement { text: "Akzidenz Grotesk" }
+                        ListElement { text: "Gotham" }
+                        ListElement { text: "Bodoni" }
+                        ListElement { text: "Didot" }
+                        ListElement { text: "Museo Slab" }
+                    }
+                }
+                
+                Label
+                {
+                    id: fontSizeTitle
+                    Layout.fillWidth: true
+                    Layout.topMargin: 16
+                    text: "Font size"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 13
+                    font.weight: Font.DemiBold
+                    color: Style.colorBaseText
                 }
                 
                 MSpinbox
                 {
-                    
+                    id: fontSizeSpinBox
+                    value: 18
+                    Layout.preferredWidth: 76
+                    Layout.preferredHeight: 34
+                    Layout.topMargin: 6
                 }
                 
-                MRadioButton
+                
+                Label
                 {
-                    
+                    id: pagesTitle
+                    Layout.fillWidth: true
+                    Layout.topMargin: 36
+                    text: "Pages"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 18
+                    font.weight: Font.Bold
+                    color: Style.colorBaseText
                 }
                 
-                MRadioButtonSelector
+                Label
                 {
-                    options: ["Some", "Another", "Third"]
+                    id: pageSpacingTitle
+                    Layout.fillWidth: true
+                    Layout.topMargin: 14
+                    text: "Page spacing"
+                    font.family: Style.defaultFontFamily
+                    font.pointSize: 13
+                    font.weight: Font.DemiBold
+                    color: Style.colorBaseText
+                }
+                
+                MSpinbox
+                {
+                    id: pageSpacingSpingBox
+                    value: 20
+                    Layout.preferredWidth: 76
+                    Layout.preferredHeight: 34
+                    Layout.topMargin: 6
                 }
             }
         }

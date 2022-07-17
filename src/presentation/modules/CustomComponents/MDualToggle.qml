@@ -6,7 +6,9 @@ import Librum.style
 Item
 {
     id: root
-    property string selected: "Light"
+    property string leftProperty: "Left"
+    property string rightProperty: "Right"
+    property string selected: rightProperty
     
     implicitHeight: 40
     implicitWidth: 178
@@ -39,15 +41,15 @@ Item
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: "Dark"
-                color: root.selected == "Dark" ? Style.colorBasePurple : Style.colorLightText3
+                text: leftProperty
+                color: root.selected == leftProperty ? Style.colorBasePurple : Style.colorLightText3
                 font.pointSize: 12
-                font.weight: root.selected == "Dark" ? Font.Bold : Font.DemiBold
+                font.weight: root.selected == leftProperty ? Font.Bold : Font.DemiBold
                 background: Rectangle
                 {
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: root.selected == "Dark" ? Style.colorSidebarMark : "transparent"
+                    color: root.selected == leftProperty ? Style.colorSidebarMark : "transparent"
                     radius: 4
                 }
                 
@@ -59,14 +61,14 @@ Item
                     anchors.topMargin: 1
                     anchors.bottomMargin: 1
                     width: 3
-                    color: root.selected == "Dark" ? Style.colorSidebarMark : "transparent"
+                    color: root.selected == leftProperty ? Style.colorSidebarMark : "transparent"
                 }
                 
                 MouseArea
                 {
                     anchors.fill: parent
                     
-                    onClicked: root.selected = "Dark"
+                    onClicked: root.selected = leftProperty
                 }
             }
             
@@ -85,15 +87,15 @@ Item
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: "Light"
-                color: root.selected == "Light" ? Style.colorBasePurple : Style.colorLightText3
+                text: rightProperty
+                color: root.selected == rightProperty ? Style.colorBasePurple : Style.colorLightText3
                 font.pointSize: 12
-                font.weight: root.selected == "Light" ? Font.Bold : Font.DemiBold
+                font.weight: root.selected == rightProperty ? Font.Bold : Font.DemiBold
                 background: Rectangle
                 {
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: root.selected == "Light" ? Style.colorSidebarMark : "transparent"
+                    color: root.selected == rightProperty ? Style.colorSidebarMark : "transparent"
                     radius: 4
                 }
                 
@@ -105,14 +107,14 @@ Item
                     anchors.topMargin: 1
                     anchors.bottomMargin: 1
                     width: 3
-                    color: root.selected == "Light" ? Style.colorSidebarMark : "transparent"
+                    color: root.selected == rightProperty ? Style.colorSidebarMark : "transparent"
                 }
                 
                 MouseArea
                 {
                     anchors.fill: parent
                     
-                    onClicked: root.selected = "Light"
+                    onClicked: root.selected = rightProperty
                 }
             }
         }
