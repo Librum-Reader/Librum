@@ -59,8 +59,8 @@ Item
                         text: root.options[index]
                         font.family: Style.defaultFontFamily
                         font.pointSize: 12
-                        font.weight: delRoot.selected ? Font.DemiBold : Font.Medium
-                        color: delRoot.selected ? Style.colorBasePurple : Style.colorBaseText
+                        font.weight: delRoot.selected ? Font.Medium : Font.Normal
+                        color: Style.colorBaseText
                     }
                 }
             }
