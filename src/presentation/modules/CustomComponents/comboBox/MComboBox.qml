@@ -132,26 +132,33 @@ Item
     
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         
-        onClicked:
-        {
-            selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
-        }
+        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
     }
     
     MComboBoxPopup
     {
         id: selectionPopup
-        y: mainLayout.y + mainLayout.height + root.popupSpacing
+        property bool fitsToBottom: false
+        
+        y: mainLayout.y + (fitsToBottom ? 
+                               mainLayout.height + root.popupSpacing : - root.popupSpacing - implicitHeight)
         backgroundColor: root.popupBackgroundColor
         width: parent.width
         multiSelect: root.multiSelect
         
         onOpenedChanged:
         {
+            popupFitsToTheBottom();
+            
             if(opened)
+            {
+                fitsToBottom = popupFitsToTheBottom();
                 closeAnim.start();
+            }
             else
                 openAnim.start();
         }
@@ -159,6 +166,13 @@ Item
         onItemChanged: root.itemChanged()
     }
     
+    
+    function popupFitsToTheBottom()
+    {
+        if(mapToGlobal(mouseArea.mouseX, mouseArea.mouseY).y + selectionPopup.height + root.popupSpacing + mouseArea.mouseY >= baseRoot.height)
+            return false;
+        return true;
+    }
     
     function giveFocus()
     {

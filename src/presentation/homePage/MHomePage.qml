@@ -124,7 +124,7 @@ Page
                 
                 model: 12
                 delegate: MBook
-                { 
+                {
                     onLeftButtonClicked: loadPage(readingPage);
                     
                     onRightButtonClicked:

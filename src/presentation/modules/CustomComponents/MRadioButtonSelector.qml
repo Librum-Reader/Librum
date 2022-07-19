@@ -9,7 +9,7 @@ Item
 {
     id: root
     property var options: []
-    property string currentSelected
+    property string currentSelected: options[0]
     
     implicitWidth: 120
     implicitHeight: layout.height
@@ -18,9 +18,8 @@ Item
     ColumnLayout
     {
         id: layout
-        property var selectedItem
-        
         width: parent.width
+        spacing: 10
         
         
         Repeater
@@ -30,7 +29,7 @@ Item
             {
                 id: delRoot
                 required property int index
-                property bool selected: false
+                property bool selected: root.currentSelected === options[index]
                 
                 width: layout.width
                 height: componentLayout.height
@@ -49,31 +48,36 @@ Item
                         id: button
                         selected: delRoot.selected
                         
-                        onClicked: layout.changeSelected(delRoot)
+                        onClicked: layout.changeSelected(index)
                     }
                     
                     Label
                     {
                         Layout.fillWidth: true
+                        Layout.maximumWidth: 200
                         Layout.alignment: Qt.AlignVCenter
                         text: root.options[index]
                         font.family: Style.defaultFontFamily
                         font.pointSize: 12
                         font.weight: delRoot.selected ? Font.Medium : Font.Normal
                         color: Style.colorBaseText
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            
+                            onClicked: layout.changeSelected(index)
+                        }
                     }
+                    
+                    Item { Layout.fillWidth: true }
                 }
             }
         }
         
-        function changeSelected(item)
+        function changeSelected(index)
         {
-            if(layout.selectedItem)
-                layout.selectedItem.selected = false;
-            
-            item.selected = true;
-            layout.selectedItem = item;
-            root.currentSelected = root.options[item.index]
+            root.currentSelected = root.options[index];
         }
     }
 }

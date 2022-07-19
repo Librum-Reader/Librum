@@ -10,7 +10,7 @@ Item
     property string rightProperty: "Right"
     property string selected: rightProperty
     
-    implicitHeight: 40
+    implicitHeight: 38
     implicitWidth: 178
     
     

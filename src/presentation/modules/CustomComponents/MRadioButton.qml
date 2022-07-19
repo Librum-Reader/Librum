@@ -10,8 +10,8 @@ Item
     property bool selected: false
     signal clicked
     
-    implicitWidth: 24
-    implicitHeight: 24
+    implicitWidth: 22
+    implicitHeight: 22
     
     
     Rectangle

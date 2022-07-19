@@ -10,9 +10,11 @@ Item
     id: root
     property bool invalid: false
     property int value: 14
+    property int maxVal: 99
+    property int minVal: 1
     
     implicitWidth: 72
-    implicitHeight: 34
+    implicitHeight: 32
     
     
     Pane
@@ -48,7 +50,7 @@ Item
                 font.pointSize: 12
                 font.weight: Font.Bold
                 font.family: Style.defaultFontFamily
-                validator: IntValidator { bottom: 1; top: 99 }
+                validator: IntValidator { bottom: root.minVal; top: root.maxVal }
                 text: root.value.toString()
                 background: Rectangle   
                 {   
@@ -60,10 +62,8 @@ Item
                 onTextEdited:
                 {
                     
-                    if(text <= 0)
-                    {
+                    if(!mainLayout.isValid())
                         root.invalid = true;
-                    }
                     else
                     {
                         root.value = text;
@@ -93,8 +93,11 @@ Item
                         
                         onClicked:
                         {
-                            if(root.value < 99)
+                            if(root.value < root.maxVal)
                                 root.value += 1;
+                            
+                            if(mainLayout.isValid())
+                                root.invalid = false;
                         }
                     }
                 }
@@ -111,11 +114,23 @@ Item
                         
                         onClicked:
                         {
-                            if(root.value > 1)
+                            if(root.value > root.minVal)
                                 root.value -= 1;
+                            
+                            if(mainLayout.isValid())
+                                root.invalid = false;
                         }
                     }
                 }
+            }
+        
+        
+            function isValid()
+            {
+                if(inputField.text < root.minVal || inputField.text > root.maxVal)
+                    return false;
+                
+                return true;
             }
         }
     }
