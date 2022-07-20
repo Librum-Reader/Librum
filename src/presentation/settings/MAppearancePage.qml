@@ -56,7 +56,7 @@ MFlickWrapper
                 
                 MButton
                 {
-                    id: saveButton
+                    id: resetButton
                     Layout.preferredWidth: 82
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignBottom
