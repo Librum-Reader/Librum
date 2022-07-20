@@ -88,5 +88,9 @@
         <file>modules/CustomComponents/MSpinbox.qml</file>
         <file>modules/CustomComponents/MRadioButton.qml</file>
         <file>modules/CustomComponents/MRadioButtonSelector.qml</file>
+        <file>homePage/tags/MManageTagsPopup.qml</file>
+        <file>homePage/tags/MAddTagBox.qml</file>
+        <file>homePage/tags/MAddTagBoxPopup.qml</file>
+        <file>homePage/tags/MTagItem.qml</file>
     </qresource>
 </RCC>

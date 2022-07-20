@@ -90,5 +90,6 @@
         <file>resources/images/utility/trash_white_icon.svg</file>
         <file>resources/images/illustrations/attention_purple_illustration.svg</file>
         <file>resources/images/arrows/arrow_right_gray_icon.svg</file>
+        <file>resources/images/decision/close_gray_icon.svg</file>
     </qresource>
 </RCC>

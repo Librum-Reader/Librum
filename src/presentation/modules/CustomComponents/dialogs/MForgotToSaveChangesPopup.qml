@@ -27,7 +27,7 @@ Popup
     {
         color: "#aa32324D"
         opacity: 1
-    }   
+    }
     
     MFlickWrapper
     {

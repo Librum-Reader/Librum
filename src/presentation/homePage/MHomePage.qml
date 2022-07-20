@@ -8,6 +8,7 @@ import Librum.style
 import Librum.icons
 import "toolbar"
 import "indexbar"
+import "tags"
 import "bookOptionsPopup"
 
 
@@ -225,6 +226,14 @@ Page
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
     
+    
+    MManageTagsPopup
+    {
+        id: manageTagsPopup
+        
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
+    }
     
     FileDialog
     {

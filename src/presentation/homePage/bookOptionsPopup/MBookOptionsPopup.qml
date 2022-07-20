@@ -84,6 +84,7 @@ Popup
             
             onClicked:
             {
+                manageTagsPopup.open();
                 root.close();
             }
         }
