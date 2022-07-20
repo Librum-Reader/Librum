@@ -259,32 +259,6 @@ Page
                         anchors.left: parent.left
                     }
                     
-                    
-                    PdfDocument
-                    {
-                        id: document
-                        source: "file://home/creapermann/Me/resources/books/code-design/Clean_code.pdf"
-                        
-                        Component.onCompleted:
-                        {
-                            toolbar.currentPageButton.maxPages = pageCount
-                        }
-                    }
-                    
-                    PdfMultiPageView
-                    {
-                        id: view
-                        anchors.fill: parent
-                        anchors.centerIn: parent
-                        anchors.leftMargin: 1
-                        anchors.rightMargin: 1
-                        document: document
-                        clip: true
-                        renderScale: 1
-                        
-                        onCurrentPageChanged: toolbar.currentPageButton.currentPage = view.currentPage
-                    }
-                    
                     Rectangle
                     {
                         width: 1

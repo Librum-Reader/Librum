@@ -80,7 +80,7 @@ Popup
             Layout.topMargin: 4
             imagePath: Icons.tag_gray
             imageSize: 16
-            text: "Add tag"
+            text: "Manage tags"
             
             onClicked:
             {
