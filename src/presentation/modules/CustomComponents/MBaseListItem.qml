@@ -19,6 +19,7 @@ Item
     property int padding : 8
     property bool checkBoxStyle: true
     signal clicked(int index)
+    signal rightClicked(int index)
     signal hovered(int index)
     
     implicitWidth: 137
@@ -34,8 +35,8 @@ Item
         background: Rectangle
         {
             color: root.selected ? Style.colorSidebarMark : 
-                                    mouseArea.containsMouse || containingListview.currentIndex === index
-                                        ? Style.colorLightGray : Style.colorBackground
+                                   mouseArea.containsMouse || containingListview.currentIndex === index
+                                   ? Style.colorLightGray : Style.colorBackground
             radius: 4
             antialiasing: true
         }
@@ -77,6 +78,17 @@ Item
         anchors.fill: parent
         hoverEnabled: true
         
-        onClicked: root.clicked(root.index);
+        onClicked:
+            (mouse) =>
+            {
+                if(mouse.buttons | Qt.LeftButton)
+                {
+                    root.clicked(root.index);
+                }
+                else if(mouse.buttons | Qt.RightButton)
+                {
+                    root.rightClicked(root.index);
+                }
+            }
     }
 }

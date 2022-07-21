@@ -79,7 +79,6 @@
         <file>settings/accountPage/MAccountPage.qml</file>
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
         <file>Globals.qml</file>
-        <file>homePage/bookOptionsPopup/MBookDetailsPopup.qml</file>
         <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
         <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
@@ -92,5 +91,7 @@
         <file>homePage/tags/MAddTagBox.qml</file>
         <file>homePage/tags/MAddTagBoxPopup.qml</file>
         <file>homePage/tags/MTagItem.qml</file>
+        <file>homePage/MBookDetailsPopup.qml</file>
+        <file>modules/CustomComponents/tagOptionsPopup/MTagOptionsPopup.qml</file>
     </qresource>
 </RCC>

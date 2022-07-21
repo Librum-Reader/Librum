@@ -68,7 +68,7 @@ Popup
                 fontColor: Style.colorLightText3
                 checkBoxStyle: false
                 
-                onClicked: (index) => listView.selectItem(index);
+                onClicked: (index) => listView.selectItem(index)
             }
             
             
