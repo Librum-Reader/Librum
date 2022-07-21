@@ -87,7 +87,7 @@ Popup
                         
                         
                         onClicked:
-                            (mouse, index) => listView.selectItem();
+                            (mouse, index) => listView.selectItem(index);
                         
                         onRightClicked:
                             (mouse, index) =>
