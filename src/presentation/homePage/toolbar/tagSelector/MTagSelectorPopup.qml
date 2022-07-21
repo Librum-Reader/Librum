@@ -87,11 +87,7 @@ Popup
                         
                         
                         onClicked:
-                            (mouse, index) =>
-                            {
-                                listView.currentIndex = index;
-                                listView.currentItem.selected = !listView.currentItem.selected;
-                            }
+                            (mouse, index) => listView.selectItem();
                         
                         onRightClicked:
                             (mouse, index) =>
@@ -100,6 +96,8 @@ Popup
                                 
                                 tagOptionsPopup.x = absoluteMousePosition.x + 2;
                                 tagOptionsPopup.y = absoluteMousePosition.y + 6;
+                                
+                                tagOptionsPopup.index = index;
                                 tagOptionsPopup.open();
                             }
                     }
@@ -108,6 +106,13 @@ Popup
                     {
                         if(listView.currentItem != null)
                             listView.currentItem.selected = !listView.currentItem.selected;
+                    }
+                    
+                    
+                    function selectItem(index)
+                    {
+                        listView.currentIndex = index;
+                        listView.currentItem.selected = !listView.currentItem.selected;
                     }
                 }
             }
@@ -118,11 +123,28 @@ Popup
     MRightClickMenu
     {
         id: tagOptionsPopup
+        property int index
+        
         visible: false
         
         
         objectModel: ObjectModel
         {
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.check_circle
+                imageSize: 17
+                text: "Select"
+                
+                onClicked:
+                {
+                    
+                    listView.selectItem(tagOptionsPopup.index);
+                    tagOptionsPopup.close();
+                }
+            }
+            
             MRightClickMenuItem
             {
                 width: tagOptionsPopup.width
