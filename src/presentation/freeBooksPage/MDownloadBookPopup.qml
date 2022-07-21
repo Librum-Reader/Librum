@@ -121,81 +121,151 @@ Popup
                             }
                         }
                         
-                        ColumnLayout
+                        
+                        Flickable
                         {
-                            id: bookDetails
+                            id: contentFlickable
+                            Layout.preferredHeight: 262
                             Layout.fillWidth: true
-                            spacing: 16
+                            Layout.topMargin: -5
+                            contentHeight: bookDetails.height
+                            maximumFlickVelocity: 650
+                            flickDeceleration: 2000
+                            boundsBehavior: Flickable.StopAtBounds
+                            clip: true
+                            
+                            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOn }
                             
                             
-                            MLabeledInputBox
+                            ColumnLayout
                             {
-                                id: titleField
-                                Layout.fillWidth: true
-                                Layout.topMargin: -5
-                                boxHeight: 34
-                                headerText: "Title"
-                                headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
-                                text: "The 7 habits of highly effective people"
-                                headerToBoxSpacing: 3
-                                inputFontSize: 12
-                                inputFontColor: Style.colorLightText3
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
-                                readOnly: true
-                            }
-                            
-                            MLabeledInputBox
-                            {
-                                id: authorField
-                                Layout.fillWidth: true
-                                boxHeight: 34
-                                headerText: "Author"
-                                headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
-                                text: "Stephen R. Covey"
-                                headerToBoxSpacing: 3
-                                inputFontSize: 12
-                                inputFontColor: Style.colorLightText3
-                                borderWidth: 1
-                                borderRadius: 4
-                                readOnly: true
-                            }
-                            
-                            MLabeledInputBox
-                            {
-                                id: publicationField
-                                Layout.fillWidth: true
-                                boxHeight: 34
-                                headerText: "Publication"
-                                headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
-                                text: "United States: Dodd, Mead and Company,1922."
-                                headerToBoxSpacing: 3
-                                inputFontSize: 12
-                                inputFontColor: Style.colorLightText3
-                                borderWidth: 1
-                                borderRadius: 4
-                                readOnly: true
-                            }
-                            
-                            MLabeledInputBox
-                            {
-                                id: languageField
-                                Layout.fillWidth: true
-                                boxHeight: 34
-                                headerText: "Language"
-                                headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
-                                text: "English"
-                                headerToBoxSpacing: 3
-                                inputFontSize: 12
-                                inputFontColor: Style.colorLightText3
-                                borderWidth: 1
-                                borderRadius: 4
-                                readOnly: true
+                                id: bookDetails
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                anchors.rightMargin: 16
+                                spacing: 17
+                                
+                                
+                                MLabeledInputBox
+                                {
+                                    id: titleField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Title"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "The 7 habits of highly effective people"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    textPadding: 12
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: authorField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Author"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "Stephen R. Covey"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: publicationField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Publication"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "United States: Dodd, Mead and Company,1922."
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: languageField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Language"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "English"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: pagesField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Pages"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "411"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: sizeField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Size"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "2.3 MB"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: formatField
+                                    Layout.fillWidth: true
+                                    Layout.bottomMargin: 3
+                                    boxHeight: 34
+                                    headerText: "Format"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: "PDF"
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorLightText3
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
                             }
                         }
                     }
