@@ -132,7 +132,8 @@ Page
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
-                            bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root)
+                            bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
+                            bookOptionsPopup.open();
                         }
                     
                     onMoreOptionClicked:

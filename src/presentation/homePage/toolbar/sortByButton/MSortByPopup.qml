@@ -87,7 +87,7 @@ Popup
                         containingListview: listView
                         
                         onClicked:
-                            (index) =>
+                            (mouse, index) =>
                             {
                                 listView.changeSelected(index);
                             }

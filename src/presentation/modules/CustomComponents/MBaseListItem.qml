@@ -18,8 +18,8 @@ Item
     property int checkBoxImageSize: 9
     property int padding : 8
     property bool checkBoxStyle: true
-    signal clicked(int index)
-    signal rightClicked(int index)
+    signal clicked(var mouse, int index)
+    signal rightClicked(var mouse, int index)
     signal hovered(int index)
     
     implicitWidth: 137
@@ -76,19 +76,16 @@ Item
     {
         id: mouseArea
         anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
         
         onClicked:
             (mouse) =>
             {
-                if(mouse.buttons | Qt.LeftButton)
-                {
-                    root.clicked(root.index);
-                }
-                else if(mouse.buttons | Qt.RightButton)
-                {
-                    root.rightClicked(root.index);
-                }
+                if(mouse.button === Qt.LeftButton)
+                    root.clicked(mouse, root.index);
+                else if(mouse.button === Qt.RightButton)
+                    root.rightClicked(mouse, root.index);
             }
     }
 }

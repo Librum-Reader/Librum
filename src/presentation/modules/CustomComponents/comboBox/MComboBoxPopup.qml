@@ -73,7 +73,7 @@ Popup
                 checkBoxImageSize: root.checkBoxImageSize
                 checkBoxSize: root.checkBoxSize
                 
-                onClicked: (index) => listView.selectItem(index);
+                onClicked: (mouse, index) => listView.selectItem(index);
             }
             
             

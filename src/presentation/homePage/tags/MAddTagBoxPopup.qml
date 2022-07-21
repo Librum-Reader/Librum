@@ -1,8 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
-import Librum.style
 import CustomComponents
+import Librum.style
+import Librum.icons
 
 
 Popup
@@ -68,7 +69,17 @@ Popup
                 fontColor: Style.colorLightText3
                 checkBoxStyle: false
                 
-                onClicked: (index) => listView.selectItem(index)
+                onClicked: (mouse, index) => listView.selectItem(index)
+                
+                onRightClicked:
+                    (mouse, index) =>
+                    {
+                        let absoluteMousePosition = mapToItem(mainLayout, mouse.x, mouse.y);
+                        
+                        tagOptionsPopup.x = absoluteMousePosition.x + 2;
+                        tagOptionsPopup.y = absoluteMousePosition.y + 2;
+                        tagOptionsPopup.open();
+                    }
             }
             
             
@@ -76,6 +87,43 @@ Popup
             {
                 if(listView.currentIndex !== -1)
                     selectItem(listView.currentIndex);
+            }
+            
+            
+            MRightClickMenu
+            {
+                id: tagOptionsPopup
+                visible: false
+                
+                
+                objectModel: ObjectModel
+                {
+                    MRightClickMenuItem
+                    {
+                        width: tagOptionsPopup.width
+                        imagePath: Icons.edit
+                        imageSize: 17
+                        text: "Rename"
+                        
+                        onClicked:
+                        {
+                            tagOptionsPopup.close();
+                        }
+                    }
+                    
+                    MRightClickMenuItem
+                    {
+                        width: tagOptionsPopup.width
+                        imagePath: Icons.trash_gray
+                        imageSize: 16
+                        text: "Delete"
+                        
+                        onClicked:
+                        {
+                            tagOptionsPopup.close();
+                        }
+                    }
+                }
             }
             
             

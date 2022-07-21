@@ -46,9 +46,9 @@ Popup
     
     function setSpawnPosition(currentMousePosition, absoluteMousePosition, rootObject)
     {
-        root.x = root.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x, rootObject) + 2;
-        root.y = root.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y, rootObject) + 2;
-        root.visible = true;
+        let offset = 2;
+        root.x = root.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x, rootObject) + offset;
+        root.y = root.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y, rootObject) + offset;
     }
     
     

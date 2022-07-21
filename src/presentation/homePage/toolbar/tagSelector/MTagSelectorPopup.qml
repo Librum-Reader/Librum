@@ -52,6 +52,7 @@ Popup
             
             ColumnLayout
             {
+                id: itemLayout
                 width: parent.width
                 
                 ListView
@@ -86,10 +87,20 @@ Popup
                         
                         
                         onClicked:
-                            (index) =>
+                            (mouse, index) =>
                             {
                                 listView.currentIndex = index;
                                 listView.currentItem.selected = !listView.currentItem.selected;
+                            }
+                        
+                        onRightClicked:
+                            (mouse, index) =>
+                            {
+                                let absoluteMousePosition = mapToItem(container, mouse.x, mouse.y);
+                                
+                                tagOptionsPopup.x = absoluteMousePosition.x + 2;
+                                tagOptionsPopup.y = absoluteMousePosition.y + 6;
+                                tagOptionsPopup.open();
                             }
                     }
                     
@@ -102,6 +113,44 @@ Popup
             }
         }
     }
+    
+    
+    MRightClickMenu
+    {
+        id: tagOptionsPopup
+        visible: false
+        
+        
+        objectModel: ObjectModel
+        {
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.edit
+                imageSize: 17
+                text: "Rename"
+                
+                onClicked:
+                {
+                    tagOptionsPopup.close();
+                }
+            }
+            
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.trash_gray
+                imageSize: 16
+                text: "Delete"
+                
+                onClicked:
+                {
+                    tagOptionsPopup.close();
+                }
+            }
+        }
+    }
+    
     
     function hasAtLeastOneTagSelected()
     {
