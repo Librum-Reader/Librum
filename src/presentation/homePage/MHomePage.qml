@@ -132,9 +132,7 @@ Page
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
-                            bookOptionsPopup.x = bookOptionsPopup.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x) + 2;
-                            bookOptionsPopup.y = bookOptionsPopup.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y) + 2;
-                            bookOptionsPopup.visible = !bookOptionsPopup.visible;
+                            bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root)
                         }
                     
                     onMoreOptionClicked:
@@ -247,34 +245,6 @@ Page
                                 bookOptionsPopup.close();
                             }
                         }
-                    }
-                    
-                    
-                    function getBookOptionsPopupXCoord(currentXPosition, absoluteXPosition)
-                    {
-                        if(spaceToRootWidth(absoluteXPosition) <= 0)
-                            return currentXPosition + spaceToRootWidth(absoluteXPosition);
-                        
-                        return currentXPosition;
-                    }
-                    
-                    function spaceToRootWidth(xCoord)
-                    {
-                        return root.width - (xCoord + implicitWidth);
-                    }
-                    
-                    
-                    function getBookOptionsPopupYCoord(currentYPosition, absoluteYPosition)
-                    {
-                        if(spaceToRootHeight(absoluteYPosition) <= 0)
-                            return currentYPosition + spaceToRootHeight(absoluteYPosition);
-                        
-                        return currentYPosition;
-                    }
-                    
-                    function spaceToRootHeight(yCoord)
-                    {
-                        return root.height - (yCoord + implicitHeight);
                     }
                 }
             }

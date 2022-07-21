@@ -113,14 +113,14 @@ Popup
                 
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
-                Layout.maximumHeight: 152
+                Layout.maximumHeight: 228
                 Layout.minimumHeight: 76
                 Layout.topMargin: 8
                 maximumFlickVelocity: 550
                 currentIndex: -1
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
-                ScrollBar.vertical: ScrollBar { }
+                ScrollBar.vertical: ScrollBar {}
                 
                 model: ListModel
                 {

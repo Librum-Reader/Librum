@@ -11,6 +11,7 @@ Popup
 {
     id: root
     property ObjectModel objectModel
+    property var mouseArea
     
     implicitWidth: 170
     focus: true
@@ -36,8 +37,45 @@ Popup
             id: listView
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
+            interactive: false
             
             model: root.objectModel
         }
+    }
+    
+    
+    function setSpawnPosition(currentMousePosition, absoluteMousePosition, rootObject)
+    {
+        root.x = root.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x, rootObject) + 2;
+        root.y = root.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y, rootObject) + 2;
+        root.visible = true;
+    }
+    
+    
+    function getBookOptionsPopupXCoord(currentXPosition, absoluteXPosition, rootObject)
+    {
+        if(spaceToRootWidth(absoluteXPosition, rootObject) <= 0)
+            return currentXPosition + spaceToRootWidth(absoluteXPosition, rootObject);
+        
+        return currentXPosition;
+    }
+    
+    function spaceToRootWidth(xCoord, rootObject)
+    {
+        return rootObject.width - (xCoord + implicitWidth);
+    }
+    
+    
+    function getBookOptionsPopupYCoord(currentYPosition, absoluteYPosition, rootObject)
+    {
+        if(spaceToRootHeight(absoluteYPosition, rootObject) <= 0)
+            return currentYPosition + spaceToRootHeight(absoluteYPosition, rootObject);
+        
+        return currentYPosition;
+    }
+    
+    function spaceToRootHeight(yCoord, rootObject)
+    {
+        return rootObject.height - (yCoord + implicitHeight);
     }
 }
