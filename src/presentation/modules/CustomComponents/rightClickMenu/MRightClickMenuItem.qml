@@ -79,7 +79,6 @@ Item
     MouseArea
     {
         anchors.fill: parent
-        
         hoverEnabled: true
         onEntered: root.selected = true;
         onExited: root.selected = false;

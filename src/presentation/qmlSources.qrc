@@ -74,8 +74,6 @@
         <file>settings/updatesPage/MUpToDate.qml</file>
         <file>settings/shortcutsPage/MAddShortcutPopup.qml</file>
         <file>settings/shortcutsPage/MRecordKeyBox.qml</file>
-        <file>homePage/bookOptionsPopup/MBookOptionsItem.qml</file>
-        <file>homePage/bookOptionsPopup/MBookOptionsPopup.qml</file>
         <file>settings/accountPage/MAccountPage.qml</file>
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
         <file>Globals.qml</file>
@@ -93,5 +91,7 @@
         <file>homePage/tags/MTagItem.qml</file>
         <file>homePage/MBookDetailsPopup.qml</file>
         <file>modules/CustomComponents/tagOptionsPopup/MTagOptionsPopup.qml</file>
+        <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
+        <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
     </qresource>
 </RCC>

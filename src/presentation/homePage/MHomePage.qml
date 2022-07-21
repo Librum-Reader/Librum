@@ -9,8 +9,6 @@ import Librum.icons
 import "toolbar"
 import "indexbar"
 import "tags"
-import "bookOptionsPopup"
-
 
 
 Page
@@ -151,10 +149,106 @@ Page
                 }
                 
                 
-                MBookOptionsPopup
+                MRightClickMenu
                 {
                     id: bookOptionsPopup
                     visible: false
+                    
+                    
+                    objectModel: ObjectModel
+                    {
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            imagePath: Icons.book_open
+                            imageSize: 17
+                            text: "Read book"
+                            
+                            onClicked:
+                            {
+                                bookOptionsPopup.close();
+                                loadPage(readingPage);
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            imagePath: Icons.book
+                            imageSize: 14
+                            text: "Book details"
+                            
+                            onClicked:
+                            {
+                                bookDetailsPopup.open();
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            Layout.bottomMargin: 4
+                            imagePath: Icons.add_file
+                            imageSize: 14
+                            text: "Save to files"
+                            
+                            onClicked:
+                            {
+                                downloadFileDialog.open();
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        Item { id: rectMargin1; height: 4; width: bookOptionsPopup.width }
+                        
+                        Rectangle { width: bookOptionsPopup.width; height: 1; color: Style.colorLightBorder }
+                        
+                        Item { id: rectMargin2; height: 4; width: bookOptionsPopup.width }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            Layout.topMargin: 4
+                            imagePath: Icons.tag_gray
+                            imageSize: 16
+                            text: "Manage tags"
+                            
+                            onClicked:
+                            {
+                                manageTagsPopup.open();
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            imagePath: Icons.check_circle
+                            imageSize: 17
+                            text: "Mark as read"
+                            
+                            onClicked:
+                            {
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            imagePath: Icons.trash_gray
+                            imageSize: 16
+                            text: "Delete book"
+                            
+                            onClicked:
+                            {
+                                acceptDeletionPopup.open();
+                                bookOptionsPopup.close();
+                            }
+                        }
+                    }
+                    
                     
                     function getBookOptionsPopupXCoord(currentXPosition, absoluteXPosition)
                     {
@@ -233,6 +327,14 @@ Page
         
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
+    }
+    
+    FileDialog
+    {
+        id: downloadFileDialog
+        acceptLabel: "Save"
+        fileMode: FileDialog.SaveFile
+        folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }
     
     FileDialog
