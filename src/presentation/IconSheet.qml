@@ -23,6 +23,7 @@ Item
     property string plusBlack: "/resources/images/decision/plus_black_icon.svg"
     property string plusPurple: "/resources/images/decision/plus_purple_icon.svg"
     property string plusWhite: "/resources/images/decision/plus_white_icon.svg"
+    property string plusSquare: "/resources/images/decision/plus_square_icon.svg"
     property string check_circle: "/resources/images/decision/check_circle_icon.svg"
     
     // Decoration-icons

@@ -78,6 +78,7 @@ Popup
                         
                         tagOptionsPopup.x = absoluteMousePosition.x + 2;
                         tagOptionsPopup.y = absoluteMousePosition.y + 2;
+                        tagOptionsPopup.index = index;
                         tagOptionsPopup.open();
                     }
             }
@@ -90,43 +91,6 @@ Popup
             }
             
             
-            MRightClickMenu
-            {
-                id: tagOptionsPopup
-                visible: false
-                
-                
-                objectModel: ObjectModel
-                {
-                    MRightClickMenuItem
-                    {
-                        width: tagOptionsPopup.width
-                        imagePath: Icons.edit
-                        imageSize: 17
-                        text: "Rename"
-                        
-                        onClicked:
-                        {
-                            tagOptionsPopup.close();
-                        }
-                    }
-                    
-                    MRightClickMenuItem
-                    {
-                        width: tagOptionsPopup.width
-                        imagePath: Icons.trash_gray
-                        imageSize: 16
-                        text: "Delete"
-                        
-                        onClicked:
-                        {
-                            tagOptionsPopup.close();
-                        }
-                    }
-                }
-            }
-            
-            
             function selectItem(index)
             {
                 let newSelected = listView.itemAtIndex(index);
@@ -134,6 +98,59 @@ Popup
                 root.currentlySelectedData = newSelected.text;
                 root.itemSelected();
                 root.close();
+            }
+        }
+    }
+    
+    
+    MRightClickMenu
+    {
+        id: tagOptionsPopup
+        property int index
+        
+        visible: false
+        
+        
+        objectModel: ObjectModel
+        {
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.plusSquare
+                imageSize: 17
+                text: "Add"
+                
+                onClicked:
+                {
+                    listView.selectItem(tagOptionsPopup.index);
+                    tagOptionsPopup.close();
+                }
+            }
+            
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.edit
+                imageSize: 17
+                text: "Rename"
+                
+                onClicked:
+                {
+                    tagOptionsPopup.close();
+                }
+            }
+            
+            MRightClickMenuItem
+            {
+                width: tagOptionsPopup.width
+                imagePath: Icons.trash_gray
+                imageSize: 16
+                text: "Delete"
+                
+                onClicked:
+                {
+                    tagOptionsPopup.close();
+                }
             }
         }
     }
