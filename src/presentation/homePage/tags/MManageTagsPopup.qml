@@ -93,6 +93,7 @@ Popup
                 font.pointSize: 9.5
                 font.weight: Font.Medium
                 font.family: Style.defaultFontFamily
+                elide: Text.ElideRight
             }
             
             Rectangle
