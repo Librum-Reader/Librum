@@ -98,7 +98,7 @@ Item
                     id: microphoneIcon
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 12
-                    source: root.recording ? Icons.active_microphone : Icons.microphone
+                    source: root.recording ? Icons.activeMicrophone : Icons.microphone
                     sourceSize.width: 18
                     fillMode: Image.PreserveAspectFit
                 }

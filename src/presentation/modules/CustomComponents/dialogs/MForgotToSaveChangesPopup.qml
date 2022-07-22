@@ -47,7 +47,7 @@ Popup
                 z: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.rightMargin: 10
-                source: Icons.attention_purple
+                source: Icons.attentionPurple
                 sourceSize.width: 250
                 fillMode: Image.PreserveAspectFit
             }

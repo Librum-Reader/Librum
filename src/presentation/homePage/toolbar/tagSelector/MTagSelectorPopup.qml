@@ -133,7 +133,7 @@ Popup
             MRightClickMenuItem
             {
                 width: tagOptionsPopup.width
-                imagePath: Icons.check_circle
+                imagePath: Icons.checkCircle
                 imageSize: 17
                 text: "Select"
                 
@@ -161,7 +161,7 @@ Popup
             MRightClickMenuItem
             {
                 width: tagOptionsPopup.width
-                imagePath: Icons.trash_gray
+                imagePath: Icons.trashGray
                 imageSize: 16
                 text: "Delete"
                 

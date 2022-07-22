@@ -548,7 +548,7 @@ Popup
                     fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText
                     fontWeight: Font.Bold
                     fontSize: 12
-                    imagePath: activeFocus || currentlyHovered ? Icons.trash_white : Icons.trash_gray
+                    imagePath: activeFocus || currentlyHovered ? Icons.trashWhite : Icons.trashGray
                     imageSize: 17
                     imageSpacing: 10
                     

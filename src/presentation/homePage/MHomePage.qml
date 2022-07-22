@@ -159,7 +159,7 @@ Page
                         MRightClickMenuItem
                         {
                             width: bookOptionsPopup.width
-                            imagePath: Icons.book_open
+                            imagePath: Icons.bookOpen
                             imageSize: 17
                             text: "Read book"
                             
@@ -188,7 +188,7 @@ Page
                         {
                             width: bookOptionsPopup.width
                             Layout.bottomMargin: 4
-                            imagePath: Icons.add_file
+                            imagePath: Icons.addFile
                             imageSize: 14
                             text: "Save to files"
                             
@@ -209,7 +209,7 @@ Page
                         {
                             width: bookOptionsPopup.width
                             Layout.topMargin: 4
-                            imagePath: Icons.tag_gray
+                            imagePath: Icons.tagGray
                             imageSize: 16
                             text: "Manage tags"
                             
@@ -223,7 +223,7 @@ Page
                         MRightClickMenuItem
                         {
                             width: bookOptionsPopup.width
-                            imagePath: Icons.check_circle
+                            imagePath: Icons.checkCircle
                             imageSize: 17
                             text: "Mark as read"
                             
@@ -236,7 +236,7 @@ Page
                         MRightClickMenuItem
                         {
                             width: bookOptionsPopup.width
-                            imagePath: Icons.trash_gray
+                            imagePath: Icons.trashGray
                             imageSize: 16
                             text: "Delete book"
                             

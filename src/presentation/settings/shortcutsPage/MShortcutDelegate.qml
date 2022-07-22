@@ -99,7 +99,7 @@ Item
                 Layout.rightMargin: 6
                 Layout.alignment: Qt.AlignVCenter
                 sourceSize.width: 21
-                source: Icons.trash_gray
+                source: Icons.trashGray
                 fillMode: Image.PreserveAspectFit
                 
                 MouseArea
