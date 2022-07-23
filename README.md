@@ -4,7 +4,6 @@ Librum is a modern and simple to use book reader which is available on all major
 - High appearance customization
 - A free in app book store
 - Book state syncing across devices
-- In-app file manipulation
 - Bookmarks / Highlighting
 - Note-taking functionality
 
