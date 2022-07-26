@@ -9,8 +9,14 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
+#include "qqmlintegration.h"
 #include "qwindowdefs.h"
 #include "authentication_controller.hpp"
+
+
+void registerTypes();
+void loadFonts();
+void addTranslations();
 
 
 int main(int argc, char *argv[])
@@ -23,47 +29,9 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     
-
-    // Translations
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages)
-    {
-        const QString baseName = "Librum_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName))
-        {
-            QGuiApplication::installTranslator(&translator);
-            break;
-        }
-    }
-
-
-
-    // Loading fonts
-    const QString fontsPath = QGuiApplication::instance()->applicationDirPath() + "/resources/fonts/";
-    const QDir fontsDir(fontsPath);
-    if(!fontsDir.isEmpty() && fontsDir.exists())
-    {
-        QDirIterator it(fontsPath);
-        while(it.hasNext())
-        {
-            QFontDatabase::addApplicationFont(it.next());
-        }
-    }
-    else
-    {
-        qWarning() << "Unable to load application fonts from " + fontsPath;
-    }
-
-
-
-    // Type registration
-    qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
-    qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
-    qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
-    
-    AuthenticationController authenticationController;
-    qmlRegisterSingletonInstance("Librum.logic.controllers", 1, 0, "AuthController", &authenticationController);
+    addTranslations();
+    loadFonts();
+    registerTypes();
     
     
     // Startup
@@ -79,4 +47,48 @@ int main(int argc, char *argv[])
     engine.load(url);
 
     return QGuiApplication::exec();
+}
+
+
+void addTranslations()
+{
+    QTranslator translator;
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for (const QString &locale : uiLanguages)
+    {
+        const QString baseName = "Librum_" + QLocale(locale).name();
+        if (translator.load(":/i18n/" + baseName))
+        {
+            QGuiApplication::installTranslator(&translator);
+            break;
+        }
+    }
+}
+
+void loadFonts()
+{
+    const QString fontsPath = QGuiApplication::instance()->applicationDirPath() + "/resources/fonts/";
+    const QDir fontsDir(fontsPath);
+    if(!fontsDir.isEmpty() && fontsDir.exists())
+    {
+        QDirIterator it(fontsPath);
+        while(it.hasNext())
+        {
+            QFontDatabase::addApplicationFont(it.next());
+        }
+    }
+    else
+    {
+        qWarning() << "Unable to load application fonts from " + fontsPath;
+    }
+}
+
+void registerTypes()
+{
+    qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
+    qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
+    qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
+    
+    AuthenticationController authenticationController;
+    qmlRegisterSingletonInstance("Librum.logic.controllers", 1, 0, "AuthController", &authenticationController);
 }
