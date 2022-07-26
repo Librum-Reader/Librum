@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Quick Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 
 # Qt
@@ -26,7 +26,6 @@ target_link_libraries(presentation
                 PRIVATE
                     application
                     Qt6::Core
-                    Qt6::Network
                     Qt6::Quick
 )
 
