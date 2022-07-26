@@ -10,6 +10,7 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "qwindowdefs.h"
+#include "authentication_controller.hpp"
 
 
 int main(int argc, char *argv[])
@@ -61,6 +62,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
     
+    AuthenticationController authenticationController;
+    qmlRegisterSingletonInstance("Librum.logic.controllers", 1, 0, "AuthController", &authenticationController);
     
     
     // Startup

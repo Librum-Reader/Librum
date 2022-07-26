@@ -45,9 +45,14 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                 PRIVATE
                     presentation
-                    application
+                    adapters
                     Qt6::Quick
                     Qt6::Widgets
+)
+
+target_include_directories(appLibrum
+                PRIVATE
+                    ${CMAKE_CURRENT_SOURCE_DIR}/adapters/controllers
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

@@ -1,8 +1,12 @@
+#include <QObject>
+
 #pragma once
 
 
-class AuthenticationController
+class AuthenticationController : public QObject
 {
+    Q_OBJECT
+    
 public:
     AuthenticationController();
 };

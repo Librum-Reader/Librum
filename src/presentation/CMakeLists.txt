@@ -17,6 +17,8 @@ add_library(presentation
                     qmlSources.qrc
                     modules/CppElements/key_sequence_recorder.cpp
                     modules/CppElements/key_sequence_recorder.hpp
+                    modules/CppElements/sidebar_state.cpp
+                    modules/CppElements/sidebar_state.hpp
 )
 
 target_compile_definitions(presentation
@@ -26,7 +28,7 @@ target_compile_definitions(presentation
 
 target_link_libraries(presentation
                 PRIVATE
-                    application
+                    adapters
                     Qt6::Core
                     Qt6::Quick
 )
@@ -42,7 +44,7 @@ target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 
 # Qml-Module
-qt6_add_qml_module(presentation
+qt_add_qml_module(presentation
   URI "Librum.Elements"
   VERSION 1.0
 )
