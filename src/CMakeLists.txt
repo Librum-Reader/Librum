@@ -9,16 +9,26 @@ set(CMAKE_AUTORCC ON)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
 
 
+
 # Dependencies
 find_package(QT NAMES Qt6 COMPONENTS Quick Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets REQUIRED)
 
 
 
+# Language
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+
+
 # Add subdirectories
 add_subdirectory(presentation/)
+add_subdirectory(infrastructure/)
+add_subdirectory(adapters/)
 add_subdirectory(application/)
-add_subdirectory(data/)
+add_subdirectory(domain/)
 
 
 
