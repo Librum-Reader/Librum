@@ -13,7 +13,6 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(infrastructure
                 SHARED
-                    
 )
 
 target_include_directories(infrastructure

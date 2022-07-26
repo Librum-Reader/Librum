@@ -15,6 +15,8 @@ add_library(presentation
                 SHARED
                     ${PROJECT_SOURCE_DIR}/resources.qrc
                     qmlSources.qrc
+                    modules/CppElements/key_sequence_recorder.cpp
+                    modules/CppElements/key_sequence_recorder.hpp
 )
 
 target_compile_definitions(presentation
@@ -29,5 +31,18 @@ target_link_libraries(presentation
                     Qt6::Quick
 )
 
+target_include_directories(presentation
+                PRIVATE
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
+)
+
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+# Qml-Module
+qt6_add_qml_module(presentation
+  URI "Librum.Elements"
+  VERSION 1.0
+)

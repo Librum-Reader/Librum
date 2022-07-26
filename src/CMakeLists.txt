@@ -45,6 +45,7 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                 PRIVATE
                     presentation
+                    application
                     Qt6::Quick
                     Qt6::Widgets
 )

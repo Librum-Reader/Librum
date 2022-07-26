@@ -13,13 +13,11 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(application
                 SHARED
-                    chapter_tree/chapter_tree_model.cpp
-                    chapter_tree/chapter_tree_node.cpp
-                    chapter_tree/chapter_tree_model.hpp
-                    chapter_tree/chapter_tree_node.hpp
                     app_information.hpp
-                    key_sequence_recorder.cpp
-                    key_sequence_recorder.hpp
+                    models/chapter_tree/chapter_tree_model.cpp
+                    models/chapter_tree/chapter_tree_node.cpp
+                    models/chapter_tree/chapter_tree_model.hpp
+                    models/chapter_tree/chapter_tree_node.hpp
                     sidebar_state.hpp
                     test_request.hpp
                     test_request.cpp
@@ -29,7 +27,7 @@ add_library(application
 target_include_directories(application
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/chapter_tree                    
+                    ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
 )
 target_compile_definitions(application
                 PRIVATE
@@ -48,6 +46,6 @@ target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 # Qml-Module
 qt6_add_qml_module(application
-  URI "Librum.Elements"
+  URI "Librum.Models"
   VERSION 1.0
 )
