@@ -13,8 +13,11 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(adapters
                 SHARED
+                    interfaces/controllers/i_authentication_controller.hpp
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    gateways/user_gateway.cpp
+                    gateways/user_gateway.hpp
                     models/app_information.hpp
                     models/chapter_tree/chapter_tree_model.cpp
                     models/chapter_tree/chapter_tree_node.cpp
@@ -27,6 +30,7 @@ target_include_directories(adapters
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                 PRIVATE
                     ${APPLICATION_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}

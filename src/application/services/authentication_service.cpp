@@ -5,7 +5,8 @@
 namespace application::services
 {
 
-AuthenticationService::AuthenticationService()
+AuthenticationService::AuthenticationService(IUserGateway* userGateway)
+    : m_userGateway(userGateway)
 {
     
 }

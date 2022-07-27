@@ -2,7 +2,7 @@
 #include <QObject>
 
 
-namespace adapters::controllers
+namespace adapters
 {
 
 class IAuthenticationController : public QObject
@@ -14,4 +14,4 @@ public:
     Q_INVOKABLE virtual void authenticateUser() = 0;
 };
 
-} // namespace adapters::controllers
+} // namespace adapters

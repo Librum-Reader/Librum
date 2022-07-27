@@ -1,7 +1,7 @@
 #pragma once
 #include <QString>
 
-namespace application::services
+namespace application
 {
 
 class IAuthenticationService
@@ -13,4 +13,4 @@ public:
     virtual void registerUser(QString email, QString password) = 0;
 };
 
-} // namespace application::services
+} // namespace application

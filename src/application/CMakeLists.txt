@@ -14,6 +14,7 @@ set(CMAKE_AUTORCC ON)
 add_library(application
                 SHARED
                     interfaces/services/i_authentication_service.hpp
+                    interfaces/gateways/i_user_gateway.hpp
                     services/authentication_service.cpp
                     services/authentication_service.hpp
                     test_request.hpp
@@ -24,6 +25,7 @@ target_include_directories(application
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
 )

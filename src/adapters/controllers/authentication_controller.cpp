@@ -1,13 +1,11 @@
 #include "authentication_controller.hpp"
 #include <iostream>
 
-using namespace application::services;
-
 
 namespace adapters::controllers
 {
 
-AuthenticationController::AuthenticationController(IAuthenticationService* authenticationService)
+AuthenticationController::AuthenticationController(application::IAuthenticationService* authenticationService)
     : m_authenticationService(authenticationService)
 {
 }

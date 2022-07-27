@@ -4,6 +4,8 @@
 #include "authentication_controller.hpp"
 #include "i_authentication_service.hpp"
 #include "authentication_service.hpp"
+#include "i_user_gateway.hpp"
+#include "user_gateway.hpp"
 
 
 namespace di = boost::di;
@@ -12,12 +14,11 @@ namespace config
 {
 
 const auto diConfig = [] {
-    using namespace adapters;
-    using namespace application;
     
     return di::make_injector(
-                di::bind<controllers::IAuthenticationController>().to<controllers::AuthenticationController>(),
-                di::bind<services::IAuthenticationService>().to<services::AuthenticationService>()
+                di::bind<adapters::IAuthenticationController>().to<adapters::controllers::AuthenticationController>(),
+                di::bind<application::IAuthenticationService>().to<application::services::AuthenticationService>(),
+                di::bind<application::IUserGateway>().to<adapters::gateways::UserGateway>()
                 );
 };
 

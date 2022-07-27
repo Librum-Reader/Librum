@@ -21,8 +21,6 @@ void addTranslations();
 
 int main(int argc, char *argv[])
 {
-    using namespace adapters;
-    
     // App
     QApplication app(argc, argv);
     QGuiApplication::setOrganizationName("Etovex");
@@ -39,7 +37,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
     
-    auto authenticationController = config::diConfig().create<controllers::IAuthenticationController*>();
+    auto authenticationController = config::diConfig().create<adapters::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);
     
     
