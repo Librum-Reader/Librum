@@ -22,13 +22,15 @@ add_library(adapters
                     models/chapter_tree/chapter_tree_node.hpp
 )
 
+
 target_include_directories(adapters
                 PUBLIC
+                    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
+                PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
-                    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
-                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
 )
 
 target_compile_definitions(adapters

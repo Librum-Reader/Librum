@@ -31,10 +31,18 @@ add_subdirectory(application/)
 add_subdirectory(domain/)
 
 
+# Includes
+get_target_property(APPLICATION_INCLUDES application INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(ADAPTERS_INCLUDES adapters INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(INFRASTRUCTURE_INCLUDES infrastructure INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
+
+
 
 # Building
 qt_add_executable(appLibrum
                     main.cpp
+                    dependency_injection.hpp
 )
 
 target_compile_definitions(appLibrum
@@ -45,6 +53,7 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                 PRIVATE
                     presentation
+                    application 
                     adapters
                     Qt6::Quick
                     Qt6::Widgets
@@ -52,8 +61,8 @@ target_link_libraries(appLibrum
 
 target_include_directories(appLibrum
                 PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}/adapters/controllers
-                    ${CMAKE_CURRENT_SOURCE_DIR}/adapters/interfaces/controllers
+                    ${ADAPTERS_INCLUDES}
+                    ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
