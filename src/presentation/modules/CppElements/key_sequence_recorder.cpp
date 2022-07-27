@@ -99,4 +99,4 @@ void KeySequenceRecorder::focusOutEvent(QFocusEvent *event)
     event->accept();
 }
 
-} // cpp_elements
+} // namespace cpp_elements

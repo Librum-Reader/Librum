@@ -28,4 +28,4 @@ SidebarState::~SidebarState()
     
 }
 
-} // cpp_elements
+} // namespace cpp_elements

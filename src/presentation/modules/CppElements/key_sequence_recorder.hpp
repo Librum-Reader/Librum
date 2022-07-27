@@ -44,4 +44,4 @@ private:
     QKeySequence m_currentSequence;
 };
 
-} // cpp_elements
+} // namespace cpp_elements

@@ -43,4 +43,4 @@ private:
     constexpr static std::string_view m_companyEmail { "support@etovex.com" };
 };
 
-} // adapters::models
+} // namespace adapters::models

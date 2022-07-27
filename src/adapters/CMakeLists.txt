@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core  Quick Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core  Quick Network REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Quick Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
 
 
 # Qt
@@ -23,11 +23,12 @@ add_library(adapters
 )
 
 target_include_directories(adapters
-                PRIVATE
+                PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
 )
 
 target_compile_definitions(adapters

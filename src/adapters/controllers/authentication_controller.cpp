@@ -1,11 +1,16 @@
-#include <iostream>
 #include "authentication_controller.hpp"
+#include <iostream>
 
 
 namespace adapters::controllers
 {
 
 AuthenticationController::AuthenticationController()
+{
+    
+}
+
+AuthenticationController::~AuthenticationController()
 {
     
 }

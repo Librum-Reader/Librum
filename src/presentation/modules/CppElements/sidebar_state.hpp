@@ -36,4 +36,4 @@ private:
     State m_currentState;
 };
 
-} // cpp_elements
+} // namespace cpp_elements

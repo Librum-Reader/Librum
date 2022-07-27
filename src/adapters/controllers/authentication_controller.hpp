@@ -1,17 +1,19 @@
 #pragma once
 #include <QObject>
+#include "i_authentication_controller.hpp"
 
 
 namespace adapters::controllers
 {
 
-class AuthenticationController : public QObject
+class AuthenticationController : public IAuthenticationController
 {
     Q_OBJECT
     
 public:
     AuthenticationController();
-    Q_INVOKABLE void registerUser();
+    ~AuthenticationController();
+    Q_INVOKABLE void registerUser() override;
 };
 
 } // namespace adapters::controllers
