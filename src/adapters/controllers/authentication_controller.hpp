@@ -13,8 +13,7 @@ class AuthenticationController : public IAuthenticationController
     
 public:
     AuthenticationController(application::services::IAuthenticationService* authenticationService);
-    ~AuthenticationController();
-    
+        
     Q_INVOKABLE void registerUser() override;
     Q_INVOKABLE void authenticateUser() override;
     
