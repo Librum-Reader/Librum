@@ -1,7 +1,10 @@
 #pragma once
-
 #include <QList>
 #include <QString>
+
+
+namespace adapters::models
+{
 
 class ChapterTreeNode
 {
@@ -24,3 +27,4 @@ private:
     QString m_data;
 };
 
+} // namespace adapters::models

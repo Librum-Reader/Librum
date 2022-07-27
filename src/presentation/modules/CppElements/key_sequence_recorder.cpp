@@ -1,7 +1,8 @@
-#include <QKeyEvent>
 #include "key_sequence_recorder.hpp"
-#include "qnamespace.h"
 
+
+namespace cpp_elements
+{
 
 QString KeySequenceRecorder::originalSequence() const
 {
@@ -97,3 +98,5 @@ void KeySequenceRecorder::focusOutEvent(QFocusEvent *event)
 {
     event->accept();
 }
+
+} // cpp_elements

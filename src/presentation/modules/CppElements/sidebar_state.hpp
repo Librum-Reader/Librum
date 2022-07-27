@@ -3,6 +3,9 @@
 #include <QObject>
 
 
+namespace cpp_elements
+{
+
 class SidebarState : public QObject
 {
     Q_OBJECT
@@ -32,3 +35,5 @@ signals:
 private:
     State m_currentState;
 };
+
+} // cpp_elements

@@ -3,7 +3,7 @@
 #include <QObject>
 #include <string_view>
 
-namespace application
+namespace adapters::models
 {
 
 class AppInformation : public QObject
@@ -43,4 +43,4 @@ private:
     constexpr static std::string_view m_companyEmail { "support@etovex.com" };
 };
 
-}
+} // adapters::models

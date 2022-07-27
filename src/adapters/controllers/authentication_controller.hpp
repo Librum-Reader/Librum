@@ -1,7 +1,9 @@
+#pragma once
 #include <QObject>
 
-#pragma once
 
+namespace adapters::controllers
+{
 
 class AuthenticationController : public QObject
 {
@@ -12,3 +14,4 @@ public:
     Q_INVOKABLE void registerUser();
 };
 
+} // namespace adapters::controllers

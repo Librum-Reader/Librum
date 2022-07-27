@@ -1,6 +1,9 @@
 #include "sidebar_state.hpp"
 
 
+namespace cpp_elements
+{
+
 SidebarState::SidebarState(QObject *parent)
     : QObject{parent}
 {
@@ -24,3 +27,5 @@ SidebarState::~SidebarState()
 {
     
 }
+
+} // cpp_elements

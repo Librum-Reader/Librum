@@ -1,8 +1,11 @@
 #pragma once
-
 #include <QQuickItem>
 #include <QKeySequence>
+#include <QKeyEvent>
 
+
+namespace cpp_elements
+{
 
 class KeySequenceRecorder : public QQuickItem
 {
@@ -40,3 +43,5 @@ private:
     QKeySequence m_originalSequence;
     QKeySequence m_currentSequence;
 };
+
+} // cpp_elements

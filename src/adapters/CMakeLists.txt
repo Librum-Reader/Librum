@@ -13,9 +13,9 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(adapters
                 SHARED
-                    app_information.hpp
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    models/app_information.hpp
                     models/chapter_tree/chapter_tree_model.cpp
                     models/chapter_tree/chapter_tree_node.cpp
                     models/chapter_tree/chapter_tree_model.hpp
@@ -26,6 +26,7 @@ target_include_directories(adapters
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
+                    ${CMAKE_CURRENT_SOURCE_DIR}/models
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
 )
 

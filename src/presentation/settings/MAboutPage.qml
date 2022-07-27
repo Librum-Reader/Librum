@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
 import Librum.Elements
+import Librum.Models
 import Librum.style
 import Librum.icons
 
