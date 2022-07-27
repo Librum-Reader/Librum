@@ -53,8 +53,8 @@ target_compile_definitions(appLibrum
 target_link_libraries(appLibrum
                 PRIVATE
                     presentation
-                    application 
                     adapters
+                    application 
                     Qt6::Quick
                     Qt6::Widgets
 )
@@ -62,6 +62,7 @@ target_link_libraries(appLibrum
 target_include_directories(appLibrum
                 PRIVATE
                     ${ADAPTERS_INCLUDES}
+                    ${APPLICATION_INCLUDES}
                     ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 

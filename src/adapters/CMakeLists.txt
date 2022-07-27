@@ -28,6 +28,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
                 PRIVATE
+                    ${APPLICATION_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
                     ${CMAKE_CURRENT_SOURCE_DIR}/models

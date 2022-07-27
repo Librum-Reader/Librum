@@ -221,7 +221,7 @@ MFlickWrapper
                         
                         function buttonTriggeredAction()
                         {
-                            AuthController.registerUser();
+                            AuthController.authenticateUser();
                             loadPage(homePage, sidebar.homeItem, false);
                         }
                     }

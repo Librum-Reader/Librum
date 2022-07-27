@@ -11,6 +11,7 @@
 #include <qqml.h>
 #include <boost/di.hpp>
 #include "dependency_injection.hpp"
+#include "i_authentication_service.hpp"
 
 
 void registerTypes();
@@ -37,7 +38,6 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
     qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
-    
     
     auto authenticationController = config::diConfig().create<controllers::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);

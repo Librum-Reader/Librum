@@ -5,9 +5,9 @@
 namespace adapters::controllers
 {
 
-AuthenticationController::AuthenticationController()
+AuthenticationController::AuthenticationController(application::services::IAuthenticationService* authenticationService)
+    : m_authenticationService(authenticationService)
 {
-    
 }
 
 AuthenticationController::~AuthenticationController()
@@ -17,7 +17,11 @@ AuthenticationController::~AuthenticationController()
 
 void AuthenticationController::registerUser()
 {
-    std::cout << "Registering\n";
+}
+
+void AuthenticationController::authenticateUser()
+{
+    m_authenticationService->authenticateUser("TestEmail", "TestPassword");
 }
 
 } // namespace adapters::controllers
