@@ -29,9 +29,19 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     
+    
     addTranslations();
     loadFonts();
-    registerTypes();
+    
+    
+    // Register types
+    qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
+    qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
+    qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
+    
+    AuthenticationController authenticationController;
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", &authenticationController);
+    
     
     
     // Startup
@@ -81,14 +91,4 @@ void loadFonts()
     {
         qWarning() << "Unable to load application fonts from " + fontsPath;
     }
-}
-
-void registerTypes()
-{
-    qmlRegisterSingletonType(QUrl(u"qrc:/StyleSheet.qml"_qs), "Librum.style", 1, 0, "Style");
-    qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
-    qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
-    
-    AuthenticationController authenticationController;
-    qmlRegisterSingletonInstance("Librum.logic.controllers", 1, 0, "AuthController", &authenticationController);
 }

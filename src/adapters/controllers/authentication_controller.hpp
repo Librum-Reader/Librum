@@ -9,5 +9,6 @@ class AuthenticationController : public QObject
     
 public:
     AuthenticationController();
+    Q_INVOKABLE void registerUser();
 };
 
