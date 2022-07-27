@@ -9,10 +9,8 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
-#include "qqmlintegration.h"
-#include "qwindowdefs.h"
-#include "authentication_controller.hpp"
-#include "i_authentication_controller.hpp"
+#include <boost/di.hpp>
+#include "dependency_injection.hpp"
 
 
 void registerTypes();
@@ -40,8 +38,8 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl(u"qrc:/IconSheet.qml"_qs), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl(u"qrc:/Globals.qml"_qs), "Librum.globals", 1, 0, "Globals");
     
-    controllers::AuthenticationController controller;
-    controllers::IAuthenticationController* authenticationController = &controller;
+    
+    auto authenticationController = config::diConfig().create<controllers::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);
     
     
