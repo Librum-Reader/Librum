@@ -56,12 +56,18 @@ Instructions to get Librum up and running in your environment.
 4. Create the build folder and step into it.
     ```sh
     mkdir build-Release
-    cd build-Debug
+    cd build-Release
     ```
 6. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_TESTS=On -G "Unix Makefiles" ..
+    cmake -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_TESTS=Off ..
     ```
+    <br>
+    If you don't want to use your default build-file generator (e.g. make, or ninja), add the -G option, e.g.
+    ```sh
+    -G "Ninja"
+    ```
+
 6. Build the project
     ```sh
     make
