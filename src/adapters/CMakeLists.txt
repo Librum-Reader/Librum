@@ -14,23 +14,30 @@ set(CMAKE_AUTORCC ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
+                    interfaces/persistance/i_authentication_access.hpp
+                    
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    
                     gateways/user_gateway.cpp
                     gateways/user_gateway.hpp
+                    
                     models/app_information.hpp
                     models/chapter_tree/chapter_tree_model.cpp
                     models/chapter_tree/chapter_tree_node.cpp
                     models/chapter_tree/chapter_tree_model.hpp
                     models/chapter_tree/chapter_tree_node.hpp
+                    
+                    DTOs/login_dto.hpp
 )
-
 
 target_include_directories(adapters
                 PUBLIC
-                    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/persistance
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
+                    ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                 PRIVATE
                     ${APPLICATION_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}

@@ -13,7 +13,7 @@ AuthenticationService::AuthenticationService(IUserGateway* userGateway)
 
 void AuthenticationService::authenticateUser(QString email, QString password)
 {
-    std::cout << "Authenticating!" << std::endl;
+    m_userGateway->loginUser(email, password);
 }
 
 void AuthenticationService::registerUser(QString email, QString password)

@@ -13,11 +13,16 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(infrastructure
                 SHARED
+                    persistance/authentication_access.hpp
+                    persistance/authentication_access.cpp
 )
 
 target_include_directories(infrastructure
+                PUBLIC
+                    ${CMAKE_CURRENT_SOURCE_DIR}/persistance
                 PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}               
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${ADAPTERS_INCLUDES}
 )
 target_compile_definitions(infrastructure
                 PRIVATE
@@ -25,6 +30,7 @@ target_compile_definitions(infrastructure
 )
 target_link_libraries(infrastructure
                 PRIVATE
+                    adapters
                     Qt6::Core
                     Qt6::Network
 )

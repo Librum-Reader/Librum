@@ -54,7 +54,8 @@ target_link_libraries(appLibrum
                 PRIVATE
                     presentation
                     adapters
-                    application 
+                    application
+                    infrastructure
                     Qt6::Quick
                     Qt6::Widgets
 )
@@ -63,6 +64,7 @@ target_include_directories(appLibrum
                 PRIVATE
                     ${ADAPTERS_INCLUDES}
                     ${APPLICATION_INCLUDES}
+                    ${INFRASTRUCTURE_INCLUDES}
                     ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 
