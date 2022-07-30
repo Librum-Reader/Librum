@@ -15,9 +15,12 @@ public:
     UserGateway(IAuthenticationAccess* authenticationAccess);
     
     void authenticateUser(domain::models::LoginModel loginModel) override;
+    void createUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
-    void processToken(QString token);
+    void processAuthenticationToken(QString token);
+    void processUserCreationFailure(QString reason);
+    void processUserCreationSuccess();
     
 private:
     IAuthenticationAccess* m_authenticationAccess;

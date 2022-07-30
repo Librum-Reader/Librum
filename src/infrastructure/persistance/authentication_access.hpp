@@ -19,12 +19,15 @@ class AuthenticationAccess : public adapters::IAuthenticationAccess
     Q_OBJECT
     
 public:
-//    AuthenticationAccess();
-    
     void authenticateUser(adapters::dtos::LoginDto loginDto) override;
+    void createUser(adapters::dtos::RegisterDto registerDto) override;
+    
+private:
+    bool checkForErrors(int expectedStatusCode);
     
 private slots:
-    void processResult();
+    void processAuthenticationResult();
+    void processCreationResult();
     
 private:
     QNetworkAccessManager m_networkAccessManager;

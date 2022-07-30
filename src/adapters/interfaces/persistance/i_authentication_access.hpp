@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QString>
 #include "login_dto.hpp"
+#include "register_dto.hpp"
 
 
 namespace adapters
@@ -14,9 +15,11 @@ class IAuthenticationAccess : public QObject
 public:
     virtual ~IAuthenticationAccess() noexcept = default;
     virtual void authenticateUser(adapters::dtos::LoginDto loginDto) = 0;
+    virtual void createUser(adapters::dtos::RegisterDto registerDto) = 0;
     
 signals:
-    void responseReceived(QString token);
+    void authenticationResponseReceived(QString token);
+    void userCreationFailed(QString reason);
 };
 
 } // namespace adapters

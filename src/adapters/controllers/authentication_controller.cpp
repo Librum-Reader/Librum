@@ -1,6 +1,7 @@
 #include "authentication_controller.hpp"
 #include "i_authentication_service.hpp"
 #include "login_model.hpp"
+#include "register_model.hpp"
 
 
 namespace adapters::controllers
@@ -9,9 +10,9 @@ namespace adapters::controllers
 AuthenticationController::AuthenticationController(application::IAuthenticationService* authenticationService)
     : m_authenticationService(authenticationService)
 {
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::succeeded,
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationSucceeded,
                      this, &AuthenticationController::success);
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::failed,
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationFailed,
                      this, &AuthenticationController::failure);
 }
 
@@ -26,8 +27,11 @@ bool AuthenticationController::loginUser(QString email, QString password)
 bool AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 
                                             QString password, bool keepUpdated)
 {
+    domain::models::RegisterModel registerModel(firstName, lastName, email, password, keepUpdated);
     
+    return m_authenticationService->registerUser(registerModel);
 }
+
 
 void AuthenticationController::success()
 {

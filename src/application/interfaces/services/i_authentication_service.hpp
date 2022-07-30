@@ -2,6 +2,7 @@
 #include <QString>
 #include <QObject>
 #include "login_model.hpp"
+#include "register_model.hpp"
 
 
 namespace application
@@ -13,10 +14,13 @@ class IAuthenticationService : public QObject
 public:
     virtual ~IAuthenticationService() noexcept = default;
     virtual bool authenticateUser(domain::models::LoginModel loginModel) = 0;
+    virtual bool registerUser(domain::models::RegisterModel registerModel) = 0;
     
 signals:
-    void succeeded();
-    void failed();
+    void authenticationSucceeded();
+    void authenticationFailed();
+    void registrationSucceeded();
+    void registrationFailed();
 };
 
 } // namespace application

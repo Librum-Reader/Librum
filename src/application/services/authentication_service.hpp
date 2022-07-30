@@ -15,9 +15,10 @@ public:
     AuthenticationService(IUserGateway* userGateway);
     
     bool authenticateUser(domain::models::LoginModel loginModel) override;
+    bool registerUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
-    void processResult(QString token);
+    void processLoginResult(QString token);
     
 private:
     IUserGateway* m_userGateway;

@@ -9,6 +9,8 @@ add_library(domain
                 SHARED
                     models/login_model.cpp
                     models/login_model.hpp
+                    models/register_model.cpp
+                    models/register_model.hpp
 )
 
 target_include_directories(domain

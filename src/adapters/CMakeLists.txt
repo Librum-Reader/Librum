@@ -29,6 +29,7 @@ add_library(adapters
                     models/chapter_tree/chapter_tree_node.hpp
                     
                     DTOs/login_dto.hpp
+                    DTOs/register_dto.hpp
 )
 
 target_include_directories(adapters

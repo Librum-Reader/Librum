@@ -5,9 +5,11 @@
 namespace adapters::dtos
 {
 
-struct LoginDto
+struct RegisterDto
 {
 public:
+    QString firstName;
+    QString lastName;
     QString email;
     QString password;
 };
