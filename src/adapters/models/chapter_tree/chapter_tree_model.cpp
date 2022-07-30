@@ -1,8 +1,11 @@
-#include "chapter_tree_model.hpp"
-#include "chapter_tree_node.hpp"
 #include <QVariant>
 #include <QAbstractItemModel>
+#include "chapter_tree_model.hpp"
+#include "chapter_tree_node.hpp"
 
+
+namespace adapters::models
+{
 
 ChapterTreeModel::ChapterTreeModel(QObject* parent)
     : QAbstractItemModel(parent), m_rootNode(new ChapterTreeNode("Title"))
@@ -143,3 +146,5 @@ QVariant ChapterTreeModel::headerData(int section, Qt::Orientation orientation, 
     
     return QVariant();
 }
+
+} // namespace adapters::models

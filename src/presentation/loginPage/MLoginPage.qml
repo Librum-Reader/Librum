@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
 
 MFlickWrapper
@@ -208,7 +209,7 @@ MFlickWrapper
                         fontWeight: Font.Bold
                         text: "Login"
                         
-                        onClicked: loadPage(homePage, sidebar.homeItem, false);
+                        onClicked: buttonTriggeredAction()
                         
                         Keys.onPressed: 
                             (event) =>
@@ -220,7 +221,17 @@ MFlickWrapper
                         
                         function buttonTriggeredAction()
                         {
+                            AuthController.loginUser(emailInput.text, passwordInput.text);    
+                        }
+                        
+                        function switchToHomePage()
+                        {
                             loadPage(homePage, sidebar.homeItem, false);
+                        }
+                        
+                        Component.onCompleted:
+                        {
+                            AuthController.loginSucceeded.connect(() => loginButton.switchToHomePage());
                         }
                     }
                 }

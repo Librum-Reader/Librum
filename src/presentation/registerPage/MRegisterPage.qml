@@ -5,6 +5,8 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.globals
+import Librum.controllers
+
 
 MFlickWrapper
 {
@@ -263,11 +265,7 @@ MFlickWrapper
                                 fontWeight: Font.Bold
                                 text: "Let's start"
                                 
-                                onClicked:
-                                {
-                                    page.saveEntries();
-                                    loadPage(loginPage);
-                                }
+                                onClicked: buttonTriggeredAction();
                                 
                                 Keys.onPressed: 
                                     (event) =>
@@ -279,8 +277,19 @@ MFlickWrapper
                                 
                                 function buttonTriggeredAction()
                                 {
-                                    page.saveEntries();
+                                    AuthController.registerUser(firstNameInput.text, lastNameInput.text,
+                                                                emailInput.text, passwordInput.text,
+                                                                keepMeUpdated.checked);   
+                                }
+                                
+                                function switchToLoginPage()
+                                {
                                     loadPage(loginPage);
+                                }
+                                
+                                Component.onCompleted: 
+                                {
+                                    AuthController.registrationSucceeded.connect(() => registerButton.switchToLoginPage());
                                 }
                             }
                         }
@@ -308,16 +317,5 @@ MFlickWrapper
         }
         
         Component.onCompleted: firstNameInput.giveFocus();
-        
-        
-        function saveEntries()
-        {
-            if(firstNameInput.text.length >= 2)
-                Globals.firstName = firstNameInput.text;
-            if(lastNameInput.text.length >= 2)
-                Globals.lastName = lastNameInput.text;
-            if(emailInput.text.length >= 5)
-                Globals.email = emailInput.text;
-        }
     }
 }

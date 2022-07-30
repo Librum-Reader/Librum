@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Quick Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Core Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 
 # Qt
@@ -13,41 +13,34 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(application
                 SHARED
-                    chapter_tree/chapter_tree_model.cpp
-                    chapter_tree/chapter_tree_node.cpp
-                    chapter_tree/chapter_tree_model.hpp
-                    chapter_tree/chapter_tree_node.hpp
-                    app_information.hpp
-                    key_sequence_recorder.cpp
-                    key_sequence_recorder.hpp
-                    sidebar_state.hpp
-                    test_request.hpp
-                    test_request.cpp
-                    sidebar_state.cpp
+                    interfaces/services/i_authentication_service.hpp
+                    interfaces/gateways/i_user_gateway.hpp
+                    
+                    services/authentication_service.cpp
+                    services/authentication_service.hpp
 )
 
 target_include_directories(application
+                PUBLIC
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
+                    ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${DOMAIN_INCLUDES}
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/chapter_tree                    
 )
+
 target_compile_definitions(application
                 PRIVATE
                     $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
+
 target_link_libraries(application
                 PRIVATE
+                    domain
                     Qt6::Core
                     Qt6::Network
-                    Qt6::Quick
 )
+
 target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
-
-
-
-# Qml-Module
-qt6_add_qml_module(application
-  URI "Librum.Elements"
-  VERSION 1.0
-)

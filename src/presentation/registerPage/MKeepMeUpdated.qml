@@ -8,7 +8,7 @@ import CustomComponents
 Item
 {
     id: root
-    property bool activated : false
+    property bool checked : false
     signal keyUp()
     signal keyDown()
     
@@ -28,7 +28,7 @@ Item
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
             
-            onClicked: root.activated = !root.activated;
+            onClicked: root.checked = !root.checked;
             
             Keys.onPressed: 
                 (event) =>
@@ -36,7 +36,7 @@ Item
                     if(event.key === Qt.Key_Return)
                     {
                         updatesCheckBox.actionOnClicked();
-                        root.activated = !root.activated;
+                        root.checked = !root.checked;
                     }
                     else if(event.key === Qt.Key_Down)
                     {

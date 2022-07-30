@@ -7,43 +7,66 @@ set(CMAKE_AUTORCC ON)
 
 # Configuration
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
-set(QML_IMPORT_TRACE "1")
+
 
 
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Quick Widgets Core5Compat Pdf REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets Core5Compat Pdf REQUIRED)
+find_package(QT NAMES Qt6 COMPONENTS Quick Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets REQUIRED)
+
+
+
+# Language
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 
 # Add subdirectories
+add_subdirectory(domain/)
+get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
+
 add_subdirectory(application/)
-add_subdirectory(data/)
+get_target_property(APPLICATION_INCLUDES application INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(infrastructure/)
+get_target_property(INFRASTRUCTURE_INCLUDES infrastructure INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(adapters/)
+get_target_property(ADAPTERS_INCLUDES adapters INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(presentation/)
 
 
 
 # Building
 qt_add_executable(appLibrum
-                    presentation/qmlSources.qrc
-                    ${PROJECT_SOURCE_DIR}/resources.qrc
                     main.cpp
+                    dependency_injection.hpp
 )
 
 target_compile_definitions(appLibrum
                 PRIVATE
                         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
-target_include_directories(appLibrum
-                PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}/application
-)
+
 target_link_libraries(appLibrum
                 PRIVATE
+                    presentation
+                    adapters
                     application
-                    Qt6::Pdf
+                    infrastructure
                     Qt6::Quick
                     Qt6::Widgets
-                    Qt6::Core5Compat
+)
+
+target_include_directories(appLibrum
+                PRIVATE
+                    ${ADAPTERS_INCLUDES}
+                    ${APPLICATION_INCLUDES}
+                    ${INFRASTRUCTURE_INCLUDES}
+                    ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

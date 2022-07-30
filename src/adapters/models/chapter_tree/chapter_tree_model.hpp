@@ -1,5 +1,4 @@
 #pragma once
-
 #include <memory>
 #include <QModelIndex>
 #include <qnamespace.h>
@@ -8,6 +7,8 @@
 #include <QAbstractItemModel>
 #include "chapter_tree_node.hpp"
 
+namespace adapters::models
+{
 
 class ChapterTreeModel : public QAbstractItemModel
 {
@@ -31,3 +32,4 @@ private:
     ChapterTreeNode* m_rootNode;
 };
 
+} // namespace adapters::models

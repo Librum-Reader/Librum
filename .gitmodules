@@ -1,0 +1,3 @@
+[submodule "libs/di"]
+	path = libs/di
+	url = https://github.com/boost-ext/di.git

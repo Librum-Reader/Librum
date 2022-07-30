@@ -1,6 +1,9 @@
-#include "chapter_tree_node.hpp"
 #include <QtAlgorithms>
+#include "chapter_tree_node.hpp"
 
+
+namespace adapters::models
+{
 
 ChapterTreeNode::ChapterTreeNode(const QString& data, ChapterTreeNode* parent)
     : m_parentNode(parent), m_data(data)
@@ -53,3 +56,5 @@ ChapterTreeNode* ChapterTreeNode::parentNode()
 {
     return m_parentNode;
 }
+
+} // namespace adapters::models
