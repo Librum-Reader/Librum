@@ -11,7 +11,10 @@ UserGateway::UserGateway(IAuthenticationAccess* authenticationAccess)
     : m_authenticationAccess(authenticationAccess)
 {
     QObject::connect(m_authenticationAccess, &IAuthenticationAccess::authenticationResponseReceived,
-                     this, &UserGateway::processAuthenticationToken);
+                     this, &UserGateway::processAuthenticationResult);
+    
+    QObject::connect(m_authenticationAccess, &IAuthenticationAccess::userCreationResponseReceived,
+                     this, &UserGateway::processUserCreationResult);
 }
 
 
@@ -31,19 +34,14 @@ void UserGateway::createUser(domain::models::RegisterModel registerModel)
 }
 
 
-void UserGateway::processAuthenticationToken(bool success, QString token)
+void UserGateway::processAuthenticationResult(bool success, QString token)
 {
     emit authenticationResultReady(success, token);
 }
 
-void UserGateway::processUserCreationFailure(QString reason)
+void UserGateway::processUserCreationResult(bool success, QString failureReason)
 {
-    emit userCreationFailed(reason);
-}
-
-void UserGateway::processUserCreationSuccess()
-{
-    emit userCreationSucceeded();
+    emit userCreationResultReady(success, failureReason);
 }
 
 } // namespace adapters::gateways

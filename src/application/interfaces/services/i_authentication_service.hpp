@@ -20,7 +20,7 @@ signals:
     void authenticationSucceeded();
     void authenticationFailed();
     void registrationSucceeded();
-    void registrationFailed();
+    void registrationFailed(QString reason);
 };
 
 } // namespace application

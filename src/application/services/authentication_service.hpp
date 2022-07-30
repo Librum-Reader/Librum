@@ -19,6 +19,7 @@ public:
     
 private slots:
     void processLoginResult(bool success, QString token);
+    void processRegistrationResult(bool success, QString failureReason);
     
 private:
     IUserGateway* m_userGateway;

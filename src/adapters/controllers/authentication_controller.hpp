@@ -19,8 +19,10 @@ public:
                                   QString password, bool keepUpdated) override;
 
 private slots:
-    void success();
-    void failure();
+    void loginSuccess();
+    void loginFailure();
+    void registrationSuccess();
+    void registrationFailure(QString reason);
     
 private:
     application::IAuthenticationService* m_authenticationService;

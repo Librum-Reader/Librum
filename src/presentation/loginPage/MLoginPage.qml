@@ -231,7 +231,7 @@ MFlickWrapper
                         
                         Component.onCompleted:
                         {
-                            AuthController.loginSucceeded.connect(() => switchToHomePage());
+                            AuthController.loginSucceeded.connect(() => loginButton.switchToHomePage());
                         }
                     }
                 }

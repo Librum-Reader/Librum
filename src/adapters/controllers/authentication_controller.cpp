@@ -11,9 +11,14 @@ AuthenticationController::AuthenticationController(application::IAuthenticationS
     : m_authenticationService(authenticationService)
 {
     QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationSucceeded,
-                     this, &AuthenticationController::success);
+                     this, &AuthenticationController::loginSuccess);
     QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationFailed,
-                     this, &AuthenticationController::failure);
+                     this, &AuthenticationController::loginFailure);
+    
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationSucceeded,
+                     this, &AuthenticationController::registrationSuccess);
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationFailed,
+                     this, &AuthenticationController::registrationFailure);
 }
 
 
@@ -33,14 +38,24 @@ bool AuthenticationController::registerUser(QString firstName, QString lastName,
 }
 
 
-void AuthenticationController::success()
+void AuthenticationController::loginSuccess()
 {
     emit loginSucceeded();
 }
 
-void AuthenticationController::failure()
+void AuthenticationController::loginFailure()
 {
     emit loginFailed();
+}
+
+void AuthenticationController::registrationSuccess()
+{
+    emit registrationSucceeded();
+}
+
+void AuthenticationController::registrationFailure(QString reason)
+{
+    emit registrationFailed(reason);
 }
 
 } // namespace adapters::controllers

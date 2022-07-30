@@ -19,8 +19,7 @@ public:
     
 signals:
     void authenticationResultReady(bool success, QString token);
-    void userCreationFailed(QString reason);
-    void userCreationSucceeded();
+    void userCreationResultReady(bool success, QString failureReason);
 };
 
 } // namespace application

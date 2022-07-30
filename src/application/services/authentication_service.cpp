@@ -10,6 +10,9 @@ AuthenticationService::AuthenticationService(IUserGateway* userGateway)
 {
     QObject::connect(m_userGateway, &IUserGateway::authenticationResultReady,
                      this, &AuthenticationService::processLoginResult);
+    
+    QObject::connect(m_userGateway, &IUserGateway::userCreationResultReady,
+                     this, &AuthenticationService::processRegistrationResult);
 }
 
 bool AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
@@ -39,6 +42,17 @@ void AuthenticationService::processLoginResult(bool success, QString token)
     }
     
     emit authenticationSucceeded();
+}
+
+void AuthenticationService::processRegistrationResult(bool success, QString failureReason)
+{
+    if(!success)
+    {
+        emit registrationFailed(failureReason);
+        return;
+    }
+    
+    emit registrationSucceeded();
 }
 
 } // namespace application::services

@@ -18,9 +18,8 @@ public:
     void createUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
-    void processAuthenticationToken(bool success, QString token);
-    void processUserCreationFailure(QString reason);
-    void processUserCreationSuccess();
+    void processAuthenticationResult(bool success, QString token);
+    void processUserCreationResult(bool success, QString failureReason);
     
 private:
     IAuthenticationAccess* m_authenticationAccess;

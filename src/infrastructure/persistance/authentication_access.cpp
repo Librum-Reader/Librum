@@ -73,6 +73,7 @@ void AuthenticationAccess::processAuthenticationResult()
     if(checkForErrors(200))
     {
         emit authenticationResponseReceived(false, "");
+        return;
     }
     
     QString result = m_reply->readAll();
@@ -83,9 +84,12 @@ void AuthenticationAccess::processCreationResult()
 {
     if(checkForErrors(201))
     {
-        emit userCreationFailed(m_reply->readAll());
+        QString reason = m_reply->readAll();
+        emit userCreationResponseReceived(false, reason);
         return;
     }
+    
+    emit userCreationResponseReceived(true, "");
 }
 
 } // namespace infrastructure::persistence

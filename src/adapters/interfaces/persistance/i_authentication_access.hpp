@@ -19,7 +19,7 @@ public:
     
 signals:
     void authenticationResponseReceived(bool success, QString token);
-    void userCreationFailed(QString reason);
+    void userCreationResponseReceived(bool success, QString failureReason);
 };
 
 } // namespace adapters

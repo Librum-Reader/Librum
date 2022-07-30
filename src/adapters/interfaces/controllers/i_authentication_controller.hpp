@@ -20,6 +20,8 @@ public:
 signals:
     void loginSucceeded();
     void loginFailed();
+    void registrationSucceeded();
+    void registrationFailed(QString reason);
 };
 
 } // namespace adapters

@@ -265,10 +265,7 @@ MFlickWrapper
                                 fontWeight: Font.Bold
                                 text: "Let's start"
                                 
-                                onClicked:
-                                {
-                                    buttonTriggeredAction();
-                                }
+                                onClicked: buttonTriggeredAction();
                                 
                                 Keys.onPressed: 
                                     (event) =>
@@ -292,7 +289,7 @@ MFlickWrapper
                                 
                                 Component.onCompleted: 
                                 {
-//                                    AuthController.loginSucceeded.connect(() => switchToHomePage());
+                                    AuthController.registrationSucceeded.connect(() => registerButton.switchToLoginPage());
                                 }
                             }
                         }
