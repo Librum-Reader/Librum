@@ -18,7 +18,7 @@ public:
     virtual void createUser(adapters::dtos::RegisterDto registerDto) = 0;
     
 signals:
-    void authenticationResponseReceived(QString token);
+    void authenticationResponseReceived(bool success, QString token);
     void userCreationFailed(QString reason);
 };
 

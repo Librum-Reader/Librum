@@ -18,7 +18,7 @@ public:
     bool registerUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
-    void processLoginResult(QString token);
+    void processLoginResult(bool success, QString token);
     
 private:
     IUserGateway* m_userGateway;

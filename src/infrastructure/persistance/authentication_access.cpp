@@ -72,11 +72,11 @@ void AuthenticationAccess::processAuthenticationResult()
 {
     if(checkForErrors(200))
     {
-        emit authenticationResponseReceived("");
+        emit authenticationResponseReceived(false, "");
     }
     
     QString result = m_reply->readAll();
-    emit authenticationResponseReceived(result);
+    emit authenticationResponseReceived(true, result);
 }
 
 void AuthenticationAccess::processCreationResult()

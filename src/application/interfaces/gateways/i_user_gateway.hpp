@@ -18,7 +18,7 @@ public:
     virtual void createUser(domain::models::RegisterModel registerModel) = 0;
     
 signals:
-    void authenticationResultReady(QString token);
+    void authenticationResultReady(bool success, QString token);
     void userCreationFailed(QString reason);
     void userCreationSucceeded();
 };

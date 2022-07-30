@@ -18,7 +18,7 @@ public:
     void createUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
-    void processAuthenticationToken(QString token);
+    void processAuthenticationToken(bool success, QString token);
     void processUserCreationFailure(QString reason);
     void processUserCreationSuccess();
     

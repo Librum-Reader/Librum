@@ -31,9 +31,9 @@ void UserGateway::createUser(domain::models::RegisterModel registerModel)
 }
 
 
-void UserGateway::processAuthenticationToken(QString token)
+void UserGateway::processAuthenticationToken(bool success, QString token)
 {
-    emit authenticationResultReady(token);
+    emit authenticationResultReady(success, token);
 }
 
 void UserGateway::processUserCreationFailure(QString reason)

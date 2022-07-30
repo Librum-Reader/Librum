@@ -30,9 +30,9 @@ bool AuthenticationService::registerUser(domain::models::RegisterModel registerM
     return true;
 }
 
-void AuthenticationService::processLoginResult(QString token)
+void AuthenticationService::processLoginResult(bool success, QString token)
 {
-    if(token.isEmpty())
+    if(!success)
     {
         emit authenticationFailed();
         return;
