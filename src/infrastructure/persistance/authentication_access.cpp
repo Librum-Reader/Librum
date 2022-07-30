@@ -3,7 +3,7 @@
 namespace infrastructure::persistence
 {
 
-QString AuthenticationAccess::loginUser(adapters::dtos::LoginDto loginDto)
+void AuthenticationAccess::loginUser(adapters::dtos::LoginDto loginDto)
 {
     QNetworkRequest request{ QUrl("https://localhost:7084/api/login") };
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -22,16 +22,21 @@ QString AuthenticationAccess::loginUser(adapters::dtos::LoginDto loginDto)
     QByteArray data = jsonDocument.toJson();
     
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::printResult);
-    
-    return QString("b");
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::processResult);
 }
-void AuthenticationAccess::printResult()
+
+void AuthenticationAccess::processResult()
 {
-    if(m_reply->error() != QNetworkReply::NoError)
-        qDebug() << "there was an error!: " << m_reply->errorString();
-        
-    qDebug() << m_reply->readAll();
+    int statusCode = m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if(statusCode != 200)
+    {
+        qDebug() << "there was an error! " << m_reply->readAll();
+        emit requestFinished("");
+        return;
+    }
+    
+    QString result = m_reply->readAll();
+    emit requestFinished(result);
 }
 
 } // namespace infrastructure::persistence

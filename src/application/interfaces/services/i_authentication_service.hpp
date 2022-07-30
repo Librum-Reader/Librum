@@ -1,18 +1,22 @@
 #pragma once
 #include <QString>
+#include <QObject>
 #include "login_model.hpp"
 
 
 namespace application
 {
-
-class IAuthenticationService
+class IAuthenticationService : public QObject
 {
+    Q_OBJECT
+    
 public:
     virtual ~IAuthenticationService() noexcept = default;
-    
     virtual bool authenticateUser(domain::models::LoginModel loginModel) = 0;
-    virtual void registerUser(QString email, QString password) = 0;
+    
+signals:
+    void authenticationSucceeded();
+    void authenticationFailed();
 };
 
 } // namespace application

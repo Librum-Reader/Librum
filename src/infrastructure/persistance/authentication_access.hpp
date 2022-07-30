@@ -14,15 +14,15 @@
 namespace infrastructure::persistence
 {
 
-class AuthenticationAccess : public QObject, public adapters::IAuthenticationAccess
+class AuthenticationAccess : public adapters::IAuthenticationAccess
 {
     Q_OBJECT
     
 public:
-    QString loginUser(adapters::dtos::LoginDto loginDto) override;
+    void loginUser(adapters::dtos::LoginDto loginDto) override;
     
-private:
-    void printResult();
+private slots:
+    void processResult();
     
 private:
     QNetworkAccessManager m_networkAccessManager;

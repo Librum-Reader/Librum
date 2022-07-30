@@ -1,4 +1,5 @@
 #include "authentication_service.hpp"
+#include "i_user_gateway.hpp"
 
 
 namespace application::services
@@ -15,13 +16,23 @@ bool AuthenticationService::authenticateUser(domain::models::LoginModel loginMod
     if(!loginModel.isValid())
         return false;
     
-    QString token = m_userGateway->loginUser(loginModel);
-    return !token.isEmpty();
+    QObject::connect(m_userGateway, &IUserGateway::resultReady, this, &AuthenticationService::processResult);
+    
+    m_userGateway->loginUser(loginModel);
+    return true;
 }
 
-void AuthenticationService::registerUser(QString email, QString password)
+void AuthenticationService::processResult(QString token)
 {
+    // Store result
     
+    if(token.isEmpty())
+    {
+        emit authenticationFailed();
+        return;
+    }
+    
+    emit authenticationSucceeded();
 }
 
 } // namespace application::services
