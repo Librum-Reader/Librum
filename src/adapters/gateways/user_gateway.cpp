@@ -11,10 +11,11 @@ UserGateway::UserGateway(IAuthenticationAccess* authenticationAccess)
     
 }
 
-void UserGateway::loginUser(QString email, QString password)
+QString UserGateway::loginUser(domain::models::LoginModel loginModel)
 {
-    dtos::LoginDto loginDto { .email = email, .password = password };
-    m_authenticationAccess->loginUser(loginDto);
+    dtos::LoginDto loginDto { .email = loginModel.email(), .password = loginModel.password() };
+    
+    return m_authenticationAccess->loginUser(loginDto);
 }
 
 } // namespace adapters::gateways

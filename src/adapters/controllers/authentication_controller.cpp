@@ -1,5 +1,5 @@
 #include "authentication_controller.hpp"
-#include <iostream>
+#include "login_model.hpp"
 
 
 namespace adapters::controllers
@@ -14,9 +14,11 @@ void AuthenticationController::registerUser()
 {
 }
 
-void AuthenticationController::authenticateUser()
+bool AuthenticationController::authenticateUser(QString email, QString password)
 {
-    m_authenticationService->authenticateUser("TestEmail", "TestPassword");
+    domain::models::LoginModel loginModel(email, password);
+    
+    return m_authenticationService->authenticateUser(loginModel);
 }
 
 } // namespace adapters::controllers

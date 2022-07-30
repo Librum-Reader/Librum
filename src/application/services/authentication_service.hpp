@@ -11,7 +11,7 @@ class AuthenticationService : public IAuthenticationService
 public:
     AuthenticationService(IUserGateway* userGateway);
     
-    void authenticateUser(QString email, QString password) override;
+    bool authenticateUser(domain::models::LoginModel loginModel) override;
     void registerUser(QString email, QString password) override;
     
 private:

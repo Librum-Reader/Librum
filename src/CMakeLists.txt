@@ -24,18 +24,19 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Add subdirectories
-add_subdirectory(presentation/)
-add_subdirectory(infrastructure/)
-add_subdirectory(adapters/)
-add_subdirectory(application/)
 add_subdirectory(domain/)
-
-
-# Includes
-get_target_property(APPLICATION_INCLUDES application INTERFACE_INCLUDE_DIRECTORIES)
-get_target_property(ADAPTERS_INCLUDES adapters INTERFACE_INCLUDE_DIRECTORIES)
-get_target_property(INFRASTRUCTURE_INCLUDES infrastructure INTERFACE_INCLUDE_DIRECTORIES)
 get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(application/)
+get_target_property(APPLICATION_INCLUDES application INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(infrastructure/)
+get_target_property(INFRASTRUCTURE_INCLUDES infrastructure INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(adapters/)
+get_target_property(ADAPTERS_INCLUDES adapters INTERFACE_INCLUDE_DIRECTORIES)
+
+add_subdirectory(presentation/)
 
 
 

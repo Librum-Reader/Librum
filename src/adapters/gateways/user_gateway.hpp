@@ -11,7 +11,7 @@ class UserGateway : public application::IUserGateway
 public:
     UserGateway(IAuthenticationAccess* authenticationAccess);
     
-    void loginUser(QString email, QString password) override;
+    QString loginUser(domain::models::LoginModel loginModel) override;
     
 private:
     IAuthenticationAccess* m_authenticationAccess;

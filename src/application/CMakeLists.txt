@@ -25,6 +25,7 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${DOMAIN_INCLUDES}
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
 )

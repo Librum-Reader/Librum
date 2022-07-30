@@ -1,5 +1,4 @@
 #include "authentication_service.hpp"
-#include <iostream>
 
 
 namespace application::services
@@ -11,9 +10,13 @@ AuthenticationService::AuthenticationService(IUserGateway* userGateway)
     
 }
 
-void AuthenticationService::authenticateUser(QString email, QString password)
+bool AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
 {
-    m_userGateway->loginUser(email, password);
+    if(!loginModel.isValid())
+        return false;
+    
+    QString token = m_userGateway->loginUser(loginModel);
+    return !token.isEmpty();
 }
 
 void AuthenticationService::registerUser(QString email, QString password)

@@ -39,6 +39,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                 PRIVATE
+                    ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
@@ -52,6 +53,7 @@ target_compile_definitions(adapters
 
 target_link_libraries(adapters
                 PRIVATE
+                    domain
                     application
                     Qt6::Core
                     Qt6::Quick
