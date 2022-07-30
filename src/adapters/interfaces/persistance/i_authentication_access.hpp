@@ -13,10 +13,10 @@ class IAuthenticationAccess : public QObject
     
 public:
     virtual ~IAuthenticationAccess() noexcept = default;
-    virtual void loginUser(adapters::dtos::LoginDto loginDto) = 0;
+    virtual void authenticateUser(adapters::dtos::LoginDto loginDto) = 0;
     
 signals:
-    void requestFinished(QString token);
+    void responseReceived(QString token);
 };
 
 } // namespace adapters

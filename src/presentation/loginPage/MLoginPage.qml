@@ -221,13 +221,17 @@ MFlickWrapper
                         
                         function buttonTriggeredAction()
                         {
-                            AuthController.authenticationSucceeded.connect(() => switchToHomePage());
-                            AuthController.authenticateUser(emailInput.text, passwordInput.text);    
+                            AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
                         function switchToHomePage()
                         {
                             loadPage(homePage, sidebar.homeItem, false);
+                        }
+                        
+                        Component.onCompleted:
+                        {
+                            AuthController.loginSucceeded.connect(() => switchToHomePage());
                         }
                     }
                 }

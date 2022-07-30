@@ -14,7 +14,7 @@ class UserGateway : public application::IUserGateway
 public:
     UserGateway(IAuthenticationAccess* authenticationAccess);
     
-    void loginUser(domain::models::LoginModel loginModel) override;
+    void authenticateUser(domain::models::LoginModel loginModel) override;
     
 private slots:
     void processToken(QString token);

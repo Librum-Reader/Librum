@@ -8,7 +8,7 @@ namespace application::services
 AuthenticationService::AuthenticationService(IUserGateway* userGateway)
     : m_userGateway(userGateway)
 {
-    
+    QObject::connect(m_userGateway, &IUserGateway::resultReady, this, &AuthenticationService::processResult);
 }
 
 bool AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
@@ -16,23 +16,19 @@ bool AuthenticationService::authenticateUser(domain::models::LoginModel loginMod
     if(!loginModel.isValid())
         return false;
     
-    QObject::connect(m_userGateway, &IUserGateway::resultReady, this, &AuthenticationService::processResult);
-    
-    m_userGateway->loginUser(loginModel);
+    m_userGateway->authenticateUser(loginModel);
     return true;
 }
 
 void AuthenticationService::processResult(QString token)
 {
-    // Store result
-    
     if(token.isEmpty())
     {
-        emit authenticationFailed();
+        emit failed();
         return;
     }
     
-    emit authenticationSucceeded();
+    emit succeeded();
 }
 
 } // namespace application::services

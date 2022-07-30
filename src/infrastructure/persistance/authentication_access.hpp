@@ -19,7 +19,9 @@ class AuthenticationAccess : public adapters::IAuthenticationAccess
     Q_OBJECT
     
 public:
-    void loginUser(adapters::dtos::LoginDto loginDto) override;
+//    AuthenticationAccess();
+    
+    void authenticateUser(adapters::dtos::LoginDto loginDto) override;
     
 private slots:
     void processResult();

@@ -3,7 +3,7 @@
 namespace infrastructure::persistence
 {
 
-void AuthenticationAccess::loginUser(adapters::dtos::LoginDto loginDto)
+void AuthenticationAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
 {
     QNetworkRequest request{ QUrl("https://localhost:7084/api/login") };
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -31,12 +31,12 @@ void AuthenticationAccess::processResult()
     if(statusCode != 200)
     {
         qDebug() << "there was an error! " << m_reply->readAll();
-        emit requestFinished("");
+        emit responseReceived("");
         return;
     }
     
     QString result = m_reply->readAll();
-    emit requestFinished(result);
+    emit responseReceived(result);
 }
 
 } // namespace infrastructure::persistence

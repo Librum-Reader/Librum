@@ -15,8 +15,8 @@ public:
     virtual bool authenticateUser(domain::models::LoginModel loginModel) = 0;
     
 signals:
-    void authenticationSucceeded();
-    void authenticationFailed();
+    void succeeded();
+    void failed();
 };
 
 } // namespace application

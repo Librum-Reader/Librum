@@ -9,30 +9,34 @@ namespace adapters::controllers
 AuthenticationController::AuthenticationController(application::IAuthenticationService* authenticationService)
     : m_authenticationService(authenticationService)
 {
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::succeeded,
+                     this, &AuthenticationController::success);
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::failed,
+                     this, &AuthenticationController::failure);
 }
 
 
-bool AuthenticationController::authenticateUser(QString email, QString password)
+bool AuthenticationController::loginUser(QString email, QString password)
 {
     domain::models::LoginModel loginModel(email, password);
-    
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationSucceeded,
-                     this, &AuthenticationController::success);
-    
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationFailed,
-                     this, &AuthenticationController::failure);
     
     return m_authenticationService->authenticateUser(loginModel);
 }
 
+bool AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 
+                                            QString password, bool keepUpdated)
+{
+    
+}
+
 void AuthenticationController::success()
 {
-    emit authenticationSucceeded();
+    emit loginSucceeded();
 }
 
 void AuthenticationController::failure()
 {
-    emit authenticationFailed();
+    emit loginFailed();
 }
 
 } // namespace adapters::controllers
