@@ -8,12 +8,12 @@
 namespace application
 {
 
-class IUserGateway : public QObject
+class IUserStorageGateway : public QObject
 {
     Q_OBJECT
     
 public:
-    virtual ~IUserGateway() noexcept = default;
+    virtual ~IUserStorageGateway() noexcept = default;
     virtual void authenticateUser(domain::models::LoginModel loginModel) = 0;
     virtual void createUser(domain::models::RegisterModel registerModel) = 0;
     

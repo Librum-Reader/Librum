@@ -14,7 +14,7 @@ set(CMAKE_AUTORCC ON)
 add_library(application
                 SHARED
                     interfaces/services/i_authentication_service.hpp
-                    interfaces/gateways/i_user_gateway.hpp
+                    interfaces/gateways/i_user_storage_gateway.hpp
                     
                     services/authentication_service.cpp
                     services/authentication_service.hpp

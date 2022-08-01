@@ -1,17 +1,17 @@
 #include "authentication_service.hpp"
-#include "i_user_gateway.hpp"
+#include "i_user_storage_gateway.hpp"
 
 
 namespace application::services
 {
 
-AuthenticationService::AuthenticationService(IUserGateway* userGateway)
+AuthenticationService::AuthenticationService(IUserStorageGateway* userGateway)
     : m_userGateway(userGateway)
 {
-    QObject::connect(m_userGateway, &IUserGateway::authenticationResultReady,
+    QObject::connect(m_userGateway, &IUserStorageGateway::authenticationResultReady,
                      this, &AuthenticationService::processLoginResult);
     
-    QObject::connect(m_userGateway, &IUserGateway::userCreationResultReady,
+    QObject::connect(m_userGateway, &IUserStorageGateway::userCreationResultReady,
                      this, &AuthenticationService::processRegistrationResult);
 }
 
