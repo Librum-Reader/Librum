@@ -13,8 +13,8 @@ set(CMAKE_AUTORCC ON)
 # Build
 add_library(infrastructure
                 SHARED
-                    persistance/authentication_access.hpp
-                    persistance/authentication_access.cpp
+                    persistance/user_storage_access.hpp
+                    persistance/user_storage_access.cpp
 )
 
 target_include_directories(infrastructure

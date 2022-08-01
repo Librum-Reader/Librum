@@ -1,9 +1,9 @@
-#include "authentication_access.hpp"
+#include "user_storage_access.hpp"
 
 namespace infrastructure::persistence
 {
 
-void AuthenticationAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
+void UserStorageAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
 {
     QUrl endpoint("https://localhost:7084/api/login");
     auto request = createRequest(endpoint);
@@ -16,10 +16,10 @@ void AuthenticationAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
     QByteArray data = jsonDocument.toJson();
     
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::authenticationFinished);
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &UserStorageAccess::authenticationFinished);
 }
 
-void AuthenticationAccess::createUser(adapters::dtos::RegisterDto registerDto)
+void UserStorageAccess::createUser(adapters::dtos::RegisterDto registerDto)
 {
     QUrl endpoint("https://localhost:7084/api/register");
     auto request = createRequest(endpoint);
@@ -34,11 +34,11 @@ void AuthenticationAccess::createUser(adapters::dtos::RegisterDto registerDto)
     QByteArray data = jsonDocument.toJson();
     
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::creationFinished);
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &UserStorageAccess::creationFinished);
 }
 
 
-bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
+bool UserStorageAccess::checkForErrors(int expectedStatusCode)
 {
     if(m_reply->error() != QNetworkReply::NoError)
     {
@@ -55,7 +55,7 @@ bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
     return false;
 }
 
-QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
+QNetworkRequest UserStorageAccess::createRequest(QUrl url)
 {
     QNetworkRequest result{ url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -70,7 +70,7 @@ QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
 }
 
 
-void AuthenticationAccess::authenticationFinished()
+void UserStorageAccess::authenticationFinished()
 {
     auto expectedStatusCode = 200;
     if(checkForErrors(expectedStatusCode))
@@ -83,7 +83,7 @@ void AuthenticationAccess::authenticationFinished()
     emit authenticationResponseReceived(true, result);
 }
 
-void AuthenticationAccess::creationFinished()
+void UserStorageAccess::creationFinished()
 {
     auto expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))

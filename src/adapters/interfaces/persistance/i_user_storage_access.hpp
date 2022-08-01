@@ -8,12 +8,12 @@
 namespace adapters
 {
 
-class IAuthenticationAccess : public QObject
+class IUserStorageAccess : public QObject
 {
     Q_OBJECT
     
 public:
-    virtual ~IAuthenticationAccess() noexcept = default;
+    virtual ~IUserStorageAccess() noexcept = default;
     virtual void authenticateUser(adapters::dtos::LoginDto loginDto) = 0;
     virtual void createUser(adapters::dtos::RegisterDto registerDto) = 0;
     

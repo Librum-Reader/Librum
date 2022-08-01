@@ -8,13 +8,13 @@
 #include <QByteArray>
 #include <QObject>
 #include <QDebug>
-#include "i_authentication_access.hpp"
+#include "i_user_storage_access.hpp"
 
 
 namespace infrastructure::persistence
 {
 
-class AuthenticationAccess : public adapters::IAuthenticationAccess
+class UserStorageAccess : public adapters::IUserStorageAccess
 {
     Q_OBJECT
     
