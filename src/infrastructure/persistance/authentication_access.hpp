@@ -24,10 +24,11 @@ public:
     
 private:
     bool checkForErrors(int expectedStatusCode);
+    QNetworkRequest createRequest(QUrl url);
     
 private slots:
-    void processAuthenticationResult();
-    void processCreationResult();
+    void authenticationFinished();
+    void creationFinished();
     
 private:
     QNetworkAccessManager m_networkAccessManager;

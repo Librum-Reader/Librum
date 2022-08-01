@@ -19,8 +19,8 @@ add_library(adapters
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
                     
-                    gateways/user_gateway.cpp
-                    gateways/user_gateway.hpp
+                    gateways/authentication_gateway.cpp
+                    gateways/authentication_gateway.hpp
                     
                     models/app_information.hpp
                     models/chapter_tree/chapter_tree_model.cpp

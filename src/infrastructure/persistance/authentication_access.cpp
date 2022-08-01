@@ -5,14 +5,8 @@ namespace infrastructure::persistence
 
 void AuthenticationAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
 {
-    QNetworkRequest request{ QUrl("https://localhost:7084/api/login") };
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("X-Version", "1.0");
-    
-    QSslConfiguration sslConfiguration = request.sslConfiguration();
-    sslConfiguration.setProtocol(QSsl::AnyProtocol);
-    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
-    request.setSslConfiguration(sslConfiguration);
+    QUrl endpoint("https://localhost:7084/api/login");
+    auto request = createRequest(endpoint);
         
     QJsonObject jsonObject;
     jsonObject["email"] = loginDto.email;
@@ -22,20 +16,14 @@ void AuthenticationAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
     QByteArray data = jsonDocument.toJson();
     
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::processAuthenticationResult);
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::authenticationFinished);
 }
 
 void AuthenticationAccess::createUser(adapters::dtos::RegisterDto registerDto)
 {
-    QNetworkRequest request{ QUrl("https://localhost:7084/api/register") };
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    request.setRawHeader("X-Version", "1.0");
+    QUrl endpoint("https://localhost:7084/api/register");
+    auto request = createRequest(endpoint);
     
-    QSslConfiguration sslConfiguration = request.sslConfiguration();
-    sslConfiguration.setProtocol(QSsl::AnyProtocol);
-    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
-    request.setSslConfiguration(sslConfiguration);
-        
     QJsonObject jsonObject;
     jsonObject["firstName"] = registerDto.firstName;
     jsonObject["lastName"] = registerDto.lastName;
@@ -46,7 +34,7 @@ void AuthenticationAccess::createUser(adapters::dtos::RegisterDto registerDto)
     QByteArray data = jsonDocument.toJson();
     
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::processCreationResult);
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &AuthenticationAccess::creationFinished);
 }
 
 
@@ -67,10 +55,25 @@ bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
     return false;
 }
 
-
-void AuthenticationAccess::processAuthenticationResult()
+QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
 {
-    if(checkForErrors(200))
+    QNetworkRequest result{ url };
+    result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    result.setRawHeader("X-Version", "1.0");
+    
+    QSslConfiguration sslConfiguration = result.sslConfiguration();
+    sslConfiguration.setProtocol(QSsl::AnyProtocol);
+    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
+    result.setSslConfiguration(sslConfiguration);
+    
+    return result;
+}
+
+
+void AuthenticationAccess::authenticationFinished()
+{
+    auto expectedStatusCode = 200;
+    if(checkForErrors(expectedStatusCode))
     {
         emit authenticationResponseReceived(false, "");
         return;
@@ -80,9 +83,10 @@ void AuthenticationAccess::processAuthenticationResult()
     emit authenticationResponseReceived(true, result);
 }
 
-void AuthenticationAccess::processCreationResult()
+void AuthenticationAccess::creationFinished()
 {
-    if(checkForErrors(201))
+    auto expectedStatusCode = 201;
+    if(checkForErrors(expectedStatusCode))
     {
         QString reason = m_reply->readAll();
         emit userCreationResponseReceived(false, reason);
