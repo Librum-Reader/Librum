@@ -18,5 +18,6 @@ add_subdirectory(src/)
 
 # Tests
 if(BUILD_TESTS)
+    add_subdirectory(libs/googletest)
     add_subdirectory(tests/)
 endif()
