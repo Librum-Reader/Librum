@@ -75,12 +75,12 @@ void UserStorageAccess::authenticationFinished()
     auto expectedStatusCode = 200;
     if(checkForErrors(expectedStatusCode))
     {
-        emit authenticationResponseReceived(false, "");
+        emit authenticationResponseArrived(false, "");
         return;
     }
     
     QString result = m_reply->readAll();
-    emit authenticationResponseReceived(true, result);
+    emit authenticationResponseArrived(true, result);
 }
 
 void UserStorageAccess::creationFinished()
@@ -89,11 +89,11 @@ void UserStorageAccess::creationFinished()
     if(checkForErrors(expectedStatusCode))
     {
         QString reason = m_reply->readAll();
-        emit userCreationResponseReceived(false, reason);
+        emit userCreationResponseArrived(false, reason);
         return;
     }
     
-    emit userCreationResponseReceived(true, "");
+    emit userCreationResponseArrived(true, "");
 }
 
 } // namespace infrastructure::persistence

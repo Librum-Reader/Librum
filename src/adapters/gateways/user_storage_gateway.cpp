@@ -10,10 +10,10 @@ namespace adapters::gateways
 UserStorageGateway::UserStorageGateway(IUserStorageAccess* authenticationAccess)
     : m_authenticationAccess(authenticationAccess)
 {
-    QObject::connect(m_authenticationAccess, &IUserStorageAccess::authenticationResponseReceived,
+    QObject::connect(m_authenticationAccess, &IUserStorageAccess::authenticationResponseArrived,
                      this, &UserStorageGateway::processAuthenticationResult);
     
-    QObject::connect(m_authenticationAccess, &IUserStorageAccess::userCreationResponseReceived,
+    QObject::connect(m_authenticationAccess, &IUserStorageAccess::userCreationResponseArrived,
                      this, &UserStorageGateway::processUserCreationResult);
 }
 
@@ -27,8 +27,10 @@ void UserStorageGateway::authenticateUser(domain::models::LoginModel loginModel)
 
 void UserStorageGateway::createUser(domain::models::RegisterModel registerModel)
 {
-    dtos::RegisterDto registerDto { .firstName = registerModel.firstName(), .lastName = registerModel.lastName(),
-                                    .email = registerModel.email(), .password = registerModel.password() };
+    dtos::RegisterDto registerDto { .firstName = registerModel.firstName(),
+                .lastName = registerModel.lastName(),
+                .email = registerModel.email(),
+                .password = registerModel.password() };
     
     m_authenticationAccess->createUser(registerDto);
 }

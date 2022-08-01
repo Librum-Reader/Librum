@@ -18,8 +18,8 @@ public:
     virtual void createUser(adapters::dtos::RegisterDto registerDto) = 0;
     
 signals:
-    void authenticationResponseReceived(bool success, QString token);
-    void userCreationResponseReceived(bool success, QString failureReason);
+    void authenticationResponseArrived(bool success, QString token);
+    void userCreationResponseArrived(bool success, QString failureReason);
 };
 
 } // namespace adapters

@@ -35,6 +35,8 @@ bool AuthenticationService::registerUser(domain::models::RegisterModel registerM
 
 void AuthenticationService::processLoginResult(bool success, QString token)
 {
+    Q_UNUSED(token);
+    
     if(!success)
     {
         emit authenticationFailed();
