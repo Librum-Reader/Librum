@@ -1,10 +1,6 @@
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
+#include "login_model_tests.hpp"
 
-
-TEST(test, test)
-{
-    ASSERT_EQ(1,1);
-}
 
 int main()
 {

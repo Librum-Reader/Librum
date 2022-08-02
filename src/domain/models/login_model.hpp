@@ -18,6 +18,7 @@ private:
     QString m_email;
     QString m_password;
     int m_minPasswordLength = 6;
+    int m_maxPasswordLength = 60;
 };
 
 } // namespace domain::models

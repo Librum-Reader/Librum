@@ -24,7 +24,7 @@ bool LoginModel::isValid() const
     if(m_password.isEmpty() || m_password.isNull() || m_email.isEmpty() || m_email.isNull())
         return false;
     
-    if(m_password.length() < m_minPasswordLength)
+    if(m_password.length() < m_minPasswordLength || m_password.length() > m_maxPasswordLength)
         return false;
     
     return true;
