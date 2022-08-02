@@ -8,46 +8,88 @@ using namespace domain::models;
 
 TEST(ALoginModel, ReturnsTheEmailWhenQueried)
 {
+    // Arrange
     QString email = "johndoe@librum.com";
     LoginModel loginModel(email, "SomePassword123");
-    ASSERT_EQ(email, loginModel.email());
+    
+    // Act
+    QString result = loginModel.email();
+    
+    // Assert
+    ASSERT_EQ(email, result);
 }
 
 TEST(ALoginModel, ReturnsThePasswordWhenQueried)
 {
+    // Arrange
     QString password = "SomePassword123";
     LoginModel loginModel("johndoe@librum.com", password);
-    ASSERT_EQ(password, loginModel.password());
+    
+    // Act
+    QString result = loginModel.password();
+    
+    // Assert
+    ASSERT_EQ(password, result);
 }
 
 TEST(ALoginModelWithValidData, ReturnsTrueWhenValidated)
 {
+    // Arrange
     LoginModel loginModel("johndoe@librum.com", "SomePassword123");
-    ASSERT_EQ(true, loginModel.isValid());
+    
+    // Act
+    bool result = loginModel.isValid();
+    
+    // Assert
+    ASSERT_TRUE(result);
 }
 
 TEST(ALoginModelWithNoPassword, ReturnsFalseWhenValidated)
 {
+    // Arrange
     LoginModel loginModel("johndoe@librum.com", "");
-    ASSERT_EQ(false, loginModel.isValid());
+    
+    // Act
+    bool result = loginModel.isValid();
+    
+    // Assert
+    ASSERT_FALSE(result);
 }
 
 TEST(ALoginModelWithNoEmail, ReturnsFalseWhenValidated)
 {
+    // Arrange
     LoginModel loginModel("", "SomePassword123");
-    ASSERT_EQ(false, loginModel.isValid());
+    
+    // Act
+    bool result = loginModel.isValid();
+    
+    // Assert
+    ASSERT_FALSE(result);
 }
 
 TEST(ALoginModelWithATooShortPassword, ReturnsFalseWhenValidated)
 {
+    // Arrange
     QString tooShortPassword = "123";
     LoginModel loginModel("johndoe@librum.com", tooShortPassword);
-    ASSERT_EQ(false, loginModel.isValid());
+    
+    // Act
+    bool result = loginModel.isValid();
+    
+    // Assert
+    ASSERT_FALSE(result);
 }
 
 TEST(ALoginModelWithATooLongPassword, ReturnsFalseWhenValidated)
 {
+    // Arrange
     QString tooLongPassword(61, 'a');
     LoginModel loginModel("johndoe@librum.com", tooLongPassword);
-    ASSERT_EQ(false, loginModel.isValid());
+    
+    // Act
+    bool result = loginModel.isValid();
+    
+    // Assert
+    ASSERT_FALSE(result);
 }
