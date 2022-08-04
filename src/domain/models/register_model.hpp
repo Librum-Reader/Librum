@@ -31,7 +31,7 @@ private:
     int m_maxFirstNameLength = 40;
     
     QString m_lastName;
-    int m_minLastNameLength = 6;
+    int m_minLastNameLength = 2;
     int m_maxLastNameLength = 50;
     
     QString m_email;
