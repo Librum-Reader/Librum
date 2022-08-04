@@ -13,8 +13,8 @@ class IAuthenticationService : public QObject
     
 public:
     virtual ~IAuthenticationService() noexcept = default;
-    virtual bool authenticateUser(domain::models::LoginModel loginModel) = 0;
-    virtual bool registerUser(domain::models::RegisterModel registerModel) = 0;
+    virtual void authenticateUser(domain::models::LoginModel loginModel) = 0;
+    virtual void registerUser(domain::models::RegisterModel registerModel) = 0;
     
 signals:
     void authenticationSucceeded();

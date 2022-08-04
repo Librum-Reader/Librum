@@ -15,22 +15,26 @@ AuthenticationService::AuthenticationService(IUserStorageGateway* userGateway)
                      this, &AuthenticationService::processRegistrationResult);
 }
 
-bool AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
+void AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
 {
     if(!loginModel.isValid())
-        return false;
+    {
+        emit authenticationFailed();
+        return;
+    }
     
     m_userGateway->authenticateUser(loginModel);
-    return true;
 }
 
-bool AuthenticationService::registerUser(domain::models::RegisterModel registerModel)
+void AuthenticationService::registerUser(domain::models::RegisterModel registerModel)
 {
     if(!registerModel.isValid())
-        return false;
+    {
+        emit registrationFailed("The provided data is invalid");
+        return;
+    }
     
     m_userGateway->createUser(registerModel);
-    return true;
 }
 
 void AuthenticationService::processLoginResult(bool success, QString token)

@@ -14,8 +14,8 @@ class AuthenticationController : public IAuthenticationController
 public:
     AuthenticationController(application::IAuthenticationService* authenticationService);
         
-    Q_INVOKABLE bool loginUser(QString email, QString password) override;
-    Q_INVOKABLE bool registerUser(QString firstName, QString lastName, QString email,
+    Q_INVOKABLE void loginUser(QString email, QString password) override;
+    Q_INVOKABLE void registerUser(QString firstName, QString lastName, QString email,
                                   QString password, bool keepUpdated) override;
 
 private slots:

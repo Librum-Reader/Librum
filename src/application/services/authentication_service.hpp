@@ -14,8 +14,8 @@ class AuthenticationService : public IAuthenticationService
 public:
     AuthenticationService(IUserStorageGateway* userGateway);
     
-    bool authenticateUser(domain::models::LoginModel loginModel) override;
-    bool registerUser(domain::models::RegisterModel registerModel) override;
+    void authenticateUser(domain::models::LoginModel loginModel) override;
+    void registerUser(domain::models::RegisterModel registerModel) override;
     
 private slots:
     void processLoginResult(bool success, QString token);

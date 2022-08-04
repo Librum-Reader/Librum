@@ -22,19 +22,19 @@ AuthenticationController::AuthenticationController(application::IAuthenticationS
 }
 
 
-bool AuthenticationController::loginUser(QString email, QString password)
+void AuthenticationController::loginUser(QString email, QString password)
 {
     domain::models::LoginModel loginModel(email, password);
     
-    return m_authenticationService->authenticateUser(loginModel);
+    m_authenticationService->authenticateUser(loginModel);
 }
 
-bool AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 
+void AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 
                                             QString password, bool keepUpdated)
 {
     domain::models::RegisterModel registerModel(firstName, lastName, email, password, keepUpdated);
     
-    return m_authenticationService->registerUser(registerModel);
+    m_authenticationService->registerUser(registerModel);
 }
 
 
