@@ -8,6 +8,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 add_executable(domain_unit_tests
                     main.cpp
                     login_model_tests.hpp
+                    register_model_tests.hpp
 )
 
 target_include_directories(domain_unit_tests
