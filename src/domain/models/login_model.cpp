@@ -21,13 +21,20 @@ QString LoginModel::password()
 
 bool LoginModel::isValid() const
 {
-    if(m_password.isEmpty() || m_password.isNull() || m_email.isEmpty() || m_email.isNull())
-        return false;
+    if(emailIsValid() && passwordIsValid())
+        return true;
     
-    if(m_password.length() < m_minPasswordLength || m_password.length() > m_maxPasswordLength)
-        return false;
-    
-    return true;
+    return false;
+}
+
+bool LoginModel::emailIsValid() const
+{
+    return m_email.length() <= m_maxEmailLength && m_email.length() >= m_minEmailLength;
+}
+
+bool LoginModel::passwordIsValid() const
+{
+    return m_password.length() <= m_maxPasswordLength && m_password.length() >= m_minPasswordLength;
 }
 
 } // namespace domain::models

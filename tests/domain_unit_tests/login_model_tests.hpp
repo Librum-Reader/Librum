@@ -71,7 +71,7 @@ TEST(ALoginModelWithNoEmail, ReturnsFalseWhenValidated)
 TEST(ALoginModelWithATooShortPassword, ReturnsFalseWhenValidated)
 {
     // Arrange
-    QString tooShortPassword = "123";
+    QString tooShortPassword = "SomeP";
     LoginModel loginModel("johndoe@librum.com", tooShortPassword);
     
     // Act
