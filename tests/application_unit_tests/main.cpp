@@ -1,10 +1,5 @@
 #include "gtest/gtest.h"
-
-
-TEST(test, test)
-{
-    ASSERT_EQ(1,1);
-}
+#include "authentication_service_tests.hpp"
 
 
 int main()
