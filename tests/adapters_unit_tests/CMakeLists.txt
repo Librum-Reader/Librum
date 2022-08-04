@@ -15,6 +15,7 @@ target_link_libraries(adapters_unit_tests
                     gmock
                     adapters
                     application
+                    domain
                     Qt6::Core
     )
 
