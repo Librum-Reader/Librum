@@ -1,4 +1,6 @@
 #include "gtest/gtest.h"
+#include "authentication_controller_tests.hpp"
+
 
 TEST(test, test)
 {
