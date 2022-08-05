@@ -26,7 +26,7 @@ void AuthenticationController::loginUser(QString email, QString password)
 {
     domain::models::LoginModel loginModel(email, password);
     
-    m_authenticationService->authenticateUser(loginModel);
+    m_authenticationService->loginUser(loginModel);
 }
 
 void AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 

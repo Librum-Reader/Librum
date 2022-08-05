@@ -31,7 +31,7 @@ TEST(AnAuthenticationService, AuthenticatesTheUserWhenTheDataIsValid)
     
     // Act
     application::services::AuthenticationService authService(&userStorageMock);
-    authService.authenticateUser(loginModel);
+    authService.loginUser(loginModel);
 }
 
 TEST(AnAuthenticationService, DoesNotAuthenticateTheUserWhenTheDataIsInvalid)
@@ -47,7 +47,7 @@ TEST(AnAuthenticationService, DoesNotAuthenticateTheUserWhenTheDataIsInvalid)
     
     // Act
     application::services::AuthenticationService authService(&userStorageMock);
-    authService.authenticateUser(loginModel);
+    authService.loginUser(loginModel);
 }
 
 TEST(AnAuthenticationService, RegistersTheUserWhenTheDataIsValid)

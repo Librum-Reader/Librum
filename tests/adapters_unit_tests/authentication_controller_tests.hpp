@@ -12,7 +12,7 @@ using namespace domain::models;
 class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
-    MOCK_METHOD(void, authenticateUser, (LoginModel loginModel), (override));
+    MOCK_METHOD(void, loginUser, (LoginModel loginModel), (override));
     MOCK_METHOD(void, registerUser, (RegisterModel registerModel), (override));
 };
 
@@ -24,7 +24,7 @@ TEST(AnAuthenticationController, LogsInTheUser)
     AuthenticationServiceMock authServiceMock;
     
     // Assert
-    EXPECT_CALL(authServiceMock, authenticateUser(_))
+    EXPECT_CALL(authServiceMock, loginUser(_))
             .Times(Exactly(1));
     
     // Act

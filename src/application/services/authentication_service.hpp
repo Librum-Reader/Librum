@@ -14,7 +14,7 @@ class AuthenticationService : public IAuthenticationService
 public:
     AuthenticationService(IUserStorageGateway* userGateway);
     
-    void authenticateUser(domain::models::LoginModel loginModel) override;
+    void loginUser(domain::models::LoginModel loginModel) override;
     void registerUser(domain::models::RegisterModel registerModel) override;
     
 private slots:

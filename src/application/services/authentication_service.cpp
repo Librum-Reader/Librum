@@ -15,7 +15,7 @@ AuthenticationService::AuthenticationService(IUserStorageGateway* userGateway)
                      this, &AuthenticationService::processRegistrationResult);
 }
 
-void AuthenticationService::authenticateUser(domain::models::LoginModel loginModel)
+void AuthenticationService::loginUser(domain::models::LoginModel loginModel)
 {
     if(!loginModel.isValid())
     {
