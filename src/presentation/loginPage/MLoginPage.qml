@@ -221,6 +221,13 @@ MFlickWrapper
                         
                         function buttonTriggeredAction()
                         {
+                            // No credential login skip
+                            if(emailInput.text == "" && passwordInput.text == "")
+                            {
+                                loadPage(homePage, sidebar.homeItem, false);
+                                return;
+                            }
+                                
                             AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
