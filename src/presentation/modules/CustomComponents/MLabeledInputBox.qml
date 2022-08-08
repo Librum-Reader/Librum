@@ -26,6 +26,7 @@ Item
     property int textPadding : 15
     property string imagePath : ""
     property string toggledImagePath : ""
+    property bool textHidden: toggledImagePath.length > 0 ? true : false
     signal edited
     
     implicitWidth: 100
@@ -84,7 +85,7 @@ Item
                     font.weight: root.inputFontWeight
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
-                    echoMode: (!root.imagePath.length > 0 || imageArea.pressed ? TextInput.Normal : TextInput.Password)
+                    echoMode: root.textHidden ? TextInput.Password : TextInput.Normal
                     background: Rectangle   
                     {   
                         anchors.fill: parent
@@ -98,17 +99,20 @@ Item
                 Image
                 {
                     id: image
+                    
                     Layout.preferredWidth: 20
                     Layout.preferredHeight: 18
                     Layout.rightMargin: 10
                     Layout.alignment: Qt.AlignVCenter
                     visible: root.imagePath.length > 0
-                    source: (imageArea.pressed ? root.toggledImagePath : root.imagePath)
+                    source: root.textHidden ? root.imagePath : root.toggledImagePath
                     
                     MouseArea
                     {
                         id: imageArea
                         anchors.fill: parent
+                        
+                        onClicked: root.textHidden = !root.textHidden
                     }
                 }
             }
