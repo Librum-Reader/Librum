@@ -452,12 +452,7 @@ Popup
                         }
                         
                         
-                        Component.onCompleted:
-                        {
-                            // Set properties on the flickable contained in Scrollview.
-                            // The Flickable is by default the contentItem of the ScrollView.
-                            contentItem.maximumFlickVelocity = 600
-                        }
+                        Component.onCompleted: contentItem.maximumFlickVelocity = 600
                         
                         
                         function scrolling()
