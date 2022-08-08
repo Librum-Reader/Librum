@@ -222,7 +222,14 @@ Popup
                             y: parent.topPadding
                             height: parent.availableHeight
                             policy: ScrollBar.AlwaysOn
-                            onActiveChanged: parent.scrolling()
+                            onActiveChanged:
+                            {
+                                if(!active)
+                                    return;
+                                
+                                languageComboBox.selectionPopup.close();
+                                tagsComboBox.selectionPopup.close();
+                            }
                         }
                         
                         
@@ -453,13 +460,6 @@ Popup
                         
                         
                         Component.onCompleted: contentItem.maximumFlickVelocity = 600
-                        
-                        
-                        function scrolling()
-                        {
-                            languageComboBox.selectionPopup.close();
-                            tagsComboBox.selectionPopup.close();
-                        }
                     }
                 }
             }              
