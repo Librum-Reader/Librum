@@ -17,6 +17,25 @@ Item
     implicitHeight: 32
     
     
+    Keys.onPressed:
+        (event) =>
+        {
+            if(event.key === Qt.Key_Up)
+            {
+                if(value < maxVal)
+                {
+                    value += 1;
+                }
+            }
+            else if(event.key === Qt.Key_Down)
+            {
+                if(value > minVal)
+                {
+                    value -= 1;
+                }
+            }
+        }
+    
     Pane
     {
         id: container
@@ -93,6 +112,8 @@ Item
                         
                         onClicked:
                         {
+                            root.forceActiveFocus();
+                            
                             if(root.value < root.maxVal)
                                 root.value += 1;
                             
@@ -114,6 +135,8 @@ Item
                         
                         onClicked:
                         {
+                            root.forceActiveFocus();
+                            
                             if(root.value > root.minVal)
                                 root.value -= 1;
                             
@@ -123,8 +146,8 @@ Item
                     }
                 }
             }
-        
-        
+            
+            
             function isValid()
             {
                 if(inputField.text < root.minVal || inputField.text > root.maxVal)
