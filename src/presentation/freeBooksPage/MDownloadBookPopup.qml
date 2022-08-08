@@ -122,19 +122,23 @@ Popup
                         }
                         
                         
-                        Flickable
+                        ScrollView
                         {
-                            id: contentFlickable
+                            id: inputSideLayout
                             Layout.preferredHeight: 262
                             Layout.fillWidth: true
                             Layout.topMargin: -5
-                            contentHeight: bookDetails.height
-                            maximumFlickVelocity: 650
-                            flickDeceleration: 2000
-                            boundsBehavior: Flickable.StopAtBounds
+                            contentWidth: width
                             clip: true
+                            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                            ScrollBar.vertical: ScrollBar
+                            {
+                                anchors.right: parent.right
+                                height: inputSideLayout.availableHeight
+                                policy: ScrollBar.AlwaysOn
+                            }
                             
-                            ScrollBar.vertical: ScrollBar { policy: ScrollBar.AlwaysOn }
+                            Component.onCompleted: contentItem.maximumFlickVelocity = 600
                             
                             
                             ColumnLayout
