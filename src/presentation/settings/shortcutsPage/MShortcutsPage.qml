@@ -166,7 +166,11 @@ Page
                     Layout.fillHeight: true
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                     
-                    Component.onCompleted: contentItem.flickDeceleration = 2200;
+                    Component.onCompleted:
+                    {
+                        contentItem.maximumFlickVelocity = 4000;
+                        contentItem.flickDeceleration = 2200;
+                    }
                     
                     
                     ListView
