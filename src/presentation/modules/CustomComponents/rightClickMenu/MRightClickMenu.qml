@@ -28,6 +28,7 @@ Popup
     
     ColumnLayout
     {
+        id: layout
         width: parent.width
         spacing: 0
         

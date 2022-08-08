@@ -140,10 +140,10 @@ Page
                         (index, mouse) =>
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                            
+                                                        
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
-                            bookOptionsPopup.visible = !bookOptionsPopup.visible;
+                            bookOptionsPopup.open();
                         }
                 }
                 
@@ -151,6 +151,7 @@ Page
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
+                    implicitHeight: 213
                     visible: false
                     
                     
