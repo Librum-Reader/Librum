@@ -211,21 +211,18 @@ Popup
                     
                     ScrollView
                     {
-                        id: inputSideLayout
-                        property int moveSpeed : 550
-                        
+                        id: inputSideLayout                        
                         anchors.fill: parent
                         anchors.leftMargin: 26
                         contentWidth: width
                         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                         ScrollBar.vertical: ScrollBar
                         {
-                            parent: inputSideLayout
-                            x: inputSideLayout.width
-                            y: inputSideLayout.topPadding
-                            height: inputSideLayout.availableHeight
+                            x: parent.width
+                            y: parent.topPadding
+                            height: parent.availableHeight
                             policy: ScrollBar.AlwaysOn
-                            onActiveChanged: inputSideLayout.scrolling()
+                            onActiveChanged: parent.scrolling()
                         }
                         
                         

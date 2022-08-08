@@ -124,7 +124,7 @@ Popup
                         
                         ScrollView
                         {
-                            id: inputSideLayout
+                            id: bookInformationLayout
                             Layout.preferredHeight: 262
                             Layout.fillWidth: true
                             Layout.topMargin: -5
@@ -134,7 +134,7 @@ Popup
                             ScrollBar.vertical: ScrollBar
                             {
                                 anchors.right: parent.right
-                                height: inputSideLayout.availableHeight
+                                height: parent.availableHeight
                                 policy: ScrollBar.AlwaysOn
                             }
                             
