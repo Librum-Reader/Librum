@@ -1,6 +1,6 @@
 # Librum
 
-Librum is a modern and simple to use book reader which is available on all major platforms. We have a lot of functionalities, including:
+Librum is a modern and simple to use book reader which is available on all major platforms. We offer lots of functionalities, including:
 - High appearance customization
 - A free in app book store
 - Book state syncing across devices
@@ -27,10 +27,10 @@ Instructions to get Librum up and running in your environment.
 
 ## For GNU/Linux
 ### Prerequisites
-- cmake (at least 3.22)            https://cmake.org/download/
-- make (or any other build system) http://ftp.gnu.org/gnu/make/
-- Qt6                              https://www.qt.io/download
-- Gcc (or any other c++ compiler)  https://gcc.gnu.org/
+- cmake (at least version 3.20)     https://cmake.org/download/
+- make (or any other build system)  http://ftp.gnu.org/gnu/make/
+- Qt6                               https://www.qt.io/download
+- Gcc (or any other c++ compiler)   https://gcc.gnu.org/
 
 ### Installation
 1. Clone the repository.
