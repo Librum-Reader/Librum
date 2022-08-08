@@ -9,6 +9,8 @@ Item
     property string leftProperty: "Left"
     property string rightProperty: "Right"
     property string selected: rightProperty
+    property bool leftSelected: false
+    property bool rightSelected: true
     
     implicitHeight: 38
     implicitWidth: 178
@@ -17,6 +19,16 @@ Item
     Pane
     {
         id: container
+        property double leftRectOpacity
+        property double rightRectOpacity
+        
+        Component.onCompleted:
+        {
+            leftRectOpacity = root.leftSelected ? 1 : 0
+            rightRectOpacity = root.rightSelected ? 1 : 0
+        }
+        
+        
         anchors.fill: parent
         padding: 0
         background: Rectangle
@@ -36,20 +48,21 @@ Item
             
             Label
             {
-                id: darkText
+                id: leftText
                 Layout.fillHeight: true
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: leftProperty
-                color: root.selected == leftProperty ? Style.colorBasePurple : Style.colorLightText3
+                color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText3
                 font.pointSize: 12
-                font.weight: root.selected == leftProperty ? Font.Bold : Font.DemiBold
+                font.weight: root.leftSelected ? Font.Bold : Font.DemiBold
                 background: Rectangle
                 {
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: root.selected == leftProperty ? Style.colorSidebarMark : "transparent"
+                    color: Style.colorSidebarMark
+                    opacity: container.leftRectOpacity
                     radius: 4
                 }
                 
@@ -61,14 +74,15 @@ Item
                     anchors.topMargin: 1
                     anchors.bottomMargin: 1
                     width: 3
-                    color: root.selected == leftProperty ? Style.colorSidebarMark : "transparent"
+                    opacity: container.leftRectOpacity
+                    color: Style.colorSidebarMark
                 }
                 
                 MouseArea
                 {
                     anchors.fill: parent
                     
-                    onClicked: root.selected = leftProperty
+                    onClicked: selectLeftAnimation.start()
                 }
             }
             
@@ -82,20 +96,21 @@ Item
             
             Label
             {
-                id: lightText
+                id: rightText
                 Layout.fillHeight: true
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: rightProperty
-                color: root.selected == rightProperty ? Style.colorBasePurple : Style.colorLightText3
+                color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText3
                 font.pointSize: 12
-                font.weight: root.selected == rightProperty ? Font.Bold : Font.DemiBold
+                font.weight: root.rightSelected ? Font.Bold : Font.DemiBold
                 background: Rectangle
                 {
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: root.selected == rightProperty ? Style.colorSidebarMark : "transparent"
+                    opacity: container.rightRectOpacity
+                    color: Style.colorSidebarMark
                     radius: 4
                 }
                 
@@ -107,16 +122,72 @@ Item
                     anchors.topMargin: 1
                     anchors.bottomMargin: 1
                     width: 3
-                    color: root.selected == rightProperty ? Style.colorSidebarMark : "transparent"
+                    opacity: container.rightRectOpacity
+                    color: Style.colorSidebarMark
                 }
                 
                 MouseArea
                 {
                     anchors.fill: parent
                     
-                    onClicked: root.selected = rightProperty
+                    onClicked: selectRightAnimation.start()
                 }
             }
+        }
+    }
+    
+    
+    SequentialAnimation
+    {
+        id: selectRightAnimation
+        
+        NumberAnimation
+        {
+            target: container
+            property: "leftRectOpacity"
+            duration: 75
+            to: 0
+        }
+        
+        NumberAnimation
+        {
+            target: container
+            property: "rightRectOpacity"
+            duration: 75
+            to: 1
+        }
+        
+        onFinished:
+        {
+            root.leftSelected = false;
+            root.rightSelected = true;
+        }
+    }
+    
+    SequentialAnimation
+    {
+        id: selectLeftAnimation
+        
+        NumberAnimation
+        {
+            target: container
+            property: "rightRectOpacity"
+            duration: 75
+            to: 0
+        }
+        
+        NumberAnimation
+        {
+            target: container
+            property: "leftRectOpacity"
+            duration: 75
+            to: 1
+        }
+        
+        onFinished:
+        {
+            root.leftSelected = true;
+            root.rightSelected = false;
         }
     }
 }
