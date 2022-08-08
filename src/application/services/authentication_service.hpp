@@ -22,7 +22,7 @@ private slots:
     void processRegistrationResult(bool success, QString failureReason);
     
 private:
-    IUserStorageGateway* m_userGateway;
+    IUserStorageGateway* m_userStorageGateway;
 };
 
 } // namespace application::services

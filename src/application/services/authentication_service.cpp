@@ -6,12 +6,12 @@ namespace application::services
 {
 
 AuthenticationService::AuthenticationService(IUserStorageGateway* userGateway)
-    : m_userGateway(userGateway)
+    : m_userStorageGateway(userGateway)
 {
-    QObject::connect(m_userGateway, &IUserStorageGateway::authenticationResultReady,
+    QObject::connect(m_userStorageGateway, &IUserStorageGateway::authenticationResultReady,
                      this, &AuthenticationService::processLoginResult);
     
-    QObject::connect(m_userGateway, &IUserStorageGateway::userCreationResultReady,
+    QObject::connect(m_userStorageGateway, &IUserStorageGateway::userCreationResultReady,
                      this, &AuthenticationService::processRegistrationResult);
 }
 
@@ -23,7 +23,7 @@ void AuthenticationService::loginUser(domain::models::LoginModel loginModel)
         return;
     }
     
-    m_userGateway->authenticateUser(loginModel);
+    m_userStorageGateway->authenticateUser(loginModel);
 }
 
 void AuthenticationService::registerUser(domain::models::RegisterModel registerModel)
@@ -34,7 +34,7 @@ void AuthenticationService::registerUser(domain::models::RegisterModel registerM
         return;
     }
     
-    m_userGateway->createUser(registerModel);
+    m_userStorageGateway->createUser(registerModel);
 }
 
 void AuthenticationService::processLoginResult(bool success, QString token)
