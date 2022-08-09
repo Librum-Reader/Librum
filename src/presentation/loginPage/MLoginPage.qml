@@ -228,17 +228,13 @@ MFlickWrapper
                                 return;
                             }
                                 
+                            AuthController.loginSucceeded.connect(() => loginButton.switchToHomePage());
                             AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
                         function switchToHomePage()
                         {
                             loadPage(homePage, sidebar.homeItem, false);
-                        }
-                        
-                        Component.onCompleted:
-                        {
-                            AuthController.loginSucceeded.connect(() => loginButton.switchToHomePage());
                         }
                     }
                 }
