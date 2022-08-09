@@ -13,12 +13,25 @@ Everyone can download, modify and redistribute the source-code since we are usin
 
 <br>
 
-you will be able to use Librum across all major platforms, including:
+# Details
+
+You will be able to use Librum across all major platforms, including:
 - Windows
 - GNU/Linux
 - MacOS
 - IOS
 - Android
+
+<br>
+
+All common formats will be supported by Librum, this includes:
+- Pdf
+- Epub
+- Mobi
+- Txt
+- Html
+- ... and much more
+
 
 <br><br>
 
