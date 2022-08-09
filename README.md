@@ -1,14 +1,17 @@
 # Librum
 
-Librum is a modern and simple to use book reader which is available on all major platforms. We offer lots of functionalities, including:
-- High appearance customization
-- A free in app book store
-- Book state syncing across devices
-- Bookmarks / Highlighting
-- Note-taking functionality
+Librum's mission is to make your reading experience as <b>good</b> and <b>simple</b> as possible.
 
-Librum's focus is on being completely <b>opensource</b>, <b>free</b>, <b>performant</b> and <b>modern</b>.</br>
-Everyone can download, modify and redistribute the source-code since we are using a completely copyleft license.
+Librum offers lots of functionalities, which you can use through a <b>modern</b> and <b>simplistic</b> interface.<br>
+With Librum, you can create and manage your own library of books and files, which you can access from <b>all</b> of your devices.<br>
+You can comfortably read your book through the app, <b>highlight</b> sections you find interesting and add <b>bookmarks</b> on pages you want to revisit. On top, Librum
+makes it possible for you, to take <b>notes</b> on what you've read, directly from the app.<br>
+Librum also offers a <b>free</b> in-app bookstore, plugins to make you even more productive and the possibility, to fully customize the application, so that it looks and behaves as you want.
+
+Librum's focus lies on being <b>modern</b>, completely <b>opensource</b>, <b>free</b> and <b>fast</b>.</br>
+Everyone can download, modify and redistribute the source-code since we are using a complete copyleft license.
+
+<br>
 
 you will be able to use Librum across all major platforms, including:
 - Windows
