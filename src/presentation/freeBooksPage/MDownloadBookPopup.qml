@@ -180,6 +180,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true
@@ -197,6 +198,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true
@@ -214,6 +216,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true
@@ -231,6 +234,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true
@@ -248,6 +252,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true
@@ -266,6 +271,7 @@ Popup
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorLightText3
+                                    textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
                                     readOnly: true

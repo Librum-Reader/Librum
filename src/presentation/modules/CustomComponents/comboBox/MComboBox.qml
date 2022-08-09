@@ -13,6 +13,7 @@ Item
     property int defaultIndex
     
     property bool multiSelect: false
+    property int textPadding: 10
     property int headerToBoxSpacing: 2
     property int popupSpacing: 5
     property string boxBackgroundColor: Style.colorBackground
@@ -65,7 +66,7 @@ Item
             Layout.fillWidth: true
             Layout.fillHeight: true
             verticalPadding: 6
-            horizontalPadding: 8
+            horizontalPadding: textPadding
             background: Rectangle
             {
                 color: root.boxBackgroundColor
