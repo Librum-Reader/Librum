@@ -13,9 +13,14 @@ ChapterTreeModel::ChapterTreeModel(QObject* parent)
     // Test data
     auto firstLevel1 = new ChapterTreeNode("Table of Contents", m_rootNode);
     auto firstLevel2 = new ChapterTreeNode("From the Publisher", m_rootNode);
-    auto firstLevel3 = new ChapterTreeNode("Introduction", m_rootNode);
+    auto firstLevel3 = new ChapterTreeNode("Prependix", m_rootNode);
     auto firstLevel4 = new ChapterTreeNode("Introduction", m_rootNode);
-    auto firstLevel0 = new ChapterTreeNode("Introduction", m_rootNode);
+    auto firstLevel5 = new ChapterTreeNode("Deducing Types", m_rootNode);
+    auto firstLevel6 = new ChapterTreeNode("Move semantics", m_rootNode);
+    auto firstLevel7 = new ChapterTreeNode("Smart pointers", m_rootNode);
+    auto firstLevel8 = new ChapterTreeNode("Lambda expression", m_rootNode);
+    auto firstLevel9 = new ChapterTreeNode("The history of c++", m_rootNode);
+    auto firstLevel10 = new ChapterTreeNode("Tweaks", m_rootNode);
     
     auto secondLevel1 = new ChapterTreeNode("Using Code Examples", firstLevel2);
     auto secondLevel2 = new ChapterTreeNode("@Safari Book Online", firstLevel2);
@@ -25,13 +30,15 @@ ChapterTreeModel::ChapterTreeModel(QObject* parent)
     firstLevel2->appendChild(secondLevel2);
     firstLevel2->appendChild(secondLevel3);
     
-    auto secondLevel4 = new ChapterTreeNode("Custom one", firstLevel3);
-    auto secondLevel5 = new ChapterTreeNode("Another one", firstLevel3);
-    auto secondLevel6 = new ChapterTreeNode("Something else", firstLevel3);
+    auto secondLevel4 = new ChapterTreeNode("About the author", firstLevel3);
+    auto secondLevel5 = new ChapterTreeNode("Why this book?", firstLevel3);
+    auto secondLevel6 = new ChapterTreeNode("Other things", firstLevel3);
+    auto secondLevel7 = new ChapterTreeNode("Mentions", firstLevel3);
     
     firstLevel3->appendChild(secondLevel4);
     firstLevel3->appendChild(secondLevel5);
     firstLevel3->appendChild(secondLevel6);
+    firstLevel3->appendChild(secondLevel7);
     
     auto thirdLevel1 = new ChapterTreeNode("Third level", secondLevel3);
     auto thirdLevel2 = new ChapterTreeNode("Even a 3rd", secondLevel3);
@@ -44,17 +51,22 @@ ChapterTreeModel::ChapterTreeModel(QObject* parent)
     
     m_rootNode->appendChild(firstLevel1);
     m_rootNode->appendChild(firstLevel2);
-    m_rootNode->appendChild(firstLevel0);
     m_rootNode->appendChild(firstLevel3);
     m_rootNode->appendChild(firstLevel4);
+    m_rootNode->appendChild(firstLevel5);
+    m_rootNode->appendChild(firstLevel6);
+    m_rootNode->appendChild(firstLevel7);
+    m_rootNode->appendChild(firstLevel8);
+    m_rootNode->appendChild(firstLevel9);
+    m_rootNode->appendChild(firstLevel10);
     
     
-    for(int i = 0; i < 40; ++i)
-    {
-        QString value = "Filler";
-        value.append(QString::number(i));
-        m_rootNode->appendChild(new ChapterTreeNode(value, m_rootNode));
-    }
+//    for(int i = 0; i < 40; ++i)
+//    {
+//        QString value = "Filler";
+//        value.append(QString::number(i));
+//        m_rootNode->appendChild(new ChapterTreeNode(value, m_rootNode));
+//    }
 }
 
 ChapterTreeModel::~ChapterTreeModel()
