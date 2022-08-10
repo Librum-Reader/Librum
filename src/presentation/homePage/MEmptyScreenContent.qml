@@ -38,7 +38,7 @@ Item
                 id: addBooksQuestion
                 Layout.preferredWidth: 250
                 Layout.alignment: Qt.AlignHCenter
-                text: "Quiet empty here, what about importing your first book?"
+                text: "Quite empty here, what about importing your first book?"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
                 font.family: Style.defaultFontFamily
