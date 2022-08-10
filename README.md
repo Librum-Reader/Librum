@@ -99,7 +99,7 @@ Instructions to get Librum up and running in your environment.
 
 ## For Windows
 ### Prerequisites
-- cmake (at least 3.22)            https://cmake.org/download/
+- cmake (at least 3.20)            https://cmake.org/download/
 - make (or any other build system) http://ftp.gnu.org/gnu/make/
 - Qt6                              https://www.qt.io/download
 - mingw                            https://sourceforge.net/projects/mingw/
