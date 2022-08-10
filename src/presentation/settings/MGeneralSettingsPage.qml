@@ -67,7 +67,7 @@ MFlickWrapper
                     fontWeight: Font.Bold
                     fontColor: Style.colorBackground
                     
-                    onClicked: root.resetAppearanceSettings()
+                    onClicked: resetSettingsPopup.open()
                 }
             }
             
@@ -132,8 +132,17 @@ MFlickWrapper
     }
     
     
-    function resetAppearanceSettings()
+    MResetSettingsPopup
     {
+        id: resetSettingsPopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - page.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - page.topPadding - 50)
         
+        onKeepChoosed: close()
+        onResetChoosed:
+        {
+            // Reset settings
+            close();
+        }
     }
 }
