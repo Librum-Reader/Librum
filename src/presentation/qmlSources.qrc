@@ -93,5 +93,6 @@
         <file>modules/CustomComponents/tagOptionsPopup/MTagOptionsPopup.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
+        <file>settings/MResetSettingsPopup.qml</file>
     </qresource>
 </RCC>

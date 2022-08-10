@@ -60,7 +60,7 @@ Page
                 fontWeight: Font.Bold
                 fontColor: Style.colorBackground
                 
-                onClicked: root.resetAppearanceSettings()
+                onClicked: resetSettingsPopup.open()
             }
         }
         
@@ -448,6 +448,14 @@ Page
                 }
             }
         }
+    }
+    
+    
+    MResetSettingsPopup
+    {
+        id: resetSettingsPopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
     }
     
     
