@@ -12,7 +12,7 @@ Popup
     property var resetSettings
     signal decisionMade
     signal resetChoosed
-    signal cancelChoosed
+    signal keepChoosed
     
     implicitWidth: 646
     implicitHeight: layout.height
@@ -136,7 +136,7 @@ Popup
                             function buttonAction()
                             {
                                 root.keepChoosed();
-                                root.close();
+                                root.decisionMade();
                             }
                         }
                         
@@ -164,19 +164,13 @@ Popup
                             function buttonAction()
                             {
                                 root.resetChoosed();
-                                root.close();
-                                root.deleteMethod();
+                                root.decisionMade();
                             }
                         }
                     }
                 }
             }
         }
-    }
-    
-    function deleteMethod()
-    {
-        
     }
     
     function giveFocus()
