@@ -19,7 +19,7 @@ Popup
     property bool checkBoxStyle: true
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
-    property bool multiSelect: false    
+    property bool multiSelect: false
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
