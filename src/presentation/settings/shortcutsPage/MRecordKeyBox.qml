@@ -68,7 +68,6 @@ Item
                 id: keySequenceRecorder
                 originalSequence: root.originalSequence
                 
-                onCurrentSequenceChanged: recordLabel.text = currentSequence
                 onReturnPressed: stopRecording()
                 onEscapePressed: root.close()
             }
@@ -86,7 +85,9 @@ Item
                     id: recordLabel
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
-                    text: keySequenceRecorder.originalSequence === "" ? "Press to record" : keySequenceRecorder.originalSequence
+                    text: keySequenceRecorder.currentSequence === "" ? 
+                              (keySequenceRecorder.originalSequence === "" ? "Press to record" : keySequenceRecorder.originalSequence)
+                            : keySequenceRecorder.currentSequence
                     font.pointSize: 13
                     font.family: Style.defaultFontFamily
                     color: Style.colorLightText3
@@ -149,6 +150,10 @@ Item
         }
     }
     
+    function clear()
+    {
+        keySequenceRecorder.resetSequence();
+    }
     
     function startRecording()
     {

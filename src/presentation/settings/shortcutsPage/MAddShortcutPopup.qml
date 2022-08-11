@@ -41,7 +41,8 @@ Popup
     onClosed:
     {
         actionComboBox.selectionPopup.deselectCurrenItem();
-        recordBox.stopRecording()
+        recordBox.stopRecording();
+        recordBox.clear();
     }
     
     Shortcut
@@ -146,7 +147,6 @@ Popup
                             // Put the marker on the right item
                             if(selectionPopup.defaultIndex !== -1)
                                 selectionPopup.selectItem(selectionPopup.defaultIndex);
-                            
                         }
                     }
                     
