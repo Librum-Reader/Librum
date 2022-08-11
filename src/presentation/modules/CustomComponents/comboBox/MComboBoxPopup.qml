@@ -99,4 +99,13 @@ Popup
         Logic.changeSelectionMarker(index);
         root.itemChanged();
     }
+    
+    function deselectCurrenItem()
+    {
+        selectedContents = "";
+        listView.currentIndex = -1;
+        
+        if(listView.currentSelected)
+            listView.currentSelected.selected = false;
+    }
 }

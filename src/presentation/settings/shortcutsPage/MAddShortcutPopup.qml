@@ -30,13 +30,18 @@ Popup
         opacity: 1
     }
     
-    onOpened: applyButton.forceActiveFocus()
-    onClosed: recordBox.stopRecording()
-    
-    onPreselectedOptionChanged:
+    onOpened:
     {
+        applyButton.forceActiveFocus();
+        
         if(root.preselectedOption != -1)
             actionComboBox.selectionPopup.selectedContents = shortcutListModel.get(root.preselectedOption).text;
+    }
+    
+    onClosed:
+    {
+        actionComboBox.selectionPopup.deselectCurrenItem();
+        recordBox.stopRecording()
     }
     
     Shortcut
@@ -139,8 +144,7 @@ Popup
                         onOpened:
                         {
                             // Put the marker on the right item
-                            console.log(selectionPopup.defaultIndex);
-                            if(selectionPopup.defaultIndex != -1)
+                            if(selectionPopup.defaultIndex !== -1)
                                 selectionPopup.selectItem(selectionPopup.defaultIndex);
                             
                         }
