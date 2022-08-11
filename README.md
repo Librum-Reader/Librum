@@ -15,7 +15,7 @@ Everyone can download, modify and redistribute the source-code since we are usin
 
 # Details
 
-You will be able to use Librum across all major platforms, including:
+By Librum supported platforms:
 - Windows
 - GNU/Linux
 - MacOS
@@ -24,13 +24,42 @@ You will be able to use Librum across all major platforms, including:
 
 <br>
 
-All common formats will be supported by Librum, this includes:
+Feature list:
+- E-Book reading
+- Free in-app bookstore
+- Cross-platform
+- Book state syncing
+- Highlighting
+- Bookmarks
+- Tags
+- Note taking
+- Chapter navigation
+- TTS
+- Automated page scrolling
+- Syncing with 3rd parties (Google drive, dropbox, nextcloud)
+- Book meta-data editing
+- Library management
+- Custom plugins
+- Fine grained appearance customization
+- Application behavior customization
+- Statistics (optional)
+    - Total time spent read
+    - Daily reading avarage
+    - Days read in a row
+    - Books read in a week/month/year
+    - Total books read
+- No-login book reading
+- Sharing / Priting books
+
+<br>
+
+Librum supports all major book formats, these include:
 - Pdf
 - Epub
 - Mobi
 - Txt
 - Html
-- ... and much more
+- ... and more
 
 
 <br><br>
