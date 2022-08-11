@@ -7,7 +7,6 @@ Item
 {
     id: root
     property alias selectionPopup: selectionPopup
-    
     property bool multiSelect: false
     property int textPadding: 10
     property int headerToBoxSpacing: 2
@@ -100,7 +99,7 @@ Item
                     Layout.alignment: Qt.AlignRight
                     sourceSize.width: root.imageSize
                     source: root.imagePath
-                    rotation: 180
+                    rotation: -180
                     fillMode: Image.PreserveAspectFit
                     
                     NumberAnimation
@@ -108,7 +107,7 @@ Item
                         id: closeAnim
                         target: icon
                         property: "rotation"
-                        to: 0
+                        to: -180
                         duration: 175
                         easing.type: Easing.InOutQuad
                     }
@@ -118,7 +117,7 @@ Item
                         id: openAnim
                         target: icon
                         property: "rotation"
-                        to: -180
+                        to: 0
                         duration: 175
                         easing.type: Easing.InOutQuad
                     }
@@ -147,28 +146,35 @@ Item
         width: parent.width
         multiSelect: root.multiSelect
         
-        onOpenedChanged:
-        {            
-            if(opened)
-            {
-                fitsToBottom = popupFitsToTheBottom();
-                closeAnim.start();
-            }
-            else
-            {
-                openAnim.start();
-            }
+        onOpened: 
+        {
+            fitsToBottom = popupFitsToTheBottom();
+            openAnim.start();
         }
-        
+
+        onClosed: closeAnim.start()
         onItemChanged: root.itemChanged()
+        
+        
+        function popupFitsToTheBottom()
+        {
+            let globalMousePos = mapToGlobal(mouseArea.mouseX, mouseArea.mouseY);
+            if((globalMousePos.y + selectionPopup.height + root.popupSpacing + mouseArea.mouseY) >= baseRoot.height)
+                return false;
+            
+            return true;
+        }
     }
     
     
-    function popupFitsToTheBottom()
+    function selectItem(index)
     {
-        if(mapToGlobal(mouseArea.mouseX, mouseArea.mouseY).y + selectionPopup.height + root.popupSpacing + mouseArea.mouseY >= baseRoot.height)
-            return false;
-        return true;
+        selectionPopup.selectItem(index);
+    }
+    
+    function deselectCurrenItem()
+    {
+        selectionPopup.deselectCurrenItem();
     }
     
     function giveFocus()

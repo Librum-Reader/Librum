@@ -61,7 +61,6 @@ Popup
             focus: true
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar { }
-            
             delegate: MBaseListItem
             {
                 width: listView.width
@@ -90,6 +89,7 @@ Popup
             }
         }
     }
+    
     
     function selectItem(index)
     {

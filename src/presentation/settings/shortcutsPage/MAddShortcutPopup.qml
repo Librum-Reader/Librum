@@ -28,13 +28,13 @@ Popup
         
         // Set the preselected item
         if(root.preselectedOption !== -1)
-            actionsComboBox.selectionPopup.selectItem(preselectedOption);
+            actionsComboBox.selectItem(preselectedOption);
     }
     
     onClosed:
     {
         // Reset data
-        actionsComboBox.selectionPopup.deselectCurrenItem();
+        actionsComboBox.deselectCurrenItem();
         recordBox.stopRecording();
         recordBox.clear();
     }
