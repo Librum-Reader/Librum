@@ -228,10 +228,9 @@ Page
                             anchors.fill: parent
                             propagateComposedEvents: true
                             
-                            onWheel: (wheel) =>
-                                     {
-                                         listView.moveContent( wheel.angleDelta.y > 0)
-                                     }
+                            onWheel: (wheel) => listView.moveContent( wheel.angleDelta.y > 0)
+                            onClicked: (mouse) => mouse.accepted = false;
+                            onPressed: (mouse) => mouse.accepted = false;
                         }
                         
                         
