@@ -14,7 +14,6 @@ Item
     property var itemToRedirectFocusTo
     property bool recording: false
     property string originalSequence: ""
-    signal close
     
     
     Glow
@@ -69,7 +68,6 @@ Item
                 originalSequence: root.originalSequence
                 
                 onReturnPressed: stopRecording()
-                onEscapePressed: root.close()
             }
             
             

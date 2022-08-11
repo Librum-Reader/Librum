@@ -45,6 +45,12 @@ Popup
         onActivated: recordBox.startRecording()
     }
     
+    Shortcut
+    {
+        sequence: "Escape"
+        onActivated: if(!recordBox.recording) root.close()
+    }
+    
     
     ColumnLayout
     {
@@ -142,8 +148,6 @@ Popup
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemToRedirectFocusTo: applyButton
-                        
-                        onClose: root.close()
                     }
                 }
                 

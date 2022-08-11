@@ -98,7 +98,7 @@ Item
                 id: deleteButton
                 Layout.preferredHeight: 37
                 Layout.preferredWidth: 37
-                Layout.leftMargin: 12
+                Layout.leftMargin: 13
                 backgroundColor: "transparent"
                 opacityOnPressed: 0.8
                 borderColor: "transparent"
