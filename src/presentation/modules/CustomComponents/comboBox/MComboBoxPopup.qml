@@ -9,7 +9,7 @@ import "ComboBoxLogic.js" as Logic
 Popup
 {
     id: root
-    property string selectedContents
+    property string selectedContents: ""
     property alias model: listView.model
     property int itemHeight: 28
     property color backgroundColor
@@ -55,8 +55,8 @@ Popup
             Layout.preferredHeight: contentHeight
             Layout.maximumHeight: root.maxHeight
             maximumFlickVelocity: 550
-            currentIndex: root.defaultIndex
             keyNavigationEnabled: true
+            currentIndex: root.defaultIndex
             clip: true
             focus: true
             boundsBehavior: Flickable.StopAtBounds
@@ -73,31 +73,30 @@ Popup
                 checkBoxImageSize: root.checkBoxImageSize
                 checkBoxSize: root.checkBoxSize
                 
-                onClicked: (mouse, index) => listView.selectItem(index);
+                onClicked: (mouse, index) => root.selectItem(index);
             }
             
             
             Keys.onReturnPressed:
             {
                 if(listView.currentIndex !== -1)
-                    selectItem(listView.currentIndex);
+                    root.selectItem(listView.currentIndex);
             }
             
             Component.onCompleted:
             {
                 if(root.defaultIndex != -1)
-                    selectItem(listView.currentIndex);
-            }
-            
-            
-            function selectItem(index)
-            {
-                if(root.multiSelect)
-                    Logic.addItemToResult(index);
-                
-                Logic.changeSelectionMarker(index);
-                root.itemChanged();
+                    root.selectItem(listView.currentIndex);
             }
         }
+    }
+    
+    function selectItem(index)
+    {
+        if(root.multiSelect)
+            Logic.addItemToResult(index);
+        
+        Logic.changeSelectionMarker(index);
+        root.itemChanged();
     }
 }

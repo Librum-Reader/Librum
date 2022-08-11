@@ -9,6 +9,8 @@ import Librum.icons
 Popup
 {
     id: root
+    property var optionsList
+    property int preselectedOption: -1
     signal applied
     
     implicitWidth: 594
@@ -30,6 +32,12 @@ Popup
     
     onOpened: applyButton.forceActiveFocus()
     onClosed: recordBox.stopRecording()
+    
+    onPreselectedOptionChanged:
+    {
+        if(root.preselectedOption != -1)
+            actionComboBox.selectionPopup.selectedContents = shortcutListModel.get(root.preselectedOption).text;
+    }
     
     Shortcut
     {
@@ -118,24 +126,23 @@ Popup
                         titleFontSize: 12.5
                         titleSpacing: 3
                         titleEmptyText: "None selected"
-                        selectionPopup.fontColor: Style.colorLightText3
-                        selectionPopup.fontSize: 12.5
-                        
                         imagePath: Icons.dropdownGray
                         imageSize: 11
                         
-                        selectionPopup.defaultIndex: -1
-                        selectionPopup.model: ListModel
+                        selectionPopup.fontSize: 12.5
+                        selectionPopup.fontColor: Style.colorLightText3
+                        selectionPopup.checkBoxStyle: false
+                        selectionPopup.defaultIndex: root.preselectedOption
+                        selectionPopup.model: shortcutListModel
+                        
+                        
+                        onOpened:
                         {
-                            ListElement { text: "Page adsdsa asd asd af fda sasd" }
-                            ListElement { text: "Any" }
-                            ListElement { text: "Pdf" }
-                            ListElement { text: "Epub"  }
-                            ListElement { text: "Mobi" }
-                            ListElement { text: "Epub"  }
-                            ListElement { text: "Mobi" }
-                            ListElement { text: "Epub"  }
-                            ListElement { text: "Mobi" }
+                            // Put the marker on the right item
+                            console.log(selectionPopup.defaultIndex);
+                            if(selectionPopup.defaultIndex != -1)
+                                selectionPopup.selectItem(selectionPopup.defaultIndex);
+                            
                         }
                     }
                     

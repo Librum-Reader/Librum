@@ -48,7 +48,6 @@ function changeSelectionMarker(index)
         return;
     }
     
-    
     if(listView.currentItem === listView.currentSelected)
     {
         listView.currentSelected.selected = !listView.currentSelected.selected;
@@ -59,7 +58,9 @@ function changeSelectionMarker(index)
     if(listView.currentSelected != null)
         listView.currentSelected.selected = false;
     
-    listView.itemAtIndex(index).selected = true;
-    listView.currentSelected = listView.itemAtIndex(index);
+    
+    let newItem = listView.itemAtIndex(index);
+    newItem.selected = true;
+    listView.currentSelected = newItem;
     root.selectedContents = listView.currentSelected.text;
 }

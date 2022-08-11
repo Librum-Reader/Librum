@@ -8,10 +8,11 @@ import Librum.icons
 Item
 {
     id: root
-    required property string action
-    required property string shortcuts
+    required property int index
+    required property string text
+    required property string shortcut
     signal gapWidthChanged(int newWidth)
-    signal editClicked
+    signal editClicked(int index)
     signal deleteClicked
     
     height: 52
@@ -46,7 +47,7 @@ Item
                 Layout.leftMargin: 12
                 Layout.preferredWidth: 150
                 Layout.alignment: Qt.AlignVCenter
-                text: root.action
+                text: root.text
                 color: Style.colorBaseText
                 font.pointSize: 12
                 font.family: Style.defaultFontFamily
@@ -66,7 +67,7 @@ Item
                 id: shortcutsText
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
-                text: root.shortcuts
+                text: root.shortcut
                 color: Style.colorBaseText
                 font.pointSize: 12
                 font.family: Style.defaultFontFamily
@@ -87,7 +88,7 @@ Item
                 {
                     anchors.fill: parent
                     
-                    onClicked: root.editClicked()
+                    onClicked: root.editClicked(root.index)
                 }
             }
             

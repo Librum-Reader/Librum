@@ -7,11 +7,33 @@ import Librum.icons
 
 
 
-
-
 Page
 {
     id: root
+    property var shortcutListModel: ListModel
+    {
+        ListElement { text: "Up"; shortcut: "Arrow-Up" }
+        ListElement { text: "Down"; shortcut: "Arrow-Down" }
+        ListElement { text: "Next page"; shortcut: "Arrow-Right" }
+        ListElement { text: "Previous page"; shortcut: "Arrow-Left" }
+        ListElement { text: "Search"; shortcut: "Ctrl+F" }
+        ListElement { text: "Full Screen"; shortcut: "Ctrl+Alt+F" }
+        ListElement { text: "Change application theme"; shortcut: "-" }
+        ListElement { text: "Go to home"; shortcut: "Ctrl+Alt+H" }
+        ListElement { text: "Zoom in"; shortcut: "Ctrl++" }
+        ListElement { text: "Zoom out"; shortcut: "Ctrl+-" }
+        ListElement { text: "Open chapters"; shortcut: "Tab" }
+        ListElement { text: "Open bookmarks"; shortcut: "Ctrl+B" }
+        ListElement { text: "Start of document"; shortcut: "Ctrl+Pos1" }
+        ListElement { text: "End of document"; shortcut: "Ctrl+End" }
+        ListElement { text: "Print page"; shortcut: "Ctrl+P" }
+        ListElement { text: "Highlighter"; shortcut: "Alt+1" }
+        ListElement { text: "Open notes"; shortcut: "Alt+2" }
+        ListElement { text: "Create bookmark here"; shortcut: "Alt+3" }
+        ListElement { text: "Pause/Resume speaking"; shortcut: "F5" }
+        ListElement { text: "Reload Librum"; shortcut: "-" }
+    }
+    
     topPadding: 64
     horizontalPadding: 48
     background: Rectangle
@@ -183,34 +205,18 @@ Page
                         clip: true
                         interactive: false
                         
-                        model: ListModel
-                        {
-                            ListElement { action: "Up"; shortcuts: "SCROLL-UP" }
-                            ListElement { action: "Down"; shortcuts: "SCROLL-DOWN" }
-                            ListElement { action: "Next page"; shortcuts: "ARROW-RIGHT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                            ListElement { action: "Previous page"; shortcuts: "ARROW-LEFT" }
-                        }
+                        model: root.shortcutListModel
                         
                         delegate: MShortcutDelegate
                         {
                             onGapWidthChanged: (newWidth) => inDetailsLayout.gapWidth = newWidth
-                            onEditClicked: addShortcutPopup.open()
+                            onEditClicked:
+                                (index) =>
+                                {
+                                    addShortcutPopup.preselectedOption = index;
+                                    addShortcutPopup.open();
+                                }
+                            
                             onDeleteClicked: console.log("delete")
                         }
                         
@@ -240,8 +246,9 @@ Page
     MAddShortcutPopup
     {
         id: addShortcutPopup
-        
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
+        
+        optionsList: root.shortcutListModel
     }
 }

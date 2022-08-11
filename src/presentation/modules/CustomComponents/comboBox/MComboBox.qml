@@ -8,10 +8,6 @@ Item
     id: root
     property alias selectionPopup: selectionPopup
     
-    property var model
-    property int maxPopupHeight
-    property int defaultIndex
-    
     property bool multiSelect: false
     property int textPadding: 10
     property int headerToBoxSpacing: 2
@@ -36,6 +32,7 @@ Item
     property int imageSize: 6
     
     signal clicked
+    signal opened
     signal itemChanged
     
     implicitHeight: 47
@@ -153,7 +150,7 @@ Item
         
         onOpenedChanged:
         {
-            popupFitsToTheBottom();
+            root.opened();
             
             if(opened)
             {
