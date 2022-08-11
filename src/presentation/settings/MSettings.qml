@@ -17,7 +17,7 @@ Page
     property alias appearancePage: appearancePage
     property alias shortcutsPage: shortcutsPage
     property alias updatesPage: updatesPage
-    property alias advancedSettingsPage: generalSettingsPage
+    property alias generalSettingsPage: generalSettingsPage
     property alias accountPage: accountPage
     property alias storagePage: storagePage
     property alias supportUsPage: supportUsPage
@@ -52,7 +52,7 @@ Page
     Shortcut
     {
         sequence: "Shift+5"
-        onActivated: loadSettingsPage(generalSettingsPage, settingsSidebar.advancedSettingsItem)
+        onActivated: loadSettingsPage(generalSettingsPage, settingsSidebar.generalSettingsItem)
     }
     Shortcut
     {
