@@ -9,7 +9,7 @@ import Librum.icons
 Popup
 {
     id: root
-    property var optionsList
+    property var actionsList
     property int preselectedOption: -1
     signal applied
     
@@ -18,29 +18,23 @@ Popup
     focus: true
     closePolicy: Popup.CloseOnPressOutside
     padding: 0
-    background: Rectangle
-    {
-        color: Style.colorBackground
-        radius: 6
-    }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    background: Rectangle { color: Style.colorBackground; radius: 6 }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
     
     onOpened:
     {
         applyButton.forceActiveFocus();
         
-        if(root.preselectedOption != -1)
-            actionComboBox.selectionPopup.selectedContents = shortcutListModel.get(root.preselectedOption).text;
+        // Set the preselected item
+        if(root.preselectedOption !== -1)
+            actionsComboBox.selectionPopup.selectItem(preselectedOption);
     }
     
     onClosed:
     {
-        actionComboBox.selectionPopup.deselectCurrenItem();
+        // Reset data
+        actionsComboBox.selectionPopup.deselectCurrenItem();
         recordBox.stopRecording();
         recordBox.clear();
     }
@@ -120,7 +114,7 @@ Popup
                     
                     MComboBox
                     {
-                        id: actionComboBox
+                        id: actionsComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         selectionPopup.itemHeight: 32
@@ -138,16 +132,7 @@ Popup
                         selectionPopup.fontSize: 12.5
                         selectionPopup.fontColor: Style.colorLightText3
                         selectionPopup.checkBoxStyle: false
-                        selectionPopup.defaultIndex: root.preselectedOption
                         selectionPopup.model: shortcutListModel
-                        
-                        
-                        onOpened:
-                        {
-                            // Put the marker on the right item
-                            if(selectionPopup.defaultIndex !== -1)
-                                selectionPopup.selectItem(selectionPopup.defaultIndex);
-                        }
                     }
                     
                     
@@ -182,6 +167,8 @@ Popup
                         fontColor: active ? Style.colorBrightText : Style.colorLightText2
                         fontWeight: Font.Bold
                         fontSize: 12
+                        KeyNavigation.right: cancelButton
+                        KeyNavigation.tab: cancelButton
                         
                         onClicked: root.close()
                         
@@ -198,9 +185,6 @@ Popup
                                     root.close();
                                 }
                             }
-                        
-                        KeyNavigation.right: cancelButton
-                        KeyNavigation.tab: cancelButton
                     }
                     
                     MButton
@@ -216,6 +200,8 @@ Popup
                         fontColor: active ? Style.colorBrightText : Style.colorLightText2
                         fontWeight: Font.Bold
                         fontSize: 12
+                        KeyNavigation.left: applyButton
+                        KeyNavigation.tab: applyButton
                         
                         onClicked: root.close()
                         
@@ -232,9 +218,6 @@ Popup
                                     root.close();
                                 }
                             }
-                        
-                        KeyNavigation.left: applyButton
-                        KeyNavigation.tab: applyButton
                     }
                 }
             }

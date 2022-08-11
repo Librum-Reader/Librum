@@ -208,9 +208,7 @@ Page
                         anchors.fill: parent
                         clip: true
                         interactive: false
-                        
                         model: root.shortcutListModel
-                        
                         delegate: MShortcutDelegate
                         {
                             onGapWidthChanged: (newWidth) => inDetailsLayout.gapWidth = newWidth
@@ -223,6 +221,7 @@ Page
                             
                             onDeleteClicked: console.log("delete")
                         }
+                        
                         
                         MouseArea
                         {
@@ -253,6 +252,6 @@ Page
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
         
-        optionsList: root.shortcutListModel
+        actionsList: root.shortcutListModel
     }
 }

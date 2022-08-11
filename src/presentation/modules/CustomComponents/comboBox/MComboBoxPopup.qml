@@ -11,7 +11,6 @@ Popup
     id: root
     property string selectedContents: ""
     property alias model: listView.model
-    property alias lW: listView
     property int itemHeight: 28
     property color backgroundColor
     property int maxHeight: 208
@@ -103,11 +102,10 @@ Popup
     
     function deselectCurrenItem()
     {
-        root.selectedContents = "";
-        
         if(listView.currentItem)
             listView.currentItem.selected = false;
         
         listView.currentIndex = -1;
+        root.selectedContents = "";
     }
 }

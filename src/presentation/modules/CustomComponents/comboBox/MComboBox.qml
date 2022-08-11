@@ -32,7 +32,6 @@ Item
     property int imageSize: 6
     
     signal clicked
-    signal opened
     signal itemChanged
     
     implicitHeight: 47
@@ -149,16 +148,16 @@ Item
         multiSelect: root.multiSelect
         
         onOpenedChanged:
-        {
-            root.opened();
-            
+        {            
             if(opened)
             {
                 fitsToBottom = popupFitsToTheBottom();
                 closeAnim.start();
             }
             else
+            {
                 openAnim.start();
+            }
         }
         
         onItemChanged: root.itemChanged()
