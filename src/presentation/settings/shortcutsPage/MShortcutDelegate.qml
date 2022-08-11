@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import CustomComponents
 import Librum.style
 import Librum.icons
 
@@ -76,39 +77,37 @@ Item
             
             Item { Layout.fillWidth: true }
             
-            Image
+            MButton
             {
-                id: editIcon
-                Layout.alignment: Qt.AlignVCenter
-                sourceSize.width: 23
-                source: Icons.edit
-                fillMode: Image.PreserveAspectFit
+                id: editButton
+                Layout.preferredHeight: 37
+                Layout.preferredWidth: 37
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.8
+                borderColor: "transparent"
+                radius: 6
+                borderColorOnPressed: Style.colorLightBorder
+                imagePath: Icons.edit
+                imageSize: 23
                 
-                MouseArea
-                {
-                    anchors.fill: parent
-                    
-                    onClicked: root.editClicked(root.index)
-                }
+                onClicked: root.editClicked(root.index)
             }
             
-            
-            Image
+            MButton
             {
-                id: deleteIcon
-                Layout.leftMargin: 28
-                Layout.rightMargin: 6
-                Layout.alignment: Qt.AlignVCenter
-                sourceSize.width: 21
-                source: Icons.trashGray
-                fillMode: Image.PreserveAspectFit
+                id: deleteButton
+                Layout.preferredHeight: 37
+                Layout.preferredWidth: 37
+                Layout.leftMargin: 12
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.8
+                borderColor: "transparent"
+                radius: 6
+                borderColorOnPressed: Style.colorLightBorder
+                imagePath: Icons.trashGray
+                imageSize: 21
                 
-                MouseArea
-                {
-                    anchors.fill: parent
-                    
-                    onClicked: root.deleteClicked()
-                }
+                onClicked: root.deleteClicked()
             }
         }
     }
