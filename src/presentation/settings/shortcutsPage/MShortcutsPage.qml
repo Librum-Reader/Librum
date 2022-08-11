@@ -98,7 +98,11 @@ Page
                 fontSize: 13
                 imagePath: Icons.plusWhite
                 
-                onClicked: addShortcutPopup.open()
+                onClicked:
+                {
+                    addShortcutPopup.preselectedOption = -1;
+                    addShortcutPopup.open();
+                }
             }
         }
         

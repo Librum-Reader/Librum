@@ -11,6 +11,7 @@ Popup
     id: root
     property string selectedContents: ""
     property alias model: listView.model
+    property alias lW: listView
     property int itemHeight: 28
     property color backgroundColor
     property int maxHeight: 208
@@ -26,6 +27,11 @@ Popup
     property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
     signal itemChanged
+    
+    onSelectedContentsChanged: 
+    {
+        console.log("selected contents changed to: " + selectedContents)
+    }
     
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -102,10 +108,12 @@ Popup
     
     function deselectCurrenItem()
     {
-        selectedContents = "";
-        listView.currentIndex = -1;
+        root.selectedContents = "";
+        console.log(listView.currentItem);
         
-        if(listView.currentSelected)
-            listView.currentSelected.selected = false;
+        if(listView.currentItem)
+            listView.currentItem.selected = false;
+        
+        listView.currentIndex = -1;
     }
 }
