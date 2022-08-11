@@ -28,11 +28,6 @@ Popup
     property string highlightColor: Style.colorLightPurple
     signal itemChanged
     
-    onSelectedContentsChanged: 
-    {
-        console.log("selected contents changed to: " + selectedContents)
-    }
-    
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
     focus: true
@@ -109,7 +104,6 @@ Popup
     function deselectCurrenItem()
     {
         root.selectedContents = "";
-        console.log(listView.currentItem);
         
         if(listView.currentItem)
             listView.currentItem.selected = false;
