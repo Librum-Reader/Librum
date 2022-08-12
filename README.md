@@ -80,7 +80,7 @@ Instructions to get Librum up and running in your environment.
 ### Installation
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Etovex/Librum.git
+    git clone --recurse-submodules -j8 https://github.com/Etovex/Librum.git
     ```
 2. Step into the cloned project folder.
     ```sh
@@ -135,7 +135,7 @@ Instructions to get Librum up and running in your environment.
 ### Installation
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Etovex/Librum.git
+    git clone --recurse-submodules -j8 https://github.com/Etovex/Librum.git
     ```
 2. Open the project in Qt creator by clicking on File -> Open File or Project... and selecting the CMakeLists.txt)
 3. Run Librum
