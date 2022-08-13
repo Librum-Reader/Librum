@@ -14,10 +14,17 @@ set(CMAKE_AUTORCC ON)
 add_library(application
                 SHARED
                     interfaces/services/i_authentication_service.hpp
+                    interfaces/services/i_book_service.hpp
                     interfaces/gateways/i_user_storage_gateway.hpp
+                    interfaces/converters/i_pdf_to_rum_converter.hpp
                     
                     services/authentication_service.cpp
                     services/authentication_service.hpp
+                    services/book_service.cpp
+                    services/book_service.hpp
+                    
+                    converters/pdf_to_rum_converter.cpp
+                    converters/pdf_to_rum_converter.hpp
 )
 
 target_include_directories(application
@@ -25,6 +32,8 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
+                    ${CMAKE_CURRENT_SOURCE_DIR}/converters
                     ${DOMAIN_INCLUDES}
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}

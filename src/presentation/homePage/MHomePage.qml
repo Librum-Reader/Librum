@@ -6,6 +6,7 @@ import Librum.Elements
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.controllers
 import "toolbar"
 import "indexbar"
 import "tags"
@@ -140,7 +141,7 @@ Page
                         (index, mouse) =>
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                                                        
+                            
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
                             bookOptionsPopup.open();
@@ -320,7 +321,13 @@ Page
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
         
-        onAccepted: root.empty = false
+        onAccepted:
+        {
+            root.empty = false;
+            
+            BookController.uploadBook(file);
+        }
+        
         onRejected: root.empty = false
     }
 }

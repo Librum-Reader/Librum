@@ -12,6 +12,7 @@
 #include <boost/di.hpp>
 #include "dependency_injection.hpp"
 #include "i_authentication_service.hpp"
+#include "i_book_controller.hpp"
 
 
 void registerTypes();
@@ -39,6 +40,10 @@ int main(int argc, char *argv[])
     
     auto authenticationController = config::diConfig().create<adapters::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);
+    
+    auto bookController = config::diConfig().create<adapters::IBookController*>();
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController", bookController);
+    
     
     
     

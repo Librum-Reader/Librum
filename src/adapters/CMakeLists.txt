@@ -14,10 +14,13 @@ set(CMAKE_AUTORCC ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
+                    interfaces/controllers/i_book_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    controllers/book_controller.cpp
+                    controllers/book_controller.hpp
                     
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp

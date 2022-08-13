@@ -1,5 +1,7 @@
 #pragma once
 #include <boost/di.hpp>
+#include "book_controller.hpp"
+#include "i_book_controller.hpp"
 #include "i_authentication_controller.hpp"
 #include "authentication_controller.hpp"
 #include "i_authentication_service.hpp"
@@ -8,6 +10,10 @@
 #include "user_storage_gateway.hpp"
 #include "i_user_storage_access.hpp"
 #include "user_storage_access.hpp"
+#include "i_book_service.hpp"
+#include "book_service.hpp"
+#include "i_pdf_to_rum_converter.hpp"
+#include "pdf_to_rum_converter.hpp"
 
 
 namespace di = boost::di;
@@ -21,7 +27,11 @@ const auto diConfig = [] {
                 di::bind<adapters::IAuthenticationController>().to<adapters::controllers::AuthenticationController>(),
                 di::bind<application::IAuthenticationService>().to<application::services::AuthenticationService>(),
                 di::bind<application::IUserStorageGateway>().to<adapters::gateways::UserStorageGateway>(),
-                di::bind<adapters::IUserStorageAccess>().to<infrastructure::persistence::UserStorageAccess>()
+                di::bind<adapters::IUserStorageAccess>().to<infrastructure::persistence::UserStorageAccess>(),
+                
+                di::bind<adapters::IBookController>().to<adapters::controllers::BookController>(),
+                di::bind<application::IBookService>().to<application::services::BookService>(),
+                di::bind<application::IPdfToRumConverter>().to<application::converters::PdfToRumConverter>()
                 );
 };
 
