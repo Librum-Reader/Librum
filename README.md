@@ -13,6 +13,8 @@ Everyone can download, modify and redistribute the source-code since we are usin
 
 <br>
 
+Librum is still in <b>development</b>, many core functionalities are not yet implemented!
+
 # Details
 
 By Librum supported platforms:
