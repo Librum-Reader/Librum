@@ -56,12 +56,19 @@ Feature list:
 <br>
 
 Librum supports all major book formats, these include:
-- Pdf
-- Epub
-- Mobi
-- Txt
-- Html
-- ... and more
+- PDF
+- PS
+- Tiff
+- CHM
+- DjVu
+- Images
+- DVI
+- XPS
+- Fiction Book
+- Comic Book
+- Plucker
+- Pub
+- Fax
 
 
 <br><br>
