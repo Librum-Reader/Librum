@@ -1,17 +1,20 @@
 # Librum
 
-Librum's mission is to make your reading experience as <b>good</b> and <b>simple</b> as possible.
+Librum's objective is to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible. <br>
 
-Librum offers lots of functionalities, which you can use through a <b>modern</b> and <b>simplistic</b> interface.<br>
-With Librum, you can create and manage your own library of books and files, which you can access from <b>all</b> of your devices.<br>
-You can comfortably read your book through the app, <b>highlight</b> sections you find interesting and add <b>bookmarks</b> on pages you want to revisit. On top, Librum
-makes it possible for you, to take <b>notes</b> on what you've read, directly from the app.<br>
-Librum also offers a <b>free</b> in-app bookstore, plugins to make you even more productive and the possibility, to fully customize the application, so that it looks and behaves as you want.
-
-Librum's focus lies on being <b>modern</b>, completely <b>opensource</b>, <b>free</b> and <b>fast</b>.</br>
-Everyone can download, modify and redistribute the source-code since we are using a complete copyleft license.
+Librum offers a wide range of options, that may be accessed via a modern and straightforward interface.<br>
+Librum allows you to create and manage your own <b>library</b> of books and documents, which you can access from <b>any device</b>.<br>
+You can <b>read</b> your book comfortably through the app, <b>highlight</b> sections that interest you, and <b>bookmark</b> pages that you wish to return to.<br>
+Other features of Librum include taking <b>notes</b> directly from the app, a free in-app <b>bookstore</b>, productivity-boosting plugins, and many more.
 
 <br>
+
+The primary goals of Librum are to be <b>modern</b>, entirely <b>opensource</b>, <b>cost-free</b>, <b>customizable</b> and <b>fast</b>.</br>
+Due to the complete copyleft license we are utilizing, anyone can download, edit, and redistribute the source code. 
+
+<br>
+
+<b>Note</b>: Librum is currently in development, and many fundamental features have yet to be implemented! 
 
 # Details
 
@@ -54,12 +57,19 @@ Feature list:
 <br>
 
 Librum supports all major book formats, these include:
-- Pdf
-- Epub
-- Mobi
-- Txt
-- Html
-- ... and more
+- PDF
+- PS
+- Tiff
+- CHM
+- DjVu
+- Images
+- DVI
+- XPS
+- Fiction Book
+- Comic Book
+- Plucker
+- Pub
+- Fax
 
 
 <br><br>
@@ -80,7 +90,7 @@ Instructions to get Librum up and running in your environment.
 ### Installation
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Etovex/Librum.git
+    git clone --recurse-submodules -j8 https://github.com/Etovex/Librum.git
     ```
 2. Step into the cloned project folder.
     ```sh
@@ -127,21 +137,7 @@ Instructions to get Librum up and running in your environment.
 <br>
 
 ## For Windows
-### Prerequisites
-- cmake (at least 3.20)            https://cmake.org/download/
-- make (or any other build system) http://ftp.gnu.org/gnu/make/
-- Qt6                              https://www.qt.io/download
-- mingw                            https://sourceforge.net/projects/mingw/
-### Installation
-1. Clone the repository.
-    ```sh
-    git clone https://github.com/Etovex/Librum.git
-    ```
-2. Open the project in Qt creator by clicking on File -> Open File or Project... and selecting the CMakeLists.txt)
-3. Run Librum
-<br>
-
-<br>
+Not yet officially supported. Support coming soon!
 
 ## For macOS
 Not yet officially supported. Support coming soon!
