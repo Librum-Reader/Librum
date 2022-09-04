@@ -71,6 +71,7 @@ Item
                 anchors.fill: parent
                 spacing: 0
                 
+                
                 TextField
                 {
                     id: inputField
@@ -87,13 +88,21 @@ Item
                     placeholderTextColor: root.placeholderColor
                     echoMode: root.textHidden ? TextInput.Password : TextInput.Normal
                     background: Rectangle   
-                    {   
+                    {
                         anchors.fill: parent
                         radius: root.borderRadius
                         color: "transparent"
                     }
                     
                     onTextEdited: root.edited()
+                    
+                    Component.onCompleted:
+                    {
+                        if((inputBox.height/inputField.implicitHeight) / 2 > 0.1)
+                        {
+                            inputField.Layout.topMargin = inputField.Layout.topMargin - 1;
+                        }
+                    }
                 }
                 
                 Image
