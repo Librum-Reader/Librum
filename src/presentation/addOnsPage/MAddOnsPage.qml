@@ -5,6 +5,7 @@ import QtQuick.Layouts 1.15
 Page
 {
     id: root
+    background: Rectangle { color: "gray" }
     
     Label
     {
