@@ -1,8 +1,7 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
 
-add_subdirectory(rum_content/)
 
 
 
@@ -25,6 +24,5 @@ target_include_directories(domain
 
 target_link_libraries(domain
                 PRIVATE
-                    rum_content
-                    Qt6::Core
+                    Qt5::Core
 )

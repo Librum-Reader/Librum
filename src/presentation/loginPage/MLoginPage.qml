@@ -1,16 +1,18 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import CustomComponents
-import Librum.style
-import Librum.icons
-import Librum.controllers
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
+import CustomComponents 1.0
+import Librum.style 1.0
+import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 MFlickWrapper
 {
     id: root
     contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
+    
     
     Page
     {
@@ -72,7 +74,6 @@ MFlickWrapper
                         color: Style.colorBaseText
                         font.bold: true
                         font.pointSize: 26
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -83,7 +84,7 @@ MFlickWrapper
                         text: "Log into your account"
                         color: Style.colorLightText2
                         font.pointSize: 13
-                        font.family: Style.defaultFontFamily
+                        font.letterSpacing: 0.7
                     }
                     
                     
@@ -167,6 +168,7 @@ MFlickWrapper
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 4
                             font.pointSize: 11
+                            font.family: Style.defaultFontFamily
                             color: Style.colorMediumText
                         }
                         
@@ -181,7 +183,7 @@ MFlickWrapper
                             text: "Forgot password?"
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 3
-                            font.pointSize: 10
+                            font.pointSize: 10.5
                             color: Style.colorBasePurple
                             
                             MouseArea
@@ -246,7 +248,7 @@ MFlickWrapper
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
                 text: "Don't have an account? Register"
-                font.pointSize: 10
+                font.pointSize: 10.5
                 color: Style.colorBasePurple
                 
                 MouseArea

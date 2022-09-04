@@ -11,7 +11,7 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CU
 
 
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Quick Widgets REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Quick Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets REQUIRED)
 
 
@@ -41,32 +41,32 @@ add_subdirectory(presentation/)
 
 
 # Building
-qt_add_executable(appLibrum
-                    main.cpp
-                    dependency_injection.hpp
+add_executable(appLibrum
+    main.cpp
+    dependency_injection.hpp
 )
 
 target_compile_definitions(appLibrum
-                PRIVATE
-                        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+    PRIVATE
+    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 
 target_link_libraries(appLibrum
-                PRIVATE
-                    presentation
-                    adapters
-                    application
-                    infrastructure
-                    Qt6::Quick
-                    Qt6::Widgets
+    PRIVATE
+    presentation
+    adapters
+    application
+    infrastructure
+    Qt5::Quick
+    Qt5::Widgets
 )
 
 target_include_directories(appLibrum
-                PRIVATE
-                    ${ADAPTERS_INCLUDES}
-                    ${APPLICATION_INCLUDES}
-                    ${INFRASTRUCTURE_INCLUDES}
-                    ${PROJECT_SOURCE_DIR}/libs/di/include
+    PRIVATE
+    ${ADAPTERS_INCLUDES}
+    ${APPLICATION_INCLUDES}
+    ${INFRASTRUCTURE_INCLUDES}
+    ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

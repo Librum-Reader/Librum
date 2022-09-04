@@ -17,7 +17,7 @@ public:
     int childCount() const;
     int columnCount() const;
     QString data() const;
-    int row() const;
+    int row();
     ChapterTreeNode* parentNode();
     
     

@@ -3,15 +3,14 @@
 namespace application::services
 {
 
-BookService::BookService(IPdfToRumConverter* pdfToRumConverter)
-    : m_pdfToRumConverter(pdfToRumConverter)
+BookService::BookService()
 {
     
 }
 
 void BookService::uploadBook(QString path)
 {
-    m_pdfToRumConverter->convertToRum(path);
+    Q_UNUSED(path)
 }
 
 } // namespace application::services

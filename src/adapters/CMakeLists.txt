@@ -1,5 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Quick Network REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
 
 
@@ -42,12 +42,12 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
-                PRIVATE
-                    ${DOMAIN_INCLUDES}
-                    ${APPLICATION_INCLUDES}
-                    ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
+                PRIVATE
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${DOMAIN_INCLUDES}
+                    ${APPLICATION_INCLUDES}
 )
 
 target_compile_definitions(adapters
@@ -59,18 +59,10 @@ target_link_libraries(adapters
                 PRIVATE
                     domain
                     application
-                    Qt6::Core
-                    Qt6::Quick
-                    Qt6::Network
+                    Qt5::Core
+                    Qt5::Quick
+                    Qt5::Network
 )
 
 target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(adapters PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
-
-
-
-# Qml-Module
-qt_add_qml_module(adapters
-  URI "Librum.Models"
-  VERSION 1.0
-)

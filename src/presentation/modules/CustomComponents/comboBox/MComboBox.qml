@@ -1,7 +1,7 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Librum.style
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Librum.style 1.0
 
 Item
 {
@@ -74,7 +74,8 @@ Item
             RowLayout
             {
                 id: inContainerLayout
-                anchors.fill: parent
+                width: parent.width
+                anchors.centerIn: parent
                 spacing: root.imageSpacing
                 
                 

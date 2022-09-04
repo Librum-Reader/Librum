@@ -1,7 +1,0 @@
-- Good resize management of book grid
-
-- Refactoring after everything is working as it should
-    - Fix logout
-    - Fix profile popup not closing on clicking it again
-    - Fix colors
-    - Fix sidebar icons

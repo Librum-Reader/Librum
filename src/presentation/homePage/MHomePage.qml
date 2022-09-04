@@ -1,12 +1,13 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Qt.labs.platform
-import Librum.Elements
-import CustomComponents
-import Librum.style
-import Librum.icons
-import Librum.controllers
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Qt.labs.platform 1.0
+import Librum.elements 1.0
+import CustomComponents 1.0
+import QtQml.Models 2.15
+import Librum.style 1.0
+import Librum.icons 1.0
+import Librum.controllers 1.0
 import "toolbar"
 import "indexbar"
 import "tags"

@@ -1,8 +1,8 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Librum.style
-import CustomComponents
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Librum.style 1.0
+import CustomComponents 1.0
 import "settingsSidebar"
 import "shortcutsPage"
 import "updatesPage"

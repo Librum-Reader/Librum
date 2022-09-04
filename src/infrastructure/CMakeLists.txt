@@ -1,5 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt6 COMPONENTS Core Network REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 
@@ -31,8 +31,8 @@ target_compile_definitions(infrastructure
 target_link_libraries(infrastructure
                 PRIVATE
                     adapters
-                    Qt6::Core
-                    Qt6::Network
+                    Qt5::Core
+                    Qt5::Network
 )
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

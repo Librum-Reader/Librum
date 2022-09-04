@@ -1,10 +1,11 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Librum.Elements
-import Librum.Models
-import Librum.style
-import Librum.icons
+import QtQuick 2.15
+import QtQuick.Controls 1.5
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Librum.elements 1.0
+import Librum.models 1.0
+import Librum.style 1.0
+import Librum.icons 1.0
 
 
 Item
@@ -98,117 +99,117 @@ Item
                         property int selectedItemRow
                         property int selectedItemDepth
                         
-                        anchors.fill: parent
-                        anchors.rightMargin: 12
-                        boundsMovement: Flickable.StopAtBounds
-                        maximumFlickVelocity: 550
-                        reuseItems: false
-                        clip: true
+//                        anchors.fill: parent
+//                        anchors.rightMargin: 12
+//                        boundsMovement: Flickable.StopAtBounds
+//                        maximumFlickVelocity: 550
+//                        reuseItems: false
+//                        clip: true
                         
-                        model: ChapterTreeModel { }
-                        delegate: Item
-                        {
-                            id: treeDelegate
-                            required property TreeView treeView
-                            required property int row
-                            required property int column
-                            required property bool isTreeNode
-                            required property bool expanded
-                            required property int hasChildren
-                            required property int depth
+//                        model: ChapterTreeModel { }
+//                        delegate: Item
+//                        {
+//                            id: treeDelegate
+//                            required property TreeView treeView
+//                            required property int row
+//                            required property int column
+//                            required property bool isTreeNode
+//                            required property bool expanded
+//                            required property int hasChildren
+//                            required property int depth
                             
-                            readonly property real indent: 16
-                            property bool selected: false
+//                            readonly property real indent: 16
+//                            property bool selected: false
                             
-                            implicitWidth: treeView.width
-                            implicitHeight: labelBox.height
+//                            implicitWidth: treeView.width
+//                            implicitHeight: labelBox.height
                             
                             
-                            RowLayout
-                            {
-                                id: deleagteLayout
-                                anchors.fill: parent
-                                anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
-                                spacing: 4
+//                            RowLayout
+//                            {
+//                                id: deleagteLayout
+//                                anchors.fill: parent
+//                                anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
+//                                spacing: 4
                                 
                                 
-                                Item { Layout.fillHeight: true; Layout.preferredWidth: 2 }
+//                                Item { Layout.fillHeight: true; Layout.preferredWidth: 2 }
                                 
-                                Image
-                                {
-                                    id: indicator
-                                    visible: treeDelegate.isTreeNode && treeDelegate.hasChildren
-                                    source: Icons.arrowRightGray
-                                    sourceSize.width: 7
-                                    fillMode: Image.PreserveAspectFit
-                                    rotation: treeDelegate.expanded ? 90 : 0
+//                                Image
+//                                {
+//                                    id: indicator
+//                                    visible: treeDelegate.isTreeNode && treeDelegate.hasChildren
+//                                    source: Icons.arrowRightGray
+//                                    sourceSize.width: 7
+//                                    fillMode: Image.PreserveAspectFit
+//                                    rotation: treeDelegate.expanded ? 90 : 0
                                     
-                                    TapHandler
-                                    {
-                                        onTapped: treeView.toggleExpanded(row)
-                                    }
-                                }
+//                                    TapHandler
+//                                    {
+//                                        onTapped: treeView.toggleExpanded(row)
+//                                    }
+//                                }
                                 
-                                Rectangle
-                                {
-                                    id: labelBox
-                                    Layout.fillWidth: true
-                                    Layout.preferredHeight: 22
+//                                Rectangle
+//                                {
+//                                    id: labelBox
+//                                    Layout.fillWidth: true
+//                                    Layout.preferredHeight: 22
                                     
-                                    color: treeDelegate.selected ? Style.colorSidebarMark
-                                                                 : itemHoverDetector.containsMouse ? Style.colorLightGray 
-                                                                                                   : "transparent"
-                                    radius: 2
+//                                    color: treeDelegate.selected ? Style.colorSidebarMark
+//                                                                 : itemHoverDetector.containsMouse ? Style.colorLightGray 
+//                                                                                                   : "transparent"
+//                                    radius: 2
                                     
                                     
-                                    Label
-                                    {
-                                        id: label
-                                        anchors.fill: parent
-                                        verticalAlignment: Text.AlignVCenter
-                                        horizontalAlignment: Text.AlignLeft
-                                        anchors.leftMargin: 4
-                                        text: model.display
-                                        font.family: Style.defaultFontFamily
-                                        font.pointSize: 10.5
-                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
-                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorBaseText
-                                        elide: Text.ElideRight
-                                    }
+//                                    Label
+//                                    {
+//                                        id: label
+//                                        anchors.fill: parent
+//                                        verticalAlignment: Text.AlignVCenter
+//                                        horizontalAlignment: Text.AlignLeft
+//                                        anchors.leftMargin: 4
+//                                        text: model.display
+//                                        font.family: Style.defaultFontFamily
+//                                        font.pointSize: 10.5
+//                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
+//                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorBaseText
+//                                        elide: Text.ElideRight
+//                                    }
                                     
-                                    MouseArea
-                                    {
-                                        id: itemHoverDetector
-                                        anchors.fill: parent
-                                        hoverEnabled: true
+//                                    MouseArea
+//                                    {
+//                                        id: itemHoverDetector
+//                                        anchors.fill: parent
+//                                        hoverEnabled: true
                                         
-                                        onClicked:
-                                        {
-                                            treeDelegate.changeSelectedItem(treeDelegate);
-                                        }
-                                    }
-                                }
-                            }
+//                                        onClicked:
+//                                        {
+//                                            treeDelegate.changeSelectedItem(treeDelegate);
+//                                        }
+//                                    }
+//                                }
+//                            }
                         
                             
-                            Component.onCompleted:
-                            {
-                                if(treeDelegate.depth == treeView.selectedItemDepth && treeDelegate.row == treeView.selectedItemRow)
-                                    treeDelegate.selected = true;
-                            }
+//                            Component.onCompleted:
+//                            {
+//                                if(treeDelegate.depth == treeView.selectedItemDepth && treeDelegate.row == treeView.selectedItemRow)
+//                                    treeDelegate.selected = true;
+//                            }
                             
-                            function changeSelectedItem(item)
-                            {   
-                                let selectedItem = treeView.itemAtCell(treeView.selectedItemDepth, treeView.selectedItemRow);                                    
+//                            function changeSelectedItem(item)
+//                            {   
+//                                let selectedItem = treeView.itemAtCell(treeView.selectedItemDepth, treeView.selectedItemRow);                                    
                                 
-                                if(selectedItem)
-                                    selectedItem.selected = false;
+//                                if(selectedItem)
+//                                    selectedItem.selected = false;
                                 
-                                item.selected = true;
-                                treeView.selectedItemRow = item.row;
-                                treeView.selectedItemDepth = item.depth;
-                            }
-                        }
+//                                item.selected = true;
+//                                treeView.selectedItemRow = item.row;
+//                                treeView.selectedItemDepth = item.depth;
+//                            }
+//                        }
                     }
                 }
             }

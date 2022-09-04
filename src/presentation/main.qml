@@ -1,6 +1,8 @@
-import QtQuick 
-import QtQuick.Controls
-import QtQuick.Layouts
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
+import Librum.models 1.0
 
 import "sidebar"
 import "homePage"
@@ -25,6 +27,7 @@ ApplicationWindow
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
+    
     
     RowLayout
     {
@@ -108,7 +111,7 @@ ApplicationWindow
             baseRoot.minimumWidth = 550;
         else
             baseRoot.minimumWidth = baseRoot.defaultMinimumWidth;
-            
+        
     }
     
     

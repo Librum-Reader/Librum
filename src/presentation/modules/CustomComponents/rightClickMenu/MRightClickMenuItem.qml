@@ -1,7 +1,7 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Librum.style
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Librum.style 1.0
 
 
 Item
@@ -64,12 +64,12 @@ Item
                 id: actionText
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignLeft
+                Layout.topMargin: -1
                 text: root.text
                 font.weight: Font.Medium
                 font.pointSize: 11
                 font.family: Style.defaultFontFamily
-                font.letterSpacing: -0.3
-                
+                font.letterSpacing: 0.5
                 color: Style.colorLightText3
                 elide: Text.ElideRight
             }

@@ -1,11 +1,12 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import CustomComponents
-import Librum.style
-import Librum.icons
-import Librum.globals
-import Librum.controllers
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
+import CustomComponents 1.0
+import Librum.style 1.0
+import Librum.icons 1.0
+import Librum.globals 1.0
+import Librum.controllers 1.0
 
 
 MFlickWrapper
@@ -304,7 +305,7 @@ MFlickWrapper
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
                 text: "Already have an account? Login"
-                font.pointSize: 10
+                font.pointSize: 10.5
                 color: Style.colorBasePurple
                 
                 

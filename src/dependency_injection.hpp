@@ -12,8 +12,6 @@
 #include "user_storage_access.hpp"
 #include "i_book_service.hpp"
 #include "book_service.hpp"
-#include "i_pdf_to_rum_converter.hpp"
-#include "pdf_to_rum_converter.hpp"
 
 
 namespace di = boost::di;
@@ -22,7 +20,6 @@ namespace config
 {
 
 const auto diConfig = [] {
-    
     return di::make_injector(
                 di::bind<adapters::IAuthenticationController>().to<adapters::controllers::AuthenticationController>(),
                 di::bind<application::IAuthenticationService>().to<application::services::AuthenticationService>(),
@@ -30,8 +27,7 @@ const auto diConfig = [] {
                 di::bind<adapters::IUserStorageAccess>().to<infrastructure::persistence::UserStorageAccess>(),
                 
                 di::bind<adapters::IBookController>().to<adapters::controllers::BookController>(),
-                di::bind<application::IBookService>().to<application::services::BookService>(),
-                di::bind<application::IPdfToRumConverter>().to<application::converters::PdfToRumConverter>()
+                di::bind<application::IBookService>().to<application::services::BookService>()
                 );
 };
 

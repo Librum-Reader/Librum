@@ -1,8 +1,8 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import Librum.style
-import Librum.icons
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import Librum.style 1.0
+import Librum.icons 1.0
 
 
 Item 
@@ -82,7 +82,7 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
-                    Layout.topMargin: 6
+                    Layout.topMargin: 5
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
@@ -96,7 +96,7 @@ Item
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 2
+                    Layout.topMargin: 4
                     text: "Stephen R. Covey"
                     color: Style.colorLightText
                     font.pointSize: 10
@@ -114,7 +114,7 @@ Item
                         id: percentageBox
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
-                        Layout.topMargin: 8
+                        Layout.topMargin: 7
                         color: Style.colorLightPurple2
                         radius: 2
                         

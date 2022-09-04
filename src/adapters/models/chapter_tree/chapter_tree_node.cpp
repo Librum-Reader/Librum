@@ -42,10 +42,10 @@ int ChapterTreeNode::columnCount() const
 QString ChapterTreeNode::data() const
 {
     return m_data;
-}
+}   
 
-int ChapterTreeNode::row() const
-{
+int ChapterTreeNode::row()
+{   
     if(m_parentNode)
         return m_parentNode->m_childNodes.indexOf(this);
     

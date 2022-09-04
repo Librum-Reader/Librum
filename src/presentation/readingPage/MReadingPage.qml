@@ -1,9 +1,8 @@
-import QtQuick
-import QtQuick.Controls
-import QtQuick.Layouts
-import QtQuick.Pdf
-import CustomComponents
-import Librum.style
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+import CustomComponents 1.0
+import Librum.style 1.0
 import "readingToolbar"
 import "readingSearchbar"
 

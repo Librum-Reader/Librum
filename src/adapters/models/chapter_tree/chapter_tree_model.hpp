@@ -2,7 +2,6 @@
 #include <memory>
 #include <QModelIndex>
 #include <qnamespace.h>
-#include <qqmlintegration.h>
 #include <QObject>
 #include <QAbstractItemModel>
 #include "chapter_tree_node.hpp"
@@ -13,7 +12,6 @@ namespace adapters::models
 class ChapterTreeModel : public QAbstractItemModel
 {
     Q_OBJECT
-    QML_ELEMENT
     
 public:
     ChapterTreeModel(QObject *parent = nullptr);
