@@ -130,6 +130,7 @@ Item
                             Layout.fillWidth: true
                             Layout.fillHeight: true
                             Layout.alignment: Qt.AlignVCenter
+                            leftPadding: 4
                             selectByMouse: true
                             color: Style.colorBaseText
                             font.pointSize: 12
