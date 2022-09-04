@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.elements 1.0
-import QtGraphicalEffects 1.12
+import QtGraphicalEffects 1.15
 import Librum.style 1.0
 import Librum.icons 1.0
 
@@ -25,9 +25,9 @@ Item
         x: button.x
         y: button.y
         spread: 0
+        samples: 12
         transparentBorder: true
         color: "#A92224"
-        
         source: button
     }
     
@@ -120,7 +120,6 @@ Item
             }
             
             startRecording();
-            button.forceActiveFocus();
         }
     }
     
@@ -136,7 +135,7 @@ Item
             target: backgroundGlow
             property: "radius"
             duration: 600
-            to: 16
+            to: 10
         }
         
         PropertyAnimation

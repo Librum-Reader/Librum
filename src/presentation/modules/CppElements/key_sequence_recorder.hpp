@@ -12,7 +12,6 @@ class KeySequenceRecorder : public QQuickItem
     Q_OBJECT
     Q_PROPERTY(QString originalSequence READ originalSequence WRITE setOriginalSequence NOTIFY originalSequenceChanged)
     Q_PROPERTY(QString currentSequence READ currentSequence NOTIFY currentSequenceChanged)
-    QML_ELEMENT
 
 public:
     QString originalSequence() const;
