@@ -125,18 +125,12 @@ Popup
                         ScrollView
                         {
                             id: bookInformationLayout
-                            Layout.preferredHeight: 262
+                            Layout.preferredHeight: 263
                             Layout.fillWidth: true
-                            Layout.topMargin: -5
+                            Layout.topMargin: -4
                             contentWidth: width
                             clip: true
-                            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                            ScrollBar.vertical: ScrollBar
-                            {
-                                anchors.right: parent.right
-                                height: parent.availableHeight
-                                policy: ScrollBar.AlwaysOn
-                            }
+                            ScrollBar.vertical.policy: ScrollBar.AlwaysOn
                             
                             Component.onCompleted: contentItem.maximumFlickVelocity = 600
                             
@@ -147,7 +141,7 @@ Popup
                                 anchors.left: parent.left
                                 anchors.right: parent.right
                                 anchors.rightMargin: 16
-                                spacing: 17
+                                spacing: 16
                                 
                                 
                                 MLabeledInputBox
@@ -325,6 +319,7 @@ Popup
                                 color: Style.colorLightText3
                                 font.pointSize: 12
                                 font.family: Style.defaultFontFamily
+                                
                                 readOnly: true
                                 background: Rectangle   
                                 {   

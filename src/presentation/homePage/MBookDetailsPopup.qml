@@ -213,30 +213,21 @@ Popup
                     {
                         id: inputSideLayout
                         anchors.fill: parent
+                        anchors.topMargin: -5
+                        anchors.rightMargin: -10
                         anchors.leftMargin: 26
                         contentWidth: width
-                        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                        ScrollBar.vertical: ScrollBar
-                        {
-                            x: parent.width
-                            y: parent.topPadding
-                            height: parent.availableHeight
-                            policy: ScrollBar.AlwaysOn
-                            onActiveChanged:
-                            {
-                                if(!active)
-                                    return;
-                                
-                                languageComboBox.selectionPopup.close();
-                                tagsComboBox.selectionPopup.close();
-                            }
-                        }
+                        clip: true
+                        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                        
+                        Component.onCompleted: contentItem.maximumFlickVelocity = 600
                         
                         
                         ColumnLayout
                         {
                             id: inputLayout
-                            anchors.fill: parent
+                            width: parent.width - 18
+                            height: parent.height
                             anchors.rightMargin: 8
                             spacing: 15
                             
@@ -245,7 +236,6 @@ Popup
                             {
                                 id: titleField
                                 Layout.fillWidth: true
-                                Layout.topMargin: -3
                                 boxHeight: 34
                                 headerText: "Title"
                                 headerFontWeight: Font.Bold
@@ -465,9 +455,6 @@ Popup
                                 readOnly: true
                             }
                         }
-                        
-                        
-                        Component.onCompleted: contentItem.maximumFlickVelocity = 600
                     }
                 }
             }              
