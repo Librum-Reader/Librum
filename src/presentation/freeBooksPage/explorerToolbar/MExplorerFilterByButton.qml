@@ -45,6 +45,7 @@ Item
             Label
             {
                 id: filterByLabel
+                Layout.topMargin: -1
                 color: Style.colorBaseText
                 text: "Filters"
                 font.pointSize: 12

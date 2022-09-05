@@ -43,6 +43,7 @@ Item
                 Label
                 {
                     id: sortByLabel
+                    Layout.topMargin: -1
                     color: Style.colorBaseText
                     text: "Sort by"
                     font.pointSize: 12

@@ -37,6 +37,7 @@ Item
             Label
             {
                 id: filterByLabel
+                Layout.topMargin: -1
                 color: Style.colorBasePurple
                 text: root.text
                 font.pointSize: 12
@@ -47,6 +48,7 @@ Item
             Image
             {
                 id: filterByArrowIcon
+                Layout.topMargin: 1
                 sourceSize.height: 11
                 source: Icons.closePurple
                 fillMode: Image.PreserveAspectFit

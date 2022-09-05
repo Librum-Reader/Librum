@@ -46,6 +46,7 @@ Item
         opacity: mouseArea.pressed ? root.opacityOnPressed : 1
         antialiasing: true
         
+        
         RowLayout
         {
             id: layout
@@ -75,6 +76,14 @@ Item
                 font.family: Style.defaultFontFamily
                 color: root.fontColor
                 elide: Text.ElideRight
+                
+                Component.onCompleted:
+                {
+                    if((container.height/loginButtonText.implicitHeight) / 2 > 0.1)
+                    {
+                        loginButtonText.Layout.topMargin = loginButtonText.Layout.topMargin - 1;
+                    }
+                }
             }
             
             Image

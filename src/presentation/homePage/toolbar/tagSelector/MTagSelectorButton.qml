@@ -45,6 +45,7 @@ Item
             Label
             {
                 id: tagLabel
+                Layout.topMargin: -1
                 color: Style.colorBaseText
                 text: "Tags"
                 font.pointSize: 12
