@@ -42,6 +42,7 @@ Popup
         {
             id: container
             Layout.fillWidth: true
+            implicitWidth: parent.width   // to fix binding loop
             padding: 0
             background: Rectangle
             {
