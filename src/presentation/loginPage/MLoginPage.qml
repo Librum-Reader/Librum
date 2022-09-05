@@ -201,6 +201,8 @@ MFlickWrapper
                     MButton 
                     {
                         id: loginButton
+                        property bool success: false
+                        
                         Layout.fillWidth: true
                         Layout.preferredHeight: 40
                         Layout.topMargin: 42
@@ -229,14 +231,21 @@ MFlickWrapper
                                 loadPage(homePage, sidebar.homeItem, false);
                                 return;
                             }
-                                
-                            AuthController.loginSucceeded.connect(() => loginButton.switchToHomePage());
+                            
+                            AuthController.loginFailed.connect(() => loginFailed());
+                            AuthController.loginSucceeded.connect(() => { if(!loginButton.success) loginSucceeded() } );
                             AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
-                        function switchToHomePage()
+                        function loginSucceeded()
                         {
+                            loginButton.success = true;
                             loadPage(homePage, sidebar.homeItem, false);
+                        }
+                        
+                        function loginFailed()
+                        {
+                            console.log("Login failed");
                         }
                     }
                 }
