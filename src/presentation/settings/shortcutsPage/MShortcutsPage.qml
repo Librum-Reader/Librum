@@ -194,8 +194,8 @@ Page
                     
                     Component.onCompleted:
                     {
-                        contentItem.maximumFlickVelocity = 4000;
-                        contentItem.flickDeceleration = 2200;
+                        contentItem.flickDeceleration = 1000;
+                        contentItem.maximumFlickVelocity = 1000;
                     }
                     
                     
