@@ -1,0 +1,37 @@
+Fix cpp comments
+Author: Albert Astals Cid <aacid@kde.org>
+
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -6048,7 +6048,7 @@ static int _synctex_scanner_get_tag(sync
+             }
+         } while((input = __synctex_tree_sibling(input)));
+     }
+-    //  2011 version
++    /* 2011 version */
+     name = _synctex_base_name(name);
+     if ((input = scanner->input)) {
+         do {
+@@ -6058,7 +6058,7 @@ static int _synctex_scanner_get_tag(sync
+                     if (_synctex_is_equivalent_file_name(name,_synctex_base_name(_synctex_data_name(other_input)))
+                         && (strlen(_synctex_data_name(input))!=strlen(_synctex_data_name(other_input))
+                             || strncmp(_synctex_data_name(other_input),_synctex_data_name(input),strlen(_synctex_data_name(input))))) {
+-                            // There is a second possible candidate
++                            /* There is a second possible candidate */
+                             return 0;
+                         }
+                 }
+Index: synctex/synctex_parser_utils.c
+===================================================================
+--- synctex.orig/synctex_parser_utils.c
++++ synctex/synctex_parser_utils.c
+@@ -587,6 +587,6 @@ int _synctex_get_name(const char * outpu
+ 
+ const char * _synctex_get_io_mode_name(synctex_io_mode_t io_mode) {
+     static const char * synctex_io_modes[4] = {"r","rb","a","ab"}; 
+-    unsigned index = ((io_mode & synctex_io_gz_mask)?1:0) + ((io_mode & synctex_io_append_mask)?2:0);// bug pointed out by Jose Alliste
++    unsigned index = ((io_mode & synctex_io_gz_mask)?1:0) + ((io_mode & synctex_io_append_mask)?2:0);/* bug pointed out by Jose Alliste */
+     return synctex_io_modes[index];
+ }

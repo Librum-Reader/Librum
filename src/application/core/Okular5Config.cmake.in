@@ -1,0 +1,14 @@
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Qt5Core @QT_REQUIRED_VERSION@)
+find_dependency(Qt5PrintSupport @QT_REQUIRED_VERSION@)
+find_dependency(Qt5Widgets @QT_REQUIRED_VERSION@)
+find_dependency(KF5CoreAddons @KF5_REQUIRED_VERSION@)
+find_dependency(KF5Config @KF5_REQUIRED_VERSION@)
+find_dependency(KF5XmlGui @KF5_REQUIRED_VERSION@)
+
+@PACKAGE_SETUP_AUTOMOC_VARIABLES@
+
+include("${CMAKE_CURRENT_LIST_DIR}/Okular5Targets.cmake")

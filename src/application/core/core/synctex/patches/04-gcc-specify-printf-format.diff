@@ -1,0 +1,77 @@
+_synctex_error has a printf-like format, so use the proper gcc extensions
+to check its arguments (doing nothing for other compilers)
+Author: Pino Toscano <pino@kde.org>
+
+Index: synctex/synctex_parser_utils.h
+===================================================================
+--- synctex.orig/synctex_parser_utils.h
++++ synctex/synctex_parser_utils.h
+@@ -83,6 +83,12 @@ extern "C" {
+ #	else
+ #		define SYNCTEX_ARE_PATH_CHARACTERS_EQUAL(left,right) (toupper(left) != toupper(right))
+ #	endif
++
++#	ifdef __GNUC__
++#		define SYNCTEX_PRINTF_FORMAT(si, ftc) __attribute__ ((format (printf, si, ftc)))
++#	else
++#		define SYNCTEX_PRINTF_FORMAT(si, ftc)
++#	endif
+     
+ /*  This custom malloc functions initializes to 0 the newly allocated memory.
+  *  There is no bzero function on windows. */
+@@ -95,8 +101,8 @@ void _synctex_free(void * ptr);
+ /*  This is used to log some informational message to the standard error stream.
+  *  On Windows, the stderr stream is not exposed and another method is used.
+  *	The return value is the number of characters printed.	*/
+-    int _synctex_error(const char * reason,...);
+-    int _synctex_debug(const char * reason,...);
++    int _synctex_error(const char * reason,...) SYNCTEX_PRINTF_FORMAT(1, 2);
++    int _synctex_debug(const char * reason,...) SYNCTEX_PRINTF_FORMAT(1, 2);
+ 
+ /*  strip the last extension of the given string, this string is modified!
+  *  This function depends on the OS because the path separator may differ.
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -8148,6 +8148,7 @@ struct synctex_updater_t {
+     int length;             /*  the number of chars appended */
+ };
+ 
++static int _synctex_updater_print(synctex_updater_p updater, const char * format, ...) SYNCTEX_PRINTF_FORMAT(2, 3);
+ static int _synctex_updater_print(synctex_updater_p updater, const char * format, ...) {
+     int result = 0;
+     if (updater) {
+@@ -8184,6 +8185,7 @@ static int vasprintf(char **ret,
+ /**
+  *  gzvprintf is not available until OSX 10.10
+  */
++static int _synctex_updater_print_gz(synctex_updater_p updater, const char * format, ...) SYNCTEX_PRINTF_FORMAT(2, 3);
+ static int _synctex_updater_print_gz(synctex_updater_p updater, const char * format, ...) {
+     int result = 0;
+     if (updater) {
+Index: synctex/synctex_parser_utils.c
+===================================================================
+--- synctex.orig/synctex_parser_utils.c
++++ synctex/synctex_parser_utils.c
+@@ -87,8 +87,11 @@ void _synctex_free(void * ptr) {
+ #   include <syslog.h>
+ #endif
+ 
+-int _synctex_log(int level, const char * prompt, const char * reason, va_list arg;) {
++int _synctex_log(int level, const char * prompt, const char * reason, ...) SYNCTEX_PRINTF_FORMAT(3, 4);
++int _synctex_log(int level, const char * prompt, const char * reason, ...) {
++    va_list arg;
+ 	int result;
++    va_start(arg, reason);
+ #	ifdef SYNCTEX_RECENT_WINDOWS
+ 	{/*	This code is contributed by William Blum.
+         As it does not work on some older computers,
+@@ -130,6 +133,7 @@ int _synctex_log(int level, const char *
+     result += vfprintf(where, reason, arg);
+     result += fprintf(where,"\n");
+ #   endif
++    va_end(arg);
+ 	return result;
+ }
+ 

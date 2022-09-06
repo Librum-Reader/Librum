@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+ <include>kuser.h</include>
+ <kcfgfile arg="true" />
+ <signal name="colorModesChanged" />
+ <group name="Core Performance" >
+  <entry key="MemoryLevel" type="Enum" >
+   <default>Normal</default>
+   <choices>
+    <choice name="Low" />
+    <choice name="Normal" />
+    <choice name="Aggressive" />
+    <choice name="Greedy" />
+   </choices>
+  </entry>
+  <entry key="EnableThreading" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="TextAntialias" type="Enum" >
+   <default>Enabled</default>
+   <choices>
+    <choice name="Disabled" />
+    <choice name="Enabled" />
+   </choices>
+  </entry>
+  <entry key="GraphicsAntialias" type="Enum" >
+   <default>Enabled</default>
+   <choices>
+    <choice name="Disabled" />
+    <choice name="Enabled" />
+   </choices>
+  </entry>
+  <entry key="TextHinting" type="Enum" >
+   <default>Disabled</default>
+   <choices>
+    <choice name="Disabled" />
+    <choice name="Enabled" />
+   </choices>
+  </entry>
+ </group>
+ <group name="Document">
+  <entry key="PaperColor" type="Color" >
+   <default code="true" >Qt::white</default>
+   <emit signal="colorModesChanged" />
+  </entry>
+  <entry key="ChangeColors" type="Bool" >
+   <default>false</default>
+   <emit signal="colorModesChanged" />
+  </entry>
+  <entry key="RenderMode" type="Enum" >
+   <default>Inverted</default>
+   <choices>
+    <choice name="Inverted" />
+    <choice name="Paper" />
+    <choice name="Recolor" />
+    <choice name="BlackWhite" />
+    <choice name="InvertLightness" />
+    <choice name="InvertLuma" />
+    <choice name="InvertLumaSymmetric" />
+    <choice name="HueShiftPositive" />
+    <choice name="HueShiftNegative" />
+   </choices>
+   <emit signal="colorModesChanged" />
+  </entry>
+ </group>
+ <group name="Core General" >
+  <entry key="ObeyDRM" type="Bool" >
+   <default>true</default>
+  </entry>
+  <entry key="ChooseGenerators" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="ExternalEditor" type="Enum" >
+   <default>Kate</default>
+   <choices>
+    <choice name="Custom" />
+    <choice name="Kate" />
+    <choice name="Kile" />
+    <choice name="Scite" />
+    <choice name="Emacsclient" />
+    <choice name="Lyxclient" />
+    <choice name="Texstudio" />
+    <choice name="Texifyidea" />
+   </choices>
+  </entry>
+  <entry key="ExternalEditorCommand" type="String">
+    <default>kate --line %l --column %c</default>
+  </entry>
+ </group>
+ <group name="Core Presentation" >
+  <entry key="SlidesAdvance" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="SlidesAdvanceTime" type="UInt" >
+   <default>5</default>
+   <min>1</min>
+   <max>3600</max>
+  </entry>
+  <entry key="SlidesLoop" type="Bool" >
+   <default>false</default>
+  </entry>
+  <entry key="SlidesTapNavigation" type="Enum" >
+   <default>Forward</default>
+   <choices>
+    <choice name="ForwardBackward" />
+    <choice name="Forward" />
+    <choice name="Disabled" />
+   </choices>
+  </entry>
+ </group>
+</kcfg>

@@ -1,0 +1,18 @@
+{
+    "KDE-KIO-Protocols": {
+        "ms-its": {
+            "Icon": "help",
+            "defaultMimetype": "text/html",
+            "exec": "kio_msits",
+            "input": "none",
+            "listing": [
+                "Name",
+                "Type",
+                "Size"
+            ],
+            "output": "filesystem",
+            "protocol": "ms-its",
+            "reading": true
+        }
+    }
+}

@@ -1,0 +1,42 @@
+<ui version="4.0" >
+ <class>ChooseEngineWidget</class>
+ <widget class="QWidget" name="ChooseEngineWidget" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>286</width>
+    <height>96</height>
+   </rect>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="leftMargin" >
+    <number>0</number>
+   </property>
+   <property name="topMargin" >
+    <number>0</number>
+   </property>
+   <property name="rightMargin" >
+    <number>0</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="description" >
+     <property name="text" >
+      <string/>
+     </property>
+     <property name="textFormat" >
+      <enum>Qt::RichText</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="engineList" />
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

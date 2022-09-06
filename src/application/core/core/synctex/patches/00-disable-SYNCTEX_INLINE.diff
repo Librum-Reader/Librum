@@ -1,0 +1,17 @@
+Disable SYNCTEX_INLINE on non-MSVC compilers. It is misplaced
+in the code (before "static"), so it causes compiling errors.
+Author: Pino Toscano <pino@kde.org>
+
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -91,7 +91,7 @@
+ #       if defined(_MSC_VER)
+ #          define SYNCTEX_INLINE __inline
+ #       else
+-#          define SYNCTEX_INLINE inline
++#          define SYNCTEX_INLINE
+ #       endif
+ #   endif
+ 

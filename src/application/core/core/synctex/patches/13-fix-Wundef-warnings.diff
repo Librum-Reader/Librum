@@ -1,0 +1,326 @@
+Fix compiler warnings for -Wundef
+Author: Henrik Fehlauer <rkflx@lab12.net>
+
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -362,7 +362,7 @@ __synctex_scanner_register_handle_to(NOD
+ #       pragma mark Tree SETGET
+ #   endif
+ 
+-#if SYNCTEX_DEBUG > 1000
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG > 1000
+ #define SYNCTEX_PARAMETER_ASSERT(WHAT) \
+     do { \
+         if (!(WHAT)) { \
+@@ -459,11 +459,11 @@ DEFINE_SYNCTEX_TREE_GETSET(next_hbox)
+ DEFINE_SYNCTEX_TREE_GETSET(arg_sibling)
+ DEFINE_SYNCTEX_TREE_GETSET(target)
+ 
+-#if SYNCTEX_DEBUG>1000
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>1000
+ #   undef SYNCTEX_USE_NODE_COUNT
+ #   define SYNCTEX_USE_NODE_COUNT 1
+ #endif
+-#if SYNCTEX_USE_NODE_COUNT>0
++#if defined SYNCTEX_USE_NODE_COUNT && SYNCTEX_USE_NODE_COUNT>0
+ #   define SYNCTEX_DECLARE_NODE_COUNT int node_count;
+ #   define SYNCTEX_INIT_NODE_COUNT \
+         do { node_count = 0; } while(synctex_NO)
+@@ -472,7 +472,7 @@ DEFINE_SYNCTEX_TREE_GETSET(target)
+ #   define SYNCTEX_INIT_NODE_COUNT
+ #endif
+ 
+-#if SYNCTEX_USE_NODE_COUNT>10
++#if defined SYNCTEX_USE_NODE_COUNT && SYNCTEX_USE_NODE_COUNT>10
+ #   define SYNCTEX_DID_NEW(N)   _synctex_did_new(N)
+ #   define SYNCTEX_WILL_FREE(N) _synctex_will_free(N)
+ #else
+@@ -865,7 +865,7 @@ SYNCTEX_INLINE static void __synctex_sca
+     node->class->scanner->handle = NNN;
+ }
+ #endif
+-#if SYNCTEX_USE_NODE_COUNT>10
++#if defined SYNCTEX_USE_NODE_COUNT && SYNCTEX_USE_NODE_COUNT>10
+ SYNCTEX_INLINE static void _synctex_did_new(synctex_node_p node) {
+     printf("NODE CREATED # %i, %s, %p\n",
+            (node->class->scanner->node_count)++,
+@@ -2516,7 +2516,7 @@ SYNCTEX_INLINE static synctex_nns_s _syn
+ }
+ static char * _synctex_node_abstract(synctex_node_p node);
+ SYNCTEX_INLINE static synctex_node_p synctex_tree_set_friend(synctex_node_p node,synctex_node_p new_friend) {
+-#if SYNCTEX_DEBUG
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG
+     synctex_node_p F = new_friend;
+     while (F) {
+         if (node == F) {
+@@ -2545,7 +2545,7 @@ SYNCTEX_INLINE static synctex_node_p __s
+         i = i%(node->class->scanner->number_of_lists);
+         old = synctex_tree_set_friend(node,(node->class->scanner->lists_of_friends)[i]);
+         (node->class->scanner->lists_of_friends)[i] = node;
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+         printf("tl(%i)=>",i);
+         synctex_node_log(node);
+         if (synctex_node_parent_form(node)) {
+@@ -4186,7 +4186,7 @@ static synctex_ns_s __synctex_parse_new_
+     /*  Prepend this input node to the input linked list of the scanner */
+     __synctex_tree_set_sibling(input,scanner->input);/* input has no parent */
+     scanner->input = input;
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+     synctex_node_log(input);
+ #   endif
+     return (synctex_ns_s){input,_synctex_next_line(scanner)};/*  read the line termination character, if any */
+@@ -5083,10 +5083,10 @@ content_loop:
+      */
+     /* forms are everywhere */
+     ns = SYNCTEX_NS_NULL;
+-#if SYNCTEX_VERBOSE
++#ifdef SYNCTEX_VERBOSE
+     synctex_scanner_set_display_switcher(scanner,-1);
+     printf("NEW CONTENT LOOP\n");
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     synctex_node_display(sheet);
+ #endif
+ #endif
+@@ -5106,7 +5106,7 @@ content_loop:
+                 }
+                 parent = ns.node;
+                 child = _synctex_tree_last(parent);
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(parent);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,parent);
+@@ -5124,7 +5124,7 @@ content_loop:
+                 }
+                 child = parent;
+                 parent = _synctex_tree_parent(child);
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 if (_synctex_next_line(scanner)<SYNCTEX_STATUS_OK) {
+@@ -5166,7 +5166,7 @@ content_loop:
+                 } else {
+                     _synctex_error("Can't create box bdry record.");
+                 }
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(parent);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,parent);
+@@ -5238,7 +5238,7 @@ content_loop:
+                     child = parent;
+                     parent = _synctex_tree_parent(child);
+                     _synctex_make_hbox_contain_box(parent,_synctex_data_box_V(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                     synctex_node_log(child);
+ #   endif
+                 }
+@@ -5260,7 +5260,7 @@ content_loop:
+                     _synctex_node_set_child(parent,ns.node);
+                 }
+                 child = ns.node;
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5282,7 +5282,7 @@ content_loop:
+                 }
+                 child = ns.node;
+                 _synctex_make_hbox_contain_box(parent,_synctex_data_box(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5305,7 +5305,7 @@ content_loop:
+                     __synctex_node_make_friend_tlc(child);
+                 }
+                 _synctex_make_hbox_contain_box(parent,_synctex_data_xob(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5327,7 +5327,7 @@ content_loop:
+                     __synctex_node_make_friend_tlc(child);
+                 }
+                 _synctex_make_hbox_contain_point(parent,_synctex_data_point(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5351,7 +5351,7 @@ content_loop:
+                 /* Rules are sometimes far too big
+ _synctex_make_hbox_contain_box(parent,_synctex_data_box(child));
+                  */
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5373,7 +5373,7 @@ _synctex_make_hbox_contain_box(parent,_s
+                     __synctex_node_make_friend_tlc(child);
+                 }
+                 _synctex_make_hbox_contain_point(parent,_synctex_data_point(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5383,7 +5383,7 @@ _synctex_make_hbox_contain_box(parent,_s
+ #	ifdef SYNCTEX_NOTHING
+ #       pragma mark + SCAN FORM REF
+ #   endif
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             synctex_node_display(parent);
+             synctex_node_display(child);
+ #endif
+@@ -5406,7 +5406,7 @@ _synctex_make_hbox_contain_box(parent,_s
+                     }
+                     scanner->ref_in_sheet = child;
+                 }
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 goto content_loop;
+@@ -5427,7 +5427,7 @@ _synctex_make_hbox_contain_box(parent,_s
+                     __synctex_node_make_friend_tlc(child);
+                 }
+                 _synctex_make_hbox_contain_point(parent,_synctex_data_point(child));
+-#   if SYNCTEX_VERBOSE
++#   ifdef SYNCTEX_VERBOSE
+                 synctex_node_log(child);
+ #   endif
+                 input.node = _synctex_input_register_line(input.node,child);
+@@ -5536,7 +5536,7 @@ SYNCTEX_INLINE static synctex_ns_s __syn
+                 sibling->line_index = arg_sibling->line_index;
+             }
+ #endif
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             printf("!  Ref replacement:\n");
+             synctex_node_log(ref);
+             synctex_node_display(synctex_node_sibling(ref));
+@@ -5600,7 +5600,7 @@ SYNCTEX_INLINE static synctex_status_t _
+             }
+         }
+         do {
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             printf("POST PROCESSING %s\n",_synctex_node_abstract(proxy));
+             {
+                 int i,j = 0;
+@@ -5619,7 +5619,7 @@ SYNCTEX_INLINE static synctex_status_t _
+             }
+ #endif
+             f(proxy);
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             {
+                 int i,j = 0;
+                 for (i=0;i<proxy->class->scanner->number_of_lists;++i) {
+@@ -5638,7 +5638,7 @@ SYNCTEX_INLINE static synctex_status_t _
+ #endif
+             /*  Side effect: create the hierarchy on the fly */
+             proxy = synctex_node_next(proxy); /*  Change is here */
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             if (proxy) {
+                 int i,j = 0;
+                 for (i=0;i<proxy->class->scanner->number_of_lists;++i) {
+@@ -5670,7 +5670,7 @@ SYNCTEX_INLINE static synctex_status_t _
+ SYNCTEX_INLINE static synctex_status_t _synctex_post_process(synctex_scanner_p scanner) {
+     synctex_status_t status = SYNCTEX_STATUS_OK;
+     synctex_ns_s ns = {NULL,SYNCTEX_STATUS_NOT_OK};
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     printf("!  entering _synctex_post_process.\n");
+     synctex_node_display(scanner->sheet);
+     synctex_node_display(scanner->form);
+@@ -5681,7 +5681,7 @@ SYNCTEX_INLINE static synctex_status_t _
+     if (ns.status<status) {
+         status = ns.status;
+     }
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     printf("!  ref replaced in form _synctex_post_process.\n");
+     synctex_node_display(scanner->form);
+ #endif
+@@ -5703,7 +5703,7 @@ SYNCTEX_INLINE static synctex_status_t _
+         status = ns.status;
+     }
+     scanner->ref_in_sheet = NULL;
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     printf("!  ref replaced in sheet _synctex_post_process.\n");
+     synctex_node_display(scanner->sheet);
+ #endif
+@@ -5725,7 +5725,7 @@ SYNCTEX_INLINE static synctex_status_t _
+         }
+     }
+ #endif
+-#if SYNCTEX_DEBUG>10000
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>10000
+     {
+         int i;
+         for (i=0;i<scanner->number_of_lists;++i) {
+@@ -5746,7 +5746,7 @@ SYNCTEX_INLINE static synctex_status_t _
+     if (ns.status<status) {
+         status = ns.status;
+     }
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     printf("!  exiting _synctex_post_process.\n");
+     synctex_node_display(scanner->sheet);
+     synctex_node_display(scanner->form);
+@@ -5861,7 +5861,7 @@ int synctex_scanner_free(synctex_scanner
+         synctex_iterator_free(scanner->iterator);
+         free(scanner->output_fmt);
+         free(scanner->lists_of_friends);
+-#if SYNCTEX_USE_NODE_COUNT>0
++#if defined SYNCTEX_USE_NODE_COUNT && SYNCTEX_USE_NODE_COUNT>0
+         node_count = scanner->node_count;
+ #endif
+         free(scanner);
+@@ -5919,7 +5919,7 @@ synctex_scanner_p synctex_scanner_parse(
+     if (status<SYNCTEX_STATUS_OK) {
+         _synctex_error("Bad postamble. Ignored\n");
+     }
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+     synctex_scanner_set_display_switcher(scanner, 100);
+     synctex_node_display(scanner->sheet);
+     synctex_node_display(scanner->form);
+@@ -8048,7 +8048,7 @@ static synctex_nd_s __synctex_closest_de
+                SYNCTEX_LINEINDEX(node));
+ #endif
+         do {
+-#if SYNCTEX_DEBUG>500
++#if defined SYNCTEX_DEBUG && SYNCTEX_DEBUG>500
+             synctex_node_display(child);
+ #endif
+             synctex_nd_s nd = SYNCTEX_ND_0;
+Index: synctex/synctex_parser_utils.c
+===================================================================
+--- synctex.orig/synctex_parser_utils.c
++++ synctex/synctex_parser_utils.c
+@@ -129,7 +129,7 @@ int _synctex_log(int level, const char *
+ 		OutputDebugStringA("\n");
+ 		free(buff);
+ 	}
+-#   elif SYNCTEX_USE_SYSLOG
++#   elif defined SYNCTEX_USE_SYSLOG
+     char * buffer1 = NULL;
+     char * buffer2 = NULL;
+     openlog ("SyncTeX", LOG_CONS | LOG_PID | LOG_PERROR | LOG_NDELAY, LOG_LOCAL0);

@@ -1,0 +1,54 @@
+Plug multiple leaks and prevent a segfault:
+- When the returned value to be assigned to reader is NULL, reader should be freed beforehand.
+- Do not leak memory when scanner creation succeeded, but no synctex file was found.
+- A valid reader is the prerequisite for accessing SYNCTEX_FILE.
+- Two calls to malloc() for reader->start also require two calls to free().
+
+Author: Henrik Fehlauer <rkflx@lab12.net>
+
+
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -739,6 +739,7 @@ synctex_reader_p synctex_reader_init_wit
+         if (open.status<SYNCTEX_STATUS_OK) {
+             open = _synctex_open_v2(output,build_directory,0,synctex_DONT_ADD_QUOTES);
+             if (open.status<SYNCTEX_STATUS_OK) {
++                synctex_reader_free(reader);
+                 return NULL;
+             }
+         }
+@@ -5840,6 +5841,7 @@ synctex_scanner_p synctex_scanner_new_wi
+ #if defined(SYNCTEX_DEBUG)
+     _synctex_error("No file?");
+ #endif
++    synctex_scanner_free(scanner);
+     return NULL;
+ }
+ 
+@@ -5848,7 +5850,7 @@ synctex_scanner_p synctex_scanner_new_wi
+ int synctex_scanner_free(synctex_scanner_p scanner) {
+     int node_count = 0;
+     if (scanner) {
+-        if (SYNCTEX_FILE) {
++        if (scanner->reader && SYNCTEX_FILE) {
+             gzclose(SYNCTEX_FILE);
+             SYNCTEX_FILE = NULL;
+         }
+@@ -5883,6 +5885,15 @@ synctex_scanner_p synctex_scanner_parse(
+     scanner->x_offset = scanner->y_offset = 6.027e23f;
+     scanner->reader->line_number = 1;
+ 
++    /* TODO: cleanup
++     * In some (all?) cases SYNCTEX_START is already initialized
++     * in synctex_reader_init_with_output_file(). Much of the
++     * following code seems like a duplicate and is perhaps a
++     * candidate for deletion. To be on the safe side though, we
++     * keep it for now and just free() any prior malloc() if
++     * existing. */
++    _synctex_free(SYNCTEX_START);
++
+     SYNCTEX_START = (char *)malloc(SYNCTEX_BUFFER_SIZE+1); /*  one more character for null termination */
+     if (NULL == SYNCTEX_START) {
+         _synctex_error("!  malloc error in synctex_scanner_parse.");

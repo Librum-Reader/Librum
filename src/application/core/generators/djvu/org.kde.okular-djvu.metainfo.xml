@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+  <id>org.kde.okular-djvu</id>
+  <extends>org.kde.okular.desktop</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+ and GFDL-1.3</project_license>
+  <name>DjVu Documents</name>
+  <name xml:lang="ar">مستندات DjVu</name>
+  <name xml:lang="az">DjVu sənədləri</name>
+  <name xml:lang="bg">DjVu документи</name>
+  <name xml:lang="ca">Documents DjVu</name>
+  <name xml:lang="ca-valencia">Documents DjVu</name>
+  <name xml:lang="cs">Dokumenty DjVu</name>
+  <name xml:lang="de">DjVu-Dokumente</name>
+  <name xml:lang="el">Έγγραφα DjVu</name>
+  <name xml:lang="en-GB">DjVu Documents</name>
+  <name xml:lang="es">Documentos DjVu</name>
+  <name xml:lang="et">DjVu dokumendid</name>
+  <name xml:lang="eu">DjVu dokumentuak</name>
+  <name xml:lang="fi">DjVu-tiedostot</name>
+  <name xml:lang="fr">Documents DjVu</name>
+  <name xml:lang="gl">Documentos DjVu</name>
+  <name xml:lang="hi">डीजेवीयू दस्तावेज़</name>
+  <name xml:lang="hu">DjVu-dokumentumok</name>
+  <name xml:lang="ia">Documentos DjVu</name>
+  <name xml:lang="it">Documenti DjVu</name>
+  <name xml:lang="ko">DjVu 문서</name>
+  <name xml:lang="lt">DjVu dokumentai</name>
+  <name xml:lang="ml">ഡിജെവിയു പ്രമാണങ്ങൾ</name>
+  <name xml:lang="nl">DjVu-documenten</name>
+  <name xml:lang="nn">DjVu-dokument</name>
+  <name xml:lang="pl">Dokumenty DjVu</name>
+  <name xml:lang="pt">Documentos DjVu</name>
+  <name xml:lang="pt-BR">Documentos DjVu</name>
+  <name xml:lang="ro">Documente DjVu</name>
+  <name xml:lang="ru">Документы DjVu</name>
+  <name xml:lang="sk">DjVu dokumenty</name>
+  <name xml:lang="sl">Dokumenti DjVu</name>
+  <name xml:lang="sr">ДјВу документи</name>
+  <name xml:lang="sr-Latn">DjVu dokumenti</name>
+  <name xml:lang="sr-ijekavian">ДјВу документи</name>
+  <name xml:lang="sr-ijekavianlatin">DjVu dokumenti</name>
+  <name xml:lang="sv">DjVu-dokument</name>
+  <name xml:lang="ta">DjVu ஆவணங்கள்</name>
+  <name xml:lang="tr">DvVu Belgeleri</name>
+  <name xml:lang="uk">документи DjVu</name>
+  <name xml:lang="vi">Tài liệu DjVu</name>
+  <name xml:lang="x-test">xxDjVu Documentsxx</name>
+  <name xml:lang="zh-CN">DjVu 文档</name>
+  <name xml:lang="zh-TW">DjVu 文件</name>
+  <summary>Adds support for reading DjVu documents</summary>
+  <summary xml:lang="ar">يضيف دعم لقراءة مستندات DjVu</summary>
+  <summary xml:lang="az">DjVu sənədlərini oxumaq üçün dəstək əlavə edir</summary>
+  <summary xml:lang="bg">Добавя поддръжка за DjVu документи</summary>
+  <summary xml:lang="ca">Afegeix la implementació per a llegir documents DjVu</summary>
+  <summary xml:lang="ca-valencia">Afig la implementació per a llegir documents DjVu</summary>
+  <summary xml:lang="cs">Přidává podporu pro čtení dokumentů DjVu</summary>
+  <summary xml:lang="de">Bietet Unterstützung zum Lesen von DjVu-Dokumenten</summary>
+  <summary xml:lang="el">Προσθέτει υποστήριξη για την ανάγνωση εγγράφων DjVu</summary>
+  <summary xml:lang="en-GB">Adds support for reading DjVu documents</summary>
+  <summary xml:lang="es">Permite la lectura de documentos DjVu</summary>
+  <summary xml:lang="et">DjVu dokumentide lugemise toetus</summary>
+  <summary xml:lang="eu">DjVu dokumentuak irakurtzeko euskarria gehitzen du</summary>
+  <summary xml:lang="fi">Lisää DjVu-tiedostojen lukutuen</summary>
+  <summary xml:lang="fr">Permet la lecture des documents DjVu</summary>
+  <summary xml:lang="gl">Engade a posibilidade de ler documentos de DjVu</summary>
+  <summary xml:lang="hi">डीजेवीयू दस्तावेज़ पढ़ने के लिए समर्थन जोड़ता है</summary>
+  <summary xml:lang="hu">Támogatás DjVu-dokumentumok olvasásához</summary>
+  <summary xml:lang="ia">Adde supporto per leger documentos DjVu</summary>
+  <summary xml:lang="it">Aggiunge il supporto per la lettura di documenti DjVu</summary>
+  <summary xml:lang="ko">DjVu 문서 읽기 지원 추가</summary>
+  <summary xml:lang="lt">Prideda palaikymą DjVu dokumentų skaitymui</summary>
+  <summary xml:lang="ml">ഡിജെവിയു പ്രമാണങ്ങൾ വായിക്കുവാൻ പിന്തുണ ചേർക്കുന്നു</summary>
+  <summary xml:lang="nl">Voegt ondersteuning voor lezen van DjVu-documenten toe</summary>
+  <summary xml:lang="nn">Legg til støtte for å lesa DjVu-dokument</summary>
+  <summary xml:lang="pl">Dodaje obsługę dokumentów DjVu</summary>
+  <summary xml:lang="pt">Adiciona o suporte para a leitura de documentos DjVu</summary>
+  <summary xml:lang="pt-BR">Adiciona o suporte para leitura de documentos DjVu</summary>
+  <summary xml:lang="ro">Adaugă suport pentru citirea documentelor DjVu</summary>
+  <summary xml:lang="ru">Поддержка чтения документов DjVu</summary>
+  <summary xml:lang="sk">Pridá podporu pre čítanie DjVu dokumentov</summary>
+  <summary xml:lang="sl">Doda podporo za branje dokumentov DjVu</summary>
+  <summary xml:lang="sr">Подршка за читање ДјВу докумената</summary>
+  <summary xml:lang="sr-Latn">Podrška za čitanje DjVu dokumenata</summary>
+  <summary xml:lang="sr-ijekavian">Подршка за читање ДјВу докумената</summary>
+  <summary xml:lang="sr-ijekavianlatin">Podrška za čitanje DjVu dokumenata</summary>
+  <summary xml:lang="sv">Lägger till stöd för att läsa DjVu-dokument</summary>
+  <summary xml:lang="ta">DjVu ஆவணங்களைப் படிப்பதற்கான ஆதரவை சேர்க்கும்</summary>
+  <summary xml:lang="tr">DjVu belgelerini okuma desteği ekler</summary>
+  <summary xml:lang="uk">Додає підтримку читання документів DjVu</summary>
+  <summary xml:lang="vi">Thêm hỗ trợ đọc tài liệu DjVu</summary>
+  <summary xml:lang="x-test">xxAdds support for reading DjVu documentsxx</summary>
+  <summary xml:lang="zh-CN">增加对 DjVu 文档的阅读支持</summary>
+  <summary xml:lang="zh-TW">加入讀取 DjVu 文件的支援</summary>
+  <provides>
+    <mediatype>image/vnd.djvu</mediatype>
+  </provides>
+  <url type="homepage">https://okular.kde.org</url>
+  <releases>
+    <release version="22.08.0" date="2022-08-18"/>
+    <release version="22.04.3" date="2022-07-07"/>
+    <release version="22.04.2" date="2022-06-09"/>
+    <release version="22.04.1" date="2022-05-12"/>
+  </releases>
+</component>

@@ -1,0 +1,17 @@
+Omit warning message when opening non-synctex pdf
+Author: Henrik Fehlauer <rkflx@lab12.net>
+
+Index: synctex/synctex_parser.c
+===================================================================
+--- synctex.orig/synctex_parser.c
++++ synctex/synctex_parser.c
+@@ -5838,7 +5838,9 @@ synctex_scanner_p synctex_scanner_new_wi
+     if ((scanner->reader = synctex_reader_init_with_output_file(scanner->reader, output, build_directory))) {
+         return parse? synctex_scanner_parse(scanner):scanner;
+     }
++#if defined(SYNCTEX_DEBUG)
+     _synctex_error("No file?");
++#endif
+     return NULL;
+ }
+ 

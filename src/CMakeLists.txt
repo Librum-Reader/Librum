@@ -11,8 +11,8 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CU
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Quick Widgets REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Quick Widgets QuickControls2 REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets QuickControls2 REQUIRED)
 
 
 
@@ -59,6 +59,7 @@ target_link_libraries(appLibrum
     infrastructure
     Qt5::Quick
     Qt5::Widgets
+    Qt5::QuickControls2
 )
 
 target_include_directories(appLibrum

@@ -1,0 +1,16 @@
+maintainer: aacid
+description: Okular, the unified document viewer
+platforms:
+    - name: Linux
+    - name: Windows
+    - name: macOS
+release: true
+
+public_lib: true
+public_source_dirs:
+        - core
+        - interfaces
+        - Mainpage.dox 
+logo: icons/128-apps-okular.png
+irc: okular
+mailinglist: okular-devel

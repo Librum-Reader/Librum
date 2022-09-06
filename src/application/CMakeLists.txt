@@ -3,10 +3,22 @@ find_package(QT NAMES Qt5 COMPONENTS Core Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 
 
+
 # Qt
-set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
+
+
+
+# Options
+set(QT_REQUIRED_VERSION "5.15.5")
+
+
+
+
+# Dependencies
+add_subdirectory(core)
+
 
 
 

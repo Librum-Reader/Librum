@@ -1,0 +1,17 @@
+Fix some typos found by Krazy2
+Author: Yuri Chornoivan <yurchor@ukr.net>
+Original commit: 3b73357
+
+Index: synctex/synctex_parser_utils.c
+===================================================================
+--- synctex.orig/synctex_parser_utils.c
++++ synctex/synctex_parser_utils.c
+@@ -410,7 +410,7 @@ char * _synctex_merge_strings(const char
+ 
+ /*  The purpose of _synctex_get_name is to find the name of the synctex file.
+  *  There is a list of possible filenames from which we return the most recent one and try to remove all the others.
+- *  With two runs of pdftex or xetex we are sure the the synctex file is really the most appropriate.
++ *  With two runs of pdftex or xetex we are sure the synctex file is really the most appropriate.
+  */
+ int _synctex_get_name(const char * output, const char * build_directory, char ** synctex_name_ref, synctex_io_mode_t * io_mode_ref)
+ {

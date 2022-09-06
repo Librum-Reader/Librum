@@ -84,7 +84,6 @@ MFlickWrapper
                         text: "Log into your account"
                         color: Style.colorLightText2
                         font.pointSize: 13
-                        font.letterSpacing: 0.7
                     }
                     
                     

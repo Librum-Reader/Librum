@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+  <id>org.kde.okular-spectre</id>
+  <extends>org.kde.okular.desktop</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+ and GFDL-1.3</project_license>
+  <name>PostScript</name>
+  <name xml:lang="ar">PostScript</name>
+  <name xml:lang="az">PostScript</name>
+  <name xml:lang="bg">PostScript</name>
+  <name xml:lang="ca">PostScript</name>
+  <name xml:lang="ca-valencia">PostScript</name>
+  <name xml:lang="cs">PostScript</name>
+  <name xml:lang="de">PostScript</name>
+  <name xml:lang="el">PostScript</name>
+  <name xml:lang="en-GB">PostScript</name>
+  <name xml:lang="es">PostScript</name>
+  <name xml:lang="et">PostScript</name>
+  <name xml:lang="eu">PostScript</name>
+  <name xml:lang="fi">PostScript</name>
+  <name xml:lang="fr">PostScript</name>
+  <name xml:lang="gl">PostScript</name>
+  <name xml:lang="hi">पोस्टस्क्रिप्ट</name>
+  <name xml:lang="hu">PostScript</name>
+  <name xml:lang="ia">PostScript</name>
+  <name xml:lang="id">PostScript</name>
+  <name xml:lang="it">PostScript</name>
+  <name xml:lang="ko">포스트스크립트</name>
+  <name xml:lang="lt">PostScript</name>
+  <name xml:lang="ml">പോസ്റ്റ്സ്ക്രിപ്റ്റ്</name>
+  <name xml:lang="nl">PostScript</name>
+  <name xml:lang="nn">PostScript</name>
+  <name xml:lang="pl">PostScript</name>
+  <name xml:lang="pt">PostScript</name>
+  <name xml:lang="pt-BR">PostScript</name>
+  <name xml:lang="ro">PostScript</name>
+  <name xml:lang="ru">PostScript</name>
+  <name xml:lang="sk">PostScript</name>
+  <name xml:lang="sl">PostScript</name>
+  <name xml:lang="sr">Постскрипт</name>
+  <name xml:lang="sr-Latn">PostScript</name>
+  <name xml:lang="sr-ijekavian">Постскрипт</name>
+  <name xml:lang="sr-ijekavianlatin">PostScript</name>
+  <name xml:lang="sv">Postscript</name>
+  <name xml:lang="ta">PostScript</name>
+  <name xml:lang="tr">PostScript</name>
+  <name xml:lang="uk">PostScript</name>
+  <name xml:lang="vi">PostScript</name>
+  <name xml:lang="x-test">xxPostScriptxx</name>
+  <name xml:lang="zh-CN">PostScript</name>
+  <name xml:lang="zh-TW">PostScript</name>
+  <summary>Adds support for reading PostScript documents</summary>
+  <summary xml:lang="ar">يضيف دعم لقراءة مستندات PostScript</summary>
+  <summary xml:lang="az">PostScript sənədlərini oxumaq üçün dəstək əlavə edir</summary>
+  <summary xml:lang="bg">Добавя поддръжка за четене на PostScript документи</summary>
+  <summary xml:lang="ca">Afegeix la implementació per a llegir documents PostScript</summary>
+  <summary xml:lang="ca-valencia">Afig la implementació per a llegir documents PostScript</summary>
+  <summary xml:lang="cs">Přidává podporu pro čtení dokumentů PostScript</summary>
+  <summary xml:lang="de">Bietet Unterstützung zum Lesen von PostScript-Dokumenten</summary>
+  <summary xml:lang="el">Προσθέτει υποστήριξη για την ανάγνωση εγγράφων PostScript</summary>
+  <summary xml:lang="en-GB">Adds support for reading PostScript documents</summary>
+  <summary xml:lang="es">Permite la lectura de documentos PostScript</summary>
+  <summary xml:lang="et">PostScript-dokumentide lugemise toetus</summary>
+  <summary xml:lang="eu">PostScript dokumentuak irakurtzeko euskarria gehitzen du</summary>
+  <summary xml:lang="fi">Lisää PostScript-tiedostojen lukutuen</summary>
+  <summary xml:lang="fr">Permet la lecture des documents PostScript</summary>
+  <summary xml:lang="gl">Engade a posibilidade de ler documentos PostScript</summary>
+  <summary xml:lang="hi">पोस्टस्क्रिप्ट दस्तावेज़ पढ़ने के लिए समर्थन जोड़ता है</summary>
+  <summary xml:lang="hu">Támogatás PostScript-dokumentumok olvasásához</summary>
+  <summary xml:lang="ia">Adde supporto per leger documentos PostScript</summary>
+  <summary xml:lang="id">Dukungan tambahan untuk pembacaan dokumen PostScript</summary>
+  <summary xml:lang="it">Aggiunge il supporto per la lettura di documenti PostScript</summary>
+  <summary xml:lang="ko">포스트스크립트 문서 읽기 지원 추가</summary>
+  <summary xml:lang="lt">Prideda palaikymą PostScript dokumentų skaitymui</summary>
+  <summary xml:lang="ml">പോസ്റ്റ്സ്ക്രിപ്റ്റ് പ്രമാണങ്ങൾ വായിക്കാൻ പിന്തുണ ചേർക്കുന്നു</summary>
+  <summary xml:lang="nl">Voegt ondersteuning voor lezen van PostScript-documenten toe</summary>
+  <summary xml:lang="nn">Legg til støtte for å lesa PostScript-dokument</summary>
+  <summary xml:lang="pl">Dodaje obsługę dokumentów PostScript</summary>
+  <summary xml:lang="pt">Adiciona o suporte para ler documentos em PostScript</summary>
+  <summary xml:lang="pt-BR">Adiciona o suporte para leitura de documentos em PostScript</summary>
+  <summary xml:lang="ro">Adaugă suport pentru citirea documentelor PostScript</summary>
+  <summary xml:lang="ru">Поддержка чтения документов PostScript</summary>
+  <summary xml:lang="sk">Pridá podporu pre čítanie dokumentov PostScript</summary>
+  <summary xml:lang="sl">Doda podporo za branje dokumentov PostScript</summary>
+  <summary xml:lang="sr">Подршка за читање постскрипт докумената</summary>
+  <summary xml:lang="sr-Latn">Podrška za čitanje PostScript dokumenata</summary>
+  <summary xml:lang="sr-ijekavian">Подршка за читање постскрипт докумената</summary>
+  <summary xml:lang="sr-ijekavianlatin">Podrška za čitanje PostScript dokumenata</summary>
+  <summary xml:lang="sv">Lägger till stöd för att läsa Postscript-dokument</summary>
+  <summary xml:lang="ta">PostScript ஆவணங்களைப் படிப்பதற்கான ஆதரவை சேர்க்கும்</summary>
+  <summary xml:lang="tr">PostScript belgelerini okuma desteği ekler</summary>
+  <summary xml:lang="uk">Додає підтримку читання документів PostScript</summary>
+  <summary xml:lang="vi">Thêm hỗ trợ đọc tài liệu PostScript</summary>
+  <summary xml:lang="x-test">xxAdds support for reading PostScript documentsxx</summary>
+  <summary xml:lang="zh-CN">增加对 PostScript 文档的阅读支持</summary>
+  <summary xml:lang="zh-TW">加入讀取 PostScript 文件的支援</summary>
+  <provides>
+    <mediatype>application/postscript</mediatype>
+    <mediatype>image/x-eps</mediatype>
+    <mediatype>application/x-gzpostscript</mediatype>
+    <mediatype>application/x-bzpostscript</mediatype>
+    <mediatype>image/x-gzeps</mediatype>
+    <mediatype>image/x-bzepsapplication/pdf</mediatype>
+  </provides>
+  <url type="homepage">https://okular.kde.org</url>
+  <releases>
+    <release version="22.08.0" date="2022-08-18"/>
+    <release version="22.04.3" date="2022-07-07"/>
+    <release version="22.04.2" date="2022-06-09"/>
+    <release version="22.04.1" date="2022-05-12"/>
+  </releases>
+</component>

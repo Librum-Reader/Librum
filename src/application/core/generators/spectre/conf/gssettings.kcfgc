@@ -1,0 +1,4 @@
+File=gssettings.kcfg
+ClassName=GSSettings
+Mutators=true
+Singleton=true

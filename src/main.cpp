@@ -11,6 +11,7 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include <boost/di.hpp>
+#include <QQuickStyle>
 #include "app_information.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
@@ -32,7 +33,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
-    
+    QQuickStyle::setStyle(QStringLiteral("Default"));
     
     addTranslations();
     loadFonts();
@@ -113,7 +114,7 @@ void loadFonts()
     
     
     QFont defaultFont("SF Pro Display");
-    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.7);
-    defaultFont.setWordSpacing(0.0);
+//    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.7);
+//    defaultFont.setWordSpacing(0.0);
     QGuiApplication::setFont(defaultFont);
 }

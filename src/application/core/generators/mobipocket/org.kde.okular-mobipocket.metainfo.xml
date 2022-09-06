@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component type="addon">
+  <id>org.kde.okular-mobipocket</id>
+  <extends>org.kde.okular.desktop</extends>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-2.0+ and GFDL-1.3</project_license>
+  <name>Mobipocket</name>
+  <name xml:lang="ar">كتب Mobipocket</name>
+  <name xml:lang="az">Mobipocket</name>
+  <name xml:lang="bg">Mobipocket</name>
+  <name xml:lang="ca">Mobipocket</name>
+  <name xml:lang="ca-valencia">Mobipocket</name>
+  <name xml:lang="cs">Mobipocket</name>
+  <name xml:lang="de">Mobipocket</name>
+  <name xml:lang="el">Mobipocket</name>
+  <name xml:lang="en-GB">Mobipocket</name>
+  <name xml:lang="es">Mobipocket</name>
+  <name xml:lang="et">Mobipocket</name>
+  <name xml:lang="eu">Mobipocket</name>
+  <name xml:lang="fi">Mobipocket</name>
+  <name xml:lang="fr">Mobipocket</name>
+  <name xml:lang="gl">Mobipocket</name>
+  <name xml:lang="hi">मोबिपोकेट</name>
+  <name xml:lang="hu">Mobipocket</name>
+  <name xml:lang="ia">Mobipocket</name>
+  <name xml:lang="it">Mobipocket</name>
+  <name xml:lang="ko">Mobipocket</name>
+  <name xml:lang="lt">Mobipocket</name>
+  <name xml:lang="ml">മൊബിപോക്കറ്റ്‌</name>
+  <name xml:lang="nl">Mobipocket</name>
+  <name xml:lang="nn">Mobipocket</name>
+  <name xml:lang="pl">Mobipocket</name>
+  <name xml:lang="pt">Mobipocket</name>
+  <name xml:lang="pt-BR">Mobipocket</name>
+  <name xml:lang="ro">Mobipocket</name>
+  <name xml:lang="ru">Mobipocket</name>
+  <name xml:lang="sk">Mobipocket</name>
+  <name xml:lang="sl">Mobipocket</name>
+  <name xml:lang="sr">Мобипокет</name>
+  <name xml:lang="sr-Latn">Mobipocket</name>
+  <name xml:lang="sr-ijekavian">Мобипокет</name>
+  <name xml:lang="sr-ijekavianlatin">Mobipocket</name>
+  <name xml:lang="sv">Mobipocket</name>
+  <name xml:lang="ta">Mobipocket</name>
+  <name xml:lang="tr">Mobipocket</name>
+  <name xml:lang="uk">Mobipocket</name>
+  <name xml:lang="vi">Mobipocket</name>
+  <name xml:lang="x-test">xxMobipocketxx</name>
+  <name xml:lang="zh-CN">Mobipocket</name>
+  <name xml:lang="zh-TW">Mobipocket</name>
+  <summary>Adds support for reading Mobipocket E-books</summary>
+  <summary xml:lang="ar">يضيف دعم لقراءة الكتب الإلكترونية Mobipocket</summary>
+  <summary xml:lang="az">Mobipocket E-books sənədlərini oxumaq üçün dəstək əlavə edir</summary>
+  <summary xml:lang="bg">Добавя поддръжка за четене на електронни книги във формат Mobipocket</summary>
+  <summary xml:lang="ca">Afegeix la implementació per a llegir llibres electrònics Mobipocket</summary>
+  <summary xml:lang="ca-valencia">Afig la implementació per a llegir llibres electrònics Mobipocket</summary>
+  <summary xml:lang="cs">Přidává podporu pro čtení e-booků Mobipocket</summary>
+  <summary xml:lang="de">Bietet Unterstützung zum Lesen von Mobipocket-E-Books</summary>
+  <summary xml:lang="el">Προσθέτει υποστήριξη για την ανάνγωση Mobipocket E-Books</summary>
+  <summary xml:lang="en-GB">Adds support for reading Mobipocket E-books</summary>
+  <summary xml:lang="es">Permite la lectura de libros electrónicos en formato Mobipocket</summary>
+  <summary xml:lang="et">Mobipocketi e-raamatute lugemise toetus</summary>
+  <summary xml:lang="eu">Mobipocket e-liburuak irakurtzeko euskarria gehitzen du</summary>
+  <summary xml:lang="fi">Lisää MobiPocket-e-kirjojen lukutuen</summary>
+  <summary xml:lang="fr">Ajouter la gestion en lecture des livres électroniques Mobipocket</summary>
+  <summary xml:lang="gl">Engade a posibilidade de ler libros electrónicos Mobipocket</summary>
+  <summary xml:lang="hi">मोबिपोकेट ई-पुस्तक पढ़ने के लिए समर्थन जोड़ता है</summary>
+  <summary xml:lang="hu">Támogatás Mobipocket e-könyvek olvasásához</summary>
+  <summary xml:lang="ia">Adde supporto per leger E-libros in Mobipocket</summary>
+  <summary xml:lang="it">Aggiunge il supporto per la lettura di libri digitali in formato Mobipocket</summary>
+  <summary xml:lang="ko">Mobipocket 전자책 읽기 지원 추가</summary>
+  <summary xml:lang="lt">Prideda palaikymą Mobipocket elektroninių knygų skaitymui</summary>
+  <summary xml:lang="ml">മൊബിപോക്കറ്റ്‌ ഈ-ബുക്കുകൾ വായിക്കുന്നതിനുള്ള പിന്തുണ ചേർക്കുന്നു</summary>
+  <summary xml:lang="nl">Voegt ondersteuning voor lezen van Mobipocket e-boeken toe</summary>
+  <summary xml:lang="nn">Legg til støtte for å lesa e-bøker i Mobipocket-formatet</summary>
+  <summary xml:lang="pl">Dodaje obsługę formatu Mobipocket</summary>
+  <summary xml:lang="pt">Adiciona o suporte para ler E-books da Mobipocket</summary>
+  <summary xml:lang="pt-BR">Adiciona o suporte para leitura de E-books da Mobipocket</summary>
+  <summary xml:lang="ro">Adaugă suport pentru citirea cărților electronice Mobipocket</summary>
+  <summary xml:lang="ru">Поддержка чтения электронных книг Mobipocket</summary>
+  <summary xml:lang="sk">Pridá podporu pre čítanie e-kníh Mobipocket</summary>
+  <summary xml:lang="sl">Doda podporo za branje e-knjig Mobipocket</summary>
+  <summary xml:lang="sr">Подршка за читање мобипокет е‑књига</summary>
+  <summary xml:lang="sr-Latn">Podrška za čitanje Mobipocket e‑knjiga</summary>
+  <summary xml:lang="sr-ijekavian">Подршка за читање мобипокет е‑књига</summary>
+  <summary xml:lang="sr-ijekavianlatin">Podrška za čitanje Mobipocket e‑knjiga</summary>
+  <summary xml:lang="sv">Lägger till stöd för att läsa Mobipocket e-böcker</summary>
+  <summary xml:lang="ta">Mobipocket மின்புத்தகங்களைப் படிப்பதற்கான ஆதரவை சேர்க்கும்</summary>
+  <summary xml:lang="tr">Mobipocket E-kitaplarını okuma desteği ekler</summary>
+  <summary xml:lang="uk">Додає підтримку читання електронних книг у форматі Mobipocket</summary>
+  <summary xml:lang="vi">Thêm hỗ trợ đọc sách điện tử Mobipocket</summary>
+  <summary xml:lang="x-test">xxAdds support for reading Mobipocket E-booksxx</summary>
+  <summary xml:lang="zh-CN">增加对 Mobipocket 电子书的支持</summary>
+  <summary xml:lang="zh-TW">加入讀取 Mobipocket 電子書的支援</summary>
+  <provides>
+    <mediatype>image/bmp</mediatype>
+    <mediatype>image/x-dds</mediatype>
+    <mediatype>image/x-eps</mediatype>
+    <mediatype>image/x-exr</mediatype>
+    <mediatype>image/gif</mediatype>
+    <mediatype>image/x-hdr</mediatype>
+    <mediatype>image/x-ico</mediatype>
+    <mediatype>image/jp2</mediatype>
+    <mediatype>image/jpeg</mediatype>
+    <mediatype>video/x-mng</mediatype>
+    <mediatype>image/x-portable-bitmap</mediatype>
+    <mediatype>image/x-pcx</mediatype>
+    <mediatype>image/x-portable-graymap</mediatype>
+    <mediatype>image/png</mediatype>
+    <mediatype>image/x-portable-pixmap</mediatype>
+    <mediatype>image/x-psd</mediatype>
+    <mediatype>image/x-rgb</mediatype>
+    <mediatype>image/x-tga</mediatype>
+    <mediatype>image/tiff</mediatype>
+    <mediatype>image/x-xbitmap</mediatype>
+    <mediatype>image/x-xcf</mediatype>
+    <mediatype>image/x-xpixmap</mediatype>
+    <mediatype>image/x-gzeps</mediatype>
+    <mediatype>image/x-bzeps</mediatype>
+  </provides>
+  <url type="homepage">https://okular.kde.org</url>
+  <releases>
+    <release version="22.08.0" date="2022-08-18"/>
+    <release version="22.04.3" date="2022-07-07"/>
+    <release version="22.04.2" date="2022-06-09"/>
+    <release version="22.04.1" date="2022-05-12"/>
+  </releases>
+</component>
