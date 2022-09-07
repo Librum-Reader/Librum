@@ -8,29 +8,46 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 
-# Qt
+# Qt Settings
 set(CMAKE_AUTOUIC OFF)
+
 
 
 
 # Setup
 include(cmake/SetOptionalPackageProperties.cmake)
+
 option(FORCE_NOT_REQUIRED_DEPENDENCIES "List (semicolon-separated) of dependencies that will be downgraded from REQUIRED to RECOMMENDED")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
 
 if (ANDROID AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES) AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES STREQUAL ""))
     set(FORCE_NOT_REQUIRED_DEPENDENCIES "KF5Wallet;KF5JS;TIFF;JPEG;LibSpectre;KF5KExiv2;CHM;KF5KHtml;LibZip;DjVuLibre;EPub;Discount;")
 endif()
 
 
-
-
-# Dependencies
-find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Test Widgets PrintSupport Svg Qml Quick)
-if(ANDROID)
-    find_package(Qt5 CONFIG REQUIRED COMPONENTS AndroidExtras)
+# append the plugins from the install tree folder to the QT_PLUGIN_PATH
+if(UNIX)
+    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH}:${KDE_INSTALL_FULL_QTPLUGINDIR}")
+elseif(WIN32)
+    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH};${KDE_INSTALL_FULL_QTPLUGINDIR}")
 endif()
 
+if(NOT WIN32)
+ set(MATH_LIB m)
+else(NOT WIN32)
+ set(MATH_LIB)
+endif(NOT WIN32)
+
+
+
+
+
+# KF5 Dependencies
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
+    Parts
+    Crash
+    IconThemes
+    TextWidgets
     Archive
     Bookmarks
     Completion
@@ -43,10 +60,6 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
     WindowSystem
 )
 
-
-
-
-# MIME-Type dependencies
 find_package(KF5Wallet ${KF5_REQUIRED_VERSION})
 set_okular_optional_package_properties(KF5Wallet PROPERTIES
     PURPOSE "Required for document storing passwords in secure wallets.")
@@ -54,17 +67,12 @@ if(KF5Wallet_FOUND)
     add_definitions(-DWITH_KWALLET=1)
 endif()
 
-
 find_package(KF5JS ${KF5_REQUIRED_VERSION})
 set_okular_optional_package_properties(KF5JS PROPERTIES
     PURPOSE "Required for supporting JavaScript in PDF documents")
 if(KF5JS_FOUND)
     add_definitions(-DWITH_KJS=1)
 endif()
-
-
-find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
-find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS Parts Crash IconThemes TextWidgets)
 
 find_package(KF5Purpose)
 set_okular_optional_package_properties(KF5Purpose PROPERTIES
@@ -76,20 +84,16 @@ else()
     set(PURPOSE_FOUND 0)
 endif()
 
-find_package(Qt5TextToSpeech CONFIG)
-set_okular_optional_package_properties(Qt5TextToSpeech PROPERTIES
-    PURPOSE "Enables speech features.")
-if (Qt5TextToSpeech_FOUND)
-    add_definitions(-DHAVE_SPEECH)
-endif()
-
-
 find_package(KF5Kirigami2)
 set_package_properties(KF5Kirigami2 PROPERTIES
     DESCRIPTION "A QtQuick based components set"
     PURPOSE "Required at runtime by the mobile app"
     TYPE RUNTIME
 )
+if(KF5Kirigami2_VERSION VERSION_LESS "5.85")
+    message(FATAL_ERROR "Disable mobile build. This requires Kirigami 5.85 or greater.")
+    set(BUILD_MOBILE OFF)
+endif()
 
 
 if(NOT WIN32 AND NOT ANDROID AND NOT APPLE)
@@ -101,34 +105,61 @@ if(NOT WIN32 AND NOT ANDROID AND NOT APPLE)
         URL "https://api.kde.org/frameworks/kactivities/html/"
         PURPOSE "Required for Activities integration.")
 endif()
+
+
+
+
+
+
+# Qt Dependencies
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Test Widgets PrintSupport Svg Qml Quick DBus)
+if(ANDROID)
+    find_package(Qt5 CONFIG REQUIRED COMPONENTS AndroidExtras)
+endif()
+
+find_package(Qt5TextToSpeech CONFIG)
+set_okular_optional_package_properties(Qt5TextToSpeech PROPERTIES
+    PURPOSE "Enables speech features.")
+if (Qt5TextToSpeech_FOUND)
+    add_definitions(-DHAVE_SPEECH)
+endif()
+
 find_package(Phonon4Qt5 CONFIG REQUIRED)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
 
+
+
+
+
+# MIME-Type dependencies
 find_package(ZLIB REQUIRED)
 
 find_package(Poppler "0.86.0" COMPONENTS Qt5)
 set_okular_optional_package_properties(Poppler PROPERTIES
         PURPOSE "Support for PDF files in okular.")
 
+    
 find_package(Freetype)
 set_okular_optional_package_properties(Freetype PROPERTIES
         DESCRIPTION  "A font rendering engine"
         URL "https://www.freetype.org"
         PURPOSE "Provides freetype font support in the okular DVI generator.")
 
+    
 find_package(TIFF)
 set_okular_optional_package_properties(TIFF PROPERTIES
         DESCRIPTION  "A library for reading and writing TIFF formatted files,"
         URL "http://www.libtiff.org"
         PURPOSE "Support for TIFF files in okular.")
 
+    
 find_package(JPEG)
 set_okular_optional_package_properties(JPEG PROPERTIES
         DESCRIPTION  "A library for reading and writing JPEG image files."
         URL "https://www.ijg.org"
         PURPOSE "Support for PalmDB documents in okular.")
 
+    
 set(LIBSPECTRE_MINIMUM_VERSION "0.2")
 find_package(LibSpectre "${LIBSPECTRE_MINIMUM_VERSION}")
 set_okular_optional_package_properties(LibSpectre PROPERTIES
@@ -136,60 +167,66 @@ set_okular_optional_package_properties(LibSpectre PROPERTIES
         URL "https://libspectre.freedesktop.org"
         PURPOSE "Support for PS files in okular.")
 
+    
 find_package(KF5KExiv2 CONFIG)
 set_okular_optional_package_properties(KF5KExiv2 PROPERTIES
         DESCRIPTION  "Wrapper around Exiv2 library"
         URL "https://commits.kde.org/libkexiv2"
         PURPOSE "Support for exif rotation in image files.")
 
+    
 find_package(CHM)
 set_okular_optional_package_properties(CHM PROPERTIES
         DESCRIPTION  "A library for dealing with Microsoft ITSS/CHM format files"
         URL "http://www.jedrea.com/chmlib"
         PURPOSE "Support CHM files in okular.")
 
+    
 find_package(KF5KHtml CONFIG)
 set_okular_optional_package_properties(KF5KHtml PROPERTIES
         DESCRIPTION "HTML rendering library"
         PURPOSE "Support CHM files in okular.")
 
+    
 find_package(LibZip)
 set_okular_optional_package_properties(LibZip PROPERTIES
         DESCRIPTION  "A library for reading, creating, and modifying zip archives"
         URL "https://libzip.org/"
         PURPOSE "Support CHM files in okular.")
 
+    
 find_package(DjVuLibre "3.5.17")
 set_okular_optional_package_properties(DjVuLibre PROPERTIES
         DESCRIPTION  "A library for dealing with DjVu formatted files"
         URL "https://djvulibre.djvuzone.org"
         PURPOSE "Support for DjVu files in okular.")
 
+    
 find_package(EPub)
 set_okular_optional_package_properties(EPub PROPERTIES
         DESCRIPTION  "A library for reading EPub documents"
         URL "http://sourceforge.net/projects/ebook-tools"
         PURPOSE "Support for EPub documents in Okular.")
 
+    
 find_package(QMobipocket "2" CONFIG)
 set_okular_optional_package_properties(QMobipocket PROPERTIES
         DESCRIPTION  "A library for reading Mobipocket documents"
         URL "https://commits.kde.org/kdegraphics-mobipocket"
         PURPOSE "Support for Mobipocket documents in Okular.")
 
+    
 find_package(Discount)
 set_okular_optional_package_properties(Discount PROPERTIES
         DESCRIPTION "A library that gives you formatting functions suitable for marking down entire documents or lines of text"
         URL "https://www.pell.portland.or.us/~orc/Code/discount/"
         PURPOSE "Support for Markdown documents in Okular.")
 
-    
-    
-    
-    
-    
-    
-# Setup
+
+
+
+
+# Qt definitions
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DTRANSLATION_DOMAIN="okular")
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
@@ -203,6 +240,7 @@ add_definitions(-DQT_NO_KEYWORDS)
 
 
 
+# ECM Setup
 include(ECMInstallIcons)
 include(ECMSetupVersion)
 include(ECMOptionalAddSubdirectory)
@@ -218,21 +256,10 @@ include(CMakePackageConfigHelpers)
 include(ECMSetupQtPluginMacroNames)
 
 
-
-# append the plugins from the install tree folder to the QT_PLUGIN_PATH
-if(UNIX)
-    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH}:${KDE_INSTALL_FULL_QTPLUGINDIR}")
-elseif(WIN32)
-    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH};${KDE_INSTALL_FULL_QTPLUGINDIR}")
-endif()
-
-
-
 ecm_setup_version(${PROJECT_VERSION}
                   VARIABLE_PREFIX OKULAR
                   VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/core/version.h"
                   PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/Okular5ConfigVersion.cmake")
-
 
 
 ecm_setup_qtplugin_macro_names(
@@ -244,15 +271,6 @@ ecm_setup_qtplugin_macro_names(
 
 
 
-if(NOT WIN32)
- set(MATH_LIB m)
-else(NOT WIN32)
- set(MATH_LIB)
-endif(NOT WIN32)
-
-
-
-
 include_directories(
     /usr/include/KF5/KBookmarks
     ${CMAKE_CURRENT_SOURCE_DIR}/
@@ -260,11 +278,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/core/synctex
     ${CMAKE_CURRENT_BINARY_DIR}/core/
 )
-
-if(KF5Kirigami2_VERSION VERSION_LESS "5.85")
-    message(FATAL_ERROR "Disable mobile build. This requires Kirigami 5.85 or greater.")
-    set(BUILD_MOBILE OFF)
-endif()
 
 
 
