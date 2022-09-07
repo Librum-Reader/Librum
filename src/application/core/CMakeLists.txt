@@ -382,8 +382,6 @@ add_library(okularcore SHARED ${okularcore_SRCS})
 generate_export_header(okularcore BASE_NAME okularcore EXPORT_FILE_NAME "${CMAKE_CURRENT_BINARY_DIR}/core/okularcore_export.h")
 
 
-
-
 if (ANDROID)
     set(fileName ${CMAKE_BINARY_DIR}/Okular5Core-android-dependencies.xml)
     file(WRITE "${fileName}" "<rules><dependencies><lib name='Okular5Core'><depends>\n"
