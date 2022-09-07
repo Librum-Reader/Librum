@@ -11,6 +11,7 @@ class IBookService : public QObject
     
 public:
     virtual void uploadBook(QString path) = 0;
+    virtual void openBook(QString path) = 0;
 };
 
 } // namespace application

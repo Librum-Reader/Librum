@@ -15,4 +15,9 @@ void BookController::uploadBook(QString path)
     m_bookService->uploadBook(path);
 }
 
+void BookController::openBook(QString path)
+{
+    m_bookService->openBook(path);
+}
+
 } // namespace adapters::controllers

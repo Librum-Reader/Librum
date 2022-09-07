@@ -127,7 +127,11 @@ Page
                 model: 12
                 delegate: MBook
                 {
-                    onLeftButtonClicked: loadPage(readingPage);
+                    onLeftButtonClicked: 
+                    {
+                        BookController.openBook("Smth");
+                        loadPage(readingPage);
+                    }
                     
                     onRightButtonClicked:
                         (index, mouse) =>

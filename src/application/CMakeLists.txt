@@ -17,7 +17,32 @@ set(QT_REQUIRED_VERSION "5.15.5")
 
 
 # Dependencies
+find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
+
 add_subdirectory(core)
+
+
+
+
+# Setup
+set(application_SRC
+    settings.hpp
+
+    interfaces/services/i_authentication_service.hpp
+    interfaces/services/i_book_service.hpp
+    interfaces/gateways/i_user_storage_gateway.hpp
+    
+    services/authentication_service.cpp
+    services/authentication_service.hpp
+    services/book_service.cpp
+    services/book_service.hpp
+)
+
+
+find_package(KF5Config)
+kconfig_add_kcfg_files(application_SRC GENERATE_MOC ${CMAKE_CURRENT_SOURCE_DIR}/core/conf/settings_mobile.kcfgc)
+
 
 
 
@@ -25,14 +50,7 @@ add_subdirectory(core)
 # Build
 add_library(application
                 SHARED
-                    interfaces/services/i_authentication_service.hpp
-                    interfaces/services/i_book_service.hpp
-                    interfaces/gateways/i_user_storage_gateway.hpp
-                    
-                    services/authentication_service.cpp
-                    services/authentication_service.hpp
-                    services/book_service.cpp
-                    services/book_service.hpp
+                    ${application_SRC}
 )
 
 target_include_directories(application
@@ -45,6 +63,11 @@ target_include_directories(application
                     ${DOMAIN_INCLUDES}
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core
+                    ${CMAKE_CURRENT_BINARY_DIR}/core/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core/core
+                    ${CMAKE_CURRENT_BINARY_DIR}/core/core
 )
 
 target_compile_definitions(application
@@ -54,9 +77,10 @@ target_compile_definitions(application
 
 target_link_libraries(application
                 PRIVATE
-                    domain
                     Qt5::Core
                     Qt5::Network
+                    domain
+                    okularcore
 )
 
 target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

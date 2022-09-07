@@ -14,6 +14,7 @@ public:
     BookService();
 
     void uploadBook(QString path) override;
+    void openBook(QString path) override;
 };
 
 } // namespace application::services

@@ -15,6 +15,7 @@ class BookController : public IBookController
 public:
     BookController(application::IBookService* bookService);
     void uploadBook(QString path) override;
+    void openBook(QString path) override;
     
 private:
     application::IBookService* m_bookService;

@@ -14,6 +14,7 @@ public:
     virtual ~IBookController() noexcept = default;
     
     Q_INVOKABLE virtual void uploadBook(QString path) = 0;
+    Q_INVOKABLE virtual void openBook(QString path) = 0;
 };
 
 } // namespace adapters
