@@ -1,22 +1,15 @@
-# Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
-
-
-
 # Qt
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 
 
-# Options
-set(QT_REQUIRED_VERSION "5.15.5")
-
-
 
 
 # Dependencies
+find_package(QT NAMES Qt5 COMPONENTS Core Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
+
 find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 

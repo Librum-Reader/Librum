@@ -1,20 +1,38 @@
 cmake_minimum_required(VERSION 3.16)
-
-set (RELEASE_SERVICE_VERSION_MAJOR "22")
-set (RELEASE_SERVICE_VERSION_MINOR "11")
-set (RELEASE_SERVICE_VERSION_MICRO "70")
-set (RELEASE_SERVICE_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}.${RELEASE_SERVICE_VERSION_MICRO}")
-
-project(okular VERSION ${RELEASE_SERVICE_VERSION})
+project(okular VERSION "22.11.70")
 
 
+# Language
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+
+# Qt
 set(CMAKE_AUTOUIC OFF)
 
 
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+# Dependencies
+find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Test Widgets PrintSupport Svg Qml Quick)
+if(ANDROID)
+    find_package(Qt5 CONFIG REQUIRED COMPONENTS AndroidExtras)
+endif()
+
+find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
+    Archive
+    Bookmarks
+    Completion
+    Config
+    ConfigWidgets
+    CoreAddons
+    I18n
+    KIO
+    ThreadWeaver
+    WindowSystem
+)
+
+
 
 
 option(FORCE_NOT_REQUIRED_DEPENDENCIES "List (semicolon-separated) of dependencies that will be downgraded from REQUIRED to RECOMMENDED")
@@ -53,65 +71,6 @@ endfunction()
 
 
 
-find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-include(ECMInstallIcons)
-include(ECMSetupVersion)
-include(ECMOptionalAddSubdirectory)
-include(GenerateExportHeader)
-include(FeatureSummary)
-include(ECMAddAppIcon)
-include(KDECompilerSettings NO_POLICY_SCOPE)
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(ECMAddTests)
-include(ECMAddAppIcon)
-include(CMakePackageConfigHelpers)
-include(ECMSetupQtPluginMacroNames)
-
-# append the plugins from the install tree folder to the QT_PLUGIN_PATH
-if(UNIX)
-    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH}:${KDE_INSTALL_FULL_QTPLUGINDIR}")
-elseif(WIN32)
-    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH};${KDE_INSTALL_FULL_QTPLUGINDIR}")
-endif()
-
-
-
-ecm_setup_version(${PROJECT_VERSION}
-                  VARIABLE_PREFIX OKULAR
-                  VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/core/version.h"
-                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/Okular5ConfigVersion.cmake")
-
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED COMPONENTS Core Test Widgets PrintSupport Svg Qml Quick)
-
-
-if(ANDROID)
-    find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED COMPONENTS AndroidExtras)
-endif()
-
-
-ecm_setup_qtplugin_macro_names(
-    JSON_ARG2
-        "OKULAR_EXPORT_PLUGIN"
-    CONFIG_CODE_VARIABLE
-        PACKAGE_SETUP_AUTOMOC_VARIABLES
-)
-
-find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
-    Archive
-    Bookmarks
-    Completion
-    Config
-    ConfigWidgets
-    CoreAddons
-    I18n
-    KIO
-    ThreadWeaver
-    WindowSystem
-)
-
 find_package(KF5Wallet ${KF5_REQUIRED_VERSION})
 set_okular_optional_package_properties(KF5Wallet PROPERTIES
     PURPOSE "Required for document storing passwords in secure wallets.")
@@ -128,7 +87,7 @@ if(KF5JS_FOUND)
 endif()
 
 
-find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED COMPONENTS DBus)
+find_package(Qt5 CONFIG REQUIRED COMPONENTS DBus)
 find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS Parts Crash IconThemes TextWidgets)
 
 find_package(KF5Purpose)
@@ -141,7 +100,7 @@ else()
     set(PURPOSE_FOUND 0)
 endif()
 
-find_package(Qt5TextToSpeech ${QT_REQUIRED_VERSION} CONFIG)
+find_package(Qt5TextToSpeech CONFIG)
 set_okular_optional_package_properties(Qt5TextToSpeech PROPERTIES
     PURPOSE "Enables speech features.")
 if (Qt5TextToSpeech_FOUND)
@@ -248,6 +207,13 @@ set_okular_optional_package_properties(Discount PROPERTIES
         URL "https://www.pell.portland.or.us/~orc/Code/discount/"
         PURPOSE "Support for Markdown documents in Okular.")
 
+    
+    
+    
+    
+    
+    
+# Setup
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DTRANSLATION_DOMAIN="okular")
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
@@ -259,6 +225,58 @@ add_definitions(-DKF_DEPRECATED_WARNINGS_SINCE=0x054400)
 add_definitions(-DQT_NO_KEYWORDS)
 
 
+
+
+include(ECMInstallIcons)
+include(ECMSetupVersion)
+include(ECMOptionalAddSubdirectory)
+include(GenerateExportHeader)
+include(FeatureSummary)
+include(ECMAddAppIcon)
+include(KDECompilerSettings NO_POLICY_SCOPE)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(ECMAddTests)
+include(ECMAddAppIcon)
+include(CMakePackageConfigHelpers)
+include(ECMSetupQtPluginMacroNames)
+
+
+
+# append the plugins from the install tree folder to the QT_PLUGIN_PATH
+if(UNIX)
+    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH}:${KDE_INSTALL_FULL_QTPLUGINDIR}")
+elseif(WIN32)
+    set(ENV{QT_PLUGIN_PATH} "$ENV{QT_PLUGIN_PATH};${KDE_INSTALL_FULL_QTPLUGINDIR}")
+endif()
+
+
+
+ecm_setup_version(${PROJECT_VERSION}
+                  VARIABLE_PREFIX OKULAR
+                  VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/core/version.h"
+                  PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/Okular5ConfigVersion.cmake")
+
+
+
+ecm_setup_qtplugin_macro_names(
+    JSON_ARG2
+        "OKULAR_EXPORT_PLUGIN"
+    CONFIG_CODE_VARIABLE
+        PACKAGE_SETUP_AUTOMOC_VARIABLES
+)
+
+
+
+if(NOT WIN32)
+ set(MATH_LIB m)
+else(NOT WIN32)
+ set(MATH_LIB)
+endif(NOT WIN32)
+
+
+
+
 include_directories(
     /usr/include/KF5/KBookmarks
     ${CMAKE_CURRENT_SOURCE_DIR}/
@@ -266,8 +284,6 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/core/synctex
     ${CMAKE_CURRENT_BINARY_DIR}/core/
 )
-
-
 
 if(KF5Kirigami2_VERSION VERSION_LESS "5.85")
     message(FATAL_ERROR "Disable mobile build. This requires Kirigami 5.85 or greater.")
@@ -281,13 +297,10 @@ add_subdirectory( generators )
 
 include(OkularConfigureChecks.cmake)
 
-if(NOT WIN32)
- set(MATH_LIB m)
-else(NOT WIN32)
- set(MATH_LIB)
-endif(NOT WIN32)
 
-# okularcore
+
+
+# Build the core
 
 set(okularcore_SRCS
    core/action.cpp
