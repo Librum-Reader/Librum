@@ -16,6 +16,7 @@ set(CMAKE_AUTOUIC OFF)
 
 # Setup
 include(cmake/SetOptionalPackageProperties.cmake)
+include(OkularConfigureChecks.cmake)
 
 option(FORCE_NOT_REQUIRED_DEPENDENCIES "List (semicolon-separated) of dependencies that will be downgraded from REQUIRED to RECOMMENDED")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules)
@@ -272,25 +273,24 @@ ecm_setup_qtplugin_macro_names(
 
 
 include_directories(
-    /usr/include/KF5/KBookmarks
-    ${CMAKE_CURRENT_SOURCE_DIR}/
+    ${CMAKE_CURRENT_SOURCE_DIR}
     ${PHONON_INCLUDES}
     ${CMAKE_CURRENT_SOURCE_DIR}/core/synctex
-    ${CMAKE_CURRENT_BINARY_DIR}/core/
+    ${CMAKE_CURRENT_BINARY_DIR}/core
 )
 
 
 
+
+
+# Generators
 add_subdirectory( generators )
 
-
-include(OkularConfigureChecks.cmake)
 
 
 
 
 # Build the core
-
 set(okularcore_SRCS
    core/action.cpp
    core/annotations.cpp
@@ -329,15 +329,14 @@ set(okularcore_SRCS
    core/synctex/synctex_parser.c
    core/synctex/synctex_parser_utils.c
 )
+
 qt5_add_resources(okularcore_SRCS
-   core/script/builtin.qrc
-)
+   core/script/builtin.qrc)
 
 ki18n_wrap_ui(okularcore_SRCS
-   core/textdocumentsettings.ui
-)
+   core/textdocumentsettings.ui)
 
-install( FILES
+install(FILES
            core/action.h
            core/annotations.h
            core/area.h
@@ -365,7 +364,7 @@ install( FILES
            ${CMAKE_CURRENT_BINARY_DIR}/settings_core.h
          DESTINATION ${KDE_INSTALL_INCLUDEDIR}/okular/core COMPONENT Devel)
 
-install( FILES
+install(FILES
            interfaces/configinterface.h
            interfaces/guiinterface.h
            interfaces/printinterface.h
@@ -374,8 +373,7 @@ install( FILES
          DESTINATION ${KDE_INSTALL_INCLUDEDIR}/okular/interfaces COMPONENT Devel)
 
 ki18n_wrap_ui(okularcore_SRCS
-   core/chooseenginewidget.ui
-)
+   core/chooseenginewidget.ui)
 
 kconfig_add_kcfg_files(okularcore_SRCS GENERATE_MOC conf/settings_core.kcfgc)
 
@@ -463,9 +461,7 @@ install(FILES core/okularGenerator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYP
 
 
 
-
 ########### install files ###############
-
 install(FILES okular.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 
 
@@ -481,7 +477,6 @@ ki18n_install(po)
 
 
 ########### cmake files #################
-
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/Okular5")
 configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/Okular5Config.cmake.in"
