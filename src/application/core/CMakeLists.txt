@@ -13,6 +13,17 @@ set(CMAKE_AUTOUIC OFF)
 
 
 
+# Setup
+include(cmake/SetOptionalPackageProperties.cmake)
+option(FORCE_NOT_REQUIRED_DEPENDENCIES "List (semicolon-separated) of dependencies that will be downgraded from REQUIRED to RECOMMENDED")
+
+if (ANDROID AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES) AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES STREQUAL ""))
+    set(FORCE_NOT_REQUIRED_DEPENDENCIES "KF5Wallet;KF5JS;TIFF;JPEG;LibSpectre;KF5KExiv2;CHM;KF5KHtml;LibZip;DjVuLibre;EPub;Discount;")
+endif()
+
+
+
+
 # Dependencies
 find_package(Qt5 CONFIG REQUIRED COMPONENTS Core Test Widgets PrintSupport Svg Qml Quick)
 if(ANDROID)
@@ -35,42 +46,7 @@ find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS
 
 
 
-option(FORCE_NOT_REQUIRED_DEPENDENCIES "List (semicolon-separated) of dependencies that will be downgraded from REQUIRED to RECOMMENDED")
-
-if (ANDROID AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES) AND (NOT FORCE_NOT_REQUIRED_DEPENDENCIES STREQUAL ""))
-    set(FORCE_NOT_REQUIRED_DEPENDENCIES "KF5Wallet;KF5JS;TIFF;JPEG;LibSpectre;KF5KExiv2;CHM;KF5KHtml;LibZip;DjVuLibre;EPub;Discount;")
-endif()
-
-
-function(set_okular_optional_package_properties _name _props)
-    if(NOT "${_props}" STREQUAL "PROPERTIES")
-        message(FATAL_ERROR "PROPERTIES keyword is missing in set_okular_optional_package_properties() call.")
-    endif()
-
-    set(options) # none
-    set(oneValueArgs DESCRIPTION URL PURPOSE)
-    set(multiValueArgs) # none
-
-    CMAKE_PARSE_ARGUMENTS(_SPP "${options}" "${oneValueArgs}" "${multiValueArgs}"  ${ARGN})
-
-    if(_SPP_UNPARSED_ARGUMENTS)
-        message(FATAL_ERROR "Unknown keywords given to set_okular_optional_package_properties(): \"${_SPP_UNPARSED_ARGUMENTS}\"")
-    endif()
-
-    set(DEPENDENCY_TYPE "REQUIRED")
-    if (${_name} IN_LIST FORCE_NOT_REQUIRED_DEPENDENCIES)
-        set(DEPENDENCY_TYPE "RECOMMENDED")
-    endif()
-    set_package_properties(${_name} PROPERTIES
-        TYPE ${DEPENDENCY_TYPE}
-        DESCRIPTION ${_SPP_DESCRIPTION}
-        URL ${_SPP_URL}
-        PURPOSE "${_SPP_PURPOSE} You can make the dependency optional adding ${_name} to the FORCE_NOT_REQUIRED_DEPENDENCIES cmake option"
-    )
-endfunction()
-
-
-
+# MIME-Type dependencies
 find_package(KF5Wallet ${KF5_REQUIRED_VERSION})
 set_okular_optional_package_properties(KF5Wallet PROPERTIES
     PURPOSE "Required for document storing passwords in secure wallets.")
