@@ -331,7 +331,7 @@ Page
         {
             root.empty = false;
             
-            BookController.uploadBook(file);
+            BookController.openBook(file);
         }
         
         onRejected: root.empty = false

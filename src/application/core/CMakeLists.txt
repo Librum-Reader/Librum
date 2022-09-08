@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 project(okular VERSION "22.11.70")
 
 
@@ -126,6 +126,7 @@ if (Qt5TextToSpeech_FOUND)
 endif()
 
 find_package(Phonon4Qt5 CONFIG REQUIRED)
+
 
 
 
@@ -459,6 +460,7 @@ install(FILES core/okularGenerator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYP
 
 
 
+
 ########### install files ###############
 install(FILES okular.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 
@@ -470,6 +472,7 @@ else()
 endif()
 
 ki18n_install(po)
+
 
 
 
