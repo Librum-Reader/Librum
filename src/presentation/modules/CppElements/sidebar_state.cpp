@@ -10,7 +10,7 @@ SidebarState::SidebarState(QObject *parent)
 }
 
 SidebarState::State SidebarState::currentState() const
-{    
+{
     return m_currentState;
 }
 

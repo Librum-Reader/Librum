@@ -1,7 +1,15 @@
-# Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
+#Dependencies
+find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Svg Xml REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Svg Xml REQUIRED)
+find_package(KF5Bookmarks)
+find_package(KF5 REQUIRED COMPONENTS
+    Bookmarks
+    Service
+    I18n
+)
 
 
 # Qt
@@ -20,6 +28,10 @@ add_library(presentation
                     modules/CppElements/key_sequence_recorder.hpp
                     modules/CppElements/sidebar_state.cpp
                     modules/CppElements/sidebar_state.hpp
+                    modules/CppElements/page_item.cpp
+                    modules/CppElements/page_item.hpp
+                    modules/CppElements/document_item.cpp
+                    modules/CppElements/document_item.hpp
 )
 
 target_compile_definitions(presentation
@@ -30,15 +42,33 @@ target_compile_definitions(presentation
 target_link_libraries(presentation
                 PRIVATE
                     adapters
+                    okularcore
+                    okularpart
                     Qt5::Core
                     Qt5::Quick
+                    Qt5::Qml
+                    Qt5::Xml
+                    Qt5::Svg
+                    KF5::Bookmarks
+                    KF5::I18n
+                    KF5::Service
 )
 
 target_include_directories(presentation
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
+                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/gui
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core/gui
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../application
+                    ${CMAKE_CURRENT_BINARY_DIR}/../application
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core
+                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/
+                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core/core
+                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/core
 )
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

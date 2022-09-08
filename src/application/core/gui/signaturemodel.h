@@ -16,7 +16,7 @@ class Document;
 
 class SignatureModelPrivate;
 
-class SignatureModel : public QAbstractItemModel
+class Q_DECL_EXPORT SignatureModel : public QAbstractItemModel
 {
     Q_OBJECT
 

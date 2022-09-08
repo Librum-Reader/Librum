@@ -461,6 +461,60 @@ install(FILES core/okularGenerator.desktop DESTINATION ${KDE_INSTALL_KSERVICETYP
 
 
 
+# Build the part
+set(okularpart_SRCS
+    gui/certificatemodel.cpp
+    gui/debug_ui.cpp
+    gui/guiutils.cpp
+    gui/pagepainter.cpp
+    gui/signatureguiutils.cpp
+    gui/signaturemodel.cpp
+    gui/tocmodel.cpp)
+
+
+kconfig_add_kcfg_files(okularpart_SRCS GENERATE_MOC conf/settings.kcfgc)
+
+add_library(okularpart SHARED ${okularpart_SRCS})
+generate_export_header(okularpart BASE_NAME okularpart)
+
+target_link_libraries(okularpart
+    okularcore
+    ${MATH_LIB}
+    Qt5::Svg
+    Phonon::phonon4qt5
+    KF5::Archive
+    KF5::Bookmarks
+    KF5::I18n
+    KF5::IconThemes
+    KF5::ItemViews
+    KF5::KIOCore
+    KF5::KIOFileWidgets
+    KF5::KIOWidgets
+    KF5::Parts
+    KF5::Solid
+    KF5::WindowSystem
+    KF5::TextWidgets
+)
+
+if(KF5Wallet_FOUND)
+    target_link_libraries(okularpart KF5::Wallet)
+endif()
+
+if (KF5Purpose_FOUND)
+    target_link_libraries(okularpart KF5::PurposeWidgets)
+endif()
+
+set_target_properties(okularpart PROPERTIES PREFIX "")
+
+if (Qt5TextToSpeech_FOUND)
+   target_link_libraries(okularpart Qt5::TextToSpeech)
+endif()
+
+
+
+
+
+
 ########### install files ###############
 install(FILES okular.upd DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
 

@@ -19,7 +19,7 @@ class DocumentViewport;
 
 class TOCModelPrivate;
 
-class TOCModel : public QAbstractItemModel
+class Q_DECL_EXPORT TOCModel : public QAbstractItemModel
 {
     Q_OBJECT
     /**

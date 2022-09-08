@@ -33,7 +33,7 @@ QString getReadableKeyUsageCommaSeparated(Okular::CertificateInfo::KeyUsageExten
 QString getReadableKeyUsageNewLineSeparated(Okular::CertificateInfo::KeyUsageExtensions kuExtensions);
 QString getReadableModificationSummary(const Okular::SignatureInfo &signatureInfo);
 
-std::pair<KMessageWidget::MessageType, QString> documentSignatureMessageWidgetText(const Okular::Document *doc);
+Q_DECL_EXPORT std::pair<KMessageWidget::MessageType, QString> documentSignatureMessageWidgetText(const Okular::Document *doc);
 }
 
 #endif
