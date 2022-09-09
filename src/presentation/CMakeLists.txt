@@ -57,18 +57,8 @@ target_link_libraries(presentation
 target_include_directories(presentation
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
-                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/gui
-                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core/gui
-                PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/../application
-                    ${CMAKE_CURRENT_BINARY_DIR}/../application
-                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core
-                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/
-                    ${CMAKE_CURRENT_SOURCE_DIR}/../application/core/core
-                    ${CMAKE_CURRENT_BINARY_DIR}/../application/core/core
+                    ${APPLICATION_INCLUDES}
+                    ${OKULARCORE_INCLUDES}
 )
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

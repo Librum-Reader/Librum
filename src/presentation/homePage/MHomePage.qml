@@ -2,9 +2,9 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Qt.labs.platform 1.0
-import Librum.elements 1.0
-import CustomComponents 1.0
 import QtQml.Models 2.15
+import CustomComponents 1.0
+import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.controllers 1.0
@@ -331,7 +331,7 @@ Page
         {
             root.empty = false;
             
-            BookController.openBook(file);
+            console.log("selected file: " + file)
         }
         
         onRejected: root.empty = false

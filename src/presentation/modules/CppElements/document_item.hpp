@@ -5,14 +5,21 @@
 #include <core/document.h>
 #include <core/observer.h>
 
+
+class SignatureModel;
+class TOCModel;
+
 namespace Okular
 {
 class Document;
 }
 
+
+namespace cpp_elements
+{
+
 class Observer;
-class SignatureModel;
-class TOCModel;
+
 
 class DocumentItem : public QObject
 {
@@ -194,6 +201,7 @@ private:
     bool m_needsPassword = false;
 };
 
+
 class Observer : public QObject, public Okular::DocumentObserver
 {
     Q_OBJECT
@@ -211,3 +219,4 @@ Q_SIGNALS:
 private:
     DocumentItem *m_document;
 };
+} // namespace cpp_elements

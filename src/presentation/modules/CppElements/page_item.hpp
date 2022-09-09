@@ -5,16 +5,20 @@
 #include <QQuickItem>
 #include <core/document.h>
 #include <core/view.h>
+#include "document_item.hpp"
+
 
 class QTimer;
-
-class DocumentItem;
 
 namespace Okular
 {
 class Document;
 class Page;
 }
+
+namespace cpp_elements
+{
+class DocumentItem;
 
 class PageItem : public QQuickItem, public Okular::View
 {
@@ -29,7 +33,7 @@ class PageItem : public QQuickItem, public Okular::View
      * The document this page belongs to
      */
     Q_PROPERTY(DocumentItem *document READ document WRITE setDocument NOTIFY documentChanged)
-
+    
     /**
      * The currently displayed page
      */
@@ -68,7 +72,7 @@ public:
     int implicitHeight() const;
 
     DocumentItem *document() const;
-    void setDocument(DocumentItem *doc);
+    void setDocument(DocumentItem* doc);
 
     int pageNumber() const;
     void setPageNumber(int number);
@@ -111,7 +115,7 @@ public:
     void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
 
     QSGNode *updatePaintNode(QSGNode *, QQuickItem::UpdatePaintNodeData *) override;
-
+    
 Q_SIGNALS:
     void flickableChanged();
     void documentChanged();
@@ -140,5 +144,6 @@ private:
     QPointer<QQuickItem> m_flickable;
     Okular::DocumentViewport m_viewPort;
     QImage m_buffer;
-    
 };
+
+} // namespace cpp_elements

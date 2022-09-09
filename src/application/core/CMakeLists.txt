@@ -85,17 +85,6 @@ else()
     set(PURPOSE_FOUND 0)
 endif()
 
-find_package(KF5Kirigami2)
-set_package_properties(KF5Kirigami2 PROPERTIES
-    DESCRIPTION "A QtQuick based components set"
-    PURPOSE "Required at runtime by the mobile app"
-    TYPE RUNTIME
-)
-if(KF5Kirigami2_VERSION VERSION_LESS "5.85")
-    message(FATAL_ERROR "Disable mobile build. This requires Kirigami 5.85 or greater.")
-    set(BUILD_MOBILE OFF)
-endif()
-
 
 if(NOT WIN32 AND NOT ANDROID AND NOT APPLE)
     find_package(KF5 ${KF5_REQUIRED_VERSION} REQUIRED COMPONENTS

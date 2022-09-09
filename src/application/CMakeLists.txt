@@ -21,7 +21,7 @@ add_subdirectory(core)
 # Setup
 set(application_SRC
     settings.hpp
-
+    
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_book_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
@@ -48,19 +48,15 @@ add_library(application
 
 target_include_directories(application
                 PUBLIC
+                    ${CMAKE_CURRENT_BINARY_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${DOMAIN_INCLUDES}
+                    ${OKULARCORE_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
                     ${CMAKE_CURRENT_SOURCE_DIR}/converters
-                    ${DOMAIN_INCLUDES}
-                PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/core
-                    ${CMAKE_CURRENT_BINARY_DIR}/core/
-                    ${CMAKE_CURRENT_SOURCE_DIR}/core/core
-                    ${CMAKE_CURRENT_BINARY_DIR}/core/core
 )
 
 target_compile_definitions(application

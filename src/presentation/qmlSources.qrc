@@ -94,5 +94,7 @@
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
         <file>settings/MResetSettingsPopup.qml</file>
+        <file>readingPage/DocumentView.qml</file>
+        <file>readingPage/PageView.qml</file>
     </qresource>
 </RCC>

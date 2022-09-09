@@ -24,6 +24,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Add subdirectories
+set(OKULARCORE_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/application/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/gui
+    ${CMAKE_CURRENT_BINARY_DIR}/application/core
+    ${CMAKE_CURRENT_BINARY_DIR}/application/core/core
+)
+
 add_subdirectory(domain/)
 get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
 
@@ -40,6 +48,7 @@ add_subdirectory(presentation/)
 
 
 
+
 # Building
 add_executable(appLibrum
     main.cpp
@@ -48,26 +57,28 @@ add_executable(appLibrum
 
 target_compile_definitions(appLibrum
     PRIVATE
-    $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
+        $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 
 target_link_libraries(appLibrum
     PRIVATE
-    presentation
-    adapters
-    application
-    infrastructure
-    Qt5::Quick
-    Qt5::Widgets
-    Qt5::QuickControls2
+        presentation
+        adapters
+        application
+        infrastructure
+        okularpart
+        Qt5::Quick
+        Qt5::Widgets
+        Qt5::QuickControls2
 )
 
 target_include_directories(appLibrum
     PRIVATE
-    ${ADAPTERS_INCLUDES}
-    ${APPLICATION_INCLUDES}
-    ${INFRASTRUCTURE_INCLUDES}
-    ${PROJECT_SOURCE_DIR}/libs/di/include
+        ${ADAPTERS_INCLUDES}
+        ${APPLICATION_INCLUDES}
+        ${INFRASTRUCTURE_INCLUDES}
+        ${OKULARCORE_INCLUDES}
+        ${PROJECT_SOURCE_DIR}/libs/di/include
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")

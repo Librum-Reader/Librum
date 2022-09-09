@@ -15,6 +15,11 @@
 #include "gui/signatureguiutils.h"
 #include "gui/signaturemodel.h"
 #include "gui/tocmodel.h"
+#include "QDebug"
+
+
+namespace cpp_elements
+{
 
 DocumentItem::DocumentItem(QObject *parent)
     : QObject(parent)
@@ -50,6 +55,8 @@ void DocumentItem::setUrl(const QUrl &url)
 
 void DocumentItem::openUrl(const QUrl &url, const QString &password)
 {
+    qDebug() << "Opening " << url;
+    
     m_document->closeDocument();
     // TODO: password
     QMimeDatabase db;
@@ -292,3 +299,5 @@ void Observer::notifyPageChanged(int page, int flags)
 {
     Q_EMIT pageChanged(page, flags);
 }
+
+} // namespace cpp_elements

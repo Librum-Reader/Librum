@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.style 1.0
+import Librum.elements 1.0
 import "readingToolbar"
 import "readingSearchbar"
 
@@ -21,7 +22,7 @@ Page
     
     Shortcut
     {
-        sequence: StandardKey.ZoomIn
+        sequences: [ StandardKey.ZoomIn ]
         onActivated: view.renderScale += 0.1
     }
     Shortcut
@@ -34,6 +35,18 @@ Page
         sequence: "ESC"
         onActivated: if(root.fullScreen) root.exitFullScreen();
     }
+    
+    Keys.onReturnPressed: documentItem.currentPage += 1
+    
+    
+    DocumentItem
+    {
+        id: documentItem
+        onUrlChanged: currentPage = 0
+        
+        Component.onCompleted: documentItem.url = "file:/home/creapermann/Downloads/The_Art_of_Seduction.epub"
+    }
+    
     
     
     Item
@@ -250,20 +263,40 @@ Page
                     radius: 2
                     
                     
-                    Rectangle
+                    RowLayout
                     {
-                        width: 1
-                        height: parent.height
-                        color: Style.colorLightBorder
-                        anchors.left: parent.left
-                    }
-                    
-                    Rectangle
-                    {
-                        width: 1
-                        height: parent.height
-                        color: Style.colorLightBorder
-                        anchors.right: parent.right
+                        id: displayLayout
+                        anchors.fill: parent
+                        spacing: 0
+                        
+                        
+                        Rectangle
+                        {
+                            Layout.preferredWidth: 1
+                            Layout.fillHeight: true
+                            Layout.alignment: Qt.AlignLeft
+                            color: Style.colorLightBorder
+                        }
+                        
+                        DocumentView
+                        {
+                            id: pageArea
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            visible: documentItem.opened
+                            document: documentItem
+                            
+                            Keys.onReturnPressed: documentItem.currentPage = documentItem.currentPage + 1
+                        }
+                        
+                        
+                        Rectangle
+                        {
+                            Layout.preferredWidth: 1
+                            Layout.fillHeight: true
+                            Layout.alignment: Qt.AlignRight
+                            color: Style.colorLightBorder
+                        }
                     }
                 }
             }

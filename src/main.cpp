@@ -1,3 +1,4 @@
+#include <memory>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QInputDialog>
 #include <QtWidgets/QMessageBox>
@@ -6,12 +7,11 @@
 #include <QTranslator>
 #include <QLocale>
 #include <QString>
-#include <memory>
+#include <QQuickStyle>
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include <boost/di.hpp>
-#include <QQuickStyle>
 #include "app_information.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
@@ -19,6 +19,9 @@
 #include "key_sequence_recorder.hpp"
 #include "qguiapplication.h"
 #include "sidebar_state.hpp"
+#include "document_item.hpp"
+#include "page_item.hpp"
+
 
 
 void registerTypes();
@@ -33,7 +36,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
-    QQuickStyle::setStyle(QStringLiteral("Default"));
+//    QQuickStyle::setStyle(QStringLiteral("Default"));
     
     addTranslations();
     loadFonts();
@@ -43,6 +46,10 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl("qrc:/StyleSheet.qml"), "Librum.style", 1, 0, "Style");
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
+    qmlRegisterType<adapters::models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
+    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
+    qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
+    qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
     
     auto authenticationController = config::diConfig().create<adapters::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);
@@ -56,8 +63,6 @@ int main(int argc, char *argv[])
     auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
     qmlRegisterSingletonInstance("Librum.elements", 1, 0, "SidebarState", sidebarState.get());
     
-    qmlRegisterType<adapters::models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
-    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     
     
     
@@ -114,7 +119,5 @@ void loadFonts()
     
     
     QFont defaultFont("SF Pro Display");
-//    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.7);
-//    defaultFont.setWordSpacing(0.0);
     QGuiApplication::setFont(defaultFont);
 }

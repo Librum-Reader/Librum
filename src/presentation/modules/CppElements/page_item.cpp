@@ -15,6 +15,11 @@
 #include "gui/priorities.h"
 #include "settings.hpp"
 
+
+
+namespace cpp_elements
+{
+
 #define REDRAW_TIMEOUT 250
 
 PageItem::PageItem(QQuickItem *parent)
@@ -81,7 +86,7 @@ DocumentItem *PageItem::document() const
     return m_documentItem.data();
 }
 
-void PageItem::setDocument(DocumentItem *doc)
+void PageItem::setDocument(DocumentItem* doc)
 {
     if (doc == m_documentItem.data() || !doc) {
         return;
@@ -396,3 +401,5 @@ void PageItem::setIsThumbnail(bool thumbnail)
     m_redrawTimer->setSingleShot(true);
     */
 }
+
+} // namespace cpp_elements
