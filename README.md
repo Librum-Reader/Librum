@@ -16,13 +16,15 @@ Due to the complete copyleft license we are utilizing, anyone can download, edit
 
 <b>Note</b>: Librum is currently in development, and many fundamental features have yet to be implemented! 
 
+<br>
+
 # Contact
 
 For questions, you can reach us under: librum_help@protonmail.com
-<br><br>
-For business related contact, contact us here: librum_reader@protonmail.com
+<br>
+For business related contact, reach out to us here: librum_reader@protonmail.com
 
-
+<br>
 
 # Details
 
