@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
-//    QQuickStyle::setStyle(QStringLiteral("Default"));
+    QQuickStyle::setStyle(QStringLiteral("Default"));
     
     addTranslations();
     loadFonts();
