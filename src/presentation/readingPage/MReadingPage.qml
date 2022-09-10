@@ -282,6 +282,7 @@ Page
                         id: displayLayout
                         anchors.fill: parent
                         spacing: 0
+                        clip: true
                         
                         
                         Rectangle
