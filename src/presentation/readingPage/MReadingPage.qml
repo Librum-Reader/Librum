@@ -44,7 +44,21 @@ Page
         id: documentItem
         onUrlChanged: currentPage = 0
         
-        Component.onCompleted: documentItem.url = "file:/home/creapermann/Downloads/The_Art_of_Seduction.epub"
+        Component.onCompleted: documentItem.url = "file:/home/creapermann/Me/resources/books/linux/Linux_Bible.pdf";
+        
+        onOpenedChanged:
+        {
+            if(opened)
+            {
+                toolbar.currentPageButton.maxPages = pageCount;
+                toolbar.currentPageButton.currentPage = currentPage;
+            }
+        }
+        
+        onCurrentPageChanged:
+        {
+            toolbar.currentPageButton.currentPage = currentPage;
+        }
     }
     
     
