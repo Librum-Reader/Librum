@@ -52,6 +52,7 @@ Page
             {
                 toolbar.currentPageButton.maxPages = pageCount;
                 toolbar.currentPageButton.currentPage = currentPage;
+                toolbar.bookTitle = windowTitleForDocument;
             }
         }
         
@@ -60,7 +61,6 @@ Page
             toolbar.currentPageButton.currentPage = currentPage;
         }
     }
-    
     
     
     Item
@@ -212,7 +212,7 @@ Page
                 SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth 
                                                                  : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth 
                                                                                             : 0
-                SplitView.minimumWidth: 140
+                SplitView.minimumWidth: chapterSidebar.visible || bookmarksSidebar.visible ? 140 : 0
                 SplitView.maximumWidth: 480
                 
                 MChapterSidebar
@@ -276,6 +276,8 @@ Page
                     color: Style.colorBackground
                     radius: 2
                     
+                    onWidthChanged: toolbar.pageWidth = width
+                    
                     
                     RowLayout
                     {
@@ -329,7 +331,7 @@ Page
     
     
     Component.onCompleted: root.forceActiveFocus()
-    
+     
     
     function enterFullScreen()
     {

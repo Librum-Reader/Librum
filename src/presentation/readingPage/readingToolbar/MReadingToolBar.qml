@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
@@ -10,6 +11,8 @@ Pane
 {
     id: root
     property bool fullScreenMode: false
+    property string bookTitle: "Unknown name"
+    property int pageWidth: 0
     property alias chapterButton: chapterButton
     property alias bookmarkButton: bookmarkButton
     property alias searchButton: searchButton
@@ -153,13 +156,14 @@ Pane
             }
         }
         
-        
         Label
         {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            text: "C-Sharp_In_Depth: A Practical Guide"
+            // To be positioned in the center
+            leftPadding: - backButton.width - chapterButton.width - bookmarkButton.width 
+                         - currentPageButton.width - mainLayout.spacing*5 + Window.width / 2 - contentWidth / 2
+            text: root.bookTitle
             color: Style.colorBaseTitle
             font.family: Style.defaultFontFamily
             font.weight: Font.DemiBold
