@@ -267,6 +267,7 @@ MFlickWrapper
             }
             
         }
+        
     }
     
     Component.onCompleted: emailInput.giveFocus()

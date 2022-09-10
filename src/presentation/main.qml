@@ -104,8 +104,10 @@ ApplicationWindow
     function switchPage(page, sidebarItem)
     {
         pageManager.replace(page);
+        
         pageManager.pageHasSidebar = sidebarItem === undefined ? false : true;
-        if(sidebarItem !== undefined) sidebar.changeSelectedItem(sidebarItem);
+        if(pageManager.pageHasSidebar)
+            sidebar.changeSelectedItem(sidebarItem);
         
         if(page === readingPage)
             baseRoot.minimumWidth = 550;
