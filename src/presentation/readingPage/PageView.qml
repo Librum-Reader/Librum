@@ -6,8 +6,6 @@ import Librum.elements 1.0
 
 Item
 {
-    width: parent.width
-    height: parent.height
     readonly property PageItem pageItem: page
     property alias document: page.document
     property alias pageNumber: page.pageNumber

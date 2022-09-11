@@ -3,11 +3,12 @@ import QtQuick.Controls 2.15
 import Librum.elements 1.0
 
 
-ScrollView
+Item
 {
     id: root
     property DocumentItem document
-    property PageItem page: page.pageItem
+    readonly property real contentWidth: flick.contentWidth
+    readonly property real contentHeight: flick.contentHeight
     signal clicked
     
     
@@ -21,10 +22,9 @@ ScrollView
         property int startWidth: 0
         
         interactive: false
-        anchors.centerIn: parent
+        anchors.fill: parent
         contentWidth: startWidth
-        contentHeight: startWidth / page.pageRatio
-        clip: true
+        contentHeight: startWidth / listView.currentItem.pageRatio
         
         onWidthChanged:
         {
@@ -39,7 +39,10 @@ ScrollView
         MouseArea
         {
             id: mouseArea
-            anchors.fill: parent
+            anchors.top: parent.top
+            width: flick.width > flick.contentWidth ? flick.width : flick.contentWidth
+            height: flick.height > flick.contentHeight ? flick.height : flick.contentHeight
+            
             
             property real oldMouseX
             property real oldMouseY
@@ -84,11 +87,11 @@ ScrollView
             
             onWheel:
             {
+                //generate factors between 0.8 and 1.2
+                var factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
+                
                 if (wheel.modifiers & Qt.ControlModifier)
                 {
-                    //generate factors between 0.8 and 1.2
-                    var factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
-                    
                     var newWidth = flick.contentWidth * factor;
                     var newHeight = flick.contentHeight * factor;
                     
@@ -102,24 +105,36 @@ ScrollView
                 }
                 else
                 {
-                    flick.contentY = Math.min(flick.contentHeight-flick.height, Math.max(0, flick.contentY - wheel.angleDelta.y));
+                    if(factor > 1)
+                        listView.flick(0, 2000)
+                    else
+                        listView.flick(0, -2000)
                 }
             }
             
-            PageView
-            {
-                id: page
-                document: root.document
-                visible: true
-                z: 2
-            }
             
-            
-            Binding
+            Component.onCompleted: listView.interactive = false
+            ListView
             {
-                target: page
-                property: "pageNumber"
-                value: root.document.currentPage
+                id: listView
+                cacheBuffer: 1000
+                anchors.fill: parent
+                interactive: false
+                boundsMovement: Flickable.StopAtBounds
+                clip: false
+                flickDeceleration: 7000
+                
+                model: root.document.pageCount
+                
+                delegate: PageView
+                {
+                    id: page
+                    width: flick.contentWidth
+                    height: flick.contentHeight
+                    document: root.document
+                    pageNumber: modelData
+                    visible: true
+                }
             }
         }
     }
