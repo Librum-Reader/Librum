@@ -109,6 +109,12 @@ Item
                         listView.flick(0, 2000)
                     else
                         listView.flick(0, -2000)
+                    
+                    
+                    // set current page
+                    let newPage = Math.round(listView.contentY / flick.contentHeight);
+                    if(newPage != root.document.currentPage)
+                        root.document.currentPage = newPage;
                 }
             }
             
@@ -122,7 +128,8 @@ Item
                 interactive: false
                 boundsMovement: Flickable.StopAtBounds
                 clip: false
-                flickDeceleration: 7000
+                flickDeceleration: 10000
+                
                 
                 model: root.document.pageCount
                 

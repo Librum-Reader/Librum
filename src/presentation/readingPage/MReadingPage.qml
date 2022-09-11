@@ -50,14 +50,8 @@ Page
             if(opened)
             {
                 toolbar.currentPageButton.maxPages = pageCount;
-                toolbar.currentPageButton.currentPage = currentPage;
                 toolbar.bookTitle = windowTitleForDocument;
             }
-        }
-        
-        onCurrentPageChanged:
-        {
-            toolbar.currentPageButton.currentPage = currentPage;
         }
     }
     
@@ -93,6 +87,8 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
+            
+            currentPage: pageArea.document.currentPage
             
             onChapterButtonClicked:
             {

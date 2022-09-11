@@ -13,6 +13,7 @@ Pane
     property bool fullScreenMode: false
     property string bookTitle: "Unknown name"
     property int pageWidth: 0
+    property int currentPage: 0
     property alias chapterButton: chapterButton
     property alias bookmarksButton: bookmarksButton
     property alias searchButton: searchButton
@@ -134,14 +135,13 @@ Pane
         MButton
         {
             id: currentPageButton
-            property int currentPage
             property int maxPages
             
             Layout.preferredWidth: 105
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
-            text: "(" + currentPage.toString() + " of " + maxPages.toString() + ")"
+            text: "(" + (root.currentPage + 1).toString() + " of " + maxPages.toString() + ")"
             fontColor: active ? Style.colorBasePurple : Style.colorBaseText
             fontWeight: Font.Medium
             fontSize: 10.5
