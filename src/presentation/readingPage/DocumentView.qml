@@ -31,7 +31,7 @@ ScrollView
             if(firstHappend)
                 return;
             
-            startWidth = root.parent.width / 2;
+            startWidth = root.parent.width;
             firstHappend = true;
         }
         

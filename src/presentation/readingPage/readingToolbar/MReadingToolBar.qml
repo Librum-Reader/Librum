@@ -160,9 +160,10 @@ Pane
         {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            // To be positioned in the center
-            leftPadding: - backButton.width - chapterButton.width - bookmarkButton.width 
-                         - currentPageButton.width - mainLayout.spacing*5 + Window.width / 2 - contentWidth / 2
+            // To be positioned at the horizontal the center
+            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarkButton.width 
+                                          - currentPageButton.width - mainLayout.spacing*5 + Window.width / 2 - contentWidth / 2
+            leftPadding: paddingToCenter
             text: root.bookTitle
             color: Style.colorBaseTitle
             font.family: Style.defaultFontFamily
