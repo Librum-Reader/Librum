@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Window 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.elements 1.0
@@ -270,7 +271,7 @@ Page
                 {
                     id: page
                     height: parent.height
-                    width: 1020
+                    width: pageArea.contentWidth == 0 ? 1020 : pageArea.contentWidth >= parent.width ? parent.width : pageArea.contentWidth
                     anchors.centerIn: parent
                     Layout.alignment: Qt.AlignCenter
                     color: Style.colorBackground

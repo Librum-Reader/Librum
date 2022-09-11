@@ -17,17 +17,29 @@ ScrollView
     Flickable
     {
         id: flick
+        property bool firstHappend: false
+        property int startWidth: 0
+        
         interactive: false
-        contentWidth: flick.width
-        contentHeight: flick.width / page.pageRatio
+        anchors.centerIn: parent
+        contentWidth: startWidth
+        contentHeight: startWidth / page.pageRatio
         clip: true
+        
+        onWidthChanged:
+        {
+            if(firstHappend)
+                return;
+            
+            startWidth = root.parent.width / 2;
+            firstHappend = true;
+        }
         
         
         MouseArea
         {
             id: mouseArea
-            width: parent.width
-            height: parent.height
+            anchors.fill: parent
             
             property real oldMouseX
             property real oldMouseY
@@ -70,36 +82,18 @@ ScrollView
                 oldMouseY = pos.y;
             }
             
-            onDoubleClicked:
-            {
-                flick.contentWidth = flick.width
-                flick.contentHeight = flick.width / mouseArea.currPageDelegate.pageRatio
-            }
-            
-            onClicked:
-            {
-                var pos = mapToItem(flick, mouse.x, mouse.y);
-                if (Math.abs(startMouseX - pos.x) < 20 &&
-                        Math.abs(startMouseY - pos.y) < 20)
-                {
-                    root.clicked();
-                }
-            }
-            
             onWheel:
             {
                 if (wheel.modifiers & Qt.ControlModifier)
                 {
                     //generate factors between 0.8 and 1.2
-                    var factor = (((wheel.angleDelta.y / 120)+1) / 5 )+ 0.8;
+                    var factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
                     
                     var newWidth = flick.contentWidth * factor;
                     var newHeight = flick.contentHeight * factor;
                     
-                    if (newWidth < flick.width || newHeight < flick.height ||
-                            newHeight > flick.height * 3)
+                    if (newHeight < flick.height - 500 || newHeight > flick.height * 5)
                     {
-                        
                         return;
                     }
                     
