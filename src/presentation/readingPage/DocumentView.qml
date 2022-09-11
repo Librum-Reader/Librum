@@ -24,7 +24,7 @@ Item
         interactive: false
         anchors.fill: parent
         contentWidth: startWidth
-        contentHeight: startWidth / listView.currentItem.pageRatio
+        contentHeight: Math.round(startWidth / listView.currentItem.pageRatio)
         
         onWidthChanged:
         {
@@ -123,7 +123,7 @@ Item
             ListView
             {
                 id: listView
-                cacheBuffer: 1000
+                cacheBuffer: 2000
                 anchors.fill: parent
                 interactive: false
                 boundsMovement: Flickable.StopAtBounds

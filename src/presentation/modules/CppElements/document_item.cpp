@@ -128,6 +128,9 @@ QUrl DocumentItem::url() const
 void DocumentItem::setCurrentPage(int page)
 {
     Q_UNUSED(page)
+    m_document->setViewportPage(page);
+//    m_tocModel->setCurrentViewport(m_document->viewport());
+    Q_EMIT currentPageChanged();
 }
 
 int DocumentItem::currentPage() const

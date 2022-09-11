@@ -3738,6 +3738,8 @@ void Document::setViewportPage(int page, DocumentObserver *excludeObserver, bool
     }
 
     // make a viewport from the page and broadcast it
+    Q_UNUSED(excludeObserver)
+    Q_UNUSED(smoothMove)
     setViewport(DocumentViewport(page), excludeObserver, smoothMove);
 }
 

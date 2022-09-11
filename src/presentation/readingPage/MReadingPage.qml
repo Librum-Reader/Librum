@@ -295,14 +295,6 @@ Page
                         clip: true
                         
                         
-                        Rectangle
-                        {
-                            Layout.preferredWidth: 1
-                            Layout.fillHeight: true
-                            Layout.alignment: Qt.AlignLeft
-                            color: Style.colorLightBorder
-                        }
-                        
                         DocumentView
                         {
                             id: pageArea
@@ -310,15 +302,6 @@ Page
                             Layout.fillHeight: true
                             visible: documentItem.opened
                             document: documentItem
-                        }
-                        
-                        
-                        Rectangle
-                        {
-                            Layout.preferredWidth: 1
-                            Layout.fillHeight: true
-                            Layout.alignment: Qt.AlignRight
-                            color: Style.colorLightBorder
                         }
                     }
                 }
