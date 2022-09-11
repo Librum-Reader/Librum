@@ -37,8 +37,6 @@ Page
         onActivated: if(root.fullScreen) root.exitFullScreen();
     }
     
-    Keys.onReturnPressed: documentItem.currentPage += 1
-    
     
     DocumentItem
     {
@@ -98,54 +96,30 @@ Page
             
             onChapterButtonClicked:
             {
-                // close
-                if(chapterButton.active)
+                if(chapterSidebar.active)
                 {
-                    chapterButton.active = false;
-                    chapterSidebar.visible = false;
+                    chapterSidebar.close();
                     return;
                 }
                 
-                // close bookmarks sidebar and open
-                if(bookmarkButton.active)
-                {
-                    bookmarkButton.active = false;
-                    bookmarksSidebar.visible = false;
-                    
-                    chapterButton.active = true;
-                    chapterSidebar.visible = true;
-                    return;
-                }
+                if(bookmarksSidebar.active)
+                    bookmarksSidebar.close();
                 
-                // open
-                chapterButton.active = true;
-                chapterSidebar.visible = true;
+                chapterSidebar.open();
             }
             
             onBookMarkButtonClicked:
             {
-                // close
-                if(bookmarkButton.active)
+                if(bookmarksSidebar.active)
                 {
-                    bookmarkButton.active = false;
-                    bookmarksSidebar.visible = false;
+                    bookmarksSidebar.close();
                     return;
                 }
                 
-                // close chapters sidebar and open
-                if(chapterButton.active)
-                {
-                    chapterButton.active = false;
-                    chapterSidebar.visible = false;
-                    
-                    bookmarkButton.active = true;
-                    bookmarksSidebar.visible = true;
-                    return;
-                }
+                if(chapterSidebar.active)
+                    chapterSidebar.close();
                 
-                // open
-                bookmarkButton.active = true;
-                bookmarksSidebar.visible = true;
+                bookmarksSidebar.open();
             }
             
             onCurrentPageButtonClicked:
@@ -210,16 +184,21 @@ Page
             // Need to combine sidebars into one item, else rezising doesnt work properly
             Item
             {
+                id: sidebarItem
                 SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth 
-                                                                 : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth 
-                                                                                            : 0
+                                                                 : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth : 0
                 SplitView.minimumWidth: chapterSidebar.visible || bookmarksSidebar.visible ? 140 : 0
                 SplitView.maximumWidth: 480
+                
+                visible: chapterSidebar.active || bookmarksSidebar.active
+                
                 
                 MChapterSidebar
                 {
                     id: chapterSidebar
                     property int lastWidth: 300
+                    property bool active: false
+                    
                     onVisibleChanged: if(!visible) lastWidth = width
                     
                     anchors.fill: parent
@@ -233,12 +212,29 @@ Page
                         color: Style.colorLightBorder
                         anchors.right: parent.right
                     }
+                    
+                    
+                    function open()
+                    {
+                        chapterSidebar.active = true;
+                        chapterSidebar.visible = true;
+                        toolbar.chapterButton.active = true;
+                    }
+                    
+                    function close()
+                    {
+                        chapterSidebar.active = false;
+                        chapterSidebar.visible = false;
+                        toolbar.chapterButton.active = false;
+                    }
                 }
                 
                 MBookmarksSidebar
                 {
                     id: bookmarksSidebar
                     property int lastWidth: 300
+                    property bool active: false
+                    
                     onVisibleChanged: if(!visible) lastWidth = width
                     
                     anchors.fill: parent
@@ -251,6 +247,21 @@ Page
                         height: parent.height
                         color: Style.colorLightBorder
                         anchors.right: parent.right
+                    }
+                    
+                    
+                    function open()
+                    {
+                        bookmarksSidebar.active = true;
+                        bookmarksSidebar.visible = true;
+                        toolbar.bookmarksButton.active = true;
+                    }
+                    
+                    function close()
+                    {
+                        bookmarksSidebar.active = false;
+                        bookmarksSidebar.visible = false;
+                        toolbar.bookmarksButton.active = false;
                     }
                 }
             }
@@ -303,8 +314,6 @@ Page
                             Layout.fillHeight: true
                             visible: documentItem.opened
                             document: documentItem
-                            
-                            Keys.onReturnPressed: documentItem.currentPage = documentItem.currentPage + 1
                         }
                         
                         

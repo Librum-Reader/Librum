@@ -14,7 +14,7 @@ Pane
     property string bookTitle: "Unknown name"
     property int pageWidth: 0
     property alias chapterButton: chapterButton
-    property alias bookmarkButton: bookmarkButton
+    property alias bookmarksButton: bookmarksButton
     property alias searchButton: searchButton
     property alias currentPageButton: currentPageButton
     property alias fullScreenButton: fullScreenButton
@@ -45,7 +45,7 @@ Pane
     Shortcut
     {
         sequence: "Ctrl+B"
-        onActivated: bookmarkButton.buttonTriggeredAction()
+        onActivated: bookmarksButton.buttonTriggeredAction()
     }
     Shortcut
     {
@@ -113,7 +113,7 @@ Pane
         
         MButton
         {
-            id: bookmarkButton
+            id: bookmarksButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
             backgroundColor: Style.colorBaseGray
@@ -161,7 +161,7 @@ Pane
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             // To be positioned at the horizontal the center
-            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarkButton.width 
+            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarksButton.width 
                                           - currentPageButton.width - mainLayout.spacing*5 + Window.width / 2 - contentWidth / 2
             leftPadding: paddingToCenter
             text: root.bookTitle
