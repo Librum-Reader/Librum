@@ -19,7 +19,30 @@ If there is an issue with the Librum installation, consider temporarily uninstal
 
 <br>
 
+# Preview
+
+![View](data/app_preview/login_screen.png)
+Your entry-point to Librum
+
+<br>
+
+![View](data/app_preview/book_reading.mp4)
+Enjoy a simple and clean look while reading
+
+<br>
+
+![View](data/app_preview/appearance_settings.png)
+Make the application look and feel the way you want
+
+<br>
+
+![View](data/app_preview/edit_metadata.png)
+Setup and manage your own library
+
+<br>
+
 # Contact
+
 
 For questions, you can reach us under: librum_help@protonmail.com
 <br>
