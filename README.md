@@ -26,7 +26,7 @@ Your entry-point to Librum
 
 <br>
 
-![View](data/app_preview/book_reading.mp4)
+![View](data/app_preview/book_reading.png)
 Enjoy a simple and clean look while reading
 
 <br>
