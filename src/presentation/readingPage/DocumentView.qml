@@ -9,6 +9,7 @@ Item
     property DocumentItem document
     readonly property real contentWidth: flick.contentWidth
     readonly property real contentHeight: flick.contentHeight
+    readonly property alias pageListView: listView
     signal clicked
     
     
@@ -21,10 +22,12 @@ Item
         property bool firstHappend: false
         property int startWidth: 0
         
-        interactive: false
         anchors.fill: parent
+        interactive: false
         contentWidth: startWidth
         contentHeight: Math.round(startWidth / listView.currentItem.pageRatio)
+        boundsMovement: Flickable.StopAtBounds
+        flickDeceleration: 10000
         
         onWidthChanged:
         {
@@ -63,15 +66,6 @@ Item
             {
                 var pos = mapToItem(flick, mouse.x, mouse.y);
                 
-                // Move on Y-Axis
-                let bottomClamp = flick.contentHeight - flick.height;
-                let topClamp = 0;
-                
-                let yFlickAmount = flick.contentY - (pos.y - oldMouseY);
-                let amountToMoveOnY = Math.min(bottomClamp, yFlickAmount);
-                flick.contentY = Math.max(topClamp, amountToMoveOnY);
-                
-                
                 // Move on X-Axis
                 let leftClamp = 0;
                 let rightClamp = flick.contentWidth - flick.width;
@@ -88,19 +82,19 @@ Item
             onWheel:
             {
                 //generate factors between 0.8 and 1.2
-                var factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
+                let factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
                 
                 if (wheel.modifiers & Qt.ControlModifier)
                 {
-                    var newWidth = flick.contentWidth * factor;
-                    var newHeight = flick.contentHeight * factor;
+                    let newWidth = flick.contentWidth * factor;
+                    let newHeight = flick.contentHeight * factor;
                     
                     if (newHeight < flick.height - 500 || newHeight > flick.height * 5)
                     {
                         return;
                     }
                     
-                    flick.resizeContent(newWidth, newHeight, Qt.point(wheel.x, wheel.y));
+                    flick.resizeContent(newWidth, newHeight, undefined);
                     flick.returnToBounds();
                 }
                 else
@@ -123,8 +117,9 @@ Item
             ListView
             {
                 id: listView
-                cacheBuffer: 2000
-                anchors.fill: parent
+                cacheBuffer: 4000
+                width: parent.width
+                height: flick.height
                 interactive: false
                 boundsMovement: Flickable.StopAtBounds
                 clip: false
