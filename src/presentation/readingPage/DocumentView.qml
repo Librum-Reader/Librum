@@ -94,7 +94,7 @@ Item
                         return;
                     }
                     
-                    flick.resizeContent(newWidth, newHeight, undefined);
+                    flick.resizeContent(newWidth, newHeight, Qt.point(0, 0));
                     flick.returnToBounds();
                 }
                 else
