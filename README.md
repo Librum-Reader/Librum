@@ -14,7 +14,8 @@ Due to the complete copyleft license we are utilizing, anyone can download, edit
 
 <br>
 
-<b>Note</b>: Librum is currently in development, and many fundamental features have yet to be implemented! 
+<b>Note</b>: Librum currently relies on KDE's infrastructure for okular. This will change soon, however for the time being, Librum and Okular may conflict.
+If there is an issue with the Librum installation, consider temporarily uninstalling okular. 
 
 <br>
 
