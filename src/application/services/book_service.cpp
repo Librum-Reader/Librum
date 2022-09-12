@@ -1,27 +1,63 @@
 #include "book_service.hpp"
-#include "settings.hpp"
-#include "document.h"
 
 
 namespace application::services
 {
 
+using namespace domain::models;
+
 BookService::BookService()
+    : m_currentBook(nullptr)
 {
     
 }
 
-void BookService::uploadBook(QString path)
+void BookService::addBook(const QString& path)
 {
-    Q_UNUSED(path)
+    
 }
 
-void BookService::openBook(QString path)
+void BookService::deleteBook(const QString& title)
 {
-    Q_UNUSED(path)
-    Okular::Settings::instance(QStringLiteral("okularproviderrc"));
-    auto doc = new Okular::Document(nullptr);
-    delete doc;
+    
 }
+
+void BookService::updateBook(const QString& title, const Book& book)
+{
+    
+}
+
+void BookService::addTags(const QString& title, const QList<Tag>& tags)
+{
+    
+}
+
+void BookService::removeTags(const QString& title, const QList<Tag>& tags)
+{
+    
+}
+
+void BookService::books(uint amount) const
+{
+    
+}
+
+void BookService::book(const QString& title) const
+{
+    
+}
+
+bool BookService::setCurrentBook(const QString& title)
+{
+    
+}
+
+const Book& BookService::currentBook() const
+{
+    
+}
+
+
+
 
 } // namespace application::services

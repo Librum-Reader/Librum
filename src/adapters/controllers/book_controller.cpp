@@ -4,30 +4,57 @@
 namespace adapters::controllers
 {
 
+using namespace domain::models;
+
 BookController::BookController(application::IBookService* bookService)
     : m_bookService(bookService)
+{
+}
+
+
+void BookController::addBook(QString path)
 {
     
 }
 
-void BookController::uploadBook(QString path)
+void BookController::deleteBook(QString title)
 {
-    m_bookService->uploadBook(path);
+    
 }
 
-void BookController::openBook(QString path)
+void BookController::updateBook(QString title, QVariantMap operations)
 {
-    m_bookService->openBook(path);
+    
 }
 
-void BookController::setCurrentBookPath(QString path)
+void BookController::addTags(QString title, QList<QString>)
 {
-    m_currentBookPath = path;
+    
 }
 
-QString BookController::currentBookPath()
+void BookController::removeTags(QString title, QList<QString>)
 {
-    return m_currentBookPath;
+    
+}
+
+void BookController::books(uint amount)
+{
+    
+}
+
+void BookController::book(QString title)
+{
+    
+}
+
+bool BookController::setCurrentBook(QString title)
+{
+    
+}
+
+const Book& BookController::currentBook()
+{
+    
 }
 
 } // namespace adapters::controllers
