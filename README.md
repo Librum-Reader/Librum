@@ -104,6 +104,8 @@ Librum supports all major book formats, these include:
 - Plucker
 - Pub
 - Fax
+- All plain text formats
+- Most image formats
 
 
 <br><br>
