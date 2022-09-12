@@ -16,9 +16,12 @@ public:
     BookController(application::IBookService* bookService);
     void uploadBook(QString path) override;
     void openBook(QString path) override;
+    void setCurrentBookPath(QString path) override;
+    QString currentBookPath() override;
     
 private:
     application::IBookService* m_bookService;
+    QString m_currentBookPath;
 };
 
 } // namespace adapters::controllers

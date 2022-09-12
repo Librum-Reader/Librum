@@ -34,6 +34,11 @@ Page
         onActivated: fileDialog.open()
     }
     
+    ListModel
+    {
+        id: bookList
+    }
+    
     
     ColumnLayout
     {
@@ -124,12 +129,15 @@ Page
                 clip: true
                 
                 
-                model: 12
+                
+                model: bookList
                 delegate: MBook
                 {
+                    required property string fileUrl
+                    
                     onLeftButtonClicked: 
                     {
-                        BookController.openBook("Smth");
+                        BookController.setCurrentBookPath(fileUrl);
                         loadPage(readingPage);
                     }
                     
@@ -174,6 +182,7 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
+                                BookController.setCurrentBookPath(fileUrl);
                                 loadPage(readingPage);
                             }
                         }
@@ -267,7 +276,10 @@ Page
             Layout.fillHeight: true
             Layout.topMargin: 32
             
-            onClicked: root.empty = false
+            onClicked:
+            {
+                fileDialog.open();
+            }
         }
         
         Item { Layout.fillHeight: true }
@@ -322,7 +334,7 @@ Page
         acceptLabel: "Import"
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["Text files (*.txt)", "PDF files (*.pdf)", "MOBI files (*.pdf)",
+        nameFilters: ["All files (*)", "Text files (*.txt)", "PDF files (*.pdf)", "MOBI files (*.pdf)",
             "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
             "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
             "DJVU files (*.djvu)"]
@@ -330,6 +342,7 @@ Page
         onAccepted:
         {
             root.empty = false;
+            bookList.append({fileUrl: file.toString()});
             
             console.log("selected file: " + file)
         }

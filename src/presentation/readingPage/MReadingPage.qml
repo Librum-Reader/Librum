@@ -5,6 +5,7 @@ import QtQuick.Window 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.elements 1.0
+import Librum.controllers 1.0
 import "readingToolbar"
 import "readingSearchbar"
 
@@ -43,7 +44,7 @@ Page
         id: documentItem
         onUrlChanged: currentPage = 0
         
-        Component.onCompleted: documentItem.url = "file:/home/creapermann/Me/resources/books/linux/Linux_Bible.pdf";
+        Component.onCompleted: documentItem.url = BookController.currentBookPath();
         
         onOpenedChanged:
         {
@@ -274,36 +275,54 @@ Page
                     color: "transparent"
                 }
                 
-                Rectangle
+                RowLayout
                 {
-                    id: page
-                    height: parent.height
-                    width: pageArea.contentWidth == 0 ? 1020 : pageArea.contentWidth >= parent.width ? parent.width : pageArea.contentWidth
-                    anchors.centerIn: parent
-                    Layout.alignment: Qt.AlignCenter
-                    color: Style.colorBackground
-                    radius: 2
-                    
-                    onWidthChanged: toolbar.pageWidth = width
+                    anchors.fill: parent
+                    spacing: 0
                     
                     
-                    RowLayout
+                    Rectangle
                     {
-                        id: displayLayout
-                        anchors.fill: parent
-                        spacing: 0
-                        clip: true
+                        id: page
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: pageArea.contentWidth == 0 ? 1020 : pageArea.contentWidth >= parent.width /*- vBar.width*/
+                                                                            ? parent.width /*- vBar.width*/ : pageArea.contentWidth
+                        Layout.alignment: Qt.AlignCenter
+                        color: Style.colorBackground
+                        radius: 2
+                        
+                        onWidthChanged: toolbar.pageWidth = width
                         
                         
-                        DocumentView
+                        RowLayout
                         {
-                            id: pageArea
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            visible: documentItem.opened
-                            document: documentItem
+                            id: displayLayout
+                            anchors.fill: parent
+                            spacing: 0
+                            clip: true
+                            
+                            
+                            DocumentView
+                            {
+                                id: pageArea
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                visible: documentItem.opened
+                                document: documentItem
+                            }
                         }
                     }
+                
+//                    ScrollBar
+//                    {
+//                        id: vBar
+//                        Layout.fillHeight: true
+//                        Layout.alignment: Qt.AlignRight
+//                        active: true
+//                        orientation: Qt.Vertical
+//                        size: parent.height / pageArea.pageListView.contentHeight
+//                        policy: ScrollBar.AlwaysOn
+//                    }
                 }
             }
         }
@@ -320,7 +339,7 @@ Page
     
     
     Component.onCompleted: root.forceActiveFocus()
-     
+    
     
     function enterFullScreen()
     {

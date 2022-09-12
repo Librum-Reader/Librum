@@ -20,4 +20,14 @@ void BookController::openBook(QString path)
     m_bookService->openBook(path);
 }
 
+void BookController::setCurrentBookPath(QString path)
+{
+    m_currentBookPath = path;
+}
+
+QString BookController::currentBookPath()
+{
+    return m_currentBookPath;
+}
+
 } // namespace adapters::controllers
