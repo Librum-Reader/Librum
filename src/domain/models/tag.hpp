@@ -6,10 +6,8 @@
 namespace domain::models
 {
 
-class Tag : public QObject
+class Tag
 {
-    Q_OBJECT
-    
 public:
     Tag(QString name);
     
