@@ -41,7 +41,7 @@ void Book::setCover(const QByteArray& newCover)
     m_cover = newCover;
 }
 
-const std::vector<Tag>& Book::tags()
+const std::vector<Tag>& Book::tags() const
 {
     return m_tags;
 }
@@ -65,6 +65,27 @@ bool Book::removeTag(const Tag& tag)
     m_tags.erase(tagPosition);
     return true;
 }
-    
 
+void Book::update(const Book& other)
+{
+    if(m_title != other.title()) m_title = other.title();
+    if(m_filePath != other.filePath()) m_filePath = other.filePath();
+    if(m_cover != other.cover()) m_cover = other.cover();
+    if(!tagsAreTheSame(other.tags())) m_tags = other.tags();
+}
+
+bool Book::tagsAreTheSame(const std::vector<Tag>& other)
+{
+    if(m_tags.size() != other.size())
+        return false;
+    
+    for(int i = 0; i < m_tags.size(); ++i)
+    {
+        if(m_tags.at(i) != other.at(i))
+            return false;
+    }
+    
+    return true;
+}
+    
 } // namespace domain::models

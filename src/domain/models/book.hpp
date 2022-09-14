@@ -23,12 +23,15 @@ public:
     const QByteArray& cover() const;
     void setCover(const QByteArray& newCover);
     
-    const std::vector<Tag>& tags();
     bool addTag(const Tag& tag);
     bool removeTag(const Tag& tag);
+    const std::vector<Tag>& tags() const;
     
+    void update(const Book& other);
     
 private:
+    bool tagsAreTheSame(const std::vector<Tag>& other);
+    
     QString m_title;
     QString m_filePath;
     QByteArray m_cover;
