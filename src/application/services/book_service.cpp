@@ -40,7 +40,8 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::updateBook(const QString& title, const Book& book)
+BookOperationStatus BookService::updateBook(const QString& title,
+                                            const Book& book)
 {
     auto bookPosition = getBookWithTitle(title);
     if(bookPosition == m_books.end())
@@ -53,33 +54,59 @@ BookOperationStatus BookService::updateBook(const QString& title, const Book& bo
 BookOperationStatus BookService::addTags(const QString& title,
                                          const std::vector<Tag>& tags)
 {
+    auto bookPosition = getBookWithTitle(title);
+    if(bookPosition == m_books.end())
+        return BookOperationStatus::BookDoesNotExist;
     
+    for(const auto& tag : tags)
+    {
+        bookPosition->addTag(tag);
+    }
+    
+    return BookOperationStatus::Success;
 }
 
 BookOperationStatus BookService::removeTags(const QString& title,
                                             const std::vector<Tag>& tags)
 {
+    auto bookPosition = getBookWithTitle(title);
+    if(bookPosition == m_books.end())
+        return BookOperationStatus::BookDoesNotExist;
     
+    for(const auto& tag : tags)
+    {
+        bookPosition->removeTag(tag);
+    }
+    
+    return BookOperationStatus::Success;
 }
 
-void BookService::books(uint amount) const
+const std::vector<Book>& BookService::books() const
 {
-    
+    return m_books;
 }
 
-void BookService::book(const QString& title) const
+const Book* BookService::book(const QString& title) const
 {
+    auto bookPosition = getBookWithTitle(title);
+    if(bookPosition == m_books.end())
+        return nullptr;
     
+    return &(*bookPosition);
 }
 
 bool BookService::setCurrentBook(const QString& title)
 {
+    auto bookPosition = getBookWithTitle(title);
+    if(bookPosition == m_books.end())
+        return false;
     
+    m_currentBook = &(*bookPosition);
 }
 
-const Book& BookService::currentBook() const
+const Book* BookService::currentBook() const
 {
-    
+    return m_currentBook;
 }
 
 
@@ -92,6 +119,17 @@ std::vector<Book>::iterator BookService::getBookWithTitle(const QString& title)
     }
     
     return m_books.end();
+}
+
+const std::vector<Book>::const_iterator BookService::getBookWithTitle(const QString& title) const
+{
+    for(std::size_t i = 0; i < m_books.size(); ++i)
+    {
+        if(m_books.at(i).title() == title)
+            return m_books.cbegin() + i;
+    }
+    
+    return m_books.cend();
 }
 
 std::vector<Book>::iterator BookService::getBookWithPath(const QString& path)
