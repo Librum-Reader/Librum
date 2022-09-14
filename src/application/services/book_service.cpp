@@ -27,18 +27,6 @@ BookOperationStatus BookService::addBook(const QString& path)
     return BookOperationStatus::Success;
 }
 
-std::vector<Book>::iterator BookService::bookWithPath(const QString& path)
-{
-    for(std::size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).filePath() == path)
-            return m_books.begin() + i;
-    }
-    
-    return m_books.end();
-}
-
-
 BookOperationStatus BookService::deleteBook(const QString& title)
 {
     auto bookPosition = bookWithTitle(title);
@@ -52,22 +40,14 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     return BookOperationStatus::Success;
 }
 
-std::vector<Book>::iterator BookService::bookWithTitle(const QString& title)
+BookOperationStatus BookService::updateBook(const QString& title, const Book& book)
 {
-    for(std::size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).title() == title)
-            return m_books.begin() + i;
-    }
+    auto bookPosition = bookWithTitle(title);
+    if(bookPosition == m_books.end())
+        return BookOperationStatus::BookDoesNotExist;
     
-    return m_books.end();
-}
-
-
-BookOperationStatus BookService::updateBook(const QString& title,
-                                            const Book& book)
-{
-    
+    bookPosition->update(book);
+    return BookOperationStatus::Success;
 }
 
 BookOperationStatus BookService::addTags(const QString& title,
@@ -100,6 +80,29 @@ bool BookService::setCurrentBook(const QString& title)
 const Book& BookService::currentBook() const
 {
     
+}
+
+
+std::vector<Book>::iterator BookService::bookWithTitle(const QString& title)
+{
+    for(std::size_t i = 0; i < m_books.size(); ++i)
+    {
+        if(m_books.at(i).title() == title)
+            return m_books.begin() + i;
+    }
+    
+    return m_books.end();
+}
+
+std::vector<Book>::iterator BookService::bookWithPath(const QString& path)
+{
+    for(std::size_t i = 0; i < m_books.size(); ++i)
+    {
+        if(m_books.at(i).filePath() == path)
+            return m_books.begin() + i;
+    }
+    
+    return m_books.end();
 }
 
 } // namespace application::services
