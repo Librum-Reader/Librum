@@ -28,8 +28,8 @@ public:
     
     
 private:
-    std::vector<domain::models::Book>::iterator bookWithTitle(const QString& title);
-    std::vector<domain::models::Book>::iterator bookWithPath(const QString& path);
+    std::vector<domain::models::Book>::iterator getBookWithTitle(const QString& title);
+    std::vector<domain::models::Book>::iterator getBookWithPath(const QString& path);
     
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
