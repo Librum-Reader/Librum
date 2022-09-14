@@ -17,7 +17,7 @@ BookService::BookService()
 
 BookOperationStatus BookService::addBook(const QString& path)
 {
-    auto bookPosition = bookWithPathExists(path);
+    auto bookPosition = bookWithPath(path);
     if(bookPosition != m_books.end())
         return BookOperationStatus::BookAlreadyExists;
     
@@ -27,7 +27,7 @@ BookOperationStatus BookService::addBook(const QString& path)
     return BookOperationStatus::Success;
 }
 
-std::vector<Book>::iterator BookService::bookWithPathExists(const QString& path)
+std::vector<Book>::iterator BookService::bookWithPath(const QString& path)
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
@@ -41,7 +41,7 @@ std::vector<Book>::iterator BookService::bookWithPathExists(const QString& path)
 
 BookOperationStatus BookService::deleteBook(const QString& title)
 {
-    auto bookPosition = bookWithTitleExists(title);
+    auto bookPosition = bookWithTitle(title);
     if(bookPosition == m_books.end())
         return BookOperationStatus::BookDoesNotExist;
     
@@ -52,7 +52,7 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     return BookOperationStatus::Success;
 }
 
-std::vector<Book>::iterator BookService::bookWithTitleExists(const QString& title)
+std::vector<Book>::iterator BookService::bookWithTitle(const QString& title)
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
