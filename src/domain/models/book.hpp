@@ -6,10 +6,8 @@
 namespace domain::models
 {
 
-class Book : public QObject
+class Book
 {
-    Q_OBJECT
-    
 public:
     Book(QString title);
     
