@@ -1,16 +1,17 @@
 #include "book.hpp"
+#include <algorithm>
 
 
 namespace domain::models
 {
 
-Book::Book(QString title)
-    : m_title(title)
+Book::Book(QString title, QString path, QByteArray cover)
+    : m_title(title), m_filePath(path), m_cover(cover)
 {
 }
 
 
-const QString& Book::title()
+const QString& Book::title() const
 {
     return m_title;
 }
@@ -20,14 +21,14 @@ void Book::setTitle(const QString& newTitle)
     m_title = newTitle;
 }
 
-const QString& Book::localPath() const
+const QString& Book::filePath() const
 {
-    return m_localPath;
+    return m_filePath;
 }
 
-void Book::setLocalPath(const QString& newLocalPath)
+void Book::setFilePath(const QString& newLocalPath)
 {
-    m_localPath = newLocalPath;
+    m_filePath = newLocalPath;
 }
 
 const QByteArray& Book::cover() const
@@ -40,28 +41,28 @@ void Book::setCover(const QByteArray& newCover)
     m_cover = newCover;
 }
 
-const QList<Tag>& Book::tags()
+const std::vector<Tag>& Book::tags()
 {
     return m_tags;
 }
 
 bool Book::addTag(const Tag& tag)
 {
-    auto containsTag = m_tags.contains(tag);
-    if(containsTag)
+    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    if(tagPosition != m_tags.end())
         return false;
     
-    m_tags.push_back(tag);
+    m_tags.emplace_back(tag);
     return true;
 }
 
 bool Book::removeTag(const Tag& tag)
 {
-    auto index = m_tags.indexOf(tag);
-    if(index == -1)
+    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    if(tagPosition == m_tags.end())
         return false;
     
-    m_tags.removeAt(index);
+    m_tags.erase(tagPosition);
     return true;
 }
     
