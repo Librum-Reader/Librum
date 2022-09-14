@@ -9,6 +9,13 @@ Tag::Tag(QString name)
 {
 }
 
+
+bool Tag::operator==(const Tag& other)
+{
+    return m_name == other.m_name;
+}
+
+
 QString Tag::name()
 {
     return m_name;
@@ -17,8 +24,6 @@ QString Tag::name()
 void Tag::setName(QString newName)
 {
     m_name = newName;
-}
-
-    
+}   
 
 } // namespace domain::models
