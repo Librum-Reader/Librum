@@ -12,6 +12,10 @@ add_library(domain
                     models/login_model.hpp
                     models/register_model.cpp
                     models/register_model.hpp
+                    models/book.cpp
+                    models/book.hpp
+                    models/tag.cpp
+                    models/tag.hpp
 )
 
 target_include_directories(domain

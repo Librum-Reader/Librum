@@ -1,5 +1,7 @@
 #pragma once
+#include <vector>
 #include <QObject>
+#include "book_operation_staus.hpp"
 #include "book.hpp"
 #include "tag.hpp"
 
@@ -14,21 +16,20 @@ class IBookService : public QObject
 public:
     virtual ~IBookService() noexcept = default;
     
-    Q_INVOKABLE virtual void addBook(const QString& path) = 0;
-    Q_INVOKABLE virtual void deleteBook(const QString& title) = 0;
-    Q_INVOKABLE virtual void updateBook(const QString& title, 
-                                        const domain::models::Book& book) = 0;
+    virtual BookOperationStatus addBook(const QString& path) = 0;
+    virtual BookOperationStatus deleteBook(const QString& title) = 0;
+    virtual BookOperationStatus updateBook(const QString& title,
+                                           const domain::models::Book& book) = 0;
     
-    Q_INVOKABLE virtual void books(uint amount = -1) const = 0;
-    Q_INVOKABLE virtual void book(const QString& title) const = 0;
-    Q_INVOKABLE virtual bool setCurrentBook(const QString& title) = 0;
-    Q_INVOKABLE virtual const domain::models::Book& currentBook() const = 0;
+    virtual void books(uint amount = -1) const = 0;
+    virtual void book(const QString& title) const = 0;
+    virtual bool setCurrentBook(const QString& title) = 0;
+    virtual const domain::models::Book& currentBook() const = 0;
     
-    Q_INVOKABLE virtual void addTags(const QString& title, 
-                                     const QList<domain::models::Tag>& tags) = 0;
-    Q_INVOKABLE virtual void removeTags(const QString& title, 
-                                        const QList<domain::models::Tag>& tags) = 0;
-    
+    virtual BookOperationStatus addTags(const QString& title,
+                                        const std::vector<domain::models::Tag>& tags) = 0;
+    virtual BookOperationStatus removeTags(const QString& title, 
+                                        const std::vector<domain::models::Tag>& tags) = 0;
 };
 
 } // namespace application

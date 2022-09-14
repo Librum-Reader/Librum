@@ -1,6 +1,4 @@
 #pragma once
-#include <QObject>
-#include <QList>
 #include "i_book_service.hpp"
 
 
@@ -14,20 +12,27 @@ class BookService : public IBookService
 public:
     BookService();
 
-    void addBook(const QString& path) override;
-    void deleteBook(const QString& title) override;
-    void updateBook(const QString& title, const domain::models::Book& book) override;
-    void addTags(const QString& title, const QList<domain::models::Tag>& tags) override;
-    void removeTags(const QString& title, 
-                    const QList<domain::models::Tag>& tags) override;
+    BookOperationStatus addBook(const QString& path) override;
+    BookOperationStatus deleteBook(const QString& title) override;
+    BookOperationStatus updateBook(const QString& title,
+                                   const domain::models::Book& book) override;
+    BookOperationStatus addTags(const QString& title, 
+                                const std::vector<domain::models::Tag>& tags) override;
+    BookOperationStatus removeTags(const QString& title,
+                                    const std::vector<domain::models::Tag>& tags) override;
+    
     void books(uint amount) const override;
     void book(const QString& title) const override;
     bool setCurrentBook(const QString& title) override;
     const domain::models::Book& currentBook() const override;
     
+    
 private:
+    std::vector<domain::models::Book>::iterator bookWithTitleExists(const QString& title);
+    std::vector<domain::models::Book>::iterator bookWithPathExists(const QString& path);
+    
     domain::models::Book* m_currentBook;
-    QList<const domain::models::Book*> m_books;
+    std::vector<domain::models::Book> m_books;
 };
 
 } // namespace application::services

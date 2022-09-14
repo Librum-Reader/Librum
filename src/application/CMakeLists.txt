@@ -57,6 +57,7 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
                     ${CMAKE_CURRENT_SOURCE_DIR}/converters
+                    ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
 )
 
 target_compile_definitions(application
