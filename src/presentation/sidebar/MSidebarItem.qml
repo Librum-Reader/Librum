@@ -70,7 +70,6 @@ Item
                 visible: false
                 opacity: root.textOpacity
                 text: root.labelContent
-                font.family: Style.defaultFontFamily
                 font.weight: Font.Medium
                 font.pointSize: 13
                 color: Style.colorLightText3

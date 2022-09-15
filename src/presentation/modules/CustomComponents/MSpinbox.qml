@@ -68,7 +68,6 @@ Item
                 color: Style.colorLightText3
                 font.pointSize: 12
                 font.weight: Font.Bold
-                font.family: Style.defaultFontFamily
                 validator: IntValidator { bottom: root.minVal; top: root.maxVal }
                 text: root.value.toString()
                 background: Rectangle   

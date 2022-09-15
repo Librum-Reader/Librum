@@ -47,7 +47,6 @@ Item
                     color: Style.colorBaseText
                     text: "Sort by"
                     font.pointSize: 12
-                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 

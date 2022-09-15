@@ -77,7 +77,6 @@ MFlickWrapper
                         text: "Details"
                         color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -87,7 +86,6 @@ MFlickWrapper
                         text: "CURRENT VERSION"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.Bold
                     }
                     
@@ -97,7 +95,6 @@ MFlickWrapper
                         text: AppInformation.currentVersion
                         color: Style.colorBaseText
                         font.pointSize: 13.5
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -106,7 +103,6 @@ MFlickWrapper
                         text: "QT VERSION"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.Bold
                     }
                     
@@ -116,7 +112,6 @@ MFlickWrapper
                         text: AppInformation.currentQtVersion
                         color: Style.colorBaseText
                         font.pointSize: 13.5
-                        font.family: Style.defaultFontFamily
                     }
                     
                     MButton
@@ -168,7 +163,6 @@ MFlickWrapper
                         text: "Creator"
                         color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -178,7 +172,6 @@ MFlickWrapper
                         text: "COMPANY NAME"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.Bold
                     }
                     
@@ -188,7 +181,6 @@ MFlickWrapper
                         text: AppInformation.companyName
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -197,7 +189,6 @@ MFlickWrapper
                         text: "WEBSITE"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.Bold
                     }
                     
@@ -206,7 +197,6 @@ MFlickWrapper
                         text: AppInformation.companyWebsite
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -215,7 +205,6 @@ MFlickWrapper
                         text: "CONTACT"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.Bold
                     }
                     
@@ -225,7 +214,6 @@ MFlickWrapper
                         text: AppInformation.companyEmail
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
-                        font.family: Style.defaultFontFamily
                     }
                 }
             }
@@ -260,7 +248,6 @@ MFlickWrapper
                         text: "This App"
                         color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -290,7 +277,6 @@ MFlickWrapper
                             wrapMode: Text.WordWrap
                             color: Style.colorBaseText
                             font.pointSize: 14.6
-                            font.family: Style.defaultFontFamily
                             lineHeight: 1.05
                         }
                     }

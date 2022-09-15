@@ -36,7 +36,6 @@ Item
             Layout.leftMargin: root.textSpacing
             text: root.textContent
             color: Style.colorLightText3
-            font.family: Style.defaultFontFamily
             font.pointSize: 10.5
             font.weight: Font.Medium
         }

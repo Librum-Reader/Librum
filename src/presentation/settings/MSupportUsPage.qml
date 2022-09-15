@@ -73,7 +73,6 @@ MFlickWrapper
                         text: "Us"
                         color: Style.colorBaseText
                         font.pointSize: 20
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -85,7 +84,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: Style.defaultFontFamily
                     }
                     
                     RowLayout
@@ -102,7 +100,6 @@ MFlickWrapper
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText3
                             font.pointSize: 14
-                            font.family: Style.defaultFontFamily
                         }
                     }
                     
@@ -115,7 +112,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: Style.defaultFontFamily
                     }
                     
                     RowLayout
@@ -131,7 +127,6 @@ MFlickWrapper
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText3
                             font.pointSize: 14
-                            font.family: Style.defaultFontFamily
                         }
                         
                         Image
@@ -157,7 +152,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: Style.defaultFontFamily
                     }
                     
                     MButton
@@ -190,7 +184,6 @@ MFlickWrapper
                         textFormat: Text.RichText
                         color: Style.colorLightText3
                         font.pointSize: 14
-                        font.family: Style.defaultFontFamily
                     }
                     
                     RowLayout
@@ -217,7 +210,6 @@ MFlickWrapper
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText3
                             font.pointSize: 14
-                            font.family: Style.defaultFontFamily
                         }
                     }
                 }

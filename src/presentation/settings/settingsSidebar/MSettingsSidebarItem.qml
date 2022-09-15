@@ -53,7 +53,6 @@ Item
                 text: root.textContent
                 color: (root.selected ? Style.colorBasePurple : Style.colorBaseText)
                 font.pointSize: 13
-                font.family: Style.defaultFontFamily
                 font.weight: (root.selected ? Font.DemiBold : Font.Normal)
             }
             

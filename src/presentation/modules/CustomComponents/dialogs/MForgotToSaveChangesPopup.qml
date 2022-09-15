@@ -82,7 +82,6 @@ Popup
                         color: Style.colorBaseTitle
                         font.weight: Font.Medium
                         font.pointSize: 42
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -96,7 +95,6 @@ Popup
                         color: Style.colorLightText3
                         font.weight: Font.Medium
                         font.pointSize: 15
-                        font.family: Style.defaultFontFamily
                     }
                     
                     RowLayout

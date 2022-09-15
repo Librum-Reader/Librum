@@ -21,11 +21,7 @@ Page
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 15
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
     
     Shortcut
@@ -34,16 +30,12 @@ Page
         onActivated: fileDialog.open()
     }
     
-    ListModel
-    {
-        id: bookList
-    }
+    ListModel { id: bookList }
     
     
     ColumnLayout
     {
         id: contentLayout
-        
         anchors.fill: parent
         spacing: 0
         

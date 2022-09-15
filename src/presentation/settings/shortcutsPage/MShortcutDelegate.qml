@@ -51,7 +51,6 @@ Item
                 text: root.text
                 color: Style.colorBaseText
                 font.pointSize: 12
-                font.family: Style.defaultFontFamily
                 font.weight: Font.DemiBold
             }
             
@@ -71,7 +70,6 @@ Item
                 text: root.shortcut
                 color: Style.colorBaseText
                 font.pointSize: 12
-                font.family: Style.defaultFontFamily
                 font.weight: Font.DemiBold
             }
             

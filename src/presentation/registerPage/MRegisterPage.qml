@@ -75,7 +75,6 @@ MFlickWrapper
                         text: "Welcome!"
                         font.bold: true
                         font.pointSize: 26
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -88,7 +87,6 @@ MFlickWrapper
                         text: "Your credentials are only used to authenticate yourself. " + 
                               "Everything will be stored in a secure database."
                         font.pointSize: 13
-                        font.family: Style.defaultFontFamily
                         color: Style.colorLightText2
                         wrapMode: "WordWrap"
                     }

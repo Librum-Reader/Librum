@@ -110,7 +110,6 @@ Item
                         visible: false
                         text: "Librum"
                         font.bold: true
-                        font.family: Style.defaultFontFamily
                         font.pointSize: 16
                         color: Style.colorBaseTitle
                     }

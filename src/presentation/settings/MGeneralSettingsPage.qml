@@ -98,7 +98,6 @@ MFlickWrapper
                         id: downloadTitle
                         Layout.fillWidth: true
                         text: "Download"
-                        font.family: Style.defaultFontFamily
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                         color: Style.colorBaseText
@@ -111,7 +110,6 @@ MFlickWrapper
                         Layout.fillWidth: true
                         Layout.topMargin: 24
                         text: "Enforce ethernet for big downloads"
-                        font.family: Style.defaultFontFamily
                         font.pointSize: 13
                         font.weight: Font.DemiBold
                         color: Style.colorBaseText

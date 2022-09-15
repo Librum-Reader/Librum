@@ -67,7 +67,6 @@ Popup
                 text: "Manage Tags"
                 font.weight: Font.Bold
                 font.pointSize: 17
-                font.family: Style.defaultFontFamily
                 color: Style.colorBaseTitle
             }
             
@@ -92,7 +91,6 @@ Popup
                 color: Style.colorLightText
                 font.pointSize: 9.5
                 font.weight: Font.Medium
-                font.family: Style.defaultFontFamily
                 elide: Text.ElideRight
             }
             

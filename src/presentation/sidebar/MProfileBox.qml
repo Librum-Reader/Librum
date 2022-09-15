@@ -53,7 +53,6 @@ Item
                     text: Globals.firstName[0].toUpperCase() + Globals.lastName[0].toUpperCase() 
                     font.pointSize: 12
                     font.bold: true
-                    font.family: Style.defaultFontFamily
                     color: Style.colorBrightText
                 }
                 

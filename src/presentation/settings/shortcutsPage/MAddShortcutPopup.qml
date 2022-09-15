@@ -105,7 +105,6 @@ Popup
                     text: "Edit Shortcuts"
                     font.weight: Font.Bold
                     font.pointSize: 17
-                    font.family: Style.defaultFontFamily
                     color: Style.colorBaseTitle
                 }
                 

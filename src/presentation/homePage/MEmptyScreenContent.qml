@@ -42,7 +42,6 @@ Item
                 text: "Quite empty here, what about importing your first book?"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
-                font.family: Style.defaultFontFamily
                 font.weight: Font.DemiBold
                 color: Style.colorLightText3
                 wrapMode: Text.WordWrap

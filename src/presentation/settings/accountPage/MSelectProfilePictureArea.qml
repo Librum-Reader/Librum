@@ -112,7 +112,6 @@ Item
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText2
                         font.pointSize: 12
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                         lineHeight: 0.9
                     }

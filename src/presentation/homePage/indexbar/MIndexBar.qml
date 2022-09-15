@@ -51,7 +51,6 @@ Item
             text: "Entries per page"
             color: Style.colorLightText
             font.pointSize: 11
-            font.family: Style.defaultFontFamily            
         }
         
         
@@ -105,7 +104,6 @@ Item
                 anchors.centerIn: parent
                 text: "..."
                 font.pointSize: 14
-                font.family: Style.defaultFontFamily
                 font.bold: false
                 color: Style.colorBaseText
             }
