@@ -21,16 +21,16 @@ public:
     BookOperationStatus removeTags(const QString& title,
                                     const std::vector<domain::models::Tag>& tags) override;
     
-    const std::vector<domain::models::Book>& books() const override;
-    const domain::models::Book* book(const QString& title) const override;
+    const std::vector<domain::models::Book>& getAllBooks() const override;
+    const domain::models::Book* getBook(const QString& title) const override;
     bool setCurrentBook(const QString& title) override;
-    const domain::models::Book* currentBook() const override;
+    const domain::models::Book* getCurrentBook() const override;
     
     
 private:
-    std::vector<domain::models::Book>::iterator getBookWithTitle(const QString& title);
-    const std::vector<domain::models::Book>::const_iterator getBookWithTitle(const QString& title) const;
-    std::vector<domain::models::Book>::iterator getBookWithPath(const QString& path);
+    std::vector<domain::models::Book>::iterator getBookByTitle(const QString& title);
+    const std::vector<domain::models::Book>::const_iterator getBookByTitle(const QString& title) const;
+    std::vector<domain::models::Book>::iterator getBookByPath(const QString& path);
     
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
