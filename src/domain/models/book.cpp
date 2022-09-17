@@ -5,7 +5,7 @@
 namespace domain::models
 {
 
-Book::Book(QString title, QString path, QByteArray cover)
+Book::Book(const QString& title, const QString& path, const QByteArray& cover)
     : m_title(title), m_filePath(path), m_cover(cover)
 {
 }

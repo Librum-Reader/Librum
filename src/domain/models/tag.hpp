@@ -13,7 +13,7 @@ public:
     
     bool operator== (const Tag& other);
     
-    QString name();
+    const QString& name() const;
     void setName(QString newName);
     
 private:

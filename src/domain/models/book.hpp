@@ -12,7 +12,8 @@ namespace domain::models
 class Book
 {
 public:
-    Book(QString title, QString localPath = "", QByteArray cover = QByteArray());
+    Book(const QString& title, const QString& localPath = "",
+         const QByteArray& cover = QByteArray());
     
     const QString& title() const;
     void setTitle(const QString& newTitle);
