@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <QObject>
-#include "book_operation_staus.hpp"
+#include "book_operation_status.hpp"
 #include "book.hpp"
 #include "tag.hpp"
 
@@ -16,20 +16,21 @@ class IBookService : public QObject
 public:
     virtual ~IBookService() noexcept = default;
     
-    virtual BookOperationStatus addBook(const QString& path) = 0;
+    virtual BookOperationStatus addBook(const QString& filePath) = 0;
     virtual BookOperationStatus deleteBook(const QString& title) = 0;
     virtual BookOperationStatus updateBook(const QString& title,
                                            const domain::models::Book& book) = 0;
     
     virtual const std::vector<domain::models::Book>& getAllBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
+    virtual int getBookCount() const = 0;
     virtual bool setCurrentBook(const QString& title) = 0;
     virtual const domain::models::Book* getCurrentBook() const = 0;
     
-    virtual BookOperationStatus addTags(const QString& title,
-                                        const std::vector<domain::models::Tag>& tags) = 0;
-    virtual BookOperationStatus removeTags(const QString& title, 
-                                        const std::vector<domain::models::Tag>& tags) = 0;
+    virtual BookOperationStatus addTag(const QString& title,
+                                       const domain::models::Tag& tag) = 0;
+    virtual BookOperationStatus removeTag(const QString& title, 
+                                          const domain::models::Tag& tag) = 0;
 };
 
 } // namespace application

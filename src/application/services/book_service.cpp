@@ -1,5 +1,5 @@
 #include "book_service.hpp"
-#include "book_operation_staus.hpp"
+#include "book_operation_status.hpp"
 #include <algorithm>
 
 
@@ -9,20 +9,20 @@ namespace application::services
 using namespace domain::models;
 
 
-BookService::BookService()
-    : m_currentBook(nullptr)
+BookService::BookService(IBookInfoManager* bookInfoManager)
+    : m_currentBook(nullptr), m_bookInfoManager(bookInfoManager)
 {
 }
 
 
-BookOperationStatus BookService::addBook(const QString& path)
+BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    auto bookPosition = getBookByPath(path);
+    auto bookPosition = getBookByPath(filePath);
     if(bookPosition != m_books.end())
         return BookOperationStatus::BookAlreadyExists;
     
-    QString title = "Some Title";
-    m_books.emplace_back(title, path);
+    QString title = m_bookInfoManager->getBookTitle(filePath);
+    m_books.emplace_back(title, filePath);
     
     return BookOperationStatus::Success;
 }
@@ -51,32 +51,28 @@ BookOperationStatus BookService::updateBook(const QString& title,
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::addTags(const QString& title,
-                                         const std::vector<Tag>& tags)
+BookOperationStatus BookService::addTag(const QString& title,
+                                        const domain::models::Tag& tag)
 {
     auto bookPosition = getBookByTitle(title);
     if(bookPosition == m_books.end())
         return BookOperationStatus::BookDoesNotExist;
     
-    for(const auto& tag : tags)
-    {
-        bookPosition->addTag(tag);
-    }
+    if(!bookPosition->addTag(tag))
+        return BookOperationStatus::TagAlreadyExists;
     
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::removeTags(const QString& title,
-                                            const std::vector<Tag>& tags)
+BookOperationStatus BookService::removeTag(const QString& title,
+                                           const domain::models::Tag& tag)
 {
     auto bookPosition = getBookByTitle(title);
     if(bookPosition == m_books.end())
         return BookOperationStatus::BookDoesNotExist;
     
-    for(const auto& tag : tags)
-    {
-        bookPosition->removeTag(tag);
-    }
+    if(!bookPosition->removeTag(tag))
+        return BookOperationStatus::TagDoesNotExist;
     
     return BookOperationStatus::Success;
 }
@@ -93,6 +89,11 @@ const Book* BookService::getBook(const QString& title) const
         return nullptr;
     
     return &(*bookPosition);
+}
+
+int BookService::getBookCount() const
+{
+    return m_books.size();
 }
 
 bool BookService::setCurrentBook(const QString& title)
