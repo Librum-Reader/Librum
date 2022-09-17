@@ -7,7 +7,6 @@ namespace adapters::dtos
 
 struct RegisterDto
 {
-public:
     QString firstName;
     QString lastName;
     QString email;
