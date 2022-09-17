@@ -52,7 +52,6 @@ add_subdirectory(presentation/)
 # Building
 add_executable(appLibrum
     main.cpp
-    dependency_injection.hpp
 )
 
 target_compile_definitions(appLibrum
@@ -78,7 +77,7 @@ target_include_directories(appLibrum
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
         ${OKULARCORE_INCLUDES}
-        ${PROJECT_SOURCE_DIR}/libs/di/include
+        ${PROJECT_SOURCE_DIR}
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
