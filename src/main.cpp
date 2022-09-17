@@ -11,7 +11,6 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
-#include <boost/di.hpp>
 #include "app_information.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
