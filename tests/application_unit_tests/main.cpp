@@ -1,5 +1,4 @@
 #include "gtest/gtest.h"
-#include "authentication_service_tests.hpp"
 
 
 int main()
