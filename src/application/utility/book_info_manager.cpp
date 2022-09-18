@@ -4,11 +4,6 @@
 namespace application::utility
 {
 
-BookInfoManager::BookInfoManager()
-{
-    
-}
-
 QString BookInfoManager::getBookTitle(const QString& filePath)
 {
     auto lastIndexOfSlash = filePath.lastIndexOf("/");
@@ -16,6 +11,11 @@ QString BookInfoManager::getBookTitle(const QString& filePath)
     
     auto result = filePath.mid(lastIndexOfSlash + 1, lastIndexOfDot - lastIndexOfSlash);
     return result;
+}
+
+QByteArray BookInfoManager::getBookCover(const QString& filePath)
+{
+    return QByteArray("Smth");
 }
 
 } // namespace application::utility
