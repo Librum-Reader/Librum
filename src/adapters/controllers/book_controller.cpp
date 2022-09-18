@@ -81,13 +81,31 @@ BookOperationStatus BookController::updateBook(const QString& title, const QVari
 BookOperationStatus BookController::addTag(const QString& title, const dtos::TagDto& tag)
 {
     Tag resultTag(tag.name);
-    return m_bookService->addTag(title, resultTag);
+    if(m_bookService->addTag(title, resultTag) == BookOperationStatus::Success)
+    {
+        m_bookChacheChanged = true;
+        if(title == m_currentBookCache.title)
+            m_currentBookCacheChanged = true;
+        
+        return BookOperationStatus::Success;
+    }
+    
+    return BookOperationStatus::TagAlreadyExists;
 }
 
 BookOperationStatus BookController::removeTag(const QString& title, const QString& tagName)
 {
     Tag resultTag(tagName);
-    return m_bookService->removeTag(title, resultTag);
+    if(m_bookService->removeTag(title, resultTag) == BookOperationStatus::Success)
+    {
+        m_bookChacheChanged = true;
+        if(title == m_currentBookCache.title)
+            m_currentBookCacheChanged = true;
+        
+        return BookOperationStatus::Success;
+    }
+    
+    return BookOperationStatus::TagDoesNotExist;
 }
 
 const dtos::BookDto* BookController::getBook(const QString& title)
@@ -106,7 +124,13 @@ int BookController::getBookCount() const
 
 bool BookController::setCurrentBook(QString title)
 {
-    return m_bookService->setCurrentBook(title);
+    if(m_bookService->setCurrentBook(title))
+    {
+        m_currentBookCacheChanged = true;
+        return true;
+    }
+    
+    return false;
 }
 
 const dtos::BookDto* BookController::getCurrentBook()

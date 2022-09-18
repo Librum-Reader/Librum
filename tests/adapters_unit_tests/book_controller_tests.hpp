@@ -1,13 +1,10 @@
 #pragma once
-#include "gmock/gmock.h"
-#include <iostream>
-#include <memory>
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 #include <utility>
 #include <QString>
 #include <QVariantMap>
 #include <QByteArray>
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
 #include "book.hpp"
 #include "book_dto.hpp"
 #include "dependency_injection.hpp"

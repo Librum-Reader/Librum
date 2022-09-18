@@ -6,6 +6,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 # Build tests
 add_executable(adapters_unit_tests
                     main.cpp
+                    book_controller_tests.hpp
     )
 
 target_link_libraries(adapters_unit_tests
@@ -27,5 +28,3 @@ target_include_directories(adapters_unit_tests
                     ${APPLICATION_INCLUDES}
                     ${PROJECT_SOURCE_DIR}
 )
-
-target_compile_options(adapters_unit_tests PRIVATE -g3 -Og)
