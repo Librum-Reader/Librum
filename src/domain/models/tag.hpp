@@ -11,7 +11,7 @@ class Tag
 public:
     Tag(QString name);
     
-    bool operator== (const Tag& other);
+    bool operator== (const Tag& other) const;
     
     const QString& name() const;
     void setName(QString newName);

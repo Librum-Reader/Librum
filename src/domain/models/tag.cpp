@@ -10,7 +10,7 @@ Tag::Tag(QString name)
 }
 
 
-bool Tag::operator==(const Tag& other)
+bool Tag::operator==(const Tag& other) const
 {
     return m_name == other.m_name;
 }
