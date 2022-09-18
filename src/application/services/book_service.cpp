@@ -17,12 +17,13 @@ BookService::BookService(IBookInfoManager* bookInfoManager)
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    auto bookPosition = getBookByPath(filePath);
+    QString title = m_bookInfoManager->getBookTitle(filePath);
+    auto bookPosition = getBookByTitle(title);
     if(bookPosition != m_books.end())
         return BookOperationStatus::BookAlreadyExists;
     
-    QString title = m_bookInfoManager->getBookTitle(filePath);
-    m_books.emplace_back(title, filePath);
+    QByteArray cover = m_bookInfoManager->getBookCover(filePath);
+    m_books.emplace_back(title, filePath, cover);
     
     return BookOperationStatus::Success;
 }
@@ -96,14 +97,14 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
-bool BookService::setCurrentBook(const QString& title)
+BookOperationStatus BookService::setCurrentBook(const QString& title)
 {
     auto bookPosition = getBookByTitle(title);
     if(bookPosition == m_books.end())
-        return false;
+        return BookOperationStatus::BookDoesNotExist;
     
     m_currentBook = &(*bookPosition);
-    return true;
+    return BookOperationStatus::Success;
 }
 
 const Book* BookService::getCurrentBook() const
@@ -132,17 +133,6 @@ const std::vector<Book>::const_iterator BookService::getBookByTitle(const QStrin
     }
     
     return m_books.cend();
-}
-
-std::vector<Book>::iterator BookService::getBookByPath(const QString& path)
-{
-    for(std::size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).filePath() == path)
-            return m_books.begin() + i;
-    }
-    
-    return m_books.end();
 }
 
 } // namespace application::services

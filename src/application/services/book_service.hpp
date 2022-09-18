@@ -25,14 +25,13 @@ public:
     const std::vector<domain::models::Book>& getAllBooks() const override;
     const domain::models::Book* getBook(const QString& title) const override;
     int getBookCount() const override;
-    bool setCurrentBook(const QString& title) override;
+    BookOperationStatus setCurrentBook(const QString& title) override;
     const domain::models::Book* getCurrentBook() const override;
     
     
 private:
     std::vector<domain::models::Book>::iterator getBookByTitle(const QString& title);
     const std::vector<domain::models::Book>::const_iterator getBookByTitle(const QString& title) const;
-    std::vector<domain::models::Book>::iterator getBookByPath(const QString& path);
     
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
