@@ -24,7 +24,7 @@ public:
     virtual const std::vector<domain::models::Book>& getAllBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
     virtual int getBookCount() const = 0;
-    virtual bool setCurrentBook(const QString& title) = 0;
+    virtual BookOperationStatus setCurrentBook(const QString& title) = 0;
     virtual const domain::models::Book* getCurrentBook() const = 0;
     
     virtual BookOperationStatus addTag(const QString& title,
