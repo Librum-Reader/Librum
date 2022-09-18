@@ -26,7 +26,7 @@ public:
                                                const QString& tagName) override;
     const dtos::BookDto* getBook(const QString& title) override;
     int getBookCount() const override;
-    bool setCurrentBook(QString title) override;
+    application::BookOperationStatus setCurrentBook(QString title) override;
     const dtos::BookDto* getCurrentBook() override;
     
 private:

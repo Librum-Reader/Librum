@@ -122,15 +122,15 @@ int BookController::getBookCount() const
     return m_bookService->getBookCount();
 }
 
-bool BookController::setCurrentBook(QString title)
+BookOperationStatus BookController::setCurrentBook(QString title)
 {
-    if(m_bookService->setCurrentBook(title))
+    if(m_bookService->setCurrentBook(title) == BookOperationStatus::Success)
     {
         m_currentBookCacheChanged = true;
-        return true;
+        return BookOperationStatus::Success;
     }
     
-    return false;
+    return BookOperationStatus::BookDoesNotExist;
 }
 
 const dtos::BookDto* BookController::getCurrentBook()

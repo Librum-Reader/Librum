@@ -31,7 +31,7 @@ public:
                                                                    const QString& tagName) = 0;
     Q_INVOKABLE virtual const dtos::BookDto* getBook(const QString& title) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
-    Q_INVOKABLE virtual bool setCurrentBook(QString title) = 0;
+    Q_INVOKABLE virtual application::BookOperationStatus setCurrentBook(QString title) = 0;
     Q_INVOKABLE virtual const dtos::BookDto* getCurrentBook() = 0;
     
 signals:
