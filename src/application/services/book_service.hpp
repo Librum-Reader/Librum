@@ -16,7 +16,7 @@ public:
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QString& title) override;
     BookOperationStatus updateBook(const QString& title,
-                                   const domain::models::Book& book) override;
+                                   const domain::models::Book& newBook) override;
     BookOperationStatus addTag(const QString& title, 
                                const domain::models::Tag& tag) override;
     BookOperationStatus removeTag(const QString& title,
@@ -30,8 +30,8 @@ public:
     
     
 private:
-    std::vector<domain::models::Book>::iterator getBookByTitle(const QString& title);
-    const std::vector<domain::models::Book>::const_iterator getBookByTitle(const QString& title) const;
+    domain::models::Book* getBookByTitle(const QString& title);
+    const domain::models::Book* getBookByTitle(const QString& title) const;
     
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;

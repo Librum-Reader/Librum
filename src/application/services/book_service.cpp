@@ -18,8 +18,9 @@ BookService::BookService(IBookInfoManager* bookInfoManager)
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
     QString title = m_bookInfoManager->getBookTitle(filePath);
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition != m_books.end())
+    
+    auto book = getBookByTitle(title);
+    if(book)
         return BookOperationStatus::BookAlreadyExists;
     
     QByteArray cover = m_bookInfoManager->getBookCover(filePath);
@@ -30,36 +31,40 @@ BookOperationStatus BookService::addBook(const QString& filePath)
 
 BookOperationStatus BookService::deleteBook(const QString& title)
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
+    auto book = getBookByTitle(title);
+    if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
     if(m_currentBook && m_currentBook->title() == title)
         m_currentBook = nullptr;
     
-    m_books.erase(bookPosition);
+    auto posOfBook = std::find_if(m_books.begin(), m_books.end(), [&title] (const Book& book){
+        return book.title() == title;
+    });
+    
+    m_books.erase(posOfBook);
     return BookOperationStatus::Success;
 }
 
 BookOperationStatus BookService::updateBook(const QString& title,
-                                            const Book& book)
+                                            const Book& newBook)
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
+    auto book = getBookByTitle(title);
+    if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    bookPosition->update(book);
+    book->update(newBook);
     return BookOperationStatus::Success;
 }
 
 BookOperationStatus BookService::addTag(const QString& title,
                                         const domain::models::Tag& tag)
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
+    auto book = getBookByTitle(title);
+    if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    if(!bookPosition->addTag(tag))
+    if(!book->addTag(tag))
         return BookOperationStatus::TagAlreadyExists;
     
     return BookOperationStatus::Success;
@@ -68,11 +73,11 @@ BookOperationStatus BookService::addTag(const QString& title,
 BookOperationStatus BookService::removeTag(const QString& title,
                                            const domain::models::Tag& tag)
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
+    auto book = getBookByTitle(title);
+    if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    if(!bookPosition->removeTag(tag))
+    if(!book->removeTag(tag))
         return BookOperationStatus::TagDoesNotExist;
     
     return BookOperationStatus::Success;
@@ -85,11 +90,7 @@ const std::vector<Book>& BookService::getAllBooks() const
 
 const Book* BookService::getBook(const QString& title) const
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
-        return nullptr;
-    
-    return &(*bookPosition);
+    return getBookByTitle(title);
 }
 
 int BookService::getBookCount() const
@@ -99,11 +100,11 @@ int BookService::getBookCount() const
 
 BookOperationStatus BookService::setCurrentBook(const QString& title)
 {
-    auto bookPosition = getBookByTitle(title);
-    if(bookPosition == m_books.end())
+    auto book = getBookByTitle(title);
+    if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    m_currentBook = &(*bookPosition);
+    m_currentBook = book;
     return BookOperationStatus::Success;
 }
 
@@ -113,26 +114,26 @@ const Book* BookService::getCurrentBook() const
 }
 
 
-std::vector<Book>::iterator BookService::getBookByTitle(const QString& title)
+Book* BookService::getBookByTitle(const QString& title)
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
         if(m_books.at(i).title() == title)
-            return m_books.begin() + i;
+            return &(*(m_books.begin() + i));
     }
     
-    return m_books.end();
+    return nullptr;
 }
 
-const std::vector<Book>::const_iterator BookService::getBookByTitle(const QString& title) const
+const Book* BookService::getBookByTitle(const QString& title) const
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
         if(m_books.at(i).title() == title)
-            return m_books.cbegin() + i;
+            return &(*(m_books.cbegin() + i));
     }
     
-    return m_books.cend();
+    return nullptr;
 }
 
 } // namespace application::services

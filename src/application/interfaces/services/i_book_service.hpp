@@ -19,7 +19,7 @@ public:
     virtual BookOperationStatus addBook(const QString& filePath) = 0;
     virtual BookOperationStatus deleteBook(const QString& title) = 0;
     virtual BookOperationStatus updateBook(const QString& title,
-                                           const domain::models::Book& book) = 0;
+                                           const domain::models::Book& newBook) = 0;
     
     virtual const std::vector<domain::models::Book>& getAllBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
