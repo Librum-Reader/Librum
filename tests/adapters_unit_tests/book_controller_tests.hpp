@@ -5,9 +5,10 @@
 #include <QString>
 #include <QVariantMap>
 #include <QByteArray>
+#include "book_controller.hpp"
+#include "i_book_service.hpp"
 #include "book.hpp"
 #include "book_dto.hpp"
-#include "dependency_injection.hpp"
 #include "book_operation_status.hpp"
 #include "tag_dto.hpp"
 
@@ -31,7 +32,7 @@ public:
     MOCK_METHOD(const std::vector<Book>&, getAllBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
-    MOCK_METHOD(bool, setCurrentBook, (const QString& title), (override));
+    MOCK_METHOD(BookOperationStatus, setCurrentBook, (const QString& title), (override));
     MOCK_METHOD(const Book*, getCurrentBook, (), (const, override));
     
     MOCK_METHOD(BookOperationStatus, addTag, (const QString& title,
@@ -388,12 +389,12 @@ TEST(ABookController, SucceedsSettingTheCurrentBook)
     IBookService* bookServiceS = &bookService;
     controllers::BookController bookController(&bookService);
     
-    bool expectedResult = true;
+    BookOperationStatus expectedResult = BookOperationStatus::Success;
     
     // Expect
     EXPECT_CALL(bookService, setCurrentBook(_))
             .Times(1)
-            .WillOnce(Return(true));
+            .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
     auto result = bookController.setCurrentBook("SomeBook");
@@ -411,12 +412,12 @@ TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
     
     QString nonExistentTitle = "SomeNonExistenBook";
     
-    bool expectedResult = false;
+    BookOperationStatus expectedResult = BookOperationStatus::BookDoesNotExist;
     
     // Expect
     EXPECT_CALL(bookService, setCurrentBook(_))
             .Times(1)
-            .WillOnce(Return(false));
+            .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
     
     // Act
     auto result = bookController.setCurrentBook(nonExistentTitle);

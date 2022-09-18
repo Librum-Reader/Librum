@@ -15,7 +15,6 @@ target_link_libraries(adapters_unit_tests
                     gmock
                     adapters
                     application
-                    infrastructure
                     domain
                     Qt5::Core
                     Qt5::Network
