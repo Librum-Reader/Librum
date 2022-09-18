@@ -7,32 +7,6 @@
 using namespace domain::models;
 
 
-TEST(ALoginModel, SucceedsReturningTheEmail)
-{
-    // Arrange
-    QString email = "johndoe@librum.com";
-    LoginModel loginModel(email, "SomePassword123");
-    
-    // Act
-    auto result = loginModel.email();
-    
-    // Assert
-    EXPECT_EQ(email, result);
-}
-
-TEST(ALoginModel, SucceedsReturningThePassword)
-{
-    // Arrange
-    QString password = "SomePassword123";
-    LoginModel loginModel("johndoe@librum.com", password);
-    
-    // Act
-    auto result = loginModel.password();
-    
-    // Assert
-    EXPECT_EQ(password, result);
-}
-
 TEST(ALoginModel, SucceedsValidation)
 {
     // Arrange
