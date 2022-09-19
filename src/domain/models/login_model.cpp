@@ -9,12 +9,12 @@ LoginModel::LoginModel(QString email, QString password)
 {
 }
 
-QString LoginModel::email()
+QString LoginModel::email() const
 {
     return m_email;
 }
 
-QString LoginModel::password()
+QString LoginModel::password() const
 {
     return m_password;
 }

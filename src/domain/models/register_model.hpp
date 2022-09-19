@@ -13,11 +13,11 @@ public:
     
     bool isValid() const;
     
-    QString firstName();
-    QString lastName();
-    QString email();
-    QString password();
-    bool keepUpdated();
+    QString firstName() const;
+    QString lastName() const;
+    QString email() const;
+    QString password() const;
+    bool keepUpdated() const;
     
 private:
     bool firstNameIsValid() const;

@@ -21,27 +21,27 @@ bool RegisterModel::isValid() const
     return false;
 }
 
-QString RegisterModel::firstName()
+QString RegisterModel::firstName() const
 {
     return m_firstName;
 }
 
-QString RegisterModel::lastName()
+QString RegisterModel::lastName() const
 {
     return m_lastName;
 }
 
-QString RegisterModel::email()
+QString RegisterModel::email() const
 {
     return m_email;
 }
 
-QString RegisterModel::password()
+QString RegisterModel::password() const
 {
     return m_password;
 }
 
-bool RegisterModel::keepUpdated()
+bool RegisterModel::keepUpdated() const
 {
     return m_keepUpdated;
 }
