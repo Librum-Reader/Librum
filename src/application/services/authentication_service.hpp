@@ -12,17 +12,19 @@ class AuthenticationService : public IAuthenticationService
     Q_OBJECT
     
 public:
-    AuthenticationService(IUserStorageGateway* userGateway);
+    AuthenticationService(IUserStorageGateway* userStorageGateway);
     
-    void loginUser(domain::models::LoginModel loginModel) override;
-    void registerUser(domain::models::RegisterModel registerModel) override;
+    void loginUser(const domain::models::LoginModel& loginModel) override;
+    void registerUser(const domain::models::RegisterModel& registerModel) override;
     
-private slots:
-    void processLoginResult(bool success, QString token);
-    void processRegistrationResult(bool success, QString failureReason);
+public slots:
+    void processAuthenticationResult(const QString& token) override;
+    void processRegistrationResult(bool success, const QString& reason) override;
+    void setAuthenticationToken(const QString& token) override;
     
 private:
     IUserStorageGateway* m_userStorageGateway;
+    QString m_token;
 };
 
 } // namespace application::services

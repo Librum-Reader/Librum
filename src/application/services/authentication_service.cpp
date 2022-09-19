@@ -5,60 +5,54 @@
 namespace application::services
 {
 
-AuthenticationService::AuthenticationService(IUserStorageGateway* userGateway)
-    : m_userStorageGateway(userGateway)
+using namespace domain::models;
+
+AuthenticationService::AuthenticationService(IUserStorageGateway* userStorageGateway)
+    : m_userStorageGateway(userStorageGateway)
 {
-    QObject::connect(m_userStorageGateway, &IUserStorageGateway::authenticationResultReady,
-                     this, &AuthenticationService::processLoginResult);
+    QObject::connect(m_userStorageGateway, &IUserStorageGateway::authenticationFinished,
+                     this, &AuthenticationService::processAuthenticationResult);
     
-    QObject::connect(m_userStorageGateway, &IUserStorageGateway::userCreationResultReady,
+    QObject::connect(m_userStorageGateway, &IUserStorageGateway::registrationFinished,
                      this, &AuthenticationService::processRegistrationResult);
+    
+    QObject::connect(this, &AuthenticationService::authenticationTokenRegistered,
+                     this, &AuthenticationService::setAuthenticationToken);
 }
 
-void AuthenticationService::loginUser(domain::models::LoginModel loginModel)
+
+void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
-    if(!loginModel.isValid())
-    {
-        emit authenticationFailed();
-        return;
-    }
-    
     m_userStorageGateway->authenticateUser(loginModel);
 }
 
-void AuthenticationService::registerUser(domain::models::RegisterModel registerModel)
+void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
-    if(!registerModel.isValid())
-    {
-        emit registrationFailed("The provided data is invalid");
-        return;
-    }
-    
-    m_userStorageGateway->createUser(registerModel);
+    m_userStorageGateway->registerUser(registerModel);
 }
 
-void AuthenticationService::processLoginResult(bool success, QString token)
+
+void AuthenticationService::processAuthenticationResult(const QString& token)
 {
-    Q_UNUSED(token);
-    
-    if(!success)
+    if(token.isEmpty())
     {
-        emit authenticationFailed();
+        emit loginFinished(false);
         return;
     }
     
-    emit authenticationSucceeded();
+    emit authenticationTokenRegistered(token);
+    emit loginFinished(true);
 }
 
-void AuthenticationService::processRegistrationResult(bool success, QString failureReason)
+void AuthenticationService::processRegistrationResult(bool success,
+                                                      const QString& reason)
 {
-    if(!success)
-    {
-        emit registrationFailed(failureReason);
-        return;
-    }
-    
-    emit registrationSucceeded();
+    emit registrationFinished(success, reason);
+}
+
+void AuthenticationService::setAuthenticationToken(const QString& token)
+{
+    m_token = token;
 }
 
 } // namespace application::services

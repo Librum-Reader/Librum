@@ -276,19 +276,22 @@ MFlickWrapper
                                 
                                 function buttonTriggeredAction()
                                 {
+                                    AuthController.registrationFinished.connect(proccessRegistrationResult);
                                     AuthController.registerUser(firstNameInput.text, lastNameInput.text,
                                                                 emailInput.text, passwordInput.text,
                                                                 keepMeUpdated.checked);   
                                 }
                                 
-                                function switchToLoginPage()
+                                function proccessRegistrationResult(success, reason)
                                 {
-                                    loadPage(loginPage);
-                                }
-                                
-                                Component.onCompleted: 
-                                {
-                                    AuthController.registrationSucceeded.connect(() => registerButton.switchToLoginPage());
+                                    if(success)
+                                    {
+                                        loadPage(loginPage);
+                                    }
+                                    else
+                                    {
+                                        console.log("Registration failed");
+                                    }
                                 }
                             }
                         }

@@ -10,40 +10,49 @@ namespace adapters::gateways
 UserStorageGateway::UserStorageGateway(IUserStorageAccess* authenticationAccess)
     : m_authenticationAccess(authenticationAccess)
 {
-    QObject::connect(m_authenticationAccess, &IUserStorageAccess::authenticationResponseArrived,
-                     this, &UserStorageGateway::processAuthenticationResult);
+    QObject::connect(m_authenticationAccess, &IUserStorageAccess::authenticationFinished,
+                     this, &UserStorageGateway::reemitAuthenticationResult);
     
-    QObject::connect(m_authenticationAccess, &IUserStorageAccess::userCreationResponseArrived,
-                     this, &UserStorageGateway::processUserCreationResult);
+    QObject::connect(m_authenticationAccess, &IUserStorageAccess::registrationFinished,
+                     this, &UserStorageGateway::reemitRegistrationResult);
 }
 
 
-void UserStorageGateway::authenticateUser(domain::models::LoginModel loginModel)
+void UserStorageGateway::authenticateUser(const domain::models::LoginModel& loginModel)
 {
-    dtos::LoginDto loginDto { .email = loginModel.email(), .password = loginModel.password() };
+    dtos::LoginDto loginDto
+    {
+        .email = loginModel.email(),
+        .password = loginModel.password()
+    };
     
     m_authenticationAccess->authenticateUser(loginDto);
 }
 
-void UserStorageGateway::createUser(domain::models::RegisterModel registerModel)
+void UserStorageGateway::registerUser(const domain::models::RegisterModel& registerModel)
 {
-    dtos::RegisterDto registerDto { .firstName = registerModel.firstName(),
-                .lastName = registerModel.lastName(),
-                .email = registerModel.email(),
-                .password = registerModel.password() };
+    dtos::RegisterDto registerDto
+    {
+        .firstName = registerModel.firstName(),
+        .lastName = registerModel.lastName(),
+        .email = registerModel.email(),
+        .password = registerModel.password()
+    };
     
-    m_authenticationAccess->createUser(registerDto);
+    m_authenticationAccess->regsiterUser(registerDto);
 }
 
-
-void UserStorageGateway::processAuthenticationResult(bool success, QString token)
+void UserStorageGateway::reemitRegistrationResult(bool success, const QString& reason)
 {
-    emit authenticationResultReady(success, token);
+    emit registrationFinished(success, reason);
 }
 
-void UserStorageGateway::processUserCreationResult(bool success, QString failureReason)
+void UserStorageGateway::reemitAuthenticationResult(const QString& token)
 {
-    emit userCreationResultReady(success, failureReason);
+    emit authenticationFinished(token);
 }
+
+
+
 
 } // namespace adapters::gateways

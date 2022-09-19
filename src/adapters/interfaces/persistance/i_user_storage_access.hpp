@@ -14,12 +14,12 @@ class IUserStorageAccess : public QObject
     
 public:
     virtual ~IUserStorageAccess() noexcept = default;
-    virtual void authenticateUser(adapters::dtos::LoginDto loginDto) = 0;
-    virtual void createUser(adapters::dtos::RegisterDto registerDto) = 0;
+    virtual void authenticateUser(const adapters::dtos::LoginDto& loginDto) = 0;
+    virtual void regsiterUser(const adapters::dtos::RegisterDto& registerDto) = 0;
     
 signals:
-    void authenticationResponseArrived(bool success, QString token);
-    void userCreationResponseArrived(bool success, QString failureReason);
+    void authenticationFinished(const QString& token);
+    void registrationFinished(bool success, const QString& reason);
 };
 
 } // namespace adapters

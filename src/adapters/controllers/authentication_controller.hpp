@@ -13,16 +13,15 @@ class AuthenticationController : public IAuthenticationController
     
 public:
     AuthenticationController(application::IAuthenticationService* authenticationService);
-        
-    Q_INVOKABLE void loginUser(QString email, QString password) override;
-    Q_INVOKABLE void registerUser(QString firstName, QString lastName, QString email,
-                                  QString password, bool keepUpdated) override;
 
-private slots:
-    void loginSuccess();
-    void loginFailure();
-    void registrationSuccess();
-    void registrationFailure(QString reason);
+    void loginUser(const QString& email, const QString& password) override;
+    void registerUser(const QString& firstName, const QString& lastName,
+                      const QString& email, QString password,
+                      bool keepUpdated) override;
+    
+public slots:
+    void reemitLoginResult(bool success) override;
+    void reemitRegistrationResult(bool success, const QString& reason) override;
     
 private:
     application::IAuthenticationService* m_authenticationService;
