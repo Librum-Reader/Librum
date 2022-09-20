@@ -15,7 +15,7 @@ TEST(ARegisterModel, SucceedsValidation)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_TRUE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::Valid ,result);
 }
 
 TEST(ARegisterModel, FailsValidationsIfFirstNameIsTooShort)
@@ -25,10 +25,10 @@ TEST(ARegisterModel, FailsValidationsIfFirstNameIsTooShort)
     RegisterModel registerModel(tooShortFirstName, "Doe", "johndoe@librum.com", "SomePassword123", true);
     
     // Assert
-    bool result = registerModel.isValid();
+    auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::FirstNameTooShort, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfFirstNameIsTooLong)
@@ -41,7 +41,7 @@ TEST(ARegisterModel, FailsValidationIfFirstNameIsTooLong)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::FirstNameTooLong, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfLastNameTooShort)
@@ -54,7 +54,7 @@ TEST(ARegisterModel, FailsValidationIfLastNameTooShort)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::LastNameTooShort, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfLastNameIsTooLong)
@@ -67,7 +67,7 @@ TEST(ARegisterModel, FailsValidationIfLastNameIsTooLong)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::LastNameTooLong, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfEmailIsTooShort)
@@ -80,7 +80,7 @@ TEST(ARegisterModel, FailsValidationIfEmailIsTooShort)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::EmailTooShort, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfEmailIsTooLong)
@@ -93,7 +93,7 @@ TEST(ARegisterModel, FailsValidationIfEmailIsTooLong)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::EmailTooLong, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfPasswordIsTooShort)
@@ -106,7 +106,7 @@ TEST(ARegisterModel, FailsValidationIfPasswordIsTooShort)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::PasswordTooShort, result);
 }
 
 TEST(ARegisterModel, FailsValidationIfPasswordIsTooLong)
@@ -119,5 +119,5 @@ TEST(ARegisterModel, FailsValidationIfPasswordIsTooLong)
     auto result = registerModel.isValid();
     
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(RegisterModel::RegistrationResult::PasswordTooLong, result);
 }
