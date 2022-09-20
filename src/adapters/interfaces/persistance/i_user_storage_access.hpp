@@ -15,7 +15,7 @@ class IUserStorageAccess : public QObject
 public:
     virtual ~IUserStorageAccess() noexcept = default;
     virtual void authenticateUser(const adapters::dtos::LoginDto& loginDto) = 0;
-    virtual void regsiterUser(const adapters::dtos::RegisterDto& registerDto) = 0;
+    virtual void registerUser(const adapters::dtos::RegisterDto& registerDto) = 0;
     
 signals:
     void authenticationFinished(const QString& token);

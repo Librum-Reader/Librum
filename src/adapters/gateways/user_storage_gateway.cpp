@@ -39,7 +39,7 @@ void UserStorageGateway::registerUser(const domain::models::RegisterModel& regis
         .password = registerModel.password()
     };
     
-    m_authenticationAccess->regsiterUser(registerDto);
+    m_authenticationAccess->registerUser(registerDto);
 }
 
 void UserStorageGateway::reemitRegistrationResult(bool success, const QString& reason)

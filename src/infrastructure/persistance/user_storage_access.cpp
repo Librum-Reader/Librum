@@ -28,7 +28,7 @@ void UserStorageAccess::authenticateUser(const adapters::dtos::LoginDto& loginDt
                      this, &UserStorageAccess::proccessAuthenticationResult);
 }
 
-void UserStorageAccess::regsiterUser(const adapters::dtos::RegisterDto& registerDto)
+void UserStorageAccess::registerUser(const adapters::dtos::RegisterDto& registerDto)
 {
     auto request = createRequest(m_registrationEndpoint);
     

@@ -22,7 +22,7 @@ public:
     UserStorageAccess();
     
     void authenticateUser(const adapters::dtos::LoginDto& loginDto) override;
-    void regsiterUser(const adapters::dtos::RegisterDto& registerDto) override;
+    void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
     
 private slots:
     void proccessAuthenticationResult();
