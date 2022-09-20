@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <QString>
+#include <QSignalSpy>
 #include "i_user_storage_gateway.hpp"
 #include "authentication_service.hpp"
 #include "login_model.hpp"
@@ -49,6 +50,8 @@ TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
     UserStorageGatewayMock userStorageGateway;
     AuthenticationService authService(&userStorageGateway);
     
+    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    
     QString someInvalidEmail = "inval";
     QString someInvalidPassword = "Somee";
     models::LoginModel loginModel(someInvalidEmail, someInvalidPassword);
@@ -60,6 +63,11 @@ TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
     
     // Act
     authService.loginUser(loginModel);
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(false, arguments[0].toBool());
 }
 
 
@@ -93,6 +101,8 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
     UserStorageGatewayMock userStorageGateway;
     AuthenticationService authService(&userStorageGateway);
     
+    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
+    
     QString invalidFirstName = "J";
     QString lastName = "Doe";
     QString email = "someEmail@librum.com";
@@ -108,4 +118,81 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
     
     // Act
     authService.registerUser(registerModel);
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(false, arguments[0].toBool());
+}
+
+
+
+TEST(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
+{
+    // Arrange
+    UserStorageGatewayMock userStorageGateway;
+    AuthenticationService authService(&userStorageGateway);
+    
+    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    
+    // Act
+    authService.processAuthenticationResult("validToken");
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(true, arguments[0].toBool());
+}
+
+TEST(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
+{
+    // Arrange
+    UserStorageGatewayMock userStorageGateway;
+    AuthenticationService authService(&userStorageGateway);
+    
+    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    
+    // Act
+    authService.processAuthenticationResult("");
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(false, arguments[0].toBool());
+}
+
+
+
+TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
+{
+    // Arrange
+    UserStorageGatewayMock userStorageGateway;
+    AuthenticationService authService(&userStorageGateway);
+    
+    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
+    
+    // Act
+    authService.processRegistrationResult(true, "");
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(true, arguments[0].toBool());
+}
+
+TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
+{
+    // Arrange
+    UserStorageGatewayMock userStorageGateway;
+    AuthenticationService authService(&userStorageGateway);
+    
+    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
+    
+    // Act
+    authService.processRegistrationResult(false, "Some reason");
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(false, arguments[0].toBool());
 }
