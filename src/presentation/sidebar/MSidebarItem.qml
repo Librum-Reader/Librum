@@ -7,18 +7,18 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property int closedWidth : 52
-    property int openedWidth : 177
-    property int imageWidth : 30
-    property int imageHeight : 0
+    property int closedWidth: 52
+    property int openedWidth: 177
+    property int imageWidth: 30
+    property int imageHeight: 0
     property bool preserveImageFit: true
-    property string imageSource : ""
-    property string labelContent : "Content here"
-    property alias  labelVisibility : label.visible
-    property alias  openAnimation : openAnim
-    property alias  closeAnimation : closeAnim
-    property real   textOpacity : 0
-    property bool   selected : false
+    property string imageSource: ""
+    property string labelContent: "Content here"
+    property alias  labelVisibility: label.visible
+    property alias  openAnimation: openAnim
+    property alias  closeAnimation: closeAnim
+    property real   textOpacity: 0
+    property bool   selected: false
     signal clicked()
     
     implicitWidth: (labelVisibility ? openedWidth : closedWidth)

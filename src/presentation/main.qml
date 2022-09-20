@@ -20,10 +20,9 @@ ApplicationWindow
 {
     id: baseRoot
     property alias pageManager: pageManager
-    property int defaultMinimumWidth: 904
     
     minimumHeight: 400
-    minimumWidth: defaultMinimumWidth
+    minimumWidth: 904
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
@@ -39,7 +38,6 @@ ApplicationWindow
         {
             id: sidebar
             z: 1
-            Layout.alignment: Qt.AlignTop
             visible: pageManager.pageHasSidebar
         }
         
@@ -74,9 +72,10 @@ ApplicationWindow
     Component { id: readingPage; MReadingPage {} }
     
     
+    
     function loadPage(page, sidebarItem, doSamePageCheck = true)
     {
-        if(newPageIsTheSameAsOldPage(sidebarItem) && doSamePageCheck)
+        if(checkIfPageIsTheSameAsPrevious(sidebarItem) && doSamePageCheck)
             return;
         
         if(!terminateActionOfPreviousPage(page, sidebarItem))
@@ -85,7 +84,7 @@ ApplicationWindow
         switchPage(page, sidebarItem);
     }
     
-    function newPageIsTheSameAsOldPage(sidebarItem)
+    function checkIfPageIsTheSameAsPrevious(sidebarItem)
     {
         return sidebar.currentItem === sidebarItem;
     }
@@ -112,7 +111,7 @@ ApplicationWindow
         if(page === readingPage)
             baseRoot.minimumWidth = 550;
         else
-            baseRoot.minimumWidth = baseRoot.defaultMinimumWidth;
+            baseRoot.minimumWidth = baseRoot.minimumWidth;
         
     }
     
