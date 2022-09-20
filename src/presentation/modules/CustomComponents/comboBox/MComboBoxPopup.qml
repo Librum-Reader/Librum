@@ -23,7 +23,6 @@ Popup
     property double fontSize: 11
     property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
-    property string fontFamily: Style.defaultFontFamily
     property string highlightColor: Style.colorLightPurple
     signal itemChanged
     

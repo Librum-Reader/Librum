@@ -22,7 +22,7 @@ Page
     ColumnLayout
     {
         id: layout
-        property int insideMargin : 40
+        property int insideMargin: 40
         
         width: parent.width
         spacing: 0
@@ -113,6 +113,7 @@ Page
                         anchors.fill: parent
                         spacing: 0
                         
+                        
                         Label
                         {
                             id: displayTitle
@@ -122,7 +123,6 @@ Page
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
-                        
                         
                         Label
                         {
@@ -134,7 +134,6 @@ Page
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
-                        
                         
                         MDualToggle
                         {

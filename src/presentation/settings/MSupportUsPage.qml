@@ -67,6 +67,7 @@ MFlickWrapper
                     width: parent.width
                     spacing: 0
                     
+                    
                     Label
                     {
                         id: detailsTitle

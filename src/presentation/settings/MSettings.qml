@@ -89,7 +89,6 @@ Page
             id: settingsPageManager
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignTop | Qt.AlignLeft
             initialItem: aboutPage
             
             popEnter: null
@@ -117,13 +116,13 @@ Page
         if(settingsSidebar.currentItem === sidebarItem)
             return;
         
-        if(!ensureSettingsPageIsSaved(switchSettingsPage, page, sidebarItem))
+        if(!saveSettingsPage(switchSettingsPage, page, sidebarItem))
             return;
         
         switchSettingsPage(page, sidebarItem);
     }
     
-    function ensureSettingsPageIsSaved(switchPageFunction, page, sidebarItem)
+    function saveSettingsPage(switchPageFunction, page, sidebarItem)
     {
         if(settingsPageManager.currentItem.hasCleanup)
         {

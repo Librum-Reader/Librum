@@ -7,10 +7,10 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property string imagePath : "<path here>"
-    property int imageWidth : 15
-    property string textContent : "text here"
-    property int textSpacing : 5
+    property string imagePath: "<path here>"
+    property int imageWidth: 15
+    property string textContent: "text here"
+    property int textSpacing: 5
     signal clicked
     
     implicitWidth: 125
