@@ -7,6 +7,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
 add_executable(adapters_unit_tests
                     main.cpp
                     book_controller_tests.hpp
+                    authentication_controller_tests.hpp
     )
 
 target_link_libraries(adapters_unit_tests
