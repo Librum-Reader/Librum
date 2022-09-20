@@ -8,6 +8,7 @@ import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.controllers 1.0
+import Librum.enums 1.0
 import "toolbar"
 import "indexbar"
 import "tags"
@@ -129,7 +130,8 @@ Page
                     
                     onLeftButtonClicked: 
                     {
-                        BookController.setCurrentBookPath(fileUrl);
+                        console.log(BookOperationStatus.BookDoesNotExist);
+                        let t = BookController.setCurrentBook(fileUrl);
                         loadPage(readingPage);
                     }
                     

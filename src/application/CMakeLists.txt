@@ -31,6 +31,9 @@ set(application_SRC
     services/authentication_service.hpp
     services/book_service.cpp
     services/book_service.hpp
+    
+    common/enums/book_operation_status.hpp
+    
     utility/book_info_manager.cpp
     utility/book_info_manager.hpp
 )

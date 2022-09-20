@@ -1,8 +1,10 @@
 #pragma once
+#include <QObject>
 
 
 namespace application
 {
+    Q_NAMESPACE
 
     enum class BookOperationStatus
     {
@@ -13,5 +15,7 @@ namespace application
         TagDoesNotExist,
         TagAlreadyExists
     };
+    
+    Q_ENUM_NS(BookOperationStatus)
 
 } // namespace application

@@ -16,7 +16,6 @@ class IBookController : public QObject
     Q_PROPERTY(const dtos::BookDto* currentBook READ getCurrentBook NOTIFY currentBookChanged)
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
     
-    
 public:
     virtual ~IBookController() noexcept = default;
     
