@@ -23,12 +23,28 @@ AuthenticationService::AuthenticationService(IUserStorageGateway* userStorageGat
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
-    m_userStorageGateway->authenticateUser(loginModel);
+    if(loginModel.isValid())
+    {
+        m_userStorageGateway->authenticateUser(loginModel);
+    }
+    else
+    {
+        emit loginFinished(false);
+    }
 }
 
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
-    m_userStorageGateway->registerUser(registerModel);
+    auto status = registerModel.isValid();
+    if(status == RegisterModel::RegistrationResult::Valid)
+    {
+        m_userStorageGateway->registerUser(registerModel);
+    }
+    else
+    {
+        QString failureReason = registerModel.generateErrorMessage(status);
+        emit registrationFinished(false, failureReason);
+    }
 }
 
 
