@@ -16,18 +16,18 @@ class BookController : public IBookController
 public:
     BookController(application::IBookService* bookService);
     
-    application::BookOperationStatus addBook(const QString& path) override;
-    application::BookOperationStatus deleteBook(const QString& title) override;
-    application::BookOperationStatus updateBook(const QString& title,
-                                                const QVariantMap& operations) override;
-    application::BookOperationStatus addTag(const QString& title,
-                                              const dtos::TagDto& tag) override;
-    application::BookOperationStatus removeTag(const QString& title,
-                                               const QString& tagName) override;
+    int addBook(const QString& path) override;
+    int deleteBook(const QString& title) override;
+    int updateBook(const QString& title,
+                   const QVariantMap& operations) override;
+    int addTag(const QString& title,
+               const dtos::TagDto& tag) override;
+    int removeTag(const QString& title,
+                  const QString& tagName) override;
     const dtos::BookDto* getBook(const QString& title) override;
     int getBookCount() const override;
-    application::BookOperationStatus setCurrentBook(QString title) override;
-    const dtos::BookDto* getCurrentBook() override;
+    int setCurrentBook(QString title) override;
+    dtos::BookDto getCurrentBook() override;
     
 private:
     void refreshBookChache();

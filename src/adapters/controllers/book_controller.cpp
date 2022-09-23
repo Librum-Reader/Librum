@@ -1,9 +1,9 @@
 #include "book_controller.hpp"
+#include <QVariant>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
 #include "tag_dto.hpp"
-#include <QVariant>
 
 
 namespace adapters::controllers
@@ -18,19 +18,19 @@ BookController::BookController(application::IBookService* bookService)
 }
 
 
-BookOperationStatus BookController::addBook(const QString& path)
+int BookController::addBook(const QString& path)
 {
     auto result = m_bookService->addBook(path);
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return BookOperationStatus::Success;
+        return static_cast<int>(BookOperationStatus::Success);
     }
     
-    return BookOperationStatus::BookAlreadyExists;
+    return static_cast<int>(BookOperationStatus::BookAlreadyExists);
 }
 
-BookOperationStatus BookController::deleteBook(const QString& title)
+int BookController::deleteBook(const QString& title)
 {
     auto result = m_bookService->deleteBook(title);
     if(result == BookOperationStatus::Success)
@@ -39,17 +39,17 @@ BookOperationStatus BookController::deleteBook(const QString& title)
             m_currentBookCacheChanged = true;
         
         m_bookChacheChanged = true;
-        return BookOperationStatus::Success;
+        return static_cast<int>(BookOperationStatus::Success);
     }
     
-    return BookOperationStatus::BookDoesNotExist;
+    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
-BookOperationStatus BookController::updateBook(const QString& title, const QVariantMap& operations)
+int BookController::updateBook(const QString& title, const QVariantMap& operations)
 {
     auto updateBookPtr = m_bookService->getBook(title);
     if(!updateBookPtr)
-        return BookOperationStatus::BookDoesNotExist;
+        return static_cast<int>(BookOperationStatus::BookDoesNotExist);
     
     auto updateBook = *updateBookPtr;
     for(auto key : operations.keys())
@@ -66,7 +66,7 @@ BookOperationStatus BookController::updateBook(const QString& title, const QVari
         }
         else
         {
-            return BookOperationStatus::PropertyDoesNotExist;
+            return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
         }
     }
     
@@ -75,10 +75,10 @@ BookOperationStatus BookController::updateBook(const QString& title, const QVari
         m_currentBookCacheChanged = true;
     
     m_bookService->updateBook(title, updateBook);
-    return BookOperationStatus::Success;
+    return static_cast<int>(BookOperationStatus::Success);
 }
 
-BookOperationStatus BookController::addTag(const QString& title, const dtos::TagDto& tag)
+int BookController::addTag(const QString& title, const dtos::TagDto& tag)
 {
     Tag resultTag(tag.name);
     if(m_bookService->addTag(title, resultTag) == BookOperationStatus::Success)
@@ -87,13 +87,13 @@ BookOperationStatus BookController::addTag(const QString& title, const dtos::Tag
         if(title == m_currentBookCache.title)
             m_currentBookCacheChanged = true;
         
-        return BookOperationStatus::Success;
+        return static_cast<int>(BookOperationStatus::Success);
     }
     
-    return BookOperationStatus::TagAlreadyExists;
+    return static_cast<int>(BookOperationStatus::TagAlreadyExists);
 }
 
-BookOperationStatus BookController::removeTag(const QString& title, const QString& tagName)
+int BookController::removeTag(const QString& title, const QString& tagName)
 {
     Tag resultTag(tagName);
     if(m_bookService->removeTag(title, resultTag) == BookOperationStatus::Success)
@@ -102,10 +102,10 @@ BookOperationStatus BookController::removeTag(const QString& title, const QStrin
         if(title == m_currentBookCache.title)
             m_currentBookCacheChanged = true;
         
-        return BookOperationStatus::Success;
+        return static_cast<int>(BookOperationStatus::Success);
     }
     
-    return BookOperationStatus::TagDoesNotExist;
+    return static_cast<int>(BookOperationStatus::TagDoesNotExist);
 }
 
 const dtos::BookDto* BookController::getBook(const QString& title)
@@ -122,27 +122,25 @@ int BookController::getBookCount() const
     return m_bookService->getBookCount();
 }
 
-BookOperationStatus BookController::setCurrentBook(QString title)
+int BookController::setCurrentBook(QString title)
 {
     if(m_bookService->setCurrentBook(title) == BookOperationStatus::Success)
     {
         m_currentBookCacheChanged = true;
-        return BookOperationStatus::Success;
+        return static_cast<int>(BookOperationStatus::Success);
     }
     
-    return BookOperationStatus::BookDoesNotExist;
+    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
-const dtos::BookDto* BookController::getCurrentBook()
+dtos::BookDto BookController::getCurrentBook()
 {
+    // TODO: Check if the current file does not exist
     bool currentBookExists = true;
     if(m_currentBookCacheChanged)
         currentBookExists = refreshCurrentBookChache();
     
-    if(!currentBookExists)
-        return nullptr;
-    
-    return &m_currentBookCache;
+    return m_currentBookCache;
 }
 
 void BookController::refreshBookChache()

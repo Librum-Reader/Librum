@@ -124,6 +124,7 @@ Item
                 boundsMovement: Flickable.StopAtBounds
                 clip: false
                 flickDeceleration: 10000
+                currentIndex: 0
                 
                 
                 model: root.document.pageCount

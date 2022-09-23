@@ -62,7 +62,7 @@ TEST(ABookController, SucceedsAddingABook)
     auto result = bookController.addBook("some/path.pdf");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsAddingABookIfTheBookAlreadyExists)
@@ -84,7 +84,7 @@ TEST(ABookController, FailsAddingABookIfTheBookAlreadyExists)
     auto result = bookController.addBook("some/path.pdf");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 
@@ -108,7 +108,7 @@ TEST(ABookController, SucceedsDeletingABook)
     auto result = bookController.deleteBook("someBook");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
@@ -130,7 +130,7 @@ TEST(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
     auto result = bookController.deleteBook("someBook");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 
@@ -160,7 +160,7 @@ TEST(ABookController, SucceedsUpdatingABook)
     auto result = bookController.updateBook("SomeBook", map);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
@@ -183,7 +183,7 @@ TEST(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
     auto result = bookController.updateBook("SomeBook", map);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
@@ -208,7 +208,7 @@ TEST(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
     auto result = bookController.updateBook("SomeBook", map);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 
@@ -347,38 +347,38 @@ TEST(ABookController, SucceedsGettingTheCurrentBook)
     auto result = bookController.getCurrentBook();
     
     // Assert
-    EXPECT_EQ(expectedResult.title, result->title);
-    EXPECT_EQ(expectedResult.cover, result->cover);
-    EXPECT_EQ(expectedResult.filePath, result->filePath);
+    EXPECT_EQ(expectedResult.title, result.title);
+    EXPECT_EQ(expectedResult.cover, result.cover);
+    EXPECT_EQ(expectedResult.filePath, result.filePath);
     
     for(int i = 0;i < expectedResult.tags.size(); ++i)
     {
-        EXPECT_EQ(expectedResult.tags[i].name, result->tags[i].name);
+        EXPECT_EQ(expectedResult.tags[i].name, result.tags[i].name);
     }
 }
 
-TEST(ABookController, FailsGettingCurrentBookIfNoneExists)
-{
-    // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
+//TEST(ABookController, FailsGettingCurrentBookIfNoneExists)
+//{
+//    // Arrange
+//    BookServiceMock bookService;
+//    IBookService* bookServiceS = &bookService;
+//    controllers::BookController bookController(&bookService);
     
-    Book* bookToReturn = nullptr;
+//    Book* bookToReturn = nullptr;
     
-    auto expectedResult = nullptr;
+//    auto expectedResult = nullptr;
     
-    // Expect
-    EXPECT_CALL(bookService, getCurrentBook())
-            .Times(1)
-            .WillOnce(Return(bookToReturn));
+//    // Expect
+//    EXPECT_CALL(bookService, getCurrentBook())
+//            .Times(1)
+//            .WillOnce(Return(bookToReturn));
     
-    // Act
-    auto result = bookController.getCurrentBook();
+//    // Act
+//    auto result = bookController.getCurrentBook();
     
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
+//    // Assert
+//    EXPECT_EQ(expectedResult, result);
+//}
 
 
 
@@ -400,7 +400,7 @@ TEST(ABookController, SucceedsSettingTheCurrentBook)
     auto result = bookController.setCurrentBook("SomeBook");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
@@ -423,7 +423,7 @@ TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
     auto result = bookController.setCurrentBook(nonExistentTitle);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 
@@ -448,7 +448,7 @@ TEST(ABookController, SucceedsAddingATag)
     auto result = bookController.addTag("SomeTitle", tag);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsAddingTagIfTagAlreadyExists)
@@ -471,7 +471,7 @@ TEST(ABookController, FailsAddingTagIfTagAlreadyExists)
     auto result = bookController.addTag("SomeTitle", tag);
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 
@@ -494,7 +494,7 @@ TEST(ABookController, SucceedsRemovingATag)
     auto result = bookController.removeTag("SomeTitle", "SomeTag");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 TEST(ABookController, FailsRemovingATagIfTagDoesNotExist)
@@ -515,5 +515,5 @@ TEST(ABookController, FailsRemovingATagIfTagDoesNotExist)
     auto result = bookController.removeTag("SomeTitle", "SomeTag");
     
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }

@@ -33,6 +33,8 @@ add_library(adapters
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
+                    DTOs/book_dto.hpp
+                    DTOs/tag_dto.hpp
 )
 
 target_include_directories(adapters
