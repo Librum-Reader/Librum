@@ -30,6 +30,8 @@ add_library(adapters
                     models/chapter_tree/chapter_tree_node.cpp
                     models/chapter_tree/chapter_tree_model.hpp
                     models/chapter_tree/chapter_tree_node.hpp
+                    models/library_model/library_model.cpp
+                    models/library_model/library_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
