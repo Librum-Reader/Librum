@@ -1,6 +1,6 @@
 # Librum
 
-Librum's objective is to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible. <br>
+Librum's objective is to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible for you.<br>
 
 Librum offers a wide range of options, that you can use through a modern and straightforward interface.<br>
 Librum allows you to create and manage your own <b>library</b> of books and documents, which you can access from <b>any device</b>.<br>
