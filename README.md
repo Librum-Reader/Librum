@@ -2,14 +2,14 @@
 
 Librum's objective is to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible. <br>
 
-Librum offers a wide range of options, that may be accessed via a modern and straightforward interface.<br>
+Librum offers a wide range of options, that you can use through a modern and straightforward interface.<br>
 Librum allows you to create and manage your own <b>library</b> of books and documents, which you can access from <b>any device</b>.<br>
 You can <b>read</b> your book comfortably through the app, <b>highlight</b> sections that interest you, and <b>bookmark</b> pages that you wish to return to.<br>
 Other features of Librum include taking <b>notes</b> directly from the app, a free in-app <b>bookstore</b>, productivity-boosting plugins, and many more.
 
 <br>
 
-The primary goals of Librum are to be <b>modern</b>, entirely <b>opensource</b>, <b>cost-free</b>, <b>customizable</b> and <b>fast</b>.</br>
+The primary goals of Librum are to be <b>modern</b>, entirely <b>opensource</b>, <b>cost-free</b> and <b>fast</b>.</br>
 Due to the complete copyleft license we are utilizing, anyone can download, edit, and redistribute the source code. 
 
 <br>
