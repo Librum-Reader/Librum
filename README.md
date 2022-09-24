@@ -118,15 +118,15 @@ Instructions to get Librum up and running in your environment.
 
 ## For GNU/Linux
 ### Prerequisites
-- cmake (at least version 3.20)     https://cmake.org/download/
+- cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
-- Qt6                               https://www.qt.io/download
+- Qt 5.15                           https://www.qt.io/download
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
 
 ### Installation
 1. Clone the repository.
     ```sh
-    git clone --recurse-submodules -j8 https://github.com/Etovex/Librum.git
+    git clone --recurse-submodules -j4 https://github.com/Etovex/Librum.git
     ```
 2. Step into the cloned project folder.
     ```sh
@@ -142,28 +142,30 @@ Instructions to get Librum up and running in your environment.
         ```
         to the third line of the top-level CMakeLists.txt and replace all contents in angular brackets '<>' with your data, for example:
         ```sh
-        list(APPEND CMAKE_PREFIX_PATH "/home/david/Qt/6.2.3/gcc_64")
+        list(APPEND CMAKE_PREFIX_PATH "/home/john/Qt/5.15.5/gcc_64")
         ```
 4. Create the build folder and step into it.
     ```sh
     mkdir build-Release
     cd build-Release
     ```
-6. Run cmake.
+5. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE:STRING=Release -DBUILD_TESTS=Off ..
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
     ```
-    If you don't want to use your default build-file generator (e.g. make, or ninja), add the -G option, e.g.
-    ```sh
-    -G "Ninja"
-    ```
-    
-
 6. Build the project
     ```sh
     make
     ```
-7. Run the app
+    Optionally, add the -j option to increase build speed. Pass it the number of cores you want "make" to use. E.g.:
+    ```sh
+    make -j4
+    ```
+7. Install the files
+    ```sh
+    sudo make install
+    ```
+8. Run the app
     ```sh
     ./appLibrum
     ```
