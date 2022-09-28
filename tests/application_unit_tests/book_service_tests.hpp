@@ -4,7 +4,7 @@
 #include <QString>
 #include "book.hpp"
 #include "book_operation_status.hpp"
-#include "i_book_info_manager.hpp"
+#include "i_book_info_helper.hpp"
 #include "book_service.hpp"
 #include "tag.hpp"
 
@@ -16,7 +16,7 @@ using namespace application::services;
 using namespace domain;
 
 
-class BookInfoManagerMock : public application::IBookInfoManager
+class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
     MOCK_METHOD(QString, getBookTitle, (const QString& filePath), (override));
@@ -29,7 +29,7 @@ public:
 TEST(ABookService, SucceedsAddingABook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = BookOperationStatus::Success;
@@ -54,7 +54,7 @@ TEST(ABookService, SucceedsAddingABook)
 TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = BookOperationStatus::BookAlreadyExists;
@@ -82,7 +82,7 @@ TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
 TEST(ABookService, SucceedsDeletingABook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString bookTitle = "SomeBook";
@@ -116,7 +116,7 @@ TEST(ABookService, SucceedsDeletingABook)
 TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = BookOperationStatus::BookAlreadyExists;
@@ -144,7 +144,7 @@ TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
 TEST(ABookService, SucceedsUpdatingABook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString originalBookTitle = "SomeBook";
@@ -192,7 +192,7 @@ TEST(ABookService, SucceedsUpdatingABook)
 TEST(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString originalBookTitle = "SomeBook";
@@ -217,7 +217,7 @@ TEST(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 TEST(ABookService, SucceedsGettingABook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString title = "SomeBook";
@@ -254,7 +254,7 @@ TEST(ABookService, SucceedsGettingABook)
 TEST(ABookService, FailsGettingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString title = "SomeBook";
@@ -274,7 +274,7 @@ TEST(ABookService, FailsGettingABookIfBookDoesNotExist)
 TEST(ABookService, SucceedsAddingATag)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
 
@@ -313,7 +313,7 @@ TEST(ABookService, SucceedsAddingATag)
 TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
 
@@ -346,7 +346,7 @@ TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
 TEST(ABookService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
 
@@ -367,7 +367,7 @@ TEST(ABookService, FailsAddingATagIfBookDoesNotExist)
 TEST(ABookService, SucceedsSettingTheCurrentBook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString bookTitle = "SomeBook";
@@ -396,7 +396,7 @@ TEST(ABookService, SucceedsSettingTheCurrentBook)
 TEST(ABookService, FailsSettingTheCurrentBookIfTheBookDoesNotExist)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -414,7 +414,7 @@ TEST(ABookService, FailsSettingTheCurrentBookIfTheBookDoesNotExist)
 TEST(ABookService, SucceedsGettingTheCurrentBook)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     QString bookTitle = "SomeBook";
@@ -463,7 +463,7 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
 TEST(ABookService, FailsGettingTheCurrentBookIfNoCurrentBookExists)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = nullptr;
@@ -480,7 +480,7 @@ TEST(ABookService, FailsGettingTheCurrentBookIfNoCurrentBookExists)
 TEST(ABookService, SucceedsGettingAllBooks)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     models::Book firstBook("FirstBook", "FirstFilePath", "FirstCover");
@@ -521,7 +521,7 @@ TEST(ABookService, SucceedsGettingAllBooks)
 TEST(ABookService, SucceedsGettingTheBookCount)
 {
     // Arrange
-    BookInfoManagerMock bookInfoManagerMock;
+    BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
     auto expectedResult = 2;

@@ -9,7 +9,7 @@ namespace application::services
 using namespace domain::models;
 
 
-BookService::BookService(IBookInfoManager* bookInfoManager)
+BookService::BookService(IBookInfoHelper* bookInfoManager)
     : m_currentBook(nullptr), m_bookInfoManager(bookInfoManager)
 {
 }

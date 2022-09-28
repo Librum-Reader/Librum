@@ -12,7 +12,7 @@
 #include "user_storage_access.hpp"
 #include "i_book_service.hpp"
 #include "book_service.hpp"
-#include "book_info_manager.hpp"
+#include "book_info_helper.hpp"
 
 
 namespace di = boost::di;
@@ -30,7 +30,7 @@ const auto diConfig = [] {
                 di::bind<adapters::IBookController>().to<adapters::controllers::BookController>(),
                 di::bind<application::IBookService>().to<application::services::BookService>(),
                 
-                di::bind<application::IBookInfoManager>().to<application::utility::BookInfoManager>()
+                di::bind<application::IBookInfoHelper>().to<application::utility::BookInfoManager>()
                 );
 };
 

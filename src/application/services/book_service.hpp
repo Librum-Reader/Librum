@@ -1,5 +1,5 @@
 #pragma once
-#include "i_book_info_manager.hpp"
+#include "i_book_info_helper.hpp"
 #include "i_book_service.hpp"
 
 
@@ -11,7 +11,7 @@ class BookService : public IBookService
     Q_OBJECT
     
 public:
-    BookService(IBookInfoManager* bookInfoManager);
+    BookService(IBookInfoHelper* bookInfoManager);
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QString& title) override;
@@ -35,7 +35,7 @@ private:
     
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
-    IBookInfoManager* m_bookInfoManager;
+    IBookInfoHelper* m_bookInfoManager;
 };
 
 } // namespace application::services
