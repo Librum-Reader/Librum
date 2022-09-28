@@ -5,7 +5,7 @@
 namespace application::utility
 {
 
-class BookInfoManager : public IBookInfoHelper
+class BookInfoHelper : public IBookInfoHelper
 {
 public:
     QString parseBookTitleFromFilePath(const QString& filePath) override;

@@ -4,16 +4,20 @@
 namespace application::utility
 {
 
-QString BookInfoManager::parseBookTitleFromFilePath(const QString& filePath)
+QString BookInfoHelper::parseBookTitleFromFilePath(const QString& filePath)
 {
     auto lastIndexOfSlash = filePath.lastIndexOf("/");
     auto lastIndexOfDot = filePath.lastIndexOf(".");
     
-    auto result = filePath.mid(lastIndexOfSlash + 1, lastIndexOfDot - lastIndexOfSlash - 1);
+    if(lastIndexOfDot == -1)
+        return filePath.mid(lastIndexOfSlash + 1);
+    
+    auto result = filePath.mid(lastIndexOfSlash + 1, 
+                               lastIndexOfDot - lastIndexOfSlash - 1);
     return result;
 }
 
-QByteArray BookInfoManager::getBookCover(const QString& filePath)
+QByteArray BookInfoHelper::getBookCover(const QString& filePath)
 {
     return QByteArray("Smth");
 }

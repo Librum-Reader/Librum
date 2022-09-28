@@ -30,7 +30,7 @@ const auto diConfig = [] {
                 di::bind<adapters::IBookController>().to<adapters::controllers::BookController>(),
                 di::bind<application::IBookService>().to<application::services::BookService>(),
                 
-                di::bind<application::IBookInfoHelper>().to<application::utility::BookInfoManager>()
+                di::bind<application::IBookInfoHelper>().to<application::utility::BookInfoHelper>()
                 );
 };
 
