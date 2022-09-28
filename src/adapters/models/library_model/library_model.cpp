@@ -1,6 +1,6 @@
 #include "library_model.hpp"
-#include "book.hpp"
 #include <QDebug>
+#include "book.hpp"
 
 
 using namespace domain::models;
@@ -12,13 +12,8 @@ namespace adapters::data_models
 LibraryModel::LibraryModel(const std::vector<domain::models::Book>& data)
     : m_data(data)
 {
-//    beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
-//    m_data.emplace_back("SomeTitle", "Some/Path.qml", "SomeCover");
-//    endInsertRows();
-//    beginInsertRows(QModelIndex(), m_data.size(), m_data.size());
-//    m_data.emplace_back("SomeOtherTitle", "Some/Path.qml", "SomeCover");
-//    endInsertRows();
 }
+
 
 int LibraryModel::rowCount(const QModelIndex& parent) const
 {
@@ -34,24 +29,34 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return QVariant();
     
     const Book& book = m_data.at(index.row());
-    if(role == TitleRole)
+    
+    
+    switch(role)
+    {
+    case TitleRole:
         return book.title();
-    else if(role == CoverRole)
+        break;
+    case CoverRole:
         return book.cover();
-    else if(role == FilePathRole)
+        break;
+    case FilePathRole:
         return book.filePath();
-    else
+        break;
+    default:
         return QVariant();
+    }
 }
 
 QHash<int, QByteArray> LibraryModel::roleNames() const
 {
-    return QHash<int, QByteArray>
+    static QHash<int, QByteArray> roles
     {
         {TitleRole, "title"},
         {CoverRole, "cover"},
         {FilePathRole, "filePath"}
     };
+    
+    return roles;
 }
 
 
