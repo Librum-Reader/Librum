@@ -122,7 +122,7 @@ Item
                             id: percentageLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
-                            text: "27%"
+                            text: "0%"
                             font.weight: Font.DemiBold
                             color: Style.colorBaseTitle
                             font.pointSize: 10
