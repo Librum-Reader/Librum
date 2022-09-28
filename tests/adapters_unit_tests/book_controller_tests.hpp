@@ -1,6 +1,7 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <memory>
 #include <utility>
 #include <QString>
 #include <QVariantMap>
@@ -42,16 +43,28 @@ public:
 };
 
 
+struct ABookController : public ::testing::Test
+{
+    ABookController() {}
+    
+    void SetUp() override
+    {
+        EXPECT_CALL(bookService, getAllBooks())
+                .WillOnce(ReturnRef(bookVector));
+        
+        bookController = std::make_unique<controllers::BookController>(&bookService);
+    }
+    
+    const std::vector<Book> bookVector;
+    BookServiceMock bookService;
+    std::unique_ptr<controllers::BookController> bookController;
+};
 
-TEST(ABookController, SucceedsAddingABook)
+
+TEST_F(ABookController, SucceedsAddingABook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::Success;
-    
     
     // Expect
     EXPECT_CALL(bookService, addBook(_))
@@ -59,19 +72,15 @@ TEST(ABookController, SucceedsAddingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.addBook("some/path.pdf");
+    auto result = bookController->addBook("some/path.pdf");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsAddingABookIfTheBookAlreadyExists)
+TEST_F(ABookController, FailsAddingABookIfTheBookAlreadyExists)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::BookAlreadyExists;
     
     
@@ -81,7 +90,7 @@ TEST(ABookController, FailsAddingABookIfTheBookAlreadyExists)
             .WillOnce(Return(BookOperationStatus::BookAlreadyExists));
     
     // Act
-    auto result = bookController.addBook("some/path.pdf");
+    auto result = bookController->addBook("some/path.pdf");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -89,13 +98,9 @@ TEST(ABookController, FailsAddingABookIfTheBookAlreadyExists)
 
 
 
-TEST(ABookController, SucceedsDeletingABook)
+TEST_F(ABookController, SucceedsDeletingABook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::Success;
     
     
@@ -105,19 +110,15 @@ TEST(ABookController, SucceedsDeletingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.deleteBook("someBook");
+    auto result = bookController->deleteBook("someBook");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
+TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     
@@ -127,7 +128,7 @@ TEST(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
             .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
     
     // Act
-    auto result = bookController.deleteBook("someBook");
+    auto result = bookController->deleteBook("someBook");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -135,17 +136,14 @@ TEST(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
 
 
 
-TEST(ABookController, SucceedsUpdatingABook)
+TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     Book bookToReturn("SomeBook");
     QVariantMap map{ {"Title", "AnotherName"}, {"Cover", QByteArray("123")} };
     
     auto expectedResult = BookOperationStatus::Success;
+    
     
     // Expect
     EXPECT_CALL(bookService, getBook(_))
@@ -157,19 +155,15 @@ TEST(ABookController, SucceedsUpdatingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.updateBook("SomeBook", map);
+    auto result = bookController->updateBook("SomeBook", map);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
+TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     QVariantMap map{ {"Title", "AnotherName"}, {"Cover", QByteArray("123")} };
     
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -180,19 +174,15 @@ TEST(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
             .WillOnce(Return(nullptr));
     
     // Act
-    auto result = bookController.updateBook("SomeBook", map);
+    auto result = bookController->updateBook("SomeBook", map);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
+TEST_F(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     Book bookToReturn("SomeBook");
     QVariantMap map{ {"NonExistentProperty", QString("123")} };
     
@@ -205,7 +195,7 @@ TEST(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
             .WillOnce(Return(&bookToReturn));
     
     // Act
-    auto result = bookController.updateBook("SomeBook", map);
+    auto result = bookController->updateBook("SomeBook", map);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -213,13 +203,9 @@ TEST(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
 
 
 
-TEST(ABookController, SucceedsGettingABook)
+TEST_F(ABookController, SucceedsGettingABook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     QString title = "SomeBook";
     QString filePath = "some/path.pdf";
     QByteArray cover = "0fdd244123bc";
@@ -245,52 +231,24 @@ TEST(ABookController, SucceedsGettingABook)
             .WillOnce(ReturnRef(booksToReturn));
     
     // Act
-    auto result = bookController.getBook(title);
+    auto result = bookController->getBook(title);
     
     // Assert
-    EXPECT_EQ(expectedResult.title, result->title);
-    EXPECT_EQ(expectedResult.filePath, result->filePath);
-    EXPECT_EQ(expectedResult.cover, result->cover);
+    EXPECT_EQ(expectedResult.title, result.title);
+    EXPECT_EQ(expectedResult.filePath, result.filePath);
+    EXPECT_EQ(expectedResult.cover, result.cover);
     
     for(int i = 0; i < expectedResult.tags.size(); ++i)
     {
-        EXPECT_EQ(expectedResult.tags[i].name, result->tags[i].name);
+        EXPECT_EQ(expectedResult.tags[i].name, result.tags[i].name);
     }
 }
 
-TEST(ABookController, FailsGettingABookIfBookDoesNotExist)
+
+
+TEST_F(ABookController, SucceedsGettingTheBookCount)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
-    QString title = "NonExistentBook";
-    std::vector<Book> booksToReturn({QString::fromStdString("SomeBook")});
-    
-    auto expectedResult = nullptr;
-    
-    // Expect
-    EXPECT_CALL(bookService, getAllBooks())
-            .Times(1)
-            .WillOnce(ReturnRef(booksToReturn));
-    
-    // Act
-    auto result = bookController.getBook(title);
-    
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
-
-
-TEST(ABookController, SucceedsGettingTheBookCount)
-{
-    // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     std::vector<Book> booksToReturn;
     booksToReturn.emplace_back("SomeBook");
     booksToReturn.emplace_back("SomeOtherBook");
@@ -304,7 +262,7 @@ TEST(ABookController, SucceedsGettingTheBookCount)
             .WillOnce(Return(2));
     
     // Act
-    auto result = bookController.getBookCount();
+    auto result = bookController->getBookCount();
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -312,13 +270,9 @@ TEST(ABookController, SucceedsGettingTheBookCount)
 
 
 
-TEST(ABookController, SucceedsGettingTheCurrentBook)
+TEST_F(ABookController, SucceedsGettingTheCurrentBook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     QString title = "SomeBook";
     QString filePath = "some/book.pdf";
     QString firstTagName = "FirstTag";
@@ -344,7 +298,7 @@ TEST(ABookController, SucceedsGettingTheCurrentBook)
             .WillOnce(Return(&bookToReturn));
     
     // Act
-    auto result = bookController.getCurrentBook();
+    auto result = bookController->getCurrentBook();
     
     // Assert
     EXPECT_EQ(expectedResult.title, result.title);
@@ -357,38 +311,9 @@ TEST(ABookController, SucceedsGettingTheCurrentBook)
     }
 }
 
-//TEST(ABookController, FailsGettingCurrentBookIfNoneExists)
-//{
-//    // Arrange
-//    BookServiceMock bookService;
-//    IBookService* bookServiceS = &bookService;
-//    controllers::BookController bookController(&bookService);
-    
-//    Book* bookToReturn = nullptr;
-    
-//    auto expectedResult = nullptr;
-    
-//    // Expect
-//    EXPECT_CALL(bookService, getCurrentBook())
-//            .Times(1)
-//            .WillOnce(Return(bookToReturn));
-    
-//    // Act
-//    auto result = bookController.getCurrentBook();
-    
-//    // Assert
-//    EXPECT_EQ(expectedResult, result);
-//}
-
-
-
-TEST(ABookController, SucceedsSettingTheCurrentBook)
+TEST_F(ABookController, SucceedsSettingTheCurrentBook)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     BookOperationStatus expectedResult = BookOperationStatus::Success;
     
     // Expect
@@ -397,19 +322,15 @@ TEST(ABookController, SucceedsSettingTheCurrentBook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.setCurrentBook("SomeBook");
+    auto result = bookController->setCurrentBook("SomeBook");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
+TEST_F(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     QString nonExistentTitle = "SomeNonExistenBook";
     
     BookOperationStatus expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -420,7 +341,7 @@ TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
             .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
     
     // Act
-    auto result = bookController.setCurrentBook(nonExistentTitle);
+    auto result = bookController->setCurrentBook(nonExistentTitle);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -428,13 +349,9 @@ TEST(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
 
 
 
-TEST(ABookController, SucceedsAddingATag)
+TEST_F(ABookController, SucceedsAddingATag)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     dtos::TagDto tag{ .name = "SomeTag" };
     
     auto expectedResult = BookOperationStatus::Success;
@@ -445,19 +362,15 @@ TEST(ABookController, SucceedsAddingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.addTag("SomeTitle", tag);
+    auto result = bookController->addTag("SomeTitle", tag);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsAddingTagIfTagAlreadyExists)
+TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     dtos::TagDto tag{ .name = "SomeTag" };
     
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
@@ -468,7 +381,7 @@ TEST(ABookController, FailsAddingTagIfTagAlreadyExists)
             .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
     
     // Act
-    auto result = bookController.addTag("SomeTitle", tag);
+    auto result = bookController->addTag("SomeTitle", tag);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -476,13 +389,9 @@ TEST(ABookController, FailsAddingTagIfTagAlreadyExists)
 
 
 
-TEST(ABookController, SucceedsRemovingATag)
+TEST_F(ABookController, SucceedsRemovingATag)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::Success;
     
     // Expect
@@ -491,19 +400,15 @@ TEST(ABookController, SucceedsRemovingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController.removeTag("SomeTitle", "SomeTag");
+    auto result = bookController->removeTag("SomeTitle", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST(ABookController, FailsRemovingATagIfTagDoesNotExist)
+TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
-    BookServiceMock bookService;
-    IBookService* bookServiceS = &bookService;
-    controllers::BookController bookController(&bookService);
-    
     auto expectedResult = BookOperationStatus::TagDoesNotExist;
     
     // Expect
@@ -512,7 +417,7 @@ TEST(ABookController, FailsRemovingATagIfTagDoesNotExist)
             .WillOnce(Return(BookOperationStatus::TagDoesNotExist));
     
     // Act
-    auto result = bookController.removeTag("SomeTitle", "SomeTag");
+    auto result = bookController->removeTag("SomeTitle", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
