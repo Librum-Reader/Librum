@@ -17,7 +17,7 @@ BookService::BookService(IBookInfoHelper* bookInfoManager)
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    QString title = m_bookInfoManager->getBookTitle(filePath);
+    QString title = m_bookInfoManager->parseBookTitleFromFilePath(filePath);
     
     auto book = getBookByTitle(title);
     if(book)

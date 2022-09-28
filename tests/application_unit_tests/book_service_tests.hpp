@@ -19,7 +19,7 @@ using namespace domain;
 class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
-    MOCK_METHOD(QString, getBookTitle, (const QString& filePath), (override));
+    MOCK_METHOD(QString, parseBookTitleFromFilePath, (const QString& filePath), (override));
     MOCK_METHOD(QByteArray, getBookCover, (const QString& filePath), (override));
 };
 
@@ -36,7 +36,7 @@ TEST(ABookService, SucceedsAddingABook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return("SomeBook"));
     
@@ -61,7 +61,7 @@ TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
     
@@ -91,7 +91,7 @@ TEST(ABookService, SucceedsDeletingABook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillOnce(Return(bookTitle))
             .WillOnce(Return("SomeOtherBook"));
@@ -123,7 +123,7 @@ TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
     
@@ -161,7 +161,7 @@ TEST(ABookService, SucceedsUpdatingABook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return(originalBookTitle));
     
@@ -228,7 +228,7 @@ TEST(ABookService, SucceedsGettingABook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return(title));
     
@@ -286,7 +286,7 @@ TEST(ABookService, SucceedsAddingATag)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return(bookTitle));
     
@@ -324,7 +324,7 @@ TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return(bookTitle));
     
@@ -376,7 +376,7 @@ TEST(ABookService, SucceedsSettingTheCurrentBook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return("SomeBook"));
     
@@ -429,7 +429,7 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillOnce(Return("SomeRandomBook"))
             .WillOnce(Return(bookTitle));
@@ -490,7 +490,7 @@ TEST(ABookService, SucceedsGettingAllBooks)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(3)
             .WillOnce(Return(firstBook.title()))
             .WillOnce(Return(secondBook.title()))
@@ -528,7 +528,7 @@ TEST(ABookService, SucceedsGettingTheBookCount)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, getBookTitle(_))
+    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillOnce(Return("SomeBook"))
             .WillOnce(Return("SomeOtherBook"));
