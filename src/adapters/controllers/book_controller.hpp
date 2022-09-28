@@ -36,11 +36,11 @@ private:
     dtos::BookDto* getBookFromChache(const QString& title);
     bool refreshCurrentBookChache();
     
+    
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
     bool m_currentBookCacheChanged;
     dtos::BookDto m_currentBookCache;
-    
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;
 };

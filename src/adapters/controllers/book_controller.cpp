@@ -40,10 +40,10 @@ int BookController::deleteBook(const QString& title)
     auto result = m_bookService->deleteBook(title);
     if(result == BookOperationStatus::Success)
     {
+        m_bookChacheChanged = true;
         if(title == m_currentBookCache.title)
             m_currentBookCacheChanged = true;
         
-        m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
     
@@ -52,22 +52,22 @@ int BookController::deleteBook(const QString& title)
 
 int BookController::updateBook(const QString& title, const QVariantMap& operations)
 {
-    auto updateBookPtr = m_bookService->getBook(title);
-    if(!updateBookPtr)
+    auto bookToUpdate = m_bookService->getBook(title);
+    if(!bookToUpdate)
         return static_cast<int>(BookOperationStatus::BookDoesNotExist);
     
-    auto updateBook = *updateBookPtr;
+    auto updatedBook = *bookToUpdate;
     for(auto key : operations.keys())
     {
         if(key == "Title")
         {
             auto title = operations.value("Title");
-            updateBook.setTitle(qvariant_cast<QString>(title));
+            updatedBook.setTitle(qvariant_cast<QString>(title));
         }
         else if(key == "Cover")
         {
             auto cover = operations.value("Cover");
-            updateBook.setTitle(qvariant_cast<QByteArray>(cover));
+            updatedBook.setTitle(qvariant_cast<QByteArray>(cover));
         }
         else
         {
@@ -79,14 +79,14 @@ int BookController::updateBook(const QString& title, const QVariantMap& operatio
     if(title == m_currentBookCache.title)
         m_currentBookCacheChanged = true;
     
-    m_bookService->updateBook(title, updateBook);
+    m_bookService->updateBook(title, updatedBook);
     return static_cast<int>(BookOperationStatus::Success);
 }
 
 int BookController::addTag(const QString& title, const dtos::TagDto& tag)
 {
-    Tag resultTag(tag.name);
-    if(m_bookService->addTag(title, resultTag) == BookOperationStatus::Success)
+    Tag tagToAdd(tag.name);
+    if(m_bookService->addTag(title, tagToAdd) == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
         if(title == m_currentBookCache.title)
@@ -100,8 +100,8 @@ int BookController::addTag(const QString& title, const dtos::TagDto& tag)
 
 int BookController::removeTag(const QString& title, const QString& tagName)
 {
-    Tag resultTag(tagName);
-    if(m_bookService->removeTag(title, resultTag) == BookOperationStatus::Success)
+    Tag tagToRemove(tagName);
+    if(m_bookService->removeTag(title, tagToRemove) == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
         if(title == m_currentBookCache.title)
@@ -128,13 +128,11 @@ int BookController::getBookCount() const
 
 int BookController::setCurrentBook(QString title)
 {
-    if(m_bookService->setCurrentBook(title) == BookOperationStatus::Success)
-    {
+    auto result = m_bookService->setCurrentBook(title);
+    if(result == BookOperationStatus::Success)
         m_currentBookCacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
-    }
     
-    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
+    return static_cast<int>(result);
 }
 
 dtos::BookDto BookController::getCurrentBook()
@@ -159,24 +157,20 @@ void BookController::refreshBookChache()
     const auto& books = m_bookService->getBooks();
     
     m_bookCache.clear();
-    for(std::size_t i = 0; i < books.size(); ++i)
+    for(const auto& book : books)
     {
-        const auto& book = books[i];
-        
-        
         dtos::BookDto bookDto;
         bookDto.title = book.title();
         bookDto.filePath = book.filePath();
         bookDto.cover = book.cover();
         
-        for(std::size_t k = 0; k < book.tags().size(); ++k)
+        for(std::size_t i = 0; i < book.tags().size(); ++i)
         {
             dtos::TagDto tagDto;
-            tagDto.name = book.tags()[k].name();
+            tagDto.name = book.tags()[i].name();
             
             bookDto.tags.push_back(tagDto);
         }
-        
         
         m_bookCache.emplace_back(std::move(bookDto));
     }
@@ -193,20 +187,18 @@ bool BookController::refreshCurrentBookChache()
         return false;
     }
     
-    
     m_currentBookCache.title = currentBook->title();
     m_currentBookCache.filePath = currentBook->filePath();
     m_currentBookCache.cover = currentBook->cover();
     
     m_currentBookCache.tags.clear();
-    for(std::size_t i = 0; i < currentBook->tags().size(); ++i)
+    for(const Tag& tag : currentBook->tags())
     {
         dtos::TagDto tagDto;
-        tagDto.name = currentBook->tags()[i].name();
+        tagDto.name = tag.name();
         
         m_currentBookCache.tags.append(tagDto);
     }
-    
     
     m_currentBookCacheChanged = false;
     return true;
