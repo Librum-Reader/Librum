@@ -86,7 +86,7 @@ BookOperationStatus BookService::removeTag(const QString& title,
     return BookOperationStatus::Success;
 }
 
-const std::vector<Book>& BookService::getAllBooks() const
+const std::vector<Book>& BookService::getBooks() const
 {
     return m_books;
 }

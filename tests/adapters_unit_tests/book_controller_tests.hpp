@@ -30,7 +30,7 @@ public:
     MOCK_METHOD(BookOperationStatus, updateBook, (const QString& title,
                                                   const Book& book), (override));
     
-    MOCK_METHOD(const std::vector<Book>&, getAllBooks, (), (const, override));
+    MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
     MOCK_METHOD(BookOperationStatus, setCurrentBook, (const QString& title), (override));
@@ -43,13 +43,14 @@ public:
 };
 
 
+
 struct ABookController : public ::testing::Test
 {
     ABookController() {}
     
     void SetUp() override
     {
-        EXPECT_CALL(bookService, getAllBooks())
+        EXPECT_CALL(bookService, getBooks())
                 .WillOnce(ReturnRef(bookVector));
         
         bookController = std::make_unique<controllers::BookController>(&bookService);
@@ -59,6 +60,8 @@ struct ABookController : public ::testing::Test
     BookServiceMock bookService;
     std::unique_ptr<controllers::BookController> bookController;
 };
+
+
 
 
 TEST_F(ABookController, SucceedsAddingABook)
@@ -226,7 +229,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     
     
     // Expect
-    EXPECT_CALL(bookService, getAllBooks())
+    EXPECT_CALL(bookService, getBooks())
             .Times(1)
             .WillOnce(ReturnRef(booksToReturn));
     

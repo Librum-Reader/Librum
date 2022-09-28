@@ -507,7 +507,7 @@ TEST(ABookService, SucceedsGettingAllBooks)
     bookService.addBook(secondBook.filePath());
     bookService.addBook(thirdBook.filePath());
     
-    auto results = bookService.getAllBooks();
+    auto results = bookService.getBooks();
     
     // Assert
     for(int i = 0; i < expectedResult.size(); ++i)

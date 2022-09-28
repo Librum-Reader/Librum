@@ -22,7 +22,7 @@ public:
     BookOperationStatus removeTag(const QString& title,
                                   const domain::models::Tag& tag) override;
     
-    const std::vector<domain::models::Book>& getAllBooks() const override;
+    const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QString& title) const override;
     int getBookCount() const override;
     BookOperationStatus setCurrentBook(const QString& title) override;

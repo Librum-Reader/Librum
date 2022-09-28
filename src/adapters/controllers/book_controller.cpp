@@ -14,7 +14,7 @@ using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService)
     : m_bookChacheChanged(true), m_currentBookCacheChanged(true), 
-      m_bookService(bookService), m_libraryModel(m_bookService->getAllBooks())
+      m_bookService(bookService), m_libraryModel(m_bookService->getBooks())
 {
     QObject::connect(m_bookService, &application::IBookService::bookInsertionStarted,
                      &m_libraryModel, &data_models::LibraryModel::beginInsertingRow);
@@ -156,7 +156,7 @@ data_models::LibraryModel* BookController::getLibraryModel()
 
 void BookController::refreshBookChache()
 {
-    const auto& books = m_bookService->getAllBooks();
+    const auto& books = m_bookService->getBooks();
     
     m_bookCache.clear();
     for(std::size_t i = 0; i < books.size(); ++i)

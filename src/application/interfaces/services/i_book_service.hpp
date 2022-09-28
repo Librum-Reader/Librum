@@ -21,7 +21,7 @@ public:
     virtual BookOperationStatus updateBook(const QString& title,
                                            const domain::models::Book& newBook) = 0;
     
-    virtual const std::vector<domain::models::Book>& getAllBooks() const = 0;
+    virtual const std::vector<domain::models::Book>& getBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
     virtual int getBookCount() const = 0;
     virtual BookOperationStatus setCurrentBook(const QString& title) = 0;
