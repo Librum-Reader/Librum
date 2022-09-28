@@ -32,7 +32,6 @@ Item
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
                 text: "Contents"
-                font.family: Style.defaultFontFamily
                 font.pointSize: 14
                 font.weight: Font.Medium
                 color: Style.colorBaseText
@@ -58,7 +57,6 @@ Item
                     selectByMouse: true
                     color: Style.colorBaseText
                     font.pointSize: 11
-                    font.family: Style.defaultFontFamily
                     font.weight: Font.Normal
                     placeholderText: "Search..."
                     placeholderTextColor: Style.colorLightText3
@@ -170,7 +168,6 @@ Item
 //                                        horizontalAlignment: Text.AlignLeft
 //                                        anchors.leftMargin: 4
 //                                        text: model.display
-//                                        font.family: Style.defaultFontFamily
 //                                        font.pointSize: 10.5
 //                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
 //                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorBaseText

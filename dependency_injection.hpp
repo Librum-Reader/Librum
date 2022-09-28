@@ -1,5 +1,5 @@
 #pragma once
-#include <boost/di.hpp>
+#include "libs/di/include/boost/di.hpp"
 #include "book_controller.hpp"
 #include "i_book_controller.hpp"
 #include "i_authentication_controller.hpp"
@@ -12,6 +12,7 @@
 #include "user_storage_access.hpp"
 #include "i_book_service.hpp"
 #include "book_service.hpp"
+#include "book_info_helper.hpp"
 
 
 namespace di = boost::di;
@@ -27,7 +28,9 @@ const auto diConfig = [] {
                 di::bind<adapters::IUserStorageAccess>().to<infrastructure::persistence::UserStorageAccess>(),
                 
                 di::bind<adapters::IBookController>().to<adapters::controllers::BookController>(),
-                di::bind<application::IBookService>().to<application::services::BookService>()
+                di::bind<application::IBookService>().to<application::services::BookService>(),
+                
+                di::bind<application::IBookInfoHelper>().to<application::utility::BookInfoHelper>()
                 );
 };
 

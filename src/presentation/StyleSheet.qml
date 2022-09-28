@@ -39,6 +39,4 @@ Item
     property color loginContentBackground : "white"
     property color colorLightGrayBackground : "#EAEAEF"
     property color pagesBackground: "#F6F6F9"
-    
-    property string defaultFontFamily : "SF Pro Display"
 }

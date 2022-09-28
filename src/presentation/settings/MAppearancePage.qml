@@ -22,7 +22,7 @@ Page
     ColumnLayout
     {
         id: layout
-        property int insideMargin : 40
+        property int insideMargin: 40
         
         width: parent.width
         spacing: 0
@@ -113,17 +113,16 @@ Page
                         anchors.fill: parent
                         spacing: 0
                         
+                        
                         Label
                         {
                             id: displayTitle
                             Layout.fillWidth: true
                             text: "Display"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 16.5
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
-                        
                         
                         Label
                         {
@@ -131,12 +130,10 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Theme"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
-                        
                         
                         MDualToggle
                         {
@@ -153,7 +150,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 14
                             text: "Font family"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -195,7 +191,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Font size"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -239,7 +234,6 @@ Page
                             id: pagesTitle
                             Layout.fillWidth: true
                             text: "Pages"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 16.5
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -251,7 +245,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Page spacing"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -271,7 +264,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Display mode"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -292,7 +284,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Layout direction"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -313,7 +304,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Page transition"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -373,7 +363,6 @@ Page
                             id: behaviorTitle
                             Layout.fillWidth: true
                             text: "Behavior"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 16.5
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -386,7 +375,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Smooth scrolling"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -408,7 +396,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Cursor mode"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
@@ -429,7 +416,6 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 16
                             text: "Default zoom"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText

@@ -50,7 +50,6 @@ Item
                 Layout.leftMargin: 25
                 text: "Settings"
                 font.pointSize: 19
-                font.family: Style.defaultFontFamily
                 font.bold: true
                 color: Style.colorBaseText
             }
@@ -71,7 +70,6 @@ Item
                 Layout.leftMargin: 25
                 text: "GLOBAL SETTINGS"
                 font.pointSize: 10.2
-                font.family: Style.defaultFontFamily
                 font.weight: Font.Bold
                 color: Style.colorLightText3
             }
@@ -170,7 +168,6 @@ Item
                 Layout.leftMargin: 25
                 text: "USER & ACCOUNT"
                 font.pointSize: 10.2
-                font.family: Style.defaultFontFamily
                 font.bold: true
                 color: Style.colorLightText3
             }

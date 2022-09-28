@@ -19,18 +19,21 @@ class UserStorageAccess : public adapters::IUserStorageAccess
     Q_OBJECT
     
 public:
-    void authenticateUser(adapters::dtos::LoginDto loginDto) override;
-    void createUser(adapters::dtos::RegisterDto registerDto) override;
+    UserStorageAccess();
+    
+    void authenticateUser(const adapters::dtos::LoginDto& loginDto) override;
+    void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
+    
+private slots:
+    void proccessAuthenticationResult();
+    void proccessRegistrationResult();
     
 private:
     bool checkForErrors(int expectedStatusCode);
     QNetworkRequest createRequest(QUrl url);
     
-private slots:
-    void authenticationFinished();
-    void creationFinished();
-    
-private:
+    const QUrl m_authenticationEndpoint;
+    const QUrl m_registrationEndpoint;
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_reply = nullptr;
 };

@@ -10,27 +10,24 @@ namespace adapters::controllers
 AuthenticationController::AuthenticationController(application::IAuthenticationService* authenticationService)
     : m_authenticationService(authenticationService)
 {
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationSucceeded,
-                     this, &AuthenticationController::loginSuccess);
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::authenticationFailed,
-                     this, &AuthenticationController::loginFailure);
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::loginFinished,
+                     this, &AuthenticationController::reemitLoginResult);
     
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationSucceeded,
-                     this, &AuthenticationController::registrationSuccess);
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationFailed,
-                     this, &AuthenticationController::registrationFailure);
+    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationFinished,
+                     this, &AuthenticationController::reemitRegistrationResult);
 }
 
 
-void AuthenticationController::loginUser(QString email, QString password)
+void AuthenticationController::loginUser(const QString& email, const QString& password)
 {
     domain::models::LoginModel loginModel(email, password);
     
     m_authenticationService->loginUser(loginModel);
 }
 
-void AuthenticationController::registerUser(QString firstName, QString lastName, QString email, 
-                                            QString password, bool keepUpdated)
+void AuthenticationController::registerUser(const QString& firstName, const QString& lastName,
+                                            const QString& email, QString password,
+                                            bool keepUpdated)
 {
     domain::models::RegisterModel registerModel(firstName, lastName, email, password, keepUpdated);
     
@@ -38,24 +35,14 @@ void AuthenticationController::registerUser(QString firstName, QString lastName,
 }
 
 
-void AuthenticationController::loginSuccess()
+void AuthenticationController::reemitLoginResult(bool success)
 {
-    emit loginSucceeded();
+    emit loginFinished(success);
 }
 
-void AuthenticationController::loginFailure()
+void AuthenticationController::reemitRegistrationResult(bool success, const QString& reason)
 {
-    emit loginFailed();
-}
-
-void AuthenticationController::registrationSuccess()
-{
-    emit registrationSucceeded();
-}
-
-void AuthenticationController::registrationFailure(QString reason)
-{
-    emit registrationFailed(reason);
+    emit registrationFinished(success, reason);
 }
 
 } // namespace adapters::controllers

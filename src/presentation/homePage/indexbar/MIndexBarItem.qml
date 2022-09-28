@@ -31,7 +31,6 @@ Item
             anchors.centerIn: parent
             text: root.pageNumber.toString()
             font.pointSize: (root.selected ? root.selectedFontSize : root.normalFontSize)
-            font.family: Style.defaultFontFamily
             font.bold: root.selected
             color: (root.selected ? Style.colorBasePurple : Style.colorBaseText)
         }

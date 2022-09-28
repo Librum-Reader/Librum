@@ -12,7 +12,6 @@ Item
     signal rightButtonClicked(int index, var mouse)
     signal moreOptionClicked(int index, var mouse)
     
-    required property int index
     
     implicitWidth: 190
     implicitHeight: 322
@@ -82,14 +81,15 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
+                    Layout.preferredHeight: 32
                     Layout.topMargin: 5
-                    text: "The books title which can be 2 lines long ..."
+                    text: model.title
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
                     font.pointSize: 11
-                    font.family: Style.defaultFontFamily
                     lineHeight: 0.8
-                    wrapMode: TextInput.WordWrap
+                    wrapMode: TextInput.WrapAnywhere
+                    elide: Text.ElideRight
                 }
                 
                 Label
@@ -100,7 +100,6 @@ Item
                     text: "Stephen R. Covey"
                     color: Style.colorLightText
                     font.pointSize: 10
-                    font.family: Style.defaultFontFamily
                 }
                 
                 RowLayout
@@ -123,11 +122,10 @@ Item
                             id: percentageLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
-                            text: "27%"
+                            text: "0%"
                             font.weight: Font.DemiBold
                             color: Style.colorBaseTitle
                             font.pointSize: 10
-                            font.family: Style.defaultFontFamily
                         }
                     }
 

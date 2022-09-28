@@ -1,12 +1,14 @@
-find_package(QT NAMES Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Network Core Test REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Test REQUIRED)
 
 
 
 # Build tests
 add_executable(adapters_unit_tests
                     main.cpp
+                    book_controller_tests.hpp
                     authentication_controller_tests.hpp
+                    user_storage_gateway_tests.hpp
     )
 
 target_link_libraries(adapters_unit_tests
@@ -17,6 +19,8 @@ target_link_libraries(adapters_unit_tests
                     application
                     domain
                     Qt5::Core
+                    Qt5::Network
+                    Qt5::Test
     )
 
 target_include_directories(adapters_unit_tests
@@ -24,4 +28,5 @@ target_include_directories(adapters_unit_tests
                     ${ADAPTERS_INCLUDES}
                     ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
+                    ${PROJECT_SOURCE_DIR}
 )

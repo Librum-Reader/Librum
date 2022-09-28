@@ -45,7 +45,6 @@ Item
             id: header
             Layout.fillWidth: true
             text: root.headerText
-            font.family: Style.defaultFontFamily
             font.pointSize: root.headerFontSize
             font.weight: root.headerFontWeight
             color: root.headerFontColor
@@ -82,7 +81,6 @@ Item
                     readOnly: root.readOnly
                     color: root.inputFontColor
                     font.pointSize: root.inputFontSize
-                    font.family: Style.defaultFontFamily
                     font.weight: root.inputFontWeight
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor

@@ -28,7 +28,6 @@ Item
             color: Style.colorBaseText
             font.weight: Font.Bold
             font.pointSize: root.titleSize
-            font.family: Style.defaultFontFamily
         }
         
         Label
@@ -37,7 +36,6 @@ Item
             text: root.descriptionText
             color: Style.colorLightText3
             font.pointSize: root.descriptionSize
-            font.family: Style.defaultFontFamily
         }
     }
 }

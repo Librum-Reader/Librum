@@ -81,7 +81,6 @@ Item
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
                     font.pointSize: 11
-                    font.family: Style.defaultFontFamily
                     lineHeight: 0.8
                     wrapMode: TextInput.WordWrap
                 }
@@ -94,7 +93,6 @@ Item
                     text: "Stephen R. Covey"
                     color: Style.colorLightText
                     font.pointSize: 10
-                    font.family: Style.defaultFontFamily
                 }
             }
         }

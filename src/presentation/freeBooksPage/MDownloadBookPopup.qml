@@ -90,7 +90,6 @@ Popup
                         text: "Download book"
                         font.weight: Font.Bold
                         font.pointSize: 17
-                        font.family: Style.defaultFontFamily
                         color: Style.colorBaseTitle
                     }
                     
@@ -288,7 +287,6 @@ Popup
                             id: contentFieldHeader
                             Layout.fillWidth: true
                             text: "Content"
-                            font.family: Style.defaultFontFamily
                             font.pointSize: 11.5
                             font.weight: Font.Bold
                             color: Style.colorBaseTitle
@@ -318,7 +316,6 @@ Popup
                                 wrapMode: Text.WordWrap
                                 color: Style.colorLightText3
                                 font.pointSize: 12
-                                font.family: Style.defaultFontFamily
                                 
                                 readOnly: true
                                 background: Rectangle   

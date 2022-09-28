@@ -52,7 +52,6 @@ Item
                     wrapMode: Text.WordWrap
                     color: Style.colorBaseText
                     font.pointSize: 23
-                    font.family: Style.defaultFontFamily
                     font.weight: Font.Bold
                 }
                 
@@ -64,7 +63,6 @@ Item
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 15
-                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -75,7 +73,6 @@ Item
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 14.5
-                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -86,7 +83,6 @@ Item
                     color: Style.colorBasePurple
                     font.pointSize: 14.2
                     font.bold: true
-                    font.family: Style.defaultFontFamily
                 }
                 
                 Image
@@ -109,7 +105,6 @@ Item
                     wrapMode: Text.WordWrap
                     color: Style.colorLightText3
                     font.pointSize: 13.5
-                    font.family: Style.defaultFontFamily
                 }
                 
                 Label
@@ -120,7 +115,6 @@ Item
                     font.underline: true
                     color: Style.colorBasePurple
                     font.pointSize: 13.5
-                    font.family: Style.defaultFontFamily
                 }
             }
         }

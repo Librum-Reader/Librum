@@ -10,8 +10,8 @@ class LoginModel
 public:
     LoginModel(QString email, QString password);
     
-    QString email();
-    QString password();
+    QString email() const;
+    QString password() const;
     bool isValid() const;
     
 private:

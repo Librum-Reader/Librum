@@ -37,7 +37,6 @@ Item
                 id: bookCountLabel
                 text: root.selectedAmountOfBooks.toString()
                 color: Style.colorBaseText
-                font.family: Style.defaultFontFamily
                 font.pointSize: 11
                 font.bold: true
             }

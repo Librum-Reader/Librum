@@ -68,7 +68,6 @@ Item
                 text: root.text
                 font.weight: Font.Medium
                 font.pointSize: 11
-                font.family: Style.defaultFontFamily
                 color: Style.colorLightText3
                 elide: Text.ElideRight
             }

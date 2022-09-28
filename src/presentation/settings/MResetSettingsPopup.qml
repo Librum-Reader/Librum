@@ -17,25 +17,16 @@ Popup
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
-    background: Rectangle
-    {
-        color: "transparent"
-        radius: 4
-    }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    background: Rectangle { color: "transparent"; radius: 4 }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
     
     onOpened: keepButton.forceActiveFocus()
     
     
     MFlickWrapper
     {
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         contentHeight: layout.height
         
         
@@ -87,7 +78,6 @@ Popup
                         color: Style.colorBaseTitle
                         font.weight: Font.Medium
                         font.pointSize: 42
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -101,7 +91,6 @@ Popup
                         color: Style.colorLightText3
                         font.weight: Font.Medium
                         font.pointSize: 15
-                        font.family: Style.defaultFontFamily
                     }
                     
                     RowLayout
@@ -145,7 +134,7 @@ Popup
                             id: resetButton
                             Layout.preferredWidth: 180
                             Layout.preferredHeight: 40
-                            Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
+                            Layout.alignment: Qt.AlignBottom
                             borderWidth: activeFocus ? 0 : 1
                             borderColor: Style.colorLightBorder2
                             backgroundColor: activeFocus ? Style.colorBaseRed : "transparent"

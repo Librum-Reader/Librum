@@ -125,7 +125,6 @@ MFlickWrapper
                             text: "Profile"
                             color: Style.colorBaseText
                             font.pointSize: 16.5
-                            font.family: Style.defaultFontFamily
                             font.weight: Font.DemiBold
                         }
                         
@@ -224,7 +223,6 @@ MFlickWrapper
                         text: "Change password"
                         color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -300,7 +298,6 @@ MFlickWrapper
                         text: "Your data"
                         color: Style.colorBaseText
                         font.pointSize: 16.5
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     

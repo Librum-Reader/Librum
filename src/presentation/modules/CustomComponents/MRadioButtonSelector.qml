@@ -57,7 +57,6 @@ Item
                         Layout.maximumWidth: 200
                         Layout.alignment: Qt.AlignVCenter
                         text: root.options[index]
-                        font.family: Style.defaultFontFamily
                         font.pointSize: 12
                         font.weight: delRoot.selected ? Font.Medium : Font.Normal
                         color: Style.colorBaseText

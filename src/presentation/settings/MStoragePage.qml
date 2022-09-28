@@ -101,7 +101,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorBaseText
                         font.pointSize: 21
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -115,7 +114,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorBaseText
                         font.pointSize: 42
-                        font.family: Style.defaultFontFamily
                         font.bold: true
                     }
                     
@@ -129,7 +127,6 @@ MFlickWrapper
                         color: Style.colorLightText3
                         font.pointSize: 15
                         textFormat: Text.RichText
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -141,7 +138,6 @@ MFlickWrapper
                         wrapMode: Text.WordWrap
                         color: Style.colorBaseText
                         font.pointSize: 21
-                        font.family: Style.defaultFontFamily
                         font.weight: Font.DemiBold
                     }
                     
@@ -167,7 +163,6 @@ MFlickWrapper
                         color: Style.colorLightText3
                         font.pointSize: 15
                         textFormat: Text.RichText
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -183,7 +178,6 @@ MFlickWrapper
                         color: Style.colorLightText3
                         font.pointSize: 15
                         textFormat: Text.RichText
-                        font.family: Style.defaultFontFamily
                     }
                 }
             }

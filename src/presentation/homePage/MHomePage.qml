@@ -16,16 +16,12 @@ import "tags"
 Page
 {
     id: root
-    property bool empty : true
+    property bool empty : BookController.libraryModel.rowCount() === 0
     
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 15
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
     
     Shortcut
@@ -34,16 +30,12 @@ Page
         onActivated: fileDialog.open()
     }
     
-    ListModel
-    {
-        id: bookList
-    }
+    ListModel { id: bookList }
     
     
     ColumnLayout
     {
         id: contentLayout
-        
         anchors.fill: parent
         spacing: 0
         
@@ -127,17 +119,12 @@ Page
                 flickDeceleration: 3500
                 maximumFlickVelocity: 3000
                 clip: true
-                
-                
-                
-                model: bookList
+                model: BookController.libraryModel
                 delegate: MBook
                 {
-                    required property string fileUrl
-                    
                     onLeftButtonClicked: 
                     {
-                        BookController.setCurrentBookPath(fileUrl);
+                        BookController.setCurrentBook(model.title);
                         loadPage(readingPage);
                     }
                     
@@ -148,6 +135,7 @@ Page
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
                             bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
+                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
                             bookOptionsPopup.open();
                         }
                     
@@ -158,6 +146,7 @@ Page
                             
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
+                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
                             bookOptionsPopup.open();
                         }
                 }
@@ -166,6 +155,8 @@ Page
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
+                    property var selectedBook
+                    
                     implicitHeight: 213
                     visible: false
                     
@@ -182,7 +173,7 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
-                                BookController.setCurrentBookPath(fileUrl);
+                                BookController.setCurrentBook(bookOptionsPopup.selectedBook.filePath);
                                 loadPage(readingPage);
                             }
                         }
@@ -302,7 +293,6 @@ Page
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
     }
     
-    
     MBookDetailsPopup
     {
         id: bookDetailsPopup
@@ -310,7 +300,6 @@ Page
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
-    
     
     MManageTagsPopup
     {
@@ -341,10 +330,14 @@ Page
         
         onAccepted:
         {
-            root.empty = false;
-            bookList.append({fileUrl: file.toString()});
-            
-            console.log("selected file: " + file)
+            if(BookController.addBook(file) === BookOperationStatus.Success)
+            {
+                root.empty = false;
+            }
+            else
+            {
+                console.log("Error loading file!");
+            }
         }
         
         onRejected: root.empty = false

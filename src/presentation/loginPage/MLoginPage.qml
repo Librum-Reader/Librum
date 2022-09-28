@@ -167,7 +167,6 @@ MFlickWrapper
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 4
                             font.pointSize: 11
-                            font.family: Style.defaultFontFamily
                             color: Style.colorMediumText
                         }
                         
@@ -231,20 +230,21 @@ MFlickWrapper
                                 return;
                             }
                             
-                            AuthController.loginFailed.connect(() => loginFailed());
-                            AuthController.loginSucceeded.connect(() => { if(!loginButton.success) loginSucceeded() } );
+                            AuthController.loginFinished.connect(proccessLoginResult);
                             AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
-                        function loginSucceeded()
+                        function proccessLoginResult(success)
                         {
-                            loginButton.success = true;
-                            loadPage(homePage, sidebar.homeItem, false);
-                        }
-                        
-                        function loginFailed()
-                        {
-                            console.log("Login failed");
+                            if(success)
+                            {
+                                loginButton.success = true;
+                                loadPage(homePage, sidebar.homeItem, false);
+                            }
+                            else
+                            {
+                                console.log("Login failed");
+                            }
                         }
                     }
                 }

@@ -75,7 +75,6 @@ MFlickWrapper
                         text: "Welcome!"
                         font.bold: true
                         font.pointSize: 26
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -88,7 +87,6 @@ MFlickWrapper
                         text: "Your credentials are only used to authenticate yourself. " + 
                               "Everything will be stored in a secure database."
                         font.pointSize: 13
-                        font.family: Style.defaultFontFamily
                         color: Style.colorLightText2
                         wrapMode: "WordWrap"
                     }
@@ -278,19 +276,22 @@ MFlickWrapper
                                 
                                 function buttonTriggeredAction()
                                 {
+                                    AuthController.registrationFinished.connect(proccessRegistrationResult);
                                     AuthController.registerUser(firstNameInput.text, lastNameInput.text,
                                                                 emailInput.text, passwordInput.text,
                                                                 keepMeUpdated.checked);   
                                 }
                                 
-                                function switchToLoginPage()
+                                function proccessRegistrationResult(success, reason)
                                 {
-                                    loadPage(loginPage);
-                                }
-                                
-                                Component.onCompleted: 
-                                {
-                                    AuthController.registrationSucceeded.connect(() => registerButton.switchToLoginPage());
+                                    if(success)
+                                    {
+                                        loadPage(loginPage);
+                                    }
+                                    else
+                                    {
+                                        console.log("Registration failed");
+                                    }
                                 }
                             }
                         }

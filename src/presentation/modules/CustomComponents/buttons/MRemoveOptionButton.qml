@@ -41,7 +41,6 @@ Item
                 color: Style.colorBasePurple
                 text: root.text
                 font.pointSize: 12
-                font.family: Style.defaultFontFamily
                 font.weight: Font.Bold
             }
             

@@ -134,7 +134,6 @@ Item
                             selectByMouse: true
                             color: Style.colorBaseText
                             font.pointSize: 12
-                            font.family: Style.defaultFontFamily
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorLightText
                             background: Rectangle

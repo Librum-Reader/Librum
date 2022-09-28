@@ -66,7 +66,6 @@ Item
                 color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
                 text: root.text
                 font.pointSize: root.fontSize
-                font.family: Style.defaultFontFamily
                 font.weight: root.selected ? Font.DemiBold : Font.Medium
                 elide: Text.ElideRight
             }

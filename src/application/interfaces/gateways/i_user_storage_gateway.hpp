@@ -14,12 +14,16 @@ class IUserStorageGateway : public QObject
     
 public:
     virtual ~IUserStorageGateway() noexcept = default;
-    virtual void authenticateUser(domain::models::LoginModel loginModel) = 0;
-    virtual void createUser(domain::models::RegisterModel registerModel) = 0;
+    virtual void authenticateUser(const domain::models::LoginModel& loginModel) = 0;
+    virtual void registerUser(const domain::models::RegisterModel& registerModel) = 0;
     
 signals:
-    void authenticationResultReady(bool success, QString token);
-    void userCreationResultReady(bool success, QString failureReason);
+    void authenticationFinished(const QString& token);
+    void registrationFinished(bool success, const QString& reason);
+    
+public slots:
+    virtual void reemitRegistrationResult(bool success, const QString& reason) = 0;
+    virtual void reemitAuthenticationResult(const QString& token) = 0;
 };
 
 } // namespace application

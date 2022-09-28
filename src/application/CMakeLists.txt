@@ -25,11 +25,17 @@ set(application_SRC
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_book_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
+    interfaces/utility/i_book_info_helper.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
     services/book_service.cpp
     services/book_service.hpp
+    
+    common/enums/book_operation_status.hpp
+    
+    utility/book_info_helper.cpp
+    utility/book_info_helper.hpp
 )
 
 
@@ -54,9 +60,11 @@ target_include_directories(application
                     ${OKULARCORE_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
-                    ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
-                    ${CMAKE_CURRENT_SOURCE_DIR}/converters
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
+                    ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/utility
 )
 
 target_compile_definitions(application

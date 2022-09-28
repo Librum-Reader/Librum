@@ -49,7 +49,6 @@ Item
             Layout.fillWidth: true
             visible: root.headerText.length > 0
             text: root.headerText
-            font.family: Style.defaultFontFamily
             font.pointSize: root.headerFontSize
             font.weight: root.headerFontWeight
             color: root.headerFontColor
@@ -88,7 +87,6 @@ Item
                     rightPadding: root.titleSpacing
                     text: selectionPopup.selectedContents === "" ? root.titleEmptyText : selectionPopup.selectedContents
                     font.pointSize: root.titleFontSize
-                    font.family: Style.defaultFontFamily
                     font.weight: root.titleFontWeight
                     color: selectionPopup.selectedContents === "" ? Style.colorLightText3 : root.titleFontColor
                     elide: Text.ElideRight

@@ -151,7 +151,6 @@ Page
                         text: "ACTION"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.bold: true
                     }
                     
@@ -167,7 +166,6 @@ Page
                         text: "SHORTCUTS"
                         color: Style.colorLightText3
                         font.pointSize: 10.25
-                        font.family: Style.defaultFontFamily
                         font.bold: true
                     }
                     

@@ -30,9 +30,13 @@ add_library(adapters
                     models/chapter_tree/chapter_tree_node.cpp
                     models/chapter_tree/chapter_tree_model.hpp
                     models/chapter_tree/chapter_tree_node.hpp
+                    models/library_model/library_model.cpp
+                    models/library_model/library_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
+                    DTOs/book_dto.hpp
+                    DTOs/tag_dto.hpp
 )
 
 target_include_directories(adapters
@@ -43,6 +47,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
+                    ${CMAKE_CURRENT_SOURCE_DIR}/models/library_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}

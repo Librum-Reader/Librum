@@ -14,12 +14,12 @@ class UserStorageGateway : public application::IUserStorageGateway
 public:
     UserStorageGateway(IUserStorageAccess* authenticationAccess);
     
-    void authenticateUser(domain::models::LoginModel loginModel) override;
-    void createUser(domain::models::RegisterModel registerModel) override;
+    void authenticateUser(const domain::models::LoginModel& loginModel) override;
+    void registerUser(const domain::models::RegisterModel& registerModel) override;
     
-private slots:
-    void processAuthenticationResult(bool success, QString token);
-    void processUserCreationResult(bool success, QString failureReason);
+public slots:
+    void reemitRegistrationResult(bool success, const QString& reason) override;
+    void reemitAuthenticationResult(const QString& token) override;
     
 private:
     IUserStorageAccess* m_authenticationAccess;

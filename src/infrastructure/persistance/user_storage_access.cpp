@@ -3,10 +3,16 @@
 namespace infrastructure::persistence
 {
 
-void UserStorageAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
+UserStorageAccess::UserStorageAccess()
+    : m_authenticationEndpoint("https://localhost:7084/api/login"),
+      m_registrationEndpoint("https://localhost:7084/api/register")
 {
-    QUrl endpoint("https://localhost:7084/api/login");
-    auto request = createRequest(endpoint);
+}
+
+
+void UserStorageAccess::authenticateUser(const adapters::dtos::LoginDto& loginDto)
+{
+    auto request = createRequest(m_authenticationEndpoint);
         
     QJsonObject jsonObject;
     jsonObject["email"] = loginDto.email;
@@ -15,14 +21,16 @@ void UserStorageAccess::authenticateUser(adapters::dtos::LoginDto loginDto)
     QJsonDocument jsonDocument{jsonObject};
     QByteArray data = jsonDocument.toJson();
     
+    
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &UserStorageAccess::authenticationFinished);
+    
+    QObject::connect(m_reply.get(), &QNetworkReply::finished, 
+                     this, &UserStorageAccess::proccessAuthenticationResult);
 }
 
-void UserStorageAccess::createUser(adapters::dtos::RegisterDto registerDto)
+void UserStorageAccess::registerUser(const adapters::dtos::RegisterDto& registerDto)
 {
-    QUrl endpoint("https://localhost:7084/api/register");
-    auto request = createRequest(endpoint);
+    auto request = createRequest(m_registrationEndpoint);
     
     QJsonObject jsonObject;
     jsonObject["firstName"] = registerDto.firstName;
@@ -33,8 +41,11 @@ void UserStorageAccess::createUser(adapters::dtos::RegisterDto registerDto)
     QJsonDocument jsonDocument{jsonObject};
     QByteArray data = jsonDocument.toJson();
     
+    
     m_reply.reset(m_networkAccessManager.post(request, data));
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, this, &UserStorageAccess::creationFinished);
+    
+    QObject::connect(m_reply.get(), &QNetworkReply::finished,
+                     this, &UserStorageAccess::proccessRegistrationResult);
 }
 
 
@@ -70,30 +81,30 @@ QNetworkRequest UserStorageAccess::createRequest(QUrl url)
 }
 
 
-void UserStorageAccess::authenticationFinished()
+void UserStorageAccess::proccessAuthenticationResult()
 {
     auto expectedStatusCode = 200;
     if(checkForErrors(expectedStatusCode))
     {
-        emit authenticationResponseArrived(false, "");
+        emit authenticationFinished("");
         return;
     }
     
     QString result = m_reply->readAll();
-    emit authenticationResponseArrived(true, result);
+    emit authenticationFinished(result);
 }
 
-void UserStorageAccess::creationFinished()
+void UserStorageAccess::proccessRegistrationResult()
 {
     auto expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))
     {
         QString reason = m_reply->readAll();
-        emit userCreationResponseArrived(false, reason);
+        emit registrationFinished(false, reason);
         return;
     }
     
-    emit userCreationResponseArrived(true, "");
+    emit registrationFinished(true, "");
 }
 
 } // namespace infrastructure::persistence

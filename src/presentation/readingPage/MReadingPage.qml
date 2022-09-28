@@ -44,8 +44,6 @@ Page
         id: documentItem
         onUrlChanged: currentPage = 0
         
-        Component.onCompleted: documentItem.url = BookController.currentBookPath();
-        
         onOpenedChanged:
         {
             if(opened)
@@ -53,6 +51,11 @@ Page
                 toolbar.currentPageButton.maxPages = pageCount;
                 toolbar.bookTitle = windowTitleForDocument;
             }
+        }
+        
+        Component.onCompleted: 
+        {
+            documentItem.url = BookController.currentBook.filePath;
         }
     }
     

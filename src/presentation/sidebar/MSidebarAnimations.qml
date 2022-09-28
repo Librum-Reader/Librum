@@ -6,12 +6,12 @@ import Librum.elements 1.0
 
 Item 
 {
-    property int slowDuration  : 250
-    property int fastDuration : 100
-    property int defaultEasingType : Easing.InOutQuad
+    property int slowDuration: 250
+    property int fastDuration: 100
+    property int defaultEasingType: Easing.InOutQuad
     
-    property alias closeAnimation : closeAnim
-    property alias openAnimation  : openAnim
+    property alias closeAnimation: closeAnim
+    property alias openAnimation: openAnim
     
     
     ParallelAnimation

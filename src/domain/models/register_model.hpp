@@ -11,19 +11,34 @@ public:
     RegisterModel(QString firstName, QString lastName, QString email,
                   QString password, bool keepUpdated);
     
-    bool isValid() const;
     
-    QString firstName();
-    QString lastName();
-    QString email();
-    QString password();
-    bool keepUpdated();
+    enum class RegistrationResult
+    {
+        Valid,
+        FirstNameTooShort,
+        FirstNameTooLong,
+        LastNameTooShort,
+        LastNameTooLong,
+        EmailTooShort,
+        EmailTooLong,
+        PasswordTooShort,
+        PasswordTooLong
+    };
+    
+    QString generateErrorMessage(RegistrationResult status) const;
+    RegistrationResult isValid() const;
+    
+    QString firstName() const;
+    QString lastName() const;
+    QString email() const;
+    QString password() const;
+    bool keepUpdated() const;
     
 private:
-    bool firstNameIsValid() const;
-    bool lastNameIsValid() const;
-    bool emailIsValid() const;
-    bool passwordIsValid() const;
+    RegisterModel::RegistrationResult firstNameIsValid() const;
+    RegisterModel::RegistrationResult lastNameIsValid() const;
+    RegisterModel::RegistrationResult emailIsValid() const;
+    RegisterModel::RegistrationResult passwordIsValid() const;
     
 private:
     QString m_firstName;

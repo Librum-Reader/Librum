@@ -166,7 +166,6 @@ Pane
             leftPadding: paddingToCenter
             text: root.bookTitle
             color: Style.colorBaseTitle
-            font.family: Style.defaultFontFamily
             font.weight: Font.DemiBold
             font.pointSize: 12
             elide: Text.ElideRight

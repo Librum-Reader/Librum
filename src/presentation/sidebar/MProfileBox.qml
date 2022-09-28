@@ -10,7 +10,7 @@ import Librum.globals 1.0
 Item
 {
     id: root
-    property int arrowRotation : 0
+    property int arrowRotation: 0
     signal clicked
     
     implicitWidth: closedWidth
@@ -21,15 +21,12 @@ Item
         id: container
         padding: 0
         anchors.fill: parent
-        background: Rectangle
-        {
-            color: "transparent"
-        }
+        background: Rectangle { color: "transparent" }
         
         
         RowLayout
         {
-            width: currentWidth + expandButton.width / 2.2  // Makes the button go over the border
+            width: currentWidth + expandButton.width / 2.2  // To make the button go over the border
             height: parent.height
             spacing: 0
             
@@ -53,7 +50,6 @@ Item
                     text: Globals.firstName[0].toUpperCase() + Globals.lastName[0].toUpperCase() 
                     font.pointSize: 12
                     font.bold: true
-                    font.family: Style.defaultFontFamily
                     color: Style.colorBrightText
                 }
                 

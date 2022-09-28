@@ -43,7 +43,6 @@ Item
             text: "Key"
             font.weight: Font.DemiBold
             font.pointSize: 12
-            font.family: Style.defaultFontFamily
             color: Style.colorBaseTitle
         }
         
@@ -87,7 +86,6 @@ Item
                               (keySequenceRecorder.originalSequence === "" ? "Press to record" : keySequenceRecorder.originalSequence)
                             : keySequenceRecorder.currentSequence
                     font.pointSize: 13
-                    font.family: Style.defaultFontFamily
                     color: Style.colorLightText3
                     elide: Text.ElideLeft
                 }

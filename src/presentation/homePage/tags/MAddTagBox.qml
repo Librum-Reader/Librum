@@ -54,7 +54,6 @@ Item
                     selectByMouse: true
                     color: Style.colorBaseText
                     font.pointSize: 12
-                    font.family: Style.defaultFontFamily
                     font.weight: Font.Normal
                     placeholderText: "Add a tag..."
                     placeholderTextColor: Style.colorLightText
@@ -146,7 +145,6 @@ Item
             color: Style.colorBasePurple
             font.pointSize: 11.5
             font.weight: Font.Bold
-            font.family: Style.defaultFontFamily
             
             
             MouseArea

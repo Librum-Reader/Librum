@@ -1,49 +1,111 @@
 #pragma once
-#include "gtest/gtest.h"
-#include "gmock/gmock.h"
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+#include <QString>
+#include <QSignalSpy>
 #include "user_storage_gateway.hpp"
+#include "i_user_storage_access.hpp"
 #include "login_model.hpp"
 
+
 using namespace testing;
+using namespace adapters::gateways;
 using namespace adapters;
-using namespace domain::models;
+using namespace domain;
 
 
-class UserStorageAccessMock : public IUserStorageAccess
+
+class UserStorageMock : public adapters::IUserStorageAccess
 {
 public:
-    MOCK_METHOD(void, authenticateUser, (adapters::dtos::LoginDto loginDto), (override));
-    MOCK_METHOD(void, createUser, (adapters::dtos::RegisterDto registerDto), (override));
+    MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto& loginDto), (override));
+    MOCK_METHOD(void, registerUser, (const dtos::RegisterDto& registerDto), (override));
 };
 
 
 
-TEST(AnUserStorageGateway, AuthenticatesTheUser)
+
+TEST(AUserStorageGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
-    UserStorageAccessMock userStorageAccessMock;
-    LoginModel loginModel("johndoe@librum.com", "SomePassword123");
+    UserStorageMock userStorageMock;
+    UserStorageGateway userStorageGateway(&userStorageMock);
     
-    // Assert
-    EXPECT_CALL(userStorageAccessMock, authenticateUser(_))
+    models::LoginModel loginModel("someEmail@librum.com", "SomePassword123");
+    
+    
+    // Expect
+    EXPECT_CALL(userStorageMock, authenticateUser(_))
             .Times(1);
     
     // Act
-    gateways::UserStorageGateway userStorageGateway(&userStorageAccessMock);
     userStorageGateway.authenticateUser(loginModel);
 }
 
-TEST(AnUserStorageGateway, CreatesTheUser)
+
+TEST(AUserStorageGateway, SucceedsRegisteringAUser)
 {
     // Arrange
-    UserStorageAccessMock userStorageAccessMock;
-    RegisterModel registerModel("John", "Doe", "johndoe@librum.com", "SomePassword123", true);
+    UserStorageMock userStorageMock;
+    UserStorageGateway userStorageGateway(&userStorageMock);
     
-    // Assert
-    EXPECT_CALL(userStorageAccessMock, createUser(_))
+    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com", 
+                                     "SomePassword123", false);
+    
+    
+    // Expect
+    EXPECT_CALL(userStorageMock, registerUser(_))
             .Times(1);
     
     // Act
-    gateways::UserStorageGateway userStorageGateway(&userStorageAccessMock);
-    userStorageGateway.createUser(registerModel);
+    userStorageGateway.registerUser(registerModel);
+}
+
+
+
+TEST(AUserStorageGateway, SucceedsReemittingAuthenticationResultSignal)
+{
+    // Arrange
+    UserStorageMock userStorageMock;
+    UserStorageGateway userStorageGateway(&userStorageMock);
+    
+    QSignalSpy spy(&userStorageGateway,
+                   SIGNAL(authenticationFinished(const QString&)));
+    
+    QString token("someToken");
+    
+    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
+                                     "SomePassword123", false);
+    
+    
+    // Act
+    userStorageGateway.reemitAuthenticationResult(token);
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(token, arguments[0].toString());
+}
+
+
+TEST(AUserStorageGateway, SucceedsReemittingRegistrationResultSignal)
+{
+    // Arrange
+    UserStorageMock userStorageMock;
+    UserStorageGateway userStorageGateway(&userStorageMock);
+    
+    QSignalSpy spy(&userStorageGateway,
+                   SIGNAL(registrationFinished(bool, const QString&)));
+    
+    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
+                                     "SomePassword123", false);
+    
+    
+    // Act
+    userStorageGateway.reemitRegistrationResult(true, "some token");
+    
+    // Assert
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(true, arguments[0].toBool());
 }

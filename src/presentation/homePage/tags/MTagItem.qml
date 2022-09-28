@@ -49,7 +49,6 @@ Item
                 text: root.text
                 font.weight: root.selected ? Font.Medium : Font.Normal
                 font.pointSize: 12
-                font.family: Style.defaultFontFamily
                 color: Style.colorBaseText
             }
             

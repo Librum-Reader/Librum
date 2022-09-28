@@ -40,7 +40,6 @@ Item
             text: root.text
             font.pointSize: 10.75
             
-            font.family: Style.defaultFontFamily
             font.weight: root.selected ? Font.Bold : Font.DemiBold
         }
     }

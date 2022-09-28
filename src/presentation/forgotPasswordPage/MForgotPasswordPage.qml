@@ -85,7 +85,6 @@ MFlickWrapper
                         color: Style.colorBaseText
                         font.bold: true
                         font.pointSize: 19
-                        font.family: Style.defaultFontFamily
                     }
                     
                     Label
@@ -101,7 +100,6 @@ MFlickWrapper
                         lineHeight: 1.1
                         font.weight: Font.Medium
                         font.pointSize: 12.5
-                        font.family: Style.defaultFontFamily
                     }
                     
                     ColumnLayout
@@ -131,7 +129,6 @@ MFlickWrapper
                             text: "We couldn't find your email"
                             color: Style.colorError
                             font.pointSize: 11.75
-                            font.family: Style.defaultFontFamily
                         }
                         
                         Label
@@ -144,7 +141,6 @@ MFlickWrapper
                             text: "Email sent to: " + email
                             color: "green"
                             font.pointSize: 11.75
-                            font.family: Style.defaultFontFamily
                         }
                         
                         MButton

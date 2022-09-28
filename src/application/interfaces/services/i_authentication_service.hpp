@@ -13,14 +13,19 @@ class IAuthenticationService : public QObject
     
 public:
     virtual ~IAuthenticationService() noexcept = default;
-    virtual void loginUser(domain::models::LoginModel loginModel) = 0;
-    virtual void registerUser(domain::models::RegisterModel registerModel) = 0;
+    virtual void loginUser(const domain::models::LoginModel& loginModel) = 0;
+    virtual void registerUser(const domain::models::RegisterModel& registerModel) = 0;
     
 signals:
-    void authenticationSucceeded();
-    void authenticationFailed();
-    void registrationSucceeded();
-    void registrationFailed(QString reason);
+    void loginFinished(bool success);
+    void registrationFinished(bool success, const QString& reason);
+    void authenticationTokenRegistered(const QString& token);
+    void authenticationTokenRemoved();
+    
+public slots:
+    virtual void processAuthenticationResult(const QString& token) = 0;
+    virtual void processRegistrationResult(bool success, const QString& reason) = 0;
+    virtual void setAuthenticationToken(const QString& token) = 0;
 };
 
 } // namespace application

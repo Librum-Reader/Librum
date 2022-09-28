@@ -65,10 +65,7 @@ Item
         id: container
         anchors.fill: parent
         padding: 0
-        background: Rectangle
-        {
-            color: Style.colorBackground
-        }
+        background: Rectangle { color: Style.colorBackground }
         
         
         MSidebarAnimations
@@ -110,7 +107,6 @@ Item
                         visible: false
                         text: "Librum"
                         font.bold: true
-                        font.family: Style.defaultFontFamily
                         font.pointSize: 16
                         color: Style.colorBaseTitle
                     }
