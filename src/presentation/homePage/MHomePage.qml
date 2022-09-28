@@ -119,18 +119,12 @@ Page
                 flickDeceleration: 3500
                 maximumFlickVelocity: 3000
                 clip: true
-                
-                
-                
-                model: bookList
+                model: BookController.libraryModel
                 delegate: MBook
                 {
-                    required property string fileUrl
-                    
                     onLeftButtonClicked: 
                     {
-                        console.log("Setting current book to: " + fileUrl)
-                        BookController.setCurrentBook(fileUrl);
+                        BookController.setCurrentBook(filePath);
                         loadPage(readingPage);
                     }
                     
@@ -175,7 +169,7 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
-                                BookController.setCurrentBookPath(fileUrl);
+                                BookController.setCurrentBook(filePath);
                                 loadPage(readingPage);
                             }
                         }
@@ -295,7 +289,6 @@ Page
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
     }
     
-    
     MBookDetailsPopup
     {
         id: bookDetailsPopup
@@ -303,7 +296,6 @@ Page
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
-    
     
     MManageTagsPopup
     {
@@ -334,10 +326,14 @@ Page
         
         onAccepted:
         {
-            root.empty = false;
-            bookList.append({fileUrl: file.toString()});
-            BookController.addBook(file);
-            console.log("selected file: " + file)
+            if(BookController.addBook(file) === BookOperationStatus.Success)
+            {
+                root.empty = false;
+            }
+            else
+            {
+                console.log("Error loading file!");
+            }
         }
         
         onRejected: root.empty = false

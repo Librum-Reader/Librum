@@ -12,7 +12,6 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "app_information.hpp"
-#include "book_dto.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "i_book_controller.hpp"
@@ -63,6 +62,8 @@ int main(int argc, char *argv[])
     auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
     qmlRegisterSingletonInstance("Librum.elements", 1, 0, "SidebarState", sidebarState.get());
     
+    qmlRegisterUncreatableMetaObject(application::staticMetaObject, "Librum.controllers", 1, 0, 
+                                     "BookOperationStatus", "This is an uncreatable enum!");
     
     
     

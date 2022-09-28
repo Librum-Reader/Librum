@@ -12,7 +12,6 @@ Item
     signal rightButtonClicked(int index, var mouse)
     signal moreOptionClicked(int index, var mouse)
     
-    required property int index
     
     implicitWidth: 190
     implicitHeight: 322
@@ -83,7 +82,7 @@ Item
                     id: bookName
                     Layout.fillWidth: true
                     Layout.topMargin: 5
-                    text: "The books title which can be 2 lines long ..."
+                    text: /*"The books title which can be 2 lines long ..."*/ model.title
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
                     font.pointSize: 11

@@ -6,11 +6,13 @@
 #include "book.hpp"
 
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 class LibraryModel : public QAbstractListModel
 {
+    Q_OBJECT
+    
 public:
     enum Roles
     {
@@ -25,8 +27,12 @@ public:
     QVariant data(const QModelIndex& index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
     
+public slots:
+    void beginInsertingRow(int index);
+    void endInsertingRow();
+    
 private:
     const std::vector<domain::models::Book>& m_data;
 };
 
-} // namespace adapters::models
+} // namespace adapters::data_models

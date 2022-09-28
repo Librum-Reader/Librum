@@ -55,7 +55,6 @@ Page
         
         Component.onCompleted: 
         {
-            console.log("Curr file paaa: " + BookController.currentBook.filePath)
             documentItem.url = BookController.currentBook.filePath;
         }
     }

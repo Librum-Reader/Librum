@@ -47,6 +47,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                     ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
+                    ${CMAKE_CURRENT_SOURCE_DIR}/models/library_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}

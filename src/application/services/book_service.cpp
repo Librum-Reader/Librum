@@ -24,7 +24,10 @@ BookOperationStatus BookService::addBook(const QString& filePath)
         return BookOperationStatus::BookAlreadyExists;
     
     QByteArray cover = m_bookInfoManager->getBookCover(filePath);
+    
+    emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(title, filePath, cover);
+    emit bookInsertionEnded();
     
     return BookOperationStatus::Success;
 }

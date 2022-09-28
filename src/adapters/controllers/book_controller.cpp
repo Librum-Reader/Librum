@@ -13,8 +13,13 @@ using namespace domain::models;
 using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService)
-    : m_bookService(bookService), m_bookChacheChanged(true), m_currentBookCacheChanged(true)
+    : m_bookChacheChanged(true), m_currentBookCacheChanged(true), 
+      m_bookService(bookService), m_libraryModel(m_bookService->getAllBooks())
 {
+    QObject::connect(m_bookService, &application::IBookService::bookInsertionStarted,
+                     &m_libraryModel, &data_models::LibraryModel::beginInsertingRow);
+    QObject::connect(m_bookService, &application::IBookService::bookInsertionEnded,
+                     &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
 }
 
 
@@ -142,6 +147,13 @@ dtos::BookDto BookController::getCurrentBook()
     
     return m_currentBookCache;
 }
+
+
+data_models::LibraryModel* BookController::getLibraryModel()
+{
+    return &m_libraryModel;
+}
+
 
 void BookController::refreshBookChache()
 {

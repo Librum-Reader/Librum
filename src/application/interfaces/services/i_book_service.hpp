@@ -31,6 +31,10 @@ public:
                                        const domain::models::Tag& tag) = 0;
     virtual BookOperationStatus removeTag(const QString& title, 
                                           const domain::models::Tag& tag) = 0;
+    
+signals:
+    void bookInsertionStarted(int index);
+    void bookInsertionEnded();
 };
 
 } // namespace application
