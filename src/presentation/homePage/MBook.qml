@@ -81,13 +81,16 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.maximumHeight: 32
                     Layout.topMargin: 5
-                    text: /*"The books title which can be 2 lines long ..."*/ model.title
+                    text: model.title
                     font.weight: Font.Medium
                     color: Style.colorBaseTitle
                     font.pointSize: 11
                     lineHeight: 0.8
-                    wrapMode: TextInput.WordWrap
+                    wrapMode: TextInput.WrapAnywhere
+                    elide: Text.ElideRight
                 }
                 
                 Label
