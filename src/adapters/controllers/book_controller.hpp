@@ -24,7 +24,7 @@ public:
                const dtos::TagDto& tag) override;
     int removeTag(const QString& title,
                   const QString& tagName) override;
-    const dtos::BookDto* getBook(const QString& title) override;
+    dtos::BookDto getBook(const QString& title) override;
     int getBookCount() const override;
     int setCurrentBook(QString title) override;
     dtos::BookDto getCurrentBook() override;

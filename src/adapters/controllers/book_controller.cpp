@@ -113,13 +113,12 @@ int BookController::removeTag(const QString& title, const QString& tagName)
     return static_cast<int>(BookOperationStatus::TagDoesNotExist);
 }
 
-const dtos::BookDto* BookController::getBook(const QString& title)
+dtos::BookDto BookController::getBook(const QString& title)
 {
     if(m_bookChacheChanged)
         refreshBookChache();
     
-    const dtos::BookDto* book = getBookFromChache(title);
-    return book;
+    return *getBookFromChache(title);
 }
 
 int BookController::getBookCount() const

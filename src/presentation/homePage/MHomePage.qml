@@ -135,6 +135,7 @@ Page
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
                             bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
+                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
                             bookOptionsPopup.open();
                         }
                     
@@ -145,6 +146,7 @@ Page
                             
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
+                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
                             bookOptionsPopup.open();
                         }
                 }
@@ -153,6 +155,8 @@ Page
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
+                    property var selectedBook
+                    
                     implicitHeight: 213
                     visible: false
                     
@@ -169,7 +173,7 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
-                                BookController.setCurrentBook(filePath);
+                                BookController.setCurrentBook(bookOptionsPopup.selectedBook.filePath);
                                 loadPage(readingPage);
                             }
                         }

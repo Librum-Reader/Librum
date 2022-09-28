@@ -29,10 +29,10 @@ public:
                                    const dtos::TagDto& tag) = 0;
     Q_INVOKABLE virtual int removeTag(const QString& title,
                                       const QString& tagName) = 0;
-    Q_INVOKABLE virtual const dtos::BookDto* getBook(const QString& title) = 0;
+    Q_INVOKABLE virtual adapters::dtos::BookDto getBook(const QString& title) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
     Q_INVOKABLE virtual int setCurrentBook(QString title) = 0;
-    Q_INVOKABLE virtual dtos::BookDto getCurrentBook() = 0;
+    Q_INVOKABLE virtual adapters::dtos::BookDto getCurrentBook() = 0;
     
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
