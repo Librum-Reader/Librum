@@ -81,8 +81,7 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.maximumHeight: 32
+                    Layout.preferredHeight: 32
                     Layout.topMargin: 5
                     text: model.title
                     font.weight: Font.Medium
