@@ -20,7 +20,7 @@ class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
     MOCK_METHOD(QString, parseBookTitleFromFilePath, (const QString& filePath), (override));
-    MOCK_METHOD(QByteArray, getBookCover, (const QString& filePath), (override));
+    MOCK_METHOD(void, getBookCover, (const QString& filePath), (override));
 };
 
 
@@ -39,10 +39,6 @@ TEST(ABookService, SucceedsAddingABook)
     EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return("SomeBook"));
-    
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
     
     // Act
     auto result = bookService.addBook("some/path.pdf");
@@ -65,9 +61,6 @@ TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
             .Times(2)
             .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
     
     // Act
     bookService.addBook("some/first.pdf");  // First time added
@@ -96,11 +89,6 @@ TEST(ABookService, SucceedsDeletingABook)
             .WillOnce(Return(bookTitle))
             .WillOnce(Return("SomeOtherBook"));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(2)
-            .WillOnce(Return("SomeCover"))
-            .WillOnce(Return("SomeOtherCover"));
-    
     // Act
     bookService.addBook("some/path.pdf");
     bookService.addBook("some/other/path.pdf");
@@ -126,10 +114,6 @@ TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
     EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(2)
             .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
-    
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
     
     // Act
     bookService.addBook("some/first.pdf");  // First time added
@@ -165,10 +149,6 @@ TEST(ABookService, SucceedsUpdatingABook)
             .Times(1)
             .WillOnce(Return(originalBookTitle));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
-    
     // Act
     bookService.addBook("some/path.pdf");
     
@@ -181,7 +161,6 @@ TEST(ABookService, SucceedsUpdatingABook)
     
     EXPECT_EQ(expectedResult.title(), result->title());
     EXPECT_EQ(expectedResult.filePath(), result->filePath());
-    EXPECT_EQ(expectedResult.cover(), result->cover());
     
     for(int i = 0; i < expectedResult.tags().size(); ++i)
     {
@@ -232,10 +211,6 @@ TEST(ABookService, SucceedsGettingABook)
             .Times(1)
             .WillOnce(Return(title));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return(cover));
-    
     // Act
     bookService.addBook(path);
     auto result = bookService.getBook(title);
@@ -243,7 +218,6 @@ TEST(ABookService, SucceedsGettingABook)
     // Assert
     EXPECT_EQ(expectedResult.title(), result->title());
     EXPECT_EQ(expectedResult.filePath(), result->filePath());
-    EXPECT_EQ(expectedResult.cover(), result->cover());
     
     for(int i = 0; i < expectedResult.tags().size(); ++i)
     {
@@ -290,10 +264,6 @@ TEST(ABookService, SucceedsAddingATag)
             .Times(1)
             .WillOnce(Return(bookTitle));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
-    
     // Act
     bookService.addBook("some/path.pdf");
     
@@ -327,10 +297,6 @@ TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
     EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return(bookTitle));
-    
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
     
     // Act
     bookService.addBook("some/path.pdf");
@@ -379,10 +345,6 @@ TEST(ABookService, SucceedsSettingTheCurrentBook)
     EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
             .Times(1)
             .WillOnce(Return("SomeBook"));
-    
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(1)
-            .WillOnce(Return("SomeCover"));
     
     // Act
     bookService.addBook("some/path.pdf");
@@ -434,11 +396,6 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
             .WillOnce(Return("SomeRandomBook"))
             .WillOnce(Return(bookTitle));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(2)
-            .WillOnce(Return("SomeRandomCover"))
-            .WillOnce(Return(bookCover));
-    
     // Act
     bookService.addBook("random/book/path.pdf");
     bookService.addBook(bookPath);
@@ -452,7 +409,6 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
     // Assert
     EXPECT_EQ(expectedResult.title(), result->title());
     EXPECT_EQ(expectedResult.filePath(), result->filePath());
-    EXPECT_EQ(expectedResult.cover(), result->cover());
     
     for(int i = 0; i < expectedResult.tags().size(); ++i)
     {
@@ -496,12 +452,6 @@ TEST(ABookService, SucceedsGettingAllBooks)
             .WillOnce(Return(secondBook.title()))
             .WillOnce(Return(thirdBook.title()));
     
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(3)
-            .WillOnce(Return(firstBook.cover()))
-            .WillOnce(Return(secondBook.cover()))
-            .WillOnce(Return(thirdBook.cover()));
-    
     // Act
     bookService.addBook(firstBook.filePath());
     bookService.addBook(secondBook.filePath());
@@ -514,7 +464,6 @@ TEST(ABookService, SucceedsGettingAllBooks)
     {
         EXPECT_EQ(expectedResult[i].title(), results[i].title());
         EXPECT_EQ(expectedResult[i].filePath(), results[i].filePath());
-        EXPECT_EQ(expectedResult[i].cover(), results[i].cover());
     }
 }
 
@@ -532,11 +481,6 @@ TEST(ABookService, SucceedsGettingTheBookCount)
             .Times(2)
             .WillOnce(Return("SomeBook"))
             .WillOnce(Return("SomeOtherBook"));
-    
-    EXPECT_CALL(bookInfoManagerMock, getBookCover(_))
-            .Times(2)
-            .WillOnce(Return("SomeCover"))
-            .WillOnce(Return("SomeOtherCover"));
     
     // Act
     bookService.addBook("some/path.pdf");

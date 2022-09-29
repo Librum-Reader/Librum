@@ -7,8 +7,8 @@ set(CMAKE_AUTORCC ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
 
 find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
@@ -75,6 +75,7 @@ target_compile_definitions(application
 target_link_libraries(application
                 PRIVATE
                     Qt5::Core
+                    Qt5::Quick
                     Qt5::Network
                     domain
                     okularcore

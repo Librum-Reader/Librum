@@ -2377,6 +2377,7 @@ Document::OpenResult Document::openDocument(const QString &docFile, const QUrl &
     QMimeDatabase db;
     QMimeType mime = _mime;
     QByteArray filedata;
+    
     int fd = -1;
     if (url.scheme() == QLatin1String("fd")) {
         bool ok;
@@ -2394,6 +2395,8 @@ Document::OpenResult Document::openDocument(const QString &docFile, const QUrl &
         }
 
         d->m_url = url;
+        if(d->m_widget.isNull())
+            ;
         d->m_docFileName = docFile;
 
         if (!d->updateMetadataXmlNameAndDocSize()) {
