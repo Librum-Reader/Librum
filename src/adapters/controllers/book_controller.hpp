@@ -31,6 +31,9 @@ public:
     
     data_models::LibraryModel* getLibraryModel() override;
     
+private slots:
+    void addBookCoverToLibrary(QPixmap cover, int index);
+    
 private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& title);

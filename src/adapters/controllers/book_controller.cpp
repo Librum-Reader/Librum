@@ -20,6 +20,9 @@ BookController::BookController(application::IBookService* bookService)
                      &m_libraryModel, &data_models::LibraryModel::beginInsertingRow);
     QObject::connect(m_bookService, &application::IBookService::bookInsertionEnded,
                      &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
+    
+    QObject::connect(m_bookService, &application::IBookService::coverReady,
+                     this, &BookController::addBookCoverToLibrary);
 }
 
 
@@ -149,6 +152,11 @@ dtos::BookDto BookController::getCurrentBook()
 data_models::LibraryModel* BookController::getLibraryModel()
 {
     return &m_libraryModel;
+}
+
+void BookController::addBookCoverToLibrary(const QPixmap* cover, int index)
+{
+    emit coverGenerated(cover, index);
 }
 
 

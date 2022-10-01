@@ -3,6 +3,7 @@
 #include <QString>
 #include <QList>
 #include <QVariantMap>
+#include <QPixmap>
 #include "book_dto.hpp"
 #include "library_model.hpp"
 
@@ -37,6 +38,7 @@ public:
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
 signals:
+    void coverGenerated(int index);
     void currentBookChanged();
     void bookCountChanged();
 };
