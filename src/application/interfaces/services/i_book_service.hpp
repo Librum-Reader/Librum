@@ -33,6 +33,7 @@ public:
                                           const domain::models::Tag& tag) = 0;
     
 signals:
+    void coverReady(int index);
     void bookInsertionStarted(int index);
     void bookInsertionEnded();
 };

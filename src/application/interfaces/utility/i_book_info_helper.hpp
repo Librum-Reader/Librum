@@ -1,6 +1,7 @@
 #pragma once
 #include <QString>
 #include <QObject>
+#include <QPixmap>
 
 
 namespace application
@@ -17,7 +18,8 @@ public:
     virtual void getBookCover(const QString& filePath) = 0;
     
 signals:
-    void bookCoverReady();
+    void bookCoverGenerated(const QPixmap* pixmal);
+    void gettingBookCoverFailed();
 };
 
 } // namespace application

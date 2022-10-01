@@ -1,5 +1,6 @@
 #include "book_service.hpp"
 #include "book_operation_status.hpp"
+#include "i_book_info_helper.hpp"
 #include <algorithm>
 
 
@@ -10,7 +11,7 @@ using namespace domain::models;
 
 
 BookService::BookService(IBookInfoHelper* bookInfoManager)
-    : m_currentBook(nullptr), m_bookInfoManager(bookInfoManager)
+    : m_bookInfoManager(bookInfoManager), m_currentBook(nullptr)
 {
 }
 
@@ -23,6 +24,8 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     if(book)
         return BookOperationStatus::BookAlreadyExists;
     
+    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+                     this, &BookService::storeBookCover);
     m_bookInfoManager->getBookCover(filePath);
     
     emit bookInsertionStarted(m_books.size());
@@ -86,6 +89,11 @@ BookOperationStatus BookService::removeTag(const QString& title,
     return BookOperationStatus::Success;
 }
 
+const QPixmap* BookService::getCover(int index) const
+{
+    return m_covers.at(index).getData();
+}
+
 const std::vector<Book>& BookService::getBooks() const
 {
     return m_books;
@@ -114,6 +122,13 @@ BookOperationStatus BookService::setCurrentBook(const QString& title)
 const Book* BookService::getCurrentBook() const
 {
     return m_currentBook;
+}
+
+void BookService::storeBookCover(const QPixmap* pixmap)
+{
+    m_covers.emplace_back(*pixmap, 0);
+    
+    emit coverReady(m_covers.size() - 1);
 }
 
 
