@@ -1016,6 +1016,11 @@ bool Page::hasTilesManager(const DocumentObserver *observer) const
     return d->tilesManager(observer) != nullptr;
 }
 
+const QPixmap* Page::getPixmap(DocumentObserver* observer, int width, int height) const
+{
+    return _o_nearestPixmap(observer, width, height);
+}
+
 QList<Tile> Page::tilesAt(const DocumentObserver *observer, const NormalizedRect &rect) const
 {
     TilesManager *tm = d->m_tilesManagers.value(observer);

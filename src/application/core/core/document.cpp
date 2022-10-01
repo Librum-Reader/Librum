@@ -2395,8 +2395,6 @@ Document::OpenResult Document::openDocument(const QString &docFile, const QUrl &
         }
 
         d->m_url = url;
-        if(d->m_widget.isNull())
-            ;
         d->m_docFileName = docFile;
 
         if (!d->updateMetadataXmlNameAndDocSize()) {
@@ -2594,7 +2592,7 @@ bool DocumentPrivate::updateMetadataXmlNameAndDocSize()
 
     // determine the related "xml document-info" filename
     if (m_url.isLocalFile()) {
-        const QString filePath = docDataFileName(m_url, m_docSize);
+        QString filePath = docDataFileName(m_url, m_docSize);
         qCDebug(OkularCoreDebug) << "Metadata file is now:" << filePath;
         m_xmlFileName = filePath;
     } else {
