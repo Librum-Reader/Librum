@@ -1,26 +1,27 @@
 #include "book_info_helper.hpp"
 #include <memory>
-#include <QMimeDatabase>
-#include <QDebug>
+#include <QSize>
+#include "generator.h"
 #include "observer.h"
 #include "page.h"
 #include "settings.hpp"
+
+
+using namespace Okular;
 
 
 namespace application::utility
 {
 
 BookInfoHelper::BookInfoHelper()
-    : m_observer(std::make_unique<TempObserver>())
+    : m_observer(std::make_unique<CoverObserver>())
 {
-    Okular::Settings::instance(QStringLiteral("okularproviderrc"));
-    m_currentDocument = std::make_unique<Okular::Document>(nullptr);
+    Settings::instance(QStringLiteral("okularproviderrc"));
+    m_currentDocument = std::make_unique<Document>(nullptr);
     m_currentDocument->addObserver(m_observer.get());
     
-    QObject::connect(m_observer.get(), &TempObserver::pageChanged, [this] (int a, int b) {
-        if(a == 0 && b == Okular::DocumentObserver::Pixmap)
-            bookCoverPixmapReady();
-    });
+    QObject::connect(m_observer.get(), &CoverObserver::pageChanged, 
+                     this, &BookInfoHelper::proccessBookCoverPixmap);
 }
 
 
@@ -37,54 +38,62 @@ QString BookInfoHelper::parseBookTitleFromFilePath(const QString& filePath)
     return result;
 }
 
+
 void BookInfoHelper::getBookCover(const QString& filePath)
 {
-    QString prefix = "file://";
-    QString systemRelativePath = filePath.mid(prefix.size());
-    
-    QMimeDatabase db;
-    auto mimeType = db.mimeTypeForUrl(filePath);
+    auto systemPath = getSystemRelativePath(filePath);
+    auto mimeType = m_mimeDb.mimeTypeForUrl(filePath);
     
     m_currentDocument->closeDocument();
-    auto result = m_currentDocument->openDocument(systemRelativePath, 
-                                                  filePath, mimeType, "");
-    if(result != Okular::Document::OpenSuccess)
+    auto result = m_currentDocument->openDocument(systemPath, filePath,
+                                                  mimeType, "");
+    if(result != Document::OpenSuccess)
         emit gettingBookCoverFailed();
     
     
-    // Calculate correct size for the cover
+    QSize coverSize = getCoverSize();
+    auto request = new PixmapRequest(m_observer.get(), 0, coverSize.width(),
+                                     coverSize.height(), 1, 1, PixmapRequest::NoFeature);
+    
+    m_currentDocument->requestPixmaps({request});
+}
+
+QSize BookInfoHelper::getCoverSize()
+{
     const auto& coverPage = m_currentDocument->page(0);
     
-    if(m_defaultCoverWidth*coverPage->ratio() <= m_defaultCoverHeight)
+    QSize size;
+    if(m_maxCoverWidth*coverPage->ratio() <= m_maxCoverHeight)
     {
-        m_coverHeight = m_defaultCoverWidth*coverPage->ratio();
-        m_coverWidth = m_defaultCoverWidth;
+        size.setHeight(m_maxCoverWidth*coverPage->ratio());
+        size.setWidth(m_maxCoverWidth);
     }
     else
     {
-        m_coverHeight = m_defaultCoverHeight;
-        m_coverWidth = m_defaultCoverHeight/coverPage->ratio();
+        size.setHeight(m_maxCoverHeight);
+        size.setWidth(m_maxCoverHeight/coverPage->ratio());
     }
     
-    
-    auto request = new Okular::PixmapRequest(m_observer.get(), 0, m_coverWidth, m_coverHeight, 1, 1, Okular::PixmapRequest::NoFeature);
-    QList<Okular::PixmapRequest*> pixmapRequests;
-    pixmapRequests.push_back(request);
-    
-    m_currentDocument->requestPixmaps(pixmapRequests);
+    return size;
 }
 
-void BookInfoHelper::bookCoverPixmapReady()
+
+QString BookInfoHelper::getSystemRelativePath(const QString& qPath)
 {
-    const QPixmap* coverPixmap = m_currentDocument->page(0)->getPixmap(m_observer.get(), m_coverWidth, m_coverHeight);
+    QString prefix = "file://";
+    return qPath.mid(prefix.size());
+}
+
+void BookInfoHelper::proccessBookCoverPixmap(int page, int flag)
+{
+    if(page != 0 || flag != DocumentObserver::Pixmap)
+        return;
     
-    if(m_currentDocument->page(0)->hasPixmap(m_observer.get(), m_coverWidth, m_coverHeight))
+    const QPixmap* coverPixmap = m_currentDocument->page(0)->
+                                 getPixmap(m_observer.get(), 100, 100);
+    
+    if(coverPixmap)
         emit bookCoverGenerated(coverPixmap);
-}
-
-void TempObserver::notifyPageChanged(int page, int flags)
-{
-    emit pageChanged(page, flags);
 }
 
 } // namespace application::utility

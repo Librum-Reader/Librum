@@ -1,28 +1,12 @@
 #pragma once
-#include <i_book_info_helper.hpp>
+#include "i_book_info_helper.hpp"
+#include <QMimeDatabase>
 #include "document.h"
-#include "observer.h"
-#include "generator.h"
+#include "cover_observer.hpp"
 
 
 namespace application::utility
 {
-
-
-class TempObserver : public QObject, public Okular::DocumentObserver
-{
-    Q_OBJECT
-
-public:
-    void notifyPageChanged(int page, int flags) override;
-
-signals:
-    void pageChanged(int page, int flags);
-
-private:
-    DocumentItem *m_document;
-};
-
 
 class BookInfoHelper : public IBookInfoHelper
 {
@@ -35,16 +19,17 @@ public:
     void getBookCover(const QString& filePath) override;
     
 private slots:
-    void bookCoverPixmapReady();
+    void proccessBookCoverPixmap(int page, int flag);
     
 private:
-    std::unique_ptr<Okular::Document> m_currentDocument;
-    std::unique_ptr<TempObserver> m_observer;
+    QSize getCoverSize();
+    QString getSystemRelativePath(const QString& qPath);
     
-    const int m_defaultCoverWidth = 188;
-    const int m_defaultCoverHeight = 238;
-    int m_coverWidth = 0;
-    int m_coverHeight = 0;
+    std::unique_ptr<Okular::Document> m_currentDocument;
+    std::unique_ptr<CoverObserver> m_observer;
+    QMimeDatabase m_mimeDb;
+    const int m_maxCoverWidth = 188;
+    const int m_maxCoverHeight = 240;
 };
 
 } // namespace application::utility

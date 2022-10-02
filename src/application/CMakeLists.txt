@@ -36,6 +36,8 @@ set(application_SRC
     
     utility/book_info_helper.cpp
     utility/book_info_helper.hpp
+    utility/cover_observer.hpp
+    utility/cover_observer.cpp
 )
 
 
