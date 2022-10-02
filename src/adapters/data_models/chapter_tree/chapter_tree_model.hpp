@@ -6,7 +6,7 @@
 #include <QAbstractItemModel>
 #include "chapter_tree_node.hpp"
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 class ChapterTreeModel : public QAbstractItemModel
@@ -30,4 +30,4 @@ private:
     ChapterTreeNode* m_rootNode;
 };
 
-} // namespace adapters::models
+} // namespace adapters::data_models

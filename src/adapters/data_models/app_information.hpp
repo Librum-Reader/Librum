@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 class AppInformation : public QObject
@@ -32,4 +32,4 @@ private:
     QString m_companyEmail { "support@etovex.com" };
 };
 
-} // namespace adapters::models
+} // namespace adapters::data_models
