@@ -28,10 +28,13 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     
 public slots:
+    void processBookCover(int index);
     void beginInsertingRow(int index);
     void endInsertingRow();
     
 private:
+    
+    
     const std::vector<domain::models::Book>& m_data;
 };
 

@@ -20,6 +20,9 @@ BookController::BookController(application::IBookService* bookService)
                      &m_libraryModel, &data_models::LibraryModel::beginInsertingRow);
     QObject::connect(m_bookService, &application::IBookService::bookInsertionEnded,
                      &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
+    
+    QObject::connect(m_bookService, &application::IBookService::bookCoverGenerated,
+                     &m_libraryModel, &data_models::LibraryModel::processBookCover);
 }
 
 

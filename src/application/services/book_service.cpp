@@ -24,13 +24,13 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     if(book)
         return BookOperationStatus::BookAlreadyExists;
     
-    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
-                     this, &BookService::storeBookCover);
-    m_bookInfoManager->getBookCover(filePath);
-    
     emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(title, filePath);
     emit bookInsertionEnded();
+    
+    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+                     this, &BookService::storeBookCover);
+    m_bookInfoManager->getBookCover(filePath);
     
     return BookOperationStatus::Success;
 }
@@ -121,7 +121,11 @@ const Book* BookService::getCurrentBook() const
 
 void BookService::storeBookCover(const QPixmap* pixmap)
 {
+    int index = m_books.size() - 1;
+    auto& book = m_books.at(index);
     
+    book.setCover(pixmap->toImage());
+    emit bookCoverGenerated(index);
 }
 
 

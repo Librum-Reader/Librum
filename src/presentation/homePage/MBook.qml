@@ -52,7 +52,7 @@ Item
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
                     sourceSize.height: 241
-                    source: Icons.bookCover
+                    source: cover
                     fillMode: Image.PreserveAspectFit
                 }
             }
