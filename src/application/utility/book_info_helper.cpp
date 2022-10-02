@@ -15,6 +15,7 @@ BookInfoHelper::BookInfoHelper()
 {
     Okular::Settings::instance(QStringLiteral("okularproviderrc"));
     m_currentDocument = std::make_unique<Okular::Document>(nullptr);
+    m_currentDocument->addObserver(m_observer.get());
     
     QObject::connect(m_observer.get(), &TempObserver::pageChanged, [this] (int a, int b) {
         if(a == 0 && b == Okular::DocumentObserver::Pixmap)
@@ -50,7 +51,21 @@ void BookInfoHelper::getBookCover(const QString& filePath)
     if(result != Okular::Document::OpenSuccess)
         emit gettingBookCoverFailed();
     
-    m_currentDocument->addObserver(m_observer.get());
+    
+    // Calculate correct size for the cover
+    const auto& coverPage = m_currentDocument->page(0);
+    
+    if(m_defaultCoverWidth*coverPage->ratio() <= m_defaultCoverHeight)
+    {
+        m_coverHeight = m_defaultCoverWidth*coverPage->ratio();
+        m_coverWidth = m_defaultCoverWidth;
+    }
+    else
+    {
+        m_coverHeight = m_defaultCoverHeight;
+        m_coverWidth = m_defaultCoverHeight/coverPage->ratio();
+    }
+    
     
     auto request = new Okular::PixmapRequest(m_observer.get(), 0, m_coverWidth, m_coverHeight, 1, 1, Okular::PixmapRequest::NoFeature);
     QList<Okular::PixmapRequest*> pixmapRequests;

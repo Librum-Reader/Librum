@@ -41,8 +41,10 @@ private:
     std::unique_ptr<Okular::Document> m_currentDocument;
     std::unique_ptr<TempObserver> m_observer;
     
-    const int m_coverWidth = 172;
-    const int m_coverHeight = 241;
+    const int m_defaultCoverWidth = 188;
+    const int m_defaultCoverHeight = 238;
+    int m_coverWidth = 0;
+    int m_coverHeight = 0;
 };
 
 } // namespace application::utility

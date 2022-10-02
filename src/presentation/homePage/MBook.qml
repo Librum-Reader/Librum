@@ -51,9 +51,7 @@ Item
                     id: bookCover
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
-                    sourceSize.height: 241
                     source: cover
-                    fillMode: Image.PreserveAspectFit
                 }
             }
         }
