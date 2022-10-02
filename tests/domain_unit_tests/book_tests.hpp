@@ -97,10 +97,10 @@ TEST(ABook, SucceedsGettingAllTags)
 TEST(ABook, SucceedsUpdatingBook)
 {
     // Arrange
-    Book book("SomeBook", "SomePath", QByteArray("SomeCover"));
+    Book book("SomeBook", "SomePath", QImage("SomeCover"));
     
     Tag tag("SomeTag");
-    Book bookToUpdateWith("SomeUpdatedBook", "SomeUpdatedPath", "SomeUpdatedCover");
+    Book bookToUpdateWith("SomeUpdatedBook", "SomeUpdatedPath", QImage("SomeUpdatedCover"));
     bookToUpdateWith.addTag(tag);
     
     auto expectedResult = bookToUpdateWith;

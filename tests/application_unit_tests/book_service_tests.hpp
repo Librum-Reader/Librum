@@ -136,7 +136,7 @@ TEST(ABookService, SucceedsUpdatingABook)
     models::Tag firstTag("FirstTag");
     models::Tag secondTag("SecondTag");
     models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdaedPath", 
-                                   "SomeUpdatedCover");
+                                   QImage("SomeUpdatedCover"));
     bookToUpdateWidth.addTag(firstTag);
     bookToUpdateWidth.addTag(secondTag);
     
@@ -176,7 +176,7 @@ TEST(ABookService, FailsUpdatingABookIfBookDoesNotExist)
     
     QString originalBookTitle = "SomeBook";
     models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdaedPath", 
-                                   "SomeUpdatedCover");
+                                   QImage("SomeUpdatedCover"));
     
     auto expectedStatus = BookOperationStatus::BookDoesNotExist;
     auto expectedResult = bookToUpdateWidth;
@@ -201,7 +201,7 @@ TEST(ABookService, SucceedsGettingABook)
     
     QString title = "SomeBook";
     QString path = "some/path.pdf";
-    QByteArray cover = "SomeCover";
+    QImage cover("SomeCover");
     
     models::Book expectedResult(title, path, cover);
     
@@ -381,7 +381,7 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
     
     QString bookTitle = "SomeBook";
     QString bookPath = "some/book.pdf";
-    QByteArray bookCover = "SomeBook";
+    QImage bookCover("SomeBook");
     
     models::Tag firstTag("FirstTag");
     models::Tag secondTag("SecondTag");
@@ -439,9 +439,9 @@ TEST(ABookService, SucceedsGettingAllBooks)
     BookInfoHelperMock bookInfoManagerMock;
     application::services::BookService bookService(&bookInfoManagerMock);
     
-    models::Book firstBook("FirstBook", "FirstFilePath", "FirstCover");
-    models::Book secondBook("SecondBook", "SecondFilePath", "SecondCover");
-    models::Book thirdBook("ThirdBook", "ThirdFilePath", "ThirdCover");
+    models::Book firstBook("FirstBook", "FirstFilePath", QImage("FirstCover"));
+    models::Book secondBook("SecondBook", "SecondFilePath", QImage("SecondCover"));
+    models::Book thirdBook("ThirdBook", "ThirdFilePath", QImage("ThirdCover"));
     std::vector<models::Book> expectedResult { firstBook, secondBook, thirdBook };
     
     

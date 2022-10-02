@@ -15,6 +15,7 @@ target_link_libraries(application_unit_tests
                 PRIVATE
                     domain
                     application
+                    okularcore
                     gtest
                     gmock
                     Qt5::Core

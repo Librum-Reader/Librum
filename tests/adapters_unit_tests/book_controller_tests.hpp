@@ -211,7 +211,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     // Arrange
     QString title = "SomeBook";
     QString filePath = "some/path.pdf";
-    QByteArray cover = "0fdd244123bc";
+    QImage cover("0xfdd244123bc");
     QString firstTagName = "FirstTag";
     QString secondTagName = "SecondTag";
     std::vector<Book> booksToReturn{ Book(title, filePath, cover) };

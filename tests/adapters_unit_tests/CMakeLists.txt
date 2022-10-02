@@ -1,5 +1,5 @@
-find_package(QT NAMES Qt5 COMPONENTS Network Core Test REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Test REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Network Core Test Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Test Quick REQUIRED)
 
 
 
@@ -20,6 +20,7 @@ target_link_libraries(adapters_unit_tests
                     domain
                     Qt5::Core
                     Qt5::Network
+                    Qt5::Quick
                     Qt5::Test
     )
 
