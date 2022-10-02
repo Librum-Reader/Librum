@@ -38,7 +38,6 @@ public:
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
 signals:
-    void coverGenerated(int index);
     void currentBookChanged();
     void bookCountChanged();
 };

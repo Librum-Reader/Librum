@@ -8,9 +8,6 @@
 namespace application::services
 {
 
-class Cover;
-
-
 class BookService : public IBookService
 {
     Q_OBJECT
@@ -27,9 +24,7 @@ public:
                                const domain::models::Tag& tag) override;
     BookOperationStatus removeTag(const QString& title,
                                   const domain::models::Tag& tag) override;
-    
-    const QPixmap* getCover(int index) const;
-    
+        
     const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QString& title) const override;
     int getBookCount() const override;
@@ -46,31 +41,6 @@ private:
     IBookInfoHelper* m_bookInfoManager;
     domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
-    std::vector<Cover> m_covers;
-};
-
-
-class Cover
-{
-public:
-    Cover(QPixmap data, int page)
-        : m_data(std::move(data)), m_page(page)
-    {
-    }
-    
-    const QPixmap* getData() const
-    {
-        return &m_data;
-    };
-    
-    int getPage() const
-    {
-        return m_page;
-    };
-    
-private:
-    QPixmap m_data;
-    int m_page;
 };
 
 } // namespace application::services

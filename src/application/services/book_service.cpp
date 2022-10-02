@@ -89,11 +89,6 @@ BookOperationStatus BookService::removeTag(const QString& title,
     return BookOperationStatus::Success;
 }
 
-const QPixmap* BookService::getCover(int index) const
-{
-    return m_covers.at(index).getData();
-}
-
 const std::vector<Book>& BookService::getBooks() const
 {
     return m_books;
@@ -126,9 +121,7 @@ const Book* BookService::getCurrentBook() const
 
 void BookService::storeBookCover(const QPixmap* pixmap)
 {
-    m_covers.emplace_back(*pixmap, 0);
     
-    emit coverReady(m_covers.size() - 1);
 }
 
 
