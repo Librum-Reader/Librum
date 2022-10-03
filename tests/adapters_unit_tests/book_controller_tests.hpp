@@ -142,7 +142,7 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
-    Book bookToReturn("SomeBook");
+    Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
     QVariantMap map{ {"Title", "AnotherName"}, {"Cover", QByteArray("123")} };
     
     auto expectedResult = BookOperationStatus::Success;
@@ -186,7 +186,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
 {
     // Arrange
-    Book bookToReturn("SomeBook");
+    Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
     QVariantMap map{ {"NonExistentProperty", QString("123")} };
     
     auto expectedResult = BookOperationStatus::PropertyDoesNotExist;
@@ -210,11 +210,12 @@ TEST_F(ABookController, SucceedsGettingABook)
 {
     // Arrange
     QString title = "SomeBook";
+    QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
-    QImage cover("0xfdd244123bc");
+    QImage cover("0fdd244123bc");
     QString firstTagName = "FirstTag";
     QString secondTagName = "SecondTag";
-    std::vector<Book> booksToReturn{ Book(title, filePath, cover) };
+    std::vector<Book> booksToReturn{ Book(title, author, filePath, cover) };
     booksToReturn[0].addTag(Tag(firstTagName));
     booksToReturn[0].addTag(Tag(secondTagName));
     
@@ -253,8 +254,8 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
 {
     // Arrange
     std::vector<Book> booksToReturn;
-    booksToReturn.emplace_back("SomeBook");
-    booksToReturn.emplace_back("SomeOtherBook");
+    booksToReturn.emplace_back("SomeBook", "SomeAuthor", "some/path.pdf");
+    booksToReturn.emplace_back("SomeOtherBook", "SomeOtherAuthor", "some/other/path.pdf");
     
     auto expectedResult = 2;
     
@@ -277,10 +278,11 @@ TEST_F(ABookController, SucceedsGettingTheCurrentBook)
 {
     // Arrange
     QString title = "SomeBook";
+    QString author = "SomeAuthor";
     QString filePath = "some/book.pdf";
     QString firstTagName = "FirstTag";
     QString secondTagName = "SecondTag";
-    Book bookToReturn(title, filePath);
+    Book bookToReturn(title, author, filePath);
     bookToReturn.addTag(Tag(firstTagName));
     bookToReturn.addTag(Tag(secondTagName));
     
