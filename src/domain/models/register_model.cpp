@@ -47,27 +47,27 @@ QString RegisterModel::generateErrorMessage(RegistrationResult status) const
 }
 
 
-QString RegisterModel::firstName() const
+QString RegisterModel::getFirstName() const
 {
     return m_firstName;
 }
 
-QString RegisterModel::lastName() const
+QString RegisterModel::getLastName() const
 {
     return m_lastName;
 }
 
-QString RegisterModel::email() const
+QString RegisterModel::getEmail() const
 {
     return m_email;
 }
 
-QString RegisterModel::password() const
+QString RegisterModel::getPassword() const
 {
     return m_password;
 }
 
-bool RegisterModel::keepUpdated() const
+bool RegisterModel::getKeepUpdated() const
 {
     return m_keepUpdated;
 }

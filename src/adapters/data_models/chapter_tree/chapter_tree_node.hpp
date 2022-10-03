@@ -3,7 +3,7 @@
 #include <QString>
 
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 class ChapterTreeNode
@@ -27,4 +27,4 @@ private:
     QString m_data;
 };
 
-} // namespace adapters::models
+} // namespace adapters::data_models

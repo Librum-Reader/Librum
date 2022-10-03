@@ -28,11 +28,11 @@ public:
     QString generateErrorMessage(RegistrationResult status) const;
     RegistrationResult isValid() const;
     
-    QString firstName() const;
-    QString lastName() const;
-    QString email() const;
-    QString password() const;
-    bool keepUpdated() const;
+    QString getFirstName() const;
+    QString getLastName() const;
+    QString getEmail() const;
+    QString getPassword() const;
+    bool getKeepUpdated() const;
     
 private:
     RegisterModel::RegistrationResult firstNameIsValid() const;

@@ -385,6 +385,12 @@ public:
      * @since 0.19 (KDE 4.13)
      */
     bool hasTilesManager(const DocumentObserver *observer) const;
+    
+    /**
+     * Returns the pixmap matching the given parameters
+     * @author david_librum
+    */
+    const QPixmap* getPixmap(DocumentObserver* observer, int width, int height) const;
 
     /**
      * Returns a list of all tiles intersecting with @p rect.

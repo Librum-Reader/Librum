@@ -2377,6 +2377,7 @@ Document::OpenResult Document::openDocument(const QString &docFile, const QUrl &
     QMimeDatabase db;
     QMimeType mime = _mime;
     QByteArray filedata;
+    
     int fd = -1;
     if (url.scheme() == QLatin1String("fd")) {
         bool ok;
@@ -2591,7 +2592,7 @@ bool DocumentPrivate::updateMetadataXmlNameAndDocSize()
 
     // determine the related "xml document-info" filename
     if (m_url.isLocalFile()) {
-        const QString filePath = docDataFileName(m_url, m_docSize);
+        QString filePath = docDataFileName(m_url, m_docSize);
         qCDebug(OkularCoreDebug) << "Metadata file is now:" << filePath;
         m_xmlFileName = filePath;
     } else {

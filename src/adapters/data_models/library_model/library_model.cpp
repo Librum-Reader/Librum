@@ -1,5 +1,8 @@
 #include "library_model.hpp"
 #include <QDebug>
+#include <QByteArray>
+#include <QBuffer>
+#include <strings.h>
 #include "book.hpp"
 
 
@@ -30,17 +33,28 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     
     const Book& book = m_data.at(index.row());
     
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    QString base64;
     
     switch(role)
     {
     case TitleRole:
-        return book.title();
+        return book.getTitle();
         break;
-    case CoverRole:
-        return book.cover();
+    case AuthorRole:
+        if(book.getAuthor() == "")
+            return "Unknown Author";
+        return book.getAuthor();
         break;
     case FilePathRole:
-        return book.filePath();
+        return book.getFilePath();
+        break;
+    case CoverRole:
+        buffer.open(QIODevice::WriteOnly);
+        book.getCover().save(&buffer, "png");
+        base64 = QString::fromUtf8(byteArray.toBase64());
+        return QString("data:image/png;base64,") + base64;
         break;
     default:
         return QVariant();
@@ -52,11 +66,19 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
     static QHash<int, QByteArray> roles
     {
         {TitleRole, "title"},
-        {CoverRole, "cover"},
-        {FilePathRole, "filePath"}
+        {AuthorRole, "author"},
+        {FilePathRole, "filePath"},
+        {CoverRole, "cover"}
     };
     
     return roles;
+}
+
+void LibraryModel::processBookCover(int row)
+{
+    auto modelIndex = index(row, 0);
+    
+    emit dataChanged(modelIndex, modelIndex, {CoverRole});
 }
 
 

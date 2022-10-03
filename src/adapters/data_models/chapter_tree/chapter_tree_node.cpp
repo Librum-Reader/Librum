@@ -2,7 +2,7 @@
 #include "chapter_tree_node.hpp"
 
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 ChapterTreeNode::ChapterTreeNode(const QString& data, ChapterTreeNode* parent)
@@ -57,4 +57,4 @@ ChapterTreeNode* ChapterTreeNode::parentNode()
     return m_parentNode;
 }
 
-} // namespace adapters::models
+} // namespace adapters::data_models

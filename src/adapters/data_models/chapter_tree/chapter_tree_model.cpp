@@ -4,7 +4,7 @@
 #include "chapter_tree_node.hpp"
 
 
-namespace adapters::models
+namespace adapters::data_models
 {
 
 ChapterTreeModel::ChapterTreeModel(QObject* parent)
@@ -159,4 +159,4 @@ QVariant ChapterTreeModel::headerData(int section, Qt::Orientation orientation, 
     return QVariant();
 }
 
-} // namespace adapters::models
+} // namespace adapters::data_models

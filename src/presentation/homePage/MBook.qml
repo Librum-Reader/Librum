@@ -51,9 +51,7 @@ Item
                     id: bookCover
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
-                    sourceSize.height: 241
-                    source: Icons.bookCover
-                    fillMode: Image.PreserveAspectFit
+                    source: cover
                 }
             }
         }
@@ -81,14 +79,16 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 34
                     Layout.topMargin: 5
+                    clip: true
                     text: model.title
                     font.weight: Font.Medium
+                    verticalAlignment: Text.AlignVCenter
                     color: Style.colorBaseTitle
                     font.pointSize: 11
                     lineHeight: 0.8
-                    wrapMode: TextInput.WrapAnywhere
+                    wrapMode: TextInput.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
                 }
                 
@@ -97,9 +97,11 @@ Item
                     id: authorName
                     Layout.fillWidth: true
                     Layout.topMargin: 4
-                    text: "Stephen R. Covey"
+                    clip: true
+                    text: author
                     color: Style.colorLightText
                     font.pointSize: 10
+                    elide: Text.ElideRight
                 }
                 
                 RowLayout
@@ -113,7 +115,7 @@ Item
                         id: percentageBox
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
-                        Layout.topMargin: 7
+                        Layout.topMargin: 4
                         color: Style.colorLightPurple2
                         radius: 2
                         

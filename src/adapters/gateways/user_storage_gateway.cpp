@@ -22,8 +22,8 @@ void UserStorageGateway::authenticateUser(const domain::models::LoginModel& logi
 {
     dtos::LoginDto loginDto
     {
-        .email = loginModel.email(),
-        .password = loginModel.password()
+        .email = loginModel.getEmail(),
+        .password = loginModel.getPassword()
     };
     
     m_authenticationAccess->authenticateUser(loginDto);
@@ -33,10 +33,10 @@ void UserStorageGateway::registerUser(const domain::models::RegisterModel& regis
 {
     dtos::RegisterDto registerDto
     {
-        .firstName = registerModel.firstName(),
-        .lastName = registerModel.lastName(),
-        .email = registerModel.email(),
-        .password = registerModel.password()
+        .firstName = registerModel.getFirstName(),
+        .lastName = registerModel.getLastName(),
+        .email = registerModel.getEmail(),
+        .password = registerModel.getPassword()
     };
     
     m_authenticationAccess->registerUser(registerDto);

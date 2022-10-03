@@ -9,7 +9,6 @@ set(CMAKE_AUTORCC ON)
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules;${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
 
 
-
 # Dependencies
 find_package(QT NAMES Qt5 COMPONENTS Quick Widgets QuickControls2 REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets QuickControls2 REQUIRED)

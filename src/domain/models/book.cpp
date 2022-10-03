@@ -5,13 +5,14 @@
 namespace domain::models
 {
 
-Book::Book(const QString& title, const QString& path, const QByteArray& cover)
-    : m_title(title), m_filePath(path), m_cover(cover)
+Book::Book(const QString& title, const QString& author, 
+           const QString& path, const QImage& cover)
+    : m_title(title), m_author(author), m_filePath(path), m_cover(cover)
 {
 }
 
 
-const QString& Book::title() const
+const QString& Book::getTitle() const
 {
     return m_title;
 }
@@ -21,7 +22,17 @@ void Book::setTitle(const QString& newTitle)
     m_title = newTitle;
 }
 
-const QString& Book::filePath() const
+const QString& Book::getAuthor() const
+{
+    return m_author;
+}
+
+void Book::setAuthor(const QString& newAuthor)
+{
+    m_author = newAuthor;
+}
+
+const QString& Book::getFilePath() const
 {
     return m_filePath;
 }
@@ -31,17 +42,17 @@ void Book::setFilePath(const QString& newLocalPath)
     m_filePath = newLocalPath;
 }
 
-const QByteArray& Book::cover() const
+const QImage& Book::getCover() const
 {
     return m_cover;
 }
 
-void Book::setCover(const QByteArray& newCover)
+void Book::setCover(const QImage& newCover)
 {
     m_cover = newCover;
 }
 
-const std::vector<Tag>& Book::tags() const
+const std::vector<Tag>& Book::getTags() const
 {
     return m_tags;
 }
@@ -68,10 +79,10 @@ bool Book::removeTag(const Tag& tag)
 
 void Book::update(const Book& other)
 {
-    if(m_title != other.title()) m_title = other.title();
-    if(m_filePath != other.filePath()) m_filePath = other.filePath();
-    if(m_cover != other.cover()) m_cover = other.cover();
-    if(!tagsAreTheSame(other.tags())) m_tags = other.tags();
+    if(m_title != other.getTitle()) m_title = other.getTitle();
+    if(m_filePath != other.getFilePath()) m_filePath = other.getFilePath();
+    if(m_cover != other.getCover()) m_cover = other.getCover();
+    if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
 }
 
 bool Book::tagsAreTheSame(const std::vector<Tag>& other)

@@ -58,7 +58,6 @@ void DocumentItem::openUrl(const QUrl &url, const QString &password)
     qDebug() << "Opening " << url;
     
     m_document->closeDocument();
-    // TODO: password
     QMimeDatabase db;
 
     QUrl realUrl = url; // NOLINT(performance-unnecessary-copy-initialization) because of the ifdef below this can't be const &

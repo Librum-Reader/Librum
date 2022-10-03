@@ -25,13 +25,13 @@ add_library(adapters
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
                     
-                    models/app_information.hpp
-                    models/chapter_tree/chapter_tree_model.cpp
-                    models/chapter_tree/chapter_tree_node.cpp
-                    models/chapter_tree/chapter_tree_model.hpp
-                    models/chapter_tree/chapter_tree_node.hpp
-                    models/library_model/library_model.cpp
-                    models/library_model/library_model.hpp
+                    data_models/app_information.hpp
+                    data_models/chapter_tree/chapter_tree_model.cpp
+                    data_models/chapter_tree/chapter_tree_node.cpp
+                    data_models/chapter_tree/chapter_tree_model.hpp
+                    data_models/chapter_tree/chapter_tree_node.hpp
+                    data_models/library_model/library_model.cpp
+                    data_models/library_model/library_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -46,9 +46,9 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
-                    ${CMAKE_CURRENT_SOURCE_DIR}/models/chapter_tree
-                    ${CMAKE_CURRENT_SOURCE_DIR}/models/library_model
-                    ${CMAKE_CURRENT_SOURCE_DIR}/models
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/chapter_tree
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/library_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${DOMAIN_INCLUDES}

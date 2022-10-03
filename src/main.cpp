@@ -12,6 +12,7 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "app_information.hpp"
+#include "book_dto.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "i_book_controller.hpp"
@@ -45,7 +46,7 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType(QUrl("qrc:/StyleSheet.qml"), "Librum.style", 1, 0, "Style");
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
-    qmlRegisterType<adapters::models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
+    qmlRegisterType<adapters::data_models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
@@ -56,7 +57,7 @@ int main(int argc, char *argv[])
     auto bookController = config::diConfig().create<adapters::IBookController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController", bookController);
     
-    auto appInfo = std::make_unique<adapters::models::AppInformation>();
+    auto appInfo = std::make_unique<adapters::data_models::AppInformation>();
     qmlRegisterSingletonInstance("Librum.models", 1, 0, "AppInformation", appInfo.get());
     
     auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
@@ -64,7 +65,6 @@ int main(int argc, char *argv[])
     
     qmlRegisterUncreatableMetaObject(application::staticMetaObject, "Librum.controllers", 1, 0, 
                                      "BookOperationStatus", "This is an uncreatable enum!");
-    
     
     
     // Startup

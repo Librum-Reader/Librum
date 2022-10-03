@@ -3,6 +3,7 @@
 #include <QString>
 #include <QList>
 #include <QVariantMap>
+#include <QPixmap>
 #include "book_dto.hpp"
 #include "library_model.hpp"
 
@@ -13,7 +14,6 @@ namespace adapters
 class IBookController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(adapters::dtos::BookDto currentBook READ getCurrentBook NOTIFY currentBookChanged)
     Q_PROPERTY(adapters::data_models::LibraryModel* libraryModel READ getLibraryModel CONSTANT)
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
     
@@ -31,13 +31,10 @@ public:
                                       const QString& tagName) = 0;
     Q_INVOKABLE virtual adapters::dtos::BookDto getBook(const QString& title) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
-    Q_INVOKABLE virtual int setCurrentBook(QString title) = 0;
-    Q_INVOKABLE virtual adapters::dtos::BookDto getCurrentBook() = 0;
     
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
 signals:
-    void currentBookChanged();
     void bookCountChanged();
 };
 

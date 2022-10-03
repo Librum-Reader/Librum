@@ -16,7 +16,7 @@ bool Tag::operator==(const Tag& other) const
 }
 
 
-const QString& Tag::name() const
+const QString& Tag::getName() const
 {
     return m_name;
 }

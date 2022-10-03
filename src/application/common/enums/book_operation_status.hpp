@@ -9,6 +9,7 @@ namespace application
     enum class BookOperationStatus
     {
         Success,
+        OpeningBookFailed,
         BookDoesNotExist,
         BookAlreadyExists,
         PropertyDoesNotExist,

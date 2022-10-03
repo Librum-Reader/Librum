@@ -1,6 +1,7 @@
 #include "book_service.hpp"
+#include <ranges>
 #include "book_operation_status.hpp"
-#include <algorithm>
+#include "i_book_info_helper.hpp"
 
 
 namespace application::services
@@ -10,24 +11,33 @@ using namespace domain::models;
 
 
 BookService::BookService(IBookInfoHelper* bookInfoManager)
-    : m_currentBook(nullptr), m_bookInfoManager(bookInfoManager)
+    : m_bookInfoManager(bookInfoManager)
 {
 }
 
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    QString title = m_bookInfoManager->parseBookTitleFromFilePath(filePath);
+    if(!m_bookInfoManager->setupDocument(filePath))
+        return BookOperationStatus::OpeningBookFailed;
+    
+    QString title = m_bookInfoManager->getTitle();
     
     auto book = getBookByTitle(title);
     if(book)
         return BookOperationStatus::BookAlreadyExists;
     
-    QByteArray cover = m_bookInfoManager->getBookCover(filePath);
+    
+    QString author = m_bookInfoManager->getAuthor();
     
     emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(title, filePath, cover);
+    m_books.emplace_back(title, author, filePath);
     emit bookInsertionEnded();
+    
+    
+    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+                     this, &BookService::storeBookCover);
+    m_bookInfoManager->getCover();
     
     return BookOperationStatus::Success;
 }
@@ -38,11 +48,8 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    if(m_currentBook && m_currentBook->title() == title)
-        m_currentBook = nullptr;
-    
-    auto posOfBook = std::find_if(m_books.begin(), m_books.end(), [&title] (const Book& book){
-        return book.title() == title;
+    auto posOfBook = std::ranges::find_if(m_books, [&title] (const Book& book) {
+        return book.getTitle() == title;
     });
     
     m_books.erase(posOfBook);
@@ -101,19 +108,13 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
-BookOperationStatus BookService::setCurrentBook(const QString& title)
+void BookService::storeBookCover(const QPixmap* pixmap)
 {
-    auto book = getBookByTitle(title);
-    if(!book)
-        return BookOperationStatus::BookDoesNotExist;
+    int index = m_books.size() - 1;
+    auto& book = m_books.at(index);
     
-    m_currentBook = book;
-    return BookOperationStatus::Success;
-}
-
-const Book* BookService::getCurrentBook() const
-{
-    return m_currentBook;
+    book.setCover(pixmap->toImage());
+    emit bookCoverGenerated(index);
 }
 
 
@@ -121,7 +122,7 @@ Book* BookService::getBookByTitle(const QString& title)
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
-        if(m_books.at(i).title() == title)
+        if(m_books.at(i).getTitle() == title)
             return &(*(m_books.begin() + i));
     }
     
@@ -132,7 +133,7 @@ const Book* BookService::getBookByTitle(const QString& title) const
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
-        if(m_books.at(i).title() == title)
+        if(m_books.at(i).getTitle() == title)
             return &(*(m_books.cbegin() + i));
     }
     

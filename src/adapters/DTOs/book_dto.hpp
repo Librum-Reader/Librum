@@ -2,7 +2,7 @@
 #include <QObject>
 #include <QString>
 #include <QList>
-#include <QByteArray>
+#include <QImage>
 #include "tag_dto.hpp"
 
 
@@ -18,7 +18,7 @@ struct BookDto
 public:
     QString title;
     QString filePath;
-    QByteArray cover;
+    QImage cover;
     QList<TagDto> tags;
 };
 

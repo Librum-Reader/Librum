@@ -1,6 +1,6 @@
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 
 
@@ -22,4 +22,5 @@ target_link_libraries(domain_unit_tests
                     gtest
                     domain
                     Qt5::Core
+                    Qt5::Quick
 )

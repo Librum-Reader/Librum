@@ -24,8 +24,6 @@ public:
     virtual const std::vector<domain::models::Book>& getBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
     virtual int getBookCount() const = 0;
-    virtual BookOperationStatus setCurrentBook(const QString& title) = 0;
-    virtual const domain::models::Book* getCurrentBook() const = 0;
     
     virtual BookOperationStatus addTag(const QString& title,
                                        const domain::models::Tag& tag) = 0;
@@ -33,6 +31,7 @@ public:
                                           const domain::models::Tag& tag) = 0;
     
 signals:
+    void bookCoverGenerated(int index);
     void bookInsertionStarted(int index);
     void bookInsertionEnded();
 };
