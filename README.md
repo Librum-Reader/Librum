@@ -159,7 +159,7 @@ Instructions to get Librum up and running in your environment.
     ```
     Optionally, add the -j option to increase build speed. Pass it the number of cores you want "make" to use. E.g.:
     ```sh
-    make -j4
+    make -j
     ```
 7. Install the files
     ```sh
