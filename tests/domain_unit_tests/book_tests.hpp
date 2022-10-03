@@ -19,8 +19,8 @@ TEST(ABook, SucceedsAddingATag)
     
     // Assert
     EXPECT_TRUE(result);
-    EXPECT_EQ(1, book.tags().size());
-    EXPECT_EQ(tag.name(), book.tags()[0].name());
+    EXPECT_EQ(1, book.getTags().size());
+    EXPECT_EQ(tag.getName(), book.getTags()[0].getName());
 }
 
 TEST(ABook, FailsAddingATagIfItAlreadyExists)
@@ -47,12 +47,12 @@ TEST(ABook, SucceedsRemovingATag)
     
     // Act
     book.addTag(tag);
-    int prevAmountOfTags = book.tags().size();
+    int prevAmountOfTags = book.getTags().size();
     
-    auto result = book.removeTag(tag.name());
+    auto result = book.removeTag(tag.getName());
     
     // Assert
-    EXPECT_EQ(prevAmountOfTags - 1, book.tags().size());
+    EXPECT_EQ(prevAmountOfTags - 1, book.getTags().size());
     EXPECT_TRUE(result);
 }
 
@@ -87,9 +87,9 @@ TEST(ABook, SucceedsGettingAllTags)
     book.addTag(thirdTag);
     
     // Assert
-    EXPECT_EQ(firstTag, book.tags()[0]);
-    EXPECT_EQ(secondTag, book.tags()[1]);
-    EXPECT_EQ(thirdTag, book.tags()[2]);
+    EXPECT_EQ(firstTag, book.getTags()[0]);
+    EXPECT_EQ(secondTag, book.getTags()[1]);
+    EXPECT_EQ(thirdTag, book.getTags()[2]);
 }
 
 
@@ -110,8 +110,8 @@ TEST(ABook, SucceedsUpdatingBook)
     book.update(bookToUpdateWith);
     
     // Assert
-    EXPECT_EQ(expectedResult.title(), book.title());
-    EXPECT_EQ(expectedResult.filePath(), book.filePath());
-    EXPECT_EQ(expectedResult.cover(), book.cover());
-    EXPECT_EQ(expectedResult.tags()[0], book.tags()[0]);
+    EXPECT_EQ(expectedResult.getTitle(), book.getTitle());
+    EXPECT_EQ(expectedResult.getFilePath(), book.getFilePath());
+    EXPECT_EQ(expectedResult.getCover(), book.getCover());
+    EXPECT_EQ(expectedResult.getTags()[0], book.getTags()[0]);
 }

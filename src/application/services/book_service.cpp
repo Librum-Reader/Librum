@@ -49,7 +49,7 @@ BookOperationStatus BookService::deleteBook(const QString& title)
         return BookOperationStatus::BookDoesNotExist;
     
     auto posOfBook = std::ranges::find_if(m_books, [&title] (const Book& book) {
-        return book.title() == title;
+        return book.getTitle() == title;
     });
     
     m_books.erase(posOfBook);
@@ -122,7 +122,7 @@ Book* BookService::getBookByTitle(const QString& title)
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
-        if(m_books.at(i).title() == title)
+        if(m_books.at(i).getTitle() == title)
             return &(*(m_books.begin() + i));
     }
     
@@ -133,7 +133,7 @@ const Book* BookService::getBookByTitle(const QString& title) const
 {
     for(std::size_t i = 0; i < m_books.size(); ++i)
     {
-        if(m_books.at(i).title() == title)
+        if(m_books.at(i).getTitle() == title)
             return &(*(m_books.cbegin() + i));
     }
     

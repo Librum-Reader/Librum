@@ -160,18 +160,18 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     bookService->addBook("some/path.pdf");
     
     auto resultStatus = bookService->updateBook(originalBookTitle, bookToUpdateWith);
-    auto result = bookService->getBook(bookToUpdateWith.title());
+    auto result = bookService->getBook(bookToUpdateWith.getTitle());
     
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
     EXPECT_NE(result, nullptr);
     
-    EXPECT_EQ(expectedResult.title(), result->title());
-    EXPECT_EQ(expectedResult.filePath(), result->filePath());
+    EXPECT_EQ(expectedResult.getTitle(), result->getTitle());
+    EXPECT_EQ(expectedResult.getFilePath(), result->getFilePath());
     
-    for(int i = 0; i < expectedResult.tags().size(); ++i)
+    for(int i = 0; i < expectedResult.getTags().size(); ++i)
     {
-        EXPECT_EQ(expectedResult.tags()[i], result->tags()[i]);
+        EXPECT_EQ(expectedResult.getTags()[i], result->getTags()[i]);
     }
 }
 
@@ -188,7 +188,7 @@ TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
     
     // Act
     auto resultStatus = bookService->updateBook(originalBookTitle, bookToUpdateWidth);
-    auto result = bookService->getBook(bookToUpdateWidth.title());
+    auto result = bookService->getBook(bookToUpdateWidth.getTitle());
     
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
@@ -218,12 +218,12 @@ TEST_F(ABookService, SucceedsGettingABook)
     auto result = bookService->getBook(title);
     
     // Assert
-    EXPECT_EQ(expectedResult.title(), result->title());
-    EXPECT_EQ(expectedResult.filePath(), result->filePath());
+    EXPECT_EQ(expectedResult.getTitle(), result->getTitle());
+    EXPECT_EQ(expectedResult.getFilePath(), result->getFilePath());
     
-    for(int i = 0; i < expectedResult.tags().size(); ++i)
+    for(int i = 0; i < expectedResult.getTags().size(); ++i)
     {
-        EXPECT_EQ(expectedResult.tags()[i].name(), result->tags()[i].name());
+        EXPECT_EQ(expectedResult.getTags()[i].getName(), result->getTags()[i].getName());
     }
 }
 
@@ -271,8 +271,8 @@ TEST_F(ABookService, SucceedsAddingATag)
     EXPECT_EQ(expectedResultStatus, firstResultStatus);
     EXPECT_EQ(expectedResultStatus, secondResultStatus);
     
-    EXPECT_EQ(firstTag, result->tags()[0]);
-    EXPECT_EQ(secondTag, result->tags()[1]);
+    EXPECT_EQ(firstTag, result->getTags()[0]);
+    EXPECT_EQ(secondTag, result->getTags()[1]);
 }
 
 TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
@@ -328,29 +328,29 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
     // Expect
     EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(3)
-            .WillOnce(Return(firstBook.title()))
-            .WillOnce(Return(secondBook.title()))
-            .WillOnce(Return(thirdBook.title()));
+            .WillOnce(Return(firstBook.getTitle()))
+            .WillOnce(Return(secondBook.getTitle()))
+            .WillOnce(Return(thirdBook.getTitle()));
     
     EXPECT_CALL(bookInfoHelperMock, getAuthor())
             .Times(3)
-            .WillOnce(Return(firstBook.author()))
-            .WillOnce(Return(secondBook.author()))
-            .WillOnce(Return(thirdBook.author()));
+            .WillOnce(Return(firstBook.getAuthor()))
+            .WillOnce(Return(secondBook.getAuthor()))
+            .WillOnce(Return(thirdBook.getAuthor()));
     
     // Act
-    bookService->addBook(firstBook.filePath());
-    bookService->addBook(secondBook.filePath());
-    bookService->addBook(thirdBook.filePath());
+    bookService->addBook(firstBook.getFilePath());
+    bookService->addBook(secondBook.getFilePath());
+    bookService->addBook(thirdBook.getFilePath());
     
     auto results = bookService->getBooks();
     
     // Assert
     for(int i = 0; i < expectedResult.size(); ++i)
     {
-        EXPECT_EQ(expectedResult[i].title(), results[i].title());
-        EXPECT_EQ(expectedResult[i].author(), results[i].author());
-        EXPECT_EQ(expectedResult[i].filePath(), results[i].filePath());
+        EXPECT_EQ(expectedResult[i].getTitle(), results[i].getTitle());
+        EXPECT_EQ(expectedResult[i].getAuthor(), results[i].getAuthor());
+        EXPECT_EQ(expectedResult[i].getFilePath(), results[i].getFilePath());
     }
 }
 

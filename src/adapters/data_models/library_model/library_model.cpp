@@ -40,19 +40,19 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     switch(role)
     {
     case TitleRole:
-        return book.title();
+        return book.getTitle();
         break;
     case AuthorRole:
-        if(book.author() == "")
+        if(book.getAuthor() == "")
             return "Unknown Author";
-        return book.author();
+        return book.getAuthor();
         break;
     case FilePathRole:
-        return book.filePath();
+        return book.getFilePath();
         break;
     case CoverRole:
         buffer.open(QIODevice::WriteOnly);
-        book.cover().save(&buffer, "png");
+        book.getCover().save(&buffer, "png");
         base64 = QString::fromUtf8(byteArray.toBase64());
         return QString("data:image/png;base64,") + base64;
         break;
