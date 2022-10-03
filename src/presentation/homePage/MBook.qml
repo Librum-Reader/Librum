@@ -79,14 +79,16 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
-                    Layout.preferredHeight: 32
+                    Layout.preferredHeight: 34
                     Layout.topMargin: 5
+                    clip: true
                     text: model.title
                     font.weight: Font.Medium
+                    verticalAlignment: Text.AlignVCenter
                     color: Style.colorBaseTitle
                     font.pointSize: 11
                     lineHeight: 0.8
-                    wrapMode: TextInput.WrapAnywhere
+                    wrapMode: TextInput.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
                 }
                 
@@ -94,7 +96,8 @@ Item
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 6
+                    Layout.topMargin: 4
+                    clip: true
                     text: author
                     color: Style.colorLightText
                     font.pointSize: 10
