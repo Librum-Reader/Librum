@@ -8,6 +8,7 @@ import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.controllers 1.0
+import Librum.globals 1.0
 import "toolbar"
 import "indexbar"
 import "tags"
@@ -122,9 +123,12 @@ Page
                 model: BookController.libraryModel
                 delegate: MBook
                 {
-                    onLeftButtonClicked: 
+                    id: bookDel
+                    
+                    onLeftButtonClicked:
                     {
-                        BookController.setCurrentBook(model.title);
+                        Globals.currentBookPath = model.filePath;
+                        Globals.currentBookTitle = model.title;
                         loadPage(readingPage);
                     }
                     
@@ -135,7 +139,7 @@ Page
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             
                             bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
-                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
+                            bookDel.setupBookOptionsPopup();
                             bookOptionsPopup.open();
                         }
                     
@@ -146,16 +150,24 @@ Page
                             
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
-                            bookOptionsPopup.selectedBook = BookController.getBook(model.title);
+                            bookDel.setupBookOptionsPopup();
                             bookOptionsPopup.open();
                         }
+                    
+                    
+                    function setupBookOptionsPopup()
+                    {
+                        bookOptionsPopup.bookFilePath = model.filePath;
+                        bookOptionsPopup.bookTitle = model.title;
+                    }
                 }
                 
                 
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
-                    property var selectedBook
+                    property string bookFilePath: ""
+                    property string bookTitle: ""
                     
                     implicitHeight: 213
                     visible: false
@@ -173,7 +185,8 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
-                                BookController.setCurrentBook(bookOptionsPopup.selectedBook.filePath);
+                                Globals.currentBookPath = bookOptionsPopup.bookFilePath;
+                                Globals.currentBookTitle = bookOptionsPopup.bookTitle;
                                 loadPage(readingPage);
                             }
                         }

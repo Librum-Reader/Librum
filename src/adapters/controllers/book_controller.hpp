@@ -26,21 +26,16 @@ public:
                   const QString& tagName) override;
     dtos::BookDto getBook(const QString& title) override;
     int getBookCount() const override;
-    int setCurrentBook(QString title) override;
-    dtos::BookDto getCurrentBook() override;
     
     data_models::LibraryModel* getLibraryModel() override;
     
 private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& title);
-    bool refreshCurrentBookChache();
     
     
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
-    bool m_currentBookCacheChanged;
-    dtos::BookDto m_currentBookCache;
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;
 };

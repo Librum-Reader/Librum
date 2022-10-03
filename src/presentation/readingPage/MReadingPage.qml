@@ -6,6 +6,7 @@ import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.elements 1.0
 import Librum.controllers 1.0
+import Librum.globals 1.0
 import "readingToolbar"
 import "readingSearchbar"
 
@@ -55,7 +56,7 @@ Page
         
         Component.onCompleted: 
         {
-            documentItem.url = BookController.currentBook.filePath;
+            documentItem.url = Globals.currentBookPath;
         }
     }
     

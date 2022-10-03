@@ -12,6 +12,7 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "app_information.hpp"
+#include "book_dto.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "i_book_controller.hpp"
@@ -64,7 +65,6 @@ int main(int argc, char *argv[])
     
     qmlRegisterUncreatableMetaObject(application::staticMetaObject, "Librum.controllers", 1, 0, 
                                      "BookOperationStatus", "This is an uncreatable enum!");
-    
     
     
     // Startup

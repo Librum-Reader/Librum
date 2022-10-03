@@ -33,8 +33,6 @@ public:
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
-    MOCK_METHOD(BookOperationStatus, setCurrentBook, (const QString& title), (override));
-    MOCK_METHOD(const Book*, getCurrentBook, (), (const, override));
     
     MOCK_METHOD(BookOperationStatus, addTag, (const QString& title,
                                               const domain::models::Tag& tag), (override));
@@ -270,86 +268,6 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
     
     // Assert
     EXPECT_EQ(expectedResult, result);
-}
-
-
-
-TEST_F(ABookController, SucceedsGettingTheCurrentBook)
-{
-    // Arrange
-    QString title = "SomeBook";
-    QString author = "SomeAuthor";
-    QString filePath = "some/book.pdf";
-    QString firstTagName = "FirstTag";
-    QString secondTagName = "SecondTag";
-    Book bookToReturn(title, author, filePath);
-    bookToReturn.addTag(Tag(firstTagName));
-    bookToReturn.addTag(Tag(secondTagName));
-    
-    dtos::BookDto expectedResult;
-    expectedResult.title = title;
-    expectedResult.filePath = filePath;
-    dtos::TagDto firstTag;
-    firstTag.name = firstTagName;
-    expectedResult.tags.append(firstTag);
-    dtos::TagDto secondTag;
-    secondTag.name = secondTagName;
-    expectedResult.tags.append(secondTag);
-    
-    
-    // Expect
-    EXPECT_CALL(bookService, getCurrentBook())
-            .Times(1)
-            .WillOnce(Return(&bookToReturn));
-    
-    // Act
-    auto result = bookController->getCurrentBook();
-    
-    // Assert
-    EXPECT_EQ(expectedResult.title, result.title);
-    EXPECT_EQ(expectedResult.cover, result.cover);
-    EXPECT_EQ(expectedResult.filePath, result.filePath);
-    
-    for(int i = 0;i < expectedResult.tags.size(); ++i)
-    {
-        EXPECT_EQ(expectedResult.tags[i].name, result.tags[i].name);
-    }
-}
-
-TEST_F(ABookController, SucceedsSettingTheCurrentBook)
-{
-    // Arrange
-    BookOperationStatus expectedResult = BookOperationStatus::Success;
-    
-    // Expect
-    EXPECT_CALL(bookService, setCurrentBook(_))
-            .Times(1)
-            .WillOnce(Return(BookOperationStatus::Success));
-    
-    // Act
-    auto result = bookController->setCurrentBook("SomeBook");
-    
-    // Assert
-    EXPECT_EQ(static_cast<int>(expectedResult), result);
-}
-
-TEST_F(ABookController, FailsSettingCurrentBookIfNoBookWithExists)
-{
-    // Arrange
-    QString nonExistentTitle = "SomeNonExistenBook";
-    
-    BookOperationStatus expectedResult = BookOperationStatus::BookDoesNotExist;
-    
-    // Expect
-    EXPECT_CALL(bookService, setCurrentBook(_))
-            .Times(1)
-            .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
-    
-    // Act
-    auto result = bookController->setCurrentBook(nonExistentTitle);
-    
-    // Assert
-    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 

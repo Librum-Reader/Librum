@@ -28,8 +28,6 @@ public:
     const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QString& title) const override;
     int getBookCount() const override;
-    BookOperationStatus setCurrentBook(const QString& title) override;
-    const domain::models::Book* getCurrentBook() const override;
     
 private slots:
     void storeBookCover(const QPixmap* pixmap);
@@ -39,7 +37,6 @@ private:
     const domain::models::Book* getBookByTitle(const QString& title) const;
     
     IBookInfoHelper* m_bookInfoManager;
-    domain::models::Book* m_currentBook;
     std::vector<domain::models::Book> m_books;
 };
 
