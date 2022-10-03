@@ -30,8 +30,10 @@ public:
     
 public slots:
     void processBookCover(int index);
-    void beginInsertingRow(int index);
+    void startInsertingRow(int index);
     void endInsertingRow();
+    void startDeletingBook(int index);
+    void endDeletingBook();
     
 private:
     

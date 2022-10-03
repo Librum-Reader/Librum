@@ -16,11 +16,19 @@ BookController::BookController(application::IBookService* bookService)
     : m_bookChacheChanged(true), m_bookService(bookService),
       m_libraryModel(m_bookService->getBooks())
 {
+    // book insertion
     QObject::connect(m_bookService, &application::IBookService::bookInsertionStarted,
-                     &m_libraryModel, &data_models::LibraryModel::beginInsertingRow);
+                     &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
     QObject::connect(m_bookService, &application::IBookService::bookInsertionEnded,
                      &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
     
+    // book deletion
+    QObject::connect(m_bookService, &application::IBookService::bookDeletionStarted,
+                     &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
+    QObject::connect(m_bookService, &application::IBookService::bookDeletionEnded,
+                     &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
+    
+    // book cover processing
     QObject::connect(m_bookService, &application::IBookService::bookCoverGenerated,
                      &m_libraryModel, &data_models::LibraryModel::processBookCover);
 }

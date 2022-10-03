@@ -34,6 +34,8 @@ signals:
     void bookCoverGenerated(int index);
     void bookInsertionStarted(int index);
     void bookInsertionEnded();
+    void bookDeletionStarted(int index);
+    void bookDeletionEnded();
 };
 
 } // namespace application

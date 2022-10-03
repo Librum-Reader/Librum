@@ -3,11 +3,11 @@
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
 
-
 namespace application::services
 {
 
 using namespace domain::models;
+using std::size_t;
 
 
 BookService::BookService(IBookInfoHelper* bookInfoManager)
@@ -52,7 +52,11 @@ BookOperationStatus BookService::deleteBook(const QString& title)
         return book.getTitle() == title;
     });
     
+    size_t index = posOfBook - m_books.begin();
+    emit bookDeletionStarted(index);
     m_books.erase(posOfBook);
+    emit bookDeletionEnded();
+    
     return BookOperationStatus::Success;
 }
 
@@ -120,7 +124,7 @@ void BookService::storeBookCover(const QPixmap* pixmap)
 
 Book* BookService::getBookByTitle(const QString& title)
 {
-    for(std::size_t i = 0; i < m_books.size(); ++i)
+    for(size_t i = 0; i < m_books.size(); ++i)
     {
         if(m_books.at(i).getTitle() == title)
             return &(*(m_books.begin() + i));
@@ -131,7 +135,7 @@ Book* BookService::getBookByTitle(const QString& title)
 
 const Book* BookService::getBookByTitle(const QString& title) const
 {
-    for(std::size_t i = 0; i < m_books.size(); ++i)
+    for(size_t i = 0; i < m_books.size(); ++i)
     {
         if(m_books.at(i).getTitle() == title)
             return &(*(m_books.cbegin() + i));

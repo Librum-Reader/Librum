@@ -82,7 +82,7 @@ void LibraryModel::processBookCover(int row)
 }
 
 
-void LibraryModel::beginInsertingRow(int index)
+void LibraryModel::startInsertingRow(int index)
 {
     beginInsertRows(QModelIndex(), index, index);
 }
@@ -90,6 +90,16 @@ void LibraryModel::beginInsertingRow(int index)
 void LibraryModel::endInsertingRow()
 {
     endInsertRows();
+}
+
+void LibraryModel::startDeletingBook(int index)
+{
+    beginRemoveRows(QModelIndex(), index, index);
+}
+
+void LibraryModel::endDeletingBook()
+{
+    endRemoveRows();
 }
 
 } // namespace adapters::data_models

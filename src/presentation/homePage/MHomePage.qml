@@ -263,6 +263,7 @@ Page
                             
                             onClicked:
                             {
+                                acceptDeletionPopup.book = bookOptionsPopup.bookTitle;
                                 acceptDeletionPopup.open();
                                 bookOptionsPopup.close();
                             }
@@ -309,7 +310,6 @@ Page
     MBookDetailsPopup
     {
         id: bookDetailsPopup
-        
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
@@ -317,7 +317,6 @@ Page
     MManageTagsPopup
     {
         id: manageTagsPopup
-        
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
