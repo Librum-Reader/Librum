@@ -1,7 +1,7 @@
 #include "book_service.hpp"
+#include <ranges>
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
-#include <algorithm>
 
 
 namespace application::services
@@ -48,7 +48,7 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    auto posOfBook = std::find_if(m_books.begin(), m_books.end(), [&title] (const Book& book){
+    auto posOfBook = std::ranges::find_if(m_books, [&title] (const Book& book) {
         return book.title() == title;
     });
     

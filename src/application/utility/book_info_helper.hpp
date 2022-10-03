@@ -16,18 +16,19 @@ public:
     BookInfoHelper();
     
     bool setupDocument(const QString& filePath) override;
-    QString getTitle() override;
-    QString getAuthor() override;
-    void getCover() override;
+    QString getTitle() const override;
+    QString getAuthor() const override;
+    void getCover() const override;
     
 private slots:
     void proccessBookCoverPixmap(int page, int flag);
     
 private:
-    QSize getCoverSize();
-    QString getSystemRelativePath(const QString& qPath);
+    QSize getCoverSize() const;
+    QString getSystemRelativePath(const QString& qPath) const;
+    QString parseTitleFromPath(const QString& path) const;
     
-    std::unique_ptr<Okular::Document> m_currentDocument;
+    std::unique_ptr<Okular::Document> m_document;
     std::unique_ptr<CoverObserver> m_observer;
     QString m_systemRelativePath;
     QMimeType m_mimeType;

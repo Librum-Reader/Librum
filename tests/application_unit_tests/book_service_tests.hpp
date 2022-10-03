@@ -20,9 +20,9 @@ class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
     MOCK_METHOD(bool, setupDocument, (const QString& filePath), (override));
-    MOCK_METHOD(QString, getTitle, (), (override));
-    MOCK_METHOD(void, getCover, (), (override));
-    MOCK_METHOD(QString, getAuthor, (), (override));
+    MOCK_METHOD(QString, getTitle, (), (const, override));
+    MOCK_METHOD(void, getCover, (), (const, override));
+    MOCK_METHOD(QString, getAuthor, (), (const, override));
 };
 
 

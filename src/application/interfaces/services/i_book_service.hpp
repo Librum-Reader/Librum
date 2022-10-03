@@ -21,7 +21,6 @@ public:
     virtual BookOperationStatus updateBook(const QString& title,
                                            const domain::models::Book& newBook) = 0;
     
-    // TODO: Remove this method?
     virtual const std::vector<domain::models::Book>& getBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
     virtual int getBookCount() const = 0;

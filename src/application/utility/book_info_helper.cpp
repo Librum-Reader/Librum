@@ -19,8 +19,8 @@ BookInfoHelper::BookInfoHelper()
     : m_observer(std::make_unique<CoverObserver>())
 {
     Settings::instance(QStringLiteral("okularproviderrc"));
-    m_currentDocument = std::make_unique<Document>(nullptr);
-    m_currentDocument->addObserver(m_observer.get());
+    m_document = std::make_unique<Document>(nullptr);
+    m_document->addObserver(m_observer.get());
     
     QObject::connect(m_observer.get(), &CoverObserver::pageChanged, 
                      this, &BookInfoHelper::proccessBookCoverPixmap);
@@ -29,76 +29,81 @@ BookInfoHelper::BookInfoHelper()
 
 bool BookInfoHelper::setupDocument(const QString& filePath)
 {
+    m_document->closeDocument();
+    
     QMimeDatabase mimeDb;
     m_systemRelativePath = getSystemRelativePath(filePath);
     m_mimeType = mimeDb.mimeTypeForUrl(filePath);
     
-    m_currentDocument->closeDocument();
-    auto result = m_currentDocument->openDocument(m_systemRelativePath, filePath,
-                                                  m_mimeType, "");
+    auto result = m_document->openDocument(m_systemRelativePath, filePath,
+                                           m_mimeType, "");
     
-    if(result != Document::OpenSuccess)
-        return false;
-    
-    return true;
+    return result == Document::OpenSuccess;
 }
 
-QString BookInfoHelper::getTitle()
+QString BookInfoHelper::getTitle() const
 {
-    QString title = m_currentDocument->documentInfo().get(DocumentInfo::Title);
-    if(title == "")
+    const QString& title = m_document->documentInfo().get(DocumentInfo::Title);
+    if(title.isEmpty())
     {
-        auto lastIndexOfSlash = m_systemRelativePath.lastIndexOf("/");
-        auto lastIndexOfDot = m_systemRelativePath.lastIndexOf(".");
-        
-        if(lastIndexOfDot == -1)
-            return m_systemRelativePath.mid(lastIndexOfSlash + 1);
-        
-        title = m_systemRelativePath.mid(lastIndexOfSlash + 1, 
-                                         lastIndexOfDot - lastIndexOfSlash - 1);
+        return parseTitleFromPath(m_systemRelativePath);
     }
     
     return title;
 }
 
-void BookInfoHelper::getCover()
+void BookInfoHelper::getCover() const
 {
-    QSize coverSize = getCoverSize();
+    auto coverSize = getCoverSize();
     auto request = new PixmapRequest(m_observer.get(), 0, coverSize.width(),
                                      coverSize.height(), 1, 1, PixmapRequest::NoFeature);
     
-    m_currentDocument->requestPixmaps({request});
+    m_document->requestPixmaps({request});
 }
 
-QString BookInfoHelper::getAuthor()
+QString BookInfoHelper::getAuthor() const
 {
-    QString author = m_currentDocument->documentInfo().get(DocumentInfo::Author);
+    const QString& author = m_document->documentInfo().get(DocumentInfo::Author);
     return author;
 }
 
-QSize BookInfoHelper::getCoverSize()
+QSize BookInfoHelper::getCoverSize() const
 {
-    const auto& coverPage = m_currentDocument->page(0);
+    const auto& coverPage = m_document->page(0);
     
     QSize size;
-    if(m_maxCoverWidth*coverPage->ratio() <= m_maxCoverHeight)
+    if(m_maxCoverWidth * coverPage->ratio() <= m_maxCoverHeight)
     {
-        size.setHeight(m_maxCoverWidth*coverPage->ratio());
+        size.setHeight(m_maxCoverWidth * coverPage->ratio());
         size.setWidth(m_maxCoverWidth);
     }
     else
     {
         size.setHeight(m_maxCoverHeight);
-        size.setWidth(m_maxCoverHeight/coverPage->ratio());
+        size.setWidth(m_maxCoverHeight / coverPage->ratio());
     }
     
     return size;
 }
 
-QString BookInfoHelper::getSystemRelativePath(const QString& qPath)
+QString BookInfoHelper::getSystemRelativePath(const QString& qPath) const
 {
     QString prefix = "file://";
     return qPath.mid(prefix.size());
+}
+
+QString BookInfoHelper::parseTitleFromPath(const QString& path) const
+{
+    auto indexOfLastSlash = path.lastIndexOf("/");
+    auto indexOfLastDot = path.lastIndexOf(".");
+    
+    if(indexOfLastDot == -1)
+        return m_systemRelativePath.mid(indexOfLastSlash + 1);
+    
+    auto result = m_systemRelativePath.mid(indexOfLastSlash + 1, 
+                                           indexOfLastDot - indexOfLastSlash - 1);
+    
+    return result;
 }
 
 void BookInfoHelper::proccessBookCoverPixmap(int page, int flag)
@@ -106,8 +111,9 @@ void BookInfoHelper::proccessBookCoverPixmap(int page, int flag)
     if(page != 0 || flag != DocumentObserver::Pixmap)
         return;
     
-    const QPixmap* coverPixmap = m_currentDocument->page(0)->
-                                 getPixmap(m_observer.get(), 100, 100);
+    auto coverPixmap = m_document->page(0)->getPixmap(m_observer.get(),
+                                                      m_maxCoverWidth,
+                                                      m_maxCoverHeight);
     
     if(coverPixmap)
         emit bookCoverGenerated(coverPixmap);

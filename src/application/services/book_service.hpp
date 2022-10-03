@@ -1,8 +1,7 @@
 #pragma once
+#include <QPixmap>
 #include "i_book_info_helper.hpp"
 #include "i_book_service.hpp"
-
-#include <QPixmap>
 
 
 namespace application::services

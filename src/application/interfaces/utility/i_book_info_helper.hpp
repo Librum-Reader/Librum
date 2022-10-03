@@ -15,9 +15,9 @@ public:
     virtual ~IBookInfoHelper() noexcept = default;
     
     virtual bool setupDocument(const QString& filePath) = 0;
-    virtual QString getTitle() = 0;
-    virtual QString getAuthor() = 0;
-    virtual void getCover() = 0;
+    virtual QString getTitle() const = 0;
+    virtual QString getAuthor() const = 0;
+    virtual void getCover() const = 0;
     
 signals:
     void bookCoverGenerated(const QPixmap* pixmal);
