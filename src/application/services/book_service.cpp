@@ -24,7 +24,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     QString title = m_bookInfoManager->getTitle();
     QString author = m_bookInfoManager->getAuthor();
     QString authorResult = author == "" ? 
-                               "Unknown" : author;
+                               "Unknown Author" : author;
     
     auto book = getBookByTitle(title);
     if(book)

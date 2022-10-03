@@ -42,14 +42,17 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case TitleRole:
         return book.title();
         break;
+    case AuthorRole:
+        return book.author();
+        break;
+    case FilePathRole:
+        return book.filePath();
+        break;
     case CoverRole:
         buffer.open(QIODevice::WriteOnly);
         book.cover().save(&buffer, "png");
         base64 = QString::fromUtf8(byteArray.toBase64());
         return QString("data:image/png;base64,") + base64;
-        break;
-    case FilePathRole:
-        return book.filePath();
         break;
     default:
         return QVariant();
@@ -61,8 +64,9 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
     static QHash<int, QByteArray> roles
     {
         {TitleRole, "title"},
-        {CoverRole, "cover"},
-        {FilePathRole, "filePath"}
+        {AuthorRole, "author"},
+        {FilePathRole, "filePath"},
+        {CoverRole, "cover"}
     };
     
     return roles;

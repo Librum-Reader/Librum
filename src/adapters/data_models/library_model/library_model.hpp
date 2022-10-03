@@ -17,8 +17,9 @@ public:
     enum Roles
     {
         TitleRole = Qt::UserRole,
+        AuthorRole,
+        FilePathRole,
         CoverRole,
-        FilePathRole
     };
     
     LibraryModel(const std::vector<domain::models::Book>& data);

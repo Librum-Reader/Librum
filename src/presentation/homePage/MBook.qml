@@ -94,10 +94,11 @@ Item
                 {
                     id: authorName
                     Layout.fillWidth: true
-                    Layout.topMargin: 4
-                    text: "Stephen R. Covey"
+                    Layout.topMargin: 6
+                    text: author
                     color: Style.colorLightText
                     font.pointSize: 10
+                    elide: Text.ElideRight
                 }
                 
                 RowLayout
@@ -111,7 +112,7 @@ Item
                         id: percentageBox
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
-                        Layout.topMargin: 7
+                        Layout.topMargin: 4
                         color: Style.colorLightPurple2
                         radius: 2
                         
