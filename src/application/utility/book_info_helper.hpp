@@ -33,7 +33,7 @@ private:
     QString m_systemRelativePath;
     QMimeType m_mimeType;
     const int m_maxCoverWidth = 188;
-    const int m_maxCoverHeight = 240;
+    const int m_maxCoverHeight = 238;
 };
 
 } // namespace application::utility
