@@ -1,6 +1,6 @@
 #pragma once
 #include "i_book_info_helper.hpp"
-#include <QMimeDatabase>
+#include <QMimeType>
 #include "document.h"
 #include "cover_observer.hpp"
 
@@ -15,8 +15,10 @@ class BookInfoHelper : public IBookInfoHelper
 public:
     BookInfoHelper();
     
-    QString parseBookTitleFromFilePath(const QString& filePath) override;
-    void getBookCover(const QString& filePath) override;
+    bool setupDocument(const QString& filePath) override;
+    QString getTitle() override;
+    QString getAuthor() override;
+    void getCover() override;
     
 private slots:
     void proccessBookCoverPixmap(int page, int flag);
@@ -27,7 +29,8 @@ private:
     
     std::unique_ptr<Okular::Document> m_currentDocument;
     std::unique_ptr<CoverObserver> m_observer;
-    QMimeDatabase m_mimeDb;
+    QString m_systemRelativePath;
+    QMimeType m_mimeType;
     const int m_maxCoverWidth = 188;
     const int m_maxCoverHeight = 240;
 };

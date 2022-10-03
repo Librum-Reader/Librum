@@ -1,6 +1,8 @@
 #include "book_info_helper.hpp"
 #include <memory>
 #include <QSize>
+#include <QMimeDatabase>
+#include "document.h"
 #include "generator.h"
 #include "observer.h"
 #include "page.h"
@@ -25,37 +27,48 @@ BookInfoHelper::BookInfoHelper()
 }
 
 
-QString BookInfoHelper::parseBookTitleFromFilePath(const QString& filePath)
+bool BookInfoHelper::setupDocument(const QString& filePath)
 {
-    auto lastIndexOfSlash = filePath.lastIndexOf("/");
-    auto lastIndexOfDot = filePath.lastIndexOf(".");
+    QMimeDatabase mimeDb;
+    m_systemRelativePath = getSystemRelativePath(filePath);
+    m_mimeType = mimeDb.mimeTypeForUrl(filePath);
+    
+    m_currentDocument->closeDocument();
+    auto result = m_currentDocument->openDocument(m_systemRelativePath, filePath,
+                                                  m_mimeType, "");
+    
+    if(result != Document::OpenSuccess)
+        return false;
+    
+    return true;
+}
+
+QString BookInfoHelper::getTitle()
+{
+    auto lastIndexOfSlash = m_systemRelativePath.lastIndexOf("/");
+    auto lastIndexOfDot = m_systemRelativePath.lastIndexOf(".");
     
     if(lastIndexOfDot == -1)
-        return filePath.mid(lastIndexOfSlash + 1);
+        return m_systemRelativePath.mid(lastIndexOfSlash + 1);
     
-    auto result = filePath.mid(lastIndexOfSlash + 1, 
-                               lastIndexOfDot - lastIndexOfSlash - 1);
+    auto result = m_systemRelativePath.mid(lastIndexOfSlash + 1, 
+                                           lastIndexOfDot - lastIndexOfSlash - 1);
     return result;
 }
 
-
-void BookInfoHelper::getBookCover(const QString& filePath)
+void BookInfoHelper::getCover()
 {
-    auto systemPath = getSystemRelativePath(filePath);
-    auto mimeType = m_mimeDb.mimeTypeForUrl(filePath);
-    
-    m_currentDocument->closeDocument();
-    auto result = m_currentDocument->openDocument(systemPath, filePath,
-                                                  mimeType, "");
-    if(result != Document::OpenSuccess)
-        emit gettingBookCoverFailed();
-    
-    
     QSize coverSize = getCoverSize();
     auto request = new PixmapRequest(m_observer.get(), 0, coverSize.width(),
                                      coverSize.height(), 1, 1, PixmapRequest::NoFeature);
     
     m_currentDocument->requestPixmaps({request});
+}
+
+QString BookInfoHelper::getAuthor()
+{
+    QString title = m_currentDocument->documentInfo().get(DocumentInfo::Author);
+    return title;
 }
 
 QSize BookInfoHelper::getCoverSize()
@@ -76,7 +89,6 @@ QSize BookInfoHelper::getCoverSize()
     
     return size;
 }
-
 
 QString BookInfoHelper::getSystemRelativePath(const QString& qPath)
 {

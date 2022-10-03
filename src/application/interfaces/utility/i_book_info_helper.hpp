@@ -14,8 +14,10 @@ class IBookInfoHelper : public QObject
 public:
     virtual ~IBookInfoHelper() noexcept = default;
     
-    virtual QString parseBookTitleFromFilePath(const QString& filePath) = 0;
-    virtual void getBookCover(const QString& filePath) = 0;
+    virtual bool setupDocument(const QString& filePath) = 0;
+    virtual QString getTitle() = 0;
+    virtual QString getAuthor() = 0;
+    virtual void getCover() = 0;
     
 signals:
     void bookCoverGenerated(const QPixmap* pixmal);

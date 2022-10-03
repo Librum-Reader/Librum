@@ -12,11 +12,14 @@ namespace domain::models
 class Book
 {
 public:
-    Book(const QString& title, const QString& localPath = "",
-         const QImage& cover = QImage());
+    Book(const QString& title, const QString& author,
+         const QString& localPath, const QImage& cover = QImage());
     
     const QString& title() const;
     void setTitle(const QString& newTitle);
+    
+    const QString& author() const;
+    void setAuthor(const QString& newAuthor);
     
     const QString& filePath() const;
     void setFilePath(const QString& newLocalPath);
@@ -34,6 +37,7 @@ private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
     
     QString m_title;
+    QString m_author;
     QString m_filePath;
     QImage m_cover;
     std::vector<Tag> m_tags;

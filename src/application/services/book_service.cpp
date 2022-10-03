@@ -18,19 +18,27 @@ BookService::BookService(IBookInfoHelper* bookInfoManager)
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    QString title = m_bookInfoManager->parseBookTitleFromFilePath(filePath);
+    if(!m_bookInfoManager->setupDocument(filePath))
+        return BookOperationStatus::OpeningBookFailed;
+    
+    QString title = m_bookInfoManager->getTitle();
+    QString author = m_bookInfoManager->getAuthor();
+    QString authorResult = author == "" ? 
+                               "Unknown" : author;
     
     auto book = getBookByTitle(title);
     if(book)
         return BookOperationStatus::BookAlreadyExists;
     
+    
     emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(title, filePath);
+    m_books.emplace_back(title, authorResult, filePath);
     emit bookInsertionEnded();
+    
     
     QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
                      this, &BookService::storeBookCover);
-    m_bookInfoManager->getBookCover(filePath);
+    m_bookInfoManager->getCover();
     
     return BookOperationStatus::Success;
 }

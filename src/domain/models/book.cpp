@@ -5,8 +5,9 @@
 namespace domain::models
 {
 
-Book::Book(const QString& title, const QString& path, const QImage& cover)
-    : m_title(title), m_filePath(path), m_cover(cover)
+Book::Book(const QString& title, const QString& author, 
+           const QString& path, const QImage& cover)
+    : m_title(title), m_author(author), m_filePath(path), m_cover(cover)
 {
 }
 
@@ -19,6 +20,16 @@ const QString& Book::title() const
 void Book::setTitle(const QString& newTitle)
 {
     m_title = newTitle;
+}
+
+const QString& Book::author() const
+{
+    return m_author;
+}
+
+void Book::setAuthor(const QString& newAuthor)
+{
+    m_author = newAuthor;
 }
 
 const QString& Book::filePath() const
