@@ -23,8 +23,6 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     
     QString title = m_bookInfoManager->getTitle();
     QString author = m_bookInfoManager->getAuthor();
-    QString authorResult = author == "" ? 
-                               "Unknown Author" : author;
     
     auto book = getBookByTitle(title);
     if(book)
@@ -32,7 +30,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     
     
     emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(title, authorResult, filePath);
+    m_books.emplace_back(title, author, filePath);
     emit bookInsertionEnded();
     
     
