@@ -93,7 +93,7 @@ ApplicationWindow
     {
         if(pageManager.currentItem instanceof MSettings)
         {
-            if(!pageManager.currentItem.ensureSettingsPageIsSaved(switchPage, page, sidebarItem))
+            if(!pageManager.currentItem.saveSettingsPage(switchPage, page, sidebarItem))
                 return false;
         }
         
