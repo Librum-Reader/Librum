@@ -19,52 +19,67 @@ using namespace domain;
 class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
-    MOCK_METHOD(QString, parseBookTitleFromFilePath, (const QString& filePath), (override));
-    MOCK_METHOD(void, getBookCover, (const QString& filePath), (override));
+    MOCK_METHOD(bool, setupDocument, (const QString& filePath), (override));
+    MOCK_METHOD(QString, getTitle, (), (override));
+    MOCK_METHOD(void, getCover, (), (override));
+    MOCK_METHOD(QString, getAuthor, (), (override));
+};
+
+
+struct ABookService : public ::testing::Test
+{
+    void SetUp() override
+    {
+        // Default actions
+        EXPECT_CALL(bookInfoHelperMock, setupDocument(_))
+                .WillRepeatedly(Return(true));
+        
+        EXPECT_CALL(bookInfoHelperMock, getTitle())
+                .WillRepeatedly(Return("SomeTitle"));
+        
+        EXPECT_CALL(bookInfoHelperMock, getAuthor())
+                .WillRepeatedly(Return("SomeAuthor"));
+        
+        EXPECT_CALL(bookInfoHelperMock, getCover())
+                .WillRepeatedly(Return());
+        
+        
+        bookService = std::make_unique<BookService>(&bookInfoHelperMock);
+    }
+    
+    BookInfoHelperMock bookInfoHelperMock;
+    std::unique_ptr<BookService> bookService;
 };
 
 
 
-
-TEST(ABookService, SucceedsAddingABook)
+TEST_F(ABookService, SucceedsAddingABook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     auto expectedResult = BookOperationStatus::Success;
     
-    
-    // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
-            .Times(1)
-            .WillOnce(Return("SomeBook"));
-    
     // Act
-    auto result = bookService.addBook("some/path.pdf");
+    auto result = bookService->addBook("some/path.pdf");
     
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
+TEST_F(ABookService, FailsAddingABookIfBookAlreadyExists)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     auto expectedResult = BookOperationStatus::BookAlreadyExists;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(2)
-            .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
+            .WillRepeatedly(Return("SomeBook"));  // Returns the same title twice
     
     
     // Act
-    bookService.addBook("some/first.pdf");  // First time added
-    auto result = bookService.addBook("some/second.pdf");  // Second time added
+    bookService->addBook("some/first.pdf");  // First time added
+    auto result = bookService->addBook("some/second.pdf");  // Second time added
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -72,52 +87,47 @@ TEST(ABookService, FailsAddingABookIfBookAlreadyExists)
 
 
 
-TEST(ABookService, SucceedsDeletingABook)
+TEST_F(ABookService, SucceedsDeletingABook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString bookTitle = "SomeBook";
     
     auto expectedResult = BookOperationStatus::Success;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(2)
             .WillOnce(Return(bookTitle))
             .WillOnce(Return("SomeOtherBook"));
     
     // Act
-    bookService.addBook("some/path.pdf");
-    bookService.addBook("some/other/path.pdf");
-    auto previousBookCount = bookService.getBookCount();
+    bookService->addBook("some/path.pdf");
+    bookService->addBook("some/other/path.pdf");
+    auto previousBookCount = bookService->getBookCount();
     
-    auto result = bookService.deleteBook(bookTitle);
+    auto result = bookService->deleteBook(bookTitle);
     
     // Assert
     EXPECT_EQ(expectedResult, result);
-    EXPECT_EQ(previousBookCount -1 , bookService.getBookCount());
+    EXPECT_EQ(previousBookCount - 1, bookService->getBookCount());
 }
 
-TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
+TEST_F(ABookService, FailsDeletingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
-    auto expectedResult = BookOperationStatus::BookAlreadyExists;
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
-            .Times(2)
-            .WillRepeatedly(Return("SomeBook"));  // Always returns the same title
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
+            .Times(1)
+            .WillOnce(Return("SomeBook"));
     
     // Act
-    bookService.addBook("some/first.pdf");  // First time added
-    auto result = bookService.addBook("some/second.pdf");  // Second time added
+    bookService->addBook("some/first.pdf");
+    
+    auto result = bookService->deleteBook("SomeNonExistentBook");
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -125,35 +135,32 @@ TEST(ABookService, FailsDeletingABookIfBookDoesNotExist)
 
 
 
-TEST(ABookService, SucceedsUpdatingABook)
+TEST_F(ABookService, SucceedsUpdatingABook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString originalBookTitle = "SomeBook";
     
     models::Tag firstTag("FirstTag");
     models::Tag secondTag("SecondTag");
-    models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdaedPath", 
-                                   QImage("SomeUpdatedCover"));
-    bookToUpdateWidth.addTag(firstTag);
-    bookToUpdateWidth.addTag(secondTag);
+    models::Book bookToUpdateWith("SomeUpdatedTitle", "SomeUpdatedAuthor",
+                                   "SomeUpdaedPath", QImage("SomeUpdatedCover"));
+    bookToUpdateWith.addTag(firstTag);
+    bookToUpdateWith.addTag(secondTag);
     
     auto expectedStatus = BookOperationStatus::Success;
-    auto expectedResult = bookToUpdateWidth;
+    auto expectedResult = bookToUpdateWith;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(1)
             .WillOnce(Return(originalBookTitle));
     
     // Act
-    bookService.addBook("some/path.pdf");
+    bookService->addBook("some/path.pdf");
     
-    auto resultStatus = bookService.updateBook(originalBookTitle, bookToUpdateWidth);
-    auto result = bookService.getBook(bookToUpdateWidth.title());
+    auto resultStatus = bookService->updateBook(originalBookTitle, bookToUpdateWith);
+    auto result = bookService->getBook(bookToUpdateWith.title());
     
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
@@ -168,23 +175,20 @@ TEST(ABookService, SucceedsUpdatingABook)
     }
 }
 
-TEST(ABookService, FailsUpdatingABookIfBookDoesNotExist)
+TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString originalBookTitle = "SomeBook";
-    models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdaedPath", 
-                                   QImage("SomeUpdatedCover"));
+    models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdatedAuthor",
+                                   "SomeUpdaedPath", QImage("SomeUpdatedCover"));
     
     auto expectedStatus = BookOperationStatus::BookDoesNotExist;
     auto expectedResult = bookToUpdateWidth;
     
     
     // Act
-    auto resultStatus = bookService.updateBook(originalBookTitle, bookToUpdateWidth);
-    auto result = bookService.getBook(bookToUpdateWidth.title());
+    auto resultStatus = bookService->updateBook(originalBookTitle, bookToUpdateWidth);
+    auto result = bookService->getBook(bookToUpdateWidth.title());
     
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
@@ -193,27 +197,25 @@ TEST(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 
 
 
-TEST(ABookService, SucceedsGettingABook)
+TEST_F(ABookService, SucceedsGettingABook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString title = "SomeBook";
+    QString author = "SomeAuthor";
     QString path = "some/path.pdf";
     QImage cover("SomeCover");
     
-    models::Book expectedResult(title, path, cover);
+    models::Book expectedResult(title, author, path, cover);
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(1)
             .WillOnce(Return(title));
     
     // Act
-    bookService.addBook(path);
-    auto result = bookService.getBook(title);
+    bookService->addBook(path);
+    auto result = bookService->getBook(title);
     
     // Assert
     EXPECT_EQ(expectedResult.title(), result->title());
@@ -225,19 +227,16 @@ TEST(ABookService, SucceedsGettingABook)
     }
 }
 
-TEST(ABookService, FailsGettingABookIfBookDoesNotExist)
+TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString title = "SomeBook";
     
     auto expectedResult = nullptr;
     
     
     // Act
-    auto result = bookService.getBook(title);
+    auto result = bookService->getBook(title);
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -245,13 +244,9 @@ TEST(ABookService, FailsGettingABookIfBookDoesNotExist)
 
 
 
-TEST(ABookService, SucceedsAddingATag)
+TEST_F(ABookService, SucceedsAddingATag)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
-
     QString bookTitle = "SomeBook";
     
     models::Tag firstTag("FirstTag");
@@ -260,17 +255,17 @@ TEST(ABookService, SucceedsAddingATag)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(1)
             .WillOnce(Return(bookTitle));
     
     // Act
-    bookService.addBook("some/path.pdf");
+    bookService->addBook("some/path.pdf");
     
-    auto firstResultStatus = bookService.addTag(bookTitle, firstTag);
-    auto secondResultStatus = bookService.addTag(bookTitle, secondTag);
+    auto firstResultStatus = bookService->addTag(bookTitle, firstTag);
+    auto secondResultStatus = bookService->addTag(bookTitle, secondTag);
     
-    auto result = bookService.getBook(bookTitle);
+    auto result = bookService->getBook(bookTitle);
     
     // Assert
     EXPECT_EQ(expectedResultStatus, firstResultStatus);
@@ -280,13 +275,9 @@ TEST(ABookService, SucceedsAddingATag)
     EXPECT_EQ(secondTag, result->tags()[1]);
 }
 
-TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
+TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
-
     QString bookTitle = "SomeBook";
     
     models::Tag tag("FirstTag");
@@ -294,35 +285,31 @@ TEST(ABookService, FailsAddingATagIfTagAlreadyExists)
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(1)
             .WillOnce(Return(bookTitle));
     
     // Act
-    bookService.addBook("some/path.pdf");
+    bookService->addBook("some/path.pdf");
     
-    bookService.addTag(bookTitle, tag);
-    auto result = bookService.addTag(bookTitle, tag);
+    bookService->addTag(bookTitle, tag);
+    auto result = bookService->addTag(bookTitle, tag);
     
     
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST(ABookService, FailsAddingATagIfBookDoesNotExist)
+TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
-
     QString bookTitle = "SomeBook";
     
     models::Tag firstTag("FirstTag");
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     
-    auto result = bookService.addTag(bookTitle, firstTag);
+    auto result = bookService->addTag(bookTitle, firstTag);
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -330,42 +317,36 @@ TEST(ABookService, FailsAddingATagIfBookDoesNotExist)
 
 
 
-TEST(ABookService, SucceedsSettingTheCurrentBook)
+TEST_F(ABookService, SucceedsSettingTheCurrentBook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString bookTitle = "SomeBook";
     
     auto expectedResult = BookOperationStatus::Success;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(1)
             .WillOnce(Return("SomeBook"));
     
     // Act
-    bookService.addBook("some/path.pdf");
+    bookService->addBook("some/path.pdf");
     
-    auto result = bookService.setCurrentBook(bookTitle);
+    auto result = bookService->setCurrentBook(bookTitle);
     
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST(ABookService, FailsSettingTheCurrentBookIfTheBookDoesNotExist)
+TEST_F(ABookService, FailsSettingTheCurrentBookIfTheBookDoesNotExist)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     
     // Act
-    auto result = bookService.setCurrentBook("NonExistentBook");
+    auto result = bookService->setCurrentBook("NonExistentBook");
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -373,38 +354,36 @@ TEST(ABookService, FailsSettingTheCurrentBookIfTheBookDoesNotExist)
 
 
 
-TEST(ABookService, SucceedsGettingTheCurrentBook)
+TEST_F(ABookService, SucceedsGettingTheCurrentBook)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     QString bookTitle = "SomeBook";
+    QString bookAuthor = "SomeAuthor";
     QString bookPath = "some/book.pdf";
     QImage bookCover("SomeBook");
     
     models::Tag firstTag("FirstTag");
     models::Tag secondTag("SecondTag");
-    models::Book expectedResult(bookTitle, bookPath, bookCover);
+    models::Book expectedResult(bookTitle, bookAuthor, bookPath, bookCover);
     expectedResult.addTag(firstTag);
     expectedResult.addTag(secondTag);
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(2)
             .WillOnce(Return("SomeRandomBook"))
             .WillOnce(Return(bookTitle));
     
     // Act
-    bookService.addBook("random/book/path.pdf");
-    bookService.addBook(bookPath);
-    bookService.addTag(bookTitle, firstTag);
-    bookService.addTag(bookTitle, secondTag);
+    bookService->addBook("random/book/path.pdf");
+    bookService->addBook(bookPath);
+    bookService->addTag(bookTitle, firstTag);
+    bookService->addTag(bookTitle, secondTag);
     
-    bookService.setCurrentBook(bookTitle);
+    bookService->setCurrentBook(bookTitle);
     
-    auto result = bookService.getCurrentBook();
+    auto result = bookService->getCurrentBook();
     
     // Assert
     EXPECT_EQ(expectedResult.title(), result->title());
@@ -416,77 +395,75 @@ TEST(ABookService, SucceedsGettingTheCurrentBook)
     }
 }
 
-TEST(ABookService, FailsGettingTheCurrentBookIfNoCurrentBookExists)
+TEST_F(ABookService, FailsGettingTheCurrentBookIfNoCurrentBookExists)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     auto expectedResult = nullptr;
     
     
     // Act
-    auto result = bookService.getCurrentBook();
+    auto result = bookService->getCurrentBook();
     
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
 
 
-TEST(ABookService, SucceedsGettingAllBooks)
+TEST_F(ABookService, SucceedsGettingAllBooks)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
-    models::Book firstBook("FirstBook", "FirstFilePath", QImage("FirstCover"));
-    models::Book secondBook("SecondBook", "SecondFilePath", QImage("SecondCover"));
-    models::Book thirdBook("ThirdBook", "ThirdFilePath", QImage("ThirdCover"));
+    models::Book firstBook("FirstBook", "Author1", "FirstFilePath", QImage("FirstCover"));
+    models::Book secondBook("SecondBook", "Author2", "SecondFilePath", QImage("SecondCover"));
+    models::Book thirdBook("ThirdBook", "Author3", "ThirdFilePath", QImage("ThirdCover"));
     std::vector<models::Book> expectedResult { firstBook, secondBook, thirdBook };
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(3)
             .WillOnce(Return(firstBook.title()))
             .WillOnce(Return(secondBook.title()))
             .WillOnce(Return(thirdBook.title()));
     
-    // Act
-    bookService.addBook(firstBook.filePath());
-    bookService.addBook(secondBook.filePath());
-    bookService.addBook(thirdBook.filePath());
+    EXPECT_CALL(bookInfoHelperMock, getAuthor())
+            .Times(3)
+            .WillOnce(Return(firstBook.author()))
+            .WillOnce(Return(secondBook.author()))
+            .WillOnce(Return(thirdBook.author()));
     
-    auto results = bookService.getBooks();
+    // Act
+    bookService->addBook(firstBook.filePath());
+    bookService->addBook(secondBook.filePath());
+    bookService->addBook(thirdBook.filePath());
+    
+    auto results = bookService->getBooks();
     
     // Assert
     for(int i = 0; i < expectedResult.size(); ++i)
     {
         EXPECT_EQ(expectedResult[i].title(), results[i].title());
+        EXPECT_EQ(expectedResult[i].author(), results[i].author());
         EXPECT_EQ(expectedResult[i].filePath(), results[i].filePath());
     }
 }
 
-TEST(ABookService, SucceedsGettingTheBookCount)
+TEST_F(ABookService, SucceedsGettingTheBookCount)
 {
     // Arrange
-    BookInfoHelperMock bookInfoManagerMock;
-    application::services::BookService bookService(&bookInfoManagerMock);
-    
     auto expectedResult = 2;
     
     
     // Expect
-    EXPECT_CALL(bookInfoManagerMock, parseBookTitleFromFilePath(_))
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
             .Times(2)
             .WillOnce(Return("SomeBook"))
             .WillOnce(Return("SomeOtherBook"));
     
     // Act
-    bookService.addBook("some/path.pdf");
-    bookService.addBook("some/other/path.pdf");
+    bookService->addBook("some/path.pdf");
+    bookService->addBook("some/other/path.pdf");
     
-    auto result = bookService.getBookCount();
+    auto result = bookService->getBookCount();
     
     // Assert
     EXPECT_EQ(expectedResult, result);
