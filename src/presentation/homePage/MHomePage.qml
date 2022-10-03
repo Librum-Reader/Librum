@@ -25,6 +25,19 @@ Page
     background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
     
+    Connections
+    {
+        id: emptyLibraryUpdater
+        target: BookController.libraryModel
+        
+        
+        function onRowsRemoved(index, first, last)
+        {
+            root.empty = BookController.libraryModel.rowCount() === 0
+        }
+    }
+    
+    
     Shortcut
     {
         sequence: StandardKey.New
@@ -351,7 +364,5 @@ Page
                 console.log("Error loading file!");
             }
         }
-        
-        onRejected: root.empty = false
     }
 }
