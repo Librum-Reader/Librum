@@ -45,15 +45,20 @@ bool BookInfoHelper::setupDocument(const QString& filePath)
 
 QString BookInfoHelper::getTitle()
 {
-    auto lastIndexOfSlash = m_systemRelativePath.lastIndexOf("/");
-    auto lastIndexOfDot = m_systemRelativePath.lastIndexOf(".");
+    QString title = m_currentDocument->documentInfo().get(DocumentInfo::Title);
+    if(title == "")
+    {
+        auto lastIndexOfSlash = m_systemRelativePath.lastIndexOf("/");
+        auto lastIndexOfDot = m_systemRelativePath.lastIndexOf(".");
+        
+        if(lastIndexOfDot == -1)
+            return m_systemRelativePath.mid(lastIndexOfSlash + 1);
+        
+        title = m_systemRelativePath.mid(lastIndexOfSlash + 1, 
+                                         lastIndexOfDot - lastIndexOfSlash - 1);
+    }
     
-    if(lastIndexOfDot == -1)
-        return m_systemRelativePath.mid(lastIndexOfSlash + 1);
-    
-    auto result = m_systemRelativePath.mid(lastIndexOfSlash + 1, 
-                                           lastIndexOfDot - lastIndexOfSlash - 1);
-    return result;
+    return title;
 }
 
 void BookInfoHelper::getCover()
@@ -67,8 +72,8 @@ void BookInfoHelper::getCover()
 
 QString BookInfoHelper::getAuthor()
 {
-    QString title = m_currentDocument->documentInfo().get(DocumentInfo::Author);
-    return title;
+    QString author = m_currentDocument->documentInfo().get(DocumentInfo::Author);
+    return author;
 }
 
 QSize BookInfoHelper::getCoverSize()
