@@ -56,7 +56,7 @@ Page
         
         Component.onCompleted: 
         {
-            documentItem.url = Globals.currentBookPath;
+            documentItem.url = Globals.selectedBook.filePath;
         }
     }
     

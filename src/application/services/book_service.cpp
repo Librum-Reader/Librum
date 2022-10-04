@@ -48,13 +48,13 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    auto posOfBook = std::ranges::find_if(m_books, [&title] (const Book& book) {
+    auto bookPosition = std::ranges::find_if(m_books, [&title] (const Book& book) {
         return book.getTitle() == title;
     });
     
-    size_t index = posOfBook - m_books.begin();
+    size_t index = bookPosition - m_books.begin();
     emit bookDeletionStarted(index);
-    m_books.erase(posOfBook);
+    m_books.erase(bookPosition);
     emit bookDeletionEnded();
     
     return BookOperationStatus::Success;
@@ -81,6 +81,9 @@ BookOperationStatus BookService::addTag(const QString& title,
     if(!book->addTag(tag))
         return BookOperationStatus::TagAlreadyExists;
     
+    int index = getBookIndex(title);
+    emit tagsChanged(index);
+    
     return BookOperationStatus::Success;
 }
 
@@ -94,6 +97,9 @@ BookOperationStatus BookService::removeTag(const QString& title,
     if(!book->removeTag(tag))
         return BookOperationStatus::TagDoesNotExist;
     
+    int index = getBookIndex(title);
+    emit tagsChanged(index);
+    
     return BookOperationStatus::Success;
 }
 
@@ -105,6 +111,15 @@ const std::vector<Book>& BookService::getBooks() const
 const Book* BookService::getBook(const QString& title) const
 {
     return getBookByTitle(title);
+}
+
+int BookService::getBookIndex(const QString& title) const
+{
+    auto* book = getBookByTitle(title);
+    std::vector<Book>::const_iterator bookPosition(book);
+    size_t index = bookPosition - m_books.begin();
+    
+    return index;
 }
 
 int BookService::getBookCount() const

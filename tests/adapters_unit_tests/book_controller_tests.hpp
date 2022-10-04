@@ -32,6 +32,7 @@ public:
     
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
+    MOCK_METHOD(int, getBookIndex, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
     
     MOCK_METHOD(BookOperationStatus, addTag, (const QString& title,
@@ -275,7 +276,7 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
 TEST_F(ABookController, SucceedsAddingATag)
 {
     // Arrange
-    dtos::TagDto tag{ .name = "SomeTag" };
+    QString tagName = "SomeTag";
     
     auto expectedResult = BookOperationStatus::Success;
     
@@ -285,7 +286,7 @@ TEST_F(ABookController, SucceedsAddingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", tag);
+    auto result = bookController->addTag("SomeTitle", tagName);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -294,7 +295,7 @@ TEST_F(ABookController, SucceedsAddingATag)
 TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
 {
     // Arrange
-    dtos::TagDto tag{ .name = "SomeTag" };
+    QString tagName = "SomeTag";
     
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
     
@@ -304,7 +305,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
             .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", tag);
+    auto result = bookController->addTag("SomeTitle", tagName);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);

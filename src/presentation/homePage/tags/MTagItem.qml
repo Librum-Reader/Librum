@@ -4,13 +4,13 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.globals 1.0
 
 
 Item
 {
     id: root
     required property int index
-    required property string text
     property bool selected: false
     signal removeTag(int index)
     
@@ -46,7 +46,7 @@ Item
                 Layout.fillWidth: true
                 Layout.leftMargin: 12
                 verticalAlignment: Text.AlignVCenter
-                text: root.text
+                text: Globals.bookTags[root.index].name
                 font.weight: root.selected ? Font.Medium : Font.Normal
                 font.pointSize: 12
                 color: Style.colorBaseText
@@ -67,7 +67,7 @@ Item
                 imagePath: currentlyPressed ? Icons.closePurple : Icons.closeGray
                 imageSize: 12
                 
-                onClicked: root.removeTag(root.index)
+                onClicked: root.removeTag(index)
             }
         }
     }

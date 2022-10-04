@@ -2,8 +2,10 @@
 #include <QDebug>
 #include <QByteArray>
 #include <QBuffer>
-#include <strings.h>
+#include <QString>
+#include <QList>
 #include "book.hpp"
+#include "tag_dto.hpp"
 
 
 using namespace domain::models;
@@ -37,6 +39,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     QBuffer buffer(&byteArray);
     QString base64;
     
+    QList<dtos::TagDto> tagDtos;
+    
     switch(role)
     {
     case TitleRole:
@@ -56,6 +60,14 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         base64 = QString::fromUtf8(byteArray.toBase64());
         return QString("data:image/png;base64,") + base64;
         break;
+    case TagsRole:
+        for(const auto& tag : book.getTags())
+        {
+            tagDtos.push_back(dtos::TagDto{ .name = tag.getName() });
+        }
+        
+        return QVariant::fromValue(tagDtos);
+        break;
     default:
         return QVariant();
     }
@@ -68,7 +80,8 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         {TitleRole, "title"},
         {AuthorRole, "author"},
         {FilePathRole, "filePath"},
-        {CoverRole, "cover"}
+        {CoverRole, "cover"},
+        {TagsRole, "tags"}
     };
     
     return roles;
@@ -81,6 +94,10 @@ void LibraryModel::processBookCover(int row)
     emit dataChanged(modelIndex, modelIndex, {CoverRole});
 }
 
+void LibraryModel::refreshTags(int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0), {TagsRole});
+}
 
 void LibraryModel::startInsertingRow(int index)
 {

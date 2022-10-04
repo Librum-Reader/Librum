@@ -115,7 +115,6 @@ Page
                 color: "transparent"
             }
             
-            
             GridView
             {
                 id: bookGrid
@@ -123,6 +122,7 @@ Page
                 property int bookHeight: 300
                 property int horizontalSpacing: 64
                 property int verticalSpacing: 48
+                property var xl : [1,2]
                 
                 anchors.fill: parent
                 cellWidth: bookWidth + horizontalSpacing
@@ -140,8 +140,7 @@ Page
                     
                     onLeftButtonClicked:
                     {
-                        Globals.currentBookPath = model.filePath;
-                        Globals.currentBookTitle = model.title;
+                        Globals.selectedBook = BookController.getBook(model.title);
                         loadPage(readingPage);
                     }
                     
@@ -150,28 +149,24 @@ Page
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
-                            
                             bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
-                            bookDel.setupBookOptionsPopup();
-                            bookOptionsPopup.open();
+                            bookDel.openBookOptions();
                         }
                     
                     onMoreOptionClicked:
                         (index, mouse) =>
                         {
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
-                            
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
-                            bookDel.setupBookOptionsPopup();
-                            bookOptionsPopup.open();
+                            bookDel.openBookOptions();
                         }
                     
-                    
-                    function setupBookOptionsPopup()
+                    function openBookOptions()
                     {
-                        bookOptionsPopup.bookFilePath = model.filePath;
-                        bookOptionsPopup.bookTitle = model.title;
+                        Globals.selectedBook = BookController.getBook(model.title);
+                        Globals.bookTags = Qt.binding(function () { return model.tags; });
+                        bookOptionsPopup.open();
                     }
                 }
                 
@@ -179,9 +174,6 @@ Page
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
-                    property string bookFilePath: ""
-                    property string bookTitle: ""
-                    
                     implicitHeight: 213
                     visible: false
                     
@@ -198,8 +190,6 @@ Page
                             onClicked:
                             {
                                 bookOptionsPopup.close();
-                                Globals.currentBookPath = bookOptionsPopup.bookFilePath;
-                                Globals.currentBookTitle = bookOptionsPopup.bookTitle;
                                 loadPage(readingPage);
                             }
                         }
@@ -276,7 +266,6 @@ Page
                             
                             onClicked:
                             {
-                                acceptDeletionPopup.book = bookOptionsPopup.bookTitle;
                                 acceptDeletionPopup.open();
                                 bookOptionsPopup.close();
                             }

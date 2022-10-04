@@ -28,6 +28,10 @@ BookController::BookController(application::IBookService* bookService)
     QObject::connect(m_bookService, &application::IBookService::bookDeletionEnded,
                      &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
     
+    // tags changed
+    QObject::connect(m_bookService, &application::IBookService::tagsChanged,
+                     &m_libraryModel, &data_models::LibraryModel::refreshTags);
+    
     // book cover processing
     QObject::connect(m_bookService, &application::IBookService::bookCoverGenerated,
                      &m_libraryModel, &data_models::LibraryModel::processBookCover);
@@ -89,9 +93,9 @@ int BookController::updateBook(const QString& title, const QVariantMap& operatio
     return static_cast<int>(BookOperationStatus::Success);
 }
 
-int BookController::addTag(const QString& title, const dtos::TagDto& tag)
+int BookController::addTag(const QString& title, const QString& tagName)
 {
-    Tag tagToAdd(tag.name);
+    Tag tagToAdd(tagName);
     if(m_bookService->addTag(title, tagToAdd) == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;

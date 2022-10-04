@@ -5,12 +5,12 @@ import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.controllers 1.0
+import Librum.globals 1.0
 
 
 Popup
 {
     id: root
-    property string book: ""
     property var saveMethod
     property var dontSaveMethod
     signal decisionMade
@@ -177,7 +177,7 @@ Popup
     
     function deleteMethod()
     {
-        let result = BookController.deleteBook(root.book);
+        let result = BookController.deleteBook(Globals.selectedBook.title);
         if(result !== BookOperationStatus.Success)
         {
             console.log("Book deletion failed");

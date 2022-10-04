@@ -4,6 +4,8 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
+import Librum.globals 1.0
 
 
 Popup
@@ -25,7 +27,11 @@ Popup
         opacity: 1
     }
     
-    onOpened: addTagBox.giveFocus()
+    onOpened: 
+    {
+        addTagBox.giveFocus();
+        informationLabel.text = Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
+    }
     
     
     MFlickWrapper
@@ -77,7 +83,7 @@ Popup
                 Layout.topMargin: 46
                 Layout.fillWidth: true
                 
-                onAddTag: (name) => tags.append({"text": name})
+                onAddTag: (name) => BookController.addTag(Globals.selectedBook.title, name)
             }
             
             
@@ -87,7 +93,6 @@ Popup
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 Layout.leftMargin: 1
-                text: tags.count + " TAGS  -  Clean architecture, a simple guide"
                 color: Style.colorLightText
                 font.pointSize: 9.5
                 font.weight: Font.Medium
@@ -119,19 +124,15 @@ Popup
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 ScrollBar.vertical: ScrollBar {}
-                
-                model: ListModel
-                {
-                    id: tags
-                    ListElement { text: "Technology" }
-                    ListElement { text: "Favourite" }
-                }
-                
+                model: Globals.bookTags
                 delegate: MTagItem
                 {
                     width: listView.width
                     
-                    onRemoveTag: (index) => tags.remove(index)
+                    onRemoveTag: (index) => 
+                                 {
+                                     BookController.removeTag(Globals.selectedBook.title, Globals.bookTags[index].name);
+                                 }
                 }
             }
             

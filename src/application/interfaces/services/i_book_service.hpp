@@ -23,6 +23,7 @@ public:
     
     virtual const std::vector<domain::models::Book>& getBooks() const = 0;
     virtual const domain::models::Book* getBook(const QString& title) const = 0;
+    virtual int getBookIndex(const QString& title) const = 0;
     virtual int getBookCount() const = 0;
     
     virtual BookOperationStatus addTag(const QString& title,
@@ -36,6 +37,7 @@ signals:
     void bookInsertionEnded();
     void bookDeletionStarted(int index);
     void bookDeletionEnded();
+    void tagsChanged(int index);
 };
 
 } // namespace application

@@ -26,6 +26,7 @@ public:
         
     const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QString& title) const override;
+    int getBookIndex(const QString& title) const override;
     int getBookCount() const override;
     
 private slots:

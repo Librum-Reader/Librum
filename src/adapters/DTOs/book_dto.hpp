@@ -3,6 +3,7 @@
 #include <QString>
 #include <QList>
 #include <QImage>
+#include <QVariant>
 #include "tag_dto.hpp"
 
 

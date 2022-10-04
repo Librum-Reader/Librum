@@ -20,6 +20,7 @@ public:
         AuthorRole,
         FilePathRole,
         CoverRole,
+        TagsRole
     };
     
     LibraryModel(const std::vector<domain::models::Book>& data);
@@ -29,15 +30,14 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     
 public slots:
-    void processBookCover(int index);
     void startInsertingRow(int index);
     void endInsertingRow();
     void startDeletingBook(int index);
     void endDeletingBook();
+    void processBookCover(int index);
+    void refreshTags(int row);
     
 private:
-    
-    
     const std::vector<domain::models::Book>& m_data;
 };
 

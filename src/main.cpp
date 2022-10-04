@@ -17,10 +17,10 @@
 #include "dependency_injection.hpp"
 #include "i_book_controller.hpp"
 #include "key_sequence_recorder.hpp"
-#include "qguiapplication.h"
 #include "sidebar_state.hpp"
 #include "document_item.hpp"
 #include "page_item.hpp"
+#include "tag_dto.hpp"
 
 
 
@@ -50,6 +50,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
+    qRegisterMetaType<adapters::dtos::BookDto>();
+    qRegisterMetaType<adapters::dtos::TagDto>();
     
     auto authenticationController = config::diConfig().create<adapters::IAuthenticationController*>();
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);

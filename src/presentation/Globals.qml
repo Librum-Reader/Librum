@@ -3,8 +3,8 @@ import QtQuick 2.15
 
 Item
 {
-    property string currentBookTitle
-    property string currentBookPath
+    property var selectedBook
+    property var bookTags: []
     
     property string profilePicture
     property string firstName: "Kai"
