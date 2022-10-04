@@ -19,8 +19,8 @@ public:
          const QString& filePath, const QString& creator,
          const QString& creationDate, const QString& format,
          const QString& docSize, const QString& pagesSize,
-         const QString& addedToLibrary, const QString& lastModified,
-         const QImage& cover = QImage());
+         int pageCount, const QString& addedToLibrary,
+         const QString& lastModified, const QImage& cover = QImage());
     
     const QString& getTitle() const;
     void setTitle(const QString& newTitle);
@@ -74,11 +74,11 @@ private:
     QString m_author;
     QString m_filePath;
     QString m_creator;
-    int m_pageCount;
     QString m_creationDate;
     QString m_format;
     QString m_documentSize;
     QString m_pagesSize;
+    int m_pageCount;
     QString m_addedToLibrary;
     QString m_lastModified;
     QImage m_cover;

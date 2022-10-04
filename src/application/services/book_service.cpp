@@ -28,11 +28,22 @@ BookOperationStatus BookService::addBook(const QString& filePath)
         return BookOperationStatus::BookAlreadyExists;
     
     
-    QString author = m_bookInfoManager->getAuthor();
-//    int pages = m_bookInfoManager->getPageCount();
+    auto author = m_bookInfoManager->getAuthor();
+    auto creator = m_bookInfoManager->getCreator();
+    auto creationDate = m_bookInfoManager->getCreationDate();
+    auto format = m_bookInfoManager->getFormat();
+    auto docSize = m_bookInfoManager->getDocumentSize();
+    auto pagesSize = m_bookInfoManager->getPagesSize();
+    auto pageCount = m_bookInfoManager->getPageCount();
+    auto addedToLibrary = QString("now");
+    auto lastModified = QString("now");
     
     emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(title, author, filePath);
+    
+    m_books.emplace_back(title, author, filePath, creator, creationDate,
+                         format, docSize, pagesSize, pageCount, 
+                         addedToLibrary, lastModified);
+    
     emit bookInsertionEnded();
     
     

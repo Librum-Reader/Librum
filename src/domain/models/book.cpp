@@ -15,12 +15,12 @@ Book::Book(const QString& title, const QString& author,
            const QString& filePath, const QString& creator,
            const QString& creationDate, const QString& format,
            const QString& docSize, const QString& pagesSize,
-           const QString& addedToLibrary, const QString& lastModified,
-           const QImage& cover)
+           int pageCount, const QString& addedToLibrary,
+           const QString& lastModified, const QImage& cover)
     : m_title(title), m_author(author), m_filePath(filePath), m_creator(creator),
       m_creationDate(creationDate), m_format(format), m_documentSize(docSize),
       m_pagesSize(pagesSize), m_addedToLibrary(addedToLibrary), 
-      m_lastModified(lastModified), m_cover(cover)
+      m_pageCount(pageCount), m_lastModified(lastModified), m_cover(cover)
 {
 }
 
