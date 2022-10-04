@@ -7,6 +7,7 @@
 #include "observer.h"
 #include "page.h"
 #include "settings.hpp"
+#include <QDebug>
 
 
 using namespace Okular;
@@ -65,6 +66,50 @@ QString BookInfoHelper::getAuthor() const
 {
     const QString& author = m_document->documentInfo().get(DocumentInfo::Author);
     return author;
+}
+
+QString BookInfoHelper::getCreator() const
+{
+    const QString& creator = m_document->documentInfo().get(DocumentInfo::Creator);
+    return creator;
+}
+
+int BookInfoHelper::getPageCount() const
+{
+    const QString& pages = m_document->documentInfo().get(DocumentInfo::Pages);
+    
+    bool ok = false;
+    int pagesAsInt = pages.toInt(&ok);
+    
+    if(ok)
+        return pagesAsInt;
+    
+    return 0;
+}
+
+QString BookInfoHelper::getCreationDate() const
+{
+    const QString& creationDate = m_document->documentInfo()
+                                  .get(DocumentInfo::CreationDate);
+    return creationDate;
+}
+
+QString BookInfoHelper::getFormat() const
+{
+    const QString& format = m_document->documentInfo().get(DocumentInfo::MimeType);
+    return format;
+}
+
+QString BookInfoHelper::getDocumentSize() const
+{
+    const QString& docSize = m_document->documentInfo().get(DocumentInfo::DocumentSize);
+    return docSize;
+}
+
+QString BookInfoHelper::getPagesSize() const
+{
+    const QString& pagesSize = m_document->documentInfo().get(DocumentInfo::PagesSize);
+    return pagesSize;
 }
 
 QSize BookInfoHelper::getCoverSize() const

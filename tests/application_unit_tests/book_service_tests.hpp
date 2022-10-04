@@ -21,8 +21,14 @@ class BookInfoHelperMock : public application::IBookInfoHelper
 public:
     MOCK_METHOD(bool, setupDocument, (const QString& filePath), (override));
     MOCK_METHOD(QString, getTitle, (), (const, override));
-    MOCK_METHOD(void, getCover, (), (const, override));
     MOCK_METHOD(QString, getAuthor, (), (const, override));
+    MOCK_METHOD(QString, getCreator, (), (const, override));
+    MOCK_METHOD(int, getPageCount, (), (const, override));
+    MOCK_METHOD(QString, getCreationDate, (), (const, override));
+    MOCK_METHOD(QString, getFormat, (), (const, override));
+    MOCK_METHOD(QString, getDocumentSize, (), (const, override));
+    MOCK_METHOD(QString, getPagesSize, (), (const, override));
+    MOCK_METHOD(void, getCover, (), (const, override));
 };
 
 

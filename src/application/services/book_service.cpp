@@ -29,6 +29,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     
     
     QString author = m_bookInfoManager->getAuthor();
+//    int pages = m_bookInfoManager->getPageCount();
     
     emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(title, author, filePath);

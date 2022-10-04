@@ -18,6 +18,12 @@ public:
     bool setupDocument(const QString& filePath) override;
     QString getTitle() const override;
     QString getAuthor() const override;
+    QString getCreator() const override;
+    int getPageCount() const override;
+    QString getCreationDate() const override;
+    QString getFormat() const override;
+    QString getDocumentSize() const override;
+    QString getPagesSize() const override;
     void getCover() const override;
     
 private slots:
