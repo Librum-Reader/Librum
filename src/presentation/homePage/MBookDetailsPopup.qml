@@ -5,6 +5,8 @@ import Qt.labs.platform 1.0
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
+import Librum.globals 1.0
 
 
 Popup
@@ -138,6 +140,7 @@ Popup
                         id: bookCoverSideLayout
                         width: parent.width - 20
                         anchors.verticalCenter: parent.verticalCenter
+                        clip: true
                         spacing: 0
                         
                         
@@ -145,7 +148,8 @@ Popup
                         {
                             id: bookCoverContainer
                             Layout.preferredWidth: parent.width
-                            Layout.preferredHeight: Layout.preferredWidth * 1.30
+                            Layout.preferredHeight: 238
+                            Layout.topMargin: 4
                             color: Style.colorLightBorder
                             radius: 4
                             
@@ -155,15 +159,15 @@ Popup
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
                                 sourceSize.height: bookCoverContainer.height - 2
-                                source: Icons.bookCover
-                                fillMode: Image.PreserveAspectFit
+                                source: Globals.selectedBook !== null ? 
+                                            BookController.getBookCover(Globals.selectedBook.title) : ""
                             }
                         }
                         
                         RowLayout
                         {
                             id: bookButtons
-                            Layout.topMargin: 28
+                            Layout.topMargin: 22
                             spacing: 14
                             
                             
@@ -239,7 +243,8 @@ Popup
                                 headerText: "Title"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "The 7 habits of highly effective people"
+                                text: Globals.selectedBook !== null && Globals.selectedBook.title !== "" ? 
+                                          Globals.selectedBook.title : "No title"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -253,10 +258,11 @@ Popup
                                 id: authorField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: "Authors"
+                                headerText: "Author"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "Stephen R. Covey, Jeff N. Murray"
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.author !== "" ? 
+                                          Globals.selectedBook.author : "Unknown author"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -273,7 +279,8 @@ Popup
                                 headerText: "Pages"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "431"
+                                text: Globals.selectedBook !== null ? 
+                                          Globals.selectedBook.pageCount : "No information"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -296,17 +303,7 @@ Popup
                                 imagePath: Icons.dropdownGray
                                 imageSize: 9
                                 selectionPopup.maxHeight: 200
-                                selectionPopup.model: ListModel
-                                {
-                                    ListElement { text: "Technology" }
-                                    ListElement { text: "Favourite" }
-                                    ListElement { text: "Romance" }
-                                    ListElement { text: "Comedy" }
-                                    ListElement { text: "Sports" }
-                                    ListElement { text: "Physics" }
-                                    ListElement { text: "Blockchain" }
-                                    ListElement { text: "Psychology" }
-                                }
+                                selectionPopup.model: Globals.bookTags
                             }
                             
                             MComboBox
@@ -352,10 +349,11 @@ Popup
                                 id: publicationField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: "Publication"
+                                headerText: "Document creator"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "United States: Dodd, Mead and Company,1922."
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.creator !== "" ? 
+                                          Globals.selectedBook.creator : "Unknown creator"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -372,7 +370,8 @@ Popup
                                 headerText: "Release date"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "24.02.2006"
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.creationDate !== "" ? 
+                                          Globals.selectedBook.creationDate : "Unknown release date"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -389,7 +388,8 @@ Popup
                                 headerText: "Format"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "PDF"
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.format !== "" ? 
+                                          Globals.selectedBook.format : "Unknown format"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -404,10 +404,11 @@ Popup
                                 id: sizeField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: "Size"
+                                headerText: "Document size"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "124 MB"
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.documentSize !== "" ? 
+                                          Globals.selectedBook.documentSize : "Unknown document size"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -425,7 +426,8 @@ Popup
                                 headerText: "Added"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "20.08.2021"
+                                text: Globals.selectedBook !== null ? 
+                                          Globals.selectedBook.addedToLibrary : "No information"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -444,7 +446,8 @@ Popup
                                 headerText: "Last opened"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: "4 days ago"
+                                text: Globals.selectedBook !== null ? 
+                                          Globals.selectedBook.lastModified : "No information"
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3

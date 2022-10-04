@@ -1,4 +1,5 @@
 #include "book_controller.hpp"
+#include <QBuffer>
 #include <QVariant>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -93,6 +94,19 @@ int BookController::updateBook(const QString& title, const QVariantMap& operatio
     return static_cast<int>(BookOperationStatus::Success);
 }
 
+QString BookController::getBookCover(const QString& title)
+{
+    const auto& book = m_bookService->getBook(title);
+    
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    book->getCover().save(&buffer, "png");
+    QString base64 = QString::fromUtf8(byteArray.toBase64());
+    return QString("data:image/png;base64,") + base64;
+    
+}
+
 int BookController::addTag(const QString& title, const QString& tagName)
 {
     Tag tagToAdd(tagName);
@@ -144,8 +158,16 @@ void BookController::refreshBookChache()
     {
         dtos::BookDto bookDto;
         bookDto.title = book.getTitle();
+        bookDto.author = book.getAuthor();
         bookDto.filePath = book.getFilePath();
-        bookDto.cover = book.getCover();
+        bookDto.creator = book.getCreator();
+        bookDto.creationDate = book.getCreationDate();
+        bookDto.format = book.getFormat();
+        bookDto.documentSize = book.getDocumentSize();
+        bookDto.pagesSize = book.getPagesSize();
+        bookDto.pageCount = book.getPageCount();
+        bookDto.addedToLibrary = book.getAddedToLibrary();
+        bookDto.lastModified = book.getLastModified();
         
         for(std::size_t i = 0; i < book.getTags().size(); ++i)
         {

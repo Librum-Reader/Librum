@@ -223,7 +223,6 @@ TEST_F(ABookController, SucceedsGettingABook)
     dtos::BookDto expectedResult;
     expectedResult.title = title;
     expectedResult.filePath = filePath;
-    expectedResult.cover = cover;
     expectedResult.tags.append(firstTag);
     expectedResult.tags.append(secondTag);
     
@@ -239,7 +238,6 @@ TEST_F(ABookController, SucceedsGettingABook)
     // Assert
     EXPECT_EQ(expectedResult.title, result.title);
     EXPECT_EQ(expectedResult.filePath, result.filePath);
-    EXPECT_EQ(expectedResult.cover, result.cover);
     
     for(int i = 0; i < expectedResult.tags.size(); ++i)
     {

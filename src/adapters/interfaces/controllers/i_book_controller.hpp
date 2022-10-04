@@ -25,6 +25,8 @@ public:
     Q_INVOKABLE virtual int deleteBook(const QString& title) = 0;
     Q_INVOKABLE virtual int updateBook(const QString& title, 
                                        const QVariantMap& operations) = 0;
+    Q_INVOKABLE virtual QString getBookCover(const QString& title) = 0;
+    
     Q_INVOKABLE virtual int addTag(const QString& title, 
                                    const QString& tagName) = 0;
     Q_INVOKABLE virtual int removeTag(const QString& title,

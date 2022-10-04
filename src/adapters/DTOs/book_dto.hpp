@@ -24,7 +24,6 @@ struct BookDto
     Q_PROPERTY(int pageCount MEMBER pageCount)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastModified MEMBER lastModified)
-    Q_PROPERTY(QImage cover MEMBER cover)
     
 public:
     QString title;
@@ -38,7 +37,6 @@ public:
     int pageCount;
     QString addedToLibrary;
     QString lastModified;
-    QImage cover;
     QList<TagDto> tags;
 };
 

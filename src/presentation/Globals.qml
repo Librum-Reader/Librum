@@ -3,7 +3,7 @@ import QtQuick 2.15
 
 Item
 {
-    property var selectedBook
+    property var selectedBook: null
     property var bookTags: []
     
     property string profilePicture

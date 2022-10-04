@@ -20,6 +20,7 @@ public:
     int deleteBook(const QString& title) override;
     int updateBook(const QString& title,
                    const QVariantMap& operations) override;
+    QString getBookCover(const QString& title) override;
     int addTag(const QString& title, const QString& tagName) override;
     int removeTag(const QString& title, const QString& tagName) override;
     dtos::BookDto getBook(const QString& title) override;

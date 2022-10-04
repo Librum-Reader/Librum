@@ -16,7 +16,7 @@ Item
     property color fontColor: Style.colorLightText3
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
-    property int padding : 8
+    property int padding: 8
     property bool checkBoxStyle: true
     signal clicked(var mouse, int index)
     signal rightClicked(var mouse, int index)
