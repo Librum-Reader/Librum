@@ -32,7 +32,9 @@ Popup
         if(opened)
         {
             addTagBox.giveFocus();
-            informationLabel.text = Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
+            informationLabel.text = Qt.binding(function() {
+                return Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
+            });
         }
         else
         {
