@@ -19,6 +19,14 @@ public:
         TitleRole = Qt::UserRole,
         AuthorRole,
         FilePathRole,
+        CreatorRole,
+        CreationDateRole,
+        FormatRole,
+        DocumentSizeRole,
+        PagesSizeRole,
+        PageCountRole,
+        AddedToLibraryRole,
+        LastModifiedRole,
         CoverRole,
         TagsRole
     };

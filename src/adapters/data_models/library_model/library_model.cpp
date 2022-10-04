@@ -54,6 +54,30 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case FilePathRole:
         return book.getFilePath();
         break;
+    case CreatorRole:
+        return book.getCreator();
+        break;
+    case CreationDateRole:
+        return book.getCreationDate();
+        break;
+    case FormatRole:
+        return book.getFormat();
+        break;
+    case DocumentSizeRole:
+        return book.getDocumentSize();
+        break;
+    case PagesSizeRole:
+        return book.getPagesSize();
+        break;
+    case PageCountRole:
+        return book.getPageCount();
+        break;
+    case AddedToLibraryRole:
+        return book.getAddedToLibrary();
+        break;
+    case LastModifiedRole:
+        return book.getLastModified();
+        break;
     case CoverRole:
         buffer.open(QIODevice::WriteOnly);
         book.getCover().save(&buffer, "png");
@@ -62,9 +86,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         break;
     case TagsRole:
         for(const auto& tag : book.getTags())
-        {
             tagDtos.push_back(dtos::TagDto{ .name = tag.getName() });
-        }
         
         return QVariant::fromValue(tagDtos);
         break;
@@ -80,6 +102,14 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         {TitleRole, "title"},
         {AuthorRole, "author"},
         {FilePathRole, "filePath"},
+        {CreatorRole, "creator"},
+        {CreationDateRole, "creationDate"},
+        {FormatRole, "format"},
+        {DocumentSizeRole, "documentSize"},
+        {PagesSizeRole, "pagesSize"},
+        {PageCountRole, "pageCount"},
+        {AddedToLibraryRole, "addedToLibrary"},
+        {LastModifiedRole, "lastModified"},
         {CoverRole, "cover"},
         {TagsRole, "tags"}
     };
