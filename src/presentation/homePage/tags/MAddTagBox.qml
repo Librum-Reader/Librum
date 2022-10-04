@@ -174,6 +174,10 @@ Item
     }
     
     
+    function clearInputField()
+    {
+        inputField.clear();
+    }
     
     function giveFocus()
     {

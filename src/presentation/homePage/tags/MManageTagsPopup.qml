@@ -27,10 +27,17 @@ Popup
         opacity: 1
     }
     
-    onOpened: 
+    onOpenedChanged: 
     {
-        addTagBox.giveFocus();
-        informationLabel.text = Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
+        if(opened)
+        {
+            addTagBox.giveFocus();
+            informationLabel.text = Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
+        }
+        else
+        {
+            addTagBox.clearInputField();
+        }
     }
     
     
