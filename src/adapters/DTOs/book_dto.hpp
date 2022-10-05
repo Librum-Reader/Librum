@@ -4,6 +4,8 @@
 #include <QList>
 #include <QImage>
 #include <QVariant>
+#include <QBuffer>
+#include <QVariant>
 #include "tag_dto.hpp"
 
 
@@ -24,6 +26,7 @@ struct BookDto
     Q_PROPERTY(int pageCount MEMBER pageCount)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastModified MEMBER lastModified)
+    Q_PROPERTY(QVariant cover READ getCover CONSTANT)
     
 public:
     QString title;
@@ -37,7 +40,19 @@ public:
     int pageCount;
     QString addedToLibrary;
     QString lastModified;
+    QImage cover;
     QList<TagDto> tags;
+    
+private:
+    QString getCover()
+    {
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        buffer.open(QIODevice::WriteOnly);
+        cover.save(&buffer, "png");
+        QString base64 = QString::fromUtf8(byteArray.toBase64());
+        return QString("data:image/jpg;base64,") + base64;
+    }
 };
 
 } // namespace adapters::dtos

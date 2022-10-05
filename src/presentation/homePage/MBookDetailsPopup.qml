@@ -159,8 +159,7 @@ Popup
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
                                 sourceSize.height: bookCoverContainer.height - 2
-                                source: Globals.selectedBook !== null ? 
-                                            BookController.getBookCover(Globals.selectedBook.title) : ""
+                                source: Globals.selectedBook !== null ? Globals.selectedBook.cover : ""
                             }
                         }
                         

@@ -94,19 +94,6 @@ int BookController::updateBook(const QString& title, const QVariantMap& operatio
     return static_cast<int>(BookOperationStatus::Success);
 }
 
-QString BookController::getBookCover(const QString& title)
-{
-    const auto& book = m_bookService->getBook(title);
-    
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    buffer.open(QIODevice::WriteOnly);
-    book->getCover().save(&buffer, "png");
-    QString base64 = QString::fromUtf8(byteArray.toBase64());
-    return QString("data:image/png;base64,") + base64;
-    
-}
-
 int BookController::addTag(const QString& title, const QString& tagName)
 {
     Tag tagToAdd(tagName);
@@ -168,6 +155,7 @@ void BookController::refreshBookChache()
         bookDto.pageCount = book.getPageCount();
         bookDto.addedToLibrary = book.getAddedToLibrary();
         bookDto.lastModified = book.getLastModified();
+        bookDto.cover = book.getCover();
         
         for(std::size_t i = 0; i < book.getTags().size(); ++i)
         {
