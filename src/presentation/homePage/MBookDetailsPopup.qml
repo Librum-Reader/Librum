@@ -228,6 +228,8 @@ Popup
                         ColumnLayout
                         {
                             id: inputLayout
+                            property string defaultText: "Unknown"
+                            
                             width: parent.width - 18
                             height: parent.height
                             anchors.rightMargin: 8
@@ -237,15 +239,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: titleField
-                                property string defaultText: "No title"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Title"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null && Globals.selectedBook.title !== "" ? 
-                                          Globals.selectedBook.title : defaultText
+                                          Globals.selectedBook.title : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -257,15 +257,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: authorField
-                                property string defaultText: "Unknown author"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Author"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.author !== "" ? 
-                                          Globals.selectedBook.author : defaultText
+                                          Globals.selectedBook.author : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -277,15 +275,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: pagesField
-                                property string defaultText: "No information"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Pages"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.pageCount : defaultText
+                                          Globals.selectedBook.pageCount : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -352,15 +348,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: publicationField
-                                property string defaultText: "Unknown creator"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Document creator"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.creator !== "" ? 
-                                          Globals.selectedBook.creator : defaultText
+                                          Globals.selectedBook.creator : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -372,15 +366,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: releaseDateField
-                                property string defaultText: "Unknown release date"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Release date"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.creationDate !== "" ? 
-                                          Globals.selectedBook.creationDate : defaultText
+                                          Globals.selectedBook.creationDate : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -392,15 +384,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: formatField
-                                property string defaultText: "Unknown format"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Format"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.format !== "" ? 
-                                          Globals.selectedBook.format : defaultText
+                                          Globals.selectedBook.format : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -413,15 +403,13 @@ Popup
                             MLabeledInputBox
                             {
                                 id: sizeField
-                                property string defaultText: "Unknown document size"
-                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Document size"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.documentSize !== "" ? 
-                                          Globals.selectedBook.documentSize : defaultText
+                                          Globals.selectedBook.documentSize : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -433,16 +421,14 @@ Popup
                             
                             MLabeledInputBox
                             {
-                                id: addedField
-                                property string defaultText: "No information"
-                                
+                                id: addedField                                
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Added"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.addedToLibrary : defaultText
+                                          Globals.selectedBook.addedToLibrary : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -455,8 +441,6 @@ Popup
                             MLabeledInputBox
                             {
                                 id: lastOpenedField
-                                property string defaultText: "No information"
-                                
                                 Layout.fillWidth: true
                                 Layout.bottomMargin: 3
                                 boxHeight: 34
@@ -464,7 +448,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.lastModified : defaultText
+                                          Globals.selectedBook.lastModified : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -550,7 +534,7 @@ Popup
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignRight
-                    borderWidth: activeFocus  || currentlyHovered ? 0 : 1
+                    borderWidth: activeFocus || currentlyHovered ? 0 : 1
                     borderColor: Style.colorLightBorder
                     backgroundColor: activeFocus || currentlyHovered ? Style.colorBaseRed : "transparent"
                     opacityOnPressed: 0.7
@@ -598,16 +582,16 @@ Popup
     {
         var operationsMap = {};
         
-        if(titleField.text !== Globals.selectedBook.title && titleField.text != titleField.defaultText)
+        if(titleField.text !== Globals.selectedBook.title && titleField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Title] = titleField.text;
         
-        if(authorField.text !== Globals.selectedBook.author && authorField.text != authorField.defaultText)
+        if(authorField.text !== Globals.selectedBook.author && authorField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Author] = authorField.text;
         
-        if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != publicationField.defaultText)
+        if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Creator] = publicationField.text;
         
-        if(releaseDateField.text !== Globals.selectedBook.creationDate && releaseDateField.text != releaseDateField.defaultText)
+        if(releaseDateField.text !== Globals.selectedBook.creationDate && releaseDateField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.CreationDate] = releaseDateField.text;
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != formatField.defaultText)
