@@ -7,6 +7,7 @@
 #include <QVariantMap>
 #include <QByteArray>
 #include "book_controller.hpp"
+#include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "book.hpp"
 #include "book_dto.hpp"
@@ -142,7 +143,11 @@ TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
     Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
-    QVariantMap map{ {"Title", "AnotherName"}, {"Cover", QByteArray("123")} };
+    QVariantMap map
+    {
+        {QString::number(static_cast<int>(IBookController::MetaProperties::Title)), "AnotherTitle"},
+        {QString::number(static_cast<int>(IBookController::MetaProperties::Author)), "DifferentAuthor"}
+    };
     
     auto expectedResult = BookOperationStatus::Success;
     
@@ -157,7 +162,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->updateBook("SomeBook", map);
+    auto result = bookController->updateBook("SomeBook", QVariant::fromValue(map));
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -166,8 +171,6 @@ TEST_F(ABookController, SucceedsUpdatingABook)
 TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
 {
     // Arrange
-    QVariantMap map{ {"Title", "AnotherName"}, {"Cover", QByteArray("123")} };
-    
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     // Expect
@@ -176,7 +179,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
             .WillOnce(Return(nullptr));
     
     // Act
-    auto result = bookController->updateBook("SomeBook", map);
+    auto result = bookController->updateBook("SomeBook", QVariant());
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -186,7 +189,10 @@ TEST_F(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
 {
     // Arrange
     Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
-    QVariantMap map{ {"NonExistentProperty", QString("123")} };
+    QVariantMap map
+    { 
+        {"81", "SomeValue"}
+    };
     
     auto expectedResult = BookOperationStatus::PropertyDoesNotExist;
     

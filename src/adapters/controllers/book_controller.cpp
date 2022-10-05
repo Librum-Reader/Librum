@@ -76,6 +76,7 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
     for(const auto& stringKey : operationsMap.keys())
     {
         int key = stringKey.toInt();
+        
         auto value = operationsMap.value(stringKey);
         switch(static_cast<MetaProperties>(key))
         {
