@@ -28,7 +28,8 @@ public:
         AddedToLibraryRole,
         LastModifiedRole,
         CoverRole,
-        TagsRole
+        TagsRole,
+        Invalid
     };
     
     LibraryModel(const std::vector<domain::models::Book>& data);
@@ -44,6 +45,7 @@ public slots:
     void endDeletingBook();
     void processBookCover(int index);
     void refreshTags(int row);
+    void refreshBook(int row);
     
 private:
     const std::vector<domain::models::Book>& m_data;

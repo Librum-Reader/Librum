@@ -34,6 +34,10 @@ BookController::BookController(application::IBookService* bookService)
     QObject::connect(m_bookService, &application::IBookService::tagsChanged,
                      &m_libraryModel, &data_models::LibraryModel::refreshTags);
     
+    // data changed
+    QObject::connect(m_bookService, &application::IBookService::dataChanged,
+                     &m_libraryModel, &data_models::LibraryModel::refreshBook);
+    
     // book cover processing
     QObject::connect(m_bookService, &application::IBookService::bookCoverGenerated,
                      &m_libraryModel, &data_models::LibraryModel::processBookCover);

@@ -33,7 +33,8 @@ public:
         PageCount,
         AddedToLibrary,
         LastModified,
-        Cover
+        Cover,
+        Invalid
     };
     Q_ENUM(MetaProperties);
     

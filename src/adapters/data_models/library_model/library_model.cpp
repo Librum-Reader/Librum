@@ -1,5 +1,4 @@
 #include "library_model.hpp"
-#include <QDebug>
 #include <QByteArray>
 #include <QBuffer>
 #include <QString>
@@ -10,9 +9,9 @@
 
 using namespace domain::models;
 
+
 namespace adapters::data_models
 {
-
 
 LibraryModel::LibraryModel(const std::vector<domain::models::Book>& data)
     : m_data(data)
@@ -127,6 +126,18 @@ void LibraryModel::processBookCover(int row)
 void LibraryModel::refreshTags(int row)
 {
     emit dataChanged(index(row, 0), index(row, 0), {TagsRole});
+}
+
+void LibraryModel::refreshBook(int row)
+{
+    QVector<int> allRoles;
+    int lastRole = Invalid;
+    for(int i = TitleRole; i < lastRole; ++i)
+    {
+        allRoles.push_back(i);
+    }
+    
+    emit dataChanged(index(row, 0), index(row, 0), allRoles);
 }
 
 void LibraryModel::startInsertingRow(int index)

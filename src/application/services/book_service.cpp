@@ -80,6 +80,9 @@ BookOperationStatus BookService::updateBook(const QString& title,
         return BookOperationStatus::BookDoesNotExist;
     
     book->update(newBook);
+    int index = getBookIndex(newBook.getTitle());
+    emit dataChanged(index);
+    
     return BookOperationStatus::Success;
 }
 
@@ -128,6 +131,9 @@ const Book* BookService::getBook(const QString& title) const
 int BookService::getBookIndex(const QString& title) const
 {
     auto* book = getBookByTitle(title);
+    if(!book)
+        return -1;
+    
     std::vector<Book>::const_iterator bookPosition(book);
     size_t index = bookPosition - m_books.begin();
     

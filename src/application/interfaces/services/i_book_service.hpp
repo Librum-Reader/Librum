@@ -38,6 +38,7 @@ signals:
     void bookDeletionStarted(int index);
     void bookDeletionEnded();
     void tagsChanged(int index);
+    void dataChanged(int index);
 };
 
 } // namespace application
