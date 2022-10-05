@@ -1,6 +1,7 @@
 #include "book_controller.hpp"
 #include <QBuffer>
 #include <QVariant>
+#include <QDebug>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
@@ -63,35 +64,65 @@ int BookController::deleteBook(const QString& title)
     return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
-int BookController::updateBook(const QString& title, const QVariantMap& operations)
+int BookController::updateBook(const QString& title, const QVariant& operations)
 {
     auto bookToUpdate = m_bookService->getBook(title);
     if(!bookToUpdate)
         return static_cast<int>(BookOperationStatus::BookDoesNotExist);
     
     auto updatedBook = *bookToUpdate;
-    for(const auto& key : operations.keys())
+    
+    const auto operationsMap = operations.toMap();
+    for(const auto& stringKey : operationsMap.keys())
     {
-        if(key == "Title")
+        int key = stringKey.toInt();
+        auto value = operationsMap.value(stringKey);
+        switch(static_cast<MetaProperties>(key))
         {
-            auto title = operations.value("Title");
-            updatedBook.setTitle(qvariant_cast<QString>(title));
-        }
-        else if(key == "Cover")
-        {
-            auto cover = operations.value("Cover");
-            updatedBook.setTitle(qvariant_cast<QByteArray>(cover));
-        }
-        else
-        {
+        case MetaProperties::Title:
+            updatedBook.setTitle(value.toString());
+            break;
+        case MetaProperties::Author:
+            updatedBook.setAuthor(value.toString());
+            break;
+        case MetaProperties::FilePath:
+            updatedBook.setFilePath(value.toString());
+            break;
+        case MetaProperties::Creator:
+            updatedBook.setCreator(value.toString());
+            break;
+        case MetaProperties::CreationDate:
+            updatedBook.setCreationDate(value.toString());
+            break;
+        case MetaProperties::Format:
+            updatedBook.setFormat(value.toString());
+            break;
+        case MetaProperties::DocumentSize:
+            updatedBook.setDocumentSize(value.toString());
+            break;
+        case MetaProperties::PagesSize:
+            updatedBook.setPagesSize(value.toString());
+            break;
+        case MetaProperties::PageCount:
+            updatedBook.setPageCount(value.toInt());
+            break;
+        case MetaProperties::AddedToLibrary:
+            updatedBook.setAddedToLibrary(value.toString());
+            break;
+        case MetaProperties::LastModified:
+            updatedBook.setLastModified(value.toString());
+            break;
+        default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
         }
     }
     
-    m_bookChacheChanged = true;
     
-    m_bookService->updateBook(title, updatedBook);
-    return static_cast<int>(BookOperationStatus::Success);
+    auto result = m_bookService->updateBook(title, updatedBook);
+    if(result == BookOperationStatus::Success)
+        m_bookChacheChanged = true;        
+    
+    return static_cast<int>(result);
 }
 
 int BookController::addTag(const QString& title, const QString& tagName)

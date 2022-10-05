@@ -20,11 +20,27 @@ class IBookController : public QObject
 public:
     virtual ~IBookController() noexcept = default;
     
+    enum class MetaProperties
+    {
+        Title = 0,
+        Author,
+        FilePath,
+        Creator,
+        CreationDate,
+        Format,
+        DocumentSize,
+        PagesSize,
+        PageCount,
+        AddedToLibrary,
+        LastModified,
+        Cover
+    };
+    Q_ENUM(MetaProperties);
     
     Q_INVOKABLE virtual int addBook(const QString& path) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& title) = 0;
     Q_INVOKABLE virtual int updateBook(const QString& title, 
-                                       const QVariantMap& operations) = 0;
+                                       const QVariant& operations) = 0;
     Q_INVOKABLE virtual int addTag(const QString& title, 
                                    const QString& tagName) = 0;
     Q_INVOKABLE virtual int removeTag(const QString& title,

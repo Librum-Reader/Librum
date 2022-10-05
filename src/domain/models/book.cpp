@@ -202,7 +202,16 @@ bool Book::tagsAreTheSame(const std::vector<Tag>& other)
 void Book::update(const Book& other)
 {
     if(m_title != other.getTitle()) m_title = other.getTitle();
+    if(m_author != other.getAuthor()) m_author = other.getAuthor();
     if(m_filePath != other.getFilePath()) m_filePath = other.getFilePath();
+    if(m_creator != other.getCreator()) m_creator = other.getCreator();
+    if(m_creationDate != other.getCreationDate()) m_creationDate = other.getCreationDate();
+    if(m_format != other.getFormat()) m_format = other.getFormat();
+    if(m_documentSize != other.getDocumentSize()) m_documentSize = other.getDocumentSize();
+    if(m_pagesSize != other.getPagesSize()) m_pagesSize = other.getPagesSize();
+    if(m_pageCount != other.getPageCount()) m_pageCount = other.getPageCount();
+    if(m_addedToLibrary != other.getAddedToLibrary()) m_addedToLibrary = other.getAddedToLibrary();
+    if(m_lastModified != other.getLastModified()) m_lastModified = other.getLastModified();
     if(m_cover != other.getCover()) m_cover = other.getCover();
     if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
 }
