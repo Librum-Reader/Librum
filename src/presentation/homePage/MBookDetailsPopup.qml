@@ -594,7 +594,7 @@ Popup
         if(releaseDateField.text !== Globals.selectedBook.creationDate && releaseDateField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.CreationDate] = releaseDateField.text;
         
-        if(formatField.text !== Globals.selectedBook.format && formatField.text != formatField.defaultText)
+        if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
         
         
