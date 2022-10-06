@@ -31,6 +31,9 @@ public:
     virtual BookOperationStatus removeTag(const QString& title, 
                                           const domain::models::Tag& tag) = 0;
     
+public slots:
+    virtual bool refreshLastOpenedFlag(const QString& title) = 0;
+    
 signals:
     void bookCoverGenerated(int index);
     void bookInsertionStarted(int index);

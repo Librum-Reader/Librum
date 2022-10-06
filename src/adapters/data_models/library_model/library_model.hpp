@@ -26,7 +26,7 @@ public:
         PagesSizeRole,
         PageCountRole,
         AddedToLibraryRole,
-        LastModifiedRole,
+        LastOpenedRole,
         CoverRole,
         TagsRole,
         Invalid

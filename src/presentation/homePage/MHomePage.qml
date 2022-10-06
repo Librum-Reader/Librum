@@ -141,9 +141,9 @@ Page
                     onLeftButtonClicked:
                     {
                         Globals.selectedBook = BookController.getBook(model.title);
-                        loadPage(readingPage);
+                        bookGrid.openBook();
                     }
-                    
+                        
                     onRightButtonClicked:
                         (index, mouse) =>
                         {
@@ -187,11 +187,7 @@ Page
                             imageSize: 17
                             text: "Read book"
                             
-                            onClicked:
-                            {
-                                bookOptionsPopup.close();
-                                loadPage(readingPage);
-                            }
+                            onClicked: bookGrid.openBook()
                         }
                         
                         MRightClickMenuItem
@@ -201,8 +197,7 @@ Page
                             imageSize: 14
                             text: "Book details"
                             
-                            onClicked:
-                            {
+                            onClicked: {
                                 bookDetailsPopup.open();
                                 bookOptionsPopup.close();
                             }
@@ -271,6 +266,16 @@ Page
                             }
                         }
                     }
+                }
+            
+            
+                function openBook(title)
+                {
+                    if(bookOptionsPopup.opened)
+                        bookOptionsPopup.close();
+                    
+                    BookController.refreshLastOpenedFlag(Globals.selectedBook.title);
+                    loadPage(readingPage);
                 }
             }
         }

@@ -24,6 +24,19 @@ Popup
     property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
     property string highlightColor: Style.colorLightPurple
+    property Component delegateItem: MBaseListItem
+    {
+        width: listView.width
+        height: root.itemHeight
+        containingListview: listView
+        fontSize: root.fontSize
+        fontColor: root.fontColor
+        checkBoxStyle: root.checkBoxStyle
+        checkBoxImageSize: root.checkBoxImageSize
+        checkBoxSize: root.checkBoxSize
+        
+        onClicked: (mouse, index) => root.selectItem(index);
+    }
     signal itemChanged
     
     padding: 8
@@ -60,19 +73,7 @@ Popup
             focus: true
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar { }
-            delegate: MBaseListItem
-            {
-                width: listView.width
-                height: root.itemHeight
-                containingListview: listView
-                fontSize: root.fontSize
-                fontColor: root.fontColor
-                checkBoxStyle: root.checkBoxStyle
-                checkBoxImageSize: root.checkBoxImageSize
-                checkBoxSize: root.checkBoxSize
-                
-                onClicked: (mouse, index) => root.selectItem(index);
-            }
+            delegate: root.delegateItem
             
             
             Keys.onReturnPressed:

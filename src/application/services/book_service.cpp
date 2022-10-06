@@ -1,4 +1,5 @@
 #include "book_service.hpp"
+#include <QDateTime>
 #include <ranges>
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
@@ -35,14 +36,14 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     auto docSize = m_bookInfoManager->getDocumentSize();
     auto pagesSize = m_bookInfoManager->getPagesSize();
     auto pageCount = m_bookInfoManager->getPageCount();
-    auto addedToLibrary = QString("now");
-    auto lastModified = QString("now");
+    auto addedToLibrary = getCurrentDateTimeAsString();
+    auto lastOpened = "Never";
     
     emit bookInsertionStarted(m_books.size());
     
     m_books.emplace_back(title, author, filePath, creator, creationDate,
                          format, docSize, pagesSize, pageCount, 
-                         addedToLibrary, lastModified);
+                         addedToLibrary, lastOpened);
     
     emit bookInsertionEnded();
     
@@ -145,6 +146,21 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
+bool BookService::refreshLastOpenedFlag(const QString& title)
+{
+    auto book = getBookByTitle(title);
+    if(!book)
+        return false;
+    
+    auto now = getCurrentDateTimeAsString();
+    book->setLastOpened(now);
+    
+    auto index = getBookIndex(title);
+    emit dataChanged(index);
+    
+    return true;
+}
+
 void BookService::storeBookCover(const QPixmap* pixmap)
 {
     int index = m_books.size() - 1;
@@ -175,6 +191,14 @@ const Book* BookService::getBookByTitle(const QString& title) const
     }
     
     return nullptr;
+}
+
+QString BookService::getCurrentDateTimeAsString()
+{
+    auto now = QDateTime::currentDateTimeUtc();
+    auto result = now.toString("dd.MM.yyyy") + " - " + now.toString("h:m ap");
+    
+    return result;
 }
 
 } // namespace application::services

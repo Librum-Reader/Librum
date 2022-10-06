@@ -1,6 +1,6 @@
 function addItemToResult(index)
 {
-    let newText = listView.itemAtIndex(index).text;
+    let newText = listView.itemAtIndex(index).getContent();
     
     if(listView.selectedItemsStore.includes(newText))
         listView.selectedItemsStore = removeFromArray(listView.selectedItemsStore, newText);
@@ -51,7 +51,7 @@ function changeSelectionMarker(index)
     if(listView.currentItem === listView.currentSelected)
     {
         listView.currentSelected.selected = !listView.currentSelected.selected;
-        root.selectedContents = (listView.currentSelected.selected === true ? listView.currentSelected.text : "");
+        root.selectedContents = (listView.currentSelected.selected === true ? listView.currentSelected.getContent() : "");
         return;
     }
     
@@ -61,5 +61,5 @@ function changeSelectionMarker(index)
     
     listView.currentItem.selected = true;
     listView.currentSelected = listView.currentItem;
-    root.selectedContents = listView.currentSelected.text;
+    root.selectedContents = listView.currentSelected.getContent();
 }

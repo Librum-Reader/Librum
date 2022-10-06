@@ -25,7 +25,7 @@ struct BookDto
     Q_PROPERTY(QString pagesSize MEMBER pagesSize)
     Q_PROPERTY(int pageCount MEMBER pageCount)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
-    Q_PROPERTY(QString lastModified MEMBER lastModified)
+    Q_PROPERTY(QString lastOpened MEMBER lastOpened)
     Q_PROPERTY(QVariant cover READ getCover CONSTANT)
     
 public:
@@ -39,7 +39,7 @@ public:
     QString pagesSize;
     int pageCount;
     QString addedToLibrary;
-    QString lastModified;
+    QString lastOpened;
     QImage cover;
     QList<TagDto> tags;
     

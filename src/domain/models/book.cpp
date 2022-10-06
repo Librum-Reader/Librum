@@ -16,11 +16,11 @@ Book::Book(const QString& title, const QString& author,
            const QString& creationDate, const QString& format,
            const QString& docSize, const QString& pagesSize,
            int pageCount, const QString& addedToLibrary,
-           const QString& lastModified, const QImage& cover)
+           const QString& lastOpened, const QImage& cover)
     : m_title(title), m_author(author), m_filePath(filePath), m_creator(creator),
       m_creationDate(creationDate), m_format(format), m_documentSize(docSize),
       m_pagesSize(pagesSize), m_addedToLibrary(addedToLibrary), 
-      m_pageCount(pageCount), m_lastModified(lastModified), m_cover(cover)
+      m_pageCount(pageCount), m_lastOpened(lastOpened), m_cover(cover)
 {
 }
 
@@ -58,14 +58,14 @@ void Book::setFilePath(const QString& newLocalPath)
 }
 
 
-const QString& Book::getLastModified() const
+const QString& Book::getLastOpened() const
 {
-    return m_lastModified;
+    return m_lastOpened;
 }
 
-void Book::setLastModified(const QString& newLastModified)
+void Book::setLastOpened(const QString& newLastModified)
 {
-    m_lastModified = newLastModified;
+    m_lastOpened = newLastModified;
 }
 
 
@@ -211,7 +211,7 @@ void Book::update(const Book& other)
     if(m_pagesSize != other.getPagesSize()) m_pagesSize = other.getPagesSize();
     if(m_pageCount != other.getPageCount()) m_pageCount = other.getPageCount();
     if(m_addedToLibrary != other.getAddedToLibrary()) m_addedToLibrary = other.getAddedToLibrary();
-    if(m_lastModified != other.getLastModified()) m_lastModified = other.getLastModified();
+    if(m_lastOpened != other.getLastOpened()) m_lastOpened = other.getLastOpened();
     if(m_cover != other.getCover()) m_cover = other.getCover();
     if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
 }

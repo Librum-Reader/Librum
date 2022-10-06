@@ -27,6 +27,9 @@ public:
     
     data_models::LibraryModel* getLibraryModel() override;
     
+public slots:
+    void refreshLastOpenedFlag(const QString& title) override;
+    
 private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& title);

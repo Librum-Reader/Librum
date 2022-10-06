@@ -305,6 +305,18 @@ Popup
                                 imageSize: 9
                                 selectionPopup.maxHeight: 200
                                 selectionPopup.model: Globals.bookTags
+                                selectionPopup.delegateItem: MTagListItem
+                                {
+                                    width: tagsComboBox.width
+                                    height: 28
+                                    fontSize: 11
+                                    fontColor: Style.colorLightText3
+                                    checkBoxStyle: true
+                                    checkBoxImageSize: 9
+                                    checkBoxSize: 18
+                                    
+                                    onClicked: (mouse, index) => root.selectItem(index);
+                                }
                             }
                             
                             MComboBox
@@ -448,7 +460,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.lastModified : inputLayout.defaultText
+                                          Globals.selectedBook.lastOpened : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3

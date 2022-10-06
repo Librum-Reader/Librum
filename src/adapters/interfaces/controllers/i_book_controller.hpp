@@ -51,6 +51,9 @@ public:
     
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
+public slots:
+    Q_INVOKABLE virtual void refreshLastOpenedFlag(const QString& title) = 0;
+
 signals:
     void bookCountChanged();
 };

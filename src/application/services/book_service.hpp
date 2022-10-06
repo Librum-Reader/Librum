@@ -29,12 +29,16 @@ public:
     int getBookIndex(const QString& title) const override;
     int getBookCount() const override;
     
+public slots:
+    bool refreshLastOpenedFlag(const QString& title) override;
+    
 private slots:
     void storeBookCover(const QPixmap* pixmap);
     
 private:
     domain::models::Book* getBookByTitle(const QString& title);
     const domain::models::Book* getBookByTitle(const QString& title) const;
+    QString getCurrentDateTimeAsString();
     
     IBookInfoHelper* m_bookInfoManager;
     std::vector<domain::models::Book> m_books;

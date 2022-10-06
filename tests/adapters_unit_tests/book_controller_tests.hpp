@@ -35,6 +35,7 @@ public:
     MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookIndex, (const QString& title), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
+    MOCK_METHOD(bool, refreshLastOpenedFlag, (const QString& title), (override));
     
     MOCK_METHOD(BookOperationStatus, addTag, (const QString& title,
                                               const domain::models::Tag& tag), (override));
@@ -349,4 +350,20 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+
+
+TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
+{
+    // Arrange
+    QString book = "Some Book";
+    
+    // Expect
+    EXPECT_CALL(bookService, refreshLastOpenedFlag(_))
+            .Times(1)
+            .WillOnce(Return(true));
+    
+    // Act
+    bookController->refreshLastOpenedFlag(book);
 }

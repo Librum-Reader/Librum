@@ -49,8 +49,8 @@ public:
     const QString& getAddedToLibrary() const;
     void setAddedToLibrary(const QString& newAddedToLibrary);
     
-    const QString& getLastModified() const;
-    void setLastModified(const QString& newLastModified);
+    const QString& getLastOpened() const;
+    void setLastOpened(const QString& newLastOpened);
     
     const QString& getFilePath() const;
     void setFilePath(const QString& newLocalPath);
@@ -80,7 +80,7 @@ private:
     QString m_pagesSize;
     int m_pageCount;
     QString m_addedToLibrary;
-    QString m_lastModified;
+    QString m_lastOpened;
     QImage m_cover;
     std::vector<Tag> m_tags;
 };

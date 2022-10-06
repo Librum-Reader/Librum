@@ -115,7 +115,7 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
             updatedBook.setAddedToLibrary(value.toString());
             break;
         case MetaProperties::LastModified:
-            updatedBook.setLastModified(value.toString());
+            updatedBook.setLastOpened(value.toString());
             break;
         default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
@@ -172,6 +172,13 @@ data_models::LibraryModel* BookController::getLibraryModel()
     return &m_libraryModel;
 }
 
+void BookController::refreshLastOpenedFlag(const QString& title)
+{
+    auto result = m_bookService->refreshLastOpenedFlag(title);
+    if(result)
+        m_bookChacheChanged = true;
+}
+
 void BookController::refreshBookChache()
 {
     const auto& books = m_bookService->getBooks();
@@ -190,7 +197,7 @@ void BookController::refreshBookChache()
         bookDto.pagesSize = book.getPagesSize();
         bookDto.pageCount = book.getPageCount();
         bookDto.addedToLibrary = book.getAddedToLibrary();
-        bookDto.lastModified = book.getLastModified();
+        bookDto.lastOpened = book.getLastOpened();
         bookDto.cover = book.getCover();
         
         for(std::size_t i = 0; i < book.getTags().size(); ++i)

@@ -74,8 +74,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case AddedToLibraryRole:
         return book.getAddedToLibrary();
         break;
-    case LastModifiedRole:
-        return book.getLastModified();
+    case LastOpenedRole:
+        return book.getLastOpened();
         break;
     case CoverRole:
         buffer.open(QIODevice::WriteOnly);
@@ -108,7 +108,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         {PagesSizeRole, "pagesSize"},
         {PageCountRole, "pageCount"},
         {AddedToLibraryRole, "addedToLibrary"},
-        {LastModifiedRole, "lastModified"},
+        {LastOpenedRole, "lastOpened"},
         {CoverRole, "cover"},
         {TagsRole, "tags"}
     };

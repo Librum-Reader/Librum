@@ -9,8 +9,8 @@ Item
 {
     id: root
     property ListView containingListview
-    property string text
-    property int index
+    required property string name
+    required property int index
     property bool selected: false
     property double fontSize: 10.75
     property color fontColor: Style.colorLightText3
@@ -24,7 +24,7 @@ Item
     
     function getContent()
     {
-        return model.text;
+        return root.name;
     }
     
     implicitWidth: 137
@@ -69,7 +69,7 @@ Item
                 Layout.fillWidth: true
                 topPadding: -1
                 color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
-                text: root.getContent()
+                text: root.getContent();
                 font.pointSize: root.fontSize
                 font.weight: root.selected ? Font.DemiBold : Font.Medium
                 elide: Text.ElideRight

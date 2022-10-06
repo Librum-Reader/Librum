@@ -381,3 +381,25 @@ TEST_F(ABookService, SucceedsGettingTheBookCount)
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
+
+
+
+TEST_F(ABookService, SucceedsRefreshLastOpenedFlag)
+{
+    // Arrange
+    QString bookTitle = "Some Book";
+    
+    // Expect
+    EXPECT_CALL(bookInfoHelperMock, getTitle())
+            .Times(1)
+            .WillOnce(Return(bookTitle));
+    
+    // Act
+    bookService->addBook("some/path.pdf");
+    auto before = bookService->getBook(bookTitle)->getLastOpened();
+    bookService->refreshLastOpenedFlag(bookTitle);
+    auto after = bookService->getBook(bookTitle)->getLastOpened();
+    
+    // Assert
+    EXPECT_NE(before, after);
+}
