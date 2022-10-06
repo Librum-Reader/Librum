@@ -96,6 +96,5 @@
         <file>settings/MResetSettingsPopup.qml</file>
         <file>readingPage/DocumentView.qml</file>
         <file>readingPage/PageView.qml</file>
-        <file>modules/CustomComponents/MTagListItem.qml</file>
     </qresource>
 </RCC>
