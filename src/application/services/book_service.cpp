@@ -24,7 +24,8 @@ BookService::BookService(IBookInfoHelper* bookInfoManager)
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    if(!m_bookInfoManager->setupDocument(filePath))
+    if(!m_bookInfoManager->setupDocument(filePath, Book::maxCoverWidth, 
+                                         Book::maxCoverHeight))
         return BookOperationStatus::OpeningBookFailed;
     
     QString title = m_bookInfoManager->getTitle();
@@ -163,7 +164,7 @@ BookOperationStatus BookService::saveBookToPath(const QString& title,
     
     auto result = QFile::copy(existingBook.path(), newBook.path());
     if(!result)
-    {
+    {   
         qDebug() << "Copying book failed!";
         return BookOperationStatus::OperationFailed;
     }

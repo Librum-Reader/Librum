@@ -14,7 +14,8 @@ class IBookInfoHelper : public QObject
 public:
     virtual ~IBookInfoHelper() noexcept = default;
     
-    virtual bool setupDocument(const QString& filePath) = 0;
+    virtual bool setupDocument(const QString& filePath, int maxBookCoverWidth,
+                               int maxBookCoverHeight) = 0;
     virtual QString getTitle() const = 0;
     virtual QString getAuthor() const = 0;
     virtual QString getCreator() const = 0;

@@ -67,6 +67,9 @@ public:
     void update(const Book& other);
     
     
+    static const int maxCoverWidth{ 188 };
+    static const int maxCoverHeight{ 238 };
+    
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
     
@@ -83,6 +86,7 @@ private:
     QString m_lastOpened;
     QImage m_cover;
     std::vector<Tag> m_tags;
+    Q_PROPERTY(int maxCoverWidth READ getMaxCoverWidth CONSTANT)
 };
 
 } // namespace domain::models

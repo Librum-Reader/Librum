@@ -15,7 +15,8 @@ class BookInfoHelper : public IBookInfoHelper
 public:
     BookInfoHelper();
     
-    bool setupDocument(const QString& filePath) override;
+    bool setupDocument(const QString& filePath, int maxBookCoverWidth, 
+                       int maxBookCoverHeight) override;
     QString getTitle() const override;
     QString getAuthor() const override;
     QString getCreator() const override;
@@ -30,6 +31,8 @@ private slots:
     void proccessBookCoverPixmap(int page, int flag);
     
 private:
+    
+    
     QSize getCoverSize() const;
     QString getSystemRelativePath(const QString& qPath) const;
     QString parseTitleFromPath(const QString& path) const;
@@ -40,8 +43,8 @@ private:
     std::unique_ptr<CoverObserver> m_observer;
     QString m_systemRelativePath;
     QMimeType m_mimeType;
-    const int m_maxCoverWidth = 188;
-    const int m_maxCoverHeight = 238;
+    int m_maxBookCoverWidth;
+    int m_maxBookCoverHeight;
 };
 
 } // namespace application::utility

@@ -19,7 +19,7 @@ using namespace domain;
 class BookInfoHelperMock : public application::IBookInfoHelper
 {
 public:
-    MOCK_METHOD(bool, setupDocument, (const QString& filePath), (override));
+    MOCK_METHOD(bool, setupDocument, (const QString& filePath, int w, int h), (override));
     MOCK_METHOD(QString, getTitle, (), (const, override));
     MOCK_METHOD(QString, getAuthor, (), (const, override));
     MOCK_METHOD(QString, getCreator, (), (const, override));
@@ -37,7 +37,7 @@ struct ABookService : public ::testing::Test
     void SetUp() override
     {
         // Default actions
-        EXPECT_CALL(bookInfoHelperMock, setupDocument(_))
+        EXPECT_CALL(bookInfoHelperMock, setupDocument(_,_,_))
                 .WillRepeatedly(Return(true));
         
         EXPECT_CALL(bookInfoHelperMock, getTitle())

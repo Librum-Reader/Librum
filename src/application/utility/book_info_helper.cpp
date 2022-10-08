@@ -28,8 +28,12 @@ BookInfoHelper::BookInfoHelper()
 }
 
 
-bool BookInfoHelper::setupDocument(const QString& filePath)
+bool BookInfoHelper::setupDocument(const QString& filePath, int maxBookCoverWidth,
+                                   int maxBookCoverHeight)
 {
+    m_maxBookCoverWidth = maxBookCoverWidth;
+    m_maxBookCoverHeight = maxBookCoverHeight;
+    
     m_document->closeDocument();
     
     QMimeDatabase mimeDb;
@@ -121,15 +125,15 @@ QSize BookInfoHelper::getCoverSize() const
     const auto& coverPage = m_document->page(0);
     
     QSize size;
-    if(m_maxCoverWidth * coverPage->ratio() <= m_maxCoverHeight)
+    if(m_maxBookCoverWidth * coverPage->ratio() <= m_maxBookCoverHeight)
     {
-        size.setHeight(m_maxCoverWidth * coverPage->ratio());
-        size.setWidth(m_maxCoverWidth);
+        size.setHeight(m_maxBookCoverWidth * coverPage->ratio());
+        size.setWidth(m_maxBookCoverWidth);
     }
     else
     {
-        size.setHeight(m_maxCoverHeight);
-        size.setWidth(m_maxCoverHeight / coverPage->ratio());
+        size.setHeight(m_maxBookCoverHeight);
+        size.setWidth(m_maxBookCoverHeight / coverPage->ratio());
     }
     
     return size;
@@ -181,8 +185,8 @@ void BookInfoHelper::proccessBookCoverPixmap(int page, int flag)
         return;
     
     auto coverPixmap = m_document->page(0)->getPixmap(m_observer.get(),
-                                                      m_maxCoverWidth,
-                                                      m_maxCoverHeight);
+                                                      m_maxBookCoverWidth,
+                                                      m_maxBookCoverHeight);
     
     if(coverPixmap)
         emit bookCoverGenerated(coverPixmap);
