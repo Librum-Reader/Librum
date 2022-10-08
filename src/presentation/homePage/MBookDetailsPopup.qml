@@ -153,7 +153,7 @@ Popup
                         {
                             id: bookCoverContainer
                             Layout.preferredWidth: parent.width
-                            Layout.preferredHeight: 238
+                            Layout.preferredHeight: 240
                             Layout.topMargin: 4
                             color: Style.colorLightBorder
                             radius: 4
@@ -162,8 +162,8 @@ Popup
                             {
                                 id: bookCover
                                 anchors.centerIn: parent
-                                Layout.alignment: Qt.AlignHCenter
-                                sourceSize.height: bookCoverContainer.height - 2
+                                sourceSize.width: 188
+                                sourceSize.height: 238
                                 source: Globals.selectedBook !== null ? Globals.selectedBook.cover : ""
                             }
                         }
@@ -617,7 +617,7 @@ Popup
         acceptLabel: "Choose"
         fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["All files (*), png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        nameFilters: ["All files (*)", "png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
         
         onAccepted: bookCover.source = file
     }
@@ -641,7 +641,8 @@ Popup
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
-        if(bookCover.source !== Globals.selectedBook.cover)
+        // @disable-check M126
+        if(bookCover.source != Globals.selectedBook.cover.toString())    // !== comparison fails, since types are different
         {
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
             bookCover.source = Qt.binding(function () { return Globals.selectedBook.cover; })

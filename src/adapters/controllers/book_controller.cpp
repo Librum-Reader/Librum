@@ -5,6 +5,7 @@
 #include <QImage>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
+#include "qnamespace.h"
 #include "tag.hpp"
 #include "tag_dto.hpp"
 
@@ -119,7 +120,7 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
             updatedBook.setLastOpened(value.toString());
             break;
         case MetaProperties::Cover:
-            updatedBook.setCover(QImage(QUrl(value.toString()).toLocalFile()));
+            updatedBook.setCover(QImage(QUrl(value.toString()).toLocalFile()).scaled(Book::maxCoverWidth, Book::maxCoverHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
             break;
         default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
