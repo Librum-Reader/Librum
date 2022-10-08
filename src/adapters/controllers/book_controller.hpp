@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include <QImage>
 #include "book_dto.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
@@ -34,6 +35,7 @@ public slots:
 private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& title);
+    QImage getCorrectlySizedBookCover(const QString& pathToCover);
     
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;

@@ -2,7 +2,6 @@
 #include <QBuffer>
 #include <QVariant>
 #include <QDebug>
-#include <QImage>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "qnamespace.h"
@@ -120,7 +119,7 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
             updatedBook.setLastOpened(value.toString());
             break;
         case MetaProperties::Cover:
-            updatedBook.setCover(QImage(QUrl(value.toString()).toLocalFile()).scaled(Book::maxCoverWidth, Book::maxCoverHeight, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+            updatedBook.setCover(getCorrectlySizedBookCover(value.toString()));
             break;
         default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
@@ -235,6 +234,16 @@ dtos::BookDto* BookController::getBookFromChache(const QString& title)
     }
     
     return nullptr;
+}
+
+QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
+{
+    QString localFilePath = QUrl(pathToCover).toLocalFile();
+    QImage cover(localFilePath);
+    auto scaledCover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight, 
+                                    Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    
+    return scaledCover;
 }
 
 } // namespace adapters::controllers
