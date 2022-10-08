@@ -617,7 +617,8 @@ Popup
         acceptLabel: "Choose"
         fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["All files (*)", "png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        nameFilters: ["All files (*.png *.jpg *.jpg *.jpeg)", "png files (*.png)", "jpg files (*.jpg)", 
+            "jpeg files (*.jpeg)"]
         
         onAccepted: bookCover.source = file
     }
