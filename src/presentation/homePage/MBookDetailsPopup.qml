@@ -30,8 +30,14 @@ Popup
         opacity: 1
     }
     
-    // Reset button focus to the apply button
-    onAboutToHide: { applyButton.forceActiveFocus(); applyButton.active = true }
+    onAboutToHide: 
+    { 
+        applyButton.forceActiveFocus(); 
+        applyButton.active = true;
+        
+        // Reset scrollview to the top when hiding
+        inputSideLayout.contentItem.contentY = 0;
+    }
     Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
     
     
