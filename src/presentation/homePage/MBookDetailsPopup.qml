@@ -35,8 +35,11 @@ Popup
         applyButton.forceActiveFocus(); 
         applyButton.active = true;
         
-        // Reset scrollview to the top when hiding
         inputSideLayout.contentItem.contentY = 0;
+        
+        // @disable-check M126
+        if(bookCover.source != Globals.selectedBook.cover)
+           bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover });
     }
     Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
     
@@ -161,10 +164,22 @@ Popup
                             Image
                             {
                                 id: bookCover
+                                visible: source != ""
                                 anchors.centerIn: parent
                                 sourceSize.width: 188
                                 sourceSize.height: 238
                                 source: Globals.selectedBook !== null ? Globals.selectedBook.cover : ""
+                            }
+                            
+                            Label
+                            {
+                                id: noImageLabel
+                                anchors.centerIn: parent
+                                visible: bookCover.source == ""
+                                text: "." + Globals.selectedBook.format
+                                color: Style.colorDarkGray
+                                font.pointSize: 20
+                                font.bold: true
                             }
                         }
                         
@@ -205,6 +220,8 @@ Popup
                                 fontColor: Style.colorBaseText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
+                                
+                                onClicked: bookCover.source = ""
                             }
                         }
                     }
@@ -643,7 +660,7 @@ Popup
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
         // @disable-check M126
-        if(bookCover.source != Globals.selectedBook.cover.toString())    // !== comparison fails, since types are different
+        if(bookCover.source != Globals.selectedBook.cover)    // !== comparison fails, since types are different
         {
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
             bookCover.source = Qt.binding(function () { return Globals.selectedBook.cover; })
