@@ -184,7 +184,7 @@ Popup
                                 borderColor: Style.colorLightBorder
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
-                                text: "Choose"
+                                text: "Change"
                                 fontColor: Style.colorBaseText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
@@ -201,7 +201,7 @@ Popup
                                 borderColor: Style.colorLightBorder
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
-                                text: "Reset"
+                                text: "Delete"
                                 fontColor: Style.colorBaseText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
@@ -614,7 +614,7 @@ Popup
     FileDialog
     {
         id: chooseImageDialog
-        acceptLabel: "Choose"
+        acceptLabel: "Select"
         fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         nameFilters: ["All files (*.png *.jpg *.jpg *.jpeg)", "png files (*.png)", "jpg files (*.jpg)", 
