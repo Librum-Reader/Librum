@@ -97,7 +97,11 @@ QString BookInfoHelper::getCreationDate() const
 QString BookInfoHelper::getFormat() const
 {
     const QString& format = m_document->documentInfo().get(DocumentInfo::MimeType);
-    return format;
+    
+    auto formatWithoutType = removeTypeFromMimeString(format);
+    auto result = removeAppendingsFromMimeString(formatWithoutType);
+    
+    return result;
 }
 
 QString BookInfoHelper::getDocumentSize() const
@@ -148,6 +152,26 @@ QString BookInfoHelper::parseTitleFromPath(const QString& path) const
     auto result = m_systemRelativePath.mid(indexOfLastSlash + 1, 
                                            indexOfLastDot - indexOfLastSlash - 1);
     
+    return result;
+}
+
+QString BookInfoHelper::removeTypeFromMimeString(const QString& mimeString) const
+{
+    int lastPositionOfSlash = mimeString.lastIndexOf("/");
+    if(lastPositionOfSlash == -1)
+        return mimeString;
+    
+    auto result = mimeString.mid(lastPositionOfSlash + 1);
+    return result;
+}
+
+QString BookInfoHelper::removeAppendingsFromMimeString(const QString& mimeString) const
+{
+    int lastPositionOfPlus = mimeString.lastIndexOf("+");
+    if(lastPositionOfPlus == -1)
+        return mimeString;
+    
+    auto result = mimeString.mid(0, lastPositionOfPlus);
     return result;
 }
 
