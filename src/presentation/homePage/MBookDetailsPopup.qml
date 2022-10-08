@@ -617,7 +617,9 @@ Popup
         acceptLabel: "Choose"
         fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        nameFilters: ["All files (*), png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        
+        onAccepted: bookCover.source = file
     }
     
     
@@ -639,7 +641,11 @@ Popup
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
-        
+        if(bookCover.source !== Globals.selectedBook.cover)
+        {
+            operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
+            bookCover.source = Qt.binding(function () { return Globals.selectedBook.cover; })
+        }
         
         BookController.updateBook(Globals.selectedBook.title, operationsMap);
     }

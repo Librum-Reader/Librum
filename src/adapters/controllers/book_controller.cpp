@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QVariant>
 #include <QDebug>
+#include <QImage>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
@@ -116,6 +117,9 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
             break;
         case MetaProperties::LastModified:
             updatedBook.setLastOpened(value.toString());
+            break;
+        case MetaProperties::Cover:
+            updatedBook.setCover(QImage(QUrl(value.toString()).toLocalFile()));
             break;
         default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
