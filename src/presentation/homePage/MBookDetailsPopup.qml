@@ -13,7 +13,6 @@ Popup
 {
     id: root
     property int contentPadding: 16
-    property MButton lastFocusedButton: applyButton
     
     implicitWidth: 751
     implicitHeight: layout.implicitHeight
@@ -31,9 +30,9 @@ Popup
         opacity: 1
     }
     
-    onAboutToHide: applyButton.forceActiveFocus();
-    
-    Component.onCompleted: applyButton.forceActiveFocus()
+    // Reset button focus to the apply button
+    onAboutToHide: { applyButton.forceActiveFocus(); applyButton.active = true }
+    Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
     
     
     MouseArea
@@ -479,26 +478,39 @@ Popup
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignLeft
-                    active: true
-                    borderWidth: activeFocus || currentlyHovered ? 0 : 1
+                    borderWidth: active ? 0 : 1
                     borderColor: Style.colorLightBorder
-                    backgroundColor: activeFocus || currentlyHovered ? Style.colorBasePurple : "transparent"
+                    backgroundColor: active ? Style.colorBasePurple : "transparent"
                     text: "Apply"
-                    fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText2
+                    fontColor: active ? Style.colorBrightText : Style.colorLightText2
                     fontWeight: Font.Bold
                     fontSize: 12
                     
-                    onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                     onClicked:
                     {
                         root.saveData();
                         root.close();
                     }
                     
-                    Keys.onReturnPressed: root.close();
+                    Keys.onReturnPressed:
+                    {
+                        root.saveData();
+                        root.close();
+                    }
                     
-                    KeyNavigation.right: cancelButton
-                    KeyNavigation.tab: cancelButton
+                    Keys.onRightPressed: 
+                    {
+                        active = false;
+                        cancelButton.active = true;
+                        cancelButton.forceActiveFocus();
+                    }
+                    
+                    Keys.onTabPressed: 
+                    {
+                        active = false;
+                        cancelButton.active = true;
+                        cancelButton.forceActiveFocus();
+                    }
                 }
                 
                 MButton
@@ -507,23 +519,38 @@ Popup
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignLeft
-                    borderWidth: activeFocus  || currentlyHovered ? 0 : 1
+                    borderWidth: active ? 0 : 1
                     borderColor: Style.colorLightBorder
-                    backgroundColor: activeFocus || currentlyHovered ? Style.colorBasePurple : "transparent"
+                    backgroundColor: active ? Style.colorBasePurple : "transparent"
                     opacityOnPressed: 0.7
                     text: "Cancel"
-                    fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText2
+                    fontColor: active ? Style.colorBrightText : Style.colorLightText2
                     fontWeight: Font.Bold
                     fontSize: 12
                     
-                    onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                     onClicked: root.close()
-                    
                     Keys.onReturnPressed: root.close();
                     
-                    KeyNavigation.left: applyButton
-                    KeyNavigation.right: deleteButton
-                    KeyNavigation.tab: deleteButton
+                    Keys.onLeftPressed: 
+                    {
+                        active = false;
+                        applyButton.active = true;
+                        applyButton.forceActiveFocus();
+                    }
+                    
+                    Keys.onRightPressed: 
+                    {
+                        active = false;
+                        deleteButton.active = true;
+                        deleteButton.forceActiveFocus();
+                    }
+                    
+                    Keys.onTabPressed: 
+                    {
+                        active = false;
+                        deleteButton.active = true;
+                        deleteButton.forceActiveFocus();
+                    }
                 }
                 
                 Item { Layout.fillWidth: true }
@@ -534,25 +561,35 @@ Popup
                     Layout.preferredWidth: 140
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignRight
-                    borderWidth: activeFocus || currentlyHovered ? 0 : 1
+                    borderWidth: active ? 0 : 1
                     borderColor: Style.colorLightBorder
-                    backgroundColor: activeFocus || currentlyHovered ? Style.colorBaseRed : "transparent"
+                    backgroundColor: active ? Style.colorBaseRed : "transparent"
                     opacityOnPressed: 0.7
                     text: "Delete"
-                    fontColor: activeFocus || currentlyHovered ? Style.colorBrightText : Style.colorLightText
+                    fontColor: active ? Style.colorBrightText : Style.colorLightText
                     fontWeight: Font.Bold
                     fontSize: 12
-                    imagePath: activeFocus || currentlyHovered ? Icons.trashWhite : Icons.trashGray
+                    imagePath: active ? Icons.trashWhite : Icons.trashGray
                     imageSize: 17
                     imageSpacing: 10
                     
-                    onActiveFocusChanged: if(activeFocus) root.lastFocusedButton = this
                     onClicked: acceptDeletionPopup.open();
                     
                     Keys.onReturnPressed: acceptDeletionPopup.open();
                     
-                    KeyNavigation.left: cancelButton
-                    KeyNavigation.tab: applyButton
+                    Keys.onLeftPressed: 
+                    {
+                        active = false;
+                        cancelButton.active = true;
+                        cancelButton.forceActiveFocus();
+                    }
+                    
+                    Keys.onTabPressed: 
+                    {
+                        active = false;
+                        applyButton.active = true;
+                        applyButton.forceActiveFocus();
+                    }
                 }
             }
         }
