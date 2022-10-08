@@ -172,6 +172,13 @@ data_models::LibraryModel* BookController::getLibraryModel()
     return &m_libraryModel;
 }
 
+int BookController::saveBookToPath(const QString& title, const QUrl& path)
+{
+    auto result = m_bookService->saveBookToPath(title, path);
+    
+    return static_cast<int>(result);
+}
+
 void BookController::refreshLastOpenedFlag(const QString& title)
 {
     auto result = m_bookService->refreshLastOpenedFlag(title);

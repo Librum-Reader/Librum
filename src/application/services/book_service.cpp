@@ -1,8 +1,13 @@
 #include "book_service.hpp"
 #include <QDateTime>
+#include <QFile>
+#include <QTime>
 #include <ranges>
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
+
+#include <QDebug>
+
 
 namespace application::services
 {
@@ -144,6 +149,27 @@ int BookService::getBookIndex(const QString& title) const
 int BookService::getBookCount() const
 {
     return m_books.size();
+}
+
+BookOperationStatus BookService::saveBookToPath(const QString& title, 
+                                                const QUrl& pathToFolder)
+{
+    auto book = getBook(title);
+    if(!book)
+        return BookOperationStatus::BookDoesNotExist;
+
+    QUrl existingBook = book->getFilePath();
+    QUrl newBook = pathToFolder.path() + "/" + existingBook.fileName();
+    
+    auto result = QFile::copy(existingBook.path(), newBook.path());
+    if(!result)
+    {
+        qDebug() << "Copying book failed!";
+        return BookOperationStatus::OperationFailed;
+    }
+    
+    
+    return BookOperationStatus::Success;
 }
 
 bool BookService::refreshLastOpenedFlag(const QString& title)

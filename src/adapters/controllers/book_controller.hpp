@@ -25,6 +25,7 @@ public:
     dtos::BookDto getBook(const QString& title) override;
     int getBookCount() const override;
     
+    int saveBookToPath(const QString& title, const QUrl& path) override;
     data_models::LibraryModel* getLibraryModel() override;
     
 public slots:
@@ -33,7 +34,6 @@ public slots:
 private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& title);
-    
     
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;

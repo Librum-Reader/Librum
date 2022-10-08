@@ -29,6 +29,9 @@ public:
     int getBookIndex(const QString& title) const override;
     int getBookCount() const override;
     
+    BookOperationStatus saveBookToPath(const QString& title,
+                                       const QUrl& path) override;
+    
 public slots:
     bool refreshLastOpenedFlag(const QString& title) override;
     

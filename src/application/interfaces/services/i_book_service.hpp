@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <QObject>
+#include <QUrl>
 #include "book_operation_status.hpp"
 #include "book.hpp"
 #include "tag.hpp"
@@ -30,6 +31,9 @@ public:
                                        const domain::models::Tag& tag) = 0;
     virtual BookOperationStatus removeTag(const QString& title, 
                                           const domain::models::Tag& tag) = 0;
+    
+    virtual BookOperationStatus saveBookToPath(const QString& title,
+                                               const QUrl& path) = 0;
     
 public slots:
     virtual bool refreshLastOpenedFlag(const QString& title) = 0;

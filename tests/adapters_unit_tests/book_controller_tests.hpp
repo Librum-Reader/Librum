@@ -41,6 +41,9 @@ public:
                                               const domain::models::Tag& tag), (override));
     MOCK_METHOD(BookOperationStatus, removeTag, (const QString&,
                                                  const domain::models::Tag& tag), (override));
+    
+    MOCK_METHOD(BookOperationStatus, saveBookToPath, (const QString& title, 
+                                                      const QUrl& path), (override));    
 };
 
 

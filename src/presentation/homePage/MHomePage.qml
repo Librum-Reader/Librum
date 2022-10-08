@@ -328,12 +328,14 @@ Page
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
     }
     
-    FileDialog
+    FolderDialog
     {
         id: downloadFileDialog
         acceptLabel: "Save"
-        fileMode: FileDialog.SaveFile
+        options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
+        
+        onAccepted: BookController.saveBookToPath(Globals.selectedBook.title, folder);
     }
     
     FileDialog

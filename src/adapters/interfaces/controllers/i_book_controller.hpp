@@ -4,6 +4,7 @@
 #include <QList>
 #include <QVariantMap>
 #include <QPixmap>
+#include <QUrl>
 #include "book_dto.hpp"
 #include "library_model.hpp"
 
@@ -49,6 +50,8 @@ public:
     Q_INVOKABLE virtual adapters::dtos::BookDto getBook(const QString& title) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
     
+    Q_INVOKABLE virtual int saveBookToPath(const QString& title, 
+                                           const QUrl& path) = 0;
     virtual data_models::LibraryModel* getLibraryModel() = 0;
     
 public slots:
