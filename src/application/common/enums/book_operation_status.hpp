@@ -14,7 +14,8 @@ namespace application
         BookAlreadyExists,
         PropertyDoesNotExist,
         TagDoesNotExist,
-        TagAlreadyExists
+        TagAlreadyExists,
+        OperationFailed
     };
     
     Q_ENUM_NS(BookOperationStatus)
