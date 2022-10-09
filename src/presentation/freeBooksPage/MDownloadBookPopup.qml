@@ -312,7 +312,10 @@ Popup
                                 topPadding: 8
                                 bottomPadding: 8
                                 selectByMouse: true
-                                text: "Your habits determine your character and later define your life. Don’t blame outside factors when you fail in life. Also, don’t think that succeeding in one area of your life will mean that you’re destined for triumph."
+                                text: "Your habits determine your character and later define" +
+                                " your life. Don’t blame outside factors when you fail in life." +
+                                " Also, don’t think that succeeding in one area of your life will" +
+                                " mean that you’re destined for triumph."
                                 wrapMode: Text.WordWrap
                                 color: Style.colorLightText3
                                 font.pointSize: 12
