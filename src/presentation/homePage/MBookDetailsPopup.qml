@@ -34,6 +34,8 @@ Popup
     { 
         applyButton.forceActiveFocus(); 
         applyButton.active = true;
+        cancelButton.active = false;
+        deleteButton.active = false;
         
         inputSideLayout.contentItem.contentY = 0;
         
