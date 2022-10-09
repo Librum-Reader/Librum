@@ -648,6 +648,10 @@ Popup
         if(authorField.text !== Globals.selectedBook.author && authorField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Author] = authorField.text;
         
+        if(languageComboBox.selectionPopup.selectedContents !== Globals.selectedBook.language && 
+                languageComboBox.selectionPopup.selectedContents != "")
+            operationsMap[BookController.MetaProperties.Language] = languageComboBox.selectionPopup.selectedContents;
+        
         if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Creator] = publicationField.text;
         
@@ -656,6 +660,7 @@ Popup
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
+        
         if(bookCover.source !== Globals.selectedBook.cover)
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
         

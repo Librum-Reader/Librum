@@ -22,6 +22,7 @@ public:
         CreatorRole,
         CreationDateRole,
         FormatRole,
+        LanguageRole,
         DocumentSizeRole,
         PagesSizeRole,
         PageCountRole,

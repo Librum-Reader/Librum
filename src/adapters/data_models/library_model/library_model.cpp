@@ -62,6 +62,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case FormatRole:
         return book.getFormat();
         break;
+    case LanguageRole:
+        return book.getLanguage();
+        break;
     case DocumentSizeRole:
         return book.getDocumentSize();
         break;

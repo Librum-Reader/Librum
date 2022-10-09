@@ -29,6 +29,7 @@ public:
         Creator,
         CreationDate,
         Format,
+        Language,
         DocumentSize,
         PagesSize,
         PageCount,

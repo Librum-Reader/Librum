@@ -103,6 +103,9 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
         case MetaProperties::Format:
             updatedBook.setFormat(value.toString());
             break;
+        case MetaProperties::Language:
+            updatedBook.setLanguage(value.toString());
+            break;
         case MetaProperties::DocumentSize:
             updatedBook.setDocumentSize(value.toString());
             break;
@@ -204,6 +207,7 @@ void BookController::refreshBookChache()
         bookDto.creator = book.getCreator();
         bookDto.creationDate = book.getCreationDate();
         bookDto.format = book.getFormat();
+        bookDto.language = book.getLanguage();
         bookDto.documentSize = book.getDocumentSize();
         bookDto.pagesSize = book.getPagesSize();
         bookDto.pageCount = book.getPageCount();

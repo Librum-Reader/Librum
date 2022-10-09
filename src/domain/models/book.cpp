@@ -113,6 +113,17 @@ void Book::setFormat(const QString& newFormat)
 }
 
 
+const QString& Book::getLanguage() const
+{
+    return m_language;
+}
+
+void Book::setLanguage(const QString& newLanguage)
+{
+    m_language = newLanguage;
+}
+
+
 const QString& Book::getCreationDate() const
 {
     return m_creationDate;
@@ -207,6 +218,7 @@ void Book::update(const Book& other)
     if(m_creator != other.getCreator()) m_creator = other.getCreator();
     if(m_creationDate != other.getCreationDate()) m_creationDate = other.getCreationDate();
     if(m_format != other.getFormat()) m_format = other.getFormat();
+    if(m_language != other.getLanguage()) m_language = other.getLanguage();
     if(m_documentSize != other.getDocumentSize()) m_documentSize = other.getDocumentSize();
     if(m_pagesSize != other.getPagesSize()) m_pagesSize = other.getPagesSize();
     if(m_pageCount != other.getPageCount()) m_pageCount = other.getPageCount();

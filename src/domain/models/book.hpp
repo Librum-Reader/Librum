@@ -40,6 +40,9 @@ public:
     const QString& getFormat() const;
     void setFormat(const QString& newFormat);
     
+    const QString& getLanguage() const;
+    void setLanguage(const QString& newLanguage);
+    
     const QString& getDocumentSize() const;
     void setDocumentSize(const QString& newDocumentSize);
     
@@ -79,6 +82,7 @@ private:
     QString m_creator;
     QString m_creationDate;
     QString m_format;
+    QString m_language;
     QString m_documentSize;
     QString m_pagesSize;
     int m_pageCount;
@@ -86,7 +90,6 @@ private:
     QString m_lastOpened;
     QImage m_cover;
     std::vector<Tag> m_tags;
-    Q_PROPERTY(int maxCoverWidth READ getMaxCoverWidth CONSTANT)
 };
 
 } // namespace domain::models

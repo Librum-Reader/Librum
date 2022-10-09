@@ -21,6 +21,7 @@ struct BookDto
     Q_PROPERTY(QString creator MEMBER creator)
     Q_PROPERTY(QString creationDate MEMBER creationDate)
     Q_PROPERTY(QString format MEMBER format)
+    Q_PROPERTY(QString language MEMBER language)
     Q_PROPERTY(QString documentSize MEMBER documentSize)
     Q_PROPERTY(QString pagesSize MEMBER pagesSize)
     Q_PROPERTY(int pageCount MEMBER pageCount)
@@ -35,6 +36,7 @@ public:
     QString creator;
     QString creationDate;
     QString format;
+    QString language;
     QString documentSize;
     QString pagesSize;
     int pageCount;
