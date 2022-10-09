@@ -139,8 +139,6 @@ Page
                     
                     onLeftButtonClicked:
                     {
-                        console.log("Cover: " + BookController.getBook(model.title).title);
-                        console.log("Title: " + BookController.getBook(model.title).cover);
                         Globals.selectedBook = BookController.getBook(model.title);
                         bookGrid.openBook();
                     }
