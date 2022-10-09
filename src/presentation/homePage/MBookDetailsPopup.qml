@@ -331,7 +331,7 @@ Popup
                                 id: languageComboBox
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 53
-                                multiSelect: true
+                                multiSelect: false
                                 headerText: "Language"
                                 headerFontSize: 11.5
                                 headerFontColor: Style.colorBaseTitle
