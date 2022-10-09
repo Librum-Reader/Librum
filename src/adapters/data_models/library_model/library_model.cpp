@@ -78,6 +78,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getLastOpened();
         break;
     case CoverRole:
+        if(book.getCover().isNull())
+            return QString("");
+        
         buffer.open(QIODevice::WriteOnly);
         book.getCover().save(&buffer, "png");
         base64 = QString::fromUtf8(byteArray.toBase64());
