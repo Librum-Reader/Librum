@@ -49,9 +49,21 @@ Item
                 Image
                 {
                     id: bookCover
+                    visible: source != ""
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
                     source: cover
+                }
+                
+                Label
+                {
+                    id: noImageLabel
+                    Layout.alignment: Qt.AlignCenter
+                    visible: bookCover.source == ""
+                    text: "." + model.format
+                    color: Style.colorDarkGray
+                    font.pointSize: 20
+                    font.bold: true
                 }
             }
         }
@@ -130,7 +142,7 @@ Item
                             font.pointSize: 10
                         }
                     }
-
+                    
                     Item { Layout.fillWidth: true }
                     
                     Image
@@ -169,7 +181,7 @@ Item
                         root.moreOptionClicked(root.index, mouse);
                         return;
                     }
-
+                    
                     root.leftButtonClicked(root.index);
                 }
                 

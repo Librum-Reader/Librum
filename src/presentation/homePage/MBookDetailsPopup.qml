@@ -30,16 +30,14 @@ Popup
         opacity: 1
     }
     
-    onAboutToHide: 
+    onAboutToShow: 
     { 
         applyButton.forceActiveFocus(); 
         applyButton.active = true;
         
         inputSideLayout.contentItem.contentY = 0;
         
-        // @disable-check M126
-        if(bookCover.source != Globals.selectedBook.cover)
-           bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover });
+        bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
     }
     Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
     
@@ -164,20 +162,19 @@ Popup
                             Image
                             {
                                 id: bookCover
-                                visible: source != ""
+                                visible: Globals.selectedBook !== null ? source != "" : false
                                 anchors.centerIn: parent
                                 sourceSize.width: 188
                                 sourceSize.height: 238
-                                source: Globals.selectedBook !== null ? Globals.selectedBook.cover : ""
                             }
                             
                             Label
                             {
                                 id: noImageLabel
                                 anchors.centerIn: parent
-                                visible: bookCover.source == ""
-                                text: "." + Globals.selectedBook.format
+                                visible: !bookCover.visible
                                 color: Style.colorDarkGray
+                                text: Globals.selectedBook !== null ? "." + Globals.selectedBook.format : ""
                                 font.pointSize: 20
                                 font.bold: true
                             }
@@ -221,7 +218,7 @@ Popup
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
                                 
-                                onClicked: bookCover.source = ""
+                                onClicked: bookCover.source = "";
                             }
                         }
                     }
@@ -661,10 +658,8 @@ Popup
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
         // @disable-check M126
         if(bookCover.source != Globals.selectedBook.cover)    // !== comparison fails, since types are different
-        {
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
-            bookCover.source = Qt.binding(function () { return Globals.selectedBook.cover; })
-        }
+        
         
         BookController.updateBook(Globals.selectedBook.title, operationsMap);
     }

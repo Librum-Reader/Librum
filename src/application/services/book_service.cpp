@@ -19,6 +19,9 @@ using std::size_t;
 BookService::BookService(IBookInfoHelper* bookInfoManager)
     : m_bookInfoManager(bookInfoManager)
 {
+    // Book Cover
+    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+                     this, &BookService::storeBookCover);
 }
 
 
@@ -53,11 +56,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     
     emit bookInsertionEnded();
     
-    
-    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
-                     this, &BookService::storeBookCover);
     m_bookInfoManager->getCover();
-    
     return BookOperationStatus::Success;
 }
 

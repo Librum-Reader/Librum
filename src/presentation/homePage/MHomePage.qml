@@ -122,7 +122,6 @@ Page
                 property int bookHeight: 300
                 property int horizontalSpacing: 64
                 property int verticalSpacing: 48
-                property var xl : [1,2]
                 
                 anchors.fill: parent
                 cellWidth: bookWidth + horizontalSpacing
@@ -140,6 +139,8 @@ Page
                     
                     onLeftButtonClicked:
                     {
+                        console.log("Cover: " + BookController.getBook(model.title).title);
+                        console.log("Title: " + BookController.getBook(model.title).cover);
                         Globals.selectedBook = BookController.getBook(model.title);
                         bookGrid.openBook();
                     }
