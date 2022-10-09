@@ -211,6 +211,7 @@ void BookController::refreshBookChache()
         bookDto.lastOpened = book.getLastOpened();
         bookDto.cover = book.getCover();
         
+        
         for(std::size_t i = 0; i < book.getTags().size(); ++i)
         {
             dtos::TagDto tagDto;
@@ -238,9 +239,12 @@ dtos::BookDto* BookController::getBookFromChache(const QString& title)
 
 QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
 {
+    if(pathToCover.isEmpty())
+        return QImage();
+    
     QString localFilePath = QUrl(pathToCover).toLocalFile();
     QImage cover(localFilePath);
-    auto scaledCover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight, 
+    auto scaledCover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
                                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
     
     return scaledCover;
