@@ -656,8 +656,7 @@ Popup
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
-        // @disable-check M126
-        if(bookCover.source != Globals.selectedBook.cover)    // !== comparison fails, since types are different
+        if(bookCover.source !== Globals.selectedBook.cover)
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
         
         
