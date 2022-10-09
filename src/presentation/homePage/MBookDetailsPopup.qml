@@ -661,7 +661,8 @@ Popup
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;
         
-        if(bookCover.source !== Globals.selectedBook.cover)
+        // @disable-check M126
+        if(bookCover.source != Globals.selectedBook.cover)   // Needs to be !=, the types are different (QUrl and QString)
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
         
         
