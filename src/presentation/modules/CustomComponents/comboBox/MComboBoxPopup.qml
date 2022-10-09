@@ -67,9 +67,8 @@ Popup
                 checkBoxImageSize: root.checkBoxImageSize
                 checkBoxSize: root.checkBoxSize
                 
-                onClicked: (mouse, index) => root.selectItem(index);
+                onClicked: (mouse, index) => root.selectItem(index)
             }
-            
             
             Keys.onReturnPressed:
             {

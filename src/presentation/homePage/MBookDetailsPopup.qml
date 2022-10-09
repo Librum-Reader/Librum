@@ -321,6 +321,10 @@ Popup
                             MComboBox
                             {
                                 id: tagsComboBox
+                                property var tags: Globals.bookTags
+                                property int prevModelCount: 0
+                                onTagsChanged: setTagsModel()
+                                
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 53
                                 multiSelect: true
@@ -331,7 +335,17 @@ Popup
                                 image: Icons.dropdownGray
                                 imageSize: 9
                                 maxHeight: 200
-                                model: Globals.bookTags
+                                model: ListModel {}
+                                
+                                function setTagsModel()
+                                {
+                                    tagsComboBox.model.clear();
+                                    
+                                    for(let i = 0; i < Globals.bookTags.length; i++)
+                                    {
+                                        tagsComboBox.model.append({"text":Globals.bookTags[i].name});
+                                    }
+                                }
                             }
                             
                             MComboBox
