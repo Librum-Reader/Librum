@@ -158,15 +158,15 @@ Popup
                                 Layout.topMargin: 2
                                 headerText: "Format"
                                 titleEmptyText: "Any"
-                                imagePath: Icons.dropdownGray
+                                image: Icons.dropdownGray
                                 imageSize: 9
                                 
-                                selectionPopup.checkBoxStyle: false
-                                selectionPopup.checkBoxSize: 17
-                                selectionPopup.checkBoxImageSize: 9
-                                selectionPopup.itemHeight: 29
-                                selectionPopup.fontSize: 11
-                                selectionPopup.model: ListModel
+                                checkBoxStyle: false
+                                checkBoxSize: 17
+                                checkBoxImageSize: 9
+                                itemHeight: 29
+                                fontSize: 11
+                                model: ListModel
                                 {
                                     ListElement { text: "Pdf" }
                                     ListElement { text: "Epub"  }
@@ -174,7 +174,7 @@ Popup
                                     ListElement { text: "Txt" }
                                 }
                                 
-                                onItemChanged: selectionPopup.close()
+                                onItemChanged: formatInputComboBox.closePopup()
                             }
                             
                             MLabeledCheckBox

@@ -322,10 +322,10 @@ Popup
                                 titleEmptyText: "None"
                                 headerFontSize: 11.5
                                 headerFontColor: Style.colorBaseTitle
-                                imagePath: Icons.dropdownGray
+                                image: Icons.dropdownGray
                                 imageSize: 9
-                                selectionPopup.maxHeight: 200
-                                selectionPopup.model: Globals.bookTags
+                                maxHeight: 200
+                                model: Globals.bookTags
                             }
                             
                             MComboBox
@@ -337,11 +337,11 @@ Popup
                                 headerText: "Language"
                                 headerFontSize: 11.5
                                 headerFontColor: Style.colorBaseTitle
-                                imagePath: Icons.dropdownGray
+                                image: Icons.dropdownGray
                                 imageSize: 9
-                                selectionPopup.maxHeight: 200
+                                maxHeight: 200
                                 
-                                selectionPopup.model: ListModel
+                                model: ListModel
                                 {
                                     ListElement { text: "English" }
                                     ListElement { text: "German"  }
@@ -650,9 +650,8 @@ Popup
         if(authorField.text !== Globals.selectedBook.author && authorField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Author] = authorField.text;
         
-        if(languageComboBox.selectionPopup.selectedContents !== Globals.selectedBook.language && 
-                languageComboBox.selectionPopup.selectedContents != "")
-            operationsMap[BookController.MetaProperties.Language] = languageComboBox.selectionPopup.selectedContents;
+        if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
+            operationsMap[BookController.MetaProperties.Language] = languageComboBox.text;
         
         if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Creator] = publicationField.text;

@@ -9,34 +9,17 @@ import "ComboBoxLogic.js" as Logic
 Popup
 {
     id: root
-    property string selectedContents: ""
+    property string selectedContent: ""
     property alias model: listView.model
     property int itemHeight: 28
-    property color backgroundColor
     property int maxHeight: 208
-    property int radius: 5
     property int defaultIndex: -1
     property bool checkBoxStyle: true
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
     property bool multiSelect: false
     property double fontSize: 11
-    property color fontColor: Style.colorLightText3
     property int fontWeight: Font.Normal
-    property string highlightColor: Style.colorLightPurple
-    property Component delegateItem: MBaseListItem
-    {
-        width: listView.width
-        height: root.itemHeight
-        containingListview: listView
-        fontSize: root.fontSize
-        fontColor: root.fontColor
-        checkBoxStyle: root.checkBoxStyle
-        checkBoxImageSize: root.checkBoxImageSize
-        checkBoxSize: root.checkBoxSize
-        
-        onClicked: (mouse, index) => root.selectItem(index);
-    }
     signal itemChanged
     
     padding: 8
@@ -44,10 +27,10 @@ Popup
     focus: true
     background: Rectangle
     {
-        color: root.backgroundColor
+        color: Style.colorBackground
         border.width: 1
         border.color: Style.colorLightBorder
-        radius: root.radius
+        radius: 5
         antialiasing: true
     }
     
@@ -73,7 +56,19 @@ Popup
             focus: true
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar { }
-            delegate: root.delegateItem
+            delegate: MBaseListItem
+            {
+                width: listView.width
+                height: root.itemHeight
+                containingListview: listView
+                fontSize: root.fontSize
+                fontColor: Style.colorLightText3
+                checkBoxStyle: root.checkBoxStyle
+                checkBoxImageSize: root.checkBoxImageSize
+                checkBoxSize: root.checkBoxSize
+                
+                onClicked: (mouse, index) => root.selectItem(index);
+            }
             
             
             Keys.onReturnPressed:
@@ -106,6 +101,6 @@ Popup
             listView.currentItem.selected = false;
         
         listView.currentIndex = -1;
-        root.selectedContents = "";
+        root.selectedContent = "";
     }
 }

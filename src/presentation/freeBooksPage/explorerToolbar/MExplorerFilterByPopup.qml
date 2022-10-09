@@ -133,10 +133,10 @@ Popup
                         Layout.preferredHeight: 49
                         multiSelect: true
                         headerText: "Language"
-                        imagePath: Icons.dropdownGray
+                        image: Icons.dropdownGray
                         imageSize: 9
                         
-                        selectionPopup.model: ListModel
+                        model: ListModel
                         {
                             ListElement { text: "English" }
                             ListElement { text: "German"  }

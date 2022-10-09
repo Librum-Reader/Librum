@@ -165,14 +165,14 @@ Page
                             titleEmptyText: "None"
                             titleFontSize: 12
                             titleSpacing: 4
-                            imagePath: Icons.dropdownGray
+                            image: Icons.dropdownGray
                             imageSize: 9
-                            selectionPopup.itemHeight: 32
-                            selectionPopup.fontSize: 11.5
-                            selectionPopup.checkBoxStyle: false
-                            selectionPopup.maxHeight: 200
-                            selectionPopup.defaultIndex: 0
-                            selectionPopup.model: ListModel
+                            itemHeight: 32
+                            fontSize: 11.5
+                            checkBoxStyle: false
+                            maxHeight: 200
+                            defaultIndex: 0
+                            model: ListModel
                             {
                                 ListElement { text: "Arial" }
                                 ListElement { text: "Helvetica" }
@@ -318,14 +318,14 @@ Page
                             Layout.maximumWidth: 380
                             titleFontSize: 12
                             titleSpacing: 4
-                            imagePath: Icons.dropdownGray
+                            image: Icons.dropdownGray
                             imageSize: 9
-                            selectionPopup.defaultIndex: 0
-                            selectionPopup.itemHeight: 32
-                            selectionPopup.fontSize: 12
-                            selectionPopup.checkBoxStyle: false
-                            selectionPopup.maxHeight: 200
-                            selectionPopup.model: ListModel
+                            defaultIndex: 0
+                            itemHeight: 32
+                            fontSize: 12
+                            checkBoxStyle: false
+                            maxHeight: 200
+                            model: ListModel
                             {
                                 ListElement { text: "Instant" }
                                 ListElement { text: "Fading" }

@@ -122,7 +122,7 @@ Popup
                         id: actionsComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
-                        selectionPopup.itemHeight: 32
+                        itemHeight: 32
                         headerText: "Action"
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
@@ -131,13 +131,12 @@ Popup
                         titleFontSize: 12.5
                         titleSpacing: 3
                         titleEmptyText: "None selected"
-                        imagePath: Icons.dropdownGray
+                        image: Icons.dropdownGray
                         imageSize: 11
                         
-                        selectionPopup.fontSize: 12.5
-                        selectionPopup.fontColor: Style.colorLightText3
-                        selectionPopup.checkBoxStyle: false
-                        selectionPopup.model: shortcutListModel
+                        fontSize: 12.5
+                        checkBoxStyle: false
+                        model: shortcutListModel
                     }
                     
                     

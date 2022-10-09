@@ -9,7 +9,7 @@ function addItemToResult(index)
         listView.selectedItemsStore.push(newText);
     }
     
-    root.selectedContents = formatArray(listView.selectedItemsStore);
+    root.selectedContent = formatArray(listView.selectedItemsStore);
 }
 
 function formatArray(arrayToComposeFrom)
@@ -51,7 +51,7 @@ function changeSelectionMarker(index)
     if(listView.currentItem === listView.currentSelected)
     {
         listView.currentSelected.selected = !listView.currentSelected.selected;
-        root.selectedContents = (listView.currentSelected.selected === true ? listView.currentSelected.getContent() : "");
+        root.selectedContent = (listView.currentSelected.selected === true ? listView.currentSelected.getContent() : "");
         return;
     }
     
@@ -61,5 +61,5 @@ function changeSelectionMarker(index)
     
     listView.currentItem.selected = true;
     listView.currentSelected = listView.currentItem;
-    root.selectedContents = listView.currentSelected.getContent();
+    root.selectedContent = listView.currentSelected.getContent();
 }

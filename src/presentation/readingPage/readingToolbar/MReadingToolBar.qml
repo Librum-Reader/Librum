@@ -180,13 +180,12 @@ Pane
             headerText: ""
             titleFontColor: Style.colorBaseTitle
             boxBackgroundColor: Style.colorBaseGray
-            selectionPopup.highlightColor: Style.colorLightGray3
-            selectionPopup.defaultIndex: 6
-            imagePath: Icons.dropdownBlack
+            defaultIndex: 6
+            image: Icons.dropdownBlack
             imageSize: 9
             
-            selectionPopup.checkBoxStyle: false
-            selectionPopup.model: ListModel
+            checkBoxStyle: false
+            model: ListModel
             {
                 ListElement { text: "12%" }
                 ListElement { text: "25%" }
