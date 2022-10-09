@@ -352,24 +352,26 @@ Popup
                             imagePath: active ? Icons.downloadWhite : Icons.downloadGray
                             imageSize: 18
                             
-                            onClicked: root.close()
+                            onClicked: downloadButton.downloadAction()
+                            Keys.onReturnPressed: downloadButton.downloadAction()
                             
-                            Keys.onPressed:
-                                (event) =>
-                                {
-                                    if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                                    {
-                                        downloadButton.active = false;
-                                        cancelButton.active = true;
-                                    }
-                                    else if(event.key === Qt.Key_Return)
-                                    {
-                                        root.close();
-                                    }
-                                }
+                            Keys.onRightPressed:
+                            {
+                                downloadButton.active = false;
+                                cancelButton.active = true;
+                                cancelButton.giveFocus();
+                            }
+                            Keys.onTabPressed: 
+                            {
+                                downloadButton.active = false;
+                                cancelButton.active = true;
+                                cancelButton.giveFocus();
+                            }
                             
-                            KeyNavigation.right: cancelButton
-                            KeyNavigation.tab: cancelButton
+                            function downloadAction()
+                            {
+                                root.close();
+                            }
                         }
                         
                         MButton
@@ -386,24 +388,21 @@ Popup
                             fontWeight: Font.Bold
                             fontSize: 12
                             
-                            onClicked: root.close()
+                            onClicked: root.close()                            
+                            Keys.onReturnPressed: root.close()
                             
-                            Keys.onPressed: 
-                                (event) =>
-                                {
-                                    if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                                    {
-                                        cancelButton.active = false;
-                                        downloadButton.active = true;
-                                    }
-                                    else if(event.key === Qt.Key_Return)
-                                    {
-                                        root.close();
-                                    }
-                                }
-                            
-                            KeyNavigation.left: downloadButton
-                            KeyNavigation.tab: downloadButton
+                            Keys.onLeftPressed:
+                            {
+                                cancelButton.active = false;
+                                downloadButton.active = true;
+                                downloadButton.giveFocus();
+                            }
+                            Keys.onTabPressed: 
+                            {
+                                downloadButton.active = true;
+                                cancelButton.active = false;
+                                downloadButton.giveFocus();
+                            }
                         }
                     }
                 }
