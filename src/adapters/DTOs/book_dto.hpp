@@ -46,6 +46,9 @@ public:
 private:
     QString getCover()
     {
+        if(cover.isNull())
+            return QString("");
+        
         QByteArray byteArray;
         QBuffer buffer(&byteArray);
         buffer.open(QIODevice::WriteOnly);
