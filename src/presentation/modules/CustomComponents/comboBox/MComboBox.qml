@@ -10,6 +10,7 @@ Item
     property alias text: selectionPopup.selectedContent
     property bool multiSelect: false
     property string boxBackgroundColor: Style.colorBackground
+    
     property alias model: selectionPopup.model
     property alias checkBoxStyle: selectionPopup.checkBoxStyle
     property alias checkBoxSize: selectionPopup.checkBoxSize
@@ -183,6 +184,17 @@ Item
     function closePopup()
     {
         selectionPopup.close();
+    }
+    
+    function setDefaultItem(itemName)
+    {
+        for(let i = 0; i < selectionPopup.model.count; i++)
+        {
+            if(selectionPopup.model.get(i).text === itemName)
+                selectItem(i);
+        }
+        
+        selectionPopup.defaultIndex = -1;
     }
     
     function giveFocus()

@@ -39,8 +39,14 @@ Popup
         
         inputSideLayout.contentItem.contentY = 0;
         
-        bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
+        loadData();
     }
+    
+    onAboutToHide:
+    {
+        unloadData();
+    }
+    
     Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
     
     
@@ -340,7 +346,6 @@ Popup
                                 image: Icons.dropdownGray
                                 imageSize: 9
                                 maxHeight: 200
-                                
                                 model: ListModel
                                 {
                                     ListElement { text: "English" }
@@ -668,5 +673,19 @@ Popup
         
         
         BookController.updateBook(Globals.selectedBook.title, operationsMap);
+    }
+    
+    
+    function loadData()
+    {
+        bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
+        
+        if(Globals.selectedBook.language !== "")
+            languageComboBox.setDefaultItem(Globals.selectedBook.language);
+    }
+    
+    function unloadData()
+    {
+        languageComboBox.deselectCurrenItem();
     }
 }
