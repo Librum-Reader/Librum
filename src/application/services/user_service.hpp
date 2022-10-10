@@ -2,6 +2,7 @@
 #include <QObject>
 #include "i_user_service.hpp"
 #include "i_user_storage_gateway.hpp"
+#include "user.hpp"
 
 
 namespace application::services
@@ -29,9 +30,7 @@ public slots:
 
 private:
     IUserStorageGateway* m_userStorageGateway;
-    QString m_firstName;
-    QString m_lastName;
-    QString m_email;
+    domain::models::User m_user;
     QString m_authenticationToken;    
 };
 

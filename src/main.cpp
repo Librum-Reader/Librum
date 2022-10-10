@@ -23,6 +23,7 @@
 #include "page_item.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
+#include "user_dto.hpp"
 
 
 
@@ -54,10 +55,12 @@ int main(int argc, char *argv[])
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
+    qRegisterMetaType<adapters::dtos::UserDto>();
     
     
     using namespace adapters::controllers;
     using namespace application::services;
+    
     
     // Authentication-Stack
     auto authenticationService = config::diConfig().create<application::IAuthenticationService*>();
