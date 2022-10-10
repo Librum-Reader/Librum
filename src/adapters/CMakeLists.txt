@@ -15,6 +15,7 @@ add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
                     interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_user_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     
@@ -22,6 +23,8 @@ add_library(adapters
                     controllers/authentication_controller.hpp
                     controllers/book_controller.cpp
                     controllers/book_controller.hpp
+                    controllers/user_controller.cpp
+                    controllers/user_controller.hpp
                     
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp

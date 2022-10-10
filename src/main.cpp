@@ -12,16 +12,17 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "app_information.hpp"
-#include "authentication_service.hpp"
 #include "book_dto.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "i_book_service.hpp"
+#include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "sidebar_state.hpp"
 #include "document_item.hpp"
 #include "page_item.hpp"
 #include "tag_dto.hpp"
+#include "user_controller.hpp"
 
 
 
@@ -63,6 +64,11 @@ int main(int argc, char *argv[])
     auto authenticationController = std::make_unique<AuthenticationController>(authenticationService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController.get());
     
+    // User-Stack
+    auto userService = config::diConfig().create<application::IUserService*>();
+    auto userController = std::make_unique<UserController>(userService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController", userController.get());
+    
     // Book-Stack
     auto bookService = config::diConfig().create<application::IBookService*>();
     auto bookController = std::make_unique<BookController>(bookService);
@@ -83,9 +89,19 @@ int main(int argc, char *argv[])
     
     
     
-    // Setup connections between types
+    // Setup authentication-token connections
     QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRegistered,
                      bookService, &application::IBookService::setAuthenticationToken);
+    
+    QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRemoved,
+                         bookService, &application::IBookService::clearAuthenticationToken);
+    
+    
+    QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRegistered,
+                     userService, &application::IUserService::setAuthenticationToken);
+    
+    QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRemoved,
+                         userService, &application::IUserService::clearAuthenticationToken);
     
     
     
