@@ -94,12 +94,22 @@ Item
                     
                     onTextEdited: root.edited()
                     
+                    onActiveFocusChanged: resetCursorPositionToStart()
+                    onTextChanged: resetCursorPositionToStart()
+                    
                     Component.onCompleted:
                     {
                         if((inputBox.height/inputField.implicitHeight) / 2 > 0.1)
                         {
                             inputField.Layout.topMargin = inputField.Layout.topMargin - 1;
                         }
+                    }
+                    
+                    
+                    function resetCursorPositionToStart()
+                    {
+                        if(!inputField.activeFocus)
+                            inputField.cursorPosition = 0;
                     }
                 }
                 
