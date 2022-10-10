@@ -9,10 +9,14 @@ namespace adapters::dtos
 struct UserDto
 {
     Q_GADGET
-    Q_PROPERTY(QString title MEMBER title)
+    Q_PROPERTY(QString firstName MEMBER firstName)
+    Q_PROPERTY(QString lastName MEMBER lastName)
+    Q_PROPERTY(QString email MEMBER email)
     
 public:
-    QString title;
+    QString firstName;
+    QString lastName;
+    QString email;
 };
 
 } // namespace adapters::dtos
