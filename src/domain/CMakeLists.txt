@@ -16,6 +16,8 @@ add_library(domain
                     models/book.hpp
                     models/tag.cpp
                     models/tag.hpp
+                    models/user.cpp
+                    models/user.hpp
 )
 
 target_include_directories(domain
