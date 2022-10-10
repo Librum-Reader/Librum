@@ -1,5 +1,5 @@
 #include "authentication_service.hpp"
-#include "i_user_storage_gateway.hpp"
+#include "i_authentication_gateway.hpp"
 
 
 namespace application::services
@@ -7,13 +7,13 @@ namespace application::services
 
 using namespace domain::models;
 
-AuthenticationService::AuthenticationService(IUserStorageGateway* userStorageGateway)
-    : m_userStorageGateway(userStorageGateway)
+AuthenticationService::AuthenticationService(IAuthenticationGateway* authenticationGateway)
+    : m_authenticationGateway(authenticationGateway)
 {
-    QObject::connect(m_userStorageGateway, &IUserStorageGateway::authenticationFinished,
+    QObject::connect(m_authenticationGateway, &IAuthenticationGateway::authenticationFinished,
                      this, &AuthenticationService::processAuthenticationResult);
     
-    QObject::connect(m_userStorageGateway, &IUserStorageGateway::registrationFinished,
+    QObject::connect(m_authenticationGateway, &IAuthenticationGateway::registrationFinished,
                      this, &AuthenticationService::processRegistrationResult);
     
     QObject::connect(this, &AuthenticationService::authenticationTokenRegistered,
@@ -25,7 +25,7 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
     if(loginModel.isValid())
     {
-        m_userStorageGateway->authenticateUser(loginModel);
+        m_authenticationGateway->authenticateUser(loginModel);
     }
     else
     {
@@ -38,7 +38,7 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
     auto status = registerModel.isValid();
     if(status == RegisterModel::RegistrationResult::Valid)
     {
-        m_userStorageGateway->registerUser(registerModel);
+        m_authenticationGateway->registerUser(registerModel);
     }
     else
     {

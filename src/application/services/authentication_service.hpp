@@ -1,7 +1,7 @@
 #pragma once
 #include <QObject>
+#include "i_authentication_gateway.hpp"
 #include "i_authentication_service.hpp"
-#include "i_user_storage_gateway.hpp"
 
 
 namespace application::services
@@ -12,7 +12,7 @@ class AuthenticationService : public IAuthenticationService
     Q_OBJECT
     
 public:
-    AuthenticationService(IUserStorageGateway* userStorageGateway);
+    AuthenticationService(IAuthenticationGateway* authenticationGateway);
     
     void loginUser(const domain::models::LoginModel& loginModel) override;
     void registerUser(const domain::models::RegisterModel& registerModel) override;
@@ -23,7 +23,7 @@ public slots:
     void setAuthenticationToken(const QString& token) override;
     
 private:
-    IUserStorageGateway* m_userStorageGateway;
+    IAuthenticationGateway* m_authenticationGateway;
     QString m_token;
 };
 

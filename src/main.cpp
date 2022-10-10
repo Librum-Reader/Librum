@@ -12,10 +12,11 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include "app_information.hpp"
+#include "authentication_service.hpp"
 #include "book_dto.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
-#include "i_book_controller.hpp"
+#include "i_book_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "sidebar_state.hpp"
 #include "document_item.hpp"
@@ -53,20 +54,39 @@ int main(int argc, char *argv[])
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
     
-    auto authenticationController = config::diConfig().create<adapters::IAuthenticationController*>();
-    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController);
     
-    auto bookController = config::diConfig().create<adapters::IBookController*>();
-    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController", bookController);
+    using namespace adapters::controllers;
+    using namespace application::services;
     
+    // Authentication-Stack
+    auto authenticationService = config::diConfig().create<application::IAuthenticationService*>();
+    auto authenticationController = std::make_unique<AuthenticationController>(authenticationService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController", authenticationController.get());
+    
+    // Book-Stack
+    auto bookService = config::diConfig().create<application::IBookService*>();
+    auto bookController = std::make_unique<BookController>(bookService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController", bookController.get());
+    
+    // App info
     auto appInfo = std::make_unique<adapters::data_models::AppInformation>();
     qmlRegisterSingletonInstance("Librum.models", 1, 0, "AppInformation", appInfo.get());
     
+    // Sidebar
     auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
     qmlRegisterSingletonInstance("Librum.elements", 1, 0, "SidebarState", sidebarState.get());
     
+    // Enums
     qmlRegisterUncreatableMetaObject(application::staticMetaObject, "Librum.controllers", 1, 0, 
                                      "BookOperationStatus", "This is an uncreatable enum!");
+    
+    
+    
+    
+    // Setup connections between types
+    QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRegistered,
+                     bookService, &application::IBookService::setAuthenticationToken);
+    
     
     
     // Startup

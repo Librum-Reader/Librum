@@ -15,6 +15,8 @@ add_library(infrastructure
                 SHARED
                     persistance/user_storage_access.hpp
                     persistance/user_storage_access.cpp
+                    persistance/authentication_access.hpp
+                    persistance/authentication_access.cpp
 )
 
 target_include_directories(infrastructure

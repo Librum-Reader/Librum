@@ -2,11 +2,10 @@
 #include <QDateTime>
 #include <QFile>
 #include <QTime>
+#include <QDebug>
 #include <ranges>
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
-
-#include <QDebug>
 
 
 namespace application::services
@@ -185,6 +184,16 @@ bool BookService::refreshLastOpenedFlag(const QString& title)
     emit dataChanged(index);
     
     return true;
+}
+
+void BookService::setAuthenticationToken(const QString& token)
+{
+    m_authenticationToken = token;
+}
+
+void BookService::clearAuthenticationToken()
+{
+    m_authenticationToken.clear();
 }
 
 void BookService::storeBookCover(const QPixmap* pixmap)

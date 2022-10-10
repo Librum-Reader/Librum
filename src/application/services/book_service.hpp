@@ -34,6 +34,8 @@ public:
     
 public slots:
     bool refreshLastOpenedFlag(const QString& title) override;
+    void setAuthenticationToken(const QString& token) override;
+    void clearAuthenticationToken() override;
     
 private slots:
     void storeBookCover(const QPixmap* pixmap);
@@ -45,6 +47,7 @@ private:
     
     IBookInfoHelper* m_bookInfoManager;
     std::vector<domain::models::Book> m_books;
+    QString m_authenticationToken;
 };
 
 } // namespace application::services

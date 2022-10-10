@@ -3,7 +3,6 @@
 #include <gmock/gmock.h>
 #include <QString>
 #include <QSignalSpy>
-#include "i_user_storage_gateway.hpp"
 #include "authentication_service.hpp"
 #include "login_model.hpp"
 
@@ -14,7 +13,7 @@ using namespace domain;
 
 
 
-class UserStorageGatewayMock : public application::IUserStorageGateway
+class AuthenticationGatewayMock : public application::IAuthenticationGateway
 {
 public:
     MOCK_METHOD(void, authenticateUser, (const models::LoginModel& loginModel), (override));
@@ -28,8 +27,8 @@ public:
 TEST(AnAuthenticationService, SucceedsLogingUserIn)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QString someValidEmail = "someEmail@librum.com";
     QString someValidPassword = "SomePassword123";
@@ -37,7 +36,7 @@ TEST(AnAuthenticationService, SucceedsLogingUserIn)
     
     
     // Expect
-    EXPECT_CALL(userStorageGateway, authenticateUser(_))
+    EXPECT_CALL(authenticationGateway, authenticateUser(_))
             .Times(1);
     
     // Act
@@ -47,8 +46,8 @@ TEST(AnAuthenticationService, SucceedsLogingUserIn)
 TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
     
@@ -58,7 +57,7 @@ TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
     
     
     // Expect
-    EXPECT_CALL(userStorageGateway, authenticateUser(_))
+    EXPECT_CALL(authenticationGateway, authenticateUser(_))
             .Times(0);
     
     // Act
@@ -75,8 +74,8 @@ TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 TEST(AnAuthenticationService, SucceedsRegisteringUser)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QString firstName = "John";
     QString lastName = "Doe";
@@ -88,7 +87,7 @@ TEST(AnAuthenticationService, SucceedsRegisteringUser)
     
     
     // Expect
-    EXPECT_CALL(userStorageGateway, registerUser(_))
+    EXPECT_CALL(authenticationGateway, registerUser(_))
             .Times(1);
     
     // Act
@@ -98,8 +97,8 @@ TEST(AnAuthenticationService, SucceedsRegisteringUser)
 TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
     
@@ -113,7 +112,7 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
     
     
     // Expect
-    EXPECT_CALL(userStorageGateway, registerUser(_))
+    EXPECT_CALL(authenticationGateway, registerUser(_))
             .Times(0);
     
     // Act
@@ -130,8 +129,8 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
 TEST(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
     
@@ -147,8 +146,8 @@ TEST(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
 TEST(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
     
@@ -166,8 +165,8 @@ TEST(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
 TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
     
@@ -183,8 +182,8 @@ TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
 {
     // Arrange
-    UserStorageGatewayMock userStorageGateway;
-    AuthenticationService authService(&userStorageGateway);
+    AuthenticationGatewayMock authenticationGateway;
+    AuthenticationService authService(&authenticationGateway);
     
     QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
     

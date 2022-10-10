@@ -12,17 +12,10 @@ class UserStorageGateway : public application::IUserStorageGateway
     Q_OBJECT
     
 public:
-    UserStorageGateway(IUserStorageAccess* authenticationAccess);
-    
-    void authenticateUser(const domain::models::LoginModel& loginModel) override;
-    void registerUser(const domain::models::RegisterModel& registerModel) override;
-    
-public slots:
-    void reemitRegistrationResult(bool success, const QString& reason) override;
-    void reemitAuthenticationResult(const QString& token) override;
+    UserStorageGateway(IUserStorageAccess* userStorageAccess);
     
 private:
-    IUserStorageAccess* m_authenticationAccess;
+    IUserStorageAccess* m_userStorageAccess;
 };
 
 } // namespace adapters::gateways

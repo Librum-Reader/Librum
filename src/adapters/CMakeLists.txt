@@ -16,6 +16,7 @@ add_library(adapters
                     interfaces/controllers/i_authentication_controller.hpp
                     interfaces/controllers/i_book_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
+                    interfaces/persistance/i_authentication_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
@@ -24,6 +25,8 @@ add_library(adapters
                     
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
+                    gateways/authentication_gateway.cpp
+                    gateways/authentication_gateway.hpp
                     
                     data_models/app_information.hpp
                     data_models/chapter_tree/chapter_tree_model.cpp

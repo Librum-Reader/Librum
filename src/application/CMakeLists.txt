@@ -25,6 +25,7 @@ set(application_SRC
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_book_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
+    interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_book_info_helper.hpp
     
     services/authentication_service.cpp

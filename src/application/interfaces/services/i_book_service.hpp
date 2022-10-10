@@ -37,6 +37,8 @@ public:
     
 public slots:
     virtual bool refreshLastOpenedFlag(const QString& title) = 0;
+    virtual void setAuthenticationToken(const QString& token) = 0;
+    virtual void clearAuthenticationToken() = 0;
     
 signals:
     void bookCoverGenerated(int index);

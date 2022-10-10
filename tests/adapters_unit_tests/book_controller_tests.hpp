@@ -43,7 +43,10 @@ public:
                                                  const domain::models::Tag& tag), (override));
     
     MOCK_METHOD(BookOperationStatus, saveBookToPath, (const QString& title, 
-                                                      const QUrl& path), (override));    
+                                                      const QUrl& path), (override));
+    
+    MOCK_METHOD(void, setAuthenticationToken, (const QString& token), (override));
+    MOCK_METHOD(void, clearAuthenticationToken, (), (override));
 };
 
 
