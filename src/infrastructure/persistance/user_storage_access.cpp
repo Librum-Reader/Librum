@@ -28,21 +28,14 @@ void UserStorageAccess::proccessGetUserResult()
         return;
     }
     
+    auto valueMap = parseJsonToMap(m_reply->readAll());
     
-    QByteArray jsonBytes = m_reply->readAll();
+    auto firstName = valueMap["firstName"].toString();
+    auto lastName = valueMap["lastName"].toString();
+    auto email = valueMap["email"].toString();
     
-    QJsonDocument jsonResponse = QJsonDocument::fromJson(jsonBytes);
-    if(jsonResponse.isNull() || !jsonResponse.isObject())
-        emit gettingUserFailed();
-    
-    QVariantMap map = jsonResponse.object().toVariantMap();
-    qDebug() << map["firstName"].toString();
-    
-    auto firstName = map["firstName"].toString();
-    auto lastName = map["lastName"].toString();
-    auto email = map["email"].toString();
-    
-    emit userReady(firstName, lastName, email);
+    emit gettingUserFailed();
+//    emit userReady(firstName, lastName, email);
 }
 
 
@@ -52,7 +45,7 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     QNetworkRequest result{ url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     result.setRawHeader("X-Version", "1.0");
-    result.setRawHeader(QByteArray("Authorization"), "Bearer " + authToken.toUtf8());
+    result.setRawHeader(QByteArray("Authorization"), "Bearer " + authToken.toUtf8() + "i");
         
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
@@ -77,6 +70,16 @@ bool UserStorageAccess::checkForErrors(int expectedStatusCode)
     }
     
     return false;
+}
+
+QVariantMap UserStorageAccess::parseJsonToMap(QByteArray jsonBytes)
+{
+    auto jsonResponse = QJsonDocument::fromJson(jsonBytes);
+    if(jsonResponse.isNull() || !jsonResponse.isObject())
+        emit gettingUserFailed();
+    
+    auto map = jsonResponse.object().toVariantMap();
+    return map;
 }
 
 } // namespace infrastructure::persistence

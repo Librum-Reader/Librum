@@ -37,14 +37,9 @@ MFlickWrapper
             function onFinishedLoadingUser(success)
             {
                 if(success)
-                {
-                    console.log("success!");
                     loadPage(homePage, sidebar.homeItem, false);
-                }
                 else
-                {
-                    console.log("failed!");
-                }
+                    loginFailedDialog.open();
             }
         }
         
@@ -286,6 +281,17 @@ MFlickWrapper
         }
         
     }
+    
+    
+    MLoginFailedPopup
+    {
+        id: loginFailedDialog
+        x: Math.round(root.width / 2 - implicitWidth / 2)
+        y: Math.round(root.height / 2 - implicitHeight / 2) - 75
+        
+        onOpenedChanged: if(opened) loginFailedDialog.giveFocus()
+    }
+    
     
     Component.onCompleted: emailInput.giveFocus()
 }

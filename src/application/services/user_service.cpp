@@ -53,7 +53,10 @@ void UserService::proccessUserInformation(const domain::models::User& user,
                                           bool success)
 {
     if(!success)
+    {
         emit finishedLoadingUser(false);
+        return;
+    }
     
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());

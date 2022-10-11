@@ -5,6 +5,7 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QVariantMap>
 #include <QByteArray>
 #include <QObject>
 #include <QDebug>
@@ -29,6 +30,7 @@ private slots:
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
     bool checkForErrors(int expectedStatusCode);
+    QVariantMap parseJsonToMap(QByteArray jsonBytes);
     
     const QUrl m_getUserEndpoint;
     QNetworkAccessManager m_networkAccessManager;
