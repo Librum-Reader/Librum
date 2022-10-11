@@ -25,6 +25,8 @@ QString UserService::getFirstName()
 void UserService::setFirstName(const QString& newFirstName)
 {
     m_user.setFirstName(newFirstName);
+    m_userStorageGateway->changeFirstName(m_authenticationToken,
+                                          m_user.getFirstName());
 }
 
 
@@ -36,6 +38,8 @@ QString UserService::getLastName()
 void UserService::setLastName(const QString& newLastName)
 {
     m_user.setLastName(newLastName);
+    m_userStorageGateway->changeLastName(m_authenticationToken,
+                                         m_user.getLastName());
 }
 
 
@@ -47,6 +51,8 @@ QString UserService::getEmail()
 void UserService::setEmail(const QString& newEmail)
 {
     m_user.setEmail(newEmail);
+    m_userStorageGateway->changeEmail(m_authenticationToken,
+                                      m_user.getEmail());
 }
 
 void UserService::proccessUserInformation(const domain::models::User& user,

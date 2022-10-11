@@ -14,7 +14,14 @@ class UserStorageGateway : public application::IUserStorageGateway
 public:
     UserStorageGateway(IUserStorageAccess* userStorageAccess);
     
-    void getUser(const QString& authenticationToken) override;
+    void getUser(const QString& authToken) override;
+    
+    void changeFirstName(const QString& authToken,
+                         const QString& newFirstName) override;
+    void changeLastName(const QString& authToken,
+                        const QString& newLastName) override;
+    void changeEmail(const QString& authToken,
+                     const QString& newEmail) override;
     
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,

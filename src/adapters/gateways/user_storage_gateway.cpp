@@ -16,9 +16,27 @@ UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess)
                      this, &UserStorageGateway::reportFailureGettingUser);
 }
 
-void UserStorageGateway::getUser(const QString& authenticationToken)
+void UserStorageGateway::getUser(const QString& authToken)
 {
-    m_userStorageAccess->getUser(authenticationToken);
+    m_userStorageAccess->getUser(authToken);
+}
+
+void UserStorageGateway::changeFirstName(const QString& authToken,
+                                         const QString& newFirstName)
+{
+    m_userStorageAccess->changeFirstName(authToken, newFirstName);
+}
+
+void UserStorageGateway::changeLastName(const QString& authToken,
+                                        const QString& newLastName)
+{
+    m_userStorageAccess->changeLastName(authToken, newLastName);
+}
+
+void UserStorageGateway::changeEmail(const QString& authToken,
+                                     const QString& newEmail)
+{
+    m_userStorageAccess->changeEmail(authToken, newEmail);
 }
 
 void UserStorageGateway::proccessUserData(const QString& firstName, 

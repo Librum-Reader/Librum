@@ -22,7 +22,14 @@ class UserStorageAccess : public adapters::IUserStorageAccess
 public:
     UserStorageAccess();
     
-    void getUser(const QString& authenticationToken) override;
+    void getUser(const QString& authToken) override;
+    
+    void changeFirstName(const QString& authToken,
+                         const QString& newFirstName) override;
+    void changeLastName(const QString& authToken,
+                        const QString& newLastName) override;
+    void changeEmail(const QString& authToken,
+                     const QString& newEmail) override;
     
 private slots:
     void proccessGetUserResult() override;
@@ -33,6 +40,7 @@ private:
     QVariantMap parseJsonToMap(QByteArray jsonBytes);
     
     const QUrl m_getUserEndpoint;
+    const QUrl m_patchUserEndpoint;
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_reply = nullptr;
 };
