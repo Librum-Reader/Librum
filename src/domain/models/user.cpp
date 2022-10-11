@@ -8,6 +8,12 @@ User::User()
 {
 }
 
+User::User(const QString& firstName, const QString& lastName,
+           const QString& email)
+    : m_firstName(firstName), m_lastName(lastName), m_email(email)
+{
+}
+
 
 const QString& User::getFirstName() const
 {
@@ -31,12 +37,12 @@ void User::setLastName(const QString& newLastName)
 
 const QString& User::getEmail() const
 {
-    return m_emailName;
+    return m_email;
 }
 
-void User::setEmail(const QString& newEmailName)
+void User::setEmail(const QString& newEmail)
 {
-    m_emailName = newEmailName;
+    m_email = newEmail;
 }
 
 const std::vector<Tag>& User::getTags() const
