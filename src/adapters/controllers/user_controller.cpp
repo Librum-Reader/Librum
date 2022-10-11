@@ -8,7 +8,7 @@ UserController::UserController(application::IUserService* userService)
     : m_userService(userService)
 {
     QObject::connect(m_userService, &application::IUserService::finishedLoadingUser,
-                     this, &UserController::finishedLoadingUser);
+                     this, &UserController::proccessUserLoadingResult);
 }
 
 
@@ -59,6 +59,15 @@ void UserController::setEmail(const QString& newEmail)
         
     m_userService->setEmail(newEmail);
     emit emailChanged();
+}
+
+void UserController::proccessUserLoadingResult(bool success)
+{
+    emit firstNameChanged();
+    emit lastNameChanged();
+    emit emailChanged();
+    
+    emit finishedLoadingUser(success);
 }
 
 } // namespace adapters::controllers

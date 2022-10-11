@@ -25,6 +25,9 @@ public:
     QString getEmail() override;
     void setEmail(const QString& newEmail) override;
     
+private slots:
+    void proccessUserLoadingResult(bool success);
+    
 private:
     application::IUserService* m_userService;
 };
