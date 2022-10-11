@@ -18,8 +18,8 @@ public:
     const QString& getLastName() const;
     void setLastName(const QString& newLastName);
     
-    const QString& getEmailName() const;
-    void setEmailName(const QString& newEmailName);
+    const QString& getEmail() const;
+    void setEmail(const QString& newEmailName);
     
     const std::vector<Tag>& getTags() const;
     void setTags(const std::vector<Tag>& newTags);

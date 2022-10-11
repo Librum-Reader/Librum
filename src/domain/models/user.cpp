@@ -29,12 +29,12 @@ void User::setLastName(const QString& newLastName)
     m_lastName = newLastName;
 }
 
-const QString& User::getEmailName() const
+const QString& User::getEmail() const
 {
     return m_emailName;
 }
 
-void User::setEmailName(const QString& newEmailName)
+void User::setEmail(const QString& newEmailName)
 {
     m_emailName = newEmailName;
 }
