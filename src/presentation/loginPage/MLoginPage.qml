@@ -31,6 +31,23 @@ MFlickWrapper
             onActivated: loginButton.buttonTriggeredAction()
         }
         
+        Connections
+        {
+            target: UserController
+            function onFinishedLoadingUser(success)
+            {
+                if(success)
+                {
+                    console.log("success!");
+                    loadPage(homePage, sidebar.homeItem, false);
+                }
+                else
+                {
+                    console.log("failed!");
+                }
+            }
+        }
+        
         
         ColumnLayout
         {
@@ -239,7 +256,7 @@ MFlickWrapper
                             if(success)
                             {
                                 loginButton.success = true;
-                                loadPage(homePage, sidebar.homeItem, false);
+                                UserController.loadUser();
                             }
                             else
                             {

@@ -15,6 +15,8 @@ class IUserController : public QObject
 public:
     virtual ~IUserController() noexcept = default;
     
+    Q_INVOKABLE virtual void loadUser() = 0;
+    
     virtual QString getFirstName() = 0;
     virtual void setFirstName(const QString& newFirstName) = 0;
     
@@ -25,6 +27,7 @@ public:
     virtual void setEmail(const QString& newEmail) = 0;
     
 signals:
+    void finishedLoadingUser(bool success);
     void firstNameChanged();
     void lastNameChanged();
     void emailChanged();

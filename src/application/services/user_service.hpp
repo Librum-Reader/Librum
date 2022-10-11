@@ -15,6 +15,8 @@ class UserService : public IUserService
 public:
     UserService(IUserStorageGateway* userStorageGateway);
     
+    void loadUser() override;
+    
     QString getFirstName() override;
     void setFirstName(const QString& newFirstName) override;
     
@@ -24,14 +26,20 @@ public:
     QString getEmail() override;
     void setEmail(const QString& newEmail) override;
     
+    
 public slots:
     void setAuthenticationToken(const QString& token) override;
     void clearAuthenticationToken() override;
+    
+    
+private slots:
+    void proccessUserInformation(const domain::models::User& user, 
+                                 bool success) override;    
 
 private:
     IUserStorageGateway* m_userStorageGateway;
     domain::models::User m_user;
-    QString m_authenticationToken;    
+    QString m_authenticationToken;
 };
 
 } // namespace application::services

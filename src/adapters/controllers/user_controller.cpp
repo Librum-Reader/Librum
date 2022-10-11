@@ -7,8 +7,15 @@ namespace adapters::controllers
 UserController::UserController(application::IUserService* userService)
     : m_userService(userService)
 {
+    QObject::connect(m_userService, &application::IUserService::finishedLoadingUser,
+                     this, &UserController::finishedLoadingUser);
 }
 
+
+void UserController::loadUser()
+{
+    m_userService->loadUser();
+}
 
 QString UserController::getFirstName()
 {

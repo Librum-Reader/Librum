@@ -7,11 +7,15 @@ namespace application::services
 UserService::UserService(IUserStorageGateway* userStorageGateway)
     : m_userStorageGateway(userStorageGateway)
 {
-    m_user.setFirstName("Alex");
-    m_user.setLastName("Manson");
-    m_user.setEmail("alexmenson@librum.com");
+    QObject::connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
+                     this, &UserService::proccessUserInformation);
 }
 
+
+void UserService::loadUser()
+{
+    m_userStorageGateway->getUser(m_authenticationToken);
+}
 
 QString UserService::getFirstName()
 {
@@ -43,6 +47,19 @@ QString UserService::getEmail()
 void UserService::setEmail(const QString& newEmail)
 {
     m_user.setEmail(newEmail);
+}
+
+void UserService::proccessUserInformation(const domain::models::User& user,
+                                          bool success)
+{
+    if(!success)
+        emit finishedLoadingUser(false);
+    
+    m_user.setFirstName(user.getFirstName());
+    m_user.setLastName(user.getLastName());
+    m_user.setEmail(user.getEmail());
+    
+    finishedLoadingUser(true);
 }
 
 void UserService::setAuthenticationToken(const QString& token)

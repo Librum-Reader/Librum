@@ -14,6 +14,8 @@ class UserController : public IUserController
 public:
     UserController(application::IUserService* userService);
     
+    void loadUser() override;
+    
     QString getFirstName() override;
     void setFirstName(const QString& newFirstName) override;
     
