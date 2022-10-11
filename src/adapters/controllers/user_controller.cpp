@@ -17,7 +17,7 @@ QString UserController::getFirstName()
 
 void UserController::setFirstName(const QString& newFirstName)
 {
-    if(newFirstName != m_userService->getFirstName())
+    if(newFirstName == m_userService->getFirstName())
         return;
     
     m_userService->setFirstName(newFirstName);
@@ -32,7 +32,7 @@ QString UserController::getLastName()
 
 void UserController::setLastName(const QString& newLastName)
 {
-    if(newLastName != m_userService->getLastName())
+    if(newLastName == m_userService->getLastName())
         return;
     
     m_userService->setLastName(newLastName);
@@ -47,7 +47,7 @@ QString UserController::getEmail()
 
 void UserController::setEmail(const QString& newEmail)
 {
-    if(newEmail != m_userService->getEmail())
+    if(newEmail == m_userService->getEmail())
             return;
         
     m_userService->setEmail(newEmail);

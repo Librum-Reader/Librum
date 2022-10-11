@@ -5,6 +5,7 @@ import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.globals 1.0
+import Librum.controllers 1.0
 
 
 MFlickWrapper
@@ -135,7 +136,7 @@ MFlickWrapper
                             Layout.topMargin: 26
                             boxHeight: 40
                             headerText: "First name"
-                            text: Globals.firstName
+                            text: UserController.firstName
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
@@ -151,7 +152,7 @@ MFlickWrapper
                             Layout.topMargin: 18
                             boxHeight: 40
                             headerText: "Last name"
-                            text: Globals.lastName
+                            text: UserController.lastName
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
@@ -167,7 +168,7 @@ MFlickWrapper
                             Layout.topMargin: 18
                             boxHeight: 40
                             headerText: "Email"
-                            text: Globals.email
+                            text: UserController.email
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
@@ -395,6 +396,9 @@ MFlickWrapper
     
     function saveAccountSettings()
     {
+        UserController.firstName = firstNameInput.text;
+        UserController.lastName = lastNameInput.text;
+        
         if(profilePictureArea.imagePath !== Globals.profilePicture)
             Globals.profilePicture = profilePictureArea.imagePath;
         

@@ -5,6 +5,7 @@ import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.globals 1.0
+import Librum.controllers 1.0
 
 
 Item
@@ -47,7 +48,7 @@ Item
                     id: initials
                     anchors.centerIn: parent
                     visible: Globals.profilePicture.length === 0
-                    text: Globals.firstName[0].toUpperCase() + Globals.lastName[0].toUpperCase() 
+                    text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase() 
                     font.pointSize: 12
                     font.bold: true
                     color: Style.colorBrightText

@@ -8,9 +8,9 @@ namespace adapters
 class IUserController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString firstName READ getFirstName NOTIFY firstNameChanged)
-    Q_PROPERTY(QString lastName READ getLastName NOTIFY lastNameChanged)
-    Q_PROPERTY(QString email READ getEmail NOTIFY emailChanged)
+    Q_PROPERTY(QString firstName READ getFirstName WRITE setFirstName NOTIFY firstNameChanged)
+    Q_PROPERTY(QString lastName READ getLastName WRITE setLastName NOTIFY lastNameChanged)
+    Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
     
 public:
     virtual ~IUserController() noexcept = default;
