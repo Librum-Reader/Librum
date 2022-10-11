@@ -5,7 +5,7 @@ namespace application::services
 {
 
 UserService::UserService(IUserStorageGateway* userStorageGateway)
-    : m_userStorageGateway(userStorageGateway)
+    : m_userStorageGateway(userStorageGateway), m_user("x", "y", "z")
 {
     QObject::connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
                      this, &UserService::proccessUserInformation);
@@ -62,7 +62,7 @@ void UserService::proccessUserInformation(const domain::models::User& user,
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
     
-    finishedLoadingUser(true);
+    emit finishedLoadingUser(true);
 }
 
 void UserService::setAuthenticationToken(const QString& token)

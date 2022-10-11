@@ -34,8 +34,7 @@ void UserStorageAccess::proccessGetUserResult()
     auto lastName = valueMap["lastName"].toString();
     auto email = valueMap["email"].toString();
     
-    emit gettingUserFailed();
-//    emit userReady(firstName, lastName, email);
+    emit userReady(firstName, lastName, email);
 }
 
 
@@ -45,7 +44,7 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     QNetworkRequest result{ url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     result.setRawHeader("X-Version", "1.0");
-    result.setRawHeader(QByteArray("Authorization"), "Bearer " + authToken.toUtf8() + "i");
+    result.setRawHeader(QByteArray("Authorization"), "Bearer " + authToken.toUtf8());
         
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
