@@ -7,39 +7,42 @@ namespace application::services
 UserService::UserService(IUserStorageGateway* userStorageGateway)
     : m_userStorageGateway(userStorageGateway)
 {
+    m_user.setFirstName("Alex");
+    m_user.setLastName("Manson");
+    m_user.setEmail("alexmenson@librum.com");
 }
 
 
 QString UserService::getFirstName()
 {
-    return m_firstName;
+    return m_user.getFirstName();
 }
 
 void UserService::setFirstName(const QString& newFirstName)
 {
-    m_firstName = newFirstName;
+    m_user.setFirstName(newFirstName);
 }
 
 
 QString UserService::getLastName()
 {
-    return m_lastName;
+    return m_user.getLastName();
 }
 
 void UserService::setLastName(const QString& newLastName)
 {
-    m_lastName = newLastName;
+    m_user.setLastName(newLastName);
 }
 
 
 QString UserService::getEmail()
 {
-    return m_email;
+    return m_user.getEmail();
 }
 
 void UserService::setEmail(const QString& newEmail)
 {
-    m_email = newEmail;
+    m_user.setEmail(newEmail);
 }
 
 void UserService::setAuthenticationToken(const QString& token)
