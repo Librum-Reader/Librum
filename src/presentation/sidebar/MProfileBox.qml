@@ -48,7 +48,7 @@ Item
                     id: initials
                     anchors.centerIn: parent
                     visible: Globals.profilePicture.length === 0
-                    text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase() 
+                    text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase()
                     font.pointSize: 12
                     font.bold: true
                     color: Style.colorBrightText

@@ -73,7 +73,7 @@ Popup
                     
                     Label
                     {
-                        id: whoops
+                        id: header
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: "We're Sorry"
@@ -100,13 +100,13 @@ Popup
                     {
                         id: buttonRow
                         Layout.preferredWidth: parent.width
-                        Layout.preferredHeight: acceptButton.height
+                        Layout.preferredHeight: okButton.height
                         Layout.topMargin: 62
                         spacing: 42
                         
                         MButton
                         {
-                            id: acceptButton
+                            id: okButton
                             Layout.preferredWidth: 100
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
@@ -143,7 +143,7 @@ Popup
                         
                         MButton
                         {
-                            id: declineButton
+                            id: reportButton
                             Layout.preferredWidth: 100
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
@@ -185,6 +185,6 @@ Popup
     
     function giveFocus()
     {
-        acceptButton.forceActiveFocus();
+        okButton.forceActiveFocus();
     }
 }
