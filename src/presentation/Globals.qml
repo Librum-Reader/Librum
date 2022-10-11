@@ -7,7 +7,4 @@ Item
     property var bookTags: []
     
     property string profilePicture
-    property string firstName: "Kai"
-    property string lastName: "Doe"
-    property string email: "Kaidoe@gmail.com"
 }
