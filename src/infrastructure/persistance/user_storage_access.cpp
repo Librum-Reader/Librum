@@ -18,6 +18,7 @@ void UserStorageAccess::getUser(const QString& authenticationToken)
                      this, &UserStorageAccess::proccessGetUserResult);
 }
 
+
 void UserStorageAccess::proccessGetUserResult()
 {
     int expectedStatusCode = 200;
@@ -27,8 +28,23 @@ void UserStorageAccess::proccessGetUserResult()
         return;
     }
     
-    emit userReady("placeHolder", "placeHolder", "placeHolder");
+    
+    QByteArray jsonBytes = m_reply->readAll();
+    
+    QJsonDocument jsonResponse = QJsonDocument::fromJson(jsonBytes);
+    if(jsonResponse.isNull() || !jsonResponse.isObject())
+        emit gettingUserFailed();
+    
+    QVariantMap map = jsonResponse.object().toVariantMap();
+    qDebug() << map["firstName"].toString();
+    
+    auto firstName = map["firstName"].toString();
+    auto lastName = map["lastName"].toString();
+    auto email = map["email"].toString();
+    
+    emit userReady(firstName, lastName, email);
 }
+
 
 QNetworkRequest UserStorageAccess::createRequest(const QUrl& url, 
                                                  const QString& authToken)
