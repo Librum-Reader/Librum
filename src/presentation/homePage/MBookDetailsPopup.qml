@@ -248,6 +248,7 @@ Popup
                         contentWidth: width
                         clip: true
                         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
+                        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                         
                         Component.onCompleted: contentItem.maximumFlickVelocity = 600
                         
