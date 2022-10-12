@@ -4,6 +4,8 @@
 #include <QByteArray>
 #include <QVariant>
 #include "book.hpp"
+#include "tag.hpp"
+#include "tag_dto.hpp"
 
 
 namespace adapters::data_models
@@ -50,6 +52,8 @@ public slots:
     
 private:
     QString convertImageToString(const QImage& image) const;
+    QList<dtos::TagDto> convertTagsToDtos(const std::vector<domain::
+                                          models::Tag>& tags) const;
     
     const std::vector<domain::models::Book>& m_data;
 };

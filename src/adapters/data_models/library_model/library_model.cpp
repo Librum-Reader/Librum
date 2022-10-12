@@ -33,8 +33,6 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return QVariant();
     
     const Book& book = m_data.at(index.row());
-    
-    QList<dtos::TagDto> tagDtos;
     switch(role)
     {
     case TitleRole:
@@ -76,16 +74,10 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getLastOpened();
         break;
     case CoverRole:
-        if(book.getCover().isNull())
-            return QString("");
         return convertImageToString(book.getCover());
         break;
     case TagsRole:
-        for(const auto& tag : book.getTags())
-        {
-            tagDtos.push_back(dtos::TagDto{ .name = tag.getName() });
-        }
-        return QVariant::fromValue(tagDtos);
+        return QVariant::fromValue(convertTagsToDtos(book.getTags()));
         break;
     default:
         return QVariant();
@@ -124,6 +116,9 @@ void LibraryModel::processBookCover(int row)
 
 QString LibraryModel::convertImageToString(const QImage& image) const
 {
+    if(image.isNull())
+        return QString("");
+    
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
     
@@ -132,6 +127,19 @@ QString LibraryModel::convertImageToString(const QImage& image) const
     QString base64 = QString::fromUtf8(byteArray.toBase64());
     
     return QString("data:image/png;base64,") + base64;
+}
+
+QList<dtos::TagDto> LibraryModel::convertTagsToDtos(const std::vector<domain::
+                                                    models::Tag>& tags) const
+{
+    QList<dtos::TagDto> tagDtos;
+    for(const auto& tag : tags)
+    {
+        auto tagDto = dtos::TagDto{ .name = tag.getName() };
+        tagDtos.push_back(tagDto);
+    }
+    
+    return tagDtos;
 }
 
 
