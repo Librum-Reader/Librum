@@ -48,7 +48,6 @@ struct AUserController : public ::testing::Test
 
 
 
-
 TEST_F(AUserController, SucceedsLoadingABook)
 {
     // Expect
