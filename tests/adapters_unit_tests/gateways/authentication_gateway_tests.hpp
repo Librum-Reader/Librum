@@ -25,53 +25,56 @@ public:
 };
 
 
+struct AnAuthenticationGateway : public ::testing::Test
+{
+    void SetUp() override
+    {
+        authGateway = std::make_unique<AuthenticationGateway>(&authAccessMock);
+    }
+    
+    AuthenticationAccessMock authAccessMock;
+    std::unique_ptr<AuthenticationGateway> authGateway;
+};
 
 
-TEST(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
+
+
+TEST_F(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
-    AuthenticationAccessMock authenticationAccessMock;
-    AuthenticationGateway AuthenticationGateway(&authenticationAccessMock);
-    
     models::LoginModel loginModel("someEmail@librum.com", "SomePassword123");
     
     
     // Expect
-    EXPECT_CALL(authenticationAccessMock, authenticateUser(_))
+    EXPECT_CALL(authAccessMock, authenticateUser(_))
             .Times(1);
     
     // Act
-    AuthenticationGateway.authenticateUser(loginModel);
+    authGateway->authenticateUser(loginModel);
 }
 
 
-TEST(AnAuthenticationGateway, SucceedsRegisteringAUser)
+TEST_F(AnAuthenticationGateway, SucceedsRegisteringAUser)
 {
     // Arrange
-    AuthenticationAccessMock authenticationAccessMock;
-    AuthenticationGateway AuthenticationGateway(&authenticationAccessMock);
-    
     models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com", 
                                      "SomePassword123", false);
     
     
     // Expect
-    EXPECT_CALL(authenticationAccessMock, registerUser(_))
+    EXPECT_CALL(authAccessMock, registerUser(_))
             .Times(1);
     
     // Act
-    AuthenticationGateway.registerUser(registerModel);
+    authGateway->registerUser(registerModel);
 }
 
 
 
-TEST(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
+TEST_F(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
 {
     // Arrange
-    AuthenticationAccessMock authenticationAccessMock;
-    AuthenticationGateway AuthenticationGateway(&authenticationAccessMock);
-    
-    QSignalSpy spy(&AuthenticationGateway,
+    QSignalSpy spy(authGateway.get(), 
                    SIGNAL(authenticationFinished(const QString&)));
     
     QString token("someToken");
@@ -81,7 +84,7 @@ TEST(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
     
     
     // Act
-    AuthenticationGateway.reemitAuthenticationResult(token);
+    authGateway->reemitAuthenticationResult(token);
     
     // Assert
     auto arguments = spy[0];
@@ -90,13 +93,10 @@ TEST(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
 }
 
 
-TEST(AnAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
+TEST_F(AnAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
 {
     // Arrange
-    AuthenticationAccessMock authenticationAccessMock;
-    AuthenticationGateway AuthenticationGateway(&authenticationAccessMock);
-    
-    QSignalSpy spy(&AuthenticationGateway,
+    QSignalSpy spy(authGateway.get(),
                    SIGNAL(registrationFinished(bool, const QString&)));
     
     models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
@@ -104,7 +104,7 @@ TEST(AnAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
     
     
     // Act
-    AuthenticationGateway.reemitRegistrationResult(true, "some token");
+    authGateway->reemitRegistrationResult(true, "some token");
     
     // Assert
     auto arguments = spy[0];
