@@ -7,8 +7,8 @@ namespace adapters::controllers
 UserController::UserController(application::IUserService* userService)
     : m_userService(userService)
 {
-    QObject::connect(m_userService, &application::IUserService::finishedLoadingUser,
-                     this, &UserController::proccessUserLoadingResult);
+    connect(m_userService, &application::IUserService::finishedLoadingUser,
+            this, &UserController::proccessUserLoadingResult);
 }
 
 
@@ -55,8 +55,8 @@ QString UserController::getEmail()
 void UserController::setEmail(const QString& newEmail)
 {
     if(newEmail == m_userService->getEmail())
-            return;
-        
+        return;
+    
     m_userService->setEmail(newEmail);
     emit emailChanged();
 }

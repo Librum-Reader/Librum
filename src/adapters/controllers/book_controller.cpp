@@ -20,28 +20,30 @@ BookController::BookController(application::IBookService* bookService)
       m_libraryModel(m_bookService->getBooks())
 {
     // book insertion
-    QObject::connect(m_bookService, &application::IBookService::bookInsertionStarted,
-                     &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
-    QObject::connect(m_bookService, &application::IBookService::bookInsertionEnded,
-                     &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
+    connect(m_bookService, &application::IBookService::bookInsertionStarted,
+            &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
+    
+    connect(m_bookService, &application::IBookService::bookInsertionEnded,
+            &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
     
     // book deletion
-    QObject::connect(m_bookService, &application::IBookService::bookDeletionStarted,
-                     &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
-    QObject::connect(m_bookService, &application::IBookService::bookDeletionEnded,
-                     &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
+    connect(m_bookService, &application::IBookService::bookDeletionStarted,
+            &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
+    
+    connect(m_bookService, &application::IBookService::bookDeletionEnded,
+            &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
     
     // tags changed
-    QObject::connect(m_bookService, &application::IBookService::tagsChanged,
-                     &m_libraryModel, &data_models::LibraryModel::refreshTags);
+    connect(m_bookService, &application::IBookService::tagsChanged,
+            &m_libraryModel, &data_models::LibraryModel::refreshTags);
     
     // data changed
-    QObject::connect(m_bookService, &application::IBookService::dataChanged,
-                     &m_libraryModel, &data_models::LibraryModel::refreshBook);
+    connect(m_bookService, &application::IBookService::dataChanged,
+            &m_libraryModel, &data_models::LibraryModel::refreshBook);
     
     // book cover processing
-    QObject::connect(m_bookService, &application::IBookService::bookCoverGenerated,
-                     &m_libraryModel, &data_models::LibraryModel::processBookCover);
+    connect(m_bookService, &application::IBookService::bookCoverGenerated,
+            &m_libraryModel, &data_models::LibraryModel::processBookCover);
 }
 
 
