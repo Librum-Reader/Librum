@@ -4,32 +4,38 @@
 #include "register_model.hpp"
 
 
+using namespace application;
+
 namespace adapters::controllers
 {
 
-AuthenticationController::AuthenticationController(application::IAuthenticationService* authenticationService)
+AuthenticationController::AuthenticationController(IAuthenticationService* 
+                                                   authenticationService)
     : m_authenticationService(authenticationService)
 {
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::loginFinished,
-                     this, &AuthenticationController::loginFinished);
+    connect(m_authenticationService, &IAuthenticationService::loginFinished,
+            this, &AuthenticationController::loginFinished);
     
-    QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationFinished,
-                     this, &AuthenticationController::registrationFinished);
+    connect(m_authenticationService, &IAuthenticationService::registrationFinished,
+            this, &AuthenticationController::registrationFinished);
 }
 
 
-void AuthenticationController::loginUser(const QString& email, const QString& password)
+void AuthenticationController::loginUser(const QString& email, 
+                                         const QString& password)
 {
     domain::models::LoginModel loginModel(email, password);
     
     m_authenticationService->loginUser(loginModel);
 }
 
-void AuthenticationController::registerUser(const QString& firstName, const QString& lastName,
-                                            const QString& email, QString password,
-                                            bool keepUpdated)
+void AuthenticationController::registerUser(const QString& firstName,
+                                            const QString& lastName, 
+                                            const QString& email,
+                                            QString password, bool keepUpdated)
 {
-    domain::models::RegisterModel registerModel(firstName, lastName, email, password, keepUpdated);
+    domain::models::RegisterModel registerModel(firstName, lastName, 
+                                                email, password, keepUpdated);
     
     m_authenticationService->registerUser(registerModel);
 }
