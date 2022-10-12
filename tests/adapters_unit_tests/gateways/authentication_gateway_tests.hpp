@@ -5,7 +5,6 @@
 #include <QSignalSpy>
 #include "authentication_gateway.hpp"
 #include "i_authentication_access.hpp"
-#include "i_user_storage_access.hpp"
 #include "login_model.hpp"
 
 

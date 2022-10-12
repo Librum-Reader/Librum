@@ -5,9 +5,10 @@
 
 using namespace testing;
 
+
 namespace tests::adapters
 {
 
-
+    
 
 } // namespace tests::adapters
