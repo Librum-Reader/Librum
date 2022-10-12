@@ -29,13 +29,25 @@ public:
 };
 
 
+struct AnAuthenticationController : public ::testing::Test
+{
+    AnAuthenticationController() {}
+    
+    void SetUp() override
+    {
+        authController = std::make_unique<AuthenticationController>(&authServiceMock);
+    }
+    
+    AuthenticationServiceMock authServiceMock;
+    std::unique_ptr<AuthenticationController> authController;
+};
 
-TEST(AnAuthenticationController, SucceedsLogingAUserIn)
+
+
+
+TEST_F(AnAuthenticationController, SucceedsLogingAUserIn)
 {
     // Arrange
-    AuthenticationServiceMock authServiceMock;
-    AuthenticationController authController(&authServiceMock);
-    
     QString email = "SomeEmail@librum.com";
     QString password = "SomePassword12345";
 
@@ -46,15 +58,12 @@ TEST(AnAuthenticationController, SucceedsLogingAUserIn)
     
     
     // Act
-    authController.loginUser(email, password);
+    authController->loginUser(email, password);
 }
 
-TEST(AnAuthenticationController, SucceedsRegisteringAUser)
+TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)
 {
     // Arrange
-    AuthenticationServiceMock authServiceMock;
-    AuthenticationController authController(&authServiceMock);
-    
     QString firstName = "Kai";
     QString lastName = "Doe";
     QString email = "SomeEmail@librum.com";
@@ -66,9 +75,9 @@ TEST(AnAuthenticationController, SucceedsRegisteringAUser)
     EXPECT_CALL(authServiceMock, registerUser(_))
             .Times(1);
     
-    
     // Act
-    authController.registerUser(firstName, lastName, email, password, keepUpdated);
+    authController->registerUser(firstName, lastName, email,
+                                 password, keepUpdated);
 }
 
 } // namespace tests::adapters
