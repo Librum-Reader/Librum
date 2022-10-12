@@ -61,7 +61,8 @@ void BookInfoHelper::getCover() const
 {
     auto coverSize = getCoverSize();
     auto request = new PixmapRequest(m_observer.get(), 0, coverSize.width(),
-                                     coverSize.height(), 1, 1, PixmapRequest::NoFeature);
+                                     coverSize.height(), 1, 1,
+                                     PixmapRequest::NoFeature);
     
     m_document->requestPixmaps({request});
 }
@@ -110,13 +111,15 @@ QString BookInfoHelper::getFormat() const
 
 QString BookInfoHelper::getDocumentSize() const
 {
-    const QString& docSize = m_document->documentInfo().get(DocumentInfo::DocumentSize);
+    const QString& docSize = m_document->documentInfo()
+                             .get(DocumentInfo::DocumentSize);
     return docSize;
 }
 
 QString BookInfoHelper::getPagesSize() const
 {
-    const QString& pagesSize = m_document->documentInfo().get(DocumentInfo::PagesSize);
+    const QString& pagesSize = m_document->documentInfo()
+                               .get(DocumentInfo::PagesSize);
     return pagesSize;
 }
 
