@@ -6,10 +6,11 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Test Quick REQUIRED)
 # Build tests
 add_executable(adapters_unit_tests
                     main.cpp
-                    book_controller_tests.hpp
-                    authentication_controller_tests.hpp
-                    user_controller_tests.hpp
-                    user_storage_gateway_tests.hpp
+                    controllers/book_controller_tests.hpp
+                    controllers/authentication_controller_tests.hpp
+                    controllers/user_controller_tests.hpp
+                    gateways/user_storage_gateway_tests.hpp
+                    gateways/authentication_gateway_tests.hpp
     )
 
 target_link_libraries(adapters_unit_tests
@@ -31,4 +32,6 @@ target_include_directories(adapters_unit_tests
                     ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
                     ${PROJECT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/controllers
+                    ${CMAKE_CURRENT_SOURCE_DIR}/gateways
 )

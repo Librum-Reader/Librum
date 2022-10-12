@@ -6,9 +6,9 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Xml PrintSupport Test R
 # Build tests
 add_executable(application_unit_tests
                     main.cpp
-                    book_service_tests.hpp
-                    user_service_tests.hpp
-                    authentication_service_tests.hpp
+                    services/book_service_tests.hpp
+                    services/user_service_tests.hpp
+                    services/authentication_service_tests.hpp
                     book_info_helper_tests.hpp
     )
 
@@ -31,4 +31,5 @@ target_include_directories(application_unit_tests
                     ${APPLICATION_INCLUDES}
                     ${DOMAIN_INCLUDES}
                     ${PROJECT_SOURCE_DIR}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/services
 )
