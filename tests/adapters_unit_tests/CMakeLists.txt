@@ -8,6 +8,7 @@ add_executable(adapters_unit_tests
                     main.cpp
                     book_controller_tests.hpp
                     authentication_controller_tests.hpp
+                    user_controller_tests.hpp
                     user_storage_gateway_tests.hpp
     )
 
