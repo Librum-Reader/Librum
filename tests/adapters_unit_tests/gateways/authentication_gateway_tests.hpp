@@ -27,7 +27,7 @@ public:
 
 
 
-TEST(AAuthenticationGateway, SucceedsAuthenticatingAUser)
+TEST(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
     AuthenticationAccessMock authenticationAccessMock;
@@ -45,7 +45,7 @@ TEST(AAuthenticationGateway, SucceedsAuthenticatingAUser)
 }
 
 
-TEST(AAuthenticationGateway, SucceedsRegisteringAUser)
+TEST(AnAuthenticationGateway, SucceedsRegisteringAUser)
 {
     // Arrange
     AuthenticationAccessMock authenticationAccessMock;
@@ -65,7 +65,7 @@ TEST(AAuthenticationGateway, SucceedsRegisteringAUser)
 
 
 
-TEST(AAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
+TEST(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
 {
     // Arrange
     AuthenticationAccessMock authenticationAccessMock;
@@ -90,7 +90,7 @@ TEST(AAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
 }
 
 
-TEST(AAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
+TEST(AnAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
 {
     // Arrange
     AuthenticationAccessMock authenticationAccessMock;

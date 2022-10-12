@@ -59,14 +59,14 @@ struct ABookController : public ::testing::Test
     
     void SetUp() override
     {
-        EXPECT_CALL(bookService, getBooks())
+        EXPECT_CALL(bookServiceMock, getBooks())
                 .WillOnce(ReturnRef(bookVector));
         
-        bookController = std::make_unique<controllers::BookController>(&bookService);
+        bookController = std::make_unique<controllers::BookController>(&bookServiceMock);
     }
     
     const std::vector<Book> bookVector;
-    BookServiceMock bookService;
+    BookServiceMock bookServiceMock;
     std::unique_ptr<controllers::BookController> bookController;
 };
 
@@ -79,7 +79,7 @@ TEST_F(ABookController, SucceedsAddingABook)
     auto expectedResult = BookOperationStatus::Success;
     
     // Expect
-    EXPECT_CALL(bookService, addBook(_))
+    EXPECT_CALL(bookServiceMock, addBook(_))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::Success));
     
@@ -97,7 +97,7 @@ TEST_F(ABookController, FailsAddingABookIfTheBookAlreadyExists)
     
     
     // Expect
-    EXPECT_CALL(bookService, addBook(_))
+    EXPECT_CALL(bookServiceMock, addBook(_))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::BookAlreadyExists));
     
@@ -117,7 +117,7 @@ TEST_F(ABookController, SucceedsDeletingABook)
     
     
     // Expect
-    EXPECT_CALL(bookService, deleteBook(_))
+    EXPECT_CALL(bookServiceMock, deleteBook(_))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::Success));
     
@@ -135,7 +135,7 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
     
     
     // Expect
-    EXPECT_CALL(bookService, deleteBook(_))
+    EXPECT_CALL(bookServiceMock, deleteBook(_))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
     
@@ -162,11 +162,11 @@ TEST_F(ABookController, SucceedsUpdatingABook)
     
     
     // Expect
-    EXPECT_CALL(bookService, getBook(_))
+    EXPECT_CALL(bookServiceMock, getBook(_))
             .Times(1)
             .WillOnce(Return(&bookToReturn));
     
-    EXPECT_CALL(bookService, updateBook(_, _))
+    EXPECT_CALL(bookServiceMock, updateBook(_, _))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::Success));
     
@@ -183,7 +183,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
     // Expect
-    EXPECT_CALL(bookService, getBook(_))
+    EXPECT_CALL(bookServiceMock, getBook(_))
             .Times(1)
             .WillOnce(Return(nullptr));
     
@@ -194,7 +194,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
+TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 {
     // Arrange
     Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
@@ -207,7 +207,7 @@ TEST_F(ABookController, FailsUpdatingABookIfAPropertyDoesNotExist)
     
     
     // Expect
-    EXPECT_CALL(bookService, getBook(_))
+    EXPECT_CALL(bookServiceMock, getBook(_))
             .Times(1)
             .WillOnce(Return(&bookToReturn));
     
@@ -243,7 +243,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     
     
     // Expect
-    EXPECT_CALL(bookService, getBooks())
+    EXPECT_CALL(bookServiceMock, getBooks())
             .Times(1)
             .WillOnce(ReturnRef(booksToReturn));
     
@@ -261,7 +261,6 @@ TEST_F(ABookController, SucceedsGettingABook)
 }
 
 
-
 TEST_F(ABookController, SucceedsGettingTheBookCount)
 {
     // Arrange
@@ -273,7 +272,7 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
     
     
     // Expect
-    EXPECT_CALL(bookService, getBookCount())
+    EXPECT_CALL(bookServiceMock, getBookCount())
             .Times(1)
             .WillOnce(Return(2));
     
@@ -294,7 +293,7 @@ TEST_F(ABookController, SucceedsAddingATag)
     auto expectedResult = BookOperationStatus::Success;
     
     // Expect
-    EXPECT_CALL(bookService, addTag(_, _))
+    EXPECT_CALL(bookServiceMock, addTag(_, _))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::Success));
     
@@ -313,7 +312,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
     
     // Expect
-    EXPECT_CALL(bookService, addTag(_, _))
+    EXPECT_CALL(bookServiceMock, addTag(_, _))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
     
@@ -332,7 +331,7 @@ TEST_F(ABookController, SucceedsRemovingATag)
     auto expectedResult = BookOperationStatus::Success;
     
     // Expect
-    EXPECT_CALL(bookService, removeTag(_, _))
+    EXPECT_CALL(bookServiceMock, removeTag(_, _))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::Success));
     
@@ -349,7 +348,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
     auto expectedResult = BookOperationStatus::TagDoesNotExist;
     
     // Expect
-    EXPECT_CALL(bookService, removeTag(_, _))
+    EXPECT_CALL(bookServiceMock, removeTag(_, _))
             .Times(1)
             .WillOnce(Return(BookOperationStatus::TagDoesNotExist));
     
@@ -368,12 +367,35 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
     QString book = "Some Book";
     
     // Expect
-    EXPECT_CALL(bookService, refreshLastOpenedFlag(_))
+    EXPECT_CALL(bookServiceMock, refreshLastOpenedFlag(_))
             .Times(1)
             .WillOnce(Return(true));
     
     // Act
     bookController->refreshLastOpenedFlag(book);
+}
+
+
+
+TEST_F(ABookController, SucceedsSavingABookToAPath)
+{
+    // Arrange
+    QString book = "SomeBook";
+    QString url = "/some/url";
+    
+    auto expectedResult = BookOperationStatus::Success;
+    
+    
+    // Expect
+    EXPECT_CALL(bookServiceMock, saveBookToPath)
+            .Times(1)
+            .WillOnce(Return(BookOperationStatus::Success));
+    
+    // Act
+    auto result = bookController->saveBookToPath(book, url);
+    
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
 } // namespace tests::adapters
