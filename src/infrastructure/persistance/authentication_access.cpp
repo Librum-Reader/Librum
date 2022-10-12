@@ -1,6 +1,9 @@
 #include "authentication_access.hpp"
 
 
+using namespace adapters::dtos;
+
+
 namespace infrastructure::persistence
 {
 
@@ -11,7 +14,7 @@ AuthenticationAccess::AuthenticationAccess()
 }
 
 
-void AuthenticationAccess::authenticateUser(const adapters::dtos::LoginDto& loginDto)
+void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
 {
     auto request = createRequest(m_authenticationEndpoint);
         
@@ -25,11 +28,11 @@ void AuthenticationAccess::authenticateUser(const adapters::dtos::LoginDto& logi
     
     m_reply.reset(m_networkAccessManager.post(request, data));
     
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, 
-                     this, &AuthenticationAccess::proccessAuthenticationResult);
+    connect(m_reply.get(), &QNetworkReply::finished, 
+            this, &AuthenticationAccess::proccessAuthenticationResult);
 }
 
-void AuthenticationAccess::registerUser(const adapters::dtos::RegisterDto& registerDto)
+void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
 {
     auto request = createRequest(m_registrationEndpoint);
     
@@ -45,17 +48,15 @@ void AuthenticationAccess::registerUser(const adapters::dtos::RegisterDto& regis
     
     m_reply.reset(m_networkAccessManager.post(request, data));
     
-    QObject::connect(m_reply.get(), &QNetworkReply::finished,
-                     this, &AuthenticationAccess::proccessRegistrationResult);
+    connect(m_reply.get(), &QNetworkReply::finished,
+            this, &AuthenticationAccess::proccessRegistrationResult);
 }
 
 
 bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
 {
     if(m_reply->error() != QNetworkReply::NoError)
-    {
         qDebug() << "there was an error! " << m_reply->errorString();
-    }
     
     int statusCode = m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if(statusCode != expectedStatusCode)

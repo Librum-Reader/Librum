@@ -23,8 +23,8 @@ BookInfoHelper::BookInfoHelper()
     m_document = std::make_unique<Document>(nullptr);
     m_document->addObserver(m_observer.get());
     
-    QObject::connect(m_observer.get(), &CoverObserver::pageChanged, 
-                     this, &BookInfoHelper::proccessBookCoverPixmap);
+    connect(m_observer.get(), &CoverObserver::pageChanged, 
+            this, &BookInfoHelper::proccessBookCoverPixmap);
 }
 
 

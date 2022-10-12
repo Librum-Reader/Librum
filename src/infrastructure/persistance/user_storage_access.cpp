@@ -15,8 +15,8 @@ void UserStorageAccess::getUser(const QString& authToken)
     
     m_reply.reset(m_networkAccessManager.get(request));
     
-    QObject::connect(m_reply.get(), &QNetworkReply::finished, 
-                     this, &UserStorageAccess::proccessGetUserResult);
+    connect(m_reply.get(), &QNetworkReply::finished, 
+            this, &UserStorageAccess::proccessGetUserResult);
 }
 
 void UserStorageAccess::changeFirstName(const QString& authToken,
@@ -92,9 +92,7 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
 bool UserStorageAccess::checkForErrors(int expectedStatusCode)
 {
     if(m_reply->error() != QNetworkReply::NoError)
-    {
         qDebug() << "there was an error! " << m_reply->errorString();
-    }
     
     int statusCode = m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if(statusCode != expectedStatusCode)
