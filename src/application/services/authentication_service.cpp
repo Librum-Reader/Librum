@@ -8,30 +8,27 @@ using namespace domain::models;
 namespace application::services
 {
 
-AuthenticationService::AuthenticationService(IAuthenticationGateway* authenticationGateway)
+AuthenticationService::AuthenticationService(IAuthenticationGateway*
+                                             authenticationGateway)
     : m_authenticationGateway(authenticationGateway)
 {
-    QObject::connect(m_authenticationGateway, &IAuthenticationGateway::authenticationFinished,
-                     this, &AuthenticationService::processAuthenticationResult);
+    connect(m_authenticationGateway, &IAuthenticationGateway::authenticationFinished,
+            this, &AuthenticationService::processAuthenticationResult);
     
-    QObject::connect(m_authenticationGateway, &IAuthenticationGateway::registrationFinished,
-                     this, &AuthenticationService::processRegistrationResult);
+    connect(m_authenticationGateway, &IAuthenticationGateway::registrationFinished,
+            this, &AuthenticationService::processRegistrationResult);
     
-    QObject::connect(this, &AuthenticationService::authenticationTokenRegistered,
-                     this, &AuthenticationService::setAuthenticationToken);
+    connect(this, &AuthenticationService::authenticationTokenRegistered,
+            this, &AuthenticationService::setAuthenticationToken);
 }
 
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
     if(loginModel.isValid())
-    {
         m_authenticationGateway->authenticateUser(loginModel);
-    }
     else
-    {
         emit loginFinished(false);
-    }
 }
 
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
