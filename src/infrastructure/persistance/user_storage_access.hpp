@@ -32,7 +32,7 @@ public:
                      const QString& newEmail) override;
     
 private slots:
-    void proccessGetUserResult() override;
+    void proccessGetUserResult();
     
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);

@@ -21,9 +21,6 @@ public:
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
     
-private slots:
-    virtual void proccessGetUserResult() = 0;
-    
 signals:
     void userReady(const QString firstName, const QString lastName, 
                    const QString email);
