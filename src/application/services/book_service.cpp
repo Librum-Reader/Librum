@@ -18,9 +18,8 @@ using std::size_t;
 BookService::BookService(IBookInfoHelper* bookInfoManager)
     : m_bookInfoManager(bookInfoManager)
 {
-    // Book Cover
-    QObject::connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
-                     this, &BookService::storeBookCover);
+    connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+            this, &BookService::storeBookCover);
 }
 
 
@@ -31,7 +30,6 @@ BookOperationStatus BookService::addBook(const QString& filePath)
         return BookOperationStatus::OpeningBookFailed;
     
     QString title = m_bookInfoManager->getTitle();
-    
     auto book = getBookByTitle(title);
     if(book)
         return BookOperationStatus::BookAlreadyExists;
@@ -162,10 +160,7 @@ BookOperationStatus BookService::saveBookToPath(const QString& title,
     
     auto result = QFile::copy(existingBook.path(), newBook.path());
     if(!result)
-    {   
-        qDebug() << "Copying book failed!";
         return BookOperationStatus::OperationFailed;
-    }
     
     
     return BookOperationStatus::Success;
