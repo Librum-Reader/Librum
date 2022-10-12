@@ -26,45 +26,53 @@ public:
 };
 
 
+struct AnAuthenticationService : public ::testing::Test
+{
+    AnAuthenticationService() {}
+    
+    void SetUp() override
+    {
+        authService = std::make_unique<AuthenticationService>(&authGatewayMock);
+    }
+    
+    AuthenticationGatewayMock authGatewayMock;
+    std::unique_ptr<AuthenticationService> authService;
+};
 
-TEST(AnAuthenticationService, SucceedsLogingUserIn)
+
+
+TEST_F(AnAuthenticationService, SucceedsLogingUserIn)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
     QString someValidEmail = "someEmail@librum.com";
     QString someValidPassword = "SomePassword123";
     models::LoginModel loginModel(someValidEmail, someValidPassword);
     
     
     // Expect
-    EXPECT_CALL(authenticationGateway, authenticateUser(_))
+    EXPECT_CALL(authGatewayMock, authenticateUser(_))
             .Times(1);
     
     // Act
-    authService.loginUser(loginModel);
+    authService->loginUser(loginModel);
 }
 
-TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
+TEST_F(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
-    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
     
     QString someInvalidEmail = "inval";
-    QString someInvalidPassword = "Somee";
+    QString someInvalidPassword = "Somep";
     models::LoginModel loginModel(someInvalidEmail, someInvalidPassword);
     
     
     // Expect
-    EXPECT_CALL(authenticationGateway, authenticateUser(_))
+    EXPECT_CALL(authGatewayMock, authenticateUser(_))
             .Times(0);
     
     // Act
-    authService.loginUser(loginModel);
+    authService->loginUser(loginModel);
     
     // Assert
     auto arguments = spy[0];
@@ -74,12 +82,9 @@ TEST(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 
 
 
-TEST(AnAuthenticationService, SucceedsRegisteringUser)
+TEST_F(AnAuthenticationService, SucceedsRegisteringUser)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
     QString firstName = "John";
     QString lastName = "Doe";
     QString email = "someEmail@librum.com";
@@ -90,20 +95,17 @@ TEST(AnAuthenticationService, SucceedsRegisteringUser)
     
     
     // Expect
-    EXPECT_CALL(authenticationGateway, registerUser(_))
+    EXPECT_CALL(authGatewayMock, registerUser(_))
             .Times(1);
     
     // Act
-    authService.registerUser(registerModel);
+    authService->registerUser(registerModel);
 }
 
-TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
+TEST_F(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
-    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
+    QSignalSpy spy(authService.get(), &AuthenticationService::registrationFinished);
     
     QString invalidFirstName = "J";
     QString lastName = "Doe";
@@ -115,11 +117,11 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
     
     
     // Expect
-    EXPECT_CALL(authenticationGateway, registerUser(_))
+    EXPECT_CALL(authGatewayMock, registerUser(_))
             .Times(0);
     
     // Act
-    authService.registerUser(registerModel);
+    authService->registerUser(registerModel);
     
     // Assert
     auto arguments = spy[0];
@@ -129,16 +131,13 @@ TEST(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
 
 
 
-TEST(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
+TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
-    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
     
     // Act
-    authService.processAuthenticationResult("validToken");
+    authService->processAuthenticationResult("validToken");
     
     // Assert
     auto arguments = spy[0];
@@ -146,16 +145,13 @@ TEST(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
     EXPECT_EQ(true, arguments[0].toBool());
 }
 
-TEST(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
+TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
-    QSignalSpy spy(&authService, SIGNAL(loginFinished(bool)));
+    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
     
     // Act
-    authService.processAuthenticationResult("");
+    authService->processAuthenticationResult("");
     
     // Assert
     auto arguments = spy[0];
@@ -165,16 +161,14 @@ TEST(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
 
 
 
-TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
+TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
+    QSignalSpy spy(authService.get(), &AuthenticationService::registrationFinished);
     
-    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
     
     // Act
-    authService.processRegistrationResult(true, "");
+    authService->processRegistrationResult(true, "");
     
     // Assert
     auto arguments = spy[0];
@@ -182,16 +176,13 @@ TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
     EXPECT_EQ(true, arguments[0].toBool());
 }
 
-TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
+TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
 {
     // Arrange
-    AuthenticationGatewayMock authenticationGateway;
-    AuthenticationService authService(&authenticationGateway);
-    
-    QSignalSpy spy(&authService, SIGNAL(registrationFinished(bool, const QString&)));
+    QSignalSpy spy(authService.get(), &AuthenticationService::registrationFinished);
     
     // Act
-    authService.processRegistrationResult(false, "Some reason");
+    authService->processRegistrationResult(false, "Some reason");
     
     // Assert
     auto arguments = spy[0];
