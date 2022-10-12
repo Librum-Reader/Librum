@@ -78,6 +78,7 @@ TEST_F(ABookController, SucceedsAddingABook)
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
     
+    
     // Expect
     EXPECT_CALL(bookServiceMock, addBook(_))
             .Times(1)
@@ -152,10 +153,13 @@ TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
     Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
+    
+    auto titleNumber = static_cast<int>(IBookController::MetaProperties::Title);
+    auto authorNumber = static_cast<int>(IBookController::MetaProperties::Author);
     QVariantMap map
     {
-        {QString::number(static_cast<int>(IBookController::MetaProperties::Title)), "AnotherTitle"},
-        {QString::number(static_cast<int>(IBookController::MetaProperties::Author)), "DifferentAuthor"}
+        {QString::number(titleNumber), "AnotherTitle"},
+        {QString::number(authorNumber), "DifferentAuthor"}
     };
     
     auto expectedResult = BookOperationStatus::Success;
@@ -182,6 +186,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
     // Arrange
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
+    
     // Expect
     EXPECT_CALL(bookServiceMock, getBook(_))
             .Times(1)
@@ -198,9 +203,11 @@ TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 {
     // Arrange
     Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
+    
+    int nonExistentProperty = 150;
     QVariantMap map
     { 
-        {"81", "SomeValue"}
+        {QString::number(nonExistentProperty), "SomeValue"}
     };
     
     auto expectedResult = BookOperationStatus::PropertyDoesNotExist;
@@ -227,19 +234,19 @@ TEST_F(ABookController, SucceedsGettingABook)
     QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
     QImage cover("0fdd244123bc");
-    QString firstTagName = "FirstTag";
-    QString secondTagName = "SecondTag";
+    QString tagNames[2] { "FirstTag", "SecondTag" };
     std::vector<Book> booksToReturn{ Book(title, author, filePath, cover) };
-    booksToReturn[0].addTag(Tag(firstTagName));
-    booksToReturn[0].addTag(Tag(secondTagName));
+    booksToReturn[0].addTag(tagNames[0]);
+    booksToReturn[0].addTag(tagNames[1]);
     
-    dtos::TagDto firstTag { .name = firstTagName};
-    dtos::TagDto secondTag { .name = secondTagName };
-    dtos::BookDto expectedResult;
-    expectedResult.title = title;
-    expectedResult.filePath = filePath;
-    expectedResult.tags.append(firstTag);
-    expectedResult.tags.append(secondTag);
+    dtos::TagDto firstTag { .name = tagNames[0] };
+    dtos::TagDto secondTag { .name = tagNames[1] };
+    dtos::BookDto expectedResult
+    {
+        .title = title,
+        .filePath = filePath,
+        .tags = { firstTag, secondTag }
+    };
     
     
     // Expect
@@ -288,9 +295,8 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
 TEST_F(ABookController, SucceedsAddingATag)
 {
     // Arrange
-    QString tagName = "SomeTag";
-    
     auto expectedResult = BookOperationStatus::Success;
+    
     
     // Expect
     EXPECT_CALL(bookServiceMock, addTag(_, _))
@@ -298,7 +304,7 @@ TEST_F(ABookController, SucceedsAddingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", tagName);
+    auto result = bookController->addTag("SomeTitle", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -307,9 +313,8 @@ TEST_F(ABookController, SucceedsAddingATag)
 TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
 {
     // Arrange
-    QString tagName = "SomeTag";
-    
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
+    
     
     // Expect
     EXPECT_CALL(bookServiceMock, addTag(_, _))
@@ -317,7 +322,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
             .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", tagName);
+    auto result = bookController->addTag("SomeTitle", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -329,6 +334,7 @@ TEST_F(ABookController, SucceedsRemovingATag)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
+    
     
     // Expect
     EXPECT_CALL(bookServiceMock, removeTag(_, _))
@@ -346,6 +352,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::TagDoesNotExist;
+    
     
     // Expect
     EXPECT_CALL(bookServiceMock, removeTag(_, _))
@@ -381,7 +388,7 @@ TEST_F(ABookController, SucceedsSavingABookToAPath)
 {
     // Arrange
     QString book = "SomeBook";
-    QString url = "/some/url";
+    QString url = "/some/url/";
     
     auto expectedResult = BookOperationStatus::Success;
     

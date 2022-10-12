@@ -31,8 +31,6 @@ public:
 
 struct AnAuthenticationController : public ::testing::Test
 {
-    AnAuthenticationController() {}
-    
     void SetUp() override
     {
         authController = std::make_unique<AuthenticationController>(&authServiceMock);
