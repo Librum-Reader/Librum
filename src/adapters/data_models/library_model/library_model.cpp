@@ -34,12 +34,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     
     const Book& book = m_data.at(index.row());
     
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    QString base64;
-    
     QList<dtos::TagDto> tagDtos;
-    
     switch(role)
     {
     case TitleRole:
@@ -83,16 +78,13 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case CoverRole:
         if(book.getCover().isNull())
             return QString("");
-        
-        buffer.open(QIODevice::WriteOnly);
-        book.getCover().save(&buffer, "png");
-        base64 = QString::fromUtf8(byteArray.toBase64());
-        return QString("data:image/png;base64,") + base64;
+        return convertImageToString(book.getCover());
         break;
     case TagsRole:
         for(const auto& tag : book.getTags())
+        {
             tagDtos.push_back(dtos::TagDto{ .name = tag.getName() });
-        
+        }
         return QVariant::fromValue(tagDtos);
         break;
     default:
@@ -128,6 +120,20 @@ void LibraryModel::processBookCover(int row)
     
     emit dataChanged(modelIndex, modelIndex, {CoverRole});
 }
+
+
+QString LibraryModel::convertImageToString(const QImage& image) const
+{
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    
+    buffer.open(QIODevice::WriteOnly);
+    image.save(&buffer, "png");
+    QString base64 = QString::fromUtf8(byteArray.toBase64());
+    
+    return QString("data:image/png;base64,") + base64;
+}
+
 
 void LibraryModel::refreshTags(int row)
 {

@@ -49,6 +49,8 @@ public slots:
     void refreshBook(int row);
     
 private:
+    QString convertImageToString(const QImage& image) const;
+    
     const std::vector<domain::models::Book>& m_data;
 };
 
