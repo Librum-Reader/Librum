@@ -9,12 +9,13 @@ namespace adapters::gateways
 UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess)
     : m_userStorageAccess(userStorageAccess)
 {
-    QObject::connect(m_userStorageAccess, &IUserStorageAccess::userReady,
-                     this, &UserStorageGateway::proccessUserData);
+    connect(m_userStorageAccess, &IUserStorageAccess::userReady,
+            this, &UserStorageGateway::proccessUserData);
     
-    QObject::connect(m_userStorageAccess, &IUserStorageAccess::gettingUserFailed,
-                     this, &UserStorageGateway::reportFailureGettingUser);
+    connect(m_userStorageAccess, &IUserStorageAccess::gettingUserFailed,
+            this, &UserStorageGateway::reportFailureGettingUser);
 }
+
 
 void UserStorageGateway::getUser(const QString& authToken)
 {
@@ -43,11 +44,7 @@ void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email)
 {
-    User user;
-    user.setFirstName(firstName);
-    user.setLastName(lastName);
-    user.setEmail(email);
-    
+    User user (firstName, lastName, email);
     emit finishedGettingUser(user, true);
 }
 

@@ -1,6 +1,9 @@
 #include "authentication_gateway.hpp"
 
 
+using namespace domain::models;
+
+
 namespace adapters::gateways
 {
 
@@ -15,7 +18,7 @@ AuthenticationGateway::AuthenticationGateway(IAuthenticationAccess* authenticati
 }
 
 
-void AuthenticationGateway::authenticateUser(const domain::models::LoginModel& loginModel)
+void AuthenticationGateway::authenticateUser(const LoginModel& loginModel)
 {
     dtos::LoginDto loginDto
     {
@@ -26,7 +29,7 @@ void AuthenticationGateway::authenticateUser(const domain::models::LoginModel& l
     m_authenticationAccess->authenticateUser(loginDto);
 }
 
-void AuthenticationGateway::registerUser(const domain::models::RegisterModel& registerModel)
+void AuthenticationGateway::registerUser(const RegisterModel& registerModel)
 {
     dtos::RegisterDto registerDto
     {
