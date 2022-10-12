@@ -7,6 +7,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Xml PrintSupport Test R
 add_executable(application_unit_tests
                     main.cpp
                     book_service_tests.hpp
+                    user_service_tests.hpp
                     authentication_service_tests.hpp
                     book_info_helper_tests.hpp
     )
