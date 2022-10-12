@@ -17,7 +17,7 @@ void UserService::loadUser()
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
-QString UserService::getFirstName()
+QString UserService::getFirstName() const
 {
     return m_user.getFirstName();
 }
@@ -30,7 +30,7 @@ void UserService::setFirstName(const QString& newFirstName)
 }
 
 
-QString UserService::getLastName()
+QString UserService::getLastName() const
 {
     return m_user.getLastName();
 }
@@ -43,7 +43,7 @@ void UserService::setLastName(const QString& newLastName)
 }
 
 
-QString UserService::getEmail()
+QString UserService::getEmail() const
 {
     return m_user.getEmail();
 }

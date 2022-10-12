@@ -17,13 +17,13 @@ public:
     
     void loadUser() override;
     
-    QString getFirstName() override;
+    QString getFirstName() const override;
     void setFirstName(const QString& newFirstName) override;
     
-    QString getLastName() override;
+    QString getLastName() const override;
     void setLastName(const QString& newLastName) override;
     
-    QString getEmail() override;
+    QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
     
     
@@ -34,7 +34,7 @@ public slots:
     
 private slots:
     void proccessUserInformation(const domain::models::User& user, 
-                                 bool success) override;    
+                                 bool success);    
 
 private:
     IUserStorageGateway* m_userStorageGateway;
