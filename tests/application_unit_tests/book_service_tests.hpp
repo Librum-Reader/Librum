@@ -13,10 +13,14 @@ using namespace testing;
 using ::testing::ReturnRef;
 using application::BookOperationStatus;
 using namespace application::services;
+using namespace application;
 using namespace domain;
 
 
-class BookInfoHelperMock : public application::IBookInfoHelper
+namespace tests::application
+{
+
+class BookInfoHelperMock : public IBookInfoHelper
 {
 public:
     MOCK_METHOD(bool, setupDocument, (const QString& filePath, int w, int h), (override));
@@ -403,3 +407,5 @@ TEST_F(ABookService, SucceedsRefreshLastOpenedFlag)
     // Assert
     EXPECT_NE(before, after);
 }
+
+} // namespace tests::application

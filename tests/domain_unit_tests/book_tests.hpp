@@ -8,6 +8,9 @@
 using namespace domain::models;
 
 
+namespace tests::domain
+{
+
 TEST(ABook, SucceedsAddingATag)
 {
     // Arrange
@@ -115,3 +118,5 @@ TEST(ABook, SucceedsUpdatingBook)
     EXPECT_EQ(expectedResult.getCover(), book.getCover());
     EXPECT_EQ(expectedResult.getTags()[0], book.getTags()[0]);
 }
+
+} // namespace tests::domain

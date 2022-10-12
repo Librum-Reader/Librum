@@ -6,6 +6,9 @@
 using namespace domain::models;
 
 
+namespace tests::domain
+{
+
 TEST(ARegisterModel, SucceedsValidation)
 {
     // Arrange
@@ -121,3 +124,5 @@ TEST(ARegisterModel, FailsValidationIfPasswordIsTooLong)
     // Assert
     EXPECT_EQ(RegisterModel::RegistrationResult::PasswordTooLong, result);
 }
+
+} // namespace tests::domain

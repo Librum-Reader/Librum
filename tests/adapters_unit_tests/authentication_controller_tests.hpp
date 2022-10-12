@@ -15,6 +15,8 @@ using namespace domain::models;
 using namespace application;
 
 
+namespace tests::adapters
+{
 
 class AuthenticationServiceMock : public application::IAuthenticationService
 {
@@ -68,3 +70,5 @@ TEST(AnAuthenticationController, SucceedsRegisteringAUser)
     // Act
     authController.registerUser(firstName, lastName, email, password, keepUpdated);
 }
+
+} // namespace tests::adapters

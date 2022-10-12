@@ -7,6 +7,9 @@
 using namespace testing;
 
 
+namespace tests::application
+{
+
 //TEST(ABookInfoManager, SucceedsParsingBookTitleFromFilePath)
 //{
 //    // Arrange
@@ -38,3 +41,5 @@ using namespace testing;
 //    // Assert
 //    EXPECT_EQ(expectedResult, result);
 //}
+
+} // namespace tests::application

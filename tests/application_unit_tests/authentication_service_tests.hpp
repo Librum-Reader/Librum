@@ -9,11 +9,14 @@
 
 using namespace testing;
 using namespace application::services;
+using namespace application;
 using namespace domain;
 
 
+namespace tests::application
+{
 
-class AuthenticationGatewayMock : public application::IAuthenticationGateway
+class AuthenticationGatewayMock : public IAuthenticationGateway
 {
 public:
     MOCK_METHOD(void, authenticateUser, (const models::LoginModel& loginModel), (override));
@@ -195,3 +198,5 @@ TEST(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
     EXPECT_EQ(1, spy.count());
     EXPECT_EQ(false, arguments[0].toBool());
 }
+
+} // namespace tests::application

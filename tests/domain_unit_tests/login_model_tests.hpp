@@ -7,6 +7,9 @@
 using namespace domain::models;
 
 
+namespace tests::domain
+{
+
 TEST(ALoginModel, SucceedsValidation)
 {
     // Arrange
@@ -68,3 +71,5 @@ TEST(ALoginModel, FailsValidationIfPasswordIsTooLong)
     // Assert
     EXPECT_FALSE(result);
 }
+
+} // namespace tests::domain

@@ -15,8 +15,10 @@ using namespace adapters;
 using namespace domain;
 
 
+namespace tests::adapters
+{
 
-class AuthenticationAccessMock : public adapters::IAuthenticationAccess
+class AuthenticationAccessMock : public IAuthenticationAccess
 {
 public:
     MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto& loginDto), (override));
@@ -110,3 +112,5 @@ TEST(AAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
     EXPECT_EQ(1, spy.count());
     EXPECT_EQ(true, arguments[0].toBool());
 }
+
+} // namespace tests::adapters

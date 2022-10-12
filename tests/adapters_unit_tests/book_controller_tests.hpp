@@ -23,6 +23,9 @@ using namespace application;
 using namespace application;
 
 
+namespace tests::adapters
+{
+
 class BookServiceMock : public application::IBookService
 {
 public:
@@ -373,3 +376,5 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
     // Act
     bookController->refreshLastOpenedFlag(book);
 }
+
+} // namespace tests::adapters
