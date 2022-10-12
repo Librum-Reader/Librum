@@ -20,13 +20,12 @@ using ::testing::ReturnRef;
 using namespace adapters;
 using namespace domain::models;
 using namespace application;
-using namespace application;
 
 
 namespace tests::adapters
 {
 
-class BookServiceMock : public application::IBookService
+class BookServiceMock : public IBookService
 {
 public:
     MOCK_METHOD(BookOperationStatus, addBook, (const QString& filePath), (override));
