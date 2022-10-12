@@ -25,9 +25,9 @@ public:
     
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,
-                          const QString& email) override;
+                          const QString& email);
     
-    void reportFailureGettingUser() override;
+    void reportFailureGettingUser();
     
 private:
     IUserStorageAccess* m_userStorageAccess;

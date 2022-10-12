@@ -23,12 +23,6 @@ public:
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
     
-public slots:
-    virtual void proccessUserData(const QString& firstName, const QString& lastName,
-                                  const QString& email) = 0;
-    
-    virtual void reportFailureGettingUser() = 0;
-    
 signals:
     void finishedGettingUser(domain::models::User user, bool success);
 };
