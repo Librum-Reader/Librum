@@ -7,11 +7,11 @@ namespace adapters::gateways
 AuthenticationGateway::AuthenticationGateway(IAuthenticationAccess* authenticationAccess)
     : m_authenticationAccess(authenticationAccess)
 {
-    QObject::connect(m_authenticationAccess, &IAuthenticationAccess::authenticationFinished,
-                     this, &AuthenticationGateway::reemitAuthenticationResult);
+    connect(m_authenticationAccess, &IAuthenticationAccess::authenticationFinished,
+            this, &AuthenticationGateway::authenticationFinished);
     
-    QObject::connect(m_authenticationAccess, &IAuthenticationAccess::registrationFinished,
-                     this, &AuthenticationGateway::reemitRegistrationResult);
+    connect(m_authenticationAccess, &IAuthenticationAccess::registrationFinished,
+            this, &AuthenticationGateway::registrationFinished);
 }
 
 
@@ -38,18 +38,5 @@ void AuthenticationGateway::registerUser(const domain::models::RegisterModel& re
     
     m_authenticationAccess->registerUser(registerDto);
 }
-
-void AuthenticationGateway::reemitRegistrationResult(bool success, const QString& reason)
-{
-    emit registrationFinished(success, reason);
-}
-
-void AuthenticationGateway::reemitAuthenticationResult(const QString& token)
-{
-    emit authenticationFinished(token);
-}
-
-
-
 
 } // namespace adapters::gateways

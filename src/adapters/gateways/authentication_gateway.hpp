@@ -15,10 +15,6 @@ public:
     void authenticateUser(const domain::models::LoginModel& loginModel) override;
     void registerUser(const domain::models::RegisterModel& registerModel) override;
     
-public slots:
-    void reemitRegistrationResult(bool success, const QString& reason) override;
-    void reemitAuthenticationResult(const QString& token) override;
-    
 private:
     IAuthenticationAccess* m_authenticationAccess;
 };

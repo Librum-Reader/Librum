@@ -20,10 +20,6 @@ public:
 signals:
     void authenticationFinished(const QString& token);
     void registrationFinished(bool success, const QString& reason);
-    
-public slots:
-    virtual void reemitRegistrationResult(bool success, const QString& reason) = 0;
-    virtual void reemitAuthenticationResult(const QString& token) = 0;
 };
 
 } // namespace application#pragma once
