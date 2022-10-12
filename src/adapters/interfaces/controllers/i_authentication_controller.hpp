@@ -18,10 +18,6 @@ public:
                                           const QString& email, QString password, 
                                           bool keepUpdated) = 0;
     
-public slots:
-    virtual void reemitLoginResult(bool success) = 0;
-    virtual void reemitRegistrationResult(bool success, const QString& reason) = 0;
-    
 signals:
     void loginFinished(bool success);
     void registrationFinished(bool success, const QString& reason);

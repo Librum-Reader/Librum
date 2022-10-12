@@ -19,10 +19,6 @@ public:
                       const QString& email, QString password,
                       bool keepUpdated) override;
     
-public slots:
-    void reemitLoginResult(bool success) override;
-    void reemitRegistrationResult(bool success, const QString& reason) override;
-    
 private:
     application::IAuthenticationService* m_authenticationService;
 };

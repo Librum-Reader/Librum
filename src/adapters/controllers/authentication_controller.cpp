@@ -11,10 +11,10 @@ AuthenticationController::AuthenticationController(application::IAuthenticationS
     : m_authenticationService(authenticationService)
 {
     QObject::connect(m_authenticationService, &application::IAuthenticationService::loginFinished,
-                     this, &AuthenticationController::reemitLoginResult);
+                     this, &AuthenticationController::loginFinished);
     
     QObject::connect(m_authenticationService, &application::IAuthenticationService::registrationFinished,
-                     this, &AuthenticationController::reemitRegistrationResult);
+                     this, &AuthenticationController::registrationFinished);
 }
 
 
@@ -32,17 +32,6 @@ void AuthenticationController::registerUser(const QString& firstName, const QStr
     domain::models::RegisterModel registerModel(firstName, lastName, email, password, keepUpdated);
     
     m_authenticationService->registerUser(registerModel);
-}
-
-
-void AuthenticationController::reemitLoginResult(bool success)
-{
-    emit loginFinished(success);
-}
-
-void AuthenticationController::reemitRegistrationResult(bool success, const QString& reason)
-{
-    emit registrationFinished(success, reason);
 }
 
 } // namespace adapters::controllers
