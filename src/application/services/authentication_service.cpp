@@ -2,10 +2,11 @@
 #include "i_authentication_gateway.hpp"
 
 
+using namespace domain::models;
+
+
 namespace application::services
 {
-
-using namespace domain::models;
 
 AuthenticationService::AuthenticationService(IAuthenticationGateway* authenticationGateway)
     : m_authenticationGateway(authenticationGateway)
