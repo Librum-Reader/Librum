@@ -3,7 +3,6 @@
 #include <gmock/gmock.h>
 #include <QString>
 #include "i_user_storage_gateway.hpp"
-#include "user.hpp"
 #include "user_service.hpp"
 
 
@@ -95,11 +94,11 @@ TEST_F(AUserService, SucceedsSettingLastName)
     
     
     // Expect
-    EXPECT_CALL(userStorageGatewayMock, changeFirstName(_,_))
+    EXPECT_CALL(userStorageGatewayMock, changeLastName(_,_))
             .Times(1);
     
     // Act
-    userService->setFirstName(lastName);
+    userService->setLastName(lastName);
 }
 
 TEST_F(AUserService, SucceedsGettingLastName)
