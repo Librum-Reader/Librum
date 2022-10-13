@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include <QImage>
 
 
 namespace adapters
@@ -20,6 +21,8 @@ public:
                                 const QString& newLastName) = 0;
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
+    virtual void changeProfilePicture(const QString& authToken,
+                                      const QImage& newProfilePicture) = 0;
     
 signals:
     void userReady(const QString firstName, const QString lastName, 

@@ -1,5 +1,6 @@
 #include "user_storage_access.hpp"
 
+
 namespace infrastructure::persistence
 {
 
@@ -51,6 +52,13 @@ void UserStorageAccess::changeEmail(const QString& authToken,
     Q_UNUSED(authToken)
     Q_UNUSED(newEmail)
     // TODO: Implement
+}
+
+void UserStorageAccess::changeProfilePicture(const QString& authToken, const QImage& newProfilePicture)
+{
+    Q_UNUSED(authToken)
+    Q_UNUSED(newProfilePicture)
+    // TODO: Implement when filestorage server is up
 }
 
 

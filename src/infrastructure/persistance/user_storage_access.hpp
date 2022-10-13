@@ -30,6 +30,8 @@ public:
                         const QString& newLastName) override;
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
+    void changeProfilePicture(const QString& authToken, 
+                              const QImage& newProfilePicture) override;
     
 private slots:
     void proccessGetUserResult();

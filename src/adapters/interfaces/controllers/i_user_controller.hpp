@@ -8,9 +8,13 @@ namespace adapters
 class IUserController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString firstName READ getFirstName WRITE setFirstName NOTIFY firstNameChanged)
-    Q_PROPERTY(QString lastName READ getLastName WRITE setLastName NOTIFY lastNameChanged)
+    Q_PROPERTY(QString firstName READ getFirstName WRITE setFirstName 
+               NOTIFY firstNameChanged)
+    Q_PROPERTY(QString lastName READ getLastName WRITE setLastName 
+               NOTIFY lastNameChanged)
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
+    Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE setProfilePicture 
+               NOTIFY profilePictureChanged)
     
 public:
     virtual ~IUserController() noexcept = default;
@@ -25,12 +29,16 @@ public:
     
     virtual QString getEmail() = 0;
     virtual void setEmail(const QString& newEmail) = 0;
+
+    virtual QString getProfilePicture() const = 0;
+    virtual void setProfilePicture(const QString& path) = 0;
     
 signals:
     void finishedLoadingUser(bool success);
     void firstNameChanged();
     void lastNameChanged();
     void emailChanged();
+    void profilePictureChanged();
 };
 
 } // namespace adapters

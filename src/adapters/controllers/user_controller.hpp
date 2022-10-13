@@ -25,6 +25,9 @@ public:
     QString getEmail() override;
     void setEmail(const QString& newEmail) override;
     
+    QString getProfilePicture() const override;
+    void setProfilePicture(const QString& path) override;
+
 private slots:
     void proccessUserLoadingResult(bool success);
     

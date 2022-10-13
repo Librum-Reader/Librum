@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include <QImage>
 
 
 namespace application
@@ -23,6 +24,9 @@ public:
     
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
+    
+    virtual QImage getProfilePicture() const = 0;
+    virtual void setProfilePicture(const QImage& image) = 0;
     
 signals:
     void finishedLoadingUser(bool success);

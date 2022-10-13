@@ -1,5 +1,9 @@
 #include "user_controller.hpp"
 
+#include <QBuffer>
+#include <QByteArray>
+#include <QUrl>
+
 
 namespace adapters::controllers
 {
@@ -59,6 +63,34 @@ void UserController::setEmail(const QString& newEmail)
     
     m_userService->setEmail(newEmail);
     emit emailChanged();
+}
+
+QString UserController::getProfilePicture() const
+{
+    auto profilePicture = m_userService->getProfilePicture();
+    if(profilePicture.isNull())
+        return QString("");
+    
+    
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    
+    buffer.open(QIODevice::WriteOnly);
+    profilePicture.save(&buffer, "png");
+    QString base64 = QString::fromUtf8(byteArray.toBase64());
+    
+    return "data:image/png;base64," + base64;
+}
+
+void UserController::setProfilePicture(const QString& path)
+{
+    QUrl url(path);
+    QImage profilePicture(url.toLocalFile());
+    if(profilePicture == m_userService->getProfilePicture())
+        return;
+        
+    m_userService->setProfilePicture(profilePicture);
+    emit profilePictureChanged();
 }
 
 void UserController::proccessUserLoadingResult(bool success)

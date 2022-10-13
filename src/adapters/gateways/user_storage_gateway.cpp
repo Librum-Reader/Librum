@@ -40,6 +40,12 @@ void UserStorageGateway::changeEmail(const QString& authToken,
     m_userStorageAccess->changeEmail(authToken, newEmail);
 }
 
+void UserStorageGateway::changeProfilePicture(const QString& authToken,
+                                              const QImage& newPicture)
+{
+    m_userStorageAccess->changeProfilePicture(authToken, newPicture);
+}
+
 void UserStorageGateway::proccessUserData(const QString& firstName, 
                                           const QString& lastName,
                                           const QString& email)

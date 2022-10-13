@@ -55,6 +55,17 @@ void UserService::setEmail(const QString& newEmail)
                                       m_user.getEmail());
 }
 
+QImage UserService::getProfilePicture() const
+{
+    return m_user.getProfilePicture();
+}
+
+void UserService::setProfilePicture(const QImage& image)
+{
+    m_user.setProfilePicture(image);
+    m_userStorageGateway->changeProfilePicture(m_authenticationToken, image);
+}
+
 void UserService::proccessUserInformation(const domain::models::User& user,
                                           bool success)
 {

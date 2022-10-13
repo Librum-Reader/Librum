@@ -1,6 +1,7 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <QImage>
 #include "user_storage_gateway.hpp"
 #include "i_user_storage_access.hpp"
 
@@ -23,6 +24,8 @@ public:
                                        const QString& newFirstName), (override));
     MOCK_METHOD(void, changeEmail, (const QString& authToken,
                                     const QString& newFirstName), (override));
+    MOCK_METHOD(void, changeProfilePicture, (const QString& authToken,
+                                             const QImage& newProfilePicture), (override));
 };
 
 
@@ -82,6 +85,20 @@ TEST_F(AUserStorageGateway, SucceedsChangingTheEmail)
     
     // Act
     userStorageGateway->changeEmail("secureToken", "SomeEmail");
+}
+
+
+TEST_F(AUserStorageGateway, SucceedsChangingProfilePicture)
+{
+    // Arrange
+    QImage profilePicture(50, 50, QImage::Format_ARGB32);
+    
+    // Expect
+    EXPECT_CALL(userStorageAccessMock, changeProfilePicture(_,_))
+            .Times(1);
+    
+    // Act
+    userStorageGateway->changeProfilePicture("secureToken", profilePicture);
 }
 
 } // namespace tests::adapters

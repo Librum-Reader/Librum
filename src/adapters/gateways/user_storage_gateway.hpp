@@ -22,6 +22,8 @@ public:
                         const QString& newLastName) override;
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
+    void changeProfilePicture(const QString& authToken, 
+                              const QImage& newPicture) override;
     
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,

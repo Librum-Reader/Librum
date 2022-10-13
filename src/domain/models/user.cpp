@@ -45,6 +45,16 @@ void User::setEmail(const QString& newEmail)
     m_email = newEmail;
 }
 
+const QImage& User::getProfilePicture() const
+{
+    return m_profilePicture;
+}
+
+void User::setProfilePicture(const QImage& newProfilePicture)
+{
+    m_profilePicture = newProfilePicture;
+}
+
 const std::vector<Tag>& User::getTags() const
 {
     return m_tags;

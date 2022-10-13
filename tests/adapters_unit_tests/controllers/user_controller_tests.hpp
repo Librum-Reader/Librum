@@ -1,12 +1,14 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <QImage>
+#include <QImage>
 #include <QString>
 #include "QSignalSpy"
 #include "i_user_controller.hpp"
+#include "qnamespace.h"
 #include "user_controller.hpp"
 #include "i_user_service.hpp"
-
 
 using ::testing::ReturnRef;
 using namespace testing;
@@ -27,6 +29,8 @@ public:
     MOCK_METHOD(void, setLastName, (const QString&), (override));
     MOCK_METHOD(QString, getEmail, (), (const, override));
     MOCK_METHOD(void, setEmail, (const QString&), (override));
+    MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
+    MOCK_METHOD(void, setProfilePicture, (const QImage&), (override));
     MOCK_METHOD(void, setAuthenticationToken, (const QString&), (override));
     MOCK_METHOD(void, clearAuthenticationToken, (), (override));
 };
@@ -245,6 +249,94 @@ TEST_F(AUserController, FailsSettingEmailIfItsTheSameAsCurrent)
     
     // Act
     userController->setEmail(email);
+    
+    // Assert
+    EXPECT_EQ(0, spy.count());
+}
+
+
+
+TEST_F(AUserController, SucceedsGettingProfilePicture)
+{
+    // Arrange
+    QImage image(50, 50, QImage::Format_ARGB32);
+    
+    QString expectedResultStart = "data:image/png;base64,";    
+    
+    
+    // Expect
+    EXPECT_CALL(userServiceMock, getProfilePicture())
+            .Times(1)
+            .WillOnce(Return(image));
+    
+    // Act
+    QString result = userController->getProfilePicture();
+    
+    // Assert
+    EXPECT_TRUE(result.startsWith(expectedResultStart));
+}
+
+TEST_F(AUserController, FailsGettingProfilePictureIfNoProfilePictureExists)
+{
+    // Arrange
+    QImage emptyImage("");
+    
+    QString expectedResult = "";
+    
+    
+    // Expect
+    EXPECT_CALL(userServiceMock, getProfilePicture())
+            .Times(1)
+            .WillOnce(Return(emptyImage));
+    
+    // Act
+    QString result = userController->getProfilePicture();
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(AUserController, SucceedsSettingProfilePicture)
+{
+    // Arrange
+    QSignalSpy spy(userController.get(), &UserController::profilePictureChanged);
+    
+    QString pathToProfilePicture = "/home/mypicture.png";
+    
+    
+    // Expect
+    EXPECT_CALL(userServiceMock, getProfilePicture())
+            .Times(1)
+            .WillOnce(Return(QImage(20, 20, QImage::Format_ARGB32)));
+    
+    EXPECT_CALL(userServiceMock, setProfilePicture(_))
+            .Times(1);
+    
+    // Act
+    userController->setProfilePicture(pathToProfilePicture);
+    
+    // Assert
+    EXPECT_EQ(1, spy.count());
+}
+
+TEST_F(AUserController, FailsSettingProfilePictureIfItsTheSameAsCurrent)
+{
+    // Arrange
+    QSignalSpy spy(userController.get(), &UserController::profilePictureChanged);
+    
+    QString pathToProfilePicture = "/home/mypicture.png";
+    
+    
+    // Expect
+    EXPECT_CALL(userServiceMock, getProfilePicture())
+            .Times(1)
+            .WillOnce(Return(QImage()));
+    
+    EXPECT_CALL(userServiceMock, setProfilePicture(_))
+            .Times(0);
+    
+    // Act
+    userController->setProfilePicture(pathToProfilePicture);
     
     // Assert
     EXPECT_EQ(0, spy.count());

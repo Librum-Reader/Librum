@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <QString>
+#include <QImage>
 #include "tag.hpp"
 
 
@@ -22,6 +23,9 @@ public:
     const QString& getEmail() const;
     void setEmail(const QString& newEmail);
     
+    const QImage& getProfilePicture() const;
+    void setProfilePicture(const QImage& newProfilePicture);
+    
     const std::vector<Tag>& getTags() const;
     void setTags(const std::vector<Tag>& newTags);
     
@@ -29,6 +33,7 @@ private:
     QString m_firstName;
     QString m_lastName;
     QString m_email;
+    QImage m_profilePicture;
     std::vector<Tag> m_tags;
 };
 

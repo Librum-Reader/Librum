@@ -26,6 +26,8 @@ public:
                                        const QString& newFirstName), (override));
     MOCK_METHOD(void, changeEmail, (const QString& authToken,
                                     const QString& newFirstName), (override));
+    MOCK_METHOD(void, changeProfilePicture, (const QString& authToken,
+                                             const QImage& newPicture), (override));
 };
 
 
@@ -144,6 +146,36 @@ TEST_F(AUserService, SucceedsGettingEmail)
     
     // Act
     auto result = userService->getEmail();
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+
+
+TEST_F(AUserService, SucceedsSettingProfilePicture)
+{
+    // Arrange
+    QImage profilePicture("/some/image.png");
+    
+    // Expect
+    EXPECT_CALL(userStorageGatewayMock, changeProfilePicture(_,_))
+            .Times(1);
+    
+    // Act
+    userService->setProfilePicture(profilePicture);
+}
+
+TEST_F(AUserService, SucceedsGettingProfilePicture)
+{
+    // Arrange
+    QImage profilePicture(50, 50, QImage::Format_ARGB32);
+    userService->setProfilePicture(profilePicture);
+    
+    const auto& expectedResult = profilePicture;
+    
+    // Act
+    auto result = userService->getProfilePicture();
     
     // Assert
     EXPECT_EQ(expectedResult, result);
