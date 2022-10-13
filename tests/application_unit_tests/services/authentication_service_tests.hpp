@@ -21,8 +21,6 @@ class AuthenticationGatewayMock : public IAuthenticationGateway
 public:
     MOCK_METHOD(void, authenticateUser, (const models::LoginModel& loginModel), (override));
     MOCK_METHOD(void, registerUser, (const domain::models::RegisterModel& registerModel), (override));
-    MOCK_METHOD(void, reemitRegistrationResult, (bool success, const QString& reason), (override));
-    MOCK_METHOD(void, reemitAuthenticationResult, (const QString& token), (override));
 };
 
 

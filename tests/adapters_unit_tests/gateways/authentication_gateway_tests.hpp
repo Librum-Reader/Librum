@@ -69,47 +69,4 @@ TEST_F(AnAuthenticationGateway, SucceedsRegisteringAUser)
     authGateway->registerUser(registerModel);
 }
 
-
-
-TEST_F(AnAuthenticationGateway, SucceedsReemittingAuthenticationResultSignal)
-{
-    // Arrange
-    QSignalSpy spy(authGateway.get(), 
-                   SIGNAL(authenticationFinished(const QString&)));
-    
-    QString token("someToken");
-    
-    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
-                                     "SomePassword123", false);
-    
-    
-    // Act
-    authGateway->reemitAuthenticationResult(token);
-    
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(token, arguments[0].toString());
-}
-
-
-TEST_F(AnAuthenticationGateway, SucceedsReemittingRegistrationResultSignal)
-{
-    // Arrange
-    QSignalSpy spy(authGateway.get(),
-                   SIGNAL(registrationFinished(bool, const QString&)));
-    
-    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
-                                     "SomePassword123", false);
-    
-    
-    // Act
-    authGateway->reemitRegistrationResult(true, "some token");
-    
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(true, arguments[0].toBool());
-}
-
 } // namespace tests::adapters
