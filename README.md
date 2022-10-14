@@ -1,21 +1,15 @@
 # Librum
 
-Librum's objective is to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible for you.<br>
+Librum is an application, designed to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible for you.<br><br>
 
-Librum offers a wide range of options, that you can use through a modern and straightforward interface.<br>
-Librum allows you to create and manage your own <b>library</b> of books and documents, which you can access from <b>any device</b>.<br>
-You can <b>read</b> your book comfortably through the app, <b>highlight</b> sections that interest you, and <b>bookmark</b> pages that you wish to return to.<br>
-Other features of Librum include taking <b>notes</b> directly from the app, a free in-app <b>bookstore</b>, productivity-boosting plugins, and many more.
+It is more than simply an e-book reader, Librum makes it possible for you, to manage your own library, which you can access from <b>all</b> of your devices at any time.<br>
+Librum provides a variety of features to make you as productive as you can be, these features include being able to take <b>notes</b> from within the app, <b>book mark</b> and <b>highlight</b> important sections, while being able to customise the application to look exactly how you want it to. Librum also provides free access to over <b>60,000</b> books, custom <b>plugins</b> and your reading <b>statistics</b>, while remaining <b>free</b> and 100% <b>open source</b>.
+
 
 <br>
 
 The primary goals of Librum are to be <b>modern</b>, entirely <b>opensource</b>, <b>cost-free</b> and <b>fast</b>.</br>
 Due to the complete copyleft license we are utilizing, anyone can download, edit, and redistribute the source code. 
-
-<br>
-
-<b>Note</b>: Librum currently relies on KDE's infrastructure for okular. This will change soon, however for the time being, Librum and Okular may conflict.
-If there is an issue with the Librum installation, consider temporarily uninstalling okular. 
 
 <br>
 
@@ -114,7 +108,9 @@ Librum supports all major book formats, these include:
 
 Instructions to get Librum up and running in your environment.
 
-<br>
+<b>Note</b>: Librum currently relies on KDE's infrastructure for okular. This will change soon, however for the time being, Librum and Okular may conflict.
+If there is an issue with the Librum installation, consider temporarily uninstalling okular. 
+<br><br>
 
 ## For GNU/Linux
 ### Prerequisites
