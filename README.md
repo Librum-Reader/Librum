@@ -53,6 +53,28 @@ We support:
 
 <br>
 
+No matter what book you want to read, it will work with Librum, since Librum supports all major book formats,<br>
+including:
+- PDF
+- PS
+- Tiff
+- CHM
+- DjVu
+- Images
+- DVI
+- XPS
+- Fiction Book
+- Comic Book
+- Plucker
+- Pub
+- Fax
+- All plain text formats
+- Most image formats
+
+and <b>much more</b>.
+
+<br>
+
 Feature list:
 - E-Book reading
 - Free in-app bookstore
@@ -79,25 +101,6 @@ Feature list:
     - Total books read
 - No-login book reading
 - Sharing / Priting books
-
-<br>
-
-Librum supports all major book formats, these include:
-- PDF
-- PS
-- Tiff
-- CHM
-- DjVu
-- Images
-- DVI
-- XPS
-- Fiction Book
-- Comic Book
-- Plucker
-- Pub
-- Fax
-- All plain text formats
-- Most image formats
 
 
 <br><br>
