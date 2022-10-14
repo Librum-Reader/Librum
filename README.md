@@ -43,6 +43,7 @@ For business related contact, reach out to us here: librum_reader@protonmail.com
 
 # Details
 
+### Supported platforms
 Part of Librum's aim, is to remove the boundary of reading on different devices, no matter where you are or which device you use, you can always continue your book with Librum, since Librum is <b>cross platform</b>.<br>
 We support:
 - Windows
@@ -53,7 +54,8 @@ We support:
 
 <br>
 
-No matter what book you want to read, it will work with Librum, since Librum supports all major book formats,<br>
+### Supported formats
+No matter what book you want to read, it will work with Librum, since Librum supports <b>all</b> major book formats,<br>
 including:
 - PDF
 - PS
@@ -75,32 +77,27 @@ and <b>much more</b>.
 
 <br>
 
-Feature list:
-- E-Book reading
-- Free in-app bookstore
-- Cross-platform
-- Book state syncing
+### Features
+Librum's objective is to make your reading more <b>productive</b>; to that end, we provide you with a variety of functions that you can access via a <b>simple</b> and <b>straightforward</b> interface.<br>
+These functions include:
+- A modern e-reader
+- Creating your personalized library
+- Book meta-data editing
+- A free in-app bookstore with more than 60.000 books
+- Book syncing across all of your devices
 - Highlighting
-- Bookmarks
-- Tags
 - Note taking
-- Chapter navigation
-- TTS
+- Bookmarking
+- Searching through
+- Tags
+- TTS (Text to speech)
 - Automated page scrolling
 - Syncing with 3rd parties (Google drive, dropbox, nextcloud)
-- Book meta-data editing
-- Library management
 - Custom plugins
-- Fine grained appearance customization
-- Application behavior customization
-- Statistics (optional)
-    - Total time spent read
-    - Daily reading avarage
-    - Days read in a row
-    - Books read in a week/month/year
-    - Total books read
+- Appearance and behaviour customization
+- Your reading statistics
 - No-login book reading
-- Sharing / Priting books
+- Sharing / Priting pages
 
 
 <br><br>
