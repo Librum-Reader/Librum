@@ -43,7 +43,8 @@ For business related contact, reach out to us here: librum_reader@protonmail.com
 
 # Details
 
-By Librum supported platforms:
+Part of Librum's aim, is to remove the boundary of reading on different devices, no matter where you are or which device you use, you can always continue your book with Librum, since Librum is <b>cross platform</b>.<br>
+We support:
 - Windows
 - GNU/Linux
 - MacOS
