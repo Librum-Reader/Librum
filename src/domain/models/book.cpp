@@ -41,11 +41,6 @@ const QUuid& Book::getUuid() const
     return m_uuid;
 }
 
-void Book::setUuid(const QUuid& newUuid)
-{
-    m_uuid = newUuid;
-}
-
 
 const QString& Book::getTitle() const
 {

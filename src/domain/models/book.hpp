@@ -25,6 +25,8 @@ public:
          const QString& lastModified, const QImage& cover = QImage(),
          int currentPage = 0, const QString& uuid = "");
     
+    const QUuid& getUuid() const;
+    
     const QString& getTitle() const;
     void setTitle(const QString& newTitle);
     
@@ -78,9 +80,6 @@ public:
     
     static const int maxCoverWidth{ 188 };
     static const int maxCoverHeight{ 238 };
-    
-    const QUuid& getUuid() const;
-    void setUuid(const QUuid& newUuid);
     
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
