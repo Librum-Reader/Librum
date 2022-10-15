@@ -11,7 +11,6 @@ namespace application
         Success,
         OpeningBookFailed,
         BookDoesNotExist,
-        BookAlreadyExists,
         PropertyDoesNotExist,
         TagDoesNotExist,
         TagAlreadyExists,
