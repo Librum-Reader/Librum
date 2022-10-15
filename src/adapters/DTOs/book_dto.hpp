@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QBuffer>
 #include <QVariant>
+#include <QUuid>
 #include "tag_dto.hpp"
 
 
@@ -15,6 +16,7 @@ namespace adapters::dtos
 struct BookDto
 {
     Q_GADGET
+    Q_PROPERTY(QString uuid MEMBER uuid)
     Q_PROPERTY(QString title MEMBER title)
     Q_PROPERTY(QString author MEMBER author)
     Q_PROPERTY(QString filePath MEMBER filePath)
@@ -30,6 +32,7 @@ struct BookDto
     Q_PROPERTY(QVariant cover READ getCover CONSTANT)
     
 public:
+    QString uuid;
     QString title;
     QString author;
     QString filePath;
