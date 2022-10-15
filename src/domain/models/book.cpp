@@ -6,9 +6,14 @@ namespace domain::models
 {
 
 Book::Book(const QString& title, const QString& author, 
-           const QString& filePath, const QImage& cover)
+           const QString& filePath, const QImage& cover,
+           const QString& uuid)
     : m_title(title), m_author(author), m_filePath(filePath), m_cover(cover)
 {
+    if(uuid.isEmpty())
+        m_uuid = QUuid::createUuid();
+    else
+        m_uuid = QUuid(uuid);
 }
 
 Book::Book(const QString& title, const QString& author, 
@@ -16,12 +21,29 @@ Book::Book(const QString& title, const QString& author,
            const QString& creationDate, const QString& format,
            const QString& docSize, const QString& pagesSize,
            int pageCount, const QString& addedToLibrary,
-           const QString& lastOpened, const QImage& cover)
+           const QString& lastOpened, const QImage& cover,
+           int currentPage, const QString& uuid)
     : m_title(title), m_author(author), m_filePath(filePath), m_creator(creator),
-      m_creationDate(creationDate), m_format(format), m_documentSize(docSize),
+      m_releaseDate(creationDate), m_format(format), m_documentSize(docSize),
       m_pagesSize(pagesSize), m_addedToLibrary(addedToLibrary), 
-      m_pageCount(pageCount), m_lastOpened(lastOpened), m_cover(cover)
+      m_pageCount(pageCount), m_lastOpened(lastOpened), 
+      m_cover(cover), m_currentPage(currentPage)
 {
+    if(uuid.isEmpty())
+        m_uuid = QUuid::createUuid();
+    else
+        m_uuid = QUuid(uuid);
+}
+
+
+const QUuid& Book::getUuid() const
+{
+    return m_uuid;
+}
+
+void Book::setUuid(const QUuid& newUuid)
+{
+    m_uuid = newUuid;
 }
 
 
@@ -124,14 +146,14 @@ void Book::setLanguage(const QString& newLanguage)
 }
 
 
-const QString& Book::getCreationDate() const
+const QString& Book::getReleaseDate() const
 {
-    return m_creationDate;
+    return m_releaseDate;
 }
 
-void Book::setCreationDate(const QString& newCreationDate)
+void Book::setReleaseDate(const QString& newCreationDate)
 {
-    m_creationDate = newCreationDate;
+    m_releaseDate = newCreationDate;
 }
 
 
@@ -143,6 +165,17 @@ int Book::getPageCount() const
 void Book::setPageCount(int newPageCount)
 {
     m_pageCount = newPageCount;
+}
+
+
+int Book::getCurrentPage() const
+{
+    return m_currentPage;
+}
+
+void Book::setCurrentPage(int newCurrentPage)
+{
+    m_currentPage = newCurrentPage;
 }
 
 
@@ -195,6 +228,7 @@ bool Book::removeTag(const Tag& tag)
     return true;
 }
 
+
 bool Book::tagsAreTheSame(const std::vector<Tag>& other)
 {
     if(m_tags.size() != other.size())
@@ -216,7 +250,7 @@ void Book::update(const Book& other)
     if(m_author != other.getAuthor()) m_author = other.getAuthor();
     if(m_filePath != other.getFilePath()) m_filePath = other.getFilePath();
     if(m_creator != other.getCreator()) m_creator = other.getCreator();
-    if(m_creationDate != other.getCreationDate()) m_creationDate = other.getCreationDate();
+    if(m_releaseDate != other.getReleaseDate()) m_releaseDate = other.getReleaseDate();
     if(m_format != other.getFormat()) m_format = other.getFormat();
     if(m_language != other.getLanguage()) m_language = other.getLanguage();
     if(m_documentSize != other.getDocumentSize()) m_documentSize = other.getDocumentSize();
