@@ -139,7 +139,7 @@ Page
                     
                     onLeftButtonClicked:
                     {
-                        Globals.selectedBook = BookController.getBook(model.title);
+                        Globals.selectedBook = BookController.getBook(model.uuid);
                         bookGrid.openBook();
                     }
                         
@@ -163,7 +163,7 @@ Page
                     
                     function openBookOptions()
                     {
-                        Globals.selectedBook = BookController.getBook(model.title);
+                        Globals.selectedBook = BookController.getBook(model.uuid);
                         Globals.bookTags = Qt.binding(function () { return model.tags; });
                         bookOptionsPopup.open();
                     }
@@ -268,12 +268,12 @@ Page
                 }
             
             
-                function openBook(title)
+                function openBook()
                 {
                     if(bookOptionsPopup.opened)
                         bookOptionsPopup.close();
                     
-                    BookController.refreshLastOpenedFlag(Globals.selectedBook.title);
+                    BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
                     loadPage(readingPage);
                 }
             }
@@ -334,7 +334,7 @@ Page
         options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
-        onAccepted: BookController.saveBookToPath(Globals.selectedBook.title, folder);
+        onAccepted: BookController.saveBookToPath(Globals.selectedBook.uuid, folder);
     }
     
     FileDialog

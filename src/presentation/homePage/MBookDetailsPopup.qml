@@ -687,7 +687,7 @@ Popup
             operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
         
         
-        BookController.updateBook(Globals.selectedBook.title, operationsMap);
+        BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
     }
     
     
