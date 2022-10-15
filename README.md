@@ -33,6 +33,12 @@ Setup and manage your own library
 
 <br>
 
+# Documentation
+
+For documentation go to [Librum's github-wiki](https://github.com/Librum-Reader/Librum/wiki)
+
+<br>
+
 # Contact
 
 
