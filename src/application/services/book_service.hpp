@@ -15,25 +15,26 @@ public:
     BookService(IBookInfoHelper* bookInfoManager);
 
     BookOperationStatus addBook(const QString& filePath) override;
-    BookOperationStatus deleteBook(const QString& title) override;
-    BookOperationStatus updateBook(const QString& title,
+    BookOperationStatus deleteBook(const QUuid& uuid) override;
+    BookOperationStatus updateBook(const QUuid& uuid,
                                    const domain::models::Book& newBook) override;
     
-    BookOperationStatus addTag(const QString& title, 
+    BookOperationStatus addTag(const QUuid& uuid, 
                                const domain::models::Tag& tag) override;
-    BookOperationStatus removeTag(const QString& title,
+    BookOperationStatus removeTag(const QUuid& uuid,
                                   const domain::models::Tag& tag) override;
         
     const std::vector<domain::models::Book>& getBooks() const override;
-    const domain::models::Book* getBook(const QString& title) const override;
-    int getBookIndex(const QString& title) const override;
+    const domain::models::Book* getBook(const QUuid& uuid) const override;
+    domain::models::Book* getBook(const QUuid& uuid) override;
+    int getBookIndex(const QUuid& uuid) const override;
     int getBookCount() const override;
     
-    BookOperationStatus saveBookToPath(const QString& title,
+    BookOperationStatus saveBookToPath(const QUuid& uuid,
                                        const QUrl& path) override;
     
 public slots:
-    bool refreshLastOpenedFlag(const QString& title) override;
+    bool refreshLastOpenedFlag(const QUuid& uuid) override;
     void setAuthenticationToken(const QString& token) override;
     void clearAuthenticationToken() override;
     
@@ -41,8 +42,6 @@ private slots:
     void storeBookCover(const QPixmap* pixmap);
     
 private:
-    domain::models::Book* getBookByTitle(const QString& title);
-    const domain::models::Book* getBookByTitle(const QString& title) const;
     QString getCurrentDateTimeAsString();
     
     IBookInfoHelper* m_bookInfoManager;

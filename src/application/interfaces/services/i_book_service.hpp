@@ -2,6 +2,7 @@
 #include <vector>
 #include <QObject>
 #include <QUrl>
+#include <QUuid>
 #include "book_operation_status.hpp"
 #include "book.hpp"
 #include "tag.hpp"
@@ -18,25 +19,26 @@ public:
     virtual ~IBookService() noexcept = default;
     
     virtual BookOperationStatus addBook(const QString& filePath) = 0;
-    virtual BookOperationStatus deleteBook(const QString& title) = 0;
-    virtual BookOperationStatus updateBook(const QString& title,
+    virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
+    virtual BookOperationStatus updateBook(const QUuid& uuid,
                                            const domain::models::Book& newBook) = 0;
     
     virtual const std::vector<domain::models::Book>& getBooks() const = 0;
-    virtual const domain::models::Book* getBook(const QString& title) const = 0;
-    virtual int getBookIndex(const QString& title) const = 0;
+    virtual const domain::models::Book* getBook(const QUuid& uuid) const = 0;
+    virtual domain::models::Book* getBook(const QUuid& uuid) = 0;
+    virtual int getBookIndex(const QUuid& uuid) const = 0;
     virtual int getBookCount() const = 0;
     
-    virtual BookOperationStatus addTag(const QString& title,
+    virtual BookOperationStatus addTag(const QUuid& uuid,
                                        const domain::models::Tag& tag) = 0;
-    virtual BookOperationStatus removeTag(const QString& title, 
+    virtual BookOperationStatus removeTag(const QUuid& uuid, 
                                           const domain::models::Tag& tag) = 0;
     
-    virtual BookOperationStatus saveBookToPath(const QString& title,
+    virtual BookOperationStatus saveBookToPath(const QUuid& uuid,
                                                const QUrl& path) = 0;
     
 public slots:
-    virtual bool refreshLastOpenedFlag(const QString& title) = 0;
+    virtual bool refreshLastOpenedFlag(const QUuid& uuid) = 0;
     virtual void setAuthenticationToken(const QString& token) = 0;
     virtual void clearAuthenticationToken() = 0;
     

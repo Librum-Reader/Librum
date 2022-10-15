@@ -18,23 +18,23 @@ public:
     BookController(application::IBookService* bookService);
     
     int addBook(const QString& path) override;
-    int deleteBook(const QString& title) override;
-    int updateBook(const QString& title,
+    int deleteBook(const QString& uuid) override;
+    int updateBook(const QString& uuid,
                    const QVariant& operations) override;
-    int addTag(const QString& title, const QString& tagName) override;
-    int removeTag(const QString& title, const QString& tagName) override;
-    dtos::BookDto getBook(const QString& title) override;
+    int addTag(const QString& uuid, const QString& tagName) override;
+    int removeTag(const QString& uuid, const QString& tagName) override;
+    dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
     
-    int saveBookToPath(const QString& title, const QUrl& path) override;
+    int saveBookToPath(const QString& uuid, const QUrl& path) override;
     data_models::LibraryModel* getLibraryModel() override;
     
 public slots:
-    void refreshLastOpenedFlag(const QString& title) override;
+    void refreshLastOpenedFlag(const QString& uuid) override;
     
 private:
     void refreshBookChache();
-    dtos::BookDto* getBookFromChache(const QString& title);
+    dtos::BookDto* getBookFromChache(const QString& uuid);
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
     
     bool m_bookChacheChanged;

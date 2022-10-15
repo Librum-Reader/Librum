@@ -30,11 +30,6 @@ BookOperationStatus BookService::addBook(const QString& filePath)
         return BookOperationStatus::OpeningBookFailed;
     
     QString title = m_bookInfoManager->getTitle();
-    auto book = getBookByTitle(title);
-    if(book)
-        return BookOperationStatus::BookAlreadyExists;
-    
-    
     auto author = m_bookInfoManager->getAuthor();
     auto creator = m_bookInfoManager->getCreator();
     auto creationDate = m_bookInfoManager->getCreationDate();
@@ -57,14 +52,14 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::deleteBook(const QString& title)
+BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
-    auto book = getBookByTitle(title);
+    auto book = getBook(uuid);
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
-    auto bookPosition = std::ranges::find_if(m_books, [&title] (const Book& book) {
-        return book.getTitle() == title;
+    auto bookPosition = std::ranges::find_if(m_books, [&uuid] (const Book& book) {
+        return book.getUuid() == uuid;
     });
     
     size_t index = bookPosition - m_books.begin();
@@ -75,47 +70,47 @@ BookOperationStatus BookService::deleteBook(const QString& title)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::updateBook(const QString& title,
+BookOperationStatus BookService::updateBook(const QUuid& uuid,
                                             const Book& newBook)
 {
-    auto book = getBookByTitle(title);
+    auto book = getBook(uuid);
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
     book->update(newBook);
-    int index = getBookIndex(newBook.getTitle());
+    int index = getBookIndex(uuid);
     emit dataChanged(index);
     
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::addTag(const QString& title,
+BookOperationStatus BookService::addTag(const QUuid& uuid,
                                         const domain::models::Tag& tag)
 {
-    auto book = getBookByTitle(title);
+    auto book = getBook(uuid);
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
     if(!book->addTag(tag))
         return BookOperationStatus::TagAlreadyExists;
     
-    int index = getBookIndex(title);
+    int index = getBookIndex(uuid);
     emit tagsChanged(index);
     
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::removeTag(const QString& title,
+BookOperationStatus BookService::removeTag(const QUuid& uuid,
                                            const domain::models::Tag& tag)
 {
-    auto book = getBookByTitle(title);
+    auto book = getBook(uuid);
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
     
     if(!book->removeTag(tag))
         return BookOperationStatus::TagDoesNotExist;
     
-    int index = getBookIndex(title);
+    int index = getBookIndex(uuid);
     emit tagsChanged(index);
     
     return BookOperationStatus::Success;
@@ -126,14 +121,31 @@ const std::vector<Book>& BookService::getBooks() const
     return m_books;
 }
 
-const Book* BookService::getBook(const QString& title) const
+const Book* BookService::getBook(const QUuid& uuid) const
 {
-    return getBookByTitle(title);
+    for(size_t i = 0; i < m_books.size(); ++i)
+    {
+        if(m_books.at(i).getUuid() == uuid)
+            return &(*(m_books.cbegin() + i));
+    }
+    
+    return nullptr;
 }
 
-int BookService::getBookIndex(const QString& title) const
+Book* BookService::getBook(const QUuid& uuid)
 {
-    auto* book = getBookByTitle(title);
+    for(size_t i = 0; i < m_books.size(); ++i)
+    {
+        if(m_books.at(i).getUuid() == uuid)
+            return &(*(m_books.begin() + i));
+    }
+    
+    return nullptr;
+}
+
+int BookService::getBookIndex(const QUuid& uuid) const
+{
+    auto* book = getBook(uuid);
     if(!book)
         return -1;
     
@@ -148,10 +160,10 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
-BookOperationStatus BookService::saveBookToPath(const QString& title, 
+BookOperationStatus BookService::saveBookToPath(const QUuid& uuid, 
                                                 const QUrl& pathToFolder)
 {
-    auto book = getBook(title);
+    auto book = getBook(uuid);
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
 
@@ -166,16 +178,16 @@ BookOperationStatus BookService::saveBookToPath(const QString& title,
     return BookOperationStatus::Success;
 }
 
-bool BookService::refreshLastOpenedFlag(const QString& title)
+bool BookService::refreshLastOpenedFlag(const QUuid& uuid)
 {
-    auto book = getBookByTitle(title);
+    auto book = getBook(uuid);
     if(!book)
         return false;
     
     auto now = getCurrentDateTimeAsString();
     book->setLastOpened(now);
     
-    auto index = getBookIndex(title);
+    auto index = getBookIndex(uuid);
     emit dataChanged(index);
     
     return true;
@@ -200,28 +212,6 @@ void BookService::storeBookCover(const QPixmap* pixmap)
     emit bookCoverGenerated(index);
 }
 
-
-Book* BookService::getBookByTitle(const QString& title)
-{
-    for(size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).getTitle() == title)
-            return &(*(m_books.begin() + i));
-    }
-    
-    return nullptr;
-}
-
-const Book* BookService::getBookByTitle(const QString& title) const
-{
-    for(size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).getTitle() == title)
-            return &(*(m_books.cbegin() + i));
-    }
-    
-    return nullptr;
-}
 
 QString BookService::getCurrentDateTimeAsString()
 {
