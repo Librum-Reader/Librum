@@ -100,7 +100,7 @@ int BookController::updateBook(const QString& title, const QVariant& operations)
             updatedBook.setCreator(value.toString());
             break;
         case MetaProperties::CreationDate:
-            updatedBook.setCreationDate(value.toString());
+            updatedBook.setReleaseDate(value.toString());
             break;
         case MetaProperties::Format:
             updatedBook.setFormat(value.toString());
@@ -207,7 +207,7 @@ void BookController::refreshBookChache()
         bookDto.author = book.getAuthor();
         bookDto.filePath = book.getFilePath();
         bookDto.creator = book.getCreator();
-        bookDto.creationDate = book.getCreationDate();
+        bookDto.creationDate = book.getReleaseDate();
         bookDto.format = book.getFormat();
         bookDto.language = book.getLanguage();
         bookDto.documentSize = book.getDocumentSize();
