@@ -3,6 +3,7 @@
 #include <QAbstractListModel>
 #include <QByteArray>
 #include <QVariant>
+#include <QUuid>
 #include "book.hpp"
 #include "tag.hpp"
 #include "tag_dto.hpp"
@@ -18,7 +19,8 @@ class LibraryModel : public QAbstractListModel
 public:
     enum Roles
     {
-        TitleRole = Qt::UserRole,
+        UuidRole = Qt::UserRole,
+        TitleRole,
         AuthorRole,
         FilePathRole,
         CreatorRole,

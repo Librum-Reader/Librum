@@ -35,6 +35,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     const Book& book = m_data.at(index.row());
     switch(role)
     {
+    case UuidRole:
+        return book.getUuid().toString(QUuid::WithoutBraces);
+        break;
     case TitleRole:
         return book.getTitle();
         break;
@@ -88,6 +91,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
 {
     static QHash<int, QByteArray> roles
     {
+        {UuidRole, "uuid"},
         {TitleRole, "title"},
         {AuthorRole, "author"},
         {FilePathRole, "filePath"},
