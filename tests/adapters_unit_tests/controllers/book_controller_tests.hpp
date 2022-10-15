@@ -29,22 +29,23 @@ class BookServiceMock : public IBookService
 {
 public:
     MOCK_METHOD(BookOperationStatus, addBook, (const QString& filePath), (override));
-    MOCK_METHOD(BookOperationStatus, deleteBook, (const QString& title), (override));
-    MOCK_METHOD(BookOperationStatus, updateBook, (const QString& title,
+    MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
+    MOCK_METHOD(BookOperationStatus, updateBook, (const QUuid&,
                                                   const Book& book), (override));
     
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
-    MOCK_METHOD(const Book*, getBook, (const QString& title), (const, override));
-    MOCK_METHOD(int, getBookIndex, (const QString& title), (const, override));
+    MOCK_METHOD(const Book*, getBook, (const QUuid&), (const, override));
+    MOCK_METHOD(Book*, getBook, (const QUuid&), (override));
+    MOCK_METHOD(int, getBookIndex, (const QUuid&), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
-    MOCK_METHOD(bool, refreshLastOpenedFlag, (const QString& title), (override));
+    MOCK_METHOD(bool, refreshLastOpenedFlag, (const QUuid&), (override));
     
-    MOCK_METHOD(BookOperationStatus, addTag, (const QString& title,
+    MOCK_METHOD(BookOperationStatus, addTag, (const QUuid&,
                                               const domain::models::Tag& tag), (override));
-    MOCK_METHOD(BookOperationStatus, removeTag, (const QString&,
+    MOCK_METHOD(BookOperationStatus, removeTag, (const QUuid&,
                                                  const domain::models::Tag& tag), (override));
     
-    MOCK_METHOD(BookOperationStatus, saveBookToPath, (const QString& title, 
+    MOCK_METHOD(BookOperationStatus, saveBookToPath, (const QUuid&, 
                                                       const QUrl& path), (override));
     
     MOCK_METHOD(void, setAuthenticationToken, (const QString& token), (override));
@@ -91,24 +92,6 @@ TEST_F(ABookController, SucceedsAddingABook)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsAddingABookIfTheBookAlreadyExists)
-{
-    // Arrange
-    auto expectedResult = BookOperationStatus::BookAlreadyExists;
-    
-    
-    // Expect
-    EXPECT_CALL(bookServiceMock, addBook(_))
-            .Times(1)
-            .WillOnce(Return(BookOperationStatus::BookAlreadyExists));
-    
-    // Act
-    auto result = bookController->addBook("some/path.pdf");
-    
-    // Assert
-    EXPECT_EQ(static_cast<int>(expectedResult), result);
-}
-
 
 
 TEST_F(ABookController, SucceedsDeletingABook)
@@ -123,7 +106,7 @@ TEST_F(ABookController, SucceedsDeletingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->deleteBook("someBook");
+    auto result = bookController->deleteBook("some-book-uuid");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -175,7 +158,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->updateBook("SomeBook", QVariant::fromValue(map));
+    auto result = bookController->updateBook("some-book-uuid", QVariant::fromValue(map));
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -193,7 +176,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
             .WillOnce(Return(nullptr));
     
     // Act
-    auto result = bookController->updateBook("SomeBook", QVariant());
+    auto result = bookController->updateBook("some-book-uuid", QVariant());
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -219,7 +202,7 @@ TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
             .WillOnce(Return(&bookToReturn));
     
     // Act
-    auto result = bookController->updateBook("SomeBook", map);
+    auto result = bookController->updateBook("some-book-uuid", map);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -233,17 +216,22 @@ TEST_F(ABookController, SucceedsGettingABook)
     QString title = "SomeBook";
     QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
-    QImage cover("0fdd244123bc");
     QString tagNames[2] { "FirstTag", "SecondTag" };
-    std::vector<Book> booksToReturn{ Book(title, author, filePath, cover) };
+    Book book(title, author, filePath);
+    
+    const auto& bookUuid = book.getUuid();
+    
+    std::vector<Book> booksToReturn{ book };
     booksToReturn[0].addTag(tagNames[0]);
     booksToReturn[0].addTag(tagNames[1]);
+    
     
     dtos::TagDto firstTag { .name = tagNames[0] };
     dtos::TagDto secondTag { .name = tagNames[1] };
     dtos::BookDto expectedResult
     {
         .title = title,
+        .author = author,
         .filePath = filePath,
         .tags = { firstTag, secondTag }
     };
@@ -255,11 +243,13 @@ TEST_F(ABookController, SucceedsGettingABook)
             .WillOnce(ReturnRef(booksToReturn));
     
     // Act
-    auto result = bookController->getBook(title);
+    auto uuidAsString = bookUuid.toString(QUuid::WithoutBraces);
+    auto result = bookController->getBook(uuidAsString);
     
     // Assert
     EXPECT_EQ(expectedResult.title, result.title);
     EXPECT_EQ(expectedResult.filePath, result.filePath);
+    EXPECT_EQ(expectedResult.author, result.author);
     
     for(int i = 0; i < expectedResult.tags.size(); ++i)
     {
@@ -304,7 +294,7 @@ TEST_F(ABookController, SucceedsAddingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", "SomeTag");
+    auto result = bookController->addTag("some-book-uuid", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -322,7 +312,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
             .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
     
     // Act
-    auto result = bookController->addTag("SomeTitle", "SomeTag");
+    auto result = bookController->addTag("some-book-uuid", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -342,7 +332,7 @@ TEST_F(ABookController, SucceedsRemovingATag)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->removeTag("SomeTitle", "SomeTag");
+    auto result = bookController->removeTag("some-book-uuid", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -360,7 +350,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
             .WillOnce(Return(BookOperationStatus::TagDoesNotExist));
     
     // Act
-    auto result = bookController->removeTag("SomeTitle", "SomeTag");
+    auto result = bookController->removeTag("some-book-uuid", "SomeTag");
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -371,7 +361,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
 TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
 {
     // Arrange
-    QString book = "Some Book";
+    QString bookUuid = "some-book-uuid";
     
     // Expect
     EXPECT_CALL(bookServiceMock, refreshLastOpenedFlag(_))
@@ -379,7 +369,7 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
             .WillOnce(Return(true));
     
     // Act
-    bookController->refreshLastOpenedFlag(book);
+    bookController->refreshLastOpenedFlag(bookUuid);
 }
 
 
@@ -387,7 +377,7 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
 TEST_F(ABookController, SucceedsSavingABookToAPath)
 {
     // Arrange
-    QString book = "SomeBook";
+    QString bookUuid = "some-book-uuid";
     QString url = "/some/url/";
     
     auto expectedResult = BookOperationStatus::Success;
@@ -399,7 +389,7 @@ TEST_F(ABookController, SucceedsSavingABookToAPath)
             .WillOnce(Return(BookOperationStatus::Success));
     
     // Act
-    auto result = bookController->saveBookToPath(book, url);
+    auto result = bookController->saveBookToPath(bookUuid, url);
     
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
