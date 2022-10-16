@@ -14,6 +14,7 @@ add_library(domain
                     models/register_model.hpp
                     models/book.cpp
                     models/book.hpp
+                    models/book_meta_data.hpp
                     models/tag.cpp
                     models/tag.hpp
                     models/user.cpp
