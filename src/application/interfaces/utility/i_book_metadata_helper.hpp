@@ -9,12 +9,12 @@
 namespace application
 {
 
-class IBookInfoHelper : public QObject
+class IBookMetadataHelper : public QObject
 {
     Q_OBJECT
     
 public:
-    virtual ~IBookInfoHelper() noexcept = default;
+    virtual ~IBookMetadataHelper() noexcept = default;
     
     virtual std::optional<domain::models::BookMetaData> getBookMetaData(
             const QString& filePath) = 0;

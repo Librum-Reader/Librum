@@ -1,4 +1,4 @@
-#include "book_info_helper.hpp"
+#include "book_metadata_helper.hpp"
 #include <QDateTime>
 #include <QMimeDatabase>
 #include "document.h"
@@ -17,7 +17,7 @@ namespace application::utility
 {
 
 
-std::optional<BookMetaData> BookInfoHelper::getBookMetaData(const QString& filePath)
+std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(const QString& filePath)
 {
     auto setupSucceeded = setupDocument(filePath);
     if(!setupSucceeded)
@@ -45,7 +45,7 @@ std::optional<BookMetaData> BookInfoHelper::getBookMetaData(const QString& fileP
 }
 
 
-bool BookInfoHelper::setupDocument(const QString& filePath)
+bool BookMetadataHelper::setupDocument(const QString& filePath)
 {
     Settings::instance(QStringLiteral("okularproviderrc"));
     m_document = std::make_unique<Document>(nullptr);
@@ -62,16 +62,16 @@ bool BookInfoHelper::setupDocument(const QString& filePath)
     return openResult == Document::OpenSuccess;
 }
 
-void BookInfoHelper::setupObserver()
+void BookMetadataHelper::setupObserver()
 {
     m_observer = std::make_unique<CoverObserver>();
     m_document->addObserver(m_observer.get());
     connect(m_observer.get(), &CoverObserver::pageChanged, 
-            this, &BookInfoHelper::proccessBookCoverPixmap);
+            this, &BookMetadataHelper::proccessBookCoverPixmap);
 }
 
 
-QString BookInfoHelper::getTitle(const QString& filePath) const
+QString BookMetadataHelper::getTitle(const QString& filePath) const
 {
     const QString& title = m_document->documentInfo().get(DocumentInfo::Title);
     if(title.isEmpty())
@@ -83,26 +83,26 @@ QString BookInfoHelper::getTitle(const QString& filePath) const
     return title;
 }
 
-QString BookInfoHelper::getAuthor() const
+QString BookMetadataHelper::getAuthor() const
 {
     const QString& author = m_document->documentInfo().get(DocumentInfo::Author);
     return author;
 }
 
-QString BookInfoHelper::getCreator() const
+QString BookMetadataHelper::getCreator() const
 {
     const QString& creator = m_document->documentInfo().get(DocumentInfo::Creator);
     return creator;
 }
 
-QString BookInfoHelper::getReleaseDate() const
+QString BookMetadataHelper::getReleaseDate() const
 {
     const QString& creationDate = m_document->documentInfo()
                                   .get(DocumentInfo::CreationDate);
     return creationDate;
 }
 
-QString BookInfoHelper::getFormat() const
+QString BookMetadataHelper::getFormat() const
 {
     const QString& format = m_document->documentInfo().get(DocumentInfo::MimeType);
     
@@ -112,21 +112,21 @@ QString BookInfoHelper::getFormat() const
     return result;
 }
 
-QString BookInfoHelper::getDocumentSize() const
+QString BookMetadataHelper::getDocumentSize() const
 {
     const QString& docSize = m_document->documentInfo()
                              .get(DocumentInfo::DocumentSize);
     return docSize;
 }
 
-QString BookInfoHelper::getPagesSize() const
+QString BookMetadataHelper::getPagesSize() const
 {
     const QString& pagesSize = m_document->documentInfo()
                                .get(DocumentInfo::PagesSize);
     return pagesSize;
 }
 
-int BookInfoHelper::getPageCount() const
+int BookMetadataHelper::getPageCount() const
 {
     const QString& pages = m_document->documentInfo().get(DocumentInfo::Pages);
     
@@ -140,7 +140,7 @@ int BookInfoHelper::getPageCount() const
 }
 
 
-void BookInfoHelper::getCover() const
+void BookMetadataHelper::getCover() const
 {
     auto coverSize = getCoverSize();
     auto request = new PixmapRequest(m_observer.get(), 0, coverSize.width(),
@@ -150,7 +150,7 @@ void BookInfoHelper::getCover() const
     m_document->requestPixmaps({request});
 }
 
-QSize BookInfoHelper::getCoverSize() const
+QSize BookMetadataHelper::getCoverSize() const
 {
     const auto& coverPage = m_document->page(0);
     
@@ -170,13 +170,13 @@ QSize BookInfoHelper::getCoverSize() const
 }
 
 
-QString BookInfoHelper::getSystemRelativePath(const QString& qPath) const
+QString BookMetadataHelper::getSystemRelativePath(const QString& qPath) const
 {
     QString prefix = "file://";
     return qPath.mid(prefix.size());
 }
 
-QString BookInfoHelper::getCurrentDateTimeAsString()
+QString BookMetadataHelper::getCurrentDateTimeAsString()
 {
     auto now = QDateTime::currentDateTimeUtc();
     auto result = now.toString("dd.MM.yyyy") + " - " + now.toString("h:m ap");
@@ -184,7 +184,7 @@ QString BookInfoHelper::getCurrentDateTimeAsString()
     return result;
 }
 
-QMimeType BookInfoHelper::getMimeType(const QString& filePath)
+QMimeType BookMetadataHelper::getMimeType(const QString& filePath)
 {
     QMimeDatabase mimeDb;
     auto mimeType = mimeDb.mimeTypeForUrl(filePath);
@@ -192,7 +192,7 @@ QMimeType BookInfoHelper::getMimeType(const QString& filePath)
     return mimeType;
 }
 
-QString BookInfoHelper::parseTitleFromPath(const QString& path) const
+QString BookMetadataHelper::parseTitleFromPath(const QString& path) const
 {
     auto indexOfLastSlash = path.lastIndexOf("/");
     auto indexOfLastDot = path.lastIndexOf(".");
@@ -206,7 +206,7 @@ QString BookInfoHelper::parseTitleFromPath(const QString& path) const
     return result;
 }
 
-QString BookInfoHelper::removeTypeFromMimeString(const QString& mimeString) const
+QString BookMetadataHelper::removeTypeFromMimeString(const QString& mimeString) const
 {
     int lastPositionOfSlash = mimeString.lastIndexOf("/");
     if(lastPositionOfSlash == -1)
@@ -216,7 +216,7 @@ QString BookInfoHelper::removeTypeFromMimeString(const QString& mimeString) cons
     return result;
 }
 
-QString BookInfoHelper::removeAppendingsFromMimeString(const QString& mimeString) const
+QString BookMetadataHelper::removeAppendingsFromMimeString(const QString& mimeString) const
 {
     int lastPositionOfPlus = mimeString.lastIndexOf("+");
     if(lastPositionOfPlus == -1)
@@ -226,7 +226,7 @@ QString BookInfoHelper::removeAppendingsFromMimeString(const QString& mimeString
     return result;
 }
 
-void BookInfoHelper::proccessBookCoverPixmap(int page, int flag)
+void BookMetadataHelper::proccessBookCoverPixmap(int page, int flag)
 {
     if(page != 0 || flag != DocumentObserver::Pixmap)
         return;

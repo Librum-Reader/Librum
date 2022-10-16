@@ -1,5 +1,5 @@
 #pragma once
-#include "i_book_info_helper.hpp"
+#include "i_book_metadata_helper.hpp"
 #include <QMimeType>
 #include <memory>
 #include <QSize>
@@ -10,7 +10,7 @@
 namespace application::utility
 {
 
-class BookInfoHelper : public IBookInfoHelper
+class BookMetadataHelper : public IBookMetadataHelper
 {
     Q_OBJECT
     

@@ -1,6 +1,6 @@
 #pragma once
 #include <QPixmap>
-#include "i_book_info_helper.hpp"
+#include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 
 
@@ -12,7 +12,7 @@ class BookService : public IBookService
     Q_OBJECT
     
 public:
-    BookService(IBookInfoHelper* bookInfoManager);
+    BookService(IBookMetadataHelper* bookMetadataHelper);
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
@@ -44,7 +44,7 @@ private slots:
 private:
     QString getCurrentDateTimeAsString();
     
-    IBookInfoHelper* m_bookInfoManager;
+    IBookMetadataHelper* m_bookMetadataHelper;
     std::vector<domain::models::Book> m_books;
     QString m_authenticationToken;
 };

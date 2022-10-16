@@ -27,7 +27,7 @@ set(application_SRC
     interfaces/services/i_user_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
-    interfaces/utility/i_book_info_helper.hpp
+    interfaces/utility/i_book_metadata_helper.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -38,8 +38,8 @@ set(application_SRC
     
     common/enums/book_operation_status.hpp
     
-    utility/book_info_helper.cpp
-    utility/book_info_helper.hpp
+    utility/book_metadata_helper.cpp
+    utility/book_metadata_helper.hpp
     utility/cover_observer.cpp
     utility/cover_observer.hpp
 )

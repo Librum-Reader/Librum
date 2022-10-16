@@ -7,7 +7,7 @@
 #include "book.hpp"
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
-#include "i_book_info_helper.hpp"
+#include "i_book_metadata_helper.hpp"
 #include "book_service.hpp"
 #include "tag.hpp"
 
@@ -23,7 +23,7 @@ using namespace domain::models;
 namespace tests::application
 {
 
-class BookInfoHelperMock : public IBookInfoHelper
+class BookInfoHelperMock : public IBookMetadataHelper
 {
 public:
     MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, 

@@ -6,8 +6,8 @@
 #include "i_book_controller.hpp"
 #include "book_controller.hpp"
 
-#include "i_book_info_helper.hpp"
-#include "book_info_helper.hpp"
+#include "i_book_metadata_helper.hpp"
+#include "book_metadata_helper.hpp"
 
 #include "i_authentication_controller.hpp"
 #include "authentication_controller.hpp"
@@ -55,7 +55,7 @@ const auto diConfig = [] {
                 di::bind<IUserStorageGateway>().to<gateways::UserStorageGateway>(),
                 di::bind<IUserStorageAccess>().to<persistence::UserStorageAccess>(),
                 
-                di::bind<application::IBookInfoHelper>().to<application::utility::BookInfoHelper>()
+                di::bind<application::IBookMetadataHelper>().to<application::utility::BookMetadataHelper>()
                 );
 };
 

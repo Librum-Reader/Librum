@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <ranges>
 #include "book_operation_status.hpp"
-#include "i_book_info_helper.hpp"
+#include "i_book_metadata_helper.hpp"
 
 
 namespace application::services
@@ -15,17 +15,17 @@ using namespace domain::models;
 using std::size_t;
 
 
-BookService::BookService(IBookInfoHelper* bookInfoManager)
-    : m_bookInfoManager(bookInfoManager)
+BookService::BookService(IBookMetadataHelper* bookMetadataHelper)
+    : m_bookMetadataHelper(bookMetadataHelper)
 {
-    connect(m_bookInfoManager, &IBookInfoHelper::bookCoverGenerated,
+    connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
 }
 
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    auto bookMetaData = m_bookInfoManager->getBookMetaData(filePath);
+    auto bookMetaData = m_bookMetadataHelper->getBookMetaData(filePath);
     if(!bookMetaData)
         return BookOperationStatus::OpeningBookFailed;
     
@@ -35,7 +35,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     
     // The cover needs to be generated after the book has been created,
     // else the cover is being added to a non existent book
-    m_bookInfoManager->getCover();
+    m_bookMetadataHelper->getCover();
     return BookOperationStatus::Success;
 }
 
