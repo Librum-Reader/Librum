@@ -61,6 +61,9 @@ public:
     const QImage& getCover() const;
     void setCover(const QImage& newCover);
     
+    bool getDownloaded() const;
+    void setDownloaded(bool newDownloaded);
+    
     
     bool addTag(const Tag& tag);
     bool removeTag(const Tag& tag);
@@ -73,12 +76,14 @@ public:
     static const int maxCoverWidth{ 188 };
     static const int maxCoverHeight{ 238 };
     
+    
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
     
     QUuid m_uuid;
     BookMetaData m_metaData;
     QString m_filePath;
+    bool downloaded = true;
     int m_currentPage;
     std::vector<Tag> m_tags;
 };

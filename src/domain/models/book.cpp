@@ -177,6 +177,18 @@ void Book::setCover(const QImage& newCover)
 }
 
 
+bool Book::getDownloaded() const
+{
+    return downloaded;
+}
+
+void Book::setDownloaded(bool newDownloaded)
+{
+    downloaded = newDownloaded;
+}
+
+
+
 const std::vector<Tag>& Book::getTags() const
 {
     return m_tags;
