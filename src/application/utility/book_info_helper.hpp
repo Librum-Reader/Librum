@@ -1,7 +1,10 @@
 #pragma once
 #include "i_book_info_helper.hpp"
 #include <QMimeType>
+#include <memory>
+#include <QSize>
 #include "document.h"
+#include "book.hpp"
 #include "cover_observer.hpp"
 
 
@@ -13,38 +16,36 @@ class BookInfoHelper : public IBookInfoHelper
     Q_OBJECT
     
 public:
-    BookInfoHelper();
-    
-    bool setupDocument(const QString& filePath, int maxBookCoverWidth, 
-                       int maxBookCoverHeight) override;
-    QString getTitle() const override;
-    QString getAuthor() const override;
-    QString getCreator() const override;
-    int getPageCount() const override;
-    QString getCreationDate() const override;
-    QString getFormat() const override;
-    QString getDocumentSize() const override;
-    QString getPagesSize() const override;
-    void getCover() const override;
+    std::optional<domain::models::BookMetaData> getBookMetaData(
+            const QString& filePath) override;
     
 private slots:
     void proccessBookCoverPixmap(int page, int flag);
+    void getCover() const;
     
 private:
+    bool setupDocument(const QString& filePath);
+    void setupObserver();
     
+    QString getTitle(const QString& filePath) const;
+    QString getAuthor() const;
+    QString getCreator() const;
+    QString getReleaseDate() const;
+    QString getFormat() const;
+    QString getDocumentSize() const;
+    QString getPagesSize() const;
+    int getPageCount() const;
     
     QSize getCoverSize() const;
     QString getSystemRelativePath(const QString& qPath) const;
     QString parseTitleFromPath(const QString& path) const;
+    QString getCurrentDateTimeAsString();
+    QMimeType getMimeType(const QString& filePath);
     QString removeTypeFromMimeString(const QString& mimeString) const;
     QString removeAppendingsFromMimeString(const QString& mimeString) const;
     
     std::unique_ptr<Okular::Document> m_document;
     std::unique_ptr<CoverObserver> m_observer;
-    QString m_systemRelativePath;
-    QMimeType m_mimeType;
-    int m_maxBookCoverWidth;
-    int m_maxBookCoverHeight;
 };
 
 } // namespace application::utility
