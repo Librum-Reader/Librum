@@ -4,7 +4,6 @@
 #include <memory>
 #include <QSize>
 #include "document.h"
-#include "book.hpp"
 #include "cover_observer.hpp"
 
 
@@ -21,7 +20,7 @@ public:
     
 private slots:
     void proccessBookCoverPixmap(int page, int flag);
-    void getCover() const;
+    void getCover() const override;
     
 private:
     bool setupDocument(const QString& filePath);

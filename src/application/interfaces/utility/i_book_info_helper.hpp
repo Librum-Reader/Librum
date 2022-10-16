@@ -18,8 +18,8 @@ public:
     
     virtual std::optional<domain::models::BookMetaData> getBookMetaData(
             const QString& filePath) = 0;
-    
-    virtual void getCover();
+
+    virtual void getCover() const = 0;
     
 signals:
     void bookCoverGenerated(const QPixmap* pixmal);

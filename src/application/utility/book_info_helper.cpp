@@ -4,6 +4,7 @@
 #include "document.h"
 #include "generator.h"
 #include "observer.h"
+#include "book.hpp"
 #include "page.h"
 #include "settings.hpp"
 
