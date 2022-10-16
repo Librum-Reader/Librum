@@ -29,6 +29,5 @@ target_include_directories(application_unit_tests
                 PRIVATE
                     ${APPLICATION_INCLUDES}
                     ${DOMAIN_INCLUDES}
-                    ${PROJECT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
 )

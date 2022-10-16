@@ -76,7 +76,6 @@ target_include_directories(appLibrum
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
         ${OKULARCORE_INCLUDES}
-        ${PROJECT_SOURCE_DIR}
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
