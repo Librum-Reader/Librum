@@ -39,6 +39,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getUuid().toString(QUuid::WithoutBraces);
         break;
     case TitleRole:
+        if(book.getTitle() == "")
+            return "No Title";
         return book.getTitle();
         break;
     case AuthorRole:
