@@ -5,6 +5,7 @@
 #include <QString>
 #include <QUuid>
 #include "tag.hpp"
+#include "book_meta_data.hpp"
 
 
 namespace domain::models
@@ -13,16 +14,7 @@ namespace domain::models
 class Book
 {
 public:
-    Book(const QString& title, const QString& author,
-         const QString& filePath, const QImage& cover = QImage(),
-         const QString& uuid = "");
-    
-    Book(const QString& title, const QString& author,
-         const QString& filePath, const QString& creator,
-         const QString& creationDate, const QString& format,
-         const QString& docSize, const QString& pagesSize,
-         int pageCount, const QString& addedToLibrary,
-         const QString& lastModified, const QImage& cover = QImage(),
+    Book(const QString& filePath, const BookMetaData& metaData,
          int currentPage = 0, const QString& uuid = "");
     
     const QUuid& getUuid() const;
@@ -85,20 +77,9 @@ private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
     
     QUuid m_uuid;
-    QString m_title;
-    QString m_author;
+    BookMetaData m_metaData;
     QString m_filePath;
-    QString m_creator;
-    QString m_releaseDate;
-    QString m_format;
-    QString m_language;
-    QString m_documentSize;
-    QString m_pagesSize;
-    int m_pageCount;
     int m_currentPage;
-    QString m_addedToLibrary;
-    QString m_lastOpened;
-    QImage m_cover;
     std::vector<Tag> m_tags;
 };
 

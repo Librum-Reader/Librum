@@ -5,29 +5,10 @@
 namespace domain::models
 {
 
-Book::Book(const QString& title, const QString& author, 
-           const QString& filePath, const QImage& cover,
-           const QString& uuid)
-    : m_title(title), m_author(author), m_filePath(filePath), m_cover(cover)
-{
-    if(uuid.isEmpty())
-        m_uuid = QUuid::createUuid();
-    else
-        m_uuid = QUuid(uuid);
-}
-
-Book::Book(const QString& title, const QString& author, 
-           const QString& filePath, const QString& creator,
-           const QString& creationDate, const QString& format,
-           const QString& docSize, const QString& pagesSize,
-           int pageCount, const QString& addedToLibrary,
-           const QString& lastOpened, const QImage& cover,
+Book::Book(const QString& filePath, const BookMetaData& metaData, 
            int currentPage, const QString& uuid)
-    : m_title(title), m_author(author), m_filePath(filePath), m_creator(creator),
-      m_releaseDate(creationDate), m_format(format), m_documentSize(docSize),
-      m_pagesSize(pagesSize), m_addedToLibrary(addedToLibrary), 
-      m_pageCount(pageCount), m_lastOpened(lastOpened), 
-      m_cover(cover), m_currentPage(currentPage)
+    : m_filePath(filePath), m_metaData(metaData), 
+      m_currentPage(currentPage)
 {
     if(uuid.isEmpty())
         m_uuid = QUuid::createUuid();
@@ -44,23 +25,23 @@ const QUuid& Book::getUuid() const
 
 const QString& Book::getTitle() const
 {
-    return m_title;
+    return m_metaData.title;
 }
 
 void Book::setTitle(const QString& newTitle)
 {
-    m_title = newTitle;
+    m_metaData.title = newTitle;
 }
 
 
 const QString& Book::getAuthor() const
 {
-    return m_author;
+    return m_metaData.author;
 }
 
 void Book::setAuthor(const QString& newAuthor)
 {
-    m_author = newAuthor;
+    m_metaData.author = newAuthor;
 }
 
 
@@ -77,89 +58,89 @@ void Book::setFilePath(const QString& newLocalPath)
 
 const QString& Book::getLastOpened() const
 {
-    return m_lastOpened;
+    return m_metaData.lastOpened;
 }
 
-void Book::setLastOpened(const QString& newLastModified)
+void Book::setLastOpened(const QString& newLastOpened)
 {
-    m_lastOpened = newLastModified;
+    m_metaData.lastOpened = newLastOpened;
 }
 
 
 const QString& Book::getAddedToLibrary() const
 {
-    return m_addedToLibrary;
+    return m_metaData.addedToLibrary;
 }
 
 void Book::setAddedToLibrary(const QString& newAddedToLibrary)
 {
-    m_addedToLibrary = newAddedToLibrary;
+    m_metaData.addedToLibrary = newAddedToLibrary;
 }
 
 
 const QString& Book::getPagesSize() const
 {
-    return m_pagesSize;
+    return m_metaData.pagesSize;
 }
 
 void Book::setPagesSize(const QString& newPagesSize)
 {
-    m_pagesSize = newPagesSize;
+    m_metaData.pagesSize = newPagesSize;
 }
 
 
 const QString& Book::getDocumentSize() const
 {
-    return m_documentSize;
+    return m_metaData.documentSize;
 }
 
 void Book::setDocumentSize(const QString& newDocumentSize)
 {
-    m_documentSize = newDocumentSize;
+    m_metaData.documentSize = newDocumentSize;
 }
 
 
 const QString& Book::getFormat() const
 {
-    return m_format;
+    return m_metaData.format;
 }
 
 void Book::setFormat(const QString& newFormat)
 {
-    m_format = newFormat;
+    m_metaData.format = newFormat;
 }
 
 
 const QString& Book::getLanguage() const
 {
-    return m_language;
+    return m_metaData.language;
 }
 
 void Book::setLanguage(const QString& newLanguage)
 {
-    m_language = newLanguage;
+    m_metaData.language = newLanguage;
 }
 
 
 const QString& Book::getReleaseDate() const
 {
-    return m_releaseDate;
+    return m_metaData.releaseDate;
 }
 
 void Book::setReleaseDate(const QString& newCreationDate)
 {
-    m_releaseDate = newCreationDate;
+    m_metaData.releaseDate = newCreationDate;
 }
 
 
 int Book::getPageCount() const
 {
-    return m_pageCount;
+    return m_metaData.pageCount;
 }
 
 void Book::setPageCount(int newPageCount)
 {
-    m_pageCount = newPageCount;
+    m_metaData.pageCount = newPageCount;
 }
 
 
@@ -176,23 +157,23 @@ void Book::setCurrentPage(int newCurrentPage)
 
 const QString& Book::getCreator() const
 {
-    return m_creator;
+    return m_metaData.creator;
 }
 
 void Book::setCreator(const QString& newCreator)
 {
-    m_creator = newCreator;
+    m_metaData.creator = newCreator;
 }
 
 
 const QImage& Book::getCover() const
 {
-    return m_cover;
+    return m_metaData.cover;
 }
 
 void Book::setCover(const QImage& newCover)
 {
-    m_cover = newCover;
+    m_metaData.cover = newCover;
 }
 
 
@@ -241,19 +222,33 @@ bool Book::tagsAreTheSame(const std::vector<Tag>& other)
 
 void Book::update(const Book& other)
 {
-    if(m_title != other.getTitle()) m_title = other.getTitle();
-    if(m_author != other.getAuthor()) m_author = other.getAuthor();
-    if(m_filePath != other.getFilePath()) m_filePath = other.getFilePath();
-    if(m_creator != other.getCreator()) m_creator = other.getCreator();
-    if(m_releaseDate != other.getReleaseDate()) m_releaseDate = other.getReleaseDate();
-    if(m_format != other.getFormat()) m_format = other.getFormat();
-    if(m_language != other.getLanguage()) m_language = other.getLanguage();
-    if(m_documentSize != other.getDocumentSize()) m_documentSize = other.getDocumentSize();
-    if(m_pagesSize != other.getPagesSize()) m_pagesSize = other.getPagesSize();
-    if(m_pageCount != other.getPageCount()) m_pageCount = other.getPageCount();
-    if(m_addedToLibrary != other.getAddedToLibrary()) m_addedToLibrary = other.getAddedToLibrary();
-    if(m_lastOpened != other.getLastOpened()) m_lastOpened = other.getLastOpened();
-    if(m_cover != other.getCover()) m_cover = other.getCover();
+    if(m_metaData.title != other.getTitle())
+        m_metaData.title = other.getTitle();
+    if(m_metaData.author != other.getAuthor())
+        m_metaData.author = other.getAuthor();
+    if(m_filePath != other.getFilePath())
+        m_filePath = other.getFilePath();
+    if(m_metaData.creator != other.getCreator())
+        m_metaData.creator = other.getCreator();
+    if(m_metaData.releaseDate != other.getReleaseDate())
+        m_metaData.releaseDate = other.getReleaseDate();
+    if(m_metaData.format != other.getFormat())
+        m_metaData.format = other.getFormat();
+    if(m_metaData.language != other.getLanguage())
+        m_metaData.language = other.getLanguage();
+    if(m_metaData.documentSize != other.getDocumentSize())
+        m_metaData.documentSize = other.getDocumentSize();
+    if(m_metaData.pagesSize != other.getPagesSize())
+        m_metaData.pagesSize = other.getPagesSize();
+    if(m_metaData.pageCount != other.getPageCount())
+        m_metaData.pageCount = other.getPageCount();
+    if(m_metaData.addedToLibrary != other.getAddedToLibrary())
+        m_metaData.addedToLibrary = other.getAddedToLibrary();
+    if(m_metaData.lastOpened != other.getLastOpened())
+        m_metaData.lastOpened = other.getLastOpened();
+    if(m_metaData.cover != other.getCover())
+        m_metaData.cover = other.getCover();
+    
     if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
 }
 
