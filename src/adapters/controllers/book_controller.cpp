@@ -217,6 +217,7 @@ void BookController::refreshBookChache()
         bookDto.addedToLibrary = book.getAddedToLibrary();
         bookDto.lastOpened = book.getLastOpened();
         bookDto.cover = book.getCover();
+        bookDto.downloaded = book.getDownloaded();
         
         
         for(std::size_t i = 0; i < book.getTags().size(); ++i)

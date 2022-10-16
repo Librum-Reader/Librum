@@ -84,6 +84,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case TagsRole:
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
         break;
+    case DownloadedRole:
+        return book.getDownloaded();
+        break;
     default:
         return QVariant();
     }
@@ -106,7 +109,8 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         {AddedToLibraryRole, "addedToLibrary"},
         {LastOpenedRole, "lastOpened"},
         {CoverRole, "cover"},
-        {TagsRole, "tags"}
+        {TagsRole, "tags"},
+        {DownloadedRole, "downloaded"}
     };
     
     return roles;

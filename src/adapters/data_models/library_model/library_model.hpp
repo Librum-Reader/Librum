@@ -34,6 +34,7 @@ public:
         LastOpenedRole,
         CoverRole,
         TagsRole,
+        DownloadedRole,
         Invalid
     };
     
