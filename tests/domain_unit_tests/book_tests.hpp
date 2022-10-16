@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <QString>
 #include "book.hpp"
+#include "book_meta_data.hpp"
 #include "tag.hpp"
 
 
@@ -14,7 +15,7 @@ namespace tests::domain
 TEST(ABook, SucceedsAddingATag)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "some/path");
+    Book book("some/path", BookMetaData());
     Tag tag("SomeTag");
     
     // Act
@@ -29,7 +30,7 @@ TEST(ABook, SucceedsAddingATag)
 TEST(ABook, FailsAddingATagIfItAlreadyExists)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "some/path");
+    Book book("some/path", BookMetaData());
     Tag tag("SomeTag");
     
     // Act
@@ -45,7 +46,7 @@ TEST(ABook, FailsAddingATagIfItAlreadyExists)
 TEST(ABook, SucceedsRemovingATag)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "some/path");
+    Book book("some/path", BookMetaData());
     Tag tag("SomeTag");
     
     // Act
@@ -62,7 +63,7 @@ TEST(ABook, SucceedsRemovingATag)
 TEST(ABook, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "some/path");
+    Book book("some/path", BookMetaData());
     Tag tag("SomeTag");
     
     // Act
@@ -79,7 +80,7 @@ TEST(ABook, FailsRemovingATagIfTagDoesNotExist)
 TEST(ABook, SucceedsGettingAllTags)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "some/path");
+    Book book("some/path", BookMetaData());
     Tag firstTag("FirstTag");
     Tag secondTag("SecondTag");
     Tag thirdTag("ThirdTag");
@@ -100,14 +101,18 @@ TEST(ABook, SucceedsGettingAllTags)
 TEST(ABook, SucceedsUpdatingBook)
 {
     // Arrange
-    Book book("SomeBook", "SomeAuthor", "SomePath", QImage("SomeCover"));
+    Book book("some/path", BookMetaData{ .title = "ATitle", .author = "AnAuthor" });
     
+    Book bookToUpdateWith("some/path", BookMetaData
+                          { 
+                              .title = "AnotherTitle", 
+                              .author = "AnotherAuthor" 
+                          });
     Tag tag("SomeTag");
-    Book bookToUpdateWith("SomeUpdatedBook", "SomeUpdatedAuthor",
-                          "SomeUpdatedPath", QImage("SomeUpdatedCover"));
     bookToUpdateWith.addTag(tag);
     
     auto expectedResult = bookToUpdateWith;
+    
     
     // Act
     book.update(bookToUpdateWith);

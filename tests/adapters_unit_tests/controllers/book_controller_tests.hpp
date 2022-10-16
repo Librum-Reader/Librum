@@ -7,6 +7,7 @@
 #include <QVariantMap>
 #include <QByteArray>
 #include "book_controller.hpp"
+#include "book_meta_data.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "book.hpp"
@@ -135,7 +136,8 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
-    Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
+    BookMetaData bookMetaData{ .title = "SomeTitle", .author = "SomeAuthor" };
+    Book bookToReturn("some/path.pdf", bookMetaData);
     
     auto titleNumber = static_cast<int>(IBookController::MetaProperties::Title);
     auto authorNumber = static_cast<int>(IBookController::MetaProperties::Author);
@@ -185,12 +187,13 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 {
     // Arrange
-    Book bookToReturn("SomeBook", "SomeAuthor", "some/path.pdf");
+    BookMetaData bookMetaData{ .title = "SomeTitle", .author = "SomeAuthor" };
+    Book bookToReturn("some/path.pdf", bookMetaData);
     
     int nonExistentProperty = 150;
     QVariantMap map
     { 
-        {QString::number(nonExistentProperty), "SomeValue"}
+        { QString::number(nonExistentProperty), "SomeValue" }
     };
     
     auto expectedResult = BookOperationStatus::PropertyDoesNotExist;
@@ -217,8 +220,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
     QString tagNames[2] { "FirstTag", "SecondTag" };
-    Book book(title, author, filePath);
-    
+    Book book(filePath, BookMetaData{ .title = title, .author = author });
     const auto& bookUuid = book.getUuid();
     
     std::vector<Book> booksToReturn{ book };
@@ -262,8 +264,9 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
 {
     // Arrange
     std::vector<Book> booksToReturn;
-    booksToReturn.emplace_back("SomeBook", "SomeAuthor", "some/path.pdf");
-    booksToReturn.emplace_back("SomeOtherBook", "SomeOtherAuthor", "some/other/path.pdf");
+    BookMetaData bookData{ .title = "SomeTitle", .author = "SomeAuthor" };
+    booksToReturn.emplace_back("/some/path", bookData);
+    booksToReturn.emplace_back("/some/path2", bookData);
     
     auto expectedResult = 2;
     

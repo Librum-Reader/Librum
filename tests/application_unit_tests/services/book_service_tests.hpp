@@ -5,6 +5,7 @@
 #include <QSignalSpy>
 #include <QUuid>
 #include "book.hpp"
+#include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_info_helper.hpp"
 #include "book_service.hpp"
@@ -16,7 +17,7 @@ using ::testing::ReturnRef;
 using application::BookOperationStatus;
 using namespace application::services;
 using namespace application;
-using namespace domain;
+using namespace domain::models;
 
 
 namespace tests::application
@@ -25,15 +26,8 @@ namespace tests::application
 class BookInfoHelperMock : public IBookInfoHelper
 {
 public:
-    MOCK_METHOD(bool, setupDocument, (const QString& filePath, int w, int h), (override));
-    MOCK_METHOD(QString, getTitle, (), (const, override));
-    MOCK_METHOD(QString, getAuthor, (), (const, override));
-    MOCK_METHOD(QString, getCreator, (), (const, override));
-    MOCK_METHOD(int, getPageCount, (), (const, override));
-    MOCK_METHOD(QString, getCreationDate, (), (const, override));
-    MOCK_METHOD(QString, getFormat, (), (const, override));
-    MOCK_METHOD(QString, getDocumentSize, (), (const, override));
-    MOCK_METHOD(QString, getPagesSize, (), (const, override));
+    MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, 
+                (const QString&), (override));
     MOCK_METHOD(void, getCover, (), (const, override));
 };
 
@@ -42,8 +36,8 @@ struct ABookService : public ::testing::Test
 {
     void SetUp() override
     {
-        EXPECT_CALL(bookInfoHelperMock, setupDocument(_,_,_))
-                .WillRepeatedly(Return(true));
+        EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
+                .WillRepeatedly(Return(BookMetaData()));
         
         bookService = std::make_unique<BookService>(&bookInfoHelperMock);
     }
@@ -112,26 +106,22 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     // Arrange
     QSignalSpy spy(bookService.get(), &BookService::dataChanged);
     
-    QString originalTitle = "SomeBook";
-    QString originalAuthor = "SomeAuthor";
     QString originalPath = "/some/path.pdf";
+    BookMetaData bookMetaData { .title = "SomeBook", .author = "SomeAuthor" };
     
-    models::Book bookToUpdateWith("NewTitle", "NewAuthor", "NewPath");
-    bookToUpdateWith.addTag(models::Tag("FirstTag"));
-    bookToUpdateWith.addTag(models::Tag("FirstTag"));
+    BookMetaData newBookMetaData{ .title = "ANewTitle", .author = "ANewAuthor" };
+    Book bookToUpdateWith("some/path", newBookMetaData);
+    bookToUpdateWith.addTag(Tag("FirstTag"));
+    bookToUpdateWith.addTag(Tag("FirstTag"));
     
     auto expectedStatus = BookOperationStatus::Success;
     auto expectedResult = bookToUpdateWith;
     
     
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getTitle())
+    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
             .Times(1)
-            .WillOnce(Return(originalTitle));
-    
-    EXPECT_CALL(bookInfoHelperMock, getAuthor())
-            .Times(1)
-            .WillOnce(Return(originalAuthor));
+            .WillOnce(Return(bookMetaData));
     
     // Act
     bookService->addBook(originalPath);
@@ -159,8 +149,7 @@ TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 {
     // Arrange
     QString bookUuid = "non-existend-uuid";
-    models::Book bookToUpdateWidth("SomeUpdatedTitle", "SomeUpdatedAuthor",
-                                   "SomeUpdaedPath");
+    Book bookToUpdateWidth("some/path", BookMetaData());
     
     auto expectedStatus = BookOperationStatus::BookDoesNotExist;
     
@@ -177,21 +166,15 @@ TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 TEST_F(ABookService, SucceedsGettingABook)
 {
     // Arrange
-    QString title = "SomeBook";
     QString path = "some/path.pdf";
-    QString author = "SomeAuthor";
-    
-    models::Book expectedResult(title, author, path);
+    BookMetaData bookMetaData{ .title = "SomeTitle", .author = "SomeAuthor" };
+    Book expectedResult(path, bookMetaData);
     
     
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getTitle())
+    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
             .Times(1)
-            .WillOnce(Return(title));
-    
-    EXPECT_CALL(bookInfoHelperMock, getAuthor())
-            .Times(1)
-            .WillOnce(Return(author));
+            .WillOnce(Return(bookMetaData));
     
     // Act
     bookService->addBook(path);
@@ -225,8 +208,8 @@ TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
 TEST_F(ABookService, SucceedsAddingATag)
 {
     // Arrange
-    models::Tag firstTag("FirstTag");
-    models::Tag secondTag("SecondTag");
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
     auto expectedResultStatus = BookOperationStatus::Success;
     
     
@@ -250,7 +233,7 @@ TEST_F(ABookService, SucceedsAddingATag)
 TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
-    models::Tag tag("FirstTag");
+    Tag tag("FirstTag");
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
     
     
@@ -270,7 +253,7 @@ TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
     QUuid bookUuid = "non-existend-uuid";
-    models::Tag firstTag("FirstTag");
+    Tag firstTag("FirstTag");
     
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
     
@@ -285,25 +268,22 @@ TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
 TEST_F(ABookService, SucceedsGettingAllBooks)
 {
     // Arrange
-    models::Book firstBook("FirstBook", "Author1", "FirstFilePath", QImage("FirstCover"));
-    models::Book secondBook("SecondBook", "Author2", "SecondFilePath", QImage("SecondCover"));
-    models::Book thirdBook("ThirdBook", "Author3", "ThirdFilePath", QImage("ThirdCover"));
+    BookMetaData firstBookMetaData{ .title = "FirstBook", .author = "Author1" };
+    Book firstBook("/some/path", firstBookMetaData);
+    BookMetaData secondBookMetaData{ .title = "SecondBook", .author = "Author2" };
+    Book secondBook("/some/path2", secondBookMetaData);
+    BookMetaData thirdBookMetaData{ .title = "ThirdBook", .author = "Author3" };
+    Book thirdBook("/some/path2", thirdBookMetaData);
     
-    std::vector<models::Book> expectedResult { firstBook, secondBook, thirdBook };
+    std::vector<Book> expectedResult { firstBook, secondBook, thirdBook };
     
     
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getTitle())
+    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
             .Times(3)
-            .WillOnce(Return(firstBook.getTitle()))
-            .WillOnce(Return(secondBook.getTitle()))
-            .WillOnce(Return(thirdBook.getTitle()));
-    
-    EXPECT_CALL(bookInfoHelperMock, getAuthor())
-            .Times(3)
-            .WillOnce(Return(firstBook.getAuthor()))
-            .WillOnce(Return(secondBook.getAuthor()))
-            .WillOnce(Return(thirdBook.getAuthor()));
+            .WillOnce(Return(firstBookMetaData))
+            .WillOnce(Return(secondBookMetaData))
+            .WillOnce(Return(thirdBookMetaData));
     
     // Act
     bookService->addBook(firstBook.getFilePath());
@@ -326,12 +306,6 @@ TEST_F(ABookService, SucceedsGettingTheBookCount)
     // Arrange
     auto expectedResult = 2;
     
-    
-    // Expect
-    EXPECT_CALL(bookInfoHelperMock, getTitle())
-            .Times(2)
-            .WillOnce(Return("SomeBook"))
-            .WillOnce(Return("SomeOtherBook"));
     
     // Act
     bookService->addBook("some/path.pdf");
