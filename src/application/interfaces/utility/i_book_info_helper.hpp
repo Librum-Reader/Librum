@@ -1,7 +1,9 @@
 #pragma once
+#include <optional>
 #include <QString>
 #include <QObject>
 #include <QPixmap>
+#include "book_meta_data.hpp"
 
 
 namespace application
@@ -14,17 +16,10 @@ class IBookInfoHelper : public QObject
 public:
     virtual ~IBookInfoHelper() noexcept = default;
     
-    virtual bool setupDocument(const QString& filePath, int maxBookCoverWidth,
-                               int maxBookCoverHeight) = 0;
-    virtual QString getTitle() const = 0;
-    virtual QString getAuthor() const = 0;
-    virtual QString getCreator() const = 0;
-    virtual int getPageCount() const = 0;
-    virtual QString getCreationDate() const = 0;
-    virtual QString getFormat() const = 0;
-    virtual QString getDocumentSize() const = 0;
-    virtual QString getPagesSize() const = 0;
-    virtual void getCover() const = 0;
+    virtual std::optional<domain::models::BookMetaData> getBookMetaData(
+            const QString& filePath) = 0;
+    
+    virtual void getCover();
     
 signals:
     void bookCoverGenerated(const QPixmap* pixmal);
