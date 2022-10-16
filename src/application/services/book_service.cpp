@@ -25,29 +25,16 @@ BookService::BookService(IBookInfoHelper* bookInfoManager)
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    if(!m_bookInfoManager->setupDocument(filePath, Book::maxCoverWidth, 
-                                         Book::maxCoverHeight))
+    auto bookMetaData = m_bookInfoManager->getBookMetaData(filePath);
+    if(!bookMetaData)
         return BookOperationStatus::OpeningBookFailed;
     
-    QString title = m_bookInfoManager->getTitle();
-    auto author = m_bookInfoManager->getAuthor();
-    auto creator = m_bookInfoManager->getCreator();
-    auto creationDate = m_bookInfoManager->getCreationDate();
-    auto format = m_bookInfoManager->getFormat();
-    auto docSize = m_bookInfoManager->getDocumentSize();
-    auto pagesSize = m_bookInfoManager->getPagesSize();
-    auto pageCount = m_bookInfoManager->getPageCount();
-    auto addedToLibrary = getCurrentDateTimeAsString();
-    auto lastOpened = "Never";
-    
     emit bookInsertionStarted(m_books.size());
-    
-    m_books.emplace_back(title, author, filePath, creator, creationDate,
-                         format, docSize, pagesSize, pageCount, 
-                         addedToLibrary, lastOpened);
-    
+    m_books.emplace_back(filePath, bookMetaData.value());
     emit bookInsertionEnded();
     
+    // The cover needs to be generated after the book has been created,
+    // else the cover is being added to a non existent book
     m_bookInfoManager->getCover();
     return BookOperationStatus::Success;
 }
