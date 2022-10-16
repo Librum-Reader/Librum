@@ -1,5 +1,5 @@
 #pragma once
-#include "libs/di/include/boost/di.hpp"
+#include "../libs/di/include/boost/di.hpp"
 
 #include "i_book_service.hpp"
 #include "book_service.hpp"
