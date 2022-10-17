@@ -32,7 +32,8 @@ signals:
     void finishedLoadingUser(bool success);
 
 public slots:
-    virtual void setAuthenticationToken(const QString& token) = 0;
+    virtual void setAuthenticationToken(const QString& token,
+                                        const QString& email) = 0;
     virtual void clearAuthenticationToken() = 0;
 };
 

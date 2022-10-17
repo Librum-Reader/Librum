@@ -35,7 +35,8 @@ public:
     
 public slots:
     bool refreshLastOpenedFlag(const QUuid& uuid) override;
-    void setAuthenticationToken(const QString& token) override;
+    void setAuthenticationToken(const QString& token,
+                                const QString& email) override;
     void clearAuthenticationToken() override;
     
 private slots:
@@ -47,6 +48,7 @@ private:
     IBookMetadataHelper* m_bookMetadataHelper;
     std::vector<domain::models::Book> m_books;
     QString m_authenticationToken;
+    QString m_currentUserEmail;
 };
 
 } // namespace application::services

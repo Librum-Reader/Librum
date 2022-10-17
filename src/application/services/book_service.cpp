@@ -180,8 +180,10 @@ bool BookService::refreshLastOpenedFlag(const QUuid& uuid)
     return true;
 }
 
-void BookService::setAuthenticationToken(const QString& token)
+void BookService::setAuthenticationToken(const QString& token, 
+                                         const QString& email)
 {
+    m_currentUserEmail = email;
     m_authenticationToken = token;
 }
 

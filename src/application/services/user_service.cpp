@@ -82,8 +82,10 @@ void UserService::proccessUserInformation(const domain::models::User& user,
     emit finishedLoadingUser(true);
 }
 
-void UserService::setAuthenticationToken(const QString& token)
+void UserService::setAuthenticationToken(const QString& token,
+                                         const QString& email)
 {
+    Q_UNUSED(email);
     m_authenticationToken = token;
 }
 

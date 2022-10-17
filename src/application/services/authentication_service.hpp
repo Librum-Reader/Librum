@@ -20,10 +20,11 @@ public:
 public slots:
     void processAuthenticationResult(const QString& token) override;
     void processRegistrationResult(bool success, const QString& reason) override;
-    void setAuthenticationToken(const QString& token) override;
+    void setAuthenticationToken(const QString& token, const QString& email) override;
     
 private:
     IAuthenticationGateway* m_authenticationGateway;
+    QString m_currentEmail;
     QString m_token;
 };
 

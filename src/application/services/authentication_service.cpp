@@ -26,9 +26,14 @@ AuthenticationService::AuthenticationService(IAuthenticationGateway*
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
     if(loginModel.isValid())
+    {
+        m_currentEmail = loginModel.getEmail();
         m_authenticationGateway->authenticateUser(loginModel);
+    }
     else
+    {
         emit loginFinished(false);
+    }
 }
 
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
@@ -50,11 +55,12 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
 {
     if(token.isEmpty())
     {
+        m_currentEmail = "";
         emit loginFinished(false);
         return;
     }
     
-    emit authenticationTokenRegistered(token);
+    emit authenticationTokenRegistered(token, m_currentEmail);
     emit loginFinished(true);
 }
 
@@ -64,8 +70,10 @@ void AuthenticationService::processRegistrationResult(bool success,
     emit registrationFinished(success, reason);
 }
 
-void AuthenticationService::setAuthenticationToken(const QString& token)
+void AuthenticationService::setAuthenticationToken(const QString& token, 
+                                                   const QString& email)
 {
+    Q_UNUSED(email);
     m_token = token;
 }
 

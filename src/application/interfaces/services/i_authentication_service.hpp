@@ -19,13 +19,13 @@ public:
 signals:
     void loginFinished(bool success);
     void registrationFinished(bool success, const QString& reason);
-    void authenticationTokenRegistered(const QString& token);
+    void authenticationTokenRegistered(const QString& token, const QString& email);
     void authenticationTokenRemoved();
     
 public slots:
     virtual void processAuthenticationResult(const QString& token) = 0;
     virtual void processRegistrationResult(bool success, const QString& reason) = 0;
-    virtual void setAuthenticationToken(const QString& token) = 0;
+    virtual void setAuthenticationToken(const QString& token, const QString& email) = 0;
 };
 
 } // namespace application

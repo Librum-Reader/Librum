@@ -39,7 +39,8 @@ public:
     
 public slots:
     virtual bool refreshLastOpenedFlag(const QUuid& uuid) = 0;
-    virtual void setAuthenticationToken(const QString& token) = 0;
+    virtual void setAuthenticationToken(const QString& token, 
+                                        const QString& email) = 0;
     virtual void clearAuthenticationToken() = 0;
     
 signals:

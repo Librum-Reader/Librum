@@ -31,7 +31,8 @@ public:
     
     
 public slots:
-    void setAuthenticationToken(const QString& token) override;
+    void setAuthenticationToken(const QString& token,
+                                const QString& email) override;
     void clearAuthenticationToken() override;
     
     
