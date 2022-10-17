@@ -22,10 +22,14 @@ class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
     MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
-    MOCK_METHOD(void, registerUser, (const domain::models::RegisterModel& registerModel), (override));
-    MOCK_METHOD(void, processAuthenticationResult, (const QString& token), (override));
-    MOCK_METHOD(void, processRegistrationResult, (bool success, const QString& reason), (override));
-    MOCK_METHOD(void, setAuthenticationToken, (const QString& token), (override));
+    MOCK_METHOD(void, registerUser, 
+                (const domain::models::RegisterModel& registerModel), (override));
+    MOCK_METHOD(void, processAuthenticationResult, 
+                (const QString& token), (override));
+    MOCK_METHOD(void, processRegistrationResult, 
+                (bool success, const QString& reason), (override));
+    MOCK_METHOD(void, setAuthenticationToken, 
+                (const QString& token, const QString& email), (override));
 };
 
 

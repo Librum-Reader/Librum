@@ -29,10 +29,10 @@ namespace tests::adapters
 class BookServiceMock : public IBookService
 {
 public:
-    MOCK_METHOD(BookOperationStatus, addBook, (const QString& filePath), (override));
+    MOCK_METHOD(BookOperationStatus, addBook, (const QString&), (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, updateBook, (const QUuid&,
-                                                  const Book& book), (override));
+                                                  const Book&book), (override));
     
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QUuid&), (const, override));
@@ -42,14 +42,15 @@ public:
     MOCK_METHOD(bool, refreshLastOpenedFlag, (const QUuid&), (override));
     
     MOCK_METHOD(BookOperationStatus, addTag, (const QUuid&,
-                                              const domain::models::Tag& tag), (override));
+                                              const domain::models::Tag&), (override));
     MOCK_METHOD(BookOperationStatus, removeTag, (const QUuid&,
-                                                 const domain::models::Tag& tag), (override));
+                                                 const domain::models::Tag&), (override));
     
     MOCK_METHOD(BookOperationStatus, saveBookToPath, (const QUuid&, 
-                                                      const QUrl& path), (override));
+                                                      const QUrl&), (override));
     
-    MOCK_METHOD(void, setAuthenticationToken, (const QString& token), (override));
+    MOCK_METHOD(void, setAuthenticationToken, 
+                (const QString&, const QString&), (override));
     MOCK_METHOD(void, clearAuthenticationToken, (), (override));
 };
 

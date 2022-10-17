@@ -31,7 +31,8 @@ public:
     MOCK_METHOD(void, setEmail, (const QString&), (override));
     MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
     MOCK_METHOD(void, setProfilePicture, (const QImage&), (override));
-    MOCK_METHOD(void, setAuthenticationToken, (const QString&), (override));
+    MOCK_METHOD(void, setAuthenticationToken, (const QString&, 
+                                               const QString&), (override));
     MOCK_METHOD(void, clearAuthenticationToken, (), (override));
 };
 
