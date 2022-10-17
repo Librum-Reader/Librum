@@ -2,6 +2,7 @@
 #include <QPixmap>
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
+#include "i_downloaded_books_tracker.hpp"
 
 
 namespace application::services
@@ -12,7 +13,8 @@ class BookService : public IBookService
     Q_OBJECT
     
 public:
-    BookService(IBookMetadataHelper* bookMetadataHelper);
+    BookService(IBookMetadataHelper* bookMetadataHelper, 
+                IDownloadedBooksTracker* downloadedBooksTracker);
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
@@ -44,8 +46,10 @@ private slots:
     
 private:
     QString getCurrentDateTimeAsString();
+    void loadLocalBooks();
     
     IBookMetadataHelper* m_bookMetadataHelper;
+    IDownloadedBooksTracker* m_downloadedBooksTracker;
     std::vector<domain::models::Book> m_books;
     QString m_authenticationToken;
     QString m_currentUserEmail;

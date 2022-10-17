@@ -15,8 +15,10 @@ using namespace domain::models;
 using std::size_t;
 
 
-BookService::BookService(IBookMetadataHelper* bookMetadataHelper)
-    : m_bookMetadataHelper(bookMetadataHelper)
+BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
+                         IDownloadedBooksTracker* downloadedBooksTracker)
+    : m_bookMetadataHelper(bookMetadataHelper),
+      m_downloadedBooksTracker(downloadedBooksTracker)
 {
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
@@ -208,6 +210,11 @@ QString BookService::getCurrentDateTimeAsString()
     auto result = now.toString("dd.MM.yyyy") + " - " + now.toString("h:m ap");
     
     return result;
+}
+
+void BookService::loadLocalBooks()
+{
+    
 }
 
 } // namespace application::services
