@@ -1,15 +1,18 @@
 #include "downloaded_books_tracker.hpp"
 
 
+using namespace domain::models;
+
+
 namespace application::utility
 {
 
-std::vector<domain::models::Book> DownloadedBooksTracker::getTrackedBooks(const QString& path)
+std::vector<Book> DownloadedBooksTracker::getTrackedBooks(const QString& path)
 {
     
 }
 
-bool DownloadedBooksTracker::trackBook(const QString& path, const domain::models::Book& book)
+bool DownloadedBooksTracker::trackBook(const QString& path, const Book& book)
 {
     
 }
@@ -19,7 +22,7 @@ bool DownloadedBooksTracker::untrackBook(const QString& path, const QUuid& uuid)
     
 }
 
-bool DownloadedBooksTracker::updateTrackedBook(const QUuid& uuid, const domain::models::Book& book)
+bool DownloadedBooksTracker::updateTrackedBook(const QUuid& uuid, const Book& book)
 {
     
 }
