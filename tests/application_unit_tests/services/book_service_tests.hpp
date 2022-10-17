@@ -8,6 +8,7 @@
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
+#include "downloaded_books_tracker.hpp"
 #include "book_service.hpp"
 #include "tag.hpp"
 
@@ -31,6 +32,15 @@ public:
     MOCK_METHOD(void, getCover, (), (const, override));
 };
 
+class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
+{
+public:
+    MOCK_METHOD(std::vector<Book>, getTrackedBooks, (const QString&), (override));
+    MOCK_METHOD(bool, trackBook, (const QString&, const Book& book), (override));
+    MOCK_METHOD(bool, untrackBook, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(bool, updateTrackedBook, (const QUuid&, const Book&), (override));
+};
+
 
 struct ABookService : public ::testing::Test
 {
@@ -39,10 +49,12 @@ struct ABookService : public ::testing::Test
         EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
                 .WillRepeatedly(Return(BookMetaData()));
         
-        bookService = std::make_unique<BookService>(&bookInfoHelperMock);
+        bookService = std::make_unique<BookService>(&bookInfoHelperMock,
+                                                    &downloadedBooksTrackerMock);
     }
     
     BookInfoHelperMock bookInfoHelperMock;
+    DownloadedBooksTrackerMock downloadedBooksTrackerMock;
     std::unique_ptr<BookService> bookService;
 };
 
