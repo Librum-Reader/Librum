@@ -28,6 +28,7 @@ set(application_SRC
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_book_metadata_helper.hpp
+    interfaces/utility/i_downloaded_books_tracker.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -42,6 +43,8 @@ set(application_SRC
     utility/book_metadata_helper.hpp
     utility/cover_observer.cpp
     utility/cover_observer.hpp
+    utility/downloaded_books_tracker.cpp
+    utility/downloaded_books_tracker.hpp
 )
 
 
