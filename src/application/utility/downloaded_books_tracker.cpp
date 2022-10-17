@@ -1,4 +1,5 @@
 #include "downloaded_books_tracker.hpp"
+#include <QDir>
 
 
 using namespace domain::models;
@@ -7,17 +8,17 @@ using namespace domain::models;
 namespace application::utility
 {
 
-std::vector<Book> DownloadedBooksTracker::getTrackedBooks(const QString& path)
+std::vector<Book> DownloadedBooksTracker::getTrackedBooks(const QString& folder)
 {
     
 }
 
-bool DownloadedBooksTracker::trackBook(const QString& path, const Book& book)
+bool DownloadedBooksTracker::trackBook(const QString& folder, const Book& book)
 {
     
 }
 
-bool DownloadedBooksTracker::untrackBook(const QString& path, const QUuid& uuid)
+bool DownloadedBooksTracker::untrackBook(const QString& folder, const QUuid& uuid)
 {
     
 }
