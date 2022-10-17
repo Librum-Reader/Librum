@@ -30,7 +30,7 @@ struct BookDto
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
     Q_PROPERTY(QVariant cover READ getCover CONSTANT)
-    Q_PROPERTY(bool cover READ getCover CONSTANT)
+    Q_PROPERTY(bool downloaded MEMBER downloaded CONSTANT)
     
 public:
     QString uuid;
