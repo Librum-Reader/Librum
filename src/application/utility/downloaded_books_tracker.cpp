@@ -26,18 +26,27 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 
 bool DownloadedBooksTracker::trackBook(const Book& book)
 {
+    ensureUserLibraryExists();
     
+    QDir parentDir = getUserLibraryDir();
+    QFile file(parentDir.path() + "/" + book.getUuid().toString(QUuid::WithoutBraces));
+    
+    if(!file.open(QFile::WriteOnly))
+        return false;
+    
+    file.write(book.serializeToJson());
+    return true;
 }
 
 bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
 {
-    
+    ensureUserLibraryExists();
 }
 
 bool DownloadedBooksTracker::updateTrackedBook(const QUuid& uuid, 
                                                const Book& book)
 {
-    
+    ensureUserLibraryExists();
 }
 
 
