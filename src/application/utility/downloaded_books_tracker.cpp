@@ -29,7 +29,8 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
     ensureUserLibraryExists();
     
     QDir parentDir = getUserLibraryDir();
-    QFile file(parentDir.path() + "/" + book.getUuid().toString(QUuid::WithoutBraces));
+    QFile file(parentDir.path() + "/" + book.getUuid()
+               .toString(QUuid::WithoutBraces) + fileExtension);
     
     if(!file.open(QFile::WriteOnly))
         return false;
@@ -41,6 +42,8 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
 bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
 {
     ensureUserLibraryExists();
+    
+    
 }
 
 bool DownloadedBooksTracker::updateTrackedBook(const QUuid& uuid, 

@@ -31,6 +31,7 @@ private:
     
     QString m_libraryOwnerEmail;
     QDir m_libraryFolder;
+    const QString fileExtension = "libmeta";
 };
 
 } // namespace application::utility
