@@ -216,7 +216,7 @@ void BookController::refreshBookChache()
         bookDto.pageCount = book.getPageCount();
         bookDto.addedToLibrary = book.getAddedToLibrary();
         bookDto.lastOpened = book.getLastOpened();
-        bookDto.cover = book.getCover();
+        bookDto.cover = book.getCoverAsString();
         bookDto.downloaded = book.getDownloaded();
         
         

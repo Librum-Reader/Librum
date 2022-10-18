@@ -29,8 +29,8 @@ struct BookDto
     Q_PROPERTY(int pageCount MEMBER pageCount)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
-    Q_PROPERTY(QVariant cover READ getCover CONSTANT)
-    Q_PROPERTY(bool downloaded MEMBER downloaded CONSTANT)
+    Q_PROPERTY(QString cover MEMBER cover)
+    Q_PROPERTY(bool downloaded MEMBER downloaded)
     
 public:
     QString uuid;
@@ -46,23 +46,9 @@ public:
     int pageCount;
     QString addedToLibrary;
     QString lastOpened;
-    QImage cover;
+    QString cover;
     bool downloaded;
     QList<TagDto> tags;
-    
-private:
-    QString getCover()
-    {
-        if(cover.isNull())
-            return QString("");
-        
-        QByteArray byteArray;
-        QBuffer buffer(&byteArray);
-        buffer.open(QIODevice::WriteOnly);
-        cover.save(&buffer, "png");
-        QString base64 = QString::fromUtf8(byteArray.toBase64());
-        return QString("data:image/jpg;base64,") + base64;
-    }
 };
 
 } // namespace adapters::dtos
