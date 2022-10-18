@@ -46,8 +46,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
 
 BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
-    auto book = getBook(uuid);
-    if(!book)
+    if(!getBook(uuid))
         return BookOperationStatus::BookDoesNotExist;
     
     auto bookPosition = std::ranges::find_if(m_books, [&uuid] (const Book& book) {
@@ -58,6 +57,8 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     emit bookDeletionStarted(index);
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
+    
+    m_downloadedBooksTracker->untrackBook(uuid);
     
     return BookOperationStatus::Success;
 }
