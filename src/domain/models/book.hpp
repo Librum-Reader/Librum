@@ -69,8 +69,8 @@ public:
     bool removeTag(const Tag& tag);
     const std::vector<Tag>& getTags() const;
     
-    
     void update(const Book& other);
+    QByteArray serializeToJson() const;
     
     
     static const int maxCoverWidth{ 188 };

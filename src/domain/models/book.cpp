@@ -1,5 +1,7 @@
 #include "book.hpp"
 #include <algorithm>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 
 namespace domain::models
@@ -262,6 +264,33 @@ void Book::update(const Book& other)
         m_metaData.cover = other.getCover();
     
     if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
+}
+
+QByteArray Book::serializeToJson() const
+{
+    QJsonObject book
+    {
+        {"uuid", getUuid().toString(QUuid::WithoutBraces)},
+        {"title", getTitle()},
+        {"author", getAuthor()},
+        {"creator", getCreator()},
+        {"pageCount", getPageCount()},
+        {"currentPage", getCurrentPage()},
+        {"releaseDate", getReleaseDate()},
+        {"format", getFormat()},
+        {"language", getLanguage()},
+        {"documentSize", getDocumentSize()},
+        {"pagesSize", getPagesSize()},
+        {"addedToLibrary", getAddedToLibrary()},
+        {"lastOpened", getLastOpened()},
+        {"filePath", getFilePath()}/*,*/
+//        {"cover", getCover().bytes}
+    };
+    
+    QJsonDocument doc(book);
+    QString strJson(doc.toJson(QJsonDocument::Indented));
+    
+    return strJson.toUtf8();
 }
 
 } // namespace domain::models
