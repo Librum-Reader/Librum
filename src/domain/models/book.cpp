@@ -181,10 +181,12 @@ QString Book::getCoverAsString() const
     
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
+    
     buffer.open(QIODevice::WriteOnly);
     m_metaData.cover.save(&buffer, "png");
     QString base64 = QString::fromUtf8(byteArray.toBase64());
-    return QString("data:image/jpg;base64,") + base64;
+    
+    return QString("data:image/png;base64,") + base64;
 }
 
 void Book::setCover(const QImage& newCover)
