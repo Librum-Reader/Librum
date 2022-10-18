@@ -192,8 +192,7 @@ void BookService::setAuthenticationToken(const QString& token,
     m_currentUserEmail = email;
     m_authenticationToken = token;
     
-    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
-    m_downloadedBooksTracker->getTrackedBooks();
+    loadLocalBooks();
 }
 
 void BookService::clearAuthenticationToken()
@@ -221,7 +220,9 @@ QString BookService::getCurrentDateTimeAsString()
 
 void BookService::loadLocalBooks()
 {
+    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
     
+    m_books = m_downloadedBooksTracker->getTrackedBooks();
 }
 
 } // namespace application::services
