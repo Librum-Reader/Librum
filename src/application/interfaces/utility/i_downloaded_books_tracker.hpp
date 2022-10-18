@@ -11,9 +11,12 @@ namespace application
 class IDownloadedBooksTracker
 {
 public:
-    virtual std::vector<domain::models::Book> getTrackedBooks(const QString& folder) = 0;
-    virtual bool trackBook(const QString& folder, const domain::models::Book& book) = 0;
-    virtual bool untrackBook(const QString& folder, const QUuid& uuid) = 0;
+    virtual ~IDownloadedBooksTracker() noexcept = default;
+    
+    virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
+    virtual std::vector<domain::models::Book> getTrackedBooks() = 0;
+    virtual bool trackBook(const domain::models::Book& book) = 0;
+    virtual bool untrackBook(const QUuid& uuid) = 0;
     virtual bool updateTrackedBook(const QUuid& uuid,
                                    const domain::models::Book& book) = 0;
 };
