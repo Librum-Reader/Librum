@@ -58,7 +58,8 @@ public:
     const QString& getFilePath() const;
     void setFilePath(const QString& newLocalPath);
     
-    const QImage& getCover() const;
+    QImage getCover() const;
+    QString getCoverAsString() const;
     void setCover(const QImage& newCover);
     
     bool getDownloaded() const;

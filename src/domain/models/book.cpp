@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QBuffer>
 
 
 namespace domain::models
@@ -168,9 +169,22 @@ void Book::setCreator(const QString& newCreator)
 }
 
 
-const QImage& Book::getCover() const
+QImage Book::getCover() const
 {
     return m_metaData.cover;
+}
+
+QString Book::getCoverAsString() const
+{
+    if(m_metaData.cover.isNull())
+        return QString("");
+    
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    buffer.open(QIODevice::WriteOnly);
+    m_metaData.cover.save(&buffer, "png");
+    QString base64 = QString::fromUtf8(byteArray.toBase64());
+    return QString("data:image/jpg;base64,") + base64;
 }
 
 void Book::setCover(const QImage& newCover)
@@ -283,8 +297,8 @@ QByteArray Book::serializeToJson() const
         {"pagesSize", getPagesSize()},
         {"addedToLibrary", getAddedToLibrary()},
         {"lastOpened", getLastOpened()},
-        {"filePath", getFilePath()}/*,*/
-//        {"cover", getCover().bytes}
+        {"filePath", getFilePath()},
+        {"cover", getCoverAsString()}
     };
     
     QJsonDocument doc(book);
