@@ -35,9 +35,10 @@ public:
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
 {
 public:
-    MOCK_METHOD(std::vector<Book>, getTrackedBooks, (const QString&), (override));
-    MOCK_METHOD(bool, trackBook, (const QString&, const Book& book), (override));
-    MOCK_METHOD(bool, untrackBook, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, setLibraryOwner, (const QString&), (override));
+    MOCK_METHOD(std::vector<Book>, getTrackedBooks, (), (override));
+    MOCK_METHOD(bool, trackBook, (const Book& book), (override));
+    MOCK_METHOD(bool, untrackBook, (const QUuid&), (override));
     MOCK_METHOD(bool, updateTrackedBook, (const QUuid&, const Book&), (override));
 };
 
