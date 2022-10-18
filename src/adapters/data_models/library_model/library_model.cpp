@@ -79,7 +79,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getLastOpened();
         break;
     case CoverRole:
-        return convertImageToString(book.getCover());
+        return book.getCoverAsString();
         break;
     case TagsRole:
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
@@ -121,22 +121,6 @@ void LibraryModel::processBookCover(int row)
     auto modelIndex = index(row, 0);
     
     emit dataChanged(modelIndex, modelIndex, {CoverRole});
-}
-
-
-QString LibraryModel::convertImageToString(const QImage& image) const
-{
-    if(image.isNull())
-        return QString("");
-    
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-    
-    buffer.open(QIODevice::WriteOnly);
-    image.save(&buffer, "png");
-    QString base64 = QString::fromUtf8(byteArray.toBase64());
-    
-    return QString("data:image/png;base64,") + base64;
 }
 
 QList<dtos::TagDto> LibraryModel::convertTagsToDtos(const std::vector<domain::

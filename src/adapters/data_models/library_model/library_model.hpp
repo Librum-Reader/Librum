@@ -54,7 +54,6 @@ public slots:
     void refreshBook(int row);
     
 private:
-    QString convertImageToString(const QImage& image) const;
     QList<dtos::TagDto> convertTagsToDtos(const std::vector<domain::
                                           models::Tag>& tags) const;
     
