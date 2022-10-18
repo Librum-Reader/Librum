@@ -187,6 +187,9 @@ void BookService::setAuthenticationToken(const QString& token,
 {
     m_currentUserEmail = email;
     m_authenticationToken = token;
+    
+    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
+    m_downloadedBooksTracker->getTrackedBooks();
 }
 
 void BookService::clearAuthenticationToken()
