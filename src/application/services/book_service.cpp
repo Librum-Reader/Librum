@@ -38,6 +38,9 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     // The cover needs to be generated after the book has been created,
     // else the cover is being added to a non existent book
     m_bookMetadataHelper->getCover();
+    
+    m_downloadedBooksTracker->trackBook(m_books.at(m_books.size() - 1));
+    
     return BookOperationStatus::Success;
 }
 
