@@ -1,7 +1,6 @@
 #include "book.hpp"
 #include <algorithm>
 #include <QJsonDocument>
-#include <QJsonObject>
 #include <QBuffer>
 
 
@@ -307,6 +306,35 @@ QByteArray Book::serializeToJson() const
     QString strJson(doc.toJson(QJsonDocument::Indented));
     
     return strJson.toUtf8();
+}
+
+Book Book::fromJson(const QJsonObject& jsonObject)
+{
+    BookMetaData metaData
+    {
+        .title = jsonObject["title"].toString(),
+        .author = jsonObject["author"].toString(),
+        .creator = jsonObject["creator"].toString(),
+        .releaseDate = jsonObject["releaseDate"].toString(),
+        .format = jsonObject["format"].toString(),
+        .language = jsonObject["language"].toString(),
+        .documentSize = jsonObject["documentSize"].toString(),
+        .pagesSize = jsonObject["pagesSize"].toString(),
+        .pageCount = jsonObject["pageCount"].toInt(),
+        .addedToLibrary = jsonObject["addedToLibrary"].toString(),
+        .lastOpened = jsonObject["lastOpened"].toString()
+    };
+    
+    auto cover = jsonObject["cover"].toString();
+    auto coverWithoutType = cover.mid(22, -1);
+    metaData.cover = QImage::fromData(QByteArray::fromBase64(coverWithoutType.toUtf8()));
+    
+    
+    QString filePath = jsonObject["filePath"].toString();
+    int currentPage = jsonObject["currentPage"].toInt();
+    QString uuid = jsonObject["uuid"].toString();
+    
+    return Book(filePath, metaData, currentPage, uuid);
 }
 
 } // namespace domain::models

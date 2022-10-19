@@ -4,6 +4,7 @@
 #include <QImage>
 #include <QString>
 #include <QUuid>
+#include <QJsonObject>
 #include "tag.hpp"
 #include "book_meta_data.hpp"
 
@@ -72,6 +73,7 @@ public:
     
     void update(const Book& other);
     QByteArray serializeToJson() const;
+    static Book fromJson(const QJsonObject& jsonObject);
     
     
     static const int maxCoverWidth{ 188 };
