@@ -49,7 +49,7 @@ std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
     auto libraryDir = getUserLibraryDir();
     auto fileName = uuid.toString(QUuid::WithoutBraces);
     
-    QFile metaFile(libraryDir.path() + "/" + fileName);
+    QFile metaFile(libraryDir.path() + "/" + fileName + m_fileExtension);
     if(!metaFile.open(QFile::ReadOnly))
         return std::nullopt;
     
