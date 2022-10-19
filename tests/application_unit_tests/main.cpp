@@ -2,6 +2,7 @@
 #include "book_service_tests.hpp"
 #include "user_service_tests.hpp"
 #include "authentication_service_tests.hpp"
+#include "downloaded_books_tracker_tests.hpp"
 
 
 int main()
