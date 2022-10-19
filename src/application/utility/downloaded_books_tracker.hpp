@@ -11,6 +11,7 @@ class DownloadedBooksTracker : public IDownloadedBooksTracker
 public:
     void setLibraryOwner(const QString& libraryOwnerEmail) override;
     std::vector<domain::models::Book> getTrackedBooks() override;
+    std::optional<domain::models::Book> getTrackedBook(const QUuid& uuid) override;
     bool trackBook(const domain::models::Book& book) override;
     bool untrackBook(const QUuid& uuid) override;
     bool updateTrackedBook(const domain::models::Book& book) override;
