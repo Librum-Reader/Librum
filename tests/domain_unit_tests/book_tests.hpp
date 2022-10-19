@@ -151,6 +151,7 @@ TEST(ABook, SucceedsSerializingToJson)
     int currentPage = 224;
     Book book("some/path", metaData, currentPage, uuid);
     
+    
     // Act
     auto serializedBook = book.toJson();
     auto jsonDoc = QJsonDocument::fromJson(serializedBook);
@@ -176,6 +177,58 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(book.getFilePath(), bookObject["filePath"].toString());
     EXPECT_EQ(book.getCurrentPage(), bookObject["currentPage"].toInt());
     EXPECT_EQ(book.getUuid(), bookObject["uuid"].toString());
+}
+
+
+TEST(ABook, SucceedsDeserializingFromJson)
+{
+    // Arrange
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    Book book("some/path", metaData, currentPage, uuid);
+    
+    // Serialize to json
+    auto serializedBook = book.toJson();
+    auto jsonDoc = QJsonDocument::fromJson(serializedBook);
+    auto serializedBookObject = jsonDoc.object();
+    
+    
+    // Act
+    auto result = Book::fromJson(serializedBookObject);
+    
+    
+    // Assert
+    EXPECT_EQ(metaData.title, result.getTitle());
+    EXPECT_EQ(metaData.author, result.getAuthor());
+    EXPECT_EQ(metaData.creator, result.getCreator());
+    EXPECT_EQ(metaData.releaseDate, result.getReleaseDate());
+    EXPECT_EQ(metaData.format, result.getFormat());
+    EXPECT_EQ(metaData.language, result.getLanguage());
+    EXPECT_EQ(metaData.documentSize, result.getDocumentSize());
+    EXPECT_EQ(metaData.pagesSize, result.getPagesSize());
+    EXPECT_EQ(metaData.pageCount, result.getPageCount());
+    EXPECT_EQ(metaData.addedToLibrary, result.getAddedToLibrary());
+    EXPECT_EQ(metaData.lastOpened, result.getLastOpened());
+    EXPECT_EQ(metaData.cover, result.getCover());
+    EXPECT_EQ(book.getFilePath(), result.getFilePath());
+    EXPECT_EQ(book.getCurrentPage(), result.getCurrentPage());
+    EXPECT_EQ(book.getUuid(), result.getUuid());
 }
 
 } // namespace tests::domain
