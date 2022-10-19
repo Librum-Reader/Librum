@@ -35,31 +35,7 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
         auto jsonDoc = QJsonDocument::fromJson(metaFile.readAll());
         auto bookObject = jsonDoc.object();
         
-        
-        BookMetaData metaData
-        {
-            .title = bookObject["title"].toString(),
-            .author = bookObject["author"].toString(),
-            .creator = bookObject["creator"].toString(),
-            .releaseDate = bookObject["releaseDate"].toString(),
-            .format = bookObject["format"].toString(),
-            .language = bookObject["language"].toString(),
-            .documentSize = bookObject["documentSize"].toString(),
-            .pagesSize = bookObject["pagesSize"].toString(),
-            .pageCount = bookObject["pageCount"].toInt(),
-            .addedToLibrary = bookObject["addedToLibrary"].toString(),
-            .lastOpened = bookObject["lastOpened"].toString()
-        };
-        
-        auto cover = bookObject["cover"].toString();
-        auto coverWithoutType = cover.mid(22, -1);
-        metaData.cover = QImage::fromData(QByteArray::fromBase64(coverWithoutType.toUtf8()));
-        
-        
-        QString filePath = bookObject["filePath"].toString();
-        int currentPage = bookObject["currentPage"].toInt();
-        QString uuid = bookObject["uuid"].toString();
-        books.emplace_back(filePath, metaData, currentPage, uuid);
+        books.emplace_back(Book::fromJson(bookObject));
     }
     
     return books;
