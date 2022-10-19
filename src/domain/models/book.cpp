@@ -183,6 +183,21 @@ QString Book::getCoverAsString() const
     
     buffer.open(QIODevice::WriteOnly);
     m_metaData.cover.save(&buffer, "png");
+    auto result = QString::fromUtf8(byteArray.toBase64());
+    
+    return result;
+}
+
+QString Book::getCoverAsStringWithType() const
+{
+    if(m_metaData.cover.isNull())
+        return QString("");
+    
+    QByteArray byteArray;
+    QBuffer buffer(&byteArray);
+    
+    buffer.open(QIODevice::WriteOnly);
+    m_metaData.cover.save(&buffer, "png");
     QString base64 = QString::fromUtf8(byteArray.toBase64());
     
     return QString("data:image/png;base64,") + base64;
@@ -326,8 +341,7 @@ Book Book::fromJson(const QJsonObject& jsonObject)
     };
     
     auto cover = jsonObject["cover"].toString();
-    auto coverWithoutType = cover.mid(22, -1);
-    metaData.cover = QImage::fromData(QByteArray::fromBase64(coverWithoutType.toUtf8()));
+    metaData.cover = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
     
     
     QString filePath = jsonObject["filePath"].toString();

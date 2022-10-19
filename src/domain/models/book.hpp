@@ -61,6 +61,7 @@ public:
     
     QImage getCover() const;
     QString getCoverAsString() const;
+    QString getCoverAsStringWithType() const;
     void setCover(const QImage& newCover);
     
     bool getDownloaded() const;
