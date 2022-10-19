@@ -82,9 +82,7 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
     QDir libraryDir = getUserLibraryDir();
     QString fileToUntrack = uuid.toString(QUuid::WithoutBraces) + m_fileExtension;
     
-    auto success = libraryDir.remove(fileToUntrack);
-    
-    return success;
+    return libraryDir.remove(fileToUntrack);
 }
 
 bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
