@@ -74,7 +74,8 @@ BookOperationStatus BookService::updateBook(const QUuid& uuid,
     int index = getBookIndex(uuid);
     emit dataChanged(index);
     
-    m_downloadedBooksTracker->updateTrackedBook(*book);
+    if(book->getDownloaded())
+        m_downloadedBooksTracker->updateTrackedBook(*book);
     
     return BookOperationStatus::Success;
 }
