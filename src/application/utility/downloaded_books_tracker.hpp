@@ -21,8 +21,7 @@ public:
     std::vector<domain::models::Book> getTrackedBooks() override;
     bool trackBook(const domain::models::Book& book) override;
     bool untrackBook(const QUuid& uuid) override;
-    bool updateTrackedBook(const QUuid& uuid, 
-                           const domain::models::Book& book) override;
+    bool updateTrackedBook(const domain::models::Book& book) override;
     
 private:
     void ensureUserLibraryExists();
