@@ -25,6 +25,15 @@ void DownloadedBooksTracker::ensureUserLibraryExists()
     libraryDir.mkpath(libraryDir.path());
 }
 
+QDir DownloadedBooksTracker::getUserLibraryDir() const
+{
+    auto applicationPath = QDir::current().path();
+    auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
+    
+    auto folderName = applicationPath + "/" + "librum_localLibraries" + "/"  + userLibName;
+    return QDir(folderName);
+}
+
 
 std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 {
@@ -101,15 +110,6 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
         return false;
     
     return trackBook(book);
-}
-
-QDir DownloadedBooksTracker::getUserLibraryDir() const
-{
-    auto applicationPath = QDir::current().path();
-    auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
-    
-    auto folderName = applicationPath + "/" + "librum_localLibraries" + "/"  + userLibName;
-    return QDir(folderName);
 }
 
 QString DownloadedBooksTracker::getUserLibraryName(QString email) const
