@@ -92,10 +92,14 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
     return success;
 }
 
-bool DownloadedBooksTracker::updateTrackedBook(const QUuid& uuid, 
-                                               const Book& book)
+bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
 {
     ensureUserLibraryExists();
+    
+    untrackBook(book.getUuid());
+    trackBook(book);
+    
+    return true;
 }
 
 
