@@ -4,7 +4,6 @@
 #include <iterator>
 #include <QDebug>
 #include <QFile>
-#include "book_meta_data.hpp"
 
 
 using namespace domain::models;
@@ -19,6 +18,7 @@ void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
     m_libraryFolder = getUserLibraryDir();
 }
 
+
 std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 {
     ensureUserLibraryExists();
@@ -26,7 +26,7 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
     QDir libraryDir = getUserLibraryDir();
     
     std::vector<Book> books;
-    for(const QString& metaFileName : libraryDir.entryList(QDir::Files))
+    for(auto& metaFileName : libraryDir.entryList(QDir::Files))
     {
         QFile metaFile(libraryDir.path() + "/" + metaFileName);
         if(!metaFile.open(QFile::ReadOnly))
