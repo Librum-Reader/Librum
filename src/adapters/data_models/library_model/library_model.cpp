@@ -79,7 +79,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getLastOpened();
         break;
     case CoverRole:
-        return book.getCoverAsString();
+        return book.getCoverAsStringWithType();
         break;
     case TagsRole:
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
