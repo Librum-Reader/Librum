@@ -34,8 +34,9 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
         
         auto jsonDoc = QJsonDocument::fromJson(metaFile.readAll());
         auto bookObject = jsonDoc.object();
+        auto book = Book::fromJson(bookObject);
         
-        books.emplace_back(Book::fromJson(bookObject));
+        books.emplace_back(std::move(book));
     }
     
     return books;
@@ -72,10 +73,10 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
 {
     ensureUserLibraryExists();
     
-    untrackBook(book.getUuid());
-    trackBook(book);
+    auto untrackingSuccess = untrackBook(book.getUuid());
+    auto trackingSuccess = trackBook(book);
     
-    return true;
+    return untrackingSuccess && trackingSuccess;
 }
 
 
