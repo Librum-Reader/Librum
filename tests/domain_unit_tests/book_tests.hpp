@@ -152,7 +152,7 @@ TEST(ABook, SucceedsSerializingToJson)
     Book book("some/path", metaData, currentPage, uuid);
     
     // Act
-    auto serializedBook = book.serializeToJson();
+    auto serializedBook = book.toJson();
     auto jsonDoc = QJsonDocument::fromJson(serializedBook);
     auto bookObject = jsonDoc.object();
     

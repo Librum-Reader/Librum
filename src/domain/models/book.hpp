@@ -73,7 +73,7 @@ public:
     const std::vector<Tag>& getTags() const;
     
     void update(const Book& other);
-    QByteArray serializeToJson() const;
+    QByteArray toJson() const;
     static Book fromJson(const QJsonObject& jsonObject);
     
     

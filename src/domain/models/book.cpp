@@ -296,7 +296,7 @@ void Book::update(const Book& other)
     if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
 }
 
-QByteArray Book::serializeToJson() const
+QByteArray Book::toJson() const
 {
     QJsonObject book
     {

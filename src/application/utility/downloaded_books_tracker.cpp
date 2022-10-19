@@ -53,7 +53,7 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
     if(!file.open(QFile::WriteOnly))
         return false;
     
-    file.write(book.serializeToJson());
+    file.write(book.toJson());
     return true;
 }
 
