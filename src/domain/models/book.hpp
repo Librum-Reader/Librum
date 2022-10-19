@@ -18,6 +18,9 @@ public:
     Book(const QString& filePath, const BookMetaData& metaData,
          int currentPage = 0, const QString& uuid = "");
     
+    bool operator==(const Book& rhs) const;
+    
+    
     const QUuid& getUuid() const;
     
     const QString& getTitle() const;
@@ -87,7 +90,7 @@ private:
     QUuid m_uuid;
     BookMetaData m_metaData;
     QString m_filePath;
-    bool downloaded = true;
+    bool m_downloaded = true;
     int m_currentPage;
     std::vector<Tag> m_tags;
 };

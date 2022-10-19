@@ -231,4 +231,95 @@ TEST(ABook, SucceedsDeserializingFromJson)
     EXPECT_EQ(book.getUuid(), result.getUuid());
 }
 
+
+
+TEST(ABook, SucceedsComparison)
+{
+    // Arrange
+    // First book
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    
+    Book firstBook("some/path", metaData, currentPage, uuid);
+    Book secondBook("some/path", metaData, currentPage, uuid);
+    
+    bool expectedResult = true;
+    
+    
+    // Act
+    auto result = firstBook == secondBook;
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
+{
+    // Arrange
+    // First book
+    BookMetaData firstBookMetaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    
+    Book firstBook("some/path", firstBookMetaData, currentPage, uuid);
+    
+    BookMetaData secondBookMetaData
+    {
+        .title = "SomeOtherTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    Book secondBook("some/path", secondBookMetaData, currentPage, uuid);
+    
+    bool expectedResult = false;
+    
+    
+    // Act
+    auto result = firstBook == secondBook;
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
 } // namespace tests::domain

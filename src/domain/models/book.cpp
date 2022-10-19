@@ -19,6 +19,18 @@ Book::Book(const QString& filePath, const BookMetaData& metaData,
 }
 
 
+bool Book::operator==(const Book& rhs) const
+{
+    bool dataIsTheSame =
+            m_uuid == rhs.m_uuid &&
+            m_filePath == rhs.m_filePath &&
+            m_downloaded == rhs.m_downloaded &&
+            m_currentPage == rhs.m_currentPage;
+            
+    return dataIsTheSame && m_metaData == rhs.m_metaData;
+}
+
+
 const QUuid& Book::getUuid() const
 {
     return m_uuid;
@@ -211,12 +223,12 @@ void Book::setCover(const QImage& newCover)
 
 bool Book::getDownloaded() const
 {
-    return downloaded;
+    return m_downloaded;
 }
 
 void Book::setDownloaded(bool newDownloaded)
 {
-    downloaded = newDownloaded;
+    m_downloaded = newDownloaded;
 }
 
 
