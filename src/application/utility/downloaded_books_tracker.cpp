@@ -18,6 +18,13 @@ void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
     m_libraryFolder = getUserLibraryDir();
 }
 
+void DownloadedBooksTracker::ensureUserLibraryExists()
+{
+    auto libraryDir = getUserLibraryDir();
+    
+    libraryDir.mkpath(libraryDir.path());
+}
+
 
 std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 {
@@ -68,7 +75,7 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
     QFile file(libraryDir.path() + "/" + book.getUuid()
                .toString(QUuid::WithoutBraces) + m_fileExtension);
     
-    if(!file.open(QFile::WriteOnly))
+    if(file.exists() || !file.open(QFile::WriteOnly))
         return false;
     
     file.write(book.toJson());
@@ -94,14 +101,6 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
         return false;
     
     return trackBook(book);
-}
-
-
-void DownloadedBooksTracker::ensureUserLibraryExists()
-{
-    auto libraryDir = getUserLibraryDir();
-    
-    libraryDir.mkpath(libraryDir.path());
 }
 
 QDir DownloadedBooksTracker::getUserLibraryDir() const
