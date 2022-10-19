@@ -3,6 +3,7 @@
 #include <optional>
 #include <QString>
 #include <QUuid>
+#include <QDir>
 #include "book.hpp"
 
 
@@ -23,6 +24,8 @@ public:
     virtual ~IDownloadedBooksTracker() noexcept = default;
     
     virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
+    virtual QDir getUserLibraryDir() const = 0;
+    
     virtual std::vector<domain::models::Book> getTrackedBooks() = 0;
     virtual std::optional<domain::models::Book> getTrackedBook(const QUuid& uuid) = 0;
     virtual bool trackBook(const domain::models::Book& book) = 0;

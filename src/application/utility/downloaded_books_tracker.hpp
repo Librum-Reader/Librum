@@ -1,5 +1,4 @@
 #pragma once
-#include <QDir>
 #include "i_downloaded_books_tracker.hpp"
 
 
@@ -10,6 +9,8 @@ class DownloadedBooksTracker : public IDownloadedBooksTracker
 {
 public:
     void setLibraryOwner(const QString& libraryOwnerEmail) override;
+    QDir getUserLibraryDir() const override;
+    
     std::vector<domain::models::Book> getTrackedBooks() override;
     std::optional<domain::models::Book> getTrackedBook(const QUuid& uuid) override;
     bool trackBook(const domain::models::Book& book) override;
@@ -18,7 +19,6 @@ public:
     
 private:
     void ensureUserLibraryExists();
-    QDir getUserLibraryDir() const;
     QString getUserLibraryName(QString email) const;
     
     QString m_libraryOwnerEmail;

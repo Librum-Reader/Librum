@@ -36,6 +36,7 @@ class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
 {
 public:
     MOCK_METHOD(void, setLibraryOwner, (const QString&), (override));
+    MOCK_METHOD(QDir, getUserLibraryDir, (), (const, override));
     MOCK_METHOD(std::vector<Book>, getTrackedBooks, (), (override));
     MOCK_METHOD(std::optional<Book>, getTrackedBook, (const QUuid&), (override));
     MOCK_METHOD(bool, trackBook, (const Book& book), (override));
