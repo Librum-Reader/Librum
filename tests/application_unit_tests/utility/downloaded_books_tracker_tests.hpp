@@ -75,6 +75,42 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
     EXPECT_EQ(expectedResultStatus, resultStatus);
 }
 
+TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
+{
+    // Arrange
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    Book book("some/path.pdf", metaData, currentPage, uuid);
+    
+    Book secondBook = book;
+    
+    bool expectedResultStatus = false;
+    
+    
+    // Act
+    downloadedBooksTracker.trackBook(book);
+    auto resultStatus = downloadedBooksTracker.trackBook(secondBook);
+    
+    // Assert
+    EXPECT_EQ(expectedResultStatus, resultStatus);
+}
+
 
 
 TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
