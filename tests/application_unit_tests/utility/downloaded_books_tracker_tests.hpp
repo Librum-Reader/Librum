@@ -40,6 +40,7 @@ private:
 };
 
 
+
 TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
 {
     // Arrange
@@ -66,16 +67,68 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
     bool expectedResultStatus = true;
     const Book& expectedResult = book;
     
+    
     // Act
     auto resultStatus = downloadedBooksTracker.trackBook(book);
+    
+    // Assert
+    EXPECT_EQ(expectedResultStatus, resultStatus);
+}
+
+
+
+TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
+{
+    // Arrange
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    Book book("some/path.pdf", metaData, currentPage, uuid);
+    
+    downloadedBooksTracker.trackBook(book);
+    
+    bool expectedResultStatus = true;
+    const Book& expectedResult = book;
+    
+    
+    // Act
     auto result = downloadedBooksTracker.getTrackedBook(book.getUuid());
     
     
     // Assert
-    EXPECT_EQ(expectedResultStatus, resultStatus);
     EXPECT_TRUE(result.has_value());
     EXPECT_EQ(expectedResult, result.value());
 }
+
+TEST_F(ADownloadedBooksTracker, FailsGettingANonExistentBook)
+{
+    // Arrange
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    
+    
+    // Act
+    auto result = downloadedBooksTracker.getTrackedBook(uuid);
+    
+    // Assert
+    EXPECT_FALSE(result.has_value());
+}
+
+
 
 TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
 {
@@ -111,29 +164,124 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
     secondBook.setPageCount(412);
     
     
-    auto firstResultStatus = downloadedBooksTracker.trackBook(firstBook);
-    auto secondResultStatus = downloadedBooksTracker.trackBook(secondBook);
-    auto thirdResultStatus = downloadedBooksTracker.trackBook(thirdBook);
+    downloadedBooksTracker.trackBook(firstBook);
+    downloadedBooksTracker.trackBook(secondBook);
+    downloadedBooksTracker.trackBook(thirdBook);
     
     // Act
     auto result = downloadedBooksTracker.getTrackedBooks();
             
     // Assert
-    auto firstIt = std::ranges::find_if(result, [&firstBook](const Book& book) { 
-        return book.getUuid() == firstBook.getUuid();  });
+    EXPECT_TRUE(result.size() == 3);
+}
+
+TEST_F(ADownloadedBooksTracker, FailsGettingAllBooksIfNoneExist)
+{
+    // Act
+    auto result = downloadedBooksTracker.getTrackedBooks();
+            
+    // Assert
+    EXPECT_TRUE(result.size() == 0);
+}
+
+
+
+TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
+{
+    // Arrange
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
     
-    auto secondIt = std::ranges::find_if(result, [&secondBook](const Book& book) { 
-        return book.getUuid() == secondBook.getUuid(); });
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    Book book("some/path.pdf", metaData, currentPage, uuid);
     
-    auto thirdIt = std::ranges::find_if(result, [&thirdBook](const Book& book) { 
-        return book.getUuid() == thirdBook.getUuid(); });
+    downloadedBooksTracker.trackBook(book);
+    
+    bool expectedResultStatus = true;
+    
+    // Act
+    auto resultStatus = downloadedBooksTracker.untrackBook(book.getUuid());
+    auto result = downloadedBooksTracker.getTrackedBook(book.getUuid());
     
     
-    EXPECT_TRUE(firstResultStatus == secondResultStatus == thirdResultStatus == true);
+    // Assert
+    EXPECT_EQ(expectedResultStatus, resultStatus);
+    EXPECT_FALSE(result.has_value());
+}
+
+TEST_F(ADownloadedBooksTracker, FailsUntrackingATrackedBookIfBookDoesNotExist)
+{
+    // Arrange
+    auto nonExistendUuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    bool expectedResultStatus = false;
     
-    EXPECT_TRUE(firstIt != result.end());
-    EXPECT_TRUE(secondIt != result.end());
-    EXPECT_TRUE(thirdIt != result.end());
+    // Act
+    auto resultStatus = downloadedBooksTracker.untrackBook(nonExistendUuid);
+    auto result = downloadedBooksTracker.getTrackedBook(nonExistendUuid);
+    
+    
+    // Assert
+    EXPECT_EQ(expectedResultStatus, resultStatus);
+    EXPECT_FALSE(result.has_value());
+}
+
+
+
+TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
+{
+    // Arrange
+    BookMetaData metaData
+    {
+        .title = "SomeTitle",
+        .author = "SomeAuthor",
+        .creator = "SomeCreator",
+        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .addedToLibrary = "18.10.2022 - 8:54 pm",
+        .lastOpened = "Never",
+        .cover = QImage("")
+    };
+    
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
+    int currentPage = 224;
+    Book book("some/path.pdf", metaData, currentPage, uuid);
+    downloadedBooksTracker.trackBook(book);
+    
+    auto newBook = book;
+    newBook.setTitle("SomeOtherBook");
+    newBook.setAuthor("SomeOtherAuthor");
+    
+    bool expectedResultStatus = true;
+    
+    
+    // Act
+    auto resultStatus = downloadedBooksTracker.updateTrackedBook(newBook);
+    auto result = downloadedBooksTracker.getTrackedBook(book.getUuid());
+    
+    
+    // Assert
+    EXPECT_EQ(expectedResultStatus, resultStatus);
+    EXPECT_EQ(newBook.getTitle(), result.value().getTitle());
+    EXPECT_EQ(newBook.getAuthor(), result.value().getAuthor());
+    EXPECT_EQ(book.getFormat(), result.value().getFormat());
 }
 
 }
