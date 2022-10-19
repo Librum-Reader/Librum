@@ -90,9 +90,10 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
     ensureUserLibraryExists();
     
     auto untrackingSuccess = untrackBook(book.getUuid());
-    auto trackingSuccess = trackBook(book);
+    if(!untrackingSuccess)
+        return false;
     
-    return untrackingSuccess && trackingSuccess;
+    return trackBook(book);
 }
 
 
