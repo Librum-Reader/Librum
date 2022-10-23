@@ -4,9 +4,9 @@
 namespace adapters::gateways
 {
 
-BookStorageGateway::BookStorageGateway()
+BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess)
+    : m_bookStorageAccess(bookStorageAccess)
 {
-    
 }
 
 
