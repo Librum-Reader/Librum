@@ -1,4 +1,8 @@
 #pragma once
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QString>
 #include "i_book_storage_access.hpp"
 
 
@@ -20,6 +24,17 @@ public:
     std::vector<adapters::dtos::BookDto> getBooksMetaData(const QString& 
                                                           authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
+    
+private slots:
+    void proccessBookCreationResult();
+    
+private:
+    QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
+    bool checkForErrors(int expectedStatusCode);
+    
+    const QString m_bookCreationEndpoint;
+    QNetworkAccessManager m_networkAccessManager;
+    std::unique_ptr<QNetworkReply> m_reply = nullptr;
 };
 
 } // namespace infrastructure::persistence
