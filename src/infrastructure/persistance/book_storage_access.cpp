@@ -23,18 +23,19 @@ void BookStorageAccess::createBook(const QString& authToken,
     auto request = createRequest(m_bookCreationEndpoint, authToken);
     
     QJsonObject jsonObject;
-    jsonObject["uuid"] = bookDto.uuid;
+    jsonObject["guid"] = bookDto.uuid;
     jsonObject["title"] = bookDto.title;
     jsonObject["creator"] = bookDto.creator;
-    jsonObject["creationDate"] = bookDto.creationDate;
+    jsonObject["releaseDate"] = bookDto.creationDate;
     jsonObject["format"] = bookDto.format;
     jsonObject["language"] = bookDto.language;
     jsonObject["documentSize"] = bookDto.documentSize;
-    jsonObject["pages"] = bookDto.pagesSize;  // TODO: Change name in api
+    jsonObject["pagesSize"] = bookDto.pagesSize;  // Change name in db
     jsonObject["pageCount"] = bookDto.pageCount;
+    jsonObject["currentPage"] = bookDto.currentPage;
     jsonObject["addedToLibrary"] = bookDto.addedToLibrary;
     jsonObject["lastOpened"] = bookDto.lastOpened;
-    jsonObject["cover"] = "";
+    jsonObject["cover"] = "someCover";
     
     QJsonDocument jsonDocument{jsonObject};
     QByteArray data = jsonDocument.toJson();
