@@ -15,9 +15,11 @@ using namespace domain::models;
 using std::size_t;
 
 
-BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
+BookService::BookService(IBookStorageGateway* bookStorageGateway,
+                         IBookMetadataHelper* bookMetadataHelper,
                          IDownloadedBooksTracker* downloadedBooksTracker)
-    : m_bookMetadataHelper(bookMetadataHelper),
+    : m_bookStorageGateway(bookStorageGateway),
+      m_bookMetadataHelper(bookMetadataHelper),
       m_downloadedBooksTracker(downloadedBooksTracker)
 {
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
