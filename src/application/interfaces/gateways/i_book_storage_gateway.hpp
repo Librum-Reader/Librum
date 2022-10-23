@@ -1,6 +1,11 @@
 #pragma once
+#include <vector>
 #include <QObject>
 #include <QString>
+#include <QString>
+#include <QUuid>
+#include "book.hpp"
+#include "book_meta_data.hpp"
 
 
 namespace application
@@ -12,10 +17,25 @@ class IBookStorageGateway : public QObject
     
 public:
     virtual ~IBookStorageGateway() noexcept = default;
-    virtual void storeBook() = 0;
+    
+    virtual void createBook(const QString& authToken,
+                            const domain::models::Book& book) = 0;
+    virtual void deleteBook(const QString& authToken,
+                            const QUuid& uuid) = 0;
+    virtual void updateBook(const QString& authToken,
+                            const domain::models::Book& book) = 0;
+    virtual std::vector<domain::models::BookMetaData> getBooksMetaData(
+            const QString& authToken) = 0;
+    virtual void downloadBook(const QString& authToken,
+                              const QUuid& uuid) = 0;
     
 signals:
-    void storingBookFinished();
+    void creatingBookFinished(bool success, const QString& reason);
+    void deletingBookFinished(bool success, const QString& reason);
+    void updatingBookFinished(bool success, const QString& reason);
+    void gettingBooksMetaDataFinished(const std::vector<domain::models::
+                                      BookMetaData>& metadata);
+    void downloadingBookFinisdhed(const QUuid& uuid, const QByteArray& data);
 };
 
 } // namespace application#pragma once
