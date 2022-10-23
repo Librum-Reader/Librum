@@ -42,6 +42,8 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     m_bookMetadataHelper->getCover();
     
     m_downloadedBooksTracker->trackBook(m_books.at(m_books.size() - 1));
+    m_bookStorageGateway->createBook(m_authenticationToken, 
+                                     m_books[m_books.size() - 1]);
     
     return BookOperationStatus::Success;
 }
