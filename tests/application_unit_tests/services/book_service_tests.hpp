@@ -10,6 +10,7 @@
 #include "i_book_metadata_helper.hpp"
 #include "downloaded_books_tracker.hpp"
 #include "book_service.hpp"
+#include "i_book_storage_gateway.hpp"
 #include "tag.hpp"
 
 
@@ -23,6 +24,16 @@ using namespace domain::models;
 
 namespace tests::application
 {
+
+class BookStorageGatewayMock : public IBookStorageGateway
+{
+public:
+    MOCK_METHOD(void, createBook, (const QString&, const Book&), (override));
+    MOCK_METHOD(void, deleteBook, (const QString&, const QUuid& uuid), (override));
+    MOCK_METHOD(void, updateBook, (const QString&, const Book&), (override));
+    MOCK_METHOD(std::vector<BookMetaData>, getBooksMetaData, (const QString&), (override));
+    MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
+};
 
 class BookInfoHelperMock : public IBookMetadataHelper
 {
@@ -52,10 +63,12 @@ struct ABookService : public ::testing::Test
         EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
                 .WillRepeatedly(Return(BookMetaData()));
         
-        bookService = std::make_unique<BookService>(&bookInfoHelperMock,
+        bookService = std::make_unique<BookService>(&bookStorageGatewayMock,
+                                                    &bookInfoHelperMock,
                                                     &downloadedBooksTrackerMock);
     }
     
+    BookStorageGatewayMock bookStorageGatewayMock;
     BookInfoHelperMock bookInfoHelperMock;
     DownloadedBooksTrackerMock downloadedBooksTrackerMock;
     std::unique_ptr<BookService> bookService;
