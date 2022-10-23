@@ -9,6 +9,7 @@ namespace adapters::gateways
 class AuthenticationGateway : public application::IAuthenticationGateway
 {
     Q_OBJECT
+    
 public:
     AuthenticationGateway(IAuthenticationAccess* authenticationAccess);
     

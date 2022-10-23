@@ -1,15 +1,19 @@
 #pragma once
 #include "../libs/di/include/boost/di.hpp"
 
-#include "i_book_service.hpp"
-#include "book_service.hpp"
-#include "i_book_controller.hpp"
-#include "book_controller.hpp"
-
 #include "i_book_metadata_helper.hpp"
 #include "book_metadata_helper.hpp"
 #include "i_downloaded_books_tracker.hpp"
 #include "downloaded_books_tracker.hpp"
+
+#include "i_book_service.hpp"
+#include "book_service.hpp"
+#include "i_book_controller.hpp"
+#include "book_controller.hpp"
+#include "i_book_storage_gateway.hpp"
+#include "book_storage_gateway.hpp"
+#include "i_book_storage_access.hpp"
+#include "book_storage_access.hpp"
 
 #include "i_authentication_controller.hpp"
 #include "authentication_controller.hpp"
@@ -50,6 +54,8 @@ const auto diConfig = [] {
                 // Books
                 di::bind<IBookController>().to<controllers::BookController>(),
                 di::bind<IBookService>().to<services::BookService>(),
+                di::bind<IBookStorageGateway>().to<gateways::BookStorageGateway>(),
+                di::bind<IBookStorageAccess>().to<persistence::BookStorageAccess>(),
                 
                 // User
                 di::bind<IUserController>().to<controllers::UserController>(),
