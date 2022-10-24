@@ -17,10 +17,12 @@ using std::size_t;
 
 BookService::BookService(IBookStorageGateway* bookStorageGateway,
                          IBookMetadataHelper* bookMetadataHelper,
-                         IDownloadedBooksTracker* downloadedBooksTracker)
+                         IDownloadedBooksTracker* downloadedBooksTracker,
+                         IInternetConnectionInfo* internetConnectionInfo)
     : m_bookStorageGateway(bookStorageGateway),
       m_bookMetadataHelper(bookMetadataHelper),
-      m_downloadedBooksTracker(downloadedBooksTracker)
+      m_downloadedBooksTracker(downloadedBooksTracker),
+      m_internetConnectionInfo(internetConnectionInfo)
 {
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
@@ -199,7 +201,7 @@ void BookService::setAuthenticationToken(const QString& token,
     m_currentUserEmail = email;
     m_authenticationToken = token;
     
-    loadLocalBooks();
+    loadBooks();
 }
 
 void BookService::clearAuthenticationToken()
@@ -225,10 +227,24 @@ QString BookService::getCurrentDateTimeAsString()
     return result;
 }
 
+
+void BookService::loadBooks()
+{
+    loadLocalBooks();
+    
+    m_internetConnectionInfo->checkAvailability();
+    connect(m_internetConnectionInfo, &IInternetConnectionInfo::available,
+            this, &BookService::loadRemoteBooks);
+}
+
+void BookService::loadRemoteBooks()
+{
+    qDebug() << "Loading remote books";
+}
+
 void BookService::loadLocalBooks()
 {
     m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
-    
     m_books = m_downloadedBooksTracker->getTrackedBooks();
 }
 

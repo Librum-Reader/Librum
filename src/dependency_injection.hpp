@@ -5,6 +5,8 @@
 #include "book_metadata_helper.hpp"
 #include "i_downloaded_books_tracker.hpp"
 #include "downloaded_books_tracker.hpp"
+#include "i_internet_connection_info.hpp"
+#include "internet_connection_info.hpp"
 
 #include "i_book_service.hpp"
 #include "book_service.hpp"
@@ -65,7 +67,8 @@ const auto diConfig = [] {
                 
                 // Utility
                 di::bind<application::IBookMetadataHelper>().to<application::utility::BookMetadataHelper>(),
-                di::bind<application::IDownloadedBooksTracker>().to<application::utility::DownloadedBooksTracker>()
+                di::bind<application::IDownloadedBooksTracker>().to<application::utility::DownloadedBooksTracker>(),
+                di::bind<application::IInternetConnectionInfo>().to<application::utility::InternetConnectionInfo>()
                 );
 };
 

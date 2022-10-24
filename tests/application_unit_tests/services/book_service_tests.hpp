@@ -8,9 +8,10 @@
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "downloaded_books_tracker.hpp"
 #include "book_service.hpp"
 #include "i_book_storage_gateway.hpp"
+#include "i_internet_connection_info.hpp"
+#include "internet_connection_info.hpp"
 #include "tag.hpp"
 
 
@@ -18,6 +19,7 @@ using namespace testing;
 using ::testing::ReturnRef;
 using application::BookOperationStatus;
 using namespace application::services;
+using namespace application::utility;
 using namespace application;
 using namespace domain::models;
 
@@ -43,6 +45,13 @@ public:
     MOCK_METHOD(void, getCover, (), (const, override));
 };
 
+class InternetConnectionInfoMock : public IInternetConnectionInfo
+{
+public:
+    MOCK_METHOD(void, checkAvailability, (), (override));
+};
+
+
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
 {
 public:
@@ -65,12 +74,14 @@ struct ABookService : public ::testing::Test
         
         bookService = std::make_unique<BookService>(&bookStorageGatewayMock,
                                                     &bookInfoHelperMock,
-                                                    &downloadedBooksTrackerMock);
+                                                    &downloadedBooksTrackerMock,
+                                                    &internetConnectionInfoMock);
     }
     
     BookStorageGatewayMock bookStorageGatewayMock;
     BookInfoHelperMock bookInfoHelperMock;
     DownloadedBooksTrackerMock downloadedBooksTrackerMock;
+    InternetConnectionInfoMock internetConnectionInfoMock;
     std::unique_ptr<BookService> bookService;
 };
 
