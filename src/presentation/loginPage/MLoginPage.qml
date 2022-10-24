@@ -31,6 +31,16 @@ MFlickWrapper
             onActivated: loginButton.buttonTriggeredAction()
         }
         
+        
+        Connections
+        {
+            target: AuthController
+            function onLoginFinished(success)
+            {
+                loginButton.proccessLoginResult(success);
+            }
+        }
+        
         Connections
         {
             target: UserController
@@ -242,7 +252,6 @@ MFlickWrapper
                                 return;
                             }
                             
-                            AuthController.loginFinished.connect(proccessLoginResult);
                             AuthController.loginUser(emailInput.text, passwordInput.text);    
                         }
                         
