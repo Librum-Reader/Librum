@@ -136,14 +136,14 @@ void Book::setLanguage(const QString& newLanguage)
 }
 
 
-const QString& Book::getReleaseDate() const
+const QString& Book::getCreationDate() const
 {
-    return m_metaData.releaseDate;
+    return m_metaData.creationDate;
 }
 
-void Book::setReleaseDate(const QString& newCreationDate)
+void Book::setCreationDate(const QString& newCreationDate)
 {
-    m_metaData.releaseDate = newCreationDate;
+    m_metaData.creationDate = newCreationDate;
 }
 
 
@@ -286,8 +286,8 @@ void Book::update(const Book& other)
         m_filePath = other.getFilePath();
     if(m_metaData.creator != other.getCreator())
         m_metaData.creator = other.getCreator();
-    if(m_metaData.releaseDate != other.getReleaseDate())
-        m_metaData.releaseDate = other.getReleaseDate();
+    if(m_metaData.creationDate != other.getCreationDate())
+        m_metaData.creationDate = other.getCreationDate();
     if(m_metaData.format != other.getFormat())
         m_metaData.format = other.getFormat();
     if(m_metaData.language != other.getLanguage())
@@ -318,7 +318,7 @@ QByteArray Book::toJson() const
         {"creator", getCreator()},
         {"pageCount", getPageCount()},
         {"currentPage", getCurrentPage()},
-        {"releaseDate", getReleaseDate()},
+        {"creationDate", getCreationDate()},
         {"format", getFormat()},
         {"language", getLanguage()},
         {"documentSize", getDocumentSize()},
@@ -342,7 +342,7 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .title = jsonObject["title"].toString(),
         .author = jsonObject["author"].toString(),
         .creator = jsonObject["creator"].toString(),
-        .releaseDate = jsonObject["releaseDate"].toString(),
+        .creationDate = jsonObject["creationDate"].toString(),
         .format = jsonObject["format"].toString(),
         .language = jsonObject["language"].toString(),
         .documentSize = jsonObject["documentSize"].toString(),

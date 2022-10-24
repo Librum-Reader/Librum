@@ -11,7 +11,7 @@ struct BookMetaData
     QString title;
     QString author;
     QString creator;
-    QString releaseDate;
+    QString creationDate;
     QString format;
     QString language;
     QString documentSize;
@@ -26,7 +26,7 @@ struct BookMetaData
         return title == rhs.title &&
                 author == rhs.author &&
                 creator == rhs.creator &&
-                releaseDate == rhs.releaseDate &&
+                creationDate == rhs.creationDate &&
                 format == rhs.format &&
                 language == rhs.language &&
                 documentSize == rhs.documentSize &&

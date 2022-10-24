@@ -55,7 +55,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getCreator();
         break;
     case CreationDateRole:
-        return book.getReleaseDate();
+        return book.getCreationDate();
         break;
     case FormatRole:
         return book.getFormat();

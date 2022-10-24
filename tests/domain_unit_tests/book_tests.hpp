@@ -136,7 +136,7 @@ TEST(ABook, SucceedsSerializingToJson)
         .title = "SomeTitle",
         .author = "SomeAuthor",
         .creator = "SomeCreator",
-        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
         .documentSize = "203 KiB",
@@ -161,7 +161,7 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(metaData.title, bookObject["title"].toString());
     EXPECT_EQ(metaData.author, bookObject["author"].toString());
     EXPECT_EQ(metaData.creator, bookObject["creator"].toString());
-    EXPECT_EQ(metaData.releaseDate, bookObject["releaseDate"].toString());
+    EXPECT_EQ(metaData.creationDate, bookObject["creationDate"].toString());
     EXPECT_EQ(metaData.format, bookObject["format"].toString());
     EXPECT_EQ(metaData.language, bookObject["language"].toString());
     EXPECT_EQ(metaData.documentSize, bookObject["documentSize"].toString());
@@ -188,7 +188,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
         .title = "SomeTitle",
         .author = "SomeAuthor",
         .creator = "SomeCreator",
-        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
         .documentSize = "203 KiB",
@@ -217,7 +217,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
     EXPECT_EQ(metaData.title, result.getTitle());
     EXPECT_EQ(metaData.author, result.getAuthor());
     EXPECT_EQ(metaData.creator, result.getCreator());
-    EXPECT_EQ(metaData.releaseDate, result.getReleaseDate());
+    EXPECT_EQ(metaData.creationDate, result.getCreationDate());
     EXPECT_EQ(metaData.format, result.getFormat());
     EXPECT_EQ(metaData.language, result.getLanguage());
     EXPECT_EQ(metaData.documentSize, result.getDocumentSize());
@@ -242,7 +242,7 @@ TEST(ABook, SucceedsComparison)
         .title = "SomeTitle",
         .author = "SomeAuthor",
         .creator = "SomeCreator",
-        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
         .documentSize = "203 KiB",
@@ -278,7 +278,7 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .title = "SomeTitle",
         .author = "SomeAuthor",
         .creator = "SomeCreator",
-        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
         .documentSize = "203 KiB",
@@ -299,7 +299,7 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .title = "SomeOtherTitle",
         .author = "SomeAuthor",
         .creator = "SomeCreator",
-        .releaseDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
         .documentSize = "203 KiB",

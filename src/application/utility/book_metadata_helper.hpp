@@ -29,7 +29,7 @@ private:
     QString getTitle(const QString& filePath) const;
     QString getAuthor() const;
     QString getCreator() const;
-    QString getReleaseDate() const;
+    QString getCreationDate() const;
     QString getFormat() const;
     QString getDocumentSize() const;
     QString getPagesSize() const;

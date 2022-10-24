@@ -26,7 +26,7 @@ void BookStorageAccess::createBook(const QString& authToken,
     jsonObject["guid"] = bookDto.uuid;
     jsonObject["title"] = bookDto.title;
     jsonObject["creator"] = bookDto.creator;
-    jsonObject["releaseDate"] = bookDto.creationDate;
+    jsonObject["creationDate"] = bookDto.creationDate;
     jsonObject["format"] = bookDto.format;
     jsonObject["language"] = bookDto.language;
     jsonObject["documentSize"] = bookDto.documentSize;

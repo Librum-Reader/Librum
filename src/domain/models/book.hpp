@@ -38,8 +38,8 @@ public:
     int getCurrentPage() const;
     void setCurrentPage(int newCurrentPage);
     
-    const QString& getReleaseDate() const;
-    void setReleaseDate(const QString& newCreationDate);
+    const QString& getCreationDate() const;
+    void setCreationDate(const QString& newCreationDate);
     
     const QString& getFormat() const;
     void setFormat(const QString& newFormat);

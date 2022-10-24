@@ -406,10 +406,10 @@ Popup
                             
                             MLabeledInputBox
                             {
-                                id: releaseDateField
+                                id: creationDateField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: "Release date"
+                                headerText: "Creation date"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.creationDate !== "" ? 
@@ -676,8 +676,8 @@ Popup
         if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Creator] = publicationField.text;
         
-        if(releaseDateField.text !== Globals.selectedBook.creationDate && releaseDateField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.CreationDate] = releaseDateField.text;
+        if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != inputLayout.defaultText)
+            operationsMap[BookController.MetaProperties.CreationDate] = creationDateField.text;
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Format] = formatField.text;

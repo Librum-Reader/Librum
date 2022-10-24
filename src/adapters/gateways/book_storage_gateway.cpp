@@ -22,7 +22,7 @@ void BookStorageGateway::createBook(const QString& authToken, const domain::mode
         .author = book.getAuthor(),
         .filePath = book.getFilePath(),
         .creator = book.getCreator(),
-        .creationDate = book.getReleaseDate(),
+        .creationDate = book.getCreationDate(),
         .format = book.getFormat(),
         .language = book.getLanguage(),
         .documentSize = book.getDocumentSize(),

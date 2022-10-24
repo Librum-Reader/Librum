@@ -30,7 +30,7 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(const QString& f
         .title = getTitle(filePath),
         .author = getAuthor(),
         .creator = getCreator(),
-        .releaseDate = getReleaseDate(),
+        .creationDate = getCreationDate(),
         .format = getFormat(),
         .language = "",
         .documentSize = getDocumentSize(),
@@ -95,7 +95,7 @@ QString BookMetadataHelper::getCreator() const
     return creator;
 }
 
-QString BookMetadataHelper::getReleaseDate() const
+QString BookMetadataHelper::getCreationDate() const
 {
     const QString& creationDate = m_document->documentInfo()
                                   .get(DocumentInfo::CreationDate);
