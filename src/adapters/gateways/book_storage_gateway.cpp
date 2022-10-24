@@ -1,7 +1,11 @@
 #include "book_storage_gateway.hpp"
+#include "book.hpp"
 #include "book_dto.hpp"
+#include "i_book_storage_access.hpp"
+
 
 using namespace adapters::dtos;
+using namespace domain::models;
 
 
 namespace adapters::gateways
@@ -10,6 +14,8 @@ namespace adapters::gateways
 BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess)
     : m_bookStorageAccess(bookStorageAccess)
 {
+    connect(m_bookStorageAccess, &IBookStorageAccess::gettingBooksMetaDataFinished,
+            this, &BookStorageGateway::proccessBooksMetadata);
 }
 
 
@@ -49,15 +55,33 @@ void BookStorageGateway::updateBook(const QString& authToken, const domain::mode
     Q_UNUSED(book);
 }
 
-std::vector<domain::models::BookMetaData> BookStorageGateway::getBooksMetaData(const QString& authToken)
+void BookStorageGateway::getBooksMetaData(const QString& authToken)
 {
-    Q_UNUSED(authToken);
+    m_bookStorageAccess->getBooksMetaData(authToken);
 }
 
 void BookStorageGateway::downloadBook(const QString& authToken, const QUuid& uuid)
 {
     Q_UNUSED(authToken);
     Q_UNUSED(uuid);
+}
+
+void BookStorageGateway::proccessBooksMetadata(std::vector<QJsonObject>&
+                                               jsonBooks)
+{
+    std::vector<Book> books;
+    for(auto& jsonBook : jsonBooks)
+    {
+        // DB yields the uuid under the name "guid", but the core wants it 
+        // as "uuid", here "guid" is renamed to "uuid"
+        auto uuid = jsonBook["guid"].toString();
+        jsonBook.remove("guid");
+        jsonBook.insert("uuid", uuid);
+        
+        books.emplace_back(Book::fromJson(jsonBook));
+    }
+    
+    emit gettingBooksMetaDataFinished(books);
 }
 
 } // namespace adapters::gateways

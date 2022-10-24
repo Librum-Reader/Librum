@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QJsonObject>
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
 
@@ -19,9 +20,11 @@ public:
     void deleteBook(const QString& authToken, const QUuid& uuid) override;
     void updateBook(const QString& authToken,
                     const domain::models::Book& book) override;
-    std::vector<domain::models::BookMetaData> getBooksMetaData(
-            const QString& authToken) override;
+    void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
+    
+private slots:
+    void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
     
 private:
     IBookStorageAccess* m_bookStorageAccess;

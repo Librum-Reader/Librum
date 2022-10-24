@@ -26,6 +26,9 @@ BookService::BookService(IBookStorageGateway* bookStorageGateway,
 {
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
+    
+    connect(m_bookStorageGateway, &IBookStorageGateway::gettingBooksMetaDataFinished,
+            this, &BookService::addRemoteBooks);
 }
 
 
@@ -239,7 +242,20 @@ void BookService::loadBooks()
 
 void BookService::loadRemoteBooks()
 {
-    qDebug() << "Loading remote books";
+    m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
+}
+
+void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
+{
+    for(const auto& book : books)
+    {
+        if(getBook(book.getUuid()) != nullptr)
+            continue;
+        
+        emit bookInsertionStarted(m_books.size());
+        m_books.emplace_back(book);
+        emit bookInsertionEnded();
+    }
 }
 
 void BookService::loadLocalBooks()

@@ -48,6 +48,7 @@ public slots:
 private slots:
     void storeBookCover(const QPixmap* pixmap);
     void loadRemoteBooks();
+    void addRemoteBooks(const std::vector<domain::models::Book>& books);
     
 private:
     QString getCurrentDateTimeAsString();

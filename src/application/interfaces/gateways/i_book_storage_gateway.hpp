@@ -5,7 +5,6 @@
 #include <QString>
 #include <QUuid>
 #include "book.hpp"
-#include "book_meta_data.hpp"
 
 
 namespace application
@@ -24,8 +23,7 @@ public:
                             const QUuid& uuid) = 0;
     virtual void updateBook(const QString& authToken,
                             const domain::models::Book& book) = 0;
-    virtual std::vector<domain::models::BookMetaData> getBooksMetaData(
-            const QString& authToken) = 0;
+    virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBook(const QString& authToken,
                               const QUuid& uuid) = 0;
     
@@ -34,7 +32,7 @@ signals:
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
     void gettingBooksMetaDataFinished(const std::vector<domain::models::
-                                      BookMetaData>& metadata);
+                                      Book>& books);
     void downloadingBookFinisdhed(const QUuid& uuid, const QByteArray& data);
 };
 
