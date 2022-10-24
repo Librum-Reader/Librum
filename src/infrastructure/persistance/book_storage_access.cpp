@@ -30,7 +30,7 @@ void BookStorageAccess::createBook(const QString& authToken,
     jsonObject["format"] = bookDto.format;
     jsonObject["language"] = bookDto.language;
     jsonObject["documentSize"] = bookDto.documentSize;
-    jsonObject["pagesSize"] = bookDto.pagesSize;  // Change name in db
+    jsonObject["pagesSize"] = bookDto.pagesSize;
     jsonObject["pageCount"] = bookDto.pageCount;
     jsonObject["currentPage"] = bookDto.currentPage;
     jsonObject["addedToLibrary"] = bookDto.addedToLibrary;
@@ -76,7 +76,7 @@ void BookStorageAccess::downloadBook(const QString& authToken, const QUuid& uuid
 
 void BookStorageAccess::proccessBookCreationResult()
 {
-    int expectedStatusCode = 200;
+    int expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))
     {
         QString reason = m_reply->readAll();
