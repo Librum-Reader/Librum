@@ -33,7 +33,7 @@ public:
     MOCK_METHOD(void, createBook, (const QString&, const Book&), (override));
     MOCK_METHOD(void, deleteBook, (const QString&, const QUuid& uuid), (override));
     MOCK_METHOD(void, updateBook, (const QString&, const Book&), (override));
-    MOCK_METHOD(std::vector<BookMetaData>, getBooksMetaData, (const QString&), (override));
+    MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
 };
 
