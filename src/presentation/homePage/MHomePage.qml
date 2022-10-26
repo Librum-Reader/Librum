@@ -177,8 +177,12 @@ Page
                 MRightClickMenu
                 {
                     id: bookOptionsPopup
-                    implicitHeight: 213
+                    property bool bookDownloaded: true
+                    
+                    implicitHeight: bookDownloaded ? 213 : 181
                     visible: false
+                    
+                    onOpened: bookDownloaded = Globals.selectedBook.downloaded
                     
                     
                     objectModel: ObjectModel
@@ -186,6 +190,24 @@ Page
                         MRightClickMenuItem
                         {
                             width: bookOptionsPopup.width
+                            height: bookOptionsPopup.bookDownloaded ? 0 : implicitHeight
+                            visible: !bookOptionsPopup.bookDownloaded
+                            imagePath: Icons.downloadDarkGray
+                            imageSize: 18
+                            text: "Download"
+                            
+                            onClicked: 
+                            {
+                                console.log("Download")
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
+                            visible: bookOptionsPopup.bookDownloaded
                             imagePath: Icons.bookOpen
                             imageSize: 17
                             text: "Read book"
@@ -209,6 +231,8 @@ Page
                         MRightClickMenuItem
                         {
                             width: bookOptionsPopup.width
+                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
+                            visible: bookOptionsPopup.bookDownloaded
                             Layout.bottomMargin: 4
                             imagePath: Icons.addFile
                             imageSize: 14
