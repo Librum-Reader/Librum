@@ -93,6 +93,13 @@ TEST_F(ABookService, SucceedsAddingABook)
     auto expectedResult = BookOperationStatus::Success;
     
     
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+            .Times(1);
+    
+    EXPECT_CALL(bookStorageGatewayMock, createBook(_, _))
+            .Times(1);
+    
     // Act
     auto result = bookService->addBook("some/path.pdf");
     
@@ -161,6 +168,12 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
             .Times(1)
             .WillOnce(Return(bookMetaData));
+    
+    EXPECT_CALL(downloadedBooksTrackerMock, updateTrackedBook(_))
+            .Times(1);
+    
+    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _))
+            .Times(1);
     
     // Act
     bookService->addBook(originalPath);
