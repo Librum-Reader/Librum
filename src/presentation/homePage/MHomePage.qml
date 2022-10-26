@@ -27,13 +27,17 @@ Page
     
     Connections
     {
-        id: emptyLibraryUpdater
+        id: emptyLibraryUpdater 
         target: BookController.libraryModel
         
+        function onRowsInserted(parent, first, last)
+        {
+            root.empty = BookController.libraryModel.rowCount() === 0;
+        }
         
         function onRowsRemoved(index, first, last)
         {
-            root.empty = BookController.libraryModel.rowCount() === 0
+            root.empty = BookController.libraryModel.rowCount() === 0;
         }
     }
     
@@ -352,7 +356,6 @@ Page
         {
             if(BookController.addBook(file) === BookOperationStatus.Success)
             {
-                root.empty = false;
             }
             else
             {
