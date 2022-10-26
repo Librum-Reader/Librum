@@ -4,6 +4,7 @@
 #include "authentication_controller_tests.hpp"
 #include "authentication_gateway_tests.hpp"
 #include "user_storage_gateway_tests.hpp"
+#include "book_storage_gateway_tests.hpp"
 
 
 int main()

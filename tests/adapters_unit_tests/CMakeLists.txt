@@ -10,6 +10,7 @@ add_executable(adapters_unit_tests
                     controllers/authentication_controller_tests.hpp
                     controllers/user_controller_tests.hpp
                     gateways/user_storage_gateway_tests.hpp
+                    gateways/book_storage_gateway_tests.hpp
                     gateways/authentication_gateway_tests.hpp
     )
 
@@ -24,7 +25,7 @@ target_link_libraries(adapters_unit_tests
                     Qt5::Network
                     Qt5::Quick
                     Qt5::Test
-    )
+)
 
 target_include_directories(adapters_unit_tests
                 PRIVATE
