@@ -17,7 +17,7 @@ import "tags"
 Page
 {
     id: root
-    property bool empty : BookController.libraryModel.rowCount() === 0
+    property bool empty: true
     
     horizontalPadding: 64
     rightPadding: 70
