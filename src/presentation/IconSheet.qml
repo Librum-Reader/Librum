@@ -89,6 +89,7 @@ Item
     property string dots: "/resources/images/utility/dots_icon.svg"
     property string downloadBlack: "/resources/images/utility/download_black_icon.svg"
     property string downloadGray: "/resources/images/utility/download_gray_icon.svg"
+    property string downloadDarkGray: "/resources/images/utility/download_darkgray_icon.svg"
     property string downloadWhite: "/resources/images/utility/download_white_icon.svg"
     property string edit: "/resources/images/utility/edit_icon.svg"
     property string eyeOff: "/resources/images/utility/eye_off_icon.svg"
