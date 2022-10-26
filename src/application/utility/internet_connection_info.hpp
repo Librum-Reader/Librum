@@ -15,6 +15,9 @@ class InternetConnectionInfo : public IInternetConnectionInfo
 public:
     void checkAvailability() override;
     
+private slots:
+    void proccessAvailabilityResult();
+    
 private:
     std::unique_ptr<QNetworkReply> m_internetCheckReply = nullptr;
     QNetworkAccessManager networkManager;
