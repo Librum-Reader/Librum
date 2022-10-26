@@ -354,13 +354,8 @@ Page
         
         onAccepted:
         {
-            if(BookController.addBook(file) === BookOperationStatus.Success)
-            {
-            }
-            else
-            {
+            if(!BookController.addBook(file) === BookOperationStatus.Success)
                 console.log("Error loading file!");
-            }
         }
     }
 }
