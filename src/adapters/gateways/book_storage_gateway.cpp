@@ -26,8 +26,7 @@ void BookStorageGateway::createBook(const QString& authToken, const domain::mode
 
 void BookStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
 {
-    Q_UNUSED(authToken);
-    Q_UNUSED(uuid);
+    m_bookStorageAccess->deleteBook(authToken, uuid);
 }
 
 void BookStorageGateway::updateBook(const QString& authToken, const domain::models::Book& book)

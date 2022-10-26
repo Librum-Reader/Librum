@@ -68,6 +68,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     emit bookDeletionEnded();
     
     m_downloadedBooksTracker->untrackBook(uuid);
+    m_bookStorageGateway->deleteBook(m_authenticationToken, uuid);
     
     return BookOperationStatus::Success;
 }
