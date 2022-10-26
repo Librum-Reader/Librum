@@ -1,6 +1,5 @@
 #include "book_storage_gateway.hpp"
 #include "book.hpp"
-#include "book_dto.hpp"
 #include "i_book_storage_access.hpp"
 
 
@@ -21,25 +20,7 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess)
 
 void BookStorageGateway::createBook(const QString& authToken, const domain::models::Book& book)
 {
-    BookDto bookDto
-    {
-        .uuid = book.getUuid().toString(QUuid::WithoutBraces),
-        .title = book.getTitle(),
-        .author = book.getAuthor(),
-        .filePath = book.getFilePath(),
-        .creator = book.getCreator(),
-        .creationDate = book.getCreationDate(),
-        .format = book.getFormat(),
-        .language = book.getLanguage(),
-        .documentSize = book.getDocumentSize(),
-        .pagesSize = book.getPagesSize(),
-        .pageCount = book.getPageCount(),
-        .currentPage = book.getCurrentPage(),
-        .addedToLibrary = book.getAddedToLibrary(),
-        .lastOpened = book.getLastOpened(),
-        .cover = book.getCoverAsString()
-    };
-    
+    auto bookDto = getBookDtoFromBook(book);
     m_bookStorageAccess->createBook(authToken, bookDto);
 }
 
@@ -51,8 +32,8 @@ void BookStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
 
 void BookStorageGateway::updateBook(const QString& authToken, const domain::models::Book& book)
 {
-    Q_UNUSED(authToken);
-    Q_UNUSED(book);
+    auto bookDto = getBookDtoFromBook(book);
+    m_bookStorageAccess->updateBook(authToken, bookDto);
 }
 
 void BookStorageGateway::getBooksMetaData(const QString& authToken)
@@ -85,6 +66,30 @@ void BookStorageGateway::proccessBooksMetadata(std::vector<QJsonObject>&
     }
     
     emit gettingBooksMetaDataFinished(books);
+}
+
+BookDto BookStorageGateway::getBookDtoFromBook(const domain::models::Book& book)
+{
+    BookDto bookDto
+    {
+        .uuid = book.getUuid().toString(QUuid::WithoutBraces),
+        .title = book.getTitle(),
+        .author = book.getAuthor(),
+        .filePath = book.getFilePath(),
+        .creator = book.getCreator(),
+        .creationDate = book.getCreationDate(),
+        .format = book.getFormat(),
+        .language = book.getLanguage(),
+        .documentSize = book.getDocumentSize(),
+        .pagesSize = book.getPagesSize(),
+        .pageCount = book.getPageCount(),
+        .currentPage = book.getCurrentPage(),
+        .addedToLibrary = book.getAddedToLibrary(),
+        .lastOpened = book.getLastOpened(),
+        .cover = book.getCoverAsString()
+    };
+    
+    return bookDto;
 }
 
 } // namespace adapters::gateways

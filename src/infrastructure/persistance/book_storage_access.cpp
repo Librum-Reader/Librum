@@ -14,6 +14,7 @@ namespace infrastructure::persistence
 
 BookStorageAccess::BookStorageAccess()
     : m_bookCreationEndpoint("https://localhost:7084/api/book/create"),
+      m_bookUpdateEndpoint("https://localhost:7084/api/book"),
       m_getBooksMetadataEndpoint("https://localhost:7084/api/book/get")
 {
 }
@@ -24,22 +25,8 @@ void BookStorageAccess::createBook(const QString& authToken,
 {
     auto request = createRequest(m_bookCreationEndpoint, authToken);
     
-    QJsonObject jsonObject;
-    jsonObject["guid"] = bookDto.uuid;
-    jsonObject["title"] = bookDto.title;
-    jsonObject["creator"] = bookDto.creator;
-    jsonObject["creationDate"] = bookDto.creationDate;
-    jsonObject["format"] = bookDto.format;
-    jsonObject["language"] = bookDto.language;
-    jsonObject["documentSize"] = bookDto.documentSize;
-    jsonObject["pagesSize"] = bookDto.pagesSize;
-    jsonObject["pageCount"] = bookDto.pageCount;
-    jsonObject["currentPage"] = bookDto.currentPage;
-    jsonObject["addedToLibrary"] = bookDto.addedToLibrary;
-    jsonObject["lastOpened"] = bookDto.lastOpened;
-    jsonObject["cover"] = "someCover";
-    
-    QJsonDocument jsonDocument{jsonObject};
+    auto jsonBook = convertBookDtoToJson(bookDto);
+    QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson();
     
     
@@ -59,8 +46,14 @@ void BookStorageAccess::deleteBook(const QString& authToken,
 void BookStorageAccess::updateBook(const QString& authToken,
                                    const BookDto& bookDto)
 {
-    Q_UNUSED(authToken);
-    Q_UNUSED(bookDto);
+    QString endpoint = m_bookUpdateEndpoint + "/" + bookDto.uuid;
+    auto request = createRequest(endpoint, authToken);
+    
+    auto jsonBook = convertBookDtoToJson(bookDto);
+    QJsonDocument jsonDocument(jsonBook);
+    QByteArray data = jsonDocument.toJson();
+    
+    m_networkAccessManager.sendCustomRequest(request, "PATCH", data);
 }
 
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
@@ -147,6 +140,27 @@ bool BookStorageAccess::checkForErrors(int expectedStatusCode, QNetworkReply* re
     }
     
     return false;
+}
+
+QJsonObject BookStorageAccess::convertBookDtoToJson(const adapters::dtos::BookDto& bookDto)
+{
+    QJsonObject jsonBook;
+    
+    jsonBook["guid"] = bookDto.uuid;
+    jsonBook["title"] = bookDto.title;
+    jsonBook["creator"] = bookDto.creator;
+    jsonBook["creationDate"] = bookDto.creationDate;
+    jsonBook["format"] = bookDto.format;
+    jsonBook["language"] = bookDto.language;
+    jsonBook["documentSize"] = bookDto.documentSize;
+    jsonBook["pagesSize"] = bookDto.pagesSize;
+    jsonBook["pageCount"] = bookDto.pageCount;
+    jsonBook["currentPage"] = bookDto.currentPage;
+    jsonBook["addedToLibrary"] = bookDto.addedToLibrary;
+    jsonBook["lastOpened"] = bookDto.lastOpened;
+    jsonBook["cover"] = "someCover";
+    
+    return jsonBook;
 }
 
 } // namespace infrastructure::persistence

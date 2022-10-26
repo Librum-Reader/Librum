@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
+#include "book_dto.hpp"
 
 
 namespace adapters::gateways
@@ -27,6 +28,8 @@ private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
     
 private:
+    dtos::BookDto getBookDtoFromBook(const domain::models::Book& book);
+    
     IBookStorageAccess* m_bookStorageAccess;
 };
 

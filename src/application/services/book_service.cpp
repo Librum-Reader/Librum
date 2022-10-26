@@ -85,6 +85,7 @@ BookOperationStatus BookService::updateBook(const QUuid& uuid,
     
     if(book->getDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(*book);
+    m_bookStorageGateway->updateBook(m_authenticationToken, *book);
     
     return BookOperationStatus::Success;
 }
