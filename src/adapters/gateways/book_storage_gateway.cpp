@@ -78,7 +78,10 @@ void BookStorageGateway::proccessBooksMetadata(std::vector<QJsonObject>&
         jsonBook.remove("guid");
         jsonBook.insert("uuid", uuid);
         
-        books.emplace_back(Book::fromJson(jsonBook));
+        auto book = Book::fromJson(jsonBook);
+        book.setDownloaded(false);
+        
+        books.emplace_back(std::move(book));
     }
     
     emit gettingBooksMetaDataFinished(books);
