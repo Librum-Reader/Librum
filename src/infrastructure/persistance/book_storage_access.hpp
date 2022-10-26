@@ -39,10 +39,10 @@ private:
     
     const QString m_bookCreationEndpoint;
     const QString m_bookUpdateEndpoint;
+    const QString m_bookDeletionEndpoint;
     const QString m_getBooksMetadataEndpoint;
     
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_gettingBooksMetadataReply = nullptr;
 };
 

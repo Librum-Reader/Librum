@@ -1,4 +1,5 @@
 #include "book_storage_access.hpp"
+#include "qjsonarray.h"
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonArray>
@@ -15,6 +16,7 @@ namespace infrastructure::persistence
 BookStorageAccess::BookStorageAccess()
     : m_bookCreationEndpoint("https://localhost:7084/api/book/create"),
       m_bookUpdateEndpoint("https://localhost:7084/api/book"),
+      m_bookDeletionEndpoint("https://localhost:7084/api/book"),
       m_getBooksMetadataEndpoint("https://localhost:7084/api/book/get")
 {
 }
@@ -27,7 +29,7 @@ void BookStorageAccess::createBook(const QString& authToken,
     
     auto jsonBook = convertBookDtoToJson(bookDto);
     QJsonDocument jsonDocument(jsonBook);
-    QByteArray data = jsonDocument.toJson();
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
     
     
     m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
@@ -39,8 +41,15 @@ void BookStorageAccess::createBook(const QString& authToken,
 void BookStorageAccess::deleteBook(const QString& authToken,
                                    const QUuid& uuid)
 {
-    Q_UNUSED(authToken);
-    Q_UNUSED(uuid);
+    auto request = createRequest(m_bookDeletionEndpoint, authToken);
+    
+    QJsonArray bookArray;
+    bookArray.append(QJsonValue::fromVariant(uuid));
+    
+    QJsonDocument jsonDocument(bookArray);
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
+    
+    m_networkAccessManager.sendCustomRequest(request, "DELETE", data);
 }
 
 void BookStorageAccess::updateBook(const QString& authToken,
@@ -51,7 +60,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
     
     auto jsonBook = convertBookDtoToJson(bookDto);
     QJsonDocument jsonDocument(jsonBook);
-    QByteArray data = jsonDocument.toJson();
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
     
     m_networkAccessManager.sendCustomRequest(request, "PATCH", data);
 }
