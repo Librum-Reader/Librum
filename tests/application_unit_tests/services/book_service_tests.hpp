@@ -119,6 +119,13 @@ TEST_F(ABookService, SucceedsDeletingABook)
     auto expectedResult = BookOperationStatus::Success;
     
     
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_))
+            .Times(1);
+    
+    EXPECT_CALL(bookStorageGatewayMock, deleteBook(_, _))
+            .Times(1);
+    
     // Act
     auto preDeleteBookCount = bookService->getBookCount();
     auto result = bookService->deleteBook(firstBookUuid);
