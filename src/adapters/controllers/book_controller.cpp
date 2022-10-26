@@ -16,7 +16,7 @@ using namespace domain::models;
 using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService)
-    : m_bookChacheChanged(false), m_bookService(bookService),
+    : m_bookChacheChanged(true), m_bookService(bookService),
       m_libraryModel(m_bookService->getBooks())
 {
     // book insertion
