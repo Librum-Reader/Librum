@@ -143,8 +143,15 @@ Page
                     
                     onLeftButtonClicked:
                     {
-                        Globals.selectedBook = BookController.getBook(model.uuid);
-                        bookGrid.openBook();
+                        if(model.downloaded)
+                        {
+                            Globals.selectedBook = BookController.getBook(model.uuid);
+                            bookGrid.openBook();
+                        }
+                        else
+                        {
+                            console.log("Download");
+                        }
                     }
                         
                     onRightButtonClicked:
