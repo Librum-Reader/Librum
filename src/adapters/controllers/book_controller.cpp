@@ -71,6 +71,18 @@ int BookController::deleteBook(const QString& uuid)
     return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
+int BookController::uninstallBook(const QString& uuid)
+{
+    auto result = m_bookService->uninstallBook(uuid);
+    if(result == BookOperationStatus::Success)
+    {
+        m_bookChacheChanged = true;
+        return static_cast<int>(BookOperationStatus::Success);
+    }
+    
+    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
+}
+
 int BookController::updateBook(const QString& uuid, const QVariant& operations)
 {
     auto bookToUpdate = m_bookService->getBook(uuid);

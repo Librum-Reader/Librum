@@ -62,13 +62,29 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
         return book.getUuid() == uuid;
     });
     
-    size_t index = bookPosition - m_books.begin();
+    size_t index = getBookIndex(uuid);
+    
     emit bookDeletionStarted(index);
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
     
     m_downloadedBooksTracker->untrackBook(uuid);
     m_bookStorageGateway->deleteBook(m_authenticationToken, uuid);
+    
+    return BookOperationStatus::Success;
+}
+
+BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
+{
+    auto book = getBook(uuid);
+    if(!book)
+        return BookOperationStatus::BookDoesNotExist;
+    
+    size_t index = getBookIndex(uuid);
+    
+    m_downloadedBooksTracker->untrackBook(uuid);
+    book->setDownloaded(false);
+    emit dataChanged(index);
     
     return BookOperationStatus::Success;
 }

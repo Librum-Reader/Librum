@@ -22,6 +22,7 @@ public:
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
+    BookOperationStatus uninstallBook(const QUuid& uuid) override;
     BookOperationStatus updateBook(const QUuid& uuid,
                                    const domain::models::Book& newBook) override;
     

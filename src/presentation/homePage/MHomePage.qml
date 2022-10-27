@@ -297,7 +297,7 @@ Page
                             
                             onClicked:
                             {
-                                acceptDeletionPopup.open();
+                                BookController.uninstallBook(Globals.selectedBook.uuid);
                                 bookOptionsPopup.close();
                             }
                         }
