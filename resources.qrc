@@ -93,5 +93,6 @@
         <file>resources/images/decision/close_gray_icon.svg</file>
         <file>resources/images/decision/plus_square_icon.svg</file>
         <file>resources/images/utility/download_darkgray_icon.svg</file>
+        <file>resources/images/decision/close_darkgray_icon.svg</file>
     </qresource>
 </RCC>

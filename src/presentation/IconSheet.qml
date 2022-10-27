@@ -18,6 +18,7 @@ Item
     property string checkWhite: "/resources/images/decision/check_white_icon.svg"
     property string checkPurple: "/resources/images/decision/check_purple_icon.svg"
     property string closeBlack: "/resources/images/decision/close_black_icon.svg"
+    property string closeDarkgray: "/resources/images/decision/close_darkgray_icon.svg"
     property string closeGray: "/resources/images/decision/close_gray_icon.svg"
     property string closePurple: "/resources/images/decision/close_purple_icon.svg"
     property string plusBlack: "/resources/images/decision/plus_black_icon.svg"

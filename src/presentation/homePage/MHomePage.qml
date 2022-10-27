@@ -186,7 +186,7 @@ Page
                     id: bookOptionsPopup
                     property bool bookDownloaded: true
                     
-                    implicitHeight: bookDownloaded ? 213 : 181
+                    implicitHeight: bookDownloaded ? 245 : 181
                     visible: false
                     
                     onOpened: bookDownloaded = Globals.selectedBook.downloaded
@@ -282,6 +282,22 @@ Page
                             
                             onClicked:
                             {
+                                bookOptionsPopup.close();
+                            }
+                        }
+                        
+                        MRightClickMenuItem
+                        {
+                            width: bookOptionsPopup.width
+                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
+                            visible: bookOptionsPopup.bookDownloaded
+                            imagePath: Icons.closeDarkgray
+                            imageSize: 12
+                            text: "Uninstall"
+                            
+                            onClicked:
+                            {
+                                acceptDeletionPopup.open();
                                 bookOptionsPopup.close();
                             }
                         }
