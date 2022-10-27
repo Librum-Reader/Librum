@@ -167,7 +167,7 @@ QJsonObject BookStorageAccess::convertBookDtoToJson(const adapters::dtos::BookDt
     jsonBook["currentPage"] = bookDto.currentPage;
     jsonBook["addedToLibrary"] = bookDto.addedToLibrary;
     jsonBook["lastOpened"] = bookDto.lastOpened;
-    jsonBook["cover"] = "someCover";
+    jsonBook["cover"] = bookDto.cover;
     
     return jsonBook;
 }
