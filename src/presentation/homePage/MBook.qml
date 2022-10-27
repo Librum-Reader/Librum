@@ -71,11 +71,23 @@ Item
             
             Rectangle
             {
+                id: bookCoverOverlay
                 anchors.fill: parent
                 visible: !model.downloaded
                 color: "#32324D"
                 opacity: 0.4
                 z: 2
+            }
+            
+            Image
+            {
+                anchors.centerIn: bookCoverOverlay
+                visible: !model.downloaded
+                sourceSize.width: 52
+                fillMode: Image.PreserveAspectFit
+                source: Icons.downloadWhite
+                opacity: 1
+                z: 3
             }
             
             ColumnLayout
