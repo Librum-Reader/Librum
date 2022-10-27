@@ -62,6 +62,7 @@ TEST_F(ABookStorageGateway, SucceedsDeletingABook)
     // Arrange
     QUuid uuid;
     
+    
     // Expect
     EXPECT_CALL(bookStorageAccessMock, deleteBook(_,_))
             .Times(1);
