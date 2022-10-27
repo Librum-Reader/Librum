@@ -135,6 +135,44 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
 
 
 
+TEST_F(ABookController, SucceedsUninstallingABook)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::Success;
+    
+    
+    // Expect
+    EXPECT_CALL(bookServiceMock, uninstallBook(_))
+            .Times(1)
+            .WillOnce(Return(BookOperationStatus::Success));
+    
+    // Act
+    auto result = bookController->uninstallBook("some-book-uuid");
+    
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, FailsUninstallingABookIfTheBookDoesNotExist)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+    
+    
+    // Expect
+    EXPECT_CALL(bookServiceMock, uninstallBook(_))
+            .Times(1)
+            .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
+    
+    // Act
+    auto result = bookController->uninstallBook("someBook");
+    
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+
+
 TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange

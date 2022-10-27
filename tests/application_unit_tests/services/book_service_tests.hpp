@@ -114,7 +114,7 @@ TEST_F(ABookService, SucceedsDeletingABook)
     // Arrange
     bookService->addBook("some/path.pdf");
     bookService->addBook("some/other/path.pdf");
-    const auto& firstBookUuid = bookService->getBooks()[0].getUuid();
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
     
     auto expectedResult = BookOperationStatus::Success;
     
@@ -128,7 +128,7 @@ TEST_F(ABookService, SucceedsDeletingABook)
     
     // Act
     auto preDeleteBookCount = bookService->getBookCount();
-    auto result = bookService->deleteBook(firstBookUuid);
+    auto result = bookService->deleteBook(bookUuid);
     
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -152,6 +152,58 @@ TEST_F(ABookService, FailsDeletingABookIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
+
+
+TEST_F(ABookService, SucceedsUninstallingABook)
+{
+    // Arrange
+    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    
+    bookService->addBook("some/path.pdf");
+    bookService->addBook("some/other/path.pdf");
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
+    
+    auto expectedResult = BookOperationStatus::Success;
+    
+    
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_))
+            .Times(1);
+    
+    // Act
+    auto result = bookService->uninstallBook(bookUuid);
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+    EXPECT_FALSE(bookService->getBook(bookUuid)->getDownloaded());
+    
+    auto arguments = spy[0];
+    EXPECT_EQ(1, spy.count());
+    EXPECT_EQ(bookService->getBookIndex(bookUuid), arguments[0].toInt());
+}
+
+TEST_F(ABookService, FailsUninstallingABook)
+{
+    // Arrange
+    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    
+    bookService->addBook("some/path.pdf");
+    auto nonExistentBookUuid = QUuid::createUuid();
+    
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+    
+    
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_))
+            .Times(0);
+    
+    // Act
+    auto result = bookService->uninstallBook(nonExistentBookUuid);
+    
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(0, spy.count());
+}
 
 
 TEST_F(ABookService, SucceedsUpdatingABook)
