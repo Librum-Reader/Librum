@@ -56,7 +56,7 @@ Item
                 height: upperFiller.height
                 width: upperFiller.width
                 color: "#32324D"
-                opacity: 0.4
+                opacity: 0.5
                 radius: 4
             }
         }
@@ -75,7 +75,7 @@ Item
                 anchors.fill: parent
                 visible: !model.downloaded
                 color: "#32324D"
-                opacity: 0.4
+                opacity: 0.5
                 z: 2
             }
             
