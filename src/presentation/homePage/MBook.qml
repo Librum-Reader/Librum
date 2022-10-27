@@ -23,22 +23,60 @@ Item
         anchors.fill: parent
         spacing: 0
         
-        Rectangle
+        
+        Item
         {
             id: upperBookPartRounding
+            Layout.preferredHeight: 10
             Layout.fillWidth: true
-            Layout.preferredHeight: 16
-            radius: 4
-            color: Style.colorLightBorder
+            clip: true
+            
+            Rectangle
+            {
+                id: upperFiller
+                height: parent.height + 4
+                width: parent.width
+                radius: 4
+                color: Style.colorLightBorder
+            }
         }
+        
+        Item
+        {
+            id: upperBookPartRoundingOverlay
+            Layout.topMargin: -10
+            Layout.preferredHeight: 10
+            Layout.fillWidth: true
+            visible: !model.downloaded
+            clip: true
+            z: 2
+            
+            Rectangle
+            {
+                height: upperFiller.height
+                width: upperFiller.width
+                color: "#32324D"
+                opacity: 0.4
+                radius: 4
+            }
+        }
+        
         
         Rectangle
         {
             id: upperRect
             Layout.fillWidth: true
             Layout.preferredHeight: 230
-            Layout.topMargin: -6
             color: Style.colorLightBorder
+            
+            Rectangle
+            {
+                anchors.fill: parent
+                visible: !model.downloaded
+                color: "#32324D"
+                opacity: 0.4
+                z: 2
+            }
             
             ColumnLayout
             {
