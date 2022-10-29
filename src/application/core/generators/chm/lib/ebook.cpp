@@ -17,19 +17,21 @@ EBook::~EBook()
 {
 }
 
-EBook *EBook::loadFile(const QString &archiveName)
+EBook* EBook::loadFile(const QString& archiveName)
 {
-    EBook_CHM *cbook = new EBook_CHM();
+    EBook_CHM* cbook = new EBook_CHM();
 
-    if (cbook->load(archiveName)) {
+    if(cbook->load(archiveName))
+    {
         return cbook;
     }
 
     delete cbook;
 
-    EBook_EPUB *ebook = new EBook_EPUB();
+    EBook_EPUB* ebook = new EBook_EPUB();
 
-    if (ebook->load(archiveName)) {
+    if(ebook->load(archiveName))
+    {
         return ebook;
     }
 

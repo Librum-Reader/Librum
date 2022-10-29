@@ -7,12 +7,17 @@
 
 #include "helperxmlhandler_epubcontainer.h"
 
-bool HelperXmlHandler_EpubContainer::startElement(const QString &, const QString &, const QString &qName, const QXmlAttributes &atts)
+bool HelperXmlHandler_EpubContainer::startElement(const QString&,
+                                                  const QString&,
+                                                  const QString& qName,
+                                                  const QXmlAttributes& atts)
 {
-    if (qName == QLatin1String("rootfile")) {
+    if(qName == QLatin1String("rootfile"))
+    {
         int idx = atts.index(QLatin1String("full-path"));
 
-        if (idx == -1) {
+        if(idx == -1)
+        {
             return false;
         }
 

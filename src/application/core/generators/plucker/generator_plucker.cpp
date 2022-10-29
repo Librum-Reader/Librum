@@ -5,30 +5,30 @@
 */
 
 #include "generator_plucker.h"
-
+#include <core/page.h>
+#include <KAboutData>
+#include <KLocalizedString>
 #include <QAbstractTextDocumentLayout>
 #include <QFile>
 #include <QPainter>
 #include <QPrinter>
 #include <QTextDocument>
 
-#include <KAboutData>
-#include <KLocalizedString>
-
-#include <core/page.h>
-
 OKULAR_EXPORT_PLUGIN(PluckerGenerator, "libokularGenerator_plucker.json")
 
-static void calculateBoundingRect(QTextDocument *document, int startPosition, int endPosition, QRectF &rect)
+static void calculateBoundingRect(QTextDocument* document, int startPosition,
+                                  int endPosition, QRectF& rect)
 {
     const QTextBlock startBlock = document->findBlock(startPosition);
-    const QRectF startBoundingRect = document->documentLayout()->blockBoundingRect(startBlock);
+    const QRectF startBoundingRect =
+        document->documentLayout()->blockBoundingRect(startBlock);
 
     const QTextBlock endBlock = document->findBlock(endPosition);
-    const QRectF endBoundingRect = document->documentLayout()->blockBoundingRect(endBlock);
+    const QRectF endBoundingRect =
+        document->documentLayout()->blockBoundingRect(endBlock);
 
-    QTextLayout *startLayout = startBlock.layout();
-    QTextLayout *endLayout = endBlock.layout();
+    QTextLayout* startLayout = startBlock.layout();
+    QTextLayout* endLayout = endBlock.layout();
 
     int startPos = startPosition - startBlock.position();
     int endPos = endPosition - endBlock.position();
@@ -41,11 +41,12 @@ static void calculateBoundingRect(QTextDocument *document, int startPosition, in
     double b = endBoundingRect.y() + endLine.y() + endLine.height();
 
     const QSizeF size = document->size();
-    rect = QRectF(x / size.width(), y / size.height(), (r - x) / size.width(), (b - y) / size.height());
+    rect = QRectF(x / size.width(), y / size.height(), (r - x) / size.width(),
+                  (b - y) / size.height());
 }
 
-PluckerGenerator::PluckerGenerator(QObject *parent, const QVariantList &args)
-    : Generator(parent, args)
+PluckerGenerator::PluckerGenerator(QObject* parent, const QVariantList& args) :
+    Generator(parent, args)
 {
 }
 
@@ -53,11 +54,13 @@ PluckerGenerator::~PluckerGenerator()
 {
 }
 
-bool PluckerGenerator::loadDocument(const QString &fileName, QVector<Okular::Page *> &pagesVector)
+bool PluckerGenerator::loadDocument(const QString& fileName,
+                                    QVector<Okular::Page*>& pagesVector)
 {
     QUnpluck unpluck;
 
-    if (!unpluck.open(fileName)) {
+    if(!unpluck.open(fileName))
+    {
         return false;
     }
 
@@ -66,26 +69,39 @@ bool PluckerGenerator::loadDocument(const QString &fileName, QVector<Okular::Pag
 
     const QMap<QString, QString> infos = unpluck.infos();
     QMapIterator<QString, QString> it(infos);
-    while (it.hasNext()) {
+    while(it.hasNext())
+    {
         it.next();
-        if (!it.value().isEmpty()) {
-            if (it.key() == QLatin1String("name")) {
-                mDocumentInfo.set(QStringLiteral("name"), it.value(), i18n("Name"));
-            } else if (it.key() == QLatin1String("title")) {
+        if(!it.value().isEmpty())
+        {
+            if(it.key() == QLatin1String("name"))
+            {
+                mDocumentInfo.set(QStringLiteral("name"), it.value(),
+                                  i18n("Name"));
+            }
+            else if(it.key() == QLatin1String("title"))
+            {
                 mDocumentInfo.set(Okular::DocumentInfo::Title, it.value());
-            } else if (it.key() == QLatin1String("author")) {
+            }
+            else if(it.key() == QLatin1String("author"))
+            {
                 mDocumentInfo.set(Okular::DocumentInfo::Author, it.value());
-            } else if (it.key() == QLatin1String("time")) {
-                mDocumentInfo.set(Okular::DocumentInfo::CreationDate, it.value());
+            }
+            else if(it.key() == QLatin1String("time"))
+            {
+                mDocumentInfo.set(Okular::DocumentInfo::CreationDate,
+                                  it.value());
             }
         }
     }
 
     pagesVector.resize(mPages.count());
 
-    for (int i = 0; i < mPages.count(); ++i) {
+    for(int i = 0; i < mPages.count(); ++i)
+    {
         QSizeF size = mPages[i]->size();
-        Okular::Page *page = new Okular::Page(i, size.width(), size.height(), Okular::Rotation0);
+        Okular::Page* page =
+            new Okular::Page(i, size.width(), size.height(), Okular::Rotation0);
         pagesVector[i] = page;
     }
 
@@ -106,16 +122,18 @@ bool PluckerGenerator::doCloseDocument()
     return true;
 }
 
-Okular::DocumentInfo PluckerGenerator::generateDocumentInfo(const QSet<Okular::DocumentInfo::Key> & /*keys*/) const
+Okular::DocumentInfo PluckerGenerator::generateDocumentInfo(
+    const QSet<Okular::DocumentInfo::Key>& /*keys*/) const
 {
     return mDocumentInfo;
 }
 
-QImage PluckerGenerator::image(Okular::PixmapRequest *request)
+QImage PluckerGenerator::image(Okular::PixmapRequest* request)
 {
     const QSizeF size = mPages[request->pageNumber()]->size();
 
-    QImage image(request->width(), request->height(), QImage::Format_ARGB32_Premultiplied);
+    QImage image(request->width(), request->height(),
+                 QImage::Format_ARGB32_Premultiplied);
     image.fill(Qt::white);
 
     QPainter p;
@@ -128,20 +146,27 @@ QImage PluckerGenerator::image(Okular::PixmapRequest *request)
     mPages[request->pageNumber()]->drawContents(&p);
     p.end();
 
-    if (!mLinkAdded.contains(request->pageNumber())) {
-        QList<Okular::ObjectRect *> objects;
-        for (int i = 0; i < mLinks.count(); ++i) {
-            if (mLinks[i].page == request->pageNumber()) {
-                QTextDocument *document = mPages[request->pageNumber()];
+    if(!mLinkAdded.contains(request->pageNumber()))
+    {
+        QList<Okular::ObjectRect*> objects;
+        for(int i = 0; i < mLinks.count(); ++i)
+        {
+            if(mLinks[i].page == request->pageNumber())
+            {
+                QTextDocument* document = mPages[request->pageNumber()];
 
                 QRectF rect;
-                calculateBoundingRect(document, mLinks[i].start, mLinks[i].end, rect);
+                calculateBoundingRect(document, mLinks[i].start, mLinks[i].end,
+                                      rect);
 
-                objects.append(new Okular::ObjectRect(rect.left(), rect.top(), rect.right(), rect.bottom(), false, Okular::ObjectRect::Action, mLinks[i].link));
+                objects.append(new Okular::ObjectRect(
+                    rect.left(), rect.top(), rect.right(), rect.bottom(), false,
+                    Okular::ObjectRect::Action, mLinks[i].link));
             }
         }
 
-        if (!objects.isEmpty()) {
+        if(!objects.isEmpty())
+        {
             request->page()->setObjectRects(objects);
         }
 
@@ -154,23 +179,29 @@ QImage PluckerGenerator::image(Okular::PixmapRequest *request)
 Okular::ExportFormat::List PluckerGenerator::exportFormats() const
 {
     static Okular::ExportFormat::List formats;
-    if (formats.isEmpty()) {
-        formats.append(Okular::ExportFormat::standardFormat(Okular::ExportFormat::PlainText));
+    if(formats.isEmpty())
+    {
+        formats.append(Okular::ExportFormat::standardFormat(
+            Okular::ExportFormat::PlainText));
     }
 
     return formats;
 }
 
-bool PluckerGenerator::exportTo(const QString &fileName, const Okular::ExportFormat &format)
+bool PluckerGenerator::exportTo(const QString& fileName,
+                                const Okular::ExportFormat& format)
 {
-    if (format.mimeType().name() == QLatin1String("text/plain")) {
+    if(format.mimeType().name() == QLatin1String("text/plain"))
+    {
         QFile file(fileName);
-        if (!file.open(QIODevice::WriteOnly)) {
+        if(!file.open(QIODevice::WriteOnly))
+        {
             return false;
         }
 
         QTextStream out(&file);
-        for (int i = 0; i < mPages.count(); ++i) {
+        for(int i = 0; i < mPages.count(); ++i)
+        {
             out << mPages[i]->toPlainText();
         }
 

@@ -6,7 +6,6 @@
 
 // local includes
 #include "fontinfo.h"
-
 #include <QVariant>
 
 using namespace Okular;
@@ -14,16 +13,18 @@ using namespace Okular;
 class Okular::FontInfoPrivate : public QSharedData
 {
 public:
-    FontInfoPrivate()
-        : type(FontInfo::Unknown)
-        , embedType(FontInfo::NotEmbedded)
-        , canBeExtracted(false)
+    FontInfoPrivate() :
+        type(FontInfo::Unknown),
+        embedType(FontInfo::NotEmbedded),
+        canBeExtracted(false)
     {
     }
 
-    bool operator==(const FontInfoPrivate &rhs) const
+    bool operator==(const FontInfoPrivate& rhs) const
     {
-        return name == rhs.name && substituteName == rhs.substituteName && type == rhs.type && embedType == rhs.embedType && file == rhs.file && canBeExtracted == rhs.canBeExtracted;
+        return name == rhs.name && substituteName == rhs.substituteName &&
+               type == rhs.type && embedType == rhs.embedType &&
+               file == rhs.file && canBeExtracted == rhs.canBeExtracted;
     }
 
     QString name;
@@ -35,13 +36,13 @@ public:
     QVariant nativeId;
 };
 
-FontInfo::FontInfo()
-    : d(new FontInfoPrivate)
+FontInfo::FontInfo() :
+    d(new FontInfoPrivate)
 {
 }
 
-FontInfo::FontInfo(const FontInfo &fi)
-    : d(fi.d)
+FontInfo::FontInfo(const FontInfo& fi) :
+    d(fi.d)
 {
 }
 
@@ -54,7 +55,7 @@ QString FontInfo::name() const
     return d->name;
 }
 
-void FontInfo::setName(const QString &name)
+void FontInfo::setName(const QString& name)
 {
     d->name = name;
 }
@@ -64,7 +65,7 @@ QString FontInfo::substituteName() const
     return d->substituteName;
 }
 
-void FontInfo::setSubstituteName(const QString &substituteName)
+void FontInfo::setSubstituteName(const QString& substituteName)
 {
     d->substituteName = substituteName;
 }
@@ -94,7 +95,7 @@ QString FontInfo::file() const
     return d->file;
 }
 
-void FontInfo::setFile(const QString &file)
+void FontInfo::setFile(const QString& file)
 {
     d->file = file;
 }
@@ -109,7 +110,7 @@ void FontInfo::setCanBeExtracted(bool extractable)
     d->canBeExtracted = extractable;
 }
 
-void FontInfo::setNativeId(const QVariant &id)
+void FontInfo::setNativeId(const QVariant& id)
 {
     d->nativeId = id;
 }
@@ -119,19 +120,20 @@ QVariant FontInfo::nativeId() const
     return d->nativeId;
 }
 
-bool FontInfo::operator==(const FontInfo &fi) const
+bool FontInfo::operator==(const FontInfo& fi) const
 {
     return *d == *fi.d;
 }
 
-bool FontInfo::operator!=(const FontInfo &fi) const
+bool FontInfo::operator!=(const FontInfo& fi) const
 {
     return !operator==(fi);
 }
 
-FontInfo &FontInfo::operator=(const FontInfo &fi)
+FontInfo& FontInfo::operator=(const FontInfo& fi)
 {
-    if (this == &fi) {
+    if(this == &fi)
+    {
         return *this;
     }
 

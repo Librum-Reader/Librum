@@ -7,35 +7,55 @@
 */
 
 #include "formfields.h"
-
+#include <poppler-qt5.h>
 #include "core/action.h"
-
 #include "generator_pdf.h"
 #include "pdfsettings.h"
 #include "pdfsignatureutils.h"
 
-#include <poppler-qt5.h>
+extern Okular::Action* createLinkFromPopplerLink(
+    const Poppler::Link* popplerLink, bool deletePopplerLink = true);
+#define SET_ANNOT_ACTIONS                                                    \
+    setAdditionalAction(Okular::Annotation::CursorEntering,                  \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::CursorEnteringAction)));    \
+    setAdditionalAction(Okular::Annotation::CursorLeaving,                   \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::CursorLeavingAction)));     \
+    setAdditionalAction(Okular::Annotation::MousePressed,                    \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::MousePressedAction)));      \
+    setAdditionalAction(Okular::Annotation::MouseReleased,                   \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::MouseReleasedAction)));     \
+    setAdditionalAction(Okular::Annotation::FocusIn,                         \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::FocusInAction)));           \
+    setAdditionalAction(Okular::Annotation::FocusOut,                        \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::Annotation::FocusOutAction)));
 
-extern Okular::Action *createLinkFromPopplerLink(const Poppler::Link *popplerLink, bool deletePopplerLink = true);
-#define SET_ANNOT_ACTIONS                                                                                                                                                                                                                      \
-    setAdditionalAction(Okular::Annotation::CursorEntering, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::CursorEnteringAction)));                                                                                  \
-    setAdditionalAction(Okular::Annotation::CursorLeaving, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::CursorLeavingAction)));                                                                                    \
-    setAdditionalAction(Okular::Annotation::MousePressed, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::MousePressedAction)));                                                                                      \
-    setAdditionalAction(Okular::Annotation::MouseReleased, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::MouseReleasedAction)));                                                                                    \
-    setAdditionalAction(Okular::Annotation::FocusIn, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::FocusInAction)));                                                                                                \
-    setAdditionalAction(Okular::Annotation::FocusOut, createLinkFromPopplerLink(m_field->additionalAction(Poppler::Annotation::FocusOutAction)));
-
-#define SET_ACTIONS                                                                                                                                                                                                                            \
-    setActivationAction(createLinkFromPopplerLink(m_field->activationAction()));                                                                                                                                                               \
-    setAdditionalAction(Okular::FormField::FieldModified, createLinkFromPopplerLink(m_field->additionalAction(Poppler::FormField::FieldModified)));                                                                                            \
-    setAdditionalAction(Okular::FormField::FormatField, createLinkFromPopplerLink(m_field->additionalAction(Poppler::FormField::FormatField)));                                                                                                \
-    setAdditionalAction(Okular::FormField::ValidateField, createLinkFromPopplerLink(m_field->additionalAction(Poppler::FormField::ValidateField)));                                                                                            \
-    setAdditionalAction(Okular::FormField::CalculateField, createLinkFromPopplerLink(m_field->additionalAction(Poppler::FormField::CalculateField)));                                                                                          \
+#define SET_ACTIONS                                                          \
+    setActivationAction(                                                     \
+        createLinkFromPopplerLink(m_field->activationAction()));             \
+    setAdditionalAction(Okular::FormField::FieldModified,                    \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::FormField::FieldModified)));            \
+    setAdditionalAction(Okular::FormField::FormatField,                      \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::FormField::FormatField)));              \
+    setAdditionalAction(Okular::FormField::ValidateField,                    \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::FormField::ValidateField)));            \
+    setAdditionalAction(Okular::FormField::CalculateField,                   \
+                        createLinkFromPopplerLink(m_field->additionalAction( \
+                            Poppler::FormField::CalculateField)));           \
     SET_ANNOT_ACTIONS
 
-PopplerFormFieldButton::PopplerFormFieldButton(std::unique_ptr<Poppler::FormFieldButton> field)
-    : Okular::FormFieldButton()
-    , m_field(std::move(field))
+PopplerFormFieldButton::PopplerFormFieldButton(
+    std::unique_ptr<Poppler::FormFieldButton> field) :
+    Okular::FormFieldButton(),
+    m_field(std::move(field))
 {
     m_rect = Okular::NormalizedRect::fromQRectF(m_field->rect());
     m_id = m_field->id();
@@ -99,7 +119,8 @@ void PopplerFormFieldButton::setPrintable(bool value)
 
 Okular::FormFieldButton::ButtonType PopplerFormFieldButton::buttonType() const
 {
-    switch (m_field->buttonType()) {
+    switch(m_field->buttonType())
+    {
     case Poppler::FormFieldButton::Push:
         return Okular::FormFieldButton::Push;
     case Poppler::FormFieldButton::CheckBox:
@@ -135,17 +156,20 @@ Poppler::FormFieldIcon PopplerFormFieldButton::icon() const
     return m_field->icon();
 }
 
-void PopplerFormFieldButton::setIcon(Okular::FormField *field)
+void PopplerFormFieldButton::setIcon(Okular::FormField* field)
 {
-    if (field->type() == Okular::FormField::FormButton) {
-        PopplerFormFieldButton *button = static_cast<PopplerFormFieldButton *>(field);
+    if(field->type() == Okular::FormField::FormButton)
+    {
+        PopplerFormFieldButton* button =
+            static_cast<PopplerFormFieldButton*>(field);
         m_field->setIcon(button->icon());
     }
 }
 
-PopplerFormFieldText::PopplerFormFieldText(std::unique_ptr<Poppler::FormFieldText> field)
-    : Okular::FormFieldText()
-    , m_field(std::move(field))
+PopplerFormFieldText::PopplerFormFieldText(
+    std::unique_ptr<Poppler::FormFieldText> field) :
+    Okular::FormFieldText(),
+    m_field(std::move(field))
 {
     m_rect = Okular::NormalizedRect::fromQRectF(m_field->rect());
     m_id = m_field->id();
@@ -209,7 +233,8 @@ void PopplerFormFieldText::setPrintable(bool value)
 
 Okular::FormFieldText::TextType PopplerFormFieldText::textType() const
 {
-    switch (m_field->textType()) {
+    switch(m_field->textType())
+    {
     case Poppler::FormFieldText::Normal:
         return Okular::FormFieldText::Normal;
     case Poppler::FormFieldText::Multiline:
@@ -225,12 +250,12 @@ QString PopplerFormFieldText::text() const
     return m_field->text();
 }
 
-void PopplerFormFieldText::setText(const QString &text)
+void PopplerFormFieldText::setText(const QString& text)
 {
     m_field->setText(text);
 }
 
-void PopplerFormFieldText::setAppearanceText(const QString &text)
+void PopplerFormFieldText::setAppearanceText(const QString& text)
 {
     m_field->setAppearanceText(text);
 }
@@ -260,9 +285,10 @@ bool PopplerFormFieldText::canBeSpellChecked() const
     return m_field->canBeSpellChecked();
 }
 
-PopplerFormFieldChoice::PopplerFormFieldChoice(std::unique_ptr<Poppler::FormFieldChoice> field)
-    : Okular::FormFieldChoice()
-    , m_field(std::move(field))
+PopplerFormFieldChoice::PopplerFormFieldChoice(
+    std::unique_ptr<Poppler::FormFieldChoice> field) :
+    Okular::FormFieldChoice(),
+    m_field(std::move(field))
 {
     m_rect = Okular::NormalizedRect::fromQRectF(m_field->rect());
     m_id = m_field->id();
@@ -270,8 +296,10 @@ PopplerFormFieldChoice::PopplerFormFieldChoice(std::unique_ptr<Poppler::FormFiel
 
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(0, 87, 0)
     QMap<QString, QString> values;
-    const auto fieldChoicesWithExportValues = m_field->choicesWithExportValues();
-    for (const QPair<QString, QString> &value : fieldChoicesWithExportValues) {
+    const auto fieldChoicesWithExportValues =
+        m_field->choicesWithExportValues();
+    for(const QPair<QString, QString>& value : fieldChoicesWithExportValues)
+    {
         values.insert(value.first, value.second);
     }
     setExportValues(values);
@@ -335,7 +363,8 @@ void PopplerFormFieldChoice::setPrintable(bool value)
 
 Okular::FormFieldChoice::ChoiceType PopplerFormFieldChoice::choiceType() const
 {
-    switch (m_field->choiceType()) {
+    switch(m_field->choiceType())
+    {
     case Poppler::FormFieldChoice::ComboBox:
         return Okular::FormFieldChoice::ComboBox;
     case Poppler::FormFieldChoice::ListBox:
@@ -364,7 +393,7 @@ QList<int> PopplerFormFieldChoice::currentChoices() const
     return m_field->currentChoices();
 }
 
-void PopplerFormFieldChoice::setCurrentChoices(const QList<int> &choices)
+void PopplerFormFieldChoice::setCurrentChoices(const QList<int>& choices)
 {
     m_field->setCurrentChoices(choices);
 }
@@ -374,7 +403,7 @@ QString PopplerFormFieldChoice::editChoice() const
     return m_field->editChoice();
 }
 
-void PopplerFormFieldChoice::setEditChoice(const QString &text)
+void PopplerFormFieldChoice::setEditChoice(const QString& text)
 {
     m_field->setEditChoice(text);
 }
@@ -389,19 +418,26 @@ bool PopplerFormFieldChoice::canBeSpellChecked() const
     return m_field->canBeSpellChecked();
 }
 
-PopplerFormFieldSignature::PopplerFormFieldSignature(std::unique_ptr<Poppler::FormFieldSignature> field)
-    : Okular::FormFieldSignature()
-    , m_field(std::move(field))
+PopplerFormFieldSignature::PopplerFormFieldSignature(
+    std::unique_ptr<Poppler::FormFieldSignature> field) :
+    Okular::FormFieldSignature(),
+    m_field(std::move(field))
 {
     m_rect = Okular::NormalizedRect::fromQRectF(m_field->rect());
     m_id = m_field->id();
-    int validateOptions = Poppler::FormFieldSignature::ValidateVerifyCertificate;
+    int validateOptions =
+        Poppler::FormFieldSignature::ValidateVerifyCertificate;
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(21, 10, 0)
-    if (!PDFSettings::checkOCSPServers()) {
-        validateOptions = validateOptions | Poppler::FormFieldSignature::ValidateWithoutOCSPRevocationCheck;
+    if(!PDFSettings::checkOCSPServers())
+    {
+        validateOptions =
+            validateOptions |
+            Poppler::FormFieldSignature::ValidateWithoutOCSPRevocationCheck;
     }
 #endif
-    m_info = new PopplerSignatureInfo(m_field->validate(static_cast<Poppler::FormFieldSignature::ValidateOptions>(validateOptions)));
+    m_info = new PopplerSignatureInfo(m_field->validate(
+        static_cast<Poppler::FormFieldSignature::ValidateOptions>(
+            validateOptions)));
     SET_ACTIONS
 }
 
@@ -445,9 +481,11 @@ bool PopplerFormFieldSignature::isVisible() const
     return m_field->isVisible();
 }
 
-PopplerFormFieldSignature::SignatureType PopplerFormFieldSignature::signatureType() const
+PopplerFormFieldSignature::SignatureType
+    PopplerFormFieldSignature::signatureType() const
 {
-    switch (m_field->signatureType()) {
+    switch(m_field->signatureType())
+    {
     case Poppler::FormFieldSignature::AdbePkcs7sha1:
         return Okular::FormFieldSignature::AdbePkcs7sha1;
     case Poppler::FormFieldSignature::AdbePkcs7detached:
@@ -463,17 +501,19 @@ PopplerFormFieldSignature::SignatureType PopplerFormFieldSignature::signatureTyp
     }
 }
 
-const Okular::SignatureInfo &PopplerFormFieldSignature::signatureInfo() const
+const Okular::SignatureInfo& PopplerFormFieldSignature::signatureInfo() const
 {
     return *m_info;
 }
 
-bool PopplerFormFieldSignature::sign(const Okular::NewSignatureData &oData, const QString &newPath) const
+bool PopplerFormFieldSignature::sign(const Okular::NewSignatureData& oData,
+                                     const QString& newPath) const
 {
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(22, 2, 0)
     Poppler::PDFConverter::NewSignatureData pData;
     PDFGenerator::okularToPoppler(oData, &pData);
-    return m_field->sign(newPath, pData) == Poppler::FormFieldSignature::SigningSuccess;
+    return m_field->sign(newPath, pData) ==
+           Poppler::FormFieldSignature::SigningSuccess;
 #else
     Q_UNUSED(oData)
     Q_UNUSED(newPath)

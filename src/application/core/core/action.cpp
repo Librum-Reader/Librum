@@ -29,15 +29,15 @@ public:
         qDeleteAll(m_nextActions);
     }
 
-    ActionPrivate(const ActionPrivate &) = delete;
-    ActionPrivate &operator=(const ActionPrivate &) = delete;
+    ActionPrivate(const ActionPrivate&) = delete;
+    ActionPrivate& operator=(const ActionPrivate&) = delete;
 
     QVariant m_nativeId;
-    QVector<Action *> m_nextActions;
+    QVector<Action*> m_nextActions;
 };
 
-Action::Action(ActionPrivate &dd)
-    : d_ptr(&dd)
+Action::Action(ActionPrivate& dd) :
+    d_ptr(&dd)
 {
 }
 
@@ -51,7 +51,7 @@ QString Action::actionTip() const
     return QLatin1String("");
 }
 
-void Action::setNativeId(const QVariant &id)
+void Action::setNativeId(const QVariant& id)
 {
     Q_D(Action);
     d->m_nativeId = id;
@@ -63,13 +63,13 @@ QVariant Action::nativeId() const
     return d->m_nativeId;
 }
 
-QVector<Action *> Action::nextActions() const
+QVector<Action*> Action::nextActions() const
 {
     Q_D(const Action);
     return d->m_nextActions;
 }
 
-void Action::setNextActions(const QVector<Action *> &actions)
+void Action::setNextActions(const QVector<Action*>& actions)
 {
     Q_D(Action);
     qDeleteAll(d->m_nextActions);
@@ -81,17 +81,19 @@ void Action::setNextActions(const QVector<Action *> &actions)
 class Okular::GotoActionPrivate : public Okular::ActionPrivate
 {
 public:
-    GotoActionPrivate(const QString &fileName, const DocumentViewport &viewport)
-        : ActionPrivate()
-        , m_extFileName(fileName)
-        , m_vp(viewport)
+    GotoActionPrivate(const QString& fileName,
+                      const DocumentViewport& viewport) :
+        ActionPrivate(),
+        m_extFileName(fileName),
+        m_vp(viewport)
     {
     }
 
-    GotoActionPrivate(const QString &fileName, const QString &namedDestination)
-        : ActionPrivate()
-        , m_extFileName(fileName)
-        , m_dest(namedDestination)
+    GotoActionPrivate(const QString& fileName,
+                      const QString& namedDestination) :
+        ActionPrivate(),
+        m_extFileName(fileName),
+        m_dest(namedDestination)
     {
     }
 
@@ -100,13 +102,15 @@ public:
     QString m_dest;
 };
 
-GotoAction::GotoAction(const QString &fileName, const DocumentViewport &viewport)
-    : Action(*new GotoActionPrivate(fileName, viewport))
+GotoAction::GotoAction(const QString& fileName,
+                       const DocumentViewport& viewport) :
+    Action(*new GotoActionPrivate(fileName, viewport))
 {
 }
 
-GotoAction::GotoAction(const QString &fileName, const QString &namedDestination)
-    : Action(*new GotoActionPrivate(fileName, namedDestination))
+GotoAction::GotoAction(const QString& fileName,
+                       const QString& namedDestination) :
+    Action(*new GotoActionPrivate(fileName, namedDestination))
 {
 }
 
@@ -122,7 +126,11 @@ Action::ActionType GotoAction::actionType() const
 QString GotoAction::actionTip() const
 {
     Q_D(const GotoAction);
-    return d->m_extFileName.isEmpty() ? (d->m_vp.isValid() ? i18n("Go to page %1", d->m_vp.pageNumber + 1) : QLatin1String("")) : i18n("Open external file");
+    return d->m_extFileName.isEmpty()
+               ? (d->m_vp.isValid()
+                      ? i18n("Go to page %1", d->m_vp.pageNumber + 1)
+                      : QLatin1String(""))
+               : i18n("Open external file");
 }
 
 bool GotoAction::isExternal() const
@@ -154,10 +162,10 @@ QString GotoAction::destinationName() const
 class Okular::ExecuteActionPrivate : public Okular::ActionPrivate
 {
 public:
-    ExecuteActionPrivate(const QString &file, const QString &parameters)
-        : ActionPrivate()
-        , m_fileName(file)
-        , m_parameters(parameters)
+    ExecuteActionPrivate(const QString& file, const QString& parameters) :
+        ActionPrivate(),
+        m_fileName(file),
+        m_parameters(parameters)
     {
     }
 
@@ -165,8 +173,8 @@ public:
     QString m_parameters;
 };
 
-ExecuteAction::ExecuteAction(const QString &file, const QString &parameters)
-    : Action(*new ExecuteActionPrivate(file, parameters))
+ExecuteAction::ExecuteAction(const QString& file, const QString& parameters) :
+    Action(*new ExecuteActionPrivate(file, parameters))
 {
 }
 
@@ -202,17 +210,17 @@ QString ExecuteAction::parameters() const
 class Okular::BrowseActionPrivate : public Okular::ActionPrivate
 {
 public:
-    explicit BrowseActionPrivate(const QUrl &url)
-        : ActionPrivate()
-        , m_url(url)
+    explicit BrowseActionPrivate(const QUrl& url) :
+        ActionPrivate(),
+        m_url(url)
     {
     }
 
     QUrl m_url;
 };
 
-BrowseAction::BrowseAction(const QUrl &url)
-    : Action(*new BrowseActionPrivate(url))
+BrowseAction::BrowseAction(const QUrl& url) :
+    Action(*new BrowseActionPrivate(url))
 {
 }
 
@@ -230,7 +238,8 @@ QString BrowseAction::actionTip() const
     Q_D(const Okular::BrowseAction);
     QString source;
     int row = 0, col = 0;
-    if (extractLilyPondSourceReference(d->m_url, &source, &row, &col)) {
+    if(extractLilyPondSourceReference(d->m_url, &source, &row, &col))
+    {
         return sourceReferenceToolTip(source, row, col);
     }
     return d->m_url.toDisplayString();
@@ -247,17 +256,18 @@ QUrl BrowseAction::url() const
 class Okular::DocumentActionPrivate : public Okular::ActionPrivate
 {
 public:
-    explicit DocumentActionPrivate(enum DocumentAction::DocumentActionType documentActionType)
-        : ActionPrivate()
-        , m_type(documentActionType)
+    explicit DocumentActionPrivate(
+        enum DocumentAction::DocumentActionType documentActionType) :
+        ActionPrivate(),
+        m_type(documentActionType)
     {
     }
 
     DocumentAction::DocumentActionType m_type;
 };
 
-DocumentAction::DocumentAction(enum DocumentActionType documentActionType)
-    : Action(*new DocumentActionPrivate(documentActionType))
+DocumentAction::DocumentAction(enum DocumentActionType documentActionType) :
+    Action(*new DocumentActionPrivate(documentActionType))
 {
 }
 
@@ -279,7 +289,8 @@ Action::ActionType DocumentAction::actionType() const
 QString DocumentAction::actionTip() const
 {
     Q_D(const Okular::DocumentAction);
-    switch (d->m_type) {
+    switch(d->m_type)
+    {
     case PageFirst:
         return i18n("First Page");
     case PagePrev:
@@ -314,13 +325,14 @@ QString DocumentAction::actionTip() const
 class Okular::SoundActionPrivate : public Okular::ActionPrivate
 {
 public:
-    SoundActionPrivate(double volume, bool sync, bool repeat, bool mix, Okular::Sound *sound)
-        : ActionPrivate()
-        , m_volume(volume)
-        , m_sync(sync)
-        , m_repeat(repeat)
-        , m_mix(mix)
-        , m_sound(sound)
+    SoundActionPrivate(double volume, bool sync, bool repeat, bool mix,
+                       Okular::Sound* sound) :
+        ActionPrivate(),
+        m_volume(volume),
+        m_sync(sync),
+        m_repeat(repeat),
+        m_mix(mix),
+        m_sound(sound)
     {
     }
 
@@ -333,11 +345,12 @@ public:
     bool m_sync : 1;
     bool m_repeat : 1;
     bool m_mix : 1;
-    Okular::Sound *m_sound;
+    Okular::Sound* m_sound;
 };
 
-SoundAction::SoundAction(double volume, bool sync, bool repeat, bool mix, Okular::Sound *sound)
-    : Action(*new SoundActionPrivate(volume, sync, repeat, mix, sound))
+SoundAction::SoundAction(double volume, bool sync, bool repeat, bool mix,
+                         Okular::Sound* sound) :
+    Action(*new SoundActionPrivate(volume, sync, repeat, mix, sound))
 {
 }
 
@@ -379,7 +392,7 @@ bool SoundAction::mix() const
     return d->m_mix;
 }
 
-Okular::Sound *SoundAction::sound() const
+Okular::Sound* SoundAction::sound() const
 {
     Q_D(const Okular::SoundAction);
     return d->m_sound;
@@ -390,10 +403,10 @@ Okular::Sound *SoundAction::sound() const
 class Okular::ScriptActionPrivate : public Okular::ActionPrivate
 {
 public:
-    ScriptActionPrivate(enum ScriptType type, const QString &script)
-        : ActionPrivate()
-        , m_scriptType(type)
-        , m_script(script)
+    ScriptActionPrivate(enum ScriptType type, const QString& script) :
+        ActionPrivate(),
+        m_scriptType(type),
+        m_script(script)
     {
     }
 
@@ -401,8 +414,8 @@ public:
     QString m_script;
 };
 
-ScriptAction::ScriptAction(enum ScriptType type, const QString &script)
-    : Action(*new ScriptActionPrivate(type, script))
+ScriptAction::ScriptAction(enum ScriptType type, const QString& script) :
+    Action(*new ScriptActionPrivate(type, script))
 {
 }
 
@@ -418,7 +431,8 @@ Action::ActionType ScriptAction::actionType() const
 QString ScriptAction::actionTip() const
 {
     Q_D(const Okular::ScriptAction);
-    switch (d->m_scriptType) {
+    switch(d->m_scriptType)
+    {
     case JavaScript:
         return i18n("JavaScript Script");
     }
@@ -443,19 +457,19 @@ QString ScriptAction::script() const
 class Okular::MovieActionPrivate : public Okular::ActionPrivate
 {
 public:
-    explicit MovieActionPrivate(MovieAction::OperationType operation)
-        : ActionPrivate()
-        , m_operation(operation)
-        , m_annotation(nullptr)
+    explicit MovieActionPrivate(MovieAction::OperationType operation) :
+        ActionPrivate(),
+        m_operation(operation),
+        m_annotation(nullptr)
     {
     }
 
     MovieAction::OperationType m_operation;
-    MovieAnnotation *m_annotation;
+    MovieAnnotation* m_annotation;
 };
 
-MovieAction::MovieAction(OperationType operation)
-    : Action(*new MovieActionPrivate(operation))
+MovieAction::MovieAction(OperationType operation) :
+    Action(*new MovieActionPrivate(operation))
 {
 }
 
@@ -479,13 +493,13 @@ MovieAction::OperationType MovieAction::operation() const
     return d->m_operation;
 }
 
-void MovieAction::setAnnotation(MovieAnnotation *annotation)
+void MovieAction::setAnnotation(MovieAnnotation* annotation)
 {
     Q_D(Okular::MovieAction);
     d->m_annotation = annotation;
 }
 
-MovieAnnotation *MovieAction::annotation() const
+MovieAnnotation* MovieAction::annotation() const
 {
     Q_D(const Okular::MovieAction);
     return d->m_annotation;
@@ -496,25 +510,29 @@ MovieAnnotation *MovieAction::annotation() const
 class Okular::RenditionActionPrivate : public Okular::ActionPrivate
 {
 public:
-    RenditionActionPrivate(RenditionAction::OperationType operation, Okular::Movie *movie, enum ScriptType scriptType, const QString &script)
-        : ActionPrivate()
-        , m_operation(operation)
-        , m_movie(movie)
-        , m_scriptType(scriptType)
-        , m_script(script)
-        , m_annotation(nullptr)
+    RenditionActionPrivate(RenditionAction::OperationType operation,
+                           Okular::Movie* movie, enum ScriptType scriptType,
+                           const QString& script) :
+        ActionPrivate(),
+        m_operation(operation),
+        m_movie(movie),
+        m_scriptType(scriptType),
+        m_script(script),
+        m_annotation(nullptr)
     {
     }
 
     RenditionAction::OperationType m_operation;
-    Okular::Movie *m_movie;
+    Okular::Movie* m_movie;
     ScriptType m_scriptType;
     QString m_script;
-    ScreenAnnotation *m_annotation;
+    ScreenAnnotation* m_annotation;
 };
 
-RenditionAction::RenditionAction(OperationType operation, Okular::Movie *movie, enum ScriptType scriptType, const QString &script)
-    : Action(*new RenditionActionPrivate(operation, movie, scriptType, script))
+RenditionAction::RenditionAction(OperationType operation, Okular::Movie* movie,
+                                 enum ScriptType scriptType,
+                                 const QString& script) :
+    Action(*new RenditionActionPrivate(operation, movie, scriptType, script))
 {
 }
 
@@ -531,10 +549,12 @@ QString RenditionAction::actionTip() const
 {
     Q_D(const Okular::RenditionAction);
 
-    switch (d->m_operation) {
+    switch(d->m_operation)
+    {
     default:
     case None:
-        switch (d->m_scriptType) {
+        switch(d->m_scriptType)
+        {
         case JavaScript:
             return i18n("JavaScript Script");
         default:
@@ -557,7 +577,7 @@ RenditionAction::OperationType RenditionAction::operation() const
     return d->m_operation;
 }
 
-Okular::Movie *RenditionAction::movie() const
+Okular::Movie* RenditionAction::movie() const
 {
     Q_D(const Okular::RenditionAction);
     return d->m_movie;
@@ -575,20 +595,20 @@ QString RenditionAction::script() const
     return d->m_script;
 }
 
-void RenditionAction::setAnnotation(ScreenAnnotation *annotation)
+void RenditionAction::setAnnotation(ScreenAnnotation* annotation)
 {
     Q_D(Okular::RenditionAction);
     d->m_annotation = annotation;
 }
 
-ScreenAnnotation *RenditionAction::annotation() const
+ScreenAnnotation* RenditionAction::annotation() const
 {
     Q_D(const Okular::RenditionAction);
     return d->m_annotation;
 }
 
-BackendOpaqueAction::BackendOpaqueAction()
-    : Action(*new ActionPrivate())
+BackendOpaqueAction::BackendOpaqueAction() :
+    Action(*new ActionPrivate())
 {
 }
 

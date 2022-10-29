@@ -1,21 +1,19 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-#include <config.h>
-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 #include "TeXFontDefinition.h"
+#include <config.h>
 #include "debug_dvi.h"
 #include "dviRenderer.h"
 #ifdef HAVE_FREETYPE
-#include "TeXFont_PFB.h"
+    #include "TeXFont_PFB.h"
 #endif
+#include <KLocalizedString>
+#include <QFile>
+#include <QLoggingCategory>
 #include "TeXFont_PK.h"
 #include "TeXFont_TFM.h"
 #include "debug_dvi.h"
 #include "xdvi.h"
-
-#include <KLocalizedString>
-
-#include <QFile>
-#include <QLoggingCategory>
 
 extern const int MFResolutions[];
 
@@ -31,10 +29,16 @@ extern const int MFResolutions[];
 
 // #define DEBUG_FONT
 
-TeXFontDefinition::TeXFontDefinition(const QString &nfontname, double _displayResolution_in_dpi, quint32 chk, qint32 _scaled_size_in_DVI_units, class fontPool *pool, double _enlargement)
+TeXFontDefinition::TeXFontDefinition(const QString& nfontname,
+                                     double _displayResolution_in_dpi,
+                                     quint32 chk,
+                                     qint32 _scaled_size_in_DVI_units,
+                                     class fontPool* pool, double _enlargement)
 {
 #ifdef DEBUG_FONT
-    qCDebug(OkularDviDebug) << "TeXFontDefinition::TeXFontDefinition(...); fontname=" << nfontname << ", enlargement=" << _enlargement;
+    qCDebug(OkularDviDebug)
+        << "TeXFontDefinition::TeXFontDefinition(...); fontname=" << nfontname
+        << ", enlargement=" << _enlargement;
 #endif
 
     enlargement = _enlargement;
@@ -59,33 +63,43 @@ TeXFontDefinition::TeXFontDefinition(const QString &nfontname, double _displayRe
 TeXFontDefinition::~TeXFontDefinition()
 {
 #ifdef DEBUG_FONT
-    qCDebug(OkularDviDebug) << "discarding font " << fontname << " at " << (int)(enlargement * MFResolutions[font_pool->getMetafontMode()] + 0.5) << " dpi";
+    qCDebug(OkularDviDebug)
+        << "discarding font " << fontname << " at "
+        << (int)(enlargement * MFResolutions[font_pool->getMetafontMode()] +
+                 0.5)
+        << " dpi";
 #endif
 
-    if (font != nullptr) {
+    if(font != nullptr)
+    {
         delete font;
         font = nullptr;
     }
-    if (macrotable != nullptr) {
+    if(macrotable != nullptr)
+    {
         delete[] macrotable;
         macrotable = nullptr;
     }
 
-    if (flags & FONT_LOADED) {
-        if (file != nullptr) {
+    if(flags & FONT_LOADED)
+    {
+        if(file != nullptr)
+        {
             fclose(file);
             file = nullptr;
         }
-        if (flags & FONT_VIRTUAL) {
+        if(flags & FONT_VIRTUAL)
+        {
             vf_table.clear();
         }
     }
 }
 
-void TeXFontDefinition::fontNameReceiver(const QString &fname)
+void TeXFontDefinition::fontNameReceiver(const QString& fname)
 {
 #ifdef DEBUG_FONT
-    qCDebug(OkularDviDebug) << "void TeXFontDefinition::fontNameReceiver( " << fname << " )";
+    qCDebug(OkularDviDebug)
+        << "void TeXFontDefinition::fontNameReceiver( " << fname << " )";
 #endif
 
     flags |= TeXFontDefinition::FONT_LOADED;
@@ -99,13 +113,19 @@ void TeXFontDefinition::fontNameReceiver(const QString &fname)
     // Check if the file could be opened. If not, try to find the file
     // in the DVI file's directory. If that works, modify the filename
     // accordingly and go on.
-    if (file == nullptr) {
-        QString filename_test(font_pool->getExtraSearchPath() + QLatin1Char('/') + filename);
+    if(file == nullptr)
+    {
+        QString filename_test(font_pool->getExtraSearchPath() +
+                              QLatin1Char('/') + filename);
         file = fopen(QFile::encodeName(filename_test).constData(), "r");
-        if (file == nullptr) {
-            qCCritical(OkularDviDebug) << i18n("Cannot find font %1, file %2.", fontname, filename);
+        if(file == nullptr)
+        {
+            qCCritical(OkularDviDebug)
+                << i18n("Cannot find font %1, file %2.", fontname, filename);
             return;
-        } else {
+        }
+        else
+        {
             filename = filename_test;
         }
     }
@@ -113,22 +133,28 @@ void TeXFontDefinition::fontNameReceiver(const QString &fname)
     set_char_p = &dviRenderer::set_char;
     int magic = two(file);
 
-    if (fname.endsWith(QLatin1String("pk"))) {
-        if (magic == PK_MAGIC) {
+    if(fname.endsWith(QLatin1String("pk")))
+    {
+        if(magic == PK_MAGIC)
+        {
             fclose(file);
             file = nullptr;
             font = new TeXFont_PK(this);
             set_char_p = &dviRenderer::set_char;
-            if ((checksum != 0) && (checksum != font->checksum)) {
-                qCWarning(OkularDviDebug) << i18n("Checksum mismatch for font file %1", filename);
+            if((checksum != 0) && (checksum != font->checksum))
+            {
+                qCWarning(OkularDviDebug)
+                    << i18n("Checksum mismatch for font file %1", filename);
             }
             fontType = TEX_PK;
             return;
         }
     }
 
-    if (fname.endsWith(QLatin1String(".vf"))) {
-        if (magic == VF_MAGIC) {
+    if(fname.endsWith(QLatin1String(".vf")))
+    {
+        if(magic == VF_MAGIC)
+        {
             read_VF_index();
             set_char_p = &dviRenderer::set_vf_char;
             fontType = TEX_VIRTUAL;
@@ -136,7 +162,8 @@ void TeXFontDefinition::fontNameReceiver(const QString &fname)
         }
     }
 
-    if (fname.endsWith(QLatin1String(".tfm"))) {
+    if(fname.endsWith(QLatin1String(".tfm")))
+    {
         fclose(file);
         file = nullptr;
         font = new TeXFont_TFM(this);
@@ -151,17 +178,23 @@ void TeXFontDefinition::fontNameReceiver(const QString &fname)
     file = nullptr;
 #ifdef HAVE_FREETYPE
     // Find the encoding for that font
-    const QString &enc = font_pool->fontsByTeXName.findEncoding(fontname);
+    const QString& enc = font_pool->fontsByTeXName.findEncoding(fontname);
 
-    if (enc.isEmpty() == false) {
-#ifdef DEBUG_FONT
-        qCDebug(OkularDviDebug) << "Font " << fontname << " uses encoding " << enc;
-#endif
-        font = new TeXFont_PFB(this, font_pool->encodingPool.findByName(enc), font_pool->fontsByTeXName.findSlant(fontname));
-    } else {
-#ifdef DEBUG_FONT
-        qCDebug(OkularDviDebug) << "Font " << fontname << " does not have an encoding.";
-#endif
+    if(enc.isEmpty() == false)
+    {
+    #ifdef DEBUG_FONT
+        qCDebug(OkularDviDebug)
+            << "Font " << fontname << " uses encoding " << enc;
+    #endif
+        font = new TeXFont_PFB(this, font_pool->encodingPool.findByName(enc),
+                               font_pool->fontsByTeXName.findSlant(fontname));
+    }
+    else
+    {
+    #ifdef DEBUG_FONT
+        qCDebug(OkularDviDebug)
+            << "Font " << fontname << " does not have an encoding.";
+    #endif
         font = new TeXFont_PFB(this);
     }
 
@@ -171,28 +204,34 @@ void TeXFontDefinition::fontNameReceiver(const QString &fname)
 #else
     // If we don't have the FreeType library, we should never have
     // reached this point. Complain, and leave this font blank
-    qCCritical(OkularDviDebug) << i18n("Cannot recognize format for font file %1", filename);
+    qCCritical(OkularDviDebug)
+        << i18n("Cannot recognize format for font file %1", filename);
 #endif
 }
 
 void TeXFontDefinition::reset()
 {
-    if (font != nullptr) {
+    if(font != nullptr)
+    {
         delete font;
         font = nullptr;
     }
 
-    if (macrotable != nullptr) {
+    if(macrotable != nullptr)
+    {
         delete[] macrotable;
         macrotable = nullptr;
     }
 
-    if (flags & FONT_LOADED) {
-        if (file != nullptr) {
+    if(flags & FONT_LOADED)
+    {
+        if(file != nullptr)
+        {
             fclose(file);
             file = nullptr;
         }
-        if (flags & FONT_VIRTUAL) {
+        if(flags & FONT_VIRTUAL)
+        {
             vf_table.clear();
         }
     }
@@ -205,7 +244,8 @@ void TeXFontDefinition::reset()
 void TeXFontDefinition::setDisplayResolution(double _displayResolution_in_dpi)
 {
     displayResolution_in_dpi = _displayResolution_in_dpi;
-    if (font != nullptr) {
+    if(font != nullptr)
+    {
         font->setDisplayResolution();
     }
 }
@@ -219,16 +259,19 @@ void TeXFontDefinition::mark_as_used()
     qCDebug(OkularDviDebug) << "TeXFontDefinition::mark_as_used()";
 #endif
 
-    if (flags & TeXFontDefinition::FONT_IN_USE) {
+    if(flags & TeXFontDefinition::FONT_IN_USE)
+    {
         return;
     }
 
     flags |= TeXFontDefinition::FONT_IN_USE;
 
     // For virtual fonts, also go through the list of referred fonts
-    if (flags & TeXFontDefinition::FONT_VIRTUAL) {
-        QHashIterator<int, TeXFontDefinition *> it(vf_table);
-        while (it.hasNext()) {
+    if(flags & TeXFontDefinition::FONT_VIRTUAL)
+    {
+        QHashIterator<int, TeXFontDefinition*> it(vf_table);
+        while(it.hasNext())
+        {
             it.next();
             it.value()->flags |= TeXFontDefinition::FONT_IN_USE;
         }
@@ -237,15 +280,17 @@ void TeXFontDefinition::mark_as_used()
 
 macro::macro()
 {
-    pos = nullptr;                                   /* address of first byte of macro */
-    end = nullptr;                                   /* address of last+1 byte */
-    dvi_advance_in_units_of_design_size_by_2e20 = 0; /* DVI units to move reference point */
+    pos = nullptr; /* address of first byte of macro */
+    end = nullptr; /* address of last+1 byte */
+    dvi_advance_in_units_of_design_size_by_2e20 =
+        0; /* DVI units to move reference point */
     free_me = false;
 }
 
 macro::~macro()
 {
-    if ((pos != nullptr) && (free_me == true)) {
+    if((pos != nullptr) && (free_me == true))
+    {
         delete[] pos;
     }
 }

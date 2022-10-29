@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 
 /* glyph.cpp
  *
@@ -7,10 +8,9 @@
  * written by Stefan Kebekus, originally based on code by Paul Vojta
  * and a large number of co-authors */
 
-#include <config.h>
-
-#include "debug_dvi.h"
 #include "glyph.h"
+#include <config.h>
+#include "debug_dvi.h"
 
 bitmap::bitmap()
 {

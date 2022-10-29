@@ -1,11 +1,13 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 /*
  * SPDX-FileCopyrightText: 1994 Paul Vojta. All rights reserved.
  *
  * SPDX-License-Identifier: BSD-2-Clause
  *
  * NOTE:
- *        xdvi is based on prior work as noted in the modification history, below.
+ *        xdvi is based on prior work as noted in the modification history,
+ * below.
  */
 
 /*
@@ -32,16 +34,12 @@
  */
 
 #include <config.h>
-
-#include "debug_dvi.h"
-#include "xdvi.h"
-
 #include <KLocalizedString>
 #include <KMessageBox>
-
-#include <cstdlib>
-
 #include <QLoggingCategory>
+#include <cstdlib>
+#include "debug_dvi.h"
+#include "xdvi.h"
 
 /*
  *   General utility routines.
@@ -51,7 +49,7 @@
  *   Print error message and quit.
  */
 
-void oops(const QString &message)
+void oops(const QString& message)
 {
     qCCritical(OkularDviDebug) << "Fatal Error:" << message;
 
@@ -69,28 +67,31 @@ please report the problem."));
  * Read size bytes from the FILE fp, constructing them into a
  * signed/unsigned integer.
  */
-unsigned long num(FILE *fp, int size)
+unsigned long num(FILE* fp, int size)
 {
     long x = 0;
 
-    while (size--) {
+    while(size--)
+    {
         x = (x << 8) | one(fp);
     }
     return x;
 }
 
-long snum(FILE *fp, int size)
+long snum(FILE* fp, int size)
 {
     long x;
 
 #ifdef __STDC__
-    x = (signed char)getc(fp); // NOLINT(bugprone-signed-char-misuse) This code is decades old, so prefer not to touch it
+    x = (signed char)getc(fp);  // NOLINT(bugprone-signed-char-misuse) This code
+                                // is decades old, so prefer not to touch it
 #else
     x = (unsigned char)getc(fp);
-    if (x & 0x80)
+    if(x & 0x80)
         x -= 0x100;
 #endif
-    while (--size) {
+    while(--size)
+    {
         x = (x << 8) | one(fp);
     }
     return x;

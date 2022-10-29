@@ -5,14 +5,11 @@
 */
 
 #include <QTest>
-
+#include "../document.h"
 #include "core/document.h"
 #include "core/generator.h"
 #include "core/observer.h"
 #include "core/page.h"
-
-#include "../document.h"
-
 #include "settings_core.h"
 
 class ComicBookGeneratorTest : public QObject
@@ -37,13 +34,14 @@ void ComicBookGeneratorTest::cleanupTestCase()
 void ComicBookGeneratorTest::testRotatedImage()
 {
     ComicBook::Document document;
-    const QString testFile = QStringLiteral(KDESRCDIR "autotests/data/rotated_cb.cbz");
+    const QString testFile =
+        QStringLiteral(KDESRCDIR "autotests/data/rotated_cb.cbz");
     QVERIFY(document.open(testFile));
 
-    QVector<Okular::Page *> pagesVector;
+    QVector<Okular::Page*> pagesVector;
     document.pages(&pagesVector);
 
-    const Okular::Page *p = pagesVector[0];
+    const Okular::Page* p = pagesVector[0];
     QVERIFY(p->height() > p->width());
 
     const QImage image = document.pageImage(0);

@@ -14,14 +14,14 @@ using namespace Okular;
 class PageTransition::Private
 {
 public:
-    explicit Private(Type type)
-        : m_type(type)
-        , m_duration(1)
-        , m_alignment(Horizontal)
-        , m_direction(Inward)
-        , m_angle(0)
-        , m_scale(1.0)
-        , m_rectangular(false)
+    explicit Private(Type type) :
+        m_type(type),
+        m_duration(1),
+        m_alignment(Horizontal),
+        m_direction(Inward),
+        m_angle(0),
+        m_scale(1.0),
+        m_rectangular(false)
     {
     }
 
@@ -34,19 +34,20 @@ public:
     bool m_rectangular;
 };
 
-PageTransition::PageTransition(Type type)
-    : d(new Private(type))
+PageTransition::PageTransition(Type type) :
+    d(new Private(type))
 {
 }
 
-PageTransition::PageTransition(const PageTransition &other)
-    : d(new Private(*other.d))
+PageTransition::PageTransition(const PageTransition& other) :
+    d(new Private(*other.d))
 {
 }
 
-PageTransition &PageTransition::operator=(const PageTransition &other)
+PageTransition& PageTransition::operator=(const PageTransition& other)
 {
-    if (this == &other) {
+    if(this == &other)
+    {
         return *this;
     }
 

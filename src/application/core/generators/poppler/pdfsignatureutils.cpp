@@ -5,13 +5,13 @@
 */
 
 #include "pdfsignatureutils.h"
-
 #include <KLocalizedString>
 #include <QDebug>
 #include <QInputDialog>
 
-PopplerCertificateInfo::PopplerCertificateInfo(const Poppler::CertificateInfo &info)
-    : m_info(info)
+PopplerCertificateInfo::PopplerCertificateInfo(
+    const Poppler::CertificateInfo& info) :
+    m_info(info)
 {
 }
 
@@ -34,15 +34,19 @@ QByteArray PopplerCertificateInfo::serialNumber() const
     return m_info.serialNumber();
 }
 
-QString PopplerCertificateInfo::issuerInfo(PopplerCertificateInfo::EntityInfoKey key) const
+QString PopplerCertificateInfo::issuerInfo(
+    PopplerCertificateInfo::EntityInfoKey key) const
 {
-    QString str = m_info.issuerInfo(static_cast<Poppler::CertificateInfo::EntityInfoKey>(key));
+    QString str = m_info.issuerInfo(
+        static_cast<Poppler::CertificateInfo::EntityInfoKey>(key));
     return !str.isEmpty() ? str : i18n("Not Available");
 }
 
-QString PopplerCertificateInfo::subjectInfo(PopplerCertificateInfo::EntityInfoKey key) const
+QString PopplerCertificateInfo::subjectInfo(
+    PopplerCertificateInfo::EntityInfoKey key) const
 {
-    QString str = m_info.subjectInfo(static_cast<Poppler::CertificateInfo::EntityInfoKey>(key));
+    QString str = m_info.subjectInfo(
+        static_cast<Poppler::CertificateInfo::EntityInfoKey>(key));
     return !str.isEmpty() ? str : i18n("Not Available");
 }
 
@@ -65,32 +69,42 @@ QDateTime PopplerCertificateInfo::validityEnd() const
     return m_info.validityEnd();
 }
 
-PopplerCertificateInfo::KeyUsageExtensions PopplerCertificateInfo::keyUsageExtensions() const
+PopplerCertificateInfo::KeyUsageExtensions
+    PopplerCertificateInfo::keyUsageExtensions() const
 {
-    Poppler::CertificateInfo::KeyUsageExtensions popplerKu = m_info.keyUsageExtensions();
+    Poppler::CertificateInfo::KeyUsageExtensions popplerKu =
+        m_info.keyUsageExtensions();
     KeyUsageExtensions ku = KuNone;
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuDigitalSignature)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuDigitalSignature))
+    {
         ku |= KuDigitalSignature;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuNonRepudiation)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuNonRepudiation))
+    {
         ku |= KuNonRepudiation;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuKeyEncipherment)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuKeyEncipherment))
+    {
         ku |= KuKeyEncipherment;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuDataEncipherment)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuDataEncipherment))
+    {
         ku |= KuDataEncipherment;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuKeyAgreement)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuKeyAgreement))
+    {
         ku |= KuKeyAgreement;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuKeyCertSign)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuKeyCertSign))
+    {
         ku |= KuKeyCertSign;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuClrSign)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuClrSign))
+    {
         ku |= KuClrSign;
     }
-    if (popplerKu.testFlag(Poppler::CertificateInfo::KuEncipherOnly)) {
+    if(popplerKu.testFlag(Poppler::CertificateInfo::KuEncipherOnly))
+    {
         ku |= KuEncipherOnly;
     }
     return ku;
@@ -101,9 +115,11 @@ QByteArray PopplerCertificateInfo::publicKey() const
     return m_info.publicKey();
 }
 
-PopplerCertificateInfo::PublicKeyType PopplerCertificateInfo::publicKeyType() const
+PopplerCertificateInfo::PublicKeyType PopplerCertificateInfo::publicKeyType()
+    const
 {
-    switch (m_info.publicKeyType()) {
+    switch(m_info.publicKeyType())
+    {
     case Poppler::CertificateInfo::RsaKey:
         return RsaKey;
     case Poppler::CertificateInfo::DsaKey:
@@ -132,7 +148,7 @@ QByteArray PopplerCertificateInfo::certificateData() const
     return m_info.certificateData();
 }
 
-bool PopplerCertificateInfo::checkPassword(const QString &password) const
+bool PopplerCertificateInfo::checkPassword(const QString& password) const
 {
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(21, 1, 0)
     return m_info.checkPassword(password);
@@ -142,8 +158,9 @@ bool PopplerCertificateInfo::checkPassword(const QString &password) const
 #endif
 }
 
-PopplerSignatureInfo::PopplerSignatureInfo(const Poppler::SignatureValidationInfo &info)
-    : m_info(info)
+PopplerSignatureInfo::PopplerSignatureInfo(
+    const Poppler::SignatureValidationInfo& info) :
+    m_info(info)
 {
     m_certfiticateInfo = new PopplerCertificateInfo(m_info.certificateInfo());
 }
@@ -153,9 +170,11 @@ PopplerSignatureInfo::~PopplerSignatureInfo()
     delete m_certfiticateInfo;
 }
 
-PopplerSignatureInfo::SignatureStatus PopplerSignatureInfo::signatureStatus() const
+PopplerSignatureInfo::SignatureStatus PopplerSignatureInfo::signatureStatus()
+    const
 {
-    switch (m_info.signatureStatus()) {
+    switch(m_info.signatureStatus())
+    {
     case Poppler::SignatureValidationInfo::SignatureValid:
         return SignatureValid;
     case Poppler::SignatureValidationInfo::SignatureInvalid:
@@ -175,9 +194,11 @@ PopplerSignatureInfo::SignatureStatus PopplerSignatureInfo::signatureStatus() co
     }
 }
 
-PopplerSignatureInfo::CertificateStatus PopplerSignatureInfo::certificateStatus() const
+PopplerSignatureInfo::CertificateStatus
+    PopplerSignatureInfo::certificateStatus() const
 {
-    switch (m_info.certificateStatus()) {
+    switch(m_info.certificateStatus())
+    {
     case Poppler::SignatureValidationInfo::CertificateTrusted:
         return CertificateTrusted;
     case Poppler::SignatureValidationInfo::CertificateUntrustedIssuer:
@@ -199,7 +220,8 @@ PopplerSignatureInfo::CertificateStatus PopplerSignatureInfo::certificateStatus(
 
 PopplerSignatureInfo::HashAlgorithm PopplerSignatureInfo::hashAlgorithm() const
 {
-    switch (m_info.hashAlgorithm()) {
+    switch(m_info.hashAlgorithm())
+    {
     case Poppler::SignatureValidationInfo::HashAlgorithmMd2:
         return HashAlgorithmMd2;
     case Poppler::SignatureValidationInfo::HashAlgorithmMd5:
@@ -259,7 +281,7 @@ bool PopplerSignatureInfo::signsTotalDocument() const
     return m_info.signsTotalDocument();
 }
 
-const Okular::CertificateInfo &PopplerSignatureInfo::certificateInfo() const
+const Okular::CertificateInfo& PopplerSignatureInfo::certificateInfo() const
 {
     return *m_certfiticateInfo;
 }
@@ -267,20 +289,28 @@ const Okular::CertificateInfo &PopplerSignatureInfo::certificateInfo() const
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(21, 1, 0)
 PopplerCertificateStore::~PopplerCertificateStore() = default;
 
-QList<Okular::CertificateInfo *> PopplerCertificateStore::signingCertificates(bool *userCancelled) const
+QList<Okular::CertificateInfo*> PopplerCertificateStore::signingCertificates(
+    bool* userCancelled) const
 {
     *userCancelled = false;
-    auto PDFGeneratorNSSPasswordCallback = [&userCancelled](const char *element) -> char * {
+    auto PDFGeneratorNSSPasswordCallback =
+        [&userCancelled](const char* element) -> char*
+    {
         bool ok;
-        const QString pwd = QInputDialog::getText(nullptr, i18n("Enter Password"), i18n("Enter password to open %1:", QString::fromUtf8(element)), QLineEdit::Password, QString(), &ok);
+        const QString pwd = QInputDialog::getText(
+            nullptr, i18n("Enter Password"),
+            i18n("Enter password to open %1:", QString::fromUtf8(element)),
+            QLineEdit::Password, QString(), &ok);
         *userCancelled = !ok;
         return ok ? strdup(pwd.toUtf8().constData()) : nullptr;
     };
     Poppler::setNSSPasswordCallback(PDFGeneratorNSSPasswordCallback);
 
-    const QVector<Poppler::CertificateInfo> certs = Poppler::getAvailableSigningCertificates();
-    QList<Okular::CertificateInfo *> vReturnCerts;
-    for (const auto &cert : certs) {
+    const QVector<Poppler::CertificateInfo> certs =
+        Poppler::getAvailableSigningCertificates();
+    QList<Okular::CertificateInfo*> vReturnCerts;
+    for(const auto& cert : certs)
+    {
         vReturnCerts.append(new PopplerCertificateInfo(cert));
     }
 

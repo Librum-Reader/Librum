@@ -17,7 +17,7 @@ DocumentObserver::~DocumentObserver()
 {
 }
 
-void DocumentObserver::notifySetup(const QVector<Okular::Page *> &, int)
+void DocumentObserver::notifySetup(const QVector<Okular::Page*>&, int)
 {
 }
 

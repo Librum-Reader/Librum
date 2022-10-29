@@ -8,13 +8,11 @@
 #include "movie.h"
 
 // qt/kde includes
+#include <QDebug>
 #include <QDir>
 #include <QImage>
 #include <QString>
 #include <QTemporaryFile>
-
-#include <QDebug>
-
 #include "debug_p.h"
 
 using namespace Okular;
@@ -22,15 +20,15 @@ using namespace Okular;
 class Movie::Private
 {
 public:
-    explicit Private(const QString &url)
-        : m_url(url)
-        , m_rotation(Rotation0)
-        , m_playMode(PlayLimited)
-        , m_playRepetitions(1.0)
-        , m_tmp(nullptr)
-        , m_showControls(false)
-        , m_autoPlay(false)
-        , m_showPosterImage(false)
+    explicit Private(const QString& url) :
+        m_url(url),
+        m_rotation(Rotation0),
+        m_playMode(PlayLimited),
+        m_playRepetitions(1.0),
+        m_tmp(nullptr),
+        m_showControls(false),
+        m_autoPlay(false),
+        m_showPosterImage(false)
     {
     }
 
@@ -39,20 +37,20 @@ public:
     Rotation m_rotation;
     PlayMode m_playMode;
     double m_playRepetitions;
-    QTemporaryFile *m_tmp;
+    QTemporaryFile* m_tmp;
     QImage m_posterImage;
     bool m_showControls : 1;
     bool m_autoPlay : 1;
     bool m_showPosterImage : 1;
 };
 
-Movie::Movie(const QString &fileName)
-    : d(new Private(fileName))
+Movie::Movie(const QString& fileName) :
+    d(new Private(fileName))
 {
 }
 
-Movie::Movie(const QString &fileName, const QByteArray &data)
-    : d(new Private(fileName))
+Movie::Movie(const QString& fileName, const QByteArray& data) :
+    d(new Private(fileName))
 {
     /* Store movie data as temporary file.
      *
@@ -61,12 +59,17 @@ Movie::Movie(const QString &fileName, const QByteArray &data)
      * GStreamer backend). Storing the data in a temporary file works fine
      * though, not to mention, it releases much needed memory. (gamaral)
      */
-    d->m_tmp = new QTemporaryFile(QStringLiteral("%1/okrXXXXXX").arg(QDir::tempPath()));
-    if (d->m_tmp->open()) {
+    d->m_tmp = new QTemporaryFile(
+        QStringLiteral("%1/okrXXXXXX").arg(QDir::tempPath()));
+    if(d->m_tmp->open())
+    {
         d->m_tmp->write(data);
         d->m_tmp->flush();
-    } else {
-        qCDebug(OkularCoreDebug) << "Failed to create temporary file for video data.";
+    }
+    else
+    {
+        qCDebug(OkularCoreDebug)
+            << "Failed to create temporary file for video data.";
     }
 }
 
@@ -78,9 +81,12 @@ Movie::~Movie()
 
 QString Movie::url() const
 {
-    if (d->m_tmp) {
+    if(d->m_tmp)
+    {
         return d->m_tmp->fileName();
-    } else {
+    }
+    else
+    {
         return d->m_url;
     }
 }
@@ -155,7 +161,7 @@ bool Movie::showPosterImage() const
     return d->m_showPosterImage;
 }
 
-void Movie::setPosterImage(const QImage &image)
+void Movie::setPosterImage(const QImage& image)
 {
     d->m_posterImage = image;
 }

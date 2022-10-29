@@ -5,36 +5,36 @@
 */
 
 #include "certificatemodel.h"
-
-#include "signatureguiutils.h"
-
 #include <KLocalizedString>
-
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QFile>
 #include <QUrl>
+#include "signatureguiutils.h"
 
-CertificateModel::CertificateModel(const Okular::CertificateInfo &certInfo, QObject *parent)
-    : QAbstractTableModel(parent)
-    , m_certificateInfo(certInfo)
+CertificateModel::CertificateModel(const Okular::CertificateInfo& certInfo,
+                                   QObject* parent) :
+    QAbstractTableModel(parent),
+    m_certificateInfo(certInfo)
 {
-    m_certificateProperties = {Version, SerialNumber, Issuer, IssuedOn, ExpiresOn, Subject, PublicKey, KeyUsage};
+    m_certificateProperties = { Version,   SerialNumber, Issuer,    IssuedOn,
+                                ExpiresOn, Subject,      PublicKey, KeyUsage };
 }
 
-int CertificateModel::columnCount(const QModelIndex &) const
+int CertificateModel::columnCount(const QModelIndex&) const
 {
     return 2;
 }
 
-int CertificateModel::rowCount(const QModelIndex &) const
+int CertificateModel::rowCount(const QModelIndex&) const
 {
     return m_certificateProperties.size();
 }
 
 static QString propertyVisibleName(CertificateModel::Property p)
 {
-    switch (p) {
+    switch(p)
+    {
     case CertificateModel::Version:
         return i18n("Version");
     case CertificateModel::SerialNumber:
@@ -65,56 +65,81 @@ static QString propertyVisibleName(CertificateModel::Property p)
     return QString();
 }
 
-QString CertificateModel::propertyVisibleValue(CertificateModel::Property p) const
+QString CertificateModel::propertyVisibleValue(
+    CertificateModel::Property p) const
 {
-    switch (p) {
+    switch(p)
+    {
     case CertificateModel::Version:
         return i18n("V%1", QString::number(m_certificateInfo.version()));
     case CertificateModel::SerialNumber:
         return QString::fromLatin1(m_certificateInfo.serialNumber().toHex(' '));
     case CertificateModel::Issuer:
-        return m_certificateInfo.issuerInfo(Okular::CertificateInfo::DistinguishedName);
+        return m_certificateInfo.issuerInfo(
+            Okular::CertificateInfo::DistinguishedName);
     case CertificateModel::IssuedOn:
-        return m_certificateInfo.validityStart().toString(Qt::DefaultLocaleLongDate);
+        return m_certificateInfo.validityStart().toString(
+            Qt::DefaultLocaleLongDate);
     case CertificateModel::ExpiresOn:
-        return m_certificateInfo.validityEnd().toString(Qt::DefaultLocaleLongDate);
+        return m_certificateInfo.validityEnd().toString(
+            Qt::DefaultLocaleLongDate);
     case CertificateModel::Subject:
-        return m_certificateInfo.subjectInfo(Okular::CertificateInfo::DistinguishedName);
+        return m_certificateInfo.subjectInfo(
+            Okular::CertificateInfo::DistinguishedName);
     case CertificateModel::PublicKey:
-        return i18n("%1 (%2 bits)", SignatureGuiUtils::getReadablePublicKeyType(m_certificateInfo.publicKeyType()), m_certificateInfo.publicKeyStrength());
+        return i18n("%1 (%2 bits)",
+                    SignatureGuiUtils::getReadablePublicKeyType(
+                        m_certificateInfo.publicKeyType()),
+                    m_certificateInfo.publicKeyStrength());
     case CertificateModel::KeyUsage:
-        return SignatureGuiUtils::getReadableKeyUsageCommaSeparated(m_certificateInfo.keyUsageExtensions());
+        return SignatureGuiUtils::getReadableKeyUsageCommaSeparated(
+            m_certificateInfo.keyUsageExtensions());
     case CertificateModel::IssuerName:
-        return m_certificateInfo.issuerInfo(Okular::CertificateInfo::CommonName);
+        return m_certificateInfo.issuerInfo(
+            Okular::CertificateInfo::CommonName);
     case CertificateModel::IssuerEmail:
-        return m_certificateInfo.issuerInfo(Okular::CertificateInfo::EmailAddress);
+        return m_certificateInfo.issuerInfo(
+            Okular::CertificateInfo::EmailAddress);
     case CertificateModel::IssuerOrganization:
-        return m_certificateInfo.issuerInfo(Okular::CertificateInfo::Organization);
+        return m_certificateInfo.issuerInfo(
+            Okular::CertificateInfo::Organization);
     case CertificateModel::SubjectName:
-        return m_certificateInfo.subjectInfo(Okular::CertificateInfo::CommonName);
+        return m_certificateInfo.subjectInfo(
+            Okular::CertificateInfo::CommonName);
     case CertificateModel::SubjectEmail:
-        return m_certificateInfo.subjectInfo(Okular::CertificateInfo::EmailAddress);
+        return m_certificateInfo.subjectInfo(
+            Okular::CertificateInfo::EmailAddress);
     case CertificateModel::SubjectOrganization:
-        return m_certificateInfo.subjectInfo(Okular::CertificateInfo::Organization);
+        return m_certificateInfo.subjectInfo(
+            Okular::CertificateInfo::Organization);
     case CertificateModel::Sha1:
-        return QString::fromLatin1(QCryptographicHash::hash(m_certificateInfo.certificateData(), QCryptographicHash::Sha1).toHex(' '));
+        return QString::fromLatin1(
+            QCryptographicHash::hash(m_certificateInfo.certificateData(),
+                                     QCryptographicHash::Sha1)
+                .toHex(' '));
     case CertificateModel::Sha256:
-        return QString::fromLatin1(QCryptographicHash::hash(m_certificateInfo.certificateData(), QCryptographicHash::Sha256).toHex(' '));
+        return QString::fromLatin1(
+            QCryptographicHash::hash(m_certificateInfo.certificateData(),
+                                     QCryptographicHash::Sha256)
+                .toHex(' '));
     }
     return QString();
 }
 
-QVariant CertificateModel::data(const QModelIndex &index, int role) const
+QVariant CertificateModel::data(const QModelIndex& index, int role) const
 {
     const int row = index.row();
-    if (!index.isValid() || row < 0 || row >= m_certificateProperties.count()) {
+    if(!index.isValid() || row < 0 || row >= m_certificateProperties.count())
+    {
         return QVariant();
     }
 
-    switch (role) {
+    switch(role)
+    {
     case Qt::DisplayRole:
     case Qt::ToolTipRole:
-        switch (index.column()) {
+        switch(index.column())
+        {
         case 0:
             return propertyVisibleName(m_certificateProperties[row]);
         case 1:
@@ -131,17 +156,21 @@ QVariant CertificateModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-QVariant CertificateModel::headerData(int section, Qt::Orientation orientation, int role) const
+QVariant CertificateModel::headerData(int section, Qt::Orientation orientation,
+                                      int role) const
 {
-    if (role == Qt::TextAlignmentRole) {
+    if(role == Qt::TextAlignmentRole)
+    {
         return QVariant(Qt::AlignLeft);
     }
 
-    if (orientation != Qt::Horizontal || role != Qt::DisplayRole) {
+    if(orientation != Qt::Horizontal || role != Qt::DisplayRole)
+    {
         return QVariant();
     }
 
-    switch (section) {
+    switch(section)
+    {
     case 0:
         return i18n("Property");
     case 1:
@@ -151,14 +180,16 @@ QVariant CertificateModel::headerData(int section, Qt::Orientation orientation, 
     }
 }
 
-bool CertificateModel::exportCertificateTo(const QString &path)
+bool CertificateModel::exportCertificateTo(const QString& path)
 {
     const QUrl url = QUrl::fromUserInput(path);
-    if (!url.isLocalFile()) {
+    if(!url.isLocalFile())
+    {
         return false;
     }
     QFile targetFile(url.toLocalFile());
-    if (!targetFile.open(QIODevice::WriteOnly)) {
+    if(!targetFile.open(QIODevice::WriteOnly))
+    {
         return false;
     }
     const QByteArray data = m_certificateInfo.certificateData();

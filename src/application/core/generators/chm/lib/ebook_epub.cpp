@@ -6,15 +6,14 @@
 */
 
 #if defined(WIN32)
-#include <io.h> // dup
+    #include <io.h>  // dup
 #else
-#include <unistd.h>
+    #include <unistd.h>
 #endif
 
 #include <KLocalizedString>
 #include <QMessageBox>
 #include <QXmlSimpleReader>
-
 #include "ebook_epub.h"
 #include "helperxmlhandler_epubcontainer.h"
 #include "helperxmlhandler_epubcontent.h"
@@ -22,8 +21,8 @@
 
 #define URL_SCHEME_EPUB QStringLiteral("epub")
 
-EBook_EPUB::EBook_EPUB()
-    : EBook()
+EBook_EPUB::EBook_EPUB() :
+    EBook()
 {
     m_zipFile = nullptr;
 }
@@ -33,15 +32,18 @@ EBook_EPUB::~EBook_EPUB()
     close();
 }
 
-bool EBook_EPUB::load(const QString &archiveName)
+bool EBook_EPUB::load(const QString& archiveName)
 {
     close();
 
-    // We use QFile and zip_fdopen instead of zip_open because latter does not support Unicode file names
+    // We use QFile and zip_fdopen instead of zip_open because latter does not
+    // support Unicode file names
     m_epubFile.setFileName(archiveName);
 
-    if (!m_epubFile.open(QIODevice::ReadOnly)) {
-        qWarning("Could not open file %s: %s", qPrintable(archiveName), qPrintable(m_epubFile.errorString()));
+    if(!m_epubFile.open(QIODevice::ReadOnly))
+    {
+        qWarning("Could not open file %s: %s", qPrintable(archiveName),
+                 qPrintable(m_epubFile.errorString()));
         return false;
     }
 
@@ -50,7 +52,8 @@ bool EBook_EPUB::load(const QString &archiveName)
     // so we need to pass a duplicate of it for this to work correctly
     int fdcopy = dup(m_epubFile.handle());
 
-    if (fdcopy < 0) {
+    if(fdcopy < 0)
+    {
         qWarning("Could not duplicate descriptor");
         return false;
     }
@@ -58,13 +61,16 @@ bool EBook_EPUB::load(const QString &archiveName)
     int errcode;
     m_zipFile = zip_fdopen(fdcopy, 0, &errcode);
 
-    if (!m_zipFile) {
-        qWarning("Could not open file %s: error %d", qPrintable(archiveName), errcode);
+    if(!m_zipFile)
+    {
+        qWarning("Could not open file %s: error %d", qPrintable(archiveName),
+                 errcode);
         return false;
     }
 
     // Parse the book descriptor file
-    if (!parseBookinfo()) {
+    if(!parseBookinfo())
+    {
         return false;
     }
 
@@ -73,7 +79,8 @@ bool EBook_EPUB::load(const QString &archiveName)
 
 void EBook_EPUB::close()
 {
-    if (m_zipFile) {
+    if(m_zipFile)
+    {
         zip_close(m_zipFile);
         m_zipFile = nullptr;
     }
@@ -82,17 +89,17 @@ void EBook_EPUB::close()
     //	m_epubFile.close();
 }
 
-bool EBook_EPUB::getFileContentAsString(QString &str, const QUrl &url) const
+bool EBook_EPUB::getFileContentAsString(QString& str, const QUrl& url) const
 {
     return getFileAsString(str, urlToPath(url));
 }
 
-bool EBook_EPUB::getFileContentAsBinary(QByteArray &data, const QUrl &url) const
+bool EBook_EPUB::getFileContentAsBinary(QByteArray& data, const QUrl& url) const
 {
     return getFileAsBinary(data, urlToPath(url));
 }
 
-bool EBook_EPUB::enumerateFiles(QList<QUrl> &files)
+bool EBook_EPUB::enumerateFiles(QList<QUrl>& files)
 {
     files = m_ebookManifest;
     return true;
@@ -110,7 +117,8 @@ QUrl EBook_EPUB::homeUrl() const
 
 bool EBook_EPUB::hasFeature(EBook::Feature code) const
 {
-    switch (code) {
+    switch(code)
+    {
     case FEATURE_TOC:
         return true;
 
@@ -124,20 +132,21 @@ bool EBook_EPUB::hasFeature(EBook::Feature code) const
     return false;
 }
 
-bool EBook_EPUB::getTableOfContents(QList<EBookTocEntry> &toc) const
+bool EBook_EPUB::getTableOfContents(QList<EBookTocEntry>& toc) const
 {
     toc = m_tocEntries;
     return true;
 }
 
-bool EBook_EPUB::getIndex(QList<EBookIndexEntry> &) const
+bool EBook_EPUB::getIndex(QList<EBookIndexEntry>&) const
 {
     return false;
 }
 
-QString EBook_EPUB::getTopicByUrl(const QUrl &url)
+QString EBook_EPUB::getTopicByUrl(const QUrl& url)
 {
-    if (m_urlTitleMap.contains(url)) {
+    if(m_urlTitleMap.contains(url))
+    {
         return m_urlTitleMap[url];
     }
 
@@ -149,21 +158,22 @@ QString EBook_EPUB::currentEncoding() const
     return QStringLiteral("UTF-8");
 }
 
-bool EBook_EPUB::setCurrentEncoding(const char *)
+bool EBook_EPUB::setCurrentEncoding(const char*)
 {
     abort();
 }
 
-bool EBook_EPUB::isSupportedUrl(const QUrl &url)
+bool EBook_EPUB::isSupportedUrl(const QUrl& url)
 {
     return url.scheme() == URL_SCHEME_EPUB;
 }
 
-bool EBook_EPUB::parseXML(const QString &uri, QXmlDefaultHandler *parser)
+bool EBook_EPUB::parseXML(const QString& uri, QXmlDefaultHandler* parser)
 {
     QByteArray container;
 
-    if (!getFileAsBinary(container, uri)) {
+    if(!getFileAsBinary(container, uri))
+    {
         qDebug("Failed to retrieve XML file %s", qPrintable(uri));
         return false;
     }
@@ -185,34 +195,43 @@ bool EBook_EPUB::parseBookinfo()
     // Parse the container.xml to find the content descriptor
     HelperXmlHandler_EpubContainer container_parser;
 
-    if (!parseXML(QStringLiteral("META-INF/container.xml"), &container_parser) || container_parser.contentPath.isEmpty()) {
+    if(!parseXML(QStringLiteral("META-INF/container.xml"), &container_parser) ||
+       container_parser.contentPath.isEmpty())
+    {
         return false;
     }
 
     // Parse the content.opf
     HelperXmlHandler_EpubContent content_parser;
 
-    if (!parseXML(container_parser.contentPath, &content_parser)) {
+    if(!parseXML(container_parser.contentPath, &content_parser))
+    {
         return false;
     }
 
     // At least title and the TOC must be present
-    if (!content_parser.metadata.contains(QStringLiteral("title")) || content_parser.tocname.isEmpty()) {
+    if(!content_parser.metadata.contains(QStringLiteral("title")) ||
+       content_parser.tocname.isEmpty())
+    {
         return false;
     }
 
-    // All the files, including TOC, are relative to the container_parser.contentPath
+    // All the files, including TOC, are relative to the
+    // container_parser.contentPath
     m_documentRoot.clear();
     int sep = container_parser.contentPath.lastIndexOf(QLatin1Char('/'));
 
-    if (sep != -1) {
-        m_documentRoot = container_parser.contentPath.left(sep + 1); // Keep the trailing slash
+    if(sep != -1)
+    {
+        m_documentRoot = container_parser.contentPath.left(
+            sep + 1);  // Keep the trailing slash
     }
 
     // Parse the TOC
     HelperXmlHandler_EpubTOC toc_parser(this);
 
-    if (!parseXML(content_parser.tocname, &toc_parser)) {
+    if(!parseXML(content_parser.tocname, &toc_parser))
+    {
         return false;
     }
 
@@ -220,23 +239,30 @@ bool EBook_EPUB::parseBookinfo()
     m_title = content_parser.metadata[QStringLiteral("title")];
 
     // Move the manifest entries into the list
-    for (const QString &f : qAsConst(content_parser.manifest)) {
+    for(const QString& f : qAsConst(content_parser.manifest))
+    {
         m_ebookManifest.push_back(pathToUrl(f));
     }
 
     // Copy the manifest information and fill up the other maps if we have it
-    if (!toc_parser.entries.isEmpty()) {
-        for (const EBookTocEntry &e : qAsConst(toc_parser.entries)) {
+    if(!toc_parser.entries.isEmpty())
+    {
+        for(const EBookTocEntry& e : qAsConst(toc_parser.entries))
+        {
             // Add into url-title map
             m_urlTitleMap[e.url] = e.name;
             m_tocEntries.push_back(e);
         }
-    } else {
+    }
+    else
+    {
         // Copy them from spine
-        for (QString url : qAsConst(content_parser.spine)) {
+        for(QString url : qAsConst(content_parser.spine))
+        {
             EBookTocEntry e;
 
-            if (content_parser.manifest.contains(url)) {
+            if(content_parser.manifest.contains(url))
+            {
                 url = content_parser.manifest[url];
             }
 
@@ -252,14 +278,15 @@ bool EBook_EPUB::parseBookinfo()
     }
 
     // EPub with an empty TOC is not valid
-    if (m_tocEntries.isEmpty()) {
+    if(m_tocEntries.isEmpty())
+    {
         return false;
     }
 
     return true;
 }
 
-QUrl EBook_EPUB::pathToUrl(const QString &link) const
+QUrl EBook_EPUB::pathToUrl(const QString& link) const
 {
     QUrl url;
     url.setScheme(URL_SCHEME_EPUB);
@@ -269,14 +296,18 @@ QUrl EBook_EPUB::pathToUrl(const QString &link) const
     int off = link.indexOf(QLatin1Char('#'));
     QString path;
 
-    if (off != -1) {
+    if(off != -1)
+    {
         path = link.left(off);
         url.setFragment(link.mid(off + 1));
-    } else {
+    }
+    else
+    {
         path = link;
     }
 
-    if (!path.startsWith(QLatin1Char('/'))) {
+    if(!path.startsWith(QLatin1Char('/')))
+    {
         path.prepend(QLatin1Char('/'));
     }
 
@@ -285,30 +316,38 @@ QUrl EBook_EPUB::pathToUrl(const QString &link) const
     return url;
 }
 
-QString EBook_EPUB::urlToPath(const QUrl &link) const
+QString EBook_EPUB::urlToPath(const QUrl& link) const
 {
-    if (link.scheme() == URL_SCHEME_EPUB) {
+    if(link.scheme() == URL_SCHEME_EPUB)
+    {
         return link.path();
     }
 
     return QLatin1String("");
 }
 
-bool EBook_EPUB::getFileAsString(QString &str, const QString &path) const
+bool EBook_EPUB::getFileAsString(QString& str, const QString& path) const
 {
     QByteArray data;
 
-    if (!getFileAsBinary(data, path)) {
+    if(!getFileAsBinary(data, path))
+    {
         return false;
     }
 
     // I have never seen yet an UTF16 epub
-    if (data.startsWith("<?xml")) {
+    if(data.startsWith("<?xml"))
+    {
         int endxmltag = data.indexOf("?>");
         int utf16 = data.indexOf("UTF-16");
 
-        if (utf16 > 0 && utf16 < endxmltag) {
-            QMessageBox::critical(nullptr, i18n("Unsupported encoding"), i18n("The encoding of this ebook is not supported yet. Please open a bug in https://bugs.kde.org for support to be added"));
+        if(utf16 > 0 && utf16 < endxmltag)
+        {
+            QMessageBox::critical(
+                nullptr, i18n("Unsupported encoding"),
+                i18n("The encoding of this ebook is not supported yet. Please "
+                     "open a bug in https://bugs.kde.org for support to be "
+                     "added"));
             return false;
         }
     }
@@ -317,35 +356,43 @@ bool EBook_EPUB::getFileAsString(QString &str, const QString &path) const
     return true;
 }
 
-bool EBook_EPUB::getFileAsBinary(QByteArray &data, const QString &path) const
+bool EBook_EPUB::getFileAsBinary(QByteArray& data, const QString& path) const
 {
     // Retrieve the file size
     struct zip_stat fileinfo;
     QString completeUrl;
 
-    if (!path.isEmpty() && path[0] == QLatin1Char('/')) {
+    if(!path.isEmpty() && path[0] == QLatin1Char('/'))
+    {
         completeUrl = m_documentRoot + path.mid(1);
-    } else {
+    }
+    else
+    {
         completeUrl = m_documentRoot + path;
     }
 
-    // qDebug("URL requested: %s (%s)", qPrintable(path), qPrintable(completeUrl));
+    // qDebug("URL requested: %s (%s)", qPrintable(path),
+    // qPrintable(completeUrl));
 
     // http://www.nih.at/libzip/zip_stat.html
-    if (zip_stat(m_zipFile, completeUrl.toUtf8().constData(), 0, &fileinfo) != 0) {
+    if(zip_stat(m_zipFile, completeUrl.toUtf8().constData(), 0, &fileinfo) != 0)
+    {
         qDebug("File %s is not found in the archive", qPrintable(completeUrl));
         return false;
     }
 
     // Make sure the size field is valid
-    if ((fileinfo.valid & ZIP_STAT_SIZE) == 0 || (fileinfo.valid & ZIP_STAT_INDEX) == 0) {
+    if((fileinfo.valid & ZIP_STAT_SIZE) == 0 ||
+       (fileinfo.valid & ZIP_STAT_INDEX) == 0)
+    {
         return false;
     }
 
     // Open the file
-    struct zip_file *file = zip_fopen_index(m_zipFile, fileinfo.index, 0);
+    struct zip_file* file = zip_fopen_index(m_zipFile, fileinfo.index, 0);
 
-    if (!file) {
+    if(!file)
+    {
         return false;
     }
 
@@ -354,7 +401,8 @@ bool EBook_EPUB::getFileAsBinary(QByteArray &data, const QString &path) const
 
     // Could it return a positive number but not fileinfo.size???
     int ret = zip_fread(file, data.data(), fileinfo.size);
-    if (ret != (int)fileinfo.size) {
+    if(ret != (int)fileinfo.size)
+    {
         zip_fclose(file);
         return false;
     }

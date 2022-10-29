@@ -8,7 +8,7 @@
 #include "helperxmlhandler_epubtoc.h"
 #include <QtDebug>
 
-HelperXmlHandler_EpubTOC::HelperXmlHandler_EpubTOC(EBook_EPUB *epub)
+HelperXmlHandler_EpubTOC::HelperXmlHandler_EpubTOC(EBook_EPUB* epub)
 {
     m_epub = epub;
     m_inNavMap = false;
@@ -16,34 +16,43 @@ HelperXmlHandler_EpubTOC::HelperXmlHandler_EpubTOC(EBook_EPUB *epub)
     m_indent = 0;
 }
 
-bool HelperXmlHandler_EpubTOC::startElement(const QString &, const QString &localName, const QString &, const QXmlAttributes &atts)
+bool HelperXmlHandler_EpubTOC::startElement(const QString&,
+                                            const QString& localName,
+                                            const QString&,
+                                            const QXmlAttributes& atts)
 {
     //	qDebug() << "startElement " << " " << localName;
 
     //	for ( int i = 0; i < atts.count(); i++ )
     //		qDebug() << "    " << atts.localName(i) << " " << atts.value(i);
 
-    if (localName == QLatin1String("navMap")) {
+    if(localName == QLatin1String("navMap"))
+    {
         m_inNavMap = true;
         return true;
     }
 
-    if (!m_inNavMap) {
+    if(!m_inNavMap)
+    {
         return true;
     }
 
-    if (localName == QLatin1String("navPoint")) {
+    if(localName == QLatin1String("navPoint"))
+    {
         m_indent++;
     }
 
-    if (localName == QLatin1String("text")) {
+    if(localName == QLatin1String("text"))
+    {
         m_inText = true;
     }
 
-    if (localName == QLatin1String("content")) {
+    if(localName == QLatin1String("content"))
+    {
         int idx = atts.index(QLatin1String("src"));
 
-        if (idx == -1) {
+        if(idx == -1)
+        {
             return false;
         }
 
@@ -54,10 +63,11 @@ bool HelperXmlHandler_EpubTOC::startElement(const QString &, const QString &loca
     return true;
 }
 
-bool HelperXmlHandler_EpubTOC::characters(const QString &ch)
+bool HelperXmlHandler_EpubTOC::characters(const QString& ch)
 {
     //	qDebug() << "characters" << " " << ch;
-    if (m_inText) {
+    if(m_inText)
+    {
         m_lastTitle = ch;
     }
 
@@ -65,20 +75,25 @@ bool HelperXmlHandler_EpubTOC::characters(const QString &ch)
     return true;
 }
 
-bool HelperXmlHandler_EpubTOC::endElement(const QString &, const QString &localName, const QString &)
+bool HelperXmlHandler_EpubTOC::endElement(const QString&,
+                                          const QString& localName,
+                                          const QString&)
 {
     //	qDebug() << "endElement" << " " << qName;
 
-    if (localName == QLatin1String("navMap")) {
+    if(localName == QLatin1String("navMap"))
+    {
         m_inNavMap = false;
         return true;
     }
 
-    if (localName == QLatin1String("navPoint")) {
+    if(localName == QLatin1String("navPoint"))
+    {
         m_indent--;
     }
 
-    if (localName == QLatin1String("text")) {
+    if(localName == QLatin1String("text"))
+    {
         m_inText = false;
     }
 
@@ -87,7 +102,8 @@ bool HelperXmlHandler_EpubTOC::endElement(const QString &, const QString &localN
 
 void HelperXmlHandler_EpubTOC::checkNewTocEntry()
 {
-    if (!m_lastId.isEmpty() && !m_lastTitle.isEmpty()) {
+    if(!m_lastId.isEmpty() && !m_lastTitle.isEmpty())
+    {
         EBookTocEntry entry;
         entry.name = m_lastTitle;
         entry.url = m_epub->pathToUrl(m_lastId);
@@ -96,7 +112,8 @@ void HelperXmlHandler_EpubTOC::checkNewTocEntry()
 
         entries.push_back(entry);
 
-        // qDebug() << "TOC entry: " << m_lastId << " :" << m_lastTitle << " :" << m_indent - 1;
+        // qDebug() << "TOC entry: " << m_lastId << " :" << m_lastTitle << " :"
+        // << m_indent - 1;
 
         m_lastId.clear();
         m_lastTitle.clear();

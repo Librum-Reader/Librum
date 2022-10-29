@@ -5,11 +5,10 @@
 */
 
 #include "textdocumentsettings.h"
-#include "textdocumentsettings_p.h"
-#include "ui_textdocumentsettings.h"
-
 #include <KFontRequester>
 #include <KLocalizedString>
+#include "textdocumentsettings_p.h"
+#include "ui_textdocumentsettings.h"
 
 using namespace Okular;
 
@@ -17,18 +16,18 @@ using namespace Okular;
  * TextDocumentSettingsWidget
  */
 
-TextDocumentSettingsWidget::TextDocumentSettingsWidget(QWidget *parent)
-    : QWidget(parent)
-    , d_ptr(new TextDocumentSettingsWidgetPrivate(new Ui_TextDocumentSettings()))
+TextDocumentSettingsWidget::TextDocumentSettingsWidget(QWidget* parent) :
+    QWidget(parent),
+    d_ptr(new TextDocumentSettingsWidgetPrivate(new Ui_TextDocumentSettings()))
 {
     Q_D(TextDocumentSettingsWidget);
 
     d->mUi->setupUi(this);
 
     // @notice I think this will be useful in future.
-#define ADD_WIDGET(property, widget, objectName, labelName)                                                                                                                                                                                    \
-    d->property = new widget(this);                                                                                                                                                                                                            \
-    d->property->setObjectName(QString::fromUtf8(objectName));                                                                                                                                                                                 \
+#define ADD_WIDGET(property, widget, objectName, labelName)    \
+    d->property = new widget(this);                            \
+    d->property->setObjectName(QString::fromUtf8(objectName)); \
     addRow(labelName, d->property);
 
     ADD_WIDGET(mFont, KFontRequester, "kcfg_Font", i18n("&Default Font:"));
@@ -43,7 +42,8 @@ TextDocumentSettingsWidget::~TextDocumentSettingsWidget()
     delete d;
 }
 
-void TextDocumentSettingsWidget::addRow(const QString &labelText, QWidget *widget)
+void TextDocumentSettingsWidget::addRow(const QString& labelText,
+                                        QWidget* widget)
 {
     Q_D(TextDocumentSettingsWidget);
 
@@ -54,9 +54,10 @@ void TextDocumentSettingsWidget::addRow(const QString &labelText, QWidget *widge
  * TextDocumentSettings
  */
 
-TextDocumentSettings::TextDocumentSettings(const QString &config, QObject *parent)
-    : KConfigSkeleton(config, parent)
-    , d_ptr(new TextDocumentSettingsPrivate(this))
+TextDocumentSettings::TextDocumentSettings(const QString& config,
+                                           QObject* parent) :
+    KConfigSkeleton(config, parent),
+    d_ptr(new TextDocumentSettingsPrivate(this))
 {
     Q_D(TextDocumentSettings);
 

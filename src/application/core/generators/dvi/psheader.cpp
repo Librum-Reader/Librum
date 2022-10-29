@@ -7,15 +7,14 @@
  */
 
 #ifndef _Xconst
-#if __STDC__
-#define _Xconst const
-#else
-#define _Xconst
-#endif
+    #if __STDC__
+        #define _Xconst const
+    #else
+        #define _Xconst
+    #endif
 #endif
 
-_Xconst char psheader[] =
-    "\
+_Xconst char psheader[] = "\
 /TeXDict 300 dict def TeXDict begin/N{def}def/B{bind def}N/S{exch}N/X{S\n\
 N}B/A{dup}B/TR{translate}N/isls false N/vsize 11 72 mul N/hsize 8.5 72\n\
 mul N/landplus90{false}def/@rigin{isls{[0 landplus90{1 -1}{-1 1}ifelse 0\n\

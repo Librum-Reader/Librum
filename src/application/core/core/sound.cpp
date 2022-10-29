@@ -5,7 +5,6 @@
 */
 
 #include "sound.h"
-
 #include <QVariant>
 
 using namespace Okular;
@@ -13,16 +12,16 @@ using namespace Okular;
 class Sound::Private
 {
 public:
-    explicit Private(const QByteArray &data)
-        : m_data(QVariant(data))
-        , m_type(Sound::Embedded)
+    explicit Private(const QByteArray& data) :
+        m_data(QVariant(data)),
+        m_type(Sound::Embedded)
     {
         init();
     }
 
-    explicit Private(const QString &url)
-        : m_data(QVariant(url))
-        , m_type(Sound::External)
+    explicit Private(const QString& url) :
+        m_data(QVariant(url)),
+        m_type(Sound::External)
     {
         init();
     }
@@ -43,13 +42,13 @@ public:
     SoundEncoding m_soundEncoding;
 };
 
-Sound::Sound(const QByteArray &data)
-    : d(new Private(data))
+Sound::Sound(const QByteArray& data) :
+    d(new Private(data))
 {
 }
 
-Sound::Sound(const QString &url)
-    : d(new Private(url))
+Sound::Sound(const QString& url) :
+    d(new Private(url))
 {
 }
 
@@ -70,7 +69,8 @@ QString Sound::url() const
 
 QByteArray Sound::data() const
 {
-    return d->m_type == Sound::Embedded ? d->m_data.toByteArray() : QByteArray();
+    return d->m_type == Sound::Embedded ? d->m_data.toByteArray()
+                                        : QByteArray();
 }
 
 double Sound::samplingRate() const

@@ -5,24 +5,28 @@
 */
 
 #include "generator_txt.h"
-#include "converter.h"
-
 #include <KAboutData>
 #include <KConfigDialog>
 #include <KLocalizedString>
+#include "converter.h"
 
 OKULAR_EXPORT_PLUGIN(TxtGenerator, "libokularGenerator_txt.json")
 
-TxtGenerator::TxtGenerator(QObject *parent, const QVariantList &args)
-    : Okular::TextDocumentGenerator(new Txt::Converter, QStringLiteral("okular_txt_generator_settings"), parent, args)
+TxtGenerator::TxtGenerator(QObject* parent, const QVariantList& args) :
+    Okular::TextDocumentGenerator(
+        new Txt::Converter, QStringLiteral("okular_txt_generator_settings"),
+        parent, args)
 {
 }
 
-void TxtGenerator::addPages(KConfigDialog *dlg)
+void TxtGenerator::addPages(KConfigDialog* dlg)
 {
-    Okular::TextDocumentSettingsWidget *widget = new Okular::TextDocumentSettingsWidget();
+    Okular::TextDocumentSettingsWidget* widget =
+        new Okular::TextDocumentSettingsWidget();
 
-    dlg->addPage(widget, generalSettings(), i18n("Txt"), QStringLiteral("text-plain"), i18n("Txt Backend Configuration"));
+    dlg->addPage(widget, generalSettings(), i18n("Txt"),
+                 QStringLiteral("text-plain"),
+                 i18n("Txt Backend Configuration"));
 }
 
 #include "generator_txt.moc"

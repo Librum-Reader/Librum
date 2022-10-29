@@ -5,19 +5,17 @@
 */
 
 #include "printoptionswidget.h"
-
+#include <KLocalizedString>
 #include <QComboBox>
 #include <QFormLayout>
 
-#include <KLocalizedString>
-
 namespace Okular
 {
-DefaultPrintOptionsWidget::DefaultPrintOptionsWidget(QWidget *parent)
-    : PrintOptionsWidget(parent)
+DefaultPrintOptionsWidget::DefaultPrintOptionsWidget(QWidget* parent) :
+    PrintOptionsWidget(parent)
 {
     setWindowTitle(i18n("Print Options"));
-    QFormLayout *layout = new QFormLayout(this);
+    QFormLayout* layout = new QFormLayout(this);
     m_ignorePrintMargins = new QComboBox;
     // value indicates whether full page is enabled (i.e. print margins ignored)
     m_ignorePrintMargins->insertItem(0, i18n("Fit to printable area"), false);
@@ -30,4 +28,4 @@ bool DefaultPrintOptionsWidget::ignorePrintMargins() const
     return m_ignorePrintMargins->currentData().value<bool>();
 }
 
-}
+}  // namespace Okular

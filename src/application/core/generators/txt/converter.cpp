@@ -5,9 +5,7 @@
 */
 
 #include "converter.h"
-
 #include <QTextFrame>
-
 #include "document.h"
 
 using namespace Txt;
@@ -20,19 +18,20 @@ Converter::~Converter()
 {
 }
 
-QTextDocument *Converter::convert(const QString &fileName)
+QTextDocument* Converter::convert(const QString& fileName)
 {
-    Document *textDocument = new Document(fileName);
+    Document* textDocument = new Document(fileName);
 
     textDocument->setPageSize(QSizeF(600, 800));
 
     QTextFrameFormat frameFormat;
     frameFormat.setMargin(20);
 
-    QTextFrame *rootFrame = textDocument->rootFrame();
+    QTextFrame* rootFrame = textDocument->rootFrame();
     rootFrame->setFrameFormat(frameFormat);
 
-    Q_EMIT addMetaData(Okular::DocumentInfo::MimeType, QStringLiteral("text/plain"));
+    Q_EMIT addMetaData(Okular::DocumentInfo::MimeType,
+                       QStringLiteral("text/plain"));
 
     return textDocument;
 }

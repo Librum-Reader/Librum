@@ -4,32 +4,34 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "chooseenginedialog_p.h"
-
-#include <QComboBox>
-#include <QLabel>
-
 #include <KLocalizedString>
+#include <QComboBox>
 #include <QDialogButtonBox>
+#include <QLabel>
 #include <QPushButton>
 #include <QVBoxLayout>
-
+#include "chooseenginedialog_p.h"
 #include "ui_chooseenginewidget.h"
 
-ChooseEngineDialog::ChooseEngineDialog(const QStringList &generators, const QMimeType &mime, QWidget *parent)
-    : QDialog(parent)
+ChooseEngineDialog::ChooseEngineDialog(const QStringList& generators,
+                                       const QMimeType& mime, QWidget* parent) :
+    QDialog(parent)
 {
     setWindowTitle(i18n("Backend Selection"));
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    QDialogButtonBox* buttonBox =
+        new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    QVBoxLayout* mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
-    QPushButton *okButton = buttonBox->button(QDialogButtonBox::Ok);
+    QPushButton* okButton = buttonBox->button(QDialogButtonBox::Ok);
     okButton->setDefault(true);
-    okButton->setShortcut(Qt::CTRL | Qt::Key_Return); // NOLINT(bugprone-suspicious-enum-usage)
-    connect(buttonBox, &QDialogButtonBox::accepted, this, &ChooseEngineDialog::accept);
-    connect(buttonBox, &QDialogButtonBox::rejected, this, &ChooseEngineDialog::reject);
+    okButton->setShortcut(
+        Qt::CTRL | Qt::Key_Return);  // NOLINT(bugprone-suspicious-enum-usage)
+    connect(buttonBox, &QDialogButtonBox::accepted, this,
+            &ChooseEngineDialog::accept);
+    connect(buttonBox, &QDialogButtonBox::rejected, this,
+            &ChooseEngineDialog::reject);
     okButton->setDefault(true);
-    QWidget *main = new QWidget(this);
+    QWidget* main = new QWidget(this);
     m_widget = new Ui_ChooseEngineWidget();
     m_widget->setupUi(main);
     mainLayout->addWidget(main);
@@ -40,8 +42,7 @@ ChooseEngineDialog::ChooseEngineDialog(const QStringList &generators, const QMim
         i18n("<qt>More than one backend found for the MIME type:<br />"
              "<b>%1</b> (%2).<br /><br />"
              "Please select which one to use:</qt>",
-             mime.comment(),
-             mime.name()));
+             mime.comment(), mime.name()));
 }
 
 ChooseEngineDialog::~ChooseEngineDialog()

@@ -12,8 +12,8 @@
 
 using namespace Okular;
 
-ViewPrivate::ViewPrivate()
-    : document(nullptr)
+ViewPrivate::ViewPrivate() :
+    document(nullptr)
 {
 }
 
@@ -21,22 +21,23 @@ ViewPrivate::~ViewPrivate()
 {
 }
 
-View::View(const QString &name)
-    : d_ptr(new ViewPrivate())
+View::View(const QString& name) :
+    d_ptr(new ViewPrivate())
 {
     d_ptr->name = name;
 }
 
 View::~View()
 {
-    if (d_ptr->document) {
+    if(d_ptr->document)
+    {
         d_ptr->document->m_views.remove(this);
     }
 
     delete d_ptr;
 }
 
-Document *View::viewDocument() const
+Document* View::viewDocument() const
 {
     return d_ptr->document ? d_ptr->document->m_parent : nullptr;
 }
@@ -52,7 +53,8 @@ bool View::supportsCapability(View::ViewCapability capability) const
     return false;
 }
 
-View::CapabilityFlags View::capabilityFlags(View::ViewCapability capability) const
+View::CapabilityFlags View::capabilityFlags(
+    View::ViewCapability capability) const
 {
     Q_UNUSED(capability)
     return NoFlag;
@@ -64,7 +66,8 @@ QVariant View::capability(View::ViewCapability capability) const
     return QVariant();
 }
 
-void View::setCapability(View::ViewCapability capability, const QVariant &option)
+void View::setCapability(View::ViewCapability capability,
+                         const QVariant& option)
 {
     Q_UNUSED(capability)
     Q_UNUSED(option)

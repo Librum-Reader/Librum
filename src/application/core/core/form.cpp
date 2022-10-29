@@ -9,14 +9,13 @@
 
 // qt includes
 #include <QVariant>
-
 #include "action.h"
 
 using namespace Okular;
 
-FormFieldPrivate::FormFieldPrivate(FormField::FieldType type)
-    : m_type(type)
-    , m_activateAction(nullptr)
+FormFieldPrivate::FormFieldPrivate(FormField::FieldType type) :
+    m_type(type),
+    m_activateAction(nullptr)
 {
 }
 
@@ -32,8 +31,8 @@ void FormFieldPrivate::setDefault()
     m_default = value();
 }
 
-FormField::FormField(FormFieldPrivate &dd)
-    : d_ptr(&dd)
+FormField::FormField(FormFieldPrivate& dd) :
+    d_ptr(&dd)
 {
     d_ptr->q_ptr = this;
 }
@@ -76,53 +75,57 @@ void FormField::setPrintable(bool)
 {
 }
 
-Action *FormField::activationAction() const
+Action* FormField::activationAction() const
 {
     Q_D(const FormField);
     return d->m_activateAction;
 }
 
-void FormField::setActivationAction(Action *action)
+void FormField::setActivationAction(Action* action)
 {
     Q_D(FormField);
     delete d->m_activateAction;
     d->m_activateAction = action;
 }
 
-Action *FormField::additionalAction(AdditionalActionType type) const
+Action* FormField::additionalAction(AdditionalActionType type) const
 {
     Q_D(const FormField);
     return d->m_additionalActions.value(type);
 }
 
-void FormField::setAdditionalAction(AdditionalActionType type, Action *action)
+void FormField::setAdditionalAction(AdditionalActionType type, Action* action)
 {
     Q_D(FormField);
     delete d->m_additionalActions.value(type);
     d->m_additionalActions[type] = action;
 }
 
-Action *FormField::additionalAction(Annotation::AdditionalActionType type) const
+Action* FormField::additionalAction(Annotation::AdditionalActionType type) const
 {
     Q_D(const FormField);
     return d->m_additionalAnnotActions.value(type);
 }
 
-void FormField::setAdditionalAction(Annotation::AdditionalActionType type, Action *action)
+void FormField::setAdditionalAction(Annotation::AdditionalActionType type,
+                                    Action* action)
 {
     Q_D(FormField);
     delete d->m_additionalAnnotActions.value(type);
     d->m_additionalAnnotActions[type] = action;
 }
 
-QList<Action *> FormField::additionalActions() const
+QList<Action*> FormField::additionalActions() const
 {
     Q_D(const FormField);
-    // yes, calling values() is not great but it's a list of ~10 elements, we can live with that
-    return d->m_additionalAnnotActions.values() + d->m_additionalActions.values(); // clazy:exclude=container-anti-pattern
+    // yes, calling values() is not great but it's a list of ~10 elements, we
+    // can live with that
+    return d->m_additionalAnnotActions.values() +
+           d->m_additionalActions
+               .values();  // clazy:exclude=container-anti-pattern
 }
 
-Page *FormField::page() const
+Page* FormField::page() const
 {
     Q_D(const FormField);
     return d->m_page;
@@ -131,14 +134,14 @@ Page *FormField::page() const
 class Okular::FormFieldButtonPrivate : public Okular::FormFieldPrivate
 {
 public:
-    FormFieldButtonPrivate()
-        : FormFieldPrivate(FormField::FormButton)
+    FormFieldButtonPrivate() :
+        FormFieldPrivate(FormField::FormButton)
     {
     }
 
     Q_DECLARE_PUBLIC(FormFieldButton)
 
-    void setValue(const QString &v) override
+    void setValue(const QString& v) override
     {
         Q_Q(FormFieldButton);
         q->setState(QVariant(v).toBool());
@@ -151,8 +154,8 @@ public:
     }
 };
 
-FormFieldButton::FormFieldButton()
-    : FormField(*new FormFieldButtonPrivate())
+FormFieldButton::FormFieldButton() :
+    FormField(*new FormFieldButtonPrivate())
 {
 }
 
@@ -164,21 +167,21 @@ void FormFieldButton::setState(bool)
 {
 }
 
-void FormFieldButton::setIcon(Okular::FormField *)
+void FormFieldButton::setIcon(Okular::FormField*)
 {
 }
 
 class Okular::FormFieldTextPrivate : public Okular::FormFieldPrivate
 {
 public:
-    FormFieldTextPrivate()
-        : FormFieldPrivate(FormField::FormText)
+    FormFieldTextPrivate() :
+        FormFieldPrivate(FormField::FormText)
     {
     }
 
     Q_DECLARE_PUBLIC(FormFieldText)
 
-    void setValue(const QString &v) override
+    void setValue(const QString& v) override
     {
         Q_Q(FormFieldText);
         q->setText(v);
@@ -191,8 +194,8 @@ public:
     }
 };
 
-FormFieldText::FormFieldText()
-    : FormField(*new FormFieldTextPrivate())
+FormFieldText::FormFieldText() :
+    FormField(*new FormFieldTextPrivate())
 {
 }
 
@@ -200,7 +203,7 @@ FormFieldText::~FormFieldText()
 {
 }
 
-void FormFieldText::setText(const QString &)
+void FormFieldText::setText(const QString&)
 {
 }
 
@@ -232,26 +235,30 @@ bool FormFieldText::canBeSpellChecked() const
 class Okular::FormFieldChoicePrivate : public Okular::FormFieldPrivate
 {
 public:
-    FormFieldChoicePrivate()
-        : FormFieldPrivate(FormField::FormChoice)
+    FormFieldChoicePrivate() :
+        FormFieldPrivate(FormField::FormChoice)
     {
     }
 
     Q_DECLARE_PUBLIC(FormFieldChoice)
 
-    void setValue(const QString &v) override
+    void setValue(const QString& v) override
     {
         Q_Q(FormFieldChoice);
-        const QStringList choices = v.split(QLatin1Char(';'), QString::SkipEmptyParts);
+        const QStringList choices =
+            v.split(QLatin1Char(';'), QString::SkipEmptyParts);
         QList<int> newchoices;
-        for (const QString &str : choices) {
+        for(const QString& str : choices)
+        {
             bool ok = true;
             int val = str.toInt(&ok);
-            if (ok) {
+            if(ok)
+            {
                 newchoices.append(val);
             }
         }
-        if (!newchoices.isEmpty()) {
+        if(!newchoices.isEmpty())
+        {
             q->setCurrentChoices(newchoices);
         }
     }
@@ -262,7 +269,8 @@ public:
         QList<int> choices = q->currentChoices();
         std::sort(choices.begin(), choices.end());
         QStringList list;
-        for (const int c : qAsConst(choices)) {
+        for(const int c : qAsConst(choices))
+        {
             list.append(QString::number(c));
         }
         return list.join(QStringLiteral(";"));
@@ -271,8 +279,8 @@ public:
     QMap<QString, QString> exportValues;
 };
 
-FormFieldChoice::FormFieldChoice()
-    : FormField(*new FormFieldChoicePrivate())
+FormFieldChoice::FormFieldChoice() :
+    FormField(*new FormFieldChoicePrivate())
 {
 }
 
@@ -290,7 +298,7 @@ bool FormFieldChoice::multiSelect() const
     return false;
 }
 
-void FormFieldChoice::setCurrentChoices(const QList<int> &)
+void FormFieldChoice::setCurrentChoices(const QList<int>&)
 {
 }
 
@@ -299,7 +307,7 @@ QString FormFieldChoice::editChoice() const
     return QString();
 }
 
-void FormFieldChoice::setEditChoice(const QString &)
+void FormFieldChoice::setEditChoice(const QString&)
 {
 }
 
@@ -313,13 +321,13 @@ bool FormFieldChoice::canBeSpellChecked() const
     return false;
 }
 
-void FormFieldChoice::setExportValues(const QMap<QString, QString> &values)
+void FormFieldChoice::setExportValues(const QMap<QString, QString>& values)
 {
     Q_D(FormFieldChoice);
     d->exportValues = values;
 }
 
-QString FormFieldChoice::exportValueForChoice(const QString &choice) const
+QString FormFieldChoice::exportValueForChoice(const QString& choice) const
 {
     Q_D(const FormFieldChoice);
     return d->exportValues.value(choice, choice);
@@ -328,14 +336,14 @@ QString FormFieldChoice::exportValueForChoice(const QString &choice) const
 class Okular::FormFieldSignaturePrivate : public Okular::FormFieldPrivate
 {
 public:
-    FormFieldSignaturePrivate()
-        : FormFieldPrivate(FormField::FormSignature)
+    FormFieldSignaturePrivate() :
+        FormFieldPrivate(FormField::FormSignature)
     {
     }
 
     Q_DECLARE_PUBLIC(FormFieldSignature)
 
-    void setValue(const QString &v) override
+    void setValue(const QString& v) override
     {
         Q_UNUSED(v)
     }
@@ -346,8 +354,8 @@ public:
     }
 };
 
-FormFieldSignature::FormFieldSignature()
-    : FormField(*new FormFieldSignaturePrivate())
+FormFieldSignature::FormFieldSignature() :
+    FormField(*new FormFieldSignaturePrivate())
 {
 }
 

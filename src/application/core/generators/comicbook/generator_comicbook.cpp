@@ -5,23 +5,20 @@
 */
 
 #include "generator_comicbook.h"
-
-#include <QPainter>
-#include <QPrinter>
-
-#include <KAboutData>
-#include <KLocalizedString>
-
 #include <core/document.h>
 #include <core/fileprinter.h>
 #include <core/page.h>
-
+#include <KAboutData>
+#include <KLocalizedString>
+#include <QPainter>
+#include <QPrinter>
 #include "debug_comicbook.h"
 
 OKULAR_EXPORT_PLUGIN(ComicBookGenerator, "libokularGenerator_comicbook.json")
 
-ComicBookGenerator::ComicBookGenerator(QObject *parent, const QVariantList &args)
-    : Generator(parent, args)
+ComicBookGenerator::ComicBookGenerator(QObject* parent,
+                                       const QVariantList& args) :
+    Generator(parent, args)
 {
     setFeature(Threaded);
     setFeature(PrintNative);
@@ -32,11 +29,14 @@ ComicBookGenerator::~ComicBookGenerator()
 {
 }
 
-bool ComicBookGenerator::loadDocument(const QString &fileName, QVector<Okular::Page *> &pagesVector)
+bool ComicBookGenerator::loadDocument(const QString& fileName,
+                                      QVector<Okular::Page*>& pagesVector)
 {
-    if (!mDocument.open(fileName)) {
+    if(!mDocument.open(fileName))
+    {
         const QString errString = mDocument.lastErrorString();
-        if (!errString.isEmpty()) {
+        if(!errString.isEmpty())
+        {
             Q_EMIT error(errString, -1);
         }
         return false;
@@ -53,30 +53,38 @@ bool ComicBookGenerator::doCloseDocument()
     return true;
 }
 
-QImage ComicBookGenerator::image(Okular::PixmapRequest *request)
+QImage ComicBookGenerator::image(Okular::PixmapRequest* request)
 {
     int width = request->width();
     int height = request->height();
 
     QImage image = mDocument.pageImage(request->pageNumber());
 
-    return image.scaled(width, height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    return image.scaled(width, height, Qt::IgnoreAspectRatio,
+                        Qt::SmoothTransformation);
 }
 
-Okular::Document::PrintError ComicBookGenerator::print(QPrinter &printer)
+Okular::Document::PrintError ComicBookGenerator::print(QPrinter& printer)
 {
     QPainter p(&printer);
 
-    QList<int> pageList = Okular::FilePrinter::pageList(printer, document()->pages(), document()->currentPage() + 1, document()->bookmarkedPageList());
+    QList<int> pageList = Okular::FilePrinter::pageList(
+        printer, document()->pages(), document()->currentPage() + 1,
+        document()->bookmarkedPageList());
 
-    for (int i = 0; i < pageList.count(); ++i) {
+    for(int i = 0; i < pageList.count(); ++i)
+    {
         QImage image = mDocument.pageImage(pageList[i] - 1);
 
-        if ((image.width() > printer.width()) || (image.height() > printer.height())) {
-            image = image.scaled(printer.width(), printer.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        if((image.width() > printer.width()) ||
+           (image.height() > printer.height()))
+        {
+            image = image.scaled(printer.width(), printer.height(),
+                                 Qt::KeepAspectRatio, Qt::SmoothTransformation);
         }
 
-        if (i != 0) {
+        if(i != 0)
+        {
             printer.newPage();
         }
 
