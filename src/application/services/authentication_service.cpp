@@ -4,24 +4,24 @@
 
 using namespace domain::models;
 
-
 namespace application::services
 {
 
-AuthenticationService::AuthenticationService(IAuthenticationGateway*
-                                             authenticationGateway)
-    : m_authenticationGateway(authenticationGateway)
+AuthenticationService::AuthenticationService(
+    IAuthenticationGateway* authenticationGateway) :
+    m_authenticationGateway(authenticationGateway)
 {
-    connect(m_authenticationGateway, &IAuthenticationGateway::authenticationFinished,
-            this, &AuthenticationService::processAuthenticationResult);
-    
-    connect(m_authenticationGateway, &IAuthenticationGateway::registrationFinished,
-            this, &AuthenticationService::processRegistrationResult);
-    
-    connect(this, &AuthenticationService::authenticationTokenRegistered,
-            this, &AuthenticationService::setAuthenticationToken);
-}
+    connect(m_authenticationGateway,
+            &IAuthenticationGateway::authenticationFinished, this,
+            &AuthenticationService::processAuthenticationResult);
 
+    connect(m_authenticationGateway,
+            &IAuthenticationGateway::registrationFinished, this,
+            &AuthenticationService::processRegistrationResult);
+
+    connect(this, &AuthenticationService::authenticationTokenRegistered, this,
+            &AuthenticationService::setAuthenticationToken);
+}
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
@@ -50,7 +50,6 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
     }
 }
 
-
 void AuthenticationService::processAuthenticationResult(const QString& token)
 {
     if(token.isEmpty())
@@ -59,7 +58,7 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
         emit loginFinished(false);
         return;
     }
-    
+
     emit authenticationTokenRegistered(token, m_currentEmail);
     emit loginFinished(true);
 }
@@ -70,11 +69,11 @@ void AuthenticationService::processRegistrationResult(bool success,
     emit registrationFinished(success, reason);
 }
 
-void AuthenticationService::setAuthenticationToken(const QString& token, 
+void AuthenticationService::setAuthenticationToken(const QString& token,
                                                    const QString& email)
 {
     Q_UNUSED(email);
     m_token = token;
 }
 
-} // namespace application::services
+}  // namespace application::services

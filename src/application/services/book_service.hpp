@@ -6,56 +6,55 @@
 #include "i_downloaded_books_tracker.hpp"
 #include "i_internet_connection_info.hpp"
 
-
 namespace application::services
 {
 
 class BookService : public IBookService
 {
     Q_OBJECT
-    
+
 public:
     BookService(IBookStorageGateway* bookStorageGateway,
-                IBookMetadataHelper* bookMetadataHelper, 
+                IBookMetadataHelper* bookMetadataHelper,
                 IDownloadedBooksTracker* downloadedBooksTracker,
                 IInternetConnectionInfo* internetConnectionInfo);
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
-    BookOperationStatus updateBook(const QUuid& uuid,
-                                   const domain::models::Book& newBook) override;
-    
-    BookOperationStatus addTag(const QUuid& uuid, 
+    BookOperationStatus updateBook(
+        const QUuid& uuid, const domain::models::Book& newBook) override;
+
+    BookOperationStatus addTag(const QUuid& uuid,
                                const domain::models::Tag& tag) override;
     BookOperationStatus removeTag(const QUuid& uuid,
                                   const domain::models::Tag& tag) override;
-        
+
     const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QUuid& uuid) const override;
     domain::models::Book* getBook(const QUuid& uuid) override;
     int getBookIndex(const QUuid& uuid) const override;
     int getBookCount() const override;
-    
+
     BookOperationStatus saveBookToPath(const QUuid& uuid,
                                        const QUrl& path) override;
-    
+
 public slots:
     bool refreshLastOpenedFlag(const QUuid& uuid) override;
     void setAuthenticationToken(const QString& token,
                                 const QString& email) override;
     void clearAuthenticationToken() override;
-    
+
 private slots:
     void storeBookCover(const QPixmap* pixmap);
     void loadRemoteBooks();
     void addRemoteBooks(const std::vector<domain::models::Book>& books);
-    
+
 private:
     QString getCurrentDateTimeAsString();
     void loadBooks();
     void loadLocalBooks();
-    
+
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;
     IDownloadedBooksTracker* m_downloadedBooksTracker;
@@ -65,4 +64,4 @@ private:
     QString m_currentUserEmail;
 };
 
-} // namespace application::services
+}  // namespace application::services

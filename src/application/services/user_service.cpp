@@ -1,16 +1,15 @@
 #include "user_service.hpp"
 
-
 namespace application::services
 {
 
-UserService::UserService(IUserStorageGateway* userStorageGateway)
-    : m_userStorageGateway(userStorageGateway), m_user("x", "y", "z")
+UserService::UserService(IUserStorageGateway* userStorageGateway) :
+    m_userStorageGateway(userStorageGateway),
+    m_user("x", "y", "z")
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
 }
-
 
 void UserService::loadUser()
 {
@@ -29,7 +28,6 @@ void UserService::setFirstName(const QString& newFirstName)
                                           m_user.getFirstName());
 }
 
-
 QString UserService::getLastName() const
 {
     return m_user.getLastName();
@@ -42,7 +40,6 @@ void UserService::setLastName(const QString& newLastName)
                                          m_user.getLastName());
 }
 
-
 QString UserService::getEmail() const
 {
     return m_user.getEmail();
@@ -51,8 +48,7 @@ QString UserService::getEmail() const
 void UserService::setEmail(const QString& newEmail)
 {
     m_user.setEmail(newEmail);
-    m_userStorageGateway->changeEmail(m_authenticationToken,
-                                      m_user.getEmail());
+    m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
 }
 
 QImage UserService::getProfilePicture() const
@@ -74,11 +70,11 @@ void UserService::proccessUserInformation(const domain::models::User& user,
         emit finishedLoadingUser(false);
         return;
     }
-    
+
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
-    
+
     emit finishedLoadingUser(true);
 }
 
@@ -94,4 +90,4 @@ void UserService::clearAuthenticationToken()
     m_authenticationToken.clear();
 }
 
-} // namespace application::services
+}  // namespace application::services
