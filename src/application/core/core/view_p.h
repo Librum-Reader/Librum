@@ -21,13 +21,13 @@ public:
     ViewPrivate();
     virtual ~ViewPrivate();
 
-    ViewPrivate(const ViewPrivate &) = delete;
-    ViewPrivate &operator=(const ViewPrivate &) = delete;
+    ViewPrivate(const ViewPrivate&) = delete;
+    ViewPrivate& operator=(const ViewPrivate&) = delete;
 
     QString name;
-    DocumentPrivate *document;
+    DocumentPrivate* document;
 };
 
-}
+}  // namespace Okular
 
 #endif

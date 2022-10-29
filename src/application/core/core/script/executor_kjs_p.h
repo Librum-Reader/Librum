@@ -18,19 +18,19 @@ class Event;
 class ExecutorKJS
 {
 public:
-    explicit ExecutorKJS(DocumentPrivate *doc);
+    explicit ExecutorKJS(DocumentPrivate* doc);
     ~ExecutorKJS();
 
-    ExecutorKJS(const ExecutorKJS &) = delete;
-    ExecutorKJS &operator=(const ExecutorKJS &) = delete;
+    ExecutorKJS(const ExecutorKJS&) = delete;
+    ExecutorKJS& operator=(const ExecutorKJS&) = delete;
 
-    void execute(const QString &script, Event *event);
+    void execute(const QString& script, Event* event);
 
 private:
     friend class ExecutorKJSPrivate;
-    ExecutorKJSPrivate *d;
+    ExecutorKJSPrivate* d;
 };
 
-}
+}  // namespace Okular
 
 #endif

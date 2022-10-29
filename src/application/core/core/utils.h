@@ -5,10 +5,10 @@
 */
 
 #ifndef _OKULAR_UTILS_H_
-#define _OKULAR_UTILS_H_
+    #define _OKULAR_UTILS_H_
 
-#include "area.h"
-#include "okularcore_export.h"
+    #include "area.h"
+    #include "okularcore_export.h"
 
 class QRect;
 class QImage;
@@ -27,7 +27,8 @@ public:
      * Rotate the rect \p source in the area \p width x \p height with the
      * specified \p orientation .
      */
-    static QRect rotateRect(const QRect source, int width, int height, int orientation);
+    static QRect rotateRect(const QRect source, int width, int height,
+                            int orientation);
 
     /**
      * Return the real DPI of the display containing given window
@@ -37,18 +38,18 @@ public:
      *
      * @since 22.04
      */
-    static QSizeF realDpi(const QWindow *windowOnScreen);
+    static QSizeF realDpi(const QWindow* windowOnScreen);
 
     /**
-     * Compute the smallest rectangle that contains all non-white pixels in image),
-     * in normalized [0,1] coordinates.
+     * Compute the smallest rectangle that contains all non-white pixels in
+     * image), in normalized [0,1] coordinates.
      *
      * @since 0.7 (KDE 4.1)
      */
-    static NormalizedRect imageBoundingBox(const QImage *image);
+    static NormalizedRect imageBoundingBox(const QImage* image);
 };
 
-}
+}  // namespace Okular
 
 #endif
 

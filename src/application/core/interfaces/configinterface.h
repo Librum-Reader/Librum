@@ -7,9 +7,8 @@
 #ifndef _OKULAR_CONFIGINTERFACE_H_
 #define _OKULAR_CONFIGINTERFACE_H_
 
-#include "../core/okularcore_export.h"
-
 #include <QObject>
+#include "../core/okularcore_export.h"
 
 class KConfigDialog;
 
@@ -46,11 +45,12 @@ public:
     {
     }
 
-    ConfigInterface(const ConfigInterface &) = delete;
-    ConfigInterface &operator=(const ConfigInterface &) = delete;
+    ConfigInterface(const ConfigInterface&) = delete;
+    ConfigInterface& operator=(const ConfigInterface&) = delete;
 
     /**
-     * This method is called to tell the generator to re-parse its configuration.
+     * This method is called to tell the generator to re-parse its
+     * configuration.
      *
      * Returns true if something has changed.
      *
@@ -65,11 +65,12 @@ public:
      * This method allows the generator to add custom configuration pages to the
      * config @p dialog of okular.
      */
-    virtual void addPages(KConfigDialog *dialog) = 0;
+    virtual void addPages(KConfigDialog* dialog) = 0;
 };
 
-}
+}  // namespace Okular
 
-Q_DECLARE_INTERFACE(Okular::ConfigInterface, "org.kde.okular.ConfigInterface/0.1")
+Q_DECLARE_INTERFACE(Okular::ConfigInterface,
+                    "org.kde.okular.ConfigInterface/0.1")
 
 #endif

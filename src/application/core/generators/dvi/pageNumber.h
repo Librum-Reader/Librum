@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // pageNumber.h
 //
@@ -29,7 +30,8 @@ that checks if the page number is 0.
 class PageNumber
 {
 public:
-    enum pageNums {
+    enum pageNums
+    {
         invalidPage = 0 /*! Invalid page number */
     };
 
@@ -49,7 +51,7 @@ public:
     }
 
     /** \brief this method implements typecasts from quint16 */
-    PageNumber &operator=(const quint16 p)
+    PageNumber& operator=(const quint16 p)
     {
         pgNum = p;
         return *this;

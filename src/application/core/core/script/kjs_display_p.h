@@ -15,15 +15,21 @@ namespace Okular
 /**
  * The display types of the field.
  */
-enum FormDisplay { FormVisible, FormHidden, FormNoPrint, FormNoView };
+enum FormDisplay
+{
+    FormVisible,
+    FormHidden,
+    FormNoPrint,
+    FormNoView
+};
 
 class JSDisplay
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSObject object(KJSContext *ctx);
+    static void initType(KJSContext* ctx);
+    static KJSObject object(KJSContext* ctx);
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -7,8 +7,8 @@
 #ifndef OKULAR_SOURCEREFERENCE_H
 #define OKULAR_SOURCEREFERENCE_H
 
-#include "okularcore_export.h"
 #include <QObject>
+#include "okularcore_export.h"
 class QString;
 
 namespace Okular
@@ -26,7 +26,7 @@ public:
      * Creates a reference to the row @p row and column @p column of the
      * source @p fileName
      */
-    SourceReference(const QString &fileName, int row, int column = 0);
+    SourceReference(const QString& fileName, int row, int column = 0);
 
     /**
      * Destroys the source reference.
@@ -50,11 +50,11 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 
     Q_DISABLE_COPY(SourceReference)
 };
 
-}
+}  // namespace Okular
 
 #endif

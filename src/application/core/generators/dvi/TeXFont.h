@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// TeXFont.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- TeXFont.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environment
 //
@@ -15,7 +15,7 @@
 class TeXFont
 {
 public:
-    explicit TeXFont(TeXFontDefinition *_parent)
+    explicit TeXFont(TeXFontDefinition* _parent)
     {
         parent = _parent;
         errorMessage.clear();
@@ -23,17 +23,20 @@ public:
 
     virtual ~TeXFont();
 
-    TeXFont(const TeXFont &) = delete;
-    TeXFont &operator=(const TeXFont &) = delete;
+    TeXFont(const TeXFont&) = delete;
+    TeXFont& operator=(const TeXFont&) = delete;
 
     void setDisplayResolution()
     {
-        for (glyph &g : glyphtable) {
+        for(glyph& g : glyphtable)
+        {
             g.shrunkenCharacter = QImage();
         }
     }
 
-    virtual glyph *getGlyph(quint16 character, bool generateCharacterPixmap = false, const QColor &color = Qt::black) = 0;
+    virtual glyph* getGlyph(quint16 character,
+                            bool generateCharacterPixmap = false,
+                            const QColor& color = Qt::black) = 0;
 
     // Checksum of the font. Used e.g. by PK fonts. This field is filled
     // in by the constructor, or set to 0.0, if the font format does not
@@ -46,7 +49,7 @@ public:
 
 protected:
     glyph glyphtable[TeXFontDefinition::max_num_of_chars_in_font];
-    TeXFontDefinition *parent;
+    TeXFontDefinition* parent;
 };
 
 #endif

@@ -21,23 +21,23 @@ class AudioPlayer;
 class AudioPlayerPrivate
 {
 public:
-    explicit AudioPlayerPrivate(AudioPlayer *qq);
+    explicit AudioPlayerPrivate(AudioPlayer* qq);
 
     ~AudioPlayerPrivate();
 
     int newId() const;
-    bool play(const SoundInfo &si);
+    bool play(const SoundInfo& si);
     void stopPlayings();
 
     void finished(int);
 
-    AudioPlayer *q;
+    AudioPlayer* q;
 
-    QHash<int, PlayData *> m_playing;
+    QHash<int, PlayData*> m_playing;
     QUrl m_currentDocument;
     AudioPlayer::State m_state;
 };
 
-}
+}  // namespace Okular
 
 #endif

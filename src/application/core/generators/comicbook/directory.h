@@ -28,7 +28,7 @@ public:
     /**
      * Opens given directory.
      */
-    bool open(const QString &dirName);
+    bool open(const QString& dirName);
 
     /**
      * Returns the list of files from the directory.
@@ -38,13 +38,13 @@ public:
     /**
      * Returns a new device for reading the file with the given path.
      */
-    QIODevice *createDevice(const QString &path) const;
+    QIODevice* createDevice(const QString& path) const;
 
 private:
     /**
      * Iterates over a directory and returns a file list.
      */
-    QStringList recurseDir(const QString &dir, int curDepth) const;
+    QStringList recurseDir(const QString& dir, int curDepth) const;
 
     static const int staticMaxDepth = 1;
     QString mDir;

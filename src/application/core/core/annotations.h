@@ -13,7 +13,6 @@
 #include <QFont>
 #include <QRect>
 #include <QString>
-
 #include "area.h"
 #include "okularcore_export.h"
 
@@ -54,25 +53,28 @@ public:
      *
      * Returns a pointer to the complete annotation or 0 if element is invalid.
      */
-    static Annotation *createAnnotation(const QDomElement &element);
+    static Annotation* createAnnotation(const QDomElement& element);
 
     /**
      * Saves the @p annotation as a child of @p element taking
      * care of saving all revisions if it has any.
      */
-    static void storeAnnotation(const Annotation *annotation, QDomElement &element, QDomDocument &document);
+    static void storeAnnotation(const Annotation* annotation,
+                                QDomElement& element, QDomDocument& document);
 
     /**
      * Returns the child element with the given @p name from the direct
      * children of @p parentNode or a null element if not found.
      */
-    static QDomElement findChildElement(const QDomNode &parentNode, const QString &name);
+    static QDomElement findChildElement(const QDomNode& parentNode,
+                                        const QString& name);
 
     /**
      * Returns the geometry of the given @p annotation scaled by
      * @p scaleX and @p scaleY.
      */
-    static QRect annotationGeometry(const Annotation *annotation, double scaleX, double scaleY);
+    static QRect annotationGeometry(const Annotation* annotation, double scaleX,
+                                    double scaleY);
 
     /**
      * Returns a pixmap for a stamp symbol
@@ -83,7 +85,8 @@ public:
      *
      * @since 21.12
      */
-    static QPixmap loadStamp(const QString &nameOrPath, int size, bool keepAspectRatio = true);
+    static QPixmap loadStamp(const QString& nameOrPath, int size,
+                             bool keepAspectRatio = true);
 };
 
 /**
@@ -107,78 +110,89 @@ public:
     /**
      * Describes the type of annotation as defined in PDF standard.
      */
-    enum SubType {
-        AText = 1,           ///< A textual annotation
-        ALine = 2,           ///< A line annotation
-        AGeom = 3,           ///< A geometrical annotation
-        AHighlight = 4,      ///< A highlight annotation
-        AStamp = 5,          ///< A stamp annotation
-        AInk = 6,            ///< An ink annotation
-        ACaret = 8,          ///< A caret annotation
-        AFileAttachment = 9, ///< A file attachment annotation
-        ASound = 10,         ///< A sound annotation
-        AMovie = 11,         ///< A movie annotation
-        AScreen = 12,        ///< A screen annotation
-        AWidget = 13,        ///< A widget annotation
-        ARichMedia = 14,     ///< A rich media annotation
-        A_BASE = 0           ///< The annotation base class
+    enum SubType
+    {
+        AText = 1,  ///< A textual annotation
+        ALine = 2,  ///< A line annotation
+        AGeom = 3,  ///< A geometrical annotation
+        AHighlight = 4,  ///< A highlight annotation
+        AStamp = 5,  ///< A stamp annotation
+        AInk = 6,  ///< An ink annotation
+        ACaret = 8,  ///< A caret annotation
+        AFileAttachment = 9,  ///< A file attachment annotation
+        ASound = 10,  ///< A sound annotation
+        AMovie = 11,  ///< A movie annotation
+        AScreen = 12,  ///< A screen annotation
+        AWidget = 13,  ///< A widget annotation
+        ARichMedia = 14,  ///< A rich media annotation
+        A_BASE = 0  ///< The annotation base class
     };
 
     /**
      * Describes additional properties of an annotation.
      */
-    enum Flag {
-        Hidden = 1,               ///< Is not shown in the document
-        FixedSize = 2,            ///< Has a fixed size
-        FixedRotation = 4,        ///< Has a fixed rotation
-        DenyPrint = 8,            ///< Cannot be printed
-        DenyWrite = 16,           ///< Cannot be changed
-        DenyDelete = 32,          ///< Cannot be deleted
-        ToggleHidingOnMouse = 64, ///< Can be hidden/shown by mouse click
-        External = 128,           ///< Is stored external
-        ExternallyDrawn = 256,    ///< Is drawn externally (by the generator which provided it) @since 0.10 (KDE 4.4)
-        BeingMoved = 512,         ///< Is being moved (mouse drag and drop). If ExternallyDrawn, the generator must not draw it @since 0.15 (KDE 4.9)
-        BeingResized = 1024       ///< Is being resized (mouse drag and drop). If ExternallyDrawn, the generator must not draw it @since 1.1.0
+    enum Flag
+    {
+        Hidden = 1,  ///< Is not shown in the document
+        FixedSize = 2,  ///< Has a fixed size
+        FixedRotation = 4,  ///< Has a fixed rotation
+        DenyPrint = 8,  ///< Cannot be printed
+        DenyWrite = 16,  ///< Cannot be changed
+        DenyDelete = 32,  ///< Cannot be deleted
+        ToggleHidingOnMouse = 64,  ///< Can be hidden/shown by mouse click
+        External = 128,  ///< Is stored external
+        ExternallyDrawn = 256,  ///< Is drawn externally (by the generator which
+                                ///< provided it) @since 0.10 (KDE 4.4)
+        BeingMoved =
+            512,  ///< Is being moved (mouse drag and drop). If ExternallyDrawn,
+                  ///< the generator must not draw it @since 0.15 (KDE 4.9)
+        BeingResized = 1024  ///< Is being resized (mouse drag and drop). If
+                             ///< ExternallyDrawn, the generator must not draw
+                             ///< it @since 1.1.0
     };
 
     /**
      * Describes possible line styles for @see ALine annotation.
      */
-    enum LineStyle {
-        Solid = 1,     ///< A solid line
-        Dashed = 2,    ///< A dashed line
-        Beveled = 4,   ///< A beveled line
-        Inset = 8,     ///< An inset line
-        Underline = 16 ///< An underline
+    enum LineStyle
+    {
+        Solid = 1,  ///< A solid line
+        Dashed = 2,  ///< A dashed line
+        Beveled = 4,  ///< A beveled line
+        Inset = 8,  ///< An inset line
+        Underline = 16  ///< An underline
     };
 
     /**
      * Describes possible line effects for @see ALine annotation.
      */
-    enum LineEffect {
-        NoEffect = 1, ///< No effect
-        Cloudy = 2    ///< The cloudy effect
+    enum LineEffect
+    {
+        NoEffect = 1,  ///< No effect
+        Cloudy = 2  ///< The cloudy effect
     };
 
     /**
      * Describes the scope of revision information.
      */
-    enum RevisionScope {
-        Reply = 1, ///< Belongs to a reply
-        Group = 2, ///< Belongs to a group
-        Delete = 4 ///< Belongs to a deleted paragraph
+    enum RevisionScope
+    {
+        Reply = 1,  ///< Belongs to a reply
+        Group = 2,  ///< Belongs to a group
+        Delete = 4  ///< Belongs to a deleted paragraph
     };
 
     /**
      * Describes the type of revision information.
      */
-    enum RevisionType {
-        None = 1,       ///< Not specified
-        Marked = 2,     ///< Is marked
-        Unmarked = 4,   ///< Is unmarked
-        Accepted = 8,   ///< Has been accepted
+    enum RevisionType
+    {
+        None = 1,  ///< Not specified
+        Marked = 2,  ///< Is marked
+        Unmarked = 4,  ///< Is unmarked
+        Accepted = 8,  ///< Has been accepted
         Rejected = 16,  ///< Was rejected
-        Cancelled = 32, ///< Has been cancelled
+        Cancelled = 32,  ///< Has been cancelled
         Completed = 64  ///< Has been completed
     };
 
@@ -187,15 +201,24 @@ public:
      *
      * @since 0.16 (KDE 4.10)
      */
-    enum AdditionalActionType {
-        PageOpening,    ///< Performed when the page containing the annotation is opened.
-        PageClosing,    ///< Performed when the page containing the annotation is closed.
-        CursorEntering, ///< Performed when the cursor enters the annotation's active area @since 1.5
-        CursorLeaving,  ///< Performed when the cursor exists the annotation's active area @since 1.5
-        MousePressed,   ///< Performed when the mouse button is pressed inside the annotation's active area @since 1.5
-        MouseReleased,  ///< Performed when the mouse button is released inside the annotation's active area @since 1.5
-        FocusIn,        ///< Performed when the annotation receives the input focus @since 1.5
-        FocusOut,       ///< Performed when the annotation loses the input focus @since 1.5
+    enum AdditionalActionType
+    {
+        PageOpening,  ///< Performed when the page containing the annotation is
+                      ///< opened.
+        PageClosing,  ///< Performed when the page containing the annotation is
+                      ///< closed.
+        CursorEntering,  ///< Performed when the cursor enters the annotation's
+                         ///< active area @since 1.5
+        CursorLeaving,  ///< Performed when the cursor exists the annotation's
+                        ///< active area @since 1.5
+        MousePressed,  ///< Performed when the mouse button is pressed inside
+                       ///< the annotation's active area @since 1.5
+        MouseReleased,  ///< Performed when the mouse button is released inside
+                        ///< the annotation's active area @since 1.5
+        FocusIn,  ///< Performed when the annotation receives the input focus
+                  ///< @since 1.5
+        FocusOut,  ///< Performed when the annotation loses the input focus
+                   ///< @since 1.5
     };
 
     /**
@@ -206,7 +229,7 @@ public:
      *
      * @since 0.7 (KDE 4.1)
      */
-    typedef void (*DisposeDataFunction)(const Okular::Annotation *);
+    typedef void (*DisposeDataFunction)(const Okular::Annotation*);
 
     /**
      * Destroys the annotation.
@@ -216,7 +239,7 @@ public:
     /**
      * Sets the @p author of the annotation.
      */
-    void setAuthor(const QString &author);
+    void setAuthor(const QString& author);
 
     /**
      * Returns the author of the annotation.
@@ -226,7 +249,7 @@ public:
     /**
      * Sets the @p contents of the annotation.
      */
-    void setContents(const QString &contents);
+    void setContents(const QString& contents);
 
     /**
      * Returns the contents of the annotation.
@@ -236,7 +259,7 @@ public:
     /**
      * Sets the unique @p name of the annotation.
      */
-    void setUniqueName(const QString &name);
+    void setUniqueName(const QString& name);
 
     /**
      * Returns the unique name of the annotation.
@@ -248,7 +271,7 @@ public:
      *
      * The date must be before or equal to QDateTime::currentDateTime()
      */
-    void setModificationDate(const QDateTime &date);
+    void setModificationDate(const QDateTime& date);
 
     /**
      * Returns the last modification date of the annotation.
@@ -260,7 +283,7 @@ public:
      *
      * The date must be before or equal to @see modificationDate()
      */
-    void setCreationDate(const QDateTime &date);
+    void setCreationDate(const QDateTime& date);
 
     /**
      * Returns the creation date of the annotation.
@@ -282,7 +305,7 @@ public:
     /**
      * Sets the bounding @p rectangle of the annotation.
      */
-    void setBoundingRectangle(const NormalizedRect &rectangle);
+    void setBoundingRectangle(const NormalizedRect& rectangle);
 
     /**
      * Returns the bounding rectangle of the annotation.
@@ -302,7 +325,7 @@ public:
      *
      * @see canBeMoved()
      */
-    void translate(const NormalizedPoint &coord);
+    void translate(const NormalizedPoint& coord);
 
     /**
      * Adjust the annotation by the specified coordinates.
@@ -311,7 +334,8 @@ public:
      *
      * @see canBeResized()
      */
-    void adjust(const NormalizedPoint &deltaCoord1, const NormalizedPoint &deltaCoord2);
+    void adjust(const NormalizedPoint& deltaCoord1,
+                const NormalizedPoint& deltaCoord2);
 
     /**
      * The Style class contains all information about style of the
@@ -330,13 +354,13 @@ public:
          */
         ~Style();
 
-        Style(const Style &other);
-        Style &operator=(const Style &other);
+        Style(const Style& other);
+        Style& operator=(const Style& other);
 
         /**
          * Sets the @p color of the style.
          */
-        void setColor(const QColor &color);
+        void setColor(const QColor& color);
 
         /**
          * Returns the color of the style.
@@ -435,18 +459,18 @@ public:
 
     private:
         class Private;
-        Private *const d;
+        Private* const d;
     };
 
     /**
      * Returns a reference to the style object of the annotation.
      */
-    Style &style();
+    Style& style();
 
     /**
      * Returns a const reference to the style object of the annotation.
      */
-    const Style &style() const;
+    const Style& style() const;
 
     /**
      * The Window class contains all information about the popup window
@@ -465,8 +489,8 @@ public:
          */
         ~Window();
 
-        Window(const Window &other);
-        Window &operator=(const Window &other);
+        Window(const Window& other);
+        Window& operator=(const Window& other);
 
         /**
          * Sets the @p flags of the window.
@@ -481,7 +505,7 @@ public:
         /**
          * Sets the top-left @p point of the window.
          */
-        void setTopLeft(const NormalizedPoint &point);
+        void setTopLeft(const NormalizedPoint& point);
 
         /**
          * Returns the top-left point of the window.
@@ -511,7 +535,7 @@ public:
         /**
          * Sets the @p title of the window.
          */
-        void setTitle(const QString &title);
+        void setTitle(const QString& title);
 
         /**
          * Returns the title of the window.
@@ -521,7 +545,7 @@ public:
         /**
          * Sets the @p summary of the window.
          */
-        void setSummary(const QString &summary);
+        void setSummary(const QString& summary);
 
         /**
          * Returns the summary of the window.
@@ -530,18 +554,18 @@ public:
 
     private:
         class Private;
-        Private *const d;
+        Private* const d;
     };
 
     /**
      * Returns a reference to the window object of the annotation.
      */
-    Window &window();
+    Window& window();
 
     /**
      * Returns a const reference to the window object of the annotation.
      */
-    const Window &window() const;
+    const Window& window() const;
 
     /**
      * The Revision class contains all information about the revision
@@ -560,18 +584,18 @@ public:
          */
         ~Revision();
 
-        Revision(const Revision &other);
-        Revision &operator=(const Revision &other);
+        Revision(const Revision& other);
+        Revision& operator=(const Revision& other);
 
         /**
          * Sets the @p annotation the revision belongs to.
          */
-        void setAnnotation(Annotation *annotation);
+        void setAnnotation(Annotation* annotation);
 
         /**
          * Returns the annotation the revision belongs to.
          */
-        Annotation *annotation() const;
+        Annotation* annotation() const;
 
         /**
          * Sets the @p scope of the revision.
@@ -597,18 +621,18 @@ public:
 
     private:
         class Private;
-        Private *const d;
+        Private* const d;
     };
 
     /**
      * Returns a reference to the revision list of the annotation.
      */
-    QList<Revision> &revisions();
+    QList<Revision>& revisions();
 
     /**
      * Returns a reference to the revision list of the annotation.
      */
-    const QList<Revision> &revisions() const;
+    const QList<Revision>& revisions() const;
 
     /**
      * Sets the "native" @p id of the annotation.
@@ -621,7 +645,7 @@ public:
      *
      * @since 0.7 (KDE 4.1)
      */
-    void setNativeId(const QVariant &id);
+    void setNativeId(const QVariant& id);
 
     /**
      * Returns the "native" id of the annotation.
@@ -653,7 +677,8 @@ public:
     bool canBeResized() const;
 
     /**
-     * Returns whether the annotation dialog should be open after creation of the annotation or not
+     * Returns whether the annotation dialog should be open after creation of
+     * the annotation or not
      *
      * @since 0.13 (KDE 4.7)
      */
@@ -665,9 +690,10 @@ public:
     virtual SubType subType() const = 0;
 
     /**
-     * Stores the annotation as xml in @p document under the given parent @p node.
+     * Stores the annotation as xml in @p document under the given parent @p
+     * node.
      */
-    virtual void store(QDomNode &node, QDomDocument &document) const;
+    virtual void store(QDomNode& node, QDomDocument& document) const;
 
     /**
      * Retrieve the QDomNode representing this annotation's properties
@@ -681,14 +707,14 @@ public:
      *
      * @since 0.17 (KDE 4.11)
      */
-    void setAnnotationProperties(const QDomNode &node);
+    void setAnnotationProperties(const QDomNode& node);
 
 protected:
     /// @cond PRIVATE
-    explicit Annotation(AnnotationPrivate &dd);
-    Annotation(AnnotationPrivate &dd, const QDomNode &description);
+    explicit Annotation(AnnotationPrivate& dd);
+    Annotation(AnnotationPrivate& dd, const QDomNode& description);
     Q_DECLARE_PRIVATE(Annotation)
-    AnnotationPrivate *d_ptr;
+    AnnotationPrivate* d_ptr;
     /// @endcond
 
 private:
@@ -706,10 +732,11 @@ private:
 class OKULARCORE_EXPORT AnnotationProxy
 {
 public:
-    enum Capability {
-        Addition,     ///< Generator can create native annotations
-        Modification, ///< Generator can edit native annotations
-        Removal       ///< Generator can remove native annotations
+    enum Capability
+    {
+        Addition,  ///< Generator can create native annotations
+        Modification,  ///< Generator can edit native annotations
+        Removal  ///< Generator can remove native annotations
     };
 
     AnnotationProxy();
@@ -719,8 +746,8 @@ public:
      */
     virtual ~AnnotationProxy();
 
-    AnnotationProxy(const AnnotationProxy &) = delete;
-    AnnotationProxy &operator=(const AnnotationProxy &) = delete;
+    AnnotationProxy(const AnnotationProxy&) = delete;
+    AnnotationProxy& operator=(const AnnotationProxy&) = delete;
 
     /**
      * Query for the supported capabilities.
@@ -732,7 +759,7 @@ public:
      *
      * @note Only called if supports(Addition) == true
      */
-    virtual void notifyAddition(Annotation *annotation, int page) = 0;
+    virtual void notifyAddition(Annotation* annotation, int page) = 0;
 
     /**
      * Called after an existing @p annotation at a given @p page is modified.
@@ -742,14 +769,15 @@ public:
      *
      * @note Only called if supports(Modification) == true
      */
-    virtual void notifyModification(const Annotation *annotation, int page, bool appearanceChanged) = 0;
+    virtual void notifyModification(const Annotation* annotation, int page,
+                                    bool appearanceChanged) = 0;
 
     /**
      * Called when an existing @p annotation at a given @p page is removed.
      *
      * @note Only called if supports(Removal) == true
      */
-    virtual void notifyRemoval(Annotation *annotation, int page) = 0;
+    virtual void notifyRemoval(Annotation* annotation, int page) = 0;
 };
 
 class OKULARCORE_EXPORT TextAnnotation : public Annotation
@@ -758,18 +786,20 @@ public:
     /**
      * Describes the type of the text.
      */
-    enum TextType {
-        Linked, ///< The annotation is linked to a text
-        InPlace ///< The annotation is located next to the text
+    enum TextType
+    {
+        Linked,  ///< The annotation is linked to a text
+        InPlace  ///< The annotation is located next to the text
     };
 
     /**
      * Describes the style of the text.
      */
-    enum InplaceIntent {
-        Unknown,   ///< Unknown style
-        Callout,   ///< Callout style
-        TypeWriter ///< Type writer style
+    enum InplaceIntent
+    {
+        Unknown,  ///< Unknown style
+        Callout,  ///< Callout style
+        TypeWriter  ///< Type writer style
     };
 
     /**
@@ -780,7 +810,7 @@ public:
     /**
      * Creates a new text annotation from the xml @p description
      */
-    explicit TextAnnotation(const QDomNode &description);
+    explicit TextAnnotation(const QDomNode& description);
 
     /**
      * Destroys the text annotation.
@@ -801,7 +831,7 @@ public:
     /**
      * Sets the @p icon of the text annotation.
      */
-    void setTextIcon(const QString &icon);
+    void setTextIcon(const QString& icon);
 
     /**
      * Returns the icon of the text annotation.
@@ -811,7 +841,7 @@ public:
     /**
      * Sets the @p font of the text annotation.
      */
-    void setTextFont(const QFont &font);
+    void setTextFont(const QFont& font);
 
     /**
      * Returns the font of the text annotation.
@@ -823,7 +853,7 @@ public:
      *
      * @since 1.6
      */
-    void setTextColor(const QColor &color);
+    void setTextColor(const QColor& color);
 
     /**
      * Returns the color of inplace text.
@@ -849,7 +879,7 @@ public:
      *
      * @p index must be between 0 and 2.
      */
-    void setInplaceCallout(const NormalizedPoint &point, int index);
+    void setInplaceCallout(const NormalizedPoint& point, int index);
 
     /**
      * Returns the inplace callout point for @p index.
@@ -859,7 +889,8 @@ public:
     NormalizedPoint inplaceCallout(int index) const;
 
     /**
-     * Returns the transformed (e.g. rotated) inplace callout point for @p index.
+     * Returns the transformed (e.g. rotated) inplace callout point for @p
+     * index.
      *
      * @p index must be between 0 and 2.
      */
@@ -882,9 +913,10 @@ public:
     SubType subType() const override;
 
     /**
-     * Stores the text annotation as xml in @p document under the given parent @p node.
+     * Stores the text annotation as xml in @p document under the given parent
+     * @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(TextAnnotation)
@@ -897,27 +929,29 @@ public:
     /**
      * Describes the line ending style.
      */
-    enum TermStyle {
-        Square,       ///< Using a square
-        Circle,       ///< Using a circle
-        Diamond,      ///< Using a diamond
-        OpenArrow,    ///< Using an open arrow
+    enum TermStyle
+    {
+        Square,  ///< Using a square
+        Circle,  ///< Using a circle
+        Diamond,  ///< Using a diamond
+        OpenArrow,  ///< Using an open arrow
         ClosedArrow,  ///< Using a closed arrow
-        None,         ///< No special ending style
-        Butt,         ///< Using a butt ending
-        ROpenArrow,   ///< Using an arrow opened at the right side
-        RClosedArrow, ///< Using an arrow closed at the right side
-        Slash         ///< Using a slash
+        None,  ///< No special ending style
+        Butt,  ///< Using a butt ending
+        ROpenArrow,  ///< Using an arrow opened at the right side
+        RClosedArrow,  ///< Using an arrow closed at the right side
+        Slash  ///< Using a slash
     };
 
     /**
      * Describes the line intent.
      */
-    enum LineIntent {
-        Unknown,     ///< Unknown intent
-        Arrow,       ///< Arrow intent
-        Dimension,   ///< Dimension intent
-        PolygonCloud ///< Polygon cloud intent
+    enum LineIntent
+    {
+        Unknown,  ///< Unknown intent
+        Arrow,  ///< Arrow intent
+        Dimension,  ///< Dimension intent
+        PolygonCloud  ///< Polygon cloud intent
     };
 
     /**
@@ -928,7 +962,7 @@ public:
     /**
      * Creates a new line annotation from the xml @p description
      */
-    explicit LineAnnotation(const QDomNode &description);
+    explicit LineAnnotation(const QDomNode& description);
 
     /**
      * Destroys the line annotation.
@@ -940,7 +974,7 @@ public:
      *
      * @since 22.08
      */
-    void setLinePoints(const QList<NormalizedPoint> &points);
+    void setLinePoints(const QList<NormalizedPoint>& points);
 
     /**
      * Returns the normalized line points of the line annotation.
@@ -992,7 +1026,7 @@ public:
     /**
      * Sets the inner line @p color of the line annotation.
      */
-    void setLineInnerColor(const QColor &color);
+    void setLineInnerColor(const QColor& color);
 
     /**
      * Returns the inner line color of the line annotation.
@@ -1046,9 +1080,10 @@ public:
     SubType subType() const override;
 
     /**
-     * Stores the line annotation as xml in @p document under the given parent @p node.
+     * Stores the line annotation as xml in @p document under the given parent
+     * @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(LineAnnotation)
@@ -1059,8 +1094,9 @@ class OKULARCORE_EXPORT GeomAnnotation : public Annotation
 {
 public:
     // common enums
-    enum GeomType {
-        InscribedSquare, ///< Draw a square
+    enum GeomType
+    {
+        InscribedSquare,  ///< Draw a square
         InscribedCircle  ///< Draw a circle
     };
 
@@ -1072,7 +1108,7 @@ public:
     /**
      * Creates a new geometrical annotation from the xml @p description
      */
-    explicit GeomAnnotation(const QDomNode &description);
+    explicit GeomAnnotation(const QDomNode& description);
 
     /**
      * Destroys the geometrical annotation.
@@ -1093,7 +1129,7 @@ public:
     /**
      * Sets the inner @p color of the geometrical annotation.
      */
-    void setGeometricalInnerColor(const QColor &color);
+    void setGeometricalInnerColor(const QColor& color);
 
     /**
      * Returns the inner color of the geometrical annotation.
@@ -1109,7 +1145,7 @@ public:
      * Stores the geometrical annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(GeomAnnotation)
@@ -1122,10 +1158,11 @@ public:
     /**
      * Describes the highlighting style of the annotation.
      */
-    enum HighlightType {
-        Highlight, ///< Highlights the text
+    enum HighlightType
+    {
+        Highlight,  ///< Highlights the text
         Squiggly,  ///< Squiggles the text
-        Underline, ///< Underlines the text
+        Underline,  ///< Underlines the text
         StrikeOut  ///< Strikes out the text
     };
 
@@ -1137,7 +1174,7 @@ public:
     /**
      * Creates a new highlight annotation from the xml @p description
      */
-    explicit HighlightAnnotation(const QDomNode &description);
+    explicit HighlightAnnotation(const QDomNode& description);
 
     /**
      * Destroys the highlight annotation.
@@ -1182,15 +1219,15 @@ public:
          */
         ~Quad();
 
-        Quad(const Quad &other);
-        Quad &operator=(const Quad &other);
+        Quad(const Quad& other);
+        Quad& operator=(const Quad& other);
 
         /**
          * Sets the normalized @p point at @p index.
          *
          * @p index must be between 0 and 3.
          */
-        void setPoint(const NormalizedPoint &point, int index);
+        void setPoint(const NormalizedPoint& point, int index);
 
         /**
          * Returns the normalized point at @p index.
@@ -1240,26 +1277,27 @@ public:
          * Transforms the quad coordinates with the transformation defined
          * by @p matrix.
          *
-         * The transformed coordinates will be accessible with transformedPoint().
-         * The coordinates returned by point() are not affected.
+         * The transformed coordinates will be accessible with
+         * transformedPoint(). The coordinates returned by point() are not
+         * affected.
          */
-        void transform(const QTransform &matrix);
+        void transform(const QTransform& matrix);
 
     private:
         class Private;
-        Private *const d;
+        Private* const d;
     };
 
     /**
      * Returns a reference to the quad list of the highlight annotation.
      */
-    QList<Quad> &highlightQuads();
+    QList<Quad>& highlightQuads();
 
     /**
      * Returns a const reference to the quad list of the highlight annotation.
      * @since 20.12
      */
-    const QList<Quad> &highlightQuads() const;
+    const QList<Quad>& highlightQuads() const;
 
     /**
      * Returns the sub type of the highlight annotation.
@@ -1270,7 +1308,7 @@ public:
      * Stores the highlight annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(HighlightAnnotation)
@@ -1288,7 +1326,7 @@ public:
     /**
      * Creates a new stamp annotation from the xml @p description
      */
-    explicit StampAnnotation(const QDomNode &description);
+    explicit StampAnnotation(const QDomNode& description);
 
     /**
      * Destroys the stamp annotation.
@@ -1298,7 +1336,7 @@ public:
     /**
      * Sets the @p name of the icon for the stamp annotation.
      */
-    void setStampIconName(const QString &name);
+    void setStampIconName(const QString& name);
 
     /**
      * Returns the name of the icon.
@@ -1314,7 +1352,7 @@ public:
      * Stores the stamp annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(StampAnnotation)
@@ -1332,7 +1370,7 @@ public:
     /**
      * Creates a new ink annotation from the xml @p description
      */
-    explicit InkAnnotation(const QDomNode &description);
+    explicit InkAnnotation(const QDomNode& description);
 
     /**
      * Destroys the ink annotation.
@@ -1344,7 +1382,7 @@ public:
      *
      * @since 22.08
      */
-    void setInkPaths(const QList<QList<NormalizedPoint>> &paths);
+    void setInkPaths(const QList<QList<NormalizedPoint>>& paths);
 
     /**
      * Returns the paths of points of the ink annotation.
@@ -1370,7 +1408,7 @@ public:
      * Stores the ink annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(InkAnnotation)
@@ -1383,9 +1421,10 @@ public:
     /**
      * Describes the highlighting style of the annotation.
      */
-    enum CaretSymbol {
-        None, ///< No symbol to be associated with the text
-        P     ///< A 'paragraph' symbol
+    enum CaretSymbol
+    {
+        None,  ///< No symbol to be associated with the text
+        P  ///< A 'paragraph' symbol
     };
 
     /**
@@ -1396,7 +1435,7 @@ public:
     /**
      * Creates a new caret annotation from the xml @p description
      */
-    explicit CaretAnnotation(const QDomNode &description);
+    explicit CaretAnnotation(const QDomNode& description);
 
     /**
      * Destroys the caret annotation.
@@ -1422,7 +1461,7 @@ public:
      * Stores the caret annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(CaretAnnotation)
@@ -1439,7 +1478,7 @@ public:
     /**
      * Creates a new file attachment annotation from the xml @p description
      */
-    explicit FileAttachmentAnnotation(const QDomNode &description);
+    explicit FileAttachmentAnnotation(const QDomNode& description);
     /**
      * Destroys the file attachment annotation.
      */
@@ -1453,18 +1492,18 @@ public:
     /**
      * Sets the @p iconName of the icon for the file attachment annotation.
      */
-    void setFileIconName(const QString &iconName);
+    void setFileIconName(const QString& iconName);
 
     /**
      * Gets the embedded file object.
      */
-    EmbeddedFile *embeddedFile() const;
+    EmbeddedFile* embeddedFile() const;
 
     /**
      * Sets the @p ef representing the embedded file of the file
      * attachment annotation.
      */
-    void setEmbeddedFile(EmbeddedFile *ef);
+    void setEmbeddedFile(EmbeddedFile* ef);
 
     /**
      * Returns the sub type of the file attachment annotation.
@@ -1475,7 +1514,7 @@ public:
      * Stores the file attachment annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(FileAttachmentAnnotation)
@@ -1499,7 +1538,7 @@ public:
     /**
      * Creates a new sound annotation from the xml @p description
      */
-    explicit SoundAnnotation(const QDomNode &description);
+    explicit SoundAnnotation(const QDomNode& description);
     /**
      * Destroys the sound annotation.
      */
@@ -1513,18 +1552,18 @@ public:
     /**
      * Sets the @p iconName of the icon for the sound annotation.
      */
-    void setSoundIconName(const QString &iconName);
+    void setSoundIconName(const QString& iconName);
 
     /**
      * Gets the sound object.
      */
-    Sound *sound() const;
+    Sound* sound() const;
 
     /**
      * Sets the @p s representing the sound of the file
      * attachment annotation.
      */
-    void setSound(Sound *s);
+    void setSound(Sound* s);
 
     /**
      * Returns the sub type of the sound annotation.
@@ -1535,7 +1574,7 @@ public:
      * Stores the sound annotation as xml in @p document
      * under the given parent @p node.
      */
-    void store(QDomNode &node, QDomDocument &document) const override;
+    void store(QDomNode& node, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(SoundAnnotation)
@@ -1559,7 +1598,7 @@ public:
     /**
      * Creates a new movie annotation from the xml @p description
      */
-    explicit MovieAnnotation(const QDomNode &description);
+    explicit MovieAnnotation(const QDomNode& description);
     /**
      * Destroys the movie annotation.
      */
@@ -1567,11 +1606,11 @@ public:
     /**
      * Gets the movie object.
      */
-    Movie *movie() const;
+    Movie* movie() const;
     /**
      * Sets the new @p movie object.
      */
-    void setMovie(Movie *movie);
+    void setMovie(Movie* movie);
     /**
      * Returns the sub type of the movie annotation.
      */
@@ -1580,7 +1619,7 @@ public:
      * Stores the movie annotation as xml in @p document
      * under the given @p parentNode.
      */
-    void store(QDomNode &parentNode, QDomDocument &document) const override;
+    void store(QDomNode& parentNode, QDomDocument& document) const override;
 
 private:
     Q_DECLARE_PRIVATE(MovieAnnotation)
@@ -1591,7 +1630,8 @@ private:
  * \short Screen annotation.
  *
  * The screen annotation specifies a region of a page upon which media clips
- * may be played. It also serves as an object from which actions can be triggered.
+ * may be played. It also serves as an object from which actions can be
+ * triggered.
  *
  * @since 0.16 (KDE 4.10)
  */
@@ -1606,7 +1646,7 @@ public:
     /**
      * Creates a new screen annotation from the xml @p description
      */
-    explicit ScreenAnnotation(const QDomNode &description);
+    explicit ScreenAnnotation(const QDomNode& description);
 
     /**
      * Destroys the screen annotation.
@@ -1622,35 +1662,37 @@ public:
      * Stores the screen annotation as xml in @p document
      * under the given @p parentNode.
      */
-    void store(QDomNode &parentNode, QDomDocument &document) const override;
+    void store(QDomNode& parentNode, QDomDocument& document) const override;
 
     /**
      * Sets the @p action that is executed when the annotation is triggered.
      *
      * @since 0.16 (KDE 4.10)
      */
-    void setAction(Action *action);
+    void setAction(Action* action);
 
     /**
-     * Returns the action that is executed when the annotation is triggered or @c 0 if not action has been defined.
+     * Returns the action that is executed when the annotation is triggered or
+     * @c 0 if not action has been defined.
      *
      * @since 0.16 (KDE 4.10)
      */
-    Action *action() const;
+    Action* action() const;
 
     /**
      * Sets the additional @p action of the given @p type.
      *
      * @since 0.16 (KDE 4.10)
      */
-    void setAdditionalAction(AdditionalActionType type, Action *action);
+    void setAdditionalAction(AdditionalActionType type, Action* action);
 
     /**
-     * Returns the additional action of the given @p type or @c 0 if no action has been defined.
+     * Returns the additional action of the given @p type or @c 0 if no action
+     * has been defined.
      *
      * @since 0.16 (KDE 4.10)
      */
-    Action *additionalAction(AdditionalActionType type) const;
+    Action* additionalAction(AdditionalActionType type) const;
 
 private:
     Q_DECLARE_PRIVATE(ScreenAnnotation)
@@ -1675,7 +1717,7 @@ public:
     /**
      * Creates a new widget annotation from the xml @p description
      */
-    explicit WidgetAnnotation(const QDomNode &description);
+    explicit WidgetAnnotation(const QDomNode& description);
 
     /**
      * Destroys the widget annotation.
@@ -1691,21 +1733,22 @@ public:
      * Stores the widget annotation as xml in @p document
      * under the given @p parentNode.
      */
-    void store(QDomNode &parentNode, QDomDocument &document) const override;
+    void store(QDomNode& parentNode, QDomDocument& document) const override;
 
     /**
      * Sets the additional @p action of the given @p type.
      *
      * @since 0.16 (KDE 4.10)
      */
-    void setAdditionalAction(AdditionalActionType type, Action *action);
+    void setAdditionalAction(AdditionalActionType type, Action* action);
 
     /**
-     * Returns the additional action of the given @p type or @c 0 if no action has been defined.
+     * Returns the additional action of the given @p type or @c 0 if no action
+     * has been defined.
      *
      * @since 0.16 (KDE 4.10)
      */
-    Action *additionalAction(AdditionalActionType type) const;
+    Action* additionalAction(AdditionalActionType type) const;
 
 private:
     Q_DECLARE_PRIVATE(WidgetAnnotation)
@@ -1730,7 +1773,7 @@ public:
     /**
      * Creates a new rich media annotation from the xml @p description
      */
-    explicit RichMediaAnnotation(const QDomNode &description);
+    explicit RichMediaAnnotation(const QDomNode& description);
 
     /**
      * Destroys the rich media annotation.
@@ -1746,33 +1789,33 @@ public:
      * Stores the rich media annotation as xml in @p document
      * under the given @p parentNode.
      */
-    void store(QDomNode &parentNode, QDomDocument &document) const override;
+    void store(QDomNode& parentNode, QDomDocument& document) const override;
 
     /**
      * Gets the movie object.
      */
-    Movie *movie() const;
+    Movie* movie() const;
 
     /**
      * Sets the new @p movie object.
      */
-    void setMovie(Movie *movie);
+    void setMovie(Movie* movie);
 
     /**
      * Sets the @p embeddedFile representing the embedded file.
      */
-    void setEmbeddedFile(EmbeddedFile *embeddedFile);
+    void setEmbeddedFile(EmbeddedFile* embeddedFile);
 
     /**
      * Gets the embedded file object.
      */
-    EmbeddedFile *embeddedFile() const;
+    EmbeddedFile* embeddedFile() const;
 
 private:
     Q_DECLARE_PRIVATE(RichMediaAnnotation)
     Q_DISABLE_COPY(RichMediaAnnotation)
 };
 
-}
+}  // namespace Okular
 
 #endif

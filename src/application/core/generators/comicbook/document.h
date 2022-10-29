@@ -28,10 +28,10 @@ public:
     Document();
     ~Document();
 
-    bool open(const QString &fileName);
+    bool open(const QString& fileName);
     void close();
 
-    void pages(QVector<Okular::Page *> *pagesVector);
+    void pages(QVector<Okular::Page*>* pagesVector);
     QStringList pageTitles() const;
 
     QImage pageImage(int page) const;
@@ -42,14 +42,14 @@ private:
     bool processArchive();
 
     QStringList mPageMap;
-    Directory *mDirectory;
-    Unrar *mUnrar;
-    KArchive *mArchive;
-    const KArchiveDirectory *mArchiveDir;
+    Directory* mDirectory;
+    Unrar* mUnrar;
+    KArchive* mArchive;
+    const KArchiveDirectory* mArchiveDir;
     QString mLastErrorString;
     QStringList mEntries;
 };
 
-}
+}  // namespace ComicBook
 
 #endif

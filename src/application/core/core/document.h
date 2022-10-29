@@ -3,27 +3,26 @@
     SPDX-FileCopyrightText: 2004-2008 Albert Astals Cid <aacid@kde.org>
 
     Work sponsored by the LiMux project of the city of Munich:
-    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group company <info@kdab.com>
+    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group
+   company <info@kdab.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef _OKULAR_DOCUMENT_H_
-#define _OKULAR_DOCUMENT_H_
+    #define _OKULAR_DOCUMENT_H_
 
-#include "area.h"
-#include "global.h"
-#include "okularcore_export.h"
-#include "pagesize.h"
-
-#include <QDomDocument>
-#include <QObject>
-#include <QPrinter>
-#include <QStringList>
-#include <QVector>
-
-#include <QMimeType>
-#include <QUrl>
+    #include <QDomDocument>
+    #include <QMimeType>
+    #include <QObject>
+    #include <QPrinter>
+    #include <QStringList>
+    #include <QUrl>
+    #include <QVector>
+    #include "area.h"
+    #include "global.h"
+    #include "okularcore_export.h"
+    #include "pagesize.h"
 
 class KConfigDialog;
 class KPluginMetaData;
@@ -61,11 +60,11 @@ class View;
 class VisiblePageRect;
 class SignatureInfo;
 
-/** IDs for seaches. Globally defined here. **/
-#define PART_SEARCH_ID 1
-#define PAGEVIEW_SEARCH_ID 2
-#define SW_SEARCH_ID 3
-#define PRESENTATION_SEARCH_ID 4
+    /** IDs for seaches. Globally defined here. **/
+    #define PART_SEARCH_ID 1
+    #define PAGEVIEW_SEARCH_ID 2
+    #define SW_SEARCH_ID 3
+    #define PRESENTATION_SEARCH_ID 4
 
 /**
  * The DocumentInfo structure can be filled in by generators to display
@@ -79,33 +78,37 @@ public:
     /**
      * The list of predefined keys.
      */
-    enum Key {
-        Title,            ///< The title of the document
-        Subject,          ///< The subject of the document
-        Description,      ///< The description of the document
-        Author,           ///< The author of the document
-        Creator,          ///< The creator of the document (this can be different from the author)
-        Producer,         ///< The producer of the document (e.g. some software)
-        Copyright,        ///< The copyright of the document
-        Pages,            ///< The number of pages of the document
-        CreationDate,     ///< The date of creation of the document
-        ModificationDate, ///< The date of last modification of the document
-        MimeType,         ///< The mime type of the document
-        Category,         ///< The category of the document
-        Keywords,         ///< The keywords which describe the content of the document
-        FilePath,         ///< The path of the file @since 0.10 (KDE 4.4)
-        DocumentSize,     ///< The size of the document @since 0.10 (KDE 4.4)
-        PagesSize,        ///< The size of the pages (if all pages have the same size) @since 0.10 (KDE 4.4)
-        CustomKeys,       ///< All the custom keys the generator supports @since 0.21
-        Invalid           ///< An invalid key @since 0.21. It will always be the last element in the enum
+    enum Key
+    {
+        Title,  ///< The title of the document
+        Subject,  ///< The subject of the document
+        Description,  ///< The description of the document
+        Author,  ///< The author of the document
+        Creator,  ///< The creator of the document (this can be different from
+                  ///< the author)
+        Producer,  ///< The producer of the document (e.g. some software)
+        Copyright,  ///< The copyright of the document
+        Pages,  ///< The number of pages of the document
+        CreationDate,  ///< The date of creation of the document
+        ModificationDate,  ///< The date of last modification of the document
+        MimeType,  ///< The mime type of the document
+        Category,  ///< The category of the document
+        Keywords,  ///< The keywords which describe the content of the document
+        FilePath,  ///< The path of the file @since 0.10 (KDE 4.4)
+        DocumentSize,  ///< The size of the document @since 0.10 (KDE 4.4)
+        PagesSize,  ///< The size of the pages (if all pages have the same size)
+                    ///< @since 0.10 (KDE 4.4)
+        CustomKeys,  ///< All the custom keys the generator supports @since 0.21
+        Invalid  ///< An invalid key @since 0.21. It will always be the last
+                 ///< element in the enum
     };
 
     /**
      * Creates a new document info.
      */
     DocumentInfo();
-    DocumentInfo(const DocumentInfo &info);
-    DocumentInfo &operator=(const DocumentInfo &);
+    DocumentInfo(const DocumentInfo& info);
+    DocumentInfo& operator=(const DocumentInfo&);
 
     ~DocumentInfo();
 
@@ -126,19 +129,20 @@ public:
      * Returns the value for a given key or an null string when the
      * key doesn't exist.
      */
-    QString get(const QString &key) const;
+    QString get(const QString& key) const;
 
     /**
      * Sets a value for a custom key. The title should be an i18n'ed
      * string, since it's used in the document information dialog.
      */
-    void set(const QString &key, const QString &value, const QString &title = QString());
+    void set(const QString& key, const QString& value,
+             const QString& title = QString());
 
     /**
      * Sets a value for a special key. The title should be an i18n'ed
      * string, since it's used in the document information dialog.
      */
-    void set(Key key, const QString &value);
+    void set(Key key, const QString& value);
 
     /**
      * Returns the user visible string for the given key
@@ -146,7 +150,7 @@ public:
      *
      * @since 0.21
      */
-    QString getKeyTitle(const QString &key) const;
+    QString getKeyTitle(const QString& key) const;
 
     /**
      * Returns the internal string for the given key
@@ -164,10 +168,10 @@ public:
      * Returns the Key from a string key
      * @since 0.21
      */
-    static Key getKeyFromString(const QString &key);
+    static Key getKeyFromString(const QString& key);
 
 private:
-    DocumentInfoPrivate *d;
+    DocumentInfoPrivate* d;
 };
 
 /**
@@ -193,9 +197,10 @@ class OKULARCORE_EXPORT Document : public QObject
 
 public:
     /**
-     * Creates a new document with the given @p widget as widget to relay GUI things (messageboxes, ...).
+     * Creates a new document with the given @p widget as widget to relay GUI
+     * things (messageboxes, ...).
      */
-    explicit Document(QWidget *widget);
+    explicit Document(QWidget* widget);
 
     /**
      * Destroys the document.
@@ -206,17 +211,21 @@ public:
      * Describes the result of an open document operation.
      * @since 0.20 (KDE 4.14)
      */
-    enum OpenResult {
-        OpenSuccess,      //< The document was opened successfully
-        OpenError,        //< The document failed to open
-        OpenNeedsPassword //< The document needs a password to be opened or the one provided is not the correct
+    enum OpenResult
+    {
+        OpenSuccess,  //< The document was opened successfully
+        OpenError,  //< The document failed to open
+        OpenNeedsPassword  //< The document needs a password to be opened or the
+                           //one provided is not the correct
     };
 
     /**
      * Opens the document.
      * @since 0.20 (KDE 4.14)
      */
-    OpenResult openDocument(const QString &docFile, const QUrl &url, const QMimeType &mime, const QString &password = QString());
+    OpenResult openDocument(const QString& docFile, const QUrl& url,
+                            const QMimeType& mime,
+                            const QString& password = QString());
 
     /**
      * Closes the document.
@@ -226,12 +235,12 @@ public:
     /**
      * Registers a new @p observer for the document.
      */
-    void addObserver(DocumentObserver *observer);
+    void addObserver(DocumentObserver* observer);
 
     /**
      * Unregisters the given @p observer for the document.
      */
-    void removeObserver(DocumentObserver *observer);
+    void removeObserver(DocumentObserver* observer);
 
     /**
      * Reparses and applies the configuration.
@@ -249,16 +258,16 @@ public:
     DocumentInfo documentInfo() const;
 
     /**
-     * Returns the asked set of meta data of the document. The result may contain more
-     * metadata than the one asked for.
+     * Returns the asked set of meta data of the document. The result may
+     * contain more metadata than the one asked for.
      */
-    DocumentInfo documentInfo(const QSet<DocumentInfo::Key> &keys) const;
+    DocumentInfo documentInfo(const QSet<DocumentInfo::Key>& keys) const;
 
     /**
      * Returns the table of content of the document or 0 if no
      * table of content is available.
      */
-    const DocumentSynopsis *documentSynopsis() const;
+    const DocumentSynopsis* documentSynopsis() const;
 
     /**
      * Starts the reading of the information about the fonts in the
@@ -290,29 +299,30 @@ public:
      * Returns the list of embedded files or 0 if no embedded files
      * are available.
      */
-    const QList<EmbeddedFile *> *embeddedFiles() const;
+    const QList<EmbeddedFile*>* embeddedFiles() const;
 
     /**
      * Returns the page object for the given page @p number or 0
      * if the number is out of range.
      */
-    const Page *page(int number) const;
+    const Page* page(int number) const;
 
     /**
      * Returns the current viewport of the document.
      */
-    const DocumentViewport &viewport() const;
+    const DocumentViewport& viewport() const;
 
     /**
      * Sets the list of visible page rectangles.
      * @see VisiblePageRect
      */
-    void setVisiblePageRects(const QVector<VisiblePageRect *> &visiblePageRects, DocumentObserver *excludeObserver = nullptr);
+    void setVisiblePageRects(const QVector<VisiblePageRect*>& visiblePageRects,
+                             DocumentObserver* excludeObserver = nullptr);
 
     /**
      * Returns the list of visible page rectangles.
      */
-    const QVector<VisiblePageRect *> &visiblePageRects() const;
+    const QVector<VisiblePageRect*>& visiblePageRects() const;
 
     /**
      * Returns the number of the current page.
@@ -367,7 +377,7 @@ public:
     /**
      * Exports the document as ASCII text and saves it under @p fileName.
      */
-    bool exportToText(const QString &fileName) const;
+    bool exportToText(const QString& fileName) const;
 
     /**
      * Returns the list of supported export formats.
@@ -376,9 +386,10 @@ public:
     QList<ExportFormat> exportFormats() const;
 
     /**
-     * Exports the document in the given @p format and saves it under @p fileName.
+     * Exports the document in the given @p format and saves it under @p
+     * fileName.
      */
-    bool exportTo(const QString &fileName, const ExportFormat &format) const;
+    bool exportTo(const QString& fileName, const ExportFormat& format) const;
 
     /**
      * Returns whether the document history is at the begin.
@@ -391,10 +402,11 @@ public:
     bool historyAtEnd() const;
 
     /**
-     * Returns the meta data for the given @p key and @p option or an empty variant
-     * if the key doesn't exists.
+     * Returns the meta data for the given @p key and @p option or an empty
+     * variant if the key doesn't exists.
      */
-    QVariant metaData(const QString &key, const QVariant &option = QVariant()) const;
+    QVariant metaData(const QString& key,
+                      const QVariant& option = QVariant()) const;
 
     /**
      * Returns the current rotation of the document.
@@ -416,36 +428,47 @@ public:
     /**
      * Returns the gui client of the generator, if it provides one.
      */
-    KXMLGUIClient *guiClient();
+    KXMLGUIClient* guiClient();
 
     /**
      * Sets the current document viewport to the given @p page.
      *
      * @param page The number of the page.
-     * @param excludeObserver The observer ids which shouldn't be effected by this change.
+     * @param excludeObserver The observer ids which shouldn't be effected by
+     * this change.
      * @param smoothMove Whether the move shall be animated smoothly.
      */
-    void setViewportPage(int page, DocumentObserver *excludeObserver = nullptr, bool smoothMove = false);
+    void setViewportPage(int page, DocumentObserver* excludeObserver = nullptr,
+                         bool smoothMove = false);
 
     /**
      * Sets the current document viewport to the given @p viewport.
      *
      * @param viewport The document viewport.
-     * @param excludeObserver The observer which shouldn't be effected by this change.
+     * @param excludeObserver The observer which shouldn't be effected by this
+     * change.
      * @param smoothMove Whether the move shall be animated smoothly.
      */
-    void setViewport(const DocumentViewport &viewport, DocumentObserver *excludeObserver = nullptr, bool smoothMove = false);
+    void setViewport(const DocumentViewport& viewport,
+                     DocumentObserver* excludeObserver = nullptr,
+                     bool smoothMove = false);
 
     /**
      * Sets the current document viewport to the given @p viewport.
-     * BCI TODO: merge with setViewport, adding a parameter "bool updateHistory = true"
+     * BCI TODO: merge with setViewport, adding a parameter "bool updateHistory
+     * = true"
      *
      * @param viewport The document viewport.
-     * @param excludeObserver The observer which shouldn't be effected by this change.
+     * @param excludeObserver The observer which shouldn't be effected by this
+     * change.
      * @param smoothMove Whether the move shall be animated smoothly.
-     * @param updateHistory Whether to consider the change of viewport for the history navigation
+     * @param updateHistory Whether to consider the change of viewport for the
+     * history navigation
      */
-    void setViewportWithHistory(const DocumentViewport &viewport, DocumentObserver *excludeObserver = nullptr, bool smoothMove = false, bool updateHistory = true);
+    void setViewportWithHistory(const DocumentViewport& viewport,
+                                DocumentObserver* excludeObserver = nullptr,
+                                bool smoothMove = false,
+                                bool updateHistory = true);
 
     /**
      * Sets the current document viewport to the next viewport in the
@@ -462,26 +485,28 @@ public:
     /**
      * Sets the next @p viewport in the viewport history.
      */
-    void setNextDocumentViewport(const DocumentViewport &viewport);
+    void setNextDocumentViewport(const DocumentViewport& viewport);
 
     /**
      * Sets the next @p namedDestination in the viewport history.
      *
      * @since 0.9 (KDE 4.3)
      */
-    void setNextDocumentDestination(const QString &namedDestination);
+    void setNextDocumentDestination(const QString& namedDestination);
 
     /**
      * Sets the zoom for the current document.
      */
-    void setZoom(int factor, DocumentObserver *excludeObserver = nullptr);
+    void setZoom(int factor, DocumentObserver* excludeObserver = nullptr);
 
     /**
      * Describes the possible options for the pixmap requests.
      */
-    enum PixmapRequestFlag {
-        NoOption = 0,         ///< No options
-        RemoveAllPrevious = 1 ///< Remove all the previous requests, even for non requested page pixmaps
+    enum PixmapRequestFlag
+    {
+        NoOption = 0,  ///< No options
+        RemoveAllPrevious = 1  ///< Remove all the previous requests, even for
+                               ///< non requested page pixmaps
     };
     Q_DECLARE_FLAGS(PixmapRequestFlags, PixmapRequestFlag)
 
@@ -492,7 +517,7 @@ public:
      *
      * @since 22.08
      */
-    void requestPixmaps(const QList<PixmapRequest *> &requests);
+    void requestPixmaps(const QList<PixmapRequest*>& requests);
 
     /**
      * Sends @p requests for pixmap generation.
@@ -502,24 +527,26 @@ public:
      *
      * @since 22.08
      */
-    void requestPixmaps(const QList<PixmapRequest *> &requests, PixmapRequestFlags reqOptions);
+    void requestPixmaps(const QList<PixmapRequest*>& requests,
+                        PixmapRequestFlags reqOptions);
 
     /**
-     * Sends a request for text page generation for the given page @p pageNumber.
+     * Sends a request for text page generation for the given page @p
+     * pageNumber.
      */
     void requestTextPage(uint pageNumber);
 
     /**
      * Adds a new @p annotation to the given @p page.
      */
-    void addPageAnnotation(int page, Annotation *annotation);
+    void addPageAnnotation(int page, Annotation* annotation);
 
     /**
      * Tests if the @p annotation can be modified
      *
      * @since 0.15 (KDE 4.9)
      */
-    bool canModifyPageAnnotation(const Annotation *annotation) const;
+    bool canModifyPageAnnotation(const Annotation* annotation) const;
 
     /**
      *  Prepares to modify the properties of the given @p annotation.
@@ -527,7 +554,7 @@ public:
      *
      * @since 0.17 (KDE 4.11)
      */
-    void prepareToModifyAnnotationProperties(Annotation *annotation);
+    void prepareToModifyAnnotationProperties(Annotation* annotation);
 
     /**
      * Modifies the given @p annotation on the given @p page.
@@ -536,61 +563,74 @@ public:
      *
      * @since 0.17 (KDE 4.11)
      */
-    void modifyPageAnnotationProperties(int page, Annotation *annotation);
+    void modifyPageAnnotationProperties(int page, Annotation* annotation);
 
     /**
-     * Translates the position of the given @p annotation on the given @p page by a distance @p delta in normalized coordinates.
+     * Translates the position of the given @p annotation on the given @p page
+     * by a distance @p delta in normalized coordinates.
      *
-     * Consecutive translations applied to the same @p annotation are merged together on the undo stack if the
-     * BeingMoved flag is set on the @p annotation.
+     * Consecutive translations applied to the same @p annotation are merged
+     * together on the undo stack if the BeingMoved flag is set on the @p
+     * annotation.
      *
      * @since 0.17 (KDE 4.11)
      */
-    void translatePageAnnotation(int page, Annotation *annotation, const Okular::NormalizedPoint &delta);
+    void translatePageAnnotation(int page, Annotation* annotation,
+                                 const Okular::NormalizedPoint& delta);
 
     /**
-     * Adjusts the position of the top-left and bottom-right corners of given @p annotation on the given @p page.
+     * Adjusts the position of the top-left and bottom-right corners of given @p
+     * annotation on the given @p page.
      *
      * Can be used to implement resize functionality.
      * @p delta1 in normalized coordinates is added to top-left.
      * @p delta2 in normalized coordinates is added to bottom-right.
      *
-     * Consecutive adjustments applied to the same @p annotation are merged together on the undo stack if the
-     * BeingResized flag is set on the @p annotation.
+     * Consecutive adjustments applied to the same @p annotation are merged
+     * together on the undo stack if the BeingResized flag is set on the @p
+     * annotation.
      *
      * @since 1.1.0
      */
-    void adjustPageAnnotation(int page, Annotation *annotation, const Okular::NormalizedPoint &delta1, const Okular::NormalizedPoint &delta2);
+    void adjustPageAnnotation(int page, Annotation* annotation,
+                              const Okular::NormalizedPoint& delta1,
+                              const Okular::NormalizedPoint& delta2);
 
     /**
-     * Edits the plain text contents of the given @p annotation on the given @p page.
+     * Edits the plain text contents of the given @p annotation on the given @p
+     * page.
      *
-     * The contents are set to @p newContents with cursor position @p newCursorPos.
-     * The previous cursor position @p prevCursorPos and previous anchor position @p prevAnchorPos
-     * must also be supplied so that they can be restored if the edit action is undone.
+     * The contents are set to @p newContents with cursor position @p
+     * newCursorPos. The previous cursor position @p prevCursorPos and previous
+     * anchor position @p prevAnchorPos must also be supplied so that they can
+     * be restored if the edit action is undone.
      *
-     * The Annotation's internal contents should not be modified prior to calling this method.
+     * The Annotation's internal contents should not be modified prior to
+     * calling this method.
      *
      * @since 0.17 (KDE 4.11)
      */
-    void editPageAnnotationContents(int page, Annotation *annotation, const QString &newContents, int newCursorPos, int prevCursorPos, int prevAnchorPos);
+    void editPageAnnotationContents(int page, Annotation* annotation,
+                                    const QString& newContents,
+                                    int newCursorPos, int prevCursorPos,
+                                    int prevAnchorPos);
 
     /**
      * Tests if the @p annotation can be removed
      *
      * @since 0.15 (KDE 4.9)
      */
-    bool canRemovePageAnnotation(const Annotation *annotation) const;
+    bool canRemovePageAnnotation(const Annotation* annotation) const;
 
     /**
      * Removes the given @p annotation from the given @p page.
      */
-    void removePageAnnotation(int page, Annotation *annotation);
+    void removePageAnnotation(int page, Annotation* annotation);
 
     /**
      * Removes the given @p annotations from the given @p page.
      */
-    void removePageAnnotations(int page, const QList<Annotation *> &annotations);
+    void removePageAnnotations(int page, const QList<Annotation*>& annotations);
 
     /**
      * Clears the text selection highlights for the given @p page,
@@ -601,16 +641,19 @@ public:
      * @param rect The rectangle of the selection.
      * @param color The color of the selection.
      */
-    void setPageTextSelection(int page, RegularAreaRect *rect, const QColor &color);
+    void setPageTextSelection(int page, RegularAreaRect* rect,
+                              const QColor& color);
 
     /**
-     * Returns true if there is an undo command available; otherwise returns false.
+     * Returns true if there is an undo command available; otherwise returns
+     * false.
      * @since 0.17 (KDE 4.11)
      */
     bool canUndo() const;
 
     /**
-     * Returns true if there is a redo command available; otherwise returns false.
+     * Returns true if there is a redo command available; otherwise returns
+     * false.
      * @since 0.17 (KDE 4.11)
      */
     bool canRedo() const;
@@ -618,21 +661,23 @@ public:
     /**
      * Describes the possible search types.
      */
-    enum SearchType {
-        NextMatch,     ///< Search next match
-        PreviousMatch, ///< Search previous match
-        AllDocument,   ///< Search complete document
-        GoogleAll,     ///< Search complete document (all words in google style)
-        GoogleAny      ///< Search complete document (any words in google style)
+    enum SearchType
+    {
+        NextMatch,  ///< Search next match
+        PreviousMatch,  ///< Search previous match
+        AllDocument,  ///< Search complete document
+        GoogleAll,  ///< Search complete document (all words in google style)
+        GoogleAny  ///< Search complete document (any words in google style)
     };
 
     /**
      * Describes how search ended
      */
-    enum SearchStatus {
-        MatchFound,     ///< Any match was found
-        NoMatchFound,   ///< No match was found
-        SearchCancelled ///< The search was cancelled
+    enum SearchStatus
+    {
+        MatchFound,  ///< Any match was found
+        NoMatchFound,  ///< No match was found
+        SearchCancelled  ///< The search was cancelled
     };
 
     /**
@@ -640,13 +685,17 @@ public:
      *
      * @param searchID The unique id for this search request.
      * @param text The text to be searched.
-     * @param fromStart Whether the search should be started at begin of the document.
+     * @param fromStart Whether the search should be started at begin of the
+     * document.
      * @param caseSensitivity Whether the search is case sensitive.
      * @param type The type of the search. @ref SearchType
-     * @param moveViewport Whether the viewport shall be moved to the position of the matches.
+     * @param moveViewport Whether the viewport shall be moved to the position
+     * of the matches.
      * @param color The highlighting color of the matches.
      */
-    void searchText(int searchID, const QString &text, bool fromStart, Qt::CaseSensitivity caseSensitivity, SearchType type, bool moveViewport, const QColor &color);
+    void searchText(int searchID, const QString& text, bool fromStart,
+                    Qt::CaseSensitivity caseSensitivity, SearchType type,
+                    bool moveViewport, const QColor& color);
 
     /**
      * Continues the search for the given @p searchID.
@@ -669,26 +718,28 @@ public:
     /**
      * Returns the bookmark manager of the document.
      */
-    BookmarkManager *bookmarkManager() const;
+    BookmarkManager* bookmarkManager() const;
 
     /**
      * Processes the given @p action.
      */
-    void processAction(const Action *action);
+    void processAction(const Action* action);
 
     /**
      * Processes the given format @p action on @p fft.
      *
      * @since 1.9
      */
-    void processFormatAction(const Action *action, Okular::FormFieldText *fft);
+    void processFormatAction(const Action* action, Okular::FormFieldText* fft);
 
     /**
      * Processes the given keystroke @p action on @p fft.
      *
      * @since 1.9
      */
-    void processKeystrokeAction(const Action *action, Okular::FormFieldText *fft, const QVariant &newValue);
+    void processKeystrokeAction(const Action* action,
+                                Okular::FormFieldText* fft,
+                                const QVariant& newValue);
 
     /**
      * Processes the given keystroke @p action on @p fft.
@@ -696,21 +747,23 @@ public:
      *
      * @since 22.04
      */
-    void processKeystrokeCommitAction(const Action *action, Okular::FormFieldText *fft);
+    void processKeystrokeCommitAction(const Action* action,
+                                      Okular::FormFieldText* fft);
 
     /**
      * Processes the given focus action on the field.
      *
      * @since 1.9
      */
-    void processFocusAction(const Action *action, Okular::FormField *field);
+    void processFocusAction(const Action* action, Okular::FormField* field);
 
     /**
      * Processes the given keystroke @p action on @p fft.
      *
      * @since 1.9
      */
-    void processValidateAction(const Action *action, Okular::FormFieldText *fft, bool &returnCode);
+    void processValidateAction(const Action* action, Okular::FormFieldText* fft,
+                               bool& returnCode);
 
     /**
      * Returns a list of the bookmarked.pages
@@ -725,7 +778,7 @@ public:
     /**
      * Processes/Executes the given source @p reference.
      */
-    void processSourceReference(const SourceReference *reference);
+    void processSourceReference(const SourceReference* reference);
 
     /**
      * Returns whether the document can configure the printer itself.
@@ -735,10 +788,11 @@ public:
     /**
      * What type of printing a document supports
      */
-    enum PrintingType {
-        NoPrinting,        ///< Printing Not Supported
-        NativePrinting,    ///< Native Cross-Platform Printing
-        PostscriptPrinting ///< Postscript file printing
+    enum PrintingType
+    {
+        NoPrinting,  ///< Printing Not Supported
+        NativePrinting,  ///< Native Cross-Platform Printing
+        PostscriptPrinting  ///< Postscript file printing
     };
 
     /**
@@ -753,8 +807,9 @@ public:
     bool supportsPrintToFile() const;
 
     /// @since 22.04
-    enum PrintError {
-        NoPrintError, ///< Printing succeeded
+    enum PrintError
+    {
+        NoPrintError,  ///< Printing succeeded
         UnknownPrintError,
         TemporaryFileOpenPrintError,
         FileConversionPrintError,
@@ -771,7 +826,7 @@ public:
     /**
      * Prints the document to the given @p printer.
      */
-    Document::PrintError print(QPrinter &printer);
+    Document::PrintError print(QPrinter& printer);
 
     /// @since 22.04
     static QString printErrorString(PrintError error);
@@ -784,13 +839,13 @@ public:
      * (which is not officially enforced by the signature for binary
      * compatibility reasons).
      */
-    QWidget *printConfigurationWidget() const;
+    QWidget* printConfigurationWidget() const;
 
     /**
      * Fill the KConfigDialog @p dialog with the setting pages of the
      * generators.
      */
-    void fillConfigDialog(KConfigDialog *dialog);
+    void fillConfigDialog(KConfigDialog* dialog);
 
     /**
      * Returns the number of generators that have a configuration widget.
@@ -827,7 +882,7 @@ public:
      *
      * @since 1.3
      */
-    bool swapBackingFile(const QString &newFileName, const QUrl &url);
+    bool swapBackingFile(const QString& newFileName, const QUrl& url);
 
     /**
      * Same as swapBackingFile, but newFileName must be a .okular file.
@@ -840,7 +895,7 @@ public:
      *
      * @since 1.3
      */
-    bool swapBackingFileArchive(const QString &newFileName, const QUrl &url);
+    bool swapBackingFileArchive(const QString& newFileName, const QUrl& url);
 
     /**
      * Sets the history to be clean
@@ -858,9 +913,10 @@ public:
      * @see canSaveChanges (SaveCapability)
      * @since 0.15 (KDE 4.9)
      */
-    enum SaveCapability {
-        SaveFormsCapability = 1,      ///< Can save form changes
-        SaveAnnotationsCapability = 2 ///< Can save annotation changes
+    enum SaveCapability
+    {
+        SaveFormsCapability = 1,  ///< Can save form changes
+        SaveAnnotationsCapability = 2  ///< Can save annotation changes
     };
 
     /**
@@ -888,7 +944,7 @@ public:
      *
      * @since 0.7 (KDE 4.1)
      */
-    bool saveChanges(const QString &fileName);
+    bool saveChanges(const QString& fileName);
 
     /**
      * Save the document and the optional changes to it to the specified
@@ -896,7 +952,7 @@ public:
      *
      * @since 0.10 (KDE 4.4)
      */
-    bool saveChanges(const QString &fileName, QString *errorText);
+    bool saveChanges(const QString& fileName, QString* errorText);
 
     /**
      * Register the specified @p view for the current document.
@@ -905,55 +961,60 @@ public:
      *
      * @since 0.7 (KDE 4.1)
      */
-    void registerView(View *view);
+    void registerView(View* view);
 
     /**
      * Unregister the specified @p view from the current document.
      *
      * @since 0.7 (KDE 4.1)
      */
-    void unregisterView(View *view);
+    void unregisterView(View* view);
 
     /**
      * Gets the font data for the given font
      *
      * @since 0.8 (KDE 4.2)
      */
-    QByteArray fontData(const FontInfo &font) const;
+    QByteArray fontData(const FontInfo& font) const;
 
     /**
      * Opens a document archive.
      *
      * @since 0.20 (KDE 4.14)
      */
-    OpenResult openDocumentArchive(const QString &docFile, const QUrl &url, const QString &password = QString());
+    OpenResult openDocumentArchive(const QString& docFile, const QUrl& url,
+                                   const QString& password = QString());
 
     /**
      * Saves a document archive.
      *
      * @since 0.8 (KDE 4.2)
      */
-    bool saveDocumentArchive(const QString &fileName);
+    bool saveDocumentArchive(const QString& fileName);
 
     /**
      * Extract the document file from the current archive.
      *
-     * @warning This function only works if the current file is a document archive
+     * @warning This function only works if the current file is a document
+     * archive
      *
      * @since 1.3
      */
-    bool extractArchivedFile(const QString &destFileName);
+    bool extractArchivedFile(const QString& destFileName);
 
     /**
      * Asks the generator to dynamically generate a SourceReference for a given
      * page number and absolute X and Y position on this page.
      *
-     * @attention Ownership of the returned SourceReference is transferred to the caller.
-     * @note This method does not call processSourceReference( const SourceReference * )
+     * @attention Ownership of the returned SourceReference is transferred to
+     * the caller.
+     * @note This method does not call processSourceReference( const
+     * SourceReference * )
      *
      * @since 0.10 (KDE 4.4)
      */
-    const SourceReference *dynamicSourceReference(int pageNr, double absX, double absY);
+    const SourceReference* dynamicSourceReference(int pageNr, double absX,
+                                                  double absY);
 
     /**
      * Returns the orientation of the document (for printing purposes). This
@@ -973,11 +1034,13 @@ public:
     void setAnnotationEditingEnabled(bool enable);
 
     /**
-     * Returns which wallet data to use to read/write the password for the given fileName
+     * Returns which wallet data to use to read/write the password for the given
+     * fileName
      *
      * @since 0.20 (KDE 4.14)
      */
-    void walletDataForFile(const QString &fileName, QString *walletName, QString *walletFolder, QString *walletKey) const;
+    void walletDataForFile(const QString& fileName, QString* walletName,
+                           QString* walletFolder, QString* walletKey) const;
 
     /**
      * Since version 0.21, okular does not allow editing annotations and
@@ -999,11 +1062,12 @@ public:
     void docdataMigrationDone();
 
     /**
-     * Returns the model for rendering layers (NULL if the document has no layers)
+     * Returns the model for rendering layers (NULL if the document has no
+     * layers)
      *
      * @since 0.24
      */
-    QAbstractItemModel *layersModel() const;
+    QAbstractItemModel* layersModel() const;
 
     /**
      *  Returns the reason why the file opening failed, if any.
@@ -1017,21 +1081,21 @@ public:
      *
      * @since 21.04
      */
-    bool sign(const NewSignatureData &data, const QString &newPath);
+    bool sign(const NewSignatureData& data, const QString& newPath);
 
     /**
      * Returns the generator's certificate store (if any)
      *
      * @since 21.04
      */
-    CertificateStore *certificateStore() const;
+    CertificateStore* certificateStore() const;
 
     /** sets the editor command to the command  \p editCmd, as
      * given at the commandline.
      *
      * @since 22.04
      */
-    void setEditorCommandOverride(const QString &editCmd);
+    void setEditorCommandOverride(const QString& editCmd);
 
     /** returns the overriding editor command.
      *
@@ -1052,7 +1116,7 @@ public Q_SLOTS:
      * This slot is called whenever the user changes the page @p size
      * of the document.
      */
-    void setPageSize(const Okular::PageSize &size);
+    void setPageSize(const Okular::PageSize& size);
 
     /**
      * Cancels the current search
@@ -1072,35 +1136,47 @@ public Q_SLOTS:
     void redo();
 
     /**
-     * Edit the text contents of the specified @p form on page @p page to be @p newContents.
-     * The new text cursor position (@p newCursorPos), previous text cursor position (@p prevCursorPos),
-     * and previous cursor anchor position will be restored by the undo / redo commands.
+     * Edit the text contents of the specified @p form on page @p page to be @p
+     * newContents. The new text cursor position (@p newCursorPos), previous
+     * text cursor position (@p prevCursorPos), and previous cursor anchor
+     * position will be restored by the undo / redo commands.
      * @since 0.17 (KDE 4.11)
      */
-    void editFormText(int pageNumber, Okular::FormFieldText *form, const QString &newContents, int newCursorPos, int prevCursorPos, int prevAnchorPos);
+    void editFormText(int pageNumber, Okular::FormFieldText* form,
+                      const QString& newContents, int newCursorPos,
+                      int prevCursorPos, int prevAnchorPos);
 
     /**
-     * Edit the selected list entries in @p form on page @p page to be @p newChoices.
+     * Edit the selected list entries in @p form on page @p page to be @p
+     * newChoices.
      * @since 0.17 (KDE 4.11)
      */
-    void editFormList(int pageNumber, Okular::FormFieldChoice *form, const QList<int> &newChoices);
+    void editFormList(int pageNumber, Okular::FormFieldChoice* form,
+                      const QList<int>& newChoices);
 
     /**
-     * Set the active choice in the combo box @p form on page @p page to @p newText
-     * The new cursor position (@p newCursorPos), previous cursor position
+     * Set the active choice in the combo box @p form on page @p page to @p
+     * newText The new cursor position (@p newCursorPos), previous cursor
+     * position
      * (@p prevCursorPos), and previous anchor position (@p prevAnchorPos)
      * will be restored by the undo / redo commands.
      *
      * @since 0.17 (KDE 4.11)
      */
-    void editFormCombo(int pageNumber, Okular::FormFieldChoice *form, const QString &newText, int newCursorPos, int prevCursorPos, int prevAnchorPos);
+    void editFormCombo(int pageNumber, Okular::FormFieldChoice* form,
+                       const QString& newText, int newCursorPos,
+                       int prevCursorPos, int prevAnchorPos);
 
     /**
-     * Set the states of the group of form buttons @p formButtons on page @p page to @p newButtonStates.
-     * The lists @p formButtons and @p newButtonStates should be the same length and true values
-     * in @p newButtonStates indicate that the corresponding entry in @p formButtons should be enabled.
+     * Set the states of the group of form buttons @p formButtons on page @p
+     * page to @p newButtonStates. The lists @p formButtons and @p
+     * newButtonStates should be the same length and true values in @p
+     * newButtonStates indicate that the corresponding entry in @p formButtons
+     * should be enabled.
      */
-    void editFormButtons(int pageNumber, const QList<Okular::FormFieldButton *> &formButtons, const QList<bool> &newButtonStates);
+    void editFormButtons(int pageNumber,
+                         const QList<Okular::FormFieldButton*>& formButtons,
+                         const QList<bool>& newButtonStates);
 
     /**
      * Reloads the pixmaps for whole document
@@ -1114,7 +1190,7 @@ public Q_SLOTS:
      *
      * @since 1.7
      */
-    QByteArray requestSignedRevisionData(const Okular::SignatureInfo &info);
+    QByteArray requestSignedRevisionData(const Okular::SignatureInfo& info);
 
     /**
      * Refresh the pixmaps for the given @p pageNumber.
@@ -1184,37 +1260,40 @@ Q_SIGNALS:
      * This signal is emitted whenever an action requests an
      * open url operation for the given document @p url.
      */
-    void openUrl(const QUrl &url);
+    void openUrl(const QUrl& url);
 
     /**
      * This signal is emitted whenever an error occurred.
      *
      * @param text The description of the error.
-     * @param duration The time in milliseconds the message should be shown to the user.
+     * @param duration The time in milliseconds the message should be shown to
+     * the user.
      */
-    void error(const QString &text, int duration);
+    void error(const QString& text, int duration);
 
     /**
      * This signal is emitted to signal a warning.
      *
      * @param text The description of the warning.
-     * @param duration The time in milliseconds the message should be shown to the user.
+     * @param duration The time in milliseconds the message should be shown to
+     * the user.
      */
-    void warning(const QString &text, int duration);
+    void warning(const QString& text, int duration);
 
     /**
      * This signal is emitted to signal a notice.
      *
      * @param text The description of the notice.
-     * @param duration The time in milliseconds the message should be shown to the user.
+     * @param duration The time in milliseconds the message should be shown to
+     * the user.
      */
-    void notice(const QString &text, int duration);
+    void notice(const QString& text, int duration);
 
     /**
      * Emitted when a new font is found during the reading of the fonts of
      * the document.
      */
-    void gotFont(const Okular::FontInfo &font);
+    void gotFont(const Okular::FontInfo& font);
 
     /**
      * Reports the progress when reading the fonts in the document.
@@ -1234,97 +1313,112 @@ Q_SIGNALS:
     void searchFinished(int searchID, Okular::Document::SearchStatus endStatus);
 
     /**
-     * This signal is emitted whenever a source reference with the given parameters has been
-     * activated.
+     * This signal is emitted whenever a source reference with the given
+     * parameters has been activated.
      *
      * \param absFileName absolute name of the file.
      * \param line line number.
      * \param col column number.
-     * \param handled should be set to 'true' if a slot handles this source reference; the
-     *                default action to launch the configured editor will then not be performed
-     *                by the document
+     * \param handled should be set to 'true' if a slot handles this source
+     * reference; the default action to launch the configured editor will then
+     * not be performed by the document
      *
      * @since 0.14 (KDE 4.8)
      */
-    void sourceReferenceActivated(const QString &absFileName, int line, int col, bool *handled);
+    void sourceReferenceActivated(const QString& absFileName, int line, int col,
+                                  bool* handled);
 
     /**
-     * This signal is emitted whenever an movie action is triggered and the UI should process it.
+     * This signal is emitted whenever an movie action is triggered and the UI
+     * should process it.
      */
-    void processMovieAction(const Okular::MovieAction *action);
+    void processMovieAction(const Okular::MovieAction* action);
 
     /**
-     * This signal is emitted whenever the availability of the undo function changes
+     * This signal is emitted whenever the availability of the undo function
+     * changes
      * @since 0.17 (KDE 4.11)
      */
     void canUndoChanged(bool undoAvailable);
 
     /**
-     * This signal is emitted whenever the availability of the redo function changes
+     * This signal is emitted whenever the availability of the redo function
+     * changes
      * @since 0.17 (KDE 4.11)
      */
     void canRedoChanged(bool redoAvailable);
 
     /**
-     * This signal is emitted whenever the undo history is clean (i.e. the same status the last time it was saved)
+     * This signal is emitted whenever the undo history is clean (i.e. the same
+     * status the last time it was saved)
      * @since 1.3
      */
     void undoHistoryCleanChanged(bool clean);
 
     /**
-     * This signal is emitted whenever an rendition action is triggered and the UI should process it.
+     * This signal is emitted whenever an rendition action is triggered and the
+     * UI should process it.
      *
      * @since 0.16 (KDE 4.10)
      */
-    void processRenditionAction(const Okular::RenditionAction *action);
+    void processRenditionAction(const Okular::RenditionAction* action);
 
     /**
-     * This signal is emitted whenever the contents of the given @p annotation are changed by an undo
-     * or redo action.
-     *
-     * The new contents (@p contents), cursor position (@p cursorPos), and anchor position (@p anchorPos) are
-     * included
-     * @since 0.17 (KDE 4.11)
-     */
-    void annotationContentsChangedByUndoRedo(Okular::Annotation *annotation, const QString &contents, int cursorPos, int anchorPos);
-
-    /**
-     * This signal is emitted whenever the text contents of the given text @p form on the given @p page
+     * This signal is emitted whenever the contents of the given @p annotation
      * are changed by an undo or redo action.
      *
-     * The new text contents (@p contents), cursor position (@p cursorPos), and anchor position (@p anchorPos) are
-     * included
+     * The new contents (@p contents), cursor position (@p cursorPos), and
+     * anchor position (@p anchorPos) are included
      * @since 0.17 (KDE 4.11)
      */
-    void formTextChangedByUndoRedo(int page, Okular::FormFieldText *form, const QString &contents, int cursorPos, int anchorPos);
+    void annotationContentsChangedByUndoRedo(Okular::Annotation* annotation,
+                                             const QString& contents,
+                                             int cursorPos, int anchorPos);
 
     /**
-     * This signal is emitted whenever the selected @p choices for the given list @p form on the
-     * given @p page are changed by an undo or redo action.
+     * This signal is emitted whenever the text contents of the given text @p
+     * form on the given @p page are changed by an undo or redo action.
+     *
+     * The new text contents (@p contents), cursor position (@p cursorPos), and
+     * anchor position (@p anchorPos) are included
      * @since 0.17 (KDE 4.11)
      */
-    void formListChangedByUndoRedo(int page, Okular::FormFieldChoice *form, const QList<int> &choices);
+    void formTextChangedByUndoRedo(int page, Okular::FormFieldText* form,
+                                   const QString& contents, int cursorPos,
+                                   int anchorPos);
 
     /**
-     * This signal is emitted whenever the active @p text for the given combo @p form on the
-     * given @p page is changed by an undo or redo action.
+     * This signal is emitted whenever the selected @p choices for the given
+     * list @p form on the given @p page are changed by an undo or redo action.
      * @since 0.17 (KDE 4.11)
      */
-    void formComboChangedByUndoRedo(int page, Okular::FormFieldChoice *form, const QString &text, int cursorPos, int anchorPos);
+    void formListChangedByUndoRedo(int page, Okular::FormFieldChoice* form,
+                                   const QList<int>& choices);
 
     /**
-     * This signal is emitted whenever the state of the specified group of form buttons (@p formButtons) on the
-     * given @p page is changed by an undo or redo action.
+     * This signal is emitted whenever the active @p text for the given combo @p
+     * form on the given @p page is changed by an undo or redo action.
      * @since 0.17 (KDE 4.11)
      */
-    void formButtonsChangedByUndoRedo(int page, const QList<Okular::FormFieldButton *> &formButtons);
+    void formComboChangedByUndoRedo(int page, Okular::FormFieldChoice* form,
+                                    const QString& text, int cursorPos,
+                                    int anchorPos);
 
     /**
-     * This signal is emitted whenever a FormField was changed programmatically and the
-     * according widget should be updated.
+     * This signal is emitted whenever the state of the specified group of form
+     * buttons (@p formButtons) on the given @p page is changed by an undo or
+     * redo action.
+     * @since 0.17 (KDE 4.11)
+     */
+    void formButtonsChangedByUndoRedo(
+        int page, const QList<Okular::FormFieldButton*>& formButtons);
+
+    /**
+     * This signal is emitted whenever a FormField was changed programmatically
+     * and the according widget should be updated.
      * @since 1.4
      */
-    void refreshFormWidget(Okular::FormField *field);
+    void refreshFormWidget(Okular::FormField* field);
 
 private:
     /// @cond PRIVATE
@@ -1336,7 +1430,7 @@ private:
     friend class EditFormComboCommand;
     friend class EditFormButtonsCommand;
     /// @endcond
-    DocumentPrivate *const d;
+    DocumentPrivate* const d;
 
     Q_DISABLE_COPY(Document)
 };
@@ -1359,7 +1453,7 @@ public:
     /**
      * Creates a new viewport from the given @p xmlDesc.
      */
-    explicit DocumentViewport(const QString &xmlDesc);
+    explicit DocumentViewport(const QString& xmlDesc);
 
     /**
      * Returns the viewport as xml description.
@@ -1374,8 +1468,8 @@ public:
     /**
      * @internal
      */
-    bool operator==(const DocumentViewport &other) const;
-    bool operator<(const DocumentViewport &other) const;
+    bool operator==(const DocumentViewport& other) const;
+    bool operator<(const DocumentViewport& other) const;
 
     /**
      * The number of the page nearest the center of the viewport.
@@ -1385,16 +1479,18 @@ public:
     /**
      * Describes the relative position of the viewport.
      */
-    enum Position {
-        Center = 1, ///< Relative to the center of the page.
-        TopLeft = 2 ///< Relative to the top left corner of the page.
+    enum Position
+    {
+        Center = 1,  ///< Relative to the center of the page.
+        TopLeft = 2  ///< Relative to the top left corner of the page.
     };
 
     /**
      * If 'rePos.enabled == true' then this structure contains the
      * viewport center or top left depending on the value of pos.
      */
-    struct {
+    struct
+    {
         bool enabled;
         double normalizedX;
         double normalizedY;
@@ -1402,9 +1498,11 @@ public:
     } rePos;
 
     /**
-     * If 'autoFit.enabled == true' then the page must be autofit in the viewport.
+     * If 'autoFit.enabled == true' then the page must be autofit in the
+     * viewport.
      */
-    struct {
+    struct
+    {
         bool enabled;
         bool width;
         bool height;
@@ -1425,7 +1523,8 @@ public:
  *      using metaData( "NamedViewport", viewport_name )
  * - ExternalFileName: A document to be opened, whose destination is specified
  *      with Destination or DestinationName
- * - Open: a boolean saying whether its TOC branch is open or not (default: false)
+ * - Open: a boolean saying whether its TOC branch is open or not (default:
+ * false)
  * - URL: a URL to be open as destination; if set, no other Destination* or
  *      ExternalFileName entry is used
  */
@@ -1441,7 +1540,7 @@ public:
      * Creates a new document synopsis object with the given
      * @p document as parent node.
      */
-    explicit DocumentSynopsis(const QDomDocument &document);
+    explicit DocumentSynopsis(const QDomDocument& document);
 };
 
 /**
@@ -1466,8 +1565,8 @@ public:
      */
     virtual ~EmbeddedFile();
 
-    EmbeddedFile(const EmbeddedFile &) = delete;
-    EmbeddedFile &operator=(const EmbeddedFile &) = delete;
+    EmbeddedFile(const EmbeddedFile&) = delete;
+    EmbeddedFile& operator=(const EmbeddedFile&) = delete;
 
     /**
      * Returns the name of the file
@@ -1518,7 +1617,9 @@ public:
      * @param pageNumber The page number where the rectangle is located.
      * @param rectangle The rectangle in normalized coordinates.
      */
-    explicit VisiblePageRect(int pageNumber = -1, const NormalizedRect &rectangle = NormalizedRect());
+    explicit VisiblePageRect(
+        int pageNumber = -1,
+        const NormalizedRect& rectangle = NormalizedRect());
 
     /**
      * The page number where the rectangle is located.
@@ -1541,35 +1642,35 @@ class OKULARCORE_EXPORT NewSignatureData
 public:
     NewSignatureData();
     ~NewSignatureData();
-    NewSignatureData(const NewSignatureData &) = delete;
-    NewSignatureData &operator=(const NewSignatureData &) = delete;
+    NewSignatureData(const NewSignatureData&) = delete;
+    NewSignatureData& operator=(const NewSignatureData&) = delete;
 
     QString certNickname() const;
-    void setCertNickname(const QString &certNickname);
+    void setCertNickname(const QString& certNickname);
 
     QString certSubjectCommonName() const;
-    void setCertSubjectCommonName(const QString &certSubjectCommonName);
+    void setCertSubjectCommonName(const QString& certSubjectCommonName);
 
     QString password() const;
-    void setPassword(const QString &password);
+    void setPassword(const QString& password);
 
     int page() const;
     void setPage(int page);
 
     NormalizedRect boundingRectangle() const;
-    void setBoundingRectangle(const NormalizedRect &rect);
+    void setBoundingRectangle(const NormalizedRect& rect);
 
     /// @since 22.04
     QString documentPassword() const;
 
     /// @since 22.04
-    void setDocumentPassword(const QString &password);
+    void setDocumentPassword(const QString& password);
 
 private:
-    NewSignatureDataPrivate *const d;
+    NewSignatureDataPrivate* const d;
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_METATYPE(Okular::DocumentInfo::Key)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Okular::Document::PixmapRequestFlags)

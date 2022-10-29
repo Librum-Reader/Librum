@@ -19,13 +19,13 @@ public:
      * @note the private class won't take ownership of the ui, so you
      *       must delete it yourself
      */
-    explicit TextDocumentSettingsWidgetPrivate(Ui_TextDocumentSettings *ui)
-        : mUi(ui)
+    explicit TextDocumentSettingsWidgetPrivate(Ui_TextDocumentSettings* ui) :
+        mUi(ui)
     {
     }
 
-    KFontRequester *mFont;
-    Ui_TextDocumentSettings *mUi;
+    KFontRequester* mFont;
+    Ui_TextDocumentSettings* mUi;
 };
 
 class TextDocumentSettingsPrivate : public QObject
@@ -33,14 +33,14 @@ class TextDocumentSettingsPrivate : public QObject
     Q_OBJECT
 
 public:
-    explicit TextDocumentSettingsPrivate(QObject *parent)
-        : QObject(parent)
+    explicit TextDocumentSettingsPrivate(QObject* parent) :
+        QObject(parent)
     {
     }
 
     QFont mFont;
 };
 
-}
+}  // namespace Okular
 
 #endif

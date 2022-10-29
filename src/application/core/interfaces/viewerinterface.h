@@ -9,9 +9,9 @@
 
 #include "../core/okularcore_export.h"
 #ifdef Q_OS_WIN
-#define VIEWERINTERFACE_EXPORT __declspec(dllexport)
+    #define VIEWERINTERFACE_EXPORT __declspec(dllexport)
 #else
-#define VIEWERINTERFACE_EXPORT OKULARCORE_EXPORT
+    #define VIEWERINTERFACE_EXPORT OKULARCORE_EXPORT
 #endif
 
 #include <QObject>
@@ -20,10 +20,11 @@
 namespace Okular
 {
 /**
- * @short Abstract interface for controlling advanced features of a document viewer
+ * @short Abstract interface for controlling advanced features of a document
+ * viewer
  *
- * This interface can be used to control some more or less advanced features of a document
- * viewer.
+ * This interface can be used to control some more or less advanced features of
+ * a document viewer.
  */
 class VIEWERINTERFACE_EXPORT ViewerInterface
 {
@@ -31,12 +32,13 @@ public:
     ViewerInterface()
     {
     }
+
     virtual ~ViewerInterface()
     {
     }
 
-    ViewerInterface(const ViewerInterface &) = delete;
-    ViewerInterface &operator=(const ViewerInterface &) = delete;
+    ViewerInterface(const ViewerInterface&) = delete;
+    ViewerInterface& operator=(const ViewerInterface&) = delete;
 
     /**
      * Show the specified source location centrally in the viewer.
@@ -45,9 +47,12 @@ public:
      * @param line in the source file, starts from 0
      * @param column in the source file, starts from 0
      * @param showGraphically controls whether the given source location will be
-     *                        shown graphically in the viewer (if that feature is globally activated)
+     *                        shown graphically in the viewer (if that feature
+     * is globally activated)
      */
-    virtual void showSourceLocation(const QString &fileName, int line, int column, bool showGraphically = true) = 0;
+    virtual void showSourceLocation(const QString& fileName, int line,
+                                    int column,
+                                    bool showGraphically = true) = 0;
 
     /**
      * Clear the source location that was set last in the viewer.
@@ -81,20 +86,22 @@ public:
 
     // SIGNALS
     /**
-     * The signal 'openSourceReference' is emitted whenever the user has triggered a source
-     * reference in the currently displayed document.
+     * The signal 'openSourceReference' is emitted whenever the user has
+     * triggered a source reference in the currently displayed document.
      */
-    void openSourceReference(const QString &absFileName, int line, int column);
+    void openSourceReference(const QString& absFileName, int line, int column);
 
     /**
-     * The signal 'viewerMenuStateChange' is emitted whenever the state of the menu
-     * 'menu_okular_part_viewer' defined in 'part-viewermode.rc' has changed.
+     * The signal 'viewerMenuStateChange' is emitted whenever the state of the
+     * menu 'menu_okular_part_viewer' defined in 'part-viewermode.rc' has
+     * changed.
      */
     void viewerMenuStateChange(bool enabled);
 };
 
-}
+}  // namespace Okular
 
-Q_DECLARE_INTERFACE(Okular::ViewerInterface, "org.kde.okular.ViewerInterface/0.1")
+Q_DECLARE_INTERFACE(Okular::ViewerInterface,
+                    "org.kde.okular.ViewerInterface/0.1")
 
 #endif

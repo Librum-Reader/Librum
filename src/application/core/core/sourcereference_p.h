@@ -12,9 +12,10 @@ class QUrl;
 
 namespace Okular
 {
-bool extractLilyPondSourceReference(const QUrl &url, QString *file, int *row, int *col);
-QString sourceReferenceToolTip(const QString &source, int row, int col);
+bool extractLilyPondSourceReference(const QUrl& url, QString* file, int* row,
+                                    int* col);
+QString sourceReferenceToolTip(const QString& source, int row, int col);
 
-}
+}  // namespace Okular
 
 #endif

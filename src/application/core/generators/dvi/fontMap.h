@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// fontMap.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- fontMap.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environment
 //
@@ -94,21 +94,21 @@ public:
     /** find the name of a font file (e.g. 'ubkd8a.pfb') from a TeX font
         name (e.g. 'rpbkd'). This method return a reference to
         QString() if the font could not be found. */
-    const QString &findFileName(const QString &TeXName);
+    const QString& findFileName(const QString& TeXName);
 
     /** find the name of a font (e.g. 'URWBookmanL-DemiBold') from a TeX
         font name (e.g. 'rpbkd'). This method return a reference to
         QString() if the font could not be found. */
-    const QString &findFontName(const QString &TeXName);
+    const QString& findFontName(const QString& TeXName);
 
     /** find the name of an encoding file for a font (e.g. '8r') from a
         TeX font name (e.g. 'rpbkd'). This method return a reference to
         QString() if the font could not be found. */
-    const QString &findEncoding(const QString &TeXName);
+    const QString& findEncoding(const QString& TeXName);
 
     /** This method finds the slant of a font. Returns 0.0 if no slant
         was defined. */
-    double findSlant(const QString &TeXName);
+    double findSlant(const QString& TeXName);
 
 private:
     /** This member maps TeX font names mapEntry classes that contain
@@ -116,4 +116,4 @@ private:
     QMap<QString, fontMapEntry> fontMapEntries;
 };
 
-#endif // ifndef _FONTMAP_H
+#endif  // ifndef _FONTMAP_H

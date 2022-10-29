@@ -8,7 +8,6 @@
 #define _OKULAR_GENERATOR_TIFF_H_
 
 #include <core/generator.h>
-
 #include <QHash>
 #include <QLoggingCategory>
 
@@ -16,27 +15,31 @@ class TIFFGenerator : public Okular::Generator
 {
     Q_OBJECT
     Q_INTERFACES(Okular::Generator)
+
 public:
-    TIFFGenerator(QObject *parent, const QVariantList &args);
+    TIFFGenerator(QObject* parent, const QVariantList& args);
     ~TIFFGenerator() override;
 
-    bool loadDocument(const QString &fileName, QVector<Okular::Page *> &pagesVector) override;
-    bool loadDocumentFromData(const QByteArray &fileData, QVector<Okular::Page *> &pagesVector) override;
+    bool loadDocument(const QString& fileName,
+                      QVector<Okular::Page*>& pagesVector) override;
+    bool loadDocumentFromData(const QByteArray& fileData,
+                              QVector<Okular::Page*>& pagesVector) override;
 
-    Okular::DocumentInfo generateDocumentInfo(const QSet<Okular::DocumentInfo::Key> &keys) const override;
+    Okular::DocumentInfo generateDocumentInfo(
+        const QSet<Okular::DocumentInfo::Key>& keys) const override;
 
-    Okular::Document::PrintError print(QPrinter &printer) override;
+    Okular::Document::PrintError print(QPrinter& printer) override;
 
 protected:
     bool doCloseDocument() override;
-    QImage image(Okular::PixmapRequest *request) override;
+    QImage image(Okular::PixmapRequest* request) override;
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 
-    bool loadTiff(QVector<Okular::Page *> &pagesVector, const char *name);
-    void loadPages(QVector<Okular::Page *> &pagesVector);
+    bool loadTiff(QVector<Okular::Page*>& pagesVector, const char* name);
+    void loadPages(QVector<Okular::Page*>& pagesVector);
     int mapPage(int page) const;
 
     QHash<int, int> m_pageMapping;

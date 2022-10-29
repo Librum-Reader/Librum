@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // Class: length
 //
@@ -12,8 +13,8 @@
 #ifndef _length_h_
 #define _length_h_
 
-#include <cmath>
 #include <math.h>
+#include <cmath>
 
 class QString;
 
@@ -111,8 +112,8 @@ public:
         length_in_mm = l * mm_per_scaledPoint;
     }
 
-    /** sets the length (@param l ) in pixels. The parameter @param res is the resolution of the
-        used device in DPI. */
+    /** sets the length (@param l ) in pixels. The parameter @param res is the
+       resolution of the used device in DPI. */
     void setLength_in_pixel(int l, double res)
     {
         setLength_in_inch(l / res);
@@ -172,14 +173,15 @@ public:
         return length_in_mm / mm_per_cicero;
     }
 
-    /** @returns the length in scaled points (1 scaled point = 65536 TeX points) */
+    /** @returns the length in scaled points (1 scaled point = 65536 TeX points)
+     */
     double getLength_in_scaledPoints() const
     {
         return length_in_mm / mm_per_scaledPoint;
     }
 
-    /** @returns the length in pixel. The parameter @param res is the resolution of the
-        used device in DPI. */
+    /** @returns the length in pixel. The parameter @param res is the resolution
+       of the used device in DPI. */
     int getLength_in_pixel(double res) const
     {
         return int(getLength_in_inch() * res);
@@ -196,6 +198,7 @@ public:
     {
         return (length_in_mm > o.getLength_in_mm());
     }
+
     bool operator<(const Length o) const
     {
         return (length_in_mm < o.getLength_in_mm());
@@ -206,6 +209,7 @@ public:
     {
         return (length_in_mm >= o.getLength_in_mm());
     }
+
     bool operator<=(const Length o) const
     {
         return (length_in_mm <= o.getLength_in_mm());
@@ -286,7 +290,7 @@ public:
     although the string is malformed.
 
     It is fine to set ok to 0. */
-    static float convertToMM(const QString &distance, bool *ok = nullptr);
+    static float convertToMM(const QString& distance, bool* ok = nullptr);
 
 private:
     /** Length in millimeters */

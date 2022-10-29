@@ -16,10 +16,10 @@ namespace Okular
 class JSUtil
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSObject object(KJSContext *ctx);
+    static void initType(KJSContext* ctx);
+    static KJSObject object(KJSContext* ctx);
 };
 
-}
+}  // namespace Okular
 
 #endif

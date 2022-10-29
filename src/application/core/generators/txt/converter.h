@@ -20,8 +20,8 @@ public:
     Converter();
     ~Converter() override;
 
-    QTextDocument *convert(const QString &fileName) override;
+    QTextDocument* convert(const QString& fileName) override;
 };
-}
+}  // namespace Txt
 
 #endif

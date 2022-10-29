@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // Class: dviRenderer
 //
@@ -15,12 +16,6 @@
 //#include "documentRenderer.h"
 #include "dviexport.h"
 //#include "dvisourceeditor.h"
-#include "anchor.h"
-#include "dviPageInfo.h"
-#include "fontpool.h"
-#include "pageSize.h"
-#include "prebookmark.h"
-
 #include <QExplicitlySharedDataPointer>
 #include <QHash>
 #include <QMutex>
@@ -31,6 +26,11 @@
 #include <QTimer>
 #include <QUrl>
 #include <QVector>
+#include "anchor.h"
+#include "dviPageInfo.h"
+#include "fontpool.h"
+#include "pageSize.h"
+#include "prebookmark.h"
 
 class Anchor;
 class DocumentWidget;
@@ -50,11 +50,13 @@ public:
     DVI_SourceFileAnchor()
     {
     }
-    DVI_SourceFileAnchor(const QString &name, quint32 ln, quint32 pg, const Length _distance_from_top)
-        : fileName(name)
-        , line(ln)
-        , page(pg)
-        , distance_from_top(_distance_from_top)
+
+    DVI_SourceFileAnchor(const QString& name, quint32 ln, quint32 pg,
+                         const Length _distance_from_top) :
+        fileName(name),
+        line(ln),
+        page(pg),
+        distance_from_top(_distance_from_top)
     {
     }
 
@@ -68,7 +70,8 @@ public:
     driver standard, Level 0, published by the TUG DVI driver
     standards committee. */
 
-struct framedata {
+struct framedata
+{
     long dvi_h;
     long dvi_v;
     long w;
@@ -81,18 +84,20 @@ struct framedata {
 /* this information is saved when using virtual fonts */
 
 typedef void (dviRenderer::*set_char_proc)(unsigned int, unsigned int);
-typedef void (dviRenderer::*parseSpecials)(char *, quint8 *);
+typedef void (dviRenderer::*parseSpecials)(char*, quint8*);
 
-struct drawinf {
+struct drawinf
+{
     struct framedata data;
-    TeXFontDefinition *fontp;
+    TeXFontDefinition* fontp;
     set_char_proc set_char_p;
 
-    QHash<int, TeXFontDefinition *> *fonttable;
-    TeXFontDefinition *_virtual;
+    QHash<int, TeXFontDefinition*>* fonttable;
+    TeXFontDefinition* _virtual;
 };
 
-class dviRenderer : public QObject /*: public DocumentRenderer*/, bigEndianByteReader
+class dviRenderer : public QObject /*: public DocumentRenderer*/,
+                    bigEndianByteReader
 {
     Q_OBJECT
 
@@ -100,9 +105,9 @@ public:
     explicit dviRenderer(bool useFontHinting);
     ~dviRenderer() override;
 
-    virtual bool setFile(const QString &fname, const QUrl &base);
+    virtual bool setFile(const QString& fname, const QUrl& base);
 
-    dvifile *dviFile;
+    dvifile* dviFile;
 
     virtual bool supportsTextSearch() const
     {
@@ -113,24 +118,26 @@ public:
     {
         return _postscript;
     }
+
     int curr_page()
     {
         return current_page + 1;
     }
-    virtual bool isValidFile(const QString &fileName) const;
+
+    virtual bool isValidFile(const QString& fileName) const;
 
     /** This method will try to parse the reference part of the DVI
         file's URL, (either a number, which is supposed to be a page
         number, or src:\<line\>\<filename\>) and see if a corresponding
         section of the DVI file can be found. If so, it returns an
         anchor to that section. If not, it returns an invalid anchor. */
-    virtual Anchor parseReference(const QString &reference);
+    virtual Anchor parseReference(const QString& reference);
 
-    Anchor findAnchor(const QString &);
+    Anchor findAnchor(const QString&);
 
     virtual PageNumber totalPages() const;
 
-    void setEventLoop(QEventLoop *el);
+    void setEventLoop(QEventLoop* el);
 
     // These should not be public... only for the moment
     void read_postamble();
@@ -139,15 +146,16 @@ public:
     void set_char(unsigned int cmd, unsigned int ch);
     void set_empty_char(unsigned int cmd, unsigned int ch);
     void set_no_char(unsigned int cmd, unsigned int ch);
-    void applicationDoSpecial(char *cp);
+    void applicationDoSpecial(char* cp);
 
     void special(long nbytes);
-    void printErrorMsgForSpecials(const QString &msg);
-    void color_special(const QString &msg);
-    void html_href_special(const QString &msg);
+    void printErrorMsgForSpecials(const QString& msg);
+    void color_special(const QString& msg);
+    void html_href_special(const QString& msg);
     void html_anchor_end();
     void draw_page();
-    void export_finished(const DVIExport *);
+    void export_finished(const DVIExport*);
+
     // void          editor_finished(const DVISourceEditor*);
 
     QVector<PreBookmark> getPrebookmarks() const
@@ -160,24 +168,28 @@ Q_SIGNALS:
      * The following three signals are modeleed on the corresponding signals
      * of the Document class.
      */
-    void error(const QString &message, int duration);
-    void warning(const QString &message, int duration);
-    void notice(const QString &message, int duration);
+    void error(const QString& message, int duration);
+    void warning(const QString& message, int duration);
+    void notice(const QString& message, int duration);
 
 public Q_SLOTS:
-    void exportPS(const QString &fname = QString(), const QStringList &options = QStringList(), QPrinter *printer = nullptr, QPrinter::Orientation orientation = QPrinter::Portrait);
+    void exportPS(const QString& fname = QString(),
+                  const QStringList& options = QStringList(),
+                  QPrinter* printer = nullptr,
+                  QPrinter::Orientation orientation = QPrinter::Portrait);
     void exportPDF();
 
-    void handleSRCLink(const QString &linkText, const QPoint point, DocumentWidget *widget);
+    void handleSRCLink(const QString& linkText, const QPoint point,
+                       DocumentWidget* widget);
 
     void embedPostScript();
 
-    virtual void drawPage(RenderedDocumentPagePixmap *page);
-    virtual void getText(RenderedDocumentPagePixmap *page);
+    virtual void drawPage(RenderedDocumentPagePixmap* page);
+    virtual void getText(RenderedDocumentPagePixmap* page);
 
     SimplePageSize sizeOfPage(const PageNumber page);
 
-    const QVector<DVI_SourceFileAnchor> &sourceAnchors()
+    const QVector<DVI_SourceFileAnchor>& sourceAnchors()
     {
         return sourceHyperLinkAnchors;
     }
@@ -201,7 +213,7 @@ private:
     /** This method parses a color specification of type "gray 0.5", "rgb
         0.5 0.7 1.0", "hsb ...", "cmyk .." or "PineGreen". See the source
         code for details. */
-    QColor parseColorSpecification(const QString &colorSpec);
+    QColor parseColorSpecification(const QString& colorSpec);
 
     /** This map contains the colors which are known by name. This field
         is initialized in the method parseColorSpecification() as soon as
@@ -211,7 +223,7 @@ private:
     /** This method locates special PDF characters in a string and
         replaces them by UTF8. See Section 3.2.3 of the PDF reference
         guide for information */
-    QString PDFencodingToQString(const QString &pdfstring);
+    QString PDFencodingToQString(const QString& pdfstring);
 
     void setResolution(double resolution_in_DPI);
 
@@ -221,25 +233,25 @@ private:
 
     // @@@ explanation
     void prescan(parseSpecials specialParser);
-    void prescan_embedPS(char *cp, quint8 *);
-    void prescan_removePageSizeInfo(char *cp, quint8 *);
-    void prescan_parseSpecials(char *cp, quint8 *);
-    void prescan_ParsePapersizeSpecial(const QString &cp);
-    void prescan_ParseBackgroundSpecial(const QString &cp);
-    void prescan_ParseHTMLAnchorSpecial(const QString &cp);
-    void prescan_ParsePSHeaderSpecial(const QString &cp);
-    void prescan_ParsePSBangSpecial(const QString &cp);
-    void prescan_ParsePSQuoteSpecial(const QString &cp);
-    void prescan_ParsePSSpecial(const QString &cp);
-    void prescan_ParsePSFileSpecial(const QString &cp);
-    void prescan_ParseSourceSpecial(const QString &cp);
+    void prescan_embedPS(char* cp, quint8*);
+    void prescan_removePageSizeInfo(char* cp, quint8*);
+    void prescan_parseSpecials(char* cp, quint8*);
+    void prescan_ParsePapersizeSpecial(const QString& cp);
+    void prescan_ParseBackgroundSpecial(const QString& cp);
+    void prescan_ParseHTMLAnchorSpecial(const QString& cp);
+    void prescan_ParsePSHeaderSpecial(const QString& cp);
+    void prescan_ParsePSBangSpecial(const QString& cp);
+    void prescan_ParsePSQuoteSpecial(const QString& cp);
+    void prescan_ParsePSSpecial(const QString& cp);
+    void prescan_ParsePSFileSpecial(const QString& cp);
+    void prescan_ParseSourceSpecial(const QString& cp);
     void prescan_setChar(unsigned int ch);
 
     /* */
     QVector<PreBookmark> prebookmarks;
 
     /** Utility fields used by the embedPostScript method*/
-    QProgressDialog *embedPS_progress;
+    QProgressDialog* embedPS_progress;
     quint16 embedPS_numOfProgressedFiles;
 
     /** Shrink factor. Units are not quite clear */
@@ -248,12 +260,12 @@ private:
     QString errorMsg;
 
     /** Methods which handle certain special commands. */
-    void epsf_special(const QString &cp);
-    void source_special(const QString &cp);
+    void epsf_special(const QString& cp);
+    void source_special(const QString& cp);
 
     /** TPIC specials */
-    void TPIC_setPen_special(const QString &cp);
-    void TPIC_addPath_special(const QString &cp);
+    void TPIC_setPen_special(const QString& cp);
+    void TPIC_addPath_special(const QString& cp);
     void TPIC_flushPath_special();
 
     // List of source-hyperlinks on all pages. This vector is generated
@@ -263,11 +275,11 @@ private:
 
     // If not NULL, the text currently drawn represents a source
     // hyperlink to the (relative) URL given in the string;
-    QString *source_href;
+    QString* source_href;
 
     // If not NULL, the text currently drawn represents a hyperlink to
     // the (relative) URL given in the string;
-    QString *HTML_href;
+    QString* HTML_href;
 
     QString editorCommand;
 
@@ -286,9 +298,9 @@ private:
     /** If PostScriptOutPutFile is non-zero, then no rendering takes
         place. Instead, the PostScript code which is generated by the
         \special-commands is written to the PostScriptString */
-    QString *PostScriptOutPutString;
+    QString* PostScriptOutPutString;
 
-    ghostscript_interface *PS_interface;
+    ghostscript_interface* PS_interface;
 
     /** true, if gs should be used, otherwise, only bounding boxes are
         drawn. */
@@ -308,8 +320,9 @@ private:
     quint16 number_of_elements_in_path;
 
     drawinf currinf;
-    RenderedDocumentPagePixmap *currentlyDrawnPage;
-    QMap<const DVIExport *, QExplicitlySharedDataPointer<DVIExport>> all_exports_;
+    RenderedDocumentPagePixmap* currentlyDrawnPage;
+    QMap<const DVIExport*, QExplicitlySharedDataPointer<DVIExport>>
+        all_exports_;
     // QExplicitlySharedDataPointer<DVISourceEditor> editor_;
 
     /** Flag if document is modified
@@ -330,9 +343,9 @@ private:
 
     QMap<QString, Anchor> anchorList;
 
-    QEventLoop *m_eventLoop;
+    QEventLoop* m_eventLoop;
 
-    QPainter *foreGroundPainter;
+    QPainter* foreGroundPainter;
 
     // was the locateFonts method of font pool executed?
     bool fontpoolLocateFontsDone;

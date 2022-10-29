@@ -7,9 +7,8 @@
 #ifndef _OKULAR_PRINTINTERFACE_H_
 #define _OKULAR_PRINTINTERFACE_H_
 
-#include "../core/okularcore_export.h"
-
 #include <QObject>
+#include "../core/okularcore_export.h"
 
 class QWidget;
 
@@ -47,8 +46,8 @@ public:
     {
     }
 
-    PrintInterface(const PrintInterface &) = delete;
-    PrintInterface &operator=(const PrintInterface &) = delete;
+    PrintInterface(const PrintInterface&) = delete;
+    PrintInterface& operator=(const PrintInterface&) = delete;
 
     /**
      * Builds and returns a new printing configuration widget.
@@ -60,10 +59,10 @@ public:
      * (which is not officially enforced by the signature for binary
      * compatibility reasons).
      */
-    virtual QWidget *printConfigurationWidget() const = 0;
+    virtual QWidget* printConfigurationWidget() const = 0;
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_INTERFACE(Okular::PrintInterface, "org.kde.okular.PrintInterface/0.1")
 

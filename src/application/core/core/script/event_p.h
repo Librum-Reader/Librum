@@ -9,7 +9,6 @@
 
 #include <QString>
 #include <QVariant>
-
 #include <memory>
 
 namespace Okular
@@ -38,37 +37,39 @@ private:
     Event();
 
 public:
-    enum EventType {
-        UnknownEvent,    /// < Unknown
-        AppInit,         /// < Not implemented.
-        BatchExec,       /// < Not implemented.
-        BookmarkMouseUp, /// < Not implemented.
-        ConsoleExec,     /// < Not implemented.
-        DocDidPrint,     /// < Not implemented.
-        DocDidSave,      /// < Not implemented.
-        DocOpen,         /// < Not implemented.
-        DocWillClose,    /// < Not implemented.
-        DocWillPrint,    /// < Not implemented.
-        DocWillSave,     /// < Not implemented.
-        ExternalExec,    /// < Not implemented.
-        FieldBlur,       /// < Not implemented.
+    enum EventType
+    {
+        UnknownEvent,  /// < Unknown
+        AppInit,  /// < Not implemented.
+        BatchExec,  /// < Not implemented.
+        BookmarkMouseUp,  /// < Not implemented.
+        ConsoleExec,  /// < Not implemented.
+        DocDidPrint,  /// < Not implemented.
+        DocDidSave,  /// < Not implemented.
+        DocOpen,  /// < Not implemented.
+        DocWillClose,  /// < Not implemented.
+        DocWillPrint,  /// < Not implemented.
+        DocWillSave,  /// < Not implemented.
+        ExternalExec,  /// < Not implemented.
+        FieldBlur,  /// < Not implemented.
         FieldCalculate,  /// < This event is defined in a field re-calculation.
-        FieldFocus,      /// < This event is defined when the field gains or loses focus.
-        FieldFormat,     /// < When a format action is executed
+        FieldFocus,  /// < This event is defined when the field gains or loses
+                     /// focus.
+        FieldFormat,  /// < When a format action is executed
         FieldKeystroke,  /// < Checks if the entered value is valid.
         FieldMouseDown,  /// < Not implemented.
-        FieldMouseEnter, /// < Not implemented.
+        FieldMouseEnter,  /// < Not implemented.
         FieldMouseExit,  /// < Not implemented.
-        FieldMouseUp,    /// < Not implemented.
+        FieldMouseUp,  /// < Not implemented.
         /* Validates the field after every change is committed
          * (clicked outside or tabbed to another field).
          * The enter event is not handled
          */
         FieldValidate,
-        LinkMouseUp, /// < Not implemented.
-        MenuExec,    /// < Not implemented.
-        PageOpen,    /// < Not implemented.
-        PageClose,   /// < Not implemented.
+        LinkMouseUp,  /// < Not implemented.
+        MenuExec,  /// < Not implemented.
+        PageOpen,  /// < Not implemented.
+        PageClose,  /// < Not implemented.
     };
 
     explicit Event(EventType type);
@@ -81,22 +82,22 @@ public:
     QString type() const;
 
     QString targetName() const;
-    void setTargetName(const QString &val);
+    void setTargetName(const QString& val);
 
-    Page *targetPage() const;
-    void setTargetPage(Page *val);
+    Page* targetPage() const;
+    void setTargetPage(Page* val);
 
-    FormField *source() const;
-    void setSource(FormField *val);
+    FormField* source() const;
+    void setSource(FormField* val);
 
-    Page *sourcePage() const;
-    void setSourcePage(Page *val);
+    Page* sourcePage() const;
+    void setSourcePage(Page* val);
 
-    void *target() const;
-    void setTarget(void *target);
+    void* target() const;
+    void setTarget(void* target);
 
     QVariant value() const;
-    void setValue(const QVariant &val);
+    void setValue(const QVariant& val);
 
     bool returnCode() const;
     void setReturnCode(bool returnCode);
@@ -108,11 +109,20 @@ public:
     bool willCommit() const;
     void setWillCommit(bool willCommit);
 
-    static std::shared_ptr<Event> createFormCalculateEvent(FormField *target, Page *targetPage, FormField *source = nullptr, Page *sourcePage = nullptr, const QString &targetName = QString());
-    static std::shared_ptr<Event> createFormatEvent(FormField *target, Page *targetPage, const QString &targetName = QString());
-    static std::shared_ptr<Event> createKeystrokeEvent(FormField *target, Page *targetPage);
-    static std::shared_ptr<Event> createFormFocusEvent(FormField *target, Page *targetPage, const QString &targetName = QString());
-    static std::shared_ptr<Event> createFormValidateEvent(FormField *target, Page *targetPage, const QString &targetName = QString());
+    static std::shared_ptr<Event> createFormCalculateEvent(
+        FormField* target, Page* targetPage, FormField* source = nullptr,
+        Page* sourcePage = nullptr, const QString& targetName = QString());
+    static std::shared_ptr<Event> createFormatEvent(
+        FormField* target, Page* targetPage,
+        const QString& targetName = QString());
+    static std::shared_ptr<Event> createKeystrokeEvent(FormField* target,
+                                                       Page* targetPage);
+    static std::shared_ptr<Event> createFormFocusEvent(
+        FormField* target, Page* targetPage,
+        const QString& targetName = QString());
+    static std::shared_ptr<Event> createFormValidateEvent(
+        FormField* target, Page* targetPage,
+        const QString& targetName = QString());
 
 private:
     class Private;
@@ -120,5 +130,5 @@ private:
     Q_DISABLE_COPY(Event)
 };
 
-} // namespace Okular
-#endif // OKULAR_SCRIPT_EVENT_P_H
+}  // namespace Okular
+#endif  // OKULAR_SCRIPT_EVENT_P_H

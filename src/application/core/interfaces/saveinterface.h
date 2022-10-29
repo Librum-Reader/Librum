@@ -7,9 +7,8 @@
 #ifndef _OKULAR_SAVEINTERFACE_H_
 #define _OKULAR_SAVEINTERFACE_H_
 
-#include "../core/okularcore_export.h"
-
 #include <QObject>
+#include "../core/okularcore_export.h"
 
 namespace Okular
 {
@@ -39,9 +38,11 @@ public:
     /**
      * The possible options for the saving.
      */
-    enum SaveOption {
+    enum SaveOption
+    {
         NoOption = 0,
-        SaveChanges = 1 ///< The possibility to save with the current changes to the document.
+        SaveChanges = 1  ///< The possibility to save with the current changes
+                         ///< to the document.
     };
     Q_DECLARE_FLAGS(SaveOptions, SaveOption)
 
@@ -56,8 +57,8 @@ public:
     {
     }
 
-    SaveInterface(const SaveInterface &) = delete;
-    SaveInterface &operator=(const SaveInterface &) = delete;
+    SaveInterface(const SaveInterface&) = delete;
+    SaveInterface& operator=(const SaveInterface&) = delete;
 
     /**
      * Query for the supported saving options.
@@ -69,7 +70,8 @@ public:
     /**
      * Save to the specified @p fileName with the specified @p options.
      */
-    virtual bool save(const QString &fileName, SaveOptions options, QString *errorText) = 0;
+    virtual bool save(const QString& fileName, SaveOptions options,
+                      QString* errorText) = 0;
 
     /**
      * Returns the annotation proxy. Generators can return NULL if native
@@ -79,10 +81,10 @@ public:
      *       that doesn't support any capability.
      * @since 0.15 (KDE 4.9)
      */
-    virtual AnnotationProxy *annotationProxy() const = 0;
+    virtual AnnotationProxy* annotationProxy() const = 0;
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_INTERFACE(Okular::SaveInterface, "org.kde.okular.SaveInterface/0.3")
 Q_DECLARE_OPERATORS_FOR_FLAGS(Okular::SaveInterface::SaveOptions)

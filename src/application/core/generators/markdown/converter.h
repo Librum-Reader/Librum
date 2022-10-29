@@ -8,7 +8,6 @@
 #define MARKDOWN_CONVERTER_H
 
 #include <core/textdocumentgenerator.h>
-
 #include <QDir>
 #include <QTextFragment>
 
@@ -25,7 +24,7 @@ public:
     Converter();
     ~Converter() override;
 
-    QTextDocument *convert(const QString &fileName) override;
+    QTextDocument* convert(const QString& fileName) override;
 
     void convertAgain();
 
@@ -33,25 +32,34 @@ public:
     {
         m_isFancyPantsEnabled = b;
     }
+
     bool isFancyPantsEnabled() const
     {
         return m_isFancyPantsEnabled;
     }
 
-    QTextDocument *convertOpenFile();
+    QTextDocument* convertOpenFile();
 
 private:
-    void extractLinks(QTextFrame *parent, QHash<QString, QTextFragment> &internalLinks, QHash<QString, QTextBlock> &documentAnchors);
-    void extractLinks(const QTextBlock &parent, QHash<QString, QTextFragment> &internalLinks, QHash<QString, QTextBlock> &documentAnchors);
-    void convertImages(QTextFrame *parent, const QDir &dir, QTextDocument *textDocument);
-    void convertImages(const QTextBlock &parent, const QDir &dir, QTextDocument *textDocument);
-    void setImageSize(QTextImageFormat &format, const qreal specifiedWidth, const qreal specifiedHeight, const qreal originalWidth, const qreal originalHeight);
+    void extractLinks(QTextFrame* parent,
+                      QHash<QString, QTextFragment>& internalLinks,
+                      QHash<QString, QTextBlock>& documentAnchors);
+    void extractLinks(const QTextBlock& parent,
+                      QHash<QString, QTextFragment>& internalLinks,
+                      QHash<QString, QTextBlock>& documentAnchors);
+    void convertImages(QTextFrame* parent, const QDir& dir,
+                       QTextDocument* textDocument);
+    void convertImages(const QTextBlock& parent, const QDir& dir,
+                       QTextDocument* textDocument);
+    void setImageSize(QTextImageFormat& format, const qreal specifiedWidth,
+                      const qreal specifiedHeight, const qreal originalWidth,
+                      const qreal originalHeight);
 
-    FILE *m_markdownFile;
+    FILE* m_markdownFile;
     QDir m_fileDir;
     bool m_isFancyPantsEnabled;
 };
 
-}
+}  // namespace Markdown
 
 #endif

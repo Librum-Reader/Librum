@@ -7,15 +7,14 @@
 #ifndef POPPLEREMBEDDEDFILE_H
 #define POPPLEREMBEDDEDFILE_H
 
-#include <poppler-qt5.h>
-
 #include <core/document.h>
+#include <poppler-qt5.h>
 
 class PDFEmbeddedFile : public Okular::EmbeddedFile
 {
 public:
-    explicit PDFEmbeddedFile(Poppler::EmbeddedFile *f)
-        : ef(f)
+    explicit PDFEmbeddedFile(Poppler::EmbeddedFile* f) :
+        ef(f)
     {
     }
 
@@ -51,7 +50,7 @@ public:
     }
 
 private:
-    Poppler::EmbeddedFile *ef;
+    Poppler::EmbeddedFile* ef;
 };
 
 #endif

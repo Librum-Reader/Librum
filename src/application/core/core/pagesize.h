@@ -10,7 +10,6 @@
 #include <QList>
 #include <QSharedDataPointer>
 #include <QString>
-
 #include "okularcore_export.h"
 
 namespace Okular
@@ -34,11 +33,11 @@ public:
      * Construct a page size with the specified @p width and @p height,
      * having the ID @p name.
      */
-    PageSize(double width, double height, const QString &name);
+    PageSize(double width, double height, const QString& name);
     /**
      * Copy constructor.
      */
-    PageSize(const PageSize &pageSize);
+    PageSize(const PageSize& pageSize);
     ~PageSize();
 
     /**
@@ -59,14 +58,14 @@ public:
      */
     bool isNull() const;
 
-    PageSize &operator=(const PageSize &pageSize);
+    PageSize& operator=(const PageSize& pageSize);
 
     /**
      * Comparison operator.
      */
-    bool operator==(const PageSize &pageSize) const;
+    bool operator==(const PageSize& pageSize) const;
 
-    bool operator!=(const PageSize &pageSize) const;
+    bool operator!=(const PageSize& pageSize) const;
 
 private:
     /// @cond PRIVATE
@@ -75,6 +74,6 @@ private:
     QSharedDataPointer<PageSizePrivate> d;
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // ghostscript_interface
 //
@@ -23,15 +24,15 @@ class QPainter;
 class pageInfo
 {
 public:
-    explicit pageInfo(const QString &_PostScriptString);
+    explicit pageInfo(const QString& _PostScriptString);
     ~pageInfo();
 
-    pageInfo(const pageInfo &) = delete;
-    pageInfo &operator=(const pageInfo &) = delete;
+    pageInfo(const pageInfo&) = delete;
+    pageInfo& operator=(const pageInfo&) = delete;
 
     QColor background;
     QColor permanentBackground;
-    QString *PostScriptString;
+    QString* PostScriptString;
 };
 
 class ghostscript_interface : public QObject
@@ -45,30 +46,33 @@ public:
     void clear();
 
     // sets the PostScript which is used on a certain page
-    void setPostScript(const quint16 page, const QString &PostScript);
+    void setPostScript(const quint16 page, const QString& PostScript);
 
     // sets path from additional postscript files may be read
-    void setIncludePath(const QString &_includePath);
+    void setIncludePath(const QString& _includePath);
 
-    // Sets the background color for a certain page. If permanent is false then the original
-    // background color can be restored by calling restoreBackground(page).
-    // The Option permanent = false is used when we want to display a different paper
-    // color as the one specified in the dvi file.
-    void setBackgroundColor(const quint16 page, const QColor &background_color, bool permanent = true);
+    // Sets the background color for a certain page. If permanent is false then
+    // the original background color can be restored by calling
+    // restoreBackground(page). The Option permanent = false is used when we
+    // want to display a different paper color as the one specified in the dvi
+    // file.
+    void setBackgroundColor(const quint16 page, const QColor& background_color,
+                            bool permanent = true);
 
-    // Restore the background to the color which was specified by the last call to setBackgroundColor()
-    // With option permanent = true.
+    // Restore the background to the color which was specified by the last call
+    // to setBackgroundColor() With option permanent = true.
     void restoreBackgroundColor(const quint16 page);
 
     // Draws the graphics of the page into the painter, if possible. If
     // the page does not contain any graphics, nothing happens
-    void graphics(const quint16 page, double dpi, long magnification, QPainter *paint);
+    void graphics(const quint16 page, double dpi, long magnification,
+                  QPainter* paint);
 
     // Returns the background color for a certain page. If no color was
     // set, Qt::white is returned.
     QColor getBackgroundColor(const quint16 page) const;
 
-    QString *PostScriptHeaderString;
+    QString* PostScriptHeaderString;
 
     /** This method tries to find the PostScript file 'filename' in the
         DVI file's directory (if the base-URL indicates that the DVI file
@@ -77,13 +81,14 @@ public:
         returned. Otherwise, the method returns the first argument. TODO:
         use the DVI file's baseURL, once this is implemented.
     */
-    static QString locateEPSfile(const QString &filename, const QUrl &base);
+    static QString locateEPSfile(const QString& filename, const QUrl& base);
 
 private:
-    void gs_generate_graphics_file(const quint16 page, const QString &filename, long magnification);
-    QHash<quint16, pageInfo *> pageList;
+    void gs_generate_graphics_file(const quint16 page, const QString& filename,
+                                   long magnification);
+    QHash<quint16, pageInfo*> pageList;
 
-    double resolution; // in dots per inch
+    double resolution;  // in dots per inch
     int pixel_page_w;  // in pixels
     int pixel_page_h;  // in pixels
 
@@ -104,7 +109,7 @@ private:
 
 Q_SIGNALS:
     /** Passed through to the top-level kpart. */
-    void error(const QString &message, int duration);
+    void error(const QString& message, int duration);
 };
 
 #endif

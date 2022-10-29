@@ -24,19 +24,41 @@ public:
     /**
      * Describes the type of transition effect.
      */
-    enum Type { Replace, Split, Blinds, Box, Wipe, Dissolve, Glitter, Fly, Push, Cover, Uncover, Fade };
+    enum Type
+    {
+        Replace,
+        Split,
+        Blinds,
+        Box,
+        Wipe,
+        Dissolve,
+        Glitter,
+        Fly,
+        Push,
+        Cover,
+        Uncover,
+        Fade
+    };
 
     /**
      * Describes the alignment that is applied to the @ref Type
      * of transition effect.
      */
-    enum Alignment { Horizontal, Vertical };
+    enum Alignment
+    {
+        Horizontal,
+        Vertical
+    };
 
     /**
      * Describes the direction that is applied to the @ref Type
      * of transition effect.
      */
-    enum Direction { Inward, Outward };
+    enum Direction
+    {
+        Inward,
+        Outward
+    };
 
     /**
      * Creates a new page transition of the given @p type.
@@ -48,8 +70,8 @@ public:
     /**
      * Creates a new page transition from an @p other.
      */
-    PageTransition(const PageTransition &other);
-    PageTransition &operator=(const PageTransition &other);
+    PageTransition(const PageTransition& other);
+    PageTransition& operator=(const PageTransition& other);
 
     /**
      * Destroys the page transition.
@@ -87,7 +109,8 @@ public:
     double scale() const;
 
     /**
-     * Returns true if the area to be flown is rectangular and opaque (Only if type == 'Fly').
+     * Returns true if the area to be flown is rectangular and opaque (Only if
+     * type == 'Fly').
      */
     bool isRectangular() const;
 
@@ -117,20 +140,22 @@ public:
     void setAngle(int angle);
 
     /**
-     * Sets the starting or ending scale of the transition (Only if type == 'Fly').
+     * Sets the starting or ending scale of the transition (Only if type ==
+     * 'Fly').
      */
     void setScale(double scale);
 
     /**
-     * Sets whether the area to be flown is rectangular and opaque (Only if type == 'Fly').
+     * Sets whether the area to be flown is rectangular and opaque (Only if type
+     * == 'Fly').
      */
     void setIsRectangular(bool rectangular);
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -22,8 +22,8 @@ namespace Okular
 class OKULARCORE_EXPORT Tile
 {
 public:
-    Tile(const NormalizedRect &rect, QPixmap *pixmap, bool isValid);
-    Tile(const Tile &t);
+    Tile(const NormalizedRect& rect, QPixmap* pixmap, bool isValid);
+    Tile(const Tile& t);
     ~Tile();
 
     /**
@@ -34,20 +34,20 @@ public:
     /**
      * Pixmap (may also be NULL)
      */
-    QPixmap *pixmap() const;
+    QPixmap* pixmap() const;
 
     /**
      * True if the pixmap is available and updated
      */
     bool isValid() const;
 
-    Tile &operator=(const Tile &other);
+    Tile& operator=(const Tile& other);
 
 private:
     class Private;
-    Private *d;
+    Private* d;
 };
 
-}
+}  // namespace Okular
 
-#endif // _OKULAR_TILE_H_
+#endif  // _OKULAR_TILE_H_

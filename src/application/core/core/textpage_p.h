@@ -16,10 +16,12 @@
 class SearchPoint;
 
 /**
- * Memory-optimized storage of a TextEntity. Stores a string and its bounding box.
+ * Memory-optimized storage of a TextEntity. Stores a string and its bounding
+ * box.
  *
- * When a generator adds a TextEntity to a TextPage, it is internally stored as TinyTextEntity.
- * TinyTextEntity is also internally used to get the geometry of text selections and highlight areas.
+ * When a generator adds a TextEntity to a TextPage, it is internally stored as
+ * TinyTextEntity. TinyTextEntity is also internally used to get the geometry of
+ * text selections and highlight areas.
  *
  * @see TextEntity
  */
@@ -29,16 +31,19 @@ class RegionText;
 namespace Okular
 {
 class PagePrivate;
-typedef QList<TinyTextEntity *> TextList;
+typedef QList<TinyTextEntity*> TextList;
 
 /**
  * Returns whether the two strings match.
- * Satisfies the condition that if two strings match then their lengths are equal.
+ * Satisfies the condition that if two strings match then their lengths are
+ * equal.
  */
-typedef bool (*TextComparisonFunction)(const QStringRef &from, const QStringRef &to);
+typedef bool (*TextComparisonFunction)(const QStringRef& from,
+                                       const QStringRef& to);
 
 /**
- * A list of RegionText. It keeps a bunch of TextList with their bounding rectangles
+ * A list of RegionText. It keeps a bunch of TextList with their bounding
+ * rectangles
  */
 typedef QList<RegionText> RegionTextList;
 
@@ -48,29 +53,35 @@ public:
     TextPagePrivate();
     ~TextPagePrivate();
 
-    RegularAreaRect *findTextInternalForward(int searchID, const QString &query, TextComparisonFunction comparer, const TextList::ConstIterator &start, int start_offset, const TextList::ConstIterator &end);
-    RegularAreaRect *findTextInternalBackward(int searchID, const QString &query, TextComparisonFunction comparer, const TextList::ConstIterator &start, int start_offset, const TextList::ConstIterator &end);
+    RegularAreaRect* findTextInternalForward(
+        int searchID, const QString& query, TextComparisonFunction comparer,
+        const TextList::ConstIterator& start, int start_offset,
+        const TextList::ConstIterator& end);
+    RegularAreaRect* findTextInternalBackward(
+        int searchID, const QString& query, TextComparisonFunction comparer,
+        const TextList::ConstIterator& start, int start_offset,
+        const TextList::ConstIterator& end);
 
     /**
      * Copy a TextList to m_words, the pointers of list are adopted
      */
-    void setWordList(const TextList &list);
+    void setWordList(const TextList& list);
 
     /**
-     * Make necessary modifications in the TextList to make the text order correct, so
-     * that textselection works fine
+     * Make necessary modifications in the TextList to make the text order
+     * correct, so that textselection works fine
      */
     void correctTextOrder();
 
     // variables those can be accessed directly from TextPage
     TextList m_words;
-    QMap<int, SearchPoint *> m_searchPoints;
-    Page *m_page;
+    QMap<int, SearchPoint*> m_searchPoints;
+    Page* m_page;
 
 private:
-    RegularAreaRect *searchPointToArea(const SearchPoint *sp);
+    RegularAreaRect* searchPointToArea(const SearchPoint* sp);
 };
 
-}
+}  // namespace Okular
 
 #endif

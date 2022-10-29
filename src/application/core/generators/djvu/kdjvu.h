@@ -19,7 +19,7 @@ class QDomDocument;
 class QFile;
 
 #ifndef MINIEXP_H
-typedef struct miniexp_s *miniexp_t;
+typedef struct miniexp_s* miniexp_t;
 #endif
 
 /**
@@ -31,8 +31,8 @@ public:
     KDjVu();
     ~KDjVu();
 
-    KDjVu(const KDjVu &) = delete;
-    KDjVu &operator=(const KDjVu &) = delete;
+    KDjVu(const KDjVu&) = delete;
+    KDjVu& operator=(const KDjVu&) = delete;
 
     /**
      * A DjVu page.
@@ -69,11 +69,23 @@ public:
         Link() = default;
         virtual ~Link();
 
-        Link(const Link &) = delete;
-        Link &operator=(const Link &) = delete;
+        Link(const Link&) = delete;
+        Link& operator=(const Link&) = delete;
 
-        enum LinkType { PageLink, UrlLink };
-        enum LinkArea { UnknownArea, RectArea, EllipseArea, PolygonArea };
+        enum LinkType
+        {
+            PageLink,
+            UrlLink
+        };
+
+        enum LinkArea
+        {
+            UnknownArea,
+            RectArea,
+            EllipseArea,
+            PolygonArea
+        };
+
         virtual int type() const = 0;
         LinkArea areaType() const;
         QPoint point() const;
@@ -129,16 +141,21 @@ public:
     public:
         virtual ~Annotation();
 
-        Annotation(const Annotation &) = delete;
-        Annotation &operator=(const Annotation &) = delete;
+        Annotation(const Annotation&) = delete;
+        Annotation& operator=(const Annotation&) = delete;
 
-        enum AnnotationType { TextAnnotation, LineAnnotation };
+        enum AnnotationType
+        {
+            TextAnnotation,
+            LineAnnotation
+        };
+
         virtual int type() const = 0;
         QPoint point() const;
         QString comment() const;
-        void setComment(const QString &comment);
+        void setComment(const QString& comment);
         virtual QColor color() const;
-        virtual void setColor(const QColor &color);
+        virtual void setColor(const QColor& color);
 
     protected:
         explicit Annotation(miniexp_t anno);
@@ -157,7 +174,7 @@ public:
     public:
         int type() const override;
         QColor color() const override;
-        void setColor(const QColor &color) override;
+        void setColor(const QColor& color) override;
         QSize size() const;
         bool inlineText() const;
 
@@ -177,7 +194,7 @@ public:
     public:
         int type() const override;
         QColor color() const override;
-        void setColor(const QColor &color) override;
+        void setColor(const QColor& color) override;
         QPoint point2() const;
         bool isArrow() const;
         int width() const;
@@ -213,7 +230,7 @@ public:
     /**
      * Opens the file \p fileName, closing the old one if necessary.
      */
-    bool openFile(const QString &fileName);
+    bool openFile(const QString& fileName);
     /**
      * Close the file currently opened, if any.
      */
@@ -224,12 +241,12 @@ public:
      * \note KDjVu handles the pages, so you don't need to delete them manually
      * \return a vector with the pages of the current document
      */
-    const QVector<KDjVu::Page *> &pages() const;
+    const QVector<KDjVu::Page*>& pages() const;
 
     /**
      * Get the metadata for the specified \p key, or a null variant otherwise.
      */
-    QVariant metaData(const QString &key) const;
+    QVariant metaData(const QString& key) const;
 
     /**
      * Get an XML document with the bookmarks of the current document (if any).
@@ -243,16 +260,18 @@ public:
      * <item title="Title 2" destination="dest2">
      * \endverbatim
      */
-    const QDomDocument *documentBookmarks() const;
+    const QDomDocument* documentBookmarks() const;
 
     /**
      * Reads the links and the annotations for the page \p pageNum
      *
-     * For both \p links and \p annotations , you can pass either a valid pointer
-     * (in case you want to extract that kind of information), or a null pointer
-     * (if you don't want that information).
+     * For both \p links and \p annotations , you can pass either a valid
+     * pointer (in case you want to extract that kind of information), or a null
+     * pointer (if you don't want that information).
      */
-    void linksAndAnnotationsForPage(int pageNum, QList<KDjVu::Link *> *links, QList<KDjVu::Annotation *> *annotations) const;
+    void linksAndAnnotationsForPage(
+        int pageNum, QList<KDjVu::Link*>* links,
+        QList<KDjVu::Annotation*>* annotations) const;
 
     /**
      * Check if the image for the specified \p page with the specified
@@ -265,19 +284,21 @@ public:
      * Export the currently open document as PostScript file \p fileName.
      * \returns whether the exporting was successful
      */
-    bool exportAsPostScript(const QString &fileName, const QList<int> &pageList) const;
+    bool exportAsPostScript(const QString& fileName,
+                            const QList<int>& pageList) const;
 
     /**
      * Export the currently open document as PostScript file.
      * \returns whether the exporting was successful
      */
-    bool exportAsPostScript(QFile *file, const QList<int> &pageList) const;
+    bool exportAsPostScript(QFile* file, const QList<int>& pageList) const;
 
     /**
-     * Return the list of the text entities for the specified \p page, that matches the
-     * specified \p granularity.
+     * Return the list of the text entities for the specified \p page, that
+     * matches the specified \p granularity.
      */
-    QList<KDjVu::TextEntity> textEntities(int page, const QString &granularity) const;
+    QList<KDjVu::TextEntity> textEntities(int page,
+                                          const QString& granularity) const;
 
     /**
      * Enable or disable the internal rendered pages cache.
@@ -291,11 +312,11 @@ public:
     /**
      * Return the page number of the page whose title is \p name.
      */
-    int pageNumber(const QString &name) const;
+    int pageNumber(const QString& name) const;
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 };
 
 #endif

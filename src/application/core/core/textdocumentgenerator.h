@@ -7,11 +7,10 @@
 #ifndef _OKULAR_TEXTDOCUMENTGENERATOR_H_
 #define _OKULAR_TEXTDOCUMENTGENERATOR_H_
 
-#include "okularcore_export.h"
-
 #include "../interfaces/configinterface.h"
 #include "document.h"
 #include "generator.h"
+#include "okularcore_export.h"
 #include "textdocumentsettings.h"
 
 class QTextBlock;
@@ -42,54 +41,61 @@ public:
     ~TextDocumentConverter() override;
 
     /**
-     * Returns the generated QTextDocument object. The caller takes ownership of the QTextDocument
+     * Returns the generated QTextDocument object. The caller takes ownership of
+     * the QTextDocument
      *
-     * @note there is no need to implement this one if you implement convertWithPassword
+     * @note there is no need to implement this one if you implement
+     * convertWithPassword
      */
-    virtual QTextDocument *convert(const QString &fileName);
+    virtual QTextDocument* convert(const QString& fileName);
 
     /**
      * Returns the generated QTextDocument object.
      */
-    virtual Document::OpenResult convertWithPassword(const QString &fileName, const QString &password);
+    virtual Document::OpenResult convertWithPassword(const QString& fileName,
+                                                     const QString& password);
 
     /**
-     * Returns the generated QTextDocument object. Will be null if convert didn't succeed
+     * Returns the generated QTextDocument object. Will be null if convert
+     * didn't succeed
      */
-    QTextDocument *document();
+    QTextDocument* document();
 
 Q_SIGNALS:
     /**
      * Adds a new link object which is located between cursorBegin and
      * cursorEnd to the generator.
      */
-    void addAction(Okular::Action *link, int cursorBegin, int cursorEnd);
+    void addAction(Okular::Action* link, int cursorBegin, int cursorEnd);
 
     /**
      * Adds a new annotation object which is located between cursorBegin and
      * cursorEnd to the generator.
      */
-    void addAnnotation(Okular::Annotation *annotation, int cursorBegin, int cursorEnd);
+    void addAnnotation(Okular::Annotation* annotation, int cursorBegin,
+                       int cursorEnd);
 
     /**
-     * Adds a new title at the given level which is located as position to the generator.
+     * Adds a new title at the given level which is located as position to the
+     * generator.
      */
-    void addTitle(int level, const QString &title, const QTextBlock &position);
+    void addTitle(int level, const QString& title, const QTextBlock& position);
 
     /**
      * Adds a set of meta data to the generator.
      *
      * @since 0.7 (KDE 4.1)
      */
-    void addMetaData(DocumentInfo::Key key, const QString &value);
+    void addMetaData(DocumentInfo::Key key, const QString& value);
 
     /**
-     * This signal should be emitted whenever an error occurred in the converter.
+     * This signal should be emitted whenever an error occurred in the
+     * converter.
      *
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void error(const QString &message, int duration);
+    void error(const QString& message, int duration);
 
     /**
      * This signal should be emitted whenever the user should be warned.
@@ -97,7 +103,7 @@ Q_SIGNALS:
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void warning(const QString &message, int duration);
+    void warning(const QString& message, int duration);
 
     /**
      * This signal should be emitted whenever the user should be noticed.
@@ -105,21 +111,22 @@ Q_SIGNALS:
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void notice(const QString &message, int duration);
+    void notice(const QString& message, int duration);
 
 protected:
     /**
      * Sets the converted QTextDocument object.
      */
-    void setDocument(QTextDocument *document);
+    void setDocument(QTextDocument* document);
 
     /**
      * This method can be used to calculate the viewport for a given text block.
      *
-     * @note This method should be called at the end of the conversion, because it
-     *       triggers QTextDocument to do the layout calculation.
+     * @note This method should be called at the end of the conversion, because
+     * it triggers QTextDocument to do the layout calculation.
      */
-    DocumentViewport calculateViewport(QTextDocument *document, const QTextBlock &block);
+    DocumentViewport calculateViewport(QTextDocument* document,
+                                       const QTextBlock& block);
 
     /**
      * Returns the generator that owns this converter.
@@ -128,10 +135,10 @@ protected:
      *
      * @since 0.7 (KDE 4.1)
      */
-    TextDocumentGenerator *generator() const;
+    TextDocumentGenerator* generator() const;
 
 private:
-    TextDocumentConverterPrivate *d_ptr;
+    TextDocumentConverterPrivate* d_ptr;
     Q_DECLARE_PRIVATE(TextDocumentConverter)
     Q_DISABLE_COPY(TextDocumentConverter)
 };
@@ -142,7 +149,8 @@ private:
  * This generator provides a document in the form of a QTextDocument object,
  * parsed using a specialized TextDocumentConverter.
  */
-class OKULARCORE_EXPORT TextDocumentGenerator : public Generator, public Okular::ConfigInterface
+class OKULARCORE_EXPORT TextDocumentGenerator : public Generator,
+                                                public Okular::ConfigInterface
 {
     /// @cond PRIVATE
     friend class TextDocumentConverter;
@@ -164,29 +172,34 @@ public:
      *       don't have to delete it yourself
      * @since 0.17 (KDE 4.11)
      */
-    TextDocumentGenerator(TextDocumentConverter *converter, const QString &configName, QObject *parent, const QVariantList &args);
+    TextDocumentGenerator(TextDocumentConverter* converter,
+                          const QString& configName, QObject* parent,
+                          const QVariantList& args);
 
     ~TextDocumentGenerator() override;
 
     // [INHERITED] load a document and fill up the pagesVector
-    Document::OpenResult loadDocumentWithPassword(const QString &fileName, QVector<Okular::Page *> &pagesVector, const QString &password) override;
+    Document::OpenResult loadDocumentWithPassword(
+        const QString& fileName, QVector<Okular::Page*>& pagesVector,
+        const QString& password) override;
 
     // [INHERITED] perform actions on document / pages
     bool canGeneratePixmap() const override;
-    void generatePixmap(Okular::PixmapRequest *request) override;
+    void generatePixmap(Okular::PixmapRequest* request) override;
 
     // [INHERITED] print document using already configured QPrinter
-    Document::PrintError print(QPrinter &printer) override;
+    Document::PrintError print(QPrinter& printer) override;
 
     // [INHERITED] text exporting
     Okular::ExportFormat::List exportFormats() const override;
-    bool exportTo(const QString &fileName, const Okular::ExportFormat &format) override;
+    bool exportTo(const QString& fileName,
+                  const Okular::ExportFormat& format) override;
 
     // [INHERITED] config interface
     /// By default checks if the default font has changed or not
     bool reparseConfig() override;
     /// Does nothing by default. You need to reimplement it in your generator
-    void addPages(KConfigDialog *dlg) override;
+    void addPages(KConfigDialog* dlg) override;
 
     /**
      * Config skeleton for TextDocumentSettingsWidget
@@ -196,26 +209,27 @@ public:
      *
      * @since 0.17 (KDE 4.11)
      */
-    TextDocumentSettings *generalSettings();
+    TextDocumentSettings* generalSettings();
 
-    Okular::DocumentInfo generateDocumentInfo(const QSet<DocumentInfo::Key> &keys) const override;
-    const Okular::DocumentSynopsis *generateDocumentSynopsis() override;
+    Okular::DocumentInfo generateDocumentInfo(
+        const QSet<DocumentInfo::Key>& keys) const override;
+    const Okular::DocumentSynopsis* generateDocumentSynopsis() override;
 
 protected:
     bool doCloseDocument() override;
-    Okular::TextPage *textPage(Okular::TextRequest *request) override;
+    Okular::TextPage* textPage(Okular::TextRequest* request) override;
 
     /* @since 1.8 */
-    TextDocumentConverter *converter();
+    TextDocumentConverter* converter();
 
     /* @since 1.8 */
-    void setTextDocument(QTextDocument *textDocument);
+    void setTextDocument(QTextDocument* textDocument);
 
 private:
     Q_DECLARE_PRIVATE(TextDocumentGenerator)
     Q_DISABLE_COPY(TextDocumentGenerator)
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -11,11 +11,10 @@
 #ifndef _faxexpand_h_
 #define _faxexpand_h_
 
-#include <QImage>
-
 #include <sys/types.h>
+#include <QImage>
 #ifndef Q_OS_WIN
-#include <unistd.h>
+    #include <unistd.h>
 #endif
 
 #define t32bits quint32
@@ -30,11 +29,12 @@ class pagenode;
    run is the base of an array of lengths, starting with a
    (possibly empty) white run for line number linenum.
    pn points to the page descriptor */
-typedef void (*drawfunc)(pixnum *run, int linenum, class pagenode *pn);
+typedef void (*drawfunc)(pixnum* run, int linenum, class pagenode* pn);
 
-struct strip {    /* tiff strip descriptor */
+struct strip
+{ /* tiff strip descriptor */
     off_t offset; /* offset in file */
-    off_t size;   /* size of this strip */
+    off_t size; /* size of this strip */
 };
 
 /* defines for the pagenode member: type */
@@ -45,27 +45,29 @@ class pagenode
 { /* compressed page descriptor */
 public:
     pagenode();
+
     ~pagenode()
     {
     }
-    int nstrips;          /* number of strips */
-    int rowsperstrip;     /* number of rows per strip */
-    int stripnum;         /* current strip while expanding */
-    struct strip *strips; /* array of strips containing fax data in file */
-    t16bits *data;        /* in-memory copy of strip */
-    t16bits *dataOrig;    /* copy of `data', in case we shift it */
-    size_t length;        /* length of data */
-    QSize size;           /* width & height of page in pixels */
-    int inverse;          /* black <=> white */
-    int lsbfirst;         /* bit order is lsb first */
-    int orient;           /* orientation - upsidedown, landscape, mirrored */
-    int vres;             /* vertical resolution: 1 = fine  */
-    QPoint dpi;           /* DPI horz/vert */
-    void (*expander)(class pagenode *, drawfunc);
+
+    int nstrips; /* number of strips */
+    int rowsperstrip; /* number of rows per strip */
+    int stripnum; /* current strip while expanding */
+    struct strip* strips; /* array of strips containing fax data in file */
+    t16bits* data; /* in-memory copy of strip */
+    t16bits* dataOrig; /* copy of `data', in case we shift it */
+    size_t length; /* length of data */
+    QSize size; /* width & height of page in pixels */
+    int inverse; /* black <=> white */
+    int lsbfirst; /* bit order is lsb first */
+    int orient; /* orientation - upsidedown, landscape, mirrored */
+    int vres; /* vertical resolution: 1 = fine  */
+    QPoint dpi; /* DPI horz/vert */
+    void (*expander)(class pagenode*, drawfunc);
     unsigned int bytes_per_line;
     QString filename; /* The name of the file to be opened */
-    QImage image;     /* The final image */
-    uchar *imageData; /* The temporary raw image data */
+    QImage image; /* The final image */
+    uchar* imageData; /* The temporary raw image data */
 };
 
 /* page orientation flags */
@@ -90,25 +92,26 @@ public:
 #define S_EOL 12
 
 /* state table entry */
-struct tabent {
+struct tabent
+{
     unsigned char State;
     unsigned char Width; /* width of code in bits */
-    pixnum Param;        /* run length */
+    pixnum Param; /* run length */
 };
 
-extern struct tabent MainTable[];  /* 2-D state table */
+extern struct tabent MainTable[]; /* 2-D state table */
 extern struct tabent WhiteTable[]; /* White run lengths */
 extern struct tabent BlackTable[]; /* Black run lengths */
 
-void MHexpand(class pagenode *pn, drawfunc df);
-void g31expand(class pagenode *pn, drawfunc df);
-void g32expand(class pagenode *pn, drawfunc df);
-void g4expand(class pagenode *pn, drawfunc df);
+void MHexpand(class pagenode* pn, drawfunc df);
+void g31expand(class pagenode* pn, drawfunc df);
+void g32expand(class pagenode* pn, drawfunc df);
+void g4expand(class pagenode* pn, drawfunc df);
 
 /* initialise code tables */
 extern void fax_init_tables();
 
 /* count lines in image */
-extern int G3count(class pagenode *pn, int twoD);
+extern int G3count(class pagenode* pn, int twoD);
 
 #endif

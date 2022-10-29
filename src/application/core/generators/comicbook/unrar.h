@@ -7,11 +7,10 @@
 #ifndef UNRAR_H
 #define UNRAR_H
 
+#include <unrarflavours.h>
 #include <QObject>
 #include <QProcess>
 #include <QStringList>
-
-#include <unrarflavours.h>
 
 class QEventLoop;
 class QTemporaryDir;
@@ -38,7 +37,7 @@ public:
     /**
      * Opens given rar archive.
      */
-    bool open(const QString &fileName);
+    bool open(const QString& fileName);
 
     /**
      * Returns the list of files from the archive.
@@ -48,12 +47,12 @@ public:
     /**
      * Returns the content of the file with the given name.
      */
-    QByteArray contentOf(const QString &fileName) const;
+    QByteArray contentOf(const QString& fileName) const;
 
     /**
      * Returns a new device for reading the file with the given name.
      */
-    QIODevice *createDevice(const QString &fileName) const;
+    QIODevice* createDevice(const QString& fileName) const;
 
     static bool isAvailable();
     static bool isSuitableVersionAvailable();
@@ -64,19 +63,19 @@ private Q_SLOTS:
     void finished(int exitCode, QProcess::ExitStatus exitStatus);
 
 private:
-    int startSyncProcess(const ProcessArgs &args);
-    void writeToProcess(const QByteArray &data);
+    int startSyncProcess(const ProcessArgs& args);
+    void writeToProcess(const QByteArray& data);
 
 #if defined(WITH_KPTY)
-    KPtyProcess *mProcess;
+    KPtyProcess* mProcess;
 #else
-    QProcess *mProcess;
+    QProcess* mProcess;
 #endif
-    QEventLoop *mLoop;
+    QEventLoop* mLoop;
     QString mFileName;
     QByteArray mStdOutData;
     QByteArray mStdErrData;
-    QTemporaryDir *mTempDir;
+    QTemporaryDir* mTempDir;
 };
 
 #endif

@@ -2,7 +2,8 @@
     SPDX-FileCopyrightText: 2004 Enrico Ros <eros.kde@email.it>
 
     Work sponsored by the LiMux project of the city of Munich:
-    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group company <info@kdab.com>
+    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group
+   company <info@kdab.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -50,8 +51,9 @@ public:
     /**
      * An action to be executed when particular events happen.
      */
-    enum PageAction {
-        Opening, ///< An action to be executed when the page is "opened".
+    enum PageAction
+    {
+        Opening,  ///< An action to be executed when the page is "opened".
         Closing  ///< An action to be executed when the page is "closed".
     };
 
@@ -107,10 +109,10 @@ public:
     double ratio() const;
 
     /**
-     * Returns the bounding box of the page content in normalized [0,1] coordinates,
-     * in terms of the upright orientation (Rotation0).
-     * If it has not been computed yet, returns the full page (i.e., (0, 0, 1, 1)).
-     * Note that the bounding box may be null if the page is blank.
+     * Returns the bounding box of the page content in normalized [0,1]
+     * coordinates, in terms of the upright orientation (Rotation0). If it has
+     * not been computed yet, returns the full page (i.e., (0, 0, 1, 1)). Note
+     * that the bounding box may be null if the page is blank.
      *
      * @since 0.7 (KDE 4.1)
      */
@@ -118,28 +120,30 @@ public:
 
     /**
      * Returns whether the bounding box of the page has been computed.
-     * Note that even if the bounding box is computed, it may be null if the page is blank.
+     * Note that even if the bounding box is computed, it may be null if the
+     * page is blank.
      *
      * @since 0.7 (KDE 4.1)
      */
     bool isBoundingBoxKnown() const;
 
     /**
-     * Sets the bounding box of the page content in normalized [0,1] coordinates,
-     * in terms of the upright orientation (Rotation0).
-     * (This does not inform the document's observers, call Document::SetPageBoundingBox
+     * Sets the bounding box of the page content in normalized [0,1]
+     * coordinates, in terms of the upright orientation (Rotation0). (This does
+     * not inform the document's observers, call Document::SetPageBoundingBox
      * instead if you want that.)
      *
      * @since 0.7 (KDE 4.1)
      */
-    void setBoundingBox(const NormalizedRect &bbox);
+    void setBoundingBox(const NormalizedRect& bbox);
 
     /**
      * Returns whether the page of size @p width x @p height has a @p pixmap
      * in the region given by @p rect for the given @p observer
      * If there is a partially rendered pixmap the answer is false.
      */
-    bool hasPixmap(DocumentObserver *observer, int width = -1, int height = -1, const NormalizedRect &rect = NormalizedRect()) const;
+    bool hasPixmap(DocumentObserver* observer, int width = -1, int height = -1,
+                   const NormalizedRect& rect = NormalizedRect()) const;
 
     /**
      * Returns whether the page provides a text page (@ref TextPage).
@@ -147,8 +151,8 @@ public:
     bool hasTextPage() const;
 
     /**
-     * Returns whether the page has an object rect which includes the point (@p x, @p y)
-     * at scale (@p xScale, @p yScale).
+     * Returns whether the page has an object rect which includes the point (@p
+     * x, @p y) at scale (@p xScale, @p yScale).
      */
     bool hasObjectRect(double x, double y, double xScale, double yScale) const;
 
@@ -169,31 +173,35 @@ public:
     bool hasAnnotations() const;
 
     /**
-     * Returns the bounding rect of the text which matches the following criteria
-     * or 0 if the search is not successful.
+     * Returns the bounding rect of the text which matches the following
+     * criteria or 0 if the search is not successful.
      *
      * @param id An unique id for this search.
      * @param text The search text.
      * @param direction The direction of the search (@ref SearchDirection)
-     * @param caseSensitivity If Qt::CaseSensitive, the search is case sensitive; otherwise
-     *                        the search is case insensitive.
-     * @param lastRect If 0 (default) the search starts at the beginning of the page, otherwise
-     *                 right/below the coordinates of the given rect.
+     * @param caseSensitivity If Qt::CaseSensitive, the search is case
+     * sensitive; otherwise the search is case insensitive.
+     * @param lastRect If 0 (default) the search starts at the beginning of the
+     * page, otherwise right/below the coordinates of the given rect.
      */
-    RegularAreaRect *findText(int id, const QString &text, SearchDirection direction, Qt::CaseSensitivity caseSensitivity, const RegularAreaRect *lastRect = nullptr) const;
+    RegularAreaRect* findText(int id, const QString& text,
+                              SearchDirection direction,
+                              Qt::CaseSensitivity caseSensitivity,
+                              const RegularAreaRect* lastRect = nullptr) const;
 
     /**
      * Returns the page text (or part of it).
      * @see TextPage::text()
      */
-    QString text(const RegularAreaRect *area = nullptr) const;
+    QString text(const RegularAreaRect* area = nullptr) const;
 
     /**
      * Returns the page text (or part of it).
      * @see TextPage::text()
      * @since 0.10 (KDE 4.4)
      */
-    QString text(const RegularAreaRect *area, TextPage::TextAreaInclusionBehaviour b) const;
+    QString text(const RegularAreaRect* area,
+                 TextPage::TextAreaInclusionBehaviour b) const;
 
     /**
      * Returns the page text (or part of it) including the bounding
@@ -202,7 +210,8 @@ public:
      * @see TextPage::words()
      * @since 0.14 (KDE 4.8)
      */
-    TextEntity::List words(const RegularAreaRect *area, TextPage::TextAreaInclusionBehaviour b) const;
+    TextEntity::List words(const RegularAreaRect* area,
+                           TextPage::TextAreaInclusionBehaviour b) const;
 
     /**
      * Returns the area and text of the word at the given point
@@ -210,58 +219,67 @@ public:
      * @see TextPage::wordAt()
      * @since 0.15 (KDE 4.9)
      */
-    RegularAreaRect *wordAt(const NormalizedPoint &p, QString *word = nullptr) const;
+    RegularAreaRect* wordAt(const NormalizedPoint& p,
+                            QString* word = nullptr) const;
 
     /**
      * Returns the rectangular area of the given @p selection.
      */
-    RegularAreaRect *textArea(TextSelection *selection) const;
+    RegularAreaRect* textArea(TextSelection* selection) const;
 
     /**
-     * Returns the object rect of the given @p type which is at point (@p x, @p y) at scale (@p xScale, @p yScale).
+     * Returns the object rect of the given @p type which is at point (@p x, @p
+     * y) at scale (@p xScale, @p yScale).
      */
-    const ObjectRect *objectRect(ObjectRect::ObjectType type, double x, double y, double xScale, double yScale) const;
+    const ObjectRect* objectRect(ObjectRect::ObjectType type, double x,
+                                 double y, double xScale, double yScale) const;
 
     /**
-     * Returns all object rects of the given @p type which are at point (@p x, @p y) at scale (@p xScale, @p yScale).
+     * Returns all object rects of the given @p type which are at point (@p x,
+     * @p y) at scale (@p xScale, @p yScale).
      * @since 0.16 (KDE 4.10)
      */
-    QList<const ObjectRect *> objectRects(ObjectRect::ObjectType type, double x, double y, double xScale, double yScale) const;
+    QList<const ObjectRect*> objectRects(ObjectRect::ObjectType type, double x,
+                                         double y, double xScale,
+                                         double yScale) const;
 
     /**
-     * Returns the object rect of the given @p type which is nearest to the point (@p x, @p y) at scale (@p xScale, @p yScale).
+     * Returns the object rect of the given @p type which is nearest to the
+     * point (@p x, @p y) at scale (@p xScale, @p yScale).
      *
      * @since 0.8.2 (KDE 4.2.2)
      */
-    const ObjectRect *nearestObjectRect(ObjectRect::ObjectType type, double x, double y, double xScale, double yScale, double *distance) const;
+    const ObjectRect* nearestObjectRect(ObjectRect::ObjectType type, double x,
+                                        double y, double xScale, double yScale,
+                                        double* distance) const;
 
     /**
      * Returns the transition effect of the page or 0 if no transition
      * effect is set (see hasTransition()).
      */
-    const PageTransition *transition() const;
+    const PageTransition* transition() const;
 
     /**
      * Returns the list of annotations of the page.
      */
-    QList<Annotation *> annotations() const;
+    QList<Annotation*> annotations() const;
 
     /**
      * Returns the annotation with the given unique name.
      * @since 1.3
      */
-    Annotation *annotation(const QString &uniqueName) const;
+    Annotation* annotation(const QString& uniqueName) const;
 
     /**
-     * Returns the @ref Action object which is associated with the given page @p action
-     * or 0 if no page action is set.
+     * Returns the @ref Action object which is associated with the given page @p
+     * action or 0 if no page action is set.
      */
-    const Action *pageAction(PageAction action) const;
+    const Action* pageAction(PageAction action) const;
 
     /**
      * Returns the list of FormField of the page.
      */
-    QList<FormField *> formFields() const;
+    QList<FormField*> formFields() const;
 
     /**
      * Sets the region described by @p rect with @p pixmap for the
@@ -269,39 +287,42 @@ public:
      * If @p rect is not set (default) the @p pixmap is set to the entire
      * page.
      */
-    void setPixmap(DocumentObserver *observer, QPixmap *pixmap, const NormalizedRect &rect = NormalizedRect());
+    void setPixmap(DocumentObserver* observer, QPixmap* pixmap,
+                   const NormalizedRect& rect = NormalizedRect());
 
     /**
      * Sets the @p text page.
      */
-    void setTextPage(TextPage *text);
+    void setTextPage(TextPage* text);
 
     /**
      * Sets the list of object @p rects of the page.
      */
-    void setObjectRects(const QList<ObjectRect *> &rects);
+    void setObjectRects(const QList<ObjectRect*>& rects);
 
     /**
      * Gets the list of object rects of the page.
      *
      * @since 22.04
      */
-    const QList<ObjectRect *> &objectRects() const;
+    const QList<ObjectRect*>& objectRects() const;
 
     /**
      * Sets the list of source reference objects @p rects.
      */
-    void setSourceReferences(const QList<SourceRefObjectRect *> &rects);
+    void setSourceReferences(const QList<SourceRefObjectRect*>& rects);
 
     /**
-     * Sets the duration of the page to @p seconds when displayed in presentation mode.
+     * Sets the duration of the page to @p seconds when displayed in
+     * presentation mode.
      *
      * Setting a negative number disables the duration.
      */
     void setDuration(double seconds);
 
     /**
-     * Returns the duration in seconds of the page when displayed in presentation mode.
+     * Returns the duration in seconds of the page when displayed in
+     * presentation mode.
      *
      * A negative number means that no time is set.
      */
@@ -310,7 +331,7 @@ public:
     /**
      * Sets the labels for the page to @p label .
      */
-    void setLabel(const QString &label);
+    void setLabel(const QString& label);
 
     /**
      * Returns the label of the page, or a null string if not set.
@@ -320,7 +341,7 @@ public:
     /**
      * Returns the current text selection.
      */
-    const RegularAreaRect *textSelection() const;
+    const RegularAreaRect* textSelection() const;
 
     /**
      * Returns the color of the current text selection, or an invalid color
@@ -331,32 +352,32 @@ public:
     /**
      * Adds a new @p annotation to the page.
      */
-    void addAnnotation(Annotation *annotation);
+    void addAnnotation(Annotation* annotation);
 
     /**
      * Removes the @p annotation from the page.
      */
-    bool removeAnnotation(Annotation *annotation);
+    bool removeAnnotation(Annotation* annotation);
 
     /**
      * Sets the page @p transition effect.
      */
-    void setTransition(PageTransition *transition);
+    void setTransition(PageTransition* transition);
 
     /**
      * Sets the @p link object for the given page @p action.
      */
-    void setPageAction(PageAction action, Action *link);
+    void setPageAction(PageAction action, Action* link);
 
     /**
      * Sets @p fields as list of FormField of the page.
      */
-    void setFormFields(const QList<FormField *> &fields);
+    void setFormFields(const QList<FormField*>& fields);
 
     /**
      * Deletes the pixmap for the given @p observer
      */
-    void deletePixmap(DocumentObserver *observer);
+    void deletePixmap(DocumentObserver* observer);
 
     /**
      * Deletes all pixmaps of the page.
@@ -384,13 +405,14 @@ public:
      *
      * @since 0.19 (KDE 4.13)
      */
-    bool hasTilesManager(const DocumentObserver *observer) const;
-    
+    bool hasTilesManager(const DocumentObserver* observer) const;
+
     /**
      * Returns the pixmap matching the given parameters
      * @author david_librum
-    */
-    const QPixmap* getPixmap(DocumentObserver* observer, int width, int height) const;
+     */
+    const QPixmap* getPixmap(DocumentObserver* observer, int width,
+                             int height) const;
 
     /**
      * Returns a list of all tiles intersecting with @p rect.
@@ -399,10 +421,11 @@ public:
      *
      * @since 0.19 (KDE 4.13)
      */
-    QList<Tile> tilesAt(const DocumentObserver *observer, const NormalizedRect &rect) const;
+    QList<Tile> tilesAt(const DocumentObserver* observer,
+                        const NormalizedRect& rect) const;
 
 private:
-    PagePrivate *d;
+    PagePrivate* d;
     /// @cond PRIVATE
     friend class PagePrivate;
     friend class Document;
@@ -416,15 +439,15 @@ private:
     friend class ::PagePainter;
     /// @endcond
 
-    const QPixmap *_o_nearestPixmap(DocumentObserver *, int, int) const;
+    const QPixmap* _o_nearestPixmap(DocumentObserver*, int, int) const;
 
-    QList<ObjectRect *> m_rects;
-    QList<HighlightAreaRect *> m_highlights;
-    QList<Annotation *> m_annotations;
+    QList<ObjectRect*> m_rects;
+    QList<HighlightAreaRect*> m_highlights;
+    QList<Annotation*> m_annotations;
 
     Q_DISABLE_COPY(Page)
 };
 
-}
+}  // namespace Okular
 
 #endif

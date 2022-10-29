@@ -17,11 +17,11 @@ class Event;
 class JSEvent
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSObject wrapEvent(KJSContext *ctx, Event *event);
+    static void initType(KJSContext* ctx);
+    static KJSObject wrapEvent(KJSContext* ctx, Event* event);
     static void clearCachedFields();
 };
 
-}
+}  // namespace Okular
 
 #endif

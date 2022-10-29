@@ -15,17 +15,21 @@
 
 /* This represents a raw Palm DB.  It's intended to be an abstraction
    of a file pointer, so that raw memory can also be used. */
-typedef struct plkr_DBHandle_s *plkr_DBHandle;
-struct plkr_DBHandle_s {
+typedef struct plkr_DBHandle_s* plkr_DBHandle;
+
+struct plkr_DBHandle_s
+{
     int dbprivate;
 
-    /* Call seek to position the DB stream at the "offset" byte from the start of the DB.
-       Returns non-zero if seek has been successfully done, zero otherwise. */
+    /* Call seek to position the DB stream at the "offset" byte from the start
+       of the DB. Returns non-zero if seek has been successfully done, zero
+       otherwise. */
     int (*seek)(plkr_DBHandle handle, long offset);
 
-    /* Call read to read "readsize" bytes into "buffer", which is at least "buffersize" bytes large.
-       Returns number of bytes read. */
-    int (*read)(plkr_DBHandle handle, unsigned char *buffer, int buffersize, int readsize);
+    /* Call read to read "readsize" bytes into "buffer", which is at least
+       "buffersize" bytes large. Returns number of bytes read. */
+    int (*read)(plkr_DBHandle handle, unsigned char* buffer, int buffersize,
+                int readsize);
 
     /* When called will return total size of DB */
     long (*size)(plkr_DBHandle handle);
@@ -34,7 +38,8 @@ struct plkr_DBHandle_s {
     void (*free)(plkr_DBHandle handle);
 };
 
-typedef enum {
+typedef enum
+{
     PLKR_DRTYPE_TEXT = 0,
     PLKR_DRTYPE_TEXT_COMPRESSED = 1,
     PLKR_DRTYPE_IMAGE = 2,
@@ -58,32 +63,45 @@ typedef enum {
 
 #define PLKR_FC_CODE(v) (((v) >> 3) & 0x1F)
 
-typedef enum {
-    PLKR_TFC_LINK = PLKR_FC_CODE(0x0A),    /* page or span link start or end */
-    PLKR_TFC_FONT = PLKR_FC_CODE(0x11),    /* set font */
-    PLKR_TFC_IMAGE = PLKR_FC_CODE(0x1A),   /* embedded image */
+typedef enum
+{
+    PLKR_TFC_LINK = PLKR_FC_CODE(0x0A), /* page or span link start or end */
+    PLKR_TFC_FONT = PLKR_FC_CODE(0x11), /* set font */
+    PLKR_TFC_IMAGE = PLKR_FC_CODE(0x1A), /* embedded image */
     PLKR_TFC_MARGINS = PLKR_FC_CODE(0x22), /* set left and right margins */
-    PLKR_TFC_ALIGN = PLKR_FC_CODE(0x29),   /* set text alignment */
-    PLKR_TFC_HRULE = PLKR_FC_CODE(0x33),   /* horizontal rule */
+    PLKR_TFC_ALIGN = PLKR_FC_CODE(0x29), /* set text alignment */
+    PLKR_TFC_HRULE = PLKR_FC_CODE(0x33), /* horizontal rule */
     PLKR_TFC_NEWLINE = PLKR_FC_CODE(0x38), /* start new line */
     PLKR_TFC_BITALIC = PLKR_FC_CODE(0x40), /* begin italic text */
     PLKR_TFC_EITALIC = PLKR_FC_CODE(0x48), /* end italic text */
-    PLKR_TFC_COLOR = PLKR_FC_CODE(0x53),   /* set text color */
-    PLKR_TFC_IMAGE2 = PLKR_FC_CODE(0x5C),  /* double embedded image */
-    PLKR_TFC_BULINE = PLKR_FC_CODE(0x60),  /* begin underline text */
-    PLKR_TFC_EULINE = PLKR_FC_CODE(0x68),  /* end underline text */
+    PLKR_TFC_COLOR = PLKR_FC_CODE(0x53), /* set text color */
+    PLKR_TFC_IMAGE2 = PLKR_FC_CODE(0x5C), /* double embedded image */
+    PLKR_TFC_BULINE = PLKR_FC_CODE(0x60), /* begin underline text */
+    PLKR_TFC_EULINE = PLKR_FC_CODE(0x68), /* end underline text */
     PLKR_TFC_BSTRIKE = PLKR_FC_CODE(0x70), /* begin struck-through text */
     PLKR_TFC_ESTRIKE = PLKR_FC_CODE(0x78), /* end struck-through text */
-    PLKR_TFC_UCHAR = PLKR_FC_CODE(0x83),   /* 16 or 32 bit Unicode character */
-    PLKR_TFC_GLYPH = PLKR_FC_CODE(0x88),   /* glyph run */
-    PLKR_TFC_TABLE = PLKR_FC_CODE(0x90)    /* table data */
+    PLKR_TFC_UCHAR = PLKR_FC_CODE(0x83), /* 16 or 32 bit Unicode character */
+    PLKR_TFC_GLYPH = PLKR_FC_CODE(0x88), /* glyph run */
+    PLKR_TFC_TABLE = PLKR_FC_CODE(0x90) /* table data */
 } plkr_TextFunctionCodes;
 
-typedef enum { PLKR_FONT_REGULAR = 0, PLKR_FONT_H1 = 1, PLKR_FONT_H2 = 2, PLKR_FONT_H3 = 3, PLKR_FONT_H4 = 4, PLKR_FONT_H5 = 5, PLKR_FONT_H6 = 6, PLKR_FONT_REGULARBOLD = 7, PLKR_FONT_FIXEDWIDTH = 8 } plkr_FontStyles;
+typedef enum
+{
+    PLKR_FONT_REGULAR = 0,
+    PLKR_FONT_H1 = 1,
+    PLKR_FONT_H2 = 2,
+    PLKR_FONT_H3 = 3,
+    PLKR_FONT_H4 = 4,
+    PLKR_FONT_H5 = 5,
+    PLKR_FONT_H6 = 6,
+    PLKR_FONT_REGULARBOLD = 7,
+    PLKR_FONT_FIXEDWIDTH = 8
+} plkr_FontStyles;
 
-typedef struct _plkr_CategoryName {
-    char *name;
-    struct _plkr_CategoryName *next;
+typedef struct _plkr_CategoryName
+{
+    char* name;
+    struct _plkr_CategoryName* next;
 } * plkr_CategoryList;
 
 typedef struct plkr_Document_s plkr_Document;
@@ -100,7 +118,7 @@ typedef struct plkr_Document_s plkr_Document;
    This call consumes a file descriptor, which is held till a subsequent
    call to plkr_CloseDoc.
 */
-plkr_Document *plkr_OpenDBFile(const char * /* filename */
+plkr_Document* plkr_OpenDBFile(const char* /* filename */
 );
 
 /* plkr_OpenDoc
@@ -110,7 +128,7 @@ plkr_Document *plkr_OpenDBFile(const char * /* filename */
    document in an arbitrary way.  A NULL value is returned if some
    aspect of the open or parse of the document structure fails.
 */
-plkr_Document *plkr_OpenDoc(plkr_DBHandle);
+plkr_Document* plkr_OpenDoc(plkr_DBHandle);
 
 /* plkr_CloseDoc
 
@@ -119,7 +137,7 @@ plkr_Document *plkr_OpenDoc(plkr_DBHandle);
    the plkr_DBHandle used to open the document.  After this call,
    the plkr_Document pointer is now invalid.
 */
-void plkr_CloseDoc(plkr_Document *);
+void plkr_CloseDoc(plkr_Document*);
 
 /* plkr_CopyRecordBytes
 
@@ -132,14 +150,17 @@ void plkr_CloseDoc(plkr_Document *);
    plkr_GetMaxRecordSize will return the uncompressed size of the largest
    record in the document.
 */
-int plkr_CopyRecordBytes(plkr_Document *, int /* record_index */, unsigned char * /* output_buffer */, int /* output_buffer_size */, plkr_DataRecordType * /* output: type */
+int plkr_CopyRecordBytes(plkr_Document*, int /* record_index */,
+                         unsigned char* /* output_buffer */,
+                         int /* output_buffer_size */,
+                         plkr_DataRecordType* /* output: type */
 );
 
 /* plkr_GetUidForIndex
 
    Retrieve the uid of the record with the given index.
 */
-int plkr_GetUidForIndex(plkr_Document *, int /* record_index */
+int plkr_GetUidForIndex(plkr_Document*, int /* record_index */
 );
 
 /* plkr_GetRecordBytes
@@ -151,7 +172,9 @@ int plkr_GetUidForIndex(plkr_Document *, int /* record_index */
    type of the record is returned through the "type" parameter.
    May return NULL if the "record_index" value is out-of-range.
 */
-unsigned char *plkr_GetRecordBytes(plkr_Document *, int /* record_index */, int * /* output: size */, plkr_DataRecordType * /* output: type */
+unsigned char* plkr_GetRecordBytes(plkr_Document*, int /* record_index */,
+                                   int* /* output: size */,
+                                   plkr_DataRecordType* /* output: type */
 );
 
 /* plkr_GetRecordURL
@@ -161,92 +184,97 @@ unsigned char *plkr_GetRecordBytes(plkr_Document *, int /* record_index */, int 
    included in the document.  Fetching the URL for the home page is a good
    way to test for the latter.
 */
-char *plkr_GetRecordURL(plkr_Document *, int record_index);
+char* plkr_GetRecordURL(plkr_Document*, int record_index);
 
 /* plkr_GetHomeRecordID
 
    Retrieve the record UID for the 'home' page, the root node of the
    document.
 */
-int plkr_GetHomeRecordID(plkr_Document *);
+int plkr_GetHomeRecordID(plkr_Document*);
 
 /* plkr_GetName
 
    Retrieve a static pointer to the short name of the document.
 */
-char *plkr_GetName(plkr_Document *);
+char* plkr_GetName(plkr_Document*);
 
 /* plkr_GetTitle
 
-   Retrieve a static pointer to the title of the document.  Returns NULL if no title was specified.
+   Retrieve a static pointer to the title of the document.  Returns NULL if no
+   title was specified.
 */
-char *plkr_GetTitle(plkr_Document *);
+char* plkr_GetTitle(plkr_Document*);
 
 /* plkr_GetAuthor
 
-   Retrieve a static pointer to the name of the author of the document.  Returns NULL if no author was specified.
+   Retrieve a static pointer to the name of the author of the document.  Returns
+   NULL if no author was specified.
 */
-char *plkr_GetAuthor(plkr_Document *);
+char* plkr_GetAuthor(plkr_Document*);
 
 /* plkr_GetDefaultCharset
 
-   Returns the IANA mibenum of the default charset used in the document, or 0 if none was specified.
+   Returns the IANA mibenum of the default charset used in the document, or 0 if
+   none was specified.
 */
-int plkr_GetDefaultCharset(plkr_Document *);
+int plkr_GetDefaultCharset(plkr_Document*);
 
 /* plkr_GetPublicationTime
 
-   Returns the time of publication of the document as an unsigned integer.  If no explicit
-   publication time was included in the document, returns the creation date, which may be more recent.
-   Time is expressed as seconds past 12:00 am, Jan 1, 1970 -- the UNIX "epoch".
+   Returns the time of publication of the document as an unsigned integer.  If
+   no explicit publication time was included in the document, returns the
+   creation date, which may be more recent. Time is expressed as seconds past
+   12:00 am, Jan 1, 1970 -- the UNIX "epoch".
 */
-unsigned long plkr_GetPublicationTime(plkr_Document *);
+unsigned long plkr_GetPublicationTime(plkr_Document*);
 
 /* plkr_GetRecordCount
 
    Returns the number of records in the document.
 */
-int plkr_GetRecordCount(plkr_Document *);
+int plkr_GetRecordCount(plkr_Document*);
 
 /* plkr_GetMaxRecordSize
 
    Returns the uncompressed data size of the largest record in the document.
 */
-int plkr_GetMaxRecordSize(plkr_Document *);
+int plkr_GetMaxRecordSize(plkr_Document*);
 
 /* plkr_GetDefaultCategories
 
    Retrieve a static GSList of char * values that are the default categories
    assigned to the document.
 */
-plkr_CategoryList plkr_GetDefaultCategories(plkr_Document *);
+plkr_CategoryList plkr_GetDefaultCategories(plkr_Document*);
 
 /* plkr_HasRecordWithID
 
    Returns 1 if the document has a record with the specified ID, 0 otherwise.
 */
-int plkr_HasRecordWithID(plkr_Document *, int /* ID */
+int plkr_HasRecordWithID(plkr_Document*, int /* ID */
 );
 
 /* plkr_GetRecordType
 
    Returns type of record, or PLKR_DRTYPE_NONE if record doesn't exist.
 */
-int plkr_GetRecordType(plkr_Document *, int /* ID */
+int plkr_GetRecordType(plkr_Document*, int /* ID */
 );
 
 /* plkr_GetRecordCharset
 
-   Returns the mibenum of the charset of the record, if the record is a text record,
-   or 0 if the record doesn't exist or is not a text record.
+   Returns the mibenum of the charset of the record, if the record is a text
+   record, or 0 if the record doesn't exist or is not a text record.
 */
-int plkr_GetRecordCharset(plkr_Document *, int /* ID */
+int plkr_GetRecordCharset(plkr_Document*, int /* ID */
 );
 
 /* plkr_ShowMessages
 
    Controls whether or not message display is enabled.  Call with 1 for messages
-   to be displayed, 0 for no display.  Initial value is 0.  Returns previous value.
+   to be displayed, 0 for no display.  Initial value is 0.  Returns previous
+   value.
 */
 int plkr_ShowMessages(int);
 
@@ -257,7 +285,8 @@ int plkr_ShowMessages(int);
    If "section_name" is NULL, the default section ("default") is used.  Section
    names and option names should be all lowercase.
 */
-char *plkr_GetConfigString(const char *section_name, const char *option_name, char *default_value);
+char* plkr_GetConfigString(const char* section_name, const char* option_name,
+                           char* default_value);
 
 /* plkr_GetConfigInt
 
@@ -266,7 +295,8 @@ char *plkr_GetConfigString(const char *section_name, const char *option_name, ch
    If "section_name" is NULL, the default section ("default") is used.  Section
    names and option names should be all lowercase.
 */
-long int plkr_GetConfigInt(const char *section_name, const char *option_name, long int default_value);
+long int plkr_GetConfigInt(const char* section_name, const char* option_name,
+                           long int default_value);
 
 /* plkr_GetConfigFloat
 
@@ -275,7 +305,8 @@ long int plkr_GetConfigInt(const char *section_name, const char *option_name, lo
    If "section_name" is NULL, the default section ("default") is used.  Section
    names and option names should be all lowercase.
 */
-double plkr_GetConfigFloat(const char *section_name, const char *option_name, double default_value);
+double plkr_GetConfigFloat(const char* section_name, const char* option_name,
+                           double default_value);
 
 /* plkr_GetConfigBoolean
 
@@ -284,5 +315,6 @@ double plkr_GetConfigFloat(const char *section_name, const char *option_name, do
    If "section_name" is NULL, the default section ("default") is used.  Section
    names and option names should be all lowercase.
 */
-int plkr_GetConfigBoolean(const char *section_name, const char *option_name, int default_value);
+int plkr_GetConfigBoolean(const char* section_name, const char* option_name,
+                          int default_value);
 #endif

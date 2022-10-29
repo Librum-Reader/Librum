@@ -7,9 +7,8 @@
 #ifndef _KDOCUMENTVIEWER_H_
 #define _KDOCUMENTVIEWER_H_
 
-#include "okularpart_export.h"
-
 #include <QStringList>
+#include "okularpart_export.h"
 
 class QUrl;
 
@@ -24,17 +23,18 @@ public:
     KDocumentViewer()
     {
     }
+
     virtual ~KDocumentViewer()
     {
     }
 
-    KDocumentViewer(const KDocumentViewer &) = delete;
-    KDocumentViewer &operator=(const KDocumentViewer &) = delete;
+    KDocumentViewer(const KDocumentViewer&) = delete;
+    KDocumentViewer& operator=(const KDocumentViewer&) = delete;
 
     /**
      * Open the document at the specified @p url at page @p page.
      */
-    virtual bool openDocument(const QUrl &url, uint page) = 0;
+    virtual bool openDocument(const QUrl& url, uint page) = 0;
 
     /**
      * Change to @p page the currently shown page.

@@ -8,24 +8,25 @@
 
 #include <core/document.h>
 #include <core/textdocumentgenerator.h>
-
-#include "mobidocument.h"
 #include <qmobipocket/mobipocket.h>
+#include "mobidocument.h"
 
 namespace Mobi
 {
 class Converter : public Okular::TextDocumentConverter
 {
     Q_OBJECT
+
 public:
     Converter();
     ~Converter() override;
 
-    QTextDocument *convert(const QString &fileName) override;
+    QTextDocument* convert(const QString& fileName) override;
 
 private:
-    void handleMetadata(const QMap<Mobipocket::Document::MetaKey, QString> &metadata);
+    void handleMetadata(
+        const QMap<Mobipocket::Document::MetaKey, QString>& metadata);
 };
-}
+}  // namespace Mobi
 
 #endif

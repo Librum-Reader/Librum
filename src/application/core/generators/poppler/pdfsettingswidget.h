@@ -9,7 +9,6 @@
 #define PDFSETTINGSWIDGET_H
 
 #include <QWidget>
-
 #include "ui_pdfsettingswidget.h"
 
 class QTreeWidget;
@@ -19,13 +18,13 @@ class PDFSettingsWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit PDFSettingsWidget(QWidget *parent = nullptr);
-    bool event(QEvent *e) override;
+    explicit PDFSettingsWidget(QWidget* parent = nullptr);
+    bool event(QEvent* e) override;
 
 private:
     void warnRestartNeeded();
 
-    QTreeWidget *m_tree = nullptr;
+    QTreeWidget* m_tree = nullptr;
     bool m_certificatesAsked = false;
     bool m_warnedAboutRestart = false;
     Ui_PDFSettingsWidgetBase m_pdfsw;

@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // Class: dviFile
 //
@@ -11,12 +12,11 @@
 #ifndef _DVIFILE_H
 #define _DVIFILE_H
 
-#include "bigEndianByteReader.h"
-
 #include <QHash>
 #include <QMap>
 #include <QString>
 #include <QVector>
+#include "bigEndianByteReader.h"
 
 class fontPool;
 class pageSize;
@@ -26,26 +26,26 @@ class dvifile : public bigEndianByteReader
 {
 public:
     /** Makes a deep copy of the old DVI file. */
-    dvifile(const dvifile *old, fontPool *fp);
-    dvifile(const QString &fname, class fontPool *pool);
+    dvifile(const dvifile* old, fontPool* fp);
+    dvifile(const QString& fname, class fontPool* pool);
 
     ~dvifile();
 
-    dvifile(const dvifile &) = delete;
-    dvifile &operator=(const dvifile &) = delete;
+    dvifile(const dvifile&) = delete;
+    dvifile& operator=(const dvifile&) = delete;
 
-    fontPool *font_pool;
+    fontPool* font_pool;
     QString filename;
     QString generatorString;
     quint16 total_pages;
     QVector<quint32> page_offset;
 
     /** Saves the DVI file. Returns true on success. */
-    bool saveAs(const QString &filename);
+    bool saveAs(const QString& filename);
 
     // Returns a pointer to the DVI file's data, or 0 if no data has yet
     // been allocated.
-    quint8 *dvi_Data()
+    quint8* dvi_Data()
     {
         return dviData.data();
     }
@@ -73,7 +73,7 @@ public:
         KDVI ensures that the user is only informed once. */
     bool sourceSpecialMarker;
 
-    QHash<int, TeXFontDefinition *> tn_table;
+    QHash<int, TeXFontDefinition*> tn_table;
 
     /** Returns the number of centimeters per DVI unit in this DVI
         file. */
@@ -96,11 +96,11 @@ public:
     quint8 errorCounter;
 
     /** Papersize information read from the dvi-File */
-    pageSize *suggestedPageSize;
+    pageSize* suggestedPageSize;
 
     /** Sets new DVI data; all old data is erased. EXPERIMENTAL, use
         with care. */
-    void setNewData(const QVector<quint8> &newData)
+    void setNewData(const QVector<quint8>& newData)
     {
         dviData = newData;
     }
@@ -128,10 +128,11 @@ public:
 
     @returns The name of the PS file, or QString() on failure.
     */
-    QString convertPDFtoPS(const QString &PDFFilename, QString *converrorms = nullptr);
+    QString convertPDFtoPS(const QString& PDFFilename,
+                           QString* converrorms = nullptr);
 
 private:
-    void pdf2psNotFound(const QString &PDFFilename, QString *converrorms);
+    void pdf2psNotFound(const QString& PDFFilename, QString* converrorms);
 
     /** process_preamble reads the information in the preamble and
         stores it into global variables for later use. */
@@ -165,4 +166,4 @@ private:
     bool have_complainedAboutMissingPDF2PS;
 };
 
-#endif // ifndef _DVIFILE_H
+#endif  // ifndef _DVIFILE_H

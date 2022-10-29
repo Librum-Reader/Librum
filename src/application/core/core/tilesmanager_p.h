@@ -49,7 +49,7 @@ public:
      * of its ancestors has. Such a situation shows, for example, when the
      * parent tile still has a dirty tile from a previous lower zoom level.
      */
-    QPixmap *pixmap;
+    QPixmap* pixmap;
 
     /**
      * Rotation of this individual tile.
@@ -77,9 +77,9 @@ public:
      * When a tile is split into multiple tiles, they're added as children.
      * nTiles can be either 0 (in leaf tiles) or 4 (in split tiles).
      */
-    TileNode *tiles;
+    TileNode* tiles;
     int nTiles;
-    TileNode *parent;
+    TileNode* parent;
 };
 
 /**
@@ -95,16 +95,18 @@ public:
 class TilesManager
 {
 public:
-    enum TileLeaf {
-        TerminalTile, ///< Return tiles without children
-        PixmapTile    ///< Return only tiles with pixmap
+    enum TileLeaf
+    {
+        TerminalTile,  ///< Return tiles without children
+        PixmapTile  ///< Return only tiles with pixmap
     };
 
-    TilesManager(int pageNumber, int width, int height, Rotation rotation = Rotation0);
+    TilesManager(int pageNumber, int width, int height,
+                 Rotation rotation = Rotation0);
     ~TilesManager();
 
-    TilesManager(const TilesManager &) = delete;
-    TilesManager &operator=(const TilesManager &) = delete;
+    TilesManager(const TilesManager&) = delete;
+    TilesManager& operator=(const TilesManager&) = delete;
 
     /**
      * Sets the pixmap of the tiles covered by @p rect (which represents
@@ -115,14 +117,15 @@ public:
      * Also it checks the dimensions of the given parameters against the
      * current request as to avoid setting pixmaps of late requests.
      */
-    void setPixmap(const QPixmap *pixmap, const NormalizedRect &rect, bool isPartialPixmap);
+    void setPixmap(const QPixmap* pixmap, const NormalizedRect& rect,
+                   bool isPartialPixmap);
 
     /**
      * Checks whether all tiles intersecting with @p rect are available.
      * Returns false if at least one tile needs to be repainted (the tile
      * is dirty).
      */
-    bool hasPixmap(const NormalizedRect &rect);
+    bool hasPixmap(const NormalizedRect& rect);
 
     /**
      * Returns a list of all tiles intersecting with @p rect.
@@ -133,7 +136,7 @@ public:
      * @param rect The normalized rectangular area
      * @param tileLeaf Indicate the type of tile to return
      */
-    QList<Tile> tilesAt(const NormalizedRect &rect, TileLeaf tileLeaf);
+    QList<Tile> tilesAt(const NormalizedRect& rect, TileLeaf tileLeaf);
 
     /**
      * The total memory consumed by the tiles manager
@@ -147,18 +150,21 @@ public:
      * @p visiblePageNumber if the current page is not visible.
      * Visible tiles are not discarded.
      */
-    void cleanupPixmapMemory(qulonglong numberOfBytes, const NormalizedRect &visibleRect, int visiblePageNumber);
+    void cleanupPixmapMemory(qulonglong numberOfBytes,
+                             const NormalizedRect& visibleRect,
+                             int visiblePageNumber);
 
     /**
      * Checks whether a given region has already been requested
      */
-    bool isRequesting(const NormalizedRect &rect, int pageWidth, int pageHeight) const;
+    bool isRequesting(const NormalizedRect& rect, int pageWidth,
+                      int pageHeight) const;
 
     /**
      * Sets a region to be requested so the tiles manager knows which
      * pixmaps to expect and discard those not useful anymore (late pixmaps)
      */
-    void setRequest(const NormalizedRect &rect, int pageWidth, int pageHeight);
+    void setRequest(const NormalizedRect& rect, int pageWidth, int pageHeight);
 
     /**
      * Inform the new size of the page and mark all tiles to repaint
@@ -189,19 +195,21 @@ public:
     /**
      * Returns a rotated NormalizedRect given a @p rotation
      */
-    static NormalizedRect toRotatedRect(const NormalizedRect &rect, Rotation rotation);
+    static NormalizedRect toRotatedRect(const NormalizedRect& rect,
+                                        Rotation rotation);
 
     /**
      * Returns a non rotated version of @p rect, which is rotated by @p rotation
      */
-    static NormalizedRect fromRotatedRect(const NormalizedRect &rect, Rotation rotation);
+    static NormalizedRect fromRotatedRect(const NormalizedRect& rect,
+                                          Rotation rotation);
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
     friend class Private;
 };
 
-}
+}  // namespace Okular
 
-#endif // _OKULAR_TILES_MANAGER_P_H_
+#endif  // _OKULAR_TILES_MANAGER_P_H_

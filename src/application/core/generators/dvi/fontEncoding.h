@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// fontEncoding.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- fontEncoding.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environment
 //
@@ -63,7 +63,7 @@ public:
     // located, opened or parsed, errors are printed using the kError()
     // channel, and the array glyphNameVector will contain empty
     // strings.
-    explicit fontEncoding(const QString &encName);
+    explicit fontEncoding(const QString& encName);
 
     // Full name of the encoding, as read from the encoding file
     QString encodingFullName;

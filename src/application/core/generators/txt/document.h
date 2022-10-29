@@ -16,12 +16,12 @@ class Document : public QTextDocument
     Q_OBJECT
 
 public:
-    explicit Document(const QString &fileName);
+    explicit Document(const QString& fileName);
     ~Document() override;
 
 private:
-    QString toUnicode(const QByteArray &array);
+    QString toUnicode(const QByteArray& array);
 };
-}
+}  // namespace Txt
 
 #endif

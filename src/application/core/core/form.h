@@ -7,15 +7,13 @@
 #ifndef _OKULAR_FORM_H_
 #define _OKULAR_FORM_H_
 
+#include <QStringList>
+#include <memory>
 #include "annotations.h"
 #include "area.h"
 #include "document.h"
 #include "okularcore_export.h"
 #include "signatureutils.h"
-
-#include <QStringList>
-
-#include <memory>
 
 namespace Okular
 {
@@ -47,11 +45,13 @@ public:
     /**
      * The types of form field.
      */
-    enum FieldType {
-        FormButton,   ///< A "button". See @ref FormFieldButton::ButtonType.
-        FormText,     ///< A field of variable text. See @ref FormFieldText::TextType.
-        FormChoice,   ///< A choice field. See @ref FormFieldChoice::ChoiceType.
-        FormSignature ///< A signature.
+    enum FieldType
+    {
+        FormButton,  ///< A "button". See @ref FormFieldButton::ButtonType.
+        FormText,  ///< A field of variable text. See @ref
+                   ///< FormFieldText::TextType.
+        FormChoice,  ///< A choice field. See @ref FormFieldChoice::ChoiceType.
+        FormSignature  ///< A signature.
     };
 
     virtual ~FormField();
@@ -129,58 +129,66 @@ public:
     */
     virtual void setPrintable(bool value);
 
-    Action *activationAction() const;
+    Action* activationAction() const;
 
     /**
      * Describes the type of form additional action.
      *
      * @since 1.1
      */
-    enum AdditionalActionType {
-        FieldModified,  ///< An action to be performed when the user modifies the field
-        FormatField,    ///< An action to be performed before the field is formatted to display its value
-        ValidateField,  ///< An action to be performed when the field value changes
-        CalculateField, ///< An action to be performed when the field needs to be recalculated
+    enum AdditionalActionType
+    {
+        FieldModified,  ///< An action to be performed when the user modifies
+                        ///< the field
+        FormatField,  ///< An action to be performed before the field is
+                      ///< formatted to display its value
+        ValidateField,  ///< An action to be performed when the field value
+                        ///< changes
+        CalculateField,  ///< An action to be performed when the field needs to
+                         ///< be recalculated
     };
 
     /**
-     * Returns the additional action of the given @p type or @c nullptr if no action has been defined.
+     * Returns the additional action of the given @p type or @c nullptr if no
+     * action has been defined.
      *
      * @since 1.1
      */
-    Action *additionalAction(AdditionalActionType type) const;
+    Action* additionalAction(AdditionalActionType type) const;
 
-    /* Returns the additional action of the given @p type or @c nullptr if no action has been defined.
+    /* Returns the additional action of the given @p type or @c nullptr if no
+     * action has been defined.
      *
      * This is for actions of annotation widgets associated with the FormField
      *
      * @since 1.5
      */
-    Action *additionalAction(Annotation::AdditionalActionType type) const;
+    Action* additionalAction(Annotation::AdditionalActionType type) const;
 
     /* Returns all the additional actions for this form
      *
      * @since 22.04
      */
-    QList<Action *> additionalActions() const;
+    QList<Action*> additionalActions() const;
 
     /**
      * Returns the page of this form field
      *
      * @since 21.12.2
      */
-    Page *page() const;
+    Page* page() const;
 
 protected:
     /// @cond PRIVATE
-    explicit FormField(FormFieldPrivate &dd);
+    explicit FormField(FormFieldPrivate& dd);
     Q_DECLARE_PRIVATE(FormField)
-    FormFieldPrivate *d_ptr;
+    FormFieldPrivate* d_ptr;
     /// @endcond
 
-    void setActivationAction(Action *action);
-    void setAdditionalAction(AdditionalActionType type, Action *action);
-    void setAdditionalAction(Annotation::AdditionalActionType type, Action *action);
+    void setActivationAction(Action* action);
+    void setAdditionalAction(AdditionalActionType type, Action* action);
+    void setAdditionalAction(Annotation::AdditionalActionType type,
+                             Action* action);
 
 private:
     Q_DISABLE_COPY(FormField)
@@ -200,10 +208,11 @@ public:
     /**
      * The types of button field.
      */
-    enum ButtonType {
-        Push,     ///< A simple push button.
-        CheckBox, ///< A check box.
-        Radio     ///< A radio button.
+    enum ButtonType
+    {
+        Push,  ///< A simple push button.
+        CheckBox,  ///< A check box.
+        Radio  ///< A radio button.
     };
 
     ~FormFieldButton() override;
@@ -241,7 +250,7 @@ public:
      *
      * @since 1.9
      */
-    virtual void setIcon(Okular::FormField *field);
+    virtual void setIcon(Okular::FormField* field);
 
 protected:
     FormFieldButton();
@@ -263,10 +272,11 @@ public:
     /**
      * The types of text field.
      */
-    enum TextType {
-        Normal,    ///< A simple singleline text field.
-        Multiline, ///< A multiline text field.
-        FileSelect ///< An input field to select the path of a file on disk.
+    enum TextType
+    {
+        Normal,  ///< A simple singleline text field.
+        Multiline,  ///< A multiline text field.
+        FileSelect  ///< An input field to select the path of a file on disk.
     };
 
     ~FormFieldText() override;
@@ -288,7 +298,7 @@ public:
      *
      * Reimplemented only if the setting of new text is supported.
      */
-    virtual void setText(const QString &text);
+    virtual void setText(const QString& text);
 
     /**
      * Whether this text field is a password input, eg its text @b must be
@@ -327,7 +337,7 @@ public:
      *
      * @since 1.9
      */
-    virtual void setAppearanceText(const QString &text) = 0;
+    virtual void setAppearanceText(const QString& text) = 0;
 
 protected:
     FormFieldText();
@@ -350,9 +360,10 @@ public:
     /**
      * The types of choice field.
      */
-    enum ChoiceType {
-        ComboBox, ///< A combo box choice field.
-        ListBox   ///< A list box choice field.
+    enum ChoiceType
+    {
+        ComboBox,  ///< A combo box choice field.
+        ListBox  ///< A list box choice field.
     };
 
     ~FormFieldChoice() override;
@@ -393,7 +404,7 @@ public:
     /**
      * Sets the selected choices to @p choices .
      */
-    virtual void setCurrentChoices(const QList<int> &choices);
+    virtual void setCurrentChoices(const QList<int>& choices);
 
     /**
       The text entered into an editable combo box choice field
@@ -407,7 +418,7 @@ public:
 
       @since 0.16 (KDE 4.10)
     */
-    virtual void setEditChoice(const QString &text);
+    virtual void setEditChoice(const QString& text);
 
     /**
      * The alignment of the text within the field.
@@ -427,7 +438,7 @@ public:
      *
      * @since 1.11
      */
-    QString exportValueForChoice(const QString &choice) const;
+    QString exportValueForChoice(const QString& choice) const;
 
 protected:
     FormFieldChoice();
@@ -435,11 +446,12 @@ protected:
     /**
      * The possible choices of the choice field.
      * The key is the display name of the choice,
-     * The value is the export value (i.e. for use in javascript, etc) of the choice
+     * The value is the export value (i.e. for use in javascript, etc) of the
+     * choice
      *
      * @since 1.11
      */
-    void setExportValues(const QMap<QString, QString> &values);
+    void setExportValues(const QMap<QString, QString>& values);
 
 private:
     Q_DECLARE_PRIVATE(FormFieldChoice)
@@ -457,12 +469,14 @@ public:
     /**
      * The types of signature.
      */
-    enum SignatureType {
+    enum SignatureType
+    {
         AdbePkcs7sha1,
         AdbePkcs7detached,
         EtsiCAdESdetached,
         UnknownType,
-        UnsignedSignature ///< The signature field has not been signed yet. @since 22.04
+        UnsignedSignature  ///< The signature field has not been signed yet.
+                           ///< @since 22.04
     };
 
     ~FormFieldSignature() override;
@@ -475,14 +489,15 @@ public:
     /**
      * The signature info
      */
-    virtual const SignatureInfo &signatureInfo() const = 0;
+    virtual const SignatureInfo& signatureInfo() const = 0;
 
     /**
       Signs a field of UnsignedSignature type.
 
       @since 22.04
      */
-    virtual bool sign(const NewSignatureData &data, const QString &newPath) const = 0;
+    virtual bool sign(const NewSignatureData& data,
+                      const QString& newPath) const = 0;
 
 protected:
     FormFieldSignature();
@@ -492,8 +507,8 @@ private:
     Q_DISABLE_COPY(FormFieldSignature)
 };
 
-}
+}  // namespace Okular
 
-Q_DECLARE_METATYPE(const Okular::FormFieldSignature *);
+Q_DECLARE_METATYPE(const Okular::FormFieldSignature*);
 
 #endif

@@ -11,11 +11,12 @@
 #include <QVariant>
 
 class QFile;
+
 namespace Mobipocket
 {
 class Document;
 class QFileStream;
-}
+}  // namespace Mobipocket
 
 namespace Mobi
 {
@@ -24,22 +25,22 @@ class MobiDocument : public QTextDocument
     Q_OBJECT
 
 public:
-    explicit MobiDocument(const QString &fileName);
+    explicit MobiDocument(const QString& fileName);
     ~MobiDocument() override;
 
-    Mobipocket::Document *mobi() const
+    Mobipocket::Document* mobi() const
     {
         return doc;
     }
 
 protected:
-    QVariant loadResource(int type, const QUrl &name) override;
+    QVariant loadResource(int type, const QUrl& name) override;
 
 private:
-    QString fixMobiMarkup(const QString &data);
-    Mobipocket::Document *doc;
-    Mobipocket::QFileStream *file;
+    QString fixMobiMarkup(const QString& data);
+    Mobipocket::Document* doc;
+    Mobipocket::QFileStream* file;
 };
 
-}
+}  // namespace Mobi
 #endif

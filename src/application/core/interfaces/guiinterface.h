@@ -7,11 +7,9 @@
 #ifndef _OKULAR_GUIINTERFACE_H_
 #define _OKULAR_GUIINTERFACE_H_
 
-#include "../core/okularcore_export.h"
-
-#include <QObject>
-
 #include <KXMLGUIClient>
+#include <QObject>
+#include "../core/okularcore_export.h"
 
 namespace Okular
 {
@@ -47,19 +45,19 @@ public:
     {
     }
 
-    GuiInterface(const GuiInterface &) = delete;
-    GuiInterface &operator=(const GuiInterface &) = delete;
+    GuiInterface(const GuiInterface&) = delete;
+    GuiInterface& operator=(const GuiInterface&) = delete;
 
     /**
      * This method requests the XML GUI Client provided by the interface.
      */
-    KXMLGUIClient *guiClient()
+    KXMLGUIClient* guiClient()
     {
         return this;
     }
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_INTERFACE(Okular::GuiInterface, "org.kde.okular.GuiInterface/0.1")
 

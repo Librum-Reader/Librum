@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // C++ Interface: dvisourcesplitter
 //
@@ -17,20 +18,23 @@ class QString;
 class DVI_SourceFileSplitter
 {
 public:
-    DVI_SourceFileSplitter(const QString &srclink, const QString &dviFile);
+    DVI_SourceFileSplitter(const QString& srclink, const QString& dviFile);
 
     QString fileName() const
     {
         return m_fileInfo.fileName();
     }
+
     QString filePath() const
     {
         return m_fileInfo.absoluteFilePath();
     }
+
     bool fileExists() const
     {
         return m_fileInfo.exists();
     }
+
     quint32 line() const
     {
         return m_line;

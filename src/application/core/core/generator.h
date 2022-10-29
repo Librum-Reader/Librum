@@ -4,35 +4,34 @@
     SPDX-FileCopyrightText: 2008 Albert Astals Cid <aacid@kde.org>
 
     Work sponsored by the LiMux project of the city of Munich:
-    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group company <info@kdab.com>
+    SPDX-FileCopyrightText: 2017 Klarälvdalens Datakonsult AB a KDAB Group
+   company <info@kdab.com>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #ifndef _OKULAR_GENERATOR_H_
-#define _OKULAR_GENERATOR_H_
+    #define _OKULAR_GENERATOR_H_
 
-#include "document.h"
-#include "fontinfo.h"
-#include "global.h"
-#include "okularcore_export.h"
-#include "pagesize.h"
-#include "signatureutils.h"
+    #include <KPluginFactory>
+    #include <QList>
+    #include <QMimeType>
+    #include <QObject>
+    #include <QSharedDataPointer>
+    #include <QSizeF>
+    #include <QString>
+    #include <QVariant>
+    #include <QVector>
+    #include "document.h"
+    #include "fontinfo.h"
+    #include "global.h"
+    #include "okularcore_export.h"
+    #include "pagesize.h"
+    #include "signatureutils.h"
 
-#include <QList>
-#include <QObject>
-#include <QSharedDataPointer>
-#include <QSizeF>
-#include <QString>
-#include <QVariant>
-#include <QVector>
-
-#include <KPluginFactory>
-#include <QMimeType>
-
-#define OKULAR_EXPORT_PLUGIN(classname, json)                                                                                                                                                                                                  \
-    static_assert(json[0] != '\0', "arg2 must be a string literal");                                                                                                                                                                           \
-    K_PLUGIN_CLASS_WITH_JSON(classname, json)
+    #define OKULAR_EXPORT_PLUGIN(classname, json)                        \
+        static_assert(json[0] != '\0', "arg2 must be a string literal"); \
+        K_PLUGIN_CLASS_WITH_JSON(classname, json)
 
 class QByteArray;
 class QMutex;
@@ -93,7 +92,7 @@ public:
      * @param description The i18n'ed description of the format.
      * @param mimeType The supported mime type of the format.
      */
-    ExportFormat(const QString &description, const QMimeType &mimeType);
+    ExportFormat(const QString& description, const QMimeType& mimeType);
 
     /**
      * Creates a new export format.
@@ -102,7 +101,8 @@ public:
      * @param description The i18n'ed description of the format.
      * @param mimeType The supported mime type of the format.
      */
-    ExportFormat(const QIcon &icon, const QString &description, const QMimeType &mimeType);
+    ExportFormat(const QIcon& icon, const QString& description,
+                 const QMimeType& mimeType);
 
     /**
      * Destroys the export format.
@@ -112,12 +112,12 @@ public:
     /**
      * @internal
      */
-    ExportFormat(const ExportFormat &other);
+    ExportFormat(const ExportFormat& other);
 
     /**
      * @internal
      */
-    ExportFormat &operator=(const ExportFormat &other);
+    ExportFormat& operator=(const ExportFormat& other);
 
     /**
      * Returns the description of the format.
@@ -145,11 +145,12 @@ public:
     /**
      * Type of standard export format.
      */
-    enum StandardExportFormat {
-        PlainText,        ///< Plain text
-        PDF,              ///< PDF, aka Portable Document Format
-        OpenDocumentText, ///< OpenDocument Text format @since 0.8 (KDE 4.2)
-        HTML              ///< OpenDocument Text format @since 0.8 (KDE 4.2)
+    enum StandardExportFormat
+    {
+        PlainText,  ///< Plain text
+        PDF,  ///< PDF, aka Portable Document Format
+        OpenDocumentText,  ///< OpenDocument Text format @since 0.8 (KDE 4.2)
+        HTML  ///< OpenDocument Text format @since 0.8 (KDE 4.2)
     };
 
     /**
@@ -157,9 +158,9 @@ public:
      */
     static ExportFormat standardFormat(StandardExportFormat type);
 
-    bool operator==(const ExportFormat &other) const;
+    bool operator==(const ExportFormat& other) const;
 
-    bool operator!=(const ExportFormat &other) const;
+    bool operator!=(const ExportFormat& other) const;
 
 private:
     /// @cond PRIVATE
@@ -198,24 +199,37 @@ public:
      * Describe the possible optional features that a Generator can
      * provide.
      */
-    enum GeneratorFeature {
-        Threaded,          ///< Whether the Generator supports asynchronous generation of pictures or text pages
-        TextExtraction,    ///< Whether the Generator can extract text from the document in the form of TextPage's
-        ReadRawData,       ///< Whether the Generator can read a document directly from its raw data.
-        FontInfo,          ///< Whether the Generator can provide information about the fonts used in the document
-        PageSizes,         ///< Whether the Generator can change the size of the document pages.
-        PrintNative,       ///< Whether the Generator supports native cross-platform printing (QPainter-based).
-        PrintPostscript,   ///< Whether the Generator supports postscript-based file printing.
-        PrintToFile,       ///< Whether the Generator supports export to PDF & PS through the Print Dialog
-        TiledRendering,    ///< Whether the Generator can render tiles @since 0.16 (KDE 4.10)
-        SwapBackingFile,   ///< Whether the Generator can hot-swap the file it's reading from @since 1.3
-        SupportsCancelling ///< Whether the Generator can cancel requests @since 1.4
+    enum GeneratorFeature
+    {
+        Threaded,  ///< Whether the Generator supports asynchronous generation
+                   ///< of pictures or text pages
+        TextExtraction,  ///< Whether the Generator can extract text from the
+                         ///< document in the form of TextPage's
+        ReadRawData,  ///< Whether the Generator can read a document directly
+                      ///< from its raw data.
+        FontInfo,  ///< Whether the Generator can provide information about the
+                   ///< fonts used in the document
+        PageSizes,  ///< Whether the Generator can change the size of the
+                    ///< document pages.
+        PrintNative,  ///< Whether the Generator supports native cross-platform
+                      ///< printing (QPainter-based).
+        PrintPostscript,  ///< Whether the Generator supports postscript-based
+                          ///< file printing.
+        PrintToFile,  ///< Whether the Generator supports export to PDF & PS
+                      ///< through the Print Dialog
+        TiledRendering,  ///< Whether the Generator can render tiles @since 0.16
+                         ///< (KDE 4.10)
+        SwapBackingFile,  ///< Whether the Generator can hot-swap the file it's
+                          ///< reading from @since 1.3
+        SupportsCancelling  ///< Whether the Generator can cancel requests
+                            ///< @since 1.4
     };
 
     /**
      * Creates a new generator.
      */
-    explicit Generator(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit Generator(QObject* parent = nullptr,
+                       const QVariantList& args = QVariantList());
 
     /**
      * Destroys the generator.
@@ -226,41 +240,51 @@ public:
      * Loads the document with the given @p fileName and fills the
      * @p pagesVector with the parsed pages.
      *
-     * @note If you implement the WithPassword variants you don't need to implement this one
+     * @note If you implement the WithPassword variants you don't need to
+     * implement this one
      *
      * @returns true on success, false otherwise.
      */
-    virtual bool loadDocument(const QString &fileName, QVector<Page *> &pagesVector);
+    virtual bool loadDocument(const QString& fileName,
+                              QVector<Page*>& pagesVector);
 
     /**
      * Loads the document from the raw data @p fileData and fills the
      * @p pagesVector with the parsed pages.
      *
-     * @note If you implement the WithPassword variants you don't need to implement this one
+     * @note If you implement the WithPassword variants you don't need to
+     * implement this one
      *
      * @note the Generator has to have the feature @ref ReadRawData enabled
      *
      * @returns true on success, false otherwise.
      */
-    virtual bool loadDocumentFromData(const QByteArray &fileData, QVector<Page *> &pagesVector);
+    virtual bool loadDocumentFromData(const QByteArray& fileData,
+                                      QVector<Page*>& pagesVector);
 
     /**
-     * Loads the document with the given @p fileName and @p password and fills the
+     * Loads the document with the given @p fileName and @p password and fills
+     * the
      * @p pagesVector with the parsed pages.
      *
-     * @note Do not implement this if your format doesn't support passwords, it'll cleanly call loadDocument()
+     * @note Do not implement this if your format doesn't support passwords,
+     * it'll cleanly call loadDocument()
      *
      * @since 0.20 (KDE 4.14)
      *
      * @returns a LoadResult defining the result of the operation
      */
-    virtual Document::OpenResult loadDocumentWithPassword(const QString &fileName, QVector<Page *> &pagesVector, const QString &password);
+    virtual Document::OpenResult loadDocumentWithPassword(
+        const QString& fileName, QVector<Page*>& pagesVector,
+        const QString& password);
 
     /**
-     * Loads the document from the raw data @p fileData and @p password and fills the
+     * Loads the document from the raw data @p fileData and @p password and
+     * fills the
      * @p pagesVector with the parsed pages.
      *
-     * @note Do not implement this if your format doesn't support passwords, it'll cleanly call loadDocumentFromData()
+     * @note Do not implement this if your format doesn't support passwords,
+     * it'll cleanly call loadDocumentFromData()
      *
      * @note the Generator has to have the feature @ref ReadRawData enabled
      *
@@ -268,17 +292,23 @@ public:
      *
      * @returns a LoadResult defining the result of the operation
      */
-    virtual Document::OpenResult loadDocumentFromDataWithPassword(const QByteArray &fileData, QVector<Page *> &pagesVector, const QString &password);
+    virtual Document::OpenResult loadDocumentFromDataWithPassword(
+        const QByteArray& fileData, QVector<Page*>& pagesVector,
+        const QString& password);
 
     /**
      * Describes the result of an swap file operation.
      *
      * @since 1.3
      */
-    enum SwapBackingFileResult {
-        SwapBackingFileError,             //< The document could not be swapped
-        SwapBackingFileNoOp,              //< The document was swapped and nothing needs to be done
-        SwapBackingFileReloadInternalData //< The document was swapped and internal data (forms, annotations, etc) needs to be reloaded
+    enum SwapBackingFileResult
+    {
+        SwapBackingFileError,  //< The document could not be swapped
+        SwapBackingFileNoOp,  //< The document was swapped and nothing needs to
+                              //be done
+        SwapBackingFileReloadInternalData  //< The document was swapped and
+                                           //internal data (forms, annotations,
+                                           //etc) needs to be reloaded
     };
 
     /**
@@ -289,7 +319,8 @@ public:
      *
      * @since 1.3
      */
-    virtual SwapBackingFileResult swapBackingFile(const QString &newFileName, QVector<Okular::Page *> &newPagesVector);
+    virtual SwapBackingFileResult swapBackingFile(
+        const QString& newFileName, QVector<Okular::Page*>& newPagesVector);
 
     /**
      * This method is called when the document is closed and not used
@@ -307,15 +338,15 @@ public:
 
     virtual bool canSign() const;
 
-    virtual bool sign(const NewSignatureData &data, const QString &rFilename);
+    virtual bool sign(const NewSignatureData& data, const QString& rFilename);
 
-    virtual CertificateStore *certificateStore() const;
+    virtual CertificateStore* certificateStore() const;
 
     /**
      * This method can be called to trigger the generation of
      * a new pixmap as described by @p request.
      */
-    virtual void generatePixmap(PixmapRequest *request);
+    virtual void generatePixmap(PixmapRequest* request);
 
     /**
      * This method returns whether the generator is ready to
@@ -331,20 +362,21 @@ public:
      *
      * @see TextPage
      */
-    void generateTextPage(Page *page);
+    void generateTextPage(Page* page);
 
     /**
      * Returns the general information object of the document.
      *
      * Changed signature in okular version 0.21
      */
-    virtual DocumentInfo generateDocumentInfo(const QSet<DocumentInfo::Key> &keys) const;
+    virtual DocumentInfo generateDocumentInfo(
+        const QSet<DocumentInfo::Key>& keys) const;
 
     /**
      * Returns the 'table of content' object of the document or 0 if
      * no table of content is available.
      */
-    virtual const DocumentSynopsis *generateDocumentSynopsis();
+    virtual const DocumentSynopsis* generateDocumentSynopsis();
 
     /**
      * Returns the 'list of embedded fonts' object of the specified \p page
@@ -359,15 +391,17 @@ public:
      * Returns the 'list of embedded files' object of the document or 0 if
      * no list of embedded files is available.
      */
-    virtual const QList<EmbeddedFile *> *embeddedFiles() const;
+    virtual const QList<EmbeddedFile*>* embeddedFiles() const;
 
     /**
      * This enum identifies the metric of the page size.
      */
-    enum PageSizeMetric {
-        None,   ///< The page size is not defined in a physical metric.
-        Points, ///< The page size is given in 1/72 inches.
-        Pixels  ///< The page size is given in screen pixels @since 0.19 (KDE 4.13)
+    enum PageSizeMetric
+    {
+        None,  ///< The page size is not defined in a physical metric.
+        Points,  ///< The page size is given in 1/72 inches.
+        Pixels  ///< The page size is given in screen pixels @since 0.19
+                ///< (KDE 4.13)
     };
 
     /**
@@ -394,18 +428,19 @@ public:
     /**
      * This method is called when the page size has been changed by the user.
      */
-    virtual void pageSizeChanged(const PageSize &pageSize, const PageSize &oldPageSize);
+    virtual void pageSizeChanged(const PageSize& pageSize,
+                                 const PageSize& oldPageSize);
 
     /**
      * This method is called to print the document to the given @p printer.
      */
-    virtual Document::PrintError print(QPrinter &printer);
+    virtual Document::PrintError print(QPrinter& printer);
 
     /**
-     * This method returns the meta data of the given @p key with the given @p option
-     * of the document.
+     * This method returns the meta data of the given @p key with the given @p
+     * option of the document.
      */
-    virtual QVariant metaData(const QString &key, const QVariant &option) const;
+    virtual QVariant metaData(const QString& key, const QVariant& option) const;
 
     /**
      * Returns the list of additional supported export formats.
@@ -413,17 +448,20 @@ public:
     virtual ExportFormat::List exportFormats() const;
 
     /**
-     * This method is called to export the document in the given @p format and save it
-     * under the given @p fileName. The format must be one of the supported export formats.
+     * This method is called to export the document in the given @p format and
+     * save it under the given @p fileName. The format must be one of the
+     * supported export formats.
      */
-    virtual bool exportTo(const QString &fileName, const ExportFormat &format);
+    virtual bool exportTo(const QString& fileName, const ExportFormat& format);
 
     /**
-     * This method is called to know which wallet data should be used for the given file name.
-     * Unless you have very special requirements to where wallet data should be stored you
-     * don't need to reimplement this method.
+     * This method is called to know which wallet data should be used for the
+     * given file name. Unless you have very special requirements to where
+     * wallet data should be stored you don't need to reimplement this method.
      */
-    virtual void walletDataForFile(const QString &fileName, QString *walletName, QString *walletFolder, QString *walletKey) const;
+    virtual void walletDataForFile(const QString& fileName, QString* walletName,
+                                   QString* walletFolder,
+                                   QString* walletKey) const;
 
     /**
      * Query for the specified @p feature.
@@ -444,28 +482,29 @@ public:
      *
      * @since 0.24
      */
-    virtual QAbstractItemModel *layersModel() const;
+    virtual QAbstractItemModel* layersModel() const;
 
     /**
      * Calls the backend to execute an BackendOpaqueAction
      */
-    virtual void opaqueAction(const BackendOpaqueAction *action);
+    virtual void opaqueAction(const BackendOpaqueAction* action);
 
     /**
      * Frees the contents of the opaque action (if any);
      *
      * @since 22.04
      */
-    virtual void freeOpaqueActionContents(const BackendOpaqueAction &action);
+    virtual void freeOpaqueActionContents(const BackendOpaqueAction& action);
 
 Q_SIGNALS:
     /**
-     * This signal should be emitted whenever an error occurred in the generator.
+     * This signal should be emitted whenever an error occurred in the
+     * generator.
      *
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void error(const QString &message, int duration);
+    void error(const QString& message, int duration);
 
     /**
      * This signal should be emitted whenever the user should be warned.
@@ -473,7 +512,7 @@ Q_SIGNALS:
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void warning(const QString &message, int duration);
+    void warning(const QString& message, int duration);
 
     /**
      * This signal should be emitted whenever the user should be noticed.
@@ -481,19 +520,19 @@ Q_SIGNALS:
      * @param message The message which should be shown to the user.
      * @param duration The time that the message should be shown to the user.
      */
-    void notice(const QString &message, int duration);
+    void notice(const QString& message, int duration);
 
 protected:
     /**
-     * This method must be called when the pixmap request triggered by generatePixmap()
-     * has been finished.
+     * This method must be called when the pixmap request triggered by
+     * generatePixmap() has been finished.
      */
-    void signalPixmapRequestDone(PixmapRequest *request);
+    void signalPixmapRequestDone(PixmapRequest* request);
 
     /**
      * This method must be called when a text generation has been finished.
      */
-    void signalTextGenerationDone(Page *page, TextPage *textPage);
+    void signalTextGenerationDone(Page* page, TextPage* textPage);
 
     /**
      * This method is called when the document is closed and not used
@@ -507,29 +546,31 @@ protected:
      * Returns the image of the page as specified in
      * the passed pixmap @p request.
      *
-     * Must return a null image if the request was cancelled and the generator supports cancelling
+     * Must return a null image if the request was cancelled and the generator
+     * supports cancelling
      *
      * @warning this method may be executed in its own separated thread if the
      * @ref Threaded is enabled!
      */
-    virtual QImage image(PixmapRequest *request);
+    virtual QImage image(PixmapRequest* request);
 
     /**
      * Returns the text page for the given @p request.
      *
-     * Must return a null pointer if the request was cancelled and the generator supports cancelling
+     * Must return a null pointer if the request was cancelled and the generator
+     * supports cancelling
      *
      * @warning this method may be executed in its own separated thread if the
      * @ref Threaded is enabled!
      *
      * @since 1.4
      */
-    virtual TextPage *textPage(TextRequest *request);
+    virtual TextPage* textPage(TextRequest* request);
 
     /**
      * Returns a pointer to the document.
      */
-    const Document *document() const;
+    const Document* document() const;
 
     /**
      * Toggle the @p feature .
@@ -539,11 +580,18 @@ protected:
     /**
      * Internal document setting
      */
-    enum DocumentMetaDataKey {
-        PaperColorMetaData,        ///< Returns (QColor) the paper color if set in Settings or the default color (white) if option is true (otherwise returns a non initialized QColor)
-        TextAntialiasMetaData,     ///< Returns (bool) text antialias from Settings (option is not used)
-        GraphicsAntialiasMetaData, ///< Returns (bool)graphic antialias from Settings (option is not used)
-        TextHintingMetaData        ///< Returns (bool)text hinting from Settings (option is not used)
+    enum DocumentMetaDataKey
+    {
+        PaperColorMetaData,  ///< Returns (QColor) the paper color if set in
+                             ///< Settings or the default color (white) if
+                             ///< option is true (otherwise returns a non
+                             ///< initialized QColor)
+        TextAntialiasMetaData,  ///< Returns (bool) text antialias from Settings
+                                ///< (option is not used)
+        GraphicsAntialiasMetaData,  ///< Returns (bool)graphic antialias from
+                                    ///< Settings (option is not used)
+        TextHintingMetaData  ///< Returns (bool)text hinting from Settings
+                             ///< (option is not used)
     };
 
     /**
@@ -552,12 +600,13 @@ protected:
      *
      * @since 1.1
      */
-    QVariant documentMetaData(const DocumentMetaDataKey key, const QVariant &option = QVariant()) const;
+    QVariant documentMetaData(const DocumentMetaDataKey key,
+                              const QVariant& option = QVariant()) const;
 
     /**
      * Return the pointer to a mutex the generator can use freely.
      */
-    QMutex *userMutex() const;
+    QMutex* userMutex() const;
 
     /**
      * Set the bounding box of a page after the page has already been handed
@@ -566,7 +615,7 @@ protected:
      *
      * @since 0.7 (KDE 4.1)
      */
-    void updatePageBoundingBox(int page, const NormalizedRect &boundingBox);
+    void updatePageBoundingBox(int page, const NormalizedRect& boundingBox);
 
     /**
      * Returns DPI, previously set via setDPI()
@@ -580,21 +629,23 @@ protected:
      * @since 0.8 (old signature)
      * @since 22.04 (new signature)
      */
-    virtual QByteArray requestFontData(const Okular::FontInfo &font);
+    virtual QByteArray requestFontData(const Okular::FontInfo& font);
 
 protected Q_SLOTS:
     /**
-     * This method can be called to trigger a partial pixmap update for the given request
-     * Make sure you call it in a way it's executed in the main thread.
+     * This method can be called to trigger a partial pixmap update for the
+     * given request Make sure you call it in a way it's executed in the main
+     * thread.
      * @since 1.3
      */
-    void signalPartialPixmapRequest(Okular::PixmapRequest *request, const QImage &image);
+    void signalPartialPixmapRequest(Okular::PixmapRequest* request,
+                                    const QImage& image);
 
 protected:
     /// @cond PRIVATE
-    Generator(GeneratorPrivate &dd, QObject *parent, const QVariantList &args);
+    Generator(GeneratorPrivate& dd, QObject* parent, const QVariantList& args);
     Q_DECLARE_PRIVATE(Generator)
-    GeneratorPrivate *d_ptr;
+    GeneratorPrivate* d_ptr;
 
     friend class Document;
     friend class DocumentPrivate;
@@ -613,7 +664,12 @@ class OKULARCORE_EXPORT PixmapRequest
     friend class DocumentPrivate;
 
 public:
-    enum PixmapRequestFeature { NoFeature = 0, Asynchronous = 1, Preload = 2 };
+    enum PixmapRequestFeature
+    {
+        NoFeature = 0,
+        Asynchronous = 1,
+        Preload = 2
+    };
     Q_DECLARE_FLAGS(PixmapRequestFeatures, PixmapRequestFeature)
 
     /**
@@ -626,7 +682,10 @@ public:
      * @param priority The priority of the request.
      * @param features The features of generation.
      */
-    [[deprecated("This PixmapRequest constructor is deprecated, use the one including the device pixel ratio")]] PixmapRequest(DocumentObserver *observer, int pageNumber, int width, int height, int priority, PixmapRequestFeatures features);
+    [[deprecated("This PixmapRequest constructor is deprecated, use the one "
+                 "including the device pixel ratio")]] PixmapRequest(
+        DocumentObserver* observer, int pageNumber, int width, int height,
+        int priority, PixmapRequestFeatures features);
 
     /**
      * Creates a new pixmap request.
@@ -635,11 +694,14 @@ public:
      * @param pageNumber The page number.
      * @param width The width of the page in logical pixels.
      * @param height The height of the page in logical pixels.
-     * @param dpr Device pixel ratio of the screen that the pixmap is intended for.
+     * @param dpr Device pixel ratio of the screen that the pixmap is intended
+     * for.
      * @param priority The priority of the request.
      * @param features The features of generation.
      */
-    PixmapRequest(DocumentObserver *observer, int pageNumber, int width, int height, qreal dpr, int priority, PixmapRequestFeatures features);
+    PixmapRequest(DocumentObserver* observer, int pageNumber, int width,
+                  int height, qreal dpr, int priority,
+                  PixmapRequestFeatures features);
 
     /**
      * Destroys the pixmap request.
@@ -649,7 +711,7 @@ public:
     /**
      * Returns the observer of the request.
      */
-    DocumentObserver *observer() const;
+    DocumentObserver* observer() const;
 
     /**
      * Returns the page number of the request.
@@ -682,15 +744,15 @@ public:
     bool asynchronous() const;
 
     /**
-     * Returns whether the generation request is for a page that is not important
-     * i.e. it's just for speeding up future rendering
+     * Returns whether the generation request is for a page that is not
+     * important i.e. it's just for speeding up future rendering
      */
     bool preload() const;
 
     /**
      * Returns a pointer to the page where the pixmap shall be generated for.
      */
-    Page *page() const;
+    Page* page() const;
 
     /**
      * Sets whether the generator should render only the given normalized
@@ -713,14 +775,14 @@ public:
      *
      * @since 0.16 (KDE 4.10)
      */
-    void setNormalizedRect(const NormalizedRect &rect);
+    void setNormalizedRect(const NormalizedRect& rect);
 
     /**
      * Returns the normalized region of the page to request.
      *
      * @since 0.16 (KDE 4.10)
      */
-    const NormalizedRect &normalizedRect() const;
+    const NormalizedRect& normalizedRect() const;
 
     /**
      * Sets whether the request should report back updates if possible
@@ -747,7 +809,7 @@ private:
     Q_DISABLE_COPY(PixmapRequest)
 
     friend class PixmapRequestPrivate;
-    PixmapRequestPrivate *const d;
+    PixmapRequestPrivate* const d;
 };
 
 /**
@@ -761,7 +823,7 @@ public:
     /**
      * Creates a new text request.
      */
-    explicit TextRequest(Page *page);
+    explicit TextRequest(Page* page);
 
     TextRequest();
 
@@ -773,7 +835,7 @@ public:
     /**
      * Returns a pointer to the page where the pixmap shall be generated for.
      */
-    Page *page() const;
+    Page* page() const;
 
     /**
      * Should the request be aborted if possible?
@@ -784,19 +846,20 @@ private:
     Q_DISABLE_COPY(TextRequest)
 
     friend TextRequestPrivate;
-    TextRequestPrivate *const d;
+    TextRequestPrivate* const d;
 };
 
-}
+}  // namespace Okular
 
-Q_DECLARE_METATYPE(Okular::PixmapRequest *)
+Q_DECLARE_METATYPE(Okular::PixmapRequest*)
 
-#define OkularGeneratorInterface_iid "org.kde.okular.Generator"
+    #define OkularGeneratorInterface_iid "org.kde.okular.Generator"
 Q_DECLARE_INTERFACE(Okular::Generator, OkularGeneratorInterface_iid)
 
-#ifndef QT_NO_DEBUG_STREAM
-OKULARCORE_EXPORT QDebug operator<<(QDebug str, const Okular::PixmapRequest &req);
-#endif
+    #ifndef QT_NO_DEBUG_STREAM
+OKULARCORE_EXPORT QDebug operator<<(QDebug str,
+                                    const Okular::PixmapRequest& req);
+    #endif
 
 #endif
 

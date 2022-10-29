@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// TeXFont_TFM.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- TeXFont_TFM.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environment
 //
@@ -18,10 +18,12 @@ public:
     {
         value = val;
     }
+
     void fromDouble(double val)
     {
         value = (qint32)(val * (1 << 20) + 0.5);
     }
+
     double toDouble()
     {
         return (double(value)) / (double(1 << 20));
@@ -33,10 +35,11 @@ public:
 class TeXFont_TFM : public TeXFont
 {
 public:
-    explicit TeXFont_TFM(TeXFontDefinition *parent);
+    explicit TeXFont_TFM(TeXFontDefinition* parent);
     ~TeXFont_TFM() override;
 
-    glyph *getGlyph(quint16 character, bool generateCharacterPixmap = false, const QColor &color = Qt::black) override;
+    glyph* getGlyph(quint16 character, bool generateCharacterPixmap = false,
+                    const QColor& color = Qt::black) override;
 
 private:
     fix_word characterWidth_in_units_of_design_size[256];

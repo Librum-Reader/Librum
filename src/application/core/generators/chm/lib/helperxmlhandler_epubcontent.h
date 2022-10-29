@@ -30,15 +30,24 @@ public:
     QString tocname;
 
 private:
-    enum State { STATE_NONE, STATE_IN_METADATA, STATE_IN_MANIFEST, STATE_IN_SPINE };
+    enum State
+    {
+        STATE_NONE,
+        STATE_IN_METADATA,
+        STATE_IN_MANIFEST,
+        STATE_IN_SPINE
+    };
 
-    bool startElement(const QString &namespaceURI, const QString &localName, const QString &qName, const QXmlAttributes &atts) override;
-    bool characters(const QString &ch) override;
-    bool endElement(const QString &namespaceURI, const QString &localName, const QString &qName) override;
+    bool startElement(const QString& namespaceURI, const QString& localName,
+                      const QString& qName,
+                      const QXmlAttributes& atts) override;
+    bool characters(const QString& ch) override;
+    bool endElement(const QString& namespaceURI, const QString& localName,
+                    const QString& qName) override;
 
     // Tracking
     State m_state;
     QString m_tagname;
 };
 
-#endif // HELPERXMLHANDLER_EPUBCONTENT_H
+#endif  // HELPERXMLHANDLER_EPUBCONTENT_H

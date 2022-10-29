@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // pageSize.h
 //
@@ -10,9 +11,8 @@
 #ifndef PAGESIZE_H
 #define PAGESIZE_H
 
-#include "simplePageSize.h"
-
 #include <QObject>
+#include "simplePageSize.h"
 
 class QString;
 class QStringList;
@@ -35,7 +35,8 @@ The main difference to the SimplePageSize class are the following.
 @version 1.0.0
 */
 
-class pageSize : public QObject, public SimplePageSize
+class pageSize : public QObject,
+                 public SimplePageSize
 {
     Q_OBJECT
 
@@ -50,10 +51,10 @@ public:
     pageSize();
 
     /** \brief Initializes the pageSize with a SimplePageSize. */
-    explicit pageSize(const SimplePageSize &);
+    explicit pageSize(const SimplePageSize&);
 
-    pageSize(const pageSize &) = delete;
-    pageSize &operator=(const pageSize &) = delete;
+    pageSize(const pageSize&) = delete;
+    pageSize& operator=(const pageSize&) = delete;
 
     /** \brief List of standard pageSizes
 
@@ -97,7 +98,7 @@ public:
     @returns 'True', if the parameter could be parsed, and 'false'
     otherwise.
     */
-    bool setPageSize(const QString &name);
+    bool setPageSize(const QString& name);
 
     /** \brief Set page size from width and height strings
 
@@ -125,7 +126,8 @@ public:
     @param heightUnits units for the height string. Currently "mm", "cm"
     and "in" are allowed.
     */
-    void setPageSize(const QString &width, const QString &widthUnits, const QString &height, const QString &heightUnits);
+    void setPageSize(const QString& width, const QString& widthUnits,
+                     const QString& height, const QString& heightUnits);
 
     /** \brief Set page size
 
@@ -159,9 +161,10 @@ public:
     must be one of "cm", "mm" or "in".
 
     @returns a string containing a number, e.g. "3.1415", which gives the page
-    width in the given unit.  If the unit is not recognized, the string "--" is returned.
+    width in the given unit.  If the unit is not recognized, the string "--" is
+    returned.
     */
-    QString widthString(const QString &unit) const;
+    QString widthString(const QString& unit) const;
 
     /** \brief Returns the page height as a string
 
@@ -172,7 +175,7 @@ public:
     the given unit. If the unit is not recognized, the string "--" is
     returned.
     */
-    QString heightString(const QString &unit) const;
+    QString heightString(const QString& unit) const;
 
     /** \brief Returns a name for the page size, if this is a standard
         size
@@ -249,7 +252,7 @@ Q_SIGNALS:
 
     @param t a pointer to this
     */
-    void sizeChanged(const SimplePageSize &t);
+    void sizeChanged(const SimplePageSize& t);
 
 private:
     /** Makes sure that pageWidth and pageHeight are in the permissible

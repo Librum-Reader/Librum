@@ -7,10 +7,9 @@
 #ifndef _CHOOSEENGINEDIALOG_H
 #define _CHOOSEENGINEDIALOG_H
 
-#include <QStringList>
-
 #include <QDialog>
 #include <QMimeType>
+#include <QStringList>
 
 class Ui_ChooseEngineWidget;
 
@@ -19,13 +18,14 @@ class ChooseEngineDialog : public QDialog
     Q_OBJECT
 
 public:
-    ChooseEngineDialog(const QStringList &generators, const QMimeType &mime, QWidget *parent = nullptr);
+    ChooseEngineDialog(const QStringList& generators, const QMimeType& mime,
+                       QWidget* parent = nullptr);
     ~ChooseEngineDialog() override;
 
     int selectedGenerator() const;
 
 protected:
-    Ui_ChooseEngineWidget *m_widget;
+    Ui_ChooseEngineWidget* m_widget;
 };
 
 #endif

@@ -15,12 +15,13 @@ class TxtGenerator : public Okular::TextDocumentGenerator
     Q_INTERFACES(Okular::Generator)
 
 public:
-    TxtGenerator(QObject *parent, const QVariantList &args);
+    TxtGenerator(QObject* parent, const QVariantList& args);
+
     ~TxtGenerator() override
     {
     }
 
-    void addPages(KConfigDialog *dlg) override;
+    void addPages(KConfigDialog* dlg) override;
 };
 
 #endif

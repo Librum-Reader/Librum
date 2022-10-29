@@ -9,14 +9,16 @@
 
 #include <poppler-form.h>
 #include <poppler-version.h>
-#define POPPLER_VERSION_MACRO ((POPPLER_VERSION_MAJOR << 16) | (POPPLER_VERSION_MINOR << 8) | (POPPLER_VERSION_MICRO))
+#define POPPLER_VERSION_MACRO                                       \
+    ((POPPLER_VERSION_MAJOR << 16) | (POPPLER_VERSION_MINOR << 8) | \
+     (POPPLER_VERSION_MICRO))
 
 #include "core/signatureutils.h"
 
 class PopplerCertificateInfo : public Okular::CertificateInfo
 {
 public:
-    explicit PopplerCertificateInfo(const Poppler::CertificateInfo &info);
+    explicit PopplerCertificateInfo(const Poppler::CertificateInfo& info);
     ~PopplerCertificateInfo() override;
 
     bool isNull() const override;
@@ -33,7 +35,7 @@ public:
     int publicKeyStrength() const override;
     bool isSelfSigned() const override;
     QByteArray certificateData() const override;
-    bool checkPassword(const QString &password) const override;
+    bool checkPassword(const QString& password) const override;
 
 private:
     Poppler::CertificateInfo m_info;
@@ -42,7 +44,7 @@ private:
 class PopplerSignatureInfo : public Okular::SignatureInfo
 {
 public:
-    explicit PopplerSignatureInfo(const Poppler::SignatureValidationInfo &info);
+    explicit PopplerSignatureInfo(const Poppler::SignatureValidationInfo& info);
     ~PopplerSignatureInfo() override;
 
     SignatureStatus signatureStatus() const override;
@@ -56,11 +58,11 @@ public:
     QByteArray signature() const override;
     QList<qint64> signedRangeBounds() const override;
     bool signsTotalDocument() const override;
-    const Okular::CertificateInfo &certificateInfo() const override;
+    const Okular::CertificateInfo& certificateInfo() const override;
 
 private:
     Poppler::SignatureValidationInfo m_info;
-    Okular::CertificateInfo *m_certfiticateInfo;
+    Okular::CertificateInfo* m_certfiticateInfo;
 };
 
 #if POPPLER_VERSION_MACRO >= QT_VERSION_CHECK(21, 1, 0)
@@ -70,7 +72,8 @@ class PopplerCertificateStore : public Okular::CertificateStore
 public:
     ~PopplerCertificateStore() override;
 
-    QList<Okular::CertificateInfo *> signingCertificates(bool *userCancelled) const override;
+    QList<Okular::CertificateInfo*> signingCertificates(
+        bool* userCancelled) const override;
 };
 
 #endif

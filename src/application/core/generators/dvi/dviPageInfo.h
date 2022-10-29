@@ -7,11 +7,11 @@
 #ifndef _dvipageinfo_h_
 #define _dvipageinfo_h_
 
+#include <QPixmap>
+#include <QVector>
 #include "hyperlink.h"
 #include "pageNumber.h"
 #include "textBox.h"
-#include <QPixmap>
-#include <QVector>
 
 class dviPageInfo
 {
@@ -25,8 +25,8 @@ public:
 
     virtual ~dviPageInfo();
 
-    dviPageInfo(const dviPageInfo &) = delete;
-    dviPageInfo &operator=(const dviPageInfo &) = delete;
+    dviPageInfo(const dviPageInfo&) = delete;
+    dviPageInfo& operator=(const dviPageInfo&) = delete;
 
     virtual void clear();
 

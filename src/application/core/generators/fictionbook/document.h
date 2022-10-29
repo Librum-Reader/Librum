@@ -17,7 +17,7 @@ namespace FictionBook
 class Document
 {
 public:
-    explicit Document(const QString &fileName);
+    explicit Document(const QString& fileName);
 
     bool open();
 
@@ -26,13 +26,13 @@ public:
     QString lastErrorString() const;
 
 private:
-    void setError(const QString &);
+    void setError(const QString&);
 
     QString mFileName;
     QDomDocument mDocument;
     QString mErrorString;
 };
 
-}
+}  // namespace FictionBook
 
 #endif

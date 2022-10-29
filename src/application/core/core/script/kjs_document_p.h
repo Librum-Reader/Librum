@@ -18,10 +18,10 @@ class DocumentPrivate;
 class JSDocument
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSGlobalObject wrapDocument(DocumentPrivate *doc);
+    static void initType(KJSContext* ctx);
+    static KJSGlobalObject wrapDocument(DocumentPrivate* doc);
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -7,11 +7,10 @@
 #ifndef _OKULAR_ACTION_H_
 #define _OKULAR_ACTION_H_
 
-#include "global.h"
-#include "okularcore_export.h"
-
 #include <QString>
 #include <QVariant>
+#include "global.h"
+#include "okularcore_export.h"
 
 namespace Okular
 {
@@ -43,16 +42,18 @@ public:
     /**
      * Describes the type of action.
      */
-    enum ActionType {
-        Goto,         ///< Goto a given page or external document
-        Execute,      ///< Execute a command or external application
-        Browse,       ///< Browse a given website
-        DocAction,    ///< Start a custom action
-        Sound,        ///< Play a sound
-        Movie,        ///< Play a movie
-        Script,       ///< Executes a Script code
-        Rendition,    ///< Play a movie and/or execute a Script code @since 0.16 (KDE 4.10)
-        BackendOpaque ///< Calls back to the backend with the action @since 1.1
+    enum ActionType
+    {
+        Goto,  ///< Goto a given page or external document
+        Execute,  ///< Execute a command or external application
+        Browse,  ///< Browse a given website
+        DocAction,  ///< Start a custom action
+        Sound,  ///< Play a sound
+        Movie,  ///< Play a movie
+        Script,  ///< Executes a Script code
+        Rendition,  ///< Play a movie and/or execute a Script code @since 0.16
+                    ///< (KDE 4.10)
+        BackendOpaque  ///< Calls back to the backend with the action @since 1.1
     };
 
     /**
@@ -85,7 +86,7 @@ public:
      *
      * @since 0.15 (KDE 4.9)
      */
-    void setNativeId(const QVariant &id);
+    void setNativeId(const QVariant& id);
 
     /**
      * Returns the "native" id of the action.
@@ -99,7 +100,7 @@ public:
      *
      * @since 1.5
      */
-    QVector<Action *> nextActions() const;
+    QVector<Action*> nextActions() const;
 
     /**
      * Sets the next actions.
@@ -107,13 +108,13 @@ public:
      * Takes ownership of the objects in the actions vector.
      * @since 1.5
      */
-    void setNextActions(const QVector<Action *> &actions);
+    void setNextActions(const QVector<Action*>& actions);
 
 protected:
     /// @cond PRIVATE
-    explicit Action(ActionPrivate &dd);
+    explicit Action(ActionPrivate& dd);
     Q_DECLARE_PRIVATE(Action)
-    ActionPrivate *d_ptr;
+    ActionPrivate* d_ptr;
     /// @endcond
 
 private:
@@ -133,7 +134,7 @@ public:
      * @p fileName The name of an external file that shall be loaded.
      * @p viewport The target viewport information of the current document.
      */
-    GotoAction(const QString &fileName, const DocumentViewport &viewport);
+    GotoAction(const QString& fileName, const DocumentViewport& viewport);
 
     /**
      * Creates a new goto action.
@@ -143,7 +144,7 @@ public:
      *
      * @since 0.9 (KDE 4.3)
      */
-    GotoAction(const QString &fileName, const QString &namedDestination);
+    GotoAction(const QString& fileName, const QString& namedDestination);
 
     /**
      * Destroys the goto action.
@@ -199,7 +200,7 @@ public:
      * @param fileName The file name of the application to execute.
      * @param parameters The parameters of the application to execute.
      */
-    ExecuteAction(const QString &fileName, const QString &parameters);
+    ExecuteAction(const QString& fileName, const QString& parameters);
 
     /**
      * Destroys the execute action.
@@ -243,7 +244,7 @@ public:
      *
      * @param url The url to browse.
      */
-    explicit BrowseAction(const QUrl &url);
+    explicit BrowseAction(const QUrl& url);
 
     /**
      * Destroys the browse action.
@@ -280,21 +281,22 @@ public:
     /**
      * Describes the possible action types.
      */
-    enum DocumentActionType {
-        PageFirst = 1,       ///< Jump to first page
-        PagePrev = 2,        ///< Jump to previous page
-        PageNext = 3,        ///< Jump to next page
-        PageLast = 4,        ///< Jump to last page
-        HistoryBack = 5,     ///< Go back in page history
+    enum DocumentActionType
+    {
+        PageFirst = 1,  ///< Jump to first page
+        PagePrev = 2,  ///< Jump to previous page
+        PageNext = 3,  ///< Jump to next page
+        PageLast = 4,  ///< Jump to last page
+        HistoryBack = 5,  ///< Go back in page history
         HistoryForward = 6,  ///< Go forward in page history
-        Quit = 7,            ///< Quit application
-        Presentation = 8,    ///< Start presentation
-        EndPresentation = 9, ///< End presentation
-        Find = 10,           ///< Open find dialog
-        GoToPage = 11,       ///< Goto page
-        Close = 12,          ///< Close document
-        Print = 13,          ///< Print the document @since 22.04
-        SaveAs = 14          ///< SaveAs the document @since 22.04
+        Quit = 7,  ///< Quit application
+        Presentation = 8,  ///< Start presentation
+        EndPresentation = 9,  ///< End presentation
+        Find = 10,  ///< Open find dialog
+        GoToPage = 11,  ///< Goto page
+        Close = 12,  ///< Close document
+        Print = 13,  ///< Print the document @since 22.04
+        SaveAs = 14  ///< SaveAs the document @since 22.04
     };
 
     /**
@@ -344,7 +346,8 @@ public:
      * @param mix Whether the sound shall be mixed.
      * @param sound The sound object which contains the sound data.
      */
-    SoundAction(double volume, bool synchronous, bool repeat, bool mix, Okular::Sound *sound);
+    SoundAction(double volume, bool synchronous, bool repeat, bool mix,
+                Okular::Sound* sound);
 
     /**
      * Destroys the sound action.
@@ -384,7 +387,7 @@ public:
     /**
      * Returns the sound object which contains the sound data.
      */
-    Okular::Sound *sound() const;
+    Okular::Sound* sound() const;
 
 private:
     Q_DECLARE_PRIVATE(SoundAction)
@@ -402,10 +405,11 @@ public:
     /**
      * Creates a new Script action.
      *
-     * @param type The type of the script (for now, only JavaScript = 0 is implemented).
+     * @param type The type of the script (for now, only JavaScript = 0 is
+     * implemented).
      * @param script The code to execute.
      */
-    ScriptAction(enum ScriptType type, const QString &script);
+    ScriptAction(enum ScriptType type, const QString& script);
 
     /**
      * Destroys the browse action.
@@ -448,7 +452,13 @@ public:
     /**
      * Describes the possible operation types.
      */
-    enum OperationType { Play, Stop, Pause, Resume };
+    enum OperationType
+    {
+        Play,
+        Stop,
+        Pause,
+        Resume
+    };
 
     /**
      * Creates a new movie action.
@@ -478,12 +488,12 @@ public:
     /**
      * Sets the @p annotation that is associated with the movie action.
      */
-    void setAnnotation(MovieAnnotation *annotation);
+    void setAnnotation(MovieAnnotation* annotation);
 
     /**
      * Returns the annotation or @c 0 if no annotation has been set.
      */
-    MovieAnnotation *annotation() const;
+    MovieAnnotation* annotation() const;
 
 private:
     Q_DECLARE_PRIVATE(MovieAction)
@@ -502,12 +512,13 @@ public:
     /**
      * Describes the possible operation types.
      */
-    enum OperationType {
+    enum OperationType
+    {
         None,  ///< Execute only the JavaScript
         Play,  ///< Start playing the video
         Stop,  ///< Stop playing the video
-        Pause, ///< Pause the video
-        Resume ///< Resume playing the video
+        Pause,  ///< Pause the video
+        Resume  ///< Resume playing the video
     };
 
     /**
@@ -518,7 +529,8 @@ public:
      * @param scriptType The type of script the action executes.
      * @param script The actual script the action executes.
      */
-    RenditionAction(OperationType operation, Okular::Movie *movie, enum ScriptType scriptType, const QString &script);
+    RenditionAction(OperationType operation, Okular::Movie* movie,
+                    enum ScriptType scriptType, const QString& script);
 
     /**
      * Destroys the rendition action.
@@ -541,9 +553,10 @@ public:
     OperationType operation() const;
 
     /**
-     * Returns the movie object or @c 0 if no movie object was set on construction time.
+     * Returns the movie object or @c 0 if no movie object was set on
+     * construction time.
      */
-    Okular::Movie *movie() const;
+    Okular::Movie* movie() const;
 
     /**
      * Returns the type of script.
@@ -558,12 +571,12 @@ public:
     /**
      * Sets the @p annotation that is associated with the rendition action.
      */
-    void setAnnotation(ScreenAnnotation *annotation);
+    void setAnnotation(ScreenAnnotation* annotation);
 
     /**
      * Returns the annotation or @c 0 if no annotation has been set.
      */
-    ScreenAnnotation *annotation() const;
+    ScreenAnnotation* annotation() const;
 
 private:
     Q_DECLARE_PRIVATE(RenditionAction)
@@ -584,6 +597,6 @@ private:
     Q_DISABLE_COPY(BackendOpaqueAction)
 };
 
-}
+}  // namespace Okular
 
 #endif

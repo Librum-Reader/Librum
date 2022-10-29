@@ -11,7 +11,6 @@
 #include <QMetaType>
 #include <QSharedDataPointer>
 #include <QString>
-
 #include "okularcore_export.h"
 
 namespace Okular
@@ -29,7 +28,8 @@ public:
     /**
      * The possible kinds of fonts.
      */
-    enum FontType {
+    enum FontType
+    {
         Unknown,
         Type1,
         Type1C,
@@ -42,16 +42,21 @@ public:
         CIDType0COT,
         CIDTrueType,
         CIDTrueTypeOT,
-        TeXPK,             ///< @since 0.10 (KDE 4.4)
-        TeXVirtual,        ///< @since 0.10 (KDE 4.4)
-        TeXFontMetric,     ///< @since 0.10 (KDE 4.4)
-        TeXFreeTypeHandled ///< @since 0.10 (KDE 4.4)
+        TeXPK,  ///< @since 0.10 (KDE 4.4)
+        TeXVirtual,  ///< @since 0.10 (KDE 4.4)
+        TeXFontMetric,  ///< @since 0.10 (KDE 4.4)
+        TeXFreeTypeHandled  ///< @since 0.10 (KDE 4.4)
     };
 
     /**
      * The possible kinds of embed.
      */
-    enum EmbedType { NotEmbedded, EmbeddedSubset, FullyEmbedded };
+    enum EmbedType
+    {
+        NotEmbedded,
+        EmbeddedSubset,
+        FullyEmbedded
+    };
 
     /**
      * Construct a new empty font info.
@@ -60,7 +65,7 @@ public:
     /**
      * Copy constructor.
      */
-    FontInfo(const FontInfo &fi);
+    FontInfo(const FontInfo& fi);
     /**
      * Destructor.
      */
@@ -73,7 +78,7 @@ public:
     /**
      * Sets a new name for the font.
      */
-    void setName(const QString &name);
+    void setName(const QString& name);
 
     /**
      * Returns the substitute name for the font.
@@ -83,7 +88,7 @@ public:
     /**
      * Sets a new substitute name for the font.
      */
-    void setSubstituteName(const QString &substituteName);
+    void setSubstituteName(const QString& substituteName);
 
     /**
      * Returns the type of the font.
@@ -108,10 +113,11 @@ public:
      * represents this font.
      */
     QString file() const;
-    void setFile(const QString &file);
+    void setFile(const QString& file);
 
     /**
-     * In case of embedded fonts, returns if the font can be extracted into a QByteArray
+     * In case of embedded fonts, returns if the font can be extracted into a
+     * QByteArray
      *
      * @since 0.8 (KDE 4.2)
      */
@@ -131,7 +137,7 @@ public:
      *
      * @since 0.8 (KDE 4.2)
      */
-    void setNativeId(const QVariant &id);
+    void setNativeId(const QVariant& id);
 
     /**
      * Returns the "native" id of the font info.
@@ -140,14 +146,14 @@ public:
      */
     QVariant nativeId() const;
 
-    FontInfo &operator=(const FontInfo &fi);
+    FontInfo& operator=(const FontInfo& fi);
 
     /**
      * Comparison operator.
      */
-    bool operator==(const FontInfo &fi) const;
+    bool operator==(const FontInfo& fi) const;
 
-    bool operator!=(const FontInfo &fi) const;
+    bool operator!=(const FontInfo& fi) const;
 
 private:
     /// @cond PRIVATE
@@ -156,7 +162,7 @@ private:
     QSharedDataPointer<FontInfoPrivate> d;
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_METATYPE(Okular::FontInfo)
 

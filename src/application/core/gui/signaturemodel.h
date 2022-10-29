@@ -23,7 +23,8 @@ class Q_DECL_EXPORT SignatureModel : public QAbstractItemModel
     Q_PROPERTY(int count READ count NOTIFY countChanged)
 
 public:
-    enum {
+    enum
+    {
         FormRole = Qt::UserRole + 1000,
         PageRole,
         ReadableStatusRole,
@@ -37,15 +38,17 @@ public:
         IsUnsignedSignatureRole
     };
 
-    explicit SignatureModel(Okular::Document *doc, QObject *parent = nullptr);
+    explicit SignatureModel(Okular::Document* doc, QObject* parent = nullptr);
     ~SignatureModel() override;
 
-    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-    bool hasChildren(const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex index(int row, int column, const QModelIndex &parent = QModelIndex()) const override;
-    QModelIndex parent(const QModelIndex &index) const override;
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex& parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex& index,
+                  int role = Qt::DisplayRole) const override;
+    bool hasChildren(const QModelIndex& parent = QModelIndex()) const override;
+    QModelIndex index(int row, int column,
+                      const QModelIndex& parent = QModelIndex()) const override;
+    QModelIndex parent(const QModelIndex& index) const override;
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
     int count() const
     {
@@ -54,7 +57,8 @@ public:
 
     QHash<int, QByteArray> roleNames() const override;
 
-    Q_INVOKABLE bool saveSignedVersion(int signatureRevisionIndex, const QUrl &filePath) const;
+    Q_INVOKABLE bool saveSignedVersion(int signatureRevisionIndex,
+                                       const QUrl& filePath) const;
 
 Q_SIGNALS:
     void countChanged();

@@ -7,10 +7,9 @@
 #ifndef _OKULAR_SOUND_H_
 #define _OKULAR_SOUND_H_
 
-#include "okularcore_export.h"
-
 #include <QByteArray>
 #include <QString>
+#include "okularcore_export.h"
 
 namespace Okular
 {
@@ -26,31 +25,33 @@ public:
     /**
      * Describes where the sound is stored.
      */
-    enum SoundType {
-        External, ///< Is stored at external resource (e.g. url)
+    enum SoundType
+    {
+        External,  ///< Is stored at external resource (e.g. url)
         Embedded  ///< Is stored embedded in the document
     };
 
     /**
      * Describes the encoding of the sound data.
      */
-    enum SoundEncoding {
-        Raw,    ///< Is not encoded
-        Signed, ///< Is encoded with twos-complement values
+    enum SoundEncoding
+    {
+        Raw,  ///< Is not encoded
+        Signed,  ///< Is encoded with twos-complement values
         muLaw,  ///< Is µ-law encoded
-        ALaw    ///< Is A-law encoded
+        ALaw  ///< Is A-law encoded
     };
 
     /**
      * Creates a new sound object with the given embedded
      * sound @p data.
      */
-    explicit Sound(const QByteArray &data);
+    explicit Sound(const QByteArray& data);
 
     /**
      * Creates a new sound object with the given external @p url.
      */
-    explicit Sound(const QString &url);
+    explicit Sound(const QString& url);
 
     /**
      * Destroys the sound object.
@@ -114,11 +115,11 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 
     Q_DISABLE_COPY(Sound)
 };
 
-}
+}  // namespace Okular
 
 #endif

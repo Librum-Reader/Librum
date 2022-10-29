@@ -7,8 +7,8 @@
 #ifndef OKULAR_VIEW_H
 #define OKULAR_VIEW_H
 
-#include "okularcore_export.h"
 #include <QObject>
+#include "okularcore_export.h"
 class QString;
 class QVariant;
 
@@ -37,22 +37,25 @@ public:
     /**
      * The capabilities of a view
      */
-    enum ViewCapability {
-        Zoom,             ///< Possibility to get/set the zoom of the view
-        ZoomModality,     ///< Possibility to get/set the zoom mode of the view
-        Continuous,       ///< Possibility to toggle continuous mode @since 1.9
-        ViewModeModality, ///< Possibility to get/set the view mode @since 1.9
-        TrimMargins       ///< Possibility to toggle trim-margins mode @since 1.9
+    enum ViewCapability
+    {
+        Zoom,  ///< Possibility to get/set the zoom of the view
+        ZoomModality,  ///< Possibility to get/set the zoom mode of the view
+        Continuous,  ///< Possibility to toggle continuous mode @since 1.9
+        ViewModeModality,  ///< Possibility to get/set the view mode @since 1.9
+        TrimMargins  ///< Possibility to toggle trim-margins mode @since 1.9
     };
 
     /**
      * The access type of a capability
      */
-    enum CapabilityFlag {
+    enum CapabilityFlag
+    {
         NoFlag = 0,
-        CapabilityRead = 0x01,        ///< Possibility to read a capability
-        CapabilityWrite = 0x02,       ///< Possibility to write a capability
-        CapabilitySerializable = 0x04 ///< The capability is suitable for being serialized/deserialized
+        CapabilityRead = 0x01,  ///< Possibility to read a capability
+        CapabilityWrite = 0x02,  ///< Possibility to write a capability
+        CapabilitySerializable = 0x04  ///< The capability is suitable for being
+                                       ///< serialized/deserialized
     };
     Q_DECLARE_FLAGS(CapabilityFlags, CapabilityFlag)
 
@@ -62,7 +65,7 @@ public:
      * Return the document which this view is associated to,
      * or null if it is not associated with any document.
      */
-    Document *viewDocument() const;
+    Document* viewDocument() const;
 
     /**
      * Return the name of this view.
@@ -87,24 +90,25 @@ public:
     /**
      * Sets a new value for the specified @p capability.
      */
-    virtual void setCapability(ViewCapability capability, const QVariant &option);
+    virtual void setCapability(ViewCapability capability,
+                               const QVariant& option);
 
 protected:
     /**
      * Construct a new view with the specified @p name.
      */
-    explicit View(const QString &name);
+    explicit View(const QString& name);
 
     /// @cond PRIVATE
     Q_DECLARE_PRIVATE(View)
-    ViewPrivate *d_ptr;
+    ViewPrivate* d_ptr;
     /// @endcond
 
 private:
     Q_DISABLE_COPY(View)
 };
 
-}
+}  // namespace Okular
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Okular::View::CapabilityFlags)
 

@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 #ifndef _xdvi_h
 #define _xdvi_h
 
@@ -8,8 +9,8 @@
 
 #define ROUNDUP(x, y) (((x) + (y)-1) / (y))
 
-extern unsigned long num(FILE *, int);
-extern long snum(FILE *, int);
+extern unsigned long num(FILE*, int);
+extern long snum(FILE*, int);
 extern struct WindowRec mane, currwin;
 
 #define one(fp) ((unsigned char)getc(fp))

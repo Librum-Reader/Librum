@@ -7,9 +7,8 @@
 #ifndef _OKULAR_PAGECONTROLLER_P_H_
 #define _OKULAR_PAGECONTROLLER_P_H_
 
-#include <QObject>
-
 #include <threadweaver/queue.h>
+#include <QObject>
 
 namespace Okular
 {
@@ -26,18 +25,18 @@ public:
     PageController();
     ~PageController() override;
 
-    void addRotationJob(RotationJob *job);
+    void addRotationJob(RotationJob* job);
 
 Q_SIGNALS:
-    void rotationFinished(int page, Okular::Page *okularPage);
+    void rotationFinished(int page, Okular::Page* okularPage);
 
 private Q_SLOTS:
-    void imageRotationDone(const ThreadWeaver::JobPointer &job);
+    void imageRotationDone(const ThreadWeaver::JobPointer& job);
 
 private:
     ThreadWeaver::Queue m_weaver;
 };
 
-}
+}  // namespace Okular
 
 #endif

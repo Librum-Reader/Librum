@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // simplePageSize.h
 //
@@ -10,9 +11,8 @@
 #ifndef SIMPLEPAGESIZE_H
 #define SIMPLEPAGESIZE_H
 
-#include "length.h"
-
 #include <QSize>
+#include "length.h"
 
 class QPaintDevice;
 
@@ -100,7 +100,8 @@ public:
         invalid, the result is undefined. */
     QSize sizeInPixel(double resolution) const
     {
-        return QSize((int)(resolution * pageWidth.getLength_in_inch() + 0.5), (int)(resolution * pageHeight.getLength_in_inch() + 0.5));
+        return QSize((int)(resolution * pageWidth.getLength_in_inch() + 0.5),
+                     (int)(resolution * pageHeight.getLength_in_inch() + 0.5));
     }
 
     /** \brief Zoom value required to scale to a certain height
@@ -117,7 +118,7 @@ public:
     'height' pixels. If the pageSize is invalid, an undefined value is
     returned.
     */
-    double zoomForHeight(quint32 height, const QPaintDevice &pd) const;
+    double zoomForHeight(quint32 height, const QPaintDevice& pd) const;
 
     /** \brief Zoom value required to scale to a certain height
 
@@ -133,7 +134,7 @@ public:
     'width' pixels. If the pageSize is invalid, an undefined value is
     returned.
     */
-    double zoomForWidth(quint32 width, const QPaintDevice &pd) const;
+    double zoomForWidth(quint32 width, const QPaintDevice& pd) const;
 
     /** \brief Returns a zoom to fit into a certain page size
 
@@ -143,7 +144,7 @@ public:
     value is returned. If height or width of this is nearly 0.0, a
     floating point exception may occur.
     */
-    double zoomToFitInto(const SimplePageSize &target) const;
+    double zoomToFitInto(const SimplePageSize& target) const;
 
     /** \brief Validity check
 
@@ -151,7 +152,8 @@ public:
     1mm */
     bool isValid() const
     {
-        return ((pageWidth.getLength_in_mm() > 1.0) && (pageHeight.getLength_in_mm() > 1.0));
+        return ((pageWidth.getLength_in_mm() > 1.0) &&
+                (pageHeight.getLength_in_mm() > 1.0));
     }
 
     /** \brief Validity check:
@@ -160,7 +162,8 @@ public:
     */
     bool isSmall() const
     {
-        return (pageWidth.getLength_in_mm() * pageHeight.getLength_in_mm() < 1.0);
+        return (pageWidth.getLength_in_mm() * pageHeight.getLength_in_mm() <
+                1.0);
     }
 
     /** \brief Approximate equality
@@ -170,9 +173,10 @@ public:
     @returns 'True' if height and width of the two objects differ by at
         most 2mm, 'false' otherwise
     */
-    bool isNearlyEqual(const SimplePageSize &size) const
+    bool isNearlyEqual(const SimplePageSize& size) const
     {
-        return (pageWidth.isNearlyEqual(size.pageWidth) && pageHeight.isNearlyEqual(size.pageHeight));
+        return (pageWidth.isNearlyEqual(size.pageWidth) &&
+                pageHeight.isNearlyEqual(size.pageHeight));
     }
 
     /** Test if paper size is higher than wide

@@ -8,13 +8,11 @@
 #define _OKULAR_AREA_H_
 
 #include <math.h>
-
 #include <QColor>
 #include <QDebug>
 #include <QList>
 #include <QPainterPath>
 #include <QTransform>
-
 #include "global.h"
 #include "okularcore_export.h"
 
@@ -80,16 +78,16 @@ class NormalizedShape;
  * and the y coordinate (0.3) with the page height (600).
  * So, the point will be drawn on the page at (400, 180).
  *
- * That allows you to zoom the page by just multiplying the normalized points with the
- * zoomed page size.
+ * That allows you to zoom the page by just multiplying the normalized points
+ * with the zoomed page size.
  * @endparblock
  *
  * @par Example: Select Text on a Page using Mouse Events
  * @parblock
  * The position of all glyphs and words is stored in normalized coordinates.
  * (This is what TextPage actually does.)
- * Mouse press and release events are given in page coordinates (400, 180) and (600, 450),
- * while the page has a size of 800x600.
+ * Mouse press and release events are given in page coordinates (400, 180) and
+ * (600, 450), while the page has a size of 800x600.
  *
  * If you want to search all text between the mouse click and release event,
  * you need their normalized coordinates.
@@ -106,7 +104,8 @@ class NormalizedShape;
  * NormalizedPoint supports basic geometric operations.
  *  * You can transform it with a QTransform matrix.
  *  * With the size of the reference area, you can calculate the squared
- *    absolute distance to another NormalizedPoint or a line of two NormalizedPoints.
+ *    absolute distance to another NormalizedPoint or a line of two
+ * NormalizedPoints.
  *
  * NormalizedRect provides additional geometric operations for rectangles.
  * @endparblock
@@ -122,7 +121,8 @@ public:
     NormalizedPoint();
 
     /**
-     * Creates a new normalized point with the normalized coordinates (@p x, @p y ).
+     * Creates a new normalized point with the normalized coordinates (@p x, @p
+     * y ).
      */
     NormalizedPoint(double x, double y);
 
@@ -135,15 +135,15 @@ public:
     /**
      * @internal
      */
-    NormalizedPoint &operator=(const NormalizedPoint &);
+    NormalizedPoint& operator=(const NormalizedPoint&);
 
-    NormalizedPoint(const NormalizedPoint &);
+    NormalizedPoint(const NormalizedPoint&);
     ~NormalizedPoint() = default;
 
     /**
      * Transforms the normalized point with the operations defined by @p matrix.
      */
-    void transform(const QTransform &matrix);
+    void transform(const QTransform& matrix);
 
     /**
      * Returns squared distance to normalized point (@p x, @p y)
@@ -158,7 +158,9 @@ public:
      * on a reference area of size @p xScale x @p yScale.
      * @since 0.17 (KDE 4.11)
      */
-    static double distanceSqr(double x, double y, double xScale, double yScale, const NormalizedPoint &start, const NormalizedPoint &end);
+    static double distanceSqr(double x, double y, double xScale, double yScale,
+                              const NormalizedPoint& start,
+                              const NormalizedPoint& end);
 
     /**
      * The normalized x coordinate.
@@ -175,10 +177,11 @@ public:
  * A NormalizedRect is a rectangle which can be defined by two NormalizedPoints.
  *
  * It describes a rectangular area on a reference area of undefined size.
- * For more information about the normalized coordinate system, see NormalizedPoint.
+ * For more information about the normalized coordinate system, see
+ * NormalizedPoint.
  *
- * In Okular, NormalizedRect can be used e. g. to describe bounding boxes of TextEntity objects,
- * and the highlight area of text selections.
+ * In Okular, NormalizedRect can be used e. g. to describe bounding boxes of
+ * TextEntity objects, and the highlight area of text selections.
  *
  * If you need to describe an area which consists of multiple rectangles,
  * you can use RegularAreaRect instead.
@@ -209,7 +212,8 @@ public:
      * @note
      * The coordinates for @p left and @p top should be lower than
      * @p right and @p bottom, respectively.
-     * At negative width or height the behaviour of some operations is undefined.
+     * At negative width or height the behaviour of some operations is
+     * undefined.
      */
     NormalizedRect(double left, double top, double right, double bottom);
 
@@ -220,26 +224,28 @@ public:
      * @note
      * The rectangle should have positive width and height.
      * You can use e. g. QRect::normalize() to ensure this.
-     * At negative width or height the behaviour of some operations is undefined.
+     * At negative width or height the behaviour of some operations is
+     * undefined.
      */
     NormalizedRect(const QRect rectangle, double xScale, double yScale);
 
     /**
      * @internal
      */
-    NormalizedRect(const NormalizedRect &);
+    NormalizedRect(const NormalizedRect&);
 
     /**
      * @internal
      */
-    NormalizedRect &operator=(const NormalizedRect &other);
+    NormalizedRect& operator=(const NormalizedRect& other);
 
     ~NormalizedRect() = default;
 
     /**
-     * Build a normalized rect from a QRectF, which already has normalized coordinates.
+     * Build a normalized rect from a QRectF, which already has normalized
+     * coordinates.
      */
-    static NormalizedRect fromQRectF(const QRectF &rect);
+    static NormalizedRect fromQRectF(const QRectF& rect);
 
     /**
      * Returns whether this normalized rectangle is a null normalized rect.
@@ -253,16 +259,16 @@ public:
     bool contains(double x, double y) const;
 
     /**
-     * Returns whether the normalized rectangle intersects the @p other normalized
-     * rectangle.
+     * Returns whether the normalized rectangle intersects the @p other
+     * normalized rectangle.
      */
-    bool intersects(const NormalizedRect &other) const;
+    bool intersects(const NormalizedRect& other) const;
 
     /**
-     * This is an overloaded member function, provided for convenience. It behaves essentially
-     * like the above function.
+     * This is an overloaded member function, provided for convenience. It
+     * behaves essentially like the above function.
      */
-    bool intersects(const NormalizedRect *other) const;
+    bool intersects(const NormalizedRect* other) const;
 
     /**
      * Returns whether the normalized rectangle intersects an other normalized
@@ -271,12 +277,14 @@ public:
     bool intersects(double left, double top, double right, double bottom) const;
 
     /**
-     * Returns the rectangle mapped to a reference area of @p xScale x @p yScale.
+     * Returns the rectangle mapped to a reference area of @p xScale x @p
+     * yScale.
      */
     QRect geometry(int xScale, int yScale) const;
 
     /**
-     * Same functionality as geometry, but the output is now rounded before typecasting to int
+     * Same functionality as geometry, but the output is now rounded before
+     * typecasting to int
      *
      * @since 0.14 (KDE 4.8)
      */
@@ -286,27 +294,28 @@ public:
      * Returns the normalized bounding rectangle of the normalized rectangle
      * combined with the @p other normalized rectangle.
      */
-    NormalizedRect operator|(const NormalizedRect &other) const;
+    NormalizedRect operator|(const NormalizedRect& other) const;
 
     /**
      * Sets the normalized rectangle to the normalized bounding rectangle
      * of itself combined with the @p other normalized rectangle.
      */
-    NormalizedRect &operator|=(const NormalizedRect &other);
+    NormalizedRect& operator|=(const NormalizedRect& other);
 
     /**
      * Returns the intersection of this normalized rectangle with the specified
-     * @p other. If the rects do not intersect then the result is a null rectangle.
+     * @p other. If the rects do not intersect then the result is a null
+     * rectangle.
      *
      * @since 0.7 (KDE 4.1)
      */
-    NormalizedRect operator&(const NormalizedRect &other) const;
+    NormalizedRect operator&(const NormalizedRect& other) const;
 
     /**
      * Returns whether the normalized rectangle is equal to the @p other
      * normalized rectangle.
      */
-    bool operator==(const NormalizedRect &other) const;
+    bool operator==(const NormalizedRect& other) const;
 
     /**
      * Returns the center of the rectangle
@@ -315,15 +324,17 @@ public:
     NormalizedPoint center() const;
 
     /**
-     * Transforms the normalized rectangle with the operations defined by @p matrix.
+     * Transforms the normalized rectangle with the operations defined by @p
+     * matrix.
      */
-    void transform(const QTransform &matrix);
+    void transform(const QTransform& matrix);
 
     /**
-     * Returns true if the point @p pt is located below the bottom of the rectangle
+     * Returns true if the point @p pt is located below the bottom of the
+     * rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isBottom(const NormalizedPoint &pt) const
+    bool isBottom(const NormalizedPoint& pt) const
     {
         return bottom < pt.y;
     }
@@ -332,7 +343,7 @@ public:
      * Returns true if the point @p pt is located above the top of the rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isTop(const NormalizedPoint &pt) const
+    bool isTop(const NormalizedPoint& pt) const
     {
         return top > pt.y;
     }
@@ -341,34 +352,37 @@ public:
      * Returns true if the point @p pt is located below the top of the rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isBottomOrLevel(const NormalizedPoint &pt) const
+    bool isBottomOrLevel(const NormalizedPoint& pt) const
     {
         return top < pt.y;
     }
 
     /**
-     * Returns true if the point @p pt is located above the bottom of the rectangle
+     * Returns true if the point @p pt is located above the bottom of the
+     * rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isTopOrLevel(const NormalizedPoint &pt) const
+    bool isTopOrLevel(const NormalizedPoint& pt) const
     {
         return bottom > pt.y;
     }
 
     /**
-     * Returns true if the point @p pt is located to the right of the left edge of the rectangle
+     * Returns true if the point @p pt is located to the right of the left edge
+     * of the rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isLeft(const NormalizedPoint &pt) const
+    bool isLeft(const NormalizedPoint& pt) const
     {
         return left < pt.x;
     }
 
     /**
-     * Returns true if the point @p pt is located to the left of the right edge of the rectangle
+     * Returns true if the point @p pt is located to the left of the right edge
+     * of the rectangle
      * @since 0.14 (KDE 4.8)
      */
-    bool isRight(const NormalizedPoint &pt) const
+    bool isRight(const NormalizedPoint& pt) const
     {
         return right > pt.x;
     }
@@ -382,16 +396,22 @@ public:
     double distanceSqr(double x, double y, double xScale, double yScale) const
     {
         double distX = 0;
-        if (x < left) {
+        if(x < left)
+        {
             distX = left - x;
-        } else if (x > right) {
+        }
+        else if(x > right)
+        {
             distX = x - right;
         }
 
         double distY = 0;
-        if (top > y) {
+        if(top > y)
+        {
             distY = top - y;
-        } else if (bottom < y) {
+        }
+        else if(bottom < y)
+        {
             distY = y - bottom;
         }
         return pow(distX * xScale, 2) + pow(distY * yScale, 2);
@@ -429,10 +449,12 @@ public:
      */
     double bottom;
 };
+
 // KDE_DUMMY_QHASH_FUNCTION(NormalizedRect)
 
 /**
- * @short An area with normalized coordinates that contains a reference to an object.
+ * @short An area with normalized coordinates that contains a reference to an
+ * object.
  *
  * These areas ("rects") contain a pointer to a document object
  * (such as a hyperlink, an action, or something like that).
@@ -445,7 +467,8 @@ public:
  *  - Image     : class Image : description of an image (n/a)
  *  - Annotation: class Annotation: description of an annotation
  *
- * For more information about the normalized coordinate system, see NormalizedPoint.
+ * For more information about the normalized coordinate system, see
+ * NormalizedPoint.
  *
  * @see NormalizedPoint
  */
@@ -455,11 +478,12 @@ public:
     /**
      * Describes the type of storable object.
      */
-    enum ObjectType {
-        Action,      ///< An action
-        Image,       ///< An image
-        OAnnotation, ///< An annotation
-        SourceRef    ///< A source reference
+    enum ObjectType
+    {
+        Action,  ///< An action
+        Image,  ///< An image
+        OAnnotation,  ///< An annotation
+        SourceRef  ///< A source reference
     };
 
     /**
@@ -473,25 +497,27 @@ public:
      * @param type The type of the storable object @see ObjectType.
      * @param object The pointer to the storable object.
      */
-    ObjectRect(double left, double top, double right, double bottom, bool ellipse, ObjectType type, void *object);
+    ObjectRect(double left, double top, double right, double bottom,
+               bool ellipse, ObjectType type, void* object);
 
     /**
      * This is an overloaded member function, provided for convenience.
      */
-    ObjectRect(const NormalizedRect &r, bool ellipse, ObjectType type, void *object);
+    ObjectRect(const NormalizedRect& r, bool ellipse, ObjectType type,
+               void* object);
 
     /**
      * This is an overloaded member function, provided for convenience.
      */
-    ObjectRect(const QPolygonF &poly, ObjectType type, void *object);
+    ObjectRect(const QPolygonF& poly, ObjectType type, void* object);
 
     /**
      * Destroys the object rectangle.
      */
     virtual ~ObjectRect();
 
-    ObjectRect(const ObjectRect &o) = delete;
-    ObjectRect &operator=(const ObjectRect &o) = delete;
+    ObjectRect(const ObjectRect& o) = delete;
+    ObjectRect& operator=(const ObjectRect& o) = delete;
 
     /**
      * Returns the object type of the object rectangle.
@@ -502,12 +528,12 @@ public:
     /**
      * Returns the storable object of the object rectangle.
      */
-    const void *object() const;
+    const void* object() const;
 
     /**
      * Returns the region that is covered by the object rectangle.
      */
-    const QPainterPath &region() const;
+    const QPainterPath& region() const;
 
     /**
      * Returns the bounding rect of the object rectangle for the
@@ -516,15 +542,17 @@ public:
     virtual QRect boundingRect(double xScale, double yScale) const;
 
     /**
-     * Returns whether the object rectangle contains the point with absolute coordinates
+     * Returns whether the object rectangle contains the point with absolute
+     * coordinates
      * (@p x, @p y) at a page size of @p xScale x @p yScale.
      */
-    virtual bool contains(double x, double y, double xScale, double yScale) const;
+    virtual bool contains(double x, double y, double xScale,
+                          double yScale) const;
 
     /**
      * Transforms the object rectangle with the operations defined by @p matrix.
      */
-    virtual void transform(const QTransform &matrix);
+    virtual void transform(const QTransform& matrix);
 
     /**
      * Returns the squared distance between the object
@@ -539,7 +567,7 @@ public:
 
 protected:
     ObjectType m_objectType;
-    void *m_object;
+    void* m_object;
     QPainterPath m_path;
     QPainterPath m_transformedPath;
 };
@@ -554,7 +582,7 @@ public:
      * Creates a new annotation object rectangle with the
      * given @p annotation.
      */
-    explicit AnnotationObjectRect(Annotation *annotation);
+    explicit AnnotationObjectRect(Annotation* annotation);
 
     /**
      * Destroys the annotation object rectangle.
@@ -564,7 +592,7 @@ public:
     /**
      * Returns the annotation object of the annotation object rectangle.
      */
-    Annotation *annotation() const;
+    Annotation* annotation() const;
 
     /**
      * Returns the bounding rect of the annotation object rectangle for the
@@ -573,18 +601,20 @@ public:
     QRect boundingRect(double xScale, double yScale) const override;
 
     /**
-     * Returns whether the annotation object rectangle contains the point @p x, @p y for the
-     * scaling factor @p xScale and @p yScale.
+     * Returns whether the annotation object rectangle contains the point @p x,
+     * @p y for the scaling factor @p xScale and @p yScale.
      */
-    bool contains(double x, double y, double xScale, double yScale) const override;
+    bool contains(double x, double y, double xScale,
+                  double yScale) const override;
 
     /**
-     * Transforms the annotation object rectangle with the operations defined by @p matrix.
+     * Transforms the annotation object rectangle with the operations defined by
+     * @p matrix.
      */
-    void transform(const QTransform &matrix) override;
+    void transform(const QTransform& matrix) override;
 
 private:
-    Annotation *m_annotation;
+    Annotation* m_annotation;
 };
 
 /**
@@ -601,60 +631,69 @@ public:
      * @param point The point of the source reference.
      * @param srcRef The storable source reference object.
      */
-    SourceRefObjectRect(const NormalizedPoint &point, void *srcRef);
+    SourceRefObjectRect(const NormalizedPoint& point, void* srcRef);
 
     /**
-     * Returns the bounding rect of the source reference object rectangle for the
-     * scaling factor @p xScale and @p yScale.
+     * Returns the bounding rect of the source reference object rectangle for
+     * the scaling factor @p xScale and @p yScale.
      */
     QRect boundingRect(double xScale, double yScale) const override;
 
     /**
-     * Returns whether the source reference object rectangle contains the point @p x, @p y for the
-     * scaling factor @p xScale and @p yScale.
+     * Returns whether the source reference object rectangle contains the point
+     * @p x, @p y for the scaling factor @p xScale and @p yScale.
      */
-    bool contains(double x, double y, double xScale, double yScale) const override;
+    bool contains(double x, double y, double xScale,
+                  double yScale) const override;
 
 private:
     NormalizedPoint m_point;
 };
 
 /**
- * This class is an object rect that doesn't own the given pointer, i.e. won't delete it on destruction
+ * This class is an object rect that doesn't own the given pointer, i.e. won't
+ * delete it on destruction
  * @since 1.7
  */
 class OKULARCORE_EXPORT NonOwningObjectRect : public ObjectRect
 {
 public:
-    NonOwningObjectRect(double left, double top, double right, double bottom, bool ellipse, ObjectType type, void *object);
+    NonOwningObjectRect(double left, double top, double right, double bottom,
+                        bool ellipse, ObjectType type, void* object);
     ~NonOwningObjectRect() override;
 };
 
 /// @cond PRIVATE
 /** @internal */
 /** @internal */
-template<typename T> T *givePtr(T &t)
+template<typename T>
+T* givePtr(T& t)
 {
     return &t;
 }
 
 /** @internal */
-template<typename T> T &deref(T &t)
+template<typename T>
+T& deref(T& t)
 {
     return t;
 }
+
 /// @endcond
 
 /**
- * @short An area with normalized coordinates, consisting of NormalizedShape objects.
+ * @short An area with normalized coordinates, consisting of NormalizedShape
+ * objects.
  *
  * This is a template class to describe an area which consists of
  * multiple shapes of the same type, intersecting or non-intersecting.
- * The coordinates are normalized, and can be mapped to a reference area of defined size.
- * For more information about the normalized coordinate system, see NormalizedPoint.
+ * The coordinates are normalized, and can be mapped to a reference area of
+ * defined size. For more information about the normalized coordinate system,
+ * see NormalizedPoint.
  *
  * Class NormalizedShape \b must have the following functions/operators defined:
- * - bool contains( double, double ), whether it contains the given NormalizedPoint
+ * - bool contains( double, double ), whether it contains the given
+ * NormalizedPoint
  * - bool intersects( NormalizedShape )
  * - bool isNull()
  * - Shape geometry( int, int ), which maps to the reference area
@@ -662,7 +701,8 @@ template<typename T> T &deref(T &t)
  *
  * @see RegularAreaRect, NormalizedPoint
  */
-template<class NormalizedShape, class Shape> class RegularArea : public QList<NormalizedShape>
+template<class NormalizedShape, class Shape>
+class RegularArea : public QList<NormalizedShape>
 {
 public:
     /**
@@ -671,32 +711,34 @@ public:
     bool contains(double x, double y) const;
 
     /**
-     * Returns whether this area contains a NormalizedShape object that equals @p shape.
+     * Returns whether this area contains a NormalizedShape object that equals
+     * @p shape.
      *
      * @note
-     * The original NormalizedShape objects can be lost if simplify() was called.
+     * The original NormalizedShape objects can be lost if simplify() was
+     * called.
      */
-    bool contains(const NormalizedShape &shape) const;
+    bool contains(const NormalizedShape& shape) const;
 
     /**
      * Returns whether this area intersects with the given @p area.
      */
-    bool intersects(const RegularArea<NormalizedShape, Shape> *area) const;
+    bool intersects(const RegularArea<NormalizedShape, Shape>* area) const;
 
     /**
      * Returns whether the regular area intersects with the given @p shape.
      */
-    bool intersects(const NormalizedShape &shape) const;
+    bool intersects(const NormalizedShape& shape) const;
 
     /**
      * Appends the given @p area to this area.
      */
-    void appendArea(const RegularArea<NormalizedShape, Shape> *area);
+    void appendArea(const RegularArea<NormalizedShape, Shape>* area);
 
     /**
      * Appends the given @p shape to this area.
      */
-    void appendShape(const NormalizedShape &shape, MergeSide side = MergeAll);
+    void appendShape(const NormalizedShape& shape, MergeSide side = MergeAll);
 
     /**
      * Simplifies this regular area by merging its intersecting subareas.
@@ -719,22 +761,27 @@ public:
     /**
      * Transforms the regular area with the operations defined by @p matrix.
      */
-    void transform(const QTransform &matrix);
+    void transform(const QTransform& matrix);
 };
 
-template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, Shape>::simplify()
+template<class NormalizedShape, class Shape>
+void RegularArea<NormalizedShape, Shape>::simplify()
 {
 #ifdef DEBUG_REGULARAREA
     int prev_end = this->count();
 #endif
     int end = this->count() - 1, x = 0;
-    for (int i = 0; i < end; ++i) {
-        if (givePtr((*this)[x])->intersects(deref((*this)[i + 1]))) {
+    for(int i = 0; i < end; ++i)
+    {
+        if(givePtr((*this)[x])->intersects(deref((*this)[i + 1])))
+        {
             deref((*this)[x]) |= deref((*this)[i + 1]);
             this->removeAt(i + 1);
             --end;
             --i;
-        } else {
+        }
+        else
+        {
             x = i + 1;
         }
     }
@@ -743,15 +790,20 @@ template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, S
 #endif
 }
 
-template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, Shape>::isNull() const
+template<class NormalizedShape, class Shape>
+bool RegularArea<NormalizedShape, Shape>::isNull() const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return true;
     }
 
-    typename QList<NormalizedShape>::const_iterator it = this->begin(), itEnd = this->end();
-    for (; it != itEnd; ++it) {
-        if (!givePtr(*it)->isNull()) {
+    typename QList<NormalizedShape>::const_iterator it = this->begin(),
+                                                    itEnd = this->end();
+    for(; it != itEnd; ++it)
+    {
+        if(!givePtr(*it)->isNull())
+        {
             return false;
         }
     }
@@ -759,15 +811,21 @@ template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, S
     return true;
 }
 
-template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, Shape>::intersects(const NormalizedShape &shape) const
+template<class NormalizedShape, class Shape>
+bool RegularArea<NormalizedShape, Shape>::intersects(
+    const NormalizedShape& shape) const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return false;
     }
 
-    typename QList<NormalizedShape>::const_iterator it = this->begin(), itEnd = this->end();
-    for (; it != itEnd; ++it) {
-        if (!givePtr(*it)->isNull() && givePtr(*it)->intersects(shape)) {
+    typename QList<NormalizedShape>::const_iterator it = this->begin(),
+                                                    itEnd = this->end();
+    for(; it != itEnd; ++it)
+    {
+        if(!givePtr(*it)->isNull() && givePtr(*it)->intersects(shape))
+        {
             return true;
         }
     }
@@ -775,17 +833,25 @@ template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, S
     return false;
 }
 
-template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, Shape>::intersects(const RegularArea<NormalizedShape, Shape> *area) const
+template<class NormalizedShape, class Shape>
+bool RegularArea<NormalizedShape, Shape>::intersects(
+    const RegularArea<NormalizedShape, Shape>* area) const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return false;
     }
 
-    typename QList<NormalizedShape>::const_iterator it = this->begin(), itEnd = this->end();
-    for (; it != itEnd; ++it) {
-        typename QList<NormalizedShape>::const_iterator areaIt = area->begin(), areaItEnd = area->end();
-        for (; areaIt != areaItEnd; ++areaIt) {
-            if (!(*it).isNull() && (*it).intersects(*areaIt)) {
+    typename QList<NormalizedShape>::const_iterator it = this->begin(),
+                                                    itEnd = this->end();
+    for(; it != itEnd; ++it)
+    {
+        typename QList<NormalizedShape>::const_iterator areaIt = area->begin(),
+                                                        areaItEnd = area->end();
+        for(; areaIt != areaItEnd; ++areaIt)
+        {
+            if(!(*it).isNull() && (*it).intersects(*areaIt))
+            {
                 return true;
             }
         }
@@ -794,23 +860,32 @@ template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, S
     return false;
 }
 
-template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, Shape>::appendArea(const RegularArea<NormalizedShape, Shape> *area)
+template<class NormalizedShape, class Shape>
+void RegularArea<NormalizedShape, Shape>::appendArea(
+    const RegularArea<NormalizedShape, Shape>* area)
 {
-    typename QList<NormalizedShape>::const_iterator areaIt = area->begin(), areaItEnd = area->end();
-    for (; areaIt != areaItEnd; ++areaIt) {
+    typename QList<NormalizedShape>::const_iterator areaIt = area->begin(),
+                                                    areaItEnd = area->end();
+    for(; areaIt != areaItEnd; ++areaIt)
+    {
         this->append(*areaIt);
     }
 }
 
-template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, Shape>::appendShape(const NormalizedShape &shape, MergeSide side)
+template<class NormalizedShape, class Shape>
+void RegularArea<NormalizedShape, Shape>::appendShape(
+    const NormalizedShape& shape, MergeSide side)
 {
     int size = this->count();
     // if the list is empty, adds the shape normally
-    if (size == 0) {
+    if(size == 0)
+    {
         this->append(shape);
-    } else {
+    }
+    else
+    {
         bool intersection = false;
-        NormalizedShape &last = (*this)[size - 1];
+        NormalizedShape& last = (*this)[size - 1];
 #define O_LAST givePtr(last)
 #define O_LAST_R O_LAST->right
 #define O_LAST_L O_LAST->left
@@ -821,18 +896,27 @@ template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, S
 #define O_NEW_L O_NEW->left
 #define O_NEW_T O_NEW->top
 #define O_NEW_B O_NEW->bottom
-        switch (side) {
+        switch(side)
+        {
         case MergeRight:
-            intersection = (O_LAST_R >= O_NEW_L) && (O_LAST_L <= O_NEW_R) && ((O_LAST_T <= O_NEW_T && O_LAST_B >= O_NEW_B) || (O_LAST_T >= O_NEW_T && O_LAST_B <= O_NEW_B));
+            intersection = (O_LAST_R >= O_NEW_L) && (O_LAST_L <= O_NEW_R) &&
+                           ((O_LAST_T <= O_NEW_T && O_LAST_B >= O_NEW_B) ||
+                            (O_LAST_T >= O_NEW_T && O_LAST_B <= O_NEW_B));
             break;
         case MergeBottom:
-            intersection = (O_LAST_B >= O_NEW_T) && (O_LAST_T <= O_NEW_B) && ((O_LAST_R <= O_NEW_R && O_LAST_L >= O_NEW_L) || (O_LAST_R >= O_NEW_R && O_LAST_L <= O_NEW_L));
+            intersection = (O_LAST_B >= O_NEW_T) && (O_LAST_T <= O_NEW_B) &&
+                           ((O_LAST_R <= O_NEW_R && O_LAST_L >= O_NEW_L) ||
+                            (O_LAST_R >= O_NEW_R && O_LAST_L <= O_NEW_L));
             break;
         case MergeLeft:
-            intersection = (O_LAST_L <= O_NEW_R) && (O_LAST_R >= O_NEW_L) && ((O_LAST_T <= O_NEW_T && O_LAST_B >= O_NEW_B) || (O_LAST_T >= O_NEW_T && O_LAST_B <= O_NEW_B));
+            intersection = (O_LAST_L <= O_NEW_R) && (O_LAST_R >= O_NEW_L) &&
+                           ((O_LAST_T <= O_NEW_T && O_LAST_B >= O_NEW_B) ||
+                            (O_LAST_T >= O_NEW_T && O_LAST_B <= O_NEW_B));
             break;
         case MergeTop:
-            intersection = (O_LAST_T <= O_NEW_B) && (O_LAST_B >= O_NEW_T) && ((O_LAST_R <= O_NEW_R && O_LAST_L >= O_NEW_L) || (O_LAST_R >= O_NEW_R && O_LAST_L <= O_NEW_L));
+            intersection = (O_LAST_T <= O_NEW_B) && (O_LAST_B >= O_NEW_T) &&
+                           ((O_LAST_R <= O_NEW_R && O_LAST_L >= O_NEW_L) ||
+                            (O_LAST_R >= O_NEW_R && O_LAST_L <= O_NEW_L));
             break;
         case MergeAll:
             intersection = O_LAST->intersects(shape);
@@ -850,23 +934,31 @@ template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, S
 #undef O_NEW_B
         // if the new shape intersects with the last shape in the list, then
         // merge it with that and delete the shape
-        if (intersection) {
+        if(intersection)
+        {
             deref((*this)[size - 1]) |= deref(shape);
-        } else {
+        }
+        else
+        {
             this->append(shape);
         }
     }
 }
 
-template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, Shape>::contains(double x, double y) const
+template<class NormalizedShape, class Shape>
+bool RegularArea<NormalizedShape, Shape>::contains(double x, double y) const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return false;
     }
 
-    typename QList<NormalizedShape>::const_iterator it = this->begin(), itEnd = this->end();
-    for (; it != itEnd; ++it) {
-        if ((*it).contains(x, y)) {
+    typename QList<NormalizedShape>::const_iterator it = this->begin(),
+                                                    itEnd = this->end();
+    for(; it != itEnd; ++it)
+    {
+        if((*it).contains(x, y))
+        {
             return true;
         }
     }
@@ -874,25 +966,34 @@ template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, S
     return false;
 }
 
-template<class NormalizedShape, class Shape> bool RegularArea<NormalizedShape, Shape>::contains(const NormalizedShape &shape) const
+template<class NormalizedShape, class Shape>
+bool RegularArea<NormalizedShape, Shape>::contains(
+    const NormalizedShape& shape) const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return false;
     }
 
     return QList<NormalizedShape>::contains(shape);
 }
 
-template<class NormalizedShape, class Shape> QList<Shape> RegularArea<NormalizedShape, Shape>::geometry(int xScale, int yScale, int dx, int dy) const
+template<class NormalizedShape, class Shape>
+QList<Shape> RegularArea<NormalizedShape, Shape>::geometry(int xScale,
+                                                           int yScale, int dx,
+                                                           int dy) const
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return QList<Shape>();
     }
 
     QList<Shape> ret;
     Shape t;
-    typename QList<NormalizedShape>::const_iterator it = this->begin(), itEnd = this->end();
-    for (; it != itEnd; ++it) {
+    typename QList<NormalizedShape>::const_iterator it = this->begin(),
+                                                    itEnd = this->end();
+    for(; it != itEnd; ++it)
+    {
         t = givePtr(*it)->geometry(xScale, yScale);
         t.translate(dx, dy);
         ret.append(t);
@@ -901,13 +1002,16 @@ template<class NormalizedShape, class Shape> QList<Shape> RegularArea<Normalized
     return ret;
 }
 
-template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, Shape>::transform(const QTransform &matrix)
+template<class NormalizedShape, class Shape>
+void RegularArea<NormalizedShape, Shape>::transform(const QTransform& matrix)
 {
-    if (this->isEmpty()) {
+    if(this->isEmpty())
+    {
         return;
     }
 
-    for (int i = 0; i < this->count(); ++i) {
+    for(int i = 0; i < this->count(); ++i)
+    {
         givePtr((*this)[i])->transform(matrix);
     }
 }
@@ -917,30 +1021,32 @@ template<class NormalizedShape, class Shape> void RegularArea<NormalizedShape, S
  * multiple rectangles using normalized coordinates.
  *
  * This area can be mapped to a reference area, resulting in a list of QRects.
- * For more information about the normalized coordinate system, see NormalizedPoint.
+ * For more information about the normalized coordinate system, see
+ * NormalizedPoint.
  *
  * Okular uses this area e. g. to describe a text highlight area,
  * which consists of multiple, intersecting or non-intersecting rectangles.
  *
  * @see NormalizedRect, NormalizedPoint
  */
-class OKULARCORE_EXPORT RegularAreaRect : public RegularArea<NormalizedRect, QRect>
+class OKULARCORE_EXPORT RegularAreaRect
+    : public RegularArea<NormalizedRect, QRect>
 {
 public:
     RegularAreaRect();
-    RegularAreaRect(const RegularAreaRect &rar);
+    RegularAreaRect(const RegularAreaRect& rar);
     ~RegularAreaRect();
 
-    RegularAreaRect &operator=(const RegularAreaRect &rar);
+    RegularAreaRect& operator=(const RegularAreaRect& rar);
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 };
 
 /**
- * This class stores the geometry of a highlighting area in normalized coordinates,
- * together with highlighting specific information.
+ * This class stores the geometry of a highlighting area in normalized
+ * coordinates, together with highlighting specific information.
  */
 class HighlightAreaRect : public RegularAreaRect
 {
@@ -949,7 +1055,7 @@ public:
      * Creates a new highlight area rect with the coordinates of
      * the given @p area.
      */
-    explicit HighlightAreaRect(const RegularAreaRect *area = nullptr);
+    explicit HighlightAreaRect(const RegularAreaRect* area = nullptr);
 
     /**
      * The search ID of the highlight owner.
@@ -962,19 +1068,21 @@ public:
     QColor color;
 };
 
-uint qHash(const Okular::NormalizedRect &r, uint seed = 0);
-}
+uint qHash(const Okular::NormalizedRect& r, uint seed = 0);
+}  // namespace Okular
 
 #ifndef QT_NO_DEBUG_STREAM
 /**
  * Debug operator for normalized @p point.
  */
-OKULARCORE_EXPORT QDebug operator<<(QDebug str, const Okular::NormalizedPoint &point);
+OKULARCORE_EXPORT QDebug operator<<(QDebug str,
+                                    const Okular::NormalizedPoint& point);
 
 /**
  * Debug operator for normalized @p rect.
  */
-OKULARCORE_EXPORT QDebug operator<<(QDebug str, const Okular::NormalizedRect &rect);
+OKULARCORE_EXPORT QDebug operator<<(QDebug str,
+                                    const Okular::NormalizedRect& rect);
 #endif
 
 #endif

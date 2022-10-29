@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// fontEncodingPool.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- fontEncodingPool.h
 //
 // Part of KDVI - A DVI previewer for the KDE desktop environment
 //
@@ -9,9 +9,8 @@
 #ifndef _FONTENCODINGPOOL_H
 #define _FONTENCODINGPOOL_H
 
-#include "fontEncoding.h"
-
 #include <QHash>
+#include "fontEncoding.h"
 
 class QString;
 
@@ -21,13 +20,13 @@ public:
     fontEncodingPool();
     ~fontEncodingPool();
 
-    fontEncodingPool(const fontEncodingPool &) = delete;
-    fontEncodingPool &operator=(const fontEncodingPool &) = delete;
+    fontEncodingPool(const fontEncodingPool&) = delete;
+    fontEncodingPool& operator=(const fontEncodingPool&) = delete;
 
-    fontEncoding *findByName(const QString &name);
+    fontEncoding* findByName(const QString& name);
 
 private:
-    QHash<QString, fontEncoding *> dictionary;
+    QHash<QString, fontEncoding*> dictionary;
 };
 
 #endif

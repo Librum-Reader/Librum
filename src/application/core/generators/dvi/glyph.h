@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 
 #ifndef _GLYPH_H
 #define _GLYPH_H
@@ -6,19 +7,20 @@
 #include <QColor>
 #include <QImage>
 
-struct bitmap {
+struct bitmap
+{
     bitmap();
     ~bitmap();
 
-    bitmap(const bitmap &) = delete;
-    bitmap &operator=(const bitmap &) = delete;
+    bitmap(const bitmap&) = delete;
+    bitmap& operator=(const bitmap&) = delete;
 
     // width and height in pixels
     quint16 w, h;
     // scan-line width in bytes
     quint16 bytes_wide;
     // pointer to the bits
-    char *bits;
+    char* bits;
 };
 
 class glyph
@@ -44,4 +46,4 @@ public:
     short x2, y2;
 };
 
-#endif // ifndef _GLYPH_H
+#endif  // ifndef _GLYPH_H

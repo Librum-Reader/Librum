@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // anchor.h
 //
@@ -44,19 +45,21 @@ public:
         @param pg number of the page
         @param _distance_from_top distance from the top of the page
     */
-    Anchor(quint16 pg, const Length _distance_from_top)
-        : page(pg)
-        , distance_from_top(_distance_from_top)
+    Anchor(quint16 pg, const Length _distance_from_top) :
+        page(pg),
+        distance_from_top(_distance_from_top)
     {
     }
 
     /** \brief quick validity check for anchors
 
-    @returns true if the page number is valid, and 0mm <= distance_from_top <= 2m
+    @returns true if the page number is valid, and 0mm <= distance_from_top <=
+    2m
     */
     bool isValid() const
     {
-        return page.isValid() && (0.0 <= distance_from_top.getLength_in_mm()) && (distance_from_top.getLength_in_mm() <= 2000.0);
+        return page.isValid() && (0.0 <= distance_from_top.getLength_in_mm()) &&
+               (distance_from_top.getLength_in_mm() <= 2000.0);
     }
 
     /** \brief Page number that this anchor point to */

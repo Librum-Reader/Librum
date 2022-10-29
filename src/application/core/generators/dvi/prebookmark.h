@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 /*
     SPDX-FileCopyrightText: 2005 Stefan Kebekus <kebekus@kde.org>
     SPDX-License-Identifier: GPL-2.0-or-later
@@ -22,7 +23,8 @@ public:
         anchorName.clear();
         noOfChildren = 0;
     }
-    PreBookmark(const QString &t, const QString &a, quint16 n)
+
+    PreBookmark(const QString& t, const QString& a, quint16 n)
     {
         title = t;
         anchorName = a;

@@ -18,10 +18,10 @@ class EmbeddedFile;
 class JSData
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSObject wrapFile(KJSContext *ctx, EmbeddedFile *f);
+    static void initType(KJSContext* ctx);
+    static KJSObject wrapFile(KJSContext* ctx, EmbeddedFile* f);
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 /*
  * The layout of a font information block.
  * There is one of these for every loaded font or magnification thereof.
@@ -31,13 +32,13 @@ public:
     macro();
     ~macro();
 
-    macro(const macro &) = delete;
-    macro &operator=(const macro &) = delete;
+    macro(const macro&) = delete;
+    macro& operator=(const macro&) = delete;
 
     // address of first byte of macro
-    unsigned char *pos;
+    unsigned char* pos;
     // address of last+1 byte
-    unsigned char *end;
+    unsigned char* end;
     // DVI units to move reference point
     qint32 dvi_advance_in_units_of_design_size_by_2e20;
     // if memory at pos should be returned on destruction
@@ -53,7 +54,9 @@ public:
     // ensure that character numbers are stored in ints rather than
     // unsigned chars.
     static const unsigned int max_num_of_chars_in_font = 256;
-    enum font_flags {
+
+    enum font_flags
+    {
         // used for housekeeping
         FONT_IN_USE = 1,
         // if font file has been read
@@ -64,16 +67,25 @@ public:
         FONT_KPSE_NAME = 8
     };
 
-    enum font_type { TEX_PK, TEX_VIRTUAL, TEX_FONTMETRIC, FREETYPE };
+    enum font_type
+    {
+        TEX_PK,
+        TEX_VIRTUAL,
+        TEX_FONTMETRIC,
+        FREETYPE
+    };
 
-    TeXFontDefinition(const QString &nfontname, double _displayResolution_in_dpi, quint32 chk, qint32 _scaled_size_in_DVI_units, class fontPool *pool, double _enlargement);
+    TeXFontDefinition(const QString& nfontname,
+                      double _displayResolution_in_dpi, quint32 chk,
+                      qint32 _scaled_size_in_DVI_units, class fontPool* pool,
+                      double _enlargement);
     ~TeXFontDefinition();
 
-    TeXFontDefinition(const TeXFontDefinition &) = delete;
-    TeXFontDefinition &operator=(const TeXFontDefinition &) = delete;
+    TeXFontDefinition(const TeXFontDefinition&) = delete;
+    TeXFontDefinition& operator=(const TeXFontDefinition&) = delete;
 
     void reset();
-    void fontNameReceiver(const QString &);
+    void fontNameReceiver(const QString&);
 
     // Members for character fonts
     void setDisplayResolution(double _displayResolution_in_dpi);
@@ -82,6 +94,7 @@ public:
     {
         return ((flags & FONT_KPSE_NAME) != 0);
     }
+
     void markAsLocated()
     {
         flags |= FONT_KPSE_NAME;
@@ -89,7 +102,7 @@ public:
 
     void mark_as_used();
     // Pointer to the pool that contains this font.
-    class fontPool *font_pool;
+    class fontPool* font_pool;
     // name of font, such as "cmr10"
     QString fontname;
     // flags byte (see values below)
@@ -105,31 +118,32 @@ public:
     double displayResolution_in_dpi;
 
     // open font file or NULL
-    FILE *file;
+    FILE* file;
     // name of font file
     QString filename;
 
-    TeXFont *font;
+    TeXFont* font;
     // used by (loaded) virtual fonts
-    macro *macrotable;
+    macro* macrotable;
     // used by (loaded) virtual fonts, list of fonts used by this vf,
-    QHash<int, TeXFontDefinition *> vf_table;
+    QHash<int, TeXFontDefinition*> vf_table;
     // accessible by number
     // used by (loaded) virtual fonts, list of fonts used by this vf
-    TeXFontDefinition *first_font;
+    TeXFontDefinition* first_font;
 
 #ifdef HAVE_FREETYPE
-    const QString &getFullFontName() const
+    const QString& getFullFontName() const
     {
         return fullFontName;
     }
-    const QString &getFullEncodingName() const
+
+    const QString& getFullEncodingName() const
     {
         return fullEncodingName;
     }
 #endif
 
-    const font_type &getFontType() const
+    const font_type& getFontType() const
     {
         return fontType;
     };

@@ -1,4 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*-
 //
 // Class: textBox
 //
@@ -43,9 +44,9 @@ public:
     @param re value for the box
     @param lT valus for the text field
     */
-    TextBox(const QRect re, const QString &lT)
-        : box(re)
-        , text(lT)
+    TextBox(const QRect re, const QString& lT) :
+        box(re),
+        text(lT)
     {
     }
 

@@ -19,12 +19,12 @@ class DocumentPrivate;
 class JSApp
 {
 public:
-    static void initType(KJSContext *ctx);
-    static KJSObject object(KJSContext *ctx, DocumentPrivate *doc);
-    static KJSObject wrapTimer(KJSContext *ctx, QTimer *timer);
+    static void initType(KJSContext* ctx);
+    static KJSObject object(KJSContext* ctx, DocumentPrivate* doc);
+    static KJSObject wrapTimer(KJSContext* ctx, QTimer* timer);
     static void clearCachedFields();
 };
 
-}
+}  // namespace Okular
 
 #endif

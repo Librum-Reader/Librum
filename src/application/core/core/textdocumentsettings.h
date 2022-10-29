@@ -7,12 +7,11 @@
 #ifndef _OKULAR_TEXTDOCUMENTSETTINGS_H_
 #define _OKULAR_TEXTDOCUMENTSETTINGS_H_
 
-#include "okularcore_export.h"
-
 #include <KConfigSkeleton>
 #include <QFont>
 #include <QObject>
 #include <QWidget>
+#include "okularcore_export.h"
 
 namespace Okular
 {
@@ -51,11 +50,13 @@ class TextDocumentSettingsPrivate;
  * }
  * void YourGenerator::addPages( KConfigDialog* dlg )
  * {
- *     Okular::TextDocumentSettingsWidget *widget = new Okular::TextDocumentSettingsWidget();
+ *     Okular::TextDocumentSettingsWidget *widget = new
+ * Okular::TextDocumentSettingsWidget();
  *
  *     KIntSpinBox *customArgumentWidget = new KIntSpinBox( dlg );
- *     customArgumentWidget->setObjectName( QString::fromUtf8( "kcfg_CustomArgument" ) );
- *     widget->addRow( "Custom argument", customArgumentWidget );
+ *     customArgumentWidget->setObjectName( QString::fromUtf8(
+ * "kcfg_CustomArgument" ) ); widget->addRow( "Custom argument",
+ * customArgumentWidget );
  *
  *     Okular::TextDocumentSettings *settings = generalSettings();
  *     settings->addItemString( "CustomArgument", customArgument );
@@ -79,15 +80,15 @@ class OKULARCORE_EXPORT TextDocumentSettingsWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit TextDocumentSettingsWidget(QWidget *parent = nullptr);
+    explicit TextDocumentSettingsWidget(QWidget* parent = nullptr);
     ~TextDocumentSettingsWidget() override;
 
-    void addRow(const QString &labelText, QWidget *widget);
+    void addRow(const QString& labelText, QWidget* widget);
 
 private:
     friend class TextDocumentGenerator;
 
-    TextDocumentSettingsWidgetPrivate *d_ptr;
+    TextDocumentSettingsWidgetPrivate* d_ptr;
     Q_DECLARE_PRIVATE(TextDocumentSettingsWidget)
     Q_DISABLE_COPY(TextDocumentSettingsWidget)
 };
@@ -110,13 +111,13 @@ public:
 private:
     friend class TextDocumentGenerator;
 
-    TextDocumentSettings(const QString &config, QObject *parent);
+    TextDocumentSettings(const QString& config, QObject* parent);
 
-    TextDocumentSettingsPrivate *d_ptr;
+    TextDocumentSettingsPrivate* d_ptr;
     Q_DECLARE_PRIVATE(TextDocumentSettings)
     Q_DISABLE_COPY(TextDocumentSettings)
 };
 
-}
+}  // namespace Okular
 
 #endif

@@ -1,5 +1,5 @@
-// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0; -*-
-// fontpool.h
+// -*- Mode: C++; c-basic-offset: 2; indent-tabs-mode: nil; c-brace-offset: 0;
+// -*- fontpool.h
 //
 // SPDX-FileCopyrightText: 2001-2004 Stefan Kebekus
 // SPDX-License-Identifier: GPL-2.0-or-later
@@ -7,17 +7,16 @@
 #ifndef _FONTPOOL_H
 #define _FONTPOOL_H
 
+#include <QList>
+#include <QObject>
+#include <QProcess>
 #include "TeXFontDefinition.h"
 #include "fontEncodingPool.h"
 #include "fontMap.h"
 
-#include <QList>
-#include <QObject>
-#include <QProcess>
-
 #ifdef HAVE_FREETYPE
-#include <ft2build.h>
-#include FT_FREETYPE_H
+    #include <ft2build.h>
+    #include FT_FREETYPE_H
 #endif
 
 /**
@@ -53,7 +52,7 @@ public:
         current working directory for the kpsewhich command, so that
         kpsewhich will find fonts that are stored in the DVI file's
         directory. */
-    void setExtraSearchPath(const QString &path)
+    void setExtraSearchPath(const QString& path)
     {
         extraSearchPath = path;
     }
@@ -71,6 +70,7 @@ public:
 
     /** Sets the number of centimeters per DVI unit. */
     void setCMperDVIunit(double CMperDVI);
+
     double getCMperDVIunit() const
     {
         return CMperDVIunit;
@@ -87,10 +87,11 @@ public:
     // called. Since this is done using a concurrently running process,
     // there is no guarantee that the loading is already performed when
     // the method returns.
-    TeXFontDefinition *appendx(const QString &fontname, quint32 checksum, quint32 scale, double enlargement);
+    TeXFontDefinition* appendx(const QString& fontname, quint32 checksum,
+                               quint32 scale, double enlargement);
 
     // This is the list which actually holds pointers to the fonts
-    QList<TeXFontDefinition *> fontList;
+    QList<TeXFontDefinition*> fontList;
 
     // This method marks all fonts in the fontpool as "not in use". The
     // fonts are, however, not removed from memory until the method
@@ -136,9 +137,9 @@ public:
 
 Q_SIGNALS:
     /** Passed through to the top-level kpart. */
-    void error(const QString &message, int duration);
-    void warning(const QString &message, int duration);
-    void notice(const QString &message, int duration);
+    void error(const QString& message, int duration);
+    void warning(const QString& message, int duration);
+    void notice(const QString& message, int duration);
 
 public Q_SLOTS:
     // Locates font files on the disk using the kpsewhich program.  If
@@ -181,7 +182,8 @@ private:
     // characters. If not null, the bool pointed at by virtualFontsFound
     // is set to true if one of the fonts found is a virtual font. If no
     // virtual font is found, the variable remains untouched.
-    void locateFonts(bool makePK, bool locateTFMonly, bool *virtualFontsFound = nullptr);
+    void locateFonts(bool makePK, bool locateTFMonly,
+                     bool* virtualFontsFound = nullptr);
 
     // This QString is used internally by the mf_output_receiver()
     // method.  This string is set to QString() in locateFonts(bool,
@@ -205,7 +207,7 @@ private:
     QString extraSearchPath;
 
     // The handle on the external process.
-    QProcess *kpsewhich_;
+    QProcess* kpsewhich_;
 
 private Q_SLOTS:
     // This slot is called when MetaFont is run via the kpsewhich program.
@@ -216,4 +218,4 @@ private Q_SLOTS:
     void mf_output_receiver();
 };
 
-#endif // ifndef _FONTPOOL_H
+#endif  // ifndef _FONTPOOL_H

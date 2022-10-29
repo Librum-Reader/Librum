@@ -8,10 +8,9 @@
 #ifndef _OKULAR_MOVIE_H_
 #define _OKULAR_MOVIE_H_
 
+#include <QSize>
 #include "global.h"
 #include "okularcore_export.h"
-
-#include <QSize>
 
 class QImage;
 
@@ -28,22 +27,25 @@ public:
     /**
      * The play mode for playing the movie
      */
-    enum PlayMode {
-        PlayLimited,   ///< Play a fixed amount of times, closing the movie controls at the end @since 0.24
-        PlayOpen,      ///< Like PlayLimited, but leaving the controls open
-        PlayRepeat,    ///< Play continuously until stopped
-        PlayPalindrome ///< Play forward, then backward, then again forward and so on until stopped
+    enum PlayMode
+    {
+        PlayLimited,  ///< Play a fixed amount of times, closing the movie
+                      ///< controls at the end @since 0.24
+        PlayOpen,  ///< Like PlayLimited, but leaving the controls open
+        PlayRepeat,  ///< Play continuously until stopped
+        PlayPalindrome  ///< Play forward, then backward, then again forward and
+                        ///< so on until stopped
     };
 
     /**
      * Creates a new movie object with the given external @p fileName.
      */
-    explicit Movie(const QString &fileName);
+    explicit Movie(const QString& fileName);
 
     /**
      * Creates a new movie object with the given movie data.
      */
-    explicit Movie(const QString &fileName, const QByteArray &data);
+    explicit Movie(const QString& fileName, const QByteArray& data);
 
     /**
      * Destroys the movie object.
@@ -136,7 +138,7 @@ public:
      *
      * @since 4.10
      */
-    void setPosterImage(const QImage &image);
+    void setPosterImage(const QImage& image);
 
     /**
      * Returns the poster image.
@@ -147,11 +149,11 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    Private* const d;
 
     Q_DISABLE_COPY(Movie)
 };
 
-}
+}  // namespace Okular
 
 #endif
