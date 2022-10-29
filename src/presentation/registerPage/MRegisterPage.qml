@@ -205,6 +205,12 @@ MFlickWrapper
                                             emailInput.giveFocus();
                                         }
                                     }
+                                
+                                onEdited:
+                                {
+                                    passwordInput.clearError();
+                                    passwordConfirmationInput.clearError();
+                                }
                             }
                             
                             MLabeledInputBox 
@@ -229,6 +235,12 @@ MFlickWrapper
                                             passwordInput.giveFocus();
                                         }
                                     }
+                                
+                                onEdited:
+                                {
+                                    passwordInput.clearError();
+                                    passwordConfirmationInput.clearError();
+                                }
                             }
                             
                             MKeepMeUpdated
@@ -283,6 +295,13 @@ MFlickWrapper
                                                                     emailInput.text, passwordInput.text,
                                                                     keepMeUpdated.checked);   
                                     }
+                                    else
+                                    {
+                                        passwordInput.setError();
+                                        
+                                        passwordConfirmationInput.errorText = "Passwords don't match."
+                                        passwordConfirmationInput.setError();
+                                    }
                                 }
                                 
                                 function proccessRegistrationResult(success, reason)
@@ -293,13 +312,13 @@ MFlickWrapper
                                     }
                                     else
                                     {
-                                        console.log("Registration failed");
+                                        emailInput.errorText = reason;
+                                        emailInput.setError();
                                     }
                                 }
                             }
                         }
                     }
-                    
                 }
             }
             
