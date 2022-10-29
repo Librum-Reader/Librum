@@ -1,6 +1,6 @@
 #pragma once
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
 #include <QString>
 #include <login_dto.hpp>
 #include "authentication_controller.hpp"
@@ -14,7 +14,6 @@ using namespace adapters;
 using namespace domain::models;
 using namespace application;
 
-
 namespace tests::adapters
 {
 
@@ -22,30 +21,28 @@ class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
     MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
-    MOCK_METHOD(void, registerUser, 
-                (const domain::models::RegisterModel& registerModel), (override));
-    MOCK_METHOD(void, processAuthenticationResult, 
-                (const QString& token), (override));
-    MOCK_METHOD(void, processRegistrationResult, 
+    MOCK_METHOD(void, registerUser,
+                (const domain::models::RegisterModel& registerModel),
+                (override));
+    MOCK_METHOD(void, processAuthenticationResult, (const QString& token),
+                (override));
+    MOCK_METHOD(void, processRegistrationResult,
                 (bool success, const QString& reason), (override));
-    MOCK_METHOD(void, setAuthenticationToken, 
+    MOCK_METHOD(void, setAuthenticationToken,
                 (const QString& token, const QString& email), (override));
 };
-
 
 struct AnAuthenticationController : public ::testing::Test
 {
     void SetUp() override
     {
-        authController = std::make_unique<AuthenticationController>(&authServiceMock);
+        authController =
+            std::make_unique<AuthenticationController>(&authServiceMock);
     }
-    
+
     AuthenticationServiceMock authServiceMock;
     std::unique_ptr<AuthenticationController> authController;
 };
-
-
-
 
 TEST_F(AnAuthenticationController, SucceedsLogingAUserIn)
 {
@@ -53,12 +50,11 @@ TEST_F(AnAuthenticationController, SucceedsLogingAUserIn)
     QString email = "SomeEmail@librum.com";
     QString password = "SomePassword12345";
 
-    
+
     // Expect
-    EXPECT_CALL(authServiceMock, loginUser(_))
-            .Times(1);
-    
-    
+    EXPECT_CALL(authServiceMock, loginUser(_)).Times(1);
+
+
     // Act
     authController->loginUser(email, password);
 }
@@ -72,14 +68,13 @@ TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)
     QString password = "SomePassword12345";
     bool keepUpdated = true;
 
-    
+
     // Expect
-    EXPECT_CALL(authServiceMock, registerUser(_))
-            .Times(1);
-    
+    EXPECT_CALL(authServiceMock, registerUser(_)).Times(1);
+
     // Act
-    authController->registerUser(firstName, lastName, email,
-                                 password, keepUpdated);
+    authController->registerUser(firstName, lastName, email, password,
+                                 keepUpdated);
 }
 
-} // namespace tests::adapters
+}  // namespace tests::adapters

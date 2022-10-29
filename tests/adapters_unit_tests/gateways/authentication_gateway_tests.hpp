@@ -1,8 +1,8 @@
 #pragma once
-#include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <QString>
+#include <gtest/gtest.h>
 #include <QSignalSpy>
+#include <QString>
 #include "authentication_gateway.hpp"
 #include "i_authentication_access.hpp"
 #include "login_model.hpp"
@@ -13,17 +13,17 @@ using namespace adapters::gateways;
 using namespace adapters;
 using namespace domain;
 
-
 namespace tests::adapters
 {
 
 class AuthenticationAccessMock : public IAuthenticationAccess
 {
 public:
-    MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto& loginDto), (override));
-    MOCK_METHOD(void, registerUser, (const dtos::RegisterDto& registerDto), (override));
+    MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto& loginDto),
+                (override));
+    MOCK_METHOD(void, registerUser, (const dtos::RegisterDto& registerDto),
+                (override));
 };
-
 
 struct AnAuthenticationGateway : public ::testing::Test
 {
@@ -31,42 +31,36 @@ struct AnAuthenticationGateway : public ::testing::Test
     {
         authGateway = std::make_unique<AuthenticationGateway>(&authAccessMock);
     }
-    
+
     AuthenticationAccessMock authAccessMock;
     std::unique_ptr<AuthenticationGateway> authGateway;
 };
-
-
-
 
 TEST_F(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
     models::LoginModel loginModel("someEmail@librum.com", "SomePassword123");
-    
-    
+
+
     // Expect
-    EXPECT_CALL(authAccessMock, authenticateUser(_))
-            .Times(1);
-    
+    EXPECT_CALL(authAccessMock, authenticateUser(_)).Times(1);
+
     // Act
     authGateway->authenticateUser(loginModel);
 }
 
-
 TEST_F(AnAuthenticationGateway, SucceedsRegisteringAUser)
 {
     // Arrange
-    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com", 
-                                     "SomePassword123", false);
-    
-    
+    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
+                                        "SomePassword123", false);
+
+
     // Expect
-    EXPECT_CALL(authAccessMock, registerUser(_))
-            .Times(1);
-    
+    EXPECT_CALL(authAccessMock, registerUser(_)).Times(1);
+
     // Act
     authGateway->registerUser(registerModel);
 }
 
-} // namespace tests::adapters
+}  // namespace tests::adapters
