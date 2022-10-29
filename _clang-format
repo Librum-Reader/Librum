@@ -1,0 +1,101 @@
+﻿---
+BasedOnStyle: Google
+AccessModifierOffset: '-4'
+AlignAfterOpenBracket: Align
+AlignConsecutiveMacros: 'false'
+AlignConsecutiveAssignments: 'false'
+AlignConsecutiveDeclarations: 'false'
+AlignOperands: 'true'
+AlignTrailingComments: 'false'
+AllowAllArgumentsOnNextLine: 'true'
+AllowAllConstructorInitializersOnNextLine: 'true'
+AllowAllParametersOfDeclarationOnNextLine: 'false'
+AllowShortBlocksOnASingleLine: 'false'
+AllowShortCaseLabelsOnASingleLine: 'false'
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: 'false'
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: 'false'
+AlwaysBreakTemplateDeclarations: 'Yes'
+BinPackArguments: 'true'
+BinPackParameters: 'true'
+BreakAfterJavaFieldAnnotations: 'true'
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: 'true'
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+  AfterControlStatement: Always
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: true
+  BeforeWhile: true
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+
+BreakConstructorInitializers: BeforeColon
+PackConstructorInitializers: Never
+BreakInheritanceList: AfterComma
+BreakStringLiterals: 'true'
+ColumnLimit: '80'
+CompactNamespaces: 'false'
+EmptyLineBeforeAccessModifier: Always
+EmptyLineAfterAccessModifier: Never
+ConstructorInitializerAllOnOneLineOrOnePerLine: 'false'
+ConstructorInitializerIndentWidth: '4'
+BreakConstructorInitializers: AfterColon
+ContinuationIndentWidth: '4'
+Cpp11BracedListStyle: 'false'
+DerivePointerAlignment: 'false'
+DisableFormat: 'false'
+ExperimentalAutoDetectBinPacking: 'false'
+FixNamespaceComments: 'true'
+IncludeBlocks: Merge
+IndentCaseLabels: 'false'
+IndentPPDirectives: BeforeHash
+SeparateDefinitionBlocks: Always
+IndentWidth: '4'
+IndentWrappedFunctionNames: 'true'
+JavaScriptQuotes: Double
+JavaScriptWrapImports: 'true'
+KeepEmptyLinesAtTheStartOfBlocks: 'true'
+Language: Cpp
+MaxEmptyLinesToKeep: '2'
+NamespaceIndentation: None
+PointerAlignment: Left
+ReflowComments: 'true'
+SortIncludes: 'true'
+SortUsingDeclarations: 'true'
+SpaceAfterCStyleCast: 'false'
+SpaceAfterLogicalNot: 'false'
+SpaceAfterTemplateKeyword: 'false'
+SpaceBeforeAssignmentOperators: 'true'
+SpaceBeforeCpp11BracedList: 'true'
+SpaceBeforeCtorInitializerColon: 'true'
+SpaceBeforeInheritanceColon: 'true'
+SpaceBeforeParens: Never
+SpaceBeforeRangeBasedForLoopColon: 'false'
+SpaceInEmptyParentheses: 'false'
+SpacesBeforeTrailingComments: '2'
+SpacesInAngles: 'false'
+SpacesInCStyleCastParentheses: 'false'
+SpacesInContainerLiterals: 'false'
+SpacesInParentheses: 'false'
+SpacesInSquareBrackets: 'false'
+SpaceBeforeRangeBasedForLoopColon: 'true'
+Standard: Auto
+TabWidth: '3'
+UseTab: Never
+
+...
