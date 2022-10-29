@@ -1,12 +1,12 @@
-#include <QtAlgorithms>
 #include "chapter_tree_node.hpp"
-
+#include <QtAlgorithms>
 
 namespace adapters::data_models
 {
 
-ChapterTreeNode::ChapterTreeNode(const QString& data, ChapterTreeNode* parent)
-    : m_parentNode(parent), m_data(data)
+ChapterTreeNode::ChapterTreeNode(const QString& data, ChapterTreeNode* parent) :
+    m_parentNode(parent),
+    m_data(data)
 {
 }
 
@@ -14,7 +14,6 @@ ChapterTreeNode::~ChapterTreeNode()
 {
     qDeleteAll(m_childNodes);
 }
-
 
 void ChapterTreeNode::appendChild(ChapterTreeNode* child)
 {
@@ -25,7 +24,7 @@ ChapterTreeNode* ChapterTreeNode::child(int row) const
 {
     if(row < 0 || row >= m_childNodes.size())
         return nullptr;
-    
+
     return m_childNodes.at(row);
 }
 
@@ -42,13 +41,13 @@ int ChapterTreeNode::columnCount() const
 QString ChapterTreeNode::data() const
 {
     return m_data;
-}   
+}
 
 int ChapterTreeNode::row()
-{   
+{
     if(m_parentNode)
         return m_parentNode->m_childNodes.indexOf(this);
-    
+
     return 0;
 }
 
@@ -57,4 +56,4 @@ ChapterTreeNode* ChapterTreeNode::parentNode()
     return m_parentNode;
 }
 
-} // namespace adapters::data_models
+}  // namespace adapters::data_models

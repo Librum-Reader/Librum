@@ -1,10 +1,9 @@
 #pragma once
-#include <QObject>
 #include <QJsonObject>
+#include <QObject>
+#include "book_dto.hpp"
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
-#include "book_dto.hpp"
-
 
 namespace adapters::gateways
 {
@@ -12,7 +11,7 @@ namespace adapters::gateways
 class BookStorageGateway : public application::IBookStorageGateway
 {
     Q_OBJECT
-    
+
 public:
     BookStorageGateway(IBookStorageAccess* bookStorageAccess);
 
@@ -23,14 +22,14 @@ public:
                     const domain::models::Book& book) override;
     void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
-    
+
 private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
-    
+
 private:
     dtos::BookDto getBookDtoFromBook(const domain::models::Book& book);
-    
+
     IBookStorageAccess* m_bookStorageAccess;
 };
 
-} // namespace adapters::gateways
+}  // namespace adapters::gateways

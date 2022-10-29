@@ -1,13 +1,12 @@
 #include "book_controller.hpp"
 #include <QBuffer>
-#include <QVariant>
 #include <QDebug>
+#include <QVariant>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "qnamespace.h"
 #include "tag.hpp"
 #include "tag_dto.hpp"
-
 
 namespace adapters::controllers
 {
@@ -15,37 +14,37 @@ namespace adapters::controllers
 using namespace domain::models;
 using application::BookOperationStatus;
 
-BookController::BookController(application::IBookService* bookService)
-    : m_bookChacheChanged(true), m_bookService(bookService),
-      m_libraryModel(m_bookService->getBooks())
+BookController::BookController(application::IBookService* bookService) :
+    m_bookChacheChanged(true),
+    m_bookService(bookService),
+    m_libraryModel(m_bookService->getBooks())
 {
     // book insertion
     connect(m_bookService, &application::IBookService::bookInsertionStarted,
             &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
-    
+
     connect(m_bookService, &application::IBookService::bookInsertionEnded,
             &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
-    
+
     // book deletion
     connect(m_bookService, &application::IBookService::bookDeletionStarted,
             &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
-    
+
     connect(m_bookService, &application::IBookService::bookDeletionEnded,
             &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
-    
+
     // tags changed
     connect(m_bookService, &application::IBookService::tagsChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshTags);
-    
+
     // data changed
     connect(m_bookService, &application::IBookService::dataChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshBook);
-    
+
     // book cover processing
     connect(m_bookService, &application::IBookService::bookCoverGenerated,
             &m_libraryModel, &data_models::LibraryModel::processBookCover);
 }
-
 
 int BookController::addBook(const QString& path)
 {
@@ -55,7 +54,7 @@ int BookController::addBook(const QString& path)
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
-    
+
     return static_cast<int>(result);
 }
 
@@ -67,7 +66,7 @@ int BookController::deleteBook(const QString& uuid)
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
-    
+
     return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
@@ -79,7 +78,7 @@ int BookController::uninstallBook(const QString& uuid)
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
-    
+
     return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 }
 
@@ -88,14 +87,14 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
     auto bookToUpdate = m_bookService->getBook(uuid);
     if(!bookToUpdate)
         return static_cast<int>(BookOperationStatus::BookDoesNotExist);
-    
+
     auto updatedBook = *bookToUpdate;
-    
+
     const auto operationsMap = operations.toMap();
     for(const auto& stringKey : operationsMap.keys())
     {
         int key = stringKey.toInt();
-        
+
         auto value = operationsMap.value(stringKey);
         switch(static_cast<MetaProperties>(key))
         {
@@ -142,12 +141,12 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
         }
     }
-    
-    
+
+
     auto result = m_bookService->updateBook(uuid, updatedBook);
     if(result == BookOperationStatus::Success)
-        m_bookChacheChanged = true;        
-    
+        m_bookChacheChanged = true;
+
     return static_cast<int>(result);
 }
 
@@ -159,19 +158,20 @@ int BookController::addTag(const QString& uuid, const QString& tagName)
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
-    
+
     return static_cast<int>(BookOperationStatus::TagAlreadyExists);
 }
 
 int BookController::removeTag(const QString& uuid, const QString& tagName)
 {
     Tag tagToRemove(tagName);
-    if(m_bookService->removeTag(uuid, tagToRemove) == BookOperationStatus::Success)
+    if(m_bookService->removeTag(uuid, tagToRemove) ==
+       BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
-    
+
     return static_cast<int>(BookOperationStatus::TagDoesNotExist);
 }
 
@@ -179,7 +179,7 @@ dtos::BookDto BookController::getBook(const QString& uuid)
 {
     if(m_bookChacheChanged)
         refreshBookChache();
-    
+
     return *getBookFromChache(uuid);
 }
 
@@ -196,7 +196,7 @@ data_models::LibraryModel* BookController::getLibraryModel()
 int BookController::saveBookToPath(const QString& uuid, const QUrl& path)
 {
     auto result = m_bookService->saveBookToPath(uuid, path);
-    
+
     return static_cast<int>(result);
 }
 
@@ -210,7 +210,7 @@ void BookController::refreshLastOpenedFlag(const QString& uuid)
 void BookController::refreshBookChache()
 {
     const auto& books = m_bookService->getBooks();
-    
+
     m_bookCache.clear();
     for(const auto& book : books)
     {
@@ -230,19 +230,19 @@ void BookController::refreshBookChache()
         bookDto.lastOpened = book.getLastOpened();
         bookDto.cover = book.getCoverAsStringWithType();
         bookDto.downloaded = book.getDownloaded();
-        
-        
+
+
         for(std::size_t i = 0; i < book.getTags().size(); ++i)
         {
             dtos::TagDto tagDto;
             tagDto.name = book.getTags()[i].getName();
-            
+
             bookDto.tags.push_back(tagDto);
         }
-        
+
         m_bookCache.emplace_back(std::move(bookDto));
     }
-    
+
     m_bookChacheChanged = false;
 }
 
@@ -253,7 +253,7 @@ dtos::BookDto* BookController::getBookFromChache(const QString& uuid)
         if(m_bookCache[i].uuid == uuid)
             return &m_bookCache[i];
     }
-    
+
     return nullptr;
 }
 
@@ -261,13 +261,14 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
 {
     if(pathToCover.isEmpty())
         return QImage();
-    
+
     QString localFilePath = QUrl(pathToCover).toLocalFile();
     QImage cover(localFilePath);
-    auto scaledCover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
-                                    Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    
+    auto scaledCover =
+        cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
+                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
     return scaledCover;
 }
 
-} // namespace adapters::controllers
+}  // namespace adapters::controllers

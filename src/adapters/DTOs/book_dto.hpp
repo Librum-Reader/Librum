@@ -1,14 +1,12 @@
 #pragma once
+#include <QBuffer>
+#include <QImage>
+#include <QList>
 #include <QObject>
 #include <QString>
-#include <QList>
-#include <QImage>
-#include <QVariant>
-#include <QBuffer>
-#include <QVariant>
 #include <QUuid>
+#include <QVariant>
 #include "tag_dto.hpp"
-
 
 namespace adapters::dtos
 {
@@ -32,7 +30,7 @@ struct BookDto
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
     Q_PROPERTY(QString cover MEMBER cover)
     Q_PROPERTY(bool downloaded MEMBER downloaded)
-    
+
 public:
     QString uuid;
     QString title;
@@ -53,6 +51,6 @@ public:
     QList<TagDto> tags;
 };
 
-} // namespace adapters::dtos
+}  // namespace adapters::dtos
 
 Q_DECLARE_METATYPE(adapters::dtos::BookDto)

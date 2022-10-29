@@ -6,16 +6,15 @@ using namespace domain::models;
 namespace adapters::gateways
 {
 
-UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess)
-    : m_userStorageAccess(userStorageAccess)
+UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess) :
+    m_userStorageAccess(userStorageAccess)
 {
-    connect(m_userStorageAccess, &IUserStorageAccess::userReady,
-            this, &UserStorageGateway::proccessUserData);
-    
-    connect(m_userStorageAccess, &IUserStorageAccess::gettingUserFailed,
-            this, &UserStorageGateway::reportFailureGettingUser);
-}
+    connect(m_userStorageAccess, &IUserStorageAccess::userReady, this,
+            &UserStorageGateway::proccessUserData);
 
+    connect(m_userStorageAccess, &IUserStorageAccess::gettingUserFailed, this,
+            &UserStorageGateway::reportFailureGettingUser);
+}
 
 void UserStorageGateway::getUser(const QString& authToken)
 {
@@ -46,11 +45,11 @@ void UserStorageGateway::changeProfilePicture(const QString& authToken,
     m_userStorageAccess->changeProfilePicture(authToken, newPicture);
 }
 
-void UserStorageGateway::proccessUserData(const QString& firstName, 
+void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email)
 {
-    User user (firstName, lastName, email);
+    User user(firstName, lastName, email);
     emit finishedGettingUser(user, true);
 }
 
@@ -60,4 +59,4 @@ void UserStorageGateway::reportFailureGettingUser()
     emit finishedGettingUser(emptyUser, false);
 }
 
-} // namespace adapters::gateways
+}  // namespace adapters::gateways

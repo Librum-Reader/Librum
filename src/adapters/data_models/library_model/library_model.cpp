@@ -1,29 +1,27 @@
 #include "library_model.hpp"
-#include <QByteArray>
 #include <QBuffer>
-#include <QString>
+#include <QByteArray>
 #include <QList>
+#include <QString>
 #include "book.hpp"
 #include "tag_dto.hpp"
 
 
 using namespace domain::models;
 
-
 namespace adapters::data_models
 {
 
-LibraryModel::LibraryModel(const std::vector<domain::models::Book>& data)
-    : m_data(data)
+LibraryModel::LibraryModel(const std::vector<domain::models::Book>& data) :
+    m_data(data)
 {
 }
-
 
 int LibraryModel::rowCount(const QModelIndex& parent) const
 {
     if(parent.isValid())
         return 0;
-    
+
     return m_data.size();
 }
 
@@ -31,7 +29,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
 {
     if(!index.isValid())
         return QVariant();
-    
+
     const Book& book = m_data.at(index.row());
     switch(role)
     {
@@ -94,52 +92,50 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
 
 QHash<int, QByteArray> LibraryModel::roleNames() const
 {
-    static QHash<int, QByteArray> roles
-    {
-        {UuidRole, "uuid"},
-        {TitleRole, "title"},
-        {AuthorRole, "author"},
-        {FilePathRole, "filePath"},
-        {CreatorRole, "creator"},
-        {CreationDateRole, "creationDate"},
-        {FormatRole, "format"},
-        {DocumentSizeRole, "documentSize"},
-        {PagesSizeRole, "pagesSize"},
-        {PageCountRole, "pageCount"},
-        {AddedToLibraryRole, "addedToLibrary"},
-        {LastOpenedRole, "lastOpened"},
-        {CoverRole, "cover"},
-        {TagsRole, "tags"},
-        {DownloadedRole, "downloaded"}
+    static QHash<int, QByteArray> roles {
+        { UuidRole, "uuid" },
+        { TitleRole, "title" },
+        { AuthorRole, "author" },
+        { FilePathRole, "filePath" },
+        { CreatorRole, "creator" },
+        { CreationDateRole, "creationDate" },
+        { FormatRole, "format" },
+        { DocumentSizeRole, "documentSize" },
+        { PagesSizeRole, "pagesSize" },
+        { PageCountRole, "pageCount" },
+        { AddedToLibraryRole, "addedToLibrary" },
+        { LastOpenedRole, "lastOpened" },
+        { CoverRole, "cover" },
+        { TagsRole, "tags" },
+        { DownloadedRole, "downloaded" },
     };
-    
+
     return roles;
 }
 
 void LibraryModel::processBookCover(int row)
 {
     auto modelIndex = index(row, 0);
-    
-    emit dataChanged(modelIndex, modelIndex, {CoverRole});
+
+    emit dataChanged(modelIndex, modelIndex, { CoverRole });
 }
 
-QList<dtos::TagDto> LibraryModel::convertTagsToDtos(const std::vector<domain::
-                                                    models::Tag>& tags) const
+QList<dtos::TagDto> LibraryModel::convertTagsToDtos(
+    const std::vector<domain::models::Tag>& tags) const
 {
     QList<dtos::TagDto> tagDtos;
     for(const auto& tag : tags)
     {
-        auto tagDto = dtos::TagDto{ .name = tag.getName() };
+        auto tagDto = dtos::TagDto { .name = tag.getName() };
         tagDtos.push_back(tagDto);
     }
-    
+
     return tagDtos;
 }
 
-
 void LibraryModel::refreshTags(int row)
 {
-    emit dataChanged(index(row, 0), index(row, 0), {TagsRole});
+    emit dataChanged(index(row, 0), index(row, 0), { TagsRole });
 }
 
 void LibraryModel::refreshBook(int row)
@@ -150,7 +146,7 @@ void LibraryModel::refreshBook(int row)
     {
         allRoles.push_back(i);
     }
-    
+
     emit dataChanged(index(row, 0), index(row, 0), allRoles);
 }
 
@@ -174,4 +170,4 @@ void LibraryModel::endDeletingBook()
     endRemoveRows();
 }
 
-} // namespace adapters::data_models
+}  // namespace adapters::data_models

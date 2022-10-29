@@ -6,19 +6,19 @@
 using namespace adapters::dtos;
 using namespace domain::models;
 
-
 namespace adapters::gateways
 {
 
-BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess)
-    : m_bookStorageAccess(bookStorageAccess)
+BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
+    m_bookStorageAccess(bookStorageAccess)
 {
-    connect(m_bookStorageAccess, &IBookStorageAccess::gettingBooksMetaDataFinished,
-            this, &BookStorageGateway::proccessBooksMetadata);
+    connect(m_bookStorageAccess,
+            &IBookStorageAccess::gettingBooksMetaDataFinished, this,
+            &BookStorageGateway::proccessBooksMetadata);
 }
 
-
-void BookStorageGateway::createBook(const QString& authToken, const domain::models::Book& book)
+void BookStorageGateway::createBook(const QString& authToken,
+                                    const domain::models::Book& book)
 {
     auto bookDto = getBookDtoFromBook(book);
     m_bookStorageAccess->createBook(authToken, bookDto);
@@ -29,7 +29,8 @@ void BookStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
     m_bookStorageAccess->deleteBook(authToken, uuid);
 }
 
-void BookStorageGateway::updateBook(const QString& authToken, const domain::models::Book& book)
+void BookStorageGateway::updateBook(const QString& authToken,
+                                    const domain::models::Book& book)
 {
     auto bookDto = getBookDtoFromBook(book);
     m_bookStorageAccess->updateBook(authToken, bookDto);
@@ -40,37 +41,37 @@ void BookStorageGateway::getBooksMetaData(const QString& authToken)
     m_bookStorageAccess->getBooksMetaData(authToken);
 }
 
-void BookStorageGateway::downloadBook(const QString& authToken, const QUuid& uuid)
+void BookStorageGateway::downloadBook(const QString& authToken,
+                                      const QUuid& uuid)
 {
     Q_UNUSED(authToken);
     Q_UNUSED(uuid);
 }
 
-void BookStorageGateway::proccessBooksMetadata(std::vector<QJsonObject>&
-                                               jsonBooks)
+void BookStorageGateway::proccessBooksMetadata(
+    std::vector<QJsonObject>& jsonBooks)
 {
     std::vector<Book> books;
     for(auto& jsonBook : jsonBooks)
     {
-        // DB yields the uuid under the name "guid", but the core wants it 
+        // DB yields the uuid under the name "guid", but the core wants it
         // as "uuid", here "guid" is renamed to "uuid"
         auto uuid = jsonBook["guid"].toString();
         jsonBook.remove("guid");
         jsonBook.insert("uuid", uuid);
-        
+
         auto book = Book::fromJson(jsonBook);
         book.setDownloaded(false);
-        
+
         books.emplace_back(std::move(book));
     }
-    
+
     emit gettingBooksMetaDataFinished(books);
 }
 
 BookDto BookStorageGateway::getBookDtoFromBook(const domain::models::Book& book)
 {
-    BookDto bookDto
-    {
+    BookDto bookDto {
         .uuid = book.getUuid().toString(QUuid::WithoutBraces),
         .title = book.getTitle(),
         .author = book.getAuthor(),
@@ -85,10 +86,10 @@ BookDto BookStorageGateway::getBookDtoFromBook(const domain::models::Book& book)
         .currentPage = book.getCurrentPage(),
         .addedToLibrary = book.getAddedToLibrary(),
         .lastOpened = book.getLastOpened(),
-        .cover = book.getCoverAsString()
+        .cover = book.getCoverAsString(),
     };
-    
+
     return bookDto;
 }
 
-} // namespace adapters::gateways
+}  // namespace adapters::gateways

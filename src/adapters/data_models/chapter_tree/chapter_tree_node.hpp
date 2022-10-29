@@ -2,7 +2,6 @@
 #include <QList>
 #include <QString>
 
-
 namespace adapters::data_models
 {
 
@@ -11,7 +10,7 @@ class ChapterTreeNode
 public:
     ChapterTreeNode(const QString& data, ChapterTreeNode* parent = nullptr);
     ~ChapterTreeNode();
-    
+
     void appendChild(ChapterTreeNode* child);
     ChapterTreeNode* child(int row) const;
     int childCount() const;
@@ -19,12 +18,12 @@ public:
     QString data() const;
     int row();
     ChapterTreeNode* parentNode();
-    
-    
+
+
 private:
     ChapterTreeNode* m_parentNode;
     QList<ChapterTreeNode*> m_childNodes;
     QString m_data;
 };
 
-} // namespace adapters::data_models
+}  // namespace adapters::data_models
