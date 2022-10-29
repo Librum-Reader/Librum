@@ -1,22 +1,21 @@
 #pragma once
 #include <QObject>
 
-
 namespace application
 {
-    Q_NAMESPACE
+Q_NAMESPACE
 
-    enum class BookOperationStatus
-    {
-        Success,
-        OpeningBookFailed,
-        BookDoesNotExist,
-        PropertyDoesNotExist,
-        TagDoesNotExist,
-        TagAlreadyExists,
-        OperationFailed
-    };
-    
-    Q_ENUM_NS(BookOperationStatus)
+enum class BookOperationStatus
+{
+    Success,
+    OpeningBookFailed,
+    BookDoesNotExist,
+    PropertyDoesNotExist,
+    TagDoesNotExist,
+    TagAlreadyExists,
+    OperationFailed
+};
 
-} // namespace application
+Q_ENUM_NS(BookOperationStatus)
+
+}  // namespace application

@@ -1,17 +1,17 @@
 #include "register_model.hpp"
 
-
 namespace domain::models
 {
 
 RegisterModel::RegisterModel(QString firstName, QString lastName, QString email,
-                             QString password, bool keepUpdated)
-    : m_firstName(firstName), m_lastName(lastName), m_email(email),
-      m_password(password), m_keepUpdated(keepUpdated)
+                             QString password, bool keepUpdated) :
+    m_firstName(firstName),
+    m_lastName(lastName),
+    m_email(email),
+    m_password(password),
+    m_keepUpdated(keepUpdated)
 {
-    
 }
-
 
 QString RegisterModel::generateErrorMessage(RegistrationResult status) const
 {
@@ -46,7 +46,6 @@ QString RegisterModel::generateErrorMessage(RegistrationResult status) const
     }
 }
 
-
 QString RegisterModel::getFirstName() const
 {
     return m_firstName;
@@ -72,26 +71,25 @@ bool RegisterModel::getKeepUpdated() const
     return m_keepUpdated;
 }
 
-
 RegisterModel::RegistrationResult RegisterModel::isValid() const
 {
     auto firstNameStatus = firstNameIsValid();
     if(firstNameStatus != RegistrationResult::Valid)
         return firstNameStatus;
-    
+
     auto lastNameStatus = lastNameIsValid();
     if(lastNameStatus != RegistrationResult::Valid)
         return lastNameStatus;
-    
+
     auto emailStatus = emailIsValid();
     if(emailStatus != RegistrationResult::Valid)
         return emailStatus;
-    
+
     auto passwordStatus = passwordIsValid();
     if(passwordStatus != RegistrationResult::Valid)
         return passwordStatus;
-    
-    
+
+
     return RegistrationResult::Valid;
 }
 
@@ -101,7 +99,7 @@ RegisterModel::RegistrationResult RegisterModel::firstNameIsValid() const
         return RegistrationResult::FirstNameTooShort;
     if(m_firstName.length() > m_maxFirstNameLength)
         return RegistrationResult::FirstNameTooLong;
-    
+
     return RegistrationResult::Valid;
 }
 
@@ -111,7 +109,7 @@ RegisterModel::RegistrationResult RegisterModel::lastNameIsValid() const
         return RegistrationResult::LastNameTooShort;
     if(m_lastName.length() > m_maxLastNameLength)
         return RegistrationResult::LastNameTooLong;
-    
+
     return RegistrationResult::Valid;
 }
 
@@ -121,7 +119,7 @@ RegisterModel::RegistrationResult RegisterModel::emailIsValid() const
         return RegistrationResult::EmailTooShort;
     if(m_email.length() > m_maxEmailLength)
         return RegistrationResult::EmailTooLong;
-    
+
     return RegistrationResult::Valid;
 }
 
@@ -131,8 +129,8 @@ RegisterModel::RegistrationResult RegisterModel::passwordIsValid() const
         return RegistrationResult::PasswordTooShort;
     if(m_password.length() > m_maxPasswordLength)
         return RegistrationResult::PasswordTooLong;
-    
+
     return RegistrationResult::Valid;
 }
 
-} // namespace domain::models
+}  // namespace domain::models

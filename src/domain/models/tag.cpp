@@ -1,20 +1,17 @@
 #include "tag.hpp"
 
-
 namespace domain::models
 {
 
-Tag::Tag(QString name)
-    : m_name(name)
+Tag::Tag(QString name) :
+    m_name(name)
 {
 }
-
 
 bool Tag::operator==(const Tag& other) const
 {
     return m_name == other.m_name;
 }
-
 
 const QString& Tag::getName() const
 {
@@ -24,6 +21,6 @@ const QString& Tag::getName() const
 void Tag::setName(QString newName)
 {
     m_name = newName;
-}   
+}
 
-} // namespace domain::models
+}  // namespace domain::models

@@ -1,11 +1,10 @@
 #pragma once
-#include <vector>
-#include <optional>
+#include <QDir>
 #include <QString>
 #include <QUuid>
-#include <QDir>
+#include <optional>
+#include <vector>
 #include "book.hpp"
-
 
 namespace application
 {
@@ -22,15 +21,16 @@ class IDownloadedBooksTracker
 {
 public:
     virtual ~IDownloadedBooksTracker() noexcept = default;
-    
+
     virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
     virtual QDir getUserLibraryDir() const = 0;
-    
+
     virtual std::vector<domain::models::Book> getTrackedBooks() = 0;
-    virtual std::optional<domain::models::Book> getTrackedBook(const QUuid& uuid) = 0;
+    virtual std::optional<domain::models::Book> getTrackedBook(
+        const QUuid& uuid) = 0;
     virtual bool trackBook(const domain::models::Book& book) = 0;
     virtual bool untrackBook(const QUuid& uuid) = 0;
     virtual bool updateTrackedBook(const domain::models::Book& book) = 0;
 };
 
-} // namespace application
+}  // namespace application

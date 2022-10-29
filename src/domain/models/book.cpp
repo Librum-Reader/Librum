@@ -1,16 +1,16 @@
 #include "book.hpp"
-#include <algorithm>
-#include <QJsonDocument>
 #include <QBuffer>
-
+#include <QJsonDocument>
+#include <algorithm>
 
 namespace domain::models
 {
 
-Book::Book(const QString& filePath, const BookMetaData& metaData, 
-           int currentPage, const QString& uuid)
-    : m_filePath(filePath), m_metaData(metaData), 
-      m_currentPage(currentPage)
+Book::Book(const QString& filePath, const BookMetaData& metaData,
+           int currentPage, const QString& uuid) :
+    m_filePath(filePath),
+    m_metaData(metaData),
+    m_currentPage(currentPage)
 {
     if(uuid.isEmpty())
         m_uuid = QUuid::createUuid();
@@ -18,24 +18,19 @@ Book::Book(const QString& filePath, const BookMetaData& metaData,
         m_uuid = QUuid(uuid);
 }
 
-
 bool Book::operator==(const Book& rhs) const
 {
-    bool dataIsTheSame =
-            m_uuid == rhs.m_uuid &&
-            m_filePath == rhs.m_filePath &&
-            m_downloaded == rhs.m_downloaded &&
-            m_currentPage == rhs.m_currentPage;
-            
+    bool dataIsTheSame = m_uuid == rhs.m_uuid && m_filePath == rhs.m_filePath &&
+                         m_downloaded == rhs.m_downloaded &&
+                         m_currentPage == rhs.m_currentPage;
+
     return dataIsTheSame && m_metaData == rhs.m_metaData;
 }
-
 
 const QUuid& Book::getUuid() const
 {
     return m_uuid;
 }
-
 
 const QString& Book::getTitle() const
 {
@@ -47,7 +42,6 @@ void Book::setTitle(const QString& newTitle)
     m_metaData.title = newTitle;
 }
 
-
 const QString& Book::getAuthor() const
 {
     return m_metaData.author;
@@ -57,7 +51,6 @@ void Book::setAuthor(const QString& newAuthor)
 {
     m_metaData.author = newAuthor;
 }
-
 
 const QString& Book::getFilePath() const
 {
@@ -69,7 +62,6 @@ void Book::setFilePath(const QString& newLocalPath)
     m_filePath = newLocalPath;
 }
 
-
 const QString& Book::getLastOpened() const
 {
     return m_metaData.lastOpened;
@@ -79,7 +71,6 @@ void Book::setLastOpened(const QString& newLastOpened)
 {
     m_metaData.lastOpened = newLastOpened;
 }
-
 
 const QString& Book::getAddedToLibrary() const
 {
@@ -91,7 +82,6 @@ void Book::setAddedToLibrary(const QString& newAddedToLibrary)
     m_metaData.addedToLibrary = newAddedToLibrary;
 }
 
-
 const QString& Book::getPagesSize() const
 {
     return m_metaData.pagesSize;
@@ -101,7 +91,6 @@ void Book::setPagesSize(const QString& newPagesSize)
 {
     m_metaData.pagesSize = newPagesSize;
 }
-
 
 const QString& Book::getDocumentSize() const
 {
@@ -113,7 +102,6 @@ void Book::setDocumentSize(const QString& newDocumentSize)
     m_metaData.documentSize = newDocumentSize;
 }
 
-
 const QString& Book::getFormat() const
 {
     return m_metaData.format;
@@ -123,7 +111,6 @@ void Book::setFormat(const QString& newFormat)
 {
     m_metaData.format = newFormat;
 }
-
 
 const QString& Book::getLanguage() const
 {
@@ -135,7 +122,6 @@ void Book::setLanguage(const QString& newLanguage)
     m_metaData.language = newLanguage;
 }
 
-
 const QString& Book::getCreationDate() const
 {
     return m_metaData.creationDate;
@@ -145,7 +131,6 @@ void Book::setCreationDate(const QString& newCreationDate)
 {
     m_metaData.creationDate = newCreationDate;
 }
-
 
 int Book::getPageCount() const
 {
@@ -157,7 +142,6 @@ void Book::setPageCount(int newPageCount)
     m_metaData.pageCount = newPageCount;
 }
 
-
 int Book::getCurrentPage() const
 {
     return m_currentPage;
@@ -167,7 +151,6 @@ void Book::setCurrentPage(int newCurrentPage)
 {
     m_currentPage = newCurrentPage;
 }
-
 
 const QString& Book::getCreator() const
 {
@@ -179,7 +162,6 @@ void Book::setCreator(const QString& newCreator)
     m_metaData.creator = newCreator;
 }
 
-
 QImage Book::getCover() const
 {
     return m_metaData.cover;
@@ -189,14 +171,14 @@ QString Book::getCoverAsString() const
 {
     if(m_metaData.cover.isNull())
         return QString("");
-    
+
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
-    
+
     buffer.open(QIODevice::WriteOnly);
     m_metaData.cover.save(&buffer, "png");
     auto result = QString::fromUtf8(byteArray.toBase64());
-    
+
     return result;
 }
 
@@ -204,14 +186,14 @@ QString Book::getCoverAsStringWithType() const
 {
     if(m_metaData.cover.isNull())
         return QString("");
-    
+
     QByteArray byteArray;
     QBuffer buffer(&byteArray);
-    
+
     buffer.open(QIODevice::WriteOnly);
     m_metaData.cover.save(&buffer, "png");
     QString base64 = QString::fromUtf8(byteArray.toBase64());
-    
+
     return QString("data:image/png;base64,") + base64;
 }
 
@@ -219,7 +201,6 @@ void Book::setCover(const QImage& newCover)
 {
     m_metaData.cover = newCover;
 }
-
 
 bool Book::getDownloaded() const
 {
@@ -231,21 +212,17 @@ void Book::setDownloaded(bool newDownloaded)
     m_downloaded = newDownloaded;
 }
 
-
-
 const std::vector<Tag>& Book::getTags() const
 {
     return m_tags;
 }
-
-
 
 bool Book::addTag(const Tag& tag)
 {
     auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
     if(tagPosition != m_tags.end())
         return false;
-    
+
     m_tags.emplace_back(tag);
     return true;
 }
@@ -255,26 +232,24 @@ bool Book::removeTag(const Tag& tag)
     auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
     if(tagPosition == m_tags.end())
         return false;
-    
+
     m_tags.erase(tagPosition);
     return true;
 }
-
 
 bool Book::tagsAreTheSame(const std::vector<Tag>& other)
 {
     if(m_tags.size() != other.size())
         return false;
-    
+
     for(int i = 0; i < m_tags.size(); ++i)
     {
         if(m_tags.at(i) != other.at(i))
             return false;
     }
-    
+
     return true;
 }
-
 
 void Book::update(const Book& other)
 {
@@ -304,41 +279,40 @@ void Book::update(const Book& other)
         m_metaData.lastOpened = other.getLastOpened();
     if(m_metaData.cover != other.getCover())
         m_metaData.cover = other.getCover();
-    
-    if(!tagsAreTheSame(other.getTags())) m_tags = other.getTags();
+
+    if(!tagsAreTheSame(other.getTags()))
+        m_tags = other.getTags();
 }
 
 QByteArray Book::toJson() const
 {
-    QJsonObject book
-    {
-        {"uuid", getUuid().toString(QUuid::WithoutBraces)},
-        {"title", getTitle()},
-        {"author", getAuthor()},
-        {"creator", getCreator()},
-        {"pageCount", getPageCount()},
-        {"currentPage", getCurrentPage()},
-        {"creationDate", getCreationDate()},
-        {"format", getFormat()},
-        {"language", getLanguage()},
-        {"documentSize", getDocumentSize()},
-        {"pagesSize", getPagesSize()},
-        {"addedToLibrary", getAddedToLibrary()},
-        {"lastOpened", getLastOpened()},
-        {"filePath", getFilePath()},
-        {"cover", getCoverAsString()}
+    QJsonObject book {
+        { "uuid", getUuid().toString(QUuid::WithoutBraces) },
+        { "title", getTitle() },
+        { "author", getAuthor() },
+        { "creator", getCreator() },
+        { "pageCount", getPageCount() },
+        { "currentPage", getCurrentPage() },
+        { "creationDate", getCreationDate() },
+        { "format", getFormat() },
+        { "language", getLanguage() },
+        { "documentSize", getDocumentSize() },
+        { "pagesSize", getPagesSize() },
+        { "addedToLibrary", getAddedToLibrary() },
+        { "lastOpened", getLastOpened() },
+        { "filePath", getFilePath() },
+        { "cover", getCoverAsString() },
     };
-    
+
     QJsonDocument doc(book);
     QString strJson(doc.toJson(QJsonDocument::Indented));
-    
+
     return strJson.toUtf8();
 }
 
 Book Book::fromJson(const QJsonObject& jsonObject)
 {
-    BookMetaData metaData
-    {
+    BookMetaData metaData {
         .title = jsonObject["title"].toString(),
         .author = jsonObject["author"].toString(),
         .creator = jsonObject["creator"].toString(),
@@ -349,18 +323,18 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .pagesSize = jsonObject["pagesSize"].toString(),
         .pageCount = jsonObject["pageCount"].toInt(),
         .addedToLibrary = jsonObject["addedToLibrary"].toString(),
-        .lastOpened = jsonObject["lastOpened"].toString()
+        .lastOpened = jsonObject["lastOpened"].toString(),
     };
-    
+
     auto cover = jsonObject["cover"].toString();
     metaData.cover = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
-    
-    
+
+
     QString filePath = jsonObject["filePath"].toString();
     int currentPage = jsonObject["currentPage"].toInt();
     QString uuid = jsonObject["uuid"].toString();
-    
+
     return Book(filePath, metaData, currentPage, uuid);
 }
 
-} // namespace domain::models
+}  // namespace domain::models

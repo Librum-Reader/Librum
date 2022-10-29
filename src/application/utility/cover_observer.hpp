@@ -2,11 +2,11 @@
 #include <QObject>
 #include "observer.h"
 
-
 namespace application::utility
 {
 
-class CoverObserver : public QObject, public Okular::DocumentObserver
+class CoverObserver : public QObject,
+                      public Okular::DocumentObserver
 {
     Q_OBJECT
 
@@ -17,4 +17,4 @@ signals:
     void pageChanged(int page, int flags);
 };
 
-} // namespace application::utility
+}  // namespace application::utility

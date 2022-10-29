@@ -305,10 +305,10 @@ public:
     {
         SwapBackingFileError,  //< The document could not be swapped
         SwapBackingFileNoOp,  //< The document was swapped and nothing needs to
-                              //be done
+                              // be done
         SwapBackingFileReloadInternalData  //< The document was swapped and
-                                           //internal data (forms, annotations,
-                                           //etc) needs to be reloaded
+                                           // internal data (forms, annotations,
+                                           // etc) needs to be reloaded
     };
 
     /**
@@ -682,10 +682,16 @@ public:
      * @param priority The priority of the request.
      * @param features The features of generation.
      */
-    [[deprecated("This PixmapRequest constructor is deprecated, use the one "
-                 "including the device pixel ratio")]] PixmapRequest(
-        DocumentObserver* observer, int pageNumber, int width, int height,
-        int priority, PixmapRequestFeatures features);
+    [[deprecated(
+        "This PixmapRequest constructor is deprecated, use the one "
+        "including the device pixel ratio")]] PixmapRequest(DocumentObserver*
+                                                                observer,
+                                                            int pageNumber,
+                                                            int width,
+                                                            int height,
+                                                            int priority,
+                                                            PixmapRequestFeatures
+                                                                features);
 
     /**
      * Creates a new pixmap request.

@@ -216,7 +216,7 @@ public:
         OpenSuccess,  //< The document was opened successfully
         OpenError,  //< The document failed to open
         OpenNeedsPassword  //< The document needs a password to be opened or the
-                           //one provided is not the correct
+                           // one provided is not the correct
     };
 
     /**

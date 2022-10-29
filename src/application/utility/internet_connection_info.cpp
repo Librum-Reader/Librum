@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QSslConfiguration>
 
-
 namespace application::utility
 {
 
@@ -15,10 +14,10 @@ void utility::InternetConnectionInfo::checkAvailability()
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
     sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
     request.setSslConfiguration(sslConfiguration);
-    
+
     m_internetCheckReply.reset(networkManager.get(request));
-    QObject::connect(m_internetCheckReply.get(), &QNetworkReply::finished, 
-                     this, &InternetConnectionInfo::proccessAvailabilityResult);
+    QObject::connect(m_internetCheckReply.get(), &QNetworkReply::finished, this,
+                     &InternetConnectionInfo::proccessAvailabilityResult);
 }
 
 void InternetConnectionInfo::proccessAvailabilityResult()
@@ -27,4 +26,4 @@ void InternetConnectionInfo::proccessAvailabilityResult()
         emit available();
 }
 
-}
+}  // namespace application::utility

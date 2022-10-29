@@ -1,6 +1,5 @@
 #include "user.hpp"
 
-
 namespace domain::models
 {
 
@@ -9,11 +8,12 @@ User::User()
 }
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email)
-    : m_firstName(firstName), m_lastName(lastName), m_email(email)
+           const QString& email) :
+    m_firstName(firstName),
+    m_lastName(lastName),
+    m_email(email)
 {
 }
-
 
 const QString& User::getFirstName() const
 {
@@ -65,4 +65,4 @@ void User::setTags(const std::vector<Tag>& newTags)
     m_tags = newTags;
 }
 
-} // namespace domain::models
+}  // namespace domain::models
