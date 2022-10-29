@@ -95,11 +95,12 @@ void AuthenticationAccess::proccessAuthenticationResult()
 
 void AuthenticationAccess::proccessRegistrationResult()
 {
+    QString message = m_reply->readAll();
     auto expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))
     {
         QString reason = m_reply->readAll();
-        emit registrationFinished(false, reason);
+        emit registrationFinished(false, message);
         return;
     }
 
