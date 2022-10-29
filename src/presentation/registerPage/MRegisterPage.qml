@@ -276,10 +276,13 @@ MFlickWrapper
                                 
                                 function buttonTriggeredAction()
                                 {
-                                    AuthController.registrationFinished.connect(proccessRegistrationResult);
-                                    AuthController.registerUser(firstNameInput.text, lastNameInput.text,
-                                                                emailInput.text, passwordInput.text,
-                                                                keepMeUpdated.checked);   
+                                    if(passwordInput.text == passwordConfirmationInput.text)
+                                    {
+                                        AuthController.registrationFinished.connect(proccessRegistrationResult);
+                                        AuthController.registerUser(firstNameInput.text, lastNameInput.text,
+                                                                    emailInput.text, passwordInput.text,
+                                                                    keepMeUpdated.checked);   
+                                    }
                                 }
                                 
                                 function proccessRegistrationResult(success, reason)
