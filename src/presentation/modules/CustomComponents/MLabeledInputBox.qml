@@ -15,12 +15,15 @@ Item
     property color inputFontColor : Style.colorBaseText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
+    property string errorText : ""
     property string headerText : "Header here"
+    property double errorFontSize : 10
     property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
     property color headerFontColor : Style.colorBaseTitle
     property int headerToBoxSpacing : 2
     property color borderColor : Style.colorLightBorder
+    property color backgroundColor: Style.colorBackground
     property int borderWidth : 2
     property int borderRadius : 5
     property int textPadding : 15
@@ -37,7 +40,8 @@ Item
     {
         id: layout
         width: parent.width
-        height: header.implicitHeight + inputBox.height
+        height: header.implicitHeight + inputBox.height + 
+                (errorText.visible && root.errorText != "" ? errorText.implicitHeight : 0)
         spacing: root.headerToBoxSpacing
         
         Label
@@ -58,9 +62,11 @@ Item
             padding: 0
             background: Rectangle
             {
+                id: backgroundRect
                 border.width: root.borderWidth
                 border.color: root.borderColor
                 radius: root.borderRadius
+                color: root.backgroundColor
             }
             
             
@@ -134,6 +140,18 @@ Item
                 }
             }
         }
+    
+        Label
+        {
+            id: errorText
+            Layout.fillWidth: true
+            Layout.topMargin: 2
+            visible: false
+            text: root.errorText
+            font.pointSize: root.errorFontSize
+            font.weight: root.headerFontWeight
+            color: Style.colorErrorText
+        }
     }
     
     
@@ -145,5 +163,23 @@ Item
     function clearText()
     {
         inputField.clear();
+    }
+    
+    function setError()
+    {
+        backgroundRect.border.color = Style.colorErrorBorder;
+        backgroundRect.border.width = 2;
+        backgroundRect.color = Style.colorErrorLight;
+        
+        errorText.visible = true;
+    }
+    
+    function clearError()
+    {
+        backgroundRect.border.color = root.borderColor;
+        backgroundRect.border.width = root.borderWidth;
+        backgroundRect.color = root.backgroundColor;
+        
+        errorText.visible = false;
     }
 }
