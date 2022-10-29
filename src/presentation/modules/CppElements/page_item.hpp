@@ -1,10 +1,10 @@
 #pragma once
 
+#include <core/document.h>
+#include <core/view.h>
 #include <QImage>
 #include <QPointer>
 #include <QQuickItem>
-#include <core/document.h>
-#include <core/view.h>
 #include "document_item.hpp"
 
 
@@ -14,30 +14,35 @@ namespace Okular
 {
 class Document;
 class Page;
-}
+}  // namespace Okular
 
 namespace cpp_elements
 {
 class DocumentItem;
 
-class PageItem : public QQuickItem, public Okular::View
+class PageItem : public QQuickItem,
+                 public Okular::View
 {
     Q_OBJECT
 
     /**
-     * If this page is in a Flickable, assign it in this property, to make goToBookmark work
+     * If this page is in a Flickable, assign it in this property, to make
+     * goToBookmark work
      */
-    Q_PROPERTY(QQuickItem *flickable READ flickable WRITE setFlickable NOTIFY flickableChanged)
+    Q_PROPERTY(QQuickItem* flickable READ flickable WRITE setFlickable NOTIFY
+                   flickableChanged)
 
     /**
      * The document this page belongs to
      */
-    Q_PROPERTY(DocumentItem *document READ document WRITE setDocument NOTIFY documentChanged)
-    
+    Q_PROPERTY(DocumentItem* document READ document WRITE setDocument NOTIFY
+                   documentChanged)
+
     /**
      * The currently displayed page
      */
-    Q_PROPERTY(int pageNumber READ pageNumber WRITE setPageNumber NOTIFY pageNumberChanged)
+    Q_PROPERTY(int pageNumber READ pageNumber WRITE setPageNumber NOTIFY
+                   pageNumberChanged)
 
     /**
      * "Natural" width of the page
@@ -47,14 +52,16 @@ class PageItem : public QQuickItem, public Okular::View
     /**
      * "Natural" height of the page
      */
-    Q_PROPERTY(int implicitHeight READ implicitHeight NOTIFY implicitHeightChanged)
+    Q_PROPERTY(
+        int implicitHeight READ implicitHeight NOTIFY implicitHeightChanged)
 
     /**
      * True if the page contains at least a bookmark.
-     * Writing true to tis property idds a bookmark at the beginning of the page (if needed).
-     * Writing false, all bookmarks for this page will be removed
+     * Writing true to tis property idds a bookmark at the beginning of the page
+     * (if needed). Writing false, all bookmarks for this page will be removed
      */
-    Q_PROPERTY(bool bookmarked READ isBookmarked WRITE setBookmarked NOTIFY bookmarkedChanged)
+    Q_PROPERTY(bool bookmarked READ isBookmarked WRITE setBookmarked NOTIFY
+                   bookmarkedChanged)
 
     /**
      * list of bookmarks urls valid on this page
@@ -62,16 +69,16 @@ class PageItem : public QQuickItem, public Okular::View
     Q_PROPERTY(QStringList bookmarks READ bookmarks NOTIFY bookmarksChanged)
 
 public:
-    explicit PageItem(QQuickItem *parent = nullptr);
+    explicit PageItem(QQuickItem* parent = nullptr);
     ~PageItem() override;
 
-    void setFlickable(QQuickItem *flickable);
-    QQuickItem *flickable() const;
+    void setFlickable(QQuickItem* flickable);
+    QQuickItem* flickable() const;
 
     int implicitWidth() const;
     int implicitHeight() const;
 
-    DocumentItem *document() const;
+    DocumentItem* document() const;
     void setDocument(DocumentItem* doc);
 
     int pageNumber() const;
@@ -84,10 +91,11 @@ public:
     void requestPixmap();
 
     /**
-     * loads a page bookmark and tries to ensure the bookmarked position is visible
+     * loads a page bookmark and tries to ensure the bookmarked position is
+     * visible
      * @param bookmark Url for the bookmark
      */
-    Q_INVOKABLE void goToBookmark(const QString &bookmark);
+    Q_INVOKABLE void goToBookmark(const QString& bookmark);
 
     /**
      * Returns the position in the page for a bookmark
@@ -95,7 +103,7 @@ public:
      *
      * @param bookmark Url for the bookmark
      */
-    Q_INVOKABLE QPointF bookmarkPosition(const QString &bookmark) const;
+    Q_INVOKABLE QPointF bookmarkPosition(const QString& bookmark) const;
 
     /**
      * Add a new bookmark ar a given position of the current page
@@ -110,12 +118,14 @@ public:
     /**
      * Remove a bookmark at a given position, if any
      */
-    Q_INVOKABLE void removeBookmark(const QString &bookmark);
+    Q_INVOKABLE void removeBookmark(const QString& bookmark);
 
-    void geometryChanged(const QRectF &newGeometry, const QRectF &oldGeometry) override;
+    void geometryChanged(const QRectF& newGeometry,
+                         const QRectF& oldGeometry) override;
 
-    QSGNode *updatePaintNode(QSGNode *, QQuickItem::UpdatePaintNodeData *) override;
-    
+    QSGNode* updatePaintNode(QSGNode*,
+                             QQuickItem::UpdatePaintNodeData*) override;
+
 Q_SIGNALS:
     void flickableChanged();
     void documentChanged();
@@ -136,14 +146,14 @@ private:
     void paint();
     void refreshPage();
 
-    const Okular::Page *m_page;
+    const Okular::Page* m_page;
     bool m_bookmarked;
     bool m_isThumbnail;
     QPointer<DocumentItem> m_documentItem;
-    QTimer *m_redrawTimer;
+    QTimer* m_redrawTimer;
     QPointer<QQuickItem> m_flickable;
     Okular::DocumentViewport m_viewPort;
     QImage m_buffer;
 };
 
-} // namespace cpp_elements
+}  // namespace cpp_elements
