@@ -8,12 +8,15 @@ import CustomComponents 1.0
 Item
 {
     id: root
-    property bool activated : false
+    property bool activated: false
+    property bool hasError: false
     signal keyUp()
     signal keyDown()
     
     implicitWidth: 200
     implicitHeight: layout.height
+    
+    onActivatedChanged: if(root.hasError) root.clearError()
     
     
     RowLayout
@@ -53,8 +56,8 @@ Item
         {
             id: text
             Layout.fillWidth: true
-            text: 'I accept the <font color=' + Style.colorBasePurple + '>terms</font> 
-                   and the <font color=' + Style.colorBasePurple + '>privacy policy.</font>'
+            text: 'I accept the <font color=' + Style.colorBasePurple + '>Terms of Service</font> 
+                       and the <font color=' + Style.colorBasePurple + '>privacy policy.</font>'
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             font.pointSize: 11
@@ -66,5 +69,21 @@ Item
     function giveFocus()
     {
         acceptCheckBox.forceActiveFocus();
+    }
+    
+    function setError() 
+    {
+        root.hasError = true;
+        acceptCheckBox.borderWidth = 2;
+        acceptCheckBox.borderColor = Style.colorErrorBorder;
+        acceptCheckBox.uncheckedBackgroundColor = Style.colorErrorLight;
+    }
+    
+    function clearError()
+    {
+        root.hasError = false;
+        acceptCheckBox.borderWidth = 1;
+        acceptCheckBox.borderColor = Style.colorDarkBorder;
+        acceptCheckBox.uncheckedBackgroundColor = "transparent";
     }
 }

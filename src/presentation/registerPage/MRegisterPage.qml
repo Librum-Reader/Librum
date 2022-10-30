@@ -280,55 +280,36 @@ MFlickWrapper
                                 
                                 function buttonTriggeredAction()
                                 {
-                                    if(passwordInput.text == passwordConfirmationInput.text)
-                                    {
-                                        AuthController.registrationFinished.connect(proccessRegistrationResult);
-                                        AuthController.registerUser(firstNameInput.text, lastNameInput.text,
-                                                                    emailInput.text, passwordInput.text,
-                                                                    keepMeUpdated.checked);   
-                                    }
-                                    else
+                                    if(passwordInput.text != passwordConfirmationInput.text)
                                     {
                                         if(!passwordInput.hasError)
                                         {
                                             passwordInput.errorText = "";
                                             passwordInput.setError();
                                         }
-                                            
+                                        
                                         passwordConfirmationInput.errorText = "Passwords don't match."
                                         passwordConfirmationInput.setError();
+                                        return;
                                     }
+                                    
+                                    if(!acceptPolicy.activated)
+                                    {
+                                        acceptPolicy.setError()
+                                    }
+                                    
+                                    AuthController.registrationFinished.connect(proccessRegistrationResult);
+                                    AuthController.registerUser(firstNameInput.text, lastNameInput.text,
+                                                                emailInput.text, passwordInput.text,
+                                                                keepMeUpdated.checked);
                                 }
                                 
                                 function proccessRegistrationResult(success, reason)
                                 {
                                     if(success)
-                                    {
                                         loadPage(loginPage);
-                                    }
                                     else
-                                    {
-                                        if(reason.toLowerCase().includes("email"))
-                                        {
-                                            emailInput.errorText = reason;
-                                            emailInput.setError();
-                                        }
-                                        else if(reason.toLowerCase().includes("password"))
-                                        {
-                                            passwordInput.errorText = reason;
-                                            passwordInput.setError();
-                                        }
-                                        else if(reason.toLowerCase().includes("first"))
-                                        {
-                                            firstNameInput.errorText = reason;
-                                            firstNameInput.setError();
-                                        }
-                                        else if(reason.toLowerCase().includes("last"))
-                                        {
-                                            lastNameInput.errorText = reason;
-                                            lastNameInput.setError();
-                                        }
-                                    }
+                                        page.setErrors(reason);
                                 }
                             }
                         }
@@ -355,5 +336,39 @@ MFlickWrapper
         }
         
         Component.onCompleted: firstNameInput.giveFocus();
+        
+        
+        function setErrors(reason)
+        {
+            if(reason.toLowerCase().includes("email"))
+            {
+                emailInput.errorText = reason;
+                emailInput.setError();
+            }
+            else if(reason.toLowerCase().includes("password"))
+            {
+                passwordInput.errorText = reason;
+                passwordInput.setError();
+            }
+            else if(reason.toLowerCase().includes("first"))
+            {
+                firstNameInput.errorText = reason;
+                firstNameInput.setError();
+            }
+            else if(reason.toLowerCase().includes("last"))
+            {
+                lastNameInput.errorText = reason;
+                lastNameInput.setError();
+            }
+            else if(reason.toLowerCase().includes("last"))
+            {
+                lastNameInput.errorText = reason;
+                lastNameInput.setError();
+            }
+            else
+            {
+                
+            }
+        }
     }
 }
