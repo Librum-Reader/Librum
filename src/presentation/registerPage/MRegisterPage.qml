@@ -206,11 +206,7 @@ MFlickWrapper
                                         }
                                     }
                                 
-                                onEdited:
-                                {
-                                    passwordInput.clearError();
-                                    passwordConfirmationInput.clearError();
-                                }
+                                onEdited: passwordConfirmationInput.clearError()
                             }
                             
                             MLabeledInputBox 
@@ -236,11 +232,7 @@ MFlickWrapper
                                         }
                                     }
                                 
-                                onEdited:
-                                {
-                                    passwordInput.clearError();
-                                    passwordConfirmationInput.clearError();
-                                }
+                                onEdited: passwordInput.clearError()
                             }
                             
                             MKeepMeUpdated
@@ -297,8 +289,12 @@ MFlickWrapper
                                     }
                                     else
                                     {
-                                        passwordInput.setError();
-                                        
+                                        if(!passwordInput.hasError)
+                                        {
+                                            passwordInput.errorText = "";
+                                            passwordInput.setError();
+                                        }
+                                            
                                         passwordConfirmationInput.errorText = "Passwords don't match."
                                         passwordConfirmationInput.setError();
                                     }
@@ -312,8 +308,26 @@ MFlickWrapper
                                     }
                                     else
                                     {
-                                        emailInput.errorText = reason;
-                                        emailInput.setError();
+                                        if(reason.toLowerCase().includes("email"))
+                                        {
+                                            emailInput.errorText = reason;
+                                            emailInput.setError();
+                                        }
+                                        else if(reason.toLowerCase().includes("password"))
+                                        {
+                                            passwordInput.errorText = reason;
+                                            passwordInput.setError();
+                                        }
+                                        else if(reason.toLowerCase().includes("first"))
+                                        {
+                                            firstNameInput.errorText = reason;
+                                            firstNameInput.setError();
+                                        }
+                                        else if(reason.toLowerCase().includes("last"))
+                                        {
+                                            lastNameInput.errorText = reason;
+                                            lastNameInput.setError();
+                                        }
                                     }
                                 }
                             }
