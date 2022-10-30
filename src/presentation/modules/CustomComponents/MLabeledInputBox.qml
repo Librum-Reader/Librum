@@ -15,9 +15,11 @@ Item
     property color inputFontColor : Style.colorBaseText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
+    property bool hasError: false
+    property bool clearErrorOnEdit: true
     property string errorText : ""
+    property double errorFontSize : 10.5
     property string headerText : "Header here"
-    property double errorFontSize : 10
     property int headerFontWeight : Font.Medium
     property double headerFontSize : 10.5
     property color headerFontColor : Style.colorBaseTitle
@@ -98,7 +100,13 @@ Item
                         color: "transparent"
                     }
                     
-                    onTextEdited: root.edited()
+                    onTextEdited:
+                    {
+                        root.edited();
+                        
+                        if(clearErrorOnEdit)
+                            root.clearError();
+                    }
                     
                     onActiveFocusChanged: resetCursorPositionToStart()
                     onTextChanged: resetCursorPositionToStart()
@@ -140,7 +148,7 @@ Item
                 }
             }
         }
-    
+        
         Label
         {
             id: errorText
@@ -167,6 +175,7 @@ Item
     
     function setError()
     {
+        root.hasError = true;
         backgroundRect.border.color = Style.colorErrorBorder;
         backgroundRect.border.width = 2;
         backgroundRect.color = Style.colorErrorLight;
@@ -176,6 +185,7 @@ Item
     
     function clearError()
     {
+        root.hasError = false;
         backgroundRect.border.color = root.borderColor;
         backgroundRect.border.width = root.borderWidth;
         backgroundRect.color = root.backgroundColor;
