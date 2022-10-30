@@ -154,7 +154,7 @@ Item
             id: errorText
             Layout.fillWidth: true
             Layout.topMargin: 2
-            visible: false
+            visible: root.hasError
             text: root.errorText
             font.pointSize: root.errorFontSize
             font.weight: root.headerFontWeight
@@ -179,8 +179,6 @@ Item
         backgroundRect.border.color = Style.colorErrorBorder;
         backgroundRect.border.width = 2;
         backgroundRect.color = Style.colorErrorLight;
-        
-        errorText.visible = true;
     }
     
     function clearError()
@@ -189,7 +187,5 @@ Item
         backgroundRect.border.color = root.borderColor;
         backgroundRect.border.width = root.borderWidth;
         backgroundRect.color = root.backgroundColor;
-        
-        errorText.visible = false;
     }
 }
