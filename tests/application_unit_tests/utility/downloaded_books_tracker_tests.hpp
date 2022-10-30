@@ -49,8 +49,8 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -82,8 +82,8 @@ TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -117,8 +117,8 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -167,8 +167,8 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
     int currentPage = 224;
@@ -220,8 +220,8 @@ TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -272,8 +272,8 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -314,8 +314,8 @@ TEST_F(ADownloadedBooksTracker, FailsUpdatingAnUntrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 

@@ -52,11 +52,11 @@ public:
     const QString& getPagesSize() const;
     void setPagesSize(const QString& newPagesSize);
 
-    const QString& getAddedToLibrary() const;
-    void setAddedToLibrary(const QString& newAddedToLibrary);
+    const QDateTime& getAddedToLibrary() const;
+    void setAddedToLibrary(const QDateTime& newAddedToLibrary);
 
-    const QString& getLastOpened() const;
-    void setLastOpened(const QString& newLastOpened);
+    const QDateTime& getLastOpened() const;
+    void setLastOpened(const QDateTime& newLastOpened);
 
     const QString& getFilePath() const;
     void setFilePath(const QString& newLocalPath);

@@ -84,8 +84,9 @@ BookDto BookStorageGateway::getBookDtoFromBook(const domain::models::Book& book)
         .pagesSize = book.getPagesSize(),
         .pageCount = book.getPageCount(),
         .currentPage = book.getCurrentPage(),
-        .addedToLibrary = book.getAddedToLibrary(),
-        .lastOpened = book.getLastOpened(),
+        .addedToLibrary =
+            book.getAddedToLibrary().toString("hh:mm:ss - dd.MM.yyyy"),
+        .lastOpened = book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy"),
         .cover = book.getCoverAsString(),
     };
 

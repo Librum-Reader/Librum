@@ -1,4 +1,5 @@
 #pragma once
+#include <QDateTime>
 #include <QImage>
 #include <QString>
 
@@ -16,8 +17,8 @@ struct BookMetaData
     QString documentSize;
     QString pagesSize;
     int pageCount;
-    QString addedToLibrary;
-    QString lastOpened;
+    QDateTime addedToLibrary;
+    QDateTime lastOpened;
     QImage cover;
 
     bool operator==(const BookMetaData& rhs) const

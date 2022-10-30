@@ -62,22 +62,22 @@ void Book::setFilePath(const QString& newLocalPath)
     m_filePath = newLocalPath;
 }
 
-const QString& Book::getLastOpened() const
+const QDateTime& Book::getLastOpened() const
 {
     return m_metaData.lastOpened;
 }
 
-void Book::setLastOpened(const QString& newLastOpened)
+void Book::setLastOpened(const QDateTime& newLastOpened)
 {
     m_metaData.lastOpened = newLastOpened;
 }
 
-const QString& Book::getAddedToLibrary() const
+const QDateTime& Book::getAddedToLibrary() const
 {
     return m_metaData.addedToLibrary;
 }
 
-void Book::setAddedToLibrary(const QString& newAddedToLibrary)
+void Book::setAddedToLibrary(const QDateTime& newAddedToLibrary)
 {
     m_metaData.addedToLibrary = newAddedToLibrary;
 }
@@ -298,8 +298,9 @@ QByteArray Book::toJson() const
         { "language", getLanguage() },
         { "documentSize", getDocumentSize() },
         { "pagesSize", getPagesSize() },
-        { "addedToLibrary", getAddedToLibrary() },
-        { "lastOpened", getLastOpened() },
+        { "addedToLibrary",
+          getAddedToLibrary().toString("hh:mm:ss - dd.MM.yyyy") },
+        { "lastOpened", getLastOpened().toString("hh:mm:ss - dd.MM.yyyy") },
         { "filePath", getFilePath() },
         { "cover", getCoverAsString() },
     };
@@ -322,8 +323,10 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .documentSize = jsonObject["documentSize"].toString(),
         .pagesSize = jsonObject["pagesSize"].toString(),
         .pageCount = jsonObject["pageCount"].toInt(),
-        .addedToLibrary = jsonObject["addedToLibrary"].toString(),
-        .lastOpened = jsonObject["lastOpened"].toString(),
+        .addedToLibrary =
+            QDateTime::fromString(jsonObject["addedToLibrary"].toString()),
+        .lastOpened =
+            QDateTime::fromString(jsonObject["lastOpened"].toString()),
     };
 
     auto cover = jsonObject["cover"].toString();

@@ -51,7 +51,6 @@ private slots:
     void addRemoteBooks(const std::vector<domain::models::Book>& books);
 
 private:
-    QString getCurrentDateTimeAsString();
     void loadBooks();
     void loadLocalBooks();
 

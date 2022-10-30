@@ -129,10 +129,11 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
             updatedBook.setPageCount(value.toInt());
             break;
         case MetaProperties::AddedToLibrary:
-            updatedBook.setAddedToLibrary(value.toString());
+            updatedBook.setAddedToLibrary(
+                QDateTime::fromString(value.toString()));
             break;
         case MetaProperties::LastModified:
-            updatedBook.setLastOpened(value.toString());
+            updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
         case MetaProperties::Cover:
             updatedBook.setCover(getCorrectlySizedBookCover(value.toString()));
@@ -226,8 +227,12 @@ void BookController::refreshBookChache()
         bookDto.documentSize = book.getDocumentSize();
         bookDto.pagesSize = book.getPagesSize();
         bookDto.pageCount = book.getPageCount();
-        bookDto.addedToLibrary = book.getAddedToLibrary();
-        bookDto.lastOpened = book.getLastOpened();
+        bookDto.addedToLibrary =
+            book.getAddedToLibrary().toString("hh:mm:ss - dd.MM.yyyy");
+        bookDto.lastOpened =
+            book.getLastOpened().toString().isEmpty()
+                ? "Never"
+                : book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy");
         bookDto.cover = book.getCoverAsStringWithType();
         bookDto.downloaded = book.getDownloaded();
 

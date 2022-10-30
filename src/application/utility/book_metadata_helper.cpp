@@ -35,8 +35,8 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
         .documentSize = getDocumentSize(),
         .pagesSize = getPagesSize(),
         .pageCount = getPageCount(),
-        .addedToLibrary = getCurrentDateTimeAsString(),
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(),
     };
 

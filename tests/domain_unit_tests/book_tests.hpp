@@ -131,8 +131,8 @@ TEST(ABook, SucceedsSerializingToJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -156,8 +156,10 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(metaData.documentSize, bookObject["documentSize"].toString());
     EXPECT_EQ(metaData.pagesSize, bookObject["pagesSize"].toString());
     EXPECT_EQ(metaData.pageCount, bookObject["pageCount"].toInt());
-    EXPECT_EQ(metaData.addedToLibrary, bookObject["addedToLibrary"].toString());
-    EXPECT_EQ(metaData.lastOpened, bookObject["lastOpened"].toString());
+    EXPECT_EQ(metaData.addedToLibrary,
+              QDateTime::fromString(bookObject["addedToLibrary"].toString()));
+    EXPECT_EQ(metaData.lastOpened,
+              QDateTime::fromString(bookObject["lastOpened"].toString()));
 
     auto cover = bookObject["cover"].toString();
     auto coverImage = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
@@ -181,8 +183,8 @@ TEST(ABook, SucceedsDeserializingFromJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -232,8 +234,8 @@ TEST(ABook, SucceedsComparison)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -267,8 +269,8 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -287,8 +289,8 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = "18.10.2022 - 8:54 pm",
-        .lastOpened = "Never",
+        .addedToLibrary = QDateTime::currentDateTimeUtc(),
+        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 

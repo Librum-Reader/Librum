@@ -74,7 +74,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getAddedToLibrary();
         break;
     case LastOpenedRole:
-        return book.getLastOpened();
+        return book.getLastOpened().toString().isEmpty()
+                   ? "Never"
+                   : book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy");
         break;
     case CoverRole:
         return book.getCoverAsStringWithType();

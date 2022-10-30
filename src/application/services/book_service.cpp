@@ -207,8 +207,7 @@ bool BookService::refreshLastOpenedFlag(const QUuid& uuid)
     if(!book)
         return false;
 
-    auto now = getCurrentDateTimeAsString();
-    book->setLastOpened(now);
+    book->setLastOpened(QDateTime::currentDateTimeUtc());
 
     auto index = getBookIndex(uuid);
     emit dataChanged(index);
@@ -237,14 +236,6 @@ void BookService::storeBookCover(const QPixmap* pixmap)
 
     book.setCover(pixmap->toImage());
     emit bookCoverGenerated(index);
-}
-
-QString BookService::getCurrentDateTimeAsString()
-{
-    auto now = QDateTime::currentDateTimeUtc();
-    auto result = now.toString("dd.MM.yyyy") + " - " + now.toString("h:m ap");
-
-    return result;
 }
 
 void BookService::loadBooks()
