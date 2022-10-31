@@ -19,6 +19,7 @@ struct BookMetaData
     int pageCount;
     QDateTime addedToLibrary;
     QDateTime lastOpened;
+    QDateTime lastModified;
     QImage cover;
 
     bool operator==(const BookMetaData& rhs) const

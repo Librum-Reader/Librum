@@ -82,6 +82,16 @@ void Book::setAddedToLibrary(const QDateTime& newAddedToLibrary)
     m_metaData.addedToLibrary = newAddedToLibrary;
 }
 
+const QDateTime& Book::getLastModified() const
+{
+    return m_metaData.lastModified;
+}
+
+void Book::setLastModified(const QDateTime& newLastModified)
+{
+    m_metaData.lastModified = newLastModified;
+}
+
 const QString& Book::getPagesSize() const
 {
     return m_metaData.pagesSize;
