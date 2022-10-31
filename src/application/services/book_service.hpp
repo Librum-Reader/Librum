@@ -40,7 +40,7 @@ public:
                                        const QUrl& path) override;
 
 public slots:
-    bool refreshLastOpenedFlag(const QUuid& uuid) override;
+    bool refreshLastOpened(const QUuid& uuid) override;
     void setAuthenticationToken(const QString& token,
                                 const QString& email) override;
     void clearAuthenticationToken() override;

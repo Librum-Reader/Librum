@@ -201,7 +201,7 @@ BookOperationStatus BookService::saveBookToPath(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-bool BookService::refreshLastOpenedFlag(const QUuid& uuid)
+bool BookService::refreshLastOpened(const QUuid& uuid)
 {
     auto book = getBook(uuid);
     if(!book)

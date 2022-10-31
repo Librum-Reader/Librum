@@ -203,7 +203,7 @@ int BookController::saveBookToPath(const QString& uuid, const QUrl& path)
 
 void BookController::refreshLastOpenedFlag(const QString& uuid)
 {
-    auto result = m_bookService->refreshLastOpenedFlag(uuid);
+    auto result = m_bookService->refreshLastOpened(uuid);
     if(result)
         m_bookChacheChanged = true;
 }
