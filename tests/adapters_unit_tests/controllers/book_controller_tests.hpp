@@ -39,7 +39,7 @@ public:
     MOCK_METHOD(Book*, getBook, (const QUuid&), (override));
     MOCK_METHOD(int, getBookIndex, (const QUuid&), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
-    MOCK_METHOD(bool, refreshLastOpenedFlag, (const QUuid&), (override));
+    MOCK_METHOD(bool, refreshLastOpened, (const QUuid&), (override));
 
     MOCK_METHOD(BookOperationStatus, addTag,
                 (const QUuid&, const domain::models::Tag&), (override));
@@ -384,7 +384,7 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
     QString bookUuid = "some-book-uuid";
 
     // Expect
-    EXPECT_CALL(bookServiceMock, refreshLastOpenedFlag(_))
+    EXPECT_CALL(bookServiceMock, refreshLastOpened(_))
         .Times(1)
         .WillOnce(Return(true));
 

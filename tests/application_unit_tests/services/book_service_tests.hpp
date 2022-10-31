@@ -418,7 +418,7 @@ TEST_F(ABookService, SucceedsRefreshingLastOpenedFlag)
 
     // Act
     auto before = bookService->getBook(bookUuid)->getLastOpened();
-    bookService->refreshLastOpenedFlag(bookUuid);
+    bookService->refreshLastOpened(bookUuid);
     auto after = bookService->getBook(bookUuid)->getLastOpened();
 
     // Assert
