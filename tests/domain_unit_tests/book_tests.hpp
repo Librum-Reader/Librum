@@ -156,10 +156,14 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(metaData.documentSize, bookObject["documentSize"].toString());
     EXPECT_EQ(metaData.pagesSize, bookObject["pagesSize"].toString());
     EXPECT_EQ(metaData.pageCount, bookObject["pageCount"].toInt());
-    EXPECT_EQ(metaData.addedToLibrary,
-              QDateTime::fromString(bookObject["addedToLibrary"].toString()));
-    EXPECT_EQ(metaData.lastOpened,
-              QDateTime::fromString(bookObject["lastOpened"].toString()));
+    EXPECT_EQ(metaData.addedToLibrary.currentSecsSinceEpoch(),
+              QDateTime::fromString(bookObject["addedToLibrary"].toString(),
+                                    "hh:mm:ss - dd.MM.yyyy")
+                  .currentSecsSinceEpoch());
+    EXPECT_EQ(metaData.lastOpened.currentSecsSinceEpoch(),
+              QDateTime::fromString(bookObject["lastOpened"].toString(),
+                                    "hh:mm:ss - dd.MM.yyyy")
+                  .currentSecsSinceEpoch());
 
     auto cover = bookObject["cover"].toString();
     auto coverImage = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
@@ -173,6 +177,8 @@ TEST(ABook, SucceedsSerializingToJson)
 TEST(ABook, SucceedsDeserializingFromJson)
 {
     // Arrange
+    auto currentTime = QDateTime::currentDateTimeUtc();
+
     BookMetaData metaData {
         .title = "SomeTitle",
         .author = "SomeAuthor",
@@ -183,8 +189,8 @@ TEST(ABook, SucceedsDeserializingFromJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
-        .lastOpened = QDateTime(),
+        .addedToLibrary = currentTime,
+        .lastOpened = currentTime,
         .cover = QImage(""),
     };
 
@@ -212,8 +218,10 @@ TEST(ABook, SucceedsDeserializingFromJson)
     EXPECT_EQ(metaData.documentSize, result.getDocumentSize());
     EXPECT_EQ(metaData.pagesSize, result.getPagesSize());
     EXPECT_EQ(metaData.pageCount, result.getPageCount());
-    EXPECT_EQ(metaData.addedToLibrary, result.getAddedToLibrary());
-    EXPECT_EQ(metaData.lastOpened, result.getLastOpened());
+    EXPECT_EQ(metaData.addedToLibrary.currentSecsSinceEpoch(),
+              result.getAddedToLibrary().currentSecsSinceEpoch());
+    EXPECT_EQ(metaData.lastOpened.currentSecsSinceEpoch(),
+              result.getLastOpened().currentSecsSinceEpoch());
     EXPECT_EQ(metaData.cover, result.getCover());
     EXPECT_EQ(book.getFilePath(), result.getFilePath());
     EXPECT_EQ(book.getCurrentPage(), result.getCurrentPage());
