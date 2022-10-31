@@ -131,7 +131,6 @@ TEST(ABook, SucceedsSerializingToJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
@@ -177,8 +176,6 @@ TEST(ABook, SucceedsSerializingToJson)
 TEST(ABook, SucceedsDeserializingFromJson)
 {
     // Arrange
-    auto currentTime = QDateTime::currentDateTimeUtc();
-
     BookMetaData metaData {
         .title = "SomeTitle",
         .author = "SomeAuthor",
@@ -189,8 +186,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = currentTime,
-        .lastOpened = currentTime,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
         .cover = QImage(""),
     };
 
@@ -242,7 +238,6 @@ TEST(ABook, SucceedsComparison)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
@@ -277,7 +272,6 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
@@ -297,7 +291,6 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };

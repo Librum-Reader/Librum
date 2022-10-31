@@ -410,11 +410,13 @@ TEST_F(ABookService, SucceedsGettingTheBookCount)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsRefreshingLastOpenedFlag)
+TEST_F(ABookService, SucceedsRefreshingLastOpened)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
+
+    // TODO: Might fail if the whole test is done in less than a MS, FIX
 
     // Act
     auto before = bookService->getBook(bookUuid)->getLastOpened();
