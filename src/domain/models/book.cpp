@@ -87,9 +87,9 @@ const QDateTime& Book::getLastModified() const
     return m_metaData.lastModified;
 }
 
-void Book::setLastModified(const QDateTime& newLastModified)
+void Book::updateLastModified()
 {
-    m_metaData.lastModified = newLastModified;
+    m_metaData.lastModified = QDateTime::currentDateTimeUtc();
 }
 
 const QString& Book::getPagesSize() const

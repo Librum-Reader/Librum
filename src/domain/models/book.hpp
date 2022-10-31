@@ -59,7 +59,7 @@ public:
     void setLastOpened(const QDateTime& newLastOpened);
 
     const QDateTime& getLastModified() const;
-    void setLastModified(const QDateTime& newLastModified);
+    void updateLastModified();
 
     const QString& getFilePath() const;
     void setFilePath(const QString& newLocalPath);
