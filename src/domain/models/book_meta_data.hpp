@@ -28,8 +28,11 @@ struct BookMetaData
                format == rhs.format && language == rhs.language &&
                documentSize == rhs.documentSize && pagesSize == rhs.pagesSize &&
                pageCount == rhs.pageCount &&
-               addedToLibrary == rhs.addedToLibrary &&
-               lastOpened == rhs.lastOpened && cover == rhs.cover;
+               addedToLibrary.currentSecsSinceEpoch() ==
+                   rhs.addedToLibrary.currentSecsSinceEpoch() &&
+               lastOpened.currentSecsSinceEpoch() ==
+                   rhs.lastOpened.currentSecsSinceEpoch() &&
+               cover == rhs.cover;
     }
 };
 

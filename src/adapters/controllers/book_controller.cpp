@@ -228,9 +228,10 @@ void BookController::refreshBookChache()
         bookDto.pagesSize = book.getPagesSize();
         bookDto.pageCount = book.getPageCount();
         bookDto.addedToLibrary =
-            book.getAddedToLibrary().toString("hh:mm:ss - dd.MM.yyyy");
+            book.getAddedToLibrary().toLocalTime().toString(
+                "hh:mm:ss - dd.MM.yyyy");
         bookDto.lastOpened =
-            book.getLastOpened().toString().isEmpty()
+            book.getLastOpened().toLocalTime().toString().isEmpty()
                 ? "Never"
                 : book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy");
         bookDto.cover = book.getCoverAsStringWithType();

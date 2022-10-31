@@ -71,12 +71,14 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getPageCount();
         break;
     case AddedToLibraryRole:
-        return book.getAddedToLibrary();
+        return book.getAddedToLibrary().toLocalTime().toString(
+            "hh:mm:ss - dd.MM.yyyy");
         break;
     case LastOpenedRole:
-        return book.getLastOpened().toString().isEmpty()
+        return book.getLastOpened().toLocalTime().toString().isEmpty()
                    ? "Never"
-                   : book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy");
+                   : book.getLastOpened().toLocalTime().toString(
+                         "hh:mm:ss - dd.MM.yyyy");
         break;
     case CoverRole:
         return book.getCoverAsStringWithType();

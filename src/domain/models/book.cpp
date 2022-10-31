@@ -323,11 +323,14 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .documentSize = jsonObject["documentSize"].toString(),
         .pagesSize = jsonObject["pagesSize"].toString(),
         .pageCount = jsonObject["pageCount"].toInt(),
-        .addedToLibrary =
-            QDateTime::fromString(jsonObject["addedToLibrary"].toString()),
-        .lastOpened =
-            QDateTime::fromString(jsonObject["lastOpened"].toString()),
+        .addedToLibrary = QDateTime::fromString(
+            jsonObject["addedToLibrary"].toString(), "hh:mm:ss - dd.MM.yyyy"),
+        .lastOpened = QDateTime::fromString(jsonObject["lastOpened"].toString(),
+                                            "hh:mm:ss - dd.MM.yyyy"),
     };
+
+    metaData.addedToLibrary.setTimeSpec(Qt::UTC);
+    metaData.lastOpened.setTimeSpec(Qt::UTC);
 
     auto cover = jsonObject["cover"].toString();
     metaData.cover = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
