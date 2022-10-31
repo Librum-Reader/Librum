@@ -208,6 +208,8 @@ bool BookService::refreshLastOpenedFlag(const QUuid& uuid)
         return false;
 
     book->setLastOpened(QDateTime::currentDateTimeUtc());
+    m_downloadedBooksTracker->updateTrackedBook(*book);
+    m_bookStorageGateway->updateBook(m_authenticationToken, *book);
 
     auto index = getBookIndex(uuid);
     emit dataChanged(index);
