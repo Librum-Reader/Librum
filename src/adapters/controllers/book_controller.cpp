@@ -215,37 +215,7 @@ void BookController::refreshBookChache()
     m_bookCache.clear();
     for(const auto& book : books)
     {
-        dtos::BookDto bookDto;
-        bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
-        bookDto.title = book.getTitle();
-        bookDto.author = book.getAuthor();
-        bookDto.filePath = book.getFilePath();
-        bookDto.creator = book.getCreator();
-        bookDto.creationDate = book.getCreationDate();
-        bookDto.format = book.getFormat();
-        bookDto.language = book.getLanguage();
-        bookDto.documentSize = book.getDocumentSize();
-        bookDto.pagesSize = book.getPagesSize();
-        bookDto.pageCount = book.getPageCount();
-        bookDto.addedToLibrary =
-            book.getAddedToLibrary().toLocalTime().toString(
-                "hh:mm:ss - dd.MM.yyyy");
-        bookDto.lastOpened =
-            book.getLastOpened().toLocalTime().toString().isEmpty()
-                ? "Never"
-                : book.getLastOpened().toString("hh:mm:ss - dd.MM.yyyy");
-        bookDto.cover = book.getCoverAsStringWithType();
-        bookDto.downloaded = book.getDownloaded();
-
-
-        for(std::size_t i = 0; i < book.getTags().size(); ++i)
-        {
-            dtos::TagDto tagDto;
-            tagDto.name = book.getTags()[i].getName();
-
-            bookDto.tags.push_back(tagDto);
-        }
-
+        auto bookDto = getDtoFromBook(book);
         m_bookCache.emplace_back(std::move(bookDto));
     }
 
@@ -275,6 +245,42 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
                      Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     return scaledCover;
+}
+
+dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
+{
+    dtos::BookDto bookDto;
+
+    bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
+    bookDto.title = book.getTitle();
+    bookDto.author = book.getAuthor();
+    bookDto.filePath = book.getFilePath();
+    bookDto.creator = book.getCreator();
+    bookDto.creationDate = book.getCreationDate();
+    bookDto.format = book.getFormat();
+    bookDto.language = book.getLanguage();
+    bookDto.documentSize = book.getDocumentSize();
+    bookDto.pagesSize = book.getPagesSize();
+    bookDto.pageCount = book.getPageCount();
+    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
+        "hh:mm:ss - dd.MM.yyyy");
+    bookDto.lastOpened = book.getLastOpened().toLocalTime().toString().isEmpty()
+                             ? "Never"
+                             : book.getLastOpened().toLocalTime().toString(
+                                   "hh:mm:ss - dd.MM.yyyy");
+    bookDto.cover = book.getCoverAsStringWithType();
+    bookDto.downloaded = book.getDownloaded();
+
+
+    for(std::size_t i = 0; i < book.getTags().size(); ++i)
+    {
+        dtos::TagDto tagDto;
+        tagDto.name = book.getTags()[i].getName();
+
+        bookDto.tags.push_back(tagDto);
+    }
+
+    return bookDto;
 }
 
 }  // namespace adapters::controllers

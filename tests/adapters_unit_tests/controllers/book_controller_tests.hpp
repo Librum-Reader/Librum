@@ -246,7 +246,8 @@ TEST_F(ABookController, SucceedsGettingABook)
     QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
     QString tagNames[2] { "FirstTag", "SecondTag" };
-    Book book(filePath, BookMetaData { .title = title, .author = author });
+    auto bookMetaData = BookMetaData { .title = title, .author = author };
+    Book book(filePath, bookMetaData);
     const auto& bookUuid = book.getUuid();
 
     std::vector<Book> booksToReturn { book };

@@ -35,6 +35,7 @@ private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& uuid);
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
+    dtos::BookDto getDtoFromBook(const domain::models::Book& book);
 
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
