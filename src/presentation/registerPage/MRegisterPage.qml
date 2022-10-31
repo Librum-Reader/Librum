@@ -263,14 +263,14 @@ MFlickWrapper
                                 Layout.topMargin: 44
                                 borderWidth: 0
                                 backgroundColor: Style.colorBasePurple
-                                fontSize: 12                            
+                                fontSize: 12
                                 fontColor: Style.colorBrightText
                                 fontWeight: Font.Bold
                                 text: "Let's start"
                                 
                                 onClicked: buttonTriggeredAction();
                                 
-                                Keys.onPressed: 
+                                Keys.onPressed:
                                     (event) =>
                                     {
                                         if(event.key === Qt.Key_Return) buttonTriggeredAction();
@@ -295,7 +295,8 @@ MFlickWrapper
                                     
                                     if(!acceptPolicy.activated)
                                     {
-                                        acceptPolicy.setError()
+                                        acceptPolicy.setError();
+                                        return;
                                     }
                                     
                                     AuthController.registrationFinished.connect(proccessRegistrationResult);
