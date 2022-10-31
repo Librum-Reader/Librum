@@ -37,7 +37,6 @@ private:
     QSize getCoverSize() const;
     QString getSystemRelativePath(const QString& qPath) const;
     QString parseTitleFromPath(const QString& path) const;
-    QString getCurrentDateTimeAsString();
     QMimeType getMimeType(const QString& filePath);
     QString removeTypeFromMimeString(const QString& mimeString) const;
     QString removeAppendingsFromMimeString(const QString& mimeString) const;

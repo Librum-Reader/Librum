@@ -35,7 +35,6 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
         .documentSize = getDocumentSize(),
         .pagesSize = getPagesSize(),
         .pageCount = getPageCount(),
-        .addedToLibrary = QDateTime::currentDateTimeUtc(),
         .lastOpened = QDateTime(),
         .cover = QImage(),
     };
@@ -172,14 +171,6 @@ QString BookMetadataHelper::getSystemRelativePath(const QString& qPath) const
 {
     QString prefix = "file://";
     return qPath.mid(prefix.size());
-}
-
-QString BookMetadataHelper::getCurrentDateTimeAsString()
-{
-    auto now = QDateTime::currentDateTimeUtc();
-    auto result = now.toString("dd.MM.yyyy") + " - " + now.toString("h:m ap");
-
-    return result;
 }
 
 QMimeType BookMetadataHelper::getMimeType(const QString& filePath)
