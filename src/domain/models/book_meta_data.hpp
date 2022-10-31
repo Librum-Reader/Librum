@@ -17,9 +17,9 @@ struct BookMetaData
     QString documentSize;
     QString pagesSize;
     int pageCount;
-    QDateTime addedToLibrary;
+    QDateTime addedToLibrary = QDateTime::currentDateTimeUtc();
+    QDateTime lastModified = QDateTime::currentDateTimeUtc();
     QDateTime lastOpened;
-    QDateTime lastModified;
     QImage cover;
 
     bool operator==(const BookMetaData& rhs) const
