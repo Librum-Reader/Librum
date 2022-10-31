@@ -33,6 +33,8 @@ struct BookMetaData
                    rhs.addedToLibrary.currentSecsSinceEpoch() &&
                lastOpened.currentSecsSinceEpoch() ==
                    rhs.lastOpened.currentSecsSinceEpoch() &&
+               lastModified.currentSecsSinceEpoch() ==
+                   rhs.lastModified.currentSecsSinceEpoch() &&
                cover == rhs.cover;
     }
 };
