@@ -44,9 +44,12 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     // else the cover is being added to a non existent book
     m_bookMetadataHelper->loadCover();
 
-    m_downloadedBooksTracker->trackBook(m_books.at(m_books.size() - 1));
-    m_bookStorageGateway->createBook(m_authenticationToken,
-                                     m_books[m_books.size() - 1]);
+    const Book& bookToStore = m_books.at(m_books.size() - 1);
+    auto success = m_downloadedBooksTracker->trackBook(bookToStore);
+    if(!success)
+        return BookOperationStatus::OpeningBookFailed;
+
+    m_bookStorageGateway->createBook(m_authenticationToken, bookToStore);
 
     return BookOperationStatus::Success;
 }
