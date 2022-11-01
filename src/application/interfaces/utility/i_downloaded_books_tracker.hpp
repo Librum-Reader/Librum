@@ -22,6 +22,7 @@ class IDownloadedBooksTracker
 public:
     virtual ~IDownloadedBooksTracker() noexcept = default;
 
+    // Needs to be called before any other function to setup filesystem paths
     virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
     virtual QDir getUserLibraryDir() const = 0;
 
