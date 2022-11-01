@@ -95,6 +95,7 @@ private:
     bool m_downloaded = true;
     int m_currentPage;
     std::vector<Tag> m_tags;
+    inline static const QString m_dateTimeFormat { "hh:mm:ss - dd.MM.yyyy" };
 };
 
 }  // namespace domain::models

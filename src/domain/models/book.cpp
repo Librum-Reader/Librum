@@ -308,9 +308,8 @@ QByteArray Book::toJson() const
         { "language", getLanguage() },
         { "documentSize", getDocumentSize() },
         { "pagesSize", getPagesSize() },
-        { "addedToLibrary",
-          getAddedToLibrary().toString("hh:mm:ss - dd.MM.yyyy") },
-        { "lastOpened", getLastOpened().toString("hh:mm:ss - dd.MM.yyyy") },
+        { "addedToLibrary", getAddedToLibrary().toString(m_dateTimeFormat) },
+        { "lastOpened", getLastOpened().toString(m_dateTimeFormat) },
         { "filePath", getFilePath() },
         { "cover", getCoverAsString() },
     };
@@ -334,11 +333,12 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .pagesSize = jsonObject["pagesSize"].toString(),
         .pageCount = jsonObject["pageCount"].toInt(),
         .addedToLibrary = QDateTime::fromString(
-            jsonObject["addedToLibrary"].toString(), "hh:mm:ss - dd.MM.yyyy"),
+            jsonObject["addedToLibrary"].toString(), m_dateTimeFormat),
         .lastOpened = QDateTime::fromString(jsonObject["lastOpened"].toString(),
-                                            "hh:mm:ss - dd.MM.yyyy"),
+                                            m_dateTimeFormat),
     };
 
+    // Specify that the dates are UTC, else Qt thinks its local time
     metaData.addedToLibrary.setTimeSpec(Qt::UTC);
     metaData.lastOpened.setTimeSpec(Qt::UTC);
 
