@@ -82,6 +82,7 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
 {
     ensureUserLibraryExists();
 
+    // Updating is simply deleting the old and creating the new book
     auto untrackingSuccess = untrackBook(book.getUuid());
     if(!untrackingSuccess)
         return false;
