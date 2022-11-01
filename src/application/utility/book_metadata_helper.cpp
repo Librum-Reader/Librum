@@ -61,8 +61,6 @@ void BookMetadataHelper::setupDocumentObserver()
 {
     m_observer = std::make_unique<CoverObserver>();
     m_document->addObserver(m_observer.get());
-    connect(m_observer.get(), &CoverObserver::pageLoaded, this,
-            &BookMetadataHelper::proccessCoverPixmap);
 }
 
 QString BookMetadataHelper::getTitle(const QString& filePath) const
@@ -138,6 +136,9 @@ int BookMetadataHelper::getPageCount() const
 
 void BookMetadataHelper::loadCover() const
 {
+    connect(m_observer.get(), &CoverObserver::pageLoaded, this,
+            &BookMetadataHelper::proccessCoverPixmap);
+
     auto coverSize = getCoverSize();
     auto request =
         new PixmapRequest(m_observer.get(), 0, coverSize.width(),
