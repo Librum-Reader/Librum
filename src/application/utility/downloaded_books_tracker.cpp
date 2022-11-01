@@ -11,29 +11,6 @@ using namespace domain::models;
 namespace application::utility
 {
 
-void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
-{
-    m_libraryOwnerEmail = libraryOwnerEmail;
-    m_libraryFolder = getUserLibraryDir();
-}
-
-void DownloadedBooksTracker::ensureUserLibraryExists()
-{
-    auto libraryDir = getUserLibraryDir();
-
-    libraryDir.mkpath(libraryDir.path());
-}
-
-QDir DownloadedBooksTracker::getUserLibraryDir() const
-{
-    auto applicationPath = QDir::current().path();
-    auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
-
-    auto folderName =
-        applicationPath + "/" + "librum_localLibraries" + "/" + userLibName;
-    return QDir(folderName);
-}
-
 std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 {
     ensureUserLibraryExists();
@@ -45,7 +22,7 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
     {
         QFile metaFile(libraryDir.path() + "/" + metaFileName);
         if(!metaFile.open(QFile::ReadOnly))
-            return {};
+            continue;
 
         auto jsonDoc = QJsonDocument::fromJson(metaFile.readAll());
         auto bookObject = jsonDoc.object();
@@ -110,6 +87,30 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
         return false;
 
     return trackBook(book);
+}
+
+void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
+{
+    m_libraryOwnerEmail = libraryOwnerEmail;
+    m_libraryFolder = getUserLibraryDir();
+}
+
+void DownloadedBooksTracker::ensureUserLibraryExists()
+{
+    auto libraryDir = getUserLibraryDir();
+
+    libraryDir.mkpath(libraryDir.path());
+}
+
+QDir DownloadedBooksTracker::getUserLibraryDir() const
+{
+    auto applicationPath = QDir::current().path();
+    auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
+
+    auto uniqueFolderName =
+        applicationPath + "/" + "librum_localLibraries" + "/" + userLibName;
+
+    return QDir(uniqueFolderName);
 }
 
 QString DownloadedBooksTracker::getUserLibraryName(QString email) const
