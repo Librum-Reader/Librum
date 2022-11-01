@@ -55,6 +55,7 @@ public slots:
 private:
     QList<dtos::TagDto> convertTagsToDtos(
         const std::vector<domain::models::Tag>& tags) const;
+    const QString dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
 
     const std::vector<domain::models::Book>& m_data;
 };
