@@ -198,12 +198,17 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     // Arrange
     QSignalSpy spy(bookService.get(), &BookService::dataChanged);
 
+    // Create book
     QString originalPath = "/some/path.pdf";
     BookMetaData bookMetaData { .title = "SomeBook", .author = "SomeAuthor" };
+    bookService->addBook(originalPath);
+    auto originalUuid =
+        bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
 
+    // Create book-for-update with
     BookMetaData newBookMetaData { .title = "ANewTitle",
                                    .author = "ANewAuthor" };
-    Book bookToUpdateWith("some/path", newBookMetaData);
+    Book bookToUpdateWith("some/path", newBookMetaData, 0, originalUuid);
     bookToUpdateWith.addTag(Tag("FirstTag"));
     bookToUpdateWith.addTag(Tag("FirstTag"));
 
@@ -212,20 +217,13 @@ TEST_F(ABookService, SucceedsUpdatingABook)
 
 
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
-        .Times(1)
-        .WillOnce(Return(bookMetaData));
-
     EXPECT_CALL(downloadedBooksTrackerMock, updateTrackedBook(_)).Times(1);
 
     EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
 
     // Act
-    bookService->addBook(originalPath);
-    const QUuid& bookUuid = bookService->getBooks()[0].getUuid();
-
-    auto resultStatus = bookService->updateBook(bookUuid, bookToUpdateWith);
-    auto result = bookService->getBook(bookUuid);
+    auto resultStatus = bookService->updateBook(bookToUpdateWith);
+    auto result = bookService->getBook(bookToUpdateWith.getUuid());
 
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
@@ -239,20 +237,21 @@ TEST_F(ABookService, SucceedsUpdatingABook)
 
     auto arguments = spy[0];
     EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(bookService->getBookIndex(bookUuid), arguments[0].toInt());
+    EXPECT_EQ(bookService->getBookIndex(bookToUpdateWith.getUuid()),
+              arguments[0].toInt());
 }
 
 TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
 {
     // Arrange
     QString bookUuid = "non-existend-uuid";
-    Book bookToUpdateWidth("some/path", BookMetaData());
+    Book bookToUpdateWidth("some/path", BookMetaData(), 0, bookUuid);
 
     auto expectedStatus = BookOperationStatus::BookDoesNotExist;
 
 
     // Act
-    auto resultStatus = bookService->updateBook(bookUuid, bookToUpdateWidth);
+    auto resultStatus = bookService->updateBook(bookToUpdateWidth);
 
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);

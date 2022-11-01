@@ -31,8 +31,8 @@ public:
     MOCK_METHOD(BookOperationStatus, addBook, (const QString&), (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, uninstallBook, (const QUuid&), (override));
-    MOCK_METHOD(BookOperationStatus, updateBook,
-                (const QUuid&, const Book& book), (override));
+    MOCK_METHOD(BookOperationStatus, updateBook, (const Book& book),
+                (override));
 
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QUuid&), (const, override));
@@ -187,7 +187,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
         .Times(1)
         .WillOnce(Return(&bookToReturn));
 
-    EXPECT_CALL(bookServiceMock, updateBook(_, _))
+    EXPECT_CALL(bookServiceMock, updateBook(_))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::Success));
 
