@@ -1,11 +1,12 @@
 #pragma once
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QSignalSpy>
 #include <QString>
 #include <QUuid>
 #include "book.hpp"
-#include "book_dto.hpp"
 #include "book_storage_gateway.hpp"
 #include "i_book_storage_access.hpp"
 
@@ -21,10 +22,10 @@ namespace tests::adapters
 class BookStorageAccessMock : public IBookStorageAccess
 {
 public:
-    MOCK_METHOD(void, createBook, (const QString&, const dtos::BookDto&),
+    MOCK_METHOD(void, createBook, (const QString&, const QJsonObject&),
                 (override));
     MOCK_METHOD(void, deleteBook, (const QString&, const QUuid&), (override));
-    MOCK_METHOD(void, updateBook, (const QString&, const dtos::BookDto&),
+    MOCK_METHOD(void, updateBook, (const QString&, const QJsonObject&),
                 (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
