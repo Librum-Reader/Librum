@@ -249,8 +249,9 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
 
 dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
 {
-    dtos::BookDto bookDto;
+    const QString dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
 
+    dtos::BookDto bookDto;
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
     bookDto.title = book.getTitle();
     bookDto.author = book.getAuthor();
@@ -262,12 +263,15 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     bookDto.documentSize = book.getDocumentSize();
     bookDto.pagesSize = book.getPagesSize();
     bookDto.pageCount = book.getPageCount();
-    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
-        "hh:mm:ss - dd.MM.yyyy");
-    bookDto.lastOpened = book.getLastOpened().toLocalTime().toString().isEmpty()
-                             ? "Never"
-                             : book.getLastOpened().toLocalTime().toString(
-                                   "hh:mm:ss - dd.MM.yyyy");
+
+    bookDto.addedToLibrary =
+        book.getAddedToLibrary().toLocalTime().toString(dateTimeFormat);
+
+    bookDto.lastOpened =
+        book.getLastOpened().isNull()
+            ? "Never"
+            : book.getLastOpened().toLocalTime().toString(dateTimeFormat);
+
     bookDto.cover = book.getCoverAsStringWithType();
     bookDto.downloaded = book.getDownloaded();
 
