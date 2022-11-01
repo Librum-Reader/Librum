@@ -8,7 +8,7 @@ namespace application::utility
 
 void CoverObserver::notifyPageChanged(int page, int flags)
 {
-    pageChanged(page, flags);
+    firstPageLoaded(page, flags);
 }
 
 }  // namespace application::utility

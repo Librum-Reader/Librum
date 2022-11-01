@@ -23,8 +23,6 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
     if(!setupSucceeded)
         return std::nullopt;
 
-    setupObserver();
-
     BookMetaData metaData {
         .title = getTitle(filePath),
         .author = getAuthor(),
@@ -47,24 +45,24 @@ bool BookMetadataHelper::setupDocument(const QString& filePath)
     Settings::instance(QStringLiteral("okularproviderrc"));
     m_document = std::make_unique<Document>(nullptr);
 
+    setupDocumentObserver();
 
     auto systemRelativPath = getSystemRelativePath(filePath);
     auto mimeType = getMimeType(filePath);
     QString password = "";
 
-    m_document->closeDocument();
     auto openResult = m_document->openDocument(systemRelativPath, filePath,
                                                mimeType, password);
 
     return openResult == Document::OpenSuccess;
 }
 
-void BookMetadataHelper::setupObserver()
+void BookMetadataHelper::setupDocumentObserver()
 {
     m_observer = std::make_unique<CoverObserver>();
     m_document->addObserver(m_observer.get());
-    connect(m_observer.get(), &CoverObserver::pageChanged, this,
-            &BookMetadataHelper::proccessBookCoverPixmap);
+    connect(m_observer.get(), &CoverObserver::firstPageLoaded, this,
+            &BookMetadataHelper::loadFirstPagePixmap);
 }
 
 QString BookMetadataHelper::getTitle(const QString& filePath) const
@@ -217,9 +215,10 @@ QString BookMetadataHelper::removeAppendingsFromMimeString(
     return result;
 }
 
-void BookMetadataHelper::proccessBookCoverPixmap(int page, int flag)
+void BookMetadataHelper::loadFirstPagePixmap(int page, int flag)
 {
-    if(page != 0 || flag != DocumentObserver::Pixmap)
+    int first = 0;
+    if(page != first || flag != DocumentObserver::Pixmap)
         return;
 
     auto coverPixmap = m_document->page(0)->getPixmap(

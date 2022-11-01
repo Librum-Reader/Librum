@@ -14,7 +14,7 @@ public:
     void notifyPageChanged(int page, int flags) override;
 
 signals:
-    void pageChanged(int page, int flags);
+    void firstPageLoaded(int page, int flags);
 };
 
 }  // namespace application::utility

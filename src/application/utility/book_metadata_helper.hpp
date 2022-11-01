@@ -18,12 +18,12 @@ public:
         const QString& filePath) override;
 
 private slots:
-    void proccessBookCoverPixmap(int page, int flag);
+    void loadFirstPagePixmap(int page, int flag);
     void getCover() const override;
 
 private:
     bool setupDocument(const QString& filePath);
-    void setupObserver();
+    void setupDocumentObserver();
 
     QString getTitle(const QString& filePath) const;
     QString getAuthor() const;
