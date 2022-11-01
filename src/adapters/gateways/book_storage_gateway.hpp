@@ -1,7 +1,6 @@
 #pragma once
 #include <QJsonObject>
 #include <QObject>
-#include "book_dto.hpp"
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
 
@@ -27,8 +26,10 @@ private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
 
 private:
-    dtos::BookDto getBookDtoFromBook(const domain::models::Book& book);
+    void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
+                             const QString& newKeyName);
 
+private:
     IBookStorageAccess* m_bookStorageAccess;
 };
 
