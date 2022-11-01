@@ -42,7 +42,7 @@ class BookInfoHelperMock : public IBookMetadataHelper
 public:
     MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, (const QString&),
                 (override));
-    MOCK_METHOD(void, getCover, (), (const, override));
+    MOCK_METHOD(void, loadCover, (), (const, override));
 };
 
 class InternetConnectionInfoMock : public IInternetConnectionInfo
@@ -90,7 +90,9 @@ TEST_F(ABookService, SucceedsAddingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_)).Times(1);
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
 
     EXPECT_CALL(bookStorageGatewayMock, createBook(_, _)).Times(1);
 
