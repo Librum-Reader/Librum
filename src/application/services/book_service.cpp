@@ -42,7 +42,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
 
     // The cover needs to be generated after the book has been created,
     // else the cover is being added to a non existent book
-    m_bookMetadataHelper->getCover();
+    m_bookMetadataHelper->loadCover();
 
     m_downloadedBooksTracker->trackBook(m_books.at(m_books.size() - 1));
     m_bookStorageGateway->createBook(m_authenticationToken,
@@ -97,6 +97,8 @@ BookOperationStatus BookService::updateBook(const QUuid& uuid,
         return BookOperationStatus::BookDoesNotExist;
 
     book->update(newBook);
+    book->updateLastModified();
+
     int index = getBookIndex(uuid);
     emit dataChanged(index);
 
