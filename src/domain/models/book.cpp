@@ -310,6 +310,7 @@ QByteArray Book::toJson() const
         { "pagesSize", getPagesSize() },
         { "addedToLibrary", getAddedToLibrary().toString(m_dateTimeFormat) },
         { "lastOpened", getLastOpened().toString(m_dateTimeFormat) },
+        { "lastModified", getLastModified().toString(m_dateTimeFormat) },
         { "filePath", getFilePath() },
         { "cover", getCoverAsString() },
     };
@@ -334,6 +335,8 @@ Book Book::fromJson(const QJsonObject& jsonObject)
         .pageCount = jsonObject["pageCount"].toInt(),
         .addedToLibrary = QDateTime::fromString(
             jsonObject["addedToLibrary"].toString(), m_dateTimeFormat),
+        .lastModified = QDateTime::fromString(
+            jsonObject["lastModified"].toString(), m_dateTimeFormat),
         .lastOpened = QDateTime::fromString(jsonObject["lastOpened"].toString(),
                                             m_dateTimeFormat),
     };
