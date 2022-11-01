@@ -3,7 +3,6 @@
 #include <QObject>
 #include <QString>
 #include <vector>
-#include "book_dto.hpp"
 
 namespace adapters
 {
@@ -16,10 +15,10 @@ public:
     virtual ~IBookStorageAccess() noexcept = default;
 
     virtual void createBook(const QString& authToken,
-                            const dtos::BookDto& bookDto) = 0;
+                            const QJsonObject& jsonBook) = 0;
     virtual void deleteBook(const QString& authToken, const QUuid& uuid) = 0;
     virtual void updateBook(const QString& authToken,
-                            const dtos::BookDto& bookDto) = 0;
+                            const QJsonObject& jsonBook) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
 

@@ -3,11 +3,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QSslConfiguration>
-#include "qjsonarray.h"
-
-
-using namespace adapters::dtos;
-using namespace adapters::dtos;
 
 namespace infrastructure::persistence
 {
@@ -21,11 +16,10 @@ BookStorageAccess::BookStorageAccess() :
 }
 
 void BookStorageAccess::createBook(const QString& authToken,
-                                   const BookDto& bookDto)
+                                   const QJsonObject& jsonBook)
 {
     auto request = createRequest(m_bookCreationEndpoint, authToken);
 
-    auto jsonBook = convertBookDtoToJson(bookDto);
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
@@ -50,12 +44,11 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
 }
 
 void BookStorageAccess::updateBook(const QString& authToken,
-                                   const BookDto& bookDto)
+                                   const QJsonObject& jsonBook)
 {
-    QString endpoint = m_bookUpdateEndpoint + "/" + bookDto.uuid;
+    QString endpoint = m_bookUpdateEndpoint + "/" + jsonBook["uuid"].toString();
     auto request = createRequest(endpoint, authToken);
 
-    auto jsonBook = convertBookDtoToJson(bookDto);
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
@@ -149,28 +142,6 @@ bool BookStorageAccess::checkForErrors(int expectedStatusCode,
     }
 
     return false;
-}
-
-QJsonObject BookStorageAccess::convertBookDtoToJson(
-    const adapters::dtos::BookDto& bookDto)
-{
-    QJsonObject jsonBook;
-
-    jsonBook["guid"] = bookDto.uuid;
-    jsonBook["title"] = bookDto.title;
-    jsonBook["creator"] = bookDto.creator;
-    jsonBook["creationDate"] = bookDto.creationDate;
-    jsonBook["format"] = bookDto.format;
-    jsonBook["language"] = bookDto.language;
-    jsonBook["documentSize"] = bookDto.documentSize;
-    jsonBook["pagesSize"] = bookDto.pagesSize;
-    jsonBook["pageCount"] = bookDto.pageCount;
-    jsonBook["currentPage"] = bookDto.currentPage;
-    jsonBook["addedToLibrary"] = bookDto.addedToLibrary;
-    jsonBook["lastOpened"] = bookDto.lastOpened;
-    jsonBook["cover"] = bookDto.cover;
-
-    return jsonBook;
 }
 
 }  // namespace infrastructure::persistence
