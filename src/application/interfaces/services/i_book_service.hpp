@@ -21,7 +21,7 @@ public:
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus updateBook(
-        const QUuid& uuid, const domain::models::Book& newBook) = 0;
+        const domain::models::Book& newBook) = 0;
 
     virtual const std::vector<domain::models::Book>& getBooks() const = 0;
     virtual const domain::models::Book* getBook(const QUuid& uuid) const = 0;

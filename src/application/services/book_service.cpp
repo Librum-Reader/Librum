@@ -92,21 +92,22 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::updateBook(const QUuid& uuid,
-                                            const Book& newBook)
+BookOperationStatus BookService::updateBook(const Book& newBook)
 {
-    auto book = getBook(uuid);
+    auto book = getBook(newBook.getUuid());
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
 
     book->update(newBook);
     book->updateLastModified();
 
-    int index = getBookIndex(uuid);
+    int index = getBookIndex(newBook.getUuid());
     emit dataChanged(index);
 
+    // Only try updating book in local-library if the book is downloaded
     if(book->getDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(*book);
+
     m_bookStorageGateway->updateBook(m_authenticationToken, *book);
 
     return BookOperationStatus::Success;

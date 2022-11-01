@@ -144,7 +144,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
     }
 
 
-    auto result = m_bookService->updateBook(uuid, updatedBook);
+    auto result = m_bookService->updateBook(updatedBook);
     if(result == BookOperationStatus::Success)
         m_bookChacheChanged = true;
 

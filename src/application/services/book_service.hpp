@@ -23,7 +23,7 @@ public:
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
     BookOperationStatus updateBook(
-        const QUuid& uuid, const domain::models::Book& newBook) override;
+        const domain::models::Book& newBook) override;
 
     BookOperationStatus addTag(const QUuid& uuid,
                                const domain::models::Tag& tag) override;
