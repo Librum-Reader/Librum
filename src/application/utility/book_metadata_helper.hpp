@@ -18,8 +18,8 @@ public:
         const QString& filePath) override;
 
 private slots:
-    void loadFirstPagePixmap(int page, int flag);
-    void getCover() const override;
+    void proccessCoverPixmap(int page, int flag);
+    void loadCover() const override;
 
 private:
     bool setupDocument(const QString& filePath);

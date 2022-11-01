@@ -61,8 +61,8 @@ void BookMetadataHelper::setupDocumentObserver()
 {
     m_observer = std::make_unique<CoverObserver>();
     m_document->addObserver(m_observer.get());
-    connect(m_observer.get(), &CoverObserver::firstPageLoaded, this,
-            &BookMetadataHelper::loadFirstPagePixmap);
+    connect(m_observer.get(), &CoverObserver::pageLoaded, this,
+            &BookMetadataHelper::proccessCoverPixmap);
 }
 
 QString BookMetadataHelper::getTitle(const QString& filePath) const
@@ -136,7 +136,7 @@ int BookMetadataHelper::getPageCount() const
     return 0;
 }
 
-void BookMetadataHelper::getCover() const
+void BookMetadataHelper::loadCover() const
 {
     auto coverSize = getCoverSize();
     auto request =
@@ -215,10 +215,11 @@ QString BookMetadataHelper::removeAppendingsFromMimeString(
     return result;
 }
 
-void BookMetadataHelper::loadFirstPagePixmap(int page, int flag)
+void BookMetadataHelper::proccessCoverPixmap(int page, int flag)
 {
-    int first = 0;
-    if(page != first || flag != DocumentObserver::Pixmap)
+    // The cover is just the first page of the book
+    int firstPage = 0;
+    if(page != firstPage || flag != DocumentObserver::Pixmap)
         return;
 
     auto coverPixmap = m_document->page(0)->getPixmap(
