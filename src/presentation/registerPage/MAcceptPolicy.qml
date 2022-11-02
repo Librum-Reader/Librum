@@ -8,7 +8,7 @@ import CustomComponents 1.0
 Item
 {
     id: root
-    property bool activated: false
+    property bool activated: acceptCheckBox.checked
     property bool hasError: false
     signal keyUp()
     signal keyDown()
@@ -31,15 +31,12 @@ Item
             Layout.preferredWidth: 20
             Layout.preferredHeight: 20
             
-            onClicked: root.activated = !root.activated;
-            
             Keys.onPressed: 
                 (event) =>
                 {
                     if(event.key === Qt.Key_Return)
                     {
                         acceptCheckBox.actionOnClicked();
-                        root.activated = !root.activated;
                     }
                     else if(event.key === Qt.Key_Down)
                     {
