@@ -21,7 +21,7 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     jsonObject["password"] = loginDto.password;
 
     QJsonDocument jsonDocument { jsonObject };
-    QByteArray data = jsonDocument.toJson();
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
 
     m_reply.reset(m_networkAccessManager.post(request, data));
@@ -41,7 +41,7 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
     jsonObject["password"] = registerDto.password;
 
     QJsonDocument jsonDocument { jsonObject };
-    QByteArray data = jsonDocument.toJson();
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
 
     m_reply.reset(m_networkAccessManager.post(request, data));
@@ -99,7 +99,6 @@ void AuthenticationAccess::proccessRegistrationResult()
     auto expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))
     {
-        QString reason = m_reply->readAll();
         emit registrationFinished(false, message);
         return;
     }
