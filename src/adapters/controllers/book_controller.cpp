@@ -101,7 +101,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
         case MetaProperties::Title:
             updatedBook.setTitle(value.toString());
             break;
-        case MetaProperties::Author:
+        case MetaProperties::Authors:
             updatedBook.setAuthors(value.toString());
             break;
         case MetaProperties::FilePath:

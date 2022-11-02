@@ -25,7 +25,7 @@ public:
     enum class MetaProperties
     {
         Title = 0,
-        Author,
+        Authors,
         FilePath,
         Creator,
         CreationDate,

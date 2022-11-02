@@ -172,7 +172,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
 
     auto titleNumber = static_cast<int>(IBookController::MetaProperties::Title);
     auto authorNumber =
-        static_cast<int>(IBookController::MetaProperties::Author);
+        static_cast<int>(IBookController::MetaProperties::Authors);
 
     QVariantMap map {
         { QString::number(titleNumber), "AnotherTitle" },
