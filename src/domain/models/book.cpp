@@ -42,14 +42,14 @@ void Book::setTitle(const QString& newTitle)
     m_metaData.title = newTitle;
 }
 
-const QString& Book::getAuthor() const
+const QString& Book::getAuthors() const
 {
-    return m_metaData.author;
+    return m_metaData.authors;
 }
 
-void Book::setAuthor(const QString& newAuthor)
+void Book::setAuthors(const QString& newAuthor)
 {
-    m_metaData.author = newAuthor;
+    m_metaData.authors = newAuthor;
 }
 
 const QString& Book::getFilePath() const
@@ -265,8 +265,8 @@ void Book::update(const Book& other)
 {
     if(m_metaData.title != other.getTitle())
         m_metaData.title = other.getTitle();
-    if(m_metaData.author != other.getAuthor())
-        m_metaData.author = other.getAuthor();
+    if(m_metaData.authors != other.getAuthors())
+        m_metaData.authors = other.getAuthors();
     if(m_filePath != other.getFilePath())
         m_filePath = other.getFilePath();
     if(m_metaData.creator != other.getCreator())
@@ -299,7 +299,7 @@ QByteArray Book::toJson() const
     QJsonObject book {
         { "uuid", getUuid().toString(QUuid::WithoutBraces) },
         { "title", getTitle() },
-        { "author", getAuthor() },
+        { "authors", getAuthors() },
         { "creator", getCreator() },
         { "pageCount", getPageCount() },
         { "currentPage", getCurrentPage() },
@@ -325,7 +325,7 @@ Book Book::fromJson(const QJsonObject& jsonObject)
 {
     BookMetaData metaData {
         .title = jsonObject["title"].toString(),
-        .author = jsonObject["author"].toString(),
+        .authors = jsonObject["authors"].toString(),
         .creator = jsonObject["creator"].toString(),
         .creationDate = jsonObject["creationDate"].toString(),
         .format = jsonObject["format"].toString(),

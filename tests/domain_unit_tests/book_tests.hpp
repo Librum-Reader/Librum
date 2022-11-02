@@ -97,11 +97,11 @@ TEST(ABook, SucceedsUpdatingBook)
 {
     // Arrange
     Book book("some/path",
-              BookMetaData { .title = "ATitle", .author = "AnAuthor" });
+              BookMetaData { .title = "ATitle", .authors = "AnAuthor" });
 
     Book bookToUpdateWith(
         "some/path",
-        BookMetaData { .title = "AnotherTitle", .author = "AnotherAuthor" });
+        BookMetaData { .title = "AnotherTitle", .authors = "AnotherAuthor" });
     Tag tag("SomeTag");
     bookToUpdateWith.addTag(tag);
 
@@ -123,7 +123,7 @@ TEST(ABook, SucceedsSerializingToJson)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -147,7 +147,7 @@ TEST(ABook, SucceedsSerializingToJson)
 
     // Assert
     EXPECT_EQ(metaData.title, bookObject["title"].toString());
-    EXPECT_EQ(metaData.author, bookObject["author"].toString());
+    EXPECT_EQ(metaData.authors, bookObject["authors"].toString());
     EXPECT_EQ(metaData.creator, bookObject["creator"].toString());
     EXPECT_EQ(metaData.creationDate, bookObject["creationDate"].toString());
     EXPECT_EQ(metaData.format, bookObject["format"].toString());
@@ -178,7 +178,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -206,7 +206,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
 
     // Assert
     EXPECT_EQ(metaData.title, result.getTitle());
-    EXPECT_EQ(metaData.author, result.getAuthor());
+    EXPECT_EQ(metaData.authors, result.getAuthors());
     EXPECT_EQ(metaData.creator, result.getCreator());
     EXPECT_EQ(metaData.creationDate, result.getCreationDate());
     EXPECT_EQ(metaData.format, result.getFormat());
@@ -230,7 +230,7 @@ TEST(ABook, SucceedsComparison)
     // First book
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -264,7 +264,7 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
     // First book
     BookMetaData firstBookMetaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -283,7 +283,7 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
 
     BookMetaData secondBookMetaData {
         .title = "SomeOtherTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",

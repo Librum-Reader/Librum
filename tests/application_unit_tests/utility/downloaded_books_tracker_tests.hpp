@@ -41,7 +41,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -73,7 +73,7 @@ TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -107,7 +107,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -156,7 +156,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -179,7 +179,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
 
     auto thirdUuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
     Book thirdBook("some/random/path.pdf", metaData, currentPage, thirdUuid);
-    secondBook.setAuthor("SomeOtherAuthor");
+    secondBook.setAuthors("SomeOtherAuthor");
     secondBook.setPageCount(412);
 
 
@@ -208,7 +208,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -259,7 +259,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
@@ -278,7 +278,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
 
     auto newBook = book;
     newBook.setTitle("SomeOtherBook");
-    newBook.setAuthor("SomeOtherAuthor");
+    newBook.setAuthors("SomeOtherAuthor");
 
     bool expectedResultStatus = true;
 
@@ -291,7 +291,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
     // Assert
     EXPECT_EQ(expectedResultStatus, resultStatus);
     EXPECT_EQ(newBook.getTitle(), result.value().getTitle());
-    EXPECT_EQ(newBook.getAuthor(), result.value().getAuthor());
+    EXPECT_EQ(newBook.getAuthors(), result.value().getAuthors());
     EXPECT_EQ(book.getFormat(), result.value().getFormat());
 }
 
@@ -300,7 +300,7 @@ TEST_F(ADownloadedBooksTracker, FailsUpdatingAnUntrackedBook)
     // Arrange
     BookMetaData metaData {
         .title = "SomeTitle",
-        .author = "SomeAuthor",
+        .authors = "SomeAuthor",
         .creator = "SomeCreator",
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",

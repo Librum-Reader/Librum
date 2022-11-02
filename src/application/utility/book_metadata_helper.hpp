@@ -26,7 +26,7 @@ private:
     void setupDocumentObserver();
 
     QString getTitle(const QString& filePath) const;
-    QString getAuthor() const;
+    QString getAuthors() const;
     QString getCreator() const;
     QString getCreationDate() const;
     QString getFormat() const;

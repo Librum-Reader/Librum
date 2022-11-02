@@ -25,7 +25,7 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
 
     BookMetaData metaData {
         .title = getTitle(filePath),
-        .author = getAuthor(),
+        .authors = getAuthors(),
         .creator = getCreator(),
         .creationDate = getCreationDate(),
         .format = getFormat(),
@@ -75,7 +75,7 @@ QString BookMetadataHelper::getTitle(const QString& filePath) const
     return title;
 }
 
-QString BookMetadataHelper::getAuthor() const
+QString BookMetadataHelper::getAuthors() const
 {
     const QString& author =
         m_document->documentInfo().get(DocumentInfo::Author);

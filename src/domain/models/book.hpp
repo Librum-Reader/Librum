@@ -25,8 +25,8 @@ public:
     const QString& getTitle() const;
     void setTitle(const QString& newTitle);
 
-    const QString& getAuthor() const;
-    void setAuthor(const QString& newAuthor);
+    const QString& getAuthors() const;
+    void setAuthors(const QString& newAuthor);
 
     const QString& getCreator() const;
     void setCreator(const QString& newCreator);

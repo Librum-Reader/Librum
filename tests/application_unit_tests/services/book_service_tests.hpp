@@ -200,14 +200,14 @@ TEST_F(ABookService, SucceedsUpdatingABook)
 
     // Create book
     QString originalPath = "/some/path.pdf";
-    BookMetaData bookMetaData { .title = "SomeBook", .author = "SomeAuthor" };
+    BookMetaData bookMetaData { .title = "SomeBook", .authors = "SomeAuthor" };
     bookService->addBook(originalPath);
     auto originalUuid =
         bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
 
     // Create book-for-update with
     BookMetaData newBookMetaData { .title = "ANewTitle",
-                                   .author = "ANewAuthor" };
+                                   .authors = "ANewAuthor" };
     Book bookToUpdateWith("some/path", newBookMetaData, 0, originalUuid);
     bookToUpdateWith.addTag(Tag("FirstTag"));
     bookToUpdateWith.addTag(Tag("FirstTag"));
@@ -261,7 +261,7 @@ TEST_F(ABookService, SucceedsGettingABook)
 {
     // Arrange
     QString path = "some/path.pdf";
-    BookMetaData bookMetaData { .title = "SomeTitle", .author = "SomeAuthor" };
+    BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
     Book expectedResult(path, bookMetaData);
 
 
@@ -278,7 +278,7 @@ TEST_F(ABookService, SucceedsGettingABook)
 
     // Assert
     EXPECT_EQ(expectedResult.getTitle(), result->getTitle());
-    EXPECT_EQ(expectedResult.getAuthor(), result->getAuthor());
+    EXPECT_EQ(expectedResult.getAuthors(), result->getAuthors());
     EXPECT_EQ(expectedResult.getFilePath(), result->getFilePath());
 }
 
@@ -360,13 +360,13 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
 {
     // Arrange
     BookMetaData firstBookMetaData { .title = "FirstBook",
-                                     .author = "Author1" };
+                                     .authors = "Author1" };
     Book firstBook("/some/path", firstBookMetaData);
     BookMetaData secondBookMetaData { .title = "SecondBook",
-                                      .author = "Author2" };
+                                      .authors = "Author2" };
     Book secondBook("/some/path2", secondBookMetaData);
     BookMetaData thirdBookMetaData { .title = "ThirdBook",
-                                     .author = "Author3" };
+                                     .authors = "Author3" };
     Book thirdBook("/some/path2", thirdBookMetaData);
 
     std::vector<Book> expectedResult { firstBook, secondBook, thirdBook };
@@ -390,7 +390,7 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
     for(int i = 0; i < expectedResult.size(); ++i)
     {
         EXPECT_EQ(expectedResult[i].getTitle(), results[i].getTitle());
-        EXPECT_EQ(expectedResult[i].getAuthor(), results[i].getAuthor());
+        EXPECT_EQ(expectedResult[i].getAuthors(), results[i].getAuthors());
         EXPECT_EQ(expectedResult[i].getFilePath(), results[i].getFilePath());
     }
 }

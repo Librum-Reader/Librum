@@ -42,9 +42,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getTitle();
         break;
     case AuthorRole:
-        if(book.getAuthor() == "")
+        if(book.getAuthors() == "")
             return "Unknown Author";
-        return book.getAuthor();
+        return book.getAuthors();
         break;
     case FilePathRole:
         return book.getFilePath();

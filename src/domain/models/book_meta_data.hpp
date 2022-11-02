@@ -9,7 +9,7 @@ namespace domain::models
 struct BookMetaData
 {
     QString title;
-    QString author;
+    QString authors;
     QString creator;
     QString creationDate;
     QString format;
@@ -24,7 +24,7 @@ struct BookMetaData
 
     bool operator==(const BookMetaData& rhs) const
     {
-        return title == rhs.title && author == rhs.author &&
+        return title == rhs.title && authors == rhs.authors &&
                creator == rhs.creator && creationDate == rhs.creationDate &&
                format == rhs.format && language == rhs.language &&
                documentSize == rhs.documentSize && pagesSize == rhs.pagesSize &&

@@ -102,7 +102,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
             updatedBook.setTitle(value.toString());
             break;
         case MetaProperties::Author:
-            updatedBook.setAuthor(value.toString());
+            updatedBook.setAuthors(value.toString());
             break;
         case MetaProperties::FilePath:
             updatedBook.setFilePath(value.toString());
@@ -254,7 +254,7 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     dtos::BookDto bookDto;
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
     bookDto.title = book.getTitle();
-    bookDto.author = book.getAuthor();
+    bookDto.author = book.getAuthors();
     bookDto.filePath = book.getFilePath();
     bookDto.creator = book.getCreator();
     bookDto.creationDate = book.getCreationDate();

@@ -167,7 +167,7 @@ TEST_F(ABookController, FailsUninstallingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, SucceedsUpdatingABook)
 {
     // Arrange
-    BookMetaData bookMetaData { .title = "SomeTitle", .author = "SomeAuthor" };
+    BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
     Book bookToReturn("some/path.pdf", bookMetaData);
 
     auto titleNumber = static_cast<int>(IBookController::MetaProperties::Title);
@@ -218,7 +218,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
 TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 {
     // Arrange
-    BookMetaData bookMetaData { .title = "SomeTitle", .author = "SomeAuthor" };
+    BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
     Book bookToReturn("some/path.pdf", bookMetaData);
 
     int nonExistentProperty = 150;
@@ -246,7 +246,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     QString author = "SomeAuthor";
     QString filePath = "some/path.pdf";
     QString tagNames[2] { "FirstTag", "SecondTag" };
-    auto bookMetaData = BookMetaData { .title = title, .author = author };
+    auto bookMetaData = BookMetaData { .title = title, .authors = author };
     Book book(filePath, bookMetaData);
     const auto& bookUuid = book.getUuid();
 
@@ -289,7 +289,7 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
 {
     // Arrange
     std::vector<Book> booksToReturn;
-    BookMetaData bookData { .title = "SomeTitle", .author = "SomeAuthor" };
+    BookMetaData bookData { .title = "SomeTitle", .authors = "SomeAuthor" };
     booksToReturn.emplace_back("/some/path", bookData);
     booksToReturn.emplace_back("/some/path2", bookData);
 
