@@ -119,6 +119,9 @@ If there is an issue with the Librum installation, consider temporarily uninstal
 <br><br>
 
 ## For GNU/Linux
+### Foreword
+Since Librum is a KDE application, the KDE libraries are necessary. If you are on a distribution that uses KDE Plasma, you are good to go; otherwise, building Librum from source means that one also needs to build KDE.
+
 ### Prerequisites
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
