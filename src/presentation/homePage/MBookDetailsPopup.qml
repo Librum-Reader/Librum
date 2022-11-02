@@ -665,26 +665,26 @@ Popup
         var operationsMap = {};
         
         if(titleField.text !== Globals.selectedBook.title && titleField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.Title] = titleField.text;
+            operationsMap[BookController.MetaProperty.Title] = titleField.text;
         
         if(authorsField.text !== Globals.selectedBook.authors && authorsField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.Authors] = authorsField.text;
+            operationsMap[BookController.MetaProperty.Authors] = authorsField.text;
         
         if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
-            operationsMap[BookController.MetaProperties.Language] = languageComboBox.text;
+            operationsMap[BookController.MetaProperty.Language] = languageComboBox.text;
         
         if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.Creator] = publicationField.text;
+            operationsMap[BookController.MetaProperty.Creator] = publicationField.text;
         
         if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.CreationDate] = creationDateField.text;
+            operationsMap[BookController.MetaProperty.CreationDate] = creationDateField.text;
         
         if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.Format] = formatField.text;
+            operationsMap[BookController.MetaProperty.Format] = formatField.text;
         
         // @disable-check M126
         if(bookCover.source != Globals.selectedBook.cover)   // Needs to be !=, the types are different (QUrl and QString)
-            operationsMap[BookController.MetaProperties.Cover] = bookCover.source;
+            operationsMap[BookController.MetaProperty.Cover] = bookCover.source;
         
         
         BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
