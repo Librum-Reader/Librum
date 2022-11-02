@@ -170,9 +170,9 @@ TEST_F(ABookController, SucceedsUpdatingABook)
     BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
     Book bookToReturn("some/path.pdf", bookMetaData);
 
-    auto titleNumber = static_cast<int>(IBookController::MetaProperties::Title);
+    auto titleNumber = static_cast<int>(IBookController::MetaProperty::Title);
     auto authorNumber =
-        static_cast<int>(IBookController::MetaProperties::Authors);
+        static_cast<int>(IBookController::MetaProperty::Authors);
 
     QVariantMap map {
         { QString::number(titleNumber), "AnotherTitle" },

@@ -22,7 +22,7 @@ class IBookController : public QObject
 public:
     virtual ~IBookController() noexcept = default;
 
-    enum class MetaProperties
+    enum class MetaProperty
     {
         Title = 0,
         Authors,
@@ -39,7 +39,7 @@ public:
         Cover,
         Invalid
     };
-    Q_ENUM(MetaProperties);
+    Q_ENUM(MetaProperty);
 
 
     Q_INVOKABLE virtual int addBook(const QString& path) = 0;

@@ -96,46 +96,46 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
         int key = stringKey.toInt();
 
         auto value = operationsMap.value(stringKey);
-        switch(static_cast<MetaProperties>(key))
+        switch(static_cast<MetaProperty>(key))
         {
-        case MetaProperties::Title:
+        case MetaProperty::Title:
             updatedBook.setTitle(value.toString());
             break;
-        case MetaProperties::Authors:
+        case MetaProperty::Authors:
             updatedBook.setAuthors(value.toString());
             break;
-        case MetaProperties::FilePath:
+        case MetaProperty::FilePath:
             updatedBook.setFilePath(value.toString());
             break;
-        case MetaProperties::Creator:
+        case MetaProperty::Creator:
             updatedBook.setCreator(value.toString());
             break;
-        case MetaProperties::CreationDate:
+        case MetaProperty::CreationDate:
             updatedBook.setCreationDate(value.toString());
             break;
-        case MetaProperties::Format:
+        case MetaProperty::Format:
             updatedBook.setFormat(value.toString());
             break;
-        case MetaProperties::Language:
+        case MetaProperty::Language:
             updatedBook.setLanguage(value.toString());
             break;
-        case MetaProperties::DocumentSize:
+        case MetaProperty::DocumentSize:
             updatedBook.setDocumentSize(value.toString());
             break;
-        case MetaProperties::PagesSize:
+        case MetaProperty::PagesSize:
             updatedBook.setPagesSize(value.toString());
             break;
-        case MetaProperties::PageCount:
+        case MetaProperty::PageCount:
             updatedBook.setPageCount(value.toInt());
             break;
-        case MetaProperties::AddedToLibrary:
+        case MetaProperty::AddedToLibrary:
             updatedBook.setAddedToLibrary(
                 QDateTime::fromString(value.toString()));
             break;
-        case MetaProperties::LastModified:
+        case MetaProperty::LastModified:
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
-        case MetaProperties::Cover:
+        case MetaProperty::Cover:
             updatedBook.setCover(getCorrectlySizedBookCover(value.toString()));
             break;
         default:
