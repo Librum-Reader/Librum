@@ -16,7 +16,7 @@ struct BookDto
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)
     Q_PROPERTY(QString title MEMBER title)
-    Q_PROPERTY(QString author MEMBER author)
+    Q_PROPERTY(QString authors MEMBER authors)
     Q_PROPERTY(QString filePath MEMBER filePath)
     Q_PROPERTY(QString creator MEMBER creator)
     Q_PROPERTY(QString creationDate MEMBER creationDate)
@@ -34,7 +34,7 @@ struct BookDto
 public:
     QString uuid;
     QString title;
-    QString author;
+    QString authors;
     QString filePath;
     QString creator;
     QString creationDate;

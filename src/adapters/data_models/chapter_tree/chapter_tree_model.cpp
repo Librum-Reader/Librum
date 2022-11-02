@@ -30,7 +30,7 @@ ChapterTreeModel::ChapterTreeModel(QObject* parent) :
     firstLevel2->appendChild(secondLevel2);
     firstLevel2->appendChild(secondLevel3);
 
-    auto secondLevel4 = new ChapterTreeNode("About the author", firstLevel3);
+    auto secondLevel4 = new ChapterTreeNode("About the authors", firstLevel3);
     auto secondLevel5 = new ChapterTreeNode("Why this book?", firstLevel3);
     auto secondLevel6 = new ChapterTreeNode("Other things", firstLevel3);
     auto secondLevel7 = new ChapterTreeNode("Mentions", firstLevel3);

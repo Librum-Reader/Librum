@@ -254,7 +254,7 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     dtos::BookDto bookDto;
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
     bookDto.title = book.getTitle();
-    bookDto.author = book.getAuthors();
+    bookDto.authors = book.getAuthors();
     bookDto.filePath = book.getFilePath();
     bookDto.creator = book.getCreator();
     bookDto.creationDate = book.getCreationDate();

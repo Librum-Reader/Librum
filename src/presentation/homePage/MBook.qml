@@ -156,11 +156,11 @@ Item
                 
                 Label
                 {
-                    id: authorName
+                    id: authorsName
                     Layout.fillWidth: true
                     Layout.topMargin: 4
                     clip: true
-                    text: author
+                    text: authors
                     color: Style.colorLightText
                     font.pointSize: 10
                     elide: Text.ElideRight

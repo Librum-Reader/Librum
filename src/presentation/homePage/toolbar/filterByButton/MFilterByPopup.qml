@@ -70,7 +70,7 @@ Popup
                         placeholderContent: "e.g. Uncle bob"
                         inputFontSize: 11
                         placeholderColor: Style.colorLightText
-                        headerText: "Author"
+                        headerText: "Authors"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
                         headerFontColor: Style.colorLightText3

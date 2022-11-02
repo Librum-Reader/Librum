@@ -284,14 +284,14 @@ Popup
                             
                             MLabeledInputBox
                             {
-                                id: authorField
+                                id: authorsField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: "Author"
+                                headerText: "Authors"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: Globals.selectedBook !== null &&  Globals.selectedBook.author !== "" ? 
-                                          Globals.selectedBook.author : inputLayout.defaultText
+                                text: Globals.selectedBook !== null &&  Globals.selectedBook.authors !== "" ? 
+                                          Globals.selectedBook.authors : inputLayout.defaultText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -667,8 +667,8 @@ Popup
         if(titleField.text !== Globals.selectedBook.title && titleField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperties.Title] = titleField.text;
         
-        if(authorField.text !== Globals.selectedBook.author && authorField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperties.Author] = authorField.text;
+        if(authorsField.text !== Globals.selectedBook.authors && authorsField.text != inputLayout.defaultText)
+            operationsMap[BookController.MetaProperties.Authors] = authorsField.text;
         
         if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
             operationsMap[BookController.MetaProperties.Language] = languageComboBox.text;

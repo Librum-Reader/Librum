@@ -41,9 +41,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
             return "No Title";
         return book.getTitle();
         break;
-    case AuthorRole:
+    case AuthorsRole:
         if(book.getAuthors() == "")
-            return "Unknown Author";
+            return "Unknown Authors";
         return book.getAuthors();
         break;
     case FilePathRole:
@@ -98,7 +98,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
     static QHash<int, QByteArray> roles {
         { UuidRole, "uuid" },
         { TitleRole, "title" },
-        { AuthorRole, "author" },
+        { AuthorsRole, "authors" },
         { FilePathRole, "filePath" },
         { CreatorRole, "creator" },
         { CreationDateRole, "creationDate" },

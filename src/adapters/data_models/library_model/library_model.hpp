@@ -20,7 +20,7 @@ public:
     {
         UuidRole = Qt::UserRole,
         TitleRole,
-        AuthorRole,
+        AuthorsRole,
         FilePathRole,
         CreatorRole,
         CreationDateRole,

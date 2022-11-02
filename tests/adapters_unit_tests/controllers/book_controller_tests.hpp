@@ -171,12 +171,12 @@ TEST_F(ABookController, SucceedsUpdatingABook)
     Book bookToReturn("some/path.pdf", bookMetaData);
 
     auto titleNumber = static_cast<int>(IBookController::MetaProperty::Title);
-    auto authorNumber =
+    auto authorsNumber =
         static_cast<int>(IBookController::MetaProperty::Authors);
 
     QVariantMap map {
         { QString::number(titleNumber), "AnotherTitle" },
-        { QString::number(authorNumber), "DifferentAuthor" },
+        { QString::number(authorsNumber), "DifferentAuthor" },
     };
 
     auto expectedResult = BookOperationStatus::Success;
@@ -243,10 +243,10 @@ TEST_F(ABookController, SucceedsGettingABook)
 {
     // Arrange
     QString title = "SomeBook";
-    QString author = "SomeAuthor";
+    QString authors = "SomeAuthor";
     QString filePath = "some/path.pdf";
     QString tagNames[2] { "FirstTag", "SecondTag" };
-    auto bookMetaData = BookMetaData { .title = title, .authors = author };
+    auto bookMetaData = BookMetaData { .title = title, .authors = authors };
     Book book(filePath, bookMetaData);
     const auto& bookUuid = book.getUuid();
 
@@ -259,7 +259,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     dtos::TagDto secondTag { .name = tagNames[1] };
     dtos::BookDto expectedResult {
         .title = title,
-        .author = author,
+        .authors = authors,
         .filePath = filePath,
         .tags = { firstTag, secondTag },
     };
@@ -277,7 +277,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     // Assert
     EXPECT_EQ(expectedResult.title, result.title);
     EXPECT_EQ(expectedResult.filePath, result.filePath);
-    EXPECT_EQ(expectedResult.author, result.author);
+    EXPECT_EQ(expectedResult.authors, result.authors);
 
     for(int i = 0; i < expectedResult.tags.size(); ++i)
     {

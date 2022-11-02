@@ -166,7 +166,7 @@ Popup
                                     id: authorField
                                     Layout.fillWidth: true
                                     boxHeight: 34
-                                    headerText: "Author"
+                                    headerText: "Authors"
                                     headerFontWeight: Font.Bold
                                     headerFontSize: 11.5
                                     text: "Stephen R. Covey"

@@ -77,9 +77,9 @@ QString BookMetadataHelper::getTitle(const QString& filePath) const
 
 QString BookMetadataHelper::getAuthors() const
 {
-    const QString& author =
+    const QString& authors =
         m_document->documentInfo().get(DocumentInfo::Author);
-    return author;
+    return authors;
 }
 
 QString BookMetadataHelper::getCreator() const

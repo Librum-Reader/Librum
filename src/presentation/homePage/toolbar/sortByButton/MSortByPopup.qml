@@ -78,7 +78,7 @@ Popup
                         ListElement { text: "Recently added" }
                         ListElement { text: "By Percentage" }
                         ListElement { text: "Book (A-Z)" }
-                        ListElement { text: "Author (A-Z)" }
+                        ListElement { text: "Authors (A-Z)" }
                     }
                     
                     delegate: MBaseListItem
