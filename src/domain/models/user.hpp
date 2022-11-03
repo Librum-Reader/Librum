@@ -30,7 +30,7 @@ public:
     const Tag* getTag(const QString& tagName) const;
     bool addTag(const Tag& tag);
     bool removeTag(const QString& tagName);
-    bool renameTag(const QString& newName);
+    bool renameTag(const QString& oldName, const QString& newName);
 
 private:
     QString m_firstName;

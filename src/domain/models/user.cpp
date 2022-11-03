@@ -98,10 +98,10 @@ bool User::removeTag(const QString& tagName)
     return true;
 }
 
-bool User::renameTag(const QString& newName)
+bool User::renameTag(const QString& oldName, const QString& newName)
 {
     auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&name = newName](const Tag& tag)
+                                            [&name = oldName](const Tag& tag)
                                             {
                                                 return tag.getName() == name;
                                             });
