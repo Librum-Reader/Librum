@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QJsonDocument>
 #include <algorithm>
+#include <ranges>
 
 namespace domain::models
 {
@@ -229,7 +230,7 @@ const std::vector<Tag>& Book::getTags() const
 
 bool Book::addTag(const Tag& tag)
 {
-    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    auto tagPosition = std::ranges::find(m_tags, tag);
     if(tagPosition != m_tags.end())
         return false;
 
@@ -239,7 +240,7 @@ bool Book::addTag(const Tag& tag)
 
 bool Book::removeTag(const Tag& tag)
 {
-    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    auto tagPosition = std::ranges::find(m_tags, tag);
     if(tagPosition == m_tags.end())
         return false;
 
