@@ -29,6 +29,7 @@ public:
     const std::vector<Tag>& getTags() const;
     bool addTag(const Tag& tag);
     bool removeTag(const Tag& tag);
+    bool renameTag(const QString& newName);
 
 private:
     QString m_firstName;

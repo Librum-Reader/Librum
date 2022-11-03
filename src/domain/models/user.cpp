@@ -80,4 +80,20 @@ bool User::removeTag(const Tag& tag)
     return true;
 }
 
+bool User::renameTag(const QString& newName)
+{
+    auto tagPosition = std::find_if(m_tags.begin(), m_tags.end(),
+                                    [&name = newName](const Tag& tag)
+                                    {
+                                        return tag.getName() == name;
+                                    });
+    if(tagPosition == m_tags.end())
+        return false;
+
+    auto index = tagPosition - m_tags.begin();
+    m_tags[index].setName(newName);
+
+    return true;
+}
+
 }  // namespace domain::models
