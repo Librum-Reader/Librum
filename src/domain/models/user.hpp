@@ -27,7 +27,8 @@ public:
     void setProfilePicture(const QImage& newProfilePicture);
 
     const std::vector<Tag>& getTags() const;
-    void setTags(const std::vector<Tag>& newTags);
+    bool addTag(const Tag& tag);
+    bool removeTag(const Tag& tag);
 
 private:
     QString m_firstName;

@@ -60,9 +60,24 @@ const std::vector<Tag>& User::getTags() const
     return m_tags;
 }
 
-void User::setTags(const std::vector<Tag>& newTags)
+bool User::addTag(const Tag& tag)
 {
-    m_tags = newTags;
+    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    if(tagPosition != m_tags.end())
+        return false;
+
+    m_tags.emplace_back(tag);
+    return true;
+}
+
+bool User::removeTag(const Tag& tag)
+{
+    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    if(tagPosition == m_tags.end())
+        return false;
+
+    m_tags.erase(tagPosition);
+    return true;
 }
 
 }  // namespace domain::models
