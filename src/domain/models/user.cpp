@@ -1,4 +1,5 @@
 #include "user.hpp"
+#include <ranges>
 
 namespace domain::models
 {
@@ -62,7 +63,7 @@ const std::vector<Tag>& User::getTags() const
 
 bool User::addTag(const Tag& tag)
 {
-    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    auto tagPosition = std::ranges::find(m_tags, tag);
     if(tagPosition != m_tags.end())
         return false;
 
@@ -72,7 +73,7 @@ bool User::addTag(const Tag& tag)
 
 bool User::removeTag(const Tag& tag)
 {
-    auto tagPosition = std::find(m_tags.begin(), m_tags.end(), tag);
+    auto tagPosition = std::ranges::find(m_tags, tag);
     if(tagPosition == m_tags.end())
         return false;
 
@@ -82,11 +83,11 @@ bool User::removeTag(const Tag& tag)
 
 bool User::renameTag(const QString& newName)
 {
-    auto tagPosition = std::find_if(m_tags.begin(), m_tags.end(),
-                                    [&name = newName](const Tag& tag)
-                                    {
-                                        return tag.getName() == name;
-                                    });
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [&name = newName](const Tag& tag)
+                                            {
+                                                return tag.getName() == name;
+                                            });
     if(tagPosition == m_tags.end())
         return false;
 
