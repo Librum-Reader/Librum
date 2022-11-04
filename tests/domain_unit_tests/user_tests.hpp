@@ -12,13 +12,13 @@ TEST(AUser, SucceedsAddingATag)
 {
     // Arrange
     User user;
-    const Tag tag("SomeTag");
-    const auto tagAmountBeforeAdding = user.getTags().size();
+    Tag tag("SomeTag");
+    auto tagAmountBeforeAdding = user.getTags().size();
 
     // Act
-    const auto result = user.addTag(tag);
-    const auto tagResult = user.getTag(tag.getName());
-    const auto tagAmountAfterAdding = user.getTags().size();
+    auto result = user.addTag(tag);
+    auto tagResult = user.getTag(tag.getName());
+    auto tagAmountAfterAdding = user.getTags().size();
 
     // Assert
     EXPECT_TRUE(result);
@@ -31,13 +31,13 @@ TEST(AUser, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
     User user;
-    const Tag tag("SomeTag");
-    const auto tagAmountBeforeAdding = user.getTags().size();
+    Tag tag("SomeTag");
+    auto tagAmountBeforeAdding = user.getTags().size();
 
     // Act
     user.addTag(tag);  // First time
-    const auto result = user.addTag(tag);  // Second time
-    const auto tagAmountAfterAdding = user.getTags().size();
+    auto result = user.addTag(tag);  // Second time
+    auto tagAmountAfterAdding = user.getTags().size();
 
     // Assert
     EXPECT_FALSE(result);
@@ -49,14 +49,14 @@ TEST(AUser, SucceedsRemovingATag)
 {
     // Arrange
     User user;
-    const Tag tag("SomeTag");
+    Tag tag("SomeTag");
     user.addTag(tag);
-    const auto tagAmountBeforeRemoving = user.getTags().size();
+    auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    const auto result = user.removeTag(tag.getName());
-    const auto tagResult = user.getTag(tag.getName());
-    const auto tagAmountAfterRemoving = user.getTags().size();
+    auto result = user.removeTag(tag.getName());
+    auto tagResult = user.getTag(tag.getName());
+    auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
     EXPECT_TRUE(result);
@@ -69,11 +69,11 @@ TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
     User user;
-    const auto tagAmountBeforeRemoving = user.getTags().size();
+    auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    const auto result = user.removeTag("NonExistantTag");
-    const auto tagAmountAfterRemoving = user.getTags().size();
+    auto result = user.removeTag("NonExistantTag");
+    auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
     EXPECT_FALSE(result);
@@ -84,14 +84,14 @@ TEST(AUser, SucceedsRenamingATag)
 {
     // Arrange
     User user;
-    const QString newTagName = "SomeNewTag";
-    const QString tagName = "SomeTag";
-    const Tag tag(tagName);
+    QString newTagName = "SomeNewTag";
+    QString tagName = "SomeTag";
+    Tag tag(tagName);
     user.addTag(tag);
 
     // Act
-    const auto result = user.renameTag(tag.getName(), newTagName);
-    const auto tagResult = user.getTag(newTagName);
+    auto result = user.renameTag(tag.getName(), newTagName);
+    auto tagResult = user.getTag(newTagName);
 
     // Assert
     EXPECT_TRUE(result);
@@ -102,11 +102,11 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 {
     // Arrange
     User user;
-    const QString newTagName = "NewTagName";
+    QString newTagName = "NewTagName";
 
     // Act
-    const auto result = user.renameTag("NonExistantTag", newTagName);
-    const auto tagResult = user.getTag(newTagName);
+    auto result = user.renameTag("NonExistantTag", newTagName);
+    auto tagResult = user.getTag(newTagName);
 
     // Assert
     EXPECT_FALSE(result);
@@ -122,7 +122,7 @@ TEST(AUser, SucceedsGettingBooks)
     user.addTag(Tag("SomeTag3"));
 
     // Act
-    const auto tagCount = user.getTags().size();
+    auto tagCount = user.getTags().size();
 
     // Assert
     EXPECT_EQ(tagCount, 3);
@@ -132,11 +132,11 @@ TEST(AUser, SucceedsGettingABook)
 {
     // Arrange
     User user;
-    const QString tagName = "SomeTag";
+    QString tagName = "SomeTag";
     user.addTag(Tag(tagName));
 
     // Act
-    const auto result = user.getTag(tagName);
+    auto result = user.getTag(tagName);
 
     // Assert
     EXPECT_EQ(result->getName(), tagName);
@@ -146,11 +146,11 @@ TEST(AUser, FailsGettingABookI)
 {
     // Arrange
     User user;
-    const QString tagName = "SomeTag";
+    QString tagName = "SomeTag";
     user.addTag(Tag(tagName));
 
     // Act
-    const auto result = user.getTag(tagName);
+    auto result = user.getTag(tagName);
 
     // Assert
     EXPECT_EQ(result->getName(), tagName);
