@@ -90,7 +90,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
     auto updatedBook = *bookToUpdate;
 
-    const auto operationsMap = operations.toMap();
+    auto operationsMap = operations.toMap();
     for(const auto& stringKey : operationsMap.keys())
     {
         int key = stringKey.toInt();
