@@ -28,6 +28,11 @@ public:
     QImage getProfilePicture() const override;
     void setProfilePicture(const QImage& image) override;
 
+    const std::vector<domain::models::Tag>& getAllTags() const override;
+    bool addTag(const domain::models::Tag& tag) override;
+    bool removeTag(const QString& tagName) override;
+    bool renameTag(const QString& oldName, const QString& newName) override;
+
 
 public slots:
     void setAuthenticationToken(const QString& token,
