@@ -198,4 +198,60 @@ TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
     EXPECT_EQ(tagCountAfterAdding, 1);
 }
 
+TEST_F(AUserService, SucceedsRemovingATag)
+{
+    // Arrange
+    models::Tag tag("SomeTag");
+    userService->addTag(tag);
+
+
+    // Act
+    auto result = userService->removeTag(tag.getName());
+    auto tagCountAfterAdding = userService->getTags().size();
+
+    // Assert
+    EXPECT_TRUE(result);
+    EXPECT_EQ(tagCountAfterAdding, 0);
+}
+
+TEST_F(AUserService, FailsRemovingTagIfTagDoesNotExists)
+{
+    // Act
+    auto result = userService->removeTag("NoneExistentTag");
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
+TEST_F(AUserService, SucceedsRenamingATag)
+{
+    // Arrange
+    QString tagName = "SomeTag";
+    QString newTagName = "SomeTag";
+    models::Tag tag(tagName);
+    userService->addTag(tag);
+
+
+    // Act
+    auto result = userService->renameTag(tagName, newTagName);
+    auto resultTags = userService->getTags();
+
+    // Assert
+    EXPECT_TRUE(result);
+    EXPECT_EQ(newTagName, resultTags[0].getName());
+}
+
+TEST_F(AUserService, FailsRenamingATagIfTagDoesNotExist)
+{
+    // Arrange
+    QString newTagName = "SomeTag";
+
+
+    // Act
+    auto result = userService->renameTag("NonExistentTag", newTagName);
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
 }  // namespace tests::application

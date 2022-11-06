@@ -76,17 +76,16 @@ bool UserService::addTag(const domain::models::Tag& tag)
 
 bool UserService::removeTag(const QString& tagName)
 {
-    Q_UNUSED(tagName);
+    auto result = m_user.removeTag(tagName);
 
-    return false;
+    return result;
 }
 
 bool UserService::renameTag(const QString& oldName, const QString& newName)
 {
-    Q_UNUSED(oldName);
-    Q_UNUSED(newName);
+    auto result = m_user.renameTag(oldName, newName);
 
-    return false;
+    return result;
 }
 
 void UserService::proccessUserInformation(const domain::models::User& user,
