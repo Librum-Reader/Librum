@@ -95,7 +95,7 @@ TEST(AUser, SucceedsRenamingATag)
 
     // Assert
     EXPECT_TRUE(result);
-    EXPECT_NE(tagResult, nullptr);
+    EXPECT_EQ(tagResult->getName(), newTagName);
 }
 
 TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
@@ -113,7 +113,7 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
     EXPECT_EQ(tagResult, nullptr);
 }
 
-TEST(AUser, SucceedsGettingBooks)
+TEST(AUser, SucceedsGettingTags)
 {
     // Arrange
     User user;
@@ -128,7 +128,7 @@ TEST(AUser, SucceedsGettingBooks)
     EXPECT_EQ(tagCount, 3);
 }
 
-TEST(AUser, SucceedsGettingABook)
+TEST(AUser, SucceedsGettingATag)
 {
     // Arrange
     User user;
@@ -142,18 +142,16 @@ TEST(AUser, SucceedsGettingABook)
     EXPECT_EQ(result->getName(), tagName);
 }
 
-TEST(AUser, FailsGettingABookI)
+TEST(AUser, FailsGettingATagIfTheTagDoesNotExist)
 {
     // Arrange
     User user;
-    QString tagName = "SomeTag";
-    user.addTag(Tag(tagName));
 
     // Act
-    auto result = user.getTag(tagName);
+    auto result = user.getTag("NonExistentTag");
 
     // Assert
-    EXPECT_EQ(result->getName(), tagName);
+    EXPECT_EQ(result, nullptr);
 }
 
 }  // namespace tests::domain
