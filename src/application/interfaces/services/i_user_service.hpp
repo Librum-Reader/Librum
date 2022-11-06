@@ -29,7 +29,7 @@ public:
     virtual QImage getProfilePicture() const = 0;
     virtual void setProfilePicture(const QImage& image) = 0;
 
-    virtual const std::vector<domain::models::Tag>& getAllTags() const = 0;
+    virtual const std::vector<domain::models::Tag>& getTags() const = 0;
     virtual bool addTag(const domain::models::Tag& tag) = 0;
     virtual bool removeTag(const QString& tagName) = 0;
     virtual bool renameTag(const QString& oldName, const QString& newName) = 0;

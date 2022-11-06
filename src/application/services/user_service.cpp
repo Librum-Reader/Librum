@@ -62,16 +62,16 @@ void UserService::setProfilePicture(const QImage& image)
     m_userStorageGateway->changeProfilePicture(m_authenticationToken, image);
 }
 
-const std::vector<domain::models::Tag>& UserService::getAllTags() const
+const std::vector<domain::models::Tag>& UserService::getTags() const
 {
     return m_user.getTags();
 }
 
 bool UserService::addTag(const domain::models::Tag& tag)
 {
-    Q_UNUSED(tag);
+    auto result = m_user.addTag(tag);
 
-    return false;
+    return result;
 }
 
 bool UserService::removeTag(const QString& tagName)
