@@ -167,4 +167,35 @@ TEST_F(AUserService, SucceedsGettingProfilePicture)
     EXPECT_EQ(expectedResult, result);
 }
 
+TEST_F(AUserService, SucceedsAddingATag)
+{
+    // Arrange
+    models::Tag tag("SomeTag");
+
+
+    // Act
+    auto result = userService->addTag(tag);
+    auto tagCountAfterAdding = userService->getTags().size();
+
+    // Assert
+    EXPECT_TRUE(result);
+    EXPECT_EQ(tagCountAfterAdding, 1);
+}
+
+TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
+{
+    // Arrange
+    models::Tag tag("SomeTag");
+
+
+    // Act
+    userService->addTag(tag);  // First
+    auto result = userService->addTag(tag);  // Second
+    auto tagCountAfterAdding = userService->getTags().size();
+
+    // Assert
+    EXPECT_FALSE(result);
+    EXPECT_EQ(tagCountAfterAdding, 1);
+}
+
 }  // namespace tests::application
