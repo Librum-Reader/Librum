@@ -14,6 +14,7 @@ public:
     AuthenticationService(IAuthenticationGateway* authenticationGateway);
 
     void loginUser(const domain::models::LoginModel& loginModel) override;
+    void logoutUser() override;
     void registerUser(
         const domain::models::RegisterModel& registerModel) override;
 

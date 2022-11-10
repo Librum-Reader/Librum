@@ -29,6 +29,11 @@ void AuthenticationController::loginUser(const QString& email,
     m_authenticationService->loginUser(loginModel);
 }
 
+void AuthenticationController::logoutUser()
+{
+    m_authenticationService->logoutUser();
+}
+
 void AuthenticationController::registerUser(const QString& firstName,
                                             const QString& lastName,
                                             const QString& email,

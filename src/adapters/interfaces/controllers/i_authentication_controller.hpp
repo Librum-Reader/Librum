@@ -14,6 +14,7 @@ public:
 
     Q_INVOKABLE virtual void loginUser(const QString& email,
                                        const QString& password) = 0;
+    Q_INVOKABLE virtual void logoutUser() = 0;
     Q_INVOKABLE virtual void registerUser(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email,

@@ -36,6 +36,11 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
     }
 }
 
+void AuthenticationService::logoutUser()
+{
+    emit authenticationTokenRemoved();
+}
+
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
     auto status = registerModel.isValid();

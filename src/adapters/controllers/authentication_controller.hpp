@@ -15,6 +15,7 @@ public:
         application::IAuthenticationService* authenticationService);
 
     void loginUser(const QString& email, const QString& password) override;
+    void logoutUser() override;
     void registerUser(const QString& firstName, const QString& lastName,
                       const QString& email, QString password,
                       bool keepUpdated) override;

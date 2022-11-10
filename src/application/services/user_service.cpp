@@ -1,4 +1,5 @@
 #include "user_service.hpp"
+#include <QDebug>
 
 namespace application::services
 {

@@ -21,6 +21,7 @@ class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
     MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
+    MOCK_METHOD(void, logoutUser, (), (override));
     MOCK_METHOD(void, registerUser,
                 (const domain::models::RegisterModel& registerModel),
                 (override));
