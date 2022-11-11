@@ -1,6 +1,7 @@
 #pragma once
 #include <QPixmap>
 #include <QTimer>
+#include "book.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_gateway.hpp"
@@ -54,6 +55,8 @@ private slots:
 private:
     void loadBooks();
     void loadLocalBooks();
+    void mergeBooks(domain::models::Book& original,
+                    const domain::models::Book& toMerge);
 
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;

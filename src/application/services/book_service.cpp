@@ -275,36 +275,41 @@ void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
         auto localBook = getBook(remoteBook.getUuid());
         if(localBook)
         {
-            bool bookChanged = false;
-
-            if(remoteBook.getLastModified() > localBook->getLastModified())
-            {
-                auto localBookFilePath = localBook->getFilePath();
-                localBook->update(remoteBook);
-                localBook->setFilePath(localBookFilePath);
-                bookChanged = true;
-            }
-
-            if(remoteBook.getLastOpened() > localBook->getLastOpened())
-            {
-                localBook->setCurrentPage(remoteBook.getCurrentPage());
-                bookChanged = true;
-            }
-
-            if(bookChanged)
-            {
-                auto localBookIndex = getBookIndex(localBook->getUuid());
-                emit dataChanged(localBookIndex);
-
-                m_downloadedBooksTracker->updateTrackedBook(*localBook);
-            }
-
+            mergeBooks(*localBook, remoteBook);
             continue;
         }
 
         emit bookInsertionStarted(m_books.size());
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
+    }
+}
+
+void BookService::mergeBooks(Book& original, const Book& toMerge)
+{
+    bool bookChanged = false;
+    if(toMerge.getLastModified() > original.getLastModified())
+    {
+        auto localBookFilePath = original.getFilePath();
+        original.update(toMerge);
+        original.setFilePath(localBookFilePath);
+        bookChanged = true;
+    }
+
+    if(toMerge.getLastOpened() > original.getLastOpened())
+    {
+        original.setCurrentPage(toMerge.getCurrentPage());
+        bookChanged = true;
+    }
+
+    if(bookChanged)
+    {
+        // Update UI
+        auto localBookIndex = getBookIndex(original.getUuid());
+        emit dataChanged(localBookIndex);
+
+        // Update local book
+        m_downloadedBooksTracker->updateTrackedBook(original);
     }
 }
 
