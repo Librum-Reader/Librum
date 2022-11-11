@@ -288,6 +288,8 @@ void Book::update(const Book& other)
         m_metaData.addedToLibrary = other.getAddedToLibrary();
     if(m_metaData.lastOpened != other.getLastOpened())
         m_metaData.lastOpened = other.getLastOpened();
+    if(m_metaData.lastModified != other.getLastModified())
+        m_metaData.lastModified = other.getLastModified();
     if(m_metaData.cover != other.getCover())
         m_metaData.cover = other.getCover();
 
