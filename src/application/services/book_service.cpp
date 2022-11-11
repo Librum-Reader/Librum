@@ -23,7 +23,7 @@ BookService::BookService(IBookStorageGateway* bookStorageGateway,
     m_internetConnectionInfo(internetConnectionInfo)
 {
     // Fetch changes timer
-    m_fetchChangesTimer.setInterval(20'000);
+    m_fetchChangesTimer.setInterval(10'000);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             &BookService::loadRemoteBooks);
 
@@ -271,7 +271,6 @@ void BookService::loadLocalBooks()
 
 void BookService::loadRemoteBooks()
 {
-    qDebug() << "Loading remote changes";
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }
 
@@ -294,23 +293,37 @@ void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
 
 void BookService::mergeBooks(Book& original, const Book& toMerge)
 {
-    bool bookChanged = false;
-    if(toMerge.getLastModified() > original.getLastModified())
+    bool bookToMergeHasNewChanges = false;
+    bool originalBookHasNewChanges = false;
+
+    if(toMerge.getLastOpened().toSecsSinceEpoch() >
+       original.getLastOpened().toSecsSinceEpoch())
+    {
+        original.setCurrentPage(toMerge.getCurrentPage());
+        original.setLastOpened(toMerge.getLastOpened());
+        bookToMergeHasNewChanges = true;
+    }
+    else if(original.getLastOpened().toSecsSinceEpoch() >
+            toMerge.getLastOpened().toSecsSinceEpoch())
+    {
+        originalBookHasNewChanges = true;
+    }
+
+    if(toMerge.getLastModified().toSecsSinceEpoch() >
+       original.getLastModified().toSecsSinceEpoch())
     {
         auto localBookFilePath = original.getFilePath();
         original.update(toMerge);
         original.setFilePath(localBookFilePath);
-        bookChanged = true;
+        bookToMergeHasNewChanges = true;
     }
-
-    if(toMerge.getLastOpened() > original.getLastOpened())
+    else if(original.getLastModified().toSecsSinceEpoch() >
+            toMerge.getLastModified().toSecsSinceEpoch())
     {
-        original.setCurrentPage(toMerge.getCurrentPage());
-        original.setLastOpened(toMerge.getLastOpened());
-        bookChanged = true;
+        originalBookHasNewChanges = true;
     }
 
-    if(bookChanged)
+    if(bookToMergeHasNewChanges)
     {
         // Update UI
         auto localBookIndex = getBookIndex(original.getUuid());
@@ -318,6 +331,11 @@ void BookService::mergeBooks(Book& original, const Book& toMerge)
 
         // Update local book
         m_downloadedBooksTracker->updateTrackedBook(original);
+    }
+
+    if(originalBookHasNewChanges)
+    {
+        m_bookStorageGateway->updateBook(m_authenticationToken, original);
     }
 }
 
