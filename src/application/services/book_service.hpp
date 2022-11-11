@@ -1,5 +1,6 @@
 #pragma once
 #include <QPixmap>
+#include <QTimer>
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_gateway.hpp"

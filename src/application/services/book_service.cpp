@@ -22,9 +22,11 @@ BookService::BookService(IBookStorageGateway* bookStorageGateway,
     m_downloadedBooksTracker(downloadedBooksTracker),
     m_internetConnectionInfo(internetConnectionInfo)
 {
+    // Book cover generated
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
 
+    // Getting books finished
     connect(m_bookStorageGateway,
             &IBookStorageGateway::gettingBooksMetaDataFinished, this,
             &BookService::addRemoteBooks);
@@ -255,6 +257,12 @@ void BookService::loadBooks()
             &BookService::loadRemoteBooks);
 }
 
+void BookService::loadLocalBooks()
+{
+    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
+    m_books = m_downloadedBooksTracker->getTrackedBooks();
+}
+
 void BookService::loadRemoteBooks()
 {
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
@@ -262,21 +270,42 @@ void BookService::loadRemoteBooks()
 
 void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
 {
-    for(const auto& book : books)
+    for(const auto& remoteBook : books)
     {
-        if(getBook(book.getUuid()) != nullptr)
+        auto localBook = getBook(remoteBook.getUuid());
+        if(localBook)
+        {
+            bool bookChanged = false;
+
+            if(remoteBook.getLastModified() > localBook->getLastModified())
+            {
+                auto localBookFilePath = localBook->getFilePath();
+                localBook->update(remoteBook);
+                localBook->setFilePath(localBookFilePath);
+                bookChanged = true;
+            }
+
+            if(remoteBook.getLastOpened() > localBook->getLastOpened())
+            {
+                localBook->setCurrentPage(remoteBook.getCurrentPage());
+                bookChanged = true;
+            }
+
+            if(bookChanged)
+            {
+                auto localBookIndex = getBookIndex(localBook->getUuid());
+                emit dataChanged(localBookIndex);
+
+                m_downloadedBooksTracker->updateTrackedBook(*localBook);
+            }
+
             continue;
+        }
 
         emit bookInsertionStarted(m_books.size());
-        m_books.emplace_back(book);
+        m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
     }
-}
-
-void BookService::loadLocalBooks()
-{
-    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
-    m_books = m_downloadedBooksTracker->getTrackedBooks();
 }
 
 }  // namespace application::services
