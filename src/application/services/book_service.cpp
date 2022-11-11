@@ -306,6 +306,7 @@ void BookService::mergeBooks(Book& original, const Book& toMerge)
     if(toMerge.getLastOpened() > original.getLastOpened())
     {
         original.setCurrentPage(toMerge.getCurrentPage());
+        original.setLastOpened(toMerge.getLastOpened());
         bookChanged = true;
     }
 
