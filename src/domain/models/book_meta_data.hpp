@@ -24,17 +24,20 @@ struct BookMetaData
 
     bool operator==(const BookMetaData& rhs) const
     {
+        // Handle case if both "lastOpened" are invalid
+        bool lastOpenedIsSame =
+            (!lastOpened.isValid() && !rhs.lastOpened.isValid()) ||
+            lastOpened.toSecsSinceEpoch() == rhs.lastOpened.toSecsSinceEpoch();
+
         return title == rhs.title && authors == rhs.authors &&
                creator == rhs.creator && creationDate == rhs.creationDate &&
                format == rhs.format && language == rhs.language &&
                documentSize == rhs.documentSize && pagesSize == rhs.pagesSize &&
-               pageCount == rhs.pageCount &&
-               addedToLibrary.currentSecsSinceEpoch() ==
-                   rhs.addedToLibrary.currentSecsSinceEpoch() &&
-               lastOpened.currentSecsSinceEpoch() ==
-                   rhs.lastOpened.currentSecsSinceEpoch() &&
-               lastModified.currentSecsSinceEpoch() ==
-                   rhs.lastModified.currentSecsSinceEpoch() &&
+               pageCount == rhs.pageCount && lastOpenedIsSame &&
+               addedToLibrary.toSecsSinceEpoch() ==
+                   rhs.addedToLibrary.toSecsSinceEpoch() &&
+               lastModified.toSecsSinceEpoch() ==
+                   rhs.lastModified.toSecsSinceEpoch() &&
                cover == rhs.cover;
     }
 };
