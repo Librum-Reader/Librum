@@ -63,6 +63,7 @@ private:
     IDownloadedBooksTracker* m_downloadedBooksTracker;
     IInternetConnectionInfo* m_internetConnectionInfo;
     std::vector<domain::models::Book> m_books;
+    QTimer m_fetchChangesTimer;
     QString m_authenticationToken;
     QString m_currentUserEmail;
 };

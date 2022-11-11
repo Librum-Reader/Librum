@@ -22,6 +22,11 @@ BookService::BookService(IBookStorageGateway* bookStorageGateway,
     m_downloadedBooksTracker(downloadedBooksTracker),
     m_internetConnectionInfo(internetConnectionInfo)
 {
+    // Fetch changes timer
+    m_fetchChangesTimer.setInterval(20'000);
+    connect(&m_fetchChangesTimer, &QTimer::timeout, this,
+            &BookService::loadRemoteBooks);
+
     // Book cover generated
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
@@ -232,6 +237,7 @@ void BookService::setAuthenticationToken(const QString& token,
     m_authenticationToken = token;
 
     loadBooks();
+    m_fetchChangesTimer.start();
 }
 
 void BookService::clearAuthenticationToken()
@@ -265,6 +271,7 @@ void BookService::loadLocalBooks()
 
 void BookService::loadRemoteBooks()
 {
+    qDebug() << "Loading remote changes";
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }
 
