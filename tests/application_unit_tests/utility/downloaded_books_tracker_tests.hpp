@@ -115,7 +115,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
 
@@ -131,7 +130,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
 
     // Act
     auto result = downloadedBooksTracker.getTrackedBook(book.getUuid());
-
 
     // Assert
     EXPECT_TRUE(result.has_value());
