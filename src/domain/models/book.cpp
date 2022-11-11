@@ -346,6 +346,7 @@ Book Book::fromJson(const QJsonObject& jsonObject)
 
     // Specify that the dates are UTC, else Qt thinks its local time
     metaData.addedToLibrary.setTimeSpec(Qt::UTC);
+    metaData.lastModified.setTimeSpec(Qt::UTC);
     metaData.lastOpened.setTimeSpec(Qt::UTC);
 
     auto cover = jsonObject["cover"].toString();
