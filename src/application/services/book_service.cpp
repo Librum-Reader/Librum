@@ -319,15 +319,15 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
     auto lastOpenedStatus = mergeCurrentPage(original, mergee);
     auto lastModifiedStatus = mergeBookData(original, mergee);
 
+
     if(lastOpenedStatus.updateLocalLibrary ||
        lastModifiedStatus.updateLocalLibrary)
     {
+        m_downloadedBooksTracker->updateTrackedBook(original);
+
         // Update UI
         auto localBookIndex = getBookIndex(original.getUuid());
         emit dataChanged(localBookIndex);
-
-        // Update book in local library
-        m_downloadedBooksTracker->updateTrackedBook(original);
     }
 
     if(lastOpenedStatus.updateDatabase || lastModifiedStatus.updateDatabase)
