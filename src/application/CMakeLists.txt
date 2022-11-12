@@ -49,6 +49,7 @@ set(application_SRC
     utility/downloaded_books_tracker.hpp
     utility/internet_connection_info.cpp
     utility/internet_connection_info.hpp
+    utility/merge_status.hpp
 )
 
 
