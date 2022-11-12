@@ -278,7 +278,7 @@ void BookService::loadRemoteBooks()
 void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
     mergeRemoteLibrary(books);
-    addLocalBooksToServerLibrary(books);
+    mergeLocalLibrary(books);
 }
 
 void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
@@ -298,8 +298,7 @@ void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
     }
 }
 
-void BookService::addLocalBooksToServerLibrary(
-    const std::vector<Book>& remoteBooks)
+void BookService::mergeLocalLibrary(const std::vector<Book>& remoteBooks)
 {
     for(const auto& localBook : m_books)
     {

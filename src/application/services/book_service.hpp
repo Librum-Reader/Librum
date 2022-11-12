@@ -59,7 +59,7 @@ private:
     void loadLocalBooks();
     void mergeRemoteLibrary(
         const std::vector<domain::models::Book>& remoteBooks);
-    void addLocalBooksToServerLibrary(
+    void mergeLocalLibrary(
         const std::vector<domain::models::Book>& remoteBooks);
     void mergeBooks(domain::models::Book& original,
                     const domain::models::Book& toMerge);
