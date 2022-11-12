@@ -52,11 +52,15 @@ public slots:
 private slots:
     void storeBookCover(const QPixmap* pixmap);
     void loadRemoteBooks();
-    void addRemoteBooks(const std::vector<domain::models::Book>& books);
+    void mergeLibraries(const std::vector<domain::models::Book>& books);
 
 private:
     void loadBooks();
     void loadLocalBooks();
+    void mergeRemoteLibrary(
+        const std::vector<domain::models::Book>& remoteBooks);
+    void addLocalBooksToServerLibrary(
+        const std::vector<domain::models::Book>& remoteBooks);
     void mergeBooks(domain::models::Book& original,
                     const domain::models::Book& toMerge);
     utility::MergeStatus mergeCurrentPage(domain::models::Book& original,

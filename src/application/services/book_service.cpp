@@ -35,7 +35,7 @@ BookService::BookService(IBookStorageGateway* bookStorageGateway,
     // Getting books finished
     connect(m_bookStorageGateway,
             &IBookStorageGateway::gettingBooksMetaDataFinished, this,
-            &BookService::addRemoteBooks);
+            &BookService::mergeLibraries);
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)
@@ -275,9 +275,15 @@ void BookService::loadRemoteBooks()
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }
 
-void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
+void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
-    for(const auto& remoteBook : books)
+    mergeRemoteLibrary(books);
+    addLocalBooksToServerLibrary(books);
+}
+
+void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
+{
+    for(const auto& remoteBook : remoteBooks)
     {
         auto localBook = getBook(remoteBook.getUuid());
         if(localBook)
@@ -290,18 +296,21 @@ void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
     }
+}
 
-    // add local books to server
+void BookService::addLocalBooksToServerLibrary(
+    const std::vector<Book>& remoteBooks)
+{
     for(const auto& localBook : m_books)
     {
-        auto remoteBook = std::ranges::find_if(books,
-                                               [&localBook](const Book& book)
-                                               {
-                                                   return localBook.getUuid() ==
-                                                          book.getUuid();
-                                               });
+        auto remoteBook = std::ranges::find_if(
+            remoteBooks,
+            [&localBook](const Book& remoteBook)
+            {
+                return remoteBook.getUuid() == localBook.getUuid();
+            });
 
-        if(remoteBook == books.end())
+        if(remoteBook == remoteBooks.end())
             m_bookStorageGateway->createBook(m_authenticationToken, localBook);
     }
 }
