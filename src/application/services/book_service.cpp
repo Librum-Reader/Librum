@@ -12,6 +12,7 @@ namespace application::services
 
 using namespace domain::models;
 using std::size_t;
+using utility::MergeStatus;
 
 BookService::BookService(IBookStorageGateway* bookStorageGateway,
                          IBookMetadataHelper* bookMetadataHelper,
@@ -291,52 +292,66 @@ void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
     }
 }
 
-void BookService::mergeBooks(Book& original, const Book& toMerge)
+void BookService::mergeBooks(Book& original, const Book& mergee)
 {
-    bool bookToMergeHasNewChanges = false;
-    bool originalBookHasNewChanges = false;
+    auto lastOpenedStatus = mergeCurrentPage(original, mergee);
+    auto lastModifiedStatus = mergeBookData(original, mergee);
 
-    if(toMerge.getLastOpened().toSecsSinceEpoch() >
-       original.getLastOpened().toSecsSinceEpoch())
-    {
-        original.setCurrentPage(toMerge.getCurrentPage());
-        original.setLastOpened(toMerge.getLastOpened());
-        bookToMergeHasNewChanges = true;
-    }
-    else if(original.getLastOpened().toSecsSinceEpoch() >
-            toMerge.getLastOpened().toSecsSinceEpoch())
-    {
-        originalBookHasNewChanges = true;
-    }
-
-    if(toMerge.getLastModified().toSecsSinceEpoch() >
-       original.getLastModified().toSecsSinceEpoch())
-    {
-        auto localBookFilePath = original.getFilePath();
-        original.update(toMerge);
-        original.setFilePath(localBookFilePath);
-        bookToMergeHasNewChanges = true;
-    }
-    else if(original.getLastModified().toSecsSinceEpoch() >
-            toMerge.getLastModified().toSecsSinceEpoch())
-    {
-        originalBookHasNewChanges = true;
-    }
-
-    if(bookToMergeHasNewChanges)
+    if(lastOpenedStatus.updateLocalLibrary ||
+       lastModifiedStatus.updateLocalLibrary)
     {
         // Update UI
         auto localBookIndex = getBookIndex(original.getUuid());
         emit dataChanged(localBookIndex);
 
-        // Update local book
+        // Update book in local library
         m_downloadedBooksTracker->updateTrackedBook(original);
     }
 
-    if(originalBookHasNewChanges)
+    if(lastOpenedStatus.updateDatabase || lastModifiedStatus.updateDatabase)
     {
         m_bookStorageGateway->updateBook(m_authenticationToken, original);
     }
+}
+
+MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
+                                          const domain::models::Book& mergee)
+{
+    auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
+    auto originalLastOpened = original.getLastOpened().toSecsSinceEpoch();
+    if(mergeeLastOpened == originalLastOpened)
+        return {};
+
+    if(mergeeLastOpened > originalLastOpened)
+    {
+        original.setCurrentPage(mergee.getCurrentPage());
+        original.setLastOpened(mergee.getLastOpened());
+
+        return MergeStatus { .updateLocalLibrary = true };
+    }
+
+    return MergeStatus { .updateDatabase = true };
+}
+
+MergeStatus BookService::mergeBookData(domain::models::Book& original,
+                                       const domain::models::Book& mergee)
+{
+    auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();
+    auto originalLastModified = original.getLastModified().toSecsSinceEpoch();
+    if(mergeeLastModified == originalLastModified)
+        return {};
+
+    if(mergeeLastModified > originalLastModified)
+    {
+        // Save the file path since its overwritten during the update operation
+        auto localBookFilePath = original.getFilePath();
+        original.update(mergee);
+        original.setFilePath(localBookFilePath);
+
+        return MergeStatus { .updateLocalLibrary = true };
+    }
+
+    return MergeStatus { .updateDatabase = true };
 }
 
 }  // namespace application::services

@@ -1,12 +1,14 @@
 #pragma once
 #include <QPixmap>
 #include <QTimer>
+#include <utility>
 #include "book.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_gateway.hpp"
 #include "i_downloaded_books_tracker.hpp"
 #include "i_internet_connection_info.hpp"
+#include "merge_status.hpp"
 
 namespace application::services
 {
@@ -57,6 +59,10 @@ private:
     void loadLocalBooks();
     void mergeBooks(domain::models::Book& original,
                     const domain::models::Book& toMerge);
+    utility::MergeStatus mergeCurrentPage(domain::models::Book& original,
+                             const domain::models::Book& toMerge);
+    utility::MergeStatus mergeBookData(domain::models::Book& original,
+                             const domain::models::Book& toMerge);
 
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;
