@@ -60,9 +60,9 @@ private:
     void mergeBooks(domain::models::Book& original,
                     const domain::models::Book& toMerge);
     utility::MergeStatus mergeCurrentPage(domain::models::Book& original,
-                             const domain::models::Book& toMerge);
+                                          const domain::models::Book& mergee);
     utility::MergeStatus mergeBookData(domain::models::Book& original,
-                             const domain::models::Book& toMerge);
+                                       const domain::models::Book& mergee);
 
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;
