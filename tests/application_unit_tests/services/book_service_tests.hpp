@@ -37,7 +37,7 @@ public:
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
 };
 
-class BookInfoHelperMock : public IBookMetadataHelper
+class BookMetaDataHelperMock : public IBookMetadataHelper
 {
 public:
     MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, (const QString&),
@@ -68,16 +68,16 @@ struct ABookService : public ::testing::Test
 {
     void SetUp() override
     {
-        EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
+        EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
             .WillRepeatedly(Return(BookMetaData()));
 
         bookService = std::make_unique<BookService>(
-            &bookStorageGatewayMock, &bookInfoHelperMock,
+            &bookStorageGatewayMock, &bookMetaDataHelperMock,
             &downloadedBooksTrackerMock, &internetConnectionInfoMock);
     }
 
     BookStorageGatewayMock bookStorageGatewayMock;
-    BookInfoHelperMock bookInfoHelperMock;
+    BookMetaDataHelperMock bookMetaDataHelperMock;
     DownloadedBooksTrackerMock downloadedBooksTrackerMock;
     InternetConnectionInfoMock internetConnectionInfoMock;
     std::unique_ptr<BookService> bookService;
@@ -266,7 +266,7 @@ TEST_F(ABookService, SucceedsGettingABook)
 
 
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
         .WillOnce(Return(bookMetaData));
 
@@ -373,7 +373,7 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
 
 
     // Expect
-    EXPECT_CALL(bookInfoHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(3)
         .WillOnce(Return(firstBookMetaData))
         .WillOnce(Return(secondBookMetaData))
@@ -417,8 +417,6 @@ TEST_F(ABookService, SucceedsRefreshingLastOpened)
     bookService->addBook("some/path.pdf");
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
 
-    // TODO: Might fail if the whole test is done in less than a MS, FIX
-
     // Act
     auto before = bookService->getBook(bookUuid)->getLastOpened();
     bookService->refreshLastOpened(bookUuid);
@@ -426,6 +424,224 @@ TEST_F(ABookService, SucceedsRefreshingLastOpened)
 
     // Assert
     EXPECT_NE(before, after);
+}
+
+TEST_F(ABookService, SucceedsMergingARemoteBookWitUpdatedData)
+{
+    // Arrange
+    BookMetaData localBookMetaData {
+        .title = "SomeBook",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc().addDays(-2),
+    };
+
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(localBookMetaData));
+
+    bookService->addBook("some/path.pdf");
+    const Book& localBook = bookService->getBooks()[0];
+    auto localBookUuid = localBook.getUuid().toString(QUuid::WithoutBraces);
+
+    BookMetaData remoteBookMetaData {
+        .title = "DifferentBook",
+        .authors = "DifferentAuthor",
+        .creator = "DifferentCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc(),  // More recent
+    };
+    Book remoteBook("", remoteBookMetaData, 0, localBookUuid);
+
+
+    // Act
+    std::vector<Book> myBooks { remoteBook };
+    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+
+    // Assert
+    EXPECT_EQ(remoteBook.getTitle(), localBook.getTitle());
+    EXPECT_EQ(remoteBook.getAuthors(), localBook.getAuthors());
+    EXPECT_EQ(remoteBook.getCreator(), localBook.getCreator());
+    EXPECT_EQ(remoteBook.getLastModified(), localBook.getLastModified());
+}
+
+TEST_F(ABookService, SucceedsMergingAnRemoteBookWithANewCurrentPage)
+{
+    // Arrange
+    BookMetaData metaData {
+        .title = "SomeBook",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc().addDays(-2),
+    };
+
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(metaData));
+
+    bookService->addBook("some/path.pdf");
+    const Book& localBook = bookService->getBooks()[0];
+    auto localBookUuid = localBook.getUuid().toString(QUuid::WithoutBraces);
+
+    Book remoteBook("", metaData, 0, localBookUuid);
+    remoteBook.setLastOpened(QDateTime::currentDateTimeUtc());
+    remoteBook.setCurrentPage(21);
+
+    // Act
+    std::vector<Book> myBooks { remoteBook };
+    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+
+    // Assert
+    EXPECT_EQ(remoteBook.getLastOpened(), localBook.getLastOpened());
+    EXPECT_EQ(remoteBook.getCurrentPage(), localBook.getCurrentPage());
+}
+
+TEST_F(ABookService, SucceedsMergingLocalBookDataToServer)
+{
+    // Arrange
+    BookMetaData localBookMetaData {
+        .title = "NewTitle",
+        .authors = "NewAuthor",
+        .creator = "NewCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc(),  // More recent
+    };
+
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(localBookMetaData));
+
+    bookService->addBook("some/path.pdf");
+    const Book& localBook = bookService->getBooks()[0];
+    auto localBookUuid = localBook.getUuid().toString(QUuid::WithoutBraces);
+
+    BookMetaData remoteBookMetaData {
+        .title = "OldTitle",
+        .authors = "OldAuthor",
+        .creator = "OldCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc().addDays(-2),
+    };
+    Book remoteBook("", remoteBookMetaData, 0, localBookUuid);
+
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
+
+    // Act
+    std::vector<Book> myBooks { remoteBook };
+    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+}
+
+TEST_F(ABookService, SucceedsMergingALocalBookWithANewCurrentPageToServer)
+{
+    // Arrange
+    BookMetaData localBookMetaData {
+        .title = "NewTitle",
+        .authors = "NewAuthor",
+        .creator = "NewCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc(),
+    };
+
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(localBookMetaData));
+
+    bookService->addBook("some/path.pdf");
+    auto localBookUuid =
+        bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
+
+    auto localBook = bookService->getBook(localBookUuid);
+    localBook->setLastOpened(QDateTime::currentDateTimeUtc());  // More recent
+    localBook->setCurrentPage(10);
+
+    Book remoteBook("", localBookMetaData, 0, localBookUuid);
+    remoteBook.setLastOpened(QDateTime::currentDateTimeUtc().addDays(-1));
+    remoteBook.setCurrentPage(251);
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
+
+    // Act
+    std::vector<Book> myBooks { remoteBook };
+    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+}
+
+TEST_F(ABookService, SucceedsAddingLocalBooksToServer)
+{
+    // Arrange
+    BookMetaData localBookMetaData {
+        .title = "NewTitle",
+        .authors = "NewAuthor",
+        .creator = "NewCreator",
+        .creationDate = "20.01.2022",
+        .format = "pdf",
+        .documentSize = "2MiB",
+        .pagesSize = "200 x 400",
+        .pageCount = 151,
+        .lastModified = QDateTime::currentDateTimeUtc(),  // More recent
+    };
+
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(localBookMetaData));
+
+    bookService->addBook("some/path.pdf");
+
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, createBook(_, _)).Times(1);
+
+    // Act
+    std::vector<Book> myBooks {};
+    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
 }
 
 }  // namespace tests::application
