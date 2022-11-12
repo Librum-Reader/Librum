@@ -290,6 +290,20 @@ void BookService::addRemoteBooks(const std::vector<domain::models::Book>& books)
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
     }
+
+    // add local books to server
+    for(const auto& localBook : m_books)
+    {
+        auto remoteBook = std::ranges::find_if(books,
+                                               [&localBook](const Book& book)
+                                               {
+                                                   return localBook.getUuid() ==
+                                                          book.getUuid();
+                                               });
+
+        if(remoteBook == books.end())
+            m_bookStorageGateway->createBook(m_authenticationToken, localBook);
+    }
 }
 
 void BookService::mergeBooks(Book& original, const Book& mergee)
