@@ -259,6 +259,7 @@ void BookService::loadBooks()
 {
     loadLocalBooks();
 
+    // Only try loading remote books, if an internet connection exists
     m_internetConnectionInfo->checkAvailability();
     connect(m_internetConnectionInfo, &IInternetConnectionInfo::available, this,
             &BookService::loadRemoteBooks);
@@ -277,11 +278,12 @@ void BookService::loadRemoteBooks()
 
 void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
-    mergeRemoteLibrary(books);
-    mergeLocalLibrary(books);
+    mergeRemoteLibraryIntoLocalLibrary(books);
+    mergeLocalLibraryIntoRemoteLibrary(books);
 }
 
-void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
+void BookService::mergeRemoteLibraryIntoLocalLibrary(
+    const std::vector<Book>& remoteBooks)
 {
     for(const auto& remoteBook : remoteBooks)
     {
@@ -298,7 +300,8 @@ void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
     }
 }
 
-void BookService::mergeLocalLibrary(const std::vector<Book>& remoteBooks)
+void BookService::mergeLocalLibraryIntoRemoteLibrary(
+    const std::vector<Book>& remoteBooks)
 {
     for(const auto& localBook : m_books)
     {
@@ -309,6 +312,7 @@ void BookService::mergeLocalLibrary(const std::vector<Book>& remoteBooks)
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
+        // Create a new book on the server if no remote book exists
         if(remoteBook == remoteBooks.end())
             m_bookStorageGateway->createBook(m_authenticationToken, localBook);
     }
@@ -339,8 +343,10 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
 MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
                                           const domain::models::Book& mergee)
 {
+    // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
     auto originalLastOpened = original.getLastOpened().toSecsSinceEpoch();
+
     if(mergeeLastOpened == originalLastOpened)
         return {};
 
@@ -358,8 +364,10 @@ MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
 MergeStatus BookService::mergeBookData(domain::models::Book& original,
                                        const domain::models::Book& mergee)
 {
+    // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();
     auto originalLastModified = original.getLastModified().toSecsSinceEpoch();
+
     if(mergeeLastModified == originalLastModified)
         return {};
 

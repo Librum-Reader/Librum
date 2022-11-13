@@ -57,9 +57,9 @@ private slots:
 private:
     void loadBooks();
     void loadLocalBooks();
-    void mergeRemoteLibrary(
+    void mergeRemoteLibraryIntoLocalLibrary(
         const std::vector<domain::models::Book>& remoteBooks);
-    void mergeLocalLibrary(
+    void mergeLocalLibraryIntoRemoteLibrary(
         const std::vector<domain::models::Book>& remoteBooks);
     void mergeBooks(domain::models::Book& original,
                     const domain::models::Book& toMerge);
