@@ -268,59 +268,24 @@ Page
             }
             
             
-            Pane
+            RowLayout
             {
-                id: readingSpace
-                padding: 0
+                id: displayLayout
                 SplitView.fillWidth: true
                 SplitView.fillHeight: true
-                background: Rectangle
+                spacing: 0
+                clip: true
+                
+                
+                DocumentView
                 {
-                    color: "transparent"
+                    id: pageArea
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    visible: documentItem.opened
+                    document: documentItem
                 }
                 
-                
-                Rectangle
-                {
-                    id: page
-                    height: parent.height
-                    width: pageArea.contentWidth ==  0 ? 1020 : pageArea.contentWidth >= parent.width /*- vBar.width*/
-                                                         ? parent.width /*- vBar.width*/ : pageArea.contentWidth
-                    anchors.centerIn: parent
-                    color: Style.colorBackground
-                    radius: 2
-                    
-                    onWidthChanged: toolbar.pageWidth = width
-                    
-                    
-                    RowLayout
-                    {
-                        id: displayLayout
-                        anchors.fill: parent
-                        spacing: 0
-                        clip: true
-                        
-                        DocumentView
-                        {
-                            id: pageArea
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            visible: documentItem.opened
-                            document: documentItem
-                        }
-                    }
-                }
-                
-                //                    ScrollBar
-                //                    {
-                //                        id: vBar
-                //                        Layout.fillHeight: true
-                //                        Layout.alignment: Qt.AlignRight
-                //                        active: true
-                //                        orientation: Qt.Vertical
-                //                        size: parent.height / pageArea.pageListView.contentHeight
-                //                        policy: ScrollBar.AlwaysOn
-                //                    }
             }
         }
         
