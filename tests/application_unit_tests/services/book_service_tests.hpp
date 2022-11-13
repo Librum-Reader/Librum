@@ -449,7 +449,8 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWitUpdatedData)
         .Times(1)
         .WillOnce(Return(localBookMetaData));
 
-    bookService->addBook("some/path.pdf");
+    QString filePath = "some/path.pdf";
+    bookService->addBook(filePath);
     const Book& localBook = bookService->getBooks()[0];
     auto localBookUuid = localBook.getUuid().toString(QUuid::WithoutBraces);
 
@@ -476,9 +477,12 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWitUpdatedData)
     EXPECT_EQ(remoteBook.getAuthors(), localBook.getAuthors());
     EXPECT_EQ(remoteBook.getCreator(), localBook.getCreator());
     EXPECT_EQ(remoteBook.getLastModified(), localBook.getLastModified());
+    EXPECT_EQ(remoteBook.getLastModified(), localBook.getLastModified());
+    // Check that the local file path was not overwritten
+    EXPECT_EQ(filePath, localBook.getFilePath());
 }
 
-TEST_F(ABookService, SucceedsMergingAnRemoteBookWithANewCurrentPage)
+TEST_F(ABookService, SucceedsMergingARemoteBookWithANewCurrentPage)
 {
     // Arrange
     BookMetaData metaData {
@@ -518,7 +522,7 @@ TEST_F(ABookService, SucceedsMergingAnRemoteBookWithANewCurrentPage)
     EXPECT_EQ(remoteBook.getCurrentPage(), localBook.getCurrentPage());
 }
 
-TEST_F(ABookService, SucceedsMergingLocalBookDataToServer)
+TEST_F(ABookService, SucceedsMergingALocalBookDataToServer)
 {
     // Arrange
     BookMetaData localBookMetaData {
