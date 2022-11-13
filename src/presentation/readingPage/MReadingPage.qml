@@ -279,55 +279,48 @@ Page
                     color: "transparent"
                 }
                 
-                RowLayout
+                
+                Rectangle
                 {
-                    anchors.fill: parent
-                    spacing: 0
+                    id: page
+                    height: parent.height
+                    width: pageArea.contentWidth ==  0 ? 1020 : pageArea.contentWidth >= parent.width /*- vBar.width*/
+                                                         ? parent.width /*- vBar.width*/ : pageArea.contentWidth
+                    anchors.centerIn: parent
+                    color: Style.colorBackground
+                    radius: 2
+                    
+                    onWidthChanged: toolbar.pageWidth = width
                     
                     
-                    Rectangle
+                    RowLayout
                     {
-                        id: page
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: pageArea.contentWidth == 0 ? 1020 : pageArea.contentWidth >= parent.width /*- vBar.width*/
-                                                                            ? parent.width /*- vBar.width*/ : pageArea.contentWidth
-                        Layout.alignment: Qt.AlignCenter
-                        color: Style.colorBackground
-                        radius: 2
+                        id: displayLayout
+                        anchors.fill: parent
+                        spacing: 0
+                        clip: true
                         
-                        onWidthChanged: toolbar.pageWidth = width
-                        
-                        
-                        RowLayout
+                        DocumentView
                         {
-                            id: displayLayout
-                            anchors.fill: parent
-                            spacing: 0
-                            clip: true
-                            
-                            
-                            DocumentView
-                            {
-                                id: pageArea
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                visible: documentItem.opened
-                                document: documentItem
-                            }
+                            id: pageArea
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            visible: documentItem.opened
+                            document: documentItem
                         }
                     }
-                
-//                    ScrollBar
-//                    {
-//                        id: vBar
-//                        Layout.fillHeight: true
-//                        Layout.alignment: Qt.AlignRight
-//                        active: true
-//                        orientation: Qt.Vertical
-//                        size: parent.height / pageArea.pageListView.contentHeight
-//                        policy: ScrollBar.AlwaysOn
-//                    }
                 }
+                
+                //                    ScrollBar
+                //                    {
+                //                        id: vBar
+                //                        Layout.fillHeight: true
+                //                        Layout.alignment: Qt.AlignRight
+                //                        active: true
+                //                        orientation: Qt.Vertical
+                //                        size: parent.height / pageArea.pageListView.contentHeight
+                //                        policy: ScrollBar.AlwaysOn
+                //                    }
             }
         }
         

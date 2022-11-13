@@ -13,7 +13,7 @@ Item
     signal clicked
     
     
-    // Some themes try to set interactive to ture, this is to make sure its
+    // Some themes try to set interactive to true, this is to make sure its
     // always false, since we need to handle dragging by ourselves
     Component.onCompleted: flick.interactive = false
     Flickable
@@ -89,6 +89,7 @@ Item
                     let newWidth = flick.contentWidth * factor;
                     let newHeight = flick.contentHeight * factor;
                     
+                    // restraining from a too high zoom
                     if (newHeight < flick.height - 500 || newHeight > flick.height * 5)
                     {
                         return;
