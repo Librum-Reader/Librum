@@ -91,39 +91,31 @@ Pane
         {
             id: pageArea
             height: parent.height
-            width: contentWidth ==  0 ? 1020 : flick.contentWidth >= parent.width
-                                        ? parent.width : flick.contentWidth
+            width: flick.contentWidth == 0 ? 1020 : flick.contentWidth >= parent.width
+                                             ? parent.width : flick.contentWidth
             anchors.centerIn: parent
             color: Style.colorBackground
             radius: 2
             
             onWidthChanged: toolbar.pageWidth = width
             
-            
-            // Some themes try to set interactive to true, this is to make sure its
-            // always false, since we need to handle dragging by ourselves
+            // Some themes try to set interactive to true
             Component.onCompleted: flick.interactive = false
+            
             Flickable
             {
                 id: flick
-                property bool firstHappend: false
-                property int startWidth: 0
+                property int defaultContentWidth: 1020
                 
-                anchors.fill: parent
+                height: parent.height
+                width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
+                                           ? root.width : contentWidth
                 interactive: false
-                contentWidth: startWidth
-                contentHeight: Math.round(startWidth / listView.currentItem.pageRatio)
+                contentWidth: defaultContentWidth
+                contentHeight: Math.round(defaultContentWidth / listView.currentItem.pageRatio)
                 boundsMovement: Flickable.StopAtBounds
                 flickDeceleration: 10000
-                
-                onWidthChanged:
-                {
-                    if(firstHappend)
-                        return;
-                    
-                    startWidth = pageArea.width;
-                    firstHappend = true;
-                }
+                clip: true
                 
                 
                 ListView
