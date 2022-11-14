@@ -18,6 +18,7 @@ Pane
         color: "transparent"
     }
     
+    
     MouseArea
     {
         id: mouseArea
@@ -78,33 +79,67 @@ Pane
                 // Generate factors between 0.8 and 1.2
                 let factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
                 
+                
                 if (wheel.modifiers & Qt.ControlModifier)
                 {
-                    let newWidth = listView.contentWidth * factor;
-                    
-                    // Prevent a too high/low zooms
-                    if (newWidth < listView.normalWidth / 6 || newWidth > listView.normalWidth * 5)
-                    {
-                        return;
-                    }
-                    
-                    listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio), Qt.point(0,0));
-                    listView.returnToBounds();
+                    root.zoom(factor);
                 }
                 else
                 {
                     if(factor > 1)
-                        listView.flick(0, 2000)
+                        root.flick(2000);
                     else
-                        listView.flick(0, -2000)
+                        root.flick(-2000);
                     
-                    
-                    // Set current page
-                    let newPage = Math.round(listView.contentY / listView.current);
-                    if(newPage != root.document.currentPage)
-                        root.document.currentPage = newPage;
+                    updateCurrentPageCounter();
                 }
             }
+            
+            function updateCurrentPageCounter()
+            {
+                // Set current page
+                let newPage = Math.round(listView.contentY / listView.currentItem.height);
+                if(newPage != root.document.currentPage)
+                    root.document.currentPage = newPage;
+            }
         }
+    }
+    
+    
+    function zoom(factor)
+    {
+        let newWidth = listView.contentWidth * factor;
+        
+        // Prevent a too high/low zooms
+        if (newWidth < listView.normalWidth / 6 || newWidth > listView.normalWidth * 5)
+        {
+            return;
+        }
+        
+        listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio), Qt.point(0,0));
+        listView.returnToBounds();
+    }
+    
+    function flick(factor)
+    {
+        listView.flick(0, factor);
+    }
+    
+    function nextPage()
+    {
+        let pageHeight = listView.currentItem.height;
+        let currentPageStartY = root.document.currentPage * pageHeight;
+        listView.contentY = currentPageStartY + pageHeight;
+        
+        listView.updateCurrentPageCounter();
+    }
+    
+    function previousPage()
+    {
+        let pageHeight = listView.currentItem.height;
+        let currentPageStartY = root.document.currentPage * pageHeight;
+        listView.contentY = currentPageStartY - pageHeight;
+        
+        listView.updateCurrentPageCounter();
     }
 }

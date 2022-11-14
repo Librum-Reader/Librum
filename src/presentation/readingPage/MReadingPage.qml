@@ -25,14 +25,40 @@ Page
     
     Shortcut
     {
-        sequences: [ StandardKey.ZoomIn ]
-        onActivated: view.renderScale += 0.1
+        sequences: [StandardKey.ZoomIn]
+        onActivated: documentView.zoom(1.2)
     }
+    
     Shortcut
     {
-        sequence: StandardKey.ZoomOut
-        onActivated: view.renderScale -= 0.1
+        sequences: [StandardKey.ZoomOut]
+        onActivated: documentView.zoom(0.8)
     }
+    
+    Shortcut
+    {
+        sequences: ["UP"]
+        onActivated: documentView.flick(1500)
+    }
+    
+    Shortcut
+    {
+        sequences: ["DOWN"]
+        onActivated: documentView.flick(-1500)
+    }
+    
+    Shortcut
+    {
+        sequences: [StandardKey.MoveToNextPage, "Right"]
+        onActivated: documentView.nextPage()
+    }
+    
+    Shortcut
+    {
+        sequences: [StandardKey.MoveToPreviousPage, "LEFT"]
+        onActivated: documentView.previousPage()
+    }
+    
     Shortcut
     {
         sequence: "ESC"
@@ -93,7 +119,7 @@ Page
             id: toolbar            
             Layout.fillWidth: true
             
-            currentPage: pageArea.document.currentPage
+            currentPage: documentView.document.currentPage
             
             onChapterButtonClicked:
             {
@@ -279,7 +305,7 @@ Page
                 
                 DocumentView
                 {
-                    id: pageArea
+                    id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     visible: documentItem.opened
