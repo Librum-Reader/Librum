@@ -11,8 +11,6 @@ Item
     readonly property PageItem pageItem: page
     property alias document: page.document
     property alias pageNumber: page.pageNumber
-    implicitWidth: page.implicitWidth
-    implicitHeight: page.implicitHeight
     readonly property real pageRatio: page.implicitWidth / page.implicitHeight
     readonly property real scaleFactor: page.width / page.implicitWidth
 
