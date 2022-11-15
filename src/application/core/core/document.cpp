@@ -4327,6 +4327,32 @@ bool DocumentPrivate::cancelRenderingBecauseOf(PixmapRequest* executingRequest,
     return true;
 }
 
+void DocumentPrivate::clearPixmapsForPage(Page* page)
+{
+    if(page->d->m_pixmaps.size() == 0)
+        return;
+
+    page->deletePixmaps();
+
+    auto allocatedPixmapIt = std::find_if(
+        m_allocatedPixmaps.begin(), m_allocatedPixmaps.end(),
+        [pageNumberToDelete = page->number()](AllocatedPixmap* pixmap)
+        {
+            return pixmap->page == pageNumberToDelete;
+        });
+
+    if(allocatedPixmapIt == m_allocatedPixmaps.end())
+        return;
+
+    m_allocatedPixmapsTotalMemory -= (*allocatedPixmapIt)->memory;
+    m_allocatedPixmaps.remove(*allocatedPixmapIt);
+
+    // send reload signals to observers
+    foreachObserverD(notifyContentsCleared(DocumentObserver::Pixmap));
+
+    qDebug() << "deleted: " << page->number();
+}
+
 void Document::requestPixmaps(const QList<PixmapRequest*>& requests)
 {
     requestPixmaps(requests, RemoveAllPrevious);
@@ -4835,57 +4861,18 @@ void Document::setViewportWithHistory(const DocumentViewport& viewport,
 
     // Delete pixmaps from pages which are out of caching range
     int cacheRange = 12;
+
     if(currentViewportPage > oldPageNumber &&
-       currentViewportPage - cacheRange >= 0 &&
-       d->m_pagesVector[currentViewportPage - cacheRange]->d->m_pixmaps.size() >
-           0)
+       currentViewportPage - cacheRange >= 0)
     {
         auto page = d->m_pagesVector[currentViewportPage - cacheRange];
-        page->deletePixmaps();
-
-        auto allocatedPixmapIt = std::find_if(
-            d->m_allocatedPixmaps.begin(), d->m_allocatedPixmaps.end(),
-            [pageNumberToDelete = page->number()](AllocatedPixmap* pixmap)
-            {
-                return pixmap->page == pageNumberToDelete;
-            });
-
-        if(allocatedPixmapIt == d->m_allocatedPixmaps.end())
-            return;
-
-        d->m_allocatedPixmapsTotalMemory -= (*allocatedPixmapIt)->memory;
-        d->m_allocatedPixmaps.remove(*allocatedPixmapIt);
-
-        // send reload signals to observers
-        foreachObserver(notifyContentsCleared(DocumentObserver::Pixmap));
-
-        qDebug() << "deleted: " << page->number();
+        d->clearPixmapsForPage(page);
     }
-    if(currentViewportPage < oldPageNumber &&
-       currentViewportPage + cacheRange <= d->m_pagesVector.size() - 1 &&
-       d->m_pagesVector[currentViewportPage + cacheRange]->d->m_pixmaps.size() >
-           0)
+    else if(currentViewportPage < oldPageNumber &&
+            currentViewportPage + cacheRange <= d->m_pagesVector.size() - 1)
     {
         auto page = d->m_pagesVector[currentViewportPage + cacheRange];
-        page->deletePixmaps();
-
-        auto allocatedPixmapIt = std::find_if(
-            d->m_allocatedPixmaps.begin(), d->m_allocatedPixmaps.end(),
-            [pageNumberToDelete = page->number()](AllocatedPixmap* pixmap)
-            {
-                return pixmap->page == pageNumberToDelete;
-            });
-
-        if(allocatedPixmapIt == d->m_allocatedPixmaps.end())
-            return;
-
-        d->m_allocatedPixmapsTotalMemory -= (*allocatedPixmapIt)->memory;
-        d->m_allocatedPixmaps.remove(*allocatedPixmapIt);
-
-        // send reload signals to observers
-        foreachObserver(notifyContentsCleared(DocumentObserver::Pixmap));
-
-        qDebug() << "deleted: " << page->number();
+        d->clearPixmapsForPage(page);
     }
 }
 

@@ -181,6 +181,7 @@ public:
                                                      qint64 document_size);
     bool cancelRenderingBecauseOf(PixmapRequest* executingRequest,
                                   PixmapRequest* newRequest);
+    void clearPixmapsForPage(Page* page);
 
     // Methods that implement functionality needed by undo commands
     void performAddPageAnnotation(int page, Annotation* annotation);
