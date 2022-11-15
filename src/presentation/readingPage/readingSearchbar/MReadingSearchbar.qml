@@ -16,6 +16,9 @@ Item
     implicitHeight: 48
     implicitWidth: 1000
     
+    // Make sure to remove the focus from the textinput when the searchbar is closed
+    onVisibleChanged: visible ? inputField.forceActiveFocus() : root.forceActiveFocus()
+    
     Keys.onPressed:
         (event) =>
         {
@@ -143,8 +146,6 @@ Item
                             }
                             
                             onTextChanged: root.textChanged(text)
-                            
-                            Component.onCompleted: forceActiveFocus()
                         }
                     }
                 }
