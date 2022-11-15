@@ -4860,7 +4860,7 @@ void Document::setViewportWithHistory(const DocumentViewport& viewport,
     }
 
     // Delete pixmaps from pages which are out of caching range
-    int cacheRange = 12;
+    int cacheRange = 4;
 
     if(currentViewportPage > oldPageNumber &&
        currentViewportPage - cacheRange >= 0)

@@ -39,7 +39,7 @@ Pane
             flickableDirection: Flickable.AutoFlickDirection
             reuseItems: false
             contentWidth: 1020
-            cacheBuffer: 15000  // Load some pages in advance
+            cacheBuffer: 5000  // Load some pages in advance
             interactive: false
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
