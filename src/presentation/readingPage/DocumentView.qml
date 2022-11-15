@@ -37,8 +37,9 @@ Pane
                                        ? root.width : contentWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
+            reuseItems: false
             contentWidth: 1020
-            cacheBuffer: 2000
+            cacheBuffer: 30000  // Load some pages in advance
             interactive: false
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
@@ -122,6 +123,8 @@ Pane
     function flick(factor)
     {
         listView.flick(0, factor);
+        
+        listView.updateCurrentPageCounter();
     }
     
     function nextPage()
