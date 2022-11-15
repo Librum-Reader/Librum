@@ -39,7 +39,7 @@ Pane
             flickableDirection: Flickable.AutoFlickDirection
             reuseItems: false
             contentWidth: 1020
-            cacheBuffer: 30000  // Load some pages in advance
+            cacheBuffer: 15000  // Load some pages in advance
             interactive: false
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
@@ -102,6 +102,29 @@ Pane
                 if(newPage != root.document.currentPage)
                     root.document.currentPage = newPage;
             }
+        
+            /**
+             * Changes the current move direction of the listview, without actually
+             * moving visibly. This is neccessary since the listview only chaches
+             * delegates in the direction of the current move direction.
+             * If we e.g. scroll downwards and then go to the previousPage
+             * by setting the contentY, the previous pages are not cached
+             * which might lead to visible loading while moving through the
+             * book with the arrow keys
+             */
+            function setMoveDirection(direction)
+            {
+                if(direction === "up")
+                {
+                    listView.flick(0, -1000);
+                    listView.cancelFlick();
+                }
+                else if(direction === "down")
+                {
+                    listView.flick(0, 1000);
+                    listView.cancelFlick();
+                }
+            }
         }
     }
     
@@ -133,6 +156,8 @@ Pane
         let currentPageStartY = root.document.currentPage * pageHeight;
         listView.contentY = currentPageStartY + pageHeight;
         
+        listView.setMoveDirection("up");
+        
         listView.updateCurrentPageCounter();
     }
     
@@ -141,6 +166,8 @@ Pane
         let pageHeight = listView.currentItem.height;
         let currentPageStartY = root.document.currentPage * pageHeight;
         listView.contentY = currentPageStartY - pageHeight;
+        
+        listView.setMoveDirection("down");
         
         listView.updateCurrentPageCounter();
     }
