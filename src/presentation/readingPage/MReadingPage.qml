@@ -37,13 +37,13 @@ Page
     
     Shortcut
     {
-        sequences: ["UP"]
+        sequences: ["Up"]
         onActivated: documentView.flick(1500)
     }
     
     Shortcut
     {
-        sequences: ["DOWN"]
+        sequences: ["Down"]
         onActivated: documentView.flick(-1500)
     }
     
@@ -55,7 +55,7 @@ Page
     
     Shortcut
     {
-        sequences: [StandardKey.MoveToPreviousPage, "LEFT"]
+        sequences: [StandardKey.MoveToPreviousPage, "Left"]
         onActivated: documentView.previousPage()
     }
     

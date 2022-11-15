@@ -35,7 +35,6 @@ Pane
             height: parent.height
             width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
                                        ? root.width : contentWidth
-            
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             contentWidth: 1020
