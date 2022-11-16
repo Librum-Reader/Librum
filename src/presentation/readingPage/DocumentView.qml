@@ -23,6 +23,7 @@ Pane
     {
         id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
         
         onWheel: listView.handleWheel(wheel)
         
@@ -73,7 +74,6 @@ Pane
             }
             
             
-            
             function handleWheel(wheel)
             {
                 // Generate factors between 0.8 and 1.2
@@ -102,7 +102,7 @@ Pane
                 if(newPage != root.document.currentPage)
                     root.document.currentPage = newPage;
             }
-        
+            
             /**
              * Changes the current move direction of the listview, without actually
              * moving visibly. This is neccessary since the listview only chaches
@@ -128,18 +128,19 @@ Pane
         }
     }
     
-    
     function zoom(factor)
     {
         let newWidth = listView.contentWidth * factor;
         
-        // Prevent a too high/low zooms
+        // Prevent from too high/low zooms
         if (newWidth < listView.normalWidth / 6 || newWidth > listView.normalWidth * 5)
         {
             return;
         }
         
-        listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio), Qt.point(0,0));
+        let mappedPoint = mapToItem(listView, Qt.point(mouseArea.mouseX, mouseArea.mouseY));
+        listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio),
+                               mappedPoint);
         listView.returnToBounds();
     }
     
@@ -156,9 +157,8 @@ Pane
         let currentPageStartY = root.document.currentPage * pageHeight;
         listView.contentY = currentPageStartY + pageHeight;
         
-        listView.setMoveDirection("up");
-        
         listView.updateCurrentPageCounter();
+        listView.setMoveDirection("up");
     }
     
     function previousPage()
@@ -167,8 +167,7 @@ Pane
         let currentPageStartY = root.document.currentPage * pageHeight;
         listView.contentY = currentPageStartY - pageHeight;
         
-        listView.setMoveDirection("down");
-        
         listView.updateCurrentPageCounter();
+        listView.setMoveDirection("down");
     }
 }

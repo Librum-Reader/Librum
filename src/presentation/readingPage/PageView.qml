@@ -1,4 +1,5 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 import QtGraphicalEffects 1.15
 import org.kde.kirigami 2.17 as Kirigami
 import Librum.elements 1.0
@@ -37,6 +38,6 @@ Item
             bottomMargin: -Math.round(root.height / 96)
         }
         z: -1
-        color: Style.pagesBackground
+        color: Style.colorBackground
     }
 }
