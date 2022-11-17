@@ -48,7 +48,6 @@ Pane
             
             onWidthChanged: toolbar.pageWidth = width
             
-            
             delegate: PageView
             {
                 width: listView.contentWidth
@@ -56,6 +55,18 @@ Pane
                 document: root.document
                 pageNumber: modelData
                 container: listView
+            }
+            
+            
+            MouseArea
+            {
+                anchors.fill: parent
+                
+                onWheel:
+                {
+                    listView.handleWheel(wheel);
+                    wheel.accepted = true;
+                }
             }
             
             
@@ -69,7 +80,7 @@ Pane
                 {
                     root.zoom(factor);
                 }
-                else if(wheel.button)
+                else
                 {
                     if(factor > 1)
                         root.flick(2000);
