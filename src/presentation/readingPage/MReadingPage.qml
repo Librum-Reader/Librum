@@ -311,7 +311,6 @@ Page
                     visible: documentItem.opened
                     document: documentItem
                 }
-                
             }
         }
         
