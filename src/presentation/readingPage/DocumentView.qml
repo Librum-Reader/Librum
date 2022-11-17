@@ -56,10 +56,10 @@ Pane
             delegate: PageView
             {
                 width: listView.contentWidth
-                height: Math.round(width / listView.currentItem.pageRatio)
+                height: Math.round(width / pageRatio) + pageSpacing
                 document: root.document
                 pageNumber: modelData
-                visible: true
+                container: listView
             }
             
             MouseArea
