@@ -69,7 +69,7 @@ Pane
                 {
                     root.zoom(factor);
                 }
-                else if(wheel.button | Qt.MiddleButton)
+                else if(wheel.button)
                 {
                     if(factor > 1)
                         root.flick(2000);
