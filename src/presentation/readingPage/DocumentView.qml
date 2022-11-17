@@ -75,12 +75,11 @@ Pane
                 // Generate factors between 0.8 and 1.2
                 let factor = (((wheel.angleDelta.y / 120)+1) / 5 ) + 0.8;
                 
-                
                 if (wheel.modifiers & Qt.ControlModifier)
                 {
                     root.zoom(factor);
                 }
-                else
+                else if(wheel.angleDelta.x === 0)  // No horizontal ScrollBar
                 {
                     if(factor > 1)
                         root.flick(2000);
