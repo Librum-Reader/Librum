@@ -38,19 +38,15 @@ Pane
                                        ? root.width : contentWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
-            reuseItems: false
             contentWidth: 1020
             cacheBuffer: 5000  // Load some pages in advance
-            interactive: false
+            interactive: true
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
             currentIndex: 0
             model: root.document.pageCount
             
             onWidthChanged: toolbar.pageWidth = width
-            
-            // Some themes try to set interactive to true
-            Component.onCompleted: listView.interactive = true
             
             
             delegate: PageView
@@ -60,17 +56,6 @@ Pane
                 document: root.document
                 pageNumber: modelData
                 container: listView
-            }
-            
-            MouseArea
-            {
-                anchors.fill: parent
-                
-                onWheel:
-                {
-                    listView.handleWheel(wheel);
-                    wheel.accepted = true;
-                }
             }
             
             
@@ -84,7 +69,7 @@ Pane
                 {
                     root.zoom(factor);
                 }
-                else
+                else if(wheel.button | Qt.MiddleButton)
                 {
                     if(factor > 1)
                         root.flick(2000);
