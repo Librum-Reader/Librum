@@ -10,9 +10,9 @@ function handleWheel(wheel)
     else if(wheel.angleDelta.x === 0)  // No horizontal ScrollBar
     {
         if(factor > 1)
-            root.flick(2000);
+            flick(listView.scrollSpeed);
         else
-            root.flick(-2000);
+            flick(-listView.scrollSpeed);
         
         updateCurrentPageCounter();
     }

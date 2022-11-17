@@ -33,6 +33,7 @@ Pane
         {
             id: listView
             readonly property int normalWidth: 1020
+            readonly property int scrollSpeed: 1600
             
             height: parent.height
             width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
@@ -77,9 +78,10 @@ Pane
         NavigationLogic.zoom(factor);
     }
     
-    function flick(factor)
+    function flick(direction)
     {
-        NavigationLogic.flick(factor);
+        let up = direction === "up";
+        NavigationLogic.flick(listView.scrollSpeed * (up ? 1 : -1));
     }
     
     function nextPage()

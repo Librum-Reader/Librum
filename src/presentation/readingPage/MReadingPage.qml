@@ -38,13 +38,13 @@ Page
     Shortcut
     {
         sequences: ["Up"]
-        onActivated: documentView.flick(1500)
+        onActivated: documentView.flick("up")
     }
     
     Shortcut
     {
         sequences: ["Down"]
-        onActivated: documentView.flick(-1500)
+        onActivated: documentView.flick("down")
     }
     
     Shortcut
