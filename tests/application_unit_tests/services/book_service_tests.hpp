@@ -103,6 +103,42 @@ TEST_F(ABookService, SucceedsAddingABook)
     EXPECT_EQ(expectedResult, result);
 }
 
+TEST_F(ABookService, FailsAddingABookIfGettingBookMetaDataFails)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::OpeningBookFailed;
+
+
+    // Expect
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(std::nullopt));
+
+    // Act
+    auto result = bookService->addBook("some/path.pdf");
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsAddingABookIfTrackingBookFails)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::OpeningBookFailed;
+
+
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
+        .Times(1)
+        .WillOnce(Return(false));
+
+    // Act
+    auto result = bookService->addBook("some/path.pdf");
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
 TEST_F(ABookService, SucceedsDeletingABook)
 {
     // Arrange
