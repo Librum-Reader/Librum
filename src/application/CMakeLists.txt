@@ -30,6 +30,7 @@ set(application_SRC
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_book_metadata_helper.hpp
     interfaces/utility/i_downloaded_books_tracker.hpp
+    interfaces/utility/i_book_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -47,6 +48,8 @@ set(application_SRC
     utility/downloaded_books_tracker.cpp
     utility/downloaded_books_tracker.hpp
     utility/merge_status.hpp
+    utility/book_storage_manager.cpp
+    utility/book_storage_manager.hpp
 )
 
 

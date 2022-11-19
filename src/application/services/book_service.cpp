@@ -16,9 +16,11 @@ using utility::MergeStatus;
 
 BookService::BookService(IBookStorageGateway* bookStorageGateway,
                          IBookMetadataHelper* bookMetadataHelper,
+                         IBookStorageManager* bookStorageManager,
                          IDownloadedBooksTracker* downloadedBooksTracker) :
     m_bookStorageGateway(bookStorageGateway),
     m_bookMetadataHelper(bookMetadataHelper),
+    m_bookStorageManager(bookStorageManager),
     m_downloadedBooksTracker(downloadedBooksTracker)
 {
     // Fetch changes timer

@@ -10,6 +10,7 @@
 #include "book_service.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "i_book_storage_gateway.hpp"
+#include "i_book_storage_manager.hpp"
 #include "tag.hpp"
 
 
@@ -43,6 +44,18 @@ public:
     MOCK_METHOD(void, loadCover, (), (const, override));
 };
 
+class BookStorageManagerMock : public IBookStorageManager
+{
+public:
+    MOCK_METHOD(void, addBook, (const domain::models::Book& bookToAdd),
+                (override));
+    MOCK_METHOD(void, deleteBook, (const QUuid& uuid), (override));
+    MOCK_METHOD(void, uninstallBook, (const QUuid& uuid), (override));
+    MOCK_METHOD(void, updateBook, (const domain::models::Book& newBook),
+                (override));
+    MOCK_METHOD(std::vector<domain::models::Book>, loadBooks, (), (override));
+};
+
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
 {
 public:
@@ -65,11 +78,12 @@ struct ABookService : public ::testing::Test
 
         bookService = std::make_unique<BookService>(
             &bookStorageGatewayMock, &bookMetaDataHelperMock,
-            &downloadedBooksTrackerMock);
+            &bookStorageManagerMock, &downloadedBooksTrackerMock);
     }
 
     BookStorageGatewayMock bookStorageGatewayMock;
     BookMetaDataHelperMock bookMetaDataHelperMock;
+    BookStorageManagerMock bookStorageManagerMock;
     DownloadedBooksTrackerMock downloadedBooksTrackerMock;
     std::unique_ptr<BookService> bookService;
 };

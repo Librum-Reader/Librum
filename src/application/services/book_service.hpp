@@ -6,6 +6,7 @@
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_gateway.hpp"
+#include "i_book_storage_manager.hpp"
 #include "i_downloaded_books_tracker.hpp"
 #include "merge_status.hpp"
 
@@ -19,6 +20,7 @@ class BookService : public IBookService
 public:
     BookService(IBookStorageGateway* bookStorageGateway,
                 IBookMetadataHelper* bookMetadataHelper,
+                IBookStorageManager* bookStorageManager,
                 IDownloadedBooksTracker* downloadedBooksTracker);
 
     BookOperationStatus addBook(const QString& filePath) override;
@@ -68,6 +70,7 @@ private:
 
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;
+    IBookStorageManager* m_bookStorageManager;
     IDownloadedBooksTracker* m_downloadedBooksTracker;
     std::vector<domain::models::Book> m_books;
     QTimer m_fetchChangesTimer;
