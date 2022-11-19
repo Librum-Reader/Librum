@@ -5,6 +5,14 @@ namespace application::utility
 
 using namespace domain::models;
 
+BookStorageManager::BookStorageManager(
+    IBookStorageGateway* bookStorageGateway,
+    IDownloadedBooksTracker* downloadedBooksTracker) :
+    m_bookStorageGateway(bookStorageGateway),
+    m_downloadedBooksTracker(downloadedBooksTracker)
+{
+}
+
 void BookStorageManager::addBook(const Book& bookToAdd)
 {
 }
