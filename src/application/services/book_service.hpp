@@ -7,7 +7,6 @@
 #include "i_book_service.hpp"
 #include "i_book_storage_gateway.hpp"
 #include "i_downloaded_books_tracker.hpp"
-#include "i_internet_connection_info.hpp"
 #include "merge_status.hpp"
 
 namespace application::services
@@ -20,8 +19,7 @@ class BookService : public IBookService
 public:
     BookService(IBookStorageGateway* bookStorageGateway,
                 IBookMetadataHelper* bookMetadataHelper,
-                IDownloadedBooksTracker* downloadedBooksTracker,
-                IInternetConnectionInfo* internetConnectionInfo);
+                IDownloadedBooksTracker* downloadedBooksTracker);
 
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
@@ -71,7 +69,6 @@ private:
     IBookStorageGateway* m_bookStorageGateway;
     IBookMetadataHelper* m_bookMetadataHelper;
     IDownloadedBooksTracker* m_downloadedBooksTracker;
-    IInternetConnectionInfo* m_internetConnectionInfo;
     std::vector<domain::models::Book> m_books;
     QTimer m_fetchChangesTimer;
     QString m_authenticationToken;

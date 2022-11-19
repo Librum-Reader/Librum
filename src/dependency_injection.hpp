@@ -20,12 +20,10 @@
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
 #include "i_downloaded_books_tracker.hpp"
-#include "i_internet_connection_info.hpp"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
 #include "i_user_storage_access.hpp"
 #include "i_user_storage_gateway.hpp"
-#include "internet_connection_info.hpp"
 #include "user_controller.hpp"
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
@@ -70,9 +68,7 @@ const auto diConfig = []
         di::bind<application::IBookMetadataHelper>()
             .to<application::utility::BookMetadataHelper>(),
         di::bind<application::IDownloadedBooksTracker>()
-            .to<application::utility::DownloadedBooksTracker>(),
-        di::bind<application::IInternetConnectionInfo>()
-            .to<application::utility::InternetConnectionInfo>());
+            .to<application::utility::DownloadedBooksTracker>());
 };
 
 }  // namespace config

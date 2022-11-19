@@ -10,8 +10,6 @@
 #include "book_service.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "i_book_storage_gateway.hpp"
-#include "i_internet_connection_info.hpp"
-#include "internet_connection_info.hpp"
 #include "tag.hpp"
 
 
@@ -45,12 +43,6 @@ public:
     MOCK_METHOD(void, loadCover, (), (const, override));
 };
 
-class InternetConnectionInfoMock : public IInternetConnectionInfo
-{
-public:
-    MOCK_METHOD(void, checkAvailability, (), (override));
-};
-
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
 {
 public:
@@ -73,13 +65,12 @@ struct ABookService : public ::testing::Test
 
         bookService = std::make_unique<BookService>(
             &bookStorageGatewayMock, &bookMetaDataHelperMock,
-            &downloadedBooksTrackerMock, &internetConnectionInfoMock);
+            &downloadedBooksTrackerMock);
     }
 
     BookStorageGatewayMock bookStorageGatewayMock;
     BookMetaDataHelperMock bookMetaDataHelperMock;
     DownloadedBooksTrackerMock downloadedBooksTrackerMock;
-    InternetConnectionInfoMock internetConnectionInfoMock;
     std::unique_ptr<BookService> bookService;
 };
 

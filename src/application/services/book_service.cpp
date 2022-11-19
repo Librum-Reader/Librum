@@ -16,12 +16,10 @@ using utility::MergeStatus;
 
 BookService::BookService(IBookStorageGateway* bookStorageGateway,
                          IBookMetadataHelper* bookMetadataHelper,
-                         IDownloadedBooksTracker* downloadedBooksTracker,
-                         IInternetConnectionInfo* internetConnectionInfo) :
+                         IDownloadedBooksTracker* downloadedBooksTracker) :
     m_bookStorageGateway(bookStorageGateway),
     m_bookMetadataHelper(bookMetadataHelper),
-    m_downloadedBooksTracker(downloadedBooksTracker),
-    m_internetConnectionInfo(internetConnectionInfo)
+    m_downloadedBooksTracker(downloadedBooksTracker)
 {
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(10'000);
@@ -258,11 +256,7 @@ void BookService::storeBookCover(const QPixmap* pixmap)
 void BookService::loadBooks()
 {
     loadLocalBooks();
-
-    // Only try loading remote books, if an internet connection exists
-    m_internetConnectionInfo->checkAvailability();
-    connect(m_internetConnectionInfo, &IInternetConnectionInfo::available, this,
-            &BookService::loadRemoteBooks);
+    loadRemoteBooks();
 }
 
 void BookService::loadLocalBooks()
@@ -278,9 +272,6 @@ void BookService::loadRemoteBooks()
 
 void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
-    if(books.empty())
-        return;
-
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
 }
