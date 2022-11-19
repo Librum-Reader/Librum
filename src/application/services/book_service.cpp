@@ -278,6 +278,9 @@ void BookService::loadRemoteBooks()
 
 void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
+    if(books.empty())
+        return;
+
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
 }
