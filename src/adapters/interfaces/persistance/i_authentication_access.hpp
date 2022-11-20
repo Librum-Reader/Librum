@@ -7,6 +7,9 @@
 namespace adapters
 {
 
+/**
+ * The BookStorageAccess class makes the API calls to the book storage server.
+ */
 class IAuthenticationAccess : public QObject
 {
     Q_OBJECT

@@ -12,6 +12,12 @@
 namespace adapters
 {
 
+/**
+ * The BookController class is exposed to the UI code and thus is the
+ * "entry point" to the application's backend for book operations. It acts as a
+ * layer of abstraction which maps the user data to a format usable for the
+ * application.
+ */
 class IBookController : public QObject
 {
     Q_OBJECT

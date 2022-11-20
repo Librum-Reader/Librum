@@ -8,8 +8,9 @@
 namespace application
 {
 
-/*
- * Manages the book storage for the local and remote library.
+/**
+ * The BookStorageManager manages the book storage for the local and remote
+ * library.
  */
 class IBookStorageManager : public QObject
 {

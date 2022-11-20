@@ -8,6 +8,9 @@
 namespace application
 {
 
+/**
+ * The BookMetaDataHelper class extracts metadata from a book.
+ */
 class IBookMetadataHelper : public QObject
 {
     Q_OBJECT

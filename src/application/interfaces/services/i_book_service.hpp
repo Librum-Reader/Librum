@@ -10,7 +10,7 @@
 namespace application
 {
 
-/*
+/**
  *  The BookService handles all the operations on books.
  */
 class IBookService : public QObject

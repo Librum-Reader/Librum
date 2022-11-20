@@ -8,7 +8,7 @@
 namespace application
 {
 
-/*
+/**
  *  The BookService handles all the operations on the user.
  */
 class IUserService : public QObject

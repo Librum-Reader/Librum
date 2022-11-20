@@ -4,6 +4,12 @@
 namespace adapters
 {
 
+/**
+ * The UserController class is exposed to the UI code and thus is the
+ * "entry point" to the application's backend for user operations. It acts as a
+ * layer of abstraction which maps the user data to a format usable for the
+ * application.
+ */
 class IUserController : public QObject
 {
     Q_OBJECT
