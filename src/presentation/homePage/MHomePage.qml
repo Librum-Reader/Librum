@@ -385,7 +385,7 @@ Page
         options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
-        onAccepted: BookController.saveBookToPath(Globals.selectedBook.uuid, folder);
+        onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
     }
     
     FileDialog

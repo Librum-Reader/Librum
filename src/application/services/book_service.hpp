@@ -36,7 +36,7 @@ public:
     int getBookIndex(const QUuid& uuid) const override;
     int getBookCount() const override;
 
-    BookOperationStatus saveBookToPath(const QUuid& uuid,
+    BookOperationStatus saveBookToFile(const QUuid& uuid,
                                        const QUrl& path) override;
 
 public slots:

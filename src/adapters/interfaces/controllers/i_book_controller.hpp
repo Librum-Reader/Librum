@@ -55,7 +55,7 @@ public:
         const QString& uuid) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
 
-    Q_INVOKABLE virtual int saveBookToPath(const QString& uuid,
+    Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;
     virtual data_models::LibraryModel* getLibraryModel() = 0;
 

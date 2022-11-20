@@ -46,7 +46,7 @@ public:
     MOCK_METHOD(BookOperationStatus, removeTag,
                 (const QUuid&, const domain::models::Tag&), (override));
 
-    MOCK_METHOD(BookOperationStatus, saveBookToPath,
+    MOCK_METHOD(BookOperationStatus, saveBookToFile,
                 (const QUuid&, const QUrl&), (override));
 
     MOCK_METHOD(void, setAuthenticationToken, (const QString&, const QString&),
@@ -402,12 +402,12 @@ TEST_F(ABookController, SucceedsSavingABookToAPath)
 
 
     // Expect
-    EXPECT_CALL(bookServiceMock, saveBookToPath)
+    EXPECT_CALL(bookServiceMock, saveBookToFile)
         .Times(1)
         .WillOnce(Return(BookOperationStatus::Success));
 
     // Act
-    auto result = bookController->saveBookToPath(bookUuid, url);
+    auto result = bookController->saveBookToFile(bookUuid, url);
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);

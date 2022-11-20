@@ -184,7 +184,7 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
-BookOperationStatus BookService::saveBookToPath(const QUuid& uuid,
+BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
                                                 const QUrl& pathToFolder)
 {
     auto book = getBook(uuid);
