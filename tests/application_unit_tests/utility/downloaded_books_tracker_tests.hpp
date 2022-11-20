@@ -1,7 +1,6 @@
 #pragma once
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <QDebug>
 #include <QString>
 #include <ranges>
 #include "book.hpp"
