@@ -6,6 +6,10 @@
 
 namespace application
 {
+
+/*
+ *  The AuthenticationService handles the authentication.
+ */
 class IAuthenticationService : public QObject
 {
     Q_OBJECT

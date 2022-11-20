@@ -11,7 +11,7 @@ namespace application
 {
 
 /*
- *  The BookService coordinates all the operations on books.
+ *  The BookService handles all the operations on books.
  */
 class IBookService : public QObject
 {
