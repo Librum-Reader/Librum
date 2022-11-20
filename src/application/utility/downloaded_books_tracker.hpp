@@ -8,6 +8,7 @@ class DownloadedBooksTracker : public IDownloadedBooksTracker
 {
 public:
     void setLibraryOwner(const QString& libraryOwnerEmail) override;
+    void clearLibraryOwner() override;
     QDir getUserLibraryDir() const override;
 
     std::vector<domain::models::Book> getTrackedBooks() override;
