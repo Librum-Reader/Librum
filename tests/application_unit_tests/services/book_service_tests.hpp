@@ -9,7 +9,6 @@
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "i_book_storage_gateway.hpp"
 #include "i_book_storage_manager.hpp"
 #include "tag.hpp"
 
@@ -25,17 +24,6 @@ using namespace domain::models;
 namespace tests::application
 {
 
-class BookStorageGatewayMock : public IBookStorageGateway
-{
-public:
-    MOCK_METHOD(void, createBook, (const QString&, const Book&), (override));
-    MOCK_METHOD(void, deleteBook, (const QString&, const QUuid& uuid),
-                (override));
-    MOCK_METHOD(void, updateBook, (const QString&, const Book&), (override));
-    MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
-    MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
-};
-
 class BookMetaDataHelperMock : public IBookMetadataHelper
 {
 public:
@@ -47,26 +35,20 @@ public:
 class BookStorageManagerMock : public IBookStorageManager
 {
 public:
-    MOCK_METHOD(void, addBook, (const domain::models::Book& bookToAdd),
+    MOCK_METHOD(void, addBook, (const domain::models::Book&), (override));
+    MOCK_METHOD(void, deleteBook, (const QUuid&), (override));
+    MOCK_METHOD(void, uninstallBook, (const QUuid&), (override));
+    MOCK_METHOD(void, updateBook, (const domain::models::Book&), (override));
+    MOCK_METHOD(void, updateBookLocally, (const domain::models::Book&),
                 (override));
-    MOCK_METHOD(void, deleteBook, (const QUuid& uuid), (override));
-    MOCK_METHOD(void, uninstallBook, (const QUuid& uuid), (override));
-    MOCK_METHOD(void, updateBook, (const domain::models::Book& newBook),
+    MOCK_METHOD(void, updateBookRemotely, (const domain::models::Book&),
                 (override));
-    MOCK_METHOD(std::vector<domain::models::Book>, loadBooks, (), (override));
-};
-
-class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
-{
-public:
-    MOCK_METHOD(void, setLibraryOwner, (const QString&), (override));
-    MOCK_METHOD(QDir, getUserLibraryDir, (), (const, override));
-    MOCK_METHOD(std::vector<Book>, getTrackedBooks, (), (override));
-    MOCK_METHOD(std::optional<Book>, getTrackedBook, (const QUuid&),
+    MOCK_METHOD(std::vector<domain::models::Book>, loadLocalBooks, (),
                 (override));
-    MOCK_METHOD(bool, trackBook, (const Book& book), (override));
-    MOCK_METHOD(bool, untrackBook, (const QUuid&), (override));
-    MOCK_METHOD(bool, updateTrackedBook, (const Book&), (override));
+    MOCK_METHOD(void, loadRemoteBooks, (), (override));
+    MOCK_METHOD(void, setUserData, (const QString&, const QString&),
+                (override));
+    MOCK_METHOD(void, clearUserData, (), (override));
 };
 
 struct ABookService : public ::testing::Test
@@ -76,15 +58,12 @@ struct ABookService : public ::testing::Test
         EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
             .WillRepeatedly(Return(BookMetaData()));
 
-        bookService = std::make_unique<BookService>(
-            &bookStorageGatewayMock, &bookMetaDataHelperMock,
-            &bookStorageManagerMock, &downloadedBooksTrackerMock);
+        bookService = std::make_unique<BookService>(&bookMetaDataHelperMock,
+                                                    &bookStorageManagerMock);
     }
 
-    BookStorageGatewayMock bookStorageGatewayMock;
     BookMetaDataHelperMock bookMetaDataHelperMock;
     BookStorageManagerMock bookStorageManagerMock;
-    DownloadedBooksTrackerMock downloadedBooksTrackerMock;
     std::unique_ptr<BookService> bookService;
 };
 
@@ -95,11 +74,7 @@ TEST_F(ABookService, SucceedsAddingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
-
-    EXPECT_CALL(bookStorageGatewayMock, createBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
 
     // Act
     auto result = bookService->addBook("some/path.pdf");
@@ -126,24 +101,6 @@ TEST_F(ABookService, FailsAddingABookIfGettingBookMetaDataFails)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsAddingABookIfTrackingBookFails)
-{
-    // Arrange
-    auto expectedResult = BookOperationStatus::OpeningBookFailed;
-
-
-    // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(false));
-
-    // Act
-    auto result = bookService->addBook("some/path.pdf");
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
 TEST_F(ABookService, SucceedsDeletingABook)
 {
     // Arrange
@@ -155,9 +112,7 @@ TEST_F(ABookService, SucceedsDeletingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(1);
-
-    EXPECT_CALL(bookStorageGatewayMock, deleteBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, deleteBook(_)).Times(1);
 
     // Act
     auto preDeleteBookCount = bookService->getBookCount();
@@ -198,7 +153,7 @@ TEST_F(ABookService, SucceedsUninstallingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, uninstallBook(_)).Times(1);
 
     // Act
     auto result = bookService->uninstallBook(bookUuid);
@@ -212,7 +167,7 @@ TEST_F(ABookService, SucceedsUninstallingABook)
     EXPECT_EQ(bookService->getBookIndex(bookUuid), arguments[0].toInt());
 }
 
-TEST_F(ABookService, FailsUninstallingABook)
+TEST_F(ABookService, FailsUninstallingABookIfBookDoesNotExist)
 {
     // Arrange
     QSignalSpy spy(bookService.get(), &BookService::dataChanged);
@@ -224,7 +179,7 @@ TEST_F(ABookService, FailsUninstallingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, uninstallBook(_)).Times(0);
 
     // Act
     auto result = bookService->uninstallBook(nonExistentBookUuid);
@@ -258,9 +213,7 @@ TEST_F(ABookService, SucceedsUpdatingABook)
 
 
     // Expect
-    EXPECT_CALL(downloadedBooksTrackerMock, updateTrackedBook(_)).Times(1);
-
-    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(1);
 
     // Act
     auto resultStatus = bookService->updateBook(bookToUpdateWith);
@@ -482,9 +435,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWitUpdatedData)
         .lastModified = QDateTime::currentDateTimeUtc().addDays(-2),
     };
 
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
 
     EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
@@ -511,7 +462,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWitUpdatedData)
 
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
 
     // Assert
     EXPECT_EQ(remoteBook.getTitle(), localBook.getTitle());
@@ -538,9 +489,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWithANewCurrentPage)
         .lastModified = QDateTime::currentDateTimeUtc().addDays(-2),
     };
 
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
 
     EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
@@ -556,7 +505,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookWithANewCurrentPage)
 
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
 
     // Assert
     EXPECT_EQ(remoteBook.getLastOpened(), localBook.getLastOpened());
@@ -578,9 +527,7 @@ TEST_F(ABookService, SucceedsMergingALocalBookDataToServer)
         .lastModified = QDateTime::currentDateTimeUtc(),  // More recent
     };
 
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
 
     EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
@@ -605,11 +552,11 @@ TEST_F(ABookService, SucceedsMergingALocalBookDataToServer)
 
 
     // Expect
-    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, updateBookRemotely(_)).Times(1);
 
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
 }
 
 TEST_F(ABookService, SucceedsMergingALocalBookWithANewCurrentPageToServer)
@@ -627,14 +574,16 @@ TEST_F(ABookService, SucceedsMergingALocalBookWithANewCurrentPageToServer)
         .lastModified = QDateTime::currentDateTimeUtc(),
     };
 
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, updateBookRemotely(_)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
 
     EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
         .WillOnce(Return(localBookMetaData));
 
+    // Arrange
     bookService->addBook("some/path.pdf");
     auto localBookUuid =
         bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
@@ -647,12 +596,9 @@ TEST_F(ABookService, SucceedsMergingALocalBookWithANewCurrentPageToServer)
     remoteBook.setLastOpened(QDateTime::currentDateTimeUtc().addDays(-1));
     remoteBook.setCurrentPage(251);
 
-    // Expect
-    EXPECT_CALL(bookStorageGatewayMock, updateBook(_, _)).Times(1);
-
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
 }
 
 TEST_F(ABookService, SucceedsAddingLocalBooksToServer)
@@ -670,9 +616,7 @@ TEST_F(ABookService, SucceedsAddingLocalBooksToServer)
         .lastModified = QDateTime::currentDateTimeUtc(),  // More recent
     };
 
-    EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_))
-        .Times(1)
-        .WillOnce(Return(true));
+    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(2);
 
     EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
         .Times(1)
@@ -680,13 +624,10 @@ TEST_F(ABookService, SucceedsAddingLocalBooksToServer)
 
     bookService->addBook("some/path.pdf");
 
-
-    // Expect
-    EXPECT_CALL(bookStorageGatewayMock, createBook(_, _)).Times(1);
-
     // Act
     std::vector<Book> myBooks {};
-    emit bookStorageGatewayMock.gettingBooksMetaDataFinished(myBooks);
+    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
+    ;
 }
 
 }  // namespace tests::application
