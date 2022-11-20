@@ -10,6 +10,9 @@
 namespace application
 {
 
+/*
+ *  The BookService coordinates all the operations on books.
+ */
 class IBookService : public QObject
 {
     Q_OBJECT

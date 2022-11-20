@@ -222,6 +222,7 @@ void BookService::setAuthenticationToken(const QString& token,
 {
     m_bookStorageManager->setUserData(email, token);
 
+    // Load books on login
     m_books = m_bookStorageManager->loadLocalBooks();
     m_bookStorageManager->loadRemoteBooks();
 
