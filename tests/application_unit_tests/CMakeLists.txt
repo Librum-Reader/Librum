@@ -10,6 +10,7 @@ add_executable(application_unit_tests
                     services/user_service_tests.hpp
                     services/authentication_service_tests.hpp
                     utility/downloaded_books_tracker_tests.hpp
+                    utility/book_storage_manager_tests.hpp
     )
 
 target_link_libraries(application_unit_tests
