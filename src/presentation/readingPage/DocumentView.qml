@@ -32,6 +32,8 @@ Pane
             readonly property int normalWidth: 1020
             readonly property int scrollSpeed: 1600
             
+            onContentYChanged: NavigationLogic.updateCurrentPageCounter();
+            
             height: parent.height
             width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
                                        ? root.width : contentWidth

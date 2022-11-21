@@ -18,15 +18,11 @@ function handleWheel(wheel)
 
 function updateCurrentPageCounter()
 {
-    // Set current page
+//     Set current page
     let pageHeight = listView.currentItem.height;
-    let currentPos = listView.contentY - listView.originY + root.height/2 + 150;
-    let pageNumber = (currentPos) / (pageHeight);
+    let currentPos = listView.contentY - listView.originY + root.height/2;
+    let pageNumber = currentPos / pageHeight;
     
-    console.log("joa: " + listView.contentY + " origin: " + listView.originY);
-    console.log("pageNumber: " + pageNumber);
-    console.log("contentY: " + listView.contentY);
-    console.log("");
     if(pageNumber != root.document.currentPage)
         root.document.currentPage = pageNumber;
 }
@@ -67,15 +63,11 @@ function zoom(factor)
     listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio),
                            Qt.point(0, 0));
     listView.returnToBounds();
-    
-    updateCurrentPageCounter();
 }
 
 function flick(factor)
 {
     listView.flick(0, factor);
-    
-    updateCurrentPageCounter();
 }
 
 function nextPage()
@@ -84,7 +76,6 @@ function nextPage()
     let currentPageStartY = root.document.currentPage * pageHeight;
     listView.contentY = currentPageStartY + pageHeight;
     
-    updateCurrentPageCounter();
     setMoveDirection("up");
 }
 
@@ -94,6 +85,5 @@ function previousPage()
     let currentPageStartY = root.document.currentPage * pageHeight;
     listView.contentY = currentPageStartY - pageHeight;
     
-    updateCurrentPageCounter();
     setMoveDirection("down");
 }
