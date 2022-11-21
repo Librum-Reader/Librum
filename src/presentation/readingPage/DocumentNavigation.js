@@ -13,17 +13,22 @@ function handleWheel(wheel)
             flick(listView.scrollSpeed);
         else
             flick(-listView.scrollSpeed);
-        
-        updateCurrentPageCounter();
     }
 }
 
 function updateCurrentPageCounter()
 {
     // Set current page
-    let newPage = Math.round(listView.contentY / listView.currentItem.height);
-    if(newPage != root.document.currentPage)
-        root.document.currentPage = newPage;
+    let pageHeight = listView.currentItem.height;
+    let currentPos = listView.contentY - listView.originY + root.height/2 + 150;
+    let pageNumber = (currentPos) / (pageHeight);
+    
+    console.log("joa: " + listView.contentY + " origin: " + listView.originY);
+    console.log("pageNumber: " + pageNumber);
+    console.log("contentY: " + listView.contentY);
+    console.log("");
+    if(pageNumber != root.document.currentPage)
+        root.document.currentPage = pageNumber;
 }
 
 /**
@@ -59,10 +64,11 @@ function zoom(factor)
         return;
     }
     
-    let mappedPoint = mapToItem(listView, Qt.point(mouseArea.mouseX, mouseArea.mouseY));
     listView.resizeContent(Math.round(newWidth), Math.round(newWidth / listView.currentItem.pageRatio),
-                           mappedPoint);
+                           Qt.point(0, 0));
     listView.returnToBounds();
+    
+    updateCurrentPageCounter();
 }
 
 function flick(factor)

@@ -14,10 +14,7 @@ Pane
     signal clicked
     
     padding: 0
-    background: Rectangle
-    {
-        color: "transparent"
-    }
+    background: Rectangle { color: "transparent" }
     
     
     MouseArea
