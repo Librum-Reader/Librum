@@ -97,5 +97,6 @@
         <file>readingPage/DocumentView.qml</file>
         <file>readingPage/PageView.qml</file>
         <file>loginPage/MLoginFailedPopup.qml</file>
+        <file>readingPage/DocumentNavigation.js</file>
     </qresource>
 </RCC>

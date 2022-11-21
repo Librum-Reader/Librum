@@ -8,6 +8,11 @@
 namespace application
 {
 
+/**
+ * The BookStorageGateway class acts as a layer of abstraction before the
+ * BookStorageAccess class. It maps the data provided by the application to
+ * the data type required for book storage API requests.
+ */
 class IBookStorageGateway : public QObject
 {
     Q_OBJECT

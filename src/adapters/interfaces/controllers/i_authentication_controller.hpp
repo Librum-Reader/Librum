@@ -5,6 +5,12 @@
 namespace adapters
 {
 
+/**
+ * The AuthenticationController class is exposed to the UI code and thus is the
+ * "entry point" to the application's backend for authentication operations. It
+ * acts as a layer of abstraction which maps the user data to a format usable
+ * for the application.
+ */
 class IAuthenticationController : public QObject
 {
     Q_OBJECT

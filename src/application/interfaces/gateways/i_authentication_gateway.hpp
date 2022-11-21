@@ -7,6 +7,11 @@
 namespace application
 {
 
+/**
+ * The AuthenticationGateway class acts as a layer of abstraction before the
+ * AuthenticationAccess class. It maps the data provided by the application to
+ * the data type required for authentication API requests.
+ */
 class IAuthenticationGateway : public QObject
 {
     Q_OBJECT

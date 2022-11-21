@@ -11,6 +11,7 @@
 
 #include "document.h"
 #include <limits.h>
+#include <iterator>
 #include <memory>
 #include "document_p.h"
 #include "documentcommands_p.h"
@@ -18,7 +19,7 @@
     #define _WIN32_WINNT 0x0500
     #include <windows.h>
 #elif defined(Q_OS_FREEBSD)
-// clang-format off
+    // clang-format off
 // FreeBSD really wants this include order
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -4326,6 +4327,30 @@ bool DocumentPrivate::cancelRenderingBecauseOf(PixmapRequest* executingRequest,
     return true;
 }
 
+void DocumentPrivate::clearPixmapsForPage(Page* page)
+{
+    if(page->d->m_pixmaps.size() == 0)
+        return;
+
+    page->deletePixmaps();
+
+    auto allocatedPixmapIt = std::find_if(
+        m_allocatedPixmaps.begin(), m_allocatedPixmaps.end(),
+        [pageNumberToDelete = page->number()](AllocatedPixmap* pixmap)
+        {
+            return pixmap->page == pageNumberToDelete;
+        });
+
+    if(allocatedPixmapIt == m_allocatedPixmaps.end())
+        return;
+
+    m_allocatedPixmapsTotalMemory -= (*allocatedPixmapIt)->memory;
+    m_allocatedPixmaps.remove(*allocatedPixmapIt);
+
+    // send reload signals to observers
+    foreachObserverD(notifyContentsCleared(DocumentObserver::Pixmap));
+}
+
 void Document::requestPixmaps(const QList<PixmapRequest*>& requests)
 {
     requestPixmaps(requests, RemoveAllPrevious);
@@ -4766,23 +4791,6 @@ bool Document::canRedo() const
     return d->m_undoStack->canRedo();
 }
 
-/* REFERENCE IMPLEMENTATION: better calling setViewport from other code
-void Document::setNextPage()
-{
-    // advance page and set viewport on observers
-    if ( (*d->m_viewportIterator).pageNumber < (int)d->m_pagesVector.count() - 1
-) setViewport( DocumentViewport( (*d->m_viewportIterator).pageNumber + 1 ) );
-}
-
-void Document::setPrevPage()
-{
-    // go to previous page and set viewport on observers
-    if ( (*d->m_viewportIterator).pageNumber > 0 )
-        setViewport( DocumentViewport( (*d->m_viewportIterator).pageNumber - 1 )
-);
-}
-*/
-
 void Document::setViewportWithHistory(const DocumentViewport& viewport,
                                       DocumentObserver* excludeObserver,
                                       bool smoothMove, bool updateHistory)
@@ -4847,6 +4855,22 @@ void Document::setViewportWithHistory(const DocumentViewport& viewport,
         {
             o->notifyCurrentPageChanged(oldPageNumber, currentViewportPage);
         }
+    }
+
+    // Delete pixmaps from pages which are out of caching range
+    int cacheRange = 4;
+
+    if(currentViewportPage > oldPageNumber &&
+       currentViewportPage - cacheRange >= 0)
+    {
+        auto page = d->m_pagesVector[currentViewportPage - cacheRange];
+        d->clearPixmapsForPage(page);
+    }
+    else if(currentViewportPage < oldPageNumber &&
+            currentViewportPage + cacheRange <= d->m_pagesVector.size() - 1)
+    {
+        auto page = d->m_pagesVector[currentViewportPage + cacheRange];
+        d->clearPixmapsForPage(page);
     }
 }
 
@@ -4952,7 +4976,8 @@ void Document::searchText(int searchID, const QString& text, bool fromStart,
         return;
     }
 
-    // if searchID search not recorded, create new descriptor and init params
+    // if searchID search not recorded, create new descriptor and init
+    // params
     QMap<int, RunningSearch*>::iterator searchIt = d->m_searches.find(searchID);
     if(searchIt == d->m_searches.end())
     {
@@ -5330,8 +5355,8 @@ void Document::processAction(const Action* action)
         return;
     }
 
-    // Don't execute next actions if the action itself caused the closing of the
-    // document
+    // Don't execute next actions if the action itself caused the closing of
+    // the document
     ExecuteNextActionsHelper executeNextActions;
     connect(this, &Document::aboutToClose, &executeNextActions,
             [&executeNextActions]
@@ -5389,16 +5414,16 @@ void Document::processAction(const Action* action)
             break;
         }
 
-        // Albert: the only pdf i have that has that kind of link don't define
-        // an application and use the fileName as the file to open
+        // Albert: the only pdf i have that has that kind of link don't
+        // define an application and use the fileName as the file to open
         QUrl url = d->giveAbsoluteUrl(fileName);
         QMimeDatabase db;
         QMimeType mime = db.mimeTypeForUrl(url);
         // Check executables
         if(KRun::isExecutableFile(url, mime.name()))
         {
-            // Don't have any pdf that uses this code path, just a guess on how
-            // it should work
+            // Don't have any pdf that uses this code path, just a guess on
+            // how it should work
             if(!exe->parameters().isEmpty())
             {
                 url = d->giveAbsoluteUrl(exe->parameters());
@@ -5525,8 +5550,8 @@ void Document::processAction(const Action* action)
         {
             const QUrl url = browse->url();
 
-            // fix for #100366, documents with relative links that are the form
-            // of http:foo.pdf
+            // fix for #100366, documents with relative links that are the
+            // form of http:foo.pdf
             if((url.scheme() == QLatin1String("http")) &&
                url.host().isEmpty() &&
                url.fileName().endsWith(QLatin1String("pdf")))
@@ -5892,8 +5917,8 @@ const SourceReference* Document::dynamicSourceReference(int pageNr, double absX,
         {
             int line = synctex_node_line(node);
             int col = synctex_node_column(node);
-            // column extraction does not seem to be implemented in synctex so
-            // far. set the SourceReference default value.
+            // column extraction does not seem to be implemented in synctex
+            // so far. set the SourceReference default value.
             if(col == -1)
             {
                 col = 0;
@@ -6007,8 +6032,8 @@ void Document::fillConfigDialog(KConfigDialog* dialog)
     d->loadServiceList(offers);
 
     // We want the generators to be sorted by name so let's fill in a QMap
-    // this sorts by internal id which is not awesome, but at least the sorting
-    // is stable between runs that before it wasn't
+    // this sorts by internal id which is not awesome, but at least the
+    // sorting is stable between runs that before it wasn't
     QMap<QString, GeneratorInfo> sortedGenerators;
     QHash<QString, GeneratorInfo>::iterator it = d->m_loadedGenerators.begin();
     QHash<QString, GeneratorInfo>::iterator itEnd = d->m_loadedGenerators.end();
@@ -6156,8 +6181,8 @@ bool Document::swapBackingFile(const QString& newFileName, const QUrl& url)
         if(result == Generator::SwapBackingFileReloadInternalData)
         {
             // Here we need to replace everything that the old generator
-            // had created with what the new one has without making it look like
-            // we have actually closed and opened the file again
+            // had created with what the new one has without making it look
+            // like we have actually closed and opened the file again
 
             // Simple sanity check
             if(newPagesVector.count() != d->m_pagesVector.count())
@@ -6186,9 +6211,9 @@ bool Document::swapBackingFile(const QString& newFileName, const QUrl& url)
                 }
                 else
                 {
-                    qWarning()
-                        << "Document::swapBackingFile: Unhandled undo command"
-                        << uc;
+                    qWarning() << "Document::swapBackingFile: Unhandled "
+                                  "undo command"
+                               << uc;
                     return false;
                 }
             }
@@ -6423,8 +6448,9 @@ ArchiveData* DocumentPrivate::unpackDocumentArchive(const QString& archivePath)
 
     const KArchiveDirectory* mainDir = okularArchive.directory();
 
-    // Check the archive doesn't have folders, we don't create them when saving
-    // the archive and folders mean paths and paths mean path traversal issues
+    // Check the archive doesn't have folders, we don't create them when
+    // saving the archive and folders mean paths and paths mean path
+    // traversal issues
     const QStringList mainDirEntries = mainDir->entries();
     for(const QString& entry : mainDirEntries)
     {
@@ -6699,8 +6725,8 @@ QPrinter::Orientation Document::orientation() const
     int landscape, portrait;
     const Okular::Page* currentPage;
 
-    // if some pages are landscape and others are not, the most common wins, as
-    // QPrinter does not accept a per-page setting
+    // if some pages are landscape and others are not, the most common wins,
+    // as QPrinter does not accept a per-page setting
     landscape = 0;
     portrait = 0;
     for(uint i = 0; i < pages(); i++)
@@ -6835,7 +6861,8 @@ void DocumentPrivate::requestDone(PixmapRequest* req)
 
     if(!req->shouldAbortRender())
     {
-        // [MEM] 1.1 find and remove a previous entry for the same page and id
+        // [MEM] 1.1 find and remove a previous entry for the same page and
+        // id
         std::list<AllocatedPixmap*>::iterator aIt = m_allocatedPixmaps.begin();
         std::list<AllocatedPixmap*>::iterator aEnd = m_allocatedPixmaps.end();
         for(; aIt != aEnd; ++aIt)
@@ -6919,11 +6946,11 @@ void DocumentPrivate::setPageBoundingBox(int page,
     // notify observers about the change
     foreachObserverD(notifyPageChanged(page, DocumentObserver::BoundingBox));
 
-    // TODO: For generators that generate the bbox by pixmap scanning, if the
-    // first generated pixmap is very small, the bounding box will forever be
-    // inaccurate.
-    // TODO: Crop computation should also consider annotations, actions, etc. to
-    // make sure they're not cropped away.
+    // TODO: For generators that generate the bbox by pixmap scanning, if
+    // the first generated pixmap is very small, the bounding box will
+    // forever be inaccurate.
+    // TODO: Crop computation should also consider annotations, actions,
+    // etc. to make sure they're not cropped away.
     // TODO: Help compute bounding box for generators that create a QPixmap
     // without a QImage, like text and plucker.
     // TODO: Don't compute the bounding box if no one needs it (e.g., Trim
@@ -6966,8 +6993,8 @@ void DocumentPrivate::textGenerationDone(Page* page)
     if(m_allocatedTextPagesFifo.size() == m_maxAllocatedTextPages)
     {
         int pageToKick = m_allocatedTextPagesFifo.takeFirst();
-        if(pageToKick != page->number())  // this should never happen but better
-                                          // be safe than sorry
+        if(pageToKick != page->number())  // this should never happen but
+                                          // better be safe than sorry
         {
             m_pagesVector.at(pageToKick)
                 ->setTextPage(nullptr);  // deletes the textpage

@@ -10,6 +10,9 @@
 namespace application
 {
 
+/**
+ *  The BookService handles all the operations on books.
+ */
 class IBookService : public QObject
 {
     Q_OBJECT
@@ -34,7 +37,7 @@ public:
     virtual BookOperationStatus removeTag(const QUuid& uuid,
                                           const domain::models::Tag& tag) = 0;
 
-    virtual BookOperationStatus saveBookToPath(const QUuid& uuid,
+    virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
                                                const QUrl& path) = 0;
 
 public slots:

@@ -12,6 +12,12 @@
 namespace adapters
 {
 
+/**
+ * The BookController class is exposed to the UI code and thus is the
+ * "entry point" to the application's backend for book operations. It acts as a
+ * layer of abstraction which maps the user data to a format usable for the
+ * application.
+ */
 class IBookController : public QObject
 {
     Q_OBJECT
@@ -55,7 +61,7 @@ public:
         const QString& uuid) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
 
-    Q_INVOKABLE virtual int saveBookToPath(const QString& uuid,
+    Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;
     virtual data_models::LibraryModel* getLibraryModel() = 0;
 

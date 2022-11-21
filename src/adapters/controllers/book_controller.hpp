@@ -25,7 +25,7 @@ public:
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
 
-    int saveBookToPath(const QString& uuid, const QUrl& path) override;
+    int saveBookToFile(const QString& uuid, const QUrl& path) override;
     data_models::LibraryModel* getLibraryModel() override;
 
 public slots:

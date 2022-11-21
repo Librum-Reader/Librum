@@ -14,27 +14,23 @@ using namespace domain::models;
 using std::size_t;
 using utility::MergeStatus;
 
-BookService::BookService(IBookStorageGateway* bookStorageGateway,
-                         IBookMetadataHelper* bookMetadataHelper,
-                         IDownloadedBooksTracker* downloadedBooksTracker,
-                         IInternetConnectionInfo* internetConnectionInfo) :
-    m_bookStorageGateway(bookStorageGateway),
+BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
+                         IBookStorageManager* bookStorageManager) :
     m_bookMetadataHelper(bookMetadataHelper),
-    m_downloadedBooksTracker(downloadedBooksTracker),
-    m_internetConnectionInfo(internetConnectionInfo)
+    m_bookStorageManager(bookStorageManager)
 {
-    // Fetch changes timer
-    m_fetchChangesTimer.setInterval(10'000);
-    connect(&m_fetchChangesTimer, &QTimer::timeout, this,
-            &BookService::loadRemoteBooks);
-
     // Book cover generated
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
             this, &BookService::storeBookCover);
 
+    // Fetch changes timer
+    m_fetchChangesTimer.setInterval(10'000);
+    connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
+            &IBookStorageManager::loadRemoteBooks);
+
     // Getting books finished
-    connect(m_bookStorageGateway,
-            &IBookStorageGateway::gettingBooksMetaDataFinished, this,
+    connect(m_bookStorageManager,
+            &IBookStorageManager::loadingRemoteBooksFinished, this,
             &BookService::mergeLibraries);
 }
 
@@ -53,11 +49,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     m_bookMetadataHelper->loadCover();
 
     const Book& bookToStore = m_books.at(m_books.size() - 1);
-    auto success = m_downloadedBooksTracker->trackBook(bookToStore);
-    if(!success)
-        return BookOperationStatus::OpeningBookFailed;
-
-    m_bookStorageGateway->createBook(m_authenticationToken, bookToStore);
+    m_bookStorageManager->addBook(bookToStore);
 
     return BookOperationStatus::Success;
 }
@@ -79,8 +71,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
 
-    m_downloadedBooksTracker->untrackBook(uuid);
-    m_bookStorageGateway->deleteBook(m_authenticationToken, uuid);
+    m_bookStorageManager->deleteBook(uuid);
 
     return BookOperationStatus::Success;
 }
@@ -93,7 +84,7 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
 
     size_t index = getBookIndex(uuid);
 
-    m_downloadedBooksTracker->untrackBook(uuid);
+    m_bookStorageManager->uninstallBook(uuid);
     book->setDownloaded(false);
     emit dataChanged(index);
 
@@ -112,11 +103,7 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     int index = getBookIndex(newBook.getUuid());
     emit dataChanged(index);
 
-    // Only try updating book in local-library if the book is downloaded
-    if(book->getDownloaded())
-        m_downloadedBooksTracker->updateTrackedBook(*book);
-
-    m_bookStorageGateway->updateBook(m_authenticationToken, *book);
+    m_bookStorageManager->updateBook(*book);
 
     return BookOperationStatus::Success;
 }
@@ -197,7 +184,7 @@ int BookService::getBookCount() const
     return m_books.size();
 }
 
-BookOperationStatus BookService::saveBookToPath(const QUuid& uuid,
+BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
                                                 const QUrl& pathToFolder)
 {
     auto book = getBook(uuid);
@@ -222,8 +209,7 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
         return false;
 
     book->setLastOpened(QDateTime::currentDateTimeUtc());
-    m_downloadedBooksTracker->updateTrackedBook(*book);
-    m_bookStorageGateway->updateBook(m_authenticationToken, *book);
+    m_bookStorageManager->updateBook(*book);
 
     auto index = getBookIndex(uuid);
     emit dataChanged(index);
@@ -234,16 +220,18 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
 void BookService::setAuthenticationToken(const QString& token,
                                          const QString& email)
 {
-    m_currentUserEmail = email;
-    m_authenticationToken = token;
+    m_bookStorageManager->setUserData(email, token);
 
-    loadBooks();
+    // Load books on login
+    m_books = m_bookStorageManager->loadLocalBooks();
+    m_bookStorageManager->loadRemoteBooks();
+
     m_fetchChangesTimer.start();
 }
 
 void BookService::clearAuthenticationToken()
 {
-    m_authenticationToken.clear();
+    m_bookStorageManager->clearUserData();
 }
 
 void BookService::storeBookCover(const QPixmap* pixmap)
@@ -255,33 +243,14 @@ void BookService::storeBookCover(const QPixmap* pixmap)
     emit bookCoverGenerated(index);
 }
 
-void BookService::loadBooks()
-{
-    loadLocalBooks();
-
-    m_internetConnectionInfo->checkAvailability();
-    connect(m_internetConnectionInfo, &IInternetConnectionInfo::available, this,
-            &BookService::loadRemoteBooks);
-}
-
-void BookService::loadLocalBooks()
-{
-    m_downloadedBooksTracker->setLibraryOwner(m_currentUserEmail);
-    m_books = m_downloadedBooksTracker->getTrackedBooks();
-}
-
-void BookService::loadRemoteBooks()
-{
-    m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
-}
-
 void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
 {
-    mergeRemoteLibrary(books);
-    mergeLocalLibrary(books);
+    mergeRemoteLibraryIntoLocalLibrary(books);
+    mergeLocalLibraryIntoRemoteLibrary(books);
 }
 
-void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
+void BookService::mergeRemoteLibraryIntoLocalLibrary(
+    const std::vector<Book>& remoteBooks)
 {
     for(const auto& remoteBook : remoteBooks)
     {
@@ -298,7 +267,8 @@ void BookService::mergeRemoteLibrary(const std::vector<Book>& remoteBooks)
     }
 }
 
-void BookService::mergeLocalLibrary(const std::vector<Book>& remoteBooks)
+void BookService::mergeLocalLibraryIntoRemoteLibrary(
+    const std::vector<Book>& remoteBooks)
 {
     for(const auto& localBook : m_books)
     {
@@ -309,8 +279,9 @@ void BookService::mergeLocalLibrary(const std::vector<Book>& remoteBooks)
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
+        // Create a new book on the server if no remote book exists
         if(remoteBook == remoteBooks.end())
-            m_bookStorageGateway->createBook(m_authenticationToken, localBook);
+            m_bookStorageManager->addBook(localBook);
     }
 }
 
@@ -323,7 +294,7 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
     if(lastOpenedStatus.updateLocalLibrary ||
        lastModifiedStatus.updateLocalLibrary)
     {
-        m_downloadedBooksTracker->updateTrackedBook(original);
+        m_bookStorageManager->updateBookLocally(original);
 
         // Update UI
         auto localBookIndex = getBookIndex(original.getUuid());
@@ -332,15 +303,17 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
 
     if(lastOpenedStatus.updateDatabase || lastModifiedStatus.updateDatabase)
     {
-        m_bookStorageGateway->updateBook(m_authenticationToken, original);
+        m_bookStorageManager->updateBookRemotely(original);
     }
 }
 
 MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
                                           const domain::models::Book& mergee)
 {
+    // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
     auto originalLastOpened = original.getLastOpened().toSecsSinceEpoch();
+
     if(mergeeLastOpened == originalLastOpened)
         return {};
 
@@ -358,8 +331,10 @@ MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
 MergeStatus BookService::mergeBookData(domain::models::Book& original,
                                        const domain::models::Book& mergee)
 {
+    // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();
     auto originalLastModified = original.getLastModified().toSecsSinceEpoch();
+
     if(mergeeLastModified == originalLastModified)
         return {};
 

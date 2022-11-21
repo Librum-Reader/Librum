@@ -96,6 +96,12 @@ void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
     m_libraryFolder = getUserLibraryDir();
 }
 
+void DownloadedBooksTracker::clearLibraryOwner()
+{
+    m_libraryOwnerEmail.clear();
+    m_libraryFolder = QDir();
+}
+
 void DownloadedBooksTracker::ensureUserLibraryExists()
 {
     auto libraryDir = getUserLibraryDir();

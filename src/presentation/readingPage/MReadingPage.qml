@@ -25,14 +25,40 @@ Page
     
     Shortcut
     {
-        sequences: [ StandardKey.ZoomIn ]
-        onActivated: view.renderScale += 0.1
+        sequences: [StandardKey.ZoomIn]
+        onActivated: documentView.zoom(1.2)
     }
+    
     Shortcut
     {
-        sequence: StandardKey.ZoomOut
-        onActivated: view.renderScale -= 0.1
+        sequences: [StandardKey.ZoomOut]
+        onActivated: documentView.zoom(0.8)
     }
+    
+    Shortcut
+    {
+        sequences: ["Up"]
+        onActivated: documentView.flick("up")
+    }
+    
+    Shortcut
+    {
+        sequences: ["Down"]
+        onActivated: documentView.flick("down")
+    }
+    
+    Shortcut
+    {
+        sequences: [StandardKey.MoveToNextPage, "Right"]
+        onActivated: documentView.nextPage()
+    }
+    
+    Shortcut
+    {
+        sequences: [StandardKey.MoveToPreviousPage, "Left"]
+        onActivated: documentView.previousPage()
+    }
+    
     Shortcut
     {
         sequence: "ESC"
@@ -93,7 +119,7 @@ Page
             id: toolbar            
             Layout.fillWidth: true
             
-            currentPage: pageArea.document.currentPage
+            currentPage: documentView.document.currentPage
             
             onChapterButtonClicked:
             {
@@ -268,65 +294,22 @@ Page
             }
             
             
-            Pane
+            RowLayout
             {
-                id: readingSpace
-                padding: 0
+                id: displayLayout
                 SplitView.fillWidth: true
                 SplitView.fillHeight: true
-                background: Rectangle
-                {
-                    color: "transparent"
-                }
+                spacing: 0
+                clip: true
                 
-                RowLayout
-                {
-                    anchors.fill: parent
-                    spacing: 0
-                    
-                    
-                    Rectangle
-                    {
-                        id: page
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: pageArea.contentWidth == 0 ? 1020 : pageArea.contentWidth >= parent.width /*- vBar.width*/
-                                                                            ? parent.width /*- vBar.width*/ : pageArea.contentWidth
-                        Layout.alignment: Qt.AlignCenter
-                        color: Style.colorBackground
-                        radius: 2
-                        
-                        onWidthChanged: toolbar.pageWidth = width
-                        
-                        
-                        RowLayout
-                        {
-                            id: displayLayout
-                            anchors.fill: parent
-                            spacing: 0
-                            clip: true
-                            
-                            
-                            DocumentView
-                            {
-                                id: pageArea
-                                Layout.fillWidth: true
-                                Layout.fillHeight: true
-                                visible: documentItem.opened
-                                document: documentItem
-                            }
-                        }
-                    }
                 
-//                    ScrollBar
-//                    {
-//                        id: vBar
-//                        Layout.fillHeight: true
-//                        Layout.alignment: Qt.AlignRight
-//                        active: true
-//                        orientation: Qt.Vertical
-//                        size: parent.height / pageArea.pageListView.contentHeight
-//                        policy: ScrollBar.AlwaysOn
-//                    }
+                DocumentView
+                {
+                    id: documentView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    visible: documentItem.opened
+                    document: documentItem
                 }
             }
         }

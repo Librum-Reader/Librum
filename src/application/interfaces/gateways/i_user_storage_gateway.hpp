@@ -6,6 +6,11 @@
 namespace application
 {
 
+/**
+ * The UserStorageGateway class acts as a layer of abstraction before the
+ * UserStorageAccess class. It maps the data provided by the application to
+ * the data type required for user storage API requests.
+ */
 class IUserStorageGateway : public QObject
 {
     Q_OBJECT

@@ -194,9 +194,9 @@ data_models::LibraryModel* BookController::getLibraryModel()
     return &m_libraryModel;
 }
 
-int BookController::saveBookToPath(const QString& uuid, const QUrl& path)
+int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
 {
-    auto result = m_bookService->saveBookToPath(uuid, path);
+    auto result = m_bookService->saveBookToFile(uuid, path);
 
     return static_cast<int>(result);
 }
