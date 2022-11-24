@@ -1,4 +1,5 @@
 #include "authentication_access.hpp"
+#include "endpoints.hpp"
 
 
 using namespace adapters::dtos;
@@ -6,15 +7,9 @@ using namespace adapters::dtos;
 namespace infrastructure::persistence
 {
 
-AuthenticationAccess::AuthenticationAccess() :
-    m_authenticationEndpoint("https://localhost:7084/api/login"),
-    m_registrationEndpoint("https://localhost:7084/api/register")
-{
-}
-
 void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
 {
-    auto request = createRequest(m_authenticationEndpoint);
+    auto request = createRequest(data::authenticationEndpoint);
 
     QJsonObject jsonObject;
     jsonObject["email"] = loginDto.email;
@@ -32,7 +27,7 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
 
 void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
 {
-    auto request = createRequest(m_registrationEndpoint);
+    auto request = createRequest(data::registrationEndpoint);
 
     QJsonObject jsonObject;
     jsonObject["firstName"] = registerDto.firstName;

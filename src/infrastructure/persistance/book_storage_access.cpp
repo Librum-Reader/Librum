@@ -3,22 +3,15 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QSslConfiguration>
+#include "endpoints.hpp"
 
 namespace infrastructure::persistence
 {
 
-BookStorageAccess::BookStorageAccess() :
-    m_bookCreationEndpoint("https://localhost:7084/api/book/create"),
-    m_bookUpdateEndpoint("https://localhost:7084/api/book"),
-    m_bookDeletionEndpoint("https://localhost:7084/api/book"),
-    m_getBooksMetadataEndpoint("https://localhost:7084/api/book/get")
-{
-}
-
 void BookStorageAccess::createBook(const QString& authToken,
                                    const QJsonObject& jsonBook)
 {
-    auto request = createRequest(m_bookCreationEndpoint, authToken);
+    auto request = createRequest(data::bookCreationEndpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
@@ -32,7 +25,7 @@ void BookStorageAccess::createBook(const QString& authToken,
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
 {
-    auto request = createRequest(m_bookDeletionEndpoint, authToken);
+    auto request = createRequest(data::bookDeletionEndpoint, authToken);
 
     QJsonArray bookArray;
     bookArray.append(QJsonValue::fromVariant(uuid));
@@ -46,7 +39,8 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
 void BookStorageAccess::updateBook(const QString& authToken,
                                    const QJsonObject& jsonBook)
 {
-    QString endpoint = m_bookUpdateEndpoint + "/" + jsonBook["uuid"].toString();
+    QString endpoint =
+        data::bookUpdateEndpoint + "/" + jsonBook["uuid"].toString();
     auto request = createRequest(endpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
@@ -57,7 +51,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
 
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
 {
-    auto request = createRequest(m_getBooksMetadataEndpoint, authToken);
+    auto request = createRequest(data::getBooksMetadataEndpoint, authToken);
     m_gettingBooksMetadataReply.reset(m_networkAccessManager.get(request));
 
     connect(m_gettingBooksMetadataReply.get(), &QNetworkReply::finished, this,

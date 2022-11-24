@@ -19,12 +19,15 @@ add_library(infrastructure
                     persistance/book_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
+                    
+                    data/endpoints.hpp
 )
 
 target_include_directories(infrastructure
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/persistance
                 PRIVATE
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${ADAPTERS_INCLUDES}
 )

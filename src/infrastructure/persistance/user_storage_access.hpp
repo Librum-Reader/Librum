@@ -19,8 +19,6 @@ class UserStorageAccess : public adapters::IUserStorageAccess
     Q_OBJECT
 
 public:
-    UserStorageAccess();
-
     void getUser(const QString& authToken) override;
 
     void changeFirstName(const QString& authToken,
@@ -40,8 +38,6 @@ private:
     bool checkForErrors(int expectedStatusCode);
     QVariantMap parseJsonToMap(QByteArray jsonBytes);
 
-    const QUrl m_getUserEndpoint;
-    const QUrl m_patchUserEndpoint;
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_reply = nullptr;
 };

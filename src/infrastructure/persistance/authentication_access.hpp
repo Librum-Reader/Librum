@@ -18,8 +18,6 @@ class AuthenticationAccess : public adapters::IAuthenticationAccess
     Q_OBJECT
 
 public:
-    AuthenticationAccess();
-
     void authenticateUser(const adapters::dtos::LoginDto& loginDto) override;
     void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
 
@@ -31,8 +29,6 @@ private:
     bool checkForErrors(int expectedStatusCode);
     QNetworkRequest createRequest(QUrl url);
 
-    const QUrl m_authenticationEndpoint;
-    const QUrl m_registrationEndpoint;
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_reply = nullptr;
 };

@@ -1,18 +1,12 @@
 #include "user_storage_access.hpp"
+#include "endpoints.hpp"
 
 namespace infrastructure::persistence
 {
 
-UserStorageAccess::UserStorageAccess() :
-    m_getUserEndpoint("https://localhost:7084/api/user"),
-    m_patchUserEndpoint("https://localhost:7084/api/user")
-{
-}
-
 void UserStorageAccess::getUser(const QString& authToken)
 {
-    auto request = createRequest(m_getUserEndpoint, authToken);
-
+    auto request = createRequest(data::patchUserEndpoint, authToken);
     m_reply.reset(m_networkAccessManager.get(request));
 
     connect(m_reply.get(), &QNetworkReply::finished, this,
@@ -22,7 +16,7 @@ void UserStorageAccess::getUser(const QString& authToken)
 void UserStorageAccess::changeFirstName(const QString& authToken,
                                         const QString& newFirstName)
 {
-    auto request = createRequest(m_patchUserEndpoint, authToken);
+    auto request = createRequest(data::patchUserEndpoint, authToken);
 
     const QString quote = "\"";
     auto jsonData = R"([{ "op": "replace", "path": "firstName", "value": )" +
@@ -35,7 +29,7 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
 void UserStorageAccess::changeLastName(const QString& authToken,
                                        const QString& newLastName)
 {
-    auto request = createRequest(m_patchUserEndpoint, authToken);
+    auto request = createRequest(data::patchUserEndpoint, authToken);
 
     const QString quote = "\"";
     auto jsonData = R"([{ "op": "replace", "path": "lastName", "value": )" +
