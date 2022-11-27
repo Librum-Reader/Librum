@@ -9,7 +9,6 @@ Item
 {
     id: root
     property ListView containingListview
-    property string text
     property int index
     property bool selected: false
     property double fontSize: 10.75
@@ -92,5 +91,10 @@ Item
                 else if(mouse.button === Qt.RightButton)
                     root.rightClicked(mouse, model.index);
             }
+    }
+    
+    function getRole()
+    {
+        return model.role;
     }
 }
