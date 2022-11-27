@@ -36,6 +36,11 @@ bool LibrarySortFilterModel::lessThan(const QModelIndex& left,
         QVariant rightData =
             sourceModel()->data(right, LibraryModel::TitleRole);
 
+        if(leftData.toString().isEmpty())
+            return false;
+        else if(rightData.toString().isEmpty())
+            return true;
+
         return leftData.toString().toLower() < rightData.toString().toLower();
     }
     case SortRole::Authors:
@@ -44,6 +49,11 @@ bool LibrarySortFilterModel::lessThan(const QModelIndex& left,
             sourceModel()->data(left, LibraryModel::AuthorsRole);
         QVariant rightData =
             sourceModel()->data(right, LibraryModel::AuthorsRole);
+
+        if(leftData.toString().isEmpty())
+            return false;
+        else if(rightData.toString().isEmpty())
+            return true;
 
         return leftData.toString().toLower() < rightData.toString().toLower();
     }
