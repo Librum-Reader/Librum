@@ -272,8 +272,9 @@ Popup
                                 headerText: "Title"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: Globals.selectedBook !== null && Globals.selectedBook.title !== "" ? 
-                                          Globals.selectedBook.title : inputLayout.defaultText
+                                text: Globals.selectedBook !== null ? Globals.selectedBook.title : ""
+                                placeholderContent: "Unknown"
+                                placeholderColor: Style.colorLightText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -290,8 +291,9 @@ Popup
                                 headerText: "Authors"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: Globals.selectedBook !== null &&  Globals.selectedBook.authors !== "" ? 
-                                          Globals.selectedBook.authors : inputLayout.defaultText
+                                text: Globals.selectedBook !== null ? Globals.selectedBook.authors : ""
+                                placeholderContent: "Unknown"
+                                placeholderColor: Style.colorLightText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -388,14 +390,15 @@ Popup
                             
                             MLabeledInputBox
                             {
-                                id: publicationField
+                                id: documentCreatorField
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerText: "Document creator"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: Globals.selectedBook !== null &&  Globals.selectedBook.creator !== "" ? 
-                                          Globals.selectedBook.creator : inputLayout.defaultText
+                                text: Globals.selectedBook !== null ? Globals.selectedBook.creator : ""
+                                placeholderContent: "Unknown"
+                                placeholderColor: Style.colorLightText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -412,8 +415,9 @@ Popup
                                 headerText: "Creation date"
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
-                                text: Globals.selectedBook !== null &&  Globals.selectedBook.creationDate !== "" ? 
-                                          Globals.selectedBook.creationDate : inputLayout.defaultText
+                                text: Globals.selectedBook !== null ? Globals.selectedBook.creationDate : ""
+                                placeholderContent: "Unknown"
+                                placeholderColor: Style.colorLightText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -664,17 +668,17 @@ Popup
     {
         var operationsMap = {};
         
-        if(titleField.text !== Globals.selectedBook.title && titleField.text != inputLayout.defaultText)
+        if(titleField.text !== Globals.selectedBook.title)
             operationsMap[BookController.MetaProperty.Title] = titleField.text;
         
-        if(authorsField.text !== Globals.selectedBook.authors && authorsField.text != inputLayout.defaultText)
+        if(authorsField.text !== Globals.selectedBook.authors)
             operationsMap[BookController.MetaProperty.Authors] = authorsField.text;
         
         if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
             operationsMap[BookController.MetaProperty.Language] = languageComboBox.text;
         
-        if(publicationField.text !== Globals.selectedBook.creator && publicationField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperty.Creator] = publicationField.text;
+        if(documentCreatorField.text !== Globals.selectedBook.creator && documentCreatorField.text != "")
+            operationsMap[BookController.MetaProperty.Creator] = documentCreatorField.text;
         
         if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != inputLayout.defaultText)
             operationsMap[BookController.MetaProperty.CreationDate] = creationDateField.text;

@@ -144,7 +144,7 @@ Item
                     Layout.preferredHeight: 34
                     Layout.topMargin: 5
                     clip: true
-                    text: model.title
+                    text: model.title === "" ? "Unknown" : model.title
                     font.weight: Font.Medium
                     verticalAlignment: Text.AlignVCenter
                     color: Style.colorBaseTitle
@@ -160,7 +160,7 @@ Item
                     Layout.fillWidth: true
                     Layout.topMargin: 4
                     clip: true
-                    text: authors
+                    text: model.authors === "" ? "Unknown" : model.authors
                     color: Style.colorLightText
                     font.pointSize: 10
                     elide: Text.ElideRight
