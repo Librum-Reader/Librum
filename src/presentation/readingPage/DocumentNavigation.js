@@ -5,7 +5,7 @@ function handleWheel(wheel)
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
-        root.zoom(factor);
+        zoom(factor);
     }
     else if(wheel.angleDelta.x === 0)  // No horizontal ScrollBar
     {
@@ -18,7 +18,7 @@ function handleWheel(wheel)
 
 function updateCurrentPageCounter()
 {
-//     Set current page
+    //     Set current page
     let pageHeight = listView.currentItem.height;
     let currentPos = listView.contentY - listView.originY + root.height/2;
     let pageNumber = currentPos / pageHeight;
@@ -72,18 +72,19 @@ function flick(factor)
 
 function nextPage()
 {
-    let pageHeight = listView.currentItem.height;
-    let currentPageStartY = root.document.currentPage * pageHeight;
-    listView.contentY = currentPageStartY + pageHeight;
+    let currentPageStartY = root.document.currentPage * listView.currentItem.height;
+    let nextPageY = currentPageStartY + listView.currentItem.height;
+    let diff = nextPageY - listView.contentY;
+    listView.contentY = nextPageY + listView.originY;
     
     setMoveDirection("up");
 }
 
 function previousPage()
 {
-    let pageHeight = listView.currentItem.height;
-    let currentPageStartY = root.document.currentPage * pageHeight;
-    listView.contentY = currentPageStartY - pageHeight;
+    let currentPageStartY = root.document.currentPage * listView.currentItem.height;
+    let nextPageY = currentPageStartY - listView.currentItem.height;
+    listView.contentY = nextPageY + listView.originY;
     
     setMoveDirection("down");
 }
