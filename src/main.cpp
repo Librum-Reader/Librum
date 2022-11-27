@@ -19,6 +19,7 @@
 #include "i_book_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
+#include "library_sort_filter_model.hpp"
 #include "page_item.hpp"
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
@@ -49,6 +50,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
     qmlRegisterType<adapters::data_models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
+    qmlRegisterType<adapters::data_models::LibrarySortFilterModel>("Librum.models", 1, 0, "LibrarySortFilterModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
