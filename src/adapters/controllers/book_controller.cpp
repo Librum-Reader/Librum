@@ -44,6 +44,9 @@ BookController::BookController(application::IBookService* bookService) :
     // book cover processing
     connect(m_bookService, &application::IBookService::bookCoverGenerated,
             &m_libraryModel, &data_models::LibraryModel::processBookCover);
+
+
+    m_librarySortFilterModel.setSourceModel(&m_libraryModel);
 }
 
 int BookController::addBook(const QString& path)
@@ -189,9 +192,9 @@ int BookController::getBookCount() const
     return m_bookService->getBookCount();
 }
 
-data_models::LibraryModel* BookController::getLibraryModel()
+data_models::LibrarySortFilterModel* BookController::getLibraryModel()
 {
-    return &m_libraryModel;
+    return &m_librarySortFilterModel;
 }
 
 int BookController::saveBookToFile(const QString& uuid, const QUrl& path)

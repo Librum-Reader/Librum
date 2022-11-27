@@ -5,6 +5,7 @@
 #include "book_dto.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
+#include "library_model.hpp"
 
 namespace adapters::controllers
 {
@@ -26,7 +27,7 @@ public:
     int getBookCount() const override;
 
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
-    data_models::LibraryModel* getLibraryModel() override;
+    data_models::LibrarySortFilterModel* getLibraryModel() override;
 
 public slots:
     void refreshLastOpenedFlag(const QString& uuid) override;
@@ -40,6 +41,7 @@ private:
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
     application::IBookService* m_bookService;
+    data_models::LibrarySortFilterModel m_librarySortFilterModel;
     data_models::LibraryModel m_libraryModel;
 };
 

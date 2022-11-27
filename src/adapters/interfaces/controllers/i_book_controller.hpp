@@ -7,7 +7,7 @@
 #include <QUuid>
 #include <QVariantMap>
 #include "book_dto.hpp"
-#include "library_model.hpp"
+#include "library_sort_filter_model.hpp"
 
 namespace adapters
 {
@@ -21,7 +21,7 @@ namespace adapters
 class IBookController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(adapters::data_models::LibraryModel* libraryModel READ
+    Q_PROPERTY(adapters::data_models::LibrarySortFilterModel* libraryModel READ
                    getLibraryModel CONSTANT)
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
 
@@ -63,7 +63,7 @@ public:
 
     Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;
-    virtual data_models::LibraryModel* getLibraryModel() = 0;
+    virtual data_models::LibrarySortFilterModel* getLibraryModel() = 0;
 
 public slots:
     Q_INVOKABLE virtual void refreshLastOpenedFlag(const QString& uuid) = 0;
