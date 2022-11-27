@@ -4,11 +4,13 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.models 1.0
 
 
 Popup
 {
     id: root
+    signal itemSelected(int role)
     property int maxHeight: 200
     
     focus: true
@@ -74,11 +76,11 @@ Popup
                     
                     model: ListModel
                     {
-                        ListElement { text: "Recently read" }
-                        ListElement { text: "Recently added" }
-                        ListElement { text: "By Percentage" }
-                        ListElement { text: "Book (A-Z)" }
-                        ListElement { text: "Authors (A-Z)" }
+                        ListElement { text: "Recently read"; role: LibrarySortFilterModel.LastOpened }
+                        ListElement { text: "Recently added"; role: LibrarySortFilterModel.RecentlyAdded }
+                        ListElement { text: "By Percentage"; role: LibrarySortFilterModel.None }
+                        ListElement { text: "Book (A-Z)"; role: LibrarySortFilterModel.Title }
+                        ListElement { text: "Authors (A-Z)"; role: LibrarySortFilterModel.None }
                     }
                     
                     delegate: MBaseListItem
@@ -87,9 +89,10 @@ Popup
                         containingListview: listView
                         
                         onClicked:
-                            (mouse, index) =>
+                            (mouse, index, role) =>
                             {
                                 listView.changeSelected(index);
+                                root.itemSelected(listView.currentItem.getRole());
                             }
                     }
                     

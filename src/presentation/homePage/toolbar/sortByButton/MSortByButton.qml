@@ -8,7 +8,7 @@ import Librum.icons 1.0
 Item
 {
     id: root
-    signal sortBySelected
+    signal itemSelected(int role)
     
     implicitWidth: 104
     implicitHeight: 36
@@ -96,11 +96,8 @@ Item
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
         onOpened: openAnim.start()
-        onClosed:
-        {
-            closeAnim.start()
-            root.sortBySelected();
-        }
+        onClosed: closeAnim.start()
+        onItemSelected: (role) => root.itemSelected(role)
     }
     
     
