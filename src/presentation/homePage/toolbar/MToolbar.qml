@@ -1,10 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import CustomComponents 1.0
+import Librum.controllers 1.0
 import "filterByButton"
 import "sortByButton"
 import "tagSelector"
-import CustomComponents 1.0
 
 Item
 {
@@ -39,6 +40,8 @@ Item
         MSortByButton
         {
             id: sortByButton
+            
+            onItemSelected: (role) => { BookController.libraryModel.setSortRole(role) }
         }
         
         MFilterByButton
