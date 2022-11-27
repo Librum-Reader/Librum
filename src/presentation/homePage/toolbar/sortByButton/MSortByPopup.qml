@@ -80,7 +80,7 @@ Popup
                         ListElement { text: "Recently added"; role: LibrarySortFilterModel.RecentlyAdded }
                         ListElement { text: "By Percentage"; role: LibrarySortFilterModel.None }
                         ListElement { text: "Book (A-Z)"; role: LibrarySortFilterModel.Title }
-                        ListElement { text: "Authors (A-Z)"; role: LibrarySortFilterModel.None }
+                        ListElement { text: "Authors (A-Z)"; role: LibrarySortFilterModel.Authors }
                     }
                     
                     delegate: MBaseListItem

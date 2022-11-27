@@ -95,9 +95,9 @@ Item
         
         MSearchButton
         {
-             id: searchButton
-             onTriggered: (query) => searchRequested(query);
-             expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
+            id: searchButton
+            onTriggered: (query) => searchRequested(query);
+            expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
         }
     }
 }

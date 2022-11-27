@@ -38,6 +38,15 @@ bool LibrarySortFilterModel::lessThan(const QModelIndex& left,
 
         return leftData.toString().toLower() < rightData.toString().toLower();
     }
+    case SortRole::Authors:
+    {
+        QVariant leftData =
+            sourceModel()->data(left, LibraryModel::AuthorsRole);
+        QVariant rightData =
+            sourceModel()->data(right, LibraryModel::AuthorsRole);
+
+        return leftData.toString().toLower() < rightData.toString().toLower();
+    }
     case SortRole::LastOpened:
     {
         QVariant leftData =

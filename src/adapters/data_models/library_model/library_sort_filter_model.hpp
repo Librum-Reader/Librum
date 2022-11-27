@@ -13,6 +13,7 @@ public:
     {
         None = Qt::UserRole + 1,
         Title,
+        Authors,
         LastOpened,
         RecentlyAdded
     };
