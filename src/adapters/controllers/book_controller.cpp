@@ -46,7 +46,7 @@ BookController::BookController(application::IBookService* bookService) :
             &m_libraryModel, &data_models::LibraryModel::processBookCover);
 
 
-    m_librarySortFilterModel.setSourceModel(&m_libraryModel);
+    m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
 
 int BookController::addBook(const QString& path)
@@ -192,9 +192,9 @@ int BookController::getBookCount() const
     return m_bookService->getBookCount();
 }
 
-data_models::LibrarySortFilterModel* BookController::getLibraryModel()
+data_models::LibraryProxyModel* BookController::getLibraryModel()
 {
-    return &m_librarySortFilterModel;
+    return &m_libraryProxyModel;
 }
 
 int BookController::saveBookToFile(const QString& uuid, const QUrl& path)

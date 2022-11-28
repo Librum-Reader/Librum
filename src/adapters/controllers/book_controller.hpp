@@ -27,7 +27,7 @@ public:
     int getBookCount() const override;
 
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
-    data_models::LibrarySortFilterModel* getLibraryModel() override;
+    data_models::LibraryProxyModel* getLibraryModel() override;
 
 public slots:
     void refreshLastOpenedFlag(const QString& uuid) override;
@@ -41,7 +41,7 @@ private:
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
     application::IBookService* m_bookService;
-    data_models::LibrarySortFilterModel m_librarySortFilterModel;
+    data_models::LibraryProxyModel m_libraryProxyModel;
     data_models::LibraryModel m_libraryModel;
 };
 

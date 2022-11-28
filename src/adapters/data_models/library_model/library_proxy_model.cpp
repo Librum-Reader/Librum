@@ -1,17 +1,17 @@
-#include "library_sort_filter_model.hpp"
+#include "library_proxy_model.hpp"
 #include <QDebug>
 #include "library_model.hpp"
 
 namespace adapters::data_models
 {
 
-LibrarySortFilterModel::LibrarySortFilterModel(QObject* parent) :
+LibraryProxyModel::LibraryProxyModel(QObject* parent) :
     QSortFilterProxyModel { parent }
 {
     sort(0);
 }
 
-void LibrarySortFilterModel::setSortRole(int newRole)
+void LibraryProxyModel::setSortRole(int newRole)
 {
     int firstRole = SortRole::None;
     int lastRole = SortRole::RecentlyAdded;
@@ -25,7 +25,7 @@ void LibrarySortFilterModel::setSortRole(int newRole)
         invalidate();
 }
 
-bool LibrarySortFilterModel::lessThan(const QModelIndex& left,
+bool LibraryProxyModel::lessThan(const QModelIndex& left,
                                       const QModelIndex& right) const
 {
     switch(m_sortRole)

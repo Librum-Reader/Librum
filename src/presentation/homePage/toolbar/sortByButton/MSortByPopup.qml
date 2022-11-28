@@ -76,11 +76,11 @@ Popup
                     
                     model: ListModel
                     {
-                        ListElement { text: "Recently read"; role: LibrarySortFilterModel.LastOpened }
-                        ListElement { text: "Recently added"; role: LibrarySortFilterModel.RecentlyAdded }
-                        ListElement { text: "By Percentage"; role: LibrarySortFilterModel.None }
-                        ListElement { text: "Book (A-Z)"; role: LibrarySortFilterModel.Title }
-                        ListElement { text: "Authors (A-Z)"; role: LibrarySortFilterModel.Authors }
+                        ListElement { text: "Recently read"; role: LibraryProxyModel.LastOpened }
+                        ListElement { text: "Recently added"; role: LibraryProxyModel.RecentlyAdded }
+                        ListElement { text: "By Percentage"; role: LibraryProxyModel.None }
+                        ListElement { text: "Book (A-Z)"; role: LibraryProxyModel.Title }
+                        ListElement { text: "Authors (A-Z)"; role: LibraryProxyModel.Authors }
                     }
                     
                     delegate: MBaseListItem

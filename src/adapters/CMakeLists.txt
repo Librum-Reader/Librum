@@ -41,8 +41,8 @@ add_library(adapters
                     data_models/chapter_tree/chapter_tree_node.hpp
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp
-                    data_models/library_model/library_sort_filter_model.cpp
-                    data_models/library_model/library_sort_filter_model.hpp
+                    data_models/library_model/library_proxy_model.cpp
+                    data_models/library_model/library_proxy_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp

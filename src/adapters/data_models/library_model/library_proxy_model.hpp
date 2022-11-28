@@ -4,7 +4,7 @@
 namespace adapters::data_models
 {
 
-class LibrarySortFilterModel : public QSortFilterProxyModel
+class LibraryProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 
@@ -20,10 +20,9 @@ public:
 
     Q_ENUM(SortRole);
 
-    explicit LibrarySortFilterModel(QObject* parent = nullptr);
+    explicit LibraryProxyModel(QObject* parent = nullptr);
 
     Q_INVOKABLE void setSortRole(int newRole);
-
     bool lessThan(const QModelIndex& left,
                   const QModelIndex& right) const override;
 
