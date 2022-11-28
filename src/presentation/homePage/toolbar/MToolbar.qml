@@ -98,6 +98,8 @@ Item
             id: searchButton
             onTriggered: (query) => searchRequested(query);
             expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
+            
+            onOpenedChanged: if(!opened) searchRequested("")
         }
     }
 }
