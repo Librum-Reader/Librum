@@ -65,24 +65,11 @@ Item
                     radius: 4
                     color: "transparent"
                 }
+                onTextEdited: triggered(inputField.text)
                 
-                onVisibleChanged: if(visible) forceActiveFocus();
+                onVisibleChanged: if(visible) forceActiveFocus()
                 
-                Keys.onPressed:
-                    (event) =>
-                    {
-                        if(event.key === Qt.Key_Return)
-                        {
-                            triggered(inputField.text);
-                        }
-                        else if(event.key === Qt.Key_Escape)
-                        {
-                            if(root.opened)
-                            {
-                                root.close();
-                            }
-                        }
-                    }
+                Keys.onEscapePressed: root.close()
             }
             
             Item
