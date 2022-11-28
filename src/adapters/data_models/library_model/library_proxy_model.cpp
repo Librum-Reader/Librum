@@ -16,8 +16,8 @@ void LibraryProxyModel::setSortRole(int newRole)
 {
     int firstRole = SortRole::None;
     int lastRole = SortRole::RecentlyAdded;
-    bool inRange = firstRole <= newRole <= lastRole;
 
+    bool inRange = firstRole <= newRole <= lastRole;
     if(!inRange)
         return;
 
@@ -25,10 +25,20 @@ void LibraryProxyModel::setSortRole(int newRole)
     invalidate();
 }
 
+int LibraryProxyModel::getSortRole()
+{
+    return m_sortRole;
+}
+
 void LibraryProxyModel::setSortString(QString newSortString)
 {
     m_sortString = newSortString;
     invalidate();
+}
+
+QString LibraryProxyModel::getSortString()
+{
+    return m_sortString;
 }
 
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
@@ -52,9 +62,8 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     {
     case SortRole::Title:
     {
-        QVariant leftData = sourceModel()->data(left, LibraryModel::TitleRole);
-        QVariant rightData =
-            sourceModel()->data(right, LibraryModel::TitleRole);
+        auto leftData = sourceModel()->data(left, LibraryModel::TitleRole);
+        auto rightData = sourceModel()->data(right, LibraryModel::TitleRole);
 
         if(leftData.toString().isEmpty())
             return false;
@@ -65,10 +74,8 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     }
     case SortRole::Authors:
     {
-        QVariant leftData =
-            sourceModel()->data(left, LibraryModel::AuthorsRole);
-        QVariant rightData =
-            sourceModel()->data(right, LibraryModel::AuthorsRole);
+        auto leftData = sourceModel()->data(left, LibraryModel::AuthorsRole);
+        auto rightData = sourceModel()->data(right, LibraryModel::AuthorsRole);
 
         if(leftData.toString().isEmpty())
             return false;
@@ -79,9 +86,8 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     }
     case SortRole::LastOpened:
     {
-        QVariant leftData =
-            sourceModel()->data(left, LibraryModel::LastOpenedRole);
-        QVariant rightData =
+        auto leftData = sourceModel()->data(left, LibraryModel::LastOpenedRole);
+        auto rightData =
             sourceModel()->data(right, LibraryModel::LastOpenedRole);
 
         auto leftLastOpenedDate =
@@ -98,9 +104,9 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     }
     case SortRole::RecentlyAdded:
     {
-        QVariant leftData =
+        auto leftData =
             sourceModel()->data(left, LibraryModel::AddedToLibraryRole);
-        QVariant rightData =
+        auto rightData =
             sourceModel()->data(right, LibraryModel::AddedToLibraryRole);
 
         auto leftRecentlyAddedDate =

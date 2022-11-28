@@ -11,6 +11,9 @@ namespace adapters::data_models
 class LibraryProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
+    Q_PROPERTY(
+        QString sortString READ getSortString WRITE setSortString CONSTANT)
+    Q_PROPERTY(int sortRole READ getSortRole WRITE setSortRole CONSTANT)
 
 public:
     enum SortRole
@@ -26,10 +29,17 @@ public:
 
     explicit LibraryProxyModel(QObject* parent = nullptr);
 
-    Q_INVOKABLE void setSortRole(int newRole);
-    Q_INVOKABLE void setSortString(QString newSortString);
+    void setSortRole(int newRole);
+    int getSortRole();
+
+    void setSortString(QString newSortString);
+    QString getSortString();
+
     bool lessThan(const QModelIndex& left,
                   const QModelIndex& right) const override;
+
+signals:
+    void sortStringUpdated();
 
 private:
     double fuzzCompareWithSortingString(QString lhs) const;
