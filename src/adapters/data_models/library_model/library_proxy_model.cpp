@@ -25,9 +25,43 @@ void LibraryProxyModel::setSortRole(int newRole)
     invalidate();
 }
 
+void LibraryProxyModel::setSortString(QString newSortString)
+{
+    m_sortString = newSortString;
+    invalidate();
+}
+
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
                                  const QModelIndex& right) const
 {
+    if(!m_sortString.isEmpty())
+    {
+        QString leftData =
+            sourceModel()->data(left, LibraryModel::TitleRole).toString();
+        QString rightData =
+            sourceModel()->data(right, LibraryModel::TitleRole).toString();
+
+        auto leftSubstrPos = leftData.toLower().indexOf(m_sortString.toLower());
+        auto rightSubstrPos =
+            rightData.toLower().indexOf(m_sortString.toLower());
+
+        if(leftSubstrPos != -1 && rightSubstrPos == -1)
+            return true;
+        if(leftSubstrPos == -1 && rightSubstrPos != -1)
+            return false;
+
+        if(leftSubstrPos < rightSubstrPos)
+            return true;
+        else if(leftSubstrPos > rightSubstrPos)
+            return false;
+
+        auto leftSimilarity = rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
+                                                     leftData.toStdString());
+        auto rightSimilarity = rapidfuzz::fuzz::ratio(
+            m_sortString.toStdString(), rightData.toStdString());
+
+        return leftSimilarity >= rightSimilarity;
+    }
 
     switch(m_sortRole)
     {

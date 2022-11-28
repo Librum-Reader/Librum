@@ -27,11 +27,13 @@ public:
     explicit LibraryProxyModel(QObject* parent = nullptr);
 
     Q_INVOKABLE void setSortRole(int newRole);
+    Q_INVOKABLE void setSortString(QString newSortString);
     bool lessThan(const QModelIndex& left,
                   const QModelIndex& right) const override;
 
 private:
     const QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
+    QString m_sortString;
     SortRole m_sortRole;
 };
 
