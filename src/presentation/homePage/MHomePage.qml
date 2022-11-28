@@ -401,8 +401,11 @@ Page
         
         onAccepted:
         {
-            if(!BookController.addBook(file) === BookOperationStatus.Success)
-                console.log("Error loading file!");
+            for(let i = 0; i < files.length; ++i)
+            {
+                if(!BookController.addBook(files[i]) === BookOperationStatus.Success)
+                    console.log("Error loading file!");
+            }
         }
     }
 }
