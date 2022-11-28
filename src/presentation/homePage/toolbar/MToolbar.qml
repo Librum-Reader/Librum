@@ -41,7 +41,7 @@ Item
         {
             id: sortByButton
             
-            onItemSelected: (role) => { BookController.libraryModel.setSortRole(role) }
+            onItemSelected: (role) => BookController.libraryModel.sortRole = role
         }
         
         MFilterByButton

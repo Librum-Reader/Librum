@@ -103,7 +103,7 @@ Page
             Layout.alignment: Qt.AlignLeft
             z: 2
             
-            onSearchRequested: (query) => BookController.libraryModel.setSortString(query)
+            onSearchRequested: (query) => BookController.libraryModel.sortString = query
         }
         
         Pane
