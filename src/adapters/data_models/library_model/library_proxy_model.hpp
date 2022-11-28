@@ -43,6 +43,11 @@ signals:
 
 private:
     double fuzzCompareWithSortingString(QString lhs) const;
+    bool stringIsLexicographicallyLess(const QString& left,
+                                       const QString& right) const;
+    bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
+    bool addedToLibraryAfter(const QModelIndex& left,
+                             const QModelIndex& right) const;
 
     const QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
     QString m_sortString;

@@ -65,64 +65,29 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
         auto leftData = sourceModel()->data(left, LibraryModel::TitleRole);
         auto rightData = sourceModel()->data(right, LibraryModel::TitleRole);
 
-        if(leftData.toString().isEmpty())
-            return false;
-        else if(rightData.toString().isEmpty())
-            return true;
-
-        return leftData.toString().toLower() < rightData.toString().toLower();
+        return stringIsLexicographicallyLess(leftData.toString(),
+                                             rightData.toString());
     }
     case SortRole::Authors:
     {
         auto leftData = sourceModel()->data(left, LibraryModel::AuthorsRole);
         auto rightData = sourceModel()->data(right, LibraryModel::AuthorsRole);
 
-        if(leftData.toString().isEmpty())
-            return false;
-        else if(rightData.toString().isEmpty())
-            return true;
-
-        return leftData.toString().toLower() < rightData.toString().toLower();
+        return stringIsLexicographicallyLess(leftData.toString(),
+                                             rightData.toString());
     }
     case SortRole::LastOpened:
     {
-        auto leftData = sourceModel()->data(left, LibraryModel::LastOpenedRole);
-        auto rightData =
-            sourceModel()->data(right, LibraryModel::LastOpenedRole);
-
-        auto leftLastOpenedDate =
-            QDateTime::fromString(leftData.toString(), m_dateTimeFormat);
-        auto rightLastOpenedDate =
-            QDateTime::fromString(rightData.toString(), m_dateTimeFormat);
-
-        if(!leftLastOpenedDate.isValid())
-            return false;
-        else if(!rightLastOpenedDate.isValid())
-            return true;
-
-        return leftLastOpenedDate > rightLastOpenedDate;
+        return openedAfter(left, right);
     }
     case SortRole::RecentlyAdded:
     {
-        auto leftData =
-            sourceModel()->data(left, LibraryModel::AddedToLibraryRole);
-        auto rightData =
-            sourceModel()->data(right, LibraryModel::AddedToLibraryRole);
-
-        auto leftRecentlyAddedDate =
-            QDateTime::fromString(leftData.toString(), m_dateTimeFormat);
-        auto rightRecentlyAddedDate =
-            QDateTime::fromString(rightData.toString(), m_dateTimeFormat);
-
-        if(!leftRecentlyAddedDate.isValid())
-            return false;
-        else if(!rightRecentlyAddedDate.isValid())
-            return true;
-
-        return leftRecentlyAddedDate > rightRecentlyAddedDate;
+        return addedToLibraryAfter(left, right);
     }
     default:
+    {
         return false;
+    }
     }
 }
 
@@ -135,6 +100,53 @@ double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
 
     return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
                                   lhs.toStdString());
+}
+
+bool LibraryProxyModel::stringIsLexicographicallyLess(
+    const QString& left, const QString& right) const
+{
+    if(left.isEmpty())
+        return false;
+    else if(right.isEmpty())
+        return true;
+
+    return left.toLower() < right.toLower();
+}
+
+bool LibraryProxyModel::openedAfter(const QModelIndex& left,
+                                    const QModelIndex& right) const
+{
+    auto lhs = sourceModel()->data(left, LibraryModel::LastOpenedRole);
+    auto rhs = sourceModel()->data(right, LibraryModel::LastOpenedRole);
+
+    auto lhsLastOpenedDate =
+        QDateTime::fromString(lhs.toString(), m_dateTimeFormat);
+    auto rhsLastOpenedDate =
+        QDateTime::fromString(rhs.toString(), m_dateTimeFormat);
+
+    if(!lhsLastOpenedDate.isValid())
+        return false;
+    else if(!rhsLastOpenedDate.isValid())
+        return true;
+
+    return lhsLastOpenedDate > rhsLastOpenedDate;
+}
+
+bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
+                                            const QModelIndex& right) const
+{
+    auto lhs = sourceModel()->data(left, LibraryModel::AddedToLibraryRole);
+    auto rhs = sourceModel()->data(right, LibraryModel::AddedToLibraryRole);
+
+    auto lhsAddedDate = QDateTime::fromString(lhs.toString(), m_dateTimeFormat);
+    auto rhsAddedDate = QDateTime::fromString(rhs.toString(), m_dateTimeFormat);
+
+    if(!lhsAddedDate.isValid())
+        return false;
+    else if(!rhsAddedDate.isValid())
+        return true;
+
+    return lhsAddedDate > rhsAddedDate;
 }
 
 }  // namespace adapters::data_models
