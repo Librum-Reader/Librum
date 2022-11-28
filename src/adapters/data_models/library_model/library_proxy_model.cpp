@@ -36,31 +36,16 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
 {
     if(!m_sortString.isEmpty())
     {
-        QString leftData =
-            sourceModel()->data(left, LibraryModel::TitleRole).toString();
-        QString rightData =
-            sourceModel()->data(right, LibraryModel::TitleRole).toString();
+        auto leftData = sourceModel()->data(left, LibraryModel::TitleRole);
+        auto rightData = sourceModel()->data(right, LibraryModel::TitleRole);
 
-        auto leftSubstrPos = leftData.toLower().indexOf(m_sortString.toLower());
-        auto rightSubstrPos =
-            rightData.toLower().indexOf(m_sortString.toLower());
+        double leftRatio = fuzzCompareWithSortingString(leftData.toString());
+        double rightRatio = fuzzCompareWithSortingString(rightData.toString());
 
-        if(leftSubstrPos != -1 && rightSubstrPos == -1)
+        if(leftRatio > rightRatio)
             return true;
-        if(leftSubstrPos == -1 && rightSubstrPos != -1)
+        if(leftRatio < rightRatio)
             return false;
-
-        if(leftSubstrPos < rightSubstrPos)
-            return true;
-        else if(leftSubstrPos > rightSubstrPos)
-            return false;
-
-        auto leftSimilarity = rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
-                                                     leftData.toStdString());
-        auto rightSimilarity = rapidfuzz::fuzz::ratio(
-            m_sortString.toStdString(), rightData.toStdString());
-
-        return leftSimilarity >= rightSimilarity;
     }
 
     switch(m_sortRole)
@@ -133,6 +118,17 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     default:
         return false;
     }
+}
+
+double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
+{
+    auto leftSubstrPos = lhs.toLower().indexOf(m_sortString.toLower());
+
+    if(leftSubstrPos != -1)
+        return 100 - leftSubstrPos;
+
+    return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
+                                  lhs.toStdString());
 }
 
 }  // namespace adapters::data_models

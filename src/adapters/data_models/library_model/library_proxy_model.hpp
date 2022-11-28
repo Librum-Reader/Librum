@@ -32,6 +32,8 @@ public:
                   const QModelIndex& right) const override;
 
 private:
+    double fuzzCompareWithSortingString(QString lhs) const;
+
     const QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
     QString m_sortString;
     SortRole m_sortRole;
