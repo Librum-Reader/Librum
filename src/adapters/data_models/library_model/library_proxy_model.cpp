@@ -1,5 +1,6 @@
 #include "library_proxy_model.hpp"
 #include <QDebug>
+#include <rapidfuzz/fuzz.hpp>
 #include "library_model.hpp"
 
 namespace adapters::data_models
@@ -21,13 +22,13 @@ void LibraryProxyModel::setSortRole(int newRole)
         return;
 
     m_sortRole = static_cast<SortRole>(newRole);
-    if(m_sortRole != SortRole::None)
-        invalidate();
+    invalidate();
 }
 
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
-                                      const QModelIndex& right) const
+                                 const QModelIndex& right) const
 {
+
     switch(m_sortRole)
     {
     case SortRole::Title:

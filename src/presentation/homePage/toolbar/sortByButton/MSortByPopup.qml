@@ -89,10 +89,15 @@ Popup
                         containingListview: listView
                         
                         onClicked:
-                            (mouse, index, role) =>
+                            (mouse, index) =>
                             {
+                                let role = listView.itemAtIndex(index).getRole();
+                                // If the item was deselected, set role to "None"
+                                if(listView.itemAtIndex(index).selected)
+                                    role = LibraryProxyModel.None;
+                                    
                                 listView.changeSelected(index);
-                                root.itemSelected(listView.currentItem.getRole());
+                                root.itemSelected(role);
                             }
                     }
                     
