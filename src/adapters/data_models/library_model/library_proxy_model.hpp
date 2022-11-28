@@ -18,11 +18,10 @@ class LibraryProxyModel : public QSortFilterProxyModel
 public:
     enum SortRole
     {
-        None = Qt::UserRole + 1,
+        RecentlyAdded = Qt::UserRole + 1,
         Title,
         Authors,
-        LastOpened,
-        RecentlyAdded
+        LastOpened
     };
 
     Q_ENUM(SortRole);
@@ -51,7 +50,7 @@ private:
 
     const QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
     QString m_sortString;
-    SortRole m_sortRole;
+    SortRole m_sortRole = SortRole::RecentlyAdded;
 };
 
 }  // namespace adapters::data_models

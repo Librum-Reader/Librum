@@ -14,8 +14,8 @@ LibraryProxyModel::LibraryProxyModel(QObject* parent) :
 
 void LibraryProxyModel::setSortRole(int newRole)
 {
-    int firstRole = SortRole::None;
-    int lastRole = SortRole::RecentlyAdded;
+    int firstRole = SortRole::RecentlyAdded;
+    int lastRole = SortRole::LastOpened;
 
     bool inRange = firstRole <= newRole <= lastRole;
     if(!inRange)

@@ -76,9 +76,9 @@ Popup
                     
                     model: ListModel
                     {
-                        ListElement { text: "Recently read"; role: LibraryProxyModel.LastOpened }
                         ListElement { text: "Recently added"; role: LibraryProxyModel.RecentlyAdded }
-                        ListElement { text: "By Percentage"; role: LibraryProxyModel.None }
+                        ListElement { text: "Recently read"; role: LibraryProxyModel.LastOpened }
+                        ListElement { text: "Percentage"; role: LibraryProxyModel.Title }
                         ListElement { text: "Book (A-Z)"; role: LibraryProxyModel.Title }
                         ListElement { text: "Authors (A-Z)"; role: LibraryProxyModel.Authors }
                     }
@@ -91,12 +91,11 @@ Popup
                         onClicked:
                             (mouse, index) =>
                             {
-                                let role = listView.itemAtIndex(index).getRole();
-                                // If the item was deselected, set role to "None"
                                 if(listView.itemAtIndex(index).selected)
-                                    role = LibraryProxyModel.None;
+                                    return;
                                     
                                 listView.changeSelected(index);
+                                let role = listView.itemAtIndex(index).getRole();
                                 root.itemSelected(role);
                             }
                     }
@@ -106,6 +105,8 @@ Popup
                         if(listView.currentIndex !== -1)
                             listView.changeSelected(listView.currentIndex)
                     }
+                    
+                    Component.onCompleted: listView.changeSelected(0);
                     
                     
                     function changeSelected(index)
