@@ -10,6 +10,9 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(BUILD_TESTS ON)
 
 
+# Dependencies
+add_subdirectory(libs/rapidfuzz-cpp)
+
 
 # Build
 add_subdirectory(src/)

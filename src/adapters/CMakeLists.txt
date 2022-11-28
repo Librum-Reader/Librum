@@ -76,6 +76,7 @@ target_link_libraries(adapters
                 PRIVATE
                     domain
                     application
+                    rapidfuzz::rapidfuzz
                     Qt5::Core
                     Qt5::Quick
                     Qt5::Network
