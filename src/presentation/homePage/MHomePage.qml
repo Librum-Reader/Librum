@@ -102,6 +102,8 @@ Page
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             z: 2
+            
+            onSearchRequested: (query) => BookController.libraryModel.setSortString(query)
         }
         
         Pane
