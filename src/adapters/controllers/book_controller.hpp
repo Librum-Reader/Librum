@@ -41,8 +41,8 @@ private:
     bool m_bookChacheChanged;
     std::vector<dtos::BookDto> m_bookCache;
     application::IBookService* m_bookService;
-    data_models::LibraryProxyModel m_libraryProxyModel;
     data_models::LibraryModel m_libraryModel;
+    data_models::LibraryProxyModel m_libraryProxyModel;
 };
 
 }  // namespace adapters::controllers

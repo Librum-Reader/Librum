@@ -11,9 +11,13 @@ namespace adapters::data_models
 {
 
 LibraryProxyModel::LibraryProxyModel(QObject* parent) :
-    QSortFilterProxyModel { parent }
+    QSortFilterProxyModel { parent },
+    m_libraryModel(qobject_cast<LibraryModel*>(parent))
 {
     sort(0);
+
+    connect(m_libraryModel, &LibraryModel::bookCountChanged, this,
+            &LibraryProxyModel::bookCountChanged);
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -115,6 +119,11 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
         return false;
 
     return true;
+}
+
+int LibraryProxyModel::getBookCount() const
+{
+    return sourceModel()->rowCount();
 }
 
 double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
