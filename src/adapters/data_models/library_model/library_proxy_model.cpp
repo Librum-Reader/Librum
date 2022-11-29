@@ -90,6 +90,16 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     if(m_filterRequest.onlyBooks && format == "plain")
         return false;
 
+    auto currentPage =
+        sourceModel()->data(index, LibraryModel::CurrentPageRole).toInt();
+    auto pageCount =
+        sourceModel()->data(index, LibraryModel::PageCountRole).toInt();
+    if(m_filterRequest.read && currentPage != pageCount)
+        return false;
+
+    if(m_filterRequest.unread && currentPage == pageCount)
+        return false;
+
     return true;
 }
 
