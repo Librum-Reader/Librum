@@ -11,6 +11,9 @@
 namespace adapters::data_models
 {
 
+/**
+ * The LibraryModel class provides access to the library for the UI
+ */
 class LibraryModel : public QAbstractListModel
 {
     Q_OBJECT
