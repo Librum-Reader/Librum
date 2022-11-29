@@ -73,15 +73,7 @@ Item
             visible: false
             text: "Remove Filters"
             
-            onClicked:
-            {
-                BookController.libraryModel.filterAuthors = "";
-                BookController.libraryModel.filterFormat = "";
-                BookController.libraryModel.filterForOnlyFiles = false;
-                BookController.libraryModel.filterForOnlyBooks = false;
-                
-                visible = false;
-            }
+            onClicked: root.removeFilters()
         }
         
         MRemoveOptionButton
@@ -113,5 +105,15 @@ Item
             
             onOpenedChanged: if(!opened) searchRequested("")
         }
+    }
+    
+    function removeFilters()
+    {
+        BookController.libraryModel.filterAuthors = "";
+        BookController.libraryModel.filterFormat = "";
+        BookController.libraryModel.filterForOnlyFiles = false;
+        BookController.libraryModel.filterForOnlyBooks = false;
+        
+        resetFiltersButton.visible = false;
     }
 }
