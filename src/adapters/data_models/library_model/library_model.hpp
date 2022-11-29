@@ -55,11 +55,14 @@ public slots:
     void refreshTags(int row);
     void refreshBook(int row);
 
+signals:
+    void bookCountChanged();
+
 private:
     QList<dtos::TagDto> convertTagsToDtos(
         const std::vector<domain::models::Tag>& tags) const;
-    const QString dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
 
+    const QString dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
     const std::vector<domain::models::Book>& m_data;
 };
 
