@@ -76,6 +76,10 @@ Item
         }
     }
     
+    function resetFilter()
+    {
+        selectionPopup.resetFilter();
+    }
     
     function giveFocus()
     {

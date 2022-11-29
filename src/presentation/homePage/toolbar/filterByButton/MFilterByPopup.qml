@@ -239,4 +239,15 @@ Popup
             }
         }
     }
+    
+    function resetFilter()
+    {
+        authorsInput.clearText();
+        addedInput.clearText();
+        formatInputComboBox.deselectCurrenItem();
+        unreadBox.checked = false;
+        readBox.checked = false;
+        onlyFilesBox.checked = false;
+        onlyBooksBox.checked = false;
+    }
 }

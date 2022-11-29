@@ -109,6 +109,8 @@ Item
     
     function removeFilters()
     {
+        filterByButton.resetFilter();
+        
         BookController.libraryModel.filterAuthors = "";
         BookController.libraryModel.filterFormat = "";
         BookController.libraryModel.filterForOnlyFiles = false;
