@@ -1,6 +1,7 @@
 #include "library_proxy_model.hpp"
 #include <QAbstractItemModel>
 #include <QDebug>
+#include <numeric>
 #include <rapidfuzz/fuzz.hpp>
 #include "book.hpp"
 #include "library_model.hpp"
@@ -143,15 +144,22 @@ void LibraryProxyModel::setFilterRequest(QString authors, QString format,
     invalidateFilter();
 }
 
-double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
+double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
 {
-    // If the sorting string is a substring of the title, return a high ratio
-    auto leftSubstrPos = lhs.toLower().indexOf(m_sortString.toLower());
+    // If the sorting string is a substring of str, return a high ratio
+    auto leftSubstrPos = str.toLower().indexOf(m_sortString.toLower());
     if(leftSubstrPos != -1)
-        return 100 - leftSubstrPos;
+    {
+        // The further at the front, the better the ratio should be
+        double ratio = 100 - leftSubstrPos;
+        // A difference in lentgh of the string should reduce the score
+        ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
+
+        return ratio;
+    }
 
     return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
-                                  lhs.toStdString());
+                                  str.toStdString());
 }
 
 bool LibraryProxyModel::stringIsLexicographicallyLess(
