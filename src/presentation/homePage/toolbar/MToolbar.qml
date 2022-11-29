@@ -109,13 +109,10 @@ Item
     
     function removeFilters()
     {
+        BookController.libraryModel.setFilterRequest("", "", "", false,
+                                                     false, false, false)
+        
         filterByButton.resetFilter();
-        
-        BookController.libraryModel.filterAuthors = "";
-        BookController.libraryModel.filterFormat = "";
-        BookController.libraryModel.filterForOnlyFiles = false;
-        BookController.libraryModel.filterForOnlyBooks = false;
-        
         resetFiltersButton.visible = false;
     }
 }
