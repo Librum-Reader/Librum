@@ -17,30 +17,12 @@ import "tags"
 Page
 {
     id: root
-    property bool empty: BookController.libraryModel.rowCount() === 0
+    property bool empty: BookController.libraryModel.bookCount === 0
     
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 15
     background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
-    
-    
-    Connections
-    {
-        id: emptyLibraryUpdater 
-        target: BookController.libraryModel
-        
-        function onRowsInserted(parent, first, last)
-        {
-            root.empty = BookController.libraryModel.rowCount() === 0;
-        }
-        
-        function onRowsRemoved(index, first, last)
-        {
-            root.empty = BookController.libraryModel.rowCount() === 0;
-        }
-    }
-    
     
     Shortcut
     {
