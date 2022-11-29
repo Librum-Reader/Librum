@@ -91,7 +91,7 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
 
 double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
 {
-    // If the sorting string is a substring of the title, return high ratio
+    // If the sorting string is a substring of the title, return a high ratio
     auto leftSubstrPos = lhs.toLower().indexOf(m_sortString.toLower());
     if(leftSubstrPos != -1)
         return 100 - leftSubstrPos;
