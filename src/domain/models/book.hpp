@@ -86,6 +86,10 @@ public:
     static const int maxCoverHeight { 238 };
 
 
+    inline static const QString dateTimeStringFormat {
+        "hh:mm:ss - dd.MM.yyyy"
+    };
+
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
 
@@ -95,8 +99,6 @@ private:
     bool m_downloaded = true;
     int m_currentPage;
     std::vector<Tag> m_tags;
-
-    inline static const QString m_dateTimeFormat { "hh:mm:ss - dd.MM.yyyy" };
 };
 
 }  // namespace domain::models
