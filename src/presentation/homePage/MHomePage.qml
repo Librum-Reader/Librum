@@ -94,7 +94,7 @@ Page
             Layout.maximumHeight: 700
             Layout.minimumHeight: 100
             Layout.topMargin: 30
-            visible: !root.empty
+            visible: !root.empty && bookGrid.count != 0
             padding: 0
             background: Rectangle
             {
@@ -135,7 +135,7 @@ Page
                             console.log("Download");
                         }
                     }
-                        
+                    
                     onRightButtonClicked:
                         (index, mouse) =>
                         {
@@ -299,8 +299,8 @@ Page
                         }
                     }
                 }
-            
-            
+                
+                
                 function openBook()
                 {
                     if(bookOptionsPopup.opened)
@@ -323,6 +323,53 @@ Page
             onClicked:
             {
                 fileDialog.open();
+            }
+        }
+        
+        Item
+        {
+            id: noBookAfterFilter
+            visible: BookController.libraryModel.bookCount !== 0 && bookGrid.count == 0
+            Layout.preferredHeight: noBookAfterFilterLayout.height
+            Layout.preferredWidth: noBookStatisfiesFilterText.implicitWidth
+            Layout.alignment: Qt.AlignHCenter
+            Layout.leftMargin: -sidebar.width
+            Layout.topMargin: Math.round(root.height / 4.2) - noBookAfterFilterLayout.height
+            
+            ColumnLayout
+            {
+                id: noBookAfterFilterLayout
+                anchors.fill: parent
+                spacing: 20
+                
+                Label
+                {
+                    id: noBookStatisfiesFilterText
+                    text: "No book satisfies the filter conditions"
+                    color: Style.colorBaseTitle
+                    font.pointSize: 22
+                    font.weight: Font.Medium
+                }
+                
+                MButton
+                {
+                    id: removeFilterButton
+                    Layout.preferredWidth: 170
+                    Layout.preferredHeight: 38
+                    Layout.alignment: Qt.AlignHCenter
+                    backgroundColor: Style.colorLightPurple
+                    opacityOnPressed: 0.75
+                    borderColor: Style.colorMediumPurple
+                    text: "Remove Filters"
+                    fontColor: Style.colorBasePurple
+                    fontWeight: Font.Bold
+                    fontSize: 12.5
+                    imagePath: Icons.closePurple
+                    imageSize: 11
+                    imageToRight: true
+                    
+                    onClicked: toolbar.removeFilters()
+                }
             }
         }
         
