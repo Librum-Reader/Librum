@@ -11,8 +11,11 @@ Popup
     id: root
     property alias authors: authorsInput.text
     property alias format: formatInputComboBox.text
+    property alias date: addedInput.text
     property alias onlyBooks: onlyBooksBox.checked
     property alias onlyFiles: onlyFilesBox.checked
+    property alias read: readBox.checked
+    property alias unread: unreadBox.checked
     signal filterQuerySent
     
     padding: 0

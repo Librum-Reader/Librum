@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.controllers 1.0
+import Librum.models 1.0
 import "filterByButton"
 import "sortByButton"
 import "tagSelector"
@@ -48,12 +49,11 @@ Item
         {
             id: filterByButton
             
-            onFilterSelected: (authors, format, onlyFiles, onlyBooks) =>
+            onFilterSelected: (authors, format, date, onlyBooks, 
+                               onlyFiles, read, unread) =>
                               {
-                                  BookController.libraryModel.filterAuthors = authors;
-                                  BookController.libraryModel.filterFormat = format;
-                                  BookController.libraryModel.filterForOnlyFiles = onlyFiles;
-                                  BookController.libraryModel.filterForOnlyBooks = onlyBooks;
+                                  BookController.libraryModel.setFilterRequest(authors, format, date, onlyBooks,
+                                                                               onlyFiles, read, unread)
                                   
                                   resetFiltersButton.visible = true;
                               }
