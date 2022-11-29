@@ -20,35 +20,6 @@ LibraryProxyModel::LibraryProxyModel(QObject* parent) :
             &LibraryProxyModel::bookCountChanged);
 }
 
-void LibraryProxyModel::setSortRole(int newRole)
-{
-    int firstRole = SortRole::RecentlyAdded;
-    int lastRole = SortRole::LastOpened;
-
-    bool inRange = firstRole <= newRole <= lastRole;
-    if(!inRange)
-        return;
-
-    m_sortRole = static_cast<SortRole>(newRole);
-    invalidate();
-}
-
-int LibraryProxyModel::getSortRole()
-{
-    return m_sortRole;
-}
-
-void LibraryProxyModel::setSortString(QString newSortString)
-{
-    m_sortString = newSortString;
-    invalidate();
-}
-
-QString LibraryProxyModel::getSortString()
-{
-    return m_sortString;
-}
-
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
                                  const QModelIndex& right) const
 {
@@ -119,6 +90,35 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
         return false;
 
     return true;
+}
+
+void LibraryProxyModel::setSortRole(int newRole)
+{
+    int firstRole = SortRole::RecentlyAdded;
+    int lastRole = SortRole::LastOpened;
+
+    bool inRange = firstRole <= newRole <= lastRole;
+    if(!inRange)
+        return;
+
+    m_sortRole = static_cast<SortRole>(newRole);
+    invalidate();
+}
+
+int LibraryProxyModel::getSortRole()
+{
+    return m_sortRole;
+}
+
+void LibraryProxyModel::setSortString(QString newSortString)
+{
+    m_sortString = newSortString;
+    invalidate();
+}
+
+QString LibraryProxyModel::getSortString()
+{
+    return m_sortString;
 }
 
 int LibraryProxyModel::getBookCount() const
