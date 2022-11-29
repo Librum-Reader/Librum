@@ -9,7 +9,8 @@ Item
 {
     id: root
     property bool opened : false
-    signal filterSelected
+    signal filterSelected(string authors, string format, 
+                          bool onlyFiles, bool onlyBooks)
     
     implicitWidth: 104
     implicitHeight: 36
@@ -70,7 +71,8 @@ Item
         onFilterQuerySent:
         {
             close();
-            root.filterSelected();
+            root.filterSelected(selectionPopup.authors, selectionPopup.format,
+                                selectionPopup.onlyFiles, selectionPopup.onlyBooks);
         }
     }
     

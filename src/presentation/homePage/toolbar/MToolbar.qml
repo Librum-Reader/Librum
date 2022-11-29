@@ -48,7 +48,15 @@ Item
         {
             id: filterByButton
             
-            onFilterSelected: resetFiltersButton.visible = true;        
+            onFilterSelected: (authors, format, onlyFiles, onlyBooks) =>
+                              {
+                                  BookController.libraryModel.filterAuthors = authors;
+                                  BookController.libraryModel.filterFormat = format;
+                                  BookController.libraryModel.filterForOnlyFiles = onlyFiles;
+                                  BookController.libraryModel.filterForOnlyBooks = onlyBooks;
+                                  
+                                  resetFiltersButton.visible = true;
+                              }
         }
         
         MTagSelectorButton
@@ -67,7 +75,11 @@ Item
             
             onClicked:
             {
-                // Reset filters
+                BookController.libraryModel.filterAuthors = "";
+                BookController.libraryModel.filterFormat = "";
+                BookController.libraryModel.filterForOnlyFiles = false;
+                BookController.libraryModel.filterForOnlyBooks = false;
+                
                 visible = false;
             }
         }

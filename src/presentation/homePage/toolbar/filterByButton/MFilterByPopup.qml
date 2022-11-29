@@ -9,6 +9,10 @@ import Librum.icons 1.0
 Popup
 {
     id: root
+    property alias authors: authorsInput.text
+    property alias format: formatInputComboBox.text
+    property alias onlyBooks: onlyBooksBox.checked
+    property alias onlyFiles: onlyFilesBox.checked
     signal filterQuerySent
     
     padding: 0
@@ -63,7 +67,7 @@ Popup
                     
                     MLabeledInputBox
                     {
-                        id: authorInput
+                        id: authorsInput
                         Layout.fillWidth: true
                         boxHeight: 30
                         headerToBoxSpacing: 2
