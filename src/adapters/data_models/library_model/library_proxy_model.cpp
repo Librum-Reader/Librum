@@ -104,18 +104,18 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 
     auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
     auto authors = authorsData.toString().toLower();
-    if(!m_filterAuthors.isEmpty() && m_filterAuthors != authors)
+    if(!m_filterRequest.authors.isEmpty() && m_filterRequest.authors != authors)
         return false;
 
     auto formatData = sourceModel()->data(index, LibraryModel::FormatRole);
     auto format = formatData.toString().toLower();
-    if(!m_filterFormat.isEmpty() && m_filterFormat != format)
+    if(!m_filterRequest.format.isEmpty() && m_filterRequest.format != format)
         return false;
 
-    if(m_filterForOnlyFiles && format != "plain")
+    if(m_filterRequest.onlyFiles && format != "plain")
         return false;
 
-    if(m_filterForOnlyBooks && format == "plain")
+    if(m_filterRequest.onlyBooks && format == "plain")
         return false;
 
     return true;
@@ -124,6 +124,23 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 int LibraryProxyModel::getBookCount() const
 {
     return sourceModel()->rowCount();
+}
+
+void LibraryProxyModel::setFilterRequest(QString authors, QString format,
+                                         QString date, bool onlyBooks,
+                                         bool onlyFiles, bool read, bool unread)
+{
+    m_filterRequest = FilterRequest {
+        .authors = authors.toLower(),
+        .format = format.toLower(),
+        .date = date.toLower(),
+        .onlyBooks = onlyBooks,
+        .onlyFiles = onlyFiles,
+        .read = read,
+        .unread = unread,
+    };
+
+    invalidateFilter();
 }
 
 double LibraryProxyModel::fuzzCompareWithSortingString(QString lhs) const
@@ -184,51 +201,6 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
         return true;
 
     return lhsAddedDate > rhsAddedDate;
-}
-
-QString LibraryProxyModel::getFilterAuthors() const
-{
-    return m_filterAuthors;
-}
-
-void LibraryProxyModel::setFilterAuthors(const QString& newFilterAuthor)
-{
-    m_filterAuthors = newFilterAuthor.toLower();
-    invalidateFilter();
-}
-
-QString LibraryProxyModel::getFilterFormat() const
-{
-    return m_filterFormat;
-}
-
-void LibraryProxyModel::setFilterFormat(const QString& newFilterFormat)
-{
-    m_filterFormat = newFilterFormat.toLower();
-    qDebug() << newFilterFormat;
-    invalidateFilter();
-}
-
-bool LibraryProxyModel::getFilterForOnlyFiles() const
-{
-    return m_filterForOnlyFiles;
-}
-
-void LibraryProxyModel::setFilterForOnlyFiles(bool newFilterForOnlyFiles)
-{
-    m_filterForOnlyFiles = newFilterForOnlyFiles;
-    invalidateFilter();
-}
-
-bool LibraryProxyModel::getFilterForOnlyBooks() const
-{
-    return m_filterForOnlyBooks;
-}
-
-void LibraryProxyModel::setFilterForOnlyBooks(bool newFilterForOnlyBooks)
-{
-    m_filterForOnlyBooks = newFilterForOnlyBooks;
-    invalidateFilter();
 }
 
 }  // namespace adapters::data_models
