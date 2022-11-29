@@ -14,6 +14,14 @@ class LibraryProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(
         QString sortString READ getSortString WRITE setSortString CONSTANT)
     Q_PROPERTY(int sortRole READ getSortRole WRITE setSortRole CONSTANT)
+    Q_PROPERTY(QString filterAuthors READ getFilterAuthors WRITE
+                   setFilterAuthors CONSTANT)
+    Q_PROPERTY(QString filterFormat READ getFilterFormat WRITE setFilterFormat
+                   CONSTANT)
+    Q_PROPERTY(bool filterForOnlyFiles READ getFilterForOnlyFiles WRITE
+                   setFilterForOnlyFiles CONSTANT)
+    Q_PROPERTY(bool filterForOnlyBooks READ getFilterForOnlyBooks WRITE
+                   setFilterForOnlyBooks CONSTANT)
 
 public:
     enum SortRole
@@ -28,14 +36,29 @@ public:
 
     explicit LibraryProxyModel(QObject* parent = nullptr);
 
+    bool lessThan(const QModelIndex& left,
+                  const QModelIndex& right) const override;
+    bool filterAcceptsRow(int source_row,
+                          const QModelIndex& source_parent) const override;
+
+
     void setSortRole(int newRole);
     int getSortRole();
 
     void setSortString(QString newSortString);
     QString getSortString();
 
-    bool lessThan(const QModelIndex& left,
-                  const QModelIndex& right) const override;
+    QString getFilterAuthors() const;
+    void setFilterAuthors(const QString& newFilterAuthor);
+
+    QString getFilterFormat() const;
+    void setFilterFormat(const QString& newFilterFormat);
+
+    bool getFilterForOnlyFiles() const;
+    void setFilterForOnlyFiles(bool newFilterForOnlyFiles);
+
+    bool getFilterForOnlyBooks() const;
+    void setFilterForOnlyBooks(bool newFilterForOnlyBooks);
 
 signals:
     void sortStringUpdated();
@@ -48,8 +71,12 @@ private:
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
 
-    QString m_sortString;
+    QString m_sortString = "";
     SortRole m_sortRole = SortRole::RecentlyAdded;
+    QString m_filterAuthors = "";
+    QString m_filterFormat = "";
+    bool m_filterForOnlyFiles = false;
+    bool m_filterForOnlyBooks = false;
 };
 
 }  // namespace adapters::data_models
