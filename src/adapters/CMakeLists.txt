@@ -43,6 +43,7 @@ add_library(adapters
                     data_models/library_model/library_model.hpp
                     data_models/library_model/library_proxy_model.cpp
                     data_models/library_model/library_proxy_model.hpp
+                    data_models/library_model/filter_request.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
