@@ -30,8 +30,6 @@ Page
         onActivated: fileDialog.open()
     }
     
-    ListModel { id: bookList }
-    
     
     ColumnLayout
     {
