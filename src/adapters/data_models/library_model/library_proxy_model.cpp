@@ -152,7 +152,7 @@ double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
     {
         // The further at the front, the better the ratio should be
         double ratio = 100 - leftSubstrPos;
-        // A difference in lentgh of the string should reduce the score
+        // A difference in lentgh of the strings should reduce the score
         ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
 
         return ratio;
