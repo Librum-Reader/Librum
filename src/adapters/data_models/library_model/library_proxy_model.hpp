@@ -48,7 +48,6 @@ private:
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
 
-    const QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
     QString m_sortString;
     SortRole m_sortRole = SortRole::RecentlyAdded;
 };

@@ -1,7 +1,9 @@
 #include "library_proxy_model.hpp"
-#include <QDebug>
 #include <rapidfuzz/fuzz.hpp>
+#include "book.hpp"
 #include "library_model.hpp"
+
+using domain::models::Book;
 
 namespace adapters::data_models
 {
@@ -118,9 +120,9 @@ bool LibraryProxyModel::openedAfter(const QModelIndex& left,
     auto rhs = sourceModel()->data(right, LibraryModel::LastOpenedRole);
 
     auto lhsLastOpenedDate =
-        QDateTime::fromString(lhs.toString(), m_dateTimeFormat);
+        QDateTime::fromString(lhs.toString(), Book::dateTimeStringFormat);
     auto rhsLastOpenedDate =
-        QDateTime::fromString(rhs.toString(), m_dateTimeFormat);
+        QDateTime::fromString(rhs.toString(), Book::dateTimeStringFormat);
 
     if(!lhsLastOpenedDate.isValid())
         return false;
@@ -136,8 +138,10 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
     auto lhs = sourceModel()->data(left, LibraryModel::AddedToLibraryRole);
     auto rhs = sourceModel()->data(right, LibraryModel::AddedToLibraryRole);
 
-    auto lhsAddedDate = QDateTime::fromString(lhs.toString(), m_dateTimeFormat);
-    auto rhsAddedDate = QDateTime::fromString(rhs.toString(), m_dateTimeFormat);
+    auto lhsAddedDate =
+        QDateTime::fromString(lhs.toString(), Book::dateTimeStringFormat);
+    auto rhsAddedDate =
+        QDateTime::fromString(rhs.toString(), Book::dateTimeStringFormat);
 
     if(!lhsAddedDate.isValid())
         return false;
