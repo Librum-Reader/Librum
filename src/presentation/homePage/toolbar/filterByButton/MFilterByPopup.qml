@@ -26,6 +26,12 @@ Popup
         color: "transparent"
     }
     
+    Shortcut
+    {
+        sequence: "Ctrl+Return"
+        enabled: root.opened
+        onActivated: root.filterQuerySent()
+    }
     
     MFlickWrapper
     {
@@ -198,7 +204,7 @@ Popup
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText3
                                 imageSize: 9
-                            
+                                
                                 onCheckedChanged: if(checked && onlyFilesBox.checked) onlyFilesBox.checked = false
                             }
                             
