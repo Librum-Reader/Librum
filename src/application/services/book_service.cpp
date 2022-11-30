@@ -223,7 +223,14 @@ void BookService::setAuthenticationToken(const QString& token,
     m_bookStorageManager->setUserData(email, token);
 
     // Load books on login
-    m_books = m_bookStorageManager->loadLocalBooks();
+    auto books = m_bookStorageManager->loadLocalBooks();
+    for(auto book : books)
+    {
+        emit bookInsertionStarted(m_books.size());
+        m_books.emplace_back(book);
+        emit bookInsertionEnded();
+    }
+
     m_bookStorageManager->loadRemoteBooks();
 
     m_fetchChangesTimer.start();
@@ -340,7 +347,8 @@ MergeStatus BookService::mergeBookData(domain::models::Book& original,
 
     if(mergeeLastModified > originalLastModified)
     {
-        // Save the file path since its overwritten during the update operation
+        // Save the file path since its overwritten during the update
+        // operation
         auto localBookFilePath = original.getFilePath();
         original.update(mergee);
         original.setFilePath(localBookFilePath);
