@@ -76,7 +76,8 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 
     auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
     auto authors = authorsData.toString().toLower();
-    if(!m_filterRequest.authors.isEmpty() && m_filterRequest.authors != authors)
+    if(!m_filterRequest.authors.isEmpty() &&
+       !authors.contains(m_filterRequest.authors))
         return false;
 
     auto formatData = sourceModel()->data(index, LibraryModel::FormatRole);
