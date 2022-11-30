@@ -78,7 +78,7 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     auto authors = authorsData.toString().toLower();
     bool authorsNotSimilar =
         rapidfuzz::fuzz::ratio(m_filterRequest.authors.toStdString(),
-                               authors.toStdString()) < 75;
+                               authors.toStdString()) < 55;
     if(!m_filterRequest.authors.isEmpty() &&
        (!authors.contains(m_filterRequest.authors) && authorsNotSimilar))
         return false;
