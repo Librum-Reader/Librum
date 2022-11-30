@@ -1,6 +1,7 @@
 #include "library_model.hpp"
 #include <QBuffer>
 #include <QByteArray>
+#include <QDebug>
 #include <QList>
 #include <QString>
 #include "book.hpp"
@@ -161,7 +162,6 @@ void LibraryModel::startInsertingRow(int index)
 void LibraryModel::endInsertingRow()
 {
     endInsertRows();
-    emit bookCountChanged();
 }
 
 void LibraryModel::startDeletingBook(int index)
@@ -172,7 +172,6 @@ void LibraryModel::startDeletingBook(int index)
 void LibraryModel::endDeletingBook()
 {
     endRemoveRows();
-    emit bookCountChanged();
 }
 
 }  // namespace adapters::data_models

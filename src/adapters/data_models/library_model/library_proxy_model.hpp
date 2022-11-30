@@ -1,7 +1,6 @@
 #pragma once
 #include <QSortFilterProxyModel>
 #include "filter_request.hpp"
-#include "library_model.hpp"
 
 namespace adapters::data_models
 {
@@ -13,7 +12,6 @@ namespace adapters::data_models
 class LibraryProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
-    Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
     Q_PROPERTY(
         QString sortString READ getSortString WRITE setSortString CONSTANT)
     Q_PROPERTY(int sortRole READ getSortRole WRITE setSortRole CONSTANT)
@@ -36,8 +34,6 @@ public:
     bool filterAcceptsRow(int source_row,
                           const QModelIndex& source_parent) const override;
 
-    int getBookCount() const;
-
     Q_INVOKABLE void setFilterRequest(QString authors, QString format,
                                       QString date, bool onlyBooks,
                                       bool onlyFiles, bool read, bool unread);
@@ -50,7 +46,6 @@ public:
 
 signals:
     void sortStringUpdated();
-    void bookCountChanged();
 
 private:
     double fuzzCompareWithSortingString(QString lhs) const;
@@ -60,7 +55,6 @@ private:
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
 
-    LibraryModel* m_libraryModel;
     FilterRequest m_filterRequest;
     QString m_sortString = "";
     SortRole m_sortRole = SortRole::RecentlyAdded;

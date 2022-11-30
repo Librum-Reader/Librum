@@ -12,13 +12,9 @@ namespace adapters::data_models
 {
 
 LibraryProxyModel::LibraryProxyModel(QObject* parent) :
-    QSortFilterProxyModel { parent },
-    m_libraryModel(qobject_cast<LibraryModel*>(parent))
+    QSortFilterProxyModel { parent }
 {
     sort(0);
-
-    connect(m_libraryModel, &LibraryModel::bookCountChanged, this,
-            &LibraryProxyModel::bookCountChanged);
 }
 
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
@@ -134,11 +130,6 @@ void LibraryProxyModel::setSortString(QString newSortString)
 QString LibraryProxyModel::getSortString()
 {
     return m_sortString;
-}
-
-int LibraryProxyModel::getBookCount() const
-{
-    return sourceModel()->rowCount();
 }
 
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,

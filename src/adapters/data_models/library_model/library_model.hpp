@@ -56,9 +56,6 @@ public slots:
     void refreshTags(int row);
     void refreshBook(int row);
 
-signals:
-    void bookCountChanged();
-
 private:
     QList<dtos::TagDto> convertTagsToDtos(
         const std::vector<domain::models::Tag>& tags) const;
