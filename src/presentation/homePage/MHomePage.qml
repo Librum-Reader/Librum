@@ -17,7 +17,7 @@ import "tags"
 Page
 {
     id: root
-    property bool empty: BookController.libraryModel.bookCount === 0
+    property bool empty: BookController.bookCount === 0
     
     horizontalPadding: 64
     rightPadding: 70
@@ -49,7 +49,7 @@ Page
                 id: title
                 Layout.topMargin: 44
                 titleText: "Home"
-                descriptionText: "You have 10 books"
+                descriptionText: "You have " + BookController.bookCount + " books"
             }
             
             Item { Layout.fillWidth: true }
@@ -329,7 +329,7 @@ Page
         Item
         {
             id: noBookAfterFilter
-            visible: BookController.libraryModel.bookCount !== 0 && bookGrid.count == 0
+            visible: BookController.bookCount !== 0 && bookGrid.count == 0
             Layout.preferredHeight: noBookAfterFilterLayout.height
             Layout.preferredWidth: noBookStatisfiesFilterText.implicitWidth
             Layout.alignment: Qt.AlignHCenter
