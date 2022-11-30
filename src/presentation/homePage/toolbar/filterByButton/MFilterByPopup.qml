@@ -28,7 +28,7 @@ Popup
     
     Shortcut
     {
-        sequence: "Ctrl+Return"
+        sequence: "Return"
         enabled: root.opened
         onActivated: root.filterQuerySent()
     }
