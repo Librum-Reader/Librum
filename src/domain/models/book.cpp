@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QJsonDocument>
 #include <algorithm>
+#include <cmath>
 #include <ranges>
 
 namespace domain::models
@@ -221,6 +222,20 @@ bool Book::getDownloaded() const
 void Book::setDownloaded(bool newDownloaded)
 {
     m_downloaded = newDownloaded;
+}
+
+int Book::getPercentageRead() const
+{
+    if(!getLastOpened().isValid() ||
+       (getPageCount() > 1 && getCurrentPage() == 0))
+    {
+        return 0;
+    }
+
+    double pageCountAsDouble = static_cast<double>(getPageCount());
+    double percentageInDecimal = (getCurrentPage() + 1) / pageCountAsDouble;
+
+    return std::round(percentageInDecimal * 100);
 }
 
 const std::vector<Tag>& Book::getTags() const

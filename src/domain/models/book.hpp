@@ -73,6 +73,8 @@ public:
     void setDownloaded(bool newDownloaded);
 
 
+    int getPercentageRead() const;
+
     bool addTag(const Tag& tag);
     bool removeTag(const Tag& tag);
     const std::vector<Tag>& getTags() const;
