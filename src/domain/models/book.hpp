@@ -97,7 +97,7 @@ private:
     BookMetaData m_metaData;
     QString m_filePath;
     bool m_downloaded = true;
-    int m_currentPage;
+    int m_currentPage = 0;
     std::vector<Tag> m_tags;
 };
 
