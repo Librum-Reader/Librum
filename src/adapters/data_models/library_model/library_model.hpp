@@ -32,6 +32,7 @@ public:
         DocumentSizeRole,
         PagesSizeRole,
         PageCountRole,
+        PercentageReadRole,
         CurrentPageRole,
         AddedToLibraryRole,
         LastOpenedRole,
