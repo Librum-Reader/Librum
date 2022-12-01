@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import Librum.elements 1.0
 import Librum.style 1.0
+import Librum.globals 1.0
 import "DocumentNavigation.js" as NavigationLogic
 
 
@@ -47,6 +48,12 @@ Pane
             currentIndex: 0
             model: root.document.pageCount
             
+            // Set default currentPage when model is loaded
+            onModelChanged:
+            {
+                if(listView.currentItem != null)
+                    contentY = listView.currentItem.height * Globals.selectedBook.currentPage
+            }
             onWidthChanged: toolbar.pageWidth = width
             
             delegate: PageView
@@ -71,6 +78,7 @@ Pane
             }
         }
     }
+    
     
     function zoom(factor)
     {

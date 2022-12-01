@@ -121,6 +121,16 @@ Page
             
             currentPage: documentView.document.currentPage
             
+            onBackButtonClicked:
+            {
+                // Save current page
+                var operationsMap = {};
+                operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage;
+                BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+                
+                loadPage(homePage, sidebar.homeItem, false);
+            }
+            
             onChapterButtonClicked:
             {
                 if(chapterSidebar.active)
