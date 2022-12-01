@@ -138,6 +138,9 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
         case MetaProperty::PageCount:
             updatedBook.setPageCount(value.toInt());
             break;
+        case MetaProperty::CurrentPage:
+            updatedBook.setCurrentPage(value.toInt());
+            break;
         case MetaProperty::AddedToLibrary:
             updatedBook.setAddedToLibrary(
                 QDateTime::fromString(value.toString()));
@@ -273,6 +276,7 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     bookDto.documentSize = book.getDocumentSize();
     bookDto.pagesSize = book.getPagesSize();
     bookDto.pageCount = book.getPageCount();
+    bookDto.currentPage = book.getCurrentPage();
 
     bookDto.addedToLibrary =
         book.getAddedToLibrary().toLocalTime().toString(dateTimeFormat);

@@ -40,6 +40,7 @@ public:
         DocumentSize,
         PagesSize,
         PageCount,
+        CurrentPage,
         AddedToLibrary,
         LastModified,
         Cover,
