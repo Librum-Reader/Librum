@@ -26,6 +26,7 @@ struct BookDto
     Q_PROPERTY(QString pagesSize MEMBER pagesSize)
     Q_PROPERTY(int pageCount MEMBER pageCount)
     Q_PROPERTY(int currentPage MEMBER currentPage)
+    Q_PROPERTY(int percentageRead MEMBER percentageRead)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
     Q_PROPERTY(QString cover MEMBER cover)
@@ -44,6 +45,7 @@ public:
     QString pagesSize;
     int pageCount;
     int currentPage;
+    int percentageRead;
     QString addedToLibrary;
     QString lastOpened;
     QString cover;
