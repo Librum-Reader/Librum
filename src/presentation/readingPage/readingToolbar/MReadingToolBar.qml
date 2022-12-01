@@ -20,6 +20,7 @@ Pane
     property alias currentPageButton: currentPageButton
     property alias fullScreenButton: fullScreenButton
     property alias optionsButton: optionsButton
+    signal backButtonClicked
     signal chapterButtonClicked
     signal bookMarkButtonClicked
     signal searchButtonClicked
@@ -83,13 +84,7 @@ Pane
             imageSize: 11
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                loadPage(homePage, sidebar.homeItem, false);
-            }
+            onClicked: root.backButtonClicked()
         }
         
         MButton
