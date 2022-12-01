@@ -186,8 +186,7 @@ Item
                             id: percentageLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
-                            text: (model.lastOpened === "Never" || (model.pageCount > 1 && model.currentPage === 0) ? "0" 
-                                                                : Math.round(((model.currentPage+1) / model.pageCount) * 100)) + "%"
+                            text: model.percentageRead + "%"
                             font.weight: Font.DemiBold
                             color: Style.colorBaseTitle
                             font.pointSize: 10
