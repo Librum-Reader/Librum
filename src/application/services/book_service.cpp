@@ -97,8 +97,16 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
 
-    book->update(newBook);
-    book->updateLastModified();
+    // handle current page manually, so that "lastModified" doesnt get updated
+    // when only the current page changes
+    if(book->getCurrentPage() != newBook.getCurrentPage())
+        book->setCurrentPage(newBook.getCurrentPage());
+
+    if(*book != newBook)
+    {
+        book->update(newBook);
+        book->updateLastModified();
+    }
 
     int index = getBookIndex(newBook.getUuid());
     emit dataChanged(index);
