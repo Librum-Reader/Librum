@@ -18,13 +18,15 @@ function handleWheel(wheel)
 
 function updateCurrentPageCounter()
 {
-    //     Set current page
+    // Set current page
     let pageHeight = listView.currentItem.height;
     let currentPos = listView.contentY - listView.originY + root.height/2;
-    let pageNumber = currentPos / pageHeight;
+    let pageNumber = Math.round(currentPos / pageHeight);
     
     if(pageNumber != root.document.currentPage)
+    {
         root.document.currentPage = pageNumber;
+    }
 }
 
 /**
