@@ -21,9 +21,9 @@ function updateCurrentPageCounter()
     // Set current page
     let pageHeight = listView.currentItem.height;
     let currentPos = listView.contentY - listView.originY + root.height/2;
-    let pageNumber = Math.round(currentPos / pageHeight);
+    let pageNumber = Math.floor(currentPos / pageHeight);
     
-    if(pageNumber != root.document.currentPage)
+    if(pageNumber !== root.document.currentPage)
     {
         root.document.currentPage = pageNumber;
     }
