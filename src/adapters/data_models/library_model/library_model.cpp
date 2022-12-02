@@ -74,13 +74,14 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return book.getPercentageRead();
         break;
     case AddedToLibraryRole:
-        return book.getAddedToLibrary().toLocalTime().toString(dateTimeFormat);
+        return book.getAddedToLibrary().toLocalTime().toString(
+            Book::dateTimeStringFormat);
         break;
     case LastOpenedRole:
         return book.getLastOpened().isNull()
                    ? "Never"
                    : book.getLastOpened().toLocalTime().toString(
-                         dateTimeFormat);
+                         Book::dateTimeStringFormat);
         break;
     case CoverRole:
         return book.getCoverAsStringWithType();
