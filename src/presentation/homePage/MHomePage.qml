@@ -370,6 +370,11 @@ Page
                 }
             }
         }
+        
+        Item
+        {
+            Layout.fillHeight: true
+        }
     }
     
     
