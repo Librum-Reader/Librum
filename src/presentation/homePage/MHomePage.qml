@@ -10,7 +10,6 @@ import Librum.icons 1.0
 import Librum.controllers 1.0
 import Librum.globals 1.0
 import "toolbar"
-import "indexbar"
 import "tags"
 
 
@@ -21,7 +20,7 @@ Page
     
     horizontalPadding: 64
     rightPadding: 70
-    bottomPadding: 15
+    bottomPadding: 20
     background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
     Shortcut
@@ -91,7 +90,6 @@ Page
             id: bookGridContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.maximumHeight: 700
             Layout.minimumHeight: 100
             Layout.topMargin: 30
             visible: !root.empty && bookGrid.count != 0
@@ -371,17 +369,6 @@ Page
                     onClicked: toolbar.removeFilters()
                 }
             }
-        }
-        
-        Item { Layout.fillHeight: true }
-        
-        MIndexBar
-        {
-            id: indexBar
-            visible: !root.empty
-            Layout.fillWidth: true
-            
-            onSelectedAmountOfBooksChanged: bookGrid.model = selectedAmountOfBooks
         }
     }
     

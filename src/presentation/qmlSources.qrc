@@ -42,12 +42,6 @@
         <file>homePage/toolbar/sortByButton/MSortByPopup.qml</file>
         <file>homePage/toolbar/filterByButton/MFilterByButton.qml</file>
         <file>homePage/toolbar/filterByButton/MFilterByPopup.qml</file>
-        <file>homePage/indexbar/MBookCountSelector.qml</file>
-        <file>homePage/indexbar/MBookCountSelectorItem.qml</file>
-        <file>homePage/indexbar/MBookCountSelectorPopup.qml</file>
-        <file>homePage/indexbar/MIndexBar.qml</file>
-        <file>homePage/indexbar/MIndexBarItem.qml</file>
-        <file>homePage/indexbar/MNavigationArrow.qml</file>
         <file>loginPage/MLoginPage.qml</file>
         <file>readingPage/MBookmarksSidebar.qml</file>
         <file>readingPage/MChapterSidebar.qml</file>
