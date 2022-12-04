@@ -92,7 +92,14 @@ Popup
                 Layout.topMargin: 46
                 Layout.fillWidth: true
                 
-                onAddTag: (name) => BookController.addTag(Globals.selectedBook.uuid, name)
+                onAddTag: (name) => 
+                          {
+                              let success = UserController.addTag(name);
+                              if(success)
+                              {
+                                  BookController.addTag(Globals.selectedBook.uuid, name)
+                              }
+                          }
             }
             
             
@@ -140,7 +147,12 @@ Popup
                     
                     onRemoveTag: (index) => 
                                  {
-                                     BookController.removeTag(Globals.selectedBook.uuid, Globals.bookTags[index].name);
+                                     let success = UserController.removeTag(Globals.bookTags[index].name);
+                                     if(success)
+                                     {
+                                         BookController.removeTag(Globals.selectedBook.uuid,
+                                                                  Globals.bookTags[index].name);
+                                     }
                                  }
                 }
             }
