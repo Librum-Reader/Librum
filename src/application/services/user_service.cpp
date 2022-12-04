@@ -71,14 +71,12 @@ const std::vector<domain::models::Tag>& UserService::getTags() const
 bool UserService::addTag(const domain::models::Tag& tag)
 {
     auto result = m_user.addTag(tag);
-
     return result;
 }
 
 bool UserService::removeTag(const QString& tagName)
 {
     auto result = m_user.removeTag(tagName);
-
     return result;
 }
 
