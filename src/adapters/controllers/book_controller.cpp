@@ -291,11 +291,10 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     bookDto.cover = book.getCoverAsStringWithType();
     bookDto.downloaded = book.getDownloaded();
 
-
-    for(std::size_t i = 0; i < book.getTags().size(); ++i)
+    for(const auto& tag : book.getTags())
     {
         dtos::TagDto tagDto;
-        tagDto.name = book.getTags()[i].getName();
+        tagDto.name = tag.getName();
 
         bookDto.tags.push_back(tagDto);
     }
