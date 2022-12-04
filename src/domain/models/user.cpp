@@ -63,11 +63,7 @@ const std::vector<Tag>& User::getTags() const
 
 const Tag* User::getTag(const QString& tagName) const
 {
-    auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&name = tagName](const Tag& tag)
-                                            {
-                                                return tag.getName() == name;
-                                            });
+    auto tagPosition = std::ranges::find(m_tags, Tag(tagName));
     if(tagPosition == m_tags.end())
         return nullptr;
 
@@ -86,11 +82,7 @@ bool User::addTag(const Tag& tag)
 
 bool User::removeTag(const QString& tagName)
 {
-    auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&name = tagName](const Tag& tag)
-                                            {
-                                                return tag.getName() == name;
-                                            });
+    auto tagPosition = std::ranges::find(m_tags, Tag(tagName));
     if(tagPosition == m_tags.end())
         return false;
 
@@ -100,11 +92,7 @@ bool User::removeTag(const QString& tagName)
 
 bool User::renameTag(const QString& oldName, const QString& newName)
 {
-    auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&name = oldName](const Tag& tag)
-                                            {
-                                                return tag.getName() == name;
-                                            });
+    auto tagPosition = std::ranges::find(m_tags, Tag(oldName));
     if(tagPosition == m_tags.end())
         return false;
 
