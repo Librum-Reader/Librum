@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QString>
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
 
@@ -14,6 +15,10 @@ public:
     UserController(application::IUserService* userService);
 
     void loadUser() override;
+
+    bool addTag(const QString& name);
+    bool removeTag(const QString& name);
+    bool renameTag(const QString& oldName, const QString& newName);
 
     QString getFirstName() override;
     void setFirstName(const QString& newFirstName) override;

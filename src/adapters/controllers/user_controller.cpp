@@ -18,6 +18,24 @@ void UserController::loadUser()
     m_userService->loadUser();
 }
 
+bool UserController::addTag(const QString& name)
+{
+    auto result = m_userService->addTag(name);
+    return result;
+}
+
+bool UserController::removeTag(const QString& name)
+{
+    auto result = m_userService->removeTag(name);
+    return result;
+}
+
+bool UserController::renameTag(const QString& oldName, const QString& newName)
+{
+    auto result = m_userService->renameTag(oldName, newName);
+    return result;
+}
+
 QString UserController::getFirstName()
 {
     return m_userService->getFirstName();
