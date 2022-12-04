@@ -167,26 +167,27 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 int BookController::addTag(const QString& uuid, const QString& tagName)
 {
     Tag tagToAdd(tagName);
-    if(m_bookService->addTag(uuid, tagToAdd) == BookOperationStatus::Success)
+    auto result = m_bookService->addTag(uuid, tagToAdd);
+    if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
 
-    return static_cast<int>(BookOperationStatus::TagAlreadyExists);
+    return static_cast<int>(result);
 }
 
 int BookController::removeTag(const QString& uuid, const QString& tagName)
 {
     Tag tagToRemove(tagName);
-    if(m_bookService->removeTag(uuid, tagToRemove) ==
-       BookOperationStatus::Success)
+    auto result = m_bookService->removeTag(uuid, tagToRemove);
+    if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
         return static_cast<int>(BookOperationStatus::Success);
     }
 
-    return static_cast<int>(BookOperationStatus::TagDoesNotExist);
+    return static_cast<int>(result);
 }
 
 dtos::BookDto BookController::getBook(const QString& uuid)
