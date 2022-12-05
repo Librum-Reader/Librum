@@ -7,8 +7,10 @@
 namespace domain::models
 {
 
-class User
+class User : public QObject
 {
+    Q_OBJECT
+
 public:
     User();
     User(const QString& firstName, const QString& lastName,
@@ -32,12 +34,21 @@ public:
     bool removeTag(const QString& tagName);
     bool renameTag(const QString& oldName, const QString& newName);
 
+signals:
+    void tagInsertionStarted(int index);
+    void tagInsertionEnded();
+    void tagDeletionStarted(int index);
+    void tagDeletionEnded();
+    void tagsChanged(int index);
+
 private:
     QString m_firstName;
     QString m_lastName;
     QString m_email;
     QImage m_profilePicture;
     std::vector<Tag> m_tags;
+
+    int getTagIndex(const QString& tagName);
 };
 
 }  // namespace domain::models

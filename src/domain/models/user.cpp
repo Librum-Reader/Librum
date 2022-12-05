@@ -76,7 +76,10 @@ bool User::addTag(const Tag& tag)
     if(tagPosition != m_tags.end())
         return false;
 
+    emit tagInsertionStarted(m_tags.size());
     m_tags.emplace_back(tag);
+    emit tagInsertionEnded();
+
     return true;
 }
 
@@ -86,7 +89,12 @@ bool User::removeTag(const QString& tagName)
     if(tagPosition == m_tags.end())
         return false;
 
+    auto index = getTagIndex(tagName);
+
+    emit tagDeletionStarted(index);
     m_tags.erase(tagPosition);
+    emit tagDeletionEnded();
+
     return true;
 }
 
@@ -96,10 +104,23 @@ bool User::renameTag(const QString& oldName, const QString& newName)
     if(tagPosition == m_tags.end())
         return false;
 
-    auto index = tagPosition - m_tags.begin();
+    auto index = getTagIndex(oldName);
     m_tags[index].setName(newName);
+    emit tagsChanged(index);
 
     return true;
+}
+
+int User::getTagIndex(const QString& tagName)
+{
+    auto* tag = getTag(tagName);
+    if(!tag)
+        return -1;
+
+    std::vector<Tag>::const_iterator tagPosition(tag);
+    size_t index = tagPosition - getTags().begin();
+
+    return index;
 }
 
 }  // namespace domain::models
