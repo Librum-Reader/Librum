@@ -7,10 +7,29 @@ namespace adapters::controllers
 {
 
 UserController::UserController(application::IUserService* userService) :
-    m_userService(userService)
+    m_userService(userService),
+    m_userTagsModel(m_userService->getTags())
 {
     connect(m_userService, &application::IUserService::finishedLoadingUser,
             this, &UserController::proccessUserLoadingResult);
+
+
+    // tag insertion
+    connect(m_userService, &application::IUserService::tagInsertionStarted,
+            &m_userTagsModel, &data_models::UserTagsModel::startInsertingRow);
+
+    connect(m_userService, &application::IUserService::tagInsertionEnded,
+            &m_userTagsModel, &data_models::UserTagsModel::endInsertingRow);
+
+    connect(m_userService, &application::IUserService::tagDeletionStarted,
+            &m_userTagsModel, &data_models::UserTagsModel::startDeletingRow);
+
+    connect(m_userService, &application::IUserService::tagDeletionEnded,
+            &m_userTagsModel, &data_models::UserTagsModel::endDeletingRow);
+
+    // tags changed
+    connect(m_userService, &application::IUserService::tagsChanged,
+            &m_userTagsModel, &data_models::UserTagsModel::refreshRows);
 }
 
 void UserController::loadUser()
@@ -104,6 +123,11 @@ void UserController::setProfilePicture(const QString& path)
 
     m_userService->setProfilePicture(profilePicture);
     emit profilePictureChanged();
+}
+
+data_models::UserTagsModel* UserController::getUserTagsModel()
+{
+    return &m_userTagsModel;
 }
 
 void UserController::proccessUserLoadingResult(bool success)

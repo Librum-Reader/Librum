@@ -32,11 +32,14 @@ public:
     QString getProfilePicture() const override;
     void setProfilePicture(const QString& path) override;
 
+    data_models::UserTagsModel* getUserTagsModel() override;
+
 private slots:
     void proccessUserLoadingResult(bool success);
 
 private:
     application::IUserService* m_userService;
+    data_models::UserTagsModel m_userTagsModel;
 };
 
 }  // namespace adapters::controllers
