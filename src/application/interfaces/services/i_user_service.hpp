@@ -39,6 +39,11 @@ public:
 
 signals:
     void finishedLoadingUser(bool success);
+    void tagInsertionStarted(int index);
+    void tagInsertionEnded();
+    void tagDeletionStarted(int index);
+    void tagDeletionEnded();
+    void tagsChanged(int index);
 
 public slots:
     virtual void setAuthenticationToken(const QString& token,
