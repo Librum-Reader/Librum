@@ -1,5 +1,9 @@
 #include "user_service.hpp"
 #include <QDebug>
+#include "tag.hpp"
+
+using domain::models::Tag;
+using domain::models::User;
 
 namespace application::services
 {
@@ -10,6 +14,21 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
+
+    // Tag insertion
+    connect(&m_user, &User::tagInsertionStarted, this,
+            &UserService::tagInsertionStarted);
+    connect(&m_user, &User::tagInsertionEnded, this,
+            &UserService::tagInsertionEnded);
+
+    // Tag deletion
+    connect(&m_user, &User::tagDeletionStarted, this,
+            &UserService::tagDeletionStarted);
+    connect(&m_user, &User::tagDeletionEnded, this,
+            &UserService::tagDeletionEnded);
+
+    // Tag changed
+    connect(&m_user, &User::tagsChanged, this, &UserService::tagsChanged);
 }
 
 void UserService::loadUser()
@@ -70,21 +89,20 @@ const std::vector<domain::models::Tag>& UserService::getTags() const
 
 bool UserService::addTag(const domain::models::Tag& tag)
 {
-    auto result = m_user.addTag(tag);
-    return result;
+    auto success = m_user.addTag(tag);
+    return success;
 }
 
 bool UserService::removeTag(const QString& tagName)
 {
-    auto result = m_user.removeTag(tagName);
-    return result;
+    auto success = m_user.removeTag(tagName);
+    return success;
 }
 
 bool UserService::renameTag(const QString& oldName, const QString& newName)
 {
-    auto result = m_user.renameTag(oldName, newName);
-
-    return result;
+    auto success = m_user.renameTag(oldName, newName);
+    return success;
 }
 
 void UserService::proccessUserInformation(const domain::models::User& user,
