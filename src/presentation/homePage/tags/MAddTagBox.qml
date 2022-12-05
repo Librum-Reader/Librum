@@ -170,9 +170,13 @@ Item
         width: box.width
         y: root.height + 6
         
-        onItemSelected: root.addTag(currentlySelectedData);
+        onItemSelected: root.addTag(currentlySelectedData)
     }
     
+    function close()
+    {
+        popup.close();
+    }
     
     function clearInputField()
     {
