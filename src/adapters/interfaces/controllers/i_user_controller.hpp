@@ -1,4 +1,5 @@
 #include <QObject>
+#include "user_tags_model.hpp"
 #pragma once
 
 namespace adapters
@@ -20,6 +21,8 @@ class IUserController : public QObject
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
     Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE
                    setProfilePicture NOTIFY profilePictureChanged)
+    Q_PROPERTY(adapters::data_models ::UserTagsModel* tagsModel READ
+                   getUserTagsModel CONSTANT)
 
 public:
     virtual ~IUserController() noexcept = default;
@@ -42,6 +45,8 @@ public:
 
     virtual QString getProfilePicture() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
+
+    virtual data_models::UserTagsModel* getUserTagsModel() = 0;
 
 signals:
     void finishedLoadingUser(bool success);
