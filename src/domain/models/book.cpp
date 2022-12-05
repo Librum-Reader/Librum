@@ -1,5 +1,6 @@
 #include "book.hpp"
 #include <QBuffer>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <algorithm>
 #include <cmath>
@@ -314,6 +315,13 @@ void Book::update(const Book& other)
 
 QByteArray Book::toJson() const
 {
+    // tags
+    QJsonArray tags;
+    for(const auto& tag : m_tags)
+    {
+        tags.append(tag.getName());
+    }
+
     QJsonObject book {
         { "uuid", getUuid().toString(QUuid::WithoutBraces) },
         { "title", getTitle() },
@@ -332,6 +340,7 @@ QByteArray Book::toJson() const
         { "lastModified", getLastModified().toString(dateTimeStringFormat) },
         { "filePath", getFilePath() },
         { "cover", getCoverAsString() },
+        { "tags", tags },
     };
 
     QJsonDocument doc(book);
@@ -373,7 +382,16 @@ Book Book::fromJson(const QJsonObject& jsonObject)
     int currentPage = jsonObject["currentPage"].toInt();
     QString uuid = jsonObject["uuid"].toString();
 
-    return Book(filePath, metaData, currentPage, uuid);
+    Book book(filePath, metaData, currentPage, uuid);
+
+    // tags
+    QJsonArray tags = jsonObject["tags"].toArray();
+    for(const auto& tag : tags.toVariantList())
+    {
+        book.addTag(tag.toString());
+    }
+
+    return book;
 }
 
 }  // namespace domain::models
