@@ -30,7 +30,7 @@ public:
                                       const QImage& newPicture) = 0;
 
 signals:
-    void finishedGettingUser(domain::models::User user, bool success);
+    void finishedGettingUser(const domain::models::User& user, bool success);
 };
 
 }  // namespace application
