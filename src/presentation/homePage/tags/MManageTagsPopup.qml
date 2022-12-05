@@ -38,6 +38,7 @@ Popup
         }
         else
         {
+            addTagBox.close();
             addTagBox.clearInputField();
         }
     }
@@ -95,10 +96,7 @@ Popup
                 onAddTag: (name) => 
                           {
                               let success = UserController.addTag(name);
-                              if(success)
-                              {
-                                  BookController.addTag(Globals.selectedBook.uuid, name)
-                              }
+                              BookController.addTag(Globals.selectedBook.uuid, name);
                           }
             }
             
@@ -159,7 +157,7 @@ Popup
             
             MButton 
             {
-                id: loginButton
+                id: doneButton
                 Layout.fillWidth: true
                 Layout.preferredHeight: 40
                 Layout.topMargin: 34
@@ -169,7 +167,7 @@ Popup
                 fontSize: 12
                 fontColor: Style.colorBrightText
                 fontWeight: Font.Bold
-                text: "Apply"
+                text: "Done"
                 
                 onClicked: root.close()
             }
