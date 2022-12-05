@@ -5,6 +5,7 @@ import CustomComponents 1.0
 import QtQml.Models 2.15
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Popup
@@ -14,11 +15,12 @@ Popup
     signal itemSelected()
     
     onOpened: listView.currentIndex = -1
+    onClosed: rightClickMenu.close()
     
     implicitWidth: 200
     padding: 8
     focus: true
-    closePolicy: Popup.CloseOnPressOutsideParent
+    closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
     background: Rectangle
     {
         color: Style.colorBackground
@@ -27,7 +29,6 @@ Popup
         radius: 4
         antialiasing: true
     }
-    
     
     ColumnLayout
     {
@@ -49,17 +50,7 @@ Popup
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar { }
             
-            model: ListModel
-            {
-                ListElement { text: "Technology" }
-                ListElement { text: "Favourite" }
-                ListElement { text: "Romance" }
-                ListElement { text: "Comedy" }
-                ListElement { text: "Sports" }
-                ListElement { text: "Physics" }
-                ListElement { text: "Blockchain" }
-                ListElement { text: "Psychology" }
-            }
+            model: UserController.tagsModel
             
             delegate: MBaseListItem
             {
@@ -70,6 +61,11 @@ Popup
                 fontColor: Style.colorLightText3
                 checkBoxStyle: false
                 
+                function getContent()
+                {
+                    return model.name;
+                }
+                
                 onClicked: (mouse, index) => listView.selectItem(index)
                 
                 onRightClicked:
@@ -77,10 +73,10 @@ Popup
                     {
                         let absoluteMousePosition = mapToItem(mainLayout, mouse.x, mouse.y);
                         
-                        tagOptionsPopup.x = absoluteMousePosition.x + 2;
-                        tagOptionsPopup.y = absoluteMousePosition.y + 2;
-                        tagOptionsPopup.index = index;
-                        tagOptionsPopup.open();
+                        rightClickMenu.x = absoluteMousePosition.x + 2;
+                        rightClickMenu.y = absoluteMousePosition.y + 2;
+                        rightClickMenu.index = index;
+                        rightClickMenu.open();
                     }
             }
             
@@ -96,7 +92,7 @@ Popup
             {
                 let newSelected = listView.itemAtIndex(index);
                 
-                root.currentlySelectedData = newSelected.text;
+                root.currentlySelectedData = newSelected.getContent();
                 root.itemSelected();
                 root.close();
             }
@@ -106,7 +102,7 @@ Popup
     
     MRightClickMenu
     {
-        id: tagOptionsPopup
+        id: rightClickMenu
         property int index
         
         visible: false
@@ -116,41 +112,41 @@ Popup
         {
             MRightClickMenuItem
             {
-                width: tagOptionsPopup.width
+                width: rightClickMenu.width
                 imagePath: Icons.plusSquare
                 imageSize: 17
                 text: "Add"
                 
                 onClicked:
                 {
-                    listView.selectItem(tagOptionsPopup.index);
-                    tagOptionsPopup.close();
+                    listView.selectItem(rightClickMenu.index);
+                    rightClickMenu.close();
                 }
             }
             
             MRightClickMenuItem
             {
-                width: tagOptionsPopup.width
+                width: rightClickMenu.width
                 imagePath: Icons.edit
                 imageSize: 17
                 text: "Rename"
                 
                 onClicked:
                 {
-                    tagOptionsPopup.close();
+                    rightClickMenu.close();
                 }
             }
             
             MRightClickMenuItem
             {
-                width: tagOptionsPopup.width
+                width: rightClickMenu.width
                 imagePath: Icons.trashGray
                 imageSize: 16
                 text: "Delete"
                 
                 onClicked:
                 {
-                    tagOptionsPopup.close();
+                    rightClickMenu.close();
                 }
             }
         }
