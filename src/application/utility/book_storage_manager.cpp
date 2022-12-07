@@ -79,14 +79,12 @@ void BookStorageManager::loadRemoteBooks()
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }
 
-void BookStorageManager::addTag(const domain::models::Tag& tag)
+void BookStorageManager::addTag(const QUuid& bookUuid, const Tag& tag)
 {
-    
 }
 
-void BookStorageManager::deleteTag(const QUuid& uuid)
+void BookStorageManager::deleteTag(const QUuid& bookUuid, const QUuid& tagUuid)
 {
-    
 }
 
 }  // namespace application::utility

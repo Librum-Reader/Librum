@@ -28,8 +28,9 @@ public:
     virtual void updateBookRemotely(const domain::models::Book& book) = 0;
     virtual std::vector<domain::models::Book> loadLocalBooks() = 0;
     virtual void loadRemoteBooks() = 0;
-    virtual void addTag(const domain::models::Tag& tag) = 0;
-    virtual void deleteTag(const QUuid& uuid) = 0;
+    virtual void addTag(const QUuid& bookUuid,
+                        const domain::models::Tag& tag) = 0;
+    virtual void deleteTag(const QUuid& bookUuid, const QUuid& tagUuid) = 0;
 
     virtual void setUserData(const QString& email,
                              const QString& authToken) = 0;
