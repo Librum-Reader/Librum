@@ -38,11 +38,13 @@ private:
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
     dtos::BookDto getDtoFromBook(const domain::models::Book& book);
 
-    bool m_bookChacheChanged;
-    std::vector<dtos::BookDto> m_bookCache;
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
+
+    // A chache containing BookDto's
+    std::vector<dtos::BookDto> m_bookCache;
+    bool m_bookChacheChanged;
 };
 
 }  // namespace adapters::controllers
