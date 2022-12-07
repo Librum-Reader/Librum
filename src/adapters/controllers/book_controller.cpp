@@ -15,10 +15,10 @@ using namespace domain::models;
 using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService) :
-    m_bookChacheChanged(true),
     m_bookService(bookService),
     m_libraryModel(m_bookService->getBooks()),
-    m_libraryProxyModel(static_cast<QObject*>(&m_libraryModel))
+    m_libraryProxyModel(static_cast<QObject*>(&m_libraryModel)),
+    m_bookChacheChanged(true)
 {
     // book insertion
     connect(m_bookService, &application::IBookService::bookInsertionStarted,
@@ -62,7 +62,6 @@ int BookController::addBook(const QString& path)
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
     }
 
     return static_cast<int>(result);
@@ -74,10 +73,9 @@ int BookController::deleteBook(const QString& uuid)
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
     }
 
-    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
+    return static_cast<int>(result);
 }
 
 int BookController::uninstallBook(const QString& uuid)
@@ -86,10 +84,9 @@ int BookController::uninstallBook(const QString& uuid)
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
     }
 
-    return static_cast<int>(BookOperationStatus::BookDoesNotExist);
+    return static_cast<int>(result);
 }
 
 int BookController::updateBook(const QString& uuid, const QVariant& operations)
@@ -171,7 +168,6 @@ int BookController::addTag(const QString& uuid, const QString& tagName)
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
     }
 
     return static_cast<int>(result);
@@ -183,7 +179,6 @@ int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
-        return static_cast<int>(BookOperationStatus::Success);
     }
 
     return static_cast<int>(result);
