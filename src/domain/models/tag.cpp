@@ -3,9 +3,13 @@
 namespace domain::models
 {
 
-Tag::Tag(QString name, QString uuid) :
+Tag::Tag(const QString& name, const QString& uuid) :
     m_name(name)
 {
+    // Capitalize by default m_name
+    m_name.at(0).toUpper();
+
+    // Generate uuid if it's not provided, else assign
     if(uuid.isEmpty())
         m_uuid = QUuid::createUuid();
     else
