@@ -76,7 +76,7 @@ public:
     int getPercentageRead() const;
 
     bool addTag(const Tag& tag);
-    bool removeTag(const Tag& tag);
+    bool removeTag(const QUuid& uuid);
     const std::vector<Tag>& getTags() const;
 
     void update(const Book& other);

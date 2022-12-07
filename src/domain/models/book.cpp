@@ -254,9 +254,13 @@ bool Book::addTag(const Tag& tag)
     return true;
 }
 
-bool Book::removeTag(const Tag& tag)
+bool Book::removeTag(const QUuid& uuid)
 {
-    auto tagPosition = std::ranges::find(m_tags, tag);
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [uuid](const Tag& tag)
+                                            {
+                                                return tag.getUuid() == uuid;
+                                            });
     if(tagPosition == m_tags.end())
         return false;
 
