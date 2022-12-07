@@ -177,10 +177,9 @@ int BookController::addTag(const QString& uuid, const QString& tagName)
     return static_cast<int>(result);
 }
 
-int BookController::removeTag(const QString& uuid, const QString& tagName)
+int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
 {
-    Tag tagToRemove(tagName);
-    auto result = m_bookService->removeTag(uuid, tagToRemove);
+    auto result = m_bookService->removeTag(bookUuid, tagUuid);
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;

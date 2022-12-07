@@ -22,7 +22,7 @@ public:
     int uninstallBook(const QString& uuid) override;
     int updateBook(const QString& uuid, const QVariant& operations) override;
     int addTag(const QString& uuid, const QString& tagName) override;
-    int removeTag(const QString& uuid, const QString& tagName) override;
+    int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
 

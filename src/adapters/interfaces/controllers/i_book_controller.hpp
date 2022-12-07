@@ -56,8 +56,8 @@ public:
                                        const QVariant& operations) = 0;
     Q_INVOKABLE virtual int addTag(const QString& uuid,
                                    const QString& tagName) = 0;
-    Q_INVOKABLE virtual int removeTag(const QString& uuid,
-                                      const QString& tagName) = 0;
+    Q_INVOKABLE virtual int removeTag(const QString& bookUuid,
+                                      const QString& tagUuid) = 0;
     Q_INVOKABLE virtual adapters::dtos::BookDto getBook(
         const QString& uuid) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
