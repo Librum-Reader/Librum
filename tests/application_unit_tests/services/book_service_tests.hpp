@@ -46,9 +46,6 @@ public:
     MOCK_METHOD(std::vector<domain::models::Book>, loadLocalBooks, (),
                 (override));
     MOCK_METHOD(void, loadRemoteBooks, (), (override));
-    MOCK_METHOD(void, addTag, (const QUuid&, const domain::models::Tag&),
-                (override));
-    MOCK_METHOD(void, deleteTag, (const QUuid&, const QUuid&), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));

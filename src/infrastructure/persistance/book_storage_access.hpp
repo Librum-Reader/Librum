@@ -21,8 +21,6 @@ public:
                     const QJsonObject& jsonBook) override;
     void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
-    void addTag(const QString& authToken, const QJsonObject& jsontag) override;
-    void deleteTag(const QString& authToken, const QUuid& uuid) override;
 
 private slots:
     void proccessBookCreationResult();

@@ -21,9 +21,6 @@ public:
                     const domain::models::Book& book) override;
     void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
-    void addTag(const QString& authToken,
-                const domain::models::Tag& book) override;
-    void deleteTag(const QString& authToken, const QUuid& uuid) override;
 
 private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
