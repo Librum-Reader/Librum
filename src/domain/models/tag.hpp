@@ -9,7 +9,7 @@ namespace domain::models
 class Tag
 {
 public:
-    Tag(QString name, QString uuid = "");
+    Tag(const QString& name, const QString& uuid = "");
 
     bool operator==(const Tag& other) const;
 
