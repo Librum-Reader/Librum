@@ -52,7 +52,7 @@ TEST(ABook, SucceedsRemovingATag)
     book.addTag(tag);
     int prevAmountOfTags = book.getTags().size();
 
-    auto result = book.removeTag(tag.getName());
+    auto result = book.removeTag(tag.getUuid());
 
     // Assert
     EXPECT_EQ(prevAmountOfTags - 1, book.getTags().size());
@@ -68,7 +68,7 @@ TEST(ABook, FailsRemovingATagIfTagDoesNotExist)
     // Act
     book.addTag(tag);
 
-    auto result = book.removeTag(Tag("NonExistentTag"));
+    auto result = book.removeTag("SomeUuid");
 
     // Assert
     EXPECT_FALSE(result);
