@@ -4,9 +4,11 @@
 #include <QImage>
 #include <QString>
 #include "QSignalSpy"
+#include "gmock/gmock.h"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
 #include "qnamespace.h"
+#include "tag.hpp"
 #include "user_controller.hpp"
 
 using ::testing::ReturnRef;
@@ -47,10 +49,15 @@ struct AUserController : public ::testing::Test
 
     void SetUp() override
     {
+        // Set default return value for 'getTags'
+        EXPECT_CALL(userServiceMock, getTags())
+            .WillRepeatedly(ReturnRef(defaultReturn));
+
         userController = std::make_unique<UserController>(&userServiceMock);
     }
 
     UserServiceMock userServiceMock;
+    std::vector<domain::models::Tag> defaultReturn;
     std::unique_ptr<UserController> userController;
 };
 

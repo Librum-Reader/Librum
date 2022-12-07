@@ -25,6 +25,9 @@ public:
     MOCK_METHOD(void, updateBook, (const QString&, const Book&), (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, addTag, (const QString&, const Tag&), (override));
+    MOCK_METHOD(void, deleteTag, (const QString&, const QUuid& uuid),
+                (override));
 };
 
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker

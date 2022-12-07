@@ -65,6 +65,16 @@ void BookStorageAccess::downloadBook(const QString& authToken,
     Q_UNUSED(uuid);
 }
 
+void BookStorageAccess::addTag(const QString& authToken, const QJsonObject& jsontag)
+{
+    
+}
+
+void BookStorageAccess::deleteTag(const QString& authToken, const QUuid& uuid)
+{
+    
+}
+
 void BookStorageAccess::proccessBookCreationResult()
 {
     int expectedStatusCode = 201;

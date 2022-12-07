@@ -21,6 +21,9 @@ public:
     void updateBookRemotely(const domain::models::Book& book) override;
     std::vector<domain::models::Book> loadLocalBooks() override;
     void loadRemoteBooks() override;
+    void addTag(const domain::models::Tag& tag) override;
+    void deleteTag(const QUuid& uuid) override;
+
     void setUserData(const QString& email, const QString& authToken) override;
     void clearUserData() override;
 
