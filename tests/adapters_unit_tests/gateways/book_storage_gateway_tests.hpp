@@ -29,8 +29,6 @@ public:
                 (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
-    MOCK_METHOD(void, addTag, (const QString&, const QJsonObject&), (override));
-    MOCK_METHOD(void, deleteTag, (const QString&, const QUuid&), (override));
 };
 
 struct ABookStorageGateway : public ::testing::Test

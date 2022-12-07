@@ -56,15 +56,6 @@ void BookStorageGateway::downloadBook(const QString& authToken,
     Q_UNUSED(uuid);
 }
 
-void BookStorageGateway::addTag(const QString& authToken,
-                                const domain::models::Tag& book)
-{
-}
-
-void BookStorageGateway::deleteTag(const QString& authToken, const QUuid& uuid)
-{
-}
-
 void BookStorageGateway::proccessBooksMetadata(
     std::vector<QJsonObject>& jsonBooks)
 {

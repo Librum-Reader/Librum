@@ -126,7 +126,7 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
     if(!book->addTag(tag))
         return BookOperationStatus::TagAlreadyExists;
 
-    m_bookStorageManager->addTag(uuid, tag);
+    m_bookStorageManager->updateBook(*book);
     int index = getBookIndex(uuid);
     emit tagsChanged(index);
 
@@ -143,7 +143,7 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
     if(!book->removeTag(tagUuid))
         return BookOperationStatus::TagDoesNotExist;
 
-    m_bookStorageManager->deleteTag(bookUuid, tagUuid);
+    m_bookStorageManager->updateBook(*book);
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);
 

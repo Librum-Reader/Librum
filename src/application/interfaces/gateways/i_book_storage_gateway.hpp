@@ -27,9 +27,6 @@ public:
                             const domain::models::Book& book) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
-    virtual void addTag(const QString& authToken,
-                        const domain::models::Tag& book) = 0;
-    virtual void deleteTag(const QString& authToken, const QUuid& uuid) = 0;
 
 signals:
     void creatingBookFinished(bool success, const QString& reason);
