@@ -34,8 +34,8 @@ public:
 
     virtual BookOperationStatus addTag(const QUuid& uuid,
                                        const domain::models::Tag& tag) = 0;
-    virtual BookOperationStatus removeTag(const QUuid& uuid,
-                                          const domain::models::Tag& tag) = 0;
+    virtual BookOperationStatus removeTag(const QUuid& bookUuid,
+                                          const QUuid& tagUuid) = 0;
 
     virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
                                                const QUrl& path) = 0;
