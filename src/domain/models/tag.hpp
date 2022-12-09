@@ -1,4 +1,7 @@
 #pragma once
+#include <QByteArray>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QObject>
 #include <QString>
 #include <QUuid>
@@ -17,6 +20,10 @@ public:
 
     const QString& getName() const;
     void setName(QString newName);
+
+public:
+    QByteArray toJson();
+    static Tag fromJson(const QJsonObject& jsonObject);
 
 private:
     QUuid m_uuid;

@@ -36,4 +36,26 @@ void Tag::setName(QString newName)
     m_name = newName;
 }
 
+QByteArray Tag::toJson()
+{
+    QJsonObject jsonTag {
+        { "name", getName() },
+        { "uuid", getUuid().toString() },
+    };
+
+    QJsonDocument jsonDoc(jsonTag);
+    QString jsonString = jsonDoc.toJson(QJsonDocument::Indented);
+
+    return jsonString.toUtf8();
+}
+
+Tag Tag::fromJson(const QJsonObject& jsonObject)
+{
+    QString name = jsonObject["name"].toString();
+    QString guid = jsonObject["uuid"].toString();
+    Tag tag(name, guid);
+
+    return tag;
+}
+
 }  // namespace domain::models
