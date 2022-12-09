@@ -319,7 +319,7 @@ void Book::update(const Book& other)
 
 QByteArray Book::toJson() const
 {
-    // tags
+    // Serialise tags
     QJsonArray tags;
     for(const auto& tag : m_tags)
     {
