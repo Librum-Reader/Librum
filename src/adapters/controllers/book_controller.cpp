@@ -257,8 +257,6 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
 
 dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
 {
-    const QString dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
-
     dtos::BookDto bookDto;
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
     bookDto.title = book.getTitle();
@@ -274,13 +272,13 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     bookDto.currentPage = book.getCurrentPage();
     bookDto.percentageRead = book.getPercentageRead();
 
-    bookDto.addedToLibrary =
-        book.getAddedToLibrary().toLocalTime().toString(dateTimeFormat);
+    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
+        Book::dateTimeStringFormat);
 
-    bookDto.lastOpened =
-        book.getLastOpened().isNull()
-            ? "Never"
-            : book.getLastOpened().toLocalTime().toString(dateTimeFormat);
+    bookDto.lastOpened = book.getLastOpened().isNull()
+                             ? "Never"
+                             : book.getLastOpened().toLocalTime().toString(
+                                   Book::dateTimeStringFormat);
 
     bookDto.cover = book.getCoverAsStringWithType();
     bookDto.downloaded = book.getDownloaded();
