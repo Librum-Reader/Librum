@@ -323,7 +323,8 @@ QByteArray Book::toJson() const
     QJsonArray tags;
     for(const auto& tag : m_tags)
     {
-        tags.append(tag.getName());
+        auto obj = QJsonDocument::fromJson(tag.toJson()).object();
+        tags.append(QJsonValue::fromVariant(obj));
     }
 
     QJsonObject book {
@@ -348,7 +349,7 @@ QByteArray Book::toJson() const
     };
 
     QJsonDocument doc(book);
-    QString strJson(doc.toJson(QJsonDocument::Indented));
+    QString strJson = doc.toJson(QJsonDocument::Indented);
 
     return strJson.toUtf8();
 }
@@ -389,11 +390,12 @@ Book Book::fromJson(const QJsonObject& jsonObject)
     Book book(filePath, metaData, currentPage, uuid);
 
     // tags
-    QJsonArray tags = jsonObject["tags"].toArray();
-    for(const auto& tag : tags.toVariantList())
-    {
-        book.addTag(tag.toString());
-    }
+    //    QJsonArray tags = jsonObject["tags"].toArray();
+    //    for(const auto& tag : tags)
+    //    {
+    //        Tag tagToAdd = Tag::fromJson(tag.toObject());
+    //        book.addTag(tagToAdd);
+    //    }
 
     return book;
 }

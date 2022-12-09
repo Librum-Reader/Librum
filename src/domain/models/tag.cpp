@@ -40,7 +40,7 @@ QByteArray Tag::toJson() const
 {
     QJsonObject jsonTag {
         { "name", getName() },
-        { "uuid", getUuid().toString() },
+        { "uuid", getUuid().toString(QUuid::WithoutBraces) },
     };
 
     QJsonDocument jsonDoc(jsonTag);
