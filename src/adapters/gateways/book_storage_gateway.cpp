@@ -1,4 +1,5 @@
 #include "book_storage_gateway.hpp"
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "book.hpp"
@@ -41,6 +42,19 @@ void BookStorageGateway::updateBook(const QString& authToken,
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
 
+    // TODO: Refactor tag mapping
+    auto tags = jsonBook["tags"].toArray();
+    jsonBook.remove("tags");
+
+    QJsonArray fixedTags;
+    for(const QJsonValue& tag : tags)
+    {
+        auto tagJsonObject = tag.toObject();
+        renameJsonObjectKey(tagJsonObject, "uuid", "guid");
+        fixedTags.append(QJsonValue::fromVariant(tagJsonObject));
+    }
+    jsonBook["tags"] = fixedTags;
+
     m_bookStorageAccess->updateBook(authToken, jsonBook);
 }
 
@@ -62,7 +76,8 @@ void BookStorageGateway::proccessBooksMetadata(
     std::vector<Book> books;
     for(auto& jsonBook : jsonBooks)
     {
-        // Rename the key name "guid" to "uuid" since that's what the core wants
+        // Rename the key name "guid" to "uuid" since that's what the core
+        // wants
         renameJsonObjectKey(jsonBook, "guid", "uuid");
 
         auto book = Book::fromJson(jsonBook);
