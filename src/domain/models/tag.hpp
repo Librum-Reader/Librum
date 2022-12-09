@@ -22,7 +22,7 @@ public:
     void setName(QString newName);
 
 public:
-    QByteArray toJson();
+    QByteArray toJson() const;
     static Tag fromJson(const QJsonObject& jsonObject);
 
 private:

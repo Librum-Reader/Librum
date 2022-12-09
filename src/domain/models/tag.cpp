@@ -36,7 +36,7 @@ void Tag::setName(QString newName)
     m_name = newName;
 }
 
-QByteArray Tag::toJson()
+QByteArray Tag::toJson() const
 {
     QJsonObject jsonTag {
         { "name", getName() },
