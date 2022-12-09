@@ -42,17 +42,9 @@ void BookStorageGateway::updateBook(const QString& authToken,
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
 
-    // TODO: Refactor tag mapping
+    // Api wants the "uuid" to be called "guid", so rename it
     auto tags = jsonBook["tags"].toArray();
-    jsonBook.remove("tags");
-
-    QJsonArray fixedTags;
-    for(const QJsonValue& tag : tags)
-    {
-        auto tagJsonObject = tag.toObject();
-        renameJsonObjectKey(tagJsonObject, "uuid", "guid");
-        fixedTags.append(QJsonValue::fromVariant(tagJsonObject));
-    }
+    auto fixedTags = renameTagUuidsToGuids(tags);
     jsonBook["tags"] = fixedTags;
 
     m_bookStorageAccess->updateBook(authToken, jsonBook);
@@ -76,8 +68,7 @@ void BookStorageGateway::proccessBooksMetadata(
     std::vector<Book> books;
     for(auto& jsonBook : jsonBooks)
     {
-        // Rename the key name "guid" to "uuid" since that's what the core
-        // wants
+        // Api sends "uuid" by the name of "guid", so rename it back to "uuid"
         renameJsonObjectKey(jsonBook, "guid", "uuid");
 
         auto book = Book::fromJson(jsonBook);
@@ -87,6 +78,20 @@ void BookStorageGateway::proccessBooksMetadata(
     }
 
     emit gettingBooksMetaDataFinished(books);
+}
+
+QJsonArray BookStorageGateway::renameTagUuidsToGuids(const QJsonArray& tags)
+{
+    QJsonArray newTags;
+    for(const QJsonValue& tag : tags)
+    {
+        auto tagObject = tag.toObject();
+        renameJsonObjectKey(tagObject, "uuid", "guid");
+
+        newTags.append(QJsonValue::fromVariant(tagObject));
+    }
+
+    return newTags;
 }
 
 void BookStorageGateway::renameJsonObjectKey(QJsonObject& jsonObject,
