@@ -90,7 +90,11 @@ const std::vector<domain::models::Tag>& UserService::getTags() const
 QUuid UserService::addTag(const domain::models::Tag& tag)
 {
     m_user.addTag(tag);
-    return tag.getUuid();
+    auto userTag = m_user.getTag(tag.getName());
+    if(!userTag)
+        return QUuid();
+
+    return userTag->getUuid();
 }
 
 bool UserService::removeTag(const QString& tagName)
