@@ -14,8 +14,10 @@ namespace adapters::controllers
 using namespace domain::models;
 using application::BookOperationStatus;
 
-BookController::BookController(application::IBookService* bookService) :
+BookController::BookController(application::IBookService* bookService,
+                               application::IUserService* userService) :
     m_bookService(bookService),
+    m_userService(userService),
     m_libraryModel(m_bookService->getBooks()),
     m_libraryProxyModel(static_cast<QObject*>(&m_libraryModel)),
     m_bookChacheChanged(true)
@@ -163,8 +165,14 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
 int BookController::addTag(const QString& uuid, const QString& tagName)
 {
-    Tag tagToAdd(tagName);
-    auto result = m_bookService->addTag(uuid, tagToAdd);
+    // Tag is always previously added to user tags, so get it from there
+    auto tag = std::ranges::find_if(m_userService->getTags(),
+                                    [tagName](const Tag& tag)
+                                    {
+                                        return tag.getName() == tagName;
+                                    });
+
+    auto result = m_bookService->addTag(uuid, *tag);
     if(result == BookOperationStatus::Success)
     {
         m_bookChacheChanged = true;
