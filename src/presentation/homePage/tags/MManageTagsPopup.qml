@@ -145,12 +145,8 @@ Popup
                     
                     onRemoveTag: (index) => 
                                  {
-                                     let success = UserController.removeTag(Globals.bookTags[index].name);
-                                     if(success)
-                                     {
-                                         BookController.removeTag(Globals.selectedBook.uuid,
-                                                                  Globals.bookTags[index].name);
-                                     }
+                                     BookController.removeTag(Globals.selectedBook.uuid,
+                                                              Globals.bookTags[index].uuid);
                                  }
                 }
             }
