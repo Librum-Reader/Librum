@@ -164,6 +164,9 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 int BookController::addTag(const QString& bookUuid, const QString& tagName,
                            const QString& tagUuid)
 {
+    if(QUuid(tagUuid).isNull())
+        return static_cast<int>(BookOperationStatus::OperationFailed);
+
     Tag tag(tagName, tagUuid);
 
     auto result = m_bookService->addTag(bookUuid, tag);
