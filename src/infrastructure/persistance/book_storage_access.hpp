@@ -33,6 +33,7 @@ private:
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
     std::unique_ptr<QNetworkReply> m_gettingBooksMetadataReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookUpdatingReply = nullptr;
 };
 
 }  // namespace infrastructure::persistence
