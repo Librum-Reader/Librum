@@ -37,10 +37,10 @@ void UserController::loadUser()
     m_userService->loadUser();
 }
 
-bool UserController::addTag(const QString& name)
+QString UserController::addTag(const QString& name)
 {
-    auto result = m_userService->addTag(name);
-    return result;
+    QUuid uuid = m_userService->addTag(name);
+    return uuid.toString();
 }
 
 bool UserController::removeTag(const QString& name)
