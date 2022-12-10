@@ -87,10 +87,10 @@ const std::vector<domain::models::Tag>& UserService::getTags() const
     return m_user.getTags();
 }
 
-bool UserService::addTag(const domain::models::Tag& tag)
+QUuid UserService::addTag(const domain::models::Tag& tag)
 {
-    auto success = m_user.addTag(tag);
-    return success;
+    m_user.addTag(tag);
+    return tag.getUuid();
 }
 
 bool UserService::removeTag(const QString& tagName)

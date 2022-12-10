@@ -29,7 +29,7 @@ public:
     void setProfilePicture(const QImage& image) override;
 
     const std::vector<domain::models::Tag>& getTags() const override;
-    bool addTag(const domain::models::Tag& tag) override;
+    QUuid addTag(const domain::models::Tag& tag) override;
     bool removeTag(const QString& tagName) override;
     bool renameTag(const QString& oldName, const QString& newName) override;
 
