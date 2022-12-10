@@ -171,6 +171,8 @@ int BookController::addTag(const QString& uuid, const QString& tagName)
                                     {
                                         return tag.getName() == tagName;
                                     });
+    if(tag == std::end(m_userService->getTags()))
+        return static_cast<int>(BookOperationStatus::TagDoesNotExist);
 
     auto result = m_bookService->addTag(uuid, *tag);
     if(result == BookOperationStatus::Success)
