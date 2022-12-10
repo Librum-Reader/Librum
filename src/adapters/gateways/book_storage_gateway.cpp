@@ -30,7 +30,7 @@ void BookStorageGateway::createBook(const QString& authToken,
 
     // Again, change "uuid" to "guid" for every tag for the api request
     auto tags = jsonBook["tags"].toArray();
-    auto fixedTags = renameTagUuidsToGuids(tags);
+    auto fixedTags = renameTagProperties(tags, TagNamingStyle::ApiStyle);
     jsonBook["tags"] = fixedTags;
 
     m_bookStorageAccess->createBook(authToken, jsonBook);
@@ -49,7 +49,7 @@ void BookStorageGateway::updateBook(const QString& authToken,
 
     // Api wants the "uuid" to be called "guid", so rename it
     auto tags = jsonBook["tags"].toArray();
-    auto fixedTags = renameTagUuidsToGuids(tags);
+    auto fixedTags = renameTagProperties(tags, TagNamingStyle::ApiStyle);
     jsonBook["tags"] = fixedTags;
 
     m_bookStorageAccess->updateBook(authToken, jsonBook);
@@ -76,6 +76,12 @@ void BookStorageGateway::proccessBooksMetadata(
         // Api sends "uuid" by the name of "guid", so rename it back to "uuid"
         renameJsonObjectKey(jsonBook, "guid", "uuid");
 
+        // Rename "guid"s to "uuid"s for tags as well
+        auto tags = jsonBook["tags"].toArray();
+        auto fixedTags = renameTagProperties(tags, TagNamingStyle::ClientStyle);
+        jsonBook["tags"] = fixedTags;
+
+
         auto book = Book::fromJson(jsonBook);
         book.setDownloaded(false);
 
@@ -85,13 +91,18 @@ void BookStorageGateway::proccessBooksMetadata(
     emit gettingBooksMetaDataFinished(books);
 }
 
-QJsonArray BookStorageGateway::renameTagUuidsToGuids(const QJsonArray& tags)
+QJsonArray BookStorageGateway::renameTagProperties(const QJsonArray& tags,
+                                                   TagNamingStyle namingStyle)
 {
     QJsonArray newTags;
     for(const QJsonValue& tag : tags)
     {
         auto tagObject = tag.toObject();
-        renameJsonObjectKey(tagObject, "uuid", "guid");
+
+        if(namingStyle == TagNamingStyle::ApiStyle)
+            renameJsonObjectKey(tagObject, "uuid", "guid");
+        else
+            renameJsonObjectKey(tagObject, "guid", "uuid");
 
         newTags.append(QJsonValue::fromVariant(tagObject));
     }
