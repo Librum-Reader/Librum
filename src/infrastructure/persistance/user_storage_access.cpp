@@ -1,4 +1,6 @@
 #include "user_storage_access.hpp"
+#include <QByteArray>
+#include <QJsonDocument>
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -64,11 +66,12 @@ void UserStorageAccess::proccessGetUserResult()
         return;
     }
 
-    auto valueMap = parseJsonToMap(m_reply->readAll());
+    auto jsonDoc = QJsonDocument::fromJson(m_reply->readAll());
+    auto jsonObj = jsonDoc.object();
 
-    auto firstName = valueMap["firstName"].toString();
-    auto lastName = valueMap["lastName"].toString();
-    auto email = valueMap["email"].toString();
+    auto firstName = jsonObj["firstName"].toString();
+    auto lastName = jsonObj["lastName"].toString();
+    auto email = jsonObj["email"].toString();
 
     emit userReady(firstName, lastName, email);
 }
@@ -104,16 +107,6 @@ bool UserStorageAccess::checkForErrors(int expectedStatusCode)
     }
 
     return false;
-}
-
-QVariantMap UserStorageAccess::parseJsonToMap(QByteArray jsonBytes)
-{
-    auto jsonResponse = QJsonDocument::fromJson(jsonBytes);
-    if(jsonResponse.isNull() || !jsonResponse.isObject())
-        emit gettingUserFailed();
-
-    auto map = jsonResponse.object().toVariantMap();
-    return map;
 }
 
 }  // namespace infrastructure::persistence

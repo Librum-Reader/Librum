@@ -36,7 +36,6 @@ private slots:
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
     bool checkForErrors(int expectedStatusCode);
-    QVariantMap parseJsonToMap(QByteArray jsonBytes);
 
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_reply = nullptr;
