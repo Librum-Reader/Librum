@@ -1,4 +1,5 @@
 #include "user_storage_gateway.hpp"
+#include <QJsonObject>
 
 
 using namespace domain::models;
@@ -47,9 +48,20 @@ void UserStorageGateway::changeProfilePicture(const QString& authToken,
 
 void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
-                                          const QString& email)
+                                          const QString& email,
+                                          const QJsonArray& tags)
 {
     User user(firstName, lastName, email);
+
+    for(const auto& tag : tags)
+    {
+        auto jsonTagObject = tag.toObject();
+        renameJsonObjectKey(jsonTagObject, "guid", "uuid");
+
+        auto tagToAdd = Tag::fromJson(jsonTagObject);
+        user.addTag(tagToAdd);
+    }
+
     emit finishedGettingUser(user, true);
 }
 
@@ -57,6 +69,15 @@ void UserStorageGateway::reportFailureGettingUser()
 {
     User emptyUser;
     emit finishedGettingUser(emptyUser, false);
+}
+
+void UserStorageGateway::renameJsonObjectKey(QJsonObject& jsonObject,
+                                             const QString& oldKeyName,
+                                             const QString& newKeyName)
+{
+    auto temp = jsonObject[oldKeyName].toString();
+    jsonObject.remove(oldKeyName);
+    jsonObject.insert(newKeyName, temp);
 }
 
 }  // namespace adapters::gateways

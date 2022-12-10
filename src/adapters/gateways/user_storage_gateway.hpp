@@ -26,11 +26,14 @@ public:
 
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,
-                          const QString& email);
+                          const QString& email, const QJsonArray& tags);
 
     void reportFailureGettingUser();
 
 private:
+    void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
+                             const QString& newKeyName);
+
     IUserStorageAccess* m_userStorageAccess;
 };
 

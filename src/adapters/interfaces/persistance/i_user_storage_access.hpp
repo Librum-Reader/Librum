@@ -1,5 +1,6 @@
 #pragma once
 #include <QImage>
+#include <QJsonArray>
 #include <QObject>
 #include <QString>
 
@@ -27,8 +28,8 @@ public:
                                       const QImage& newProfilePicture) = 0;
 
 signals:
-    void userReady(const QString firstName, const QString lastName,
-                   const QString email);
+    void userReady(const QString& firstName, const QString& lastName,
+                   const QString& email, const QJsonArray& tags);
     void gettingUserFailed();
 };
 

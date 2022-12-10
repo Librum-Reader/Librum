@@ -118,6 +118,11 @@ void UserService::proccessUserInformation(const domain::models::User& user,
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
 
+    for(const auto& tag : user.getTags())
+    {
+        m_user.addTag(tag);
+    }
+
     emit finishedLoadingUser(true);
 }
 

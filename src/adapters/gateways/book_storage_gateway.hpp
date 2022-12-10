@@ -37,11 +37,9 @@ private:
     // E.g. the client calls IDs "uuid"s where as the api calls them "guid"s
     QJsonArray renameTagProperties(const QJsonArray& tags,
                                    TagNamingStyle namingStyle);
-
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 
-private:
     IBookStorageAccess* m_bookStorageAccess;
 };
 

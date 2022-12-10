@@ -1,5 +1,4 @@
 #include "user_storage_access.hpp"
-#include <QByteArray>
 #include <QJsonDocument>
 #include "endpoints.hpp"
 
@@ -72,8 +71,9 @@ void UserStorageAccess::proccessGetUserResult()
     auto firstName = jsonObj["firstName"].toString();
     auto lastName = jsonObj["lastName"].toString();
     auto email = jsonObj["email"].toString();
+    auto tags = jsonObj["tags"].toArray();
 
-    emit userReady(firstName, lastName, email);
+    emit userReady(firstName, lastName, email, tags);
 }
 
 QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
