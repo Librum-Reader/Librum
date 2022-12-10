@@ -5,6 +5,7 @@
 #include "book_dto.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
+#include "i_user_service.hpp"
 #include "library_model.hpp"
 
 namespace adapters::controllers
@@ -15,7 +16,8 @@ class BookController : public IBookController
     Q_OBJECT
 
 public:
-    BookController(application::IBookService* bookService);
+    BookController(application::IBookService* bookService,
+                   application::IUserService* userService);
 
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
@@ -39,6 +41,7 @@ private:
     dtos::BookDto getDtoFromBook(const domain::models::Book& book);
 
     application::IBookService* m_bookService;
+    application::IUserService* m_userService;  // For access to user tags
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
 

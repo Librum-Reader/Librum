@@ -79,7 +79,7 @@ int main(int argc, char* argv[])
 
     // Book-Stack
     auto bookService = config::diConfig().create<application::IBookService*>();
-    auto bookController = std::make_unique<BookController>(bookService);
+    auto bookController = std::make_unique<BookController>(bookService, userService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
