@@ -26,8 +26,18 @@ private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);
 
 private:
-    // The application uses 'uuid's but the api requests 'guid's
-    QJsonArray renameTagUuidsToGuids(const QJsonArray& tags);
+    enum class TagNamingStyle
+    {
+        ApiStyle,
+        ClientStyle
+    };
+
+private:
+    // The api and the client use different property names, convert as needed.
+    // E.g. the client calls IDs "uuid"s where as the api calls them "guid"s
+    QJsonArray renameTagProperties(const QJsonArray& tags,
+                                   TagNamingStyle namingStyle);
+
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 
