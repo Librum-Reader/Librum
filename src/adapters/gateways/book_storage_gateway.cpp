@@ -25,8 +25,13 @@ void BookStorageGateway::createBook(const QString& authToken,
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
 
-    // Change the key name "uuid" to "guid" since that's what the api wants
+    // Change the key name "uuid" to "guid" since that's what the api requests
     renameJsonObjectKey(jsonBook, "uuid", "guid");
+
+    // Again, change "uuid" to "guid" for every tag for the api request
+    auto tags = jsonBook["tags"].toArray();
+    auto fixedTags = renameTagUuidsToGuids(tags);
+    jsonBook["tags"] = fixedTags;
 
     m_bookStorageAccess->createBook(authToken, jsonBook);
 }
