@@ -76,6 +76,9 @@ bool User::addTag(const Tag& tag)
     if(tagPosition != m_tags.end())
         return false;
 
+    if(tag.getName().size() < 2)
+        return false;
+
     emit tagInsertionStarted(m_tags.size());
     m_tags.emplace_back(tag);
     emit tagInsertionEnded();
