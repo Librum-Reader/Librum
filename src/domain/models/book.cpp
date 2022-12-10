@@ -390,12 +390,12 @@ Book Book::fromJson(const QJsonObject& jsonObject)
     Book book(filePath, metaData, currentPage, uuid);
 
     // tags
-    //    QJsonArray tags = jsonObject["tags"].toArray();
-    //    for(const auto& tag : tags)
-    //    {
-    //        Tag tagToAdd = Tag::fromJson(tag.toObject());
-    //        book.addTag(tagToAdd);
-    //    }
+    QJsonArray tags = jsonObject["tags"].toArray();
+    for(const auto& tag : tags)
+    {
+        Tag tagToAdd = Tag::fromJson(tag.toObject());
+        book.addTag(tagToAdd);
+    }
 
     return book;
 }
