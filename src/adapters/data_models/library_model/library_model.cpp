@@ -135,7 +135,10 @@ QList<dtos::TagDto> LibraryModel::convertTagsToDtos(
     QList<dtos::TagDto> tagDtos;
     for(const auto& tag : tags)
     {
-        auto tagDto = dtos::TagDto { .name = tag.getName() };
+        auto tagDto = dtos::TagDto {
+            .uuid = tag.getUuid().toString(QUuid::WithoutBraces),
+            .name = tag.getName(),
+        };
         tagDtos.push_back(tagDto);
     }
 
