@@ -5,6 +5,7 @@ import CustomComponents 1.0
 import QtQml.Models 2.15
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Popup
@@ -69,26 +70,31 @@ Popup
                     boundsBehavior: Flickable.StopAtBounds
                     ScrollBar.vertical: ScrollBar { }
                     
-                    model: ListModel
-                    {
-                        ListElement { text: "Technology" }
-                        ListElement { text: "Favourite" }
-                        ListElement { text: "Romance" }
-                        ListElement { text: "Comedy" }
-                        ListElement { text: "Sports" }
-                        ListElement { text: "Physics" }
-                        ListElement { text: "Blockchain" }
-                        ListElement { text: "Psychology" }
-                    }
+                    model: UserController.tagsModel
                     
                     delegate: MBaseListItem
                     {
                         width: parent.width
                         containingListview: listView
                         
+                        function getContent()
+                        {
+                            return model.name;
+                        }
                         
                         onClicked:
-                            (mouse, index) => listView.selectItem(index);
+                            (mouse, index) => 
+                            {
+                                listView.selectItem(index);
+                                if(listView.itemAtIndex(index).selected)
+                                {
+                                    BookController.libraryModel.addFilterTag(getContent());
+                                }
+                                else
+                                {
+                                    BookController.libraryModel.removeFilterTag(getContent());
+                                }
+                            }
                         
                         onRightClicked:
                             (mouse, index) =>
@@ -174,6 +180,13 @@ Popup
         }
     }
     
+    function clearSelections()
+    {
+        for(let i = 0; i < listView.count; i++)
+        {
+            listView.itemAtIndex(i).selected = false;
+        }
+    }
     
     function hasAtLeastOneTagSelected()
     {
