@@ -174,6 +174,15 @@ Popup
                 
                 onClicked:
                 {
+                    let tagName = listView.itemAtIndex(tagOptionsPopup.index).getContent();
+                    let uuid = UserController.getTagUuidForName(tagName);
+                    
+                    let success = UserController.removeTag(uuid);
+                    if(success)
+                    {
+                        BookController.deleteAllTagsWithUuid(uuid);
+                    }
+                    
                     tagOptionsPopup.close();
                 }
             }
