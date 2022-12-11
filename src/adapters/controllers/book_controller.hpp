@@ -23,6 +23,7 @@ public:
     int updateBook(const QString& uuid, const QVariant& operations) override;
     int addTag(const QString& bookUuid, const QString& tagName,
                const QString& tagUuid) override;
+    void deleteAllTagsWithUuid(const QString& tagUuid) override;
     int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;

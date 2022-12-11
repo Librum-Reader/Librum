@@ -178,6 +178,18 @@ int BookController::addTag(const QString& bookUuid, const QString& tagName,
     return static_cast<int>(result);
 }
 
+void BookController::deleteAllTagsWithUuid(const QString& tagUuid)
+{
+    if(QUuid(tagUuid).isNull())
+        return;
+
+    auto& books = m_bookService->getBooks();
+    for(const auto& book : books)
+    {
+        m_bookService->removeTag(book.getUuid(), tagUuid);
+    }
+}
+
 int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
 {
     auto result = m_bookService->removeTag(bookUuid, tagUuid);
