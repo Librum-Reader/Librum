@@ -18,7 +18,7 @@ Tag::Tag(const QString& name, const QString& uuid) :
 
 bool Tag::operator==(const Tag& other) const
 {
-    return m_name == other.m_name;
+    return m_name == other.m_name && m_uuid == other.getUuid();
 }
 
 const QUuid& Tag::getUuid() const

@@ -75,6 +75,7 @@ public:
 
     int getPercentageRead() const;
 
+    domain::models::Tag* getTag(const QUuid& uuid);
     bool addTag(const Tag& tag);
     bool removeTag(const QUuid& uuid);
     const std::vector<Tag>& getTags() const;

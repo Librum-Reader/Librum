@@ -29,10 +29,11 @@ public:
     void setProfilePicture(const QImage& newProfilePicture);
 
     const std::vector<Tag>& getTags() const;
-    const Tag* getTag(const QString& tagName) const;
+    const Tag* getTagByName(const QString& tagName) const;
+    const Tag* getTagByUuid(const QUuid& uuid) const;
     bool addTag(const Tag& tag);
-    bool removeTag(const QString& tagName);
-    bool renameTag(const QString& oldName, const QString& newName);
+    bool removeTag(const QUuid& uuid);
+    bool renameTag(const QUuid& uuid, const QString& newName);
 
 signals:
     void tagInsertionStarted(int index);
@@ -48,7 +49,7 @@ private:
     QImage m_profilePicture;
     std::vector<Tag> m_tags;
 
-    int getTagIndex(const QString& tagName);
+    int getTagIndex(const QUuid& uuid);
 };
 
 }  // namespace domain::models

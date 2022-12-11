@@ -61,9 +61,26 @@ const std::vector<Tag>& User::getTags() const
     return m_tags;
 }
 
-const Tag* User::getTag(const QString& tagName) const
+const Tag* User::getTagByUuid(const QUuid& uuid) const
 {
-    auto tagPosition = std::ranges::find(m_tags, Tag(tagName));
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [&uuid](const Tag& tag)
+                                            {
+                                                return tag.getUuid() == uuid;
+                                            });
+    if(tagPosition == m_tags.end())
+        return nullptr;
+
+    return &(*tagPosition);
+}
+
+const Tag* User::getTagByName(const QString& tagName) const
+{
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [&tagName](const Tag& tag)
+                                            {
+                                                return tag.getName() == tagName;
+                                            });
     if(tagPosition == m_tags.end())
         return nullptr;
 
@@ -72,8 +89,8 @@ const Tag* User::getTag(const QString& tagName) const
 
 bool User::addTag(const Tag& tag)
 {
-    auto tagPosition = std::ranges::find(m_tags, tag);
-    if(tagPosition != m_tags.end())
+    auto tagPosition = getTagByName(tag.getName());
+    if(tagPosition != nullptr)
         return false;
 
     if(tag.getName().size() < 2)
@@ -86,37 +103,39 @@ bool User::addTag(const Tag& tag)
     return true;
 }
 
-bool User::removeTag(const QString& tagName)
+bool User::removeTag(const QUuid& uuid)
 {
-    auto tagPosition = std::ranges::find(m_tags, Tag(tagName));
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [uuid](const Tag& tag)
+                                            {
+                                                return tag.getUuid() == uuid;
+                                            });
     if(tagPosition == m_tags.end())
         return false;
 
-    auto index = getTagIndex(tagName);
-
-    emit tagDeletionStarted(index);
+    emit tagDeletionStarted(getTagIndex(uuid));
     m_tags.erase(tagPosition);
     emit tagDeletionEnded();
 
     return true;
 }
 
-bool User::renameTag(const QString& oldName, const QString& newName)
+bool User::renameTag(const QUuid& uuid, const QString& newName)
 {
-    auto tagPosition = std::ranges::find(m_tags, Tag(oldName));
-    if(tagPosition == m_tags.end())
+    auto tag = getTagByUuid(uuid);
+    if(tag == nullptr)
         return false;
 
-    auto index = getTagIndex(oldName);
+    auto index = getTagIndex(uuid);
     m_tags[index].setName(newName);
     emit tagsChanged(index);
 
     return true;
 }
 
-int User::getTagIndex(const QString& tagName)
+int User::getTagIndex(const QUuid& uuid)
 {
-    auto* tag = getTag(tagName);
+    auto tag = getTagByUuid(uuid);
     if(!tag)
         return -1;
 
