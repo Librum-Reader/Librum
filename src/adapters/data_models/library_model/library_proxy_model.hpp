@@ -57,6 +57,7 @@ private:
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";
+    QString m_tag = "";
     SortRole m_sortRole = SortRole::RecentlyAdded;
 };
 

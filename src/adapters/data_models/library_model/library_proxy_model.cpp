@@ -5,6 +5,7 @@
 #include <rapidfuzz/fuzz.hpp>
 #include "book.hpp"
 #include "library_model.hpp"
+#include "tag_dto.hpp"
 
 using domain::models::Book;
 
@@ -69,6 +70,17 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
                                          const QModelIndex& source_parent) const
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
+
+    // tags
+    auto tags = sourceModel()->data(index, LibraryModel::TagsRole).toList();
+    auto v = std::ranges::find_if(tags,
+                                  [this](const QVariant& tag)
+                                  {
+                                      auto x = qvariant_cast<dtos::TagDto>(tag);
+                                      return m_tag == x.name;
+                                  });
+    if(!m_tag.isEmpty() && v == std::end(tags))
+        return false;
 
     auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
     auto authors = authorsData.toString().toLower();
