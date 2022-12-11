@@ -78,6 +78,10 @@ Item
         }
     }
     
+    function clearSelections()
+    {
+        selectionPopup.clearSelections();
+    }
     
     function giveFocus()
     {
