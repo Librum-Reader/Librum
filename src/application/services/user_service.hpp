@@ -30,8 +30,8 @@ public:
 
     const std::vector<domain::models::Tag>& getTags() const override;
     QUuid addTag(const domain::models::Tag& tag) override;
-    bool removeTag(const QString& tagName) override;
-    bool renameTag(const QString& oldName, const QString& newName) override;
+    bool removeTag(const QUuid& uuid) override;
+    bool renameTag(const QUuid& uuid, const QString& newName) override;
 
 
 public slots:

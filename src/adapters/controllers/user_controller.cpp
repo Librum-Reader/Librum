@@ -43,9 +43,9 @@ QString UserController::addTag(const QString& name)
     return uuid.toString();
 }
 
-bool UserController::removeTag(const QString& name)
+bool UserController::removeTag(const QString& uuid)
 {
-    auto result = m_userService->removeTag(name);
+    auto result = m_userService->removeTag(uuid);
     return result;
 }
 

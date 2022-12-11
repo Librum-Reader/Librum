@@ -90,22 +90,22 @@ const std::vector<domain::models::Tag>& UserService::getTags() const
 QUuid UserService::addTag(const domain::models::Tag& tag)
 {
     m_user.addTag(tag);
-    auto userTag = m_user.getTag(tag.getName());
+    auto userTag = m_user.getTagByName(tag.getName());
     if(!userTag)
         return QUuid();
 
     return userTag->getUuid();
 }
 
-bool UserService::removeTag(const QString& tagName)
+bool UserService::removeTag(const QUuid& uuid)
 {
-    auto success = m_user.removeTag(tagName);
+    auto success = m_user.removeTag(uuid);
     return success;
 }
 
-bool UserService::renameTag(const QString& oldName, const QString& newName)
+bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 {
-    auto success = m_user.renameTag(oldName, newName);
+    auto success = m_user.renameTag(uuid, newName);
     return success;
 }
 

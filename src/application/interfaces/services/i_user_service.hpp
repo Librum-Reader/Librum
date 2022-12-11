@@ -35,8 +35,8 @@ public:
 
     virtual const std::vector<domain::models::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::models::Tag& tag) = 0;
-    virtual bool removeTag(const QString& tagName) = 0;
-    virtual bool renameTag(const QString& oldName, const QString& newName) = 0;
+    virtual bool removeTag(const QUuid& uuid) = 0;
+    virtual bool renameTag(const QUuid& uuid, const QString& newName) = 0;
 
 signals:
     void finishedLoadingUser(bool success);
