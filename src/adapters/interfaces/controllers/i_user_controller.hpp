@@ -29,6 +29,7 @@ public:
 
     Q_INVOKABLE virtual void loadUser() = 0;
 
+    Q_INVOKABLE virtual QString getTagUuidForName(const QString& name) = 0;
     Q_INVOKABLE virtual QString addTag(const QString& name) = 0;
     Q_INVOKABLE virtual bool removeTag(const QString& uuid) = 0;
     Q_INVOKABLE virtual bool renameTag(const QString& oldName,

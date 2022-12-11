@@ -37,6 +37,17 @@ void UserController::loadUser()
     m_userService->loadUser();
 }
 
+QString UserController::getTagUuidForName(const QString& name)
+{
+    for(const auto& tag : m_userService->getTags())
+    {
+        if(tag.getName() == name)
+            return tag.getUuid().toString();
+    }
+
+    return "";
+}
+
 QString UserController::addTag(const QString& name)
 {
     QUuid uuid = m_userService->addTag(name);
