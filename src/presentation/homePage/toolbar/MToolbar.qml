@@ -87,6 +87,8 @@ Item
             
             function resetTags()
             {
+                tagSelector.clearSelections();
+                BookController.libraryModel.clearFilterTags();
                 visible = false;
             }
         }
