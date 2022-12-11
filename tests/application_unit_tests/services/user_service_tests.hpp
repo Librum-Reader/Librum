@@ -178,7 +178,7 @@ TEST_F(AUserService, SucceedsAddingATag)
     auto tagCountAfterAdding = userService->getTags().size();
 
     // Assert
-    EXPECT_TRUE(result);
+    EXPECT_EQ(tag.getUuid(), result);
     EXPECT_EQ(tagCountAfterAdding, 1);
 }
 
@@ -194,7 +194,7 @@ TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
     auto tagCountAfterAdding = userService->getTags().size();
 
     // Assert
-    EXPECT_FALSE(result);
+    EXPECT_EQ(tag.getUuid(), result);
     EXPECT_EQ(tagCountAfterAdding, 1);
 }
 
@@ -206,7 +206,7 @@ TEST_F(AUserService, SucceedsRemovingATag)
 
 
     // Act
-    auto result = userService->removeTag(tag.getName());
+    auto result = userService->removeTag(tag.getUuid());
     auto tagCountAfterAdding = userService->getTags().size();
 
     // Assert
@@ -233,7 +233,7 @@ TEST_F(AUserService, SucceedsRenamingATag)
 
 
     // Act
-    auto result = userService->renameTag(tagName, newTagName);
+    auto result = userService->renameTag(tag.getUuid(), newTagName);
     auto resultTags = userService->getTags();
 
     // Assert
@@ -248,7 +248,7 @@ TEST_F(AUserService, FailsRenamingATagIfTagDoesNotExist)
 
 
     // Act
-    auto result = userService->renameTag("NonExistentTag", newTagName);
+    auto result = userService->renameTag("NonExistentTagUuid", newTagName);
 
     // Assert
     EXPECT_FALSE(result);

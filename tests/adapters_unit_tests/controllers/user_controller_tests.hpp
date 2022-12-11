@@ -36,9 +36,9 @@ public:
     MOCK_METHOD(void, clearAuthenticationToken, (), (override));
     MOCK_METHOD(const std::vector<domain::models::Tag>&, getTags, (),
                 (const, override));
-    MOCK_METHOD(bool, addTag, (const domain::models::Tag&), (override));
-    MOCK_METHOD(bool, removeTag, (const QString&), (override));
-    MOCK_METHOD(bool, renameTag, (const QString&, const QString&), (override));
+    MOCK_METHOD(QUuid, addTag, (const domain::models::Tag&), (override));
+    MOCK_METHOD(bool, removeTag, (const QUuid&), (override));
+    MOCK_METHOD(bool, renameTag, (const QUuid&, const QString&), (override));
 };
 
 struct AUserController : public ::testing::Test

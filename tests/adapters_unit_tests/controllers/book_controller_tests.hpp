@@ -310,7 +310,8 @@ TEST_F(ABookController, SucceedsAddingATag)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
-
+    QString bookUuid = QUuid::createUuid().toString();
+    QString tagUuid = QUuid::createUuid().toString();
 
     // Expect
     EXPECT_CALL(bookServiceMock, addTag(_, _))
@@ -318,7 +319,7 @@ TEST_F(ABookController, SucceedsAddingATag)
         .WillOnce(Return(BookOperationStatus::Success));
 
     // Act
-    auto result = bookController->addTag("some-book-uuid", "SomeTag");
+    auto result = bookController->addTag(bookUuid, "SomeTag", tagUuid);
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -328,6 +329,8 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
+    QString bookUuid = QUuid::createUuid().toString();
+    QString tagUuid = QUuid::createUuid().toString();
 
 
     // Expect
@@ -336,7 +339,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
         .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
 
     // Act
-    auto result = bookController->addTag("some-book-uuid", "SomeTag");
+    auto result = bookController->addTag(bookUuid, "SomeTag", tagUuid);
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);

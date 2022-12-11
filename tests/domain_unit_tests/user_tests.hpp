@@ -17,7 +17,7 @@ TEST(AUser, SucceedsAddingATag)
 
     // Act
     auto result = user.addTag(tag);
-    auto tagResult = user.getTag(tag.getName());
+    auto tagResult = user.getTagByUuid(tag.getUuid());
     auto tagAmountAfterAdding = user.getTags().size();
 
     // Assert
@@ -54,8 +54,8 @@ TEST(AUser, SucceedsRemovingATag)
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    auto result = user.removeTag(tag.getName());
-    auto tagResult = user.getTag(tag.getName());
+    auto result = user.removeTag(tag.getUuid());
+    auto tagResult = user.getTagByUuid(tag.getUuid());
     auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
@@ -72,7 +72,7 @@ TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    auto result = user.removeTag("NonExistantTag");
+    auto result = user.removeTag("NonExistantTagUuid");
     auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
@@ -84,14 +84,14 @@ TEST(AUser, SucceedsRenamingATag)
 {
     // Arrange
     User user;
-    QString newTagName = "SomeNewTag";
     QString tagName = "SomeTag";
     Tag tag(tagName);
+    QString newTagName = "SomeNewTag";
     user.addTag(tag);
 
     // Act
-    auto result = user.renameTag(tag.getName(), newTagName);
-    auto tagResult = user.getTag(newTagName);
+    auto result = user.renameTag(tag.getUuid(), newTagName);
+    auto tagResult = user.getTagByUuid(tag.getUuid());
 
     // Assert
     EXPECT_TRUE(result);
@@ -105,8 +105,8 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
     QString newTagName = "NewTagName";
 
     // Act
-    auto result = user.renameTag("NonExistantTag", newTagName);
-    auto tagResult = user.getTag(newTagName);
+    auto result = user.renameTag("NonExistantTagUuid", newTagName);
+    auto tagResult = user.getTagByName(newTagName);
 
     // Assert
     EXPECT_FALSE(result);
@@ -128,30 +128,32 @@ TEST(AUser, SucceedsGettingTags)
     EXPECT_EQ(tagCount, 3);
 }
 
-TEST(AUser, SucceedsGettingATag)
+TEST(AUser, SucceedsGettingATagByName)
 {
     // Arrange
     User user;
-    QString tagName = "SomeTag";
-    user.addTag(Tag(tagName));
+    Tag tag("SomeTag");
+    user.addTag(tag);
 
     // Act
-    auto result = user.getTag(tagName);
+    auto result = user.getTagByName(tag.getName());
 
     // Assert
-    EXPECT_EQ(result->getName(), tagName);
+    EXPECT_EQ(*result, tag);
 }
 
-TEST(AUser, FailsGettingATagIfTheTagDoesNotExist)
+TEST(AUser, SucceedsGettingATagByUuid)
 {
     // Arrange
     User user;
+    Tag tag("SomeTag");
+    user.addTag(tag);
 
     // Act
-    auto result = user.getTag("NonExistentTag");
+    auto result = user.getTagByUuid(tag.getUuid());
 
     // Assert
-    EXPECT_EQ(result, nullptr);
+    EXPECT_EQ(*result, tag);
 }
 
 }  // namespace tests::domain
