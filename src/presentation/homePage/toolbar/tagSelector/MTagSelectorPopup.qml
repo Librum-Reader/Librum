@@ -86,14 +86,6 @@ Popup
                             (mouse, index) => 
                             {
                                 listView.selectItem(index);
-                                if(listView.itemAtIndex(index).selected)
-                                {
-                                    BookController.libraryModel.addFilterTag(getContent());
-                                }
-                                else
-                                {
-                                    BookController.libraryModel.removeFilterTag(getContent());
-                                }
                             }
                         
                         onRightClicked:
@@ -120,6 +112,15 @@ Popup
                     {
                         listView.currentIndex = index;
                         listView.currentItem.selected = !listView.currentItem.selected;
+                        
+                        if(listView.itemAtIndex(index).selected)
+                        {
+                            BookController.libraryModel.addFilterTag(listView.currentItem.getContent());
+                        }
+                        else
+                        {
+                            BookController.libraryModel.removeFilterTag(listView.currentItem.getContent());
+                        }
                     }
                 }
             }
@@ -146,7 +147,6 @@ Popup
                 
                 onClicked:
                 {
-                    
                     listView.selectItem(tagOptionsPopup.index);
                     tagOptionsPopup.close();
                 }
