@@ -1,5 +1,6 @@
 #pragma once
 #include <QSortFilterProxyModel>
+#include <vector>
 #include "filter_request.hpp"
 
 namespace adapters::data_models
@@ -37,6 +38,9 @@ public:
     Q_INVOKABLE void setFilterRequest(QString authors, QString format,
                                       QString date, bool onlyBooks,
                                       bool onlyFiles, bool read, bool unread);
+    Q_INVOKABLE void addFilterTag(QString tag);
+    Q_INVOKABLE void removeFilterTag(QString tag);
+    Q_INVOKABLE void clearFilterTags();
 
     void setSortRole(int newRole);
     int getSortRole();
@@ -57,7 +61,7 @@ private:
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";
-    QString m_tag = "";
+    std::vector<QString> m_tags;
     SortRole m_sortRole = SortRole::RecentlyAdded;
 };
 

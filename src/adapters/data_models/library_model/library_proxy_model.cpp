@@ -1,6 +1,7 @@
 #include "library_proxy_model.hpp"
 #include <QAbstractItemModel>
 #include <QDebug>
+#include <algorithm>
 #include <numeric>
 #include <rapidfuzz/fuzz.hpp>
 #include "book.hpp"
@@ -8,6 +9,7 @@
 #include "tag_dto.hpp"
 
 using domain::models::Book;
+using domain::models::Tag;
 
 namespace adapters::data_models
 {
@@ -72,14 +74,29 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
     // tags
-    auto tags = sourceModel()->data(index, LibraryModel::TagsRole).toList();
-    auto v = std::ranges::find_if(tags,
-                                  [this](const QVariant& tag)
-                                  {
-                                      auto x = qvariant_cast<dtos::TagDto>(tag);
-                                      return m_tag == x.name;
-                                  });
-    if(!m_tag.isEmpty() && v == std::end(tags))
+    auto qTags = sourceModel()
+                     ->data(index, LibraryModel::TagsRole)
+                     .value<QList<dtos::TagDto>>();
+    std::vector<dtos::TagDto> tags;
+    for(auto tag : qTags)
+    {
+        tags.emplace_back(std::move(tag));
+    }
+
+    bool v = std::ranges::all_of(m_tags,
+                                 [&tags](const QString& tagName)
+                                 {
+                                     auto pos = std::ranges::find_if(
+                                         tags,
+                                         [&tagName](const dtos::TagDto& tag)
+                                         {
+                                             return tag.name == tagName;
+                                         });
+
+                                     return pos != std::end(tags);
+                                 });
+
+    if(!m_tags.empty() && !v)
         return false;
 
     auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
@@ -158,6 +175,28 @@ void LibraryProxyModel::setFilterRequest(QString authors, QString format,
         .unread = unread,
     };
 
+    invalidateFilter();
+}
+
+void LibraryProxyModel::addFilterTag(QString tag)
+{
+    m_tags.emplace_back(tag);
+    invalidateFilter();
+}
+
+void LibraryProxyModel::removeFilterTag(QString tagToRemove)
+{
+    auto pos = std::ranges::find(m_tags, tagToRemove);
+    if(pos == m_tags.end())
+        return;
+
+    m_tags.erase(pos);
+    invalidateFilter();
+}
+
+void LibraryProxyModel::clearFilterTags()
+{
+    m_tags.clear();
     invalidateFilter();
 }
 
