@@ -30,8 +30,8 @@ public:
     void changeProfilePicture(const QString& authToken,
                               const QImage& newProfilePicture) override;
     void addTag(const QString& authToken, const QJsonObject& tag) override;
-    void removeTag(const QString& authToken, const QUuid& uuid) override;
-    void renameTag(const QString& authToken, const QUuid& uuid,
+    void removeTag(const QString& authToken, const QString& uuid) override;
+    void renameTag(const QString& authToken, const QString& uuid,
                    const QString& newName) override;
 
 private slots:

@@ -67,15 +67,15 @@ void UserStorageAccess::addTag(const QString& authToken, const QJsonObject& tag)
     m_networkAccessManager.post(request, data);
 }
 
-void UserStorageAccess::removeTag(const QString& authToken, const QUuid& uuid)
+void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
 {
-    QString endPoint = data::addTagEndpoint + "/" + uuid.toString();
+    QString endPoint = data::addTagEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     m_networkAccessManager.sendCustomRequest(request, "DELETE");
 }
 
-void UserStorageAccess::renameTag(const QString& authToken, const QUuid& uuid,
+void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
                                   const QString& newName)
 {
     Q_UNUSED(authToken);
