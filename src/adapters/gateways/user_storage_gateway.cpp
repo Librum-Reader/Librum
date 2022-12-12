@@ -57,13 +57,13 @@ void UserStorageGateway::addTag(const QString& authToken, const Tag& tag)
 
 void UserStorageGateway::removeTag(const QString& authToken, const QUuid& uuid)
 {
-    m_userStorageAccess->removeTag(authToken, uuid);
+    m_userStorageAccess->removeTag(authToken, uuid.toString());
 }
 
 void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
                                    const QString& newName)
 {
-    m_userStorageAccess->renameTag(authToken, uuid, newName);
+    m_userStorageAccess->renameTag(authToken, uuid.toString(), newName);
 }
 
 void UserStorageGateway::proccessUserData(const QString& firstName,
