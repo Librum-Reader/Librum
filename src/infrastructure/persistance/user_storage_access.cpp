@@ -56,6 +56,21 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     // TODO: Implement when filestorage server is up
 }
 
+void UserStorageAccess::addTag(const QString& authToken, const QJsonObject& tag)
+{
+    
+}
+
+void UserStorageAccess::removeTag(const QString& authToken, const QUuid& uuid)
+{
+    
+}
+
+void UserStorageAccess::renameTag(const QString& authToken, const QUuid& uuid, const QString& newName)
+{
+    
+}
+
 void UserStorageAccess::proccessGetUserResult()
 {
     int expectedStatusCode = 200;

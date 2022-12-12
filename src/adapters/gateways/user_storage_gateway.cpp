@@ -46,6 +46,19 @@ void UserStorageGateway::changeProfilePicture(const QString& authToken,
     m_userStorageAccess->changeProfilePicture(authToken, newPicture);
 }
 
+void UserStorageGateway::addTag(const QString& authToken, const Tag& tag)
+{
+}
+
+void UserStorageGateway::removeTag(const QString& authToken, const QUuid& uuid)
+{
+}
+
+void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
+                                   const QString& newName)
+{
+}
+
 void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email,

@@ -23,6 +23,11 @@ public:
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
                               const QImage& newPicture) override;
+    void addTag(const QString& authToken,
+                const domain::models::Tag& tag) override;
+    void removeTag(const QString& authToken, const QUuid& uuid) override;
+    void renameTag(const QString& authToken, const QUuid& uuid,
+                   const QString& newName) override;
 
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,

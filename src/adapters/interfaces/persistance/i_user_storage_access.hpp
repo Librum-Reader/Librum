@@ -1,6 +1,7 @@
 #pragma once
 #include <QImage>
 #include <QJsonArray>
+#include <QJsonObject>
 #include <QObject>
 #include <QString>
 
@@ -26,6 +27,10 @@ public:
                              const QString& newEmail) = 0;
     virtual void changeProfilePicture(const QString& authToken,
                                       const QImage& newProfilePicture) = 0;
+    virtual void addTag(const QString& authToken, const QJsonObject& tag) = 0;
+    virtual void removeTag(const QString& authToken, const QUuid& uuid) = 0;
+    virtual void renameTag(const QString& authToken, const QUuid& uuid,
+                           const QString& newName) = 0;
 
 signals:
     void userReady(const QString& firstName, const QString& lastName,
