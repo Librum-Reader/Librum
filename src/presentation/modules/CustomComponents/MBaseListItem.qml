@@ -17,6 +17,7 @@ Item
     property int checkBoxImageSize: 9
     property int padding: 8
     property bool checkBoxStyle: true
+    property bool renameable: false
     signal clicked(var mouse, int index)
     signal rightClicked(var mouse, int index)
     signal hovered(int index)
@@ -61,17 +62,24 @@ Item
                 imageSize: root.checkBoxImageSize
             }
             
-            Label
+            TextField
             {
                 id: content
                 horizontalAlignment: Text.AlignLeft
+                verticalAlignment: Text.AlignVCenter
                 Layout.fillWidth: true
-                topPadding: -1
+                padding: 0
+                leftPadding: 0
+                bottomPadding: 1
                 color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
                 text: root.getContent()
                 font.pointSize: root.fontSize
                 font.weight: root.selected ? Font.DemiBold : Font.Medium
-                elide: Text.ElideRight
+                background: Rectangle
+                {
+                    border.width: 0
+                    color: "transparent"
+                }
             }
         }
     }
