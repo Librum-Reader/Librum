@@ -29,8 +29,6 @@ public:
                              const QString& newEmail) = 0;
     virtual void changeProfilePicture(const QString& authToken,
                                       const QImage& newPicture) = 0;
-    virtual void addTag(const QString& authToken,
-                        const domain::models::Tag& tag) = 0;
     virtual void removeTag(const QString& authToken, const QUuid& uuid) = 0;
     virtual void renameTag(const QString& authToken, const QUuid& uuid,
                            const QString& newName) = 0;

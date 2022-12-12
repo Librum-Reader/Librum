@@ -94,7 +94,6 @@ QUuid UserService::addTag(const domain::models::Tag& tag)
     if(!userTag)
         return QUuid();
 
-    m_userStorageGateway->addTag(m_authenticationToken, tag);
     return userTag->getUuid();
 }
 

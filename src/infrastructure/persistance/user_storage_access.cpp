@@ -57,19 +57,9 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     // TODO: Implement when filestorage server is up
 }
 
-void UserStorageAccess::addTag(const QString& authToken, const QJsonObject& tag)
-{
-    auto request = createRequest(data::addTagEndpoint, authToken);
-
-    QJsonDocument jsonDocument(tag);
-    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
-
-    m_networkAccessManager.post(request, data);
-}
-
 void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
 {
-    QString endPoint = data::addTagEndpoint + "/" + uuid;
+    QString endPoint = data::deleteTagEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     m_networkAccessManager.sendCustomRequest(request, "DELETE");
