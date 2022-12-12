@@ -94,18 +94,23 @@ QUuid UserService::addTag(const domain::models::Tag& tag)
     if(!userTag)
         return QUuid();
 
+    m_userStorageGateway->addTag(m_authenticationToken, tag);
     return userTag->getUuid();
 }
 
 bool UserService::removeTag(const QUuid& uuid)
 {
     auto success = m_user.removeTag(uuid);
+    m_userStorageGateway->removeTag(m_authenticationToken, uuid);
+
     return success;
 }
 
 bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 {
     auto success = m_user.renameTag(uuid, newName);
+    m_userStorageGateway->renameTag(m_authenticationToken, uuid, newName);
+
     return success;
 }
 
