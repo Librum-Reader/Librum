@@ -242,7 +242,7 @@ Popup
                     {
                         id: inputSideLayout
                         anchors.fill: parent
-                        anchors.topMargin: -5
+                        anchors.topMargin: 0
                         anchors.rightMargin: -10
                         anchors.leftMargin: 26
                         contentWidth: width
@@ -261,7 +261,7 @@ Popup
                             width: parent.width - 18
                             height: parent.height
                             anchors.rightMargin: 8
-                            spacing: 15
+                            spacing: 13
                             
                             
                             MLabeledInputBox
@@ -319,36 +319,6 @@ Popup
                                 borderWidth: 1
                                 borderRadius: 4
                                 readOnly: true
-                            }
-                            
-                            MComboBox
-                            {
-                                id: tagsComboBox
-                                property var tags: Globals.bookTags
-                                property int prevModelCount: 0
-                                onTagsChanged: setTagsModel()
-                                
-                                Layout.fillWidth: true
-                                Layout.preferredHeight: 53
-                                multiSelect: true
-                                headerText: "Tags"
-                                titleEmptyText: "None"
-                                headerFontSize: 11.5
-                                headerFontColor: Style.colorBaseTitle
-                                image: Icons.dropdownGray
-                                imageSize: 9
-                                maxHeight: 200
-                                model: ListModel {}
-                                
-                                function setTagsModel()
-                                {
-                                    tagsComboBox.model.clear();
-                                    
-                                    for(let i = 0; i < Globals.bookTags.length; i++)
-                                    {
-                                        tagsComboBox.model.append({"text":Globals.bookTags[i].name});
-                                    }
-                                }
                             }
                             
                             MComboBox
