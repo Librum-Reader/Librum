@@ -99,6 +99,15 @@ Popup
                                 tagOptionsPopup.index = index;
                                 tagOptionsPopup.open();
                             }
+                        
+                        onRenamed: (index, text) =>
+                                   {
+                                       let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+                                       let tagName = currentItem.getContent();
+                                       let uuid = UserController.getTagUuidForName(tagName);
+                                       
+                                       UserController.renameTag(uuid, text);
+                                   }
                     }
                     
                     Keys.onReturnPressed:
@@ -132,6 +141,7 @@ Popup
     {
         id: tagOptionsPopup
         property int index
+        property string originalTextOfLastEdited
         
         visible: false
         
@@ -161,7 +171,10 @@ Popup
                 
                 onClicked:
                 {
-                    listView.itemAtIndex(tagOptionsPopup.index).renameable = true;
+                    let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+                    tagOptionsPopup.originalTextOfLastEdited = currentItem.getContent();
+                    
+                    currentItem.renameable = true;
                     tagOptionsPopup.close();
                 }
             }
