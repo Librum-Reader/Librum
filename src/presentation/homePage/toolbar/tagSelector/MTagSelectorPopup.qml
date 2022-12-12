@@ -74,7 +74,7 @@ Popup
                     
                     delegate: MBaseListItem
                     {
-                        width: parent.width
+                        width: listView.width
                         containingListview: listView
                         
                         function getContent()
