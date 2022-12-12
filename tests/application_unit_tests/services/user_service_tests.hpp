@@ -31,6 +31,12 @@ public:
     MOCK_METHOD(void, changeProfilePicture,
                 (const QString& authToken, const QImage& newPicture),
                 (override));
+    MOCK_METHOD(void, addTag, (const QString&, const domain::models::Tag&),
+                (override));
+    MOCK_METHOD(void, removeTag, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, renameTag,
+                (const QString&, const QUuid&, const QString& newName),
+                (override));
 };
 
 struct AUserService : public ::testing::Test
