@@ -126,6 +126,9 @@ bool User::renameTag(const QUuid& uuid, const QString& newName)
     if(tag == nullptr)
         return false;
 
+    if(getTagByName(newName) != nullptr)
+        return false;
+
     auto index = getTagIndex(uuid);
     m_tags[index].setName(newName);
     emit tagsChanged(index);
