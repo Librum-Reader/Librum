@@ -1,5 +1,6 @@
 #include "user_storage_access.hpp"
 #include <QJsonDocument>
+#include <QJsonObject>
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -58,17 +59,28 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
 
 void UserStorageAccess::addTag(const QString& authToken, const QJsonObject& tag)
 {
-    
+    auto request = createRequest(data::addTagEndpoint, authToken);
+
+    QJsonDocument jsonDocument(tag);
+    QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
+
+    m_networkAccessManager.post(request, data);
 }
 
 void UserStorageAccess::removeTag(const QString& authToken, const QUuid& uuid)
 {
-    
+    QString endPoint = data::addTagEndpoint + "/" + uuid.toString();
+    auto request = createRequest(endPoint, authToken);
+
+    m_networkAccessManager.sendCustomRequest(request, "DELETE");
 }
 
-void UserStorageAccess::renameTag(const QString& authToken, const QUuid& uuid, const QString& newName)
+void UserStorageAccess::renameTag(const QString& authToken, const QUuid& uuid,
+                                  const QString& newName)
 {
-    
+    Q_UNUSED(authToken);
+    Q_UNUSED(uuid);
+    Q_UNUSED(newName);
 }
 
 void UserStorageAccess::proccessGetUserResult()
