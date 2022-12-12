@@ -60,9 +60,9 @@ bool UserController::removeTag(const QString& uuid)
     return result;
 }
 
-bool UserController::renameTag(const QString& oldName, const QString& newName)
+bool UserController::renameTag(const QString& uuid, const QString& newName)
 {
-    auto result = m_userService->renameTag(oldName, newName);
+    auto result = m_userService->renameTag(uuid, newName);
     return result;
 }
 
