@@ -1,4 +1,5 @@
 #include "user_storage_gateway.hpp"
+#include <QJsonDocument>
 #include <QJsonObject>
 
 
@@ -48,15 +49,21 @@ void UserStorageGateway::changeProfilePicture(const QString& authToken,
 
 void UserStorageGateway::addTag(const QString& authToken, const Tag& tag)
 {
+    auto jsonDoc = QJsonDocument::fromJson(tag.toJson());
+    auto jsonObj = jsonDoc.object();
+
+    m_userStorageAccess->addTag(authToken, jsonObj);
 }
 
 void UserStorageGateway::removeTag(const QString& authToken, const QUuid& uuid)
 {
+    m_userStorageAccess->removeTag(authToken, uuid);
 }
 
 void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
                                    const QString& newName)
 {
+    m_userStorageAccess->renameTag(authToken, uuid, newName);
 }
 
 void UserStorageGateway::proccessUserData(const QString& firstName,
