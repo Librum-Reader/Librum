@@ -147,9 +147,7 @@ Popup
                 onClicked:
                 {
                     let tagName = listView.itemAtIndex(rightClickMenu.index).getContent();
-                    console.log("Deleting name: " + tagName);
                     let uuid = UserController.getTagUuidForName(tagName);
-                    console.log("Uuid is: " + uuid);
                     
                     let success = UserController.removeTag(uuid);
                     if(success)
