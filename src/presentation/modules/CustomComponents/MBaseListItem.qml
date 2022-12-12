@@ -21,10 +21,26 @@ Item
     signal clicked(var mouse, int index)
     signal rightClicked(var mouse, int index)
     signal hovered(int index)
+    signal renamed(int index, string text)
     
     function getContent()
     {
         return model.text;
+    }
+    
+    onRenameableChanged:
+    {
+        if(renameable)
+        {
+            content.readOnly = false;
+            content.forceActiveFocus();
+            content.selectAll()
+        }
+        else
+        {
+            content.readOnly = true;
+            root.forceActiveFocus();
+        }
     }
     
     implicitWidth: 137
@@ -69,6 +85,7 @@ Item
                 verticalAlignment: Text.AlignVCenter
                 Layout.fillWidth: true
                 padding: 0
+                readOnly: true
                 leftPadding: 0
                 bottomPadding: 1
                 color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
@@ -79,6 +96,12 @@ Item
                 {
                     border.width: 0
                     color: "transparent"
+                }
+                
+                onEditingFinished:
+                {
+                    root.renamed(model.index, content.text);
+                    root.renameable = false;
                 }
             }
         }

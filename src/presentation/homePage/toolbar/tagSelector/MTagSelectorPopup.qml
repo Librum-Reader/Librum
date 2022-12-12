@@ -161,6 +161,7 @@ Popup
                 
                 onClicked:
                 {
+                    listView.itemAtIndex(tagOptionsPopup.index).renameable = true;
                     tagOptionsPopup.close();
                 }
             }
