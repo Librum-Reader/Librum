@@ -98,10 +98,13 @@ Item
                     color: "transparent"
                 }
                 
-                onEditingFinished:
+                onAccepted:
                 {
                     root.renamed(model.index, content.text);
                     root.renameable = false;
+                    
+                    // Make sure its bound to the model text after editing
+                    content.text = Qt.binding(function() { return root.getContent() });
                 }
             }
         }
