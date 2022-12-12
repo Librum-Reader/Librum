@@ -22,6 +22,10 @@ inline const QString getBooksMetadataEndpoint { baseUrl + "/api/book/get" };
 inline const QString getUserEndpoint { baseUrl + "/api/user" };
 inline const QString patchUserEndpoint { baseUrl + "/api/user" };
 
+// Tag storage
+inline const QString addTagEndpoint { baseUrl + "/api/tag" };
+inline const QString deleteTagEndpoint { baseUrl + "/api/tag" };
+
 
 // clang-format on
 }  // namespace infrastructure::data
