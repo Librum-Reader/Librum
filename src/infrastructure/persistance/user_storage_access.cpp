@@ -66,11 +66,15 @@ void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
 }
 
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
-                                  const QString& newName)
+                                  const QJsonObject& bookForUpdate)
 {
-    Q_UNUSED(authToken);
-    Q_UNUSED(uuid);
-    Q_UNUSED(newName);
+    QString endPoint = data::updateTagEndpoint + "/" + uuid;
+    auto request = createRequest(endPoint, authToken);
+
+    QJsonDocument jsonDoc(bookForUpdate);
+    QByteArray jsonData = jsonDoc.toJson(QJsonDocument::Compact);
+
+    m_networkAccessManager.sendCustomRequest(request, "PUT", jsonData);
 }
 
 void UserStorageAccess::proccessGetUserResult()
