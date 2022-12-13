@@ -24,6 +24,7 @@ inline const QString patchUserEndpoint { baseUrl + "/api/user" };
 
 // Tag storage
 inline const QString addTagEndpoint { baseUrl + "/api/tag/create" };
+inline const QString updateTagEndpoint { baseUrl + "/api/tag" };
 inline const QString deleteTagEndpoint { baseUrl + "/api/tag" };
 
 
