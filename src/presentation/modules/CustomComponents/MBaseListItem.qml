@@ -125,7 +125,6 @@ Item
     
     function startRenaming()
     {
-        console.log("Selected");
         content.readOnly = false;
         content.forceActiveFocus();
         content.selectAll();
@@ -135,10 +134,9 @@ Item
     
     function stopRenaming(saveText = true)
     {
-        console.log("NOT Selected");
         content.readOnly = true;
         content.select(0,0);
-        root.forceActiveFocus();  // Remove focus from input
+        root.forceActiveFocus();  // Remove focus from text input
         
         container.renameable = false;
         

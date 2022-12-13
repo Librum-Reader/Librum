@@ -26,7 +26,7 @@ Popup
         if(tagOptionsPopup.opened)
             root.open();
         
-        // Make sure renaming of the last item is inactive
+        // Make sure to stop renaming (if something is currently being renamed) when closing
         let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
         if(currentItem !== null && currentItem.renameable)
         {
