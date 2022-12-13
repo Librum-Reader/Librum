@@ -31,7 +31,8 @@ public:
                 (override));
     MOCK_METHOD(void, removeTag, (const QString&, const QString&), (override));
     MOCK_METHOD(void, renameTag,
-                (const QString&, const QString&, const QString&), (override));
+                (const QString&, const QString&, const QJsonObject&),
+                (override));
 };
 
 struct AUserStorageGateway : public testing::Test
