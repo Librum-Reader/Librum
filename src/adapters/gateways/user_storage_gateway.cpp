@@ -56,8 +56,12 @@ void UserStorageGateway::removeTag(const QString& authToken, const QUuid& uuid)
 void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
                                    const QString& newName)
 {
+    QJsonObject jsonTag {
+        { "name", newName },
+    };
+
     m_userStorageAccess->renameTag(
-        authToken, uuid.toString(QUuid::WithoutBraces), newName);
+        authToken, uuid.toString(QUuid::WithoutBraces), jsonTag);
 }
 
 void UserStorageGateway::proccessUserData(const QString& firstName,

@@ -29,7 +29,7 @@ public:
                                       const QImage& newProfilePicture) = 0;
     virtual void removeTag(const QString& authToken, const QString& uuid) = 0;
     virtual void renameTag(const QString& authToken, const QString& uuid,
-                           const QString& newName) = 0;
+                           const QJsonObject& bookForUpdate) = 0;
 
 signals:
     void userReady(const QString& firstName, const QString& lastName,
