@@ -67,7 +67,6 @@ Item
         property var startingItems: []
         
         y: root.height + 6
-        closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         
         onClosed:
         {

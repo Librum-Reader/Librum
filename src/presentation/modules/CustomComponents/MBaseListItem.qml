@@ -17,7 +17,7 @@ Item
     property int checkBoxImageSize: 9
     property int padding: 8
     property bool checkBoxStyle: true
-    property bool renameable: false
+    readonly property alias renameable: container.renameable
     signal clicked(var mouse, int index)
     signal rightClicked(var mouse, int index)
     signal hovered(int index)
@@ -28,21 +28,6 @@ Item
         return model.text;
     }
     
-    onRenameableChanged:
-    {
-        if(renameable)
-        {
-            content.readOnly = false;
-            content.forceActiveFocus();
-            content.selectAll()
-        }
-        else
-        {
-            content.readOnly = true;
-            root.forceActiveFocus();
-        }
-    }
-    
     implicitWidth: 137
     implicitHeight: 36
     
@@ -50,6 +35,8 @@ Item
     Pane
     {
         id: container
+        property bool renameable: false
+        
         anchors.fill: parent
         verticalPadding: 0
         horizontalPadding: root.padding
@@ -101,10 +88,14 @@ Item
                 onAccepted:
                 {
                     root.renamed(model.index, content.text);
-                    root.renameable = false;
-                    
-                    // Make sure its bound to the model text after editing
-                    content.text = Qt.binding(function() { return root.getContent() });
+                    stopRenaming();
+                }
+                
+                onTextChanged: 
+                {
+                    // Prevent content being scrolled to the right by default
+                    if(!content.activeFocus)
+                        content.cursorPosition = 0;
                 }
             }
         }
@@ -130,5 +121,31 @@ Item
     function getRole()
     {
         return model.role;
+    }
+    
+    function startRenaming()
+    {
+        console.log("Selected");
+        content.readOnly = false;
+        content.forceActiveFocus();
+        content.selectAll();
+        
+        container.renameable = true;
+    }
+    
+    function stopRenaming(saveText = true)
+    {
+        console.log("NOT Selected");
+        content.readOnly = true;
+        content.select(0,0);
+        root.forceActiveFocus();  // Remove focus from input
+        
+        container.renameable = false;
+        
+        if(saveText)
+            root.renamed(model.index, content.text);
+        
+        // Make sure its bound to the model text after editing
+        content.text = Qt.binding(function() { return root.getContent() });
     }
 }

@@ -14,11 +14,25 @@ Popup
     focus: true
     padding: 0
     implicitWidth: 168
+    closePolicy: Popup.CloseOnReleaseOutside | Popup.CloseOnEscape
     background: Rectangle
     {
         color: "transparent"
     }
     
+    onAboutToHide:
+    {
+        // Prevent closing when tagOptionsPopup is still opened
+        if(tagOptionsPopup.opened)
+            root.open();
+        
+        // Make sure renaming of the last item is inactive
+        let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+        if(currentItem !== null && currentItem.renameable)
+        {
+            currentItem.stopRenaming(false);
+        }
+    }
     onOpenedChanged: if(opened) listView.forceActiveFocus()
     
     
@@ -85,14 +99,23 @@ Popup
                         onClicked:
                             (mouse, index) => 
                             {
-                                listView.selectItem(index);
+                                if(!listView.itemAtIndex(index).renameable)
+                                {
+                                    listView.selectItem(index);
+                                }
                             }
                         
                         onRightClicked:
                             (mouse, index) =>
                             {
-                                let absoluteMousePosition = mapToItem(container, mouse.x, mouse.y);
+                                // Stop editing for previous item
+                                let currItem = listView.itemAtIndex(tagOptionsPopup.index);
+                                if(currItem.renameable)
+                                {
+                                    currItem.stopRenaming();
+                                }
                                 
+                                let absoluteMousePosition = mapToItem(container, mouse.x, mouse.y);
                                 tagOptionsPopup.x = absoluteMousePosition.x + 2;
                                 tagOptionsPopup.y = absoluteMousePosition.y + 6;
                                 
@@ -110,15 +133,12 @@ Popup
                                    }
                     }
                     
-                    Keys.onReturnPressed:
-                    {
-                        if(listView.currentItem != null)
-                            listView.currentItem.selected = !listView.currentItem.selected;
-                    }
-                    
-                    
                     function selectItem(index)
                     {
+                        // Stop the renaming of the currentItem
+                        if(listView.itemAtIndex(tagOptionsPopup.index).renameable)
+                            listView.itemAtIndex(tagOptionsPopup.index).stopRenaming();
+                        
                         listView.currentIndex = index;
                         listView.currentItem.selected = !listView.currentItem.selected;
                         
@@ -174,7 +194,7 @@ Popup
                     let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
                     tagOptionsPopup.originalTextOfLastEdited = currentItem.getContent();
                     
-                    currentItem.renameable = true;
+                    currentItem.startRenaming();
                     tagOptionsPopup.close();
                 }
             }
