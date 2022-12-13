@@ -87,7 +87,6 @@ Item
                 
                 onAccepted:
                 {
-                    root.renamed(model.index, content.text);
                     stopRenaming();
                 }
                 
