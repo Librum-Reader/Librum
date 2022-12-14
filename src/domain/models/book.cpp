@@ -268,6 +268,16 @@ bool Book::removeTag(const QUuid& uuid)
     return true;
 }
 
+bool Book::renameTag(const QUuid& uuid, const QString& newName)
+{
+    auto tag = getTag(uuid);
+    if(tag == nullptr)
+        return false;
+
+    tag->setName(newName);
+    return true;
+}
+
 bool Book::tagsAreTheSame(const std::vector<Tag>& other)
 {
     if(m_tags.size() != other.size())

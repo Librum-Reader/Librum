@@ -78,6 +78,7 @@ public:
     domain::models::Tag* getTag(const QUuid& uuid);
     bool addTag(const Tag& tag);
     bool removeTag(const QUuid& uuid);
+    bool renameTag(const QUuid& uuid, const QString& newName);
     const std::vector<Tag>& getTags() const;
 
     void update(const Book& other);
