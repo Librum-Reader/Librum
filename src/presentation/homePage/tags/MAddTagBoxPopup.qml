@@ -15,7 +15,17 @@ Popup
     signal itemSelected()
     
     onOpened: listView.currentIndex = -1
-    onClosed: rightClickMenu.close()
+    onAboutToHide:
+    {
+        // Make sure to stop renaming (if something is currently being renamed) when closing
+        let currentItem = listView.itemAtIndex(rightClickMenu.index);
+        if(currentItem !== null && currentItem.renameable)
+        {
+            currentItem.stopRenaming(false);
+        }
+        
+        rightClickMenu.close()
+    }
     
     implicitWidth: 200
     padding: 8
@@ -71,6 +81,13 @@ Popup
                 onRightClicked:
                     (mouse, index) =>
                     {
+                        // Stop editing for previous item
+                        let currItem = listView.itemAtIndex(rightClickMenu.index);
+                        if(currItem.renameable)
+                        {
+                            currItem.stopRenaming();
+                        }
+                        
                         let absoluteMousePosition = mapToItem(mainLayout, mouse.x, mouse.y);
                         
                         rightClickMenu.x = absoluteMousePosition.x + 2;
@@ -78,6 +95,20 @@ Popup
                         rightClickMenu.index = index;
                         rightClickMenu.open();
                     }
+                
+                onRenamed: (index, text) =>
+                           {
+                               let currentItem = listView.itemAtIndex(rightClickMenu.index);
+                               let tagName = currentItem.getContent();
+                               let uuid = UserController.getTagUuidForName(tagName);
+                               
+                               let success = UserController.renameTag(uuid, text);
+                               if(success)
+                               {
+                                   let oldText = rightClickMenu.originalTextOfLastEdited;
+                                   BookController.renameTags(oldText, text);
+                               }
+                           }
             }
             
             
@@ -90,6 +121,10 @@ Popup
             
             function selectItem(index)
             {
+                // Stop the renaming of the currentItem
+                if(listView.itemAtIndex(tagOptionsPopup.index).renameable)
+                    listView.itemAtIndex(tagOptionsPopup.index).stopRenaming();
+                
                 let newSelected = listView.itemAtIndex(index);
                 
                 root.currentlySelectedData = newSelected.getContent();
@@ -104,6 +139,7 @@ Popup
     {
         id: rightClickMenu
         property int index
+        property string originalTextOfLastEdited
         
         visible: false
         
@@ -133,6 +169,10 @@ Popup
                 
                 onClicked:
                 {
+                    let currentItem = listView.itemAtIndex(rightClickMenu.index);
+                    rightClickMenu.originalTextOfLastEdited = currentItem.getContent();
+                    
+                    currentItem.startRenaming();
                     rightClickMenu.close();
                 }
             }
