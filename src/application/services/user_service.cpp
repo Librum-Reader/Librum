@@ -29,6 +29,11 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
 
     // Tag changed
     connect(&m_user, &User::tagsChanged, this, &UserService::tagsChanged);
+
+    // Fetch changes timer
+    m_fetchChangesTimer.setInterval(15'000);
+    connect(&m_fetchChangesTimer, &QTimer::timeout, this,
+            &UserService::loadUser);
 }
 
 void UserService::loadUser()
@@ -139,6 +144,8 @@ void UserService::setAuthenticationToken(const QString& token,
 {
     Q_UNUSED(email);
     m_authenticationToken = token;
+
+    m_fetchChangesTimer.start();
 }
 
 void UserService::clearAuthenticationToken()

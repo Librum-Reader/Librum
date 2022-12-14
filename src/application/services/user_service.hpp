@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QTimer>
 #include "i_user_service.hpp"
 #include "i_user_storage_gateway.hpp"
 #include "user.hpp"
@@ -48,6 +49,7 @@ private:
     IUserStorageGateway* m_userStorageGateway;
     domain::models::User m_user;
     QString m_authenticationToken;
+    QTimer m_fetchChangesTimer;
 };
 
 }  // namespace application::services
