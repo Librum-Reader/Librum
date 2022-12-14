@@ -93,6 +93,7 @@ Item
     property string downloadDarkGray: "/resources/images/utility/download_darkgray_icon.svg"
     property string downloadWhite: "/resources/images/utility/download_white_icon.svg"
     property string editGray: "/resources/images/utility/edit_gray_icon.svg"
+    property string editPurple: "/resources/images/utility/edit_purple_icon.svg"
     property string editLightGray: "/resources/images/utility/edit_light_gray_icon.svg"
     property string eyeOff: "/resources/images/utility/eye_off_icon.svg"
     property string eyeOn: "/resources/images/utility/eye_on_icon.svg"
