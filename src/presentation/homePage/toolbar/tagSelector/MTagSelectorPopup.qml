@@ -129,7 +129,12 @@ Popup
                                        let tagName = currentItem.getContent();
                                        let uuid = UserController.getTagUuidForName(tagName);
                                        
-                                       UserController.renameTag(uuid, text);
+                                       let success = UserController.renameTag(uuid, text);
+                                       if(success)
+                                       {
+                                           let oldText = tagOptionsPopup.originalTextOfLastEdited;
+                                           BookController.renameTags(oldText, text);
+                                       }
                                    }
                     }
                     
