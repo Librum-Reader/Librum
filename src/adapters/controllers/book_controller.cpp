@@ -190,6 +190,20 @@ void BookController::deleteAllTagsWithUuid(const QString& tagUuid)
     }
 }
 
+void BookController::renameTags(const QString& oldName, const QString& newName)
+{
+    auto& books = m_bookService->getBooks();
+    for(const auto& book : books)
+    {
+        for(const auto& tag : book.getTags())
+        {
+            if(tag.getName() == oldName)
+                m_bookService->renameTag(book.getUuid(), tag.getUuid(),
+                                         newName);
+        }
+    }
+}
+
 int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
 {
     auto result = m_bookService->removeTag(bookUuid, tagUuid);

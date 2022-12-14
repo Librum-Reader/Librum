@@ -24,6 +24,7 @@ public:
     int addTag(const QString& bookUuid, const QString& tagName,
                const QString& tagUuid) override;
     void deleteAllTagsWithUuid(const QString& tagUuid) override;
+    void renameTags(const QString& oldName, const QString& newName) override;
     int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
