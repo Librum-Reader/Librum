@@ -165,6 +165,10 @@ BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
     if(!book->renameTag(tagUuid, newName))
         return BookOperationStatus::TagDoesNotExist;
 
+    // User service renames the tag remotely, just apply it locally
+    m_bookStorageManager->updateBookLocally(*book);
+    book->updateLastModified();
+
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);
 
