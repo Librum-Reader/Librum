@@ -12,7 +12,10 @@ Item
     id: root
     required property int index
     property bool selected: false
+    readonly property alias renameable: container.renameable
     signal removeTag(int index)
+    signal renamedTag(int index, string text)
+    signal startedRenaming(string prevText)
     
     implicitHeight: 38
     implicitWidth: 400
@@ -21,6 +24,8 @@ Item
     Pane
     {
         id: container
+        property bool renameable: false
+        
         anchors.fill: parent
         padding: 0
         background: Rectangle
@@ -36,22 +41,58 @@ Item
         {
             id: layout
             anchors.fill: parent
-            spacing: 4
+            spacing: 2
             
             
-            Label
+            TextField
             {
-                id: text
+                id: content
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.leftMargin: 12
                 verticalAlignment: Text.AlignVCenter
+                horizontalAlignment: Text.AlignLeft
+                leftPadding: 0
                 text: Globals.bookTags[root.index].name
                 font.weight: root.selected ? Font.Medium : Font.Normal
                 font.pointSize: 12
                 color: Style.colorBaseText
+                readOnly: true
+                background: Rectangle
+                {
+                    border.width: 0
+                    color: "transparent"
+                }
+                
+                onEditingFinished:
+                {
+                    root.stopRenaming();
+                }
+                
+                onTextChanged: 
+                {
+                    // Prevent content being scrolled to the right by default
+                    if(!content.activeFocus)
+                        content.cursorPosition = 0;
+                }
             }
             
+            MButton
+            {
+                id: editButton
+                Layout.preferredHeight: 28
+                Layout.preferredWidth: 30
+                Layout.rightMargin: 2
+                Layout.alignment: Qt.AlignVCenter
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.7
+                borderColor: currentlyPressed ? Style.colorLightBorder : "transparent"
+                radius: 4
+                imagePath: currentlyPressed ? Icons.editPurple : Icons.editLightGray
+                imageSize: 17
+                
+                onClicked: root.startRenaming();
+            }
             
             MButton
             {
@@ -67,7 +108,7 @@ Item
                 imagePath: currentlyPressed ? Icons.closePurple : Icons.closeGray
                 imageSize: 12
                 
-                onClicked: root.removeTag(index)
+                onClicked: root.removeTag(root.index)
             }
         }
     }
@@ -78,7 +119,33 @@ Item
         anchors.fill: parent
         hoverEnabled: true
         propagateComposedEvents: true
-       
+        
         onPressed: (mouse) => mouse.accepted = false
+    }
+    
+    function startRenaming()
+    {
+        root.startedRenaming(content.text);
+        
+        content.readOnly = false;
+        content.selectAll();
+        content.forceActiveFocus();
+        container.renameable = true;
+    }
+    
+    function stopRenaming(saveText = true)
+    {
+        if(!root.renameable)
+            return;
+        
+        content.readOnly = true;
+        content.select(0,0);
+        content.deselect();
+        container.renameable = false;
+        
+        root.renamedTag(root.index, content.text);
+        
+        // Make sure its bound to the model text after editing
+        content.text = Qt.binding(function() { return Globals.bookTags[root.index].name });
     }
 }
