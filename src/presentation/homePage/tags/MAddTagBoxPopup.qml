@@ -163,7 +163,7 @@ Popup
             MRightClickMenuItem
             {
                 width: rightClickMenu.width
-                imagePath: Icons.edit
+                imagePath: Icons.editGray
                 imageSize: 17
                 text: "Rename"
                 

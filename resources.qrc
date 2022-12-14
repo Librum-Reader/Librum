@@ -58,7 +58,6 @@
         <file>resources/images/utility/dots_icon.svg</file>
         <file>resources/images/utility/download_gray_icon.svg</file>
         <file>resources/images/utility/download_white_icon.svg</file>
-        <file>resources/images/utility/edit_icon.svg</file>
         <file>resources/images/utility/eye_off_icon.svg</file>
         <file>resources/images/utility/eye_on_icon.svg</file>
         <file>resources/images/utility/filter_icon.svg</file>
@@ -94,5 +93,7 @@
         <file>resources/images/decision/plus_square_icon.svg</file>
         <file>resources/images/utility/download_darkgray_icon.svg</file>
         <file>resources/images/decision/close_darkgray_icon.svg</file>
+        <file>resources/images/utility/edit_gray_icon.svg</file>
+        <file>resources/images/utility/edit_light_gray_icon.svg</file>
     </qresource>
 </RCC>
