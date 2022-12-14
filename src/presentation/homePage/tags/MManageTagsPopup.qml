@@ -127,6 +127,7 @@ Popup
             {
                 id: listView
                 property var currentSelected
+                property string oldText
                 
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
@@ -148,6 +149,23 @@ Popup
                                      BookController.removeTag(Globals.selectedBook.uuid,
                                                               Globals.bookTags[index].uuid);
                                  }
+                    
+                    onStartedRenaming: (oldText) =>
+                                       {
+                                           listView.oldText = oldText;
+                                       }
+                    
+                    onRenamedTag: (index, text) =>
+                                  {
+                                      let currentItem = listView.itemAtIndex(index);
+                                      let uuid = UserController.getTagUuidForName(listView.oldText);
+                                      
+                                      let success = UserController.renameTag(uuid, text);
+                                      if(success)
+                                      {
+                                          BookController.renameTags(listView.oldText, text);
+                                      }
+                                  }
                 }
             }
             
