@@ -95,6 +95,6 @@
         <file>resources/images/decision/close_darkgray_icon.svg</file>
         <file>resources/images/utility/edit_gray_icon.svg</file>
         <file>resources/images/utility/edit_light_gray_icon.svg</file>
-        <file>resources/images/utility/edit_purple_icon copy.svg</file>
+        <file>resources/images/utility/edit_purple_icon.svg</file>
     </qresource>
 </RCC>
