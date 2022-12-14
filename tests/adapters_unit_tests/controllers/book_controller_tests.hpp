@@ -43,6 +43,8 @@ public:
 
     MOCK_METHOD(BookOperationStatus, addTag,
                 (const QUuid&, const domain::models::Tag&), (override));
+    MOCK_METHOD(BookOperationStatus, renameTag,
+                (const QUuid&, const QUuid&, const QString&), (override));
     MOCK_METHOD(BookOperationStatus, removeTag, (const QUuid&, const QUuid&),
                 (override));
 
