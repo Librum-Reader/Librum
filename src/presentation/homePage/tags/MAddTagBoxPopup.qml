@@ -122,8 +122,8 @@ Popup
             function selectItem(index)
             {
                 // Stop the renaming of the currentItem
-                if(listView.itemAtIndex(tagOptionsPopup.index).renameable)
-                    listView.itemAtIndex(tagOptionsPopup.index).stopRenaming();
+                if(listView.itemAtIndex(rightClickMenu.index).renameable)
+                    listView.itemAtIndex(rightClickMenu.index).stopRenaming();
                 
                 let newSelected = listView.itemAtIndex(index);
                 
