@@ -29,6 +29,8 @@ public:
                                const domain::models::Tag& tag) override;
     BookOperationStatus removeTag(const QUuid& bookUuid,
                                   const QUuid& tagUuid) override;
+    BookOperationStatus renameTag(const QUuid& bookUuid, const QUuid& tagUuid,
+                                  const QString& newName) override;
 
     const std::vector<domain::models::Book>& getBooks() const override;
     const domain::models::Book* getBook(const QUuid& uuid) const override;

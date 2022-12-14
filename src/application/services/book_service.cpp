@@ -154,6 +154,23 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
     return BookOperationStatus::Success;
 }
 
+BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
+                                           const QUuid& tagUuid,
+                                           const QString& newName)
+{
+    auto book = getBook(bookUuid);
+    if(!book)
+        return BookOperationStatus::BookDoesNotExist;
+
+    if(!book->renameTag(tagUuid, newName))
+        return BookOperationStatus::TagDoesNotExist;
+
+    int index = getBookIndex(bookUuid);
+    emit tagsChanged(index);
+
+    return BookOperationStatus::Success;
+}
+
 const std::vector<Book>& BookService::getBooks() const
 {
     return m_books;

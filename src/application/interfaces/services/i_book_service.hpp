@@ -36,6 +36,9 @@ public:
                                        const domain::models::Tag& tag) = 0;
     virtual BookOperationStatus removeTag(const QUuid& bookUuid,
                                           const QUuid& tagUuid) = 0;
+    virtual BookOperationStatus renameTag(const QUuid& bookUuid,
+                                          const QUuid& tagUuid,
+                                          const QString& newName) = 0;
 
     virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
                                                const QUrl& path) = 0;
