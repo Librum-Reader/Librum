@@ -41,7 +41,7 @@ Item
         {
             id: layout
             anchors.fill: parent
-            spacing: 2
+            spacing: 0
             
             
             TextField
