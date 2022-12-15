@@ -125,19 +125,16 @@ Item
     
     function startRenaming()
     {
-        root.startedRenaming(content.text);
-        
         content.readOnly = false;
         content.selectAll();
         content.forceActiveFocus();
         container.renameable = true;
+        
+        root.startedRenaming(content.text);
     }
     
     function stopRenaming(saveText = true)
     {
-        if(!root.renameable)
-            return;
-        
         content.readOnly = true;
         content.select(0,0);
         content.deselect();
