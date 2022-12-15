@@ -109,7 +109,7 @@ Popup
                             (mouse, index) =>
                             {
                                 // Stop editing for previous item
-                                let currItem = listView.itemAtIndex(tagOptionsPopup.index);
+                                let currItem = listView.itemAtIndex(index);
                                 if(currItem.renameable)
                                 {
                                     currItem.stopRenaming();
