@@ -8,6 +8,7 @@
 #include "library_model.hpp"
 #include "tag_dto.hpp"
 
+using adapters::dtos::TagDto;
 using domain::models::Book;
 using domain::models::Tag;
 
@@ -76,27 +77,13 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     // tags
     auto qTags = sourceModel()
                      ->data(index, LibraryModel::TagsRole)
-                     .value<QList<dtos::TagDto>>();
-    std::vector<dtos::TagDto> tags;
+                     .value<QList<TagDto>>();
+
+    std::vector<TagDto> tags;
     for(auto tag : qTags)
-    {
         tags.emplace_back(std::move(tag));
-    }
 
-    bool v = std::ranges::all_of(m_tags,
-                                 [&tags](const QString& tagName)
-                                 {
-                                     auto pos = std::ranges::find_if(
-                                         tags,
-                                         [&tagName](const dtos::TagDto& tag)
-                                         {
-                                             return tag.name == tagName;
-                                         });
-
-                                     return pos != std::end(tags);
-                                 });
-
-    if(!m_tags.empty() && !v)
+    if(!m_tags.empty() && !bookContainsAllTags(tags))
         return false;
 
     auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
@@ -265,6 +252,22 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
         return true;
 
     return lhsAddedDate > rhsAddedDate;
+}
+
+bool LibraryProxyModel::bookContainsAllTags(std::vector<TagDto> tags) const
+{
+    for(const auto& tagName : m_tags)
+    {
+        auto pos = std::ranges::find_if(tags,
+                                        [&tagName](const TagDto& tag)
+                                        {
+                                            return tag.name == tagName;
+                                        });
+        if(pos == tags.end())
+            return false;
+    }
+
+    return true;
 }
 
 }  // namespace adapters::data_models

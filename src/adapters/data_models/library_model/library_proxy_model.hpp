@@ -2,6 +2,7 @@
 #include <QSortFilterProxyModel>
 #include <vector>
 #include "filter_request.hpp"
+#include "tag_dto.hpp"
 
 namespace adapters::data_models
 {
@@ -58,6 +59,7 @@ private:
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
+    bool bookContainsAllTags(std::vector<adapters::dtos::TagDto> tags) const;
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";
