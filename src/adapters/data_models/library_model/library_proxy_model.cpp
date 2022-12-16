@@ -116,7 +116,7 @@ void LibraryProxyModel::setSortRole(int newRole)
     int firstRole = SortRole::RecentlyAdded;
     int lastRole = SortRole::LastOpened;
 
-    bool inRange = firstRole <= newRole <= lastRole;
+    bool inRange = firstRole <= newRole && newRole <= lastRole;
     if(!inRange)
         return;
 
