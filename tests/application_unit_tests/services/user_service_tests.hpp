@@ -231,7 +231,7 @@ TEST_F(AUserService, SucceedsRenamingATag)
 {
     // Arrange
     QString tagName = "SomeTag";
-    QString newTagName = "SomeTag";
+    QString newTagName = "SomeOtherTag";
     models::Tag tag(tagName);
     userService->addTag(tag);
 
