@@ -74,15 +74,7 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
-    // tags
-    auto qTags = sourceModel()
-                     ->data(index, LibraryModel::TagsRole)
-                     .value<QList<TagDto>>();
-
-    std::vector<TagDto> tags;
-    for(auto tag : qTags)
-        tags.emplace_back(std::move(tag));
-
+    auto tags = getTags(index);
     if(!m_tags.empty() && !bookContainsAllTags(tags))
         return false;
 
@@ -252,6 +244,21 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
         return true;
 
     return lhsAddedDate > rhsAddedDate;
+}
+
+std::vector<dtos::TagDto> LibraryProxyModel::getTags(QModelIndex index) const
+{
+    QList<TagDto> qTagList = sourceModel()
+                                 ->data(index, LibraryModel::TagsRole)
+                                 .value<QList<TagDto>>();
+
+    std::vector<TagDto> tags;
+    for(auto tag : qTagList)
+    {
+        tags.emplace_back(std::move(tag));
+    }
+
+    return tags;
 }
 
 bool LibraryProxyModel::bookContainsAllTags(std::vector<TagDto> tags) const

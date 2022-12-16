@@ -59,6 +59,7 @@ private:
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
+    std::vector<adapters::dtos::TagDto> getTags(QModelIndex index) const;
     bool bookContainsAllTags(std::vector<adapters::dtos::TagDto> tags) const;
 
     FilterRequest m_filterRequest;
