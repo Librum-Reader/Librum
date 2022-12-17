@@ -138,8 +138,8 @@ bool BookStorageAccess::checkForErrors(int expectedStatusCode,
     if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
     {
-        qDebug() << "Book storage error: " << reply->errorString()
-                 << "\n\nServer reply: " << reply->readAll();
+        qWarning() << "Book storage error: " << reply->errorString()
+                   << "\n\nServer reply: " << reply->readAll();
         return true;
     }
 
