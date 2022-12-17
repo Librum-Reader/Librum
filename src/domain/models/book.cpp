@@ -342,14 +342,6 @@ void Book::update(const Book& other)
 
 QByteArray Book::toJson() const
 {
-    // Serialise tags
-    QJsonArray tags;
-    for(const auto& tag : m_tags)
-    {
-        auto obj = QJsonDocument::fromJson(tag.toJson()).object();
-        tags.append(QJsonValue::fromVariant(obj));
-    }
-
     QJsonObject book {
         { "uuid", getUuid().toString(QUuid::WithoutBraces) },
         { "title", getTitle() },
@@ -368,13 +360,25 @@ QByteArray Book::toJson() const
         { "lastModified", getLastModified().toString(dateTimeStringFormat) },
         { "filePath", getFilePath() },
         { "cover", getCoverAsString() },
-        { "tags", tags },
+        { "tags", serializeTags() },
     };
 
     QJsonDocument doc(book);
     QString strJson = doc.toJson(QJsonDocument::Indented);
 
     return strJson.toUtf8();
+}
+
+QJsonArray Book::serializeTags() const
+{
+    QJsonArray tags;
+    for(const auto& tag : m_tags)
+    {
+        auto obj = QJsonDocument::fromJson(tag.toJson()).object();
+        tags.append(QJsonValue::fromVariant(obj));
+    }
+
+    return tags;
 }
 
 Book Book::fromJson(const QJsonObject& jsonBook)
