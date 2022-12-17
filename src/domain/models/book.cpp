@@ -11,8 +11,8 @@ namespace domain::models
 
 Book::Book(const QString& filePath, const BookMetaData& metaData,
            int currentPage, const QString& uuid) :
-    m_filePath(filePath),
     m_metaData(metaData),
+    m_filePath(filePath),
     m_currentPage(currentPage)
 {
     if(uuid.isEmpty())
@@ -283,7 +283,7 @@ bool Book::tagsAreTheSame(const std::vector<Tag>& other) const
     if(m_tags.size() != other.size())
         return false;
 
-    for(int i = 0; i < m_tags.size(); ++i)
+    for(std::size_t i = 0; i < m_tags.size(); ++i)
     {
         if(m_tags.at(i) != other.at(i))
             return false;
