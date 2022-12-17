@@ -59,10 +59,10 @@ void BookStorageAccess::updateBook(const QString& authToken,
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
 {
     auto request = createRequest(data::getBooksMetadataEndpoint, authToken);
-    m_gettingBooksMetadataReply.reset(m_networkAccessManager.get(request));
+    m_gettingBooksMetaDataReply.reset(m_networkAccessManager.get(request));
 
-    connect(m_gettingBooksMetadataReply.get(), &QNetworkReply::finished, this,
-            &BookStorageAccess::proccessGettingBooksMetadataResult);
+    connect(m_gettingBooksMetaDataReply.get(), &QNetworkReply::finished, this,
+            &BookStorageAccess::proccessGettingBooksMetaDataResult);
 }
 
 void BookStorageAccess::downloadBook(const QString& authToken,
@@ -85,11 +85,11 @@ void BookStorageAccess::proccessBookCreationResult()
     emit creatingBookFinished(true, "");
 }
 
-void BookStorageAccess::proccessGettingBooksMetadataResult()
+void BookStorageAccess::proccessGettingBooksMetaDataResult()
 {
     // Error handling
     int expectedStatusCode = 200;
-    if(checkForErrors(expectedStatusCode, m_gettingBooksMetadataReply.get()))
+    if(checkForErrors(expectedStatusCode, m_gettingBooksMetaDataReply.get()))
     {
         std::vector<QJsonObject> empty;
         emit gettingBooksMetaDataFinished(empty);
@@ -98,7 +98,7 @@ void BookStorageAccess::proccessGettingBooksMetadataResult()
 
     // Parsing
     auto jsonReply =
-        QJsonDocument::fromJson(m_gettingBooksMetadataReply->readAll());
+        QJsonDocument::fromJson(m_gettingBooksMetaDataReply->readAll());
     auto jsonBooks = jsonReply.array();
 
     std::vector<QJsonObject> books;

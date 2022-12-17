@@ -30,7 +30,7 @@ signals:
     void creatingBookFinished(bool success, const QString& reason);
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
-    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metadata);
+    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
     void downloadingBookFinisdhed(const QUuid& uuid, const QByteArray& data);
 };
 
