@@ -35,13 +35,20 @@ public:
 
 private slots:
     void proccessGetUserResult();
+    void linkRequestToErrorHandling(QNetworkReply* reply, int statusCode);
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
-    bool checkForErrors(int expectedStatusCode);
+    bool checkForErrors(int expectedStatusCode, QNetworkReply* reply);
 
     QNetworkAccessManager m_networkAccessManager;
-    std::unique_ptr<QNetworkReply> m_reply = nullptr;
+    std::unique_ptr<QNetworkReply> m_getUserReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_firstNameUpdateReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_lastNameUpdateReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_emailUpdateReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_profilePictureUpdateReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_TagRemovalReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_TagRenameReply = nullptr;
 };
 
 }  // namespace infrastructure::persistence

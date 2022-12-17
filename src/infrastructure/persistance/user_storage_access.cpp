@@ -9,9 +9,9 @@ namespace infrastructure::persistence
 void UserStorageAccess::getUser(const QString& authToken)
 {
     auto request = createRequest(data::userGetEndpoint, authToken);
-    m_reply.reset(m_networkAccessManager.get(request));
+    m_getUserReply.reset(m_networkAccessManager.get(request));
 
-    connect(m_reply.get(), &QNetworkReply::finished, this,
+    connect(m_getUserReply.get(), &QNetworkReply::finished, this,
             &UserStorageAccess::proccessGetUserResult);
 }
 
@@ -24,8 +24,11 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
     auto jsonData = R"([{ "op": "replace", "path": "firstName", "value": )" +
                     quote + newFirstName + quote + "}]";
 
-    m_networkAccessManager.sendCustomRequest(request, "PATCH",
-                                             jsonData.toUtf8());
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+    m_firstNameUpdateReply.reset(reply);
+
+    linkRequestToErrorHandling(m_firstNameUpdateReply.get(), 200);
 }
 
 void UserStorageAccess::changeLastName(const QString& authToken,
@@ -37,8 +40,11 @@ void UserStorageAccess::changeLastName(const QString& authToken,
     auto jsonData = R"([{ "op": "replace", "path": "lastName", "value": )" +
                     quote + newLastName + quote + "}]";
 
-    m_networkAccessManager.sendCustomRequest(request, "PATCH",
-                                             jsonData.toUtf8());
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+    m_lastNameUpdateReply.reset(reply);
+
+    linkRequestToErrorHandling(m_lastNameUpdateReply.get(), 200);
 }
 
 void UserStorageAccess::changeEmail(const QString& authToken,
@@ -62,7 +68,10 @@ void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
     QString endPoint = data::tagDeletionEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
-    m_networkAccessManager.sendCustomRequest(request, "DELETE");
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
+    m_TagRemovalReply.reset(reply);
+
+    linkRequestToErrorHandling(m_TagRemovalReply.get(), 201);
 }
 
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
@@ -74,19 +83,23 @@ void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
     QJsonDocument jsonDoc(bookForUpdate);
     QByteArray jsonData = jsonDoc.toJson(QJsonDocument::Compact);
 
-    m_networkAccessManager.sendCustomRequest(request, "PUT", jsonData);
+    auto result =
+        m_networkAccessManager.sendCustomRequest(request, "PUT", jsonData);
+    m_TagRenameReply.reset(result);
+
+    linkRequestToErrorHandling(m_TagRenameReply.get(), 201);
 }
 
 void UserStorageAccess::proccessGetUserResult()
 {
     int expectedStatusCode = 200;
-    if(checkForErrors(expectedStatusCode))
+    if(checkForErrors(expectedStatusCode, m_getUserReply.get()))
     {
         emit gettingUserFailed();
         return;
     }
 
-    auto jsonDoc = QJsonDocument::fromJson(m_reply->readAll());
+    auto jsonDoc = QJsonDocument::fromJson(m_getUserReply->readAll());
     auto jsonObj = jsonDoc.object();
 
     auto firstName = jsonObj["firstName"].toString();
@@ -95,6 +108,16 @@ void UserStorageAccess::proccessGetUserResult()
     auto tags = jsonObj["tags"].toArray();
 
     emit userReady(firstName, lastName, email, tags);
+}
+
+void UserStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
+                                                   int statusCode)
+{
+    connect(reply, &QNetworkReply::finished, this,
+            [this, statusCode, reply]()
+            {
+                checkForErrors(statusCode, reply);
+            });
 }
 
 QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
@@ -114,16 +137,16 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     return result;
 }
 
-bool UserStorageAccess::checkForErrors(int expectedStatusCode)
+bool UserStorageAccess::checkForErrors(int expectedStatusCode,
+                                       QNetworkReply* reply)
 {
-    if(m_reply->error() != QNetworkReply::NoError)
-        qDebug() << "there was an error! " << m_reply->errorString();
-
-    int statusCode =
-        m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(statusCode != expectedStatusCode)
+    auto statusCode =
+        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if(reply->error() != QNetworkReply::NoError ||
+       expectedStatusCode != statusCode)
     {
-        qDebug() << "there was an error! " << m_reply->readAll();
+        qWarning() << "User storage error: " << reply->errorString()
+                   << "\nServer reply: " << reply->readAll();
         return true;
     }
 
