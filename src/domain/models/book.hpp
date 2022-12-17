@@ -95,7 +95,7 @@ public:
     };
 
 private:
-    bool tagsAreTheSame(const std::vector<Tag>& other);
+    bool tagsAreTheSame(const std::vector<Tag>& other) const;
     static BookMetaData getBookMetaDataFromJson(const QJsonObject& jsonBook);
     static QImage getBookCoverFromJson(const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);

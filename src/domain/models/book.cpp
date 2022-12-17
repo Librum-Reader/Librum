@@ -278,7 +278,7 @@ bool Book::renameTag(const QUuid& uuid, const QString& newName)
     return true;
 }
 
-bool Book::tagsAreTheSame(const std::vector<Tag>& other)
+bool Book::tagsAreTheSame(const std::vector<Tag>& other) const
 {
     if(m_tags.size() != other.size())
         return false;
