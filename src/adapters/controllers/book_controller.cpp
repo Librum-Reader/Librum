@@ -4,7 +4,6 @@
 #include <QVariant>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
-#include "qnamespace.h"
 #include "tag.hpp"
 #include "tag_dto.hpp"
 
@@ -147,6 +146,9 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
             break;
         case MetaProperty::Cover:
             updatedBook.setCover(getCorrectlySizedBookCover(value.toString()));
+            break;
+        case MetaProperty::Invalid:
+            return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
             break;
         default:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
