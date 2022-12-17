@@ -121,6 +121,7 @@ void LibraryProxyModel::setSortRole(int newRole)
         return;
 
     m_sortRole = static_cast<SortRole>(newRole);
+    emit sortRoleUpdated();
     invalidate();
 }
 
@@ -132,6 +133,7 @@ int LibraryProxyModel::getSortRole()
 void LibraryProxyModel::setSortString(QString newSortString)
 {
     m_sortString = newSortString;
+    emit sortStringUpdated();
     invalidate();
 }
 
