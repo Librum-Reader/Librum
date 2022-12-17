@@ -58,7 +58,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
 
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
 {
-    auto request = createRequest(data::getBooksMetadataEndpoint, authToken);
+    auto request = createRequest(data::booksMetadataGetEndpoint, authToken);
     m_gettingBooksMetaDataReply.reset(m_networkAccessManager.get(request));
 
     connect(m_gettingBooksMetaDataReply.get(), &QNetworkReply::finished, this,

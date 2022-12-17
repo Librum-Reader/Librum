@@ -16,16 +16,15 @@ inline const QString registrationEndpoint { baseUrl + "/api/register" };
 inline const QString bookCreationEndpoint { baseUrl + "/api/book" };
 inline const QString bookUpdateEndpoint { baseUrl + "/api/book" };
 inline const QString bookDeletionEndpoint { baseUrl + "/api/book" };
-inline const QString getBooksMetadataEndpoint { baseUrl + "/api/book" };
+inline const QString booksMetadataGetEndpoint { baseUrl + "/api/book" };
 
 // User storage
-inline const QString getUserEndpoint { baseUrl + "/api/user" };
-inline const QString patchUserEndpoint { baseUrl + "/api/user" };
+inline const QString userGetEndpoint { baseUrl + "/api/user" };
+inline const QString userPatchEndpoint { baseUrl + "/api/user" };
 
 // Tag storage
-inline const QString addTagEndpoint { baseUrl + "/api/tag" };
-inline const QString updateTagEndpoint { baseUrl + "/api/tag" };
-inline const QString deleteTagEndpoint { baseUrl + "/api/tag" };
+inline const QString tagUpdateEndpoint { baseUrl + "/api/tag" };
+inline const QString tagDeletionEndpoint { baseUrl + "/api/tag" };
 
 
 // clang-format on

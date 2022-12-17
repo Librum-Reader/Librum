@@ -8,7 +8,7 @@ namespace infrastructure::persistence
 
 void UserStorageAccess::getUser(const QString& authToken)
 {
-    auto request = createRequest(data::getUserEndpoint, authToken);
+    auto request = createRequest(data::userGetEndpoint, authToken);
     m_reply.reset(m_networkAccessManager.get(request));
 
     connect(m_reply.get(), &QNetworkReply::finished, this,
@@ -18,7 +18,7 @@ void UserStorageAccess::getUser(const QString& authToken)
 void UserStorageAccess::changeFirstName(const QString& authToken,
                                         const QString& newFirstName)
 {
-    auto request = createRequest(data::patchUserEndpoint, authToken);
+    auto request = createRequest(data::userPatchEndpoint, authToken);
 
     const QString quote = "\"";
     auto jsonData = R"([{ "op": "replace", "path": "firstName", "value": )" +
@@ -31,7 +31,7 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
 void UserStorageAccess::changeLastName(const QString& authToken,
                                        const QString& newLastName)
 {
-    auto request = createRequest(data::patchUserEndpoint, authToken);
+    auto request = createRequest(data::userPatchEndpoint, authToken);
 
     const QString quote = "\"";
     auto jsonData = R"([{ "op": "replace", "path": "lastName", "value": )" +
@@ -59,7 +59,7 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
 
 void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
 {
-    QString endPoint = data::deleteTagEndpoint + "/" + uuid;
+    QString endPoint = data::tagDeletionEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     m_networkAccessManager.sendCustomRequest(request, "DELETE");
@@ -68,7 +68,7 @@ void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
                                   const QJsonObject& bookForUpdate)
 {
-    QString endPoint = data::updateTagEndpoint + "/" + uuid;
+    QString endPoint = data::tagUpdateEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     QJsonDocument jsonDoc(bookForUpdate);
