@@ -71,7 +71,7 @@ void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
     m_tagRemovalReply.reset(reply);
 
-    linkRequestToErrorHandling(m_tagRemovalReply.get(), 201);
+    linkRequestToErrorHandling(m_tagRemovalReply.get(), 204);
 }
 
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
