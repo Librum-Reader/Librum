@@ -24,7 +24,6 @@ add_library(domain
 target_include_directories(domain
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/models
-                    ${CMAKE_CURRENT_SOURCE_DIR}/rum_content
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
 )
