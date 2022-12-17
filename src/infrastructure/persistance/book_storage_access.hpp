@@ -28,12 +28,14 @@ private slots:
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
+    void linkRequestToErrorHandling(QNetworkReply* reply, int statusCode);
     bool checkForErrors(int expectedStatusCode, QNetworkReply* reply);
 
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
     std::unique_ptr<QNetworkReply> m_gettingBooksMetaDataReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookUpdatingReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookDeletionReply = nullptr;
 };
 
 }  // namespace infrastructure::persistence

@@ -16,11 +16,8 @@ void BookStorageAccess::createBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-
     m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
-
-    connect(m_bookCreationReply.get(), &QNetworkReply::finished, this,
-            &BookStorageAccess::proccessBookCreationResult);
+    linkRequestToErrorHandling(m_bookCreationReply.get(), 201);
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
@@ -33,7 +30,11 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
     QJsonDocument jsonDocument(bookArray);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    m_networkAccessManager.sendCustomRequest(request, "DELETE", data);
+    auto reply =
+        m_networkAccessManager.sendCustomRequest(request, "DELETE", data);
+    m_bookDeletionReply.reset(reply);
+
+    linkRequestToErrorHandling(m_bookDeletionReply.get(), 204);
 }
 
 void BookStorageAccess::updateBook(const QString& authToken,
@@ -46,14 +47,8 @@ void BookStorageAccess::updateBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply = m_networkAccessManager.sendCustomRequest(request, "PUT", data);
-    m_bookUpdatingReply.reset(reply);
-
-    connect(m_bookUpdatingReply.get(), &QNetworkReply::finished, this,
-            [this]()
-            {
-                checkForErrors(200, m_bookUpdatingReply.get());
-            });
+    m_bookUpdateReply.reset(m_networkAccessManager.put(request, data));
+    linkRequestToErrorHandling(m_bookUpdateReply.get(), 200);
 }
 
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
@@ -87,16 +82,14 @@ void BookStorageAccess::proccessBookCreationResult()
 
 void BookStorageAccess::proccessGettingBooksMetaDataResult()
 {
-    // Error handling
-    int expectedStatusCode = 200;
-    if(checkForErrors(expectedStatusCode, m_gettingBooksMetaDataReply.get()))
+    if(checkForErrors(200, m_gettingBooksMetaDataReply.get()))
     {
         std::vector<QJsonObject> empty;
         emit gettingBooksMetaDataFinished(empty);
         return;
     }
 
-    // Parsing
+
     auto jsonReply =
         QJsonDocument::fromJson(m_gettingBooksMetaDataReply->readAll());
     auto jsonBooks = jsonReply.array();
@@ -107,7 +100,6 @@ void BookStorageAccess::proccessGettingBooksMetaDataResult()
         books.emplace_back(jsonBook.toObject());
     }
 
-    // Sending result
     emit gettingBooksMetaDataFinished(books);
 }
 
@@ -128,21 +120,35 @@ QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
     return result;
 }
 
+void BookStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
+                                                   int expectedStatusCode)
+{
+    connect(reply, &QNetworkReply::finished, this,
+            [this, expectedStatusCode, reply]()
+            {
+                checkForErrors(expectedStatusCode, reply);
+            });
+}
+
 bool BookStorageAccess::checkForErrors(int expectedStatusCode,
                                        QNetworkReply* reply)
 {
+    bool error = false;
     if(reply->error() != QNetworkReply::NoError)
-        qDebug() << "there was an error! " << reply->errorString();
-
-    int statusCode =
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(statusCode != expectedStatusCode)
     {
-        qDebug() << "there was an error! " << reply->readAll();
-        return true;
+        qDebug() << "error: " << reply->errorString();
+        error = true;
     }
 
-    return false;
+    if(auto statusCode =
+           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+       expectedStatusCode != statusCode)
+    {
+        qDebug() << "unexpected statuscode: " << reply->readAll();
+        error = true;
+    }
+
+    return error;
 }
 
 }  // namespace infrastructure::persistence
