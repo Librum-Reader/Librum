@@ -24,29 +24,18 @@ LibraryProxyModel::LibraryProxyModel(QObject* parent) :
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
                                  const QModelIndex& right) const
 {
-    if(!m_sortString.isEmpty())
-    {
-        auto leftData = sourceModel()->data(left, LibraryModel::TitleRole);
-        auto rightData = sourceModel()->data(right, LibraryModel::TitleRole);
-
-        double leftRatio = fuzzCompareWithSortingString(leftData.toString());
-        double rightRatio = fuzzCompareWithSortingString(rightData.toString());
-
-        if(leftRatio > rightRatio)
-            return true;
-        if(leftRatio < rightRatio)
-            return false;
-    }
+    auto fuzzResult = fuzzCompareBooks(left, right);
+    if(fuzzResult.has_value())
+        return fuzzResult.value();
 
     switch(m_sortRole)
     {
     case SortRole::Title:
     {
-        auto leftData = sourceModel()->data(left, LibraryModel::TitleRole);
-        auto rightData = sourceModel()->data(right, LibraryModel::TitleRole);
-
-        return stringIsLexicographicallyLess(leftData.toString(),
-                                             rightData.toString());
+        auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
+        auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
+        return stringIsLexicographicallyLess(leftTitle.toString(),
+                                             rightTitle.toString());
     }
     case SortRole::Authors:
     {
@@ -110,6 +99,26 @@ void LibraryProxyModel::setSortString(QString newSortString)
 QString LibraryProxyModel::getSortString()
 {
     return m_sortString;
+}
+
+std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
+    const QModelIndex& left, const QModelIndex& right) const
+{
+    if(m_sortString.isEmpty())
+        return std::nullopt;
+
+    auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
+    auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
+
+    double leftRatio = fuzzCompareWithSortingString(leftTitle.toString());
+    double rightRatio = fuzzCompareWithSortingString(rightTitle.toString());
+
+    if(leftRatio > rightRatio)
+        return true;
+    if(leftRatio < rightRatio)
+        return false;
+    else
+        return std::nullopt;
 }
 
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,

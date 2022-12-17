@@ -1,7 +1,9 @@
 #pragma once
 #include <QSortFilterProxyModel>
+#include <optional>
 #include <vector>
 #include "filter_request.hpp"
+#include "fuzz_comparison_result.hpp"
 #include "tag_dto.hpp"
 
 namespace adapters::data_models
@@ -55,6 +57,8 @@ signals:
     void sortRoleUpdated();
 
 private:
+    std::optional<bool> fuzzCompareBooks(const QModelIndex& left,
+                                         const QModelIndex& right) const;
     double fuzzCompareWithSortingString(QString lhs) const;
     bool stringIsLexicographicallyLess(const QString& left,
                                        const QString& right) const;
