@@ -74,41 +74,11 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
-    auto tags = getTags(index);
-    if(!m_tags.empty() && !bookContainsAllTags(tags))
-        return false;
+    if(filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
+       filterAcceptsFormat(index) && filterAcceptsStatus(index))
+        return true;
 
-    auto authorsData = sourceModel()->data(index, LibraryModel::AuthorsRole);
-    auto authors = authorsData.toString().toLower();
-    bool authorsNotSimilar =
-        rapidfuzz::fuzz::ratio(m_filterRequest.authors.toStdString(),
-                               authors.toStdString()) < 55;
-    if(!m_filterRequest.authors.isEmpty() &&
-       (!authors.contains(m_filterRequest.authors) && authorsNotSimilar))
-        return false;
-
-    auto formatData = sourceModel()->data(index, LibraryModel::FormatRole);
-    auto format = formatData.toString().toLower();
-    if(!m_filterRequest.format.isEmpty() && m_filterRequest.format != format)
-        return false;
-
-    if(m_filterRequest.onlyFiles && format != "plain")
-        return false;
-
-    if(m_filterRequest.onlyBooks && format == "plain")
-        return false;
-
-    auto currentPage =
-        sourceModel()->data(index, LibraryModel::CurrentPageRole).toInt();
-    auto pageCount =
-        sourceModel()->data(index, LibraryModel::PageCountRole).toInt();
-    if(m_filterRequest.read && currentPage != pageCount)
-        return false;
-
-    if(m_filterRequest.unread && currentPage == pageCount)
-        return false;
-
-    return true;
+    return false;
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -248,7 +218,17 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
     return lhsAddedDate > rhsAddedDate;
 }
 
-std::vector<dtos::TagDto> LibraryProxyModel::getTags(QModelIndex index) const
+bool LibraryProxyModel::filterAcceptsTags(const QModelIndex& bookIndex) const
+{
+    auto tags = getTags(bookIndex);
+    if(m_tags.empty() || bookContainsAllTags(tags))
+        return true;
+
+    return false;
+}
+
+std::vector<dtos::TagDto> LibraryProxyModel::getTags(
+    const QModelIndex& index) const
 {
     QList<TagDto> qTagList = sourceModel()
                                  ->data(index, LibraryModel::TagsRole)
@@ -275,6 +255,61 @@ bool LibraryProxyModel::bookContainsAllTags(std::vector<TagDto> tags) const
         if(pos == tags.end())
             return false;
     }
+
+    return true;
+}
+
+bool LibraryProxyModel::filterAcceptsAuthors(const QModelIndex& bookIndex) const
+{
+    bool requestIsEmpty = m_filterRequest.authors.isEmpty();
+    if(requestIsEmpty)
+        return true;
+
+    auto rawAuthors = sourceModel()->data(bookIndex, LibraryModel::AuthorsRole);
+    auto authors = rawAuthors.toString().toLower();
+
+    bool authorsAndRequestAreSimilar =
+        rapidfuzz::fuzz::ratio(m_filterRequest.authors.toStdString(),
+                               authors.toStdString()) >= 55;
+    bool authorsContainsRequest = authors.contains(m_filterRequest.authors);
+
+    if(authorsContainsRequest || authorsAndRequestAreSimilar)
+        return true;
+
+    return false;
+}
+
+bool LibraryProxyModel::filterAcceptsFormat(const QModelIndex& bookIndex) const
+{
+    auto formatData = sourceModel()->data(bookIndex, LibraryModel::FormatRole);
+    auto format = formatData.toString().toLower();
+    if(m_filterRequest.format.isEmpty())
+        return true;
+
+    if(m_filterRequest.format == format)
+        return true;
+
+    if(m_filterRequest.onlyFiles && format == "plain")
+        return true;
+
+    if(m_filterRequest.onlyBooks && format != "plain")
+        return true;
+
+    return false;
+}
+
+bool LibraryProxyModel::filterAcceptsStatus(const QModelIndex& bookIndex) const
+{
+    auto currentPage =
+        sourceModel()->data(bookIndex, LibraryModel::CurrentPageRole).toInt();
+    auto pageCount =
+        sourceModel()->data(bookIndex, LibraryModel::PageCountRole).toInt();
+
+    if(m_filterRequest.read && currentPage != pageCount)
+        return false;
+
+    if(m_filterRequest.unread && currentPage == pageCount)
+        return false;
 
     return true;
 }

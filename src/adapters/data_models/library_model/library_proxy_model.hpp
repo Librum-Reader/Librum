@@ -61,8 +61,12 @@ private:
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
-    std::vector<adapters::dtos::TagDto> getTags(QModelIndex index) const;
+    bool filterAcceptsTags(const QModelIndex& bookIndex) const;
+    std::vector<adapters::dtos::TagDto> getTags(const QModelIndex& index) const;
     bool bookContainsAllTags(std::vector<adapters::dtos::TagDto> tags) const;
+    bool filterAcceptsAuthors(const QModelIndex& bookIndex) const;
+    bool filterAcceptsFormat(const QModelIndex& bookIndex) const;
+    bool filterAcceptsStatus(const QModelIndex& bookIndex) const;
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";
