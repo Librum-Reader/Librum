@@ -58,6 +58,61 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     }
 }
 
+std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
+    const QModelIndex& left, const QModelIndex& right) const
+{
+    if(m_sortString.isEmpty())
+        return std::nullopt;
+
+    auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
+    auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
+
+    double leftRatio = fuzzCompareWithSortingString(leftTitle.toString());
+    double rightRatio = fuzzCompareWithSortingString(rightTitle.toString());
+
+    if(leftRatio > rightRatio)
+        return true;
+    if(leftRatio < rightRatio)
+        return false;
+    else
+        return std::nullopt;
+}
+
+double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
+{
+    // If the sorting string is a substring of str, return a high ratio
+    auto leftSubstrPos = str.toLower().indexOf(m_sortString.toLower());
+    if(leftSubstrPos != -1)
+    {
+        // The further at the front, the better the ratio should be
+        double ratio = 100 - leftSubstrPos;
+        // A difference in lentgh of the strings should reduce the score
+        ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
+
+        return ratio;
+    }
+
+    return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
+                                  str.toStdString());
+}
+
+void LibraryProxyModel::setFilterRequest(QString authors, QString format,
+                                         QString date, bool onlyBooks,
+                                         bool onlyFiles, bool read, bool unread)
+{
+    m_filterRequest = FilterRequest {
+        .authors = authors.toLower(),
+        .format = format.toLower(),
+        .date = date.toLower(),
+        .onlyBooks = onlyBooks,
+        .onlyFiles = onlyFiles,
+        .read = read,
+        .unread = unread,
+    };
+
+    invalidateFilter();
+}
+
 bool LibraryProxyModel::filterAcceptsRow(int source_row,
                                          const QModelIndex& source_parent) const
 {
@@ -101,43 +156,6 @@ QString LibraryProxyModel::getSortString()
     return m_sortString;
 }
 
-std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
-    const QModelIndex& left, const QModelIndex& right) const
-{
-    if(m_sortString.isEmpty())
-        return std::nullopt;
-
-    auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
-    auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
-
-    double leftRatio = fuzzCompareWithSortingString(leftTitle.toString());
-    double rightRatio = fuzzCompareWithSortingString(rightTitle.toString());
-
-    if(leftRatio > rightRatio)
-        return true;
-    if(leftRatio < rightRatio)
-        return false;
-    else
-        return std::nullopt;
-}
-
-void LibraryProxyModel::setFilterRequest(QString authors, QString format,
-                                         QString date, bool onlyBooks,
-                                         bool onlyFiles, bool read, bool unread)
-{
-    m_filterRequest = FilterRequest {
-        .authors = authors.toLower(),
-        .format = format.toLower(),
-        .date = date.toLower(),
-        .onlyBooks = onlyBooks,
-        .onlyFiles = onlyFiles,
-        .read = read,
-        .unread = unread,
-    };
-
-    invalidateFilter();
-}
-
 void LibraryProxyModel::addFilterTag(QString tag)
 {
     m_tags.emplace_back(tag);
@@ -158,24 +176,6 @@ void LibraryProxyModel::clearFilterTags()
 {
     m_tags.clear();
     invalidateFilter();
-}
-
-double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
-{
-    // If the sorting string is a substring of str, return a high ratio
-    auto leftSubstrPos = str.toLower().indexOf(m_sortString.toLower());
-    if(leftSubstrPos != -1)
-    {
-        // The further at the front, the better the ratio should be
-        double ratio = 100 - leftSubstrPos;
-        // A difference in lentgh of the strings should reduce the score
-        ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
-
-        return ratio;
-    }
-
-    return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
-                                  str.toStdString());
 }
 
 bool LibraryProxyModel::stringIsLexicographicallyLess(

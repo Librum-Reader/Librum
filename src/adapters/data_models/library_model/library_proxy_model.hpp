@@ -3,7 +3,6 @@
 #include <optional>
 #include <vector>
 #include "filter_request.hpp"
-#include "fuzz_comparison_result.hpp"
 #include "tag_dto.hpp"
 
 namespace adapters::data_models
