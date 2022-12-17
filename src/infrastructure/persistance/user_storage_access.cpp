@@ -8,7 +8,7 @@ namespace infrastructure::persistence
 
 void UserStorageAccess::getUser(const QString& authToken)
 {
-    auto request = createRequest(data::patchUserEndpoint, authToken);
+    auto request = createRequest(data::getUserEndpoint, authToken);
     m_reply.reset(m_networkAccessManager.get(request));
 
     connect(m_reply.get(), &QNetworkReply::finished, this,
