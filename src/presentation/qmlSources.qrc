@@ -88,8 +88,8 @@
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
         <file>settings/MResetSettingsPopup.qml</file>
-        <file>readingPage/DocumentView.qml</file>
-        <file>readingPage/PageView.qml</file>
+        <file>readingPage/MDocumentView.qml</file>
+        <file>readingPage/MPageView.qml</file>
         <file>loginPage/MLoginFailedPopup.qml</file>
         <file>readingPage/DocumentNavigation.js</file>
     </qresource>

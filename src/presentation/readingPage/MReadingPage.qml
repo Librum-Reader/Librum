@@ -313,7 +313,7 @@ Page
                 clip: true
                 
                 
-                DocumentView
+                MDocumentView
                 {
                     id: documentView
                     Layout.fillWidth: true

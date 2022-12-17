@@ -56,7 +56,7 @@ Pane
             }
             onWidthChanged: toolbar.pageWidth = width
             
-            delegate: PageView
+            delegate: MPageView
             {
                 width: listView.contentWidth
                 height: Math.round(width / pageRatio) + pageSpacing
