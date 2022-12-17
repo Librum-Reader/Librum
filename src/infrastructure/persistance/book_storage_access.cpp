@@ -139,7 +139,7 @@ bool BookStorageAccess::checkForErrors(int expectedStatusCode,
        expectedStatusCode != statusCode)
     {
         qWarning() << "Book storage error: " << reply->errorString()
-                   << "\n\nServer reply: " << reply->readAll();
+                   << "\nServer reply: " << reply->readAll();
         return true;
     }
 

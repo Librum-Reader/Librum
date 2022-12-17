@@ -47,15 +47,13 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
 
 bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
 {
-    if(m_reply->error() != QNetworkReply::NoError)
-        qDebug() << "there was an error! " << m_reply->errorString();
-
     int statusCode =
         m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(statusCode != expectedStatusCode)
+    if(m_reply->error() != QNetworkReply::NoError ||
+       statusCode != expectedStatusCode)
     {
-        qDebug() << "there was an error! " << m_reply->readAll();
-        return true;
+        qWarning() << "Authentication error: " << m_reply->errorString()
+                   << "\nServer reply: " << m_reply->readAll();
     }
 
     return false;
@@ -84,17 +82,15 @@ void AuthenticationAccess::proccessAuthenticationResult()
         return;
     }
 
-    QString result = m_reply->readAll();
-    emit authenticationFinished(result);
+    emit authenticationFinished(m_reply->readAll());
 }
 
 void AuthenticationAccess::proccessRegistrationResult()
 {
-    QString message = m_reply->readAll();
     auto expectedStatusCode = 201;
     if(checkForErrors(expectedStatusCode))
     {
-        emit registrationFinished(false, message);
+        emit registrationFinished(false, m_reply->readAll());
         return;
     }
 
