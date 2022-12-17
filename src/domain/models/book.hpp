@@ -83,7 +83,7 @@ public:
 
     void update(const Book& other);
     QByteArray toJson() const;
-    static Book fromJson(const QJsonObject& jsonObject);
+    static Book fromJson(const QJsonObject& jsonBook);
 
 
     static const int maxCoverWidth { 188 };
@@ -96,6 +96,9 @@ public:
 
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other);
+    static BookMetaData getBookMetaDataFromJson(const QJsonObject& jsonBook);
+    static QImage getBookCoverFromJson(const QJsonObject& jsonBook);
+    static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
 
     QUuid m_uuid;
     BookMetaData m_metaData;

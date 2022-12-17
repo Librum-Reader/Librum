@@ -377,24 +377,38 @@ QByteArray Book::toJson() const
     return strJson.toUtf8();
 }
 
-Book Book::fromJson(const QJsonObject& jsonObject)
+Book Book::fromJson(const QJsonObject& jsonBook)
+{
+    BookMetaData metaData = getBookMetaDataFromJson(jsonBook);
+    QString filePath = jsonBook["filePath"].toString();
+    int currentPage = jsonBook["currentPage"].toInt();
+    QString uuid = jsonBook["uuid"].toString();
+
+    Book book(filePath, metaData, currentPage, uuid);
+    addTagsToBook(book, jsonBook["tags"].toArray());
+
+    return book;
+}
+
+BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
 {
     BookMetaData metaData {
-        .title = jsonObject["title"].toString(),
-        .authors = jsonObject["authors"].toString(),
-        .creator = jsonObject["creator"].toString(),
-        .creationDate = jsonObject["creationDate"].toString(),
-        .format = jsonObject["format"].toString(),
-        .language = jsonObject["language"].toString(),
-        .documentSize = jsonObject["documentSize"].toString(),
-        .pagesSize = jsonObject["pagesSize"].toString(),
-        .pageCount = jsonObject["pageCount"].toInt(),
+        .title = jsonBook["title"].toString(),
+        .authors = jsonBook["authors"].toString(),
+        .creator = jsonBook["creator"].toString(),
+        .creationDate = jsonBook["creationDate"].toString(),
+        .format = jsonBook["format"].toString(),
+        .language = jsonBook["language"].toString(),
+        .documentSize = jsonBook["documentSize"].toString(),
+        .pagesSize = jsonBook["pagesSize"].toString(),
+        .pageCount = jsonBook["pageCount"].toInt(),
         .addedToLibrary = QDateTime::fromString(
-            jsonObject["addedToLibrary"].toString(), dateTimeStringFormat),
+            jsonBook["addedToLibrary"].toString(), dateTimeStringFormat),
         .lastModified = QDateTime::fromString(
-            jsonObject["lastModified"].toString(), dateTimeStringFormat),
-        .lastOpened = QDateTime::fromString(jsonObject["lastOpened"].toString(),
+            jsonBook["lastModified"].toString(), dateTimeStringFormat),
+        .lastOpened = QDateTime::fromString(jsonBook["lastOpened"].toString(),
                                             dateTimeStringFormat),
+        .cover = getBookCoverFromJson(jsonBook),
     };
 
     // Specify that the dates are UTC, else Qt thinks its local time
@@ -402,25 +416,24 @@ Book Book::fromJson(const QJsonObject& jsonObject)
     metaData.lastModified.setTimeSpec(Qt::UTC);
     metaData.lastOpened.setTimeSpec(Qt::UTC);
 
-    auto cover = jsonObject["cover"].toString();
-    metaData.cover = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
+    return metaData;
+}
 
+QImage Book::getBookCoverFromJson(const QJsonObject& jsonBook)
+{
+    auto cover = jsonBook["cover"].toString();
+    return QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
+}
 
-    QString filePath = jsonObject["filePath"].toString();
-    int currentPage = jsonObject["currentPage"].toInt();
-    QString uuid = jsonObject["uuid"].toString();
-
-    Book book(filePath, metaData, currentPage, uuid);
-
-    // tags
-    QJsonArray tags = jsonObject["tags"].toArray();
-    for(const auto& tag : tags)
+void Book::addTagsToBook(Book& book, const QJsonArray& jsonTags)
+{
+    for(const auto& jsonTag : jsonTags)
     {
-        Tag tagToAdd = Tag::fromJson(tag.toObject());
-        book.addTag(tagToAdd);
-    }
+        auto tagObject = jsonTag.toObject();
+        Tag tag = Tag::fromJson(tagObject);
 
-    return book;
+        book.addTag(tag);
+    }
 }
 
 }  // namespace domain::models
