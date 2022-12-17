@@ -10,7 +10,6 @@
 #include "document_item.hpp"
 #include "gui/pagepainter.h"
 #include "gui/priorities.h"
-#include "settings.hpp"
 
 namespace cpp_elements
 {
