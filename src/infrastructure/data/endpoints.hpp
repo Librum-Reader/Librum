@@ -13,10 +13,10 @@ inline const QString authenticationEndpoint { baseUrl + "/api/login" };
 inline const QString registrationEndpoint { baseUrl + "/api/register" };
 
 // Book storage
-inline const QString bookCreationEndpoint { baseUrl + "/api/book/create" };
+inline const QString bookCreationEndpoint { baseUrl + "/api/book" };
 inline const QString bookUpdateEndpoint { baseUrl + "/api/book" };
 inline const QString bookDeletionEndpoint { baseUrl + "/api/book" };
-inline const QString getBooksMetadataEndpoint { baseUrl + "/api/book/get" };
+inline const QString getBooksMetadataEndpoint { baseUrl + "/api/book" };
 
 // User storage
 inline const QString getUserEndpoint { baseUrl + "/api/user" };
