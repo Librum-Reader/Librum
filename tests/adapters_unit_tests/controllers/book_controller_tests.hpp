@@ -253,8 +253,8 @@ TEST_F(ABookController, SucceedsGettingABook)
     const auto& bookUuid = book.getUuid();
 
     std::vector<Book> booksToReturn { book };
-    booksToReturn[0].addTag(tagNames[0]);
-    booksToReturn[0].addTag(tagNames[1]);
+    booksToReturn[0].addTag(Tag(tagNames[0]));
+    booksToReturn[0].addTag(Tag(tagNames[1]));
 
 
     dtos::TagDto firstTag { .name = tagNames[0] };

@@ -2,6 +2,9 @@
 #include <QBuffer>
 #include <QByteArray>
 #include <QUrl>
+#include "tag.hpp"
+
+using domain::models::Tag;
 
 namespace adapters::controllers
 {
@@ -50,7 +53,9 @@ QString UserController::getTagUuidForName(const QString& name)
 
 QString UserController::addTag(const QString& name)
 {
-    QUuid uuid = m_userService->addTag(name);
+    Tag tag(name);
+    QUuid uuid = m_userService->addTag(tag);
+
     return uuid.toString();
 }
 
