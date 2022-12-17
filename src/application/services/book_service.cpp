@@ -65,7 +65,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
                                                  return book.getUuid() == uuid;
                                              });
 
-    size_t index = getBookIndex(uuid);
+    int index = getBookIndex(uuid);
 
     emit bookDeletionStarted(index);
     m_books.erase(bookPosition);
@@ -82,7 +82,7 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     if(!book)
         return BookOperationStatus::BookDoesNotExist;
 
-    size_t index = getBookIndex(uuid);
+    int index = getBookIndex(uuid);
 
     m_bookStorageManager->uninstallBook(uuid);
     book->setDownloaded(false);
@@ -314,7 +314,7 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
 {
     for(const auto& localBook : m_books)
     {
-        auto remoteBook = std::ranges::find_if(
+        auto remoteBookPos = std::ranges::find_if(
             remoteBooks,
             [&localBook](const Book& remoteBook)
             {
@@ -322,7 +322,7 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
             });
 
         // Create a new book on the server if no remote book exists
-        if(remoteBook == remoteBooks.end())
+        if(remoteBookPos == remoteBooks.end())
             m_bookStorageManager->addBook(localBook);
     }
 }
