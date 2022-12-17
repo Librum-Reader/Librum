@@ -69,9 +69,9 @@ void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
     auto request = createRequest(endPoint, authToken);
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
-    m_TagRemovalReply.reset(reply);
+    m_tagRemovalReply.reset(reply);
 
-    linkRequestToErrorHandling(m_TagRemovalReply.get(), 201);
+    linkRequestToErrorHandling(m_tagRemovalReply.get(), 201);
 }
 
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
@@ -85,9 +85,9 @@ void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
 
     auto result =
         m_networkAccessManager.sendCustomRequest(request, "PUT", jsonData);
-    m_TagRenameReply.reset(result);
+    m_tagRenameReply.reset(result);
 
-    linkRequestToErrorHandling(m_TagRenameReply.get(), 201);
+    linkRequestToErrorHandling(m_tagRenameReply.get(), 201);
 }
 
 void UserStorageAccess::proccessGetUserResult()

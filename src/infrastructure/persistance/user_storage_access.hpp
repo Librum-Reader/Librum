@@ -47,8 +47,8 @@ private:
     std::unique_ptr<QNetworkReply> m_lastNameUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_emailUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_profilePictureUpdateReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_TagRemovalReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_TagRenameReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_tagRemovalReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_tagRenameReply = nullptr;
 };
 
 }  // namespace infrastructure::persistence
