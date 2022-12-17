@@ -133,22 +133,17 @@ void BookStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
 bool BookStorageAccess::checkForErrors(int expectedStatusCode,
                                        QNetworkReply* reply)
 {
-    bool error = false;
-    if(reply->error() != QNetworkReply::NoError)
-    {
-        qDebug() << "error: " << reply->errorString();
-        error = true;
-    }
-
-    if(auto statusCode =
-           reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    auto statusCode =
+        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
     {
-        qDebug() << "unexpected statuscode: " << reply->readAll();
-        error = true;
+        qDebug() << "Book storage error: " << reply->errorString()
+                 << "\n\nServer reply: " << reply->readAll();
+        return true;
     }
 
-    return error;
+    return false;
 }
 
 }  // namespace infrastructure::persistence
