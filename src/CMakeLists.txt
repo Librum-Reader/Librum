@@ -42,6 +42,7 @@ get_target_property(INFRASTRUCTURE_INCLUDES infrastructure INTERFACE_INCLUDE_DIR
 
 add_subdirectory(adapters/)
 get_target_property(ADAPTERS_INCLUDES adapters INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(ADAPTERS_BIN_DIR adapters CMAKE_BINARY_DIR)
 
 add_subdirectory(presentation/)
 

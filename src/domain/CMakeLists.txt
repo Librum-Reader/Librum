@@ -34,3 +34,6 @@ target_link_libraries(domain
                     Qt5::Core
                     Qt5::Quick
 )
+
+target_compile_options(domain PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};-g3;-Og>")
+target_compile_options(domain PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

@@ -68,17 +68,17 @@ add_library(application
 
 target_include_directories(application
                 PUBLIC
-                    ${CMAKE_CURRENT_BINARY_DIR}
-                    ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${DOMAIN_INCLUDES}
-                    ${OKULARCORE_INCLUDES}
-                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
-                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
-                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
-                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
-                    ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
-                    ${CMAKE_CURRENT_SOURCE_DIR}/services
-                    ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                ${CMAKE_CURRENT_SOURCE_DIR}
+                ${CMAKE_CURRENT_BINARY_DIR}  # For generated settings file
+                ${DOMAIN_INCLUDES}
+                ${OKULARCORE_INCLUDES}
+                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
+                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
+                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/converters
+                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
+                ${CMAKE_CURRENT_SOURCE_DIR}/services
+                ${CMAKE_CURRENT_SOURCE_DIR}/utility
 )
 
 target_compile_definitions(application
@@ -95,5 +95,5 @@ target_link_libraries(application
                     okularcore
 )
 
-target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};-g3;-Og>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

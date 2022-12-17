@@ -86,5 +86,5 @@ target_link_libraries(adapters
                     Qt5::Network
 )
 
-target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};-g3;-Og>")
 target_compile_options(adapters PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
