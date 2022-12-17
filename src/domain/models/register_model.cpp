@@ -17,6 +17,9 @@ QString RegisterModel::generateErrorMessage(RegistrationResult status) const
 {
     switch(status)
     {
+    case RegistrationResult::Valid:
+        return "";
+        break;
     case RegistrationResult::FirstNameTooShort:
         return "First name too short";
         break;
