@@ -46,8 +46,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply =
-        m_networkAccessManager.sendCustomRequest(request, "PATCH", data);
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PUT", data);
     m_bookUpdatingReply.reset(reply);
 
     connect(m_bookUpdatingReply.get(), &QNetworkReply::finished, this,
