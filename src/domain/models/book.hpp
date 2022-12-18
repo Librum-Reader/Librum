@@ -75,7 +75,8 @@ public:
 
     int getPercentageRead() const;
 
-    domain::models::Tag* getTag(const QUuid& uuid);
+    domain::models::Tag* getTagByUuid(const QUuid& uuid);
+    domain::models::Tag* getTagByName(const QString& name);
     bool addTag(const Tag& tag);
     bool removeTag(const QUuid& uuid);
     bool renameTag(const QUuid& uuid, const QString& newName);

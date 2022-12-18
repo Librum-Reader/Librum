@@ -246,7 +246,7 @@ const std::vector<Tag>& Book::getTags() const
 
 bool Book::addTag(const Tag& tag)
 {
-    auto existingTag = getTag(tag.getUuid());
+    auto existingTag = getTagByUuid(tag.getUuid());
     if(existingTag != nullptr)
         return false;
 
@@ -270,8 +270,11 @@ bool Book::removeTag(const QUuid& uuid)
 
 bool Book::renameTag(const QUuid& uuid, const QString& newName)
 {
-    auto tag = getTag(uuid);
+    auto tag = getTagByUuid(uuid);
     if(tag == nullptr)
+        return false;
+
+    if(getTagByName(newName) != nullptr)
         return false;
 
     tag->setName(newName);
@@ -292,12 +295,25 @@ bool Book::tagsAreTheSame(const std::vector<Tag>& other) const
     return true;
 }
 
-Tag* Book::getTag(const QUuid& uuid)
+Tag* Book::getTagByUuid(const QUuid& uuid)
 {
     auto tagPosition = std::ranges::find_if(m_tags,
                                             [uuid](const Tag& tag)
                                             {
                                                 return tag.getUuid() == uuid;
+                                            });
+    if(tagPosition == m_tags.end())
+        return nullptr;
+
+    return &(*tagPosition);
+}
+
+Tag* Book::getTagByName(const QString& name)
+{
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [name](const Tag& tag)
+                                            {
+                                                return tag.getName() == name;
                                             });
     if(tagPosition == m_tags.end())
         return nullptr;
