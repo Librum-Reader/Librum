@@ -52,7 +52,7 @@ Pane
             onModelChanged:
             {
                 if(listView.currentItem != null)
-                    contentY = listView.currentItem.height * Globals.selectedBook.currentPage
+                    contentY = listView.currentItem.height * (Globals.selectedBook.currentPage - 1)
             }
             onWidthChanged: toolbar.pageWidth = width
             

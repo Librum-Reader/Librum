@@ -228,13 +228,13 @@ void Book::setDownloaded(bool newDownloaded)
 int Book::getBookProgressPercentage() const
 {
     if(!getLastOpened().isValid() ||
-       (getPageCount() > 1 && getCurrentPage() == 0))
+       (getPageCount() > 1 && getCurrentPage() <= 1))
     {
         return 0;
     }
 
     double pageCountAsDouble = static_cast<double>(getPageCount());
-    double percentageInDecimal = (getCurrentPage() + 1) / pageCountAsDouble;
+    double percentageInDecimal = (getCurrentPage()) / pageCountAsDouble;
 
     return std::round(percentageInDecimal * 100);
 }

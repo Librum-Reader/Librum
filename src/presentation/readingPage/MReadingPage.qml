@@ -125,7 +125,7 @@ Page
             {
                 // Save current page
                 var operationsMap = {};
-                operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage;
+                operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
                 BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
                 
                 loadPage(homePage, sidebar.homeItem, false);
