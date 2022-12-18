@@ -145,6 +145,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context,
 {
     Q_UNUSED(context);
 
+    bool writeToStdOut = false;
     QString logLine;
     switch(type)
     {
@@ -153,6 +154,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context,
         break;
     case QtDebugMsg:
         logLine = QString("Debug: %1").arg(msg);
+        writeToStdOut = true;
         break;
     case QtWarningMsg:
         logLine = QString("Warning: %1").arg(msg);
@@ -166,7 +168,7 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context,
     }
 
     QFile file("librum_log.txt");
-    if(file.open(QIODevice::WriteOnly | QIODevice::Append))
+    if(file.open(QIODevice::WriteOnly | QIODevice::Append) && !writeToStdOut)
     {
         QTextStream logStream(&file);
 
