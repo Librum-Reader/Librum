@@ -310,4 +310,140 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
     EXPECT_EQ(expectedResult, result);
 }
 
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageOne)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(10);
+    book.setCurrentPage(1);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(0, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCountOneAndCurrentPageOne)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(1);
+    book.setCurrentPage(1);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(100, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageMiddle)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(20);
+    book.setCurrentPage(10);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(50, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageEnd)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(20);
+    book.setCurrentPage(20);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(100, percentage);
+}
+
+TEST(ABook, FailsGettingBoookProgressPercentageIfLastOpenedInvalid)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(10);
+    book.setCurrentPage(5);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(0, percentage);
+}
+
+
 }  // namespace tests::domain
