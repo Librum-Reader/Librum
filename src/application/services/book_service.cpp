@@ -38,7 +38,10 @@ BookOperationStatus BookService::addBook(const QString& filePath)
 {
     auto bookMetaData = m_bookMetadataHelper->getBookMetaData(filePath);
     if(!bookMetaData)
+    {
+        qWarning() << "Could not open book at path: " << filePath;
         return BookOperationStatus::OpeningBookFailed;
+    }
 
     emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(filePath, bookMetaData.value());
@@ -57,7 +60,11 @@ BookOperationStatus BookService::addBook(const QString& filePath)
 BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
     if(!getBook(uuid))
+    {
+        qWarning() << "Could not delete book with uuid: " << uuid
+                   << ". The book was not found.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     auto bookPosition = std::ranges::find_if(m_books,
                                              [&uuid](const Book& book)
@@ -80,7 +87,11 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
 {
     auto book = getBook(uuid);
     if(!book)
+    {
+        qWarning() << "Could not uninstall book with uuid: " << uuid
+                   << ". No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     int index = getBookIndex(uuid);
 
@@ -95,7 +106,11 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
 {
     auto book = getBook(newBook.getUuid());
     if(!book)
+    {
+        qWarning() << "Could not update book with uuid: " << newBook.getUuid()
+                   << ". No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     // handle current page manually, so that "lastModified" doesnt get updated
     // when only the current page changes
@@ -106,6 +121,8 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     {
         book->update(newBook);
         book->updateLastModified();
+
+        qInfo() << "Updated book with uuid: " << newBook.getUuid();
     }
 
     int index = getBookIndex(newBook.getUuid());
@@ -121,10 +138,19 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
 {
     auto book = getBook(uuid);
     if(!book)
+    {
+        qWarning() << "Adding tag to book with uuid: " << uuid << " failed."
+                   << "No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     if(!book->addTag(tag))
+    {
+        qWarning() << "Adding tag called: " << tag.getName()
+                   << " to book with uuid: " << uuid << " failed."
+                   << "A tag with this name already exists.";
         return BookOperationStatus::TagAlreadyExists;
+    }
 
     m_bookStorageManager->updateBook(*book);
     book->updateLastModified();
@@ -140,10 +166,19 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
 {
     auto book = getBook(bookUuid);
     if(!book)
+    {
+        qWarning() << "Removing tag from book with uuid: " << bookUuid
+                   << " failed. No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     if(!book->removeTag(tagUuid))
+    {
+        qWarning() << "Removing tag with uuid: " << tagUuid
+                   << " from book with uuid: " << bookUuid << " failed."
+                   << "No tag with this uuid exists.";
         return BookOperationStatus::TagDoesNotExist;
+    }
 
     m_bookStorageManager->updateBook(*book);
     book->updateLastModified();
@@ -160,10 +195,20 @@ BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
 {
     auto book = getBook(bookUuid);
     if(!book)
+    {
+        qWarning() << "Renaming tag from book with uuid: " << bookUuid
+                   << " failed. No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     if(!book->renameTag(tagUuid, newName))
+    {
+        qWarning() << "Renaming tag with uuid: " << tagUuid
+                   << " from book with uuid: " << bookUuid << " failed."
+                   << "No tag with this uuid exists or a tag with this name "
+                      "already exists.";
         return BookOperationStatus::TagDoesNotExist;
+    }
 
     // User service renames the tag remotely, just apply it locally
     m_bookStorageManager->updateBookLocally(*book);
@@ -224,14 +269,23 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
 {
     auto book = getBook(uuid);
     if(!book)
+    {
+        qWarning() << "Saving book with uuid: " << uuid << " to file failed."
+                   << " No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
+    }
 
     QUrl existingBook = book->getFilePath();
     QUrl newBook = pathToFolder.path() + "/" + existingBook.fileName();
 
     auto result = QFile::copy(existingBook.path(), newBook.path());
     if(!result)
+    {
+        qWarning() << "Saving book with uuid: " << uuid
+                   << " to folder: " << pathToFolder.toLocalFile() << " failed."
+                   << " No book with this uuid exists.";
         return BookOperationStatus::OperationFailed;
+    }
 
 
     return BookOperationStatus::Success;
