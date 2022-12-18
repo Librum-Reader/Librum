@@ -45,7 +45,6 @@ QHash<int, QByteArray> UserTagsModel::roleNames() const
 
 void UserTagsModel::startInsertingRow(int row)
 {
-    //    qDebug() << "inserting";
     beginInsertRows(QModelIndex(), row, row);
 }
 
