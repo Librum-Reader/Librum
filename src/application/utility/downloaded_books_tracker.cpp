@@ -20,11 +20,13 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
     std::vector<Book> books;
     for(auto& metaFileName : libraryDir.entryList(QDir::Files))
     {
-        QFile metaFile(libraryDir.path() + "/" + metaFileName);
-        if(!metaFile.open(QFile::ReadOnly))
+        QFile metaFile(libraryDir.filePath(metaFileName));
+        if(!metaFile.open(QFile::ReadOnly | QIODevice::Text))
             continue;
 
-        auto jsonDoc = QJsonDocument::fromJson(metaFile.readAll());
+        QByteArray jsonData = metaFile.readAll();
+        auto jsonDoc = parseLibMetaFile(std::move(jsonData));
+
         auto bookObject = jsonDoc.object();
         auto book = Book::fromJson(bookObject);
 
@@ -107,6 +109,19 @@ void DownloadedBooksTracker::ensureUserLibraryExists()
     auto libraryDir = getUserLibraryDir();
 
     libraryDir.mkpath(libraryDir.path());
+}
+
+QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
+{
+    QJsonParseError parseError;
+    auto jsonDoc = QJsonDocument::fromJson(data, &parseError);
+    if(parseError.error != QJsonParseError::NoError)
+    {
+        qWarning() << "Error parsing .libmeta file:"
+                   << parseError.errorString();
+    }
+
+    return jsonDoc;
 }
 
 QDir DownloadedBooksTracker::getUserLibraryDir() const

@@ -20,6 +20,7 @@ public:
 
 private:
     void ensureUserLibraryExists();
+    QJsonDocument parseLibMetaFile(QByteArray&& libMetaFile) const;
     QString getUserLibraryName(QString email) const;
 
     QString m_libraryOwnerEmail;
