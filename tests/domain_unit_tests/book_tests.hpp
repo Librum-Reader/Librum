@@ -13,6 +13,141 @@ using namespace domain::models;
 namespace tests::domain
 {
 
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageOne)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(10);
+    book.setCurrentPage(1);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(0, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCountOneAndCurrentPageOne)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(1);
+    book.setCurrentPage(1);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(100, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageMiddle)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(20);
+    book.setCurrentPage(10);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(50, percentage);
+}
+
+TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageEnd)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime::currentDateTimeUtc(),
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(20);
+    book.setCurrentPage(20);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(100, percentage);
+}
+
+TEST(ABook, FailsGettingBoookProgressPercentageIfLastOpenedInvalid)
+{
+    BookMetaData bookMetaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = "203 KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 10,
+        .lastOpened = QDateTime(),  // Invalid
+        .cover = QImage(""),
+    };
+
+    Book book("some/path.pdf", bookMetaData);
+    book.setPageCount(10);
+    book.setCurrentPage(5);
+
+    // Act
+    int percentage = book.getBookProgressPercentage();
+
+    // Assert
+    EXPECT_EQ(0, percentage);
+}
+
 TEST(ABook, SucceedsAddingATag)
 {
     // Arrange
@@ -25,7 +160,7 @@ TEST(ABook, SucceedsAddingATag)
     // Assert
     EXPECT_TRUE(result);
     EXPECT_EQ(1, book.getTags().size());
-    EXPECT_EQ(tag.getName(), book.getTags()[0].getName());
+    EXPECT_EQ(tag, book.getTags()[0]);
 }
 
 TEST(ABook, FailsAddingATagIfItAlreadyExists)
@@ -74,6 +209,58 @@ TEST(ABook, FailsRemovingATagIfTagDoesNotExist)
     EXPECT_FALSE(result);
 }
 
+TEST(ABook, SucceedsRenamingATag)
+{
+    // Arrange
+    Book book("some/path", BookMetaData());
+    Tag tag("SomeTag");
+    book.addTag(tag);
+
+    QString newName = "SomeNewName";
+
+    // Act
+    auto result = book.renameTag(tag.getUuid(), newName);
+
+    // Assert
+    EXPECT_TRUE(result);
+    EXPECT_EQ(newName, book.getTags()[0].getName());
+}
+
+TEST(ABook, FailsRenamingATagIfNoTagWithTheUuidExists)
+{
+    // Arrange
+    Book book("some/path", BookMetaData());
+    Tag tag("SomeTag");
+    book.addTag(tag);
+
+    QUuid nonExistentUuid = QUuid::createUuid();
+    QString newName = "SomeNewName";
+
+    // Act
+    auto result = book.renameTag(nonExistentUuid, newName);
+
+    // Assert
+    EXPECT_FALSE(result);
+    EXPECT_NE(newName, book.getTags()[0].getName());
+}
+
+TEST(ABook, FailsRenamingATagIfNameAlreadyExists)
+{
+    // Arrange
+    Book book("some/path", BookMetaData());
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    book.addTag(firstTag);
+    book.addTag(secondTag);
+
+    // Act
+    auto result = book.renameTag(firstTag.getUuid(), secondTag.getName());
+
+    // Assert
+    EXPECT_FALSE(result);
+    EXPECT_NE(secondTag.getName(), book.getTags()[0].getName());
+}
+
 TEST(ABook, SucceedsGettingAllTags)
 {
     // Arrange
@@ -105,17 +292,14 @@ TEST(ABook, SucceedsUpdatingBook)
     Tag tag("SomeTag");
     bookToUpdateWith.addTag(tag);
 
-    auto expectedResult = bookToUpdateWith;
-
 
     // Act
     book.update(bookToUpdateWith);
 
     // Assert
-    EXPECT_EQ(expectedResult.getTitle(), book.getTitle());
-    EXPECT_EQ(expectedResult.getFilePath(), book.getFilePath());
-    EXPECT_EQ(expectedResult.getCover(), book.getCover());
-    EXPECT_EQ(expectedResult.getTags()[0], book.getTags()[0]);
+    EXPECT_EQ(bookToUpdateWith.getTitle(), book.getTitle());
+    EXPECT_EQ(bookToUpdateWith.getFilePath(), book.getFilePath());
+    EXPECT_EQ(bookToUpdateWith.getTags()[0], book.getTags()[0]);
 }
 
 TEST(ABook, SucceedsSerializingToJson)
@@ -309,141 +493,5 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
     // Assert
     EXPECT_EQ(expectedResult, result);
 }
-
-TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageOne)
-{
-    BookMetaData bookMetaData {
-        .title = "SomeTitle",
-        .authors = "SomeAuthor",
-        .creator = "SomeCreator",
-        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
-        .format = "pdf",
-        .language = "English",
-        .documentSize = "203 KiB",
-        .pagesSize = "400 x 800",
-        .pageCount = 10,
-        .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
-    };
-
-    Book book("some/path.pdf", bookMetaData);
-    book.setPageCount(10);
-    book.setCurrentPage(1);
-
-    // Act
-    int percentage = book.getBookProgressPercentage();
-
-    // Assert
-    EXPECT_EQ(0, percentage);
-}
-
-TEST(ABook, SucceedsGettingBoookProgressPercentageIfCountOneAndCurrentPageOne)
-{
-    BookMetaData bookMetaData {
-        .title = "SomeTitle",
-        .authors = "SomeAuthor",
-        .creator = "SomeCreator",
-        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
-        .format = "pdf",
-        .language = "English",
-        .documentSize = "203 KiB",
-        .pagesSize = "400 x 800",
-        .pageCount = 10,
-        .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
-    };
-
-    Book book("some/path.pdf", bookMetaData);
-    book.setPageCount(1);
-    book.setCurrentPage(1);
-
-    // Act
-    int percentage = book.getBookProgressPercentage();
-
-    // Assert
-    EXPECT_EQ(100, percentage);
-}
-
-TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageMiddle)
-{
-    BookMetaData bookMetaData {
-        .title = "SomeTitle",
-        .authors = "SomeAuthor",
-        .creator = "SomeCreator",
-        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
-        .format = "pdf",
-        .language = "English",
-        .documentSize = "203 KiB",
-        .pagesSize = "400 x 800",
-        .pageCount = 10,
-        .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
-    };
-
-    Book book("some/path.pdf", bookMetaData);
-    book.setPageCount(20);
-    book.setCurrentPage(10);
-
-    // Act
-    int percentage = book.getBookProgressPercentage();
-
-    // Assert
-    EXPECT_EQ(50, percentage);
-}
-
-TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageEnd)
-{
-    BookMetaData bookMetaData {
-        .title = "SomeTitle",
-        .authors = "SomeAuthor",
-        .creator = "SomeCreator",
-        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
-        .format = "pdf",
-        .language = "English",
-        .documentSize = "203 KiB",
-        .pagesSize = "400 x 800",
-        .pageCount = 10,
-        .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
-    };
-
-    Book book("some/path.pdf", bookMetaData);
-    book.setPageCount(20);
-    book.setCurrentPage(20);
-
-    // Act
-    int percentage = book.getBookProgressPercentage();
-
-    // Assert
-    EXPECT_EQ(100, percentage);
-}
-
-TEST(ABook, FailsGettingBoookProgressPercentageIfLastOpenedInvalid)
-{
-    BookMetaData bookMetaData {
-        .title = "SomeTitle",
-        .authors = "SomeAuthor",
-        .creator = "SomeCreator",
-        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
-        .format = "pdf",
-        .language = "English",
-        .documentSize = "203 KiB",
-        .pagesSize = "400 x 800",
-        .pageCount = 10,
-        .lastOpened = QDateTime(),
-        .cover = QImage(""),
-    };
-
-    Book book("some/path.pdf", bookMetaData);
-    book.setPageCount(10);
-    book.setCurrentPage(5);
-
-    // Act
-    int percentage = book.getBookProgressPercentage();
-
-    // Assert
-    EXPECT_EQ(0, percentage);
-}
-
 
 }  // namespace tests::domain
