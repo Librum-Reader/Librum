@@ -186,7 +186,7 @@ Item
                             id: percentageLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
-                            text: model.percentageRead + "%"
+                            text: model.bookProgressPercentage + "%"
                             font.weight: Font.DemiBold
                             color: Style.colorBaseTitle
                             font.pointSize: 10

@@ -70,8 +70,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case CurrentPageRole:
         return book.getCurrentPage();
         break;
-    case PercentageReadRole:
-        return book.getPercentageRead();
+    case BookProgressPercentageRole:
+        return book.getBookProgressPercentage();
         break;
     case AddedToLibraryRole:
         return book.getAddedToLibrary().toLocalTime().toString(
@@ -111,7 +111,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { PagesSizeRole, "pagesSize" },
         { PageCountRole, "pageCount" },
         { CurrentPageRole, "currentPage" },
-        { PercentageReadRole, "percentageRead" },
+        { BookProgressPercentageRole, "bookProgressPercentage" },
         { AddedToLibraryRole, "addedToLibrary" },
         { LastOpenedRole, "lastOpened" },
         { CoverRole, "cover" },

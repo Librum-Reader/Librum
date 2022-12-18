@@ -303,7 +303,7 @@ dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
     bookDto.pagesSize = book.getPagesSize();
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
-    bookDto.percentageRead = book.getPercentageRead();
+    bookDto.bookProgressPercentage = book.getBookProgressPercentage();
 
     bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
         Book::dateTimeStringFormat);
