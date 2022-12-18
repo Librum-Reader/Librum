@@ -7,7 +7,7 @@ Tag::Tag(const QString& name, const QString& uuid) :
     m_name(name)
 {
     // Capitalize 'm_name' by default
-    m_name.at(0).toUpper();
+    m_name[0] = m_name[0].toUpper();
 
     // Generate uuid if it's not provided, else assign
     if(uuid.isEmpty())
