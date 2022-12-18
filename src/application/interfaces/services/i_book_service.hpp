@@ -24,16 +24,16 @@ public:
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus updateBook(
-        const domain::models::Book& newBook) = 0;
+        const domain::entities::Book& newBook) = 0;
 
-    virtual const std::vector<domain::models::Book>& getBooks() const = 0;
-    virtual const domain::models::Book* getBook(const QUuid& uuid) const = 0;
-    virtual domain::models::Book* getBook(const QUuid& uuid) = 0;
+    virtual const std::vector<domain::entities::Book>& getBooks() const = 0;
+    virtual const domain::entities::Book* getBook(const QUuid& uuid) const = 0;
+    virtual domain::entities::Book* getBook(const QUuid& uuid) = 0;
     virtual int getBookIndex(const QUuid& uuid) const = 0;
     virtual int getBookCount() const = 0;
 
     virtual BookOperationStatus addTag(const QUuid& uuid,
-                                       const domain::models::Tag& tag) = 0;
+                                       const domain::entities::Tag& tag) = 0;
     virtual BookOperationStatus removeTag(const QUuid& bookUuid,
                                           const QUuid& tagUuid) = 0;
     virtual BookOperationStatus renameTag(const QUuid& bookUuid,

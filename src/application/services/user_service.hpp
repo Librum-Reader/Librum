@@ -29,8 +29,8 @@ public:
     QImage getProfilePicture() const override;
     void setProfilePicture(const QImage& image) override;
 
-    const std::vector<domain::models::Tag>& getTags() const override;
-    QUuid addTag(const domain::models::Tag& tag) override;
+    const std::vector<domain::entities::Tag>& getTags() const override;
+    QUuid addTag(const domain::entities::Tag& tag) override;
     bool removeTag(const QUuid& uuid) override;
     bool renameTag(const QUuid& uuid, const QString& newName) override;
 
@@ -42,12 +42,12 @@ public slots:
 
 
 private slots:
-    void proccessUserInformation(const domain::models::User& user,
+    void proccessUserInformation(const domain::entities::User& user,
                                  bool success);
 
 private:
     IUserStorageGateway* m_userStorageGateway;
-    domain::models::User m_user;
+    domain::entities::User m_user;
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
 };

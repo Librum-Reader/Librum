@@ -16,10 +16,11 @@ class IAuthenticationService : public QObject
 
 public:
     virtual ~IAuthenticationService() noexcept = default;
-    virtual void loginUser(const domain::models::LoginModel& loginModel) = 0;
+    virtual void loginUser(
+        const domain::value_objects::LoginModel& loginModel) = 0;
     virtual void logoutUser() = 0;
     virtual void registerUser(
-        const domain::models::RegisterModel& registerModel) = 0;
+        const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
     void loginFinished(bool success);

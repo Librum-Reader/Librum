@@ -10,7 +10,7 @@
 namespace adapters::controllers
 {
 
-using namespace domain::models;
+using namespace domain::entities;
 using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService) :
@@ -288,7 +288,7 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
     return scaledCover;
 }
 
-dtos::BookDto BookController::getDtoFromBook(const domain::models::Book& book)
+dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
 {
     dtos::BookDto bookDto;
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);

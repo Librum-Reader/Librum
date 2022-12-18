@@ -39,7 +39,7 @@ private:
     void refreshBookChache();
     dtos::BookDto* getBookFromChache(const QString& uuid);
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
-    dtos::BookDto getDtoFromBook(const domain::models::Book& book);
+    dtos::BookDto getDtoFromBook(const domain::entities::Book& book);
 
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;

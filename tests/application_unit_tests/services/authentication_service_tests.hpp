@@ -18,10 +18,10 @@ namespace tests::application
 class AuthenticationGatewayMock : public IAuthenticationGateway
 {
 public:
-    MOCK_METHOD(void, authenticateUser, (const models::LoginModel& loginModel),
-                (override));
+    MOCK_METHOD(void, authenticateUser,
+                (const value_objects::LoginModel& loginModel), (override));
     MOCK_METHOD(void, registerUser,
-                (const domain::models::RegisterModel& registerModel),
+                (const domain::value_objects::RegisterModel& registerModel),
                 (override));
 };
 
@@ -45,7 +45,7 @@ TEST_F(AnAuthenticationService, SucceedsLogingUserIn)
     // Arrange
     QString someValidEmail = "someEmail@librum.com";
     QString someValidPassword = "SomePassword123";
-    models::LoginModel loginModel(someValidEmail, someValidPassword);
+    value_objects::LoginModel loginModel(someValidEmail, someValidPassword);
 
 
     // Expect
@@ -62,7 +62,7 @@ TEST_F(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 
     QString someInvalidEmail = "inval";
     QString someInvalidPassword = "Somep";
-    models::LoginModel loginModel(someInvalidEmail, someInvalidPassword);
+    value_objects::LoginModel loginModel(someInvalidEmail, someInvalidPassword);
 
 
     // Expect
@@ -85,8 +85,8 @@ TEST_F(AnAuthenticationService, SucceedsRegisteringUser)
     QString email = "someEmail@librum.com";
     QString password = "SomePassword123";
     bool keepUpdated = true;
-    models::RegisterModel registerModel(firstName, lastName, email, password,
-                                        keepUpdated);
+    value_objects::RegisterModel registerModel(firstName, lastName, email,
+                                               password, keepUpdated);
 
 
     // Expect
@@ -107,8 +107,8 @@ TEST_F(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
     QString email = "someEmail@librum.com";
     QString password = "SomePassword123";
     bool keepUpdated = true;
-    models::RegisterModel registerModel(invalidFirstName, lastName, email,
-                                        password, keepUpdated);
+    value_objects::RegisterModel registerModel(invalidFirstName, lastName,
+                                               email, password, keepUpdated);
 
 
     // Expect

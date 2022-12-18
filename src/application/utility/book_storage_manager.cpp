@@ -3,7 +3,7 @@
 namespace application::utility
 {
 
-using namespace domain::models;
+using namespace domain::entities;
 
 BookStorageManager::BookStorageManager(
     IBookStorageGateway* bookStorageGateway,
@@ -56,14 +56,14 @@ void BookStorageManager::updateBook(const Book& book)
     updateBookRemotely(book);
 }
 
-void BookStorageManager::updateBookLocally(const domain::models::Book& book)
+void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
 {
     // Only try updating book in local-library if the book is downloaded
     if(book.getDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(book);
 }
 
-void BookStorageManager::updateBookRemotely(const domain::models::Book& book)
+void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
 {
     m_bookStorageGateway->updateBook(m_authenticationToken, book);
 }

@@ -3,7 +3,7 @@
 #include <QJsonObject>
 
 
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace adapters::gateways
 {

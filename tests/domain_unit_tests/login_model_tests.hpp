@@ -4,7 +4,7 @@
 #include "login_model.hpp"
 
 
-using namespace domain::models;
+using namespace domain::value_objects;
 
 namespace tests::domain
 {

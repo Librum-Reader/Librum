@@ -2,7 +2,7 @@
 #include "i_authentication_gateway.hpp"
 
 
-using namespace domain::models;
+using namespace domain::value_objects;
 
 namespace application::services
 {

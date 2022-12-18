@@ -39,7 +39,8 @@ struct AnAuthenticationGateway : public ::testing::Test
 TEST_F(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
-    models::LoginModel loginModel("someEmail@librum.com", "SomePassword123");
+    value_objects::LoginModel loginModel("someEmail@librum.com",
+                                         "SomePassword123");
 
 
     // Expect
@@ -52,8 +53,8 @@ TEST_F(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 TEST_F(AnAuthenticationGateway, SucceedsRegisteringAUser)
 {
     // Arrange
-    models::RegisterModel registerModel("John", "Doe", "someEmail@librum.com",
-                                        "SomePassword123", false);
+    value_objects::RegisterModel registerModel(
+        "John", "Doe", "someEmail@librum.com", "SomePassword123", false);
 
 
     // Expect

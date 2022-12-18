@@ -2,8 +2,8 @@
 #include <QDebug>
 #include "tag.hpp"
 
-using domain::models::Tag;
-using domain::models::User;
+using domain::entities::Tag;
+using domain::entities::User;
 
 namespace application::services
 {
@@ -87,12 +87,12 @@ void UserService::setProfilePicture(const QImage& image)
     m_userStorageGateway->changeProfilePicture(m_authenticationToken, image);
 }
 
-const std::vector<domain::models::Tag>& UserService::getTags() const
+const std::vector<domain::entities::Tag>& UserService::getTags() const
 {
     return m_user.getTags();
 }
 
-QUuid UserService::addTag(const domain::models::Tag& tag)
+QUuid UserService::addTag(const domain::entities::Tag& tag)
 {
     m_user.addTag(tag);
     auto userTag = m_user.getTagByName(tag.getName());
@@ -118,7 +118,7 @@ bool UserService::renameTag(const QUuid& uuid, const QString& newName)
     return success;
 }
 
-void UserService::proccessUserInformation(const domain::models::User& user,
+void UserService::proccessUserInformation(const domain::entities::User& user,
                                           bool success)
 {
     if(!success)

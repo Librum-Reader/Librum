@@ -13,13 +13,13 @@ public:
     BookStorageManager(IBookStorageGateway* bookStorageGateway,
                        IDownloadedBooksTracker* downloadedBooksTracker);
 
-    void addBook(const domain::models::Book& bookToAdd) override;
+    void addBook(const domain::entities::Book& bookToAdd) override;
     void deleteBook(const QUuid& uuid) override;
     void uninstallBook(const QUuid& uuid) override;
-    void updateBook(const domain::models::Book& book) override;
-    void updateBookLocally(const domain::models::Book& book) override;
-    void updateBookRemotely(const domain::models::Book& book) override;
-    std::vector<domain::models::Book> loadLocalBooks() override;
+    void updateBook(const domain::entities::Book& book) override;
+    void updateBookLocally(const domain::entities::Book& book) override;
+    void updateBookRemotely(const domain::entities::Book& book) override;
+    std::vector<domain::entities::Book> loadLocalBooks() override;
     void loadRemoteBooks() override;
 
     void setUserData(const QString& email, const QString& authToken) override;

@@ -11,7 +11,7 @@ using namespace testing;
 using ::testing::ReturnRef;
 using namespace adapters::controllers;
 using namespace adapters;
-using namespace domain::models;
+using namespace domain::value_objects;
 using namespace application;
 
 namespace tests::adapters
@@ -23,7 +23,7 @@ public:
     MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
     MOCK_METHOD(void, logoutUser, (), (override));
     MOCK_METHOD(void, registerUser,
-                (const domain::models::RegisterModel& registerModel),
+                (const domain::value_objects::RegisterModel& registerModel),
                 (override));
     MOCK_METHOD(void, processAuthenticationResult, (const QString& token),
                 (override));

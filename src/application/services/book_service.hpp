@@ -23,18 +23,18 @@ public:
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
     BookOperationStatus updateBook(
-        const domain::models::Book& newBook) override;
+        const domain::entities::Book& newBook) override;
 
     BookOperationStatus addTag(const QUuid& uuid,
-                               const domain::models::Tag& tag) override;
+                               const domain::entities::Tag& tag) override;
     BookOperationStatus removeTag(const QUuid& bookUuid,
                                   const QUuid& tagUuid) override;
     BookOperationStatus renameTag(const QUuid& bookUuid, const QUuid& tagUuid,
                                   const QString& newName) override;
 
-    const std::vector<domain::models::Book>& getBooks() const override;
-    const domain::models::Book* getBook(const QUuid& uuid) const override;
-    domain::models::Book* getBook(const QUuid& uuid) override;
+    const std::vector<domain::entities::Book>& getBooks() const override;
+    const domain::entities::Book* getBook(const QUuid& uuid) const override;
+    domain::entities::Book* getBook(const QUuid& uuid) override;
     int getBookIndex(const QUuid& uuid) const override;
     int getBookCount() const override;
 
@@ -49,23 +49,23 @@ public slots:
 
 private slots:
     void storeBookCover(const QPixmap* pixmap);
-    void mergeLibraries(const std::vector<domain::models::Book>& books);
+    void mergeLibraries(const std::vector<domain::entities::Book>& books);
 
 private:
     void mergeRemoteLibraryIntoLocalLibrary(
-        const std::vector<domain::models::Book>& remoteBooks);
+        const std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(
-        const std::vector<domain::models::Book>& remoteBooks);
-    void mergeBooks(domain::models::Book& original,
-                    const domain::models::Book& toMerge);
-    utility::MergeStatus mergeCurrentPage(domain::models::Book& original,
-                                          const domain::models::Book& mergee);
-    utility::MergeStatus mergeBookData(domain::models::Book& original,
-                                       const domain::models::Book& mergee);
+        const std::vector<domain::entities::Book>& remoteBooks);
+    void mergeBooks(domain::entities::Book& original,
+                    const domain::entities::Book& toMerge);
+    utility::MergeStatus mergeCurrentPage(domain::entities::Book& original,
+                                          const domain::entities::Book& mergee);
+    utility::MergeStatus mergeBookData(domain::entities::Book& original,
+                                       const domain::entities::Book& mergee);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;
-    std::vector<domain::models::Book> m_books;
+    std::vector<domain::entities::Book> m_books;
     QTimer m_fetchChangesTimer;
 };
 

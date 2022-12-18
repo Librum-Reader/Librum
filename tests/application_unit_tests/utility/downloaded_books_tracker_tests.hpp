@@ -10,7 +10,7 @@
 
 using namespace testing;
 using namespace application::utility;
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace tests::application
 {

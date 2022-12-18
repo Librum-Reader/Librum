@@ -3,7 +3,7 @@
 #include <QString>
 #include "register_model.hpp"
 
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace tests::domain
 {

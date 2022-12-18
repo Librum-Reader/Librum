@@ -18,7 +18,7 @@ class IBookMetadataHelper : public QObject
 public:
     virtual ~IBookMetadataHelper() noexcept = default;
 
-    virtual std::optional<domain::models::BookMetaData> getBookMetaData(
+    virtual std::optional<domain::value_objects::BookMetaData> getBookMetaData(
         const QString& filePath) = 0;
 
     virtual void loadCover() const = 0;

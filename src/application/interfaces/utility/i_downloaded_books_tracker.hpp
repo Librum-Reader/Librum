@@ -27,12 +27,12 @@ public:
     virtual void clearLibraryOwner() = 0;
     virtual QDir getUserLibraryDir() const = 0;
 
-    virtual std::vector<domain::models::Book> getTrackedBooks() = 0;
-    virtual std::optional<domain::models::Book> getTrackedBook(
+    virtual std::vector<domain::entities::Book> getTrackedBooks() = 0;
+    virtual std::optional<domain::entities::Book> getTrackedBook(
         const QUuid& uuid) = 0;
-    virtual bool trackBook(const domain::models::Book& book) = 0;
+    virtual bool trackBook(const domain::entities::Book& book) = 0;
     virtual bool untrackBook(const QUuid& uuid) = 0;
-    virtual bool updateTrackedBook(const domain::models::Book& book) = 0;
+    virtual bool updateTrackedBook(const domain::entities::Book& book) = 0;
 };
 
 }  // namespace application

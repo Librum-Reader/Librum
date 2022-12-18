@@ -13,10 +13,11 @@ class AuthenticationService : public IAuthenticationService
 public:
     AuthenticationService(IAuthenticationGateway* authenticationGateway);
 
-    void loginUser(const domain::models::LoginModel& loginModel) override;
+    void loginUser(
+        const domain::value_objects::LoginModel& loginModel) override;
     void logoutUser() override;
     void registerUser(
-        const domain::models::RegisterModel& registerModel) override;
+        const domain::value_objects::RegisterModel& registerModel) override;
 
 public slots:
     void processAuthenticationResult(const QString& token) override;

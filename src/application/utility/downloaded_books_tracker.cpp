@@ -6,7 +6,7 @@
 #include <iterator>
 
 
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace application::utility
 {

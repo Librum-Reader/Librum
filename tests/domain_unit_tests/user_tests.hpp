@@ -3,7 +3,7 @@
 #include "user.hpp"
 
 
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace tests::domain
 {

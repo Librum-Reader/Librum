@@ -19,9 +19,9 @@ class IAuthenticationGateway : public QObject
 public:
     virtual ~IAuthenticationGateway() noexcept = default;
     virtual void authenticateUser(
-        const domain::models::LoginModel& loginModel) = 0;
+        const domain::value_objects::LoginModel& loginModel) = 0;
     virtual void registerUser(
-        const domain::models::RegisterModel& registerModel) = 0;
+        const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
     void authenticationFinished(const QString& token);

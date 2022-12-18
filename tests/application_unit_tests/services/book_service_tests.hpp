@@ -19,7 +19,8 @@ using ::testing::ReturnRef;
 using namespace application::services;
 using namespace application::utility;
 using namespace application;
-using namespace domain::models;
+using namespace domain::entities;
+using namespace domain::value_objects;
 
 namespace tests::application
 {
@@ -35,15 +36,15 @@ public:
 class BookStorageManagerMock : public IBookStorageManager
 {
 public:
-    MOCK_METHOD(void, addBook, (const domain::models::Book&), (override));
+    MOCK_METHOD(void, addBook, (const domain::entities::Book&), (override));
     MOCK_METHOD(void, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(void, uninstallBook, (const QUuid&), (override));
-    MOCK_METHOD(void, updateBook, (const domain::models::Book&), (override));
-    MOCK_METHOD(void, updateBookLocally, (const domain::models::Book&),
+    MOCK_METHOD(void, updateBook, (const domain::entities::Book&), (override));
+    MOCK_METHOD(void, updateBookLocally, (const domain::entities::Book&),
                 (override));
-    MOCK_METHOD(void, updateBookRemotely, (const domain::models::Book&),
+    MOCK_METHOD(void, updateBookRemotely, (const domain::entities::Book&),
                 (override));
-    MOCK_METHOD(std::vector<domain::models::Book>, loadLocalBooks, (),
+    MOCK_METHOD(std::vector<domain::entities::Book>, loadLocalBooks, (),
                 (override));
     MOCK_METHOD(void, loadRemoteBooks, (), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),

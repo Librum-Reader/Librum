@@ -42,7 +42,7 @@ public:
         Invalid
     };
 
-    LibraryModel(const std::vector<domain::models::Book>& data);
+    LibraryModel(const std::vector<domain::entities::Book>& data);
 
     int rowCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role) const override;
@@ -59,9 +59,9 @@ public slots:
 
 private:
     QList<dtos::TagDto> convertTagsToDtos(
-        const std::vector<domain::models::Tag>& tags) const;
+        const std::vector<domain::entities::Tag>& tags) const;
 
-    const std::vector<domain::models::Book>& m_data;
+    const std::vector<domain::entities::Book>& m_data;
 };
 
 }  // namespace adapters::data_models

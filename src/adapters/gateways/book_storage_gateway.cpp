@@ -6,7 +6,7 @@
 #include "i_book_storage_access.hpp"
 
 
-using namespace domain::models;
+using namespace domain::entities;
 
 namespace adapters::gateways
 {
@@ -20,7 +20,7 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
 }
 
 void BookStorageGateway::createBook(const QString& authToken,
-                                    const domain::models::Book& book)
+                                    const domain::entities::Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
@@ -42,7 +42,7 @@ void BookStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
 }
 
 void BookStorageGateway::updateBook(const QString& authToken,
-                                    const domain::models::Book& book)
+                                    const domain::entities::Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();

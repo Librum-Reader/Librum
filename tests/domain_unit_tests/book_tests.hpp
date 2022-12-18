@@ -8,7 +8,8 @@
 #include "tag.hpp"
 
 
-using namespace domain::models;
+using namespace domain::value_objects;
+using namespace domain::entities;
 
 namespace tests::domain
 {

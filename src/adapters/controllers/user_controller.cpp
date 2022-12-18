@@ -4,7 +4,7 @@
 #include <QUrl>
 #include "tag.hpp"
 
-using domain::models::Tag;
+using domain::entities::Tag;
 
 namespace adapters::controllers
 {

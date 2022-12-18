@@ -19,7 +19,7 @@
 using namespace testing;
 using ::testing::ReturnRef;
 using namespace adapters;
-using namespace domain::models;
+using namespace domain::entities;
 using namespace application;
 
 namespace tests::adapters
@@ -42,7 +42,7 @@ public:
     MOCK_METHOD(bool, refreshLastOpened, (const QUuid&), (override));
 
     MOCK_METHOD(BookOperationStatus, addTag,
-                (const QUuid&, const domain::models::Tag&), (override));
+                (const QUuid&, const domain::entities::Tag&), (override));
     MOCK_METHOD(BookOperationStatus, renameTag,
                 (const QUuid&, const QUuid&, const QString&), (override));
     MOCK_METHOD(BookOperationStatus, removeTag, (const QUuid&, const QUuid&),

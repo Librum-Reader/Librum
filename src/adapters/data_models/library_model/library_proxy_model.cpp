@@ -9,8 +9,8 @@
 #include "tag_dto.hpp"
 
 using adapters::dtos::TagDto;
-using domain::models::Book;
-using domain::models::Tag;
+using domain::entities::Book;
+using domain::entities::Tag;
 
 namespace adapters::data_models
 {

@@ -1,11 +1,11 @@
 #include "user_tags_model.hpp"
 
-using domain::models::Tag;
+using domain::entities::Tag;
 
 namespace adapters::data_models
 {
 
-UserTagsModel::UserTagsModel(const std::vector<domain::models::Tag>& data) :
+UserTagsModel::UserTagsModel(const std::vector<domain::entities::Tag>& data) :
     m_data(data)
 {
 }

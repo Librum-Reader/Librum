@@ -19,7 +19,7 @@ public:
         NameRole = Qt::UserRole,
     };
 
-    UserTagsModel(const std::vector<domain::models::Tag>& data);
+    UserTagsModel(const std::vector<domain::entities::Tag>& data);
 
     int rowCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role) const override;
@@ -33,7 +33,7 @@ public slots:
     void refreshRows(int row);
 
 private:
-    const std::vector<domain::models::Tag>& m_data;
+    const std::vector<domain::entities::Tag>& m_data;
 };
 
 }  // namespace adapters::data_models

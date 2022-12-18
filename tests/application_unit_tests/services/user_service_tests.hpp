@@ -174,7 +174,7 @@ TEST_F(AUserService, SucceedsGettingProfilePicture)
 TEST_F(AUserService, SucceedsAddingATag)
 {
     // Arrange
-    models::Tag tag("SomeTag");
+    entities::Tag tag("SomeTag");
 
 
     // Act
@@ -189,7 +189,7 @@ TEST_F(AUserService, SucceedsAddingATag)
 TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
 {
     // Arrange
-    models::Tag tag("SomeTag");
+    entities::Tag tag("SomeTag");
 
 
     // Act
@@ -205,7 +205,7 @@ TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
 TEST_F(AUserService, SucceedsRemovingATag)
 {
     // Arrange
-    models::Tag tag("SomeTag");
+    entities::Tag tag("SomeTag");
     userService->addTag(tag);
 
 
@@ -232,7 +232,7 @@ TEST_F(AUserService, SucceedsRenamingATag)
     // Arrange
     QString tagName = "SomeTag";
     QString newTagName = "SomeOtherTag";
-    models::Tag tag(tagName);
+    entities::Tag tag(tagName);
     userService->addTag(tag);
 
 

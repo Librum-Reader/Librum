@@ -13,9 +13,9 @@ public:
     AuthenticationGateway(IAuthenticationAccess* authenticationAccess);
 
     void authenticateUser(
-        const domain::models::LoginModel& loginModel) override;
+        const domain::value_objects::LoginModel& loginModel) override;
     void registerUser(
-        const domain::models::RegisterModel& registerModel) override;
+        const domain::value_objects::RegisterModel& registerModel) override;
 
 private:
     IAuthenticationAccess* m_authenticationAccess;

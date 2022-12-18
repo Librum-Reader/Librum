@@ -5,6 +5,7 @@
 
 
 using namespace application;
+using namespace domain::value_objects;
 
 namespace adapters::controllers
 {
@@ -24,7 +25,7 @@ AuthenticationController::AuthenticationController(
 void AuthenticationController::loginUser(const QString& email,
                                          const QString& password)
 {
-    domain::models::LoginModel loginModel(email, password);
+    LoginModel loginModel(email, password);
 
     m_authenticationService->loginUser(loginModel);
 }
@@ -39,8 +40,8 @@ void AuthenticationController::registerUser(const QString& firstName,
                                             const QString& email,
                                             QString password, bool keepUpdated)
 {
-    domain::models::RegisterModel registerModel(firstName, lastName, email,
-                                                password, keepUpdated);
+    RegisterModel registerModel(firstName, lastName, email, password,
+                                keepUpdated);
 
     m_authenticationService->registerUser(registerModel);
 }

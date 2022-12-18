@@ -10,7 +10,7 @@
 namespace application::services
 {
 
-using namespace domain::models;
+using namespace domain::entities;
 using std::size_t;
 using utility::MergeStatus;
 
@@ -134,7 +134,7 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
 }
 
 BookOperationStatus BookService::addTag(const QUuid& uuid,
-                                        const domain::models::Tag& tag)
+                                        const domain::entities::Tag& tag)
 {
     auto book = getBook(uuid);
     if(!book)
@@ -339,7 +339,7 @@ void BookService::storeBookCover(const QPixmap* pixmap)
     emit bookCoverGenerated(index);
 }
 
-void BookService::mergeLibraries(const std::vector<domain::models::Book>& books)
+void BookService::mergeLibraries(const std::vector<domain::entities::Book>& books)
 {
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
@@ -403,8 +403,8 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
     }
 }
 
-MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
-                                          const domain::models::Book& mergee)
+MergeStatus BookService::mergeCurrentPage(domain::entities::Book& original,
+                                          const domain::entities::Book& mergee)
 {
     // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
@@ -424,8 +424,8 @@ MergeStatus BookService::mergeCurrentPage(domain::models::Book& original,
     return MergeStatus { .updateDatabase = true };
 }
 
-MergeStatus BookService::mergeBookData(domain::models::Book& original,
-                                       const domain::models::Book& mergee)
+MergeStatus BookService::mergeBookData(domain::entities::Book& original,
+                                       const domain::entities::Book& mergee)
 {
     // Take the current time in seconds, so there are no ms dismatches
     auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();

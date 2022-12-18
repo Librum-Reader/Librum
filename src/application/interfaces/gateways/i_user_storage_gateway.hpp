@@ -34,7 +34,7 @@ public:
                            const QString& newName) = 0;
 
 signals:
-    void finishedGettingUser(const domain::models::User& user, bool success);
+    void finishedGettingUser(const domain::entities::User& user, bool success);
 };
 
 }  // namespace application

@@ -46,7 +46,7 @@ struct ABookStorageGateway : public ::testing::Test
 TEST_F(ABookStorageGateway, SucceedsCreatingABook)
 {
     // Arrange
-    models::Book book("some/path.pdf", {}, 0);
+    entities::Book book("some/path.pdf", {}, 0);
 
     // Expect
     EXPECT_CALL(bookStorageAccessMock, createBook(_, _)).Times(1);
@@ -71,7 +71,7 @@ TEST_F(ABookStorageGateway, SucceedsDeletingABook)
 TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
 {
     // Arrange
-    models::Book book("some/path.pdf", {}, 0);
+    entities::Book book("some/path.pdf", {}, 0);
 
     // Expect
     EXPECT_CALL(bookStorageAccessMock, updateBook(_, _)).Times(1);
