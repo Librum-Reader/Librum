@@ -191,6 +191,6 @@ Popup
     
     function removeTag()
     {
-        console.log("Remove tag")
+        ;
     }
 }

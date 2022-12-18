@@ -264,7 +264,7 @@ MFlickWrapper
                             }
                             else
                             {
-                                console.log("Login failed");
+                                ;
                             }
                         }
                     }

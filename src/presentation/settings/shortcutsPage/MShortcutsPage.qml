@@ -217,7 +217,7 @@ Page
                                     addShortcutPopup.open();
                                 }
                             
-                            onDeleteClicked: console.log("delete")
+                            onDeleteClicked: ;
                         }
                         
                         

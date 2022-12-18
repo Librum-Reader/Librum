@@ -177,11 +177,7 @@ Popup
     
     function deleteMethod()
     {
-        let result = BookController.deleteBook(Globals.selectedBook.uuid);
-        if(result !== BookOperationStatus.Success)
-        {
-            console.log("Book deletion failed");
-        }
+        BookController.deleteBook(Globals.selectedBook.uuid);
     }
     
     function giveFocus()

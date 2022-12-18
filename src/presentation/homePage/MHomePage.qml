@@ -130,7 +130,7 @@ Page
                         }
                         else
                         {
-                            console.log("Download");
+                            ;
                         }
                     }
                     
@@ -185,7 +185,7 @@ Page
                             
                             onClicked: 
                             {
-                                console.log("Download")
+                                ;
                                 bookOptionsPopup.close();
                             }
                         }
@@ -424,8 +424,7 @@ Page
         {
             for(let i = 0; i < files.length; ++i)
             {
-                if(!BookController.addBook(files[i]) === BookOperationStatus.Success)
-                    console.log("Error loading file!");
+                BookController.addBook(files[i]);
             }
         }
     }
