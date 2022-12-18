@@ -228,7 +228,7 @@ void Book::setDownloaded(bool newDownloaded)
 int Book::getBookProgressPercentage() const
 {
     if(!getLastOpened().isValid() ||
-       (getPageCount() > 1 && getCurrentPage() <= 1))
+       (getPageCount() > getCurrentPage() && getCurrentPage() <= 1))
     {
         return 0;
     }
@@ -246,8 +246,7 @@ const std::vector<Tag>& Book::getTags() const
 
 bool Book::addTag(const Tag& tag)
 {
-    auto existingTag = getTagByUuid(tag.getUuid());
-    if(existingTag != nullptr)
+    if(getTagByUuid(tag.getUuid()) != nullptr)
         return false;
 
     m_tags.emplace_back(tag);

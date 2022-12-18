@@ -72,8 +72,8 @@ public:
     bool getDownloaded() const;
     void setDownloaded(bool newDownloaded);
 
-
     int getBookProgressPercentage() const;
+
 
     domain::models::Tag* getTagByUuid(const QUuid& uuid);
     domain::models::Tag* getTagByName(const QString& name);
