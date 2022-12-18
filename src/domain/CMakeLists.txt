@@ -8,22 +8,24 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 # Build
 add_library(domain
                 SHARED
-                    models/login_model.cpp
-                    models/login_model.hpp
-                    models/register_model.cpp
-                    models/register_model.hpp
-                    models/book.cpp
-                    models/book.hpp
-                    models/book_meta_data.hpp
-                    models/tag.cpp
-                    models/tag.hpp
-                    models/user.cpp
-                    models/user.hpp
+                    entities/book.cpp
+                    entities/book.hpp
+                    entities/tag.cpp
+                    entities/tag.hpp
+                    entities/user.cpp
+                    entities/user.hpp
+                    
+                    value_objects/book_meta_data.hpp
+                    value_objects/login_model.cpp
+                    value_objects/login_model.hpp
+                    value_objects/register_model.cpp
+                    value_objects/register_model.hpp
 )
 
 target_include_directories(domain
                 PUBLIC
-                    ${CMAKE_CURRENT_SOURCE_DIR}/models
+                    ${CMAKE_CURRENT_SOURCE_DIR}/entities
+                    ${CMAKE_CURRENT_SOURCE_DIR}/value_objects
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
 )
