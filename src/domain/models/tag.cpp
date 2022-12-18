@@ -36,6 +36,11 @@ void Tag::setName(QString newName)
     m_name = newName;
 }
 
+bool Tag::isValid() const
+{
+    return m_name.size() >= 2;
+}
+
 QByteArray Tag::toJson() const
 {
     QJsonObject jsonTag {

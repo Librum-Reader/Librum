@@ -21,6 +21,8 @@ public:
     const QString& getName() const;
     void setName(QString newName);
 
+    bool isValid() const;
+
 public:
     QByteArray toJson() const;
     static Tag fromJson(const QJsonObject& jsonObject);
