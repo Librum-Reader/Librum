@@ -39,7 +39,6 @@ private:
     RegisterModel::RegistrationResult emailIsValid() const;
     RegisterModel::RegistrationResult passwordIsValid() const;
 
-private:
     QString m_firstName;
     int m_minFirstNameLength = 2;
     int m_maxFirstNameLength = 40;
