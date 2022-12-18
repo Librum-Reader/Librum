@@ -12,7 +12,6 @@ class User : public QObject
     Q_OBJECT
 
 public:
-    User();
     User(const QString& firstName, const QString& lastName,
          const QString& email);
 
@@ -43,13 +42,13 @@ signals:
     void tagsChanged(int index);
 
 private:
+    int getTagIndex(const QUuid& uuid);
+
     QString m_firstName;
     QString m_lastName;
     QString m_email;
     QImage m_profilePicture;
     std::vector<Tag> m_tags;
-
-    int getTagIndex(const QUuid& uuid);
 };
 
 }  // namespace domain::models

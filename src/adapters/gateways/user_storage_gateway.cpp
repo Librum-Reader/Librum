@@ -85,7 +85,7 @@ void UserStorageGateway::proccessUserData(const QString& firstName,
 
 void UserStorageGateway::reportFailureGettingUser()
 {
-    User emptyUser;
+    User emptyUser("invalid", "invalid", "invalid@email.x");
     emit finishedGettingUser(emptyUser, false);
 }
 

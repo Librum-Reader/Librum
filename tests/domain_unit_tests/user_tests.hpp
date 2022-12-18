@@ -11,7 +11,7 @@ namespace tests::domain
 TEST(AUser, SucceedsAddingATag)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
     auto tagAmountBeforeAdding = user.getTags().size();
 
@@ -30,7 +30,7 @@ TEST(AUser, SucceedsAddingATag)
 TEST(AUser, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
     auto tagAmountBeforeAdding = user.getTags().size();
 
@@ -48,7 +48,7 @@ TEST(AUser, FailsAddingATagIfTagAlreadyExists)
 TEST(AUser, SucceedsRemovingATag)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
     user.addTag(tag);
     auto tagAmountBeforeRemoving = user.getTags().size();
@@ -68,7 +68,7 @@ TEST(AUser, SucceedsRemovingATag)
 TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
@@ -83,7 +83,7 @@ TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
 TEST(AUser, SucceedsRenamingATag)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     QString tagName = "SomeTag";
     Tag tag(tagName);
     QString newTagName = "SomeNewTag";
@@ -101,7 +101,7 @@ TEST(AUser, SucceedsRenamingATag)
 TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     QString newTagName = "NewTagName";
 
     // Act
@@ -116,7 +116,7 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 TEST(AUser, SucceedsGettingTags)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     user.addTag(Tag("SomeTag1"));
     user.addTag(Tag("SomeTag2"));
     user.addTag(Tag("SomeTag3"));
@@ -131,7 +131,7 @@ TEST(AUser, SucceedsGettingTags)
 TEST(AUser, SucceedsGettingATagByName)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
     user.addTag(tag);
 
@@ -145,7 +145,7 @@ TEST(AUser, SucceedsGettingATagByName)
 TEST(AUser, SucceedsGettingATagByUuid)
 {
     // Arrange
-    User user;
+    User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
     user.addTag(tag);
 

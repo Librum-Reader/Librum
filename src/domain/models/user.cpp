@@ -4,10 +4,6 @@
 namespace domain::models
 {
 
-User::User()
-{
-}
-
 User::User(const QString& firstName, const QString& lastName,
            const QString& email) :
     m_firstName(firstName),
