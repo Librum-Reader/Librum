@@ -85,11 +85,10 @@ const Tag* User::getTagByName(const QString& tagName) const
 
 bool User::addTag(const Tag& tag)
 {
-    auto tagPosition = getTagByName(tag.getName());
-    if(tagPosition != nullptr)
+    if(getTagByName(tag.getName()) != nullptr)
         return false;
 
-    if(tag.getName().size() < 2)
+    if(!tag.isValid())
         return false;
 
     emit tagInsertionStarted(m_tags.size());
