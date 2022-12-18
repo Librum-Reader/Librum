@@ -117,11 +117,10 @@ bool User::removeTag(const QUuid& uuid)
 
 bool User::renameTag(const QUuid& uuid, const QString& newName)
 {
-    auto tag = getTagByUuid(uuid);
-    if(tag == nullptr)
+    if(auto tag = getTagByUuid(uuid); tag == nullptr)
         return false;
 
-    if(getTagByName(newName) != nullptr)
+    if(auto tag = getTagByName(newName); tag != nullptr)
         return false;
 
     auto index = getTagIndex(uuid);
