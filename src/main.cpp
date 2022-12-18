@@ -1,6 +1,7 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
+#include <QDateTime>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -30,6 +31,8 @@
 void registerTypes();
 void loadFonts();
 void addTranslations();
+void messageHandler(QtMsgType type, const QMessageLogContext& context,
+                    const QString& msg);
 
 int main(int argc, char* argv[])
 {
@@ -40,6 +43,8 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
+
+    qInstallMessageHandler(messageHandler);
 
     addTranslations();
     loadFonts();
@@ -133,6 +138,48 @@ int main(int argc, char* argv[])
 
     return QGuiApplication::exec();
     // clang-format on
+}
+
+void messageHandler(QtMsgType type, const QMessageLogContext& context,
+                    const QString& msg)
+{
+    Q_UNUSED(context);
+
+    QString logLine;
+    switch(type)
+    {
+    case QtInfoMsg:
+        logLine = QString("Info: %1").arg(msg);
+        break;
+    case QtDebugMsg:
+        logLine = QString("Debug: %1").arg(msg);
+        break;
+    case QtWarningMsg:
+        logLine = QString("Warning: %1").arg(msg);
+        break;
+    case QtCriticalMsg:
+        logLine = QString("Critical: %1").arg(msg);
+        break;
+    case QtFatalMsg:
+        logLine = QString("Fatal: %1").arg(msg);
+        break;
+    }
+
+    QFile file("librum_log.txt");
+    if(file.open(QIODevice::WriteOnly | QIODevice::Append))
+    {
+        QTextStream logStream(&file);
+
+        QDateTime current = QDateTime::currentDateTime();
+        QString dateString = current.toString("dd.MM.yyyy - hh.mm.ss");
+        logStream << "(" << dateString << "): " << logLine << Qt::endl
+                  << Qt::endl;
+    }
+    else
+    {
+        QTextStream out(stdout);
+        out << "Librum message: " << logLine << Qt::endl;
+    }
 }
 
 void addTranslations()
