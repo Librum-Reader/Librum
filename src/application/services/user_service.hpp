@@ -36,8 +36,7 @@ public:
 
 
 public slots:
-    void setupUserData(const QString& token,
-                                const QString& email) override;
+    void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 
 
@@ -46,6 +45,8 @@ private slots:
                                  bool success);
 
 private:
+    bool userIsLoggedIn();
+
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;
     QString m_authenticationToken;

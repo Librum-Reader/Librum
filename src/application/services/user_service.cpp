@@ -121,7 +121,9 @@ bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 void UserService::proccessUserInformation(const domain::entities::User& user,
                                           bool success)
 {
-    if(!success)
+    // Avoid storing data for logged out users by verifying login status before
+    // applying data, else their data might be in memory even though logged out.
+    if(!success || !userIsLoggedIn())
     {
         emit finishedLoadingUser(false);
         return;
@@ -139,8 +141,12 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     emit finishedLoadingUser(true);
 }
 
-void UserService::setupUserData(const QString& token,
-                                         const QString& email)
+bool UserService::userIsLoggedIn()
+{
+    return !m_authenticationToken.isEmpty();
+}
+
+void UserService::setupUserData(const QString& token, const QString& email)
 {
     Q_UNUSED(email);
     m_authenticationToken = token;
@@ -150,6 +156,8 @@ void UserService::setupUserData(const QString& token,
 
 void UserService::clearUserData()
 {
+    m_fetchChangesTimer.stop();
+    m_user.clearData();
     m_authenticationToken.clear();
 }
 
