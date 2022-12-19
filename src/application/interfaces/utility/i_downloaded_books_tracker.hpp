@@ -25,7 +25,7 @@ public:
     // Needs to be called before any other function to setup filesystem paths
     virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
     virtual void clearLibraryOwner() = 0;
-    virtual QDir getUserLibraryDir() const = 0;
+    virtual QDir getLibraryDir() const = 0;
 
     virtual std::vector<domain::entities::Book> getTrackedBooks() = 0;
     virtual std::optional<domain::entities::Book> getTrackedBook(

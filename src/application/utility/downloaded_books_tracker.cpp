@@ -15,14 +15,19 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
 {
     ensureUserLibraryExists();
 
-    QDir libraryDir = getUserLibraryDir();
+    QDir libraryDir = getLibraryDir();
 
     std::vector<Book> books;
     for(auto& metaFileName : libraryDir.entryList(QDir::Files))
     {
         QFile metaFile(libraryDir.filePath(metaFileName));
         if(!metaFile.open(QFile::ReadOnly | QIODevice::Text))
+        {
+            qWarning() << "Failed opening .libmeta file at: "
+                       << metaFile.fileName()
+                       << " for operation 'getTrackedBooks'";
             continue;
+        }
 
         QByteArray jsonData = metaFile.readAll();
         auto jsonDoc = parseLibMetaFile(std::move(jsonData));
@@ -40,12 +45,16 @@ std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
 {
     ensureUserLibraryExists();
 
-    auto libraryDir = getUserLibraryDir();
+    auto libraryDir = getLibraryDir();
     auto fileName = uuid.toString(QUuid::WithoutBraces);
 
     QFile metaFile(libraryDir.path() + "/" + fileName + m_fileExtension);
     if(!metaFile.open(QFile::ReadOnly))
+    {
+        qWarning() << "Failed opening .libmeta file at: " << metaFile.fileName()
+                   << " for operation 'getTrackedBook'";
         return std::nullopt;
+    }
 
     auto jsonDoc = QJsonDocument::fromJson(metaFile.readAll());
     auto bookObject = jsonDoc.object();
@@ -58,12 +67,16 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
 {
     ensureUserLibraryExists();
 
-    QDir libraryDir = getUserLibraryDir();
+    QDir libraryDir = getLibraryDir();
     QFile file(libraryDir.path() + "/" +
                book.getUuid().toString(QUuid::WithoutBraces) + m_fileExtension);
 
     if(file.exists() || !file.open(QFile::WriteOnly))
+    {
+        qWarning() << "Failed opening .libmeta file at: " << file.fileName()
+                   << " for operation 'trackBook'";
         return false;
+    }
 
     file.write(book.toJson());
     return true;
@@ -73,11 +86,18 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
 {
     ensureUserLibraryExists();
 
-    QDir libraryDir = getUserLibraryDir();
+    QDir libraryDir = getLibraryDir();
     QString fileToUntrack =
         uuid.toString(QUuid::WithoutBraces) + m_fileExtension;
 
-    return libraryDir.remove(fileToUntrack);
+    auto success = libraryDir.remove(fileToUntrack);
+    if(!success)
+    {
+        qWarning() << "Failed removing .libmeta file called: " << fileToUntrack
+                   << " for operation 'untrackBook'";
+    }
+
+    return success;
 }
 
 bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
@@ -95,7 +115,7 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
 void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
 {
     m_libraryOwnerEmail = libraryOwnerEmail;
-    m_libraryFolder = getUserLibraryDir();
+    m_libraryFolder = getLibraryDir();
 }
 
 void DownloadedBooksTracker::clearLibraryOwner()
@@ -106,7 +126,7 @@ void DownloadedBooksTracker::clearLibraryOwner()
 
 void DownloadedBooksTracker::ensureUserLibraryExists()
 {
-    auto libraryDir = getUserLibraryDir();
+    auto libraryDir = getLibraryDir();
 
     libraryDir.mkpath(libraryDir.path());
 }
@@ -124,7 +144,7 @@ QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
     return jsonDoc;
 }
 
-QDir DownloadedBooksTracker::getUserLibraryDir() const
+QDir DownloadedBooksTracker::getLibraryDir() const
 {
     auto applicationPath = QDir::current().path();
     auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
@@ -137,16 +157,23 @@ QDir DownloadedBooksTracker::getUserLibraryDir() const
 
 QString DownloadedBooksTracker::getUserLibraryName(QString email) const
 {
-    auto it = std::remove_if(email.begin(), email.end(),
+    // The user library name is the user's email without special characters,
+    // followed by '_' repeated x times, where x is the length of the email.
+    auto emailWithoutSpecialChars = removeSpecialCharacters(email);
+
+    return emailWithoutSpecialChars + QString(email.length(), '_');
+}
+
+QString DownloadedBooksTracker::removeSpecialCharacters(QString& str) const
+{
+    auto it = std::remove_if(str.begin(), str.end(),
                              [](const QChar& c)
                              {
                                  return !c.isLetterOrNumber();
                              });
 
-    int specialCharCount = std::distance(it, email.end());
-    email.chop(specialCharCount);
-
-    return email + QString(email.length(), '_');
+    int specialCharCount = std::distance(it, str.end());
+    return str.chopped(specialCharCount);
 }
 
 }  // namespace application::utility
