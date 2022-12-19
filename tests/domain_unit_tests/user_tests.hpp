@@ -54,7 +54,7 @@ TEST(AUser, SucceedsRemovingATag)
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    auto result = user.removeTag(tag.getUuid());
+    auto result = user.deleteTag(tag.getUuid());
     auto tagResult = user.getTagByUuid(tag.getUuid());
     auto tagAmountAfterRemoving = user.getTags().size();
 
@@ -72,7 +72,7 @@ TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    auto result = user.removeTag("NonExistantTagUuid");
+    auto result = user.deleteTag("NonExistantTagUuid");
     auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert

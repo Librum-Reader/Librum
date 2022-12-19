@@ -37,7 +37,7 @@ public:
     MOCK_METHOD(const std::vector<domain::entities::Tag>&, getTags, (),
                 (const, override));
     MOCK_METHOD(QUuid, addTag, (const domain::entities::Tag&), (override));
-    MOCK_METHOD(bool, removeTag, (const QUuid&), (override));
+    MOCK_METHOD(bool, deleteTag, (const QUuid&), (override));
     MOCK_METHOD(bool, renameTag, (const QUuid&, const QString&), (override));
 };
 

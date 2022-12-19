@@ -31,7 +31,7 @@ public:
     MOCK_METHOD(void, changeProfilePicture,
                 (const QString& authToken, const QImage& newPicture),
                 (override));
-    MOCK_METHOD(void, removeTag, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, deleteTag, (const QString&, const QUuid&), (override));
     MOCK_METHOD(void, renameTag,
                 (const QString&, const QUuid&, const QString& newName),
                 (override));
@@ -210,7 +210,7 @@ TEST_F(AUserService, SucceedsRemovingATag)
 
 
     // Act
-    auto result = userService->removeTag(tag.getUuid());
+    auto result = userService->deleteTag(tag.getUuid());
     auto tagCountAfterAdding = userService->getTags().size();
 
     // Assert
@@ -221,7 +221,7 @@ TEST_F(AUserService, SucceedsRemovingATag)
 TEST_F(AUserService, FailsRemovingTagIfTagDoesNotExists)
 {
     // Act
-    auto result = userService->removeTag("NoneExistentTag");
+    auto result = userService->deleteTag("NoneExistentTag");
 
     // Assert
     EXPECT_FALSE(result);
