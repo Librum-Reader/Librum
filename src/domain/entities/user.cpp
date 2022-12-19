@@ -130,6 +130,15 @@ bool User::renameTag(const QUuid& uuid, const QString& newName)
     return true;
 }
 
+void User::clearData()
+{
+    m_firstName = "x";
+    m_lastName = "y";
+    m_email = "y";
+    m_profilePicture.fill(Qt::white);
+    m_tags.clear();
+}
+
 int User::getTagIndex(const QUuid& uuid)
 {
     auto tag = getTagByUuid(uuid);

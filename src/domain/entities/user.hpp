@@ -34,6 +34,8 @@ public:
     bool deleteTag(const QUuid& uuid);
     bool renameTag(const QUuid& uuid, const QString& newName);
 
+    void clearData();
+
 signals:
     void tagInsertionStarted(int index);
     void tagInsertionEnded();
