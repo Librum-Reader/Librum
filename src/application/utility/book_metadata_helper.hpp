@@ -36,10 +36,10 @@ private:
 
     QSize getCoverSize() const;
     QString getSystemRelativePath(const QString& qPath) const;
-    QString parseTitleFromPath(const QString& path) const;
+    QString getTitleFromBookPath(const QString& path) const;
     QMimeType getMimeType(const QString& filePath);
     QString removeTypeFromMimeString(const QString& mimeString) const;
-    QString removeAppendingsFromMimeString(const QString& mimeString) const;
+    QString removeSuffixFromMimeString(const QString& mimeString) const;
 
     std::unique_ptr<Okular::Document> m_document;
     std::unique_ptr<CoverObserver> m_observer;

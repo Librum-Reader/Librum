@@ -1,5 +1,6 @@
 #include "book_metadata_helper.hpp"
 #include <QDateTime>
+#include <QDebug>
 #include <QMimeDatabase>
 #include "book.hpp"
 #include "document.h"
@@ -22,7 +23,10 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
 {
     auto setupSucceeded = setupDocument(filePath);
     if(!setupSucceeded)
+    {
+        qWarning() << "Failed to open document at path: " << filePath << ".";
         return std::nullopt;
+    }
 
     BookMetaData metaData {
         .title = getTitle(filePath),
@@ -43,6 +47,7 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
 
 bool BookMetadataHelper::setupDocument(const QString& filePath)
 {
+    // Need to instantiate settings before creating 'Document'
     Settings::instance(QStringLiteral("okularproviderrc"));
     m_document = std::make_unique<Document>(nullptr);
 
@@ -70,7 +75,7 @@ QString BookMetadataHelper::getTitle(const QString& filePath) const
     if(title.isEmpty())
     {
         auto systemRelativPath = getSystemRelativePath(filePath);
-        return parseTitleFromPath(systemRelativPath);
+        return getTitleFromBookPath(systemRelativPath);
     }
 
     return title;
@@ -103,7 +108,7 @@ QString BookMetadataHelper::getFormat() const
         m_document->documentInfo().get(DocumentInfo::MimeType);
 
     auto formatWithoutType = removeTypeFromMimeString(format);
-    auto result = removeAppendingsFromMimeString(formatWithoutType);
+    auto result = removeSuffixFromMimeString(formatWithoutType);
 
     return result;
 }
@@ -181,7 +186,7 @@ QMimeType BookMetadataHelper::getMimeType(const QString& filePath)
     return mimeType;
 }
 
-QString BookMetadataHelper::parseTitleFromPath(const QString& path) const
+QString BookMetadataHelper::getTitleFromBookPath(const QString& path) const
 {
     auto indexOfLastSlash = path.lastIndexOf("/");
     auto indexOfLastDot = path.lastIndexOf(".");
@@ -198,6 +203,8 @@ QString BookMetadataHelper::parseTitleFromPath(const QString& path) const
 QString BookMetadataHelper::removeTypeFromMimeString(
     const QString& mimeString) const
 {
+    // The type in "text/plain" is "text/", which can be removed by
+    // cutting everything off before the '/'.
     int lastPositionOfSlash = mimeString.lastIndexOf("/");
     if(lastPositionOfSlash == -1)
         return mimeString;
@@ -206,9 +213,11 @@ QString BookMetadataHelper::removeTypeFromMimeString(
     return result;
 }
 
-QString BookMetadataHelper::removeAppendingsFromMimeString(
+QString BookMetadataHelper::removeSuffixFromMimeString(
     const QString& mimeString) const
 {
+    // The suffix in "text/font+woff" is "+woff" which can be removed by
+    // cutting everything off after the '+'
     int lastPositionOfPlus = mimeString.lastIndexOf("+");
     if(lastPositionOfPlus == -1)
         return mimeString;
