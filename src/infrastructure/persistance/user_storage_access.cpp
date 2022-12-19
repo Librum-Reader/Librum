@@ -63,15 +63,15 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     // TODO: Implement when filestorage server is up
 }
 
-void UserStorageAccess::removeTag(const QString& authToken, const QString& uuid)
+void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 {
     QString endPoint = data::tagDeletionEndpoint + "/" + uuid;
     auto request = createRequest(endPoint, authToken);
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
-    m_tagRemovalReply.reset(reply);
+    m_tagDeletionReply.reset(reply);
 
-    linkRequestToErrorHandling(m_tagRemovalReply.get(), 204);
+    linkRequestToErrorHandling(m_tagDeletionReply.get(), 204);
 }
 
 void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,

@@ -102,10 +102,10 @@ QUuid UserService::addTag(const domain::entities::Tag& tag)
     return userTag->getUuid();
 }
 
-bool UserService::removeTag(const QUuid& uuid)
+bool UserService::deleteTag(const QUuid& uuid)
 {
-    auto success = m_user.removeTag(uuid);
-    m_userStorageGateway->removeTag(m_authenticationToken, uuid);
+    auto success = m_user.deleteTag(uuid);
+    m_userStorageGateway->deleteTag(m_authenticationToken, uuid);
 
     return success;
 }

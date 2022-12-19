@@ -23,7 +23,7 @@ public:
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
                               const QImage& newPicture) override;
-    void removeTag(const QString& authToken, const QUuid& uuid) override;
+    void deleteTag(const QString& authToken, const QUuid& uuid) override;
     void renameTag(const QString& authToken, const QUuid& uuid,
                    const QString& newName) override;
 

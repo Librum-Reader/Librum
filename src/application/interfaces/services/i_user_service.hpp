@@ -35,7 +35,7 @@ public:
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
-    virtual bool removeTag(const QUuid& uuid) = 0;
+    virtual bool deleteTag(const QUuid& uuid) = 0;
     virtual bool renameTag(const QUuid& uuid, const QString& newName) = 0;
 
 signals:

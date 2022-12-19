@@ -98,7 +98,7 @@ bool User::addTag(const Tag& tag)
     return true;
 }
 
-bool User::removeTag(const QUuid& uuid)
+bool User::deleteTag(const QUuid& uuid)
 {
     auto tagPosition = std::ranges::find_if(m_tags,
                                             [uuid](const Tag& tag)

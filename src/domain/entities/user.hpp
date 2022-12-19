@@ -31,7 +31,7 @@ public:
     const Tag* getTagByName(const QString& tagName) const;
     const Tag* getTagByUuid(const QUuid& uuid) const;
     bool addTag(const Tag& tag);
-    bool removeTag(const QUuid& uuid);
+    bool deleteTag(const QUuid& uuid);
     bool renameTag(const QUuid& uuid, const QString& newName);
 
 signals:

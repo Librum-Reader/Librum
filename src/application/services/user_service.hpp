@@ -31,7 +31,7 @@ public:
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;
-    bool removeTag(const QUuid& uuid) override;
+    bool deleteTag(const QUuid& uuid) override;
     bool renameTag(const QUuid& uuid, const QString& newName) override;
 
 

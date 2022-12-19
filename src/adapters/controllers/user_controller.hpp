@@ -18,7 +18,7 @@ public:
 
     QString getTagUuidForName(const QString& name) override;
     QString addTag(const QString& name) override;
-    bool removeTag(const QString& uuid) override;
+    bool deleteTag(const QString& uuid) override;
     bool renameTag(const QString& uuid, const QString& newName) override;
 
     QString getFirstName() override;

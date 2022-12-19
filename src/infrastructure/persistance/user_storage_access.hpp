@@ -29,7 +29,7 @@ public:
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
                               const QImage& newProfilePicture) override;
-    void removeTag(const QString& authToken, const QString& uuid) override;
+    void deleteTag(const QString& authToken, const QString& uuid) override;
     void renameTag(const QString& authToken, const QString& uuid,
                    const QJsonObject& bookForUpdate) override;
 
@@ -47,7 +47,7 @@ private:
     std::unique_ptr<QNetworkReply> m_lastNameUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_emailUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_profilePictureUpdateReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_tagRemovalReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_tagDeletionReply = nullptr;
     std::unique_ptr<QNetworkReply> m_tagRenameReply = nullptr;
 };
 
