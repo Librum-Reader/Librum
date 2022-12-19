@@ -306,8 +306,7 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
     return true;
 }
 
-void BookService::setupUserData(const QString& token,
-                                         const QString& email)
+void BookService::setupUserData(const QString& token, const QString& email)
 {
     m_bookStorageManager->setUserData(email, token);
 
@@ -327,6 +326,9 @@ void BookService::setupUserData(const QString& token,
 
 void BookService::clearUserData()
 {
+    m_fetchChangesTimer.stop();
+    m_books.clear();
+
     m_bookStorageManager->clearUserData();
 }
 
@@ -339,7 +341,8 @@ void BookService::storeBookCover(const QPixmap* pixmap)
     emit bookCoverGenerated(index);
 }
 
-void BookService::mergeLibraries(const std::vector<domain::entities::Book>& books)
+void BookService::mergeLibraries(
+    const std::vector<domain::entities::Book>& books)
 {
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);

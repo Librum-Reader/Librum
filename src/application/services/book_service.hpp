@@ -43,8 +43,7 @@ public:
 
 public slots:
     bool refreshLastOpened(const QUuid& uuid) override;
-    void setupUserData(const QString& token,
-                                const QString& email) override;
+    void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 
 private slots:
