@@ -31,8 +31,8 @@ void BookStorageManager::clearUserData()
 
 void BookStorageManager::addBook(const Book& bookToAdd)
 {
-    // Prevent adding remote books to the local library if not specified to
-    // do so by settting "downloaded" to true.
+    // Prevent adding remote books to the local library unless "downloaded" is
+    // set to true.
     if(bookToAdd.getDownloaded())
         m_downloadedBooksTracker->trackBook(bookToAdd);
 
@@ -58,7 +58,8 @@ void BookStorageManager::updateBook(const Book& book)
 
 void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
 {
-    // Only try updating book in local-library if the book is downloaded
+    // Prevent updating remote books in the local library unless "downloaded" is
+    // set to true.
     if(book.getDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(book);
 }
