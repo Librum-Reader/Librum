@@ -1,6 +1,8 @@
 #include "downloaded_books_tracker.hpp"
+#include <QCryptographicHash>
 #include <QDebug>
 #include <QFile>
+#include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <iterator>
@@ -157,23 +159,10 @@ QDir DownloadedBooksTracker::getLibraryDir() const
 
 QString DownloadedBooksTracker::getUserLibraryName(QString email) const
 {
-    // The user library name is the user's email without special characters,
-    // followed by '_' repeated x times, where x is the length of the email.
-    auto emailWithoutSpecialChars = removeSpecialCharacters(email);
+    // Hash the email to get a unique user library name
+    auto hash = qHash(email);
 
-    return emailWithoutSpecialChars + QString(email.length(), '_');
-}
-
-QString DownloadedBooksTracker::removeSpecialCharacters(QString& str) const
-{
-    auto it = std::remove_if(str.begin(), str.end(),
-                             [](const QChar& c)
-                             {
-                                 return !c.isLetterOrNumber();
-                             });
-
-    int specialCharCount = std::distance(it, str.end());
-    return str.chopped(specialCharCount);
+    return QString::number(hash);
 }
 
 }  // namespace application::utility
