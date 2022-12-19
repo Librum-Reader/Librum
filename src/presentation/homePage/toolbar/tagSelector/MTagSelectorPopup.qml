@@ -216,7 +216,7 @@ Popup
                     let tagName = listView.itemAtIndex(tagOptionsPopup.index).getContent();
                     let uuid = UserController.getTagUuidForName(tagName);
                     
-                    let success = UserController.removeTag(uuid);
+                    let success = UserController.deleteTag(uuid);
                     if(success)
                     {
                         BookController.deleteAllTagsWithUuid(uuid);

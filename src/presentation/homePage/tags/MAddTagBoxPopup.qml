@@ -189,7 +189,7 @@ Popup
                     let tagName = listView.itemAtIndex(rightClickMenu.index).getContent();
                     let uuid = UserController.getTagUuidForName(tagName);
                     
-                    let success = UserController.removeTag(uuid);
+                    let success = UserController.deleteTag(uuid);
                     if(success)
                     {
                         BookController.deleteAllTagsWithUuid(uuid);
