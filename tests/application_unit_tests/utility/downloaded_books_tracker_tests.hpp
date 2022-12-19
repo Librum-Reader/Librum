@@ -25,7 +25,7 @@ struct ADownloadedBooksTracker : public ::testing::Test
 
     void TearDown() override
     {
-        auto libraryDir = downloadedBooksTracker.getUserLibraryDir();
+        auto libraryDir = downloadedBooksTracker.getLibraryDir();
         libraryDir.removeRecursively();
     }
 
