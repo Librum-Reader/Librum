@@ -1,9 +1,10 @@
 #include "book_storage_manager.hpp"
+#include <vector>
+
+using namespace domain::entities;
 
 namespace application::utility
 {
-
-using namespace domain::entities;
 
 BookStorageManager::BookStorageManager(
     IBookStorageGateway* bookStorageGateway,
@@ -13,7 +14,16 @@ BookStorageManager::BookStorageManager(
 {
     connect(m_bookStorageGateway,
             &IBookStorageGateway::gettingBooksMetaDataFinished, this,
-            &IBookStorageManager::loadingRemoteBooksFinished);
+            [this](const std::vector<Book>& books)
+            {
+                // Avoid storing books for logged out users by verifying login
+                // status before adding books, else books might get loaded into
+                // memory, even though the user is logged out.
+                if(!userLoggedIn())
+                    return;
+
+                emit loadingRemoteBooksFinished(books);
+            });
 }
 
 void BookStorageManager::setUserData(const QString& email,
@@ -27,6 +37,11 @@ void BookStorageManager::clearUserData()
 {
     m_authenticationToken.clear();
     m_downloadedBooksTracker->clearLibraryOwner();
+}
+
+bool BookStorageManager::userLoggedIn()
+{
+    return !m_authenticationToken.isEmpty();
 }
 
 void BookStorageManager::addBook(const Book& bookToAdd)

@@ -26,6 +26,8 @@ public:
     void clearUserData() override;
 
 private:
+    bool userLoggedIn();
+
     IBookStorageGateway* m_bookStorageGateway;
     IDownloadedBooksTracker* m_downloadedBooksTracker;
     QString m_authenticationToken;
