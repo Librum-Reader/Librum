@@ -13,7 +13,7 @@ using namespace domain::entities;
 namespace adapters::data_models
 {
 
-LibraryModel::LibraryModel(const std::vector<domain::entities::Book>& data) :
+LibraryModel::LibraryModel(const std::vector<Book>& data) :
     m_data(data)
 {
 }
