@@ -51,9 +51,9 @@ public:
     MOCK_METHOD(BookOperationStatus, saveBookToFile,
                 (const QUuid&, const QUrl&), (override));
 
-    MOCK_METHOD(void, setAuthenticationToken, (const QString&, const QString&),
+    MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
-    MOCK_METHOD(void, clearAuthenticationToken, (), (override));
+    MOCK_METHOD(void, clearUserData, (), (override));
 };
 
 struct ABookController : public ::testing::Test

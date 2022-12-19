@@ -31,9 +31,9 @@ public:
     MOCK_METHOD(void, setEmail, (const QString&), (override));
     MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
     MOCK_METHOD(void, setProfilePicture, (const QImage&), (override));
-    MOCK_METHOD(void, setAuthenticationToken, (const QString&, const QString&),
+    MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
-    MOCK_METHOD(void, clearAuthenticationToken, (), (override));
+    MOCK_METHOD(void, clearUserData, (), (override));
     MOCK_METHOD(const std::vector<domain::entities::Tag>&, getTags, (),
                 (const, override));
     MOCK_METHOD(QUuid, addTag, (const domain::entities::Tag&), (override));

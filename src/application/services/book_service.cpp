@@ -306,7 +306,7 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
     return true;
 }
 
-void BookService::setAuthenticationToken(const QString& token,
+void BookService::setupUserData(const QString& token,
                                          const QString& email)
 {
     m_bookStorageManager->setUserData(email, token);
@@ -325,7 +325,7 @@ void BookService::setAuthenticationToken(const QString& token,
     m_fetchChangesTimer.start();
 }
 
-void BookService::clearAuthenticationToken()
+void BookService::clearUserData()
 {
     m_bookStorageManager->clearUserData();
 }

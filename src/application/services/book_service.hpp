@@ -43,9 +43,9 @@ public:
 
 public slots:
     bool refreshLastOpened(const QUuid& uuid) override;
-    void setAuthenticationToken(const QString& token,
+    void setupUserData(const QString& token,
                                 const QString& email) override;
-    void clearAuthenticationToken() override;
+    void clearUserData() override;
 
 private slots:
     void storeBookCover(const QPixmap* pixmap);

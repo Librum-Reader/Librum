@@ -45,9 +45,9 @@ public:
 
 public slots:
     virtual bool refreshLastOpened(const QUuid& uuid) = 0;
-    virtual void setAuthenticationToken(const QString& token,
+    virtual void setupUserData(const QString& token,
                                         const QString& email) = 0;
-    virtual void clearAuthenticationToken() = 0;
+    virtual void clearUserData() = 0;
 
 signals:
     void bookCoverGenerated(int index);

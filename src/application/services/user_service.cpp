@@ -139,7 +139,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     emit finishedLoadingUser(true);
 }
 
-void UserService::setAuthenticationToken(const QString& token,
+void UserService::setupUserData(const QString& token,
                                          const QString& email)
 {
     Q_UNUSED(email);
@@ -148,7 +148,7 @@ void UserService::setAuthenticationToken(const QString& token,
     m_fetchChangesTimer.start();
 }
 
-void UserService::clearAuthenticationToken()
+void UserService::clearUserData()
 {
     m_authenticationToken.clear();
 }

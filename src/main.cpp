@@ -104,21 +104,21 @@ int main(int argc, char* argv[])
                                      "This is an uncreatable enum!");
 
 
-    // Setup authentication-token connections
+    // Setup login connections
     QObject::connect(
         authenticationService,
         &application::IAuthenticationService::authenticationTokenRegistered,
-        bookService, &application::IBookService::setAuthenticationToken);
+        bookService, &application::IBookService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::authenticationTokenRemoved,
-        bookService, &application::IBookService::clearAuthenticationToken);
+        bookService, &application::IBookService::clearUserData);
 
 
     QObject::connect( authenticationService, &application::IAuthenticationService::authenticationTokenRegistered,
-        userService, &application::IUserService::setAuthenticationToken);
+        userService, &application::IUserService::setupUserData);
 
     QObject::connect( authenticationService, &application::IAuthenticationService::authenticationTokenRemoved,
-        userService, &application::IUserService::clearAuthenticationToken);
+        userService, &application::IUserService::clearUserData);
 
 
     // Startup
