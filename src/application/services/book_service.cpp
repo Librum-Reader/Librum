@@ -7,12 +7,12 @@
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
 
+using namespace domain::entities;
+using application::utility::MergeStatus;
+using std::size_t;
+
 namespace application::services
 {
-
-using namespace domain::entities;
-using std::size_t;
-using utility::MergeStatus;
 
 BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
                          IBookStorageManager* bookStorageManager) :
