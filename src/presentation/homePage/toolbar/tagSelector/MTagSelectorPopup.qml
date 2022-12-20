@@ -141,12 +141,12 @@ Popup
                     function selectItem(index)
                     {
                         // Stop the renaming of the currentItem
-                        if(listView.itemAtIndex(tagOptionsPopup.index).renameable)
+                        if(tagOptionsPopup.index != -1 && listView.itemAtIndex(tagOptionsPopup.index).renameable)
                             listView.itemAtIndex(tagOptionsPopup.index).stopRenaming();
-                        
+                                                
                         listView.currentIndex = index;
                         listView.currentItem.selected = !listView.currentItem.selected;
-                        
+                                                
                         if(listView.itemAtIndex(index).selected)
                         {
                             BookController.libraryModel.addFilterTag(listView.currentItem.getContent());
@@ -165,7 +165,7 @@ Popup
     MRightClickMenu
     {
         id: tagOptionsPopup
-        property int index
+        property int index: -1
         property string originalTextOfLastEdited
         
         visible: false
