@@ -313,7 +313,14 @@ void BookService::setupUserData(const QString& token, const QString& email)
 {
     m_bookStorageManager->setUserData(email, token);
 
-    // Load books on login
+    loadLocalBooks();
+    m_bookStorageManager->loadRemoteBooks();
+
+    m_fetchChangesTimer.start();
+}
+
+void BookService::loadLocalBooks()
+{
     auto books = m_bookStorageManager->loadLocalBooks();
     for(auto book : books)
     {
@@ -321,10 +328,6 @@ void BookService::setupUserData(const QString& token, const QString& email)
         m_books.emplace_back(book);
         emit bookInsertionEnded();
     }
-
-    m_bookStorageManager->loadRemoteBooks();
-
-    m_fetchChangesTimer.start();
 }
 
 void BookService::clearUserData()
