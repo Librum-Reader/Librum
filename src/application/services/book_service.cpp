@@ -126,8 +126,6 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     {
         book->update(newBook);
         book->updateLastModified();
-
-        qInfo() << "Updated book with uuid: " << newBook.getUuid();
     }
 
     int index = getBookIndex(newBook.getUuid());
