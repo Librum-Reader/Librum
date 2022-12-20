@@ -45,8 +45,7 @@ public:
 
 public slots:
     virtual bool refreshLastOpened(const QUuid& uuid) = 0;
-    virtual void setupUserData(const QString& token,
-                                        const QString& email) = 0;
+    virtual void setupUserData(const QString& token, const QString& email) = 0;
     virtual void clearUserData() = 0;
 
 signals:
@@ -55,6 +54,8 @@ signals:
     void bookInsertionEnded();
     void bookDeletionStarted(int index);
     void bookDeletionEnded();
+    void bookClearingStarted();
+    void bookClearingEnded();
     void tagsChanged(int index);
     void dataChanged(int index);
 };

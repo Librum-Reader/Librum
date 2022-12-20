@@ -326,10 +326,12 @@ void BookService::setupUserData(const QString& token, const QString& email)
 
 void BookService::clearUserData()
 {
-    m_fetchChangesTimer.stop();
-    m_books.clear();
-
     m_bookStorageManager->clearUserData();
+    m_fetchChangesTimer.stop();
+
+    emit bookClearingStarted();
+    m_books.clear();
+    emit bookClearingEnded();
 }
 
 void BookService::storeBookCover(const QPixmap* pixmap)
