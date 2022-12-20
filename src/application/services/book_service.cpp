@@ -57,6 +57,16 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     return BookOperationStatus::Success;
 }
 
+auto BookService::getBookPosition(const QUuid& uuid)
+{
+    auto bookPosition = std::ranges::find_if(m_books,
+                                             [&uuid](const Book& book)
+                                             {
+                                                 return book.getUuid() == uuid;
+                                             });
+    return bookPosition;
+}
+
 BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
     if(!getBook(uuid))
@@ -66,12 +76,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    auto bookPosition = std::ranges::find_if(m_books,
-                                             [&uuid](const Book& book)
-                                             {
-                                                 return book.getUuid() == uuid;
-                                             });
-
+    auto bookPosition = getBookPosition(uuid);
     int index = getBookIndex(uuid);
 
     emit bookDeletionStarted(index);

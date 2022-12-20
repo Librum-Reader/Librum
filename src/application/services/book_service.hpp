@@ -51,6 +51,7 @@ private slots:
     void mergeLibraries(const std::vector<domain::entities::Book>& books);
 
 private:
+    auto getBookPosition(const QUuid& uuid);
     void mergeRemoteLibraryIntoLocalLibrary(
         const std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(
