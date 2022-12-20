@@ -105,7 +105,8 @@ QUuid UserService::addTag(const domain::entities::Tag& tag)
 bool UserService::deleteTag(const QUuid& uuid)
 {
     auto success = m_user.deleteTag(uuid);
-    m_userStorageGateway->deleteTag(m_authenticationToken, uuid);
+    if(success)
+        m_userStorageGateway->deleteTag(m_authenticationToken, uuid);
 
     return success;
 }
@@ -113,7 +114,8 @@ bool UserService::deleteTag(const QUuid& uuid)
 bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 {
     auto success = m_user.renameTag(uuid, newName);
-    m_userStorageGateway->renameTag(m_authenticationToken, uuid, newName);
+    if(success)
+        m_userStorageGateway->renameTag(m_authenticationToken, uuid, newName);
 
     return success;
 }
@@ -123,7 +125,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 {
     // Avoid storing data for logged out users by verifying login status before
     // applying data, else their data might be in memory even though logged out.
-    if(!success || !userIsLoggedIn())
+    if(!userIsLoggedIn() || !success)
     {
         emit finishedLoadingUser(false);
         return;
