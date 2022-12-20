@@ -56,10 +56,13 @@ public slots:
     void processBookCover(int index);
     void refreshTags(int row);
     void refreshBook(int row);
+    void startBookClearing();
+    void endBookClearing();
 
 private:
     QList<dtos::TagDto> convertTagsToDtos(
         const std::vector<domain::entities::Tag>& tags) const;
+    QVector<int> getAllRoles();
 
     const std::vector<domain::entities::Book>& m_data;
 };

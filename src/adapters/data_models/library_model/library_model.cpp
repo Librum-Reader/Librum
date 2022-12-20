@@ -145,12 +145,7 @@ QList<dtos::TagDto> LibraryModel::convertTagsToDtos(
     return tagDtos;
 }
 
-void LibraryModel::refreshTags(int row)
-{
-    emit dataChanged(index(row, 0), index(row, 0), { TagsRole });
-}
-
-void LibraryModel::refreshBook(int row)
+QVector<int> LibraryModel::getAllRoles()
 {
     QVector<int> allRoles;
     int lastRole = Invalid;
@@ -159,7 +154,29 @@ void LibraryModel::refreshBook(int row)
         allRoles.push_back(i);
     }
 
+    return allRoles;
+}
+
+void LibraryModel::refreshTags(int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0), { TagsRole });
+}
+
+void LibraryModel::refreshBook(int row)
+{
+    auto allRoles = getAllRoles();
+
     emit dataChanged(index(row, 0), index(row, 0), allRoles);
+}
+
+void LibraryModel::startBookClearing()
+{
+    beginResetModel();
+}
+
+void LibraryModel::endBookClearing()
+{
+    endResetModel();
 }
 
 void LibraryModel::startInsertingRow(int index)
