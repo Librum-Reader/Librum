@@ -28,6 +28,7 @@ BookController::BookController(application::IBookService* bookService) :
     connect(m_bookService, &application::IBookService::bookInsertionEnded, this,
             &BookController::bookCountChanged);
 
+
     // book deletion
     connect(m_bookService, &application::IBookService::bookDeletionStarted,
             &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
@@ -37,6 +38,18 @@ BookController::BookController(application::IBookService* bookService) :
 
     connect(m_bookService, &application::IBookService::bookDeletionEnded, this,
             &BookController::bookCountChanged);
+
+
+    // book clearing
+    connect(m_bookService, &application::IBookService::bookClearingStarted,
+            &m_libraryModel, &data_models::LibraryModel::startBookClearing);
+
+    connect(m_bookService, &application::IBookService::bookClearingEnded,
+            &m_libraryModel, &data_models::LibraryModel::endBookClearing);
+
+    connect(m_bookService, &application::IBookService::bookClearingEnded, this,
+            &BookController::bookCountChanged);
+
 
     // tags changed
     connect(m_bookService, &application::IBookService::tagsChanged,
