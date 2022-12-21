@@ -27,9 +27,13 @@ public slots:
                                 const QString& email) override;
 
 private:
+    void clearTemporaryUserData();
+
     IAuthenticationGateway* m_authenticationGateway;
-    QString m_currentEmail;
     QString m_token;
+
+    // To be able to send the user email with the 'loggedIn' signal
+    QString m_tempEmail;
 };
 
 }  // namespace application::services

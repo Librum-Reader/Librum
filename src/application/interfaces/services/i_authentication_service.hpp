@@ -25,9 +25,8 @@ public:
 signals:
     void loginFinished(bool success);
     void registrationFinished(bool success, const QString& reason);
-    void authenticationTokenRegistered(const QString& token,
-                                       const QString& email);
-    void authenticationTokenRemoved();
+    void loggedIn(const QString& token, const QString& email);
+    void loggedOut();
 
 public slots:
     virtual void processAuthenticationResult(const QString& token) = 0;

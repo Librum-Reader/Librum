@@ -19,7 +19,7 @@ AuthenticationService::AuthenticationService(
             &IAuthenticationGateway::registrationFinished, this,
             &AuthenticationService::processRegistrationResult);
 
-    connect(this, &AuthenticationService::authenticationTokenRegistered, this,
+    connect(this, &AuthenticationService::loggedIn, this,
             &AuthenticationService::setAuthenticationToken);
 }
 
@@ -27,7 +27,7 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
     if(loginModel.isValid())
     {
-        m_currentEmail = loginModel.getEmail();
+        m_tempEmail = loginModel.getEmail();
         m_authenticationGateway->authenticateUser(loginModel);
     }
     else
@@ -38,7 +38,7 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
 
 void AuthenticationService::logoutUser()
 {
-    emit authenticationTokenRemoved();
+    emit loggedOut();
 }
 
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
@@ -59,13 +59,14 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
 {
     if(token.isEmpty())
     {
-        m_currentEmail = "";
         emit loginFinished(false);
         return;
     }
 
-    emit authenticationTokenRegistered(token, m_currentEmail);
+    emit loggedIn(token, m_tempEmail);
     emit loginFinished(true);
+
+    clearTemporaryUserData();
 }
 
 void AuthenticationService::processRegistrationResult(bool success,
@@ -79,6 +80,11 @@ void AuthenticationService::setAuthenticationToken(const QString& token,
 {
     Q_UNUSED(email);
     m_token = token;
+}
+
+void AuthenticationService::clearTemporaryUserData()
+{
+    m_tempEmail = "";
 }
 
 }  // namespace application::services
