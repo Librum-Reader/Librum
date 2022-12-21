@@ -4,8 +4,6 @@ set(CMAKE_AUTORCC ON)
 
 
 
-
-
 # Dependencies
 find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
@@ -14,7 +12,6 @@ find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
 
 add_subdirectory(core)
-
 
 
 
@@ -69,7 +66,7 @@ add_library(application
 target_include_directories(application
                 PUBLIC
                 ${CMAKE_CURRENT_SOURCE_DIR}
-                ${CMAKE_CURRENT_BINARY_DIR}  # For generated settings file
+                ${CMAKE_CURRENT_BINARY_DIR}  # For generated okular settings file
                 ${DOMAIN_INCLUDES}
                 ${OKULARCORE_INCLUDES}
                 ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
