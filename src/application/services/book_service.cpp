@@ -378,15 +378,14 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
 {
     for(const auto& localBook : m_books)
     {
-        auto remoteBookPos = std::ranges::find_if(
+        bool localBookExistsOnServer = std::ranges::any_of(
             remoteBooks,
             [&localBook](const Book& remoteBook)
             {
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
-        // Create a new book on the server if no remote book exists
-        if(remoteBookPos == remoteBooks.end())
+        if(!localBookExistsOnServer)
             m_bookStorageManager->addBook(localBook);
     }
 }
@@ -403,8 +402,8 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
         m_bookStorageManager->updateBookLocally(original);
 
         // Update UI
-        auto localBookIndex = getBookIndex(original.getUuid());
-        emit dataChanged(localBookIndex);
+        auto index = getBookIndex(original.getUuid());
+        emit dataChanged(index);
     }
 
     if(lastOpenedStatus.updateDatabase || lastModifiedStatus.updateDatabase)
