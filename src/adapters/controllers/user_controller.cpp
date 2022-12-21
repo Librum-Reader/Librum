@@ -135,8 +135,11 @@ void UserController::setProfilePicture(const QString& path)
 {
     QUrl url(path);
     QImage profilePicture(url.toLocalFile());
-    if(profilePicture == m_userService->getProfilePicture())
+    if(profilePicture.isNull() ||
+       profilePicture == m_userService->getProfilePicture())
+    {
         return;
+    }
 
     m_userService->setProfilePicture(profilePicture);
     emit profilePictureChanged();
