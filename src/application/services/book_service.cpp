@@ -117,10 +117,9 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    // handle current page manually, so that "lastModified" doesnt get updated
-    // when only the current page changes
-    if(book->getCurrentPage() != newBook.getCurrentPage())
-        book->setCurrentPage(newBook.getCurrentPage());
+    // Manually handle changes to current page to prevent "lastModified" being
+    // updated on a simple page update
+    book->setCurrentPage(newBook.getCurrentPage());
 
     if(*book != newBook)
     {
