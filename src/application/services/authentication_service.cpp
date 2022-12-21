@@ -18,9 +18,6 @@ AuthenticationService::AuthenticationService(
     connect(m_authenticationGateway,
             &IAuthenticationGateway::registrationFinished, this,
             &AuthenticationService::processRegistrationResult);
-
-    connect(this, &AuthenticationService::loggedIn, this,
-            &AuthenticationService::setAuthenticationToken);
 }
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
@@ -73,13 +70,6 @@ void AuthenticationService::processRegistrationResult(bool success,
                                                       const QString& reason)
 {
     emit registrationFinished(success, reason);
-}
-
-void AuthenticationService::setAuthenticationToken(const QString& token,
-                                                   const QString& email)
-{
-    Q_UNUSED(email);
-    m_token = token;
 }
 
 void AuthenticationService::clearTemporaryUserData()

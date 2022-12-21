@@ -32,8 +32,6 @@ public slots:
     virtual void processAuthenticationResult(const QString& token) = 0;
     virtual void processRegistrationResult(bool success,
                                            const QString& reason) = 0;
-    virtual void setAuthenticationToken(const QString& token,
-                                        const QString& email) = 0;
 };
 
 }  // namespace application

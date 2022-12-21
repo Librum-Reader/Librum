@@ -23,8 +23,6 @@ public slots:
     void processAuthenticationResult(const QString& token) override;
     void processRegistrationResult(bool success,
                                    const QString& reason) override;
-    void setAuthenticationToken(const QString& token,
-                                const QString& email) override;
 
 private:
     void clearTemporaryUserData();

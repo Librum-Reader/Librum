@@ -29,8 +29,6 @@ public:
                 (override));
     MOCK_METHOD(void, processRegistrationResult,
                 (bool success, const QString& reason), (override));
-    MOCK_METHOD(void, setAuthenticationToken,
-                (const QString& token, const QString& email), (override));
 };
 
 struct AnAuthenticationController : public ::testing::Test
