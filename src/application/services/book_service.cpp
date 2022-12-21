@@ -47,8 +47,8 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     m_books.emplace_back(filePath, bookMetaData.value());
     emit bookInsertionEnded();
 
-    // The cover needs to be generated after the book has been created,
-    // else the cover is being added to a non existent book
+    // Generate cover after creating book to avoid adding cover to non-existent
+    // book
     m_bookMetadataHelper->loadCover();
 
     const Book& bookToStore = m_books.at(m_books.size() - 1);
