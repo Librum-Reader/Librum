@@ -142,7 +142,7 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
     if(!book)
     {
         qWarning() << "Adding tag to book with uuid: " << uuid << " failed."
-                   << "No book with this uuid exists.";
+                   << " No book with this uuid exists.";
         return BookOperationStatus::BookDoesNotExist;
     }
 
@@ -150,7 +150,7 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
     {
         qWarning() << "Adding tag called: " << tag.getName()
                    << " to book with uuid: " << uuid << " failed."
-                   << "A tag with this name already exists.";
+                   << " A tag with this name already exists.";
         return BookOperationStatus::TagAlreadyExists;
     }
 
@@ -178,7 +178,7 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
     {
         qWarning() << "Removing tag with uuid: " << tagUuid
                    << " from book with uuid: " << bookUuid << " failed."
-                   << "No tag with this uuid exists.";
+                   << " No tag with this uuid exists.";
         return BookOperationStatus::TagDoesNotExist;
     }
 
@@ -207,8 +207,8 @@ BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
     {
         qWarning() << "Renaming tag with uuid: " << tagUuid
                    << " from book with uuid: " << bookUuid << " failed."
-                   << "No tag with this uuid exists or a tag with this name "
-                      "already exists.";
+                   << " No tag with this uuid exists or a tag with this name"
+                      " already exists.";
         return BookOperationStatus::TagDoesNotExist;
     }
 
