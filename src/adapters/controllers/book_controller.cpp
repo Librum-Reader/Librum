@@ -186,12 +186,9 @@ void BookController::renameTags(const QString& oldName, const QString& newName)
     auto& books = m_bookService->getBooks();
     for(const auto& book : books)
     {
-        for(const auto& tag : book.getTags())
-        {
-            if(tag.getName() == oldName)
-                m_bookService->renameTag(book.getUuid(), tag.getUuid(),
-                                         newName);
-        }
+        auto tagUuid = getTagUuidByName(book, oldName);
+        if(!tagUuid.isNull())
+            m_bookService->renameTag(book.getUuid(), tagUuid, newName);
     }
 }
 
@@ -286,6 +283,17 @@ dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
     }
 
     return bookDto;
+}
+
+QUuid BookController::getTagUuidByName(const Book& book, const QString& name)
+{
+    for(const auto& tag : book.getTags())
+    {
+        if(tag.getName() == name)
+            return tag.getUuid();
+    }
+
+    return QUuid();
 }
 
 }  // namespace adapters::controllers

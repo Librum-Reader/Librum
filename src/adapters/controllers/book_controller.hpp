@@ -38,6 +38,8 @@ public slots:
 private:
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
     dtos::BookDto getDtoFromBook(const domain::entities::Book& book);
+    QUuid getTagUuidByName(const domain::entities::Book& book,
+                            const QString& name);
 
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;
