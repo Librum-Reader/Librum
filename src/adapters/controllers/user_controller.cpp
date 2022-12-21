@@ -24,13 +24,14 @@ UserController::UserController(application::IUserService* userService) :
     connect(m_userService, &application::IUserService::tagInsertionEnded,
             &m_userTagsModel, &data_models::UserTagsModel::endInsertingRow);
 
+    // tag deletion
     connect(m_userService, &application::IUserService::tagDeletionStarted,
             &m_userTagsModel, &data_models::UserTagsModel::startDeletingRow);
 
     connect(m_userService, &application::IUserService::tagDeletionEnded,
             &m_userTagsModel, &data_models::UserTagsModel::endDeletingRow);
 
-    // tags changed
+    // tags changes
     connect(m_userService, &application::IUserService::tagsChanged,
             &m_userTagsModel, &data_models::UserTagsModel::refreshRows);
 }
