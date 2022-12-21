@@ -277,10 +277,10 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    QUrl existingBook = book->getFilePath();
-    QUrl newBook = pathToFolder.path() + "/" + existingBook.fileName();
+    QUrl currentBookPath = book->getFilePath();
+    QUrl destinaton = pathToFolder.path() + "/" + currentBookPath.fileName();
 
-    auto result = QFile::copy(existingBook.path(), newBook.path());
+    auto result = QFile::copy(currentBookPath.path(), destinaton.path());
     if(!result)
     {
         qWarning() << "Saving book with uuid: " << uuid
