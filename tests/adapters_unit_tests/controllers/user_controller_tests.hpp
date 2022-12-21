@@ -288,4 +288,6 @@ TEST_F(AUserController, FailsGettingProfilePictureIfNoProfilePictureExists)
     EXPECT_EQ(expectedResult, result);
 }
 
+// TODO: Profile picture tests
+
 }  // namespace tests::adapters
