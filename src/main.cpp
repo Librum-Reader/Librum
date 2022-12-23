@@ -143,7 +143,13 @@ int main(int argc, char* argv[])
 void messageHandler(QtMsgType type, const QMessageLogContext& context,
                     const QString& msg)
 {
-    Q_UNUSED(context);
+    // Redirect qml messages to console:
+    QString fileName(context.file);
+    if(fileName.endsWith(".qml"))
+    {
+        qDebug() << "Qml: " << msg;
+        return;
+    }
 
     bool writeToStdOut = false;
     QString logLine;
