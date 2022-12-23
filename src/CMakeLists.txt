@@ -52,6 +52,8 @@ add_subdirectory(presentation/)
 # Building
 add_executable(appLibrum
     main.cpp
+    dependency_injection.hpp
+    message_handler.hpp
 )
 
 target_compile_definitions(appLibrum

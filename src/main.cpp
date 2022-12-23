@@ -21,6 +21,7 @@
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
+#include "message_handler.hpp"
 #include "page_item.hpp"
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
@@ -31,8 +32,6 @@
 void registerTypes();
 void loadFonts();
 void addTranslations();
-void messageHandler(QtMsgType type, const QMessageLogContext& context,
-                    const QString& msg);
 
 int main(int argc, char* argv[])
 {
@@ -44,7 +43,7 @@ int main(int argc, char* argv[])
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 
-    qInstallMessageHandler(messageHandler);
+    qInstallMessageHandler(logging::messageHandler);
 
     addTranslations();
     loadFonts();
@@ -138,56 +137,6 @@ int main(int argc, char* argv[])
 
     return QGuiApplication::exec();
     // clang-format on
-}
-
-void messageHandler(QtMsgType type, const QMessageLogContext& context,
-                    const QString& msg)
-{
-    // Redirect qml messages to console:
-    QString fileName(context.file);
-    if(fileName.endsWith(".qml"))
-    {
-        qDebug() << "Qml: " << msg;
-        return;
-    }
-
-    bool writeToStdOut = false;
-    QString logLine;
-    switch(type)
-    {
-    case QtInfoMsg:
-        logLine = QString("Info: %1").arg(msg);
-        break;
-    case QtDebugMsg:
-        logLine = QString("Debug: %1").arg(msg);
-        writeToStdOut = true;
-        break;
-    case QtWarningMsg:
-        logLine = QString("Warning: %1").arg(msg);
-        break;
-    case QtCriticalMsg:
-        logLine = QString("Critical: %1").arg(msg);
-        break;
-    case QtFatalMsg:
-        logLine = QString("Fatal: %1").arg(msg);
-        break;
-    }
-
-    QFile file("librum_log.txt");
-    if(file.open(QIODevice::WriteOnly | QIODevice::Append) && !writeToStdOut)
-    {
-        QTextStream logStream(&file);
-
-        QDateTime current = QDateTime::currentDateTime();
-        QString dateString = current.toString("dd.MM.yyyy - hh.mm.ss");
-        logStream << "(" << dateString << "): " << logLine << Qt::endl
-                  << Qt::endl;
-    }
-    else
-    {
-        QTextStream out(stdout);
-        out << "Librum message: " << logLine << Qt::endl;
-    }
 }
 
 void addTranslations()
