@@ -39,7 +39,11 @@ private:
     QImage getCorrectlySizedBookCover(const QString& pathToCover);
     dtos::BookDto getDtoFromBook(const domain::entities::Book& book);
     QUuid getTagUuidByName(const domain::entities::Book& book,
-                            const QString& name);
+                           const QString& name);
+    void addBookMetaDataToDto(const domain::entities::Book& book,
+                              dtos::BookDto& bookDto);
+    void addBookTagsToDto(const domain::entities::Book& book,
+                          dtos::BookDto& bookDto);
 
     application::IBookService* m_bookService;
     data_models::LibraryModel m_libraryModel;

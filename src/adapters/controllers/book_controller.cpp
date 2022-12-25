@@ -11,6 +11,7 @@ namespace adapters::controllers
 {
 
 using namespace domain::entities;
+using namespace dtos;
 using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService) :
@@ -249,38 +250,7 @@ QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
 dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
 {
     dtos::BookDto bookDto;
-    bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
-    bookDto.title = book.getTitle();
-    bookDto.authors = book.getAuthors();
-    bookDto.filePath = book.getFilePath();
-    bookDto.creator = book.getCreator();
-    bookDto.creationDate = book.getCreationDate();
-    bookDto.format = book.getFormat();
-    bookDto.language = book.getLanguage();
-    bookDto.documentSize = book.getDocumentSize();
-    bookDto.pagesSize = book.getPagesSize();
-    bookDto.pageCount = book.getPageCount();
-    bookDto.currentPage = book.getCurrentPage();
-    bookDto.bookProgressPercentage = book.getBookProgressPercentage();
-
-    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
-        Book::dateTimeStringFormat);
-
-    bookDto.lastOpened = book.getLastOpened().isNull()
-                             ? "Never"
-                             : book.getLastOpened().toLocalTime().toString(
-                                   Book::dateTimeStringFormat);
-
-    bookDto.cover = book.getCoverAsStringWithType();
-    bookDto.downloaded = book.getDownloaded();
-
-    for(const auto& tag : book.getTags())
-    {
-        dtos::TagDto tagDto;
-        tagDto.name = tag.getName();
-
-        bookDto.tags.push_back(tagDto);
-    }
+    addBookMetaDataToDto(book, bookDto);
 
     return bookDto;
 }
@@ -294,6 +264,44 @@ QUuid BookController::getTagUuidByName(const Book& book, const QString& name)
     }
 
     return QUuid();
+}
+
+void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
+{
+    bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
+    bookDto.title = book.getTitle();
+    bookDto.authors = book.getAuthors();
+    bookDto.filePath = book.getFilePath();
+    bookDto.creator = book.getCreator();
+    bookDto.creationDate = book.getCreationDate();
+    bookDto.format = book.getFormat();
+    bookDto.language = book.getLanguage();
+    bookDto.documentSize = book.getDocumentSize();
+    bookDto.pagesSize = book.getPagesSize();
+    bookDto.pageCount = book.getPageCount();
+    bookDto.currentPage = book.getCurrentPage();
+    bookDto.bookProgressPercentage = book.getBookProgressPercentage();
+    bookDto.cover = book.getCoverAsStringWithType();
+    bookDto.downloaded = book.getDownloaded();
+
+    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
+        Book::dateTimeStringFormat);
+
+    bookDto.lastOpened = book.getLastOpened().isNull()
+                             ? "Never"
+                             : book.getLastOpened().toLocalTime().toString(
+                                   Book::dateTimeStringFormat);
+}
+
+void BookController::addBookTagsToDto(const Book& book, BookDto& bookDto)
+{
+    for(const auto& tag : book.getTags())
+    {
+        dtos::TagDto tagDto;
+        tagDto.name = tag.getName();
+
+        bookDto.tags.push_back(tagDto);
+    }
 }
 
 }  // namespace adapters::controllers
