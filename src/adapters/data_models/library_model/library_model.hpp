@@ -42,7 +42,7 @@ public:
         Invalid
     };
 
-    LibraryModel(const std::vector<domain::entities::Book>& data);
+    explicit LibraryModel(const std::vector<domain::entities::Book>& data);
 
     int rowCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role) const override;
