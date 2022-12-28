@@ -29,6 +29,10 @@
 #include "user_dto.hpp"
 
 
+using namespace adapters::controllers;
+using namespace application::services;
+
+
 void registerTypes();
 void loadFonts();
 void addTranslations();
@@ -61,10 +65,6 @@ int main(int argc, char* argv[])
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
     qRegisterMetaType<adapters::dtos::UserDto>();
-
-
-    using namespace adapters::controllers;
-    using namespace application::services;
 
 
     // Authentication-Stack
