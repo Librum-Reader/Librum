@@ -12,7 +12,7 @@ void logMessage(const QString& logLine, bool writeToStdOut);
 void messageHandler(QtMsgType type, const QMessageLogContext& context,
                     const QString& msg)
 {
-    // Redirect qml messages to console:
+    // Redirect qml messages to the console
     QString fileName(context.file);
     if(fileName.endsWith(".qml"))
     {
