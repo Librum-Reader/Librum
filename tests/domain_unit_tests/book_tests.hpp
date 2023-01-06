@@ -265,20 +265,85 @@ TEST(ABook, FailsRenamingATagIfNameAlreadyExists)
 TEST(ABook, SucceedsGettingAllTags)
 {
     // Arrange
-    Book book("some/path", BookMetaData());
+    Book book("some/path.pdf", BookMetaData());
     Tag firstTag("FirstTag");
     Tag secondTag("SecondTag");
     Tag thirdTag("ThirdTag");
-
-    // Act
     book.addTag(firstTag);
     book.addTag(secondTag);
     book.addTag(thirdTag);
 
+    // Act
+    auto result = book.getTags();
+
     // Assert
-    EXPECT_EQ(firstTag, book.getTags()[0]);
-    EXPECT_EQ(secondTag, book.getTags()[1]);
-    EXPECT_EQ(thirdTag, book.getTags()[2]);
+    EXPECT_EQ(firstTag, result[0]);
+    EXPECT_EQ(secondTag, result[1]);
+    EXPECT_EQ(thirdTag, result[2]);
+}
+
+TEST(ABook, SucceedsGettingTagByUuid)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData());
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    book.addTag(firstTag);
+    book.addTag(secondTag);
+
+
+    // Act
+    auto result = book.getTagByUuid(firstTag.getUuid());
+
+    // Assert
+    EXPECT_EQ(firstTag, *result);
+}
+
+TEST(ABook, FailsGettingTagByUuidIfTagDoesNotExist)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData());
+    Tag firstTag("FirstTag");
+    book.addTag(firstTag);
+
+
+    // Act
+    auto result = book.getTagByUuid(QUuid::createUuid());
+
+    // Assert
+    EXPECT_EQ(nullptr, result);
+}
+
+TEST(ABook, SucceedsGettingTagByName)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData());
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    book.addTag(firstTag);
+    book.addTag(secondTag);
+
+
+    // Act
+    auto result = book.getTagByName(firstTag.getName());
+
+    // Assert
+    EXPECT_EQ(firstTag, *result);
+}
+
+TEST(ABook, FailsGettingTagByNameIfTagDoesNotExist)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData());
+    Tag firstTag("FirstTag");
+    book.addTag(firstTag);
+
+
+    // Act
+    auto result = book.getTagByName("NonExistentTag");
+
+    // Assert
+    EXPECT_EQ(nullptr, result);
 }
 
 TEST(ABook, SucceedsUpdatingBook)
