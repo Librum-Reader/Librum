@@ -198,7 +198,7 @@ TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
     auto tagCountAfterAdding = userService->getTags().size();
 
     // Assert
-    EXPECT_EQ(tag.getUuid(), result);
+    EXPECT_EQ(QUuid(), result);
     EXPECT_EQ(tagCountAfterAdding, 1);
 }
 

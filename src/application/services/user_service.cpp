@@ -94,12 +94,11 @@ const std::vector<domain::entities::Tag>& UserService::getTags() const
 
 QUuid UserService::addTag(const domain::entities::Tag& tag)
 {
-    m_user.addTag(tag);
-    auto userTag = m_user.getTagByName(tag.getName());
-    if(!userTag)
+    auto success = m_user.addTag(tag);
+    if(!success)
         return QUuid();
 
-    return userTag->getUuid();
+    return tag.getUuid();
 }
 
 bool UserService::deleteTag(const QUuid& uuid)
