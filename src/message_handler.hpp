@@ -7,20 +7,20 @@
 namespace logging
 {
 
-void logMessage(const QString& logLine, bool writeToStdOut);
+void logMessageToStdout(const QString& logLine);
+void logMessageToFile(const QString& logLine);
 
 void messageHandler(QtMsgType type, const QMessageLogContext& context,
                     const QString& msg)
 {
-    // Redirect qml messages to the console
+    // Redirect qml messages to stdout
     QString fileName(context.file);
     if(fileName.endsWith(".qml"))
     {
-        qDebug() << "Qml: " << msg;
+        logMessageToStdout("Qml: " + msg);
         return;
     }
 
-    bool writeToStdOut = false;
     QString logLine;
     switch(type)
     {
@@ -29,7 +29,6 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context,
         break;
     case QtDebugMsg:
         logLine = QString("Debug: %1").arg(msg);
-        writeToStdOut = true;
         break;
     case QtWarningMsg:
         logLine = QString("Warning: %1").arg(msg);
@@ -42,26 +41,25 @@ void messageHandler(QtMsgType type, const QMessageLogContext& context,
         break;
     }
 
-    logMessage(logLine, writeToStdOut);
+    logMessageToFile(logLine);
 }
 
-void logMessage(const QString& logLine, bool writeToStdOut)
+void logMessageToStdout(const QString& logLine)
+{
+    QTextStream out(stdout);
+    out << logLine << Qt::endl;
+}
+
+void logMessageToFile(const QString& logLine)
 {
     QFile file("librum_log.txt");
-    if(file.open(QIODevice::WriteOnly | QIODevice::Append) && !writeToStdOut)
-    {
-        QTextStream logStream(&file);
+    if(!file.open(QIODevice::WriteOnly | QIODevice::Append))
+        logMessageToStdout(logLine);  // Fallback
 
-        QDateTime current = QDateTime::currentDateTime();
-        QString dateString = current.toString("dd.MM.yyyy - hh.mm.ss");
-        logStream << "(" << dateString << "): " << logLine << Qt::endl
-                  << Qt::endl;
-    }
-    else
-    {
-        QTextStream out(stdout);
-        out << "Librum message: " << logLine << Qt::endl;
-    }
+    QTextStream logStream(&file);
+    QDateTime current = QDateTime::currentDateTime();
+    QString dateString = current.toString("dd.MM.yyyy - hh.mm.ss");
+    logStream << "(" << dateString << "): " << logLine << Qt::endl << Qt::endl;
 }
 
 }  // namespace logging
