@@ -48,7 +48,7 @@ struct AUserService : public ::testing::Test
     std::unique_ptr<UserService> userService;
 };
 
-TEST_F(AUserService, SucceedsGettingTheUser)
+TEST_F(AUserService, SucceedsLoadingTheUser)
 {
     // Expect
     EXPECT_CALL(userStorageGatewayMock, getUser(_)).Times(1);
@@ -200,6 +200,32 @@ TEST_F(AUserService, FailsAddingTagIfTagWithSameNameAlreadyExists)
     // Assert
     EXPECT_EQ(QUuid(), result);
     EXPECT_EQ(tagCountAfterAdding, 1);
+}
+
+TEST_F(AUserService, SucceedsGettingTags)
+{
+    // Arrange
+    entities::Tag firstTag("SomeTag");
+    entities::Tag secondTag("AnotherTag");
+    userService->addTag(firstTag);
+    userService->addTag(secondTag);
+
+
+    // Act
+    auto result = userService->getTags();
+
+    // Assert
+    EXPECT_EQ(firstTag, result[0]);
+    EXPECT_EQ(secondTag, result[1]);
+}
+
+TEST_F(AUserService, FailsGettingTagsIfNoneExist)
+{
+    // Act
+    auto result = userService->getTags();
+
+    // Assert
+    EXPECT_EQ(0, result.size());
 }
 
 TEST_F(AUserService, SucceedsRemovingATag)
