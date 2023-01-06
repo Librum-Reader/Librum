@@ -3,6 +3,10 @@ project(Librum VERSION 0.1
                LANGUAGES CXX)
 
 
+#Qt
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
 
 # Configuration
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
