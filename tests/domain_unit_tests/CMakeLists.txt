@@ -11,6 +11,7 @@ add_executable(domain_unit_tests
                     register_model_tests.hpp
                     book_tests.hpp
                     user_tests.hpp
+                    tag_tests.hpp
 )
 
 target_include_directories(domain_unit_tests
