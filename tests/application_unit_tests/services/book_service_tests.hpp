@@ -224,6 +224,7 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     EXPECT_EQ(expectedStatus, resultStatus);
     EXPECT_EQ(expectedResult.getTitle(), result->getTitle());
     EXPECT_EQ(expectedResult.getFilePath(), result->getFilePath());
+    EXPECT_EQ(expectedResult.getAuthors(), result->getAuthors());
 
     for(int i = 0; i < expectedResult.getTags().size(); ++i)
     {
