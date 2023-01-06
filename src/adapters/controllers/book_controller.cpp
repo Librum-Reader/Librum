@@ -251,6 +251,7 @@ dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
 {
     dtos::BookDto bookDto;
     addBookMetaDataToDto(book, bookDto);
+    addBookTagsToDto(book, bookDto);
 
     return bookDto;
 }
