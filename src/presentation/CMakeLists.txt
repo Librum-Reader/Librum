@@ -12,13 +12,6 @@ find_package(KF5 REQUIRED COMPONENTS
 )
 
 
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
-
 # Build
 add_library(presentation
                 SHARED

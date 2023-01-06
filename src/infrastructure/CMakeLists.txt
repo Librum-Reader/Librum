@@ -3,13 +3,6 @@ find_package(QT NAMES Qt5 COMPONENTS Core Network Gui REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Gui REQUIRED)
 
 
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
-
 # Build
 add_library(infrastructure
                 SHARED
