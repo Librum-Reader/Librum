@@ -73,7 +73,6 @@ Item
             id: animations
         }
         
-        
         MFlickWrapper
         {
             anchors.fill: parent
