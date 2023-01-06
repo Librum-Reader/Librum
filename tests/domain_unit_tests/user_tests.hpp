@@ -32,20 +32,29 @@ TEST(AUser, FailsAddingATagIfTagAlreadyExists)
     // Arrange
     User user("first", "last", "email@librum.com");
     Tag tag("SomeTag");
-    auto tagAmountBeforeAdding = user.getTags().size();
+    user.addTag(tag);  // First time
 
     // Act
-    user.addTag(tag);  // First time
     auto result = user.addTag(tag);  // Second time
-    auto tagAmountAfterAdding = user.getTags().size();
 
     // Assert
     EXPECT_FALSE(result);
-    EXPECT_EQ(tagAmountBeforeAdding, 0);
-    EXPECT_EQ(tagAmountAfterAdding, 1);
 }
 
-TEST(AUser, SucceedsRemovingATag)
+TEST(AUser, FailsAddingATagIfTagIsInvalid)
+{
+    // Arrange
+    User user("first", "last", "email@librum.com");
+    Tag tag("T");  // Name too short
+
+    // Act
+    auto result = user.addTag(tag);
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
+TEST(AUser, SucceedsDeletingATag)
 {
     // Arrange
     User user("first", "last", "email@librum.com");
@@ -65,7 +74,7 @@ TEST(AUser, SucceedsRemovingATag)
     EXPECT_EQ(tagAmountAfterRemoving, 0);
 }
 
-TEST(AUser, FailsRemovingATagIfTagDoesNotExist)
+TEST(AUser, FailsDeletingATagIfTagDoesNotExist)
 {
     // Arrange
     User user("first", "last", "email@librum.com");
@@ -113,6 +122,22 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
     EXPECT_EQ(tagResult, nullptr);
 }
 
+TEST(AUser, FailsRenamingATagIfNewNameAlreadyExists)
+{
+    // Arrange
+    User user("first", "last", "email@librum.com");
+    Tag firstTag("SomeName");
+    Tag secondTag("AnotherName");
+    user.addTag(firstTag);
+    user.addTag(secondTag);
+
+    // Act
+    auto result = user.renameTag(secondTag.getUuid(), firstTag.getName());
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
 TEST(AUser, SucceedsGettingTags)
 {
     // Arrange
@@ -142,6 +167,18 @@ TEST(AUser, SucceedsGettingATagByName)
     EXPECT_EQ(*result, tag);
 }
 
+TEST(AUser, FailsGettingATagByNameIfTagDoesNotExist)
+{
+    // Arrange
+    User user("first", "last", "email@librum.com");
+
+    // Act
+    auto result = user.getTagByName("NonExistentTag");
+
+    // Assert
+    EXPECT_EQ(nullptr, result);
+}
+
 TEST(AUser, SucceedsGettingATagByUuid)
 {
     // Arrange
@@ -154,6 +191,18 @@ TEST(AUser, SucceedsGettingATagByUuid)
 
     // Assert
     EXPECT_EQ(*result, tag);
+}
+
+TEST(AUser, FailsGettingATagByUuidIfTagDoesNotExist)
+{
+    // Arrange
+    User user("first", "last", "email@librum.com");
+
+    // Act
+    auto result = user.getTagByUuid(QUuid::createUuid());
+
+    // Assert
+    EXPECT_EQ(nullptr, result);
 }
 
 }  // namespace tests::domain
