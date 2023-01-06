@@ -73,8 +73,8 @@ void BookStorageManager::updateBook(const Book& book)
 
 void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
 {
-    // Prevent updating remote books in the local library unless "downloaded" is
-    // set to true.
+    // Prevent updating remote books in the local library unless the book is
+    // downloaded. If its not downloaded, there is no local file to update.
     if(book.getDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(book);
 }
