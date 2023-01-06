@@ -12,6 +12,7 @@ using namespace testing;
 using namespace application::utility;
 using namespace application;
 using namespace domain::entities;
+using namespace domain::value_objects;
 
 namespace tests::application
 {
@@ -67,11 +68,11 @@ TEST_F(ABookStorageManager, SucceedsAddingABook)
     bookStorageManager->addBook(book);
 }
 
-TEST_F(ABookStorageManager, AddsABookOnlyToRemoteLibraryIfBookIsNotDownloaded)
+TEST_F(ABookStorageManager, SucceedsAddingLocalBookToRemoteLibrary)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
-    book.setDownloaded(false);
+    book.setDownloaded(false);  // Mark the book as local
 
     // Expect
     EXPECT_CALL(downloadedBooksTrackerMock, trackBook(_)).Times(0);
@@ -134,7 +135,7 @@ TEST_F(ABookStorageManager, SucceedsUpdatingABookLocally)
     bookStorageManager->updateBookLocally(book);
 }
 
-TEST_F(ABookStorageManager, FailsUpdatingABookOnlyLocallyIfBookIsNotDownloaded)
+TEST_F(ABookStorageManager, FailsUpdatingABookLocallyIfItsNotDownloaded)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
