@@ -49,4 +49,19 @@ TEST(ATag, FailsValidityCheckIfNameIsTooShort)
     EXPECT_FALSE(firstTag.isValid());
 }
 
+TEST(ATag, SucceedsSerializationToJson)
+{
+    Tag tag("SomeTag");
+
+
+    // Act
+    auto serializedTag = tag.toJson();
+    auto jsonDoc = QJsonDocument::fromJson(serializedTag);
+    auto tagObject = jsonDoc.object();
+
+    // Assert
+    EXPECT_EQ(tag.getName(), tagObject["name"].toString());
+    EXPECT_EQ(tag.getUuid(), tagObject["uuid"].toString());
+}
+
 }  // namespace tests::domain
