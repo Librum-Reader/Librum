@@ -245,7 +245,7 @@ TEST(ABook, FailsRenamingATagIfNoTagWithTheUuidExists)
     EXPECT_NE(newName, book.getTags()[0].getName());
 }
 
-TEST(ABook, FailsRenamingATagIfNameAlreadyExists)
+TEST(ABook, FailsRenamingATagIfNewNameExists)
 {
     // Arrange
     Book book("some/path", BookMetaData());
@@ -477,7 +477,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
     EXPECT_EQ(book.getUuid(), result.getUuid());
 }
 
-TEST(ABook, SucceedsComparison)
+TEST(ABook, SucceedsEqualityComparison)
 {
     // Arrange
     // First book
@@ -511,10 +511,10 @@ TEST(ABook, SucceedsComparison)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
+TEST(ABook, FailsEqualityComparisonIfTheBooksDiffer)
 {
     // Arrange
-    // First book
+    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
     BookMetaData firstBookMetaData {
         .title = "SomeTitle",
         .authors = "SomeAuthor",
@@ -528,10 +528,7 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
-
-    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
     int currentPage = 224;
-
     Book firstBook("some/path", firstBookMetaData, currentPage, uuid);
 
     BookMetaData secondBookMetaData {
@@ -547,7 +544,6 @@ TEST(ABook, SucceedsFailsComparisonIfTheBooksDiffer)
         .lastOpened = QDateTime(),
         .cover = QImage(""),
     };
-
     Book secondBook("some/path", secondBookMetaData, currentPage, uuid);
 
     bool expectedResult = false;
