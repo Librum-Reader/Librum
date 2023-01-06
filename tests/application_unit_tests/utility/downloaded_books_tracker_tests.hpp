@@ -11,6 +11,7 @@
 using namespace testing;
 using namespace application::utility;
 using namespace domain::entities;
+using namespace domain::value_objects;
 
 namespace tests::application
 {
@@ -135,7 +136,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
     EXPECT_EQ(expectedResult, result.value());
 }
 
-TEST_F(ADownloadedBooksTracker, FailsGettingANonExistentBook)
+TEST_F(ADownloadedBooksTracker, FailsGettingUntrackedBook)
 {
     // Arrange
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -148,7 +149,7 @@ TEST_F(ADownloadedBooksTracker, FailsGettingANonExistentBook)
     EXPECT_FALSE(result.has_value());
 }
 
-TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
+TEST_F(ADownloadedBooksTracker, SucceedsGettingAllTrackedBooks)
 {
     // Arrange
     BookMetaData metaData {
@@ -191,7 +192,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllBooks)
     EXPECT_TRUE(result.size() == 3);
 }
 
-TEST_F(ADownloadedBooksTracker, FailsGettingAllBooksIfNoneExist)
+TEST_F(ADownloadedBooksTracker, FailsGettingAllTrackedBooksIfNoneExist)
 {
     // Act
     auto result = downloadedBooksTracker.getTrackedBooks();
@@ -235,7 +236,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
     EXPECT_FALSE(result.has_value());
 }
 
-TEST_F(ADownloadedBooksTracker, FailsUntrackingATrackedBookIfBookDoesNotExist)
+TEST_F(ADownloadedBooksTracker, FailsUntrackingIfNoTrackedBookExists)
 {
     // Arrange
     auto nonExistendUuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
