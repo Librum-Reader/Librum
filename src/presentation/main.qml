@@ -75,7 +75,7 @@ ApplicationWindow
     
     function loadPage(page, sidebarItem, doSamePageCheck = true)
     {
-        if(checkIfPageIsTheSameAsPrevious(sidebarItem) && doSamePageCheck)
+        if(doSamePageCheck && checkIfPageIsTheSameAsPrevious(sidebarItem))
             return;
         
         if(!terminateActionOfPreviousPage(page, sidebarItem))
