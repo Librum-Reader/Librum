@@ -496,6 +496,53 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
     }
 }
 
+TEST_F(ABookService, SucceedsGettingABookIndex)
+{
+
+    // Arrange
+    BookMetaData firstBookMetaData { .title = "FirstBook",
+                                     .authors = "Author1" };
+    BookMetaData secondBookMetaData { .title = "SecondBook",
+                                      .authors = "Author2" };
+
+    Book firstBook("/some/path", firstBookMetaData);
+    Book secondBook("/some/path2", secondBookMetaData);
+
+    int expectedResult = 1;
+
+
+    // Expect
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(2)
+        .WillOnce(Return(firstBookMetaData))
+        .WillOnce(Return(secondBookMetaData));
+
+
+    // Act
+    bookService->addBook(firstBook.getFilePath());
+    bookService->addBook(secondBook.getFilePath());
+    auto secondBookUuid = bookService->getBooks()[1].getUuid();
+
+    auto result = bookService->getBookIndex(secondBookUuid);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsGettingABookIndexIfBookDoesNotExist)
+{
+    // Arrange
+    QUuid nonExistentBook = QUuid::createUuid();
+
+    int expectedResult = -1;
+
+    // Act
+    auto result = bookService->getBookIndex(nonExistentBook);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
 TEST_F(ABookService, SucceedsGettingTheBookCount)
 {
     // Arrange
