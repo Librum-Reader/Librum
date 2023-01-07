@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QSignalSpy>
 #include <QString>
 #include <QUuid>
 #include "book.hpp"
@@ -91,7 +90,6 @@ TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
     book.addTag(entities::Tag("SecondTag"));
     QJsonObject argPassedToMock;
 
-
     // Expect
     EXPECT_CALL(bookStorageAccessMock, updateBook(_, _))
         .Times(1)
@@ -100,6 +98,7 @@ TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
             {
                 argPassedToMock = arg;
             }));
+
 
     // Act
     bookStorageGateway->updateBook("some_token", book);

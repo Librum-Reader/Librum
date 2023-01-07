@@ -1,7 +1,6 @@
 #pragma once
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <QSignalSpy>
 #include <QString>
 #include "authentication_gateway.hpp"
 #include "i_authentication_access.hpp"
