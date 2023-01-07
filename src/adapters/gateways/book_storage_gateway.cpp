@@ -24,13 +24,7 @@ void BookStorageGateway::createBook(const QString& authToken, const Book& book)
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
 
-    // Change the key name "uuid" to "guid" since that's what the api requests
-    renameJsonObjectKey(jsonBook, "uuid", "guid");
-
-    // Again, change "uuid" to "guid" for every tag for the api request
-    auto tags = jsonBook["tags"].toArray();
-    auto fixedTags = renameTagProperties(tags, TagNamingStyle::ApiStyle);
-    jsonBook["tags"] = fixedTags;
+    convertJsonBookToApiFormat(jsonBook);
 
     m_bookStorageAccess->createBook(authToken, jsonBook);
 }
@@ -45,13 +39,7 @@ void BookStorageGateway::updateBook(const QString& authToken, const Book& book)
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
 
-    // Change the key name "uuid" to "guid" since that's what the api requests
-    renameJsonObjectKey(jsonBook, "uuid", "guid");
-
-    // Api wants the "uuid" to be called "guid", so rename it
-    auto tags = jsonBook["tags"].toArray();
-    auto fixedTags = renameTagProperties(tags, TagNamingStyle::ApiStyle);
-    jsonBook["tags"] = fixedTags;
+    convertJsonBookToApiFormat(jsonBook);
 
     m_bookStorageAccess->updateBook(authToken, jsonBook);
 }
@@ -90,6 +78,17 @@ void BookStorageGateway::proccessBooksMetadata(
     }
 
     emit gettingBooksMetaDataFinished(books);
+}
+
+void BookStorageGateway::convertJsonBookToApiFormat(QJsonObject& jsonBook)
+{
+    // Change the json key names from "uuid" to "guid" since that's what the api
+    // requests
+    renameJsonObjectKey(jsonBook, "uuid", "guid");
+
+    auto tagsToFix = jsonBook["tags"].toArray();
+    auto fixedTags = renameTagProperties(tagsToFix, TagNamingStyle::ApiStyle);
+    jsonBook["tags"] = fixedTags;
 }
 
 QJsonArray BookStorageGateway::renameTagProperties(const QJsonArray& tags,
