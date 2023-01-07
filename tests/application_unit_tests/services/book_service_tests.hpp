@@ -352,6 +352,111 @@ TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
+TEST_F(ABookService, SucceedsRemovingATag)
+{
+    // Arrange
+    bookService->addBook("some/path.pdf");
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
+
+    Tag firstTag("FirstTag");
+    bookService->addTag(bookUuid, firstTag);
+
+    auto expectedResultStatus = BookOperationStatus::Success;
+
+
+    // Act
+    bookService->removeTag(bookUuid, firstTag.getUuid());
+
+    // Assert
+    EXPECT_EQ(0, bookService->getBooks()[0].getTags().size());
+}
+
+TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
+{
+    // Arrange
+    bookService->addBook("some/path.pdf");
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
+
+    auto expectedResult = BookOperationStatus::TagDoesNotExist;
+
+
+    // Act
+    auto result = bookService->removeTag(bookUuid, QUuid::createUuid());
+
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
+{
+    // Arrange
+    QUuid bookUuid = "non-existend-uuid";
+    Tag someTag("SomeTag");
+
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+
+    auto result = bookService->removeTag(bookUuid, someTag.getUuid());
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, SucceedsRenamingATag)
+{
+    // Arrange
+    bookService->addBook("some/path.pdf");
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
+
+    QString newName = "SomeNewName";
+    Tag firstTag("FirstTag");
+    bookService->addTag(bookUuid, firstTag);
+
+    auto expectedResultStatus = BookOperationStatus::Success;
+
+
+    // Act
+    bookService->renameTag(bookUuid, firstTag.getUuid(), newName);
+
+    // Assert
+    EXPECT_EQ(newName, bookService->getBook(bookUuid)->getTags()[0].getName());
+}
+
+TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
+{
+    // Arrange
+    bookService->addBook("some/path.pdf");
+    const auto& bookUuid = bookService->getBooks()[0].getUuid();
+
+    auto expectedResult = BookOperationStatus::TagDoesNotExist;
+
+
+    // Act
+    auto result =
+        bookService->renameTag(bookUuid, QUuid::createUuid(), "SomeName");
+
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
+{
+    // Arrange
+    QUuid bookUuid = "non-existend-uuid";
+    Tag someTag("SomeTag");
+
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+
+    auto result = bookService->renameTag(bookUuid, someTag.getUuid(),
+                                         someTag.getUuid().toString());
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
 TEST_F(ABookService, SucceedsGettingAllBooks)
 {
     // Arrange
