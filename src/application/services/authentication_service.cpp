@@ -22,15 +22,14 @@ AuthenticationService::AuthenticationService(
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
-    if(loginModel.isValid())
-    {
-        m_tempEmail = loginModel.getEmail();
-        m_authenticationGateway->authenticateUser(loginModel);
-    }
-    else
+    if(!loginModel.isValid())
     {
         emit loginFinished(false);
+        return;
     }
+
+    m_tempEmail = loginModel.getEmail();
+    m_authenticationGateway->authenticateUser(loginModel);
 }
 
 void AuthenticationService::logoutUser()
@@ -41,15 +40,14 @@ void AuthenticationService::logoutUser()
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
     auto status = registerModel.isValid();
-    if(status == RegisterModel::RegistrationResult::Valid)
-    {
-        m_authenticationGateway->registerUser(registerModel);
-    }
-    else
+    if(status != RegisterModel::RegistrationResult::Valid)
     {
         QString failureReason = registerModel.generateErrorMessage(status);
         emit registrationFinished(false, failureReason);
+        return;
     }
+
+    m_authenticationGateway->registerUser(registerModel);
 }
 
 void AuthenticationService::processAuthenticationResult(const QString& token)
