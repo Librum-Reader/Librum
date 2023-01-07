@@ -47,12 +47,27 @@ TEST_F(ABookStorageGateway, SucceedsCreatingABook)
 {
     // Arrange
     entities::Book book("some/path.pdf", {}, 0);
+    book.addTag(entities::Tag("FirstTag"));
+    book.addTag(entities::Tag("SecondTag"));
+    QJsonObject argPassedToMock;
 
     // Expect
-    EXPECT_CALL(bookStorageAccessMock, createBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageAccessMock, createBook(_, _))
+        .Times(1)
+        .WillOnce(Invoke(
+            [&argPassedToMock](const QString&, const QJsonObject& arg)
+            {
+                argPassedToMock = arg;
+            }));
+
 
     // Act
     bookStorageGateway->createBook("some_token", book);
+
+    // Assert
+    // Check for correct conversion from uuid to guid json property
+    QString argContent = QJsonDocument(argPassedToMock).toJson();
+    EXPECT_FALSE(argContent.contains("uuid"));
 }
 
 TEST_F(ABookStorageGateway, SucceedsDeletingABook)
@@ -72,12 +87,27 @@ TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
 {
     // Arrange
     entities::Book book("some/path.pdf", {}, 0);
+    book.addTag(entities::Tag("FirstTag"));
+    book.addTag(entities::Tag("SecondTag"));
+    QJsonObject argPassedToMock;
+
 
     // Expect
-    EXPECT_CALL(bookStorageAccessMock, updateBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageAccessMock, updateBook(_, _))
+        .Times(1)
+        .WillOnce(Invoke(
+            [&argPassedToMock](const QString&, const QJsonObject& arg)
+            {
+                argPassedToMock = arg;
+            }));
 
     // Act
     bookStorageGateway->updateBook("some_token", book);
+
+    // Assert
+    // Check for correct conversion from uuid to guid json property
+    QString argContent = QJsonDocument(argPassedToMock).toJson();
+    EXPECT_FALSE(argContent.contains("uuid"));
 }
 
 TEST_F(ABookStorageGateway, SucceedsGettingBooksMetaData)
