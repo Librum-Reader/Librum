@@ -228,7 +228,7 @@ TEST_F(AUserService, FailsGettingTagsIfNoneExist)
     EXPECT_EQ(0, result.size());
 }
 
-TEST_F(AUserService, SucceedsRemovingATag)
+TEST_F(AUserService, SucceedsDeletingATag)
 {
     // Arrange
     entities::Tag tag("SomeTag");
@@ -244,7 +244,7 @@ TEST_F(AUserService, SucceedsRemovingATag)
     EXPECT_EQ(tagCountAfterAdding, 0);
 }
 
-TEST_F(AUserService, FailsRemovingTagIfTagDoesNotExists)
+TEST_F(AUserService, FailsDeletingTagIfTagDoesNotExists)
 {
     // Act
     auto result = userService->deleteTag("NoneExistentTag");
