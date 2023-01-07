@@ -19,8 +19,7 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
             &BookStorageGateway::proccessBooksMetadata);
 }
 
-void BookStorageGateway::createBook(const QString& authToken,
-                                    const domain::entities::Book& book)
+void BookStorageGateway::createBook(const QString& authToken, const Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
@@ -41,8 +40,7 @@ void BookStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
     m_bookStorageAccess->deleteBook(authToken, uuid);
 }
 
-void BookStorageGateway::updateBook(const QString& authToken,
-                                    const domain::entities::Book& book)
+void BookStorageGateway::updateBook(const QString& authToken, const Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
