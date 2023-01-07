@@ -95,4 +95,31 @@ TEST_F(AUserStorageGateway, SucceedsChangingProfilePicture)
     userStorageGateway->changeProfilePicture("secureToken", profilePicture);
 }
 
+TEST_F(AUserStorageGateway, SucceedsDeletingATag)
+{
+    // Arrange
+    QString authToken = "secureToken";
+    QUuid bookUuid = QUuid::createUuid();
+
+    // Expect
+    EXPECT_CALL(userStorageAccessMock, deleteTag(_, _)).Times(1);
+
+    // Act
+    userStorageGateway->deleteTag(authToken, bookUuid);
+}
+
+TEST_F(AUserStorageGateway, SucceedsRenamingATag)
+{
+    // Arrange
+    QString authToken = "secureToken";
+    QUuid bookUuid = QUuid::createUuid();
+    QString newName = "SomeName";
+
+    // Expect
+    EXPECT_CALL(userStorageAccessMock, renameTag(_, _, _)).Times(1);
+
+    // Act
+    userStorageGateway->renameTag(authToken, bookUuid, newName);
+}
+
 }  // namespace tests::adapters
