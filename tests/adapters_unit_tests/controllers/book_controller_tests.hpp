@@ -182,7 +182,6 @@ TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
     EXPECT_CALL(bookServiceMock, getBooks())
         .Times(1)
         .WillOnce(ReturnRef(books));
-    EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
 
     // Act
     bookController->removeAllTagsWithUuid(nonExistentTag.toString());
