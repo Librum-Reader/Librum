@@ -14,6 +14,7 @@ add_executable(adapters_unit_tests
                     gateways/authentication_gateway_tests.hpp
                     data_models/library_proxy_model_tests.hpp
                     data_models/test_data/sort_by_title_test_data.hpp
+                    data_models/test_data/sort_by_recently_added_test_data.hpp
     )
 
 target_link_libraries(adapters_unit_tests

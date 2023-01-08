@@ -5,6 +5,7 @@
 #include <QString>
 #include "library_model.hpp"
 #include "library_proxy_model.hpp"
+#include "test_data/sort_by_recently_added_test_data.hpp"
 #include "test_data/sort_by_title_test_data.hpp"
 
 
@@ -29,48 +30,10 @@ public:
     LibraryProxyModel libraryProxyModel;
 };
 
-SortByTitleTestData titleSortingTestData[] = {
-    { Book("some/path", BookMetaData { .title = "ABook" }),
-      Book("some/path", BookMetaData { .title = "ZBook" }), true },
-
-    { Book("some/path", BookMetaData { .title = "Blank Paper" }),
-      Book("some/path", BookMetaData { .title = "Stay Hidden" }), true },
-
-    { Book("some/path", BookMetaData { .title = "The Happy Alien" }),
-      Book("some/path", BookMetaData { .title = "The Bad Guy" }), false },
-
-    { Book("some/path", BookMetaData { .title = "Innocent Eyes" }),
-      Book("some/path", BookMetaData { .title = "Heart Me" }), false },
-
-    { Book("some/path", BookMetaData { .title = "The Number" }),
-      Book("some/path", BookMetaData { .title = "Spear of Gold" }), false },
-
-    { Book("some/path", BookMetaData { .title = "Priest of Heaven" }),
-      Book("some/path", BookMetaData { .title = "Answering God" }), false },
-
-    { Book("some/path", BookMetaData { .title = "Winter Fairy" }),
-      Book("some/path", BookMetaData { .title = "Choice of Gold" }), false },
-
-    { Book("some/path", BookMetaData { .title = "Time Lies" }),
-      Book("some/path", BookMetaData { .title = "Time Ticks" }), true },
-
-    { Book("some/path", BookMetaData { .title = "Border with A Goal" }),
-      Book("some/path", BookMetaData { .title = "World of Tomorrow" }), true },
-
-    { Book("some/path", BookMetaData { .title = "Victory of Glory" }),
-      Book("some/path", BookMetaData { .title = "Avatar" }), false },
-
-    { Book("some/path", BookMetaData { .title = "A Turkey For Christmas" }),
-      Book("some/path", BookMetaData { .title = "maginary Gravity" }), true },
-
-    { Book("some/path", BookMetaData { .title = "The Hollow Spirit" }),
-      Book("some/path", BookMetaData { .title = "Changing History" }), false },
-};
-
-TEST_P(ALibraryProxyModel, Works)
+TEST_P(ALibraryProxyModelTitleSorter, SucceedsSortingData)
 {
     // Arrange
-    SortByTitleTestData data = GetParam();
+    test_data::SortByTitleTestData data = GetParam();
     std::vector<Book> bookVec { data.first, data.second };
 
     LibraryModel model(bookVec);
@@ -87,8 +50,43 @@ TEST_P(ALibraryProxyModel, Works)
     EXPECT_EQ(data.expectedResult, result);
 }
 
+class ALibraryProxyModelRecentlyAddedSorter
+    : public ::testing::TestWithParam<test_data::SortByRecentlyAddedTestData>
+{
+public:
+    void SetUp() override
+    {
+    }
+
+    LibraryProxyModel libraryProxyModel;
+};
+
+TEST_P(ALibraryProxyModelRecentlyAddedSorter, SucceedsSortingData)
+{
+    // Arrange
+    test_data::SortByRecentlyAddedTestData data = GetParam();
+    std::vector<Book> bookVec { data.first, data.second };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+    libraryProxyModel.setSortRole(LibraryProxyModel::SortRole::RecentlyAdded);
+
+
+    // Act
+    QModelIndex parent;
+    auto result = libraryProxyModel.lessThan(model.index(0, 0, parent),
+                                             model.index(1, 0, parent));
+
+    // Assert
+    EXPECT_EQ(data.expectedResult, result);
+}
+
 // Register the test cases
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTitleSorter,
                          ::testing::ValuesIn(test_data::titleSortingTestData));
+
+INSTANTIATE_TEST_SUITE_P(
+    TestSuite, ALibraryProxyModelRecentlyAddedSorter,
+    ::testing::ValuesIn(test_data::recentlyAddedSortingTestData));
 
 }  // namespace tests::adapters
