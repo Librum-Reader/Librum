@@ -156,7 +156,7 @@ TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
     EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
 
     // Act
-    bookController->deleteAllTagsWithUuid(firstTag.getUuid().toString());
+    bookController->removeAllTagsWithUuid(firstTag.getUuid().toString());
 }
 
 TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
@@ -185,7 +185,7 @@ TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
     EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
 
     // Act
-    bookController->deleteAllTagsWithUuid(nonExistentTag.toString());
+    bookController->removeAllTagsWithUuid(nonExistentTag.toString());
 }
 
 TEST_F(ABookController, SucceedsUninstallingABook)

@@ -59,7 +59,7 @@ public:
                                    const QString& tagUuid) = 0;
     Q_INVOKABLE virtual int removeTag(const QString& bookUuid,
                                       const QString& tagUuid) = 0;
-    Q_INVOKABLE virtual void deleteAllTagsWithUuid(const QString& tagUuid) = 0;
+    Q_INVOKABLE virtual void removeAllTagsWithUuid(const QString& tagUuid) = 0;
     Q_INVOKABLE virtual void renameTags(const QString& oldName,
                                         const QString& newName) = 0;
     Q_INVOKABLE virtual adapters::dtos::BookDto getBook(

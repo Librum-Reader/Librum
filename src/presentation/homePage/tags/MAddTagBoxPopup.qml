@@ -192,7 +192,7 @@ Popup
                     let success = UserController.deleteTag(uuid);
                     if(success)
                     {
-                        BookController.deleteAllTagsWithUuid(uuid);
+                        BookController.removeAllTagsWithUuid(uuid);
                     }
                     
                     rightClickMenu.close();
