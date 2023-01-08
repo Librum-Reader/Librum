@@ -292,7 +292,8 @@ bool LibraryProxyModel::filterAcceptsFormat(const QModelIndex& bookIndex) const
 {
     auto formatData = sourceModel()->data(bookIndex, LibraryModel::FormatRole);
     auto format = formatData.toString().toLower();
-    if(m_filterRequest.format.isEmpty())
+    if(m_filterRequest.format.isEmpty() && !m_filterRequest.onlyFiles &&
+       !m_filterRequest.onlyBooks)
         return true;
 
     if(m_filterRequest.format == format)
