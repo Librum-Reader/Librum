@@ -95,7 +95,7 @@ Popup
                 
                 onAddTag: (name) => 
                           {
-                              let tagUuid = UserController.addTag(name);
+                              let tagUuid = UserController.getTagUuidForName(name);
                               BookController.addTag(Globals.selectedBook.uuid, name, tagUuid);
                           }
             }

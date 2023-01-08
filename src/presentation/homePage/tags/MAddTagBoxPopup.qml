@@ -82,8 +82,8 @@ Popup
                     (mouse, index) =>
                     {
                         // Stop editing for previous item
-                        let currItem = listView.itemAtIndex(rightClickMenu.index);
-                        if(currItem.renameable)
+                        let currItem = listView.itemAtIndex(index);
+                        if(currItem !== null && currItem.renameable)
                         {
                             currItem.stopRenaming();
                         }
@@ -122,8 +122,9 @@ Popup
             function selectItem(index)
             {
                 // Stop the renaming of the currentItem
-                if(listView.itemAtIndex(rightClickMenu.index).renameable)
-                    listView.itemAtIndex(rightClickMenu.index).stopRenaming();
+                let oldItem = listView.itemAtIndex(rightClickMenu.index);
+                if(oldItem !== null && oldItem.renameable)
+                    oldItem.stopRenaming();
                 
                 let newSelected = listView.itemAtIndex(index);
                 
