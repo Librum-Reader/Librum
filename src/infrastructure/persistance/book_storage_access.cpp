@@ -41,7 +41,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
                                    const QJsonObject& jsonBook)
 {
     QString endpoint =
-        data::bookUpdateEndpoint + "/" + jsonBook["uuid"].toString();
+        data::bookUpdateEndpoint + "/" + jsonBook["guid"].toString();
     auto request = createRequest(endpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
