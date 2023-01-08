@@ -128,7 +128,7 @@ TEST_P(ALibraryProxyModelAuthorsSorter, SucceedsSortingData)
 }
 
 //
-// Last opened
+// Sort byLast opened
 //
 
 class ALibraryProxyModelLastOpenedSorter
