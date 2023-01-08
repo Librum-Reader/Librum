@@ -3,14 +3,12 @@
 #include <gtest/gtest.h>
 #include "book.hpp"
 #include "book_meta_data.hpp"
-#include "library_proxy_model.hpp"
 
 namespace test_data
 {
 
 using namespace domain::entities;
 using namespace domain::value_objects;
-using namespace adapters::data_models;
 
 class SortByTitleTestData
 {
