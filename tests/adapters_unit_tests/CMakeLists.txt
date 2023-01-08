@@ -18,6 +18,7 @@ add_executable(adapters_unit_tests
                     data_models/test_data/sort_by_fuzzing_test_data.hpp
                     data_models/test_data/sort_by_last_opened_test_data.hpp
                     data_models/test_data/sort_by_authors_test_data.hpp
+                    data_models/test_data/filter_by_tags_test_data.hpp
     )
 
 target_link_libraries(adapters_unit_tests

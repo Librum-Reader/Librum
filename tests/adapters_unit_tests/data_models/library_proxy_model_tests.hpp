@@ -5,6 +5,7 @@
 #include <QString>
 #include "library_model.hpp"
 #include "library_proxy_model.hpp"
+#include "test_data/filter_by_tags_test_data.hpp"
 #include "test_data/sort_by_authors_test_data.hpp"
 #include "test_data/sort_by_fuzzing_test_data.hpp"
 #include "test_data/sort_by_last_opened_test_data.hpp"
@@ -197,6 +198,44 @@ TEST_P(ALibraryProxyModelFuzzSorter, SucceedsSortingData)
     EXPECT_EQ(data.expectedResult, result);
 }
 
+//
+// Tag filtering
+//
+
+class ALibraryProxyModelTagFilter
+    : public ::testing::TestWithParam<test_data::FilterByTagsTestData>
+{
+public:
+    void SetUp() override
+    {
+    }
+
+    LibraryProxyModel libraryProxyModel;
+};
+
+TEST_P(ALibraryProxyModelTagFilter, SucceedsSortingData)
+{
+    // Arrange
+    test_data::FilterByTagsTestData data = GetParam();
+    std::vector<Book> bookVec { data.book };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+
+    for(const auto& filterTag : data.filterTags)
+    {
+        libraryProxyModel.addFilterTag(filterTag);
+    }
+
+
+    // Act
+    QModelIndex parent;
+    auto result = libraryProxyModel.filterAcceptsRow(0, parent);
+
+    // Assert
+    EXPECT_EQ(data.expectedResult, result);
+}
+
 // Register the test cases
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTitleSorter,
                          ::testing::ValuesIn(test_data::titleSortingTestData));
@@ -215,5 +254,8 @@ INSTANTIATE_TEST_SUITE_P(
 
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelFuzzSorter,
                          ::testing::ValuesIn(test_data::fuzzSortingTestData));
+
+INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTagFilter,
+                         ::testing::ValuesIn(test_data::tagFilteringTestData));
 
 }  // namespace tests::adapters
