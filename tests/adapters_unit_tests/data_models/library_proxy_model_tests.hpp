@@ -5,6 +5,7 @@
 #include <QString>
 #include "library_model.hpp"
 #include "library_proxy_model.hpp"
+#include "test_data/sort_by_authors_test_data.hpp"
 #include "test_data/sort_by_recently_added_test_data.hpp"
 #include "test_data/sort_by_title_test_data.hpp"
 
@@ -18,6 +19,10 @@ using namespace domain::entities;
 
 namespace tests::adapters
 {
+
+//
+// Sort by title
+//
 
 class ALibraryProxyModelTitleSorter
     : public ::testing::TestWithParam<test_data::SortByTitleTestData>
@@ -50,6 +55,10 @@ TEST_P(ALibraryProxyModelTitleSorter, SucceedsSortingData)
     EXPECT_EQ(data.expectedResult, result);
 }
 
+//
+// Sort by recently added
+//
+
 class ALibraryProxyModelRecentlyAddedSorter
     : public ::testing::TestWithParam<test_data::SortByRecentlyAddedTestData>
 {
@@ -81,6 +90,41 @@ TEST_P(ALibraryProxyModelRecentlyAddedSorter, SucceedsSortingData)
     EXPECT_EQ(data.expectedResult, result);
 }
 
+//
+// Sort by authors
+//
+
+class ALibraryProxyModelAuthorsSorter
+    : public ::testing::TestWithParam<test_data::SortByAuthorsTestData>
+{
+public:
+    void SetUp() override
+    {
+    }
+
+    LibraryProxyModel libraryProxyModel;
+};
+
+TEST_P(ALibraryProxyModelAuthorsSorter, SucceedsSortingData)
+{
+    // Arrange
+    test_data::SortByAuthorsTestData data = GetParam();
+    std::vector<Book> bookVec { data.first, data.second };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+    libraryProxyModel.setSortRole(LibraryProxyModel::SortRole::Authors);
+
+
+    // Act
+    QModelIndex parent;
+    auto result = libraryProxyModel.lessThan(model.index(0, 0, parent),
+                                             model.index(1, 0, parent));
+
+    // Assert
+    EXPECT_EQ(data.expectedResult, result);
+}
+
 // Register the test cases
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTitleSorter,
                          ::testing::ValuesIn(test_data::titleSortingTestData));
@@ -88,5 +132,9 @@ INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTitleSorter,
 INSTANTIATE_TEST_SUITE_P(
     TestSuite, ALibraryProxyModelRecentlyAddedSorter,
     ::testing::ValuesIn(test_data::recentlyAddedSortingTestData));
+
+INSTANTIATE_TEST_SUITE_P(
+    TestSuite, ALibraryProxyModelAuthorsSorter,
+    ::testing::ValuesIn(test_data::authorsSortingTestData));
 
 }  // namespace tests::adapters
