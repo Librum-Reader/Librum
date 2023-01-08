@@ -20,6 +20,7 @@ using namespace testing;
 using ::testing::ReturnRef;
 using namespace adapters;
 using namespace domain::entities;
+using namespace domain::value_objects;
 using namespace application;
 
 namespace tests::adapters
@@ -130,6 +131,63 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
+TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
+{
+    // Arrange
+    Book firstBook("some/path", {});
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    firstBook.addTag(firstTag);
+    firstBook.addTag(secondTag);
+
+    Book secondBook("some/path", {});
+    Tag thirdTag("ThirdTag");
+    Tag fourthTag("FourthTag");
+    secondBook.addTag(firstTag);
+    secondBook.addTag(thirdTag);
+    secondBook.addTag(fourthTag);
+
+    std::vector<Book> books { firstBook, secondBook };
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks())
+        .Times(1)
+        .WillOnce(ReturnRef(books));
+    EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
+
+    // Act
+    bookController->deleteAllTagsWithUuid(firstTag.getUuid().toString());
+}
+
+TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
+{
+    // Arrange
+    Book firstBook("some/path", {});
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    firstBook.addTag(firstTag);
+
+    Book secondBook("some/path", {});
+    Tag thirdTag("ThirdTag");
+    Tag fourthTag("FourthTag");
+    secondBook.addTag(firstTag);
+    secondBook.addTag(thirdTag);
+
+    std::vector<Book> books { firstBook, secondBook };
+
+    QUuid nonExistentTag = QUuid::createUuid();
+
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks())
+        .Times(1)
+        .WillOnce(ReturnRef(books));
+    EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
+
+    // Act
+    bookController->deleteAllTagsWithUuid(nonExistentTag.toString());
+}
+
 TEST_F(ABookController, SucceedsUninstallingABook)
 {
     // Arrange
@@ -164,6 +222,64 @@ TEST_F(ABookController, FailsUninstallingABookIfTheBookDoesNotExist)
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, SucceedsRenamingTags)
+{
+    // Arrange
+    Book firstBook("some/path", {});
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    firstBook.addTag(firstTag);
+    firstBook.addTag(secondTag);
+
+    Book secondBook("some/path", {});
+    Tag thirdTag("ThirdTag");
+    Tag fourthTag("FourthTag");
+    secondBook.addTag(firstTag);
+    secondBook.addTag(thirdTag);
+    secondBook.addTag(fourthTag);
+
+    std::vector<Book> books { firstBook, secondBook };
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks())
+        .Times(1)
+        .WillOnce(ReturnRef(books));
+
+    EXPECT_CALL(bookServiceMock, renameTag(_, _, _)).Times(2);
+
+    // Act
+    bookController->renameTags(firstTag.getName(), "NewName");
+}
+
+TEST_F(ABookController, FailsRenamingTagsIfNoTagsWithNameExist)
+{
+    // Arrange
+    Book firstBook("some/path", {});
+    Tag firstTag("FirstTag");
+    Tag secondTag("SecondTag");
+    firstBook.addTag(firstTag);
+    firstBook.addTag(secondTag);
+
+    Book secondBook("some/path", {});
+    Tag thirdTag("ThirdTag");
+    Tag fourthTag("FourthTag");
+    secondBook.addTag(firstTag);
+    secondBook.addTag(thirdTag);
+    secondBook.addTag(fourthTag);
+
+    std::vector<Book> books { firstBook, secondBook };
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks())
+        .Times(1)
+        .WillOnce(ReturnRef(books));
+
+    EXPECT_CALL(bookServiceMock, renameTag(_, _, _)).Times(0);
+
+    // Act
+    bookController->renameTags("NonExistentTag", "NewName");
 }
 
 TEST_F(ABookController, SucceedsUpdatingABook)
@@ -285,6 +401,26 @@ TEST_F(ABookController, SucceedsGettingABook)
     {
         EXPECT_EQ(expectedResult.tags[i].name, result.tags[i].name);
     }
+}
+
+TEST_F(ABookController, FailsGettingABookIfNoneExists)
+{
+    // Arrange
+    std::vector<Book> booksToReturn { Book("some/path", {}) };
+    QUuid nonExistententUuid = QUuid::createUuid();
+
+    dtos::BookDto expectedResult;
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks())
+        .Times(1)
+        .WillOnce(ReturnRef(booksToReturn));
+
+    // Act
+    auto result = bookController->getBook(nonExistententUuid.toString());
+
+    // Assert
+    EXPECT_EQ("", result.title);  // Empty book
 }
 
 TEST_F(ABookController, SucceedsGettingTheBookCount)
