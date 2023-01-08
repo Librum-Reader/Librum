@@ -178,7 +178,10 @@ void BookController::removeAllTagsWithUuid(const QString& tagUuid)
     auto& books = m_bookService->getBooks();
     for(const auto& book : books)
     {
-        m_bookService->removeTag(book.getUuid(), tagUuid);
+        if(vectorContainsTag(book.getTags(), tagUuid))
+        {
+            m_bookService->removeTag(book.getUuid(), tagUuid);
+        }
     }
 }
 
@@ -303,6 +306,15 @@ void BookController::addBookTagsToDto(const Book& book, BookDto& bookDto)
 
         bookDto.tags.push_back(tagDto);
     }
+}
+
+bool BookController::vectorContainsTag(const std::vector<Tag>& tags, QUuid uuid)
+{
+    return std::ranges::any_of(tags,
+                               [&uuid](const Tag& tag)
+                               {
+                                   return tag.getUuid() == uuid;
+                               });
 }
 
 }  // namespace adapters::controllers
