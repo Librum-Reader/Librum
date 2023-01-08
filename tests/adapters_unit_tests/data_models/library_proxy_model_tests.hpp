@@ -164,7 +164,7 @@ TEST_P(ALibraryProxyModelLastOpenedSorter, SucceedsSortingData)
 }
 
 //
-// Fuzz sorting
+// Sort by fuzzing
 //
 
 class ALibraryProxyModelFuzzSorter
@@ -199,7 +199,7 @@ TEST_P(ALibraryProxyModelFuzzSorter, SucceedsSortingData)
 }
 
 //
-// Tag filtering
+// Filter by tags
 //
 
 class ALibraryProxyModelTagFilter
