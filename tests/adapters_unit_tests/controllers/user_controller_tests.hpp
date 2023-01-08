@@ -15,6 +15,7 @@ using ::testing::ReturnRef;
 using namespace testing;
 using namespace application;
 using namespace adapters::controllers;
+using namespace domain::entities;
 
 namespace tests::adapters
 {
@@ -168,6 +169,112 @@ TEST_F(AUserController, SucceedsSettingLastName)
     EXPECT_EQ(1, spy.count());
 }
 
+TEST_F(AUserController, SucceedsAddingATag)
+{
+    // Arrange
+    QString tagName = "SomeTag";
+    QUuid tagUuid = QUuid::createUuid();
+
+    auto expectedResult = tagUuid;
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, addTag(_)).Times(1).WillOnce(Return(tagUuid));
+
+    // Act
+    auto result = userController->addTag(tagName);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(AUserController, FailsAddingATagIfTagAlreadyExists)
+{
+    // Arrange
+    QString tagName = "SomeTag";
+
+    auto expectedResult = QUuid();
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, addTag(_)).Times(1).WillOnce(Return(QUuid()));
+
+    // Act
+    auto result = userController->addTag(tagName);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(AUserController, SucceedsDeletingATag)
+{
+    // Arrange
+    Tag tag("SomeTag");
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, deleteTag(_)).Times(1).WillOnce(Return(true));
+
+    // Act
+    auto result = userController->deleteTag(tag.getUuid().toString());
+
+    // Assert
+    EXPECT_TRUE(result);
+}
+
+TEST_F(AUserController, FailsDeletingATagIfTagDoesNotExist)
+{
+    // Arrange
+    QUuid tagUuid = QUuid::createUuid();
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, deleteTag(_)).Times(1).WillOnce(Return(false));
+
+    // Act
+    auto result = userController->deleteTag(tagUuid.toString());
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
+TEST_F(AUserController, SucceedsRenamingATag)
+{
+    // Arrange
+    Tag tag("SomeTag");
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, renameTag(_, _))
+        .Times(1)
+        .WillOnce(Return(true));
+
+    // Act
+    auto result =
+        userController->renameTag(tag.getUuid().toString(), "NewName");
+
+    // Assert
+    EXPECT_TRUE(result);
+}
+
+TEST_F(AUserController, FailsRenamingATagIfTagDoesNotExist)
+{
+    // Arrange
+    QUuid tagUuid = QUuid::createUuid();
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, renameTag(_, _))
+        .Times(1)
+        .WillOnce(Return(false));
+
+    // Act
+    auto result = userController->renameTag(tagUuid.toString(), "SomeName");
+
+    // Assert
+    EXPECT_FALSE(result);
+}
+
 TEST_F(AUserController, FailsSettingLastNameIfItsTheSameAsCurrent)
 {
     // Arrange
@@ -288,6 +395,44 @@ TEST_F(AUserController, FailsGettingProfilePictureIfNoProfilePictureExists)
     EXPECT_EQ(expectedResult, result);
 }
 
-// TODO: Profile picture tests
+TEST_F(AUserController, SucceedsGettingTagUuidForName)
+{
+    // Arrange
+    Tag tagToFind("SomeName");
+    std::vector<Tag> tags {
+        Tag("SomeTag"),
+        tagToFind,
+    };
+
+    QUuid expectedResult = tagToFind.getUuid();
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, getTags()).Times(1).WillOnce(ReturnRef(tags));
+
+    // Act
+    auto result = userController->getTagUuidForName(tagToFind.getName());
+
+    // Assert
+    EXPECT_EQ(expectedResult, QUuid(result));
+}
+
+TEST_F(AUserController, FailsGettingTagUuidForNameIfTagDoesNotExist)
+{
+    // Arrange
+    std::vector<Tag> tags { Tag("SomeTag") };
+
+    QUuid expectedResult = QUuid();
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, getTags()).Times(1).WillOnce(ReturnRef(tags));
+
+    // Act
+    auto result = userController->getTagUuidForName("NonExistentName");
+
+    // Assert
+    EXPECT_EQ(expectedResult, QUuid(result));
+}
 
 }  // namespace tests::adapters
