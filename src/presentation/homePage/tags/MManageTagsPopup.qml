@@ -95,6 +95,9 @@ Popup
                 
                 onAddTag: (name) => 
                           {
+                              // Cant use return value, bc. it is null if tag already exists
+                              UserController.addTag(name);
+                              
                               let tagUuid = UserController.getTagUuidForName(name);
                               BookController.addTag(Globals.selectedBook.uuid, name, tagUuid);
                           }
