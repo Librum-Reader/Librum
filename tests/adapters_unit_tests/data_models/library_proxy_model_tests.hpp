@@ -6,6 +6,7 @@
 #include "library_model.hpp"
 #include "library_proxy_model.hpp"
 #include "test_data/sort_by_authors_test_data.hpp"
+#include "test_data/sort_by_last_opened_test_data.hpp"
 #include "test_data/sort_by_recently_added_test_data.hpp"
 #include "test_data/sort_by_title_test_data.hpp"
 
@@ -125,6 +126,41 @@ TEST_P(ALibraryProxyModelAuthorsSorter, SucceedsSortingData)
     EXPECT_EQ(data.expectedResult, result);
 }
 
+//
+// Last opened
+//
+
+class ALibraryProxyModelLastOpenedSorter
+    : public ::testing::TestWithParam<test_data::SortByLastOpenedTestData>
+{
+public:
+    void SetUp() override
+    {
+    }
+
+    LibraryProxyModel libraryProxyModel;
+};
+
+TEST_P(ALibraryProxyModelLastOpenedSorter, SucceedsSortingData)
+{
+    // Arrange
+    test_data::SortByLastOpenedTestData data = GetParam();
+    std::vector<Book> bookVec { data.first, data.second };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+    libraryProxyModel.setSortRole(LibraryProxyModel::SortRole::LastOpened);
+
+
+    // Act
+    QModelIndex parent;
+    auto result = libraryProxyModel.lessThan(model.index(0, 0, parent),
+                                             model.index(1, 0, parent));
+
+    // Assert
+    EXPECT_EQ(data.expectedResult, result);
+}
+
 // Register the test cases
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelTitleSorter,
                          ::testing::ValuesIn(test_data::titleSortingTestData));
@@ -136,5 +172,9 @@ INSTANTIATE_TEST_SUITE_P(
 INSTANTIATE_TEST_SUITE_P(
     TestSuite, ALibraryProxyModelAuthorsSorter,
     ::testing::ValuesIn(test_data::authorsSortingTestData));
+
+INSTANTIATE_TEST_SUITE_P(
+    TestSuite, ALibraryProxyModelLastOpenedSorter,
+    ::testing::ValuesIn(test_data::lastOpenedSortingTestData));
 
 }  // namespace tests::adapters

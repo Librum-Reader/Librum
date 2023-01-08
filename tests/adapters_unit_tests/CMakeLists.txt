@@ -15,6 +15,7 @@ add_executable(adapters_unit_tests
                     data_models/library_proxy_model_tests.hpp
                     data_models/test_data/sort_by_title_test_data.hpp
                     data_models/test_data/sort_by_recently_added_test_data.hpp
+                    data_models/test_data/sort_by_last_opened_test_data.hpp
                     data_models/test_data/sort_by_authors_test_data.hpp
     )
 
