@@ -40,9 +40,7 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
 void BookStorageAccess::updateBook(const QString& authToken,
                                    const QJsonObject& jsonBook)
 {
-    QString endpoint =
-        data::bookUpdateEndpoint + "/" + jsonBook["guid"].toString();
-    auto request = createRequest(endpoint, authToken);
+    auto request = createRequest(data::bookUpdateEndpoint, authToken);
 
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
