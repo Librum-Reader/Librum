@@ -16,6 +16,7 @@ set(application_SRC
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_book_service.hpp
     interfaces/services/i_user_service.hpp
+    interfaces/services/i_settings_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_book_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
@@ -29,6 +30,8 @@ set(application_SRC
     services/book_service.hpp
     services/user_service.cpp
     services/user_service.hpp
+    services/settings_service.cpp
+    services/settings_service.hpp
     
     common/enums/book_operation_status.hpp
     
