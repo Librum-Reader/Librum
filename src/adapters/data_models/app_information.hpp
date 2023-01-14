@@ -7,54 +7,67 @@ namespace adapters::data_models
 class AppInformation : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString currentVersion READ getCurrentVersionAsQString CONSTANT)
-    Q_PROPERTY(QString newestVersion READ getNewestVersionAsQString CONSTANT)
-    Q_PROPERTY(
-        QString currentQtVersion READ getCurrentQtVersionAsQString CONSTANT)
-    Q_PROPERTY(QString companyName READ getCompanyNameAsQString CONSTANT)
-    Q_PROPERTY(QString companyWebsite READ getCompanyWebsiteAsQString CONSTANT)
-    Q_PROPERTY(QString companyEmail READ getCompanyEmailAsQString CONSTANT)
+    Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)
+    Q_PROPERTY(QString newestVersion READ getNewestVersion CONSTANT)
+    Q_PROPERTY(QString currentQtVersion READ getCurrentQtVersion CONSTANT)
+    Q_PROPERTY(QString productName READ getProductName CONSTANT)
+    Q_PROPERTY(QString companyName READ getCompanyName CONSTANT)
+    Q_PROPERTY(QString companyWebsite READ getCompanyWebsite CONSTANT)
+    Q_PROPERTY(QString companyEmail READ getCompanyEmail CONSTANT)
+    Q_PROPERTY(QString helpEmail READ getHelpEmail CONSTANT)
 
 public slots:
 
-    QString getCurrentVersionAsQString()
+    QString getCurrentVersion()
     {
         return m_currentVersion;
     }
 
-    QString getNewestVersionAsQString()
+    QString getNewestVersion()
     {
         return m_newestVersion;
     }
 
-    QString getCurrentQtVersionAsQString()
+    QString getCurrentQtVersion()
     {
         return m_currentQtVersion;
     }
 
-    QString getCompanyNameAsQString()
+    QString getProductName()
+    {
+        return m_productName;
+    }
+
+    QString getCompanyName()
     {
         return m_companyName;
     }
 
-    QString getCompanyWebsiteAsQString()
+    QString getCompanyWebsite()
     {
         return m_companyWebsite;
     }
 
-    QString getCompanyEmailAsQString()
+    QString getCompanyEmail()
     {
         return m_companyEmail;
     }
 
+    QString getHelpEmail()
+    {
+        return m_helpEmail;
+    }
+
 
 private:
-    QString m_currentVersion { "v0.0.1" };
-    QString m_newestVersion { "v0.0.1" };
-    QString m_currentQtVersion { "v6.3.1" };
+    QString m_currentVersion { "v0.1" };
+    QString m_newestVersion { "v0.1" };
+    QString m_currentQtVersion { "v5.15.7" };
     QString m_companyName { "Etovex" };
-    QString m_companyWebsite { "https://librumreader.netlify.app/" };
-    QString m_companyEmail { "support@etovex.com" };
+    QString m_productName { "Librum" };
+    QString m_companyWebsite { "https://librum-reader.com" };
+    QString m_companyEmail { "librum_reader@protonmail.com" };
+    QString m_helpEmail { "librum_help@protonmail.com" };
 };
 
 }  // namespace adapters::data_models
