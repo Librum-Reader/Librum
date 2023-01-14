@@ -1,6 +1,5 @@
 #pragma once
 #include <QObject>
-#include <QSettings>
 #include <QString>
 
 namespace application
