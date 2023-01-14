@@ -96,5 +96,6 @@
         <file>resources/images/utility/edit_gray_icon.svg</file>
         <file>resources/images/utility/edit_light_gray_icon.svg</file>
         <file>resources/images/utility/edit_purple_icon.svg</file>
+        <file>resources/data/default_settings.json</file>
     </qresource>
 </RCC>
