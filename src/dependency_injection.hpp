@@ -9,23 +9,10 @@
 #include "book_service.hpp"
 #include "book_storage_access.hpp"
 #include "book_storage_gateway.hpp"
-#include "downloaded_books_tracker.hpp"
-#include "i_authentication_access.hpp"
-#include "i_authentication_controller.hpp"
-#include "i_authentication_gateway.hpp"
-#include "i_authentication_service.hpp"
-#include "i_book_controller.hpp"
-#include "i_book_metadata_helper.hpp"
-#include "i_book_service.hpp"
-#include "i_book_storage_access.hpp"
-#include "i_book_storage_gateway.hpp"
-#include "i_downloaded_books_tracker.hpp"
-#include "i_user_controller.hpp"
-#include "i_user_service.hpp"
-#include "i_user_storage_access.hpp"
-#include "i_user_storage_gateway.hpp"
-#include "i_book_storage_manager.hpp"
 #include "book_storage_manager.hpp"
+#include "downloaded_books_tracker.hpp"
+#include "settings_controller.hpp"
+#include "settings_service.hpp"
 #include "user_controller.hpp"
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
@@ -65,6 +52,10 @@ const auto diConfig = []
         di::bind<IUserService>().to<services::UserService>(),
         di::bind<IUserStorageGateway>().to<gateways::UserStorageGateway>(),
         di::bind<IUserStorageAccess>().to<persistence::UserStorageAccess>(),
+
+        // Settings
+        di::bind<ISettingsController>().to<controllers::SettingsController>(),
+        di::bind<ISettingsService>().to<services::SettingsService>(),
 
         // Utility
         di::bind<application::IBookMetadataHelper>()
