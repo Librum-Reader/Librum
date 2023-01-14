@@ -2,6 +2,8 @@
 #include <QDebug>
 #include <QFile>
 #include <QHash>
+#include <QJsonDocument>
+#include <QJsonObject>
 
 namespace application::services
 {
@@ -43,8 +45,7 @@ void SettingsService::createSettings()
     auto format = QSettings::NativeFormat;
     m_settings = std::make_unique<QSettings>(uniqueFileName, format);
 
-    if(m_settings->allKeys().isEmpty())
-        generateDefaultSettings();
+    generateDefaultSettings();
 }
 
 QString SettingsService::getUniqueUserHash() const
@@ -56,13 +57,28 @@ QString SettingsService::getUniqueUserHash() const
 
 void SettingsService::generateDefaultSettings()
 {
-    QFile defaultSettingsFile(":/resources/data/default_settings.json");
+    QJsonObject defaultSettings = getDefaultSettings();
+    for(const auto& settingKey : defaultSettings.keys())
+    {
+        if(m_settings->contains(settingKey))
+            continue;
+
+        auto settingValue = defaultSettings.value(settingKey).toString();
+        setSetting(settingKey, settingValue);
+    }
+}
+
+QJsonObject SettingsService::getDefaultSettings()
+{
+    QFile defaultSettingsFile(m_defaultSettingsFile);
     if(!defaultSettingsFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         qWarning() << "Failed to open default settings file!";
     }
 
-    qDebug() << defaultSettingsFile.readAll();
+    QByteArray rawJson = defaultSettingsFile.readAll();
+    auto jsonDoc = QJsonDocument::fromJson(rawJson);
+    return jsonDoc.object();
 }
 
 }  // namespace application::services

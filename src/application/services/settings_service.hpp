@@ -1,4 +1,5 @@
 #pragma once
+#include <QJsonObject>
 #include <QSettings>
 #include <memory>
 #include "i_settings_service.hpp"
@@ -24,9 +25,11 @@ private:
     void createSettings();
     QString getUniqueUserHash() const;
     void generateDefaultSettings();
+    QJsonObject getDefaultSettings();
 
     std::unique_ptr<QSettings> m_settings;
     QString m_userEmail;
+    QString m_defaultSettingsFile = ":/resources/data/default_settings.json";
 };
 
 }  // namespace application::services
