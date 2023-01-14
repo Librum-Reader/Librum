@@ -1,4 +1,6 @@
 {
     "theme": "bright",
-    "smooth scrolling": "false"
+    "smooth scrolling": "false",
+    "font-family": "arial",
+    "point-size": "17"
 }
