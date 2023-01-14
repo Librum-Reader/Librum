@@ -87,6 +87,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
+    // Settings-Stack
+    auto settingsService = config::diConfig().create<application::ISettingsService*>();
+    auto settingsController = std::make_unique<SettingsController>(settingsService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
+                                 settingsController.get());
+
     // App info
     auto appInfo = std::make_unique<adapters::data_models::AppInformation>();
     qmlRegisterSingletonInstance("Librum.models", 1, 0, "AppInformation",
@@ -113,11 +119,19 @@ int main(int argc, char* argv[])
         bookService, &application::IBookService::clearUserData);
 
 
-    QObject::connect( authenticationService, &application::IAuthenticationService::loggedIn,
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
         userService, &application::IUserService::setupUserData);
 
-    QObject::connect( authenticationService, &application::IAuthenticationService::loggedOut,
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         userService, &application::IUserService::clearUserData);
+
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+        settingsService, &application::ISettingsService::loadUserSettings);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+        settingsService, &application::ISettingsService::clearUserData);
+
 
 
     // Startup
