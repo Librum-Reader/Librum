@@ -9,6 +9,7 @@ add_library(adapters
                     interfaces/controllers/i_authentication_controller.hpp
                     interfaces/controllers/i_book_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
+                    interfaces/controllers/i_settings_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_book_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
@@ -19,6 +20,8 @@ add_library(adapters
                     controllers/book_controller.hpp
                     controllers/user_controller.cpp
                     controllers/user_controller.hpp
+                    controllers/settings_controller.cpp
+                    controllers/settings_controller.hpp
                     
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
