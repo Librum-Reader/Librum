@@ -16,8 +16,8 @@ public:
     virtual ~ISettingsService() noexcept = default;
 
     virtual QString getSetting(const QString& settingName) = 0;
-    virtual QString setSetting(const QString& settingName,
-                               const QString& value) = 0;
+    virtual void setSetting(const QString& settingName,
+                            const QString& value) = 0;
 
 public slots:
     virtual void loadUserSettings(const QString& token,
