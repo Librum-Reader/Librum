@@ -7,6 +7,9 @@ SettingsStorageGateway::SettingsStorageGateway(
     ISettingsStorageAccess* settingsStorageAccess) :
     m_settingsStorageAccess(settingsStorageAccess)
 {
+    connect(m_settingsStorageAccess,
+            &ISettingsStorageAccess::finishedGettingSettings, this,
+            &SettingsStorageGateway::finishedGettingSettings);
 }
 
 void SettingsStorageGateway::getSettings(const QString& authToken)
