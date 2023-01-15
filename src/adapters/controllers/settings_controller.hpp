@@ -18,7 +18,7 @@ public:
     void setSetting(const QString& settingName, const QString& value) override;
 
 private:
-    std::unique_ptr<application::ISettingsService> m_settingsService;
+    application::ISettingsService* m_settingsService;
 };
 
 }  // namespace adapters::controllers
