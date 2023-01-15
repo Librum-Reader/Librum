@@ -12,14 +12,4 @@ void SettingsStorageAccess::updateSettings(const QString& authToken,
 {
 }
 
-QNetworkRequest SettingsStorageAccess::createRequest(const QUrl& url,
-                                                     const QString& authToken)
-{
-}
-
-bool SettingsStorageAccess::checkForErrors(int expectedStatusCode,
-                                           QNetworkReply* reply)
-{
-}
-
 }  // namespace infrastructure::persistence

@@ -21,9 +21,6 @@ public:
                         const QByteArray& data) override;
 
 private:
-    QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
-    bool checkForErrors(int expectedStatusCode, QNetworkReply* reply);
-
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_getSettingsReply = nullptr;
 };
