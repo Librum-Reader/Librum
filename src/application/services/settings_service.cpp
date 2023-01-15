@@ -24,7 +24,9 @@ void SettingsService::setSetting(const QString& settingName,
                                  const QString& value)
 {
     auto dataToSet = QVariant::fromValue(value.toLower());
+
     m_settings->setValue(settingName.toLower(), dataToSet);
+    m_settingsStorageGateway->updateSettings(m_authToken, getSettingsAsBytes());
 }
 
 void SettingsService::loadUserSettings(const QString& token,
@@ -81,6 +83,17 @@ QJsonObject SettingsService::getDefaultSettings()
     QByteArray rawJson = defaultSettingsFile.readAll();
     auto jsonDoc = QJsonDocument::fromJson(rawJson);
     return jsonDoc.object();
+}
+
+QByteArray SettingsService::getSettingsAsBytes()
+{
+    QFile settingsFile(m_settings->fileName());
+    if(!settingsFile.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qWarning() << "Failed to open settings file!";
+    }
+
+    return settingsFile.readAll();
 }
 
 }  // namespace application::services

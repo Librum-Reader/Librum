@@ -1,4 +1,5 @@
 #pragma once
+#include <QByteArray>
 #include <QJsonObject>
 #include <QSettings>
 #include <memory>
@@ -27,11 +28,13 @@ private:
     QString getUniqueUserHash() const;
     void generateDefaultSettings();
     QJsonObject getDefaultSettings();
+    QByteArray getSettingsAsBytes();
 
     ISettingsStorageGateway* m_settingsStorageGateway;
     std::unique_ptr<QSettings> m_settings;
-    QString m_userEmail;
     QString m_defaultSettingsFile = ":/resources/data/default_settings.json";
+    QString m_userEmail;
+    QString m_authToken;
 };
 
 }  // namespace application::services
