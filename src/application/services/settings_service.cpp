@@ -12,6 +12,9 @@ SettingsService::SettingsService(
     ISettingsStorageGateway* settingsStorageGateway) :
     m_settingsStorageGateway(settingsStorageGateway)
 {
+    connect(m_settingsStorageGateway,
+            &ISettingsStorageGateway::finishedGettingSettings, this,
+            &SettingsService::mergeSettings);
 }
 
 QString SettingsService::getSetting(const QString& settingName)
@@ -41,6 +44,10 @@ void SettingsService::loadUserSettings(const QString& token,
 void SettingsService::clearUserData()
 {
     m_userEmail.clear();
+}
+
+void SettingsService::mergeSettings(const QByteArray& data)
+{
 }
 
 void SettingsService::createSettings()

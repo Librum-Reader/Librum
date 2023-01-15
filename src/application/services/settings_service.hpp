@@ -23,6 +23,9 @@ public slots:
     void loadUserSettings(const QString& token, const QString& email) override;
     void clearUserData() override;
 
+private slots:
+    void mergeSettings(const QByteArray& data);
+
 private:
     void createSettings();
     QString getUniqueUserHash() const;
