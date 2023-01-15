@@ -8,7 +8,9 @@
 namespace application::services
 {
 
-SettingsService::SettingsService()
+SettingsService::SettingsService(
+    ISettingsStorageGateway* settingsStorageGateway) :
+    m_settingsStorageGateway(settingsStorageGateway)
 {
 }
 

@@ -3,6 +3,7 @@
 #include <QSettings>
 #include <memory>
 #include "i_settings_service.hpp"
+#include "i_settings_storage_gateway.hpp"
 
 namespace application::services
 {
@@ -12,7 +13,7 @@ class SettingsService : public ISettingsService
     Q_OBJECT
 
 public:
-    SettingsService();
+    SettingsService(ISettingsStorageGateway* settingsStorageGateway);
 
     QString getSetting(const QString& settingName) override;
     void setSetting(const QString& settingName, const QString& value) override;
@@ -27,6 +28,7 @@ private:
     void generateDefaultSettings();
     QJsonObject getDefaultSettings();
 
+    ISettingsStorageGateway* m_settingsStorageGateway;
     std::unique_ptr<QSettings> m_settings;
     QString m_userEmail;
     QString m_defaultSettingsFile = ":/resources/data/default_settings.json";
