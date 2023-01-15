@@ -13,6 +13,8 @@
 #include "downloaded_books_tracker.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
+#include "settings_storage_access.hpp"
+#include "settings_storage_gateway.hpp"
 #include "user_controller.hpp"
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
@@ -56,6 +58,10 @@ const auto diConfig = []
         // Settings
         di::bind<ISettingsController>().to<controllers::SettingsController>(),
         di::bind<ISettingsService>().to<services::SettingsService>(),
+        di::bind<ISettingsStorageGateway>()
+            .to<gateways::SettingsStorageGateway>(),
+        di::bind<ISettingsStorageAccess>()
+            .to<persistence::SettingsStorageAccess>(),
 
         // Utility
         di::bind<application::IBookMetadataHelper>()
