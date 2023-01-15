@@ -18,8 +18,8 @@ public:
     virtual ~ISettingsStorageGateway() noexcept = default;
 
     virtual void getSettings(const QString& authToken) = 0;
-    virtual void setSettings(const QString& authToken,
-                             const QByteArray& data) = 0;
+    virtual void updateSettings(const QString& authToken,
+                                const QByteArray& data) = 0;
 
 signals:
     void finishedGettingSettings(const QString& data, bool success);

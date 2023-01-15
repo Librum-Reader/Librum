@@ -14,7 +14,7 @@ public:
     SettingsStorageGateway(ISettingsStorageAccess* settingsStorageAccess);
 
     void getSettings(const QString& authToken) override;
-    void setSettings(const QString& authToken, const QByteArray& data) override;
+    void updateSettings(const QString& authToken, const QByteArray& data) override;
 
 private:
     ISettingsStorageAccess* m_settingsStorageAccess;

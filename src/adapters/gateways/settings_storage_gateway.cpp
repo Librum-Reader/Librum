@@ -14,10 +14,10 @@ void SettingsStorageGateway::getSettings(const QString& authToken)
     m_settingsStorageAccess->getSettings(authToken);
 }
 
-void SettingsStorageGateway::setSettings(const QString& authToken,
-                                         const QByteArray& data)
+void SettingsStorageGateway::updateSettings(const QString& authToken,
+                                            const QByteArray& data)
 {
-    m_settingsStorageAccess->setSettings(authToken, data);
+    m_settingsStorageAccess->updateSettings(authToken, data);
 }
 
 }  // namespace adapters::gateways

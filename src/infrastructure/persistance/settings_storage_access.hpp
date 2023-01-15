@@ -17,7 +17,8 @@ class SettingsStorageAccess : public adapters::ISettingsStorageAccess
 
 public:
     void getSettings(const QString& authToken) override;
-    void setSettings(const QString& authToken, const QByteArray& data) override;
+    void updateSettings(const QString& authToken,
+                        const QByteArray& data) override;
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);

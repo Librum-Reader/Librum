@@ -7,8 +7,8 @@ void SettingsStorageAccess::getSettings(const QString& authToken)
 {
 }
 
-void SettingsStorageAccess::setSettings(const QString& authToken,
-                                        const QByteArray& data)
+void SettingsStorageAccess::updateSettings(const QString& authToken,
+                                           const QByteArray& data)
 {
 }
 
