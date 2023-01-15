@@ -22,7 +22,7 @@ public:
                                 const QByteArray& data) = 0;
 
 signals:
-    void finishedGettingSettings(const QString& data, bool success);
+    void finishedGettingSettings(const QByteArray& data, bool success);
 };
 
 }  // namespace application

@@ -46,7 +46,7 @@ void SettingsService::clearUserData()
     m_userEmail.clear();
 }
 
-void SettingsService::mergeSettings(const QByteArray& data)
+void SettingsService::mergeSettings(const QByteArray& data, bool success)
 {
 }
 

@@ -24,7 +24,7 @@ public slots:
     void clearUserData() override;
 
 private slots:
-    void mergeSettings(const QByteArray& data);
+    void mergeSettings(const QByteArray& data, bool success);
 
 private:
     void createSettings();
