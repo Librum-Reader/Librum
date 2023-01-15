@@ -25,6 +25,8 @@ add_library(adapters
                     
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
+                    gateways/settings_storage_gateway.cpp
+                    gateways/settings_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
                     gateways/book_storage_gateway.cpp
