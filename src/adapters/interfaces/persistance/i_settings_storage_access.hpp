@@ -22,7 +22,6 @@ public:
 
 signals:
     void settingsReady(const QByteArray& data);
-    void gettingSettingsFailed();
 };
 
 }  // namespace adapters
