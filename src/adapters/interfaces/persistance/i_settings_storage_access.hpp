@@ -21,7 +21,7 @@ public:
                                 const QByteArray& data) = 0;
 
 signals:
-    void settingsReady(const QByteArray& data);
+    void finishedGettingSettings(const QByteArray& data);
 };
 
 }  // namespace adapters
