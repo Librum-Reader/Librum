@@ -11,6 +11,7 @@ add_library(adapters
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
+                    interfaces/persistance/i_settings_storage_access.hpp
                     interfaces/persistance/i_book_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     
