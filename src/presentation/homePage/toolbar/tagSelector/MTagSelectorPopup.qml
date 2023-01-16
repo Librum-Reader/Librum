@@ -14,7 +14,7 @@ Popup
     focus: true
     padding: 0
     implicitWidth: 168
-    closePolicy: Popup.CloseOnReleaseOutside | Popup.CloseOnEscape
+    closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
     background: Rectangle
     {
         color: "transparent"
