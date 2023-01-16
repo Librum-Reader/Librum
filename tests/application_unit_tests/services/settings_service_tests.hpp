@@ -2,7 +2,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <QString>
-#include "i_settings_storage_gateway.hpp"
 #include "settings_service.hpp"
 
 using namespace testing;
@@ -11,21 +10,11 @@ using namespace application::services;
 namespace tests::application
 {
 
-class SettingsStorageGatewayMock : public ::application::ISettingsStorageGateway
-{
-public:
-    MOCK_METHOD(void, getSettings, (const QString&), (override));
-    MOCK_METHOD(void, updateSettings, (const QString&, const QByteArray&),
-                (override));
-};
-
 struct ASettingsService : public ::testing::Test
 {
     void SetUp() override
     {
-        settingsService =
-            std::make_unique<SettingsService>(&settingsStorageGatewayMock);
-
+        settingsService = std::make_unique<SettingsService>();
         settingsService->loadUserSettings(testingEmail, "");
     }
 
@@ -35,7 +24,6 @@ struct ASettingsService : public ::testing::Test
         settingsService->clearUserData();
     }
 
-    SettingsStorageGatewayMock settingsStorageGatewayMock;
     std::unique_ptr<SettingsService> settingsService;
 
 private:
@@ -47,9 +35,6 @@ TEST_F(ASettingsService, SucceedsSettingASetting)
     // Arrange
     QString settingName = "SomeSetting";
     QString settingValue = "SomeValue";
-
-    // Expect
-    EXPECT_CALL(settingsStorageGatewayMock, updateSettings(_, _)).Times(1);
 
 
     // Act
@@ -64,9 +49,6 @@ TEST_F(ASettingsService, FailsSettingASettingIfSettingsAreInvalid)
 
     settingsService->clearSettings();
 
-    // Expect
-    EXPECT_CALL(settingsStorageGatewayMock, updateSettings(_, _)).Times(0);
-
 
     // Act
     settingsService->setSetting(settingName, settingValue);
@@ -80,9 +62,6 @@ TEST_F(ASettingsService, SucceedsOverridingASetting)
     QString newValue = "SomeValue";
 
     settingsService->setSetting(settingName, initialValue);
-
-    // Expect
-    EXPECT_CALL(settingsStorageGatewayMock, updateSettings(_, _)).Times(1);
 
 
     // Act

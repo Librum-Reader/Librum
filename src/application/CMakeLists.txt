@@ -19,7 +19,6 @@ set(application_SRC
     interfaces/services/i_settings_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_book_storage_gateway.hpp
-    interfaces/gateways/i_settings_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_book_metadata_helper.hpp
     interfaces/utility/i_downloaded_books_tracker.hpp
