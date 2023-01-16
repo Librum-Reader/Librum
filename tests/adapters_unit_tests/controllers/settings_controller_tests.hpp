@@ -38,7 +38,7 @@ struct ASettingsController : public ::testing::Test
     std::unique_ptr<SettingsController> settingsController;
 };
 
-TEST_F(ASettingsController, SucceedsGettingSetting)
+TEST_F(ASettingsController, SucceedsGettingASetting)
 {
     // Arrange
     QString settingName = "SomeSetting";
@@ -50,7 +50,7 @@ TEST_F(ASettingsController, SucceedsGettingSetting)
     settingsController->getSetting(settingName);
 }
 
-TEST_F(ASettingsController, SucceedsSettingSetting)
+TEST_F(ASettingsController, SucceedsSettingASetting)
 {
     // Arrange
     QString settingName = "SomeSetting";
