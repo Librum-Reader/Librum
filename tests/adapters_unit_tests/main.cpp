@@ -5,6 +5,7 @@
 #include "book_storage_gateway_tests.hpp"
 #include "library_proxy_model_tests.hpp"
 #include "settings_controller_tests.hpp"
+#include "settings_storage_gateway_tests.hpp"
 #include "user_controller_tests.hpp"
 #include "user_storage_gateway_tests.hpp"
 
