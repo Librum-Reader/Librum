@@ -33,6 +33,7 @@ private:
     void generateDefaultSettings();
     QJsonObject getDefaultSettings();
     QByteArray getSettingsAsBytes();
+    bool settingsAreValid();
 
     ISettingsStorageGateway* m_settingsStorageGateway;
     std::unique_ptr<QSettings> m_settings;

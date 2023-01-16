@@ -19,6 +19,9 @@ SettingsService::SettingsService(
 
 QString SettingsService::getSetting(const QString& settingName)
 {
+    if(!settingsAreValid())
+        return "";
+
     auto defaultValue = QVariant::fromValue(QString(""));
     return m_settings->value(settingName.toLower(), defaultValue).toString();
 }
@@ -26,6 +29,9 @@ QString SettingsService::getSetting(const QString& settingName)
 void SettingsService::setSetting(const QString& settingName,
                                  const QString& value)
 {
+    if(!settingsAreValid() || !m_settings->isWritable())
+        return;
+
     auto dataToSet = QVariant::fromValue(value.toLower());
 
     m_settings->setValue(settingName.toLower(), dataToSet);
@@ -110,6 +116,12 @@ QByteArray SettingsService::getSettingsAsBytes()
     }
 
     return settingsFile.readAll();
+}
+
+bool SettingsService::settingsAreValid()
+{
+    // If the underlying file has been deleted by "clear()", its invalid
+    return QFile::exists(m_settings->fileName());
 }
 
 }  // namespace application::services
