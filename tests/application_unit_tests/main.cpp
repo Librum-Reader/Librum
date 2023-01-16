@@ -3,6 +3,7 @@
 #include "book_storage_manager_tests.hpp"
 #include "downloaded_books_tracker_tests.hpp"
 #include "gtest/gtest.h"
+#include "settings_service_tests.hpp"
 #include "user_service_tests.hpp"
 
 int main()

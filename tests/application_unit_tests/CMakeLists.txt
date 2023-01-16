@@ -8,6 +8,7 @@ add_executable(application_unit_tests
                     main.cpp
                     services/book_service_tests.hpp
                     services/user_service_tests.hpp
+                    services/settings_service_tests.hpp
                     services/authentication_service_tests.hpp
                     utility/downloaded_books_tracker_tests.hpp
                     utility/book_storage_manager_tests.hpp
