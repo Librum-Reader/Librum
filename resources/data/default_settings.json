@@ -1,6 +1,5 @@
 {
     "theme": "bright",
-    "smooth scrolling": "false",
     "font-family": "arial",
-    "point-size": "17"
+    "font-size": "13"
 }

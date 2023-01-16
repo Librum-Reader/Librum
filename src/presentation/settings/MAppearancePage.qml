@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 
@@ -141,7 +142,8 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "Dark"
                             rightProperty: "Light"
-                            selected: rightProperty
+                            
+                            onSelectedChanged: (newSelected) => SettingsController.setSetting("theme", newSelected)
                         }
                         
                         Label
@@ -183,6 +185,8 @@ Page
                                 ListElement { text: "Didot" }
                                 ListElement { text: "Museo Slab" }
                             }
+                            
+                            onItemChanged: SettingsController.setSetting("font-family", text)
                         }
                         
                         Label
@@ -202,6 +206,8 @@ Page
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
                             value: 18
+                            
+                            onValueChanged: SettingsController.setSetting("font-size", value)
                         }
                     }   
                 }
@@ -387,7 +393,8 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            selected: leftProperty
+                            leftSelected: true
+                            rightSelected: false
                         }
                         
                         Label
