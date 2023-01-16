@@ -32,6 +32,13 @@ void SettingsService::setSetting(const QString& settingName,
     m_settingsStorageGateway->updateSettings(m_authToken, getSettingsAsBytes());
 }
 
+void SettingsService::clearSettings()
+{
+    m_settings->sync();
+    QString filePath = m_settings->fileName();
+    QFile::remove(filePath);
+}
+
 void SettingsService::loadUserSettings(const QString& token,
                                        const QString& email)
 {

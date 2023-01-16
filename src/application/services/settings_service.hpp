@@ -18,6 +18,7 @@ public:
 
     QString getSetting(const QString& settingName) override;
     void setSetting(const QString& settingName, const QString& value) override;
+    void clearSettings() override;
 
 public slots:
     void loadUserSettings(const QString& token, const QString& email) override;

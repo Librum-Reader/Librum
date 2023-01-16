@@ -18,6 +18,7 @@ public:
     virtual QString getSetting(const QString& settingName) = 0;
     virtual void setSetting(const QString& settingName,
                             const QString& value) = 0;
+    virtual void clearSettings() = 0;
 
 public slots:
     virtual void loadUserSettings(const QString& token,
