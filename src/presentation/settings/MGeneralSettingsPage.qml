@@ -122,7 +122,8 @@ MFlickWrapper
                         Layout.topMargin: 4
                         leftProperty: "OFF"
                         rightProperty: "ON"
-                        selected: leftProperty
+                        leftSelected: true
+                        rightSelected: false
                     }
                 }
             }
