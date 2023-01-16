@@ -34,6 +34,7 @@ private:
     QJsonObject getDefaultSettings();
     QByteArray getSettingsAsBytes();
     bool settingsAreValid();
+    void writeDataToSettingsFile(const QByteArray& data);
 
     ISettingsStorageGateway* m_settingsStorageGateway;
     std::unique_ptr<QSettings> m_settings;

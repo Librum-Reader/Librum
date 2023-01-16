@@ -32,9 +32,9 @@ void SettingsService::setSetting(const QString& settingName,
     if(!m_settingsAreValid)
         return;
 
-    auto dataToSet = QVariant::fromValue(value.toLower());
+    auto valueToSet = QVariant::fromValue(value.toLower());
+    m_settings->setValue(settingName.toLower(), valueToSet);
 
-    m_settings->setValue(settingName.toLower(), dataToSet);
     m_settingsStorageGateway->updateSettings(m_authToken, getSettingsAsBytes());
 }
 
@@ -63,8 +63,17 @@ void SettingsService::clearUserData()
 
 void SettingsService::mergeSettings(const QByteArray& data, bool success)
 {
-    Q_UNUSED(data);
-    Q_UNUSED(success);
+    if(!success)
+    {
+        qWarning() << "Getting settings from server failed!";
+        return;
+    }
+
+    if(getSettingsAsBytes() != data)
+    {
+        m_settings->clear();
+        writeDataToSettingsFile(data);
+    }
 }
 
 void SettingsService::createSettings()
@@ -125,6 +134,17 @@ bool SettingsService::settingsAreValid()
 {
     // If the underlying file has been deleted by "clear()", its invalid
     return QFile::exists(m_settings->fileName());
+}
+
+void SettingsService::writeDataToSettingsFile(const QByteArray& data)
+{
+    QFile settingsFile(m_settings->fileName());
+    if(!settingsFile.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        qWarning() << "Failed to open settings file!";
+    }
+
+    settingsFile.write(data);
 }
 
 }  // namespace application::services
