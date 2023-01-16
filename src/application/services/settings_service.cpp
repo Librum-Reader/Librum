@@ -48,6 +48,8 @@ void SettingsService::clearUserData()
 
 void SettingsService::mergeSettings(const QByteArray& data, bool success)
 {
+    Q_UNUSED(data);
+    Q_UNUSED(success);
 }
 
 void SettingsService::createSettings()
