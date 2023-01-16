@@ -121,4 +121,10 @@ QByteArray SettingsService::getSettingsAsBytes()
     return settingsFile.readAll();
 }
 
+bool SettingsService::settingsAreValid()
+{
+    // If the underlying file has been deleted by "clear()", its invalid
+    return QFile::exists(m_settings->fileName());
+}
+
 }  // namespace application::services
