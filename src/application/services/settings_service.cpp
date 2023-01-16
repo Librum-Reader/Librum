@@ -19,6 +19,9 @@ SettingsService::SettingsService(
 
 QString SettingsService::getSetting(const QString& settingName)
 {
+    if(!m_settingsAreValid)
+        return "";
+
     auto defaultValue = QVariant::fromValue(QString(""));
     return m_settings->value(settingName.toLower(), defaultValue).toString();
 }
@@ -26,6 +29,9 @@ QString SettingsService::getSetting(const QString& settingName)
 void SettingsService::setSetting(const QString& settingName,
                                  const QString& value)
 {
+    if(!m_settingsAreValid)
+        return;
+
     auto dataToSet = QVariant::fromValue(value.toLower());
 
     m_settings->setValue(settingName.toLower(), dataToSet);
@@ -37,6 +43,8 @@ void SettingsService::clearSettings()
     m_settings->sync();
     QString filePath = m_settings->fileName();
     QFile::remove(filePath);
+
+    m_settingsAreValid = false;
 }
 
 void SettingsService::loadUserSettings(const QString& token,
@@ -64,6 +72,7 @@ void SettingsService::createSettings()
     auto uniqueFileName = getUniqueUserHash();
     auto format = QSettings::NativeFormat;
     m_settings = std::make_unique<QSettings>(uniqueFileName, format);
+    m_settingsAreValid = true;
 
     generateDefaultSettings();
 }

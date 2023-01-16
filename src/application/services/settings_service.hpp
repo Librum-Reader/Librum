@@ -39,6 +39,7 @@ private:
     QString m_defaultSettingsFile = ":/resources/data/default_settings.json";
     QString m_userEmail;
     QString m_authToken;
+    bool m_settingsAreValid = false;
 };
 
 }  // namespace application::services
