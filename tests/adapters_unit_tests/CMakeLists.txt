@@ -9,9 +9,12 @@ add_executable(adapters_unit_tests
                     controllers/book_controller_tests.hpp
                     controllers/authentication_controller_tests.hpp
                     controllers/user_controller_tests.hpp
+                    controllers/settings_controller_tests.hpp
+                    
                     gateways/user_storage_gateway_tests.hpp
                     gateways/book_storage_gateway_tests.hpp
                     gateways/authentication_gateway_tests.hpp
+                    
                     data_models/library_proxy_model_tests.hpp
                     data_models/test_data/sort_by_title_test_data.hpp
                     data_models/test_data/sort_by_recently_added_test_data.hpp
