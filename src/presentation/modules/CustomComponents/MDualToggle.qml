@@ -8,9 +8,9 @@ Item
     id: root
     property string leftProperty: "Left"
     property string rightProperty: "Right"
-    property string selected: rightProperty
     property bool leftSelected: false
     property bool rightSelected: true
+    signal selectedChanged(string newSelected)
     
     implicitHeight: 38
     implicitWidth: 178
@@ -161,6 +161,7 @@ Item
         {
             root.leftSelected = false;
             root.rightSelected = true;
+            root.selectedChanged(root.rightProperty);
         }
     }
     
@@ -188,6 +189,7 @@ Item
         {
             root.leftSelected = true;
             root.rightSelected = false;
+            root.selectedChanged(root.leftProperty);
         }
     }
 }
