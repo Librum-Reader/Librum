@@ -1,5 +1,12 @@
 {
     "theme": "bright",
-    "font-family": "arial",
-    "font-size": "13"
+    "page-spacing": "10",
+    "display-book-in-titlebar": "false",
+    "layout-direction": "vertical",
+    "display-mode": "single-page",
+    "page-transition": "instant",
+    "default-zoom": "100",
+    "smooth-scrolling": "false",
+    "loop-after-last-page": "false",
+    "cursor-mode": "hidden-after-delay"
 }
