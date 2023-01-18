@@ -13,8 +13,10 @@ class SettingsService : public ISettingsService
     Q_OBJECT
 
 public:
-    QString getSetting(const QString& settingName) override;
-    void setSetting(const QString& settingName, const QString& value) override;
+    QString getSetting(const QString& settingName,
+                       const QString& group = "") override;
+    void setSetting(const QString& settingName, const QString& value,
+                    const QString& group = "") override;
     void clearSettings() override;
 
 public slots:

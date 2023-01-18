@@ -8,23 +8,36 @@
 namespace application::services
 {
 
-QString SettingsService::getSetting(const QString& settingName)
+QString SettingsService::getSetting(const QString& settingName,
+                                    const QString& group)
 {
     if(!m_settingsAreValid)
         return "";
 
+    if(!group.isEmpty())
+        m_settings->beginGroup(group);
+
     auto defaultValue = QVariant::fromValue(QString(""));
-    return m_settings->value(settingName.toLower(), defaultValue).toString();
+    auto result =
+        m_settings->value(settingName.toLower(), defaultValue).toString();
+
+    m_settings->endGroup();
+    return result;
 }
 
 void SettingsService::setSetting(const QString& settingName,
-                                 const QString& value)
+                                 const QString& value, const QString& group)
 {
     if(!m_settingsAreValid)
         return;
 
+    if(!group.isEmpty())
+        m_settings->beginGroup(group);
+
     auto valueToSet = QVariant::fromValue(value.toLower());
     m_settings->setValue(settingName.toLower(), valueToSet);
+
+    m_settings->endGroup();
 }
 
 void SettingsService::clearSettings()

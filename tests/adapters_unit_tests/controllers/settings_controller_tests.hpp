@@ -15,8 +15,10 @@ namespace tests::adapters
 class SettingsServiceMock : public application::ISettingsService
 {
 public:
-    MOCK_METHOD(QString, getSetting, (const QString&), (override));
-    MOCK_METHOD(void, setSetting, (const QString&, const QString&), (override));
+    MOCK_METHOD(QString, getSetting, (const QString&, const QString&),
+                (override));
+    MOCK_METHOD(void, setSetting,
+                (const QString&, const QString&, const QString&), (override));
     MOCK_METHOD(void, loadUserSettings, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearSettings, (), (override));
@@ -45,7 +47,7 @@ TEST_F(ASettingsController, SucceedsGettingASetting)
     QString settingName = "SomeSetting";
 
     // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_)).Times(1);
+    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(1);
 
     // Act
     settingsController->getSetting(settingName);
@@ -58,7 +60,7 @@ TEST_F(ASettingsController, SucceedsSettingASetting)
     QString settingValue = "SomeSetting";
 
     // Expect
-    EXPECT_CALL(settingsServiceMock, setSetting(_, _)).Times(1);
+    EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(1);
 
     // Act
     settingsController->setSetting(settingName, settingValue);
