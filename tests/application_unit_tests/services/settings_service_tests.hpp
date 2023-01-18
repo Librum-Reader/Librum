@@ -41,6 +41,18 @@ TEST_F(ASettingsService, SucceedsSettingASetting)
     settingsService->setSetting(settingName, settingValue);
 }
 
+TEST_F(ASettingsService, SucceedsSettingASettingInAGroup)
+{
+    // Arrange
+    QString settingName = "SomeSetting";
+    QString settingValue = "SomeValue";
+    QString settingGroup = "SomeGroup";
+
+
+    // Act
+    settingsService->setSetting(settingName, settingValue, settingGroup);
+}
+
 TEST_F(ASettingsService, FailsSettingASettingIfSettingsAreInvalid)
 {
     // Arrange
@@ -88,6 +100,23 @@ TEST_F(ASettingsService, SucceedsGettingASetting)
     EXPECT_EQ(settingValue.toLower(), result);
 }
 
+TEST_F(ASettingsService, SucceedsGettingASettingFromAGroup)
+{
+    // Arrange
+    QString settingName = "SomeSetting";
+    QString settingValue = "SomeValue";
+    QString settingGroup = "SomeGroup";
+
+    settingsService->setSetting(settingName, settingValue, settingGroup);
+
+
+    // Act
+    auto result = settingsService->getSetting(settingName, settingGroup);
+
+    // Assert
+    EXPECT_EQ(settingValue.toLower(), result);
+}
+
 TEST_F(ASettingsService, FailsGettingASettingIfSettingDoesNotExist)
 {
     // Arrange
@@ -96,6 +125,23 @@ TEST_F(ASettingsService, FailsGettingASettingIfSettingDoesNotExist)
 
     // Act
     auto result = settingsService->getSetting(nonExistentSettingName);
+
+    // Assert
+    EXPECT_TRUE(result.isEmpty());
+}
+
+TEST_F(ASettingsService, FailsGettingASettingIfSettingIsNotInGroup)
+{
+    // Arrange
+    QString settingName = "SomeSetting";
+    QString settingValue = "SomeValue";
+    QString settingGroup = "SomeGroup";
+
+    settingsService->setSetting(settingName, settingValue, settingGroup);
+
+
+    // Act
+    auto result = settingsService->getSetting(settingName, "NonExistentGroup");
 
     // Assert
     EXPECT_TRUE(result.isEmpty());
