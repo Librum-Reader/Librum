@@ -96,7 +96,9 @@
         <file>resources/images/utility/edit_gray_icon.svg</file>
         <file>resources/images/utility/edit_light_gray_icon.svg</file>
         <file>resources/images/utility/edit_purple_icon.svg</file>
-        <file>resources/data/default_settings.json</file>
         <file>resources/images/utility/patreon_icon.svg</file>
+        <file>resources/data/default_appearance_settings.json</file>
+        <file>resources/data/default_general_settings.json</file>
+        <file>resources/data/default_shortcuts.json</file>
     </qresource>
 </RCC>
