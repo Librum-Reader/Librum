@@ -69,7 +69,17 @@ QString SettingsService::getUniqueUserHash() const
 
 void SettingsService::generateDefaultSettings()
 {
-    QJsonObject defaultSettings = getDefaultSettings();
+    loadDefaultSettings("Appearance", m_defaultAppearanceSettingsFilePath);
+    loadDefaultSettings("General", m_defaultGeneralSettingsFilePath);
+    loadDefaultSettings("Shortcuts", m_defaultShortcutsFilePath);
+}
+
+void SettingsService::loadDefaultSettings(const QString& group,
+                                          const QString& filePath)
+{
+    QJsonObject defaultSettings = getDefaultSettings(filePath);
+
+    m_settings->beginGroup(group);
     for(const auto& settingKey : defaultSettings.keys())
     {
         if(m_settings->contains(settingKey))
@@ -78,14 +88,15 @@ void SettingsService::generateDefaultSettings()
         auto settingValue = defaultSettings.value(settingKey).toString();
         setSetting(settingKey, settingValue);
     }
+    m_settings->endGroup();
 }
 
-QJsonObject SettingsService::getDefaultSettings()
+QJsonObject SettingsService::getDefaultSettings(const QString& path)
 {
-    QFile defaultSettingsFile(m_defaultSettingsFile);
+    QFile defaultSettingsFile(path);
     if(!defaultSettingsFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qWarning() << "Failed to open default settings file!";
+        qWarning() << "Failed to open default settings file: " << path << "!";
     }
 
     QByteArray rawJson = defaultSettingsFile.readAll();
