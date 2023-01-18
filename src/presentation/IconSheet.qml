@@ -115,4 +115,5 @@ Item
     property string bookOpen: "/resources/images/utility/book_open_icon.svg"
     property string book: "/resources/images/utility/book_icon.svg"
     property string addFile: "/resources/images/utility/add_file_icon.svg"
+    property string patreon: "/resources/images/utility/patreon_icon.svg"
 }
