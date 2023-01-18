@@ -149,7 +149,7 @@ MFlickWrapper
                         id: coffeeText
                         Layout.fillWidth: true
                         Layout.topMargin: 36
-                        text: "If you feel like supporting us and our new projects, feel free to buy us a coffee"
+                        text: "If you feel like supporting us and our new projects, feel free to support us on patreon"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText3
                         font.pointSize: 14
@@ -157,20 +157,22 @@ MFlickWrapper
                     
                     MButton
                     {
-                        id: coffeeButton
-                        Layout.preferredWidth: 168
+                        id: patreonButton
+                        Layout.preferredWidth: 146
                         Layout.preferredHeight: 38
                         Layout.topMargin: 10
                         borderWidth: 0
-                        backgroundColor: Style.colorCoffeeBrown
-                        imagePath: Icons.coffee
-                        imageSize: 20
+                        backgroundColor: Style.colorBasePurple
+                        imagePath: Icons.patreon
+                        imageSize: 18
                         imageSpacing: 10
-                        text: "Buy us a coffee"
+                        text: "Support us"
                         fontWeight: Font.DemiBold
-                        fontSize: 11.9
-                        fontColor: Style.colorBaseTitle
+                        fontSize: 12
+                        fontColor: Style.loginContentBackground
                         radius: 4
+                        
+                        onClicked: Qt.openUrlExternally("https://www.patreon.com/librum_reader")
                     }
                     
                     Label
