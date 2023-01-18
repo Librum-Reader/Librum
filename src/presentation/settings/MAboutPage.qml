@@ -197,6 +197,14 @@ MFlickWrapper
                         text: AppInformation.companyWebsite
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            
+                            onClicked: Qt.open
+                        }
                     }
                     
                     Label
