@@ -80,7 +80,7 @@ Page
             flickDeceleration: 4000
             clip: true
             
-            ScrollBar.vertical: ScrollBar { width: 10 }
+            ScrollBar.vertical: ScrollBar { width: 10; policy: "AlwaysOn" }
             
             
             ColumnLayout
@@ -120,7 +120,7 @@ Page
                             id: displayTitle
                             Layout.fillWidth: true
                             text: "Display"
-                            font.pointSize: 16.5
+                            font.pointSize: 17
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
@@ -145,76 +145,12 @@ Page
                             
                             onSelectedChanged: (newSelected) => SettingsController.setSetting("theme", newSelected)
                         }
-                        
-                        Label
-                        {
-                            id: fontFamilyTitle
-                            Layout.fillWidth: true
-                            Layout.topMargin: 14
-                            text: "Font family"
-                            font.pointSize: 13
-                            font.weight: Font.DemiBold
-                            color: Style.colorBaseText
-                        }
-                        
-                        MComboBox
-                        {
-                            id: fontFamilyComboBox
-                            Layout.topMargin: 4
-                            Layout.preferredHeight: 36
-                            Layout.fillWidth: true
-                            Layout.maximumWidth: 380
-                            titleEmptyText: "None"
-                            titleFontSize: 12
-                            titleSpacing: 4
-                            image: Icons.dropdownGray
-                            imageSize: 9
-                            itemHeight: 32
-                            fontSize: 11.5
-                            checkBoxStyle: false
-                            maxHeight: 200
-                            defaultIndex: 0
-                            model: ListModel
-                            {
-                                ListElement { text: "Arial" }
-                                ListElement { text: "Helvetica" }
-                                ListElement { text: "Baskerville" }
-                                ListElement { text: "Akzidenz Grotesk" }
-                                ListElement { text: "Gotham" }
-                                ListElement { text: "Bodoni" }
-                                ListElement { text: "Didot" }
-                                ListElement { text: "Museo Slab" }
-                            }
-                            
-                            onItemChanged: SettingsController.setSetting("font-family", text)
-                        }
-                        
-                        Label
-                        {
-                            id: fontSizeTitle
-                            Layout.fillWidth: true
-                            Layout.topMargin: 16
-                            text: "Font size"
-                            font.pointSize: 13
-                            font.weight: Font.DemiBold
-                            color: Style.colorBaseText
-                        }
-                        
-                        MSpinbox
-                        {
-                            id: fontSizeSpinBox
-                            Layout.preferredWidth: 76
-                            Layout.topMargin: 4
-                            value: 18
-                            
-                            onValueChanged: SettingsController.setSetting("font-size", value)
-                        }
                     }   
                 }
                 
                 Pane
                 {
-                    id: pagesBlock
+                    id: readingBlock
                     Layout.fillWidth: true
                     Layout.topMargin: 24
                     verticalPadding: 24
@@ -230,17 +166,17 @@ Page
                     
                     ColumnLayout
                     {
-                        id: pagesColumn
+                        id: readingColumn
                         anchors.fill: parent
                         spacing: 0
                         
                         
                         Label
                         {
-                            id: pagesTitle
+                            id: readingTitle
                             Layout.fillWidth: true
-                            text: "Pages"
-                            font.pointSize: 16.5
+                            text: "Reading"
+                            font.pointSize: 17
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
@@ -258,7 +194,7 @@ Page
                         
                         MSpinbox
                         {
-                            id: pageSpacingSpingBox
+                            id: pageSpacingSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
                             value: 20
@@ -266,29 +202,30 @@ Page
                         
                         Label
                         {
-                            id: displayModeTitle
+                            id: docTitleDisplayTitle
                             Layout.fillWidth: true
-                            Layout.topMargin: 16
-                            text: "Display mode"
+                            Layout.topMargin: 18
+                            text: "Display book title in titlebar"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
                         
-                        MRadioButtonSelector
+                        MDualToggle
                         {
-                            id: displayModeSelector
-                            Layout.fillWidth: true
-                            Layout.topMargin: 8
-                            options: ["Single Page", "Double Page"]
-                            currentSelected: options[0]
+                            id: docTitleDisplaySwitch
+                            Layout.topMargin: 4
+                            leftProperty: "OFF"
+                            rightProperty: "ON"
+                            leftSelected: false
+                            rightSelected: true
                         }
                         
                         Label
                         {
                             id: layoutDirectionTitle
                             Layout.fillWidth: true
-                            Layout.topMargin: 16
+                            Layout.topMargin: 18
                             text: "Layout direction"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
@@ -299,8 +236,28 @@ Page
                         {
                             id: layoutDirectionSelector
                             Layout.fillWidth: true
-                            Layout.topMargin: 8
+                            Layout.topMargin: 6
                             options: ["Vertical", "Horizontal"]
+                            currentSelected: options[0]
+                        }
+                       
+                        Label
+                        {
+                            id: displayModeTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: "Display mode"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorBaseText
+                        }
+                        
+                        MRadioButtonSelector
+                        {
+                            id: displayModeSelector
+                            Layout.fillWidth: true
+                            Layout.topMargin: 6
+                            options: ["Single Page", "Double Page"]
                             currentSelected: options[0]
                         }
                         
@@ -308,7 +265,7 @@ Page
                         {
                             id: pageTransitionTitle
                             Layout.fillWidth: true
-                            Layout.topMargin: 16
+                            Layout.topMargin: 18
                             text: "Page transition"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
@@ -338,6 +295,25 @@ Page
                                 ListElement { text: "Swipe" }
                                 ListElement { text: "Swap" }
                             }
+                        }
+                        
+                        Label
+                        {
+                            id: defaultZoomTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: "Default Zoom"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorBaseText
+                        }
+                        
+                        MSpinbox
+                        {
+                            id: defaultZoomSpinBox
+                            Layout.preferredWidth: 76
+                            Layout.topMargin: 4
+                            value: 100
                         }
                     }
                 }
@@ -369,7 +345,7 @@ Page
                             id: behaviorTitle
                             Layout.fillWidth: true
                             text: "Behavior"
-                            font.pointSize: 16.5
+                            font.pointSize: 17
                             font.weight: Font.DemiBold
                             color: Style.colorBaseText
                         }
@@ -399,9 +375,31 @@ Page
                         
                         Label
                         {
+                            id: loopAfterLastTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: "Loop after last page"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorBaseText
+                        }
+                        
+                        
+                        MDualToggle
+                        {
+                            id: loopAfterLastSwitch
+                            Layout.topMargin: 4
+                            leftProperty: "OFF"
+                            rightProperty: "ON"
+                            leftSelected: true
+                            rightSelected: false
+                        }
+                        
+                        Label
+                        {
                             id: cursorModeTitle
                             Layout.fillWidth: true
-                            Layout.topMargin: 16
+                            Layout.topMargin: 18
                             text: "Cursor mode"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
@@ -412,30 +410,9 @@ Page
                         {
                             id: cursorModeSelector
                             Layout.fillWidth: true
-                            Layout.topMargin: 8
-                            options: ["Hidden after delay", "Always visible", "Never visible"]
+                            Layout.topMargin: 6
+                            options: ["Hidden after delay", "Always visible"]
                             currentSelected: options[0]
-                        }
-                        
-                        Label
-                        {
-                            id: defaultZoomTitle
-                            Layout.fillWidth: true
-                            Layout.topMargin: 16
-                            text: "Default zoom"
-                            font.pointSize: 13
-                            font.weight: Font.DemiBold
-                            color: Style.colorBaseText
-                        }
-                        
-                        MSpinbox
-                        {
-                            id: defaultZoomBox
-                            Layout.preferredWidth: 92
-                            Layout.topMargin: 4
-                            value: 100
-                            minVal: 10
-                            maxVal: 4000
                         }
                     }
                 }

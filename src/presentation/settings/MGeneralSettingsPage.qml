@@ -47,7 +47,7 @@ MFlickWrapper
                     id: title
                     Layout.topMargin: 64
                     titleText: "General settings"
-                    descriptionText: "Change how Librum works"
+                    descriptionText: "Change the way Librum works"
                     titleSize: 25
                     descriptionSize: 13.25
                 }
@@ -97,8 +97,8 @@ MFlickWrapper
                     {
                         id: downloadTitle
                         Layout.fillWidth: true
-                        text: "Download"
-                        font.pointSize: 16.5
+                        text: "Books"
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                         color: Style.colorBaseText
                     }
@@ -106,19 +106,18 @@ MFlickWrapper
                     
                     Label
                     {
-                        id: forceEthernetTitle
+                        id: openBookAfterCreationTitle
                         Layout.fillWidth: true
                         Layout.topMargin: 24
-                        text: "Enforce ethernet for big downloads"
+                        text: "Open books after creation"
                         font.pointSize: 13
                         font.weight: Font.DemiBold
                         color: Style.colorBaseText
                     }
                     
-                    
                     MDualToggle
                     {
-                        id: forceEthernetSwitch
+                        id: openBookAfterCreationSwitch
                         Layout.topMargin: 4
                         leftProperty: "OFF"
                         rightProperty: "ON"
