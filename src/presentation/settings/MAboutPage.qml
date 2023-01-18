@@ -203,7 +203,7 @@ MFlickWrapper
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
-                            onClicked: Qt.open
+                            onClicked: Qt.openUrlExternally(AppInformation.companyWebsite)
                         }
                     }
                     
