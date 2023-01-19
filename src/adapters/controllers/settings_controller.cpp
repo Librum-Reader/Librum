@@ -10,15 +10,16 @@ SettingsController::SettingsController(ISettingsService* settingsService) :
 {
 }
 
-QString SettingsController::getSetting(const QString& settingName)
+QString SettingsController::getSetting(const QString& settingName,
+                                       const QString& group)
 {
-    return m_settingsService->getSetting(settingName);
+    return m_settingsService->getSetting(settingName, group);
 }
 
 void SettingsController::setSetting(const QString& settingName,
-                                    const QString& value)
+                                    const QString& value, const QString& group)
 {
-    m_settingsService->setSetting(settingName, value);
+    m_settingsService->setSetting(settingName, value, group);
 }
 
 }  // namespace adapters::controllers

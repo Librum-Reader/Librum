@@ -14,8 +14,10 @@ class SettingsController : public ISettingsController
 public:
     SettingsController(application::ISettingsService* settingsService);
 
-    QString getSetting(const QString& settingName) override;
-    void setSetting(const QString& settingName, const QString& value) override;
+    QString getSetting(const QString& settingName,
+                       const QString& group = "") override;
+    void setSetting(const QString& settingName, const QString& value,
+                    const QString& group = "") override;
 
 private:
     application::ISettingsService* m_settingsService;

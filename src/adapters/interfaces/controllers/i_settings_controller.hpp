@@ -15,9 +15,11 @@ class ISettingsController : public QObject
 public:
     virtual ~ISettingsController() noexcept = default;
 
-    Q_INVOKABLE virtual QString getSetting(const QString& settingName) = 0;
+    Q_INVOKABLE virtual QString getSetting(const QString& settingName,
+                                           const QString& group = "") = 0;
     Q_INVOKABLE virtual void setSetting(const QString& settingName,
-                                        const QString& value) = 0;
+                                        const QString& value,
+                                        const QString& group = "") = 0;
 };
 
 }  // namespace adapters
