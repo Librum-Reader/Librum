@@ -10,6 +10,7 @@ Item
     id: root
     property var options: []
     property string currentSelected: options[0]
+    signal newCurrentSelected()
     
     implicitWidth: 120
     implicitHeight: layout.height
@@ -77,6 +78,7 @@ Item
         function changeSelected(index)
         {
             root.currentSelected = root.options[index];
+            root.newCurrentSelected();
         }
     }
 }

@@ -12,6 +12,7 @@ Item
     property int value: 14
     property int maxVal: 99
     property int minVal: 1
+    signal newValueSelected()
     
     implicitWidth: 72
     implicitHeight: 32
@@ -86,6 +87,7 @@ Item
                     {
                         root.value = text;
                         root.invalid = false;
+                        root.newValueSelected();
                     }
                 }
             }
@@ -114,7 +116,10 @@ Item
                             root.forceActiveFocus();
                             
                             if(root.value < root.maxVal)
+                            {
                                 root.value += 1;
+                                root.newValueSelected();
+                            }
                             
                             if(mainLayout.isValid())
                                 root.invalid = false;
@@ -137,7 +142,10 @@ Item
                             root.forceActiveFocus();
                             
                             if(root.value > root.minVal)
+                            {
                                 root.value -= 1;
+                                root.newValueSelected();
+                            }
                             
                             if(mainLayout.isValid())
                                 root.invalid = false;
