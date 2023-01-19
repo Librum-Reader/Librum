@@ -1,7 +1,7 @@
 {
-    "theme": "bright",
+    "theme": "light",
     "page-spacing": "10",
-    "display-book-in-titlebar": "false",
+    "display-book-title-in-titlebar": "false",
     "layout-direction": "vertical",
     "display-mode": "single-page",
     "page-transition": "instant",
