@@ -21,7 +21,9 @@ QString SettingsService::getSetting(const QString& settingName,
     auto result =
         m_settings->value(settingName.toLower(), defaultValue).toString();
 
-    m_settings->endGroup();
+    if(!group.isEmpty())
+        m_settings->endGroup();
+
     return result;
 }
 
@@ -37,7 +39,8 @@ void SettingsService::setSetting(const QString& settingName,
     auto valueToSet = QVariant::fromValue(value.toLower());
     m_settings->setValue(settingName.toLower(), valueToSet);
 
-    m_settings->endGroup();
+    if(!group.isEmpty())
+        m_settings->endGroup();
 }
 
 void SettingsService::clearSettings()
