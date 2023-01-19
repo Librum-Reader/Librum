@@ -139,11 +139,15 @@ Page
                         MDualToggle
                         {
                             id: themeSwitch
+                            property string savedSetting: layout.getSavedSetting("theme")
+                            
                             Layout.topMargin: 4
                             leftProperty: "Dark"
                             rightProperty: "Light"
+                            leftSelected: savedSetting == "dark"
+                            rightSelected: savedSetting == "light"
                             
-                            onSelectedChanged: (newSelected) => SettingsController.setSetting("theme", newSelected)
+                            onSelectedChanged: (newSelected) => layout.saveSetting("theme", newSelected)
                         }
                     }   
                 }
@@ -197,7 +201,9 @@ Page
                             id: pageSpacingSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: 20
+                            value: parseInt(layout.getSavedSetting("page-spacing"))
+                            
+                            onNewValueSelected: layout.saveSetting("page-spacing", value)
                         }
                         
                         Label
@@ -214,11 +220,24 @@ Page
                         MDualToggle
                         {
                             id: docTitleDisplaySwitch
+                            property string savedValue: layout.getSavedSetting("display-book-title-in-titlebar")
+                            
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            leftSelected: false
-                            rightSelected: true
+                            rightSelected: savedValue == "true"
+                            leftSelected: savedValue == "false"
+                            
+                            onSelectedChanged:
+                            {
+                                let status = true;
+                                if(docTitleDisplaySwitch.leftSelected) // "OFF"
+                                {
+                                    status = false;
+                                }
+                                
+                                layout.saveSetting("display-book-title-in-titlebar", status.toString())
+                            }
                         }
                         
                         Label
@@ -235,12 +254,16 @@ Page
                         MRadioButtonSelector
                         {
                             id: layoutDirectionSelector
+                            property string savedValue: layout.getSavedSetting("layout-direction")
+                            
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Vertical", "Horizontal"]
-                            currentSelected: options[0]
+                            currentSelected: savedValue == "vertical" ? options[0] : options[1]
+                            
+                            onNewCurrentSelected: layout.saveSetting("layout-direction", currentSelected)
                         }
-                       
+                        
                         Label
                         {
                             id: displayModeTitle
@@ -255,10 +278,14 @@ Page
                         MRadioButtonSelector
                         {
                             id: displayModeSelector
+                            property string savedValue: layout.getSavedSetting("display-mode")
+                            
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Single Page", "Double Page"]
-                            currentSelected: options[0]
+                            currentSelected: savedValue == "single page" ? options[0] : options[1]
+                            
+                            onNewCurrentSelected: layout.saveSetting("display-mode", currentSelected)
                         }
                         
                         Label
@@ -275,6 +302,20 @@ Page
                         MComboBox
                         {
                             id: pageTransitionComboBox
+                            property string savedValue: layout.getSavedSetting("page-transition")
+                            
+                            defaultIndex:
+                            {
+                                if(savedValue == "instant")
+                                    return 0;
+                                else if(savedValue == "swipe")
+                                    return 1;
+                                else if(savedValue == "fading")
+                                    return 2;
+                                else
+                                    return 3;
+                            }
+                            
                             Layout.topMargin: 4
                             Layout.preferredHeight: 36
                             Layout.fillWidth: true
@@ -283,7 +324,6 @@ Page
                             titleSpacing: 4
                             image: Icons.dropdownGray
                             imageSize: 9
-                            defaultIndex: 0
                             itemHeight: 32
                             fontSize: 12
                             checkBoxStyle: false
@@ -295,6 +335,8 @@ Page
                                 ListElement { text: "Swipe" }
                                 ListElement { text: "Swap" }
                             }
+                            
+                            onItemChanged: layout.saveSetting("page-transition", text)
                         }
                         
                         Label
@@ -313,7 +355,9 @@ Page
                             id: defaultZoomSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: 100
+                            value: layout.getSavedSetting("default-zoom")
+                            
+                            onNewValueSelected: layout.saveSetting("default-zoom", value)
                         }
                     }
                 }
@@ -417,6 +461,18 @@ Page
                     }
                 }
             }
+        }
+        
+        // comfortability methods => eases the syntax
+        function saveSetting(name, value)
+        {
+            console.log("Setting: " + value + " to: " + value);
+            SettingsController.setSetting(name, value, "Appearance");
+        }
+        
+        function getSavedSetting(name)
+        {
+            return SettingsController.getSetting(name, "Appearance");
         }
     }
     
