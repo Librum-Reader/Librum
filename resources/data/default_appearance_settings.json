@@ -8,5 +8,5 @@
     "default-zoom": "100",
     "smooth-scrolling": "false",
     "loop-after-last-page": "false",
-    "cursor-mode": "hidden-after-delay"
+    "cursor-mode": "hidden after delay"
 }
