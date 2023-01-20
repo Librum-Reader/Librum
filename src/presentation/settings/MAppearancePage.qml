@@ -410,11 +410,23 @@ Page
                         MDualToggle
                         {
                             id: smoothScrollingSwitch
+                            property string savedValue: layout.getSavedSetting("smooth-scrolling")
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            leftSelected: true
-                            rightSelected: false
+                            leftSelected: savedValue == "false"
+                            rightSelected: savedValue == "true"
+                            
+                            onSelectedChanged:
+                            {
+                                let status = true;
+                                if(leftSelected) // "OFF"
+                                {
+                                    status = false;
+                                }
+                                
+                                layout.saveSetting("smooth-scrolling", status.toString())
+                            }
                         }
                         
                         Label
@@ -432,11 +444,24 @@ Page
                         MDualToggle
                         {
                             id: loopAfterLastSwitch
+                            property string savedValue: layout.getSavedSetting("loop-after-last-page")
+                            
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
                             leftSelected: true
                             rightSelected: false
+                            
+                            onSelectedChanged:
+                            {
+                                let status = true;
+                                if(leftSelected) // "OFF"
+                                {
+                                    status = false;
+                                }
+                                
+                                layout.saveSetting("loop-after-last-page", status.toString())
+                            }
                         }
                         
                         Label
@@ -453,10 +478,14 @@ Page
                         MRadioButtonSelector
                         {
                             id: cursorModeSelector
+                            property string savedValue: layout.getSavedSetting("cursor-mode")
+                            
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Hidden after delay", "Always visible"]
-                            currentSelected: options[0]
+                            currentSelected: savedValue == "hidden after delay" ? options[0] : options[1]
+                                                        
+                            onNewCurrentSelected: layout.saveSetting("cursor-mode", currentSelected)
                         }
                     }
                 }
@@ -466,7 +495,7 @@ Page
         // comfortability methods => eases the syntax
         function saveSetting(name, value)
         {
-            console.log("Setting: " + value + " to: " + value);
+            console.log("Setting: " + name + " to: " + value);
             SettingsController.setSetting(name, value, "Appearance");
         }
         
