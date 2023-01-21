@@ -38,7 +38,7 @@ protected:
 
 private:
     void setCurrentSequence(const QString& newSequence);
-    bool sequenceIsAllModifiers(int keySequence);
+    bool sequenceIsOnlyModifiers(int keySequence);
 
     QKeySequence m_originalSequence;
     QKeySequence m_currentSequence;

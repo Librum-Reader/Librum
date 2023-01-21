@@ -33,7 +33,7 @@ void KeySequenceRecorder::setCurrentSequence(const QString& newSequence)
     emit currentSequenceChanged();
 }
 
-bool KeySequenceRecorder::sequenceIsAllModifiers(int keySequence)
+bool KeySequenceRecorder::sequenceIsOnlyModifiers(int keySequence)
 {
     return keySequence >= Qt::Key_Shift && keySequence <= Qt::Key_Alt;
 }
@@ -72,7 +72,7 @@ void KeySequenceRecorder::keyPressEvent(QKeyEvent* event)
             modifiers |= Qt::META;
 
 
-        if(!sequenceIsAllModifiers(event->key()))
+        if(!sequenceIsOnlyModifiers(event->key()))
         {
             int keyCode(event->key() | modifiers);
             const QKeySequence sequence(keyCode);
