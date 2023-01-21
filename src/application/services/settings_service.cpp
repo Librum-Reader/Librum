@@ -98,6 +98,7 @@ void SettingsService::loadDefaultSettings(const QString& group,
     m_settings->beginGroup(group);
     for(const auto& settingKey : defaultSettings.keys())
     {
+        // Only add default setting, if it does not already exist
         if(m_settings->contains(settingKey))
             continue;
 
