@@ -29,7 +29,6 @@ private:
     void generateDefaultSettings();
     void loadDefaultSettings(const QString& group, const QString& filePath);
     QJsonObject getDefaultSettings(const QString& path);
-    QByteArray getSettingsAsBytes();
     bool settingsAreValid();
 
     std::unique_ptr<QSettings> m_settings;

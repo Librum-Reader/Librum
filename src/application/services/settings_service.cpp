@@ -120,17 +120,6 @@ QJsonObject SettingsService::getDefaultSettings(const QString& path)
     return jsonDoc.object();
 }
 
-QByteArray SettingsService::getSettingsAsBytes()
-{
-    QFile settingsFile(m_settings->fileName());
-    if(!settingsFile.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qWarning() << "Failed to open settings file!";
-    }
-
-    return settingsFile.readAll();
-}
-
 bool SettingsService::settingsAreValid()
 {
     // If the underlying file has been deleted by "clear()", its invalid
