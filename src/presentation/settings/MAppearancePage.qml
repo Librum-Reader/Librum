@@ -144,8 +144,8 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "Dark"
                             rightProperty: "Light"
-                            leftSelected: savedSetting == "dark"
-                            rightSelected: savedSetting == "light"
+                            leftSelected: savedSetting == "Dark"
+                            rightSelected: savedSetting == "Light"
                             
                             onSelectedChanged: (newSelected) => layout.saveSetting(SettingKeys.Theme,
                                                                                    newSelected)
@@ -227,19 +227,13 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            rightSelected: savedValue == "true"
-                            leftSelected: savedValue == "false"
+                            leftSelected: savedValue == leftProperty
+                            rightSelected: savedValue == rightProperty
                             
                             onSelectedChanged:
                             {
-                                let status = true;
-                                if(docTitleDisplaySwitch.leftSelected) // "OFF"
-                                {
-                                    status = false;
-                                }
-                                
                                 layout.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
-                                                   status.toString())
+                                                   leftSelected == true ? leftProperty : rightProperty)
                             }
                         }
                         
@@ -262,7 +256,7 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Vertical", "Horizontal"]
-                            currentSelected: savedValue == "vertical" ? options[0] : options[1]
+                            currentSelected: savedValue === options[0] ? options[0] : options[1]
                             
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.LayoutDirection,
                                                                      currentSelected)
@@ -287,7 +281,7 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Single Page", "Double Page"]
-                            currentSelected: savedValue == "single page" ? options[0] : options[1]
+                            currentSelected: savedValue === options[0] ? options[0] : options[1]
                             
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.DisplayMode,
                                                                      currentSelected)
@@ -311,14 +305,11 @@ Page
                             
                             defaultIndex:
                             {
-                                if(savedValue == "instant")
-                                    return 0;
-                                else if(savedValue == "swipe")
-                                    return 1;
-                                else if(savedValue == "fading")
-                                    return 2;
-                                else
-                                    return 3;
+                                for(let i = 0; i < model.count; ++i)
+                                {
+                                    if(model.get(i).text === savedValue)
+                                        return i;
+                                }
                             }
                             
                             Layout.topMargin: 4
@@ -421,19 +412,13 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            leftSelected: savedValue == "false"
-                            rightSelected: savedValue == "true"
+                            leftSelected: savedValue == leftProperty
+                            rightSelected: savedValue == rightProperty
                             
                             onSelectedChanged:
                             {
-                                let status = true;
-                                if(leftSelected) // "OFF"
-                                {
-                                    status = false;
-                                }
-                                
                                 layout.saveSetting(SettingKeys.SmoothScrolling,
-                                                   status.toString())
+                                                   leftSelected == true ? leftProperty : rightProperty)
                             }
                         }
                         
@@ -457,19 +442,13 @@ Page
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
-                            leftSelected: true
-                            rightSelected: false
+                            leftSelected: savedValue == leftProperty
+                            rightSelected: savedValue == rightProperty
                             
                             onSelectedChanged:
                             {
-                                let status = true;
-                                if(leftSelected) // "OFF"
-                                {
-                                    status = false;
-                                }
-                                
                                 layout.saveSetting(SettingKeys.LoopAfterLastPage,
-                                                   status.toString())
+                                                   leftSelected == true ? leftProperty : rightProperty)
                             }
                         }
                         
@@ -492,8 +471,8 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Hidden after delay", "Always visible"]
-                            currentSelected: savedValue == "hidden after delay" ? options[0] : options[1]
-                                                        
+                            currentSelected: savedValue === options[0] ? options[0] : options[1]
+                            
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.CursorMode,
                                                                      currentSelected)
                         }
@@ -502,10 +481,9 @@ Page
             }
         }
         
-        // comfortability methods => eases the syntax
+        // higher order functions -> simplify syntax
         function saveSetting(key, value)
         {
-            console.log("Setting: " + key + " to: " + value);
             SettingsController.setSetting(key, value, SettingGroups.Appearance);
         }
         
