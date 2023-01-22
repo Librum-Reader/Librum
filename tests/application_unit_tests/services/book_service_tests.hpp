@@ -14,7 +14,6 @@
 
 
 using namespace testing;
-using application::BookOperationStatus;
 using ::testing::ReturnRef;
 using namespace application::services;
 using namespace application::utility;

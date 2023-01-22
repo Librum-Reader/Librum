@@ -12,7 +12,6 @@ namespace adapters::controllers
 
 using namespace domain::entities;
 using namespace dtos;
-using application::BookOperationStatus;
 
 BookController::BookController(application::IBookService* bookService) :
     m_bookService(bookService),
