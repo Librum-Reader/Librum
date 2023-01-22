@@ -1,12 +1,12 @@
 {
-    "theme": "light",
-    "page-spacing": "10",
-    "display-book-title-in-titlebar": "false",
-    "layout-direction": "vertical",
-    "display-mode": "single-page",
-    "page-transition": "instant",
-    "default-zoom": "100",
-    "smooth-scrolling": "false",
-    "loop-after-last-page": "false",
-    "cursor-mode": "hidden after delay"
+    "Theme": "light",
+    "PageSpacing": "10",
+    "DisplayBookTitleInTitlebar": "false",
+    "LayoutDirection": "vertical",
+    "DisplayMode": "single-page",
+    "PageTransition": "instant",
+    "DefaultZoom": "100",
+    "SmoothScrolling": "false",
+    "LoopAfterLastPage": "false",
+    "CursorMode": "hidden after delay"
 }
