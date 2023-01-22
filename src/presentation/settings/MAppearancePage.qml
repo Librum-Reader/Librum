@@ -139,7 +139,7 @@ Page
                         MDualToggle
                         {
                             id: themeSwitch
-                            property string savedSetting: layout.getSavedSetting("theme")
+                            property string savedSetting: layout.getSavedSetting(SettingKeys.Theme)
                             
                             Layout.topMargin: 4
                             leftProperty: "Dark"
@@ -147,7 +147,8 @@ Page
                             leftSelected: savedSetting == "dark"
                             rightSelected: savedSetting == "light"
                             
-                            onSelectedChanged: (newSelected) => layout.saveSetting("theme", newSelected)
+                            onSelectedChanged: (newSelected) => layout.saveSetting(SettingKeys.Theme,
+                                                                                   newSelected)
                         }
                     }   
                 }
@@ -201,9 +202,10 @@ Page
                             id: pageSpacingSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: parseInt(layout.getSavedSetting("page-spacing"))
+                            value: parseInt(layout.getSavedSetting(SettingKeys.PageSpacing))
                             
-                            onNewValueSelected: layout.saveSetting("page-spacing", value)
+                            onNewValueSelected: layout.saveSetting(SettingKeys.PageSpacing,
+                                                                   value)
                         }
                         
                         Label
@@ -220,7 +222,7 @@ Page
                         MDualToggle
                         {
                             id: docTitleDisplaySwitch
-                            property string savedValue: layout.getSavedSetting("display-book-title-in-titlebar")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.DisplayBookTitleInTitlebar)
                             
                             Layout.topMargin: 4
                             leftProperty: "OFF"
@@ -236,7 +238,8 @@ Page
                                     status = false;
                                 }
                                 
-                                layout.saveSetting("display-book-title-in-titlebar", status.toString())
+                                layout.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
+                                                   status.toString())
                             }
                         }
                         
@@ -254,14 +257,15 @@ Page
                         MRadioButtonSelector
                         {
                             id: layoutDirectionSelector
-                            property string savedValue: layout.getSavedSetting("layout-direction")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.LayoutDirection)
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Vertical", "Horizontal"]
                             currentSelected: savedValue == "vertical" ? options[0] : options[1]
                             
-                            onNewCurrentSelected: layout.saveSetting("layout-direction", currentSelected)
+                            onNewCurrentSelected: layout.saveSetting(SettingKeys.LayoutDirection,
+                                                                     currentSelected)
                         }
                         
                         Label
@@ -278,14 +282,15 @@ Page
                         MRadioButtonSelector
                         {
                             id: displayModeSelector
-                            property string savedValue: layout.getSavedSetting("display-mode")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.DisplayMode)
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Single Page", "Double Page"]
                             currentSelected: savedValue == "single page" ? options[0] : options[1]
                             
-                            onNewCurrentSelected: layout.saveSetting("display-mode", currentSelected)
+                            onNewCurrentSelected: layout.saveSetting(SettingKeys.DisplayMode,
+                                                                     currentSelected)
                         }
                         
                         Label
@@ -302,7 +307,7 @@ Page
                         MComboBox
                         {
                             id: pageTransitionComboBox
-                            property string savedValue: layout.getSavedSetting("page-transition")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.PageTransition)
                             
                             defaultIndex:
                             {
@@ -336,7 +341,8 @@ Page
                                 ListElement { text: "Swap" }
                             }
                             
-                            onItemChanged: layout.saveSetting("page-transition", text)
+                            onItemChanged: layout.saveSetting(SettingKeys.PageTransition,
+                                                              text)
                         }
                         
                         Label
@@ -355,9 +361,10 @@ Page
                             id: defaultZoomSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: layout.getSavedSetting("default-zoom")
+                            value: layout.getSavedSetting(SettingKeys.DefaultZoom)
                             
-                            onNewValueSelected: layout.saveSetting("default-zoom", value)
+                            onNewValueSelected: layout.saveSetting(SettingKeys.DefaultZoom,
+                                                                   value)
                         }
                     }
                 }
@@ -410,7 +417,7 @@ Page
                         MDualToggle
                         {
                             id: smoothScrollingSwitch
-                            property string savedValue: layout.getSavedSetting("smooth-scrolling")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.SmoothScrolling)
                             Layout.topMargin: 4
                             leftProperty: "OFF"
                             rightProperty: "ON"
@@ -425,7 +432,8 @@ Page
                                     status = false;
                                 }
                                 
-                                layout.saveSetting("smooth-scrolling", status.toString())
+                                layout.saveSetting(SettingKeys.SmoothScrolling,
+                                                   status.toString())
                             }
                         }
                         
@@ -444,7 +452,7 @@ Page
                         MDualToggle
                         {
                             id: loopAfterLastSwitch
-                            property string savedValue: layout.getSavedSetting("loop-after-last-page")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.LoopAfterLastPage)
                             
                             Layout.topMargin: 4
                             leftProperty: "OFF"
@@ -460,7 +468,8 @@ Page
                                     status = false;
                                 }
                                 
-                                layout.saveSetting("loop-after-last-page", status.toString())
+                                layout.saveSetting(SettingKeys.LoopAfterLastPage,
+                                                   status.toString())
                             }
                         }
                         
@@ -478,14 +487,15 @@ Page
                         MRadioButtonSelector
                         {
                             id: cursorModeSelector
-                            property string savedValue: layout.getSavedSetting("cursor-mode")
+                            property string savedValue: layout.getSavedSetting(SettingKeys.CursorMode)
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Hidden after delay", "Always visible"]
                             currentSelected: savedValue == "hidden after delay" ? options[0] : options[1]
                                                         
-                            onNewCurrentSelected: layout.saveSetting("cursor-mode", currentSelected)
+                            onNewCurrentSelected: layout.saveSetting(SettingKeys.CursorMode,
+                                                                     currentSelected)
                         }
                     }
                 }
@@ -493,15 +503,15 @@ Page
         }
         
         // comfortability methods => eases the syntax
-        function saveSetting(name, value)
+        function saveSetting(key, value)
         {
-            console.log("Setting: " + name + " to: " + value);
-            SettingsController.setSetting(name, value, "Appearance");
+            console.log("Setting: " + key + " to: " + value);
+            SettingsController.setSetting(key, value, SettingGroups.Appearance);
         }
         
-        function getSavedSetting(name)
+        function getSavedSetting(key)
         {
-            return SettingsController.getSetting(name, "Appearance");
+            return SettingsController.getSetting(key, SettingGroups.Appearance);
         }
     }
     

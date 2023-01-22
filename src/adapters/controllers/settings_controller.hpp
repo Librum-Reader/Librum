@@ -14,12 +14,13 @@ class SettingsController : public ISettingsController
 public:
     SettingsController(application::ISettingsService* settingsService);
 
-    QString getSetting(const QString& settingName,
-                       const QString& group = "") override;
-    void setSetting(const QString& settingName, const QString& value,
-                    const QString& group = "") override;
+    QString getSetting(int key, int group) override;
+    void setSetting(int key, const QVariant& value, int group) override;
 
 private:
+    bool keyIsValid(int key);
+    bool groupIsValid(int group);
+
     application::ISettingsService* m_settingsService;
 };
 

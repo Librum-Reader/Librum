@@ -4,43 +4,41 @@
 #include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QMetaEnum>
+#include "setting_keys.hpp"
 
 namespace application::services
 {
 
-QString SettingsService::getSetting(const QString& settingName,
-                                    const QString& group)
+QString SettingsService::getSetting(SettingKeys key, SettingGroups group)
 {
     if(!m_settingsAreValid)
         return "";
 
-    if(!group.isEmpty())
-        m_settings->beginGroup(group);
+    QString keyName = getNameForEnumValue(key);
+    QString groupName = getNameForEnumValue(group);
+    m_settings->beginGroup(groupName);
 
     auto defaultValue = QVariant::fromValue(QString(""));
-    auto result =
-        m_settings->value(settingName.toLower(), defaultValue).toString();
+    auto result = m_settings->value(keyName, defaultValue);
 
-    if(!group.isEmpty())
-        m_settings->endGroup();
-
-    return result;
+    m_settings->endGroup();
+    return result.toString();
 }
 
-void SettingsService::setSetting(const QString& settingName,
-                                 const QString& value, const QString& group)
+void SettingsService::setSetting(SettingKeys key, const QVariant& value,
+                                 SettingGroups group)
 {
     if(!m_settingsAreValid)
         return;
 
-    if(!group.isEmpty())
-        m_settings->beginGroup(group);
+    auto groupName = getNameForEnumValue(group);
+    m_settings->beginGroup(groupName);
 
-    auto valueToSet = QVariant::fromValue(value.toLower());
-    m_settings->setValue(settingName.toLower(), valueToSet);
+    auto keyName = getNameForEnumValue(key);
+    m_settings->setValue(keyName, value);
 
-    if(!group.isEmpty())
-        m_settings->endGroup();
+    m_settings->endGroup();
 }
 
 void SettingsService::clearSettings()
@@ -85,27 +83,44 @@ QString SettingsService::getUniqueUserHash() const
 
 void SettingsService::generateDefaultSettings()
 {
-    loadDefaultSettings("Appearance", m_defaultAppearanceSettingsFilePath);
-    loadDefaultSettings("General", m_defaultGeneralSettingsFilePath);
-    loadDefaultSettings("Shortcuts", m_defaultShortcutsFilePath);
+    loadDefaultSettings(SettingGroups::Appearance,
+                        m_defaultAppearanceSettingsFilePath);
+    loadDefaultSettings(SettingGroups::General,
+                        m_defaultGeneralSettingsFilePath);
+    loadDefaultSettings(SettingGroups::Shortcuts, m_defaultShortcutsFilePath);
 }
 
-void SettingsService::loadDefaultSettings(const QString& group,
+void SettingsService::loadDefaultSettings(SettingGroups group,
                                           const QString& filePath)
 {
     QJsonObject defaultSettings = getDefaultSettings(filePath);
 
-    m_settings->beginGroup(group);
-    for(const auto& settingKey : defaultSettings.keys())
+    for(const auto& defaultSettingKey : defaultSettings.keys())
     {
         // Only add default setting, if it does not already exist
-        if(m_settings->contains(settingKey))
+        auto groupName = getNameForEnumValue(group);
+        m_settings->beginGroup(groupName);
+        bool alreadyContainsKey = m_settings->contains(defaultSettingKey);
+        m_settings->endGroup();
+        if(alreadyContainsKey)
             continue;
 
-        auto settingValue = defaultSettings.value(settingKey).toString();
-        setSetting(settingKey, settingValue);
+        auto defaultSettingValue =
+            defaultSettings.value(defaultSettingKey).toString();
+
+        auto keyAsEnum = getValueForEnumName<SettingKeys>(defaultSettingKey);
+        if(keyAsEnum.has_value())
+        {
+            setSetting(keyAsEnum.value(), defaultSettingValue, group);
+        }
+        else
+        {
+            qWarning() << "Failed converting setting-key from default settings "
+                          "file with value: "
+                       << defaultSettingKey << " to an enum.";
+            continue;
+        }
     }
-    m_settings->endGroup();
 }
 
 QJsonObject SettingsService::getDefaultSettings(const QString& path)
@@ -126,5 +141,35 @@ bool SettingsService::settingsAreValid()
     // If the underlying file has been deleted by "clear()", its invalid
     return QFile::exists(m_settings->fileName());
 }
+
+template<typename Enum>
+QString SettingsService::getNameForEnumValue(Enum value) const
+{
+    QMetaEnum meta = QMetaEnum::fromType<Enum>();
+    auto text = meta.valueToKey(static_cast<int>(value));
+
+    return QString::fromLatin1(text);
+}
+
+template<typename Enum>
+std::optional<Enum> SettingsService::getValueForEnumName(
+    const QString& name) const
+{
+    QMetaEnum meta = QMetaEnum::fromType<Enum>();
+    auto key = meta.keyToValue(name.toLatin1());
+    if(key == -1)
+        return std::nullopt;
+
+    return static_cast<Enum>(key);
+}
+
+// explicit template instantiations
+template QString SettingsService::getNameForEnumValue<SettingKeys>(
+    SettingKeys) const;
+template QString SettingsService::getNameForEnumValue<SettingGroups>(
+    SettingGroups) const;
+
+template std::optional<SettingKeys>
+    SettingsService::getValueForEnumName<SettingKeys>(const QString&) const;
 
 }  // namespace application::services

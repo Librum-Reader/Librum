@@ -1,4 +1,7 @@
 #include <QObject>
+#include <QVariant>
+#include "setting_groups.hpp"
+#include "setting_keys.hpp"
 #pragma once
 
 namespace adapters
@@ -15,11 +18,9 @@ class ISettingsController : public QObject
 public:
     virtual ~ISettingsController() noexcept = default;
 
-    Q_INVOKABLE virtual QString getSetting(const QString& settingName,
-                                           const QString& group = "") = 0;
-    Q_INVOKABLE virtual void setSetting(const QString& settingName,
-                                        const QString& value,
-                                        const QString& group = "") = 0;
+    Q_INVOKABLE virtual QString getSetting(int key, int group) = 0;
+    Q_INVOKABLE virtual void setSetting(int key, const QVariant& value,
+                                        int group) = 0;
 };
 
 }  // namespace adapters

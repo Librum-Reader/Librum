@@ -1,6 +1,8 @@
 #pragma once
 #include <QObject>
-#include <QString>
+#include <QVariant>
+#include "setting_groups.hpp"
+#include "setting_keys.hpp"
 
 namespace application
 {
@@ -15,10 +17,9 @@ class ISettingsService : public QObject
 public:
     virtual ~ISettingsService() noexcept = default;
 
-    virtual QString getSetting(const QString& settingName,
-                               const QString& group = "") = 0;
-    virtual void setSetting(const QString& settingName, const QString& value,
-                            const QString& group = "") = 0;
+    virtual QString getSetting(SettingKeys key, SettingGroups group) = 0;
+    virtual void setSetting(SettingKeys key, const QVariant& value,
+                            SettingGroups group) = 0;
     virtual void clearSettings() = 0;
 
 public slots:

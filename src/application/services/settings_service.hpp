@@ -3,6 +3,7 @@
 #include <QJsonObject>
 #include <QSettings>
 #include <memory>
+#include <optional>
 #include "i_settings_service.hpp"
 
 namespace application::services
@@ -13,10 +14,9 @@ class SettingsService : public ISettingsService
     Q_OBJECT
 
 public:
-    QString getSetting(const QString& settingName,
-                       const QString& group = "") override;
-    void setSetting(const QString& settingName, const QString& value,
-                    const QString& group = "") override;
+    QString getSetting(SettingKeys key, SettingGroups group) override;
+    void setSetting(SettingKeys key, const QVariant& value,
+                    SettingGroups group) override;
     void clearSettings() override;
 
 public slots:
@@ -27,9 +27,14 @@ private:
     void createSettings();
     QString getUniqueUserHash() const;
     void generateDefaultSettings();
-    void loadDefaultSettings(const QString& group, const QString& filePath);
+    void loadDefaultSettings(SettingGroups group, const QString& filePath);
     QJsonObject getDefaultSettings(const QString& path);
     bool settingsAreValid();
+
+    template<typename Enum>
+    QString getNameForEnumValue(Enum value) const;
+    template<typename Enum>
+    std::optional<Enum> getValueForEnumName(const QString& name) const;
 
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =
