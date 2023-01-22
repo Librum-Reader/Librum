@@ -2,6 +2,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <QString>
+#include "setting_groups.hpp"
+#include "setting_keys.hpp"
 #include "settings_service.hpp"
 
 using namespace testing;
@@ -33,132 +35,96 @@ private:
 TEST_F(ASettingsService, SucceedsSettingASetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
+    auto key = SettingKeys::PageSpacing;
+    QVariant value = 20;
+    auto group = SettingGroups::Appearance;
 
 
     // Act
-    settingsService->setSetting(settingName, settingValue);
-}
-
-TEST_F(ASettingsService, SucceedsSettingASettingInAGroup)
-{
-    // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
-    QString settingGroup = "SomeGroup";
-
-
-    // Act
-    settingsService->setSetting(settingName, settingValue, settingGroup);
+    settingsService->setSetting(key, value, group);
 }
 
 TEST_F(ASettingsService, FailsSettingASettingIfSettingsAreInvalid)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
+    auto key = SettingKeys::PageSpacing;
+    QVariant value = 20;
+    auto group = SettingGroups::Appearance;
 
     settingsService->clearSettings();
 
 
     // Act
-    settingsService->setSetting(settingName, settingValue);
+    settingsService->setSetting(key, value, group);
 }
 
 TEST_F(ASettingsService, SucceedsOverridingASetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString initialValue = "SomeValue";
-    QString newValue = "SomeValue";
+    auto key = SettingKeys::PageSpacing;
+    QVariant initialValue = 20;
+    QVariant newValue = 50;
+    auto group = SettingGroups::Appearance;
 
-    settingsService->setSetting(settingName, initialValue);
+    settingsService->setSetting(key, initialValue, group);
 
 
     // Act
-    settingsService->setSetting(settingName, newValue);
+    settingsService->setSetting(key, newValue, group);
 
     // Assert
-    auto actualValue = settingsService->getSetting(settingName);
-    EXPECT_EQ(newValue.toLower(), actualValue);
+    auto actualValue = settingsService->getSetting(key, group);
+    EXPECT_EQ(newValue, actualValue);
 }
 
-TEST_F(ASettingsService, SucceedsGettingASetting)
+TEST_F(ASettingsService, SucceedsGettingAIntegerSetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
+    auto key = SettingKeys::PageSpacing;
+    QVariant value = 20;
+    auto group = SettingGroups::Appearance;
 
-    settingsService->setSetting(settingName, settingValue);
+    settingsService->setSetting(key, value, group);
 
 
     // Act
-    auto result = settingsService->getSetting(settingName);
+    auto result = settingsService->getSetting(key, group);
 
     // Assert
-    EXPECT_EQ(settingValue.toLower(), result);
+    EXPECT_EQ(value, result.toInt());
 }
 
-TEST_F(ASettingsService, SucceedsGettingASettingFromAGroup)
+TEST_F(ASettingsService, SucceedsGettingAStringSetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
-    QString settingGroup = "SomeGroup";
+    auto key = SettingKeys::PageSpacing;
+    QVariant value = QString("SomeString");
+    auto group = SettingGroups::Appearance;
 
-    settingsService->setSetting(settingName, settingValue, settingGroup);
+    settingsService->setSetting(key, value, group);
 
 
     // Act
-    auto result = settingsService->getSetting(settingName, settingGroup);
+    auto result = settingsService->getSetting(key, group);
 
     // Assert
-    EXPECT_EQ(settingValue.toLower(), result);
-}
-
-TEST_F(ASettingsService, FailsGettingASettingIfSettingDoesNotExist)
-{
-    // Arrange
-    QString nonExistentSettingName = "SomeSetting";
-
-
-    // Act
-    auto result = settingsService->getSetting(nonExistentSettingName);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
-TEST_F(ASettingsService, FailsGettingASettingIfSettingIsNotInGroup)
-{
-    // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeValue";
-    QString settingGroup = "SomeGroup";
-
-    settingsService->setSetting(settingName, settingValue, settingGroup);
-
-
-    // Act
-    auto result = settingsService->getSetting(settingName, "NonExistentGroup");
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
+    EXPECT_EQ(value, result);
 }
 
 TEST_F(ASettingsService, FailsGettingASettingIfSettingsAreInvalid)
 {
     // Arrange
-    QString settingName = "SomeSetting";
+    auto key = SettingKeys::PageSpacing;
+    auto group = SettingGroups::Appearance;
+
     settingsService->clearSettings();
 
+
     // Act
-    auto result = settingsService->getSetting(settingName);
+    auto result = settingsService->getSetting(key, group);
 
     // Assert
     EXPECT_TRUE(result.isEmpty());
 }
-
 
 }  // namespace tests::application
