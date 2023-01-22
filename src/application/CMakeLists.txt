@@ -35,6 +35,7 @@ set(application_SRC
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
+    common/enums/setting_groups.hpp
     
     utility/book_metadata_helper.cpp
     utility/book_metadata_helper.hpp

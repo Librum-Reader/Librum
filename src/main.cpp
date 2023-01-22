@@ -24,6 +24,7 @@
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
 #include "page_item.hpp"
+#include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
@@ -109,8 +110,13 @@ int main(int argc, char* argv[])
     qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",
                                      1, 0, "BookOperationStatus",
                                      "This is an uncreatable enum!");
+    
     qmlRegisterUncreatableMetaObject(application::setting_keys::staticMetaObject, "Librum.controllers",
                                      1, 0, "SettingKeys",
+                                     "This is an uncreatable enum!");
+
+    qmlRegisterUncreatableMetaObject(application::setting_groups::staticMetaObject, "Librum.controllers",
+                                     1, 0, "SettingGroups",
                                      "This is an uncreatable enum!");
 
 
