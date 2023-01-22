@@ -1,12 +1,12 @@
 {
-    "Theme": "light",
+    "Theme": "Light",
     "PageSpacing": "10",
-    "DisplayBookTitleInTitlebar": "false",
-    "LayoutDirection": "vertical",
-    "DisplayMode": "single-page",
-    "PageTransition": "instant",
+    "DisplayBookTitleInTitlebar": "ON",
+    "LayoutDirection": "Vertical",
+    "DisplayMode": "Single Page",
+    "PageTransition": "Instant",
     "DefaultZoom": "100",
-    "SmoothScrolling": "false",
-    "LoopAfterLastPage": "false",
-    "CursorMode": "hidden after delay"
+    "SmoothScrolling": "OFF",
+    "LoopAfterLastPage": "OFF",
+    "CursorMode": "Hidden after delay"
 }
