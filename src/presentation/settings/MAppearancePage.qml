@@ -219,21 +219,18 @@ Page
                             color: Style.colorBaseText
                         }
                         
-                        MDualToggle
+                        MOnOffToggle
                         {
-                            id: docTitleDisplaySwitch
+                            id: displayBookTitleInTitlebarToggle
                             property string savedValue: layout.getSavedSetting(SettingKeys.DisplayBookTitleInTitlebar)
                             
                             Layout.topMargin: 4
-                            leftProperty: "OFF"
-                            rightProperty: "ON"
-                            leftSelected: savedValue == leftProperty
-                            rightSelected: savedValue == rightProperty
+                            onByDefault: savedValue === onText
                             
-                            onSelectedChanged:
+                            onToggled:
                             {
                                 layout.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
-                                                   leftSelected == true ? leftProperty : rightProperty)
+                                                   currentlyOn === true ? onText : offText)
                             }
                         }
                         
@@ -405,20 +402,17 @@ Page
                         }
                         
                         
-                        MDualToggle
+                        MOnOffToggle
                         {
-                            id: smoothScrollingSwitch
+                            id: smoothScrollingToggle
                             property string savedValue: layout.getSavedSetting(SettingKeys.SmoothScrolling)
                             Layout.topMargin: 4
-                            leftProperty: "OFF"
-                            rightProperty: "ON"
-                            leftSelected: savedValue == leftProperty
-                            rightSelected: savedValue == rightProperty
+                            onByDefault: savedValue === onText
                             
-                            onSelectedChanged:
+                            onToggled:
                             {
                                 layout.saveSetting(SettingKeys.SmoothScrolling,
-                                                   leftSelected == true ? leftProperty : rightProperty)
+                                                   currentlyOn === true ? onText : offText)
                             }
                         }
                         
@@ -434,21 +428,18 @@ Page
                         }
                         
                         
-                        MDualToggle
+                        MOnOffToggle
                         {
-                            id: loopAfterLastSwitch
+                            id: loopAfterLastToggle
                             property string savedValue: layout.getSavedSetting(SettingKeys.LoopAfterLastPage)
                             
                             Layout.topMargin: 4
-                            leftProperty: "OFF"
-                            rightProperty: "ON"
-                            leftSelected: savedValue == leftProperty
-                            rightSelected: savedValue == rightProperty
+                            onByDefault: savedValue === onText
                             
-                            onSelectedChanged:
+                            onToggled:
                             {
                                 layout.saveSetting(SettingKeys.LoopAfterLastPage,
-                                                   leftSelected == true ? leftProperty : rightProperty)
+                                                   currentlyOn === true ? onText : offText)
                             }
                         }
                         

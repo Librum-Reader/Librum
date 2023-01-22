@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 MFlickWrapper
@@ -115,16 +116,32 @@ MFlickWrapper
                         color: Style.colorBaseText
                     }
                     
-                    MDualToggle
+                    MOnOffToggle
                     {
-                        id: openBookAfterCreationSwitch
+                        id: openBookAfterCreationToggle
+                        property string savedValue: layout.getSavedSetting(SettingKeys.OpenBooksAfterCreation)
                         Layout.topMargin: 4
-                        leftProperty: "OFF"
-                        rightProperty: "ON"
-                        leftSelected: true
-                        rightSelected: false
+                        onByDefault: savedValue === onText
+                        
+                        onToggled:
+                        {
+                            layout.saveSetting(SettingKeys.OpenBooksAfterCreation,
+                                               currentlyOn === true ? onText : offText)
+                        }
                     }
                 }
+            }
+            
+            
+            // higher order functions -> simplify syntax
+            function saveSetting(key, value)
+            {
+                SettingsController.setSetting(key, value, SettingGroups.General);
+            }
+            
+            function getSavedSetting(key)
+            {
+                return SettingsController.getSetting(key, SettingGroups.General);
             }
         }
     }
