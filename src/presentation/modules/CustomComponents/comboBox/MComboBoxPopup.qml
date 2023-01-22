@@ -79,19 +79,22 @@ Popup
             Component.onCompleted:
             {
                 if(root.defaultIndex != -1)
-                    root.selectItem(listView.currentIndex);
+                {
+                    root.selectItem(listView.currentIndex, true);
+                }
             }
         }
     }
     
     
-    function selectItem(index)
+    function selectItem(index, initialSelect = false)
     {
         if(root.multiSelect)
             Logic.addItemToResult(index);
         
         Logic.changeSelectionMarker(index);
-        root.itemChanged();
+        if(!initialSelect)
+            root.itemChanged();
     }
     
     function deselectCurrenItem()
