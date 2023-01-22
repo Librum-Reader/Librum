@@ -15,10 +15,9 @@ namespace tests::adapters
 class SettingsServiceMock : public application::ISettingsService
 {
 public:
-    MOCK_METHOD(QString, getSetting, (const QString&, const QString&),
+    MOCK_METHOD(QString, getSetting, (SettingKeys, SettingGroups), (override));
+    MOCK_METHOD(void, setSetting, (SettingKeys, const QVariant&, SettingGroups),
                 (override));
-    MOCK_METHOD(void, setSetting,
-                (const QString&, const QString&, const QString&), (override));
     MOCK_METHOD(void, loadUserSettings, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearSettings, (), (override));
@@ -44,26 +43,158 @@ struct ASettingsController : public ::testing::Test
 TEST_F(ASettingsController, SucceedsGettingASetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    int group = static_cast<int>(SettingGroups::Appearance);
 
     // Expect
     EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(1);
 
+
     // Act
-    settingsController->getSetting(settingName);
+    settingsController->getSetting(key, group);
+}
+
+TEST_F(ASettingsController, FailsGettingASettingIfKeyIsAboveBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::SettingKeys_END) + 1;
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
+
+
+    // Act
+    auto result = settingsController->getSetting(key, group);
+
+    // Assert
+    EXPECT_TRUE(result.isEmpty());
+}
+
+TEST_F(ASettingsController, FailsGettingASettingIfKeyIsBelowBound)
+{
+    // Arrange
+    int key = -1;
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
+
+
+    // Act
+    auto result = settingsController->getSetting(key, group);
+
+    // Assert
+    EXPECT_TRUE(result.isEmpty());
+}
+
+TEST_F(ASettingsController, FailsGettingASettingIfGroupIsAboveBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
+
+
+    // Act
+    auto result = settingsController->getSetting(key, group);
+
+    // Assert
+    EXPECT_TRUE(result.isEmpty());
+}
+
+TEST_F(ASettingsController, FailsGettingASettingIfGroupIsBelowBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    int group = -1;
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
+
+
+    // Act
+    auto result = settingsController->getSetting(key, group);
+
+    // Assert
+    EXPECT_TRUE(result.isEmpty());
 }
 
 TEST_F(ASettingsController, SucceedsSettingASetting)
 {
     // Arrange
-    QString settingName = "SomeSetting";
-    QString settingValue = "SomeSetting";
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    QVariant value = 30;
+    int group = static_cast<int>(SettingGroups::Appearance);
 
     // Expect
     EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(1);
 
+
     // Act
-    settingsController->setSetting(settingName, settingValue);
+    settingsController->setSetting(key, value, group);
+}
+
+TEST_F(ASettingsController, FailsSettingASettingIfKeyIsAboveBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::SettingKeys_END) + 1;
+    QVariant value = 30;
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(0);
+
+
+    // Act
+    settingsController->setSetting(key, value, group);
+}
+
+TEST_F(ASettingsController, FailsSettingASettingIfKeyIsBelowBound)
+{
+    // Arrange
+    int key = -1;
+    QVariant value = 30;
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(0);
+
+
+    // Act
+    settingsController->setSetting(key, value, group);
+}
+
+TEST_F(ASettingsController, FailsSettingASettingIfGroupIsAboveBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    QVariant value = 30;
+    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(0);
+
+
+    // Act
+    settingsController->setSetting(key, value, group);
+}
+
+TEST_F(ASettingsController, FailsSettingASettingIfGroupIsBelowBound)
+{
+    // Arrange
+    int key = static_cast<int>(SettingKeys::DefaultZoom);
+    QVariant value = 30;
+    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, setSetting(_, _, _)).Times(0);
+
+
+    // Act
+    settingsController->setSetting(key, value, group);
 }
 
 }  // namespace tests::adapters
