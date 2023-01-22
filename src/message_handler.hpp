@@ -3,45 +3,69 @@
 #include <QDebug>
 #include <QFile>
 #include <QString>
+#include <QUrl>
 
 namespace logging
 {
 
 void logMessageToStdout(const QString& logLine);
 void logMessageToFile(const QString& logLine);
+QString getMsgTypeAsString(const QtMsgType& type);
+QString getFunctionNameFromSignature(const QString& signature);
 
 void messageHandler(QtMsgType type, const QMessageLogContext& context,
                     const QString& msg)
 {
-    // Redirect qml messages to stdout
+    // Redirect qml and debug messages to stdout
     QString fileName(context.file);
-    if(fileName.endsWith(".qml"))
+    if(fileName.endsWith(".qml") || type == QtDebugMsg)
     {
-        logMessageToStdout("Qml: " + msg);
+        logMessageToStdout("Librum: " + msg);
         return;
     }
 
-    QString logLine;
+    QString messageType = getMsgTypeAsString(type);
+    QString functionName = getFunctionNameFromSignature(context.function);
+
+    QString logMessage =
+        QString("%1 | %2 | %3 | %4 in '%5' at line: %6 | %7")
+            .arg(QDateTime::currentDateTime().toString("yyyy-MM-dd"),
+                 QDateTime::currentDateTime().toString("HH:mm:ss.zzz"))
+            .arg(messageType, -9)
+            .arg(QUrl(context.file).fileName(), -18)
+            .arg(functionName, -10)
+            .arg(context.line)
+            .arg(msg);
+
+    logMessageToFile(logMessage);
+}
+
+QString getFunctionNameFromSignature(const QString& signature)
+{
+    int functionNameStart = signature.lastIndexOf(':') + 1;
+    QString functionName = signature.mid(functionNameStart);
+
+    return functionName;
+}
+
+QString getMsgTypeAsString(const QtMsgType& type)
+{
     switch(type)
     {
     case QtInfoMsg:
-        logLine = QString("Info: %1").arg(msg);
-        break;
+        return "Info";
     case QtDebugMsg:
-        logLine = QString("Debug: %1").arg(msg);
-        break;
+        return "Debug";
     case QtWarningMsg:
-        logLine = QString("Warning: %1").arg(msg);
-        break;
+        return "Warning";
     case QtCriticalMsg:
-        logLine = QString("Critical: %1").arg(msg);
-        break;
+        return "Critical";
     case QtFatalMsg:
-        logLine = QString("Fatal: %1").arg(msg);
+        return "Fatal";
         break;
     }
 
-    logMessageToFile(logLine);
+    return "Unknown";
 }
 
 void logMessageToStdout(const QString& logLine)
@@ -50,16 +74,14 @@ void logMessageToStdout(const QString& logLine)
     out << logLine << Qt::endl;
 }
 
-void logMessageToFile(const QString& logLine)
+void logMessageToFile(const QString& logMessage)
 {
     QFile file("librum_log.txt");
     if(!file.open(QIODevice::WriteOnly | QIODevice::Append))
-        logMessageToStdout(logLine);  // Fallback
+        logMessageToStdout(logMessage);  // Fallback
 
     QTextStream logStream(&file);
-    QDateTime current = QDateTime::currentDateTime();
-    QString dateString = current.toString("dd.MM.yyyy - hh.mm.ss");
-    logStream << "(" << dateString << "): " << logLine << Qt::endl << Qt::endl;
+    logStream << logMessage << Qt::endl << Qt::endl;
 }
 
 }  // namespace logging
