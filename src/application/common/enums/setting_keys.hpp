@@ -14,6 +14,7 @@ Q_NAMESPACE
 
 enum class SettingKeys
 {
+    // Appearance
     Theme = 0,
     PageSpacing,
     DisplayBookTitleInTitlebar,
@@ -24,6 +25,13 @@ enum class SettingKeys
     SmoothScrolling,
     LoopAfterLastPage,
     CursorMode,
+
+    // General
+    OpenBooksAfterCreation,
+
+    // Shortcuts
+    Up,
+
     SettingKeys_END
 };
 
