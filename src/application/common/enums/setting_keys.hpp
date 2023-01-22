@@ -23,7 +23,8 @@ enum class SettingKeys
     DefaultZoom,
     SmoothScrolling,
     LoopAfterLastPage,
-    CursorMode
+    CursorMode,
+    SettingKeys_END
 };
 
 Q_ENUM_NS(SettingKeys)

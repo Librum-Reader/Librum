@@ -16,7 +16,8 @@ enum class SettingGroups
 {
     Appearance = 0,
     General,
-    Shortcuts
+    Shortcuts,
+    SettingGroups_END
 };
 
 Q_ENUM_NS(SettingGroups)
