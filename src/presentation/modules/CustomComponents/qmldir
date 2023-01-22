@@ -22,3 +22,4 @@ MRadioButton 1.0 MRadioButton.qml
 MRadioButtonSelector 1.0 MRadioButtonSelector.qml
 MRightClickMenu 1.0 rightClickMenu/MRightClickMenu.qml
 MRightClickMenuItem 1.0 rightClickMenu/MRightClickMenuItem.qml
+MOnOffToggle 1.0 MOnOffToggle.qml

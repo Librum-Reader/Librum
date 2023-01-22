@@ -92,5 +92,6 @@
         <file>readingPage/MPageView.qml</file>
         <file>loginPage/MLoginFailedPopup.qml</file>
         <file>readingPage/DocumentNavigation.js</file>
+        <file>modules/CustomComponents/MOnOffToggle.qml</file>
     </qresource>
 </RCC>
