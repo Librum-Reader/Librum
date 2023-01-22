@@ -14,6 +14,7 @@
 #include <memory>
 #include "app_information.hpp"
 #include "book_dto.hpp"
+#include "book_operation_status.hpp"
 #include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
@@ -23,6 +24,7 @@
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
 #include "page_item.hpp"
+#include "setting_keys.hpp"
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
@@ -104,8 +106,11 @@ int main(int argc, char* argv[])
                                  sidebarState.get());
 
     // Enums
-    qmlRegisterUncreatableMetaObject(application::staticMetaObject, "Librum.controllers",
+    qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",
                                      1, 0, "BookOperationStatus",
+                                     "This is an uncreatable enum!");
+    qmlRegisterUncreatableMetaObject(application::setting_keys::staticMetaObject, "Librum.controllers",
+                                     1, 0, "SettingKeys",
                                      "This is an uncreatable enum!");
 
 
