@@ -7,26 +7,29 @@
 // This causes not being able to register multiple enums to the Qt type system
 // and to QML (Q_NAMESPACE and Q_ENUM_NS), if they are in the same namespace.
 // The work around is to create a separate namespace for each enum.
-namespace application::book_operation_status
+namespace application::setting_keys
 {
 
 Q_NAMESPACE
 
-enum class BookOperationStatus
+enum class SettingKeys
 {
-    Success,
-    OpeningBookFailed,
-    BookDoesNotExist,
-    PropertyDoesNotExist,
-    TagDoesNotExist,
-    TagAlreadyExists,
-    OperationFailed
+    Theme = 0,
+    PageSpacing,
+    DisplayBookTitleInTitlebar,
+    LayoutDirection,
+    DisplayMode,
+    PageTransition,
+    DefaultZoom,
+    SmoothScrolling,
+    LoopAfterLastPage,
+    CursorMode
 };
 
-Q_ENUM_NS(BookOperationStatus)
+Q_ENUM_NS(SettingKeys)
 
-}  // namespace application::book_operation_status
+}  // namespace application::setting_keys
 
 // Because the enum shouldn't be in a separate namespace in the first place,
 // make the namespace available to all of its users to avoid syntactic clutter.
-using namespace application::book_operation_status;
+using namespace application::setting_keys;
