@@ -112,9 +112,11 @@ Item
     function removeFilters()
     {
         BookController.libraryModel.setFilterRequest("", "", "", false,
-                                                     false, false, false)
+                                                     false, false, false);
+        BookController.libraryModel.clearFilterTags();
         
         filterByButton.resetFilter();
         resetFiltersButton.visible = false;
+        resetTagsButton.visible = false;
     }
 }
