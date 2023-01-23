@@ -16,6 +16,7 @@ public:
 
     QString getSetting(int key, int group) override;
     void setSetting(int key, const QVariant& value, int group) override;
+    void resetSettingGroup(int group) override;
 
 private:
     bool keyIsValid(int key);

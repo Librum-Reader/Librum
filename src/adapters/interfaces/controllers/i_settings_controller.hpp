@@ -21,6 +21,10 @@ public:
     Q_INVOKABLE virtual QString getSetting(int key, int group) = 0;
     Q_INVOKABLE virtual void setSetting(int key, const QVariant& value,
                                         int group) = 0;
+    Q_INVOKABLE virtual void resetSettingGroup(int group) = 0;
+
+signals:
+    void reload();
 };
 
 }  // namespace adapters

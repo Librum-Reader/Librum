@@ -30,7 +30,18 @@ void SettingsController::setSetting(int key, const QVariant& value, int group)
 
     auto keyAsEnum = static_cast<SettingKeys>(key);
     auto groupAsEnum = static_cast<SettingGroups>(group);
-    return m_settingsService->setSetting(keyAsEnum, value, groupAsEnum);
+    m_settingsService->setSetting(keyAsEnum, value, groupAsEnum);
+}
+
+void SettingsController::resetSettingGroup(int group)
+{
+    if(!groupIsValid(group))
+        return;
+
+    auto groupAsEnum = static_cast<SettingGroups>(group);
+    m_settingsService->resetSettingGroup(groupAsEnum);
+
+    emit reload();
 }
 
 bool SettingsController::keyIsValid(int key)

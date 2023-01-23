@@ -17,6 +17,7 @@ public:
     QString getSetting(SettingKeys key, SettingGroups group) override;
     void setSetting(SettingKeys key, const QVariant& value,
                     SettingGroups group) override;
+    void resetSettingGroup(SettingGroups group) override;
     void clearSettings() override;
 
 public slots:

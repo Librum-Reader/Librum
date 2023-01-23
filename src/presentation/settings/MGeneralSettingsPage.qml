@@ -31,9 +31,28 @@ MFlickWrapper
         {
             id: layout
             property int insideMargin : 40
+            property var settings: []
             
             width: parent.width
             spacing: 0
+            
+            function registerSetting(setting)
+            {
+                settings.push(setting);
+            }
+            
+            
+            Connections
+            {
+                target: SettingsController
+                function onReload()
+                {
+                    for (var i = 0; i < layout.settings.length; i++)
+                    {
+                        layout.settings[i].reset();
+                    }
+                }
+            }
             
             
             RowLayout
@@ -128,6 +147,17 @@ MFlickWrapper
                             layout.saveSetting(SettingKeys.OpenBooksAfterCreation,
                                                currentlyOn === true ? onText : offText)
                         }
+                        
+                        function reset()
+                        {
+                            savedValue = layout.getSavedSetting(SettingKeys.OpenBooksAfterCreation);
+                            if(savedValue === onText)
+                                setOn();
+                            else
+                                setOff();
+                        }
+                        
+                        Component.onCompleted: layout.registerSetting(this);
                     }
                 }
             }
@@ -156,7 +186,7 @@ MFlickWrapper
         onKeepChoosed: close()
         onResetChoosed:
         {
-            // Reset settings
+            SettingsController.resetSettingGroup(SettingGroups.General);
             close();
         }
     }

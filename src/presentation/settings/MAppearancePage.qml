@@ -24,9 +24,28 @@ Page
     {
         id: layout
         property int insideMargin: 40
+        property var settings: []
         
         width: parent.width
         spacing: 0
+        
+        function registerSetting(setting)
+        {
+            settings.push(setting);
+        }
+        
+        
+        Connections
+        {
+            target: SettingsController
+            function onReload()
+            {
+                for (var i = 0; i < layout.settings.length; i++)
+                {
+                    layout.settings[i].reset();
+                }
+            }
+        }
         
         
         RowLayout
@@ -139,16 +158,27 @@ Page
                         MDualToggle
                         {
                             id: themeSwitch
-                            property string savedSetting: layout.getSavedSetting(SettingKeys.Theme)
+                            property string savedValue: layout.getSavedSetting(SettingKeys.Theme)
                             
                             Layout.topMargin: 4
                             leftProperty: "Dark"
                             rightProperty: "Light"
-                            leftSelected: savedSetting == "Dark"
-                            rightSelected: savedSetting == "Light"
+                            leftSelected: savedValue == leftProperty
+                            rightSelected: savedValue == rightProperty
                             
                             onSelectedChanged: (newSelected) => layout.saveSetting(SettingKeys.Theme,
                                                                                    newSelected)
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.Theme);
+                                if(savedValue === leftProperty)
+                                    selectLeft();
+                                else
+                                    selectRight();
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                     }   
                 }
@@ -202,10 +232,17 @@ Page
                             id: pageSpacingSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: parseInt(layout.getSavedSetting(SettingKeys.PageSpacing))
+                            value: layout.getSavedSetting(SettingKeys.PageSpacing)
                             
                             onNewValueSelected: layout.saveSetting(SettingKeys.PageSpacing,
                                                                    value)
+                            
+                            function reset()
+                            {
+                                value = layout.getSavedSetting(SettingKeys.PageSpacing);
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -232,6 +269,17 @@ Page
                                 layout.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
                                                    currentlyOn === true ? onText : offText)
                             }
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.DisplayBookTitleInTitlebar);
+                                if(savedValue === onText)
+                                    setOn();
+                                else
+                                    setOff();
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -257,6 +305,14 @@ Page
                             
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.LayoutDirection,
                                                                      currentSelected)
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.LayoutDirection);
+                                currentSelected = (savedValue === options[0] ? options[0] : options[1]);
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -278,10 +334,23 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Single Page", "Double Page"]
-                            currentSelected: savedValue === options[0] ? options[0] : options[1]
+                            currentSelected: getCurrentSelected()
                             
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.DisplayMode,
                                                                      currentSelected)
+                            
+                            function getCurrentSelected()
+                            {
+                                return savedValue === options[0] ? options[0] : options[1];
+                            }
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.DisplayMode);
+                                currentSelected = getCurrentSelected();
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -300,15 +369,6 @@ Page
                             id: pageTransitionComboBox
                             property string savedValue: layout.getSavedSetting(SettingKeys.PageTransition)
                             
-                            defaultIndex:
-                            {
-                                for(let i = 0; i < model.count; ++i)
-                                {
-                                    if(model.get(i).text === savedValue)
-                                        return i;
-                                }
-                            }
-                            
                             Layout.topMargin: 4
                             Layout.preferredHeight: 36
                             Layout.fillWidth: true
@@ -316,6 +376,7 @@ Page
                             titleFontSize: 12
                             titleSpacing: 4
                             image: Icons.dropdownGray
+                            defaultIndex: calculateDefaultIndex()
                             imageSize: 9
                             itemHeight: 32
                             fontSize: 12
@@ -331,6 +392,25 @@ Page
                             
                             onItemChanged: layout.saveSetting(SettingKeys.PageTransition,
                                                               text)
+                            
+                            function calculateDefaultIndex()
+                            {
+                                for(let i = 0; i < model.count; ++i)
+                                {
+                                    if(model.get(i).text === savedValue)
+                                        return i;
+                                }
+                                return -1;
+                            }
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.PageTransition);
+                                deselectCurrenItem();
+                                selectItem(calculateDefaultIndex());
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -347,12 +427,22 @@ Page
                         MSpinbox
                         {
                             id: defaultZoomSpinBox
+                            property int savedValue: layout.getSavedSetting(SettingKeys.DefaultZoom)
+                            
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: layout.getSavedSetting(SettingKeys.DefaultZoom)
+                            value: savedValue
                             
                             onNewValueSelected: layout.saveSetting(SettingKeys.DefaultZoom,
                                                                    value)
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.DefaultZoom);
+                                value = savedValue;
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                     }
                 }
@@ -414,6 +504,17 @@ Page
                                 layout.saveSetting(SettingKeys.SmoothScrolling,
                                                    currentlyOn === true ? onText : offText)
                             }
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.SmoothScrolling);
+                                if(savedValue === onText)
+                                    setOn();
+                                else
+                                    setOff();
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -441,6 +542,17 @@ Page
                                 layout.saveSetting(SettingKeys.LoopAfterLastPage,
                                                    currentlyOn === true ? onText : offText)
                             }
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.LoopAfterLastPage);
+                                if(savedValue === onText)
+                                    setOn();
+                                else
+                                    setOff();
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                         
                         Label
@@ -466,6 +578,14 @@ Page
                             
                             onNewCurrentSelected: layout.saveSetting(SettingKeys.CursorMode,
                                                                      currentSelected)
+                            
+                            function reset()
+                            {
+                                savedValue = layout.getSavedSetting(SettingKeys.CursorMode);
+                                currentSelected = (savedValue === options[0] ? options[0] : options[1]);
+                            }
+                            
+                            Component.onCompleted: layout.registerSetting(this);
                         }
                     }
                 }
@@ -494,7 +614,7 @@ Page
         onKeepChoosed: close()
         onResetChoosed:
         {
-            // Reset settings
+            SettingsController.resetSettingGroup(SettingGroups.Appearance);
             close();
         }
     }

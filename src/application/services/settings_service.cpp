@@ -41,6 +41,49 @@ void SettingsService::setSetting(SettingKeys key, const QVariant& value,
     m_settings->endGroup();
 }
 
+void SettingsService::resetSettingGroup(SettingGroups group)
+{
+    if(!m_settingsAreValid)
+        return;
+
+    QString defaultSettingFilePath;
+    switch(group)
+    {
+    case SettingGroups::Appearance:
+        defaultSettingFilePath = m_defaultAppearanceSettingsFilePath;
+        break;
+    case SettingGroups::General:
+        defaultSettingFilePath = m_defaultGeneralSettingsFilePath;
+        break;
+    case SettingGroups::Shortcuts:
+        defaultSettingFilePath = m_defaultShortcutsFilePath;
+        break;
+    case SettingGroups::SettingGroups_END:
+        qWarning() << "Called with invalid parameter";
+        return;
+    }
+
+    QJsonObject defaultSettings = getDefaultSettings(defaultSettingFilePath);
+    for(const auto& defaultSettingKey : defaultSettings.keys())
+    {
+        auto defaultSettingValue =
+            defaultSettings.value(defaultSettingKey).toString();
+
+        auto keyAsEnum = getValueForEnumName<SettingKeys>(defaultSettingKey);
+        if(keyAsEnum.has_value())
+        {
+            setSetting(keyAsEnum.value(), defaultSettingValue, group);
+        }
+        else
+        {
+            qWarning() << "Failed converting setting-key from default settings "
+                          "file with value: "
+                       << defaultSettingKey << " to an enum.";
+            continue;
+        }
+    }
+}
+
 void SettingsService::clearSettings()
 {
     m_settings->sync();

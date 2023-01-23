@@ -20,6 +20,7 @@ public:
     virtual QString getSetting(SettingKeys key, SettingGroups group) = 0;
     virtual void setSetting(SettingKeys key, const QVariant& value,
                             SettingGroups group) = 0;
+    virtual void resetSettingGroup(SettingGroups group) = 0;
     virtual void clearSettings() = 0;
 
 public slots:
