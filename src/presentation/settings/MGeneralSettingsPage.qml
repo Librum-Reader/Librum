@@ -77,12 +77,12 @@ MFlickWrapper
                 MButton
                 {
                     id: resetButton
-                    Layout.preferredWidth: 82
+                    Layout.preferredWidth: 160
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignBottom
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
-                    text: "Reset"
+                    text: "Restore Defaults"
                     fontSize: 12
                     fontWeight: Font.Bold
                     fontColor: Style.colorBackground
