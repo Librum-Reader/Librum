@@ -25,4 +25,14 @@ Item
         
         onSelectedChanged: root.toggled()
     }
+    
+    function setOn()
+    {
+        dualToggle.selectRight();
+    }
+    
+    function setOff()
+    {
+        dualToggle.selectLeft();
+    }
 }

@@ -192,4 +192,14 @@ Item
             root.selectedChanged(root.leftProperty);
         }
     }
+    
+    function selectLeft()
+    {
+        selectLeftAnimation.start();
+    }
+    
+    function selectRight()
+    {
+        selectRightAnimation.start();
+    }
 }
