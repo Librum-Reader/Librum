@@ -6,6 +6,7 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Xml PrintSupport Test R
 # Build tests
 add_executable(application_unit_tests
                     main.cpp
+                    ${PROJECT_SOURCE_DIR}/resources.qrc
                     services/book_service_tests.hpp
                     services/user_service_tests.hpp
                     services/settings_service_tests.hpp
