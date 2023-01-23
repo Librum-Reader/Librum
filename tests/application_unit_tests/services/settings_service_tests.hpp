@@ -17,7 +17,7 @@ struct ASettingsService : public ::testing::Test
     void SetUp() override
     {
         settingsService = std::make_unique<SettingsService>();
-        settingsService->loadUserSettings(testingEmail, "");
+        settingsService->loadUserSettings("", testingEmail);
     }
 
     void TearDown() override
@@ -29,7 +29,7 @@ struct ASettingsService : public ::testing::Test
     std::unique_ptr<SettingsService> settingsService;
 
 private:
-    QString testingEmail = "LibrumTestEmail@librum.com.fake";
+    QString testingEmail = "LibrumTestEmail@librum.fake";
 };
 
 TEST_F(ASettingsService, SucceedsSettingASetting)
@@ -125,6 +125,48 @@ TEST_F(ASettingsService, FailsGettingASettingIfSettingsAreInvalid)
 
     // Assert
     EXPECT_TRUE(result.isEmpty());
+}
+
+TEST_F(ASettingsService, SucceedsResettingSettingGroup)
+{
+    // Arrange
+    auto firstKey = SettingKeys::CursorMode;
+    auto secondKey = SettingKeys::DefaultZoom;
+    auto thirdKey = SettingKeys::Theme;
+
+    auto group = SettingGroups::Appearance;
+
+    // Get default data
+    QString firstDefaultValue = settingsService->getSetting(firstKey, group);
+    QString secondDefaultValue = settingsService->getSetting(secondKey, group);
+    QString thirdDefaultValue = settingsService->getSetting(thirdKey, group);
+
+    // Change default data
+    settingsService->setSetting(firstKey, "SomeValue", group);
+    settingsService->setSetting(secondKey, "SomeOtherValue", group);
+    settingsService->setSetting(thirdKey, "AnotherValue", group);
+
+    // Act
+    settingsService->resetSettingGroup(group);
+
+    // Assert
+    auto firstAfterReset = settingsService->getSetting(firstKey, group);
+    auto secondAfterReset = settingsService->getSetting(secondKey, group);
+    auto thirdAfterReset = settingsService->getSetting(thirdKey, group);
+
+    EXPECT_EQ(firstDefaultValue, firstAfterReset);
+    EXPECT_EQ(secondDefaultValue, secondAfterReset);
+    EXPECT_EQ(thirdDefaultValue, thirdAfterReset);
+}
+
+TEST_F(ASettingsService, FailsResettingSettingGroupIfSettingsAreInvalid)
+{
+    // Arrange
+    auto group = SettingGroups::Appearance;
+
+    // Act
+    settingsService->clearSettings();  // Invalidate settings
+    settingsService->resetSettingGroup(group);  // Fails resetting
 }
 
 }  // namespace tests::application

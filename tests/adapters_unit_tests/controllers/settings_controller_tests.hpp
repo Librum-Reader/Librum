@@ -1,6 +1,7 @@
 #pragma once
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <QSignalSpy>
 #include <QString>
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
@@ -18,6 +19,7 @@ public:
     MOCK_METHOD(QString, getSetting, (SettingKeys, SettingGroups), (override));
     MOCK_METHOD(void, setSetting, (SettingKeys, const QVariant&, SettingGroups),
                 (override));
+    MOCK_METHOD(void, resetSettingGroup, (SettingGroups), (override));
     MOCK_METHOD(void, loadUserSettings, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearSettings, (), (override));
@@ -195,6 +197,41 @@ TEST_F(ASettingsController, FailsSettingASettingIfGroupIsBelowBound)
 
     // Act
     settingsController->setSetting(key, value, group);
+}
+
+TEST_F(ASettingsController, SucceedsResettingSettingGroup)
+{
+    // Arrange
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    QSignalSpy spy(settingsController.get(), &SettingsController::reload);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, resetSettingGroup(_)).Times(1);
+
+    // Act
+    settingsController->resetSettingGroup(group);
+
+    // Assert
+    EXPECT_EQ(1, spy.count());
+}
+
+TEST_F(ASettingsController, FailsResettingSettingGroupIfGroupIsInvalid)
+{
+    // Arrange
+    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
+
+    QSignalSpy spy(settingsController.get(), &SettingsController::reload);
+
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, resetSettingGroup(_)).Times(0);
+
+    // Act
+    settingsController->resetSettingGroup(group);
+
+    // Assert
+    EXPECT_EQ(0, spy.count());
 }
 
 }  // namespace tests::adapters
