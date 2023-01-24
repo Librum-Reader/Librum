@@ -8,14 +8,13 @@ Item
     id: root
     signal checkBoxClicked
     
-    implicitWidth:  1714
+    implicitWidth: 1714
     implicitHeight: 36
+    
     
     RowLayout
     {
-        id: mainLayout
-        property int popUpTopSpacing : 6
-        
+        id: layout
         anchors.fill: parent
         spacing: 12
         
@@ -24,23 +23,24 @@ Item
         {
             id: checkBox
             
-            onChecked: checkBoxClicked();
+            onChecked: checkBoxClicked()
         }
         
         MExplorerFilterByButton
         {
             id: filterByButton
-            onClicked: (filterByPopup.opened) ? filterByPopup.close() : filterByPopup.open()
+            onClicked: filterByPopup.opened ? filterByPopup.close() : filterByPopup.open()
+            
             
             MExplorerFilterByPopup
             {
                 id: filterByPopup
-                y: filterByButton.y + filterByButton.height + mainLayout.popUpTopSpacing
+                y: filterByButton.y + filterByButton.height + internal.filterPopupTopSpacing
                 closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
                 
                 onFilterQuerySent:
                 {
-                    close();
+                    filterByPopup.close();
                     resetFiltersButton.visible = true;
                 }
             }
@@ -61,7 +61,7 @@ Item
         
         Item
         {
-            id: spacer
+            id: widthFiller
             Layout.fillWidth: true
         }
         
@@ -69,7 +69,13 @@ Item
         {
              id: searchButton
 
-             expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
+             expansionWidth: (widthFiller.width <= 445 ? widthFiller.width : 445)
         }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int filterPopupTopSpacing: 6
     }
 }

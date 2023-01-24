@@ -13,29 +13,26 @@ Popup
     
     padding: 0
     implicitWidth: 273
-    implicitHeight: mainLayout.height
-    background: Rectangle
-    {
-        color: "transparent"
-    }
+    implicitHeight: layout.height
+    background: Rectangle { color: "transparent" }
     
     
     MFlickWrapper
     {
         anchors.fill: parent
-        contentHeight: mainLayout.height
+        contentHeight: layout.height
+        
         
         ColumnLayout
         {
-            id: mainLayout
-            property int popUpTopSpacing: 6        
-            
+            id: layout
             width: parent.width
             spacing: 0
             
             
             Image
             {
+                id: topTriangleDecoration
                 Layout.leftMargin: 14
                 Layout.bottomMargin: -1
                 source: Icons.dropupLightGray
@@ -58,7 +55,7 @@ Popup
                 
                 ColumnLayout
                 {
-                    id: itemLayout
+                    id: inputLayout
                     width: parent.width
                     spacing: 11
                     
@@ -90,7 +87,7 @@ Popup
                         
                         MLabeledInputBox
                         {
-                            id: frominput
+                            id: yearFromInput
                             Layout.fillWidth: true
                             boxHeight: 30
                             headerToBoxSpacing: 2
@@ -106,10 +103,9 @@ Popup
                             borderRadius: 4
                         }
                         
-                        
                         MLabeledInputBox
                         {
-                            id: toInput
+                            id: yearToInput
                             Layout.fillWidth: true
                             boxHeight: 30
                             headerToBoxSpacing: 2

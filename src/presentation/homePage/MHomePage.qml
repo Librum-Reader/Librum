@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Qt.labs.platform 1.0
-import QtQml.Models 2.15
 import CustomComponents 1.0
 import Librum.elements 1.0
 import Librum.style 1.0
@@ -16,23 +15,22 @@ import "tags"
 Page
 {
     id: root
-    property bool empty: BookController.bookCount === 0
-    
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 20
     background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
+    
     Shortcut
     {
         sequence: StandardKey.New
-        onActivated: fileDialog.open()
+        onActivated: importFilesDialog.open()
     }
     
     
     ColumnLayout
     {
-        id: contentLayout
+        id: layout
         anchors.fill: parent
         spacing: 0
         
@@ -43,9 +41,10 @@ Page
             Layout.fillWidth: true
             spacing: 0
             
+            
             MTitle
             {
-                id: title
+                id: pageTitle
                 Layout.topMargin: 44
                 titleText: "Home"
                 descriptionText: "You have " + BookController.bookCount + " books"
@@ -68,7 +67,7 @@ Page
                 fontSize: 13
                 imagePath: Icons.plusWhite
                 
-                onClicked: fileDialog.open()
+                onClicked: importFilesDialog.open()
             }
         }
         
@@ -77,7 +76,7 @@ Page
         MToolbar
         {
             id: toolbar
-            visible: !root.empty
+            visible: !internal.libraryIsEmpty
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             z: 2
@@ -92,25 +91,18 @@ Page
             Layout.fillHeight: true
             Layout.minimumHeight: 100
             Layout.topMargin: 30
-            visible: !root.empty && bookGrid.count != 0
+            visible: !internal.libraryIsEmpty && bookGrid.count != 0
             padding: 0
-            background: Rectangle
-            {
-                color: "transparent"
-            }
+            background: Rectangle { color: "transparent" }
+            
             
             GridView
             {
                 id: bookGrid
-                property int bookWidth: 190
-                property int bookHeight: 300
-                property int horizontalSpacing: 64
-                property int verticalSpacing: 48
-                
                 anchors.fill: parent
-                cellWidth: bookWidth + horizontalSpacing
-                cellHeight: bookHeight + verticalSpacing
-                rightMargin: -horizontalSpacing
+                cellWidth: internal.bookWidth + internal.horizontalBookSpacing
+                cellHeight: internal.bookHeight + internal.verticalBookSpacing
+                rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
                 flickDeceleration: 3500
@@ -119,193 +111,103 @@ Page
                 model: BookController.libraryModel
                 delegate: MBook
                 {
-                    id: bookDel
+                    id: bookDelegate
                     
                     onLeftButtonClicked:
                     {
                         if(model.downloaded)
                         {
                             Globals.selectedBook = BookController.getBook(model.uuid);
-                            bookGrid.openBook();
+                            internal.openBook();
                         }
                         else
                         {
-                            ;
+                            // TODO: Download book
                         }
                     }
                     
+                    /*
+                      When right-clicking a book, open the bookOptions popup
+                      */
                     onRightButtonClicked:
                         (index, mouse) =>
                         {
+                            // Calculate where to spawn the bookOptions popup and set its position
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             let absoluteMousePosition = mapToItem(root, mouse.x, mouse.y);
                             bookOptionsPopup.setSpawnPosition(currentMousePosition, absoluteMousePosition, root);
-                            bookDel.openBookOptions();
+                            
+                            // Open the bookOptions
+                            internal.openBookOptionsPopup(model);
                         }
                     
+                    /*
+                      When clicking more options, open the bookOptions popup
+                      */
                     onMoreOptionClicked:
                         (index, mouse) =>
                         {
+                            // Calculate where to spawn the bookOptions popup and set its position
                             let currentMousePosition = mapToItem(bookGridContainer, mouse.x, mouse.y);
                             bookOptionsPopup.x = currentMousePosition.x - bookOptionsPopup.implicitWidth / 2;
                             bookOptionsPopup.y = currentMousePosition.y - bookOptionsPopup.implicitHeight - 6;
-                            bookDel.openBookOptions();
+                            
+                            // Open the bookOptions
+                            internal.openBookOptionsPopup(model);
                         }
-                    
-                    function openBookOptions()
-                    {
-                        Globals.selectedBook = BookController.getBook(model.uuid);
-                        Globals.bookTags = Qt.binding(function () { return model.tags; });
-                        bookOptionsPopup.open();
-                    }
                 }
                 
-                
-                MRightClickMenu
+                /*
+                  The options menu when e.g. right-clicking a book
+                  */
+                MBookRightClickPopup
                 {
                     id: bookOptionsPopup
-                    property bool bookDownloaded: true
                     
-                    implicitHeight: bookDownloaded ? 245 : 181
-                    visible: false
-                    
-                    onOpened: bookDownloaded = Globals.selectedBook.downloaded
-                    
-                    
-                    objectModel: ObjectModel
+                    onDownloadClicked:
                     {
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            height: bookOptionsPopup.bookDownloaded ? 0 : implicitHeight
-                            visible: !bookOptionsPopup.bookDownloaded
-                            imagePath: Icons.downloadDarkGray
-                            imageSize: 18
-                            text: "Download"
-                            
-                            onClicked: 
-                            {
-                                ;
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
-                            visible: bookOptionsPopup.bookDownloaded
-                            imagePath: Icons.bookOpen
-                            imageSize: 17
-                            text: "Read book"
-                            
-                            onClicked: bookGrid.openBook()
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            imagePath: Icons.book
-                            imageSize: 14
-                            text: "Book details"
-                            
-                            onClicked: {
-                                bookDetailsPopup.open();
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
-                            visible: bookOptionsPopup.bookDownloaded
-                            Layout.bottomMargin: 4
-                            imagePath: Icons.addFile
-                            imageSize: 14
-                            text: "Save to files"
-                            
-                            onClicked:
-                            {
-                                downloadFileDialog.open();
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        Item { id: rectMargin1; height: 4; width: bookOptionsPopup.width }
-                        
-                        Rectangle { width: bookOptionsPopup.width; height: 1; color: Style.colorLightBorder }
-                        
-                        Item { id: rectMargin2; height: 4; width: bookOptionsPopup.width }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            Layout.topMargin: 4
-                            imagePath: Icons.tagGray
-                            imageSize: 16
-                            text: "Manage tags"
-                            
-                            onClicked:
-                            {
-                                manageTagsPopup.open();
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            imagePath: Icons.checkCircle
-                            imageSize: 17
-                            text: "Mark as read"
-                            
-                            onClicked:
-                            {
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            height: bookOptionsPopup.bookDownloaded ? implicitHeight : 0
-                            visible: bookOptionsPopup.bookDownloaded
-                            imagePath: Icons.closeDarkgray
-                            imageSize: 12
-                            text: "Uninstall"
-                            
-                            onClicked:
-                            {
-                                BookController.uninstallBook(Globals.selectedBook.uuid);
-                                bookOptionsPopup.close();
-                            }
-                        }
-                        
-                        MRightClickMenuItem
-                        {
-                            width: bookOptionsPopup.width
-                            imagePath: Icons.trashGray
-                            imageSize: 16
-                            text: "Delete book"
-                            
-                            onClicked:
-                            {
-                                acceptDeletionPopup.open();
-                                bookOptionsPopup.close();
-                            }
-                        }
+                        close();
                     }
-                }
-                
-                
-                function openBook()
-                {
-                    if(bookOptionsPopup.opened)
-                        bookOptionsPopup.close();
                     
-                    BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
-                    loadPage(readingPage);
+                    onReadBookClicked:
+                    {
+                        internal.openBook()
+                    }
+                    
+                    onBookDetailsClicked:
+                    {
+                        bookDetailsPopup.open();
+                        close();
+                    }
+                    
+                    onSaveToFilesClicked:
+                    {
+                        downloadFileDialog.open();
+                        close();
+                    }
+                    
+                    onManageTagsClicked:
+                    {
+                        manageTagsPopup.open();
+                        close();
+                    }
+                    
+                    onMarkAsReadClicked:
+                    {
+                        close();
+                    }
+                    
+                    onUninstallClicked:
+                    {
+                        BookController.uninstallBook(Globals.selectedBook.uuid);
+                        close();
+                    }
+                    
+                    onDeleteClicked:
+                    {
+                        acceptDeletionPopup.open();
+                        close();
+                    }
                 }
             }
         }
@@ -313,62 +215,23 @@ Page
         MEmptyScreenContent
         {
             id: emptyScreenContent
-            visible: root.empty
+            visible: internal.libraryIsEmpty
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.topMargin: 32
             
-            onClicked:
-            {
-                fileDialog.open();
-            }
+            onClicked: importFilesDialog.open();
         }
         
-        Item
+        MNoBookSatisfiesFilterItem
         {
-            id: noBookAfterFilter
-            visible: BookController.bookCount !== 0 && bookGrid.count == 0
-            Layout.preferredHeight: noBookAfterFilterLayout.height
-            Layout.preferredWidth: noBookStatisfiesFilterText.implicitWidth
+            id: noBookSatisfiesFilterItem
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
-            Layout.topMargin: Math.round(root.height / 4.2) - noBookAfterFilterLayout.height
+            Layout.topMargin: Math.round(root.height / 3) - implicitHeight
+            visible: bookGrid.count == 0 && BookController.bookCount !== 0
             
-            ColumnLayout
-            {
-                id: noBookAfterFilterLayout
-                anchors.fill: parent
-                spacing: 20
-                
-                Label
-                {
-                    id: noBookStatisfiesFilterText
-                    text: "No book satisfies the filter conditions"
-                    color: Style.colorBaseTitle
-                    font.pointSize: 22
-                    font.weight: Font.Medium
-                }
-                
-                MButton
-                {
-                    id: removeFilterButton
-                    Layout.preferredWidth: 170
-                    Layout.preferredHeight: 38
-                    Layout.alignment: Qt.AlignHCenter
-                    backgroundColor: Style.colorLightPurple
-                    opacityOnPressed: 0.75
-                    borderColor: Style.colorMediumPurple
-                    text: "Remove Filters"
-                    fontColor: Style.colorBasePurple
-                    fontWeight: Font.Bold
-                    fontSize: 12.5
-                    imagePath: Icons.closePurple
-                    imageSize: 11
-                    imageToRight: true
-                    
-                    onClicked: toolbar.removeFilters()
-                }
-            }
+            onClearFilters: toolbar.removeFilters()
         }
         
         Item
@@ -411,7 +274,7 @@ Page
     
     FileDialog
     {
-        id: fileDialog
+        id: importFilesDialog
         acceptLabel: "Import"
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
@@ -426,6 +289,33 @@ Page
             {
                 BookController.addBook(files[i]);
             }
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property bool libraryIsEmpty: BookController.bookCount === 0
+        
+        property int bookWidth: 190
+        property int bookHeight: 300
+        property int horizontalBookSpacing: 64
+        property int verticalBookSpacing: 48
+        
+        function openBookOptionsPopup(item)
+        {
+            Globals.selectedBook = BookController.getBook(item.uuid);
+            Globals.bookTags = Qt.binding(function () { return item.tags; });
+            bookOptionsPopup.open();
+        }
+        
+        function openBook()
+        {
+            if(bookOptionsPopup.opened)
+                bookOptionsPopup.close();
+            
+            BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
+            loadPage(readingPage);
         }
     }
 }

@@ -9,17 +9,10 @@ import Librum.icons 1.0
 Popup
 {
     id: root
-    property int contentPadding: 16
-    
     implicitWidth: 751
     implicitHeight: layout.height
-    focus: true
     padding: 0
-    background: Rectangle
-    {
-        radius: 6
-        color: Style.colorBackground
-    }
+    background: Rectangle { radius: 6; color: Style.colorBackground }
     
     modal: true
     Overlay.modal: Rectangle
@@ -28,11 +21,12 @@ Popup
         opacity: 1
     }
     
-    onOpenedChanged: if(opened) downloadButton.forceActiveFocus()
+    onOpened: downloadButton.forceActiveFocus()
     
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
         
@@ -46,15 +40,15 @@ Popup
             
             MButton
             {
-                id: closeButton
+                id: closePopupButton
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: 32
                 Layout.topMargin: 12
                 Layout.rightMargin: 14
-                Layout.alignment: Qt.AlignTop | Qt.AlignRight
+                Layout.alignment: Qt.AlignRight
                 backgroundColor: "transparent"
-                opacityOnPressed: 0.7
                 borderColor: "transparent"
+                opacityOnPressed: 0.7
                 radius: 6
                 borderColorOnPressed: Style.colorLightBorder
                 imagePath: Icons.closeBlack
@@ -67,15 +61,9 @@ Popup
             {
                 id: content
                 Layout.fillWidth: true
-                Layout.topMargin: 18
-                topPadding: 0
                 horizontalPadding: 52
                 bottomPadding: 42
-                background: Rectangle
-                {
-                    color: "transparent"
-                    radius: 6
-                }
+                background: Rectangle { color: "transparent"; radius: 6 }
                 
                 
                 ColumnLayout
@@ -87,6 +75,7 @@ Popup
                     Label
                     {
                         id: title
+                        Layout.topMargin: 6
                         text: "Download book"
                         font.weight: Font.Bold
                         font.pointSize: 17
@@ -95,7 +84,7 @@ Popup
                     
                     RowLayout
                     {
-                        id: bookInformation
+                        id: bookInformationLayout
                         spacing: 28
                         Layout.fillWidth: true
                         Layout.topMargin: 32
@@ -103,7 +92,7 @@ Popup
                         
                         Rectangle
                         {
-                            id: bookCoverContainer
+                            id: bookCoverArea
                             Layout.preferredWidth: 198
                             Layout.preferredHeight: 258
                             color: Style.colorLightBorder
@@ -114,16 +103,15 @@ Popup
                                 id: bookCover
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
-                                sourceSize.height: bookCoverContainer.height - 2
+                                sourceSize.height: bookCoverArea.height - 2
                                 source: Icons.bookCover
                                 fillMode: Image.PreserveAspectFit
                             }
                         }
                         
-                        
                         ScrollView
                         {
-                            id: bookInformationLayout
+                            id: bookInformation
                             Layout.preferredHeight: 263
                             Layout.fillWidth: true
                             Layout.topMargin: -4
@@ -131,6 +119,7 @@ Popup
                             clip: true
                             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
                             
+                            // contentItem is the underlying flickable of ScrollView
                             Component.onCompleted: contentItem.maximumFlickVelocity = 600
                             
                             
@@ -273,10 +262,9 @@ Popup
                         }
                     }
                     
-                    
                     ColumnLayout
                     {
-                        id: contentFieldLayout
+                        id: bookDescriptionLayout
                         Layout.fillWidth: true
                         Layout.topMargin: 28
                         spacing: 3
@@ -284,7 +272,7 @@ Popup
                         
                         Label
                         {
-                            id: contentFieldHeader
+                            id: bookDescriptionHeader
                             Layout.fillWidth: true
                             text: "Content"
                             font.pointSize: 11.5
@@ -294,7 +282,7 @@ Popup
                         
                         Rectangle
                         {
-                            id: contentField
+                            id: bookDescriptionField
                             Layout.fillWidth: true
                             Layout.preferredHeight: 78
                             color: "transparent"
@@ -305,7 +293,7 @@ Popup
                             
                             TextArea
                             {
-                                id: contentTextArea
+                                id: bookDescriptionTextArea
                                 anchors.fill: parent
                                 leftPadding: 12
                                 rightPadding: 12
@@ -313,68 +301,53 @@ Popup
                                 bottomPadding: 8
                                 selectByMouse: true
                                 text: "Your habits determine your character and later define" +
-                                " your life. Don’t blame outside factors when you fail in life." +
-                                " Also, don’t think that succeeding in one area of your life will" +
-                                " mean that you’re destined for triumph."
+                                      " your life. Don’t blame outside factors when you fail in life." +
+                                      " Also, don’t think that succeeding in one area of your life will" +
+                                      " mean that you’re destined for triumph."
                                 wrapMode: Text.WordWrap
                                 color: Style.colorLightText3
                                 font.pointSize: 12
-                                
                                 readOnly: true
+                                
                                 background: Rectangle   
                                 {   
                                     anchors.fill: parent
-                                    radius: contentField.radius
+                                    radius: bookDescriptionField.radius
                                     color: "transparent"
                                 }
                             }
                         }
                     }
                     
-                    
                     RowLayout
                     {
-                        id: buttonLayout
+                        id: buttonsLayout
                         Layout.topMargin: 42
                         spacing: 16
                         
-                        
+                        /*
+                          Download button, the color/border changes if the button is focused
+                          */
                         MButton
                         {
                             id: downloadButton
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: 38
                             active: true
-                            borderWidth: active ? 0 : 1
-                            borderColor: Style.colorLightBorder
-                            backgroundColor: active ? Style.colorBasePurple : "transparent"
                             text: "Download"
                             fontColor: active ? Style.colorBrightText : Style.colorLightText2
                             fontWeight: Font.Bold
                             fontSize: 12
+                            borderColor: Style.colorLightBorder
+                            borderWidth: active ? 0 : 1
+                            backgroundColor: active ? Style.colorBasePurple : "transparent"
                             imagePath: active ? Icons.downloadWhite : Icons.downloadGray
                             imageSize: 18
                             
-                            onClicked: downloadButton.downloadAction()
-                            Keys.onReturnPressed: downloadButton.downloadAction()
-                            
-                            Keys.onRightPressed:
-                            {
-                                downloadButton.active = false;
-                                cancelButton.active = true;
-                                cancelButton.giveFocus();
-                            }
-                            Keys.onTabPressed: 
-                            {
-                                downloadButton.active = false;
-                                cancelButton.active = true;
-                                cancelButton.giveFocus();
-                            }
-                            
-                            function downloadAction()
-                            {
-                                root.close();
-                            }
+                            onClicked: internal.downloadBook()
+                            Keys.onReturnPressed: internal.downloadBook()
+                            Keys.onRightPressed: internal.giveFocusToCancelButton()
+                            Keys.onTabPressed: internal.giveFocusToCancelButton()
                         }
                         
                         MButton
@@ -393,23 +366,36 @@ Popup
                             
                             onClicked: root.close()                            
                             Keys.onReturnPressed: root.close()
-                            
-                            Keys.onLeftPressed:
-                            {
-                                cancelButton.active = false;
-                                downloadButton.active = true;
-                                downloadButton.giveFocus();
-                            }
-                            Keys.onTabPressed: 
-                            {
-                                downloadButton.active = true;
-                                cancelButton.active = false;
-                                downloadButton.giveFocus();
-                            }
+                            Keys.onLeftPressed: internal.giveFocusToDownloadButton()
+                            Keys.onTabPressed: internal.giveFocusToDownloadButton()
                         }
                     }
                 }
             }
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        function downloadBook()
+        {
+            // TODO: Implement
+        }
+        
+        function giveFocusToCancelButton()
+        {
+            downloadButton.active = false;
+            cancelButton.active = true;
+            cancelButton.giveFocus();
+        }
+        
+        function giveFocusToDownloadButton()
+        {
+            cancelButton.active = false;
+            downloadButton.active = true;
+            downloadButton.giveFocus();
         }
     }
 }

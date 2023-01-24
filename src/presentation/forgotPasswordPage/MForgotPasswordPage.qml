@@ -9,7 +9,7 @@ import Librum.icons 1.0
 MFlickWrapper
 {
     id: root
-    contentHeight: (Window.height < layout.implicitHeight ? layout.implicitHeight + page.bottomPadding : Window.height)
+    contentHeight: internal.calculatePageContentHeight()
     
     
     Page
@@ -27,13 +27,13 @@ MFlickWrapper
         Shortcut
         {
             sequence: "Ctrl+Return"
-            onActivated: sendEmailButton.buttonTriggeredAction()
+            onActivated: internal.sendPasswordResetEmail()
         }
         
         Shortcut
         {
             sequence: "Ctrl+Backspace"
-            onActivated: backButton.buttonTriggeredAction()
+            onActivated: internal.backToLoginPage()
         }
         
         
@@ -56,7 +56,7 @@ MFlickWrapper
             
             Pane
             {
-                id: backgroundRect
+                id: background
                 Layout.preferredWidth: 542
                 topPadding: 86
                 bottomPadding: 28
@@ -70,9 +70,7 @@ MFlickWrapper
                 
                 ColumnLayout
                 {
-                    id: inRectLayout
-                    property int inRectMargin: 71
-                    
+                    id: backgroundLayout
                     width: parent.width
                     
                     
@@ -89,7 +87,7 @@ MFlickWrapper
                     
                     Label
                     {
-                        id: resetText
+                        id: resetPasswordText
                         Layout.preferredWidth: 450
                         Layout.topMargin: 8
                         Layout.alignment: Qt.AlignHCenter
@@ -106,8 +104,8 @@ MFlickWrapper
                     {
                         id: inputColumn
                         Layout.fillWidth: true
-                        Layout.leftMargin: inRectLayout.inRectMargin
-                        Layout.rightMargin: inRectLayout.inRectMargin
+                        Layout.leftMargin: internal.inWindowPadding
+                        Layout.rightMargin: internal.inWindowPadding
                         Layout.topMargin: 12
                         Layout.alignment: Qt.AlignHCenter
                         spacing: 0
@@ -134,12 +132,10 @@ MFlickWrapper
                         Label
                         {
                             id: successText
-                            property string email : ""
-                            
                             Layout.topMargin: 10
                             visible: false
-                            text: "Email sent to: " + email
-                            color: "green"
+                            text: "Email sent to: " + "placeholder@librum.com"
+                            color: Style.colorMediumGreen
                             font.pointSize: 11.75
                         }
                         
@@ -157,15 +153,7 @@ MFlickWrapper
                             fontColor: Style.colorBrightText
                             fontWeight: Font.Bold
                             
-                            onClicked: buttonTriggeredAction()
-                            
-                            
-                            function buttonTriggeredAction()
-                            {
-                                successText.email = emailInput.text;
-                                successText.visible = true;
-                                emailInput.clearText();
-                            }
+                            onClicked: internal.sendPasswordResetEmail()
                         }
                         
                         
@@ -189,16 +177,35 @@ MFlickWrapper
                             imageRotation: 180
                             imageSpacing: 4
                             
-                            onClicked: buttonTriggeredAction()
-                            
-                            function buttonTriggeredAction()
-                            {
-                                loadPage(loginPage)
-                            }
+                            onClicked: internal.backToLoginPage()
                         }
                     }
                 }
             }
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int inWindowPadding: 71
+        
+        function sendPasswordResetEmail()
+        {
+            successText.email = emailInput.text;
+            successText.visible = true;
+            emailInput.clearText();
+        }
+        
+        function backToLoginPage()
+        {
+            loadPage(loginPage);
+        }
+        
+        function calculatePageContentHeight()
+        {
+            return Window.height < layout.implicitHeight ? 
+                        layout.implicitHeight + page.bottomPadding : Window.height
         }
     }
 }

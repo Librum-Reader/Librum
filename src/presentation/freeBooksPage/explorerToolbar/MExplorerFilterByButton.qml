@@ -8,7 +8,7 @@ import Librum.icons 1.0
 Item
 {
     id: root
-    property bool opened : false
+    property bool opened: false
     signal clicked()
     
     implicitWidth: 100

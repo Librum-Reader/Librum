@@ -14,10 +14,13 @@ Item
     ColumnLayout
     {
         id: layout
-        width: parent.width
-        height: parent.height
+        anchors.fill: parent
         spacing: 0
         
+        /**
+          A rectangle with rounded corners which is overlapping with the top half of
+          the book to create a a rounded top, while the rest of the book is rectangluar
+          */
         Rectangle
         {
             id: upperBookPartRounding
@@ -27,9 +30,12 @@ Item
             color: Style.colorLightBorder
         }
         
+        /**
+          The upper book half which contains the book cover
+          */
         Rectangle
         {
-            id: upperRect
+            id: bookCoverRect
             Layout.fillWidth: true
             Layout.preferredHeight: 230
             Layout.topMargin: -6
@@ -37,7 +43,6 @@ Item
             
             ColumnLayout
             {
-                id: topLayout
                 anchors.centerIn: parent
                 spacing: 0
                 
@@ -53,10 +58,12 @@ Item
             }
         }
         
-        
+        /**
+          The lower book half which contains the book information
+          */
         Rectangle
         {
-            id: lowerRect
+            id: informationRect
             Layout.fillWidth: true
             Layout.preferredHeight: 65
             color: Style.colorBackground
@@ -65,10 +72,8 @@ Item
             
             ColumnLayout
             {
-                id: bottomLayout
-                property int inBookMargin : 14
-                
-                width: parent.width - inBookMargin*2
+                id: informationRectLayout
+                width: parent.width - internal.paddingInsideBook * 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 0
                 
@@ -87,7 +92,7 @@ Item
                 
                 Label
                 {
-                    id: authorName
+                    id: authors
                     Layout.fillWidth: true
                     Layout.topMargin: 5                    
                     text: "Stephen R. Covey"
@@ -98,6 +103,11 @@ Item
         }
     }
     
+    QtObject
+    {
+        id: internal
+        property int paddingInsideBook : 14
+    }
     
     function giveFocus()
     {
