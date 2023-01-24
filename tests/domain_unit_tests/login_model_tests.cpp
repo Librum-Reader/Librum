@@ -1,4 +1,3 @@
-#pragma once
 #include <gtest/gtest.h>
 #include <QString>
 #include "login_model.hpp"

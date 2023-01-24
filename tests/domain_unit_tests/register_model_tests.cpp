@@ -1,9 +1,8 @@
-#pragma once
 #include <gtest/gtest.h>
 #include <QString>
 #include "register_model.hpp"
 
-using namespace domain::entities;
+using namespace domain::value_objects;
 
 namespace tests::domain
 {
