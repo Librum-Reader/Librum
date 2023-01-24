@@ -22,17 +22,17 @@ class IDownloadedBooksTracker
 public:
     virtual ~IDownloadedBooksTracker() noexcept = default;
 
-    // Needs to be called before any other function to setup filesystem paths
-    virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
-    virtual void clearLibraryOwner() = 0;
-    virtual QDir getLibraryDir() const = 0;
-
     virtual std::vector<domain::entities::Book> getTrackedBooks() = 0;
     virtual std::optional<domain::entities::Book> getTrackedBook(
         const QUuid& uuid) = 0;
     virtual bool trackBook(const domain::entities::Book& book) = 0;
     virtual bool untrackBook(const QUuid& uuid) = 0;
     virtual bool updateTrackedBook(const domain::entities::Book& book) = 0;
+
+    // Setup methods that need to be called first to setup filesystem paths
+    virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;
+    virtual void clearLibraryOwner() = 0;
+    virtual QDir getLibraryDir() const = 0;
 };
 
 }  // namespace application
