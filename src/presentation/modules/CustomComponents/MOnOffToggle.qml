@@ -23,7 +23,7 @@ Item
         leftSelected: !onByDefault
         rightSelected: onByDefault
         
-        onSelectedChanged: root.toggled()
+        onToggled: root.toggled()
     }
     
     function setOn()

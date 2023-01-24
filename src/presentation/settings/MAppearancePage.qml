@@ -166,8 +166,8 @@ Page
                             leftSelected: savedValue == leftProperty
                             rightSelected: savedValue == rightProperty
                             
-                            onSelectedChanged: (newSelected) => layout.saveSetting(SettingKeys.Theme,
-                                                                                   newSelected)
+                            onToggled: (newSelected) => layout.saveSetting(SettingKeys.Theme,
+                                                                           newSelected)
                             
                             function reset()
                             {

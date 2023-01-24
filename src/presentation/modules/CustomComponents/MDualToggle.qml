@@ -10,7 +10,7 @@ Item
     property string rightProperty: "Right"
     property bool leftSelected: false
     property bool rightSelected: true
-    signal selectedChanged(string newSelected)
+    signal toggled(string newSelected)
     
     implicitHeight: 38
     implicitWidth: 178
@@ -161,7 +161,7 @@ Item
         {
             root.leftSelected = false;
             root.rightSelected = true;
-            root.selectedChanged(root.rightProperty);
+            root.toggled(root.rightProperty);
         }
     }
     
@@ -189,7 +189,7 @@ Item
         {
             root.leftSelected = true;
             root.rightSelected = false;
-            root.selectedChanged(root.leftProperty);
+            root.toggled(root.leftProperty);
         }
     }
     
