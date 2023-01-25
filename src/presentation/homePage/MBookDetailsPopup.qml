@@ -12,55 +12,22 @@ import Librum.globals 1.0
 Popup
 {
     id: root
-    property int contentPadding: 16
-    
     implicitWidth: 751
     implicitHeight: layout.implicitHeight
     focus: true
     padding: 0
-    background: Rectangle
-    {
-        radius: 6
-        color: Style.colorBackground
-    }
+    background: Rectangle { radius: 6; color: Style.colorBackground }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
     
-    onAboutToShow: 
-    { 
-        applyButton.forceActiveFocus(); 
-        applyButton.active = true;
-        cancelButton.active = false;
-        deleteButton.active = false;
-        
-        inputSideLayout.contentItem.contentY = 0;
-        
-        loadData();
-    }
-    
-    onAboutToHide:
-    {
-        unloadData();
-    }
-    
+    onAboutToHide: internal.unloadData()
+    onAboutToShow: { internal.setupPopup(); internal.loadData() }
     Component.onCompleted: { applyButton.forceActiveFocus(); applyButton.active = true }
-    
-    
-    MouseArea
-    {
-        anchors.fill: parent
-        
-        propagateComposedEvents: true
-        onClicked: lastFocusedButton.forceActiveFocus()
-    }
     
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
         
@@ -79,7 +46,7 @@ Popup
                 Layout.preferredWidth: 32
                 Layout.topMargin: 12
                 Layout.rightMargin: 14
-                Layout.alignment: Qt.AlignTop | Qt.AlignRight
+                Layout.alignment: Qt.AlignRight
                 backgroundColor: "transparent"
                 opacityOnPressed: 0.7
                 borderColor: "transparent"
@@ -102,6 +69,10 @@ Popup
                 color: Style.colorBaseTitle
             }
             
+            /*
+              The SplitView contains all the book information, it holds the book cover
+              on the left side, and the book data on the right.
+              */
             SplitView
             {
                 id: splitView
@@ -113,6 +84,7 @@ Popup
                 orientation: Qt.Horizontal
                 spacing: 10
                 smooth: true
+                // Create explicit handle to make the grabbable area bigger
                 handle: RowLayout
                 {
                     width: 9
@@ -142,12 +114,16 @@ Popup
                 }
                 
                 
+                /*
+                  The book cover side of the SplitView
+                  */
                 Item
                 {
                     id: bookCoverSide
                     SplitView.preferredWidth: 218
                     SplitView.minimumWidth: 80
                     SplitView.maximumWidth: 246
+                    
                     
                     ColumnLayout
                     {
@@ -190,7 +166,7 @@ Popup
                         
                         RowLayout
                         {
-                            id: bookButtons
+                            id: bookCoverButtons
                             Layout.topMargin: 22
                             spacing: 14
                             
@@ -232,15 +208,19 @@ Popup
                     }
                 }
                 
+                /*
+                  The book data side of the SplitView
+                  */
                 Item
                 {
-                    id: inputSide
+                    id: bookDataSide
                     SplitView.minimumWidth: 100
                     SplitView.fillWidth: true
                     
+                    
                     ScrollView
                     {
-                        id: inputSideLayout
+                        id: dataSideScrollView
                         anchors.fill: parent
                         anchors.topMargin: 0
                         anchors.rightMargin: -10
@@ -255,9 +235,7 @@ Popup
                         
                         ColumnLayout
                         {
-                            id: inputLayout
-                            property string defaultText: "Unknown"
-                            
+                            id: dataSideLayout
                             width: parent.width - 18
                             height: parent.height
                             anchors.rightMargin: 8
@@ -311,7 +289,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.pageCount : inputLayout.defaultText
+                                          Globals.selectedBook.pageCount : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -405,7 +383,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.format !== "" ? 
-                                          Globals.selectedBook.format : inputLayout.defaultText
+                                          Globals.selectedBook.format : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -424,7 +402,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null &&  Globals.selectedBook.documentSize !== "" ? 
-                                          Globals.selectedBook.documentSize : inputLayout.defaultText
+                                          Globals.selectedBook.documentSize : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -443,7 +421,7 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.addedToLibrary : inputLayout.defaultText
+                                          Globals.selectedBook.addedToLibrary : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -463,7 +441,8 @@ Popup
                                 headerFontWeight: Font.Bold
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? 
-                                          Globals.selectedBook.lastOpened : inputLayout.defaultText
+                                          Globals.selectedBook.lastOpened : internal.placeholderText
+                                
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -502,31 +481,10 @@ Popup
                     fontWeight: Font.Bold
                     fontSize: 12
                     
-                    onClicked:
-                    {
-                        root.saveData();
-                        root.close();
-                    }
-                    
-                    Keys.onReturnPressed:
-                    {
-                        root.saveData();
-                        root.close();
-                    }
-                    
-                    Keys.onRightPressed: 
-                    {
-                        active = false;
-                        cancelButton.active = true;
-                        cancelButton.forceActiveFocus();
-                    }
-                    
-                    Keys.onTabPressed: 
-                    {
-                        active = false;
-                        cancelButton.active = true;
-                        cancelButton.forceActiveFocus();
-                    }
+                    onClicked: { internal.saveData(); root.close() }
+                    Keys.onReturnPressed: { internal.saveData(); root.close() }
+                    Keys.onRightPressed: internal.focusCancelButton()
+                    Keys.onTabPressed: internal.focusCancelButton()
                 }
                 
                 MButton
@@ -546,30 +504,12 @@ Popup
                     
                     onClicked: root.close()
                     Keys.onReturnPressed: root.close();
-                    
-                    Keys.onLeftPressed: 
-                    {
-                        active = false;
-                        applyButton.active = true;
-                        applyButton.forceActiveFocus();
-                    }
-                    
-                    Keys.onRightPressed: 
-                    {
-                        active = false;
-                        deleteButton.active = true;
-                        deleteButton.forceActiveFocus();
-                    }
-                    
-                    Keys.onTabPressed: 
-                    {
-                        active = false;
-                        deleteButton.active = true;
-                        deleteButton.forceActiveFocus();
-                    }
+                    Keys.onLeftPressed: internal.focusApplyButton()
+                    Keys.onRightPressed:  internal.focusDeleteButton()
+                    Keys.onTabPressed: internal.focusDeleteButton()
                 }
                 
-                Item { Layout.fillWidth: true }
+                Item { id: widthFiller; Layout.fillWidth: true }
                 
                 MButton
                 {
@@ -590,22 +530,9 @@ Popup
                     imageSpacing: 10
                     
                     onClicked: acceptDeletionPopup.open();
-                    
                     Keys.onReturnPressed: acceptDeletionPopup.open();
-                    
-                    Keys.onLeftPressed: 
-                    {
-                        active = false;
-                        cancelButton.active = true;
-                        cancelButton.forceActiveFocus();
-                    }
-                    
-                    Keys.onTabPressed: 
-                    {
-                        active = false;
-                        applyButton.active = true;
-                        applyButton.forceActiveFocus();
-                    }
+                    Keys.onLeftPressed: internal.focusCancelButton()
+                    Keys.onTabPressed: internal.focusApplyButton()
                 }
             }
         }
@@ -633,48 +560,89 @@ Popup
         onAccepted: bookCover.source = file
     }
     
-    
-    function saveData()
+    QtObject
     {
-        var operationsMap = {};
+        id: internal
+        property string placeholderText: "Unknown"
         
-        if(titleField.text !== Globals.selectedBook.title)
-            operationsMap[BookController.MetaProperty.Title] = titleField.text;
+        function focusApplyButton()
+        {
+            cancelButton.active = false;
+            deleteButton.active = false;
+            
+            applyButton.active = true;
+            applyButton.forceActiveFocus();
+        }
         
-        if(authorsField.text !== Globals.selectedBook.authors)
-            operationsMap[BookController.MetaProperty.Authors] = authorsField.text;
+        function focusCancelButton()
+        {
+            applyButton.active = false;
+            deleteButton.active = false;
+            
+            cancelButton.active = true;
+            cancelButton.forceActiveFocus();
+        }
         
-        if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
-            operationsMap[BookController.MetaProperty.Language] = languageComboBox.text;
+        function focusDeleteButton()
+        {
+            applyButton.active = false;
+            cancelButton.active = false;
+            
+            deleteButton.active = true;
+            deleteButton.forceActiveFocus();
+        }
         
-        if(documentCreatorField.text !== Globals.selectedBook.creator && documentCreatorField.text != "")
-            operationsMap[BookController.MetaProperty.Creator] = documentCreatorField.text;
+        function saveData()
+        {
+            var operationsMap = {};
+            
+            if(titleField.text !== Globals.selectedBook.title)
+                operationsMap[BookController.MetaProperty.Title] = titleField.text;
+            
+            if(authorsField.text !== Globals.selectedBook.authors)
+                operationsMap[BookController.MetaProperty.Authors] = authorsField.text;
+            
+            if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
+                operationsMap[BookController.MetaProperty.Language] = languageComboBox.text;
+            
+            if(documentCreatorField.text !== Globals.selectedBook.creator && documentCreatorField.text != "")
+                operationsMap[BookController.MetaProperty.Creator] = documentCreatorField.text;
+            
+            if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != internal.placeholderText)
+                operationsMap[BookController.MetaProperty.CreationDate] = creationDateField.text;
+            
+            if(formatField.text !== Globals.selectedBook.format && formatField.text != internal.placeholderText)
+                operationsMap[BookController.MetaProperty.Format] = formatField.text;
+            
+            // @disable-check M126
+            if(bookCover.source != Globals.selectedBook.cover)   // Needs to be !=, the types are different (QUrl and QString)
+                operationsMap[BookController.MetaProperty.Cover] = bookCover.source;
+            
+            
+            BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+        }
         
-        if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperty.CreationDate] = creationDateField.text;
+        function setupPopup()
+        {
+            applyButton.forceActiveFocus(); 
+            applyButton.active = true;
+            cancelButton.active = false;
+            deleteButton.active = false;
+            
+            dataSideScrollView.contentItem.contentY = 0;
+        }
         
-        if(formatField.text !== Globals.selectedBook.format && formatField.text != inputLayout.defaultText)
-            operationsMap[BookController.MetaProperty.Format] = formatField.text;
+        function loadData()
+        {
+            bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
+            
+            if(Globals.selectedBook.language !== "")
+                languageComboBox.setDefaultItem(Globals.selectedBook.language);
+        }
         
-        // @disable-check M126
-        if(bookCover.source != Globals.selectedBook.cover)   // Needs to be !=, the types are different (QUrl and QString)
-            operationsMap[BookController.MetaProperty.Cover] = bookCover.source;
-        
-        
-        BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
-    }
-    
-    
-    function loadData()
-    {
-        bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
-        
-        if(Globals.selectedBook.language !== "")
-            languageComboBox.setDefaultItem(Globals.selectedBook.language);
-    }
-    
-    function unloadData()
-    {
-        languageComboBox.deselectCurrenItem();
+        function unloadData()
+        {
+            languageComboBox.deselectCurrenItem();
+        }
     }
 }

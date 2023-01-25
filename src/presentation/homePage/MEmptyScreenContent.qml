@@ -15,14 +15,14 @@ Item
     
     Image
     {
-        id: emptyBackgroundImage
+        id: backgroundImage
         source: Icons.emptyHomeBackground
         sourceSize.width: parent.width
         sourceSize.height: parent.height
         
         ColumnLayout
         {
-            id: inEmptyBackgroundLayout
+            id: layout
             anchors.centerIn: parent
             anchors.verticalCenterOffset: -90
             
@@ -39,7 +39,7 @@ Item
                 id: addBooksQuestion
                 Layout.preferredWidth: 250
                 Layout.alignment: Qt.AlignHCenter
-                text: "Quite empty here, what about importing your first book?"
+                text: "Quite empty here, what about adding your first book?"
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
                 font.weight: Font.DemiBold
@@ -49,7 +49,7 @@ Item
             
             MButton
             {
-                id: emptyAddBooksButton
+                id: addBooksButton
                 Layout.preferredWidth: 134
                 Layout.preferredHeight: 42
                 Layout.alignment: Qt.AlignHCenter

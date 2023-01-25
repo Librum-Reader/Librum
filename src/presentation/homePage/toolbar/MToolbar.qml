@@ -14,26 +14,21 @@ Item
     signal searchRequested(string query)
     signal checkBoxClicked()
     
-    implicitWidth:  1714
+    implicitWidth: 1714
     implicitHeight: 36
     
-    onWidthChanged:
-    {
-        if(searchButton.opened)
-            searchButton.close();
-    }
+    onWidthChanged: if(searchButton.opened) searchButton.close();
     
     
     RowLayout
     {
-        id: mainLayout
-        
+        id: layout
         anchors.fill: parent
         spacing: 12
         
         MWrappedCheckBox
         {
-            id: checkBox
+            id: selectBooksCheckBox
             
             onChecked: checkBoxClicked();
         }
@@ -61,41 +56,41 @@ Item
         
         MTagSelectorButton
         {
-            id: tagSelector
+            id: tagSelectorButton
             
             onTagsSelected: resetTagsButton.visible = true
-            onTagsRemoved: resetTagsButton.resetTags()
+            onTagsRemoved: root.resetTags()
         }
         
+        /* 
+          Button which appears when a filter is applied.
+          When clicked, it clears the filters and disappears.
+          */
         MRemoveOptionButton
         {
             id: resetFiltersButton
             visible: false
             text: "Remove Filters"
             
-            onClicked: root.removeFilters()
+            onClicked: root.resetFilters()
         }
         
+        /* 
+          Button which appears when tag filters are applied.
+          When clicked, it clears the tag filters and disappears.
+          */
         MRemoveOptionButton
         {
             id: resetTagsButton
             visible: false
             text: "Remove Tags"
             
-            onClicked: resetTags()
-            
-            
-            function resetTags()
-            {
-                tagSelector.clearSelections();
-                BookController.libraryModel.clearFilterTags();
-                visible = false;
-            }
+            onClicked: root.resetTags()
         }
         
         Item
         {
-            id: spacer
+            id: widthFiller
             Layout.fillWidth: true
         }
         
@@ -103,20 +98,25 @@ Item
         {
             id: searchButton
             onTriggered: (query) => searchRequested(query);
-            expansionWidth: (spacer.width <= 445 ? spacer.width : 445)
+            expansionWidth: (widthFiller.width <= 445 ? widthFiller.width : 445)
             
             onOpenedChanged: if(!opened) searchRequested("")
         }
     }
     
-    function removeFilters()
+    
+    function resetFilters()
     {
         BookController.libraryModel.setFilterRequest("", "", "", false,
                                                      false, false, false);
-        BookController.libraryModel.clearFilterTags();
-        
         filterByButton.resetFilter();
         resetFiltersButton.visible = false;
+    }
+    
+    function resetTags()
+    {
+        BookController.libraryModel.clearFilterTags();
+        tagSelectorButton.clearSelections();
         resetTagsButton.visible = false;
     }
 }

@@ -19,7 +19,7 @@ Item
         
         /**
           A rectangle with rounded corners which is overlapping with the top half of
-          the book to create a a rounded top, while the rest of the book is rectangluar
+          the book to create a rounded top, while the rest of the book is rectangluar
           */
         Rectangle
         {

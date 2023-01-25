@@ -78,7 +78,6 @@ Page
             id: toolbar
             visible: !internal.libraryIsEmpty
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignLeft
             z: 2
             
             onSearchRequested: (query) => BookController.libraryModel.sortString = query
@@ -231,11 +230,16 @@ Page
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
             visible: bookGrid.count == 0 && BookController.bookCount !== 0
             
-            onClearFilters: toolbar.removeFilters()
+            onClearFilters:
+            {
+                toolbar.resetFilters();
+                toolbar.resetTags();
+            }
         }
         
         Item
         {
+            id: bottomHeightFillter
             Layout.fillHeight: true
         }
     }
