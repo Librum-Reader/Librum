@@ -32,6 +32,7 @@ Item
         
         RowLayout
         {
+            id: layout
             anchors.centerIn: parent
             spacing: 5
             
@@ -57,6 +58,7 @@ Item
     
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
         
         onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
@@ -75,6 +77,7 @@ Item
                                 onlyFiles, read, unread);
         }
     }
+    
     
     function resetFilter()
     {

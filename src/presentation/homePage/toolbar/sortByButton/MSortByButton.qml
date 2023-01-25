@@ -16,6 +16,7 @@ Item
     
     ColumnLayout
     {
+        id: layout
         anchors.fill: parent
         spacing: 4
         
@@ -37,6 +38,7 @@ Item
             
             RowLayout
             {
+                id: inButtonLayout
                 anchors.centerIn: parent
                 spacing: 8
                 
@@ -86,12 +88,12 @@ Item
     {
         anchors.fill: parent
         
-        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+        onClicked: sortByPopup.opened ? sortByPopup.close() : sortByPopup.open()
     }
     
     MSortByPopup
     {
-        id: selectionPopup
+        id: sortByPopup
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
         

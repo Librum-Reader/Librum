@@ -31,6 +31,7 @@ Item
         
         RowLayout
         {
+            id: layout
             anchors.centerIn: parent
             spacing: 6
             
@@ -64,8 +65,6 @@ Item
     MTagSelectorPopup
     {
         id: selectionPopup
-        property var startingItems: []
-        
         y: root.height + 6
         
         onClosed:

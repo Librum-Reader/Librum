@@ -20,11 +20,9 @@ Popup
     
     padding: 0
     implicitWidth: 273
-    implicitHeight: mainLayout.height
-    background: Rectangle
-    {
-        color: "transparent"
-    }
+    implicitHeight: layout.height
+    background: Rectangle { color: "transparent" }
+    
     
     Shortcut
     {
@@ -33,20 +31,23 @@ Popup
         onActivated: root.filterQuerySent()
     }
     
+    
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
-        contentHeight: mainLayout.height
+        contentHeight: layout.height
         
         ColumnLayout
         {
-            id: mainLayout
+            id: layout
             width: parent.width
             spacing: 0
             
             
             Image
             {
+                id: triangleDecoration
                 Layout.leftMargin: 14
                 Layout.bottomMargin: -1
                 source: Icons.dropupLightGray
@@ -94,12 +95,14 @@ Popup
                     
                     RowLayout
                     {
+                        id: horizontalInputLayout
                         Layout.fillWidth: true
                         spacing: 17
                         
                         
                         ColumnLayout
                         {
+                            id: leftColumnLayout
                             Layout.fillWidth: true
                             
                             
@@ -161,6 +164,7 @@ Popup
                         
                         ColumnLayout
                         {
+                            id: rightColumnlayout
                             Layout.fillWidth: true
                             
                             MComboBox

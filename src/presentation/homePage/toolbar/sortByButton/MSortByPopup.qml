@@ -13,26 +13,23 @@ Popup
     signal itemSelected(int role)
     property int maxHeight: 200
     
-    focus: true
     padding: 0
     implicitWidth: 176
-    background: Rectangle
-    {
-        color: "transparent"
-    }
+    background: Rectangle { color: "transparent" }
     
     onOpenedChanged: if(opened) listView.forceActiveFocus();
     
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 0
         
         
         Image
         {
+            id: triangleDecorator
             Layout.leftMargin: 14
             Layout.bottomMargin: -1
             source: Icons.dropupLightGray
@@ -62,13 +59,11 @@ Popup
                 ListView
                 {
                     id: listView
-                    property MBaseListItem currentSelected: null
-                    
                     Layout.fillWidth: true
                     Layout.preferredHeight: contentHeight
                     Layout.maximumHeight: 200
                     maximumFlickVelocity: 550
-                    currentIndex: -1
+                    currentIndex: 0
                     keyNavigationEnabled: true
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
@@ -88,45 +83,39 @@ Popup
                         width: parent.width
                         containingListview: listView
                         
-                        onClicked:
-                            (mouse, index) =>
-                            {
-                                if(listView.itemAtIndex(index).selected)
-                                    return;
-                                    
-                                listView.changeSelected(index);
-                                let role = listView.itemAtIndex(index).getRole();
-                                root.itemSelected(role);
-                            }
+                        
+                        onClicked: (mouse, index) =>
+                                   {
+                                       // Disable unselecting items
+                                       if(listView.itemAtIndex(index).selected)
+                                       {
+                                           return;
+                                       }
+                                       
+                                       internal.changeSelectedItem(index);
+                                       let role = listView.itemAtIndex(index).getRole();
+                                       root.itemSelected(role);
+                                   }
                     }
                     
-                    Keys.onReturnPressed:
-                    {
-                        if(listView.currentIndex !== -1)
-                            listView.changeSelected(listView.currentIndex)
-                    }
-                    
-                    Component.onCompleted: listView.changeSelected(0);
-                    
-                    
-                    function changeSelected(index)
-                    {
-                        listView.currentIndex = index;
-                        
-                        if(listView.currentSelected == listView.currentItem)
-                        {
-                            listView.currentItem.selected = !listView.currentItem.selected;
-                            return;
-                        }
-                        
-                        if(listView.currentSelected != null)
-                            listView.currentSelected.selected = false;
-                        
-                        listView.currentItem.selected = true;
-                        listView.currentSelected = listView.currentItem;
-                    }
+                    Keys.onReturnPressed: internal.changeSelectedItem(listView.currentIndex)
+                    Component.onCompleted: internal.changeSelectedItem(0);
                 }
             }
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function changeSelectedItem(index)
+        {
+            listView.currentItem.selected = false;
+            
+            listView.currentIndex = index;
+            listView.currentItem.selected = true;
         }
     }
 }
