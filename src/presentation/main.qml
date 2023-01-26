@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 import Librum.models 1.0
+import "PageNavigationLogic.js" as Logic
 
 import "sidebar"
 import "homePage"
@@ -19,8 +20,6 @@ import "readingPage"
 ApplicationWindow
 {
     id: baseRoot
-    property alias pageManager: pageManager
-    
     minimumHeight: 400
     minimumWidth: 904
     visible: true
@@ -34,6 +33,7 @@ ApplicationWindow
         anchors.fill: parent
         spacing: 0
         
+        
         MSidebar
         {
             id: sidebar
@@ -41,7 +41,9 @@ ApplicationWindow
             visible: pageManager.pageHasSidebar
         }
         
-        
+        /*
+          The StackView is managing the switching of pages
+          */
         StackView
         {
             id: pageManager
@@ -61,6 +63,7 @@ ApplicationWindow
     }
     
     
+    // Pages
     Component { id: loginPage; MLoginPage {} }
     Component { id: forgotPasswordPage; MForgotPasswordPage {} }
     Component { id: registerPage; MRegisterPage {} }
@@ -73,51 +76,29 @@ ApplicationWindow
     
     
     
+    /*
+      loadPage() manages the page switching through out the application
+      */
     function loadPage(page, sidebarItem, doSamePageCheck = true)
     {
-        if(doSamePageCheck && checkIfPageIsTheSameAsPrevious(sidebarItem))
+        // Prevent switching to the same page that is currently active
+        if(doSamePageCheck && Logic.checkIfNewPageIsTheSameAsOld(sidebarItem))
             return;
         
-        if(!terminateActionOfPreviousPage(page, sidebarItem))
+        // Terminate any pending operation on the previous page
+        if(!Logic.terminateActionOfCurrentPage(page, sidebarItem))
             return;
         
-        switchPage(page, sidebarItem);
-    }
-    
-    function checkIfPageIsTheSameAsPrevious(sidebarItem)
-    {
-        return sidebar.currentItem === sidebarItem;
-    }
-    
-    function terminateActionOfPreviousPage(page, sidebarItem)
-    {
-        if(pageManager.currentItem instanceof MSettings)
-        {
-            if(!pageManager.currentItem.saveSettingsPage(switchPage, page, sidebarItem))
-                return false;
-        }
-        
-        return true;
-    }
-    
-    function switchPage(page, sidebarItem)
-    {
-        pageManager.replace(page);
-        
-        pageManager.pageHasSidebar = sidebarItem === undefined ? false : true;
-        if(pageManager.pageHasSidebar)
-            sidebar.changeSelectedItem(sidebarItem);
-        
-        if(page === readingPage)
-            baseRoot.minimumWidth = 550;
-        else
-            baseRoot.minimumWidth = baseRoot.minimumWidth;
-        
+        // Switch the page
+        Logic.switchPage(page, sidebarItem);
     }
     
     
     
-    // Nested settings navigation
+    /*
+      Nested setting navigation - Navigate to a specific sub-page in one command.
+      E.g. go from "Home" to "Settings / Account page"
+      */
     
     function loadSettingsAccountPage()
     {
