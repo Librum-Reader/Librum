@@ -7,9 +7,9 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property string imagePath: "<path here>"
+    property string image
     property int imageWidth: 15
-    property string textContent: "text here"
+    property string text
     property int textSpacing: 5
     signal clicked
     
@@ -26,15 +26,16 @@ Item
         Image
         {
             id: icon
-            source: root.imagePath
+            source: root.image
             fillMode: Image.PreserveAspectFit
             sourceSize.width: root.imageWidth
         }
         
         Label
         {
+            id: label
             Layout.leftMargin: root.textSpacing
-            text: root.textContent
+            text: root.text
             color: Style.colorLightText3
             font.pointSize: 10.5
             font.weight: Font.Medium

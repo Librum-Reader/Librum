@@ -6,10 +6,10 @@ import Librum.elements 1.0
 
 Item 
 {
-    property int slowDuration: 250
-    property int fastDuration: 100
-    property int defaultEasingType: Easing.InOutQuad
-    
+    id: root
+    required property var sidebar
+    property int closedSidebarWidth
+    property int openedSidebarWidth
     property alias closeAnimation: closeAnim
     property alias openAnimation: openAnim
     
@@ -20,12 +20,12 @@ Item
         
         PropertyAnimation
         {
-            target: root
+            target: sidebar
             property: "implicitWidth"
-            from: closedWidth
-            to: openedWidth
-            duration: slowDuration
-            easing.type: defaultEasingType
+            from: root.closedSidebarWidth
+            to: root.openedSidebarWidth
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         NumberAnimation
@@ -33,8 +33,8 @@ Item
             target: profileBox
             property: "arrowRotation"
             to: 180
-            duration: slowDuration
-            easing.type: defaultEasingType
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         PropertyAnimation
@@ -42,27 +42,27 @@ Item
             target: logoLabel
             property: "visible"
             to: true
-            duration: slowDuration
-            easing.type: defaultEasingType
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnsItem, settingsItem]
             property: "labelVisibility"
             to: true
-            duration: slowDuration
-            easing.type: defaultEasingType
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnsItem, settingsItem]
             property: "textOpacity"
             from: 0
             to: 1
-            duration: slowDuration * 2.5
-            easing.type: defaultEasingType
+            duration: internal.slowDuration * 2.5
+            easing.type: internal.easingType
         }
         
         onFinished: SidebarState.currentState = SidebarState.Opened
@@ -74,11 +74,11 @@ Item
         
         PropertyAnimation
         {
-            target: root
+            target: sidebar
             property: "implicitWidth"
-            to: root.closedWidth
-            duration: slowDuration
-            easing.type: defaultEasingType
+            to: root.closedSidebarWidth
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         NumberAnimation
@@ -86,8 +86,8 @@ Item
             target: profileBox
             property: "arrowRotation"
             to: 0
-            duration: slowDuration
-            easing.type: defaultEasingType
+            duration: internal.slowDuration
+            easing.type: internal.easingType
         }
         
         PropertyAnimation
@@ -95,19 +95,27 @@ Item
             target: logoLabel
             property: "visible"
             to: false
-            duration: fastDuration
-            easing.type: defaultEasingType
+            duration: internal.fastDuration
+            easing.type: internal.easingType
         }
         
         PropertyAnimation
         {
-            targets: [freeBooksItem, homeItem, statisticsItem, addOnButton, settingsItem]
+            targets: [freeBooksItem, homeItem, statisticsItem, addOnsItem, settingsItem]
             property: "labelVisibility"
             to: false
-            duration: fastDuration
-            easing.type: defaultEasingType
+            duration: internal.fastDuration
+            easing.type: internal.easingType
         }
         
         onFinished: SidebarState.currentState = SidebarState.Closed
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int slowDuration: 250
+        property int fastDuration: 100
+        property int easingType: Easing.InOutQuad
     }
 }

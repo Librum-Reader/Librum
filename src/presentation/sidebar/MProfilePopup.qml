@@ -28,11 +28,7 @@ Popup
         anchors.fill: parent
         hoverEnabled: true
         
-        onContainsMouseChanged:
-        {
-            if(!containsMouse)
-                root.close();
-        }
+        onContainsMouseChanged: if(!containsMouse) root.close();
     }
     
     ColumnLayout
@@ -43,11 +39,12 @@ Popup
         
         MProfilePopupItem
         {
+            id: syncItem
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 18
-            imagePath: Icons.sync
-            textContent: "Sync"
+            image: Icons.sync
+            text: "Sync"
             imageWidth: 16
             textSpacing: 9
         }
@@ -55,11 +52,12 @@ Popup
         
         MProfilePopupItem
         {
+            id: manageProfileItem
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 16
-            imagePath: Icons.emptyProfile
-            textContent: "Manage Profile"
+            image: Icons.emptyProfile
+            text: "Manage Profile"
             imageWidth: 19
             textSpacing: 8
             
@@ -73,11 +71,12 @@ Popup
         
         MProfilePopupItem
         {
+            id: logoutItem
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 15
-            imagePath: Icons.logout
-            textContent: "Logout"
+            image: Icons.logout
+            text: "Logout"
             imageWidth: 20
             textSpacing: 8
             

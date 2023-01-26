@@ -11,11 +11,14 @@ import Librum.controllers 1.0
 Item
 {
     id: root
-    property int arrowRotation: 0
+    property int currentSidebarWidth
+    property int closedSidebarWidth
+    property int arrowRotation
     signal clicked
     
-    implicitWidth: closedWidth
+    implicitWidth: root.closedSidebarWidth
     implicitHeight: 60
+    
     
     Pane
     {
@@ -27,9 +30,11 @@ Item
         
         RowLayout
         {
-            width: currentWidth + expandButton.width / 2.2  // To make the button go over the border
+            // Make the button go over the sidebar border
+            width: root.currentSidebarWidth + expandButton.width / 2.2
             height: parent.height
             spacing: 0
+            
             
             Rectangle
             {
@@ -43,11 +48,12 @@ Item
                 antialiasing: true
                 color: Globals.profilePicture.length === 0 ? "#DBCE5F" : "transparent"
                 
+                
                 Label
                 {
                     id: initials
                     anchors.centerIn: parent
-                    visible: Globals.profilePicture.length === 0
+                    visible: !internal.profilePictureExists
                     text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase()
                     font.pointSize: 12
                     font.bold: true
@@ -56,8 +62,8 @@ Item
                 
                 Image
                 {
-                    id: image
-                    visible: Globals.profilePicture.length > 0
+                    id: profileImage
+                    visible: internal.profilePictureExists
                     anchors.centerIn: parent
                     Layout.leftMargin: 18
                     source: Globals.profilePicture
@@ -73,6 +79,9 @@ Item
                 }
             }
             
+            /*
+              Button to expand the sidebar
+              */
             Rectangle
             {
                 id: expandButton
@@ -82,6 +91,7 @@ Item
                 radius: 2
                 border.width: 1
                 border.color: Style.colorLightBorder
+                
                 
                 Image
                 {
@@ -95,7 +105,7 @@ Item
                 
                 MouseArea
                 {
-                    id: expandMouseArea
+                    id: expandButtonMouseArea
                     anchors.fill: parent
                     
                     onClicked:
@@ -108,6 +118,12 @@ Item
                 }
             }
         }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property bool profilePictureExists: Globals.profilePicture.length > 0
     }
     
     

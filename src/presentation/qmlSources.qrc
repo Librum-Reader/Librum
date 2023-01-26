@@ -95,5 +95,6 @@
         <file>modules/CustomComponents/MOnOffToggle.qml</file>
         <file>homePage/MBookRightClickPopup.qml</file>
         <file>homePage/MNoBookSatisfiesFilterItem.qml</file>
+        <file>PageNavigationLogic.js</file>
     </qresource>
 </RCC>

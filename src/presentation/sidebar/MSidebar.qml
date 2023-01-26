@@ -2,32 +2,29 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.15
-import Librum.elements 1.0
 import CustomComponents 1.0
+import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.models 1.0
 
 Item
 {
     id: root
-    property int  closedWidth: 72
-    property int  openedWidth: 232
-    property int  currentWidth: width
-    property bool isOpened: false
-    
     property alias freeBooksItem: freeBooksItem
     property alias homeItem: homeItem
     property alias statisticsItem: statisticsItem
-    property alias addOnsItem: addOnButton
+    property alias addOnsItem: addOnsItem
     property alias settingsItem: settingsItem
+    property MSidebarItem currentItem: internal.defaultItem
     
-    property MSidebarItem defaultItem: homeItem
-    property MSidebarItem currentItem: defaultItem
-    
-    implicitWidth: closedWidth
+    implicitWidth: internal.closedWidth
     implicitHeight: Window.height
     
     
+    /*
+      Shortcuts to switch between pages
+      */
     Shortcut
     {
         sequence: "Ctrl+O"
@@ -68,20 +65,16 @@ Item
         background: Rectangle { color: Style.colorBackground }
         
         
-        MSidebarAnimations
-        {
-            id: animations
-        }
-        
         MFlickWrapper
         {
+            id: flickWrapper
             anchors.fill: parent
-            contentHeight: mainLayout.implicitHeight
+            contentHeight: layout.implicitHeight
             
             
             ColumnLayout
             {
-                id: mainLayout
+                id: layout
                 width: parent.width
                 height: container.height
                 spacing: 0
@@ -104,7 +97,7 @@ Item
                     {
                         id: logoLabel
                         visible: false
-                        text: "Librum"
+                        text: AppInformation.productName
                         font.bold: true
                         font.pointSize: 16
                         color: Style.colorBaseTitle
@@ -126,8 +119,8 @@ Item
                     Layout.topMargin: 16
                     Layout.leftMargin: 10
                     imageWidth: 31
-                    imageSource: Icons.downloadGray
-                    labelContent: "Free books"
+                    image: Icons.downloadGray
+                    text: "Free books"
                     
                     onClicked: loadPage(freeBooksPage, root.freeBooksItem)
                 }            
@@ -150,8 +143,8 @@ Item
                     imageWidth: 30
                     preserveImageFit: false
                     imageHeight: 28
-                    imageSource: Icons.home
-                    labelContent: "Home"
+                    image: Icons.home
+                    text: "Home"
                     
                     onClicked: loadPage(homePage, root.homeItem)
                 }
@@ -162,8 +155,8 @@ Item
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 28
-                    imageSource: Icons.pieChart
-                    labelContent: "Statistics"
+                    image: Icons.pieChart
+                    text: "Statistics"
                     
                     onClicked: loadPage(statisticsPage, root.statisticsItem)
                 }
@@ -180,12 +173,12 @@ Item
                 
                 MSidebarItem
                 {
-                    id: addOnButton
+                    id: addOnsItem
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 30
-                    imageSource: Icons.addOns
-                    labelContent: "Add-ons"
+                    image: Icons.addOns
+                    text: "Add-ons"
                     
                     onClicked: loadPage(addOnsPage, root.addOnsItem)
                 }
@@ -196,14 +189,15 @@ Item
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 36
-                    imageSource: Icons.settings
-                    labelContent: "Settings"
+                    image: Icons.settings
+                    text: "Settings"
                     
                     onClicked: loadPage(settings, root.settingsItem)
                 }
                 
                 Item
                 {
+                    id: heightFiller
                     Layout.fillHeight: true
                     Layout.minimumHeight: 30
                 }
@@ -216,9 +210,15 @@ Item
                     color: Style.colorSeparator
                 }
                 
+                
+                /*
+                  Box which contains the profile picture
+                  */
                 MProfileBox
                 {
                     id: profileBox
+                    currentSidebarWidth: root.width
+                    closedSidebarWidth: internal.closedWidth
                     Layout.alignment: Qt.AlignBottom
                     Layout.topMargin: 2
                     
@@ -231,7 +231,9 @@ Item
                     }
                 }
                 
-                
+                /*
+                  Popup which is spawned after clicking the profile picture
+                  */
                 MProfilePopup
                 {
                     id: profilePopup
@@ -241,7 +243,26 @@ Item
             }
             
         }
+    
+        MSidebarAnimations
+        {
+            id: animations
+            sidebar: root
+            closedSidebarWidth: internal.closedWidth
+            openedSidebarWidth: internal.openedWidth
+        }
     }
+    
+    QtObject
+    {
+        id: internal
+        property int closedWidth: 72
+        property int openedWidth: 232
+        property bool isOpened: false
+        
+        property MSidebarItem defaultItem: homeItem
+    }
+    
     
     function changeSelectedItem(newItem)
     {
@@ -253,19 +274,19 @@ Item
     function openSidebar()
     {
         animations.openAnimation.start();
-        currentItem.openAnimation.start();
+        root.currentItem.openAnimation.start();
     }
     
     function closeSidebar()
     {
         animations.closeAnimation.start();
-        currentItem.closeAnimation.start();
+        root.currentItem.closeAnimation.start();
     }
     
     function resetSidebar()
     {
         closeSidebar();
-        changeSelectedItem(root.defaultItem);
+        changeSelectedItem(internal.defaultItem);
     }
     
     function giveFocus()

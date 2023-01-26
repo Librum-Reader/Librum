@@ -7,32 +7,30 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property int closedWidth: 52
-    property int openedWidth: 177
+    property bool selected: false
+    property string text
+    property string image
     property int imageWidth: 30
-    property int imageHeight: 0
+    property int imageHeight
     property bool preserveImageFit: true
-    property string imageSource: ""
-    property string labelContent: "Content here"
-    property alias  labelVisibility: label.visible
-    property alias  openAnimation: openAnim
-    property alias  closeAnimation: closeAnim
-    property real   textOpacity: 0
-    property bool   selected: false
+    property alias openAnimation: openAnim
+    property alias closeAnimation: closeAnim
+    property alias labelVisibility: label.visible
+    property real textOpacity: 0
     signal clicked()
     
-    implicitWidth: (labelVisibility ? openedWidth : closedWidth)
+    implicitWidth: (labelVisibility ? internal.openedWidth : internal.closedWidth)
     implicitHeight: 44
     
     
     Pane
     {
-        id: content
+        id: container
         anchors.fill: parent
         padding: 0
         background: Rectangle
         {
-            color: (root.selected ? Style.colorSidebarMark : "transparent")
+            color: root.selected ? Style.colorSidebarMark : "transparent"
             radius: 4
         }
         
@@ -43,9 +41,12 @@ Item
             height: parent.height
             spacing: 0
             
+            /*
+              Needs a container because the actual item is bigger than just the icon
+              */
             Rectangle
             {
-                id: iconBox
+                id: iconContainer
                 Layout.preferredWidth: 52
                 Layout.preferredHeight: 44
                 radius: 4
@@ -58,7 +59,7 @@ Item
                     sourceSize.height: root.imageHeight
                     fillMode: root.preserveImageFit ? Image.PreserveAspectFit : Image.Stretch
                     anchors.centerIn: parent
-                    source: root.imageSource
+                    source: root.image
                     antialiasing: false                    
                 }
             }
@@ -69,7 +70,7 @@ Item
                 Layout.leftMargin: 10
                 visible: false
                 opacity: root.textOpacity
-                text: root.labelContent
+                text: root.text
                 font.weight: Font.Medium
                 font.pointSize: 13
                 color: Style.colorLightText3
@@ -80,6 +81,7 @@ Item
     MouseArea
     {
         anchors.fill: parent
+        
         onClicked: root.clicked();
     }
     
@@ -87,9 +89,9 @@ Item
     PropertyAnimation
     {
         id: openAnim
-        target: content
+        target: container
         property: "width"
-        to: openedWidth
+        to: internal.openedWidth
         duration: 250
         easing.type: Easing.InOutQuad
     }
@@ -97,11 +99,18 @@ Item
     PropertyAnimation
     {
         id: closeAnim
-        target: content
+        target: container
         property: "width"
-        to: closedWidth
+        to: internal.closedWidth
         duration: 250
         easing.type: Easing.InOutQuad
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int closedWidth: 52
+        property int openedWidth: 177
     }
     
     
