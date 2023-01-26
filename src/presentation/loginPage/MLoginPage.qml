@@ -11,7 +11,41 @@ import Librum.controllers 1.0
 MFlickWrapper
 {
     id: root
-    contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
+    contentHeight: Window.height < layout.implicitHeight ? 
+                       layout.implicitHeight : Window.height
+    
+    // Passing the focus to emailInput on Component.onCompleted() causes it
+    // to pass controll back to root for some reason, this fixes the focus problem
+    onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
+    
+    Shortcut
+    {
+        sequence: "Ctrl+Return"
+        onActivated: internal.login()
+    }
+    
+    Connections
+    {
+        id: proccessLoginResult
+        target: AuthController
+        function onLoginFinished(success)
+        {
+            internal.processLoginResult(success);
+        }
+    }
+    
+    Connections
+    {
+        id: proccessLoadingUserResult
+        target: UserController
+        function onFinishedLoadingUser(success)
+        {
+            if(success)
+                loadPage(homePage, sidebar.homeItem, false);
+            else
+                loginFailedDialog.open();
+        }
+    }
     
     
     Page
@@ -23,34 +57,6 @@ MFlickWrapper
         {
             anchors.fill: parent
             color: Style.loginWindowBackground
-        }
-        
-        Shortcut
-        {
-            sequence: "Ctrl+Return"
-            onActivated: loginButton.buttonTriggeredAction()
-        }
-        
-        
-        Connections
-        {
-            target: AuthController
-            function onLoginFinished(success)
-            {
-                loginButton.proccessLoginResult(success);
-            }
-        }
-        
-        Connections
-        {
-            target: UserController
-            function onFinishedLoadingUser(success)
-            {
-                if(success)
-                    loadPage(homePage, sidebar.homeItem, false);
-                else
-                    loginFailedDialog.open();
-            }
         }
         
         
@@ -194,6 +200,7 @@ MFlickWrapper
                         
                         Item
                         {
+                            id: widthFiller
                             Layout.fillWidth: true
                         }
                         
@@ -208,12 +215,10 @@ MFlickWrapper
                             
                             MouseArea
                             {
+                                id: forgotPasswordPageRedirection
                                 anchors.fill: parent
                                 
-                                onClicked:
-                                {
-                                    loadPage(forgotPasswordPage);
-                                }
+                                onClicked: loadPage(forgotPasswordPage)
                             }
                         }
                     }
@@ -221,8 +226,6 @@ MFlickWrapper
                     MButton 
                     {
                         id: loginButton
-                        property bool success: false
-                        
                         Layout.fillWidth: true
                         Layout.preferredHeight: 40
                         Layout.topMargin: 42
@@ -233,40 +236,14 @@ MFlickWrapper
                         fontWeight: Font.Bold
                         text: "Login"
                         
-                        onClicked: buttonTriggeredAction()
+                        onClicked: internal.login()
                         
                         Keys.onPressed: 
                             (event) =>
                             {
                                 if(event.key === Qt.Key_Up) rememberMeCheckBox.giveFocus();
-                                else if(event.key === Qt.Key_Return) buttonTriggeredAction();
+                                else if(event.key === Qt.Key_Return) internal.login();
                             }
-                        
-                        
-                        function buttonTriggeredAction()
-                        {
-                            // No credential login skip
-                            if(emailInput.text === "" && passwordInput.text === "")
-                            {
-                                loadPage(homePage, sidebar.homeItem, false);
-                                return;
-                            }
-                            
-                            AuthController.loginUser(emailInput.text, passwordInput.text);    
-                        }
-                        
-                        function proccessLoginResult(success)
-                        {
-                            if(success)
-                            {
-                                loginButton.success = true;
-                                UserController.loadUser();
-                            }
-                            else
-                            {
-                                ;
-                            }
-                        }
                     }
                 }
             }
@@ -291,7 +268,6 @@ MFlickWrapper
         
     }
     
-    
     MLoginFailedPopup
     {
         id: loginFailedDialog
@@ -301,6 +277,36 @@ MFlickWrapper
         onOpenedChanged: if(opened) loginFailedDialog.giveFocus()
     }
     
+    QtObject
+    {
+        id: internal
+        
+        function login()
+        {
+            // No-credential login skip - For development only
+            if(emailInput.text === "" && passwordInput.text === "")
+            {
+                loadPage(homePage, sidebar.homeItem, false);
+                return;
+            }
+            
+            AuthController.loginUser(emailInput.text, passwordInput.text);   
+        }
+        
+        function processLoginResult(success)
+        {
+            if(success)
+            {
+                UserController.loadUser();
+            }
+            else
+            {
+                // TODO: Login failed
+            }
+        }
+    }
     
+    
+    // Focus the emailInput when page has loaded
     Component.onCompleted: emailInput.giveFocus()
 }

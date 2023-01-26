@@ -9,28 +9,21 @@ import Librum.icons 1.0
 Popup
 {
     id: root
-    signal decisionMade
-    
     implicitWidth: 612
     implicitHeight: layout.height
     padding: 0
     closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
-    background: Rectangle
-    {
-        color: "transparent"
-        radius: 4
-    }
+    background: Rectangle { color: "transparent"; radius: 4 }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
+    
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
+        
         
         ColumnLayout
         {
@@ -52,21 +45,17 @@ Popup
             
             Pane
             {
-                id: backgroundRect
+                id: container
                 Layout.fillWidth: true
                 topPadding: 86
                 horizontalPadding: 62
                 bottomPadding: 52
-                background: Rectangle
-                {
-                    color: Style.colorBackground
-                    radius: 6
-                }
+                background: Rectangle { color: Style.colorBackground; radius: 6 }
                 
                 
                 ColumnLayout
                 {
-                    id: inRectLayout
+                    id: inContainerLayout
                     width: parent.width
                     spacing: 0
                     
@@ -84,7 +73,7 @@ Popup
                     
                     Label
                     {
-                        id: explenation
+                        id: explenationText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.fillWidth: true
                         Layout.topMargin: 22
@@ -119,7 +108,7 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: root.close();
                             
                             Keys.onPressed:
                                 (event) =>
@@ -130,15 +119,9 @@ Popup
                                     }
                                     else if(event.key === Qt.Key_Return)
                                     {
-                                        buttonAction();
+                                        root.close();
                                     }
                                 }
-                            
-                            function buttonAction()
-                            {
-                                root.decisionMade();
-                                root.close();
-                            }
                         }
                         
                         MButton
@@ -156,7 +139,7 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.report()
                             
                             Keys.onPressed:
                                 (event) =>
@@ -167,21 +150,27 @@ Popup
                                     }
                                     else if(event.key === Qt.Key_Return)
                                     {
-                                        buttonAction();
+                                        internal.report();
                                     }
                                 }
-                            
-                            function buttonAction()
-                            {
-                                root.decisionMade();
-                                root.close();
-                            }
                         }
                     }
                 }
             }
         }
     }
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function report()
+        {
+            root.close();
+        }
+    }
+    
     
     function giveFocus()
     {
