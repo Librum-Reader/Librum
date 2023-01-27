@@ -34,12 +34,14 @@ Popup
     Shortcut
     {
         sequence: "Ctrl+R"
+        enabled: root.opened
         onActivated: recordKeyBox.startRecording()
     }
     
     Shortcut
     {
         sequence: "Escape"
+        enabled: root.opened
         onActivated: if(!recordKeyBox.recording) root.close()
     }
     
