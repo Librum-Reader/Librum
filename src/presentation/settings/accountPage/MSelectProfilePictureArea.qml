@@ -9,8 +9,8 @@ import Librum.icons 1.0
 Item
 {
     id: root
-    property bool imageSelected: imagePath.length > 0
-    property string imagePath: ""
+    property string image: ""
+    signal imageSelected()
     
     implicitWidth: 100
     implicitHeight: 100
@@ -35,26 +35,34 @@ Item
             id: dropArea
             anchors.fill: parent
             
-            onDropped:
-                (drop) => root.imagePath = drop.urls[0];
+            onDropped: (drop) =>
+                       {
+                           root.image = drop.urls[0];
+                           root.imageSelected();
+                       }
             
-            
+            /*
+              The image which is displayed when the dropArea owns an image
+              */
             Image
             {
-                id: image
+                id: profilePicture
                 anchors.fill: parent
-                visible: imageSelected
-                source: imagePath
+                visible: internal.imageExists
+                source: root.image
                 sourceSize.height: emptyDropArea.height
                 fillMode: Image.PreserveAspectFit
             }
             
+            /*
+              The illustation you see while hovering over the dropArea with a file
+              */
             Rectangle
             {
-                id: addFileImage
+                id: fileDropIllustration
                 anchors.fill: parent
                 z: 2
-                opacity: imageSelected ? 1 : 0.8
+                opacity: internal.imageExists ? 1 : 0.8
                 visible: dropArea.containsDrag
                 color: Style.colorBackground
                 radius: 4
@@ -62,6 +70,7 @@ Item
                 
                 Image
                 {
+                    id: fileDropImage
                     anchors.centerIn: parent
                     source: Icons.addFileIllustration
                     sourceSize.width: 220
@@ -69,18 +78,17 @@ Item
                 }
             }
             
+            /*
+              The empty look of the drop area
+              */
             Pane
             {
                 id: emptyDropArea
                 anchors.fill: parent
-                visible: !root.imageSelected
+                visible: !internal.imageExists
                 padding: 0
                 clip: true
-                background: Rectangle
-                {
-                    color: Style.colorLightGray
-                    radius: 4
-                }
+                background: Rectangle { color: Style.colorLightGray; radius: 4 }
                 
                 
                 ColumnLayout
@@ -120,7 +128,6 @@ Item
         }
     }
     
-    
     MouseArea
     {
         anchors.fill: parent
@@ -128,14 +135,19 @@ Item
         onClicked: fileDialog.open()
     }
     
-    
     FileDialog
     {
         id: fileDialog
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
-        nameFilters: ["png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        nameFilters: ["All files (*)", "png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
         
-        onAccepted: root.imagePath = file
+        onAccepted: root.image = file
+    }
+    
+    QtObject
+    {
+        id: internal
+        property bool imageExists: root.image.length > 0
     }
 }

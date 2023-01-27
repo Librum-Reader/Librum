@@ -20,21 +20,18 @@ MFlickWrapper
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.pagesBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         ColumnLayout
         {
+            id: layout
             spacing: 0
             width: parent.width
             
             MTitle
             {
-                id: title
+                id: pageTitle
                 Layout.topMargin: 64
                 titleText: "Updates"
                 descriptionText: "Any new update?"
@@ -43,14 +40,21 @@ MFlickWrapper
             }
             
             
+            // Pages to render
             Component { id: updatesAvailable; MUpdatesAvailable {} }
             Component { id: upToDate; MUpToDate {} }
             
+            
+            /*
+              The loader loads the fitting page, depending on whether the
+              application is up to date or not
+              */
             Loader
             {
                 id: contentLoader
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.topMargin: 32
                 sourceComponent: AppInformation.currentVersion === AppInformation.newestVersion ? upToDate : updatesAvailable
             }
         }

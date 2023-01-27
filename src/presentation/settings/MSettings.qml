@@ -22,13 +22,12 @@ Page
     property alias storagePage: storagePage
     property alias supportUsPage: supportUsPage
     
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
     
+    /*
+      Settings navigation shortcuts
+      */
     Shortcut
     {
         sequence: "Shift+1"
@@ -84,6 +83,9 @@ Page
             height: parent.height
         }
         
+        /*
+          The StackView is managing the switching of setting pages
+          */
         StackView
         {
             id: settingsPageManager
@@ -101,6 +103,7 @@ Page
     }
     
     
+    // Pages
     Component { id: aboutPage; MAboutPage{} }
     Component { id: appearancePage; MAppearancePage{} }
     Component { id: shortcutsPage; MShortcutsPage{} }
@@ -111,31 +114,49 @@ Page
     Component { id: supportUsPage; MSupportUsPage{} }
     
     
+    /*
+      loadPage() manages the page switching through out the settings
+      */
     function loadSettingsPage(page, sidebarItem)
     {
         if(settingsSidebar.currentItem === sidebarItem)
             return;
         
-        if(!saveSettingsPage(switchSettingsPage, page, sidebarItem))
+        if(!saveSettingsPage(internal.switchSettingsPage, page, sidebarItem))
             return;
         
-        switchSettingsPage(page, sidebarItem);
+        internal.switchSettingsPage(page, sidebarItem);
     }
     
+    /*
+      saveSettingsPage() saves the given settings page
+      
+      @param "switchPageFunction" is a callback for continuing page switching 
+      after the page was saved successfully. This can be a switch between settings pages,
+      but also a switch between main pages.
+      */
     function saveSettingsPage(switchPageFunction, page, sidebarItem)
     {
-        if(settingsPageManager.currentItem.hasCleanup)
+        if(settingsPageManager.currentItem.pageCleanup)
         {
-            settingsPageManager.currentItem.pageCleanup.callbackMethod = () => switchPageFunction(page, sidebarItem);
+            settingsPageManager.currentItem.pageCleanup.callbackFunction = 
+                    () => switchPageFunction(page, sidebarItem);
+            
             return settingsPageManager.currentItem.pageCleanup.cleanUp();
         }
         
         return true;
     }
     
-    function switchSettingsPage(page, sidebarItem)
+    QtObject
     {
-        settingsPageManager.replace(page);
-        settingsSidebar.changeSelectedSettingsItem(sidebarItem);
+        id: internal
+        
+        
+        function switchSettingsPage(page, sidebarItem)
+        {
+            settingsPageManager.replace(page);
+            settingsSidebar.changeSelectedSettingsItem(sidebarItem);
+        }
     }
 }

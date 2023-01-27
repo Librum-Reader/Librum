@@ -21,11 +21,7 @@ MFlickWrapper
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.pagesBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         ColumnLayout
@@ -63,14 +59,14 @@ MFlickWrapper
                 
                 ColumnLayout
                 {
-                    id: inDetailsLayout
+                    id: contentLayout
                     width: parent.width
                     spacing: 0
                     
                     
                     Label
                     {
-                        id: detailsTitle
+                        id: contentTitle
                         text: "Us"
                         color: Style.colorBaseText
                         font.pointSize: 20
@@ -81,32 +77,15 @@ MFlickWrapper
                     {
                         Layout.fillWidth: true
                         Layout.topMargin: 15
-                        text: "We are a small team of freelancing developers creating free apps for the community. We love"
+                        text: "We are a small team of freelancing developers creating free apps for the community. We love\n" +
+                              "working on fun projects, supporting our community and trying to make the world a better place."
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText3
                         font.pointSize: 14
                     }
                     
-                    RowLayout
-                    {
-                        id: teamTextColumn
-                        Layout.fillWidth: true
-                        spacing: 0
-                        
-                        
-                        Label
-                        {
-                            Layout.fillWidth: true
-                            text: "working on fun projects, supporting our community and trying to make the world a better place."
-                            wrapMode: Text.WordWrap
-                            color: Style.colorLightText3
-                            font.pointSize: 14
-                        }
-                    }
-                    
                     Label
                     {
-                        id: workText
                         Layout.fillWidth: true
                         Layout.topMargin: 18
                         text: "We are working in our own name, so we are not getting payed in any way."
@@ -115,12 +94,12 @@ MFlickWrapper
                         font.pointSize: 14
                     }
                     
+                    // RowLayout needed to put icon next to text
                     RowLayout
                     {
                         id: supportText
                         Layout.fillWidth: true
                         spacing: 0
-                        
                         
                         Label
                         {
@@ -141,12 +120,12 @@ MFlickWrapper
                             fillMode: Image.PreserveAspectFit
                         }
                         
-                        Item { Layout.fillWidth: true }
+                        Item { id: widthFiller; Layout.fillWidth: true }
                     }
                     
                     Label
                     {
-                        id: coffeeText
+                        id: supportOnPatreonText
                         Layout.fillWidth: true
                         Layout.topMargin: 36
                         text: "If you feel like supporting us and our new projects, feel free to support us on patreon"
@@ -189,6 +168,7 @@ MFlickWrapper
                         font.pointSize: 14
                     }
                     
+                    // RowLayout needed to put icon next to text
                     RowLayout
                     {
                         id: heartColumn

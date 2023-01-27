@@ -6,7 +6,6 @@ import Librum.style 1.0
 import Librum.icons 1.0
 
 
-
 Page
 {
     id: root
@@ -36,17 +35,9 @@ Page
     
     topPadding: 64
     horizontalPadding: 48
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
-    onWidthChanged:
-    {
-        if(searchButton.opened)
-            searchButton.close();
-    }
+    onWidthChanged: if(searchButton.opened) searchButton.close()
     
     
     Shortcut
@@ -59,22 +50,19 @@ Page
     ColumnLayout
     {
         id: layout
-        property int insideMargin : 48
-        property int outsideMargin : 48
-        
         anchors.fill: parent
         spacing: 0
         
         
         RowLayout
         {
-            id: titleRow
+            id: pageTitleRow
             Layout.fillWidth: true
             spacing: 0
             
             MTitle
             {
-                id: title
+                id: pageTitle
                 titleText: "Shortcuts"
                 descriptionText: "Make your own experience"
                 titleSize: 25
@@ -100,7 +88,7 @@ Page
                 
                 onClicked:
                 {
-                    addShortcutPopup.preselectedOption = -1;
+                    addShortcutPopup.preselectedSettingIndex = -1;
                     addShortcutPopup.open();
                 }
             }
@@ -114,9 +102,8 @@ Page
             Layout.topMargin: 32
             Layout.bottomMargin: 44
             topPadding: 60
-            leftPadding: layout.insideMargin
-            rightPadding: 0
-            bottomPadding: 0
+            leftPadding: internal.containerPadding
+            padding: 0
             clip: true
             background: Rectangle
             {
@@ -129,18 +116,19 @@ Page
             
             ColumnLayout
             {
-                id: inDetailsLayout
-                property int gapWidth: 340
-                
+                id: containerLayout
                 anchors.fill: parent
                 spacing: 0
                 
                 
+                /*
+                  The shortcuts header labeling the different columns
+                  */
                 RowLayout
                 {
                     id: headerLayout
                     Layout.fillWidth: true
-                    Layout.rightMargin: layout.outsideMargin
+                    Layout.rightMargin: internal.containerPadding
                     spacing: 0
                     
                     
@@ -157,7 +145,7 @@ Page
                     Item
                     { 
                         id: headerLabelSpacer
-                        Layout.preferredWidth: inDetailsLayout.gapWidth + 90
+                        Layout.preferredWidth: internal.verticalSettingSpacing + 90
                     }
                     
                     Label
@@ -177,12 +165,17 @@ Page
                         implicitWidth: 34
                         implicitHeight: 32
                         imageSize: 14
+                        // Make sure that the searchButton does not overlap other items
                         expansionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
                     }
                 }
                 
+                /*
+                  The actual shortcuts view
+                  */
                 ScrollView
                 {
+                    id: shortcutScrollArea
                     Layout.topMargin: 20
                     Layout.rightMargin: 20
                     Layout.bottomMargin: 32
@@ -192,6 +185,7 @@ Page
                     
                     Component.onCompleted:
                     {
+                        // contentItem is the ScrollView's underlying Flickable
                         contentItem.flickDeceleration = 1000;
                         contentItem.maximumFlickVelocity = 1000;
                     }
@@ -200,8 +194,6 @@ Page
                     ListView
                     {
                         id: listView
-                        property int moveSpeed : 550
-                        
                         anchors.rightMargin: 28
                         anchors.fill: parent
                         clip: true
@@ -209,32 +201,35 @@ Page
                         model: root.shortcutListModel
                         delegate: MShortcutDelegate
                         {
-                            onGapWidthChanged: (newWidth) => inDetailsLayout.gapWidth = newWidth
+                            onGapWidthChanged: (spacing) => internal.verticalSettingSpacing = spacing
                             onEditClicked:
                                 (index) =>
                                 {
-                                    addShortcutPopup.preselectedOption = index;
+                                    addShortcutPopup.preselectedSettingIndex = index;
                                     addShortcutPopup.open();
                                 }
                             
-                            onDeleteClicked: ;
+                            onDeleteClicked: (index) => {}
                         }
                         
                         
                         MouseArea
                         {
+                            id: mouseEventInterceptor
                             anchors.fill: parent
                             propagateComposedEvents: true
                             
-                            onWheel: (wheel) => listView.moveContent( wheel.angleDelta.y > 0)
-                            onClicked: (mouse) => mouse.accepted = false;
-                            onPressed: (mouse) => mouse.accepted = false;
+                            onWheel: (wheel) => listView.scroll(wheel.angleDelta.y > 0)
+                            // Propagate click/pressed signals to lower MouseAreas
+                            onClicked: (mouse) => mouse.accepted = false
+                            onPressed: (mouse) => mouse.accepted = false
                         }
                         
                         
-                        function moveContent(up)
+                        function scroll(up)
                         {
-                            listView.flick(0, up ? listView.moveSpeed : -listView.moveSpeed)
+                            let scrollSpeed = 550;
+                            listView.flick(0, up ? scrollSpeed : -scrollSpeed)
                         }
                     }
                 }
@@ -242,13 +237,19 @@ Page
         }
     }
     
-    
     MAddShortcutPopup
     {
         id: addShortcutPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
         
-        actionsList: root.shortcutListModel
+        actions: root.shortcutListModel
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int containerPadding: 48
+        property int verticalSettingSpacing: 340
     }
 }

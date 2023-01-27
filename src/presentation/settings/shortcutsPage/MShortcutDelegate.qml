@@ -12,9 +12,12 @@ Item
     required property int index
     required property string text
     required property string shortcut
-    signal gapWidthChanged(int newWidth)
+    
+    // The gap width between ACTION and SETTING. When the page gets smaller the gap decreases,
+    // this needs to be signaled to the header because it also needs to reize its gap aswell
+    signal gapWidthChanged(int spacing)
     signal editClicked(int index)
-    signal deleteClicked
+    signal deleteClicked(int index)
     
     height: 52
     width: listView.width
@@ -22,6 +25,7 @@ Item
     
     ColumnLayout
     {
+        id: layout
         anchors.fill: parent
         spacing: 0
         
@@ -56,6 +60,7 @@ Item
             
             Item
             {
+                id: widthFiller
                 Layout.fillWidth: true
                 Layout.maximumWidth: 247
                 
@@ -64,7 +69,7 @@ Item
             
             Label
             {
-                id: shortcutsText
+                id: shortcutName
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
                 text: root.shortcut
@@ -105,7 +110,7 @@ Item
                 imagePath: Icons.trashGray
                 imageSize: 21
                 
-                onClicked: root.deleteClicked()
+                onClicked: root.deleteClicked(root.index)
             }
         }
     }

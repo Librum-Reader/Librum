@@ -9,15 +9,15 @@ import Librum.icons 1.0
 Popup
 {
     id: root
-    property var actionsList
-    property int preselectedOption: -1
+    property var actions
+    property int preselectedSettingIndex: -1
     signal applied
     
     implicitWidth: 594
     implicitHeight: layout.implicitHeight
-    focus: true
     closePolicy: Popup.CloseOnPressOutside
     padding: 0
+    focus: true
     modal: true
     background: Rectangle { color: Style.colorBackground; radius: 6 }
     Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
@@ -25,30 +25,22 @@ Popup
     onOpened:
     {
         applyButton.forceActiveFocus();
-        
-        // Set the preselected item
-        if(root.preselectedOption !== -1)
-            actionsComboBox.selectItem(preselectedOption);
+        internal.setPreselectedItem();
     }
     
-    onClosed:
-    {
-        // Reset data
-        actionsComboBox.deselectCurrenItem();
-        recordBox.stopRecording();
-        recordBox.clear();
-    }
+    onClosed: internal.resetPopupData()
+    
     
     Shortcut
     {
         sequence: "Ctrl+R"
-        onActivated: recordBox.startRecording()
+        onActivated: recordKeyBox.startRecording()
     }
     
     Shortcut
     {
         sequence: "Escape"
-        onActivated: if(!recordBox.recording) root.close()
+        onActivated: if(!recordKeyBox.recording) root.close()
     }
     
     
@@ -66,7 +58,7 @@ Popup
             Layout.preferredWidth: 32
             Layout.topMargin: 12
             Layout.rightMargin: 14
-            Layout.alignment: Qt.AlignTop | Qt.AlignRight
+            Layout.alignment: Qt.AlignRight
             backgroundColor: "transparent"
             opacityOnPressed: 0.7
             borderColor: "transparent"
@@ -86,11 +78,7 @@ Popup
             topPadding: 0
             horizontalPadding: 52
             bottomPadding: 42
-            background: Rectangle
-            {
-                color: "transparent"
-                radius: 6
-            }
+            background: Rectangle { color: "transparent"; radius: 6 }
             
             
             ColumnLayout
@@ -111,7 +99,7 @@ Popup
                 
                 RowLayout
                 {
-                    id: buttonLayout
+                    id: selectionLayout
                     Layout.fillWidth: true
                     Layout.topMargin: 42
                     spacing: 26
@@ -136,13 +124,13 @@ Popup
                         
                         fontSize: 12.5
                         checkBoxStyle: false
-                        model: shortcutListModel
+                        model: root.actions
                     }
                     
                     
                     MRecordKeyBox
                     {
-                        id: recordBox
+                        id: recordKeyBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemToRedirectFocusTo: applyButton
@@ -151,7 +139,7 @@ Popup
                 
                 RowLayout
                 {
-                    id: decisionLayout
+                    id: buttonLayout
                     Layout.topMargin: 96
                     spacing: 16
                     
@@ -174,6 +162,7 @@ Popup
                         
                         onClicked: root.close()
                         
+                        // Key navigation
                         Keys.onPressed:
                             (event) =>
                             {
@@ -207,6 +196,7 @@ Popup
                         
                         onClicked: root.close()
                         
+                        // Key navigation
                         Keys.onPressed:
                             (event) =>
                             {
@@ -226,18 +216,37 @@ Popup
         }
     }
     
-    
     MouseArea
     {
         anchors.fill: parent
         
         propagateComposedEvents: true
+        // If clicking anywhere on the popup, stop the recordKeyBox
         onClicked:
             (mouse) =>
             {
-                recordBox.stopRecording();
+                recordKeyBox.stopRecording();
                 applyButton.forceActiveFocus();
                 mouse.accepted = false;
             }
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function setPreselectedItem()
+        {
+            if(root.preselectedSettingIndex !== -1)
+                actionsComboBox.selectItem(root.preselectedSettingIndex);
+        }
+        
+        function resetPopupData()
+        {
+            actionsComboBox.deselectCurrenItem();
+            recordKeyBox.stopRecording();
+            recordKeyBox.clear();
+        }
     }
 }

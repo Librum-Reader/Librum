@@ -16,6 +16,7 @@ Item
     property string originalSequence: ""
     
     
+    // Creates the glowing effect around the button
     Glow
     {
         id: backgroundGlow
@@ -33,9 +34,10 @@ Item
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 2
+        
         
         Label
         {
@@ -46,11 +48,9 @@ Item
             color: Style.colorBaseTitle
         }
         
-        
         Rectangle
         {
             id: button
-            
             Layout.fillWidth: true
             Layout.preferredHeight: 38
             radius: 4
@@ -82,9 +82,7 @@ Item
                     id: recordLabel
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
-                    text: keySequenceRecorder.currentSequence === "" ? 
-                              (keySequenceRecorder.originalSequence === "" ? "Press to record" : keySequenceRecorder.originalSequence)
-                            : keySequenceRecorder.currentSequence
+                    text: internal.getRecordText()
                     font.pointSize: 13
                     color: Style.colorLightText3
                     elide: Text.ElideLeft
@@ -109,7 +107,7 @@ Item
         anchors.fill: parent
         
         onClicked:
-        {            
+        {
             if(root.recording)
             {
                 stopRecording();
@@ -144,6 +142,24 @@ Item
             to: 2
         }
     }
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function getRecordText()
+        {
+            if(keySequenceRecorder.currentSequence)
+                return keySequenceRecorder.currentSequence; 
+            
+            if(keySequenceRecorder.originalSequence)
+                return keySequenceRecorder.originalSequence;
+            
+            return "Press to record";
+        }
+    }
+    
     
     function clear()
     {

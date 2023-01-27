@@ -8,14 +8,14 @@ Item
 {
     id: root
     property bool selected : false
-    property int imageLeftMargin : 0
-    property int imageWidth : 0
-    property int labelLeftMargin : 0
-    property int labelTopMargin : 0
+    property int imageLeftMargin: 0
+    property int imageWidth: 0
+    property int labelLeftMargin: 0
+    property int labelTopMargin: 0
     property int textVerticalAlignment: Text.AlignVCenter
-    property string textContent : "<Text here>"
-    property string defaultIcon : "<icon here>"
-    property string selectedIcon : "<icon here>"
+    property string textContent
+    property string defaultIcon
+    property string selectedIcon
     signal clicked
     
     implicitWidth: 235
@@ -26,7 +26,8 @@ Item
     {
         id: container
         anchors.fill: parent
-        color: (root.selected ? "#F0F0FF" : "transparent")
+        color: root.selected ? "#F0F0FF" : "transparent"
+        
         
         RowLayout
         {
@@ -39,9 +40,9 @@ Item
             {
                 id: icon
                 Layout.leftMargin: root.imageLeftMargin
-                source: (root.selected ? root.selectedIcon : root.defaultIcon)
+                source: root.selected ? root.selectedIcon : root.defaultIcon
                 fillMode: Image.PreserveAspectFit
-                sourceSize.width: (root.selected ? root.imageWidth + 1 : root.imageWidth)
+                sourceSize.width: root.selected ? root.imageWidth + 1 : root.imageWidth
             }
             
             Label
@@ -51,12 +52,12 @@ Item
                 Layout.leftMargin: root.labelLeftMargin
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
-                color: (root.selected ? Style.colorBasePurple : Style.colorBaseText)
+                color: root.selected ? Style.colorBasePurple : Style.colorBaseText
                 font.pointSize: 13
-                font.weight: (root.selected ? Font.DemiBold : Font.Normal)
+                font.weight: root.selected ? Font.DemiBold : Font.Normal
             }
             
-            Item { Layout.fillWidth: true }
+            Item { id: widthFiller; Layout.fillWidth: true }
             
             Rectangle
             {

@@ -12,9 +12,6 @@ MFlickWrapper
 {
     id: root
     property alias pageCleanup: pageCleanup
-    property alias forgotToSaveChangesDialog: forgotToSaveChangesDialog
-    readonly property bool hasCleanup: true
-    property bool unsavedChanges: false
     
     contentHeight: page.implicitHeight
     
@@ -26,15 +23,12 @@ MFlickWrapper
         horizontalPadding: 48
         topPadding: 64
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.pagesBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         Shortcut
         {
+            id: saveSettings
             sequence: StandardKey.Save
             onActivated: root.saveAccountSettings()
         }
@@ -43,8 +37,6 @@ MFlickWrapper
         ColumnLayout
         {
             id: layout
-            property int insideMargin : 40
-            
             width: parent.width
             spacing: 0
             
@@ -58,9 +50,9 @@ MFlickWrapper
                 
                 MTitle
                 {
-                    id: title
+                    id: pageTitle
                     titleText: "Account"
-                    descriptionText: "Kai Doe"
+                    descriptionText: UserController.firstName + " " + UserController.lastName
                     titleSize: 25
                     descriptionSize: 13.25
                 }
@@ -88,11 +80,11 @@ MFlickWrapper
             
             Pane
             {
-                id: profile
+                id: profileBox
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 topPadding: 25
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.boxPadding
                 bottomPadding: 40
                 background: Rectangle
                 {
@@ -114,7 +106,7 @@ MFlickWrapper
                     
                     ColumnLayout
                     {
-                        id: profileInputColumn
+                        id: profileInputLayout
                         Layout.maximumWidth: Math.round(profileLayout.width - profileLayout.horizontalSpacing) / 2
                         Layout.fillWidth: true
                         spacing: 0
@@ -142,7 +134,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: root.unsavedChanges = true
+                            onEdited: internal.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -158,7 +150,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: root.unsavedChanges = true
+                            onEdited: internal.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -174,7 +166,7 @@ MFlickWrapper
                             borderWidth: 1
                             borderRadius: 4
                             
-                            onEdited: root.unsavedChanges = true
+                            onEdited: internal.unsavedChanges = true
                         }
                     }
                     
@@ -188,7 +180,7 @@ MFlickWrapper
                         Layout.rightMargin: 40
                         Layout.leftMargin: 32
                         
-                        onImageSelectedChanged: root.unsavedChanges = true
+                        onImageSelected: internal.unsavedChanges = true
                     }
                     
                     Item { Layout.fillWidth: true }
@@ -197,11 +189,11 @@ MFlickWrapper
             
             Pane
             {
-                id: changePassword
+                id: changePasswordBox
                 Layout.fillWidth: true
                 Layout.topMargin: 26
                 topPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.boxPadding
                 bottomPadding: 50
                 background: Rectangle
                 {
@@ -214,9 +206,10 @@ MFlickWrapper
                 
                 ColumnLayout
                 {
-                    id: passwordColumn
+                    id: passwordLayout
                     anchors.fill: parent
                     spacing: 0
+                    
                     
                     Label
                     {
@@ -234,6 +227,7 @@ MFlickWrapper
                         spacing: profileLayout.horizontalSpacing
                         Layout.topMargin: 30
                         
+                        
                         MLabeledInputBox
                         {
                             id: passwordInput
@@ -247,7 +241,7 @@ MFlickWrapper
                             imagePath: Icons.eyeOn
                             toggledImagePath: Icons.eyeOff
                             
-                            onEdited: root.unsavedChanges = true
+                            onEdited: internal.unsavedChanges = true
                         }
                         
                         MLabeledInputBox
@@ -263,7 +257,7 @@ MFlickWrapper
                             imagePath: Icons.eyeOn
                             toggledImagePath: Icons.eyeOff
                             
-                            onEdited: root.unsavedChanges = true
+                            onEdited: internal.unsavedChanges = true
                         }
                     }
                 }
@@ -271,11 +265,11 @@ MFlickWrapper
             
             Pane
             {
-                id: yourData
+                id: yourDataBox
                 Layout.fillWidth: true
                 Layout.topMargin: 26
                 topPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.boxPadding
                 bottomPadding: 38
                 background: Rectangle
                 {
@@ -314,7 +308,7 @@ MFlickWrapper
                         spacing: 12
                         checked: true
                         
-                        onClicked: root.unsavedChanges = true
+                        onClicked: internal.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -329,7 +323,7 @@ MFlickWrapper
                         spacing: 12
                         checked: true
                         
-                        onClicked: root.unsavedChanges = true
+                        onClicked: internal.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -343,7 +337,7 @@ MFlickWrapper
                         fontColor: Style.colorBaseText
                         spacing: 12
                         
-                        onClicked: root.unsavedChanges = true
+                        onClicked: internal.unsavedChanges = true
                     }
                     
                     MLabeledCheckBox
@@ -357,13 +351,12 @@ MFlickWrapper
                         fontColor: Style.colorBaseText
                         spacing: 12
                         
-                        onClicked: root.unsavedChanges = true
+                        onClicked: internal.unsavedChanges = true
                     }
                 }
             }
         }
     }
-    
     
     MForgotToSaveChangesPopup
     {
@@ -372,25 +365,36 @@ MFlickWrapper
         y: Math.round(root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
         
         saveMethod: root.saveAccountSettings
-        dontSaveMethod: () => { root.unsavedChanges = false; }
+        dontSaveMethod: () => { internal.unsavedChanges = false; }
         
         onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
     }
     
+    /*
+      Since MAccountPage can have unsaved change, it needs MPageCleanup to
+      ensure correct saving of data on page switching.
+      */
     MPageCleanup
     {
         id: pageCleanup
-        action: () =>
-                {
-                    if(root.unsavedChanges)
-                    {
-                        forgotToSaveChangesDialog.open();
-                        return true;
-                    }
-                    return false;
-                }
+        savePageAction: () =>
+                        {
+                            if(internal.unsavedChanges)
+                            {
+                                forgotToSaveChangesDialog.open();
+                                return true;
+                            }
+                            return false;
+                        }
         
-        signalToBindTo: forgotToSaveChangesDialog.decisionMade
+        savingPageFinishedSignal: forgotToSaveChangesDialog.decisionMade
+    }
+    
+    QtObject
+    {
+        id: internal
+        property bool unsavedChanges: false
+        property int boxPadding: 40
     }
     
     
@@ -399,9 +403,9 @@ MFlickWrapper
         UserController.firstName = firstNameInput.text;
         UserController.lastName = lastNameInput.text;
         
-        if(profilePictureArea.imagePath !== Globals.profilePicture)
-            Globals.profilePicture = profilePictureArea.imagePath;
+        if(profilePictureArea.image !== Globals.profilePicture)
+            Globals.profilePicture = profilePictureArea.image;
         
-        root.unsavedChanges = false;
+        internal.unsavedChanges = false;
     }
 }

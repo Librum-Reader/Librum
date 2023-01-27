@@ -18,15 +18,18 @@ Item
     property MSettingsSidebarItem accountItem: accountItem
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
-    
     property MSettingsSidebarItem currentItem : aboutItem
     
     implicitWidth: 238
     implicitHeight: Window.height
     
+    
+    /*
+      Adds a border to the whole settings sidebar
+      */
     Rectangle
     {
-        id: container
+        id: borderRect
         anchors.fill: parent
         color: "transparent"
         border.color: Style.colorLightBorder
@@ -34,6 +37,7 @@ Item
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.implicitHeight
         
@@ -56,7 +60,7 @@ Item
             
             Rectangle
             {
-                id: titleBorder
+                id: titleSeparator
                 Layout.preferredWidth: 56
                 Layout.preferredHeight: 2
                 Layout.topMargin: 15
@@ -79,7 +83,7 @@ Item
             {
                 id: aboutItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 14
                 Layout.leftMargin: 1
                 selected: true
@@ -97,7 +101,7 @@ Item
             {
                 id: appearanceItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.leftMargin: 1
                 imageLeftMargin: 25
@@ -114,7 +118,7 @@ Item
             {
                 id: shortcutsItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.leftMargin: 1
                 imageLeftMargin: 26
@@ -131,7 +135,7 @@ Item
             {
                 id: updatesItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.leftMargin: 1
                 imageLeftMargin: 25
@@ -148,7 +152,7 @@ Item
             {
                 id: generalSettingsItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.leftMargin: 1
                 imageLeftMargin: 24
@@ -176,7 +180,7 @@ Item
             {
                 id: accountItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 12
                 Layout.leftMargin: 1
                 imageLeftMargin: 25
@@ -195,7 +199,7 @@ Item
             {
                 id: storageItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.leftMargin: 1
                 imageLeftMargin: 26
@@ -212,7 +216,7 @@ Item
             {
                 id: supportUsItem
                 Layout.preferredHeight: 32
-                Layout.preferredWidth: root.width - 2
+                Layout.preferredWidth: internal.sidebarItemWidth
                 Layout.topMargin: 5
                 Layout.bottomMargin: 12
                 Layout.leftMargin: 1
@@ -227,6 +231,13 @@ Item
             }
         }
     }
+    
+    QtObject
+    {
+        id: internal
+        property int sidebarItemWidth: root.width - 2
+    }
+    
     
     function changeSelectedSettingsItem(newItem)
     {

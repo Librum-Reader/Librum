@@ -20,38 +20,20 @@ MFlickWrapper
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.pagesBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         ColumnLayout
         {
             id: layout
-            property int insideMargin : 40
-            property var settings: []
-            
             width: parent.width
             spacing: 0
-            
-            function registerSetting(setting)
-            {
-                settings.push(setting);
-            }
             
             
             Connections
             {
                 target: SettingsController
-                function onReload()
-                {
-                    for (var i = 0; i < layout.settings.length; i++)
-                    {
-                        layout.settings[i].reset();
-                    }
-                }
+                function onReload() { internal.resetSettings(); }
             }
             
             
@@ -97,7 +79,7 @@ MFlickWrapper
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 verticalPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.pagePadding
                 background: Rectangle
                 {
                     color: Style.colorBackground
@@ -138,44 +120,31 @@ MFlickWrapper
                     MOnOffToggle
                     {
                         id: openBookAfterCreationToggle
-                        property string savedValue: layout.getSavedSetting(SettingKeys.OpenBooksAfterCreation)
+                        property string savedValue: internal.getSavedSetting(SettingKeys.OpenBooksAfterCreation)
                         Layout.topMargin: 4
                         onByDefault: savedValue === onText
                         
                         onToggled:
                         {
-                            layout.saveSetting(SettingKeys.OpenBooksAfterCreation,
+                            internal.saveSetting(SettingKeys.OpenBooksAfterCreation,
                                                currentlyOn === true ? onText : offText)
                         }
                         
                         function reset()
                         {
-                            savedValue = layout.getSavedSetting(SettingKeys.OpenBooksAfterCreation);
+                            savedValue = internal.getSavedSetting(SettingKeys.OpenBooksAfterCreation);
                             if(savedValue === onText)
                                 setOn();
                             else
                                 setOff();
                         }
                         
-                        Component.onCompleted: layout.registerSetting(this);
+                        Component.onCompleted: internal.registerSetting(this);
                     }
                 }
             }
-            
-            
-            // higher order functions -> simplify syntax
-            function saveSetting(key, value)
-            {
-                SettingsController.setSetting(key, value, SettingGroups.General);
-            }
-            
-            function getSavedSetting(key)
-            {
-                return SettingsController.getSetting(key, SettingGroups.General);
-            }
         }
     }
-    
     
     MResetSettingsPopup
     {
@@ -188,6 +157,48 @@ MFlickWrapper
         {
             SettingsController.resetSettingGroup(SettingGroups.General);
             close();
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int pagePadding : 40
+        property var registeredSettings: []
+        
+        
+        /*
+          Every setting needs to register it self and define some specific methods
+          e.g. reset(), so that certain operations can be executed on all settings dynamically
+          */
+        function registerSetting(setting)
+        {
+            registeredSettings.push(setting);
+        }
+        
+        /*
+          Reset the values of all settings, by calling their reset() method
+          */
+        function resetSettings()
+        {
+            for (var i = 0; i < internal.registeredSettings.length; i++)
+            {
+                internal.registeredSettings[i].reset();
+            }
+        }
+        
+        
+        /*
+          Higher order functions to simplify the call on the SettingsController
+          */
+        function saveSetting(key, value)
+        {
+            SettingsController.setSetting(key, value, SettingGroups.General);
+        }
+        
+        function getSavedSetting(key)
+        {
+            return SettingsController.getSetting(key, SettingGroups.General);
         }
     }
 }

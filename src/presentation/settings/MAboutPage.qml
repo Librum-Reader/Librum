@@ -20,19 +20,13 @@ MFlickWrapper
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.pagesBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         
         ColumnLayout
         {
             id: layout
-            property int insideMargin : 40
-            
             width: parent.width
             spacing: 26
             
@@ -53,7 +47,7 @@ MFlickWrapper
                 Layout.fillWidth: true
                 Layout.topMargin: 6
                 topPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.pagePadding
                 bottomPadding: 21
                 background: Rectangle
                 {
@@ -139,7 +133,7 @@ MFlickWrapper
                 id: creator
                 Layout.fillWidth: true
                 topPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.pagePadding
                 bottomPadding: 30
                 background: Rectangle
                 {
@@ -232,7 +226,7 @@ MFlickWrapper
                 Layout.fillWidth: true
                 Layout.minimumHeight: inThisAppLayout.height + 15
                 topPadding: 24
-                horizontalPadding: layout.insideMargin
+                horizontalPadding: internal.pagePadding
                 bottomPadding: 56
                 background: Rectangle
                 {
@@ -291,5 +285,11 @@ MFlickWrapper
                 }
             }
         }
+    }
+    
+    QtObject
+    {
+        id: internal
+        property int pagePadding: 40
     }
 }

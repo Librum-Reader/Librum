@@ -9,7 +9,6 @@ import Librum.icons 1.0
 Popup
 {
     id: root
-    property var resetSettings
     signal decisionMade
     signal resetChoosed
     signal keepChoosed
@@ -26,6 +25,7 @@ Popup
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
         
@@ -50,28 +50,24 @@ Popup
             
             Pane
             {
-                id: backgroundRect
+                id: container
                 Layout.fillWidth: true
                 topPadding: 86
                 horizontalPadding: 82
                 bottomPadding: 66
-                background: Rectangle
-                {
-                    color: Style.colorBackground
-                    radius: 6
-                }
+                background: Rectangle { color: Style.colorBackground; radius: 6 }
                 
                 
                 ColumnLayout
                 {
-                    id: inRectLayout
+                    id: contentLayout
                     width: parent.width
                     spacing: 22
                     
                     
                     Label
                     {
-                        id: whoops
+                        id: whoopsText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: "Reset settings?"
@@ -82,7 +78,7 @@ Popup
                     
                     Label
                     {
-                        id: explenation
+                        id: permanentActionText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -116,17 +112,11 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.keep()
                             
                             KeyNavigation.tab: resetButton
                             KeyNavigation.right: resetButton
-                            Keys.onReturnPressed: buttonAction()
-                            
-                            function buttonAction()
-                            {
-                                root.keepChoosed();
-                                root.decisionMade();
-                            }
+                            Keys.onReturnPressed: internal.keep()
                         }
                         
                         MButton
@@ -144,21 +134,33 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.reset()
                             
                             KeyNavigation.tab: keepButton
                             KeyNavigation.left: keepButton
-                            Keys.onReturnPressed: buttonAction()
-                            
-                            function buttonAction()
-                            {
-                                root.resetChoosed();
-                                root.decisionMade();
-                            }
+                            Keys.onReturnPressed: internal.reset()
                         }
                     }
                 }
             }
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function reset()
+        {
+            root.resetChoosed();
+            root.decisionMade();
+        }
+        
+        function keep()
+        {
+            root.keepChoosed();
+            root.decisionMade();
         }
     }
     
