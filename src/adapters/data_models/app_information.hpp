@@ -60,8 +60,8 @@ public slots:
 
 
 private:
-    QString m_currentVersion { "v0.1" };
-    QString m_newestVersion { "v0.1" };
+    QString m_currentVersion { "v0.2" };
+    QString m_newestVersion { "v0.2" };
     QString m_currentQtVersion { "v5.15.7" };
     QString m_companyName { "Etovex" };
     QString m_productName { "Librum" };
