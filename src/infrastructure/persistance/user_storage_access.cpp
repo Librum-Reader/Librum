@@ -93,7 +93,10 @@ void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
 void UserStorageAccess::proccessGetUserResult()
 {
     int expectedStatusCode = 200;
-    if(checkForErrors(expectedStatusCode, m_getUserReply.get()))
+    auto replyStatus =
+        validateServerReply(expectedStatusCode, m_getUserReply.get());
+
+    if(!replyStatus.success)
     {
         emit gettingUserFailed();
         return;
@@ -116,7 +119,7 @@ void UserStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
     connect(reply, &QNetworkReply::finished, this,
             [this, statusCode, reply]()
             {
-                checkForErrors(statusCode, reply);
+                validateServerReply(statusCode, reply);
             });
 }
 
@@ -137,20 +140,26 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     return result;
 }
 
-bool UserStorageAccess::checkForErrors(int expectedStatusCode,
-                                       QNetworkReply* reply)
+ServerReplyStatus UserStorageAccess::validateServerReply(int expectedStatusCode,
+                                                         QNetworkReply* reply)
 {
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(reply->error() != QNetworkReply::NoError ||
-       expectedStatusCode != statusCode)
+
+    auto replyHasError = reply->error() != QNetworkReply::NoError;
+    if(replyHasError || expectedStatusCode != statusCode)
     {
+        auto errorMessage = reply->readAll();
         qWarning() << "User storage error: " << reply->errorString()
-                   << "\nServer reply: " << reply->readAll();
-        return true;
+                   << "\nServer reply: " << errorMessage;
+
+        return ServerReplyStatus {
+            .success = false,
+            .errorMessage = errorMessage,
+        };
     }
 
-    return false;
+    return ServerReplyStatus { .success = true };
 }
 
 }  // namespace infrastructure::persistence

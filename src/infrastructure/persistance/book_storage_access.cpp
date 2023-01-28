@@ -68,10 +68,11 @@ void BookStorageAccess::downloadBook(const QString& authToken,
 void BookStorageAccess::proccessBookCreationResult()
 {
     int expectedStatusCode = 201;
-    if(checkForErrors(expectedStatusCode, m_bookCreationReply.get()))
+    auto replyStatus =
+        validateServerReply(expectedStatusCode, m_bookCreationReply.get());
+    if(!replyStatus.success)
     {
-        QString reason = m_bookCreationReply->readAll();
-        emit creatingBookFinished(false, reason);
+        emit creatingBookFinished(false, replyStatus.errorMessage);
         return;
     }
 
@@ -80,7 +81,9 @@ void BookStorageAccess::proccessBookCreationResult()
 
 void BookStorageAccess::proccessGettingBooksMetaDataResult()
 {
-    if(checkForErrors(200, m_gettingBooksMetaDataReply.get()))
+    auto replyStatus =
+        validateServerReply(200, m_gettingBooksMetaDataReply.get());
+    if(!replyStatus.success)
     {
         std::vector<QJsonObject> empty;
         emit gettingBooksMetaDataFinished(empty);
@@ -124,24 +127,31 @@ void BookStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
     connect(reply, &QNetworkReply::finished, this,
             [this, expectedStatusCode, reply]()
             {
-                checkForErrors(expectedStatusCode, reply);
+                validateServerReply(expectedStatusCode, reply);
             });
 }
 
-bool BookStorageAccess::checkForErrors(int expectedStatusCode,
-                                       QNetworkReply* reply)
+ServerReplyStatus BookStorageAccess::validateServerReply(int expectedStatusCode,
+                                                         QNetworkReply* reply)
 {
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+
+
     if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
     {
+        auto errorMessage = reply->readAll();
         qWarning() << "Book storage error: " << reply->errorString()
-                   << "\nServer reply: " << reply->readAll();
-        return true;
+                   << "\nServer reply: " << errorMessage;
+
+        return ServerReplyStatus {
+            .success = false,
+            .errorMessage = errorMessage,
+        };
     }
 
-    return false;
+    return ServerReplyStatus { .success = true };
 }
 
 }  // namespace infrastructure::persistence

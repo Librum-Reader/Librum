@@ -45,18 +45,26 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
             &AuthenticationAccess::proccessRegistrationResult);
 }
 
-bool AuthenticationAccess::checkForErrors(int expectedStatusCode)
+ServerReplyStatus AuthenticationAccess::validateServerReply(
+    int expectedStatusCode)
 {
     int statusCode =
         m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-    if(m_reply->error() != QNetworkReply::NoError ||
-       statusCode != expectedStatusCode)
+
+    auto replyHasError = m_reply->error() != QNetworkReply::NoError;
+    if(replyHasError || statusCode != expectedStatusCode)
     {
+        QString errorMessage = m_reply->readAll();
         qWarning() << "Authentication error: " << m_reply->errorString()
-                   << "\nServer reply: " << m_reply->readAll();
+                   << "\nServer reply: " << errorMessage;
+
+        return ServerReplyStatus {
+            .success = false,
+            .errorMessage = errorMessage,
+        };
     }
 
-    return false;
+    return ServerReplyStatus { .success = true };
 }
 
 QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
@@ -76,7 +84,8 @@ QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
 void AuthenticationAccess::proccessAuthenticationResult()
 {
     auto expectedStatusCode = 200;
-    if(checkForErrors(expectedStatusCode))
+    auto replyStatus = validateServerReply(expectedStatusCode);
+    if(!replyStatus.success)
     {
         emit authenticationFinished("");
         return;
@@ -88,9 +97,10 @@ void AuthenticationAccess::proccessAuthenticationResult()
 void AuthenticationAccess::proccessRegistrationResult()
 {
     auto expectedStatusCode = 201;
-    if(checkForErrors(expectedStatusCode))
+    auto replyStatus = validateServerReply(expectedStatusCode);
+    if(!replyStatus.success)
     {
-        emit registrationFinished(false, m_reply->readAll());
+        emit registrationFinished(false, replyStatus.errorMessage);
         return;
     }
 

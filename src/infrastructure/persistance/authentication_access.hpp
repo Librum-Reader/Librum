@@ -8,6 +8,7 @@
 #include <QNetworkRequest>
 #include <QObject>
 #include <memory>
+#include "server_reply_status.hpp"
 #include "i_authentication_access.hpp"
 
 namespace infrastructure::persistence
@@ -26,7 +27,7 @@ private slots:
     void proccessRegistrationResult();
 
 private:
-    bool checkForErrors(int expectedStatusCode);
+    ServerReplyStatus validateServerReply(int expectedStatusCode);
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;

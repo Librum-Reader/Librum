@@ -5,6 +5,7 @@
 #include <QNetworkRequest>
 #include <QString>
 #include "i_book_storage_access.hpp"
+#include "server_reply_status.hpp"
 
 namespace infrastructure::persistence
 {
@@ -29,7 +30,8 @@ private slots:
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
     void linkRequestToErrorHandling(QNetworkReply* reply, int statusCode);
-    bool checkForErrors(int expectedStatusCode, QNetworkReply* reply);
+    ServerReplyStatus validateServerReply(int expectedStatusCode,
+                                          QNetworkReply* reply);
 
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
