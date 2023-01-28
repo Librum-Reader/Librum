@@ -3,7 +3,9 @@ import QtQuick.Controls 2.15
 import Librum.elements 1.0
 import Librum.style 1.0
 
-
+/*
+  The book page
+  */
 Item
 {
     id: root

@@ -13,6 +13,7 @@ Item
     
     Rectangle
     {
+        id: background
         anchors.fill: parent
         color: Style.colorBackground
         

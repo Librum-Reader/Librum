@@ -30,45 +30,46 @@ Pane
     
     implicitHeight: 48
     padding: 8
-    background: Rectangle
-    {
-        color: Style.colorLightGray2
-        radius: 4
-    }
+    background: Rectangle { color: Style.colorLightGray2; radius: 4 }
     
     onVisibleChanged: if(optionsPopup.opened) optionsPopup.close()
     
     
     Shortcut
     {
+        id: openChapterSidebar
         sequence: Qt.Key_Tab
-        onActivated: chapterButton.buttonTriggeredAction()
+        onActivated: root.chapterButtonClicked()
     }
     Shortcut
     {
+        id: openBookmarks
         sequence: "Ctrl+B"
-        onActivated: bookmarksButton.buttonTriggeredAction()
+        onActivated: root.bookMarkButtonClicked()
     }
     Shortcut
     {
+        id: search
         sequence: "Ctrl+F"
-        onActivated: searchButton.buttonTriggeredAction()
+        onActivated: root.searchButtonClicked()
     }
     Shortcut
     {
+        id: startFullScreenMode
         sequences: ["Ctrl+Alt+F"]
-        onActivated: fullScreenButton.buttonTriggeredAction()
+        onActivated: root.fullScreenButtonClicked()
     }
     Shortcut
     {
+        id: openOptions
         sequence: "Ctrl+Alt+O"
-        onActivated: optionsButton.buttonTriggeredAction()
+        onActivated: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
     }
     
     
     RowLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 8
         
@@ -98,13 +99,7 @@ Pane
             imageSize: 18
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                root.chapterButtonClicked();
-            }
+            onClicked: root.chapterButtonClicked()
         }
         
         MButton
@@ -118,13 +113,7 @@ Pane
             imageSize: 14
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                root.bookMarkButtonClicked();
-            }
+            onClicked: root.bookMarkButtonClicked()
         }
         
         MButton
@@ -142,22 +131,18 @@ Pane
             fontSize: 10.5
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                root.currentPageButtonClicked();
-            }
+            onClicked: root.currentPageButtonClicked()
         }
         
         Label
         {
+            id: bookTitle
+            // Calculate the padding to position the label in the middle
+            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarksButton.width 
+                                          - currentPageButton.width - layout.spacing*5 + Window.width / 2 - contentWidth / 2
+            
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            // To be positioned at the horizontal the center
-            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarksButton.width 
-                                          - currentPageButton.width - mainLayout.spacing*5 + Window.width / 2 - contentWidth / 2
             leftPadding: paddingToCenter
             text: root.bookTitle
             color: Style.colorBaseTitle
@@ -178,7 +163,6 @@ Pane
             defaultIndex: 6
             image: Icons.dropdownBlack
             imageSize: 9
-            
             checkBoxStyle: false
             model: ListModel
             {
@@ -209,17 +193,10 @@ Pane
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
             imagePath: active ? Icons.readingViewMaximizePurple : Icons.readingViewMaximizeBlack
-            
             imageSize: 20
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                root.fullScreenButtonClicked();
-            }
+            onClicked: root.fullScreenButtonClicked()
         }
         
         MButton
@@ -233,13 +210,7 @@ Pane
             imageSize: 18
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                root.searchButtonClicked();
-            }
+            onClicked: root.searchButtonClicked()
         }
         
         MButton
@@ -253,14 +224,7 @@ Pane
             imageSize: 20
             opacityOnPressed: 0.7
             
-            onClicked: buttonTriggeredAction()
-            
-            
-            function buttonTriggeredAction()
-            {
-                // @disable-check M127
-                optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
-            }
+            onClicked: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
         }
     }
     

@@ -14,22 +14,33 @@ MFlickWrapper
     id: root
     contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight : Window.height
     
+    // Passing the focus to firstNameInput on Component.onCompleted() causes it
+    // to pass controll back to root for some reason, this fixes the focus problem
+    onActiveFocusChanged: if(activeFocus) firstNameInput.giveFocus()
+    
     Page
     {
         id: page
         anchors.fill: parent
         bottomPadding: 16
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.loginWindowBackground
-        }
+        background: Rectangle { anchors.fill: parent; color: Style.loginWindowBackground }
         
         
         Shortcut
         {
+            id: registerShortcut
             sequence: "Ctrl+Return"
-            onActivated: registerButton.buttonTriggeredAction()
+            onActivated: internal.registerUser()
+        }
+        
+        Connections
+        {
+            id: registrationFinished
+            target: AuthController
+            function onRegistrationFinished(success, reason) 
+            {
+                internal.proccessRegistrationResult(success, reason);
+            }
         }
         
         
@@ -42,20 +53,17 @@ MFlickWrapper
             
             Pane
             {
-                id: backgroundRect
+                id: background
                 Layout.fillWidth: true
                 topPadding: 48
                 bottomPadding: 36
                 horizontalPadding: 52
-                background: Rectangle
-                {
-                    color: Style.loginContentBackground
-                    radius: 5
-                }
+                background: Rectangle { color: Style.loginContentBackground; radius: 5 }
                 
                 
                 ColumnLayout
                 {
+                    id: contentLayout
                     width: parent.width
                     spacing: 0
                     
@@ -88,21 +96,18 @@ MFlickWrapper
                               "Everything will be stored in a secure database."
                         font.pointSize: 13
                         color: Style.colorLightText2
-                        wrapMode: "WordWrap"
+                        wrapMode: Text.WordWrap
                     }
                     
                     Pane
                     {
-                        id: inputGroup
+                        id: credentialInputContainer
                         Layout.fillWidth: true
                         Layout.topMargin: 38
                         Layout.alignment: Qt.AlignHCenter
                         verticalPadding: 0
                         horizontalPadding: 20
-                        background: Rectangle
-                        {
-                            color: "transparent"
-                        }
+                        background: Rectangle { color: "transparent" }
                         
                         
                         ColumnLayout
@@ -127,14 +132,9 @@ MFlickWrapper
                                     placeholderContent: "Kai"
                                     placeholderColor: Style.colorLightText
                                     
-                                    Keys.onPressed: 
-                                        (event) =>
-                                        {
-                                            if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
-                                            {
-                                                lastNameInput.giveFocus();
-                                            }
-                                        }
+                                    Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
+                                                                                             null, 
+                                                                                             lastNameInput)
                                 }
                                 
                                 MLabeledInputBox
@@ -145,18 +145,9 @@ MFlickWrapper
                                     placeholderContent: "Doe"
                                     placeholderColor: Style.colorLightText
                                     
-                                    Keys.onPressed: 
-                                        (event) =>
-                                        {
-                                            if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
-                                            {
-                                                emailInput.giveFocus();
-                                            }
-                                            else if(event.key === Qt.Key_Up)
-                                            {
-                                                firstNameInput.giveFocus();
-                                            }
-                                        }
+                                    Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
+                                                                                             firstNameInput,
+                                                                                             emailInput)
                                 }
                             }
                             
@@ -168,19 +159,9 @@ MFlickWrapper
                                 headerText: 'Email'
                                 placeholderContent: "kaidoe@gmail.com"
                                 placeholderColor: Style.colorLightText
-                                
-                                Keys.onPressed: 
-                                    (event) =>
-                                    {
-                                        if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
-                                        {
-                                            passwordInput.giveFocus();
-                                        }
-                                        else if(event.key === Qt.Key_Up)
-                                        {
-                                            lastNameInput.giveFocus();
-                                        }
-                                    }
+                                Keys.onPressed: (event) => internal.moveFocusToNextInput(event,
+                                                                                         lastNameInput,
+                                                                                         passwordInput)
                             }
                             
                             MLabeledInputBox 
@@ -193,18 +174,9 @@ MFlickWrapper
                                 imagePath: Icons.eyeOn
                                 toggledImagePath: Icons.eyeOff
                                 
-                                Keys.onPressed: 
-                                    (event) =>
-                                    {
-                                        if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
-                                        {
-                                            passwordConfirmationInput.giveFocus();
-                                        }
-                                        else if(event.key === Qt.Key_Up)
-                                        {
-                                            emailInput.giveFocus();
-                                        }
-                                    }
+                                Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
+                                                                                         emailInput,
+                                                                                         passwordConfirmationInput)
                                 
                                 onEdited: passwordConfirmationInput.clearError()
                             }
@@ -219,18 +191,9 @@ MFlickWrapper
                                 imagePath: Icons.eyeOn
                                 toggledImagePath: Icons.eyeOff
                                 
-                                Keys.onPressed: 
-                                    (event) =>
-                                    {
-                                        if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
-                                        {
-                                            keepMeUpdated.giveFocus();
-                                        }
-                                        else if(event.key === Qt.Key_Up)
-                                        {
-                                            passwordInput.giveFocus();
-                                        }
-                                    }
+                                Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
+                                                                                         passwordInput,
+                                                                                         keepMeUpdated)
                                 
                                 onEdited: passwordInput.clearError()
                             }
@@ -268,50 +231,10 @@ MFlickWrapper
                                 fontWeight: Font.Bold
                                 text: "Let's start"
                                 
-                                onClicked: buttonTriggeredAction();
+                                onClicked: internal.registerUser()
                                 
-                                Keys.onPressed:
-                                    (event) =>
-                                    {
-                                        if(event.key === Qt.Key_Return) buttonTriggeredAction();
-                                        else if(event.key === Qt.Key_Up) acceptPolicy.giveFocus();
-                                    }
-                                
-                                
-                                function buttonTriggeredAction()
-                                {
-                                    if(passwordInput.text != passwordConfirmationInput.text)
-                                    {
-                                        if(!passwordInput.hasError)
-                                        {
-                                            passwordInput.errorText = "";
-                                            passwordInput.setError();
-                                        }
-                                        
-                                        passwordConfirmationInput.errorText = "Passwords don't match."
-                                        passwordConfirmationInput.setError();
-                                        return;
-                                    }
-                                    
-                                    if(!acceptPolicy.activated)
-                                    {
-                                        acceptPolicy.setError();
-                                        return;
-                                    }
-                                    
-                                    AuthController.registrationFinished.connect(proccessRegistrationResult);
-                                    AuthController.registerUser(firstNameInput.text, lastNameInput.text,
-                                                                emailInput.text, passwordInput.text,
-                                                                keepMeUpdated.checked);
-                                }
-                                
-                                function proccessRegistrationResult(success, reason)
-                                {
-                                    if(success)
-                                        loadPage(loginPage);
-                                    else
-                                        page.setErrors(reason);
-                                }
+                                Keys.onReturnPressed: internal.registerUser()
+                                Keys.onUpPressed: acceptPolicy.giveFocus()
                             }
                         }
                     }
@@ -331,14 +254,59 @@ MFlickWrapper
                 MouseArea
                 {
                     anchors.fill: parent
+                    
                     onClicked: loadPage(loginPage);
                 }
             }
         }
         
         Component.onCompleted: firstNameInput.giveFocus();
+    }
+    
+    QtObject
+    {
+        id: internal
         
         
+        function registerUser()
+        {
+            if(!passwordIsValid() || !policyIsAccepted())
+                return;
+            
+            AuthController.registerUser(firstNameInput.text, lastNameInput.text,
+                                        emailInput.text, passwordInput.text,
+                                        keepMeUpdated.checked);
+        }
+        
+        function passwordIsValid()
+        {
+            if(passwordInput.text == passwordConfirmationInput.text)
+                return true;
+            
+            passwordConfirmationInput.errorText = "Passwords don't match."
+            passwordConfirmationInput.setError();
+            return false;
+        }
+        
+        function policyIsAccepted()
+        {
+            if(acceptPolicy.activated)
+                return true;
+            
+            acceptPolicy.setError();
+            return false;
+        }
+        
+        function proccessRegistrationResult(success, reason)
+        {
+            if(success)
+                loadPage(loginPage);
+            else
+                internal.setErrors(reason);
+        }
+        
+        
+        // Parse keywords from error message and set the corresponding error
         function setErrors(reason)
         {
             if(reason.toLowerCase().includes("email"))
@@ -361,14 +329,21 @@ MFlickWrapper
                 lastNameInput.errorText = reason;
                 lastNameInput.setError();
             }
-            else if(reason.toLowerCase().includes("last"))
+        }
+        
+        
+        // Navigates to the next or previous item, depending on user input
+        function moveFocusToNextInput(event, previous, next)
+        {
+            if(event.key === Qt.Key_Return || event.key === Qt.Key_Down)
             {
-                lastNameInput.errorText = reason;
-                lastNameInput.setError();
+                if(next)
+                    next.giveFocus();
             }
-            else
+            else if(event.key === Qt.Key_Up)
             {
-                
+                if(previous)
+                    previous.giveFocus();
             }
         }
     }

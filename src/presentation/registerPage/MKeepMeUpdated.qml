@@ -12,8 +12,8 @@ Item
     signal keyUp()
     signal keyDown()
     
-    implicitWidth: layout.width
-    implicitHeight: layout.height    
+    implicitWidth: 100
+    implicitHeight: layout.height
     
     
     RowLayout

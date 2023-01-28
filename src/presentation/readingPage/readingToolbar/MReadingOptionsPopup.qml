@@ -13,16 +13,12 @@ Popup
     implicitWidth: 212
     padding: 0
     closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-    background: Rectangle
-    {
-        color: "transparent"
-        radius: 4
-    }
+    background: Rectangle { color: "transparent"; radius: 4 }
     
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         width: parent.width
         spacing: 0
         
@@ -42,7 +38,7 @@ Popup
         {
             id: container
             Layout.fillWidth: true
-            implicitWidth: parent.width   // to fix binding loop
+            implicitWidth: parent.width
             padding: 0
             background: Rectangle
             {
@@ -55,7 +51,7 @@ Popup
             
             ColumnLayout
             {
-                id: inContainerLayout
+                id: contentLayout
                 width: parent.width
                 spacing: 0
                 
@@ -109,6 +105,7 @@ Popup
                 }
                 
                 Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorLightBorder }
+                
                 
                 ColumnLayout
                 {

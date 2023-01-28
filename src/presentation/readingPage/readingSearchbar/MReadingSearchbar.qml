@@ -19,6 +19,7 @@ Item
     // Make sure to remove the focus from the textinput when the searchbar is closed
     onVisibleChanged: visible ? inputField.forceActiveFocus() : root.forceActiveFocus()
     
+    // Close on pressing escape
     Keys.onPressed:
         (event) =>
         {
@@ -31,7 +32,7 @@ Item
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 0
         
@@ -44,22 +45,18 @@ Item
             Layout.fillWidth: true
         }
         
-        
         Pane
         {
             id: container
             Layout.fillHeight: true
             Layout.fillWidth: true
             padding: 8
-            background: Rectangle
-            {
-                color: Style.colorBackground
-            }
+            background: Rectangle { color: Style.colorBackground }
             
             
             RowLayout
             {
-                id: itemLayout
+                id: contentLayout
                 spacing: 12
                 anchors.fill: parent
                 
@@ -114,7 +111,7 @@ Item
                     
                     RowLayout
                     {
-                        id: inInputLayout
+                        id: inputFieldLayout
                         anchors.fill: parent
                         spacing: 6
                         
@@ -139,11 +136,7 @@ Item
                             font.pointSize: 12
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorLightText
-                            background: Rectangle
-                            {
-                                anchors.fill: parent
-                                color: "transparent"
-                            }
+                            background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
                             onTextChanged: root.textChanged(text)
                         }
@@ -192,7 +185,6 @@ Item
             }
         }
     }
-    
     
     MReadingSearchbarOptionsPopup
     {

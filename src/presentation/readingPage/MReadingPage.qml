@@ -14,79 +14,82 @@ import "readingSearchbar"
 Page
 {
     id: root
-    property bool fullScreen: false
+    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
     
-    background: Rectangle
-    {
-        anchors.fill: parent
-        color: Style.pagesBackground
-    }
+    Component.onCompleted: root.forceActiveFocus()
     
     
     Shortcut
     {
+        id: zoomIn
         sequences: [StandardKey.ZoomIn]
         onActivated: documentView.zoom(1.2)
     }
     
     Shortcut
     {
+        id: zoomOut
         sequences: [StandardKey.ZoomOut]
         onActivated: documentView.zoom(0.8)
     }
     
     Shortcut
     {
+        id: flickUp
         sequences: ["Up"]
         onActivated: documentView.flick("up")
     }
     
     Shortcut
     {
+        id: flickDown
         sequences: ["Down"]
         onActivated: documentView.flick("down")
     }
     
     Shortcut
     {
+        id: nextPage
         sequences: [StandardKey.MoveToNextPage, "Right"]
         onActivated: documentView.nextPage()
     }
     
     Shortcut
     {
+        id: previousPage
         sequences: [StandardKey.MoveToPreviousPage, "Left"]
         onActivated: documentView.previousPage()
     }
     
     Shortcut
     {
+        id: stopFullScreenMode
         sequence: "ESC"
-        onActivated: if(root.fullScreen) root.exitFullScreen();
+        onActivated: internal.stopFullScreenMode();
     }
     
     
     DocumentItem
     {
         id: documentItem
-        onUrlChanged: currentPage = 0
         
+        onUrlChanged: currentPage = 0
         onOpenedChanged:
         {
-            if(opened)
-            {
-                toolbar.currentPageButton.maxPages = pageCount;
-                toolbar.bookTitle = windowTitleForDocument;
-            }
+            if(!opened)
+                return;
+            
+            toolbar.currentPageButton.maxPages = pageCount;
+            toolbar.bookTitle = windowTitleForDocument;
         }
         
-        Component.onCompleted: 
-        {
-            documentItem.url = Globals.selectedBook.filePath;
-        }
+        Component.onCompleted: documentItem.url = Globals.selectedBook.filePath;
     }
     
-    
+    /*
+      An invisible component at the top of the screen, when hovering over it
+      while the fullscreen mode is enabled, the fullscreen mode will be disabled.
+      */
     Item
     {
         id: toolbarReactivationContainer
@@ -98,18 +101,14 @@ Page
         {
             id: toolbarReactivationArea
             enabled: true
-            onHoveredChanged:
-            {
-                if(hovered)
-                    root.exitFullScreen();
-            }
+            onHoveredChanged: if(hovered) internal.stopFullScreenMode();
         }
     }
     
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 0
         
@@ -118,16 +117,12 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            
             currentPage: documentView.document.currentPage
             
             onBackButtonClicked:
             {
-                // Save current page
-                var operationsMap = {};
-                operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
-                BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
-                
+                // Save current page before leaving
+                internal.saveCurrentPage();
                 loadPage(homePage, sidebar.homeItem, false);
             }
             
@@ -166,8 +161,10 @@ Page
             
             onFullScreenButtonClicked:
             {
-                if(root.fullScreen) root.exitFullScreen();
-                else root.enterFullScreen();
+                if(internal.fullScreen)
+                    internal.stopFullScreenMode();
+                else
+                    internal.startFullScreenMode();
             }
             
             onSearchButtonClicked:
@@ -204,30 +201,34 @@ Page
             }
         }
         
+        
+        /*
+          Contains the reizeable sidebars, e.g. chapter or book-sidebar
+          */
         SplitView
         {
+            id: sidebarSplitView
             Layout.fillHeight: true
             Layout.fillWidth: true
             orientation: Qt.Horizontal
             padding: 0
             spacing: 10
-            handle: Rectangle
-            {
-                implicitWidth: 8
-                color: "transparent"
-            }
+            handle: Rectangle { implicitWidth: 8; color: "transparent" }
             smooth: true
             
-            // Need to combine sidebars into one item, else rezising doesnt work properly
+            /*
+              Need to combine sidebar items into one item, else rezising doesn't
+              work properly, since the SplitView thinks they are 3 different items
+              */
             Item
             {
                 id: sidebarItem
+                visible: chapterSidebar.active || bookmarksSidebar.active
+                // Load in the last width of the correct sidebar
                 SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth 
                                                                  : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth : 0
                 SplitView.minimumWidth: chapterSidebar.visible || bookmarksSidebar.visible ? 140 : 0
                 SplitView.maximumWidth: 480
-                
-                visible: chapterSidebar.active || bookmarksSidebar.active
                 
                 
                 MChapterSidebar
@@ -236,10 +237,11 @@ Page
                     property int lastWidth: 300
                     property bool active: false
                     
-                    onVisibleChanged: if(!visible) lastWidth = width
-                    
                     anchors.fill: parent
                     visible: false
+                    
+                    // Save the last width to restore it if re-enabled
+                    onVisibleChanged: if(!visible) lastWidth = width
                     
                     
                     Rectangle
@@ -272,10 +274,11 @@ Page
                     property int lastWidth: 300
                     property bool active: false
                     
-                    onVisibleChanged: if(!visible) lastWidth = width
-                    
                     anchors.fill: parent
                     visible: false
+                    
+                    // Save the last width to restore it if re-enabled
+                    onVisibleChanged: if(!visible) lastWidth = width
                     
                     
                     Rectangle
@@ -306,7 +309,7 @@ Page
             
             RowLayout
             {
-                id: displayLayout
+                id: documentLayout
                 SplitView.fillWidth: true
                 SplitView.fillHeight: true
                 spacing: 0
@@ -320,6 +323,8 @@ Page
                     Layout.fillHeight: true
                     visible: documentItem.opened
                     document: documentItem
+                    
+                    onPageWidthChanged: (width) => toolbar.pageWidth = width
                 }
             }
         }
@@ -334,23 +339,35 @@ Page
         }
     }
     
-    
-    Component.onCompleted: root.forceActiveFocus()
-    
-    
-    function enterFullScreen()
+    QtObject
     {
-        fullScreen = true;
+        id: internal
+        property bool fullScreen: false
         
-        if(toolbar.visible)
+        
+        function startFullScreenMode()
+        {
+            if(internal.fullScreen)
+                return;
+            
+            internal.fullScreen = true;
             hideToolbar.start();
-    }
-    
-    function exitFullScreen()
-    {
-        fullScreen = false;
+        }
         
-        if(!toolbar.visible)
+        function stopFullScreenMode()
+        {
+            if(!internal.fullScreen)
+                return;
+            
+            internal.fullScreen = false;
             showToolbar.start();
+        }
+        
+        function saveCurrentPage()
+        {
+            var operationsMap = {};
+            operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
+            BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+        }
     }
 }
