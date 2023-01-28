@@ -13,6 +13,7 @@ add_library(infrastructure
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
                     
+                    persistance/server_reply_status.hpp
                     data/endpoints.hpp
 )
 
