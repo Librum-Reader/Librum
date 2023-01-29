@@ -36,7 +36,7 @@ Item
                 {
                     if(event.key === Qt.Key_Return)
                     {
-                        acceptCheckBox.actionOnClicked();
+                        acceptCheckBox.toggle();
                     }
                     else if(event.key === Qt.Key_Down)
                     {

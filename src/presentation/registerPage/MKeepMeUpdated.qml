@@ -35,7 +35,7 @@ Item
                 {
                     if(event.key === Qt.Key_Return)
                     {
-                        updatesCheckBox.actionOnClicked();
+                        updatesCheckBox.toggle();
                         root.checked = !root.checked;
                     }
                     else if(event.key === Qt.Key_Down)
