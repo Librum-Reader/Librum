@@ -51,21 +51,16 @@ Item
             id: mouseArea
             anchors.fill: parent
             
-            onClicked: internal.clickAction();
+            onClicked: root.toggle();
         }
     }
     
-    QtObject
+    
+    function toggle()
     {
-        id: internal
-        
-        function clickAction()
-        {
-            root.clicked();
-            root.checked = !root.checked;
-        }
+        root.clicked();
+        root.checked = !root.checked;
     }
-    
     
     function giveFocus()
     {

@@ -175,7 +175,7 @@ MFlickWrapper
                                 {
                                     if(event.key === Qt.Key_Return)
                                     {
-                                        actionOnClicked();
+                                        toggle();
                                     }
                                     else if(event.key === Qt.Key_Up)
                                     {
