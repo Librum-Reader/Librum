@@ -18,6 +18,9 @@ MFlickWrapper
     // to pass controll back to root for some reason, this fixes the focus problem
     onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
     
+    // Focus the emailInput when page has loaded
+    Component.onCompleted: emailInput.giveFocus()
+    
     Shortcut
     {
         sequence: "Ctrl+Return"
@@ -305,8 +308,4 @@ MFlickWrapper
             }
         }
     }
-    
-    
-    // Focus the emailInput when page has loaded
-    Component.onCompleted: emailInput.giveFocus()
 }
