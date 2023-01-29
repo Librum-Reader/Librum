@@ -4,7 +4,10 @@ import QtQuick.Layouts 1.15
 import Librum.style 1.0
 import Librum.icons 1.0
 
-
+/**
+ A box with an editable text input which contains a number and can also
+ be changed by arrows next to the box.
+ */
 Item
 {
     id: root
@@ -17,25 +20,8 @@ Item
     implicitWidth: 72
     implicitHeight: 32
     
+    Keys.onPressed:(event) => internal.handleKeyInput(event)
     
-    Keys.onPressed:
-        (event) =>
-        {
-            if(event.key === Qt.Key_Up)
-            {
-                if(value < maxVal)
-                {
-                    value += 1;
-                }
-            }
-            else if(event.key === Qt.Key_Down)
-            {
-                if(value > minVal)
-                {
-                    value -= 1;
-                }
-            }
-        }
     
     Pane
     {
@@ -53,7 +39,7 @@ Item
         
         RowLayout
         {
-            id: mainLayout
+            id: layout
             anchors.fill: parent
             spacing: 0
             
@@ -78,11 +64,13 @@ Item
                     color: "transparent"
                 }
                 
+                // Validate new value before applying
                 onTextEdited:
                 {
-                    
-                    if(!mainLayout.isValid())
+                    if(!internal.isValid())
+                    {
                         root.invalid = true;
+                    }
                     else
                     {
                         root.value = text;
@@ -94,6 +82,7 @@ Item
             
             ColumnLayout
             {
+                id: arrowLayout
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 Layout.rightMargin: 14
@@ -102,6 +91,7 @@ Item
                 
                 Image
                 {
+                    id: upArrow
                     source: Icons.dropdownGray
                     sourceSize.width: 9
                     fillMode: Image.PreserveAspectFit
@@ -111,24 +101,13 @@ Item
                     {
                         anchors.fill: parent
                         
-                        onClicked:
-                        {
-                            root.forceActiveFocus();
-                            
-                            if(root.value < root.maxVal)
-                            {
-                                root.value += 1;
-                                root.newValueSelected();
-                            }
-                            
-                            if(mainLayout.isValid())
-                                root.invalid = false;
-                        }
+                        onClicked: internal.increaseValue()
                     }
                 }
                 
                 Image
                 {
+                    id: downArrow
                     source: Icons.dropdownGray
                     sourceSize.width: 9
                     fillMode: Image.PreserveAspectFit
@@ -137,31 +116,59 @@ Item
                     {
                         anchors.fill: parent
                         
-                        onClicked:
-                        {
-                            root.forceActiveFocus();
-                            
-                            if(root.value > root.minVal)
-                            {
-                                root.value -= 1;
-                                root.newValueSelected();
-                            }
-                            
-                            if(mainLayout.isValid())
-                                root.invalid = false;
-                        }
+                        onClicked: internal.decreaseValue()
                     }
                 }
             }
-            
-            
-            function isValid()
+        }
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        function handleKeyInput(event)
+        {
+            if(event.key === Qt.Key_Up)
             {
-                if(inputField.text < root.minVal || inputField.text > root.maxVal)
-                    return false;
-                
-                return true;
+                if(value < maxVal)
+                    value += 1;
             }
+            else if(event.key === Qt.Key_Down)
+            {
+                if(value > minVal)
+                    value -= 1;
+            }
+        }
+        
+        function isValid()
+        {
+            if(inputField.text < root.minVal || inputField.text > root.maxVal)
+                return false;
+            
+            return true;
+        }
+        
+        function increaseValue()
+        {
+            root.forceActiveFocus();
+            if(root.value > root.maxVal)
+                return;
+            
+            root.value += 1;
+            root.newValueSelected();
+            root.invalid = false;
+        }
+        
+        function decreaseValue()
+        {
+            root.forceActiveFocus();
+            if(root.value < root.minVal)
+                return;
+            
+            root.value -= 1;
+            root.newValueSelected();
+            root.invalid = false;
         }
     }
 }

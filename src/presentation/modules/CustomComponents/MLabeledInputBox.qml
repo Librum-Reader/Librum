@@ -7,31 +7,31 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property alias text : inputField.text
-    property int boxHeight : 40
-    property string placeholderContent : ""
-    property color placeholderColor : "black"
-    property double inputFontSize : 12
-    property color inputFontColor : Style.colorBaseText
+    property alias text: inputField.text
+    property int boxHeight: 40
+    property string placeholderContent
+    property color placeholderColor: Style.colorBaseText
+    property double inputFontSize: 12
+    property color inputFontColor: Style.colorBaseText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
     property bool hasError: false
     property bool clearErrorOnEdit: true
-    property string errorText : ""
-    property double errorFontSize : 10.5
-    property string headerText : "Header here"
-    property int headerFontWeight : Font.Medium
-    property double headerFontSize : 10.5
-    property color headerFontColor : Style.colorBaseTitle
-    property int headerToBoxSpacing : 2
-    property color borderColor : Style.colorLightBorder
+    property string errorText
+    property double errorFontSize: 10.5
+    property string headerText
+    property int headerFontWeight: Font.Medium
+    property double headerFontSize: 10.5
+    property color headerFontColor: Style.colorBaseTitle
+    property int headerToBoxSpacing: 2
+    property color borderColor: Style.colorLightBorder
     property color backgroundColor: Style.colorBackground
-    property int borderWidth : 2
-    property int borderRadius : 5
-    property int textPadding : 15
-    property string imagePath : ""
-    property string toggledImagePath : ""
-    property bool textHidden: toggledImagePath.length > 0 ? true : false
+    property int borderWidth: 2
+    property int borderRadius: 5
+    property int textPadding: 15
+    property string image
+    property string toggledImage
+    property bool textHidden: toggledImage.length > 0 ? true : false
     signal edited
     
     implicitWidth: 100
@@ -45,6 +45,7 @@ Item
         height: header.implicitHeight + inputBox.height + 
                 (errorText.visible && root.errorText != "" ? errorText.implicitHeight : 0)
         spacing: root.headerToBoxSpacing
+        
         
         Label
         {
@@ -100,6 +101,9 @@ Item
                         color: "transparent"
                     }
                     
+                    // Make sure the cursor is at the start
+                    onActiveFocusChanged: resetCursorPositionToStart()
+                    onTextChanged: resetCursorPositionToStart()
                     onTextEdited:
                     {
                         root.edited();
@@ -108,18 +112,23 @@ Item
                             root.clearError();
                     }
                     
-                    onActiveFocusChanged: resetCursorPositionToStart()
-                    onTextChanged: resetCursorPositionToStart()
-                    
+                    /**
+                     In certain text-size / container-height proportions the text position
+                     is too low, this makes sure that the text is always centered
+                     */
                     Component.onCompleted:
                     {
-                        if((inputBox.height/inputField.implicitHeight) / 2 > 0.1)
+                        // If the size difference is too big, move the input field up by 1px
+                        if((inputBox.height/inputField.implicitHeight) > 0.2)
                         {
-                            inputField.Layout.topMargin = inputField.Layout.topMargin - 1;
+                            inputField.Layout.topMargin -= 1;
                         }
                     }
                     
-                    
+                    /**
+                     If the text is longer than the container-width, the text is automatically
+                     scrolled to the right. This resets the cursor to the start of the text
+                     */
                     function resetCursorPositionToStart()
                     {
                         if(!inputField.activeFocus)
@@ -129,14 +138,13 @@ Item
                 
                 Image
                 {
-                    id: image
-                    
+                    id: passwordVisibilityTogglerIcon
                     Layout.preferredWidth: 20
                     Layout.preferredHeight: 18
                     Layout.rightMargin: 10
                     Layout.alignment: Qt.AlignVCenter
-                    visible: root.imagePath.length > 0
-                    source: root.textHidden ? root.imagePath : root.toggledImagePath
+                    visible: root.image.length > 0
+                    source: root.textHidden ? root.image : root.toggledImage
                     
                     MouseArea
                     {

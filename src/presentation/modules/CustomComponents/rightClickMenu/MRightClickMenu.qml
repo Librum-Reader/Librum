@@ -6,6 +6,7 @@ import Qt.labs.platform 1.0
 import QtQml.Models 2.15
 import Librum.style 1.0
 import Librum.icons 1.0
+import "PopupPositionLogic.js" as Logic
 
 
 Popup
@@ -45,39 +46,15 @@ Popup
         }
     }
     
-    
+    // Calculate the popup's spawn position
     function setSpawnPosition(currentMousePosition, absoluteMousePosition, rootObject)
     {
         let offset = 2;
-        root.x = root.getBookOptionsPopupXCoord(currentMousePosition.x, absoluteMousePosition.x, rootObject) + offset;
-        root.y = root.getBookOptionsPopupYCoord(currentMousePosition.y, absoluteMousePosition.y, rootObject) + offset;
-    }
-    
-    
-    function getBookOptionsPopupXCoord(currentXPosition, absoluteXPosition, rootObject)
-    {
-        if(spaceToRootWidth(absoluteXPosition, rootObject) <= 0)
-            return currentXPosition + spaceToRootWidth(absoluteXPosition, rootObject);
-        
-        return currentXPosition;
-    }
-    
-    function spaceToRootWidth(xCoord, rootObject)
-    {
-        return rootObject.width - (xCoord + implicitWidth);
-    }
-    
-    
-    function getBookOptionsPopupYCoord(currentYPosition, absoluteYPosition, rootObject)
-    {
-        if(spaceToRootHeight(absoluteYPosition, rootObject) <= 0)
-            return currentYPosition + spaceToRootHeight(absoluteYPosition, rootObject);
-        
-        return currentYPosition;
-    }
-    
-    function spaceToRootHeight(yCoord, rootObject)
-    {
-        return rootObject.height - (yCoord + implicitHeight);
+        root.x = Logic.getBookOptionsPopupXCoord(currentMousePosition.x,
+                                                 absoluteMousePosition.x,
+                                                 rootObject) + offset;
+        root.y = Logic.getBookOptionsPopupYCoord(currentMousePosition.y,
+                                                 absoluteMousePosition.y,
+                                                 rootObject) + offset;
     }
 }

@@ -4,7 +4,9 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Librum.style 1.0
 
-
+/**
+ A radio button selector for string items
+ */
 Item
 {
     id: root
@@ -26,54 +28,21 @@ Item
         Repeater
         {
             model: options
-            delegate: Rectangle
+            delegate: MRadioButton
             {
-                id: delRoot
                 required property int index
-                property bool selected: root.currentSelected === options[index]
                 
-                width: layout.width
-                height: componentLayout.height
+                selected: root.currentSelected === root.options[index]
+                text: root.options[index]
                 
-                
-                RowLayout
-                {
-                    id: componentLayout
-                    width: parent.width
-                    height: button.implicitHeight
-                    spacing: 8
-                    
-                    
-                    MRadioButton
-                    {
-                        id: button
-                        selected: delRoot.selected
-                        
-                        onClicked: layout.changeSelected(index)
-                    }
-                    
-                    Label
-                    {
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 200
-                        Layout.alignment: Qt.AlignVCenter
-                        text: root.options[index]
-                        font.pointSize: 12
-                        font.weight: delRoot.selected ? Font.Medium : Font.Normal
-                        color: Style.colorBaseText
-                        
-                        MouseArea
-                        {
-                            anchors.fill: parent
-                            
-                            onClicked: layout.changeSelected(index)
-                        }
-                    }
-                    
-                    Item { Layout.fillWidth: true }
-                }
+                onClicked: internal.changeSelected(index)
             }
         }
+    }
+    
+    QtObject
+    {
+        id: internal
         
         function changeSelected(index)
         {

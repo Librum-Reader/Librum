@@ -36,7 +36,7 @@ Item
         
         RowLayout
         {
-            id: mainLayout
+            id: layout
             anchors.fill: parent
             spacing: 10
             

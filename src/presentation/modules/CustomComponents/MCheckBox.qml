@@ -4,7 +4,9 @@ import QtQuick.Layouts 1.15
 import Librum.style 1.0
 import Librum.icons 1.0
 
-
+/**
+ A checkbox which toggles between two pictures, depending on its state
+ */
 Item
 {
     id: root
@@ -15,9 +17,8 @@ Item
     property int checkedBorderWidth: 0
     property color uncheckedBackgroundColor: "transparent"
     property color checkedBackgroundColor: Style.colorBasePurple
-    property string imagePath: Icons.checkWhite
+    property string image: Icons.checkWhite
     property int imageSize: container.width - 10
-    property bool imageDefaultVisibility: false
     property bool checked: false
     signal clicked()
     
@@ -39,9 +40,9 @@ Item
         {
             id: image
             anchors.centerIn: parent
-            visible: (root.checked ? true : false)
+            visible: root.checked ? true : false
             sourceSize.width: root.imageSize
-            source: root.imagePath
+            source: root.image
             fillMode: Image.PreserveAspectFit
         }
         
@@ -49,16 +50,22 @@ Item
         {
             id: mouseArea
             anchors.fill: parent
-            onClicked: actionOnClicked();
+            
+            onClicked: internal.clickAction();
         }
     }
     
-    
-    function actionOnClicked()
+    QtObject
     {
-        root.clicked();
-        root.checked = !root.checked;
+        id: internal
+        
+        function clickAction()
+        {
+            root.clicked();
+            root.checked = !root.checked;
+        }
     }
+    
     
     function giveFocus()
     {

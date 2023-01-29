@@ -140,8 +140,8 @@ MFlickWrapper
                         Layout.fillWidth: true
                         Layout.topMargin: 22
                         headerText: "Password"
-                        imagePath: Icons.eyeOn
-                        toggledImagePath: Icons.eyeOff
+                        image: Icons.eyeOn
+                        toggledImage: Icons.eyeOff
                         
                         Keys.onPressed: 
                             (event) =>

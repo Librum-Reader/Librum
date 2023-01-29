@@ -171,8 +171,8 @@ MFlickWrapper
                                 Layout.topMargin: 16
                                 headerText: 'Password'
                                 placeholderColor: Style.colorLightText
-                                imagePath: Icons.eyeOn
-                                toggledImagePath: Icons.eyeOff
+                                image: Icons.eyeOn
+                                toggledImage: Icons.eyeOff
                                 
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                          emailInput,
@@ -188,8 +188,8 @@ MFlickWrapper
                                 Layout.topMargin: 16
                                 headerText: 'Confirmation password'
                                 placeholderColor: Style.colorLightText
-                                imagePath: Icons.eyeOn
-                                toggledImagePath: Icons.eyeOff
+                                image: Icons.eyeOn
+                                toggledImage: Icons.eyeOff
                                 
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                          passwordInput,

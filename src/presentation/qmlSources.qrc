@@ -84,7 +84,6 @@
         <file>homePage/tags/MAddTagBoxPopup.qml</file>
         <file>homePage/tags/MTagItem.qml</file>
         <file>homePage/MBookDetailsPopup.qml</file>
-        <file>modules/CustomComponents/tagOptionsPopup/MTagOptionsPopup.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
         <file>settings/MResetSettingsPopup.qml</file>
@@ -96,5 +95,6 @@
         <file>homePage/MBookRightClickPopup.qml</file>
         <file>homePage/MNoBookSatisfiesFilterItem.qml</file>
         <file>PageNavigationLogic.js</file>
+        <file>modules/CustomComponents/rightClickMenu/PopupPositionLogic.js</file>
     </qresource>
 </RCC>

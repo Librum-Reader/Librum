@@ -9,28 +9,22 @@ import Librum.icons 1.0
 Popup
 {
     id: root
-    property var saveMethod
-    property var dontSaveMethod
+    property var saveFunction
+    property var discardMethod
     signal decisionMade
     
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
     closePolicy: Popup.NoAutoClose
-    background: Rectangle
-    {
-        color: "transparent"
-        radius: 4
-    }
+    background: Rectangle { color: "transparent"; radius: 4 }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
+    
     
     MFlickWrapper
     {
+        id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
         
@@ -59,11 +53,7 @@ Popup
                 topPadding: 86
                 horizontalPadding: 62
                 bottomPadding: 62
-                background: Rectangle
-                {
-                    color: Style.colorBackground
-                    radius: 6
-                }
+                background: Rectangle { color: Style.colorBackground; radius: 6 }
                 
                 
                 ColumnLayout
@@ -75,7 +65,7 @@ Popup
                     
                     Label
                     {
-                        id: whoops
+                        id: whoopsText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: "Whoops"
@@ -105,6 +95,7 @@ Popup
                         Layout.topMargin: 24
                         spacing: 42
                         
+                        
                         MButton
                         {
                             id: acceptButton
@@ -120,32 +111,16 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.save()
                             
-                            Keys.onPressed:
-                                (event) =>
-                                {
-                                    if(event.key === Qt.Key_Right || event.key === Qt.Key_Tab)
-                                    {
-                                        declineButton.forceActiveFocus();
-                                    }
-                                    else if(event.key === Qt.Key_Return)
-                                    {
-                                        buttonAction();
-                                    }
-                                }
-                            
-                            function buttonAction()
-                            {
-                                root.saveMethod();
-                                root.close();
-                                root.decisionMade();
-                            }
+                            KeyNavigation.tab: discardButton
+                            KeyNavigation.right: discardButton
+                            Keys.onReturnPressed: internal.save()
                         }
                         
                         MButton
                         {
-                            id: declineButton
+                            id: discardButton
                             Layout.preferredWidth: 120
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
@@ -158,33 +133,37 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.discard()
                             
-                            Keys.onPressed:
-                                (event) =>
-                                {
-                                    if(event.key === Qt.Key_Left || event.key === Qt.Key_Tab)
-                                    {
-                                        acceptButton.forceActiveFocus();
-                                    }
-                                    else if(event.key === Qt.Key_Return)
-                                    {
-                                        buttonAction();
-                                    }
-                                }
-                            
-                            function buttonAction()
-                            {
-                                root.dontSaveMethod();
-                                root.close();
-                                root.decisionMade();
-                            }
+                            KeyNavigation.tab: acceptButton
+                            KeyNavigation.left: acceptButton
+                            Keys.onReturnPressed: internal.discard()
                         }
                     }
                 }
             }
         }
     }
+    
+    QtObject
+    {
+        id: internal
+        
+        function save()
+        {
+            root.saveFunction();
+            root.close();
+            root.decisionMade();
+        }
+        
+        function discard()
+        {
+            root.discardMethod();
+            root.close();
+            root.decisionMade();
+        }
+    }
+    
     
     function giveFocus()
     {

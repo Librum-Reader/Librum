@@ -20,25 +20,17 @@ Popup
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
-    background: Rectangle
-    {
-        color: "transparent"
-        radius: 4
-    }
+    background: Rectangle { color: "transparent"; radius: 4 }
     modal: true
-    Overlay.modal: Rectangle
-    {
-        color: "#aa32324D"
-        opacity: 1
-    }
+    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
     
     onOpened: keepButton.forceActiveFocus()
     
     
     MFlickWrapper
     {
-        width: parent.width
-        height: parent.height
+        id: flickWrapper
+        anchors.fill: parent
         contentHeight: layout.height
         
         
@@ -67,23 +59,19 @@ Popup
                 topPadding: 86
                 horizontalPadding: 82
                 bottomPadding: 66
-                background: Rectangle
-                {
-                    color: Style.colorBackground
-                    radius: 6
-                }
+                background: Rectangle { color: Style.colorBackground; radius: 6 }
                 
                 
                 ColumnLayout
                 {
-                    id: inRectLayout
+                    id: contentLayout
                     width: parent.width
                     spacing: 22
                     
                     
                     Label
                     {
-                        id: whoops
+                        id: whoopsText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: "Delete book?"
@@ -113,6 +101,7 @@ Popup
                         Layout.topMargin: 36
                         spacing: 42
                         
+                        
                         MButton
                         {
                             id: keepButton
@@ -128,17 +117,11 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.keepBook()
                             
                             KeyNavigation.tab: deleteButton
                             KeyNavigation.right: deleteButton
-                            Keys.onReturnPressed: buttonAction()
-                            
-                            function buttonAction()
-                            {
-                                root.keepChoosed();
-                                root.close();
-                            }
+                            Keys.onReturnPressed: internal.keepBook()
                         }
                         
                         MButton
@@ -156,18 +139,11 @@ Popup
                             fontWeight: Font.Bold
                             fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
                             
-                            onClicked: buttonAction()
+                            onClicked: internal.deleteBook()
                             
                             KeyNavigation.tab: keepButton
                             KeyNavigation.left: keepButton
-                            Keys.onReturnPressed: buttonAction()
-                            
-                            function buttonAction()
-                            {
-                                root.deleteChoosed();
-                                root.close();
-                                root.deleteMethod();
-                            }
+                            Keys.onReturnPressed: internal.deleteBook()
                         }
                     }
                 }
@@ -175,9 +151,22 @@ Popup
         }
     }
     
-    function deleteMethod()
+    QtObject
     {
-        BookController.deleteBook(Globals.selectedBook.uuid);
+        id: internal
+        
+        function keepBook()
+        {
+            root.keepChoosed();
+            root.close();
+        }
+        
+        function deleteBook()
+        {
+            root.deleteChoosed();
+            BookController.deleteBook(Globals.selectedBook.uuid);
+            root.close();
+        }
     }
     
     function giveFocus()

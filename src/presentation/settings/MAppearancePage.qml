@@ -147,10 +147,10 @@ Page
                             property string savedValue: internal.getSavedSetting(SettingKeys.Theme)
                             
                             Layout.topMargin: 4
-                            leftProperty: "Dark"
-                            rightProperty: "Light"
-                            leftSelected: savedValue == leftProperty
-                            rightSelected: savedValue == rightProperty
+                            leftText: "Dark"
+                            rightText: "Light"
+                            leftSelected: savedValue == leftText
+                            rightSelected: savedValue == rightText
                             
                             onToggled: (newSelected) => internal.saveSetting(SettingKeys.Theme,
                                                                            newSelected)
@@ -158,7 +158,7 @@ Page
                             function reset()
                             {
                                 savedValue = internal.getSavedSetting(SettingKeys.Theme);
-                                if(savedValue === leftProperty)
+                                if(savedValue === leftText)
                                     selectLeft();
                                 else
                                     selectRight();

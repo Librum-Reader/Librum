@@ -238,8 +238,8 @@ MFlickWrapper
                             inputFontSize: 13
                             borderWidth: 1
                             borderRadius: 4
-                            imagePath: Icons.eyeOn
-                            toggledImagePath: Icons.eyeOff
+                            image: Icons.eyeOn
+                            toggledImage: Icons.eyeOff
                             
                             onEdited: internal.unsavedChanges = true
                         }
@@ -254,8 +254,8 @@ MFlickWrapper
                             inputFontSize: 13
                             borderWidth: 1
                             borderRadius: 4
-                            imagePath: Icons.eyeOn
-                            toggledImagePath: Icons.eyeOff
+                            image: Icons.eyeOn
+                            toggledImage: Icons.eyeOff
                             
                             onEdited: internal.unsavedChanges = true
                         }
@@ -364,8 +364,8 @@ MFlickWrapper
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
         y: Math.round(root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
         
-        saveMethod: root.saveAccountSettings
-        dontSaveMethod: () => { internal.unsavedChanges = false; }
+        saveFunction: root.saveAccountSettings
+        discardMethod: () => { internal.unsavedChanges = false; }
         
         onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
     }

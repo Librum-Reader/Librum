@@ -141,13 +141,13 @@ Popup
                         fontSize: 12
                         fontWeight: Font.Medium
                         fontColor: Style.colorBaseText
-                        imageDefaultVisibility: true
+                        checked: true
                         spacing: 8
                     }
                     
                     MLabeledCheckBox
                     {
-                        id: displayHorizontallyCheckbox
+                        id: displayVerticallyCheckbox
                         Layout.fillWidth: true
                         boxHeight: 19
                         boxWidth: 19
@@ -156,7 +156,7 @@ Popup
                         fontSize: 12
                         fontWeight: Font.Medium
                         fontColor: Style.colorBaseText
-                        imageDefaultVisibility: true
+                        checked: true
                         spacing: 8
                     }
                 }

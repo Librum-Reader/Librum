@@ -4,40 +4,73 @@ import QtQuick.Layouts 1.15
 import Librum.style 1.0
 
 
+/**
+ A radio button, usually used inside of MRadioSelector
+ */
 Item
 {
     id: root
     property bool selected: false
+    property string text
     signal clicked
     
-    implicitWidth: 22
     implicitHeight: 22
     
     
-    Rectangle
+    RowLayout
     {
+        id: layout
         anchors.fill: parent
-        radius: width
-        border.color: root.selected ? Style.colorBasePurple: Style.colorLightBorder2
-        antialiasing: true
+        spacing: 8
         
         
         Rectangle
         {
-            visible: root.selected
-            width: parent.width / 1.7
-            height: parent.height / 1.7
-            anchors.centerIn: parent
-            color: Style.colorBasePurple
+            id: buttonBorder
+            Layout.fillHeight: true
+            Layout.preferredWidth: 22
             radius: width
+            border.color: root.selected ? Style.colorBasePurple: Style.colorLightBorder2
             antialiasing: true
+            
+            
+            Rectangle
+            {
+                id: buttonFill
+                visible: root.selected
+                width: parent.width / 1.7
+                height: parent.height / 1.7
+                anchors.centerIn: parent
+                color: Style.colorBasePurple
+                radius: width
+                antialiasing: true
+            }
+            
+            MouseArea
+            {
+                anchors.fill: parent
+                
+                onClicked: root.clicked()
+            }
         }
-    }
-    
-    MouseArea
-    {
-        anchors.fill: parent
         
-        onClicked: root.clicked()
+        Label
+        {
+            id: label
+            Layout.fillWidth: true
+            Layout.maximumWidth: 200
+            Layout.alignment: Qt.AlignVCenter
+            text: root.text
+            font.pointSize: 12
+            font.weight: root.selected ? Font.Medium : Font.Normal
+            color: Style.colorBaseText
+            
+            MouseArea
+            {
+                anchors.fill: parent
+                
+                onClicked: root.clicked()
+            }
+        }
     }
 }
