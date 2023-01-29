@@ -129,8 +129,7 @@ Popup
                         Layout.preferredHeight: 49
                         multiSelect: true
                         headerText: "Language"
-                        image: Icons.dropdownGray
-                        imageSize: 9
+                        dropdownIconSize: 9
                         
                         model: ListModel
                         {

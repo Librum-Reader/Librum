@@ -359,11 +359,10 @@ Page
                             Layout.preferredHeight: 36
                             Layout.fillWidth: true
                             Layout.maximumWidth: 380
-                            titleFontSize: 12
-                            titleSpacing: 4
-                            image: Icons.dropdownGray
+                            selectedItemFontSize: 12
+                            selectedItemPadding: 4
                             defaultIndex: calculateDefaultIndex()
-                            imageSize: 9
+                            dropdownIconSize: 9
                             itemHeight: 32
                             fontSize: 12
                             checkBoxStyle: false

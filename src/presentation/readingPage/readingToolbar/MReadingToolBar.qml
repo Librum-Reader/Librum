@@ -158,11 +158,11 @@ Pane
             Layout.preferredHeight: 32
             Layout.preferredWidth: 92
             headerText: ""
-            titleFontColor: Style.colorBaseTitle
+            selectedItemFontColor: Style.colorBaseTitle
             boxBackgroundColor: Style.colorBaseGray
             defaultIndex: 6
-            image: Icons.dropdownBlack
-            imageSize: 9
+            dropdownIcon: Icons.dropdownBlack
+            dropdownIconSize: 9
             checkBoxStyle: false
             model: ListModel
             {

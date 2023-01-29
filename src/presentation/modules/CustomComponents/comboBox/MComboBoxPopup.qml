@@ -9,7 +9,7 @@ import "ComboBoxLogic.js" as Logic
 Popup
 {
     id: root
-    property string selectedContent: ""
+    property string selectedContent
     property alias model: listView.model
     property int itemHeight: 28
     property int maxHeight: 208
@@ -37,14 +37,13 @@ Popup
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         width: parent.width
         
         ListView
         {
             id: listView
             property MBaseListItem currentSelected
-            property var selectedItemsStore: []
             
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
@@ -70,29 +69,26 @@ Popup
                 onClicked: (mouse, index) => root.selectItem(index)
             }
             
-            Keys.onReturnPressed:
-            {
-                if(listView.currentIndex !== -1)
-                    root.selectItem(listView.currentIndex);
-            }
-            
-            Component.onCompleted:
-            {
-                if(root.defaultIndex != -1)
-                {
-                    root.selectItem(listView.currentIndex, true);
-                }
-            }
+            Keys.onReturnPressed: if(listView.currentIndex !== -1) root.selectItem(listView.currentIndex);
+            Component.onCompleted: if(root.defaultIndex != -1) root.selectItem(listView.currentIndex, true)
         }
+    }
+    
+    QtObject
+    {
+        id: internal
+        // If multi select is turned on, multiple items can be selected, thus
+        // this is a storage for all the currently selected items
+        property var selectedItems: []
     }
     
     
     function selectItem(index, initialSelect = false)
     {
         if(root.multiSelect)
-            Logic.addItemToResult(index);
+            Logic.addItemToSelectedItems(index);
         
-        Logic.changeSelectionMarker(index);
+        Logic.selectItem(index);
         if(!initialSelect)
             root.itemChanged();
     }

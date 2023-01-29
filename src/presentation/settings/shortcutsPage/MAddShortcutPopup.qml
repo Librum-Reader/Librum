@@ -117,12 +117,11 @@ Popup
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
                         headerFontWeight: Font.DemiBold
-                        titleFontColor: Style.colorLightText3
-                        titleFontSize: 12.5
-                        titleSpacing: 3
-                        titleEmptyText: "None selected"
-                        image: Icons.dropdownGray
-                        imageSize: 11
+                        selectedItemFontColor: Style.colorLightText3
+                        selectedItemFontSize: 12.5
+                        selectedItemPadding: 3
+                        emptyText: "None selected"
+                        dropdownIconSize: 11
                         
                         fontSize: 12.5
                         checkBoxStyle: false

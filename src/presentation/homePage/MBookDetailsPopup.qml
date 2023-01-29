@@ -308,8 +308,7 @@ Popup
                                 headerText: "Language"
                                 headerFontSize: 11.5
                                 headerFontColor: Style.colorBaseTitle
-                                image: Icons.dropdownGray
-                                imageSize: 9
+                                dropdownIconSize: 9
                                 maxHeight: 200
                                 model: ListModel
                                 {

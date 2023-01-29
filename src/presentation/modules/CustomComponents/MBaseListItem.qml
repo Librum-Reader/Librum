@@ -23,11 +23,6 @@ Item
     signal hovered(int index)
     signal renamed(int index, string text)
     
-    function getContent()
-    {
-        return model.text;
-    }
-    
     implicitWidth: 137
     implicitHeight: 36
     
@@ -51,6 +46,7 @@ Item
         
         RowLayout
         {
+            id: layout
             anchors.fill: parent
             spacing: 9
             
@@ -68,31 +64,22 @@ Item
             TextField
             {
                 id: content
-                horizontalAlignment: Text.AlignLeft
-                verticalAlignment: Text.AlignVCenter
                 Layout.fillWidth: true
+                verticalAlignment: Text.AlignVCenter
                 padding: 0
-                readOnly: true
                 leftPadding: 0
                 bottomPadding: 1
-                color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
+                readOnly: true
                 text: root.getContent()
+                color: root.checkBoxStyle == false && root.selected ? Style.colorBasePurple : root.fontColor
                 font.pointSize: root.fontSize
                 font.weight: root.selected ? Font.DemiBold : Font.Medium
-                background: Rectangle
-                {
-                    border.width: 0
-                    color: "transparent"
-                }
+                background: Rectangle { border.width: 0; color: "transparent" }
                 
-                onAccepted:
-                {
-                    stopRenaming();
-                }
-                
+                onAccepted: stopRenaming()
                 onTextChanged: 
                 {
-                    // Prevent content being scrolled to the right by default
+                    // Move cursor to the start of the text
                     if(!content.activeFocus)
                         content.cursorPosition = 0;
                 }
@@ -104,22 +91,30 @@ Item
     {
         id: mouseArea
         anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
         hoverEnabled: true
         
-        onClicked:
-            (mouse) =>
-            {
-                if(mouse.button === Qt.LeftButton)
-                    root.clicked(mouse, model.index);
-                else if(mouse.button === Qt.RightButton)
-                    root.rightClicked(mouse, model.index);
-            }
+        onClicked: (mouse) =>
+                   {
+                       if(mouse.button === Qt.LeftButton)
+                       {
+                           root.clicked(mouse, model.index);
+                       }
+                       else if(mouse.button === Qt.RightButton)
+                       {
+                           root.rightClicked(mouse, model.index);
+                       }
+                   }
     }
+    
     
     function getRole()
     {
         return model.role;
+    }
+    
+    function getContent()
+    {
+        return model.text;
     }
     
     function startRenaming()
@@ -142,7 +137,7 @@ Item
         if(saveText)
             root.renamed(model.index, content.text);
         
-        // Make sure its bound to the model text after editing
+        // Make sure that the binding is kept
         content.text = Qt.binding(function() { return root.getContent() });
     }
 }

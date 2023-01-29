@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Librum.style 1.0
+import Librum.icons 1.0
 
 
 Item
@@ -26,15 +27,13 @@ Item
     property double headerFontSize: 10.5
     property color headerFontColor: Style.colorLightText3
     
-    property string titleEmptyText: "Any"
-    property double titleFontSize: 11
-    property color titleFontColor: Style.colorBaseText
-    property int titleSpacing: 0
+    property string emptyText: "Any"
+    property double selectedItemFontSize: 11
+    property color selectedItemFontColor: Style.colorBaseText
+    property int selectedItemPadding: 0
     
-    property string image
-    property int imageSize: 6
-    
-    signal clicked
+    property string dropdownIcon: Icons.dropdownGray
+    property int dropdownIconSize: 6
     signal itemChanged
     
     implicitHeight: 47
@@ -42,7 +41,7 @@ Item
     
     ColumnLayout
     {
-        id: mainLayout
+        id: layout
         anchors.fill: parent
         spacing: 2
         
@@ -76,7 +75,7 @@ Item
             
             RowLayout
             {
-                id: inContainerLayout
+                id: contentLayout
                 width: parent.width
                 anchors.centerIn: parent
                 spacing: 4
@@ -84,31 +83,31 @@ Item
                 
                 Label
                 {
-                    id: title
+                    id: selectedItem
                     Layout.fillWidth: true
-                    Layout.alignment: root.centerTitle ? Qt.AlignHCenter : Qt.AlignLeft
-                    leftPadding: root.titleSpacing
-                    rightPadding: root.titleSpacing
-                    text: selectionPopup.selectedContent === "" ? root.titleEmptyText : selectionPopup.selectedContent
-                    font.pointSize: root.titleFontSize
+                    leftPadding: root.selectedItemPadding
+                    rightPadding: root.selectedItemPadding
+                    text: root.text ? root.text : root.emptyText
+                    font.pointSize: root.selectedItemFontSize
                     font.weight: Font.Normal
-                    color: selectionPopup.selectedContent === "" ? Style.colorLightText3 : root.titleFontColor
+                    color: root.text ? root.selectedItemFontColor : Style.colorLightText3
                     elide: Text.ElideRight
                 }
                 
                 Image
                 {
-                    id: icon
+                    id: dropDownIcon
                     Layout.alignment: Qt.AlignRight
-                    sourceSize.width: root.imageSize
-                    source: root.image
+                    sourceSize.width: root.dropdownIconSize
+                    source: root.dropdownIcon
                     rotation: -180
                     fillMode: Image.PreserveAspectFit
+                    
                     
                     NumberAnimation
                     {
                         id: closeAnim
-                        target: icon
+                        target: dropDownIcon
                         property: "rotation"
                         to: -180
                         duration: 175
@@ -118,7 +117,7 @@ Item
                     NumberAnimation
                     {
                         id: openAnim
-                        target: icon
+                        target: dropDownIcon
                         property: "rotation"
                         to: 0
                         duration: 175
@@ -145,26 +144,35 @@ Item
         property bool fitsToBottom: false
         
         model: root.model
-        y: mainLayout.y + (fitsToBottom ? 
-                               mainLayout.height + popupSpacing : - popupSpacing - implicitHeight)
+        y: layout.y + (fitsToBottom ? layout.height + popupSpacing : -popupSpacing - implicitHeight)
         width: parent.width
         multiSelect: root.multiSelect
         
         onClosed: closeAnim.start()
         onItemChanged: root.itemChanged()
-        
-        onOpened: 
+        onAboutToShow:
         {
-            fitsToBottom = checkIfPopupFitsBelow();
+            fitsToBottom = internal.popupFitsBelowComboBox();
             openAnim.start();
         }
+    }
+    
+    QtObject
+    {
+        id: internal
         
-        
-        function checkIfPopupFitsBelow()
+        /**
+         Returns true if the popup would fit below the combobox, returns
+         false if the popup would be out of screen
+         */
+        function popupFitsBelowComboBox()
         {
             let globalMousePos = mapToGlobal(mouseArea.mouseX, mouseArea.mouseY);
-            if((globalMousePos.y + selectionPopup.height + popupSpacing + mouseArea.mouseY) >= baseRoot.height)
+            if((globalMousePos.y + selectionPopup.height + 
+                selectionPopup.popupSpacing + mouseArea.mouseY) >= baseRoot.height)
+            {
                 return false;
+            }
             
             return true;
         }

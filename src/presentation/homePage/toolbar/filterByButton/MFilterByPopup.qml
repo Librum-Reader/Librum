@@ -174,9 +174,8 @@ Popup
                                 Layout.preferredHeight: 49
                                 Layout.topMargin: 2
                                 headerText: "Format"
-                                titleEmptyText: "Any"
-                                image: Icons.dropdownGray
-                                imageSize: 9
+                                emptyText: "Any"
+                                dropdownIconSize: 9
                                 
                                 checkBoxStyle: false
                                 checkBoxSize: 17
