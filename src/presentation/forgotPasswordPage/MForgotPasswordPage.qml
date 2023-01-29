@@ -12,6 +12,12 @@ MFlickWrapper
     contentHeight: Window.height < layout.implicitHeight ?
                        layout.implicitHeight + page.bottomPadding : Window.height
     
+    // Passing the focus to emailInput on Component.onCompleted() causes it
+    // to pass controll back to root for some reason, this fixes the focus problem
+    onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
+    
+    // Focus the emailInput when page has loaded
+    Component.onCompleted: emailInput.giveFocus()
     
     Page
     {
