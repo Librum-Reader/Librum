@@ -9,7 +9,8 @@ import Librum.icons 1.0
 MFlickWrapper
 {
     id: root
-    contentHeight: internal.calculatePageContentHeight()
+    contentHeight: Window.height < layout.implicitHeight ?
+                       layout.implicitHeight + page.bottomPadding : Window.height
     
     
     Page
@@ -125,7 +126,7 @@ MFlickWrapper
                             Layout.topMargin: 10
                             visible: false
                             text: "We couldn't find your email"
-                            color: Style.colorError
+                            color: Style.colorErrorText
                             font.pointSize: 11.75
                         }
                         
@@ -192,7 +193,7 @@ MFlickWrapper
         
         function sendPasswordResetEmail()
         {
-            successText.email = emailInput.text;
+            successText.text = emailInput.text;
             successText.visible = true;
             emailInput.clearText();
         }
@@ -200,12 +201,6 @@ MFlickWrapper
         function backToLoginPage()
         {
             loadPage(loginPage);
-        }
-        
-        function calculatePageContentHeight()
-        {
-            return Window.height < layout.implicitHeight ? 
-                        layout.implicitHeight + page.bottomPadding : Window.height
         }
     }
 }
