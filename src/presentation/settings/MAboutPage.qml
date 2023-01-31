@@ -33,7 +33,7 @@ MFlickWrapper
             
             MTitle
             {
-                id: title
+                id: pageTitle
                 Layout.topMargin: 64
                 titleText: "About"
                 descriptionText: "About this application"

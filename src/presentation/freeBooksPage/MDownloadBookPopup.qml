@@ -74,7 +74,7 @@ Popup
                     
                     Label
                     {
-                        id: title
+                        id: pageTitle
                         Layout.topMargin: 6
                         text: "Download book"
                         font.weight: Font.Bold

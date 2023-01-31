@@ -91,7 +91,7 @@ Popup
                 
                 Label
                 {
-                    id: title
+                    id: popupTitle
                     text: "Edit Shortcuts"
                     font.weight: Font.Bold
                     font.pointSize: 17

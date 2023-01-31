@@ -78,7 +78,7 @@ Popup
             
             Label
             {
-                id: title
+                id: popupTitle
                 Layout.topMargin: 20
                 text: "Manage Tags"
                 font.weight: Font.Bold

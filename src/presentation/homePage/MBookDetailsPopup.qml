@@ -60,7 +60,7 @@ Popup
             
             Label
             {
-                id: title
+                id: pageTitle
                 Layout.topMargin: 20
                 Layout.leftMargin: 52
                 text: "Book details"

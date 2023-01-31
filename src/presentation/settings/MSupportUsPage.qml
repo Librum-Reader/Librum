@@ -33,7 +33,7 @@ MFlickWrapper
             
             MTitle
             {
-                id: title
+                id: pageTitle
                 titleText: "Support us"
                 descriptionText: "Thanks for considering"
                 titleSize: 25

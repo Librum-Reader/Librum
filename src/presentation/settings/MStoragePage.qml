@@ -37,7 +37,7 @@ MFlickWrapper
                 
                 MTitle
                 {
-                    id: title
+                    id: pageTitle
                     Layout.topMargin: 64
                     titleText: "Storage"
                     descriptionText: "Your storage"
