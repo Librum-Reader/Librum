@@ -143,7 +143,7 @@ Popup
                                     text: "The 7 habits of highly effective people"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -161,7 +161,7 @@ Popup
                                     text: "Stephen R. Covey"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -179,7 +179,7 @@ Popup
                                     text: "United States: Dodd, Mead and Company,1922."
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -197,7 +197,7 @@ Popup
                                     text: "English"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -215,7 +215,7 @@ Popup
                                     text: "411"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -233,7 +233,7 @@ Popup
                                     text: "2.3 MB"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -252,7 +252,7 @@ Popup
                                     text: "PDF"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
-                                    inputFontColor: Style.colorLightText
+                                    inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
                                     borderRadius: 4
@@ -305,7 +305,7 @@ Popup
                                       " Also, don’t think that succeeding in one area of your life will" +
                                       " mean that you’re destined for triumph."
                                 wrapMode: Text.WordWrap
-                                color: Style.colorLightText
+                                color: Style.colorReadOnlyInputText
                                 font.pointSize: 12
                                 readOnly: true
                                 

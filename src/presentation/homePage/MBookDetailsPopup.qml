@@ -255,7 +255,7 @@ Popup
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -274,7 +274,7 @@ Popup
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -292,7 +292,7 @@ Popup
                                           Globals.selectedBook.pageCount : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -348,7 +348,7 @@ Popup
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -367,7 +367,7 @@ Popup
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -385,7 +385,7 @@ Popup
                                           Globals.selectedBook.format : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -404,7 +404,7 @@ Popup
                                           Globals.selectedBook.documentSize : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -423,7 +423,7 @@ Popup
                                           Globals.selectedBook.addedToLibrary : internal.placeholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
@@ -444,7 +444,7 @@ Popup
                                 
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
-                                inputFontColor: Style.colorLightText
+                                inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
                                 borderRadius: 4
