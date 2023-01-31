@@ -72,7 +72,7 @@ Popup
                         headerText: "Authors"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
-                        headerFontColor: Style.colorLightText3
+                        headerFontColor: Style.colorLightText
                         textPadding: 8
                         borderWidth: 1
                         borderRadius: 4
@@ -97,7 +97,7 @@ Popup
                             headerText: "From"
                             headerFontSize: 10.5
                             headerFontWeight: Font.Bold
-                            headerFontColor: Style.colorLightText3
+                            headerFontColor: Style.colorLightText
                             textPadding: 8
                             borderWidth: 1
                             borderRadius: 4
@@ -115,7 +115,7 @@ Popup
                             headerText: "To"
                             headerFontSize: 10.5
                             headerFontWeight: Font.Bold
-                            headerFontColor: Style.colorLightText3
+                            headerFontColor: Style.colorLightText
                             textPadding: 8
                             borderWidth: 1
                             borderRadius: 4

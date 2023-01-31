@@ -73,7 +73,7 @@ Item
                 text: root.text
                 font.weight: Font.Medium
                 font.pointSize: 13
-                color: Style.colorLightText3
+                color: Style.colorLightText
             }
         }
     }

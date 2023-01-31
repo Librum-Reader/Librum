@@ -137,7 +137,7 @@ Page
                         id: actionsLabel
                         Layout.leftMargin: 12
                         text: "ACTION"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.bold: true
                     }
@@ -152,7 +152,7 @@ Page
                     {
                         id: shortcutsLabel
                         text: "SHORTCUTS"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.bold: true
                     }

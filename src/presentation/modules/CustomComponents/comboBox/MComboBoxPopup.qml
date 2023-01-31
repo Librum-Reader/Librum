@@ -61,7 +61,7 @@ Popup
                 height: root.itemHeight
                 containingListview: listView
                 fontSize: root.fontSize
-                fontColor: Style.colorLightText3
+                fontColor: Style.colorLightText
                 checkBoxStyle: root.checkBoxStyle
                 checkBoxImageSize: root.checkBoxImageSize
                 checkBoxSize: root.checkBoxSize

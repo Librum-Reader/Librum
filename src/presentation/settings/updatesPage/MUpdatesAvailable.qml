@@ -54,7 +54,7 @@ Item
                 Layout.topMargin: 7
                 text: "Download it and get the great new improvements"
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 15
             }
             
@@ -64,7 +64,7 @@ Item
                 Layout.topMargin: 26
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 14.5
             }
             
@@ -73,7 +73,7 @@ Item
                 Layout.fillWidth: true
                 text: AppInformation.newestVersion
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 14.2
                 font.bold: true
             }
@@ -102,7 +102,7 @@ Item
                 Layout.topMargin: 42
                 text: "See the exact changes on our website at:"
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 13.5
             }
             

@@ -80,7 +80,7 @@ MFlickWrapper
                         text: "We are a small team of freelancing developers creating free apps for the community. We love\n" +
                               "working on fun projects, supporting our community and trying to make the world a better place."
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 14
                     }
                     
@@ -90,7 +90,7 @@ MFlickWrapper
                         Layout.topMargin: 18
                         text: "We are working in our own name, so we are not getting payed in any way."
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 14
                     }
                     
@@ -105,7 +105,7 @@ MFlickWrapper
                         {
                             text: "We are thankful for any support."
                             wrapMode: Text.WordWrap
-                            color: Style.colorLightText3
+                            color: Style.colorLightText
                             font.pointSize: 14
                         }
                         
@@ -130,7 +130,7 @@ MFlickWrapper
                         Layout.topMargin: 36
                         text: "If you feel like supporting us and our new projects, feel free to support us on patreon"
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 14
                     }
                     
@@ -164,7 +164,7 @@ MFlickWrapper
                               + AppInformation.companyWebsite + "/dontations</font>"
                         wrapMode: Text.WordWrap
                         textFormat: Text.RichText
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 14
                     }
                     
@@ -191,7 +191,7 @@ MFlickWrapper
                             Layout.leftMargin: 16
                             text: "If you dont, we hope you enjoy our app and wish you the best."
                             wrapMode: Text.WordWrap
-                            color: Style.colorLightText3
+                            color: Style.colorLightText
                             font.pointSize: 14
                         }
                     }

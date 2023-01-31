@@ -83,7 +83,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Options"
                     fontSize: 12
-                    fontColor: Style.colorLightText3
+                    fontColor: Style.colorLightText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
@@ -150,7 +150,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Next"
                     fontSize: 12
-                    fontColor: Style.colorLightText3
+                    fontColor: Style.colorLightText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8
@@ -170,7 +170,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Previous"
                     fontSize: 12
-                    fontColor: Style.colorLightText3
+                    fontColor: Style.colorLightText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorLightPurple2
                     opacityOnPressed: 0.8

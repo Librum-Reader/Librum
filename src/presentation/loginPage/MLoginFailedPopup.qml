@@ -80,7 +80,7 @@ Popup
                         wrapMode: Text.WordWrap
                         text: "Logging you in failed, please try again later."
                         horizontalAlignment: Qt.AlignHCenter
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.weight: Font.Medium
                         font.pointSize: 15
                     }

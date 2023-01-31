@@ -8,7 +8,7 @@ Item
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorPlaceholderText: "#8E8EA9"
     property color colorSubtitle: "#8A8AA0"
-    property color colorLightText3   : "#666687"
+    property color colorLightText   : "#666687"
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"
     property color colorPinkPurple   : "#E3D6FF"

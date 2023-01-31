@@ -75,7 +75,7 @@ Item
                 text: "GLOBAL SETTINGS"
                 font.pointSize: 10.2
                 font.weight: Font.Bold
-                color: Style.colorLightText3
+                color: Style.colorLightText
             }
             
             
@@ -173,7 +173,7 @@ Item
                 text: "USER & ACCOUNT"
                 font.pointSize: 10.2
                 font.bold: true
-                color: Style.colorLightText3
+                color: Style.colorLightText
             }
             
             MSettingsSidebarItem

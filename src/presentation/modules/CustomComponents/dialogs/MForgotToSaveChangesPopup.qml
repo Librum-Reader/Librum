@@ -82,7 +82,7 @@ Popup
                         wrapMode: Text.WordWrap
                         text: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
                         horizontalAlignment: Qt.AlignHCenter
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.weight: Font.Medium
                         font.pointSize: 15
                     }

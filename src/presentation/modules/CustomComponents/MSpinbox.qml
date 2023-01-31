@@ -52,7 +52,7 @@ Item
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 selectByMouse: true
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 12
                 font.weight: Font.Bold
                 validator: IntValidator { bottom: root.minVal; top: root.maxVal }

@@ -78,7 +78,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 15
                         text: "CURRENT VERSION"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.weight: Font.Bold
                     }
@@ -95,7 +95,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 12
                         text: "QT VERSION"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.weight: Font.Bold
                     }
@@ -164,7 +164,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 18
                         text: "COMPANY NAME"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.weight: Font.Bold
                     }
@@ -181,7 +181,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 12
                         text: "WEBSITE"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.weight: Font.Bold
                     }
@@ -205,7 +205,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 12
                         text: "CONTACT"
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 10.25
                         font.weight: Font.Bold
                     }

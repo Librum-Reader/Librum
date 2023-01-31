@@ -120,7 +120,7 @@ MFlickWrapper
                         Layout.leftMargin: 40
                         text: "This are approximately <font size=4 bold><b>1000</b></font> books."
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 15
                         textFormat: Text.RichText
                     }
@@ -156,7 +156,7 @@ MFlickWrapper
                         text: "You currently have <font size=4 color=" + Style.colorBasePurple + " bold><b>24</b></font> files stored " +
                               "and have <font size=4 color=" + Style.colorBasePurple + " bold><b>1.8GB</b></font> free!"
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 15
                         textFormat: Text.RichText
                     }
@@ -171,7 +171,7 @@ MFlickWrapper
                               Style.colorBasePurple + ">upgrade your tier.</font><br>" +
                               "To know why we offer different tiers <font color=" + Style.colorBasePurple + " bold>click here.</font>"
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.pointSize: 15
                         textFormat: Text.RichText
                     }

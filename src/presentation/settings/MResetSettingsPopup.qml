@@ -84,7 +84,7 @@ Popup
                         wrapMode: Text.WordWrap
                         text: "Resetting your settings is a permanent action, there will be no way to restore them!"
                         horizontalAlignment: Qt.AlignHCenter
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.weight: Font.Medium
                         font.pointSize: 15
                     }

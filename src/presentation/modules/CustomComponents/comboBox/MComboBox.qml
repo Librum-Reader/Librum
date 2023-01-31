@@ -25,7 +25,7 @@ Item
     property string headerText
     property int headerFontWeight: Font.Bold
     property double headerFontSize: 10.5
-    property color headerFontColor: Style.colorLightText3
+    property color headerFontColor: Style.colorLightText
     
     property string emptyText: "Any"
     property double selectedItemFontSize: 11
@@ -90,7 +90,7 @@ Item
                     text: root.text ? root.text : root.emptyText
                     font.pointSize: root.selectedItemFontSize
                     font.weight: Font.Normal
-                    color: root.text ? root.selectedItemFontColor : Style.colorLightText3
+                    color: root.text ? root.selectedItemFontColor : Style.colorLightText
                     elide: Text.ElideRight
                 }
                 

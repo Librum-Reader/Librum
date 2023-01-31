@@ -54,7 +54,7 @@ Item
                 Layout.topMargin: 7
                 text: "Make sure to check for updates regularly, so you dont miss out on any great features."
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 15
             }
             
@@ -64,7 +64,7 @@ Item
                 Layout.topMargin: 24
                 text: "Your current version is:"
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 14.5
             }
             
@@ -96,7 +96,7 @@ Item
                 Layout.topMargin: 32
                 text: "See our latest changes at:"
                 wrapMode: Text.WordWrap
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 font.pointSize: 13.5
             }
             

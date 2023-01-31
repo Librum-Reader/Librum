@@ -12,7 +12,7 @@ Item
     property int index
     property bool selected: false
     property double fontSize: 10.75
-    property color fontColor: Style.colorLightText3
+    property color fontColor: Style.colorLightText
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
     property int padding: 8

@@ -88,7 +88,7 @@ Popup
                         wrapMode: Text.WordWrap
                         text: "Deleting a book is a permanent action, no one will be able to restore it afterwards!"
                         horizontalAlignment: Qt.AlignHCenter
-                        color: Style.colorLightText3
+                        color: Style.colorLightText
                         font.weight: Font.Medium
                         font.pointSize: 15
                     }

@@ -36,7 +36,7 @@ Item
             id: label
             Layout.leftMargin: root.textSpacing
             text: root.text
-            color: Style.colorLightText3
+            color: Style.colorLightText
             font.pointSize: 10.5
             font.weight: Font.Medium
         }

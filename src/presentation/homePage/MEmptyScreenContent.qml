@@ -43,7 +43,7 @@ Item
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: 14
                 font.weight: Font.DemiBold
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 wrapMode: Text.WordWrap
             }
             

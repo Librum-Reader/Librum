@@ -87,7 +87,7 @@ Popup
                         headerText: "Authors"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
-                        headerFontColor: Style.colorLightText3
+                        headerFontColor: Style.colorLightText
                         textPadding: 8
                         borderWidth: 1
                         borderRadius: 4
@@ -119,7 +119,7 @@ Popup
                                 headerText: "Added"
                                 headerFontSize: 10.5
                                 headerFontWeight: Font.Bold
-                                headerFontColor: Style.colorLightText3
+                                headerFontColor: Style.colorLightText
                                 textPadding: 8
                                 borderWidth: 1
                                 borderRadius: 4
@@ -137,7 +137,7 @@ Popup
                                 text: "Read"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
-                                fontColor: Style.colorLightText3
+                                fontColor: Style.colorLightText
                                 imageSize: 9
                                 
                                 onCheckedChanged: if(checked && unreadBox.checked) unreadBox.checked = false
@@ -155,7 +155,7 @@ Popup
                                 text: "Unread"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
-                                fontColor: Style.colorLightText3
+                                fontColor: Style.colorLightText
                                 imageSize: 9
                                 
                                 onCheckedChanged: if(checked && readBox.checked) readBox.checked = false
@@ -205,7 +205,7 @@ Popup
                                 text: "Only Books"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
-                                fontColor: Style.colorLightText3
+                                fontColor: Style.colorLightText
                                 imageSize: 9
                                 
                                 onCheckedChanged: if(checked && onlyFilesBox.checked) onlyFilesBox.checked = false
@@ -223,7 +223,7 @@ Popup
                                 text: "Only Files"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
-                                fontColor: Style.colorLightText3
+                                fontColor: Style.colorLightText
                                 imageSize: 9
                                 
                                 onCheckedChanged: if(checked && onlyBooksBox.checked) onlyBooksBox.checked = false

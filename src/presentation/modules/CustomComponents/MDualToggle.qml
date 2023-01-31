@@ -48,7 +48,7 @@ Item
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: root.leftText
-                color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText3
+                color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: 12
                 font.weight: root.leftSelected ? Font.Bold : Font.DemiBold
                 background: Rectangle
@@ -103,7 +103,7 @@ Item
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: root.rightText
-                color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText3
+                color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: 12
                 font.weight: root.rightSelected ? Font.Bold : Font.DemiBold
                 background: Rectangle

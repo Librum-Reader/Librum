@@ -59,7 +59,7 @@ Item
                     font.pointSize: 11
                     font.weight: Font.Normal
                     placeholderText: "Search..."
-                    placeholderTextColor: Style.colorLightText3
+                    placeholderTextColor: Style.colorLightText
                     background: Rectangle   
                     {   
                         anchors.fill: parent

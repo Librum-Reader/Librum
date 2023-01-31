@@ -34,7 +34,7 @@ Item
         {
             id: description
             text: root.descriptionText
-            color: Style.colorLightText3
+            color: Style.colorLightText
             font.pointSize: root.descriptionSize
         }
     }

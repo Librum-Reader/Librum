@@ -96,7 +96,7 @@ Item
                     Layout.fillWidth: true
                     Layout.topMargin: 5                    
                     text: "Stephen R. Covey"
-                    color: Style.colorLightText3
+                    color: Style.colorLightText
                     font.pointSize: 10
                 }
             }

@@ -68,7 +68,7 @@ Item
                 text: root.text
                 font.weight: Font.Medium
                 font.pointSize: 11
-                color: Style.colorLightText3
+                color: Style.colorLightText
                 elide: Text.ElideRight
             }
         }

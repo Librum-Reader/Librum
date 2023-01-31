@@ -68,7 +68,7 @@ Popup
                 height: 32
                 containingListview: listView
                 fontSize: 11.5
-                fontColor: Style.colorLightText3
+                fontColor: Style.colorLightText
                 checkBoxStyle: false
                 
                 function getContent()
