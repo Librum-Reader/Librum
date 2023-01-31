@@ -10,6 +10,7 @@ Item
     property color colorSubtitle: "#8A8AA0"
     property color colorLightText: "#666687"
     property color colorReadOnlyInputText: "#666687"
+    property color colorBaseInputText: "#32324D"
     property color colorLightInputText: "#666687"
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"

@@ -10,9 +10,9 @@ Item
     property alias text: inputField.text
     property int boxHeight: 40
     property string placeholderContent
-    property color placeholderColor: Style.colorBaseText
+    property color placeholderColor: Style.colorPlaceholderText
     property double inputFontSize: 12
-    property color inputFontColor: Style.colorBaseText
+    property color inputFontColor: Style.colorBaseInputText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
     property bool hasError: false
