@@ -101,7 +101,7 @@ MFlickWrapper
                         horizontalAlignment: Qt.AlignHCenter
                         text: "Enter your email and we'll send you a link to reset your password"
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText2
+                        color: Style.colorSubtitle
                         lineHeight: 1.1
                         font.weight: Font.Medium
                         font.pointSize: 12.5
@@ -178,7 +178,7 @@ MFlickWrapper
                             text: "Back to Login"
                             fontSize: 12.20
                             fontWeight: Font.Medium
-                            fontColor: Style.colorLightText2
+                            fontColor: Style.colorSubtitle
                             imagePath: Icons.arrowtopBlackRight
                             imageSize: 28
                             imageRotation: 180

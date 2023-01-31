@@ -113,7 +113,7 @@ MFlickWrapper
                         Layout.topMargin: 4
                         Layout.alignment: Qt.AlignHCenter
                         text: "Log into your account"
-                        color: Style.colorLightText2
+                        color: Style.colorSubtitle
                         font.pointSize: 13
                     }
                     

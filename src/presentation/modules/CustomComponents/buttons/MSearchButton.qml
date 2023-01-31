@@ -58,7 +58,7 @@ Item
                 color: Style.colorBaseText
                 font.pointSize: 12
                 placeholderText: "Search for entries"
-                placeholderTextColor: Style.colorLightText2
+                placeholderTextColor: Style.colorSubtitle
                 background: Rectangle
                 {
                     anchors.fill: parent

@@ -95,7 +95,7 @@ MFlickWrapper
                         text: "Your credentials are only used to authenticate yourself. " + 
                               "Everything will be stored in a secure database."
                         font.pointSize: 13
-                        color: Style.colorLightText2
+                        color: Style.colorSubtitle
                         wrapMode: Text.WordWrap
                     }
                     

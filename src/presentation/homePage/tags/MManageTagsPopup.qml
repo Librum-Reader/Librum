@@ -110,7 +110,7 @@ Popup
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 Layout.leftMargin: 1
-                color: Style.colorLightText2
+                color: Style.colorSubtitle
                 font.pointSize: 9.5
                 font.weight: Font.Medium
                 elide: Text.ElideRight

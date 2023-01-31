@@ -118,7 +118,7 @@ Item
                         text: "Click to select an image or drop it into in this area"
                         horizontalAlignment: Qt.AlignHCenter
                         wrapMode: Text.WordWrap
-                        color: Style.colorLightText2
+                        color: Style.colorSubtitle
                         font.pointSize: 12
                         font.weight: Font.DemiBold
                         lineHeight: 0.9
