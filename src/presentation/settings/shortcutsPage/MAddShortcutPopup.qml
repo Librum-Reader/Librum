@@ -117,7 +117,7 @@ Popup
                         headerFontSize: 12
                         headerFontColor: Style.colorBaseTitle
                         headerFontWeight: Font.DemiBold
-                        selectedItemFontColor: Style.colorLightText
+                        selectedItemFontColor: Style.colorReadOnlyInputText
                         selectedItemFontSize: 12.5
                         selectedItemPadding: 3
                         emptyText: "None selected"
