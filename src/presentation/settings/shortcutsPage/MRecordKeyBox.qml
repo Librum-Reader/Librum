@@ -25,10 +25,11 @@ Item
         height: button.height
         x: button.x
         y: button.y
-        spread: 0
-        samples: 12
+        spread: 0.05
+        radius: 12
+        samples: 24
         transparentBorder: true
-        color: "#A92224"
+        color: "#aaA92224"
         source: button
     }
     
@@ -131,7 +132,7 @@ Item
             target: backgroundGlow
             property: "radius"
             duration: 600
-            to: 10
+            to: 17
         }
         
         PropertyAnimation
@@ -139,7 +140,7 @@ Item
             target: backgroundGlow
             property: "radius"
             duration: 600
-            to: 2
+            to: 7
         }
     }
     
