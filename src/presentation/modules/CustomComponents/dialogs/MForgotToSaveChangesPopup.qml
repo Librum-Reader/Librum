@@ -109,7 +109,7 @@ Popup
                             text: "Save"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.save()
                             
@@ -131,7 +131,7 @@ Popup
                             text: "Don't save"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: focus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.discard()
                             

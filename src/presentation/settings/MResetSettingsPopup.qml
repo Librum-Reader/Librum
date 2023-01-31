@@ -110,7 +110,7 @@ Popup
                             text: "No, Keep"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.keep()
                             
@@ -132,7 +132,7 @@ Popup
                             text: "Yes, Reset"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.reset()
                             

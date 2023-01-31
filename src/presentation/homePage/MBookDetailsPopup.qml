@@ -181,7 +181,7 @@ Popup
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Change"
-                                fontColor: Style.colorBaseText
+                                xxxUniqueLibrumProperty: Style.colorBaseText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
                                 
@@ -198,7 +198,7 @@ Popup
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Delete"
-                                fontColor: Style.colorBaseText
+                                xxxUniqueLibrumProperty: Style.colorBaseText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
                                 
@@ -476,7 +476,7 @@ Popup
                     borderColor: Style.colorLightBorder
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     text: "Apply"
-                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                    xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: 12
                     
@@ -497,7 +497,7 @@ Popup
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     opacityOnPressed: 0.7
                     text: "Cancel"
-                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                    xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: 12
                     
@@ -521,7 +521,7 @@ Popup
                     backgroundColor: active ? Style.colorBaseRed : "transparent"
                     opacityOnPressed: 0.7
                     text: "Delete"
-                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                    xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: 12
                     imagePath: active ? Icons.trashWhite : Icons.trashGray

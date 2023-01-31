@@ -70,7 +70,7 @@ MFlickWrapper
                     text: "Save"
                     fontSize: 12
                     fontWeight: Font.Bold
-                    fontColor: Style.colorBackground
+                    xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                     imagePath: Icons.checkWhite
                     imageSize: 14
                     

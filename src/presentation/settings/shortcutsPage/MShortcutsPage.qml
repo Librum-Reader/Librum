@@ -81,7 +81,7 @@ Page
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 text: "Add shortcut"
-                fontColor: Style.colorBackground
+                xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: Icons.plusWhite

@@ -106,7 +106,7 @@ Popup
                             text: "Ok"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: activeFocus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: root.close();
                             
@@ -130,14 +130,14 @@ Popup
                             Layout.preferredWidth: 100
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
-                            borderWidth: focus ? 0 : 1
+                            borderWidth: activeFocus ? 0 : 1
                             borderColor: Style.colorLightBorder2
-                            backgroundColor: focus ? Style.colorBasePurple : "transparent"
+                            backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: "Report"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            fontColor: focus ? Style.colorBackground : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.report()
                             

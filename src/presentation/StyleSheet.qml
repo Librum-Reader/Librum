@@ -6,13 +6,18 @@ Item
 {
     id: styleSheet
     property color colorFocusedButtonText: "#FFFFFF"
+    property color colorUnfocusedButtonText: "#666687"
+    
     property color colorPlaceholderText: "#8E8EA9"
+    property color colorLightText: "#666687"
+    
     property color colorSubtitle: "#8A8AA0"
     property color colorPageSubtitle: "#666687"
-    property color colorLightText: "#666687"
+    
     property color colorReadOnlyInputText: "#666687"
     property color colorBaseInputText: "#32324D"
     property color colorLightInputText: "#666687"
+    
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"
     property color colorPinkPurple   : "#E3D6FF"

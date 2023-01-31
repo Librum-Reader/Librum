@@ -58,7 +58,7 @@ Item
                 opacityOnPressed: 0.75
                 borderColor: Style.colorMediumPurple
                 text: "Add book"
-                fontColor: Style.colorBasePurple
+                xxxUniqueLibrumProperty: Style.colorBasePurple
                 fontWeight: Font.Bold
                 fontSize: 13.5
                 imagePath: Icons.plusBlack

@@ -184,7 +184,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "Adjust brightness"
-                        fontColor: Style.colorBaseText
+                        xxxUniqueLibrumProperty: Style.colorBaseText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.sun
@@ -201,7 +201,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "Sync book"
-                        fontColor: Style.colorBaseText
+                        xxxUniqueLibrumProperty: Style.colorBaseText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.sync
@@ -220,7 +220,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "More options"
-                        fontColor: Style.colorBaseText
+                        xxxUniqueLibrumProperty: Style.colorBaseText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.settingsGrayHallow

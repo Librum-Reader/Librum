@@ -58,7 +58,7 @@ MFlickWrapper
                     text: "Upgrade"
                     fontSize: 12
                     fontWeight: Font.Bold
-                    fontColor: Style.colorBackground
+                    xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                     imagePath: Icons.heartWhiteHallow
                     imageSize: 18
                 }

@@ -155,7 +155,7 @@ Popup
                         borderColor: Style.colorLightBorder
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         text: "Apply"
-                        fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                        xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: 12
                         KeyNavigation.right: cancelButton
@@ -189,7 +189,7 @@ Popup
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         opacityOnPressed: 0.7
                         text: "Cancel"
-                        fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                        xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: 12
                         KeyNavigation.left: applyButton

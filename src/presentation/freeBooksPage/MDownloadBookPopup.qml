@@ -335,7 +335,7 @@ Popup
                             Layout.preferredHeight: 38
                             active: true
                             text: "Download"
-                            fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: 12
                             borderColor: Style.colorLightBorder
@@ -360,7 +360,7 @@ Popup
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: "Cancel"
-                            fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
+                            xxxUniqueLibrumProperty: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: 12
                             

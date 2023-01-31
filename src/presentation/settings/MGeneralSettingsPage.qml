@@ -67,7 +67,7 @@ MFlickWrapper
                     text: "Restore Defaults"
                     fontSize: 12
                     fontWeight: Font.Bold
-                    fontColor: Style.colorBackground
+                    xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                     
                     onClicked: resetSettingsPopup.open()
                 }

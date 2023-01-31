@@ -62,7 +62,7 @@ Page
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 text: "Add books"
-                fontColor: Style.colorBackground
+                xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 fontSize: 13
                 imagePath: Icons.plusWhite

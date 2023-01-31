@@ -182,7 +182,7 @@ Popup
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 fontSize: 12
-                fontColor: Style.colorFocusedButtonText
+                xxxUniqueLibrumProperty: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 text: "Done"
                 
