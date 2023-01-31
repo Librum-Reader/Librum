@@ -8,6 +8,7 @@ Item
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorPlaceholderText: "#8E8EA9"
     property color colorSubtitle: "#8A8AA0"
+    property color colorPageSubtitle: "#666687"
     property color colorLightText: "#666687"
     property color colorReadOnlyInputText: "#666687"
     property color colorBaseInputText: "#32324D"

@@ -34,7 +34,7 @@ Item
         {
             id: description
             text: root.descriptionText
-            color: Style.colorLightText
+            color: Style.colorPageSubtitle
             font.pointSize: root.descriptionSize
         }
     }
