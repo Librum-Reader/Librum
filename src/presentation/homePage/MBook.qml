@@ -173,7 +173,7 @@ Item
                     Layout.topMargin: 4
                     clip: true
                     text: model.authors === "" ? "Unknown" : model.authors
-                    color: Style.colorLightText2
+                    color: Style.colorLightText3
                     font.pointSize: 10
                     elide: Text.ElideRight
                 }
