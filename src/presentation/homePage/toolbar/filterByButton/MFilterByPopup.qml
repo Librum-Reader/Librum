@@ -83,7 +83,7 @@ Popup
                         headerToBoxSpacing: 2
                         placeholderContent: "e.g. Uncle bob"
                         inputFontSize: 11
-                        placeholderColor: Style.colorLightText
+                        placeholderColor: Style.colorPlaceholderText
                         headerText: "Authors"
                         headerFontSize: 10.5
                         headerFontWeight: Font.Bold
@@ -115,7 +115,7 @@ Popup
                                 headerToBoxSpacing: 2
                                 placeholderContent: "e.g. 2d ago"
                                 inputFontSize: 11
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 headerText: "Added"
                                 headerFontSize: 10.5
                                 headerFontWeight: Font.Bold
@@ -242,7 +242,7 @@ Popup
                         backgroundColor: Style.colorBasePurple
                         text: "Apply Filter"
                         fontSize: 10.5
-                        fontColor: Style.colorBrightText
+                        fontColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         
                         onClicked: root.filterQuerySent()

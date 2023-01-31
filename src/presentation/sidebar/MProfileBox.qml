@@ -57,7 +57,7 @@ Item
                     text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase()
                     font.pointSize: 12
                     font.bold: true
-                    color: Style.colorBrightText
+                    color: Style.colorFocusedButtonText
                 }
                 
                 Image

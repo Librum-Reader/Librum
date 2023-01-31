@@ -1,10 +1,12 @@
 pragma Singleton
 import QtQuick 2.15
+import Librum.controllers 1.0
 
 Item
 {
-    property color colorBrightText   : "#FFFFFF"
-    property color colorLightText    : "#8E8EA9"
+    id: styleSheet
+    property color colorFocusedButtonText: "#FFFFFF"
+    property color colorPlaceholderText: "#8E8EA9"
     property color colorLightText2   : "#8A8AA0"
     property color colorLightText3   : "#666687"
     property color colorBasePurple   : "#946BDE"

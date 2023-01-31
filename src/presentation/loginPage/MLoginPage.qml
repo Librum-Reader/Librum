@@ -59,7 +59,7 @@ MFlickWrapper
         background: Rectangle
         {
             anchors.fill: parent
-            color: Style.loginWindowBackground
+            color: Style.pagesBackground
         }
         
         
@@ -79,7 +79,7 @@ MFlickWrapper
                 bottomPadding: 42
                 background: Rectangle
                 {
-                    color: Style.loginContentBackground
+                    color: Style.containerBackground
                     radius: 5
                 }
                 
@@ -124,7 +124,7 @@ MFlickWrapper
                         Layout.fillWidth: true
                         Layout.topMargin: 32
                         placeholderContent: "kaidoe@gmail.com"
-                        placeholderColor: Style.colorLightText
+                        placeholderColor: Style.colorPlaceholderText
                         headerText: "Email"
                         
                         Keys.onPressed: 
@@ -235,7 +235,7 @@ MFlickWrapper
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
                         fontSize: 12
-                        fontColor: Style.colorBrightText
+                        fontColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         text: "Login"
                         

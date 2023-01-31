@@ -110,7 +110,7 @@ Popup
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 Layout.leftMargin: 1
-                color: Style.colorLightText
+                color: Style.colorLightText2
                 font.pointSize: 9.5
                 font.weight: Font.Medium
                 elide: Text.ElideRight
@@ -182,7 +182,7 @@ Popup
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 fontSize: 12
-                fontColor: Style.colorBrightText
+                fontColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 text: "Done"
                 

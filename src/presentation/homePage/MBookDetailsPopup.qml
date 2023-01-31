@@ -252,7 +252,7 @@ Popup
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.title : ""
                                 placeholderContent: "Unknown"
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -271,7 +271,7 @@ Popup
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.authors : ""
                                 placeholderContent: "Unknown"
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -345,7 +345,7 @@ Popup
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.creator : ""
                                 placeholderContent: "Unknown"
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -364,7 +364,7 @@ Popup
                                 headerFontSize: 11.5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.creationDate : ""
                                 placeholderContent: "Unknown"
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
                                 inputFontSize: 12
                                 inputFontColor: Style.colorLightText3
@@ -476,7 +476,7 @@ Popup
                     borderColor: Style.colorLightBorder
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     text: "Apply"
-                    fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
                     fontWeight: Font.Bold
                     fontSize: 12
                     
@@ -497,7 +497,7 @@ Popup
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     opacityOnPressed: 0.7
                     text: "Cancel"
-                    fontColor: active ? Style.colorBrightText : Style.colorLightText2
+                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
                     fontWeight: Font.Bold
                     fontSize: 12
                     
@@ -521,7 +521,7 @@ Popup
                     backgroundColor: active ? Style.colorBaseRed : "transparent"
                     opacityOnPressed: 0.7
                     text: "Delete"
-                    fontColor: active ? Style.colorBrightText : Style.colorLightText
+                    fontColor: active ? Style.colorFocusedButtonText : Style.colorBaseTitle
                     fontWeight: Font.Bold
                     fontSize: 12
                     imagePath: active ? Icons.trashWhite : Icons.trashGray

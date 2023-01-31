@@ -27,7 +27,7 @@ MFlickWrapper
         background: Rectangle
         {
             anchors.fill: parent
-            color: Style.loginWindowBackground
+            color: Style.pagesBackground
         }
         
         
@@ -70,7 +70,7 @@ MFlickWrapper
                 horizontalPadding: 0
                 background: Rectangle
                 {
-                    color: Style.loginContentBackground
+                    color: Style.containerBackground
                     radius: 6
                 }
                 
@@ -122,7 +122,7 @@ MFlickWrapper
                             id: emailInput
                             Layout.fillWidth: true
                             placeholderContent: "kaidoe@gmail.com"
-                            placeholderColor: Style.colorLightText
+                            placeholderColor: Style.colorPlaceholderText
                             headerText: ""
                         }
                         
@@ -157,7 +157,7 @@ MFlickWrapper
                             backgroundColor: Style.colorBasePurple
                             text: "Send Email"
                             fontSize: 12.25
-                            fontColor: Style.colorBrightText
+                            fontColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
                             
                             onClicked: internal.sendPasswordResetEmail()

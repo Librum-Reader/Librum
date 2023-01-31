@@ -23,7 +23,7 @@ MFlickWrapper
         id: page
         anchors.fill: parent
         bottomPadding: 16
-        background: Rectangle { anchors.fill: parent; color: Style.loginWindowBackground }
+        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
         
         
         Shortcut
@@ -58,7 +58,7 @@ MFlickWrapper
                 topPadding: 48
                 bottomPadding: 36
                 horizontalPadding: 52
-                background: Rectangle { color: Style.loginContentBackground; radius: 5 }
+                background: Rectangle { color: Style.containerBackground; radius: 5 }
                 
                 
                 ColumnLayout
@@ -130,7 +130,7 @@ MFlickWrapper
                                     Layout.fillWidth: true
                                     headerText: 'First name'
                                     placeholderContent: "Kai"
-                                    placeholderColor: Style.colorLightText
+                                    placeholderColor: Style.colorPlaceholderText
                                     
                                     Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                              null, 
@@ -143,7 +143,7 @@ MFlickWrapper
                                     Layout.fillWidth: true
                                     headerText: "Last name"
                                     placeholderContent: "Doe"
-                                    placeholderColor: Style.colorLightText
+                                    placeholderColor: Style.colorPlaceholderText
                                     
                                     Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                              firstNameInput,
@@ -158,7 +158,7 @@ MFlickWrapper
                                 Layout.topMargin: 19
                                 headerText: 'Email'
                                 placeholderContent: "kaidoe@gmail.com"
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event,
                                                                                          lastNameInput,
                                                                                          passwordInput)
@@ -170,7 +170,7 @@ MFlickWrapper
                                 Layout.fillWidth: true
                                 Layout.topMargin: 16
                                 headerText: 'Password'
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
                                 
@@ -187,7 +187,7 @@ MFlickWrapper
                                 Layout.fillWidth: true
                                 Layout.topMargin: 16
                                 headerText: 'Confirmation password'
-                                placeholderColor: Style.colorLightText
+                                placeholderColor: Style.colorPlaceholderText
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
                                 
@@ -227,7 +227,7 @@ MFlickWrapper
                                 borderWidth: 0
                                 backgroundColor: Style.colorBasePurple
                                 fontSize: 12
-                                fontColor: Style.colorBrightText
+                                fontColor: Style.colorFocusedButtonText
                                 fontWeight: Font.Bold
                                 text: "Let's start"
                                 

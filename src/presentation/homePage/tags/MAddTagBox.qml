@@ -56,7 +56,7 @@ Item
                     font.pointSize: 12
                     font.weight: Font.Normal
                     placeholderText: "Add a tag..."
-                    placeholderTextColor: Style.colorLightText
+                    placeholderTextColor: Style.colorPlaceholderText
                     background: Rectangle
                     {   
                         anchors.fill: parent

@@ -135,7 +135,7 @@ Item
                             color: Style.colorBaseText
                             font.pointSize: 12
                             placeholderText: "Find"
-                            placeholderTextColor: Style.colorLightText
+                            placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
                             onTextChanged: root.textChanged(text)
