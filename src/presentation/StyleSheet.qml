@@ -36,8 +36,37 @@ Item
     property color darkBackground    : "#CCCCCC"
     property color colorSidebarMark  : "#F0F0FF"
     property color colorSeparator    : "#EAEAEF"
-    property color loginWindowBackground  : "#efefef"
-    property color loginContentBackground : "white"
+    property color containerBackground : "#FFFFFF"
     property color colorLightGrayBackground : "#EAEAEF"
-    property color pagesBackground: "#F6F6F9"
+    property color pagesBackground: "#F1F1F1"
+    
+    
+    // Temporary solution for switching themes
+    Connections
+    {
+        id: theme
+        target: SettingsController
+        function onSettingChanged()
+        {
+            let newTheme = SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance);
+            if(newTheme !== state)
+                state = newTheme;
+        }
+    }
+    
+    state: /*"Dark"*/SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance)
+    states: [
+        State {
+            name: "Light"
+            PropertyChanges { target: styleSheet; pagesBackground: "#F1F1F1" }
+            PropertyChanges { target: styleSheet; containerBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
+        },
+        State {
+            name: "Dark"
+            PropertyChanges { target: styleSheet; pagesBackground: "#24242D" }
+            PropertyChanges { target: styleSheet; containerBackground: "#2D2D38" }
+            PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
+        }
+    ]
 }

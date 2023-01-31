@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE virtual void resetSettingGroup(int group) = 0;
 
 signals:
+    void settingChanged();
     void reload();
 };
 
