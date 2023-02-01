@@ -46,8 +46,6 @@ Item
     // Other
     property color colorDropArea: "#F6F6F9"
     
-    property color colorLightGray3   : "#E2E2E2"
-    property color colorNeonBlue     : "#4945FF"
     property color colorLightGreen   : "#EAFBE7"
     property color colorLightGreen2  : "#C6F0C2"
     property color colorMediumGreen  : "#5CB176"
