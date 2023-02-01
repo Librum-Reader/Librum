@@ -186,7 +186,7 @@ Item
         root.hasError = true;
         backgroundRect.border.color = Style.colorErrorBorder;
         backgroundRect.border.width = 2;
-        backgroundRect.color = Style.colorErrorLight;
+        backgroundRect.color = Style.colorErrorBackground;
     }
     
     function clearError()

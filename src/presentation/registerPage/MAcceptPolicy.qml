@@ -73,7 +73,7 @@ Item
         root.hasError = true;
         acceptCheckBox.borderWidth = 2;
         acceptCheckBox.borderColor = Style.colorErrorBorder;
-        acceptCheckBox.uncheckedBackgroundColor = Style.colorErrorLight;
+        acceptCheckBox.uncheckedBackgroundColor = Style.colorErrorBackground;
     }
     
     function clearError()

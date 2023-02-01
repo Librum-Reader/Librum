@@ -19,6 +19,7 @@ Item
     property color colorNoImageLabel: "#737373"
     property color colorGreenText: "#5CB176"
     property color colorText: "#32324D"
+    property color colorErrorText: "#F25E42"
     property color colorTitle: "#32324D"
     
     // Subtitless
@@ -49,25 +50,24 @@ Item
     property color colorReadingToolbarBackground: "#EDEDED"
     property color colorGreenBackground: "#EAFBE7"
     property color colorBookImageBackground: "#DCDCE4"
+    property color colorErrorBackground: "#FDEDE8"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
     property color colorBookBorder: "#E0E0DE"
     property color colorButtonBorder: "#DCDCE4"
     property color colorCheckboxBorder: "#C0C0CF"
+    property color colorContainerBorder  : "#DCDCE4"
+    property color colorErrorBorder: "#E87964"
     
     // Other
     property color colorDropArea: "#F6F6F9"
     
     
-    property color colorContainerBorder  : "#DCDCE4"
-    property color colorErrorText    : "#F25E42"
-    property color colorErrorBorder  : "#E87964"
-    property color colorErrorLight   : "#FDEDE8"
-    property color colorBackground   : "#FFFFFF"
-    property color colorSidebarMark  : "#F0F0FF"
-    property color containerBackground : "#FFFFFF"
-    property color colorLightGrayBackground : "#EAEAEF"
+    property color colorBackground: "#FFFFFF"
+    property color colorSidebarMark: "#F0F0FF"
+    property color containerBackground: "#FFFFFF"
+    property color colorLightGrayBackground: "#EAEAEF"
     property color pagesBackground: "#F1F1F1"
     
     
