@@ -15,7 +15,7 @@ Item
     property color textColor: Style.colorUnfocusedButtonText
     property int fontWeight: Font.Bold
     property double fontSize: 11
-    property color backgroundColor: "white"
+    property color backgroundColor: Style.colorButtonBackground
     property double opacityOnPressed: 0.9
     property int borderWidth: 1
     property color borderColor: "red"

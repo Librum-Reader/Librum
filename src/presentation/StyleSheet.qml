@@ -8,7 +8,8 @@ Item
     // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
-    property color colorBaseGray: "#D2D2D2"
+    property color colorButtonBackground: "transparent"
+    property color colorBorderlessButtonBackground: "#D2D2D2"
     
     // Texts
     property color colorPlaceholderText: "#8E8EA9"
