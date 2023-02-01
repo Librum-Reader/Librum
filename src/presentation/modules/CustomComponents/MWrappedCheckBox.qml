@@ -35,7 +35,6 @@ Item
             width: 22
             height: 22
             anchors.centerIn: parent
-            borderColor: Style.colorLightBorder2
             borderWidth: 1
             imageSize: 12
             

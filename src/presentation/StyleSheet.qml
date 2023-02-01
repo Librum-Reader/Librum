@@ -52,13 +52,13 @@ Item
     property color colorGreenBorder: "#C6F0C2"
     property color colorBookBorder: "#E0E0DE"
     property color colorButtonBorder: "#DCDCE4"
+    property color colorCheckboxBorder: "#C0C0CF"
     
     // Other
     property color colorDropArea: "#F6F6F9"
     
     
     property color colorLightBorder  : "#DCDCE4"
-    property color colorLightBorder2 : "#C0C0CF"
     property color colorDarkBorder   : "#ADADB4"
     property color colorErrorText    : "#F25E42"
     property color colorErrorBorder  : "#E87964"

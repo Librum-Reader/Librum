@@ -10,7 +10,7 @@ import Librum.icons 1.0
 Item
 {
     id: root
-    property color borderColor: Style.colorDarkBorder
+    property color borderColor: Style.colorCheckboxBorder
     property color checkedBorderColor: Style.colorLightBorder
     property int borderRadius: 4
     property int borderWidth: 1
