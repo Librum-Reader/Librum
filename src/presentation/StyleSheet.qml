@@ -59,7 +59,6 @@ Item
     
     
     property color colorLightBorder  : "#DCDCE4"
-    property color colorDarkBorder   : "#ADADB4"
     property color colorErrorText    : "#F25E42"
     property color colorErrorBorder  : "#E87964"
     property color colorErrorLight   : "#FDEDE8"

@@ -80,7 +80,7 @@ Item
     {
         root.hasError = false;
         acceptCheckBox.borderWidth = 1;
-        acceptCheckBox.borderColor = Style.colorDarkBorder;
+        acceptCheckBox.borderColor = Style.colorCheckboxBorder;
         acceptCheckBox.uncheckedBackgroundColor = "transparent";
     }
 }
