@@ -35,7 +35,7 @@ Item
             id: topBorder
             Layout.fillWidth: true
             Layout.preferredHeight: 2
-            color: Style.colorLightGray
+            color: Style.colorLightSeparator
         }
         
         RowLayout

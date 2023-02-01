@@ -88,7 +88,7 @@ Item
                 visible: !internal.imageExists
                 padding: 0
                 clip: true
-                background: Rectangle { color: Style.colorLightGray; radius: 4 }
+                background: Rectangle { color: Style.colorDropArea; radius: 4 }
                 
                 
                 ColumnLayout

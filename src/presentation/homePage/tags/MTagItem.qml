@@ -30,9 +30,9 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : 
+            color: root.selected ? Style.colorSidebarMark :
                                    mouseArea.containsMouse || ListView.currentIndex === index
-                                   ? Style.colorLightGray : Style.colorBackground
+                                   ? Style.colorLightHighlight : Style.colorBackground
             radius: 4
         }
         

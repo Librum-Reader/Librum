@@ -34,8 +34,11 @@ Item
     property color colorHighlight: "#EEE9F1"
     
     // Separators
+    property color colorSeparator: "#EAEAEF"
     property color colorDarkSeparator: "#D2D2D2"
+    property color colorLightSeparator: "#F6F6F9"
     
+    property color colorDropArea: "#F6F6F9"
     
     property color colorLightGray    : "#F6F6F9"
     property color colorLightGray2   : "#EDEDED"
@@ -56,9 +59,7 @@ Item
     property color colorErrorBorder  : "#E87964"
     property color colorErrorLight   : "#FDEDE8"
     property color colorBackground   : "#FFFFFF"
-    property color darkBackground    : "#CCCCCC"
     property color colorSidebarMark  : "#F0F0FF"
-    property color colorSeparator    : "#EAEAEF"
     property color containerBackground : "#FFFFFF"
     property color colorLightGrayBackground : "#EAEAEF"
     property color pagesBackground: "#F1F1F1"
