@@ -34,7 +34,7 @@ Item
             Layout.preferredWidth: 170
             Layout.preferredHeight: 38
             Layout.alignment: Qt.AlignHCenter
-            backgroundColor: Style.colorLightPurple
+            backgroundColor: Style.colorLightHighlight
             opacityOnPressed: 0.75
             borderColor: Style.colorMediumPurple
             text: "Remove Filters"

@@ -190,7 +190,7 @@ Item
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
                         Layout.topMargin: 4
-                        color: Style.colorLightPurple2
+                        color: Style.colorHighlight
                         radius: 2
                         
                         Label

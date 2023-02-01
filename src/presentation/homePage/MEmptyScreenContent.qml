@@ -54,7 +54,7 @@ Item
                 Layout.preferredHeight: 42
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 20
-                backgroundColor: Style.colorLightPurple
+                backgroundColor: Style.colorLightHighlight
                 opacityOnPressed: 0.75
                 borderColor: Style.colorMediumPurple
                 text: "Add book"

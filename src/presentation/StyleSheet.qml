@@ -20,9 +20,9 @@ Item
     
     property color colorBasePurple   : "#946BDE"
     property color colorMediumPurple : "#D9D8FF"
-    property color colorPinkPurple   : "#E3D6FF"
-    property color colorLightPurple  : "#F0F0FF"
-    property color colorLightPurple2 : "#EEE9F1"
+    property color colorLightHighlight  : "#F0F0FF"
+    property color colorHighlight : "#EEE9F1"
+    
     property color colorBaseGray     : "#D2D2D2"
     property color colorDarkGray     : "#737373"
     property color colorLightGray    : "#F6F6F9"

@@ -22,7 +22,7 @@ Item
         padding: 12
         background: Rectangle
         {
-            color: Style.colorLightPurple
+            color: Style.colorLightHighlight
             border.width: 1
             border.color: Style.colorMediumPurple
             radius: 5

@@ -66,7 +66,7 @@ Item
                     id: closeButton
                     Layout.preferredWidth: 32
                     Layout.preferredHeight: 30
-                    backgroundColor: Style.colorLightPurple2
+                    backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
@@ -85,7 +85,7 @@ Item
                     fontSize: 12
                     xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
-                    backgroundColor: Style.colorLightPurple2
+                    backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
@@ -152,7 +152,7 @@ Item
                     fontSize: 12
                     xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
-                    backgroundColor: Style.colorLightPurple2
+                    backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
@@ -172,7 +172,7 @@ Item
                     fontSize: 12
                     xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
-                    backgroundColor: Style.colorLightPurple2
+                    backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
