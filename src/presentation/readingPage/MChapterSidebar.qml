@@ -46,7 +46,7 @@ Item
                 Layout.alignment: Qt.AlignBottom
                 radius: 4
                 color: Style.colorBackground
-                border.color: Style.colorLightBorder
+                border.color: Style.colorButtonBorder
                 
                 TextField
                 {

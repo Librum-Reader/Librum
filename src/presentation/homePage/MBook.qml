@@ -39,7 +39,7 @@ Item
                 height: parent.height + 4
                 width: parent.width
                 radius: 4
-                color: Style.colorLightBorder
+                color: Style.colorBookImageBackground
             }
         }
         
@@ -76,7 +76,7 @@ Item
             id: upperBookPart
             Layout.fillWidth: true
             Layout.preferredHeight: 230
-            color: Style.colorLightBorder
+            color: Style.colorBookImageBackground
             
             Rectangle
             {

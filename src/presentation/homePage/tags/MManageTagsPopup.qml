@@ -69,7 +69,7 @@ Popup
                 opacityOnPressed: 0.7
                 borderColor: "transparent"
                 radius: 6
-                borderColorOnPressed: Style.colorLightBorder
+                borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.closeBlack
                 imageSize: 14
                 

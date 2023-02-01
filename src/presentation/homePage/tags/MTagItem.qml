@@ -86,7 +86,7 @@ Item
                 Layout.alignment: Qt.AlignVCenter
                 backgroundColor: "transparent"
                 opacityOnPressed: 0.7
-                borderColor: currentlyPressed ? Style.colorLightBorder : "transparent"
+                borderColor: currentlyPressed ? Style.colorButtonBorder : "transparent"
                 radius: 4
                 imagePath: currentlyPressed ? Icons.editPurple : Icons.editLightGray
                 imageSize: 17
@@ -103,7 +103,7 @@ Item
                 Layout.alignment: Qt.AlignVCenter
                 backgroundColor: "transparent"
                 opacityOnPressed: 0.7
-                borderColor: currentlyPressed ? Style.colorLightBorder : "transparent"
+                borderColor: currentlyPressed ? Style.colorButtonBorder : "transparent"
                 radius: 4
                 imagePath: currentlyPressed ? Icons.closePurple : Icons.closeGray
                 imageSize: 12

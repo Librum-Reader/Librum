@@ -90,7 +90,7 @@ Item
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 radius: 2
                 border.width: 1
-                border.color: Style.colorLightBorder
+                border.color: Style.colorButtonBorder
                 
                 
                 Image

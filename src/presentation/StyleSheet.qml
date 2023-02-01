@@ -5,6 +5,7 @@ import Librum.controllers 1.0
 Item
 {
     id: styleSheet
+    
     // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
@@ -41,12 +42,13 @@ Item
     
     // Separators
     property color colorSeparator: "#EAEAEF"
-    property color colorDarkSeparator: "#D2D2D2"
+    property color colorDarkSeparator: "#DCDCE4"
     property color colorLightSeparator: "#F6F6F9"
     
     // Backgrounds
     property color colorReadingToolbarBackground: "#EDEDED"
     property color colorGreenBackground: "#EAFBE7"
+    property color colorBookImageBackground: "#DCDCE4"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"

@@ -50,7 +50,7 @@ Popup
                 borderColor: "transparent"
                 opacityOnPressed: 0.7
                 radius: 6
-                borderColorOnPressed: Style.colorLightBorder
+                borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.closeBlack
                 imageSize: 14
                 
@@ -95,7 +95,7 @@ Popup
                             id: bookCoverArea
                             Layout.preferredWidth: 198
                             Layout.preferredHeight: 258
-                            color: Style.colorLightBorder
+                            color: Style.colorBookImageBackground
                             radius: 4
                             
                             Image

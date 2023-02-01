@@ -75,7 +75,7 @@ MRightClickMenu
         
         Item { id: rectMargin1; height: 4; width: root.width }
         
-        Rectangle { width: root.width; height: 1; color: Style.colorLightBorder }
+        Rectangle { width: root.width; height: 1; color: Style.colorDarkSeparator }
         
         Item { id: rectMargin2; height: 4; width: root.width }
         

@@ -89,7 +89,7 @@ Item
                 opacityOnPressed: 0.8
                 borderColor: "transparent"
                 radius: 6
-                borderColorOnPressed: Style.colorLightBorder
+                borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.editGray
                 imageSize: 23
                 
@@ -106,7 +106,7 @@ Item
                 opacityOnPressed: 0.8
                 borderColor: "transparent"
                 radius: 6
-                borderColorOnPressed: Style.colorLightBorder
+                borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.trashGray
                 imageSize: 21
                 

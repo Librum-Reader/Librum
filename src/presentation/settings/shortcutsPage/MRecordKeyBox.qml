@@ -56,7 +56,7 @@ Item
             Layout.preferredHeight: 38
             radius: 4
             color: Style.colorBackground
-            border.color: root.recording ? "#E8B9BA" : Style.colorLightBorder
+            border.color: root.recording ? "#E8B9BA" : Style.colorButtonBorder
             opacity: mouseArea.pressed ? 0.8 : 1
             
             onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()

@@ -248,7 +248,7 @@ Page
                     {
                         width: 1
                         height: parent.height
-                        color: Style.colorLightBorder
+                        color: Style.colorDarkSeparator
                         anchors.right: parent.right
                     }
                     
@@ -285,7 +285,7 @@ Page
                     {
                         width: 1
                         height: parent.height
-                        color: Style.colorLightBorder
+                        color: Style.colorDarkSeparator
                         anchors.right: parent.right
                     }
                     

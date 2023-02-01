@@ -27,7 +27,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: 16
             radius: 4
-            color: Style.colorLightBorder
+            color: Style.colorBookImageBackground
         }
         
         /**
@@ -39,7 +39,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: 230
             Layout.topMargin: -6
-            color: Style.colorLightBorder
+            color: Style.colorBookImageBackground
             
             ColumnLayout
             {

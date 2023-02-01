@@ -104,7 +104,7 @@ Popup
                     }
                 }
                 
-                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorLightBorder }
+                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorDarkSeparator }
                 
                 
                 ColumnLayout
@@ -161,7 +161,7 @@ Popup
                     }
                 }
                 
-                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorLightBorder }
+                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorDarkSeparator }
                 
                 
                 ColumnLayout

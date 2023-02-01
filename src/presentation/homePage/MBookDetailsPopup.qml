@@ -51,7 +51,7 @@ Popup
                 opacityOnPressed: 0.7
                 borderColor: "transparent"
                 radius: 6
-                borderColorOnPressed: Style.colorLightBorder
+                borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.closeBlack
                 imageSize: 14
                 
@@ -102,7 +102,7 @@ Popup
                     {
                         Layout.preferredWidth: 1
                         Layout.fillHeight: true
-                        color: Style.colorLightBorder
+                        color: Style.colorDarkSeparator
                     }
                     
                     Rectangle
@@ -140,7 +140,7 @@ Popup
                             Layout.preferredWidth: parent.width
                             Layout.preferredHeight: 240
                             Layout.topMargin: 4
-                            color: Style.colorLightBorder
+                            color: Style.colorBookImageBackground
                             radius: 4
                             
                             Image

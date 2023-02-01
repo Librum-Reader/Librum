@@ -40,7 +40,7 @@ Item
         Rectangle
         {
             id: topBorder
-            color: Style.colorLightBorder
+            color: Style.colorDarkSeparator
             Layout.preferredHeight: 1
             Layout.fillWidth: true
         }
