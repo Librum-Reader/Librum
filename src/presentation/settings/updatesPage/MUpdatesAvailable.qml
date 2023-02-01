@@ -92,7 +92,7 @@ Item
                 text: "Download"
                 fontSize: 12
                 fontWeight: Font.Bold
-                xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8
             }
             

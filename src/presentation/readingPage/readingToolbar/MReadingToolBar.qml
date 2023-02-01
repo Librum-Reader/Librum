@@ -126,7 +126,7 @@ Pane
             backgroundColor: Style.colorBaseGray
             borderWidth: 0
             text: "(" + (root.currentPage + 1).toString() + " of " + maxPages.toString() + ")"
-            xxxUniqueLibrumProperty: active ? Style.colorBasePurple : Style.colorBaseText
+            textColor: active ? Style.colorBasePurple : Style.colorBaseText
             fontWeight: Font.Medium
             fontSize: 10.5
             opacityOnPressed: 0.7

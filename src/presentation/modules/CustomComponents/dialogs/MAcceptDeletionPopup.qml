@@ -115,7 +115,7 @@ Popup
                             text: "No, Keep Book"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.keepBook()
                             
@@ -137,7 +137,7 @@ Popup
                             text: "Yes, Delete Book"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.deleteBook()
                             

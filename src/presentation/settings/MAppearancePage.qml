@@ -65,7 +65,7 @@ Page
                 text: "Restore Defaults"
                 fontSize: 12
                 fontWeight: Font.Bold
-                xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                textColor: Style.colorFocusedButtonText
                 
                 onClicked: resetSettingsPopup.open()
             }

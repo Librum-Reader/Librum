@@ -38,7 +38,7 @@ Item
             opacityOnPressed: 0.75
             borderColor: Style.colorLightPurple
             text: "Remove Filters"
-            xxxUniqueLibrumProperty: Style.colorBasePurple
+            textColor: Style.colorBasePurple
             fontWeight: Font.Bold
             fontSize: 12.5
             imagePath: Icons.closePurple

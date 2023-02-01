@@ -157,7 +157,7 @@ MFlickWrapper
                             backgroundColor: Style.colorBasePurple
                             text: "Send Email"
                             fontSize: 12.25
-                            xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                            textColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
                             
                             onClicked: internal.sendPasswordResetEmail()
@@ -178,7 +178,7 @@ MFlickWrapper
                             text: "Back to Login"
                             fontSize: 12.20
                             fontWeight: Font.Medium
-                            xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
+                            textColor: Style.colorUnfocusedButtonText
                             imagePath: Icons.arrowtopBlackRight
                             imageSize: 28
                             imageRotation: 180

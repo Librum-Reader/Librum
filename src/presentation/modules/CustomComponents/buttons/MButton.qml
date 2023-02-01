@@ -12,7 +12,7 @@ Item
     property bool currentlyPressed: mouseArea.pressed
     
     property string text
-    property color xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
+    property color textColor: Style.colorUnfocusedButtonText
     property int fontWeight: Font.Bold
     property double fontSize: 11
     property color backgroundColor: "white"
@@ -73,7 +73,7 @@ Item
                 text: root.text
                 font.weight: root.fontWeight
                 font.pointSize: root.fontSize
-                color: root.xxxUniqueLibrumProperty
+                color: root.textColor
                 elide: Text.ElideRight
                 
                 Component.onCompleted:

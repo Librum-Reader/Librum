@@ -167,7 +167,7 @@ Popup
                         backgroundColor: Style.colorBasePurple
                         text: "Apply Filter"
                         fontSize: 10.5
-                        xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                        textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         
                         onClicked: root.filterQuerySent()

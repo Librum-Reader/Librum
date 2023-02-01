@@ -148,7 +148,7 @@ MFlickWrapper
                         text: "Support us"
                         fontWeight: Font.DemiBold
                         fontSize: 12
-                        xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                        textColor: Style.colorFocusedButtonText
                         radius: 4
                         
                         onClicked: Qt.openUrlExternally("https://www.patreon.com/librum_reader")

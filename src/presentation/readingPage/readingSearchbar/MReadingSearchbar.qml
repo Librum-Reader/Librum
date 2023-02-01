@@ -83,7 +83,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Options"
                     fontSize: 12
-                    xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
+                    textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
@@ -150,7 +150,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Next"
                     fontSize: 12
-                    xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
+                    textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8
@@ -170,7 +170,7 @@ Item
                     Layout.preferredHeight: 30
                     text: "Previous"
                     fontSize: 12
-                    xxxUniqueLibrumProperty: Style.colorUnfocusedButtonText
+                    textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
                     opacityOnPressed: 0.8

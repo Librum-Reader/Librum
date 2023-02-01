@@ -235,7 +235,7 @@ MFlickWrapper
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
                         fontSize: 12
-                        xxxUniqueLibrumProperty: Style.colorFocusedButtonText
+                        textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         text: "Login"
                         

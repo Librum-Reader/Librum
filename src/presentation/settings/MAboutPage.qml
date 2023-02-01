@@ -119,7 +119,7 @@ MFlickWrapper
                         imageSize: 20
                         text: "Up-to date"
                         fontSize: 10.5
-                        xxxUniqueLibrumProperty: Style.colorMediumGreen
+                        textColor: Style.colorMediumGreen
                         imageSpacing: 6
                         opacityOnPressed: 0.8
                         

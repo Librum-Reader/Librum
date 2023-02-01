@@ -106,7 +106,7 @@ Popup
                             text: "Ok"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: root.close();
                             
@@ -137,7 +137,7 @@ Popup
                             text: "Report"
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            xxxUniqueLibrumProperty: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
                             onClicked: internal.report()
                             
