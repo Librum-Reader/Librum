@@ -24,7 +24,7 @@ Item
         clip: true
         background: Rectangle
         {
-            color: Style.colorBackground
+            color: Style.colorContainerBackground
             border.color: Style.colorContainerBorder
             radius: 4
         }
@@ -64,7 +64,7 @@ Item
                 z: 2
                 opacity: internal.imageExists ? 1 : 0.8
                 visible: dropArea.containsDrag
-                color: Style.colorBackground
+                color: Style.colorContainerBackground
                 radius: 4
                 
                 

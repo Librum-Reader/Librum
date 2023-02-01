@@ -22,7 +22,7 @@ Item
             width: parent.width / 2
             height: parent.height / 2
             anchors.centerIn: parent
-            color: Style.containerBackground
+            color: Style.colorContainerBackground
             radius: width / 4
             antialiasing: true
         }

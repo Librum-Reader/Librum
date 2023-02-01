@@ -58,7 +58,7 @@ MFlickWrapper
                 topPadding: 48
                 bottomPadding: 36
                 horizontalPadding: 52
-                background: Rectangle { color: Style.containerBackground; radius: 5 }
+                background: Rectangle { color: Style.colorContainerBackground; radius: 5 }
                 
                 
                 ColumnLayout

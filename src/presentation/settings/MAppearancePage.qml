@@ -106,7 +106,7 @@ Page
                     horizontalPadding: internal.pagePadding
                     background: Rectangle
                     {
-                        color: Style.colorBackground
+                        color: Style.colorContainerBackground
                         border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true
@@ -178,7 +178,7 @@ Page
                     horizontalPadding: internal.pagePadding
                     background: Rectangle
                     {
-                        color: Style.colorBackground
+                        color: Style.colorContainerBackground
                         border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true
@@ -441,7 +441,7 @@ Page
                     horizontalPadding: internal.pagePadding
                     background: Rectangle
                     {
-                        color: Style.colorBackground
+                        color: Style.colorContainerBackground
                         border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true

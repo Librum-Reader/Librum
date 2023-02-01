@@ -24,7 +24,7 @@ Item
         bottomPadding: 32
         background: Rectangle
         {
-            color: Style.colorBackground
+            color: Style.colorContainerBackground
             border.color: Style.colorContainerBorder
             radius: 4
             antialiasing: true

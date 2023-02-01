@@ -51,7 +51,7 @@ MFlickWrapper
                 bottomPadding: 21
                 background: Rectangle
                 {
-                    color: Style.colorBackground
+                    color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
@@ -137,7 +137,7 @@ MFlickWrapper
                 bottomPadding: 30
                 background: Rectangle
                 {
-                    color: Style.colorBackground
+                    color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
@@ -230,7 +230,7 @@ MFlickWrapper
                 bottomPadding: 56
                 background: Rectangle
                 {
-                    color: Style.colorBackground
+                    color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true

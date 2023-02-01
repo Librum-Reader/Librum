@@ -81,7 +81,7 @@ Item
                 background: Rectangle
                 {
                     radius: 4
-                    color: Style.colorBackground
+                    color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                 }
                 

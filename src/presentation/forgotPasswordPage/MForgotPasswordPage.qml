@@ -70,7 +70,7 @@ MFlickWrapper
                 horizontalPadding: 0
                 background: Rectangle
                 {
-                    color: Style.containerBackground
+                    color: Style.colorContainerBackground
                     radius: 6
                 }
                 

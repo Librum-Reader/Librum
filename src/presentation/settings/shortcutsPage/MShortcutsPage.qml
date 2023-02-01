@@ -107,7 +107,7 @@ Page
             clip: true
             background: Rectangle
             {
-                color: Style.colorBackground
+                color: Style.colorContainerBackground
                 border.color: Style.colorContainerBorder
                 radius: 4
                 antialiasing: true

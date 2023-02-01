@@ -79,7 +79,7 @@ MFlickWrapper
                 bottomPadding: 42
                 background: Rectangle
                 {
-                    color: Style.containerBackground
+                    color: Style.colorContainerBackground
                     radius: 5
                 }
                 

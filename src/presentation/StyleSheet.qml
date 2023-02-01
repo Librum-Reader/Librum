@@ -51,13 +51,14 @@ Item
     property color colorGreenBackground: "#EAFBE7"
     property color colorBookImageBackground: "#DCDCE4"
     property color colorErrorBackground: "#FDEDE8"
+    property color colorContainerBackground: "#FFFFFF"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
     property color colorBookBorder: "#E0E0DE"
     property color colorButtonBorder: "#DCDCE4"
     property color colorCheckboxBorder: "#C0C0CF"
-    property color colorContainerBorder  : "#DCDCE4"
+    property color colorContainerBorder: "#DCDCE4"
     property color colorErrorBorder: "#E87964"
     
     // Other
@@ -66,7 +67,6 @@ Item
     
     property color colorBackground: "#FFFFFF"
     property color colorSidebarMark: "#F0F0FF"
-    property color containerBackground: "#FFFFFF"
     property color colorLightGrayBackground: "#EAEAEF"
     property color pagesBackground: "#F1F1F1"
     
@@ -89,13 +89,13 @@ Item
         State {
             name: "Light"
             PropertyChanges { target: styleSheet; pagesBackground: "#F1F1F1" }
-            PropertyChanges { target: styleSheet; containerBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorContainerBackground: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         },
         State {
             name: "Dark"
             PropertyChanges { target: styleSheet; pagesBackground: "#212121" }
-            PropertyChanges { target: styleSheet; containerBackground: "#2C2C2C" }
+            PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         }
     ]

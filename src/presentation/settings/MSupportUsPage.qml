@@ -50,7 +50,7 @@ MFlickWrapper
                 bottomPadding: 38
                 background: Rectangle
                 {
-                    color: Style.colorBackground
+                    color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true

@@ -62,7 +62,7 @@ Item
         id: container
         anchors.fill: parent
         padding: 0
-        background: Rectangle { color: Style.colorBackground }
+        background: Rectangle { color: Style.colorContainerBackground }
         
         
         MFlickWrapper

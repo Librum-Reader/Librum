@@ -15,7 +15,7 @@ Item
     {
         id: background
         anchors.fill: parent
-        color: Style.colorBackground
+        color: Style.colorContainerBackground
         
         
         Label
