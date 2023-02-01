@@ -51,6 +51,7 @@ Item
     // Borders
     property color colorGreenBorder: "#C6F0C2"
     property color colorBookBorder: "#E0E0DE"
+    property color colorButtonBorder: "#DCDCE4"
     
     // Other
     property color colorDropArea: "#F6F6F9"

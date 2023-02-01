@@ -18,7 +18,7 @@ Item
     property color backgroundColor: Style.colorButtonBackground
     property double opacityOnPressed: 0.9
     property int borderWidth: 1
-    property color borderColor: "red"
+    property color borderColor: Style.colorButtonBorder
     property color borderColorOnPressed: borderColor
     property int radius: 4
     property string imagePath
