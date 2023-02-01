@@ -56,7 +56,6 @@ Popup
                     imageSize: 10
                     text: "Case sensitive"
                     fontSize: 12
-                    fontColor: Style.colorBaseText
                 }
                 
                 MLabeledCheckBox
@@ -68,7 +67,6 @@ Popup
                     imageSize: 10
                     text: "Highlight all"
                     fontSize: 12
-                    fontColor: Style.colorBaseText
                 }
                 
                 MLabeledCheckBox
@@ -80,7 +78,6 @@ Popup
                     imageSize: 10
                     text: "Whole words"
                     fontSize: 12
-                    fontColor: Style.colorBaseText
                 }
             }
         }
