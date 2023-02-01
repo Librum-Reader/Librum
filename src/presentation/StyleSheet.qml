@@ -19,7 +19,7 @@ Item
     property color colorLightInputText: "#666687"
     
     property color colorBasePurple   : "#946BDE"
-    property color colorMediumPurple : "#D9D8FF"
+    property color colorLightPurple : "#D9D8FF"
     property color colorLightHighlight  : "#F0F0FF"
     property color colorHighlight : "#EEE9F1"
     

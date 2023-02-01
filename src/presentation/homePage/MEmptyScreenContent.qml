@@ -56,7 +56,7 @@ Item
                 Layout.topMargin: 20
                 backgroundColor: Style.colorLightHighlight
                 opacityOnPressed: 0.75
-                borderColor: Style.colorMediumPurple
+                borderColor: Style.colorLightPurple
                 text: "Add book"
                 xxxUniqueLibrumProperty: Style.colorBasePurple
                 fontWeight: Font.Bold

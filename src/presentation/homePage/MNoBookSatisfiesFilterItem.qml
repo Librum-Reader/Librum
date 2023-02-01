@@ -36,7 +36,7 @@ Item
             Layout.alignment: Qt.AlignHCenter
             backgroundColor: Style.colorLightHighlight
             opacityOnPressed: 0.75
-            borderColor: Style.colorMediumPurple
+            borderColor: Style.colorLightPurple
             text: "Remove Filters"
             xxxUniqueLibrumProperty: Style.colorBasePurple
             fontWeight: Font.Bold

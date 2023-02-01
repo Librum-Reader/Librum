@@ -24,7 +24,7 @@ Item
         {
             color: Style.colorLightHighlight
             border.width: 1
-            border.color: Style.colorMediumPurple
+            border.color: Style.colorLightPurple
             radius: 5
         }
         
