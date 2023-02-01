@@ -55,7 +55,6 @@ Item
     property color colorDropArea: "#F6F6F9"
     
     
-    property color colorMediumText   : "#505057"
     property color colorLightBorder  : "#DCDCE4"
     property color colorLightBorder2 : "#C0C0CF"
     property color colorLightBorder3 : "#E0E0DE"

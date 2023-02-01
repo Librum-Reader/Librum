@@ -198,7 +198,7 @@ MFlickWrapper
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 4
                             font.pointSize: 11
-                            color: Style.colorMediumText
+                            color: Style.colorText
                         }
                         
                         Item

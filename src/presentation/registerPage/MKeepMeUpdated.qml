@@ -63,10 +63,10 @@ Item
                 Label
                 {
                     id: keepMeUpdatedTextFirst
-                    text: "Keep me updated about the new features and"
+                    text: "Keep me updated about new features and"
                     wrapMode: Text.WordWrap
                     font.pointSize: 11
-                    color: Style.colorMediumText
+                    color: Style.colorText
                 }
                 
                 Label
@@ -75,7 +75,7 @@ Item
                     text: "upcoming improvements."
                     wrapMode: Text.WordWrap
                     font.pointSize: 11
-                    color: Style.colorMediumText
+                    color: Style.colorText
                 }
             }
         }

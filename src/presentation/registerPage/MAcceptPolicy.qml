@@ -58,7 +58,7 @@ Item
             textFormat: Text.RichText
             wrapMode: Text.WordWrap
             font.pointSize: 11
-            color: Style.colorMediumText
+            color: Style.colorText
         }
     }
     
