@@ -32,6 +32,7 @@ Item
     // Highlight
     property color colorLightHighlight: "#F0F0FF"
     property color colorHighlight: "#EEE9F1"
+    property color colorHoverHighlight: "#F6F6F9"
     
     // Separators
     property color colorSeparator: "#EAEAEF"
@@ -40,7 +41,6 @@ Item
     
     property color colorDropArea: "#F6F6F9"
     
-    property color colorLightGray    : "#F6F6F9"
     property color colorLightGray2   : "#EDEDED"
     property color colorLightGray3   : "#E2E2E2"
     property color colorNeonBlue     : "#4945FF"

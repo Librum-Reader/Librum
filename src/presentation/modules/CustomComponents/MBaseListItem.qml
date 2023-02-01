@@ -39,7 +39,7 @@ Item
         {
             color: root.selected ? Style.colorSidebarMark : 
                                    mouseArea.containsMouse || ListView.currentIndex === index
-                                   ? Style.colorLightGray : Style.colorBackground
+                                   ? Style.colorHoverHighlight : Style.colorBackground
             radius: 4
             antialiasing: true
         }
