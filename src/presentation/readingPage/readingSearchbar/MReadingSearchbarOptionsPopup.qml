@@ -34,7 +34,7 @@ Popup
             background: Rectangle
             {
                 color: Style.colorBackground
-                border.color: Style.colorLightBorder
+                border.color: Style.colorContainerBorder
                 border.width: 1
                 radius: 4
             }

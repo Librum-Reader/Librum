@@ -68,7 +68,7 @@ Item
             {
                 color: root.boxBackgroundColor
                 border.width: 1
-                border.color: Style.colorLightBorder
+                border.color: Style.colorContainerBorder
                 radius: 4
             }
             

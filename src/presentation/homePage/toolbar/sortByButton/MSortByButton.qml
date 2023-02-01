@@ -31,7 +31,7 @@ Item
             {
                 color: Style.colorBackground
                 border.width: 1
-                border.color: Style.colorLightBorder
+                border.color: Style.colorContainerBorder
                 radius: 5
             }
             

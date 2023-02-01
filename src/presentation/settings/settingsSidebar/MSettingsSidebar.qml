@@ -32,7 +32,7 @@ Item
         id: borderRect
         anchors.fill: parent
         color: "transparent"
-        border.color: Style.colorLightBorder
+        border.color: Style.colorContainerBorder
     }
     
     MFlickWrapper

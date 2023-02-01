@@ -11,7 +11,7 @@ Item
 {
     id: root
     property color borderColor: Style.colorCheckboxBorder
-    property color checkedBorderColor: Style.colorLightBorder
+    property color checkedBorderColor: Style.colorContainerBorder
     property int borderRadius: 4
     property int borderWidth: 1
     property int checkedBorderWidth: 0

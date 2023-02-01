@@ -60,7 +60,7 @@ Item
     property color colorDropArea: "#F6F6F9"
     
     
-    property color colorLightBorder  : "#DCDCE4"
+    property color colorContainerBorder  : "#DCDCE4"
     property color colorErrorText    : "#F25E42"
     property color colorErrorBorder  : "#E87964"
     property color colorErrorLight   : "#FDEDE8"

@@ -288,7 +288,7 @@ Popup
                             color: "transparent"
                             radius: 5
                             border.width: 1
-                            border.color: Style.colorLightBorder
+                            border.color: Style.colorContainerBorder
                             
                             
                             TextArea

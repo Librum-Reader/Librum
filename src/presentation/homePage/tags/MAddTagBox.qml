@@ -31,7 +31,7 @@ Item
             background: Rectangle
             {
                 color: "transparent"
-                border.color: Style.colorLightBorder
+                border.color: Style.colorContainerBorder
                 radius: 4
             }
             

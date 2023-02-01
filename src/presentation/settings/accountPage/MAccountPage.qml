@@ -89,7 +89,7 @@ MFlickWrapper
                 background: Rectangle
                 {
                     color: Style.colorBackground
-                    border.color: Style.colorLightBorder
+                    border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }
@@ -198,7 +198,7 @@ MFlickWrapper
                 background: Rectangle
                 {
                     color: Style.colorBackground
-                    border.color: Style.colorLightBorder
+                    border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }
@@ -274,7 +274,7 @@ MFlickWrapper
                 background: Rectangle
                 {
                     color: Style.colorBackground
-                    border.color: Style.colorLightBorder
+                    border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }

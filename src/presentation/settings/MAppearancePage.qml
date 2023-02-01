@@ -107,7 +107,7 @@ Page
                     background: Rectangle
                     {
                         color: Style.colorBackground
-                        border.color: Style.colorLightBorder
+                        border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true
                     }
@@ -179,7 +179,7 @@ Page
                     background: Rectangle
                     {
                         color: Style.colorBackground
-                        border.color: Style.colorLightBorder
+                        border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true
                     }
@@ -442,7 +442,7 @@ Page
                     background: Rectangle
                     {
                         color: Style.colorBackground
-                        border.color: Style.colorLightBorder
+                        border.color: Style.colorContainerBorder
                         radius: 4
                         antialiasing: true
                     }

@@ -82,7 +82,7 @@ Item
                 {
                     radius: 4
                     color: Style.colorBackground
-                    border.color: Style.colorLightBorder
+                    border.color: Style.colorContainerBorder
                 }
                 
                 

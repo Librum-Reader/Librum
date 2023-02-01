@@ -31,7 +31,7 @@ Item
         background: Rectangle
         {
             color: Style.colorBackground
-            border.color: root.invalid ? Style.colorRed : Style.colorLightBorder
+            border.color: root.invalid ? Style.colorRed : Style.colorContainerBorder
             border.width: root.invalid ? 2 : 1
             radius: 4
         }
