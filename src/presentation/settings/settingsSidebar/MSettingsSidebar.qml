@@ -65,7 +65,7 @@ Item
                 Layout.preferredHeight: 2
                 Layout.topMargin: 15
                 Layout.leftMargin: 26
-                color: Style.colorLightBorder
+                color: Style.colorDarkSeparator
             }
             
             Label
