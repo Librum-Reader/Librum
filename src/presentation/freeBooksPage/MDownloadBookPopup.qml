@@ -338,7 +338,6 @@ Popup
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: 12
-                            borderColor: Style.colorLightBorder
                             borderWidth: active ? 0 : 1
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             imagePath: active ? Icons.downloadWhite : Icons.downloadGray
@@ -356,7 +355,6 @@ Popup
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: 38
                             borderWidth: active ? 0 : 1
-                            borderColor: Style.colorLightBorder
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: "Cancel"

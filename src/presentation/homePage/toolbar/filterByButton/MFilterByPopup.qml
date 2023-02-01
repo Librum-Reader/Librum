@@ -133,7 +133,7 @@ Popup
                                 boxWidth: 17
                                 boxHeight: 17
                                 borderColor: Style.colorLightBorder2
-                                spacing:  7
+                                spacing: 7
                                 text: "Read"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
@@ -151,7 +151,7 @@ Popup
                                 boxWidth: 17
                                 boxHeight: 17
                                 borderColor: Style.colorLightBorder2
-                                spacing:  7
+                                spacing: 7
                                 text: "Unread"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal
@@ -201,7 +201,7 @@ Popup
                                 boxWidth: 17
                                 boxHeight: 17
                                 borderColor: Style.colorLightBorder2
-                                spacing:  7
+                                spacing: 7
                                 text: "Only Books"
                                 fontSize: 10.5
                                 fontWeight: Font.Normal

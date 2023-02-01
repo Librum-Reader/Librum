@@ -152,7 +152,6 @@ Popup
                         Layout.preferredHeight: 38
                         active: true
                         borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         text: "Apply"
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
@@ -185,7 +184,6 @@ Popup
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 38
                         borderWidth: active ? 0 : 1
-                        borderColor: Style.colorLightBorder
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         opacityOnPressed: 0.7
                         text: "Cancel"

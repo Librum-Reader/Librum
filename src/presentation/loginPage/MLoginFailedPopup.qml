@@ -100,7 +100,6 @@ Popup
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                             borderWidth: activeFocus ? 0 : 1
-                            borderColor: Style.colorLightBorder2
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: "Ok"
@@ -131,7 +130,6 @@ Popup
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
                             borderWidth: activeFocus ? 0 : 1
-                            borderColor: Style.colorLightBorder2
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: "Report"

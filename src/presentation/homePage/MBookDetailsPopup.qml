@@ -177,7 +177,6 @@ Popup
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 34
                                 borderWidth: 1
-                                borderColor: Style.colorLightBorder
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Change"
@@ -194,7 +193,6 @@ Popup
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 34
                                 borderWidth: 1
-                                borderColor: Style.colorLightBorder
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Delete"
@@ -473,7 +471,6 @@ Popup
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignLeft
                     borderWidth: active ? 0 : 1
-                    borderColor: Style.colorLightBorder
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     text: "Apply"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
@@ -493,7 +490,6 @@ Popup
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignLeft
                     borderWidth: active ? 0 : 1
-                    borderColor: Style.colorLightBorder
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     opacityOnPressed: 0.7
                     text: "Cancel"
@@ -517,7 +513,6 @@ Popup
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignRight
                     borderWidth: active ? 0 : 1
-                    borderColor: Style.colorLightBorder
                     backgroundColor: active ? Style.colorRed : "transparent"
                     opacityOnPressed: 0.7
                     text: "Delete"
