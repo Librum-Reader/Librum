@@ -22,7 +22,7 @@ Item
     property string headerText
     property int headerFontWeight: Font.Medium
     property double headerFontSize: 10.5
-    property color headerFontColor: Style.colorBaseTitle
+    property color headerFontColor: Style.colorTitle
     property int headerToBoxSpacing: 2
     property color borderColor: Style.colorLightBorder
     property color backgroundColor: Style.colorBackground

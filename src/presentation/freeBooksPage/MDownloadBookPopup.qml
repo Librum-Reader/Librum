@@ -79,7 +79,7 @@ Popup
                         text: "Download book"
                         font.weight: Font.Bold
                         font.pointSize: 17
-                        color: Style.colorBaseTitle
+                        color: Style.colorTitle
                     }
                     
                     RowLayout
@@ -277,7 +277,7 @@ Popup
                             text: "Content"
                             font.pointSize: 11.5
                             font.weight: Font.Bold
-                            color: Style.colorBaseTitle
+                            color: Style.colorTitle
                         }
                         
                         Rectangle

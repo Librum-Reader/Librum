@@ -25,7 +25,7 @@ Item
         {
             id: title
             text: root.titleText
-            color: Style.colorBaseText
+            color: Style.colorTitle
             font.weight: Font.Bold
             font.pointSize: root.titleSize
         }

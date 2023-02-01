@@ -46,7 +46,7 @@ Item
             {
                 id: filterByLabel
                 Layout.topMargin: -1
-                color: Style.colorBaseText
+                color: Style.colorText
                 text: "Filters"
                 font.pointSize: 12
                 font.weight: Font.Bold

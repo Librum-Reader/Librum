@@ -52,7 +52,7 @@ Item
                     leftPadding: 12
                     rightPadding: 4
                     selectByMouse: true
-                    color: Style.colorBaseText
+                    color: Style.colorText
                     font.pointSize: 12
                     font.weight: Font.Normal
                     placeholderText: "Add a tag..."

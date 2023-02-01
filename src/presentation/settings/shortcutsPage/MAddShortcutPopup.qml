@@ -95,7 +95,7 @@ Popup
                     text: "Edit Shortcuts"
                     font.weight: Font.Bold
                     font.pointSize: 17
-                    color: Style.colorBaseTitle
+                    color: Style.colorTitle
                 }
                 
                 
@@ -115,7 +115,7 @@ Popup
                         itemHeight: 32
                         headerText: "Action"
                         headerFontSize: 12
-                        headerFontColor: Style.colorBaseTitle
+                        headerFontColor: Style.colorTitle
                         headerFontWeight: Font.DemiBold
                         selectedItemFontColor: Style.colorReadOnlyInputText
                         selectedItemFontSize: 12.5

@@ -53,7 +53,7 @@ Item
                 Layout.preferredWidth: 150
                 Layout.alignment: Qt.AlignVCenter
                 text: root.text
-                color: Style.colorBaseText
+                color: Style.colorText
                 font.pointSize: 12
                 font.weight: Font.DemiBold
             }
@@ -73,7 +73,7 @@ Item
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
                 text: root.shortcut
-                color: Style.colorBaseText
+                color: Style.colorText
                 font.pointSize: 12
                 font.weight: Font.DemiBold
             }

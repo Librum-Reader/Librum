@@ -126,7 +126,7 @@ Pane
             backgroundColor: Style.colorBorderlessButtonBackground
             borderWidth: 0
             text: "(" + (root.currentPage + 1).toString() + " of " + maxPages.toString() + ")"
-            textColor: active ? Style.colorBasePurple : Style.colorBaseText
+            textColor: active ? Style.colorBasePurple : Style.colorText
             fontWeight: Font.Medium
             fontSize: 10.5
             opacityOnPressed: 0.7
@@ -145,7 +145,7 @@ Pane
             Layout.alignment: Qt.AlignVCenter
             leftPadding: paddingToCenter
             text: root.bookTitle
-            color: Style.colorBaseTitle
+            color: Style.colorTitle
             font.weight: Font.DemiBold
             font.pointSize: 12
             elide: Text.ElideRight
@@ -158,7 +158,7 @@ Pane
             Layout.preferredHeight: 32
             Layout.preferredWidth: 92
             headerText: ""
-            selectedItemFontColor: Style.colorBaseTitle
+            selectedItemFontColor: Style.colorTitle
             boxBackgroundColor: Style.colorBorderlessButtonBackground
             defaultIndex: 6
             dropdownIcon: Icons.dropdownBlack

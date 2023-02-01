@@ -43,7 +43,7 @@ Item
                 Layout.fillWidth: true
                 text: "You are up to date!"
                 wrapMode: Text.WordWrap
-                color: Style.colorBaseText
+                color: Style.colorText
                 font.pointSize: 23
                 font.weight: Font.Bold
             }

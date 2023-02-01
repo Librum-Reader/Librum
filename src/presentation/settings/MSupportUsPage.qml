@@ -68,7 +68,7 @@ MFlickWrapper
                     {
                         id: contentTitle
                         text: "Us"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 20
                         font.weight: Font.DemiBold
                     }

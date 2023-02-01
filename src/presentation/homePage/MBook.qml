@@ -159,7 +159,7 @@ Item
                     text: model.title === "" ? "Unknown" : model.title
                     font.weight: Font.Medium
                     verticalAlignment: Text.AlignVCenter
-                    color: Style.colorBaseTitle
+                    color: Style.colorTitle
                     font.pointSize: 11
                     lineHeight: 0.8
                     wrapMode: TextInput.WrapAtWordBoundaryOrAnywhere
@@ -200,7 +200,7 @@ Item
                             horizontalAlignment: Text.AlignBottom
                             text: model.bookProgressPercentage + "%"
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseTitle
+                            color: Style.colorTitle
                             font.pointSize: 10
                         }
                     }

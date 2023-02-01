@@ -66,7 +66,7 @@ Popup
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: "We're Sorry"
-                        color: Style.colorBaseTitle
+                        color: Style.colorTitle
                         font.weight: Font.Medium
                         font.pointSize: 42
                     }

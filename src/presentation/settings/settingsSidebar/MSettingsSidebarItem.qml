@@ -52,7 +52,7 @@ Item
                 Layout.leftMargin: root.labelLeftMargin
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
-                color: root.selected ? Style.colorBasePurple : Style.colorBaseText
+                color: root.selected ? Style.colorBasePurple : Style.colorText
                 font.pointSize: 13
                 font.weight: root.selected ? Font.DemiBold : Font.Normal
             }

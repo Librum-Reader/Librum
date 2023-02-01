@@ -84,7 +84,7 @@ Item
                     Layout.topMargin: 4
                     text: "The books title which can be 2 lines long ..."
                     font.weight: Font.Medium
-                    color: Style.colorBaseTitle
+                    color: Style.colorTitle
                     font.pointSize: 11
                     lineHeight: 0.8
                     wrapMode: TextInput.WordWrap

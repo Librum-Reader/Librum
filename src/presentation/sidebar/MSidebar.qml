@@ -100,7 +100,7 @@ Item
                         text: AppInformation.productName
                         font.bold: true
                         font.pointSize: 16
-                        color: Style.colorBaseTitle
+                        color: Style.colorTitle
                     }
                 }
                 

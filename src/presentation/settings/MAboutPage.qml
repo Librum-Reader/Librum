@@ -69,7 +69,7 @@ MFlickWrapper
                     {
                         id: detailsTitle
                         text: "Details"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                     }
@@ -87,7 +87,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 1
                         text: AppInformation.currentVersion
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 13.5
                     }
                     
@@ -104,7 +104,7 @@ MFlickWrapper
                     {
                         Layout.topMargin: 1
                         text: AppInformation.currentQtVersion
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 13.5
                     }
                     
@@ -155,7 +155,7 @@ MFlickWrapper
                     {
                         id: creatorTitle
                         text: "Creator"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                     }
@@ -248,7 +248,7 @@ MFlickWrapper
                     {
                         id: thisAppTitle
                         text: "This App"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                     }
@@ -277,7 +277,7 @@ MFlickWrapper
                             text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
                                   "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."
                             wrapMode: Text.WordWrap
-                            color: Style.colorBaseText
+                            color: Style.colorText
                             font.pointSize: 14.6
                             lineHeight: 1.05
                         }

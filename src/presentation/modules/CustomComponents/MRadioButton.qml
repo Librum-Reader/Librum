@@ -63,7 +63,7 @@ Item
             text: root.text
             font.pointSize: 12
             font.weight: root.selected ? Font.Medium : Font.Normal
-            color: Style.colorBaseText
+            color: Style.colorText
             
             MouseArea
             {

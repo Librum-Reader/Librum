@@ -102,7 +102,7 @@ MFlickWrapper
                         text: "Books"
                         font.pointSize: 17
                         font.weight: Font.DemiBold
-                        color: Style.colorBaseText
+                        color: Style.colorText
                     }
                     
                     
@@ -114,7 +114,7 @@ MFlickWrapper
                         text: "Open books after creation"
                         font.pointSize: 13
                         font.weight: Font.DemiBold
-                        color: Style.colorBaseText
+                        color: Style.colorText
                     }
                     
                     MOnOffToggle

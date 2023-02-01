@@ -34,7 +34,7 @@ Item
                 text: "Contents"
                 font.pointSize: 14
                 font.weight: Font.Medium
-                color: Style.colorBaseText
+                color: Style.colorText
             }
             
             Rectangle
@@ -55,7 +55,7 @@ Item
                     leftPadding: 15
                     rightPadding: 15
                     selectByMouse: true
-                    color: Style.colorBaseText
+                    color: Style.colorText
                     font.pointSize: 11
                     font.weight: Font.Normal
                     placeholderText: "Search..."
@@ -170,7 +170,7 @@ Item
 //                                        text: model.display
 //                                        font.pointSize: 10.5
 //                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
-//                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorBaseText
+//                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorText
 //                                        elide: Text.ElideRight
 //                                    }
                                     

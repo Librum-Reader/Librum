@@ -46,7 +46,7 @@ Item
             text: "Key"
             font.weight: Font.DemiBold
             font.pointSize: 12
-            color: Style.colorBaseTitle
+            color: Style.colorTitle
         }
         
         Rectangle

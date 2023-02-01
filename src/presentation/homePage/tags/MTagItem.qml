@@ -56,7 +56,7 @@ Item
                 text: Globals.bookTags[root.index].name
                 font.weight: root.selected ? Font.Medium : Font.Normal
                 font.pointSize: 12
-                color: Style.colorBaseText
+                color: Style.colorText
                 readOnly: true
                 background: Rectangle
                 {

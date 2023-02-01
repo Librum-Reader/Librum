@@ -79,7 +79,7 @@ MFlickWrapper
                         id: welcomeText
                         Layout.topMargin: 24
                         Layout.alignment: Qt.AlignHCenter
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         text: "Welcome!"
                         font.bold: true
                         font.pointSize: 26

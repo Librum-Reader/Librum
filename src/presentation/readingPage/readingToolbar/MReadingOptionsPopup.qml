@@ -126,7 +126,7 @@ Popup
                         text: "Read out (TTS)"
                         fontSize: 12
                         fontWeight: Font.Medium
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         spacing: 8
                     }
                     
@@ -140,7 +140,7 @@ Popup
                         text: "Continuous pages"
                         fontSize: 12
                         fontWeight: Font.Medium
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         checked: true
                         spacing: 8
                     }
@@ -155,7 +155,7 @@ Popup
                         text: "Display vertically"
                         fontSize: 12
                         fontWeight: Font.Medium
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         checked: true
                         spacing: 8
                     }
@@ -184,7 +184,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "Adjust brightness"
-                        textColor: Style.colorBaseText
+                        textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.sun
@@ -201,7 +201,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "Sync book"
-                        textColor: Style.colorBaseText
+                        textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.sync
@@ -220,7 +220,7 @@ Popup
                         opacityOnPressed: 0.7
                         borderWidth: 0
                         text: "More options"
-                        textColor: Style.colorBaseText
+                        textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
                         imagePath: Icons.settingsGrayHallow

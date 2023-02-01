@@ -116,7 +116,7 @@ MFlickWrapper
                         {
                             id: profileTitle
                             text: "Profile"
-                            color: Style.colorBaseText
+                            color: Style.colorText
                             font.pointSize: 16.5
                             font.weight: Font.DemiBold
                         }
@@ -215,7 +215,7 @@ MFlickWrapper
                     {
                         id: passwordTitle
                         text: "Change password"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                     }
@@ -291,7 +291,7 @@ MFlickWrapper
                     {
                         id: yourDataTitle
                         text: "Your data"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 16.5
                         font.weight: Font.DemiBold
                     }
@@ -304,7 +304,7 @@ MFlickWrapper
                         boxHeight: 21
                         text: "Analyse your reading to make better recommendations"
                         fontSize: 13
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         spacing: 12
                         checked: true
                         
@@ -319,7 +319,7 @@ MFlickWrapper
                         boxHeight: 21
                         text: "Anonymously share the fromats of books you read (e.g. Pdf), to help us improve Librum"
                         fontSize: 13
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         spacing: 12
                         checked: true
                         
@@ -334,7 +334,7 @@ MFlickWrapper
                         boxHeight: 21
                         text: "Collect data on application crashes, so we can prevent it from happening again"
                         fontSize: 13
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         spacing: 12
                         
                         onClicked: internal.unsavedChanges = true
@@ -348,7 +348,7 @@ MFlickWrapper
                         boxHeight: 21
                         text: "Collect data to display in your statistics"
                         fontSize: 13
-                        fontColor: Style.colorBaseText
+                        fontColor: Style.colorText
                         spacing: 12
                         
                         onClicked: internal.unsavedChanges = true

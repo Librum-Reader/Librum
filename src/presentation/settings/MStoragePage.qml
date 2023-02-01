@@ -95,7 +95,7 @@ MFlickWrapper
                         Layout.topMargin: 24
                         text: "Total storage"
                         wrapMode: Text.WordWrap
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 21
                         font.weight: Font.DemiBold
                     }
@@ -108,7 +108,7 @@ MFlickWrapper
                         Layout.topMargin: 10
                         text: "2GB"
                         wrapMode: Text.WordWrap
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 42
                         font.bold: true
                     }
@@ -132,7 +132,7 @@ MFlickWrapper
                         Layout.topMargin: 50
                         text: "Available storage"
                         wrapMode: Text.WordWrap
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.pointSize: 21
                         font.weight: Font.DemiBold
                     }

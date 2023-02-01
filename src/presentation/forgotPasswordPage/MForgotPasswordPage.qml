@@ -87,7 +87,7 @@ MFlickWrapper
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 32
                         text: "Forgot Password"
-                        color: Style.colorBaseText
+                        color: Style.colorText
                         font.bold: true
                         font.pointSize: 19
                     }

@@ -127,7 +127,7 @@ Page
                             text: "Display"
                             font.pointSize: 17
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         Label
@@ -138,7 +138,7 @@ Page
                             text: "Theme"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MDualToggle
@@ -199,7 +199,7 @@ Page
                             text: "Reading"
                             font.pointSize: 17
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         Label
@@ -210,7 +210,7 @@ Page
                             text: "Page spacing"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MSpinbox
@@ -239,7 +239,7 @@ Page
                             text: "Display book title in titlebar"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MOnOffToggle
@@ -276,7 +276,7 @@ Page
                             text: "Layout direction"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MRadioButtonSelector
@@ -309,7 +309,7 @@ Page
                             text: "Display mode"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MRadioButtonSelector
@@ -347,7 +347,7 @@ Page
                             text: "Page transition"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MComboBox
@@ -406,7 +406,7 @@ Page
                             text: "Default Zoom"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MSpinbox
@@ -461,7 +461,7 @@ Page
                             text: "Behavior"
                             font.pointSize: 17
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         
@@ -473,7 +473,7 @@ Page
                             text: "Smooth scrolling"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         
@@ -510,7 +510,7 @@ Page
                             text: "Loop after last page"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         
@@ -548,7 +548,7 @@ Page
                             text: "Cursor mode"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
-                            color: Style.colorBaseText
+                            color: Style.colorText
                         }
                         
                         MRadioButtonSelector

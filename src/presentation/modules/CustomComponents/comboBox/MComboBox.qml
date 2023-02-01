@@ -29,7 +29,7 @@ Item
     
     property string emptyText: "Any"
     property double selectedItemFontSize: 11
-    property color selectedItemFontColor: Style.colorBaseText
+    property color selectedItemFontColor: Style.colorText
     property int selectedItemPadding: 0
     
     property string dropdownIcon: Icons.dropdownGray

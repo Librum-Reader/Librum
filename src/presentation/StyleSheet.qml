@@ -16,7 +16,9 @@ Item
     property color colorPlaceholderText: "#8E8EA9"
     property color colorLightText: "#666687"
     property color colorNoImageLabel: "#737373"
-    property color colorGreenText  : "#5CB176"
+    property color colorGreenText: "#5CB176"
+    property color colorText: "#32324D"
+    property color colorTitle: "#32324D"
     
     // Subtitless
     property color colorSubtitle: "#8A8AA0"
@@ -53,8 +55,6 @@ Item
     property color colorDropArea: "#F6F6F9"
     
     
-    property color colorBaseText     : "#32324D"
-    property color colorBaseTitle    : "#4A4A6A"
     property color colorMediumText   : "#505057"
     property color colorLightBorder  : "#DCDCE4"
     property color colorLightBorder2 : "#C0C0CF"

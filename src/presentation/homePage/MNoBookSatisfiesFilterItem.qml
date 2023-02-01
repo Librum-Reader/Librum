@@ -23,7 +23,7 @@ Item
         {
             id: text
             text: "No book satisfies the filter conditions"
-            color: Style.colorBaseTitle
+            color: Style.colorTitle
             font.pointSize: 22
             font.weight: Font.Medium
         }

@@ -25,7 +25,7 @@ Item
     property double fontSize: 12
     property double fontWeight: Font.Normal
     property int verticalTextOffset: 0
-    property color fontColor: Style.colorBaseText
+    property color fontColor: Style.colorText
     signal clicked()
     
     implicitWidth: 100

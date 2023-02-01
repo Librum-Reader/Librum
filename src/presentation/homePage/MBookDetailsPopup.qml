@@ -66,7 +66,7 @@ Popup
                 text: "Book details"
                 font.weight: Font.Bold
                 font.pointSize: 17
-                color: Style.colorBaseTitle
+                color: Style.colorTitle
             }
             
             /*
@@ -181,7 +181,7 @@ Popup
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Change"
-                                textColor: Style.colorBaseText
+                                textColor: Style.colorText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
                                 
@@ -198,7 +198,7 @@ Popup
                                 backgroundColor: "transparent"
                                 opacityOnPressed: 0.8
                                 text: "Delete"
-                                textColor: Style.colorBaseText
+                                textColor: Style.colorText
                                 fontWeight: Font.DemiBold
                                 fontSize: 11.5
                                 
@@ -307,7 +307,7 @@ Popup
                                 multiSelect: false
                                 headerText: "Language"
                                 headerFontSize: 11.5
-                                headerFontColor: Style.colorBaseTitle
+                                headerFontColor: Style.colorTitle
                                 dropdownIconSize: 9
                                 maxHeight: 200
                                 model: ListModel
