@@ -139,7 +139,7 @@ Item
             Layout.preferredHeight: 90
             color: Style.colorBackground
             border.width: 1
-            border.color: Style.colorLightBorder3
+            border.color: Style.colorBookBorder
             
             
             ColumnLayout
