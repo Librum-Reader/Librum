@@ -127,7 +127,7 @@ Popup
                             Layout.alignment: Qt.AlignBottom
                             borderWidth: activeFocus ? 0 : 1
                             borderColor: Style.colorLightBorder2
-                            backgroundColor: activeFocus ? Style.colorBaseRed : "transparent"
+                            backgroundColor: activeFocus ? Style.colorRed : "transparent"
                             opacityOnPressed: 0.7
                             text: "Yes, Reset"
                             fontSize: 12.75

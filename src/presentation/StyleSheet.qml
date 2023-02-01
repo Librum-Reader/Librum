@@ -27,9 +27,10 @@ Item
     property color colorBaseInputText: "#32324D"
     property color colorLightInputText: "#666687"
     
-    // Purple tones
+    // Color tones
     property color colorBasePurple: "#946BDE"
     property color colorLightPurple: "#D9D8FF"
+    property color colorRed: "#D84B4D"
     
     // Highlight
     property color colorLightHighlight: "#F0F0FF"
@@ -52,7 +53,6 @@ Item
     property color colorDropArea: "#F6F6F9"
     
     
-    property color colorBaseRed      : "#D84B4D"
     property color colorBaseText     : "#32324D"
     property color colorBaseTitle    : "#4A4A6A"
     property color colorMediumText   : "#505057"

@@ -518,7 +518,7 @@ Popup
                     Layout.alignment: Qt.AlignRight
                     borderWidth: active ? 0 : 1
                     borderColor: Style.colorLightBorder
-                    backgroundColor: active ? Style.colorBaseRed : "transparent"
+                    backgroundColor: active ? Style.colorRed : "transparent"
                     opacityOnPressed: 0.7
                     text: "Delete"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
