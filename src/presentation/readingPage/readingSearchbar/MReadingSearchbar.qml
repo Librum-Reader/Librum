@@ -132,7 +132,7 @@ Item
                             Layout.alignment: Qt.AlignVCenter
                             leftPadding: 4
                             selectByMouse: true
-                            color: Style.colorBaseText
+                            color: Style.colorBaseInputText
                             font.pointSize: 12
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorPlaceholderText

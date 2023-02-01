@@ -55,7 +55,7 @@ Item
                 z: 1
                 visible: false
                 leftPadding: 12
-                color: Style.colorBaseText
+                color: Style.colorBaseInputText
                 font.pointSize: 12
                 placeholderText: "Search for entries"
                 placeholderTextColor: Style.colorPlaceholderText
