@@ -10,6 +10,7 @@ Item
     property color colorUnfocusedButtonText: "#666687"
     property color colorButtonBackground: "transparent"
     property color colorBorderlessButtonBackground: "#D2D2D2"
+    property color colorLightBorderlessButtonBackground: "#EDEDED"
     
     // Texts
     property color colorPlaceholderText: "#8E8EA9"
@@ -45,7 +46,6 @@ Item
     // Other
     property color colorDropArea: "#F6F6F9"
     
-    property color colorLightGray2   : "#EDEDED"
     property color colorLightGray3   : "#E2E2E2"
     property color colorNeonBlue     : "#4945FF"
     property color colorLightGreen   : "#EAFBE7"
