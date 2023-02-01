@@ -157,7 +157,7 @@ Popup
                                 id: noImageLabel
                                 anchors.centerIn: parent
                                 visible: !bookCover.visible
-                                color: Style.colorDarkGray
+                                color: Style.colorNoImageLabel
                                 text: Globals.selectedBook !== null ? "." + Globals.selectedBook.format : ""
                                 font.pointSize: 20
                                 font.bold: true

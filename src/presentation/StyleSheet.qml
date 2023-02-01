@@ -14,6 +14,7 @@ Item
     // Texts
     property color colorPlaceholderText: "#8E8EA9"
     property color colorLightText: "#666687"
+    property color colorNoImageLabel: "#737373"
     
     // Subtitless
     property color colorSubtitle: "#8A8AA0"
@@ -36,7 +37,6 @@ Item
     property color colorDarkSeparator: "#D2D2D2"
     
     
-    property color colorDarkGray     : "#737373"
     property color colorLightGray    : "#F6F6F9"
     property color colorLightGray2   : "#EDEDED"
     property color colorLightGray3   : "#E2E2E2"

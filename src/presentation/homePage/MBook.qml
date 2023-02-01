@@ -124,7 +124,7 @@ Item
                     Layout.alignment: Qt.AlignCenter
                     visible: bookCover.source == ""
                     text: "." + model.format
-                    color: Style.colorDarkGray
+                    color: Style.colorNoImageLabel
                     font.pointSize: 20
                     font.bold: true
                 }
