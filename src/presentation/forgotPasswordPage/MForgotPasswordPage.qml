@@ -142,7 +142,7 @@ MFlickWrapper
                             Layout.topMargin: 10
                             visible: false
                             text: "Email sent to: " + "placeholder@librum.com"
-                            color: Style.colorMediumGreen
+                            color: Style.colorGreenText
                             font.pointSize: 11.75
                         }
                         

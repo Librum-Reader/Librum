@@ -113,13 +113,13 @@ MFlickWrapper
                         Layout.topMargin: 21
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 32
-                        borderColor: Style.colorLightGreen2
-                        backgroundColor: Style.colorLightGreen
+                        borderColor: Style.colorGreenBorder
+                        backgroundColor: Style.colorGreenBackground
                         imagePath: Icons.checkGreen
                         imageSize: 20
                         text: "Up-to date"
                         fontSize: 10.5
-                        textColor: Style.colorMediumGreen
+                        textColor: Style.colorGreenText
                         imageSpacing: 6
                         opacityOnPressed: 0.8
                         
