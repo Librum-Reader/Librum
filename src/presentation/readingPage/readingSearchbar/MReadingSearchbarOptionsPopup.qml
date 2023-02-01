@@ -33,7 +33,7 @@ Popup
             horizontalPadding: 12
             background: Rectangle
             {
-                color: Style.colorBackground
+                color: Style.colorPopupBackground
                 border.color: Style.colorContainerBorder
                 border.width: 1
                 radius: 4

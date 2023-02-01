@@ -33,7 +33,7 @@ Popup
     closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
     background: Rectangle
     {
-        color: Style.colorBackground
+        color: Style.colorPopupBackground
         border.width: 1
         border.color: Style.colorContainerBorder
         radius: 4

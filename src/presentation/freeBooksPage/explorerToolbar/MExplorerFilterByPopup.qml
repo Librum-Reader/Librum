@@ -45,7 +45,7 @@ Popup
                 padding: 14
                 background: Rectangle
                 {
-                    color: Style.colorBackground
+                    color: Style.colorPopupBackground
                     border.width: 1
                     border.color: Style.colorContainerBorder
                     radius: 6

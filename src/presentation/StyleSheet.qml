@@ -52,6 +52,7 @@ Item
     property color colorBookImageBackground: "#DCDCE4"
     property color colorErrorBackground: "#FDEDE8"
     property color colorContainerBackground: "#FFFFFF"
+    property color colorPopupBackground: "#FFFFFF"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"

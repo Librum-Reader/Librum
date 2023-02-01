@@ -16,7 +16,7 @@ Popup
     implicitHeight: layout.implicitHeight
     focus: true
     padding: 0
-    background: Rectangle { radius: 6; color: Style.colorBackground }
+    background: Rectangle { radius: 6; color: Style.colorPopupBackground }
     modal: true
     Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
     

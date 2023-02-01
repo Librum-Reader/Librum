@@ -12,7 +12,7 @@ Popup
     implicitWidth: 751
     implicitHeight: layout.height
     padding: 0
-    background: Rectangle { radius: 6; color: Style.colorBackground }
+    background: Rectangle { radius: 6; color: Style.colorPopupBackground }
     
     modal: true
     Overlay.modal: Rectangle

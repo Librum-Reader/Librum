@@ -50,7 +50,7 @@ Popup
                 topPadding: 86
                 horizontalPadding: 62
                 bottomPadding: 52
-                background: Rectangle { color: Style.colorBackground; radius: 6 }
+                background: Rectangle { color: Style.colorPopupBackground; radius: 6 }
                 
                 
                 ColumnLayout

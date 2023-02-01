@@ -17,7 +17,7 @@ Popup
     horizontalPadding: 52
     background: Rectangle
     {
-        color: Style.colorBackground
+        color: Style.colorPopupBackground
         radius: 6
     }
     modal: true
