@@ -5,25 +5,36 @@ import Librum.controllers 1.0
 Item
 {
     id: styleSheet
+    // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
+    property color colorBaseGray: "#D2D2D2"
     
+    // Texts
     property color colorPlaceholderText: "#8E8EA9"
     property color colorLightText: "#666687"
     
+    // Subtitless
     property color colorSubtitle: "#8A8AA0"
     property color colorPageSubtitle: "#666687"
     
+    // Input
     property color colorReadOnlyInputText: "#666687"
     property color colorBaseInputText: "#32324D"
     property color colorLightInputText: "#666687"
     
-    property color colorBasePurple   : "#946BDE"
-    property color colorLightPurple : "#D9D8FF"
-    property color colorLightHighlight  : "#F0F0FF"
-    property color colorHighlight : "#EEE9F1"
+    // Purple tones
+    property color colorBasePurple: "#946BDE"
+    property color colorLightPurple: "#D9D8FF"
     
-    property color colorBaseGray     : "#D2D2D2"
+    // Highlight
+    property color colorLightHighlight: "#F0F0FF"
+    property color colorHighlight: "#EEE9F1"
+    
+    // Separators
+    property color colorDarkSeparator: "#D2D2D2"
+    
+    
     property color colorDarkGray     : "#737373"
     property color colorLightGray    : "#F6F6F9"
     property color colorLightGray2   : "#EDEDED"
@@ -75,8 +86,8 @@ Item
         },
         State {
             name: "Dark"
-            PropertyChanges { target: styleSheet; pagesBackground: "#24242D" }
-            PropertyChanges { target: styleSheet; containerBackground: "#2D2D38" }
+            PropertyChanges { target: styleSheet; pagesBackground: "#212121" }
+            PropertyChanges { target: styleSheet; containerBackground: "#2C2C2C" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         }
     ]
