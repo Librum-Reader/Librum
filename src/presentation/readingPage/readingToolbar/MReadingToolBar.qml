@@ -30,7 +30,7 @@ Pane
     
     implicitHeight: 48
     padding: 8
-    background: Rectangle { color: Style.colorLightGray2; radius: 4 }
+    background: Rectangle { color: Style.colorReadingToolbarBackground; radius: 4 }
     
     onVisibleChanged: if(optionsPopup.opened) optionsPopup.close()
     

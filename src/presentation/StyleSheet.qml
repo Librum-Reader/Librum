@@ -39,6 +39,10 @@ Item
     property color colorDarkSeparator: "#D2D2D2"
     property color colorLightSeparator: "#F6F6F9"
     
+    // Backgrounds
+    property color colorReadingToolbarBackground: "#EDEDED"
+    
+    // Other
     property color colorDropArea: "#F6F6F9"
     
     property color colorLightGray2   : "#EDEDED"
