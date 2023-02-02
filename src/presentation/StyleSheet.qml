@@ -9,7 +9,7 @@ Item
     // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
-    property color colorButtonBackground: "#FFFFFF"
+    property color colorControlBackground: "#FFFFFF"
     property color colorReadingViewButtonBackground: "#D2D2D2"
     property color colorLightReadingViewButtonBackground: "#EDEDED"
     

@@ -55,7 +55,7 @@ Item
             Layout.fillWidth: true
             Layout.preferredHeight: 38
             radius: 4
-            color: Style.colorButtonBackground
+            color: Style.colorControlBackground
             border.color: root.recording ? "#E8B9BA" : Style.colorButtonBorder
             opacity: mouseArea.pressed ? 0.8 : 1
             

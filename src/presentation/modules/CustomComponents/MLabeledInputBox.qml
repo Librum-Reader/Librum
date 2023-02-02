@@ -25,7 +25,7 @@ Item
     property color headerFontColor: Style.colorTitle
     property int headerToBoxSpacing: 2
     property color borderColor: Style.colorContainerBorder
-    property color backgroundColor: Style.colorButtonBackground
+    property color backgroundColor: Style.colorControlBackground
     property int borderWidth: 2
     property int borderRadius: 5
     property int textPadding: 15

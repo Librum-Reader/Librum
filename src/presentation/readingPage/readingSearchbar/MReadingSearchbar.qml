@@ -102,7 +102,7 @@ Item
                     verticalPadding: 0
                     background: Rectangle
                     {
-                        color: Style.colorButtonBackground
+                        color: Style.colorControlBackground
                         border.color: Style.colorContainerBorder
                         border.width: 1
                         radius: 4

@@ -27,7 +27,7 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: Style.colorButtonBackground
+            color: Style.colorControlBackground
             border.color: Style.colorContainerBorder
             radius: 4
         }
