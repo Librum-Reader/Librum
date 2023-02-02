@@ -45,7 +45,7 @@ Item
                 Layout.margins: 12
                 Layout.alignment: Qt.AlignBottom
                 radius: 4
-                color: Style.colorBackground
+                color: Style.colorContainerBackground
                 border.color: Style.colorButtonBorder
                 
                 TextField

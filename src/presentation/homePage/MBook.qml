@@ -137,7 +137,7 @@ Item
             id: lowerBookPart
             Layout.fillWidth: true
             Layout.preferredHeight: 90
-            color: Style.colorBackground
+            color: Style.colorBookBackground
             border.width: 1
             border.color: Style.colorBookBorder
             

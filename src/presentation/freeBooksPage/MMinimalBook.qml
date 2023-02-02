@@ -66,7 +66,7 @@ Item
             id: informationRect
             Layout.fillWidth: true
             Layout.preferredHeight: 65
-            color: Style.colorBackground
+            color: Style.colorBookBackground
             border.width: 1
             border.color: Style.colorBookBorder
             

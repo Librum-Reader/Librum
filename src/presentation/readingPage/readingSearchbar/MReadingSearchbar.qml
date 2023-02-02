@@ -51,7 +51,7 @@ Item
             Layout.fillHeight: true
             Layout.fillWidth: true
             padding: 8
-            background: Rectangle { color: Style.colorBackground }
+            background: Rectangle { color: Style.colorContainerBackground }
             
             
             RowLayout
@@ -102,7 +102,7 @@ Item
                     verticalPadding: 0
                     background: Rectangle
                     {
-                        color: Style.colorBackground
+                        color: Style.colorButtonBackground
                         border.color: Style.colorContainerBorder
                         border.width: 1
                         radius: 4

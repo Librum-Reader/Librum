@@ -30,7 +30,7 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: Style.colorBackground
+            color: Style.colorButtonBackground
             border.color: root.invalid ? Style.colorRed : Style.colorContainerBorder
             border.width: root.invalid ? 2 : 1
             radius: 4

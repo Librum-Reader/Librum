@@ -9,7 +9,7 @@ Item
     // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
-    property color colorButtonBackground: "transparent"
+    property color colorButtonBackground: "#FFFFFF"
     property color colorBorderlessButtonBackground: "#D2D2D2"
     property color colorLightBorderlessButtonBackground: "#EDEDED"
     
@@ -53,6 +53,8 @@ Item
     property color colorErrorBackground: "#FDEDE8"
     property color colorContainerBackground: "#FFFFFF"
     property color colorPopupBackground: "#FFFFFF"
+    property color colorBookBackground: "#FFFFFF"
+    property color colorReadingViewBackground: "#FFFFFF"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
@@ -65,8 +67,6 @@ Item
     // Other
     property color colorDropArea: "#F6F6F9"
     
-    
-    property color colorBackground: "#FFFFFF"
     property color colorSidebarMark: "#F0F0FF"
     property color colorLightGrayBackground: "#EAEAEF"
     property color pagesBackground: "#F1F1F1"

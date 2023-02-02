@@ -31,7 +31,7 @@ Item
             id: pageBackground
             z: -1
             anchors.fill: parent
-            color: Style.colorBackground
+            color: Style.colorReadingViewBackground
         }
     }
     

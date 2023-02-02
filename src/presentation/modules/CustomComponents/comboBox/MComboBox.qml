@@ -10,7 +10,7 @@ Item
     id: root
     property alias text: selectionPopup.selectedContent
     property bool multiSelect: false
-    property string boxBackgroundColor: Style.colorBackground
+    property string boxBackgroundColor: Style.colorContainerBackground
     
     property alias model: selectionPopup.model
     property alias checkBoxStyle: selectionPopup.checkBoxStyle
