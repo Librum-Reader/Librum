@@ -37,7 +37,7 @@ Item
         horizontalPadding: root.padding
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : 
+            color: root.selected ? Style.colorLightHighlight : 
                                    mouseArea.containsMouse || ListView.currentIndex === index
                                    ? Style.colorHoverHighlight : Style.colorControlBackground
             radius: 4

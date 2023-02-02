@@ -29,7 +29,7 @@ Item
         verticalPadding: 4
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : "transparent"
+            color: root.selected ? Style.colorLightHighlight : "transparent"
             radius: 3
         }
         

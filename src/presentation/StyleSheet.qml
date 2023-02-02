@@ -67,7 +67,6 @@ Item
     // Other
     property color colorDropArea: "#F6F6F9"
     
-    property color colorSidebarMark: "#F0F0FF"
     property color colorLightGrayBackground: "#EAEAEF"
     property color pagesBackground: "#F1F1F1"
     

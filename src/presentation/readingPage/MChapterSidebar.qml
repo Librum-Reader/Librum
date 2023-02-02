@@ -154,7 +154,7 @@ Item
 //                                    Layout.fillWidth: true
 //                                    Layout.preferredHeight: 22
                                     
-//                                    color: treeDelegate.selected ? Style.colorSidebarMark
+//                                    color: treeDelegate.selected ? Style.colorLightHighlight
 //                                                                 : itemHoverDetector.containsMouse ? Style.colorLightGray 
 //                                                                                                   : "transparent"
 //                                    radius: 2

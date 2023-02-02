@@ -56,7 +56,7 @@ Item
                     id: leftLabelBackground
                     anchors.fill: parent
                     anchors.margins: 1
-                    color: Style.colorSidebarMark
+                    color: Style.colorLightHighlight
                     opacity: internal.leftRectOpacity
                     radius: 4
                 }
@@ -112,7 +112,7 @@ Item
                     anchors.fill: parent
                     anchors.margins: 1
                     opacity: internal.rightRectOpacity
-                    color: Style.colorSidebarMark
+                    color: Style.colorLightHighlight
                     radius: 4
                 }
                 

@@ -30,7 +30,7 @@ Item
         padding: 0
         background: Rectangle
         {
-            color: root.selected ? Style.colorSidebarMark : "transparent"
+            color: root.selected ? Style.colorLightHighlight : "transparent"
             radius: 4
         }
         
