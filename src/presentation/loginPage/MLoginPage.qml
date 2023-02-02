@@ -56,11 +56,7 @@ MFlickWrapper
         id: page
         anchors.fill: parent
         bottomPadding: 22
-        background: Rectangle
-        {
-            anchors.fill: parent
-            color: Style.colorPageBackground
-        }
+        background: Rectangle { color: Style.colorAuthenticationPageBackground }
         
         
         ColumnLayout

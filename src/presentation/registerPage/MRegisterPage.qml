@@ -23,7 +23,7 @@ MFlickWrapper
         id: page
         anchors.fill: parent
         bottomPadding: 16
-        background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
+        background: Rectangle { color: Style.colorAuthenticationPageBackground }
         
         
         Shortcut

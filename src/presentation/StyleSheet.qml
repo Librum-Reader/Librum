@@ -9,7 +9,6 @@ Item
     // Buttons
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
-    property color colorControlBackground: "#FFFFFF"
     property color colorReadingViewButtonBackground: "#D2D2D2"
     property color colorLightReadingViewButtonBackground: "#EDEDED"
     
@@ -55,7 +54,9 @@ Item
     property color colorPopupBackground: "#FFFFFF"
     property color colorBookBackground: "#FFFFFF"
     property color colorReadingViewBackground: "#FFFFFF"
-    property color colorPageBackground: "#F1F1F1"
+    property color colorAuthenticationPageBackground: "#EFEFEF"
+    property color colorPageBackground: "#F6F6F9"
+    property color colorControlBackground: "#FFFFFF"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
@@ -87,7 +88,7 @@ Item
     states: [
         State {
             name: "Light"
-            PropertyChanges { target: styleSheet; colorPageBackground: "#F1F1F1" }
+            PropertyChanges { target: styleSheet; colorPageBackground: "#F6F6F9" }
             PropertyChanges { target: styleSheet; colorContainerBackground: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         },
