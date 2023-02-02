@@ -70,7 +70,7 @@ Popup
                         id: printButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
-                        backgroundColor: Style.colorLightBorderlessButtonBackground
+                        backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
                         imagePath: Icons.printer
@@ -82,7 +82,7 @@ Popup
                         id: downloadButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
-                        backgroundColor: Style.colorLightBorderlessButtonBackground
+                        backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
                         imagePath: Icons.downloadBlack
@@ -96,7 +96,7 @@ Popup
                         id: shareButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
-                        backgroundColor: Style.colorLightBorderlessButtonBackground
+                        backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
                         imagePath: Icons.share

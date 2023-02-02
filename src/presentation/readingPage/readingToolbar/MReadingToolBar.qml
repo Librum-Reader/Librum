@@ -79,7 +79,7 @@ Pane
             id: backButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: Icons.arrowtopBlackLeft
             imageSize: 11
@@ -93,7 +93,7 @@ Pane
             id: chapterButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: active ? Icons.readingViewSidebarPurple : Icons.readingViewSidebarBlack
             imageSize: 18
@@ -107,7 +107,7 @@ Pane
             id: bookmarksButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: active ? Icons.readingViewBookmarkPurple : Icons.readingViewBookmarkBlack
             imageSize: 14
@@ -123,7 +123,7 @@ Pane
             
             Layout.preferredWidth: 105
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             text: "(" + (root.currentPage + 1).toString() + " of " + maxPages.toString() + ")"
             textColor: active ? Style.colorBasePurple : Style.colorText
@@ -159,7 +159,7 @@ Pane
             Layout.preferredWidth: 92
             headerText: ""
             selectedItemFontColor: Style.colorTitle
-            boxBackgroundColor: Style.colorBorderlessButtonBackground
+            boxBackgroundColor: Style.colorReadingViewButtonBackground
             defaultIndex: 6
             dropdownIcon: Icons.dropdownBlack
             dropdownIconSize: 9
@@ -190,7 +190,7 @@ Pane
             id: fullScreenButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: active ? Icons.readingViewMaximizePurple : Icons.readingViewMaximizeBlack
             imageSize: 20
@@ -204,7 +204,7 @@ Pane
             id: searchButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: active ? Icons.readingViewSearchPurpleThin : Icons.readingViewSearchBlackThin
             imageSize: 18
@@ -218,7 +218,7 @@ Pane
             id: optionsButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
-            backgroundColor: Style.colorBorderlessButtonBackground
+            backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
             imagePath: active ? Icons.readingViewMenuPurple : Icons.readingViewMenuBlack
             imageSize: 20

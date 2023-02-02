@@ -10,8 +10,8 @@ Item
     property color colorFocusedButtonText: "#FFFFFF"
     property color colorUnfocusedButtonText: "#666687"
     property color colorButtonBackground: "#FFFFFF"
-    property color colorBorderlessButtonBackground: "#D2D2D2"
-    property color colorLightBorderlessButtonBackground: "#EDEDED"
+    property color colorReadingViewButtonBackground: "#D2D2D2"
+    property color colorLightReadingViewButtonBackground: "#EDEDED"
     
     // Texts
     property color colorPlaceholderText: "#8E8EA9"
