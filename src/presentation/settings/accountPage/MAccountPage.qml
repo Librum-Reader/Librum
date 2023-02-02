@@ -23,7 +23,7 @@ MFlickWrapper
         horizontalPadding: 48
         topPadding: 64
         bottomPadding: 22
-        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+        background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
         
         
         Shortcut

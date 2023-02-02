@@ -14,7 +14,7 @@ import "readingSearchbar"
 Page
 {
     id: root
-    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     Component.onCompleted: root.forceActiveFocus()
     

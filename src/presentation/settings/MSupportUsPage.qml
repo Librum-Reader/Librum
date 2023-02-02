@@ -21,7 +21,7 @@ MFlickWrapper
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+        background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
         
         
         ColumnLayout

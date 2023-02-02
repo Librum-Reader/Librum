@@ -22,7 +22,7 @@ Page
     property alias storagePage: storagePage
     property alias supportUsPage: supportUsPage
     
-    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     
     /*

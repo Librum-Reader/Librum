@@ -12,7 +12,7 @@ Page
     background: Rectangle
     {
         anchors.fill: parent
-        color: Style.pagesBackground
+        color: Style.colorPageBackground
     }
     
     ColumnLayout

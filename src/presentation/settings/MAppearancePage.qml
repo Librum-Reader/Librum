@@ -13,7 +13,7 @@ Page
     id: root
     horizontalPadding: 48
     bottomPadding: 22
-    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     
     /*

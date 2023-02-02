@@ -18,7 +18,7 @@ Page
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 20
-    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     
     Shortcut

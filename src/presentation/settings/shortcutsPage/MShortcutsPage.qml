@@ -35,7 +35,7 @@ Page
     
     topPadding: 64
     horizontalPadding: 48
-    background: Rectangle { anchors.fill: parent; color: Style.pagesBackground }
+    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     onWidthChanged: if(searchButton.opened) searchButton.close()
     

@@ -55,6 +55,7 @@ Item
     property color colorPopupBackground: "#FFFFFF"
     property color colorBookBackground: "#FFFFFF"
     property color colorReadingViewBackground: "#FFFFFF"
+    property color colorPageBackground: "#F1F1F1"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
@@ -67,8 +68,6 @@ Item
     // Other
     property color colorDropArea: "#F6F6F9"
     
-    property color colorLightGrayBackground: "#EAEAEF"
-    property color pagesBackground: "#F1F1F1"
     
     
     // Temporary solution for switching themes
@@ -88,13 +87,13 @@ Item
     states: [
         State {
             name: "Light"
-            PropertyChanges { target: styleSheet; pagesBackground: "#F1F1F1" }
+            PropertyChanges { target: styleSheet; colorPageBackground: "#F1F1F1" }
             PropertyChanges { target: styleSheet; colorContainerBackground: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         },
         State {
             name: "Dark"
-            PropertyChanges { target: styleSheet; pagesBackground: "#212121" }
+            PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
             PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
         }
