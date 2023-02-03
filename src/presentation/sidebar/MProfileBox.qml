@@ -88,6 +88,7 @@ Item
                 Layout.preferredWidth: 23
                 Layout.preferredHeight: 24
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                color: Style.colorControlBackground
                 radius: 2
                 border.width: 1
                 border.color: Style.colorButtonBorder

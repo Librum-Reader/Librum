@@ -26,7 +26,7 @@ Item
     {
         id: container
         anchors.fill: parent
-        color: root.selected ? "#F0F0FF" : "transparent"
+        color: root.selected ? Style.colorLightHighlight : "transparent"
         
         
         RowLayout
