@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick 2.15
 import Librum.controllers 1.0
+import Librum.icons 1.0
 
 Item
 {
@@ -84,82 +85,145 @@ Item
         }
     }
     
-    state: "Dark"/*SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance)*/
+    state: /*"Dark"*/SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance)
     states: [
         State
         {
             name: "Light"
             
-            // Backgrounds
-            PropertyChanges { target: styleSheet; colorPageBackground: "#F6F6F9" }
-            PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#EFEFEF" }
-            PropertyChanges { target: styleSheet; colorPopupBackground: "#FFFFFF" }
-            PropertyChanges { target: styleSheet; colorContainerBackground: "#FFFFFF" }
-            PropertyChanges { target: styleSheet; colorControlBackground: "#FFFFFF" }
-            
-            // Texts
-            PropertyChanges { target: styleSheet; colorText: "#32324D" }
-            PropertyChanges { target: styleSheet; colorLightText: "#666687" }
-            PropertyChanges { target: styleSheet; colorPlaceholderText: "#8E8EA9" }
-            PropertyChanges { target: styleSheet; colorTitle: "#32324D" }
-            PropertyChanges { target: styleSheet; colorBaseInputText: "#32324D" }
-            
             // Buttons
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorUnfocusedButtonText: "#666687" }
+            PropertyChanges { target: styleSheet; colorReadingViewButtonBackground: "#D2D2D2" }
+            PropertyChanges { target: styleSheet; colorLightReadingViewButtonBackground: "#EDEDED" }
             
-            // Subtitles
+            // Texts
+            PropertyChanges { target: styleSheet; colorPlaceholderText: "#8E8EA9" }
+            PropertyChanges { target: styleSheet; colorLightText: "#666687" }
+            PropertyChanges { target: styleSheet; colorNoImageLabel: "#737373" }
+            PropertyChanges { target: styleSheet; colorGreenText: "#5CB176" }
+            PropertyChanges { target: styleSheet; colorText: "#32324D" }
+            PropertyChanges { target: styleSheet; colorErrorText: "#F25E42" }
+            PropertyChanges { target: styleSheet; colorTitle: "#32324D" }
+            
+            // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#8A8AA0" }
             PropertyChanges { target: styleSheet; colorPageSubtitle: "#666687" }
             
-            // Borders
-            PropertyChanges { target: styleSheet; colorContainerBorder: "#DCDCE4" }
-            PropertyChanges { target: styleSheet; colorCheckboxBorder: "#C0C0CF" }
+            // Input
+            PropertyChanges { target: styleSheet; colorReadOnlyInputText: "#666687" }
+            PropertyChanges { target: styleSheet; colorBaseInputText: "#32324D" }
+            PropertyChanges { target: styleSheet; colorLightInputText: "#666687" }
+            
+            // Color tones
+            PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorLightPurple: "#D9D8FF" }
+            PropertyChanges { target: styleSheet; colorRed: "#D84B4D" }
+            
+            // Highlight
+            PropertyChanges { target: styleSheet; colorLightHighlight: "#F0F0FF" }
+            PropertyChanges { target: styleSheet; colorHighlight: "#EEE9F1" }
+            PropertyChanges { target: styleSheet; colorHoverHighlight: "#F6F6F9" }
             
             // Separators
             PropertyChanges { target: styleSheet; colorSeparator: "#EAEAEF" }
             PropertyChanges { target: styleSheet; colorDarkSeparator: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorLightSeparator: "#F6F6F9" }
             
-            // Highlights
-            PropertyChanges { target: styleSheet; colorLightHighlight: "#F0F0FF" }
+            // Backgrounds
+            PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#EDEDED" }
+            PropertyChanges { target: styleSheet; colorGreenBackground: "#EAFBE7" }
+            PropertyChanges { target: styleSheet; colorBookImageBackground: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorErrorBackground: "#FDEDE8" }
+            PropertyChanges { target: styleSheet; colorContainerBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorPopupBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorBookBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorReadingViewBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#EFEFEF" }
+            PropertyChanges { target: styleSheet; colorPageBackground: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorControlBackground: "#FFFFFF" }
+            
+            // Borders
+            PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
+            PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
+            PropertyChanges { target: styleSheet; colorButtonBorder: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorCheckboxBorder: "#C0C0CF" }
+            PropertyChanges { target: styleSheet; colorContainerBorder: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorErrorBorder: "#E87964" }
+            
+            // Other
+            PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
         },
         State
         {
             name: "Dark"
             
-            // Backgrounds
-            PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
-            PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#212121" }
-            PropertyChanges { target: styleSheet; colorPopupBackground: "#2C2C2C" }
-            PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
-            PropertyChanges { target: styleSheet; colorControlBackground: "#2E2E2E" }
-            
-            // Texts
-            PropertyChanges { target: styleSheet; colorText: "#E9E9E9" }
-            PropertyChanges { target: styleSheet; colorLightText: "#CECEDD" }
-            PropertyChanges { target: styleSheet; colorPlaceholderText: "#C8C8C8" }
-            PropertyChanges { target: styleSheet; colorTitle: "#E9E9E9" }
-            PropertyChanges { target: styleSheet; colorBaseInputText: "#FFFFFF" }
-            
-            // Button
+            // Buttons
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorUnfocusedButtonText: "#C8C8D8" }
+            PropertyChanges { target: styleSheet; colorReadingViewButtonBackground: "#D2D2D2" }
+            PropertyChanges { target: styleSheet; colorLightReadingViewButtonBackground: "#EDEDED" }
             
-            // Subtitles
+            // Texts
+            PropertyChanges { target: styleSheet; colorPlaceholderText: "#C8C8C8" }
+            PropertyChanges { target: styleSheet; colorLightText: "#CECEDD" }
+            PropertyChanges { target: styleSheet; colorNoImageLabel: "#737373" }
+            PropertyChanges { target: styleSheet; colorGreenText: "#5CB176" }
+            PropertyChanges { target: styleSheet; colorText: "#E9E9E9" }
+            PropertyChanges { target: styleSheet; colorErrorText: "#F25E42" }
+            PropertyChanges { target: styleSheet; colorTitle: "#E9E9E9" }
+            
+            // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#E5E5EF" }
             PropertyChanges { target: styleSheet; colorPageSubtitle: "#ECECF6" }
             
-            // Borders
-            PropertyChanges { target: styleSheet; colorContainerBorder: "#55555A" }
-            PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
-            PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
+            // Input
+            PropertyChanges { target: styleSheet; colorReadOnlyInputText: "#666687" }
+            PropertyChanges { target: styleSheet; colorBaseInputText: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorLightInputText: "#666687" }
+            
+            // Color tones
+            PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorLightPurple: "#D9D8FF" }
+            PropertyChanges { target: styleSheet; colorRed: "#D84B4D" }
+            
+            // Highlight
+            PropertyChanges { target: styleSheet; colorLightHighlight: "#3F3F49" }
+            PropertyChanges { target: styleSheet; colorHighlight: "#EEE9F1" }
+            PropertyChanges { target: styleSheet; colorHoverHighlight: "#F6F6F9" }
             
             // Separators
             PropertyChanges { target: styleSheet; colorSeparator: "#434344" }
             PropertyChanges { target: styleSheet; colorDarkSeparator: "#454547" }
+            PropertyChanges { target: styleSheet; colorLightSeparator: "#F6F6F9" }
             
-            // Highlights
-            PropertyChanges { target: styleSheet; colorLightHighlight: "#3F3F49" }
+            // Backgrounds
+            PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#EDEDED" }
+            PropertyChanges { target: styleSheet; colorGreenBackground: "#EAFBE7" }
+            PropertyChanges { target: styleSheet; colorBookImageBackground: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorErrorBackground: "#FDEDE8" }
+            PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
+            PropertyChanges { target: styleSheet; colorPopupBackground: "#2C2C2C" }
+            PropertyChanges { target: styleSheet; colorBookBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorReadingViewBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#212121" }
+            PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
+            PropertyChanges { target: styleSheet; colorControlBackground: "#2E2E2E" }
+            
+            // Borders
+            PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
+            PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
+            PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
+            PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
+            PropertyChanges { target: styleSheet; colorContainerBorder: "#55555A" }
+            PropertyChanges { target: styleSheet; colorErrorBorder: "#E87964" }
+            
+            
+            // Other
+            PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
         }
     ]
+    
+    // Change icons
+    onStateChanged: Icons.setState(state)
 }
