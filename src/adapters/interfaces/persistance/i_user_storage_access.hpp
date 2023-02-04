@@ -28,7 +28,7 @@ public:
     virtual void changeProfilePicture(const QString& authToken,
                                       const QImage& newProfilePicture) = 0;
     virtual void deleteTag(const QString& authToken, const QString& uuid) = 0;
-    virtual void renameTag(const QString& authToken, const QString& uuid,
+    virtual void renameTag(const QString& authToken,
                            const QJsonObject& bookForUpdate) = 0;
 
 signals:
