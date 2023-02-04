@@ -70,7 +70,7 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
-                    imagePath: Icons.cancelPurple
+                    imagePath: Icons.readingSearchbarCancel
                     imageSize: 12
                     
                     onClicked: root.visible = false
@@ -156,7 +156,7 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
-                    imagePath: Icons.arrowtopPurpleDown
+                    imagePath: Icons.readingSearchbarNext
                     imageSize: 13
                     imageSpacing: 10
                     
@@ -176,7 +176,7 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
-                    imagePath: Icons.arrowtopPurpleUp
+                    imagePath: Icons.readingSearchbarPrevious
                     imageSize: 13
                     imageSpacing: 10
                     

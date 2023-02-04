@@ -48,20 +48,23 @@ Item
     property string checkBubbleIllustration: "/resources/images/light_mode/illustrations/check_bubble_illustration.svg"
     property string addFileIllustration: "/resources/images/light_mode/illustrations/add_file_illustration.svg"
     
+    // ReadingSearchbar-icons
+    property string readingSearchbarCancel: "/resources/images/light_mode/reading_searchbar/cancel_icon.svg"
+    property string readingSearchbarNext: "/resources/images/light_mode/reading_searchbar/next_icon.svg"
+    property string readingSearchbarPrevious: "/resources/images/light_mode/reading_searchbar/previous_icon.svg"
+    
     // ReadingView-icons
-    property string arrowtopBlackLeft: "/resources/images/light_mode/reading_view/arrowtop_black_left_icon.svg"
-    property string arrowtopPurpleDown: "/resources/images/light_mode/reading_view/arrowtop_purple_down_icon.svg"
-    property string arrowtopPurpleUp: "/resources/images/light_mode/reading_view/arrowtop_purple_up_icon.svg"
-    property string readingViewBookmarkBlack: "/resources/images/light_mode/reading_view/bookmark_black_icon.svg"
-    property string readingViewBookmarkPurple: "/resources/images/light_mode/reading_view/bookmark_purple_icon.svg"
-    property string readingViewMaximizeBlack: "/resources/images/light_mode/reading_view/maximize_black_icon.svg"
-    property string readingViewMaximizePurple: "/resources/images/light_mode/reading_view/maximize_purple_icon.svg"
-    property string readingViewMenuBlack: "/resources/images/light_mode/reading_view/menu_black_icon.svg"
-    property string readingViewMenuPurple: "/resources/images/light_mode/reading_view/menu_purple_icon.svg"
-    property string readingViewSearchBlackThin: "/resources/images/light_mode/reading_view/search_black_thin_icon.svg"
-    property string readingViewSearchPurpleThin: "/resources/images/light_mode/reading_view/search_purple_thin_icon.svg"
-    property string readingViewSidebarBlack: "/resources/images/light_mode/reading_view/sidebar_black_icon.svg"
-    property string readingViewSidebarPurple: "/resources/images/light_mode/reading_view/sidebar_purple_icon.svg"
+    property string readingViewBack: "/resources/images/light_mode/reading_view/back_icon.svg"
+    property string readingViewBookmark: "/resources/images/light_mode/reading_view/bookmark_icon.svg"
+    property string readingViewBookmarkSelected: "/resources/images/light_mode/reading_view/bookmark_selected_icon.svg"
+    property string readingViewChapters: "/resources/images/light_mode/reading_view/chapters_icon.svg"
+    property string readingViewChaptersSelected: "/resources/images/light_mode/reading_view/chapters_selected_icon.svg"
+    property string readingViewMaximize: "/resources/images/light_mode/reading_view/maximize_icon.svg"
+    property string readingViewMaximizeSelected: "/resources/images/light_mode/reading_view/maximize_selected_icon.svg"
+    property string readingViewOptions: "/resources/images/light_mode/reading_view/options_icon.svg"
+    property string readingViewOptionsPurple: "/resources/images/light_mode/reading_view/options_selected_icon.svg"
+    property string readingViewSearch: "/resources/images/light_mode/reading_view/search_icon.svg"
+    property string readingViewSearchSelected: "/resources/images/light_mode/reading_view/search_selected_icon.svg"
     
     // Setting-icons
     property string settingsAboutGray: "/resources/images/light_mode/settings/about_gray_icon.svg"

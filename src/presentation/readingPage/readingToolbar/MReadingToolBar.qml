@@ -81,7 +81,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: Icons.arrowtopBlackLeft
+            imagePath: Icons.readingViewBack
             imageSize: 11
             opacityOnPressed: 0.7
             
@@ -95,7 +95,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: active ? Icons.readingViewSidebarPurple : Icons.readingViewSidebarBlack
+            imagePath: active ? Icons.readingViewChaptersSelected : Icons.readingViewChapters
             imageSize: 18
             opacityOnPressed: 0.7
             
@@ -109,7 +109,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: active ? Icons.readingViewBookmarkPurple : Icons.readingViewBookmarkBlack
+            imagePath: active ? Icons.readingViewBookmarkSelected : Icons.readingViewBookmark
             imageSize: 14
             opacityOnPressed: 0.7
             
@@ -192,7 +192,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: active ? Icons.readingViewMaximizePurple : Icons.readingViewMaximizeBlack
+            imagePath: active ? Icons.readingViewMaximizeSelected : Icons.readingViewMaximize
             imageSize: 20
             opacityOnPressed: 0.7
             
@@ -206,7 +206,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: active ? Icons.readingViewSearchPurpleThin : Icons.readingViewSearchBlackThin
+            imagePath: active ? Icons.readingViewSearchSelected : Icons.readingViewSearch
             imageSize: 18
             opacityOnPressed: 0.7
             
@@ -220,7 +220,7 @@ Pane
             Layout.preferredHeight: 32
             backgroundColor: Style.colorReadingViewButtonBackground
             borderWidth: 0
-            imagePath: active ? Icons.readingViewMenuPurple : Icons.readingViewMenuBlack
+            imagePath: active ? Icons.readingViewOptionsPurple : Icons.readingViewOptions
             imageSize: 20
             opacityOnPressed: 0.7
             
