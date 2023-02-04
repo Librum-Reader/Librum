@@ -74,10 +74,10 @@ void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
     linkRequestToErrorHandling(m_tagDeletionReply.get(), 204);
 }
 
-void UserStorageAccess::renameTag(const QString& authToken, const QString& uuid,
+void UserStorageAccess::renameTag(const QString& authToken,
                                   const QJsonObject& bookForUpdate)
 {
-    QString endPoint = data::tagUpdateEndpoint + "/" + uuid;
+    QString endPoint = data::tagUpdateEndpoint;
     auto request = createRequest(endPoint, authToken);
 
     QJsonDocument jsonDoc(bookForUpdate);

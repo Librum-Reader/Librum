@@ -31,7 +31,7 @@ public:
     void changeProfilePicture(const QString& authToken,
                               const QImage& newProfilePicture) override;
     void deleteTag(const QString& authToken, const QString& uuid) override;
-    void renameTag(const QString& authToken, const QString& uuid,
+    void renameTag(const QString& authToken,
                    const QJsonObject& bookForUpdate) override;
 
 private slots:
