@@ -29,8 +29,7 @@ public:
                 (const QString& authToken, const QImage& newProfilePicture),
                 (override));
     MOCK_METHOD(void, deleteTag, (const QString&, const QString&), (override));
-    MOCK_METHOD(void, renameTag,
-                (const QString&, const QString&, const QJsonObject&),
+    MOCK_METHOD(void, renameTag, (const QString&, const QJsonObject&),
                 (override));
 };
 
@@ -115,7 +114,7 @@ TEST_F(AUserStorageGateway, SucceedsRenamingATag)
     QString newName = "SomeName";
 
     // Expect
-    EXPECT_CALL(userStorageAccessMock, renameTag(_, _, _)).Times(1);
+    EXPECT_CALL(userStorageAccessMock, renameTag(_, _)).Times(1);
 
     // Act
     userStorageGateway->renameTag(authToken, bookUuid, newName);

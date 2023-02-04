@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include <QString>
 #include "book.hpp"
+#include "book_for_deletion.hpp"
 #include "book_storage_manager.hpp"
 #include "i_book_storage_gateway.hpp"
 #include "i_downloaded_books_tracker.hpp"
@@ -86,13 +87,35 @@ TEST_F(ABookStorageManager, SucceedsDeletingABook)
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
 
+    BookForDeletion bookForDeletion {
+        .uuid = QUuid::createUuid().toString(),
+        .downloaded = true,
+    };
+
     // Expect
     EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(1);
     EXPECT_CALL(bookStorageGatewayMock, deleteBook(_, _)).Times(1);
 
     // Act
-    bookStorageManager->deleteBook(
-        book.getUuid().toString(QUuid::WithoutBraces));
+    bookStorageManager->deleteBook(bookForDeletion);
+}
+
+TEST_F(ABookStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData {});
+
+    BookForDeletion bookForDeletion {
+        .uuid = QUuid::createUuid().toString(),
+        .downloaded = false,
+    };
+
+    // Expect
+    EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(0);
+    EXPECT_CALL(bookStorageGatewayMock, deleteBook(_, _)).Times(1);
+
+    // Act
+    bookStorageManager->deleteBook(bookForDeletion);
 }
 
 TEST_F(ABookStorageManager, SucceedsUninstallingABook)

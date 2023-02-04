@@ -46,6 +46,7 @@ set(application_SRC
     utility/merge_status.hpp
     utility/book_storage_manager.cpp
     utility/book_storage_manager.hpp
+    utility/book_for_deletion.hpp
 )
 
 

@@ -14,7 +14,7 @@ public:
                        IDownloadedBooksTracker* downloadedBooksTracker);
 
     void addBook(const domain::entities::Book& bookToAdd) override;
-    void deleteBook(const QUuid& uuid) override;
+    void deleteBook(BookForDeletion bookToDelete) override;
     void uninstallBook(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
     void updateBookLocally(const domain::entities::Book& book) override;

@@ -54,10 +54,13 @@ void BookStorageManager::addBook(const Book& bookToAdd)
     m_bookStorageGateway->createBook(m_authenticationToken, bookToAdd);
 }
 
-void BookStorageManager::deleteBook(const QUuid& uuid)
+void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
 {
-    m_downloadedBooksTracker->untrackBook(uuid);
-    m_bookStorageGateway->deleteBook(m_authenticationToken, uuid);
+    // Remote books aren't in the local library, thus can't be untracked
+    if(bookToDelete.downloaded)
+        m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
+
+    m_bookStorageGateway->deleteBook(m_authenticationToken, bookToDelete.uuid);
 }
 
 void BookStorageManager::uninstallBook(const QUuid& uuid)

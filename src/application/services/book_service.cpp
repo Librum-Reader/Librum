@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QTime>
 #include <ranges>
+#include "book_for_deletion.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
 
@@ -76,6 +77,12 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
+    const auto book = getBook(uuid);
+    utility::BookForDeletion bookToDelete {
+        .uuid = uuid,
+        .downloaded = book->getDownloaded(),
+    };
+
     auto bookPosition = getBookPosition(uuid);
     int index = getBookIndex(uuid);
 
@@ -83,7 +90,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
 
-    m_bookStorageManager->deleteBook(uuid);
+    m_bookStorageManager->deleteBook(std::move(bookToDelete));
 
     return BookOperationStatus::Success;
 }
