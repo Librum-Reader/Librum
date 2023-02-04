@@ -84,7 +84,7 @@ Page
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 fontSize: 13
-                imagePath: Icons.plusWhite
+                imagePath: Icons.addWhite
                 
                 onClicked:
                 {

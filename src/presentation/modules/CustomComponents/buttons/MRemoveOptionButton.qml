@@ -49,7 +49,7 @@ Item
                 id: filterByArrowIcon
                 Layout.topMargin: 1
                 sourceSize.height: 11
-                source: Icons.closePurple
+                source: Icons.cancelPurple
                 fillMode: Image.PreserveAspectFit
             }
             

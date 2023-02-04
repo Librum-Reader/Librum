@@ -61,7 +61,7 @@ Item
                 textColor: Style.colorBasePurple
                 fontWeight: Font.Bold
                 fontSize: 13.5
-                imagePath: Icons.plusBlack
+                imagePath: Icons.addFirstBookPlus
                 imageSize: 16
                 
                 onClicked: root.clicked();

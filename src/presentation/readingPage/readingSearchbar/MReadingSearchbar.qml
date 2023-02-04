@@ -70,7 +70,7 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
-                    imagePath: Icons.closePurple
+                    imagePath: Icons.cancelPurple
                     imageSize: 12
                     
                     onClicked: root.visible = false

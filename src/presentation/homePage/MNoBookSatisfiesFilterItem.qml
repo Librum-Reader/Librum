@@ -41,7 +41,7 @@ Item
             textColor: Style.colorBasePurple
             fontWeight: Font.Bold
             fontSize: 12.5
-            imagePath: Icons.closePurple
+            imagePath: Icons.cancelPurple
             imageSize: 11
             imageToRight: true
             

@@ -105,7 +105,7 @@ Item
                 opacityOnPressed: 0.7
                 borderColor: currentlyPressed ? Style.colorButtonBorder : "transparent"
                 radius: 4
-                imagePath: currentlyPressed ? Icons.closePurple : Icons.closeGray
+                imagePath: currentlyPressed ? Icons.removeItemFocused : Icons.removeItem
                 imageSize: 12
                 
                 onClicked: root.removeTag(root.index)
