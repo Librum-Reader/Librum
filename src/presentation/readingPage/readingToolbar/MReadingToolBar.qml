@@ -161,7 +161,7 @@ Pane
             selectedItemFontColor: Style.colorTitle
             boxBackgroundColor: Style.colorReadingViewButtonBackground
             defaultIndex: 6
-            dropdownIcon: Icons.dropdownBlack
+            dropdownIcon: Icons.comboboxDropdownDark
             dropdownIconSize: 9
             checkBoxStyle: false
             model: ListModel

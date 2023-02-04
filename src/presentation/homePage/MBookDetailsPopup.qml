@@ -52,7 +52,7 @@ Popup
                 borderColor: "transparent"
                 radius: 6
                 borderColorOnPressed: Style.colorButtonBorder
-                imagePath: Icons.closeBlack
+                imagePath: Icons.closePopup
                 imageSize: 14
                 
                 onClicked: root.close()

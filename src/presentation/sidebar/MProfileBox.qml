@@ -101,7 +101,7 @@ Item
                     sourceSize.width: 20
                     sourceSize.height: 20
                     anchors.centerIn: parent
-                    source: Icons.arrowtopBlackRight
+                    source: Icons.arrowheadNextIcon
                 }
                 
                 MouseArea

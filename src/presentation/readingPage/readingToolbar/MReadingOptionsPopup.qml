@@ -29,7 +29,7 @@ Popup
             Layout.alignment: Qt.AlignRight
             Layout.topMargin: -1
             Layout.rightMargin: 12
-            source: Icons.dropupLightGray
+            source: Icons.popupDroplet
             sourceSize.width: 10
             fillMode: Image.PreserveAspectFit
         }

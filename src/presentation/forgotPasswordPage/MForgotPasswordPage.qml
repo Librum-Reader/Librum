@@ -175,9 +175,8 @@ MFlickWrapper
                             fontSize: 12.20
                             fontWeight: Font.Medium
                             textColor: Style.colorUnfocusedButtonText
-                            imagePath: Icons.arrowtopBlackRight
+                            imagePath: Icons.arrowheadBackIcon
                             imageSize: 28
-                            imageRotation: 180
                             imageSpacing: 4
                             
                             onClicked: internal.backToLoginPage()

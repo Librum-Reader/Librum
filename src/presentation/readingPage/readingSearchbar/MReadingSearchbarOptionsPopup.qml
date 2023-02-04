@@ -87,7 +87,7 @@ Popup
             id: dropletIcon
             Layout.leftMargin: 13
             Layout.topMargin: -1
-            source: Icons.dropupLightGray
+            source: Icons.popupDroplet
             sourceSize.width: 10
             fillMode: Image.PreserveAspectFit
             rotation: 180

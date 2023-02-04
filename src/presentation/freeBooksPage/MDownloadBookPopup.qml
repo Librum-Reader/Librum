@@ -51,7 +51,7 @@ Popup
                 opacityOnPressed: 0.7
                 radius: 6
                 borderColorOnPressed: Style.colorButtonBorder
-                imagePath: Icons.closeBlack
+                imagePath: Icons.closePopup
                 imageSize: 14
                 
                 onClicked: root.close()

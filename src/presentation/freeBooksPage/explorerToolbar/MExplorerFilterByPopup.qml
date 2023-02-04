@@ -35,7 +35,7 @@ Popup
                 id: topTriangleDecoration
                 Layout.leftMargin: 14
                 Layout.bottomMargin: -1
-                source: Icons.dropupLightGray
+                source: Icons.popupDroplet
             }
             
             Pane
