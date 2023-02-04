@@ -32,7 +32,7 @@ Item
     property color selectedItemFontColor: Style.colorText
     property int selectedItemPadding: 0
     
-    property string dropdownIcon: Icons.comboboxDropdownLight
+    property string dropdownIcon: Icons.dropdownLight
     property int dropdownIconSize: 6
     signal itemChanged
     

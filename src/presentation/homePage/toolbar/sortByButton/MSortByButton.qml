@@ -56,7 +56,7 @@ Item
                 {
                     id: sortByArrowIcon
                     sourceSize.height: 6
-                    source: Icons.comboboxDropdownLight
+                    source: Icons.dropdownLight
                     fillMode: Image.PreserveAspectFit
                     rotation: 180
                     

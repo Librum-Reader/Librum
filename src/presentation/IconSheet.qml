@@ -8,22 +8,28 @@ Item
     // Arrows-icons
     property string arrowheadBackIcon: "/resources/images/light_mode/arrows/arrowhead_back_icon.svg"
     property string arrowheadNextIcon: "/resources/images/light_mode/arrows/arrowhead_next_icon.svg"
-    
-    // Combobox
-    property string comboboxDropdownDark: "/resources/images/light_mode/combobox/combobox_dropdown_dark.svg"
-    property string comboboxDropdownLight: "/resources/images/light_mode/combobox/combobox_dropdown_light.svg"
+    property string dropdownDark: "/resources/images/light_mode/arrows/dropdown_dark.svg"
+    property string dropdownLight: "/resources/images/light_mode/arrows/dropdown_light.svg"
     
     // Decision-icons
     property string checkGreen: "/resources/images/light_mode/decision/check_green_icon.svg"
     property string checkWhite: "/resources/images/light_mode/decision/check_white_icon.svg"
     property string closePopup: "/resources/images/light_mode/decision/close_popup_icon.svg"
-    property string closeDarkgray: "/resources/images/light_mode/decision/close_darkgray_icon.svg"
     property string closeGray: "/resources/images/light_mode/decision/close_gray_icon.svg"
     property string closePurple: "/resources/images/light_mode/decision/close_purple_icon.svg"
     property string plusBlack: "/resources/images/light_mode/decision/plus_black_icon.svg"
     property string plusWhite: "/resources/images/light_mode/decision/plus_white_icon.svg"
     property string plusSquare: "/resources/images/light_mode/decision/plus_square_icon.svg"
     property string checkCircle: "/resources/images/light_mode/decision/check_circle_icon.svg"
+    
+    // Book popup
+    property string bookPopupUninstall: "/resources/images/light_mode/book_popup/uninstall_icon.svg"
+    property string bookPopupRead: "/resources/images/light_mode/book_popup/read_icon.svg"
+    property string bookPopupDetails: "/resources/images/light_mode/book_popup/details_icon.svg"
+    property string bookPopupSave: "/resources/images/light_mode/book_popup/save_icon.svg"
+    property string bookPopupTags: "/resources/images/light_mode/book_popup/tags_icon.svg"
+    property string bookPopupMarkAsRead: "/resources/images/light_mode/book_popup/mark_as_read_icon.svg"
+    property string bookPopupDelete: "/resources/images/light_mode/book_popup/delete_icon.svg"
     
     // Decoration-icons
     property string heartGray: "/resources/images/light_mode/decoration/heart_gray_icon.svg"
@@ -41,21 +47,20 @@ Item
     property string checkBubbleIllustration: "/resources/images/light_mode/illustrations/check_bubble_illustration.svg"
     property string addFileIllustration: "/resources/images/light_mode/illustrations/add_file_illustration.svg"
     
-    
     // ReadingView-icons
-    property string arrowtopBlackLeft: "/resources/images/light_mode/readingView/arrowtop_black_left_icon.svg"
-    property string arrowtopPurpleDown: "/resources/images/light_mode/readingView/arrowtop_purple_down_icon.svg"
-    property string arrowtopPurpleUp: "/resources/images/light_mode/readingView/arrowtop_purple_up_icon.svg"
-    property string readingViewBookmarkBlack: "/resources/images/light_mode/readingView/bookmark_black_icon.svg"
-    property string readingViewBookmarkPurple: "/resources/images/light_mode/readingView/bookmark_purple_icon.svg"
-    property string readingViewMaximizeBlack: "/resources/images/light_mode/readingView/maximize_black_icon.svg"
-    property string readingViewMaximizePurple: "/resources/images/light_mode/readingView/maximize_purple_icon.svg"
-    property string readingViewMenuBlack: "/resources/images/light_mode/readingView/menu_black_icon.svg"
-    property string readingViewMenuPurple: "/resources/images/light_mode/readingView/menu_purple_icon.svg"
-    property string readingViewSearchBlackThin: "/resources/images/light_mode/readingView/search_black_thin_icon.svg"
-    property string readingViewSearchPurpleThin: "/resources/images/light_mode/readingView/search_purple_thin_icon.svg"
-    property string readingViewSidebarBlack: "/resources/images/light_mode/readingView/sidebar_black_icon.svg"
-    property string readingViewSidebarPurple: "/resources/images/light_mode/readingView/sidebar_purple_icon.svg"
+    property string arrowtopBlackLeft: "/resources/images/light_mode/reading_view/arrowtop_black_left_icon.svg"
+    property string arrowtopPurpleDown: "/resources/images/light_mode/reading_view/arrowtop_purple_down_icon.svg"
+    property string arrowtopPurpleUp: "/resources/images/light_mode/reading_view/arrowtop_purple_up_icon.svg"
+    property string readingViewBookmarkBlack: "/resources/images/light_mode/reading_view/bookmark_black_icon.svg"
+    property string readingViewBookmarkPurple: "/resources/images/light_mode/reading_view/bookmark_purple_icon.svg"
+    property string readingViewMaximizeBlack: "/resources/images/light_mode/reading_view/maximize_black_icon.svg"
+    property string readingViewMaximizePurple: "/resources/images/light_mode/reading_view/maximize_purple_icon.svg"
+    property string readingViewMenuBlack: "/resources/images/light_mode/reading_view/menu_black_icon.svg"
+    property string readingViewMenuPurple: "/resources/images/light_mode/reading_view/menu_purple_icon.svg"
+    property string readingViewSearchBlackThin: "/resources/images/light_mode/reading_view/search_black_thin_icon.svg"
+    property string readingViewSearchPurpleThin: "/resources/images/light_mode/reading_view/search_purple_thin_icon.svg"
+    property string readingViewSidebarBlack: "/resources/images/light_mode/reading_view/sidebar_black_icon.svg"
+    property string readingViewSidebarPurple: "/resources/images/light_mode/reading_view/sidebar_purple_icon.svg"
     
     // Setting-icons
     property string settingsAboutGray: "/resources/images/light_mode/settings/about_gray_icon.svg"
@@ -100,7 +105,6 @@ Item
     property string searchGray: "/resources/images/light_mode/utility/search_gray_icon.svg"
     property string sync: "/resources/images/light_mode/utility/sync_icon.svg"
     property string tag: "/resources/images/light_mode/utility/tag_icon.svg"
-    property string tagGray: "/resources/images/light_mode/utility/tag_gray_icon.svg"
     property string printer: "/resources/images/light_mode/utility/printer_black_icon.svg"
     property string settingsGrayHallow: "/resources/images/light_mode/utility/settings_gray_hallow_icon.svg"
     property string share: "/resources/images/light_mode/utility/share_black_icon.svg"
@@ -109,9 +113,6 @@ Item
     property string activeMicrophone: "/resources/images/light_mode/utility/active_microphone_icon.svg"
     property string trashGray: "/resources/images/light_mode/utility/trash_gray_icon.svg"
     property string trashWhite: "/resources/images/light_mode/utility/trash_white_icon.svg"
-    property string bookOpen: "/resources/images/light_mode/utility/book_open_icon.svg"
-    property string book: "/resources/images/light_mode/utility/book_icon.svg"
-    property string addFile: "/resources/images/light_mode/utility/add_file_icon.svg"
     property string patreon: "/resources/images/light_mode/utility/patreon_icon.svg"
     
     

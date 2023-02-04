@@ -92,7 +92,7 @@ Item
                 Image
                 {
                     id: upArrow
-                    source: Icons.comboboxDropdownLight
+                    source: Icons.dropdownLight
                     sourceSize.width: 9
                     fillMode: Image.PreserveAspectFit
                     rotation: 180
@@ -108,7 +108,7 @@ Item
                 Image
                 {
                     id: downArrow
-                    source: Icons.comboboxDropdownLight
+                    source: Icons.dropdownLight
                     sourceSize.width: 9
                     fillMode: Image.PreserveAspectFit
                     

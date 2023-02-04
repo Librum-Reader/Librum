@@ -88,7 +88,7 @@ Item
                         id: icon
                         anchors.centerIn: parent
                         sourceSize.width: 10
-                        source: Icons.comboboxDropdownLight
+                        source: Icons.dropdownLight
                         rotation: 180
                         fillMode: Image.PreserveAspectFit
                         

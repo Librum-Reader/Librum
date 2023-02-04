@@ -43,7 +43,7 @@ MRightClickMenu
             width: root.width
             height: internal.bookDownloaded ? implicitHeight : 0
             visible: internal.bookDownloaded
-            imagePath: Icons.bookOpen
+            imagePath: Icons.bookPopupRead
             imageSize: 17
             text: "Read book"
             
@@ -53,7 +53,7 @@ MRightClickMenu
         MRightClickMenuItem
         {
             width: root.width
-            imagePath: Icons.book
+            imagePath: Icons.bookPopupDetails
             imageSize: 14
             text: "Book details"
             
@@ -66,7 +66,7 @@ MRightClickMenu
             height: internal.bookDownloaded ? implicitHeight : 0
             visible: internal.bookDownloaded
             Layout.bottomMargin: 4
-            imagePath: Icons.addFile
+            imagePath: Icons.bookPopupSave
             imageSize: 14
             text: "Save to files"
             
@@ -83,7 +83,7 @@ MRightClickMenu
         {
             width: root.width
             Layout.topMargin: 4
-            imagePath: Icons.tagGray
+            imagePath: Icons.bookPopupTags
             imageSize: 16
             text: "Manage tags"
             
@@ -93,7 +93,7 @@ MRightClickMenu
         MRightClickMenuItem
         {
             width: root.width
-            imagePath: Icons.checkCircle
+            imagePath: Icons.bookPopupMarkAsRead
             imageSize: 17
             text: "Mark as read"
             
@@ -105,7 +105,7 @@ MRightClickMenu
             width: root.width
             height: internal.bookDownloaded ? implicitHeight : 0
             visible: internal.bookDownloaded
-            imagePath: Icons.closeDarkgray
+            imagePath: Icons.bookPopupUninstall
             imageSize: 12
             text: "Uninstall"
             
