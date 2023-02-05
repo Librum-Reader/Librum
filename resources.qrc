@@ -4,8 +4,6 @@
         <file>resources/images/light_mode/decision/check_white_icon.svg</file>
         <file>resources/images/light_mode/decision/plus_purple_icon.svg</file>
         <file>resources/images/light_mode/decoration/coffee_icon.svg</file>
-        <file>resources/images/light_mode/decoration/heart_gray_icon.svg</file>
-        <file>resources/images/light_mode/decoration/heart_white_hallow_icon.svg</file>
         <file>resources/images/light_mode/decoration/seed_icon.svg</file>
         <file>resources/images/light_mode/illustrations/add_image_illustration.svg</file>
         <file>resources/images/light_mode/illustrations/book_cover.png</file>
@@ -102,5 +100,7 @@
         <file>resources/images/light_mode/utility/trash_icon.svg</file>
         <file>resources/images/light_mode/utility/trash_highlighted_icon.svg</file>
         <file>resources/images/light_mode/decoration/patreon_icon.svg</file>
+        <file>resources/images/light_mode/decoration/heart_icon.svg</file>
+        <file>resources/images/light_mode/decoration/heart_hallow_icon.svg</file>
     </qresource>
 </RCC>

@@ -38,8 +38,8 @@ Item
     property string bookPopupDelete: "/resources/images/light_mode/book_popup/delete_icon.svg"
     
     // Decoration
-    property string heartGray: "/resources/images/light_mode/decoration/heart_gray_icon.svg"
-    property string heartWhiteHallow: "/resources/images/light_mode/decoration/heart_white_hallow_icon.svg"
+    property string heart: "/resources/images/light_mode/decoration/heart_icon.svg"
+    property string heartHallow: "/resources/images/light_mode/decoration/heart_hallow_icon.svg"
     property string seed: "/resources/images/light_mode/decoration/seed_icon.svg"
     property string popupDroplet: "/resources/images/light_mode/decoration/popup_droplet_icon.svg"
     property string patreon: "/resources/images/light_mode/decoration/patreon_icon.svg"

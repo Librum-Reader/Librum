@@ -264,7 +264,7 @@ MFlickWrapper
                         Image
                         {
                             id: heartImage
-                            source: Icons.heartGray
+                            source: Icons.heart
                             fillMode: Image.PreserveAspectFit
                             sourceSize.width: 80
                         }

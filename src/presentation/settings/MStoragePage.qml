@@ -59,7 +59,7 @@ MFlickWrapper
                     fontSize: 12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
-                    imagePath: Icons.heartWhiteHallow
+                    imagePath: Icons.heartHallow
                     imageSize: 18
                 }
             }
