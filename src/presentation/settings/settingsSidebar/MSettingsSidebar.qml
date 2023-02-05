@@ -91,8 +91,8 @@ Item
                 imageWidth: 14
                 labelLeftMargin: 12
                 textContent: "About"
-                defaultIcon: Icons.settingsAboutGray
-                selectedIcon: Icons.settingsAboutPurple
+                defaultIcon: Icons.settingsSidebarAbout
+                selectedIcon: Icons.settingsSidebarAboutSelected
                 
                 onClicked: loadSettingsPage(aboutPage, root.aboutItem);
             }
@@ -108,8 +108,8 @@ Item
                 imageWidth: 18
                 labelLeftMargin: 8
                 textContent: "Appearance"
-                defaultIcon: Icons.settingsAppearanceGray
-                selectedIcon: Icons.settingsAppearancePurple            
+                defaultIcon: Icons.settingsSidebarAppearance
+                selectedIcon: Icons.settingsSidebarAppearanceSelected           
                 
                 onClicked: loadSettingsPage(appearancePage, root.appearanceItem)
             }
@@ -125,8 +125,8 @@ Item
                 imageWidth: 16
                 labelLeftMargin: 9
                 textContent: "Shortcuts"
-                defaultIcon: Icons.settingsShortcutsGray
-                selectedIcon: Icons.settingsShortcutsPurple
+                defaultIcon: Icons.settingsSidebarShortcuts
+                selectedIcon: Icons.settingsSidebarShortcutsSelected
                 
                 onClicked: loadSettingsPage(shortcutsPage, root.shortcutsItem)
             }
@@ -142,8 +142,8 @@ Item
                 imageWidth: 16
                 labelLeftMargin: 10
                 textContent: "Updates"
-                defaultIcon: Icons.settingsUpdatesGray
-                selectedIcon: Icons.settingsUpdatesPurple
+                defaultIcon: Icons.settingsSidebarUpdates
+                selectedIcon: Icons.settingsSidebarUpdatesSelected
                 
                 onClicked: loadSettingsPage(updatesPage, root.updatesItem)
             }
@@ -159,8 +159,8 @@ Item
                 imageWidth: 19
                 labelLeftMargin: 8
                 textContent: "General Settings"
-                defaultIcon: Icons.settingsSettingsGray
-                selectedIcon: Icons.settingsSettingsPurple
+                defaultIcon: Icons.settingsSidebarSettings
+                selectedIcon: Icons.settingsSidebarSettingsSelected
                 
                 onClicked: loadSettingsPage(generalSettingsPage, root.generalSettingsItem)
             }
@@ -188,8 +188,8 @@ Item
                 labelTopMargin: 2
                 labelLeftMargin: 13
                 textContent: "Account"
-                defaultIcon: Icons.settingsAccountGray
-                selectedIcon: Icons.settingsAccountPurple
+                defaultIcon: Icons.settingsSidebarAccount
+                selectedIcon: Icons.settingsSidebarAccountSelected
                 
                 onClicked:
                     loadSettingsPage(accountPage, root.accountItem)
@@ -206,8 +206,8 @@ Item
                 imageWidth: 14
                 labelLeftMargin: 11
                 textContent: "Storage"
-                defaultIcon: Icons.settingsStorageGray
-                selectedIcon: Icons.settingsStoragePurple
+                defaultIcon: Icons.settingsSidebarStorage
+                selectedIcon: Icons.settingsSidebarStorageSelected
                 
                 onClicked: loadSettingsPage(storagePage, root.storageItem)
             }
@@ -224,8 +224,8 @@ Item
                 imageWidth: 18
                 labelLeftMargin: 8
                 textContent: "Support us"
-                defaultIcon: Icons.settingsSupportUsGray
-                selectedIcon: Icons.settingsSupportUsPurple
+                defaultIcon: Icons.settingsSidebarSupportUs
+                selectedIcon: Icons.settingsSidebarSupportUsSelected
                 
                 onClicked: loadSettingsPage(supportUsPage, root.supportUsItem)
             }
