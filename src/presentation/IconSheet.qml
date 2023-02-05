@@ -42,6 +42,7 @@ Item
     property string heartWhiteHallow: "/resources/images/light_mode/decoration/heart_white_hallow_icon.svg"
     property string seed: "/resources/images/light_mode/decoration/seed_icon.svg"
     property string popupDroplet: "/resources/images/light_mode/decoration/popup_droplet_icon.svg"
+    property string patreon: "/resources/images/light_mode/decoration/patreon_icon.svg"
     
     // Illustrations
     property string addImage: "/resources/images/light_mode/illustrations/add_image_illustration.svg"
@@ -57,6 +58,7 @@ Item
     property string readingSearchbarCancel: "/resources/images/light_mode/reading_searchbar/cancel_icon.svg"
     property string readingSearchbarNext: "/resources/images/light_mode/reading_searchbar/next_icon.svg"
     property string readingSearchbarPrevious: "/resources/images/light_mode/reading_searchbar/previous_icon.svg"
+    property string readingSearchbarSearch: "/resources/images/light_mode/reading_searchbar/search_icon.svg"
     
     // ReadingView
     property string readingViewBack: "/resources/images/light_mode/reading_view/back_icon.svg"
@@ -99,11 +101,13 @@ Item
     
     // Sidebar
     property string sidebarDownload: "/resources/images/light_mode/sidebar/download_icon.svg"
-    property string sidebarEmptyProfile : "/resources/images/light_mode/sidebar/empty_profile_icon.svg"
     property string sidebarHome: "/resources/images/light_mode/sidebar/home_icon.svg"
     property string sidebarPieChart: "/resources/images/light_mode/sidebar/pieChart_icon.svg"
     property string sidebarSettings: "/resources/images/light_mode/sidebar/settings_icon.svg"
     property string sidebarAddOns: "/resources/images/light_mode/sidebar/puzzle_icon.svg"
+    property string sidebarSync: "/resources/images/light_mode/sidebar/sync_icon.svg"
+    property string sidebarEmptyProfile : "/resources/images/light_mode/sidebar/empty_profile_icon.svg"
+    property string sidebarLogout: "/resources/images/light_mode/sidebar/log_out_icon.svg"
     
     // Utility
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"
@@ -113,16 +117,12 @@ Item
     property string eyeOff: "/resources/images/light_mode/utility/eye_off_icon.svg"
     property string eyeOn: "/resources/images/light_mode/utility/eye_on_icon.svg"
     property string filter: "/resources/images/light_mode/utility/filter_icon.svg"
-    property string logout: "/resources/images/light_mode/utility/log_out_icon.svg"
-    property string searchBlack: "/resources/images/light_mode/utility/search_black_icon.svg"
-    property string searchGray: "/resources/images/light_mode/utility/search_gray_icon.svg"
-    property string sync: "/resources/images/light_mode/utility/sync_icon.svg"
+    property string search: "/resources/images/light_mode/utility/search_icon.svg"
     property string tag: "/resources/images/light_mode/utility/tag_icon.svg"
     property string microphone: "/resources/images/light_mode/utility/microphone_icon.svg"
     property string activeMicrophone: "/resources/images/light_mode/utility/active_microphone_icon.svg"
-    property string trashGray: "/resources/images/light_mode/utility/trash_gray_icon.svg"
-    property string trashWhite: "/resources/images/light_mode/utility/trash_white_icon.svg"
-    property string patreon: "/resources/images/light_mode/utility/patreon_icon.svg"
+    property string trash: "/resources/images/light_mode/utility/trash_icon.svg"
+    property string trashHighlighted: "/resources/images/light_mode/utility/trash_highlighted_icon.svg"
     
     
     

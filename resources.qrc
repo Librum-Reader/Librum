@@ -13,30 +13,18 @@
         <file>resources/images/light_mode/illustrations/eye_crossed_illustration.png</file>
         <file>resources/images/light_mode/illustrations/file_swift_illustration.svg</file>
         <file>resources/images/light_mode/utility/dots_icon.svg</file>
-        <file>resources/images/light_mode/utility/download_white_icon.svg</file>
         <file>resources/images/light_mode/utility/eye_off_icon.svg</file>
         <file>resources/images/light_mode/utility/eye_on_icon.svg</file>
         <file>resources/images/light_mode/utility/filter_icon.svg</file>
-        <file>resources/images/light_mode/utility/log_out_icon.svg</file>
-        <file>resources/images/light_mode/utility/sync_icon.svg</file>
         <file>resources/images/light_mode/utility/tag_icon.svg</file>
-        <file>resources/images/light_mode/utility/search_black_icon.svg</file>
-        <file>resources/images/light_mode/utility/search_gray_icon.svg</file>
         <file>resources/images/light_mode/illustrations/lock_protected_illustration.svg</file>
         <file>resources/images/light_mode/decision/check_purple_icon.svg</file>
         <file>resources/images/light_mode/illustrations/check_bubble_illustration.svg</file>
         <file>resources/images/light_mode/utility/microphone_icon.svg</file>
-        <file>resources/images/light_mode/utility/trash_gray_icon.svg</file>
         <file>resources/images/light_mode/utility/active_microphone_icon.svg</file>
         <file>resources/images/light_mode/illustrations/add_file_illustration.svg</file>
-        <file>resources/images/light_mode/utility/trash_white_icon.svg</file>
         <file>resources/images/light_mode/illustrations/attention_purple_illustration.svg</file>
         <file>resources/images/light_mode/decision/plus_square_icon.svg</file>
-        <file>resources/images/light_mode/utility/download_darkgray_icon.svg</file>
-        <file>resources/images/light_mode/utility/edit_gray_icon.svg</file>
-        <file>resources/images/light_mode/utility/edit_light_gray_icon.svg</file>
-        <file>resources/images/light_mode/utility/edit_purple_icon.svg</file>
-        <file>resources/images/light_mode/utility/patreon_icon.svg</file>
         <file>resources/data/default_appearance_settings.json</file>
         <file>resources/data/default_general_settings.json</file>
         <file>resources/data/default_shortcuts.json</file>
@@ -54,8 +42,6 @@
         <file>resources/images/light_mode/book_popup/mark_as_read_icon.svg</file>
         <file>resources/images/light_mode/book_popup/delete_icon.svg</file>
         <file>resources/images/light_mode/decision/check_circle_icon.svg</file>
-        <file>resources/images/light_mode/decision/remove_item_icon.svg</file>
-        <file>resources/images/light_mode/decision/remove_item_focused_icon.svg</file>
         <file>resources/images/light_mode/decision/cancel_purple_icon.svg</file>
         <file>resources/images/light_mode/decision/add_first_book_plus_icon.svg</file>
         <file>resources/images/light_mode/decision/add_white_icon.svg</file>
@@ -101,5 +87,20 @@
         <file>resources/images/light_mode/reading_options_popup/settings_icon.svg</file>
         <file>resources/images/light_mode/reading_options_popup/printer_icon.svg</file>
         <file>resources/images/light_mode/reading_options_popup/download_icon.svg</file>
+        <file>resources/images/light_mode/book_popup/download_icon.svg</file>
+        <file>resources/images/light_mode/utility/download_selected_icon.svg</file>
+        <file>resources/images/light_mode/utility/download_icon.svg</file>
+        <file>resources/images/light_mode/tags/remove_selected_icon.svg</file>
+        <file>resources/images/light_mode/tags/remove_icon.svg</file>
+        <file>resources/images/light_mode/tags/edit_selected_icon.svg</file>
+        <file>resources/images/light_mode/tags/edit_icon.svg</file>
+        <file>resources/images/light_mode/utility/edit_icon.svg</file>
+        <file>resources/images/light_mode/reading_searchbar/search_icon.svg</file>
+        <file>resources/images/light_mode/utility/search_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/sync_icon.svg</file>
+        <file>resources/images/light_mode/sidebar/log_out_icon.svg</file>
+        <file>resources/images/light_mode/utility/trash_icon.svg</file>
+        <file>resources/images/light_mode/utility/trash_highlighted_icon.svg</file>
+        <file>resources/images/light_mode/decoration/patreon_icon.svg</file>
     </qresource>
 </RCC>

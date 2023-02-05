@@ -43,7 +43,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 18
-            image: Icons.sync
+            image: Icons.sidebarSync
             text: "Sync"
             imageWidth: 16
             textSpacing: 9
@@ -75,7 +75,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 15
-            image: Icons.logout
+            image: Icons.sidebarLogout
             text: "Logout"
             imageWidth: 20
             textSpacing: 8

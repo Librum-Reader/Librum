@@ -107,7 +107,7 @@ Item
                 borderColor: "transparent"
                 radius: 6
                 borderColorOnPressed: Style.colorButtonBorder
-                imagePath: Icons.trashGray
+                imagePath: Icons.trash
                 imageSize: 21
                 
                 onClicked: root.deleteClicked(root.index)

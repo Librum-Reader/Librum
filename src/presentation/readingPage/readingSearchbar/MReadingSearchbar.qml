@@ -119,7 +119,7 @@ Item
                         Image
                         {
                             id: searchIcon
-                            source: Icons.searchGray
+                            source: Icons.readingSearchbarSearch
                             sourceSize.width: 14
                             fillMode: Image.PreserveAspectFit
                         }

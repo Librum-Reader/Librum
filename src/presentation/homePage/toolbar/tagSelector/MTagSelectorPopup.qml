@@ -151,7 +151,7 @@ Popup
             MRightClickMenuItem
             {
                 width: tagOptionsPopup.width
-                imagePath: Icons.trashGray
+                imagePath: Icons.trash
                 imageSize: 16
                 text: "Delete"
                 

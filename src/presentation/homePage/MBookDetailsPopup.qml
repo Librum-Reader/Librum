@@ -519,7 +519,7 @@ Popup
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: 12
-                    imagePath: active ? Icons.trashWhite : Icons.trashGray
+                    imagePath: active ? Icons.trashHighlighted : Icons.trash
                     imageSize: 17
                     imageSpacing: 10
                     
