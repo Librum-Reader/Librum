@@ -48,7 +48,7 @@ Item
     property string checkBubbleIllustration: "/resources/images/light_mode/illustrations/check_bubble_illustration.svg"
     property string addFileIllustration: "/resources/images/light_mode/illustrations/add_file_illustration.svg"
     
-    // ReadingSearchbar-icons
+    // Reading searchbar icons
     property string readingSearchbarCancel: "/resources/images/light_mode/reading_searchbar/cancel_icon.svg"
     property string readingSearchbarNext: "/resources/images/light_mode/reading_searchbar/next_icon.svg"
     property string readingSearchbarPrevious: "/resources/images/light_mode/reading_searchbar/previous_icon.svg"
@@ -65,6 +65,14 @@ Item
     property string readingViewOptionsPurple: "/resources/images/light_mode/reading_view/options_selected_icon.svg"
     property string readingViewSearch: "/resources/images/light_mode/reading_view/search_icon.svg"
     property string readingViewSearchSelected: "/resources/images/light_mode/reading_view/search_selected_icon.svg"
+    
+    // Reading options popup icons
+    property string readingOptionsPopupPrinter: "/resources/images/light_mode/reading_options_popup/printer_icon.svg"
+    property string readingOptionsPopupDownload: "/resources/images/light_mode/reading_options_popup/download_icon.svg"
+    property string readingOptionsPopupShare: "/resources/images/light_mode/reading_options_popup/share_icon.svg"
+    property string readingOptionsPopupSun: "/resources/images/light_mode/reading_options_popup/sun_icon.svg"
+    property string readingOptionsPopupSync: "/resources/images/light_mode/reading_options_popup/sync_icon.svg"
+    property string readingOptionsSettings: "/resources/images/light_mode/reading_options_popup/settings_icon.svg"
     
     // Setting-icons
     property string settingsSidebarAbout: "/resources/images/light_mode/settings_sidebar/about_icon.svg"
@@ -94,7 +102,6 @@ Item
     
     // Utility-icons
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"
-    property string downloadBlack: "/resources/images/light_mode/utility/download_black_icon.svg"
     property string downloadGray: "/resources/images/light_mode/utility/download_gray_icon.svg"
     property string downloadDarkGray: "/resources/images/light_mode/utility/download_darkgray_icon.svg"
     property string downloadWhite: "/resources/images/light_mode/utility/download_white_icon.svg"
@@ -109,10 +116,6 @@ Item
     property string searchGray: "/resources/images/light_mode/utility/search_gray_icon.svg"
     property string sync: "/resources/images/light_mode/utility/sync_icon.svg"
     property string tag: "/resources/images/light_mode/utility/tag_icon.svg"
-    property string printer: "/resources/images/light_mode/utility/printer_black_icon.svg"
-    property string settingsGrayHallow: "/resources/images/light_mode/utility/settings_gray_hallow_icon.svg"
-    property string share: "/resources/images/light_mode/utility/share_black_icon.svg"
-    property string sun: "/resources/images/light_mode/utility/sun_gray_icon.svg"
     property string microphone: "/resources/images/light_mode/utility/microphone_icon.svg"
     property string activeMicrophone: "/resources/images/light_mode/utility/active_microphone_icon.svg"
     property string trashGray: "/resources/images/light_mode/utility/trash_gray_icon.svg"

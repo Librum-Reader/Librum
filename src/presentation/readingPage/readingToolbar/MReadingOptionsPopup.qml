@@ -73,7 +73,7 @@ Popup
                         backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
-                        imagePath: Icons.printer
+                        imagePath: Icons.readingOptionsPopupPrinter
                         imageSize: 22
                     }
                     
@@ -85,7 +85,7 @@ Popup
                         backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
-                        imagePath: Icons.downloadBlack
+                        imagePath: Icons.readingOptionsPopupDownload
                         imageSize: 22
                         
                         onClicked: downloadFileDialog.open()
@@ -99,7 +99,7 @@ Popup
                         backgroundColor: Style.colorLightReadingViewButtonBackground
                         opacityOnPressed: 0.8
                         borderWidth: 0
-                        imagePath: Icons.share
+                        imagePath: Icons.readingOptionsPopupShare
                         imageSize: 22
                     }
                 }
@@ -187,7 +187,7 @@ Popup
                         textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
-                        imagePath: Icons.sun
+                        imagePath: Icons.readingOptionsPopupSun
                         imageSize: 21
                     }
                     
@@ -204,7 +204,7 @@ Popup
                         textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
-                        imagePath: Icons.sync
+                        imagePath: Icons.readingOptionsPopupSync
                         imageSize: 16
                         imageLeftMargin: 2
                         imageSpacing: 11
@@ -223,7 +223,7 @@ Popup
                         textColor: Style.colorText
                         fontSize: 12
                         fontWeight: Font.Medium
-                        imagePath: Icons.settingsGrayHallow
+                        imagePath: Icons.readingOptionsSettings
                         imageSize: 20
                         imageLeftMargin: 1
                         imageSpacing: 8
