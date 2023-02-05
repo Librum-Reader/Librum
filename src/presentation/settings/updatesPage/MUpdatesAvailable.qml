@@ -86,7 +86,7 @@ Item
                 Layout.topMargin: 14
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                imagePath: Icons.downloadWhite
+                imagePath: Icons.downloadSelected
                 imageSize: 16
                 imageSpacing: 8
                 text: "Download"

@@ -90,7 +90,7 @@ Item
                 borderColor: "transparent"
                 radius: 6
                 borderColorOnPressed: Style.colorButtonBorder
-                imagePath: Icons.editGray
+                imagePath: Icons.edit
                 imageSize: 23
                 
                 onClicked: root.editClicked(root.index)

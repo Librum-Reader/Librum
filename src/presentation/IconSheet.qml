@@ -15,15 +15,20 @@ Item
     property string checkGreen: "/resources/images/light_mode/decision/check_green_icon.svg"
     property string checkWhite: "/resources/images/light_mode/decision/check_white_icon.svg"
     property string closePopup: "/resources/images/light_mode/decision/close_popup_icon.svg"
-    property string removeItem: "/resources/images/light_mode/decision/remove_item_icon.svg"
-    property string removeItemFocused: "/resources/images/light_mode/decision/remove_item_focused_icon.svg"
     property string cancelPurple: "/resources/images/light_mode/decision/cancel_purple_icon.svg"
     property string addFirstBookPlus: "/resources/images/light_mode/decision/add_first_book_plus_icon.svg"
     property string addWhite: "/resources/images/light_mode/decision/add_white_icon.svg"
     property string plusSquare: "/resources/images/light_mode/decision/plus_square_icon.svg"
     property string checkCircle: "/resources/images/light_mode/decision/check_circle_icon.svg"
     
+    // Tags
+    property string tagsRemove: "/resources/images/light_mode/tags/remove_icon.svg"
+    property string tagsRemoveSelected: "/resources/images/light_mode/tags/remove_selected_icon.svg"
+    property string tagsEdit: "/resources/images/light_mode/tags/edit_icon.svg"
+    property string tagsEditSelected: "/resources/images/light_mode/tags/edit_selected_icon.svg"
+    
     // Book popup
+    property string bookPopupDownload: "/resources/images/light_mode/book_popup/download_icon.svg"
     property string bookPopupUninstall: "/resources/images/light_mode/book_popup/uninstall_icon.svg"
     property string bookPopupRead: "/resources/images/light_mode/book_popup/read_icon.svg"
     property string bookPopupDetails: "/resources/images/light_mode/book_popup/details_icon.svg"
@@ -32,7 +37,7 @@ Item
     property string bookPopupMarkAsRead: "/resources/images/light_mode/book_popup/mark_as_read_icon.svg"
     property string bookPopupDelete: "/resources/images/light_mode/book_popup/delete_icon.svg"
     
-    // Decoration-icons
+    // Decoration
     property string heartGray: "/resources/images/light_mode/decoration/heart_gray_icon.svg"
     property string heartWhiteHallow: "/resources/images/light_mode/decoration/heart_white_hallow_icon.svg"
     property string seed: "/resources/images/light_mode/decoration/seed_icon.svg"
@@ -48,12 +53,12 @@ Item
     property string checkBubbleIllustration: "/resources/images/light_mode/illustrations/check_bubble_illustration.svg"
     property string addFileIllustration: "/resources/images/light_mode/illustrations/add_file_illustration.svg"
     
-    // Reading searchbar icons
+    // Reading searchbar
     property string readingSearchbarCancel: "/resources/images/light_mode/reading_searchbar/cancel_icon.svg"
     property string readingSearchbarNext: "/resources/images/light_mode/reading_searchbar/next_icon.svg"
     property string readingSearchbarPrevious: "/resources/images/light_mode/reading_searchbar/previous_icon.svg"
     
-    // ReadingView-icons
+    // ReadingView
     property string readingViewBack: "/resources/images/light_mode/reading_view/back_icon.svg"
     property string readingViewBookmark: "/resources/images/light_mode/reading_view/bookmark_icon.svg"
     property string readingViewBookmarkSelected: "/resources/images/light_mode/reading_view/bookmark_selected_icon.svg"
@@ -66,7 +71,7 @@ Item
     property string readingViewSearch: "/resources/images/light_mode/reading_view/search_icon.svg"
     property string readingViewSearchSelected: "/resources/images/light_mode/reading_view/search_selected_icon.svg"
     
-    // Reading options popup icons
+    // Reading options popup
     property string readingOptionsPopupPrinter: "/resources/images/light_mode/reading_options_popup/printer_icon.svg"
     property string readingOptionsPopupDownload: "/resources/images/light_mode/reading_options_popup/download_icon.svg"
     property string readingOptionsPopupShare: "/resources/images/light_mode/reading_options_popup/share_icon.svg"
@@ -74,7 +79,7 @@ Item
     property string readingOptionsPopupSync: "/resources/images/light_mode/reading_options_popup/sync_icon.svg"
     property string readingOptionsSettings: "/resources/images/light_mode/reading_options_popup/settings_icon.svg"
     
-    // Setting-icons
+    // Setting
     property string settingsSidebarAbout: "/resources/images/light_mode/settings_sidebar/about_icon.svg"
     property string settingsSidebarAboutSelected: "/resources/images/light_mode/settings_sidebar/about_selected_icon.svg"
     property string settingsSidebarAccount: "/resources/images/light_mode/settings_sidebar/account_icon.svg"
@@ -92,7 +97,7 @@ Item
     property string settingsSidebarUpdates: "/resources/images/light_mode/settings_sidebar/updates_icon.svg"
     property string settingsSidebarUpdatesSelected: "/resources/images/light_mode/settings_sidebar/updates_selected_icon.svg"
     
-    // Sidebar-icons
+    // Sidebar
     property string sidebarDownload: "/resources/images/light_mode/sidebar/download_icon.svg"
     property string sidebarEmptyProfile : "/resources/images/light_mode/sidebar/empty_profile_icon.svg"
     property string sidebarHome: "/resources/images/light_mode/sidebar/home_icon.svg"
@@ -100,13 +105,11 @@ Item
     property string sidebarSettings: "/resources/images/light_mode/sidebar/settings_icon.svg"
     property string sidebarAddOns: "/resources/images/light_mode/sidebar/puzzle_icon.svg"
     
-    // Utility-icons
+    // Utility
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"
-    property string downloadDarkGray: "/resources/images/light_mode/utility/download_darkgray_icon.svg"
-    property string downloadWhite: "/resources/images/light_mode/utility/download_white_icon.svg"
-    property string editGray: "/resources/images/light_mode/utility/edit_gray_icon.svg"
-    property string editPurple: "/resources/images/light_mode/utility/edit_purple_icon.svg"
-    property string editLightGray: "/resources/images/light_mode/utility/edit_light_gray_icon.svg"
+    property string download: "/resources/images/light_mode/utility/download_icon.svg"
+    property string downloadSelected: "/resources/images/light_mode/utility/download_selected_icon.svg"
+    property string edit: "/resources/images/light_mode/utility/edit_icon.svg"
     property string eyeOff: "/resources/images/light_mode/utility/eye_off_icon.svg"
     property string eyeOn: "/resources/images/light_mode/utility/eye_on_icon.svg"
     property string filter: "/resources/images/light_mode/utility/filter_icon.svg"

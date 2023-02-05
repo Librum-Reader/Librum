@@ -31,7 +31,7 @@ MRightClickMenu
             width: root.width
             height: internal.bookDownloaded ? 0 : implicitHeight
             visible: !internal.bookDownloaded
-            imagePath: Icons.downloadDarkGray
+            imagePath: Icons.bookPopupDownload
             imageSize: 18
             text: "Download"
             
@@ -115,7 +115,7 @@ MRightClickMenu
         MRightClickMenuItem
         {
             width: root.width
-            imagePath: Icons.trashGray
+            imagePath: Icons.bookPopupDelete
             imageSize: 16
             text: "Delete book"
             

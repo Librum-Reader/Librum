@@ -95,7 +95,7 @@ Item
                 visible: !model.downloaded
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
-                source: Icons.downloadWhite
+                source: Icons.downloadSelected
                 opacity: 1
                 z: 3
             }

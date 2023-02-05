@@ -88,7 +88,7 @@ Item
                 opacityOnPressed: 0.7
                 borderColor: currentlyPressed ? Style.colorButtonBorder : "transparent"
                 radius: 4
-                imagePath: currentlyPressed ? Icons.editPurple : Icons.editLightGray
+                imagePath: currentlyPressed ? Icons.tagsEditSelected : Icons.tagsEdit
                 imageSize: 17
                 
                 onClicked: root.startRenaming();
@@ -105,7 +105,7 @@ Item
                 opacityOnPressed: 0.7
                 borderColor: currentlyPressed ? Style.colorButtonBorder : "transparent"
                 radius: 4
-                imagePath: currentlyPressed ? Icons.removeItemFocused : Icons.removeItem
+                imagePath: currentlyPressed ? Icons.tagsRemoveSelected : Icons.tagsRemove
                 imageSize: 12
                 
                 onClicked: root.removeTag(root.index)
