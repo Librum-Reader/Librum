@@ -179,7 +179,7 @@ MFlickWrapper
                         {
                             id: heartImage
                             Layout.alignment: Qt.AlignBottom
-                            source: Icons.heartGray
+                            source: Icons.heart
                             sourceSize.width: 80
                             fillMode: Image.PreserveAspectFit
                         }
