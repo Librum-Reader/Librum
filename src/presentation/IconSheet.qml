@@ -85,12 +85,12 @@ Item
     property string settingsSidebarUpdatesSelected: "/resources/images/light_mode/settings_sidebar/updates_selected_icon.svg"
     
     // Sidebar-icons
-    property string emptyProfile : "/resources/images/light_mode/sidebar/sidebar_empty_profile_icon.svg"
-    property string home: "/resources/images/light_mode/sidebar/sidebar_home_icon.svg"
-    property string pieChart: "/resources/images/light_mode/sidebar/sidebar_pieChart_icon.svg"
-    property string tool: "/resources/images/light_mode/sidebar/sidebar_wrench_icon.svg"
-    property string settings: "/resources/images/light_mode/sidebar/sidebar_settings_icon.svg"
-    property string addOns: "/resources/images/light_mode/sidebar/sidebar_puzzle_icon.svg"
+    property string sidebarDownload: "/resources/images/light_mode/sidebar/download_icon.svg"
+    property string sidebarEmptyProfile : "/resources/images/light_mode/sidebar/empty_profile_icon.svg"
+    property string sidebarHome: "/resources/images/light_mode/sidebar/home_icon.svg"
+    property string sidebarPieChart: "/resources/images/light_mode/sidebar/pieChart_icon.svg"
+    property string sidebarSettings: "/resources/images/light_mode/sidebar/settings_icon.svg"
+    property string sidebarAddOns: "/resources/images/light_mode/sidebar/puzzle_icon.svg"
     
     // Utility-icons
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"

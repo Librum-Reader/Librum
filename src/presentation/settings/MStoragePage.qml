@@ -137,16 +137,6 @@ MFlickWrapper
                         font.weight: Font.DemiBold
                     }
                     
-                    Image
-                    {
-                        id: usedStorageChart
-                        Layout.leftMargin: 15
-                        Layout.topMargin: 20
-                        source: Icons.pieChart
-                        sourceSize.width: 100
-                        fillMode: Image.PreserveAspectFit
-                    }
-                    
                     Label
                     {
                         id: availableStorageText

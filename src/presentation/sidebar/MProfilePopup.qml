@@ -56,7 +56,7 @@ Popup
             Layout.fillWidth: true
             Layout.topMargin: 15
             Layout.leftMargin: 16
-            image: Icons.emptyProfile
+            image: Icons.sidebarEmptyProfile
             text: "Manage Profile"
             imageWidth: 19
             textSpacing: 8

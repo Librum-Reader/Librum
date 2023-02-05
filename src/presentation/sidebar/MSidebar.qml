@@ -119,7 +119,7 @@ Item
                     Layout.topMargin: 16
                     Layout.leftMargin: 10
                     imageWidth: 31
-                    image: Icons.downloadGray
+                    image: Icons.sidebarDownload
                     text: "Free books"
                     
                     onClicked: loadPage(freeBooksPage, root.freeBooksItem)
@@ -143,7 +143,7 @@ Item
                     imageWidth: 30
                     preserveImageFit: false
                     imageHeight: 28
-                    image: Icons.home
+                    image: Icons.sidebarHome
                     text: "Home"
                     
                     onClicked: loadPage(homePage, root.homeItem)
@@ -155,7 +155,7 @@ Item
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 28
-                    image: Icons.pieChart
+                    image: Icons.sidebarPieChart
                     text: "Statistics"
                     
                     onClicked: loadPage(statisticsPage, root.statisticsItem)
@@ -177,7 +177,7 @@ Item
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 30
-                    image: Icons.addOns
+                    image: Icons.sidebarAddOns
                     text: "Add-ons"
                     
                     onClicked: loadPage(addOnsPage, root.addOnsItem)
@@ -189,7 +189,7 @@ Item
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 36
-                    image: Icons.settings
+                    image: Icons.sidebarSettings
                     text: "Settings"
                     
                     onClicked: loadPage(settings, root.settingsItem)
