@@ -102,7 +102,6 @@ Item
     
     // Utility-icons
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"
-    property string downloadGray: "/resources/images/light_mode/utility/download_gray_icon.svg"
     property string downloadDarkGray: "/resources/images/light_mode/utility/download_darkgray_icon.svg"
     property string downloadWhite: "/resources/images/light_mode/utility/download_white_icon.svg"
     property string editGray: "/resources/images/light_mode/utility/edit_gray_icon.svg"

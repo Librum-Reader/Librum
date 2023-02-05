@@ -340,7 +340,7 @@ Popup
                             fontSize: 12
                             borderWidth: active ? 0 : 1
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
-                            imagePath: active ? Icons.downloadWhite : Icons.downloadGray
+                            imagePath: active ? Icons.downloadWhite : Icons.downloadDarkGray
                             imageSize: 18
                             
                             onClicked: internal.downloadBook()
