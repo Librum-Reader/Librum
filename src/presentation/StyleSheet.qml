@@ -85,7 +85,7 @@ Item
         }
     }
     
-    state: /*"Dark"*/SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance)
+    state: "Dark"/*SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance)*/
     states: [
         State
         {
