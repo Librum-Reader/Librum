@@ -169,13 +169,13 @@ Item
             PropertyChanges { target: styleSheet; colorLightText: "#CECEDD" }
             PropertyChanges { target: styleSheet; colorNoImageLabel: "#737373" }
             PropertyChanges { target: styleSheet; colorGreenText: "#5CB176" }
-            PropertyChanges { target: styleSheet; colorText: "#E9E9E9" }
+            PropertyChanges { target: styleSheet; colorText: "#D5D5D5" }
             PropertyChanges { target: styleSheet; colorErrorText: "#F25E42" }
-            PropertyChanges { target: styleSheet; colorTitle: "#E9E9E9" }
+            PropertyChanges { target: styleSheet; colorTitle: "#CBCBCB" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#E5E5EF" }
-            PropertyChanges { target: styleSheet; colorPageSubtitle: "#ECECF6" }
+            PropertyChanges { target: styleSheet; colorPageSubtitle: "#C4C4C4" }
             
             // Input
             PropertyChanges { target: styleSheet; colorReadOnlyInputText: "#666687" }
@@ -215,9 +215,8 @@ Item
             PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
-            PropertyChanges { target: styleSheet; colorContainerBorder: "#55555A" }
+            PropertyChanges { target: styleSheet; colorContainerBorder: "#404044" }
             PropertyChanges { target: styleSheet; colorErrorBorder: "#E87964" }
-            
             
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
