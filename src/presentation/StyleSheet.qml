@@ -189,7 +189,7 @@ Item
             
             // Highlight
             PropertyChanges { target: styleSheet; colorLightHighlight: "#3F3F49" }
-            PropertyChanges { target: styleSheet; colorHighlight: "#EEE9F1" }
+            PropertyChanges { target: styleSheet; colorHighlight: "#3E3E48" }
             PropertyChanges { target: styleSheet; colorHoverHighlight: "#3C3C3C" }
             
             // Separators
@@ -200,11 +200,11 @@ Item
             // Backgrounds
             PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#EDEDED" }
             PropertyChanges { target: styleSheet; colorGreenBackground: "#EAFBE7" }
-            PropertyChanges { target: styleSheet; colorBookImageBackground: "#DCDCE4" }
+            PropertyChanges { target: styleSheet; colorBookImageBackground: "#454545" }
             PropertyChanges { target: styleSheet; colorErrorBackground: "#FDEDE8" }
             PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
             PropertyChanges { target: styleSheet; colorPopupBackground: "#2C2C2C" }
-            PropertyChanges { target: styleSheet; colorBookBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorBookBackground: "#2C2C2C" }
             PropertyChanges { target: styleSheet; colorReadingViewBackground: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#212121" }
             PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
@@ -212,7 +212,7 @@ Item
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
-            PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
+            PropertyChanges { target: styleSheet; colorBookBorder: "#3C3C40" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
             PropertyChanges { target: styleSheet; colorContainerBorder: "#404044" }
