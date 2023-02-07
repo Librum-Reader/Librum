@@ -184,13 +184,13 @@ Item
             
             // Color tones
             PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
-            PropertyChanges { target: styleSheet; colorLightPurple: "#D9D8FF" }
+            PropertyChanges { target: styleSheet; colorLightPurple: "#625669" }
             PropertyChanges { target: styleSheet; colorRed: "#D84B4D" }
             
             // Highlight
             PropertyChanges { target: styleSheet; colorLightHighlight: "#3F3F49" }
             PropertyChanges { target: styleSheet; colorHighlight: "#EEE9F1" }
-            PropertyChanges { target: styleSheet; colorHoverHighlight: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorHoverHighlight: "#3C3C3C" }
             
             // Separators
             PropertyChanges { target: styleSheet; colorSeparator: "#434344" }

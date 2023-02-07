@@ -55,7 +55,7 @@ Item
                 text: "Settings"
                 font.pointSize: 19
                 font.bold: true
-                color: Style.colorText
+                color: Style.colorTitle
             }
             
             Rectangle
