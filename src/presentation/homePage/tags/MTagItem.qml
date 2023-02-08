@@ -32,7 +32,7 @@ Item
         {
             color: root.selected ? Style.colorLightHighlight :
                                    mouseArea.containsMouse || ListView.currentIndex === index
-                                   ? Style.colorLightHighlight : Style.colorControlBackground
+                                   ? Style.colorLightHighlight : "transparent"
             radius: 4
         }
         

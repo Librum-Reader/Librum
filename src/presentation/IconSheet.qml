@@ -111,7 +111,6 @@ Item
     
     // Utility
     property string dots: "/resources/images/light_mode/utility/dots_icon.svg"
-    property string download: "/resources/images/light_mode/utility/download_icon.svg"
     property string downloadSelected: "/resources/images/light_mode/utility/download_selected_icon.svg"
     property string edit: "/resources/images/light_mode/utility/edit_icon.svg"
     property string eyeOff: "/resources/images/light_mode/utility/eye_off_icon.svg"
@@ -238,7 +237,6 @@ Item
             
             // Utility
             PropertyChanges { target: iconSheet; dots: "/resources/images/light_mode/utility/dots_icon.svg" }
-            PropertyChanges { target: iconSheet; download: "/resources/images/light_mode/utility/download_icon.svg" }
             PropertyChanges { target: iconSheet; downloadSelected: "/resources/images/light_mode/utility/download_selected_icon.svg" }
             PropertyChanges { target: iconSheet; edit: "/resources/images/light_mode/utility/edit_icon.svg" }
             PropertyChanges { target: iconSheet; eyeOff: "/resources/images/light_mode/utility/eye_off_icon.svg" }
@@ -361,7 +359,6 @@ Item
             
             // Utility
             PropertyChanges { target: iconSheet; dots: "/resources/images/dark_mode/utility/dots_icon.svg" }
-            PropertyChanges { target: iconSheet; download: "/resources/images/dark_mode/utility/download_icon.svg" }
             PropertyChanges { target: iconSheet; downloadSelected: "/resources/images/dark_mode/utility/download_selected_icon.svg" }
             PropertyChanges { target: iconSheet; edit: "/resources/images/dark_mode/utility/edit_icon.svg" }
             PropertyChanges { target: iconSheet; eyeOff: "/resources/images/dark_mode/utility/eye_off_icon.svg" }
