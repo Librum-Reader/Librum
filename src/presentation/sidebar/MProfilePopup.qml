@@ -47,7 +47,7 @@ Popup
             image: Icons.sidebarSync
             text: "Sync"
             imageWidth: 16
-            textSpacing: 9
+            textSpacing: 12
         }
         
         
@@ -60,7 +60,7 @@ Popup
             image: Icons.sidebarEmptyProfile
             text: "Manage Profile"
             imageWidth: 19
-            textSpacing: 8
+            textSpacing: 11
             
             onClicked:
             {
@@ -79,7 +79,7 @@ Popup
             image: Icons.sidebarLogout
             text: "Logout"
             imageWidth: 20
-            textSpacing: 8
+            textSpacing: 11
             
             onClicked: root.logout()
         }

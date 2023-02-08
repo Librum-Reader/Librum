@@ -31,7 +31,7 @@ Item
     {
         id: borderRect
         anchors.fill: parent
-        color: "transparent"
+        color: Style.colorSettingsSidebarBackground
         border.color: Style.colorContainerBorder
     }
     

@@ -58,6 +58,7 @@ Item
     property color colorAuthenticationPageBackground: "#EFEFEF"
     property color colorPageBackground: "#F6F6F9"
     property color colorControlBackground: "#FFFFFF"
+    property color colorSettingsSidebarBackground: "#F6F6F9"
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
@@ -147,6 +148,7 @@ Item
             PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#EFEFEF" }
             PropertyChanges { target: styleSheet; colorPageBackground: "#F6F6F9" }
             PropertyChanges { target: styleSheet; colorControlBackground: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorSettingsSidebarBackground: "#F6F6F9" }
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
@@ -176,7 +178,7 @@ Item
             
             // Texts
             PropertyChanges { target: styleSheet; colorPlaceholderText: "#C8C8C8" }
-            PropertyChanges { target: styleSheet; colorLightText: "#CECEDD" }
+            PropertyChanges { target: styleSheet; colorLightText: "#CACACF" }
             PropertyChanges { target: styleSheet; colorNoImageLabel: "#737373" }
             PropertyChanges { target: styleSheet; colorGreenText: "#5CB176" }
             PropertyChanges { target: styleSheet; colorText: "#D5D5D5" }
@@ -194,7 +196,7 @@ Item
             
             // Color tones
             PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
-            PropertyChanges { target: styleSheet; colorLightPurple: "#625669" }
+            PropertyChanges { target: styleSheet; colorLightPurple: "#29232C" }
             PropertyChanges { target: styleSheet; colorRed: "#D84B4D" }
             
             // Highlight
@@ -205,11 +207,11 @@ Item
             // Separators
             PropertyChanges { target: styleSheet; colorSeparator: "#434344" }
             PropertyChanges { target: styleSheet; colorDarkSeparator: "#454547" }
-            PropertyChanges { target: styleSheet; colorLightSeparator: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorLightSeparator: "#3B3B3B" }
             
             // Backgrounds
             PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#2D2D2D" }
-            PropertyChanges { target: styleSheet; colorGreenBackground: "#EAFBE7" }
+            PropertyChanges { target: styleSheet; colorGreenBackground: "#204619" }
             PropertyChanges { target: styleSheet; colorBookImageBackground: "#454545" }
             PropertyChanges { target: styleSheet; colorErrorBackground: "#FDEDE8" }
             PropertyChanges { target: styleSheet; colorContainerBackground: "#2C2C2C" }
@@ -219,18 +221,19 @@ Item
             PropertyChanges { target: styleSheet; colorAuthenticationPageBackground: "#212121" }
             PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
             PropertyChanges { target: styleSheet; colorControlBackground: "#2E2E2E" }
+            PropertyChanges { target: styleSheet; colorSettingsSidebarBackground: "#262626" }
             
             // Borders
-            PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
-            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#E8B9BA" }
+            PropertyChanges { target: styleSheet; colorGreenBorder: "#4B7947" }
+            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#45302E" }
             PropertyChanges { target: styleSheet; colorBookBorder: "#3C3C40" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
-            PropertyChanges { target: styleSheet; colorContainerBorder: "#404044" }
+            PropertyChanges { target: styleSheet; colorContainerBorder: "#48484D" }
             PropertyChanges { target: styleSheet; colorErrorBorder: "#E87964" }
             
             // Other
-            PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorDropArea: "#313131" }
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa3F3F52" }
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }

@@ -92,7 +92,7 @@ Item
                 id: separator
                 Layout.fillHeight: true
                 Layout.preferredWidth: 2
-                color: Style.colorLightPurple
+                color: Style.colorSeparator
             }
             
             Label

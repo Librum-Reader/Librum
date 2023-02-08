@@ -30,6 +30,7 @@ Item
             Layout.fillHeight: true
             Layout.preferredWidth: 22
             radius: width
+            color: Style.colorControlBackground
             border.color: root.selected ? Style.colorBasePurple: Style.colorCheckboxBorder
             antialiasing: true
             

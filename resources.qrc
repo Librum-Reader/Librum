@@ -8,7 +8,6 @@
         <file>resources/images/light_mode/illustrations/add_image_illustration.svg</file>
         <file>resources/images/light_mode/illustrations/book_cover.png</file>
         <file>resources/images/light_mode/illustrations/empty_home_background.svg</file>
-        <file>resources/images/light_mode/illustrations/eye_crossed_illustration.png</file>
         <file>resources/images/light_mode/illustrations/file_swift_illustration.svg</file>
         <file>resources/images/light_mode/utility/dots_icon.svg</file>
         <file>resources/images/light_mode/utility/eye_off_icon.svg</file>
@@ -109,7 +108,6 @@
         <file>resources/images/dark_mode/illustrations/add_image_illustration.svg</file>
         <file>resources/images/dark_mode/illustrations/book_cover.png</file>
         <file>resources/images/dark_mode/illustrations/empty_home_background.svg</file>
-        <file>resources/images/dark_mode/illustrations/eye_crossed_illustration.png</file>
         <file>resources/images/dark_mode/illustrations/file_swift_illustration.svg</file>
         <file>resources/images/dark_mode/utility/dots_icon.svg</file>
         <file>resources/images/dark_mode/utility/eye_off_icon.svg</file>

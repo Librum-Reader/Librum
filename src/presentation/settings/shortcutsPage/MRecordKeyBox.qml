@@ -84,7 +84,7 @@ Item
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
                     text: internal.getRecordText()
-                    font.pointSize: 13
+                    font.pointSize: 12
                     color: Style.colorLightInputText
                     elide: Text.ElideLeft
                 }

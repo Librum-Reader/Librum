@@ -21,7 +21,7 @@ Item
     {
         id: layout
         anchors.fill: parent
-        
+        spacing: root.textSpacing
         
         Image
         {
@@ -33,8 +33,7 @@ Item
         
         Label
         {
-            id: label
-            Layout.leftMargin: root.textSpacing
+            id: labels
             text: root.text
             color: Style.colorLightText
             font.pointSize: 10.5

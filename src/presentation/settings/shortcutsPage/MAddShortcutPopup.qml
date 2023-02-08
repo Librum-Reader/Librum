@@ -118,12 +118,12 @@ Popup
                         headerFontColor: Style.colorTitle
                         headerFontWeight: Font.DemiBold
                         selectedItemFontColor: Style.colorReadOnlyInputText
-                        selectedItemFontSize: 12.5
+                        selectedItemFontSize: 12
                         selectedItemPadding: 3
                         emptyText: "None selected"
                         dropdownIconSize: 11
                         
-                        fontSize: 12.5
+                        fontSize: 11.5
                         checkBoxStyle: false
                         model: root.actions
                     }
