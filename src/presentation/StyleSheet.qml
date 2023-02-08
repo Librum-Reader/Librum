@@ -161,8 +161,8 @@ Item
             // Buttons
             PropertyChanges { target: styleSheet; colorFocusedButtonText: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorUnfocusedButtonText: "#C8C8D8" }
-            PropertyChanges { target: styleSheet; colorReadingViewButtonBackground: "#D2D2D2" }
-            PropertyChanges { target: styleSheet; colorLightReadingViewButtonBackground: "#EDEDED" }
+            PropertyChanges { target: styleSheet; colorReadingViewButtonBackground: "#3A3A3A" }
+            PropertyChanges { target: styleSheet; colorLightReadingViewButtonBackground: "#3D3D3D" }
             
             // Texts
             PropertyChanges { target: styleSheet; colorPlaceholderText: "#C8C8C8" }
@@ -198,7 +198,7 @@ Item
             PropertyChanges { target: styleSheet; colorLightSeparator: "#F6F6F9" }
             
             // Backgrounds
-            PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#EDEDED" }
+            PropertyChanges { target: styleSheet; colorReadingToolbarBackground: "#2D2D2D" }
             PropertyChanges { target: styleSheet; colorGreenBackground: "#EAFBE7" }
             PropertyChanges { target: styleSheet; colorBookImageBackground: "#454545" }
             PropertyChanges { target: styleSheet; colorErrorBackground: "#FDEDE8" }
