@@ -188,9 +188,9 @@ Item
             PropertyChanges { target: styleSheet; colorPageSubtitle: "#C4C4C4" }
             
             // Input
-            PropertyChanges { target: styleSheet; colorReadOnlyInputText: "#666687" }
+            PropertyChanges { target: styleSheet; colorReadOnlyInputText: "#C1C1C1" }
             PropertyChanges { target: styleSheet; colorBaseInputText: "#FFFFFF" }
-            PropertyChanges { target: styleSheet; colorLightInputText: "#666687" }
+            PropertyChanges { target: styleSheet; colorLightInputText: "#E2E2E2" }
             
             // Color tones
             PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
@@ -233,7 +233,7 @@ Item
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa3F3F52" }
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
-            PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
+            PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
         }
     ]
