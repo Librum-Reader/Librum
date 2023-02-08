@@ -38,7 +38,7 @@ Item
             id: bookCoverRect
             Layout.fillWidth: true
             Layout.preferredHeight: 230
-            Layout.topMargin: -6
+            Layout.topMargin: -5
             color: Style.colorBookImageBackground
             
             ColumnLayout
@@ -50,7 +50,7 @@ Item
                 {
                     id: bookCover
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.topMargin: -10
+                    Layout.topMargin: -8
                     sourceSize.height: 241
                     source: Icons.bookCover
                     fillMode: Image.PreserveAspectFit
