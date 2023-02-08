@@ -61,6 +61,7 @@ Item
     
     // Borders
     property color colorGreenBorder: "#C6F0C2"
+    property color colorRecordActiveBorder: "#E8B9BA"
     property color colorBookBorder: "#E0E0DE"
     property color colorButtonBorder: "#DCDCE4"
     property color colorCheckboxBorder: "#C0C0CF"
@@ -69,6 +70,10 @@ Item
     
     // Other
     property color colorDropArea: "#F6F6F9"
+    property color colorPopupDim: "#aa32324D"
+    property color colorRecordActiveGlow: "#aaA92224"
+    property color colorBookCoverDim: "#32324D"
+    property color colorDefaultProfilePicture: "#DBCE5F"
     
     
     
@@ -145,6 +150,7 @@ Item
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
+            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#E8B9BA" }
             PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#DCDCE4" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#C0C0CF" }
@@ -153,6 +159,10 @@ Item
             
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorPopupDim: "#aa32324D" }
+            PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
+            PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
+            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
         },
         State
         {
@@ -212,6 +222,7 @@ Item
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
+            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#E8B9BA" }
             PropertyChanges { target: styleSheet; colorBookBorder: "#3C3C40" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
@@ -220,6 +231,10 @@ Item
             
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorPopupDim: "#aa32324D" }
+            PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
+            PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
+            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
         }
     ]
     

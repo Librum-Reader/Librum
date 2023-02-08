@@ -20,7 +20,7 @@ Popup
     focus: true
     modal: true
     background: Rectangle { color: Style.colorPopupBackground; radius: 6 }
-    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
+    Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
     
     onOpened:
     {

@@ -46,7 +46,7 @@ Item
                 clip: true
                 radius: width
                 antialiasing: true
-                color: Globals.profilePicture.length === 0 ? "#DBCE5F" : "transparent"
+                color: Globals.profilePicture.length === 0 ? Style.colorDefaultProfilePicture : "transparent"
                 
                 
                 Label

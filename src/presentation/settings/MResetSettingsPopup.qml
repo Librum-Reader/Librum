@@ -18,7 +18,7 @@ Popup
     padding: 0
     modal: true
     background: Rectangle { color: "transparent"; radius: 4 }
-    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
+    Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
     
     onOpened: keepButton.forceActiveFocus()
     

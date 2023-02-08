@@ -64,7 +64,7 @@ Item
                 id: dimmerRect
                 height: upperRoundingFiller.height
                 width: upperRoundingFiller.width
-                color: "#32324D"
+                color: Style.colorBookCoverDim
                 opacity: 0.5
                 radius: 4
             }
@@ -83,7 +83,7 @@ Item
                 id: bookCoverDimmer
                 anchors.fill: parent
                 visible: !model.downloaded
-                color: "#32324D"
+                color: Style.colorBookCoverDim
                 opacity: 0.5
                 z: 2
             }

@@ -23,7 +23,7 @@ Popup
     modal: true
     Overlay.modal: Rectangle
     {
-        color: "#aa32324D"
+        color: Style.colorPopupDim
         opacity: 1
     }
     

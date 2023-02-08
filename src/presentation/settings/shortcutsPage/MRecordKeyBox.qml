@@ -29,7 +29,7 @@ Item
         radius: 12
         samples: 24
         transparentBorder: true
-        color: "#aaA92224"
+        color: Style.colorRecordActiveGlow
         source: button
     }
     
@@ -56,7 +56,7 @@ Item
             Layout.preferredHeight: 38
             radius: 4
             color: Style.colorControlBackground
-            border.color: root.recording ? "#E8B9BA" : Style.colorButtonBorder
+            border.color: root.recording ? Style.colorRecordActiveBorder : Style.colorButtonBorder
             opacity: mouseArea.pressed ? 0.8 : 1
             
             onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()

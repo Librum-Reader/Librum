@@ -18,7 +18,7 @@ Popup
     padding: 0
     background: Rectangle { radius: 6; color: Style.colorPopupBackground }
     modal: true
-    Overlay.modal: Rectangle { color: "#aa32324D"; opacity: 1 }
+    Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
     
     onAboutToHide: internal.unloadData()
     onAboutToShow: { internal.setupPopup(); internal.loadData() }
