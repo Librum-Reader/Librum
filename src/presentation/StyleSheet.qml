@@ -231,7 +231,7 @@ Item
             
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
-            PropertyChanges { target: styleSheet; colorPopupDim: "#aa32324D" }
+            PropertyChanges { target: styleSheet; colorPopupDim: "#aa3F3F52" }
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
