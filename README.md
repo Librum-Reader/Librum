@@ -13,17 +13,17 @@ Librum's aim is to make reading as <b>frictionless</b> and <b>enjoyable</b> as p
 
 # Preview
 
-![View](data/app_preview/login_screen.png)
+![login_screen](https://user-images.githubusercontent.com/69865187/218166838-c2cad42a-d1dd-4a2a-a110-411368f7ff65.png)
 Your entry-point to Librum
 
 <br>
 
-![View](data/app_preview/book_reading.png)
+![book_reading](https://user-images.githubusercontent.com/69865187/218166898-9054e579-8cbf-460e-9f35-6178e8666c71.png)
 Enjoy a simple and clean look while reading
 
 <br>
 
-![View](data/app_preview/appearance_settings.png)
+![appearance_settings](https://user-images.githubusercontent.com/69865187/218166919-162da3ed-e5da-4db6-9c12-e9913c374c11.png)
 Make the application look and feel the way you want
 
 <br>
