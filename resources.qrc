@@ -3,7 +3,6 @@
         <file>resources/images/light_mode/decision/check_green_icon.svg</file>
         <file>resources/images/light_mode/decision/check_white_icon.svg</file>
         <file>resources/images/light_mode/decision/plus_purple_icon.svg</file>
-        <file>resources/images/light_mode/decoration/coffee_icon.svg</file>
         <file>resources/images/light_mode/decoration/seed_icon.svg</file>
         <file>resources/images/light_mode/illustrations/add_image_illustration.svg</file>
         <file>resources/images/light_mode/illustrations/book_cover.png</file>
@@ -103,7 +102,6 @@
         <file>resources/images/dark_mode/decision/check_green_icon.svg</file>
         <file>resources/images/dark_mode/decision/check_white_icon.svg</file>
         <file>resources/images/dark_mode/decision/plus_purple_icon.svg</file>
-        <file>resources/images/dark_mode/decoration/coffee_icon.svg</file>
         <file>resources/images/dark_mode/decoration/seed_icon.svg</file>
         <file>resources/images/dark_mode/illustrations/add_image_illustration.svg</file>
         <file>resources/images/dark_mode/illustrations/book_cover.png</file>
