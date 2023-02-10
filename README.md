@@ -28,6 +28,11 @@ Make the application look and feel the way you want
 
 <br>
 
+![about_settings_dark](https://user-images.githubusercontent.com/69865187/218176878-f621669f-9d20-4f92-a9d5-ebb75e877218.png)
+Enjoy a relaxing dark mode
+
+<br>
+
 https://user-images.githubusercontent.com/69865187/204820315-4fccb311-8709-486f-8be8-5277a2bc3be5.mp4
 
 Setup and manage your own library
