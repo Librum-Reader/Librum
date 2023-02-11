@@ -17,21 +17,16 @@ Popup
     closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
     background: Rectangle { color: "transparent" }
     
+    onOpenedChanged: if(opened) listView.forceActiveFocus()
     onAboutToHide:
     {
-        // Prevent closing when tagOptionsPopup is still opened
+        // When clicking the tagOptionsPopup while its over the popup edges,
+        // root automatically closes because of its closing policy. We don't want this.
         if(tagOptionsPopup.opened)
             root.open();
         
-        // Make sure to stop renaming any item before closing
-        let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
-        if(currentItem !== null && currentItem.renameable)
-        {
-            currentItem.stopRenaming(false);
-        }
+        internal.stopRenamingCurrentTag(false);
     }
-    
-    onOpenedChanged: if(opened) listView.forceActiveFocus()
     
     
     ColumnLayout
@@ -84,32 +79,33 @@ Popup
                     boundsBehavior: Flickable.StopAtBounds
                     ScrollBar.vertical: ScrollBar { }
                     model: UserController.tagsModel
-                    
-                    // Close popup when scrolling
-                    onContentYChanged: tagOptionsPopup.close();
-                    
                     delegate: MBaseListItem
                     {
                         width: listView.width
                         containingListview: listView
                         
-                        function getContent()
-                        {
-                            return model.name;
-                        }
-                        
-                        onClicked: (mouse, index) => 
-                                   {
-                                       if(!listView.itemAtIndex(index).renameable)
-                                       {
-                                           internal.selectTag(index);
-                                       }
-                                   }
-                        
-                        onRightClicked: (mouse, index) => internal.openTagOptionsPopup(mouse, index)
-                        
+                        onClicked: internal.selectTag(index);
                         onRenamed: (index, text) => internal.renameTag(index, text)
+                        onRightClicked: (mouse, index) =>
+                                        {
+                                            internal.stopRenamingCurrentTag();
+                                            
+                                            // Calculate tagOptionsPopup position
+                                            let mousePosition = mapToItem(container, mouse.x, mouse.y);
+                                            tagOptionsPopup.x = mousePosition.x + 1;
+                                            tagOptionsPopup.y = mousePosition.y + 6;
+                                            
+                                            // Open tagOptionsPopup
+                                            tagOptionsPopup.index = index;
+                                            tagOptionsPopup.open();
+                                        }
+                        
+                        // Function required by MBaseListItem
+                        function getContent() { return model.name; }
                     }
+                    
+                    // Close popup when scrolling
+                    onContentYChanged: tagOptionsPopup.close();
                 }
             }
         }
@@ -168,7 +164,7 @@ Popup
         id: internal
         
         /*
-          Only innitiate the renaming proccess of tag at @index
+          Innitiate the visual renaming proccess of tag at @index
           */
         function startRenamingTag(index)
         {
@@ -181,10 +177,12 @@ Popup
         
         function renameTag(index, text)
         {
+            // Get tag to rename
             let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
             let tagName = currentItem.getContent();
             let uuid = UserController.getTagUuidForName(tagName);
             
+            // Rename tag
             let success = UserController.renameTag(uuid, text);
             if(success)
             {
@@ -211,9 +209,7 @@ Popup
         
         function selectTag(index)
         {
-            // Stop the renaming the currentItem
-            if(tagOptionsPopup.index != -1 && listView.itemAtIndex(tagOptionsPopup.index).renameable)
-                listView.itemAtIndex(tagOptionsPopup.index).stopRenaming();
+            internal.stopRenamingCurrentTag();
             
             // Set ListView properties
             listView.currentIndex = index;
@@ -225,26 +221,11 @@ Popup
                 BookController.libraryModel.removeFilterTag(listView.currentItem.getContent());
         }
         
-        function openTagOptionsPopup(mouse, index)
+        function stopRenamingCurrentTag(saveText = true)
         {
-            // Stop renaming current tag
-            let currItem = listView.itemAtIndex(index);
-            if(currItem.renameable)
-                currItem.stopRenaming();
-            
-            // Calculate x position
-            let xOffset = 7;
-            tagOptionsPopup.x = mouse.x + xOffset;
-            
-            // Calculate the y position
-            let yOffset = 12;
-            let popupPosition = index*currItem.height + mouse.y;
-            let scrolledDistance = listView.contentY;
-            tagOptionsPopup.y = popupPosition + yOffset - scrolledDistance;
-            
-            // Open tagOptionsPopup
-            tagOptionsPopup.index = index;
-            tagOptionsPopup.open();
+            let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+            if(currentItem !== null && currentItem.renameable)
+                currentItem.stopRenaming(saveText);
         }
     }
     
