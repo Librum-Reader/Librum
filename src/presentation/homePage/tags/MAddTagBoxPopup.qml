@@ -14,19 +14,6 @@ Popup
     property string currentlySelectedData
     signal itemSelected()
     
-    onOpened: listView.currentIndex = -1
-    onAboutToHide:
-    {
-        // Make sure to stop renaming (if something is currently being renamed) when closing
-        let currentItem = listView.itemAtIndex(rightClickMenu.index);
-        if(currentItem !== null && currentItem.renameable)
-        {
-            currentItem.stopRenaming(false);
-        }
-        
-        rightClickMenu.close()
-    }
-    
     implicitWidth: 200
     padding: 8
     focus: true
@@ -39,6 +26,14 @@ Popup
         radius: 4
         antialiasing: true
     }
+    
+    onOpened: listView.currentIndex = -1
+    onAboutToHide:
+    {
+        internal.stopRenamingCurrentTag();
+        tagOptionsPopup.close()
+    }
+    
     
     ColumnLayout
     {
@@ -59,12 +54,7 @@ Popup
             focus: true
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar { }
-            
             model: UserController.tagsModel
-            
-            // Close popup when scrolling
-            onContentYChanged: rightClickMenu.close()
-            
             delegate: MBaseListItem
             {
                 width: listView.width
@@ -74,74 +64,34 @@ Popup
                 fontColor: Style.colorLightText
                 checkBoxStyle: false
                 
-                onClicked: (mouse, index) => listView.selectItem(index)
+                onClicked: (mouse, index) => internal.selectItem(index)
+                onRenamed: internal.renameTag(index, text)
+                onRightClicked: (mouse, index) =>
+                                {
+                                    internal.stopRenamingCurrentTag();
+                                    
+                                    // Calculate the popup position
+                                    let absoluteMousePosition = mapToItem(mainLayout, mouse.x, mouse.y);
+                                    tagOptionsPopup.x = absoluteMousePosition.x + 2;
+                                    tagOptionsPopup.y = absoluteMousePosition.y + 2;
+                                    
+                                    // Open the popup
+                                    tagOptionsPopup.index = index;
+                                    tagOptionsPopup.open();
+                                }
                 
-                onRightClicked:
-                    (mouse, index) =>
-                    {
-                        // Stop editing for previous item
-                        let currItem = listView.itemAtIndex(index);
-                        if(currItem !== null && currItem.renameable)
-                        {
-                            currItem.stopRenaming();
-                        }
-                        
-                        let absoluteMousePosition = mapToItem(mainLayout, mouse.x, mouse.y);
-                        
-                        rightClickMenu.x = absoluteMousePosition.x + 2;
-                        rightClickMenu.y = absoluteMousePosition.y + 2;
-                        rightClickMenu.index = index;
-                        rightClickMenu.open();
-                    }
-                
-                onRenamed: (index, text) =>
-                           {
-                               let currentItem = listView.itemAtIndex(rightClickMenu.index);
-                               let tagName = currentItem.getContent();
-                               let uuid = UserController.getTagUuidForName(tagName);
-                               
-                               let success = UserController.renameTag(uuid, text);
-                               if(success)
-                               {
-                                   let oldText = rightClickMenu.originalTextOfLastEdited;
-                                   BookController.renameTags(oldText, text);
-                               }
-                           }
-                
-                function getContent()
-                {
-                    return model.name;
-                }
+                // Function required by MBaseListItem
+                function getContent() { return model.name; }
             }
             
-            
-            Keys.onReturnPressed:
-            {
-                if(listView.currentIndex !== -1)
-                    selectItem(listView.currentIndex);
-            }
-            
-            
-            function selectItem(index)
-            {
-                // Stop the renaming of the currentItem
-                let oldItem = listView.itemAtIndex(rightClickMenu.index);
-                if(oldItem !== null && oldItem.renameable)
-                    oldItem.stopRenaming();
-                
-                let newSelected = listView.itemAtIndex(index);
-                
-                root.currentlySelectedData = newSelected.getContent();
-                root.itemSelected();
-                root.close();
-            }
+            // Close popup when scrolling
+            onContentYChanged: tagOptionsPopup.close()
         }
     }
     
-    
     MRightClickMenu
     {
-        id: rightClickMenu
+        id: tagOptionsPopup
         property int index
         property string originalTextOfLastEdited
         
@@ -152,56 +102,105 @@ Popup
         {
             MRightClickMenuItem
             {
-                width: rightClickMenu.width
+                width: tagOptionsPopup.width
                 imagePath: Icons.plusSquare
                 imageSize: 17
                 text: "Add"
                 
                 onClicked:
                 {
-                    listView.selectItem(rightClickMenu.index);
-                    rightClickMenu.close();
+                    internal.selectItem(tagOptionsPopup.index);
+                    tagOptionsPopup.close();
                 }
             }
             
             MRightClickMenuItem
             {
-                width: rightClickMenu.width
+                width: tagOptionsPopup.width
                 imagePath: Icons.edit
                 imageSize: 17
                 text: "Rename"
                 
-                onClicked:
-                {
-                    let currentItem = listView.itemAtIndex(rightClickMenu.index);
-                    rightClickMenu.originalTextOfLastEdited = currentItem.getContent();
-                    
-                    currentItem.startRenaming();
-                    rightClickMenu.close();
-                }
+                onClicked: internal.startRenamingTag(tagOptionsPopup.index)
             }
             
             MRightClickMenuItem
             {
-                width: rightClickMenu.width
+                width: tagOptionsPopup.width
                 imagePath: Icons.trash
                 imageSize: 16
                 text: "Delete"
                 
-                onClicked:
-                {
-                    let tagName = listView.itemAtIndex(rightClickMenu.index).getContent();
-                    let uuid = UserController.getTagUuidForName(tagName);
-                    
-                    let success = UserController.deleteTag(uuid);
-                    if(success)
-                    {
-                        BookController.removeAllTagsWithUuid(uuid);
-                    }
-                    
-                    rightClickMenu.close();
-                }
+                onClicked: internal.deleteTag(tagOptionsPopup.index)
             }
+        }
+    }
+
+    QtObject
+    {
+        id: internal
+        
+        /*
+          Innitiate the visual renaming proccess of tag at @index
+          */
+        function startRenamingTag(index)
+        {
+            let currentItem = listView.itemAtIndex(index);
+            tagOptionsPopup.originalTextOfLastEdited = currentItem.getContent();
+            
+            currentItem.startRenaming();
+            tagOptionsPopup.close();
+        }
+        
+        function renameTag(index, text)
+        {
+            // Get tag to rename
+            let currentItem = listView.itemAtIndex(index);
+            let tagName = currentItem.getContent();
+            let uuid = UserController.getTagUuidForName(tagName);
+            
+            // Rename tag
+            let success = UserController.renameTag(uuid, text);
+            if(success)
+            {
+                let oldText = tagOptionsPopup.originalTextOfLastEdited;
+                BookController.renameTags(oldText, text);
+            }
+        }
+        
+        function deleteTag(index)
+        {
+            let tagName = listView.itemAtIndex(index).getContent();
+            let uuid = UserController.getTagUuidForName(tagName);
+            
+            let success = UserController.deleteTag(uuid);
+            if(success)
+            {
+                BookController.removeAllTagsWithUuid(uuid);
+            }
+            
+            tagOptionsPopup.close();
+        }
+        
+        function selectItem(index)
+        {
+            // Stop the renaming of the currentItem
+            let oldItem = listView.itemAtIndex(tagOptionsPopup.index);
+            if(oldItem !== null && oldItem.renameable)
+                oldItem.stopRenaming();
+            
+            let newSelected = listView.itemAtIndex(index);
+            
+            root.currentlySelectedData = newSelected.getContent();
+            root.itemSelected();
+            root.close();
+        }
+        
+        function stopRenamingCurrentTag(saveText = true)
+        {
+            let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+            if(currentItem !== null && currentItem.renameable)
+                currentItem.stopRenaming(saveText);
         }
     }
 }
