@@ -85,6 +85,9 @@ Popup
                     ScrollBar.vertical: ScrollBar { }
                     model: UserController.tagsModel
                     
+                    // Close popup when scrolling
+                    onContentYChanged: tagOptionsPopup.close();
+                    
                     delegate: MBaseListItem
                     {
                         width: listView.width
@@ -229,10 +232,15 @@ Popup
             if(currItem.renameable)
                 currItem.stopRenaming();
             
-            // Calculate tagOptionsPopup position
-            let absoluteMousePosition = mapToItem(container, mouse.x, mouse.y);
-            tagOptionsPopup.x = absoluteMousePosition.x + 2;
-            tagOptionsPopup.y = absoluteMousePosition.y + 6;
+            // Calculate x position
+            let xOffset = 7;
+            tagOptionsPopup.x = mouse.x + xOffset;
+            
+            // Calculate the y position
+            let yOffset = 12;
+            let popupPosition = index*currItem.height + mouse.y;
+            let scrolledDistance = listView.contentY;
+            tagOptionsPopup.y = popupPosition + yOffset - scrolledDistance;
             
             // Open tagOptionsPopup
             tagOptionsPopup.index = index;

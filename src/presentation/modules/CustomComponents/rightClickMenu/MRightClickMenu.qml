@@ -13,7 +13,6 @@ Popup
 {
     id: root
     property ObjectModel objectModel
-    property var mouseArea
     
     implicitWidth: 170
     focus: true
