@@ -62,6 +62,9 @@ Popup
             
             model: UserController.tagsModel
             
+            // Close popup when scrolling
+            onContentYChanged: rightClickMenu.close()
+            
             delegate: MBaseListItem
             {
                 width: listView.width
@@ -70,11 +73,6 @@ Popup
                 fontSize: 11.5
                 fontColor: Style.colorLightText
                 checkBoxStyle: false
-                
-                function getContent()
-                {
-                    return model.name;
-                }
                 
                 onClicked: (mouse, index) => listView.selectItem(index)
                 
@@ -109,6 +107,11 @@ Popup
                                    BookController.renameTags(oldText, text);
                                }
                            }
+                
+                function getContent()
+                {
+                    return model.name;
+                }
             }
             
             
