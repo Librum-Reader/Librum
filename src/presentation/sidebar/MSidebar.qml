@@ -62,7 +62,24 @@ Item
         id: container
         anchors.fill: parent
         padding: 0
-        background: Rectangle { color: Style.colorContainerBackground }
+        background: RowLayout
+        {
+            spacing: 0
+            
+            Rectangle
+            {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                color: Style.colorContainerBackground
+            }
+            
+            Rectangle
+            {
+                Layout.preferredWidth:  1
+                Layout.fillHeight: true
+                color: Style.colorContainerBorder
+            }
+        }
         
         
         MFlickWrapper
