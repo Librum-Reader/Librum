@@ -9,7 +9,8 @@ Librum provides a variety of features to make you as productive as you can be, t
 Librum's aim is to make reading as <b>frictionless</b> and <b>enjoyable</b> as possible for you.
 
 <br>
-<b>Note</b>: Librum is still in early development, some of the mentioned features may not yet be ready to use.
+<b>Note</b>: Librum is still in development, the servers are <b>not</b> public, and thus Librum is not yet available for public use.
+A beta release will be available soon, bringing the servers online and making the application available to end users. 
 
 # Preview
 
