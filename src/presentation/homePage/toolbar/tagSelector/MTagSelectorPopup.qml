@@ -178,7 +178,7 @@ Popup
         function renameTag(index, text)
         {
             // Get tag to rename
-            let currentItem = listView.itemAtIndex(tagOptionsPopup.index);
+            let currentItem = listView.itemAtIndex(index);
             let tagName = currentItem.getContent();
             let uuid = UserController.getTagUuidForName(tagName);
             
