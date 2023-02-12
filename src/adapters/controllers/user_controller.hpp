@@ -16,7 +16,7 @@ public:
 
     void loadUser() override;
 
-    QString getTagUuidForName(const QString& name) override;
+    QString getTagUuidForName(QString name) override;
     QString addTag(const QString& name) override;
     bool deleteTag(const QString& uuid) override;
     bool renameTag(const QString& uuid, const QString& newName) override;
