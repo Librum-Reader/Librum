@@ -167,6 +167,7 @@ Item
         id: popup
         width: box.width
         y: root.height + 6
+        closePolicy: Popup.CloseOnPressOutsideParent | Popup.CloseOnEscape
         
         onItemSelected: root.addTag(currentlySelectedData)
         onAboutToShow: openAnim.start();
