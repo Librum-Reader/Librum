@@ -1,6 +1,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <QString>
+#include "gmock/gmock.h"
 #include "i_user_storage_gateway.hpp"
 #include "user_service.hpp"
 
@@ -233,6 +234,8 @@ TEST_F(AUserService, SucceedsDeletingATag)
     entities::Tag tag("SomeTag");
     userService->addTag(tag);
 
+    // Expect
+    EXPECT_CALL(userStorageGatewayMock, deleteTag(_, _)).Times(1);
 
     // Act
     auto result = userService->deleteTag(tag.getUuid());
@@ -260,6 +263,8 @@ TEST_F(AUserService, SucceedsRenamingATag)
     entities::Tag tag(tagName);
     userService->addTag(tag);
 
+    // Expect
+    EXPECT_CALL(userStorageGatewayMock, renameTag(_, _, _)).Times(1);
 
     // Act
     auto result = userService->renameTag(tag.getUuid(), newTagName);
@@ -268,6 +273,39 @@ TEST_F(AUserService, SucceedsRenamingATag)
     // Assert
     EXPECT_TRUE(result);
     EXPECT_EQ(newTagName, resultTags[0].getName());
+}
+
+TEST_F(AUserService, SucceedsRenamingATagIfNewNameIsUncapitalized)
+{
+    // Arrange
+    QString tagName = "SomeTag";
+    QString newTagName = "newName";  // Uncapitalized
+    entities::Tag tag(tagName);
+    userService->addTag(tag);
+
+    QString expectedResult = newTagName;
+    expectedResult[0] = expectedResult[0].toUpper();
+
+    // Expect
+    QString argPassedToMock;
+    EXPECT_CALL(userStorageGatewayMock, renameTag(_, _, _))
+        .Times(1)
+        .WillOnce(Invoke(
+            [&argPassedToMock](const QString&, const QUuid&,
+                               const QString& tagName)
+            {
+                argPassedToMock = tagName;
+            }));
+
+
+    // Act
+    auto result = userService->renameTag(tag.getUuid(), newTagName);
+    auto resultTags = userService->getTags();
+
+    // Assert
+    EXPECT_TRUE(result);
+    // Make sure mock gets new tag name capitalized
+    EXPECT_EQ(expectedResult, argPassedToMock);
 }
 
 TEST_F(AUserService, FailsRenamingATagIfTagDoesNotExist)
