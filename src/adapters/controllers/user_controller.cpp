@@ -41,8 +41,11 @@ void UserController::loadUser()
     m_userService->loadUser();
 }
 
-QString UserController::getTagUuidForName(const QString& name)
+QString UserController::getTagUuidForName(QString name)
 {
+    // Tags are always capitalized, make sure to search for the correct one
+    name[0] = name[0].toUpper();
+
     for(const auto& tag : m_userService->getTags())
     {
         if(tag.getName() == name)
