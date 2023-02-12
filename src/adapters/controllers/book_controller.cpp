@@ -161,7 +161,12 @@ int BookController::addTag(const QString& bookUuid, const QString& tagName,
                            const QString& tagUuid)
 {
     if(QUuid(tagUuid).isNull())
+    {
+        qWarning() << QString("Adding tag with name: %1 to book with uuid: %2 "
+                              "failed. The tag does not have a valid uuid")
+                          .arg(tagName, bookUuid);
         return static_cast<int>(BookOperationStatus::OperationFailed);
+    }
 
     Tag tag(tagName, tagUuid);
     auto result = m_bookService->addTag(bookUuid, tag);
