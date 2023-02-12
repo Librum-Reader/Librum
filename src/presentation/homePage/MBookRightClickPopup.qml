@@ -19,7 +19,7 @@ MRightClickMenu
     signal uninstallClicked()
     signal deleteClicked()
     
-    implicitHeight: 245
+    implicitHeight: internal.bookDownloaded ? 245 : 181 
     
     onOpened: internal.bookDownloaded = Globals.selectedBook.downloaded
     
