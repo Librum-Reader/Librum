@@ -123,12 +123,10 @@ Item
                             if(popup.opened)
                             {
                                 popup.close();
-                                closeAnim.start();
                                 return;
                             }
                                 
                             popup.open();
-                            openAnim.start();
                         }
                     }
                 }
@@ -171,6 +169,8 @@ Item
         y: root.height + 6
         
         onItemSelected: root.addTag(currentlySelectedData)
+        onAboutToShow: openAnim.start();
+        onAboutToHide: closeAnim.start();
     }
     
     function close()
