@@ -26,7 +26,9 @@ public:
         RecentlyAdded = Qt::UserRole + 1,
         Title,
         Authors,
-        LastOpened
+        LastOpened,
+        Percentage,
+        SortRole_END
     };
 
     Q_ENUM(SortRole);
@@ -64,6 +66,8 @@ private:
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
+    bool higherProgressPercentage(const QModelIndex& left,
+                                  const QModelIndex& right) const;
     bool filterAcceptsTags(const QModelIndex& bookIndex) const;
     std::vector<adapters::dtos::TagDto> getTags(const QModelIndex& index) const;
     bool bookContainsAllTags(std::vector<adapters::dtos::TagDto> tags) const;

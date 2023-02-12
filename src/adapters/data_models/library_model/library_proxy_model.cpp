@@ -53,6 +53,15 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     {
         return addedToLibraryAfter(left, right);
     }
+    case SortRole::Percentage:
+    {
+        return higherProgressPercentage(left, right);
+    }
+    case SortRole::SortRole_END:
+    {
+        qCritical() << QString("Sorting called with role: 'SortRole_END'");
+        return false;
+    }
     default:
         return false;
     }
@@ -128,9 +137,8 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 void LibraryProxyModel::setSortRole(int newRole)
 {
     int firstRole = SortRole::RecentlyAdded;
-    int lastRole = SortRole::LastOpened;
 
-    bool inRange = firstRole <= newRole && newRole <= lastRole;
+    bool inRange = firstRole <= newRole && newRole <= SortRole::SortRole_END;
     if(!inRange)
         return;
 
@@ -225,6 +233,17 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
         return true;
 
     return lhsAddedDate > rhsAddedDate;
+}
+
+bool LibraryProxyModel::higherProgressPercentage(const QModelIndex& left,
+                                                 const QModelIndex& right) const
+{
+    auto lhs =
+        sourceModel()->data(left, LibraryModel::BookProgressPercentageRole);
+    auto rhs =
+        sourceModel()->data(right, LibraryModel::BookProgressPercentageRole);
+
+    return lhs.toInt() >= rhs.toInt();
 }
 
 bool LibraryProxyModel::filterAcceptsTags(const QModelIndex& bookIndex) const
