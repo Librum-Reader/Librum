@@ -76,9 +76,9 @@ void SettingsService::resetSettingGroup(SettingGroups group)
         }
         else
         {
-            qWarning() << "Failed converting setting-key from default settings "
-                          "file with value: "
-                       << defaultSettingKey << " to an enum.";
+            qWarning() << QString("Failed converting setting-key from default "
+                                  "settings file with value: %1 to an enum.")
+                              .arg(defaultSettingKey);
             continue;
         }
     }
@@ -140,12 +140,8 @@ void SettingsService::loadDefaultSettings(SettingGroups group,
 
     for(const auto& defaultSettingKey : defaultSettings.keys())
     {
-        // Only add default setting, if it does not already exist
-        auto groupName = getNameForEnumValue(group);
-        m_settings->beginGroup(groupName);
-        bool alreadyContainsKey = m_settings->contains(defaultSettingKey);
-        m_settings->endGroup();
-        if(alreadyContainsKey)
+        // Only load default settings which dont yet exist
+        if(defaultSettingAlreadyExists(defaultSettingKey, group))
             continue;
 
         auto defaultSettingValue =
@@ -158,12 +154,23 @@ void SettingsService::loadDefaultSettings(SettingGroups group,
         }
         else
         {
-            qWarning() << "Failed converting setting-key from default settings "
-                          "file with value: "
-                       << defaultSettingKey << " to an enum.";
-            continue;
+            qWarning() << QString("Failed converting setting-key from default "
+                                  "settings file with value: %1 to an enum.")
+                              .arg(defaultSettingKey);
         }
     }
+}
+
+bool SettingsService::defaultSettingAlreadyExists(const QString& key,
+                                                  SettingGroups group)
+{
+    auto groupName = getNameForEnumValue(group);
+
+    m_settings->beginGroup(groupName);
+    bool exists = m_settings->contains(key);
+    m_settings->endGroup();
+
+    return exists;
 }
 
 QJsonObject SettingsService::getDefaultSettings(const QString& path)
@@ -171,7 +178,8 @@ QJsonObject SettingsService::getDefaultSettings(const QString& path)
     QFile defaultSettingsFile(path);
     if(!defaultSettingsFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        qWarning() << "Failed to open default settings file: " << path << "!";
+        qWarning() << QString("Failed opening the default settings file: %1")
+                          .arg(path);
     }
 
     QByteArray rawJson = defaultSettingsFile.readAll();

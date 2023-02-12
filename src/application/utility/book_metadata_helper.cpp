@@ -24,7 +24,7 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
     auto setupSucceeded = setupDocument(filePath);
     if(!setupSucceeded)
     {
-        qWarning() << "Failed to open document at path: " << filePath << ".";
+        qWarning() << QString("Failed opening document at: %1.").arg(filePath);
         return std::nullopt;
     }
 

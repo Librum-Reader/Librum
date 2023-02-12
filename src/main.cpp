@@ -191,13 +191,14 @@ void loadFonts()
         {
             int res = QFontDatabase::addApplicationFont(it.next());
             if(res == -1)
-                qWarning() << "Loading font file: " + it.fileName() +
-                                  " failed.";
+                qWarning() << QString("Loading font file: %1 failed.")
+                                  .arg(it.fileName());
         }
     }
     else
     {
-        qWarning() << "Unable to load application fonts from " + fontsPath;
+        qWarning() << QString("Unable to load application fonts from %1")
+                          .arg(fontsPath);
     }
 
 

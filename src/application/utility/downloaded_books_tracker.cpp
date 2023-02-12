@@ -25,9 +25,9 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
         QFile metaFile(libraryDir.filePath(metaFileName));
         if(!metaFile.open(QFile::ReadOnly | QIODevice::Text))
         {
-            qWarning() << "Failed opening .libmeta file at: "
-                       << metaFile.fileName()
-                       << " for operation 'getTrackedBooks'";
+            qWarning() << QString("Getting tracked book failed."
+                                  "Failed opening .libmeta file at: %1")
+                              .arg(metaFile.fileName());
             continue;
         }
 
@@ -53,8 +53,9 @@ std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
     QFile metaFile(libraryDir.path() + "/" + fileName + m_fileExtension);
     if(!metaFile.open(QFile::ReadOnly))
     {
-        qWarning() << "Failed opening .libmeta file at: " << metaFile.fileName()
-                   << " for operation 'getTrackedBook'";
+        qWarning() << QString("Getting tracked book failed."
+                              "Failed opening .libmeta file at: %1")
+                          .arg(metaFile.fileName());
         return std::nullopt;
     }
 
@@ -75,8 +76,9 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
 
     if(file.exists() || !file.open(QFile::WriteOnly))
     {
-        qWarning() << "Failed opening .libmeta file at: " << file.fileName()
-                   << " for operation 'trackBook'";
+        qWarning() << QString("Tracking book failed."
+                              "Failed opening .libmeta file at: %1")
+                          .arg(file.fileName());
         return false;
     }
 
@@ -95,8 +97,9 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
     auto success = libraryDir.remove(fileToUntrack);
     if(!success)
     {
-        qWarning() << "Failed removing .libmeta file called: " << fileToUntrack
-                   << " for operation 'untrackBook'";
+        qWarning() << QString("Untracking book failed."
+                              "Failed deleting .libmeta file: %1")
+                          .arg(fileToUntrack);
     }
 
     return success;
@@ -139,8 +142,8 @@ QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
     auto jsonDoc = QJsonDocument::fromJson(data, &parseError);
     if(parseError.error != QJsonParseError::NoError)
     {
-        qWarning() << "Error parsing .libmeta file:"
-                   << parseError.errorString();
+        qWarning() << QString("Error parsing .libmeta file: %1")
+                          .arg(parseError.errorString());
     }
 
     return jsonDoc;

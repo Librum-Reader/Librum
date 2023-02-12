@@ -40,7 +40,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     auto bookMetaData = m_bookMetadataHelper->getBookMetaData(filePath);
     if(!bookMetaData)
     {
-        qWarning() << "Could not open book at path: " << filePath;
+        qWarning() << QString("Could not open book at path: %1 ").arg(filePath);
         return BookOperationStatus::OpeningBookFailed;
     }
 
@@ -72,8 +72,9 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
     if(!getBook(uuid))
     {
-        qWarning() << "Could not delete book with uuid: " << uuid
-                   << ". The book was not found.";
+        qWarning() << QString("Could not delete book with uuid: %1. "
+                              "No book with this uuid exists.")
+                          .arg(uuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
@@ -100,8 +101,9 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     auto book = getBook(uuid);
     if(!book)
     {
-        qWarning() << "Could not uninstall book with uuid: " << uuid
-                   << ". No book with this uuid exists.";
+        qWarning() << QString("Could not uninstall book with uuid: %1. "
+                              "No book with this uuid exists.")
+                          .arg(uuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
@@ -119,8 +121,9 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     auto book = getBook(newBook.getUuid());
     if(!book)
     {
-        qWarning() << "Could not update book with uuid: " << newBook.getUuid()
-                   << ". No book with this uuid exists.";
+        qWarning() << QString("Failed updating book with uuid: %1."
+                              "No book with this uuid exists.")
+                          .arg(newBook.getUuid().toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
@@ -148,16 +151,17 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
     auto book = getBook(uuid);
     if(!book)
     {
-        qWarning() << "Adding tag to book with uuid: " << uuid << " failed."
-                   << " No book with this uuid exists.";
+        qWarning() << QString("Adding tag to book with uuid: %1 failed. No "
+                              "book with this uuid exists.")
+                          .arg(uuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
     if(!book->addTag(tag))
     {
-        qWarning() << "Adding tag called: " << tag.getName()
-                   << " to book with uuid: " << uuid << " failed."
-                   << " A tag with this name already exists.";
+        qWarning() << QString("Adding tag called: %1 to book with uuid: %2 "
+                              "failed. A tag with this name already exists.")
+                          .arg(tag.getName(), uuid.toString());
         return BookOperationStatus::TagAlreadyExists;
     }
 
@@ -176,16 +180,17 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
     auto book = getBook(bookUuid);
     if(!book)
     {
-        qWarning() << "Removing tag from book with uuid: " << bookUuid
-                   << " failed. No book with this uuid exists.";
+        qWarning() << QString("Removing tag from book with uuid: %1 failed. No "
+                              "book with this uuid exists.")
+                          .arg(bookUuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
     if(!book->removeTag(tagUuid))
     {
-        qWarning() << "Removing tag with uuid: " << tagUuid
-                   << " from book with uuid: " << bookUuid << " failed."
-                   << " No tag with this uuid exists.";
+        qWarning() << QString("Removing tag with uuid: %1 from book with "
+                              "uuid: %2 failed. No tag with this uuid exists.")
+                          .arg(tagUuid.toString(), bookUuid.toString());
         return BookOperationStatus::TagDoesNotExist;
     }
 
@@ -205,17 +210,18 @@ BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
     auto book = getBook(bookUuid);
     if(!book)
     {
-        qWarning() << "Renaming tag from book with uuid: " << bookUuid
-                   << " failed. No book with this uuid exists.";
+        qWarning() << QString("Renaming tag from book with uuid: %1 failed."
+                              "No book with this uuid exists.")
+                          .arg(bookUuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
     if(!book->renameTag(tagUuid, newName))
     {
-        qWarning() << "Renaming tag with uuid: " << tagUuid
-                   << " from book with uuid: " << bookUuid << " failed."
-                   << " No tag with this uuid exists or a tag with this name"
-                      " already exists.";
+        qWarning() << QString("Renaming tag with uuid: %1 from book with "
+                              "uuid: %2 failed. No tag with this uuid exists "
+                              "or a tag with this name already exists.")
+                          .arg(tagUuid.toString(), bookUuid.toString());
         return BookOperationStatus::TagDoesNotExist;
     }
 
@@ -279,8 +285,9 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
     auto book = getBook(uuid);
     if(!book)
     {
-        qWarning() << "Saving book with uuid: " << uuid << " to file failed."
-                   << " No book with this uuid exists.";
+        qWarning() << QString("Saving book with uuid: %1 to folder %2 failed."
+                              " No book with this uuid exists.")
+                          .arg(uuid.toString(), pathToFolder.path());
         return BookOperationStatus::BookDoesNotExist;
     }
 
@@ -290,9 +297,10 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
     auto result = QFile::copy(currentBookPath.path(), destinaton.path());
     if(!result)
     {
-        qWarning() << "Saving book with uuid: " << uuid
-                   << " to folder: " << pathToFolder.toLocalFile() << " failed."
-                   << " No book with this uuid exists.";
+        qWarning() << QString("Saving book with uuid: %1 to folder: %2 failed. "
+                              "No book with this uuid exists.")
+                          .arg(uuid.toString(), pathToFolder.path());
+
         return BookOperationStatus::OperationFailed;
     }
 

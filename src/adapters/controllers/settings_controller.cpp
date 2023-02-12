@@ -52,7 +52,7 @@ bool SettingsController::keyIsValid(int key)
     int settingKeysEnd = static_cast<int>(SettingKeys::SettingKeys_END);
     if(key >= settingKeysEnd || key < 0)
     {
-        qWarning() << "Invalid setting-key: " << key;
+        qWarning() << QString("Invalid setting-key: %1").arg(key);
         return false;
     }
 
@@ -64,7 +64,7 @@ bool SettingsController::groupIsValid(int group)
     int settingGroupsEnd = static_cast<int>(SettingGroups::SettingGroups_END);
     if(group >= settingGroupsEnd || group < 0)
     {
-        qWarning() << "Invalid setting-group: " << group;
+        qWarning() << QString("Invalid setting-group: %1").arg(group);
         return false;
     }
 

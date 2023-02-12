@@ -150,8 +150,8 @@ ServerReplyStatus UserStorageAccess::validateServerReply(int expectedStatusCode,
     if(replyHasError || expectedStatusCode != statusCode)
     {
         auto errorMessage = reply->readAll();
-        qWarning() << "User storage error: " << reply->errorString()
-                   << "\nServer reply: " << errorMessage;
+        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
+                          .arg(reply->errorString(), errorMessage);
 
         return ServerReplyStatus {
             .success = false,

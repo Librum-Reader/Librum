@@ -96,7 +96,11 @@ QUuid UserService::addTag(const domain::entities::Tag& tag)
 {
     auto success = m_user.addTag(tag);
     if(!success)
+    {
+        qWarning() << QString("Failed adding tag with name: %1 to user.")
+                          .arg(tag.getName());
         return QUuid();
+    }
 
     return tag.getUuid();
 }
@@ -104,22 +108,31 @@ QUuid UserService::addTag(const domain::entities::Tag& tag)
 bool UserService::deleteTag(const QUuid& uuid)
 {
     auto success = m_user.deleteTag(uuid);
-    if(success)
-        m_userStorageGateway->deleteTag(m_authenticationToken, uuid);
+    if(!success)
+    {
+        qWarning() << QString("Failed deleting tag with uuid: %1 from user.")
+                          .arg(uuid.toString());
+        return false;
+    }
 
-    return success;
+    m_userStorageGateway->deleteTag(m_authenticationToken, uuid);
+    return true;
 }
 
 bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 {
     auto success = m_user.renameTag(uuid, newName);
-    if(success)
+    if(!success)
     {
-        m_userStorageGateway->renameTag(m_authenticationToken, uuid,
-                                        m_user.getTagByUuid(uuid)->getName());
+        qWarning() << QString("Failed renaming tag with uuid: %1 with new "
+                              "name: %2 from user.")
+                          .arg(uuid.toString(), newName);
+        return false;
     }
 
-    return success;
+    m_userStorageGateway->renameTag(m_authenticationToken, uuid,
+                                    m_user.getTagByUuid(uuid)->getName());
+    return true;
 }
 
 void UserService::proccessUserInformation(const domain::entities::User& user,

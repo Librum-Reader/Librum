@@ -1,4 +1,5 @@
 #include "authentication_service.hpp"
+#include <QDebug>
 #include "i_authentication_gateway.hpp"
 
 
@@ -24,6 +25,8 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
     if(!loginModel.isValid())
     {
+        qWarning() << "Login failed due to invalid login model";
+
         emit loginFinished(false);
         return;
     }
@@ -43,6 +46,7 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
     if(status != RegisterModel::RegistrationResult::Valid)
     {
         QString failureReason = registerModel.generateErrorMessage(status);
+        qWarning() << QString("Failed registration: %1").arg(failureReason);
         emit registrationFinished(false, failureReason);
         return;
     }
@@ -54,6 +58,7 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
 {
     if(token.isEmpty())
     {
+        qWarning() << "Authentication token is empty";
         emit loginFinished(false);
         return;
     }

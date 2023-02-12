@@ -55,8 +55,8 @@ ServerReplyStatus AuthenticationAccess::validateServerReply(
     if(replyHasError || statusCode != expectedStatusCode)
     {
         QString errorMessage = m_reply->readAll();
-        qWarning() << "Authentication error: " << m_reply->errorString()
-                   << "\nServer reply: " << errorMessage;
+        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
+                          .arg(m_reply->errorString(), errorMessage);
 
         return ServerReplyStatus {
             .success = false,

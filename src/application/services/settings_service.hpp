@@ -31,6 +31,7 @@ private:
     void loadDefaultSettings(SettingGroups group, const QString& filePath);
     QJsonObject getDefaultSettings(const QString& path);
     bool settingsAreValid();
+    bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
 
     template<typename Enum>
     QString getNameForEnumValue(Enum value) const;

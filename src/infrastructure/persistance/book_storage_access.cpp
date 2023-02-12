@@ -142,8 +142,8 @@ ServerReplyStatus BookStorageAccess::validateServerReply(int expectedStatusCode,
        expectedStatusCode != statusCode)
     {
         auto errorMessage = reply->readAll();
-        qWarning() << "Book storage error: " << reply->errorString()
-                   << "\nServer reply: " << errorMessage;
+        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
+                          .arg(reply->errorString(), errorMessage);
 
         return ServerReplyStatus {
             .success = false,
