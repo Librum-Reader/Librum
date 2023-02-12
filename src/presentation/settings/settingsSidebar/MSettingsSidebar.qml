@@ -29,10 +29,18 @@ Item
       */
     Rectangle
     {
-        id: borderRect
+        id: background
         anchors.fill: parent
         color: Style.colorSettingsSidebarBackground
-        border.color: Style.colorContainerBorder
+        
+        Rectangle
+        {
+            id: rightBorder
+            width: 1
+            height: parent.height
+            anchors.right: parent.right
+            color: Style.colorContainerBorder
+        }
     }
     
     MFlickWrapper
