@@ -79,10 +79,6 @@
         <file>modules/CustomComponents/MSpinbox.qml</file>
         <file>modules/CustomComponents/MRadioButton.qml</file>
         <file>modules/CustomComponents/MRadioButtonSelector.qml</file>
-        <file>homePage/tags/MManageTagsPopup.qml</file>
-        <file>homePage/tags/MAddTagBox.qml</file>
-        <file>homePage/tags/MAddTagBoxPopup.qml</file>
-        <file>homePage/tags/MTagItem.qml</file>
         <file>homePage/MBookDetailsPopup.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
@@ -96,5 +92,9 @@
         <file>homePage/MNoBookSatisfiesFilterItem.qml</file>
         <file>PageNavigationLogic.js</file>
         <file>modules/CustomComponents/rightClickMenu/PopupPositionLogic.js</file>
+        <file>homePage/manageTagsPopup/MAddTagBox.qml</file>
+        <file>homePage/manageTagsPopup/MAddTagBoxPopup.qml</file>
+        <file>homePage/manageTagsPopup/MManageTagsPopup.qml</file>
+        <file>homePage/manageTagsPopup/MTagItem.qml</file>
     </qresource>
 </RCC>

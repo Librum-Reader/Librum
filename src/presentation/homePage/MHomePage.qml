@@ -9,7 +9,7 @@ import Librum.icons 1.0
 import Librum.controllers 1.0
 import Librum.globals 1.0
 import "toolbar"
-import "tags"
+import "manageTagsPopup"
 
 
 Page
