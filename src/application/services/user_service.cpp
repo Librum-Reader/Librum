@@ -114,7 +114,10 @@ bool UserService::renameTag(const QUuid& uuid, const QString& newName)
 {
     auto success = m_user.renameTag(uuid, newName);
     if(success)
-        m_userStorageGateway->renameTag(m_authenticationToken, uuid, newName);
+    {
+        m_userStorageGateway->renameTag(m_authenticationToken, uuid,
+                                        m_user.getTagByUuid(uuid)->getName());
+    }
 
     return success;
 }

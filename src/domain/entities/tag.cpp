@@ -6,8 +6,7 @@ namespace domain::entities
 Tag::Tag(const QString& name, const QString& uuid) :
     m_name(name)
 {
-    // Capitalize 'm_name' by default
-    m_name[0] = m_name[0].toUpper();
+    capitalizeName(m_name);
 
     // Generate uuid if it's not provided, else assign
     if(uuid.isEmpty())
@@ -33,6 +32,7 @@ const QString& Tag::getName() const
 
 void Tag::setName(QString newName)
 {
+    capitalizeName(newName);
     m_name = newName;
 }
 
@@ -61,6 +61,11 @@ Tag Tag::fromJson(const QJsonObject& jsonObject)
     Tag tag(name, guid);
 
     return tag;
+}
+
+void Tag::capitalizeName(QString& tagName)
+{
+    tagName[0] = tagName[0].toUpper();
 }
 
 }  // namespace domain::entities

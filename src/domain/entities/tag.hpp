@@ -25,6 +25,9 @@ public:
     static Tag fromJson(const QJsonObject& jsonObject);
 
 private:
+    // Tag names should always start with a capital letter
+    void capitalizeName(QString& tagName);
+
     QUuid m_uuid;
     QString m_name;
 };
