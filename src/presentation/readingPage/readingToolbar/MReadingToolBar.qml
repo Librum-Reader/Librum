@@ -137,13 +137,9 @@ Pane
         Label
         {
             id: bookTitle
-            // Calculate the padding to position the label in the middle
-            property int paddingToCenter: - backButton.width - chapterButton.width - bookmarksButton.width 
-                                          - currentPageButton.width - layout.spacing*5 + Window.width / 2 - contentWidth / 2
-            
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
-            leftPadding: paddingToCenter
+            horizontalAlignment: Text.AlignHCenter
             text: root.bookTitle
             color: Style.colorTitle
             font.weight: Font.DemiBold
