@@ -1,7 +1,5 @@
 #include <QObject>
 #include <QVariant>
-#include "setting_groups.hpp"
-#include "setting_keys.hpp"
 #pragma once
 
 namespace adapters
