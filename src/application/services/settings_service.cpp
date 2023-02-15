@@ -204,7 +204,7 @@ std::vector<std::pair<QString, QVariant>> SettingsService::getSettingsForGroup(
     for(auto& key : keys)
     {
         auto value = m_settings->value(key);
-        if(!value.isValid())
+        if(!value.isNull())
         {
             qCritical() << QString("Failed reading setting with name: %1 and "
                                    "group: %2")
@@ -216,7 +216,6 @@ std::vector<std::pair<QString, QVariant>> SettingsService::getSettingsForGroup(
     }
 
     m_settings->endGroup();
-
     return result;
 }
 
