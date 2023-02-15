@@ -142,17 +142,6 @@ Page
                             
                             onToggled: (newSelected) => internal.saveSetting(SettingKeys.Theme,
                                                                            newSelected)
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.Theme
-                                if(savedValue === leftText)
-                                    selectLeft();
-                                else
-                                    selectRight();
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                     }   
                 }
@@ -210,13 +199,6 @@ Page
                             
                             onNewValueSelected: internal.saveSetting(SettingKeys.PageSpacing,
                                                                    value)
-                            
-                            function reset()
-                            {
-                                value = SettingsController.appearanceSettings.PageSpacing
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -243,17 +225,6 @@ Page
                                 internal.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
                                                    currentlyOn === true ? onText : offText)
                             }
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.DisplayBookTitleInTitlebar;
-                                if(savedValue === onText)
-                                    setOn();
-                                else
-                                    setOff();
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -279,14 +250,6 @@ Page
                             
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.LayoutDirection,
                                                                      currentSelected)
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.LayoutDirection;
-                                currentSelected = (savedValue === options[0] ? options[0] : options[1]);
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -312,19 +275,6 @@ Page
                             
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.DisplayMode,
                                                                      currentSelected)
-                            
-                            function getCurrentSelected()
-                            {
-                                return savedValue === options[0] ? options[0] : options[1];
-                            }
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.DisplayMode;
-                                currentSelected = getCurrentSelected();
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -363,27 +313,7 @@ Page
                                 ListElement { text: "Swap" }
                             }
                             
-                            onItemChanged: internal.saveSetting(SettingKeys.PageTransition,
-                                                              text)
-                            
-                            function calculateDefaultIndex()
-                            {
-                                for(let i = 0; i < model.count; ++i)
-                                {
-                                    if(model.get(i).text === savedValue)
-                                        return i;
-                                }
-                                return -1;
-                            }
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.PageTransition;
-                                deselectCurrenItem();
-                                selectItem(calculateDefaultIndex());
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
+                            onItemChanged: internal.saveSetting(SettingKeys.PageTransition, text)
                         }
                         
                         Label
@@ -406,16 +336,7 @@ Page
                             Layout.topMargin: 4
                             value: savedValue
                             
-                            onNewValueSelected: internal.saveSetting(SettingKeys.DefaultZoom,
-                                                                   value)
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.DefaultZoom;
-                                value = savedValue;
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
+                            onNewValueSelected: internal.saveSetting(SettingKeys.DefaultZoom, value)
                         }
                     }
                 }
@@ -477,17 +398,6 @@ Page
                                 internal.saveSetting(SettingKeys.SmoothScrolling,
                                                    currentlyOn === true ? onText : offText)
                             }
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.SmoothScrolling;
-                                if(savedValue === onText)
-                                    setOn();
-                                else
-                                    setOff();
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -515,17 +425,6 @@ Page
                                 internal.saveSetting(SettingKeys.LoopAfterLastPage,
                                                    currentlyOn === true ? onText : offText)
                             }
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.LoopAfterLastPage;
-                                if(savedValue === onText)
-                                    setOn();
-                                else
-                                    setOff();
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                         
                         Label
@@ -551,14 +450,6 @@ Page
                             
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.CursorMode,
                                                                      currentSelected)
-                            
-                            function reset()
-                            {
-                                savedValue = SettingsController.appearanceSettings.CursorMode;
-                                currentSelected = (savedValue === options[0] ? options[0] : options[1]);
-                            }
-                            
-                            Component.onCompleted: internal.registerSetting(this);
                         }
                     }
                 }
@@ -586,28 +477,6 @@ Page
         id: internal
         property int pagePadding: 40
         property int scrollbarOffset: 22
-        property var registeredSettings: []
-        
-        
-        /*
-          Every setting needs to register it self and define some specific methods
-          e.g. reset(), so that certain operations can be executed on all settings dynamically
-          */
-        function registerSetting(setting)
-        {
-            internal.registeredSettings.push(setting);
-        }
-        
-        /*
-          Reset the values of all settings, by calling their reset() method
-          */
-        function resetSettings()
-        {
-            for (var i = 0; i < internal.registeredSettings.length; i++)
-            {
-                internal.registeredSettings[i].reset();
-            }
-        }
         
         
         /*
