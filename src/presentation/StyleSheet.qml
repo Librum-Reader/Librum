@@ -78,26 +78,10 @@ Item
     
     
     
-    // Temporary solution for switching themes
-    Connections
-    {
-        id: theme
-        target: SettingsController
-        function onSettingChanged()
-        {
-            let newTheme = SettingsController.getSetting(SettingKeys.Theme, SettingGroups.Appearance);
-            if(newTheme !== "Light" && newTheme !== "Dark")
-            {
-                console.log("Unknown theme: " + newTheme);
-                return;
-            }
-            
-            if(newTheme !== state)
-                state = newTheme;
-        }
-    }
+    state: (SettingsController.appearanceSettings.Theme === undefined 
+            ? "Light" // default
+            : SettingsController.appearanceSettings.Theme)
     
-    state: "Light" // default
     states: [
         State
         {

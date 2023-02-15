@@ -16,18 +16,6 @@ Page
     background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     
-    /*
-      This connection is triggered after the settings are reset, upon which
-      the SettingsController sends a reload() signal.
-      */
-    Connections
-    {
-        id: reloadSettings
-        target: SettingsController
-        function onReload() { internal.resetSettings() }
-    }
-    
-    
     ColumnLayout
     {
         id: layout
@@ -144,7 +132,7 @@ Page
                         MDualToggle
                         {
                             id: themeSwitch
-                            property string savedValue: internal.getSavedSetting(SettingKeys.Theme)
+                            property string savedValue: SettingsController.appearanceSettings.Theme
                             
                             Layout.topMargin: 4
                             leftText: "Dark"
@@ -157,7 +145,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.Theme);
+                                savedValue = SettingsController.appearanceSettings.Theme
                                 if(savedValue === leftText)
                                     selectLeft();
                                 else
@@ -218,14 +206,14 @@ Page
                             id: pageSpacingSpinBox
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: internal.getSavedSetting(SettingKeys.PageSpacing)
+                            value: SettingsController.appearanceSettings.PageSpacing
                             
                             onNewValueSelected: internal.saveSetting(SettingKeys.PageSpacing,
                                                                    value)
                             
                             function reset()
                             {
-                                value = internal.getSavedSetting(SettingKeys.PageSpacing);
+                                value = SettingsController.appearanceSettings.PageSpacing
                             }
                             
                             Component.onCompleted: internal.registerSetting(this);
@@ -245,7 +233,7 @@ Page
                         MOnOffToggle
                         {
                             id: displayBookTitleInTitlebarToggle
-                            property string savedValue: internal.getSavedSetting(SettingKeys.DisplayBookTitleInTitlebar)
+                            property string savedValue: SettingsController.appearanceSettings.DisplayBookTitleInTitlebar
                             
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
@@ -258,7 +246,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.DisplayBookTitleInTitlebar);
+                                savedValue = SettingsController.appearanceSettings.DisplayBookTitleInTitlebar;
                                 if(savedValue === onText)
                                     setOn();
                                 else
@@ -282,7 +270,7 @@ Page
                         MRadioButtonSelector
                         {
                             id: layoutDirectionSelector
-                            property string savedValue: internal.getSavedSetting(SettingKeys.LayoutDirection)
+                            property string savedValue: SettingsController.appearanceSettings.LayoutDirection
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
@@ -294,7 +282,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.LayoutDirection);
+                                savedValue = SettingsController.appearanceSettings.LayoutDirection;
                                 currentSelected = (savedValue === options[0] ? options[0] : options[1]);
                             }
                             
@@ -315,7 +303,7 @@ Page
                         MRadioButtonSelector
                         {
                             id: displayModeSelector
-                            property string savedValue: internal.getSavedSetting(SettingKeys.DisplayMode)
+                            property string savedValue: SettingsController.appearanceSettings.DisplayMode
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
@@ -332,7 +320,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.DisplayMode);
+                                savedValue = SettingsController.appearanceSettings.DisplayMode;
                                 currentSelected = getCurrentSelected();
                             }
                             
@@ -353,7 +341,7 @@ Page
                         MComboBox
                         {
                             id: pageTransitionComboBox
-                            property string savedValue: internal.getSavedSetting(SettingKeys.PageTransition)
+                            property string savedValue: SettingsController.appearanceSettings.PageTransition
                             
                             Layout.topMargin: 4
                             Layout.preferredHeight: 36
@@ -390,7 +378,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.PageTransition);
+                                savedValue = SettingsController.appearanceSettings.PageTransition;
                                 deselectCurrenItem();
                                 selectItem(calculateDefaultIndex());
                             }
@@ -412,7 +400,7 @@ Page
                         MSpinbox
                         {
                             id: defaultZoomSpinBox
-                            property int savedValue: internal.getSavedSetting(SettingKeys.DefaultZoom)
+                            property int savedValue: SettingsController.appearanceSettings.DefaultZoom
                             
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
@@ -423,7 +411,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.DefaultZoom);
+                                savedValue = SettingsController.appearanceSettings.DefaultZoom;
                                 value = savedValue;
                             }
                             
@@ -480,7 +468,7 @@ Page
                         MOnOffToggle
                         {
                             id: smoothScrollingToggle
-                            property string savedValue: internal.getSavedSetting(SettingKeys.SmoothScrolling)
+                            property string savedValue: SettingsController.appearanceSettings.SmoothScrolling
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
                             
@@ -492,7 +480,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.SmoothScrolling);
+                                savedValue = SettingsController.appearanceSettings.SmoothScrolling;
                                 if(savedValue === onText)
                                     setOn();
                                 else
@@ -517,7 +505,7 @@ Page
                         MOnOffToggle
                         {
                             id: loopAfterLastToggle
-                            property string savedValue: internal.getSavedSetting(SettingKeys.LoopAfterLastPage)
+                            property string savedValue: SettingsController.appearanceSettings.LoopAfterLastPage
                             
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
@@ -530,7 +518,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.LoopAfterLastPage);
+                                savedValue = SettingsController.appearanceSettings.LoopAfterLastPage;
                                 if(savedValue === onText)
                                     setOn();
                                 else
@@ -554,7 +542,7 @@ Page
                         MRadioButtonSelector
                         {
                             id: cursorModeSelector
-                            property string savedValue: internal.getSavedSetting(SettingKeys.CursorMode)
+                            property string savedValue: SettingsController.appearanceSettings.CursorMode
                             
                             Layout.fillWidth: true
                             Layout.topMargin: 6
@@ -566,7 +554,7 @@ Page
                             
                             function reset()
                             {
-                                savedValue = internal.getSavedSetting(SettingKeys.CursorMode);
+                                savedValue = SettingsController.appearanceSettings.CursorMode;
                                 currentSelected = (savedValue === options[0] ? options[0] : options[1]);
                             }
                             
@@ -628,11 +616,6 @@ Page
         function saveSetting(key, value)
         {
             SettingsController.setSetting(key, value, SettingGroups.Appearance);
-        }
-        
-        function getSavedSetting(key)
-        {
-            return SettingsController.getSetting(key, SettingGroups.Appearance);
         }
     }
 }
