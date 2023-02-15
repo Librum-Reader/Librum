@@ -48,6 +48,7 @@ set(application_SRC
     utility/book_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
+    utility/application_settings.hpp
 )
 
 
