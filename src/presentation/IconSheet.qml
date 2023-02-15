@@ -377,6 +377,5 @@ Item
     function setState(name)
     {
         state = name;
-        console.log("Setting to: " + name)
     }
 }
