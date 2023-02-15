@@ -1,9 +1,11 @@
 #include "settings_controller.hpp"
 #include <QDebug>
-#include <setting_groups.hpp>
-#include <setting_keys.hpp>
+#include <QString>
+#include "enum_utils.hpp"
 
 using namespace application;
+using application::setting_groups::SettingGroups;
+using application::setting_keys::SettingKeys;
 
 namespace adapters::controllers
 {
@@ -11,6 +13,8 @@ namespace adapters::controllers
 SettingsController::SettingsController(ISettingsService* settingsService) :
     m_settingsService(settingsService)
 {
+    connect(m_settingsService, &ISettingsService::settingChanged, this,
+            &SettingsController::updateChangedSetting);
 }
 
 QString SettingsController::getSetting(int key, int group)
@@ -45,6 +49,43 @@ void SettingsController::resetSettingGroup(int group)
 
     emit reload();
     emit settingChanged();
+}
+
+QQmlPropertyMap* SettingsController::getAppearanceSettings()
+{
+    return &m_appearanceSettingsMap;
+}
+
+QQmlPropertyMap* SettingsController::getGeneralSettings()
+{
+    return &m_generalSettingsMap;
+}
+
+QQmlPropertyMap* SettingsController::getShortcuts()
+{
+    return &m_shortcutsMap;
+}
+
+void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
+                                              SettingGroups group)
+{
+    auto keyAsString = utility::getNameForEnumValue(key);
+
+    switch(group)
+    {
+    case SettingGroups::Appearance:
+        m_appearanceSettingsMap.insert(keyAsString, value.toString());
+        break;
+    case SettingGroups::General:
+        m_generalSettingsMap.insert(keyAsString, value.toString());
+        break;
+    case SettingGroups::Shortcuts:
+        m_shortcutsMap.insert(keyAsString, value.toString());
+        break;
+    case SettingGroups::SettingGroups_END:
+        qCritical() << "Tried to update item of group SettingGroups_END";
+        break;
+    }
 }
 
 bool SettingsController::keyIsValid(int key)
