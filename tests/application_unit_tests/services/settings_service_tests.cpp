@@ -117,7 +117,7 @@ TEST_F(ASettingsService, SucceedsResettingSettingGroup)
     settingsService->setSetting(thirdKey, "AnotherValue", group);
 
     // Act
-    settingsService->resetSettingGroup(group);
+    settingsService->resetSettingsGroupToDefault(group);
 
     // Assert
     auto firstAfterReset = settingsService->getSetting(firstKey, group);

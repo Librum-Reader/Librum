@@ -9,6 +9,7 @@
 namespace application::services
 {
 
+// A wrapper class around QSettings which manages the application settings
 class SettingsService : public ISettingsService
 {
     Q_OBJECT
@@ -17,7 +18,7 @@ public:
     QString getSetting(SettingKeys key, SettingGroups group) override;
     void setSetting(SettingKeys key, const QVariant& value,
                     SettingGroups group) override;
-    void resetSettingGroup(SettingGroups group) override;
+    void resetSettingsGroupToDefault(SettingGroups group) override;
     QString getSettingsFilePath() override;
 
 public slots:
@@ -25,16 +26,19 @@ public slots:
     void clearUserData() override;
 
 private:
-    void createSettings();
+    void setupSettings();
+
     void generateDefaultSettings();
-    void loadDefaultSettings(SettingGroups group, const QString& filePath);
-    QJsonObject getDefaultSettings(const QString& path);
+    void loadDefaultSettingsGroup(SettingGroups group);
+    QJsonObject getDefaultSettingsForGroup(SettingGroups group);
+    QString getDefaultSettingsFilePathForEnum(SettingGroups group);
+    bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
+
     void loadSettings();
     std::vector<std::pair<QString, QVariant>> getSettingsForGroup(
         SettingGroups group);
-    bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
+
     QString getUniqueUserHash() const;
-    QString getDefaultSettingsFilePathForEnum(SettingGroups group);
 
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =

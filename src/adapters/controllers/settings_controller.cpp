@@ -37,7 +37,7 @@ void SettingsController::resetSettingGroup(int group)
         return;
 
     auto groupAsEnum = static_cast<SettingGroups>(group);
-    m_settingsService->resetSettingGroup(groupAsEnum);
+    m_settingsService->resetSettingsGroupToDefault(groupAsEnum);
 }
 
 QQmlPropertyMap* SettingsController::getAppearanceSettings()
