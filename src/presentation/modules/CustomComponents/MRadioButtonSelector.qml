@@ -35,19 +35,14 @@ Item
                 selected: root.currentSelected === root.options[index]
                 text: root.options[index]
                 
-                onClicked: internal.changeSelected(index)
+                onClicked: root.changeSelected(index)
             }
         }
     }
     
-    QtObject
+    function changeSelected(index)
     {
-        id: internal
-        
-        function changeSelected(index)
-        {
-            root.currentSelected = root.options[index];
-            root.newCurrentSelected();
-        }
+        root.currentSelected = root.options[index];
+        root.newCurrentSelected();
     }
 }
