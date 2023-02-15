@@ -52,6 +52,9 @@ function selectItem(index)
 
 function deselectCurrentItem()
 {
+    if(listView.currentSelected == null)
+        return;
+    
     listView.currentSelected.selected = false;
     listView.currentSelected = null;
     root.selectedContent = "";
