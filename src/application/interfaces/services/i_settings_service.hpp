@@ -27,6 +27,11 @@ public slots:
     virtual void loadUserSettings(const QString& token,
                                   const QString& email) = 0;
     virtual void clearUserData() = 0;
+
+signals:
+    void settingChanged(application::setting_keys::SettingKeys key,
+                        QVariant value,
+                        application::setting_groups::SettingGroups group);
 };
 
 }  // namespace application

@@ -33,11 +33,6 @@ private:
     bool settingsAreValid();
     bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
 
-    template<typename Enum>
-    QString getNameForEnumValue(Enum value) const;
-    template<typename Enum>
-    std::optional<Enum> getValueForEnumName(const QString& name) const;
-
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =
         ":/resources/data/default_appearance_settings.json";

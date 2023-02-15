@@ -39,6 +39,8 @@ void SettingsService::setSetting(SettingKeys key, const QVariant& value,
     auto keyName = utility::getNameForEnumValue(key);
     m_settings->setValue(keyName, value);
     m_settings->endGroup();
+
+    emit settingChanged(key, value, group);
 }
 
 void SettingsService::resetSettingGroup(SettingGroups group)
