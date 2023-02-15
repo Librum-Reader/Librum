@@ -83,7 +83,7 @@ Item
                 {
                     anchors.fill: parent
                     
-                    onClicked: selectLeftAnimation.start()
+                    onClicked: root.selectLeft()
                 }
             }
             
@@ -138,7 +138,7 @@ Item
                 {
                     anchors.fill: parent
                     
-                    onClicked: selectRightAnimation.start()
+                    onClicked: root.selectRight();
                 }
             }
         }
@@ -219,11 +219,17 @@ Item
     
     function selectLeft()
     {
+        if(root.leftSelected)
+            return;
+
         selectLeftAnimation.start();
     }
     
     function selectRight()
     {
+        if(root.rightSelected)
+            return;
+        
         selectRightAnimation.start();
     }
 }
