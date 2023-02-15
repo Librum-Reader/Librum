@@ -12,7 +12,7 @@ Item
     property bool currentlyOn: dualToggle.rightSelected
     property alias onText: dualToggle.rightText
     property alias offText: dualToggle.leftText
-    signal toggled
+    signal toggled(string value)
  
     implicitHeight: 38
     implicitWidth: 178
@@ -26,7 +26,7 @@ Item
         leftSelected: !onByDefault
         rightSelected: onByDefault
         
-        onToggled: root.toggled()
+        onToggled: root.toggled(root.currentlyOn ? root.onText : root.offText)
     }
     
     
