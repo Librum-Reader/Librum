@@ -35,6 +35,7 @@ private:
     bool settingsAreValid();
     bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
     QString getUniqueUserHash() const;
+    QString getDefaultSettingsFilePathForEnum(SettingGroups group);
 
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =
@@ -45,7 +46,6 @@ private:
         ":/resources/data/default_shortcuts.json";
     QString m_userEmail;
     QString m_authToken;
-    bool m_settingsAreValid = false;
 };
 
 }  // namespace application::services

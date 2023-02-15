@@ -13,9 +13,6 @@ namespace application::services
 
 QString SettingsService::getSetting(SettingKeys key, SettingGroups group)
 {
-    if(!m_settingsAreValid)
-        return "";
-
     QString keyName = utility::getNameForEnumValue(key);
     QString groupName = utility::getNameForEnumValue(group);
     m_settings->beginGroup(groupName);
@@ -30,9 +27,6 @@ QString SettingsService::getSetting(SettingKeys key, SettingGroups group)
 void SettingsService::setSetting(SettingKeys key, const QVariant& value,
                                  SettingGroups group)
 {
-    if(!m_settingsAreValid)
-        return;
-
     auto groupName = utility::getNameForEnumValue(group);
     m_settings->beginGroup(groupName);
 
@@ -45,44 +39,22 @@ void SettingsService::setSetting(SettingKeys key, const QVariant& value,
 
 void SettingsService::resetSettingGroup(SettingGroups group)
 {
-    if(!m_settingsAreValid)
-        return;
+    QString filePath = getDefaultSettingsFilePathForEnum(group);
+    QJsonObject defaultSettings = getDefaultSettings(filePath);
 
-    QString defaultSettingFilePath;
-    switch(group)
+    for(const auto& defaultKey : defaultSettings.keys())
     {
-    case SettingGroups::Appearance:
-        defaultSettingFilePath = m_defaultAppearanceSettingsFilePath;
-        break;
-    case SettingGroups::General:
-        defaultSettingFilePath = m_defaultGeneralSettingsFilePath;
-        break;
-    case SettingGroups::Shortcuts:
-        defaultSettingFilePath = m_defaultShortcutsFilePath;
-        break;
-    case SettingGroups::SettingGroups_END:
-        qWarning() << "Called with invalid parameter";
-        return;
-    }
-
-    QJsonObject defaultSettings = getDefaultSettings(defaultSettingFilePath);
-    for(const auto& defaultSettingKey : defaultSettings.keys())
-    {
-        auto defaultSettingValue =
-            defaultSettings.value(defaultSettingKey).toString();
-
-        auto keyAsEnum =
-            utility::getValueForEnumName<SettingKeys>(defaultSettingKey);
+        auto defaultValue = defaultSettings.value(defaultKey).toString();
+        auto keyAsEnum = utility::getValueForEnumName<SettingKeys>(defaultKey);
         if(keyAsEnum.has_value())
         {
-            setSetting(keyAsEnum.value(), defaultSettingValue, group);
+            setSetting(keyAsEnum.value(), defaultValue, group);
         }
         else
         {
             qWarning() << QString("Failed converting setting-key from default "
                                   "settings file with value: %1 to an enum.")
-                              .arg(defaultSettingKey);
-            continue;
+                              .arg(defaultKey);
         }
     }
 }
@@ -92,8 +64,6 @@ void SettingsService::clearSettings()
     m_settings->sync();
     QString filePath = m_settings->fileName();
     QFile::remove(filePath);
-
-    m_settingsAreValid = false;
 }
 
 void SettingsService::loadUserSettings(const QString& token,
@@ -116,7 +86,6 @@ void SettingsService::createSettings()
     auto uniqueFileName = getUniqueUserHash();
     auto format = QSettings::NativeFormat;
     m_settings = std::make_unique<QSettings>(uniqueFileName, format);
-    m_settingsAreValid = true;
 
     generateDefaultSettings();
 }
@@ -126,6 +95,28 @@ QString SettingsService::getUniqueUserHash() const
     auto userHash = qHash(m_userEmail);
 
     return QString::number(userHash);
+}
+
+QString SettingsService::getDefaultSettingsFilePathForEnum(SettingGroups group)
+{
+    switch(group)
+    {
+    case SettingGroups::Appearance:
+        return m_defaultAppearanceSettingsFilePath;
+        break;
+    case SettingGroups::General:
+        return m_defaultGeneralSettingsFilePath;
+        break;
+    case SettingGroups::Shortcuts:
+        return m_defaultShortcutsFilePath;
+        break;
+    case SettingGroups::SettingGroups_END:
+        qCritical() << "Failed getting default settings file path for enum "
+                       "called SettingGroups_END";
+        return QString();
+    }
+
+    return QString();
 }
 
 void SettingsService::generateDefaultSettings()
