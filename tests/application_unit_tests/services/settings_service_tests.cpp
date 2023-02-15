@@ -1,9 +1,10 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <QFile>
 #include <QString>
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
-#include "settings_service.hpp"
+#include "settings_service.hpp" n
 
 using namespace testing;
 using namespace application::services;
@@ -21,7 +22,7 @@ struct ASettingsService : public ::testing::Test
 
     void TearDown() override
     {
-        settingsService->clearSettings();
+        QFile::remove(settingsService->getSettingsFilePath());
         settingsService->clearUserData();
     }
 
@@ -37,20 +38,6 @@ TEST_F(ASettingsService, SucceedsSettingASetting)
     auto key = SettingKeys::PageSpacing;
     QVariant value = 20;
     auto group = SettingGroups::Appearance;
-
-
-    // Act
-    settingsService->setSetting(key, value, group);
-}
-
-TEST_F(ASettingsService, FailsSettingASettingIfSettingsAreInvalid)
-{
-    // Arrange
-    auto key = SettingKeys::PageSpacing;
-    QVariant value = 20;
-    auto group = SettingGroups::Appearance;
-
-    settingsService->clearSettings();
 
 
     // Act
@@ -110,22 +97,6 @@ TEST_F(ASettingsService, SucceedsGettingAStringSetting)
     EXPECT_EQ(value, result);
 }
 
-TEST_F(ASettingsService, FailsGettingASettingIfSettingsAreInvalid)
-{
-    // Arrange
-    auto key = SettingKeys::PageSpacing;
-    auto group = SettingGroups::Appearance;
-
-    settingsService->clearSettings();
-
-
-    // Act
-    auto result = settingsService->getSetting(key, group);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
 TEST_F(ASettingsService, SucceedsResettingSettingGroup)
 {
     // Arrange
@@ -156,16 +127,6 @@ TEST_F(ASettingsService, SucceedsResettingSettingGroup)
     EXPECT_EQ(firstDefaultValue, firstAfterReset);
     EXPECT_EQ(secondDefaultValue, secondAfterReset);
     EXPECT_EQ(thirdDefaultValue, thirdAfterReset);
-}
-
-TEST_F(ASettingsService, FailsResettingSettingGroupIfSettingsAreInvalid)
-{
-    // Arrange
-    auto group = SettingGroups::Appearance;
-
-    // Act
-    settingsService->clearSettings();  // Invalidate settings
-    settingsService->resetSettingGroup(group);  // Fails resetting
 }
 
 }  // namespace tests::application

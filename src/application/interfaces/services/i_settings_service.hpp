@@ -24,7 +24,7 @@ public:
     virtual void setSetting(SettingKeys key, const QVariant& value,
                             SettingGroups group) = 0;
     virtual void resetSettingGroup(SettingGroups group) = 0;
-    virtual void clearSettings() = 0;
+    virtual QString getSettingsFilePath() = 0;
 
 public slots:
     virtual void loadUserSettings(const QString& token,

@@ -21,7 +21,7 @@ public:
     MOCK_METHOD(void, resetSettingGroup, (SettingGroups), (override));
     MOCK_METHOD(void, loadUserSettings, (const QString&, const QString&),
                 (override));
-    MOCK_METHOD(void, clearSettings, (), (override));
+    MOCK_METHOD(QString, getSettingsFilePath, (), (override));
     MOCK_METHOD(void, clearUserData, (), (override));
 };
 

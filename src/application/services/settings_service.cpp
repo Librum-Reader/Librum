@@ -59,11 +59,9 @@ void SettingsService::resetSettingGroup(SettingGroups group)
     }
 }
 
-void SettingsService::clearSettings()
+QString SettingsService::getSettingsFilePath()
 {
-    m_settings->sync();
-    QString filePath = m_settings->fileName();
-    QFile::remove(filePath);
+    return m_settings->fileName();
 }
 
 void SettingsService::loadUserSettings(const QString& token,
@@ -220,12 +218,6 @@ std::vector<std::pair<QString, QVariant>> SettingsService::getSettingsForGroup(
     m_settings->endGroup();
 
     return result;
-}
-
-bool SettingsService::settingsAreValid()
-{
-    // If the underlying file has been deleted by "clear()", its invalid
-    return QFile::exists(m_settings->fileName());
 }
 
 }  // namespace application::services

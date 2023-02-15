@@ -18,7 +18,7 @@ public:
     void setSetting(SettingKeys key, const QVariant& value,
                     SettingGroups group) override;
     void resetSettingGroup(SettingGroups group) override;
-    void clearSettings() override;
+    QString getSettingsFilePath() override;
 
 public slots:
     void loadUserSettings(const QString& token, const QString& email) override;
@@ -32,7 +32,6 @@ private:
     void loadSettings();
     std::vector<std::pair<QString, QVariant>> getSettingsForGroup(
         SettingGroups group);
-    bool settingsAreValid();
     bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
     QString getUniqueUserHash() const;
     QString getDefaultSettingsFilePathForEnum(SettingGroups group);
