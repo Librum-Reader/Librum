@@ -1,6 +1,9 @@
 #pragma once
 #include <QObject>
 #include <QVariant>
+#include <utility>
+#include <vector>
+#include "application_settings.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 
@@ -32,6 +35,7 @@ signals:
     void settingChanged(application::setting_keys::SettingKeys key,
                         QVariant value,
                         application::setting_groups::SettingGroups group);
+    void settingsLoaded(utility::ApplicationSettings settings);
 };
 
 }  // namespace application

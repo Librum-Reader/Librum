@@ -103,6 +103,7 @@ void SettingsService::loadUserSettings(const QString& token,
     m_userEmail = email;
 
     createSettings();
+    loadSettings();
 }
 
 void SettingsService::clearUserData()
@@ -189,6 +190,45 @@ QJsonObject SettingsService::getDefaultSettings(const QString& path)
     QByteArray rawJson = defaultSettingsFile.readAll();
     auto jsonDoc = QJsonDocument::fromJson(rawJson);
     return jsonDoc.object();
+}
+
+void SettingsService::loadSettings()
+{
+    utility::ApplicationSettings result;
+
+    result.appearanceSettings = getSettingsForGroup(SettingGroups::Appearance);
+    result.generalSettings = getSettingsForGroup(SettingGroups::General);
+    result.shortcuts = getSettingsForGroup(SettingGroups::Shortcuts);
+
+    emit settingsLoaded(result);
+}
+
+std::vector<std::pair<QString, QVariant>> SettingsService::getSettingsForGroup(
+    SettingGroups group)
+{
+    QString groupName = utility::getNameForEnumValue(group);
+    m_settings->beginGroup(groupName);
+
+    std::vector<std::pair<QString, QVariant>> result;
+
+    auto keys = m_settings->allKeys();
+    for(auto& key : keys)
+    {
+        auto value = m_settings->value(key);
+        if(!value.isValid())
+        {
+            qCritical() << QString("Failed reading setting with name: %1 and "
+                                   "group: %2")
+                               .arg(key, groupName);
+            return {};
+        }
+
+        result.emplace_back(key, value);
+    }
+
+    m_settings->endGroup();
+
+    return result;
 }
 
 bool SettingsService::settingsAreValid()

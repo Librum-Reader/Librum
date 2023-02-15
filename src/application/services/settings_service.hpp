@@ -26,12 +26,15 @@ public slots:
 
 private:
     void createSettings();
-    QString getUniqueUserHash() const;
     void generateDefaultSettings();
     void loadDefaultSettings(SettingGroups group, const QString& filePath);
     QJsonObject getDefaultSettings(const QString& path);
+    void loadSettings();
+    std::vector<std::pair<QString, QVariant>> getSettingsForGroup(
+        SettingGroups group);
     bool settingsAreValid();
     bool defaultSettingAlreadyExists(const QString& key, SettingGroups group);
+    QString getUniqueUserHash() const;
 
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =
