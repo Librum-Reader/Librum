@@ -4,7 +4,7 @@
 #include <QString>
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
-#include "settings_service.hpp" n
+#include "settings_service.hpp"
 
 using namespace testing;
 using namespace application::services;
