@@ -30,13 +30,6 @@ MFlickWrapper
             spacing: 0
             
             
-            Connections
-            {
-                target: SettingsController
-                function onReload() { internal.resetSettings(); }
-            }
-            
-            
             RowLayout
             {
                 id: titleRow
@@ -120,26 +113,14 @@ MFlickWrapper
                     MOnOffToggle
                     {
                         id: openBookAfterCreationToggle
-                        property string savedValue: internal.getSavedSetting(SettingKeys.OpenBooksAfterCreation)
+                        property string savedValue: SettingsController.generalSettings.OpenBooksAfterCreation
+                        
                         Layout.topMargin: 4
                         onByDefault: savedValue === onText
                         
-                        onToggled:
-                        {
-                            internal.saveSetting(SettingKeys.OpenBooksAfterCreation,
-                                               currentlyOn === true ? onText : offText)
-                        }
-                        
-                        function reset()
-                        {
-                            savedValue = internal.getSavedSetting(SettingKeys.OpenBooksAfterCreation);
-                            if(savedValue === onText)
-                                setOn();
-                            else
-                                setOff();
-                        }
-                        
-                        Component.onCompleted: internal.registerSetting(this);
+                        // Need rebinding on reset
+                        onSavedValueChanged: savedValue == onText ? setOn() : setOff()
+                        onToggled: (value) => internal.saveSetting(SettingKeys.OpenBooksAfterCreation, value)
                     }
                 }
             }
@@ -164,28 +145,6 @@ MFlickWrapper
     {
         id: internal
         property int pagePadding : 40
-        property var registeredSettings: []
-        
-        
-        /*
-          Every setting needs to register it self and define some specific methods
-          e.g. reset(), so that certain operations can be executed on all settings dynamically
-          */
-        function registerSetting(setting)
-        {
-            registeredSettings.push(setting);
-        }
-        
-        /*
-          Reset the values of all settings, by calling their reset() method
-          */
-        function resetSettings()
-        {
-            for (var i = 0; i < internal.registeredSettings.length; i++)
-            {
-                internal.registeredSettings[i].reset();
-            }
-        }
         
         
         /*
@@ -194,11 +153,6 @@ MFlickWrapper
         function saveSetting(key, value)
         {
             SettingsController.setSetting(key, value, SettingGroups.General);
-        }
-        
-        function getSavedSetting(key)
-        {
-            return SettingsController.getSetting(key, SettingGroups.General);
         }
     }
 }

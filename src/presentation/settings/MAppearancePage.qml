@@ -7,7 +7,6 @@ import Librum.icons 1.0
 import Librum.controllers 1.0
 
 
-
 Page
 {
     id: root
@@ -137,11 +136,10 @@ Page
                             Layout.topMargin: 4
                             leftText: "Dark"
                             rightText: "Light"
-                            leftSelected: savedValue == leftText
-                            rightSelected: savedValue == rightText
                             
-                            onToggled: (newSelected) => internal.saveSetting(SettingKeys.Theme,
-                                                                           newSelected)
+                            // Need rebinding on reset
+                            onSavedValueChanged: savedValue == leftText ? selectLeft() : selectRight()
+                            onToggled: (newSelected) => internal.saveSetting(SettingKeys.Theme, newSelected)
                         }
                     }   
                 }
@@ -193,12 +191,15 @@ Page
                         MSpinbox
                         {
                             id: pageSpacingSpinBox
+                            property string savedValue: SettingsController.appearanceSettings.PageSpacing
+                            
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
-                            value: SettingsController.appearanceSettings.PageSpacing
+                            value: savedValue
                             
-                            onNewValueSelected: internal.saveSetting(SettingKeys.PageSpacing,
-                                                                   value)
+                            // Need rebinding on reset
+                            onSavedValueChanged: value = savedValue
+                            onNewValueSelected: internal.saveSetting(SettingKeys.PageSpacing, value)
                         }
                         
                         Label
@@ -220,11 +221,9 @@ Page
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
                             
-                            onToggled:
-                            {
-                                internal.saveSetting(SettingKeys.DisplayBookTitleInTitlebar,
-                                                   currentlyOn === true ? onText : offText)
-                            }
+                            // Need rebinding on reset
+                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.DisplayBookTitleInTitlebar, value)
                         }
                         
                         Label
@@ -246,8 +245,10 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Vertical", "Horizontal"]
-                            currentSelected: savedValue === options[0] ? options[0] : options[1]
+                            currentSelected: changeSelected(options.indexOf(savedValue))
                             
+                            // Need rebinding on reset
+                            onSavedValueChanged: changeSelected(options.indexOf(savedValue))
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.LayoutDirection,
                                                                      currentSelected)
                         }
@@ -271,8 +272,10 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Single Page", "Double Page"]
-                            currentSelected: getCurrentSelected()
+                            currentSelected: changeSelected(options.indexOf(savedValue))
                             
+                            // Need rebinding on reset
+                            onSavedValueChanged: changeSelected(options.indexOf(savedValue))
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.DisplayMode,
                                                                      currentSelected)
                         }
@@ -314,6 +317,27 @@ Page
                             }
                             
                             onItemChanged: internal.saveSetting(SettingKeys.PageTransition, text)
+                            // Need rebinding on reset
+                            onSavedValueChanged:
+                            {
+                                let defaultIndex = calculateDefaultIndex();
+                                if(listView.currentIndex === defaultIndex)
+                                    return;
+                                
+                                deselectCurrenItem();
+                                selectItem(defaultIndex, true);
+                            }
+                            
+                            
+                            function calculateDefaultIndex()
+                            {
+                                for(let i = 0; i < model.count; ++i)
+                                {
+                                    if(model.get(i).text === savedValue)
+                                        return i;
+                                }
+                                return -1;
+                            }
                         }
                         
                         Label
@@ -336,6 +360,8 @@ Page
                             Layout.topMargin: 4
                             value: savedValue
                             
+                            // Need rebinding on reset
+                            onSavedValueChanged: value = savedValue
                             onNewValueSelected: internal.saveSetting(SettingKeys.DefaultZoom, value)
                         }
                     }
@@ -362,6 +388,7 @@ Page
                         id: behaviorLayout
                         anchors.fill: parent
                         spacing: 0
+                        
                         
                         Label
                         {
@@ -390,14 +417,13 @@ Page
                         {
                             id: smoothScrollingToggle
                             property string savedValue: SettingsController.appearanceSettings.SmoothScrolling
+                            
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
                             
-                            onToggled:
-                            {
-                                internal.saveSetting(SettingKeys.SmoothScrolling,
-                                                   currentlyOn === true ? onText : offText)
-                            }
+                            // Need rebinding on reset
+                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.SmoothScrolling, value)
                         }
                         
                         Label
@@ -420,11 +446,9 @@ Page
                             Layout.topMargin: 4
                             onByDefault: savedValue === onText
                             
-                            onToggled:
-                            {
-                                internal.saveSetting(SettingKeys.LoopAfterLastPage,
-                                                   currentlyOn === true ? onText : offText)
-                            }
+                            // Need rebinding on reset
+                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.LoopAfterLastPage, value)
                         }
                         
                         Label
@@ -446,8 +470,10 @@ Page
                             Layout.fillWidth: true
                             Layout.topMargin: 6
                             options: ["Hidden after delay", "Always visible"]
-                            currentSelected: savedValue === options[0] ? options[0] : options[1]
+                            currentSelected: changeSelected(options.indexOf(savedValue))
                             
+                            // Need rebinding on reset
+                            onSavedValueChanged: changeSelected(options.indexOf(savedValue))
                             onNewCurrentSelected: internal.saveSetting(SettingKeys.CursorMode,
                                                                      currentSelected)
                         }
