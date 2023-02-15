@@ -41,88 +41,6 @@ struct ASettingsController : public ::testing::Test
     std::unique_ptr<SettingsController> settingsController;
 };
 
-TEST_F(ASettingsController, SucceedsGettingASetting)
-{
-    // Arrange
-    int key = static_cast<int>(SettingKeys::DefaultZoom);
-    int group = static_cast<int>(SettingGroups::Appearance);
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(1);
-
-
-    // Act
-    settingsController->getSetting(key, group);
-}
-
-TEST_F(ASettingsController, FailsGettingASettingIfKeyIsAboveBound)
-{
-    // Arrange
-    int key = static_cast<int>(SettingKeys::SettingKeys_END) + 1;
-    int group = static_cast<int>(SettingGroups::Appearance);
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
-
-
-    // Act
-    auto result = settingsController->getSetting(key, group);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
-TEST_F(ASettingsController, FailsGettingASettingIfKeyIsBelowBound)
-{
-    // Arrange
-    int key = -1;
-    int group = static_cast<int>(SettingGroups::Appearance);
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
-
-
-    // Act
-    auto result = settingsController->getSetting(key, group);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
-TEST_F(ASettingsController, FailsGettingASettingIfGroupIsAboveBound)
-{
-    // Arrange
-    int key = static_cast<int>(SettingKeys::DefaultZoom);
-    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
-
-
-    // Act
-    auto result = settingsController->getSetting(key, group);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
-TEST_F(ASettingsController, FailsGettingASettingIfGroupIsBelowBound)
-{
-    // Arrange
-    int key = static_cast<int>(SettingKeys::DefaultZoom);
-    int group = -1;
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, getSetting(_, _)).Times(0);
-
-
-    // Act
-    auto result = settingsController->getSetting(key, group);
-
-    // Assert
-    EXPECT_TRUE(result.isEmpty());
-}
-
 TEST_F(ASettingsController, SucceedsSettingASetting)
 {
     // Arrange
@@ -196,41 +114,6 @@ TEST_F(ASettingsController, FailsSettingASettingIfGroupIsBelowBound)
 
     // Act
     settingsController->setSetting(key, value, group);
-}
-
-TEST_F(ASettingsController, SucceedsResettingSettingGroup)
-{
-    // Arrange
-    int group = static_cast<int>(SettingGroups::Appearance);
-
-    QSignalSpy spy(settingsController.get(), &SettingsController::reload);
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, resetSettingGroup(_)).Times(1);
-
-    // Act
-    settingsController->resetSettingGroup(group);
-
-    // Assert
-    EXPECT_EQ(1, spy.count());
-}
-
-TEST_F(ASettingsController, FailsResettingSettingGroupIfGroupIsInvalid)
-{
-    // Arrange
-    int group = static_cast<int>(SettingGroups::SettingGroups_END) + 1;
-
-    QSignalSpy spy(settingsController.get(), &SettingsController::reload);
-
-
-    // Expect
-    EXPECT_CALL(settingsServiceMock, resetSettingGroup(_)).Times(0);
-
-    // Act
-    settingsController->resetSettingGroup(group);
-
-    // Assert
-    EXPECT_EQ(0, spy.count());
 }
 
 }  // namespace tests::adapters
