@@ -6,6 +6,7 @@
 using namespace application;
 using application::setting_groups::SettingGroups;
 using application::setting_keys::SettingKeys;
+using application::utility::ApplicationSettings;
 
 namespace adapters::controllers
 {
@@ -13,18 +14,11 @@ namespace adapters::controllers
 SettingsController::SettingsController(ISettingsService* settingsService) :
     m_settingsService(settingsService)
 {
+    connect(m_settingsService, &ISettingsService::settingsLoaded, this,
+            &SettingsController::initialiseSettings);
+
     connect(m_settingsService, &ISettingsService::settingChanged, this,
             &SettingsController::updateChangedSetting);
-}
-
-QString SettingsController::getSetting(int key, int group)
-{
-    if(!keyIsValid(key) || !groupIsValid(group))
-        return "";
-
-    auto keyAsEnum = static_cast<SettingKeys>(key);
-    auto groupAsEnum = static_cast<SettingGroups>(group);
-    return m_settingsService->getSetting(keyAsEnum, groupAsEnum);
 }
 
 void SettingsController::setSetting(int key, const QVariant& value, int group)
@@ -35,8 +29,6 @@ void SettingsController::setSetting(int key, const QVariant& value, int group)
     auto keyAsEnum = static_cast<SettingKeys>(key);
     auto groupAsEnum = static_cast<SettingGroups>(group);
     m_settingsService->setSetting(keyAsEnum, value, groupAsEnum);
-
-    emit settingChanged();
 }
 
 void SettingsController::resetSettingGroup(int group)
@@ -46,9 +38,6 @@ void SettingsController::resetSettingGroup(int group)
 
     auto groupAsEnum = static_cast<SettingGroups>(group);
     m_settingsService->resetSettingGroup(groupAsEnum);
-
-    emit reload();
-    emit settingChanged();
 }
 
 QQmlPropertyMap* SettingsController::getAppearanceSettings()
@@ -86,6 +75,18 @@ void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
         qCritical() << "Tried to update item of group SettingGroups_END";
         break;
     }
+}
+
+void SettingsController::initialiseSettings(ApplicationSettings settings)
+{
+    for(auto& elem : settings.appearanceSettings)
+        m_appearanceSettingsMap.insert(elem.first, elem.second);
+
+    for(auto& elem : settings.generalSettings)
+        m_generalSettingsMap.insert(elem.first, elem.second);
+
+    for(auto& elem : settings.shortcuts)
+        m_shortcutsMap.insert(elem.first, elem.second);
 }
 
 bool SettingsController::keyIsValid(int key)

@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QVariant>
 #include <memory>
+#include "application_settings.hpp"
 #include "i_settings_controller.hpp"
 #include "i_settings_service.hpp"
 #include "setting_groups.hpp"
@@ -17,7 +18,6 @@ class SettingsController : public ISettingsController
 public:
     SettingsController(application::ISettingsService* settingsService);
 
-    QString getSetting(int key, int group) override;
     void setSetting(int key, const QVariant& value, int group) override;
     void resetSettingGroup(int group) override;
 
@@ -29,6 +29,7 @@ private slots:
     void updateChangedSetting(application::setting_keys::SettingKeys key,
                               QVariant value,
                               application::setting_groups::SettingGroups group);
+    void initialiseSettings(application::utility::ApplicationSettings settings);
 
 private:
     bool keyIsValid(int key);

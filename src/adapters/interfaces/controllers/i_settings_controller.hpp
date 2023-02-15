@@ -23,7 +23,6 @@ class ISettingsController : public QObject
 public:
     virtual ~ISettingsController() noexcept = default;
 
-    Q_INVOKABLE virtual QString getSetting(int key, int group) = 0;
     Q_INVOKABLE virtual void setSetting(int key, const QVariant& value,
                                         int group) = 0;
     Q_INVOKABLE virtual void resetSettingGroup(int group) = 0;
@@ -31,10 +30,6 @@ public:
     virtual QQmlPropertyMap* getAppearanceSettings() = 0;
     virtual QQmlPropertyMap* getGeneralSettings() = 0;
     virtual QQmlPropertyMap* getShortcuts() = 0;
-
-signals:
-    void settingChanged();
-    void reload();
 };
 
 }  // namespace adapters
