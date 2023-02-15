@@ -13,6 +13,7 @@ Item
     property string boxBackgroundColor: Style.colorContainerBackground
     
     property alias model: selectionPopup.model
+    property alias listView: selectionPopup.listView
     property alias checkBoxStyle: selectionPopup.checkBoxStyle
     property alias checkBoxSize: selectionPopup.checkBoxSize
     property alias checkBoxImageSize: selectionPopup.checkBoxImageSize
@@ -179,9 +180,9 @@ Item
     }
     
     
-    function selectItem(index)
+    function selectItem(index, initialSelect = false)
     {
-        selectionPopup.selectItem(index);
+        selectionPopup.selectItem(index, initialSelect);
     }
     
     function deselectCurrenItem()

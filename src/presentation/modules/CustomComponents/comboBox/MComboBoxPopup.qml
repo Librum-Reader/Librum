@@ -11,6 +11,7 @@ Popup
     id: root
     property string selectedContent
     property alias model: listView.model
+    property alias listView: listView
     property int itemHeight: 28
     property int maxHeight: 208
     property int defaultIndex: -1
