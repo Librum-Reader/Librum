@@ -136,6 +136,8 @@ Page
                             Layout.topMargin: 4
                             leftText: "Dark"
                             rightText: "Light"
+                            leftSelected: savedValue === leftText
+                            rightSelected: savedValue === rightText
                             
                             // Need rebinding on reset
                             onSavedValueChanged: savedValue == leftText ? selectLeft() : selectRight()
