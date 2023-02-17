@@ -94,8 +94,8 @@ target_link_libraries(application
 )
 
 
-# Remove 'address sanatizer' from 'application' target when compiling with anything but GCC.
-# Okular core has some ODR violations, which lead to 'address sanatizer' failing on startup.
+# Remove 'address sanitizer' from 'application' target when compiling with anything but GCC.
+# Okular core has some ODR violations, which lead to 'address sanitizer' failing on startup.
 # It works well with GCC though, so just remove it when compiling with any other compiler.
 set(SPECIALISED_SANITIZERS ${LIBRUM_SANITIZERS})  # Fixed list of sanitizers
 

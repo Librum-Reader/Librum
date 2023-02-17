@@ -25,7 +25,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # If compiler is GCC
 endif()
                           
 
-# Create a set of sanatizers                          
+# Create a set of sanitizers
 string(CONCAT LIBRUM_SANITIZERS "-fsanitize=address,undefined,shift,integer-divide-by-zero,"
                                 "float-divide-by-zero,unreachable,vla-bound,null,return,leak,"
                                 "bounds,float-cast-overflow,enum")
