@@ -56,5 +56,3 @@ target_include_directories(presentation
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-g3;-Og>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
-
-target_link_options(presentation PRIVATE "${LIBRUM_SANITIZERS}")
