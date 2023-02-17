@@ -81,9 +81,10 @@ target_include_directories(appLibrum
         ${OKULARCORE_INCLUDES}
 )
 
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-fno-sanitize-recover=all;-Wall;-Wextra;-g3;-Og>")
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
+target_link_options(appLibrum PRIVATE "${LIBRUM_SANITIZERS}")
 
 
 

@@ -48,3 +48,6 @@ target_include_directories(adapters_unit_tests
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
 )
+
+target_compile_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")
+target_link_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")

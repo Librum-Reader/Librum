@@ -54,5 +54,7 @@ target_include_directories(presentation
                     ${OKULARCORE_INCLUDES}
 )
 
-target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:-Wall;-Wextra;-g3;-Og>")
+target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-g3;-Og>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+target_link_options(presentation PRIVATE "${LIBRUM_SANITIZERS}")

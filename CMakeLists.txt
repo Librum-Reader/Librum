@@ -3,11 +3,6 @@ project(Librum VERSION 0.1
                LANGUAGES CXX)
 
 
-#Qt
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
 # Configuration
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
@@ -19,6 +14,10 @@ string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-s
                               "-Wduplicated-branches;-Wlogical-op;-Wcast-qual;-Winit-self;"
                               "-Wunsafe-loop-optimizations;-Wmissing-include-dirs;-Wredundant-decls;"
                               "-Wswitch-enum;-Wunreachable-code;")
+                          
+string(CONCAT LIBRUM_SANITIZERS "-fsanitize=address,undefined,shift,integer-divide-by-zero,"
+                                "float-divide-by-zero,unreachable,vla-bound,null,return,leak,"
+                                "bounds,float-cast-overflow,enum")
 
 
 # Dependencies

@@ -36,5 +36,7 @@ target_link_libraries(infrastructure
                     Qt5::Gui
                     Qt5::Network
 )
-target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};-g3;-Og>")
+target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-g3;-Og>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+target_link_options(infrastructure PRIVATE "${LIBRUM_SANITIZERS}")

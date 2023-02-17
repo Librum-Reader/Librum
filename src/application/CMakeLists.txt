@@ -93,5 +93,22 @@ target_link_libraries(application
                     okularcore
 )
 
-target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};-g3;-Og>")
+
+# Remove 'address sanatizer' from 'application' target when compiling with anything but GCC.
+# Okular core has some ODR violations, which lead to 'address sanatizer' failing on startup.
+# It works well with GCC though, so just remove it when compiling with any other compiler.
+set(SPECIALISED_SANITIZERS ${LIBRUM_SANITIZERS})  # Fixed list of sanitizers
+
+# Replace 'address' with empty string if compiler_id is not GNU
+if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+    string(REPLACE "address," "" SPECIALISED_SANITIZERS "${SPECIALISED_SANITIZERS}")
+    message("Disabled 'address sanitizer' for target 'application'")
+endif()
+message(${SPECIALISED_SANITIZERS})
+
+
+
+target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${SPECIALISED_SANITIZERS};-g3;-Og;>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+#target_link_options(application PRIVATE "${LIBRUM_SANITIZERS}")
