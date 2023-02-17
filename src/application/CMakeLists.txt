@@ -104,7 +104,6 @@ if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
     string(REPLACE "address," "" SPECIALISED_SANITIZERS "${SPECIALISED_SANITIZERS}")
     message("Disabled 'address sanitizer' for target 'application'")
 endif()
-message(${SPECIALISED_SANITIZERS})
 
 
 
