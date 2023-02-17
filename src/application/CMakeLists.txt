@@ -110,4 +110,4 @@ endif()
 target_compile_options(application PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${SPECIALISED_SANITIZERS};-g3;-Og;>")
 target_compile_options(application PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
-#target_link_options(application PRIVATE "${LIBRUM_SANITIZERS}")
+target_link_options(application PRIVATE "${LIBRUM_SANITIZERS}")
