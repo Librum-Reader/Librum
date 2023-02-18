@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick 2.15
+import Qt.labs.settings 1.1
 import Librum.controllers 1.0
 import Librum.icons 1.0
 
@@ -79,7 +80,7 @@ Item
     
     
     state: (SettingsController.appearanceSettings.Theme === undefined 
-            ? "Light" // default
+            ? lastRunSettings.theme // default
             : SettingsController.appearanceSettings.Theme)
     
     states: [
@@ -233,4 +234,14 @@ Item
     
     // Change icons
     onStateChanged: Icons.setState(state)
+    
+    
+    // Settings which capture the application theme the last time the application ran.
+    // This way the correct theme is also chosen before the user is authenticated.
+    Settings
+    {
+        id: lastRunSettings
+        property string theme: "Light"
+    }
+    Component.onDestruction: lastRunSettings.theme = styleSheet.state
 }
