@@ -1,3 +1,9 @@
+# Qt
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+
 # Dependencies
 find_package(QT NAMES Qt5 COMPONENTS Core Quick Xml PrintSupport Test REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Xml PrintSupport Test REQUIRED)
@@ -11,8 +17,11 @@ add_executable(application_unit_tests
                     services/user_service_tests.cpp
                     services/settings_service_tests.cpp
                     services/authentication_service_tests.cpp
+                    
                     utility/downloaded_books_tracker_tests.cpp
                     utility/book_storage_manager_tests.cpp
+                    utility/test_enum.hpp
+                    utility/enum_utils_tests.cpp
     )
 
 target_link_libraries(application_unit_tests
