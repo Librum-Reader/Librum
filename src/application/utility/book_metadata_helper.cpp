@@ -146,7 +146,7 @@ void BookMetadataHelper::loadCover() const
             &BookMetadataHelper::proccessCoverPixmap);
 
     auto coverSize = getCoverSize();
-    auto request =
+    auto* request =
         new PixmapRequest(m_observer.get(), 0, coverSize.width(),
                           coverSize.height(), 1, 1, PixmapRequest::NoFeature);
 
@@ -233,10 +233,10 @@ void BookMetadataHelper::proccessCoverPixmap(int page, int flag)
     if(page != firstPage || flag != DocumentObserver::Pixmap)
         return;
 
-    auto coverPixmap = m_document->page(0)->getPixmap(
+    auto* coverPixmap = m_document->page(0)->getPixmap(
         m_observer.get(), Book::maxCoverWidth, Book::maxCoverHeight);
 
-    if(coverPixmap)
+    if(coverPixmap != nullptr)
         emit bookCoverGenerated(coverPixmap);
 }
 

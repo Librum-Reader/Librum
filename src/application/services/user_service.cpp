@@ -31,7 +31,7 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
     connect(&m_user, &User::tagsChanged, this, &UserService::tagsChanged);
 
     // Fetch changes timer
-    m_fetchChangesTimer.setInterval(15'000);
+    m_fetchChangesTimer.setInterval(m_fetchChangesInverval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             &UserService::loadUser);
 }

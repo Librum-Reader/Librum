@@ -51,6 +51,7 @@ private:
     domain::entities::User m_user;
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
+    const int m_fetchChangesInverval = 15'000;
 };
 
 }  // namespace application::services

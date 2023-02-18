@@ -10,7 +10,7 @@ template<typename Enum>
 QString getNameForEnumValue(Enum value)
 {
     QMetaEnum meta = QMetaEnum::fromType<Enum>();
-    auto text = meta.valueToKey(static_cast<int>(value));
+    auto* text = meta.valueToKey(static_cast<int>(value));
 
     return QString::fromLatin1(text);
 }

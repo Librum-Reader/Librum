@@ -24,7 +24,7 @@ public:
 Book getBookWithTags(std::initializer_list<QString> tagNames)
 {
     Book book("some/path", {});
-    for(auto& tagName : tagNames)
+    for(const auto& tagName : tagNames)
     {
         book.addTag(Tag(tagName));
     }

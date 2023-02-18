@@ -292,7 +292,7 @@ TEST(ABook, SucceedsGettingTagByUuid)
 
 
     // Act
-    auto result = book.getTagByUuid(firstTag.getUuid());
+    auto* result = book.getTagByUuid(firstTag.getUuid());
 
     // Assert
     EXPECT_EQ(firstTag, *result);
@@ -307,7 +307,7 @@ TEST(ABook, FailsGettingTagByUuidIfTagDoesNotExist)
 
 
     // Act
-    auto result = book.getTagByUuid(QUuid::createUuid());
+    auto* result = book.getTagByUuid(QUuid::createUuid());
 
     // Assert
     EXPECT_EQ(nullptr, result);
@@ -324,7 +324,7 @@ TEST(ABook, SucceedsGettingTagByName)
 
 
     // Act
-    auto result = book.getTagByName(firstTag.getName());
+    auto* result = book.getTagByName(firstTag.getName());
 
     // Assert
     EXPECT_EQ(firstTag, *result);
@@ -339,7 +339,7 @@ TEST(ABook, FailsGettingTagByNameIfTagDoesNotExist)
 
 
     // Act
-    auto result = book.getTagByName("NonExistentTag");
+    auto* result = book.getTagByName("NonExistentTag");
 
     // Assert
     EXPECT_EQ(nullptr, result);

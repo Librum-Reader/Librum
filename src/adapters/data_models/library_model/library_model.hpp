@@ -53,7 +53,7 @@ public slots:
     void endInsertingRow();
     void startDeletingBook(int index);
     void endDeletingBook();
-    void processBookCover(int index);
+    void processBookCover(int row);
     void refreshTags(int row);
     void refreshBook(int row);
     void startBookClearing();

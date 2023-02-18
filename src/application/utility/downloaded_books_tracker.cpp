@@ -129,7 +129,7 @@ void DownloadedBooksTracker::clearLibraryOwner()
     m_libraryFolder = QDir();
 }
 
-void DownloadedBooksTracker::ensureUserLibraryExists()
+void DownloadedBooksTracker::ensureUserLibraryExists() const
 {
     auto libraryDir = getLibraryDir();
 

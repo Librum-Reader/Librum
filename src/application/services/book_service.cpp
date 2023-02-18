@@ -25,7 +25,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
             this, &BookService::storeBookCover);
 
     // Fetch changes timer
-    m_fetchChangesTimer.setInterval(10'000);
+    m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
             &IBookStorageManager::loadRemoteBooks);
 
@@ -70,7 +70,7 @@ auto BookService::getBookPosition(const QUuid& uuid)
 
 BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
-    if(!getBook(uuid))
+    if(getBook(uuid) == nullptr)
     {
         qWarning() << QString("Could not delete book with uuid: %1. "
                               "No book with this uuid exists.")
@@ -78,7 +78,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    const auto book = getBook(uuid);
+    const auto* book = getBook(uuid);
     utility::BookForDeletion bookToDelete {
         .uuid = uuid,
         .downloaded = book->getDownloaded(),
@@ -98,8 +98,8 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 
 BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
 {
-    auto book = getBook(uuid);
-    if(!book)
+    auto* book = getBook(uuid);
+    if(book == nullptr)
     {
         qWarning() << QString("Could not uninstall book with uuid: %1. "
                               "No book with this uuid exists.")
@@ -118,8 +118,8 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
 
 BookOperationStatus BookService::updateBook(const Book& newBook)
 {
-    auto book = getBook(newBook.getUuid());
-    if(!book)
+    auto* book = getBook(newBook.getUuid());
+    if(book == nullptr)
     {
         qWarning() << QString("Failed updating book with uuid: %1."
                               "No book with this uuid exists.")
@@ -148,8 +148,8 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
 BookOperationStatus BookService::addTag(const QUuid& uuid,
                                         const domain::entities::Tag& tag)
 {
-    auto book = getBook(uuid);
-    if(!book)
+    auto* book = getBook(uuid);
+    if(book == nullptr)
     {
         qWarning() << QString("Adding tag to book with uuid: %1 failed. No "
                               "book with this uuid exists.")
@@ -177,8 +177,8 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
 BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
                                            const QUuid& tagUuid)
 {
-    auto book = getBook(bookUuid);
-    if(!book)
+    auto* book = getBook(bookUuid);
+    if(book == nullptr)
     {
         qWarning() << QString("Removing tag from book with uuid: %1 failed. No "
                               "book with this uuid exists.")
@@ -207,8 +207,8 @@ BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
                                            const QUuid& tagUuid,
                                            const QString& newName)
 {
-    auto book = getBook(bookUuid);
-    if(!book)
+    auto* book = getBook(bookUuid);
+    if(book == nullptr)
     {
         qWarning() << QString("Renaming tag from book with uuid: %1 failed."
                               "No book with this uuid exists.")
@@ -265,7 +265,7 @@ Book* BookService::getBook(const QUuid& uuid)
 int BookService::getBookIndex(const QUuid& uuid) const
 {
     auto* book = getBook(uuid);
-    if(!book)
+    if(book == nullptr)
         return -1;
 
     std::vector<Book>::const_iterator bookPosition(book);
@@ -282,8 +282,8 @@ int BookService::getBookCount() const
 BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
                                                 const QUrl& pathToFolder)
 {
-    auto book = getBook(uuid);
-    if(!book)
+    auto* book = getBook(uuid);
+    if(book == nullptr)
     {
         qWarning() << QString("Saving book with uuid: %1 to folder %2 failed."
                               " No book with this uuid exists.")
@@ -310,8 +310,8 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
 
 bool BookService::refreshLastOpened(const QUuid& uuid)
 {
-    auto book = getBook(uuid);
-    if(!book)
+    auto* book = getBook(uuid);
+    if(book == nullptr)
         return false;
 
     book->setLastOpened(QDateTime::currentDateTimeUtc());
@@ -375,8 +375,8 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
 {
     for(const auto& remoteBook : remoteBooks)
     {
-        auto localBook = getBook(remoteBook.getUuid());
-        if(localBook)
+        auto* localBook = getBook(remoteBook.getUuid());
+        if(localBook != nullptr)
         {
             mergeBooks(*localBook, remoteBook);
             continue;

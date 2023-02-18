@@ -216,7 +216,7 @@ TEST_F(ABookService, SucceedsUpdatingABook)
 
     // Act
     auto resultStatus = bookService->updateBook(bookToUpdateWith);
-    auto result = bookService->getBook(bookToUpdateWith.getUuid());
+    auto* result = bookService->getBook(bookToUpdateWith.getUuid());
 
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
@@ -268,7 +268,7 @@ TEST_F(ABookService, SucceedsGettingABook)
     bookService->addBook(path);
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
 
-    auto result = bookService->getBook(bookUuid);
+    auto* result = bookService->getBook(bookUuid);
 
     // Assert
     EXPECT_EQ(expectedResult.getTitle(), result->getTitle());
@@ -285,7 +285,7 @@ TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
 
 
     // Act
-    auto result = bookService->getBook(bookUuid);
+    auto* result = bookService->getBook(bookUuid);
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -306,7 +306,7 @@ TEST_F(ABookService, SucceedsAddingATag)
     auto firstResultStatus = bookService->addTag(bookUuid, firstTag);
     auto secondResultStatus = bookService->addTag(bookUuid, secondTag);
 
-    auto result = bookService->getBook(bookUuid);
+    auto* result = bookService->getBook(bookUuid);
 
     // Assert
     EXPECT_EQ(expectedResultStatus, firstResultStatus);

@@ -197,7 +197,7 @@ TEST_F(ADownloadedBooksTracker, FailsGettingAllTrackedBooksIfNoneExist)
     auto result = downloadedBooksTracker.getTrackedBooks();
 
     // Assert
-    EXPECT_TRUE(result.size() == 0);
+    EXPECT_TRUE(result.empty());
 }
 
 TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)

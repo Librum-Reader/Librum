@@ -16,7 +16,7 @@ TEST(AUser, SucceedsAddingATag)
 
     // Act
     auto result = user.addTag(tag);
-    auto tagResult = user.getTagByUuid(tag.getUuid());
+    auto* tagResult = user.getTagByUuid(tag.getUuid());
     auto tagAmountAfterAdding = user.getTags().size();
 
     // Assert
@@ -63,7 +63,7 @@ TEST(AUser, SucceedsDeletingATag)
 
     // Act
     auto result = user.deleteTag(tag.getUuid());
-    auto tagResult = user.getTagByUuid(tag.getUuid());
+    auto* tagResult = user.getTagByUuid(tag.getUuid());
     auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
@@ -99,7 +99,7 @@ TEST(AUser, SucceedsRenamingATag)
 
     // Act
     auto result = user.renameTag(tag.getUuid(), newTagName);
-    auto tagResult = user.getTagByUuid(tag.getUuid());
+    auto* tagResult = user.getTagByUuid(tag.getUuid());
 
     // Assert
     EXPECT_TRUE(result);
@@ -114,7 +114,7 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 
     // Act
     auto result = user.renameTag("NonExistantTagUuid", newTagName);
-    auto tagResult = user.getTagByName(newTagName);
+    auto* tagResult = user.getTagByName(newTagName);
 
     // Assert
     EXPECT_FALSE(result);
@@ -160,7 +160,7 @@ TEST(AUser, SucceedsGettingATagByName)
     user.addTag(tag);
 
     // Act
-    auto result = user.getTagByName(tag.getName());
+    auto* result = user.getTagByName(tag.getName());
 
     // Assert
     EXPECT_EQ(*result, tag);
@@ -172,7 +172,7 @@ TEST(AUser, FailsGettingATagByNameIfTagDoesNotExist)
     User user("first", "last", "email@librum.com");
 
     // Act
-    auto result = user.getTagByName("NonExistentTag");
+    auto* result = user.getTagByName("NonExistentTag");
 
     // Assert
     EXPECT_EQ(nullptr, result);
@@ -186,7 +186,7 @@ TEST(AUser, SucceedsGettingATagByUuid)
     user.addTag(tag);
 
     // Act
-    auto result = user.getTagByUuid(tag.getUuid());
+    auto* result = user.getTagByUuid(tag.getUuid());
 
     // Assert
     EXPECT_EQ(*result, tag);
@@ -198,7 +198,7 @@ TEST(AUser, FailsGettingATagByUuidIfTagDoesNotExist)
     User user("first", "last", "email@librum.com");
 
     // Act
-    auto result = user.getTagByUuid(QUuid::createUuid());
+    auto* result = user.getTagByUuid(QUuid::createUuid());
 
     // Assert
     EXPECT_EQ(nullptr, result);

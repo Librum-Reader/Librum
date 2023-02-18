@@ -271,7 +271,7 @@ bool Book::removeTag(const QUuid& uuid)
 
 bool Book::renameTag(const QUuid& uuid, const QString& newName)
 {
-    auto tag = getTagByUuid(uuid);
+    auto* tag = getTagByUuid(uuid);
     if(tag == nullptr)
         return false;
 

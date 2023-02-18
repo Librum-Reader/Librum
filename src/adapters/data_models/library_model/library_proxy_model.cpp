@@ -83,8 +83,8 @@ std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
         return true;
     if(leftRatio < rightRatio)
         return false;
-    else
-        return std::nullopt;
+
+    return std::nullopt;
 }
 
 double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
@@ -127,11 +127,8 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
-    if(filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
-       filterAcceptsFormat(index) && filterAcceptsStatus(index))
-        return true;
-
-    return false;
+    return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
+           filterAcceptsFormat(index) && filterAcceptsStatus(index);
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -249,10 +246,8 @@ bool LibraryProxyModel::higherProgressPercentage(const QModelIndex& left,
 bool LibraryProxyModel::filterAcceptsTags(const QModelIndex& bookIndex) const
 {
     auto tags = getTags(bookIndex);
-    if(m_tags.empty() || bookContainsAllTags(tags))
-        return true;
 
-    return false;
+    return m_tags.empty() || bookContainsAllTags(tags);
 }
 
 std::vector<dtos::TagDto> LibraryProxyModel::getTags(
@@ -301,10 +296,7 @@ bool LibraryProxyModel::filterAcceptsAuthors(const QModelIndex& bookIndex) const
                                authors.toStdString()) >= 55;
     bool authorsContainsRequest = authors.contains(m_filterRequest.authors);
 
-    if(authorsContainsRequest || authorsAndRequestAreSimilar)
-        return true;
-
-    return false;
+    return authorsContainsRequest || authorsAndRequestAreSimilar;
 }
 
 bool LibraryProxyModel::filterAcceptsFormat(const QModelIndex& bookIndex) const

@@ -9,7 +9,7 @@ namespace logging
 {
 
 void logMessageToStdout(const QString& logLine);
-void logMessageToFile(const QString& logLine);
+void logMessageToFile(const QString& logMessage);
 QString getMsgTypeAsString(const QtMsgType& type);
 QString getFunctionNameFromSignature(const QString& signature);
 

@@ -21,10 +21,7 @@ QString LoginModel::getPassword() const
 
 bool LoginModel::isValid() const
 {
-    if(emailIsValid() && passwordIsValid())
-        return true;
-
-    return false;
+    return emailIsValid() && passwordIsValid();
 }
 
 bool LoginModel::emailIsValid() const

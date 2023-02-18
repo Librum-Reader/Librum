@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
 
 
     // Authentication-Stack
-    auto authenticationService =
+    auto* authenticationService =
         config::diConfig().create<application::IAuthenticationService*>();
     auto authenticationController =
         std::make_unique<AuthenticationController>(authenticationService);
@@ -79,19 +79,19 @@ int main(int argc, char* argv[])
                                  authenticationController.get());
 
     // User-Stack
-    auto userService = config::diConfig().create<application::IUserService*>();
+    auto* userService = config::diConfig().create<application::IUserService*>();
     auto userController = std::make_unique<UserController>(userService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController",
                                  userController.get());
 
     // Book-Stack
-    auto bookService = config::diConfig().create<application::IBookService*>();
+    auto* bookService = config::diConfig().create<application::IBookService*>();
     auto bookController = std::make_unique<BookController>(bookService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
     // Settings-Stack
-    auto settingsService = config::diConfig().create<application::ISettingsService*>();
+    auto* settingsService = config::diConfig().create<application::ISettingsService*>();
     auto settingsController = std::make_unique<SettingsController>(settingsService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject* obj, const QUrl& objUrl)
         {
-            if(!obj && url == objUrl)
+            if(obj == nullptr && url == objUrl)
                 QCoreApplication::exit(-1);
         },
         Qt::QueuedConnection);
@@ -181,9 +181,9 @@ void addTranslations()
 
 void loadFonts()
 {
-    const QString fontsPath =
-        QGuiApplication::instance()->applicationDirPath() + "/resources/fonts/";
-    const QDir fontsDir(fontsPath);
+    QString fontsPath =
+        QGuiApplication::applicationDirPath() + "/resources/fonts/";
+    QDir fontsDir(fontsPath);
     if(!fontsDir.isEmpty() && fontsDir.exists())
     {
         QDirIterator it(fontsPath, QDir::Files);

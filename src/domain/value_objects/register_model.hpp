@@ -40,22 +40,22 @@ private:
     RegisterModel::RegistrationResult passwordIsValid() const;
 
     QString m_firstName;
-    int m_minFirstNameLength = 2;
-    int m_maxFirstNameLength = 40;
+    const int m_minFirstNameLength = 2;
+    const int m_maxFirstNameLength = 40;
 
     QString m_lastName;
-    int m_minLastNameLength = 2;
-    int m_maxLastNameLength = 50;
+    const int m_minLastNameLength = 2;
+    const int m_maxLastNameLength = 50;
 
     QString m_email;
-    int m_minEmailLength = 6;
-    int m_maxEmailLength = 50;
+    const int m_minEmailLength = 6;
+    const int m_maxEmailLength = 50;
 
     QString m_password;
-    int m_minPasswordLength = 6;
-    int m_maxPasswordLength = 60;
+    const int m_minPasswordLength = 6;
+    const int m_maxPasswordLength = 60;
 
-    bool m_keepUpdated;
+    const bool m_keepUpdated;
 };
 
 }  // namespace domain::value_objects

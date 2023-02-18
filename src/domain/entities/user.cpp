@@ -85,7 +85,7 @@ const Tag* User::getTagByName(const QString& tagName) const
 
 bool User::addTag(const Tag& tag)
 {
-    if(auto t = getTagByName(tag.getName()); t != nullptr)
+    if(auto* t = getTagByName(tag.getName()); t != nullptr)
         return false;
 
     if(!tag.isValid())
@@ -117,10 +117,10 @@ bool User::deleteTag(const QUuid& uuid)
 
 bool User::renameTag(const QUuid& uuid, const QString& newName)
 {
-    if(auto tag = getTagByUuid(uuid); tag == nullptr)
+    if(auto* tag = getTagByUuid(uuid); tag == nullptr)
         return false;
 
-    if(auto tag = getTagByName(newName); tag != nullptr)
+    if(auto* tag = getTagByName(newName); tag != nullptr)
         return false;
 
     auto index = getTagIndex(uuid);
@@ -139,10 +139,10 @@ void User::clearData()
     m_tags.clear();
 }
 
-int User::getTagIndex(const QUuid& uuid)
+int User::getTagIndex(const QUuid& uuid) const
 {
-    auto tag = getTagByUuid(uuid);
-    if(!tag)
+    auto* tag = getTagByUuid(uuid);
+    if(tag == nullptr)
         return -1;
 
     std::vector<Tag>::const_iterator tagPosition(tag);

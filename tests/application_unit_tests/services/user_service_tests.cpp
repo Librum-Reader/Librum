@@ -1,7 +1,6 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <QString>
-#include "gmock/gmock.h"
 #include "i_user_storage_gateway.hpp"
 #include "user_service.hpp"
 

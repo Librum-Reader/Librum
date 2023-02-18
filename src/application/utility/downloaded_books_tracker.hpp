@@ -20,8 +20,8 @@ public:
     QDir getLibraryDir() const override;
 
 private:
-    void ensureUserLibraryExists();
-    QJsonDocument parseLibMetaFile(QByteArray&& libMetaFile) const;
+    void ensureUserLibraryExists() const;
+    QJsonDocument parseLibMetaFile(QByteArray&& data) const;
     QString getUserLibraryName(QString email) const;
 
     QString m_libraryOwnerEmail;

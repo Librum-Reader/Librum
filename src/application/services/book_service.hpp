@@ -68,6 +68,7 @@ private:
     IBookStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
     QTimer m_fetchChangesTimer;
+    const int m_fetchChangedInterval = 15'000;
 };
 
 }  // namespace application::services

@@ -44,7 +44,7 @@ signals:
     void tagsChanged(int index);
 
 private:
-    int getTagIndex(const QUuid& uuid);
+    int getTagIndex(const QUuid& uuid) const;
 
     QString m_firstName;
     QString m_lastName;

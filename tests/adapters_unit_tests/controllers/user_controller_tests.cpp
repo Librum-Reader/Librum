@@ -3,7 +3,6 @@
 #include <QImage>
 #include <QString>
 #include "QSignalSpy"
-#include "gmock/gmock.h"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
 #include "qnamespace.h"
