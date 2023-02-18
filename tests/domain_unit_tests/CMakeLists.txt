@@ -27,5 +27,5 @@ target_link_libraries(domain_unit_tests
                     Qt5::Quick
 )
 
-target_compile_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")
+target_compile_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-g3;-Og")
 target_link_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")
