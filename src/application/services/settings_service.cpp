@@ -23,6 +23,12 @@ QString SettingsService::getSetting(SettingKeys key, SettingGroups group)
     auto defaultValue = QVariant::fromValue(QString(""));
     auto result = m_settings->value(keyName, defaultValue);
 
+    if(result == defaultValue)
+    {
+        qWarning() << QString("Requested Setting with key: %1 does not exist.")
+                          .arg(keyName);
+    }
+
     m_settings->endGroup();
     return result.toString();
 }
