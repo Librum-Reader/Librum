@@ -134,6 +134,12 @@ void SettingsService::generateDefaultSettings()
 void SettingsService::loadDefaultSettingsGroup(SettingGroups group)
 {
     auto defaultSettings = getDefaultSettingsForGroup(group);
+    if(defaultSettings.isEmpty())
+    {
+        qCritical() << QString("Failed loading default settings for group: %1")
+                           .arg(getNameForEnumValue(group));
+    }
+
     for(const auto& defaultSettingKey : defaultSettings.keys())
     {
         // Default settings are only loaded for settings which don't yet exist.
@@ -177,6 +183,7 @@ QJsonObject SettingsService::getDefaultSettingsForGroup(SettingGroups group)
     {
         qWarning() << QString("Failed opening the default settings file: %1")
                           .arg(defaultSettingsFilePath);
+        return {};
     }
 
     QByteArray rawJson = defaultSettingsFile.readAll();
