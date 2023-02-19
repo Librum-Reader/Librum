@@ -94,6 +94,17 @@ target_link_libraries(application
 )
 
 
+# Precompiled header support
+option(LIBRUM_BUILD_USING_PCH "Build using pre-compile header support" ON)
+if (LIBRUM_BUILD_USING_PCH)
+    message("Compiling using pre-compiled headers")
+    target_precompile_headers(application PUBLIC librum_application_pch.hpp) # PUBLIC - every linking target gets the same PCHs
+    set(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
+else()
+    message(STATUS "Precompiled headers are disabled")
+endif()
+
+
 # Remove 'address sanitizer' from 'application' target when compiling with anything but GCC.
 # Okular core has some ODR violations, which lead to 'address sanitizer' failing on startup.
 # It works well with GCC though, so just remove it when compiling with any other compiler.
