@@ -430,7 +430,7 @@ void BookService::mergeBooks(Book& original, const Book& mergee)
 MergeStatus BookService::mergeCurrentPage(domain::entities::Book& original,
                                           const domain::entities::Book& mergee)
 {
-    // Take the current time in seconds, so there are no ms dismatches
+    // Take the current time in seconds, so there are no ms mismatches
     auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
     auto originalLastOpened = original.getLastOpened().toSecsSinceEpoch();
 
@@ -451,7 +451,7 @@ MergeStatus BookService::mergeCurrentPage(domain::entities::Book& original,
 MergeStatus BookService::mergeBookData(domain::entities::Book& original,
                                        const domain::entities::Book& mergee)
 {
-    // Take the current time in seconds, so there are no ms dismatches
+    // Take the current time in seconds, so there are no ms mismatches
     auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();
     auto originalLastModified = original.getLastModified().toSecsSinceEpoch();
 
