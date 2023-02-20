@@ -236,6 +236,7 @@ Page
                     id: chapterSidebar
                     property int lastWidth: 300
                     property bool active: false
+                    chapterModel: documentItem.tableOfContents
                     
                     anchors.fill: parent
                     visible: false

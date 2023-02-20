@@ -6,12 +6,14 @@ import Librum.elements 1.0
 import Librum.models 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
-import QtQuick.TreeView 2.15 as QtMarketplace
+import QtQuick.TreeView 2.15 as Chapters
 
 
 Item
 {
     id: root
+    property var chapterModel
+    
     implicitWidth: 300
     implicitHeight: 600
     
@@ -92,19 +94,21 @@ Item
                     anchors.fill: parent
                     
                     
-                    QtMarketplace.TreeView
+                    Chapters.TreeView
                     {
                         id: treeView
                         anchors.fill: parent
                         anchors.margins: 1
-                        model: fileSystemModel
+                        model: root.chapterModel
                         clip: true
                         focus: true
-                        navigationMode: navigationModeBox.checked ? QtMarketplace.TreeView.Table : QtMarketplace.TreeView.List
+                        navigationMode: Chapters.TreeView.List
             
-                        states: State {
+                        states: State
+                        {
                             when: plainModeBox.checked == false
-                            PropertyChanges {
+                            PropertyChanges
+                            {
                                 target: treeView
                                 styleHints.indent: 18
                                 styleHints.columnPadding: 20
@@ -124,12 +128,14 @@ Item
                             }
                         }
             
-                        onCurrentModelIndexChanged: {
+                        onCurrentModelIndexChanged:
+                        {
                             var label = model.data(currentModelIndex, treeView.textRole)
                             selectedLabel.text = "Selected row " + currentIndex.row + ", label: " + label
                         }
             
-                        Keys.onReturnPressed: {
+                        Keys.onReturnPressed:
+                        {
                             // Set the second file inside the root folder as current:
                             var rootIndex = fileSystemModel.index(0, 0)
                             var childIndex = fileSystemModel.index(1, 0, rootIndex)
