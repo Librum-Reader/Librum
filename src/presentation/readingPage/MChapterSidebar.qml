@@ -6,6 +6,7 @@ import Librum.elements 1.0
 import Librum.models 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import QtQuick.TreeView 2.15 as QtMarketplace
 
 
 Item
@@ -91,122 +92,51 @@ Item
                     anchors.fill: parent
                     
                     
-                    TreeView
+                    QtMarketplace.TreeView
                     {
                         id: treeView
-                        property int selectedItemRow
-                        property int selectedItemDepth
-                        
-//                        anchors.fill: parent
-//                        anchors.rightMargin: 12
-//                        boundsMovement: Flickable.StopAtBounds
-//                        maximumFlickVelocity: 550
-//                        reuseItems: false
-//                        clip: true
-                        
-//                        model: ChapterTreeModel { }
-//                        delegate: Item
-//                        {
-//                            id: treeDelegate
-//                            required property TreeView treeView
-//                            required property int row
-//                            required property int column
-//                            required property bool isTreeNode
-//                            required property bool expanded
-//                            required property int hasChildren
-//                            required property int depth
-                            
-//                            readonly property real indent: 16
-//                            property bool selected: false
-                            
-//                            implicitWidth: treeView.width
-//                            implicitHeight: labelBox.height
-                            
-                            
-//                            RowLayout
-//                            {
-//                                id: deleagteLayout
-//                                anchors.fill: parent
-//                                anchors.leftMargin: treeDelegate.depth * treeDelegate.indent + (!indicator.visible ? indicator.width + spacing : 0)
-//                                spacing: 4
-                                
-                                
-//                                Item { Layout.fillHeight: true; Layout.preferredWidth: 2 }
-                                
-//                                Image
-//                                {
-//                                    id: indicator
-//                                    visible: treeDelegate.isTreeNode && treeDelegate.hasChildren
-//                                    source: Icons.arrowRightGray
-//                                    sourceSize.width: 7
-//                                    fillMode: Image.PreserveAspectFit
-//                                    rotation: treeDelegate.expanded ? 90 : 0
-                                    
-//                                    TapHandler
-//                                    {
-//                                        onTapped: treeView.toggleExpanded(row)
-//                                    }
-//                                }
-                                
-//                                Rectangle
-//                                {
-//                                    id: labelBox
-//                                    Layout.fillWidth: true
-//                                    Layout.preferredHeight: 22
-                                    
-//                                    color: treeDelegate.selected ? Style.colorLightHighlight
-//                                                                 : itemHoverDetector.containsMouse ? Style.colorLightGray 
-//                                                                                                   : "transparent"
-//                                    radius: 2
-                                    
-                                    
-//                                    Label
-//                                    {
-//                                        id: label
-//                                        anchors.fill: parent
-//                                        verticalAlignment: Text.AlignVCenter
-//                                        horizontalAlignment: Text.AlignLeft
-//                                        anchors.leftMargin: 4
-//                                        text: model.display
-//                                        font.pointSize: 10.5
-//                                        font.weight: treeDelegate.selected ? Font.Medium : Font.Normal
-//                                        color: treeDelegate.selected ? Style.colorBasePurple : Style.colorText
-//                                        elide: Text.ElideRight
-//                                    }
-                                    
-//                                    MouseArea
-//                                    {
-//                                        id: itemHoverDetector
-//                                        anchors.fill: parent
-//                                        hoverEnabled: true
-                                        
-//                                        onClicked:
-//                                        {
-//                                            treeDelegate.changeSelectedItem(treeDelegate);
-//                                        }
-//                                    }
-//                                }
-//                            }
-                        
-                            
-//                            Component.onCompleted:
-//                            {
-//                                if(treeDelegate.depth == treeView.selectedItemDepth && treeDelegate.row == treeView.selectedItemRow)
-//                                    treeDelegate.selected = true;
-//                            }
-                            
-//                            function changeSelectedItem(item)
-//                            {   
-//                                let selectedItem = treeView.itemAtCell(treeView.selectedItemDepth, treeView.selectedItemRow);                                    
-                                
-//                                if(selectedItem)
-//                                    selectedItem.selected = false;
-                                
-//                                item.selected = true;
-//                                treeView.selectedItemRow = item.row;
-//                                treeView.selectedItemDepth = item.depth;
-//                            }
-//                        }
+                        anchors.fill: parent
+                        anchors.margins: 1
+                        model: fileSystemModel
+                        clip: true
+                        focus: true
+                        navigationMode: navigationModeBox.checked ? QtMarketplace.TreeView.Table : QtMarketplace.TreeView.List
+            
+                        states: State {
+                            when: plainModeBox.checked == false
+                            PropertyChanges {
+                                target: treeView
+                                styleHints.indent: 18
+                                styleHints.columnPadding: 20
+                                styleHints.font.bold: true
+                                styleHints.foregroundOdd: "#001a66"
+                                styleHints.backgroundOdd: "#e6ecff"
+                                styleHints.foregroundEven: "#001a66"
+                                styleHints.backgroundEven: "#ccd9ff"
+                                styleHints.foregroundCurrent: "#ebf0fa"
+                                styleHints.backgroundCurrent: "#2e5cb8"
+                                styleHints.foregroundHovered: styleHints.foregroundCurrent
+                                styleHints.backgroundHovered: styleHints.backgroundCurrent
+                                styleHints.indicator: styleHints.backgroundCurrent
+                                styleHints.indicatorCurrent: styleHints.foregroundCurrent
+                                styleHints.indicatorHovered: styleHints.foregroundCurrent
+                                styleHints.overlay: navigationMode === QtMarketplace.TreeView.Table ? Qt.rgba(1, 1, 1) : "transparent"
+                            }
+                        }
+            
+                        onCurrentModelIndexChanged: {
+                            var label = model.data(currentModelIndex, treeView.textRole)
+                            selectedLabel.text = "Selected row " + currentIndex.row + ", label: " + label
+                        }
+            
+                        Keys.onReturnPressed: {
+                            // Set the second file inside the root folder as current:
+                            var rootIndex = fileSystemModel.index(0, 0)
+                            var childIndex = fileSystemModel.index(1, 0, rootIndex)
+                            currentIndex = mapFromModel(childIndex)
+                            if (!currentIndex.valid)
+                                selectedLabel.text = childIndex + " is not visible"
+                        }
                     }
                 }
             }
