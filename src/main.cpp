@@ -2,7 +2,6 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include <QDateTime>
-#include <QFileSystemModel>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -146,13 +145,9 @@ int main(int argc, char* argv[])
 
 
 
-    QFileSystemModel model;
-    model.setRootPath("/");
-
     // Startup
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/modules");
-    engine.rootContext()->setContextProperty("fileSystemModel", &model);
 
     const QUrl url("qrc:/main.qml");
     QObject::connect(
