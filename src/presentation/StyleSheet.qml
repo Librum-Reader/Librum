@@ -241,6 +241,8 @@ Item
     Settings
     {
         id: lastRunSettings
+        fileName: "last_run_settings"
+        
         property string theme: "Light"
     }
     Component.onDestruction: lastRunSettings.theme = styleSheet.state
