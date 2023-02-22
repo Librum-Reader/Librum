@@ -12,25 +12,43 @@ find_package(KF5 REQUIRED COMPONENTS
 )
 
 
-# Options
+
+############ Building TreeView ############
+#
+# Since the QtQuick.TreeView is only an add-on to Qt5, and not a real QtQuick type,
+# we need to build it our selves.
+# Sadly QtQuick.TreeView can only be built with qmake in Qt5, so we need to invoke
+# qmake via "add_custom_target" from cmake and build it that way.
+#
+#
+# TreeView variables
 set(TREEVIEW_DEST ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view)
 set(TREEVIEW_BIN ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view/qml/QtQuick/TreeView/)
 set(TREEVIEW_SRC ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements/qttreeview)
 set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${TREEVIEW_BIN}/qt_tree_view/qml/QtQuick/TreeView)
-
-
-# Add treeview
+#
+#
+# Build TreeView by invoking qmake via add_custom_target
 add_custom_target(qt_treeview_qmake ALL
-    COMMAND mkdir -p ${TREEVIEW_DEST}
-    COMMAND qmake -o ${TREEVIEW_DEST} ${TREEVIEW_SRC}
-    COMMAND make -C ${TREEVIEW_DEST}
+    COMMAND mkdir -p ${TREEVIEW_DEST}                   # Create the destination folder
+    COMMAND qmake -o ${TREEVIEW_DEST} ${TREEVIEW_SRC}   # Run qmake to generate the build files
+    COMMAND make -C ${TREEVIEW_DEST}                    # Build the TreeView
     VERBATIM
     USES_TERMINAL
 )
+#
+# Copy the necessary qt5/ folder with TreeView.qml, which is needed by the qmldir to its destination
 file(COPY ${TREEVIEW_SRC}/src/qt5 DESTINATION ${TREEVIEW_BIN})
-
-# Placeholder file, since the qmldir only gets created at build time
+#
+#
+# Create a qmldir placeholder file at the final location, because "add_library" needs it
+# at configuration time, but "add_custom_target" only generates it at build time.
+# This file is only needed so that "add_library" doesn't fail, it is replaced at build time.
 file(WRITE ${TREEVIEW_BIN}/qmldir "")
+#
+###########################################
+
+
 
 
 # Build
