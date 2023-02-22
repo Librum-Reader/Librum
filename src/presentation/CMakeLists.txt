@@ -13,15 +13,31 @@ find_package(KF5 REQUIRED COMPONENTS
 
 
 # Options
-set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view/qml/QtQuick/TreeView)
 set(TREEVIEW_DEST ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view)
+set(TREEVIEW_BIN ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view/qml/QtQuick/TreeView/)
 set(TREEVIEW_SRC ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements/qttreeview)
+set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${TREEVIEW_BIN}/qt_tree_view/qml/QtQuick/TreeView)
+
+
+# Add treeview
+add_custom_target(qt_treeview_qmake ALL
+    COMMAND mkdir -p ${TREEVIEW_DEST}
+    COMMAND qmake -o ${TREEVIEW_DEST} ${TREEVIEW_SRC}
+    COMMAND make -C ${TREEVIEW_DEST}
+    VERBATIM
+    USES_TERMINAL
+)
+file(COPY ${TREEVIEW_SRC}/src/qt5 DESTINATION ${TREEVIEW_BIN})
+
+# Placeholder file, since the qmldir only gets created at build time
+file(WRITE ${TREEVIEW_BIN}/qmldir "")
 
 
 # Build
 add_library(presentation
                 SHARED
                     ${PROJECT_SOURCE_DIR}/resources.qrc
+                    ${TREEVIEW_BIN}/qmldir
                     qmlSources.qrc
                     modules/CppElements/key_sequence_recorder.cpp
                     modules/CppElements/key_sequence_recorder.hpp
@@ -33,26 +49,13 @@ add_library(presentation
                     modules/CppElements/document_item.hpp
 )
 
+add_dependencies(presentation qt_treeview_qmake)
+
+
 target_compile_definitions(presentation
                 PRIVATE
                     $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
-
-
-# Add treeview
-add_custom_target(qt_treeview_qmake ALL
-    COMMAND mkdir -p ${TREEVIEW_DEST}
-    COMMAND qmake -o ${TREEVIEW_DEST} ${TREEVIEW_SRC}
-    COMMAND make -C ${TREEVIEW_DEST}
-    COMMAND make install -i -C ${TREEVIEW_DEST}
-    VERBATIM
-    USES_TERMINAL
-)
-
-
-
-# Make presentation depend on qt_treeview_qmake
-add_dependencies(presentation qt_treeview_qmake)
 
 
 
