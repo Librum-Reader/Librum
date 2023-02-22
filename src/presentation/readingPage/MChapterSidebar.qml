@@ -144,6 +144,7 @@ Item
                                 selectedLabel.text = childIndex + " is not visible"
                         }
                     }
+                
                 }
             }
         }

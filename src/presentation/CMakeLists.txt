@@ -13,8 +13,9 @@ find_package(KF5 REQUIRED COMPONENTS
 
 
 # Options
-set(TREEVIEW_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view/qml/QtQuick/TreeView)
-set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${TREE_VIEW_OUTPUT})
+set(QML_IMPORT_PATH ${QML_IMPORT_PATH} ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view/qml/QtQuick/TreeView)
+set(TREEVIEW_DEST ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view)
+set(TREEVIEW_SRC ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements/qttreeview)
 
 
 # Build
@@ -40,10 +41,10 @@ target_compile_definitions(presentation
 
 # Add treeview
 add_custom_target(qt_treeview_qmake ALL
-    BYPRODUCTS ${TREEVIEW_BIN_DIR}/libqquicktreeviewplugin.so
-    COMMAND mkdir -p ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view
-    COMMAND qmake -o ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements/qttreeview
-    COMMAND make -C ${CMAKE_CURRENT_BINARY_DIR}/qt_tree_view
+    COMMAND mkdir -p ${TREEVIEW_DEST}
+    COMMAND qmake -o ${TREEVIEW_DEST} ${TREEVIEW_SRC}
+    COMMAND make -C ${TREEVIEW_DEST}
+    COMMAND make install -i -C ${TREEVIEW_DEST}
     VERBATIM
     USES_TERMINAL
 )
@@ -69,7 +70,6 @@ target_link_libraries(presentation
                     KF5::Bookmarks
                     KF5::I18n
                     KF5::Service
-                    ${TREEVIEW_BIN_DIR}/libqquicktreeviewplugin.so
 )
 
 target_include_directories(presentation
