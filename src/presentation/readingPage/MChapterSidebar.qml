@@ -123,8 +123,9 @@ Item
                         delegate: Rectangle
                         {
                             id: treeNode
-                            implicitWidth: treeNodeLabel.x + treeNodeLabel.width + (treeView.styleHints.columnPadding / 2)
-                            implicitHeight: Math.max(indicator.height, treeNodeLabel.height)
+                            implicitWidth: treeView.width - 2  // L/R margins
+                            width: implicitWidth
+                            implicitHeight: Math.max(treeNodeLabel.height)
                             color: d.bgColor(column, row)
                             
                             property var view: Chapters.TreeView.view
@@ -132,39 +133,59 @@ Item
                             property bool isExpanded: Chapters.TreeView.isExpanded
                             property int depth: Chapters.TreeView.depth
                             
-                            Text
+                            
+                            RowLayout
                             {
-                                id: indicator
-                                x: depth * treeView.styleHints.indent
-                                color: d.indicatorColor(column, row)
-                                font: treeView.styleHints.font
-                                text: hasChildren ? (isExpanded ? "▼" : "▶") : ""
-                                anchors.verticalCenter: parent.verticalCenter
+                                id: nodeLayout
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                spacing: 0
                                 
-                                TapHandler
+                                
+                                Image
                                 {
-                                    onTapped:
-                                    {
-                                        if (hasChildren)
-                                            treeView.toggleExpanded(row)
-                                    }
+                                    id: indicator
+                                    Layout.preferredWidth: implicitWidth
+                                    Layout.leftMargin: depth * treeView.styleHints.indent
+                                    Layout.alignment: Qt.AlignVCenter
+                                    visible: hasChildren
+                                    source: Icons.arrowheadNextIcon
+                                    sourceSize.width: 20
+                                    fillMode: Image.PreserveAspectFit
+                                    rotation: isExpanded ? 90 : 0
+                                    
+                                    TapHandler { onTapped: if(hasChildren) treeView.toggleExpanded(row) }
                                 }
-                            }
-                            
-                            Text
-                            {
-                                id: treeNodeLabel
-                                x: indicator.x + Math.max(treeView.styleHints.indent, indicator.width * 1.5)
-                                clip: true
-                                color: d.fgColor(column, row)
-                                font: treeView.styleHints.font
-                                text: model.display
-                            }
-                            
-                            HoverHandler
-                            {
-                                enabled: d.hoverEnabled
-                                onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                
+                                Text
+                                {
+                                    id: treeNodeLabel
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: (hasChildren ? indicator.width * 0.1 : indicator.width*1.1 + depth * treeView.styleHints.indent)
+                                    Layout.alignment: Qt.AlignVCenter
+                                    clip: true
+                                    color: Style.colorText
+                                    font.pixelSize: 14
+                                    elide: Text.ElideRight
+                                    text: model.display
+                                }
+                                
+                                Text
+                                {
+                                    id: pageNumberLabel
+                                    Layout.preferredWidth: implicitWidth
+                                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                                    Layout.leftMargin: 6
+                                    color: Style.colorText
+                                    font.pixelSize: 14
+                                    text: model.page
+                                }
+                                
+                                HoverHandler
+                                {
+                                    enabled: d.hoverEnabled
+                                    onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                }
                             }
                         }
                     }
