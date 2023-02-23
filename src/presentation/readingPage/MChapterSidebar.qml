@@ -1,11 +1,12 @@
 import QtQuick 2.15
-import QtQuick.Controls 1.5
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Librum.elements 1.0
 import Librum.models 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Qt.labs.qmlmodels 1.0
+import QtQuick.Shapes 1.0
 import QtQuick.TreeView 2.15 as Chapters
 
 
@@ -103,50 +104,197 @@ Item
                         clip: true
                         focus: true
                         navigationMode: Chapters.TreeView.List
-            
-                        states: State
+                        
+                        styleHints.indent: 18
+                        styleHints.columnPadding: 20
+                        styleHints.foregroundOdd: "black"
+                        styleHints.backgroundOdd: "transparent"
+                        styleHints.foregroundEven: "black"
+                        styleHints.backgroundEven: "transparent"
+                        styleHints.foregroundCurrent: navigationMode === treeView.List ? "white" : "black"
+                        styleHints.backgroundCurrent: navigationMode === treeView.List ? "#005fe5" : "transparent"
+                        styleHints.foregroundHovered: "transparent"
+                        styleHints.backgroundHovered: "transparent"
+                        styleHints.overlay:  navigationMode === treeView.Table ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
+                        styleHints.overlayHovered: "transparent"
+                        styleHints.indicator: "black"
+                        styleHints.indicatorHovered: "transparent"
+                        
+                        delegate:  DelegateChooser
                         {
-                            when: plainModeBox.checked == false
-                            PropertyChanges
+                            DelegateChoice
                             {
-                                target: treeView
-                                styleHints.indent: 18
-                                styleHints.columnPadding: 20
-                                styleHints.font.bold: true
-                                styleHints.foregroundOdd: "#001a66"
-                                styleHints.backgroundOdd: "#e6ecff"
-                                styleHints.foregroundEven: "#001a66"
-                                styleHints.backgroundEven: "#ccd9ff"
-                                styleHints.foregroundCurrent: "#ebf0fa"
-                                styleHints.backgroundCurrent: "#2e5cb8"
-                                styleHints.foregroundHovered: styleHints.foregroundCurrent
-                                styleHints.backgroundHovered: styleHints.backgroundCurrent
-                                styleHints.indicator: styleHints.backgroundCurrent
-                                styleHints.indicatorCurrent: styleHints.foregroundCurrent
-                                styleHints.indicatorHovered: styleHints.foregroundCurrent
-                                styleHints.overlay: navigationMode === QtMarketplace.TreeView.Table ? Qt.rgba(1, 1, 1) : "transparent"
+                                // The column where the tree is drawn
+                                column: 0
+                                
+                                Rectangle
+                                {
+                                    id: treeNode
+                                    implicitWidth: treeNodeLabel.x + treeNodeLabel.width + (treeView.styleHints.columnPadding / 2)
+                                    implicitHeight: Math.max(indicator.height, treeNodeLabel.height)
+                                    color: d.bgColor(column, row)
+                                    
+                                    property var view: Chapters.TreeView.view
+                                    property bool hasChildren: Chapters.TreeView.hasChildren
+                                    property bool isExpanded: Chapters.TreeView.isExpanded
+                                    property int depth: Chapters.TreeView.depth
+                                    
+                                    Text
+                                    {
+                                        id: indicator
+                                        x: depth * treeView.styleHints.indent
+                                        color: d.indicatorColor(column, row)
+                                        font: treeView.styleHints.font
+                                        text: hasChildren ? (isExpanded ? "▼" : "▶") : ""
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        
+                                        TapHandler
+                                        {
+                                            onTapped:
+                                            {
+                                                if (hasChildren)
+                                                    treeView.toggleExpanded(row)
+                                            }
+                                        }
+                                    }
+                                    
+                                    Text
+                                    {
+                                        id: treeNodeLabel
+                                        x: indicator.x + Math.max(treeView.styleHints.indent, indicator.width * 1.5)
+                                        clip: true
+                                        color: d.fgColor(column, row)
+                                        font: treeView.styleHints.font
+                                        text: model.display
+                                    }
+                                    
+                                    HoverHandler
+                                    {
+                                        enabled: d.hoverEnabled
+                                        onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                    }
+                                }
+                            }
+                            
+                            DelegateChoice
+                            {
+                                // The remaining columns after the tree column will use this delegate
+                                Rectangle
+                                {
+                                    implicitWidth: infoLabel.x + infoLabel.width + (treeView.styleHints.columnPadding / 2)
+                                    color: d.bgColor(column, row)
+                                    Text
+                                    {
+                                        id: infoLabel
+                                        x: treeView.styleHints.columnPadding / 2
+                                        color: d.fgColor(column, row)
+                                        font: treeView.styleHints.font
+                                        text: display
+                                        clip: true
+                                    }
+                                    
+                                    HoverHandler
+                                    {
+                                        enabled: d.hoverEnabled
+                                        onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                    }
+                                }
                             }
                         }
-            
-                        onCurrentModelIndexChanged:
-                        {
-                            var label = model.data(currentModelIndex, treeView.textRole)
-                            selectedLabel.text = "Selected row " + currentIndex.row + ", label: " + label
-                        }
-            
-                        Keys.onReturnPressed:
-                        {
-                            // Set the second file inside the root folder as current:
-                            var rootIndex = fileSystemModel.index(0, 0)
-                            var childIndex = fileSystemModel.index(1, 0, rootIndex)
-                            currentIndex = mapFromModel(childIndex)
-                            if (!currentIndex.valid)
-                                selectedLabel.text = childIndex + " is not visible"
+                        
+                        Shape {
+                            id: overlayShape
+                            z: 10
+                            property point currentPos: currentItem ? mapToItem(overlayShape, Qt.point(currentItem.x, currentItem.y)) : Qt.point(0, 0)
+                            visible: currentItem != null
+                            
+                            ShapePath {
+                                id: path
+                                fillColor: "transparent"
+                                strokeColor: d.overlayColor()
+                                strokeWidth: 1
+                                strokeStyle: ShapePath.DashLine
+                                dashPattern: [1, 2]
+                                startX: currentItem ? currentItem.x + strokeWidth : 0
+                                startY: currentItem ? currentItem.y + strokeWidth : 0
+                                property real endX: currentItem ? currentItem.width + startX - (strokeWidth * 2) : 0
+                                property real endY: currentItem ? currentItem.height + startY - (strokeWidth * 2) : 0
+                                PathLine { x: path.endX; y: path.startY }
+                                PathLine { x: path.endX; y: path.endY }
+                                PathLine { x: path.startX; y: path.endY }
+                                PathLine { x: path.startX; y: path.startY }
+                            }
                         }
                     }
-                
                 }
             }
+        }
+    }
+    
+    // Don't leak API that might not be support by all styles into the public API.
+    QtObject
+    {
+        id: d
+        property var hoverIndex: treeView.viewIndex(-1, -1)
+        property bool hoverEnabled: treeView.styleHints.foregroundHovered.a > 0 || treeView.styleHints.backgroundHovered.a > 0
+        
+        function updateHoverIndex(index, hovered)
+        {
+            if (hovered)
+                hoverIndex = index
+            else if (hoverIndex === index)
+                hoverIndex = treeView.viewIndex(-1, -1)
+        }
+        
+        function bgColor(column, row)
+        {
+            if (row === d.hoverIndex.row
+                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
+                    && treeView.styleHints.backgroundHovered.a > 0)
+                return treeView.styleHints.backgroundHovered
+            else if (row === treeView.currentIndex.row)
+                return treeView.styleHints.backgroundCurrent
+            else if (row % 2)
+                return treeView.styleHints.backgroundOdd
+            else
+                return treeView.styleHints.backgroundEven
+        }
+        
+        function fgColor(column, row)
+        {
+            if (row === d.hoverIndex.row
+                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
+                    && treeView.styleHints.foregroundHovered.a > 0)
+                return treeView.styleHints.foregroundHovered
+            else if (row === treeView.currentIndex.row)
+                return treeView.styleHints.foregroundCurrent
+            else if (row % 2)
+                return treeView.styleHints.foregroundOdd
+            else
+                return treeView.styleHints.foregroundEven
+        }
+        
+        function indicatorColor(column, row)
+        {
+            if (row === d.hoverIndex.row
+                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
+                    && treeView.styleHints.indicatorHovered.a > 0)
+                return treeView.styleHints.indicatorHovered
+            else if (row === treeView.currentIndex.row)
+                return treeView.styleHints.indicatorCurrent
+            else
+                return treeView.styleHints.indicator
+        }
+        
+        function overlayColor()
+        {
+            if (d.hoverIndex.row === treeView.currentIndex.row
+                    && (d.hoverIndex.column === treeView.currentIndex.column || navigationMode === treeView.List)
+                    && treeView.styleHints.overlayHovered.a > 0)
+                return treeView.styleHints.overlayHovered
+            else
+                return treeView.styleHints.overlay
+            
         }
     }
 }
