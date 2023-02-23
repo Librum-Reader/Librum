@@ -14,6 +14,7 @@ Item
 {
     id: root
     property var chapterModel
+    signal switchPage(int pageNumber)
     
     implicitWidth: 300
     implicitHeight: 600
@@ -154,7 +155,14 @@ Item
                                     fillMode: Image.PreserveAspectFit
                                     rotation: isExpanded ? 90 : 0
                                     
-                                    TapHandler { onTapped: if(hasChildren) treeView.toggleExpanded(row) }
+                                    MouseArea
+                                    {
+                                        id: indicatorArea
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        
+                                        onClicked: treeView.toggleExpanded(row)
+                                    }
                                 }
                                 
                                 Text
@@ -185,6 +193,25 @@ Item
                                 {
                                     enabled: d.hoverEnabled
                                     onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                }
+                            }
+                            
+                            MouseArea
+                            {
+                                id: mouseArea
+                                propagateComposedEvents: true
+                                anchors.fill: parent
+                                
+                                onClicked: (mouse) =>
+                                {
+                                    if(!indicatorArea.containsMouse)
+                                    {
+                                        root.switchPage(model.page);
+                                        mouse.accepted = true;
+                                        return;
+                                    }
+                                    
+                                    mouse.accepted = false;
                                 }
                             }
                         }

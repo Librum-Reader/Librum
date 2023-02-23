@@ -237,13 +237,13 @@ Page
                     property int lastWidth: 300
                     property bool active: false
                     chapterModel: documentItem.tableOfContents
-                    
                     anchors.fill: parent
                     visible: false
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
-                    
+                    onSwitchPage: (pageNumber) => documentView.setPage(pageNumber - 1)
+                     
                     
                     Rectangle
                     {
