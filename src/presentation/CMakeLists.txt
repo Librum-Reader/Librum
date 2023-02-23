@@ -44,7 +44,10 @@ file(COPY ${TREEVIEW_SRC}/src/qt5 DESTINATION ${TREEVIEW_BIN})
 # Create a qmldir placeholder file at the final location, because "add_library" needs it
 # at configuration time, but "add_custom_target" only generates it at build time.
 # This file is only needed so that "add_library" doesn't fail, it is replaced at build time.
-file(WRITE ${TREEVIEW_BIN}/qmldir "")
+# To not override the "real" file everytime you reconfigure, check if the file already exists.
+if(NOT EXISTS "${TREEVIEW_BIN}/qmldir")
+    file(WRITE ${TREEVIEW_BIN}/qmldir "")
+endif()
 #
 ###########################################
 
