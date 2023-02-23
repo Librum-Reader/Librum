@@ -120,109 +120,51 @@ Item
                         styleHints.indicator: "black"
                         styleHints.indicatorHovered: "transparent"
                         
-                        delegate:  DelegateChooser
+                        delegate: Rectangle
                         {
-                            DelegateChoice
+                            id: treeNode
+                            implicitWidth: treeNodeLabel.x + treeNodeLabel.width + (treeView.styleHints.columnPadding / 2)
+                            implicitHeight: Math.max(indicator.height, treeNodeLabel.height)
+                            color: d.bgColor(column, row)
+                            
+                            property var view: Chapters.TreeView.view
+                            property bool hasChildren: Chapters.TreeView.hasChildren
+                            property bool isExpanded: Chapters.TreeView.isExpanded
+                            property int depth: Chapters.TreeView.depth
+                            
+                            Text
                             {
-                                // The column where the tree is drawn
-                                column: 0
+                                id: indicator
+                                x: depth * treeView.styleHints.indent
+                                color: d.indicatorColor(column, row)
+                                font: treeView.styleHints.font
+                                text: hasChildren ? (isExpanded ? "▼" : "▶") : ""
+                                anchors.verticalCenter: parent.verticalCenter
                                 
-                                Rectangle
+                                TapHandler
                                 {
-                                    id: treeNode
-                                    implicitWidth: treeNodeLabel.x + treeNodeLabel.width + (treeView.styleHints.columnPadding / 2)
-                                    implicitHeight: Math.max(indicator.height, treeNodeLabel.height)
-                                    color: d.bgColor(column, row)
-                                    
-                                    property var view: Chapters.TreeView.view
-                                    property bool hasChildren: Chapters.TreeView.hasChildren
-                                    property bool isExpanded: Chapters.TreeView.isExpanded
-                                    property int depth: Chapters.TreeView.depth
-                                    
-                                    Text
+                                    onTapped:
                                     {
-                                        id: indicator
-                                        x: depth * treeView.styleHints.indent
-                                        color: d.indicatorColor(column, row)
-                                        font: treeView.styleHints.font
-                                        text: hasChildren ? (isExpanded ? "▼" : "▶") : ""
-                                        anchors.verticalCenter: parent.verticalCenter
-                                        
-                                        TapHandler
-                                        {
-                                            onTapped:
-                                            {
-                                                if (hasChildren)
-                                                    treeView.toggleExpanded(row)
-                                            }
-                                        }
-                                    }
-                                    
-                                    Text
-                                    {
-                                        id: treeNodeLabel
-                                        x: indicator.x + Math.max(treeView.styleHints.indent, indicator.width * 1.5)
-                                        clip: true
-                                        color: d.fgColor(column, row)
-                                        font: treeView.styleHints.font
-                                        text: model.display
-                                    }
-                                    
-                                    HoverHandler
-                                    {
-                                        enabled: d.hoverEnabled
-                                        onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
+                                        if (hasChildren)
+                                            treeView.toggleExpanded(row)
                                     }
                                 }
                             }
                             
-                            DelegateChoice
+                            Text
                             {
-                                // The remaining columns after the tree column will use this delegate
-                                Rectangle
-                                {
-                                    implicitWidth: infoLabel.x + infoLabel.width + (treeView.styleHints.columnPadding / 2)
-                                    color: d.bgColor(column, row)
-                                    Text
-                                    {
-                                        id: infoLabel
-                                        x: treeView.styleHints.columnPadding / 2
-                                        color: d.fgColor(column, row)
-                                        font: treeView.styleHints.font
-                                        text: display
-                                        clip: true
-                                    }
-                                    
-                                    HoverHandler
-                                    {
-                                        enabled: d.hoverEnabled
-                                        onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
-                                    }
-                                }
+                                id: treeNodeLabel
+                                x: indicator.x + Math.max(treeView.styleHints.indent, indicator.width * 1.5)
+                                clip: true
+                                color: d.fgColor(column, row)
+                                font: treeView.styleHints.font
+                                text: model.display
                             }
-                        }
-                        
-                        Shape {
-                            id: overlayShape
-                            z: 10
-                            property point currentPos: currentItem ? mapToItem(overlayShape, Qt.point(currentItem.x, currentItem.y)) : Qt.point(0, 0)
-                            visible: currentItem != null
                             
-                            ShapePath {
-                                id: path
-                                fillColor: "transparent"
-                                strokeColor: d.overlayColor()
-                                strokeWidth: 1
-                                strokeStyle: ShapePath.DashLine
-                                dashPattern: [1, 2]
-                                startX: currentItem ? currentItem.x + strokeWidth : 0
-                                startY: currentItem ? currentItem.y + strokeWidth : 0
-                                property real endX: currentItem ? currentItem.width + startX - (strokeWidth * 2) : 0
-                                property real endY: currentItem ? currentItem.height + startY - (strokeWidth * 2) : 0
-                                PathLine { x: path.endX; y: path.startY }
-                                PathLine { x: path.endX; y: path.endY }
-                                PathLine { x: path.startX; y: path.endY }
-                                PathLine { x: path.startX; y: path.startY }
+                            HoverHandler
+                            {
+                                enabled: d.hoverEnabled
+                                onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
                             }
                         }
                     }
@@ -284,17 +226,6 @@ Item
                 return treeView.styleHints.indicatorCurrent
             else
                 return treeView.styleHints.indicator
-        }
-        
-        function overlayColor()
-        {
-            if (d.hoverIndex.row === treeView.currentIndex.row
-                    && (d.hoverIndex.column === treeView.currentIndex.column || navigationMode === treeView.List)
-                    && treeView.styleHints.overlayHovered.a > 0)
-                return treeView.styleHints.overlayHovered
-            else
-                return treeView.styleHints.overlay
-            
         }
     }
 }
