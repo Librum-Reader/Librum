@@ -71,6 +71,8 @@ Item
                         radius: 4
                         color: "transparent"
                     }
+                    
+                    onEditingFinished: documentItem.tableOfContents.filterString = text
                 }
             }
             

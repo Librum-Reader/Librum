@@ -458,16 +458,20 @@ set(okularpart_SRCS
     gui/pagepainter.cpp
     gui/signatureguiutils.cpp
     gui/signaturemodel.cpp
-    gui/tocmodel.cpp)
+    gui/filtered_tocmodel.cpp
+    gui/tocmodel.cpp
+)
 
 
 kconfig_add_kcfg_files(okularpart_SRCS GENERATE_MOC conf/settings.kcfgc)
 
 add_library(okularpart SHARED ${okularpart_SRCS})
+target_compile_options(okularpart PRIVATE -fexceptions)
 generate_export_header(okularpart BASE_NAME okularpart)
 
 target_link_libraries(okularpart
     okularcore
+    rapidfuzz::rapidfuzz
     ${MATH_LIB}
     Qt5::Svg
     Phonon::phonon4qt5

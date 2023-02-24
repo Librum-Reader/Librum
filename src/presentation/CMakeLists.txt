@@ -84,8 +84,8 @@ target_compile_definitions(presentation
 target_link_libraries(presentation
                 PRIVATE
                     adapters
-                    okularcore
                     okularpart
+                    okularcore
                     Qt5::Core
                     Qt5::Quick
                     Qt5::Qml
