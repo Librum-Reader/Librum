@@ -1,4 +1,5 @@
 #include "filtered_tocmodel.hpp"
+#include <algorithm>
 #include <rapidfuzz/fuzz.hpp>
 
 namespace Okular
@@ -9,13 +10,18 @@ FilteredTOCModel::FilteredTOCModel(QObject* parent) :
 {
 }
 
-bool FilteredTOCModel::filterAcceptsRow(int source_row,
-                                        const QModelIndex& source_parent) const
+bool FilteredTOCModel::filterAcceptsRow(int row,
+                                        const QModelIndex& parent) const
 {
-    auto index = sourceModel()->index(source_row, 0, source_parent);
-    auto rawAuthors = sourceModel()->data(index, Qt::ToolTipRole);
+    auto index = sourceModel()->index(row, 0, parent);
+    auto name = sourceModel()->data(index, Qt::ToolTipRole);
 
-    auto similarity = fuzzCompareWithFilterString(rawAuthors.toString());
+    auto x = sourceModel()->index(row, 0, parent);
+    TOCItem* item = static_cast<TOCItem*>(x.internalPointer());
+    if(item != nullptr && hasChildrenMatchingTheFilter(item))
+        return true;
+
+    auto similarity = fuzzCompareWithFilterString(name.toString());
     double minSimilarity = 70;
 
     return similarity >= minSimilarity;
@@ -30,6 +36,26 @@ void FilteredTOCModel::setFilterString(QString filterString)
 QString FilteredTOCModel::getFilterString()
 {
     return m_filterString;
+}
+
+bool FilteredTOCModel::hasChildrenMatchingTheFilter(const TOCItem* item) const
+{
+    if(itemPassesFilter(item))
+        return true;
+
+    return std::any_of(item->children.begin(), item->children.end(),
+                       [this](const TOCItem* child)
+                       {
+                           return hasChildrenMatchingTheFilter(child);
+                       });
+}
+
+bool FilteredTOCModel::itemPassesFilter(const TOCItem* item) const
+{
+    auto similarity = fuzzCompareWithFilterString(item->text);
+    double minSimilarity = 70;
+
+    return similarity >= minSimilarity;
 }
 
 double FilteredTOCModel::fuzzCompareWithFilterString(QString str) const
