@@ -1,14 +1,11 @@
-/*
-    SPDX-FileCopyrightText: 2007 Pino Toscano <pino@kde.org>
-
-    SPDX-License-Identifier: GPL-2.0-or-later
-*/
-
 #ifndef TOCMODEL_H
 #define TOCMODEL_H
 
 #include <QAbstractItemModel>
+#include <QDomDocument>
+#include <QDomElement>
 #include <QVector>
+#include "core/document.h"
 
 namespace Okular
 {
@@ -81,6 +78,25 @@ private:
     bool checkequality(const TOCModel* model,
                        const QModelIndex& parentA = QModelIndex(),
                        const QModelIndex& parentB = QModelIndex()) const;
+};
+
+struct Q_DECL_EXPORT TOCItem
+{
+    TOCItem();
+    TOCItem(TOCItem* parent, const QDomElement& e);
+    ~TOCItem();
+    
+    TOCItem(const TOCItem&) = delete;
+    TOCItem& operator=(const TOCItem&) = delete;
+    
+    QString text;
+    Okular::DocumentViewport viewport;
+    QString extFileName;
+    QString url;
+    bool highlight : 1;
+    TOCItem* parent;
+    QList<TOCItem*> children;
+    TOCModelPrivate* model;
 };
 
 #endif
