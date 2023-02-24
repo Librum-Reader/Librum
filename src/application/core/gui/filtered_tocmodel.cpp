@@ -7,7 +7,6 @@ namespace Okular
 FilteredTOCModel::FilteredTOCModel(QObject* parent) :
     QSortFilterProxyModel { parent }
 {
-    sort(0);
 }
 
 bool FilteredTOCModel::filterAcceptsRow(int source_row,
