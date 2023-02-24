@@ -65,14 +65,14 @@ Item
                     font.weight: Font.Normal
                     placeholderText: "Search..."
                     placeholderTextColor: Style.colorPlaceholderText
-                    background: Rectangle   
+                    background: Rectangle
                     {   
                         anchors.fill: parent
                         radius: 4
                         color: "transparent"
                     }
                     
-                    onEditingFinished: documentItem.tableOfContents.filterString = text
+                    onTextEdited: documentItem.tableOfContents.filterString = text
                 }
             }
             
