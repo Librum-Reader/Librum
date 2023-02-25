@@ -118,7 +118,7 @@ Item
                         styleHints.backgroundCurrent: navigationMode === treeView.List ? "#005fe5" : "transparent"
                         styleHints.foregroundHovered: "transparent"
                         styleHints.backgroundHovered: "transparent"
-                        styleHints.overlay:  navigationMode === treeView.Table ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
+                        styleHints.overlay: navigationMode === treeView.Table ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
                         styleHints.overlayHovered: "transparent"
                         styleHints.indicator: "black"
                         styleHints.indicatorHovered: "transparent"
@@ -178,6 +178,18 @@ Item
                                     font.pixelSize: 14
                                     elide: Text.ElideRight
                                     text: model.display
+                                    
+                                    MouseArea
+                                    {
+                                        id: pageSwitchTrigger
+                                        anchors.fill: parent
+                                        
+                                        onClicked:
+                                        {
+                                            root.switchPage(model.page);
+                                            mouse.accepted = true;
+                                        }
+                                    }
                                 }
                                 
                                 Text
@@ -195,25 +207,6 @@ Item
                                 {
                                     enabled: d.hoverEnabled
                                     onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
-                                }
-                            }
-                            
-                            MouseArea
-                            {
-                                id: mouseArea
-                                propagateComposedEvents: true
-                                anchors.fill: parent
-                                
-                                onClicked: (mouse) =>
-                                {
-                                    if(!indicatorArea.containsMouse)
-                                    {
-                                        root.switchPage(model.page);
-                                        mouse.accepted = true;
-                                        return;
-                                    }
-                                    
-                                    mouse.accepted = false;
                                 }
                             }
                         }
