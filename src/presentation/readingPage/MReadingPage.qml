@@ -247,6 +247,7 @@ Page
                     
                     Rectangle
                     {
+                        id: rightChaptersBorder
                         width: 1
                         height: parent.height
                         color: Style.colorDarkSeparator
@@ -284,6 +285,7 @@ Page
                     
                     Rectangle
                     {
+                        id: rightBookmarksBorder
                         width: 1
                         height: parent.height
                         color: Style.colorDarkSeparator
