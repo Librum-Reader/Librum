@@ -152,6 +152,7 @@ Item
                                     Layout.leftMargin: depth * treeView.styleHints.indent
                                     Layout.alignment: Qt.AlignVCenter
                                     visible: hasChildren
+                                    opacity: pageSwitchTrigger.pressed || indicatorArea.pressed ? 0.7 : 1
                                     source: Icons.arrowheadNextIcon
                                     sourceSize.width: 20
                                     fillMode: Image.PreserveAspectFit
@@ -177,6 +178,7 @@ Item
                                     Layout.alignment: Qt.AlignVCenter
                                     clip: true
                                     color: Style.colorText
+                                    opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                     font.pixelSize: 14
                                     elide: Text.ElideRight
                                     text: model.display
@@ -186,11 +188,7 @@ Item
                                         id: pageSwitchTrigger
                                         anchors.fill: parent
                                         
-                                        onClicked:
-                                        {
-                                            root.switchPage(model.page);
-                                            mouse.accepted = true;
-                                        }
+                                        onClicked: root.switchPage(model.page)
                                     }
                                 }
                                 
@@ -201,6 +199,7 @@ Item
                                     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                                     Layout.leftMargin: 6
                                     color: Style.colorText
+                                    opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                     font.pixelSize: 14
                                     text: model.page
                                 }
