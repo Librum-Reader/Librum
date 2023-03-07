@@ -126,15 +126,15 @@ Item
                         delegate: Rectangle
                         {
                             id: treeNode
-                            implicitWidth: treeView.width - 2  // L/R margins
-                            width: implicitWidth
-                            implicitHeight: Math.max(treeNodeLabel.height)
-                            color: d.bgColor(column, row)
-                            
                             property var view: Chapters.TreeView.view
                             property bool hasChildren: Chapters.TreeView.hasChildren
                             property bool isExpanded: Chapters.TreeView.isExpanded
                             property int depth: Chapters.TreeView.depth
+                            
+                            implicitWidth: treeView.width - 2  // L/R margins
+                            width: implicitWidth
+                            implicitHeight: Math.max(treeNodeLabel.height)
+                            color: d.bgColor(column, row)
                             
                             
                             RowLayout
@@ -171,7 +171,9 @@ Item
                                 {
                                     id: treeNodeLabel
                                     Layout.fillWidth: true
-                                    Layout.leftMargin: (hasChildren ? indicator.width * 0.1 : indicator.width*1.1 + depth * treeView.styleHints.indent)
+                                    Layout.leftMargin: hasChildren 
+                                                       ? indicator.width * 0.1 
+                                                       : indicator.width*1.1 + depth * treeView.styleHints.indent
                                     Layout.alignment: Qt.AlignVCenter
                                     clip: true
                                     color: Style.colorText
