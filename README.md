@@ -57,9 +57,9 @@ As a team of opensource developers we rely on donations from the community to be
 # Contact
 
 
-For questions, you can reach us under: librum_help@protonmail.com
+For questions, you can reach us under: help@librumreader.com
 <br>
-For business related contact, reach out to us here: librum_reader@protonmail.com
+For business related contact, reach out to us here: contact@librumreader.com
 
 <br>
 
