@@ -19,6 +19,7 @@ Item
     implicitWidth: 300
     implicitHeight: 600
     
+    
     Rectangle
     {
         anchors.fill: parent
@@ -95,6 +96,16 @@ Item
                 
                 ScrollView
                 {
+                    id: scrollBar
+                    property bool isEnabled: contentHeight > height
+                    onIsEnabledChanged:
+                    {
+                        if(isEnabled)
+                            ScrollBar.vertical.policy = ScrollBar.AlwaysOn;
+                        else
+                            ScrollBar.vertical.policy = ScrollBar.AlwaysOff;
+                    }
+                    
                     anchors.fill: parent
                     
                     
@@ -103,6 +114,7 @@ Item
                         id: treeView
                         anchors.fill: parent
                         anchors.margins: 1
+                        anchors.rightMargin: scrollBar.isEnabled ? 18 : 1
                         model: root.chapterModel
                         clip: true
                         focus: true
@@ -211,6 +223,7 @@ Item
                                 }
                             }
                         }
+                        
                     }
                 }
             }
