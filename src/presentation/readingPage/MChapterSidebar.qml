@@ -22,12 +22,14 @@ Item
     
     Rectangle
     {
+        id: background
         anchors.fill: parent
         color: "transparent"
         
         
         ColumnLayout
         {
+            id: layout
             anchors.fill: parent
             spacing: 0
             
@@ -53,6 +55,7 @@ Item
                 radius: 4
                 color: Style.colorContainerBackground
                 border.color: Style.colorButtonBorder
+                
                 
                 TextField
                 {
@@ -147,7 +150,7 @@ Item
                             implicitWidth: treeView.width - 2  // L/R margins
                             width: implicitWidth
                             implicitHeight: Math.max(treeNodeLabel.height)
-                            color: d.bgColor(column, row)
+                            color: "transparent"
                             
                             
                             RowLayout
@@ -216,17 +219,12 @@ Item
                                     font.pixelSize: 14
                                     text: model.page
                                 }
-                                
-                                HoverHandler
-                                {
-                                    enabled: d.hoverEnabled
-                                    onHoveredChanged: d.updateHoverIndex(treeView.viewIndex(column, row), hovered)
-                                }
                             }
                         }
                         
                     }
                 
+                    
                     Component.onCompleted:
                     {
                         // contentItem is the ScrollView's underlying Flickable
@@ -237,62 +235,6 @@ Item
                     }
                 }
             }
-        }
-    }
-    
-    // Don't leak API that might not be support by all styles into the public API.
-    QtObject
-    {
-        id: d
-        property var hoverIndex: treeView.viewIndex(-1, -1)
-        property bool hoverEnabled: treeView.styleHints.foregroundHovered.a > 0 || treeView.styleHints.backgroundHovered.a > 0
-        
-        function updateHoverIndex(index, hovered)
-        {
-            if (hovered)
-                hoverIndex = index
-            else if (hoverIndex === index)
-                hoverIndex = treeView.viewIndex(-1, -1)
-        }
-        
-        function bgColor(column, row)
-        {
-            if (row === d.hoverIndex.row
-                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
-                    && treeView.styleHints.backgroundHovered.a > 0)
-                return treeView.styleHints.backgroundHovered
-            else if (row === treeView.currentIndex.row)
-                return treeView.styleHints.backgroundCurrent
-            else if (row % 2)
-                return treeView.styleHints.backgroundOdd
-            else
-                return treeView.styleHints.backgroundEven
-        }
-        
-        function fgColor(column, row)
-        {
-            if (row === d.hoverIndex.row
-                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
-                    && treeView.styleHints.foregroundHovered.a > 0)
-                return treeView.styleHints.foregroundHovered
-            else if (row === treeView.currentIndex.row)
-                return treeView.styleHints.foregroundCurrent
-            else if (row % 2)
-                return treeView.styleHints.foregroundOdd
-            else
-                return treeView.styleHints.foregroundEven
-        }
-        
-        function indicatorColor(column, row)
-        {
-            if (row === d.hoverIndex.row
-                    && (column === d.hoverIndex.column || navigationMode === treeView.List)
-                    && treeView.styleHints.indicatorHovered.a > 0)
-                return treeView.styleHints.indicatorHovered
-            else if (row === treeView.currentIndex.row)
-                return treeView.styleHints.indicatorCurrent
-            else
-                return treeView.styleHints.indicator
         }
     }
 }
