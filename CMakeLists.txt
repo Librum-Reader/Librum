@@ -26,9 +26,9 @@ endif()
                           
 
 # Create a set of sanitizers
-string(CONCAT LIBRUM_SANITIZERS "-fsanitize=address,undefined,shift,integer-divide-by-zero,"
+string(CONCAT LIBRUM_SANITIZERS #[["-fsanitize=address,undefined,shift,integer-divide-by-zero,"
                                 "float-divide-by-zero,unreachable,vla-bound,null,return,leak,"
-                                "bounds,float-cast-overflow,enum")
+                                "bounds,float-cast-overflow,enum"]])
 
 
 # Dependencies

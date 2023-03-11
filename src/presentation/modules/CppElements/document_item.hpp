@@ -3,6 +3,7 @@
 #include <core/document.h>
 #include <core/observer.h>
 #include <QObject>
+#include "filtered_tocmodel.hpp"
 #include "settings.hpp"
 
 
@@ -80,7 +81,8 @@ class DocumentItem : public QObject
     /**
      * Table of contents for the document, if available
      */
-    Q_PROPERTY(TOCModel* tableOfContents READ tableOfContents CONSTANT)
+    Q_PROPERTY(
+        Okular::FilteredTOCModel* tableOfContents READ tableOfContents CONSTANT)
 
     /**
      * Signatures model, if available
@@ -125,7 +127,7 @@ public:
 
     QVariantList matchingPages() const;
 
-    TOCModel* tableOfContents() const;
+    Okular::FilteredTOCModel* tableOfContents();
 
     SignatureModel* signaturesModel() const;
 
@@ -205,6 +207,7 @@ private:
 
     Okular::Document* m_document;
     TOCModel* m_tocModel;
+    Okular::FilteredTOCModel m_filteredTocModel;
     SignatureModel* m_signaturesModel;
     Observer* m_thumbnailObserver;
     Observer* m_pageviewObserver;

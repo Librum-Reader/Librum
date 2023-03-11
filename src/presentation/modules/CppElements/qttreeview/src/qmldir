@@ -1,0 +1,6 @@
+module QtQuick.TreeView
+plugin qquicktreeviewplugin
+classname QQuickTreeViewPlugin
+TreeView 2.15 qt5/TreeView.qml
+depends QtQuick.Shapes 2.15
+depends Qt.labs.qmlmodels 1.0

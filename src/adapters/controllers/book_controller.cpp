@@ -15,8 +15,7 @@ using namespace dtos;
 
 BookController::BookController(application::IBookService* bookService) :
     m_bookService(bookService),
-    m_libraryModel(m_bookService->getBooks()),
-    m_libraryProxyModel(static_cast<QObject*>(&m_libraryModel))
+    m_libraryModel(m_bookService->getBooks())
 {
     // book insertion
     connect(m_bookService, &application::IBookService::bookInsertionStarted,

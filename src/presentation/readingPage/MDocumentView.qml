@@ -62,7 +62,7 @@ Pane
             onModelChanged:
             {
                 if(listView.currentItem != null)
-                    contentY = listView.currentItem.height * (Globals.selectedBook.currentPage - 1)
+                    root.setPage(Globals.selectedBook.currentPage - 1)
             }
             onWidthChanged: root.pageWidthChanged(width)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
@@ -102,5 +102,10 @@ Pane
     function previousPage()
     {
         NavigationLogic.previousPage();
+    }
+    
+    function setPage(pageNumber)
+    {
+        listView.contentY = listView.currentItem.height * pageNumber;
     }
 }

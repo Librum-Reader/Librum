@@ -30,9 +30,11 @@ DocumentItem::DocumentItem(QObject* parent) :
     qmlRegisterUncreatableType<SignatureModel>(
         "org.kde.okular.private", 1, 0, "SignatureModel",
         QStringLiteral("Do not create objects of this type."));
+
     Okular::Settings::instance(QStringLiteral("okularproviderrc"));
     m_document = new Okular::Document(nullptr);
     m_tocModel = new TOCModel(m_document, this);
+    m_filteredTocModel.setSourceModel(m_tocModel);
     m_signaturesModel = new SignatureModel(m_document, this);
 
     connect(m_document, &Okular::Document::searchFinished, this,
@@ -159,7 +161,6 @@ void DocumentItem::setCurrentPage(int page)
 {
     Q_UNUSED(page)
     m_document->setViewportPage(page);
-    //    m_tocModel->setCurrentViewport(m_document->viewport());
     Q_EMIT currentPageChanged();
 }
 
@@ -183,9 +184,9 @@ QVariantList DocumentItem::matchingPages() const
     return m_matchingPages;
 }
 
-TOCModel* DocumentItem::tableOfContents() const
+Okular::FilteredTOCModel* DocumentItem::tableOfContents()
 {
-    return m_tocModel;
+    return &m_filteredTocModel;
 }
 
 SignatureModel* DocumentItem::signaturesModel() const

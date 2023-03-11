@@ -15,25 +15,6 @@
 
 Q_DECLARE_METATYPE(QModelIndex)
 
-struct TOCItem
-{
-    TOCItem();
-    TOCItem(TOCItem* parent, const QDomElement& e);
-    ~TOCItem();
-
-    TOCItem(const TOCItem&) = delete;
-    TOCItem& operator=(const TOCItem&) = delete;
-
-    QString text;
-    Okular::DocumentViewport viewport;
-    QString extFileName;
-    QString url;
-    bool highlight : 1;
-    TOCItem* parent;
-    QList<TOCItem*> children;
-    TOCModelPrivate* model;
-};
-
 class TOCModelPrivate
 {
 public:

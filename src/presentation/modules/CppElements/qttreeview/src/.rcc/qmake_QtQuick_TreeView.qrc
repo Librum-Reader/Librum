@@ -1,0 +1,5 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/qt-project.org/imports/QtQuick/TreeView">
+<file alias="qt5/TreeView.qml">/home/creapermann/Programming/Etovex/Testing/TreeView/libs/qttreeview/src/qt5/TreeView.qml</file>
+</qresource>
+</RCC>
