@@ -1,0 +1,1227 @@
+[
+    {
+        "classes": [
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "TreeViewStyleHints"
+                    },
+                    {
+                        "name": "QML.Creatable",
+                        "value": "false"
+                    },
+                    {
+                        "name": "QML.UncreatableReason",
+                        "value": "TreeViewStyleHints is not creatable"
+                    },
+                    {
+                        "name": "QML.AddedInMinorVersion",
+                        "value": "15"
+                    }
+                ],
+                "className": "QQuickTreeViewStyleHints",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_indicator",
+                        "name": "indicator",
+                        "notify": "indicatorChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_indicatorCurrent",
+                        "name": "indicatorCurrent",
+                        "notify": "indicatorCurrentChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_indicatorHovered",
+                        "name": "indicatorHovered",
+                        "notify": "indicatorHoveredChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_overlay",
+                        "name": "overlay",
+                        "notify": "overlayChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_overlayHovered",
+                        "name": "overlayHovered",
+                        "notify": "overlayHoveredChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_foregroundOdd",
+                        "name": "foregroundOdd",
+                        "notify": "foregroundOddChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_backgroundOdd",
+                        "name": "backgroundOdd",
+                        "notify": "backgroundOddChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_foregroundEven",
+                        "name": "foregroundEven",
+                        "notify": "foregroundEvenChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_backgroundEven",
+                        "name": "backgroundEven",
+                        "notify": "backgroundEvenChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_foregroundCurrent",
+                        "name": "foregroundCurrent",
+                        "notify": "foregroundCurrentChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_backgroundCurrent",
+                        "name": "backgroundCurrent",
+                        "notify": "backgroundCurrentChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_foregroundHovered",
+                        "name": "foregroundHovered",
+                        "notify": "foregroundHoveredChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_backgroundHovered",
+                        "name": "backgroundHovered",
+                        "notify": "backgroundHoveredChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QColor",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_indent",
+                        "name": "indent",
+                        "notify": "indentChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "qreal",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_columnPadding",
+                        "name": "columnPadding",
+                        "notify": "columnPaddingChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "qreal",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "member": "m_font",
+                        "name": "font",
+                        "notify": "fontChanged",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QFont",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "QQuickTreeViewStyleHints",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "indicatorChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "indicatorCurrentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "indicatorHoveredChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "overlayChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "overlayHoveredChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "foregroundOddChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "backgroundOddChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "foregroundEvenChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "backgroundEvenChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "foregroundCurrentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "backgroundCurrentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "foregroundHoveredChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "backgroundHoveredChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "indentChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "columnPaddingChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "fontChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            },
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "anonymous"
+                    },
+                    {
+                        "name": "QML.Foreign",
+                        "value": "QQuickTableView"
+                    },
+                    {
+                        "name": "QML.AddedInMinorVersion",
+                        "value": "12"
+                    }
+                ],
+                "className": "QQuickTableViewForeign",
+                "gadget": true,
+                "qualifiedClassName": "QQuickTableViewForeign"
+            },
+            {
+                "classInfos": [
+                    {
+                        "name": "QML.Element",
+                        "value": "TreeViewTemplate"
+                    },
+                    {
+                        "name": "QML.AddedInMinorVersion",
+                        "value": "15"
+                    },
+                    {
+                        "name": "QML.Attached",
+                        "value": "QQuickTreeViewAttached"
+                    }
+                ],
+                "className": "QQuickTreeView",
+                "enums": [
+                    {
+                        "isClass": false,
+                        "isFlag": false,
+                        "name": "NavigateMode",
+                        "values": [
+                            "List",
+                            "Table"
+                        ]
+                    }
+                ],
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "hasChildren",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "hasSiblings",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "depth",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "isExpanded",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "expand",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "collapse",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "toggleExpanded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "isModelIndexExpanded",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "collapseModelIndex",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "expandModelIndex",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "toggleModelIndexExpanded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "x",
+                                "type": "int"
+                            },
+                            {
+                                "name": "includeSpacing",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "columnAtX",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "y",
+                                "type": "int"
+                            },
+                            {
+                                "name": "includeSpacing",
+                                "type": "bool"
+                            }
+                        ],
+                        "name": "rowAtY",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "cell",
+                                "type": "QPoint"
+                            }
+                        ],
+                        "name": "itemAtCell",
+                        "returnType": "QQuickItem*"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "viewIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "itemAtIndex",
+                        "returnType": "QQuickItem*"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "itemAtModelIndex",
+                        "returnType": "QQuickItem*"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "column",
+                                "type": "int"
+                            },
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "viewIndex",
+                        "returnType": "QModelIndex"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "viewIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "mapToModel",
+                        "returnType": "QModelIndex"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "modelIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "mapFromModel",
+                        "returnType": "QModelIndex"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "currentIndex",
+                        "notify": "currentIndexChanged",
+                        "read": "currentIndex",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QModelIndex",
+                        "user": false,
+                        "write": "setCurrentIndex"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "currentModelIndex",
+                        "notify": "currentModelIndexChanged",
+                        "read": "currentModelIndex",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QModelIndex",
+                        "user": false,
+                        "write": "setCurrentModelIndex"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "currentItem",
+                        "notify": "currentItemChanged",
+                        "read": "currentItem",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QQuickItem*",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "navigationMode",
+                        "notify": "navigationModeChanged",
+                        "read": "navigationMode",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "NavigateMode",
+                        "user": false,
+                        "write": "setNavigationMode"
+                    },
+                    {
+                        "constant": true,
+                        "designable": true,
+                        "final": false,
+                        "name": "styleHints",
+                        "read": "styleHints",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QQuickTreeViewStyleHints*",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "QQuickTreeView",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "currentIndexChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "currentModelIndexChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "expanded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "collapsed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "navigationModeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "currentItemChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QQuickTableView"
+                    }
+                ]
+            },
+            {
+                "className": "QQuickTreeViewAttached",
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "view",
+                        "notify": "viewChanged",
+                        "read": "view",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QQuickTreeView*",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "hasChildren",
+                        "notify": "hasChildrenChanged",
+                        "read": "hasChildren",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "isExpanded",
+                        "notify": "isExpandedChanged",
+                        "read": "isExpanded",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "bool",
+                        "user": false
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "depth",
+                        "notify": "depthChanged",
+                        "read": "depth",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "int",
+                        "user": false
+                    }
+                ],
+                "qualifiedClassName": "QQuickTreeViewAttached",
+                "signals": [
+                    {
+                        "access": "public",
+                        "name": "viewChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "hasChildrenChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "isExpandedChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "depthChanged",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QQuickTableViewAttached"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qquicktreeview_p.h",
+        "outputRevision": 67
+    },
+    {
+        "classes": [
+            {
+                "className": "QQuickTreeModelAdaptor",
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "fromIndex",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "toIndex",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "selectionForRowRange",
+                        "returnType": "QItemSelection"
+                    }
+                ],
+                "object": true,
+                "properties": [
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "model",
+                        "notify": "modelChanged",
+                        "read": "model",
+                        "required": false,
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QAbstractItemModel*",
+                        "user": false,
+                        "write": "setModel"
+                    },
+                    {
+                        "constant": false,
+                        "designable": true,
+                        "final": false,
+                        "name": "rootIndex",
+                        "notify": "rootIndexChanged",
+                        "read": "rootIndex",
+                        "required": false,
+                        "reset": "resetRootIndex()",
+                        "scriptable": true,
+                        "stored": true,
+                        "type": "QModelIndex",
+                        "user": false,
+                        "write": "setRootIndex"
+                    }
+                ],
+                "qualifiedClassName": "QQuickTreeModelAdaptor",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "model",
+                                "type": "QAbstractItemModel*"
+                            }
+                        ],
+                        "name": "modelChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "name": "rootIndexChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "expanded",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "index",
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "collapsed",
+                        "returnType": "void"
+                    }
+                ],
+                "slots": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "expand",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "collapse",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "model",
+                                "type": "QAbstractItemModel*"
+                            }
+                        ],
+                        "name": "setModel",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "type": "QModelIndex"
+                            }
+                        ],
+                        "name": "isExpanded",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "isExpanded",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "hasChildren",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "hasSiblings",
+                        "returnType": "bool"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "row",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "depthAtRow",
+                        "returnType": "int"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "n",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "expandRow",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "n",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "collapseRow",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "name": "modelHasBeenDestroyed",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "name": "modelHasBeenReset",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "topLeft",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "bottomRight",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "roles",
+                                "type": "QVector<int>"
+                            }
+                        ],
+                        "name": "modelDataChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parents",
+                                "type": "QList<QPersistentModelIndex>"
+                            },
+                            {
+                                "name": "hint",
+                                "type": "QAbstractItemModel::LayoutChangeHint"
+                            }
+                        ],
+                        "name": "modelLayoutAboutToBeChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parents",
+                                "type": "QList<QPersistentModelIndex>"
+                            },
+                            {
+                                "name": "hint",
+                                "type": "QAbstractItemModel::LayoutChangeHint"
+                            }
+                        ],
+                        "name": "modelLayoutChanged",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "start",
+                                "type": "int"
+                            },
+                            {
+                                "name": "end",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsAboutToBeInserted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "sourceParent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "sourceStart",
+                                "type": "int"
+                            },
+                            {
+                                "name": "sourceEnd",
+                                "type": "int"
+                            },
+                            {
+                                "name": "destinationParent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "destinationRow",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsAboutToBeMoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "start",
+                                "type": "int"
+                            },
+                            {
+                                "name": "end",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsAboutToBeRemoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "start",
+                                "type": "int"
+                            },
+                            {
+                                "name": "end",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsInserted",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "sourceParent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "sourceStart",
+                                "type": "int"
+                            },
+                            {
+                                "name": "sourceEnd",
+                                "type": "int"
+                            },
+                            {
+                                "name": "destinationParent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "destinationRow",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsMoved",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "private",
+                        "arguments": [
+                            {
+                                "name": "parent",
+                                "type": "QModelIndex"
+                            },
+                            {
+                                "name": "start",
+                                "type": "int"
+                            },
+                            {
+                                "name": "end",
+                                "type": "int"
+                            }
+                        ],
+                        "name": "modelRowsRemoved",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QAbstractItemModel"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qquicktreemodeladaptor_p.h",
+        "outputRevision": 67
+    },
+    {
+        "classes": [
+            {
+                "className": "QQuickTreeViewPlugin",
+                "object": true,
+                "qualifiedClassName": "QQuickTreeViewPlugin",
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QQmlExtensionPlugin"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "qquicktreeviewplugin.cpp",
+        "outputRevision": 67
+    }
+]

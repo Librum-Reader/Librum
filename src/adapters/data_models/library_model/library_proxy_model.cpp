@@ -89,13 +89,13 @@ std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
 
 double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
 {
-    // If the sorting string is a substring of str, return a high ratio
+    // If the sorting string is a sub-string of str, return a high ratio
     auto leftSubstrPos = str.toLower().indexOf(m_sortString.toLower());
     if(leftSubstrPos != -1)
     {
         // The further at the front, the better the ratio should be
         double ratio = 100 - leftSubstrPos;
-        // A difference in lentgh of the strings should reduce the score
+        // A difference in length of the strings should reduce the score
         ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
 
         return ratio;
@@ -188,7 +188,8 @@ bool LibraryProxyModel::stringIsLexicographicallyLess(
 {
     if(left.isEmpty())
         return false;
-    else if(right.isEmpty())
+
+    if(right.isEmpty())
         return true;
 
     return left.toLower() < right.toLower();
@@ -207,7 +208,8 @@ bool LibraryProxyModel::openedAfter(const QModelIndex& left,
 
     if(!lhsLastOpenedDate.isValid())
         return false;
-    else if(!rhsLastOpenedDate.isValid())
+
+    if(!rhsLastOpenedDate.isValid())
         return true;
 
     return lhsLastOpenedDate > rhsLastOpenedDate;
@@ -226,7 +228,8 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
 
     if(!lhsAddedDate.isValid())
         return false;
-    else if(!rhsAddedDate.isValid())
+
+    if(!rhsAddedDate.isValid())
         return true;
 
     return lhsAddedDate > rhsAddedDate;

@@ -6,7 +6,7 @@ namespace infrastructure::data
 // clang-format off
 
 
-inline const QString baseUrl { "https://localhost:7084" };
+inline const QString baseUrl { "https://librum-dev.azurewebsites.net" };    
 
 // Authentication
 inline const QString authenticationEndpoint { baseUrl + "/api/login" };

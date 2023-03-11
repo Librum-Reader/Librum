@@ -148,6 +148,7 @@ int main(int argc, char* argv[])
     // Startup
     QQmlApplicationEngine engine;
     engine.addImportPath("qrc:/modules");
+    engine.addImportPath(QCoreApplication::applicationDirPath() + "/src/presentation/qt_tree_view/qml/");
 
     const QUrl url("qrc:/main.qml");
     QObject::connect(
