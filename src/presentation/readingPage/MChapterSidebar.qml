@@ -98,6 +98,8 @@ Item
                 {
                     id: scrollBar
                     property bool isEnabled: contentHeight > height
+                    anchors.fill: parent
+                    
                     onIsEnabledChanged:
                     {
                         if(isEnabled)
@@ -105,8 +107,6 @@ Item
                         else
                             ScrollBar.vertical.policy = ScrollBar.AlwaysOff;
                     }
-                    
-                    anchors.fill: parent
                     
                     
                     Chapters.TreeView
@@ -224,6 +224,15 @@ Item
                             }
                         }
                         
+                    }
+                
+                    Component.onCompleted:
+                    {
+                        // contentItem is the ScrollView's underlying Flickable
+                        contentItem.flickDeceleration = 10000;
+                        contentItem.maximumFlickVelocity = 2000;
+                        contentItem.boundsBehavior = Flickable.StopAtBounds
+                        contentItem.boundsMovement = Flickable.StopAtBounds
                     }
                 }
             }
