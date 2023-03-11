@@ -234,7 +234,7 @@ Page
                 MChapterSidebar
                 {
                     id: chapterSidebar
-                    property int lastWidth: 300
+                    property int lastWidth: 370
                     property bool active: false
                     chapterModel: documentItem.tableOfContents
                     anchors.fill: parent
