@@ -175,11 +175,7 @@ Since Librum is a KDE application, the KDE libraries are necessary. If you are o
     ```
 6. Build the project
     ```sh
-    make
-    ```
-    Optionally, add the -j option to increase build speed. Pass it the number of cores you want "make" to use. E.g.:
-    ```sh
-    make -j
+    make -j4
     ```
 7. Install the files
     ```sh
