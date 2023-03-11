@@ -100,6 +100,7 @@ Item
                     property bool isEnabled: contentHeight > height
                     anchors.fill: parent
                     
+                    ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                     onIsEnabledChanged:
                     {
                         if(isEnabled)
