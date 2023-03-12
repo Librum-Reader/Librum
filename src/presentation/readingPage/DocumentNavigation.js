@@ -75,21 +75,13 @@ function flick(factor)
     listView.flick(0, factor);
 }
 
-function nextPage()
+function setPage(newPageNumber)
 {
-    let currentPageStartY = root.document.currentPage * listView.currentItem.height;
-    let nextPageY = currentPageStartY + listView.currentItem.height;
-    let diff = nextPageY - listView.contentY;
-    listView.contentY = nextPageY + listView.originY;
+    let newPageY = listView.currentItem.height * newPageNumber;
+    listView.contentY = newPageY + listView.originY;
     
-    setMoveDirection("up");
-}
-
-function previousPage()
-{
-    let currentPageStartY = root.document.currentPage * listView.currentItem.height;
-    let nextPageY = currentPageStartY - listView.currentItem.height;
-    listView.contentY = nextPageY + listView.originY;
-    
-    setMoveDirection("down");
+    if(newPageNumber >= 0)
+        setMoveDirection("up");
+    else
+        setMoveDirection("down");
 }

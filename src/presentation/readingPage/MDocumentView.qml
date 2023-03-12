@@ -96,16 +96,16 @@ Pane
     
     function nextPage()
     {
-        NavigationLogic.nextPage();
+        NavigationLogic.setPage(root.document.currentPage + 1);
     }
     
     function previousPage()
     {
-        NavigationLogic.previousPage();
+        NavigationLogic.setPage(root.document.currentPage - 1);
     }
     
     function setPage(pageNumber)
     {
-        listView.contentY = listView.currentItem.height * pageNumber;
+        NavigationLogic.setPage(pageNumber);
     }
 }
