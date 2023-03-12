@@ -1,6 +1,6 @@
 #include "filtered_tocmodel.hpp"
 #include <algorithm>
-#include <rapidfuzz/fuzz.hpp>
+#include "string_utils.hpp"
 
 namespace Okular
 {
@@ -21,7 +21,8 @@ bool FilteredTOCModel::filterAcceptsRow(int row,
     if(item != nullptr && hasChildrenMatchingTheFilter(item))
         return true;
 
-    auto similarity = fuzzCompareWithFilterString(name.toString());
+    auto similarity =
+        string_utils::fuzzCompare(name.toString(), m_filterString);
     double minSimilarity = 70;
 
     return similarity >= minSimilarity;
@@ -52,28 +53,10 @@ bool FilteredTOCModel::hasChildrenMatchingTheFilter(const TOCItem* item) const
 
 bool FilteredTOCModel::itemPassesFilter(const TOCItem* item) const
 {
-    auto similarity = fuzzCompareWithFilterString(item->text);
+    auto similarity = string_utils::fuzzCompare(item->text, m_filterString);
     double minSimilarity = 70;
 
     return similarity >= minSimilarity;
-}
-
-double FilteredTOCModel::fuzzCompareWithFilterString(QString str) const
-{
-    // If the sorting string is a sub-string of str, return a high ratio
-    auto leftSubstrPos = str.toLower().indexOf(m_filterString.toLower());
-    if(leftSubstrPos != -1)
-    {
-        // The further at the front, the better the ratio should be
-        double ratio = 100 - leftSubstrPos;
-        // A difference in length of the strings should reduce the score
-        ratio -= std::abs(str.length() - m_filterString.length()) * 0.1;
-
-        return ratio;
-    }
-
-    return rapidfuzz::fuzz::ratio(m_filterString.toStdString(),
-                                  str.toStdString());
 }
 
 }  // namespace Okular

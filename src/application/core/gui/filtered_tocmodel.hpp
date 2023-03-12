@@ -28,7 +28,6 @@ private:
     // Recursively check if the item or any of its children match the filter
     bool hasChildrenMatchingTheFilter(const TOCItem* item) const;
     bool itemPassesFilter(const TOCItem* item) const;
-    double fuzzCompareWithFilterString(QString str) const;
 
     QString m_filterString;
 };

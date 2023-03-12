@@ -63,6 +63,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${PROJECT_SOURCE_DIR}/src/library_helpers
                     ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
 )

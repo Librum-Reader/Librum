@@ -467,6 +467,11 @@ kconfig_add_kcfg_files(okularpart_SRCS GENERATE_MOC conf/settings.kcfgc)
 
 add_library(okularpart SHARED ${okularpart_SRCS})
 target_compile_options(okularpart PRIVATE -fexceptions)
+target_include_directories(okularpart 
+    PRIVATE 
+    ${CMAKE_CURRENT_SOURCE_DIR}/../utility
+)
+
 generate_export_header(okularpart BASE_NAME okularpart)
 
 target_link_libraries(okularpart
