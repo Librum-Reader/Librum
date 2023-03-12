@@ -12,7 +12,7 @@ Item
     property var container
     property bool isLastPage: pageNumber == container.count - 1
     readonly property PageItem pageItem: page
-    readonly property int pageSpacing: root.isLastPage ? 0 : Math.round(14 * scaleFactor)
+    readonly property int pageSpacing: root.isLastPage ? 0 : Math.round(10 * scaleFactor)
     property alias document: page.document
     property alias pageNumber: page.pageNumber
     readonly property real pageRatio: page.implicitWidth / page.implicitHeight
