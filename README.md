@@ -54,6 +54,13 @@ As a team of opensource developers we rely on donations from the community to be
 
 <br>
 
+# Contributing
+
+If you are interested in contributing, feel free to contact us under: contact@librumreader.com <br>
+We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing.
+
+<br>
+
 # Contact
 
 
