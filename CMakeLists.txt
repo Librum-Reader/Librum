@@ -7,6 +7,7 @@ project(Librum VERSION 0.1
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(BUILD_TESTS ON)
+option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
 
 # Create a set of warnings
@@ -26,9 +27,11 @@ endif()
                           
 
 # Create a set of sanitizers
-string(CONCAT LIBRUM_SANITIZERS #[["-fsanitize=address,undefined,shift,integer-divide-by-zero,"
-                                "float-divide-by-zero,unreachable,vla-bound,null,return,leak,"
-                                "bounds,float-cast-overflow,enum"]])
+if(USE_SANITIZERS)
+    string(CONCAT LIBRUM_SANITIZERS "-fsanitize=address,undefined,shift,integer-divide-by-zero,"
+                                    "float-divide-by-zero,unreachable,vla-bound,null,return,leak,"
+                                    "bounds,float-cast-overflow,enum")
+endif()
 
 
 # Dependencies
