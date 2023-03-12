@@ -58,11 +58,8 @@ signals:
     void sortRoleUpdated();
 
 private:
-    std::optional<bool> fuzzCompareBooks(const QModelIndex& left,
+    std::optional<bool> leftBookIsCloserToSortString(const QModelIndex& left,
                                          const QModelIndex& right) const;
-    double fuzzCompareWithSortingString(QString lhs) const;
-    bool stringIsLexicographicallyLess(const QString& left,
-                                       const QString& right) const;
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;

@@ -3,9 +3,9 @@
 #include <QDebug>
 #include <algorithm>
 #include <numeric>
-#include <rapidfuzz/fuzz.hpp>
 #include "book.hpp"
 #include "library_model.hpp"
+#include "string_utils.hpp"
 #include "tag_dto.hpp"
 
 using adapters::dtos::TagDto;
@@ -24,26 +24,28 @@ LibraryProxyModel::LibraryProxyModel(QObject* parent) :
 bool LibraryProxyModel::lessThan(const QModelIndex& left,
                                  const QModelIndex& right) const
 {
-    auto fuzzResult = fuzzCompareBooks(left, right);
-    if(fuzzResult.has_value())
-        return fuzzResult.value();
+    auto result = leftBookIsCloserToSortString(left, right);
+    if(result.has_value())
+        return result.value();
 
+
+    // If no sort string is set, compare by sort role
     switch(m_sortRole)
     {
     case SortRole::Title:
     {
         auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
         auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
-        return stringIsLexicographicallyLess(leftTitle.toString(),
-                                             rightTitle.toString());
+        return string_utils::lexicographicallyLess(leftTitle.toString(),
+                                                   rightTitle.toString());
     }
     case SortRole::Authors:
     {
         auto leftData = sourceModel()->data(left, LibraryModel::AuthorsRole);
         auto rightData = sourceModel()->data(right, LibraryModel::AuthorsRole);
 
-        return stringIsLexicographicallyLess(leftData.toString(),
-                                             rightData.toString());
+        return string_utils::lexicographicallyLess(leftData.toString(),
+                                                   rightData.toString());
     }
     case SortRole::LastOpened:
     {
@@ -67,17 +69,20 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     }
 }
 
-std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
+std::optional<bool> LibraryProxyModel::leftBookIsCloserToSortString(
     const QModelIndex& left, const QModelIndex& right) const
 {
+    // If no sort string is set, abort
     if(m_sortString.isEmpty())
         return std::nullopt;
 
     auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
     auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
 
-    double leftRatio = fuzzCompareWithSortingString(leftTitle.toString());
-    double rightRatio = fuzzCompareWithSortingString(rightTitle.toString());
+    double leftRatio =
+        string_utils::fuzzCompare(leftTitle.toString(), m_sortString);
+    double rightRatio =
+        string_utils::fuzzCompare(rightTitle.toString(), m_sortString);
 
     if(leftRatio > rightRatio)
         return true;
@@ -85,24 +90,6 @@ std::optional<bool> LibraryProxyModel::fuzzCompareBooks(
         return false;
 
     return std::nullopt;
-}
-
-double LibraryProxyModel::fuzzCompareWithSortingString(QString str) const
-{
-    // If the sorting string is a sub-string of str, return a high ratio
-    auto leftSubstrPos = str.toLower().indexOf(m_sortString.toLower());
-    if(leftSubstrPos != -1)
-    {
-        // The further at the front, the better the ratio should be
-        double ratio = 100 - leftSubstrPos;
-        // A difference in length of the strings should reduce the score
-        ratio -= std::abs(str.length() - m_sortString.length()) * 0.1;
-
-        return ratio;
-    }
-
-    return rapidfuzz::fuzz::ratio(m_sortString.toStdString(),
-                                  str.toStdString());
 }
 
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,
@@ -181,18 +168,6 @@ void LibraryProxyModel::clearFilterTags()
 {
     m_tags.clear();
     invalidateFilter();
-}
-
-bool LibraryProxyModel::stringIsLexicographicallyLess(
-    const QString& left, const QString& right) const
-{
-    if(left.isEmpty())
-        return false;
-
-    if(right.isEmpty())
-        return true;
-
-    return left.toLower() < right.toLower();
 }
 
 bool LibraryProxyModel::openedAfter(const QModelIndex& left,
