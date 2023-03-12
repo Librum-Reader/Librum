@@ -391,6 +391,11 @@ void PageItem::paint()
     const int flags = PagePainter::Accessibility | PagePainter::Highlights |
                       PagePainter::Annotations;
 
+    // When loading pages fast some windows are not created, thus window()
+    // gets to be a nullptr which leads to a segmentation fault.
+    if(window() == nullptr)
+        return;
+
     const qreal dpr = window()->devicePixelRatio();
     const QRect limits(QPoint(0, 0), QSize(width() * dpr, height() * dpr));
     QPixmap pix(limits.size());
