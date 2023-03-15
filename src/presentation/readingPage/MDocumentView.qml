@@ -30,6 +30,12 @@ Pane
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
         
+        onClicked:
+        {
+            root.forceActiveFocus();
+            mouse.accepted = false;
+        }
+        
         
         ListView
         {
@@ -77,6 +83,12 @@ Pane
                 {
                     NavigationLogic.handleWheel(wheel);
                     wheel.accepted = true;
+                }
+                
+                onClicked:
+                {
+                    root.forceActiveFocus();
+                    mouse.accepted = false;
                 }
             }
         }

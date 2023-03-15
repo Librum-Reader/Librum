@@ -79,7 +79,7 @@ Page
             if(!opened)
                 return;
             
-            toolbar.currentPageButton.maxPages = pageCount;
+            toolbar.currentPageSelection.pageCount = pageCount;
             toolbar.bookTitle = windowTitleForDocument;
         }
         
@@ -152,11 +152,6 @@ Page
                     chapterSidebar.close();
                 
                 bookmarksSidebar.open();
-            }
-            
-            onCurrentPageButtonClicked:
-            {
-                currentPageButton.active = !currentPageButton.active;
             }
             
             onFullScreenButtonClicked:
