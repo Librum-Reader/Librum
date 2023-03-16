@@ -94,6 +94,15 @@ Pane
         }
     }
     
+    Rectangle
+    {
+        z: 100
+        color: "red"
+        width: root.width
+        height: 2
+        y: listView.height/2
+    }
+    
     
     function zoom(factor)
     {

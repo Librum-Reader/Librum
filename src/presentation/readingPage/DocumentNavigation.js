@@ -12,7 +12,7 @@ function handleWheel(wheel)
     }
     // angleDelta.x is the "horizontal scroll" mode some mouses support by
     // e.g. pushing the scroll button to the left/right. Make sure not to
-    // scroll vertically when a "horizontal scroll" is performed
+    // scroll vertically when a "horizontal scroll" is performed.
     else if(wheel.angleDelta.x === 0)
     {
         if(factor > 1)
@@ -24,15 +24,14 @@ function handleWheel(wheel)
 
 function updateCurrentPageCounter()
 {
-    // Calculate the current page based on contentY and the zoom
-    let pageHeight = listView.currentItem.height;
-    let currentPos = listView.contentY - listView.originY + root.height/2;
+    // Calculate the current page.
+    // A new page starts if it is over the middle of the screen (vertically).
+    let pageHeight = listView.itemAtIndex(root.document.currentPage).height;
+    let currentPos = listView.contentY + listView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
     
     if(pageNumber !== root.document.currentPage)
-    {
         root.document.currentPage = pageNumber;
-    }
 }
 
 /**
@@ -42,7 +41,7 @@ function updateCurrentPageCounter()
   If we e.g. scroll downwards and then go to the previousPage
   by setting the contentY, the previous pages are not cached
   which might lead to visible loading while moving through the
-  book with the arrow keys
+  book with the arrow keys.
   */
 function setMoveDirection(direction)
 {
@@ -77,8 +76,9 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let newPageY = listView.currentItem.height * newPageNumber;
-    listView.contentY = newPageY + listView.originY;
+    let newPageHeight = listView.itemAtIndex(newPageNumber).height;
+    let newPageY = listView.itemAtIndex(newPageNumber).height * newPageNumber;
+    listView.contentY = newPageY;
     
     if(newPageNumber >= 0)
         setMoveDirection("up");

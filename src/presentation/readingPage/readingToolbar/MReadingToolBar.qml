@@ -186,7 +186,6 @@ Pane
                                 return;
                             }
                             
-                            console.log("Setting: " + newPage)
                             documentView.setPage(newPage - 1);
                             documentView.forceActiveFocus(); // Discard focus when finished
                         }
