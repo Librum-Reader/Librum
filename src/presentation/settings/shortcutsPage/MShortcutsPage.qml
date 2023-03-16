@@ -73,9 +73,9 @@ Page
             
             MButton
             {
-                id: addBooksButton
+                id: addShortcutButton
                 Layout.preferredWidth: 160
-                Layout.preferredHeight: 40
+                Layout.preferredHeight: 38
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
