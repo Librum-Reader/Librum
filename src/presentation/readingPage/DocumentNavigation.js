@@ -22,9 +22,9 @@ function handleWheel(wheel)
     }
 }
 
+// Calculate the current page.
 function updateCurrentPageCounter()
 {
-    // Calculate the current page.
     // A new page starts if it is over the middle of the screen (vertically).
     let pageHeight = listView.itemAtIndex(root.document.currentPage).height;
     let currentPos = listView.contentY + listView.height/2;
@@ -77,7 +77,7 @@ function flick(factor)
 function setPage(newPageNumber)
 {
     let newPageHeight = listView.itemAtIndex(newPageNumber).height;
-    let newPageY = listView.itemAtIndex(newPageNumber).height * newPageNumber;
+    let newPageY = newPageHeight * newPageNumber;
     listView.contentY = newPageY;
     
     if(newPageNumber >= 0)

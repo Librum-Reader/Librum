@@ -12,7 +12,7 @@ Item
     property var container
     property bool isLastPage: pageNumber == container.count - 1
     readonly property PageItem pageItem: page
-    readonly property int pageSpacing: root.isLastPage ? 0 : Math.round(10 * scaleFactor)
+    readonly property int pageSpacing: Math.round(10 * scaleFactor)
     property alias document: page.document
     property alias pageNumber: page.pageNumber
     readonly property real pageRatio: page.implicitWidth / page.implicitHeight
@@ -41,6 +41,8 @@ Item
         anchors.top: page.bottom
         height: root.pageSpacing
         width: root.width
-        color: "transparent"
+        // If the current page is the book's last page, we dont want a space at the
+        // bottom, so just fill it with the page's background color.
+        color: root.isLastPage ? Style.colorReadingViewBackground : "transparent"
     }
 }
