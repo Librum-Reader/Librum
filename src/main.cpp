@@ -24,6 +24,7 @@
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
 #include "page_item.hpp"
+#include "qquicktableviewextra_p.h"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "sidebar_state.hpp"
@@ -65,6 +66,7 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
+    qmlRegisterType<QQuickTableViewExtra>("Librum.elements", 1, 0, "TableViewExtra");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
     qRegisterMetaType<adapters::dtos::UserDto>();

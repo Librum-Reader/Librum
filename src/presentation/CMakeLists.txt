@@ -68,6 +68,8 @@ add_library(presentation
                     modules/CppElements/page_item.hpp
                     modules/CppElements/document_item.cpp
                     modules/CppElements/document_item.hpp
+                    modules/CppElements/qquicktableviewextra_p.h
+                    modules/CppElements/qquicktableviewextra.cpp
 )
 
 add_dependencies(presentation qt_treeview_qmake)
@@ -101,6 +103,9 @@ target_include_directories(presentation
                     ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
                     ${APPLICATION_INCLUDES}
                     ${OKULARCORE_INCLUDES}
+                    
+                    # Need Qt's private API headers for qquicktableviewextra
+                    ${Qt${QT_VERSION_MAJOR}Quick_PRIVATE_INCLUDE_DIRS}
 )
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-g3;-Og>")
