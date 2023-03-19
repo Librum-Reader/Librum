@@ -13,7 +13,7 @@ Pane
 {
     id: root
     property DocumentItem document
-    readonly property alias pageListView: listView
+    readonly property alias pagetableView: tableView
     signal clicked
     signal pageWidthChanged(int width)
     
@@ -30,6 +30,7 @@ Pane
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
         
+        // Take over focus when clicked
         onClicked:
         {
             root.forceActiveFocus();
@@ -37,60 +38,63 @@ Pane
         }
         
         
-        ListView
+        TableView
         {
-            id: listView
+            id: tableView
             readonly property int normalWidth: 1020
             readonly property int scrollSpeed: 1600
             
-            height: parent.height
+            height: parent.height /** 10*/  // Increase the height to render pages in advance
             width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
                                        ? root.width : contentWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             contentWidth: 1020
-            cacheBuffer: 5000  // Load some pages in advance
             interactive: true
+            rowSpacing: 14
+            clip: true
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
-            currentIndex: 0
             model: root.document.pageCount
             delegate: MPageView
             {
-                width: listView.contentWidth
-                height: Math.round(width / pageRatio) + pageSpacing
+                implicitHeight: 1334 /*Math.round(width / pageRatio)*/
+                implicitWidth: Math.round(height * pageRatio) /*tableView.contentWidth*/
                 document: root.document
                 pageNumber: modelData
-                container: listView
             }
+            
             
             // Set the book's current page once the model is loaded
-            onModelChanged:
-            {
-                if(listView.currentItem != null)
-                    root.setPage(Globals.selectedBook.currentPage - 1)
-            }
-            onWidthChanged: root.pageWidthChanged(width)
+//            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
+//            onWidthChanged: root.pageWidthChanged(width)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
-            
-            MouseArea
+            // A custom helper class which provides Qt6 like functions for
+            // the TableView, such as 'itemAtCell(cell)'
+            TableViewExtra
             {
-                id: wheelInterceptor
-                anchors.fill: parent
-                
-                onWheel:
-                {
-                    NavigationLogic.handleWheel(wheel);
-                    wheel.accepted = true;
-                }
-                
-                onClicked:
-                {
-                    root.forceActiveFocus();
-                    mouse.accepted = false;
-                }
+                id: tableHelper
+                tableView: tableView
             }
+            
+//            MouseArea
+//            {
+//                id: wheelInterceptor
+//                anchors.fill: parent
+                
+//                onWheel:
+//                {
+//                    NavigationLogic.handleWheel(wheel);
+//                    wheel.accepted = true;
+//                }
+                
+//                onClicked:
+//                {
+//                    root.forceActiveFocus();
+//                    mouse.accepted = false;
+//                }
+//            }
         }
     }
     
@@ -100,7 +104,7 @@ Pane
         color: "red"
         width: root.width
         height: 2
-        y: listView.height/2
+        y: tableView.height/2
     }
     
     
@@ -112,11 +116,16 @@ Pane
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(listView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick(tableView.scrollSpeed * (up ? 1 : -1));
     }
     
     function nextPage()
     {
+        // Prevent trying to go over the end
+        let newPage = root.document.currentPage + 1;
+        if(newPage > root.document.pageCount - 1)
+            return;
+        
         NavigationLogic.setPage(root.document.currentPage + 1);
     }
     

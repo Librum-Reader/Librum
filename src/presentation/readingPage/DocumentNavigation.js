@@ -16,72 +16,50 @@ function handleWheel(wheel)
     else if(wheel.angleDelta.x === 0)
     {
         if(factor > 1)
-            flick(listView.scrollSpeed);
+            flick(tableView.scrollSpeed);
         else
-            flick(-listView.scrollSpeed);
+            flick(-tableView.scrollSpeed);
     }
 }
 
-// Calculate the current page.
+// Calculate the current page and update the document.
 function updateCurrentPageCounter()
 {
-    // A new page starts if it is over the middle of the screen (vertically).
-    let pageHeight = listView.itemAtIndex(root.document.currentPage).height;
-    let currentPos = listView.contentY + listView.height/2;
+    // A new page starts if it is over the middle of the screen (vertically).   
+    let pageHeight = getPage(root.document.currentPage).height + tableView.rowSpacing;
+    let currentPos = tableView.contentY + tableView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
+    
     
     if(pageNumber !== root.document.currentPage)
         root.document.currentPage = pageNumber;
 }
 
-/**
-  Changes the current move direction of the listview, without actually
-  moving visibly. This is neccessary since the listview only chaches
-  delegates in the direction of the current move direction.
-  If we e.g. scroll downwards and then go to the previousPage
-  by setting the contentY, the previous pages are not cached
-  which might lead to visible loading while moving through the
-  book with the arrow keys.
-  */
-function setMoveDirection(direction)
-{
-    if(direction === "up")
-    {
-        listView.flick(0, -1000);
-        listView.cancelFlick();
-    }
-    else if(direction === "down")
-    {
-        listView.flick(0, 1000);
-        listView.cancelFlick();
-    }
-}
 
 function zoom(factor)
 {
-    let newWidth = listView.contentWidth * factor;
-    if (newWidth < listView.normalWidth / 6 || newWidth > listView.normalWidth * 5)
+    let newWidth = tableView.contentWidth * factor;
+    if (newWidth < tableView.defaultWidth / 6 || newWidth > tableView.defaultWidth * 5)
         return;
     
-    listView.resizeContent(Math.round(newWidth),
-                           Math.round(newWidth / listView.currentItem.pageRatio),
-                           Qt.point(0, 0));
-    listView.returnToBounds();
+//    tableView.contentWidth *= factor;
 }
+
 
 function flick(factor)
 {
-    listView.flick(0, factor);
+    tableView.flick(0, factor);
 }
 
 function setPage(newPageNumber)
 {
-    let newPageHeight = listView.itemAtIndex(newPageNumber).height;
+    let newPageHeight = getPage(root.document.currentPage).height + tableView.rowSpacing;
     let newPageY = newPageHeight * newPageNumber;
-    listView.contentY = newPageY;
     
-    if(newPageNumber >= 0)
-        setMoveDirection("up");
-    else
-        setMoveDirection("down");
+    tableView.contentY = newPageY;
+}
+
+function getPage(pageNumber)
+{
+    return tableHelper.itemAtCell(0, pageNumber);
 }

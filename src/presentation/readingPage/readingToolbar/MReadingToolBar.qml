@@ -180,7 +180,7 @@ Pane
                             if(root.currentPage == newPage - 1)
                                 return;
                             
-                            if(newPage < 1 || newPage > currentPageSelection.pageCount + 1)
+                            if(newPage < 1 || newPage > currentPageSelection.pageCount)
                             {
                                 inputField.text = Qt.binding(() => root.currentPage + 1);
                                 return;
