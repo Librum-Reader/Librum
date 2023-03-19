@@ -321,8 +321,6 @@ Page
                     Layout.fillHeight: true
                     visible: documentItem.opened
                     document: documentItem
-                    
-                    onPageWidthChanged: (width) => toolbar.pageWidth = width
                 }
             }
         }

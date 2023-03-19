@@ -15,7 +15,6 @@ Pane
     property DocumentItem document
     readonly property alias pagetableView: tableView
     signal clicked
-    signal pageWidthChanged(int width)
     
     padding: 0
     background: Rectangle { color: "transparent" }
@@ -66,8 +65,7 @@ Pane
             
             
             // Set the book's current page once the model is loaded
-//            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
-//            onWidthChanged: root.pageWidthChanged(width)
+            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
             // A custom helper class which provides Qt6 like functions for

@@ -12,7 +12,6 @@ Pane
     id: root
     property bool fullScreenMode: false
     property string bookTitle: "Unknown name"
-    property int pageWidth: 0
     property int currentPage: 0
     property int lastPage: 0
     property alias chapterButton: chapterButton
