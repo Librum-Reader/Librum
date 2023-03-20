@@ -56,5 +56,5 @@ target_include_directories(adapters_unit_tests
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
 )
 
-target_compile_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-g3;-Og")
+target_compile_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-O0;-g")
 target_link_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")

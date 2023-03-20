@@ -46,5 +46,5 @@ target_include_directories(application_unit_tests
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
 )
 
-target_compile_options(application_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-g3;-Og")
+target_compile_options(application_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-O0;-g")
 target_link_options(application_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")

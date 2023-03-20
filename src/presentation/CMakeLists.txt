@@ -108,5 +108,5 @@ target_include_directories(presentation
                     ${Qt${QT_VERSION_MAJOR}Quick_PRIVATE_INCLUDE_DIRS}
 )
 
-target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-g3;-Og>")
+target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-O0;-g>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

@@ -81,7 +81,7 @@ target_include_directories(appLibrum
         ${OKULARCORE_INCLUDES}
 )
 
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-g3;-Og>")
+target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 target_link_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
