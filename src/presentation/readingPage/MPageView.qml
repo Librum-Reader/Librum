@@ -9,17 +9,19 @@ import Librum.style 1.0
 Item
 {
     id: root
-    property var container
     readonly property PageItem pageItem: page
     property alias document: page.document
     property alias pageNumber: page.pageNumber
-    property real pageRatio: page.implicitWidth / page.implicitHeight
-    readonly property real scaleFactor: page.width / page.implicitWidth
+    readonly property bool isLastPage: pageNumber == document.pageCount - 1
+    readonly property real pageRatio: page.implicitWidth / page.implicitHeight
+    property int pageSpacing
+    readonly property int adaptedWidth: page.width
     
     PageItem
     {
         id: page
-        anchors.fill: parent
+        height: parent.height - root.pageSpacing
+        width: root.height * root.pageRatio
         
         
         Rectangle
@@ -29,5 +31,17 @@ Item
             anchors.fill: parent
             color: Style.colorReadingViewBackground
         }
+    }
+    
+    // TODO: Fix the way we handle the last item spacing
+    Rectangle
+    {
+        id: bottomSpacing
+        anchors.top: page.bottom
+        height: root.pageSpacing
+        width: root.width
+        // If the current page is the book's last page, we dont want a space at the
+        // bottom, so just fill it with the page's background color.
+        color: root.isLastPage ? Style.colorReadingViewBackground : "transparent"
     }
 }

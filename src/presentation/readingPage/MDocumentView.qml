@@ -13,7 +13,7 @@ Pane
 {
     id: root
     property DocumentItem document
-    readonly property alias pagetableView: tableView
+    readonly property alias pagepageView: pageView
     signal clicked
     
     padding: 0
@@ -37,62 +37,54 @@ Pane
         }
         
         
-        TableView
+        GridView
         {
-            id: tableView
-            readonly property int normalWidth: 1020
+            id: pageView
+            readonly property real defaultHeight: 1334
+            property real zoomFactor: 1
+            readonly property int defaultPageSpacing: 12
             readonly property int scrollSpeed: 1600
             
-            height: parent.height /** 10*/  // Increase the height to render pages in advance
-            width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
-                                       ? root.width : contentWidth
+            height: parent.height
+            width: contentItem.childrenRect.width
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
-            contentWidth: 1020
             interactive: true
-            rowSpacing: 14
             clip: true
+            cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+            cellWidth: 800
+            cacheBuffer: 20000
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
             model: root.document.pageCount
             delegate: MPageView
             {
-                implicitHeight: 1334 /*Math.round(width / pageRatio)*/
-                implicitWidth: Math.round(height * pageRatio) /*tableView.contentWidth*/
+                // The width is automatically deduced
+                height: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+                width: adaptedWidth
+                
                 document: root.document
                 pageNumber: modelData
+                pageSpacing: pageView.defaultPageSpacing
             }
             
             
-            // Set the book's current page once the model is loaded
-            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
+//             Set the book's current page once the model is loaded
+//            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
-            // A custom helper class which provides Qt6 like functions for
-            // the TableView, such as 'itemAtCell(cell)'
-            TableViewExtra
-            {
-                id: tableHelper
-                tableView: tableView
-            }
             
-//            MouseArea
-//            {
-//                id: wheelInterceptor
-//                anchors.fill: parent
+            MouseArea
+            {
+                id: wheelInterceptor
+                anchors.fill: parent
                 
-//                onWheel:
-//                {
-//                    NavigationLogic.handleWheel(wheel);
-//                    wheel.accepted = true;
-//                }
-                
-//                onClicked:
-//                {
-//                    root.forceActiveFocus();
-//                    mouse.accepted = false;
-//                }
-//            }
+                onWheel:
+                {
+                    NavigationLogic.handleWheel(wheel);
+                    wheel.accepted = true;
+                }
+            }
         }
     }
     
@@ -102,7 +94,7 @@ Pane
         color: "red"
         width: root.width
         height: 2
-        y: tableView.height/2
+        y: pageView.height/2
     }
     
     
@@ -114,7 +106,7 @@ Pane
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(tableView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick(pageView.scrollSpeed * (up ? 1 : -1));
     }
     
     function nextPage()
