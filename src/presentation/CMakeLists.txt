@@ -68,8 +68,6 @@ add_library(presentation
                     modules/CppElements/page_item.hpp
                     modules/CppElements/document_item.cpp
                     modules/CppElements/document_item.hpp
-                    modules/CppElements/qquicktableviewextra_p.h
-                    modules/CppElements/qquicktableviewextra.cpp
 )
 
 add_dependencies(presentation qt_treeview_qmake)
