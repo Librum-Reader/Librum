@@ -13,9 +13,8 @@ Pane
 {
     id: root
     property DocumentItem document
-    readonly property alias pageListView: listView
+    readonly property alias pagepageView: pageView
     signal clicked
-    signal pageWidthChanged(int width)
     
     padding: 0
     background: Rectangle { color: "transparent" }
@@ -30,41 +29,50 @@ Pane
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
         
-        
-        ListView
+        // Take over focus when clicked
+        onClicked:
         {
-            id: listView
-            readonly property int normalWidth: 1020
+            root.forceActiveFocus();
+            mouse.accepted = false;
+        }
+        
+        
+        GridView
+        {
+            id: pageView
+            readonly property real defaultHeight: 1334
+            property real zoomFactor: 1
+            readonly property int defaultPageSpacing: 12
             readonly property int scrollSpeed: 1600
             
             height: parent.height
-            width: contentWidth == 0 ? 1020 : contentWidth >= root.width 
-                                       ? root.width : contentWidth
+            width: contentItem.childrenRect.width > root.width ? root.width : contentItem.childrenRect.width
+            contentWidth: currentItem.width
             anchors.centerIn: parent
-            flickableDirection: Flickable.AutoFlickDirection
-            contentWidth: 1020
-            cacheBuffer: 5000  // Load some pages in advance
+            flickableDirection: Flickable.VerticalFlick
             interactive: true
+            clip: true
+            cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+            cellWidth: currentItem.width
+            cacheBuffer: 20000
+            flow: GridView.FlowLeftToRight
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
-            currentIndex: 0
             model: root.document.pageCount
             delegate: MPageView
             {
-                width: listView.contentWidth
-                height: Math.round(width / pageRatio) + pageSpacing
+                // The width is automatically deduced
+                height: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+                width: adaptedWidth
+                
                 document: root.document
                 pageNumber: modelData
-                container: listView
+                pageSpacing: pageView.defaultPageSpacing
             }
             
+            
             // Set the book's current page once the model is loaded
-            onModelChanged:
-            {
-                if(listView.currentItem != null)
-                    root.setPage(Globals.selectedBook.currentPage - 1)
-            }
-            onWidthChanged: root.pageWidthChanged(width)
+            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
             
@@ -91,11 +99,16 @@ Pane
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(listView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick(pageView.scrollSpeed * (up ? 1 : -1));
     }
     
     function nextPage()
     {
+        // Prevent trying to go over the end
+        let newPage = root.document.currentPage + 1;
+        if(newPage > root.document.pageCount - 1)
+            return;
+        
         NavigationLogic.setPage(root.document.currentPage + 1);
     }
     

@@ -36,5 +36,5 @@ target_link_libraries(domain
                     Qt5::Quick
 )
 
-target_compile_options(domain PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-g3;-Og>")
+target_compile_options(domain PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(domain PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

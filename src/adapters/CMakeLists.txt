@@ -83,5 +83,5 @@ target_link_libraries(adapters
                     Qt5::Network
 )
 
-target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-g3;-Og>")
+target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(adapters PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
