@@ -4,7 +4,7 @@
 function handleWheel(wheel)
 {
     // Normalize to factors between 0.8 and 1.2
-    let factor = (((wheel.angleDelta.y / 120)+1) / 8 ) + 0.8;
+    let factor = (((wheel.angleDelta.y / 120)+1) / 6 ) + 0.8;
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
@@ -63,12 +63,19 @@ function zoom(factor)
 {
     let newZoomFactor = pageView.zoomFactor * factor;
     let newHeight = Math.round(pageView.defaultHeight * newZoomFactor);
-    if (newHeight < pageView.defaultHeight / 6 || newHeight > pageView.defaultHeight * 5)
+    if (newHeight < pageView.defaultHeight / 5 || newHeight > pageView.defaultHeight * 3)
         return;
     
+    let oldPageHeight = pageView.currentItem.height;
+    let currentPage = root.document.currentPage;
+    let currentPos = pageView.contentY + pageView.height/2;
     
-    console.log("New zoom factor: " + newZoomFactor);
+    let oldPageOffsetNumber = currentPos - (oldPageHeight * currentPage);
+    
+    
     pageView.zoomFactor = newZoomFactor;
+    pageView.contentY = newHeight * currentPage + oldPageOffsetNumber * newZoomFactor;
+    pageView.forceLayout();
 }
 
 

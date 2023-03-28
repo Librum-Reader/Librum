@@ -46,14 +46,16 @@ Pane
             readonly property int scrollSpeed: 1600
             
             height: parent.height
-            width: contentItem.childrenRect.width
+            width: contentItem.childrenRect.width > root.width ? root.width : contentItem.childrenRect.width
+            contentWidth: currentItem.width
             anchors.centerIn: parent
-            flickableDirection: Flickable.AutoFlickDirection
+            flickableDirection: Flickable.VerticalFlick
             interactive: true
             clip: true
             cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
-            cellWidth: 800
+            cellWidth: currentItem.width
             cacheBuffer: 20000
+            flow: GridView.FlowLeftToRight
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
             model: root.document.pageCount
@@ -69,8 +71,8 @@ Pane
             }
             
             
-//             Set the book's current page once the model is loaded
-//            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
+            // Set the book's current page once the model is loaded
+            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
             
@@ -86,15 +88,6 @@ Pane
                 }
             }
         }
-    }
-    
-    Rectangle
-    {
-        z: 100
-        color: "red"
-        width: root.width
-        height: 2
-        y: pageView.height/2
     }
     
     
