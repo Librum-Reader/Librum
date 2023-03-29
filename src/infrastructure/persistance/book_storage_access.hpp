@@ -35,6 +35,7 @@ private:
 
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_testReply = nullptr;  // TODO: Remove!
     std::unique_ptr<QNetworkReply> m_gettingBooksMetaDataReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookDeletionReply = nullptr;

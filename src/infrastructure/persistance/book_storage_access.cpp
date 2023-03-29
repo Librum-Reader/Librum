@@ -1,5 +1,7 @@
 #include "book_storage_access.hpp"
 #include <QDebug>
+#include <QFile>
+#include <QHttpMultiPart>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QSslConfiguration>
@@ -16,8 +18,48 @@ void BookStorageAccess::createBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
-    linkRequestToErrorHandling(m_bookCreationReply.get(), 201);
+    //    m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
+    //    linkRequestToErrorHandling(m_bookCreationReply.get(), 201);
+
+
+    // Open file
+    QFile* file = new QFile("/home/creapermann/Downloads/api-design.pdf");
+    if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        qDebug() << "Could not open test file!";
+        return;
+    }
+
+    QHttpMultiPart* multiPart =
+        new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+
+    QHttpPart filePart;
+    filePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                       QVariant("multipart/form-data"));
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"file\"; filename=\"" +
+                                file->fileName() + "\""));
+    filePart.setBodyDevice(file);
+    file->setParent(multiPart);
+    multiPart->append(filePart);
+
+
+    QUrl url(data::baseUrl + "/api/book/data");
+    QNetworkRequest testRequest { url };
+    testRequest.setRawHeader("X-Version", "1.0");
+    testRequest.setRawHeader(QByteArray("Authorization"),
+                             "Bearer " + authToken.toUtf8());
+
+    QSslConfiguration sslConfiguration = testRequest.sslConfiguration();
+    sslConfiguration.setProtocol(QSsl::AnyProtocol);
+    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
+    testRequest.setSslConfiguration(sslConfiguration);
+
+    auto reply = m_networkAccessManager.post(testRequest, multiPart);
+    m_testReply.reset(reply);
+
+    linkRequestToErrorHandling(m_testReply.get(), 201);
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
