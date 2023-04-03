@@ -23,6 +23,7 @@ public:
     virtual BookOperationStatus addBook(const QString& filePath) = 0;
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
+    virtual BookOperationStatus downloadBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus updateBook(
         const domain::entities::Book& newBook) = 0;
 

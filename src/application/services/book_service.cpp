@@ -107,10 +107,38 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    int index = getBookIndex(uuid);
-
     m_bookStorageManager->uninstallBook(uuid);
     book->setDownloaded(false);
+
+    int index = getBookIndex(uuid);
+    emit dataChanged(index);
+
+    return BookOperationStatus::Success;
+}
+
+BookOperationStatus BookService::downloadBook(const QUuid& uuid)
+{
+    auto* book = getBook(uuid);
+    if(book == nullptr)
+    {
+        qWarning() << QString("Could not download book with uuid: %1. "
+                              "No book with this uuid exists.")
+                          .arg(uuid.toString());
+        return BookOperationStatus::BookDoesNotExist;
+    }
+
+    auto filePath = m_bookStorageManager->downloadBook(uuid);
+    if(!filePath.has_value())
+    {
+        qWarning() << QString("Downloading book with uuid: %1 Failed.")
+                          .arg(uuid.toString());
+        return BookOperationStatus::OperationFailed;
+    }
+
+    book->setFilePath(filePath.value().path());
+    book->setDownloaded(true);
+
+    int index = getBookIndex(uuid);
     emit dataChanged(index);
 
     return BookOperationStatus::Success;

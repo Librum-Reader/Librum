@@ -68,6 +68,18 @@ void BookStorageManager::uninstallBook(const QUuid& uuid)
     m_downloadedBooksTracker->untrackBook(uuid);
 }
 
+std::optional<QUrl> BookStorageManager::downloadBook(const QUuid& uuid)
+{
+    auto destDir = m_downloadedBooksTracker->getLibraryDir();
+    QString fileName = uuid.toString(QUuid::WithoutBraces);
+    auto dest = QUrl(destDir.filePath(fileName));
+
+    if(!m_bookStorageGateway->downloadBook(m_authenticationToken, uuid, dest))
+        return std::nullopt;
+
+    return dest;
+}
+
 void BookStorageManager::updateBook(const Book& book)
 {
     updateBookLocally(book);

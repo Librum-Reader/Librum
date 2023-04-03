@@ -26,7 +26,8 @@ public:
     virtual void updateBook(const QString& authToken,
                             const domain::entities::Book& book) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
-    virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
+    virtual bool downloadBook(const QString& authToken, const QUuid& uuid,
+                              const QUrl& dest) = 0;
 
 signals:
     void creatingBookFinished(bool success, const QString& reason);

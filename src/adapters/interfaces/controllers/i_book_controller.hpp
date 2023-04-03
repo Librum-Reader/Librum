@@ -52,6 +52,7 @@ public:
     Q_INVOKABLE virtual int addBook(const QString& path) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int uninstallBook(const QString& uuid) = 0;
+    Q_INVOKABLE virtual int downloadBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int updateBook(const QString& uuid,
                                        const QVariant& operations) = 0;
     Q_INVOKABLE virtual int addTag(const QString& bookUuid,

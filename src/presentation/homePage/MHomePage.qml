@@ -121,7 +121,7 @@ Page
                         }
                         else
                         {
-                            // TODO: Download book
+                            BookController.downloadBook(model.uuid);
                         }
                     }
                     

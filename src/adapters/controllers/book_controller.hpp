@@ -20,6 +20,7 @@ public:
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
     int uninstallBook(const QString& uuid) override;
+    int downloadBook(const QString& uuid) override;
     int updateBook(const QString& uuid, const QVariant& operations) override;
     int addTag(const QString& bookUuid, const QString& tagName,
                const QString& tagUuid) override;

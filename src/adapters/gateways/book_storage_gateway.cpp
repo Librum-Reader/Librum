@@ -49,11 +49,15 @@ void BookStorageGateway::getBooksMetaData(const QString& authToken)
     m_bookStorageAccess->getBooksMetaData(authToken);
 }
 
-void BookStorageGateway::downloadBook(const QString& authToken,
-                                      const QUuid& uuid)
+bool BookStorageGateway::downloadBook(const QString& authToken,
+                                      const QUuid& uuid, const QUrl& dest)
 {
+    qDebug() << "Downloading: " + uuid.toString();
     Q_UNUSED(authToken);
+    Q_UNUSED(dest);
     Q_UNUSED(uuid);
+
+    return true;
 }
 
 void BookStorageGateway::proccessBooksMetadata(

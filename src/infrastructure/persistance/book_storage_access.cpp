@@ -80,6 +80,8 @@ void BookStorageAccess::getBooksMetaData(const QString& authToken)
 void BookStorageAccess::downloadBook(const QString& authToken,
                                      const QUuid& uuid)
 {
+    qDebug() << "Download: " + uuid.toString();
+
     Q_UNUSED(authToken);
     Q_UNUSED(uuid);
 }
