@@ -1,7 +1,7 @@
 #include "book_storage_access.hpp"
 #include <QDebug>
+#include <QEventLoop>
 #include <QFile>
-#include <QHttpMultiPart>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QSslConfiguration>
@@ -18,48 +18,29 @@ void BookStorageAccess::createBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    //    m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
-    //    linkRequestToErrorHandling(m_bookCreationReply.get(), 201);
+    m_bookCreationReply.reset(m_networkAccessManager.post(request, data));
+
+    int expectedStatusCode = 201;
+    linkRequestToErrorHandling(m_bookCreationReply.get(), expectedStatusCode);
 
 
-    // Open file
-    QFile* file = new QFile("/home/creapermann/Downloads/api-design.pdf");
-    if(!file->open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        qDebug() << "Could not open test file!";
-        return;
-    }
-
-    QHttpMultiPart* multiPart =
-        new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    connect(m_bookCreationReply.get(), &QNetworkReply::finished,
+            [this, expectedStatusCode, jsonBook, authToken]()
+            {
+                auto statusCode =
+                    m_bookCreationReply
+                        ->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                        .toInt();
 
 
-    QHttpPart filePart;
-    filePart.setHeader(QNetworkRequest::ContentTypeHeader,
-                       QVariant("multipart/form-data"));
-    filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                       QVariant("form-data; name=\"file\"; filename=\"" +
-                                file->fileName() + "\""));
-    filePart.setBodyDevice(file);
-    file->setParent(multiPart);
-    multiPart->append(filePart);
-
-
-    QUrl url(data::baseUrl + "/api/book/data");
-    QNetworkRequest testRequest { url };
-    testRequest.setRawHeader("X-Version", "1.0");
-    testRequest.setRawHeader(QByteArray("Authorization"),
-                             "Bearer " + authToken.toUtf8());
-
-    QSslConfiguration sslConfiguration = testRequest.sslConfiguration();
-    sslConfiguration.setProtocol(QSsl::AnyProtocol);
-    sslConfiguration.setPeerVerifyMode(QSslSocket::QueryPeer);
-    testRequest.setSslConfiguration(sslConfiguration);
-
-    auto reply = m_networkAccessManager.post(testRequest, multiPart);
-    m_testReply.reset(reply);
-
-    linkRequestToErrorHandling(m_testReply.get(), 201);
+                if(m_bookCreationReply->error() == QNetworkReply::NoError ||
+                   expectedStatusCode == statusCode)
+                {
+                    uploadBookBinaryData(jsonBook["guid"].toString(),
+                                         jsonBook["filePath"].toString(),
+                                         authToken);
+                }
+            });
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
@@ -144,6 +125,46 @@ void BookStorageAccess::proccessGettingBooksMetaDataResult()
     }
 
     emit gettingBooksMetaDataFinished(books);
+}
+
+void BookStorageAccess::uploadBookBinaryData(const QString& uuid,
+                                             const QString& filePath,
+                                             const QString& authToken)
+{
+    // Open file
+    QFile* file = new QFile(QUrl(filePath).path());
+    if(!file->open(QIODevice::ReadOnly))
+    {
+        qDebug() << "Could not open test file!";
+        return;
+    }
+
+    // Build multi part
+    m_multiPart.reset(new QHttpMultiPart(QHttpMultiPart::FormDataType));
+    file->setParent(m_multiPart.get());
+    QHttpPart filePart;
+    filePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                       QVariant("application/octet-stream"));
+    filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                       QVariant("form-data; name=\"file\"; filename=\"" +
+                                file->fileName() + "\""));
+    filePart.setBodyDevice(file);
+
+    m_multiPart->append(filePart);
+
+    auto testRequest =
+        createRequest(data::bookBinaryDataEndpoint + "/" + uuid, authToken);
+    testRequest.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+    testRequest.setHeader(QNetworkRequest::ContentDispositionHeader,
+                          QVariant("form-data; name=\"file\"; filename=\"" +
+                                   file->fileName() + "\""));
+
+
+    // Send request
+    auto reply = m_networkAccessManager.post(testRequest, m_multiPart.get());
+    m_testReply.reset(reply);
+
+    linkRequestToErrorHandling(m_testReply.get(), 201);
 }
 
 QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
