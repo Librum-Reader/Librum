@@ -31,6 +31,7 @@ public:
     MOCK_METHOD(BookOperationStatus, addBook, (const QString&), (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, uninstallBook, (const QUuid&), (override));
+    MOCK_METHOD(BookOperationStatus, downloadBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, updateBook, (const Book& book),
                 (override));
 
