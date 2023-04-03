@@ -3,8 +3,6 @@
 
 namespace infrastructure::data
 {
-// clang-format off
-
 
 inline const QString baseUrl { "https://librum-dev.azurewebsites.net" };    
 
@@ -14,6 +12,8 @@ inline const QString registrationEndpoint { baseUrl + "/api/register" };
 
 // Book storage
 inline const QString bookCreationEndpoint { baseUrl + "/api/book" };
+inline const QString bookBinaryDataEndpoint { baseUrl +
+                                              "/api/book/addBookBinaryData" };
 inline const QString bookUpdateEndpoint { baseUrl + "/api/book" };
 inline const QString bookDeletionEndpoint { baseUrl + "/api/book" };
 inline const QString booksMetadataGetEndpoint { baseUrl + "/api/book" };
@@ -27,5 +27,4 @@ inline const QString tagUpdateEndpoint { baseUrl + "/api/tag" };
 inline const QString tagDeletionEndpoint { baseUrl + "/api/tag" };
 
 
-// clang-format on
 }  // namespace infrastructure::data
