@@ -24,6 +24,9 @@ BookStorageManager::BookStorageManager(
 
                 emit loadingRemoteBooksFinished(books);
             });
+
+    connect(m_bookStorageGateway, &IBookStorageGateway::downloadingBookFinished,
+            this, &BookStorageManager::saveDownloadedBookToFile);
 }
 
 void BookStorageManager::setUserData(const QString& email,
@@ -39,6 +42,24 @@ void BookStorageManager::clearUserData()
     m_downloadedBooksTracker->clearLibraryOwner();
 }
 
+void BookStorageManager::saveDownloadedBookToFile(const QByteArray& data,
+                                                  const QUuid& uuid)
+{
+    auto destDir = m_downloadedBooksTracker->getLibraryDir();
+    QString fileName = uuid.toString(QUuid::WithoutBraces) + ".pdf";
+    auto destination = QUrl(destDir.filePath(fileName)).path();
+
+    QFile file(destination);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        qDebug() << "Could not open test file!";
+        return;
+    }
+
+    file.write(data);
+    emit finishedDownloadingBook(uuid, destination);
+}
+
 bool BookStorageManager::userLoggedIn()
 {
     return !m_authenticationToken.isEmpty();
@@ -49,9 +70,14 @@ void BookStorageManager::addBook(const Book& bookToAdd)
     // Prevent adding remote books to the local library unless "downloaded" is
     // set to true.
     if(bookToAdd.getDownloaded())
-        m_downloadedBooksTracker->trackBook(bookToAdd);
+        addBookLocally(bookToAdd);
 
     m_bookStorageGateway->createBook(m_authenticationToken, bookToAdd);
+}
+
+void BookStorageManager::addBookLocally(const domain::entities::Book& bookToAdd)
+{
+    m_downloadedBooksTracker->trackBook(bookToAdd);
 }
 
 void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
@@ -68,16 +94,9 @@ void BookStorageManager::uninstallBook(const QUuid& uuid)
     m_downloadedBooksTracker->untrackBook(uuid);
 }
 
-std::optional<QUrl> BookStorageManager::downloadBook(const QUuid& uuid)
+void BookStorageManager::downloadBook(const QUuid& uuid)
 {
-    auto destDir = m_downloadedBooksTracker->getLibraryDir();
-    QString fileName = uuid.toString(QUuid::WithoutBraces);
-    auto dest = QUrl(destDir.filePath(fileName));
-
-    if(!m_bookStorageGateway->downloadBook(m_authenticationToken, uuid, dest))
-        return std::nullopt;
-
-    return dest;
+    m_bookStorageGateway->downloadBook(m_authenticationToken, uuid);
 }
 
 void BookStorageManager::updateBook(const Book& book)

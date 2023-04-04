@@ -14,9 +14,10 @@ public:
                        IDownloadedBooksTracker* downloadedBooksTracker);
 
     void addBook(const domain::entities::Book& bookToAdd) override;
+    void addBookLocally(const domain::entities::Book& bookToAdd) override;
     void deleteBook(BookForDeletion bookToDelete) override;
     void uninstallBook(const QUuid& uuid) override;
-    std::optional<QUrl> downloadBook(const QUuid& uuid) override;
+    void downloadBook(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
     void updateBookLocally(const domain::entities::Book& book) override;
     void updateBookRemotely(const domain::entities::Book& book) override;
@@ -25,6 +26,9 @@ public:
 
     void setUserData(const QString& email, const QString& authToken) override;
     void clearUserData() override;
+
+private slots:
+    void saveDownloadedBookToFile(const QByteArray& data, const QUuid& uuid);
 
 private:
     bool userLoggedIn();

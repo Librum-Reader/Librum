@@ -12,8 +12,10 @@ inline const QString registrationEndpoint { baseUrl + "/api/register" };
 
 // Book storage
 inline const QString bookCreationEndpoint { baseUrl + "/api/book" };
-inline const QString bookBinaryDataEndpoint { baseUrl +
+inline const QString uploadBookDataEndpoint { baseUrl +
                                               "/api/book/addBookBinaryData" };
+inline const QString downloadBookDataEndpoint { baseUrl +
+                                                "/api/book/getBookBinaryData" };
 inline const QString bookUpdateEndpoint { baseUrl + "/api/book" };
 inline const QString bookDeletionEndpoint { baseUrl + "/api/book" };
 inline const QString booksMetadataGetEndpoint { baseUrl + "/api/book" };

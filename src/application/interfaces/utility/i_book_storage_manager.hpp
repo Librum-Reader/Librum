@@ -22,9 +22,10 @@ public:
     virtual ~IBookStorageManager() noexcept = default;
 
     virtual void addBook(const domain::entities::Book& bookToAdd) = 0;
+    virtual void addBookLocally(const domain::entities::Book& bookToAdd) = 0;
     virtual void deleteBook(utility::BookForDeletion bookToDelete) = 0;
     virtual void uninstallBook(const QUuid& uuid) = 0;
-    virtual std::optional<QUrl> downloadBook(const QUuid& uuid) = 0;
+    virtual void downloadBook(const QUuid& uuid) = 0;
     virtual void updateBook(const domain::entities::Book& book) = 0;
     virtual void updateBookLocally(const domain::entities::Book& book) = 0;
     virtual void updateBookRemotely(const domain::entities::Book& book) = 0;
@@ -38,6 +39,7 @@ public:
 signals:
     void loadingRemoteBooksFinished(
         const std::vector<domain::entities::Book>& books);
+    void finishedDownloadingBook(const QUuid& uuid, const QString& filePath);
 };
 
 }  // namespace application

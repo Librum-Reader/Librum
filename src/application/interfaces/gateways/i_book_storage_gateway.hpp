@@ -26,8 +26,7 @@ public:
     virtual void updateBook(const QString& authToken,
                             const domain::entities::Book& book) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
-    virtual bool downloadBook(const QString& authToken, const QUuid& uuid,
-                              const QUrl& dest) = 0;
+    virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
 
 signals:
     void creatingBookFinished(bool success, const QString& reason);
@@ -35,7 +34,7 @@ signals:
     void updatingBookFinished(bool success, const QString& reason);
     void gettingBooksMetaDataFinished(
         const std::vector<domain::entities::Book>& books);
-    void downloadingBookFinisdhed(const QUuid& uuid, const QByteArray& data);
+    void downloadingBookFinished(const QByteArray& data, const QUuid& uuid);
 };
 
 }  // namespace application

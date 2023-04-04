@@ -1,5 +1,6 @@
 #include "book_storage_access.hpp"
 #include <QDebug>
+#include <QDir>
 #include <QEventLoop>
 #include <QFile>
 #include <QJsonArray>
@@ -80,10 +81,17 @@ void BookStorageAccess::getBooksMetaData(const QString& authToken)
 void BookStorageAccess::downloadBook(const QString& authToken,
                                      const QUuid& uuid)
 {
-    qDebug() << "Download: " + uuid.toString();
+    auto endpoint = data::downloadBookDataEndpoint + "/" +
+                    uuid.toString(QUuid::WithoutBraces);
+    auto request = createRequest(endpoint, authToken);
 
-    Q_UNUSED(authToken);
-    Q_UNUSED(uuid);
+    auto reply = m_networkAccessManager.get(request);
+    m_bookDataDownloadReply.reset(reply);
+
+    connect(m_bookDataDownloadReply.get(), &QNetworkReply::finished, this,
+            &BookStorageAccess::proccessDownloadBookResult);
+
+    linkRequestToErrorHandling(m_bookDataDownloadReply.get(), 200);
 }
 
 void BookStorageAccess::proccessGettingBooksMetaDataResult()
@@ -111,6 +119,12 @@ void BookStorageAccess::proccessGettingBooksMetaDataResult()
     emit gettingBooksMetaDataFinished(books);
 }
 
+void BookStorageAccess::proccessDownloadBookResult()
+{
+    QString bookGuid = m_bookDataDownloadReply->rawHeader("Guid");
+    emit downloadingBookFinished(m_bookDataDownloadReply->readAll(), bookGuid);
+}
+
 void BookStorageAccess::uploadBookData(const QString& uuid,
                                        const QString& filePath,
                                        const QString& authToken)
@@ -119,7 +133,7 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
     addBookDataToBookDataMultiPart(filePath);
 
 
-    QUrl endpoint = data::bookBinaryDataEndpoint + "/" + uuid;
+    QUrl endpoint = data::uploadBookDataEndpoint + "/" + uuid;
     auto request = createRequest(endpoint, authToken);
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 

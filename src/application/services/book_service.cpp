@@ -33,6 +33,10 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     connect(m_bookStorageManager,
             &IBookStorageManager::loadingRemoteBooksFinished, this,
             &BookService::mergeLibraries);
+
+    // Downloading book finished
+    connect(m_bookStorageManager, &IBookStorageManager::finishedDownloadingBook,
+            this, &BookService::updateDownloadedBook);
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)
@@ -127,20 +131,7 @@ BookOperationStatus BookService::downloadBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    auto filePath = m_bookStorageManager->downloadBook(uuid);
-    if(!filePath.has_value())
-    {
-        qWarning() << QString("Downloading book with uuid: %1 Failed.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::OperationFailed;
-    }
-
-    book->setFilePath(filePath.value().path());
-    book->setDownloaded(true);
-
-    int index = getBookIndex(uuid);
-    emit dataChanged(index);
-
+    m_bookStorageManager->downloadBook(uuid);
     return BookOperationStatus::Success;
 }
 
@@ -349,6 +340,21 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
     emit dataChanged(index);
 
     return true;
+}
+
+void BookService::updateDownloadedBook(const QUuid& uuid,
+                                       const QString& filePath)
+{
+    auto* book = getBook(uuid);
+
+    book->setFilePath("file://" + filePath);
+    book->setDownloaded(true);
+
+    // The book meta-data file does not exist locally, so create it
+    m_bookStorageManager->addBookLocally(*book);
+
+    int index = getBookIndex(uuid);
+    emit dataChanged(index);
 }
 
 void BookService::setupUserData(const QString& token, const QString& email)

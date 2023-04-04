@@ -44,6 +44,7 @@ public:
 
 public slots:
     bool refreshLastOpened(const QUuid& uuid) override;
+    void updateDownloadedBook(const QUuid& uuid, const QString& filePath);
     void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 

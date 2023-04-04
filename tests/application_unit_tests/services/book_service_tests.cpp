@@ -35,9 +35,11 @@ class BookStorageManagerMock : public IBookStorageManager
 {
 public:
     MOCK_METHOD(void, addBook, (const domain::entities::Book&), (override));
+    MOCK_METHOD(void, addBookLocally, (const domain::entities::Book&),
+                (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
     MOCK_METHOD(void, uninstallBook, (const QUuid&), (override));
-    MOCK_METHOD(std::optional<QUrl>, downloadBook, (const QUuid&), (override));
+    MOCK_METHOD(void, downloadBook, (const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const domain::entities::Book&), (override));
     MOCK_METHOD(void, updateBookLocally, (const domain::entities::Book&),
                 (override));

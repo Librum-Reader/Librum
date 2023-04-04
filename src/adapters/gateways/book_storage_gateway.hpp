@@ -20,8 +20,7 @@ public:
     void updateBook(const QString& authToken,
                     const domain::entities::Book& book) override;
     void getBooksMetaData(const QString& authToken) override;
-    bool downloadBook(const QString& authToken, const QUuid& uuid,
-                      const QUrl& dest) override;
+    void downloadBook(const QString& authToken, const QUuid& uuid) override;
 
 private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);

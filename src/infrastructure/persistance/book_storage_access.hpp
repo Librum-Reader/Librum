@@ -26,6 +26,7 @@ public:
 
 private slots:
     void proccessGettingBooksMetaDataResult();
+    void proccessDownloadBookResult();
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
@@ -43,6 +44,7 @@ private:
     QNetworkAccessManager m_networkAccessManager;
     std::unique_ptr<QHttpMultiPart> m_bookDataMultiPart = nullptr;
     std::unique_ptr<QNetworkReply> m_bookDataUploadReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookDataDownloadReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
     std::unique_ptr<QNetworkReply> m_gettingBooksMetaDataReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;

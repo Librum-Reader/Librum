@@ -17,6 +17,9 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
     connect(m_bookStorageAccess,
             &IBookStorageAccess::gettingBooksMetaDataFinished, this,
             &BookStorageGateway::proccessBooksMetadata);
+
+    connect(m_bookStorageAccess, &IBookStorageAccess::downloadingBookFinished,
+            this, &BookStorageGateway::downloadingBookFinished);
 }
 
 void BookStorageGateway::createBook(const QString& authToken, const Book& book)
@@ -49,15 +52,10 @@ void BookStorageGateway::getBooksMetaData(const QString& authToken)
     m_bookStorageAccess->getBooksMetaData(authToken);
 }
 
-bool BookStorageGateway::downloadBook(const QString& authToken,
-                                      const QUuid& uuid, const QUrl& dest)
+void BookStorageGateway::downloadBook(const QString& authToken,
+                                      const QUuid& uuid)
 {
-    qDebug() << "Downloading: " + uuid.toString();
-    Q_UNUSED(authToken);
-    Q_UNUSED(dest);
-    Q_UNUSED(uuid);
-
-    return true;
+    m_bookStorageAccess->downloadBook(authToken, uuid);
 }
 
 void BookStorageGateway::proccessBooksMetadata(

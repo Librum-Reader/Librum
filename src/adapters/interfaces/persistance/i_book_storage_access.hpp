@@ -27,11 +27,10 @@ public:
     virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
 
 signals:
-    void creatingBookFinished(bool success, const QString& reason);
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
+    void downloadingBookFinished(const QByteArray& data, const QUuid& uuid);
     void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
-    void downloadingBookFinisdhed(const QUuid& uuid, const QByteArray& data);
 };
 
 }  // namespace adapters
