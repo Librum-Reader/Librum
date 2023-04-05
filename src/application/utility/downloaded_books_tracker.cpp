@@ -22,11 +22,16 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
     std::vector<Book> books;
     for(auto& metaFileName : libraryDir.entryList(QDir::Files))
     {
+        // Skip over files which are not meta files
+        if(!metaFileName.endsWith(m_fileExtension))
+            continue;
+
         QFile metaFile(libraryDir.filePath(metaFileName));
         if(!metaFile.open(QFile::ReadOnly | QIODevice::Text))
         {
             qWarning() << QString("Getting tracked book failed."
-                                  "Failed opening .libmeta file at: %1")
+                                  "Failed opening " +
+                                  m_fileExtension + " file at: %1")
                               .arg(metaFile.fileName());
             continue;
         }
