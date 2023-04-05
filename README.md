@@ -49,8 +49,15 @@ For documentation go to [Librum's github-wiki](https://github.com/Librum-Reader/
 
 # Donations
 
-If you like the Librum project, consider donating to the opensource developers at https://www.patreon.com/librum_reader.<br><br>
+If you like the Librum project, consider donating to the opensource developers at https://www.patreon.com/librumreader.<br><br>
 As a team of opensource developers we rely on donations from the community to be able to continue working on projects like Librum. Any help is greatly appreciated.
+
+<br>
+
+# Contributing
+
+If you are interested in contributing, feel free to contact us under: contact@librumreader.com <br>
+We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing.
 
 <br>
 
