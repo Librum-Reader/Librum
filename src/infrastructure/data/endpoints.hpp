@@ -4,7 +4,7 @@
 namespace infrastructure::data
 {
 
-inline const QString baseUrl { "https://librum-dev.azurewebsites.net" };
+inline const QString baseUrl { "https://localhost:7084" };
 
 // Authentication
 inline const QString authenticationEndpoint { baseUrl + "/api/login" };

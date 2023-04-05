@@ -25,13 +25,16 @@ public:
     BookOperationStatus downloadBook(const QUuid& uuid) override;
     BookOperationStatus updateBook(
         const domain::entities::Book& newBook) override;
+    BookOperationStatus saveBookToFile(const QUuid& uuid,
+                                       const QUrl& path) override;
 
-    BookOperationStatus addTag(const QUuid& uuid,
-                               const domain::entities::Tag& tag) override;
-    BookOperationStatus removeTag(const QUuid& bookUuid,
-                                  const QUuid& tagUuid) override;
-    BookOperationStatus renameTag(const QUuid& bookUuid, const QUuid& tagUuid,
-                                  const QString& newName) override;
+    BookOperationStatus addTagToBook(const QUuid& uuid,
+                                     const domain::entities::Tag& tag) override;
+    BookOperationStatus removeTagFromBook(const QUuid& bookUuid,
+                                          const QUuid& tagUuid) override;
+    BookOperationStatus renameTagOfBook(const QUuid& bookUuid,
+                                        const QUuid& tagUuid,
+                                        const QString& newName) override;
 
     const std::vector<domain::entities::Book>& getBooks() const override;
     const domain::entities::Book* getBook(const QUuid& uuid) const override;
@@ -39,18 +42,15 @@ public:
     int getBookIndex(const QUuid& uuid) const override;
     int getBookCount() const override;
 
-    BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                       const QUrl& path) override;
-
 public slots:
-    bool refreshLastOpened(const QUuid& uuid) override;
-    void updateDownloadedBook(const QUuid& uuid, const QString& filePath);
+    bool refreshLastOpenedDateOfBook(const QUuid& uuid) override;
     void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 
 private slots:
-    void storeBookCover(const QPixmap* pixmap);
-    void mergeLibraries(const std::vector<domain::entities::Book>& books);
+    void assignBookCoverToBook(const QPixmap* pixmap);
+    void updateLibrary(const std::vector<domain::entities::Book>& books);
+    void processDownloadedBook(const QUuid& uuid, const QString& filePath);
 
 private:
     auto getBookPosition(const QUuid& uuid);

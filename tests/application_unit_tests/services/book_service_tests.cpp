@@ -306,8 +306,8 @@ TEST_F(ABookService, SucceedsAddingATag)
     bookService->addBook("some/path.pdf");
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
 
-    auto firstResultStatus = bookService->addTag(bookUuid, firstTag);
-    auto secondResultStatus = bookService->addTag(bookUuid, secondTag);
+    auto firstResultStatus = bookService->addTagToBook(bookUuid, firstTag);
+    auto secondResultStatus = bookService->addTagToBook(bookUuid, secondTag);
 
     auto* result = bookService->getBook(bookUuid);
 
@@ -330,8 +330,8 @@ TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
     bookService->addBook("some/path.pdf");
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
 
-    bookService->addTag(bookUuid, tag);
-    auto result = bookService->addTag(bookUuid, tag);
+    bookService->addTagToBook(bookUuid, tag);
+    auto result = bookService->addTagToBook(bookUuid, tag);
 
 
     // Assert
@@ -347,7 +347,7 @@ TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
 
 
-    auto result = bookService->addTag(bookUuid, firstTag);
+    auto result = bookService->addTagToBook(bookUuid, firstTag);
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -360,13 +360,13 @@ TEST_F(ABookService, SucceedsRemovingATag)
     const auto& bookUuid = bookService->getBooks()[0].getUuid();
 
     Tag firstTag("FirstTag");
-    bookService->addTag(bookUuid, firstTag);
+    bookService->addTagToBook(bookUuid, firstTag);
 
     auto expectedResultStatus = BookOperationStatus::Success;
 
 
     // Act
-    bookService->removeTag(bookUuid, firstTag.getUuid());
+    bookService->removeTagFromBook(bookUuid, firstTag.getUuid());
 
     // Assert
     EXPECT_EQ(0, bookService->getBooks()[0].getTags().size());
@@ -382,7 +382,7 @@ TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
 
 
     // Act
-    auto result = bookService->removeTag(bookUuid, QUuid::createUuid());
+    auto result = bookService->removeTagFromBook(bookUuid, QUuid::createUuid());
 
 
     // Assert
@@ -398,7 +398,7 @@ TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
 
 
-    auto result = bookService->removeTag(bookUuid, someTag.getUuid());
+    auto result = bookService->removeTagFromBook(bookUuid, someTag.getUuid());
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -412,13 +412,13 @@ TEST_F(ABookService, SucceedsRenamingATag)
 
     QString newName = "SomeNewName";
     Tag firstTag("FirstTag");
-    bookService->addTag(bookUuid, firstTag);
+    bookService->addTagToBook(bookUuid, firstTag);
 
     auto expectedResultStatus = BookOperationStatus::Success;
 
 
     // Act
-    bookService->renameTag(bookUuid, firstTag.getUuid(), newName);
+    bookService->renameTagOfBook(bookUuid, firstTag.getUuid(), newName);
 
     // Assert
     EXPECT_EQ(newName, bookService->getBook(bookUuid)->getTags()[0].getName());
@@ -435,7 +435,7 @@ TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
 
     // Act
     auto result =
-        bookService->renameTag(bookUuid, QUuid::createUuid(), "SomeName");
+        bookService->renameTagOfBook(bookUuid, QUuid::createUuid(), "SomeName");
 
 
     // Assert
@@ -451,7 +451,7 @@ TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
 
 
-    auto result = bookService->renameTag(bookUuid, someTag.getUuid(),
+    auto result = bookService->renameTagOfBook(bookUuid, someTag.getUuid(),
                                          someTag.getUuid().toString());
 
     // Assert
@@ -568,7 +568,7 @@ TEST_F(ABookService, SucceedsRefreshingLastOpened)
 
     // Act
     auto before = bookService->getBook(bookUuid)->getLastOpened();
-    bookService->refreshLastOpened(bookUuid);
+    bookService->refreshLastOpenedDateOfBook(bookUuid);
     auto after = bookService->getBook(bookUuid)->getLastOpened();
 
     // Assert

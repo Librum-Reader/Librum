@@ -22,7 +22,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
 {
     // Book cover generated
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
-            this, &BookService::storeBookCover);
+            this, &BookService::assignBookCoverToBook);
 
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
@@ -32,11 +32,11 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Getting books finished
     connect(m_bookStorageManager,
             &IBookStorageManager::loadingRemoteBooksFinished, this,
-            &BookService::mergeLibraries);
+            &BookService::updateLibrary);
 
     // Downloading book finished
     connect(m_bookStorageManager, &IBookStorageManager::finishedDownloadingBook,
-            this, &BookService::updateDownloadedBook);
+            this, &BookService::processDownloadedBook);
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)
@@ -146,8 +146,9 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    // Manually handle changes to current page to prevent "lastModified" being
-    // updated on a simple page update
+    // Manually handle changes to "current page" because we don't want
+    // "lastModified" to be updated on a "current page" change, since this would
+    // break the whole updating mechanism.
     book->setCurrentPage(newBook.getCurrentPage());
 
     if(*book != newBook)
@@ -164,8 +165,8 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::addTag(const QUuid& uuid,
-                                        const domain::entities::Tag& tag)
+BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
+                                              const domain::entities::Tag& tag)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -193,8 +194,8 @@ BookOperationStatus BookService::addTag(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
-                                           const QUuid& tagUuid)
+BookOperationStatus BookService::removeTagFromBook(const QUuid& bookUuid,
+                                                   const QUuid& tagUuid)
 {
     auto* book = getBook(bookUuid);
     if(book == nullptr)
@@ -222,9 +223,9 @@ BookOperationStatus BookService::removeTag(const QUuid& bookUuid,
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::renameTag(const QUuid& bookUuid,
-                                           const QUuid& tagUuid,
-                                           const QString& newName)
+BookOperationStatus BookService::renameTagOfBook(const QUuid& bookUuid,
+                                                 const QUuid& tagUuid,
+                                                 const QString& newName)
 {
     auto* book = getBook(bookUuid);
     if(book == nullptr)
@@ -327,7 +328,7 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-bool BookService::refreshLastOpened(const QUuid& uuid)
+bool BookService::refreshLastOpenedDateOfBook(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -342,8 +343,8 @@ bool BookService::refreshLastOpened(const QUuid& uuid)
     return true;
 }
 
-void BookService::updateDownloadedBook(const QUuid& uuid,
-                                       const QString& filePath)
+void BookService::processDownloadedBook(const QUuid& uuid,
+                                        const QString& filePath)
 {
     auto* book = getBook(uuid);
 
@@ -388,7 +389,7 @@ void BookService::clearUserData()
     emit bookClearingEnded();
 }
 
-void BookService::storeBookCover(const QPixmap* pixmap)
+void BookService::assignBookCoverToBook(const QPixmap* pixmap)
 {
     int index = m_books.size() - 1;
     auto& book = m_books.at(index);
@@ -397,9 +398,11 @@ void BookService::storeBookCover(const QPixmap* pixmap)
     emit bookCoverGenerated(index);
 }
 
-void BookService::mergeLibraries(
-    const std::vector<domain::entities::Book>& books)
+void BookService::updateLibrary(const std::vector<Book>& books)
 {
+    // The remote library is the library fetched from the server and the local
+    // library is the library on the client's PC. On startup we need to make
+    // sure that both libraries are synchronized.
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
 }
@@ -416,6 +419,7 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
             continue;
         }
 
+        // Add the remote book to the local library if it does not exist
         emit bookInsertionStarted(m_books.size());
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
@@ -439,71 +443,73 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
     }
 }
 
-void BookService::mergeBooks(Book& original, const Book& mergee)
+void BookService::mergeBooks(Book& localBook, const Book& remoteBook)
 {
-    auto lastOpenedStatus = mergeCurrentPage(original, mergee);
-    auto lastModifiedStatus = mergeBookData(original, mergee);
+    auto lastOpenedStatus = mergeCurrentPage(localBook, remoteBook);
+    auto lastModifiedStatus = mergeBookData(localBook, remoteBook);
 
 
-    if(lastOpenedStatus.updateLocalLibrary ||
-       lastModifiedStatus.updateLocalLibrary)
+    if(lastOpenedStatus.localLibraryOutdated ||
+       lastModifiedStatus.localLibraryOutdated)
     {
-        m_bookStorageManager->updateBookLocally(original);
+        m_bookStorageManager->updateBookLocally(localBook);
 
         // Update UI
-        auto index = getBookIndex(original.getUuid());
+        auto index = getBookIndex(localBook.getUuid());
         emit dataChanged(index);
     }
 
-    if(lastOpenedStatus.updateDatabase || lastModifiedStatus.updateDatabase)
+    if(lastOpenedStatus.remoteLibraryOutdated ||
+       lastModifiedStatus.remoteLibraryOutdated)
     {
-        m_bookStorageManager->updateBookRemotely(original);
+        m_bookStorageManager->updateBookRemotely(localBook);
     }
 }
 
-MergeStatus BookService::mergeCurrentPage(domain::entities::Book& original,
-                                          const domain::entities::Book& mergee)
+MergeStatus BookService::mergeCurrentPage(Book& localBook,
+                                          const Book& remoteBook)
 {
-    // Take the current time in seconds, so there are no ms mismatches
-    auto mergeeLastOpened = mergee.getLastOpened().toSecsSinceEpoch();
-    auto originalLastOpened = original.getLastOpened().toSecsSinceEpoch();
+    // Take the current time in seconds, so that there are no ms mismatches
+    auto localLastOpened = localBook.getLastOpened().toSecsSinceEpoch();
+    auto remoteLastOpened = remoteBook.getLastOpened().toSecsSinceEpoch();
 
-    if(mergeeLastOpened == originalLastOpened)
+    // There are no "current page" differences between the local and remote book
+    if(remoteLastOpened == localLastOpened)
         return {};
 
-    if(mergeeLastOpened > originalLastOpened)
+    if(remoteLastOpened > localLastOpened)
     {
-        original.setCurrentPage(mergee.getCurrentPage());
-        original.setLastOpened(mergee.getLastOpened());
+        localBook.setCurrentPage(remoteBook.getCurrentPage());
+        localBook.setLastOpened(remoteBook.getLastOpened());
 
-        return MergeStatus { .updateLocalLibrary = true };
+        return MergeStatus { .localLibraryOutdated = true };
     }
 
-    return MergeStatus { .updateDatabase = true };
+    return MergeStatus { .remoteLibraryOutdated = true };
 }
 
-MergeStatus BookService::mergeBookData(domain::entities::Book& original,
-                                       const domain::entities::Book& mergee)
+MergeStatus BookService::mergeBookData(Book& localBook, const Book& remoteBook)
 {
-    // Take the current time in seconds, so there are no ms mismatches
-    auto mergeeLastModified = mergee.getLastModified().toSecsSinceEpoch();
-    auto originalLastModified = original.getLastModified().toSecsSinceEpoch();
+    // Take the current time in seconds, so that there are no ms mismatches
+    auto localLastModified = localBook.getLastModified().toSecsSinceEpoch();
+    auto remoteLastModified = remoteBook.getLastModified().toSecsSinceEpoch();
 
-    if(mergeeLastModified == originalLastModified)
+    // There are no data differences between the local and remote book
+    if(remoteLastModified == localLastModified)
         return {};
 
-    if(mergeeLastModified > originalLastModified)
+    if(remoteLastModified > localLastModified)
     {
         // Save the file path since its overwritten during the update
         // operation
-        auto localBookFilePath = original.getFilePath();
-        original.update(mergee);
-        original.setFilePath(localBookFilePath);
+        auto localBookFilePath = localBook.getFilePath();
+        localBook.update(remoteBook);
+        localBook.setFilePath(localBookFilePath);
 
-        return MergeStatus { .updateLocalLibrary = true };
+        return MergeStatus { .localLibraryOutdated = true };
     }
 
-    return MergeStatus { .updateDatabase = true };
+    return MergeStatus { .remoteLibraryOutdated = true };
 }
 
 }  // namespace application::services

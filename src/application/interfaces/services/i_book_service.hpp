@@ -33,11 +33,11 @@ public:
     virtual int getBookIndex(const QUuid& uuid) const = 0;
     virtual int getBookCount() const = 0;
 
-    virtual BookOperationStatus addTag(const QUuid& uuid,
+    virtual BookOperationStatus addTagToBook(const QUuid& uuid,
                                        const domain::entities::Tag& tag) = 0;
-    virtual BookOperationStatus removeTag(const QUuid& bookUuid,
+    virtual BookOperationStatus removeTagFromBook(const QUuid& bookUuid,
                                           const QUuid& tagUuid) = 0;
-    virtual BookOperationStatus renameTag(const QUuid& bookUuid,
+    virtual BookOperationStatus renameTagOfBook(const QUuid& bookUuid,
                                           const QUuid& tagUuid,
                                           const QString& newName) = 0;
 
@@ -45,7 +45,7 @@ public:
                                                const QUrl& path) = 0;
 
 public slots:
-    virtual bool refreshLastOpened(const QUuid& uuid) = 0;
+    virtual bool refreshLastOpenedDateOfBook(const QUuid& uuid) = 0;
     virtual void setupUserData(const QString& token, const QString& email) = 0;
     virtual void clearUserData() = 0;
 

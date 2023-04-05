@@ -174,7 +174,7 @@ int BookController::addTag(const QString& bookUuid, const QString& tagName,
     }
 
     Tag tag(tagName, tagUuid);
-    auto result = m_bookService->addTag(bookUuid, tag);
+    auto result = m_bookService->addTagToBook(bookUuid, tag);
 
     return static_cast<int>(result);
 }
@@ -189,7 +189,7 @@ void BookController::removeAllTagsWithUuid(const QString& tagUuid)
     {
         if(vectorContainsTag(book.getTags(), tagUuid))
         {
-            m_bookService->removeTag(book.getUuid(), tagUuid);
+            m_bookService->removeTagFromBook(book.getUuid(), tagUuid);
         }
     }
 }
@@ -201,13 +201,13 @@ void BookController::renameTags(const QString& oldName, const QString& newName)
     {
         auto tagUuid = getTagUuidByName(book, oldName);
         if(!tagUuid.isNull())
-            m_bookService->renameTag(book.getUuid(), tagUuid, newName);
+            m_bookService->renameTagOfBook(book.getUuid(), tagUuid, newName);
     }
 }
 
 int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
 {
-    auto result = m_bookService->removeTag(bookUuid, tagUuid);
+    auto result = m_bookService->removeTagFromBook(bookUuid, tagUuid);
     return static_cast<int>(result);
 }
 
@@ -242,7 +242,7 @@ int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
 
 void BookController::refreshLastOpenedFlag(const QString& uuid)
 {
-    m_bookService->refreshLastOpened(uuid);
+    m_bookService->refreshLastOpenedDateOfBook(uuid);
 }
 
 QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)

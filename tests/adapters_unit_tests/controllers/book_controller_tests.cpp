@@ -40,14 +40,14 @@ public:
     MOCK_METHOD(Book*, getBook, (const QUuid&), (override));
     MOCK_METHOD(int, getBookIndex, (const QUuid&), (const, override));
     MOCK_METHOD(int, getBookCount, (), (const, override));
-    MOCK_METHOD(bool, refreshLastOpened, (const QUuid&), (override));
+    MOCK_METHOD(bool, refreshLastOpenedDateOfBook, (const QUuid&), (override));
 
-    MOCK_METHOD(BookOperationStatus, addTag,
+    MOCK_METHOD(BookOperationStatus, addTagToBook,
                 (const QUuid&, const domain::entities::Tag&), (override));
-    MOCK_METHOD(BookOperationStatus, renameTag,
+    MOCK_METHOD(BookOperationStatus, renameTagOfBook,
                 (const QUuid&, const QUuid&, const QString&), (override));
-    MOCK_METHOD(BookOperationStatus, removeTag, (const QUuid&, const QUuid&),
-                (override));
+    MOCK_METHOD(BookOperationStatus, removeTagFromBook,
+                (const QUuid&, const QUuid&), (override));
 
     MOCK_METHOD(BookOperationStatus, saveBookToFile,
                 (const QUuid&, const QUrl&), (override));
@@ -153,7 +153,7 @@ TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
     EXPECT_CALL(bookServiceMock, getBooks())
         .Times(1)
         .WillOnce(ReturnRef(books));
-    EXPECT_CALL(bookServiceMock, removeTag(_, _)).Times(2);
+    EXPECT_CALL(bookServiceMock, removeTagFromBook(_, _)).Times(2);
 
     // Act
     bookController->removeAllTagsWithUuid(firstTag.getUuid().toString());
@@ -246,7 +246,7 @@ TEST_F(ABookController, SucceedsRenamingTags)
         .Times(1)
         .WillOnce(ReturnRef(books));
 
-    EXPECT_CALL(bookServiceMock, renameTag(_, _, _)).Times(2);
+    EXPECT_CALL(bookServiceMock, renameTagOfBook(_, _, _)).Times(2);
 
     // Act
     bookController->renameTags(firstTag.getName(), "NewName");
@@ -275,7 +275,7 @@ TEST_F(ABookController, FailsRenamingTagsIfNoTagsWithNameExist)
         .Times(1)
         .WillOnce(ReturnRef(books));
 
-    EXPECT_CALL(bookServiceMock, renameTag(_, _, _)).Times(0);
+    EXPECT_CALL(bookServiceMock, renameTagOfBook(_, _, _)).Times(0);
 
     // Act
     bookController->renameTags("NonExistentTag", "NewName");
@@ -451,7 +451,7 @@ TEST_F(ABookController, SucceedsAddingATag)
     QString tagUuid = QUuid::createUuid().toString();
 
     // Expect
-    EXPECT_CALL(bookServiceMock, addTag(_, _))
+    EXPECT_CALL(bookServiceMock, addTagToBook(_, _))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::Success));
 
@@ -471,7 +471,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
 
 
     // Expect
-    EXPECT_CALL(bookServiceMock, addTag(_, _))
+    EXPECT_CALL(bookServiceMock, addTagToBook(_, _))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
 
@@ -489,7 +489,7 @@ TEST_F(ABookController, SucceedsRemovingATag)
 
 
     // Expect
-    EXPECT_CALL(bookServiceMock, removeTag(_, _))
+    EXPECT_CALL(bookServiceMock, removeTagFromBook(_, _))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::Success));
 
@@ -507,7 +507,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
 
 
     // Expect
-    EXPECT_CALL(bookServiceMock, removeTag(_, _))
+    EXPECT_CALL(bookServiceMock, removeTagFromBook(_, _))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::TagDoesNotExist));
 
@@ -524,7 +524,7 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
     QString bookUuid = "some-book-uuid";
 
     // Expect
-    EXPECT_CALL(bookServiceMock, refreshLastOpened(_))
+    EXPECT_CALL(bookServiceMock, refreshLastOpenedDateOfBook(_))
         .Times(1)
         .WillOnce(Return(true));
 
