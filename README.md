@@ -142,13 +142,14 @@ If there is an issue with the Librum installation, consider temporarily uninstal
 
 ## For GNU/Linux
 ### Foreword
-Since Librum is a KDE application, the KDE libraries are necessary. If you are on a distribution that uses KDE Plasma, you are good to go; otherwise, building Librum from source means that one also needs to build KDE.
+Since Librum is a KDE application, the KDE libraries are necessary. If you are on a Linux distribution that uses KDE Plasma, you are good to go; otherwise feel free to spin up a virtual-machine to try Librum until we get independent of the KDE libraries.
 
 ### Prerequisites
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
-- Qt 5.15                           https://www.qt.io/download
+- (Qt 5.15)                         You will need to use the Qt version provided by your OS                           
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
+- Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers have them listed as `extra-cmake-modules`)
 
 ### Installation
 1. Clone the repository.
@@ -159,36 +160,24 @@ Since Librum is a KDE application, the KDE libraries are necessary. If you are o
     ```sh
     cd Librum
     ```
-3. Add the Qt path to the CMakeLists.txt<br>
-    By default, Qt creator appends the path to Qt to the 'CMAKE_PREFIX_PATH' variable, you have 2 options for building Librum:
-    <br>
-    - Use Qt Creator to build the project (Simply open the CMakeLists.txt through Qt Creator, by clicking File -> Open File or Project...)
-    - Add the path manually, for that, just copy this line
-        ```sh
-        list(APPEND CMAKE_PREFIX_PATH "/home/<username>/Qt/<Version>/<compiler>")
-        ```
-        to the third line of the top-level CMakeLists.txt and replace all contents in angular brackets '<>' with your data, for example:
-        ```sh
-        list(APPEND CMAKE_PREFIX_PATH "/home/john/Qt/5.15.5/gcc_64")
-        ```
-4. Create the build folder and step into it.
+3. Create the build folder and step into it.
     ```sh
     mkdir build-Release
     cd build-Release
     ```
-5. Run cmake.
+4. Run cmake.
     ```sh
     cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
     ```
-6. Build the project
+5. Build the project
     ```sh
     make -j4
     ```
-7. Install the files
+6. Install the files
     ```sh
     sudo make install
     ```
-8. Run the app
+7. Run the app
     ```sh
     ./appLibrum
     ```
