@@ -38,6 +38,7 @@ public:
     MOCK_METHOD(void, addBookLocally, (const domain::entities::Book&),
                 (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
+    MOCK_METHOD(void, deleteBookLocally, (QUuid), (override));
     MOCK_METHOD(void, uninstallBook, (const QUuid&), (override));
     MOCK_METHOD(void, downloadBook, (const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const domain::entities::Book&), (override));
@@ -452,7 +453,7 @@ TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
 
 
     auto result = bookService->renameTagOfBook(bookUuid, someTag.getUuid(),
-                                         someTag.getUuid().toString());
+                                               someTag.getUuid().toString());
 
     // Assert
     EXPECT_EQ(expectedResult, result);
