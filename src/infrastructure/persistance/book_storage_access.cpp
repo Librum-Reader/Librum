@@ -121,7 +121,9 @@ void BookStorageAccess::proccessGettingBooksMetaDataResult()
 
 void BookStorageAccess::proccessDownloadBookResult()
 {
+    // The book uuid (or as the server calls it "guid") is send as a header
     QString bookGuid = m_bookDataDownloadReply->rawHeader("Guid");
+
     emit downloadingBookFinished(m_bookDataDownloadReply->readAll(), bookGuid);
 }
 
@@ -130,7 +132,7 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
                                        const QString& authToken)
 {
     m_bookDataMultiPart.reset(new QHttpMultiPart(QHttpMultiPart::FormDataType));
-    addBookDataToBookDataMultiPart(filePath);
+    setupDataMultiPartWithFile(filePath);
 
 
     QUrl endpoint = data::uploadBookDataEndpoint + "/" + uuid;
@@ -151,7 +153,7 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
             });
 }
 
-void BookStorageAccess::addBookDataToBookDataMultiPart(const QUrl& path)
+void BookStorageAccess::setupDataMultiPartWithFile(const QUrl& path)
 {
     QFile* file = new QFile(QUrl(path).path());
     if(!file->open(QIODevice::ReadOnly))
@@ -160,7 +162,7 @@ void BookStorageAccess::addBookDataToBookDataMultiPart(const QUrl& path)
         return;
     }
 
-    // Make sure the file is released, when the request finished.
+    // Make sure the file is released when the request finished.
     file->setParent(m_bookDataMultiPart.get());
 
     QHttpPart filePart;

@@ -38,7 +38,7 @@ private:
     // has been created.
     void uploadBookData(const QString& uuid, const QString& filePath,
                         const QString& authToken);
-    void addBookDataToBookDataMultiPart(const QUrl& path);
+    void setupDataMultiPartWithFile(const QUrl& path);
 
 
     QNetworkAccessManager m_networkAccessManager;
