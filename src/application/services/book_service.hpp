@@ -55,6 +55,7 @@ private slots:
 private:
     auto getBookPosition(const QUuid& uuid);
     void loadLocalBooks();
+    void checkIfBookFileStillExists(domain::entities::Book& book);
     void mergeRemoteLibraryIntoLocalLibrary(
         const std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(

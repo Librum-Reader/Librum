@@ -373,9 +373,24 @@ void BookService::loadLocalBooks()
     auto books = m_bookStorageManager->loadLocalBooks();
     for(auto book : books)
     {
+        checkIfBookFileStillExists(book);
+
         emit bookInsertionStarted(m_books.size());
         m_books.emplace_back(book);
         emit bookInsertionEnded();
+    }
+}
+
+void BookService::checkIfBookFileStillExists(Book& book)
+{
+    // The file might have been moved or deleted from the user's filesystem
+    QFile bookFile(QUrl(book.getFilePath()).path());
+    if(!bookFile.exists())
+    {
+        // Delete the local book so the user can re-download it from the server
+        book.setFilePath("");
+        book.setDownloaded(false);
+        m_bookStorageManager->deleteBookLocally(book.getUuid());
     }
 }
 
