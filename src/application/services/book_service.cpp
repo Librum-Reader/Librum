@@ -232,7 +232,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         book->setCoverPath(path.value());
         emit dataChanged(index);
     }
-    
+
     m_bookStorageManager->changeBookCover(*book);
     return BookOperationStatus::Success;
 }

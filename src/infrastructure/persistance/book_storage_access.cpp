@@ -38,6 +38,20 @@ void BookStorageAccess::createBook(const QString& authToken,
                 uploadBookData(jsonBook["guid"].toString(),
                                jsonBook["filePath"].toString(), authToken);
             });
+
+    // Upload book's cover if creating the book succeeded
+    connect(m_bookCreationReply.get(), &QNetworkReply::finished, this,
+            [this, jsonBook, authToken, expectedStatusCode]()
+            {
+                auto statusCode = m_bookCreationReply->attribute(
+                    QNetworkRequest::HttpStatusCodeAttribute);
+
+                if(statusCode.toInt() != expectedStatusCode)
+                    return;
+
+                changeBookCover(authToken, jsonBook["guid"].toString(),
+                                jsonBook["coverPath"].toString());
+            });
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
