@@ -43,7 +43,6 @@ public:
         CurrentPage,
         AddedToLibrary,
         LastModified,
-        Cover,
         Invalid
     };
     Q_ENUM(MetaProperty);

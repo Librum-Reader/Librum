@@ -608,12 +608,12 @@ Popup
             if(formatField.text !== Globals.selectedBook.format && formatField.text != internal.placeholderText)
                 operationsMap[BookController.MetaProperty.Format] = formatField.text;
             
-            // @disable-check M126
-            if(bookCover.source != Globals.selectedBook.coverPath)   // Needs to be !=, the types are different (QUrl and QString)
-                operationsMap[BookController.MetaProperty.Cover] = bookCover.source;
-            
-            
             BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+            
+            
+            // Handle book cover specially
+            if(bookCover.source != Globals.selectedBook.coverPath)   // Needs to be !=, the types are different (QUrl and QString)
+                BookController.changeBookCover(Globals.selectedBook.uuid, bookCover.source);
         }
         
         function setupPopup()
@@ -628,7 +628,7 @@ Popup
         
         function loadData()
         {
-            bookCover.source = Qt.binding( function () { return Globals.selectedBook.coverPath })
+            bookCover.source = Qt.binding( function () { return "file://" + Globals.selectedBook.coverPath })
             
             if(Globals.selectedBook.language !== "")
                 languageComboBox.setDefaultItem(Globals.selectedBook.language);

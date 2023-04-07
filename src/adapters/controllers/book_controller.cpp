@@ -146,9 +146,6 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
         case MetaProperty::LastModified:
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
-        case MetaProperty::Cover:
-            changeBookCover(uuid, value.toString());
-            break;
         case MetaProperty::Invalid:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
             break;

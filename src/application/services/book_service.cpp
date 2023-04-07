@@ -2,6 +2,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QPixmap>
 #include <QTime>
 #include <ranges>
 #include "book_for_deletion.hpp"
@@ -147,8 +148,8 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     }
 
     // Manually handle changes to "current page" because we don't want
-    // "lastModified" to be updated on a "current page" change, since this would
-    // break the whole updating mechanism.
+    // "lastModified" to be updated on a "current page" change, since this
+    // would break the whole updating mechanism.
     book->setCurrentPage(newBook.getCurrentPage());
 
     if(*book != newBook)
@@ -177,20 +178,62 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         return BookOperationStatus::BookDoesNotExist;
     }
 
+    int index = getBookIndex(uuid);
+
     if(filePath.isEmpty())
     {
         // Delete book cover
+        m_bookStorageManager->deleteBookCover(uuid);
+
         book->setCoverPath("");
         book->setHasCover(false);
         book->updateCoverLastModified();
 
-        m_bookStorageManager->deleteBookCover(uuid);
+        emit dataChanged(index);
     }
     else
     {
         // Set new book cover
+        auto absoluteFilePath = QUrl(filePath).path();
+        QPixmap newCover(absoluteFilePath);
+        if(newCover.isNull())
+        {
+            qWarning() << QString(
+                              "Failed changing cover for book with uuid: %1."
+                              "Can't open new image at: %2.")
+                              .arg(uuid.toString(), absoluteFilePath);
+            return BookOperationStatus::OperationFailed;
+        }
+
+        newCover =
+            newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
+                            Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+        auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
+        if(!path.has_value())
+        {
+            qWarning() << QString(
+                              "Failed changing cover for book with uuid: %1."
+                              "Saving new image failed.")
+                              .arg(uuid.toString(), absoluteFilePath);
+            return BookOperationStatus::OperationFailed;
+        }
+
+        book->setHasCover(true);
+        book->updateCoverLastModified();
+
+        // To properly update the UI, we need to invalidate the current image
+        // and then set the new one.
+        // We do this by setting the path to an empty string first and then to
+        // the actual path. We emit 'dataChanged' in between to update the UI.
+        book->setCoverPath("");
+        emit dataChanged(index);
+
+        book->setCoverPath(path.value());
+        emit dataChanged(index);
     }
 
+    m_bookStorageManager->updateBook(*book);
     return BookOperationStatus::Success;
 }
 
@@ -416,7 +459,8 @@ void BookService::checkIfBookFileStillExists(Book& book)
     QFile bookFile(QUrl(book.getFilePath()).path());
     if(!bookFile.exists())
     {
-        // Delete the local book so the user can re-download it from the server
+        // Delete the local book so the user can re-download it from the
+        // server
         book.setFilePath("");
         book.setDownloaded(false);
         m_bookStorageManager->deleteBookLocally(book.getUuid());
@@ -443,8 +487,8 @@ void BookService::processBookCover(const QPixmap* pixmap)
         m_bookStorageManager->saveBookCoverToFile(book.getUuid(), *pixmap);
     if(!result.has_value())
     {
-        qDebug() << QString("Failed creating cover for book with uuid: %1.")
-                        .arg(book.getUuid().toString(QUuid::WithoutBraces));
+        qWarning() << QString("Failed creating cover for book with uuid: %1.")
+                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
         return;
     }
 
@@ -457,9 +501,9 @@ void BookService::processBookCover(const QPixmap* pixmap)
 
 void BookService::updateLibrary(const std::vector<Book>& books)
 {
-    // The remote library is the library fetched from the server and the local
-    // library is the library on the client's PC. On startup we need to make
-    // sure that both libraries are synchronized.
+    // The remote library is the library fetched from the server and the
+    // local library is the library on the client's PC. On startup we need
+    // to make sure that both libraries are synchronized.
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
 }
@@ -530,7 +574,8 @@ MergeStatus BookService::mergeCurrentPage(Book& localBook,
     auto localLastOpened = localBook.getLastOpened().toSecsSinceEpoch();
     auto remoteLastOpened = remoteBook.getLastOpened().toSecsSinceEpoch();
 
-    // There are no "current page" differences between the local and remote book
+    // There are no "current page" differences between the local and remote
+    // book
     if(remoteLastOpened == localLastOpened)
         return {};
 
