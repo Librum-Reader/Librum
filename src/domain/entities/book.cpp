@@ -67,6 +67,36 @@ void Book::setFilePath(const QString& newLocalPath)
     m_filePath = newLocalPath;
 }
 
+bool Book::hasCover() const
+{
+    return m_metaData.hasCover;
+}
+
+void Book::setHasCover(bool hasCover)
+{
+    m_metaData.hasCover = hasCover;
+}
+
+const QString& Book::getCoverPath() const
+{
+    return m_metaData.coverPath;
+}
+
+void Book::setCoverPath(const QString& path)
+{
+    m_metaData.coverPath = path;
+}
+
+const QDateTime& Book::getCoverLastModified() const
+{
+    return m_metaData.coverLastModified;
+}
+
+void Book::updateCoverLastModified()
+{
+    m_metaData.coverLastModified = QDateTime::currentDateTimeUtc();
+}
+
 const QDateTime& Book::getLastOpened() const
 {
     return m_metaData.lastOpened;
@@ -175,46 +205,6 @@ const QString& Book::getCreator() const
 void Book::setCreator(const QString& newCreator)
 {
     m_metaData.creator = newCreator;
-}
-
-QImage Book::getCover() const
-{
-    return m_metaData.cover;
-}
-
-QString Book::getCoverAsString() const
-{
-    if(m_metaData.cover.isNull())
-        return QString("");
-
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-
-    buffer.open(QIODevice::WriteOnly);
-    m_metaData.cover.save(&buffer, "png");
-    auto result = QString::fromUtf8(byteArray.toBase64());
-
-    return result;
-}
-
-QString Book::getCoverAsStringWithType() const
-{
-    if(m_metaData.cover.isNull())
-        return QString("");
-
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-
-    buffer.open(QIODevice::WriteOnly);
-    m_metaData.cover.save(&buffer, "png");
-    QString base64 = QString::fromUtf8(byteArray.toBase64());
-
-    return QString("data:image/png;base64,") + base64;
-}
-
-void Book::setCover(const QImage& newCover)
-{
-    m_metaData.cover = newCover;
 }
 
 bool Book::getDownloaded() const
@@ -350,8 +340,12 @@ void Book::update(const Book& other)
         m_metaData.lastOpened = other.getLastOpened();
     if(m_metaData.lastModified != other.getLastModified())
         m_metaData.lastModified = other.getLastModified();
-    if(m_metaData.cover != other.getCover())
-        m_metaData.cover = other.getCover();
+    if(m_metaData.coverLastModified != other.getCoverLastModified())
+        m_metaData.coverLastModified = other.getCoverLastModified();
+    if(m_metaData.hasCover != other.hasCover())
+        m_metaData.hasCover = other.hasCover();
+    if(m_metaData.coverPath != other.getCoverPath())
+        m_metaData.coverPath = other.getCoverPath();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
@@ -376,7 +370,10 @@ QByteArray Book::toJson() const
         { "lastOpened", getLastOpened().toString(dateTimeStringFormat) },
         { "lastModified", getLastModified().toString(dateTimeStringFormat) },
         { "filePath", getFilePath() },
-        { "cover", getCoverAsString() },
+        { "coverLastModified",
+          getCoverLastModified().toString(dateTimeStringFormat) },
+        { "hasCover", hasCover() },
+        { "coverPath", getCoverPath() },
         { "tags", serializeTags() },
     };
 
@@ -429,21 +426,19 @@ BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
             jsonBook["lastModified"].toString(), dateTimeStringFormat),
         .lastOpened = QDateTime::fromString(jsonBook["lastOpened"].toString(),
                                             dateTimeStringFormat),
-        .cover = getBookCoverFromJson(jsonBook),
+        .coverLastModified = QDateTime::fromString(
+            jsonBook["coverLastModified"].toString(), dateTimeStringFormat),
+        .hasCover = jsonBook["hasCover"].toBool(),
+        .coverPath = jsonBook["coverPath"].toString(),
     };
 
     // Specify that the dates are UTC, else Qt thinks its local time
     metaData.addedToLibrary.setTimeSpec(Qt::UTC);
     metaData.lastModified.setTimeSpec(Qt::UTC);
     metaData.lastOpened.setTimeSpec(Qt::UTC);
+    metaData.coverLastModified.setTimeSpec(Qt::UTC);
 
     return metaData;
-}
-
-QImage Book::getBookCoverFromJson(const QJsonObject& jsonBook)
-{
-    auto cover = jsonBook["cover"].toString();
-    return QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
 }
 
 void Book::addTagsToBook(Book& book, const QJsonArray& jsonTags)

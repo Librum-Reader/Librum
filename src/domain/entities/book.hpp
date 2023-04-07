@@ -64,10 +64,14 @@ public:
     const QString& getFilePath() const;
     void setFilePath(const QString& newLocalPath);
 
-    QImage getCover() const;
-    QString getCoverAsString() const;
-    QString getCoverAsStringWithType() const;
-    void setCover(const QImage& newCover);
+    bool hasCover() const;
+    void setHasCover(bool hasCover);
+
+    const QString& getCoverPath() const;
+    void setCoverPath(const QString& path);
+
+    const QDateTime& getCoverLastModified() const;
+    void updateCoverLastModified();
 
     bool getDownloaded() const;
     void setDownloaded(bool newDownloaded);
@@ -90,7 +94,6 @@ public:
     static const int maxCoverWidth { 188 };
     static const int maxCoverHeight { 238 };
 
-
     inline static const QString dateTimeStringFormat {
         "hh:mm:ss - dd.MM.yyyy"
     };
@@ -100,7 +103,6 @@ private:
     QJsonArray serializeTags() const;
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
-    static QImage getBookCoverFromJson(const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
 
     QUuid m_uuid;

@@ -29,7 +29,7 @@ struct BookDto
     Q_PROPERTY(int bookProgressPercentage MEMBER bookProgressPercentage)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
-    Q_PROPERTY(QString cover MEMBER cover)
+    Q_PROPERTY(QString coverPath MEMBER coverPath)
     Q_PROPERTY(bool downloaded MEMBER downloaded)
 
 public:
@@ -48,7 +48,7 @@ public:
     int bookProgressPercentage;
     QString addedToLibrary;
     QString lastOpened;
-    QString cover;
+    QString coverPath;
     bool downloaded;
     QList<TagDto> tags;
 };

@@ -26,7 +26,6 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageOne)
         .pagesSize = "400 x 800",
         .pageCount = 10,
         .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
     };
 
     Book book("some/path.pdf", bookMetaData);
@@ -53,7 +52,6 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCountOneAndCurrentPageOne)
         .pagesSize = "400 x 800",
         .pageCount = 10,
         .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
     };
 
     Book book("some/path.pdf", bookMetaData);
@@ -80,7 +78,6 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageMiddle)
         .pagesSize = "400 x 800",
         .pageCount = 10,
         .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
     };
 
     Book book("some/path.pdf", bookMetaData);
@@ -107,7 +104,6 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageEnd)
         .pagesSize = "400 x 800",
         .pageCount = 10,
         .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
     };
 
     Book book("some/path.pdf", bookMetaData);
@@ -134,7 +130,6 @@ TEST(ABook, FailsGettingBoookProgressPercentageIfLastOpenedInvalid)
         .pagesSize = "400 x 800",
         .pageCount = 10,
         .lastOpened = QDateTime(),  // Invalid
-        .cover = QImage(""),
     };
 
     Book book("some/path.pdf", bookMetaData);
@@ -380,7 +375,7 @@ TEST(ABook, SucceedsSerializingToJson)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .cover = QImage(""),
+        .hasCover = true,
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -415,11 +410,7 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(metaData.pageCount, bookObject["pageCount"].toInt());
     EXPECT_EQ(metaData.addedToLibrary.toSecsSinceEpoch(),
               addedToLibrary.toSecsSinceEpoch());
-
-    auto cover = bookObject["cover"].toString();
-    auto coverImage = QImage::fromData(QByteArray::fromBase64(cover.toUtf8()));
-    EXPECT_EQ(metaData.cover, coverImage);
-
+    EXPECT_EQ(metaData.hasCover, bookObject["hasCover"].toBool());
     EXPECT_EQ(book.getFilePath(), bookObject["filePath"].toString());
     EXPECT_EQ(book.getCurrentPage(), bookObject["currentPage"].toInt());
     EXPECT_EQ(book.getUuid(), bookObject["uuid"].toString());
@@ -439,7 +430,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime::currentDateTimeUtc(),
-        .cover = QImage(""),
+        .hasCover = true,
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -470,7 +461,7 @@ TEST(ABook, SucceedsDeserializingFromJson)
               result.getAddedToLibrary().toSecsSinceEpoch());
     EXPECT_EQ(metaData.lastOpened.toSecsSinceEpoch(),
               result.getLastOpened().toSecsSinceEpoch());
-    EXPECT_EQ(metaData.cover, result.getCover());
+    EXPECT_EQ(metaData.hasCover, result.hasCover());
     EXPECT_EQ(book.getFilePath(), result.getFilePath());
     EXPECT_EQ(book.getCurrentPage(), result.getCurrentPage());
     EXPECT_EQ(book.getUuid(), result.getUuid());
@@ -491,7 +482,9 @@ TEST(ABook, SucceedsEqualityComparison)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
+        .coverLastModified = QDateTime::currentDateTimeUtc(),
+        .hasCover = true,
+        .coverPath = "some/path.png",
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -525,7 +518,8 @@ TEST(ABook, FailsEqualityComparisonIfTheBooksDiffer)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
+        .hasCover = true,
+        .coverPath = "some/path.png"
     };
     int currentPage = 224;
     Book firstBook("some/path", firstBookMetaData, currentPage, uuid);
@@ -541,7 +535,8 @@ TEST(ABook, FailsEqualityComparisonIfTheBooksDiffer)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
+        .hasCover = true,
+        .coverPath = "other/path.png"
     };
     Book secondBook("some/path", secondBookMetaData, currentPage, uuid);
 

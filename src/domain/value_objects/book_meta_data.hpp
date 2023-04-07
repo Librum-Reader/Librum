@@ -20,7 +20,9 @@ struct BookMetaData
     QDateTime addedToLibrary = QDateTime::currentDateTimeUtc();
     QDateTime lastModified = QDateTime::currentDateTimeUtc();
     QDateTime lastOpened;
-    QImage cover;
+    QDateTime coverLastModified;
+    bool hasCover = false;
+    QString coverPath;
 
     bool operator==(const BookMetaData& rhs) const
     {
@@ -38,7 +40,9 @@ struct BookMetaData
                    rhs.addedToLibrary.toSecsSinceEpoch() &&
                lastModified.toSecsSinceEpoch() ==
                    rhs.lastModified.toSecsSinceEpoch() &&
-               cover == rhs.cover;
+               coverLastModified.toSecsSinceEpoch() ==
+                   rhs.coverLastModified.toSecsSinceEpoch() &&
+               hasCover == rhs.hasCover;
     }
 };
 
