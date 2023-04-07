@@ -69,6 +69,68 @@ void BookStorageAccess::updateBook(const QString& authToken,
     linkRequestToErrorHandling(m_bookUpdateReply.get(), 200);
 }
 
+void BookStorageAccess::changeBookCover(const QString& authToken,
+                                        const QUuid& uuid, const QString& path)
+{
+    m_bookCoverMultiPart.reset(
+        new QHttpMultiPart(QHttpMultiPart::FormDataType));
+    QString stringUuid = uuid.toString(QUuid::WithoutBraces);
+
+    QFile* file = new QFile(QUrl(path).path());
+    if(!file->open(QIODevice::ReadOnly))
+    {
+        qDebug() << QString("Could not open cover for book with uuid: %1")
+                        .arg(stringUuid);
+        return;
+    }
+
+    // Make sure the file is released when the request finished.
+    file->setParent(m_bookCoverMultiPart.get());
+
+    QHttpPart imagePart;
+    imagePart.setBodyDevice(file);
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                        QVariant("image/png"));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                        QVariant("form-data; name=\"image\"; filename=\"" +
+                                 file->fileName() + "\""));
+
+
+    m_bookCoverMultiPart->append(imagePart);
+
+
+    QUrl endpoint = data::changeBookCoverEndpoint + "/" + stringUuid;
+    auto request = createRequest(endpoint, authToken);
+
+    // Reset the ContentTypeHeader since it will be set by the multipart
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+
+    auto r = m_networkAccessManager.post(request, m_bookCoverMultiPart.get());
+    m_bookCoverUploadReply.reset(r);
+    linkRequestToErrorHandling(m_bookCoverUploadReply.get(), 201);
+
+
+    // Make sure to free the data used for uploading the cover.
+    // The m_bookCoverUploadReply is set as the parent for e.g. the file.
+    connect(m_bookCoverUploadReply.get(), &QNetworkReply::finished, this,
+            [this]()
+            {
+                m_bookDataMultiPart.reset();
+            });
+}
+
+void BookStorageAccess::deleteBookCover(const QString& authToken,
+                                        const QUuid& uuid)
+{
+    QUrl endpoint = data::deleteBookCoverEndpoint + "/" +
+                    uuid.toString(QUuid::WithoutBraces);
+    auto request = createRequest(endpoint, authToken);
+
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
+    m_bookCoverDeletionReply.reset(reply);
+    linkRequestToErrorHandling(m_bookCoverDeletionReply.get(), 204);
+}
+
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
 {
     auto request = createRequest(data::booksMetadataGetEndpoint, authToken);
@@ -137,6 +199,8 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
 
     QUrl endpoint = data::uploadBookDataEndpoint + "/" + uuid;
     auto request = createRequest(endpoint, authToken);
+
+    // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
     auto r = m_networkAccessManager.post(request, m_bookDataMultiPart.get());
@@ -145,7 +209,7 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
 
 
     // Make sure to free the data used for uploading the book binary data.
-    // the m_bookBinaryDataUploadReply is set as the parent for e.g. the file.
+    // The m_bookDataUploadReply is set as the parent for e.g. the file.
     connect(m_bookDataUploadReply.get(), &QNetworkReply::finished, this,
             [this]()
             {
@@ -158,7 +222,7 @@ void BookStorageAccess::setupDataMultiPartWithFile(const QUrl& path)
     QFile* file = new QFile(QUrl(path).path());
     if(!file->open(QIODevice::ReadOnly))
     {
-        qDebug() << "Could not open test file!";
+        qDebug() << "Could not open book data file";
         return;
     }
 

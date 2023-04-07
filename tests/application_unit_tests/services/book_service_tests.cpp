@@ -34,23 +34,20 @@ public:
 class BookStorageManagerMock : public IBookStorageManager
 {
 public:
-    MOCK_METHOD(void, addBook, (const domain::entities::Book&), (override));
-    MOCK_METHOD(void, addBookLocally, (const domain::entities::Book&),
-                (override));
+    MOCK_METHOD(void, addBook, (const Book&), (override));
+    MOCK_METHOD(void, addBookLocally, (const Book&), (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
     MOCK_METHOD(void, deleteBookLocally, (QUuid), (override));
     MOCK_METHOD(void, uninstallBook, (const QUuid&), (override));
     MOCK_METHOD(void, downloadBook, (const QUuid&), (override));
-    MOCK_METHOD(void, updateBook, (const domain::entities::Book&), (override));
-    MOCK_METHOD(void, updateBookLocally, (const domain::entities::Book&),
-                (override));
-    MOCK_METHOD(void, updateBookRemotely, (const domain::entities::Book&),
-                (override));
+    MOCK_METHOD(void, updateBook, (const Book&), (override));
+    MOCK_METHOD(void, updateBookLocally, (const Book&), (override));
+    MOCK_METHOD(void, updateBookRemotely, (const Book&), (override));
+    MOCK_METHOD(void, changeBookCover, (const Book&), (override));
     MOCK_METHOD(std::optional<QString>, saveBookCoverToFile,
                 (const QUuid&, const QPixmap&), (override));
     MOCK_METHOD(bool, deleteBookCover, (const QUuid&), (override));
-    MOCK_METHOD(std::vector<domain::entities::Book>, loadLocalBooks, (),
-                (override));
+    MOCK_METHOD(std::vector<Book>, loadLocalBooks, (), (override));
     MOCK_METHOD(void, loadRemoteBooks, (), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),
                 (override));

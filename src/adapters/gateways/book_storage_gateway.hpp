@@ -19,6 +19,9 @@ public:
     void deleteBook(const QString& authToken, const QUuid& uuid) override;
     void updateBook(const QString& authToken,
                     const domain::entities::Book& book) override;
+    void changeBookCover(const QString& authToken, const QUuid& uuid,
+                         const QString& path) override;
+    void deleteBookCover(const QString& authToken, const QUuid& uuid) override;
     void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
 

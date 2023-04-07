@@ -25,6 +25,10 @@ public:
     MOCK_METHOD(void, deleteBook, (const QString&, const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const QString&, const QJsonObject&),
                 (override));
+    MOCK_METHOD(void, changeBookCover,
+                (const QString&, const QUuid&, const QString&), (override));
+    MOCK_METHOD(void, deleteBookCover, (const QString&, const QUuid&),
+                (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
     MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
 };

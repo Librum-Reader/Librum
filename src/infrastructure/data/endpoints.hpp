@@ -12,11 +12,13 @@ inline const QString registrationEndpoint { domain + "/api/register" };
 
 // Book storage
 inline const QString bookCreationEndpoint { domain + "/api/book" };
-inline const QString uploadBookDataEndpoint { domain + "/api/book/bookData" };
-inline const QString downloadBookDataEndpoint { domain + "/api/book/bookData" };
 inline const QString bookUpdateEndpoint { domain + "/api/book" };
 inline const QString bookDeletionEndpoint { domain + "/api/book" };
 inline const QString booksMetadataGetEndpoint { domain + "/api/book" };
+inline const QString uploadBookDataEndpoint { domain + "/api/book/bookData" };
+inline const QString downloadBookDataEndpoint { domain + "/api/book/bookData" };
+inline const QString changeBookCoverEndpoint { domain + "/api/book/cover" };
+inline const QString deleteBookCoverEndpoint { domain + "/api/book/cover" };
 
 // User storage
 inline const QString userGetEndpoint { domain + "/api/user" };

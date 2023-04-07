@@ -23,6 +23,10 @@ public:
     virtual void deleteBook(const QString& authToken, const QUuid& uuid) = 0;
     virtual void updateBook(const QString& authToken,
                             const QJsonObject& jsonBook) = 0;
+    virtual void changeBookCover(const QString& authToken, const QUuid& uuid,
+                                 const QString& path) = 0;
+    virtual void deleteBookCover(const QString& authToken,
+                                 const QUuid& uuid) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
 

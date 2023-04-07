@@ -65,6 +65,16 @@ bool BookStorageManager::userLoggedIn()
     return !m_authenticationToken.isEmpty();
 }
 
+QString BookStorageManager::getBookCoverPath(const QUuid& uuid)
+{
+    auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
+    auto fileName = QString("%1%2.%3").arg(m_bookCoverPrefix,
+                                           uuid.toString(QUuid::WithoutBraces),
+                                           m_bookCoverType);
+
+    return dir.filePath(fileName);
+}
+
 void BookStorageManager::addBook(const Book& bookToAdd)
 {
     // Prevent adding remote books to the local library unless "downloaded" is
@@ -123,29 +133,40 @@ void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
     m_bookStorageGateway->updateBook(m_authenticationToken, book);
 }
 
+void BookStorageManager::changeBookCover(const Book& book)
+{
+    updateBook(book);
+
+    if(book.hasCover())
+    {
+        auto pathToCover = getBookCoverPath(book.getUuid());
+        m_bookStorageGateway->changeBookCover(m_authenticationToken,
+                                              book.getUuid(), pathToCover);
+    }
+    else
+    {
+        m_bookStorageGateway->deleteBookCover(m_authenticationToken,
+                                              book.getUuid());
+    }
+}
+
 std::optional<QString> BookStorageManager::saveBookCoverToFile(
     const QUuid& uuid, const QPixmap& cover)
 {
-    QString fileName = QString("%1%2.%3").arg(
-        bookCoverPrefix, uuid.toString(QUuid::WithoutBraces), bookCoverType);
-
-    QFile file(m_downloadedBooksTracker->getLibraryDir().filePath(fileName));
+    QFile file(getBookCoverPath(uuid));
     if(!file.open(QFile::WriteOnly))
     {
         return std::nullopt;
     }
 
     int fileQuality = 20;
-    cover.save(&file, bookCoverType.toStdString().c_str(), fileQuality);
+    cover.save(&file, m_bookCoverType.toStdString().c_str(), fileQuality);
     return file.fileName();
 }
 
 bool BookStorageManager::deleteBookCover(const QUuid& uuid)
 {
-    QString fileName = QString("%1%2.%3").arg(
-        bookCoverPrefix, uuid.toString(QUuid::WithoutBraces), bookCoverType);
-
-    QFile file(m_downloadedBooksTracker->getLibraryDir().filePath(fileName));
+    QFile file(getBookCoverPath(uuid));
     auto success = file.remove();
 
     return success;

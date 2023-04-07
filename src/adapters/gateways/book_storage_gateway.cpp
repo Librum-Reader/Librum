@@ -47,6 +47,18 @@ void BookStorageGateway::updateBook(const QString& authToken, const Book& book)
     m_bookStorageAccess->updateBook(authToken, jsonBook);
 }
 
+void BookStorageGateway::changeBookCover(const QString& authToken,
+                                         const QUuid& uuid, const QString& path)
+{
+    m_bookStorageAccess->changeBookCover(authToken, uuid, path);
+}
+
+void BookStorageGateway::deleteBookCover(const QString& authToken,
+                                         const QUuid& uuid)
+{
+    m_bookStorageAccess->deleteBookCover(authToken, uuid);
+}
+
 void BookStorageGateway::getBooksMetaData(const QString& authToken)
 {
     m_bookStorageAccess->getBooksMetaData(authToken);

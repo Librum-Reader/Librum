@@ -21,6 +21,9 @@ public:
     void deleteBook(const QString& authToken, const QUuid& uuid) override;
     void updateBook(const QString& authToken,
                     const QJsonObject& jsonBook) override;
+    void changeBookCover(const QString& authToken, const QUuid& uuid,
+                         const QString& path) override;
+    void deleteBookCover(const QString& authToken, const QUuid& uuid) override;
     void getBooksMetaData(const QString& authToken) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
 
@@ -42,9 +45,14 @@ private:
 
 
     QNetworkAccessManager m_networkAccessManager;
+
     std::unique_ptr<QHttpMultiPart> m_bookDataMultiPart = nullptr;
+    std::unique_ptr<QHttpMultiPart> m_bookCoverMultiPart = nullptr;
+
     std::unique_ptr<QNetworkReply> m_bookDataUploadReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookDataDownloadReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookCoverUploadReply = nullptr;
+    std::unique_ptr<QNetworkReply> m_bookCoverDeletionReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
     std::unique_ptr<QNetworkReply> m_gettingBooksMetaDataReply = nullptr;
     std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;
