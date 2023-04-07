@@ -37,7 +37,7 @@ signals:
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
     void gettingBooksMetaDataFinished(
-        const std::vector<domain::entities::Book>& books);
+        std::vector<domain::entities::Book>& books);
     void downloadingBookFinished(const QByteArray& data, const QUuid& uuid);
 };
 

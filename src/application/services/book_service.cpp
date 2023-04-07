@@ -97,6 +97,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     emit bookDeletionEnded();
 
     m_bookStorageManager->deleteBook(std::move(bookToDelete));
+    m_bookStorageManager->deleteBookCoverLocally(uuid);
 
     return BookOperationStatus::Success;
 }
@@ -182,8 +183,8 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
 
     if(filePath.isEmpty())
     {
-        // Delete book cover
-        m_bookStorageManager->deleteBookCover(uuid);
+        // Delete the book cover
+        m_bookStorageManager->deleteBookCoverLocally(uuid);
 
         book->setCoverPath("");
         book->setHasCover(false);

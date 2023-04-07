@@ -14,16 +14,7 @@ BookStorageManager::BookStorageManager(
 {
     connect(m_bookStorageGateway,
             &IBookStorageGateway::gettingBooksMetaDataFinished, this,
-            [this](const std::vector<Book>& books)
-            {
-                // Avoid storing books for logged out users by verifying login
-                // status before adding books, else books might get loaded into
-                // memory, even though the user is logged out.
-                if(!userLoggedIn())
-                    return;
-
-                emit loadingRemoteBooksFinished(books);
-            });
+            &BookStorageManager::processBookMetadata);
 
     connect(m_bookStorageGateway, &IBookStorageGateway::downloadingBookFinished,
             this, &BookStorageManager::saveDownloadedBookToFile);
@@ -58,6 +49,28 @@ void BookStorageManager::saveDownloadedBookToFile(const QByteArray& data,
 
     file.write(data);
     emit finishedDownloadingBook(uuid, destination);
+}
+
+void BookStorageManager::processBookMetadata(std::vector<Book>& books)
+{
+    // Avoid storing books for logged out users by verifying login
+    // status before adding books, else books might get loaded into
+    // memory, even though the user is logged out.
+    if(!userLoggedIn())
+        return;
+
+
+    // Set the cover paths for the remote books
+    for(auto& book : books)
+    {
+        if(book.hasCover())
+        {
+            auto& uuid = book.getUuid();
+            book.setCoverPath(getBookCoverPath(uuid));
+        }
+    }
+
+    emit loadingRemoteBooksFinished(books);
 }
 
 bool BookStorageManager::userLoggedIn()
@@ -164,7 +177,7 @@ std::optional<QString> BookStorageManager::saveBookCoverToFile(
     return file.fileName();
 }
 
-bool BookStorageManager::deleteBookCover(const QUuid& uuid)
+bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
 {
     QFile file(getBookCoverPath(uuid));
     auto success = file.remove();

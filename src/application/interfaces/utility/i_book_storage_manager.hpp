@@ -34,7 +34,7 @@ public:
     virtual void changeBookCover(const domain::entities::Book& book) = 0;
     virtual std::optional<QString> saveBookCoverToFile(
         const QUuid& uuid, const QPixmap& cover) = 0;
-    virtual bool deleteBookCover(const QUuid& uuid) = 0;
+    virtual bool deleteBookCoverLocally(const QUuid& uuid) = 0;
     virtual std::vector<domain::entities::Book> loadLocalBooks() = 0;
     virtual void loadRemoteBooks() = 0;
 
@@ -43,8 +43,7 @@ public:
     virtual void clearUserData() = 0;
 
 signals:
-    void loadingRemoteBooksFinished(
-        const std::vector<domain::entities::Book>& books);
+    void loadingRemoteBooksFinished(std::vector<domain::entities::Book>& books);
     void finishedDownloadingBook(const QUuid& uuid, const QString& filePath);
 };
 
