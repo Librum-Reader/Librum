@@ -112,7 +112,7 @@ Item
                     visible: source != ""
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -10
-                    source: cover
+                    source: "file://" + cover  // It needs the file:// to know that the path is absolute
                 }
                 
                 /*

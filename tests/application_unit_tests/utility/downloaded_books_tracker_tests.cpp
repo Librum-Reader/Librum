@@ -49,7 +49,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -81,7 +80,6 @@ TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -114,7 +112,9 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
         .documentSize = "203 KiB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
-        .cover = QImage(""),
+        .coverLastModified = QDateTime::currentDateTimeUtc(),
+        .hasCover = true,
+        .coverPath = "some/path.png",
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -162,7 +162,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllTrackedBooks)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
     int currentPage = 224;
 
@@ -214,7 +213,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -265,7 +263,6 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -306,7 +303,6 @@ TEST_F(ADownloadedBooksTracker, FailsUpdatingAnUntrackedBook)
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
-        .cover = QImage(""),
     };
 
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);

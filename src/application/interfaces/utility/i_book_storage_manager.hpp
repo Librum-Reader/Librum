@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QPixmap>
 #include <QString>
 #include <QUuid>
 #include <optional>
@@ -30,6 +31,9 @@ public:
     virtual void updateBook(const domain::entities::Book& book) = 0;
     virtual void updateBookLocally(const domain::entities::Book& book) = 0;
     virtual void updateBookRemotely(const domain::entities::Book& book) = 0;
+    virtual std::optional<QString> saveBookCoverToFile(
+        const QUuid& uuid, const QPixmap& cover) = 0;
+    virtual bool deleteBookCover(const QUuid& uuid) = 0;
     virtual std::vector<domain::entities::Book> loadLocalBooks() = 0;
     virtual void loadRemoteBooks() = 0;
 

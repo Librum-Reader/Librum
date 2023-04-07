@@ -123,6 +123,34 @@ void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
     m_bookStorageGateway->updateBook(m_authenticationToken, book);
 }
 
+std::optional<QString> BookStorageManager::saveBookCoverToFile(
+    const QUuid& uuid, const QPixmap& cover)
+{
+    QString fileName = QString("%1%2.%3").arg(
+        bookCoverPrefix, uuid.toString(QUuid::WithoutBraces), bookCoverType);
+
+    QFile file(m_downloadedBooksTracker->getLibraryDir().filePath(fileName));
+    if(!file.open(QFile::WriteOnly))
+    {
+        return std::nullopt;
+    }
+
+    int fileQuality = 20;
+    cover.save(&file, bookCoverType.toStdString().c_str(), fileQuality);
+    return file.fileName();
+}
+
+bool BookStorageManager::deleteBookCover(const QUuid& uuid)
+{
+    QString fileName = QString("%1%2.%3").arg(
+        bookCoverPrefix, uuid.toString(QUuid::WithoutBraces), bookCoverType);
+
+    QFile file(m_downloadedBooksTracker->getLibraryDir().filePath(fileName));
+    auto success = file.remove();
+
+    return success;
+}
+
 std::vector<Book> BookStorageManager::loadLocalBooks()
 {
     auto m_localBooks = m_downloadedBooksTracker->getTrackedBooks();

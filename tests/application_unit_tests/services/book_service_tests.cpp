@@ -46,6 +46,9 @@ public:
                 (override));
     MOCK_METHOD(void, updateBookRemotely, (const domain::entities::Book&),
                 (override));
+    MOCK_METHOD(std::optional<QString>, saveBookCoverToFile,
+                (const QUuid&, const QPixmap&), (override));
+    MOCK_METHOD(bool, deleteBookCover, (const QUuid&), (override));
     MOCK_METHOD(std::vector<domain::entities::Book>, loadLocalBooks, (),
                 (override));
     MOCK_METHOD(void, loadRemoteBooks, (), (override));
@@ -254,6 +257,25 @@ TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
     // Assert
     EXPECT_EQ(expectedStatus, resultStatus);
 }
+
+// TEST_F(ABookService, FailsUninstallingABookIfBookDoesNotExist)
+//{
+//     // Arrange
+//     auto uuid = QUuid::createUuid();
+
+//    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+
+//    // Expect
+//    //    EXPECT_CALL(bookStorageManagerMock, uninstallBook(_)).Times(0);
+
+//    // Act
+//    auto result = bookService->changeBookCover(uuid);
+
+//    // Assert
+//    EXPECT_EQ(expectedResult, result);
+//    EXPECT_EQ(0, spy.count());
+//}
 
 TEST_F(ABookService, SucceedsGettingABook)
 {

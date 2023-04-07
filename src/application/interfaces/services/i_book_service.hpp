@@ -26,6 +26,8 @@ public:
     virtual BookOperationStatus downloadBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus updateBook(
         const domain::entities::Book& newBook) = 0;
+    virtual BookOperationStatus changeBookCover(const QUuid& uuid,
+                                                const QString& filePath) = 0;
 
     virtual const std::vector<domain::entities::Book>& getBooks() const = 0;
     virtual const domain::entities::Book* getBook(const QUuid& uuid) const = 0;
@@ -33,13 +35,13 @@ public:
     virtual int getBookIndex(const QUuid& uuid) const = 0;
     virtual int getBookCount() const = 0;
 
-    virtual BookOperationStatus addTagToBook(const QUuid& uuid,
-                                       const domain::entities::Tag& tag) = 0;
+    virtual BookOperationStatus addTagToBook(
+        const QUuid& uuid, const domain::entities::Tag& tag) = 0;
     virtual BookOperationStatus removeTagFromBook(const QUuid& bookUuid,
-                                          const QUuid& tagUuid) = 0;
+                                                  const QUuid& tagUuid) = 0;
     virtual BookOperationStatus renameTagOfBook(const QUuid& bookUuid,
-                                          const QUuid& tagUuid,
-                                          const QString& newName) = 0;
+                                                const QUuid& tagUuid,
+                                                const QString& newName) = 0;
 
     virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
                                                const QUrl& path) = 0;

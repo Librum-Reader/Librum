@@ -609,7 +609,7 @@ Popup
                 operationsMap[BookController.MetaProperty.Format] = formatField.text;
             
             // @disable-check M126
-            if(bookCover.source != Globals.selectedBook.cover)   // Needs to be !=, the types are different (QUrl and QString)
+            if(bookCover.source != Globals.selectedBook.coverPath)   // Needs to be !=, the types are different (QUrl and QString)
                 operationsMap[BookController.MetaProperty.Cover] = bookCover.source;
             
             
@@ -628,7 +628,7 @@ Popup
         
         function loadData()
         {
-            bookCover.source = Qt.binding( function () { return Globals.selectedBook.cover })
+            bookCover.source = Qt.binding( function () { return Globals.selectedBook.coverPath })
             
             if(Globals.selectedBook.language !== "")
                 languageComboBox.setDefaultItem(Globals.selectedBook.language);

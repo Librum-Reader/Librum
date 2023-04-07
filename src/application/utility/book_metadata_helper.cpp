@@ -39,7 +39,6 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
         .pagesSize = getPagesSize(),
         .pageCount = getPageCount(),
         .lastOpened = QDateTime(),
-        .cover = QImage(),
     };
 
     return metaData;

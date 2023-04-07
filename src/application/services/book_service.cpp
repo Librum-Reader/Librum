@@ -22,7 +22,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
 {
     // Book cover generated
     connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
-            this, &BookService::assignBookCoverToBook);
+            this, &BookService::processBookCover);
 
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
@@ -161,6 +161,35 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     emit dataChanged(index);
 
     m_bookStorageManager->updateBook(*book);
+
+    return BookOperationStatus::Success;
+}
+
+BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
+                                                 const QString& filePath)
+{
+    auto* book = getBook(uuid);
+    if(book == nullptr)
+    {
+        qWarning() << QString("Failed changing cover for book with uuid: %1."
+                              "No book with this uuid exists.")
+                          .arg(uuid.toString());
+        return BookOperationStatus::BookDoesNotExist;
+    }
+
+    if(filePath.isEmpty())
+    {
+        // Delete book cover
+        book->setCoverPath("");
+        book->setHasCover(false);
+        book->updateCoverLastModified();
+
+        m_bookStorageManager->deleteBookCover(uuid);
+    }
+    else
+    {
+        // Set new book cover
+    }
 
     return BookOperationStatus::Success;
 }
@@ -404,12 +433,25 @@ void BookService::clearUserData()
     emit bookClearingEnded();
 }
 
-void BookService::assignBookCoverToBook(const QPixmap* pixmap)
+void BookService::processBookCover(const QPixmap* pixmap)
 {
+    // The book to assing the last cover to is always the last added book
     int index = m_books.size() - 1;
     auto& book = m_books.at(index);
 
-    book.setCover(pixmap->toImage());
+    auto result =
+        m_bookStorageManager->saveBookCoverToFile(book.getUuid(), *pixmap);
+    if(!result.has_value())
+    {
+        qDebug() << QString("Failed creating cover for book with uuid: %1.")
+                        .arg(book.getUuid().toString(QUuid::WithoutBraces));
+        return;
+    }
+
+    book.updateCoverLastModified();
+    book.setHasCover(true);
+    book.setCoverPath(result.value());
+
     emit bookCoverGenerated(index);
 }
 

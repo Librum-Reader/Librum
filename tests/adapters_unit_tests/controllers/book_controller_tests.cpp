@@ -34,6 +34,8 @@ public:
     MOCK_METHOD(BookOperationStatus, downloadBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, updateBook, (const Book& book),
                 (override));
+    MOCK_METHOD(BookOperationStatus, changeBookCover,
+                (const QUuid&, const QString&), (override));
 
     MOCK_METHOD(const std::vector<Book>&, getBooks, (), (const, override));
     MOCK_METHOD(const Book*, getBook, (const QUuid&), (const, override));
@@ -513,6 +515,57 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
 
     // Act
     auto result = bookController->removeTag("some-book-uuid", "SomeTag");
+
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, SucceedsChangingBookCover)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::Success;
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, changeBookCover(_, _))
+        .Times(1)
+        .WillOnce(Return(BookOperationStatus::Success));
+
+    // Act
+    auto result = bookController->changeBookCover("someUuid", "some/path.png");
+
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, FailsChangingBookCoverIfBookDoesNotExist)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, changeBookCover(_, _))
+        .Times(1)
+        .WillOnce(Return(BookOperationStatus::BookDoesNotExist));
+
+    // Act
+    auto result = bookController->changeBookCover("wrongUuid", "some/path.png");
+
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, FailsChangingBookCoverIfFilePathIsInvalid)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::OperationFailed;
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, changeBookCover(_, _))
+        .Times(1)
+        .WillOnce(Return(BookOperationStatus::OperationFailed));
+
+    // Act
+    auto result = bookController->changeBookCover("someUuid", "wrong/path.png");
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);

@@ -22,6 +22,7 @@ public:
     int uninstallBook(const QString& uuid) override;
     int downloadBook(const QString& uuid) override;
     int updateBook(const QString& uuid, const QVariant& operations) override;
+    int changeBookCover(const QString& uuid, const QString& path) override;
     int addTag(const QString& bookUuid, const QString& tagName,
                const QString& tagUuid) override;
     void removeAllTagsWithUuid(const QString& tagUuid) override;
@@ -37,7 +38,6 @@ public slots:
     void refreshLastOpenedFlag(const QString& uuid) override;
 
 private:
-    QImage getCorrectlySizedBookCover(const QString& pathToCover);
     dtos::BookDto getDtoFromBook(const domain::entities::Book& book);
     QUuid getTagUuidByName(const domain::entities::Book& book,
                            const QString& name);

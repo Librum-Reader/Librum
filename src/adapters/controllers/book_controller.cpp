@@ -147,7 +147,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
         case MetaProperty::Cover:
-            updatedBook.setCover(getCorrectlySizedBookCover(value.toString()));
+            changeBookCover(uuid, value.toString());
             break;
         case MetaProperty::Invalid:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
@@ -159,6 +159,12 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
 
     auto result = m_bookService->updateBook(updatedBook);
+    return static_cast<int>(result);
+}
+
+int BookController::changeBookCover(const QString& uuid, const QString& path)
+{
+    auto result = m_bookService->changeBookCover(uuid, path);
     return static_cast<int>(result);
 }
 
@@ -245,20 +251,6 @@ void BookController::refreshLastOpenedFlag(const QString& uuid)
     m_bookService->refreshLastOpenedDateOfBook(uuid);
 }
 
-QImage BookController::getCorrectlySizedBookCover(const QString& pathToCover)
-{
-    if(pathToCover.isEmpty())
-        return QImage();
-
-    QString localFilePath = QUrl(pathToCover).toLocalFile();
-    QImage cover(localFilePath);
-    auto scaledCover =
-        cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
-                     Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    return scaledCover;
-}
-
 dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
 {
     dtos::BookDto bookDto;
@@ -294,7 +286,7 @@ void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
     bookDto.bookProgressPercentage = book.getBookProgressPercentage();
-    bookDto.cover = book.getCoverAsStringWithType();
+    bookDto.coverPath = book.getCoverPath();
     bookDto.downloaded = book.getDownloaded();
 
     bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(

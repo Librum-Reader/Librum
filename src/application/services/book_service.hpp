@@ -25,6 +25,8 @@ public:
     BookOperationStatus downloadBook(const QUuid& uuid) override;
     BookOperationStatus updateBook(
         const domain::entities::Book& newBook) override;
+    BookOperationStatus changeBookCover(const QUuid& uuid,
+                                        const QString& filePath) override;
     BookOperationStatus saveBookToFile(const QUuid& uuid,
                                        const QUrl& path) override;
 
@@ -48,7 +50,7 @@ public slots:
     void clearUserData() override;
 
 private slots:
-    void assignBookCoverToBook(const QPixmap* pixmap);
+    void processBookCover(const QPixmap* pixmap);
     void updateLibrary(const std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
 

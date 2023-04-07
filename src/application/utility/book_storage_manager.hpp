@@ -22,6 +22,9 @@ public:
     void updateBook(const domain::entities::Book& book) override;
     void updateBookLocally(const domain::entities::Book& book) override;
     void updateBookRemotely(const domain::entities::Book& book) override;
+    std::optional<QString> saveBookCoverToFile(const QUuid& uuid,
+                                               const QPixmap& cover) override;
+    bool deleteBookCover(const QUuid& uuid) override;
     std::vector<domain::entities::Book> loadLocalBooks() override;
     void loadRemoteBooks() override;
 
@@ -34,6 +37,8 @@ private slots:
 private:
     bool userLoggedIn();
 
+    QString bookCoverPrefix = "cover_";
+    QString bookCoverType = "png";
     IBookStorageGateway* m_bookStorageGateway;
     IDownloadedBooksTracker* m_downloadedBooksTracker;
     QString m_authenticationToken;
