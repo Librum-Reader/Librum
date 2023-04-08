@@ -28,35 +28,20 @@ public:
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
 
 private slots:
-    void proccessGettingBooksMetaDataResult();
-    void proccessDownloadBookResult();
+    void processGettingBooksMetaDataResult();
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
-    void linkRequestToErrorHandling(QNetworkReply* reply, int statusCode);
-    ServerReplyStatus validateServerReply(int expectedStatusCode,
-                                          QNetworkReply* reply);
+    ServerReplyStatus validateNetworkReply(int expectedStatusCode,
+                                           QNetworkReply* reply,
+                                           const QString& name);
 
-    // The books actual data, the binary file, is uploaded after the book
-    // has been created.
     void uploadBookData(const QString& uuid, const QString& filePath,
                         const QString& authToken);
-    void setupDataMultiPartWithFile(const QUrl& path);
+    bool addFilePartToMultiPart(QHttpMultiPart* bookData, const QUrl& path);
 
 
     QNetworkAccessManager m_networkAccessManager;
-
-    std::unique_ptr<QHttpMultiPart> m_bookDataMultiPart = nullptr;
-    std::unique_ptr<QHttpMultiPart> m_bookCoverMultiPart = nullptr;
-
-    std::unique_ptr<QNetworkReply> m_bookDataUploadReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookDataDownloadReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookCoverUploadReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookCoverDeletionReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookCreationReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_gettingBooksMetaDataReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookUpdateReply = nullptr;
-    std::unique_ptr<QNetworkReply> m_bookDeletionReply = nullptr;
 };
 
 }  // namespace infrastructure::persistence

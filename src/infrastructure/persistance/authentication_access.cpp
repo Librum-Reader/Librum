@@ -19,10 +19,27 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
 
-    m_reply.reset(m_networkAccessManager.post(request, data));
+    auto reply = m_networkAccessManager.post(request, data);
 
-    connect(m_reply.get(), &QNetworkReply::finished, this,
-            &AuthenticationAccess::proccessAuthenticationResult);
+
+    // Handle authentication result and release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+
+                auto res = validateNetworkReply(200, reply, "Authentication");
+                if(!res.success)
+                {
+                    emit authenticationFinished("");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit authenticationFinished(reply->readAll());
+                reply->deleteLater();
+            });
 }
 
 void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
@@ -39,28 +56,45 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
 
-    m_reply.reset(m_networkAccessManager.post(request, data));
+    auto reply = m_networkAccessManager.post(request, data);
 
-    connect(m_reply.get(), &QNetworkReply::finished, this,
-            &AuthenticationAccess::proccessRegistrationResult);
+
+    // Handle registration result and release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+
+                auto res = validateNetworkReply(201, reply, "Registration");
+                if(!res.success)
+                {
+                    emit registrationFinished(false, res.errorMessage);
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit registrationFinished(true, "");
+                reply->deleteLater();
+            });
 }
 
-ServerReplyStatus AuthenticationAccess::validateServerReply(
-    int expectedStatusCode)
+ServerReplyStatus AuthenticationAccess::validateNetworkReply(
+    int expectedStatusCode, QNetworkReply* reply, const QString& name)
 {
-    int statusCode =
-        m_reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+    auto statusCode =
+        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-    auto replyHasError = m_reply->error() != QNetworkReply::NoError;
-    if(replyHasError || statusCode != expectedStatusCode)
+
+    if(reply->error() != QNetworkReply::NoError ||
+       expectedStatusCode != statusCode)
     {
-        QString errorMessage = m_reply->readAll();
-        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
-                          .arg(m_reply->errorString(), errorMessage);
+        auto content = reply->readAll();
+        qWarning() << name + " failed: " + content;
 
         return ServerReplyStatus {
             .success = false,
-            .errorMessage = errorMessage,
+            .errorMessage = content,
         };
     }
 
@@ -79,32 +113,6 @@ QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
     result.setSslConfiguration(sslConfiguration);
 
     return result;
-}
-
-void AuthenticationAccess::proccessAuthenticationResult()
-{
-    auto expectedStatusCode = 200;
-    auto replyStatus = validateServerReply(expectedStatusCode);
-    if(!replyStatus.success)
-    {
-        emit authenticationFinished("");
-        return;
-    }
-
-    emit authenticationFinished(m_reply->readAll());
-}
-
-void AuthenticationAccess::proccessRegistrationResult()
-{
-    auto expectedStatusCode = 201;
-    auto replyStatus = validateServerReply(expectedStatusCode);
-    if(!replyStatus.success)
-    {
-        emit registrationFinished(false, replyStatus.errorMessage);
-        return;
-    }
-
-    emit registrationFinished(true, "");
 }
 
 }  // namespace infrastructure::persistence

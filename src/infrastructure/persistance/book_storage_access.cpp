@@ -19,38 +19,31 @@ void BookStorageAccess::createBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    int expectedStatusCode = 201;
     auto reply = m_networkAccessManager.post(request, data);
-    m_bookCreationReply.reset(reply);
-    linkRequestToErrorHandling(m_bookCreationReply.get(), expectedStatusCode);
 
 
-    // Upload book's binary data if creating the book succeeded
-    connect(m_bookCreationReply.get(), &QNetworkReply::finished, this,
-            [this, jsonBook, authToken, expectedStatusCode]()
+    // The book is created in separate steps. First of all an enty for the book
+    // is created in the SQL Database, if that succeeds the book's data (the
+    // actual binary file) and its cover are uploaded to the server.
+    connect(reply, &QNetworkReply::finished, this,
+            [this, jsonBook, authToken]()
             {
-                auto statusCode = m_bookCreationReply->attribute(
-                    QNetworkRequest::HttpStatusCodeAttribute);
-
-                if(statusCode.toInt() != expectedStatusCode)
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                auto result = validateNetworkReply(201, reply, "Creating book");
+                if(!result.success)
                     return;
 
+
+                // Send book's actual binary file to the server
                 uploadBookData(jsonBook["guid"].toString(),
                                jsonBook["filePath"].toString(), authToken);
-            });
 
-    // Upload book's cover if creating the book succeeded
-    connect(m_bookCreationReply.get(), &QNetworkReply::finished, this,
-            [this, jsonBook, authToken, expectedStatusCode]()
-            {
-                auto statusCode = m_bookCreationReply->attribute(
-                    QNetworkRequest::HttpStatusCodeAttribute);
-
-                if(statusCode.toInt() != expectedStatusCode)
-                    return;
-
+                // Send the book's cover to the server
                 changeBookCover(authToken, jsonBook["guid"].toString(),
                                 jsonBook["coverPath"].toString());
+
+                // Make sure to release the reply's memory
+                reply->deleteLater();
             });
 }
 
@@ -66,9 +59,17 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
 
     auto reply =
         m_networkAccessManager.sendCustomRequest(request, "DELETE", data);
-    m_bookDeletionReply.reset(reply);
 
-    linkRequestToErrorHandling(m_bookDeletionReply.get(), 204);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(204, reply, "Deleting book");
+
+                reply->deleteLater();
+            });
 }
 
 void BookStorageAccess::updateBook(const QString& authToken,
@@ -79,15 +80,24 @@ void BookStorageAccess::updateBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    m_bookUpdateReply.reset(m_networkAccessManager.put(request, data));
-    linkRequestToErrorHandling(m_bookUpdateReply.get(), 200);
+    auto reply = m_networkAccessManager.put(request, data);
+
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Updating book");
+
+                reply->deleteLater();
+            });
 }
 
 void BookStorageAccess::changeBookCover(const QString& authToken,
                                         const QUuid& uuid, const QString& path)
 {
-    m_bookCoverMultiPart.reset(
-        new QHttpMultiPart(QHttpMultiPart::FormDataType));
+    auto bookCover = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     QString stringUuid = uuid.toString(QUuid::WithoutBraces);
 
     QFile* file = new QFile(QUrl(path).path());
@@ -95,11 +105,13 @@ void BookStorageAccess::changeBookCover(const QString& authToken,
     {
         qDebug() << QString("Could not open cover for book with uuid: %1")
                         .arg(stringUuid);
+
+        bookCover->deleteLater();
         return;
     }
 
     // Make sure the file is released when the request finished.
-    file->setParent(m_bookCoverMultiPart.get());
+    file->setParent(bookCover);
 
     QHttpPart imagePart;
     imagePart.setBodyDevice(file);
@@ -110,7 +122,7 @@ void BookStorageAccess::changeBookCover(const QString& authToken,
                                  file->fileName() + "\""));
 
 
-    m_bookCoverMultiPart->append(imagePart);
+    bookCover->append(imagePart);
 
 
     QUrl endpoint = data::changeBookCoverEndpoint + "/" + stringUuid;
@@ -119,17 +131,17 @@ void BookStorageAccess::changeBookCover(const QString& authToken,
     // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
-    auto r = m_networkAccessManager.post(request, m_bookCoverMultiPart.get());
-    m_bookCoverUploadReply.reset(r);
-    linkRequestToErrorHandling(m_bookCoverUploadReply.get(), 201);
-
+    auto reply = m_networkAccessManager.post(request, bookCover);
 
     // Make sure to free the data used for uploading the cover.
-    // The m_bookCoverUploadReply is set as the parent for e.g. the file.
-    connect(m_bookCoverUploadReply.get(), &QNetworkReply::finished, this,
-            [this]()
+    connect(reply, &QNetworkReply::finished, this,
+            [this, bookCover]()
             {
-                m_bookDataMultiPart.reset();
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Uploading book cover");
+
+                reply->deleteLater();
+                bookCover->deleteLater();
             });
 }
 
@@ -141,17 +153,25 @@ void BookStorageAccess::deleteBookCover(const QString& authToken,
     auto request = createRequest(endpoint, authToken);
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
-    m_bookCoverDeletionReply.reset(reply);
-    linkRequestToErrorHandling(m_bookCoverDeletionReply.get(), 204);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Deleting book cover");
+
+                reply->deleteLater();
+            });
 }
 
 void BookStorageAccess::getBooksMetaData(const QString& authToken)
 {
     auto request = createRequest(data::booksMetadataGetEndpoint, authToken);
-    m_gettingBooksMetaDataReply.reset(m_networkAccessManager.get(request));
+    auto reply = m_networkAccessManager.get(request);
 
-    connect(m_gettingBooksMetaDataReply.get(), &QNetworkReply::finished, this,
-            &BookStorageAccess::proccessGettingBooksMetaDataResult);
+    connect(reply, &QNetworkReply::finished, this,
+            &BookStorageAccess::processGettingBooksMetaDataResult);
 }
 
 void BookStorageAccess::downloadBook(const QString& authToken,
@@ -162,28 +182,38 @@ void BookStorageAccess::downloadBook(const QString& authToken,
     auto request = createRequest(endpoint, authToken);
 
     auto reply = m_networkAccessManager.get(request);
-    m_bookDataDownloadReply.reset(reply);
 
-    connect(m_bookDataDownloadReply.get(), &QNetworkReply::finished, this,
-            &BookStorageAccess::proccessDownloadBookResult);
 
-    linkRequestToErrorHandling(m_bookDataDownloadReply.get(), 200);
+    // Handle the received books and release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Downloading book data");
+
+                // The book's uuid (server calls it: "guid") is sent as a header
+                QString bookGuid = reply->rawHeader("Guid");
+
+                emit downloadingBookFinished(reply->readAll(), bookGuid);
+                reply->deleteLater();
+            });
 }
 
-void BookStorageAccess::proccessGettingBooksMetaDataResult()
+void BookStorageAccess::processGettingBooksMetaDataResult()
 {
-    auto replyStatus =
-        validateServerReply(200, m_gettingBooksMetaDataReply.get());
+    auto reply = qobject_cast<QNetworkReply*>(sender());
+    auto replyStatus = validateNetworkReply(200, reply, "Getting books");
     if(!replyStatus.success)
     {
         std::vector<QJsonObject> empty;
         emit gettingBooksMetaDataFinished(empty);
+
+        reply->deleteLater();
         return;
     }
 
 
-    auto jsonReply =
-        QJsonDocument::fromJson(m_gettingBooksMetaDataReply->readAll());
+    auto jsonReply = QJsonDocument::fromJson(reply->readAll());
     auto jsonBooks = jsonReply.array();
 
     std::vector<QJsonObject> books;
@@ -193,22 +223,20 @@ void BookStorageAccess::proccessGettingBooksMetaDataResult()
     }
 
     emit gettingBooksMetaDataFinished(books);
-}
-
-void BookStorageAccess::proccessDownloadBookResult()
-{
-    // The book uuid (or as the server calls it "guid") is send as a header
-    QString bookGuid = m_bookDataDownloadReply->rawHeader("Guid");
-
-    emit downloadingBookFinished(m_bookDataDownloadReply->readAll(), bookGuid);
+    reply->deleteLater();
 }
 
 void BookStorageAccess::uploadBookData(const QString& uuid,
                                        const QString& filePath,
                                        const QString& authToken)
 {
-    m_bookDataMultiPart.reset(new QHttpMultiPart(QHttpMultiPart::FormDataType));
-    setupDataMultiPartWithFile(filePath);
+    auto bookData = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    auto success = addFilePartToMultiPart(bookData, filePath);
+    if(!success)
+    {
+        bookData->deleteLater();
+        return;
+    }
 
 
     QUrl endpoint = data::uploadBookDataEndpoint + "/" + uuid;
@@ -217,31 +245,33 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
     // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
-    auto r = m_networkAccessManager.post(request, m_bookDataMultiPart.get());
-    m_bookDataUploadReply.reset(r);
-    linkRequestToErrorHandling(m_bookDataUploadReply.get(), 201);
+    auto reply = m_networkAccessManager.post(request, bookData);
 
 
-    // Make sure to free the data used for uploading the book binary data.
-    // The m_bookDataUploadReply is set as the parent for e.g. the file.
-    connect(m_bookDataUploadReply.get(), &QNetworkReply::finished, this,
-            [this]()
+    // Make sure to free the data used for uploading the book data.
+    connect(reply, &QNetworkReply::finished, this,
+            [this, bookData]()
             {
-                m_bookDataMultiPart.reset();
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Uploading book data");
+
+                reply->deleteLater();
+                bookData->deleteLater();
             });
 }
 
-void BookStorageAccess::setupDataMultiPartWithFile(const QUrl& path)
+bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
+                                               const QUrl& path)
 {
     QFile* file = new QFile(QUrl(path).path());
     if(!file->open(QIODevice::ReadOnly))
     {
         qDebug() << "Could not open book data file";
-        return;
+        return false;
     }
 
     // Make sure the file is released when the request finished.
-    file->setParent(m_bookDataMultiPart.get());
+    file->setParent(bookData);
 
     QHttpPart filePart;
     filePart.setBodyDevice(file);
@@ -252,7 +282,8 @@ void BookStorageAccess::setupDataMultiPartWithFile(const QUrl& path)
                                 file->fileName() + "\""));
 
 
-    m_bookDataMultiPart->append(filePart);
+    bookData->append(filePart);
+    return true;
 }
 
 QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
@@ -272,18 +303,8 @@ QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
     return result;
 }
 
-void BookStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
-                                                   int expectedStatusCode)
-{
-    connect(reply, &QNetworkReply::finished, this,
-            [this, expectedStatusCode, reply]()
-            {
-                validateServerReply(expectedStatusCode, reply);
-            });
-}
-
-ServerReplyStatus BookStorageAccess::validateServerReply(int expectedStatusCode,
-                                                         QNetworkReply* reply)
+ServerReplyStatus BookStorageAccess::validateNetworkReply(
+    int expectedStatusCode, QNetworkReply* reply, const QString& name)
 {
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -292,13 +313,12 @@ ServerReplyStatus BookStorageAccess::validateServerReply(int expectedStatusCode,
     if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
     {
-        auto errorMessage = reply->readAll();
-        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
-                          .arg(reply->errorString(), errorMessage);
+        auto content = reply->readAll();
+        qWarning() << name + " failed: " + content;
 
         return ServerReplyStatus {
             .success = false,
-            .errorMessage = errorMessage,
+            .errorMessage = content,
         };
     }
 

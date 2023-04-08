@@ -9,9 +9,9 @@ namespace infrastructure::persistence
 void UserStorageAccess::getUser(const QString& authToken)
 {
     auto request = createRequest(data::userGetEndpoint, authToken);
-    m_getUserReply.reset(m_networkAccessManager.get(request));
+    auto reply = m_networkAccessManager.get(request);
 
-    connect(m_getUserReply.get(), &QNetworkReply::finished, this,
+    connect(reply, &QNetworkReply::finished, this,
             &UserStorageAccess::proccessGetUserResult);
 }
 
@@ -26,9 +26,17 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
                                                           jsonData.toUtf8());
-    m_firstNameUpdateReply.reset(reply);
 
-    linkRequestToErrorHandling(m_firstNameUpdateReply.get(), 200);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Changing firstname");
+
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::changeLastName(const QString& authToken,
@@ -42,9 +50,17 @@ void UserStorageAccess::changeLastName(const QString& authToken,
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
                                                           jsonData.toUtf8());
-    m_lastNameUpdateReply.reset(reply);
 
-    linkRequestToErrorHandling(m_lastNameUpdateReply.get(), 200);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Changing lastname");
+
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::changeEmail(const QString& authToken,
@@ -69,9 +85,17 @@ void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
     auto request = createRequest(endPoint, authToken);
 
     auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
-    m_tagDeletionReply.reset(reply);
 
-    linkRequestToErrorHandling(m_tagDeletionReply.get(), 204);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(204, reply, "Deleting tag");
+
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::renameTag(const QString& authToken,
@@ -83,26 +107,32 @@ void UserStorageAccess::renameTag(const QString& authToken,
     QJsonDocument jsonDoc(bookForUpdate);
     QByteArray jsonData = jsonDoc.toJson(QJsonDocument::Compact);
 
-    auto result =
+    auto reply =
         m_networkAccessManager.sendCustomRequest(request, "PUT", jsonData);
-    m_tagRenameReply.reset(result);
 
-    linkRequestToErrorHandling(m_tagRenameReply.get(), 201);
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(201, reply, "Renaming tag");
+
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::proccessGetUserResult()
 {
-    int expectedStatusCode = 200;
-    auto replyStatus =
-        validateServerReply(expectedStatusCode, m_getUserReply.get());
-
-    if(!replyStatus.success)
+    auto reply = qobject_cast<QNetworkReply*>(sender());
+    auto status = validateNetworkReply(200, reply, "Getting User");
+    if(!status.success)
     {
         emit gettingUserFailed();
         return;
     }
 
-    auto jsonDoc = QJsonDocument::fromJson(m_getUserReply->readAll());
+    auto jsonDoc = QJsonDocument::fromJson(reply->readAll());
     auto jsonObj = jsonDoc.object();
 
     auto firstName = jsonObj["firstName"].toString();
@@ -111,16 +141,9 @@ void UserStorageAccess::proccessGetUserResult()
     auto tags = jsonObj["tags"].toArray();
 
     emit userReady(firstName, lastName, email, tags);
-}
 
-void UserStorageAccess::linkRequestToErrorHandling(QNetworkReply* reply,
-                                                   int statusCode)
-{
-    connect(reply, &QNetworkReply::finished, this,
-            [this, statusCode, reply]()
-            {
-                validateServerReply(statusCode, reply);
-            });
+    // Make sure to release the reply's memory
+    reply->deleteLater();
 }
 
 QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
@@ -140,22 +163,22 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     return result;
 }
 
-ServerReplyStatus UserStorageAccess::validateServerReply(int expectedStatusCode,
-                                                         QNetworkReply* reply)
+ServerReplyStatus UserStorageAccess::validateNetworkReply(
+    int expectedStatusCode, QNetworkReply* reply, const QString& name)
 {
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-    auto replyHasError = reply->error() != QNetworkReply::NoError;
-    if(replyHasError || expectedStatusCode != statusCode)
+
+    if(reply->error() != QNetworkReply::NoError ||
+       expectedStatusCode != statusCode)
     {
-        auto errorMessage = reply->readAll();
-        qWarning() << QString("Authentication error: %1 \nServer replied: %2")
-                          .arg(reply->errorString(), errorMessage);
+        auto content = reply->readAll();
+        qWarning() << name + " failed: " + content;
 
         return ServerReplyStatus {
             .success = false,
-            .errorMessage = errorMessage,
+            .errorMessage = content,
         };
     }
 
