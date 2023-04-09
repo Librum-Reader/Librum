@@ -38,7 +38,7 @@ private:
     QString getSystemRelativePath(const QString& qPath) const;
     QString getTitleFromBookPath(const QString& path) const;
     QMimeType getMimeType(const QString& filePath);
-    QString removeTypeFromMimeString(const QString& mimeString) const;
+    QString getFileTypeFromPath(const QString& mimeString) const;
     QString removeSuffixFromMimeString(const QString& mimeString) const;
 
     std::unique_ptr<Okular::Document> m_document;

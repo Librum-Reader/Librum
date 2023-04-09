@@ -104,9 +104,9 @@ QString BookMetadataHelper::getCreationDate() const
 QString BookMetadataHelper::getFormat() const
 {
     const QString& format =
-        m_document->documentInfo().get(DocumentInfo::MimeType);
+        m_document->documentInfo().get(DocumentInfo::FilePath);
 
-    auto formatWithoutType = removeTypeFromMimeString(format);
+    auto formatWithoutType = getFileTypeFromPath(format);
     auto result = removeSuffixFromMimeString(formatWithoutType);
 
     return result;
@@ -199,16 +199,15 @@ QString BookMetadataHelper::getTitleFromBookPath(const QString& path) const
     return result;
 }
 
-QString BookMetadataHelper::removeTypeFromMimeString(
-    const QString& mimeString) const
+QString BookMetadataHelper::getFileTypeFromPath(const QString& path) const
 {
-    // The type in "text/plain" is "text/", which can be removed by
-    // cutting everything off before the '/'.
-    int lastPositionOfSlash = mimeString.lastIndexOf("/");
-    if(lastPositionOfSlash == -1)
-        return mimeString;
+    // We want to get the file type from the path, so from: some/path.pdf
+    // we want "pdf". We do this by taking everthing after the last dot.
+    int lastPositionOfDot = path.lastIndexOf(".");
+    if(lastPositionOfDot == -1)
+        return "pdf";  // The default is pdf
 
-    auto result = mimeString.mid(lastPositionOfSlash + 1);
+    auto result = path.mid(lastPositionOfDot + 1);
     return result;
 }
 
