@@ -57,8 +57,10 @@ public:
 
     const QDateTime& getLastOpened() const;
     void setLastOpened(const QDateTime& newLastOpened);
+    void updateLastOpened();
 
     const QDateTime& getLastModified() const;
+    void setLastModified(const QDateTime& newLastModified);
     void updateLastModified();
 
     const QString& getFilePath() const;
@@ -72,6 +74,7 @@ public:
 
     const QDateTime& getCoverLastModified() const;
     void updateCoverLastModified();
+    void setCoverLastModified(const QDateTime& newTime);
 
     bool getDownloaded() const;
     void setDownloaded(bool newDownloaded);

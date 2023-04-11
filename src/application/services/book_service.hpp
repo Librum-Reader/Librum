@@ -54,6 +54,9 @@ private slots:
     void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
     void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
+    
+    void refreshUIWithNewCover(const QUuid& uuid, const QString& path);
+    void refreshUIForBook(const QUuid& uuid);
 
 private:
     auto getBookPosition(const QUuid& uuid);
@@ -63,15 +66,6 @@ private:
         std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(
         const std::vector<domain::entities::Book>& remoteBooks);
-    void mergeBooks(domain::entities::Book& original,
-                    const domain::entities::Book& toMerge);
-    void updateUIWithNewCover(const QUuid& uuid, const QString& path);
-    utility::MergeStatus mergeCurrentPage(domain::entities::Book& local,
-                                          const domain::entities::Book& remote);
-    utility::MergeStatus mergeBookData(domain::entities::Book& local,
-                                       const domain::entities::Book& remote);
-    utility::MergeStatus mergeBookCover(domain::entities::Book& local,
-                                        const domain::entities::Book& remote);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;

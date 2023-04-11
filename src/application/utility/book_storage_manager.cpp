@@ -176,19 +176,14 @@ void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
     m_bookStorageGateway->updateBook(m_authenticationToken, book);
 }
 
-void BookStorageManager::changeBookCover(const Book& book)
+void BookStorageManager::updateBookCoverRemotely(const QUuid& uuid,
+                                                 bool hasCover)
 {
-    if(book.hasCover())
-    {
-        auto pathToCover = getBookCoverPath(book.getUuid());
-        m_bookStorageGateway->changeBookCover(m_authenticationToken,
-                                              book.getUuid(), pathToCover);
-    }
+    if(hasCover)
+        m_bookStorageGateway->changeBookCover(m_authenticationToken, uuid,
+                                              getBookCoverPath(uuid));
     else
-    {
-        m_bookStorageGateway->deleteBookCover(m_authenticationToken,
-                                              book.getUuid());
-    }
+        m_bookStorageGateway->deleteBookCover(m_authenticationToken, uuid);
 }
 
 std::optional<QString> BookStorageManager::saveBookCoverToFile(

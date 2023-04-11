@@ -26,10 +26,11 @@ struct BookMetaData
 
     bool operator==(const BookMetaData& rhs) const
     {
-        // Handle case if both "lastOpened" are invalid
+        // 'lastOpened' is equals if both are invalid or the same
         bool lastOpenedIsSame =
             (!lastOpened.isValid() && !rhs.lastOpened.isValid()) ||
             lastOpened.toSecsSinceEpoch() == rhs.lastOpened.toSecsSinceEpoch();
+
 
         return title == rhs.title && authors == rhs.authors &&
                creator == rhs.creator && creationDate == rhs.creationDate &&
@@ -42,7 +43,7 @@ struct BookMetaData
                    rhs.lastModified.toSecsSinceEpoch() &&
                coverLastModified.toSecsSinceEpoch() ==
                    rhs.coverLastModified.toSecsSinceEpoch() &&
-               hasCover == rhs.hasCover;
+               hasCover == rhs.hasCover && coverPath == coverPath;
     }
 };
 

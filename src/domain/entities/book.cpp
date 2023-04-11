@@ -97,6 +97,11 @@ void Book::updateCoverLastModified()
     m_metaData.coverLastModified = QDateTime::currentDateTimeUtc();
 }
 
+void Book::setCoverLastModified(const QDateTime& newTime)
+{
+    m_metaData.coverLastModified = newTime;
+}
+
 const QDateTime& Book::getLastOpened() const
 {
     return m_metaData.lastOpened;
@@ -105,6 +110,11 @@ const QDateTime& Book::getLastOpened() const
 void Book::setLastOpened(const QDateTime& newLastOpened)
 {
     m_metaData.lastOpened = newLastOpened;
+}
+
+void Book::updateLastOpened()
+{
+    m_metaData.lastOpened = QDateTime::currentDateTimeUtc();
 }
 
 const QDateTime& Book::getAddedToLibrary() const
@@ -120,6 +130,11 @@ void Book::setAddedToLibrary(const QDateTime& newAddedToLibrary)
 const QDateTime& Book::getLastModified() const
 {
     return m_metaData.lastModified;
+}
+
+void Book::setLastModified(const QDateTime& newLastModified)
+{
+    m_metaData.lastModified = newLastModified;
 }
 
 void Book::updateLastModified()

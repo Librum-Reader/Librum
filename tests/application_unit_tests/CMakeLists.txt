@@ -22,6 +22,7 @@ add_executable(application_unit_tests
                     utility/book_storage_manager_tests.cpp
                     utility/test_enum.hpp
                     utility/enum_utils_tests.cpp
+                    utility/book_merger_tests.cpp
     )
 
 target_link_libraries(application_unit_tests

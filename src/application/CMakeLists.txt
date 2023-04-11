@@ -49,6 +49,8 @@ set(application_SRC
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp
+    utility/book_merger.cpp
+    utility/book_merger.hpp
 )
 
 

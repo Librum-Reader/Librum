@@ -43,7 +43,8 @@ public:
     MOCK_METHOD(void, updateBook, (const Book&), (override));
     MOCK_METHOD(void, updateBookLocally, (const Book&), (override));
     MOCK_METHOD(void, updateBookRemotely, (const Book&), (override));
-    MOCK_METHOD(void, changeBookCover, (const Book&), (override));
+    MOCK_METHOD(void, updateBookCoverRemotely, (const QUuid&, bool),
+                (override));
     MOCK_METHOD(std::optional<QString>, saveBookCoverToFile,
                 (const QUuid&, const QPixmap&), (override));
     MOCK_METHOD(bool, deleteBookCoverLocally, (const QUuid&), (override));

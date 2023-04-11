@@ -6,11 +6,11 @@
 #include <QTime>
 #include <ranges>
 #include "book_for_deletion.hpp"
+#include "book_merger.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
 
 using namespace domain::entities;
-using application::utility::MergeStatus;
 using std::size_t;
 
 namespace application::services
@@ -121,9 +121,7 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     m_bookStorageManager->uninstallBook(uuid);
     book->setDownloaded(false);
 
-    int index = getBookIndex(uuid);
-    emit dataChanged(index);
-
+    refreshUIForBook(uuid);
     return BookOperationStatus::Success;
 }
 
@@ -164,11 +162,9 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
         book->updateLastModified();
     }
 
-    int index = getBookIndex(newBook.getUuid());
-    emit dataChanged(index);
-
     m_bookStorageManager->updateBook(*book);
 
+    refreshUIForBook(newBook.getUuid());
     return BookOperationStatus::Success;
 }
 
@@ -184,8 +180,6 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    int index = getBookIndex(uuid);
-
     if(filePath.isEmpty())
     {
         // Delete the book cover
@@ -195,7 +189,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         book->setHasCover(false);
         book->updateCoverLastModified();
 
-        emit dataChanged(index);
+        refreshUIForBook(uuid);
     }
     else
     {
@@ -228,11 +222,12 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         book->setHasCover(true);
         book->updateCoverLastModified();
 
-        updateUIWithNewCover(uuid, path.value());
+        refreshUIWithNewCover(uuid, path.value());
     }
 
     m_bookStorageManager->updateBook(*book);
-    m_bookStorageManager->changeBookCover(*book);
+    m_bookStorageManager->updateBookCoverRemotely(book->getUuid(),
+                                                  book->hasCover());
     return BookOperationStatus::Success;
 }
 
@@ -405,12 +400,10 @@ bool BookService::refreshLastOpenedDateOfBook(const QUuid& uuid)
     if(book == nullptr)
         return false;
 
-    book->setLastOpened(QDateTime::currentDateTimeUtc());
+    book->updateLastOpened();
     m_bookStorageManager->updateBook(*book);
 
-    auto index = getBookIndex(uuid);
-    emit dataChanged(index);
-
+    refreshUIForBook(uuid);
     return true;
 }
 
@@ -425,8 +418,7 @@ void BookService::processDownloadedBook(const QUuid& uuid,
     // The book meta-data file does not exist locally, so create it
     m_bookStorageManager->addBookLocally(*book);
 
-    int index = getBookIndex(uuid);
-    emit dataChanged(index);
+    refreshUIForBook(uuid);
 }
 
 void BookService::processDownloadedBookCover(const QUuid& uuid,
@@ -438,7 +430,7 @@ void BookService::processDownloadedBookCover(const QUuid& uuid,
     book->setHasCover(true);
     m_bookStorageManager->updateBookLocally(*book);
 
-    updateUIWithNewCover(uuid, filePath);
+    refreshUIWithNewCover(uuid, filePath);
 }
 
 void BookService::setupUserData(const QString& token, const QString& email)
@@ -526,7 +518,13 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
         auto* localBook = getBook(remoteBook.getUuid());
         if(localBook != nullptr)
         {
-            mergeBooks(*localBook, remoteBook);
+            utility::BookMerger bookMerger;
+            connect(&bookMerger, &utility::BookMerger::localBookCoverDeleted,
+                    this, &BookService::refreshUIWithNewCover);
+            connect(&bookMerger, &utility::BookMerger::bookDataChanged, this,
+                    &BookService::refreshUIForBook);
+
+            bookMerger.mergeBooks(*localBook, remoteBook, m_bookStorageManager);
             continue;
         }
 
@@ -563,126 +561,27 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
     }
 }
 
-void BookService::mergeBooks(Book& localBook, const Book& remoteBook)
-{
-    auto lastOpenedStatus = mergeCurrentPage(localBook, remoteBook);
-    auto lastModifiedStatus = mergeBookData(localBook, remoteBook);
-    auto coverLastModifiedStatus = mergeBookCover(localBook, remoteBook);
-
-
-    if(lastOpenedStatus.localLibraryOutdated ||
-       lastModifiedStatus.localLibraryOutdated ||
-       coverLastModifiedStatus.localLibraryOutdated)
-    {
-        m_bookStorageManager->updateBookLocally(localBook);
-
-        // Update UI
-        auto index = getBookIndex(localBook.getUuid());
-        emit dataChanged(index);
-    }
-
-    if(lastOpenedStatus.remoteLibraryOutdated ||
-       lastModifiedStatus.remoteLibraryOutdated ||
-       coverLastModifiedStatus.remoteLibraryOutdated)
-    {
-        m_bookStorageManager->updateBookRemotely(localBook);
-    }
-}
-
-MergeStatus BookService::mergeCurrentPage(Book& localBook,
-                                          const Book& remoteBook)
-{
-    // Take the current time in seconds, so that there are no ms mismatches
-    auto localLastOpened = localBook.getLastOpened().toSecsSinceEpoch();
-    auto remoteLastOpened = remoteBook.getLastOpened().toSecsSinceEpoch();
-
-    // There are no "current page" differences between the local and remote
-    // book
-    if(remoteLastOpened == localLastOpened)
-        return {};
-
-    if(remoteLastOpened > localLastOpened)
-    {
-        localBook.setCurrentPage(remoteBook.getCurrentPage());
-        localBook.setLastOpened(remoteBook.getLastOpened());
-
-        return MergeStatus { .localLibraryOutdated = true };
-    }
-
-    return MergeStatus { .remoteLibraryOutdated = true };
-}
-
-MergeStatus BookService::mergeBookData(Book& localBook, const Book& remoteBook)
-{
-    // Take the current time in seconds, so that there are no ms mismatches
-    auto localLastModified = localBook.getLastModified().toSecsSinceEpoch();
-    auto remoteLastModified = remoteBook.getLastModified().toSecsSinceEpoch();
-
-    // There are no data differences between the local and remote book
-    if(remoteLastModified == localLastModified)
-        return {};
-
-    if(remoteLastModified > localLastModified)
-    {
-        // Save the file path since its overwritten during the update
-        // operation
-        auto localBookFilePath = localBook.getFilePath();
-        localBook.update(remoteBook);
-        localBook.setFilePath(localBookFilePath);
-
-        return MergeStatus { .localLibraryOutdated = true };
-    }
-
-    return MergeStatus { .remoteLibraryOutdated = true };
-}
-
-MergeStatus BookService::mergeBookCover(Book& localBook, const Book& remoteBook)
-{
-    auto localCoverLastModified =
-        localBook.getCoverLastModified().toSecsSinceEpoch();
-    auto remoteCoverLastModified =
-        remoteBook.getCoverLastModified().toSecsSinceEpoch();
-
-
-    // There are no differences between the local and remote cover
-    if(remoteCoverLastModified == localCoverLastModified)
-        return {};
-
-    if(remoteCoverLastModified > localCoverLastModified)
-    {
-        if(remoteBook.hasCover())
-        {
-            m_bookStorageManager->getCoverForBook(remoteBook.getUuid());
-        }
-        else
-        {
-            m_bookStorageManager->deleteBookCoverLocally(remoteBook.getUuid());
-
-            localBook.setHasCover(false);
-            localBook.updateCoverLastModified();
-            updateUIWithNewCover(localBook.getUuid(), "");
-        }
-
-        return MergeStatus { .localLibraryOutdated = true };
-    }
-
-    m_bookStorageManager->changeBookCover(localBook);
-    return MergeStatus { .remoteLibraryOutdated = true };
-}
-
-void BookService::updateUIWithNewCover(const QUuid& uuid, const QString& path)
+void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
 {
     auto book = getBook(uuid);
     auto index = getBookIndex(uuid);
 
-    // To properly update the UI, we need to invalidate the current image
-    // and then set the new one.
+    // To properly update the UI, we need to invalidate the current image first
+    // and then set the new one, else Qt doesn't see the changes.
     // We do this by setting the path to an empty string first and then to
     // the actual path. We emit 'dataChanged' in between to update the UI.
     book->setCoverPath("");
     emit dataChanged(index);
 
     book->setCoverPath(path);
+    emit dataChanged(index);
+}
+
+void BookService::refreshUIForBook(const QUuid& uuid)
+{
+    // The dataChanged signal invalidates the book model, which then
+    // causes the UI to refresh and show the new changes.
+    int index = getBookIndex(uuid);
     emit dataChanged(index);
 }
 
