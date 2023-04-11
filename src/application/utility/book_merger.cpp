@@ -15,7 +15,6 @@ void BookMerger::mergeBooks(Book& localBook, const Book& remoteBook,
     auto coverLastModifiedStatus = mergeBookCover(localBook, remoteBook);
 
     // Update the local and remote library according to the merge results.
-    // Update the local library when 'localLibraryOutdated' == true, vice versa.
     if(lastOpenedStatus.localLibraryOutdated ||
        lastModifiedStatus.localLibraryOutdated ||
        coverLastModifiedStatus.localLibraryOutdated)
@@ -129,7 +128,7 @@ void BookMerger::storeChangesToTheCover(CoverChanges coverChanges,
 
     if(coverChanges.bookHasCover)
     {
-        bookStorageManager->getCoverForBook(coverChanges.bookUuid);
+        bookStorageManager->downloadBookCover(coverChanges.bookUuid);
         return;
     }
 

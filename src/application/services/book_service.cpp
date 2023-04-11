@@ -58,8 +58,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     m_books.emplace_back(filePath, bookMetaData.value());
     emit bookInsertionEnded();
 
-    // Generate cover after creating book to avoid adding cover to non-existent
-    // book
+    // Load the cover after creating book to avoid adding to a non-existent book
     m_bookMetadataHelper->loadCover();
 
     const Book& bookToStore = m_books.at(m_books.size() - 1);
@@ -163,7 +162,6 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     }
 
     m_bookStorageManager->updateBook(*book);
-
     refreshUIForBook(newBook.getUuid());
     return BookOperationStatus::Success;
 }
@@ -182,53 +180,62 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
 
     if(filePath.isEmpty())
     {
-        // Delete the book cover
-        m_bookStorageManager->deleteBookCoverLocally(uuid);
-
-        book->setCoverPath("");
-        book->setHasCover(false);
-        book->updateCoverLastModified();
-
-        refreshUIForBook(uuid);
+        deleteBookCover(*book);
     }
     else
     {
-        // Set new book cover
         auto absoluteFilePath = QUrl(filePath).path();
-        QPixmap newCover(absoluteFilePath);
-        if(newCover.isNull())
-        {
-            qWarning() << QString(
-                              "Failed changing cover for book with uuid: %1."
-                              "Can't open new image at: %2.")
-                              .arg(uuid.toString(), absoluteFilePath);
-            return BookOperationStatus::OperationFailed;
-        }
-
-        newCover =
-            newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
-                            Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-        auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
-        if(!path.has_value())
-        {
-            qWarning() << QString(
-                              "Failed changing cover for book with uuid: %1."
-                              "Saving new image failed.")
-                              .arg(uuid.toString(), absoluteFilePath);
-            return BookOperationStatus::OperationFailed;
-        }
-
-        book->setHasCover(true);
-        book->updateCoverLastModified();
-
-        refreshUIWithNewCover(uuid, path.value());
+        auto success = setNewBookCover(*book, absoluteFilePath);
+        if(!success)
+            return BookOperationStatus::OpeningBookFailed;
     }
 
     m_bookStorageManager->updateBook(*book);
     m_bookStorageManager->updateBookCoverRemotely(book->getUuid(),
                                                   book->hasCover());
     return BookOperationStatus::Success;
+}
+
+void BookService::deleteBookCover(Book& book)
+{
+    m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
+
+    book.setCoverPath("");
+    book.setHasCover(false);
+    book.updateCoverLastModified();
+
+    refreshUIForBook(book.getUuid());
+}
+
+bool BookService::setNewBookCover(Book& book, QString filePath)
+{
+    auto uuid = book.getUuid();
+    QPixmap newCover(filePath);
+    if(newCover.isNull())
+    {
+        qWarning() << QString("Failed changing cover for book with uuid: %1."
+                              "Can't open new image at: %2.")
+                          .arg(uuid.toString(), filePath);
+        return false;
+    }
+
+    newCover = newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
+                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
+    if(!path.has_value())
+    {
+        qWarning() << QString("Failed changing cover for book with uuid: %1."
+                              "Saving new image failed.")
+                          .arg(uuid.toString(), filePath);
+        return false;
+    }
+
+    book.setHasCover(true);
+    book.updateCoverLastModified();
+
+    refreshUIWithNewCover(uuid, path.value());
+    return true;
 }
 
 BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
@@ -448,7 +455,7 @@ void BookService::loadLocalBooks()
     auto books = m_bookStorageManager->loadLocalBooks();
     for(auto book : books)
     {
-        checkIfBookFileStillExists(book);
+        uninstallBookIfTheBookFileIsInvalid(book);
 
         emit bookInsertionStarted(m_books.size());
         m_books.emplace_back(book);
@@ -456,16 +463,18 @@ void BookService::loadLocalBooks()
     }
 }
 
-void BookService::checkIfBookFileStillExists(Book& book)
+void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
 {
-    // The file might have been moved or deleted from the user's filesystem
+    // The file might have been moved or deleted from the user's filesystem,
+    // from the last time the application was used. This would mean that the
+    // underlying book file would be invalid (since it does not exist anymore).
+    // If this happens, unsinstall the book, so that the user can redownload it
+    // from the server.
     QFile bookFile(QUrl(book.getFilePath()).path());
     if(!bookFile.exists())
     {
-        // Delete the local book so the user can re-download it from the server
         book.setFilePath("");
         book.setDownloaded(false);
-        m_bookStorageManager->deleteBookLocally(book.getUuid());
     }
 }
 
@@ -528,19 +537,15 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
             continue;
         }
 
-
-        // Unset cover path, since it is set by receiving slot
-        if(remoteBook.hasCover())
-            remoteBook.setCoverPath("");
-
         // Add the remote book to the local library if it does not exist
         emit bookInsertionStarted(m_books.size());
+        remoteBook.setCoverPath("");  // Path will be set after cover download
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
 
         // Get the cover for remote books which don't yet exist locally
         if(remoteBook.hasCover())
-            m_bookStorageManager->getCoverForBook(remoteBook.getUuid());
+            m_bookStorageManager->downloadBookCover(remoteBook.getUuid());
     }
 }
 

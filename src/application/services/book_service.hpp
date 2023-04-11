@@ -6,7 +6,6 @@
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_manager.hpp"
-#include "merge_status.hpp"
 
 namespace application::services
 {
@@ -54,18 +53,20 @@ private slots:
     void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
     void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
-    
+
     void refreshUIWithNewCover(const QUuid& uuid, const QString& path);
     void refreshUIForBook(const QUuid& uuid);
 
 private:
     auto getBookPosition(const QUuid& uuid);
     void loadLocalBooks();
-    void checkIfBookFileStillExists(domain::entities::Book& book);
+    void uninstallBookIfTheBookFileIsInvalid(domain::entities::Book& book);
     void mergeRemoteLibraryIntoLocalLibrary(
         std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(
         const std::vector<domain::entities::Book>& remoteBooks);
+    void deleteBookCover(domain::entities::Book& book);
+    bool setNewBookCover(domain::entities::Book& book, QString filePath);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;

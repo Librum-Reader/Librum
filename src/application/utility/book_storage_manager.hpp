@@ -26,7 +26,7 @@ public:
     std::optional<QString> saveBookCoverToFile(const QUuid& uuid,
                                                const QPixmap& cover) override;
     bool deleteBookCoverLocally(const QUuid& uuid) override;
-    void getCoverForBook(const QUuid& uuid) override;
+    void downloadBookCover(const QUuid& uuid) override;
     std::vector<domain::entities::Book> loadLocalBooks() override;
     void loadRemoteBooks() override;
 

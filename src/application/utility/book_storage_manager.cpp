@@ -208,7 +208,7 @@ bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
     return success;
 }
 
-void BookStorageManager::getCoverForBook(const QUuid& uuid)
+void BookStorageManager::downloadBookCover(const QUuid& uuid)
 {
     m_bookStorageGateway->getCoverForBook(m_authenticationToken, uuid);
 }

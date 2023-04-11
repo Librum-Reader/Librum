@@ -35,7 +35,7 @@ public:
     MOCK_METHOD(std::optional<QString>, saveBookCoverToFile,
                 (const QUuid&, const QPixmap&), (override));
     MOCK_METHOD(bool, deleteBookCoverLocally, (const QUuid&), (override));
-    MOCK_METHOD(void, getCoverForBook, (const QUuid&), (override));
+    MOCK_METHOD(void, downloadBookCover, (const QUuid&), (override));
     MOCK_METHOD(std::vector<Book>, loadLocalBooks, (), (override));
     MOCK_METHOD(void, loadRemoteBooks, (), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),
@@ -87,7 +87,7 @@ TEST_F(ABookMerger, SucceedsMergingNothingWhenBooksAreEqual)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(0);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -109,7 +109,7 @@ TEST_F(ABookMerger, SucceedsMergingCurrentPageFromRemoteIntoLocal)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(1);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(0);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -135,7 +135,7 @@ TEST_F(ABookMerger, SucceedsMergingCurrentPageFromLocalIntoRemote)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(1);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -158,7 +158,7 @@ TEST_F(ABookMerger, SucceedsMergingBookDataFromRemoteIntoLocal)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(1);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(0);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -184,7 +184,7 @@ TEST_F(ABookMerger, SucceedsMergingBookDataFromLocalIntoRemote)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(1);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -204,7 +204,7 @@ TEST_F(ABookMerger, SucceedsMergingNewBookCoverFromRemoteIntoLocal)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(1);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(0);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(1);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -231,7 +231,7 @@ TEST_F(ABookMerger, SucceedsMergingDeletedBookCoverFromRemoteIntoLocal)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(1);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(0);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(1);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(0);
 
@@ -256,7 +256,7 @@ TEST_F(ABookMerger, SucceedsMergingNewBookCoverFromLocalIntoRemote)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(1);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(1);
 
@@ -278,7 +278,7 @@ TEST_F(ABookMerger, SucceedsMergingDeletedBookCoverFromLocalIntoRemote)
     // Expect
     EXPECT_CALL(bookStorageManagerMock, updateBookLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookRemotely).Times(1);
-    EXPECT_CALL(bookStorageManagerMock, getCoverForBook).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookCover).Times(0);
     EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally).Times(0);
     EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely).Times(1);
 
