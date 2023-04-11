@@ -12,12 +12,19 @@ BookStorageManager::BookStorageManager(
     m_bookStorageGateway(bookStorageGateway),
     m_downloadedBooksTracker(downloadedBooksTracker)
 {
+    // Loading books
     connect(m_bookStorageGateway,
             &IBookStorageGateway::gettingBooksMetaDataFinished, this,
             &BookStorageManager::processBookMetadata);
 
+    // Save downloaded book
     connect(m_bookStorageGateway, &IBookStorageGateway::downloadingBookFinished,
             this, &BookStorageManager::saveDownloadedBookToFile);
+
+    // Save book cover
+    connect(m_bookStorageGateway,
+            &IBookStorageGateway::downloadingBookCoverFinished, this,
+            &BookStorageManager::saveDownloadedCoverToFile);
 }
 
 void BookStorageManager::setUserData(const QString& email,
@@ -34,21 +41,44 @@ void BookStorageManager::clearUserData()
 }
 
 void BookStorageManager::saveDownloadedBookToFile(const QByteArray& data,
-                                                  const QUuid& uuid)
+                                                  const QUuid& uuid,
+                                                  const QString& format)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
-    QString fileName = uuid.toString(QUuid::WithoutBraces) + ".pdf";
+    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
     auto destination = QUrl(destDir.filePath(fileName)).path();
 
     QFile file(destination);
     if(!file.open(QIODevice::WriteOnly))
     {
-        qDebug() << "Could not open test file!";
+        qDebug() << "Could not open new book file!";
         return;
     }
 
     file.write(data);
     emit finishedDownloadingBook(uuid, destination);
+}
+
+void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
+                                                   const QUuid& uuid)
+{
+    auto destDir = m_downloadedBooksTracker->getLibraryDir();
+    QString fileName = getBookCoverPath(uuid);
+    auto destination = QUrl(destDir.filePath(fileName)).path();
+
+    QFile file(destination);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        qDebug() << "Could not open new cover file!";
+        return;
+    }
+
+    file.write(data);
+
+    // Manually close to make sure the data is written to file before continuing
+    file.close();
+
+    emit finishedDownloadingBookCover(uuid, destination);
 }
 
 void BookStorageManager::processBookMetadata(std::vector<Book>& books)
@@ -148,8 +178,6 @@ void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
 
 void BookStorageManager::changeBookCover(const Book& book)
 {
-    updateBook(book);
-
     if(book.hasCover())
     {
         auto pathToCover = getBookCoverPath(book.getUuid());
@@ -183,6 +211,11 @@ bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
     auto success = file.remove();
 
     return success;
+}
+
+void BookStorageManager::getCoverForBook(const QUuid& uuid)
+{
+    m_bookStorageGateway->getCoverForBook(m_authenticationToken, uuid);
 }
 
 std::vector<Book> BookStorageManager::loadLocalBooks()

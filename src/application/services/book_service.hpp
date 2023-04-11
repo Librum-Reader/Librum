@@ -51,23 +51,27 @@ public slots:
 
 private slots:
     void processBookCover(const QPixmap* pixmap);
-    void updateLibrary(const std::vector<domain::entities::Book>& books);
+    void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
+    void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
 
 private:
     auto getBookPosition(const QUuid& uuid);
     void loadLocalBooks();
     void checkIfBookFileStillExists(domain::entities::Book& book);
     void mergeRemoteLibraryIntoLocalLibrary(
-        const std::vector<domain::entities::Book>& remoteBooks);
+        std::vector<domain::entities::Book>& remoteBooks);
     void mergeLocalLibraryIntoRemoteLibrary(
         const std::vector<domain::entities::Book>& remoteBooks);
     void mergeBooks(domain::entities::Book& original,
                     const domain::entities::Book& toMerge);
-    utility::MergeStatus mergeCurrentPage(domain::entities::Book& original,
-                                          const domain::entities::Book& mergee);
-    utility::MergeStatus mergeBookData(domain::entities::Book& original,
-                                       const domain::entities::Book& mergee);
+    void updateUIWithNewCover(const QUuid& uuid, const QString& path);
+    utility::MergeStatus mergeCurrentPage(domain::entities::Book& local,
+                                          const domain::entities::Book& remote);
+    utility::MergeStatus mergeBookData(domain::entities::Book& local,
+                                       const domain::entities::Book& remote);
+    utility::MergeStatus mergeBookCover(domain::entities::Book& local,
+                                        const domain::entities::Book& remote);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;

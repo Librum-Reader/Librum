@@ -14,12 +14,19 @@ namespace adapters::gateways
 BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
     m_bookStorageAccess(bookStorageAccess)
 {
+    // Loading books
     connect(m_bookStorageAccess,
             &IBookStorageAccess::gettingBooksMetaDataFinished, this,
             &BookStorageGateway::proccessBooksMetadata);
 
+    // Save downloaded book
     connect(m_bookStorageAccess, &IBookStorageAccess::downloadingBookFinished,
             this, &BookStorageGateway::downloadingBookFinished);
+
+    // Save book cover
+    connect(m_bookStorageAccess,
+            &IBookStorageAccess::downloadingBookCoverFinished, this,
+            &BookStorageGateway::downloadingBookCoverFinished);
 }
 
 void BookStorageGateway::createBook(const QString& authToken, const Book& book)
@@ -50,7 +57,7 @@ void BookStorageGateway::updateBook(const QString& authToken, const Book& book)
 void BookStorageGateway::changeBookCover(const QString& authToken,
                                          const QUuid& uuid, const QString& path)
 {
-    m_bookStorageAccess->changeBookCover(authToken, uuid, path);
+    m_bookStorageAccess->uploadBookCover(authToken, uuid, path);
 }
 
 void BookStorageGateway::deleteBookCover(const QString& authToken,
@@ -62,6 +69,12 @@ void BookStorageGateway::deleteBookCover(const QString& authToken,
 void BookStorageGateway::getBooksMetaData(const QString& authToken)
 {
     m_bookStorageAccess->getBooksMetaData(authToken);
+}
+
+void BookStorageGateway::getCoverForBook(const QString& authToken,
+                                         const QUuid& uuid)
+{
+    m_bookStorageAccess->downloadCoverForBook(authToken, uuid);
 }
 
 void BookStorageGateway::downloadBook(const QString& authToken,

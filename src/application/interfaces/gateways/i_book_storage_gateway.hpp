@@ -29,6 +29,8 @@ public:
                                  const QString& path) = 0;
     virtual void deleteBookCover(const QString& authToken,
                                  const QUuid& uuid) = 0;
+    virtual void getCoverForBook(const QString& authToken,
+                                 const QUuid& uuid) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBook(const QString& authToken, const QUuid& uuid) = 0;
 
@@ -38,7 +40,10 @@ signals:
     void updatingBookFinished(bool success, const QString& reason);
     void gettingBooksMetaDataFinished(
         std::vector<domain::entities::Book>& books);
-    void downloadingBookFinished(const QByteArray& data, const QUuid& uuid);
+    void downloadingBookFinished(const QByteArray& data, const QUuid& uuid,
+                                 const QString& format);
+    void downloadingBookCoverFinished(const QByteArray& data,
+                                      const QUuid& uuid);
 };
 
 }  // namespace application

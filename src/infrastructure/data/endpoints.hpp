@@ -17,6 +17,7 @@ inline const QString bookDeletionEndpoint { domain + "/api/book" };
 inline const QString booksMetadataGetEndpoint { domain + "/api/book" };
 inline const QString uploadBookDataEndpoint { domain + "/api/book/bookData" };
 inline const QString downloadBookDataEndpoint { domain + "/api/book/bookData" };
+inline const QString getBookCoverEndpoint { domain + "/api/book/cover" };
 inline const QString changeBookCoverEndpoint { domain + "/api/book/cover" };
 inline const QString deleteBookCoverEndpoint { domain + "/api/book/cover" };
 

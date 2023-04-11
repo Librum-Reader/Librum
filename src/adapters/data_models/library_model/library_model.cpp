@@ -84,7 +84,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
                          Book::dateTimeStringFormat);
         break;
     case CoverRole:
-        return book.hasCover() ? "file://" + book.getCoverPath() : "";
+        return book.hasCover() && !book.getCoverPath().isEmpty()
+                   ? "file://" + book.getCoverPath()
+                   : "";
     case TagsRole:
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
         break;

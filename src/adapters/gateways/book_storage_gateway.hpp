@@ -23,6 +23,7 @@ public:
                          const QString& path) override;
     void deleteBookCover(const QString& authToken, const QUuid& uuid) override;
     void getBooksMetaData(const QString& authToken) override;
+    void getCoverForBook(const QString& authToken, const QUuid& uuid) override;
     void downloadBook(const QString& authToken, const QUuid& uuid) override;
 
 private slots:

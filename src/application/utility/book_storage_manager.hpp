@@ -26,6 +26,7 @@ public:
     std::optional<QString> saveBookCoverToFile(const QUuid& uuid,
                                                const QPixmap& cover) override;
     bool deleteBookCoverLocally(const QUuid& uuid) override;
+    void getCoverForBook(const QUuid& uuid) override;
     std::vector<domain::entities::Book> loadLocalBooks() override;
     void loadRemoteBooks() override;
 
@@ -33,7 +34,9 @@ public:
     void clearUserData() override;
 
 private slots:
-    void saveDownloadedBookToFile(const QByteArray& data, const QUuid& uuid);
+    void saveDownloadedBookToFile(const QByteArray& data, const QUuid& uuid,
+                                  const QString& format);
+    void saveDownloadedCoverToFile(const QByteArray& data, const QUuid& uuid);
     void processBookMetadata(std::vector<domain::entities::Book>& books);
 
 private:

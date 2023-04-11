@@ -39,7 +39,7 @@ void BookStorageAccess::createBook(const QString& authToken,
                                jsonBook["filePath"].toString(), authToken);
 
                 // Send the book's cover to the server
-                changeBookCover(authToken, jsonBook["guid"].toString(),
+                uploadBookCover(authToken, jsonBook["guid"].toString(),
                                 jsonBook["coverPath"].toString());
 
                 // Make sure to release the reply's memory
@@ -94,7 +94,7 @@ void BookStorageAccess::updateBook(const QString& authToken,
             });
 }
 
-void BookStorageAccess::changeBookCover(const QString& authToken,
+void BookStorageAccess::uploadBookCover(const QString& authToken,
                                         const QUuid& uuid, const QString& path)
 {
     auto bookCover = new QHttpMultiPart(QHttpMultiPart::FormDataType);
@@ -174,6 +174,30 @@ void BookStorageAccess::getBooksMetaData(const QString& authToken)
             &BookStorageAccess::processGettingBooksMetaDataResult);
 }
 
+void BookStorageAccess::downloadCoverForBook(const QString& authToken,
+                                             const QUuid& uuid)
+{
+    QString uuidString = uuid.toString(QUuid::WithoutBraces);
+    QString endpoint = data::getBookCoverEndpoint + "/" + uuidString;
+    auto request = createRequest(endpoint, authToken);
+    auto reply = m_networkAccessManager.get(request);
+
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                validateNetworkReply(200, reply, "Getting book cover");
+
+                // The book's uuid (server calls it: "guid") is sent as a header
+                QString bookGuid = reply->rawHeader("Guid");
+
+                emit downloadingBookCoverFinished(reply->readAll(), bookGuid);
+                reply->deleteLater();
+            });
+}
+
 void BookStorageAccess::downloadBook(const QString& authToken,
                                      const QUuid& uuid)
 {
@@ -193,8 +217,10 @@ void BookStorageAccess::downloadBook(const QString& authToken,
 
                 // The book's uuid (server calls it: "guid") is sent as a header
                 QString bookGuid = reply->rawHeader("Guid");
+                QString bookFormat = reply->rawHeader("Format");
 
-                emit downloadingBookFinished(reply->readAll(), bookGuid);
+                emit downloadingBookFinished(reply->readAll(), bookGuid,
+                                             bookFormat);
                 reply->deleteLater();
             });
 }

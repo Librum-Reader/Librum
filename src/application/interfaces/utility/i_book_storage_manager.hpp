@@ -35,6 +35,7 @@ public:
     virtual std::optional<QString> saveBookCoverToFile(
         const QUuid& uuid, const QPixmap& cover) = 0;
     virtual bool deleteBookCoverLocally(const QUuid& uuid) = 0;
+    virtual void getCoverForBook(const QUuid& uuid) = 0;
     virtual std::vector<domain::entities::Book> loadLocalBooks() = 0;
     virtual void loadRemoteBooks() = 0;
 
@@ -45,6 +46,8 @@ public:
 signals:
     void loadingRemoteBooksFinished(std::vector<domain::entities::Book>& books);
     void finishedDownloadingBook(const QUuid& uuid, const QString& filePath);
+    void finishedDownloadingBookCover(const QUuid& uuid,
+                                      const QString& filePath);
 };
 
 }  // namespace application
