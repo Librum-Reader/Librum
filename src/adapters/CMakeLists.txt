@@ -83,5 +83,19 @@ target_link_libraries(adapters
                     Qt5::Network
 )
 
-target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
+target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};${COVERAGE_COMPILE_OPTIONS};-O0;-g>")
 target_compile_options(adapters PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+target_link_options(adapters PRIVATE "${COVERAGE_LINKING_OPTIONS}")
+
+
+# Generate code coverage
+if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when the compiler is GCC
+    include(CodeCoverage)
+    append_coverage_compiler_flags_to_target(adapters)
+    setup_target_for_coverage_gcovr_html(
+              NAME adapters_coverage
+              EXECUTABLE adapters_unit_tests
+              BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+              EXCLUDE ${PROJECT_BINARY_DIR}/* ${PROJECT_SOURCE_DIR}/libs/*)
+endif()

@@ -7,7 +7,9 @@ project(Librum VERSION 0.1
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 option(BUILD_TESTS ON)
+option(ENABLE_COVERAGE OFF)
 option(USE_SANITIZERS OFF) # Slows down program startup significantly
+
 
 
 # Create a set of warnings
@@ -24,7 +26,14 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # If compiler is GCC
     list(APPEND LIBRUM_WARNINGS "-Wlogical-op")
     list(APPEND LIBRUM_WARNINGS "-Wunsafe-loop-optimizations")
 endif()
-                          
+
+
+# Create variables for coverage compiler an linker flags
+if(ENABLE_COVERAGE)
+    string(CONCAT COVERAGE_COMPILE_OPTIONS "-fprofile-arcs;-ftest-coverage;-fno-inline;--coverage")
+    string(CONCAT COVERAGE_LINKING_OPTIONS "-lgcov;--coverage;")
+endif()
+
 
 # Create a set of sanitizers
 if(USE_SANITIZERS)
