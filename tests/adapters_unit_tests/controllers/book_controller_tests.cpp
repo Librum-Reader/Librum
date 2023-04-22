@@ -161,7 +161,7 @@ TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
     bookController->removeAllTagsWithUuid(firstTag.getUuid().toString());
 }
 
-TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
+TEST_F(ABookController, SucceedsNotDeletingTagsIfUuidDoesNotExist)
 {
     // Arrange
     Book firstBook("some/path", {});
@@ -177,7 +177,7 @@ TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
 
     std::vector<Book> books { firstBook, secondBook };
 
-    QUuid nonExistentTag = QUuid::createUuid();
+    QUuid nonExistentUuid = QUuid::createUuid();
 
 
     // Expect
@@ -186,7 +186,20 @@ TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfNonExist)
         .WillOnce(ReturnRef(books));
 
     // Act
-    bookController->removeAllTagsWithUuid(nonExistentTag.toString());
+    bookController->removeAllTagsWithUuid(nonExistentUuid.toString());
+}
+
+TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfUuidIsInvalid)
+{
+    // Arrange
+    QString invalidUuid = "Invalid uuid";
+
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, getBooks()).Times(0);
+
+    // Act
+    bookController->removeAllTagsWithUuid(invalidUuid);
 }
 
 TEST_F(ABookController, SucceedsUninstallingABook)
@@ -293,7 +306,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
     auto authorsNumber =
         static_cast<int>(IBookController::MetaProperty::Authors);
 
-    QVariantMap map {
+    QVariantMap operationsMap {
         { QString::number(titleNumber), "AnotherTitle" },
         { QString::number(authorsNumber), "DifferentAuthor" },
     };
@@ -311,8 +324,8 @@ TEST_F(ABookController, SucceedsUpdatingABook)
         .WillOnce(Return(BookOperationStatus::Success));
 
     // Act
-    auto result =
-        bookController->updateBook("some-book-uuid", QVariant::fromValue(map));
+    auto result = bookController->updateBook(
+        "some-book-uuid", QVariant::fromValue(operationsMap));
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
@@ -356,6 +369,27 @@ TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, SucceedsDownloadingABook)
+{
+    // Arrange
+    QString bookUuid = QUuid::createUuid().toString();
+
+    auto expectedStatus = BookOperationStatus::Success;
+
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, downloadBook(_))
+        .Times(1)
+        .WillOnce(Return(BookOperationStatus::Success));
+
+
+    // Act
+    auto resultStatus = bookController->downloadBook(bookUuid);
+
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedStatus), resultStatus);
 }
 
 TEST_F(ABookController, SucceedsGettingABook)
@@ -476,6 +510,24 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
     EXPECT_CALL(bookServiceMock, addTagToBook(_, _))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::TagAlreadyExists));
+
+    // Act
+    auto result = bookController->addTag(bookUuid, "SomeTag", tagUuid);
+
+    // Assert
+    EXPECT_EQ(static_cast<int>(expectedResult), result);
+}
+
+TEST_F(ABookController, FailsAddingTagIfTheUuidIsInvalid)
+{
+    // Arrange
+    auto expectedResult = BookOperationStatus::OperationFailed;
+    QString bookUuid = QUuid::createUuid().toString();
+    QString tagUuid = "Invalid uuid";
+
+
+    // Expect
+    EXPECT_CALL(bookServiceMock, addTagToBook(_, _)).Times(0);
 
     // Act
     auto result = bookController->addTag(bookUuid, "SomeTag", tagUuid);

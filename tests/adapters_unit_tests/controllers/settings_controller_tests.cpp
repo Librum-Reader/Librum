@@ -2,12 +2,15 @@
 #include <gtest/gtest.h>
 #include <QSignalSpy>
 #include <QString>
+#include <QVariant>
+#include "enum_utils.hpp"
 #include "settings_controller.hpp"
-#include "settings_service.hpp"
+
 
 using namespace testing;
 using namespace application;
 using namespace adapters::controllers;
+using application::utility::ApplicationSettings;
 
 namespace tests::adapters
 {
@@ -115,5 +118,99 @@ TEST_F(ASettingsController, FailsSettingASettingIfGroupIsBelowBound)
     // Act
     settingsController->setSetting(key, value, group);
 }
+
+TEST_F(ASettingsController, SucceedsResettingSettingGroup)
+{
+    // Arrange
+    int group = static_cast<int>(SettingGroups::Appearance);
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, resetSettingsGroupToDefault(_)).Times(1);
+
+
+    // Act
+    settingsController->resetSettingGroup(group);
+}
+
+TEST_F(ASettingsController, FailsResettingSettingGroupIfGroupIsInvalid)
+{
+    // Arrange
+    int invalidGroup = 981;
+
+    // Expect
+    EXPECT_CALL(settingsServiceMock, resetSettingsGroupToDefault(_)).Times(0);
+
+
+    // Act
+    settingsController->resetSettingGroup(invalidGroup);
+}
+
+TEST_F(ASettingsController, SuceedsUpdatingThePropertyMapWhenValueHasChanged)
+{
+    // Arrange
+    auto key = SettingKeys::PageSpacing;
+    QString keyName = utility::getNameForEnumValue(key);
+    auto value = QVariant::fromValue(25);
+    auto group = SettingGroups::Appearance;
+
+    // Act
+    // This calls a slot on the settings controller which updates the
+    // corresponding property maps
+    emit settingsServiceMock.settingChanged(key, value, group);
+
+    // Assert
+    auto appearanceMap = settingsController->getAppearanceSettings();
+    EXPECT_EQ(value.toInt(), (*appearanceMap)[keyName].toInt());
+}
+
+TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
+{
+    // Arrange
+    auto pageSpacing = utility::getNameForEnumValue(SettingKeys::PageSpacing);
+    auto pageSpacingValue = QVariant::fromValue(25);
+
+    auto cursorMode = utility::getNameForEnumValue(SettingKeys::CursorMode);
+    auto cursorModeValue = QVariant::fromValue(QString("Hidden"));
+
+    auto openBooksAfterCreation =
+        utility::getNameForEnumValue(SettingKeys::OpenBooksAfterCreation);
+    auto openBooksAfterCreationValue = QVariant::fromValue(true);
+
+    auto upKey = utility::getNameForEnumValue(SettingKeys::Up);
+    auto upKeyValue = QVariant::fromValue(QString("ALT+4"));
+
+    // App settings sent to initalize the QQmlPropertymaps with
+    ApplicationSettings settings {
+        {
+            { pageSpacing, pageSpacingValue },
+            { cursorMode, cursorModeValue },
+        },
+        {
+            { openBooksAfterCreation, openBooksAfterCreationValue },
+        },
+        {
+            { upKey, upKeyValue },
+        },
+    };
+
+    // Act
+    // This calls a slot on the settings controller which causes the property
+    // maps to be
+    emit settingsServiceMock.settingsLoaded(settings);
+
+
+    // Assert
+    auto appearanceMap = settingsController->getAppearanceSettings();
+    EXPECT_EQ(pageSpacingValue, appearanceMap->value("PageSpacing").toInt());
+    EXPECT_EQ(cursorModeValue, appearanceMap->value("CursorMode").toString());
+
+    auto generalMap = settingsController->getGeneralSettings();
+    EXPECT_EQ(openBooksAfterCreationValue,
+              generalMap->value("OpenBooksAfterCreation").toBool());
+
+    auto shortcutsMap = settingsController->getShortcuts();
+    EXPECT_EQ(upKeyValue, shortcutsMap->value("Up").toString());
+}
+
 
 }  // namespace tests::adapters

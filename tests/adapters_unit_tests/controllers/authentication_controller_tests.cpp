@@ -75,4 +75,13 @@ TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)
                                  keepUpdated);
 }
 
+TEST_F(AnAuthenticationController, SucceedsLogingOutAUser)
+{
+    // Expect
+    EXPECT_CALL(authServiceMock, logoutUser()).Times(1);
+
+    // Act
+    authController->logoutUser();
+}
+
 }  // namespace tests::adapters
