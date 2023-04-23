@@ -137,6 +137,7 @@ QString UserController::getProfilePicture() const
 void UserController::setProfilePicture(const QString& path)
 {
     QUrl url(path);
+    auto x = url.path();
     QImage profilePicture(url.toLocalFile());
     if(profilePicture.isNull() ||
        profilePicture == m_userService->getProfilePicture())

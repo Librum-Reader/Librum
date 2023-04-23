@@ -1,11 +1,9 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <QImage>
+#include <QSignalSpy>
 #include <QString>
-#include "QSignalSpy"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
-#include "qnamespace.h"
 #include "tag.hpp"
 #include "user_controller.hpp"
 
@@ -431,6 +429,19 @@ TEST_F(AUserController, FailsGettingTagUuidForNameIfTagDoesNotExist)
 
     // Assert
     EXPECT_EQ(expectedResult, QUuid(result));
+}
+
+TEST_F(AUserController, FailsSettingAProfilePictureIfPathIsInvalid)
+{
+    // Arrange
+    QString nonExistentPath = "some/path.png";
+
+
+    // Expect
+    EXPECT_CALL(userServiceMock, setProfilePicture(_)).Times(0);
+
+    // Act
+    userController->setProfilePicture(nonExistentPath);
 }
 
 }  // namespace tests::adapters
