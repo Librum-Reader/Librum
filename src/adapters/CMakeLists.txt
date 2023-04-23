@@ -31,10 +31,6 @@ add_library(adapters
                     gateways/book_storage_gateway.hpp
                     
                     data_models/app_information.hpp
-                    data_models/chapter_tree/chapter_tree_model.cpp
-                    data_models/chapter_tree/chapter_tree_node.cpp
-                    data_models/chapter_tree/chapter_tree_model.hpp
-                    data_models/chapter_tree/chapter_tree_node.hpp
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp
                     data_models/library_model/library_proxy_model.cpp

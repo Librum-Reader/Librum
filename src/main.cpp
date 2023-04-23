@@ -15,7 +15,6 @@
 #include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
-#include "chapter_tree_model.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
 #include "i_book_service.hpp"
@@ -60,7 +59,6 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/StyleSheet.qml"), "Librum.style", 1, 0, "Style");
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
-    qmlRegisterType<adapters::data_models::ChapterTreeModel>("Librum.models", 1, 0, "ChapterTreeModel");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
