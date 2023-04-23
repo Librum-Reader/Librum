@@ -53,13 +53,11 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
-                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/chapter_tree
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/library_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
-                    ${PROJECT_SOURCE_DIR}/src/library_helpers
                     ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
 )
