@@ -33,7 +33,7 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageOne)
     book.setCurrentPage(1);
 
     // Act
-    int percentage = book.getBookProgressPercentage();
+    int percentage = book.getBookReadingProgress();
 
     // Assert
     EXPECT_EQ(0, percentage);
@@ -59,7 +59,7 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCountOneAndCurrentPageOne)
     book.setCurrentPage(1);
 
     // Act
-    int percentage = book.getBookProgressPercentage();
+    int percentage = book.getBookReadingProgress();
 
     // Assert
     EXPECT_EQ(100, percentage);
@@ -85,7 +85,7 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageMiddle)
     book.setCurrentPage(10);
 
     // Act
-    int percentage = book.getBookProgressPercentage();
+    int percentage = book.getBookReadingProgress();
 
     // Assert
     EXPECT_EQ(50, percentage);
@@ -111,7 +111,7 @@ TEST(ABook, SucceedsGettingBoookProgressPercentageIfCurrentPageEnd)
     book.setCurrentPage(20);
 
     // Act
-    int percentage = book.getBookProgressPercentage();
+    int percentage = book.getBookReadingProgress();
 
     // Assert
     EXPECT_EQ(100, percentage);
@@ -137,7 +137,7 @@ TEST(ABook, FailsGettingBoookProgressPercentageIfLastOpenedInvalid)
     book.setCurrentPage(5);
 
     // Act
-    int percentage = book.getBookProgressPercentage();
+    int percentage = book.getBookReadingProgress();
 
     // Assert
     EXPECT_EQ(0, percentage);

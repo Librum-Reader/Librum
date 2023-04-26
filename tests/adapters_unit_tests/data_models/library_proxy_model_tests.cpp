@@ -9,6 +9,7 @@
 #include "test_data/sort_by_authors_test_data.hpp"
 #include "test_data/sort_by_fuzzing_test_data.hpp"
 #include "test_data/sort_by_last_opened_test_data.hpp"
+#include "test_data/sort_by_reading_progress_data.hpp"
 #include "test_data/sort_by_recently_added_test_data.hpp"
 #include "test_data/sort_by_title_test_data.hpp"
 
@@ -37,6 +38,37 @@ public:
 
     LibraryProxyModel libraryProxyModel;
 };
+
+TEST_F(ALibraryProxyModelTitleSorter, SucceedsRemovingFilterTag)
+{
+    // Arrange
+    QString firstTag = "FirstTag";
+    QString secondTag = "SecondTag";
+    Book firstBook("some/path.pdf", BookMetaData { .title = "FirstBook" });
+    firstBook.addTag(Tag(firstTag));
+    Book secondBook("other/path.pdf", BookMetaData { .title = "SecondBook" });
+    secondBook.addTag(Tag(secondTag));
+
+    std::vector<Book> bookVec { firstBook, secondBook };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+    libraryProxyModel.addFilterTag(firstTag);
+    libraryProxyModel.addFilterTag(secondTag);
+
+    // Act
+    libraryProxyModel.removeFilterTag(firstTag);  // Now only the secondTag
+
+    QModelIndex parent;
+    auto firstBookIsAccepted = libraryProxyModel.filterAcceptsRow(0, parent);
+    auto secondBookIsAccepted = libraryProxyModel.filterAcceptsRow(1, parent);
+
+    // Assert
+    // The first tag is no accepted anymore, since we removed the filter
+    EXPECT_FALSE(firstBookIsAccepted);
+    // The second book is accepted since the filter tag matches
+    EXPECT_TRUE(secondBookIsAccepted);
+}
 
 TEST_P(ALibraryProxyModelTitleSorter, SucceedsSortingData)
 {
@@ -199,6 +231,41 @@ TEST_P(ALibraryProxyModelFuzzSorter, SucceedsSortingData)
 }
 
 //
+// Sort by book progress (higher percentage read)
+//
+
+class ALibraryProxyModelReadingProgressSorter
+    : public ::testing::TestWithParam<test_data::SortByReadingProgressTestData>
+{
+public:
+    void SetUp() override
+    {
+    }
+
+    LibraryProxyModel libraryProxyModel;
+};
+
+TEST_P(ALibraryProxyModelReadingProgressSorter, SucceedsSortingData)
+{
+    // Arrange
+    test_data::SortByReadingProgressTestData data = GetParam();
+    std::vector<Book> bookVec { data.first, data.second };
+
+    LibraryModel model(bookVec);
+    libraryProxyModel.setSourceModel(&model);
+    libraryProxyModel.setSortRole(LibraryProxyModel::SortRole::Progress);
+
+
+    // Act
+    QModelIndex parent;
+    auto result = libraryProxyModel.lessThan(model.index(0, 0, parent),
+                                             model.index(1, 0, parent));
+
+    // Assert
+    EXPECT_EQ(data.expectedResult, result);
+}
+
+//
 // Filter by tags
 //
 
@@ -288,6 +355,10 @@ INSTANTIATE_TEST_SUITE_P(
 INSTANTIATE_TEST_SUITE_P(
     TestSuite, ALibraryProxyModelLastOpenedSorter,
     ::testing::ValuesIn(test_data::lastOpenedSortingTestData));
+
+INSTANTIATE_TEST_SUITE_P(
+    TestSuite, ALibraryProxyModelReadingProgressSorter,
+    ::testing::ValuesIn(test_data::readingProgressSortingTestData));
 
 INSTANTIATE_TEST_SUITE_P(TestSuite, ALibraryProxyModelFuzzSorter,
                          ::testing::ValuesIn(test_data::fuzzSortingTestData));
