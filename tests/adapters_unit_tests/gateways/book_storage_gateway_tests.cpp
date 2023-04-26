@@ -123,4 +123,57 @@ TEST_F(ABookStorageGateway, SucceedsGettingBooksMetaData)
     bookStorageGateway->getBooksMetaData("some_token");
 }
 
+TEST_F(ABookStorageGateway, SucceedsChangingBookCover)
+{
+    // Arrange
+    QUuid uuid;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageAccessMock, uploadBookCover(_, _, _)).Times(1);
+
+    // Act
+    bookStorageGateway->changeBookCover("some_token", uuid,
+                                        "path/to/cover.png");
+}
+
+TEST_F(ABookStorageGateway, SucceedsDeletingBookCover)
+{
+    // Arrange
+    QUuid uuid;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageAccessMock, deleteBookCover(_, _)).Times(1);
+
+    // Act
+    bookStorageGateway->deleteBookCover("some_token", uuid);
+}
+
+TEST_F(ABookStorageGateway, SucceedsGettingCoverForBook)
+{
+    // Arrange
+    QUuid uuid;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageAccessMock, downloadCoverForBook(_, _)).Times(1);
+
+    // Act
+    bookStorageGateway->getCoverForBook("some_token", uuid);
+}
+
+TEST_F(ABookStorageGateway, SucceedsDownloadingBook)
+{
+    // Arrange
+    QUuid uuid;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageAccessMock, downloadBook(_, _)).Times(1);
+
+    // Act
+    bookStorageGateway->downloadBook("some_token", uuid);
+}
+
 };  // namespace tests::adapters
