@@ -78,8 +78,8 @@ public:
 
     bool getDownloaded() const;
     void setDownloaded(bool newDownloaded);
-
-    int getBookProgressPercentage() const;
+    
+    int getBookReadingProgress() const;
 
 
     domain::entities::Tag* getTagByUuid(const QUuid& uuid);

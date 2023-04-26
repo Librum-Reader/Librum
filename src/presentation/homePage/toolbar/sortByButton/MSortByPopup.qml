@@ -73,7 +73,7 @@ Popup
                     {
                         ListElement { text: "Recently added"; role: LibraryProxyModel.RecentlyAdded }
                         ListElement { text: "Recently read"; role: LibraryProxyModel.LastOpened }
-                        ListElement { text: "Percentage"; role: LibraryProxyModel.Percentage }
+                        ListElement { text: "Progress"; role: LibraryProxyModel.Progress }
                         ListElement { text: "Book (A-Z)"; role: LibraryProxyModel.Title }
                         ListElement { text: "Authors (A-Z)"; role: LibraryProxyModel.Authors }
                     }

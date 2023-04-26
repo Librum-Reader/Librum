@@ -282,7 +282,7 @@ void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.pagesSize = book.getPagesSize();
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
-    bookDto.bookProgressPercentage = book.getBookProgressPercentage();
+    bookDto.bookReadingProgress = book.getBookReadingProgress();
     bookDto.coverPath = book.getCoverPath();
     bookDto.downloaded = book.getDownloaded();
 

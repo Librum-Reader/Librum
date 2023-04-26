@@ -55,9 +55,9 @@ bool LibraryProxyModel::lessThan(const QModelIndex& left,
     {
         return addedToLibraryAfter(left, right);
     }
-    case SortRole::Percentage:
+    case SortRole::Progress:
     {
-        return higherProgressPercentage(left, right);
+        return hasHigherReadingProgress(left, right);
     }
     case SortRole::SortRole_END:
     {
@@ -210,13 +210,13 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
     return lhsAddedDate > rhsAddedDate;
 }
 
-bool LibraryProxyModel::higherProgressPercentage(const QModelIndex& left,
+bool LibraryProxyModel::hasHigherReadingProgress(const QModelIndex& left,
                                                  const QModelIndex& right) const
 {
     auto lhs =
-        sourceModel()->data(left, LibraryModel::BookProgressPercentageRole);
+        sourceModel()->data(left, LibraryModel::BookReadingProgressRole);
     auto rhs =
-        sourceModel()->data(right, LibraryModel::BookProgressPercentageRole);
+        sourceModel()->data(right, LibraryModel::BookReadingProgressRole);
 
     return lhs.toInt() >= rhs.toInt();
 }

@@ -27,7 +27,7 @@ public:
         Title,
         Authors,
         LastOpened,
-        Percentage,
+        Progress,
         SortRole_END
     };
 
@@ -58,12 +58,12 @@ signals:
     void sortRoleUpdated();
 
 private:
-    std::optional<bool> leftBookIsCloserToSortString(const QModelIndex& left,
-                                         const QModelIndex& right) const;
+    std::optional<bool> leftBookIsCloserToSortString(
+        const QModelIndex& left, const QModelIndex& right) const;
     bool openedAfter(const QModelIndex& left, const QModelIndex& right) const;
     bool addedToLibraryAfter(const QModelIndex& left,
                              const QModelIndex& right) const;
-    bool higherProgressPercentage(const QModelIndex& left,
+    bool hasHigherReadingProgress(const QModelIndex& left,
                                   const QModelIndex& right) const;
     bool filterAcceptsTags(const QModelIndex& bookIndex) const;
     std::vector<adapters::dtos::TagDto> getTags(const QModelIndex& index) const;

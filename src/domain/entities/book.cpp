@@ -232,7 +232,7 @@ void Book::setDownloaded(bool newDownloaded)
     m_downloaded = newDownloaded;
 }
 
-int Book::getBookProgressPercentage() const
+int Book::getBookReadingProgress() const
 {
     if(!getLastOpened().isValid() ||
        (getPageCount() > getCurrentPage() && getCurrentPage() <= 1))

@@ -187,7 +187,7 @@ Item
                     
                     Rectangle
                     {
-                        id: percentageBox
+                        id: readingProgressBox
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
                         Layout.topMargin: 4
@@ -196,10 +196,10 @@ Item
                         
                         Label
                         {
-                            id: percentageLabel
+                            id: readingProgressLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
-                            text: model.bookProgressPercentage + "%"
+                            text: model.bookReadingProgress + "%"
                             font.weight: Font.DemiBold
                             color: Style.colorTitle
                             font.pointSize: 10

@@ -32,7 +32,7 @@ public:
         DocumentSizeRole,
         PagesSizeRole,
         PageCountRole,
-        BookProgressPercentageRole,
+        BookReadingProgressRole,
         CurrentPageRole,
         AddedToLibraryRole,
         LastOpenedRole,
