@@ -213,4 +213,56 @@ TEST_F(ABookStorageManager, SucceedsLoadingRemoteBooks)
     bookStorageManager->loadRemoteBooks();
 }
 
+TEST_F(ABookStorageManager, SucceedsDownloadingBook)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData {});
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, downloadBook(_, _)).Times(1);
+
+    // Act
+    bookStorageManager->downloadBook(book.getUuid());
+}
+
+TEST_F(ABookStorageManager, SucceedsChangingBookCoverRemotely)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData {});
+    book.setHasCover(true);
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, changeBookCover(_, _, _)).Times(1);
+
+    // Act
+    bookStorageManager->updateBookCoverRemotely(book.getUuid(),
+                                                book.hasCover());
+}
+
+TEST_F(ABookStorageManager, SucceedsDeletingBookCoverRemotely)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData {});
+    book.setHasCover(false);
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, deleteBookCover(_, _)).Times(1);
+
+    // Act
+    bookStorageManager->updateBookCoverRemotely(book.getUuid(),
+                                                book.hasCover());
+}
+
+TEST_F(ABookStorageManager, SucceedsDownloadingBookCover)
+{
+    // Arrange
+    Book book("some/path.pdf", BookMetaData {});
+
+    // Expect
+    EXPECT_CALL(bookStorageGatewayMock, getCoverForBook(_, _)).Times(1);
+
+    // Act
+    bookStorageManager->downloadBookCover(book.getUuid());
+}
+
 }  // namespace tests::application
