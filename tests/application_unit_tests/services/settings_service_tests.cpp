@@ -63,7 +63,7 @@ TEST_F(ASettingsService, SucceedsOverridingASetting)
     EXPECT_EQ(newValue, actualValue);
 }
 
-TEST_F(ASettingsService, SucceedsGettingAIntegerSetting)
+TEST_F(ASettingsService, SucceedsGettingAnIntegerSetting)
 {
     // Arrange
     auto key = SettingKeys::PageSpacing;
@@ -96,38 +96,5 @@ TEST_F(ASettingsService, SucceedsGettingAStringSetting)
     // Assert
     EXPECT_EQ(value, result);
 }
-
-// TEST_F(ASettingsService, SucceedsResettingSettingGroup)
-//{
-//     // Arrange
-//     auto firstKey = SettingKeys::CursorMode;
-//     auto secondKey = SettingKeys::DefaultZoom;
-//     auto thirdKey = SettingKeys::Theme;
-
-//    auto group = SettingGroups::Appearance;
-
-//    // Get default data
-//    QString firstDefaultValue = settingsService->getSetting(firstKey, group);
-//    QString secondDefaultValue = settingsService->getSetting(secondKey,
-//    group); QString thirdDefaultValue = settingsService->getSetting(thirdKey,
-//    group);
-
-//    // Change default data
-//    settingsService->setSetting(firstKey, "SomeValue", group);
-//    settingsService->setSetting(secondKey, "SomeOtherValue", group);
-//    settingsService->setSetting(thirdKey, "AnotherValue", group);
-
-//    // Act
-//    settingsService->resetSettingsGroupToDefault(group);
-
-//    // Assert
-//    auto firstAfterReset = settingsService->getSetting(firstKey, group);
-//    auto secondAfterReset = settingsService->getSetting(secondKey, group);
-//    auto thirdAfterReset = settingsService->getSetting(thirdKey, group);
-
-//    EXPECT_EQ(firstDefaultValue, firstAfterReset);
-//    EXPECT_EQ(secondDefaultValue, secondAfterReset);
-//    EXPECT_EQ(thirdDefaultValue, thirdAfterReset);
-//}
 
 }  // namespace tests::application
