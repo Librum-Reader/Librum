@@ -502,7 +502,6 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
 
 TEST_F(ABookService, SucceedsGettingABookIndex)
 {
-
     // Arrange
     BookMetaData firstBookMetaData { .title = "FirstBook",
                                      .authors = "Author1" };
@@ -528,6 +527,116 @@ TEST_F(ABookService, SucceedsGettingABookIndex)
     auto secondBookUuid = bookService->getBooks()[1].getUuid();
 
     auto result = bookService->getBookIndex(secondBookUuid);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, SucceedsChangingABookCoverByDeletingIt)
+{
+    // Arrange
+    BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(bookMetaData));
+    bookService->addBook("some/path.pdf");
+
+    auto expectedResult = BookOperationStatus::Success;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely(_, _)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally(_)).Times(1);
+
+    // Act
+    auto& uuid = bookService->getBooks()[0].getUuid();
+    auto result = bookService->changeBookCover(uuid, "");
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsChangingABookCoverIfNewCoverDoesNotExist)
+{
+    // Arrange
+    BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(bookMetaData));
+    bookService->addBook("some/path.pdf");
+
+    auto expectedResult = BookOperationStatus::OperationFailed;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely(_, _)).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, deleteBookCoverLocally(_)).Times(0);
+
+    // Act
+    auto& uuid = bookService->getBooks()[0].getUuid();
+    auto result = bookService->changeBookCover(uuid, "non-existent/book.pdf");
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsChangingABookCoverIfBookDoesNotExist)
+{
+    // Arrange
+    auto nonExistentBook = QUuid::createUuid();
+
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, updateBookCoverRemotely(_, _)).Times(0);
+
+    // Act
+    auto result = bookService->changeBookCover(nonExistentBook, "");
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, SucceedsDownloadingABook)
+{
+    // Arrange
+    BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+        .Times(1)
+        .WillOnce(Return(bookMetaData));
+    bookService->addBook("some/path.pdf");
+
+    auto expectedResult = BookOperationStatus::Success;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, downloadBook(_)).Times(1);
+
+    // Act
+    auto uuid = bookService->getBooks()[0].getUuid();
+    auto result = bookService->downloadBook(uuid);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ABookService, FailsDownloadingBookIfItDoesNotExist)
+{
+    // Arrange
+    auto nonExistentBook = QUuid::createUuid();
+
+    auto expectedResult = BookOperationStatus::BookDoesNotExist;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, downloadBook(_)).Times(0);
+
+    // Act
+    auto result = bookService->downloadBook(nonExistentBook);
 
     // Assert
     EXPECT_EQ(expectedResult, result);

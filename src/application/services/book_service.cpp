@@ -9,6 +9,7 @@
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
+#include "qfileinfo.h"
 
 using namespace domain::entities;
 using std::size_t;
@@ -178,6 +179,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         return BookOperationStatus::BookDoesNotExist;
     }
 
+    // An empty file path indicates that the book cover shall be deleted.
     if(filePath.isEmpty())
     {
         deleteBookCover(*book);
@@ -187,7 +189,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
         auto absoluteFilePath = QUrl(filePath).path();
         auto success = setNewBookCover(*book, absoluteFilePath);
         if(!success)
-            return BookOperationStatus::OpeningBookFailed;
+            return BookOperationStatus::OperationFailed;
     }
 
     m_bookStorageManager->updateBook(*book);
@@ -198,7 +200,14 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
 
 void BookService::deleteBookCover(Book& book)
 {
-    m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
+    auto success = m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
+    if(!success)
+    {
+        qWarning() << QString("Failed deleting the local book cover for book "
+                              "with uuid: %1."
+                              "Deleting the file failed.")
+                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
+    }
 
     book.setCoverPath("");
     book.setHasCover(false);
@@ -210,23 +219,33 @@ void BookService::deleteBookCover(Book& book)
 bool BookService::setNewBookCover(Book& book, QString filePath)
 {
     auto uuid = book.getUuid();
-    QPixmap newCover(filePath);
-    if(newCover.isNull())
+    QFileInfo newCoverFile(filePath);
+    if(!newCoverFile.exists() || !newCoverFile.isFile())
     {
-        qWarning() << QString("Failed changing cover for book with uuid: %1."
-                              "Can't open new image at: %2.")
+        qWarning() << QString("Failed setting new cover for book with uuid: %1."
+                              "The given file at: %2 is invalid.")
                           .arg(uuid.toString(), filePath);
         return false;
     }
 
+    QPixmap newCover(filePath);
+    if(newCover.isNull())
+    {
+        qWarning() << QString("Failed setting new cover for book with uuid: %1."
+                              "Can't open new cover image at: %2.")
+                          .arg(uuid.toString(), filePath);
+        return false;
+    }
+
+    // Scale the book cover to the correct size
     newCover = newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
                                Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
     if(!path.has_value())
     {
-        qWarning() << QString("Failed changing cover for book with uuid: %1."
-                              "Saving new image failed.")
+        qWarning() << QString("Failed setting new cover for book with uuid: %1."
+                              "Saving new cover image failed.")
                           .arg(uuid.toString(), filePath);
         return false;
     }
@@ -467,9 +486,9 @@ void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
 {
     // The file might have been moved or deleted from the user's filesystem,
     // from the last time the application was used. This would mean that the
-    // underlying book file would be invalid (since it does not exist anymore).
-    // If this happens, unsinstall the book, so that the user can redownload it
-    // from the server.
+    // underlying book file would be invalid (since it does not exist
+    // anymore). If this happens, unsinstall the book, so that the user can
+    // redownload it from the server.
     QFile bookFile(QUrl(book.getFilePath()).path());
     if(!bookFile.exists())
     {
@@ -571,10 +590,10 @@ void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
     auto book = getBook(uuid);
     auto index = getBookIndex(uuid);
 
-    // To properly update the UI, we need to invalidate the current image first
-    // and then set the new one, else Qt doesn't see the changes.
-    // We do this by setting the path to an empty string first and then to
-    // the actual path. We emit 'dataChanged' in between to update the UI.
+    // To properly update the UI, we need to invalidate the current image
+    // first and then set the new one, else Qt doesn't see the changes. We
+    // do this by setting the path to an empty string first and then to the
+    // actual path. We emit 'dataChanged' in between to update the UI.
     book->setCoverPath("");
     emit dataChanged(index);
 
