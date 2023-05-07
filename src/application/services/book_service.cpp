@@ -151,6 +151,15 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
         return BookOperationStatus::BookDoesNotExist;
     }
 
+    if(!newBook.isValid())
+    {
+        qWarning() << QString("Failed updating book with uuid: %1."
+                              "The new properties are invalid.")
+                          .arg(newBook.getUuid().toString());
+        return BookOperationStatus::OperationFailed;
+    }
+
+
     // Manually handle changes to "current page" because we don't want
     // "lastModified" to be updated on a "current page" change, since this
     // would break the whole updating mechanism.

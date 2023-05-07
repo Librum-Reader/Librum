@@ -154,7 +154,6 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
         }
     }
 
-
     auto result = m_bookService->updateBook(updatedBook);
     return static_cast<int>(result);
 }

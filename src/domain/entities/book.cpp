@@ -366,6 +366,18 @@ void Book::update(const Book& other)
         m_tags = other.getTags();
 }
 
+bool Book::isValid() const
+{
+    int titleSize = m_metaData.title.size();
+    int authorsSize = m_metaData.authors.size();
+    int creatorSize = m_metaData.creator.size();
+    int creationDateSize = m_metaData.creationDate.size();
+
+    return titleSize >= 2 && titleSize <= 200 && authorsSize <= 400 &&
+           creatorSize >= 2 && creatorSize <= 140 && creationDateSize >= 8 &&
+           creationDateSize <= 140;
+}
+
 QByteArray Book::toJson() const
 {
     QJsonObject book {

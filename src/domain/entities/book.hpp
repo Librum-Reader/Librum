@@ -78,7 +78,7 @@ public:
 
     bool getDownloaded() const;
     void setDownloaded(bool newDownloaded);
-    
+
     int getBookReadingProgress() const;
 
 
@@ -90,6 +90,7 @@ public:
     const std::vector<Tag>& getTags() const;
 
     void update(const Book& other);
+    bool isValid() const;
     QByteArray toJson() const;
     static Book fromJson(const QJsonObject& jsonBook);
 
