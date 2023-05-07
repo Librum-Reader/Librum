@@ -80,7 +80,8 @@ auto BookService::getBookPosition(const QUuid& uuid)
 
 BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 {
-    if(getBook(uuid) == nullptr)
+    const auto* book = getBook(uuid);
+    if(!book)
     {
         qWarning() << QString("Could not delete book with uuid: %1. "
                               "No book with this uuid exists.")
@@ -88,9 +89,9 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    const auto* book = getBook(uuid);
+
     utility::BookForDeletion bookToDelete {
-        .uuid = uuid,
+        .uuid = book->getUuid(),
         .downloaded = book->getDownloaded(),
     };
 

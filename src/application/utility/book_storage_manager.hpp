@@ -16,7 +16,6 @@ public:
     void addBook(const domain::entities::Book& bookToAdd) override;
     void addBookLocally(const domain::entities::Book& bookToAdd) override;
     void deleteBook(BookForDeletion bookToDelete) override;
-    void deleteBookLocally(QUuid uuid) override;
     void uninstallBook(const QUuid& uuid) override;
     void downloadBook(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
