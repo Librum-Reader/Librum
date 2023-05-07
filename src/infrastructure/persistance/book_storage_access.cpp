@@ -19,13 +19,13 @@ void BookStorageAccess::createBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply = m_networkAccessManager.post(request, data);
+    auto bookCreationReply = m_networkAccessManager.post(request, data);
 
 
     // The book is created in separate steps. First of all an enty for the book
     // is created in the SQL Database, if that succeeds the book's data (the
     // actual binary file) and its cover are uploaded to the server.
-    connect(reply, &QNetworkReply::finished, this,
+    connect(bookCreationReply, &QNetworkReply::finished, this,
             [this, jsonBook, authToken]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -57,12 +57,12 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
     QJsonDocument jsonDocument(bookArray);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply =
+    auto deletionReply =
         m_networkAccessManager.sendCustomRequest(request, "DELETE", data);
 
 
-    // Make sure to release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
+    // Validate and release the reply's memory
+    connect(deletionReply, &QNetworkReply::finished, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -80,11 +80,11 @@ void BookStorageAccess::updateBook(const QString& authToken,
     QJsonDocument jsonDocument(jsonBook);
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-    auto reply = m_networkAccessManager.put(request, data);
+    auto updateReply = m_networkAccessManager.put(request, data);
 
 
-    // Make sure to release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
+    // Validate and release the reply's memory
+    connect(updateReply, &QNetworkReply::finished, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -131,10 +131,10 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
     // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
-    auto reply = m_networkAccessManager.post(request, bookCover);
+    auto coverUploadreply = m_networkAccessManager.post(request, bookCover);
 
     // Make sure to free the data used for uploading the cover.
-    connect(reply, &QNetworkReply::finished, this,
+    connect(coverUploadreply, &QNetworkReply::finished, this,
             [this, bookCover]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -152,10 +152,11 @@ void BookStorageAccess::deleteBookCover(const QString& authToken,
                     uuid.toString(QUuid::WithoutBraces);
     auto request = createRequest(endpoint, authToken);
 
-    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
+    auto coverDeletionReply =
+        m_networkAccessManager.sendCustomRequest(request, "DELETE");
 
     // Make sure to release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
+    connect(coverDeletionReply, &QNetworkReply::finished, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -180,11 +181,11 @@ void BookStorageAccess::downloadCoverForBook(const QString& authToken,
     QString uuidString = uuid.toString(QUuid::WithoutBraces);
     QString endpoint = data::getBookCoverEndpoint + "/" + uuidString;
     auto request = createRequest(endpoint, authToken);
-    auto reply = m_networkAccessManager.get(request);
+    auto coverDownloadreply = m_networkAccessManager.get(request);
 
 
     // Make sure to release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
+    connect(coverDownloadreply, &QNetworkReply::finished, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -204,12 +205,11 @@ void BookStorageAccess::downloadBook(const QString& authToken,
     auto endpoint = data::downloadBookDataEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
     auto request = createRequest(endpoint, authToken);
-
-    auto reply = m_networkAccessManager.get(request);
+    auto bookDownloadReply = m_networkAccessManager.get(request);
 
 
     // Handle the received books and release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
+    connect(bookDownloadReply, &QNetworkReply::finished, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -271,11 +271,11 @@ void BookStorageAccess::uploadBookData(const QString& uuid,
     // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
-    auto reply = m_networkAccessManager.post(request, bookData);
+    auto bookUploadReply = m_networkAccessManager.post(request, bookData);
 
 
     // Make sure to free the data used for uploading the book data.
-    connect(reply, &QNetworkReply::finished, this,
+    connect(bookUploadReply, &QNetworkReply::finished, this,
             [this, bookData]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
