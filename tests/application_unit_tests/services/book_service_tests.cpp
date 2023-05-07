@@ -206,7 +206,7 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     auto originalUuid =
         bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
 
-    // Create book-for-update with
+    // Create book-for-update
     BookMetaData newBookMetaData { .title = "ANewTitle",
                                    .authors = "ANewAuthor" };
     Book bookToUpdateWith("some/path", newBookMetaData, 0, originalUuid);
@@ -239,6 +239,36 @@ TEST_F(ABookService, SucceedsUpdatingABook)
     EXPECT_EQ(1, spy.count());
     EXPECT_EQ(bookService->getBookIndex(bookToUpdateWith.getUuid()),
               arguments[0].toInt());
+}
+
+TEST_F(ABookService, FailsUpdatingABookIfAPropertyIsTooLong)
+{
+    // Arrange
+    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+
+    // Create book
+    BookMetaData bookMetaData { .title = "SomeBook", .authors = "SomeAuthor" };
+    bookService->addBook("/some/path.pdf");
+    auto originalUuid =
+        bookService->getBooks()[0].getUuid().toString(QUuid::WithoutBraces);
+
+    // Create book-for-update
+    QString veryLongString(500, 'x');
+    BookMetaData newBookMetaData { .title = "ANewTitle",
+                                   .creator = veryLongString };  // Too long
+    Book bookToUpdateWith("some/path.pdf", newBookMetaData, 0, originalUuid);
+
+    auto expectedResult = BookOperationStatus::OperationFailed;
+
+
+    // Expect
+    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(0);
+
+    // Act
+    auto result = bookService->updateBook(bookToUpdateWith);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
 }
 
 TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
