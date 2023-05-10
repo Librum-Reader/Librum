@@ -93,6 +93,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     utility::BookForDeletion bookToDelete {
         .uuid = book->getUuid(),
         .downloaded = book->getDownloaded(),
+        .format = book->getFormat(),
     };
 
     auto bookPosition = getBookPosition(uuid);
@@ -103,8 +104,6 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     emit bookDeletionEnded();
 
     m_bookStorageManager->deleteBook(std::move(bookToDelete));
-    m_bookStorageManager->deleteBookCoverLocally(uuid);
-
     return BookOperationStatus::Success;
 }
 
@@ -119,7 +118,7 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    m_bookStorageManager->uninstallBook(uuid);
+    m_bookStorageManager->uninstallBook(*book);
     book->setDownloaded(false);
 
     refreshUIForBook(uuid);

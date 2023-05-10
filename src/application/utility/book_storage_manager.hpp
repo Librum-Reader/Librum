@@ -16,7 +16,7 @@ public:
     void addBook(const domain::entities::Book& bookToAdd) override;
     void addBookLocally(const domain::entities::Book& bookToAdd) override;
     void deleteBook(BookForDeletion bookToDelete) override;
-    void uninstallBook(const QUuid& uuid) override;
+    void uninstallBook(const domain::entities::Book& book) override;
     void downloadBook(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
     void updateBookLocally(const domain::entities::Book& book) override;
@@ -41,6 +41,7 @@ private slots:
 private:
     bool userLoggedIn();
     QString getBookCoverPath(const QUuid& uuid);
+    void deleteBookFile(const QUuid& uuid, const QString& format);
 
     QString m_bookCoverPrefix = "cover_";
     QString m_bookCoverType = "png";

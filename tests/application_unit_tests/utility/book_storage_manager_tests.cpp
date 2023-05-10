@@ -127,14 +127,13 @@ TEST_F(ABookStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
 TEST_F(ABookStorageManager, SucceedsUninstallingABook)
 {
     // Arrange
-    Book book("some/path.pdf", BookMetaData {});
+    Book book("some/path.pdf", BookMetaData { .format = "pdf" });
 
     // Expect
     EXPECT_CALL(downloadedBooksTrackerMock, untrackBook(_)).Times(1);
 
     // Act
-    bookStorageManager->uninstallBook(
-        book.getUuid().toString(QUuid::WithoutBraces));
+    bookStorageManager->uninstallBook(book);
 }
 
 TEST_F(ABookStorageManager, SucceedsUpdatingABook)

@@ -118,6 +118,17 @@ QString BookStorageManager::getBookCoverPath(const QUuid& uuid)
     return dir.filePath(fileName);
 }
 
+void BookStorageManager::deleteBookFile(const QUuid& uuid,
+                                        const QString& format)
+{
+    auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
+    auto fileName =
+        QString("%1.%2").arg(uuid.toString(QUuid::WithoutBraces), format);
+
+    QFile bookFileToDelete(dir.filePath(fileName));
+    bookFileToDelete.remove();
+}
+
 void BookStorageManager::addBook(const Book& bookToAdd)
 {
     // Prevent adding remote books to the local library unless "downloaded" is
@@ -135,16 +146,21 @@ void BookStorageManager::addBookLocally(const domain::entities::Book& bookToAdd)
 
 void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
 {
-    // Remote books aren't in the local library, thus can't be untracked
+    // Non-downloaded books aren't in the local library, thus can't be untracked
     if(bookToDelete.downloaded)
+    {
         m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
+        deleteBookFile(bookToDelete.uuid, bookToDelete.format);
+    }
 
     m_bookStorageGateway->deleteBook(m_authenticationToken, bookToDelete.uuid);
+    deleteBookCoverLocally(bookToDelete.uuid);
 }
 
-void BookStorageManager::uninstallBook(const QUuid& uuid)
+void BookStorageManager::uninstallBook(const Book& book)
 {
-    m_downloadedBooksTracker->untrackBook(uuid);
+    m_downloadedBooksTracker->untrackBook(book.getUuid());
+    deleteBookFile(book.getUuid(), book.getFormat());
 }
 
 void BookStorageManager::downloadBook(const QUuid& uuid)
