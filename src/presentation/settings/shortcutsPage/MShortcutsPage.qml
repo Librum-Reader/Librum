@@ -183,13 +183,6 @@ Page
                     Layout.fillHeight: true
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                     
-                    Component.onCompleted:
-                    {
-                        // contentItem is the ScrollView's underlying Flickable
-                        contentItem.flickDeceleration = 1000;
-                        contentItem.maximumFlickVelocity = 1000;
-                    }
-                    
                     
                     ListView
                     {
@@ -197,8 +190,10 @@ Page
                         anchors.rightMargin: 28
                         anchors.fill: parent
                         clip: true
-                        interactive: false
                         model: root.shortcutListModel
+                        flickDeceleration: 15000
+                        maximumFlickVelocity: 2000
+                        boundsBehavior: Flickable.StopAtBounds
                         delegate: MShortcutDelegate
                         {
                             onGapWidthChanged: (spacing) => internal.verticalSettingSpacing = spacing
@@ -219,17 +214,10 @@ Page
                             anchors.fill: parent
                             propagateComposedEvents: true
                             
-                            onWheel: (wheel) => listView.scroll(wheel.angleDelta.y > 0)
                             // Propagate click/pressed signals to lower MouseAreas
+                            onWheel: (wheel) => wheel.accepted = false
                             onClicked: (mouse) => mouse.accepted = false
                             onPressed: (mouse) => mouse.accepted = false
-                        }
-                        
-                        
-                        function scroll(up)
-                        {
-                            let scrollSpeed = 550;
-                            listView.flick(0, up ? scrollSpeed : -scrollSpeed)
                         }
                     }
                 }
