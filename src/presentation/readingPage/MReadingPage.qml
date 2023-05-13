@@ -36,14 +36,14 @@ Page
     Shortcut
     {
         id: flickUp
-        sequences: ["Up"]
+        sequences: [SettingsController.shortcuts.MoveUp]
         onActivated: documentView.flick("up")
     }
     
     Shortcut
     {
         id: flickDown
-        sequences: ["Down"]
+        sequences: [SettingsController.shortcuts.MoveDown]
         onActivated: documentView.flick("down")
     }
     
