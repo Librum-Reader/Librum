@@ -19,6 +19,7 @@ public:
     SettingsController(application::ISettingsService* settingsService);
 
     void setSetting(int key, const QVariant& value, int group) override;
+    void setSetting(QString key, const QVariant& value, int group) override;
     void resetSettingGroup(int group) override;
 
     QQmlPropertyMap* getAppearanceSettings() override;

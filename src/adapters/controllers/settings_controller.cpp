@@ -33,6 +33,24 @@ void SettingsController::setSetting(int key, const QVariant& value, int group)
     m_settingsService->setSetting(keyAsEnum, value, groupAsEnum);
 }
 
+void SettingsController::setSetting(QString key, const QVariant& value,
+                                    int group)
+{
+    auto keyAsEnum = utility::getValueForEnumName<SettingKeys>(key);
+    if(!keyAsEnum.has_value())
+    {
+        qWarning()
+            << QString("Setting a setting via the string key '%1' Failed. No "
+                       "setting with this name exists, converting it to an "
+                       "enum failed.")
+                   .arg(key);
+        return;
+    }
+
+    // Delegate the call to the actual method
+    setSetting(static_cast<int>(keyAsEnum.value()), value, group);
+}
+
 void SettingsController::resetSettingGroup(int group)
 {
     if(!groupIsValid(group))
@@ -82,6 +100,11 @@ void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
         qCritical() << "Tried to update item of group SettingGroups_END";
         break;
     }
+
+
+    // Update the shortcuts model
+    if(m_shortcutsModel != nullptr)
+        m_shortcutsModel->refreshRow(keyAsString);
 }
 
 void SettingsController::initialiseSettings(ApplicationSettings settings)
