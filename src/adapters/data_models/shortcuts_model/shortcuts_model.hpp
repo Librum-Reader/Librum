@@ -27,10 +27,6 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    void startInsertingRow(int row);
-    void endInsertingRow();
-    void startDeletingRow(int row);
-    void endDeletingRow();
     void refreshRow(QString key);
 
 private:

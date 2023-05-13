@@ -46,26 +46,6 @@ QHash<int, QByteArray> ShortcutsModel::roleNames() const
     return roles;
 }
 
-void ShortcutsModel::startInsertingRow(int row)
-{
-    beginInsertRows(QModelIndex(), row, row);
-}
-
-void ShortcutsModel::endInsertingRow()
-{
-    endInsertRows();
-}
-
-void ShortcutsModel::startDeletingRow(int row)
-{
-    beginRemoveRows(QModelIndex(), row, row);
-}
-
-void ShortcutsModel::endDeletingRow()
-{
-    endRemoveRows();
-}
-
 void ShortcutsModel::refreshRow(QString key)
 {
     int row = 0;
