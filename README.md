@@ -56,9 +56,12 @@ As a team of opensource developers we rely on donations from the community to be
 
 # Contributing
 
-If you are interested in contributing, feel free to contact us under: contact@librumreader.com <br>
-We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing.
-
+If you are interested in contributing, feel free to contact us on either:<br>
+1. Discord (m_david#0631)
+2. Email (contact@librumreader.com)
+<br>
+We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing. <br>
+Please make sure to run clang format, keep to the conventions used through the application and ensure that all tests pass, before submitting any pull request.
 <br>
 
 # Contact
