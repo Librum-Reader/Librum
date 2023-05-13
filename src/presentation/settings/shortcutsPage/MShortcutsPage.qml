@@ -4,35 +4,12 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Page
 {
     id: root
-    property var shortcutListModel: ListModel
-    {
-        ListElement { text: "Up"; shortcut: "Arrow-Up" }
-        ListElement { text: "Down"; shortcut: "Arrow-Down" }
-        ListElement { text: "Next page"; shortcut: "Arrow-Right" }
-        ListElement { text: "Previous page"; shortcut: "Arrow-Left" }
-        ListElement { text: "Search"; shortcut: "Ctrl+F" }
-        ListElement { text: "Full Screen"; shortcut: "Ctrl+Alt+F" }
-        ListElement { text: "Change application theme"; shortcut: "-" }
-        ListElement { text: "Go to home"; shortcut: "Ctrl+Alt+H" }
-        ListElement { text: "Zoom in"; shortcut: "Ctrl++" }
-        ListElement { text: "Zoom out"; shortcut: "Ctrl+-" }
-        ListElement { text: "Open chapters"; shortcut: "Tab" }
-        ListElement { text: "Open bookmarks"; shortcut: "Ctrl+B" }
-        ListElement { text: "Start of document"; shortcut: "Ctrl+Pos1" }
-        ListElement { text: "End of document"; shortcut: "Ctrl+End" }
-        ListElement { text: "Print page"; shortcut: "Ctrl+P" }
-        ListElement { text: "Highlighter"; shortcut: "Alt+1" }
-        ListElement { text: "Open notes"; shortcut: "Alt+2" }
-        ListElement { text: "Create bookmark here"; shortcut: "Alt+3" }
-        ListElement { text: "Pause/Resume speaking"; shortcut: "F5" }
-        ListElement { text: "Reload Librum"; shortcut: "-" }
-    }
-    
     topPadding: 64
     horizontalPadding: 48
     background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
@@ -190,7 +167,7 @@ Page
                         anchors.rightMargin: 28
                         anchors.fill: parent
                         clip: true
-                        model: root.shortcutListModel
+                        model: SettingsController.shortcutsModel
                         flickDeceleration: 15000
                         maximumFlickVelocity: 2000
                         boundsBehavior: Flickable.StopAtBounds
@@ -206,7 +183,6 @@ Page
                             
                             onDeleteClicked: (index) => {}
                         }
-                        
                         
                         MouseArea
                         {

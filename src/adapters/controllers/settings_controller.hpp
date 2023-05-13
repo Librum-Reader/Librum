@@ -24,6 +24,7 @@ public:
     QQmlPropertyMap* getAppearanceSettings() override;
     QQmlPropertyMap* getGeneralSettings() override;
     QQmlPropertyMap* getShortcuts() override;
+    data_models::ShortcutsModel* getShortcutsModel() override;
 
 private slots:
     void updateChangedSetting(application::setting_keys::SettingKeys key,
@@ -38,6 +39,7 @@ private:
     QQmlPropertyMap m_appearanceSettingsMap;
     QQmlPropertyMap m_generalSettingsMap;
     QQmlPropertyMap m_shortcutsMap;
+    std::unique_ptr<data_models::ShortcutsModel> m_shortcutsModel;
     application::ISettingsService* m_settingsService;
 };
 

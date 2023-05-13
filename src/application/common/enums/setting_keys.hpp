@@ -31,6 +31,7 @@ enum class SettingKeys
 
     // Shortcuts
     Up,
+    Down,
 
     SettingKeys_END
 };

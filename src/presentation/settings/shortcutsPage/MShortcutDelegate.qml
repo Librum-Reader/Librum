@@ -10,8 +10,8 @@ Item
 {
     id: root
     required property int index
-    required property string text
     required property string shortcut
+    required property string value
     
     // The gap width between ACTION and SETTING. When the page gets smaller the gap decreases,
     // this needs to be signaled to the header because it also needs to reize its gap aswell
@@ -48,11 +48,11 @@ Item
             
             Label
             {
-                id: actionText
+                id: shortcutText
                 Layout.leftMargin: 12
                 Layout.preferredWidth: 150
                 Layout.alignment: Qt.AlignVCenter
-                text: root.text
+                text: root.shortcut
                 color: Style.colorText
                 font.pointSize: 12
                 font.weight: Font.DemiBold
@@ -69,10 +69,10 @@ Item
             
             Label
             {
-                id: shortcutName
+                id: shortcutValue
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
-                text: root.shortcut
+                text: root.value
                 color: Style.colorText
                 font.pointSize: 12
                 font.weight: Font.DemiBold

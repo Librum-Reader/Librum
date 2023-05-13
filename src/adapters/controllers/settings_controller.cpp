@@ -1,9 +1,11 @@
 #include "settings_controller.hpp"
 #include <QDebug>
 #include <QString>
+#include <memory>
 #include "enum_utils.hpp"
 
 using namespace application;
+using adapters::data_models::ShortcutsModel;
 using application::setting_groups::SettingGroups;
 using application::setting_keys::SettingKeys;
 using application::utility::ApplicationSettings;
@@ -55,6 +57,11 @@ QQmlPropertyMap* SettingsController::getShortcuts()
     return &m_shortcutsMap;
 }
 
+data_models::ShortcutsModel* SettingsController::getShortcutsModel()
+{
+    return m_shortcutsModel.get();
+}
+
 void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
                                               SettingGroups group)
 {
@@ -87,6 +94,9 @@ void SettingsController::initialiseSettings(ApplicationSettings settings)
 
     for(auto& elem : settings.shortcuts)
         m_shortcutsMap.insert(elem.first, elem.second);
+
+
+    m_shortcutsModel = std::make_unique<ShortcutsModel>(m_shortcutsMap);
 }
 
 bool SettingsController::keyIsValid(int key)
