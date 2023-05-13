@@ -66,9 +66,20 @@ void ShortcutsModel::endDeletingRow()
     endRemoveRows();
 }
 
-void ShortcutsModel::refreshRows(int row)
+void ShortcutsModel::refreshRow(QString key)
 {
-    emit dataChanged(index(row, 0), index(row, 0), { ShorcutRole, ValueRole });
+    int row = 0;
+    for(const QString& item : m_data.keys())
+    {
+        if(item == key)
+        {
+            emit dataChanged(index(row, 0), index(row, 0),
+                             { ShorcutRole, ValueRole });
+            return;
+        }
+
+        ++row;
+    }
 }
 
 }  // namespace adapters::data_models

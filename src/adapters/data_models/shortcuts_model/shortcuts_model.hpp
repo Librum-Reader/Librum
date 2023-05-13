@@ -17,7 +17,7 @@ public:
     enum Roles
     {
         ShorcutRole = Qt::UserRole,
-        ValueRole,
+        ValueRole
     };
 
     ShortcutsModel(const QQmlPropertyMap& data);
@@ -31,7 +31,7 @@ public slots:
     void endInsertingRow();
     void startDeletingRow(int row);
     void endDeletingRow();
-    void refreshRows(int row);
+    void refreshRow(QString key);
 
 private:
     const QQmlPropertyMap& m_data;
