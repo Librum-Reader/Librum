@@ -206,8 +206,6 @@ Page
         id: addShortcutPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
-        
-        actions: root.shortcutListModel
     }
     
     QtObject

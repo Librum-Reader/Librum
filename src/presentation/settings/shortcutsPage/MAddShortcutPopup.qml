@@ -4,12 +4,12 @@ import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Popup
 {
     id: root
-    property var actions
     property int preselectedSettingIndex: -1
     signal applied
     
@@ -122,10 +122,11 @@ Popup
                         selectedItemPadding: 3
                         emptyText: "None selected"
                         dropdownIconSize: 11
+                        contentPropertyName: "shortcut"
                         
                         fontSize: 11.5
                         checkBoxStyle: false
-                        model: root.actions
+                        model: SettingsController.shortcutsModel
                     }
                     
                     
