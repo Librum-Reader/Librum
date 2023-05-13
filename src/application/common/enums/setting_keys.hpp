@@ -30,8 +30,8 @@ enum class SettingKeys
     OpenBooksAfterCreation,
 
     // Shortcuts
-    Up,
-    Down,
+    MoveUp,
+    MoveDown,
 
     SettingKeys_END
 };

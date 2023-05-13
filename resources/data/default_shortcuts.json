@@ -1,4 +1,4 @@
 { 
-    "Up": "Up",
-    "Down": "Down"
+    "MoveUp": "Up",
+    "MoveDown": "Down"
 }
