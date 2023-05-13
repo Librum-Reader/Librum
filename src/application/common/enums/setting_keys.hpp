@@ -32,6 +32,21 @@ enum class SettingKeys
     // Shortcuts
     MoveUp,
     MoveDown,
+    NextPage,
+    PreviousPage,
+    Search,
+    FullScreen,
+    GoToHome,
+    ZoomIn,
+    ZoomOut,
+    OpenChapters,
+    OpenBookmarks,
+    StartOfDocument,
+    EndOfDocument,
+    PrintPage,
+    CreateBookmarkHere,
+    ToggleSpeaking,
+    ReloadLibrary,
 
     SettingKeys_END
 };

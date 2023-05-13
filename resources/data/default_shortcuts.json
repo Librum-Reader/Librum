@@ -1,4 +1,19 @@
 { 
     "MoveUp": "Up",
-    "MoveDown": "Down"
+    "MoveDown": "Down",
+    "NextPage":"Right",
+    "PreviousPage": "Left",
+    "Search": "Ctrl+F",
+    "FullScreen": "Ctrl+Alt+F",
+    "GoToHome": "Ctrl+Alt+H",
+    "ZoomIn": "Ctrl++",
+    "ZoomOut": "Ctrl+-",
+    "OpenChapters": "Tab",
+    "OpenBookmarks": "Ctrl+B",
+    "StartOfDocument": "Ctrl+Pos1",
+    "EndOfDocument": "Ctrl+End",
+    "PrintPage": "Ctrl+P",
+    "CreateBookmarkHere": "Alt+3",
+    "ToggleSpeaking": "F5",
+    "ReloadLibrary": "Ctrl+R"
 }
