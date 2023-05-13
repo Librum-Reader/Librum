@@ -13,6 +13,7 @@ Item
     property string boxBackgroundColor: Style.colorContainerBackground
     
     property alias model: selectionPopup.model
+    property alias contentPropertyName: selectionPopup.contentPropertyName
     property alias listView: selectionPopup.listView
     property alias checkBoxStyle: selectionPopup.checkBoxStyle
     property alias checkBoxSize: selectionPopup.checkBoxSize

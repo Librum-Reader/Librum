@@ -10,6 +10,7 @@ Popup
 {
     id: root
     property string selectedContent
+    property string contentPropertyName: "text"
     property alias model: listView.model
     property alias listView: listView
     property int itemHeight: 28
@@ -68,6 +69,9 @@ Popup
                 checkBoxSize: root.checkBoxSize
                 
                 onClicked: (mouse, index) => root.selectItem(index)
+                
+                // Overwrite the way the model's text is queried
+                function getContent() { return model[root.contentPropertyName] }
             }
             
             Keys.onReturnPressed: if(listView.currentIndex !== -1) root.selectItem(listView.currentIndex);
