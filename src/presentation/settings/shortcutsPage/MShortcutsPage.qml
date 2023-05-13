@@ -51,13 +51,13 @@ Page
             MButton
             {
                 id: addShortcutButton
-                Layout.preferredWidth: 160
+                Layout.preferredWidth: 164
                 Layout.preferredHeight: 38
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                text: "Add shortcut"
+                text: "Edit shortcut"
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 fontSize: 13
@@ -206,6 +206,8 @@ Page
         id: addShortcutPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
+        
+        onApplied: (shortcut, value) => SettingsController.setSetting(shortcut, value, SettingGroups.Shortcuts)
     }
     
     QtObject

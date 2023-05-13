@@ -14,6 +14,7 @@ Item
     property var itemToRedirectFocusTo
     property bool recording: false
     property string originalSequence: ""
+    property alias text: recordLabel.text
     
     
     // Creates the glowing effect around the button

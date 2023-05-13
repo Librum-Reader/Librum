@@ -11,7 +11,7 @@ Popup
 {
     id: root
     property int preselectedSettingIndex: -1
-    signal applied
+    signal applied(string shortcut, string value)
     
     implicitWidth: 594
     implicitHeight: layout.implicitHeight
@@ -161,7 +161,7 @@ Popup
                         KeyNavigation.right: cancelButton
                         KeyNavigation.tab: cancelButton
                         
-                        onClicked: root.close()
+                        onClicked: apply()
                         
                         // Key navigation
                         Keys.onPressed:
@@ -174,9 +174,15 @@ Popup
                                 }
                                 else if(event.key === Qt.Key_Return)
                                 {
-                                    root.close();
+                                    apply();
                                 }
                             }
+                        
+                        function apply()
+                        {
+                            root.applied(actionsComboBox.text, recordKeyBox.text);
+                            root.close();
+                        }
                     }
                     
                     MButton
