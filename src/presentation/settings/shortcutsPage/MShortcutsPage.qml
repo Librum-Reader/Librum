@@ -181,7 +181,7 @@ Page
                                     addShortcutPopup.open();
                                 }
                             
-                            onDeleteClicked: (index) => {}
+                            onDeleteClicked: (shortcut) => SettingsController.setSetting(shortcut, "", SettingGroups.Shortcuts);
                         }
                         
                         MouseArea

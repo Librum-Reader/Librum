@@ -17,7 +17,7 @@ Item
     // this needs to be signaled to the header because it also needs to reize its gap aswell
     signal gapWidthChanged(int spacing)
     signal editClicked(int index)
-    signal deleteClicked(int index)
+    signal deleteClicked(string shortcut)
     
     height: 52
     width: listView.width
@@ -72,7 +72,7 @@ Item
                 id: shortcutValue
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
-                text: root.value
+                text: root.value.length > 0 ? root.value : "None"
                 color: Style.colorText
                 font.pointSize: 12
                 font.weight: Font.DemiBold
@@ -110,7 +110,7 @@ Item
                 imagePath: Icons.trash
                 imageSize: 21
                 
-                onClicked: root.deleteClicked(root.index)
+                onClicked: root.deleteClicked(root.shortcut)
             }
         }
     }
