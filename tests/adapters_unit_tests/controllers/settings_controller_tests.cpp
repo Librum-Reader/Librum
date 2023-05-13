@@ -175,7 +175,7 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     auto openBooksAfterCreation =
         utility::getNameForEnumValue(SettingKeys::OpenBooksAfterCreation);
     auto openBooksAfterCreationValue = QVariant::fromValue(true);
-    
+
     auto upKey = utility::getNameForEnumValue(SettingKeys::MoveUp);
     auto upKeyValue = QVariant::fromValue(QString("ALT+4"));
 
@@ -209,7 +209,7 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
               generalMap->value("OpenBooksAfterCreation").toBool());
 
     auto shortcutsMap = settingsController->getShortcuts();
-    EXPECT_EQ(upKeyValue, shortcutsMap->value("Up").toString());
+    EXPECT_EQ(upKeyValue, shortcutsMap->value("MoveUp").toString());
 }
 
 
