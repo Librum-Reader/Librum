@@ -7,6 +7,7 @@
 #include "i_settings_service.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
+#include "shortcuts_model.hpp"
 
 namespace adapters::controllers
 {
@@ -25,7 +26,7 @@ public:
     QQmlPropertyMap* getAppearanceSettings() override;
     QQmlPropertyMap* getGeneralSettings() override;
     QQmlPropertyMap* getShortcuts() override;
-    data_models::ShortcutsModel* getShortcutsModel() override;
+    data_models::ShortcutsProxyModel* getShortcutsModel() override;
 
 private slots:
     void updateChangedSetting(application::setting_keys::SettingKeys key,
@@ -41,6 +42,7 @@ private:
     QQmlPropertyMap m_generalSettingsMap;
     QQmlPropertyMap m_shortcutsMap;
     std::unique_ptr<data_models::ShortcutsModel> m_shortcutsModel;
+    std::unique_ptr<data_models::ShortcutsProxyModel> m_shortcutsProxyModel;
     application::ISettingsService* m_settingsService;
 };
 

@@ -2,7 +2,7 @@
 #include <QQmlPropertyMap>
 #include <QStandardItemModel>
 #include <QVariant>
-#include "shortcuts_model/shortcuts_model.hpp"
+#include "shortcuts_model/shortcuts_proxy_model.hpp"
 #pragma once
 
 namespace adapters
@@ -32,7 +32,7 @@ class ISettingsController : public QObject
     Q_PROPERTY(
         QQmlPropertyMap* generalSettings READ getGeneralSettings CONSTANT)
     Q_PROPERTY(QQmlPropertyMap* shortcuts READ getShortcuts CONSTANT)
-    Q_PROPERTY(adapters::data_models::ShortcutsModel* shortcutsModel READ
+    Q_PROPERTY(adapters::data_models::ShortcutsProxyModel* shortcutsModel READ
                    getShortcutsModel CONSTANT)
 
 
@@ -48,7 +48,7 @@ public:
     virtual QQmlPropertyMap* getAppearanceSettings() = 0;
     virtual QQmlPropertyMap* getGeneralSettings() = 0;
     virtual QQmlPropertyMap* getShortcuts() = 0;
-    virtual data_models::ShortcutsModel* getShortcutsModel() = 0;
+    virtual data_models::ShortcutsProxyModel* getShortcutsModel() = 0;
 };
 
 }  // namespace adapters

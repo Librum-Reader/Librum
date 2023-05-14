@@ -5,7 +5,7 @@
 namespace string_utils
 {
 
-double fuzzCompare(const QString& lhs,
+inline double fuzzCompare(const QString& lhs,
                           const QString& rhs)
 {
     // If rhs is a sub-string of lhs, return a high ratio
@@ -24,7 +24,7 @@ double fuzzCompare(const QString& lhs,
                                   lhs.toStdString());
 }
 
-bool lexicographicallyLess(const QString& left, const QString& right)
+inline bool lexicographicallyLess(const QString& left, const QString& right)
 {
     if(left.isEmpty())
         return false;

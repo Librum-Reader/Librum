@@ -24,7 +24,7 @@ public:
     bool filterAcceptsRow(int source_row,
                           const QModelIndex& source_parent) const override;
 
-    void setFilterString(QString newSortString);
+    void setFilterString(QString newFilterString);
     QString getFilterString();
 
 signals:

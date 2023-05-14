@@ -6,6 +6,7 @@
 
 using namespace application;
 using adapters::data_models::ShortcutsModel;
+using adapters::data_models::ShortcutsProxyModel;
 using application::setting_groups::SettingGroups;
 using application::setting_keys::SettingKeys;
 using application::utility::ApplicationSettings;
@@ -75,9 +76,9 @@ QQmlPropertyMap* SettingsController::getShortcuts()
     return &m_shortcutsMap;
 }
 
-data_models::ShortcutsModel* SettingsController::getShortcutsModel()
+data_models::ShortcutsProxyModel* SettingsController::getShortcutsModel()
 {
-    return m_shortcutsModel.get();
+    return m_shortcutsProxyModel.get();
 }
 
 void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
@@ -102,9 +103,8 @@ void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
     }
 
 
-    // Update the shortcuts model
-    if(m_shortcutsModel != nullptr)
-        m_shortcutsModel->refreshRow(keyAsString);
+    // Update the shortcuts proxy model
+    m_shortcutsModel->refreshRow(keyAsString);
 }
 
 void SettingsController::initialiseSettings(ApplicationSettings settings)
@@ -119,7 +119,10 @@ void SettingsController::initialiseSettings(ApplicationSettings settings)
         m_shortcutsMap.insert(elem.first, elem.second);
 
 
+    // Create the models with the new data
     m_shortcutsModel = std::make_unique<ShortcutsModel>(m_shortcutsMap);
+    m_shortcutsProxyModel = std::make_unique<ShortcutsProxyModel>();
+    m_shortcutsProxyModel->setSourceModel(m_shortcutsModel.get());
 }
 
 bool SettingsController::keyIsValid(int key)

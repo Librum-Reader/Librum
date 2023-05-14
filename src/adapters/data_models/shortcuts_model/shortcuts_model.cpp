@@ -27,7 +27,7 @@ QVariant ShortcutsModel::data(const QModelIndex& index, int role) const
 
     switch(role)
     {
-    case ShorcutRole:
+    case ShortcutRole:
         return shortcut;
     case ValueRole:
         return value;
@@ -39,7 +39,7 @@ QVariant ShortcutsModel::data(const QModelIndex& index, int role) const
 QHash<int, QByteArray> ShortcutsModel::roleNames() const
 {
     static QHash<int, QByteArray> roles {
-        { ShorcutRole, "shortcut" },
+        { ShortcutRole, "shortcut" },
         { ValueRole, "value" },
     };
 
@@ -54,7 +54,7 @@ void ShortcutsModel::refreshRow(QString key)
         if(item == key)
         {
             emit dataChanged(index(row, 0), index(row, 0),
-                             { ShorcutRole, ValueRole });
+                             { ShortcutRole, ValueRole });
             return;
         }
 

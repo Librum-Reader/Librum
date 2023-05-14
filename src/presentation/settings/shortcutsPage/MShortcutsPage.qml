@@ -144,6 +144,12 @@ Page
                         imageSize: 14
                         // Make sure that the searchButton does not overlap other items
                         expansionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
+                        
+                        onTriggered: (query) => SettingsController.shortcutsModel.filterString = query
+                        
+                        // Reset filter when closing or leaving the page
+                        Component.onDestruction: SettingsController.shortcutsModel.filterString = ""
+                        onOpenedChanged: if(!opened) SettingsController.shortcutsModel.filterString = ""
                     }
                 }
                 

@@ -16,7 +16,7 @@ class ShortcutsModel : public QAbstractListModel
 public:
     enum Roles
     {
-        ShorcutRole = Qt::UserRole,
+        ShortcutRole = Qt::UserRole,
         ValueRole
     };
 
