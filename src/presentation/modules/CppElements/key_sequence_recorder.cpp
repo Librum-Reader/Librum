@@ -58,8 +58,6 @@ void KeySequenceRecorder::keyPressEvent(QKeyEvent* event)
         }
         if(event->key() == Qt::Key_Escape)
         {
-            emit escapePressed();
-            event->accept();
             return;
         }
         if(event->modifiers().testFlag(Qt::ControlModifier))
@@ -86,7 +84,16 @@ void KeySequenceRecorder::keyPressEvent(QKeyEvent* event)
 
 void KeySequenceRecorder::keyReleaseEvent(QKeyEvent* event)
 {
-    event->accept();
+    // The Escape key is for some reason not caught by the 'keyPressEvent'
+    // method, so we need to handle it manually here
+    if(event->key() == Qt::Key_Escape)
+    {
+        int keyCode(event->key());
+        const QKeySequence sequence(keyCode);
+        setCurrentSequence(sequence.toString());
+
+        event->accept();
+    }
 }
 
 void KeySequenceRecorder::focusInEvent(QFocusEvent* event)
