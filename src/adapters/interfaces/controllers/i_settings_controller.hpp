@@ -44,6 +44,7 @@ public:
     Q_INVOKABLE virtual void setSetting(QString key, const QVariant& value,
                                         int group) = 0;
     Q_INVOKABLE virtual void resetSettingGroup(int group) = 0;
+    Q_INVOKABLE virtual QString checkIfShortcutIsInUse(QString) = 0;
 
     virtual QQmlPropertyMap* getAppearanceSettings() = 0;
     virtual QQmlPropertyMap* getGeneralSettings() = 0;

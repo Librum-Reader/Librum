@@ -61,6 +61,17 @@ void SettingsController::resetSettingGroup(int group)
     m_settingsService->resetSettingsGroupToDefault(groupAsEnum);
 }
 
+QString SettingsController::checkIfShortcutIsInUse(QString valueToCheck)
+{
+    for(const QString& key : m_shortcutsMap.keys())
+    {
+        if(m_shortcutsMap[key].toString() == valueToCheck)
+            return key;
+    }
+
+    return "";
+}
+
 QQmlPropertyMap* SettingsController::getAppearanceSettings()
 {
     return &m_appearanceSettingsMap;

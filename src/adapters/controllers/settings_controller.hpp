@@ -22,6 +22,7 @@ public:
     void setSetting(int key, const QVariant& value, int group) override;
     void setSetting(QString key, const QVariant& value, int group) override;
     void resetSettingGroup(int group) override;
+    QString checkIfShortcutIsInUse(QString valueToCheck) override;
 
     QQmlPropertyMap* getAppearanceSettings() override;
     QQmlPropertyMap* getGeneralSettings() override;

@@ -143,7 +143,35 @@ Popup
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemToRedirectFocusTo: applyButton
+                        
+                        onTextChanged:
+                        {
+                            let conflictingShortcut = SettingsController.checkIfShortcutIsInUse(recordKeyBox.text);
+                            if(conflictingShortcut.length !== 0)
+                            {
+                                shortcutIsAlreadyInUseLabel.conflictingShortcut = conflictingShortcut;
+                                shortcutIsAlreadyInUseLabel.visible = true;
+                            }
+                            else
+                            {
+                                shortcutIsAlreadyInUseLabel.visible = false;
+                            }
+                        }
                     }
+                }
+                
+                Label
+                {
+                    id: shortcutIsAlreadyInUseLabel
+                    property string conflictingShortcut: ""
+                    
+                    Layout.preferredWidth: parent.width
+                    Layout.topMargin: 16
+                    visible: false
+                    text: "The shortcut '" + recordKeyBox.text + "' is already used for '" + conflictingShortcut + "'."
+                    wrapMode: Text.WordWrap
+                    font.pointSize: 11
+                    color: Style.colorErrorText
                 }
                 
                 RowLayout
