@@ -40,6 +40,8 @@ add_library(adapters
                     data_models/user_tags_model/user_tags_model.hpp
                     data_models/shortcuts_model/shortcuts_model.cpp
                     data_models/shortcuts_model/shortcuts_model.hpp
+                    data_models/shortcuts_model/shortcuts_proxy_model.cpp
+                    data_models/shortcuts_model/shortcuts_proxy_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp

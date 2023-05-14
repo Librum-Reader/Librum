@@ -25,6 +25,7 @@
 #include "page_item.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
+#include "shortcuts_proxy_model.hpp"
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
@@ -60,6 +61,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
+    qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
