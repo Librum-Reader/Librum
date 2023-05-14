@@ -66,6 +66,7 @@ Page
         id: stopFullScreenMode
         sequences: [SettingsController.shortcuts.ExitFullScreenMode]
         onActivated: internal.stopFullScreenMode();
+        enabled: internal.fullScreen
     }
     
     
