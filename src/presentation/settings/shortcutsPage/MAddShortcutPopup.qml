@@ -28,7 +28,14 @@ Popup
         internal.setPreselectedItem();
     }
     
-    onClosed: internal.resetPopupData()
+    onClosed:
+    {
+        internal.resetPopupData()
+        
+        // Reset the buttons, so that "Apply" has the focus again
+        cancelButton.active = false;
+        applyButton.active = true;
+    }
     
     
     Shortcut
