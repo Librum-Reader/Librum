@@ -175,7 +175,7 @@ Page
                         clip: true
                         model: SettingsController.shortcutsModel
                         flickDeceleration: 15000
-                        maximumFlickVelocity: 2000
+                        maximumFlickVelocity: 1600
                         boundsBehavior: Flickable.StopAtBounds
                         delegate: MShortcutDelegate
                         {
