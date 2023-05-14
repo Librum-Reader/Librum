@@ -74,8 +74,17 @@ Item
                 Layout.alignment: Qt.AlignVCenter
                 text: root.value.length > 0 ? root.value : "None"
                 color: Style.colorText
+                opacity: valueLabelArea.pressed ? 0.6 : 1
                 font.pointSize: 12
                 font.weight: Font.DemiBold
+                
+                MouseArea
+                {
+                    id: valueLabelArea
+                    anchors.fill: parent
+                    
+                    onClicked: root.editClicked(root.index);
+                }
             }
             
             Item { Layout.fillWidth: true }
