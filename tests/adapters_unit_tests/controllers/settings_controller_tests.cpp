@@ -194,8 +194,8 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     };
 
     // Act
-    // This calls a slot on the settings controller which causes the property
-    // maps to be
+    // This calls a slot on the settings controller that causes the property
+    // maps to be stored
     emit settingsServiceMock.settingsLoaded(settings);
 
 
@@ -212,5 +212,70 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     EXPECT_EQ(upKeyValue, shortcutsMap->value("MoveUp").toString());
 }
 
+TEST_F(ASettingsController, SucceedsCheckingIfAShortcutIsAlreadyInUse)
+{
+    // Arrange
+    QString shortcutToCheck = "Ctrl+A";
+    auto shortcut1 = utility::getNameForEnumValue(SettingKeys::AddBook);
+    auto shortcut1Value = QVariant::fromValue(shortcutToCheck);
+
+    auto shortcut2 = utility::getNameForEnumValue(SettingKeys::ZoomIn);
+    auto shortcut2Value = QVariant::fromValue(QString("Ctrl+B"));
+
+    // App settings sent to initalize the QQmlPropertymaps with
+    ApplicationSettings settings {
+        {},
+        {},
+        {
+            { shortcut1, shortcut1Value },
+            { shortcut2, shortcut2Value },
+        },
+    };
+
+    // Make sure the are stored
+    emit settingsServiceMock.settingsLoaded(settings);
+
+    QString expectedResult = shortcut1;
+
+
+    // Act
+    auto result = settingsController->checkIfShortcutIsInUse(shortcutToCheck);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
+
+TEST_F(ASettingsController, FailsCheckingIfAShortcutIsAlreadyInUseIfItIsntUsed)
+{
+    // Arrange
+    QString unusedShortcut = "Ctrl+C";
+    auto shortcut1 = utility::getNameForEnumValue(SettingKeys::AddBook);
+    auto shortcut1Value = QVariant::fromValue(QString("Ctrl+A"));
+
+    auto shortcut2 = utility::getNameForEnumValue(SettingKeys::ZoomIn);
+    auto shortcut2Value = QVariant::fromValue(QString("Ctrl+B"));
+
+    // App settings sent to initalize the QQmlPropertymaps with
+    ApplicationSettings settings {
+        {},
+        {},
+        {
+            { shortcut1, shortcut1Value },
+            { shortcut2, shortcut2Value },
+        },
+    };
+
+    // Make sure the are stored
+    emit settingsServiceMock.settingsLoaded(settings);
+
+    QString expectedResult = "";
+
+
+    // Act
+    auto result = settingsController->checkIfShortcutIsInUse(unusedShortcut);
+
+    // Assert
+    EXPECT_EQ(expectedResult, result);
+}
 
 }  // namespace tests::adapters
