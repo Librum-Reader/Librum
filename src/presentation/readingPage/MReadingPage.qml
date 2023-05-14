@@ -22,14 +22,14 @@ Page
     Shortcut
     {
         id: zoomIn
-        sequences: [StandardKey.ZoomIn]
+        sequences: [SettingsController.shortcuts.ZoomIn]
         onActivated: documentView.zoom(1.2)
     }
     
     Shortcut
     {
         id: zoomOut
-        sequences: [StandardKey.ZoomOut]
+        sequences: [SettingsController.shortcuts.ZoomOut]
         onActivated: documentView.zoom(0.8)
     }
     
@@ -50,21 +50,21 @@ Page
     Shortcut
     {
         id: nextPage
-        sequences: [StandardKey.MoveToNextPage, "Right"]
+        sequences: [SettingsController.shortcuts.NextPage]
         onActivated: documentView.nextPage()
     }
     
     Shortcut
     {
         id: previousPage
-        sequences: [StandardKey.MoveToPreviousPage, "Left"]
+        sequences: [SettingsController.shortcuts.PreviousPage]
         onActivated: documentView.previousPage()
     }
     
     Shortcut
     {
         id: stopFullScreenMode
-        sequence: "ESC"
+        sequences: [SettingsController.shortcuts.ToggleFullScreenMode]
         onActivated: internal.stopFullScreenMode();
     }
     

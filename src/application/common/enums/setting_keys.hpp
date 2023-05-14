@@ -35,7 +35,7 @@ enum class SettingKeys
     NextPage,
     PreviousPage,
     Search,
-    FullScreen,
+    ToggleFullScreenMode,
     GoToHome,
     ZoomIn,
     ZoomOut,

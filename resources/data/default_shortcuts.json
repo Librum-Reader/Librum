@@ -4,7 +4,7 @@
     "NextPage":"Right",
     "PreviousPage": "Left",
     "Search": "Ctrl+F",
-    "FullScreen": "Ctrl+Alt+F",
+    "ToggleFullScreenMode": "Ctrl+Alt+F",
     "GoToHome": "Ctrl+Alt+H",
     "ZoomIn": "Ctrl++",
     "ZoomOut": "Ctrl+-",
