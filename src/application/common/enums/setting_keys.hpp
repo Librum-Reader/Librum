@@ -35,7 +35,8 @@ enum class SettingKeys
     NextPage,
     PreviousPage,
     Search,
-    ToggleFullScreenMode,
+    StartFullScreenMode,
+    ExitFullScreenMode,
     GoToHome,
     ZoomIn,
     ZoomOut,
@@ -47,6 +48,7 @@ enum class SettingKeys
     CreateBookmarkHere,
     ToggleSpeaking,
     ReloadLibrary,
+    AddBook,
 
     SettingKeys_END
 };

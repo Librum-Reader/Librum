@@ -5,6 +5,7 @@ import QtQuick.Window 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Pane
@@ -38,32 +39,32 @@ Pane
     Shortcut
     {
         id: openChapterSidebar
-        sequence: Qt.Key_Tab
+        sequences: [SettingsController.shortcuts.OpenChapters]
         onActivated: root.chapterButtonClicked()
     }
     Shortcut
     {
         id: openBookmarks
-        sequence: "Ctrl+B"
+        sequences: [SettingsController.shortcuts.OpenBookmarks]
         onActivated: root.bookMarkButtonClicked()
     }
     Shortcut
     {
         id: search
-        sequence: "Ctrl+F"
+        sequences: [SettingsController.shortcuts.Search]
         onActivated: root.searchButtonClicked()
     }
     Shortcut
     {
         id: startFullScreenMode
-        sequences: ["Ctrl+Alt+F"]
+        sequences: [SettingsController.shortcuts.StartFullScreenMode]
         onActivated: root.fullScreenButtonClicked()
     }
     Shortcut
     {
-        id: openOptions
-        sequence: "Ctrl+Alt+O"
-        onActivated: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
+        id: goBackToHome
+        sequences: [SettingsController.shortcuts.GoToHome]
+        onActivated: root.backButtonClicked()
     }
     
     

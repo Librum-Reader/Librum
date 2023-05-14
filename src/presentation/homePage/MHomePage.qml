@@ -23,7 +23,7 @@ Page
     
     Shortcut
     {
-        sequence: StandardKey.New
+        sequence: SettingsController.shortcuts.AddBook
         onActivated: importFilesDialog.open()
     }
     

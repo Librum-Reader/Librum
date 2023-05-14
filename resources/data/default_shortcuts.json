@@ -4,7 +4,8 @@
     "NextPage":"Right",
     "PreviousPage": "Left",
     "Search": "Ctrl+F",
-    "ToggleFullScreenMode": "Ctrl+Alt+F",
+    "StartFullScreenMode": "Ctrl+Alt+F",
+    "ExitFullScreenMode": "ESC",
     "GoToHome": "Ctrl+Alt+H",
     "ZoomIn": "Ctrl++",
     "ZoomOut": "Ctrl+-",
@@ -15,5 +16,6 @@
     "PrintPage": "Ctrl+P",
     "CreateBookmarkHere": "Alt+3",
     "ToggleSpeaking": "F5",
-    "ReloadLibrary": "Ctrl+R"
+    "ReloadLibrary": "Ctrl+R",
+    "AddBook": "Ctrl+N"
 }
