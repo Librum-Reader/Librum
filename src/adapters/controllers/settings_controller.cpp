@@ -104,7 +104,8 @@ void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
 
 
     // Update the shortcuts proxy model
-    m_shortcutsModel->refreshRow(keyAsString);
+    if(m_shortcutsModel != nullptr)
+        m_shortcutsModel->refreshRow(keyAsString);
 }
 
 void SettingsController::initialiseSettings(ApplicationSettings settings)
