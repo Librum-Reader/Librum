@@ -60,13 +60,13 @@ public slots:
 
 
 private:
-    QString m_currentVersion { "v0.3.1" };
-    QString m_newestVersion { "v0.3.1" };
-    QString m_currentQtVersion { "v5.15.7" };
-    QString m_companyName { "Etovex" };
+    QString m_currentVersion { "v0.4.3" };
+    QString m_newestVersion { "v0.4.3" };
+    QString m_currentQtVersion { "v5.15.8" };
+    QString m_companyName { "Librum-Reader" };
     QString m_productName { "Librum" };
-    QString m_companyWebsite { "https://librum-reader.com" };
-    QString m_companyEmail { "librum_reader@protonmail.com" };
+    QString m_companyWebsite { "https://librumreader.com" };
+    QString m_companyEmail { "contact@librumreader.com" };
     QString m_helpEmail { "librum_help@protonmail.com" };
 };
 
