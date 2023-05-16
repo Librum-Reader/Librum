@@ -47,8 +47,7 @@ signals:
     void tagsChanged(int index);
 
 public slots:
-    virtual void setupUserData(const QString& token,
-                                        const QString& email) = 0;
+    virtual void setupUserData(const QString& token, const QString& email) = 0;
     virtual void clearUserData() = 0;
 };
 

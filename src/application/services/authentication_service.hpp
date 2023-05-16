@@ -28,7 +28,6 @@ private:
     void clearTemporaryUserData();
 
     IAuthenticationGateway* m_authenticationGateway;
-    QString m_token;
 
     // To be able to send the user email with the 'loggedIn' signal
     QString m_tempEmail;
