@@ -40,7 +40,7 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             });
 }
 
-void UserService::loadUser(bool rememberMe)
+void UserService::loadUser(bool rememberUser)
 {
     utility::AutomaticLoginHelper autoLoginHelper;
     auto result = autoLoginHelper.tryAutomaticUserLoading();
@@ -56,7 +56,7 @@ void UserService::loadUser(bool rememberMe)
         return;
     }
 
-    m_rememberMe = rememberMe;
+    m_rememberUser = rememberUser;
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
@@ -176,7 +176,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 
     emit finishedLoadingUser(true);
 
-    if(m_rememberMe)
+    if(m_rememberUser)
     {
         utility::AutomaticLoginHelper autoLoginHelper;
         utility::UserData userData {
@@ -188,7 +188,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 
         autoLoginHelper.addUserData(userData);
     }
-    clearRememberMe();
+    clearRememberUser();
 }
 
 bool UserService::userIsLoggedIn()
@@ -196,9 +196,9 @@ bool UserService::userIsLoggedIn()
     return !m_authenticationToken.isEmpty();
 }
 
-void UserService::clearRememberMe()
+void UserService::clearRememberUser()
 {
-    m_rememberMe = false;
+    m_rememberUser = false;
 }
 
 void UserService::setupUserData(const QString& token, const QString& email)

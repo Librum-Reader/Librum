@@ -14,7 +14,7 @@ class UserController : public IUserController
 public:
     UserController(application::IUserService* userService);
 
-    void loadUser(bool rememberMe) override;
+    void loadUser(bool rememberUser) override;
 
     QString getTagUuidForName(QString name) override;
     QString addTag(const QString& name) override;

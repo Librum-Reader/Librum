@@ -40,7 +40,7 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
         return;
     }
 
-    m_rememberMe = loginModel.getRememberMe();
+    m_rememberUser = loginModel.getRememberUser();
     m_tempEmail = loginModel.getEmail();
     m_authenticationGateway->authenticateUser(loginModel);
 }
@@ -86,8 +86,8 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
     }
     else
     {
-        // Store the login data if "RememberMe" was selected
-        if(m_rememberMe)
+        // Store the login data if "rememberUser" was selected
+        if(m_rememberUser)
         {
             utility::AutomaticLoginHelper autoLoginHelper;
             utility::AuthenticationData authData { m_tempEmail, token };
@@ -110,7 +110,7 @@ void AuthenticationService::processRegistrationResult(bool success,
 void AuthenticationService::clearTemporaryUserData()
 {
     m_tempEmail = "";
-    m_rememberMe = false;
+    m_rememberUser = false;
 }
 
 }  // namespace application::services

@@ -29,7 +29,7 @@ private:
     void clearTemporaryUserData();
 
     IAuthenticationGateway* m_authenticationGateway;
-    bool m_rememberMe = false;
+    bool m_rememberUser = false;
     // To be able to send the user email with the 'loggedIn' signal
     QString m_tempEmail;
 };

@@ -7,11 +7,11 @@ namespace domain::value_objects
 class LoginModel
 {
 public:
-    LoginModel(QString email, QString password, bool rememberMe);
+    LoginModel(QString email, QString password, bool rememberUser);
 
     QString getEmail() const;
     QString getPassword() const;
-    bool getRememberMe() const;
+    bool getRememberUser() const;
     bool isValid() const;
 
 private:
@@ -24,7 +24,7 @@ private:
     QString m_password;
     const int m_minPasswordLength = 6;
     const int m_maxPasswordLength = 60;
-    bool m_rememberMe = false;
+    bool m_rememberUser = false;
 };
 
 }  // namespace domain::value_objects

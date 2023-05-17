@@ -36,9 +36,9 @@ UserController::UserController(application::IUserService* userService) :
             &m_userTagsModel, &data_models::UserTagsModel::refreshRows);
 }
 
-void UserController::loadUser(bool rememberMe)
+void UserController::loadUser(bool rememberUser)
 {
-    m_userService->loadUser(rememberMe);
+    m_userService->loadUser(rememberUser);
 }
 
 QString UserController::getTagUuidForName(QString name)

@@ -20,7 +20,7 @@ public:
 
     Q_INVOKABLE virtual void loginUser(const QString& email,
                                        const QString& password,
-                                       bool rememberMe) = 0;
+                                       bool rememberUser) = 0;
     Q_INVOKABLE virtual void tryAutomaticLogin() = 0;
     Q_INVOKABLE virtual void logoutUser() = 0;
     Q_INVOKABLE virtual void registerUser(const QString& firstName,

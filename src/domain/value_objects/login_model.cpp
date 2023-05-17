@@ -3,10 +3,10 @@
 namespace domain::value_objects
 {
 
-LoginModel::LoginModel(QString email, QString password, bool rememberMe) :
+LoginModel::LoginModel(QString email, QString password, bool rememberUser) :
     m_email(email),
     m_password(password),
-    m_rememberMe(rememberMe)
+    m_rememberUser(rememberUser)
 {
 }
 
@@ -20,9 +20,9 @@ QString LoginModel::getPassword() const
     return m_password;
 }
 
-bool LoginModel::getRememberMe() const
+bool LoginModel::getRememberUser() const
 {
-    return m_rememberMe;
+    return m_rememberUser;
 }
 
 bool LoginModel::isValid() const

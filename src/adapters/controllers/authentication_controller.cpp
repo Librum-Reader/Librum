@@ -24,9 +24,9 @@ AuthenticationController::AuthenticationController(
 
 void AuthenticationController::loginUser(const QString& email,
                                          const QString& password,
-                                         bool rememberMe)
+                                         bool rememberUser)
 {
-    LoginModel loginModel(email, password, rememberMe);
+    LoginModel loginModel(email, password, rememberUser);
 
     m_authenticationService->loginUser(loginModel);
 }

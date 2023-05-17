@@ -27,7 +27,7 @@ class IUserController : public QObject
 public:
     virtual ~IUserController() noexcept = default;
 
-    Q_INVOKABLE virtual void loadUser(bool rememberMe) = 0;
+    Q_INVOKABLE virtual void loadUser(bool rememberUser) = 0;
 
     Q_INVOKABLE virtual QString getTagUuidForName(QString name) = 0;
     Q_INVOKABLE virtual QString addTag(const QString& name) = 0;
