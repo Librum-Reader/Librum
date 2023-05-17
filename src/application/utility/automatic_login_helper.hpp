@@ -44,6 +44,8 @@ public:
 
 private:
     std::optional<QJsonObject> getAutomaticLoginFileData();
+    void appendUserDataToJsonObject(QJsonObject& jsonObject, UserData userData);
+    void saveDataToAutomaticLoginFile(const QJsonObject& data);
 
     QString m_automaticLoginFile = "autologin.txt";
 };

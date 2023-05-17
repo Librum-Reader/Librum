@@ -33,7 +33,7 @@ std::optional<UserData> AutomaticLoginHelper::tryAutomaticUserLoading()
 {
     auto jsonData = getAutomaticLoginFileData();
     // Check if the data contains the "firstName" property since it should be
-    // set if the user was already saved. We can't check for "no saved data",
+    // set if the user was already saved. We can't check for no-saved-data,
     // since the authentication data is saved before the user data, thus there
     // is already some data in the file, even though the user was not saved.
     if(!jsonData.has_value() || !jsonData.value().contains("firstName"))
@@ -62,59 +62,29 @@ std::optional<UserData> AutomaticLoginHelper::tryAutomaticUserLoading()
 void AutomaticLoginHelper::saveAuthenticationData(
     const AuthenticationData& authData)
 {
-    auto currentFolder = QDir::current();
-    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
-
+    // Make sure to clear the previous authentication data before saving the new
     clearAutomaticLoginData();
-    QFile file(automaticLoginFilePath);
-    if(!file.open(QFile::WriteOnly | QIODevice::Text))
-    {
-        qDebug() << "...";
-        return;
-    }
+
 
     QJsonObject jsonAuthData {
         { "email", authData.email },
         { "token", authData.token },
     };
-
-    QJsonDocument jsonDoc(jsonAuthData);
-    file.write(jsonDoc.toJson((QJsonDocument::Indented)));
+    saveDataToAutomaticLoginFile(jsonAuthData);
 }
 
 void AutomaticLoginHelper::saveUserData(const UserData& userData)
 {
-    // User data can only be appended to the file, if the auth data already
-    // exists. They would make no sense without each other.
+    // User data can only be appended to the file, if the authentication data
+    // already exists. So check if the file already contains the auth data.
     auto existingAuthData = getAutomaticLoginFileData();
     if(!existingAuthData.has_value())
         return;
 
-    auto currentFolder = QDir::current();
-    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
-    QFile file(automaticLoginFilePath);
-    if(!file.open(QFile::WriteOnly | QIODevice::Text))
-    {
-        qDebug() << "...";
-        return;
-    }
+    auto jsonUserData = existingAuthData.value();
+    appendUserDataToJsonObject(jsonUserData, std::move(userData));
 
-    auto jsonAuthData = existingAuthData.value();
-    jsonAuthData.insert("firstName", userData.firstName);
-    jsonAuthData.insert("lastName", userData.lastName);
-    jsonAuthData.insert("email", userData.email);
-
-    // Add tags
-    QJsonArray tags;
-    for(const auto& tag : userData.tags)
-    {
-        auto obj = QJsonDocument::fromJson(tag.toJson()).object();
-        tags.append(QJsonValue::fromVariant(obj));
-    }
-    jsonAuthData.insert("tags", tags);
-
-    QJsonDocument jsonDoc(jsonAuthData);
-    file.write(jsonDoc.toJson((QJsonDocument::Indented)));
+    saveDataToAutomaticLoginFile(jsonUserData);
 }
 
 void AutomaticLoginHelper::clearAutomaticLoginData()
@@ -146,6 +116,38 @@ std::optional<QJsonObject> AutomaticLoginHelper::getAutomaticLoginFileData()
     }
 
     return jsonDoc.object();
+}
+
+void AutomaticLoginHelper::appendUserDataToJsonObject(QJsonObject& jsonObject,
+                                                      UserData userData)
+{
+    jsonObject.insert("firstName", userData.firstName);
+    jsonObject.insert("lastName", userData.lastName);
+    jsonObject.insert("email", userData.email);
+
+    QJsonArray tags;
+    for(const auto& tag : userData.tags)
+    {
+        auto obj = QJsonDocument::fromJson(tag.toJson()).object();
+        tags.append(QJsonValue::fromVariant(obj));
+    }
+    jsonObject.insert("tags", tags);
+}
+
+void AutomaticLoginHelper::saveDataToAutomaticLoginFile(const QJsonObject& data)
+{
+    auto currentFolder = QDir::current();
+    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
+
+    QFile file(automaticLoginFilePath);
+    if(!file.open(QFile::WriteOnly | QIODevice::Text))
+    {
+        qDebug() << "Failed Opening automatic login file for saving data";
+        return;
+    }
+
+    QJsonDocument jsonDoc(data);
+    file.write(jsonDoc.toJson((QJsonDocument::Indented)));
 }
 
 }  // namespace application::utility
