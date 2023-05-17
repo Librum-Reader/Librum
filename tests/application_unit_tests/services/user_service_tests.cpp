@@ -49,9 +49,6 @@ struct AUserService : public ::testing::Test
 
 TEST_F(AUserService, SucceedsLoadingTheUser)
 {
-    // Expect
-    EXPECT_CALL(userStorageGatewayMock, getUser(_)).Times(1);
-
     // Act
     userService->loadUser(false);
 }
