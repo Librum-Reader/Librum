@@ -59,7 +59,7 @@ std::optional<UserData> AutomaticLoginHelper::tryAutomaticUserLoading()
     return user;
 }
 
-void AutomaticLoginHelper::addAuthenticationData(
+void AutomaticLoginHelper::saveAuthenticationData(
     const AuthenticationData& authData)
 {
     auto currentFolder = QDir::current();
@@ -82,7 +82,7 @@ void AutomaticLoginHelper::addAuthenticationData(
     file.write(jsonDoc.toJson((QJsonDocument::Indented)));
 }
 
-void AutomaticLoginHelper::addUserData(const UserData& userData)
+void AutomaticLoginHelper::saveUserData(const UserData& userData)
 {
     // User data can only be appended to the file, if the auth data already
     // exists. They would make no sense without each other.

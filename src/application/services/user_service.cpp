@@ -31,7 +31,9 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
     // Tag changed
     connect(&m_user, &User::tagsChanged, this, &UserService::tagsChanged);
 
-    // Fetch changes timer
+
+    // The timer which controls in which intervall we will check for new changes
+    // to the user data on the server.
     m_fetchChangesTimer.setInterval(m_fetchChangesInverval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
@@ -42,19 +44,9 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
 
 void UserService::loadUser(bool rememberUser)
 {
-    utility::AutomaticLoginHelper autoLoginHelper;
-    auto result = autoLoginHelper.tryAutomaticUserLoading();
-    if(result.has_value())
-    {
-        utility::UserData userData = result.value();
-        User user(userData.firstName, userData.lastName, userData.email);
-
-        for(auto& tag : userData.tags)
-            user.addTag(tag);
-
-        proccessUserInformation(user, true);
+    auto success = tryLoadingUserFromFile();
+    if(success)
         return;
-    }
 
     m_rememberUser = rememberUser;
     m_userStorageGateway->getUser(m_authenticationToken);
@@ -168,26 +160,14 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
-
     for(const auto& tag : user.getTags())
-    {
         m_user.addTag(tag);
-    }
 
     emit finishedLoadingUser(true);
 
     if(m_rememberUser)
-    {
-        utility::AutomaticLoginHelper autoLoginHelper;
-        utility::UserData userData {
-            user.getFirstName(),
-            user.getLastName(),
-            user.getEmail(),
-            user.getTags(),
-        };
+        saveUserToFile(user);
 
-        autoLoginHelper.addUserData(userData);
-    }
     clearRememberUser();
 }
 
@@ -198,7 +178,40 @@ bool UserService::userIsLoggedIn()
 
 void UserService::clearRememberUser()
 {
+    // This needs to be reset after every 'loadUser' request, else we might
+    // save the data for the next user, even though they don't want it
     m_rememberUser = false;
+}
+
+bool UserService::tryLoadingUserFromFile()
+{
+    utility::AutomaticLoginHelper autoLoginHelper;
+    auto result = autoLoginHelper.tryAutomaticUserLoading();
+    if(result.has_value())
+    {
+        utility::UserData userData = result.value();
+        User user(userData.firstName, userData.lastName, userData.email);
+        for(auto& tag : userData.tags)
+            user.addTag(tag);
+
+        proccessUserInformation(user, true);
+        return true;
+    }
+
+    return false;
+}
+
+void UserService::saveUserToFile(const domain::entities::User& user)
+{
+    utility::AutomaticLoginHelper autoLoginHelper;
+    utility::UserData userData {
+        user.getFirstName(),
+        user.getLastName(),
+        user.getEmail(),
+        user.getTags(),
+    };
+
+    autoLoginHelper.saveUserData(userData);
 }
 
 void UserService::setupUserData(const QString& token, const QString& email)

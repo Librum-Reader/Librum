@@ -91,7 +91,7 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
         {
             utility::AutomaticLoginHelper autoLoginHelper;
             utility::AuthenticationData authData { m_tempEmail, token };
-            autoLoginHelper.addAuthenticationData(authData);
+            autoLoginHelper.saveAuthenticationData(authData);
         }
 
         emit loggedIn(token, m_tempEmail);

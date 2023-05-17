@@ -47,6 +47,8 @@ private slots:
 private:
     bool userIsLoggedIn();
     void clearRememberUser();
+    bool tryLoadingUserFromFile();
+    void saveUserToFile(const domain::entities::User& user);
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

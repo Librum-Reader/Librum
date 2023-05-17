@@ -38,8 +38,8 @@ class AutomaticLoginHelper
 public:
     std::optional<AuthenticationData> tryAutomaticAuthentication();
     std::optional<UserData> tryAutomaticUserLoading();
-    void addAuthenticationData(const AuthenticationData& authData);
-    void addUserData(const UserData& userData);
+    void saveAuthenticationData(const AuthenticationData& authData);
+    void saveUserData(const UserData& userData);
     void clearAutomaticLoginData();
 
 private:
