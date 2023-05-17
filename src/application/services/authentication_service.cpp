@@ -20,6 +20,14 @@ AuthenticationService::AuthenticationService(
     connect(m_authenticationGateway,
             &IAuthenticationGateway::registrationFinished, this,
             &AuthenticationService::processRegistrationResult);
+
+    // Delete the user data when logging out
+    connect(this, &AuthenticationService::loggedOut, this,
+            []()
+            {
+                utility::AutomaticLoginHelper autoLoginHelper;
+                autoLoginHelper.clearAutomaticLoginData();
+            });
 }
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
