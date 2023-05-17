@@ -20,6 +20,7 @@ class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
     MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
+    MOCK_METHOD(void, tryAutomaticLogin, (), (override));
     MOCK_METHOD(void, logoutUser, (), (override));
     MOCK_METHOD(void, registerUser,
                 (const domain::value_objects::RegisterModel& registerModel),
@@ -54,7 +55,7 @@ TEST_F(AnAuthenticationController, SucceedsLogingAUserIn)
 
 
     // Act
-    authController->loginUser(email, password);
+    authController->loginUser(email, password, false);
 }
 
 TEST_F(AnAuthenticationController, SucceedsRegisteringAUser)

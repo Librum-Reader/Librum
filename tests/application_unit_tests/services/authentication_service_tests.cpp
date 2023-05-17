@@ -44,7 +44,8 @@ TEST_F(AnAuthenticationService, SucceedsLogingUserIn)
     // Arrange
     QString someValidEmail = "someEmail@librum.com";
     QString someValidPassword = "SomePassword123";
-    value_objects::LoginModel loginModel(someValidEmail, someValidPassword);
+    value_objects::LoginModel loginModel(someValidEmail, someValidPassword,
+                                         false);
 
 
     // Expect
@@ -61,7 +62,8 @@ TEST_F(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
 
     QString someInvalidEmail = "inval";
     QString someInvalidPassword = "Somep";
-    value_objects::LoginModel loginModel(someInvalidEmail, someInvalidPassword);
+    value_objects::LoginModel loginModel(someInvalidEmail, someInvalidPassword,
+                                         false);
 
 
     // Expect

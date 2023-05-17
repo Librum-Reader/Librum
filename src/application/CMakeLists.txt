@@ -51,6 +51,9 @@ set(application_SRC
     utility/application_settings.hpp
     utility/book_merger.cpp
     utility/book_merger.hpp
+    utility/book_merger.cpp
+    utility/automatic_login_helper.hpp
+    utility/automatic_login_helper.cpp
 )
 
 

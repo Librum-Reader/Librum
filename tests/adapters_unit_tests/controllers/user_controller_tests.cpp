@@ -19,7 +19,7 @@ namespace tests::adapters
 class UserServiceMock : public application::IUserService
 {
 public:
-    MOCK_METHOD(void, loadUser, (), (override));
+    MOCK_METHOD(void, loadUser, (bool), (override));
     MOCK_METHOD(QString, getFirstName, (), (const, override));
     MOCK_METHOD(void, setFirstName, (const QString&), (override));
     MOCK_METHOD(QString, getLastName, (), (const, override));
@@ -61,10 +61,10 @@ struct AUserController : public ::testing::Test
 TEST_F(AUserController, SucceedsLoadingABook)
 {
     // Expect
-    EXPECT_CALL(userServiceMock, loadUser()).Times(1);
+    EXPECT_CALL(userServiceMock, loadUser(false)).Times(1);
 
     // Act
-    userController->loadUser();
+    userController->loadUser(false);
 }
 
 TEST_F(AUserController, SucceedsGettingFirstName)

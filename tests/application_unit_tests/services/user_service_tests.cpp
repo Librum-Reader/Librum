@@ -53,7 +53,7 @@ TEST_F(AUserService, SucceedsLoadingTheUser)
     EXPECT_CALL(userStorageGatewayMock, getUser(_)).Times(1);
 
     // Act
-    userService->loadUser();
+    userService->loadUser(false);
 }
 
 TEST_F(AUserService, SucceedsSettingFirstName)

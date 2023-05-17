@@ -38,7 +38,7 @@ TEST_F(AnAuthenticationGateway, SucceedsAuthenticatingAUser)
 {
     // Arrange
     value_objects::LoginModel loginModel("someEmail@librum.com",
-                                         "SomePassword123");
+                                         "SomePassword123", false);
 
 
     // Expect

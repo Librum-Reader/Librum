@@ -15,7 +15,7 @@ class UserService : public IUserService
 public:
     UserService(IUserStorageGateway* userStorageGateway);
 
-    void loadUser() override;
+    void loadUser(bool rememberMe) override;
 
     QString getFirstName() const override;
     void setFirstName(const QString& newFirstName) override;
@@ -46,12 +46,14 @@ private slots:
 
 private:
     bool userIsLoggedIn();
+    void clearRememberMe();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
     const int m_fetchChangesInverval = 15'000;
+    bool m_rememberMe = false;
 };
 
 }  // namespace application::services

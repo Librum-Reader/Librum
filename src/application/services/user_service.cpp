@@ -1,5 +1,6 @@
 #include "user_service.hpp"
 #include <QDebug>
+#include "automatic_login_helper.hpp"
 #include "tag.hpp"
 
 using domain::entities::Tag;
@@ -33,11 +34,29 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangesInverval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
-            &UserService::loadUser);
+            [this]()
+            {
+                loadUser(true);
+            });
 }
 
-void UserService::loadUser()
+void UserService::loadUser(bool rememberMe)
 {
+    utility::AutomaticLoginHelper autoLoginHelper;
+    auto result = autoLoginHelper.tryAutomaticUserLoading();
+    if(result.has_value())
+    {
+        utility::UserData userData = result.value();
+        User user(userData.firstName, userData.lastName, userData.email);
+
+        for(auto& tag : userData.tags)
+            user.addTag(tag);
+
+        proccessUserInformation(user, true);
+        return;
+    }
+
+    m_rememberMe = rememberMe;
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
@@ -156,11 +175,30 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     }
 
     emit finishedLoadingUser(true);
+
+    if(m_rememberMe)
+    {
+        utility::AutomaticLoginHelper autoLoginHelper;
+        utility::UserData userData {
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getTags(),
+        };
+
+        autoLoginHelper.addUserData(userData);
+    }
+    clearRememberMe();
 }
 
 bool UserService::userIsLoggedIn()
 {
     return !m_authenticationToken.isEmpty();
+}
+
+void UserService::clearRememberMe()
+{
+    m_rememberMe = false;
 }
 
 void UserService::setupUserData(const QString& token, const QString& email)

@@ -1,5 +1,6 @@
 #include "authentication_service.hpp"
 #include <QDebug>
+#include "automatic_login_helper.hpp"
 #include "i_authentication_gateway.hpp"
 
 
@@ -31,8 +32,22 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
         return;
     }
 
+    m_rememberMe = loginModel.getRememberMe();
     m_tempEmail = loginModel.getEmail();
     m_authenticationGateway->authenticateUser(loginModel);
+}
+
+void AuthenticationService::tryAutomaticLogin()
+{
+    utility::AutomaticLoginHelper autoLoginHelper;
+    auto result = autoLoginHelper.tryAutomaticAuthentication();
+    if(!result.has_value())
+        return;
+
+    utility::AuthenticationData authData = result.value();
+    m_tempEmail = authData.email;
+
+    processAuthenticationResult(authData.token);
 }
 
 void AuthenticationService::logoutUser()
@@ -60,11 +75,20 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
     {
         qWarning() << "Authentication token is empty";
         emit loginFinished(false);
-        return;
     }
+    else
+    {
+        // Store the login data if "RememberMe" was selected
+        if(m_rememberMe)
+        {
+            utility::AutomaticLoginHelper autoLoginHelper;
+            utility::AuthenticationData authData { m_tempEmail, token };
+            autoLoginHelper.addAuthenticationData(authData);
+        }
 
-    emit loggedIn(token, m_tempEmail);
-    emit loginFinished(true);
+        emit loggedIn(token, m_tempEmail);
+        emit loginFinished(true);
+    }
 
     clearTemporaryUserData();
 }
@@ -78,6 +102,7 @@ void AuthenticationService::processRegistrationResult(bool success,
 void AuthenticationService::clearTemporaryUserData()
 {
     m_tempEmail = "";
+    m_rememberMe = false;
 }
 
 }  // namespace application::services

@@ -289,19 +289,21 @@ MFlickWrapper
                 return;
             }
             
-            AuthController.loginUser(emailInput.text, passwordInput.text);   
+            AuthController.loginUser(emailInput.text, passwordInput.text, rememberMeCheckBox.checked);
         }
         
         function processLoginResult(success)
         {
             if(success)
             {
-                UserController.loadUser();
+                UserController.loadUser(rememberMeCheckBox.checked);
             }
             else
             {
                 // TODO: Login failed
             }
         }
+        
+        Component.onCompleted: AuthController.tryAutomaticLogin();
     }
 }

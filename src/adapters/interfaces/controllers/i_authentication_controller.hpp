@@ -19,7 +19,9 @@ public:
     virtual ~IAuthenticationController() noexcept = default;
 
     Q_INVOKABLE virtual void loginUser(const QString& email,
-                                       const QString& password) = 0;
+                                       const QString& password,
+                                       bool rememberMe) = 0;
+    Q_INVOKABLE virtual void tryAutomaticLogin() = 0;
     Q_INVOKABLE virtual void logoutUser() = 0;
     Q_INVOKABLE virtual void registerUser(const QString& firstName,
                                           const QString& lastName,

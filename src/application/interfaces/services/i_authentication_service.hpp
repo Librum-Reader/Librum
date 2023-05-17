@@ -18,6 +18,7 @@ public:
     virtual ~IAuthenticationService() noexcept = default;
     virtual void loginUser(
         const domain::value_objects::LoginModel& loginModel) = 0;
+    virtual void tryAutomaticLogin() = 0;
     virtual void logoutUser() = 0;
     virtual void registerUser(
         const domain::value_objects::RegisterModel& registerModel) = 0;

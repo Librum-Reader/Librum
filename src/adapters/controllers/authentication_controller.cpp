@@ -23,11 +23,17 @@ AuthenticationController::AuthenticationController(
 }
 
 void AuthenticationController::loginUser(const QString& email,
-                                         const QString& password)
+                                         const QString& password,
+                                         bool rememberMe)
 {
-    LoginModel loginModel(email, password);
+    LoginModel loginModel(email, password, rememberMe);
 
     m_authenticationService->loginUser(loginModel);
+}
+
+void AuthenticationController::tryAutomaticLogin()
+{
+    m_authenticationService->tryAutomaticLogin();
 }
 
 void AuthenticationController::logoutUser()

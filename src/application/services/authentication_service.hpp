@@ -15,6 +15,7 @@ public:
 
     void loginUser(
         const domain::value_objects::LoginModel& loginModel) override;
+    void tryAutomaticLogin() override;
     void logoutUser() override;
     void registerUser(
         const domain::value_objects::RegisterModel& registerModel) override;
@@ -28,7 +29,7 @@ private:
     void clearTemporaryUserData();
 
     IAuthenticationGateway* m_authenticationGateway;
-
+    bool m_rememberMe = false;
     // To be able to send the user email with the 'loggedIn' signal
     QString m_tempEmail;
 };
