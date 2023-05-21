@@ -154,6 +154,13 @@ public:
      */
     Q_INVOKABLE void setPassword(const QString& password);
 
+    Q_INVOKABLE void expand(const QModelIndex&)
+    {
+        // This method just exists for fixing a warning of something trying to
+        // call a non-existent "expand" method
+        ;
+    };
+
     // Internal, not binded to qml
     Okular::Document* document();
     Observer* pageviewObserver();

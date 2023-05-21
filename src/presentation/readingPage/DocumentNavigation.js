@@ -87,7 +87,8 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let newPageY = pageView.currentItem.height * newPageNumber;
+    let pageHeight = pageView.currentItem != null ? pageView.currentItem.height : 0
+    let newPageY = pageHeight * newPageNumber;
     
     if(newPageNumber > root.document.currentPage)
         setMoveDirection("up");
