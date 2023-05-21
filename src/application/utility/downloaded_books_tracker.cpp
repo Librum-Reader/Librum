@@ -29,7 +29,7 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
         QFile metaFile(libraryDir.filePath(metaFileName));
         if(!metaFile.open(QFile::ReadOnly | QIODevice::Text))
         {
-            qWarning() << QString("Getting tracked book failed."
+            qWarning() << QString("Getting tracked book failed. "
                                   "Failed opening " +
                                   m_fileExtension + " file at: %1")
                               .arg(metaFile.fileName());
@@ -58,7 +58,7 @@ std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
     QFile metaFile(libraryDir.path() + "/" + fileName + m_fileExtension);
     if(!metaFile.open(QFile::ReadOnly))
     {
-        qWarning() << QString("Getting tracked book failed."
+        qWarning() << QString("Getting tracked book failed. "
                               "Failed opening .libmeta file at: %1")
                           .arg(metaFile.fileName());
         return std::nullopt;
@@ -81,7 +81,7 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
 
     if(file.exists() || !file.open(QFile::WriteOnly))
     {
-        qWarning() << QString("Tracking book failed."
+        qWarning() << QString("Tracking book failed. "
                               "Failed opening .libmeta file at: %1")
                           .arg(file.fileName());
         return false;
@@ -102,7 +102,7 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
     auto success = libraryDir.remove(fileToUntrack);
     if(!success)
     {
-        qWarning() << QString("Untracking book failed."
+        qWarning() << QString("Untracking book failed. "
                               "Failed deleting .libmeta file: %1")
                           .arg(fileToUntrack);
     }

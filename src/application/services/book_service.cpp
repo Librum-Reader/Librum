@@ -154,7 +154,7 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
 
     if(!newBook.isValid())
     {
-        qWarning() << QString("Failed updating book with uuid: %1."
+        qWarning() << QString("Failed updating book with uuid: %1. "
                               "The new properties are invalid.")
                           .arg(newBook.getUuid().toString());
         return BookOperationStatus::OperationFailed;
@@ -183,7 +183,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
     auto* book = getBook(uuid);
     if(book == nullptr)
     {
-        qWarning() << QString("Failed changing cover for book with uuid: %1."
+        qWarning() << QString("Failed changing cover for book with uuid: %1. "
                               "No book with this uuid exists.")
                           .arg(uuid.toString());
         return BookOperationStatus::BookDoesNotExist;
@@ -214,7 +214,7 @@ void BookService::deleteBookCover(Book& book)
     if(!success)
     {
         qWarning() << QString("Failed deleting the local book cover for book "
-                              "with uuid: %1."
+                              "with uuid: %1. "
                               "Deleting the file failed.")
                           .arg(book.getUuid().toString(QUuid::WithoutBraces));
     }
@@ -232,8 +232,9 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
     QFileInfo newCoverFile(filePath);
     if(!newCoverFile.exists() || !newCoverFile.isFile())
     {
-        qWarning() << QString("Failed setting new cover for book with uuid: %1."
-                              "The given file at: %2 is invalid.")
+        qWarning() << QString(
+                          "Failed setting new cover for book with uuid: %1. "
+                          "The given file at: %2 is invalid.")
                           .arg(uuid.toString(), filePath);
         return false;
     }
@@ -241,8 +242,9 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
     QPixmap newCover(filePath);
     if(newCover.isNull())
     {
-        qWarning() << QString("Failed setting new cover for book with uuid: %1."
-                              "Can't open new cover image at: %2.")
+        qWarning() << QString(
+                          "Failed setting new cover for book with uuid: %1. "
+                          "Can't open new cover image at: %2.")
                           .arg(uuid.toString(), filePath);
         return false;
     }
@@ -254,8 +256,9 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
     auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
     if(!path.has_value())
     {
-        qWarning() << QString("Failed setting new cover for book with uuid: %1."
-                              "Saving new cover image failed.")
+        qWarning() << QString(
+                          "Failed setting new cover for book with uuid: %1. "
+                          "Saving new cover image failed.")
                           .arg(uuid.toString(), filePath);
         return false;
     }
@@ -332,7 +335,7 @@ BookOperationStatus BookService::renameTagOfBook(const QUuid& bookUuid,
     auto* book = getBook(bookUuid);
     if(book == nullptr)
     {
-        qWarning() << QString("Renaming tag from book with uuid: %1 failed."
+        qWarning() << QString("Renaming tag from book with uuid: %1 failed. "
                               "No book with this uuid exists.")
                           .arg(bookUuid.toString());
         return BookOperationStatus::BookDoesNotExist;
@@ -407,7 +410,7 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
     auto* book = getBook(uuid);
     if(book == nullptr)
     {
-        qWarning() << QString("Saving book with uuid: %1 to folder %2 failed."
+        qWarning() << QString("Saving book with uuid: %1 to folder %2 failed. "
                               " No book with this uuid exists.")
                           .arg(uuid.toString(), pathToFolder.path());
         return BookOperationStatus::BookDoesNotExist;
