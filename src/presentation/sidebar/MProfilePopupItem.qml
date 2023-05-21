@@ -22,6 +22,7 @@ Item
         id: layout
         anchors.fill: parent
         spacing: root.textSpacing
+        opacity: mouseArea.pressed ? 0.8 : 1
         
         Image
         {
@@ -45,6 +46,7 @@ Item
     
     MouseArea
     {
+        id: mouseArea
         anchors.fill: parent
         
         onClicked: root.clicked()
