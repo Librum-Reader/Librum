@@ -151,7 +151,7 @@ MFlickWrapper
                         textColor: Style.colorFocusedButtonText
                         radius: 4
                         
-                        onClicked: Qt.openUrlExternally("https://www.patreon.com/librum_reader")
+                        onClicked: Qt.openUrlExternally("https://www.patreon.com/librumreader")
                     }
                     
                     Label
