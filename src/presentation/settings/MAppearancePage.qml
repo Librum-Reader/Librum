@@ -68,8 +68,8 @@ Page
             contentHeight: contentLayout.implicitHeight
             Layout.topMargin: 32
             Layout.rightMargin: -internal.scrollbarOffset
-            maximumFlickVelocity: 1000
-            flickDeceleration: 4000
+            flickDeceleration: 20000
+            maximumFlickVelocity: 2300
             clip: true
             
             ScrollBar.vertical: ScrollBar { width: 10; policy: "AlwaysOn" }
