@@ -93,7 +93,7 @@ void BookStorageManager::processBookMetadata(std::vector<Book>& books)
     // Set the cover paths for the remote books
     for(auto& book : books)
     {
-        if(book.hasCover())
+        if(book.hasCover() && bookCoverExistsLocally(book.getUuid()))
         {
             auto& uuid = book.getUuid();
             book.setCoverPath(getBookCoverPath(uuid));
@@ -222,6 +222,12 @@ bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
 void BookStorageManager::downloadBookCover(const QUuid& uuid)
 {
     m_bookStorageGateway->getCoverForBook(m_authenticationToken, uuid);
+}
+
+bool BookStorageManager::bookCoverExistsLocally(const QUuid& uuid)
+{
+    QFile cover(getBookCoverPath(uuid));
+    return cover.exists();
 }
 
 std::vector<Book> BookStorageManager::loadLocalBooks()

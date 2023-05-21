@@ -40,8 +40,9 @@ private slots:
 
 private:
     bool userLoggedIn();
-    QString getBookCoverPath(const QUuid& uuid);
     void deleteBookFile(const QUuid& uuid, const QString& format);
+    QString getBookCoverPath(const QUuid& uuid);
+    bool bookCoverExistsLocally(const QUuid& uuid);
 
     QString m_bookCoverPrefix = "cover_";
     QString m_bookCoverType = "png";

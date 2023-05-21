@@ -567,13 +567,15 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
 
         // Add the remote book to the local library if it does not exist
         emit bookInsertionStarted(m_books.size());
-        remoteBook.setCoverPath("");  // Path will be set after cover download
         m_books.emplace_back(remoteBook);
         emit bookInsertionEnded();
 
-        // Get the cover for remote books which don't yet exist locally
-        if(remoteBook.hasCover())
+
+        // Get the cover for the remote book if it does not exist locally
+        if(remoteBook.hasCover() && remoteBook.getCoverPath().isEmpty())
+        {
             m_bookStorageManager->downloadBookCover(remoteBook.getUuid());
+        }
     }
 }
 
