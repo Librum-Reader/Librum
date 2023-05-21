@@ -38,7 +38,7 @@ public:
     MOCK_METHOD(void, addBookLocally, (const Book&), (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
     MOCK_METHOD(void, uninstallBook, (const Book&), (override));
-    MOCK_METHOD(void, downloadBook, (const QUuid&), (override));
+    MOCK_METHOD(void, downloadBookMedia, (const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const Book&), (override));
     MOCK_METHOD(void, updateBookLocally, (const Book&), (override));
     MOCK_METHOD(void, updateBookRemotely, (const Book&), (override));
@@ -643,11 +643,11 @@ TEST_F(ABookService, SucceedsDownloadingABook)
 
 
     // Expect
-    EXPECT_CALL(bookStorageManagerMock, downloadBook(_)).Times(1);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookMedia(_)).Times(1);
 
     // Act
     auto uuid = bookService->getBooks()[0].getUuid();
-    auto result = bookService->downloadBook(uuid);
+    auto result = bookService->downloadBookMedia(uuid);
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -662,10 +662,10 @@ TEST_F(ABookService, FailsDownloadingBookIfItDoesNotExist)
 
 
     // Expect
-    EXPECT_CALL(bookStorageManagerMock, downloadBook(_)).Times(0);
+    EXPECT_CALL(bookStorageManagerMock, downloadBookMedia(_)).Times(0);
 
     // Act
-    auto result = bookService->downloadBook(nonExistentBook);
+    auto result = bookService->downloadBookMedia(nonExistentBook);
 
     // Assert
     EXPECT_EQ(expectedResult, result);

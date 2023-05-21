@@ -18,8 +18,9 @@ BookStorageManager::BookStorageManager(
             &BookStorageManager::processBookMetadata);
 
     // Save downloaded book
-    connect(m_bookStorageGateway, &IBookStorageGateway::downloadingBookFinished,
-            this, &BookStorageManager::saveDownloadedBookToFile);
+    connect(m_bookStorageGateway,
+            &IBookStorageGateway::downloadingBookMediaFinished, this,
+            &BookStorageManager::saveDownloadedBookMediaToFile);
 
     // Save book cover
     connect(m_bookStorageGateway,
@@ -40,9 +41,9 @@ void BookStorageManager::clearUserData()
     m_downloadedBooksTracker->clearLibraryOwner();
 }
 
-void BookStorageManager::saveDownloadedBookToFile(const QByteArray& data,
-                                                  const QUuid& uuid,
-                                                  const QString& format)
+void BookStorageManager::saveDownloadedBookMediaToFile(const QByteArray& data,
+                                                       const QUuid& uuid,
+                                                       const QString& format)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
@@ -56,7 +57,7 @@ void BookStorageManager::saveDownloadedBookToFile(const QByteArray& data,
     }
 
     file.write(data);
-    emit finishedDownloadingBook(uuid, destination);
+    emit finishedDownloadingBookMedia(uuid, destination);
 }
 
 void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
@@ -163,9 +164,9 @@ void BookStorageManager::uninstallBook(const Book& book)
     deleteBookFile(book.getUuid(), book.getFormat());
 }
 
-void BookStorageManager::downloadBook(const QUuid& uuid)
+void BookStorageManager::downloadBookMedia(const QUuid& uuid)
 {
-    m_bookStorageGateway->downloadBook(m_authenticationToken, uuid);
+    m_bookStorageGateway->downloadBookMedia(m_authenticationToken, uuid);
 }
 
 void BookStorageManager::updateBook(const Book& book)

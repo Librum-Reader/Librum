@@ -31,12 +31,15 @@ void BookStorageAccess::createBook(const QString& authToken,
                 auto reply = qobject_cast<QNetworkReply*>(sender());
                 auto result = validateNetworkReply(201, reply, "Creating book");
                 if(!result.success)
+                {
+                    reply->deleteLater();
                     return;
+                }
 
 
                 // Send book's actual binary file to the server
-                uploadBookData(jsonBook["guid"].toString(),
-                               jsonBook["filePath"].toString(), authToken);
+                uploadBookMedia(jsonBook["guid"].toString(),
+                                jsonBook["filePath"].toString(), authToken);
 
                 // Send the book's cover to the server
                 uploadBookCover(authToken, jsonBook["guid"].toString(),
@@ -199,8 +202,8 @@ void BookStorageAccess::downloadCoverForBook(const QString& authToken,
             });
 }
 
-void BookStorageAccess::downloadBook(const QString& authToken,
-                                     const QUuid& uuid)
+void BookStorageAccess::downloadBookMedia(const QString& authToken,
+                                          const QUuid& uuid)
 {
     auto endpoint = data::downloadBookDataEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
@@ -219,8 +222,8 @@ void BookStorageAccess::downloadBook(const QString& authToken,
                 QString bookGuid = reply->rawHeader("Guid");
                 QString bookFormat = reply->rawHeader("Format");
 
-                emit downloadingBookFinished(reply->readAll(), bookGuid,
-                                             bookFormat);
+                emit downloadingBookMediaFinished(reply->readAll(), bookGuid,
+                                                  bookFormat);
                 reply->deleteLater();
             });
 }
@@ -252,9 +255,9 @@ void BookStorageAccess::processGettingBooksMetaDataResult()
     reply->deleteLater();
 }
 
-void BookStorageAccess::uploadBookData(const QString& uuid,
-                                       const QString& filePath,
-                                       const QString& authToken)
+void BookStorageAccess::uploadBookMedia(const QString& uuid,
+                                        const QString& filePath,
+                                        const QString& authToken)
 {
     auto bookData = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     auto success = addFilePartToMultiPart(bookData, filePath);

@@ -37,8 +37,9 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
             &BookService::updateLibrary);
 
     // Downloading book finished
-    connect(m_bookStorageManager, &IBookStorageManager::finishedDownloadingBook,
-            this, &BookService::processDownloadedBook);
+    connect(m_bookStorageManager,
+            &IBookStorageManager::finishedDownloadingBookMedia, this,
+            &BookService::processDownloadedBook);
 
     // Downloading book cover finished
     connect(m_bookStorageManager,
@@ -125,18 +126,18 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::downloadBook(const QUuid& uuid)
+BookOperationStatus BookService::downloadBookMedia(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
     {
-        qWarning() << QString("Could not download book with uuid: %1. "
+        qWarning() << QString("Could not download book media with uuid: %1. "
                               "No book with this uuid exists.")
                           .arg(uuid.toString());
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    m_bookStorageManager->downloadBook(uuid);
+    m_bookStorageManager->downloadBookMedia(uuid);
     return BookOperationStatus::Success;
 }
 

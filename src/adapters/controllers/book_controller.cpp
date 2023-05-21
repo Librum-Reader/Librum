@@ -84,9 +84,9 @@ int BookController::uninstallBook(const QString& uuid)
     return static_cast<int>(result);
 }
 
-int BookController::downloadBook(const QString& uuid)
+int BookController::downloadBookMedia(const QString& uuid)
 {
-    auto result = m_bookService->downloadBook(uuid);
+    auto result = m_bookService->downloadBookMedia(uuid);
     return static_cast<int>(result);
 }
 

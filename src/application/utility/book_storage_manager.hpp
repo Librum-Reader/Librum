@@ -17,7 +17,7 @@ public:
     void addBookLocally(const domain::entities::Book& bookToAdd) override;
     void deleteBook(BookForDeletion bookToDelete) override;
     void uninstallBook(const domain::entities::Book& book) override;
-    void downloadBook(const QUuid& uuid) override;
+    void downloadBookMedia(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
     void updateBookLocally(const domain::entities::Book& book) override;
     void updateBookRemotely(const domain::entities::Book& book) override;
@@ -33,8 +33,9 @@ public:
     void clearUserData() override;
 
 private slots:
-    void saveDownloadedBookToFile(const QByteArray& data, const QUuid& uuid,
-                                  const QString& format);
+    void saveDownloadedBookMediaToFile(const QByteArray& data,
+                                       const QUuid& uuid,
+                                       const QString& format);
     void saveDownloadedCoverToFile(const QByteArray& data, const QUuid& uuid);
     void processBookMetadata(std::vector<domain::entities::Book>& books);
 

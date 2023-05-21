@@ -24,7 +24,8 @@ public:
     void deleteBookCover(const QString& authToken, const QUuid& uuid) override;
     void getBooksMetaData(const QString& authToken) override;
     void getCoverForBook(const QString& authToken, const QUuid& uuid) override;
-    void downloadBook(const QString& authToken, const QUuid& uuid) override;
+    void downloadBookMedia(const QString& authToken,
+                           const QUuid& uuid) override;
 
 private slots:
     void proccessBooksMetadata(std::vector<QJsonObject>& jsonBooks);

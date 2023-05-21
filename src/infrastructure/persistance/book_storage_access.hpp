@@ -27,7 +27,8 @@ public:
     void getBooksMetaData(const QString& authToken) override;
     void downloadCoverForBook(const QString& authToken,
                               const QUuid& uuid) override;
-    void downloadBook(const QString& authToken, const QUuid& uuid) override;
+    void downloadBookMedia(const QString& authToken,
+                           const QUuid& uuid) override;
 
 private slots:
     void processGettingBooksMetaDataResult();
@@ -38,8 +39,8 @@ private:
                                            QNetworkReply* reply,
                                            const QString& name);
 
-    void uploadBookData(const QString& uuid, const QString& filePath,
-                        const QString& authToken);
+    void uploadBookMedia(const QString& uuid, const QString& filePath,
+                         const QString& authToken);
     bool addFilePartToMultiPart(QHttpMultiPart* bookData, const QUrl& path);
 
 

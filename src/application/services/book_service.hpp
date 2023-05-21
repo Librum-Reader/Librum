@@ -21,7 +21,7 @@ public:
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
-    BookOperationStatus downloadBook(const QUuid& uuid) override;
+    BookOperationStatus downloadBookMedia(const QUuid& uuid) override;
     BookOperationStatus updateBook(
         const domain::entities::Book& newBook) override;
     BookOperationStatus changeBookCover(const QUuid& uuid,

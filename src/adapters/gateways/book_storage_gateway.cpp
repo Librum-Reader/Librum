@@ -20,8 +20,9 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
             &BookStorageGateway::proccessBooksMetadata);
 
     // Save downloaded book
-    connect(m_bookStorageAccess, &IBookStorageAccess::downloadingBookFinished,
-            this, &BookStorageGateway::downloadingBookFinished);
+    connect(m_bookStorageAccess,
+            &IBookStorageAccess::downloadingBookMediaFinished, this,
+            &BookStorageGateway::downloadingBookMediaFinished);
 
     // Save book cover
     connect(m_bookStorageAccess,
@@ -77,10 +78,10 @@ void BookStorageGateway::getCoverForBook(const QString& authToken,
     m_bookStorageAccess->downloadCoverForBook(authToken, uuid);
 }
 
-void BookStorageGateway::downloadBook(const QString& authToken,
-                                      const QUuid& uuid)
+void BookStorageGateway::downloadBookMedia(const QString& authToken,
+                                           const QUuid& uuid)
 {
-    m_bookStorageAccess->downloadBook(authToken, uuid);
+    m_bookStorageAccess->downloadBookMedia(authToken, uuid);
 }
 
 void BookStorageGateway::proccessBooksMetadata(

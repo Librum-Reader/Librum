@@ -31,7 +31,8 @@ public:
     MOCK_METHOD(void, getCoverForBook, (const QString&, const QUuid&),
                 (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
-    MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, downloadBookMedia, (const QString&, const QUuid&),
+                (override));
 };
 
 class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
@@ -218,10 +219,10 @@ TEST_F(ABookStorageManager, SucceedsDownloadingBook)
     Book book("some/path.pdf", BookMetaData {});
 
     // Expect
-    EXPECT_CALL(bookStorageGatewayMock, downloadBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageGatewayMock, downloadBookMedia(_, _)).Times(1);
 
     // Act
-    bookStorageManager->downloadBook(book.getUuid());
+    bookStorageManager->downloadBookMedia(book.getUuid());
 }
 
 TEST_F(ABookStorageManager, SucceedsChangingBookCoverRemotely)

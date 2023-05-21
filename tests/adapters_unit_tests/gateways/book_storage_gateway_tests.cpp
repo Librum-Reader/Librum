@@ -32,7 +32,8 @@ public:
     MOCK_METHOD(void, downloadCoverForBook, (const QString&, const QUuid&),
                 (override));
     MOCK_METHOD(void, getBooksMetaData, (const QString&), (override));
-    MOCK_METHOD(void, downloadBook, (const QString&, const QUuid&), (override));
+    MOCK_METHOD(void, downloadBookMedia, (const QString&, const QUuid&),
+                (override));
 };
 
 struct ABookStorageGateway : public ::testing::Test
@@ -170,10 +171,10 @@ TEST_F(ABookStorageGateway, SucceedsDownloadingBook)
 
 
     // Expect
-    EXPECT_CALL(bookStorageAccessMock, downloadBook(_, _)).Times(1);
+    EXPECT_CALL(bookStorageAccessMock, downloadBookMedia(_, _)).Times(1);
 
     // Act
-    bookStorageGateway->downloadBook("some_token", uuid);
+    bookStorageGateway->downloadBookMedia("some_token", uuid);
 }
 
 };  // namespace tests::adapters

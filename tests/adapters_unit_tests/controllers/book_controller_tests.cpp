@@ -31,7 +31,8 @@ public:
     MOCK_METHOD(BookOperationStatus, addBook, (const QString&), (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, uninstallBook, (const QUuid&), (override));
-    MOCK_METHOD(BookOperationStatus, downloadBook, (const QUuid&), (override));
+    MOCK_METHOD(BookOperationStatus, downloadBookMedia, (const QUuid&),
+                (override));
     MOCK_METHOD(BookOperationStatus, updateBook, (const Book& book),
                 (override));
     MOCK_METHOD(BookOperationStatus, changeBookCover,
@@ -380,13 +381,13 @@ TEST_F(ABookController, SucceedsDownloadingABook)
 
 
     // Expect
-    EXPECT_CALL(bookServiceMock, downloadBook(_))
+    EXPECT_CALL(bookServiceMock, downloadBookMedia(_))
         .Times(1)
         .WillOnce(Return(BookOperationStatus::Success));
 
 
     // Act
-    auto resultStatus = bookController->downloadBook(bookUuid);
+    auto resultStatus = bookController->downloadBookMedia(bookUuid);
 
     // Assert
     EXPECT_EQ(static_cast<int>(expectedStatus), resultStatus);
