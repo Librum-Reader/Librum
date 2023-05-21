@@ -59,6 +59,7 @@ Item
                 font.pointSize: 12
                 placeholderText: "Search for entries"
                 placeholderTextColor: Style.colorPlaceholderText
+                selectByMouse: true
                 background: Rectangle
                 {
                     anchors.fill: parent
