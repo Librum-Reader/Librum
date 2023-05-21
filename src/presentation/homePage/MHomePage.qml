@@ -121,7 +121,7 @@ Page
                         }
                         else
                         {
-                            BookController.downloadBook(model.uuid);
+                            BookController.downloadBookMedia(model.uuid);
                         }
                     }
                     
