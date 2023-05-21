@@ -91,7 +91,7 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
         break;
     case DownloadedRole:
-        return book.getDownloaded();
+        return book.isDownloaded();
         break;
     default:
         return QVariant();

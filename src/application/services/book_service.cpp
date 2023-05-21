@@ -92,7 +92,7 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
 
     utility::BookForDeletion bookToDelete {
         .uuid = book->getUuid(),
-        .downloaded = book->getDownloaded(),
+        .downloaded = book->isDownloaded(),
         .format = book->getFormat(),
     };
 

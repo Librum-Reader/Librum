@@ -26,7 +26,7 @@ Book::Book(const QString& filePath, const BookMetaData& metaData,
 bool Book::operator==(const Book& rhs) const
 {
     bool dataIsTheSame = m_uuid == rhs.m_uuid && m_filePath == rhs.m_filePath &&
-                         m_downloaded == rhs.m_downloaded &&
+                         m_isDownloaded == rhs.m_isDownloaded &&
                          m_currentPage == rhs.m_currentPage;
 
     return dataIsTheSame && m_metaData == rhs.m_metaData;
@@ -222,14 +222,14 @@ void Book::setCreator(const QString& newCreator)
     m_metaData.creator = newCreator;
 }
 
-bool Book::getDownloaded() const
+bool Book::isDownloaded() const
 {
-    return m_downloaded;
+    return m_isDownloaded;
 }
 
 void Book::setDownloaded(bool newDownloaded)
 {
-    m_downloaded = newDownloaded;
+    m_isDownloaded = newDownloaded;
 }
 
 int Book::getBookReadingProgress() const

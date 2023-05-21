@@ -76,7 +76,7 @@ public:
     void updateCoverLastModified();
     void setCoverLastModified(const QDateTime& newTime);
 
-    bool getDownloaded() const;
+    bool isDownloaded() const;
     void setDownloaded(bool newDownloaded);
 
     int getBookReadingProgress() const;
@@ -112,7 +112,7 @@ private:
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;
     QString m_filePath;
-    bool m_downloaded = true;
+    bool m_isDownloaded = true;
     int m_currentPage = 0;
     std::vector<Tag> m_tags;
 };

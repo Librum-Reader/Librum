@@ -164,7 +164,7 @@ TEST_F(ABookService, SucceedsUninstallingABook)
 
     // Assert
     EXPECT_EQ(expectedResult, result);
-    EXPECT_FALSE(bookService->getBook(bookUuid)->getDownloaded());
+    EXPECT_FALSE(bookService->getBook(bookUuid)->isDownloaded());
 
     auto arguments = spy[0];
     EXPECT_EQ(1, spy.count());

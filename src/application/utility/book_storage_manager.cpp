@@ -133,7 +133,7 @@ void BookStorageManager::addBook(const Book& bookToAdd)
 {
     // Prevent adding remote books to the local library unless "downloaded" is
     // set to true.
-    if(bookToAdd.getDownloaded())
+    if(bookToAdd.isDownloaded())
         addBookLocally(bookToAdd);
 
     m_bookStorageGateway->createBook(m_authenticationToken, bookToAdd);
@@ -178,7 +178,7 @@ void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
 {
     // Prevent updating remote books in the local library unless the book is
     // downloaded. If its not downloaded, there is no local file to update.
-    if(book.getDownloaded())
+    if(book.isDownloaded())
         m_downloadedBooksTracker->updateTrackedBook(book);
 }
 
