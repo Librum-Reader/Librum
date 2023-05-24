@@ -52,17 +52,18 @@ void UserService::loadUser(bool rememberUser)
         return;
     }
 
+    m_rememberUser = true;
+
     // Load the user a few milliseconds after the user was loaded from the
     // file to update the local data with the freshest data from the server.
     // Add a delay of a few milliseconds because else we create a segfault.
     QTimer* timer = new QTimer;
     timer->setInterval(200);
     connect(timer, &QTimer::timeout, this,
-            [this, rememberUser]()
+            [this]()
             {
                 auto reply = qobject_cast<QTimer*>(sender());
 
-                m_rememberUser = rememberUser;
                 m_userStorageGateway->getUser(m_authenticationToken);
 
                 reply->deleteLater();
@@ -189,22 +190,16 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 
     emit finishedLoadingUser(true);
 
+    // If "rememberUser" is true, update the saved autologin user data everytime
+    // there are changes to the user. This way, when logging in via autologin
+    // the next time, you already have the newest changes available.
     if(m_rememberUser)
         saveUserToFile(user);
-
-    clearRememberUser();
 }
 
 bool UserService::userIsLoggedIn()
 {
     return !m_authenticationToken.isEmpty();
-}
-
-void UserService::clearRememberUser()
-{
-    // This needs to be reset after every 'loadUser' request, else we might
-    // save the data for the next user, even though they don't want it
-    m_rememberUser = false;
 }
 
 bool UserService::tryLoadingUserFromFile()
@@ -250,6 +245,7 @@ void UserService::clearUserData()
     m_fetchChangesTimer.stop();
     m_user.clearData();
     m_authenticationToken.clear();
+    m_rememberUser = false;
 }
 
 }  // namespace application::services
