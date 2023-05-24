@@ -157,12 +157,12 @@ Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary
 
 <br>
 
-### Prerequisites specifically for KDE Plasma Users
+### Prerequisites for KDE Plasma Users
 - Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers list them as `extra-cmake-modules`)
 
 <br>
 
-### Prerequisites specifically for Ubuntu Users
+### Prerequisites for Ubuntu Users
 Run the following commands to install all dependencies for Librum
 
 ```sh
@@ -175,7 +175,7 @@ sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake q
     
 <br>
 
-### Prerequisites specifically for other distros
+### Prerequisites for other distros
 If you are running on another, non-kde-plasma distro which isn't Ubuntu, you will need to find install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed in the "Prerequisites specifically for Ubuntu Users" section, but they might be called differently in your package manager. <br><br>
 If you manage to build Librum on a distro that is not listed here, feel free to open a pull request with the instructions to build it on your distro.
 
