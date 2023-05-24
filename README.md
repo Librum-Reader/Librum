@@ -141,20 +141,45 @@ Instructions to get Librum up and running in your environment.
 
 <b>Note</b>: Librum currently relies on KDE's infrastructure for okular. This will change soon, however for the time being, Librum and Okular may conflict.
 If there is an issue with the Librum installation, consider temporarily uninstalling okular. 
-<br><br>
+<br>
+<br>
 
 ## For GNU/Linux
 ### Foreword
-Since Librum is a KDE application, the KDE libraries are necessary. If you are on a Linux distribution that uses KDE Plasma, you are good to go; otherwise feel free to spin up a virtual-machine to try Librum until we get independent of the KDE libraries.
+Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary to run Librum. If you are on a Linux distribution that uses KDE Plasma, you are good to go; else you will need to download the dependencies.
 
-### Prerequisites
+<br>
+
+### Prerequisites for Everyone
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
-- (Qt 5.15)                         You will need to use the Qt version provided by your OS                           
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
-- Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers have them listed as `extra-cmake-modules`)
+
+<br>
+
+### Prerequisites specifically for KDE Plasma Users
+- Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers list them as `extra-cmake-modules`)
+
+<br>
+
+### Prerequisites specifically for Ubuntu Users
+Run the following commands to install all dependencies for Librum
+
+```sh
+sudo apt update
+```
+    
+```sh
+sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake qtquickcontrols2-5-dev qtdeclarative5-dev qml-module-qtquick-controls2 libkf5parts-dev libkf5crash-dev libkf5textwidgets-dev libkf5archive-dev libkf5threadweaver-dev libkf5activities-dev libqt5svg5-dev libphonon4qt5-dev libqt5texttospeech5-dev zlib1g-dev libkf5pty-dev qtdeclarative5-private-dev qtbase5-private-dev qml-module-qtquick-shapes qml-module-qt-labs-qmlmodels qml-module-qt-labs-settings qml-module-qt-labs-platform libpoppler-qt5-dev qml-module-qtquick-controls qml-module-qtquick-layouts qml-module-qtquick-window2
+```
+    
+<br>
 
 ### Installation
+Once you have installed the necessary dependencies, go ahead and build Librum by following the steps below.
+
+<br>
+
 1. Clone the repository.
     ```sh
     git clone --recurse-submodules -j4 https://github.com/Etovex/Librum.git
