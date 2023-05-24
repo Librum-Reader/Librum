@@ -67,10 +67,10 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
 void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email,
+                                          double usedBookStorage,
                                           const QJsonArray& tags)
 {
-    User user(firstName, lastName, email);
-
+    User user(firstName, lastName, email, usedBookStorage);
     for(const auto& tag : tags)
     {
         auto jsonTagObject = tag.toObject();
@@ -85,7 +85,7 @@ void UserStorageGateway::proccessUserData(const QString& firstName,
 
 void UserStorageGateway::reportFailureGettingUser()
 {
-    User emptyUser("invalid", "invalid", "invalid@email.x");
+    User emptyUser("invalid", "invalid", "invalid@email.x", 0.0);
     emit finishedGettingUser(emptyUser, false);
 }
 

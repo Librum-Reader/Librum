@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 MFlickWrapper
@@ -61,6 +62,8 @@ MFlickWrapper
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.heartHallow
                     imageSize: 18
+                    
+                    onClicked: uploadLimitReachedPopup.open()
                 }
             }
             
@@ -143,7 +146,8 @@ MFlickWrapper
                         Layout.fillWidth: true
                         Layout.leftMargin: 20
                         Layout.topMargin: 15
-                        text: "You currently have <font size=4 color=" + Style.colorBasePurple + " bold><b>24</b></font> files stored " +
+                        text: "You currently have <font size=4 color=" + Style.colorBasePurple + " bold><b>" + 
+                              UserController.usedBookStorage + "</b></font> files stored " +
                               "and have <font size=4 color=" + Style.colorBasePurple + " bold><b>1.8GB</b></font> free!"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
@@ -168,5 +172,15 @@ MFlickWrapper
                 }
             }
         }
+    }
+    
+    MUploadLimitReachedPopup
+    {
+        id: uploadLimitReachedPopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - 50)
+        
+        onKeepChoosed: close()
+        onResetChoosed: close()
     }
 }

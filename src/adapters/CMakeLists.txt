@@ -47,7 +47,6 @@ add_library(adapters
                     DTOs/register_dto.hpp
                     DTOs/book_dto.hpp
                     DTOs/tag_dto.hpp
-                    DTOs/user_dto.hpp
 )
 
 target_include_directories(adapters

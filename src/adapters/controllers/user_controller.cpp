@@ -75,7 +75,7 @@ bool UserController::renameTag(const QString& uuid, const QString& newName)
     return result;
 }
 
-QString UserController::getFirstName()
+QString UserController::getFirstName() const
 {
     return m_userService->getFirstName();
 }
@@ -89,7 +89,7 @@ void UserController::setFirstName(const QString& newFirstName)
     emit firstNameChanged();
 }
 
-QString UserController::getLastName()
+QString UserController::getLastName() const
 {
     return m_userService->getLastName();
 }
@@ -103,7 +103,7 @@ void UserController::setLastName(const QString& newLastName)
     emit lastNameChanged();
 }
 
-QString UserController::getEmail()
+QString UserController::getEmail() const
 {
     return m_userService->getEmail();
 }
@@ -115,6 +115,11 @@ void UserController::setEmail(const QString& newEmail)
 
     m_userService->setEmail(newEmail);
     emit emailChanged();
+}
+
+double UserController::getUsedBookStorage() const
+{
+    return m_userService->getUsedBookStorage();
 }
 
 QString UserController::getProfilePicture() const
@@ -137,7 +142,6 @@ QString UserController::getProfilePicture() const
 void UserController::setProfilePicture(const QString& path)
 {
     QUrl url(path);
-    auto x = url.path();
     QImage profilePicture(url.toLocalFile());
     if(profilePicture.isNull() ||
        profilePicture == m_userService->getProfilePicture())
@@ -159,6 +163,7 @@ void UserController::proccessUserLoadingResult(bool success)
     emit firstNameChanged();
     emit lastNameChanged();
     emit emailChanged();
+    emit usedBookStorageChanged();
 
     emit finishedLoadingUser(success);
 }

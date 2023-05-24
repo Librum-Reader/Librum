@@ -33,7 +33,8 @@ public:
 
 signals:
     void userReady(const QString& firstName, const QString& lastName,
-                   const QString& email, const QJsonArray& tags);
+                   const QString& email, double usedBookStorage,
+                   const QJsonArray& tags);
     void gettingUserFailed();
 };
 

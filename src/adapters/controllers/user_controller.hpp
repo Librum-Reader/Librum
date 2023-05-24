@@ -21,14 +21,16 @@ public:
     bool deleteTag(const QString& uuid) override;
     bool renameTag(const QString& uuid, const QString& newName) override;
 
-    QString getFirstName() override;
+    QString getFirstName() const override;
     void setFirstName(const QString& newFirstName) override;
 
-    QString getLastName() override;
+    QString getLastName() const override;
     void setLastName(const QString& newLastName) override;
 
-    QString getEmail() override;
+    QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
+
+    double getUsedBookStorage() const override;
 
     QString getProfilePicture() const override;
     void setProfilePicture(const QString& path) override;

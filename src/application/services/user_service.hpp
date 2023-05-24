@@ -26,6 +26,8 @@ public:
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
 
+    double getUsedBookStorage() const override;
+
     QImage getProfilePicture() const override;
     void setProfilePicture(const QImage& image) override;
 

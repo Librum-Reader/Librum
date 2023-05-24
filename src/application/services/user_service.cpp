@@ -11,7 +11,7 @@ namespace application::services
 
 UserService::UserService(IUserStorageGateway* userStorageGateway) :
     m_userStorageGateway(userStorageGateway),
-    m_user("x", "y", "z")
+    m_user("x", "y", "z", 0.0)
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
@@ -38,18 +38,36 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {
-                loadUser(true);
+                m_userStorageGateway->getUser(m_authenticationToken);
             });
 }
 
 void UserService::loadUser(bool rememberUser)
 {
     auto success = tryLoadingUserFromFile();
-    if(success)
+    if(!success)
+    {
+        m_rememberUser = rememberUser;
+        m_userStorageGateway->getUser(m_authenticationToken);
         return;
+    }
 
-    m_rememberUser = rememberUser;
-    m_userStorageGateway->getUser(m_authenticationToken);
+    // Load the user a few milliseconds after the user was loaded from the
+    // file to update the local data with the freshest data from the server.
+    // Add a delay of a few milliseconds because else we create a segfault.
+    QTimer* timer = new QTimer;
+    timer->setInterval(200);
+    connect(timer, &QTimer::timeout, this,
+            [this, rememberUser]()
+            {
+                auto reply = qobject_cast<QTimer*>(sender());
+
+                m_rememberUser = rememberUser;
+                m_userStorageGateway->getUser(m_authenticationToken);
+
+                reply->deleteLater();
+            });
+    timer->start();
 }
 
 QString UserService::getFirstName() const
@@ -85,6 +103,11 @@ void UserService::setEmail(const QString& newEmail)
 {
     m_user.setEmail(newEmail);
     m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
+}
+
+double UserService::getUsedBookStorage() const
+{
+    return m_user.getUsedBookStorage();
 }
 
 QImage UserService::getProfilePicture() const
@@ -160,6 +183,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
+    m_user.setUsedBookStorage(user.getUsedBookStorage());
     for(const auto& tag : user.getTags())
         m_user.addTag(tag);
 
@@ -190,7 +214,8 @@ bool UserService::tryLoadingUserFromFile()
     if(result.has_value())
     {
         utility::UserData userData = result.value();
-        User user(userData.firstName, userData.lastName, userData.email);
+        User user(userData.firstName, userData.lastName, userData.email,
+                  userData.usedBookStorage);
         for(auto& tag : userData.tags)
             user.addTag(tag);
 
@@ -205,10 +230,8 @@ void UserService::saveUserToFile(const domain::entities::User& user)
 {
     utility::AutomaticLoginHelper autoLoginHelper;
     utility::UserData userData {
-        user.getFirstName(),
-        user.getLastName(),
-        user.getEmail(),
-        user.getTags(),
+        user.getFirstName(),       user.getLastName(), user.getEmail(),
+        user.getUsedBookStorage(), user.getTags(),
     };
 
     autoLoginHelper.saveUserData(userData);

@@ -19,6 +19,8 @@ class IUserController : public QObject
     Q_PROPERTY(QString lastName READ getLastName WRITE setLastName NOTIFY
                    lastNameChanged)
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
+    Q_PROPERTY(double usedBookStorage READ getUsedBookStorage NOTIFY
+                   usedBookStorageChanged CONSTANT)
     Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE
                    setProfilePicture NOTIFY profilePictureChanged)
     Q_PROPERTY(adapters::data_models ::UserTagsModel* tagsModel READ
@@ -35,14 +37,16 @@ public:
     Q_INVOKABLE virtual bool renameTag(const QString& uuid,
                                        const QString& newName) = 0;
 
-    virtual QString getFirstName() = 0;
+    virtual QString getFirstName() const = 0;
     virtual void setFirstName(const QString& newFirstName) = 0;
 
-    virtual QString getLastName() = 0;
+    virtual QString getLastName() const = 0;
     virtual void setLastName(const QString& newLastName) = 0;
 
-    virtual QString getEmail() = 0;
+    virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
+
+    virtual double getUsedBookStorage() const = 0;
 
     virtual QString getProfilePicture() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
@@ -54,6 +58,7 @@ signals:
     void firstNameChanged();
     void lastNameChanged();
     void emailChanged();
+    void usedBookStorageChanged();
     void profilePictureChanged();
 };
 

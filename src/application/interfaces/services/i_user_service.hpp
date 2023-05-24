@@ -30,6 +30,8 @@ public:
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
 
+    virtual double getUsedBookStorage() const = 0;
+
     virtual QImage getProfilePicture() const = 0;
     virtual void setProfilePicture(const QImage& image) = 0;
 
