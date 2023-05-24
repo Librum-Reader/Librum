@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
-    app.addLibraryPath("/usr/local/lib/plugins");
+    app.addLibraryPath(QCoreApplication::applicationDirPath() + "/bin/plugins/");
 
     qInstallMessageHandler(logging::messageHandler);
 
