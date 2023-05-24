@@ -439,7 +439,7 @@ Okular::FontInfo::List DviGenerator::fontsForPage(int page)
                                 QString::number(zoom));
             }
 #else
-            name = QString("%1, %2%").arg(font->fontname).arg(zoom);
+            name = QString::fromLatin1("%1, %2%").arg(font->fontname).arg(zoom);
 #endif
             of.setName(name);
 

@@ -29,7 +29,6 @@
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
-#include "user_dto.hpp"
 
 
 using namespace adapters::controllers;
@@ -49,6 +48,7 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
+    app.addLibraryPath("/usr/local/lib/plugins");
 
     qInstallMessageHandler(logging::messageHandler);
 
@@ -67,7 +67,6 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::DocumentItem>("Librum.elements", 1, 0, "DocumentItem");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
-    qRegisterMetaType<adapters::dtos::UserDto>();
 
 
     // Authentication-Stack

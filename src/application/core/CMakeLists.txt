@@ -129,7 +129,6 @@ find_package(Poppler "0.86.0" COMPONENTS Qt5)
 set_okular_optional_package_properties(Poppler PROPERTIES
         PURPOSE "Support for PDF files in okular.")
 
-    
 find_package(Freetype)
 set_okular_optional_package_properties(Freetype PROPERTIES
         DESCRIPTION  "A font rendering engine"
