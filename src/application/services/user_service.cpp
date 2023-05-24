@@ -47,25 +47,27 @@ void UserService::loadUser(bool rememberUser)
     auto success = tryLoadingUserFromFile();
     if(!success)
     {
+        // Load user from server
         m_rememberUser = rememberUser;
         m_userStorageGateway->getUser(m_authenticationToken);
         return;
     }
 
+    // If the user was loaded from file, we know that "rememberUser" is true
     m_rememberUser = true;
 
     // Load the user a few milliseconds after the user was loaded from the
     // file to update the local data with the freshest data from the server.
     // Add a delay of a few milliseconds because else we create a segfault.
     QTimer* timer = new QTimer;
-    timer->setInterval(200);
+    timer->setInterval(100);
     connect(timer, &QTimer::timeout, this,
             [this]()
             {
-                auto reply = qobject_cast<QTimer*>(sender());
-
                 m_userStorageGateway->getUser(m_authenticationToken);
 
+                // Free the timer's memory
+                auto reply = qobject_cast<QTimer*>(sender());
                 reply->deleteLater();
             });
     timer->start();
