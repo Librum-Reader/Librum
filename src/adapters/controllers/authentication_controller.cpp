@@ -26,7 +26,9 @@ void AuthenticationController::loginUser(const QString& email,
                                          const QString& password,
                                          bool rememberUser)
 {
-    LoginModel loginModel(email, password, rememberUser);
+    // Make sure that the email is always lower-case
+    auto fixedEmail = email.toLower();
+    LoginModel loginModel(fixedEmail, password, rememberUser);
 
     m_authenticationService->loginUser(loginModel);
 }
@@ -46,8 +48,10 @@ void AuthenticationController::registerUser(const QString& firstName,
                                             const QString& email,
                                             QString password, bool keepUpdated)
 {
-    RegisterModel registerModel(firstName, lastName, email, password,
-                                keepUpdated);
+    // Make sure that the email is always lower-case
+    auto fixedEmail = email.toLower();
+    RegisterModel registerModel(firstName, lastName, fixedEmail, password,
+                                 keepUpdated);
 
     m_authenticationService->registerUser(registerModel);
 }
