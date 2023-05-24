@@ -62,8 +62,6 @@ MFlickWrapper
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.heartHallow
                     imageSize: 18
-                    
-                    onClicked: uploadLimitReachedPopup.open()
                 }
             }
             
@@ -172,15 +170,5 @@ MFlickWrapper
                 }
             }
         }
-    }
-    
-    MUploadLimitReachedPopup
-    {
-        id: uploadLimitReachedPopup
-        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2)
-        y: Math.round(root.height / 2 - implicitHeight / 2 - 50)
-        
-        onKeepChoosed: close()
-        onResetChoosed: close()
     }
 }

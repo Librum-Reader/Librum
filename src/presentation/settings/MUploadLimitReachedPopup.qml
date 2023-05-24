@@ -10,8 +10,8 @@ Popup
 {
     id: root
     signal decisionMade
-    signal resetChoosed
-    signal keepChoosed
+    signal closeChoosed
+    signal goToLibraryChoosed
     
     implicitWidth: 666
     implicitHeight: layout.height
@@ -20,7 +20,7 @@ Popup
     background: Rectangle { color: "transparent"; radius: 4 }
     Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
     
-    onOpened: okButton.forceActiveFocus()
+    onOpened: closeButton.forceActiveFocus()
     
     
     MFlickWrapper
@@ -89,31 +89,80 @@ Popup
                         font.pointSize: 15
                     }
                     
-                    MButton
+                    RowLayout
                     {
-                        id: okButton
-                        Layout.preferredWidth: 180
-                        Layout.preferredHeight: 40
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
+                        id: buttonRow
+                        Layout.preferredWidth: parent.width
+                        Layout.preferredHeight: closeButton.height
                         Layout.topMargin: 36
-                        borderWidth: 1
-                        backgroundColor: Style.colorBasePurple
-                        opacityOnPressed: 0.7
-                        text: "Ok"
-                        fontSize: 12.75
-                        fontWeight: Font.Bold
-                        textColor: Style.colorFocusedButtonText
+                        spacing: 42
                         
-                        onClicked: root.close()
-                        Keys.onReturnPressed: root.close()
+                        MButton
+                        {
+                            id: closeButton
+                            Layout.preferredWidth: 180
+                            Layout.preferredHeight: 40
+                            Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                            borderWidth: activeFocus ? 0 : 1
+                            backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
+                            opacityOnPressed: 0.7
+                            text: "Close"
+                            fontSize: 12.75
+                            fontWeight: Font.Bold
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            
+                            onClicked: internal.close()
+                            
+                            KeyNavigation.tab: goToLibraryButton
+                            KeyNavigation.right: goToLibraryButton
+                            Keys.onReturnPressed: internal.close()
+                        }
+                        
+                        MButton
+                        {
+                            id: goToLibraryButton
+                            Layout.preferredWidth: 180
+                            Layout.preferredHeight: 40
+                            Layout.alignment: Qt.AlignBottom
+                            borderWidth: activeFocus ? 0 : 1
+                            backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
+                            opacityOnPressed: 0.7
+                            text: "Go To Library"
+                            fontSize: 12.75
+                            fontWeight: Font.Bold
+                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            
+                            onClicked: internal.goToLibrary()
+                            
+                            KeyNavigation.tab: closeButton
+                            KeyNavigation.left: closeButton
+                            Keys.onReturnPressed: internal.goToLibrary()
+                        }
                     }
                 }
             }
         }
     }
     
+    QtObject
+    {
+        id: internal
+        
+        function close()
+        {
+            root.closeChoosed();
+            root.decisionMade();
+        }
+        
+        function goToLibrary()
+        {
+            root.goToLibraryChoosed();
+            root.decisionMade();
+        }
+    }
+    
     function giveFocus()
     {
-        okButton.forceActiveFocus();
+        closeButton.forceActiveFocus();
     }
 }
