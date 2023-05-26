@@ -143,6 +143,10 @@ int main(int argc, char* argv[])
         settingsService, &application::ISettingsService::clearUserData);
 
 
+    // Setup other connections
+    QObject::connect(userService, &application::IUserService::usedBookStorageUpdated,
+                     bookService, &application::IBookService::updateUsedBookStorage);
+
 
     // Startup
     QQmlApplicationEngine engine;

@@ -47,6 +47,7 @@ signals:
     void tagDeletionStarted(int index);
     void tagDeletionEnded();
     void tagsChanged(int index);
+    void usedBookStorageUpdated(double usedStorage);
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;

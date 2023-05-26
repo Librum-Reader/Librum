@@ -91,6 +91,7 @@ public:
 
     void update(const Book& other);
     bool isValid() const;
+    double getSizeInBytes() const;
     QByteArray toJson() const;
     static Book fromJson(const QJsonObject& jsonBook);
 
@@ -108,6 +109,7 @@ private:
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
+    double getBytesFromSizeString(const QString& size) const;
 
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;

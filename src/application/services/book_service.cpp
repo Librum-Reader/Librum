@@ -477,6 +477,11 @@ void BookService::processDownloadedBookCover(const QUuid& uuid,
     refreshUIWithNewCover(uuid, filePath);
 }
 
+void BookService::updateUsedBookStorage(double usedStorage)
+{
+    m_usedBookStorage = usedStorage;
+}
+
 void BookService::setupUserData(const QString& token, const QString& email)
 {
     m_bookStorageManager->setUserData(email, token);
@@ -593,8 +598,12 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
-        if(!localBookExistsOnServer)
+        bool enoughStorageSpaceAvailable =
+            m_usedBookStorage + localBook.getSizeInBytes() < m_maxBookStorage;
+        if(!localBookExistsOnServer && enoughStorageSpaceAvailable)
+        {
             m_bookStorageManager->addBook(localBook);
+        }
     }
 }
 

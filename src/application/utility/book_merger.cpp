@@ -14,6 +14,7 @@ void BookMerger::mergeBooks(Book& localBook, const Book& remoteBook,
     auto lastModifiedStatus = mergeBookData(localBook, remoteBook);
     auto coverLastModifiedStatus = mergeBookCover(localBook, remoteBook);
 
+
     // Update the local and remote library according to the merge results.
     if(lastOpenedStatus.localLibraryOutdated ||
        lastModifiedStatus.localLibraryOutdated ||
@@ -43,12 +44,11 @@ void BookMerger::mergeBooks(Book& localBook, const Book& remoteBook,
 MergeStatus BookMerger::mergeCurrentPage(Book& localBook,
                                          const Book& remoteBook)
 {
-    // Take the current time in seconds, so that there are no ms mismatches
+    // Take the current time in seconds, to avoid ms mismatches
     auto localLastOpened = localBook.getLastOpened().toSecsSinceEpoch();
     auto remoteLastOpened = remoteBook.getLastOpened().toSecsSinceEpoch();
 
-    // There are no "current page" differences between the local and remote
-    // book
+    // Exit if there is no difference in the "current page"
     if(remoteLastOpened == localLastOpened)
         return {};
 
@@ -65,18 +65,16 @@ MergeStatus BookMerger::mergeCurrentPage(Book& localBook,
 
 MergeStatus BookMerger::mergeBookData(Book& localBook, const Book& remoteBook)
 {
-    // Take the current time in seconds, so that there are no ms mismatches
+    // Take the current time in seconds, to avoid ms mismatches
     auto localLastModified = localBook.getLastModified().toSecsSinceEpoch();
     auto remoteLastModified = remoteBook.getLastModified().toSecsSinceEpoch();
 
-    // There are no data differences between the local and remote book
+    // Exit if there are no differences in their data
     if(remoteLastModified == localLastModified)
         return {};
 
     if(remoteLastModified > localLastModified)
     {
-        // Save the file path since its overwritten during the update
-        // operation
         auto localBookFilePath = localBook.getFilePath();
         localBook.update(remoteBook);
         localBook.setFilePath(localBookFilePath);
@@ -89,14 +87,13 @@ MergeStatus BookMerger::mergeBookData(Book& localBook, const Book& remoteBook)
 
 MergeStatus BookMerger::mergeBookCover(Book& localBook, const Book& remoteBook)
 {
-    // Take the current time in seconds, so that there are no ms mismatches
+    // Take the current time in seconds, to avoid ms mismatches
     auto localCoverLastModified =
         localBook.getCoverLastModified().toSecsSinceEpoch();
     auto remoteCoverLastModified =
         remoteBook.getCoverLastModified().toSecsSinceEpoch();
 
-
-    // There are no differences between the local and remote cover
+    // Exit if there are no cover changes
     if(remoteCoverLastModified == localCoverLastModified)
         return {};
 
@@ -114,10 +111,8 @@ MergeStatus BookMerger::mergeBookCover(Book& localBook, const Book& remoteBook)
 void BookMerger::storeChangesToTheCover(CoverChanges coverChanges,
                                         IBookStorageManager* bookStorageManager)
 {
-    // Exit if there are no new changes
     if(!coverChanges.newChangesExist())
         return;
-
 
     if(coverChanges.remoteBookChanged)
     {

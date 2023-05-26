@@ -191,6 +191,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
         m_user.addTag(tag);
 
     emit finishedLoadingUser(true);
+    emit usedBookStorageUpdated(user.getUsedBookStorage());
 
     // If "rememberUser" is true, update the saved autologin user data everytime
     // there are changes to the user. This way, when logging in via autologin

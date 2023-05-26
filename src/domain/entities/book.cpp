@@ -1,5 +1,7 @@
 #include "book.hpp"
 #include <QBuffer>
+#include <QDebug>
+#include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <algorithm>
@@ -377,6 +379,57 @@ bool Book::isValid() const
 
     return (titleSize >= 2 && titleSize <= 200) && authorsSize <= 400 &&
            creatorSize <= 140 && creationDateSize <= 140;
+}
+
+double Book::getSizeInBytes() const
+{
+    double totalSize = getBytesFromSizeString(m_metaData.documentSize);
+
+    if(m_metaData.hasCover)
+    {
+        QFile cover(m_metaData.coverPath);
+        if(!cover.open(QFile::ReadOnly))
+            return 0;
+
+        totalSize += cover.size();
+    }
+
+    return totalSize;
+}
+
+double Book::getBytesFromSizeString(const QString& size) const
+{
+    QString fixedSize = size;
+    fixedSize = fixedSize.replace(" ", "");
+    fixedSize = fixedSize.replace(",", ".");
+
+    int typeBegining = -1;
+    for(int i = 0; i < fixedSize.length(); i++)
+    {
+        if(!fixedSize[i].isDigit() && fixedSize[i] != '.')
+        {
+            typeBegining = i;
+            break;
+        }
+    }
+
+    auto numberString = fixedSize.mid(0, typeBegining);
+    auto numbers = numberString.toDouble();
+    auto type = fixedSize.mid(typeBegining);
+
+    if(type.toLower() == "b")
+        return numbers;
+    else if(type.toLower() == "kib")
+        return numbers * 1024;
+    else if(type.toLower() == "mib")
+        return numbers * 1024 * 1024;
+    else
+    {
+        qWarning() << "Tried getting size in bytes from a file with a "
+                      "non-supported size: "
+                   << type;
+        return 0;
+    }
 }
 
 QByteArray Book::toJson() const

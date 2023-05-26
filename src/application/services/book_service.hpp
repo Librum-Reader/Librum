@@ -53,6 +53,7 @@ private slots:
     void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
     void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
+    void updateUsedBookStorage(double usedStorage) override;
 
     void refreshUIWithNewCover(const QUuid& uuid, const QString& path);
     void refreshUIForBook(const QUuid& uuid);
@@ -73,6 +74,8 @@ private:
     IBookStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
     QTimer m_fetchChangesTimer;
+    double m_usedBookStorage = 0;
+    double m_maxBookStorage = 20971520;  // 20 MiB
     const int m_fetchChangedInterval = 15'000;
 };
 
