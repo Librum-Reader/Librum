@@ -383,53 +383,54 @@ bool Book::isValid() const
 
 double Book::getSizeInBytes() const
 {
-    double totalSize = getBytesFromSizeString(m_metaData.documentSize);
-
-    if(m_metaData.hasCover)
-    {
-        QFile cover(m_metaData.coverPath);
-        if(!cover.open(QFile::ReadOnly))
-            return 0;
-
-        totalSize += cover.size();
-    }
-
-    return totalSize;
+    return getBytesFromSizeString(m_metaData.documentSize) +
+           getCoverSizeInBytes();
 }
 
-double Book::getBytesFromSizeString(const QString& size) const
+// An example input for this function would be 24 MiB. This function converts x
+// Mib, Bytes or KiB to its corresponding amount of bytes.
+double Book::getBytesFromSizeString(QString size) const
 {
-    QString fixedSize = size;
-    fixedSize = fixedSize.replace(" ", "");
-    fixedSize = fixedSize.replace(",", ".");
+    // Make sure there are no spaces and decimal points are dots '.'
+    size = size.replace(" ", "");
+    size = size.replace(",", ".");
 
     int typeBegining = -1;
-    for(int i = 0; i < fixedSize.length(); i++)
+    for(int i = 0; i < size.length(); i++)
     {
-        if(!fixedSize[i].isDigit() && fixedSize[i] != '.')
+        if(!size[i].isDigit() && size[i] != '.')
         {
             typeBegining = i;
             break;
         }
     }
 
-    auto numberString = fixedSize.mid(0, typeBegining);
-    auto numbers = numberString.toDouble();
-    auto type = fixedSize.mid(typeBegining);
+    auto numbers = size.midRef(0, typeBegining).toDouble();
+    auto type = size.mid(typeBegining);
 
     if(type.toLower() == "b")
         return numbers;
-    else if(type.toLower() == "kib")
+    if(type.toLower() == "kib")
         return numbers * 1024;
-    else if(type.toLower() == "mib")
+    if(type.toLower() == "mib")
         return numbers * 1024 * 1024;
-    else
-    {
-        qWarning() << "Tried getting size in bytes from a file with a "
-                      "non-supported size: "
-                   << type;
+
+    qWarning() << "Tried getting size in bytes from a book with a "
+                  "non-supported size type: "
+               << type;
+    return 0;
+}
+
+double Book::getCoverSizeInBytes() const
+{
+    if(!m_metaData.hasCover || m_metaData.coverPath.isEmpty())
         return 0;
-    }
+
+    QFile cover(m_metaData.coverPath);
+    if(!cover.open(QFile::ReadOnly))
+        return 0;
+
+    return cover.size();
 }
 
 QByteArray Book::toJson() const

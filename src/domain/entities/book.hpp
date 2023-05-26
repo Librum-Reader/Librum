@@ -109,7 +109,8 @@ private:
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
-    double getBytesFromSizeString(const QString& size) const;
+    double getBytesFromSizeString(QString size) const;
+    double getCoverSizeInBytes() const;
 
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;
