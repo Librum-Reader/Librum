@@ -25,35 +25,28 @@ void BookStorageAccess::createBook(const QString& authToken,
     // The book is created in separate steps. First of all an enty for the book
     // is created in the SQL Database, if that succeeds the book's data (the
     // actual binary file) and its cover are uploaded to the server.
-    connect(
-        bookCreationReply, &QNetworkReply::finished, this,
-        [this, jsonBook, authToken]()
-        {
-            auto reply = qobject_cast<QNetworkReply*>(sender());
-            auto result = validateNetworkReply(201, reply, "Creating book");
-            if(!result.success)
+    connect(bookCreationReply, &QNetworkReply::finished, this,
+            [this, jsonBook, authToken]()
             {
-                if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                       .toInt() == 426)
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                auto result = validateNetworkReply(201, reply, "Creating book");
+                if(!result.success)
                 {
-                    emit storageLimitExceeded();
+                    reply->deleteLater();
+                    return;
                 }
 
+                // Send book's actual binary file to the server
+                uploadBookMedia(jsonBook["guid"].toString(),
+                                jsonBook["filePath"].toString(), authToken);
+
+                // Send the book's cover to the server
+                uploadBookCover(authToken, jsonBook["guid"].toString(),
+                                jsonBook["coverPath"].toString());
+
+                // Make sure to release the reply's memory
                 reply->deleteLater();
-                return;
-            }
-
-            // Send book's actual binary file to the server
-            uploadBookMedia(jsonBook["guid"].toString(),
-                            jsonBook["filePath"].toString(), authToken);
-
-            // Send the book's cover to the server
-            uploadBookCover(authToken, jsonBook["guid"].toString(),
-                            jsonBook["coverPath"].toString());
-
-            // Make sure to release the reply's memory
-            reply->deleteLater();
-        });
+            });
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
@@ -344,6 +337,15 @@ ServerReplyStatus BookStorageAccess::validateNetworkReply(
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
+    if(statusCode == 426)
+    {
+        qWarning() << name << " failed: Exceeded the storage limit.";
+        emit storageLimitExceeded();
+        return ServerReplyStatus {
+            .success = false,
+            .errorMessage = "Exceeded the storage limit",
+        };
+    }
 
     if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
