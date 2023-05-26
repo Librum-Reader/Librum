@@ -593,6 +593,7 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
 void BookService::mergeLocalLibraryIntoRemoteLibrary(
     const std::vector<Book>& remoteBooks)
 {
+    int bytesOfDataUploaded = 0;
     for(const auto& localBook : m_books)
     {
         bool localBookExistsOnServer = std::ranges::any_of(
@@ -602,11 +603,16 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
-        bool enoughStorageSpaceAvailable =
-            m_usedBookStorage + localBook.getSizeInBytes() < m_maxBookStorage;
-        if(!localBookExistsOnServer && enoughStorageSpaceAvailable)
+        // Ensure that we are not trying to upload the local books even though
+        // there is not enough space available. This would just lead to annoying
+        // error messages for the user saying "Storage Limit Reached" or similar
+        double bookSize = localBook.getSizeInBytes();
+        double totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
+        bool enoughSpace = totalStorageSpace + bookSize < m_maxBookStorage;
+        if(!localBookExistsOnServer && enoughSpace)
         {
             m_bookStorageManager->addBook(localBook);
+            bytesOfDataUploaded += bookSize;
         }
     }
 }

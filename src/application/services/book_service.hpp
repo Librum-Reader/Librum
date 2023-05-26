@@ -75,7 +75,7 @@ private:
     std::vector<domain::entities::Book> m_books;
     QTimer m_fetchChangesTimer;
     double m_usedBookStorage = 0;
-    double m_maxBookStorage = 20971520;  // 20 MiB
+    double m_maxBookStorage = 209715200;  // 200 MiB
     const int m_fetchChangedInterval = 15'000;
 };
 
