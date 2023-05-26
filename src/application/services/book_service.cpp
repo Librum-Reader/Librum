@@ -56,9 +56,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
         return BookOperationStatus::OpeningBookFailed;
     }
 
-    emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(filePath, bookMetaData.value());
-    emit bookInsertionEnded();
+    addBookToLibrary(Book(filePath, bookMetaData.value()));
 
     // Load the cover after creating book to avoid adding to a non-existent book
     m_bookMetadataHelper->loadCover();
@@ -268,6 +266,13 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
 
     refreshUIWithNewCover(uuid, path.value());
     return true;
+}
+
+void BookService::addBookToLibrary(const Book& book)
+{
+    emit bookInsertionStarted(m_books.size());
+    m_books.emplace_back(book);
+    emit bookInsertionEnded();
 }
 
 BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
@@ -488,10 +493,7 @@ void BookService::loadLocalBooks()
     for(auto book : books)
     {
         uninstallBookIfTheBookFileIsInvalid(book);
-
-        emit bookInsertionStarted(m_books.size());
-        m_books.emplace_back(book);
-        emit bookInsertionEnded();
+        addBookToLibrary(book);
     }
 }
 
@@ -569,11 +571,7 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
             continue;
         }
 
-        // Add the remote book to the local library if it does not exist
-        emit bookInsertionStarted(m_books.size());
-        m_books.emplace_back(remoteBook);
-        emit bookInsertionEnded();
-
+        addBookToLibrary(remoteBook);
 
         // Get the cover for the remote book if it does not exist locally
         if(remoteBook.hasCover() && remoteBook.getCoverPath().isEmpty())
