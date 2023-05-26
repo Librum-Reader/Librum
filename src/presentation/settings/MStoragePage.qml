@@ -141,12 +141,14 @@ MFlickWrapper
                     Label
                     {
                         id: availableStorageText
+                        property double usedMB: ((UserController.usedBookStorage / (1024 * 1024) )).toFixed(2)
+                        
                         Layout.fillWidth: true
                         Layout.leftMargin: 20
                         Layout.topMargin: 15
-                        text: "You currently have <font size=4 color=" + Style.colorBasePurple + " bold><b>" + 
-                              UserController.usedBookStorage + "</b></font> files stored " +
-                              "and have <font size=4 color=" + Style.colorBasePurple + " bold><b>1.8GB</b></font> free!"
+                        text: "You are currently using <font size=4 color=" + Style.colorBasePurple + " bold><b>" + 
+                              (usedMB <= 200 ? usedMB : 200) + "</b></font> MB " + 
+                              "out of <font size=4 color=" + Style.colorBasePurple + " bold><b> 200 </b></font> MB!"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: 15
