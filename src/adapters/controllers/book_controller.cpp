@@ -49,6 +49,9 @@ BookController::BookController(application::IBookService* bookService) :
     connect(m_bookService, &application::IBookService::bookClearingEnded, this,
             &BookController::bookCountChanged);
 
+    // Storage limit exceeded
+    connect(m_bookService, &application::IBookService::storageLimitExceeded,
+            this, &BookController::storageLimitExceeded);
 
     // tags changed
     connect(m_bookService, &application::IBookService::tagsChanged,

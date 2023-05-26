@@ -27,6 +27,13 @@ Page
         onActivated: importFilesDialog.open()
     }
     
+    Connections
+    {
+        target: BookController
+        
+        function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
+    }
+    
     
     ColumnLayout
     {
@@ -274,6 +281,15 @@ Page
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
         onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
+    }
+    
+    MUploadLimitReachedPopup
+    {
+        id: uploadLimitReachedPopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        
+        onDecisionMade: close()
     }
     
     FileDialog

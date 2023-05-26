@@ -77,6 +77,7 @@ public slots:
 
 signals:
     void bookCountChanged();
+    void storageLimitExceeded();
 };
 
 }  // namespace adapters

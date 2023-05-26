@@ -48,6 +48,7 @@ signals:
                                       const QString& filePath);
     void finishedDownloadingBookCover(const QUuid& uuid,
                                       const QString& filePath);
+    void storageLimitExceeded();
 };
 
 }  // namespace application

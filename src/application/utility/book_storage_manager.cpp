@@ -26,6 +26,10 @@ BookStorageManager::BookStorageManager(
     connect(m_bookStorageGateway,
             &IBookStorageGateway::downloadingBookCoverFinished, this,
             &BookStorageManager::saveDownloadedCoverToFile);
+
+    // Storage limit exceeded
+    connect(m_bookStorageGateway, &IBookStorageGateway::storageLimitExceeded,
+            this, &BookStorageManager::storageLimitExceeded);
 }
 
 void BookStorageManager::setUserData(const QString& email,

@@ -42,6 +42,7 @@ signals:
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
     void uploadLimitReached();
+    void storageLimitExceeded();
 };
 
 }  // namespace adapters

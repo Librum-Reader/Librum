@@ -45,6 +45,10 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     connect(m_bookStorageManager,
             &IBookStorageManager::finishedDownloadingBookCover, this,
             &BookService::processDownloadedBookCover);
+
+    // Storage limit exceeded
+    connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
+            this, &BookService::storageLimitExceeded);
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)

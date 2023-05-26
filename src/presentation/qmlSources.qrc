@@ -96,6 +96,6 @@
         <file>homePage/manageTagsPopup/MAddTagBoxPopup.qml</file>
         <file>homePage/manageTagsPopup/MManageTagsPopup.qml</file>
         <file>homePage/manageTagsPopup/MTagItem.qml</file>
-        <file>settings/MUploadLimitReachedPopup.qml</file>
+        <file>homePage/MUploadLimitReachedPopup.qml</file>
     </qresource>
 </RCC>

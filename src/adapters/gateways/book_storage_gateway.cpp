@@ -28,6 +28,10 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
     connect(m_bookStorageAccess,
             &IBookStorageAccess::downloadingBookCoverFinished, this,
             &BookStorageGateway::downloadingBookCoverFinished);
+
+    // Storage limit exceeded
+    connect(m_bookStorageAccess, &IBookStorageAccess::storageLimitExceeded,
+            this, &BookStorageGateway::storageLimitExceeded);
 }
 
 void BookStorageGateway::createBook(const QString& authToken, const Book& book)

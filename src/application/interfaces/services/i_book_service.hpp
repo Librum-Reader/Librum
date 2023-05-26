@@ -62,6 +62,7 @@ signals:
     void bookClearingEnded();
     void tagsChanged(int index);
     void dataChanged(int index);
+    void storageLimitExceeded();
 };
 
 }  // namespace application

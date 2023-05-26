@@ -25,29 +25,35 @@ void BookStorageAccess::createBook(const QString& authToken,
     // The book is created in separate steps. First of all an enty for the book
     // is created in the SQL Database, if that succeeds the book's data (the
     // actual binary file) and its cover are uploaded to the server.
-    connect(bookCreationReply, &QNetworkReply::finished, this,
-            [this, jsonBook, authToken]()
+    connect(
+        bookCreationReply, &QNetworkReply::finished, this,
+        [this, jsonBook, authToken]()
+        {
+            auto reply = qobject_cast<QNetworkReply*>(sender());
+            auto result = validateNetworkReply(201, reply, "Creating book");
+            if(!result.success)
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
-                auto result = validateNetworkReply(201, reply, "Creating book");
-                if(!result.success)
+                if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                       .toInt() == 426)
                 {
-                    reply->deleteLater();
-                    return;
+                    emit storageLimitExceeded();
                 }
 
-
-                // Send book's actual binary file to the server
-                uploadBookMedia(jsonBook["guid"].toString(),
-                                jsonBook["filePath"].toString(), authToken);
-
-                // Send the book's cover to the server
-                uploadBookCover(authToken, jsonBook["guid"].toString(),
-                                jsonBook["coverPath"].toString());
-
-                // Make sure to release the reply's memory
                 reply->deleteLater();
-            });
+                return;
+            }
+
+            // Send book's actual binary file to the server
+            uploadBookMedia(jsonBook["guid"].toString(),
+                            jsonBook["filePath"].toString(), authToken);
+
+            // Send the book's cover to the server
+            uploadBookCover(authToken, jsonBook["guid"].toString(),
+                            jsonBook["coverPath"].toString());
+
+            // Make sure to release the reply's memory
+            reply->deleteLater();
+        });
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
