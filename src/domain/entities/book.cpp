@@ -391,22 +391,14 @@ double Book::getSizeInBytes() const
 // Mib, Bytes or KiB to its corresponding amount of bytes.
 double Book::getBytesFromSizeString(QString size) const
 {
-    // Make sure there are no spaces and decimal points are dots '.'
+    // Make sure there are no spaces and decimal points are dots '.' so that we
+    // can parse the size correctly, independent of the culture.
     size = size.replace(" ", "");
     size = size.replace(",", ".");
 
-    int typeBegining = -1;
-    for(int i = 0; i < size.length(); i++)
-    {
-        if(!size[i].isDigit() && size[i] != '.')
-        {
-            typeBegining = i;
-            break;
-        }
-    }
-
-    auto numbers = size.midRef(0, typeBegining).toDouble();
-    auto type = size.mid(typeBegining);
+    auto dataPair = splitSizeStringInNumbersAndFormat(size);
+    auto numbers = dataPair.first;
+    auto type = dataPair.second;
 
     if(type.toLower() == "b")
         return numbers;
@@ -419,6 +411,24 @@ double Book::getBytesFromSizeString(QString size) const
                   "non-supported size type: "
                << type;
     return 0;
+}
+
+QPair<double, QString> Book::splitSizeStringInNumbersAndFormat(
+    const QString& sizeString) const
+{
+    int typeBegining = -1;
+    for(int i = 0; i < sizeString.length(); i++)
+    {
+        if(!sizeString[i].isDigit() && sizeString[i] != '.')
+        {
+            typeBegining = i;
+            break;
+        }
+    }
+
+    auto numbers = sizeString.midRef(0, typeBegining).toDouble();
+    auto type = sizeString.mid(typeBegining);
+    return { numbers, type };
 }
 
 double Book::getCoverSizeInBytes() const

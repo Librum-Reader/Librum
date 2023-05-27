@@ -111,6 +111,8 @@ private:
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
     double getBytesFromSizeString(QString size) const;
     double getCoverSizeInBytes() const;
+    QPair<double, QString> splitSizeStringInNumbersAndFormat(
+        const QString& sizeString) const;
 
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;
