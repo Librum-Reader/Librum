@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QString>
@@ -548,6 +549,131 @@ TEST(ABook, FailsEqualityComparisonIfTheBooksDiffer)
 
     // Assert
     EXPECT_EQ(expectedResult, result);
+}
+
+TEST(ABook, SucceedsGettingSizeInBytesForByteSizeFormat)
+{
+    // Arrange
+    int sizeInBytes = 203;
+    BookMetaData metaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = QString::number(sizeInBytes) + " B",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .lastOpened = QDateTime(),
+        .hasCover = false,
+    };
+    Book book("some/path.pdf", metaData);
+
+    auto expectedSize = sizeInBytes;
+
+
+    // Act
+    auto bookSize = book.getSizeInBytes();
+
+    // Assert
+    EXPECT_EQ(bookSize, expectedSize);
+}
+
+TEST(ABook, SucceedsGettingSizeInBytesForKiBSizeFormat)
+{
+    // Arrange
+    int sizeInKiB = 203;
+    BookMetaData metaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = QString::number(sizeInKiB) + " KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .lastOpened = QDateTime(),
+        .hasCover = false,
+    };
+    Book book("some/path.pdf", metaData);
+
+    auto expectedSize = sizeInKiB * 1024;
+
+
+    // Act
+    auto bookSize = book.getSizeInBytes();
+
+    // Assert
+    EXPECT_EQ(bookSize, expectedSize);
+}
+
+TEST(ABook, SucceedsGettingSizeInBytesForMiBSizeFormat)
+{
+    // Arrange
+    int sizeInMiB = 203;
+    BookMetaData metaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = QString::number(sizeInMiB) + " MiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .lastOpened = QDateTime(),
+        .hasCover = false,
+    };
+    Book book("some/path.pdf", metaData);
+
+    auto expectedSize = sizeInMiB * 1024 * 1024;
+
+
+    // Act
+    auto bookSize = book.getSizeInBytes();
+
+    // Assert
+    EXPECT_EQ(bookSize, expectedSize);
+}
+
+TEST(ABook, SucceedsGettingSizeInBytesWhenCoverExists)
+{
+    // Arrange
+    int sizeInKiB = 203;
+    BookMetaData metaData {
+        .title = "SomeTitle",
+        .authors = "SomeAuthor",
+        .creator = "SomeCreator",
+        .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
+        .format = "pdf",
+        .language = "English",
+        .documentSize = QString::number(sizeInKiB) + " KiB",
+        .pagesSize = "400 x 800",
+        .pageCount = 574,
+        .lastOpened = QDateTime(),
+        .hasCover = false,
+    };
+    Book book("some/path.pdf", metaData);
+
+    // Create cover
+    QFile cover("testCoverFile.txt");
+    cover.open(QFile::WriteOnly);
+    cover.write("Book cover data");
+
+    book.setHasCover(true);
+    book.setCoverPath(cover.fileName());
+
+
+    auto expectedSize = sizeInKiB * 1024 + cover.size();
+
+
+    // Act
+    auto bookSize = book.getSizeInBytes();
+
+    // Assert
+    EXPECT_EQ(bookSize, expectedSize);
 }
 
 }  // namespace tests::domain
