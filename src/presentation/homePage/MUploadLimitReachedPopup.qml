@@ -82,7 +82,8 @@ Popup
                         Layout.alignment: Qt.AlignHCenter
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
-                        text: "You have reached your 2GB upload limit!\nDelete unused books to free up some space"
+                        text: "Your books won't be saved to the cloud anymore.\n" + 
+                              "Delete unused books to free up space!"
                         horizontalAlignment: Qt.AlignHCenter
                         color: Style.colorLightText
                         font.weight: Font.Medium
