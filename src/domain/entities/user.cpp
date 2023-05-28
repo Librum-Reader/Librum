@@ -5,7 +5,7 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, double usedBookStorage) :
+           const QString& email, long usedBookStorage) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
@@ -43,12 +43,12 @@ void User::setEmail(const QString& newEmail)
     m_email = newEmail;
 }
 
-double User::getUsedBookStorage() const
+long User::getUsedBookStorage() const
 {
     return m_usedBookStorage;
 }
 
-void User::setUsedBookStorage(double newUsedBookStorage)
+void User::setUsedBookStorage(long newUsedBookStorage)
 {
     m_usedBookStorage = newUsedBookStorage;
 }

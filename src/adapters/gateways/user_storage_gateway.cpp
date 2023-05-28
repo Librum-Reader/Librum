@@ -67,7 +67,7 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
 void UserStorageGateway::proccessUserData(const QString& firstName,
                                           const QString& lastName,
                                           const QString& email,
-                                          double usedBookStorage,
+                                          long usedBookStorage,
                                           const QJsonArray& tags)
 {
     User user(firstName, lastName, email, usedBookStorage);

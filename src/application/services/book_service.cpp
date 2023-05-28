@@ -481,7 +481,7 @@ void BookService::processDownloadedBookCover(const QUuid& uuid,
     refreshUIWithNewCover(uuid, filePath);
 }
 
-void BookService::updateUsedBookStorage(double usedStorage)
+void BookService::updateUsedBookStorage(long usedStorage)
 {
     m_usedBookStorage = usedStorage;
 }
@@ -606,8 +606,8 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
         // Ensure that we are not trying to upload the local books even though
         // there is not enough space available. This would just lead to annoying
         // error messages for the user saying "Storage Limit Reached" or similar
-        double bookSize = localBook.getSizeInBytes();
-        double totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
+        long bookSize = localBook.getSizeInBytes();
+        long totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
         bool enoughSpace = totalStorageSpace + bookSize < m_maxBookStorage;
         if(!localBookExistsOnServer && enoughSpace)
         {

@@ -19,7 +19,7 @@ class IUserController : public QObject
     Q_PROPERTY(QString lastName READ getLastName WRITE setLastName NOTIFY
                    lastNameChanged)
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
-    Q_PROPERTY(double usedBookStorage READ getUsedBookStorage NOTIFY
+    Q_PROPERTY(long usedBookStorage READ getUsedBookStorage NOTIFY
                    usedBookStorageChanged CONSTANT)
     Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE
                    setProfilePicture NOTIFY profilePictureChanged)
@@ -46,7 +46,7 @@ public:
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
 
-    virtual double getUsedBookStorage() const = 0;
+    virtual long getUsedBookStorage() const = 0;
 
     virtual QString getProfilePicture() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;

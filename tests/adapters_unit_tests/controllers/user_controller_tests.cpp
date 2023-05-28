@@ -26,7 +26,7 @@ public:
     MOCK_METHOD(void, setLastName, (const QString&), (override));
     MOCK_METHOD(QString, getEmail, (), (const, override));
     MOCK_METHOD(void, setEmail, (const QString&), (override));
-    MOCK_METHOD(double, getUsedBookStorage, (), (const, override));
+    MOCK_METHOD(long, getUsedBookStorage, (), (const, override));
     MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
     MOCK_METHOD(void, setProfilePicture, (const QImage&), (override));
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),

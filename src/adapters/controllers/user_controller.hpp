@@ -30,7 +30,7 @@ public:
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
 
-    double getUsedBookStorage() const override;
+    long getUsedBookStorage() const override;
 
     QString getProfilePicture() const override;
     void setProfilePicture(const QString& path) override;

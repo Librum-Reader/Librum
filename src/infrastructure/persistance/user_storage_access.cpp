@@ -137,7 +137,8 @@ void UserStorageAccess::proccessGetUserResult()
 
     auto firstName = jsonObj["firstName"].toString();
     auto lastName = jsonObj["lastName"].toString();
-    auto usedBookStorage = jsonObj["usedBookStorage"].toDouble();
+    auto usedBookStorage =
+        static_cast<long>(jsonObj["usedBookStorage"].toDouble());
     auto email = jsonObj["email"].toString();
     auto tags = jsonObj["tags"].toArray();
 

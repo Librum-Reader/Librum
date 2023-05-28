@@ -91,7 +91,7 @@ public:
 
     void update(const Book& other);
     bool isValid() const;
-    double getSizeInBytes() const;
+    long getSizeInBytes() const;
     QByteArray toJson() const;
     static Book fromJson(const QJsonObject& jsonBook);
 
@@ -109,9 +109,9 @@ private:
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
-    double getBytesFromSizeString(QString size) const;
-    double getCoverSizeInBytes() const;
-    QPair<double, QString> splitSizeStringInNumbersAndFormat(
+    long getBytesFromSizeString(QString size) const;
+    long getCoverSizeInBytes() const;
+    QPair<long, QString> splitSizeStringInNumbersAndFormat(
         const QString& sizeString) const;
 
     QUuid m_uuid;

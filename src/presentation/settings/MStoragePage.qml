@@ -141,7 +141,7 @@ MFlickWrapper
                     Label
                     {
                         id: availableStorageText
-                        property double usedMB: ((UserController.usedBookStorage / (1024 * 1024) )).toFixed(2)
+                        property int usedMB: (UserController.usedBookStorage / (1024 * 1024))
                         
                         Layout.fillWidth: true
                         Layout.leftMargin: 20

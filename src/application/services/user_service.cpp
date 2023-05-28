@@ -108,7 +108,7 @@ void UserService::setEmail(const QString& newEmail)
     m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
 }
 
-double UserService::getUsedBookStorage() const
+long UserService::getUsedBookStorage() const
 {
     return m_user.getUsedBookStorage();
 }

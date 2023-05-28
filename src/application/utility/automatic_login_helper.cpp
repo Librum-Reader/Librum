@@ -44,7 +44,7 @@ std::optional<UserData> AutomaticLoginHelper::tryAutomaticUserLoading()
         automaticLoginData["firstName"].toString(),
         automaticLoginData["lastName"].toString(),
         automaticLoginData["email"].toString(),
-        automaticLoginData["usedBookStorage"].toDouble(),
+        static_cast<long>(automaticLoginData["usedBookStorage"].toDouble()),
         std::vector<Tag>(),
     };
 
@@ -125,7 +125,8 @@ void AutomaticLoginHelper::appendUserDataToJsonObject(QJsonObject& jsonObject,
     jsonObject.insert("firstName", userData.firstName);
     jsonObject.insert("lastName", userData.lastName);
     jsonObject.insert("email", userData.email);
-    jsonObject.insert("usedBookStorage", userData.usedBookStorage);
+    jsonObject.insert("usedBookStorage",
+                      static_cast<qint64>(userData.usedBookStorage));
 
     QJsonArray tags;
     for(const auto& tag : userData.tags)

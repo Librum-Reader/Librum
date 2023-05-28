@@ -117,7 +117,7 @@ void UserController::setEmail(const QString& newEmail)
     emit emailChanged();
 }
 
-double UserController::getUsedBookStorage() const
+long UserController::getUsedBookStorage() const
 {
     return m_userService->getUsedBookStorage();
 }

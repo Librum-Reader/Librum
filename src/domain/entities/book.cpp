@@ -381,7 +381,7 @@ bool Book::isValid() const
            creatorSize <= 140 && creationDateSize <= 140;
 }
 
-double Book::getSizeInBytes() const
+long Book::getSizeInBytes() const
 {
     return getBytesFromSizeString(m_metaData.documentSize) +
            getCoverSizeInBytes();
@@ -389,7 +389,7 @@ double Book::getSizeInBytes() const
 
 // An example input for this function would be 24 MiB. This function converts x
 // Mib, Bytes or KiB to its corresponding amount of bytes.
-double Book::getBytesFromSizeString(QString size) const
+long Book::getBytesFromSizeString(QString size) const
 {
     // Make sure there are no spaces and decimal points are dots '.' so that we
     // can parse the size correctly, independent of the culture.
@@ -413,7 +413,7 @@ double Book::getBytesFromSizeString(QString size) const
     return 0;
 }
 
-QPair<double, QString> Book::splitSizeStringInNumbersAndFormat(
+QPair<long, QString> Book::splitSizeStringInNumbersAndFormat(
     const QString& sizeString) const
 {
     int typeBegining = -1;
@@ -426,12 +426,12 @@ QPair<double, QString> Book::splitSizeStringInNumbersAndFormat(
         }
     }
 
-    auto numbers = sizeString.midRef(0, typeBegining).toDouble();
+    auto numbers = sizeString.midRef(0, typeBegining).toLong();
     auto type = sizeString.mid(typeBegining);
     return { numbers, type };
 }
 
-double Book::getCoverSizeInBytes() const
+long Book::getCoverSizeInBytes() const
 {
     if(!m_metaData.hasCover || m_metaData.coverPath.isEmpty())
         return 0;

@@ -13,7 +13,7 @@ struct UserData
     QString firstName;
     QString lastName;
     QString email;
-    double usedBookStorage;
+    long usedBookStorage;
     std::vector<domain::entities::Tag> tags;
 };
 
