@@ -1,16 +1,13 @@
 # Librum
 
-Librum is an application, designed to make reading as <b>enjoyable</b> and <b>straightforward</b> as possible for you.<br>
+Librum is an application designed to make reading <b>enjoyable</b> and <b>straightforward</b> for you.
 
-It is more than simply an e-book reader, Librum makes it possible for you, to manage your own library, which you can access from <b>all</b> of your devices at any time.<br>
-Librum provides a variety of features to make you as productive as you can be, these features include being able to take <b>notes</b> from within the app, <b>book mark</b> and <b>highlight</b> important sections, while being able to customise the application to look and feel exactly how you want it to. Librum also provides free access to over <b>70,000</b> books, custom <b>plugins</b> and your reading <b>statistics</b>, while remaining <b>free</b> and 100% <b>open source</b>.
-
-
-Librum's aim is to make reading as <b>frictionless</b> and <b>enjoyable</b> as possible for you.
+It's more than just an e-book reader. With Librum, you can manage your own online library and access it from all your devices at any time. It offers features like note-taking, bookmarking, highlighting, while being able to customise the application to look and feel exactly how you want it to. 
+Librum also provides free access to over 70,000 books and your reading statistics while being free and completely open source.
 
 <br>
 <b>Note</b>: Librum is still in development, the servers are <b>not</b> public, and thus Librum is not yet available for public use.
-A beta release will be available soon, bringing the servers online and making the application available to end users. 
+An alpha release will be available soon, bringing the servers online and making the application available to end users. 
 
 # Preview
 
