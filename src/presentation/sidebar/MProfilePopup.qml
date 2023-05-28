@@ -87,9 +87,9 @@ Popup
     
     function logout()
     {
+        AuthController.logoutUser();
         loadPage(loginPage);
         root.close();
-        AuthController.logoutUser();
         resetSidebar();
     }
 }
