@@ -11,7 +11,7 @@ namespace application::services
 
 UserService::UserService(IUserStorageGateway* userStorageGateway) :
     m_userStorageGateway(userStorageGateway),
-    m_user("x", "y", "z", 0.0)
+    m_user("x", "y", "z", 0, 0)
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
@@ -113,6 +113,11 @@ long UserService::getUsedBookStorage() const
     return m_user.getUsedBookStorage();
 }
 
+long UserService::getBookStorageLimit() const
+{
+    return m_user.getBookStorageLimit();
+}
+
 QImage UserService::getProfilePicture() const
 {
     return m_user.getProfilePicture();
@@ -187,11 +192,13 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
     m_user.setUsedBookStorage(user.getUsedBookStorage());
+    m_user.setBookStorageLimit(user.getBookStorageLimit());
     for(const auto& tag : user.getTags())
         m_user.addTag(tag);
 
     emit finishedLoadingUser(true);
-    emit usedBookStorageUpdated(user.getUsedBookStorage());
+    emit bookStorageDataUpdated(user.getUsedBookStorage(),
+                                user.getBookStorageLimit());
 
     // If "rememberUser" is true, update the saved autologin user data everytime
     // there are changes to the user. This way, when logging in via autologin
@@ -213,7 +220,7 @@ bool UserService::tryLoadingUserFromFile()
     {
         utility::UserData userData = result.value();
         User user(userData.firstName, userData.lastName, userData.email,
-                  userData.usedBookStorage);
+                  userData.usedBookStorage, userData.bookStorageLimit);
         for(auto& tag : userData.tags)
             user.addTag(tag);
 
@@ -228,8 +235,8 @@ void UserService::saveUserToFile(const domain::entities::User& user)
 {
     utility::AutomaticLoginHelper autoLoginHelper;
     utility::UserData userData {
-        user.getFirstName(),       user.getLastName(), user.getEmail(),
-        user.getUsedBookStorage(), user.getTags(),
+        user.getFirstName(),       user.getLastName(),         user.getEmail(),
+        user.getUsedBookStorage(), user.getBookStorageLimit(), user.getTags(),
     };
 
     autoLoginHelper.saveUserData(userData);

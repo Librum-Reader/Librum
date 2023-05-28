@@ -21,6 +21,8 @@ class IUserController : public QObject
     Q_PROPERTY(QString email READ getEmail WRITE setEmail NOTIFY emailChanged)
     Q_PROPERTY(long usedBookStorage READ getUsedBookStorage NOTIFY
                    usedBookStorageChanged CONSTANT)
+    Q_PROPERTY(long bookStorageLimit READ getBookStorageLimit NOTIFY
+                   bookStorageLimitChanged CONSTANT)
     Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE
                    setProfilePicture NOTIFY profilePictureChanged)
     Q_PROPERTY(adapters::data_models ::UserTagsModel* tagsModel READ
@@ -47,6 +49,7 @@ public:
     virtual void setEmail(const QString& newEmail) = 0;
 
     virtual long getUsedBookStorage() const = 0;
+    virtual long getBookStorageLimit() const = 0;
 
     virtual QString getProfilePicture() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
@@ -59,6 +62,7 @@ signals:
     void lastNameChanged();
     void emailChanged();
     void usedBookStorageChanged();
+    void bookStorageLimitChanged();
     void profilePictureChanged();
 };
 

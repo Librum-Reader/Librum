@@ -34,7 +34,7 @@ public:
 signals:
     void userReady(const QString& firstName, const QString& lastName,
                    const QString& email, long usedBookStorage,
-                   const QJsonArray& tags);
+                   long bookStorageLimit, const QJsonArray& tags);
     void gettingUserFailed();
 };
 

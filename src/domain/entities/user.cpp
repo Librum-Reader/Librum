@@ -5,11 +5,12 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, long usedBookStorage) :
+           const QString& email, long usedBookStorage, long bookStorageLimit) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
-    m_usedBookStorage(usedBookStorage)
+    m_usedBookStorage(usedBookStorage),
+    m_bookStorageLimit(bookStorageLimit)
 {
 }
 
@@ -51,6 +52,16 @@ long User::getUsedBookStorage() const
 void User::setUsedBookStorage(long newUsedBookStorage)
 {
     m_usedBookStorage = newUsedBookStorage;
+}
+
+long User::getBookStorageLimit() const
+{
+    return m_bookStorageLimit;
+}
+
+void User::setBookStorageLimit(long newBookStorageLimit)
+{
+    m_bookStorageLimit = newBookStorageLimit;
 }
 
 const QImage& User::getProfilePicture() const

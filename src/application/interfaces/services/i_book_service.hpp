@@ -48,7 +48,8 @@ public:
 
 public slots:
     virtual bool refreshLastOpenedDateOfBook(const QUuid& uuid) = 0;
-    virtual void updateUsedBookStorage(long usedStorage) = 0;
+    virtual void updateUsedBookStorage(long usedStorage,
+                                       long bookStorageLimit) = 0;
     virtual void setupUserData(const QString& token, const QString& email) = 0;
     virtual void clearUserData() = 0;
 

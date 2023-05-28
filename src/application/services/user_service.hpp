@@ -28,6 +28,8 @@ public:
 
     long getUsedBookStorage() const override;
 
+    long getBookStorageLimit() const override;
+
     QImage getProfilePicture() const override;
     void setProfilePicture(const QImage& image) override;
 

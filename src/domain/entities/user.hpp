@@ -13,7 +13,7 @@ class User : public QObject
 
 public:
     User(const QString& firstName, const QString& lastName,
-         const QString& email, long usedBookStorage);
+         const QString& email, long usedBookStorage, long bookStorageLimit);
 
     const QString& getFirstName() const;
     void setFirstName(const QString& newFirstName);
@@ -26,6 +26,10 @@ public:
 
     long getUsedBookStorage() const;
     void setUsedBookStorage(long newUsedBookStorage);
+
+    long getBookStorageLimit() const;
+    void setBookStorageLimit(long newBookStorageLimit);
+
 
     const QImage& getProfilePicture() const;
     void setProfilePicture(const QImage& newProfilePicture);
@@ -53,6 +57,7 @@ private:
     QString m_lastName;
     QString m_email;
     long m_usedBookStorage;
+    long m_bookStorageLimit;
     QImage m_profilePicture;
     std::vector<Tag> m_tags;
 };

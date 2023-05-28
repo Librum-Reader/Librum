@@ -139,10 +139,13 @@ void UserStorageAccess::proccessGetUserResult()
     auto lastName = jsonObj["lastName"].toString();
     auto usedBookStorage =
         static_cast<long>(jsonObj["usedBookStorage"].toDouble());
+    auto bookStorageLimit =
+        static_cast<long>(jsonObj["bookStorageLimit"].toDouble());
     auto email = jsonObj["email"].toString();
     auto tags = jsonObj["tags"].toArray();
 
-    emit userReady(firstName, lastName, email, usedBookStorage, tags);
+    emit userReady(firstName, lastName, email, usedBookStorage,
+                   bookStorageLimit, tags);
 
     // Make sure to release the reply's memory
     reply->deleteLater();

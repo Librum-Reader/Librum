@@ -31,6 +31,7 @@ public:
     void setEmail(const QString& newEmail) override;
 
     long getUsedBookStorage() const override;
+    long getBookStorageLimit() const override;
 
     QString getProfilePicture() const override;
     void setProfilePicture(const QString& path) override;

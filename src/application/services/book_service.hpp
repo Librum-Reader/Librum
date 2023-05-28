@@ -47,14 +47,14 @@ public slots:
     bool refreshLastOpenedDateOfBook(const QUuid& uuid) override;
     void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
+    void updateUsedBookStorage(long usedStorage,
+                               long bookStorageLimit) override;
 
 private slots:
     void processBookCover(const QPixmap* pixmap);
     void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
     void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
-    void updateUsedBookStorage(long usedStorage) override;
-
     void refreshUIWithNewCover(const QUuid& uuid, const QString& path);
     void refreshUIForBook(const QUuid& uuid);
 
@@ -73,11 +73,10 @@ private:
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
+    long m_usedBookStorage = 0;
+    long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
     const int m_fetchChangedInterval = 15'000;
-
-    long m_usedBookStorage = 0;
-    long m_maxBookStorage = 209715200;  // 200 MiB
 };
 
 }  // namespace application::services

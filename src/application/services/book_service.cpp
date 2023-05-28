@@ -481,9 +481,10 @@ void BookService::processDownloadedBookCover(const QUuid& uuid,
     refreshUIWithNewCover(uuid, filePath);
 }
 
-void BookService::updateUsedBookStorage(long usedStorage)
+void BookService::updateUsedBookStorage(long usedStorage, long bookStorageLimit)
 {
     m_usedBookStorage = usedStorage;
+    m_bookStorageLimit = bookStorageLimit;
 }
 
 void BookService::setupUserData(const QString& token, const QString& email)
@@ -608,7 +609,7 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
         // error messages for the user saying "Storage Limit Reached" or similar
         long bookSize = localBook.getSizeInBytes();
         long totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
-        bool enoughSpace = totalStorageSpace + bookSize < m_maxBookStorage;
+        bool enoughSpace = totalStorageSpace + bookSize < m_bookStorageLimit;
         if(!localBookExistsOnServer && enoughSpace)
         {
             m_bookStorageManager->addBook(localBook);

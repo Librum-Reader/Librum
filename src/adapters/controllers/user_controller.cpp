@@ -122,6 +122,11 @@ long UserController::getUsedBookStorage() const
     return m_userService->getUsedBookStorage();
 }
 
+long UserController::getBookStorageLimit() const
+{
+    return m_userService->getBookStorageLimit();
+}
+
 QString UserController::getProfilePicture() const
 {
     auto profilePicture = m_userService->getProfilePicture();
@@ -164,6 +169,7 @@ void UserController::proccessUserLoadingResult(bool success)
     emit lastNameChanged();
     emit emailChanged();
     emit usedBookStorageChanged();
+    emit bookStorageLimitChanged();
 
     emit finishedLoadingUser(success);
 }

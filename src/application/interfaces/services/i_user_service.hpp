@@ -31,6 +31,7 @@ public:
     virtual void setEmail(const QString& newEmail) = 0;
 
     virtual long getUsedBookStorage() const = 0;
+    virtual long getBookStorageLimit() const = 0;
 
     virtual QImage getProfilePicture() const = 0;
     virtual void setProfilePicture(const QImage& image) = 0;
@@ -47,7 +48,7 @@ signals:
     void tagDeletionStarted(int index);
     void tagDeletionEnded();
     void tagsChanged(int index);
-    void usedBookStorageUpdated(long usedStorage);
+    void bookStorageDataUpdated(long usedStorage, long bookStorageLimit);
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;

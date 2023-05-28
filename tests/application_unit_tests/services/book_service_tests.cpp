@@ -812,6 +812,7 @@ TEST_F(ABookService, SucceedsAddingALocalBookToRemoteServer)
         .Times(1)
         .WillOnce(Return(localBookMetaData));
 
+    bookService->updateUsedBookStorage(0, 99999999);  // Setup storage limit
     bookService->addBook("some/path.pdf");
 
 

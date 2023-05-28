@@ -58,7 +58,7 @@ public:
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));
-    MOCK_METHOD(void, updateUsedBookStorage, (long), (override));
+    MOCK_METHOD(void, updateUsedBookStorage, (long, long), (override));
 };
 
 struct ABookController : public ::testing::Test

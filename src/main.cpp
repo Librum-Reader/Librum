@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 
 
     // Setup other connections
-    QObject::connect(userService, &application::IUserService::usedBookStorageUpdated,
+    QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
                      bookService, &application::IBookService::updateUsedBookStorage);
 
 

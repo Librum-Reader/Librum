@@ -142,13 +142,14 @@ MFlickWrapper
                     {
                         id: availableStorageText
                         property int usedMB: (UserController.usedBookStorage / (1024 * 1024))
+                        property int storageLimitMB: (UserController.bookStorageLimit / (1024 * 1024))
                         
                         Layout.fillWidth: true
                         Layout.leftMargin: 20
                         Layout.topMargin: 15
                         text: "You are currently using <font size=4 color=" + Style.colorBasePurple + " bold><b>" + 
-                              (usedMB <= 200 ? usedMB : 200) + "</b></font> MB " + 
-                              "out of <font size=4 color=" + Style.colorBasePurple + " bold><b> 200 </b></font> MB!"
+                              (usedMB <= storageLimitMB ? usedMB : storageLimitMB) + "</b></font> MB " + 
+                              "out of <font size=4 color=" + Style.colorBasePurple + " bold><b> " + storageLimitMB + " </b></font> MB!"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: 15
