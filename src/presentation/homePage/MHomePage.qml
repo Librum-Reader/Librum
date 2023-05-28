@@ -111,8 +111,8 @@ Page
                 rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
-                flickDeceleration: 3500
-                maximumFlickVelocity: 3000
+                flickDeceleration: 12500
+                maximumFlickVelocity: 3500
                 clip: true
                 model: BookController.libraryModel
                 delegate: MBook
