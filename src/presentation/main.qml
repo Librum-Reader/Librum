@@ -21,7 +21,7 @@ ApplicationWindow
 {
     id: baseRoot
     minimumHeight: 400
-    minimumWidth: 904
+    minimumWidth: 650
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")

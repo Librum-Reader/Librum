@@ -28,6 +28,6 @@ function switchPage(page, sidebarItem)
     if(page === readingPage)
         baseRoot.minimumWidth = 550;
     else
-        baseRoot.minimumWidth = baseRoot.minimumWidth;
+        baseRoot.minimumWidth = 650;
     
 }
