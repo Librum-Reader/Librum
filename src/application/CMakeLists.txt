@@ -53,7 +53,7 @@ set(application_SRC
     utility/book_merger.hpp
     utility/book_merger.cpp
     utility/automatic_login_helper.hpp
-    utility/automatic_login_helper.cpp
+    utility/api_error_code_converter.hpp
 )
 
 
