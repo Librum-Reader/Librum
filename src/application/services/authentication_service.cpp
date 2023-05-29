@@ -25,8 +25,7 @@ AuthenticationService::AuthenticationService(
     connect(this, &AuthenticationService::loggedOut, this,
             []()
             {
-                utility::AutomaticLoginHelper autoLoginHelper;
-                autoLoginHelper.clearAutomaticLoginData();
+                utility::AutomaticLoginHelper::clearAutomaticLoginData();
             });
 }
 
@@ -47,8 +46,7 @@ void AuthenticationService::loginUser(const LoginModel& loginModel)
 
 void AuthenticationService::tryAutomaticLogin()
 {
-    utility::AutomaticLoginHelper autoLoginHelper;
-    auto result = autoLoginHelper.tryAutomaticAuthentication();
+    auto result = utility::AutomaticLoginHelper::tryAutomaticAuthentication();
     if(!result.has_value())
         return;
 
@@ -89,9 +87,8 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
         // Store the login data if "rememberUser" was selected
         if(m_rememberUser)
         {
-            utility::AutomaticLoginHelper autoLoginHelper;
             utility::AuthenticationData authData { m_tempEmail, token };
-            autoLoginHelper.saveAuthenticationData(authData);
+            utility::AutomaticLoginHelper::saveAuthenticationData(authData);
         }
 
         emit loggedIn(token, m_tempEmail);

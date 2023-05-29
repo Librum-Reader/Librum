@@ -214,8 +214,7 @@ bool UserService::userIsLoggedIn()
 
 bool UserService::tryLoadingUserFromFile()
 {
-    utility::AutomaticLoginHelper autoLoginHelper;
-    auto result = autoLoginHelper.tryAutomaticUserLoading();
+    auto result = utility::AutomaticLoginHelper::tryAutomaticUserLoading();
     if(result.has_value())
     {
         utility::UserData userData = result.value();
@@ -233,13 +232,12 @@ bool UserService::tryLoadingUserFromFile()
 
 void UserService::saveUserToFile(const domain::entities::User& user)
 {
-    utility::AutomaticLoginHelper autoLoginHelper;
     utility::UserData userData {
         user.getFirstName(),       user.getLastName(),         user.getEmail(),
         user.getUsedBookStorage(), user.getBookStorageLimit(), user.getTags(),
     };
 
-    autoLoginHelper.saveUserData(userData);
+    utility::AutomaticLoginHelper::saveUserData(userData);
 }
 
 void UserService::setupUserData(const QString& token, const QString& email)
