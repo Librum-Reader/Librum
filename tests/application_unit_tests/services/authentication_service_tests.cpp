@@ -144,7 +144,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
     QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
 
     // Act
-    authService->processAuthenticationResult("");
+    authService->processAuthenticationResult("", 1);
 
     // Assert
     auto arguments = spy[0];
