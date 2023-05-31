@@ -33,8 +33,7 @@ MFlickWrapper
         target: AuthController
         function onLoginFinished(success, message)
         {
-            console.log(message);
-            internal.processLoginResult(success);
+            internal.processLoginResult(success, message);
         }
     }
     
@@ -124,6 +123,7 @@ MFlickWrapper
                         placeholderColor: Style.colorPlaceholderText
                         headerText: "Email"
                         
+                        onEdited: internal.clearLoginError()
                         Keys.onPressed: 
                             (event) =>
                             {
@@ -143,6 +143,7 @@ MFlickWrapper
                         image: Icons.eyeOn
                         toggledImage: Icons.eyeOff
                         
+                        onEdited: internal.clearLoginError()
                         Keys.onPressed: 
                             (event) =>
                             {
@@ -155,6 +156,15 @@ MFlickWrapper
                                     rememberMeCheckBox.giveFocus();
                                 }
                             }
+                    }
+                    
+                    Label
+                    {
+                        id: errorText
+                        Layout.topMargin: 8
+                        visible: false
+                        text: "An error occurred."
+                        color: Style.colorErrorText
                     }
                     
                     RowLayout
@@ -280,6 +290,7 @@ MFlickWrapper
     QtObject
     {
         id: internal
+        property color previousBorderColor: emailInput.borderColor
         
         function login()
         {
@@ -293,7 +304,7 @@ MFlickWrapper
             AuthController.loginUser(emailInput.text, passwordInput.text, rememberMeCheckBox.checked);
         }
         
-        function processLoginResult(success)
+        function processLoginResult(success, message)
         {
             if(success)
             {
@@ -301,8 +312,26 @@ MFlickWrapper
             }
             else
             {
-                // TODO: Login failed
+                internal.setLoginError(message);
             }
+        }
+        
+        function setLoginError(message)
+        {
+            errorText.visible = true;
+            errorText.text = message;
+            
+            emailInput.setError();
+            passwordInput.setError();
+        }
+        
+        function clearLoginError()
+        {
+            errorText.visible = false;
+            errorText.text = "";
+            
+            emailInput.clearError();
+            passwordInput.clearError();
         }
         
         Component.onCompleted: AuthController.tryAutomaticLogin();
