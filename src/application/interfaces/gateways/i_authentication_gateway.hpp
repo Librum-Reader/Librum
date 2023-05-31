@@ -24,8 +24,8 @@ public:
         const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
-    void authenticationFinished(const QString& token);
-    void registrationFinished(bool success, const QString& reason);
+    void authenticationFinished(const QString& token, int errorCode = -1);
+    void registrationFinished(int errorCode = -1);
 };
 
 }  // namespace application

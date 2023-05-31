@@ -1,5 +1,6 @@
 #include "authentication_service.hpp"
 #include <QDebug>
+#include "api_error_code_converter.hpp"
 #include "automatic_login_helper.hpp"
 #include "i_authentication_gateway.hpp"
 
@@ -75,12 +76,16 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
     m_authenticationGateway->registerUser(registerModel);
 }
 
-void AuthenticationService::processAuthenticationResult(const QString& token)
+void AuthenticationService::processAuthenticationResult(const QString& token,
+                                                        int errorCode)
 {
-    if(token.isEmpty())
+    if(errorCode != -1)
     {
-        qWarning() << "Authentication token is empty";
-        emit loginFinished(false);
+        auto errorMessage =
+            utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
+
+        qWarning() << errorMessage;
+        emit loginFinished(false, errorMessage);
     }
     else
     {
@@ -98,10 +103,17 @@ void AuthenticationService::processAuthenticationResult(const QString& token)
     clearTemporaryUserData();
 }
 
-void AuthenticationService::processRegistrationResult(bool success,
-                                                      const QString& reason)
+void AuthenticationService::processRegistrationResult(int errorCode)
 {
-    emit registrationFinished(success, reason);
+    bool errorOccured = errorCode != -1;
+    QString errorMessage;
+    if(errorOccured)
+    {
+        errorMessage =
+            utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
+    }
+
+    emit registrationFinished(!errorOccured, errorMessage);
 }
 
 void AuthenticationService::clearTemporaryUserData()

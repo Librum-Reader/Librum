@@ -8,7 +8,7 @@ QString getMessageForErrorCode(int code)
     switch(code)
     {
     case 1:
-        return "Your email or password was wrong";
+        return "Your email or password is wrong";
     case 2:
         return "A user with this email already exists";
     case 3:

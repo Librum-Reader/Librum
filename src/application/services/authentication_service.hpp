@@ -21,9 +21,9 @@ public:
         const domain::value_objects::RegisterModel& registerModel) override;
 
 public slots:
-    void processAuthenticationResult(const QString& token) override;
-    void processRegistrationResult(bool success,
-                                   const QString& reason) override;
+    void processAuthenticationResult(const QString& token,
+                                     int errorCode = -1) override;
+    void processRegistrationResult(int errorCode) override;
 
 private:
     void clearTemporaryUserData();

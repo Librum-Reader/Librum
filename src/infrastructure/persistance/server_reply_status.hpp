@@ -8,6 +8,7 @@ struct ServerReplyStatus
 {
     bool success = true;
     QString errorMessage = "";
+    int errorCode = 0;
 };
 
 }  // namespace infrastructure::persistence

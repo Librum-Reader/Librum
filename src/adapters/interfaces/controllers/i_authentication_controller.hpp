@@ -30,8 +30,8 @@ public:
                                           bool keepUpdated) = 0;
 
 signals:
-    void loginFinished(bool success);
-    void registrationFinished(bool success, const QString& reason);
+    void loginFinished(bool success, const QString& message);
+    void registrationFinished(bool success, const QString& message);
 };
 
 }  // namespace adapters

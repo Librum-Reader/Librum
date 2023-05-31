@@ -25,6 +25,8 @@ public:
 private:
     ServerReplyStatus validateNetworkReply(int expectedStatusCode,
                                            QNetworkReply*, const QString& name);
+    QString getErrorMessageFromReply(const QByteArray& reply);
+    int getErrorCodeFromReply(const QByteArray& reply);
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;

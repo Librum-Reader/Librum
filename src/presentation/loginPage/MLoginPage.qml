@@ -31,8 +31,9 @@ MFlickWrapper
     {
         id: proccessLoginResult
         target: AuthController
-        function onLoginFinished(success)
+        function onLoginFinished(success, message)
         {
+            console.log(message);
             internal.processLoginResult(success);
         }
     }

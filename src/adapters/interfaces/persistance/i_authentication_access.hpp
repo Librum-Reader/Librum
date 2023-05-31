@@ -21,8 +21,8 @@ public:
         const adapters::dtos::RegisterDto& registerDto) = 0;
 
 signals:
-    void authenticationFinished(const QString& token);
-    void registrationFinished(bool success, const QString& reason);
+    void authenticationFinished(const QString& token, int errorCode = -1);
+    void registrationFinished(int errorCode = -1);
 };
 
 }  // namespace adapters

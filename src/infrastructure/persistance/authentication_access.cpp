@@ -31,7 +31,7 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
                 auto res = validateNetworkReply(200, reply, "Authentication");
                 if(!res.success)
                 {
-                    emit authenticationFinished("");
+                    emit authenticationFinished("", res.errorCode);
 
                     reply->deleteLater();
                     return;
@@ -68,13 +68,13 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
                 auto res = validateNetworkReply(201, reply, "Registration");
                 if(!res.success)
                 {
-                    emit registrationFinished(false, res.errorMessage);
+                    emit registrationFinished(res.errorCode);
 
                     reply->deleteLater();
                     return;
                 }
 
-                emit registrationFinished(true, "");
+                emit registrationFinished();
                 reply->deleteLater();
             });
 }
@@ -85,20 +85,40 @@ ServerReplyStatus AuthenticationAccess::validateNetworkReply(
     auto statusCode =
         reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
-
     if(reply->error() != QNetworkReply::NoError ||
        expectedStatusCode != statusCode)
     {
         auto content = reply->readAll();
-        qWarning() << name + " failed: " + content;
+        QString errorMessage = getErrorMessageFromReply(content);
+        int errorCode = getErrorCodeFromReply(content);
 
+        qWarning() << name + " failed (" + errorCode + "): " + errorMessage;
         return ServerReplyStatus {
             .success = false,
-            .errorMessage = content,
+            .errorMessage = errorMessage,
+            .errorCode = errorCode,
         };
     }
 
     return ServerReplyStatus { .success = true };
+}
+
+QString AuthenticationAccess::getErrorMessageFromReply(const QByteArray& reply)
+{
+    auto jsonObj = QJsonDocument::fromJson(reply).object();
+    auto jsonErrorMessage = jsonObj["message"];
+    if(jsonErrorMessage.isNull() || jsonErrorMessage.toString().isEmpty())
+        return reply;
+
+    return jsonErrorMessage.toString();
+}
+
+int AuthenticationAccess::getErrorCodeFromReply(const QByteArray& reply)
+{
+    auto jsonObj = QJsonDocument::fromJson(reply).object();
+    auto jsonErrorCode = jsonObj["code"];
+
+    return jsonErrorCode.toInt();
 }
 
 QNetworkRequest AuthenticationAccess::createRequest(QUrl url)

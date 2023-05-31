@@ -24,15 +24,15 @@ public:
         const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
-    void loginFinished(bool success);
-    void registrationFinished(bool success, const QString& reason);
+    void loginFinished(bool success, const QString& message = "");
+    void registrationFinished(bool success, const QString& message);
     void loggedIn(const QString& token, const QString& email);
     void loggedOut();
 
 public slots:
-    virtual void processAuthenticationResult(const QString& token) = 0;
-    virtual void processRegistrationResult(bool success,
-                                           const QString& reason) = 0;
+    virtual void processAuthenticationResult(const QString& token,
+                                             int errorCode = -1) = 0;
+    virtual void processRegistrationResult(int errorCode) = 0;
 };
 
 }  // namespace application

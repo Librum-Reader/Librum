@@ -160,7 +160,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 
 
     // Act
-    authService->processRegistrationResult(true, "");
+    authService->processRegistrationResult(-1);
 
     // Assert
     auto arguments = spy[0];
@@ -175,7 +175,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
                    &AuthenticationService::registrationFinished);
 
     // Act
-    authService->processRegistrationResult(false, "Some reason");
+    authService->processRegistrationResult(2);
 
     // Assert
     auto arguments = spy[0];
