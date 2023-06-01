@@ -25,10 +25,4 @@ bool LoginModel::getRememberUser() const
     return m_rememberUser;
 }
 
-bool LoginModel::isValid() const
-{
-    return m_password.length() <= m_maxPasswordLength &&
-           m_password.length() >= m_minPasswordLength;
-}
-
 }  // namespace domain::value_objects

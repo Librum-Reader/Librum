@@ -1,7 +1,7 @@
 #include "authentication_service.hpp"
 #include <QDebug>
-#include "error_code_converter.hpp"
 #include "automatic_login_helper.hpp"
+#include "error_code_converter.hpp"
 #include "i_authentication_gateway.hpp"
 
 
@@ -32,14 +32,6 @@ AuthenticationService::AuthenticationService(
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
 {
-    if(!loginModel.isValid())
-    {
-        qWarning() << "Login failed due to invalid login model";
-
-        emit loginFinished(false);
-        return;
-    }
-
     m_rememberUser = loginModel.getRememberUser();
     m_tempEmail = loginModel.getEmail();
     m_authenticationGateway->authenticateUser(loginModel);
@@ -53,7 +45,7 @@ void AuthenticationService::tryAutomaticLogin()
 
     utility::AuthenticationData authData = result.value();
     m_tempEmail = authData.email;
-    
+
     processAuthenticationResult(authData.token, ErrorCode::NoError);
 }
 
@@ -64,15 +56,6 @@ void AuthenticationService::logoutUser()
 
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
-    auto status = registerModel.isValid();
-    if(status != RegisterModel::RegistrationResult::Valid)
-    {
-        QString failureReason = registerModel.generateErrorMessage(status);
-        qWarning() << QString("Failed registration: %1").arg(failureReason);
-        emit registrationFinished(false, failureReason);
-        return;
-    }
-
     m_authenticationGateway->registerUser(registerModel);
 }
 
