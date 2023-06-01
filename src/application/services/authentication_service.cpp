@@ -54,7 +54,7 @@ void AuthenticationService::tryAutomaticLogin()
     utility::AuthenticationData authData = result.value();
     m_tempEmail = authData.email;
 
-    processAuthenticationResult(authData.token);
+    processAuthenticationResult(authData.token, ApiErrorCodes::NoError);
 }
 
 void AuthenticationService::logoutUser()
@@ -77,9 +77,9 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
 }
 
 void AuthenticationService::processAuthenticationResult(const QString& token,
-                                                        int errorCode)
+                                                        ApiErrorCodes errorCode)
 {
-    if(errorCode != -1)
+    if(errorCode != ApiErrorCodes::NoError)
     {
         auto errorMessage =
             utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
@@ -103,17 +103,17 @@ void AuthenticationService::processAuthenticationResult(const QString& token,
     clearTemporaryUserData();
 }
 
-void AuthenticationService::processRegistrationResult(int errorCode)
+void AuthenticationService::processRegistrationResult(ApiErrorCodes errorCode)
 {
-    bool errorOccured = errorCode != -1;
+    bool success = errorCode == ApiErrorCodes::NoError;
     QString errorMessage;
-    if(errorOccured)
+    if(!success)
     {
         errorMessage =
             utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
     }
 
-    emit registrationFinished(!errorOccured, errorMessage);
+    emit registrationFinished(success, errorMessage);
 }
 
 void AuthenticationService::clearTemporaryUserData()

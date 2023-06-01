@@ -1,7 +1,6 @@
 #include "authentication_access.hpp"
 #include "endpoints.hpp"
 
-
 using namespace adapters::dtos;
 
 namespace infrastructure::persistence

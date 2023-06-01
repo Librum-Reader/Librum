@@ -130,7 +130,8 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
     QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
 
     // Act
-    authService->processAuthenticationResult("validToken");
+    authService->processAuthenticationResult("validToken",
+                                             ApiErrorCodes::NoError);
 
     // Assert
     auto arguments = spy[0];
@@ -144,7 +145,8 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
     QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
 
     // Act
-    authService->processAuthenticationResult("", 1);
+    authService->processAuthenticationResult(
+        "", ApiErrorCodes::EmailOrPasswordIsWrong);
 
     // Assert
     auto arguments = spy[0];
@@ -160,7 +162,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 
 
     // Act
-    authService->processRegistrationResult(-1);
+    authService->processRegistrationResult(ApiErrorCodes::NoError);
 
     // Assert
     auto arguments = spy[0];
@@ -175,7 +177,8 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
                    &AuthenticationService::registrationFinished);
 
     // Act
-    authService->processRegistrationResult(2);
+    authService->processRegistrationResult(
+        ApiErrorCodes::EmailOrPasswordIsWrong);
 
     // Assert
     auto arguments = spy[0];

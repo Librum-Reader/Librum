@@ -22,15 +22,15 @@ public:
 
 public slots:
     void processAuthenticationResult(const QString& token,
-                                     int errorCode = -1) override;
-    void processRegistrationResult(int errorCode) override;
+                                     ApiErrorCodes errorCode) override;
+    void processRegistrationResult(ApiErrorCodes errorCode) override;
 
 private:
     void clearTemporaryUserData();
 
     IAuthenticationGateway* m_authenticationGateway;
     bool m_rememberUser = false;
-    // To be able to send the user email with the 'loggedIn' signal
+    // To be able to send the user's email with the 'loggedIn' signal.
     QString m_tempEmail;
 };
 

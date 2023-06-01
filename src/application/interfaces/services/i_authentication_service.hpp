@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "api_error_codes.hpp"
 #include "login_model.hpp"
 #include "register_model.hpp"
 
@@ -31,8 +32,8 @@ signals:
 
 public slots:
     virtual void processAuthenticationResult(const QString& token,
-                                             int errorCode = -1) = 0;
-    virtual void processRegistrationResult(int errorCode) = 0;
+                                             ApiErrorCodes errorCode) = 0;
+    virtual void processRegistrationResult(ApiErrorCodes errorCode) = 0;
 };
 
 }  // namespace application

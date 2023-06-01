@@ -19,7 +19,7 @@ MFlickWrapper
     onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
     
     // Focus the emailInput when page has loaded
-    Component.onCompleted: emailInput.giveFocus()
+    Component.onCompleted: { console.log(ApiErrorCodes.InsufficientBookStorageSpace); emailInput.giveFocus() }
     
     Shortcut
     {
