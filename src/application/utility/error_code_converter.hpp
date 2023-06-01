@@ -28,21 +28,21 @@ QString getMessageForErrorCode(ErrorCode code)
     case ErrorCode::InvalidEmailAddressFormat:
         return "Invalid email address format";
     case ErrorCode::EmailAddressTooShort:
-        return "The provided email address is too short";
+        return "The email address is too short";
     case ErrorCode::EmailAddressTooLong:
-        return "The provided email address is too long";
+        return "The email address is too long";
     case ErrorCode::PasswordTooShort:
-        return "The provided password is too short";
+        return "The password is too short";
     case ErrorCode::PasswordTooLong:
-        return "The provided password is too long";
+        return "The password is too long";
     case ErrorCode::FirstNameTooShort:
-        return "The provided first name is too short";
+        return "First name is too short";
     case ErrorCode::FirstNameTooLong:
-        return "The provided first name is too long";
+        return "First name is too long";
     case ErrorCode::LastNameTooShort:
-        return "The provided last name is too short";
+        return "Last name is too short";
     case ErrorCode::LastNameTooLong:
-        return "The provided last name is too long";
+        return "Last name is too long";
     case ErrorCode::NoError:
         [[fallthrough]];
     default:
