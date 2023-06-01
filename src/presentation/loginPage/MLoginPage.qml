@@ -158,15 +158,6 @@ MFlickWrapper
                             }
                     }
                     
-                    Label
-                    {
-                        id: errorText
-                        Layout.topMargin: 8
-                        visible: false
-                        text: "An error occurred."
-                        color: Style.colorErrorText
-                    }
-                    
                     RowLayout
                     {
                         id: optionsLayout
@@ -314,27 +305,22 @@ MFlickWrapper
             switch(errorCode)
             {
             case ErrorCode.EmailOrPasswordIsWrong:
-                errorText.visible = true;
-                errorText.text = message;
-                
                 emailInput.setError();
+                passwordInput.errorText = message;
                 passwordInput.setError();
                 break;
             
             case ErrorCode.EmailAddressTooLong:   // Fall through
             case ErrorCode.EmailAddressTooShort:  // Fall through
             case ErrorCode.InvalidEmailAddressFormat:
-                errorText.visible = true;
-                errorText.text = message;
-                
+                emailInput.errorText = message;
                 emailInput.setError();
                 break;
                 
             case ErrorCode.PasswordTooLong:   // Fall through
             case ErrorCode.PasswordTooShort:
-                errorText.visible = true;
-                errorText.text = message;
                 
+                passwordInput.errorText = message;
                 passwordInput.setError();
                 break;
             }
@@ -342,10 +328,9 @@ MFlickWrapper
         
         function clearLoginError()
         {
-            errorText.visible = false;
-            errorText.text = "";
-            
+            emailInput.errorText = "";
             emailInput.clearError();
+            passwordInput.errorText = "";
             passwordInput.clearError();
         }
         

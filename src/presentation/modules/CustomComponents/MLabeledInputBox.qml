@@ -18,7 +18,7 @@ Item
     property bool hasError: false
     property bool clearErrorOnEdit: true
     property string errorText
-    property double errorFontSize: 10.5
+    property double errorFontSize: 11
     property string headerText
     property int headerFontWeight: Font.Medium
     property double headerFontSize: 10.5
@@ -165,7 +165,6 @@ Item
             visible: root.hasError
             text: root.errorText
             font.pointSize: root.errorFontSize
-            font.weight: root.headerFontWeight
             color: Style.colorErrorText
         }
     }
