@@ -15,16 +15,12 @@ public:
     bool isValid() const;
 
 private:
-    bool emailIsValid() const;
-    bool passwordIsValid() const;
-
     QString m_email;
-    const int m_minEmailLength = 6;
-    const int m_maxEmailLength = 50;
     QString m_password;
-    const int m_minPasswordLength = 6;
-    const int m_maxPasswordLength = 60;
     bool m_rememberUser = false;
+
+    const int m_minPasswordLength = 4;
+    const int m_maxPasswordLength = 60;
 };
 
 }  // namespace domain::value_objects

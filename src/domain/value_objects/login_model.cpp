@@ -27,17 +27,6 @@ bool LoginModel::getRememberUser() const
 
 bool LoginModel::isValid() const
 {
-    return emailIsValid() && passwordIsValid();
-}
-
-bool LoginModel::emailIsValid() const
-{
-    return m_email.length() <= m_maxEmailLength &&
-           m_email.length() >= m_minEmailLength;
-}
-
-bool LoginModel::passwordIsValid() const
-{
     return m_password.length() <= m_maxPasswordLength &&
            m_password.length() >= m_minPasswordLength;
 }
