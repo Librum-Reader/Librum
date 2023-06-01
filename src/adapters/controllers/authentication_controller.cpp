@@ -15,6 +15,7 @@ AuthenticationController::AuthenticationController(
     m_authenticationService(authenticationService)
 {
     connect(m_authenticationService, &IAuthenticationService::loginFinished,
+            this,
             [this](ErrorCode code, const QString& message)
             {
                 emit loginFinished(static_cast<int>(code), message);
