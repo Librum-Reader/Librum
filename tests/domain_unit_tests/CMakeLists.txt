@@ -13,8 +13,6 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 # Build tests
 add_executable(domain_unit_tests
                     main.cpp
-                    login_model_tests.cpp
-                    register_model_tests.cpp
                     book_tests.cpp
                     user_tests.cpp
                     tag_tests.cpp

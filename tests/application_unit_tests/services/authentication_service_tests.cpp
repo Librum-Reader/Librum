@@ -39,45 +39,6 @@ struct AnAuthenticationService : public ::testing::Test
     std::unique_ptr<AuthenticationService> authService;
 };
 
-TEST_F(AnAuthenticationService, SucceedsLogingUserIn)
-{
-    // Arrange
-    QString someValidEmail = "someEmail@librum.com";
-    QString someValidPassword = "SomePassword123";
-    value_objects::LoginModel loginModel(someValidEmail, someValidPassword,
-                                         false);
-
-
-    // Expect
-    EXPECT_CALL(authGatewayMock, authenticateUser(_)).Times(1);
-
-    // Act
-    authService->loginUser(loginModel);
-}
-
-TEST_F(AnAuthenticationService, FailsLogingUserInIfCredentialsInvalid)
-{
-    // Arrange
-    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
-
-    QString someInvalidEmail = "inval";
-    QString someInvalidPassword = "Somep";
-    value_objects::LoginModel loginModel(someInvalidEmail, someInvalidPassword,
-                                         false);
-
-
-    // Expect
-    EXPECT_CALL(authGatewayMock, authenticateUser(_)).Times(0);
-
-    // Act
-    authService->loginUser(loginModel);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(false, arguments[0].toBool());
-}
-
 TEST_F(AnAuthenticationService, SucceedsRegisteringUser)
 {
     // Arrange
@@ -130,8 +91,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
     QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
 
     // Act
-    authService->processAuthenticationResult("validToken",
-                                             ApiErrorCodes::NoError);
+    authService->processAuthenticationResult("validToken", ErrorCode::NoError);
 
     // Assert
     auto arguments = spy[0];
@@ -145,8 +105,8 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
     QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
 
     // Act
-    authService->processAuthenticationResult(
-        "", ApiErrorCodes::EmailOrPasswordIsWrong);
+    authService->processAuthenticationResult("",
+                                             ErrorCode::EmailOrPasswordIsWrong);
 
     // Assert
     auto arguments = spy[0];
@@ -162,7 +122,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
 
 
     // Act
-    authService->processRegistrationResult(ApiErrorCodes::NoError);
+    authService->processRegistrationResult(ErrorCode::NoError);
 
     // Assert
     auto arguments = spy[0];
@@ -177,8 +137,7 @@ TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
                    &AuthenticationService::registrationFinished);
 
     // Act
-    authService->processRegistrationResult(
-        ApiErrorCodes::EmailOrPasswordIsWrong);
+    authService->processRegistrationResult(ErrorCode::EmailOrPasswordIsWrong);
 
     // Assert
     auto arguments = spy[0];

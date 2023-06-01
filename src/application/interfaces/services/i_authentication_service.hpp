@@ -25,8 +25,8 @@ public:
         const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
-    void loginFinished(bool success, const QString& message = "");
-    void registrationFinished(bool success, const QString& message);
+    void loginFinished(ErrorCode errorCode, const QString& message = "");
+    void registrationFinished(ErrorCode errorCode, const QString& message);
     void loggedIn(const QString& token, const QString& email);
     void loggedOut();
 

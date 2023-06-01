@@ -15,11 +15,17 @@ AuthenticationController::AuthenticationController(
     m_authenticationService(authenticationService)
 {
     connect(m_authenticationService, &IAuthenticationService::loginFinished,
-            this, &AuthenticationController::loginFinished);
+            [this](ErrorCode code, const QString& message)
+            {
+                emit loginFinished(static_cast<int>(code), message);
+            });
 
     connect(m_authenticationService,
             &IAuthenticationService::registrationFinished, this,
-            &AuthenticationController::registrationFinished);
+            [this](ErrorCode code, const QString& message)
+            {
+                emit registrationFinished(static_cast<int>(code), message);
+            });
 }
 
 void AuthenticationController::loginUser(const QString& email,
@@ -51,7 +57,7 @@ void AuthenticationController::registerUser(const QString& firstName,
     // Make sure that the email is always lower-case
     auto fixedEmail = email.toLower();
     RegisterModel registerModel(firstName, lastName, fixedEmail, password,
-                                 keepUpdated);
+                                keepUpdated);
 
     m_authenticationService->registerUser(registerModel);
 }

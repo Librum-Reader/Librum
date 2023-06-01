@@ -19,7 +19,7 @@ MFlickWrapper
     onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
     
     // Focus the emailInput when page has loaded
-    Component.onCompleted: { console.log(ApiErrorCodes.InsufficientBookStorageSpace); emailInput.giveFocus() }
+    Component.onCompleted: emailInput.giveFocus()
     
     Shortcut
     {
@@ -31,9 +31,9 @@ MFlickWrapper
     {
         id: proccessLoginResult
         target: AuthController
-        function onLoginFinished(success, message)
+        function onLoginFinished(errorCode, message)
         {
-            internal.processLoginResult(success, message);
+            internal.processLoginResult(errorCode, message);
         }
     }
     
@@ -304,25 +304,39 @@ MFlickWrapper
             AuthController.loginUser(emailInput.text, passwordInput.text, rememberMeCheckBox.checked);
         }
         
-        function processLoginResult(success, message)
+        function processLoginResult(errorCode, message)
         {
-            if(success)
+            if(errorCode === ErrorCode.NoError)
             {
                 UserController.loadUser(rememberMeCheckBox.checked);
             }
             else
             {
-                internal.setLoginError(message);
+                internal.setLoginError(errorCode, message);
             }
         }
         
-        function setLoginError(message)
+        function setLoginError(errorCode, message)
         {
-            errorText.visible = true;
-            errorText.text = message;
+            switch(errorCode)
+            {
+            case ErrorCode.EmailOrPasswordIsWrong:
+                errorText.visible = true;
+                errorText.text = message;
+                
+                emailInput.setError();
+                passwordInput.setError();
+                break;
             
-            emailInput.setError();
-            passwordInput.setError();
+            case ErrorCode.EmailAddressTooLong:   // Fall through
+            case ErrorCode.EmailAddressTooShort:  // Fall through
+            case ErrorCode.InvalidEmailAddressFormat:
+                errorText.visible = true;
+                errorText.text = message;
+                
+                emailInput.setError();
+                break;    
+            }
         }
         
         function clearLoginError()

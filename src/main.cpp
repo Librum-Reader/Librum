@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
                                      "This is an uncreatable enum!");
 
     qmlRegisterUncreatableMetaObject(application::error_codes::staticMetaObject, "Librum.controllers",
-                                     1, 0, "ApiErrorCodes",
+                                     1, 0, "ErrorCode",
                                      "This is an uncreatable enum!");
 
 

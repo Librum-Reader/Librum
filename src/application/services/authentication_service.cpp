@@ -68,7 +68,7 @@ void AuthenticationService::processAuthenticationResult(const QString& token,
             utility::error_code_converter::getMessageForErrorCode(errorCode);
 
         qWarning() << errorMessage;
-        emit loginFinished(false, errorMessage);
+        emit loginFinished(errorCode, errorMessage);
     }
     else
     {
@@ -80,7 +80,7 @@ void AuthenticationService::processAuthenticationResult(const QString& token,
         }
 
         emit loggedIn(token, m_tempEmail);
-        emit loginFinished(true);
+        emit loginFinished(ErrorCode::NoError);
     }
 
     clearTemporaryUserData();
@@ -96,7 +96,7 @@ void AuthenticationService::processRegistrationResult(ErrorCode errorCode)
             utility::error_code_converter::getMessageForErrorCode(errorCode);
     }
 
-    emit registrationFinished(success, errorMessage);
+    emit registrationFinished(errorCode, errorMessage);
 }
 
 void AuthenticationService::clearTemporaryUserData()
