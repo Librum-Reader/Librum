@@ -16,7 +16,7 @@ QString getMessageForErrorCode(ErrorCode code)
     case ErrorCode::UserWithEmailAlreadyExists:
         return "A user with this email already exists";
     case ErrorCode::ProvidedDataIsInvalid:
-        return "The provided data was invalid";
+        return "The provided data is invalid";
     case ErrorCode::NoBookWithThisIdWasFound:
         return "No book with this ID was found";
     case ErrorCode::InsufficientBookStorageSpace:
