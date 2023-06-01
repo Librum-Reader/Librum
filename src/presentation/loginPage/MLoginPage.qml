@@ -158,6 +158,14 @@ MFlickWrapper
                             }
                     }
                     
+                    Label
+                    {
+                        id: generalErrorText
+                        Layout.topMargin: 8
+                        visible: false
+                        color: Style.colorErrorText
+                    }
+                    
                     RowLayout
                     {
                         id: optionsLayout
@@ -323,6 +331,10 @@ MFlickWrapper
                 passwordInput.errorText = message;
                 passwordInput.setError();
                 break;
+                
+            default:
+                generalErrorText.text = message;
+                generalErrorText.visible = true;
             }
         }
         
@@ -332,6 +344,9 @@ MFlickWrapper
             emailInput.clearError();
             passwordInput.errorText = "";
             passwordInput.clearError();
+            
+            generalErrorText.visible = false;
+            generalErrorText.text = "";
         }
         
         Component.onCompleted: AuthController.tryAutomaticLogin();

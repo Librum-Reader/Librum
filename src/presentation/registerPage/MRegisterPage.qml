@@ -200,6 +200,14 @@ MFlickWrapper
                                                                                          keepMeUpdated)
                             }
                             
+                            Label
+                            {
+                                id: generalErrorText
+                                Layout.topMargin: 8
+                                visible: false
+                                color: Style.colorErrorText
+                            }
+                            
                             MKeepMeUpdated
                             {
                                 id: keepMeUpdated
@@ -340,6 +348,10 @@ MFlickWrapper
                 passwordInput.errorText = message;
                 passwordInput.setError();
                 break;
+                
+            default:
+                generalErrorText.text = message;
+                generalErrorText.visible = true;
             }
         }
         
@@ -350,6 +362,9 @@ MFlickWrapper
             emailInput.clearError();
             passwordInput.clearError();
             passwordConfirmationInput.clearError();
+            
+            generalErrorText.visible = false;
+            generalErrorText.text = "";
         }
         
         
