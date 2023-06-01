@@ -3,7 +3,7 @@
 #include <QString>
 #include <login_model.hpp>
 #include <register_model.hpp>
-#include "api_error_codes.hpp"
+#include "error_code.hpp"
 
 namespace application
 {
@@ -25,8 +25,8 @@ public:
         const domain::value_objects::RegisterModel& registerModel) = 0;
 
 signals:
-    void authenticationFinished(const QString& token, ApiErrorCodes errorCode);
-    void registrationFinished(ApiErrorCodes errorCode);
+    void authenticationFinished(const QString& token, ErrorCode errorCode);
+    void registrationFinished(ErrorCode errorCode);
 };
 
 }  // namespace application

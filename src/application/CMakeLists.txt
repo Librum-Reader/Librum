@@ -36,7 +36,7 @@ set(application_SRC
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
     common/enums/setting_groups.hpp
-    common/enums/api_error_codes.hpp
+    common/enums/error_code.hpp
     
     utility/book_metadata_helper.cpp
     utility/book_metadata_helper.hpp
@@ -54,7 +54,7 @@ set(application_SRC
     utility/book_merger.hpp
     utility/book_merger.cpp
     utility/automatic_login_helper.hpp
-    utility/api_error_code_converter.hpp
+    utility/error_code_converter.hpp
 )
 
 

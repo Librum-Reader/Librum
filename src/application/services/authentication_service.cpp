@@ -1,6 +1,6 @@
 #include "authentication_service.hpp"
 #include <QDebug>
-#include "api_error_code_converter.hpp"
+#include "error_code_converter.hpp"
 #include "automatic_login_helper.hpp"
 #include "i_authentication_gateway.hpp"
 
@@ -53,8 +53,8 @@ void AuthenticationService::tryAutomaticLogin()
 
     utility::AuthenticationData authData = result.value();
     m_tempEmail = authData.email;
-
-    processAuthenticationResult(authData.token, ApiErrorCodes::NoError);
+    
+    processAuthenticationResult(authData.token, ErrorCode::NoError);
 }
 
 void AuthenticationService::logoutUser()
@@ -77,12 +77,12 @@ void AuthenticationService::registerUser(const RegisterModel& registerModel)
 }
 
 void AuthenticationService::processAuthenticationResult(const QString& token,
-                                                        ApiErrorCodes errorCode)
+                                                        ErrorCode errorCode)
 {
-    if(errorCode != ApiErrorCodes::NoError)
+    if(errorCode != ErrorCode::NoError)
     {
         auto errorMessage =
-            utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
+            utility::error_code_converter::getMessageForErrorCode(errorCode);
 
         qWarning() << errorMessage;
         emit loginFinished(false, errorMessage);
@@ -103,14 +103,14 @@ void AuthenticationService::processAuthenticationResult(const QString& token,
     clearTemporaryUserData();
 }
 
-void AuthenticationService::processRegistrationResult(ApiErrorCodes errorCode)
+void AuthenticationService::processRegistrationResult(ErrorCode errorCode)
 {
-    bool success = errorCode == ApiErrorCodes::NoError;
+    bool success = errorCode == ErrorCode::NoError;
     QString errorMessage;
     if(!success)
     {
         errorMessage =
-            utility::ApiErrorCodeConverter::getMessageForErrorCode(errorCode);
+            utility::error_code_converter::getMessageForErrorCode(errorCode);
     }
 
     emit registrationFinished(success, errorMessage);

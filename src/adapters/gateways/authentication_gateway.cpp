@@ -1,5 +1,5 @@
 #include "authentication_gateway.hpp"
-#include "api_error_codes.hpp"
+#include "error_code.hpp"
 
 
 using namespace domain::value_objects;
@@ -15,7 +15,7 @@ AuthenticationGateway::AuthenticationGateway(
             &IAuthenticationAccess::authenticationFinished, this,
             [this](const QString& token, int code)
             {
-                auto errorCode = static_cast<ApiErrorCodes>(code);
+                auto errorCode = static_cast<ErrorCode>(code);
                 emit authenticationFinished(token, errorCode);
             });
 
@@ -23,7 +23,7 @@ AuthenticationGateway::AuthenticationGateway(
             &IAuthenticationAccess::registrationFinished, this,
             [this](int code)
             {
-                auto errorCode = static_cast<ApiErrorCodes>(code);
+                auto errorCode = static_cast<ErrorCode>(code);
                 emit registrationFinished(errorCode);
             });
 }

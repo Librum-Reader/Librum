@@ -22,8 +22,8 @@ public:
 
 public slots:
     void processAuthenticationResult(const QString& token,
-                                     ApiErrorCodes errorCode) override;
-    void processRegistrationResult(ApiErrorCodes errorCode) override;
+                                     ErrorCode errorCode) override;
+    void processRegistrationResult(ErrorCode errorCode) override;
 
 private:
     void clearTemporaryUserData();

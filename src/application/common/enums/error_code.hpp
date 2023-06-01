@@ -7,12 +7,12 @@
 // This causes not being able to register multiple enums to the Qt type system
 // and to QML (Q_NAMESPACE and Q_ENUM_NS), if they are in the same namespace.
 // The work around is to create a separate namespace for each enum.
-namespace application::api_error_codes
+namespace application::error_codes
 {
 
 Q_NAMESPACE
 
-enum class ApiErrorCodes
+enum class ErrorCode
 {
     NoError = -1,
     Unknown,
@@ -34,10 +34,10 @@ enum class ApiErrorCodes
     LastNameTooLong
 };
 
-Q_ENUM_NS(ApiErrorCodes)
+Q_ENUM_NS(ErrorCode)
 
-}  // namespace application::setting_groups
+}  // namespace application::api_error_codes
 
 // Because the enum shouldn't be in a separate namespace in the first place,
 // make the namespace available to all of its users to avoid syntactic clutter.
-using namespace application::api_error_codes;
+using namespace application::error_codes;

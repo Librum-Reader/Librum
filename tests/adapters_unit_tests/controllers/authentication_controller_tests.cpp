@@ -26,8 +26,8 @@ public:
                 (const domain::value_objects::RegisterModel& registerModel),
                 (override));
     MOCK_METHOD(void, processAuthenticationResult,
-                (const QString&, ApiErrorCodes), (override));
-    MOCK_METHOD(void, processRegistrationResult, (ApiErrorCodes), (override));
+                (const QString&, ErrorCode), (override));
+    MOCK_METHOD(void, processRegistrationResult, (ErrorCode), (override));
 };
 
 struct AnAuthenticationController : public ::testing::Test

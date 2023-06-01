@@ -1,54 +1,54 @@
 #pragma once
 #include <QDebug>
-#include "api_error_codes.hpp"
+#include "error_code.hpp"
 
-namespace application::utility::ApiErrorCodeConverter
+namespace application::utility::error_code_converter
 {
 
-QString getMessageForErrorCode(application::api_error_codes::ApiErrorCodes code)
+QString getMessageForErrorCode(ErrorCode code)
 {
-    using api_error_codes::ApiErrorCodes;
-
     switch(code)
     {
-    case ApiErrorCodes::Unknown:
+    case ErrorCode::Unknown:
         return "An unknown error occured";
-    case ApiErrorCodes::EmailOrPasswordIsWrong:
+    case ErrorCode::EmailOrPasswordIsWrong:
         return "Your email or password is wrong";
-    case ApiErrorCodes::UserWithEmailAlreadyExists:
+    case ErrorCode::UserWithEmailAlreadyExists:
         return "A user with this email already exists";
-    case ApiErrorCodes::ProvidedDataIsInvalid:
+    case ErrorCode::ProvidedDataIsInvalid:
         return "The provided data was invalid";
-    case ApiErrorCodes::NoBookWithThisIdWasFound:
+    case ErrorCode::NoBookWithThisIdWasFound:
         return "No book with this ID was found";
-    case ApiErrorCodes::InsufficientBookStorageSpace:
+    case ErrorCode::InsufficientBookStorageSpace:
         return "Book storage space is insufficient";
-    case ApiErrorCodes::TagWithNameAlreadyExists:
+    case ErrorCode::TagWithNameAlreadyExists:
         return "A tag with this name already exists";
-    case ApiErrorCodes::NoTagWithThisNameExists:
+    case ErrorCode::NoTagWithThisNameExists:
         return "No tag with this name exists";
-    case ApiErrorCodes::InvalidEmailAddressFormat:
+    case ErrorCode::InvalidEmailAddressFormat:
         return "Invalid email address format";
-    case ApiErrorCodes::EmailAddressTooShort:
+    case ErrorCode::EmailAddressTooShort:
         return "The provided email address is too short";
-    case ApiErrorCodes::EmailAddressTooLong:
+    case ErrorCode::EmailAddressTooLong:
         return "The provided email address is too long";
-    case ApiErrorCodes::PasswordTooShort:
+    case ErrorCode::PasswordTooShort:
         return "The provided password is too short";
-    case ApiErrorCodes::PasswordTooLong:
+    case ErrorCode::PasswordTooLong:
         return "The provided password is too long";
-    case ApiErrorCodes::FirstNameTooShort:
+    case ErrorCode::FirstNameTooShort:
         return "The provided first name is too short";
-    case ApiErrorCodes::FirstNameTooLong:
+    case ErrorCode::FirstNameTooLong:
         return "The provided first name is too long";
-    case ApiErrorCodes::LastNameTooShort:
+    case ErrorCode::LastNameTooShort:
         return "The provided last name is too short";
-    case ApiErrorCodes::LastNameTooLong:
+    case ErrorCode::LastNameTooLong:
         return "The provided last name is too long";
+    case ErrorCode::NoError:
+        [[fallthrough]];
     default:
         qWarning() << "Failed converting invalid api error code";
         return "Internal client error";
     }
 }
 
-}  // namespace application::utility::ApiErrorCodeConverter
+}  // namespace application::utility::error_code_converter
