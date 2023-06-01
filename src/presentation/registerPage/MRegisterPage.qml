@@ -37,9 +37,9 @@ MFlickWrapper
         {
             id: registrationFinished
             target: AuthController
-            function onRegistrationFinished(success, reason) 
+            function onRegistrationFinished(errorCode, message) 
             {
-                internal.proccessRegistrationResult(success, reason);
+                internal.proccessRegistrationResult(errorCode, message);
             }
         }
         
@@ -132,6 +132,7 @@ MFlickWrapper
                                     placeholderContent: "Kai"
                                     placeholderColor: Style.colorPlaceholderText
                                     
+                                    onEdited: internal.clearLoginError()
                                     Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                              null, 
                                                                                              lastNameInput)
@@ -145,6 +146,7 @@ MFlickWrapper
                                     placeholderContent: "Doe"
                                     placeholderColor: Style.colorPlaceholderText
                                     
+                                    onEdited: internal.clearLoginError()
                                     Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                              firstNameInput,
                                                                                              emailInput)
@@ -159,6 +161,8 @@ MFlickWrapper
                                 headerText: 'Email'
                                 placeholderContent: "kaidoe@gmail.com"
                                 placeholderColor: Style.colorPlaceholderText
+                                
+                                onEdited: internal.clearLoginError()
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event,
                                                                                          lastNameInput,
                                                                                          passwordInput)
@@ -174,11 +178,10 @@ MFlickWrapper
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
                                 
+                                onEdited: internal.clearLoginError()
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                          emailInput,
                                                                                          passwordConfirmationInput)
-                                
-                                onEdited: passwordConfirmationInput.clearError()
                             }
                             
                             MLabeledInputBox 
@@ -191,11 +194,10 @@ MFlickWrapper
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
                                 
+                                onEdited: internal.clearLoginError()
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                          passwordInput,
                                                                                          keepMeUpdated)
-                                
-                                onEdited: passwordInput.clearError()
                             }
                             
                             MKeepMeUpdated
@@ -280,10 +282,10 @@ MFlickWrapper
         
         function passwordIsValid()
         {
-            if(passwordInput.text == passwordConfirmationInput.text)
+            if(passwordInput.text === passwordConfirmationInput.text)
                 return true;
             
-            passwordConfirmationInput.errorText = "Passwords don't match."
+            passwordConfirmationInput.errorText = "Passwords don't match"
             passwordConfirmationInput.setError();
             return false;
         }
@@ -297,38 +299,57 @@ MFlickWrapper
             return false;
         }
         
-        function proccessRegistrationResult(success, reason)
+        function proccessRegistrationResult(errorCode, message)
         {
-            if(success)
+            if(errorCode === ErrorCode.NoError)
+            {
                 loadPage(loginPage);
+            }
             else
-                internal.setErrors(reason);
+            {
+                internal.setRegistrationErrors(errorCode, message);
+            }
         }
         
-        
-        // Parse keywords from error message and set the corresponding error
-        function setErrors(reason)
+        function setRegistrationErrors(errorCode, message)
         {
-            if(reason.toLowerCase().includes("email"))
+            switch(errorCode)
             {
-                emailInput.errorText = reason;
-                emailInput.setError();
-            }
-            else if(reason.toLowerCase().includes("password"))
-            {
-                passwordInput.errorText = reason;
-                passwordInput.setError();
-            }
-            else if(reason.toLowerCase().includes("first"))
-            {
-                firstNameInput.errorText = reason;
+            case ErrorCode.FirstNameTooLong:   // Fall through
+            case ErrorCode.FirstNameTooShort:
+                firstNameInput.errorText = message;
                 firstNameInput.setError();
-            }
-            else if(reason.toLowerCase().includes("last"))
-            {
-                lastNameInput.errorText = reason;
+                break;
+                
+            case ErrorCode.LastNameTooLong:   // Fall through
+            case ErrorCode.LastNameTooShort:
+                lastNameInput.errorText = message;
                 lastNameInput.setError();
+                break;
+                
+            case ErrorCode.UserWithEmailAlreadyExists:  // Fall through
+            case ErrorCode.InvalidEmailAddressFormat:   // Fall through
+            case ErrorCode.EmailAddressTooShort:        // Fall through
+            case ErrorCode.EmailAddressTooLong:         // Fall through
+                emailInput.errorText = message;
+                emailInput.setError();
+                break;
+                
+            case ErrorCode.PasswordTooShort:   // Fall through
+            case ErrorCode.PasswordTooLong:
+                passwordInput.errorText = message;
+                passwordInput.setError();
+                break;
             }
+        }
+        
+        function clearLoginError()
+        {
+            firstNameInput.clearError();
+            lastNameInput.clearError();
+            emailInput.clearError();
+            passwordInput.clearError();
+            passwordConfirmationInput.clearError();
         }
         
         
