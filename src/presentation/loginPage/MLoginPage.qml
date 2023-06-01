@@ -294,13 +294,6 @@ MFlickWrapper
         
         function login()
         {
-            // No-credential login skip - For development only
-            if(emailInput.text === "" && passwordInput.text === "")
-            {
-                loadPage(homePage, sidebar.homeItem, false);
-                return;
-            }
-            
             AuthController.loginUser(emailInput.text, passwordInput.text, rememberMeCheckBox.checked);
         }
         
@@ -335,7 +328,15 @@ MFlickWrapper
                 errorText.text = message;
                 
                 emailInput.setError();
-                break;    
+                break;
+                
+            case ErrorCode.PasswordTooLong:   // Fall through
+            case ErrorCode.PasswordTooShort:
+                errorText.visible = true;
+                errorText.text = message;
+                
+                passwordInput.setError();
+                break;
             }
         }
         
