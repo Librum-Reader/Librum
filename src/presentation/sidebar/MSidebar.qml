@@ -17,6 +17,7 @@ Item
     property alias addOnsItem: addOnsItem
     property alias settingsItem: settingsItem
     property MSidebarItem currentItem: internal.defaultItem
+    property bool open: false
     
     implicitWidth: internal.closedWidth
     implicitHeight: Window.height
@@ -292,18 +293,21 @@ Item
     {
         animations.openAnimation.start();
         root.currentItem.openAnimation.start();
+        root.open = true;
     }
     
     function closeSidebar()
     {
         animations.closeAnimation.start();
         root.currentItem.closeAnimation.start();
+        root.open = false;
     }
     
     function resetSidebar()
     {
         closeSidebar();
         changeSelectedItem(internal.defaultItem);
+        root.open = false;
     }
     
     function giveFocus()

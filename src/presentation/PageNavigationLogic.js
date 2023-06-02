@@ -26,8 +26,9 @@ function switchPage(page, sidebarItem)
     
     // The reading page can have a lower minimum width than the other pages
     if(page === readingPage)
-        baseRoot.minimumWidth = 550;
+        baseRoot.minimumWidth = baseRoot.readingPageMinWidth;
+    else if(sidebar.open)
+        baseRoot.minimumWidth = baseRoot.sidebarOpenedMinWidth;
     else
-        baseRoot.minimumWidth = 650;
-    
+        baseRoot.minimumWidth = baseRoot.defaultMinWidth;
 }

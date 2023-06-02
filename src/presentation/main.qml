@@ -20,6 +20,11 @@ import "readingPage"
 ApplicationWindow
 {
     id: baseRoot
+    property int defaultMinWidth: 650
+    property int sidebarOpenedMinWidth: 810
+    property int readingPageMinWidth: 550
+    
+    
     minimumHeight: 400
     minimumWidth: 650
     visible: true
@@ -39,6 +44,9 @@ ApplicationWindow
             id: sidebar
             z: 1
             visible: pageManager.pageHasSidebar
+            
+            onOpenChanged: open ? baseRoot.minimumWidth = sidebarOpenedMinWidth 
+                                : baseRoot.minimumWidth = defaultMinWidth;
         }
         
         /*
