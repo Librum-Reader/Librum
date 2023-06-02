@@ -228,7 +228,7 @@ MFlickWrapper
                                 onKeyDown: registerButton.giveFocus();
                             }
                             
-                            MButton 
+                            MButton
                             {
                                 id: registerButton
                                 Layout.fillWidth: true
@@ -243,6 +243,13 @@ MFlickWrapper
                                 text: "Let's start"
                                 
                                 onClicked: internal.registerUser()
+                                onFocusChanged:
+                                {
+                                    if(focus)
+                                        opacity = opacityOnPressed;
+                                    else
+                                        opacity = 1;
+                                }
                                 
                                 Keys.onReturnPressed: internal.registerUser()
                                 Keys.onUpPressed: acceptPolicy.giveFocus()

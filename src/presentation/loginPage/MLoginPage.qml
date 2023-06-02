@@ -248,6 +248,13 @@ MFlickWrapper
                         text: "Login"
                         
                         onClicked: internal.login()
+                        onFocusChanged:
+                        {
+                            if(focus)
+                                opacity = opacityOnPressed;
+                            else
+                                opacity = 1;
+                        }
                         
                         Keys.onPressed: 
                             (event) =>
