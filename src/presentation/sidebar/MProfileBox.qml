@@ -89,6 +89,7 @@ Item
                 Layout.preferredHeight: 24
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 color: Style.colorControlBackground
+                opacity: expandButtonMouseArea.pressed ? 0.8 : 1
                 radius: 2
                 border.width: 1
                 border.color: Style.colorButtonBorder
