@@ -191,9 +191,11 @@ MFlickWrapper
                         text: AppInformation.companyWebsite
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
+                        opacity: websiteLinkArea.pressed ? 0.8 : 1
                         
                         MouseArea
                         {
+                            id: websiteLinkArea
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
@@ -215,10 +217,12 @@ MFlickWrapper
                         Layout.topMargin: 1
                         text: AppInformation.companyEmail
                         color: Style.colorBasePurple
+                        opacity: emailLinkArea.pressed ? 0.8 : 1
                         font.pointSize: 13.5
                         
                         MouseArea
                         {
+                            id: emailLinkArea
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
