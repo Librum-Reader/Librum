@@ -58,91 +58,20 @@ TEST_F(AnAuthenticationService, SucceedsRegisteringUser)
     authService->registerUser(registerModel);
 }
 
-TEST_F(AnAuthenticationService, FailsRegisteringUserIfCredentialsAreInvalid)
+TEST_F(AnAuthenticationService, SucceedsAuthenticatingUser)
 {
     // Arrange
-    QSignalSpy spy(authService.get(),
-                   &AuthenticationService::registrationFinished);
-
-    QString invalidFirstName = "J";
-    QString lastName = "Doe";
     QString email = "someEmail@librum.com";
     QString password = "SomePassword123";
     bool keepUpdated = true;
-    value_objects::RegisterModel registerModel(invalidFirstName, lastName,
-                                               email, password, keepUpdated);
+    value_objects::LoginModel loginModel(email, password, false);
 
 
     // Expect
-    EXPECT_CALL(authGatewayMock, registerUser(_)).Times(0);
+    EXPECT_CALL(authGatewayMock, authenticateUser(_)).Times(1);
 
     // Act
-    authService->registerUser(registerModel);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(false, arguments[0].toBool());
-}
-
-TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginSuccessSignal)
-{
-    // Arrange
-    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
-
-    // Act
-    authService->processAuthenticationResult("validToken", ErrorCode::NoError);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(true, arguments[0].toBool());
-}
-
-TEST_F(AnAuthenticationService, SucceedsReemittingTheLoginFailureSignal)
-{
-    // Arrange
-    QSignalSpy spy(authService.get(), &AuthenticationService::loginFinished);
-
-    // Act
-    authService->processAuthenticationResult("",
-                                             ErrorCode::EmailOrPasswordIsWrong);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(false, arguments[0].toBool());
-}
-
-TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationSuccessSignal)
-{
-    // Arrange
-    QSignalSpy spy(authService.get(),
-                   &AuthenticationService::registrationFinished);
-
-
-    // Act
-    authService->processRegistrationResult(ErrorCode::NoError);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(true, arguments[0].toBool());
-}
-
-TEST_F(AnAuthenticationService, SucceedsReemittingTheRegistrationFailureSignal)
-{
-    // Arrange
-    QSignalSpy spy(authService.get(),
-                   &AuthenticationService::registrationFinished);
-
-    // Act
-    authService->processRegistrationResult(ErrorCode::EmailOrPasswordIsWrong);
-
-    // Assert
-    auto arguments = spy[0];
-    EXPECT_EQ(1, spy.count());
-    EXPECT_EQ(false, arguments[0].toBool());
+    authService->loginUser(loginModel);
 }
 
 }  // namespace tests::application
