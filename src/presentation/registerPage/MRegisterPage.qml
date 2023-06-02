@@ -258,11 +258,12 @@ MFlickWrapper
                 Layout.topMargin: 14
                 text: "Already have an account? Login"
                 font.pointSize: 10.5
+                opacity: loginRedirecitonLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
-                
                 
                 MouseArea
                 {
+                    id: loginRedirecitonLinkArea
                     anchors.fill: parent
                     
                     onClicked: loadPage(loginPage);

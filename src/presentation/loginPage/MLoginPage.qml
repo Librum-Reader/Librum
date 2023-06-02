@@ -220,6 +220,7 @@ MFlickWrapper
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 3
                             font.pointSize: 10.5
+                            opacity: forgotPasswordPageRedirection.pressed ? 0.8 : 1
                             color: Style.colorBasePurple
                             
                             MouseArea
@@ -264,10 +265,12 @@ MFlickWrapper
                 Layout.topMargin: 14
                 text: "Don't have an account? Register"
                 font.pointSize: 10.5
+                opacity: registerLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
                 
                 MouseArea
                 {
+                    id: registerLinkArea
                     anchors.fill: parent
                     onClicked: loadPage(registerPage);
                 }
