@@ -155,7 +155,7 @@ Item
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa32324D" }
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
-            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
+            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
         },
         State
         {
@@ -228,7 +228,7 @@ Item
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa3F3F52" }
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaC0452C" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }
-            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#DBCE5F" }
+            PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
         }
     ]
     
