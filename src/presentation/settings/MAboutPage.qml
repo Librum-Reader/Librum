@@ -229,6 +229,33 @@ MFlickWrapper
                             onClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
                         }
                     }
+                    
+                    Label
+                    {
+                        Layout.topMargin: 12
+                        text: "GITHUB"
+                        color: Style.colorLightText
+                        font.pointSize: 10.25
+                        font.weight: Font.Bold
+                    }
+                    
+                    Label
+                    {
+                        Layout.topMargin: 1
+                        text: AppInformation.githubLink
+                        color: Style.colorBasePurple
+                        opacity: emailLinkArea.pressed ? 0.8 : 1
+                        font.pointSize: 13.5
+                        
+                        MouseArea
+                        {
+                            id: githubLinkArea
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            
+                            onClicked: Qt.openUrlExternally(AppInformation.githubLink)
+                        }
+                    }
                 }
             }
             

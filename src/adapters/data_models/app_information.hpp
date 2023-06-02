@@ -13,8 +13,9 @@ class AppInformation : public QObject
     Q_PROPERTY(QString productName READ getProductName CONSTANT)
     Q_PROPERTY(QString companyName READ getCompanyName CONSTANT)
     Q_PROPERTY(QString companyWebsite READ getCompanyWebsite CONSTANT)
+    Q_PROPERTY(QString newsWebsite READ getNewsWebsite CONSTANT)
     Q_PROPERTY(QString companyEmail READ getCompanyEmail CONSTANT)
-    Q_PROPERTY(QString helpEmail READ getHelpEmail CONSTANT)
+    Q_PROPERTY(QString githubLink READ getGithubLink CONSTANT)
 
 public slots:
 
@@ -53,21 +54,27 @@ public slots:
         return m_companyEmail;
     }
 
-    QString getHelpEmail()
+    QString getGithubLink()
     {
-        return m_helpEmail;
+        return m_githubLink;
+    }
+
+    QString getNewsWebsite()
+    {
+        return m_newsWebsite;
     }
 
 
 private:
-    QString m_currentVersion { "v0.4.3" };
-    QString m_newestVersion { "v0.4.3" };
+    QString m_currentVersion { "v0.4.6" };
+    QString m_newestVersion { "v0.4.6" };
     QString m_currentQtVersion { "v5.15.8" };
     QString m_companyName { "Librum-Reader" };
     QString m_productName { "Librum" };
     QString m_companyWebsite { "https://librumreader.com" };
+    QString m_newsWebsite { "https://librumreader.com/news" };
     QString m_companyEmail { "contact@librumreader.com" };
-    QString m_helpEmail { "librum_help@protonmail.com" };
+    QString m_githubLink { "https://github.com/Librum-Reader/Librum" };
 };
 
 }  // namespace adapters::data_models

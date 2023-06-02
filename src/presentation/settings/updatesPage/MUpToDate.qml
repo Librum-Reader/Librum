@@ -102,12 +102,23 @@ Item
             
             Label
             {
-                Layout.fillWidth: true
-                text: "www.etovex.com/new_updates"
+                Layout.preferredWidth: implicitWidth
+                Layout.minimumWidth: implicitWidth
+                text: AppInformation.newsWebsite
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
                 font.pointSize: 13.5
+                opacity: newsWebsiteLinkArea.pressed ? 0.8 : 1
+                
+                MouseArea
+                {
+                    id: newsWebsiteLinkArea
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    
+                    onClicked: Qt.openUrlExternally(AppInformation.newsWebsite)
+                }
             }
         }
     }
