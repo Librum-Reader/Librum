@@ -145,6 +145,7 @@ Item
                     Layout.alignment: Qt.AlignVCenter
                     visible: root.image.length > 0
                     source: root.textHidden ? root.image : root.toggledImage
+                    opacity: imageArea.pressed ? 0.75 : 1
                     
                     MouseArea
                     {
