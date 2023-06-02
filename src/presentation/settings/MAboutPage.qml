@@ -216,6 +216,14 @@ MFlickWrapper
                         text: AppInformation.companyEmail
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            cursorShape: Qt.PointingHandCursor
+                            
+                            onClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
+                        }
                     }
                 }
             }
