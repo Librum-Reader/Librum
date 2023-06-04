@@ -369,7 +369,6 @@ QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setRawHeader("X-Version", "1.0");
     result.setRawHeader(QByteArray("Authorization"),
                         "Bearer " + authToken.toUtf8());
 
