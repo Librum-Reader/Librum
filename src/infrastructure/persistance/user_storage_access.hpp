@@ -10,7 +10,6 @@
 #include <QVariantMap>
 #include <memory>
 #include "i_user_storage_access.hpp"
-#include "server_reply_status.hpp"
 
 namespace infrastructure::persistence
 {
@@ -39,9 +38,6 @@ private slots:
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
-    ServerReplyStatus validateNetworkReply(int expectedStatusCode,
-                                           QNetworkReply* reply,
-                                           const QString& name);
 
     QNetworkAccessManager m_networkAccessManager;
 };
