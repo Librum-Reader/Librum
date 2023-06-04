@@ -1,6 +1,7 @@
 #include "user_storage_access.hpp"
 #include <QJsonDocument>
 #include <QJsonObject>
+#include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -33,7 +34,11 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Changing firstname");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Changing firstname");
+                }
 
                 reply->deleteLater();
             });
@@ -57,7 +62,11 @@ void UserStorageAccess::changeLastName(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Changing lastname");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Changing lastname");
+                }
 
                 reply->deleteLater();
             });
@@ -92,7 +101,10 @@ void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(204, reply, "Deleting tag");
+                if(api_error_helper::apiRequestFailed(reply, 204))
+                {
+                    api_error_helper::logErrorMessage(reply, "Deleting tag");
+                }
 
                 reply->deleteLater();
             });
@@ -116,7 +128,10 @@ void UserStorageAccess::renameTag(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(201, reply, "Renaming tag");
+                if(api_error_helper::apiRequestFailed(reply, 201))
+                {
+                    api_error_helper::logErrorMessage(reply, "Renaming tag");
+                }
 
                 reply->deleteLater();
             });
@@ -125,12 +140,15 @@ void UserStorageAccess::renameTag(const QString& authToken,
 void UserStorageAccess::proccessGetUserResult()
 {
     auto reply = qobject_cast<QNetworkReply*>(sender());
-    auto status = validateNetworkReply(200, reply, "Getting User");
-    if(!status.success)
+    if(api_error_helper::apiRequestFailed(reply, 200))
     {
+        api_error_helper::logErrorMessage(reply, "Getting User");
+
         emit gettingUserFailed();
+        reply->deleteLater();
         return;
     }
+
 
     auto jsonDoc = QJsonDocument::fromJson(reply->readAll());
     auto jsonObj = jsonDoc.object();
@@ -166,28 +184,6 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
     result.setSslConfiguration(sslConfiguration);
 
     return result;
-}
-
-ServerReplyStatus UserStorageAccess::validateNetworkReply(
-    int expectedStatusCode, QNetworkReply* reply, const QString& name)
-{
-    auto statusCode =
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-
-
-    if(reply->error() != QNetworkReply::NoError ||
-       expectedStatusCode != statusCode)
-    {
-        auto content = reply->readAll();
-        qWarning() << name + " failed: " + content;
-
-        return ServerReplyStatus {
-            .success = false,
-            .errorMessage = content,
-        };
-    }
-
-    return ServerReplyStatus { .success = true };
 }
 
 }  // namespace infrastructure::persistence

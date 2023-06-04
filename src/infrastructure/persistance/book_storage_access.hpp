@@ -6,7 +6,6 @@
 #include <QNetworkRequest>
 #include <QString>
 #include "i_book_storage_access.hpp"
-#include "server_reply_status.hpp"
 
 namespace infrastructure::persistence
 {
@@ -35,10 +34,6 @@ private slots:
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
-    ServerReplyStatus validateNetworkReply(int expectedStatusCode,
-                                           QNetworkReply* reply,
-                                           const QString& name);
-
     void uploadBookMedia(const QString& uuid, const QString& filePath,
                          const QString& authToken);
     bool addFilePartToMultiPart(QHttpMultiPart* bookData, const QUrl& path);
