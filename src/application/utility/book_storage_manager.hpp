@@ -33,9 +33,10 @@ public:
     void clearUserData() override;
 
 private slots:
-    void saveDownloadedBookMediaToFile(const QByteArray& data,
-                                       const QUuid& uuid,
-                                       const QString& format);
+    void saveDownloadedBookMediaChunkToFile(const QByteArray& data,
+                                            const bool isChunkLast,
+                                            const QUuid& uuid,
+                                            const QString& format);
     void saveDownloadedCoverToFile(const QByteArray& data, const QUuid& uuid);
     void processBookMetadata(std::vector<domain::entities::Book>& books);
 

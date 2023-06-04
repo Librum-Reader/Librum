@@ -41,7 +41,13 @@ signals:
     void updatingBookFinished(bool success, const QString& reason);
     void gettingBooksMetaDataFinished(
         std::vector<domain::entities::Book>& books);
-    void downloadingBookMediaFinished(const QByteArray& data, const QUuid& uuid,
+    void downloadingBookMediaChunkReady(const QByteArray& data,
+                                        const bool isChunkLast,
+                                        const QUuid& uuid,
+                                        const QString& format);
+    void downloadingBookMediaFinished(const QByteArray& data,
+                                      const bool isChunkLast,
+                                      const QUuid& uuid,
                                       const QString& format);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);

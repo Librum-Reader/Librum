@@ -209,9 +209,7 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
     auto request = createRequest(endpoint, authToken);
     auto bookDownloadReply = m_networkAccessManager.get(request);
 
-
-    // Handle the received books and release the reply's memory
-    connect(bookDownloadReply, &QNetworkReply::finished, this,
+    connect(bookDownloadReply, &QNetworkReply::readyRead, this,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
@@ -221,9 +219,22 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
                 QString bookGuid = reply->rawHeader("Guid");
                 QString bookFormat = reply->rawHeader("Format");
 
-                emit downloadingBookMediaFinished(reply->readAll(), bookGuid,
-                                                  bookFormat);
-                reply->deleteLater();
+                emit downloadingBookMediaChunkReady(reply->readAll(), false,
+                                                    bookGuid, bookFormat);
+            });
+
+    connect(bookDownloadReply, &QNetworkReply::finished, this,
+            [this]()
+            {
+              auto reply = qobject_cast<QNetworkReply*>(sender());
+
+              QString bookGuid = reply->rawHeader("Guid");
+              QString bookFormat = reply->rawHeader("Format");
+
+              emit downloadingBookMediaFinished(QByteArray(), true,
+                                                bookGuid, bookFormat);
+
+              reply->deleteLater();
             });
 }
 
