@@ -1,4 +1,5 @@
 #include "authentication_access.hpp"
+#include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
 using namespace adapters::dtos;
@@ -27,11 +28,12 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
 
-                auto res = validateNetworkReply(200, reply, "Authentication");
-                if(!res.success)
+                if(api_error_helper::apiRequestFailed(reply, 200))
                 {
-                    emit authenticationFinished("", res.errorCode);
+                    auto errorCode = api_error_helper::logErrorMessage(
+                        reply, "Authentication");
 
+                    emit authenticationFinished("", errorCode);
                     reply->deleteLater();
                     return;
                 }
@@ -64,11 +66,12 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
 
-                auto res = validateNetworkReply(201, reply, "Registration");
-                if(!res.success)
+                if(api_error_helper::apiRequestFailed(reply, 201))
                 {
-                    emit registrationFinished(res.errorCode);
+                    auto errorCode = api_error_helper::logErrorMessage(
+                        reply, "Registration");
 
+                    emit registrationFinished(errorCode);
                     reply->deleteLater();
                     return;
                 }
@@ -78,53 +81,10 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
             });
 }
 
-ServerReplyStatus AuthenticationAccess::validateNetworkReply(
-    int expectedStatusCode, QNetworkReply* reply, const QString& name)
-{
-    auto statusCode =
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-
-    if(reply->error() != QNetworkReply::NoError ||
-       expectedStatusCode != statusCode)
-    {
-        auto content = reply->readAll();
-        QString errorMessage = getErrorMessageFromReply(content);
-        int errorCode = getErrorCodeFromReply(content);
-
-        qWarning() << name + " failed (" + errorCode + "): " + errorMessage;
-        return ServerReplyStatus {
-            .success = false,
-            .errorMessage = errorMessage,
-            .errorCode = errorCode,
-        };
-    }
-
-    return ServerReplyStatus { .success = true };
-}
-
-QString AuthenticationAccess::getErrorMessageFromReply(const QByteArray& reply)
-{
-    auto jsonObj = QJsonDocument::fromJson(reply).object();
-    auto jsonErrorMessage = jsonObj["message"];
-    if(jsonErrorMessage.isNull() || jsonErrorMessage.toString().isEmpty())
-        return reply;
-
-    return jsonErrorMessage.toString();
-}
-
-int AuthenticationAccess::getErrorCodeFromReply(const QByteArray& reply)
-{
-    auto jsonObj = QJsonDocument::fromJson(reply).object();
-    auto jsonErrorCode = jsonObj["code"];
-
-    return jsonErrorCode.toInt();
-}
-
 QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setRawHeader("X-Version", "1.0");
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);

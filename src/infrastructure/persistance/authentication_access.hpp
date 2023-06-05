@@ -9,7 +9,6 @@
 #include <QObject>
 #include <memory>
 #include "i_authentication_access.hpp"
-#include "server_reply_status.hpp"
 
 namespace infrastructure::persistence
 {
@@ -23,10 +22,6 @@ public:
     void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
 
 private:
-    ServerReplyStatus validateNetworkReply(int expectedStatusCode,
-                                           QNetworkReply*, const QString& name);
-    QString getErrorMessageFromReply(const QByteArray& reply);
-    int getErrorCodeFromReply(const QByteArray& reply);
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;

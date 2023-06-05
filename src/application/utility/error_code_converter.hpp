@@ -43,6 +43,10 @@ QString getMessageForErrorCode(ErrorCode code)
         return "Last name is too short";
     case ErrorCode::LastNameTooLong:
         return "Last name is too long";
+    case ErrorCode::UserDoesNotExist:
+        return "No user with this email exists";
+    case ErrorCode::AccountNotConfirmed:
+        return "Your account is not confirmed";
     case ErrorCode::NoError:
         [[fallthrough]];
     default:

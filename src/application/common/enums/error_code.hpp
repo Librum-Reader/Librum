@@ -31,12 +31,14 @@ enum class ErrorCode
     FirstNameTooShort,
     FirstNameTooLong,
     LastNameTooShort,
-    LastNameTooLong
+    LastNameTooLong,
+    UserDoesNotExist,
+    AccountNotConfirmed
 };
 
 Q_ENUM_NS(ErrorCode)
 
-}  // namespace application::api_error_codes
+}  // namespace application::error_codes
 
 // Because the enum shouldn't be in a separate namespace in the first place,
 // make the namespace available to all of its users to avoid syntactic clutter.

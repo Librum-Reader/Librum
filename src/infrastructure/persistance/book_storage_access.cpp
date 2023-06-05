@@ -6,6 +6,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QSslConfiguration>
+#include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -25,28 +26,37 @@ void BookStorageAccess::createBook(const QString& authToken,
     // The book is created in separate steps. First of all an enty for the book
     // is created in the SQL Database, if that succeeds the book's data (the
     // actual binary file) and its cover are uploaded to the server.
-    connect(bookCreationReply, &QNetworkReply::finished, this,
-            [this, jsonBook, authToken]()
+    connect(
+        bookCreationReply, &QNetworkReply::finished, this,
+        [this, jsonBook, authToken]()
+        {
+            auto reply = qobject_cast<QNetworkReply*>(sender());
+            if(api_error_helper::apiRequestFailed(reply, 201))
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
-                auto result = validateNetworkReply(201, reply, "Creating book");
-                if(!result.success)
+                api_error_helper::logErrorMessage(reply, "Creating book");
+
+                // Manually handle "Storage limit exceeded" error
+                if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                       .toInt() == 426)
                 {
-                    reply->deleteLater();
-                    return;
+                    emit storageLimitExceeded();
                 }
 
-                // Send book's actual binary file to the server
-                uploadBookMedia(jsonBook["guid"].toString(),
-                                jsonBook["filePath"].toString(), authToken);
-
-                // Send the book's cover to the server
-                uploadBookCover(authToken, jsonBook["guid"].toString(),
-                                jsonBook["coverPath"].toString());
-
-                // Make sure to release the reply's memory
                 reply->deleteLater();
-            });
+                return;
+            }
+
+            // Send book's actual binary file to the server
+            uploadBookMedia(jsonBook["guid"].toString(),
+                            jsonBook["filePath"].toString(), authToken);
+
+            // Send the book's cover to the server
+            uploadBookCover(authToken, jsonBook["guid"].toString(),
+                            jsonBook["coverPath"].toString());
+
+            // Make sure to release the reply's memory
+            reply->deleteLater();
+        });
 }
 
 void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
@@ -68,7 +78,10 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(204, reply, "Deleting book");
+                if(api_error_helper::apiRequestFailed(reply, 204))
+                {
+                    api_error_helper::logErrorMessage(reply, "Deleting");
+                }
 
                 reply->deleteLater();
             });
@@ -90,7 +103,10 @@ void BookStorageAccess::updateBook(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Updating book");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply, "Updating book");
+                }
 
                 reply->deleteLater();
             });
@@ -140,7 +156,14 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
             [this, bookCover]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Uploading book cover");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Uploading book cover");
+
+                    reply->deleteLater();
+                    return;
+                }
 
                 reply->deleteLater();
                 bookCover->deleteLater();
@@ -162,7 +185,14 @@ void BookStorageAccess::deleteBookCover(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Deleting book cover");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Deleting book cover");
+
+                    reply->deleteLater();
+                    return;
+                }
 
                 reply->deleteLater();
             });
@@ -191,7 +221,15 @@ void BookStorageAccess::downloadCoverForBook(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Getting book cover");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Downloading book cover");
+
+                    reply->deleteLater();
+                    return;
+                }
+
 
                 // The book's uuid (server calls it: "guid") is sent as a header
                 QString bookGuid = reply->rawHeader("Guid");
@@ -213,7 +251,15 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
             [this]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Downloading book data");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Downloading book media");
+
+                    reply->deleteLater();
+                    return;
+                }
+
 
                 // The book's uuid (server calls it: "guid") is sent as a header
                 QString bookGuid = reply->rawHeader("Guid");
@@ -241,12 +287,12 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
 void BookStorageAccess::processGettingBooksMetaDataResult()
 {
     auto reply = qobject_cast<QNetworkReply*>(sender());
-    auto replyStatus = validateNetworkReply(200, reply, "Getting books");
-    if(!replyStatus.success)
+    if(api_error_helper::apiRequestFailed(reply, 200))
     {
+        api_error_helper::logErrorMessage(reply, "Getting books");
+
         std::vector<QJsonObject> empty;
         emit gettingBooksMetaDataFinished(empty);
-
         reply->deleteLater();
         return;
     }
@@ -292,7 +338,11 @@ void BookStorageAccess::uploadBookMedia(const QString& uuid,
             [this, bookData]()
             {
                 auto reply = qobject_cast<QNetworkReply*>(sender());
-                validateNetworkReply(200, reply, "Uploading book data");
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Uploading book media");
+                }
 
                 reply->deleteLater();
                 bookData->deleteLater();
@@ -330,7 +380,6 @@ QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setRawHeader("X-Version", "1.0");
     result.setRawHeader(QByteArray("Authorization"),
                         "Bearer " + authToken.toUtf8());
 
