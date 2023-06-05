@@ -19,8 +19,8 @@ BookStorageManager::BookStorageManager(
 
     // Save downloaded book
     connect(m_bookStorageGateway,
-            &IBookStorageGateway::downloadingBookMediaFinished, this,
-            &BookStorageManager::saveDownloadedBookMediaToFile);
+            &IBookStorageGateway::downloadingBookMediaChunkReady, this,
+            &BookStorageManager::saveDownloadedBookMediaChunkToFile);
 
     // Save book cover
     connect(m_bookStorageGateway,
@@ -45,23 +45,44 @@ void BookStorageManager::clearUserData()
     m_downloadedBooksTracker->clearLibraryOwner();
 }
 
-void BookStorageManager::saveDownloadedBookMediaToFile(const QByteArray& data,
-                                                       const QUuid& uuid,
-                                                       const QString& format)
+void BookStorageManager::saveDownloadedBookMediaChunkToFile(
+    const QByteArray& data, const bool isChunkLast, const QUuid& uuid,
+    const QString& format)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
     auto destination = QUrl(destDir.filePath(fileName)).path();
 
-    QFile file(destination);
-    if(!file.open(QIODevice::WriteOnly))
+    static QMap<QString, QSharedPointer<QFile>> filesMap;
+    if(isChunkLast)
     {
-        qDebug() << "Could not open new book file!";
+        filesMap.remove(fileName);
+        emit finishedDownloadingBookMedia(uuid, destination);
         return;
     }
 
-    file.write(data);
-    emit finishedDownloadingBookMedia(uuid, destination);
+    QSharedPointer<QFile> file;
+    if(filesMap.contains(fileName))
+    {
+        file = filesMap[fileName];
+    }
+    else
+    {
+        file = QSharedPointer<QFile>(new QFile(destination));
+        filesMap.insert(fileName, file);
+    }
+
+    if(!file->isOpen())
+    {
+        if(!file->open(QIODevice::Append))
+        {
+            qWarning()
+                << QString("Could not open new book file: %1").arg(destination);
+            return;
+        }
+    }
+
+    file->write(data);
 }
 
 void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
