@@ -36,8 +36,10 @@ public:
 signals:
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
-    void downloadingBookMediaFinished(const QByteArray& data, const QUuid& uuid,
-                                      const QString& format);
+    void downloadingBookMediaChunkReady(const QByteArray& data,
+                                        const bool isChunkLast,
+                                        const QUuid& uuid,
+                                        const QString& format);
     void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
