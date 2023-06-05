@@ -21,9 +21,6 @@ BookStorageManager::BookStorageManager(
     connect(m_bookStorageGateway,
             &IBookStorageGateway::downloadingBookMediaChunkReady, this,
             &BookStorageManager::saveDownloadedBookMediaChunkToFile);
-    connect(m_bookStorageGateway,
-            &IBookStorageGateway::downloadingBookMediaFinished, this,
-            &BookStorageManager::saveDownloadedBookMediaChunkToFile);
 
     // Save book cover
     connect(m_bookStorageGateway,
@@ -48,17 +45,16 @@ void BookStorageManager::clearUserData()
     m_downloadedBooksTracker->clearLibraryOwner();
 }
 
-void BookStorageManager::saveDownloadedBookMediaChunkToFile(const QByteArray& data,
-                                                            const bool isChunkLast,
-                                                            const QUuid& uuid,
-                                                            const QString& format)
+void BookStorageManager::saveDownloadedBookMediaChunkToFile(
+    const QByteArray& data, const bool isChunkLast, const QUuid& uuid,
+    const QString& format)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
     auto destination = QUrl(destDir.filePath(fileName)).path();
 
     static QMap<QString, QSharedPointer<QFile>> filesMap;
-    if (isChunkLast)
+    if(isChunkLast)
     {
         filesMap.remove(fileName);
         emit finishedDownloadingBookMedia(uuid, destination);
@@ -76,13 +72,14 @@ void BookStorageManager::saveDownloadedBookMediaChunkToFile(const QByteArray& da
         filesMap.insert(fileName, file);
     }
 
-    if (!file->isOpen())
+    if(!file->isOpen())
     {
-      if(!file->open(QIODevice::Append))
-      {
-          qDebug() << "Could not open new book file!";
-          return;
-      }
+        if(!file->open(QIODevice::Append))
+        {
+            qWarning()
+                << QString("Could not open new book file: %1").arg(destination);
+            return;
+        }
     }
 
     file->write(data);

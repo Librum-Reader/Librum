@@ -272,15 +272,15 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
     connect(bookDownloadReply, &QNetworkReply::finished, this,
             [this]()
             {
-              auto reply = qobject_cast<QNetworkReply*>(sender());
+                auto reply = qobject_cast<QNetworkReply*>(sender());
 
-              QString bookGuid = reply->rawHeader("Guid");
-              QString bookFormat = reply->rawHeader("Format");
+                QString bookGuid = reply->rawHeader("Guid");
+                QString bookFormat = reply->rawHeader("Format");
 
-              emit downloadingBookMediaFinished(QByteArray(), true,
-                                                bookGuid, bookFormat);
+                emit downloadingBookMediaChunkReady(QByteArray(), true,
+                                                    bookGuid, bookFormat);
 
-              reply->deleteLater();
+                reply->deleteLater();
             });
 }
 
@@ -389,37 +389,6 @@ QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
     result.setSslConfiguration(sslConfiguration);
 
     return result;
-}
-
-ServerReplyStatus BookStorageAccess::validateNetworkReply(
-    int expectedStatusCode, QNetworkReply* reply, const QString& name)
-{
-    auto statusCode =
-        reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-
-    if(statusCode == 426)
-    {
-        qWarning() << name << " failed: Exceeded the storage limit.";
-        emit storageLimitExceeded();
-        return ServerReplyStatus {
-            .success = false,
-            .errorMessage = "Exceeded the storage limit",
-        };
-    }
-
-    if(reply->error() != QNetworkReply::NoError ||
-       expectedStatusCode != statusCode)
-    {
-        auto content = reply->readAll();
-        qWarning() << name + " failed: " + content;
-
-        return ServerReplyStatus {
-            .success = false,
-            .errorMessage = content,
-        };
-    }
-
-    return ServerReplyStatus { .success = true };
 }
 
 }  // namespace infrastructure::persistence

@@ -45,10 +45,6 @@ signals:
                                         const bool isChunkLast,
                                         const QUuid& uuid,
                                         const QString& format);
-    void downloadingBookMediaFinished(const QByteArray& data,
-                                      const bool isChunkLast,
-                                      const QUuid& uuid,
-                                      const QString& format);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
     void storageLimitExceeded();

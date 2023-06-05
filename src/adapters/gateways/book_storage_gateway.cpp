@@ -23,9 +23,6 @@ BookStorageGateway::BookStorageGateway(IBookStorageAccess* bookStorageAccess) :
     connect(m_bookStorageAccess,
             &IBookStorageAccess::downloadingBookMediaChunkReady, this,
             &BookStorageGateway::downloadingBookMediaChunkReady);
-    connect(m_bookStorageAccess,
-            &IBookStorageAccess::downloadingBookMediaFinished, this,
-            &BookStorageGateway::downloadingBookMediaFinished);
 
     // Save book cover
     connect(m_bookStorageAccess,
