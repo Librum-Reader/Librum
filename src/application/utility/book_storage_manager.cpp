@@ -46,7 +46,7 @@ void BookStorageManager::clearUserData()
 }
 
 void BookStorageManager::saveDownloadedBookMediaChunkToFile(
-    const QByteArray& data, const bool isChunkLast, const QUuid& uuid,
+    const QByteArray& data, bool isLastChunk, const QUuid& uuid,
     const QString& format)
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
@@ -54,30 +54,26 @@ void BookStorageManager::saveDownloadedBookMediaChunkToFile(
     auto destination = QUrl(destDir.filePath(fileName)).path();
 
     static QMap<QString, QSharedPointer<QFile>> filesMap;
-    if(isChunkLast)
+    if(isLastChunk)
     {
         filesMap.remove(fileName);
         emit finishedDownloadingBookMedia(uuid, destination);
         return;
     }
 
-    QSharedPointer<QFile> file;
-    if(filesMap.contains(fileName))
+    if(!filesMap.contains(fileName))
     {
-        file = filesMap[fileName];
-    }
-    else
-    {
-        file = QSharedPointer<QFile>(new QFile(destination));
-        filesMap.insert(fileName, file);
+        auto newFile = QSharedPointer<QFile>(new QFile(destination));
+        filesMap.insert(fileName, newFile);
     }
 
+    QSharedPointer<QFile> file;
+    file = filesMap[fileName];
     if(!file->isOpen())
     {
         if(!file->open(QIODevice::Append))
         {
-            qWarning()
-                << QString("Could not open new book file: %1").arg(destination);
+            qWarning() << "Could not open new book file: %1" << destination;
             return;
         }
     }
