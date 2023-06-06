@@ -3,7 +3,7 @@ import QtQuick 2.15
 Rectangle
 {
     id: root
-    property int progress
+    property double progress
     
     implicitWidth: 100
     implicitHeight: 25

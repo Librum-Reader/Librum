@@ -93,7 +93,7 @@ Item
             {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
-                visible: !model.downloaded || !downloadProgress.visible
+                visible: !model.downloaded && !downloadProgress.visible
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.downloadSelected
@@ -113,7 +113,14 @@ Item
                 progress: model.mediaDownloadProgress
                 onProgressChanged:
                 {
-                    downloadProgress.visible = true;
+                    if(progress === 1)
+                    {
+                        downloadProgress.visible = false;
+                    }
+                    else
+                    {
+                        downloadProgress.visible = true;
+                    }
                 }
             }
             
