@@ -44,6 +44,9 @@ public:
 
 signals:
     void loadingRemoteBooksFinished(std::vector<domain::entities::Book>& books);
+    void downloadingBookMediaProgressChanged(const QUuid& uuid,
+                                             qint64 bytesReceived,
+                                             qint64 bytesTotal);
     void finishedDownloadingBookMedia(const QUuid& uuid,
                                       const QString& filePath);
     void finishedDownloadingBookCover(const QUuid& uuid,

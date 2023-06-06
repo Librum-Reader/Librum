@@ -22,6 +22,11 @@ BookStorageManager::BookStorageManager(
             &IBookStorageGateway::downloadingBookMediaChunkReady, this,
             &BookStorageManager::saveDownloadedBookMediaChunkToFile);
 
+    // Downloading book media progress
+    connect(m_bookStorageGateway,
+            &IBookStorageGateway::downloadingBookMediaProgressChanged, this,
+            &BookStorageManager::downloadingBookMediaProgressChanged);
+
     // Save book cover
     connect(m_bookStorageGateway,
             &IBookStorageGateway::downloadingBookCoverFinished, this,
