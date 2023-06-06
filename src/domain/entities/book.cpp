@@ -89,6 +89,16 @@ void Book::setCoverPath(const QString& path)
     m_metaData.coverPath = path;
 }
 
+double Book::getMediaDownloadProgress() const
+{
+    return m_metaData.bookMediaDownloadProgress;
+}
+
+void Book::setMediaDownloadProgress(double newProgress)
+{
+    m_metaData.bookMediaDownloadProgress = newProgress;
+}
+
 const QDateTime& Book::getCoverLastModified() const
 {
     return m_metaData.coverLastModified;

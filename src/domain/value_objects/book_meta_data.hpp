@@ -22,6 +22,7 @@ struct BookMetaData
     QDateTime lastOpened;
     QDateTime coverLastModified;
     bool hasCover = false;
+    double bookMediaDownloadProgress = 0.0;
     QString coverPath;
 
     bool operator==(const BookMetaData& rhs) const

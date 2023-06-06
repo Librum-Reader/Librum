@@ -64,9 +64,7 @@ signals:
     void tagsChanged(int index);
     void dataChanged(int index);
     void storageLimitExceeded();
-    void downloadingBookMediaProgressChanged(const QUuid& uuid,
-                                             qint64 bytesReceived,
-                                             qint64 bytesTotal);
+    void downloadingBookMediaProgressChanged(int index);
 };
 
 }  // namespace application

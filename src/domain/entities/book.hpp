@@ -72,6 +72,10 @@ public:
     const QString& getCoverPath() const;
     void setCoverPath(const QString& path);
 
+    double getMediaDownloadProgress() const;
+    void setMediaDownloadProgress(double newProgress);
+
+
     const QDateTime& getCoverLastModified() const;
     void updateCoverLastModified();
     void setCoverLastModified(const QDateTime& newTime);

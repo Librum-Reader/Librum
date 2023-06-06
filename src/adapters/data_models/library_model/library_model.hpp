@@ -39,6 +39,7 @@ public:
         CoverRole,
         TagsRole,
         DownloadedRole,
+        MediaDownloadProgressRole,
         Invalid
     };
 
@@ -58,6 +59,7 @@ public slots:
     void refreshBook(int row);
     void startBookClearing();
     void endBookClearing();
+    void downloadingBookMediaProgressChanged(int row);
 
 private:
     QList<dtos::TagDto> convertTagsToDtos(

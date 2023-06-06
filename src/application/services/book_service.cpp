@@ -39,7 +39,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Downloading book media progress
     connect(m_bookStorageManager,
             &IBookStorageManager::downloadingBookMediaProgressChanged, this,
-            &BookService::downloadingBookMediaProgressChanged);
+            &BookService::setMediaDownloadProgressForBook);
 
     // Downloading book finished
     connect(m_bookStorageManager,
@@ -282,6 +282,24 @@ void BookService::addBookToLibrary(const Book& book)
     emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(book);
     emit bookInsertionEnded();
+}
+
+void BookService::setMediaDownloadProgressForBook(const QUuid& uuid,
+                                                  qint64 bytesReceived,
+                                                  qint64 bytesTotal)
+{
+    auto* book = getBook(uuid);
+    if(book == nullptr)
+    {
+        qWarning() << QString("Failed setting media download progress for book "
+                              "with uuid: %1. No book with this uuid exists.")
+                          .arg(uuid.toString());
+        return;
+    }
+
+    auto progress = static_cast<double>(bytesReceived) / bytesTotal;
+    book->setMediaDownloadProgress(progress);
+    emit downloadingBookMediaProgressChanged(getBookIndex(uuid));
 }
 
 BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
