@@ -282,6 +282,17 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
 
                 reply->deleteLater();
             });
+
+    connect(bookDownloadReply, &QNetworkReply::downloadProgress, this,
+            [this](qint64 bytesReceived, qint64 bytesTotal)
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+
+                QString bookGuid = reply->rawHeader("Guid");
+
+                emit downloadingBookMediaProgressChanged(
+                    bookGuid, bytesReceived, bytesTotal);
+            });
 }
 
 void BookStorageAccess::processGettingBooksMetaDataResult()

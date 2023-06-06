@@ -65,6 +65,16 @@ BookController::BookController(application::IBookService* bookService) :
     connect(m_bookService, &application::IBookService::bookCoverGenerated,
             &m_libraryModel, &data_models::LibraryModel::processBookCover);
 
+    // Downloading book media progress
+    connect(m_bookService,
+            &application::IBookService::downloadingBookMediaProgressChanged,
+            this,
+            [this](const QUuid& uuid, qint64 bytesReceived, qint64 bytesTotal)
+            {
+                int percentage = (bytesReceived * 100) / bytesTotal;
+
+                emit downloadingBookMediaProgressChanged(uuid, percentage);
+            });
 
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
