@@ -93,6 +93,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case DownloadedRole:
         return book.isDownloaded();
         break;
+    case MediaDownloadProgressRole:
+        return book.getMediaDownloadProgress();
+        break;
     default:
         return QVariant();
     }
@@ -118,6 +121,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { CoverRole, "cover" },
         { TagsRole, "tags" },
         { DownloadedRole, "downloaded" },
+        { MediaDownloadProgressRole, "mediaDownloadProgress" },
     };
 
     return roles;
@@ -178,6 +182,12 @@ void LibraryModel::startBookClearing()
 void LibraryModel::endBookClearing()
 {
     endResetModel();
+}
+
+void LibraryModel::downloadingBookMediaProgressChanged(int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0),
+                     { MediaDownloadProgressRole });
 }
 
 void LibraryModel::startInsertingRow(int index)

@@ -69,6 +69,9 @@ private:
     void deleteBookCover(domain::entities::Book& book);
     bool setNewBookCover(domain::entities::Book& book, QString filePath);
     void addBookToLibrary(const domain::entities::Book& book);
+    void setMediaDownloadProgressForBook(const QUuid& uuid,
+                                         qint64 bytesReceived,
+                                         qint64 bytesTotal);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;

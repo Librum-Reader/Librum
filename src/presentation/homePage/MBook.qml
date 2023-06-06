@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import Librum.style 1.0
 import Librum.icons 1.0
+import CustomComponents 1.0
 
 
 Item 
@@ -92,13 +93,30 @@ Item
             {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
-                visible: !model.downloaded
+                visible: !model.downloaded || !downloadProgress.visible
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.downloadSelected
                 opacity: 1
                 z: 3
             }
+            
+            MProgressBar
+            {
+                id: downloadProgress
+                anchors.centerIn: bookCoverDimmer
+                width: 100
+                height: 25
+                visible: false
+                z: 3
+                
+                progress: model.mediaDownloadProgress
+                onProgressChanged:
+                {
+                    downloadProgress.visible = true;
+                }
+            }
+            
             
             ColumnLayout
             {
