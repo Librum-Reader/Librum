@@ -36,6 +36,11 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
             &IBookStorageManager::loadingRemoteBooksFinished, this,
             &BookService::updateLibrary);
 
+    // Downloading book media progress
+    connect(m_bookStorageManager,
+            &IBookStorageManager::downloadingBookMediaProgressChanged, this,
+            &BookService::downloadingBookMediaProgressChanged);
+
     // Downloading book finished
     connect(m_bookStorageManager,
             &IBookStorageManager::finishedDownloadingBookMedia, this,

@@ -78,6 +78,7 @@ public slots:
 signals:
     void bookCountChanged();
     void storageLimitExceeded();
+    void downloadingBookMediaProgressChanged(const QUuid& uuid, int percentage);
 };
 
 }  // namespace adapters
