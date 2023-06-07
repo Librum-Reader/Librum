@@ -93,35 +93,12 @@ Item
             {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
-                visible: !model.downloaded && !downloadProgress.visible
+                visible: !model.downloaded && !downloadProgressBar.visible
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.downloadSelected
                 opacity: 1
                 z: 3
-            }
-            
-            MProgressBar
-            {
-                id: downloadProgress
-                anchors.centerIn: bookCoverDimmer
-                width: 100
-                height: 25
-                visible: false
-                z: 3
-                
-                progress: model.mediaDownloadProgress
-                onProgressChanged:
-                {
-                    if(progress === 1)
-                    {
-                        downloadProgress.visible = false;
-                    }
-                    else
-                    {
-                        downloadProgress.visible = true;
-                    }
-                }
             }
             
             
@@ -153,6 +130,27 @@ Item
                     color: Style.colorNoImageLabel
                     font.pointSize: 20
                     font.bold: true
+                }
+            }
+            
+            MProgressBar
+            {
+                id: downloadProgressBar
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottomMargin: 1
+                anchors.leftMargin: 1
+                anchors.rightMargin: 1
+                visible: false
+                z: 3
+                progress: model.mediaDownloadProgress
+                onProgressChanged:
+                {
+                    if(progress === 1)
+                        visible = false;
+                    else
+                        visible = true;
                 }
             }
         }
