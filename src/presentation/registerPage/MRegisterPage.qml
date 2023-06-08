@@ -283,14 +283,22 @@ MFlickWrapper
         Component.onCompleted: firstNameInput.giveFocus();
     }
     
-    MConfirmEmailPopup
+    MWarningPopup
     {
         id: confirmEmailPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - page.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - page.topPadding - 65)
         visible: false
+        title: "Confirm Your Email"
+        message: "You're are almost ready to go!\nConfirm your email by clicking the link we sent you."
+        leftButtonText: "Done!"
+        rightButtonText: "Resend"
         
-        onDecisionMade: loadPage(loginPage);
+        onLeftButtonClicked: 
+        {
+            close();
+            loadPage(loginPage);
+        }
     }
     
     QtObject
