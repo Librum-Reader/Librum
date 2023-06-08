@@ -251,12 +251,22 @@ Page
         }
     }
     
-    
-    MAcceptDeletionPopup
+    MWarningPopup
     {
         id: acceptDeletionPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: "Delete Book?"
+        message: "Deleting a book is a permanent action, no one will be\n able to restore it afterwards!"
+        leftButtonText: "No, Keep Book"
+        rightButtonText: "Yes, Delete Book"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        
+        onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
+        onDecisionMade: close()
+        onRightButtonClicked: BookController.deleteBook(Globals.selectedBook.uuid);
     }
     
     MBookDetailsPopup
@@ -283,12 +293,20 @@ Page
         onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
     }
     
-    MUploadLimitReachedPopup
+    MWarningPopup
     {
         id: uploadLimitReachedPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: "Limit Reached"
+        message: "You have reached your upload limit.\nDelete unused books to free up space or upgrade."
+        leftButtonText: "Ok"
+        rightButtonText: "Upgrade"
+        buttonsWidth: 180
+        messageBottomSpacing: 16
         
+        onOpenedChanged: if(opened) uploadLimitReachedPopup.giveFocus()
         onDecisionMade: close()
     }
     

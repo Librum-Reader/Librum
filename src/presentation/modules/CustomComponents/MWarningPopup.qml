@@ -9,18 +9,23 @@ import Librum.icons 1.0
 Popup
 {
     id: root
+    property string leftButtonText: "Accept"
+    property string rightButtonText: "Decline"
+    property string title: "Do you Accept?"
+    property string message: "This is a message"
+    property int buttonsWidth: 120
+    property int messageBottomSpacing: 0
+    signal leftButtonClicked
+    signal rightButtonClicked
     signal decisionMade
-    signal resetChoosed
-    signal keepChoosed
     
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
-    modal: true
+    closePolicy: Popup.NoAutoClose
     background: Rectangle { color: "transparent"; radius: 4 }
+    modal: true
     Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
-    
-    onOpened: keepButton.forceActiveFocus()
     
     
     MFlickWrapper
@@ -28,7 +33,6 @@ Popup
         id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
-        
         
         ColumnLayout
         {
@@ -39,7 +43,7 @@ Popup
             
             Image
             {
-                id: attentionIllustration
+                id: warningIllustration
                 z: 2
                 Layout.alignment: Qt.AlignHCenter
                 Layout.rightMargin: 10
@@ -50,27 +54,27 @@ Popup
             
             Pane
             {
-                id: container
+                id: backgroundRect
                 Layout.fillWidth: true
                 topPadding: 86
-                horizontalPadding: 82
-                bottomPadding: 66
+                horizontalPadding: 62
+                bottomPadding: 62
                 background: Rectangle { color: Style.colorPopupBackground; radius: 6 }
                 
                 
                 ColumnLayout
                 {
-                    id: contentLayout
+                    id: inRectLayout
                     width: parent.width
                     spacing: 22
                     
                     
                     Label
                     {
-                        id: whoopsText
+                        id: title
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
-                        text: "Reset settings?"
+                        text: root.title
                         color: Style.colorTitle
                         font.weight: Font.Medium
                         font.pointSize: 42
@@ -78,11 +82,12 @@ Popup
                     
                     Label
                     {
-                        id: permanentActionText
+                        id: message
                         Layout.alignment: Qt.AlignHCenter
+                        Layout.bottomMargin: root.messageBottomSpacing
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
-                        text: "Resetting your settings is a permanent action, there will be no way to restore them!"
+                        text: root.message
                         horizontalAlignment: Qt.AlignHCenter
                         color: Style.colorLightText
                         font.weight: Font.Medium
@@ -93,50 +98,51 @@ Popup
                     {
                         id: buttonRow
                         Layout.preferredWidth: parent.width
-                        Layout.preferredHeight: keepButton.height
-                        Layout.topMargin: 36
+                        Layout.preferredHeight: leftButton.height
+                        Layout.topMargin: 24
                         spacing: 42
+                        
                         
                         MButton
                         {
-                            id: keepButton
-                            Layout.preferredWidth: 180
+                            id: leftButton
+                            Layout.preferredWidth: root.buttonsWidth
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                             borderWidth: activeFocus ? 0 : 1
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
-                            text: "No, Keep"
+                            text: root.leftButtonText
                             fontSize: 12.75
                             fontWeight: Font.Bold
                             textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
-                            onClicked: internal.keep()
+                            onClicked: internal.leftButtonClicked()
                             
-                            KeyNavigation.tab: resetButton
-                            KeyNavigation.right: resetButton
-                            Keys.onReturnPressed: internal.keep()
+                            KeyNavigation.tab: rightButton
+                            KeyNavigation.right: rightButton
+                            Keys.onReturnPressed: internal.leftButtonClicked()
                         }
                         
                         MButton
                         {
-                            id: resetButton
-                            Layout.preferredWidth: 180
+                            id: rightButton
+                            Layout.preferredWidth: root.buttonsWidth
                             Layout.preferredHeight: 40
-                            Layout.alignment: Qt.AlignBottom
-                            borderWidth: activeFocus ? 0 : 1
-                            backgroundColor: activeFocus ? Style.colorRed : "transparent"
+                            Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
+                            borderWidth: focus ? 0 : 1
+                            backgroundColor: focus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
-                            text: "Yes, Reset"
+                            text: root.rightButtonText
                             fontSize: 12.75
                             fontWeight: Font.Bold
-                            textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
+                            textColor: focus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             
-                            onClicked: internal.reset()
+                            onClicked: internal.rightButtonClicked()
                             
-                            KeyNavigation.tab: keepButton
-                            KeyNavigation.left: keepButton
-                            Keys.onReturnPressed: internal.reset()
+                            KeyNavigation.tab: leftButton
+                            KeyNavigation.left: leftButton
+                            Keys.onReturnPressed: internal.rightButtonClicked()
                         }
                     }
                 }
@@ -148,22 +154,21 @@ Popup
     {
         id: internal
         
-        
-        function reset()
+        function leftButtonClicked()
         {
-            root.resetChoosed();
-            root.decisionMade();
+            root.leftButtonClicked();
+            decisionMade();
         }
         
-        function keep()
+        function rightButtonClicked()
         {
-            root.keepChoosed();
-            root.decisionMade();
+            root.rightButtonClicked();
+            decisionMade();
         }
     }
     
     function giveFocus()
     {
-        acceptButton.forceActiveFocus();
+        leftButton.forceActiveFocus();
     }
 }

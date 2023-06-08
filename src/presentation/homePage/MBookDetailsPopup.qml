@@ -533,13 +533,26 @@ Popup
     }
     
     
-    MAcceptDeletionPopup
+    MWarningPopup
     {
         id: acceptDeletionPopup
         x: root.width / 2 - implicitWidth / 2
         y: root.height / 2 - implicitHeight / 2 - 30
+        visible: false
+        title: "Delete Book?"
+        message: "Deleting a book is a permanent action, no one will be\n able to restore it afterwards!"
+        leftButtonText: "No, Keep Book"
+        rightButtonText: "Yes, Delete Book"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
         
-        onDeleteChoosed: root.close()
+        onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
+        onDecisionMade: close()
+        onRightButtonClicked:
+        {
+            BookController.deleteBook(Globals.selectedBook.uuid);
+            root.close();
+        }
     }
     
     FileDialog

@@ -358,16 +358,22 @@ MFlickWrapper
         }
     }
     
-    MForgotToSaveChangesPopup
+    MWarningPopup
     {
-        id: forgotToSaveChangesDialog
+        id: acceptDeletionPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
         y: Math.round(root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
+        visible: false
+        title: "Whoops"
+        message: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
+        leftButtonText: "Save"
+        rightButtonText: "Don't save"
+        buttonsWidth: 120
         
-        saveFunction: root.saveAccountSettings
-        discardMethod: () => { internal.unsavedChanges = false; }
-        
-        onOpenedChanged: if(opened) forgotToSaveChangesDialog.giveFocus()
+        onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
+        onDecisionMade: close()
+        onLeftButtonClicked: root.saveAccountSettings()
+        onRightButtonClicked: internal.unsavedChanges = false;
     }
     
     /*
@@ -381,13 +387,13 @@ MFlickWrapper
                         {
                             if(internal.unsavedChanges)
                             {
-                                forgotToSaveChangesDialog.open();
+                                acceptDeletionPopup.open();
                                 return true;
                             }
                             return false;
                         }
         
-        savingPageFinishedSignal: forgotToSaveChangesDialog.decisionMade
+        savingPageFinishedSignal: acceptDeletionPopup.decisionMade
     }
     
     QtObject
@@ -408,7 +414,7 @@ MFlickWrapper
             Globals.profilePicture = profilePictureArea.image;
             UserController.profilePicture = profilePictureArea.image;
         }
-            
+        
         internal.unsavedChanges = false;
     }
 }

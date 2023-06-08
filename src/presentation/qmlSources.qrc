@@ -22,7 +22,6 @@
         <file>modules/CustomComponents/buttons/MSearchButton.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBox.qml</file>
         <file>modules/CustomComponents/comboBox/MComboBoxPopup.qml</file>
-        <file>modules/CustomComponents/dialogs/MForgotToSaveChangesPopup.qml</file>
         <file>modules/CustomComponents/MPageCleanup.qml</file>
         <file>addOnsPage/MAddOnsPage.qml</file>
         <file>forgotPasswordPage/MForgotPasswordPage.qml</file>
@@ -71,7 +70,6 @@
         <file>settings/accountPage/MAccountPage.qml</file>
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
         <file>Globals.qml</file>
-        <file>modules/CustomComponents/dialogs/MAcceptDeletionPopup.qml</file>
         <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
         <file>settings/MGeneralSettingsPage.qml</file>
@@ -82,10 +80,8 @@
         <file>homePage/MBookDetailsPopup.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
-        <file>settings/MResetSettingsPopup.qml</file>
         <file>readingPage/MDocumentView.qml</file>
         <file>readingPage/MPageView.qml</file>
-        <file>loginPage/MLoginFailedPopup.qml</file>
         <file>readingPage/DocumentNavigation.js</file>
         <file>modules/CustomComponents/MOnOffToggle.qml</file>
         <file>homePage/MBookRightClickPopup.qml</file>
@@ -96,8 +92,7 @@
         <file>homePage/manageTagsPopup/MAddTagBoxPopup.qml</file>
         <file>homePage/manageTagsPopup/MManageTagsPopup.qml</file>
         <file>homePage/manageTagsPopup/MTagItem.qml</file>
-        <file>homePage/MUploadLimitReachedPopup.qml</file>
         <file>modules/CustomComponents/MProgressBar.qml</file>
-        <file>registerPage/MConfirmEmailPopup.qml</file>
+        <file>modules/CustomComponents/MWarningPopup.qml</file>
     </qresource>
 </RCC>

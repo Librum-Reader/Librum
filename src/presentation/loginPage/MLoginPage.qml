@@ -46,7 +46,7 @@ MFlickWrapper
             if(success)
                 loadPage(homePage, sidebar.homeItem, false);
             else
-                loginFailedDialog.open();
+                loginFailedPopup.open();
         }
     }
     
@@ -288,14 +288,22 @@ MFlickWrapper
         
     }
     
-    MLoginFailedPopup
+    MWarningPopup
     {
-        id: loginFailedDialog
+        id: loginFailedPopup
         x: Math.round(root.width / 2 - implicitWidth / 2)
         y: Math.round(root.height / 2 - implicitHeight / 2) - 75
+        visible: false
+        title: "We're Sorry"
+        message: "Logging you in failed, please try again later."
+        leftButtonText: "Ok"
+        rightButtonText: "Report"
+        messageBottomSpacing: 8
         
-        onOpenedChanged: if(opened) loginFailedDialog.giveFocus()
+        onDecisionMade: close()
+        onOpenedChanged: if(opened) loginFailedPopup.giveFocus()
     }
+    
     
     QtObject
     {
@@ -328,7 +336,7 @@ MFlickWrapper
                 passwordInput.errorText = message;
                 passwordInput.setError();
                 break;
-            
+                
             case ErrorCode.EmailAddressTooLong:   // Fall through
             case ErrorCode.EmailAddressTooShort:  // Fall through
             case ErrorCode.InvalidEmailAddressFormat:
