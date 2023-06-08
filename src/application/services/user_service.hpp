@@ -31,7 +31,7 @@ public:
     long getBookStorageLimit() const override;
 
     QImage getProfilePicture() const override;
-    void setProfilePicture(const QImage& image) override;
+    void setProfilePicture(const QString& path, const QImage& image) override;
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;

@@ -42,9 +42,9 @@ void UserStorageGateway::changeEmail(const QString& authToken,
 }
 
 void UserStorageGateway::changeProfilePicture(const QString& authToken,
-                                              const QImage& newPicture)
+                                              const QString& path)
 {
-    m_userStorageAccess->changeProfilePicture(authToken, newPicture);
+    m_userStorageAccess->changeProfilePicture(authToken, path);
 }
 
 void UserStorageGateway::deleteTag(const QString& authToken, const QUuid& uuid)

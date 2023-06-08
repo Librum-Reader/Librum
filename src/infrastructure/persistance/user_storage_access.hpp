@@ -28,7 +28,7 @@ public:
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
-                              const QImage& newProfilePicture) override;
+                              const QString& path) override;
     void deleteTag(const QString& authToken, const QString& uuid) override;
     void renameTag(const QString& authToken,
                    const QJsonObject& bookForUpdate) override;

@@ -22,7 +22,7 @@ public:
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
-                              const QImage& newPicture) override;
+                              const QString& path) override;
     void deleteTag(const QString& authToken, const QUuid& uuid) override;
     void renameTag(const QString& authToken, const QUuid& uuid,
                    const QString& newName) override;

@@ -26,7 +26,7 @@ public:
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
     virtual void changeProfilePicture(const QString& authToken,
-                                      const QImage& newProfilePicture) = 0;
+                                      const QString& path) = 0;
     virtual void deleteTag(const QString& authToken, const QString& uuid) = 0;
     virtual void renameTag(const QString& authToken,
                            const QJsonObject& bookForUpdate) = 0;

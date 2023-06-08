@@ -154,7 +154,7 @@ void UserController::setProfilePicture(const QString& path)
         return;
     }
 
-    m_userService->setProfilePicture(profilePicture);
+    m_userService->setProfilePicture(path, profilePicture);
     emit profilePictureChanged();
 }
 

@@ -123,10 +123,10 @@ QImage UserService::getProfilePicture() const
     return m_user.getProfilePicture();
 }
 
-void UserService::setProfilePicture(const QImage& image)
+void UserService::setProfilePicture(const QString& path, const QImage& image)
 {
     m_user.setProfilePicture(image);
-    m_userStorageGateway->changeProfilePicture(m_authenticationToken, image);
+    m_userStorageGateway->changeProfilePicture(m_authenticationToken, path);
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const

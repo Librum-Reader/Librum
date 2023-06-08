@@ -1,4 +1,7 @@
 #include "user_storage_access.hpp"
+#include <QFile>
+#include <QFileInfo>
+#include <QHttpMultiPart>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include "api_error_helper.hpp"
@@ -81,11 +84,62 @@ void UserStorageAccess::changeEmail(const QString& authToken,
 }
 
 void UserStorageAccess::changeProfilePicture(const QString& authToken,
-                                             const QImage& newProfilePicture)
+                                             const QString& path)
 {
-    Q_UNUSED(authToken)
-    Q_UNUSED(newProfilePicture)
-    // TODO: Implement when filestorage server is up
+    auto profilePicture = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+    QFile* file = new QFile(QUrl(path).path());
+    if(!file->open(QIODevice::ReadOnly))
+    {
+        qWarning() << "Could not open new profile picture file: "
+                   << file->fileName();
+
+        profilePicture->deleteLater();
+        return;
+    }
+
+    // Make sure the file is released when the request finished
+    file->setParent(profilePicture);
+
+    QFileInfo fileInfo(path);
+
+    QHttpPart imagePart;
+    imagePart.setBodyDevice(file);
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                        QVariant("image/" + fileInfo.suffix()));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                        QVariant("form-data; name=\"image\"; filename=\"" +
+                                 file->fileName() + "\""));
+
+    profilePicture->append(imagePart);
+
+    QUrl endpoint = data::userProfilePictureEndpoint;
+    auto request = createRequest(endpoint, authToken);
+
+    // Reset the ContentTypeHeader since it will be set by the multipart
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+
+    auto profilePictureUploadreply =
+        m_networkAccessManager.post(request, profilePicture);
+
+    // Make sure to free the data used for uploading the profile picture
+    connect(profilePictureUploadreply, &QNetworkReply::finished, this,
+            [this, profilePicture]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Uploading profile picture");
+
+                    reply->deleteLater();
+                    profilePicture->deleteLater();
+                    return;
+                }
+
+                reply->deleteLater();
+                profilePicture->deleteLater();
+            });
 }
 
 void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
