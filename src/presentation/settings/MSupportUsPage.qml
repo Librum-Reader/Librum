@@ -88,7 +88,7 @@ MFlickWrapper
                     {
                         Layout.fillWidth: true
                         Layout.topMargin: 18
-                        text: "We are working in our own name, so we are not getting payed in any way."
+                        text: "We are working in our own name, so we are not getting paid in any way."
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: 14
