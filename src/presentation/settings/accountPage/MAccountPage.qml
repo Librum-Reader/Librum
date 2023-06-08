@@ -180,7 +180,7 @@ MFlickWrapper
                         Layout.rightMargin: 40
                         Layout.leftMargin: 32
                         
-                        onImageSelected: internal.unsavedChanges = true
+                        onImageChanged: internal.unsavedChanges = true
                     }
                     
                     Item { Layout.fillWidth: true }
@@ -404,8 +404,11 @@ MFlickWrapper
         UserController.lastName = lastNameInput.text;
         
         if(profilePictureArea.image !== Globals.profilePicture)
+        {
             Globals.profilePicture = profilePictureArea.image;
-        
+            UserController.profilePicture = profilePictureArea.image;
+        }
+            
         internal.unsavedChanges = false;
     }
 }
