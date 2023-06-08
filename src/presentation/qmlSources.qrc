@@ -98,5 +98,6 @@
         <file>homePage/manageTagsPopup/MTagItem.qml</file>
         <file>homePage/MUploadLimitReachedPopup.qml</file>
         <file>modules/CustomComponents/MProgressBar.qml</file>
+        <file>registerPage/MConfirmEmailPopup.qml</file>
     </qresource>
 </RCC>
