@@ -29,7 +29,9 @@ public:
     MOCK_METHOD(long, getUsedBookStorage, (), (const, override));
     MOCK_METHOD(long, getBookStorageLimit, (), (const, override));
     MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
-    MOCK_METHOD(void, setProfilePicture, (const QImage&), (override));
+    MOCK_METHOD(void, setProfilePicture, (const QString&, const QImage&),
+                (override));
+    MOCK_METHOD(void, saveProfilePictureToFile, (QByteArray&), (override));
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));
@@ -38,6 +40,7 @@ public:
     MOCK_METHOD(QUuid, addTag, (const domain::entities::Tag&), (override));
     MOCK_METHOD(bool, deleteTag, (const QUuid&), (override));
     MOCK_METHOD(bool, renameTag, (const QUuid&, const QString&), (override));
+    MOCK_METHOD(QDir, getUserProfileDir, (), (const, override));
 };
 
 struct AUserController : public ::testing::Test
@@ -438,9 +441,8 @@ TEST_F(AUserController, FailsSettingAProfilePictureIfPathIsInvalid)
     // Arrange
     QString nonExistentPath = "some/path.png";
 
-
     // Expect
-    EXPECT_CALL(userServiceMock, setProfilePicture(_)).Times(0);
+    EXPECT_CALL(userServiceMock, setProfilePicture(_, _)).Times(0);
 
     // Act
     userController->setProfilePicture(nonExistentPath);
