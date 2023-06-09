@@ -16,6 +16,8 @@ class UserStorageAccessMock : public IUserStorageAccess
 {
 public:
     MOCK_METHOD(void, getUser, (const QString& authToken), (override));
+    MOCK_METHOD(void, getProfilePicture, (const QString& authToken),
+                (override));
     MOCK_METHOD(void, changeFirstName,
                 (const QString& authToken, const QString& newFirstName),
                 (override));
@@ -26,8 +28,7 @@ public:
                 (const QString& authToken, const QString& newFirstName),
                 (override));
     MOCK_METHOD(void, changeProfilePicture,
-                (const QString& authToken, const QImage& newProfilePicture),
-                (override));
+                (const QString& authToken, const QString& path), (override));
     MOCK_METHOD(void, deleteTag, (const QString&, const QString&), (override));
     MOCK_METHOD(void, renameTag, (const QString&, const QJsonObject&),
                 (override));
@@ -83,14 +84,11 @@ TEST_F(AUserStorageGateway, SucceedsChangingTheEmail)
 
 TEST_F(AUserStorageGateway, SucceedsChangingProfilePicture)
 {
-    // Arrange
-    QImage profilePicture(50, 50, QImage::Format_ARGB32);
-
     // Expect
     EXPECT_CALL(userStorageAccessMock, changeProfilePicture(_, _)).Times(1);
 
     // Act
-    userStorageGateway->changeProfilePicture("secureToken", profilePicture);
+    userStorageGateway->changeProfilePicture("secureToken", "/some/image.png");
 }
 
 TEST_F(AUserStorageGateway, SucceedsDeletingATag)
