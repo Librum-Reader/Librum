@@ -137,28 +137,14 @@ void UserService::setProfilePicture(const QString& path, const QImage& image)
 
 void UserService::saveProfilePictureToFile(QByteArray& data)
 {
-    // Conversion necessary since QImageReader can only read from QBuffer
-    QBuffer buffer(&data);
-    buffer.open(QIODevice::ReadOnly);
-    QImageReader imageReader(&buffer);
-    QString imageFormat = imageReader.format();
-    buffer.close();
-    if(imageFormat.isEmpty())
-    {
-        qWarning()
-            << "The format of downloaded profile picture is unsupported or "
-               "the image cannot be read";
-        return;
-    }
-
-    auto destDir = getUserProfileDir();
-    destDir.mkpath(destDir.path());
-    auto destination = destDir.path() + "/profilePicture." + imageFormat;
+    auto userDir = getUserProfileDir();
+    auto imageFormat = getImageFormat(data);
+    auto destination = userDir.path() + "/profilePicture." + imageFormat;
 
     QFile file(destination);
     if(!file.open(QIODevice::WriteOnly))
     {
-        qWarning() << "Could not open downloaded profile picture file";
+        qWarning() << "Could not open downloaded profile picture";
         return;
     }
 
@@ -166,6 +152,24 @@ void UserService::saveProfilePictureToFile(QByteArray& data)
 
     // Manually close to make sure the data is written to file before continuing
     file.close();
+}
+
+QString UserService::getImageFormat(QByteArray& image) const
+{
+    QBuffer buffer(&image);
+    buffer.open(QIODevice::ReadOnly);
+
+    QImageReader imageReader(&buffer);
+    QString format = imageReader.format();
+    buffer.close();
+    if(format.isEmpty())
+    {
+        qWarning()
+            << "Failed reading the format of the downloaded profile picture";
+        return "";
+    }
+
+    return format;
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const
@@ -298,10 +302,13 @@ void UserService::clearUserData()
 QDir UserService::getUserProfileDir() const
 {
     auto applicationDir = QDir::current().path();
-    auto userProfileName = QString::number(qHash(m_user.getEmail()));
-    auto folderName = applicationDir + "/userProfiles/" + userProfileName;
+    auto userProfileHash = QString::number(qHash(m_user.getEmail()));
+    auto folder = QDir(applicationDir + "/userProfiles/" + userProfileHash);
 
-    return QDir(folderName);
+    if(!folder.exists())
+        folder.mkpath(folder.path());
+
+    return folder;
 }
 
 }  // namespace application::services

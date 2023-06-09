@@ -37,6 +37,8 @@ private slots:
     void proccessGetUserResult();
 
 private:
+    void addImagePartToMultiPart(QHttpMultiPart* multiPart,
+                                 const QString& imagePath);
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
 
     QNetworkAccessManager m_networkAccessManager;
