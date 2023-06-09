@@ -20,7 +20,7 @@ class UserStorageAccess : public adapters::IUserStorageAccess
 
 public:
     void getUser(const QString& authToken) override;
-
+    void getProfilePicture(const QString& authToken) override;
     void changeFirstName(const QString& authToken,
                          const QString& newFirstName) override;
     void changeLastName(const QString& authToken,

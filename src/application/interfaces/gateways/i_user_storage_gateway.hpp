@@ -20,7 +20,7 @@ public:
     virtual ~IUserStorageGateway() noexcept = default;
 
     virtual void getUser(const QString& authToken) = 0;
-
+    virtual void getProfilePicture(const QString& authToken) = 0;
     virtual void changeFirstName(const QString& authToken,
                                  const QString& newFirstName) = 0;
     virtual void changeLastName(const QString& authToken,
@@ -35,6 +35,7 @@ public:
 
 signals:
     void finishedGettingUser(const domain::entities::User& user, bool success);
+    void profilePictureReady(QByteArray& data);
 };
 
 }  // namespace application

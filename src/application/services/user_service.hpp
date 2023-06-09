@@ -32,12 +32,14 @@ public:
 
     QImage getProfilePicture() const override;
     void setProfilePicture(const QString& path, const QImage& image) override;
+    void saveProfilePictureToFile(QByteArray& data) override;
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;
     bool deleteTag(const QUuid& uuid) override;
     bool renameTag(const QUuid& uuid, const QString& newName) override;
 
+    QDir getUserProfileDir() const override;
 
 public slots:
     void setupUserData(const QString& token, const QString& email) override;

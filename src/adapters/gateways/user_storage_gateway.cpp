@@ -16,11 +16,19 @@ UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess) :
 
     connect(m_userStorageAccess, &IUserStorageAccess::gettingUserFailed, this,
             &UserStorageGateway::reportFailureGettingUser);
+
+    connect(m_userStorageAccess, &IUserStorageAccess::profilePictureReady, this,
+            &UserStorageGateway::profilePictureReady);
 }
 
 void UserStorageGateway::getUser(const QString& authToken)
 {
     m_userStorageAccess->getUser(authToken);
+}
+
+void UserStorageGateway::getProfilePicture(const QString& authToken)
+{
+    m_userStorageAccess->getProfilePicture(authToken);
 }
 
 void UserStorageGateway::changeFirstName(const QString& authToken,

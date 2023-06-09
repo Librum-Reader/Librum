@@ -19,6 +19,32 @@ void UserStorageAccess::getUser(const QString& authToken)
             &UserStorageAccess::proccessGetUserResult);
 }
 
+void UserStorageAccess::getProfilePicture(const QString& authToken)
+{
+    QString endpoint = data::userProfilePictureEndpoint;
+    auto request = createRequest(endpoint, authToken);
+    auto pictureDownloadreply = m_networkAccessManager.get(request);
+
+    connect(pictureDownloadreply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Downloading profile picture");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                QByteArray replyData = reply->readAll();
+                emit profilePictureReady(replyData);
+
+                reply->deleteLater();
+            });
+}
+
 void UserStorageAccess::changeFirstName(const QString& authToken,
                                         const QString& newFirstName)
 {
