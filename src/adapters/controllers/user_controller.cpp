@@ -1,6 +1,8 @@
 #include "user_controller.hpp"
 #include <QBuffer>
 #include <QByteArray>
+#include <QDebug>
+#include <QImageReader>
 #include <QUrl>
 #include "tag.hpp"
 
@@ -147,10 +149,17 @@ QString UserController::getProfilePicture() const
 void UserController::setProfilePicture(const QString& path)
 {
     QUrl url(path);
-    QImage profilePicture(url.toLocalFile());
-    if(profilePicture.isNull() ||
-       profilePicture == m_userService->getProfilePicture())
+    QImageReader imageReader(url.path());
+    if(imageReader.canRead())
     {
+        qWarning() << "Provided profile picture is not an image";
+        return;
+    }
+
+    QImage profilePicture(url.path());
+    if(profilePicture.isNull())
+    {
+        qWarning() << "Failed reading provided profile picture";
         return;
     }
 

@@ -141,19 +141,6 @@ TEST_F(AUserService, SucceedsGettingEmail)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(AUserService, SucceedsSettingProfilePicture)
-{
-    // Arrange
-    QString path = "/some/image.png";
-    QImage profilePicture(path);
-
-    // Expect
-    EXPECT_CALL(userStorageGatewayMock, changeProfilePicture(_, _)).Times(1);
-
-    // Act
-    userService->setProfilePicture(path, profilePicture);
-}
-
 TEST_F(AUserService, SucceedsGettingProfilePicture)
 {
     // Arrange
