@@ -4,7 +4,6 @@ import QtQuick.Controls 2.15
 import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
-import Librum.globals 1.0
 import Librum.controllers 1.0
 
 
@@ -46,14 +45,14 @@ Item
                 clip: true
                 radius: width
                 antialiasing: true
-                color: Globals.profilePicture.length === 0 ? Style.colorDefaultProfilePicture : "transparent"
+                color: UserController.profilePicture.length === 0 ? Style.colorDefaultProfilePicture : "transparent"
                 
                 
                 Label
                 {
                     id: initials
                     anchors.centerIn: parent
-                    visible: !internal.profilePictureExists
+                    visible: UserController.profilePicture.length === 0
                     text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase()
                     font.pointSize: 12
                     font.bold: true
@@ -63,10 +62,10 @@ Item
                 Image
                 {
                     id: profileImage
-                    visible: internal.profilePictureExists
+                    visible: UserController.profilePicture.length > 0
                     anchors.centerIn: parent
                     Layout.leftMargin: 18
-                    source: Globals.profilePicture
+                    source: UserController.profilePicture
                     sourceSize.height: parent.height
                     fillMode: Image.PreserveAspectFit
                 }
@@ -120,12 +119,6 @@ Item
                 }
             }
         }
-    }
-    
-    QtObject
-    {
-        id: internal
-        property bool profilePictureExists: Globals.profilePicture.length > 0
     }
     
     

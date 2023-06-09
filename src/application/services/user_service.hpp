@@ -53,10 +53,13 @@ private:
     void saveUserToFile(const domain::entities::User& user);
     QDir getUserProfileDir() const;
     void saveProfilePictureToFile(QByteArray& data);
+    void saveProfilePictureToFile(const QString& path);
     QString getImageFormat(QByteArray& image) const;
+    void loadProfilePictureFromFile();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;
+    QString profilePictureFileName = "profilePicture";
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
     const int m_fetchChangesInverval = 15'000;

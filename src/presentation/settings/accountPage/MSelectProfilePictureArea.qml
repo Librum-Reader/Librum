@@ -4,13 +4,13 @@ import QtQuick.Controls 2.15
 import Qt.labs.platform 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Item
 {
     id: root
     property string image: ""
-    signal imageSelected()
     
     implicitWidth: 100
     implicitHeight: 100
@@ -35,11 +35,7 @@ Item
             id: dropArea
             anchors.fill: parent
             
-            onDropped: (drop) =>
-                       {
-                           root.image = drop.urls[0];
-                           root.imageSelected();
-                       }
+            onDropped: (drop) => root.image = drop.urls[0]
             
             /*
               The image which is displayed when the dropArea owns an image
@@ -49,7 +45,7 @@ Item
                 id: profilePicture
                 anchors.fill: parent
                 visible: internal.imageExists
-                source: root.image
+                source: root.image.length > 0 ? root.image : UserController.profilePicture
                 sourceSize.height: emptyDropArea.height
                 fillMode: Image.PreserveAspectFit
             }
@@ -148,6 +144,6 @@ Item
     QtObject
     {
         id: internal
-        property bool imageExists: root.image.length > 0
+        property bool imageExists: (root.image.length > 0) || (UserController.profilePicture.length > 0)
     }
 }
