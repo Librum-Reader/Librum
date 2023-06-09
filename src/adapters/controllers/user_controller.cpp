@@ -18,22 +18,25 @@ UserController::UserController(application::IUserService* userService) :
     connect(m_userService, &application::IUserService::finishedLoadingUser,
             this, &UserController::proccessUserLoadingResult);
 
+    connect(m_userService, &application::IUserService::profilePictureChanged,
+            this, &UserController::profilePictureChanged);
 
-    // tag insertion
+
+    // Tag insertion
     connect(m_userService, &application::IUserService::tagInsertionStarted,
             &m_userTagsModel, &data_models::UserTagsModel::startInsertingRow);
 
     connect(m_userService, &application::IUserService::tagInsertionEnded,
             &m_userTagsModel, &data_models::UserTagsModel::endInsertingRow);
 
-    // tag deletion
+    // Tag deletion
     connect(m_userService, &application::IUserService::tagDeletionStarted,
             &m_userTagsModel, &data_models::UserTagsModel::startDeletingRow);
 
     connect(m_userService, &application::IUserService::tagDeletionEnded,
             &m_userTagsModel, &data_models::UserTagsModel::endDeletingRow);
 
-    // tags changes
+    // Tags changes
     connect(m_userService, &application::IUserService::tagsChanged,
             &m_userTagsModel, &data_models::UserTagsModel::refreshRows);
 }
@@ -129,21 +132,10 @@ long UserController::getBookStorageLimit() const
     return m_userService->getBookStorageLimit();
 }
 
-QString UserController::getProfilePicture() const
+QString UserController::getProfilePicturePath() const
 {
-    auto profilePicture = m_userService->getProfilePicture();
-    if(profilePicture.isNull())
-        return QString("");
-
-
-    QByteArray byteArray;
-    QBuffer buffer(&byteArray);
-
-    buffer.open(QIODevice::WriteOnly);
-    profilePicture.save(&buffer, "png");
-    QString base64 = QString::fromUtf8(byteArray.toBase64());
-
-    return "data:image/png;base64," + base64;
+    auto path = m_userService->getProfilePicturePath();
+    return path.isEmpty() ? "" : "file://" + path;
 }
 
 void UserController::setProfilePicture(const QString& path)
@@ -164,8 +156,7 @@ void UserController::setProfilePicture(const QString& path)
         return;
     }
 
-    m_userService->setProfilePicture(path, profilePicture);
-    emit profilePictureChanged();
+    m_userService->setProfilePicturePath(url.path());
 }
 
 data_models::UserTagsModel* UserController::getUserTagsModel()
@@ -180,7 +171,6 @@ void UserController::proccessUserLoadingResult(bool success)
     emit emailChanged();
     emit usedBookStorageChanged();
     emit bookStorageLimitChanged();
-    emit profilePictureChanged();
 
     emit finishedLoadingUser(success);
 }

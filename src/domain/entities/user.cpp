@@ -64,14 +64,14 @@ void User::setBookStorageLimit(long newBookStorageLimit)
     m_bookStorageLimit = newBookStorageLimit;
 }
 
-const QImage& User::getProfilePicture() const
+const QString& User::getProfilePicturePath() const
 {
-    return m_profilePicture;
+    return m_profilePicturePath;
 }
 
-void User::setProfilePicture(const QImage& newProfilePicture)
+void User::setProfilePicturePath(const QString& path)
 {
-    m_profilePicture = newProfilePicture;
+    m_profilePicturePath = path;
 }
 
 const std::vector<Tag>& User::getTags() const
@@ -157,7 +157,7 @@ void User::clearData()
     m_firstName = "x";
     m_lastName = "y";
     m_email = "y";
-    m_profilePicture.fill(Qt::white);
+    m_profilePicturePath = "";
     m_tags.clear();
 }
 

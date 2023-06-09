@@ -34,9 +34,8 @@ public:
     virtual long getUsedBookStorage() const = 0;
     virtual long getBookStorageLimit() const = 0;
 
-    virtual QImage getProfilePicture() const = 0;
-    virtual void setProfilePicture(const QString& path,
-                                   const QImage& image) = 0;
+    virtual QString getProfilePicturePath() const = 0;
+    virtual void setProfilePicturePath(const QString& path) = 0;
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
@@ -45,6 +44,7 @@ public:
 
 signals:
     void finishedLoadingUser(bool success);
+    void profilePictureChanged();
     void tagInsertionStarted(int index);
     void tagInsertionEnded();
     void tagDeletionStarted(int index);

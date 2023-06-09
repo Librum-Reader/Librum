@@ -30,9 +30,8 @@ public:
     long getBookStorageLimit() const;
     void setBookStorageLimit(long newBookStorageLimit);
 
-
-    const QImage& getProfilePicture() const;
-    void setProfilePicture(const QImage& newProfilePicture);
+    const QString& getProfilePicturePath() const;
+    void setProfilePicturePath(const QString& path);
 
     const std::vector<Tag>& getTags() const;
     const Tag* getTagByName(const QString& tagName) const;
@@ -58,7 +57,7 @@ private:
     QString m_email;
     long m_usedBookStorage;
     long m_bookStorageLimit;
-    QImage m_profilePicture;
+    QString m_profilePicturePath;
     std::vector<Tag> m_tags;
 };
 

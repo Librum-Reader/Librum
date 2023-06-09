@@ -33,7 +33,7 @@ public:
     long getUsedBookStorage() const override;
     long getBookStorageLimit() const override;
 
-    QString getProfilePicture() const override;
+    QString getProfilePicturePath() const override;
     void setProfilePicture(const QString& path) override;
 
     data_models::UserTagsModel* getUserTagsModel() override;
