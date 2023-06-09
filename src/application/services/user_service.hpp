@@ -53,6 +53,7 @@ private:
     void saveUserToFile(const domain::entities::User& user);
     QDir getUserProfileDir() const;
     void saveProfilePictureToFile(QByteArray& data);
+    QString getImageFormat(QByteArray& image) const;
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

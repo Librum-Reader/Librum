@@ -113,31 +113,8 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
                                              const QString& path)
 {
     auto profilePicture = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+    addImagePartToMultiPart(profilePicture, path);
 
-    QFile* file = new QFile(QUrl(path).path());
-    if(!file->open(QIODevice::ReadOnly))
-    {
-        qWarning() << "Could not open new profile picture file: "
-                   << file->fileName();
-
-        profilePicture->deleteLater();
-        return;
-    }
-
-    // Make sure the file is released when the request finished
-    file->setParent(profilePicture);
-
-    QFileInfo fileInfo(path);
-
-    QHttpPart imagePart;
-    imagePart.setBodyDevice(file);
-    imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
-                        QVariant("image/" + fileInfo.suffix()));
-    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
-                        QVariant("form-data; name=\"image\"; filename=\"" +
-                                 file->fileName() + "\""));
-
-    profilePicture->append(imagePart);
 
     QUrl endpoint = data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
@@ -157,10 +134,6 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
                 {
                     api_error_helper::logErrorMessage(
                         reply, "Uploading profile picture");
-
-                    reply->deleteLater();
-                    profilePicture->deleteLater();
-                    return;
                 }
 
                 reply->deleteLater();
@@ -247,6 +220,31 @@ void UserStorageAccess::proccessGetUserResult()
 
     // Make sure to release the reply's memory
     reply->deleteLater();
+}
+
+void UserStorageAccess::addImagePartToMultiPart(QHttpMultiPart* multiPart,
+                                                const QString& imagePath)
+{
+    QFile* file = new QFile(QUrl(imagePath).path(), multiPart);
+    if(!file->open(QIODevice::ReadOnly))
+    {
+        qWarning() << "Could not open new profile picture file: "
+                   << file->fileName();
+
+        multiPart->deleteLater();
+        return;
+    }
+
+    QFileInfo fileInfo(imagePath);
+    QHttpPart imagePart;
+    imagePart.setBodyDevice(file);
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
+                        QVariant("image/" + fileInfo.suffix()));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
+                        QVariant("form-data; name=\"image\"; filename=\"" +
+                                 file->fileName() + "\""));
+
+    multiPart->append(imagePart);
 }
 
 QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
