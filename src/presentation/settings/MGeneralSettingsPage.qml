@@ -127,18 +127,22 @@ MFlickWrapper
         }
     }
     
-    MResetSettingsPopup
+    MWarningPopup
     {
         id: resetSettingsPopup
         x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - page.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - page.topPadding - 50)
+        visible: false
+        title: "Reset settings?"
+        message: "Resetting your settings is a permanent action, there\n will be no way to restore them!"
+        leftButtonText: "No, Keep"
+        rightButtonText: "Yes, Reset"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
         
-        onKeepChoosed: close()
-        onResetChoosed:
-        {
-            SettingsController.resetSettingGroup(SettingGroups.General);
-            close();
-        }
+        onOpenedChanged: if(opened) resetSettingsPopup.giveFocus()
+        onDecisionMade: close()
+        onRightButtonClicked: SettingsController.resetSettingGroup(SettingGroups.General)
     }
     
     QtObject
