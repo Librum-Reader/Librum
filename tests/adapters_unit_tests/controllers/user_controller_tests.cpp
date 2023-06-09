@@ -28,9 +28,8 @@ public:
     MOCK_METHOD(void, setEmail, (const QString&), (override));
     MOCK_METHOD(long, getUsedBookStorage, (), (const, override));
     MOCK_METHOD(long, getBookStorageLimit, (), (const, override));
-    MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
-    MOCK_METHOD(void, setProfilePicture, (const QString&, const QImage&),
-                (override));
+    MOCK_METHOD(QString, getProfilePicturePath, (), (const, override));
+    MOCK_METHOD(void, setProfilePicturePath, (const QString&), (override));
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));
@@ -354,46 +353,6 @@ TEST_F(AUserController, FailsSettingEmailIfItsTheSameAsCurrent)
     EXPECT_EQ(0, spy.count());
 }
 
-TEST_F(AUserController, SucceedsGettingProfilePicture)
-{
-    // Arrange
-    QImage image(50, 50, QImage::Format_ARGB32);
-
-    QString expectedResultStart = "data:image/png;base64,";
-
-
-    // Expect
-    EXPECT_CALL(userServiceMock, getProfilePicture())
-        .Times(1)
-        .WillOnce(Return(image));
-
-    // Act
-    QString result = userController->getProfilePicture();
-
-    // Assert
-    EXPECT_TRUE(result.startsWith(expectedResultStart));
-}
-
-TEST_F(AUserController, FailsGettingProfilePictureIfNoProfilePictureExists)
-{
-    // Arrange
-    QImage emptyImage("");
-
-    QString expectedResult = "";
-
-
-    // Expect
-    EXPECT_CALL(userServiceMock, getProfilePicture())
-        .Times(1)
-        .WillOnce(Return(emptyImage));
-
-    // Act
-    QString result = userController->getProfilePicture();
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
 TEST_F(AUserController, SucceedsGettingTagUuidForName)
 {
     // Arrange
@@ -440,7 +399,7 @@ TEST_F(AUserController, FailsSettingAProfilePictureIfPathIsInvalid)
     QString nonExistentPath = "some/path.png";
 
     // Expect
-    EXPECT_CALL(userServiceMock, setProfilePicture(_, _)).Times(0);
+    EXPECT_CALL(userServiceMock, setProfilePicturePath(_)).Times(0);
 
     // Act
     userController->setProfilePicture(nonExistentPath);

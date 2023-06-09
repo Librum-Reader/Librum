@@ -23,7 +23,7 @@ class IUserController : public QObject
                    usedBookStorageChanged CONSTANT)
     Q_PROPERTY(long bookStorageLimit READ getBookStorageLimit NOTIFY
                    bookStorageLimitChanged CONSTANT)
-    Q_PROPERTY(QString profilePicture READ getProfilePicture WRITE
+    Q_PROPERTY(QString profilePicture READ getProfilePicturePath WRITE
                    setProfilePicture NOTIFY profilePictureChanged)
     Q_PROPERTY(adapters::data_models ::UserTagsModel* tagsModel READ
                    getUserTagsModel CONSTANT)
@@ -51,7 +51,7 @@ public:
     virtual long getUsedBookStorage() const = 0;
     virtual long getBookStorageLimit() const = 0;
 
-    virtual QString getProfilePicture() const = 0;
+    virtual QString getProfilePicturePath() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
 
     virtual data_models::UserTagsModel* getUserTagsModel() = 0;

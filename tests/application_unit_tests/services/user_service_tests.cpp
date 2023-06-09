@@ -144,13 +144,13 @@ TEST_F(AUserService, SucceedsGettingEmail)
 TEST_F(AUserService, SucceedsGettingProfilePicture)
 {
     // Arrange
-    QImage profilePicture(50, 50, QImage::Format_ARGB32);
-    userService->setProfilePicture("/some/image.png", profilePicture);
+    QString path = "/some/image.png";
+    userService->setProfilePicturePath(path);
 
-    const auto& expectedResult = profilePicture;
+    const auto& expectedResult = path;
 
     // Act
-    auto result = userService->getProfilePicture();
+    auto result = userService->getProfilePicturePath();
 
     // Assert
     EXPECT_EQ(expectedResult, result);
