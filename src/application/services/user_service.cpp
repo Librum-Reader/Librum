@@ -131,6 +131,9 @@ QImage UserService::getProfilePicture() const
 
 void UserService::setProfilePicture(const QString& path, const QImage& image)
 {
+    if(image == m_user.getProfilePicture())
+        return;
+
     m_user.setProfilePicture(image);
     m_userStorageGateway->changeProfilePicture(m_authenticationToken, path);
 }
