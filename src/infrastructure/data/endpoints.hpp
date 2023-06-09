@@ -26,6 +26,8 @@ inline const QString getUsedBookStorageEndpoint { domain +
 // User storage
 inline const QString userGetEndpoint { domain + "/api/user" };
 inline const QString userPatchEndpoint { domain + "/api/user" };
+inline const QString userProfilePictureEndpoint { domain +
+                                                  "/api/user/profilePicture" };
 
 // Tag storage
 inline const QString tagUpdateEndpoint { domain + "/api/tag" };

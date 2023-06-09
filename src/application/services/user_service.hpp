@@ -31,13 +31,12 @@ public:
     long getBookStorageLimit() const override;
 
     QImage getProfilePicture() const override;
-    void setProfilePicture(const QImage& image) override;
+    void setProfilePicture(const QString& path, const QImage& image) override;
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;
     bool deleteTag(const QUuid& uuid) override;
     bool renameTag(const QUuid& uuid, const QString& newName) override;
-
 
 public slots:
     void setupUserData(const QString& token, const QString& email) override;
@@ -52,6 +51,8 @@ private:
     bool userIsLoggedIn();
     bool tryLoadingUserFromFile();
     void saveUserToFile(const domain::entities::User& user);
+    QDir getUserProfileDir() const;
+    void saveProfilePictureToFile(QByteArray& data);
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

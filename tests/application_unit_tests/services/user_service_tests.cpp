@@ -18,6 +18,8 @@ class UserStorageGatewayMock : public IUserStorageGateway
 {
 public:
     MOCK_METHOD(void, getUser, (const QString& authToken), (override));
+    MOCK_METHOD(void, getProfilePicture, (const QString& authToken),
+                (override));
     MOCK_METHOD(void, changeFirstName,
                 (const QString& authToken, const QString& newFirstName),
                 (override));
@@ -28,8 +30,7 @@ public:
                 (const QString& authToken, const QString& newFirstName),
                 (override));
     MOCK_METHOD(void, changeProfilePicture,
-                (const QString& authToken, const QImage& newPicture),
-                (override));
+                (const QString& authToken, const QString& path), (override));
     MOCK_METHOD(void, deleteTag, (const QString&, const QUuid&), (override));
     MOCK_METHOD(void, renameTag,
                 (const QString&, const QUuid&, const QString& newName),
@@ -143,20 +144,21 @@ TEST_F(AUserService, SucceedsGettingEmail)
 TEST_F(AUserService, SucceedsSettingProfilePicture)
 {
     // Arrange
-    QImage profilePicture("/some/image.png");
+    QString path = "/some/image.png";
+    QImage profilePicture(path);
 
     // Expect
     EXPECT_CALL(userStorageGatewayMock, changeProfilePicture(_, _)).Times(1);
 
     // Act
-    userService->setProfilePicture(profilePicture);
+    userService->setProfilePicture(path, profilePicture);
 }
 
 TEST_F(AUserService, SucceedsGettingProfilePicture)
 {
     // Arrange
     QImage profilePicture(50, 50, QImage::Format_ARGB32);
-    userService->setProfilePicture(profilePicture);
+    userService->setProfilePicture("/some/image.png", profilePicture);
 
     const auto& expectedResult = profilePicture;
 

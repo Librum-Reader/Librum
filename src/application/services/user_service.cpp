@@ -1,5 +1,7 @@
 #include "user_service.hpp"
+#include <QBuffer>
 #include <QDebug>
+#include <QImageReader>
 #include "automatic_login_helper.hpp"
 #include "tag.hpp"
 
@@ -15,6 +17,9 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
+
+    connect(m_userStorageGateway, &IUserStorageGateway::profilePictureReady,
+            this, &UserService::saveProfilePictureToFile);
 
     // Tag insertion
     connect(&m_user, &User::tagInsertionStarted, this,
@@ -39,6 +44,7 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
+                m_userStorageGateway->getProfilePicture(m_authenticationToken);
             });
 }
 
@@ -123,10 +129,43 @@ QImage UserService::getProfilePicture() const
     return m_user.getProfilePicture();
 }
 
-void UserService::setProfilePicture(const QImage& image)
+void UserService::setProfilePicture(const QString& path, const QImage& image)
 {
     m_user.setProfilePicture(image);
-    m_userStorageGateway->changeProfilePicture(m_authenticationToken, image);
+    m_userStorageGateway->changeProfilePicture(m_authenticationToken, path);
+}
+
+void UserService::saveProfilePictureToFile(QByteArray& data)
+{
+    // Conversion necessary since QImageReader can only read from QBuffer
+    QBuffer buffer(&data);
+    buffer.open(QIODevice::ReadOnly);
+    QImageReader imageReader(&buffer);
+    QString imageFormat = imageReader.format();
+    buffer.close();
+    if(imageFormat.isEmpty())
+    {
+        qWarning()
+            << "The format of downloaded profile picture is unsupported or "
+               "the image cannot be read";
+        return;
+    }
+
+    auto destDir = getUserProfileDir();
+    destDir.mkpath(destDir.path());
+    auto destination = destDir.path() + "/profilePicture." + imageFormat;
+
+    QFile file(destination);
+    if(!file.open(QIODevice::WriteOnly))
+    {
+        qWarning() << "Could not open downloaded profile picture file";
+        return;
+    }
+
+    file.write(data);
+
+    // Manually close to make sure the data is written to file before continuing
+    file.close();
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const
@@ -254,6 +293,15 @@ void UserService::clearUserData()
     m_user.clearData();
     m_authenticationToken.clear();
     m_rememberUser = false;
+}
+
+QDir UserService::getUserProfileDir() const
+{
+    auto applicationDir = QDir::current().path();
+    auto userProfileName = QString::number(qHash(m_user.getEmail()));
+    auto folderName = applicationDir + "/userProfiles/" + userProfileName;
+
+    return QDir(folderName);
 }
 
 }  // namespace application::services

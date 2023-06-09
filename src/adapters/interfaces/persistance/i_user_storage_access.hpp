@@ -19,6 +19,7 @@ public:
     virtual ~IUserStorageAccess() noexcept = default;
 
     virtual void getUser(const QString& authToken) = 0;
+    virtual void getProfilePicture(const QString& authToken) = 0;
     virtual void changeFirstName(const QString& authToken,
                                  const QString& newFirstName) = 0;
     virtual void changeLastName(const QString& authToken,
@@ -26,7 +27,7 @@ public:
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
     virtual void changeProfilePicture(const QString& authToken,
-                                      const QImage& newProfilePicture) = 0;
+                                      const QString& path) = 0;
     virtual void deleteTag(const QString& authToken, const QString& uuid) = 0;
     virtual void renameTag(const QString& authToken,
                            const QJsonObject& bookForUpdate) = 0;
@@ -36,6 +37,7 @@ signals:
                    const QString& email, long usedBookStorage,
                    long bookStorageLimit, const QJsonArray& tags);
     void gettingUserFailed();
+    void profilePictureReady(QByteArray& data);
 };
 
 }  // namespace adapters

@@ -162,6 +162,7 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
                                                       "Uploading book cover");
 
                     reply->deleteLater();
+                    bookCover->deleteLater();
                     return;
                 }
 

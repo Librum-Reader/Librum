@@ -14,7 +14,7 @@ public:
     UserStorageGateway(IUserStorageAccess* userStorageAccess);
 
     void getUser(const QString& authToken) override;
-
+    void getProfilePicture(const QString& authToken) override;
     void changeFirstName(const QString& authToken,
                          const QString& newFirstName) override;
     void changeLastName(const QString& authToken,
@@ -22,7 +22,7 @@ public:
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
     void changeProfilePicture(const QString& authToken,
-                              const QImage& newPicture) override;
+                              const QString& path) override;
     void deleteTag(const QString& authToken, const QUuid& uuid) override;
     void renameTag(const QString& authToken, const QUuid& uuid,
                    const QString& newName) override;
