@@ -413,6 +413,10 @@ MFlickWrapper
         {
             Globals.profilePicture = profilePictureArea.image;
             UserController.profilePicture = profilePictureArea.image;
+            
+            // Reset it to make sure that if the app declines the picture, it
+            // won't still stay in the profile picture area
+            profilePictureArea.image = null;
         }
         
         internal.unsavedChanges = false;

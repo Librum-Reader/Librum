@@ -19,7 +19,8 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             this, &UserService::proccessUserInformation);
 
     connect(m_userStorageGateway, &IUserStorageGateway::profilePictureReady,
-            this, &UserService::saveProfilePictureToFile);
+            this,
+            QOverload<QByteArray&>::of(&UserService::saveProfilePictureToFile));
 
     // Tag insertion
     connect(&m_user, &User::tagInsertionStarted, this,
@@ -71,6 +72,7 @@ void UserService::loadUser(bool rememberUser)
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
+                m_userStorageGateway->getProfilePicture(m_authenticationToken);
 
                 // Free the timer's memory
                 auto reply = qobject_cast<QTimer*>(sender());
@@ -135,6 +137,7 @@ void UserService::setProfilePicture(const QString& path, const QImage& image)
         return;
 
     m_user.setProfilePicture(image);
+    saveProfilePictureToFile(path);
     m_userStorageGateway->changeProfilePicture(m_authenticationToken, path);
 }
 
@@ -142,9 +145,9 @@ void UserService::saveProfilePictureToFile(QByteArray& data)
 {
     auto userDir = getUserProfileDir();
     auto imageFormat = getImageFormat(data);
-    auto destination = userDir.path() + "/profilePicture." + imageFormat;
+    auto path = userDir.filePath(profilePictureFileName + "." + imageFormat);
 
-    QFile file(destination);
+    QFile file(path);
     if(!file.open(QIODevice::WriteOnly))
     {
         qWarning() << "Could not open downloaded profile picture";
@@ -153,8 +156,24 @@ void UserService::saveProfilePictureToFile(QByteArray& data)
 
     file.write(data);
 
-    // Manually close to make sure the data is written to file before continuing
+    // Manually close to make sure the data is written to file before
+    // continuing
     file.close();
+}
+
+void UserService::saveProfilePictureToFile(const QString& path)
+{
+    QFile profilePicture(QUrl(path).toLocalFile());
+    if(!profilePicture.open(QFile::ReadOnly))
+    {
+        qWarning() << "Could not open new profile picture";
+        return;
+    }
+
+    // Make sure thata 'readAll()' is stored to a variable to be an lvalue, else
+    // it will bind to the QString overload and the method will call itself.
+    auto data = profilePicture.readAll();
+    saveProfilePictureToFile(data);
 }
 
 QString UserService::getImageFormat(QByteArray& image) const
@@ -173,6 +192,18 @@ QString UserService::getImageFormat(QByteArray& image) const
     }
 
     return format;
+}
+
+void UserService::loadProfilePictureFromFile()
+{
+    auto userDir = getUserProfileDir();
+    auto matchingFiles = userDir.entryList({ profilePictureFileName + ".*" });
+    if(matchingFiles.isEmpty())
+        return;
+
+    QString path = userDir.absoluteFilePath(matchingFiles.first());
+    QImage profilePicture(path);
+    m_user.setProfilePicture(profilePicture);
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const
@@ -241,6 +272,9 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     m_user.setBookStorageLimit(user.getBookStorageLimit());
     for(const auto& tag : user.getTags())
         m_user.addTag(tag);
+
+    if(m_user.getProfilePicture().isNull())
+        loadProfilePictureFromFile();
 
     emit finishedLoadingUser(true);
     emit bookStorageDataUpdated(user.getUsedBookStorage(),

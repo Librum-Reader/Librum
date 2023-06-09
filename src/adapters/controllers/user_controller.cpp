@@ -150,9 +150,10 @@ void UserController::setProfilePicture(const QString& path)
 {
     QUrl url(path);
     QImageReader imageReader(url.path());
-    if(imageReader.canRead())
+    if(!QImageReader::supportedImageFormats().contains(imageReader.format()) ||
+       imageReader.format() == "pdf")
     {
-        qWarning() << "Provided profile picture is not an image";
+        qWarning() << "Provided profile picture format is not supported";
         return;
     }
 
@@ -179,6 +180,7 @@ void UserController::proccessUserLoadingResult(bool success)
     emit emailChanged();
     emit usedBookStorageChanged();
     emit bookStorageLimitChanged();
+    emit profilePictureChanged();
 
     emit finishedLoadingUser(success);
 }
