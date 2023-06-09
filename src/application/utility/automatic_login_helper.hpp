@@ -191,7 +191,7 @@ inline void saveUserData(const UserData& userData)
         return;
 
     auto jsonUserData = existingAuthData.value();
-    appendUserDataToJsonObject(jsonUserData, std::move(userData));
+    appendUserDataToJsonObject(jsonUserData, userData);
 
     saveDataToAutomaticLoginFile(jsonUserData);
 }
