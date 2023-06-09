@@ -37,14 +37,11 @@ public:
     virtual QImage getProfilePicture() const = 0;
     virtual void setProfilePicture(const QString& path,
                                    const QImage& image) = 0;
-    virtual void saveProfilePictureToFile(QByteArray& data) = 0;
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
     virtual bool deleteTag(const QUuid& uuid) = 0;
     virtual bool renameTag(const QUuid& uuid, const QString& newName) = 0;
-
-    virtual QDir getUserProfileDir() const = 0;
 
 signals:
     void finishedLoadingUser(bool success);

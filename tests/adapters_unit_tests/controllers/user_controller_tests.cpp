@@ -31,7 +31,6 @@ public:
     MOCK_METHOD(QImage, getProfilePicture, (), (const, override));
     MOCK_METHOD(void, setProfilePicture, (const QString&, const QImage&),
                 (override));
-    MOCK_METHOD(void, saveProfilePictureToFile, (QByteArray&), (override));
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));
@@ -40,7 +39,6 @@ public:
     MOCK_METHOD(QUuid, addTag, (const domain::entities::Tag&), (override));
     MOCK_METHOD(bool, deleteTag, (const QUuid&), (override));
     MOCK_METHOD(bool, renameTag, (const QUuid&, const QString&), (override));
-    MOCK_METHOD(QDir, getUserProfileDir, (), (const, override));
 };
 
 struct AUserController : public ::testing::Test

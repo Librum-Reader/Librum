@@ -137,6 +137,7 @@ void UserService::setProfilePicture(const QString& path, const QImage& image)
 
 void UserService::saveProfilePictureToFile(QByteArray& data)
 {
+    // Conversion necessary since QImageReader can only read from QBuffer
     QBuffer buffer(&data);
     buffer.open(QIODevice::ReadOnly);
     QImageReader imageReader(&buffer);
