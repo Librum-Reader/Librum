@@ -128,7 +128,7 @@ These functions include:
 - No-login book reading
 - Sharing / Priting pages
 
-If you are missing any feature, feel free to leave a feature request ticket!
+If you are missing any feature, feel free to leave a feature request ticket.
 
 <br><br>
 
