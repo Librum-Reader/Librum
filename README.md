@@ -43,7 +43,8 @@ Dark mode support. Need we say more?
 
 Setup and manage your own library
 
-https://user-images.githubusercontent.com/69865187/204820315-4fccb311-8709-486f-8be8-5277a2bc3be5.mp4
+![HomeScreenDark](https://github.com/Librum-Reader/Librum/assets/69865187/ea94fc68-1bf0-4933-8d80-43a57c6590c5)
+
 <br>
 
 # Documentation
