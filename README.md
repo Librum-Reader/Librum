@@ -1,53 +1,61 @@
-# Librum
+﻿# Librum
 
-Librum is an application designed to make reading <b>enjoyable</b> and <b>straightforward</b> for you.
+Librum is an application designed to make reading <b>enjoyable</b> and <b>straightforward</b> for everyone.
 
-It's more than just an e-book reader. With Librum, you can manage your own online library and access it from all your devices at any time. It offers features like note-taking, bookmarking, highlighting, while being able to customise the application to look and feel exactly how you want it to. 
-Librum also provides free access to over 70,000 books and your reading statistics while being free and completely open source.
+It's not **just** an e-book reader. With Librum, you can manage your own online library and access it from any device anytime, anywhere. It has features like note-taking, bookmarking, and highlighting, while offering customization to make it as personal as you want!
+ 
+Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
 <br>
-<b>Note</b>: Librum is still in development, the servers are <b>not</b> public, and thus Librum is not yet available for public use.
+<b>Note</b>: Librum is still in development, the servers are <b>not</b> public. This means Librum is not yet available for public use.
+
 An alpha release will be available soon, bringing the servers online and making the application available to end users. 
 
 # Preview
 
+The login and starting page of Librum
+
 ![login_screen](https://user-images.githubusercontent.com/69865187/218166838-c2cad42a-d1dd-4a2a-a110-411368f7ff65.png)
-Your entry-point to Librum
+
 
 <br>
+
+A simple and modern interface that removes any distractions and clutter
 
 ![book_reading](https://user-images.githubusercontent.com/69865187/218166898-9054e579-8cbf-460e-9f35-6178e8666c71.png)
-Enjoy a simple and clean look while reading
+
 
 <br>
+
+Customize Librum to make it personal to you
 
 ![appearance_settings](https://user-images.githubusercontent.com/69865187/218166919-162da3ed-e5da-4db6-9c12-e9913c374c11.png)
-Make the application look and feel the way you want
+
 
 <br>
+
+Dark mode support. Need we say more?
 
 ![about_settings_dark](https://user-images.githubusercontent.com/69865187/218176878-f621669f-9d20-4f92-a9d5-ebb75e877218.png)
-Enjoy a relaxing dark mode
+
 
 <br>
-
-https://user-images.githubusercontent.com/69865187/204820315-4fccb311-8709-486f-8be8-5277a2bc3be5.mp4
 
 Setup and manage your own library
 
+https://user-images.githubusercontent.com/69865187/204820315-4fccb311-8709-486f-8be8-5277a2bc3be5.mp4
 <br>
-
 
 # Documentation
 
-For documentation go to [Librum's github-wiki](https://github.com/Librum-Reader/Librum/wiki)
+For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/Librum/wiki)
 
 <br>
 
 # Donations
 
 If you like the Librum project, consider donating to the opensource developers at https://www.patreon.com/librumreader.<br><br>
-As a team of opensource developers we rely on donations from the community to be able to continue working on projects like Librum. Any help is greatly appreciated.
+As a team of opensource developers we rely on donations to continue working on projects like Librum. All help is greatly appreciated.
 
 <br>
 
@@ -73,18 +81,17 @@ For business related contact, reach out to us here: contact@librumreader.com
 # Details
 
 ### Supported platforms
-Part of Librum's aim, is to remove the boundary of reading on different devices, no matter where you are or which device you use, you can always continue your book with Librum, since Librum is <b>cross platform</b>.<br>
+Part of Librum's aim is to work on **any** platform. No matter where you are or which device you use, you can always continue your book with Librum, as it is <b>cross platform</b>.<br>
 We support:
 - Windows
 - GNU/Linux
 - MacOS
 - IOS
 - Android
-
 <br>
 
 ### Supported formats
-No matter what book you want to read, it will work with Librum, since Librum supports <b>all</b> major book formats,<br>
+No matter what file type you have, you can read it on Librum, since we support <b>all</b> major book formats,<br>
 including:
 - PDF
 - PS
@@ -107,43 +114,44 @@ and <b>much more</b>.
 <br>
 
 ### Features
-Librum's objective is to make your reading more <b>productive</b>; to that end, we provide you with a variety of functions that you can access via a <b>simple</b> and <b>straightforward</b> interface.<br>
-These functions include:
+Librum's objective is to make your reading more <b>productive</b>; to that end, we provide you with a variety of features that you can access via a <b>simple</b> and <b>straightforward</b> interface.<br>
+These features include:
 - A modern e-reader
-- Creating your personalized library
-- Book meta-data editing
+- Creating a personalized library
+- Meta-data editing
 - A free in-app bookstore with more than 60.000 books
 - Book syncing across all of your devices
 - Highlighting
-- Note taking
+- Note-taking
 - Bookmarking
-- Searching through
+- Extensive search
 - Tags
 - TTS (Text to speech)
 - Automated page scrolling
-- Syncing with 3rd parties (Google drive, dropbox, nextcloud)
+- Syncing with third parties (Google drive, Dropbox, Nextcloud)
 - Custom plugins
-- Appearance and behaviour customization
-- Your reading statistics
+- Unlimited customization
+- Personalized reading statistics
 - No-login book reading
-- Sharing / Priting pages
+- Sharing / Printing pages
 
-If you are missing any feature, feel free to leave a feature request ticket!
+Want a new feature? Feel free to leave a feature request ticket!
 
 <br><br>
 
 # Getting started
 
-Instructions to get Librum up and running in your environment.
+Here's how to get Librum up and running in your environment.
 
-<b>Note</b>: Librum currently relies on KDE's infrastructure for okular. This will change soon, however for the time being, Librum and Okular may conflict.
-If there is an issue with the Librum installation, consider temporarily uninstalling okular. 
+<b>Note</b>: Librum currently relies on KDE's infrastructure for Okular. This will change soon, however for now, Librum and Okular may conflict.
+
+If there is an issue with the Librum installation, consider temporarily uninstalling Okular. 
 <br>
 <br>
 
 ## For GNU/Linux
 ### Foreword
-Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary to run Librum. If you are on a Linux distribution that uses KDE Plasma, you are good to go; else you will need to download the dependencies.
+Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary to run Librum. If you are on a Linux distribution that uses KDE Plasma, you are good to go! If not, you will need to download the dependencies.
 
 <br>
 
@@ -174,12 +182,12 @@ sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake q
 
 ### Prerequisites for other distros
 If you are running on another, non-kde-plasma distro which isn't Ubuntu, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed in the "Prerequisites for Ubuntu Users" section, but they might be called differently in your package manager. <br><br>
-If you manage to build Librum on a distro that is not listed here, feel free to open a pull request with the instructions to build it on your distro.
+If you manage to build Librum on a distro that is not listed here,  please open a pull request with the instructions to build it on your distro to help others with the same setup.
 
 <br>
 
 ### Installation
-Once you have installed the necessary dependencies, go ahead and build Librum by following the steps below.
+Once you have installed the necessary dependencies, build Librum by following the steps below:
 
 <br>
 
@@ -202,11 +210,11 @@ Once you have installed the necessary dependencies, go ahead and build Librum by
     ```
 5. Build the project
     ```sh
-    make -j4
+    cmake --build .
     ```
 6. Install the files
     ```sh
-    sudo make install
+    cmake --install .
     ```
 7. Run the app
     ```sh
@@ -218,7 +226,7 @@ Once you have installed the necessary dependencies, go ahead and build Librum by
 <br>
 
 ## For Windows
-Not yet officially supported. Support coming soon!
+Support coming soon!
 
 ## For macOS
-Not yet officially supported. Support coming soon!
+Support coming soon!
