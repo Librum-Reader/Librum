@@ -159,6 +159,11 @@ void UserController::setProfilePicture(const QString& path)
     m_userService->setProfilePicturePath(url.path());
 }
 
+void UserController::deleteProfilePicture()
+{
+    m_userService->deleteProfilePicture();
+}
+
 data_models::UserTagsModel* UserController::getUserTagsModel()
 {
     return &m_userTagsModel;
