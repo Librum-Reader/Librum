@@ -53,6 +53,7 @@ public:
 
     virtual QString getProfilePicturePath() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
+    virtual void deleteProfilePicture() = 0;
 
     virtual data_models::UserTagsModel* getUserTagsModel() = 0;
 

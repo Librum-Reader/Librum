@@ -141,6 +141,30 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
             });
 }
 
+void UserStorageAccess::deleteProfilePicture(const QString& authToken)
+{
+    QString endpoint = data::userProfilePictureEndpoint;
+    auto request = createRequest(endpoint, authToken);
+    auto pictureDeleteReply =
+        m_networkAccessManager.sendCustomRequest(request, "DELETE");
+
+    connect(pictureDeleteReply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Deleting profile picture");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                reply->deleteLater();
+            });
+}
+
 void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 {
     QString endPoint = data::tagDeletionEndpoint + "/" + uuid;

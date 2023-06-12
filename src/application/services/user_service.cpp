@@ -147,11 +147,30 @@ void UserService::setProfilePicturePath(const QString& path)
     updateProfilePictureUI(savedPic);
 }
 
+void UserService::deleteProfilePicture()
+{
+    auto userDir = getUserProfileDir();
+
+    QString fullProfilePictureName = getFullProfilePictureName();
+    if(fullProfilePictureName.isEmpty())
+        return;
+
+    QString path = userDir.absoluteFilePath(fullProfilePictureName);
+
+    QFile file(path);
+    file.remove();
+
+    m_user.setProfilePicturePath("");
+    updateProfilePictureUI("");
+
+    m_userStorageGateway->deleteProfilePicture(m_authenticationToken);
+}
+
 QString UserService::saveProfilePictureToFile(QByteArray& data)
 {
     auto userDir = getUserProfileDir();
     auto imageFormat = getImageFormat(data);
-    auto path = userDir.filePath(profilePictureFileName + "." + imageFormat);
+    auto path = userDir.filePath(m_profilePictureFileName + "." + imageFormat);
 
     QFile file(path);
     if(!file.open(QIODevice::WriteOnly))
@@ -205,11 +224,12 @@ QString UserService::getImageFormat(QByteArray& image) const
 void UserService::loadProfilePictureFromFile()
 {
     auto userDir = getUserProfileDir();
-    auto matchingFiles = userDir.entryList({ profilePictureFileName + ".*" });
-    if(matchingFiles.isEmpty())
+
+    QString fullProfilePictureName = getFullProfilePictureName();
+    if(fullProfilePictureName.isEmpty())
         return;
 
-    QString path = userDir.absoluteFilePath(matchingFiles.first());
+    QString path = userDir.absoluteFilePath(fullProfilePictureName);
     m_user.setProfilePicturePath(path);
 }
 
@@ -222,6 +242,17 @@ void UserService::updateProfilePictureUI(const QString& path)
 
     m_user.setProfilePicturePath(path);
     emit profilePictureChanged();
+}
+
+QString UserService::getFullProfilePictureName()
+{
+    auto userDir = getUserProfileDir();
+    auto matchingFiles = userDir.entryList({ m_profilePictureFileName + ".*" });
+
+    if(matchingFiles.isEmpty())
+        return "";
+
+    return matchingFiles.first();
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const

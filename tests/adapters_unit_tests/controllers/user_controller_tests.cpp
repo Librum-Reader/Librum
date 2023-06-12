@@ -30,6 +30,7 @@ public:
     MOCK_METHOD(long, getBookStorageLimit, (), (const, override));
     MOCK_METHOD(QString, getProfilePicturePath, (), (const, override));
     MOCK_METHOD(void, setProfilePicturePath, (const QString&), (override));
+    MOCK_METHOD(void, deleteProfilePicture, (), (override));
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));

@@ -35,6 +35,7 @@ public:
 
     QString getProfilePicturePath() const override;
     void setProfilePicture(const QString& path) override;
+    void deleteProfilePicture() override;
 
     data_models::UserTagsModel* getUserTagsModel() override;
 
