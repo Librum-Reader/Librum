@@ -33,6 +33,8 @@ public:
     QString getProfilePicturePath() const override;
     void setProfilePicturePath(const QString& path) override;
 
+    void deleteProfilePicture() override;
+
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;
     bool deleteTag(const QUuid& uuid) override;
@@ -57,10 +59,11 @@ private:
     QString getImageFormat(QByteArray& image) const;
     void loadProfilePictureFromFile();
     void updateProfilePictureUI(const QString& path);
+    QString getFullProfilePictureName();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;
-    QString profilePictureFileName = "profilePicture";
+    QString m_profilePictureFileName = "profilePicture";
     QString m_authenticationToken;
     QTimer m_fetchChangesTimer;
     const int m_fetchChangesInverval = 15'000;

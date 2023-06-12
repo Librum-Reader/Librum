@@ -55,6 +55,11 @@ void UserStorageGateway::changeProfilePicture(const QString& authToken,
     m_userStorageAccess->changeProfilePicture(authToken, path);
 }
 
+void UserStorageGateway::deleteProfilePicture(const QString& authToken)
+{
+    m_userStorageAccess->deleteProfilePicture(authToken);
+}
+
 void UserStorageGateway::deleteTag(const QString& authToken, const QUuid& uuid)
 {
     m_userStorageAccess->deleteTag(authToken,

@@ -37,6 +37,8 @@ public:
     virtual QString getProfilePicturePath() const = 0;
     virtual void setProfilePicturePath(const QString& path) = 0;
 
+    virtual void deleteProfilePicture() = 0;
+
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
     virtual bool deleteTag(const QUuid& uuid) = 0;

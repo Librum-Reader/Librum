@@ -31,6 +31,8 @@ public:
                 (override));
     MOCK_METHOD(void, changeProfilePicture,
                 (const QString& authToken, const QString& path), (override));
+    MOCK_METHOD(void, deleteProfilePicture, (const QString& authToken),
+                (override));
     MOCK_METHOD(void, deleteTag, (const QString&, const QUuid&), (override));
     MOCK_METHOD(void, renameTag,
                 (const QString&, const QUuid&, const QString& newName),
