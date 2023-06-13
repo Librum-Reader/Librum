@@ -1,0 +1,42 @@
+# Runs all tests
+name: Test
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - dev/develop
+      - main
+  pull_request:
+    branches:
+      - dev/develop
+      - main
+
+    
+    
+    
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install tools
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build
+      
+      - name: Install dependencies
+        run: sudo apt-get install -y build-essential extra-cmake-modules qtbase5-dev qt5-qmake qtquickcontrols2-5-dev qtdeclarative5-dev qml-module-qtquick-controls2 libkf5parts-dev libkf5crash-dev libkf5textwidgets-dev libkf5archive-dev libkf5threadweaver-dev libkf5activities-dev libqt5svg5-dev libphonon4qt5-dev libqt5texttospeech5-dev zlib1g-dev libkf5pty-dev qtdeclarative5-private-dev qtbase5-private-dev qml-module-qtquick-shapes qml-module-qt-labs-qmlmodels qml-module-qt-labs-settings qml-module-qt-labs-platform libpoppler-qt5-dev qml-module-qtquick-controls qml-module-qtquick-layouts qml-module-qtquick-window2
+          
+      - name: Build
+        run: |
+          mkdir build-Release
+          cd build-Release
+          cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON ..
+          cmake --build .
+          
+      - name: Run tests
+        run: |
+          ./domain_unit_tests
+          ./application_unit_tests
+          ./adapters_unit_tests
