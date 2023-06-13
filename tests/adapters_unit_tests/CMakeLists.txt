@@ -58,3 +58,6 @@ target_include_directories(adapters_unit_tests
 
 target_compile_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-O0;-g")
 target_link_options(adapters_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")
+
+add_test(NAME AdapterUnitTests 
+         COMMAND ${PROJECT_BINARY_DIR}/adapters_unit_tests)

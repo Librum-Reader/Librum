@@ -33,3 +33,6 @@ target_link_libraries(domain_unit_tests
 
 target_compile_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-O0;-g")
 target_link_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS}")
+
+add_test(NAME DomainUnitTests 
+         COMMAND ${PROJECT_BINARY_DIR}/domain_unit_tests)

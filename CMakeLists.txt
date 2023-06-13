@@ -11,7 +11,6 @@ option(ENABLE_COVERAGE OFF)
 option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
 
-
 # Create a set of warnings
 string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;"
                               "-Wunused;-Woverloaded-virtual;-Wpedantic;-Wmissing-include-dirs;"
@@ -54,6 +53,7 @@ add_subdirectory(src/)
 
 # Tests
 if(BUILD_TESTS)
+    include(CTest)
     add_subdirectory(libs/googletest)
     add_subdirectory(tests/)
 endif()
