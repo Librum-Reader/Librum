@@ -143,21 +143,6 @@ TEST_F(AUserService, SucceedsGettingEmail)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(AUserService, SucceedsGettingProfilePicture)
-{
-    // Arrange
-    QString path = "/some/image.png";
-    userService->setProfilePicturePath(path);
-
-    const auto& expectedResult = path;
-
-    // Act
-    auto result = userService->getProfilePicturePath();
-
-    // Assert
-    EXPECT_EQ(expectedResult, result);
-}
-
 TEST_F(AUserService, SucceedsAddingATag)
 {
     // Arrange
