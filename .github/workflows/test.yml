@@ -39,6 +39,5 @@ jobs:
           
       - name: Run tests
         run: |
-          ./domain_unit_tests
-          ./application_unit_tests
-          ./adapters_unit_tests
+          cd build-Release
+          ctest
