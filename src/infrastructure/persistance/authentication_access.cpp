@@ -81,6 +81,36 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
             });
 }
 
+void AuthenticationAccess::checkIfEmailConfirmed(const QString& email)
+{
+    auto request =
+        createRequest(data::checkIfEmailConfirmedEndpoint + "/" + email);
+
+    auto reply = m_networkAccessManager.get(request);
+
+    // Handle registration result and release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Checking if email is confirmed");
+
+                    emit emailConfirmationCheckFinished(false);
+                    reply->deleteLater();
+                    return;
+                }
+
+                bool emailConfirmed =
+                    reply->readAll().compare("true", Qt::CaseInsensitive) == 0;
+                emit emailConfirmationCheckFinished(emailConfirmed);
+                reply->deleteLater();
+            });
+}
+
 QNetworkRequest AuthenticationAccess::createRequest(QUrl url)
 {
     QNetworkRequest result { url };

@@ -4,11 +4,14 @@
 namespace infrastructure::data
 {
 
-inline const QString domain { "https://librum-dev.azurewebsites.net" };
+inline const QString domain { "https://localhost:7084" };
 
 // Authentication
 inline const QString authenticationEndpoint { domain + "/api/login" };
 inline const QString registrationEndpoint { domain + "/api/register" };
+inline const QString checkIfEmailConfirmedEndpoint {
+    domain + "/api/checkIfEmailConfirmed"
+};
 
 // Book storage
 inline const QString bookCreationEndpoint { domain + "/api/book" };

@@ -21,6 +21,7 @@ public:
     void registerUser(const QString& firstName, const QString& lastName,
                       const QString& email, QString password,
                       bool keepUpdated) override;
+    void checkIfEmailConfirmed(const QString& email) override;
 
 private:
     application::IAuthenticationService* m_authenticationService;

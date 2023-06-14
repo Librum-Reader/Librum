@@ -27,6 +27,10 @@ AuthenticationController::AuthenticationController(
             {
                 emit registrationFinished(static_cast<int>(code), message);
             });
+
+    connect(m_authenticationService,
+            &IAuthenticationService::emailConfirmationCheckFinished, this,
+            &IAuthenticationController::emailConfirmationCheckFinished);
 }
 
 void AuthenticationController::loginUser(const QString& email,
@@ -61,6 +65,11 @@ void AuthenticationController::registerUser(const QString& firstName,
                                 keepUpdated);
 
     m_authenticationService->registerUser(registerModel);
+}
+
+void AuthenticationController::checkIfEmailConfirmed(const QString& email)
+{
+    m_authenticationService->checkIfEmailConfirmed(email);
 }
 
 }  // namespace adapters::controllers

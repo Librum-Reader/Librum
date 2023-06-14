@@ -26,6 +26,10 @@ AuthenticationGateway::AuthenticationGateway(
                 auto errorCode = static_cast<ErrorCode>(code);
                 emit registrationFinished(errorCode);
             });
+
+    connect(m_authenticationAccess,
+            &IAuthenticationAccess::emailConfirmationCheckFinished, this,
+            &AuthenticationGateway::emailConfirmationCheckFinished);
 }
 
 void AuthenticationGateway::authenticateUser(const LoginModel& loginModel)
@@ -48,6 +52,11 @@ void AuthenticationGateway::registerUser(const RegisterModel& registerModel)
     };
 
     m_authenticationAccess->registerUser(registerDto);
+}
+
+void AuthenticationGateway::checkIfEmailConfirmed(const QString& email)
+{
+    m_authenticationAccess->checkIfEmailConfirmed(email);
 }
 
 }  // namespace adapters::gateways

@@ -20,6 +20,7 @@ class AuthenticationAccess : public adapters::IAuthenticationAccess
 public:
     void authenticateUser(const adapters::dtos::LoginDto& loginDto) override;
     void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
+    void checkIfEmailConfirmed(const QString& email) override;
 
 private:
     QNetworkRequest createRequest(QUrl url);

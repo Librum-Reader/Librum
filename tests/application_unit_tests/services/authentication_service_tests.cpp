@@ -17,11 +17,11 @@ namespace tests::application
 class AuthenticationGatewayMock : public IAuthenticationGateway
 {
 public:
-    MOCK_METHOD(void, authenticateUser,
-                (const value_objects::LoginModel& loginModel), (override));
-    MOCK_METHOD(void, registerUser,
-                (const domain::value_objects::RegisterModel& registerModel),
+    MOCK_METHOD(void, authenticateUser, (const value_objects::LoginModel&),
                 (override));
+    MOCK_METHOD(void, registerUser,
+                (const domain::value_objects::RegisterModel&), (override));
+    MOCK_METHOD(void, checkIfEmailConfirmed, (const QString&), (override));
 };
 
 struct AnAuthenticationService : public ::testing::Test

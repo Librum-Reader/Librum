@@ -17,10 +17,9 @@ namespace tests::adapters
 class AuthenticationAccessMock : public IAuthenticationAccess
 {
 public:
-    MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto& loginDto),
-                (override));
-    MOCK_METHOD(void, registerUser, (const dtos::RegisterDto& registerDto),
-                (override));
+    MOCK_METHOD(void, authenticateUser, (const dtos::LoginDto&), (override));
+    MOCK_METHOD(void, registerUser, (const dtos::RegisterDto&), (override));
+    MOCK_METHOD(void, checkIfEmailConfirmed, (const QString&), (override));
 };
 
 struct AnAuthenticationGateway : public ::testing::Test

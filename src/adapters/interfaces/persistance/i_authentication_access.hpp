@@ -19,10 +19,12 @@ public:
     virtual void authenticateUser(const adapters::dtos::LoginDto& loginDto) = 0;
     virtual void registerUser(
         const adapters::dtos::RegisterDto& registerDto) = 0;
+    virtual void checkIfEmailConfirmed(const QString& email) = 0;
 
 signals:
     void authenticationFinished(const QString& token, int errorCode = -1);
     void registrationFinished(int errorCode = -1);
+    void emailConfirmationCheckFinished(bool confirmed);
 };
 
 }  // namespace adapters

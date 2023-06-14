@@ -35,12 +35,17 @@ MFlickWrapper
         
         Connections
         {
-            id: registrationFinished
+            id: authenticationControllerConnections
             target: AuthController
             
             function onRegistrationFinished(errorCode, message) 
             {
                 internal.proccessRegistrationResult(errorCode, message);
+            }
+            
+            function onEmailConfirmationCheckFinished(confirmed) 
+            {
+                internal.processEmailConfirmationResult(confirmed);
             }
         }
         
@@ -296,8 +301,7 @@ MFlickWrapper
         
         onLeftButtonClicked: 
         {
-            close();
-            loadPage(loginPage);
+            AuthController.checkIfEmailConfirmed(emailInput.text);
         }
     }
     
@@ -345,6 +349,18 @@ MFlickWrapper
             else
             {
                 internal.setRegistrationErrors(errorCode, message);
+            }
+        }
+        
+        function processEmailConfirmationResult(confirmed)
+        {
+            if(confirmed)
+            {
+                loadPage(loginPage);
+            }
+            else
+            {
+                console.log("wrong");
             }
         }
         

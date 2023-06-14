@@ -19,6 +19,7 @@ public:
     void logoutUser() override;
     void registerUser(
         const domain::value_objects::RegisterModel& registerModel) override;
+    void checkIfEmailConfirmed(const QString& email) override;
 
 public slots:
     void processAuthenticationResult(const QString& token,
