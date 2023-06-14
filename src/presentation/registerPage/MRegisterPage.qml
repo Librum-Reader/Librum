@@ -294,14 +294,22 @@ MFlickWrapper
         x: Math.round(root.width / 2 - implicitWidth / 2 - page.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - page.topPadding - 65)
         visible: false
+        singleButton: true
+        messageBottomSpacing: 12
         title: "Confirm Your Email"
         message: "You're are almost ready to go!\nConfirm your email by clicking the link we sent you."
-        leftButtonText: "Done!"
-        rightButtonText: "Resend"
+        leftButtonText: "Resend"
         
-        onLeftButtonClicked: 
+        onOpened: fetchEmailConfirmationTimer.start()
+        onLeftButtonClicked: console.log("resend!")
+        
+        Timer
         {
-            AuthController.checkIfEmailConfirmed(emailInput.text);
+            id: fetchEmailConfirmationTimer
+            interval: 3000
+            repeat: true
+            
+            onTriggered: AuthController.checkIfEmailConfirmed(emailInput.text)
         }
     }
     
@@ -356,11 +364,9 @@ MFlickWrapper
         {
             if(confirmed)
             {
+                confirmEmailPopup.close();
+                fetchEmailConfirmationTimer.stop();
                 loadPage(loginPage);
-            }
-            else
-            {
-                console.log("wrong");
             }
         }
         
