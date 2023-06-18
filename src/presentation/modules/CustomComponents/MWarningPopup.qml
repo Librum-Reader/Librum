@@ -107,11 +107,7 @@ Popup
                         MButton
                         {
                             id: leftButton
-<<<<<<< HEAD
-                            Layout.preferredWidth: root.buttonsWidth
-=======
                             Layout.preferredWidth: root.singleButton ? parent.width : root.buttonsWidth
->>>>>>> upstream/dev/develop
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                             borderWidth: activeFocus ? 0 : 1
@@ -132,10 +128,7 @@ Popup
                         MButton
                         {
                             id: rightButton
-<<<<<<< HEAD
-=======
                             visible: !root.singleButton
->>>>>>> upstream/dev/develop
                             Layout.preferredWidth: root.buttonsWidth
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
