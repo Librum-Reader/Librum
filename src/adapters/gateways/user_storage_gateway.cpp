@@ -60,6 +60,20 @@ void UserStorageGateway::deleteProfilePicture(const QString& authToken)
     m_userStorageAccess->deleteProfilePicture(authToken);
 }
 
+void UserStorageGateway::changeProfilePictureLastUpdated(
+    const QString& authToken, const QDateTime& newDateTime)
+{
+    m_userStorageAccess->changeProfilePictureLastUpdated(
+        authToken, newDateTime.toString(Qt::ISODateWithMs));
+}
+
+void UserStorageGateway::changeHasProfilePicture(const QString& authToken,
+                                                 bool newValue)
+{
+    QString newValueStr = newValue ? "true" : "false";
+    m_userStorageAccess->changeHasProfilePicture(authToken, newValueStr);
+}
+
 void UserStorageGateway::deleteTag(const QString& authToken, const QUuid& uuid)
 {
     m_userStorageAccess->deleteTag(authToken,
@@ -79,9 +93,12 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
 
 void UserStorageGateway::proccessUserData(
     const QString& firstName, const QString& lastName, const QString& email,
-    long usedBookStorage, long bookStorageLimit, const QJsonArray& tags)
+    long usedBookStorage, long bookStorageLimit,
+    const QDateTime& profilePictureLastUpdated, bool hasProfilePicture,
+    const QJsonArray& tags)
 {
-    User user(firstName, lastName, email, usedBookStorage, bookStorageLimit);
+    User user(firstName, lastName, email, usedBookStorage, bookStorageLimit,
+              profilePictureLastUpdated, hasProfilePicture);
     for(const auto& tag : tags)
     {
         auto jsonTagObject = tag.toObject();

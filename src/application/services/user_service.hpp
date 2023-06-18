@@ -60,6 +60,7 @@ private:
     void loadProfilePictureFromFile();
     void updateProfilePictureUI(const QString& path);
     QString getFullProfilePictureName();
+    void deleteProfilePictureFile();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

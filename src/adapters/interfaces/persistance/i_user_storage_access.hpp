@@ -29,6 +29,10 @@ public:
     virtual void changeProfilePicture(const QString& authToken,
                                       const QString& path) = 0;
     virtual void deleteProfilePicture(const QString& authToken) = 0;
+    virtual void changeProfilePictureLastUpdated(
+        const QString& authToken, const QString& newDateTime) = 0;
+    virtual void changeHasProfilePicture(const QString& authToken,
+                                         const QString& newValue) = 0;
     virtual void deleteTag(const QString& authToken, const QString& uuid) = 0;
     virtual void renameTag(const QString& authToken,
                            const QJsonObject& bookForUpdate) = 0;
@@ -36,7 +40,9 @@ public:
 signals:
     void userReady(const QString& firstName, const QString& lastName,
                    const QString& email, long usedBookStorage,
-                   long bookStorageLimit, const QJsonArray& tags);
+                   long bookStorageLimit,
+                   const QDateTime& profilePictureLastUpdated,
+                   bool hasProfilePicture, const QJsonArray& tags);
     void gettingUserFailed();
     void profilePictureReady(QByteArray& data);
 };

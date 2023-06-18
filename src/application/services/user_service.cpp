@@ -23,6 +23,9 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             [this](QByteArray& data)
             {
                 auto path = saveProfilePictureToFile(data);
+                m_user.setProfilePictureLastUpdated(
+                    QDateTime::currentDateTimeUtc());
+                m_user.setHasProfilePicture(true);
                 updateProfilePictureUI(path);
             });
 
@@ -49,13 +52,13 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
-                m_userStorageGateway->getProfilePicture(m_authenticationToken);
             });
 }
 
 void UserService::loadUser(bool rememberUser)
 {
-    auto success = tryLoadingUserFromFile();
+    // auto success = tryLoadingUserFromFile();
+    auto success = false;
     if(!success)
     {
         // Load user from server
@@ -76,7 +79,6 @@ void UserService::loadUser(bool rememberUser)
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
-                m_userStorageGateway->getProfilePicture(m_authenticationToken);
 
                 // Free the timer's memory
                 auto reply = qobject_cast<QTimer*>(sender());
@@ -140,30 +142,41 @@ void UserService::setProfilePicturePath(const QString& path)
     if(path == m_user.getProfilePicturePath())
         return;
 
-    auto savedPic = saveProfilePictureToFile(path);
-    m_user.setProfilePicturePath(savedPic);
-    m_userStorageGateway->changeProfilePicture(m_authenticationToken, savedPic);
+    auto savedProfilePicturePath = saveProfilePictureToFile(path);
+    auto newHasProfilePicture = path.isEmpty() ? false : true;
+    auto newProfilePictureLastUpdated = QDateTime::currentDateTimeUtc();
 
-    updateProfilePictureUI(savedPic);
+    m_user.setProfilePicturePath(savedProfilePicturePath);
+    m_user.setProfilePictureLastUpdated(newProfilePictureLastUpdated);
+    m_user.setHasProfilePicture(newHasProfilePicture);
+
+    m_userStorageGateway->changeProfilePicture(m_authenticationToken,
+                                               savedProfilePicturePath);
+    m_userStorageGateway->changeProfilePictureLastUpdated(
+        m_authenticationToken, newProfilePictureLastUpdated);
+    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken,
+                                                  newHasProfilePicture);
+
+    updateProfilePictureUI(savedProfilePicturePath);
 }
 
 void UserService::deleteProfilePicture()
 {
-    auto userDir = getUserProfileDir();
+    deleteProfilePictureFile();
 
-    QString fullProfilePictureName = getFullProfilePictureName();
-    if(fullProfilePictureName.isEmpty())
-        return;
+    auto newProfilePictureLastUpdated = QDateTime::currentDateTimeUtc();
+    auto newHasProfilePicture = false;
 
-    QString path = userDir.absoluteFilePath(fullProfilePictureName);
-
-    QFile file(path);
-    file.remove();
-
-    m_user.setProfilePicturePath("");
-    updateProfilePictureUI("");
+    m_user.setProfilePictureLastUpdated(newProfilePictureLastUpdated);
+    m_user.setHasProfilePicture(newHasProfilePicture);
 
     m_userStorageGateway->deleteProfilePicture(m_authenticationToken);
+    m_userStorageGateway->changeProfilePictureLastUpdated(
+        m_authenticationToken, newProfilePictureLastUpdated);
+    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken,
+                                                  newHasProfilePicture);
+
+    updateProfilePictureUI("");
 }
 
 QString UserService::saveProfilePictureToFile(QByteArray& data)
@@ -255,6 +268,20 @@ QString UserService::getFullProfilePictureName()
     return matchingFiles.first();
 }
 
+void UserService::deleteProfilePictureFile()
+{
+    auto userDir = getUserProfileDir();
+
+    QString fullProfilePictureName = getFullProfilePictureName();
+    if(fullProfilePictureName.isEmpty())
+        return;
+
+    QString path = userDir.absoluteFilePath(fullProfilePictureName);
+
+    QFile file(path);
+    file.remove();
+}
+
 const std::vector<domain::entities::Tag>& UserService::getTags() const
 {
     return m_user.getTags();
@@ -322,8 +349,22 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     for(const auto& tag : user.getTags())
         m_user.addTag(tag);
 
-    if(m_user.getProfilePicturePath().isEmpty())
-        loadProfilePictureFromFile();
+    // if(m_user.getProfilePicturePath().isEmpty())
+    //     loadProfilePictureFromFile();
+
+    if(user.getHasProfilePicture() == false)
+    {
+        deleteProfilePictureFile();
+        m_user.setHasProfilePicture(false);
+        m_user.setProfilePictureLastUpdated(QDateTime::currentDateTimeUtc());
+        updateProfilePictureUI("");
+    }
+    else if(!m_user.getHasProfilePicture() && user.getHasProfilePicture() ||
+            m_user.getProfilePictureLastUpdated() <
+                user.getProfilePictureLastUpdated())
+    {
+        m_userStorageGateway->getProfilePicture(m_authenticationToken);
+    }
 
     emit finishedLoadingUser(true);
     emit bookStorageDataUpdated(user.getUsedBookStorage(),

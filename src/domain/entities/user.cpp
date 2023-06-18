@@ -5,12 +5,15 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, long usedBookStorage, long bookStorageLimit) :
+           const QString& email, long usedBookStorage, long bookStorageLimit,
+           const QDateTime& profilePictureLastUpdated, bool hasProfilePicture) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
     m_usedBookStorage(usedBookStorage),
-    m_bookStorageLimit(bookStorageLimit)
+    m_bookStorageLimit(bookStorageLimit),
+    m_profilePictureLastUpdated(profilePictureLastUpdated),
+    m_hasProfilePicture(hasProfilePicture)
 {
 }
 
@@ -62,6 +65,26 @@ long User::getBookStorageLimit() const
 void User::setBookStorageLimit(long newBookStorageLimit)
 {
     m_bookStorageLimit = newBookStorageLimit;
+}
+
+bool User::getHasProfilePicture() const
+{
+    return m_hasProfilePicture;
+}
+
+void User::setHasProfilePicture(bool newValue)
+{
+    m_hasProfilePicture = newValue;
+}
+
+const QDateTime& User::getProfilePictureLastUpdated() const
+{
+    return m_profilePictureLastUpdated;
+}
+
+void User::setProfilePictureLastUpdated(const QDateTime& newLastUpdated)
+{
+    m_profilePictureLastUpdated = newLastUpdated;
 }
 
 const QString& User::getProfilePicturePath() const
