@@ -66,8 +66,11 @@ private:
     QString m_email;
     long m_usedBookStorage;
     long m_bookStorageLimit;
+<<<<<<< HEAD
     QDateTime m_profilePictureLastUpdated;
     bool m_hasProfilePicture;
+=======
+>>>>>>> upstream/dev/develop
     QString m_profilePicturePath;
     std::vector<Tag> m_tags;
 };

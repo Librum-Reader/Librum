@@ -52,6 +52,7 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
+                m_userStorageGateway->getProfilePicture(m_authenticationToken);
             });
 }
 
@@ -79,6 +80,7 @@ void UserService::loadUser(bool rememberUser)
             [this]()
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
+                m_userStorageGateway->getProfilePicture(m_authenticationToken);
 
                 // Free the timer's memory
                 auto reply = qobject_cast<QTimer*>(sender());

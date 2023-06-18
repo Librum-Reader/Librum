@@ -15,6 +15,7 @@ Popup
     property string message: "This is a message"
     property int buttonsWidth: 120
     property int messageBottomSpacing: 0
+    property bool singleButton: false
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
@@ -106,7 +107,11 @@ Popup
                         MButton
                         {
                             id: leftButton
+<<<<<<< HEAD
                             Layout.preferredWidth: root.buttonsWidth
+=======
+                            Layout.preferredWidth: root.singleButton ? parent.width : root.buttonsWidth
+>>>>>>> upstream/dev/develop
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                             borderWidth: activeFocus ? 0 : 1
@@ -127,6 +132,10 @@ Popup
                         MButton
                         {
                             id: rightButton
+<<<<<<< HEAD
+=======
+                            visible: !root.singleButton
+>>>>>>> upstream/dev/develop
                             Layout.preferredWidth: root.buttonsWidth
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft

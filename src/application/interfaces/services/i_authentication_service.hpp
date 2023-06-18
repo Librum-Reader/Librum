@@ -23,12 +23,14 @@ public:
     virtual void logoutUser() = 0;
     virtual void registerUser(
         const domain::value_objects::RegisterModel& registerModel) = 0;
+    virtual void checkIfEmailConfirmed(const QString& email) = 0;
 
 signals:
     void loginFinished(ErrorCode errorCode, const QString& message = "");
     void registrationFinished(ErrorCode errorCode, const QString& message);
     void loggedIn(const QString& token, const QString& email);
     void loggedOut();
+    void emailConfirmationCheckFinished(bool confirmed);
 
 public slots:
     virtual void processAuthenticationResult(const QString& token,

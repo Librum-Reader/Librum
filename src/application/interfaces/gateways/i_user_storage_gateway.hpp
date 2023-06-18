@@ -30,10 +30,13 @@ public:
     virtual void changeProfilePicture(const QString& authToken,
                                       const QString& path) = 0;
     virtual void deleteProfilePicture(const QString& authToken) = 0;
+<<<<<<< HEAD
     virtual void changeProfilePictureLastUpdated(
         const QString& authToken, const QDateTime& newDateTime) = 0;
     virtual void changeHasProfilePicture(const QString& authToken,
                                          bool newValue) = 0;
+=======
+>>>>>>> upstream/dev/develop
     virtual void deleteTag(const QString& authToken, const QUuid& uuid) = 0;
     virtual void renameTag(const QString& authToken, const QUuid& uuid,
                            const QString& newName) = 0;

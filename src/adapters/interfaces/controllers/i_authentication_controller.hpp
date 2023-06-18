@@ -28,10 +28,12 @@ public:
                                           const QString& email,
                                           QString password,
                                           bool keepUpdated) = 0;
+    Q_INVOKABLE virtual void checkIfEmailConfirmed(const QString& email) = 0;
 
 signals:
     void loginFinished(int errorCode, const QString& message);
     void registrationFinished(int errorCode, const QString& message);
+    void emailConfirmationCheckFinished(bool confirmed);
 };
 
 }  // namespace adapters

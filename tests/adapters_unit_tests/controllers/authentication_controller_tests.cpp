@@ -19,15 +19,15 @@ namespace tests::adapters
 class AuthenticationServiceMock : public application::IAuthenticationService
 {
 public:
-    MOCK_METHOD(void, loginUser, (const LoginModel& loginModel), (override));
+    MOCK_METHOD(void, loginUser, (const LoginModel&), (override));
     MOCK_METHOD(void, tryAutomaticLogin, (), (override));
     MOCK_METHOD(void, logoutUser, (), (override));
     MOCK_METHOD(void, registerUser,
-                (const domain::value_objects::RegisterModel& registerModel),
+                (const domain::value_objects::RegisterModel&), (override));
+    MOCK_METHOD(void, processAuthenticationResult, (const QString&, ErrorCode),
                 (override));
-    MOCK_METHOD(void, processAuthenticationResult,
-                (const QString&, ErrorCode), (override));
     MOCK_METHOD(void, processRegistrationResult, (ErrorCode), (override));
+    MOCK_METHOD(void, checkIfEmailConfirmed, (const QString&), (override));
 };
 
 struct AnAuthenticationController : public ::testing::Test

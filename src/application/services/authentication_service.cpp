@@ -28,6 +28,10 @@ AuthenticationService::AuthenticationService(
             {
                 utility::AutomaticLoginHelper::clearAutomaticLoginData();
             });
+
+    connect(m_authenticationGateway,
+            &IAuthenticationGateway::emailConfirmationCheckFinished, this,
+            &AuthenticationService::emailConfirmationCheckFinished);
 }
 
 void AuthenticationService::loginUser(const LoginModel& loginModel)
@@ -57,6 +61,11 @@ void AuthenticationService::logoutUser()
 void AuthenticationService::registerUser(const RegisterModel& registerModel)
 {
     m_authenticationGateway->registerUser(registerModel);
+}
+
+void AuthenticationService::checkIfEmailConfirmed(const QString& email)
+{
+    m_authenticationGateway->checkIfEmailConfirmed(email);
 }
 
 void AuthenticationService::processAuthenticationResult(const QString& token,

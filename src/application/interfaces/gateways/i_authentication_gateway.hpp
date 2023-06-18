@@ -23,10 +23,12 @@ public:
         const domain::value_objects::LoginModel& loginModel) = 0;
     virtual void registerUser(
         const domain::value_objects::RegisterModel& registerModel) = 0;
+    virtual void checkIfEmailConfirmed(const QString& email) = 0;
 
 signals:
     void authenticationFinished(const QString& token, ErrorCode errorCode);
     void registrationFinished(ErrorCode errorCode);
+    void emailConfirmationCheckFinished(bool confirmed);
 };
 
 }  // namespace application

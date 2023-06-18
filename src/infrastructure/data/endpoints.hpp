@@ -9,6 +9,9 @@ inline const QString domain { "https://librum-dev.azurewebsites.net" };
 // Authentication
 inline const QString authenticationEndpoint { domain + "/api/login" };
 inline const QString registrationEndpoint { domain + "/api/register" };
+inline const QString checkIfEmailConfirmedEndpoint {
+    domain + "/api/checkIfEmailConfirmed"
+};
 
 // Book storage
 inline const QString bookCreationEndpoint { domain + "/api/book" };

@@ -16,6 +16,7 @@ public:
         const domain::value_objects::LoginModel& loginModel) override;
     void registerUser(
         const domain::value_objects::RegisterModel& registerModel) override;
+    void checkIfEmailConfirmed(const QString& email) override;
 
 private:
     IAuthenticationAccess* m_authenticationAccess;
