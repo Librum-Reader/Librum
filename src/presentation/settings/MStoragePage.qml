@@ -70,9 +70,7 @@ MFlickWrapper
                 id: container
                 Layout.fillWidth: true
                 Layout.topMargin: 32
-                horizontalPadding: 40
-                topPadding: 0
-                bottomPadding: 55
+                padding: 28
                 background: Rectangle
                 {
                     color: Style.colorContainerBackground
@@ -84,91 +82,105 @@ MFlickWrapper
                 
                 ColumnLayout
                 {
-                    id: contentLayout
-                    anchors.fill: parent
-                    spacing: 0
+                    width: parent.width
+                    spacing: 26
                     
-                    
-                    Label
+                    RowLayout
                     {
-                        id: storageTitle
-                        Layout.fillWidth: true
-                        Layout.topMargin: 24
-                        text: "Total storage"
-                        wrapMode: Text.WordWrap
-                        color: Style.colorText
-                        font.pointSize: 21
-                        font.weight: Font.DemiBold
-                    }
-                    
-                    Label
-                    {
-                        id: maxStorageText
-                        Layout.fillWidth: true
-                        Layout.leftMargin: 15
-                        Layout.topMargin: 10
-                        text: "2GB"
-                        wrapMode: Text.WordWrap
-                        color: Style.colorText
-                        font.pointSize: 42
-                        font.bold: true
-                    }
-                    
-                    Label
-                    {
-                        id: approximateBooksText
-                        Layout.fillWidth: true
-                        Layout.leftMargin: 40
-                        text: "This are approximately <font size=4 bold><b>1000</b></font> books."
-                        wrapMode: Text.WordWrap
-                        color: Style.colorLightText
-                        font.pointSize: 15
-                        textFormat: Text.RichText
-                    }
-                    
-                    Label
-                    {
-                        id: availableStorageTitle
-                        Layout.fillWidth: true
-                        Layout.topMargin: 50
-                        text: "Available storage"
-                        wrapMode: Text.WordWrap
-                        color: Style.colorText
-                        font.pointSize: 21
-                        font.weight: Font.DemiBold
-                    }
-                    
-                    Label
-                    {
-                        id: availableStorageText
-                        property int usedMB: (UserController.usedBookStorage / (1024 * 1024))
-                        property int storageLimitMB: (UserController.bookStorageLimit / (1024 * 1024))
+                        width: parent.width
+                        spacing: 26
                         
-                        Layout.fillWidth: true
-                        Layout.leftMargin: 20
-                        Layout.topMargin: 15
-                        text: "You are currently using <font size=4 color=" + Style.colorBasePurple + " bold><b>" + 
-                              (usedMB <= storageLimitMB ? usedMB : storageLimitMB) + "</b></font> MB " + 
-                              "out of <font size=4 color=" + Style.colorBasePurple + " bold><b> " + storageLimitMB + " </b></font> MB!"
-                        wrapMode: Text.WordWrap
-                        color: Style.colorLightText
-                        font.pointSize: 15
-                        textFormat: Text.RichText
+                        Pane
+                        {
+                            id: tierPane
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 470
+                            Layout.maximumWidth: 470
+                            Layout.minimumWidth: 235
+                            Layout.preferredHeight: 325
+                            background: Rectangle
+                            {
+                                anchors.fill: parent
+                                color: Style.colorPageBackground
+                                radius: 4
+                            }
+                            
+                            ColumnLayout
+                            {
+                                width: parent.width
+                                
+                                Label
+                                {
+                                    id: tierTitle
+                                    Layout.alignment: Qt.AlignLeft
+                                    Layout.leftMargin: 24
+                                    Layout.topMargin: 6
+                                    text: "YOUR TIER"
+                                    color: Style.colorPageSubtitle
+                                    font.weight: Font.Bold
+                                    font.pointSize: 10.5
+                                }
+                                
+                                Label
+                                {
+                                    id: tierName
+                                    Layout.alignment: Qt.AlignHCenter
+                                    Layout.topMargin: 54
+                                    text: "BASIC"
+                                    color: Style.colorTitle
+                                    font.weight: Font.Medium
+                                    font.pointSize: 22
+                                }
+                                
+                                Label
+                                {
+                                    id: storageAmount
+                                    Layout.alignment: Qt.AlignHCenter
+                                    Layout.topMargin: -8
+                                    text: "2GB"
+                                    color: Style.colorLightText
+                                    font.weight: Font.Bold
+                                    font.pointSize: 44
+                                }
+                            }
+                        }
+                        
+                        Pane
+                        {
+                            id: usedStoragePane
+                            Layout.fillWidth: true
+                            Layout.minimumWidth: 600
+                            Layout.preferredHeight: 325
+                            background: Rectangle
+                            {
+                                anchors.fill: parent
+                                color: Style.colorPageBackground
+                                radius: 4
+                            }
+                        }
+                        
                     }
                     
-                    Label
+                    RowLayout
                     {
-                        id: upgradeText
-                        Layout.fillWidth: true
-                        Layout.leftMargin: 20
-                        Layout.topMargin: 50
-                        text: "If you want to have more storage space available <font color=" + 
-                              Style.colorBasePurple + ">upgrade your tier.</font><br>" +
-                              "To know why we offer different tiers <font color=" + Style.colorBasePurple + " bold>click here.</font>"
-                        wrapMode: Text.WordWrap
-                        color: Style.colorLightText
-                        font.pointSize: 15
-                        textFormat: Text.RichText
+                        width: parent.width
+                        spacing: 28
+                        
+                        Pane
+                        {
+                            id: bookAmountPane
+                            Layout.fillWidth: true
+                            Layout.preferredWidth: 470
+                            Layout.maximumWidth: 470
+                            Layout.minimumWidth: 235
+                            Layout.preferredHeight: 325
+                            background: Rectangle
+                            {
+                                anchors.fill: parent
+                                color: Style.colorPageBackground
+                                radius: 4
+                            }
+                        }
                     }
                 }
             }
