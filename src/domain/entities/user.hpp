@@ -13,7 +13,10 @@ class User : public QObject
 
 public:
     User(const QString& firstName, const QString& lastName,
-         const QString& email, long usedBookStorage, long bookStorageLimit);
+         const QString& email, long usedBookStorage, long bookStorageLimit,
+         const QDateTime& profilePictureLastUpdated =
+             QDateTime::currentDateTimeUtc(),
+         bool hasProfilePicture = false);
 
     const QString& getFirstName() const;
     void setFirstName(const QString& newFirstName);
@@ -29,6 +32,12 @@ public:
 
     long getBookStorageLimit() const;
     void setBookStorageLimit(long newBookStorageLimit);
+
+    bool getHasProfilePicture() const;
+    void setHasProfilePicture(bool newValue);
+
+    const QDateTime& getProfilePictureLastUpdated() const;
+    void setProfilePictureLastUpdated(const QDateTime& newLastUpdated);
 
     const QString& getProfilePicturePath() const;
     void setProfilePicturePath(const QString& path);
@@ -57,6 +66,8 @@ private:
     QString m_email;
     long m_usedBookStorage;
     long m_bookStorageLimit;
+    QDateTime m_profilePictureLastUpdated;
+    bool m_hasProfilePicture;
     QString m_profilePicturePath;
     std::vector<Tag> m_tags;
 };

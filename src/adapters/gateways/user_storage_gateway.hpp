@@ -24,6 +24,10 @@ public:
     void changeProfilePicture(const QString& authToken,
                               const QString& path) override;
     void deleteProfilePicture(const QString& authToken) override;
+    void changeProfilePictureLastUpdated(const QString& authToken,
+                                         const QDateTime& newDateTime) override;
+    void changeHasProfilePicture(const QString& authToken,
+                                 bool newValue) override;
     void deleteTag(const QString& authToken, const QUuid& uuid) override;
     void renameTag(const QString& authToken, const QUuid& uuid,
                    const QString& newName) override;
@@ -31,7 +35,9 @@ public:
 private slots:
     void proccessUserData(const QString& firstName, const QString& lastName,
                           const QString& email, long usedBookStorage,
-                          long bookStorageLimit, const QJsonArray& tags);
+                          long bookStorageLimit,
+                          const QDateTime& profilePictureLastUpdated,
+                          bool hasProfilePicture, const QJsonArray& tags);
 
     void reportFailureGettingUser();
 

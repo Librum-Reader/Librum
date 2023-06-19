@@ -165,6 +165,62 @@ void UserStorageAccess::deleteProfilePicture(const QString& authToken)
             });
 }
 
+void UserStorageAccess::changeProfilePictureLastUpdated(
+    const QString& authToken, const QString& newDateTime)
+{
+    QString endPoint = data::userPatchEndpoint;
+    auto request = createRequest(endPoint, authToken);
+
+    const QString quote = "\"";
+    auto jsonData =
+        R"([{ "op": "replace", "path": "profilePictureLastUpdated", "value": )" +
+        quote + newDateTime + quote + "}]";
+
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Changing profile picture last updated date");
+                }
+
+                reply->deleteLater();
+            });
+}
+
+void UserStorageAccess::changeHasProfilePicture(const QString& authToken,
+                                                const QString& newValue)
+{
+    QString endPoint = data::userPatchEndpoint;
+    auto request = createRequest(endPoint, authToken);
+
+    const QString quote = "\"";
+    auto jsonData =
+        R"([{ "op": "replace", "path": "hasProfilePicture", "value": )" +
+        quote + newValue + quote + "}]";
+
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Changing has profile picture");
+                }
+
+                reply->deleteLater();
+            });
+}
+
 void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 {
     QString endPoint = data::tagDeletionEndpoint + "/" + uuid;
@@ -236,11 +292,15 @@ void UserStorageAccess::proccessGetUserResult()
         static_cast<long>(jsonObj["usedBookStorage"].toDouble());
     auto bookStorageLimit =
         static_cast<long>(jsonObj["bookStorageLimit"].toDouble());
+    auto profilePictureLastUpdated = QDateTime::fromString(
+        jsonObj["profilePictureLastUpdated"].toString(), Qt::ISODateWithMs);
+    auto hasProfilePicture = jsonObj["hasProfilePicture"].toBool();
     auto email = jsonObj["email"].toString();
     auto tags = jsonObj["tags"].toArray();
 
     emit userReady(firstName, lastName, email, usedBookStorage,
-                   bookStorageLimit, tags);
+                   bookStorageLimit, profilePictureLastUpdated,
+                   hasProfilePicture, tags);
 
     // Make sure to release the reply's memory
     reply->deleteLater();
