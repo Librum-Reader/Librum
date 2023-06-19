@@ -98,6 +98,7 @@ MFlickWrapper
                             Layout.maximumWidth: 470
                             Layout.minimumWidth: 235
                             Layout.preferredHeight: 325
+                            horizontalPadding: 34
                             background: Rectangle
                             {
                                 anchors.fill: parent
@@ -113,7 +114,6 @@ MFlickWrapper
                                 {
                                     id: tierTitle
                                     Layout.alignment: Qt.AlignLeft
-                                    Layout.leftMargin: 24
                                     Layout.topMargin: 6
                                     text: "YOUR TIER"
                                     color: Style.colorPageSubtitle
@@ -125,9 +125,9 @@ MFlickWrapper
                                 {
                                     id: tierName
                                     Layout.alignment: Qt.AlignHCenter
-                                    Layout.topMargin: 54
+                                    Layout.topMargin: 46
                                     text: "BASIC"
-                                    color: Style.colorTitle
+                                    color: Style.colorSubtitle
                                     font.weight: Font.Medium
                                     font.pointSize: 22
                                 }
@@ -138,24 +138,161 @@ MFlickWrapper
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: -8
                                     text: "2GB"
-                                    color: Style.colorLightText
+                                    color: Style.colorMatteTitle
                                     font.weight: Font.Bold
-                                    font.pointSize: 44
+                                    font.pointSize: 46
+                                }
+                                
+                                RowLayout
+                                {
+                                    id: upgradeButtonRow
+                                    Layout.fillWidth: true
+                                    Layout.topMargin: 36
+                                    spacing: 12
+                                    
+                                    MButton
+                                    {
+                                        id: inlineUpgradeButton
+                                        Layout.preferredWidth: 110
+                                        Layout.preferredHeight: 38
+                                        borderWidth: 0
+                                        backgroundColor: Style.colorBasePurple
+                                        text: "Upgrade"
+                                        fontSize: 12
+                                        fontWeight: Font.Bold
+                                        textColor: Style.colorFocusedButtonText
+                                    }
+                                    
+                                    MButton
+                                    {
+                                        id: whyOfferingTiersButton
+                                        Layout.fillWidth: true
+                                        Layout.preferredHeight: 38
+                                        borderWidth: 1
+                                        borderColor: Style.colorCheckboxBorder
+                                        opacityOnPressed: 0.75
+                                        backgroundColor: "transparent"
+                                        text: "See why we offer multiple tiers"
+                                        fontSize: 12
+                                        fontWeight: Font.Medium
+                                        textColor: Style.colorText
+                                    }
                                 }
                             }
                         }
                         
                         Pane
                         {
-                            id: usedStoragePane
+                            id: usedStoragePaneBold
                             Layout.fillWidth: true
-                            Layout.minimumWidth: 600
+                            Layout.minimumWidth: 340
                             Layout.preferredHeight: 325
+                            horizontalPadding: 34
                             background: Rectangle
                             {
                                 anchors.fill: parent
                                 color: Style.colorPageBackground
                                 radius: 4
+                            }
+                            
+                            ColumnLayout
+                            {
+                                width: parent.width
+                                spacing: 0
+                                
+                                Label
+                                {
+                                    id: usedStorageTitle
+                                    Layout.alignment: Qt.AlignLeft
+                                    Layout.topMargin: 6
+                                    text: "USED STORAGE"
+                                    color: Style.colorPageSubtitle
+                                    font.weight: Font.Bold
+                                    font.pointSize: 10.5
+                                }
+                                
+                                RowLayout
+                                {
+                                    Layout.fillWidth: true
+                                    Layout.topMargin: 85
+                                    spacing: 0
+                                    
+                                    
+                                    Item
+                                    {
+                                        id: usedStorageBox
+                                        Layout.preferredWidth: parent.width / 2
+                                        height: usedStorageText.height + usedStorageExplenationText.height
+                                        
+                                        Label
+                                        {
+                                            id: usedStorageText
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            text: "1GB"
+                                            color: Style.colorBasePurple
+                                            font.weight: Font.Bold
+                                            font.pointSize: 42
+                                        }
+                                        
+                                        Label
+                                        {
+                                            id: usedStorageExplenationText
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            anchors.top: usedStorageText.bottom
+                                            anchors.topMargin: 2
+                                            text: "Used Storage"
+                                            color: Style.colorLightText
+                                            font.pointSize: 11
+                                        }
+                                    }
+                                    
+                                    Item
+                                    {
+                                        id: availableStorageBox
+                                        Layout.fillWidth: true
+                                        height: remainingStorageText.height + remainingStorageExplenationText.height
+                                        
+                                        Label
+                                        {
+                                            id: remainingStorageText
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            text: "1GB"
+                                            color: Style.colorLightText
+                                            font.weight: Font.Bold
+                                            font.pointSize: 42
+                                        }
+                                        
+                                        Label
+                                        {
+                                            id: remainingStorageExplenationText
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            anchors.top: remainingStorageText.bottom
+                                            anchors.topMargin: 2
+                                            text: "Remaining Storage"
+                                            color: Style.colorLightText
+                                            font.pointSize: 11
+                                        }
+                                    }
+                                }
+                                
+                                Rectangle
+                                {
+                                    id: progressBar
+                                    Layout.fillWidth: true
+                                    Layout.preferredHeight: 34
+                                    Layout.topMargin: 32
+                                    color: Style.colorLightPurple
+                                    radius: 4
+                                    
+                                    Rectangle
+                                    {
+                                        id: progressBarFilling
+                                        width: parent.width / 2
+                                        height: parent.height
+                                        color: Style.colorBasePurple
+                                        radius: parent.radius
+                                    }
+                                }
                             }
                         }
                         
@@ -168,17 +305,55 @@ MFlickWrapper
                         
                         Pane
                         {
-                            id: bookAmountPane
+                            id: yourBooksPane
                             Layout.fillWidth: true
                             Layout.preferredWidth: 470
                             Layout.maximumWidth: 470
                             Layout.minimumWidth: 235
                             Layout.preferredHeight: 325
+                            horizontalPadding: 34
                             background: Rectangle
                             {
                                 anchors.fill: parent
                                 color: Style.colorPageBackground
                                 radius: 4
+                            }
+                            
+                            ColumnLayout
+                            {
+                                width: parent.width
+                                spacing: 0
+                                
+                                Label
+                                {
+                                    id: yourBooksTitle
+                                    Layout.alignment: Qt.AlignLeft
+                                    Layout.topMargin: 6
+                                    text: "YOUR BOOKS"
+                                    color: Style.colorPageSubtitle
+                                    font.weight: Font.Bold
+                                    font.pointSize: 10.5
+                                }
+                                
+                                Label
+                                {
+                                    id: bookCount
+                                    Layout.alignment: Qt.AlignHCenter
+                                    Layout.topMargin: 78
+                                    text: "989"
+                                    color: Style.colorMatteTitle
+                                    font.weight: Font.Bold
+                                    font.pointSize: 46
+                                }
+                                
+                                Label
+                                {
+                                    id: bookCountDescription
+                                    Layout.alignment: Qt.AlignHCenter
+                                    text: "Books in your Library"
+                                    color: Style.colorLightText
+                                    font.pointSize: 12
+                                }
                             }
                         }
                     }

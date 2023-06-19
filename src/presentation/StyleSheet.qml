@@ -22,6 +22,7 @@ Item
     property color colorText
     property color colorErrorText
     property color colorTitle
+    property color colorMatteTitle
     
     // Subtitless
     property color colorSubtitle
@@ -102,6 +103,7 @@ Item
             PropertyChanges { target: styleSheet; colorText: "#32324D" }
             PropertyChanges { target: styleSheet; colorErrorText: "#F25E42" }
             PropertyChanges { target: styleSheet; colorTitle: "#32324D" }
+            PropertyChanges { target: styleSheet; colorMatteTitle: "#545460" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#8A8AA0" }
@@ -175,6 +177,7 @@ Item
             PropertyChanges { target: styleSheet; colorText: "#D5D5D5" }
             PropertyChanges { target: styleSheet; colorErrorText: "#DC4C31" }
             PropertyChanges { target: styleSheet; colorTitle: "#CBCBCB" }
+            PropertyChanges { target: styleSheet; colorMatteTitle: "#B6B6C8" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#E5E5EF" }
@@ -187,7 +190,7 @@ Item
             
             // Color tones
             PropertyChanges { target: styleSheet; colorBasePurple: "#946BDE" }
-            PropertyChanges { target: styleSheet; colorLightPurple: "#29232C" }
+            PropertyChanges { target: styleSheet; colorLightPurple: "#332B37" }
             PropertyChanges { target: styleSheet; colorRed: "#CD4D34" }
             
             // Highlight
