@@ -5,6 +5,7 @@ import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
 import Librum.controllers 1.0
+import Librum.models 1.0
 
 
 MFlickWrapper
@@ -62,6 +63,8 @@ MFlickWrapper
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.heartHallow
                     imageSize: 18
+                    
+                    onClicked: upgradePopup.open()
                 }
             }
             
@@ -161,6 +164,8 @@ MFlickWrapper
                                         fontSize: 12
                                         fontWeight: Font.Bold
                                         textColor: Style.colorFocusedButtonText
+                                        
+                                        onClicked: upgradePopup.open()
                                     }
                                     
                                     MButton
@@ -176,6 +181,8 @@ MFlickWrapper
                                         fontSize: 12
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
+                                        
+                                        onClicked: Qt.openUrlExternally(AppInformation.companyWebsite + "/whyTiers")
                                     }
                                 }
                             }
@@ -360,5 +367,24 @@ MFlickWrapper
                 }
             }
         }
+    }
+    
+    MWarningPopup
+    {
+        id: upgradePopup
+        x: Math.round(page.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - page.horizontalPadding)
+        y: Math.round(page.height / 2 - implicitHeight / 2 - page.topPadding - 50)
+        visible: false
+        title: "Upgrade Your Tier"
+        message: "We don't offer upgrading options at the moment.\n" +
+                  "If you require additional storage, please contact us at: " + AppInformation.companyEmail
+        leftButtonText: "Close"
+        rightButtonText: "Email Us"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        
+        onOpenedChanged: if(opened) upgradePopup.giveFocus()
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
+        onDecisionMade: close()
     }
 }
