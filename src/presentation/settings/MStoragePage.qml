@@ -140,7 +140,7 @@ MFlickWrapper
                                     id: storageAmount
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: -8
-                                    text: "2GB"
+                                    text: internal.bytesToGB(UserController.bookStorageLimit) + "GB"
                                     color: Style.colorMatteTitle
                                     font.weight: Font.Bold
                                     font.pointSize: 46
@@ -235,7 +235,7 @@ MFlickWrapper
                                         {
                                             id: usedStorageText
                                             anchors.horizontalCenter: parent.horizontalCenter
-                                            text: "1GB"
+                                            text: internal.bytesToGB(UserController.usedBookStorage, 2) + "GB"
                                             color: Style.colorBasePurple
                                             font.weight: Font.Bold
                                             font.pointSize: 42
@@ -263,7 +263,7 @@ MFlickWrapper
                                         {
                                             id: remainingStorageText
                                             anchors.horizontalCenter: parent.horizontalCenter
-                                            text: "1GB"
+                                            text: internal.bytesToGB(UserController.bookStorageLimit) + "GB"
                                             color: Style.colorLightText
                                             font.weight: Font.Bold
                                             font.pointSize: 42
@@ -294,7 +294,7 @@ MFlickWrapper
                                     Rectangle
                                     {
                                         id: progressBarFilling
-                                        width: parent.width / 2
+                                        width: parent.width * (UserController.usedBookStorage / UserController.bookStorageLimit)
                                         height: parent.height
                                         color: Style.colorBasePurple
                                         radius: parent.radius
@@ -347,7 +347,7 @@ MFlickWrapper
                                     id: bookCount
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: 78
-                                    text: "989"
+                                    text: BookController.bookCount
                                     color: Style.colorMatteTitle
                                     font.weight: Font.Bold
                                     font.pointSize: 46
@@ -386,5 +386,28 @@ MFlickWrapper
         onOpenedChanged: if(opened) upgradePopup.giveFocus()
         onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
         onDecisionMade: close()
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        // Convert bytes to GB and format them correctly, rules:
+        // - Convert bytes to GB
+        // - If bytes == 0, return "0"
+        // - If result ends with a 0, e.g. "2.40" remove it, so "2.4"
+        // - Else Round it up to "precision" amount
+        function bytesToGB(bytes, precision = 1)
+        {
+            if (bytes === 0) {
+                return "0";
+              }
+            
+              const gibibytes = bytes / (1024 * 1024 * 1024);
+              const rounded = gibibytes.toFixed(2);
+              const formatted = rounded.replace(/\.?0+$/, "");
+            
+              return formatted;
+        }
     }
 }
