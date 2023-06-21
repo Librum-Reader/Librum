@@ -64,7 +64,7 @@ void UserStorageGateway::changeProfilePictureLastUpdated(
     const QString& authToken, const QDateTime& newDateTime)
 {
     m_userStorageAccess->changeProfilePictureLastUpdated(
-        authToken, newDateTime.toString(Qt::ISODateWithMs));
+        authToken, newDateTime.toString(m_dateTimeFormat));
 }
 
 void UserStorageGateway::changeHasProfilePicture(const QString& authToken,
