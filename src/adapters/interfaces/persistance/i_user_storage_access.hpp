@@ -38,11 +38,7 @@ public:
                            const QJsonObject& bookForUpdate) = 0;
 
 signals:
-    void userReady(const QString& firstName, const QString& lastName,
-                   const QString& email, long usedBookStorage,
-                   long bookStorageLimit,
-                   const QDateTime& profilePictureLastUpdated,
-                   bool hasProfilePicture, const QJsonArray& tags);
+    void userReady(const QByteArray& data);
     void gettingUserFailed();
     void profilePictureReady(QByteArray& data);
 };

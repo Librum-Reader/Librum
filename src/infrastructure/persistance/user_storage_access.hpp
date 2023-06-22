@@ -38,9 +38,6 @@ public:
     void renameTag(const QString& authToken,
                    const QJsonObject& bookForUpdate) override;
 
-private slots:
-    void proccessGetUserResult();
-
 private:
     void addImagePartToMultiPart(QHttpMultiPart* multiPart,
                                  const QString& imagePath);

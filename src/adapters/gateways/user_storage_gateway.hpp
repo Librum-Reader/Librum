@@ -33,15 +33,14 @@ public:
                    const QString& newName) override;
 
 private slots:
-    void proccessUserData(const QString& firstName, const QString& lastName,
-                          const QString& email, long usedBookStorage,
-                          long bookStorageLimit,
-                          const QDateTime& profilePictureLastUpdated,
-                          bool hasProfilePicture, const QJsonArray& tags);
+    void proccessUserData(const QByteArray& data);
 
     void reportFailureGettingUser();
 
 private:
+    void assignValuesToUser(domain::entities::User& user,
+                            const QByteArray& values);
+    void addTagsToUser(domain::entities::User& user, const QJsonArray& tags);
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 
