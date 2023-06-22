@@ -1,4 +1,5 @@
 #pragma once
+#include <QDate>
 #include <QDir>
 #include <QFile>
 #include <QJsonArray>
@@ -18,6 +19,7 @@ struct UserData
     QString email;
     long usedBookStorage;
     long bookStorageLimit;
+    QDateTime profilePictureLastUpdated;
     std::vector<domain::entities::Tag> tags;
 };
 
@@ -83,6 +85,8 @@ void appendUserDataToJsonObject(QJsonObject& jsonObject, UserData userData)
                       static_cast<qint64>(userData.usedBookStorage));
     jsonObject.insert("bookStorageLimit",
                       static_cast<qint64>(userData.bookStorageLimit));
+    jsonObject.insert("profilePictureLastUpdated",
+                      userData.profilePictureLastUpdated.toString());
 
     QJsonArray tags;
     for(const auto& tag : userData.tags)
@@ -145,6 +149,8 @@ inline std::optional<UserData> tryAutomaticUserLoading()
         automaticLoginData["email"].toString(),
         static_cast<long>(automaticLoginData["usedBookStorage"].toDouble()),
         static_cast<long>(automaticLoginData["bookStorageLimit"].toDouble()),
+        QDateTime::fromString(
+            automaticLoginData["profilePictureLastUpdated"].toString()),
         std::vector<Tag>(),
     };
 

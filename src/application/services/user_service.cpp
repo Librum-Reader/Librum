@@ -57,22 +57,14 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
 
 void UserService::loadUser(bool rememberUser)
 {
-    // auto success = tryLoadingUserFromFile();
-    auto success = false;
-    if(!success)
-    {
-        // Load user from server
-        m_rememberUser = rememberUser;
-        m_userStorageGateway->getUser(m_authenticationToken);
-        return;
-    }
+    auto success = tryLoadingUserFromFile();
 
-    // If the user was loaded from file, we know that "rememberUser" is true
-    m_rememberUser = true;
+    // When user was loaded from file, we know that 'rememberMe' is true
+    m_rememberUser = success ? true : rememberUser;
 
-    // Load the user a few milliseconds after the user was loaded from the
-    // file to update the local data with the freshest data from the server.
-    // Add a delay of a few milliseconds because else we create a segfault.
+    // Load the user from the server, since it may have been updated since it
+    // was stored to the 'automatic login file'. Add a slight delay (e.g.
+    // 100ms), else we generate a segfault.
     QTimer* timer = new QTimer;
     timer->setInterval(100);
     connect(timer, &QTimer::timeout, this,
@@ -80,7 +72,7 @@ void UserService::loadUser(bool rememberUser)
             {
                 m_userStorageGateway->getUser(m_authenticationToken);
 
-                // Free the timer's memory
+                // Free the timer's memory after first timeout
                 auto reply = qobject_cast<QTimer*>(sender());
                 reply->deleteLater();
             });
@@ -233,6 +225,7 @@ void UserService::loadProfilePictureFromFile()
 
     QString path = userDir.absoluteFilePath(fullProfilePictureName);
     m_user.setProfilePicturePath(path);
+    m_user.setHasProfilePicture(true);
 }
 
 void UserService::updateProfilePictureUI(const QString& path)
@@ -340,9 +333,37 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
         return;
     }
 
-    // if(m_user.getProfilePicturePath().isEmpty())
-    //     loadProfilePictureFromFile();
+    updateProfilePicture(user);
+    setUserData(user);
+    emit finishedLoadingUser(true);
+    emit bookStorageDataUpdated(user.getUsedBookStorage(),
+                                user.getBookStorageLimit());
 
+    // If "rememberUser" is true, update the saved autologin user data
+    // everytime there are changes to the user. This way, when logging in
+    // via autologin the next time, you already have the newest changes
+    // available.
+    if(m_rememberUser)
+        saveUserToFile(user);
+}
+
+void UserService::setUserData(const User& user)
+{
+    m_user.setFirstName(user.getFirstName());
+    m_user.setLastName(user.getLastName());
+    m_user.setEmail(user.getEmail());
+    m_user.setUsedBookStorage(user.getUsedBookStorage());
+    m_user.setBookStorageLimit(user.getBookStorageLimit());
+    m_user.setProfilePictureLastUpdated(user.getProfilePictureLastUpdated());
+
+    for(const auto& tag : user.getTags())
+    {
+        m_user.addTag(tag);
+    }
+}
+
+void UserService::updateProfilePicture(const domain::entities::User& user)
+{
     if(m_user.hasProfilePicture() && !user.hasProfilePicture())
     {
         deleteProfilePictureLocally();
@@ -352,25 +373,6 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
     {
         m_userStorageGateway->getProfilePicture(m_authenticationToken);
     }
-
-    m_user.setFirstName(user.getFirstName());
-    m_user.setLastName(user.getLastName());
-    m_user.setEmail(user.getEmail());
-    m_user.setUsedBookStorage(user.getUsedBookStorage());
-    m_user.setBookStorageLimit(user.getBookStorageLimit());
-    m_user.setProfilePictureLastUpdated(user.getProfilePictureLastUpdated());
-    for(const auto& tag : user.getTags())
-        m_user.addTag(tag);
-
-    emit finishedLoadingUser(true);
-    emit bookStorageDataUpdated(user.getUsedBookStorage(),
-                                user.getBookStorageLimit());
-
-    // If "rememberUser" is true, update the saved autologin user data everytime
-    // there are changes to the user. This way, when logging in via autologin
-    // the next time, you already have the newest changes available.
-    if(m_rememberUser)
-        saveUserToFile(user);
 }
 
 bool UserService::userIsLoggedIn()
@@ -386,10 +388,19 @@ bool UserService::tryLoadingUserFromFile()
         utility::UserData userData = result.value();
         User user(userData.firstName, userData.lastName, userData.email,
                   userData.usedBookStorage, userData.bookStorageLimit);
+        user.setProfilePictureLastUpdated(userData.profilePictureLastUpdated);
         for(auto& tag : userData.tags)
             user.addTag(tag);
 
-        proccessUserInformation(user, true);
+        setUserData(user);
+        loadProfilePictureFromFile();
+        QString path = m_user.getProfilePicturePath();  // Needs to copy!
+        updateProfilePictureUI(path);
+
+        emit finishedLoadingUser(true);
+        emit bookStorageDataUpdated(user.getUsedBookStorage(),
+                                    user.getBookStorageLimit());
+
         return true;
     }
 
@@ -399,8 +410,13 @@ bool UserService::tryLoadingUserFromFile()
 void UserService::saveUserToFile(const domain::entities::User& user)
 {
     utility::UserData userData {
-        user.getFirstName(),       user.getLastName(),         user.getEmail(),
-        user.getUsedBookStorage(), user.getBookStorageLimit(), user.getTags(),
+        user.getFirstName(),
+        user.getLastName(),
+        user.getEmail(),
+        user.getUsedBookStorage(),
+        user.getBookStorageLimit(),
+        user.getProfilePictureLastUpdated(),
+        user.getTags(),
     };
 
     utility::AutomaticLoginHelper::saveUserData(userData);
