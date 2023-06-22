@@ -45,7 +45,7 @@ private:
                              const QString& newKeyName);
 
     IUserStorageAccess* m_userStorageAccess;
-    QString m_dateTimeFormat = "hh:mm:ss - dd.MM.yyyy";
+    QString m_dateTimeFormat = "yyyy-MM-ddThh:mm:ss";
 };
 
 }  // namespace adapters::gateways
