@@ -160,21 +160,12 @@ void UserService::setProfilePicturePath(const QString& path)
 
 void UserService::deleteProfilePicture()
 {
-    deleteProfilePictureFile();
-
-    auto newProfilePictureLastUpdated = QDateTime::currentDateTimeUtc();
-    auto newHasProfilePicture = false;
-
-    m_user.setProfilePictureLastUpdated(newProfilePictureLastUpdated);
-    m_user.setHasProfilePicture(newHasProfilePicture);
+    auto newProfilePictureLastUpdated = deleteProfilePictureLocally();
 
     m_userStorageGateway->deleteProfilePicture(m_authenticationToken);
     m_userStorageGateway->changeProfilePictureLastUpdated(
         m_authenticationToken, newProfilePictureLastUpdated);
-    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken,
-                                                  newHasProfilePicture);
-
-    updateProfilePictureUI("");
+    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken, false);
 }
 
 QString UserService::saveProfilePictureToFile(QByteArray& data)
@@ -266,18 +257,28 @@ QString UserService::getFullProfilePictureName()
     return matchingFiles.first();
 }
 
-void UserService::deleteProfilePictureFile()
+QDateTime UserService::deleteProfilePictureLocally()
 {
-    auto userDir = getUserProfileDir();
+    auto newProfilePictureLastUpdated = QDateTime::currentDateTimeUtc();
 
     QString fullProfilePictureName = getFullProfilePictureName();
     if(fullProfilePictureName.isEmpty())
-        return;
+        return newProfilePictureLastUpdated;
 
+    auto userDir = getUserProfileDir();
     QString path = userDir.absoluteFilePath(fullProfilePictureName);
 
     QFile file(path);
     file.remove();
+
+    m_user.setProfilePictureLastUpdated(newProfilePictureLastUpdated);
+    m_user.setHasProfilePicture(false);
+
+    updateProfilePictureUI("");
+
+    // return date and time that have been set locally so app and server could
+    // sync correctly
+    return newProfilePictureLastUpdated;
 }
 
 const std::vector<domain::entities::Tag>& UserService::getTags() const
@@ -352,10 +353,7 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
 
     if(user.getHasProfilePicture() == false)
     {
-        deleteProfilePictureFile();
-        m_user.setHasProfilePicture(false);
-        m_user.setProfilePictureLastUpdated(QDateTime::currentDateTimeUtc());
-        updateProfilePictureUI("");
+        deleteProfilePictureLocally();
     }
     else if(!m_user.getHasProfilePicture() && user.getHasProfilePicture() ||
             m_user.getProfilePictureLastUpdated() <
