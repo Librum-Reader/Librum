@@ -143,19 +143,17 @@ void UserService::setProfilePicturePath(const QString& path)
         return;
 
     auto savedProfilePicturePath = saveProfilePictureToFile(path);
-    auto newHasProfilePicture = path.isEmpty() ? false : true;
     auto newProfilePictureLastUpdated = QDateTime::currentDateTimeUtc();
 
     m_user.setProfilePicturePath(savedProfilePicturePath);
     m_user.setProfilePictureLastUpdated(newProfilePictureLastUpdated);
-    m_user.setHasProfilePicture(newHasProfilePicture);
+    m_user.setHasProfilePicture(true);
 
     m_userStorageGateway->changeProfilePicture(m_authenticationToken,
                                                savedProfilePicturePath);
     m_userStorageGateway->changeProfilePictureLastUpdated(
         m_authenticationToken, newProfilePictureLastUpdated);
-    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken,
-                                                  newHasProfilePicture);
+    m_userStorageGateway->changeHasProfilePicture(m_authenticationToken, true);
 
     updateProfilePictureUI(savedProfilePicturePath);
 }
