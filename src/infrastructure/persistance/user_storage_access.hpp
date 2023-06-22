@@ -30,12 +30,13 @@ public:
     void changeProfilePicture(const QString& authToken,
                               const QString& path) override;
     void deleteProfilePicture(const QString& authToken) override;
+    void changeProfilePictureLastUpdated(const QString& authToken,
+                                         const QString& newDateTime) override;
+    void changeHasProfilePicture(const QString& authToken,
+                                 const QString& newValue) override;
     void deleteTag(const QString& authToken, const QString& uuid) override;
     void renameTag(const QString& authToken,
                    const QJsonObject& bookForUpdate) override;
-
-private slots:
-    void proccessGetUserResult();
 
 private:
     void addImagePartToMultiPart(QHttpMultiPart* multiPart,

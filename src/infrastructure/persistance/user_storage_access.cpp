@@ -13,10 +13,25 @@ namespace infrastructure::persistence
 void UserStorageAccess::getUser(const QString& authToken)
 {
     auto request = createRequest(data::userGetEndpoint, authToken);
-    auto reply = m_networkAccessManager.get(request);
+    auto getUserReply = m_networkAccessManager.get(request);
 
-    connect(reply, &QNetworkReply::finished, this,
-            &UserStorageAccess::proccessGetUserResult);
+    connect(getUserReply, &QNetworkReply::finished, this,
+            [this]
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply, "Getting User");
+
+                    emit gettingUserFailed();
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit userReady(reply->readAll());
+
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::getProfilePicture(const QString& authToken)
@@ -165,6 +180,62 @@ void UserStorageAccess::deleteProfilePicture(const QString& authToken)
             });
 }
 
+void UserStorageAccess::changeProfilePictureLastUpdated(
+    const QString& authToken, const QString& newDateTime)
+{
+    QString endPoint = data::userPatchEndpoint;
+    auto request = createRequest(endPoint, authToken);
+
+    const QString quote = "\"";
+    auto jsonData =
+        R"([{ "op": "replace", "path": "profilePictureLastUpdated", "value": )" +
+        quote + newDateTime + quote + "}]";
+
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Changing profile picture last updated date");
+                }
+
+                reply->deleteLater();
+            });
+}
+
+void UserStorageAccess::changeHasProfilePicture(const QString& authToken,
+                                                const QString& newValue)
+{
+    QString endPoint = data::userPatchEndpoint;
+    auto request = createRequest(endPoint, authToken);
+
+    const QString quote = "\"";
+    auto jsonData =
+        R"([{ "op": "replace", "path": "hasProfilePicture", "value": )" +
+        quote + newValue + quote + "}]";
+
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "PATCH",
+                                                          jsonData.toUtf8());
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this]()
+            {
+                auto reply = qobject_cast<QNetworkReply*>(sender());
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Changing has profile picture");
+                }
+
+                reply->deleteLater();
+            });
+}
+
 void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 {
     QString endPoint = data::tagDeletionEndpoint + "/" + uuid;
@@ -212,38 +283,6 @@ void UserStorageAccess::renameTag(const QString& authToken,
 
                 reply->deleteLater();
             });
-}
-
-void UserStorageAccess::proccessGetUserResult()
-{
-    auto reply = qobject_cast<QNetworkReply*>(sender());
-    if(api_error_helper::apiRequestFailed(reply, 200))
-    {
-        api_error_helper::logErrorMessage(reply, "Getting User");
-
-        emit gettingUserFailed();
-        reply->deleteLater();
-        return;
-    }
-
-
-    auto jsonDoc = QJsonDocument::fromJson(reply->readAll());
-    auto jsonObj = jsonDoc.object();
-
-    auto firstName = jsonObj["firstName"].toString();
-    auto lastName = jsonObj["lastName"].toString();
-    auto usedBookStorage =
-        static_cast<long>(jsonObj["usedBookStorage"].toDouble());
-    auto bookStorageLimit =
-        static_cast<long>(jsonObj["bookStorageLimit"].toDouble());
-    auto email = jsonObj["email"].toString();
-    auto tags = jsonObj["tags"].toArray();
-
-    emit userReady(firstName, lastName, email, usedBookStorage,
-                   bookStorageLimit, tags);
-
-    // Make sure to release the reply's memory
-    reply->deleteLater();
 }
 
 void UserStorageAccess::addImagePartToMultiPart(QHttpMultiPart* multiPart,

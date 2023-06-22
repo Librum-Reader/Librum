@@ -60,6 +60,20 @@ void UserStorageGateway::deleteProfilePicture(const QString& authToken)
     m_userStorageAccess->deleteProfilePicture(authToken);
 }
 
+void UserStorageGateway::changeProfilePictureLastUpdated(
+    const QString& authToken, const QDateTime& newDateTime)
+{
+    m_userStorageAccess->changeProfilePictureLastUpdated(
+        authToken, newDateTime.toString(m_dateTimeFormat));
+}
+
+void UserStorageGateway::changeHasProfilePicture(const QString& authToken,
+                                                 bool newValue)
+{
+    QString newValueStr = newValue ? "true" : "false";
+    m_userStorageAccess->changeHasProfilePicture(authToken, newValueStr);
+}
+
 void UserStorageGateway::deleteTag(const QString& authToken, const QUuid& uuid)
 {
     m_userStorageAccess->deleteTag(authToken,
@@ -77,19 +91,11 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
     m_userStorageAccess->renameTag(authToken, jsonTag);
 }
 
-void UserStorageGateway::proccessUserData(
-    const QString& firstName, const QString& lastName, const QString& email,
-    long usedBookStorage, long bookStorageLimit, const QJsonArray& tags)
+void UserStorageGateway::proccessUserData(const QByteArray& data)
 {
-    User user(firstName, lastName, email, usedBookStorage, bookStorageLimit);
-    for(const auto& tag : tags)
-    {
-        auto jsonTagObject = tag.toObject();
-        renameJsonObjectKey(jsonTagObject, "guid", "uuid");
+    User user("x", "y", "z", 0, 0);
 
-        auto tagToAdd = Tag::fromJson(jsonTagObject);
-        user.addTag(tagToAdd);
-    }
+    assignValuesToUser(user, data);
 
     emit finishedGettingUser(user, true);
 }
@@ -98,6 +104,38 @@ void UserStorageGateway::reportFailureGettingUser()
 {
     User emptyUser("invalid", "invalid", "invalid@email.x", 0, 0);
     emit finishedGettingUser(emptyUser, false);
+}
+
+void UserStorageGateway::assignValuesToUser(User& user,
+                                            const QByteArray& values)
+{
+    auto jsonDoc = QJsonDocument::fromJson(values);
+    auto jsonObj = jsonDoc.object();
+
+    user.setFirstName(jsonObj["firstName"].toString());
+    user.setLastName(jsonObj["lastName"].toString());
+    user.setUsedBookStorage(
+        static_cast<long>(jsonObj["usedBookStorage"].toDouble()));
+    user.setBookStorageLimit(
+        static_cast<long>(jsonObj["bookStorageLimit"].toDouble()));
+    user.setProfilePictureLastUpdated(QDateTime::fromString(
+        jsonObj["profilePictureLastUpdated"].toString(), m_dateTimeFormat));
+    user.setHasProfilePicture(jsonObj["hasProfilePicture"].toBool());
+    user.setEmail(jsonObj["email"].toString());
+
+    addTagsToUser(user, jsonObj["tags"].toArray());
+}
+
+void UserStorageGateway::addTagsToUser(User& user, const QJsonArray& tags)
+{
+    for(const auto& tag : tags)
+    {
+        auto jsonTagObject = tag.toObject();
+        renameJsonObjectKey(jsonTagObject, "guid", "uuid");
+
+        auto tagToAdd = Tag::fromJson(jsonTagObject);
+        user.addTag(tagToAdd);
+    }
 }
 
 void UserStorageGateway::renameJsonObjectKey(QJsonObject& jsonObject,

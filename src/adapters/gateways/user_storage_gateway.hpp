@@ -24,22 +24,28 @@ public:
     void changeProfilePicture(const QString& authToken,
                               const QString& path) override;
     void deleteProfilePicture(const QString& authToken) override;
+    void changeProfilePictureLastUpdated(const QString& authToken,
+                                         const QDateTime& newDateTime) override;
+    void changeHasProfilePicture(const QString& authToken,
+                                 bool newValue) override;
     void deleteTag(const QString& authToken, const QUuid& uuid) override;
     void renameTag(const QString& authToken, const QUuid& uuid,
                    const QString& newName) override;
 
 private slots:
-    void proccessUserData(const QString& firstName, const QString& lastName,
-                          const QString& email, long usedBookStorage,
-                          long bookStorageLimit, const QJsonArray& tags);
+    void proccessUserData(const QByteArray& data);
 
     void reportFailureGettingUser();
 
 private:
+    void assignValuesToUser(domain::entities::User& user,
+                            const QByteArray& values);
+    void addTagsToUser(domain::entities::User& user, const QJsonArray& tags);
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 
     IUserStorageAccess* m_userStorageAccess;
+    QString m_dateTimeFormat = "yyyy-MM-ddThh:mm:ss";
 };
 
 }  // namespace adapters::gateways
