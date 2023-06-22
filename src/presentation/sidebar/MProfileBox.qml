@@ -68,6 +68,7 @@ Item
                     source: UserController.profilePicture
                     sourceSize.height: parent.height
                     fillMode: Image.PreserveAspectFit
+                    cache: false
                 }
                 
                 MouseArea

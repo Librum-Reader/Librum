@@ -48,6 +48,7 @@ Item
                 source: root.image.length > 0 ? root.image : UserController.profilePicture
                 sourceSize.height: emptyDropArea.height
                 fillMode: Image.PreserveAspectFit
+                cache: false
             }
             
             /*
