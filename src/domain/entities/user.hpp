@@ -14,8 +14,7 @@ class User : public QObject
 public:
     User(const QString& firstName, const QString& lastName,
          const QString& email, long usedBookStorage, long bookStorageLimit,
-         const QDateTime& profilePictureLastUpdated =
-             QDateTime::currentDateTimeUtc(),
+         const QDateTime& profilePictureLastUpdated = QDateTime(),
          bool hasProfilePicture = false);
 
     const QString& getFirstName() const;
@@ -33,7 +32,7 @@ public:
     long getBookStorageLimit() const;
     void setBookStorageLimit(long newBookStorageLimit);
 
-    bool getHasProfilePicture() const;
+    bool hasProfilePicture() const;
     void setHasProfilePicture(bool newValue);
 
     const QDateTime& getProfilePictureLastUpdated() const;

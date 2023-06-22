@@ -67,7 +67,7 @@ void User::setBookStorageLimit(long newBookStorageLimit)
     m_bookStorageLimit = newBookStorageLimit;
 }
 
-bool User::getHasProfilePicture() const
+bool User::hasProfilePicture() const
 {
     return m_hasProfilePicture;
 }

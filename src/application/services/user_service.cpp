@@ -340,27 +340,27 @@ void UserService::proccessUserInformation(const domain::entities::User& user,
         return;
     }
 
+    // if(m_user.getProfilePicturePath().isEmpty())
+    //     loadProfilePictureFromFile();
+
+    if(m_user.hasProfilePicture() && !user.hasProfilePicture())
+    {
+        deleteProfilePictureLocally();
+    }
+    else if(m_user.getProfilePictureLastUpdated().toSecsSinceEpoch() <
+            user.getProfilePictureLastUpdated().toSecsSinceEpoch())
+    {
+        m_userStorageGateway->getProfilePicture(m_authenticationToken);
+    }
+
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
     m_user.setUsedBookStorage(user.getUsedBookStorage());
     m_user.setBookStorageLimit(user.getBookStorageLimit());
+    m_user.setProfilePictureLastUpdated(user.getProfilePictureLastUpdated());
     for(const auto& tag : user.getTags())
         m_user.addTag(tag);
-
-    // if(m_user.getProfilePicturePath().isEmpty())
-    //     loadProfilePictureFromFile();
-
-    if(user.getHasProfilePicture() == false)
-    {
-        deleteProfilePictureLocally();
-    }
-    else if(!m_user.getHasProfilePicture() && user.getHasProfilePicture() ||
-            m_user.getProfilePictureLastUpdated() <
-                user.getProfilePictureLastUpdated())
-    {
-        m_userStorageGateway->getProfilePicture(m_authenticationToken);
-    }
 
     emit finishedLoadingUser(true);
     emit bookStorageDataUpdated(user.getUsedBookStorage(),
