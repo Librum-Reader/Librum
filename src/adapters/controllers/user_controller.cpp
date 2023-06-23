@@ -46,7 +46,7 @@ void UserController::loadUser(bool rememberUser)
     m_userService->loadUser(rememberUser);
 }
 
-void UserController::refresh()
+void UserController::syncWithServer()
 {
     m_userService->downloadUser();
 }

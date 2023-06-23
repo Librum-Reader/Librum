@@ -75,7 +75,7 @@ BookController::BookController(application::IBookService* bookService) :
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
 
-void BookController::refresh()
+void BookController::syncWithServer()
 {
     m_bookService->downloadBooks();
 }

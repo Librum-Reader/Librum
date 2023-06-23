@@ -15,8 +15,8 @@ public:
     UserController(application::IUserService* userService);
 
     void loadUser(bool rememberUser) override;
-
-    void refresh() override;
+    
+    void syncWithServer() override;
 
     QString getTagUuidForName(QString name) override;
     QString addTag(const QString& name) override;

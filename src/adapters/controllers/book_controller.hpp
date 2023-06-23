@@ -17,7 +17,6 @@ class BookController : public IBookController
 public:
     BookController(application::IBookService* bookService);
 
-    void refresh() override;
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
     int uninstallBook(const QString& uuid) override;
@@ -31,7 +30,8 @@ public:
     int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
-
+    
+    void syncWithServer() override;
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
     data_models::LibraryProxyModel* getLibraryModel() override;
 
