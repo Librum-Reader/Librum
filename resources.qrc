@@ -95,7 +95,6 @@
         <file>resources/images/light_mode/utility/search_icon.svg</file>
         <file>resources/images/light_mode/sidebar/sync_icon.svg</file>
         <file>resources/images/light_mode/sidebar/log_out_icon.svg</file>
-        <file>resources/images/light_mode/utility/trash_icon.svg</file>
         <file>resources/images/light_mode/utility/trash_highlighted_icon.svg</file>
         <file>resources/images/light_mode/decoration/patreon_icon.svg</file>
         <file>resources/images/light_mode/decoration/heart_hallow_icon.svg</file>
@@ -199,5 +198,8 @@
         <file>resources/images/dark_mode/decoration/heart_hallow_icon.svg</file>
         <file>resources/images/dark_mode/decoration/heart_icon.svg</file>
         <file>resources/images/light_mode/decoration/heart_icon.svg</file>
+        <file>resources/images/light_mode/utility/trash_icon.svg</file>
+        <file>resources/images/dark_mode/utility/trash_red_icon.svg</file>
+        <file>resources/images/light_mode/utility/trash_red_icon.svg</file>
     </qresource>
 </RCC>
