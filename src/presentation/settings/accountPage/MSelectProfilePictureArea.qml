@@ -10,7 +10,7 @@ import Librum.controllers 1.0
 Item
 {
     id: root
-    property string image: ""
+    property string currentImage: ""  // Being set to "!" means DELETED
     
     implicitWidth: 100
     implicitHeight: 100
@@ -35,7 +35,7 @@ Item
             id: dropArea
             anchors.fill: parent
             
-            onDropped: (drop) => root.image = drop.urls[0]
+            onDropped: (drop) => root.currentImage = drop.urls[0]
             
             /*
               The image which is displayed when the dropArea owns an image
@@ -45,7 +45,7 @@ Item
                 id: profilePicture
                 anchors.fill: parent
                 visible: internal.imageExists
-                source: root.image.length > 0 ? root.image : UserController.profilePicture
+                source: root.currentImage.length > 0 ? (root.currentImage == "!" ? "" : root.currentImage) : UserController.profilePicture
                 sourceSize.height: emptyDropArea.height
                 fillMode: Image.PreserveAspectFit
                 cache: false
@@ -125,9 +125,35 @@ Item
         }
     }
     
+    Image
+    {
+        id: deletePictureButton
+        z: 2
+        anchors.top: parent.top
+        anchors.right: parent.right
+        sourceSize.width: 19
+        anchors.topMargin: 8
+        anchors.rightMargin: 8
+        source: Icons.trashRed
+        fillMode: Image.PreserveAspectFit
+        opacity: deletePictureArea.pressed ? 0.6 : 0.8
+        visible: (deletePictureArea.containsMouse || mainArea.containsMouse) && internal.imageExists
+        
+        MouseArea
+        {
+            id: deletePictureArea
+            anchors.fill: parent
+            hoverEnabled: true
+            
+            onClicked: root.currentImage = "!";
+        }
+    }
+    
     MouseArea
     {
+        id: mainArea
         anchors.fill: parent
+        hoverEnabled: true
         
         onClicked: fileDialog.open()
     }
@@ -139,12 +165,13 @@ Item
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
         nameFilters: ["All files (*)", "png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
         
-        onAccepted: root.image = file
+        onAccepted: root.currentImage = file
     }
     
     QtObject
     {
         id: internal
-        property bool imageExists: (root.image.length > 0) || (UserController.profilePicture.length > 0)
+        property bool imageExists: ((root.currentImage.length > 0) || (UserController.profilePicture.length > 0)) 
+                                   && root.currentImage != "!"
     }
 }
