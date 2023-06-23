@@ -51,9 +51,9 @@ Popup
             
             onClicked: 
             {
-                BookController.refresh();
-                UserController.refresh();
-                close();
+                BookController.syncWithServer();
+                UserController.syncWithServer();
+                root.close();
             }
         }
         
