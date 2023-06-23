@@ -36,7 +36,7 @@ public:
     MOCK_METHOD(bool, deleteBookCoverLocally, (const QUuid&), (override));
     MOCK_METHOD(void, downloadBookCover, (const QUuid&), (override));
     MOCK_METHOD(std::vector<Book>, loadLocalBooks, (), (override));
-    MOCK_METHOD(void, loadRemoteBooks, (), (override));
+    MOCK_METHOD(void, downloadRemoteBooks, (), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));

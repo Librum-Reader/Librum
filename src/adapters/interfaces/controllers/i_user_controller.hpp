@@ -33,6 +33,8 @@ public:
 
     Q_INVOKABLE virtual void loadUser(bool rememberUser) = 0;
 
+    Q_INVOKABLE virtual void refresh() = 0;
+
     Q_INVOKABLE virtual QString getTagUuidForName(QString name) = 0;
     Q_INVOKABLE virtual QString addTag(const QString& name) = 0;
     Q_INVOKABLE virtual bool deleteTag(const QString& uuid) = 0;

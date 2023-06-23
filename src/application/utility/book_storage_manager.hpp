@@ -27,7 +27,7 @@ public:
     bool deleteBookCoverLocally(const QUuid& uuid) override;
     void downloadBookCover(const QUuid& uuid) override;
     std::vector<domain::entities::Book> loadLocalBooks() override;
-    void loadRemoteBooks() override;
+    void downloadRemoteBooks() override;
 
     void setUserData(const QString& email, const QString& authToken) override;
     void clearUserData() override;

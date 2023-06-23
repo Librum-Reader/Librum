@@ -17,6 +17,7 @@ class BookController : public IBookController
 public:
     BookController(application::IBookService* bookService);
 
+    void refresh() override;
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
     int uninstallBook(const QString& uuid) override;

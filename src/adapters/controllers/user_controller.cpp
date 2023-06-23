@@ -46,6 +46,11 @@ void UserController::loadUser(bool rememberUser)
     m_userService->loadUser(rememberUser);
 }
 
+void UserController::refresh()
+{
+    m_userService->downloadUser();
+}
+
 QString UserController::getTagUuidForName(QString name)
 {
     // Tags are always capitalized, make sure to search for the correct one

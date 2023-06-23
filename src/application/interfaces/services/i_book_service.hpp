@@ -20,6 +20,7 @@ class IBookService : public QObject
 public:
     virtual ~IBookService() noexcept = default;
 
+    virtual void downloadBooks() = 0;
     virtual BookOperationStatus addBook(const QString& filePath) = 0;
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;

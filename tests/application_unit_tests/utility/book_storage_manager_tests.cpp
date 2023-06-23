@@ -210,7 +210,7 @@ TEST_F(ABookStorageManager, SucceedsLoadingRemoteBooks)
     EXPECT_CALL(bookStorageGatewayMock, getBooksMetaData(_)).Times(1);
 
     // Act
-    bookStorageManager->loadRemoteBooks();
+    bookStorageManager->downloadRemoteBooks();
 }
 
 TEST_F(ABookStorageManager, SucceedsDownloadingBook)

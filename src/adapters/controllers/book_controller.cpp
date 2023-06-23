@@ -75,6 +75,11 @@ BookController::BookController(application::IBookService* bookService) :
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
 
+void BookController::refresh()
+{
+    m_bookService->downloadBooks();
+}
+
 int BookController::addBook(const QString& path)
 {
     auto result = m_bookService->addBook(path);
