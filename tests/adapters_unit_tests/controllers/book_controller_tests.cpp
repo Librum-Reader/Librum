@@ -28,6 +28,7 @@ namespace tests::adapters
 class BookServiceMock : public IBookService
 {
 public:
+    MOCK_METHOD(void, downloadBooks, (), (override));
     MOCK_METHOD(BookOperationStatus, addBook, (const QString&), (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, uninstallBook, (const QUuid&), (override));

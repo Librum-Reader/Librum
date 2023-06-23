@@ -47,7 +47,7 @@ public:
     };
     Q_ENUM(MetaProperty);
 
-
+    Q_INVOKABLE virtual void refresh() = 0;
     Q_INVOKABLE virtual int addBook(const QString& path) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int uninstallBook(const QString& uuid) = 0;

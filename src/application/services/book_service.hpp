@@ -18,6 +18,7 @@ public:
     BookService(IBookMetadataHelper* bookMetadataHelper,
                 IBookStorageManager* bookStorageManager);
 
+    void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;

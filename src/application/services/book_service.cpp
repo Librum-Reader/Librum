@@ -29,11 +29,11 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
-            &IBookStorageManager::loadRemoteBooks);
+            &IBookStorageManager::downloadRemoteBooks);
 
     // Getting books finished
     connect(m_bookStorageManager,
-            &IBookStorageManager::loadingRemoteBooksFinished, this,
+            &IBookStorageManager::finishedDownloadingRemoteBooks, this,
             &BookService::updateLibrary);
 
     // Downloading book media progress
@@ -54,6 +54,11 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Storage limit exceeded
     connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
             this, &BookService::storageLimitExceeded);
+}
+
+void BookService::downloadBooks()
+{
+    m_bookStorageManager->downloadRemoteBooks();
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)
@@ -515,7 +520,7 @@ void BookService::setupUserData(const QString& token, const QString& email)
     m_bookStorageManager->setUserData(email, token);
 
     loadLocalBooks();
-    m_bookStorageManager->loadRemoteBooks();
+    m_bookStorageManager->downloadRemoteBooks();
 
     m_fetchChangesTimer.start();
 }

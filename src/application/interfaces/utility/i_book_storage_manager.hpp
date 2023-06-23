@@ -36,14 +36,15 @@ public:
     virtual bool deleteBookCoverLocally(const QUuid& uuid) = 0;
     virtual void downloadBookCover(const QUuid& uuid) = 0;
     virtual std::vector<domain::entities::Book> loadLocalBooks() = 0;
-    virtual void loadRemoteBooks() = 0;
+    virtual void downloadRemoteBooks() = 0;
 
     virtual void setUserData(const QString& email,
                              const QString& authToken) = 0;
     virtual void clearUserData() = 0;
 
 signals:
-    void loadingRemoteBooksFinished(std::vector<domain::entities::Book>& books);
+    void finishedDownloadingRemoteBooks(
+        std::vector<domain::entities::Book>& books);
     void downloadingBookMediaProgressChanged(const QUuid& uuid,
                                              qint64 bytesReceived,
                                              qint64 bytesTotal);

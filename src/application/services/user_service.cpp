@@ -79,6 +79,11 @@ void UserService::loadUser(bool rememberUser)
     timer->start();
 }
 
+void UserService::downloadUser()
+{
+    m_userStorageGateway->getUser(m_authenticationToken);
+}
+
 QString UserService::getFirstName() const
 {
     return m_user.getFirstName();

@@ -21,6 +21,7 @@ public:
     virtual ~IUserService() noexcept = default;
 
     virtual void loadUser(bool rememberUser) = 0;
+    virtual void downloadUser() = 0;
 
     virtual QString getFirstName() const = 0;
     virtual void setFirstName(const QString& newFirstName) = 0;

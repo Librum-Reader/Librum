@@ -127,7 +127,7 @@ void BookStorageManager::processBookMetadata(std::vector<Book>& books)
         }
     }
 
-    emit loadingRemoteBooksFinished(books);
+    emit finishedDownloadingRemoteBooks(books);
 }
 
 bool BookStorageManager::userLoggedIn()
@@ -263,7 +263,7 @@ std::vector<Book> BookStorageManager::loadLocalBooks()
     return m_localBooks;
 }
 
-void BookStorageManager::loadRemoteBooks()
+void BookStorageManager::downloadRemoteBooks()
 {
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }

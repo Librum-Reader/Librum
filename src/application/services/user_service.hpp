@@ -16,6 +16,7 @@ public:
     UserService(IUserStorageGateway* userStorageGateway);
 
     void loadUser(bool rememberUser) override;
+    void downloadUser() override;
 
     QString getFirstName() const override;
     void setFirstName(const QString& newFirstName) override;
