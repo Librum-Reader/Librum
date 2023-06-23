@@ -33,6 +33,7 @@ public:
 
     Q_INVOKABLE virtual void loadUser(bool rememberUser) = 0;
     Q_INVOKABLE virtual void syncWithServer() = 0;
+    Q_INVOKABLE virtual void deleteProfilePicture() = 0;
 
     Q_INVOKABLE virtual QString getTagUuidForName(QString name) = 0;
     Q_INVOKABLE virtual QString addTag(const QString& name) = 0;
@@ -54,7 +55,6 @@ public:
 
     virtual QString getProfilePicturePath() const = 0;
     virtual void setProfilePicture(const QString& path) = 0;
-    virtual void deleteProfilePicture() = 0;
 
     virtual data_models::UserTagsModel* getUserTagsModel() = 0;
 
