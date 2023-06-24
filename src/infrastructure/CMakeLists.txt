@@ -10,6 +10,8 @@ add_library(infrastructure
                     persistance/user_storage_access.hpp
                     persistance/book_storage_access.cpp
                     persistance/book_storage_access.hpp
+                    persistance/free_books_storage_access.cpp
+                    persistance/free_books_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
                     

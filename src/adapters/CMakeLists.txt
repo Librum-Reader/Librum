@@ -8,16 +8,20 @@ add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
                     interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_free_books_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_book_storage_access.hpp
+                    interfaces/persistance/i_free_books_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
                     controllers/book_controller.cpp
                     controllers/book_controller.hpp
+                    controllers/free_books_controller.cpp
+                    controllers/free_books_controller.hpp
                     controllers/user_controller.cpp
                     controllers/user_controller.hpp
                     controllers/settings_controller.cpp
@@ -29,6 +33,8 @@ add_library(adapters
                     gateways/authentication_gateway.hpp
                     gateways/book_storage_gateway.cpp
                     gateways/book_storage_gateway.hpp
+                    gateways/free_books_storage_gateway.cpp
+                    gateways/free_books_storage_gateway.hpp
                     
                     data_models/app_information.hpp
                     data_models/library_model/library_model.cpp
