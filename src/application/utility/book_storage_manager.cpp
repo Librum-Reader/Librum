@@ -35,6 +35,10 @@ BookStorageManager::BookStorageManager(
     // Storage limit exceeded
     connect(m_bookStorageGateway, &IBookStorageGateway::storageLimitExceeded,
             this, &BookStorageManager::storageLimitExceeded);
+
+    // Book upload succeeded
+    connect(m_bookStorageGateway, &IBookStorageGateway::bookUploadSucceeded,
+            this, &BookStorageManager::bookUploadSucceeded);
 }
 
 void BookStorageManager::setUserData(const QString& email,

@@ -2,6 +2,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QPixmap>
 #include <QTime>
 #include <ranges>
@@ -9,7 +10,6 @@
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "qfileinfo.h"
 
 using namespace domain::entities;
 using std::size_t;
@@ -54,6 +54,17 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Storage limit exceeded
     connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
             this, &BookService::storageLimitExceeded);
+
+    // Book upload succeeded
+    connect(m_bookStorageManager, &IBookStorageManager::bookUploadSucceeded,
+            this,
+            [this](const QUuid& uuid)
+            {
+                auto book = getBook(uuid);
+                book->setExistsOnlyOnClient(false);
+
+                m_bookStorageManager->updateBookLocally(*book);
+            });
 }
 
 void BookService::downloadBooks()

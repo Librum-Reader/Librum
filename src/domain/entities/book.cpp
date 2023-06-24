@@ -244,6 +244,16 @@ void Book::setDownloaded(bool newDownloaded)
     m_isDownloaded = newDownloaded;
 }
 
+bool Book::getExistsOnlyOnClient() const
+{
+    return m_existsOnlyOnClient;
+}
+
+void Book::setExistsOnlyOnClient(bool newExistsOnlyOnClient)
+{
+    m_existsOnlyOnClient = newExistsOnlyOnClient;
+}
+
 int Book::getBookReadingProgress() const
 {
     if(!getLastOpened().isValid() ||
@@ -476,6 +486,7 @@ QByteArray Book::toJson() const
           getCoverLastModified().toString(dateTimeStringFormat) },
         { "hasCover", hasCover() },
         { "coverPath", getCoverPath() },
+        { "existsOnlyOnClient", getExistsOnlyOnClient() },
         { "tags", serializeTags() },
     };
 
@@ -503,8 +514,10 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     QString filePath = jsonBook["filePath"].toString();
     int currentPage = jsonBook["currentPage"].toInt();
     QString uuid = jsonBook["uuid"].toString();
+    bool existsOnlyOnClient = jsonBook["existsOnlyOnClient"].toBool(false);
 
     Book book(filePath, metaData, currentPage, uuid);
+    book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
 
     return book;

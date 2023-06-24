@@ -53,6 +53,7 @@ signals:
     void finishedDownloadingBookCover(const QUuid& uuid,
                                       const QString& filePath);
     void storageLimitExceeded();
+    void bookUploadSucceeded(const QUuid& uuid);
 };
 
 }  // namespace application
