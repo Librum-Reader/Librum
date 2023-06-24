@@ -82,8 +82,8 @@ public:
 
     bool isDownloaded() const;
     void setDownloaded(bool newDownloaded);
-
-    bool getExistsOnlyOnClient() const;
+    
+    bool existsOnlyOnClient() const;
     void setExistsOnlyOnClient(bool newExistsOnlyOnClient);
 
     int getBookReadingProgress() const;

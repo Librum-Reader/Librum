@@ -37,6 +37,7 @@ public:
     MOCK_METHOD(void, addBook, (const Book&), (override));
     MOCK_METHOD(void, addBookLocally, (const Book&), (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
+    MOCK_METHOD(void, deleteBookLocally, (BookForDeletion), (override));
     MOCK_METHOD(void, uninstallBook, (const Book&), (override));
     MOCK_METHOD(void, downloadBookMedia, (const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const Book&), (override));

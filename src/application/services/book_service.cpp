@@ -62,7 +62,6 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
             {
                 auto book = getBook(uuid);
                 book->setExistsOnlyOnClient(false);
-
                 m_bookStorageManager->updateBookLocally(*book);
             });
 }
@@ -643,9 +642,15 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
-        // Ensure that we are not trying to upload the local books even though
-        // there is not enough space available. This would just lead to annoying
-        // error messages for the user saying "Storage Limit Reached" or similar
+        // When the book was uploaded to the server at some point, and it does
+        // not exist on the server anymore, it must have been deleted from
+        // another device. Make sure to delete the book locally as well.
+        if(!localBook.existsOnlyOnClient() && !localBookExistsOnServer)
+            deleteBookLocally(localBook);
+
+        // Ensure that we are not trying to upload the local books even
+        // though we know that there is not enough space available. This would
+        // just lead to annoying error messages.
         long bookSize = localBook.getSizeInBytes();
         long totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
         bool enoughSpace = totalStorageSpace + bookSize < m_bookStorageLimit;
@@ -655,6 +660,24 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
             bytesOfDataUploaded += bookSize;
         }
     }
+}
+
+void BookService::deleteBookLocally(const domain::entities::Book& book)
+{
+    utility::BookForDeletion bookToDelete {
+        .uuid = book.getUuid(),
+        .downloaded = book.isDownloaded(),
+        .format = book.getFormat(),
+    };
+
+    auto bookPosition = getBookPosition(book.getUuid());
+    int index = getBookIndex(book.getUuid());
+
+    emit bookDeletionStarted(index);
+    m_books.erase(bookPosition);
+    emit bookDeletionEnded();
+
+    m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
 void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)

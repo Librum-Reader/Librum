@@ -244,7 +244,7 @@ void Book::setDownloaded(bool newDownloaded)
     m_isDownloaded = newDownloaded;
 }
 
-bool Book::getExistsOnlyOnClient() const
+bool Book::existsOnlyOnClient() const
 {
     return m_existsOnlyOnClient;
 }
@@ -486,7 +486,7 @@ QByteArray Book::toJson() const
           getCoverLastModified().toString(dateTimeStringFormat) },
         { "hasCover", hasCover() },
         { "coverPath", getCoverPath() },
-        { "existsOnlyOnClient", getExistsOnlyOnClient() },
+        { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
     };
 

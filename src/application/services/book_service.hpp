@@ -73,6 +73,7 @@ private:
     void setMediaDownloadProgressForBook(const QUuid& uuid,
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
+    void deleteBookLocally(const domain::entities::Book& book);
 
     IBookMetadataHelper* m_bookMetadataHelper;
     IBookStorageManager* m_bookStorageManager;

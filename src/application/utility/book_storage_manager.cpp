@@ -179,12 +179,16 @@ void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
 {
     // Non-downloaded books aren't in the local library, thus can't be untracked
     if(bookToDelete.downloaded)
-    {
-        m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
-        deleteBookFile(bookToDelete.uuid, bookToDelete.format);
-    }
+        deleteBookLocally(bookToDelete);
 
     m_bookStorageGateway->deleteBook(m_authenticationToken, bookToDelete.uuid);
+    deleteBookCoverLocally(bookToDelete.uuid);
+}
+
+void BookStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
+{
+    m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
+    deleteBookFile(bookToDelete.uuid, bookToDelete.format);
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
