@@ -646,7 +646,10 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
         // not exist on the server anymore, it must have been deleted from
         // another device. Make sure to delete the book locally as well.
         if(!localBook.existsOnlyOnClient() && !localBookExistsOnServer)
+        {
             deleteBookLocally(localBook);
+            return;
+        }
 
         // Ensure that we are not trying to upload the local books even
         // though we know that there is not enough space available. This would
