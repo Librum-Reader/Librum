@@ -5,6 +5,4 @@ Item
 {
     property var selectedBook: null
     property var bookTags: []
-    
-    property string profilePicture
 }

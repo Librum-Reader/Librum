@@ -82,6 +82,9 @@ public:
 
     bool isDownloaded() const;
     void setDownloaded(bool newDownloaded);
+    
+    bool existsOnlyOnClient() const;
+    void setExistsOnlyOnClient(bool newExistsOnlyOnClient);
 
     int getBookReadingProgress() const;
 
@@ -122,6 +125,7 @@ private:
     value_objects::BookMetaData m_metaData;
     QString m_filePath;
     bool m_isDownloaded = true;
+    bool m_existsOnlyOnClient = true;
     int m_currentPage = 0;
     std::vector<Tag> m_tags;
 };

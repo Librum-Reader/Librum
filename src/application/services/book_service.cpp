@@ -2,6 +2,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QFileInfo>
 #include <QPixmap>
 #include <QTime>
 #include <ranges>
@@ -9,7 +10,6 @@
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "qfileinfo.h"
 
 using namespace domain::entities;
 using std::size_t;
@@ -29,11 +29,11 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
-            &IBookStorageManager::loadRemoteBooks);
+            &IBookStorageManager::downloadRemoteBooks);
 
     // Getting books finished
     connect(m_bookStorageManager,
-            &IBookStorageManager::loadingRemoteBooksFinished, this,
+            &IBookStorageManager::finishedDownloadingRemoteBooks, this,
             &BookService::updateLibrary);
 
     // Downloading book media progress
@@ -54,6 +54,21 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     // Storage limit exceeded
     connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
             this, &BookService::storageLimitExceeded);
+
+    // Book upload succeeded
+    connect(m_bookStorageManager, &IBookStorageManager::bookUploadSucceeded,
+            this,
+            [this](const QUuid& uuid)
+            {
+                auto book = getBook(uuid);
+                book->setExistsOnlyOnClient(false);
+                m_bookStorageManager->updateBookLocally(*book);
+            });
+}
+
+void BookService::downloadBooks()
+{
+    m_bookStorageManager->downloadRemoteBooks();
 }
 
 BookOperationStatus BookService::addBook(const QString& filePath)
@@ -515,7 +530,7 @@ void BookService::setupUserData(const QString& token, const QString& email)
     m_bookStorageManager->setUserData(email, token);
 
     loadLocalBooks();
-    m_bookStorageManager->loadRemoteBooks();
+    m_bookStorageManager->downloadRemoteBooks();
 
     m_fetchChangesTimer.start();
 }
@@ -627,9 +642,18 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
                 return remoteBook.getUuid() == localBook.getUuid();
             });
 
-        // Ensure that we are not trying to upload the local books even though
-        // there is not enough space available. This would just lead to annoying
-        // error messages for the user saying "Storage Limit Reached" or similar
+        // When the book was uploaded to the server at some point, and it does
+        // not exist on the server anymore, it must have been deleted from
+        // another device. Make sure to delete the book locally as well.
+        if(!localBook.existsOnlyOnClient() && !localBookExistsOnServer)
+        {
+            deleteBookLocally(localBook);
+            return;
+        }
+
+        // Ensure that we are not trying to upload the local books even
+        // though we know that there is not enough space available. This would
+        // just lead to annoying error messages.
         long bookSize = localBook.getSizeInBytes();
         long totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
         bool enoughSpace = totalStorageSpace + bookSize < m_bookStorageLimit;
@@ -639,6 +663,24 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
             bytesOfDataUploaded += bookSize;
         }
     }
+}
+
+void BookService::deleteBookLocally(const domain::entities::Book& book)
+{
+    utility::BookForDeletion bookToDelete {
+        .uuid = book.getUuid(),
+        .downloaded = book.isDownloaded(),
+        .format = book.getFormat(),
+    };
+
+    auto bookPosition = getBookPosition(book.getUuid());
+    int index = getBookIndex(book.getUuid());
+
+    emit bookDeletionStarted(index);
+    m_books.erase(bookPosition);
+    emit bookDeletionEnded();
+
+    m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
 void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)

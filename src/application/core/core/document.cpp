@@ -19,7 +19,7 @@
     #define _WIN32_WINNT 0x0500
     #include <windows.h>
 #elif defined(Q_OS_FREEBSD)
-    // clang-format off
+// clang-format off
 // FreeBSD really wants this include order
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -3221,6 +3221,7 @@ Document::OpenResult Document::openDocument(const QString& docFile,
     }
     if(!offer.isValid())
     {
+        auto x = mime.name();
         d->m_openError = i18n("Can not find a plugin which is able to handle "
                               "the document being passed.");
         Q_EMIT error(d->m_openError, -1);

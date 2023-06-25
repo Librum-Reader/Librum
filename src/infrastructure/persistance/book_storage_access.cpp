@@ -46,13 +46,11 @@ void BookStorageAccess::createBook(const QString& authToken,
                 return;
             }
 
-            // Send book's actual binary file to the server
-            uploadBookMedia(jsonBook["guid"].toString(),
-                            jsonBook["filePath"].toString(), authToken);
+            auto uuid = jsonBook["guid"].toString();
+            uploadBookMedia(uuid, jsonBook["filePath"].toString(), authToken);
+            uploadBookCover(authToken, uuid, jsonBook["coverPath"].toString());
 
-            // Send the book's cover to the server
-            uploadBookCover(authToken, jsonBook["guid"].toString(),
-                            jsonBook["coverPath"].toString());
+            emit bookUploadSucceeded(uuid);
 
             // Make sure to release the reply's memory
             reply->deleteLater();

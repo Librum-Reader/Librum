@@ -180,7 +180,20 @@ MFlickWrapper
                         Layout.rightMargin: 40
                         Layout.leftMargin: 32
                         
-                        onImageChanged: internal.unsavedChanges = true
+                        onCurrentImageChanged:
+                        {
+                            // Make sure that if we DELETE the picture, and no profile picture exists,
+                            // we say that there are no unsaved changes. The only situation where this happens,
+                            // is when there is no picture, we add a current picture WITHOUT saving and
+                            // then delete it again. Since nothing changed, we don't want to set unsavedChanges.
+                            if(currentImage == "!" && UserController.profilePicture.length === 0)
+                            {
+                                internal.unsavedChanges = false;
+                                return;
+                            }
+                            
+                            internal.unsavedChanges = true;
+                        }
                     }
                     
                     Item { Layout.fillWidth: true }
@@ -409,16 +422,12 @@ MFlickWrapper
         UserController.firstName = firstNameInput.text;
         UserController.lastName = lastNameInput.text;
         
-        if(profilePictureArea.image !== Globals.profilePicture)
-        {
-            Globals.profilePicture = profilePictureArea.image;
-            UserController.profilePicture = profilePictureArea.image;
-            
-            // Reset it to make sure that if the app declines the picture, it
-            // won't still stay in the profile picture area
-            profilePictureArea.image = null;
-        }
+        if(profilePictureArea.currentImage == "!")
+            UserController.deleteProfilePicture();
+        else
+            UserController.profilePicture = profilePictureArea.currentImage;
         
+        profilePictureArea.currentImage = "";
         internal.unsavedChanges = false;
     }
 }

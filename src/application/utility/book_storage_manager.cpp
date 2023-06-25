@@ -35,6 +35,10 @@ BookStorageManager::BookStorageManager(
     // Storage limit exceeded
     connect(m_bookStorageGateway, &IBookStorageGateway::storageLimitExceeded,
             this, &BookStorageManager::storageLimitExceeded);
+
+    // Book upload succeeded
+    connect(m_bookStorageGateway, &IBookStorageGateway::bookUploadSucceeded,
+            this, &BookStorageManager::bookUploadSucceeded);
 }
 
 void BookStorageManager::setUserData(const QString& email,
@@ -127,7 +131,7 @@ void BookStorageManager::processBookMetadata(std::vector<Book>& books)
         }
     }
 
-    emit loadingRemoteBooksFinished(books);
+    emit finishedDownloadingRemoteBooks(books);
 }
 
 bool BookStorageManager::userLoggedIn()
@@ -175,12 +179,16 @@ void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
 {
     // Non-downloaded books aren't in the local library, thus can't be untracked
     if(bookToDelete.downloaded)
-    {
-        m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
-        deleteBookFile(bookToDelete.uuid, bookToDelete.format);
-    }
+        deleteBookLocally(bookToDelete);
 
     m_bookStorageGateway->deleteBook(m_authenticationToken, bookToDelete.uuid);
+    deleteBookCoverLocally(bookToDelete.uuid);
+}
+
+void BookStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
+{
+    m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
+    deleteBookFile(bookToDelete.uuid, bookToDelete.format);
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
@@ -263,7 +271,7 @@ std::vector<Book> BookStorageManager::loadLocalBooks()
     return m_localBooks;
 }
 
-void BookStorageManager::loadRemoteBooks()
+void BookStorageManager::downloadRemoteBooks()
 {
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }

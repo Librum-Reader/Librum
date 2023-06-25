@@ -48,6 +48,7 @@ signals:
                                       const QUuid& uuid);
     void uploadLimitReached();
     void storageLimitExceeded();
+    void bookUploadSucceeded(const QUuid& uuid);
 };
 
 }  // namespace adapters

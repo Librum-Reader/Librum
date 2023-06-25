@@ -48,6 +48,13 @@ Popup
             text: "Sync"
             imageWidth: 16
             textSpacing: 12
+            
+            onClicked: 
+            {
+                BookController.syncWithServer();
+                UserController.syncWithServer();
+                root.close();
+            }
         }
         
         

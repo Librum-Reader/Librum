@@ -122,6 +122,7 @@ Item
     property string activeMicrophone
     property string trash
     property string trashHighlighted
+    property string trashRed
     
     
     
@@ -248,6 +249,7 @@ Item
             PropertyChanges { target: iconSheet; activeMicrophone: "/resources/images/light_mode/utility/active_microphone_icon.svg" }
             PropertyChanges { target: iconSheet; trash: "/resources/images/light_mode/utility/trash_icon.svg" }
             PropertyChanges { target: iconSheet; trashHighlighted: "/resources/images/light_mode/utility/trash_highlighted_icon.svg" }
+            PropertyChanges { target: iconSheet; trashRed: "/resources/images/light_mode/utility/trash_red_icon.svg" }
         },
         State
         {
@@ -369,7 +371,7 @@ Item
             PropertyChanges { target: iconSheet; microphone: "/resources/images/dark_mode/utility/microphone_icon.svg" }
             PropertyChanges { target: iconSheet; activeMicrophone: "/resources/images/dark_mode/utility/active_microphone_icon.svg" }
             PropertyChanges { target: iconSheet; trash: "/resources/images/dark_mode/utility/trash_icon.svg" }
-            PropertyChanges { target: iconSheet; trashHighlighted: "/resources/images/dark_mode/utility/trash_highlighted_icon.svg" }
+            PropertyChanges { target: iconSheet; trashRed: "/resources/images/dark_mode/utility/trash_red_icon.svg" }
         }
     ]
     

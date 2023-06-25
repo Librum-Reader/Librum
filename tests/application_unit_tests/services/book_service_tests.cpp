@@ -37,6 +37,7 @@ public:
     MOCK_METHOD(void, addBook, (const Book&), (override));
     MOCK_METHOD(void, addBookLocally, (const Book&), (override));
     MOCK_METHOD(void, deleteBook, (BookForDeletion), (override));
+    MOCK_METHOD(void, deleteBookLocally, (BookForDeletion), (override));
     MOCK_METHOD(void, uninstallBook, (const Book&), (override));
     MOCK_METHOD(void, downloadBookMedia, (const QUuid&), (override));
     MOCK_METHOD(void, updateBook, (const Book&), (override));
@@ -49,7 +50,7 @@ public:
     MOCK_METHOD(bool, deleteBookCoverLocally, (const QUuid&), (override));
     MOCK_METHOD(void, downloadBookCover, (const QUuid&), (override));
     MOCK_METHOD(std::vector<Book>, loadLocalBooks, (), (override));
-    MOCK_METHOD(void, loadRemoteBooks, (), (override));
+    MOCK_METHOD(void, downloadRemoteBooks, (), (override));
     MOCK_METHOD(void, setUserData, (const QString&, const QString&),
                 (override));
     MOCK_METHOD(void, clearUserData, (), (override));
@@ -749,7 +750,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookIntoALocalBook)
 
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
+    emit bookStorageManagerMock.finishedDownloadingRemoteBooks(myBooks);
 
     // Assert
     EXPECT_EQ(remoteBook, localBook);
@@ -783,7 +784,7 @@ TEST_F(ABookService, SucceedsAddingARemoteBookToALocalBook)
 
     // Act
     std::vector<Book> myBooks { remoteBook };
-    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
+    emit bookStorageManagerMock.finishedDownloadingRemoteBooks(myBooks);
 
     // Assert
     EXPECT_EQ(1, startSpy.count());
@@ -818,7 +819,7 @@ TEST_F(ABookService, SucceedsAddingALocalBookToRemoteServer)
 
     // Act
     std::vector<Book> myBooks {};
-    emit bookStorageManagerMock.loadingRemoteBooksFinished(myBooks);
+    emit bookStorageManagerMock.finishedDownloadingRemoteBooks(myBooks);
 }
 
 }  // namespace tests::application
