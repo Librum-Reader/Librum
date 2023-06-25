@@ -6,6 +6,8 @@ namespace infrastructure::data
 
 inline const QString domain { "https://librum-dev.azurewebsites.net" };
 
+inline const QString freeBooksDomain { "https://gutendex.com" };
+
 // Authentication
 inline const QString authenticationEndpoint { domain + "/api/login" };
 inline const QString registrationEndpoint { domain + "/api/register" };
@@ -25,6 +27,9 @@ inline const QString changeBookCoverEndpoint { domain + "/api/book/cover" };
 inline const QString deleteBookCoverEndpoint { domain + "/api/book/cover" };
 inline const QString getUsedBookStorageEndpoint { domain +
                                                   "/api/book/usedBookStorage" };
+
+// Free books storage
+inline const QString getFreeBooksMetadata { freeBooksDomain + "/books" };
 
 // User storage
 inline const QString userGetEndpoint { domain + "/api/user" };
