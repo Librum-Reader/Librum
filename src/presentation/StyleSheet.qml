@@ -77,6 +77,7 @@ Item
     property color colorRecordActiveGlow
     property color colorBookCoverDim
     property color colorDefaultProfilePicture
+    property color colorTextSelection
     
     
     
@@ -158,6 +159,7 @@ Item
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorTextSelection: "#21BDAC" }
         },
         State
         {
@@ -232,6 +234,7 @@ Item
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaC0452C" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorTextSelection: "#01584E" }
         }
     ]
     
