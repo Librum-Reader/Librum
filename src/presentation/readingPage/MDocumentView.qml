@@ -37,37 +37,39 @@ Pane
         }
         
         
-        GridView
+        ListView
         {
             id: pageView
-            readonly property real defaultHeight: 1334
+            readonly property real defaultPageHeight: 1334
             property real zoomFactor: 1
             readonly property int defaultPageSpacing: 12
             readonly property int scrollSpeed: 1600
             
             height: parent.height
-            width: contentItem.childrenRect.width > root.width ? root.width : contentItem.childrenRect.width
+            width: currentItem.width <= root.width ? currentItem.width : root.width
             contentWidth: currentItem.width
             anchors.centerIn: parent
-            flickableDirection: Flickable.VerticalFlick
+            flickableDirection: Flickable.AutoFlickDirection
             interactive: true
             clip: true
-            cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
-            cellWidth: currentItem.width
             cacheBuffer: 20000
-            flow: GridView.FlowLeftToRight
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
             model: root.document.pageCount
             delegate: MPageView
             {
-                // The width is automatically deduced
-                height: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+                height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
                 width: adaptedWidth
                 
                 document: root.document
                 pageNumber: modelData
                 pageSpacing: pageView.defaultPageSpacing
+            }
+            
+            ScrollBar.vertical: ScrollBar
+            {
+                width: 10
+                policy: ScrollBar.AlwaysOn
             }
             
             
