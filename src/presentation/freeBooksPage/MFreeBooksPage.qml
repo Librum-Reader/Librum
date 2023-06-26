@@ -1,8 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
-import Librum.style 1.0
 import CustomComponents 1.0
+import Librum.style 1.0
+import Librum.controllers 1.0
 import "explorerToolbar"
 
 
@@ -72,7 +73,7 @@ Page
                     {
                         anchors.fill: parent
                         
-                        onClicked: getBookPopup.open();
+                        onClicked: { FreeBooksController.getBooksMetadata(); getBookPopup.open(); }
                     }
                 }
             }

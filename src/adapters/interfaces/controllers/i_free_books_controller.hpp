@@ -11,7 +11,7 @@ class IFreeBooksController : public QObject
 public:
     virtual ~IFreeBooksController() noexcept = default;
 
-    virtual void getBooksMetadata() = 0;
+    Q_INVOKABLE virtual void getBooksMetadata() = 0;
 };
 
 }  // namespace adapters
