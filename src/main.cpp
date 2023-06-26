@@ -18,6 +18,7 @@
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
 #include "i_book_service.hpp"
+#include "i_free_books_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
@@ -88,6 +89,12 @@ int main(int argc, char* argv[])
     auto bookController = std::make_unique<BookController>(bookService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
+
+    // Free-Books-Stack
+    auto* freeBooksService = config::diConfig().create<application::IFreeBooksService*>();
+    auto freeBooksController = std::make_unique<FreeBooksController>(freeBooksService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "FreeBooksController",
+                                 freeBooksController.get());
 
     // Settings-Stack
     auto* settingsService = config::diConfig().create<application::ISettingsService*>();

@@ -11,6 +11,10 @@
 #include "book_storage_gateway.hpp"
 #include "book_storage_manager.hpp"
 #include "downloaded_books_tracker.hpp"
+#include "free_books_controller.hpp"
+#include "free_books_service.hpp"
+#include "free_books_storage_access.hpp"
+#include "free_books_storage_gateway.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
 #include "user_controller.hpp"
@@ -46,6 +50,14 @@ const auto diConfig = []
         di::bind<IBookService>().to<services::BookService>(),
         di::bind<IBookStorageGateway>().to<gateways::BookStorageGateway>(),
         di::bind<IBookStorageAccess>().to<persistence::BookStorageAccess>(),
+
+        // Free books
+        di::bind<IFreeBooksController>().to<controllers::FreeBooksController>(),
+        di::bind<IFreeBooksService>().to<services::FreeBooksService>(),
+        di::bind<IFreeBooksStorageGateway>()
+            .to<gateways::FreeBooksStorageGateway>(),
+        di::bind<IFreeBooksStorageAccess>()
+            .to<persistence::FreeBooksStorageAccess>(),
 
         // User
         di::bind<IUserController>().to<controllers::UserController>(),
