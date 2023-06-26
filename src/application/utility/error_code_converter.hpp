@@ -47,6 +47,8 @@ QString getMessageForErrorCode(ErrorCode code)
         return "No user with this email exists";
     case ErrorCode::AccountNotConfirmed:
         return "Your account is not confirmed";
+    case ErrorCode::TooManyRequests:
+        return "Too many requests, please try again later";
     case ErrorCode::NoError:
         [[fallthrough]];
     default:
