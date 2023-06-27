@@ -105,7 +105,7 @@ Pane
         
         contentItem: Rectangle
         {
-            color: "#999999"
+            color: Style.colorScrollBarHandle
             opacity: scrollbar.pressed ? 0.8 : 1
             radius: 4
         }
