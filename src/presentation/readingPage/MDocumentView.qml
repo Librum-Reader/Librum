@@ -96,13 +96,12 @@ Pane
         orientation: Qt.Vertical
         size: pageView.height / pageView.contentHeight
         minimumSize: 0.04
-        position: pageView.contentY / pageView.contentHeight
-        onPositionChanged: pageView.contentY = position * pageView.contentHeight
+        position: (pageView.contentY - pageView.originY) / pageView.contentHeight
+        onPositionChanged: pageView.contentY = position * pageView.contentHeight + pageView.originY
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         horizontalPadding: 4
-        z: 4
         
         contentItem: Rectangle
         {
