@@ -66,12 +66,6 @@ Pane
                 pageSpacing: pageView.defaultPageSpacing
             }
             
-            ScrollBar.vertical: ScrollBar
-            {
-                width: 10
-                policy: ScrollBar.AlwaysOn
-            }
-            
             
             // Set the book's current page once the model is loaded
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
@@ -89,6 +83,39 @@ Pane
                     wheel.accepted = true;
                 }
             }
+        }
+    }
+    
+    ScrollBar
+    {
+        id: scrollbar
+        width: hovered ? 14 : 12
+        hoverEnabled: true
+        active: true
+        policy: ScrollBar.AlwaysOn
+        orientation: Qt.Vertical
+        size: pageView.height / pageView.contentHeight
+        minimumSize: 0.04
+        position: pageView.contentY / pageView.contentHeight
+        onPositionChanged: pageView.contentY = position * pageView.contentHeight
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        horizontalPadding: 4
+        z: 4
+        
+        contentItem: Rectangle
+        {
+            color: "#999999"
+            opacity: scrollbar.pressed ? 0.8 : 1
+            radius: 4
+        }
+        
+        background: Rectangle
+        {
+            implicitWidth: 26
+            implicitHeight: 200
+            color: scrollbar.hovered ? Style.colorContainerBackground : "transparent"
         }
     }
     
