@@ -1,6 +1,6 @@
 #pragma once
 
-namespace domain::entities
+namespace domain::value_objects
 {
 
 struct FreeBook
@@ -13,4 +13,4 @@ struct FreeBook
     long downloadCount;
 };
 
-}  // namespace domain::entities
+}  // namespace domain::value_objects

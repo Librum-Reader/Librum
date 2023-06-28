@@ -20,13 +20,13 @@ private:
     IFreeBooksStorageAccess* m_freeBooksStorageAccess;
 
     void proccessBooksMetadata(const QByteArray& data);
-    void assignValuesToBook(domain::entities::FreeBook& book,
+    void assignValuesToBook(domain::value_objects::FreeBook& book,
                             const QJsonObject& values);
-    void addAuthorsToBook(domain::entities::FreeBook& book,
+    void addAuthorsToBook(domain::value_objects::FreeBook& book,
                           const QJsonArray& authors);
-    void addLanguagesToBook(domain::entities::FreeBook& book,
+    void addLanguagesToBook(domain::value_objects::FreeBook& book,
                             const QJsonArray& languages);
-    void addFormatsToBook(domain::entities::FreeBook& book,
+    void addFormatsToBook(domain::value_objects::FreeBook& book,
                           const QJsonArray& formats);
 };
 

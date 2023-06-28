@@ -1,7 +1,7 @@
 #include "free_books_storage_gateway.hpp"
 #include <QJsonDocument>
 
-using namespace domain::entities;
+using namespace domain::value_objects;
 
 namespace adapters::gateways
 {

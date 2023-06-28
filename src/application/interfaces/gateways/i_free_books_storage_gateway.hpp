@@ -16,7 +16,7 @@ public:
 
 signals:
     void gettingBooksMetaDataFinished(
-        std::vector<domain::entities::FreeBook>& books);
+        std::vector<domain::value_objects::FreeBook>& books);
 };
 
 }  // namespace application
