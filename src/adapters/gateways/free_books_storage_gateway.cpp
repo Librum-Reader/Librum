@@ -13,6 +13,10 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
     connect(m_freeBooksStorageAccess,
             &IFreeBooksStorageAccess::gettingBooksMetadataFinished, this,
             &FreeBooksStorageGateway::proccessBooksMetadata);
+
+    connect(m_freeBooksStorageAccess,
+            &IFreeBooksStorageAccess::gettingBookCoverFinished, this,
+            &FreeBooksStorageGateway::proccessBookCover);
 }
 
 void FreeBooksStorageGateway::getBooksMetadata()
@@ -37,6 +41,8 @@ void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
         assignValuesToBook(book, resultObject);
 
         books.emplace_back(std::move(book));
+
+        getCoverForBook(resultObject);
     }
 
     emit gettingBooksMetaDataFinished(books);
@@ -45,6 +51,7 @@ void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
 void FreeBooksStorageGateway::assignValuesToBook(FreeBook& book,
                                                  const QJsonObject& values)
 {
+    book.id = values["id"].toInt();
     book.title = values["title"].toString();
     book.mediaType = values["media_type"].toString();
     book.downloadCount = values["download_count"].toInt();
@@ -93,6 +100,22 @@ void FreeBooksStorageGateway::addLanguagesToBook(FreeBook& book,
 void FreeBooksStorageGateway::addFormatsToBook(FreeBook& book,
                                                const QJsonArray& formats)
 {
+}
+
+void FreeBooksStorageGateway::getCoverForBook(const QJsonObject& book)
+{
+    auto bookId = book["id"].toInt();
+
+    auto bookFormats = book["formats"].toObject();
+    auto bookCoverUrl = bookFormats["image/jpeg"].toString();
+
+    m_freeBooksStorageAccess->getCoverForBook(bookId, bookCoverUrl);
+}
+
+void FreeBooksStorageGateway::proccessBookCover(int bookId,
+                                                const QByteArray& data)
+{
+    emit gettingBookCoverFinished(bookId, QImage(data));
 }
 
 }  // namespace adapters::gateways

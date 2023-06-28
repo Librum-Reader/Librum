@@ -5,6 +5,7 @@ namespace domain::value_objects
 
 struct FreeBook
 {
+    int id;
     QString title;
     QString authors;
     QString languages;

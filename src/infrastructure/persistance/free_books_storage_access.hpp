@@ -12,6 +12,7 @@ class FreeBooksStorageAccess : public adapters::IFreeBooksStorageAccess
 
 public:
     void getBooksMetadata() override;
+    void getCoverForBook(int bookId, const QString& coverUrl) override;
 
 private:
     QNetworkAccessManager m_networkAccessManager;

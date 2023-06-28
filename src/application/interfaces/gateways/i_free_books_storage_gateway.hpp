@@ -1,4 +1,5 @@
 #pragma once
+#include <QImage>
 #include <QObject>
 #include "free_book.hpp"
 
@@ -17,6 +18,7 @@ public:
 signals:
     void gettingBooksMetaDataFinished(
         std::vector<domain::value_objects::FreeBook>& books);
+    void gettingBookCoverFinished(int bookId, const QImage& cover);
 };
 
 }  // namespace application

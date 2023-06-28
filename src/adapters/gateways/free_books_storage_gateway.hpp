@@ -28,6 +28,8 @@ private:
                             const QJsonArray& languages);
     void addFormatsToBook(domain::value_objects::FreeBook& book,
                           const QJsonArray& formats);
+    void getCoverForBook(const QJsonObject& book);
+    void proccessBookCover(int bookId, const QByteArray& data);
 };
 
 }  // namespace adapters::gateways

@@ -10,12 +10,11 @@ void FreeBooksStorageAccess::getBooksMetadata()
 {
     auto request = createRequest(data::getFreeBooksMetadata);
 
-    auto getBooksMetadataReply = m_networkAccessManager.get(request);
+    auto reply = m_networkAccessManager.get(request);
 
-    connect(getBooksMetadataReply, &QNetworkReply::finished, this,
-            [this]()
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -26,6 +25,31 @@ void FreeBooksStorageAccess::getBooksMetadata()
                 }
 
                 emit gettingBooksMetadataFinished(reply->readAll());
+
+                reply->deleteLater();
+            });
+}
+
+void FreeBooksStorageAccess::getCoverForBook(int bookId,
+                                             const QString& coverUrl)
+{
+    auto request = createRequest(coverUrl);
+
+    auto reply = m_networkAccessManager.get(request);
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this, bookId, reply]()
+            {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Getting free book's cover");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit gettingBookCoverFinished(bookId, reply->readAll());
 
                 reply->deleteLater();
             });
