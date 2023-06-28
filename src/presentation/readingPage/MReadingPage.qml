@@ -17,7 +17,7 @@ Page
     background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     Component.onCompleted: root.forceActiveFocus()
-    
+    Component.onDestruction: internal.saveCurrentPage()
     
     Shortcut
     {
@@ -154,6 +154,8 @@ Page
                 
                 bookmarksSidebar.open();
             }
+            
+            onZoomSelectionChanged: (factor) => documentView.zoom(factor / 100)
             
             onFullScreenButtonClicked:
             {
@@ -322,6 +324,8 @@ Page
                     Layout.fillHeight: true
                     visible: documentItem.opened
                     document: documentItem
+                    
+                    onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
             }
         }

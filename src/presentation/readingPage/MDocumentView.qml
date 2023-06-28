@@ -15,6 +15,7 @@ Pane
     property DocumentItem document
     readonly property alias pagepageView: pageView
     signal clicked
+    signal zoomFactorChanged(real factor)
     
     padding: 0
     background: Rectangle { color: "transparent" }
@@ -43,18 +44,20 @@ Pane
             readonly property real defaultPageHeight: 1334
             property real zoomFactor: 1
             readonly property int defaultPageSpacing: 12
-            readonly property int scrollSpeed: 1600
+            readonly property int scrollSpeed: 5500
             
             height: parent.height
             width: currentItem.width <= root.width ? currentItem.width : root.width
             contentWidth: currentItem.width
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
+            flickDeceleration: 100000
             interactive: true
             clip: true
             cacheBuffer: 20000
+            maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
-            flickDeceleration: 10000
+            boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
             delegate: MPageView
             {
@@ -70,6 +73,7 @@ Pane
             // Set the book's current page once the model is loaded
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
+            onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
             
             
             MouseArea
@@ -127,7 +131,7 @@ Pane
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(pageView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1));
     }
     
     function nextPage()
