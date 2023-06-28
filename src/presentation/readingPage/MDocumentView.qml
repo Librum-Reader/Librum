@@ -55,6 +55,7 @@ Pane
             cacheBuffer: 20000
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
+            boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
             delegate: MPageView
             {
