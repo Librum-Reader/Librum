@@ -3,8 +3,7 @@
   */
 function handleWheel(wheel)
 {
-    // Normalize to factors between 0.8 and 1.2
-    let factor = (((wheel.angleDelta.y / 120)+1) / 6 ) + 0.8;
+    let factor = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
