@@ -17,6 +17,7 @@ Item
     property int pageSpacing
     readonly property int adaptedWidth: page.width
     
+    
     PageItem
     {
         id: page

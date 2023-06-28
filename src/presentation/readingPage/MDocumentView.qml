@@ -37,32 +37,28 @@ Pane
         }
         
         
-        GridView
+        ListView
         {
             id: pageView
-            readonly property real defaultHeight: 1334
+            readonly property real defaultPageHeight: 1334
             property real zoomFactor: 1
             readonly property int defaultPageSpacing: 12
             readonly property int scrollSpeed: 1600
             
             height: parent.height
-            width: contentItem.childrenRect.width > root.width ? root.width : contentItem.childrenRect.width
+            width: currentItem.width <= root.width ? currentItem.width : root.width
             contentWidth: currentItem.width
             anchors.centerIn: parent
-            flickableDirection: Flickable.VerticalFlick
+            flickableDirection: Flickable.AutoFlickDirection
             interactive: true
             clip: true
-            cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
-            cellWidth: currentItem.width
             cacheBuffer: 20000
-            flow: GridView.FlowLeftToRight
             boundsMovement: Flickable.StopAtBounds
             flickDeceleration: 10000
             model: root.document.pageCount
             delegate: MPageView
             {
-                // The width is automatically deduced
-                height: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+                height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
                 width: adaptedWidth
                 
                 document: root.document
@@ -87,6 +83,38 @@ Pane
                     wheel.accepted = true;
                 }
             }
+        }
+    }
+    
+    ScrollBar
+    {
+        id: scrollbar
+        width: hovered ? 14 : 12
+        hoverEnabled: true
+        active: true
+        policy: ScrollBar.AlwaysOn
+        orientation: Qt.Vertical
+        size: pageView.height / pageView.contentHeight
+        minimumSize: 0.04
+        position: (pageView.contentY - pageView.originY) / pageView.contentHeight
+        onPositionChanged: pageView.contentY = position * pageView.contentHeight + pageView.originY
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        horizontalPadding: 4
+        
+        contentItem: Rectangle
+        {
+            color: Style.colorScrollBarHandle
+            opacity: scrollbar.pressed ? 0.8 : 1
+            radius: 4
+        }
+        
+        background: Rectangle
+        {
+            implicitWidth: 26
+            implicitHeight: 200
+            color: scrollbar.hovered ? Style.colorContainerBackground : "transparent"
         }
     }
     

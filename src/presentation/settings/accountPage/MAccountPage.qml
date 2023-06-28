@@ -128,7 +128,7 @@ MFlickWrapper
                             Layout.topMargin: 26
                             boxHeight: 40
                             headerText: "First name"
-                            text: UserController.firstName
+                            text: internal.unsavedChanges ? text : UserController.firstName
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
@@ -144,7 +144,7 @@ MFlickWrapper
                             Layout.topMargin: 18
                             boxHeight: 40
                             headerText: "Last name"
-                            text: UserController.lastName
+                            text: internal.unsavedChanges ? text : UserController.lastName
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
@@ -160,7 +160,7 @@ MFlickWrapper
                             Layout.topMargin: 18
                             boxHeight: 40
                             headerText: "Email"
-                            text: UserController.email
+                            text: internal.unsavedChanges ? text : UserController.email
                             headerToBoxSpacing: 3
                             inputFontSize: 13
                             borderWidth: 1
