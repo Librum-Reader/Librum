@@ -43,7 +43,7 @@ Pane
             readonly property real defaultPageHeight: 1334
             property real zoomFactor: 1
             readonly property int defaultPageSpacing: 12
-            readonly property int scrollSpeed: 1600
+            readonly property int scrollSpeed: 5500
             
             height: parent.height
             width: currentItem.width <= root.width ? currentItem.width : root.width
@@ -53,8 +53,8 @@ Pane
             interactive: true
             clip: true
             cacheBuffer: 20000
+            maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
-            flickDeceleration: 10000
             model: root.document.pageCount
             delegate: MPageView
             {
