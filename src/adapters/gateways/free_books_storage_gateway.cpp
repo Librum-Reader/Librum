@@ -115,7 +115,7 @@ void FreeBooksStorageGateway::getCoverForBook(const QJsonObject& book)
 void FreeBooksStorageGateway::proccessBookCover(int bookId,
                                                 const QByteArray& data)
 {
-    emit gettingBookCoverFinished(bookId, QImage(data));
+    emit gettingBookCoverFinished(bookId, QImage::fromData(data));
 }
 
 }  // namespace adapters::gateways
