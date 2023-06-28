@@ -252,7 +252,7 @@ Item
         id: lastRunSettings
         fileName: "last_run_settings"
         
-        property string theme: "Light"
+        property string theme: "Dark"
     }
     Component.onDestruction: lastRunSettings.theme = styleSheet.state
 }
