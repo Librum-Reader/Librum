@@ -17,7 +17,7 @@ Page
     background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     Component.onCompleted: root.forceActiveFocus()
-    
+    Component.onDestruction: internal.saveCurrentPage()
     
     Shortcut
     {
