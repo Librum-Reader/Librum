@@ -25,7 +25,7 @@ function handleWheel(wheel)
 function updateCurrentPageCounter()
 {
     // A new page starts if it is over the middle of the screen (vertically).
-    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor);
+    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
     let currentPos = pageView.contentY - pageView.originY + pageView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
     
@@ -64,9 +64,9 @@ function zoom(newZoomFactor)
     newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 3));
     if (newZoomFactor === pageView.zoomFactor)
         return;
-        
-    let newPageHeight = Math.round(pageView.defaultPageHeight * newZoomFactor);
-    let currentPageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor);
+    
+    let newPageHeight = Math.round(pageView.defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
+    let currentPageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.getPageSpacing(pageView.zoomFactor);
     let currentPageNumber = root.document.currentPage;
     let currentPos = pageView.contentY - pageView.originY;
     
@@ -86,7 +86,7 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor);
+    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
     let newContentY = (pageHeight * newPageNumber) + pageView.originY;
     
     if(newPageNumber > root.document.currentPage)
