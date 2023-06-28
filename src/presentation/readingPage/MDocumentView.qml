@@ -128,7 +128,7 @@ Pane
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(pageView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1));
     }
     
     function nextPage()
