@@ -218,14 +218,15 @@ Page
                         MOnOffToggle
                         {
                             id: displayBookTitleInTitlebarToggle
-                            property string savedValue: SettingsController.appearanceSettings.DisplayBookTitleInTitlebar
+                            property bool savedValue: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar)
                             
                             Layout.topMargin: 4
-                            onByDefault: savedValue === onText
+                            onByDefault: savedValue
                             
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
-                            onToggled: (value) => internal.saveSetting(SettingKeys.DisplayBookTitleInTitlebar, value)
+                            onSavedValueChanged: savedValue ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.DisplayBookTitleInTitlebar, 
+                                                                       value === onText ? true : false )
                         }
                         
                         Label
@@ -418,14 +419,15 @@ Page
                         MOnOffToggle
                         {
                             id: smoothScrollingToggle
-                            property string savedValue: SettingsController.appearanceSettings.SmoothScrolling
+                            property bool savedValue: JSON.parse(SettingsController.appearanceSettings.SmoothScrolling)
                             
                             Layout.topMargin: 4
-                            onByDefault: savedValue === onText
+                            onByDefault: savedValue
                             
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
-                            onToggled: (value) => internal.saveSetting(SettingKeys.SmoothScrolling, value)
+                            onSavedValueChanged: savedValue ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.SmoothScrolling,
+                                                                       value === onText ? true : false)
                         }
                         
                         Label
@@ -443,14 +445,15 @@ Page
                         MOnOffToggle
                         {
                             id: loopAfterLastToggle
-                            property string savedValue: SettingsController.appearanceSettings.LoopAfterLastPage
+                            property bool savedValue: JSON.parse(SettingsController.appearanceSettings.LoopAfterLastPage)
                             
                             Layout.topMargin: 4
-                            onByDefault: savedValue === onText
+                            onByDefault: savedValue
                             
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue == onText ? setOn() : setOff()
-                            onToggled: (value) => internal.saveSetting(SettingKeys.LoopAfterLastPage, value)
+                            onSavedValueChanged: savedValue ? setOn() : setOff()
+                            onToggled: (value) => internal.saveSetting(SettingKeys.LoopAfterLastPage,
+                                                                       value === onText ? true : false)
                         }
                         
                         Label

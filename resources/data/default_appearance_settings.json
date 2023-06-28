@@ -1,12 +1,12 @@
 {
     "Theme": "Dark",
     "PageSpacing": "10",
-    "DisplayBookTitleInTitlebar": "ON",
+    "DisplayBookTitleInTitlebar": "true",
     "LayoutDirection": "Vertical",
     "DisplayMode": "Single Page",
     "PageTransition": "Instant",
     "DefaultZoom": "100",
-    "SmoothScrolling": "OFF",
-    "LoopAfterLastPage": "OFF",
+    "SmoothScrolling": "false",
+    "LoopAfterLastPage": "false",
     "CursorMode": "Hidden after delay"
 }

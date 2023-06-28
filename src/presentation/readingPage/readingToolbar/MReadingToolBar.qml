@@ -217,6 +217,7 @@ Pane
             font.weight: Font.DemiBold
             font.pointSize: 12
             elide: Text.ElideRight
+            visible: SettingsController.appearanceSettings.DisplayBookTitleInTitlebar
         }
         
         
