@@ -15,6 +15,7 @@ Pane
     property DocumentItem document
     readonly property alias pagepageView: pageView
     signal clicked
+    signal zoomFactorChanged(real factor)
     
     padding: 0
     background: Rectangle { color: "transparent" }
@@ -50,6 +51,7 @@ Pane
             contentWidth: currentItem.width
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
+            flickDeceleration: 100000
             interactive: true
             clip: true
             cacheBuffer: 20000
@@ -71,6 +73,7 @@ Pane
             // Set the book's current page once the model is loaded
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
+            onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
             
             
             MouseArea

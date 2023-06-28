@@ -155,6 +155,8 @@ Page
                 bookmarksSidebar.open();
             }
             
+            onZoomSelectionChanged: (factor) => documentView.zoom(factor / 100)
+            
             onFullScreenButtonClicked:
             {
                 if(internal.fullScreen)
@@ -322,6 +324,8 @@ Page
                     Layout.fillHeight: true
                     visible: documentItem.opened
                     document: documentItem
+                    
+                    onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
             }
         }
