@@ -13,9 +13,13 @@ public:
     FreeBooksService(IFreeBooksStorageGateway* freeBooksStorageGateway);
 
     void getBooksMetadata() override;
+    void getBookMedia(const QString& url) override;
 
 private:
     IFreeBooksStorageGateway* m_freeBooksStorageGateway;
+    QString m_freeBooksFolderName = "downloaded_free_books";
+
+    void saveBookToFile(const QByteArray& data);
 };
 
 }  // namespace application::services

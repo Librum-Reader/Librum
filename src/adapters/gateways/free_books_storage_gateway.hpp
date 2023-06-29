@@ -15,6 +15,7 @@ public:
     FreeBooksStorageGateway(IFreeBooksStorageAccess* freeBooksStorageAccess);
 
     void getBooksMetadata() override;
+    void getBookMedia(const QString& url) override;
 
 private:
     IFreeBooksStorageAccess* m_freeBooksStorageAccess;

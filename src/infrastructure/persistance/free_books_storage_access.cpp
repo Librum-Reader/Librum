@@ -55,6 +55,30 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
             });
 }
 
+void FreeBooksStorageAccess::getBookMedia(const QString& url)
+{
+    auto request = createRequest(url);
+
+    auto reply = m_networkAccessManager.get(request);
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
+            {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Getting free book's media");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit gettingBookMediaFinished(reply->readAll());
+
+                reply->deleteLater();
+            });
+}
+
 QNetworkRequest FreeBooksStorageAccess::createRequest(const QUrl& url)
 {
     QNetworkRequest result { url };

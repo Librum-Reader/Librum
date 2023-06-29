@@ -17,11 +17,20 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
     connect(m_freeBooksStorageAccess,
             &IFreeBooksStorageAccess::gettingBookCoverFinished, this,
             &FreeBooksStorageGateway::proccessBookCover);
+
+    connect(m_freeBooksStorageAccess,
+            &IFreeBooksStorageAccess::gettingBookMediaFinished, this,
+            &FreeBooksStorageGateway::gettingBookMediaFinished);
 }
 
 void FreeBooksStorageGateway::getBooksMetadata()
 {
     m_freeBooksStorageAccess->getBooksMetadata();
+}
+
+void FreeBooksStorageGateway::getBookMedia(const QString& url)
+{
+    m_freeBooksStorageAccess->getBookMedia(url);
 }
 
 void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)

@@ -13,6 +13,7 @@ public:
     FreeBooksController(application::IFreeBooksService* bookService);
 
     void getBooksMetadata() override;
+    void getBookMedia(const QString& url) override;
 
 private:
     application::IFreeBooksService* m_freeBooksService;
