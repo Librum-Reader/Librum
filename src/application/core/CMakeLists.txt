@@ -13,6 +13,7 @@ set(CMAKE_AUTOUIC OFF)
 
 
 # Append cmake folder
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
 if(UNIX)
     list(APPEND CMAKE_MODULE_PATH "/opt/okular/cmake/modules")
 elseif(WIN32)
