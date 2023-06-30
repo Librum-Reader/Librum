@@ -12,6 +12,11 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_AUTOUIC OFF)
 
 
+# Append cmake folder
+if(UNIX)
+    list(APPEND CMAKE_MODULE_PATH "/opt/okular/cmake/modules")
+elseif(WIN32)
+endif()
 
 
 # Setup
