@@ -165,6 +165,7 @@ Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary
 
 ### Prerequisites for KDE Plasma Users
 - Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers list them as `extra-cmake-modules`)
+- threadweaver (Many package managers list it as `threadweaver`)
 
 <br>
 
