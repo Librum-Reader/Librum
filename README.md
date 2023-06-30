@@ -164,13 +164,12 @@ Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary
 <br>
 
 ### Prerequisites for KDE Plasma Users
+If you are using KDE Plasma, simply installing the following will be enough. Jump straight to "Installation" when you are done.
 - Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers list them as `extra-cmake-modules`)
-- threadweaver (Many package managers list it as `threadweaver`)
-- kpty (Many package managers list it as `kpty`)
 
 <br>
 
-### Prerequisites for Ubuntu Users
+### Prerequisites for (non KDE) Ubuntu Users
 Run the following commands to install all dependencies for Librum
 
 ```sh
@@ -183,8 +182,22 @@ sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake q
     
 <br>
 
+### Prerequisites for (non KDE) Arch Users
+Run the following commands to install all dependencies for Librum
+
+```sh
+sudo pacman -Syyu
+```
+    
+```sh
+sudo pacman -S base-devel extra-cmake-modules qt5-base qt5-quickcontrols2 qt5-quickcontrols2 qt5-declarative kde-dev-utils libarchive threadweaver qt5-svg phonon-qt5 qt5-speech kpty poppler-qt5 kactivities qt5-graphicaleffects ebook-tools
+```
+    
+<br>
+
+
 ### Prerequisites for other distros
-If you are running on another, non-kde-plasma distro which isn't Ubuntu, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed in the "Prerequisites for Ubuntu Users" section, but they might be called differently in your package manager. <br><br>
+If you are running on another, non-kde-plasma distro which isn't listed above, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed for other non-KDE distros above, but they might be called differently in your package manager. <br><br>
 If you manage to build Librum on a distro that is not listed here,  please open a pull request with the instructions to build it on your distro to help others with the same setup.
 
 <br>
