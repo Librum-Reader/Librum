@@ -144,6 +144,12 @@ Pane
         NavigationLogic.zoom(factor);
     }
     
+    function changeZoomBy(factor)
+    {
+        let newZoomFactor = pageView.zoomFactor * factor;
+        NavigationLogic.zoom(newZoomFactor);
+    }
+    
     function flick(direction)
     {
         let up = direction === "up";
