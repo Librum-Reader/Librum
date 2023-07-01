@@ -113,14 +113,15 @@ MFlickWrapper
                     MOnOffToggle
                     {
                         id: openBookAfterCreationToggle
-                        property string savedValue: SettingsController.generalSettings.OpenBooksAfterCreation
+                        property bool savedValue: JSON.parse(SettingsController.generalSettings.OpenBooksAfterCreation)
                         
                         Layout.topMargin: 4
-                        onByDefault: savedValue === onText
+                        onByDefault: savedValue
                         
                         // Need rebinding on reset
-                        onSavedValueChanged: savedValue == onText ? setOn() : setOff()
-                        onToggled: (value) => internal.saveSetting(SettingKeys.OpenBooksAfterCreation, value)
+                        onSavedValueChanged: savedValue ? setOn() : setOff()
+                        onToggled: (value) => internal.saveSetting(SettingKeys.OpenBooksAfterCreation,
+                                                                   value === onText ? true : false)
                     }
                 }
             }

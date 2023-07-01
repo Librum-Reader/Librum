@@ -14,14 +14,13 @@ Item
     property alias pageNumber: page.pageNumber
     readonly property bool isLastPage: pageNumber == document.pageCount - 1
     readonly property real pageRatio: page.implicitWidth / page.implicitHeight
-    property int pageSpacing
     readonly property int adaptedWidth: page.width
     
     
     PageItem
     {
         id: page
-        height: parent.height - root.pageSpacing
+        height: parent.height
         width: root.height * root.pageRatio
         
         
@@ -32,17 +31,5 @@ Item
             anchors.fill: parent
             color: Style.colorReadingViewBackground
         }
-    }
-    
-    // TODO: Fix the way we handle the last item spacing
-    Rectangle
-    {
-        id: bottomSpacing
-        anchors.top: page.bottom
-        height: root.pageSpacing
-        width: root.width
-        // If the current page is the book's last page, we dont want a space at the
-        // bottom, so just fill it with the page's background color.
-        color: root.isLastPage ? Style.colorReadingViewBackground : "transparent"
     }
 }

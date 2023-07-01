@@ -212,7 +212,7 @@ Pane
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            text: root.bookTitle
+            text: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
             font.pointSize: 12

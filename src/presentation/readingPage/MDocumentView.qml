@@ -4,6 +4,7 @@ import QtQuick.Window 2.15
 import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.globals 1.0
+import Librum.controllers 1.0
 import "DocumentNavigation.js" as NavigationLogic
 
 /*
@@ -41,10 +42,10 @@ Pane
         ListView
         {
             id: pageView
-            readonly property real defaultPageHeight: 1334
-            property real zoomFactor: 1
-            readonly property int defaultPageSpacing: 12
+            readonly property real defaultPageHeight: 1310
+            property real zoomFactor: SettingsController.appearanceSettings.DefaultZoom / 100
             readonly property int scrollSpeed: 5500
+            property int pageSpacing: pageView.getPageSpacing(zoomFactor)
             
             height: parent.height
             width: currentItem.width <= root.width ? currentItem.width : root.width
@@ -59,6 +60,7 @@ Pane
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
+            spacing: pageSpacing
             delegate: MPageView
             {
                 height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
@@ -66,7 +68,6 @@ Pane
                 
                 document: root.document
                 pageNumber: modelData
-                pageSpacing: pageView.defaultPageSpacing
             }
             
             
@@ -74,6 +75,16 @@ Pane
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
+            
+            // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
+            // since the zoom factor can change depending on the setting
+            Component.onCompleted: zoomEmitter.start()
+            Timer
+            {
+                id: zoomEmitter
+                interval: 1
+                onTriggered: root.zoomFactorChanged(pageView.zoomFactor)
+            }
             
             
             MouseArea
@@ -86,6 +97,11 @@ Pane
                     NavigationLogic.handleWheel(wheel);
                     wheel.accepted = true;
                 }
+            }
+            
+            function getPageSpacing(zoom)
+            {
+                return Math.round(SettingsController.appearanceSettings.PageSpacing * (zoom + 0.4 * (1 - zoom)));
             }
         }
     }
