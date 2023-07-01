@@ -272,6 +272,7 @@ Page
                         chapterSidebar.active = true;
                         chapterSidebar.visible = true;
                         toolbar.chapterButton.active = true;
+                        chapterSidebar.giveFocus();
                     }
                     
                     function close()
@@ -279,6 +280,7 @@ Page
                         chapterSidebar.active = false;
                         chapterSidebar.visible = false;
                         toolbar.chapterButton.active = false;
+                        documentView.forceActiveFocus();
                     }
                 }
                 
