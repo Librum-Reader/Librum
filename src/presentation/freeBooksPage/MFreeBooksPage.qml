@@ -75,7 +75,15 @@ Page
                     {
                         anchors.fill: parent
                         
-                        onClicked: getBookPopup.open();
+                        onClicked:
+                        {
+                            downloadBookPopup.title = model.title;
+                            downloadBookPopup.authors = model.authors;
+                            downloadBookPopup.languages = model.languages;
+                            downloadBookPopup.cover = model.cover;
+                            downloadBookPopup.downloadCount = model.downloadCount;
+                            downloadBookPopup.open();
+                        }
                     }
                 }
             }
@@ -84,7 +92,7 @@ Page
     
     MDownloadBookPopup
     {
-        id: getBookPopup
+        id: downloadBookPopup
         
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
