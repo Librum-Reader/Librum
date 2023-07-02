@@ -1,12 +1,13 @@
 #include "free_books_model.hpp"
+#include <QBuffer>
+#include <QDebug>
 
 using namespace domain::value_objects;
 
 namespace adapters::data_models
 {
 
-FreeBooksModel::FreeBooksModel(
-    const std::vector<domain::value_objects::FreeBook>& data) :
+FreeBooksModel::FreeBooksModel(const std::vector<FreeBook>* data) :
     m_data(data)
 {
 }
@@ -16,7 +17,7 @@ int FreeBooksModel::rowCount(const QModelIndex& parent) const
     if(parent.isValid())
         return 0;
 
-    return m_data.size();
+    return m_data->size();
 }
 
 QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
@@ -24,30 +25,36 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
     if(!index.isValid())
         return QVariant();
 
-    const auto& book = m_data.at(index.row());
+    const auto& freeBook = m_data->at(index.row());
     switch(role)
     {
     case IdRole:
-        return QString::number(book.id);
-        break;
+        return QVariant::fromValue(freeBook.id);
     case TitleRole:
-        return book.title;
-        break;
+        return freeBook.title;
     case AuthorsRole:
-        return book.authors;
-        break;
+        return freeBook.authors;
     case LanguagesRole:
-        return book.languages;
-        break;
+        return freeBook.languages;
     case MediaTypeRole:
-        return book.mediaType;
-        break;
+        return freeBook.mediaType;
     case FormatsRole:
-        return book.formats;
-        break;
+        return freeBook.formats;
     case DownloadCountRole:
-        return QString::number(book.downloadCount);
-        break;
+        return QVariant::fromValue(freeBook.downloadCount);
+    case CoverRole:
+    {
+        auto& cover = freeBook.cover;
+        if(cover.isNull())
+            return "";
+
+        QByteArray byteArray;
+        QBuffer buffer(&byteArray);
+        buffer.open(QIODevice::WriteOnly);
+        cover.save(&buffer, "jpeg");
+        QString base64 = QString::fromUtf8(byteArray.toBase64());
+        return QString("data:image/jpeg;base64,") + base64;
+    }
     default:
         return QVariant();
     }
@@ -63,6 +70,7 @@ QHash<int, QByteArray> FreeBooksModel::roleNames() const
         { MediaTypeRole, "mediaType" },
         { FormatsRole, "formats" },
         { DownloadCountRole, "downloadCount" },
+        { CoverRole, "cover" },
     };
 
     return roles;

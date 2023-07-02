@@ -9,6 +9,11 @@ import Librum.icons 1.0
 Popup
 {
     id: root
+    property string title: ""
+    property string authors: ""
+    property string languages: ""
+    property string formats: ""
+    
     implicitWidth: 751
     implicitHeight: layout.height
     padding: 0

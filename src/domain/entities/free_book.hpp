@@ -1,4 +1,6 @@
 #pragma once
+#include <QImage>
+#include <QString>
 
 namespace domain::value_objects
 {
@@ -11,6 +13,7 @@ struct FreeBook
     QString languages;
     QString mediaType;
     QString formats;
+    QImage cover;
     long downloadCount;
 };
 

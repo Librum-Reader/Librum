@@ -17,6 +17,7 @@
 #include "book_operation_status.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
+#include "free_books_model.hpp"
 #include "i_book_service.hpp"
 #include "i_free_books_service.hpp"
 #include "i_user_service.hpp"
@@ -62,6 +63,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
+    qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageItem>("Librum.elements", 1, 0, "PageItem");

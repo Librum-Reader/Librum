@@ -16,6 +16,8 @@ Page
         color: Style.colorPageBackground
     }
     
+    Component.onCompleted: FreeBooksController.getBooksMetadata();
+    
     ColumnLayout
     {
         id: layout
@@ -62,18 +64,18 @@ Page
                 rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
-                flickDeceleration: 3500
-                maximumFlickVelocity: 3000
+                flickDeceleration: 19500
+                maximumFlickVelocity: 3300
                 clip: true
                 
-                model: 500
-                delegate: MMinimalBook
+                model: FreeBooksController.freeBooksModel
+                delegate: MFreeBook
                 {
-                    MouseArea   
+                    MouseArea
                     {
                         anchors.fill: parent
                         
-                        onClicked: { FreeBooksController.getBooksMetadata(); getBookPopup.open(); }
+                        onClicked: getBookPopup.open();
                     }
                 }
             }
