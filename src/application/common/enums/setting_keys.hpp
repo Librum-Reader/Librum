@@ -47,7 +47,7 @@ enum class SettingKeys
     PrintPage,
     CreateBookmarkHere,
     ToggleSpeaking,
-    ReloadLibrary,
+    ReloadApplication,
     AddBook,
 
     SettingKeys_END

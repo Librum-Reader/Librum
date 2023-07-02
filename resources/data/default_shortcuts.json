@@ -9,13 +9,13 @@
     "GoToHome": "Ctrl+Alt+H",
     "ZoomIn": "Ctrl++",
     "ZoomOut": "Ctrl+-",
-    "OpenChapters": "Tab",
+    "OpenChapters": "Ctrl+Tab",
     "OpenBookmarks": "Ctrl+B",
-    "StartOfDocument": "Ctrl+Pos1",
+    "StartOfDocument": "Ctrl+Home",
     "EndOfDocument": "Ctrl+End",
     "PrintPage": "Ctrl+P",
     "CreateBookmarkHere": "Alt+3",
     "ToggleSpeaking": "F5",
-    "ReloadLibrary": "Ctrl+R",
+    "ReloadApplication": "Ctrl+R",
     "AddBook": "Ctrl+N"
 }

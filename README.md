@@ -164,11 +164,12 @@ Since Librum is a Qt and KDE application, the Qt and KDE libraries are necessary
 <br>
 
 ### Prerequisites for KDE Plasma Users
+If you are using KDE Plasma, simply installing the following will be enough. Jump straight to "Installation" when you are done.
 - Extra-cmake-modules               https://github.com/KDE/extra-cmake-modules  (Many package managers list them as `extra-cmake-modules`)
 
 <br>
 
-### Prerequisites for Ubuntu Users
+### Prerequisites for (non KDE) Ubuntu Users
 Run the following commands to install all dependencies for Librum
 
 ```sh
@@ -181,8 +182,43 @@ sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake q
     
 <br>
 
+### Prerequisites for (non KDE) Arch Users
+Run the following commands to install all dependencies for Librum
+
+```sh
+sudo pacman -Syyu
+```
+    
+```sh
+sudo pacman -S base-devel extra-cmake-modules qt5-base qt5-quickcontrols2 qt5-quickcontrols2 qt5-declarative kde-dev-utils libarchive threadweaver qt5-svg phonon-qt5 qt5-speech kpty poppler-qt5 kactivities qt5-graphicaleffects ebook-tools
+```
+    
+<br>
+
+### Prerequisites for (non KDE) Fedora
+Run the following commands to install all dependencies for Librum
+    
+```sh
+sudo dnf install extra-cmake-modules qt5-qtbase-devel qt5-qtquickcontrols2 qt5-qtdeclarative qt5-qtquickcontrols2 kf5-kparts-devel kf5-threadweaver-devel kf5-kactivities-devel kf5-karchive-devel kf5-kiconthemes-devel kf5-kcrash-devel phonon-qt5-devel zlib-devel kf5-kpty-devel poppler-qt5-devel ebook-tools-devel qt5-qtquickcontrols2-devel qt5-qtsvg-devel qt5-qtbase-private-devel redhat-rpm-config
+```
+
+Create a symbolic link for qmake (it is called qmake-qt5 on fedora, but Librum calls it via `qmake`)
+```sh
+sudo ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
+```
+
+Some might get errors like `RPM_* not defined`. If that's the case, run the following:
+```sh
+export RPM_ARCH=$(uname -m)
+export RPM_PACKAGE_VERSION=$(uname -v)
+export RPM_PACKAGE_RELEASE=$(uname -v)
+```
+    
+<br>
+
+
 ### Prerequisites for other distros
-If you are running on another, non-kde-plasma distro which isn't Ubuntu, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed in the "Prerequisites for Ubuntu Users" section, but they might be called differently in your package manager. <br><br>
+If you are running on another, non-kde-plasma distro which isn't listed above, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed for other non-KDE distros above, but they might be called differently in your package manager. <br><br>
 If you manage to build Librum on a distro that is not listed here,  please open a pull request with the instructions to build it on your distro to help others with the same setup.
 
 <br>
@@ -215,7 +251,7 @@ Once you have installed the necessary dependencies, build Librum by following th
     ```
 6. Install the files
     ```sh
-    cmake --install .
+    sudo cmake --install .
     ```
 7. Run the app
     ```sh
