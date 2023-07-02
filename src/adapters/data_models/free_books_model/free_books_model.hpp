@@ -19,7 +19,6 @@ public:
         TitleRole,
         AuthorsRole,
         LanguagesRole,
-        MediaTypeRole,
         FormatsRole,
         DownloadCountRole,
         CoverRole,

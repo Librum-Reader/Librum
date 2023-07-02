@@ -11,7 +11,6 @@ struct FreeBook
     QString title;
     QString authors;
     QString languages;
-    QString mediaType;
     QString formats;
     QImage cover;
     long downloadCount;

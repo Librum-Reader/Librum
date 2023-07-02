@@ -42,73 +42,66 @@ void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
     for(const auto& result : results)
     {
         auto resultObject = result.toObject();
-
-        if(resultObject["copyright"].toBool())
+        auto isCopyrighted = resultObject["copyright"].toBool();
+        if(isCopyrighted)
             continue;
 
-        FreeBook book;
-        assignValuesToBook(book, resultObject);
+        auto book = getBookFromJson(resultObject);
 
         books.emplace_back(std::move(book));
-
         getCoverForBook(resultObject);
     }
 
     emit gettingBooksMetaDataFinished(books);
 }
 
-void FreeBooksStorageGateway::assignValuesToBook(FreeBook& book,
-                                                 const QJsonObject& values)
+FreeBook FreeBooksStorageGateway::getBookFromJson(const QJsonObject& values)
 {
-    book.id = values["id"].toInt();
-    book.title = values["title"].toString();
-    book.mediaType = values["media_type"].toString();
-    book.downloadCount = values["download_count"].toInt();
+    auto authors = formatAuthors(values["authors"].toArray());
+    auto languages = formatLanguages(values["languages"].toArray());
 
-    addAuthorsToBook(book, values["authors"].toArray());
-    addLanguagesToBook(book, values["languages"].toArray());
+    FreeBook result {
+        .id = values["id"].toInt(),
+        .title = values["title"].toString(),
+        .authors = authors,
+        .languages = languages,
+        .formats = "",
+        .cover = QImage(),
+        .downloadCount = values["download_count"].toInt(),
+    };
+    return result;
 }
 
-void FreeBooksStorageGateway::addAuthorsToBook(FreeBook& book,
-                                               const QJsonArray& authors)
+QString FreeBooksStorageGateway::formatAuthors(QJsonArray authors)
 {
-    QString authorNames;
+    QString result;
 
     for(int i = 0; i < authors.size(); i++)
     {
-        auto authorName = authors[i]["name"].toString();
+        auto authorName = authors.at(i)["name"].toString();
         authorName.remove(',');
-
-        authorNames.append(authorName);
+        result.append(authorName);
 
         if(i != authors.size() - 1)
-            authorNames.append(", ");
+            result.append(", ");
     }
 
-    book.authors = authorNames;
+    return result;
 }
 
-void FreeBooksStorageGateway::addLanguagesToBook(FreeBook& book,
-                                                 const QJsonArray& languages)
+QString FreeBooksStorageGateway::formatLanguages(QJsonArray languages)
 {
-    QString languagesStr;
-
+    QString result;
     for(int i = 0; i < languages.size(); i++)
     {
         auto language = languages[i].toString();
-
-        languagesStr.append(language);
+        result.append(language);
 
         if(i != languages.size() - 1)
-            languagesStr.append(", ");
+            result.append(", ");
     }
 
-    book.languages = languagesStr;
-}
-
-void FreeBooksStorageGateway::addFormatsToBook(FreeBook& book,
-                                               const QJsonArray& formats)
-{
+    return result;
 }
 
 void FreeBooksStorageGateway::getCoverForBook(const QJsonObject& book)

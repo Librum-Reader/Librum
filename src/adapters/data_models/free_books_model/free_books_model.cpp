@@ -36,8 +36,6 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
         return freeBook.authors;
     case LanguagesRole:
         return freeBook.languages;
-    case MediaTypeRole:
-        return freeBook.mediaType;
     case FormatsRole:
         return freeBook.formats;
     case DownloadCountRole:
@@ -63,13 +61,9 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
 QHash<int, QByteArray> FreeBooksModel::roleNames() const
 {
     static QHash<int, QByteArray> roles {
-        { IdRole, "id" },
-        { TitleRole, "title" },
-        { AuthorsRole, "authors" },
-        { LanguagesRole, "languages" },
-        { MediaTypeRole, "mediaType" },
-        { FormatsRole, "formats" },
-        { DownloadCountRole, "downloadCount" },
+        { IdRole, "id" },           { TitleRole, "title" },
+        { AuthorsRole, "authors" }, { LanguagesRole, "languages" },
+        { FormatsRole, "formats" }, { DownloadCountRole, "downloadCount" },
         { CoverRole, "cover" },
     };
 
