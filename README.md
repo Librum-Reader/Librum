@@ -195,6 +195,27 @@ sudo pacman -S base-devel extra-cmake-modules qt5-base qt5-quickcontrols2 qt5-qu
     
 <br>
 
+### Prerequisites for (non KDE) Fedora
+Run the following commands to install all dependencies for Librum
+    
+```sh
+sudo dnf install extra-cmake-modules qt5-qtbase-devel qt5-qtquickcontrols2 qt5-qtdeclarative qt5-qtquickcontrols2 kf5-kparts-devel kf5-threadweaver-devel kf5-kactivities-devel kf5-karchive-devel kf5-kiconthemes-devel kf5-kcrash-devel phonon-qt5-devel zlib-devel kf5-kpty-devel poppler-qt5-devel ebook-tools-devel qt5-qtquickcontrols2-devel qt5-qtsvg-devel qt5-qtbase-private-devel redhat-rpm-config
+```
+
+Create a symbolic link for qmake (it is called qmake-qt5 on fedora, but Librum calls it via `qmake`)
+```sh
+sudo ln -s /usr/bin/qmake-qt5 /usr/bin/qmake
+```
+
+Some might get errors like `RPM_* not defined`. If that's the case, run the following:
+```sh
+export RPM_ARCH=$(uname -m)
+export RPM_PACKAGE_VERSION=$(uname -v)
+export RPM_PACKAGE_RELEASE=$(uname -v)
+```
+    
+<br>
+
 
 ### Prerequisites for other distros
 If you are running on another, non-kde-plasma distro which isn't listed above, you will need to install the dependencies via your distro specific package manager. The packages required should be pretty similar to the ones listed for other non-KDE distros above, but they might be called differently in your package manager. <br><br>
