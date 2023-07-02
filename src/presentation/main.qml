@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 import Librum.models 1.0
+import Librum.controllers 1.0
 import "PageNavigationLogic.js" as Logic
 
 import "sidebar"
@@ -30,6 +31,12 @@ ApplicationWindow
     visible: true
     visibility: Window.Maximized
     title: qsTr("Librum - Your ebook reader")
+    
+    Shortcut
+    {
+        sequence: SettingsController.shortcuts.ReloadApplication
+        onActivated: internal.reloadApplication()
+    }
     
     
     RowLayout
@@ -122,5 +129,32 @@ ApplicationWindow
         
         let page = pageManager.currentItem;
         page.loadSettingsPage(page.appearancePage, page.settingsSidebar.appearanceItem);
+    }
+    
+    
+    QtObject
+    {
+        id: internal
+        
+        
+        function reloadApplication()
+        {
+            if(spamStopper.available)
+            {
+                BookController.syncWithServer();
+                UserController.syncWithServer();
+                spamStopper.available = false;
+                spamStopper.start();
+            }
+        }
+    }
+    
+    Timer
+    {
+        id: spamStopper
+        property bool available: true
+        
+        interval: 1000
+        onTriggered: spamStopper.available = true
     }
 }

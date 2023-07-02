@@ -18,16 +18,13 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     QJsonDocument jsonDocument { jsonObject };
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-
     auto reply = m_networkAccessManager.post(request, data);
 
 
     // Handle authentication result and release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [this, reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
-
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     auto errorCode = api_error_helper::logErrorMessage(
@@ -56,16 +53,13 @@ void AuthenticationAccess::registerUser(const RegisterDto& registerDto)
     QJsonDocument jsonDocument { jsonObject };
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
-
     auto reply = m_networkAccessManager.post(request, data);
 
 
     // Handle registration result and release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [this, reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
-
                 if(api_error_helper::apiRequestFailed(reply, 201))
                 {
                     auto errorCode = api_error_helper::logErrorMessage(
@@ -90,10 +84,8 @@ void AuthenticationAccess::checkIfEmailConfirmed(const QString& email)
 
     // Handle registration result and release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [this, reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
-
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(

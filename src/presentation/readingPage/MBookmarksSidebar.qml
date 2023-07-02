@@ -21,8 +21,9 @@ Item
         Label
         {
             anchors.centerIn: parent
-            text: "Bookmarks"
-            font.pointSize: 14
+            text: "In Development"
+            color: Style.colorTitle
+            font.pointSize: 20
             font.weight: Font.Bold
         }
     }

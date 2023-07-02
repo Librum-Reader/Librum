@@ -4,6 +4,7 @@ import QtQuick.Window 2.15
 import Librum.elements 1.0
 import Librum.style 1.0
 import Librum.globals 1.0
+import Librum.controllers 1.0
 import "DocumentNavigation.js" as NavigationLogic
 
 /*
@@ -15,6 +16,7 @@ Pane
     property DocumentItem document
     readonly property alias pagepageView: pageView
     signal clicked
+    signal zoomFactorChanged(real factor)
     
     padding: 0
     background: Rectangle { color: "transparent" }
@@ -37,43 +39,52 @@ Pane
         }
         
         
-        GridView
+        ListView
         {
             id: pageView
-            readonly property real defaultHeight: 1334
-            property real zoomFactor: 1
-            readonly property int defaultPageSpacing: 12
-            readonly property int scrollSpeed: 1600
+            readonly property real defaultPageHeight: 1310
+            property real zoomFactor: SettingsController.appearanceSettings.DefaultZoom / 100
+            readonly property int scrollSpeed: 5500
+            property int pageSpacing: pageView.getPageSpacing(zoomFactor)
             
             height: parent.height
-            width: contentItem.childrenRect.width > root.width ? root.width : contentItem.childrenRect.width
+            width: currentItem.width <= root.width ? currentItem.width : root.width
             contentWidth: currentItem.width
             anchors.centerIn: parent
-            flickableDirection: Flickable.VerticalFlick
+            flickableDirection: Flickable.AutoFlickDirection
+            flickDeceleration: 100000
             interactive: true
             clip: true
-            cellHeight: Math.round(pageView.defaultHeight * pageView.zoomFactor)
-            cellWidth: currentItem.width
             cacheBuffer: 20000
-            flow: GridView.FlowLeftToRight
+            maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
-            flickDeceleration: 10000
+            boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
+            spacing: pageSpacing
             delegate: MPageView
             {
-                // The width is automatically deduced
-                height: Math.round(pageView.defaultHeight * pageView.zoomFactor)
+                height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
                 width: adaptedWidth
                 
                 document: root.document
                 pageNumber: modelData
-                pageSpacing: pageView.defaultPageSpacing
             }
             
             
             // Set the book's current page once the model is loaded
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
+            onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
+            
+            // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
+            // since the zoom factor can change depending on the setting
+            Component.onCompleted: zoomEmitter.start()
+            Timer
+            {
+                id: zoomEmitter
+                interval: 1
+                onTriggered: root.zoomFactorChanged(pageView.zoomFactor)
+            }
             
             
             MouseArea
@@ -87,6 +98,43 @@ Pane
                     wheel.accepted = true;
                 }
             }
+            
+            function getPageSpacing(zoom)
+            {
+                return Math.round(SettingsController.appearanceSettings.PageSpacing * (zoom + 0.4 * (1 - zoom)));
+            }
+        }
+    }
+    
+    ScrollBar
+    {
+        id: scrollbar
+        width: hovered ? 14 : 12
+        hoverEnabled: true
+        active: true
+        policy: ScrollBar.AlwaysOn
+        orientation: Qt.Vertical
+        size: pageView.height / pageView.contentHeight
+        minimumSize: 0.04
+        position: (pageView.contentY - pageView.originY) / pageView.contentHeight
+        onPositionChanged: pageView.contentY = position * pageView.contentHeight + pageView.originY
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        horizontalPadding: 4
+        
+        contentItem: Rectangle
+        {
+            color: Style.colorScrollBarHandle
+            opacity: scrollbar.pressed ? 0.8 : 1
+            radius: 4
+        }
+        
+        background: Rectangle
+        {
+            implicitWidth: 26
+            implicitHeight: 200
+            color: scrollbar.hovered ? Style.colorContainerBackground : "transparent"
         }
     }
     
@@ -96,10 +144,16 @@ Pane
         NavigationLogic.zoom(factor);
     }
     
+    function changeZoomBy(factor)
+    {
+        let newZoomFactor = pageView.zoomFactor * factor;
+        NavigationLogic.zoom(newZoomFactor);
+    }
+    
     function flick(direction)
     {
         let up = direction === "up";
-        NavigationLogic.flick(pageView.scrollSpeed * (up ? 1 : -1));
+        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1));
     }
     
     function nextPage()

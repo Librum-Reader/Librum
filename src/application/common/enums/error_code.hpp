@@ -33,7 +33,8 @@ enum class ErrorCode
     LastNameTooShort,
     LastNameTooLong,
     UserDoesNotExist,
-    AccountNotConfirmed
+    AccountNotConfirmed,
+    TooManyRequests
 };
 
 Q_ENUM_NS(ErrorCode)

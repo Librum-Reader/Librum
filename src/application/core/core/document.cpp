@@ -19,7 +19,7 @@
     #define _WIN32_WINNT 0x0500
     #include <windows.h>
 #elif defined(Q_OS_FREEBSD)
-// clang-format off
+    // clang-format off
 // FreeBSD really wants this include order
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -3040,8 +3040,12 @@ QVector<KPluginMetaData> DocumentPrivate::availableGenerators()
     static QVector<KPluginMetaData> result;
     if(result.isEmpty())
     {
-        result =
+        // Try looking in both paths and take the match
+        auto first = KPluginLoader::findPlugins(QStringLiteral("okular"));
+        auto second =
             KPluginLoader::findPlugins(QStringLiteral("okular/generators"));
+
+        result = first.size() > second.size() ? first : second;
     }
     return result;
 }

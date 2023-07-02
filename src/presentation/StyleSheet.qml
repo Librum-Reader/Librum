@@ -77,6 +77,8 @@ Item
     property color colorRecordActiveGlow
     property color colorBookCoverDim
     property color colorDefaultProfilePicture
+    property color colorTextSelection
+    property color colorScrollBarHandle
     
     
     
@@ -158,6 +160,8 @@ Item
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorTextSelection: "#21BDAC" }
+            PropertyChanges { target: styleSheet; colorScrollBarHandle: "#999999" }
         },
         State
         {
@@ -232,6 +236,8 @@ Item
             PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaC0452C" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
+            PropertyChanges { target: styleSheet; colorTextSelection: "#01584E" }
+            PropertyChanges { target: styleSheet; colorScrollBarHandle: "#999999" }
         }
     ]
     
@@ -246,7 +252,7 @@ Item
         id: lastRunSettings
         fileName: "last_run_settings"
         
-        property string theme: "Light"
+        property string theme: "Dark"
     }
     Component.onDestruction: lastRunSettings.theme = styleSheet.state
 }

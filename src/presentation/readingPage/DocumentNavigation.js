@@ -3,12 +3,11 @@
   */
 function handleWheel(wheel)
 {
-    // Normalize to factors between 0.8 and 1.2
-    let factor = (((wheel.angleDelta.y / 120)+1) / 6 ) + 0.8;
+    let factor = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
-        zoom(factor);
+        zoom(pageView.zoomFactor * factor);
     }
     // angleDelta.x is the "horizontal scroll" mode some mouses support by
     // e.g. pushing the scroll button to the left/right. Make sure not to
@@ -25,9 +24,9 @@ function handleWheel(wheel)
 // Calculate the current page and update the document.
 function updateCurrentPageCounter()
 {
-    // A new page starts if it is over the middle of the screen (vertically).   
-    let pageHeight = pageView.currentItem.height;
-    let currentPos = pageView.contentY + pageView.height/2;
+    // A new page starts if it is over the middle of the screen (vertically).
+    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
+    let currentPos = pageView.contentY - pageView.originY + pageView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
     
     if(pageNumber !== root.document.currentPage)
@@ -59,23 +58,23 @@ function setMoveDirection(direction)
 }
 
 
-function zoom(factor)
+function zoom(newZoomFactor)
 {
-    let newZoomFactor = pageView.zoomFactor * factor;
-    let newHeight = Math.round(pageView.defaultHeight * newZoomFactor);
-    if (newHeight < pageView.defaultHeight / 5 || newHeight > pageView.defaultHeight * 3)
+    // Clamp to max / min zoom factors
+    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 3));
+    if (newZoomFactor === pageView.zoomFactor)
         return;
     
-    let oldPageHeight = pageView.currentItem.height;
-    let currentPage = root.document.currentPage;
-    let currentPos = pageView.contentY + pageView.height/2;
+    let newPageHeight = Math.round(pageView.defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
+    let currentPageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.getPageSpacing(pageView.zoomFactor);
+    let currentPageNumber = root.document.currentPage;
+    let currentPos = pageView.contentY - pageView.originY;
     
-    let oldPageOffsetNumber = currentPos - (oldPageHeight * currentPage);
-    
+    let pageOffset = currentPos - (currentPageHeight * currentPageNumber);
     
     pageView.zoomFactor = newZoomFactor;
-    pageView.contentY = newHeight * currentPage + oldPageOffsetNumber * newZoomFactor;
     pageView.forceLayout();
+    pageView.contentY = newPageHeight * currentPageNumber + pageOffset + pageView.originY;
 }
 
 
@@ -87,13 +86,13 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let pageHeight = pageView.currentItem != null ? pageView.currentItem.height : 0
-    let newPageY = pageHeight * newPageNumber;
+    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
+    let newContentY = (pageHeight * newPageNumber) + pageView.originY;
     
     if(newPageNumber > root.document.currentPage)
         setMoveDirection("up");
     else if(newPageNumber < root.document.currentPage)
         setMoveDirection("down");
     
-    pageView.contentY = newPageY;
+    pageView.contentY = newContentY;
 }

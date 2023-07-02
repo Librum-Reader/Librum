@@ -28,6 +28,7 @@ Pane
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
     signal optionsPopupVisibileChanged
+    signal zoomSelectionChanged(int factor)
     
     implicitHeight: 48
     padding: 8
@@ -211,7 +212,7 @@ Pane
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            text: root.bookTitle
+            text: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
             font.pointSize: 12
@@ -233,7 +234,7 @@ Pane
             checkBoxStyle: false
             model: ListModel
             {
-                ListElement { text: "12%" }
+                ListElement { text: "15%" }
                 ListElement { text: "25%" }
                 ListElement { text: "33%" }
                 ListElement { text: "50%" }
@@ -243,13 +244,12 @@ Pane
                 ListElement { text: "125%" }
                 ListElement { text: "150%" }
                 ListElement { text: "175%" }
-                ListElement { text: "200%" }
-                ListElement { text: "400%" }
-                ListElement { text: "800%" }
-                ListElement { text: "1000%" }
-                ListElement { text: "2000%" }
-                ListElement { text: "4000%" }
+                ListElement { text: "250%" }
+                ListElement { text: "300%" }
             }
+            
+            // Remove % sign from text
+            onItemChanged: root.zoomSelectionChanged(zoomComboBox.text.substring(0, zoomComboBox.text.length - 1))
         }
         
         MButton
@@ -302,5 +302,11 @@ Pane
         y: optionsButton.height + 12
         
         onOpenedChanged: root.optionsPopupVisibileChanged()
+    }
+    
+    
+    function setZoomFactor(factor)
+    {
+        zoomComboBox.text = Math.round(factor * 100) + "%"
     }
 }

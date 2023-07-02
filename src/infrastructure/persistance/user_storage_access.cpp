@@ -13,12 +13,11 @@ namespace infrastructure::persistence
 void UserStorageAccess::getUser(const QString& authToken)
 {
     auto request = createRequest(data::userGetEndpoint, authToken);
-    auto getUserReply = m_networkAccessManager.get(request);
+    auto reply = m_networkAccessManager.get(request);
 
-    connect(getUserReply, &QNetworkReply::finished, this,
-            [this]
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(reply, "Getting User");
@@ -38,12 +37,11 @@ void UserStorageAccess::getProfilePicture(const QString& authToken)
 {
     QString endpoint = data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
-    auto pictureDownloadreply = m_networkAccessManager.get(request);
+    auto reply = m_networkAccessManager.get(request);
 
-    connect(pictureDownloadreply, &QNetworkReply::finished, this,
-            [this]()
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -75,9 +73,8 @@ void UserStorageAccess::changeFirstName(const QString& authToken,
 
     // Make sure to release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(reply,
@@ -103,9 +100,8 @@ void UserStorageAccess::changeLastName(const QString& authToken,
 
     // Make sure to release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(reply,
@@ -137,14 +133,12 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     // Reset the ContentTypeHeader since it will be set by the multipart
     request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
 
-    auto profilePictureUploadreply =
-        m_networkAccessManager.post(request, profilePicture);
+    auto reply = m_networkAccessManager.post(request, profilePicture);
 
     // Make sure to free the data used for uploading the profile picture
-    connect(profilePictureUploadreply, &QNetworkReply::finished, this,
-            [this, profilePicture]()
+    connect(reply, &QNetworkReply::finished, this,
+            [reply, profilePicture]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -160,13 +154,11 @@ void UserStorageAccess::deleteProfilePicture(const QString& authToken)
 {
     QString endpoint = data::userProfilePictureEndpoint;
     auto request = createRequest(endpoint, authToken);
-    auto pictureDeleteReply =
-        m_networkAccessManager.sendCustomRequest(request, "DELETE");
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
 
-    connect(pictureDeleteReply, &QNetworkReply::finished, this,
-            [this]()
+    connect(reply, &QNetworkReply::finished, this,
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -195,9 +187,8 @@ void UserStorageAccess::changeProfilePictureLastUpdated(
                                                           jsonData.toUtf8());
 
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -223,9 +214,8 @@ void UserStorageAccess::changeHasProfilePicture(const QString& authToken,
                                                           jsonData.toUtf8());
 
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
@@ -246,9 +236,8 @@ void UserStorageAccess::deleteTag(const QString& authToken, const QString& uuid)
 
     // Make sure to release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 204))
                 {
                     api_error_helper::logErrorMessage(reply, "Deleting tag");
@@ -273,9 +262,8 @@ void UserStorageAccess::renameTag(const QString& authToken,
 
     // Make sure to release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [this]()
+            [reply]()
             {
-                auto reply = qobject_cast<QNetworkReply*>(sender());
                 if(api_error_helper::apiRequestFailed(reply, 201))
                 {
                     api_error_helper::logErrorMessage(reply, "Renaming tag");

@@ -30,7 +30,7 @@ public:
                            const QUuid& uuid) override;
 
 private slots:
-    void processGettingBooksMetaDataResult();
+    void processGettingBooksMetaDataResult(QNetworkReply* reply);
 
 private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);

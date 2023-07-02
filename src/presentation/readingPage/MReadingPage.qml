@@ -17,20 +17,20 @@ Page
     background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
     
     Component.onCompleted: root.forceActiveFocus()
-    
+    Component.onDestruction: internal.saveCurrentPage()
     
     Shortcut
     {
         id: zoomIn
         sequences: [SettingsController.shortcuts.ZoomIn]
-        onActivated: documentView.zoom(1.2)
+        onActivated: documentView.changeZoomBy(1.13)
     }
     
     Shortcut
     {
         id: zoomOut
         sequences: [SettingsController.shortcuts.ZoomOut]
-        onActivated: documentView.zoom(0.8)
+        onActivated: documentView.changeZoomBy(0.87)
     }
     
     Shortcut
@@ -65,8 +65,22 @@ Page
     {
         id: stopFullScreenMode
         sequences: [SettingsController.shortcuts.ExitFullScreenMode]
-        onActivated: internal.stopFullScreenMode();
+        onActivated: internal.stopFullScreenMode()
         enabled: internal.fullScreen
+    }
+    
+    Shortcut
+    {
+        id: startOfDocument
+        sequences: [SettingsController.shortcuts.StartOfDocument]
+        onActivated: internal.goToStart()
+    }
+    
+    Shortcut
+    {
+        id: endOfDocument
+        sequences: [SettingsController.shortcuts.EndOfDocument]
+        onActivated: internal.goToEnd()
     }
     
     
@@ -81,7 +95,7 @@ Page
                 return;
             
             toolbar.currentPageSelection.pageCount = pageCount;
-            toolbar.bookTitle = windowTitleForDocument;
+            toolbar.bookTitle = Globals.selectedBook.title;
         }
         
         Component.onCompleted: documentItem.url = Globals.selectedBook.filePath;
@@ -154,6 +168,8 @@ Page
                 
                 bookmarksSidebar.open();
             }
+            
+            onZoomSelectionChanged: (factor) => documentView.zoom(factor / 100)
             
             onFullScreenButtonClicked:
             {
@@ -256,6 +272,7 @@ Page
                         chapterSidebar.active = true;
                         chapterSidebar.visible = true;
                         toolbar.chapterButton.active = true;
+                        chapterSidebar.giveFocus();
                     }
                     
                     function close()
@@ -263,6 +280,7 @@ Page
                         chapterSidebar.active = false;
                         chapterSidebar.visible = false;
                         toolbar.chapterButton.active = false;
+                        documentView.forceActiveFocus();
                     }
                 }
                 
@@ -322,6 +340,8 @@ Page
                     Layout.fillHeight: true
                     visible: documentItem.opened
                     document: documentItem
+                    
+                    onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
             }
         }
@@ -358,6 +378,16 @@ Page
             
             internal.fullScreen = false;
             showToolbar.start();
+        }
+        
+        function goToStart()
+        {
+            documentView.setPage(0);
+        }
+
+        function goToEnd()
+        {
+            documentView.setPage(documentItem.pageCount)
         }
         
         function saveCurrentPage()

@@ -94,6 +94,8 @@ Item
                     placeholderText: root.placeholderContent
                     placeholderTextColor: root.placeholderColor
                     echoMode: root.textHidden ? TextInput.Password : TextInput.Normal
+                    selectionColor: Style.colorTextSelection
+                    selectedTextColor: root.inputFontColor
                     background: Rectangle   
                     {
                         anchors.fill: parent
