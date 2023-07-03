@@ -237,9 +237,4 @@ Item
             }
         }
     }
-    
-    function giveFocus()
-    {
-        inputField.forceActiveFocus();
-    }
 }

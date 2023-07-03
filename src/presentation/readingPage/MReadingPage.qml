@@ -272,7 +272,6 @@ Page
                         chapterSidebar.active = true;
                         chapterSidebar.visible = true;
                         toolbar.chapterButton.active = true;
-                        chapterSidebar.giveFocus();
                     }
                     
                     function close()
