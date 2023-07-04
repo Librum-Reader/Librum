@@ -16,6 +16,8 @@ Page
         color: Style.colorPageBackground
     }
     
+    Component.onCompleted: FreeBooksController.getBooksMetadata();
+    
     ColumnLayout
     {
         id: layout
@@ -62,18 +64,26 @@ Page
                 rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
-                flickDeceleration: 3500
-                maximumFlickVelocity: 3000
+                flickDeceleration: 19500
+                maximumFlickVelocity: 3300
                 clip: true
                 
-                model: 500
-                delegate: MMinimalBook
+                model: FreeBooksController.freeBooksModel
+                delegate: MFreeBook
                 {
-                    MouseArea   
+                    MouseArea
                     {
                         anchors.fill: parent
                         
-                        onClicked: { FreeBooksController.getBooksMetadata(); getBookPopup.open(); }
+                        onClicked:
+                        {
+                            downloadBookPopup.title = model.title;
+                            downloadBookPopup.authors = model.authors;
+                            downloadBookPopup.languages = model.languages;
+                            downloadBookPopup.cover = model.cover;
+                            downloadBookPopup.downloadCount = model.downloadCount;
+                            downloadBookPopup.open();
+                        }
                     }
                 }
             }
@@ -82,7 +92,7 @@ Page
     
     MDownloadBookPopup
     {
-        id: getBookPopup
+        id: downloadBookPopup
         
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 30)

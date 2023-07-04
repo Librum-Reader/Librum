@@ -9,6 +9,12 @@ import Librum.icons 1.0
 Popup
 {
     id: root
+    property string title: ""
+    property string authors: ""
+    property string languages: ""
+    property var cover
+    property int downloadCount: -1
+    
     implicitWidth: 751
     implicitHeight: layout.height
     padding: 0
@@ -97,6 +103,7 @@ Popup
                             Layout.preferredHeight: 258
                             color: Style.colorBookImageBackground
                             radius: 4
+                            clip: true
                             
                             Image
                             {
@@ -104,7 +111,7 @@ Popup
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
                                 sourceSize.height: bookCoverArea.height - 2
-                                source: Icons.bookCover
+                                source: root.cover
                                 fillMode: Image.PreserveAspectFit
                             }
                         }
@@ -120,7 +127,11 @@ Popup
                             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
                             
                             // contentItem is the underlying flickable of ScrollView
-                            Component.onCompleted: contentItem.maximumFlickVelocity = 600
+                            Component.onCompleted:
+                            {
+                                contentItem.boundsBehavior = Flickable.StopAtBounds
+                                contentItem.maximumFlickVelocity = 600
+                            }
                             
                             
                             ColumnLayout
@@ -140,7 +151,7 @@ Popup
                                     headerText: "Title"
                                     headerFontWeight: Font.Bold
                                     headerFontSize: 11.5
-                                    text: "The 7 habits of highly effective people"
+                                    text: root.title
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorReadOnlyInputText
@@ -158,25 +169,7 @@ Popup
                                     headerText: "Authors"
                                     headerFontWeight: Font.Bold
                                     headerFontSize: 11.5
-                                    text: "Stephen R. Covey"
-                                    headerToBoxSpacing: 3
-                                    inputFontSize: 12
-                                    inputFontColor: Style.colorReadOnlyInputText
-                                    textPadding: 12
-                                    borderWidth: 1
-                                    borderRadius: 4
-                                    readOnly: true
-                                }
-                                
-                                MLabeledInputBox
-                                {
-                                    id: publicationField
-                                    Layout.fillWidth: true
-                                    boxHeight: 34
-                                    headerText: "Publication"
-                                    headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
-                                    text: "United States: Dodd, Mead and Company,1922."
+                                    text: root.authors
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorReadOnlyInputText
@@ -194,7 +187,25 @@ Popup
                                     headerText: "Language"
                                     headerFontWeight: Font.Bold
                                     headerFontSize: 11.5
-                                    text: "English"
+                                    text: root.languages
+                                    headerToBoxSpacing: 3
+                                    inputFontSize: 12
+                                    inputFontColor: Style.colorReadOnlyInputText
+                                    textPadding: 12
+                                    borderWidth: 1
+                                    borderRadius: 4
+                                    readOnly: true
+                                }
+                                
+                                MLabeledInputBox
+                                {
+                                    id: publicationField
+                                    Layout.fillWidth: true
+                                    boxHeight: 34
+                                    headerText: "Downloads"
+                                    headerFontWeight: Font.Bold
+                                    headerFontSize: 11.5
+                                    text: root.downloadCount
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorReadOnlyInputText

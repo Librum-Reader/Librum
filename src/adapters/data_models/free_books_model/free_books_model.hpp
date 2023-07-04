@@ -15,18 +15,18 @@ class FreeBooksModel : public QAbstractListModel
 public:
     enum Roles
     {
-        IdRole = Qt::UserRole,
+        IdRole = Qt::UserRole + 1,
         TitleRole,
         AuthorsRole,
         LanguagesRole,
-        MediaTypeRole,
         FormatsRole,
         DownloadCountRole,
+        CoverRole,
         Invalid
     };
 
-    explicit FreeBooksModel(
-        const std::vector<domain::value_objects::FreeBook>& data);
+    FreeBooksModel(const std::vector<domain::value_objects::FreeBook>* data);
+    FreeBooksModel() = default;
 
     int rowCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role) const override;
@@ -44,7 +44,7 @@ public slots:
 private:
     QVector<int> getAllRoles();
 
-    const std::vector<domain::value_objects::FreeBook>& m_data;
+    const std::vector<domain::value_objects::FreeBook>* m_data;
 };
 
 }  // namespace adapters::data_models

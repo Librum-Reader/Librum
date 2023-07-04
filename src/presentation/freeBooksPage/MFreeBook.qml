@@ -8,6 +8,7 @@ import Librum.icons 1.0
 Item 
 {
     id: root
+    
     implicitWidth: 190
     implicitHeight: 304
     
@@ -40,6 +41,7 @@ Item
             Layout.preferredHeight: 230
             Layout.topMargin: -5
             color: Style.colorBookImageBackground
+            clip: true
             
             ColumnLayout
             {
@@ -52,7 +54,7 @@ Item
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -8
                     sourceSize.height: 241
-                    source: Icons.bookCover
+                    source: cover
                     fillMode: Image.PreserveAspectFit
                 }
             }
@@ -81,12 +83,14 @@ Item
                 {
                     id: bookName
                     Layout.fillWidth: true
+                    Layout.preferredHeight: 32
                     Layout.topMargin: 4
-                    text: "The books title which can be 2 lines long ..."
+                    text: model.title
                     font.weight: Font.Medium
                     color: Style.colorTitle
                     font.pointSize: 11
                     lineHeight: 0.8
+                    elide: Label.ElideRight
                     wrapMode: TextInput.WordWrap
                 }
                 
@@ -95,9 +99,10 @@ Item
                     id: authors
                     Layout.fillWidth: true
                     Layout.topMargin: 5                    
-                    text: "Stephen R. Covey"
+                    text: model.authors
                     color: Style.colorLightText
                     font.pointSize: 10
+                    elide: Label.ElideRight
                 }
             }
         }

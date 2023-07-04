@@ -67,7 +67,6 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
                 }
 
                 emit gettingBookCoverFinished(bookId, reply->readAll());
-
                 reply->deleteLater();
             });
 }
