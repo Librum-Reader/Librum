@@ -8,7 +8,7 @@ namespace infrastructure::persistence
 
 void FreeBooksStorageAccess::getBooksMetadata()
 {
-    auto request = createRequest(data::getFreeBooksMetadata);
+    auto request = createRequest(data::getFreeBooksMetadataEndpoint + "/");
 
     auto reply = m_networkAccessManager.get(request);
 
