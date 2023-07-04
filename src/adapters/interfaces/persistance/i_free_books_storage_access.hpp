@@ -11,7 +11,8 @@ class IFreeBooksStorageAccess : public QObject
 public:
     virtual ~IFreeBooksStorageAccess() noexcept = default;
 
-    virtual void getBooksMetadata() = 0;
+    virtual void getBooksMetadata(const QString& author,
+                                  const QString& title) = 0;
     virtual void getCoverForBook(int bookId, const QString& coverUrl) = 0;
     virtual void getBookMedia(const QString& url) = 0;
 

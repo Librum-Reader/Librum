@@ -12,7 +12,7 @@ class FreeBooksService : public IFreeBooksService
 public:
     FreeBooksService(IFreeBooksStorageGateway* freeBooksStorageGateway);
 
-    void getBooksMetadata() override;
+    void getBooksMetadata(const QString& author, const QString& title) override;
     void getBookMedia(const QString& url) override;
 
 private:

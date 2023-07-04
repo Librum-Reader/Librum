@@ -12,7 +12,8 @@ class FreeBooksController : public IFreeBooksController
 public:
     FreeBooksController(application::IFreeBooksService* bookService);
 
-    void getBooksMetadata() override;
+    void getBooksMetadata(const QString& author = "",
+                          const QString& title = "") override;
     void getBookMedia(const QString& url) override;
 
 private:

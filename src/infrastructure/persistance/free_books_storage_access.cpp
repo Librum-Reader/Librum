@@ -6,9 +6,26 @@
 namespace infrastructure::persistence
 {
 
-void FreeBooksStorageAccess::getBooksMetadata()
+void FreeBooksStorageAccess::getBooksMetadata(const QString& author,
+                                              const QString& title)
 {
-    auto request = createRequest(data::getFreeBooksMetadataEndpoint + "/");
+    QNetworkRequest request;
+
+    if(!author.isEmpty() || !title.isEmpty())
+    {
+        QString formattedAuthor = author;
+        QString formattedTitle = title;
+        formattedAuthor.replace(" ", m_whitespaceCode);
+        formattedTitle.replace(" ", m_whitespaceCode);
+
+        request = createRequest(data::getFreeBooksMetadataEndpoint +
+                                "?search=" + formattedAuthor +
+                                m_whitespaceCode + formattedTitle);
+    }
+    else
+    {
+        request = createRequest(data::getFreeBooksMetadataEndpoint + "/");
+    }
 
     auto reply = m_networkAccessManager.get(request);
 
