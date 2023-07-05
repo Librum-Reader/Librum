@@ -6,9 +6,10 @@
 namespace infrastructure::persistence
 {
 
-void FreeBooksStorageAccess::getBooksMetadata()
+void FreeBooksStorageAccess::getBooksMetadata(const QString& author,
+                                              const QString& title)
 {
-    auto request = createRequest(data::getFreeBooksMetadata);
+    auto request = createGetBooksMetadataRequest(author, title);
 
     auto reply = m_networkAccessManager.get(request);
 
@@ -79,10 +80,29 @@ void FreeBooksStorageAccess::getBookMedia(const QString& url)
             });
 }
 
+QNetworkRequest FreeBooksStorageAccess::createGetBooksMetadataRequest(
+    const QString& author, const QString& title)
+{
+    if(!author.isEmpty() || !title.isEmpty())
+    {
+        QString formattedAuthor = author;
+        QString formattedTitle = title;
+        formattedAuthor.replace(" ", m_whitespaceCode);
+        formattedTitle.replace(" ", m_whitespaceCode);
+
+        return createRequest(data::getFreeBooksMetadataEndpoint +
+                             "?search=" + formattedAuthor + m_whitespaceCode +
+                             formattedTitle);
+    }
+
+    return createRequest(data::getFreeBooksMetadataEndpoint + "/");
+}
+
 QNetworkRequest FreeBooksStorageAccess::createRequest(const QUrl& url)
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    result.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);

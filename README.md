@@ -177,7 +177,7 @@ sudo apt update
 ```
     
 ```sh
-sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake qtquickcontrols2-5-dev qtdeclarative5-dev qml-module-qtquick-controls2 libkf5parts-dev libkf5crash-dev libkf5textwidgets-dev libkf5archive-dev libkf5threadweaver-dev libkf5activities-dev libqt5svg5-dev libphonon4qt5-dev libqt5texttospeech5-dev zlib1g-dev libkf5pty-dev qtdeclarative5-private-dev qtbase5-private-dev qml-module-qtquick-shapes qml-module-qt-labs-qmlmodels qml-module-qt-labs-settings qml-module-qt-labs-platform libpoppler-qt5-dev qml-module-qtquick-controls qml-module-qtquick-layouts qml-module-qtquick-window2
+sudo apt-get install build-essential extra-cmake-modules qtbase5-dev qt5-qmake qtquickcontrols2-5-dev qtdeclarative5-dev qml-module-qtquick-controls2 libkf5parts-dev libkf5crash-dev libkf5textwidgets-dev libkf5archive-dev libkf5threadweaver-dev libkf5activities-dev libqt5svg5-dev libphonon4qt5-dev libqt5texttospeech5-dev zlib1g-dev libkf5pty-dev qtdeclarative5-private-dev qtbase5-private-dev qml-module-qtquick-shapes qml-module-qt-labs-qmlmodels qml-module-qt-labs-settings qml-module-qt-labs-platform libpoppler-qt5-dev qml-module-qtquick-controls qml-module-qtquick-layouts qml-module-qtquick-window2 libepub-dev
 ```
     
 <br>

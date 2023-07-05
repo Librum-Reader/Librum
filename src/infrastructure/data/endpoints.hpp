@@ -29,7 +29,8 @@ inline const QString getUsedBookStorageEndpoint { domain +
                                                   "/api/book/usedBookStorage" };
 
 // Free books storage
-inline const QString getFreeBooksMetadata { freeBooksDomain + "/books/" };
+inline const QString getFreeBooksMetadataEndpoint { freeBooksDomain +
+                                                    "/books" };
 
 // User storage
 inline const QString userGetEndpoint { domain + "/api/user" };

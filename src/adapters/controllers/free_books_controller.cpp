@@ -47,9 +47,10 @@ FreeBooksController::FreeBooksController(
             &m_freeBooksModel, &data_models::FreeBooksModel::refreshBook);
 }
 
-void FreeBooksController::getBooksMetadata()
+void FreeBooksController::getBooksMetadata(const QString& author,
+                                           const QString& title)
 {
-    m_freeBooksService->getBooksMetadata();
+    m_freeBooksService->getBooksMetadata(author, title);
 }
 
 void FreeBooksController::getBookMedia(const QString& url)

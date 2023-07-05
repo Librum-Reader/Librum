@@ -23,9 +23,10 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
             &FreeBooksStorageGateway::gettingBookMediaFinished);
 }
 
-void FreeBooksStorageGateway::getBooksMetadata()
+void FreeBooksStorageGateway::getBooksMetadata(const QString& author,
+                                               const QString& title)
 {
-    m_freeBooksStorageAccess->getBooksMetadata();
+    m_freeBooksStorageAccess->getBooksMetadata(author, title);
 }
 
 void FreeBooksStorageGateway::getBookMedia(const QString& url)

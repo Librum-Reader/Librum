@@ -11,13 +11,16 @@ class FreeBooksStorageAccess : public adapters::IFreeBooksStorageAccess
     Q_OBJECT
 
 public:
-    void getBooksMetadata() override;
+    void getBooksMetadata(const QString& author, const QString& title) override;
     void getCoverForBook(int bookId, const QString& coverUrl) override;
     void getBookMedia(const QString& url) override;
 
 private:
     QNetworkAccessManager m_networkAccessManager;
+    QString m_whitespaceCode = "%20";
 
+    QNetworkRequest createGetBooksMetadataRequest(const QString& author,
+                                                  const QString& title);
     QNetworkRequest createRequest(const QUrl& url);
 };
 

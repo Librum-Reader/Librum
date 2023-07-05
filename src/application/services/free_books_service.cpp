@@ -27,9 +27,10 @@ FreeBooksService::FreeBooksService(
             &FreeBooksService::setBookCover);
 }
 
-void FreeBooksService::getBooksMetadata()
+void FreeBooksService::getBooksMetadata(const QString& author,
+                                        const QString& title)
 {
-    m_freeBooksStorageGateway->getBooksMetadata();
+    m_freeBooksStorageGateway->getBooksMetadata(author, title);
 }
 
 void FreeBooksService::getBookMedia(const QString& url)
