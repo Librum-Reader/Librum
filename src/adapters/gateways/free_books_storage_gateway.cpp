@@ -68,6 +68,7 @@ FreeBook FreeBooksStorageGateway::getBookFromJson(const QJsonObject& values)
         .formats = "",
         .cover = QImage(),
         .downloadCount = values["download_count"].toInt(),
+        .downloadLink = values["formats"]["application/epub+zip"].toString(),
     };
     return result;
 }

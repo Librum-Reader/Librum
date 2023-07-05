@@ -53,6 +53,8 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
         QString base64 = QString::fromUtf8(byteArray.toBase64());
         return QString("data:image/jpeg;base64,") + base64;
     }
+    case DownloadLink:
+        return freeBook.downloadLink;
     default:
         return QVariant();
     }
@@ -64,7 +66,7 @@ QHash<int, QByteArray> FreeBooksModel::roleNames() const
         { IdRole, "id" },           { TitleRole, "title" },
         { AuthorsRole, "authors" }, { LanguagesRole, "languages" },
         { FormatsRole, "formats" }, { DownloadCountRole, "downloadCount" },
-        { CoverRole, "cover" },
+        { CoverRole, "cover" },     { DownloadLink, "downloadLink" },
     };
 
     return roles;

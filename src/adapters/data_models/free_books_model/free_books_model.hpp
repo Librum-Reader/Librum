@@ -22,6 +22,7 @@ public:
         FormatsRole,
         DownloadCountRole,
         CoverRole,
+        DownloadLink,
         Invalid
     };
 

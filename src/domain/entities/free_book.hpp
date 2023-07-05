@@ -14,6 +14,7 @@ struct FreeBook
     QString formats;
     QImage cover;
     long downloadCount;
+    QString downloadLink;
 };
 
 }  // namespace domain::value_objects

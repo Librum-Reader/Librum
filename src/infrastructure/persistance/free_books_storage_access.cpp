@@ -57,6 +57,7 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
 void FreeBooksStorageAccess::getBookMedia(const QString& url)
 {
     auto request = createRequest(url);
+    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 
     auto reply = m_networkAccessManager.get(request);
 

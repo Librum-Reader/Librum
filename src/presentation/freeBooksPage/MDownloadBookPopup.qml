@@ -4,16 +4,18 @@ import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.style 1.0
 import Librum.icons 1.0
+import Librum.controllers 1.0
 
 
 Popup
 {
     id: root
-    property string title: ""
-    property string authors: ""
-    property string languages: ""
+    property string title
+    property string authors
+    property string languages
     property var cover
-    property int downloadCount: -1
+    property int downloadCount
+    property string downloadLink
     
     implicitWidth: 751
     implicitHeight: layout.height
@@ -390,7 +392,7 @@ Popup
         
         function downloadBook()
         {
-            // TODO: Implement
+            FreeBooksController.getBookMedia(root.downloadLink);
         }
         
         function giveFocusToCancelButton()
