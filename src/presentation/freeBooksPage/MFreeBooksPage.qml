@@ -16,7 +16,7 @@ Page
         color: Style.colorPageBackground
     }
     
-    Component.onCompleted: FreeBooksController.getBooksMetadata();
+    Component.onCompleted: FreeBooksController.getBooksMetadata("", "");
     
     ColumnLayout
     {
