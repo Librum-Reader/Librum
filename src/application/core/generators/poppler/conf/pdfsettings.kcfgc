@@ -1,4 +1,0 @@
-File=pdfsettings.kcfg
-ClassName=PDFSettings
-Mutators=true
-Singleton=true

@@ -9,15 +9,13 @@ import Librum.style 1.0
 Item
 {
     id: root
-    readonly property PageItem pageItem: page
-    property alias document: page.document
-    property alias pageNumber: page.pageNumber
-    readonly property bool isLastPage: pageNumber == document.pageCount - 1
+    property int pageNumber: 0
+    readonly property bool isLastPage: pageNumber == 0
     readonly property real pageRatio: page.implicitWidth / page.implicitHeight
     readonly property int adaptedWidth: page.width
     
     
-    PageItem
+    Item
     {
         id: page
         height: parent.height

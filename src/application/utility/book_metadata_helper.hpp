@@ -2,8 +2,6 @@
 #include <QMimeType>
 #include <QSize>
 #include <memory>
-#include "cover_observer.hpp"
-#include "document.h"
 #include "i_book_metadata_helper.hpp"
 
 namespace application::utility
@@ -40,9 +38,6 @@ private:
     QMimeType getMimeType(const QString& filePath);
     QString getFileTypeFromPath(const QString& mimeString) const;
     QString removeSuffixFromMimeString(const QString& mimeString) const;
-
-    std::unique_ptr<Okular::Document> m_document;
-    std::unique_ptr<CoverObserver> m_observer;
 };
 
 }  // namespace application::utility

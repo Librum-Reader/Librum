@@ -1,15 +1,6 @@
 #Dependencies
-find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Svg Xml REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Svg Xml REQUIRED)
-find_package(KF5Bookmarks)
-find_package(KF5 REQUIRED COMPONENTS
-    Bookmarks
-    Service
-    I18n
-)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
 
 
 
@@ -64,10 +55,10 @@ add_library(presentation
                     modules/CppElements/key_sequence_recorder.hpp
                     modules/CppElements/sidebar_state.cpp
                     modules/CppElements/sidebar_state.hpp
-                    modules/CppElements/page_item.cpp
-                    modules/CppElements/page_item.hpp
                     modules/CppElements/document_item.cpp
                     modules/CppElements/document_item.hpp
+                    modules/CppElements/page_item.cpp
+                    modules/CppElements/page_item.hpp
 )
 
 add_dependencies(presentation qt_treeview_qmake)
@@ -78,22 +69,12 @@ target_compile_definitions(presentation
                     $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 
-
-
-# Link
 target_link_libraries(presentation
                 PRIVATE
                     adapters
-                    okularpart
-                    okularcore
+                    application
                     Qt5::Core
                     Qt5::Quick
-                    Qt5::Qml
-                    Qt5::Xml
-                    Qt5::Svg
-                    KF5::Bookmarks
-                    KF5::I18n
-                    KF5::Service
 )
 
 target_include_directories(presentation

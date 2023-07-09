@@ -3,14 +3,8 @@
 #include <QDebug>
 #include <QMimeDatabase>
 #include "book.hpp"
-#include "document.h"
-#include "generator.h"
-#include "observer.h"
-#include "page.h"
-#include "settings.hpp"
 
 
-using namespace Okular;
 using namespace domain::value_objects;
 using namespace domain::entities;
 
@@ -21,13 +15,6 @@ namespace application::utility
 std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
     const QString& filePath)
 {
-    auto setupSucceeded = setupDocument(filePath);
-    if(!setupSucceeded)
-    {
-        qWarning() << QString("Failed opening document at: %1.").arg(filePath);
-        return std::nullopt;
-    }
-
     BookMetaData metaData {
         .title = getTitle(filePath),
         .authors = getAuthors(),
@@ -46,129 +33,60 @@ std::optional<BookMetaData> BookMetadataHelper::getBookMetaData(
 
 bool BookMetadataHelper::setupDocument(const QString& filePath)
 {
-    // Need to instantiate settings before creating 'Document'
-    Settings::instance(QStringLiteral("okularproviderrc"));
-    m_document = std::make_unique<Document>(nullptr);
-
-    setupDocumentObserver();
-
-    auto systemRelativPath = getSystemRelativePath(filePath);
-    auto mimeType = getMimeType(filePath);
-    QString password = "";
-
-    auto openResult = m_document->openDocument(systemRelativPath, filePath,
-                                               mimeType, password);
-
-    return openResult == Document::OpenSuccess;
+    return true;
 }
 
 void BookMetadataHelper::setupDocumentObserver()
 {
-    m_observer = std::make_unique<CoverObserver>();
-    m_document->addObserver(m_observer.get());
 }
 
 QString BookMetadataHelper::getTitle(const QString& filePath) const
 {
-    const QString& title = m_document->documentInfo().get(DocumentInfo::Title);
-    if(title.isEmpty())
-    {
-        auto systemRelativPath = getSystemRelativePath(filePath);
-        return getTitleFromBookPath(systemRelativPath);
-    }
-
-    return title;
+    return "Test";
 }
 
 QString BookMetadataHelper::getAuthors() const
 {
-    const QString& authors =
-        m_document->documentInfo().get(DocumentInfo::Author);
-    return authors;
+    return "Test";
 }
 
 QString BookMetadataHelper::getCreator() const
 {
-    const QString& creator =
-        m_document->documentInfo().get(DocumentInfo::Creator);
-    return creator;
+    return "Test";
 }
 
 QString BookMetadataHelper::getCreationDate() const
 {
-    const QString& creationDate =
-        m_document->documentInfo().get(DocumentInfo::CreationDate);
-    return creationDate;
+    return "Test";
 }
 
 QString BookMetadataHelper::getFormat() const
 {
-    const QString& format =
-        m_document->documentInfo().get(DocumentInfo::FilePath);
-
-    auto formatWithoutType = getFileTypeFromPath(format);
-    auto result = removeSuffixFromMimeString(formatWithoutType);
-
-    return result;
+    return "Test";
 }
 
 QString BookMetadataHelper::getDocumentSize() const
 {
-    const QString& docSize =
-        m_document->documentInfo().get(DocumentInfo::DocumentSize);
-    return docSize;
+    return "Test";
 }
 
 QString BookMetadataHelper::getPagesSize() const
 {
-    const QString& pagesSize =
-        m_document->documentInfo().get(DocumentInfo::PagesSize);
-    return pagesSize;
+    return "Test";
 }
 
 int BookMetadataHelper::getPageCount() const
 {
-    const QString& pages = m_document->documentInfo().get(DocumentInfo::Pages);
-
-    bool ok = false;
-    int pagesAsInt = pages.toInt(&ok);
-
-    if(ok)
-        return pagesAsInt;
-
     return 0;
 }
 
 void BookMetadataHelper::loadCover() const
 {
-    connect(m_observer.get(), &CoverObserver::pageLoaded, this,
-            &BookMetadataHelper::proccessCoverPixmap);
-
-    auto coverSize = getCoverSize();
-    auto* request =
-        new PixmapRequest(m_observer.get(), 0, coverSize.width(),
-                          coverSize.height(), 1, 1, PixmapRequest::NoFeature);
-
-    m_document->requestPixmaps({ request });
 }
 
 QSize BookMetadataHelper::getCoverSize() const
 {
-    const auto& coverPage = m_document->page(0);
-
-    QSize size;
-    if(Book::maxCoverWidth * coverPage->ratio() <= Book::maxCoverHeight)
-    {
-        size.setHeight(Book::maxCoverWidth * coverPage->ratio());
-        size.setWidth(Book::maxCoverWidth);
-    }
-    else
-    {
-        size.setHeight(Book::maxCoverHeight);
-        size.setWidth(Book::maxCoverHeight / coverPage->ratio());
-    }
-
-    return size;
+    return QSize();
 }
 
 QString BookMetadataHelper::getSystemRelativePath(const QString& qPath) const
@@ -226,16 +144,6 @@ QString BookMetadataHelper::removeSuffixFromMimeString(
 
 void BookMetadataHelper::proccessCoverPixmap(int page, int flag)
 {
-    // The cover is just the first page of the book
-    int firstPage = 0;
-    if(page != firstPage || flag != DocumentObserver::Pixmap)
-        return;
-
-    auto* coverPixmap = m_document->page(0)->getPixmap(
-        m_observer.get(), Book::maxCoverWidth, Book::maxCoverHeight);
-
-    if(coverPixmap != nullptr)
-        emit bookCoverGenerated(coverPixmap);
 }
 
 }  // namespace application::utility

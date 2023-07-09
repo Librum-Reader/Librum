@@ -5,8 +5,8 @@ set(CMAKE_AUTORCC ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Xml PrintSupport Test REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Xml PrintSupport Test REQUIRED)
+find_package(QT NAMES Qt5 COMPONENTS Core Quick Test REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Test REQUIRED)
 
 
 # Build tests
@@ -29,13 +29,10 @@ target_link_libraries(application_unit_tests
                 PRIVATE
                     domain
                     application
-                    okularcore
                     gtest
                     gmock
                     Qt5::Core
                     Qt5::Quick
-                    Qt5::Xml
-                    Qt5::PrintSupport
                     Qt5::Test
     )
 

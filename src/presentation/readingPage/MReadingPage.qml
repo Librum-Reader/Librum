@@ -84,21 +84,9 @@ Page
     }
     
     
-    DocumentItem
+    Item
     {
         id: documentItem
-        
-        onUrlChanged: currentPage = 0
-        onOpenedChanged:
-        {
-            if(!opened)
-                return;
-            
-            toolbar.currentPageSelection.pageCount = pageCount;
-            toolbar.bookTitle = Globals.selectedBook.title;
-        }
-        
-        Component.onCompleted: documentItem.url = Globals.selectedBook.filePath;
     }
     
     /*
@@ -132,7 +120,7 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            currentPage: documentView.document.currentPage
+            currentPage: 0
             
             onBackButtonClicked:
             {
@@ -248,13 +236,13 @@ Page
                     id: chapterSidebar
                     property int lastWidth: 370
                     property bool active: false
-                    chapterModel: documentItem.tableOfContents
+//                    chapterModel: documentItem.tableOfContents
                     anchors.fill: parent
                     visible: false
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
-                    onSwitchPage: (pageNumber) => documentView.setPage(pageNumber - 1)
+//                    onSwitchPage: (pageNumber) => documentView.setPage(...)
                      
                     
                     Rectangle
@@ -338,7 +326,6 @@ Page
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     visible: documentItem.opened
-                    document: documentItem
                     
                     onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
@@ -392,7 +379,7 @@ Page
         function saveCurrentPage()
         {
             var operationsMap = {};
-            operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
+            operationsMap[BookController.MetaProperty.CurrentPage] = 1;
             BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
         }
     }

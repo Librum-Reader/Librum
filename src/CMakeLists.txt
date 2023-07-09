@@ -23,14 +23,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Configure and add subdirectories
-set(OKULARCORE_INCLUDES
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/core
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/gui
-    ${CMAKE_CURRENT_BINARY_DIR}/application/core
-    ${CMAKE_CURRENT_BINARY_DIR}/application/core/core
-)
-
 add_subdirectory(domain/)
 get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
 
@@ -67,7 +59,7 @@ target_link_libraries(appLibrum
         adapters
         application
         infrastructure
-        okularpart
+        ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
         Qt5::Quick
         Qt5::Widgets
         Qt5::QuickControls2
@@ -78,7 +70,6 @@ target_include_directories(appLibrum
         ${ADAPTERS_INCLUDES}
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
-        ${OKULARCORE_INCLUDES}
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")

@@ -13,7 +13,6 @@ import "DocumentNavigation.js" as NavigationLogic
 Pane
 {
     id: root
-    property DocumentItem document
     readonly property alias pagepageView: pageView
     signal clicked
     signal zoomFactorChanged(real factor)
@@ -66,7 +65,6 @@ Pane
                 height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
                 width: adaptedWidth
                 
-                document: root.document
                 pageNumber: modelData
             }
             

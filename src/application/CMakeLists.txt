@@ -2,17 +2,9 @@
 find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
 
-find_package(ECM ${KF5_REQUIRED_VERSION} CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH})
-
-add_subdirectory(core)
-
-
 
 # Setup
 set(application_SRC
-    settings.hpp
-    
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_book_service.hpp
     interfaces/services/i_user_service.hpp
@@ -40,8 +32,6 @@ set(application_SRC
     
     utility/book_metadata_helper.cpp
     utility/book_metadata_helper.hpp
-    utility/cover_observer.cpp
-    utility/cover_observer.hpp
     utility/downloaded_books_tracker.cpp
     utility/downloaded_books_tracker.hpp
     utility/merge_status.hpp
@@ -55,13 +45,25 @@ set(application_SRC
     utility/book_merger.cpp
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
+    
+    core/document.hpp
+    core/document.cpp
+    core/page.hpp
+    core/page.cpp
 )
 
 
-find_package(KF5Config)
-kconfig_add_kcfg_files(application_SRC GENERATE_MOC ${CMAKE_CURRENT_SOURCE_DIR}/core/conf/settings_mobile.kcfgc)
+# Build mupdf
+add_custom_command(
+    OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so"
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+    COMMAND ./scripts/mupdfwrap.py --swig-windows-auto -d build/shared-debug -b m01
+    COMMENT "Building mupdf"
+)
 
-
+add_custom_target(mupdf ALL
+   DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
+)
 
 
 
@@ -73,16 +75,16 @@ add_library(application
 
 target_include_directories(application
                 PUBLIC
-                ${CMAKE_CURRENT_SOURCE_DIR}
-                ${CMAKE_CURRENT_BINARY_DIR}  # For generated okular settings file
-                ${DOMAIN_INCLUDES}
-                ${OKULARCORE_INCLUDES}
-                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
-                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
-                ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
-                ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
-                ${CMAKE_CURRENT_SOURCE_DIR}/services
-                ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}
+                    ${DOMAIN_INCLUDES}
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
+                    ${CMAKE_CURRENT_SOURCE_DIR}/services
+                    ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core
+                    ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/c++/include
 )
 
 target_compile_definitions(application
@@ -96,7 +98,7 @@ target_link_libraries(application
                     Qt5::Quick
                     Qt5::Network
                     domain
-                    okularcore
+                    ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
 )
 
 
@@ -108,18 +110,6 @@ if (LIBRUM_BUILD_USING_PCH)
     set(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
 else()
     message(STATUS "Precompiled headers are disabled")
-endif()
-
-
-# Remove 'address sanitizer' from 'application' target when compiling with anything but GCC.
-# Okular core has some ODR violations, which lead to 'address sanitizer' failing on startup.
-# It works well with GCC though, so just remove it when compiling with any other compiler.
-set(SPECIALISED_SANITIZERS ${LIBRUM_SANITIZERS})  # Fixed list of sanitizers
-
-# Replace 'address' with empty string if compiler_id is not GNU
-if (NOT CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-    string(REPLACE "address," "" SPECIALISED_SANITIZERS "${SPECIALISED_SANITIZERS}")
-    message("Disabled 'address sanitizer' for target 'application'")
 endif()
 
 
