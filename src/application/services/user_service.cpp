@@ -62,21 +62,7 @@ void UserService::loadUser(bool rememberUser)
     // When user was loaded from file, we know that 'rememberMe' is true
     m_rememberUser = success ? true : rememberUser;
 
-    // Load the user from the server, since it may have been updated since it
-    // was stored to the 'automatic login file'. Add a slight delay (e.g.
-    // 100ms), else we generate a segfault.
-    QTimer* timer = new QTimer;
-    timer->setInterval(100);
-    connect(timer, &QTimer::timeout, this,
-            [this]()
-            {
-                m_userStorageGateway->getUser(m_authenticationToken);
-
-                // Free the timer's memory after first timeout
-                auto reply = qobject_cast<QTimer*>(sender());
-                reply->deleteLater();
-            });
-    timer->start();
+//    m_userStorageGateway->getUser(m_authenticationToken);  <---- Causes SEGV
 }
 
 void UserService::downloadUser()

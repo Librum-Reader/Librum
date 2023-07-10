@@ -1,4 +1,5 @@
 #include "page_item.hpp"
+#include <QDebug>
 #include <QObject>
 #include <QQuickWindow>
 #include <QSGSimpleTextureNode>
@@ -6,13 +7,24 @@
 namespace cpp_elements
 {
 
+cpp_elements::PageItem::PageItem()
+{
+    setFlag(QQuickItem::ItemHasContents, true);
+}
+
 int PageItem::getImplicitWidth() const
 {
+    if(m_document == nullptr)
+        return 100;
+
     return m_page->getWidth();
 }
 
 int PageItem::getImplicitHeight() const
 {
+    if(m_document == nullptr)
+        return 100;
+
     return m_page->getHeight();
 }
 
@@ -26,20 +38,25 @@ void PageItem::setDocument(DocumentItem* newDocument)
     m_document = newDocument;
     m_page = std::make_unique<application::core::Page>(m_document->internal(),
                                                        m_currentPage);
+
+    emit implicitWidthChanged();
+    emit implicitHeightChanged();
+
+    update();
 }
 
-int PageItem::getCurrentPage() const
+int PageItem::getPageNumber() const
 {
     return m_currentPage;
 }
 
-void PageItem::setCurrentPage(int newCurrentPage)
+void PageItem::setPageNumber(int newCurrentPage)
 {
     m_currentPage = newCurrentPage;
 }
 
-void PageItem::geometryChanged(const QRectF& newGeometry,
-                               const QRectF& oldGeometry)
+void PageItem::geometryChange(const QRectF& newGeometry,
+                              const QRectF& oldGeometry)
 {
     if(newGeometry.size().isEmpty())
         return;
@@ -47,17 +64,15 @@ void PageItem::geometryChanged(const QRectF& newGeometry,
     if(newGeometry.width() != oldGeometry.width() ||
        newGeometry.height() != newGeometry.height())
     {
-        qDebug() << "New";
         update();
     }
 
-    QQuickItem::geometryChanged(newGeometry, oldGeometry);
+    QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
 QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
 {
     Q_UNUSED(nodeData);
-
     QSGSimpleTextureNode* n = static_cast<QSGSimpleTextureNode*>(node);
     if(!n)
     {

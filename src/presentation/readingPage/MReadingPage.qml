@@ -84,9 +84,10 @@ Page
     }
     
     
-    Item
+    DocumentItem
     {
         id: documentItem
+        filePath: Globals.selectedBook.filePath
     }
     
     /*
@@ -325,7 +326,7 @@ Page
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    visible: documentItem.opened
+                    visible: true
                     
                     onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }

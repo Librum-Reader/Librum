@@ -142,7 +142,7 @@ TEST_F(ADownloadedBooksTracker, FailsGettingUntrackedBook)
 
 
     // Act
-    auto result = downloadedBooksTracker.getTrackedBook(uuid);
+    auto result = downloadedBooksTracker.getTrackedBook(QUuid(uuid));
 
     // Assert
     EXPECT_FALSE(result.has_value());
@@ -240,8 +240,9 @@ TEST_F(ADownloadedBooksTracker, FailsUntrackingIfNoTrackedBookExists)
     bool expectedResultStatus = false;
 
     // Act
-    auto resultStatus = downloadedBooksTracker.untrackBook(nonExistendUuid);
-    auto result = downloadedBooksTracker.getTrackedBook(nonExistendUuid);
+    auto resultStatus =
+        downloadedBooksTracker.untrackBook(QUuid(nonExistendUuid));
+    auto result = downloadedBooksTracker.getTrackedBook(QUuid(nonExistendUuid));
 
 
     // Assert

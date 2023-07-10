@@ -5,8 +5,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Test REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Test REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Test)
 
 
 # Build tests
@@ -31,9 +30,9 @@ target_link_libraries(application_unit_tests
                     application
                     gtest
                     gmock
-                    Qt5::Core
-                    Qt5::Quick
-                    Qt5::Test
+                    Qt6::Core
+                    Qt6::Quick
+                    Qt6::Test
     )
 
 target_include_directories(application_unit_tests

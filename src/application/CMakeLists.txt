@@ -1,6 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
 
 
 # Setup
@@ -94,23 +93,12 @@ target_compile_definitions(application
 
 target_link_libraries(application
                 PRIVATE
-                    Qt5::Core
-                    Qt5::Quick
-                    Qt5::Network
+                    Qt6::Core
+                    Qt6::Quick
+                    Qt6::Network
                     domain
                     ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
 )
-
-
-# Precompiled header support
-option(LIBRUM_BUILD_USING_PCH "Build using pre-compile header support" ON)
-if (LIBRUM_BUILD_USING_PCH)
-    message("Compiling using pre-compiled headers")
-    target_precompile_headers(application PUBLIC librum_application_pch.hpp) # PUBLIC - every linking target gets the same PCHs
-    set(CMAKE_PCH_INSTANTIATE_TEMPLATES ON)
-else()
-    message(STATUS "Precompiled headers are disabled")
-endif()
 
 
 

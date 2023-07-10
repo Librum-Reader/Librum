@@ -80,7 +80,7 @@ TEST(AUser, FailsDeletingATagIfTagDoesNotExist)
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
-    auto result = user.deleteTag("NonExistantTagUuid");
+    auto result = user.deleteTag(QUuid("NonExistantTagUuid"));
     auto tagAmountAfterRemoving = user.getTags().size();
 
     // Assert
@@ -113,7 +113,7 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
     QString newTagName = "NewTagName";
 
     // Act
-    auto result = user.renameTag("NonExistantTagUuid", newTagName);
+    auto result = user.renameTag(QUuid("NonExistentTagUuid"), newTagName);
     auto* tagResult = user.getTagByName(newTagName);
 
     // Assert

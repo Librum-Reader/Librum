@@ -321,7 +321,7 @@ TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
 
 
     // Act
-    auto* result = bookService->getBook(bookUuid);
+    auto* result = bookService->getBook(QUuid(bookUuid));
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -374,7 +374,7 @@ TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
 TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag firstTag("FirstTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -425,7 +425,7 @@ TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
 TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag someTag("SomeTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -478,7 +478,7 @@ TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
 TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag someTag("SomeTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;

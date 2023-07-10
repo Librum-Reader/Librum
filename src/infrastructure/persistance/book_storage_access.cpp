@@ -47,9 +47,10 @@ void BookStorageAccess::createBook(const QString& authToken,
 
             auto uuid = jsonBook["guid"].toString();
             uploadBookMedia(uuid, jsonBook["filePath"].toString(), authToken);
-            uploadBookCover(authToken, uuid, jsonBook["coverPath"].toString());
+            uploadBookCover(authToken, QUuid(uuid),
+                            jsonBook["coverPath"].toString());
 
-            emit bookUploadSucceeded(uuid);
+            emit bookUploadSucceeded(QUuid(uuid));
 
             // Make sure to release the reply's memory
             reply->deleteLater();

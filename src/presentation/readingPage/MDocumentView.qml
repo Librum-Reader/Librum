@@ -47,25 +47,25 @@ Pane
             property int pageSpacing: pageView.getPageSpacing(zoomFactor)
             
             height: parent.height
-            width: currentItem.width <= root.width ? currentItem.width : root.width
-            contentWidth: currentItem.width
+            width: /*currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width*/ 600
+            contentWidth: 400 /*currentItem.implicitWidth*/
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             flickDeceleration: 100000
             interactive: true
-            clip: true
-            cacheBuffer: 20000
+//            clip: true
+//            cacheBuffer: 20000
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
-            model: root.document.pageCount
+            model: 50
             spacing: pageSpacing
-            delegate: MPageView
+            delegate: PageItem
             {
-                height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
-                width: adaptedWidth
-                
                 pageNumber: modelData
+                document: documentItem
+                height: implicitHeight
+                width: implicitWidth
             }
             
             

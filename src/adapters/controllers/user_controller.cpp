@@ -75,13 +75,13 @@ QString UserController::addTag(const QString& name)
 
 bool UserController::deleteTag(const QString& uuid)
 {
-    auto result = m_userService->deleteTag(uuid);
+    auto result = m_userService->deleteTag(QUuid(uuid));
     return result;
 }
 
 bool UserController::renameTag(const QString& uuid, const QString& newName)
 {
-    auto result = m_userService->renameTag(uuid, newName);
+    auto result = m_userService->renameTag(QUuid(uuid), newName);
     return result;
 }
 

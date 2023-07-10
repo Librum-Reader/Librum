@@ -446,7 +446,7 @@ QPair<long, QString> Book::splitSizeStringInNumbersAndFormat(
         }
     }
 
-    auto numbers = sizeString.midRef(0, typeBegining).toLong();
+    auto numbers = sizeString.mid(0, typeBegining).toLong();
     auto type = sizeString.mid(typeBegining);
     return { numbers, type };
 }

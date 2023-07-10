@@ -1,6 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick Network REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick Network REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
 
 
 # Build
@@ -76,9 +75,9 @@ target_link_libraries(adapters
                     domain
                     application
                     rapidfuzz::rapidfuzz
-                    Qt5::Core
-                    Qt5::Quick
-                    Qt5::Network
+                    Qt6::Core
+                    Qt6::Quick
+                    Qt6::Network
 )
 
 target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};${COVERAGE_COMPILE_OPTIONS};-O0;-g>")

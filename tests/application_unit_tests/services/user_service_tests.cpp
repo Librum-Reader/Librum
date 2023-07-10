@@ -226,7 +226,7 @@ TEST_F(AUserService, SucceedsDeletingATag)
 TEST_F(AUserService, FailsDeletingTagIfTagDoesNotExists)
 {
     // Act
-    auto result = userService->deleteTag("NoneExistentTag");
+    auto result = userService->deleteTag(QUuid("NoneExistentTag"));
 
     // Assert
     EXPECT_FALSE(result);
@@ -292,7 +292,8 @@ TEST_F(AUserService, FailsRenamingATagIfTagDoesNotExist)
 
 
     // Act
-    auto result = userService->renameTag("NonExistentTagUuid", newTagName);
+    auto result =
+        userService->renameTag(QUuid("NonExistentTagUuid"), newTagName);
 
     // Assert
     EXPECT_FALSE(result);

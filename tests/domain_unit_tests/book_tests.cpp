@@ -199,7 +199,7 @@ TEST(ABook, FailsRemovingATagIfTagDoesNotExist)
     // Act
     book.addTag(tag);
 
-    auto result = book.removeTag("SomeUuid");
+    auto result = book.removeTag(QUuid("SomeUuid"));
 
     // Assert
     EXPECT_FALSE(result);
@@ -414,7 +414,7 @@ TEST(ABook, SucceedsSerializingToJson)
     EXPECT_EQ(metaData.hasCover, bookObject["hasCover"].toBool());
     EXPECT_EQ(book.getFilePath(), bookObject["filePath"].toString());
     EXPECT_EQ(book.getCurrentPage(), bookObject["currentPage"].toInt());
-    EXPECT_EQ(book.getUuid(), bookObject["uuid"].toString());
+    EXPECT_EQ(book.getUuid(), QUuid(bookObject["uuid"].toString()));
 }
 
 TEST(ABook, SucceedsDeserializingFromJson)

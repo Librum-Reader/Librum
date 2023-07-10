@@ -88,25 +88,25 @@ int BookController::addBook(const QString& path)
 
 int BookController::deleteBook(const QString& uuid)
 {
-    auto result = m_bookService->deleteBook(uuid);
+    auto result = m_bookService->deleteBook(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int BookController::uninstallBook(const QString& uuid)
 {
-    auto result = m_bookService->uninstallBook(uuid);
+    auto result = m_bookService->uninstallBook(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int BookController::downloadBookMedia(const QString& uuid)
 {
-    auto result = m_bookService->downloadBookMedia(uuid);
+    auto result = m_bookService->downloadBookMedia(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int BookController::updateBook(const QString& uuid, const QVariant& operations)
 {
-    auto bookToUpdate = m_bookService->getBook(uuid);
+    auto bookToUpdate = m_bookService->getBook(QUuid(uuid));
     if(!bookToUpdate)
         return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 
@@ -174,7 +174,7 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
 int BookController::changeBookCover(const QString& uuid, const QString& path)
 {
-    auto result = m_bookService->changeBookCover(uuid, path);
+    auto result = m_bookService->changeBookCover(QUuid(uuid), path);
     return static_cast<int>(result);
 }
 
@@ -190,7 +190,7 @@ int BookController::addTag(const QString& bookUuid, const QString& tagName,
     }
 
     Tag tag(tagName, tagUuid);
-    auto result = m_bookService->addTagToBook(bookUuid, tag);
+    auto result = m_bookService->addTagToBook(QUuid(bookUuid), tag);
 
     return static_cast<int>(result);
 }
@@ -203,9 +203,9 @@ void BookController::removeAllTagsWithUuid(const QString& tagUuid)
     auto& books = m_bookService->getBooks();
     for(const auto& book : books)
     {
-        if(vectorContainsTag(book.getTags(), tagUuid))
+        if(vectorContainsTag(book.getTags(), QUuid(tagUuid)))
         {
-            m_bookService->removeTagFromBook(book.getUuid(), tagUuid);
+            m_bookService->removeTagFromBook(book.getUuid(), QUuid(tagUuid));
         }
     }
 }
@@ -223,7 +223,8 @@ void BookController::renameTags(const QString& oldName, const QString& newName)
 
 int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
 {
-    auto result = m_bookService->removeTagFromBook(bookUuid, tagUuid);
+    auto result =
+        m_bookService->removeTagFromBook(QUuid(bookUuid), QUuid(tagUuid));
     return static_cast<int>(result);
 }
 
@@ -233,7 +234,7 @@ dtos::BookDto BookController::getBook(const QString& uuid)
     auto book = std::ranges::find_if(books,
                                      [&uuid](const Book& b)
                                      {
-                                         return b.getUuid() == uuid;
+                                         return b.getUuid() == QUuid(uuid);
                                      });
 
     return book == books.end() ? dtos::BookDto() : getDtoFromBook(*book);
@@ -251,14 +252,14 @@ data_models::LibraryProxyModel* BookController::getLibraryModel()
 
 int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
 {
-    auto result = m_bookService->saveBookToFile(uuid, path);
+    auto result = m_bookService->saveBookToFile(QUuid(uuid), path);
 
     return static_cast<int>(result);
 }
 
 void BookController::refreshLastOpenedFlag(const QString& uuid)
 {
-    m_bookService->refreshLastOpenedDateOfBook(uuid);
+    m_bookService->refreshLastOpenedDateOfBook(QUuid(uuid));
 }
 
 dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)

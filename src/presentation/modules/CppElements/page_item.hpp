@@ -16,23 +16,24 @@ class PageItem : public QQuickItem
         int implicitWidth READ getImplicitWidth NOTIFY implicitWidthChanged)
     Q_PROPERTY(
         int implicitHeight READ getImplicitHeight NOTIFY implicitHeightChanged)
-    Q_PROPERTY(
-        int currentPage READ getCurrentPage WRITE setCurrentPage CONSTANT)
+    Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
 
 
 public:
+    PageItem();
+    
     int getImplicitWidth() const;
     int getImplicitHeight() const;
 
     DocumentItem* getDocument() const;
     void setDocument(DocumentItem* newDocument);
 
-    int getCurrentPage() const;
-    void setCurrentPage(int newCurrentPage);
+    int getPageNumber() const;
+    void setPageNumber(int newCurrentPage);
 
 protected:
-    void geometryChanged(const QRectF& newGeometry,
-                         const QRectF& oldGeometry) override;
+    void geometryChange(const QRectF& newGeometry,
+                        const QRectF& oldGeometry) override;
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* _) override;
 
 private:

@@ -1,8 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
-
-
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick QuickControls2)
 
 
 # Build
@@ -32,8 +29,8 @@ target_include_directories(domain
 
 target_link_libraries(domain
                 PRIVATE
-                    Qt5::Core
-                    Qt5::Quick
+                    Qt6::Core
+                    Qt6::Quick
 )
 
 target_compile_options(domain PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};${COVERAGE_COMPILE_OPTIONS};-O0;-g>")

@@ -1,4 +1,5 @@
 #pragma once
+#include <QString>
 #include "mupdf/classes.h"
 
 namespace application::core

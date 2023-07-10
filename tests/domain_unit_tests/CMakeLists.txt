@@ -5,9 +5,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Quick REQUIRED)
-
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
 
 
 # Build tests
@@ -27,8 +25,8 @@ target_link_libraries(domain_unit_tests
                 PRIVATE
                     gtest
                     domain
-                    Qt5::Core
-                    Qt5::Quick
+                    Qt6::Core
+                    Qt6::Quick
 )
 
 target_compile_options(domain_unit_tests PRIVATE "${LIBRUM_SANITIZERS};-O0;-g")

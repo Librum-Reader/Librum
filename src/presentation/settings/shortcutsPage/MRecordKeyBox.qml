@@ -3,7 +3,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import CustomComponents 1.0
 import Librum.elements 1.0
-import QtGraphicalEffects 1.15
 import Librum.style 1.0
 import Librum.icons 1.0
 
@@ -18,21 +17,21 @@ Item
     
     
     // Creates the glowing effect around the button
-    Glow
-    {
-        id: backgroundGlow
-        visible: root.recording
-        width: button.width
-        height: button.height
-        x: button.x
-        y: button.y
-        spread: 0.05
-        radius: 12
-        samples: 24
-        transparentBorder: true
-        color: Style.colorRecordActiveGlow
-        source: button
-    }
+//    Glow
+//    {
+//        id: backgroundGlow
+//        visible: root.recording
+//        width: button.width
+//        height: button.height
+//        x: button.x
+//        y: button.y
+//        spread: 0.05
+//        radius: 12
+//        samples: 24
+//        transparentBorder: true
+//        color: Style.colorRecordActiveGlow
+//        source: button
+//    }
     
     ColumnLayout
     {
