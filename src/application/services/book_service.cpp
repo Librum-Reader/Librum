@@ -22,10 +22,6 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     m_bookMetadataHelper(bookMetadataHelper),
     m_bookStorageManager(bookStorageManager)
 {
-    // Book cover generated
-    connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
-            this, &BookService::processBookCover);
-
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
@@ -81,9 +77,6 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     }
 
     addBookToLibrary(Book(filePath, bookMetaData.value()));
-
-    // Load the cover after creating book to avoid adding to a non-existent book
-    m_bookMetadataHelper->loadCover();
 
     const Book& bookToStore = m_books.at(m_books.size() - 1);
     m_bookStorageManager->addBook(bookToStore);

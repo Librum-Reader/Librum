@@ -1,6 +1,7 @@
 #include "book_controller.hpp"
 #include <QBuffer>
 #include <QDebug>
+#include <QUrl>
 #include <QVariant>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -82,7 +83,7 @@ void BookController::syncWithServer()
 
 int BookController::addBook(const QString& path)
 {
-    auto result = m_bookService->addBook(path);
+    auto result = m_bookService->addBook(QUrl(path).path());
     return static_cast<int>(result);
 }
 

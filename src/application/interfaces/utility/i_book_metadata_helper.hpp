@@ -20,12 +20,6 @@ public:
 
     virtual std::optional<domain::value_objects::BookMetaData> getBookMetaData(
         const QString& filePath) = 0;
-
-    virtual void loadCover() const = 0;
-
-signals:
-    void bookCoverGenerated(const QPixmap* pixmal);
-    void gettingBookCoverFailed();
 };
 
 }  // namespace application

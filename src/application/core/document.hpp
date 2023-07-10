@@ -10,7 +10,13 @@ class Document
 public:
     Document(const QString& filePath);
 
-    int pageCount() const;
+    int getPageCount() const;
+    QString getTitle();
+    QString getAuthors();
+    QString getFormat();
+    QString getCreator();
+    QString getCreationDate();
+
     const mupdf::FzDocument* internal() const;
 
 private:

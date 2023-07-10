@@ -28,7 +28,6 @@ class BookMetaDataHelperMock : public IBookMetadataHelper
 public:
     MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, (const QString&),
                 (override));
-    MOCK_METHOD(void, loadCover, (), (const, override));
 };
 
 class BookStorageManagerMock : public IBookStorageManager
