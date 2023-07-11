@@ -420,12 +420,14 @@ long Book::getBytesFromSizeString(QString size) const
     auto numbers = dataPair.first;
     auto type = dataPair.second;
 
-    if(type.toLower() == "b")
+    if(type.toLower() == "B")
         return numbers;
-    if(type.toLower() == "kib")
-        return numbers * 1024;
-    if(type.toLower() == "mib")
-        return numbers * 1024 * 1024;
+    if(type.toLower() == "KB")
+        return numbers * 1000;
+    if(type.toLower() == "MB")
+        return numbers * 1000 * 1000;
+    if(type.toLower() == "GB")
+        return numbers * 1000 * 1000 * 1000;
 
     qWarning() << "Tried getting size in bytes from a book with a "
                   "non-supported size type: "
