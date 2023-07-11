@@ -14,7 +14,12 @@ public:
     QImage getBookCover() override;
 
 private:
+    QString getTitleFromPath();
+    QString getDocumentSize();
+    double roundToPrecisionOf2(double raw);
+
     std::unique_ptr<core::Document> m_document;
+    QString m_filePath;
 };
 
 }  // namespace application::utility
