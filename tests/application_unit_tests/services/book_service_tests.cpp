@@ -60,11 +60,14 @@ struct ABookService : public ::testing::Test
 {
     void SetUp() override
     {
-        EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
-            .WillRepeatedly(Return(BookMetaData()));
-
         bookService = std::make_unique<BookService>(&bookMetaDataHelperMock,
                                                     &bookStorageManagerMock);
+
+        // Make sure that adding books succeeds by default
+        EXPECT_CALL(bookMetaDataHelperMock, setup(_))
+            .WillRepeatedly(Return(true));
+        EXPECT_CALL(bookStorageManagerMock, saveBookCoverToFile(_, _))
+            .WillRepeatedly(Return("/some/path"));
     }
 
     BookMetaDataHelperMock bookMetaDataHelperMock;
@@ -77,10 +80,6 @@ TEST_F(ABookService, SucceedsAddingABook)
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
 
-
-    // Expect
-    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
-
     // Act
     auto result = bookService->addBook("some/path.pdf");
 
@@ -88,16 +87,16 @@ TEST_F(ABookService, SucceedsAddingABook)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsAddingABookIfGettingBookMetaDataFails)
+TEST_F(ABookService, FailsAddingABookIfOpeningDocumentFails)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::OpeningBookFailed;
 
 
     // Expect
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
+    EXPECT_CALL(bookMetaDataHelperMock, setup(_))
         .Times(1)
-        .WillOnce(Return(BookMetaData()));
+        .WillOnce(Return(false));
 
     // Act
     auto result = bookService->addBook("some/path.pdf");

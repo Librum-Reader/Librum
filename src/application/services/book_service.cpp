@@ -88,7 +88,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     {
         qWarning() << QString("Failed creating cover for book with uuid: %1.")
                           .arg(book.getUuid().toString(QUuid::WithoutBraces));
-        return BookOperationStatus::OpeningBookFailed;
+        return BookOperationStatus::OperationFailed;
     }
 
     book.updateCoverLastModified();
