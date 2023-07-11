@@ -55,7 +55,6 @@ public slots:
     virtual void clearUserData() = 0;
 
 signals:
-    void bookCoverGenerated(int index);
     void bookInsertionStarted(int index);
     void bookInsertionEnded();
     void bookDeletionStarted(int index);

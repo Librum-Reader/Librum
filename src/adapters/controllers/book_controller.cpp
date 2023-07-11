@@ -62,10 +62,6 @@ BookController::BookController(application::IBookService* bookService) :
     connect(m_bookService, &application::IBookService::dataChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshBook);
 
-    // book cover processing
-    connect(m_bookService, &application::IBookService::bookCoverGenerated,
-            &m_libraryModel, &data_models::LibraryModel::processBookCover);
-
     // download book media progress changed
     connect(m_bookService,
             &application::IBookService::downloadingBookMediaProgressChanged,

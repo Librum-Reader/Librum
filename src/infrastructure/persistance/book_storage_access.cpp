@@ -121,6 +121,7 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
                         .arg(stringUuid);
 
         bookCover->deleteLater();
+        file->deleteLater();
         return;
     }
 
@@ -128,14 +129,12 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
     file->setParent(bookCover);
 
     QHttpPart imagePart;
-    imagePart.setBodyDevice(file);
     imagePart.setHeader(QNetworkRequest::ContentTypeHeader,
                         QVariant("image/png"));
     imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,
                         QVariant("form-data; name=\"image\"; filename=\"" +
                                  file->fileName() + "\""));
-
-
+    imagePart.setBodyDevice(file);
     bookCover->append(imagePart);
 
 
@@ -143,7 +142,7 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart
-    request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant());
 
     auto reply = m_networkAccessManager.post(request, bookCover);
 
@@ -326,7 +325,7 @@ void BookStorageAccess::uploadBookMedia(const QString& uuid,
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart
-    request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant());
 
     auto reply = m_networkAccessManager.post(request, bookData);
 
@@ -353,6 +352,7 @@ bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
     if(!file->open(QIODevice::ReadOnly))
     {
         qDebug() << "Could not open book data file";
+        file->deleteLater();
         return false;
     }
 
@@ -360,12 +360,12 @@ bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
     file->setParent(bookData);
 
     QHttpPart filePart;
-    filePart.setBodyDevice(file);
     filePart.setHeader(QNetworkRequest::ContentTypeHeader,
                        QVariant("application/octet-stream"));
     filePart.setHeader(QNetworkRequest::ContentDispositionHeader,
                        QVariant("form-data; name=\"file\"; filename=\"" +
                                 file->fileName() + "\""));
+    filePart.setBodyDevice(file);
 
 
     bookData->append(filePart);
