@@ -420,13 +420,13 @@ long Book::getBytesFromSizeString(QString size) const
     auto numbers = dataPair.first;
     auto type = dataPair.second;
 
-    if(type.toLower() == "B")
+    if(type.toLower() == "b")
         return numbers;
-    if(type.toLower() == "KB")
+    if(type.toLower() == "kb")
         return numbers * 1000;
-    if(type.toLower() == "MB")
+    if(type.toLower() == "mb")
         return numbers * 1000 * 1000;
-    if(type.toLower() == "GB")
+    if(type.toLower() == "gb")
         return numbers * 1000 * 1000 * 1000;
 
     qWarning() << "Tried getting size in bytes from a book with a "
