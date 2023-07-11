@@ -1,4 +1,5 @@
 #pragma once
+#include <QImage>
 #include <QString>
 #include "mupdf/classes.h"
 
@@ -16,6 +17,7 @@ public:
     QString getFormat();
     QString getCreator();
     QString getCreationDate();
+    QImage getCover();
 
     const mupdf::FzDocument* internal() const;
 

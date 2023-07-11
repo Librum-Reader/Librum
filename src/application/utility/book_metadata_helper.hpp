@@ -1,7 +1,6 @@
 #pragma once
-#include <QMimeType>
-#include <QSize>
 #include <memory>
+#include "document.hpp"
 #include "i_book_metadata_helper.hpp"
 
 namespace application::utility
@@ -9,11 +8,13 @@ namespace application::utility
 
 class BookMetadataHelper : public IBookMetadataHelper
 {
-    Q_OBJECT
-
 public:
-    std::optional<domain::value_objects::BookMetaData> getBookMetaData(
-        const QString& filePath) override;
+    bool setup(const QString& filePath) override;
+    domain::value_objects::BookMetaData getBookMetaData() override;
+    QImage getBookCover() override;
+
+private:
+    std::unique_ptr<core::Document> m_document;
 };
 
 }  // namespace application::utility

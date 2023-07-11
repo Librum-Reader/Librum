@@ -23,8 +23,8 @@ public:
     void updateBookLocally(const domain::entities::Book& book) override;
     void updateBookRemotely(const domain::entities::Book& book) override;
     void updateBookCoverRemotely(const QUuid& uuid, bool hasCover) override;
-    std::optional<QString> saveBookCoverToFile(const QUuid& uuid,
-                                               const QPixmap& cover) override;
+    QString saveBookCoverToFile(const QUuid& uuid,
+                                const QImage& cover) override;
     bool deleteBookCoverLocally(const QUuid& uuid) override;
     void downloadBookCover(const QUuid& uuid) override;
     std::vector<domain::entities::Book> loadLocalBooks() override;

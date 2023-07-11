@@ -1,4 +1,5 @@
 #include "document.hpp"
+#include "page.hpp"
 
 namespace application::core
 {
@@ -39,6 +40,12 @@ QString Document::getCreationDate()
 {
     return QString::fromStdString(
         m_document.fz_lookup_metadata("info:CreationDate"));
+}
+
+QImage Document::getCover()
+{
+    Page page(this, 0);
+    return page.renderPage();
 }
 
 const mupdf::FzDocument* Document::internal() const

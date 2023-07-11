@@ -1,6 +1,6 @@
 #pragma once
+#include <QImage>
 #include <QObject>
-#include <QPixmap>
 #include <QString>
 #include <optional>
 #include "book_meta_data.hpp"
@@ -11,15 +11,14 @@ namespace application
 /**
  * The BookMetaDataHelper class extracts metadata from a book.
  */
-class IBookMetadataHelper : public QObject
+class IBookMetadataHelper
 {
-    Q_OBJECT
-
 public:
     virtual ~IBookMetadataHelper() noexcept = default;
 
-    virtual std::optional<domain::value_objects::BookMetaData> getBookMetaData(
-        const QString& filePath) = 0;
+    virtual bool setup(const QString& filePath) = 0;
+    virtual domain::value_objects::BookMetaData getBookMetaData() = 0;
+    virtual QImage getBookCover() = 0;
 };
 
 }  // namespace application

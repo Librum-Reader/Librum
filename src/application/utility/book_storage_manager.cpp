@@ -232,14 +232,12 @@ void BookStorageManager::updateBookCoverRemotely(const QUuid& uuid,
         m_bookStorageGateway->deleteBookCover(m_authenticationToken, uuid);
 }
 
-std::optional<QString> BookStorageManager::saveBookCoverToFile(
-    const QUuid& uuid, const QPixmap& cover)
+QString BookStorageManager::saveBookCoverToFile(const QUuid& uuid,
+                                                const QImage& cover)
 {
     QFile file(getBookCoverPath(uuid));
     if(!file.open(QFile::WriteOnly))
-    {
-        return std::nullopt;
-    }
+        return "";
 
     int fileQuality = 20;
     cover.save(&file, m_bookCoverType.toStdString().c_str(), fileQuality);
