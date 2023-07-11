@@ -14,6 +14,7 @@ public:
     QImage renderPage();
     int getWidth() const;
     int getHeight() const;
+    void setZoom(float newZoom);
 
 private:
     mupdf::FzPixmap getEmptyPixmap() const;

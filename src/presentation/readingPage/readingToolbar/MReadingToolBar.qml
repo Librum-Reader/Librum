@@ -15,6 +15,7 @@ Pane
     property string bookTitle: "Unknown name"
     property int currentPage: 0
     property int lastPage: 0
+    property int pageCount: 0
     property alias chapterButton: chapterButton
     property alias bookmarksButton: bookmarksButton
     property alias searchButton: searchButton
@@ -121,8 +122,6 @@ Pane
         Item
         {
             id: currentPageSelection
-            property int pageCount: 0
-            
             Layout.preferredWidth: inputBox.width + pageInputLayout.spacing + totalPageText.implicitWidth
             Layout.preferredHeight: 34
             
@@ -181,7 +180,7 @@ Pane
                             if(root.currentPage == newPage - 1)
                                 return;
                             
-                            if(newPage < 1 || newPage > currentPageSelection.pageCount)
+                            if(newPage < 1 || newPage > root.pageCount)
                             {
                                 inputField.text = Qt.binding(() => root.currentPage + 1);
                                 return;
@@ -198,7 +197,7 @@ Pane
                     id: totalPageText
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    text: "of " + (currentPageSelection.pageCount).toString()
+                    text: "of " + root.pageCount.toString()
                     font.pointSize: 12
                     font.weight: Font.Normal
                     color: Style.colorText

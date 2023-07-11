@@ -7,7 +7,7 @@ function handleWheel(wheel)
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
-        zoom(pageView.zoomFactor * factor);
+        zoom(root.document.zoom * factor);
     }
     // angleDelta.x is the "horizontal scroll" mode some mouses support by
     // e.g. pushing the scroll button to the left/right. Make sure not to
@@ -62,7 +62,7 @@ function zoom(newZoomFactor)
 {
     // Clamp to max / min zoom factors
     newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 3));
-    if (newZoomFactor === pageView.zoomFactor)
+    if (newZoomFactor === root.document.zoom)
         return;
     
     let newPageHeight = Math.round(pageView.defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
@@ -72,7 +72,8 @@ function zoom(newZoomFactor)
     
     let pageOffset = currentPos - (currentPageHeight * currentPageNumber);
     
-    pageView.zoomFactor = newZoomFactor;
+    console.log(newZoomFactor);
+    root.document.zoom = newZoomFactor;
     pageView.forceLayout();
     pageView.contentY = newPageHeight * currentPageNumber + pageOffset + pageView.originY;
 }

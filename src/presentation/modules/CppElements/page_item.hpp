@@ -21,7 +21,7 @@ class PageItem : public QQuickItem
 
 public:
     PageItem();
-    
+
     int getImplicitWidth() const;
     int getImplicitHeight() const;
 
@@ -31,6 +31,9 @@ public:
     int getPageNumber() const;
     void setPageNumber(int newCurrentPage);
 
+private slots:
+    void updateZoom(float newZoom);
+
 protected:
     void geometryChange(const QRectF& newGeometry,
                         const QRectF& oldGeometry) override;
@@ -39,7 +42,7 @@ protected:
 private:
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;
-    int m_currentPage;
+    int m_currentPage = 0;
 };
 
 }  // namespace cpp_elements

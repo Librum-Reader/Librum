@@ -121,7 +121,8 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            currentPage: 0
+            currentPage: documentItem.currentPage
+            pageCount: documentItem.pageCount
             
             onBackButtonClicked:
             {
@@ -327,6 +328,7 @@ Page
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     visible: true
+                    document: documentItem
                     
                     onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }

@@ -13,13 +13,36 @@ import "DocumentNavigation.js" as NavigationLogic
 Pane
 {
     id: root
-    readonly property alias pagepageView: pageView
+    property var document
     signal clicked
     signal zoomFactorChanged(real factor)
     
     padding: 0
     background: Rectangle { color: "transparent" }
     
+    Component.onCompleted: 
+    {
+        document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+        zoomEmitter.start();
+    }
+    
+    // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
+    // since the zoom factor can change depending on the setting
+    Timer
+    {
+        id: zoomEmitter
+        interval: 1
+        onTriggered: root.zoomFactorChanged(document.zoom)
+    }
+    
+    Connections
+    {
+        target: document
+        function zoomChanged (newZoom) 
+        {
+            root.zoomFactorChanged(newZoom);
+        }
+    }
     
     MouseArea
     {
@@ -42,23 +65,22 @@ Pane
         {
             id: pageView
             readonly property real defaultPageHeight: 1310
-            property real zoomFactor: SettingsController.appearanceSettings.DefaultZoom / 100
             readonly property int scrollSpeed: 5500
-            property int pageSpacing: pageView.getPageSpacing(zoomFactor)
+            property int pageSpacing: pageView.getPageSpacing(root.document.zoom)
             
             height: parent.height
-            width: /*currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width*/ 600
-            contentWidth: 400 /*currentItem.implicitWidth*/
+            width: currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width
+            contentWidth: currentItem.implicitWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             flickDeceleration: 100000
             interactive: true
-//            clip: true
-//            cacheBuffer: 20000
+            clip: true
+            cacheBuffer: 10000
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
-            model: 50
+            model: root.document.pageCount
             spacing: pageSpacing
             delegate: PageItem
             {
@@ -72,17 +94,6 @@ Pane
             // Set the book's current page once the model is loaded
             onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
-            onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
-            
-            // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
-            // since the zoom factor can change depending on the setting
-            Component.onCompleted: zoomEmitter.start()
-            Timer
-            {
-                id: zoomEmitter
-                interval: 1
-                onTriggered: root.zoomFactorChanged(pageView.zoomFactor)
-            }
             
             
             MouseArea

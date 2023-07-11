@@ -15,7 +15,7 @@ cpp_elements::PageItem::PageItem()
 int PageItem::getImplicitWidth() const
 {
     if(m_document == nullptr)
-        return 100;
+        return 0;
 
     return m_page->getWidth();
 }
@@ -23,7 +23,7 @@ int PageItem::getImplicitWidth() const
 int PageItem::getImplicitHeight() const
 {
     if(m_document == nullptr)
-        return 100;
+        return 0;
 
     return m_page->getHeight();
 }
@@ -39,9 +39,12 @@ void PageItem::setDocument(DocumentItem* newDocument)
     m_page = std::make_unique<application::core::Page>(m_document->internal(),
                                                        m_currentPage);
 
+    connect(m_document, &DocumentItem::zoomChanged, this,
+            &PageItem::updateZoom);
+
+    m_page->setZoom(m_document->getZoom());
     emit implicitWidthChanged();
     emit implicitHeightChanged();
-
     update();
 }
 
@@ -53,6 +56,13 @@ int PageItem::getPageNumber() const
 void PageItem::setPageNumber(int newCurrentPage)
 {
     m_currentPage = newCurrentPage;
+}
+
+void PageItem::updateZoom(float newZoom)
+{
+    m_page->setZoom(newZoom);
+    emit implicitWidthChanged();
+    emit implicitHeightChanged();
 }
 
 void PageItem::geometryChange(const QRectF& newGeometry,

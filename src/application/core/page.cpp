@@ -73,4 +73,10 @@ int Page::getHeight() const
     return (m_page.fz_bound_page().y1 - m_page.fz_bound_page().y0) * m_matrix.d;
 }
 
+void Page::setZoom(float newZoom)
+{
+    m_matrix.a = newZoom;
+    m_matrix.d = newZoom;
+}
+
 }  // namespace application::core
