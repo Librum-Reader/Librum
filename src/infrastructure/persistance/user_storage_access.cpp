@@ -4,6 +4,7 @@
 #include <QHttpMultiPart>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QVariant>
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
@@ -131,7 +132,7 @@ void UserStorageAccess::changeProfilePicture(const QString& authToken,
     auto request = createRequest(endpoint, authToken);
 
     // Reset the ContentTypeHeader since it will be set by the multipart
-    request.setHeader(QNetworkRequest::ContentTypeHeader, QByteArray());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, QVariant());
 
     auto reply = m_networkAccessManager.post(request, profilePicture);
 
