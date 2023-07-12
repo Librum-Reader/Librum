@@ -25,7 +25,7 @@ function handleWheel(wheel)
 function updateCurrentPageCounter()
 {
     // A new page starts if it is over the middle of the screen (vertically).
-    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
+    let pageHeight = pageView.currentItem.height + pageView.pageSpacing;
     let currentPos = pageView.contentY - pageView.originY + pageView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
     
@@ -65,14 +65,14 @@ function zoom(newZoomFactor)
     if (newZoomFactor === root.document.zoom)
         return;
     
-    let newPageHeight = Math.round(pageView.defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
-    let currentPageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.getPageSpacing(pageView.zoomFactor);
+    let defaultPageHeight = Math.round(pageView.currentItem.height / root.document.zoom)
+    let newPageHeight = Math.round(defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
+    let currentPageHeight = pageView.currentItem.height + pageView.getPageSpacing(root.document.zoom);
     let currentPageNumber = root.document.currentPage;
     let currentPos = pageView.contentY - pageView.originY;
     
     let pageOffset = currentPos - (currentPageHeight * currentPageNumber);
     
-    console.log(newZoomFactor);
     root.document.zoom = newZoomFactor;
     pageView.forceLayout();
     pageView.contentY = newPageHeight * currentPageNumber + pageOffset + pageView.originY;
@@ -87,7 +87,7 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let pageHeight = Math.round(pageView.defaultPageHeight * pageView.zoomFactor) + pageView.pageSpacing;
+    let pageHeight = pageView.currentItem.height + pageView.pageSpacing;
     let newContentY = (pageHeight * newPageNumber) + pageView.originY;
     
     if(newPageNumber > root.document.currentPage)

@@ -22,7 +22,7 @@ Pane
     
     Component.onCompleted: 
     {
-        document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
         zoomEmitter.start();
     }
     
@@ -64,7 +64,6 @@ Pane
         ListView
         {
             id: pageView
-            readonly property real defaultPageHeight: 1310
             readonly property int scrollSpeed: 5500
             property int pageSpacing: pageView.getPageSpacing(root.document.zoom)
             
@@ -76,7 +75,7 @@ Pane
             flickDeceleration: 100000
             interactive: true
             clip: true
-            cacheBuffer: 10000
+            cacheBuffer: 1000
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds

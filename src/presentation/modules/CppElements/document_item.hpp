@@ -38,9 +38,9 @@ signals:
 
 private:
     std::unique_ptr<application::core::Document> m_document;
-    QString m_pageCount;
-    int m_currentPage;
-    float m_zoom;
+    QString m_pageCount = 0;
+    int m_currentPage = 0;
+    float m_zoom = 1;
 };
 
 }  // namespace cpp_elements
