@@ -580,7 +580,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForByteSizeFormat)
     EXPECT_EQ(bookSize, expectedSize);
 }
 
-TEST(ABook, SucceedsGettingSizeInBytesForKiBSizeFormat)
+TEST(ABook, SucceedsGettingSizeInBytesForKBSizeFormat)
 {
     // Arrange
     int sizeInKiB = 203;
@@ -591,7 +591,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForKiBSizeFormat)
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
-        .documentSize = QString::number(sizeInKiB) + " KiB",
+        .documentSize = QString::number(sizeInKiB) + " KB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
@@ -599,7 +599,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForKiBSizeFormat)
     };
     Book book("some/path.pdf", metaData);
 
-    auto expectedSize = sizeInKiB * 1024;
+    auto expectedSize = sizeInKiB * 1000;
 
 
     // Act
@@ -609,7 +609,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForKiBSizeFormat)
     EXPECT_EQ(bookSize, expectedSize);
 }
 
-TEST(ABook, SucceedsGettingSizeInBytesForMiBSizeFormat)
+TEST(ABook, SucceedsGettingSizeInBytesForMBSizeFormat)
 {
     // Arrange
     int sizeInMiB = 203;
@@ -620,7 +620,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForMiBSizeFormat)
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
-        .documentSize = QString::number(sizeInMiB) + " MiB",
+        .documentSize = QString::number(sizeInMiB) + " MB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
@@ -628,7 +628,7 @@ TEST(ABook, SucceedsGettingSizeInBytesForMiBSizeFormat)
     };
     Book book("some/path.pdf", metaData);
 
-    auto expectedSize = sizeInMiB * 1024 * 1024;
+    auto expectedSize = sizeInMiB * 1000 * 1000;
 
 
     // Act
@@ -649,7 +649,7 @@ TEST(ABook, SucceedsGettingSizeInBytesWhenCoverExists)
         .creationDate = "Saturday, 11. September 2021 09:17:44 UTC",
         .format = "pdf",
         .language = "English",
-        .documentSize = QString::number(sizeInKiB) + " KiB",
+        .documentSize = QString::number(sizeInKiB) + " KB",
         .pagesSize = "400 x 800",
         .pageCount = 574,
         .lastOpened = QDateTime(),
@@ -666,7 +666,7 @@ TEST(ABook, SucceedsGettingSizeInBytesWhenCoverExists)
     book.setCoverPath(cover.fileName());
 
 
-    auto expectedSize = sizeInKiB * 1024 + cover.size();
+    auto expectedSize = sizeInKiB * 1000 + cover.size();
 
 
     // Act
