@@ -20,29 +20,7 @@ Pane
     padding: 0
     background: Rectangle { color: "transparent" }
     
-    Component.onCompleted: 
-    {
-        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
-        zoomEmitter.start();
-    }
-    
-    // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
-    // since the zoom factor can change depending on the setting
-    Timer
-    {
-        id: zoomEmitter
-        interval: 1
-        onTriggered: root.zoomFactorChanged(document.zoom)
-    }
-    
-    Connections
-    {
-        target: document
-        function zoomChanged (newZoom) 
-        {
-            root.zoomFactorChanged(newZoom);
-        }
-    }
+    Component.onCompleted: root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
     
     MouseArea
     {

@@ -123,6 +123,7 @@ Page
             Layout.fillWidth: true
             currentPage: documentItem.currentPage
             pageCount: documentItem.pageCount
+            document: documentItem
             
             onBackButtonClicked:
             {
@@ -158,8 +159,6 @@ Page
                 
                 bookmarksSidebar.open();
             }
-            
-            onZoomSelectionChanged: (factor) => documentView.zoom(factor / 100)
             
             onFullScreenButtonClicked:
             {
@@ -329,8 +328,6 @@ Page
                     Layout.fillHeight: true
                     visible: true
                     document: documentItem
-                    
-                    onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
             }
         }

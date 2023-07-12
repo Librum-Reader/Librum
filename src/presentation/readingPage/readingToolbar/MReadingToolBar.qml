@@ -22,6 +22,7 @@ Pane
     property alias currentPageSelection: currentPageSelection
     property alias fullScreenButton: fullScreenButton
     property alias optionsButton: optionsButton
+    property var document
     signal backButtonClicked
     signal chapterButtonClicked
     signal bookMarkButtonClicked
@@ -29,7 +30,6 @@ Pane
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
     signal optionsPopupVisibileChanged
-    signal zoomSelectionChanged(int factor)
     
     implicitHeight: 48
     padding: 8
@@ -247,8 +247,25 @@ Pane
                 ListElement { text: "300%" }
             }
             
+            // Need to run a timer to create the binding, since the combobox does not set the text correctly
+            // when trying to just assign it during onCompleted
+            Component.onCompleted: zoomAssignment.start()
+            Timer
+            {
+                id: zoomAssignment
+                interval: 5
+                onTriggered: zoomComboBox.text = Qt.binding(function () { return Math.round(root.document.zoom * 100) + "%" })
+            }
+            
             // Remove % sign from text
-            onItemChanged: root.zoomSelectionChanged(zoomComboBox.text.substring(0, zoomComboBox.text.length - 1))
+            onItemChanged:
+            {
+                if(text === "")
+                    return;
+                
+                root.document.zoom = zoomComboBox.text.substring(0, zoomComboBox.text.length - 1) / 100;
+                zoomAssignment.start();  // Force rebinding
+            }
         }
         
         MButton
@@ -301,11 +318,5 @@ Pane
         y: optionsButton.height + 12
         
         onOpenedChanged: root.optionsPopupVisibileChanged()
-    }
-    
-    
-    function setZoomFactor(factor)
-    {
-        zoomComboBox.text = Math.round(factor * 100) + "%"
     }
 }
