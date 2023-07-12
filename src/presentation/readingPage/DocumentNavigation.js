@@ -61,7 +61,7 @@ function setMoveDirection(direction)
 function zoom(newZoomFactor)
 {
     // Clamp to max / min zoom factors
-    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 3));
+    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 4));
     if (newZoomFactor === root.document.zoom)
         return;
     

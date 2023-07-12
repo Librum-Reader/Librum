@@ -245,6 +245,7 @@ Pane
                 ListElement { text: "175%" }
                 ListElement { text: "250%" }
                 ListElement { text: "300%" }
+                ListElement { text: "400%" }
             }
             
             // Need to run a timer to create the binding, since the combobox does not set the text correctly
