@@ -209,12 +209,13 @@ Pane
         {
             id: bookTitle
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
+            Component.onCompleted: Layout.rightMargin = (Math.ceil(x + width/2) - Math.ceil(root.width / 2)) * 4
+            Layout.alignment: Qt.AlignVCenter 
             horizontalAlignment: Text.AlignHCenter
             text: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
-            font.pointSize: 12
+            font.pointSize: 13
             elide: Text.ElideRight
         }
         

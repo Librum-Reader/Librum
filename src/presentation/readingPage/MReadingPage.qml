@@ -124,6 +124,7 @@ Page
             currentPage: documentItem.currentPage
             pageCount: documentItem.pageCount
             document: documentItem
+            bookTitle: Globals.selectedBook.title
             
             onBackButtonClicked:
             {
