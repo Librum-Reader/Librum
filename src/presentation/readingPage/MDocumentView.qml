@@ -20,7 +20,12 @@ Pane
     padding: 0
     background: Rectangle { color: "transparent" }
     
-    Component.onCompleted: root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+    Component.onCompleted: 
+    {
+        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+        root.setPage(Globals.selectedBook.currentPage - 1);
+    }
+    
     
     MouseArea
     {
@@ -69,7 +74,6 @@ Pane
             
             
             // Set the book's current page once the model is loaded
-            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             
             

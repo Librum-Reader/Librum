@@ -128,8 +128,6 @@ Page
             
             onBackButtonClicked:
             {
-                // Save current page before leaving
-                internal.saveCurrentPage();
                 loadPage(homePage, sidebar.homeItem, false);
             }
             
@@ -327,7 +325,6 @@ Page
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    visible: true
                     document: documentItem
                 }
             }
@@ -380,7 +377,7 @@ Page
         function saveCurrentPage()
         {
             var operationsMap = {};
-            operationsMap[BookController.MetaProperty.CurrentPage] = 1;
+            operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
             BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
         }
     }
