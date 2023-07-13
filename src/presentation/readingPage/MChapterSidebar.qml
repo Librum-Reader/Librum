@@ -135,15 +135,16 @@ Item
                             
                             implicitWidth: treeView.width - 2  // L/R margins
                             width: implicitWidth
-                            implicitHeight: Math.max(treeNodeLabel.height)
+                            implicitHeight: treeNodeLabel.height
                             color: "transparent"
                             
-                            
+
                             RowLayout
                             {
                                 id: nodeLayout
                                 anchors.left: parent.left
                                 anchors.right: parent.right
+                                anchors.verticalCenter: parent.verticalCenter
                                 spacing: 0
                                 
                                 
