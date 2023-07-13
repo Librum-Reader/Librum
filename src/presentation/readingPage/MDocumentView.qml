@@ -164,7 +164,8 @@ Pane
     function setPage(pageNumber, yOffset = 0)
     {
         NavigationLogic.setPage(pageNumber);
-        pageView.contentY += yOffset * root.document.zoom;
-        console.log(yOffset);
+        
+        let space = 10;
+        pageView.contentY += yOffset * root.document.zoom - space;
     }
 }
