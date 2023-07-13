@@ -155,16 +155,16 @@ void TOCModel::setupModelData(fz_outline* outline)
 TOCItem* TOCModel::getTOCItemFromOutline(fz_outline* outline)
 {
     int pageNumber = outline->page.page;
+    float yOffset = outline->y;
 
     // If the pageNumber is -1, it probably is an epub, which are parsed
     // differently. We need to resolve the uri for it and then get the page
     // number from the location.
-    float yOffset = 0;
     if(pageNumber < 0)
     {
-
         auto pos =
             mupdf::fz_resolve_link(m_document, outline->uri, nullptr, &yOffset);
+
         pageNumber = m_document.fz_page_number_from_location(pos) + 1;
     }
 
