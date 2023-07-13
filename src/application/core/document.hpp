@@ -3,6 +3,7 @@
 #include <QString>
 #include <memory>
 #include "mupdf/classes.h"
+#include "toc/filtered_toc_model.hpp"
 #include "toc/toc_model.hpp"
 
 namespace application::core
@@ -20,13 +21,14 @@ public:
     QString getCreator();
     QString getCreationDate();
     QImage getCover();
-    TOCModel* getTOCModel();
+    FilteredTOCModel* getFilteredTOCModel();
 
     const mupdf::FzDocument* internal() const;
 
 private:
     mupdf::FzDocument m_document;
     std::unique_ptr<TOCModel> m_TOCModel;
+    std::unique_ptr<FilteredTOCModel> m_filteredTOCModel;
 };
 
 }  // namespace application::core

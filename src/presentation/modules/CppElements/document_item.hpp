@@ -3,7 +3,7 @@
 #include <QString>
 #include <memory>
 #include "document.hpp"
-#include "toc/toc_model.hpp"
+#include "toc/filtered_toc_model.hpp"
 
 namespace cpp_elements
 {
@@ -16,7 +16,7 @@ class DocumentItem : public QObject
     Q_PROPERTY(int currentPage READ getCurrentPage WRITE setCurrentPage NOTIFY
                    currentPageChanged)
     Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
-    Q_PROPERTY(application::core::TOCModel* tableOfContents READ
+    Q_PROPERTY(application::core::FilteredTOCModel* tableOfContents READ
                    getTableOfContents NOTIFY tableOfContentsChanged)
 
 public:
@@ -31,7 +31,7 @@ public:
     float getZoom() const;
     void setZoom(float newZoom);
 
-    application::core::TOCModel* getTableOfContents() const;
+    application::core::FilteredTOCModel* getTableOfContents() const;
 
     const application::core::Document* internal() const;
 
@@ -44,6 +44,7 @@ signals:
 
 private:
     std::unique_ptr<application::core::Document> m_document;
+    std::unique_ptr<application::core::FilteredTOCModel> filteredTOCModel;
     QString m_pageCount = 0;
     int m_currentPage = 0;
     float m_zoom = 1;

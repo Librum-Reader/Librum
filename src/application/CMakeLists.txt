@@ -53,6 +53,8 @@ set(application_SRC
     core/toc/toc_item.cpp
     core/toc/toc_model.hpp
     core/toc/toc_model.cpp
+    core/toc/filtered_toc_model.hpp
+    core/toc/filtered_toc_model.cpp
 )
 
 
@@ -100,6 +102,7 @@ target_link_libraries(application
                     Qt6::Core
                     Qt6::Quick
                     Qt6::Network
+                    rapidfuzz::rapidfuzz
                     domain
                     ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
 )

@@ -55,11 +55,11 @@ void DocumentItem::setZoom(float newZoom)
     emit zoomChanged(m_zoom);
 }
 
-application::core::TOCModel* DocumentItem::getTableOfContents() const
+application::core::FilteredTOCModel* DocumentItem::getTableOfContents() const
 {
     if(m_document == nullptr)
         return nullptr;
 
-    return m_document->getTOCModel();
+    return m_document->getFilteredTOCModel();
 }
 }  // namespace cpp_elements

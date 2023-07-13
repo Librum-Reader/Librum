@@ -12,25 +12,25 @@ TOCItem::TOCItem(const TOCItemData& data, TOCItem* parentItem) :
 
 TOCItem::~TOCItem()
 {
-    qDeleteAll(m_childItems);
+    qDeleteAll(m_children);
 }
 
 void TOCItem::appendChild(TOCItem* child)
 {
-    m_childItems.append(child);
+    m_children.append(child);
 }
 
 TOCItem* TOCItem::child(int row)
 {
-    if(row < 0 || row >= m_childItems.size())
+    if(row < 0 || row >= m_children.size())
         return nullptr;
 
-    return m_childItems.at(row);
+    return m_children.at(row);
 }
 
 int TOCItem::childCount() const
 {
-    return m_childItems.count();
+    return m_children.count();
 }
 
 int TOCItem::columnCount() const
@@ -46,7 +46,7 @@ TOCItemData TOCItem::data() const
 int TOCItem::row() const
 {
     if(m_parentItem != nullptr)
-        return m_parentItem->m_childItems.indexOf(const_cast<TOCItem*>(this));
+        return m_parentItem->m_children.indexOf(const_cast<TOCItem*>(this));
 
     return 0;
 }
@@ -59,6 +59,11 @@ TOCItem* TOCItem::parentItem()
 void TOCItem::setParent(TOCItem* parent)
 {
     m_parentItem = parent;
+}
+
+const QList<TOCItem*>& TOCItem::getChildren() const
+{
+    return m_children;
 }
 
 }  // namespace application::core

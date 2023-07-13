@@ -1,0 +1,60 @@
+#include "filtered_toc_model.hpp"
+#include <algorithm>
+#include "string_utils.hpp"
+#include "toc_model.hpp"
+
+namespace application::core
+{
+
+FilteredTOCModel::FilteredTOCModel(QObject* parent) :
+    QSortFilterProxyModel { parent }
+{
+}
+
+bool FilteredTOCModel::filterAcceptsRow(int row,
+                                        const QModelIndex& parent) const
+{
+    auto index = sourceModel()->index(row, 0, parent);
+    auto title = sourceModel()->data(index, TOCModel::Roles::TitleRole);
+
+    auto temp = sourceModel()->index(row, 0, parent);
+    TOCItem* item = static_cast<TOCItem*>(temp.internalPointer());
+    if(item != nullptr && hasChildrenMatchingTheFilter(item))
+        return true;
+
+    return false;
+}
+
+void FilteredTOCModel::setFilterString(QString filterString)
+{
+    m_filterString = filterString;
+    invalidateFilter();
+}
+
+QString FilteredTOCModel::getFilterString()
+{
+    return m_filterString;
+}
+
+bool FilteredTOCModel::hasChildrenMatchingTheFilter(const TOCItem* item) const
+{
+    if(itemPassesFilter(item))
+        return true;
+
+    return std::any_of(item->getChildren().begin(), item->getChildren().end(),
+                       [this](const TOCItem* child)
+                       {
+                           return hasChildrenMatchingTheFilter(child);
+                       });
+}
+
+bool FilteredTOCModel::itemPassesFilter(const TOCItem* item) const
+{
+    auto similarity =
+        string_utils::fuzzCompare(item->data().title, m_filterString);
+    double minSimilarity = 70;
+
+    return similarity >= minSimilarity;
+}
+
+}  // namespace application::core

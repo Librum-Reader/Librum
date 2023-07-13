@@ -49,15 +49,17 @@ QImage Document::getCover()
     return page.renderPage();
 }
 
-TOCModel* Document::getTOCModel()
+FilteredTOCModel* Document::getFilteredTOCModel()
 {
     if(m_TOCModel == nullptr)
     {
         auto data = m_document.fz_load_outline();
         m_TOCModel = std::make_unique<TOCModel>(data.m_internal, m_document);
+        m_filteredTOCModel = std::make_unique<FilteredTOCModel>();
+        m_filteredTOCModel->setSourceModel(m_TOCModel.get());
     }
 
-    return m_TOCModel.get();
+    return m_filteredTOCModel.get();
 }
 
 const mupdf::FzDocument* Document::internal() const

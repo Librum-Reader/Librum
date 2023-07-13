@@ -29,9 +29,10 @@ public:
     int row() const;
     TOCItem* parentItem();
     void setParent(TOCItem* parent);
+    const QList<TOCItem*>& getChildren() const;
 
 private:
-    QList<TOCItem*> m_childItems;
+    QList<TOCItem*> m_children;
     TOCItemData m_data;
     TOCItem* m_parentItem;
 };
