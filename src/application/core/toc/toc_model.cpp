@@ -1,12 +1,14 @@
-#include "toc_model.hpp"
+#include "toc/toc_model.hpp"
+#include <QDebug>
 #include <QStack>
-#include "toc/toc_item.hpp"
 
 namespace application::core
 {
 
-TOCModel::TOCModel(fz_outline* outline, QObject* parent) :
-    QAbstractItemModel(parent)
+TOCModel::TOCModel(fz_outline* outline, mupdf::FzDocument& document,
+                   QObject* parent) :
+    QAbstractItemModel(parent),
+    m_document(document)
 {
     m_rootItem = new TOCItem(TOCItemData());
 
@@ -27,7 +29,7 @@ QVariant TOCModel::data(const QModelIndex& index, int role) const
     switch(role)
     {
     case TitleRole:
-        return item->data().title;
+        return item->data().title.isEmpty() ? "-" : item->data().title;
     case PageNumberRole:
         return item->data().pageNumber;
     case YOffsetRole:
@@ -111,9 +113,8 @@ int TOCModel::columnCount(const QModelIndex& parent) const
 
 void TOCModel::setupModelData(fz_outline* outline)
 {
-    // No chapter exists
-    //    if(outline->page.page == -1)
-    //        return;
+    if(outline == nullptr)
+        return;
 
     QStack<TOCItem*> stack;
     stack.push(m_rootItem);
@@ -153,10 +154,25 @@ void TOCModel::setupModelData(fz_outline* outline)
 
 TOCItem* TOCModel::getTOCItemFromOutline(fz_outline* outline)
 {
+    int pageNumber = outline->page.page;
+
+    // If the pageNumber is -1, it probably is an epub, which are parsed
+    // differently. We need to resolve the uri for it and then get the page
+    // number from the location.
+    float yOffset = 0;
+    if(pageNumber < 0)
+    {
+
+        auto pos =
+            mupdf::fz_resolve_link(m_document, outline->uri, nullptr, &yOffset);
+        pageNumber = m_document.fz_page_number_from_location(pos) + 1;
+    }
+
+
     TOCItemData data {
         .title = QString(outline->title),
-        .pageNumber = outline->page.page,
-        .yOffset = outline->y,
+        .pageNumber = pageNumber,
+        .yOffset = yOffset,
         .internal = outline,
     };
 

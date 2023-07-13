@@ -1,6 +1,6 @@
 #pragma once
 #include <QAbstractItemModel>
-#include "mupdf/classes.h"
+#include "mupdf/classes2.h"
 #include "toc_item.hpp"
 
 namespace application::core
@@ -11,7 +11,8 @@ class TOCModel : public QAbstractItemModel
     Q_OBJECT
 
 public:
-    explicit TOCModel(fz_outline* outline, QObject* parent = nullptr);
+    explicit TOCModel(fz_outline* outline, mupdf::FzDocument& document,
+                      QObject* parent = nullptr);
     ~TOCModel();
 
     enum Roles
@@ -35,6 +36,7 @@ private:
     TOCItem* getTOCItemFromOutline(fz_outline* outline);
 
     TOCItem* m_rootItem;
+    mupdf::FzDocument& m_document;
 };
 
 }  // namespace application::core

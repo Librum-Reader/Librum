@@ -236,14 +236,14 @@ Page
                     id: chapterSidebar
                     property int lastWidth: 370
                     property bool active: false
-                    chapterModel: documentItem.tableOfContents
                     anchors.fill: parent
                     visible: false
+                    model: documentItem.tableOfContents
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
                     onSwitchPage: (pageNumber, yOffset) => documentView.setPage(pageNumber, yOffset)
-                     
+                    
                     
                     Rectangle
                     {
@@ -368,7 +368,7 @@ Page
         {
             documentView.setPage(0);
         }
-
+        
         function goToEnd()
         {
             documentView.setPage(documentItem.pageCount)

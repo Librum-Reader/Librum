@@ -8,8 +8,6 @@ namespace application::core
 Document::Document(const QString& filePath) :
     m_document(filePath.toStdString().c_str())
 {
-    auto x = m_document.fz_load_outline();
-    TOCModel model(x.m_internal);
 }
 
 int Document::getPageCount() const
@@ -56,7 +54,7 @@ TOCModel* Document::getTOCModel()
     if(m_TOCModel == nullptr)
     {
         auto data = m_document.fz_load_outline();
-        m_TOCModel = std::make_unique<TOCModel>(data.m_internal);
+        m_TOCModel = std::make_unique<TOCModel>(data.m_internal, m_document);
     }
 
     return m_TOCModel.get();

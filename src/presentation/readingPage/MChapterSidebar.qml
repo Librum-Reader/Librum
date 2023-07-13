@@ -12,8 +12,8 @@ import QtQuick.Shapes
 Item
 {
     id: root
-    property var chapterModel
     signal switchPage(int pageNumber, real yOffset)
+    property alias model: treeView.model
     
     implicitWidth: 300
     implicitHeight: 600
@@ -120,7 +120,6 @@ Item
                         anchors.fill: parent
                         anchors.margins: 1
                         anchors.rightMargin: scrollBar.isEnabled ? 18 : 1
-                        model: documentItem.tableOfContents
                         clip: true
                         focus: true
                         
