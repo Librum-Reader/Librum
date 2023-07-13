@@ -28,10 +28,10 @@ QVariant TOCModel::data(const QModelIndex& index, int role) const
     {
     case TitleRole:
         return item->data().title;
-        break;
     case PageNumberRole:
         return item->data().pageNumber;
-        break;
+    case YOffsetRole:
+        return item->data().yOffset;
     }
 
     return QVariant();
@@ -96,6 +96,7 @@ QHash<int, QByteArray> TOCModel::roleNames() const
     static QHash<int, QByteArray> roles {
         { TitleRole, "title" },
         { PageNumberRole, "pageNumber" },
+        { YOffsetRole, "yOffset" },
     };
 
     return roles;
@@ -103,7 +104,9 @@ QHash<int, QByteArray> TOCModel::roleNames() const
 
 int TOCModel::columnCount(const QModelIndex& parent) const
 {
-    return 2;
+    Q_UNUSED(parent)
+
+    return roleNames().count();
 }
 
 void TOCModel::setupModelData(fz_outline* outline)
@@ -153,6 +156,7 @@ TOCItem* TOCModel::getTOCItemFromOutline(fz_outline* outline)
     TOCItemData data {
         .title = QString(outline->title),
         .pageNumber = outline->page.page,
+        .yOffset = outline->y,
         .internal = outline,
     };
 

@@ -242,7 +242,7 @@ Page
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
-                    onSwitchPage: (pageNumber) => documentView.setPage(pageNumber)
+                    onSwitchPage: (pageNumber, yOffset) => documentView.setPage(pageNumber, yOffset)
                      
                     
                     Rectangle

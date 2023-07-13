@@ -10,6 +10,7 @@ struct TOCItemData
 {
     QString title;
     int pageNumber;
+    float yOffset;
     fz_outline* internal;
 };
 

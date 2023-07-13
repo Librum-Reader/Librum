@@ -18,6 +18,7 @@ public:
     {
         TitleRole = Qt::DisplayRole,
         PageNumberRole,
+        YOffsetRole,
     };
 
     QVariant data(const QModelIndex& index, int role) const override;

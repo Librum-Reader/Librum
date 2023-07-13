@@ -13,7 +13,7 @@ Item
 {
     id: root
     property var chapterModel
-    signal switchPage(int pageNumber)
+    signal switchPage(int pageNumber, real yOffset)
     
     implicitWidth: 300
     implicitHeight: 600
@@ -191,7 +191,7 @@ Item
                                         id: pageSwitchTrigger
                                         anchors.fill: parent
                                         
-                                        onClicked: root.switchPage(model.pageNumber)
+                                        onClicked: root.switchPage(model.pageNumber, model.yOffset)
                                     }
                                 }
                                 
