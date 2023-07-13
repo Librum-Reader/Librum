@@ -49,6 +49,10 @@ set(application_SRC
     core/document.cpp
     core/page.hpp
     core/page.cpp
+    core/toc/toc_item.hpp
+    core/toc/toc_item.cpp
+    core/toc/toc_model.hpp
+    core/toc/toc_model.cpp
 )
 
 

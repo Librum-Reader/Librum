@@ -14,6 +14,7 @@ void DocumentItem::setFilePath(const QString& newFilePath)
 
     emit filePathChanged(newFilePath);
     emit pageCountChanged(m_document->getPageCount());
+    emit tableOfContentsChanged();
 }
 
 int DocumentItem::getPageCount() const
@@ -54,4 +55,11 @@ void DocumentItem::setZoom(float newZoom)
     emit zoomChanged(m_zoom);
 }
 
+application::core::TOCModel* DocumentItem::getTableOfContents() const
+{
+    if(m_document == nullptr)
+        return nullptr;
+
+    return m_document->getTOCModel();
+}
 }  // namespace cpp_elements

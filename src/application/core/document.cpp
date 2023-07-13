@@ -1,5 +1,6 @@
 #include "document.hpp"
 #include "page.hpp"
+#include "toc/toc_model.hpp"
 
 namespace application::core
 {
@@ -7,6 +8,8 @@ namespace application::core
 Document::Document(const QString& filePath) :
     m_document(filePath.toStdString().c_str())
 {
+    auto x = m_document.fz_load_outline();
+    TOCModel model(x.m_internal);
 }
 
 int Document::getPageCount() const
@@ -46,6 +49,17 @@ QImage Document::getCover()
 {
     Page page(this, 0);
     return page.renderPage();
+}
+
+TOCModel* Document::getTOCModel()
+{
+    if(m_TOCModel == nullptr)
+    {
+        auto data = m_document.fz_load_outline();
+        m_TOCModel = std::make_unique<TOCModel>(data.m_internal);
+    }
+
+    return m_TOCModel.get();
 }
 
 const mupdf::FzDocument* Document::internal() const
