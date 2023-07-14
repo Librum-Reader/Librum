@@ -78,6 +78,9 @@ add_library(application
                     ${application_SRC}
 )
 
+# Make sure to build mupdf before the application
+add_dependencies(application mupdf)
+
 target_include_directories(application
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -90,6 +93,7 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
                     ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/c++/include
+                    ${PROJECT_SOURCE_DIR}/libs/mupdf/include
 )
 
 target_compile_definitions(application
