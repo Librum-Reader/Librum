@@ -176,13 +176,17 @@ The installation is straight forward, just follow the steps below:
     ```
 4. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/<username>/Qt/<version>/gcc_64 ..
     ```
-5. Build the project
+    `CMAKE_PREFIX_PATH` needs to be set to the Qt install path. Qt is usually installed at /home/name/Qt, so an example might be:
+    ```sh
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/john/Qt/6.5.1/gcc_64 ..
+    ```
+6. Build the project
     ```sh
     cmake --build .
     ```
-6. Run the app
+7. Run the app
     ```sh
     ./appLibrum
     ```
