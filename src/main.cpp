@@ -207,6 +207,6 @@ void loadFonts()
 
 
     QFont defaultFont("SF Pro Display");
-    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.65);
+    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
     QGuiApplication::setFont(defaultFont);
 }
