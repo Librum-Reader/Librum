@@ -27,7 +27,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # If compiler is GCC
 endif()
 
 
-# Create variables for coverage compiler an linker flags
+# Create variables for coverage compiler and linker flags
 if(ENABLE_COVERAGE)
     string(CONCAT COVERAGE_COMPILE_OPTIONS "-fprofile-arcs;-ftest-coverage;-fno-inline;--coverage")
     string(CONCAT COVERAGE_LINKING_OPTIONS "-lgcov;--coverage;")

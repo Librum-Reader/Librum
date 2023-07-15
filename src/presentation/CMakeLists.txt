@@ -1,5 +1,5 @@
 #Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
 
 
 # Build
