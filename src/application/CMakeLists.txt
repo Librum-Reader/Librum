@@ -61,8 +61,8 @@ set(application_SRC
 # Build mupdf
 add_custom_command(
     OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf/scripts
-    COMMAND python3 mupdfwrap.py --swig-windows-auto -d build/shared-debug -b m01
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+    COMMAND ./scripts/mupdfwrap.py --swig-windows-auto -d build/shared-debug -b m01
     COMMENT "Building mupdf"
 )
 
