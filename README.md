@@ -145,13 +145,15 @@ Want a new feature? Feel free to leave a feature request ticket!
 Here's how to get Librum up and running in your environment.
 <br>
 
-## For GNU/Linux
-
 ### Prerequisites
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
+- Qt 6.5                            https://www.qt.io/download-open-source
 
+<br>
+
+## For GNU/Linux
 
 ### Installation
 The installation is straight forward, just follow the steps below:
