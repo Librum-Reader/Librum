@@ -35,7 +35,6 @@ target_include_directories(presentation
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/modules/CppElements
                     ${APPLICATION_INCLUDES}
-                    ${OKULARCORE_INCLUDES}
 )
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-O0;-g>")
