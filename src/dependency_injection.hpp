@@ -6,7 +6,6 @@
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
 #include "book_metadata_helper.hpp"
-#include "book_metadata_helper.hpp".hpp "
 #include "book_service.hpp"
 #include "book_storage_access.hpp"
 #include "book_storage_gateway.hpp"

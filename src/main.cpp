@@ -1,7 +1,6 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
-#include <qt/QtCore/qglobal.h>
 #include <QDateTime>
 #include <QLocale>
 #include <QQmlApplicationEngine>
