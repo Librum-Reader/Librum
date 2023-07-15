@@ -149,6 +149,7 @@ Here's how to get Librum up and running in your environment.
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
+- `python-clang` (Most package managers list it as `python-clang`, `python3-clang` or `python-libclang`)
 - Qt 6.5                            https://www.qt.io/download-open-source
 
 <br>
@@ -187,6 +188,12 @@ The installation is straight forward, just follow the steps below:
     ```
 <br>
 
+### Troubleshooting
+Here are solutions to some common errors. If your error is not listed here, please open an issue.
+<br>
+
+Error: `... package "Qt6Gui" is considered to be NOT FOUND`<br>
+Solution: Install the libGL mesa dev package, on ubuntu its `sudo apt install libgl1-mesa-dev` and on fedora its `sudo dnf install mesa-libGL-devel`.
 
 <br>
 
