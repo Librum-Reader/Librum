@@ -60,14 +60,14 @@ set(application_SRC
 
 # Build mupdf
 add_custom_command(
-    OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so"
+    OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ./scripts/mupdfwrap.py --swig-windows-auto -d build/shared-debug -b m01
-    COMMENT "Building mupdf"
+    COMMAND ./scripts/mupdfwrap.py --swig-windows-auto -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b m01
+    COMMENT "Building mupdf (This takes a while) ..."
 )
 
 add_custom_target(mupdf ALL
-   DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
+   DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
 )
 
 
@@ -108,7 +108,7 @@ target_link_libraries(application
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so
+                    ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
 )
 
 
