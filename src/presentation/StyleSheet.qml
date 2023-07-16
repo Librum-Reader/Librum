@@ -1,8 +1,8 @@
 pragma Singleton
-import QtQuick 2.15
+import QtQuick
 import QtCore
-import Librum.controllers 1.0
-import Librum.icons 1.0
+import Librum.controllers
+import Librum.icons
 
 Item
 {

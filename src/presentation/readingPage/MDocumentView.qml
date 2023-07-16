@@ -1,10 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
-import Librum.elements 1.0
-import Librum.style 1.0
-import Librum.globals 1.0
-import Librum.controllers 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import Librum.elements
+import Librum.style
+import Librum.globals
+import Librum.controllers
 import "DocumentNavigation.js" as NavigationLogic
 
 /*
