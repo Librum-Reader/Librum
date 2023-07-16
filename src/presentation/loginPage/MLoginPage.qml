@@ -15,11 +15,24 @@ MFlickWrapper
                        layout.implicitHeight : Window.height
     
     // Passing the focus to emailInput on Component.onCompleted() causes it
-    // to pass controll back to root for some reason, this fixes the focus problem
+    // to pass controll back to root for some reason, this fixes the focus problem.
     onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
     
-    // Focus the emailInput when page has loaded
-    Component.onCompleted: emailInput.giveFocus()
+    Component.onCompleted: 
+    {
+        // Focus the emailInput when page has loaded.
+        emailInput.giveFocus();
+        
+        // For some reason this prevents a SEGV. Directly calling the auto login
+        // directly causes the application to crash on startup.
+        autoLoginTimer.start();
+    }
+    Timer
+    {
+        id: autoLoginTimer
+        interval: 0
+        onTriggered: AuthController.tryAutomaticLogin();
+    }
     
     Shortcut
     {
@@ -367,7 +380,5 @@ MFlickWrapper
             generalErrorText.visible = false;
             generalErrorText.text = "";
         }
-        
-        Component.onCompleted: AuthController.tryAutomaticLogin();
     }
 }

@@ -62,7 +62,7 @@ void UserService::loadUser(bool rememberUser)
     // When user was loaded from file, we know that 'rememberMe' is true
     m_rememberUser = success ? true : rememberUser;
 
-//    m_userStorageGateway->getUser(m_authenticationToken);  <---- Causes SEGV
+    m_userStorageGateway->getUser(m_authenticationToken);
 }
 
 void UserService::downloadUser()
