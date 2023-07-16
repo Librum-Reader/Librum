@@ -1,6 +1,6 @@
 pragma Singleton
 import QtQuick 2.15
-import Qt.labs.settings 1.1
+import QtCore
 import Librum.controllers 1.0
 import Librum.icons 1.0
 
@@ -250,7 +250,7 @@ Item
     Settings
     {
         id: lastRunSettings
-        fileName: "last_run_settings"
+        location: "last_run_settings"
         
         property string theme: "Dark"
     }
