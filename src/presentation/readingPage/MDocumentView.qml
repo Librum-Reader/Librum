@@ -70,6 +70,7 @@ Pane
                 document: documentItem
                 height: implicitHeight
                 width: implicitWidth
+                anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
             }
             
             
