@@ -314,13 +314,17 @@ Page
     {
         id: importFilesDialog
         acceptLabel: "Import"
-        fileMode: FileDialog.OpenFiles
+        fileMode: FileDialog.FileMode.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["All files (*)", "Text files (*.txt)", "PDF files (*.pdf)", "MOBI files (*.pdf)",
-            "WOLF files (*.wol)", "RTF files (*.rtf)", "PDB files (*.pdb)",
-            "HTML files (*.html *.htm)", "EPUB files (*.epub)", "MOBI files (*mobi)",
-            "DJVU files (*.djvu)"]
-        
+        nameFilters: [
+            "All files (*)",
+            "PDF files (*.pdf)",
+            "EPUB files (*.epub)",
+            "HTML files (*.html *.htm)",
+            "Text files (*.txt)",
+            "MOBI files (*.mobi)",
+        ]
+    
         onAccepted:
         {
             for(let i = 0; i < files.length; ++i)

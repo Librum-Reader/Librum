@@ -10,6 +10,7 @@
 #include <QString>
 #include <QTranslator>
 #include <memory>
+#include <QApplication>
 #include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -41,7 +42,7 @@ int main(int argc, char* argv[])
 {
     // clang-format off
     // App
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QGuiApplication::setOrganizationName("Etovex");
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");

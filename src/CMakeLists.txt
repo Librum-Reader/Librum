@@ -10,7 +10,7 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CU
 
 
 # Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick QuickControls2)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
 
 
 
@@ -60,6 +60,7 @@ target_link_libraries(appLibrum
         infrastructure
         ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
         Qt6::Quick
+        Qt6::Widgets
         Qt6::QuickControls2
 )
 
