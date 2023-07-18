@@ -51,7 +51,7 @@ Pane
             property int pageSpacing: pageView.getPageSpacing(root.document.zoom)
             
             height: parent.height
-            width: currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width
+            width: if(currentItem) currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width
             contentWidth: currentItem.implicitWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
