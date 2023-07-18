@@ -191,7 +191,8 @@ Item
                                         id: pageSwitchTrigger
                                         anchors.fill: parent
                                         
-                                        onClicked: root.switchPage(model.pageNumber, model.yOffset)
+                                        // NaN check: x !== x
+                                        onClicked: root.switchPage(model.pageNumber, model.yOffset !== model.yOffset ? 1 : model.yOffset)
                                     }
                                 }
                                 
