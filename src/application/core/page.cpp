@@ -33,8 +33,9 @@ QImage Page::renderPage()
 
 mupdf::FzPixmap Page::getEmptyPixmap() const
 {
-    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, getWidth(),
-                           getHeight(), mupdf::FzSeparations(), 0);
+    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB,
+                           m_page.fz_bound_page_box(FZ_CROP_BOX),
+                           mupdf::FzSeparations(), 0);
     pixmap.fz_clear_pixmap();
 
     return pixmap;
@@ -65,12 +66,16 @@ QImage Page::imageFromPixmap(mupdf::FzPixmap pixmap)
 
 int Page::getWidth() const
 {
-    return (m_page.fz_bound_page().x1 - m_page.fz_bound_page().x0) * m_matrix.a;
+    return (m_page.fz_bound_page_box(FZ_CROP_BOX).x1 -
+            m_page.fz_bound_page_box(FZ_CROP_BOX).x0) *
+           m_matrix.a;
 }
 
 int Page::getHeight() const
 {
-    return (m_page.fz_bound_page().y1 - m_page.fz_bound_page().y0) * m_matrix.d;
+    return (m_page.fz_bound_page_box(FZ_CROP_BOX).y1 -
+            m_page.fz_bound_page_box(FZ_CROP_BOX).y0) *
+           m_matrix.d;
 }
 
 void Page::setZoom(float newZoom)
