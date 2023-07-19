@@ -87,13 +87,15 @@ function flick(factor)
 
 function setPage(newPageNumber)
 {
-    let pageHeight = pageView.currentItem.height + pageView.pageSpacing;
-    let newContentY = (pageHeight * newPageNumber) + pageView.originY;
+    if(newPageNumber < 0 || newPageNumber > root.document.pageCount)
+        return;
+    
+    pageView.currentIndex = newPageNumber;
+    pageView.positionViewAtIndex(newPageNumber, ListView.Beginning);
+    root.document.currentPage = newPageNumber;
     
     if(newPageNumber > root.document.currentPage)
         setMoveDirection("up");
     else if(newPageNumber < root.document.currentPage)
         setMoveDirection("down");
-    
-    pageView.contentY = newContentY;
 }

@@ -23,7 +23,6 @@ Pane
     Component.onCompleted: 
     {
         root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
-        root.setPage(Globals.selectedBook.currentPage - 1);
     }
     
     
@@ -76,6 +75,7 @@ Pane
             
             // Set the book's current page once the model is loaded
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
+            Component.onCompleted: root.setPage(Globals.selectedBook.currentPage - 1);
             
             
             MouseArea

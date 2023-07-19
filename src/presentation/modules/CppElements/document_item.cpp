@@ -62,4 +62,5 @@ application::core::FilteredTOCModel* DocumentItem::getTableOfContents() const
 
     return m_document->getFilteredTOCModel();
 }
+
 }  // namespace cpp_elements
