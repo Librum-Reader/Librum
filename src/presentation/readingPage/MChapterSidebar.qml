@@ -205,7 +205,7 @@ Item
                                     color: Style.colorText
                                     opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                     font.pixelSize: 14
-                                    text: treeNode.pageNumber
+                                    text: treeNode.pageNumber + 1  // Convert from 0-indexed to normal numbers
                                 }
                             }
                         }
