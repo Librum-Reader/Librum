@@ -148,7 +148,7 @@ Here's how to get Librum up and running in your environment.
 ### Prerequisites
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
-- Gcc (or any other c++ compiler)   https://gcc.gnu.org/
+- g++ (or any other c++ compiler)   https://gcc.gnu.org/
 - Qt 6.5                            https://www.qt.io/download-open-source
 
 <br>
