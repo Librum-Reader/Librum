@@ -11,7 +11,7 @@ class Page
 public:
     Page(const Document* document, int pageNumber);
 
-    QImage renderPage();
+    QImage renderPage(bool invertColor);
     int getWidth() const;
     int getHeight() const;
     void setZoom(float newZoom);

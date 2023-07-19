@@ -140,8 +140,35 @@ Page
                             rightSelected: savedValue === rightText
                             
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue == leftText ? selectLeft() : selectRight()
+                            onSavedValueChanged: savedValue === leftText ? selectLeft() : selectRight()
                             onToggled: (newSelected) => internal.saveSetting(SettingKeys.Theme, newSelected)
+                        }
+                        
+                        Label
+                        {
+                            id: pageColorModeTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: "Page Color Mode"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        MDualToggle
+                        {
+                            id: pageColorModeSwitch
+                            property string savedValue: SettingsController.appearanceSettings.PageColorMode
+                            
+                            Layout.topMargin: 4
+                            leftText: "Normal"
+                            rightText: "Inverted"
+                            leftSelected: savedValue === leftText
+                            rightSelected: savedValue === rightText
+                            
+                            // Need rebinding on reset
+                            onSavedValueChanged: savedValue === leftText ? selectLeft() : selectRight()
+                            onToggled: (newSelected) => internal.saveSetting(SettingKeys.PageColorMode, newSelected)
                         }
                     }   
                 }

@@ -1,5 +1,6 @@
 {
     "Theme": "Dark",
+    "PageColorMode": "Normal",
     "PageSpacing": "10",
     "DisplayBookTitleInTitlebar": "true",
     "LayoutDirection": "Vertical",

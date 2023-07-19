@@ -17,6 +17,7 @@ class PageItem : public QQuickItem
     Q_PROPERTY(
         int implicitHeight READ getImplicitHeight NOTIFY implicitHeightChanged)
     Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
+    Q_PROPERTY(bool colorInverted WRITE setColorInverted)
 
 
 public:
@@ -31,6 +32,8 @@ public:
     int getPageNumber() const;
     void setPageNumber(int newCurrentPage);
 
+    void setColorInverted(bool newColorInverted);
+
 private slots:
     void updateZoom(float newZoom);
 
@@ -43,6 +46,8 @@ private:
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;
     int m_currentPage = 0;
+    bool m_colorInverted;
+    bool m_firstTimeColorInverted = true;
 };
 
 }  // namespace cpp_elements

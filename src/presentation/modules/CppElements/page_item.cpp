@@ -90,10 +90,20 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
         n->setOwnsTexture(true);
     }
 
-    auto image = m_page->renderPage();
+    auto image = m_page->renderPage(m_colorInverted);
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
     return n;
+}
+
+void PageItem::setColorInverted(bool newColorInverted)
+{
+    m_colorInverted = newColorInverted;
+    if(!m_firstTimeColorInverted)
+        update();
+
+
+    m_firstTimeColorInverted = false;
 }
 
 }  // namespace cpp_elements

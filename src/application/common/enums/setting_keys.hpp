@@ -16,6 +16,7 @@ enum class SettingKeys
 {
     // Appearance
     Theme = 0,
+    PageColorMode,
     PageSpacing,
     DisplayBookTitleInTitlebar,
     LayoutDirection,

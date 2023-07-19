@@ -45,7 +45,7 @@ QImage Document::getCover()
     try
     {
         Page page(this, 0);
-        return page.renderPage();
+        return page.renderPage(false);
     }
     catch(...)
     {

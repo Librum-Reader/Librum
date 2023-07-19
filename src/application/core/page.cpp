@@ -18,7 +18,7 @@ application::core::Page::Page(const Document* document, int pageNumber) :
     listDevice.fz_close_device();
 }
 
-QImage Page::renderPage()
+QImage Page::renderPage(bool invertColor)
 {
     auto pixmap = getEmptyPixmap();
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
@@ -27,6 +27,9 @@ QImage Page::renderPage()
     mupdf::FzRect rect = mupdf::FzRect::Fixed_INFINITE;
     m_displayList.fz_run_display_list(drawDevice, m_matrix, rect, cookie);
     drawDevice.fz_close_device();
+
+    if(invertColor)
+        pixmap.fz_invert_pixmap();
 
     return imageFromPixmap(pixmap);
 }

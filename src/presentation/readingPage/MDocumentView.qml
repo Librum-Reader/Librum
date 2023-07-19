@@ -69,6 +69,7 @@ Pane
                 document: documentItem
                 height: implicitHeight
                 width: implicitWidth
+                colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
                 anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
             }
             
