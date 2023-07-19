@@ -17,33 +17,79 @@ int Document::getPageCount() const
 
 QString Document::getTitle()
 {
-    return getDocumentInfo("info:Title");
+    try
+    {
+        return QString::fromStdString(
+            m_document.fz_lookup_metadata2("info:Title"));
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 QString Document::getAuthors()
 {
-    return getDocumentInfo("info:Author");
+    try
+    {
+        return QString::fromStdString(
+            m_document.fz_lookup_metadata2("info:Author"));
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 QString Document::getFormat()
 {
-    return getDocumentInfo("format");
+    try
+    {
+        return QString::fromStdString(m_document.fz_lookup_metadata2("format"));
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 QString Document::getCreator()
 {
-    return getDocumentInfo("info:Creator");
+    try
+    {
+        return QString::fromStdString(
+            m_document.fz_lookup_metadata2("info:Creator"));
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 QString Document::getCreationDate()
 {
-    return getDocumentInfo("info:CreationDate");
+    try
+    {
+        return QString::fromStdString(
+            m_document.fz_lookup_metadata2("info:CreationDate"));
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 QImage Document::getCover()
 {
-    Page page(this, 0);
-    return page.renderPage();
+    try
+    {
+        Page page(this, 0);
+        return page.renderPage();
+    }
+    catch(...)
+    {
+        return QImage();
+    }
 }
 
 FilteredTOCModel* Document::getFilteredTOCModel()
@@ -62,26 +108,6 @@ FilteredTOCModel* Document::getFilteredTOCModel()
 const mupdf::FzDocument* Document::internal() const
 {
     return &m_document;
-}
-
-QString Document::getDocumentInfo(const QString& key)
-{
-    auto cKey = key.toLatin1().data();
-
-    const int size = 100;
-    char dataBuffer[size];
-    auto res = m_document.fz_lookup_metadata(cKey, dataBuffer, size);
-    if(res == -1)
-    {
-        return "";
-    }
-    else if(res > size)
-    {
-        // Refetch the data with the correct size
-        m_document.fz_lookup_metadata(cKey, dataBuffer, res);
-    }
-
-    return QString(dataBuffer);
 }
 
 }  // namespace application::core
