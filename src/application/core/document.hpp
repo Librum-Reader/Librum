@@ -26,6 +26,8 @@ public:
     const mupdf::FzDocument* internal() const;
 
 private:
+    QString getDocumentInfo(const char* key);
+
     mupdf::FzDocument m_document;
     std::unique_ptr<TOCModel> m_TOCModel;
     std::unique_ptr<FilteredTOCModel> m_filteredTOCModel;

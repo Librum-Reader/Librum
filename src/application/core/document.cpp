@@ -17,66 +17,27 @@ int Document::getPageCount() const
 
 QString Document::getTitle()
 {
-    try
-    {
-        return QString::fromStdString(
-            m_document.fz_lookup_metadata2("info:Title"));
-    }
-    catch(...)
-    {
-        return "";
-    }
+    return getDocumentInfo("info:Title");
 }
 
 QString Document::getAuthors()
 {
-    try
-    {
-        return QString::fromStdString(
-            m_document.fz_lookup_metadata2("info:Author"));
-    }
-    catch(...)
-    {
-        return "";
-    }
+    return getDocumentInfo("info:Author");
 }
 
 QString Document::getFormat()
 {
-    try
-    {
-        return QString::fromStdString(m_document.fz_lookup_metadata2("format"));
-    }
-    catch(...)
-    {
-        return "";
-    }
+    return getDocumentInfo("format");
 }
 
 QString Document::getCreator()
 {
-    try
-    {
-        return QString::fromStdString(
-            m_document.fz_lookup_metadata2("info:Creator"));
-    }
-    catch(...)
-    {
-        return "";
-    }
+    return getDocumentInfo("info:Creator");
 }
 
 QString Document::getCreationDate()
 {
-    try
-    {
-        return QString::fromStdString(
-            m_document.fz_lookup_metadata2("info:CreationDate"));
-    }
-    catch(...)
-    {
-        return "";
-    }
+    return getDocumentInfo("info:CreationDate");
 }
 
 QImage Document::getCover()
@@ -108,6 +69,19 @@ FilteredTOCModel* Document::getFilteredTOCModel()
 const mupdf::FzDocument* Document::internal() const
 {
     return &m_document;
+}
+
+QString Document::getDocumentInfo(const char* key)
+{
+    try
+    {
+        auto result = m_document.fz_lookup_metadata2(key);
+        return QString::fromStdString(result);
+    }
+    catch(...)
+    {
+        return "";
+    }
 }
 
 }  // namespace application::core
