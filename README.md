@@ -149,7 +149,7 @@ Here's how to get Librum up and running in your environment.
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
 - g++ (or any other c++ compiler)   https://gcc.gnu.org/
-- python3-venv                      (`pip3 install virtualenv`)
+- python3-venv                      (on ubuntu use `sudo apt install python3-venv`)
 - Qt 6.5                            https://www.qt.io/download-open-source
 
 <br>
