@@ -149,7 +149,6 @@ Here's how to get Librum up and running in your environment.
 - cmake (at least version 3.21)     https://cmake.org/download/
 - make (or any other build system)  http://ftp.gnu.org/gnu/make/
 - Gcc (or any other c++ compiler)   https://gcc.gnu.org/
-- `python-clang` (Most package managers list it as `python-clang`, `python3-clang` or `python-libclang`)
 - Qt 6.5                            https://www.qt.io/download-open-source
 
 <br>
