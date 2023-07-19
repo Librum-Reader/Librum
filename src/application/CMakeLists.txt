@@ -62,7 +62,7 @@ set(application_SRC
 add_custom_command(
     OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 4 m01
+    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
     COMMENT "Building mupdf (This takes a while) ..."
 )
 
