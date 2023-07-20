@@ -92,25 +92,16 @@ We support:
 <br>
 
 ### Supported formats
-No matter what file type you have, you can read it on Librum, since we support <b>all</b> major book formats,<br>
+Librum is the best choice for all kinds of books, since Librum supports <b>all</b> major book formats<br>
 including:
 - PDF
-- PS
-- Tiff
-- CHM
-- DjVu
-- Images
-- DVI
+- EPUB
+- CBZ (Comic books)
 - XPS
-- Fiction Book
-- Comic Book
-- Plucker
-- Pub
-- Fax
+- PS
 - All plain text formats
-- Most image formats
+- Images
 
-and <b>much more</b>.
 
 <br>
 
@@ -118,23 +109,18 @@ and <b>much more</b>.
 Librum's objective is to make your reading more <b>productive</b>; to that end, we provide you with a variety of features that you can access via a <b>simple</b> and <b>straightforward</b> interface.<br>
 These features include:
 - A modern e-reader
-- Creating a personalized library
-- Meta-data editing
-- A free in-app bookstore with more than 60.000 books
+- A personalized and customizable library
+- Book meta-data editing
+- A free in-app bookstore with more than 70.000 books
 - Book syncing across all of your devices
 - Highlighting
-- Note-taking
 - Bookmarking
-- Extensive search
-- Tags
-- TTS (Text to speech)
-- Automated page scrolling
-- Syncing with third parties (Google drive, Dropbox, Nextcloud)
-- Custom plugins
+- Text search
 - Unlimited customization
-- Personalized reading statistics
-- No-login book reading
-- Sharing / Printing pages
+- Note-taking (Coming Soon)
+- TTS (Coming Soon)
+- Personalized reading statistics (Coming Soon)
+- No-login book reading (Coming Soon)
 
 Want a new feature? Feel free to leave a feature request ticket!
 
