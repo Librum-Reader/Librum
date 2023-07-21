@@ -89,6 +89,13 @@ Pane
                     NavigationLogic.handleWheel(wheel);
                     wheel.accepted = true;
                 }
+                
+                // Take over focus when clicked
+                onClicked:
+                {
+                    root.forceActiveFocus();
+                    mouse.accepted = false;
+                }
             }
             
             function getPageSpacing(zoom)
