@@ -25,6 +25,7 @@ Pane
         root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
     }
     
+    Keys.onTabPressed: (event) => { event.accepted = true; } // Disable pressing tab to focus other elements
     
     MouseArea
     {
