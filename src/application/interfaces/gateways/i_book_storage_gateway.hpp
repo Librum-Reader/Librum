@@ -4,6 +4,7 @@
 #include <QUuid>
 #include <vector>
 #include "book.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -13,7 +14,7 @@ namespace application
  * BookStorageAccess class. It maps the data provided by the application to
  * the data type required for book storage API requests.
  */
-class IBookStorageGateway : public QObject
+class APPLICATION_LIBRARY IBookStorageGateway : public QObject
 {
     Q_OBJECT
 

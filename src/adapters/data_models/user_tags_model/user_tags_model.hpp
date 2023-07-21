@@ -1,7 +1,8 @@
+#pragma once
 #include <QAbstractListModel>
 #include <vector>
 #include "tag.hpp"
-#pragma once
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -9,7 +10,7 @@ namespace adapters::data_models
 /**
  * The UserTagsModel represents the user's tags to the UI
  */
-class UserTagsModel : public QAbstractListModel
+class ADAPTERS_LIBRARY UserTagsModel : public QAbstractListModel
 {
     Q_OBJECT
 

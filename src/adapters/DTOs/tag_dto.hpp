@@ -1,11 +1,12 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters::dtos
 {
 
-struct TagDto
+struct ADAPTERS_LIBRARY TagDto
 {
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)

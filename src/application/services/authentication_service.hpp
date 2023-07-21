@@ -2,11 +2,12 @@
 #include <QObject>
 #include "i_authentication_gateway.hpp"
 #include "i_authentication_service.hpp"
+#include "application_export.hpp"
 
 namespace application::services
 {
 
-class AuthenticationService : public IAuthenticationService
+class APPLICATION_LIBRARY AuthenticationService : public IAuthenticationService
 {
     Q_OBJECT
 

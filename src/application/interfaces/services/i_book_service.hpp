@@ -6,6 +6,7 @@
 #include "book.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -13,7 +14,7 @@ namespace application
 /**
  *  The BookService handles all the operations on books.
  */
-class IBookService : public QObject
+class APPLICATION_LIBRARY IBookService : public QObject
 {
     Q_OBJECT
 

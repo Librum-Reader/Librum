@@ -2,11 +2,13 @@
 #include <QDateTime>
 #include <QImage>
 #include <QString>
+#include "domain_export.hpp"
+
 
 namespace domain::value_objects
 {
 
-struct BookMetaData
+struct DOMAIN_LIBRARY BookMetaData
 {
     QString title;
     QString authors;

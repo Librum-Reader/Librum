@@ -8,11 +8,12 @@
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_model.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class SettingsController : public ISettingsController
+class ADAPTERS_LIBRARY SettingsController : public ISettingsController
 {
     Q_OBJECT
 

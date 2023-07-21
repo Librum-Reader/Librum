@@ -2,11 +2,12 @@
 #include <QObject>
 #include "i_user_storage_access.hpp"
 #include "i_user_storage_gateway.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::gateways
 {
 
-class UserStorageGateway : public application::IUserStorageGateway
+class ADAPTERS_LIBRARY UserStorageGateway : public application::IUserStorageGateway
 {
     Q_OBJECT
 

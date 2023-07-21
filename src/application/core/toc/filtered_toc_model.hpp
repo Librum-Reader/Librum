@@ -4,11 +4,12 @@
 #include <QString>
 #include "toc_item.hpp"
 #include "toc_model.hpp"
+#include "application_export.hpp"
 
 namespace application::core
 {
 
-class FilteredTOCModel : public QSortFilterProxyModel
+class APPLICATION_LIBRARY FilteredTOCModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString filterString READ getFilterString WRITE setFilterString

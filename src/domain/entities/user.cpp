@@ -190,7 +190,11 @@ int User::getTagIndex(const QUuid& uuid) const
     if(tag == nullptr)
         return -1;
 
-    std::vector<Tag>::const_iterator tagPosition(tag);
+    auto tagPosition = std::ranges::find_if(m_tags,
+                                            [&uuid](const Tag& tag)
+                                            {
+                                                return tag.getUuid() == uuid;
+                                            });
     size_t index = tagPosition - getTags().begin();
 
     return index;

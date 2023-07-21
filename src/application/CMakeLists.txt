@@ -1,6 +1,12 @@
 # Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+# Qt
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 # Setup
 set(application_SRC
@@ -59,16 +65,16 @@ set(application_SRC
 
 
 # Build mupdf
-add_custom_command(
-    OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
-    COMMENT "Building mupdf (This takes a while) ..."
-)
-
-add_custom_target(mupdf ALL
-   DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
-)
+# add_custom_command(
+#     OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
+#     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+#     COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
+#     COMMENT "Building mupdf (This takes a while) ..."
+# )
+#
+# add_custom_target(mupdf ALL
+#    DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
+# )
 
 
 
@@ -79,7 +85,9 @@ add_library(application
 )
 
 # Make sure to build mupdf before the application
-add_dependencies(application mupdf)
+# add_dependencies(application mupdf)
+
+target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
 target_include_directories(application
                 PUBLIC
@@ -108,7 +116,7 @@ target_link_libraries(application
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
+                    ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib
 )
 
 

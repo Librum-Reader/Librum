@@ -6,11 +6,12 @@
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_manager.hpp"
+#include "application_export.hpp"
 
 namespace application::services
 {
 
-class BookService : public IBookService
+class APPLICATION_LIBRARY BookService : public IBookService
 {
     Q_OBJECT
 

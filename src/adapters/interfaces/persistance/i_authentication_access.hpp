@@ -3,6 +3,7 @@
 #include <QString>
 #include "login_dto.hpp"
 #include "register_dto.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters
 {
@@ -10,7 +11,7 @@ namespace adapters
 /**
  * The BookStorageAccess class makes the API calls to the book storage server.
  */
-class IAuthenticationAccess : public QObject
+class ADAPTERS_LIBRARY IAuthenticationAccess : public QObject
 {
     Q_OBJECT
 

@@ -2,11 +2,12 @@
 #include <QImage>
 #include "document.hpp"
 #include "mupdf/classes.h"
+#include "application_export.hpp"
 
 namespace application::core
 {
 
-class Page
+class APPLICATION_LIBRARY Page
 {
 public:
     Page(const Document* document, int pageNumber);

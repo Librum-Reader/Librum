@@ -3,11 +3,12 @@
 #include <QString>
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class UserController : public IUserController
+class ADAPTERS_LIBRARY UserController : public IUserController
 {
     Q_OBJECT
 

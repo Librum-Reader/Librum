@@ -3,11 +3,12 @@
 #include <memory>
 #include "document_item.hpp"
 #include "page.hpp"
+#include "presentation_export.hpp"
 
 namespace cpp_elements
 {
 
-class PageItem : public QQuickItem
+class PRESENTATION_LIBRARY PageItem : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(

@@ -450,7 +450,11 @@ int BookService::getBookIndex(const QUuid& uuid) const
     if(book == nullptr)
         return -1;
 
-    std::vector<Book>::const_iterator bookPosition(book);
+    auto bookPosition = std::ranges::find_if(m_books,
+                                            [&uuid](const Book& rhs)
+                                            {
+                                                return rhs.getUuid() == uuid;
+                                            });
     size_t index = bookPosition - m_books.begin();
 
     return index;
