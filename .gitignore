@@ -12,6 +12,18 @@
 
 # Windows
 /.vs/
+/.qtc_clangd/
+/.cmake/
+CMakeFiles/
+/Testing/
+/.qtc/
+/.qt/
+
+# Cmake
+CMakeCache.txt
+qtcsettings.cmake
+cmake_install.cmake
+build.ninja
 
 # Qt-es
 object_script.*.Release
