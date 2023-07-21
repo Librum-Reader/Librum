@@ -65,16 +65,27 @@ set(application_SRC
 
 
 # Build mupdf
-# add_custom_command(
-#     OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
-#     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-#     COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
-#     COMMENT "Building mupdf (This takes a while) ..."
-# )
-#
-# add_custom_target(mupdf ALL
-#    DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
-# )
+if(UNIX)
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so")
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so" PARENT_SCOPE)
+    set(MUPDF_BUILD_COMMAND "./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01")
+elseif(WIN32)
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib")
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib" PARENT_SCOPE)
+    set(MUPDF_BUILD_COMMAND "python scripts/mupdfwrap.py --venv -b -j 0 m01")
+endif()
+
+
+add_custom_command(
+    OUTPUT ${MUPDF_OUTPUT}
+    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
+    COMMENT "Building mupdf (This takes a while) ..."
+)
+
+add_custom_target(mupdf ALL
+   DEPENDS ${MUPDF_OUTPUT}
+)
 
 
 
@@ -116,7 +127,7 @@ target_link_libraries(application
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib
+                    ${MUPDF_OUTPUT}
 )
 
 

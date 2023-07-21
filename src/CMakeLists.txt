@@ -58,7 +58,7 @@ target_link_libraries(appLibrum
         adapters
         application
         infrastructure
-        ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib
+        ${MUPDF_OUTPUT}
         Qt6::Quick
         Qt6::Widgets
         Qt6::QuickControls2

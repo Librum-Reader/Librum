@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.16)
 project(Librum VERSION 0.1 
                LANGUAGES CXX)
 
@@ -10,24 +10,25 @@ option(BUILD_TESTS ON)
 option(ENABLE_COVERAGE OFF)
 option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
-set(CMAKE_PREFIX_PATH "C:\\Qt\\6.5.1\\mingw_64")
 add_compile_options(-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Create a set of warnings
-# string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;"
-#                               "-Wunused;-Woverloaded-virtual;-Wpedantic;-Wmissing-include-dirs;"
-#                               "-Wnull-dereference;-Wdouble-promotion;-Wformat=2;-Wcast-qual;-Winit-self;"
-#                               "-Wswitch-enum;-Wunreachable-code;-Wredundant-decls;")
+if(NOT WIN32)
+    string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;"
+                                  "-Wunused;-Woverloaded-virtual;-Wpedantic;-Wmissing-include-dirs;"
+                                  "-Wnull-dereference;-Wdouble-promotion;-Wformat=2;-Wcast-qual;-Winit-self;"
+                                  "-Wswitch-enum;-Wunreachable-code;-Wredundant-decls;")
 
-# GCC specific warnings
-# if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # If compiler is GCC
-#     list(APPEND LIBRUM_WARNINGS "-Wduplicated-cond")
-#     list(APPEND LIBRUM_WARNINGS "-Wduplicated-branches")
-#     list(APPEND LIBRUM_WARNINGS "-Wunsafe-loop-optimizations")
-#     list(APPEND LIBRUM_WARNINGS "-Wlogical-op")
-#     list(APPEND LIBRUM_WARNINGS "-Wunsafe-loop-optimizations")
-# endif()
+    # GCC specific warnings
+    if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # If compiler is GCC
+        list(APPEND LIBRUM_WARNINGS "-Wduplicated-cond")
+        list(APPEND LIBRUM_WARNINGS "-Wduplicated-branches")
+        list(APPEND LIBRUM_WARNINGS "-Wunsafe-loop-optimizations")
+        list(APPEND LIBRUM_WARNINGS "-Wlogical-op")
+        list(APPEND LIBRUM_WARNINGS "-Wunsafe-loop-optimizations")
+    endif()
+endif()
 
 
 # Create variables for coverage compiler and linker flags
