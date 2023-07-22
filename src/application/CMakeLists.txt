@@ -64,6 +64,7 @@ set(application_SRC
 )
 
 
+
 # Build mupdf
 if(UNIX)
     set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so")
@@ -89,6 +90,8 @@ add_custom_target(mupdf ALL
    DEPENDS ${MUPDF_OUTPUT}
 )
 
+
+# Copy the mupdf dll into the binary folder for windows
 if(WIN32)
     set(MUPDF_DLL_DEST ${PROJECT_BINARY_DIR}/Debug)
 
@@ -104,7 +107,9 @@ if(WIN32)
 endif()
 
 
-# Build
+
+
+# Build application
 add_library(application
                 SHARED
                     ${application_SRC}
