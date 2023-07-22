@@ -70,8 +70,9 @@ if(UNIX)
     set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so" PARENT_SCOPE)
     set(MUPDF_BUILD_COMMAND "./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01")
 elseif(WIN32)
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib" PARENT_SCOPE)
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release/mupdfcpp64.lib")
+    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
     set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py --venv -b -j 0 m01)
 endif()
 
@@ -88,6 +89,19 @@ add_custom_target(mupdf ALL
    DEPENDS ${MUPDF_OUTPUT}
 )
 
+if(WIN32)
+    set(MUPDF_DLL_DEST ${PROJECT_BINARY_DIR}/Debug)
+
+    add_custom_command(
+      OUTPUT ${MUPDF_DLL_DEST}/mupdfcpp64.dll
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll
+              ${MUPDF_DLL_DEST}/mupdfcpp64.dll
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+
+    add_custom_target(mupdf_copy_target ALL DEPENDS ${MUPDF_DLL_DEST}/mupdfcpp64.dll)
+endif()
 
 
 # Build
