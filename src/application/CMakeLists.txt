@@ -90,20 +90,16 @@ add_custom_target(mupdf ALL
    DEPENDS ${MUPDF_OUTPUT}
 )
 
-
 # Copy the mupdf dll into the binary folder for windows
 if(WIN32)
-    set(MUPDF_DLL_DEST ${PROJECT_BINARY_DIR}/mupdfcpp64.dll)
-
     add_custom_command(
-      OUTPUT ${MUPDF_DLL_DEST}
+      OUTPUT ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
       COMMAND ${CMAKE_COMMAND} -E copy
               ${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll
-              ${MUPDF_DLL_DEST}
+              ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
       DEPENDS ${MUPDF_OUTPUT}
     )
-
-    add_custom_target(mupdf_copy_target ALL DEPENDS ${MUPDF_DLL_DEST})
+    add_custom_target(mupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/mupdfcpp64.dll)
 endif()
 
 
