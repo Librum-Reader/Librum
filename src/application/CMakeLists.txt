@@ -79,7 +79,7 @@ endif()
 add_custom_command(
     OUTPUT ${MUPDF_OUTPUT}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
+    COMMAND ${MUPDF_BUILD_COMMAND}
     COMMENT "Building mupdf (This takes a while) ..."
 )
 
