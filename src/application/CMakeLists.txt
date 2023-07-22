@@ -96,7 +96,7 @@ add_library(application
 )
 
 # Make sure to build mupdf before the application
-# add_dependencies(application mupdf)
+add_dependencies(application mupdf)
 
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
