@@ -128,7 +128,7 @@ Want a new feature? Feel free to leave a feature request ticket!
 
 <br><br>
 
-# Getting started
+# Build Guide
 
 Here's how to get Librum up and running in your environment.
 <br>
