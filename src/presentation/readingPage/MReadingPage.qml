@@ -371,7 +371,7 @@ Page
         
         function goToEnd()
         {
-            documentView.setPage(documentItem.pageCount)
+            documentView.setPage(documentItem.pageCount);
         }
         
         function saveCurrentPage()

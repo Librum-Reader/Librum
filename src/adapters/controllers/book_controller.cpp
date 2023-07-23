@@ -79,7 +79,8 @@ void BookController::syncWithServer()
 
 int BookController::addBook(const QString& path)
 {
-    auto result = m_bookService->addBook(QUrl(path).path());
+    auto localPath = QUrl(path).toLocalFile();
+    auto result = m_bookService->addBook(localPath);
     return static_cast<int>(result);
 }
 
@@ -171,7 +172,8 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
 int BookController::changeBookCover(const QString& uuid, const QString& path)
 {
-    auto result = m_bookService->changeBookCover(QUuid(uuid), path);
+    auto result = m_bookService->changeBookCover(QUuid(uuid),
+                                                 QUrl(path).toLocalFile());
     return static_cast<int>(result);
 }
 
@@ -249,7 +251,8 @@ data_models::LibraryProxyModel* BookController::getLibraryModel()
 
 int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
 {
-    auto result = m_bookService->saveBookToFile(QUuid(uuid), path);
+    auto result = m_bookService->saveBookToFile(QUuid(uuid),
+                                                path.toLocalFile());
 
     return static_cast<int>(result);
 }
@@ -281,6 +284,8 @@ QUuid BookController::getTagUuidByName(const Book& book, const QString& name)
 
 void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
 {
+    auto pathWithScheme = QUrl::fromLocalFile(book.getCoverPath()).toString();
+
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
     bookDto.title = book.getTitle();
     bookDto.authors = book.getAuthors();
@@ -294,7 +299,7 @@ void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
     bookDto.bookReadingProgress = book.getBookReadingProgress();
-    bookDto.coverPath = book.getCoverPath();
+    bookDto.coverPath = pathWithScheme;
     bookDto.downloaded = book.isDownloaded();
 
     bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(

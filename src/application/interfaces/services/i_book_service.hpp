@@ -1,6 +1,5 @@
 #pragma once
 #include <QObject>
-#include <QUrl>
 #include <QUuid>
 #include <vector>
 #include "book.hpp"
@@ -46,7 +45,7 @@ public:
                                                 const QString& newName) = 0;
 
     virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                               const QUrl& path) = 0;
+                                               const QString& path) = 0;
 
 public slots:
     virtual bool refreshLastOpenedDateOfBook(const QUuid& uuid) = 0;

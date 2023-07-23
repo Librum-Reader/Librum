@@ -60,7 +60,7 @@ void BookStorageManager::saveDownloadedBookMediaChunkToFile(
 {
     auto destDir = m_downloadedBooksTracker->getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
-    auto destination = QUrl(destDir.filePath(fileName)).path();
+    auto destination = destDir.filePath(fileName);
 
     static QMap<QString, QSharedPointer<QFile>> filesMap;
     if(isLastChunk)
@@ -93,9 +93,7 @@ void BookStorageManager::saveDownloadedBookMediaChunkToFile(
 void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
                                                    const QUuid& uuid)
 {
-    auto destDir = m_downloadedBooksTracker->getLibraryDir();
-    QString fileName = getBookCoverPath(uuid);
-    auto destination = QUrl(destDir.filePath(fileName)).path();
+    QString destination = getBookCoverPath(uuid);
 
     QFile file(destination);
     if(!file.open(QIODevice::WriteOnly))

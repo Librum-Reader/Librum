@@ -29,7 +29,7 @@ public:
     BookOperationStatus changeBookCover(const QUuid& uuid,
                                         const QString& filePath) override;
     BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                       const QUrl& path) override;
+                                       const QString& path) override;
 
     BookOperationStatus addTagToBook(const QUuid& uuid,
                                      const domain::entities::Tag& tag) override;
