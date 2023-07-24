@@ -281,6 +281,12 @@ bool LibraryProxyModel::filterAcceptsFormat(const QModelIndex& bookIndex) const
 {
     auto formatData = sourceModel()->data(bookIndex, LibraryModel::FormatRole);
     auto format = formatData.toString().toLower();
+    // Remove the version details from the format
+    int firstSpaceIndex = format.indexOf(' ');
+    if (firstSpaceIndex != -1)
+        format = format.left(firstSpaceIndex);
+    
+    
     if(m_filterRequest.format.isEmpty() && !m_filterRequest.onlyFiles &&
        !m_filterRequest.onlyBooks)
         return true;
