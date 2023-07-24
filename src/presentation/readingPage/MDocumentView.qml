@@ -146,7 +146,7 @@ Pane
     
     function changeZoomBy(factor)
     {
-        let newZoomFactor = pageView.zoomFactor * factor;
+        let newZoomFactor = root.document.zoom * factor;
         NavigationLogic.zoom(newZoomFactor);
     }
     

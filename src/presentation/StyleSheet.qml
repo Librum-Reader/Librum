@@ -74,7 +74,6 @@ Item
     // Other
     property color colorDropArea
     property color colorPopupDim
-    property color colorRecordActiveGlow
     property color colorBookCoverDim
     property color colorDefaultProfilePicture
     property color colorTextSelection
@@ -147,7 +146,7 @@ Item
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
-            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#E8B9BA" }
+            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#E59395" }
             PropertyChanges { target: styleSheet; colorBookBorder: "#E0E0DE" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#DCDCE4" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#C0C0CF" }
@@ -157,7 +156,6 @@ Item
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#F6F6F9" }
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa32324D" }
-            PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaA92224" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#32324D" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
             PropertyChanges { target: styleSheet; colorTextSelection: "#21BDAC" }
@@ -223,7 +221,7 @@ Item
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#4B7947" }
-            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#45302E" }
+            PropertyChanges { target: styleSheet; colorRecordActiveBorder: "#973B3E" }
             PropertyChanges { target: styleSheet; colorBookBorder: "#3C3C40" }
             PropertyChanges { target: styleSheet; colorButtonBorder: "#55555A" }
             PropertyChanges { target: styleSheet; colorCheckboxBorder: "#6C6C73" }
@@ -233,7 +231,6 @@ Item
             // Other
             PropertyChanges { target: styleSheet; colorDropArea: "#313131" }
             PropertyChanges { target: styleSheet; colorPopupDim: "#aa3F3F52" }
-            PropertyChanges { target: styleSheet; colorRecordActiveGlow: "#aaC0452C" }
             PropertyChanges { target: styleSheet; colorBookCoverDim: "#0C0C0F" }
             PropertyChanges { target: styleSheet; colorDefaultProfilePicture: "#946BDE" }
             PropertyChanges { target: styleSheet; colorTextSelection: "#01584E" }

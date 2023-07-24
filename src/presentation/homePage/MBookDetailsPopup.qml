@@ -641,7 +641,8 @@ Popup
         
         function loadData()
         {
-            bookCover.source = Qt.binding( function () { return Globals.selectedBook.coverPath })
+            if(Globals.selectedBook.coverPath !== "")
+                bookCover.source = Qt.binding( function () { return Globals.selectedBook.coverPath })
             
             if(Globals.selectedBook.language !== "")
                 languageComboBox.setDefaultItem(Globals.selectedBook.language);
