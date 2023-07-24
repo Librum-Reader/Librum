@@ -71,7 +71,6 @@ add_custom_target(mupdf ALL
 )
 
 
-
 # Build
 add_library(application
                 SHARED
@@ -92,6 +91,10 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
+)
+
+# Make sure to ignore warnings from mupdf by adding it as a system include directory
+target_include_directories(application SYSTEM PUBLIC
                     ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/c++/include
                     ${PROJECT_SOURCE_DIR}/libs/mupdf/include
 )
