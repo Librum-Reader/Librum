@@ -1,9 +1,6 @@
 #pragma once
-#include <QMimeType>
-#include <QSize>
 #include <memory>
-#include "cover_observer.hpp"
-#include "document.h"
+#include "document.hpp"
 #include "i_book_metadata_helper.hpp"
 
 namespace application::utility
@@ -11,38 +8,18 @@ namespace application::utility
 
 class BookMetadataHelper : public IBookMetadataHelper
 {
-    Q_OBJECT
-
 public:
-    std::optional<domain::value_objects::BookMetaData> getBookMetaData(
-        const QString& filePath) override;
-
-private slots:
-    void proccessCoverPixmap(int page, int flag);
-    void loadCover() const override;
+    bool setup(const QString& filePath) override;
+    domain::value_objects::BookMetaData getBookMetaData() override;
+    QImage getBookCover() override;
 
 private:
-    bool setupDocument(const QString& filePath);
-    void setupDocumentObserver();
+    QString getTitleFromPath();
+    QString getDocumentSize();
+    double roundToPrecisionOf2(double raw);
 
-    QString getTitle(const QString& filePath) const;
-    QString getAuthors() const;
-    QString getCreator() const;
-    QString getCreationDate() const;
-    QString getFormat() const;
-    QString getDocumentSize() const;
-    QString getPagesSize() const;
-    int getPageCount() const;
-
-    QSize getCoverSize() const;
-    QString getSystemRelativePath(const QString& qPath) const;
-    QString getTitleFromBookPath(const QString& path) const;
-    QMimeType getMimeType(const QString& filePath);
-    QString getFileTypeFromPath(const QString& mimeString) const;
-    QString removeSuffixFromMimeString(const QString& mimeString) const;
-
-    std::unique_ptr<Okular::Document> m_document;
-    std::unique_ptr<CoverObserver> m_observer;
+    std::unique_ptr<core::Document> m_document;
+    QString m_filePath;
 };
 
 }  // namespace application::utility

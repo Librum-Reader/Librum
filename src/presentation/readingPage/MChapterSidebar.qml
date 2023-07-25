@@ -1,20 +1,19 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import Librum.elements 1.0
-import Librum.models 1.0
-import Librum.style 1.0
-import Librum.icons 1.0
-import Qt.labs.qmlmodels 1.0
-import QtQuick.Shapes 1.0
-import QtQuick.TreeView 2.15 as Chapters
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import Librum.elements
+import Librum.models
+import Librum.style
+import Librum.icons
+import Qt.labs.qmlmodels
+import QtQuick.Shapes
 
 
 Item
 {
     id: root
-    property var chapterModel
-    signal switchPage(int pageNumber)
+    signal switchPage(int pageNumber, real yOffset)
+    property alias model: treeView.model
     
     implicitWidth: 300
     implicitHeight: 600
@@ -113,51 +112,39 @@ Item
                     }
                     
                     
-                    Chapters.TreeView
+                    TreeView
                     {
                         id: treeView
+                        property int indent: 18
+                        
                         anchors.fill: parent
                         anchors.margins: 1
                         anchors.rightMargin: scrollBar.isEnabled ? 18 : 1
-                        model: root.chapterModel
                         clip: true
                         focus: true
-                        navigationMode: Chapters.TreeView.List
-                        
-                        styleHints.indent: 18
-                        styleHints.columnPadding: 20
-                        styleHints.foregroundOdd: "black"
-                        styleHints.backgroundOdd: "transparent"
-                        styleHints.foregroundEven: "black"
-                        styleHints.backgroundEven: "transparent"
-                        styleHints.foregroundCurrent: navigationMode === treeView.List ? "white" : "black"
-                        styleHints.backgroundCurrent: navigationMode === treeView.List ? "#005fe5" : "transparent"
-                        styleHints.foregroundHovered: "transparent"
-                        styleHints.backgroundHovered: "transparent"
-                        styleHints.overlay: navigationMode === treeView.Table ? Qt.rgba(0, 0, 0, 0.5) : "transparent"
-                        styleHints.overlayHovered: "transparent"
-                        styleHints.indicator: "black"
-                        styleHints.indicatorHovered: "transparent"
                         
                         delegate: Rectangle
                         {
                             id: treeNode
-                            property var view: Chapters.TreeView.view
-                            property bool hasChildren: Chapters.TreeView.hasChildren
-                            property bool isExpanded: Chapters.TreeView.isExpanded
-                            property int depth: Chapters.TreeView.depth
+                            required property string title
+                            required property int pageNumber
+                            required property TreeView treeView
+                            required property bool expanded
+                            required property int hasChildren
+                            required property int depth
                             
                             implicitWidth: treeView.width - 2  // L/R margins
                             width: implicitWidth
-                            implicitHeight: Math.max(treeNodeLabel.height)
+                            implicitHeight: treeNodeLabel.height
                             color: "transparent"
                             
-                            
+
                             RowLayout
                             {
                                 id: nodeLayout
                                 anchors.left: parent.left
                                 anchors.right: parent.right
+                                anchors.verticalCenter: parent.verticalCenter
                                 spacing: 0
                                 
                                 
@@ -165,14 +152,14 @@ Item
                                 {
                                     id: indicator
                                     Layout.preferredWidth: implicitWidth
-                                    Layout.leftMargin: depth * treeView.styleHints.indent
+                                    Layout.leftMargin: treeNode.depth * treeView.indent
                                     Layout.alignment: Qt.AlignVCenter
-                                    visible: hasChildren
+                                    visible: treeNode.hasChildren
                                     opacity: pageSwitchTrigger.pressed || indicatorArea.pressed ? 0.7 : 1
                                     source: Icons.arrowheadNextIcon
                                     sourceSize.width: 20
                                     fillMode: Image.PreserveAspectFit
-                                    rotation: isExpanded ? 90 : 0
+                                    rotation: treeNode.expanded ? 90 : 0
                                     
                                     MouseArea
                                     {
@@ -188,23 +175,24 @@ Item
                                 {
                                     id: treeNodeLabel
                                     Layout.fillWidth: true
-                                    Layout.leftMargin: hasChildren 
+                                    Layout.leftMargin: treeNode.hasChildren 
                                                        ? indicator.width * 0.1 
-                                                       : indicator.width*1.1 + depth * treeView.styleHints.indent
+                                                       : indicator.width * 1.1 + depth * treeView.indent
                                     Layout.alignment: Qt.AlignVCenter
                                     clip: true
                                     color: Style.colorText
                                     opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                     font.pixelSize: 14
                                     elide: Text.ElideRight
-                                    text: model.display
+                                    text: treeNode.title
                                     
                                     MouseArea
                                     {
                                         id: pageSwitchTrigger
                                         anchors.fill: parent
                                         
-                                        onClicked: root.switchPage(model.page)
+                                        // NaN check: x !== x
+                                        onClicked: root.switchPage(model.pageNumber, model.yOffset !== model.yOffset ? 1 : model.yOffset)
                                     }
                                 }
                                 
@@ -217,17 +205,17 @@ Item
                                     color: Style.colorText
                                     opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                     font.pixelSize: 14
-                                    text: model.page
+                                    text: treeNode.pageNumber + 1  // Convert from 0-indexed to normal numbers
                                 }
                             }
                         }
                         
                     }
-                
+                    
                     
                     Component.onCompleted:
                     {
-                        // contentItem is the ScrollView's underlying Flickable
+                        // contentItem is the TreeView's underlying Flickable
                         contentItem.flickDeceleration = 10000;
                         contentItem.maximumFlickVelocity = 2000;
                         contentItem.boundsBehavior = Flickable.StopAtBounds
@@ -236,10 +224,5 @@ Item
                 }
             }
         }
-    }
-    
-    function giveFocus()
-    {
-        inputField.forceActiveFocus();
     }
 }

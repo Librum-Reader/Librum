@@ -1,10 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
-import Librum.elements 1.0
-import Librum.style 1.0
-import Librum.globals 1.0
-import Librum.controllers 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Window
+import Librum.elements
+import Librum.style
+import Librum.globals
+import Librum.controllers
 import "DocumentNavigation.js" as NavigationLogic
 
 /*
@@ -13,14 +13,19 @@ import "DocumentNavigation.js" as NavigationLogic
 Pane
 {
     id: root
-    property DocumentItem document
-    readonly property alias pagepageView: pageView
+    property var document
     signal clicked
     signal zoomFactorChanged(real factor)
     
     padding: 0
     background: Rectangle { color: "transparent" }
     
+    Component.onCompleted: 
+    {
+        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+    }
+    
+    Keys.onTabPressed: (event) => { event.accepted = true; } // Disable pressing tab to focus other elements
     
     MouseArea
     {
@@ -42,49 +47,37 @@ Pane
         ListView
         {
             id: pageView
-            readonly property real defaultPageHeight: 1310
-            property real zoomFactor: SettingsController.appearanceSettings.DefaultZoom / 100
             readonly property int scrollSpeed: 5500
-            property int pageSpacing: pageView.getPageSpacing(zoomFactor)
+            property int pageSpacing: pageView.getPageSpacing(root.document.zoom)
             
             height: parent.height
-            width: currentItem.width <= root.width ? currentItem.width : root.width
-            contentWidth: currentItem.width
+            width: if(currentItem) currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width
+            contentWidth: currentItem.implicitWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             flickDeceleration: 100000
             interactive: true
             clip: true
-            cacheBuffer: 20000
+            cacheBuffer: 1000
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
             spacing: pageSpacing
-            delegate: MPageView
+            delegate: PageItem
             {
-                height: Math.round(pageView.defaultPageHeight * pageView.zoomFactor)
-                width: adaptedWidth
-                
-                document: root.document
                 pageNumber: modelData
+                document: documentItem
+                height: implicitHeight
+                width: implicitWidth
+                colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
+                anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
             }
             
             
             // Set the book's current page once the model is loaded
-            onModelChanged: root.setPage(Globals.selectedBook.currentPage - 1)
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
-            onZoomFactorChanged: root.zoomFactorChanged(pageView.zoomFactor)
-            
-            // Make sure to send the 'zoomFactorChanged' signal after the page was loaded, 
-            // since the zoom factor can change depending on the setting
-            Component.onCompleted: zoomEmitter.start()
-            Timer
-            {
-                id: zoomEmitter
-                interval: 1
-                onTriggered: root.zoomFactorChanged(pageView.zoomFactor)
-            }
+            Component.onCompleted: root.setPage(Globals.selectedBook.currentPage - 1);
             
             
             MouseArea
@@ -96,6 +89,13 @@ Pane
                 {
                     NavigationLogic.handleWheel(wheel);
                     wheel.accepted = true;
+                }
+                
+                // Take over focus when clicked
+                onClicked:
+                {
+                    root.forceActiveFocus();
+                    mouse.accepted = false;
                 }
             }
             
@@ -146,7 +146,7 @@ Pane
     
     function changeZoomBy(factor)
     {
-        let newZoomFactor = pageView.zoomFactor * factor;
+        let newZoomFactor = root.document.zoom * factor;
         NavigationLogic.zoom(newZoomFactor);
     }
     
@@ -171,8 +171,11 @@ Pane
         NavigationLogic.setPage(root.document.currentPage - 1);
     }
     
-    function setPage(pageNumber)
+    function setPage(pageNumber, yOffset = 0)
     {
         NavigationLogic.setPage(pageNumber);
+        
+        let space = 10;
+        pageView.contentY += yOffset * root.document.zoom - space;
     }
 }

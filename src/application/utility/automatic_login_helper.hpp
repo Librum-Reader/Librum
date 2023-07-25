@@ -68,10 +68,7 @@ std::optional<QJsonObject> getAutomaticLoginFileData()
     QJsonParseError parseError;
     auto jsonDoc = QJsonDocument::fromJson(jsonData, &parseError);
     if(parseError.error != QJsonParseError::NoError)
-    {
-        qWarning() << QString("Error parsing automatic login file");
         return std::nullopt;
-    }
 
     return jsonDoc.object();
 }

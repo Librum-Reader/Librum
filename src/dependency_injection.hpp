@@ -15,6 +15,7 @@
 #include "free_books_service.hpp"
 #include "free_books_storage_access.hpp"
 #include "free_books_storage_gateway.hpp"
+#include "i_book_metadata_helper.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
 #include "user_controller.hpp"

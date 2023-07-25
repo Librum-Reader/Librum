@@ -1,11 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import CustomComponents 1.0
-import Librum.elements 1.0
-import QtGraphicalEffects 1.15
-import Librum.style 1.0
-import Librum.icons 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import CustomComponents
+import Librum.elements
+import Librum.style
+import Librum.icons
 
 
 Item
@@ -16,23 +15,6 @@ Item
     property string originalSequence: ""
     property alias text: recordLabel.text
     
-    
-    // Creates the glowing effect around the button
-    Glow
-    {
-        id: backgroundGlow
-        visible: root.recording
-        width: button.width
-        height: button.height
-        x: button.x
-        y: button.y
-        spread: 0.05
-        radius: 12
-        samples: 24
-        transparentBorder: true
-        color: Style.colorRecordActiveGlow
-        source: button
-    }
     
     ColumnLayout
     {
@@ -58,6 +40,7 @@ Item
             radius: 4
             color: Style.colorControlBackground
             border.color: root.recording ? Style.colorRecordActiveBorder : Style.colorButtonBorder
+            border.width: root.recording ? 2 : 1
             opacity: mouseArea.pressed ? 0.8 : 1
             
             onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()
@@ -121,30 +104,6 @@ Item
         }
     }
     
-    
-    SequentialAnimation
-    {
-        loops: Animation.Infinite
-        id: buttonPulsatingAnimation
-        
-        
-        PropertyAnimation
-        {
-            target: backgroundGlow
-            property: "radius"
-            duration: 600
-            to: 17
-        }
-        
-        PropertyAnimation
-        {
-            target: backgroundGlow
-            property: "radius"
-            duration: 600
-            to: 7
-        }
-    }
-    
     QtObject
     {
         id: internal
@@ -172,13 +131,11 @@ Item
     {
         keySequenceRecorder.forceActiveFocus();
         root.recording = true;
-        buttonPulsatingAnimation.start();
     }
     
     function stopRecording()
     {
         itemToRedirectFocusTo.forceActiveFocus();
         root.recording = false;
-        buttonPulsatingAnimation.stop();
     }
 }

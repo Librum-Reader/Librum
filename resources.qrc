@@ -201,5 +201,7 @@
         <file>resources/images/light_mode/utility/trash_icon.svg</file>
         <file>resources/images/dark_mode/utility/trash_red_icon.svg</file>
         <file>resources/images/light_mode/utility/trash_red_icon.svg</file>
+        <file>resources/images/light_mode/reading_options_popup/invert_color_icon.svg</file>
+        <file>resources/images/dark_mode/reading_options_popup/invert_color_icon.svg</file>
     </qresource>
 </RCC>

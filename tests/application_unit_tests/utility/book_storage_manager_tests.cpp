@@ -95,7 +95,7 @@ TEST_F(ABookStorageManager, SucceedsDeletingABook)
     Book book("some/path.pdf", BookMetaData {});
 
     BookForDeletion bookForDeletion {
-        .uuid = QUuid::createUuid().toString(),
+        .uuid = QUuid(QUuid::createUuid().toString()),
         .downloaded = true,
     };
 
@@ -113,7 +113,7 @@ TEST_F(ABookStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
     Book book("some/path.pdf", BookMetaData {});
 
     BookForDeletion bookForDeletion {
-        .uuid = QUuid::createUuid().toString(),
+        .uuid = QUuid(QUuid::createUuid().toString()),
         .downloaded = false,
     };
 

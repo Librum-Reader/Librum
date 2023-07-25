@@ -22,10 +22,6 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
     m_bookMetadataHelper(bookMetadataHelper),
     m_bookStorageManager(bookStorageManager)
 {
-    // Book cover generated
-    connect(m_bookMetadataHelper, &IBookMetadataHelper::bookCoverGenerated,
-            this, &BookService::processBookCover);
-
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
@@ -73,21 +69,35 @@ void BookService::downloadBooks()
 
 BookOperationStatus BookService::addBook(const QString& filePath)
 {
-    auto bookMetaData = m_bookMetadataHelper->getBookMetaData(filePath);
-    if(!bookMetaData)
+    auto success = m_bookMetadataHelper->setup(filePath);
+    if(!success)
     {
         qWarning() << QString("Could not open book at path: %1 ").arg(filePath);
         return BookOperationStatus::OpeningBookFailed;
     }
 
-    addBookToLibrary(Book(filePath, bookMetaData.value()));
+    auto bookMetaData = m_bookMetadataHelper->getBookMetaData();
+    Book book(filePath, bookMetaData);
 
-    // Load the cover after creating book to avoid adding to a non-existent book
-    m_bookMetadataHelper->loadCover();
+    auto cover = m_bookMetadataHelper->getBookCover();
+    cover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
+                         Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    auto coverPath =
+        m_bookStorageManager->saveBookCoverToFile(book.getUuid(), cover);
+    if(coverPath.isEmpty())
+    {
+        qWarning() << QString("Failed creating cover for book with uuid: %1.")
+                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
+        return BookOperationStatus::OperationFailed;
+    }
 
-    const Book& bookToStore = m_books.at(m_books.size() - 1);
-    m_bookStorageManager->addBook(bookToStore);
+    book.updateCoverLastModified();
+    book.setHasCover(true);
+    book.setCoverPath(coverPath);
 
+    addBookToLibrary(book);
+
+    m_bookStorageManager->addBook(book);
     return BookOperationStatus::Success;
 }
 
@@ -261,7 +271,7 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
         return false;
     }
 
-    QPixmap newCover(filePath);
+    QImage newCover(filePath);
     if(newCover.isNull())
     {
         qWarning() << QString(
@@ -276,7 +286,7 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
                                Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
-    if(!path.has_value())
+    if(path.isEmpty())
     {
         qWarning() << QString(
                           "Failed setting new cover for book with uuid: %1. "
@@ -288,7 +298,7 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
     book.setHasCover(true);
     book.updateCoverLastModified();
 
-    refreshUIWithNewCover(uuid, path.value());
+    refreshUIWithNewCover(uuid, path);
     return true;
 }
 
@@ -568,28 +578,6 @@ void BookService::clearUserData()
     emit bookClearingStarted();
     m_books.clear();
     emit bookClearingEnded();
-}
-
-void BookService::processBookCover(const QPixmap* pixmap)
-{
-    // The book to assing the last cover to is always the last added book
-    int index = m_books.size() - 1;
-    auto& book = m_books.at(index);
-
-    auto result =
-        m_bookStorageManager->saveBookCoverToFile(book.getUuid(), *pixmap);
-    if(!result.has_value())
-    {
-        qWarning() << QString("Failed creating cover for book with uuid: %1.")
-                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
-        return;
-    }
-
-    book.updateCoverLastModified();
-    book.setHasCover(true);
-    book.setCoverPath(result.value());
-
-    emit bookCoverGenerated(index);
 }
 
 void BookService::updateLibrary(std::vector<Book>& books)

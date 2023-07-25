@@ -185,7 +185,7 @@ TEST_F(AUserController, SucceedsAddingATag)
     auto result = userController->addTag(tagName);
 
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(expectedResult, QUuid(result));
 }
 
 TEST_F(AUserController, FailsAddingATagIfTagAlreadyExists)
@@ -203,7 +203,7 @@ TEST_F(AUserController, FailsAddingATagIfTagAlreadyExists)
     auto result = userController->addTag(tagName);
 
     // Assert
-    EXPECT_EQ(expectedResult, result);
+    EXPECT_EQ(expectedResult, QUuid(result));
 }
 
 TEST_F(AUserController, SucceedsDeletingATag)

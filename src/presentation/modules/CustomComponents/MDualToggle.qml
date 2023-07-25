@@ -1,7 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-import Librum.style 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Librum.style
 
 /**
  A rectangular component which switches between two states which are represented
@@ -51,6 +51,7 @@ Item
                 color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: 12
                 font.weight: root.leftSelected ? Font.Bold : Font.DemiBold
+                font.letterSpacing: root.leftSelected ? -0.4 : 0
                 background: Rectangle
                 {
                     id: leftLabelBackground
@@ -106,6 +107,7 @@ Item
                 color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: 12
                 font.weight: root.rightSelected ? Font.Bold : Font.DemiBold
+                font.letterSpacing: root.rightSelected ? -0.4 : 0
                 background: Rectangle
                 {
                     id: rightLabelBackground

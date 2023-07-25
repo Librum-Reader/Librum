@@ -1,12 +1,12 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15
-import CustomComponents 1.0
-import Librum.style 1.0
-import Librum.elements 1.0
-import Librum.controllers 1.0
-import Librum.globals 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window
+import CustomComponents
+import Librum.style
+import Librum.elements
+import Librum.controllers
+import Librum.globals
 import "readingToolbar"
 import "readingSearchbar"
 
@@ -87,18 +87,7 @@ Page
     DocumentItem
     {
         id: documentItem
-        
-        onUrlChanged: currentPage = 0
-        onOpenedChanged:
-        {
-            if(!opened)
-                return;
-            
-            toolbar.currentPageSelection.pageCount = pageCount;
-            toolbar.bookTitle = Globals.selectedBook.title;
-        }
-        
-        Component.onCompleted: documentItem.url = Globals.selectedBook.filePath;
+        filePath: Globals.selectedBook.filePath
     }
     
     /*
@@ -132,12 +121,13 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            currentPage: documentView.document.currentPage
+            currentPage: documentItem.currentPage
+            pageCount: documentItem.pageCount
+            document: documentItem
+            bookTitle: Globals.selectedBook.title
             
             onBackButtonClicked:
             {
-                // Save current page before leaving
-                internal.saveCurrentPage();
                 loadPage(homePage, sidebar.homeItem, false);
             }
             
@@ -168,8 +158,6 @@ Page
                 
                 bookmarksSidebar.open();
             }
-            
-            onZoomSelectionChanged: (factor) => documentView.zoom(factor / 100)
             
             onFullScreenButtonClicked:
             {
@@ -248,14 +236,14 @@ Page
                     id: chapterSidebar
                     property int lastWidth: 370
                     property bool active: false
-                    chapterModel: documentItem.tableOfContents
                     anchors.fill: parent
                     visible: false
+                    model: documentItem.tableOfContents
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
-                    onSwitchPage: (pageNumber) => documentView.setPage(pageNumber - 1)
-                     
+                    onSwitchPage: (pageNumber, yOffset) => documentView.setPage(pageNumber, yOffset)
+                    
                     
                     Rectangle
                     {
@@ -272,7 +260,6 @@ Page
                         chapterSidebar.active = true;
                         chapterSidebar.visible = true;
                         toolbar.chapterButton.active = true;
-                        chapterSidebar.giveFocus();
                     }
                     
                     function close()
@@ -338,10 +325,7 @@ Page
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    visible: documentItem.opened
                     document: documentItem
-                    
-                    onZoomFactorChanged: (factor) => toolbar.setZoomFactor(factor)
                 }
             }
         }
@@ -384,10 +368,10 @@ Page
         {
             documentView.setPage(0);
         }
-
+        
         function goToEnd()
         {
-            documentView.setPage(documentItem.pageCount)
+            documentView.setPage(documentItem.pageCount - 1);
         }
         
         function saveCurrentPage()

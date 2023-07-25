@@ -6,7 +6,8 @@ namespace domain::entities
 Tag::Tag(const QString& name, const QString& uuid) :
     m_name(name)
 {
-    capitalizeName(m_name);
+    if(!name.isEmpty())
+        capitalizeName(m_name);
 
     // Generate uuid if it's not provided, else assign
     if(uuid.isEmpty())

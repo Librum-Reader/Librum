@@ -10,8 +10,7 @@ set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CU
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Quick Widgets QuickControls2 REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Quick Widgets QuickControls2 REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
 
 
 
@@ -23,14 +22,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # Configure and add subdirectories
-set(OKULARCORE_INCLUDES
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/core
-    ${CMAKE_CURRENT_SOURCE_DIR}/application/core/gui
-    ${CMAKE_CURRENT_BINARY_DIR}/application/core
-    ${CMAKE_CURRENT_BINARY_DIR}/application/core/core
-)
-
 add_subdirectory(domain/)
 get_target_property(DOMAIN_INCLUDES domain INTERFACE_INCLUDE_DIRECTORIES)
 
@@ -67,10 +58,10 @@ target_link_libraries(appLibrum
         adapters
         application
         infrastructure
-        okularpart
-        Qt5::Quick
-        Qt5::Widgets
-        Qt5::QuickControls2
+        ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
+        Qt6::Quick
+        Qt6::Widgets
+        Qt6::QuickControls2
 )
 
 target_include_directories(appLibrum
@@ -78,7 +69,6 @@ target_include_directories(appLibrum
         ${ADAPTERS_INCLUDES}
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
-        ${OKULARCORE_INCLUDES}
 )
 
 target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")

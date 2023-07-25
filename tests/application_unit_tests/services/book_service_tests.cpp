@@ -26,9 +26,9 @@ namespace tests::application
 class BookMetaDataHelperMock : public IBookMetadataHelper
 {
 public:
-    MOCK_METHOD(std::optional<BookMetaData>, getBookMetaData, (const QString&),
-                (override));
-    MOCK_METHOD(void, loadCover, (), (const, override));
+    MOCK_METHOD(bool, setup, (const QString&), (override));
+    MOCK_METHOD(BookMetaData, getBookMetaData, (), (override));
+    MOCK_METHOD(QImage, getBookCover, (), (override));
 };
 
 class BookStorageManagerMock : public IBookStorageManager
@@ -45,8 +45,8 @@ public:
     MOCK_METHOD(void, updateBookRemotely, (const Book&), (override));
     MOCK_METHOD(void, updateBookCoverRemotely, (const QUuid&, bool),
                 (override));
-    MOCK_METHOD(std::optional<QString>, saveBookCoverToFile,
-                (const QUuid&, const QPixmap&), (override));
+    MOCK_METHOD(QString, saveBookCoverToFile, (const QUuid&, const QImage&),
+                (override));
     MOCK_METHOD(bool, deleteBookCoverLocally, (const QUuid&), (override));
     MOCK_METHOD(void, downloadBookCover, (const QUuid&), (override));
     MOCK_METHOD(std::vector<Book>, loadLocalBooks, (), (override));
@@ -60,11 +60,14 @@ struct ABookService : public ::testing::Test
 {
     void SetUp() override
     {
-        EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
-            .WillRepeatedly(Return(BookMetaData()));
-
         bookService = std::make_unique<BookService>(&bookMetaDataHelperMock,
                                                     &bookStorageManagerMock);
+
+        // Make sure that adding books succeeds by default
+        EXPECT_CALL(bookMetaDataHelperMock, setup(_))
+            .WillRepeatedly(Return(true));
+        EXPECT_CALL(bookStorageManagerMock, saveBookCoverToFile(_, _))
+            .WillRepeatedly(Return("/some/path"));
     }
 
     BookMetaDataHelperMock bookMetaDataHelperMock;
@@ -77,10 +80,6 @@ TEST_F(ABookService, SucceedsAddingABook)
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
 
-
-    // Expect
-    EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
-
     // Act
     auto result = bookService->addBook("some/path.pdf");
 
@@ -88,16 +87,16 @@ TEST_F(ABookService, SucceedsAddingABook)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsAddingABookIfGettingBookMetaDataFails)
+TEST_F(ABookService, FailsAddingABookIfOpeningDocumentFails)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::OpeningBookFailed;
 
 
     // Expect
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, setup(_))
         .Times(1)
-        .WillOnce(Return(std::nullopt));
+        .WillOnce(Return(false));
 
     // Act
     auto result = bookService->addBook("some/path.pdf");
@@ -296,7 +295,7 @@ TEST_F(ABookService, SucceedsGettingABook)
 
 
     // Expect
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(bookMetaData));
 
@@ -321,7 +320,7 @@ TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
 
 
     // Act
-    auto* result = bookService->getBook(bookUuid);
+    auto* result = bookService->getBook(QUuid(bookUuid));
 
     // Assert
     EXPECT_EQ(expectedResult, result);
@@ -374,7 +373,7 @@ TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
 TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag firstTag("FirstTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -425,7 +424,7 @@ TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
 TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag someTag("SomeTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -478,7 +477,7 @@ TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
 TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
 {
     // Arrange
-    QUuid bookUuid = "non-existend-uuid";
+    QUuid bookUuid = QUuid("non-existend-uuid");
     Tag someTag("SomeTag");
 
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -508,7 +507,7 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
 
 
     // Expect
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(3)
         .WillOnce(Return(firstBookMetaData))
         .WillOnce(Return(secondBookMetaData))
@@ -545,7 +544,7 @@ TEST_F(ABookService, SucceedsGettingABookIndex)
 
 
     // Expect
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(2)
         .WillOnce(Return(firstBookMetaData))
         .WillOnce(Return(secondBookMetaData));
@@ -566,7 +565,7 @@ TEST_F(ABookService, SucceedsChangingABookCoverByDeletingIt)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(bookMetaData));
     bookService->addBook("some/path.pdf");
@@ -591,7 +590,7 @@ TEST_F(ABookService, FailsChangingABookCoverIfNewCoverDoesNotExist)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(bookMetaData));
     bookService->addBook("some/path.pdf");
@@ -635,7 +634,7 @@ TEST_F(ABookService, SucceedsDownloadingABook)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(bookMetaData));
     bookService->addBook("some/path.pdf");
@@ -733,7 +732,7 @@ TEST_F(ABookService, SucceedsMergingARemoteBookIntoALocalBook)
     };
 
     EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(1);
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(localBookMetaData));
 
@@ -809,7 +808,7 @@ TEST_F(ABookService, SucceedsAddingALocalBookToRemoteServer)
 
     // Expect two calls, one during test setup, and one while merging
     EXPECT_CALL(bookStorageManagerMock, addBook(_)).Times(2);  // Twice!
-    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData(_))
+    EXPECT_CALL(bookMetaDataHelperMock, getBookMetaData())
         .Times(1)
         .WillOnce(Return(localBookMetaData));
 

@@ -1,7 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import Librum.style 1.0
-import CustomComponents 1.0
+import QtQuick
+import QtQuick.Controls
+import Librum.style
+import CustomComponents
 
 /**
  A wrapper around MCheckBox to creat an extra container around it

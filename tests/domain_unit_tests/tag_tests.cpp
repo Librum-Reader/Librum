@@ -110,7 +110,7 @@ TEST(ATag, SucceedsSerializationToJson)
 
     // Assert
     EXPECT_EQ(tag.getName(), tagObject["name"].toString());
-    EXPECT_EQ(tag.getUuid(), tagObject["uuid"].toString());
+    EXPECT_EQ(tag.getUuid(), QUuid(tagObject["uuid"].toString()));
 }
 
 }  // namespace tests::domain

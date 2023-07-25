@@ -1,10 +1,10 @@
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
-import Librum.elements 1.0
-import Librum.icons 1.0
-import Librum.controllers 1.0
-import Librum.style 1.0
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
+import Librum.elements
+import Librum.icons
+import Librum.controllers
+import Librum.style
 
 
 Popup

@@ -1,11 +1,11 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15
-import CustomComponents 1.0
-import Librum.style 1.0
-import Librum.icons 1.0
-import Librum.controllers 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window
+import CustomComponents
+import Librum.style
+import Librum.icons
+import Librum.controllers
 
 
 Pane
@@ -15,12 +15,14 @@ Pane
     property string bookTitle: "Unknown name"
     property int currentPage: 0
     property int lastPage: 0
+    property int pageCount: 0
     property alias chapterButton: chapterButton
     property alias bookmarksButton: bookmarksButton
     property alias searchButton: searchButton
     property alias currentPageSelection: currentPageSelection
     property alias fullScreenButton: fullScreenButton
     property alias optionsButton: optionsButton
+    property var document
     signal backButtonClicked
     signal chapterButtonClicked
     signal bookMarkButtonClicked
@@ -28,7 +30,6 @@ Pane
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
     signal optionsPopupVisibileChanged
-    signal zoomSelectionChanged(int factor)
     
     implicitHeight: 48
     padding: 8
@@ -121,8 +122,6 @@ Pane
         Item
         {
             id: currentPageSelection
-            property int pageCount: 0
-            
             Layout.preferredWidth: inputBox.width + pageInputLayout.spacing + totalPageText.implicitWidth
             Layout.preferredHeight: 34
             
@@ -181,7 +180,7 @@ Pane
                             if(root.currentPage == newPage - 1)
                                 return;
                             
-                            if(newPage < 1 || newPage > currentPageSelection.pageCount)
+                            if(newPage < 1 || newPage > root.pageCount)
                             {
                                 inputField.text = Qt.binding(() => root.currentPage + 1);
                                 return;
@@ -198,7 +197,7 @@ Pane
                     id: totalPageText
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    text: "of " + (currentPageSelection.pageCount).toString()
+                    text: "of " + root.pageCount.toString()
                     font.pointSize: 12
                     font.weight: Font.Normal
                     color: Style.colorText
@@ -210,12 +209,13 @@ Pane
         {
             id: bookTitle
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
+            Component.onCompleted: Layout.rightMargin = (Math.ceil(x + width/2) - Math.ceil(root.width / 2)) * 4
+            Layout.alignment: Qt.AlignVCenter 
             horizontalAlignment: Text.AlignHCenter
             text: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
-            font.pointSize: 12
+            font.pointSize: 13
             elide: Text.ElideRight
         }
         
@@ -246,10 +246,28 @@ Pane
                 ListElement { text: "175%" }
                 ListElement { text: "250%" }
                 ListElement { text: "300%" }
+                ListElement { text: "400%" }
+            }
+            
+            // Need to run a timer to create the binding, since the combobox does not set the text correctly
+            // when trying to just assign it during onCompleted
+            Component.onCompleted: zoomAssignment.start()
+            Timer
+            {
+                id: zoomAssignment
+                interval: 5
+                onTriggered: zoomComboBox.text = Qt.binding(function () { return Math.round(root.document.zoom * 100) + "%" })
             }
             
             // Remove % sign from text
-            onItemChanged: root.zoomSelectionChanged(zoomComboBox.text.substring(0, zoomComboBox.text.length - 1))
+            onItemChanged:
+            {
+                if(text === "")
+                    return;
+                
+                root.document.zoom = zoomComboBox.text.substring(0, zoomComboBox.text.length - 1) / 100;
+                zoomAssignment.start();  // Force rebinding
+            }
         }
         
         MButton
@@ -302,11 +320,5 @@ Pane
         y: optionsButton.height + 12
         
         onOpenedChanged: root.optionsPopupVisibileChanged()
-    }
-    
-    
-    function setZoomFactor(factor)
-    {
-        zoomComboBox.text = Math.round(factor * 100) + "%"
     }
 }

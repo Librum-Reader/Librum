@@ -1,5 +1,5 @@
 #pragma once
-#include <QPixmap>
+#include <QImage>
 #include <QTimer>
 #include <utility>
 #include "book.hpp"
@@ -52,7 +52,6 @@ public slots:
                                long bookStorageLimit) override;
 
 private slots:
-    void processBookCover(const QPixmap* pixmap);
     void updateLibrary(std::vector<domain::entities::Book>& books);
     void processDownloadedBook(const QUuid& uuid, const QString& filePath);
     void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);

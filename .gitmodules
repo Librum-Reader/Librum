@@ -7,3 +7,6 @@
 [submodule "libs/rapidfuzz-cpp"]
 	path = libs/rapidfuzz-cpp
 	url = https://github.com/maxbachmann/rapidfuzz-cpp.git
+[submodule "libs/mupdf"]
+	path = libs/mupdf
+	url = https://github.com/ArtifexSoftware/mupdf.git

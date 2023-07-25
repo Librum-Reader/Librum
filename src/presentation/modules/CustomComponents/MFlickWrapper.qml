@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick
 
 /**
  A component supposed to be wrapped around pages or popups to make

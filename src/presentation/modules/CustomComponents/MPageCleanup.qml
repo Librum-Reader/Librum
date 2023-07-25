@@ -1,4 +1,4 @@
-import QtQuick 2.15
+import QtQuick
 
 /*
   MPageCleanup is a component which allows to save pages via. a unified interface.

@@ -1,5 +1,5 @@
-import QtQuick 2.15
-import Librum.style 1.0
+import QtQuick
+import Librum.style
 
 Rectangle
 {

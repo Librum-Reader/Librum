@@ -81,7 +81,6 @@
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenuItem.qml</file>
         <file>modules/CustomComponents/rightClickMenu/MRightClickMenu.qml</file>
         <file>readingPage/MDocumentView.qml</file>
-        <file>readingPage/MPageView.qml</file>
         <file>readingPage/DocumentNavigation.js</file>
         <file>modules/CustomComponents/MOnOffToggle.qml</file>
         <file>homePage/MBookRightClickPopup.qml</file>

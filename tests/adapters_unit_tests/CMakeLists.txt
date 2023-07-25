@@ -5,9 +5,7 @@ set(CMAKE_AUTORCC ON)
 
 
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Network Core Test Quick REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Test Quick REQUIRED)
-
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Test Quick)
 
 
 # Build tests
@@ -39,10 +37,10 @@ target_link_libraries(adapters_unit_tests
                     adapters
                     application
                     domain
-                    Qt5::Core
-                    Qt5::Network
-                    Qt5::Quick
-                    Qt5::Test
+                    Qt6::Core
+                    Qt6::Network
+                    Qt6::Quick
+                    Qt6::Test
 )
 
 target_include_directories(adapters_unit_tests

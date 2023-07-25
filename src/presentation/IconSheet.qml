@@ -1,5 +1,5 @@
 pragma Singleton
-import QtQuick 2.15
+import QtQuick
 
 Item
 {
@@ -80,6 +80,7 @@ Item
     property string readingOptionsPopupSun
     property string readingOptionsPopupSync
     property string readingOptionsSettings
+    property string readingOptionsInvertColor
     
     // Setting
     property string settingsSidebarAbout
@@ -207,6 +208,7 @@ Item
             PropertyChanges { target: iconSheet; readingOptionsPopupSun: "/resources/images/light_mode/reading_options_popup/sun_icon.svg" }
             PropertyChanges { target: iconSheet; readingOptionsPopupSync: "/resources/images/light_mode/reading_options_popup/sync_icon.svg" }
             PropertyChanges { target: iconSheet; readingOptionsSettings: "/resources/images/light_mode/reading_options_popup/settings_icon.svg" }
+            PropertyChanges { target: iconSheet; readingOptionsInvertColor: "/resources/images/light_mode/reading_options_popup/invert_color_icon.svg" }
             
             // Setting
             PropertyChanges { target: iconSheet; settingsSidebarAbout: "/resources/images/light_mode/settings_sidebar/about_icon.svg" }
@@ -330,6 +332,7 @@ Item
             PropertyChanges { target: iconSheet; readingOptionsPopupSun: "/resources/images/dark_mode/reading_options_popup/sun_icon.svg" }
             PropertyChanges { target: iconSheet; readingOptionsPopupSync: "/resources/images/dark_mode/reading_options_popup/sync_icon.svg" }
             PropertyChanges { target: iconSheet; readingOptionsSettings: "/resources/images/dark_mode/reading_options_popup/settings_icon.svg" }
+            PropertyChanges { target: iconSheet; readingOptionsInvertColor: "/resources/images/dark_mode/reading_options_popup/invert_color_icon.svg" }
             
             // Setting
             PropertyChanges { target: iconSheet; settingsSidebarAbout: "/resources/images/dark_mode/settings_sidebar/about_icon.svg" }

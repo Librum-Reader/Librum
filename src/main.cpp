@@ -2,16 +2,15 @@
 #include <qfontdatabase.h>
 #include <qqml.h>
 #include <QDateTime>
+#include <QGuiApplication>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
 #include <QString>
 #include <QTranslator>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QInputDialog>
-#include <QtWidgets/QMessageBox>
 #include <memory>
+#include <QApplication>
 #include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -50,13 +49,11 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
-    app.addLibraryPath(QCoreApplication::applicationDirPath() + "/bin/plugins/");
 
     qInstallMessageHandler(logging::messageHandler);
 
     addTranslations();
     loadFonts();
-
 
     // Register types
     qmlRegisterSingletonType(QUrl("qrc:/StyleSheet.qml"), "Librum.style", 1, 0, "Style");
@@ -199,7 +196,7 @@ void addTranslations()
 void loadFonts()
 {
     QString fontsPath =
-        QGuiApplication::applicationDirPath() + "/resources/fonts/";
+        QGuiApplication::applicationDirPath() + "/resources/fonts";
     QDir fontsDir(fontsPath);
     if(!fontsDir.isEmpty() && fontsDir.exists())
     {
@@ -220,5 +217,6 @@ void loadFonts()
 
 
     QFont defaultFont("SF Pro Display");
+    defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
     QGuiApplication::setFont(defaultFont);
 }

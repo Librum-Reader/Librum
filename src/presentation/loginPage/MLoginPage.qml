@@ -1,11 +1,11 @@
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15
-import CustomComponents 1.0
-import Librum.style 1.0
-import Librum.icons 1.0
-import Librum.controllers 1.0
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Window
+import CustomComponents
+import Librum.style
+import Librum.icons
+import Librum.controllers
 
 
 MFlickWrapper
@@ -15,11 +15,24 @@ MFlickWrapper
                        layout.implicitHeight : Window.height
     
     // Passing the focus to emailInput on Component.onCompleted() causes it
-    // to pass controll back to root for some reason, this fixes the focus problem
+    // to pass controll back to root for some reason, this fixes the focus problem.
     onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
     
-    // Focus the emailInput when page has loaded
-    Component.onCompleted: emailInput.giveFocus()
+    Component.onCompleted: 
+    {
+        // Focus the emailInput when page has loaded.
+        emailInput.giveFocus();
+        
+        // For some reason this prevents a SEGV. Directly calling the auto login
+        // directly causes the application to crash on startup.
+        autoLoginTimer.start();
+    }
+    Timer
+    {
+        id: autoLoginTimer
+        interval: 0
+        onTriggered: AuthController.tryAutomaticLogin();
+    }
     
     Shortcut
     {
@@ -367,7 +380,5 @@ MFlickWrapper
             generalErrorText.visible = false;
             generalErrorText.text = "";
         }
-        
-        Component.onCompleted: AuthController.tryAutomaticLogin();
     }
 }

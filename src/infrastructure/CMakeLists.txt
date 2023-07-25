@@ -1,6 +1,5 @@
 # Dependencies
-find_package(QT NAMES Qt5 COMPONENTS Core Network Gui REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Core Network Gui REQUIRED)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Gui)
 
 
 # Build
@@ -34,9 +33,9 @@ target_compile_definitions(infrastructure
 target_link_libraries(infrastructure
                 PRIVATE
                     adapters
-                    Qt5::Core
-                    Qt5::Gui
-                    Qt5::Network
+                    Qt6::Core
+                    Qt6::Gui
+                    Qt6::Network
 )
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
