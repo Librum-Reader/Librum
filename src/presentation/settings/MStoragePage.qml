@@ -22,6 +22,8 @@ MFlickWrapper
         bottomPadding: 22
         background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
         
+        Component.onCompleted: { UserController.syncWithServer() }
+        
         
         ColumnLayout
         {
@@ -294,7 +296,9 @@ MFlickWrapper
                                     Rectangle
                                     {
                                         id: progressBarFilling
-                                        width: parent.width * (UserController.usedBookStorage / UserController.bookStorageLimit)
+                                        property int progress: parent.width * (UserController.usedBookStorage / UserController.bookStorageLimit)
+                                        
+                                        width: progress <= parent.width ? progress : parent.width
                                         height: parent.height
                                         color: Style.colorBasePurple
                                         radius: parent.radius

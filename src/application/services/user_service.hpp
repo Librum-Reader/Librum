@@ -1,14 +1,17 @@
 #pragma once
+#include <QtCore/QtGlobal>
 #include <QObject>
 #include <QTimer>
 #include "i_user_service.hpp"
 #include "i_user_storage_gateway.hpp"
 #include "user.hpp"
+#include "domain_export.hpp"
+#include "application_export.hpp"
 
 namespace application::services
 {
 
-class UserService : public IUserService
+class APPLICATION_LIBRARY UserService : public IUserService
 {
     Q_OBJECT
 

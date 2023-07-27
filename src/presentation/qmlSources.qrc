@@ -93,5 +93,6 @@
         <file>homePage/manageTagsPopup/MTagItem.qml</file>
         <file>modules/CustomComponents/MProgressBar.qml</file>
         <file>modules/CustomComponents/MWarningPopup.qml</file>
+        <file>modules/CustomComponents/MToolTip.qml</file>
     </qresource>
 </RCC>

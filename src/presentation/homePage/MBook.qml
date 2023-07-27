@@ -229,6 +229,26 @@ Item
                         }
                     }
                     
+                    Image
+                    {
+                        id: existsOnlyOnClientIndicator
+                        Layout.leftMargin: 8
+                        Layout.topMargin: 4
+                        Layout.alignment: Qt.AlignVCenter
+                        visible: model.existsOnlyOnClient
+                        sourceSize.width: 18
+                        fillMode: Image.PreserveAspectFit
+                        source: Icons.cloudOff
+                        
+                        MouseArea
+                        {
+                            id: existsOnlyOnClientIndicatorArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            onContainsMouseChanged: containsMouse ? toolTip.open() : toolTip.close()
+                        }
+                    }
+                    
                     Item { Layout.fillWidth: true }
                     
                     Image
@@ -284,6 +304,12 @@ Item
         property int lowerBookPartPadding: 14
     }
     
+    MToolTip
+    {
+        id: toolTip
+        focusedItem: existsOnlyOnClientIndicator
+        content: "Your book has not been uploaded to the cloud.\nEither you are offline, or your storage is full."
+    }
     
     function giveFocus()
     {

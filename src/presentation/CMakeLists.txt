@@ -1,6 +1,8 @@
 #Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 
 # Build
 add_library(presentation
@@ -17,6 +19,7 @@ add_library(presentation
                     modules/CppElements/page_item.hpp
 )
 
+target_compile_definitions(presentation PRIVATE PRESENTATION_LIBRARY)
 
 target_compile_definitions(presentation
                 PRIVATE
@@ -37,5 +40,5 @@ target_include_directories(presentation
                     ${APPLICATION_INCLUDES}
 )
 
-target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-Wextra;-O0;-g>")
+target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-O0;-g>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")

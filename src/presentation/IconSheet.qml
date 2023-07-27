@@ -124,6 +124,7 @@ Item
     property string trash
     property string trashHighlighted
     property string trashRed
+    property string cloudOff
     
     
     
@@ -252,6 +253,7 @@ Item
             PropertyChanges { target: iconSheet; trash: "/resources/images/light_mode/utility/trash_icon.svg" }
             PropertyChanges { target: iconSheet; trashHighlighted: "/resources/images/light_mode/utility/trash_highlighted_icon.svg" }
             PropertyChanges { target: iconSheet; trashRed: "/resources/images/light_mode/utility/trash_red_icon.svg" }
+            PropertyChanges { target: iconSheet; cloudOff: "/resources/images/light_mode/utility/cloud_off_icon.svg" }
         },
         State
         {
@@ -375,6 +377,7 @@ Item
             PropertyChanges { target: iconSheet; activeMicrophone: "/resources/images/dark_mode/utility/active_microphone_icon.svg" }
             PropertyChanges { target: iconSheet; trash: "/resources/images/dark_mode/utility/trash_icon.svg" }
             PropertyChanges { target: iconSheet; trashRed: "/resources/images/dark_mode/utility/trash_red_icon.svg" }
+            PropertyChanges { target: iconSheet; cloudOff: "/resources/images/dark_mode/utility/cloud_off_icon.svg" }
         }
     ]
     

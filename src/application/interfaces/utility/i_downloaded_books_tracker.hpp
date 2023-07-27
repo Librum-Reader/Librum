@@ -5,6 +5,7 @@
 #include <optional>
 #include <vector>
 #include "book.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -17,7 +18,7 @@ namespace application
  *  internet connection. These local and tracked books, could then be synced
  *  with the server, when an internet connection is established.
  */
-class IDownloadedBooksTracker
+class APPLICATION_LIBRARY IDownloadedBooksTracker
 {
 public:
     virtual ~IDownloadedBooksTracker() noexcept = default;

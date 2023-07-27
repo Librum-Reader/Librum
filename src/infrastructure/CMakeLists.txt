@@ -1,6 +1,8 @@
 # Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Gui)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
 
 # Build
 add_library(infrastructure

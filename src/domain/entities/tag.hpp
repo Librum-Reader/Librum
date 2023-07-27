@@ -5,24 +5,25 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
+#include "domain_export.hpp"
 
 namespace domain::entities
 {
 
-class Tag
+class DOMAIN_LIBRARY Tag
 {
 public:
-    explicit Tag(const QString& name, const QString& uuid = "");
+     explicit Tag(const QString& name, const QString& uuid = "");
 
-    bool operator==(const Tag& other) const;
+     bool operator==(const Tag& other) const;
 
-    const QUuid& getUuid() const;
-    const QString& getName() const;
-    void setName(QString newName);
+     const QUuid& getUuid() const;
+     const QString& getName() const;
+     void setName(QString newName);
 
-    bool isValid() const;
-    QByteArray toJson() const;
-    static Tag fromJson(const QJsonObject& jsonObject);
+     bool isValid() const;
+     QByteArray toJson() const;
+     static Tag fromJson(const QJsonObject& jsonObject);
 
 private:
     // Tag names should always start with a capital letter

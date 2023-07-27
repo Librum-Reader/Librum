@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include "application_export.hpp"
 
 // Each enum needs to be in a separate namespace due to a Qt bug reported at:
 // https://bugreports.qt.io/browse/QTBUG-81792
@@ -10,9 +11,9 @@
 namespace application::error_codes
 {
 
-Q_NAMESPACE
+Q_NAMESPACE_EXPORT(APPLICATION_LIBRARY)
 
-enum class ErrorCode
+enum class APPLICATION_LIBRARY ErrorCode
 {
     NoError = -1,
     Unknown,

@@ -6,11 +6,12 @@
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "library_model.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class BookController : public IBookController
+class ADAPTERS_LIBRARY BookController : public IBookController
 {
     Q_OBJECT
 

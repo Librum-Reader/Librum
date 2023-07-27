@@ -4,6 +4,7 @@
 #include <QString>
 #include <optional>
 #include "book_meta_data.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -11,7 +12,7 @@ namespace application
 /**
  * The BookMetaDataHelper class extracts metadata from a book.
  */
-class IBookMetadataHelper
+class APPLICATION_LIBRARY IBookMetadataHelper
 {
 public:
     virtual ~IBookMetadataHelper() noexcept = default;

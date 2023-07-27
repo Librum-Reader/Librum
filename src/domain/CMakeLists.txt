@@ -1,6 +1,12 @@
 # Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick QuickControls2)
 
+# Qt
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Build
 add_library(domain
@@ -19,11 +25,12 @@ add_library(domain
                     value_objects/register_model.hpp
 )
 
+target_compile_definitions(domain PRIVATE DOMAIN_LIBRARY)
+
 target_include_directories(domain
                 PUBLIC
                     ${CMAKE_CURRENT_SOURCE_DIR}/entities
                     ${CMAKE_CURRENT_SOURCE_DIR}/value_objects
-                PRIVATE
                     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 

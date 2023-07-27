@@ -1,10 +1,11 @@
 #pragma once
 #include <QObject>
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
 
-class AppInformation : public QObject
+class ADAPTERS_LIBRARY AppInformation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)
