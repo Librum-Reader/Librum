@@ -310,6 +310,23 @@ Page
         onDecisionMade: close()
     }
     
+    MWarningPopup
+    {
+        id: unsupportedFilePopup
+        x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: "Unsupported File"
+        message: "Oops! This file is not supported by Librum."
+        leftButtonText: "Ok"
+        buttonsWidth: 180
+        messageBottomSpacing: 24
+        singleButton: true
+        
+        onOpenedChanged: if(opened) giveFocus()
+        onDecisionMade: close()
+    }
+    
     FileDialog
     {
         id: importFilesDialog
@@ -329,7 +346,9 @@ Page
         {
             for(let i = 0; i < files.length; ++i)
             {
-                BookController.addBook(files[i]);
+                let result =  BookController.addBook(files[i]);
+                if(result === BookOperationStatus.OpeningBookFailed)
+                    unsupportedFilePopup.open();
             }
         }
     }
