@@ -224,7 +224,7 @@ To build Librum on windows, run the following commands in the Powershell:
     ```
 6. Build the project
     ```sh
-    cmake --build .
+    cmake --build . --config Release
     ```
 7. Run the app
     ```sh
