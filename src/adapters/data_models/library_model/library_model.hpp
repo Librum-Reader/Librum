@@ -40,6 +40,7 @@ public:
         TagsRole,
         DownloadedRole,
         MediaDownloadProgressRole,
+        ExistsOnlyOnClientRole,
         Invalid
     };
 

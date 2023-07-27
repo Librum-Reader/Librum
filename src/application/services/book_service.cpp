@@ -59,6 +59,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
                 auto book = getBook(uuid);
                 book->setExistsOnlyOnClient(false);
                 m_bookStorageManager->updateBookLocally(*book);
+                refreshUIForBook(uuid);
             });
 }
 

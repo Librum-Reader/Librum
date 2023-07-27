@@ -22,3 +22,4 @@ MRightClickMenuItem 1.0 rightClickMenu/MRightClickMenuItem.qml
 MOnOffToggle 1.0 MOnOffToggle.qml
 MProgressBar 1.0 MProgressBar.qml
 MWarningPopup 1.0 MWarningPopup.qml
+MToolTip 1.0 MToolTip.qml

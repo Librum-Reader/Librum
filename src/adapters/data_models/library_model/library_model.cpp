@@ -96,6 +96,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
     case MediaDownloadProgressRole:
         return book.getMediaDownloadProgress();
         break;
+    case ExistsOnlyOnClientRole:
+        return book.existsOnlyOnClient();
+        break;
     default:
         return QVariant();
     }
@@ -122,6 +125,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { TagsRole, "tags" },
         { DownloadedRole, "downloaded" },
         { MediaDownloadProgressRole, "mediaDownloadProgress" },
+        { ExistsOnlyOnClientRole, "existsOnlyOnClient" },
     };
 
     return roles;
