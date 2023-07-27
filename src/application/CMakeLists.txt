@@ -83,7 +83,6 @@ add_custom_command(
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
     COMMAND ${MUPDF_BUILD_COMMAND}
     COMMENT "Building mupdf (This takes a while) ..."
-    BYPRODUCTS ${MUPDF_OUTPUT}
 )
 
 add_custom_target(mupdf ALL

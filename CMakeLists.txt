@@ -18,11 +18,13 @@ option(BUILD_TESTS ON)
 option(ENABLE_COVERAGE OFF)
 option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
-add_compile_options(-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458)
-set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+if(WIN32)
+    add_compile_options(-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458)
+    set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+endif()
 
-# Create a set of warnings
-if(NOT WIN32)
+# Create a set of warnings for unix systems
+if(UNIX)
     string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;"
                                   "-Wunused;-Woverloaded-virtual;-Wpedantic;-Wmissing-include-dirs;"
                                   "-Wnull-dereference;-Wdouble-promotion;-Wformat=2;-Wcast-qual;-Winit-self;"
