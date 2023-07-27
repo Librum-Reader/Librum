@@ -2,11 +2,12 @@
 #include <QObject>
 #include "i_authentication_controller.hpp"
 #include "i_authentication_service.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class AuthenticationController : public IAuthenticationController
+class ADAPTERS_LIBRARY AuthenticationController : public IAuthenticationController
 {
     Q_OBJECT
 

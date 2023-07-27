@@ -6,6 +6,7 @@
 #include <QUuid>
 #include <vector>
 #include "tag.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -13,7 +14,7 @@ namespace application
 /**
  *  The BookService handles all the operations on the user.
  */
-class IUserService : public QObject
+class APPLICATION_LIBRARY IUserService : public QObject
 {
     Q_OBJECT
 

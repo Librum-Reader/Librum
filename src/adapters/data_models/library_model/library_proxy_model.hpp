@@ -4,6 +4,7 @@
 #include <vector>
 #include "filter_request.hpp"
 #include "tag_dto.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -12,7 +13,7 @@ namespace adapters::data_models
  * The LibraryProxyModel class is a proxy class which acts as a wrapper around
  * the library model that is handling the sorting and filtering of elements
  */
-class LibraryProxyModel : public QSortFilterProxyModel
+class ADAPTERS_LIBRARY LibraryProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString sortString READ getSortString WRITE setSortString NOTIFY

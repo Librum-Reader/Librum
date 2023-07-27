@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters
 {
@@ -11,7 +12,7 @@ namespace adapters
 /**
  * The UserStorageAccess class makes the API calls to the user storage server.
  */
-class IUserStorageAccess : public QObject
+class ADAPTERS_LIBRARY IUserStorageAccess : public QObject
 {
     Q_OBJECT
 

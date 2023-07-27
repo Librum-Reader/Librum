@@ -7,6 +7,7 @@
 #include <vector>
 #include "book.hpp"
 #include "book_for_deletion.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -15,7 +16,7 @@ namespace application
  * The BookStorageManager manages the book storage for the local and remote
  * library.
  */
-class IBookStorageManager : public QObject
+class APPLICATION_LIBRARY IBookStorageManager : public QObject
 {
     Q_OBJECT
 

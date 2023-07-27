@@ -1,7 +1,8 @@
+#pragma once
 #include <QAbstractListModel>
 #include <QPair>
 #include <QQmlPropertyMap>
-#pragma once
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -9,7 +10,7 @@ namespace adapters::data_models
 /**
  * The ShortcutsModel represents the shortcuts to the user
  */
-class ShortcutsModel : public QAbstractListModel
+class ADAPTERS_LIBRARY ShortcutsModel : public QAbstractListModel
 {
     Q_OBJECT
 

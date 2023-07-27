@@ -7,6 +7,7 @@
 #include "book.hpp"
 #include "tag.hpp"
 #include "tag_dto.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -14,7 +15,7 @@ namespace adapters::data_models
 /**
  * The LibraryModel class provides access to the library for the UI
  */
-class LibraryModel : public QAbstractListModel
+class ADAPTERS_LIBRARY LibraryModel : public QAbstractListModel
 {
     Q_OBJECT
 

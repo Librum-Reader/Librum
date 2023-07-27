@@ -1,10 +1,11 @@
 #pragma once
 #include <QString>
+#include "domain_export.hpp"
 
 namespace domain::value_objects
 {
 
-class RegisterModel
+class DOMAIN_LIBRARY RegisterModel
 {
 public:
     RegisterModel(QString firstName, QString lastName, QString email,

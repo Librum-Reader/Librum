@@ -1,6 +1,12 @@
 # Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
+
+# Qt
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 
 # Setup
 set(application_SRC
@@ -58,20 +64,46 @@ set(application_SRC
 )
 
 
+
 # Build mupdf
+if(UNIX)
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so")
+    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so" PARENT_SCOPE)
+    set(MUPDF_BUILD_COMMAND "./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01")
+elseif(WIN32)
+    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/Release")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
+    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py --venv -b -j 0 m01)
+endif()
+
+
 add_custom_command(
-    OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so"
+    OUTPUT ${MUPDF_OUTPUT}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01
+    COMMAND ${MUPDF_BUILD_COMMAND}
     COMMENT "Building mupdf (This takes a while) ..."
+    BYPRODUCTS ${MUPDF_OUTPUT}
 )
 
 add_custom_target(mupdf ALL
-   DEPENDS ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
+   DEPENDS ${MUPDF_OUTPUT}
 )
 
+# Copy the mupdf dll into the binary folder for windows
+if(WIN32)
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll
+              ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+    add_custom_target(mupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/mupdfcpp64.dll)
+endif()
 
-# Build
+
+# Build application
 add_library(application
                 SHARED
                     ${application_SRC}
@@ -79,6 +111,8 @@ add_library(application
 
 # Make sure to build mupdf before the application
 add_dependencies(application mupdf)
+
+target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
 target_include_directories(application
                 PUBLIC
@@ -111,7 +145,7 @@ target_link_libraries(application
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so
+                    ${MUPDF_OUTPUT}
 )
 
 

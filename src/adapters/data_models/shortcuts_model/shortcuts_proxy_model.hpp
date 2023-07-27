@@ -2,6 +2,7 @@
 #include <QSortFilterProxyModel>
 #include <optional>
 #include <vector>
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -10,7 +11,7 @@ namespace adapters::data_models
  * The ShortcutsProxyModel class is a proxy class which acts as a wrapper around
  * the shortcuts model that is handling the sorting and filtering of elements.
  */
-class ShortcutsProxyModel : public QSortFilterProxyModel
+class ADAPTERS_LIBRARY ShortcutsProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString filterString READ getFilterString WRITE setFilterString

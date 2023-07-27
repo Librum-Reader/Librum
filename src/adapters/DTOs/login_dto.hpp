@@ -1,10 +1,11 @@
 #pragma once
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters::dtos
 {
 
-struct LoginDto
+struct ADAPTERS_LIBRARY LoginDto
 {
     QString email;
     QString password;

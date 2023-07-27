@@ -2,11 +2,12 @@
 #include <QAbstractItemModel>
 #include "mupdf/classes2.h"
 #include "toc_item.hpp"
+#include "application_export.hpp"
 
 namespace application::core
 {
 
-class TOCModel : public QAbstractItemModel
+class APPLICATION_LIBRARY TOCModel : public QAbstractItemModel
 {
     Q_OBJECT
 

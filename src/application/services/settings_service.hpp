@@ -5,12 +5,13 @@
 #include <memory>
 #include <optional>
 #include "i_settings_service.hpp"
+#include "application_export.hpp"
 
 namespace application::services
 {
 
 // A wrapper class around QSettings which manages the application settings
-class SettingsService : public ISettingsService
+class APPLICATION_LIBRARY SettingsService : public ISettingsService
 {
     Q_OBJECT
 

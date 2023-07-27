@@ -1,11 +1,11 @@
 #pragma once
 #include <QObject>
-#include <QUrl>
 #include <QUuid>
 #include <vector>
 #include "book.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -13,7 +13,7 @@ namespace application
 /**
  *  The BookService handles all the operations on books.
  */
-class IBookService : public QObject
+class APPLICATION_LIBRARY IBookService : public QObject
 {
     Q_OBJECT
 
@@ -45,7 +45,7 @@ public:
                                                 const QString& newName) = 0;
 
     virtual BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                               const QUrl& path) = 0;
+                                               const QString& path) = 0;
 
 public slots:
     virtual bool refreshLastOpenedDateOfBook(const QUuid& uuid) = 0;

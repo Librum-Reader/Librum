@@ -1,10 +1,11 @@
 #pragma once
 #include <QString>
+#include "domain_export.hpp"
 
 namespace domain::value_objects
 {
 
-class LoginModel
+class DOMAIN_LIBRARY LoginModel
 {
 public:
     LoginModel(QString email, QString password, bool rememberUser);

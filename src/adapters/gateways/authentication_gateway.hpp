@@ -1,11 +1,12 @@
 #pragma once
 #include "i_authentication_access.hpp"
 #include "i_authentication_gateway.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::gateways
 {
 
-class AuthenticationGateway : public application::IAuthenticationGateway
+class ADAPTERS_LIBRARY AuthenticationGateway : public application::IAuthenticationGateway
 {
     Q_OBJECT
 

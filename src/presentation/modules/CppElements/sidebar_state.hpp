@@ -1,11 +1,12 @@
 #pragma once
 #include <QObject>
 #include <QQmlEngine>
+#include "presentation_export.hpp"
 
 namespace cpp_elements
 {
 
-class SidebarState : public QObject
+class PRESENTATION_LIBRARY SidebarState : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(State currentState READ currentState WRITE setCurrentState NOTIFY

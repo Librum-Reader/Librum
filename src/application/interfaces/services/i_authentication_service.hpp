@@ -4,6 +4,7 @@
 #include "error_code.hpp"
 #include "login_model.hpp"
 #include "register_model.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -11,7 +12,7 @@ namespace application
 /**
  *  The AuthenticationService handles the authentication.
  */
-class IAuthenticationService : public QObject
+class APPLICATION_LIBRARY IAuthenticationService : public QObject
 {
     Q_OBJECT
 

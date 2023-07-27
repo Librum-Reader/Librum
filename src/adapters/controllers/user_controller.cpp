@@ -140,13 +140,15 @@ long UserController::getBookStorageLimit() const
 QString UserController::getProfilePicturePath() const
 {
     auto path = m_userService->getProfilePicturePath();
-    return path.isEmpty() ? "" : "file://" + path;
+    auto pathWithScheme = QUrl::fromLocalFile(path).toString();
+
+    return path.isEmpty() ? "" : pathWithScheme;
 }
 
 void UserController::setProfilePicture(const QString& path)
 {
-    QUrl url(path);
-    QImageReader imageReader(url.path());
+    QString localPath = QUrl(path).toLocalFile();
+    QImageReader imageReader(localPath);
     if(!QImageReader::supportedImageFormats().contains(imageReader.format()) ||
        imageReader.format() == "pdf")
     {
@@ -154,14 +156,14 @@ void UserController::setProfilePicture(const QString& path)
         return;
     }
 
-    QImage profilePicture(url.path());
+    QImage profilePicture(localPath);
     if(profilePicture.isNull())
     {
         qWarning() << "Failed reading provided profile picture";
         return;
     }
 
-    m_userService->setProfilePicturePath(url.path());
+    m_userService->setProfilePicturePath(localPath);
 }
 
 void UserController::deleteProfilePicture()

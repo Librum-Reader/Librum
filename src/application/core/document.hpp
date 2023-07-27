@@ -5,11 +5,12 @@
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 #include "toc/toc_model.hpp"
+#include "application_export.hpp"
 
 namespace application::core
 {
 
-class Document
+class APPLICATION_LIBRARY Document
 {
 public:
     Document(const QString& filePath);
