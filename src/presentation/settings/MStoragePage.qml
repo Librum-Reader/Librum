@@ -22,6 +22,8 @@ MFlickWrapper
         bottomPadding: 22
         background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
         
+        Component.onCompleted: { UserController.syncWithServer() }
+        
         
         ColumnLayout
         {

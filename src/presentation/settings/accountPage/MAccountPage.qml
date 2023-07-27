@@ -15,7 +15,6 @@ MFlickWrapper
     
     contentHeight: page.implicitHeight
     
-    
     Page
     {
         id: page
@@ -25,6 +24,7 @@ MFlickWrapper
         bottomPadding: 22
         background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
         
+        Component.onCompleted: { UserController.syncWithServer() }
         
         Shortcut
         {
