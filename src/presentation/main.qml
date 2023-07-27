@@ -148,6 +148,17 @@ ApplicationWindow
             }
         }
     }
+
+    // Connect in main so that addBook() is called no matter what page is displayed
+    Connections
+    {
+        target: FreeBooksController
+
+        function onGettingBookFinished(path)
+        {
+            BookController.addBook(path);
+        }
+    }
     
     Timer
     {

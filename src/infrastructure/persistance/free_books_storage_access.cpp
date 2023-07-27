@@ -102,7 +102,7 @@ QNetworkRequest FreeBooksStorageAccess::createRequest(const QUrl& url)
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+    result.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);

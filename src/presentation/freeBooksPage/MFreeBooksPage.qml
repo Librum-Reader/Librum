@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Librum.controllers
 import Librum.style
 import CustomComponents
 import "explorerToolbar"

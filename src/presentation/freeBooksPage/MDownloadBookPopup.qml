@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
 
@@ -112,7 +113,7 @@ Popup
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
                                 sourceSize.height: bookCoverArea.height - 2
-                                source: root.cover
+                                source: root.cover !== undefined ? root.cover : ""
                                 fillMode: Image.PreserveAspectFit
                             }
                         }
@@ -355,7 +356,11 @@ Popup
                             imagePath: active ? Icons.downloadSelected : Icons.download
                             imageSize: 18
                             
-                            onClicked: internal.downloadBook()
+                            onClicked:
+                            {
+                                internal.downloadBook();
+                                root.close();
+                            }
                             Keys.onReturnPressed: internal.downloadBook()
                             Keys.onRightPressed: internal.giveFocusToCancelButton()
                             Keys.onTabPressed: internal.giveFocusToCancelButton()
