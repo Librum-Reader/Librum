@@ -3,11 +3,12 @@
 #include <QObject>
 #include "i_book_storage_access.hpp"
 #include "i_book_storage_gateway.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::gateways
 {
 
-class BookStorageGateway : public application::IBookStorageGateway
+class ADAPTERS_LIBRARY BookStorageGateway : public application::IBookStorageGateway
 {
     Q_OBJECT
 

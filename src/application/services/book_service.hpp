@@ -6,11 +6,12 @@
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_manager.hpp"
+#include "application_export.hpp"
 
 namespace application::services
 {
 
-class BookService : public IBookService
+class APPLICATION_LIBRARY BookService : public IBookService
 {
     Q_OBJECT
 
@@ -28,7 +29,7 @@ public:
     BookOperationStatus changeBookCover(const QUuid& uuid,
                                         const QString& filePath) override;
     BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                       const QUrl& path) override;
+                                       const QString& path) override;
 
     BookOperationStatus addTagToBook(const QUuid& uuid,
                                      const domain::entities::Tag& tag) override;

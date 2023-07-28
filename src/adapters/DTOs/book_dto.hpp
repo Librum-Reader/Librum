@@ -7,11 +7,12 @@
 #include <QUuid>
 #include <QVariant>
 #include "tag_dto.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::dtos
 {
 
-struct BookDto
+struct ADAPTERS_LIBRARY BookDto
 {
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)

@@ -1,10 +1,11 @@
 #pragma once
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
 
-struct FilterRequest
+struct ADAPTERS_LIBRARY FilterRequest
 {
     QString authors = "";
     QString format = "";

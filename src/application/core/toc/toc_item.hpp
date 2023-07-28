@@ -2,6 +2,7 @@
 #include <mupdf/classes.h>
 #include <QList>
 #include <QString>
+#include "application_export.hpp"
 
 namespace application::core
 {

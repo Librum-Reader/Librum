@@ -1,10 +1,11 @@
 #pragma once
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters::dtos
 {
 
-struct RegisterDto
+struct ADAPTERS_LIBRARY RegisterDto
 {
     QString firstName;
     QString lastName;

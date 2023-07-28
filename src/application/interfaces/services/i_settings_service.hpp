@@ -6,6 +6,7 @@
 #include "application_settings.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -13,7 +14,7 @@ namespace application
 /**
  *  The SettingsService handles storing and reading application settings.
  */
-class ISettingsService : public QObject
+class APPLICATION_LIBRARY ISettingsService : public QObject
 {
     Q_OBJECT
 

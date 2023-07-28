@@ -59,6 +59,7 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
                 auto book = getBook(uuid);
                 book->setExistsOnlyOnClient(false);
                 m_bookStorageManager->updateBookLocally(*book);
+                refreshUIForBook(uuid);
             });
 }
 
@@ -228,8 +229,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
     }
     else
     {
-        auto absoluteFilePath = QUrl(filePath).path();
-        auto success = setNewBookCover(*book, absoluteFilePath);
+        auto success = setNewBookCover(*book, filePath);
         if(!success)
             return BookOperationStatus::OperationFailed;
     }
@@ -450,7 +450,11 @@ int BookService::getBookIndex(const QUuid& uuid) const
     if(book == nullptr)
         return -1;
 
-    std::vector<Book>::const_iterator bookPosition(book);
+    auto bookPosition = std::ranges::find_if(m_books,
+                                            [&uuid](const Book& rhs)
+                                            {
+                                                return rhs.getUuid() == uuid;
+                                            });
     size_t index = bookPosition - m_books.begin();
 
     return index;
@@ -462,26 +466,26 @@ int BookService::getBookCount() const
 }
 
 BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
-                                                const QUrl& pathToFolder)
+                                                const QString& pathToFolder)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
     {
         qWarning() << QString("Saving book with uuid: %1 to folder %2 failed. "
                               " No book with this uuid exists.")
-                          .arg(uuid.toString(), pathToFolder.path());
+                          .arg(uuid.toString(), pathToFolder);
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    QUrl currentBookPath = book->getFilePath();
-    QUrl destinaton = pathToFolder.path() + "/" + currentBookPath.fileName();
+    QString currentBookPath = book->getFilePath();
+    QString destinaton = pathToFolder + "/" + QUrl(currentBookPath).fileName();
 
-    auto result = QFile::copy(currentBookPath.path(), destinaton.path());
+    auto result = QFile::copy(book->getFilePath(), destinaton);
     if(!result)
     {
         qWarning() << QString("Saving book with uuid: %1 to folder: %2 failed. "
                               "No book with this uuid exists.")
-                          .arg(uuid.toString(), pathToFolder.path());
+                          .arg(uuid.toString(), pathToFolder);
 
         return BookOperationStatus::OperationFailed;
     }
@@ -508,7 +512,7 @@ void BookService::processDownloadedBook(const QUuid& uuid,
 {
     auto* book = getBook(uuid);
 
-    book->setFilePath("file://" + filePath);
+    book->setFilePath(filePath);
     book->setDownloaded(true);
 
     // The book meta-data file does not exist locally, so create it
@@ -562,7 +566,7 @@ void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
     // underlying book file would be invalid (since it does not exist
     // anymore). If this happens, unsinstall the book, so that the user can
     // redownload it from the server.
-    QFile bookFile(QUrl(book.getFilePath()).path());
+    QFile bookFile(book.getFilePath());
     if(!bookFile.exists())
     {
         book.setFilePath("");

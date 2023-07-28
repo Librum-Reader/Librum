@@ -2,11 +2,12 @@
 #include <QKeyEvent>
 #include <QKeySequence>
 #include <QQuickItem>
+#include "presentation_export.hpp"
 
 namespace cpp_elements
 {
 
-class KeySequenceRecorder : public QQuickItem
+class PRESENTATION_LIBRARY KeySequenceRecorder : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString originalSequence READ originalSequence WRITE

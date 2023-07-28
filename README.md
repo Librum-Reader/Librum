@@ -68,6 +68,8 @@ If you are interested in contributing, feel free to contact us on either:<br>
 <br>
 We are following a pull request workflow where every contribution is sent as a pull request and merged into the dev/develop branch for testing. <br>
 Please make sure to run clang format, keep to the conventions used throughout the application and ensure that all tests pass, before submitting any pull request.
+
+<br>
 <br>
 
 # Contact
@@ -126,21 +128,20 @@ Want a new feature? Feel free to leave a feature request ticket!
 
 <br><br>
 
-# Getting started
+# Build Guide
 
 Here's how to get Librum up and running in your environment.
 <br>
 
-### Prerequisites
-- cmake (at least version 3.21)     https://cmake.org/download/
-- make (or any other build system)  http://ftp.gnu.org/gnu/make/
-- g++ (or any other c++ compiler)   https://gcc.gnu.org/
-- python3-venv                      (on ubuntu use `sudo apt install python3-venv`)
-- Qt 6.5                            https://www.qt.io/download-open-source
-
-<br>
 
 ## For GNU/Linux
+
+### Prerequisites
+- cmake                             (https://cmake.org/download)
+- make                              (http://ftp.gnu.org/gnu/make)
+- g++                               (https://gcc.gnu.org)
+- python3-venv                      (on ubuntu use `sudo apt install python3-venv`)
+- Qt 6.5                            (https://www.qt.io/download-open-source)
 
 ### Installation
 The installation is straight forward, just follow the steps below:
@@ -187,8 +188,48 @@ Here are solutions to some common errors. If your error is not listed here, plea
 
 <br>
 
+
 ## For Windows
-Support coming soon!
+### Prerequisites
+- cmake                             (https://cmake.org/download)
+- Visual Studio <b>19</b>           (https://visualstudio.microsoft.com/de/vs/older-downloads)
+- Python                            (https://www.python.org/downloads)
+- Qt 6.5                            (https://www.qt.io/download-open-source)
+
+### Installation
+To build Librum on windows, run the following commands in the Powershell:
+
+<br>
+
+1. Clone the repository.
+    ```sh
+    git clone https://github.com/Etovex/Librum.git --recursive
+    ```
+2. Step into the cloned project folder.
+    ```sh
+    cd Librum
+    ```
+3. Create the build folder and step into it.
+    ```sh
+    mkdir build
+    cd build
+    ```
+4. Run cmake.
+    ```sh
+    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<Drive>\\Qt\\<version>\\msvc2019_64 ..
+    ```
+    `CMAKE_PREFIX_PATH` needs to be set to the Qt install path, for example:
+    ```sh
+    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=C:\\Qt\\6.5.1\\msvc2019_64 ..
+    ```
+6. Build the project
+    ```sh
+    cmake --build . --config Release
+    ```
+7. Run the app
+    ```sh
+    ./appLibrum
+    ```
 
 ## For macOS
 Support coming soon!

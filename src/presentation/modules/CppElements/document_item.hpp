@@ -4,11 +4,12 @@
 #include <memory>
 #include "document.hpp"
 #include "toc/filtered_toc_model.hpp"
+#include "presentation_export.hpp"
 
 namespace cpp_elements
 {
 
-class DocumentItem : public QObject
+class PRESENTATION_LIBRARY DocumentItem : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString filePath WRITE setFilePath NOTIFY filePathChanged)

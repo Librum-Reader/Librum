@@ -84,9 +84,14 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
                          Book::dateTimeStringFormat);
         break;
     case CoverRole:
+    {
+        auto pathWithScheme =
+            QUrl::fromLocalFile(book.getCoverPath()).toString();
+
         return book.hasCover() && !book.getCoverPath().isEmpty()
-                   ? "file://" + book.getCoverPath()
+                   ? pathWithScheme
                    : "";
+    }
     case TagsRole:
         return QVariant::fromValue(convertTagsToDtos(book.getTags()));
         break;
@@ -95,6 +100,9 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
         break;
     case MediaDownloadProgressRole:
         return book.getMediaDownloadProgress();
+        break;
+    case ExistsOnlyOnClientRole:
+        return book.existsOnlyOnClient();
         break;
     default:
         return QVariant();
@@ -122,6 +130,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { TagsRole, "tags" },
         { DownloadedRole, "downloaded" },
         { MediaDownloadProgressRole, "mediaDownloadProgress" },
+        { ExistsOnlyOnClientRole, "existsOnlyOnClient" },
     };
 
     return roles;

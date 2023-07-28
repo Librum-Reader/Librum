@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QString>
 #include <vector>
+#include "adapters_export.hpp"
 
 namespace adapters
 {
@@ -11,7 +12,7 @@ namespace adapters
  * The IAuthenticationAccess class makes the API calls to the authentication
  * server.
  */
-class IBookStorageAccess : public QObject
+class ADAPTERS_LIBRARY IBookStorageAccess : public QObject
 {
     Q_OBJECT
 

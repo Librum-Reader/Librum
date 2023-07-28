@@ -3,6 +3,7 @@
 #include <QString>
 #include <QUuid>
 #include "user.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
@@ -12,7 +13,7 @@ namespace application
  * UserStorageAccess class. It maps the data provided by the application to
  * the data type required for user storage API requests.
  */
-class IUserStorageGateway : public QObject
+class APPLICATION_LIBRARY IUserStorageGateway : public QObject
 {
     Q_OBJECT
 

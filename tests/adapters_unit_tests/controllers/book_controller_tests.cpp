@@ -54,7 +54,7 @@ public:
                 (const QUuid&, const QUuid&), (override));
 
     MOCK_METHOD(BookOperationStatus, saveBookToFile,
-                (const QUuid&, const QUrl&), (override));
+                (const QUuid&, const QString&), (override));
 
     MOCK_METHOD(void, setupUserData, (const QString&, const QString&),
                 (override));

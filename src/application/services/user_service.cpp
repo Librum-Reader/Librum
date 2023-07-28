@@ -214,7 +214,7 @@ void UserService::loadProfilePictureFromFile()
     if(fullProfilePictureName.isEmpty())
         return;
 
-    QString path = userDir.absoluteFilePath(fullProfilePictureName);
+    QString path = userDir.filePath(fullProfilePictureName);
     m_user.setProfilePicturePath(path);
     m_user.setHasProfilePicture(true);
 }
@@ -250,7 +250,7 @@ QDateTime UserService::deleteProfilePictureLocally()
         return newProfilePictureLastUpdated;
 
     auto userDir = getUserProfileDir();
-    QString path = userDir.absoluteFilePath(fullProfilePictureName);
+    QString path = userDir.filePath(fullProfilePictureName);
 
     QFile file(path);
     file.remove();

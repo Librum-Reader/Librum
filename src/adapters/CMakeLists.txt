@@ -1,6 +1,7 @@
 # Dependencies
 find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
 
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Build
 add_library(adapters
@@ -56,8 +57,11 @@ add_library(adapters
                     DTOs/tag_dto.hpp
 )
 
+target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)
+
 target_include_directories(adapters
                 PUBLIC
+                    ${CMAKE_CURRENT_SOURCE_DIR}
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/persistance
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/controllers
                     ${CMAKE_CURRENT_SOURCE_DIR}/controllers
@@ -69,7 +73,6 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
-                    ${CMAKE_CURRENT_SOURCE_DIR}
                     ${DOMAIN_INCLUDES}
                     ${APPLICATION_INCLUDES}
 )
