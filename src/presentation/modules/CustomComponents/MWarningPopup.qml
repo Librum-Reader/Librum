@@ -16,6 +16,7 @@ Popup
     property int buttonsWidth: 120
     property int messageBottomSpacing: 0
     property bool singleButton: false
+    property bool rightButtonRed: false
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
@@ -133,7 +134,7 @@ Popup
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
                             borderWidth: focus ? 0 : 1
-                            backgroundColor: focus ? Style.colorBasePurple : "transparent"
+                            backgroundColor: focus ? (root.rightButtonRed ? Style.colorRed : Style.colorBasePurple) : "transparent"
                             opacityOnPressed: 0.7
                             text: root.rightButtonText
                             fontSize: 12.75
