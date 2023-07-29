@@ -1,4 +1,5 @@
 #include "document_item.hpp"
+#include <QFile>
 #include <QUrl>
 #include <memory>
 #include "document.hpp"
@@ -10,6 +11,14 @@ namespace cpp_elements
 
 void DocumentItem::setFilePath(const QString& newFilePath)
 {
+    if(!QFile::exists(newFilePath))
+    {
+        qWarning()
+            << QString("Opening book at path: %1 failed. File does not exist.")
+                   .arg(newFilePath);
+        return;
+    }
+
     m_document = std::make_unique<Document>(QUrl(newFilePath).path());
 
     emit filePathChanged(newFilePath);
