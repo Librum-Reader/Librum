@@ -36,6 +36,9 @@ Pane
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
         
+        onPressed: mouse.accepted = false
+        onReleased: mouse.accepted = false
+        
         // Take over focus when clicked
         onClicked:
         {
@@ -56,7 +59,7 @@ Pane
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             flickDeceleration: 100000
-            interactive: true
+            interactive: false
             clip: true
             cacheBuffer: 1000
             maximumFlickVelocity: scrollSpeed
@@ -66,12 +69,32 @@ Pane
             spacing: pageSpacing
             delegate: PageItem
             {
+                id: page
                 pageNumber: modelData
                 document: documentItem
                 height: implicitHeight
                 width: implicitWidth
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
                 anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
+                
+                MouseArea
+                {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    property var highlightStartPos
+                    property var highlightEndPos
+                    
+                    onPressed: highlightStartPos = Qt.point(mouseX, mouseY)
+                    onPositionChanged:
+                    {
+                        if(!pressed)
+                            return;
+                        
+                        highlightEndPos = Qt.point(mouseX, mouseY)
+                        page.setHighlight(highlightStartPos.x, highlightStartPos.y, 
+                                          highlightEndPos.x, highlightEndPos.y)
+                    }
+                }
             }
             
             
@@ -84,6 +107,9 @@ Pane
             {
                 id: wheelInterceptor
                 anchors.fill: parent
+                
+                onPressed: mouse.accepted = false
+                onReleased: mouse.accepted = false
                 
                 onWheel:
                 {

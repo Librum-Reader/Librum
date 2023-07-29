@@ -1,3 +1,4 @@
+#include <QPoint>
 #include <QQuickItem>
 #include <QString>
 #include <memory>
@@ -34,6 +35,7 @@ public:
     void setPageNumber(int newCurrentPage);
 
     void setColorInverted(bool newColorInverted);
+    Q_INVOKABLE void setHighlight(int beginX, int beginY, int endX, int endY);
 
 private slots:
     void updateZoom(float newZoom);
@@ -44,11 +46,14 @@ protected:
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* _) override;
 
 private:
+    void generateHighlights();
+
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;
     int m_currentPage = 0;
-    bool m_colorInverted;
     bool m_firstTimeColorInverted = true;
+    QPointF m_highlightStart;
+    QPointF m_highlightEnd;
 };
 
 }  // namespace cpp_elements

@@ -106,6 +106,7 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
+                    
 )
 
 # Make sure to build mupdf before the application

@@ -1,6 +1,8 @@
 #include "page_item.hpp"
 #include <QDebug>
+#include <QImage>
 #include <QObject>
+#include <QPainter>
 #include <QQuickWindow>
 #include <QSGSimpleTextureNode>
 
@@ -60,6 +62,13 @@ void PageItem::setPageNumber(int newCurrentPage)
 
 void PageItem::updateZoom(float newZoom)
 {
+    if(!m_highlightStart.isNull() && !m_highlightEnd.isNull())
+    {
+        m_highlightStart = m_page->scalePointToZoom(m_highlightStart, newZoom);
+        m_highlightEnd = m_page->scalePointToZoom(m_highlightEnd, newZoom);
+        generateHighlights();
+    }
+
     m_page->setZoom(newZoom);
     emit implicitWidthChanged();
     emit implicitHeightChanged();
@@ -90,18 +99,43 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
         n->setOwnsTexture(true);
     }
 
-    auto image = m_page->renderPage(m_colorInverted);
+    auto image = m_page->renderPage();
+    auto& bufferedHighlights = m_page->getBufferedHighlights();
+    for(auto rect : bufferedHighlights)
+    {
+        QColor highlightColor(134, 171, 175, 125);
+        QPainter painter(&image);
+        painter.setCompositionMode(QPainter::CompositionMode_Multiply);
+        painter.fillRect(rect, highlightColor);
+    }
+
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
     return n;
 }
 
+void PageItem::setHighlight(int beginX, int beginY, int endX, int endY)
+{
+    m_highlightStart = QPointF(beginX, beginY);
+    m_highlightEnd = QPointF(endX, endY);
+
+    generateHighlights();
+    update();
+}
+
+void PageItem::generateHighlights()
+{
+    m_page->getBufferedHighlights().clear();
+    m_page->setHighlight(m_highlightStart, m_highlightEnd);
+}
+
 void PageItem::setColorInverted(bool newColorInverted)
 {
-    m_colorInverted = newColorInverted;
+    // This method gets called on initialisation of the page item, but we don't
+    // want to redraw it then, so we skip it if it's called for the first time.
+    m_page->setInvertColor(newColorInverted);
     if(!m_firstTimeColorInverted)
         update();
-
 
     m_firstTimeColorInverted = false;
 }
