@@ -74,7 +74,7 @@ Pane
                                 {
                                     if(event.key === Qt.Key_C && (event.modifiers & Qt.ControlModifier))
                                     {
-                                        page.copyHighlightedText();
+                                        page.copySelectedText();
                                     }
                                 }
                 
@@ -82,8 +82,8 @@ Pane
                 {
                     anchors.fill: parent
                     hoverEnabled: true
-                    property var highlightStartPos
-                    property var highlightEndPos
+                    property var selectionStartPos
+                    property var selectionEndPos
                     
                     onWheel:
                     {
@@ -96,8 +96,8 @@ Pane
                     onPressed:
                     {
                         root.forceActiveFocus();
-                        page.removeHighlight();
-                        highlightStartPos = Qt.point(mouseX, mouseY)
+                        page.removeSelection();
+                        selectionStartPos = Qt.point(mouseX, mouseY)
                         
                         mouse.accepted = true;
                     }
@@ -112,10 +112,10 @@ Pane
                         if(!pressed)
                             return;
                         
-                        highlightEndPos = Qt.point(mouseX, mouseY);
+                        selectionEndPos = Qt.point(mouseX, mouseY);
                         page.forceActiveFocus();
-                        page.setHighlight(highlightStartPos.x, highlightStartPos.y, 
-                                          highlightEndPos.x, highlightEndPos.y)
+                        page.setSelection(selectionStartPos.x, selectionStartPos.y, 
+                                          selectionEndPos.x, selectionEndPos.y)
                     }
                 }
             }

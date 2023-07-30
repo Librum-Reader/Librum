@@ -125,9 +125,9 @@ float Page::getZoom() const
     return m_matrix.a;
 }
 
-QList<QRectF>& Page::getBufferedHighlights()
+QList<QRectF>& Page::getBufferedSelectionRects()
 {
-    return m_bufferedHighlights;
+    return m_bufferedSelectionRects;
 }
 
 QPointF Page::scalePointToCurrentZoom(const QPointF& point, float oldZoom)
@@ -166,7 +166,7 @@ void Page::setInvertColor(bool newInvertColor)
     m_pageImageOutdated = true;
 }
 
-void Page::setHighlight(QPointF start, QPointF end)
+void Page::setSelection(QPointF start, QPointF end)
 {
     mupdf::FzPoint fzStart(start.x(), start.y());
     mupdf::FzPoint fzEnd(end.x(), end.y());
@@ -185,7 +185,7 @@ void Page::setHighlight(QPointF start, QPointF end)
     {
         fz_quad hit = hits[i];
         hit = mupdf::ll_fz_transform_quad(hit, *m_matrix.internal());
-        m_bufferedHighlights.append(fzQuadToQRectF(hit));
+        m_bufferedSelectionRects.append(fzQuadToQRectF(hit));
     }
 }
 
@@ -210,8 +210,7 @@ bool Page::pointIsAboveText(const QPoint& point)
     return false;
 }
 
-QString Page::getTextFromCurrentHighlight(const QPointF& start,
-                                          const QPointF& end)
+QString Page::getTextFromSelection(const QPointF& start, const QPointF& end)
 {
     mupdf::FzPoint fzStart(start.x(), start.y());
     mupdf::FzPoint fzEnd(end.x(), end.y());

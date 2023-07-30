@@ -35,9 +35,9 @@ public:
     void setPageNumber(int newCurrentPage);
 
     void setColorInverted(bool newColorInverted);
-    Q_INVOKABLE void setHighlight(int beginX, int beginY, int endX, int endY);
-    Q_INVOKABLE void removeHighlight();
-    Q_INVOKABLE void copyHighlightedText();
+    Q_INVOKABLE void setSelection(int beginX, int beginY, int endX, int endY);
+    Q_INVOKABLE void removeSelection();
+    Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE bool pointIsAboveText(int x, int y);
 
 private slots:
@@ -49,15 +49,15 @@ protected:
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* _) override;
 
 private:
-    void paintHighlightsOnPage(QPainter& painter);
-    void generateHighlights();
+    void paintSelectionOnPage(QPainter& painter);
+    void generateSelection();
 
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;
     int m_currentPage = 0;
     bool m_firstTimeColorInverted = true;
-    QPointF m_highlightStart;
-    QPointF m_highlightEnd;
+    QPointF m_selectionStart;
+    QPointF m_selectionEnd;
 };
 
 }  // namespace cpp_elements

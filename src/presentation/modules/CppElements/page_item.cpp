@@ -67,14 +67,14 @@ void PageItem::updateZoom(float newZoom)
     auto oldZoom = m_page->getZoom();
     m_page->setZoom(newZoom);
 
-    // Update highlight positions to match new zoom
-    if(!m_highlightStart.isNull() && !m_highlightEnd.isNull())
+    // Update selection positions to match new zoom
+    if(!m_selectionStart.isNull() && !m_selectionEnd.isNull())
     {
-        m_highlightStart =
-            m_page->scalePointToCurrentZoom(m_highlightStart, oldZoom);
-        m_highlightEnd =
-            m_page->scalePointToCurrentZoom(m_highlightEnd, oldZoom);
-        generateHighlights();
+        m_selectionStart =
+            m_page->scalePointToCurrentZoom(m_selectionStart, oldZoom);
+        m_selectionEnd =
+            m_page->scalePointToCurrentZoom(m_selectionEnd, oldZoom);
+        generateSelection();
     }
 
     emit implicitWidthChanged();
@@ -109,44 +109,44 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     auto image = m_page->renderPage();
     QPainter painter(&image);
 
-    paintHighlightsOnPage(painter);
+    paintSelectionOnPage(painter);
 
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
     return n;
 }
 
-void PageItem::paintHighlightsOnPage(QPainter& painter)
+void PageItem::paintSelectionOnPage(QPainter& painter)
 {
-    auto& bufferedHighlights = m_page->getBufferedHighlights();
-    for(auto rect : bufferedHighlights)
+    auto& bufferedSelectionRects = m_page->getBufferedSelectionRects();
+    for(auto rect : bufferedSelectionRects)
     {
-        QColor highlightColor(134, 171, 175, 125);
+        QColor selectionColor(134, 171, 175, 125);
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
-        painter.fillRect(rect, highlightColor);
+        painter.fillRect(rect, selectionColor);
     }
 }
 
-void PageItem::setHighlight(int beginX, int beginY, int endX, int endY)
+void PageItem::setSelection(int beginX, int beginY, int endX, int endY)
 {
-    m_highlightStart = QPointF(beginX, beginY);
-    m_highlightEnd = QPointF(endX, endY);
+    m_selectionStart = QPointF(beginX, beginY);
+    m_selectionEnd = QPointF(endX, endY);
 
-    generateHighlights();
+    generateSelection();
     update();
 }
 
-void PageItem::removeHighlight()
+void PageItem::removeSelection()
 {
-    m_page->getBufferedHighlights().clear();
+    m_page->getBufferedSelectionRects().clear();
     update();
 }
 
-void PageItem::copyHighlightedText()
+void PageItem::copySelectedText()
 {
     auto clipboard = QApplication::clipboard();
     QString text =
-        m_page->getTextFromCurrentHighlight(m_highlightStart, m_highlightEnd);
+        m_page->getTextFromSelection(m_selectionStart, m_selectionEnd);
 
     clipboard->setText(text);
 }
@@ -156,10 +156,10 @@ bool PageItem::pointIsAboveText(int x, int y)
     return m_page->pointIsAboveText(QPoint(x, y));
 }
 
-void PageItem::generateHighlights()
+void PageItem::generateSelection()
 {
-    m_page->getBufferedHighlights().clear();
-    m_page->setHighlight(m_highlightStart, m_highlightEnd);
+    m_page->getBufferedSelectionRects().clear();
+    m_page->setSelection(m_selectionStart, m_selectionEnd);
 }
 
 void PageItem::setColorInverted(bool newColorInverted)

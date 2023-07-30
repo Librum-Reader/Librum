@@ -26,14 +26,13 @@ public:
     float getZoom() const;
     void setZoom(float newZoom);
 
-    QList<QRectF>& getBufferedHighlights();
+    QList<QRectF>& getBufferedSelectionRects();
 
     QImage renderPage();
     QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
     void setInvertColor(bool newInvertColor);
-    void setHighlight(QPointF start, QPointF end);
-    QString getTextFromCurrentHighlight(const QPointF& start,
-                                        const QPointF& end);
+    void setSelection(QPointF start, QPointF end);
+    QString getTextFromSelection(const QPointF& start, const QPointF& end);
     bool pointIsAboveText(const QPoint& point);
 
 private:
@@ -46,7 +45,7 @@ private:
     std::unique_ptr<mupdf::FzStextPage> m_textPage;
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
-    QList<QRectF> m_bufferedHighlights;
+    QList<QRectF> m_bufferedSelectionRects;
     std::vector<fz_quad> m_pageSymbolBounds;
     bool m_invertColor = false;
 
