@@ -38,7 +38,7 @@ public:
     Q_INVOKABLE void setHighlight(int beginX, int beginY, int endX, int endY);
     Q_INVOKABLE void removeHighlight();
     Q_INVOKABLE void copyHighlightedText();
-    Q_INVOKABLE bool textIsBelowPoint(int x, int y);
+    Q_INVOKABLE bool pointIsAboveText(int x, int y);
 
 private slots:
     void updateZoom(float newZoom);
@@ -49,6 +49,7 @@ protected:
     QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData* _) override;
 
 private:
+    void paintHighlightsOnPage(QPainter& painter);
     void generateHighlights();
 
     DocumentItem* m_document = nullptr;

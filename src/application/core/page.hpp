@@ -16,6 +16,9 @@ class APPLICATION_LIBRARY Page
 {
 public:
     Page(const Document* document, int pageNumber);
+    void setupDisplayList(const mupdf::FzRect& boundPage);
+    void setupTextPage(int pageNumber);
+    void setupSymbolBounds(const mupdf::FzRect& boundPage);
 
     int getWidth() const;
     int getHeight() const;
@@ -23,18 +26,20 @@ public:
     float getZoom() const;
     void setZoom(float newZoom);
 
-    QImage renderPage();
     QList<QRectF>& getBufferedHighlights();
+
+    QImage renderPage();
     QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
     void setInvertColor(bool newInvertColor);
     void setHighlight(QPointF start, QPointF end);
-    bool textIsBelowPoint(const QPoint& point);
     QString getTextFromCurrentHighlight(const QPointF& start,
                                         const QPointF& end);
+    bool pointIsAboveText(const QPoint& point);
 
 private:
     mupdf::FzPixmap getEmptyPixmap() const;
     QImage imageFromPixmap(mupdf::FzPixmap pixmap);
+    QRectF fzQuadToQRectF(const mupdf::FzQuad& rect);
 
     const mupdf::FzDocument* m_document;
     std::unique_ptr<mupdf::FzPage> m_page;
@@ -42,10 +47,10 @@ private:
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
     QList<QRectF> m_bufferedHighlights;
-    std::vector<fz_quad> m_allTextQuads;
+    std::vector<fz_quad> m_pageSymbolBounds;
     bool m_invertColor = false;
 
-    bool m_pageImageInvalid = true;
+    bool m_pageImageOutdated = true;
     QImage m_pageImage;
 };
 

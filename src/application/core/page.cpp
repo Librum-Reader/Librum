@@ -15,29 +15,44 @@ application::core::Page::Page(const Document* document, int pageNumber) :
         std::make_unique<mupdf::FzPage>(m_document->fz_load_page(pageNumber));
     auto boundPage = m_page->fz_bound_page();
 
+    setupDisplayList(boundPage);
+    setupTextPage(pageNumber);
+    setupSymbolBounds(boundPage);
+}
+
+void Page::setupDisplayList(const mupdf::FzRect& boundPage)
+{
     m_displayList = mupdf::FzDisplayList(boundPage);
+
     auto listDevice = m_displayList.fz_new_list_device();
     mupdf::FzCookie defaultCookie;
     m_page->fz_run_page(listDevice, mupdf::FzMatrix(), defaultCookie);
     listDevice.fz_close_device();
+}
 
+void Page::setupTextPage(int pageNumber)
+{
     mupdf::FzStextOptions options(
         FZ_STEXT_PRESERVE_LIGATURES | FZ_STEXT_PRESERVE_WHITESPACE |
         FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_PRESERVE_SPANS);
+
     m_textPage =
         std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
+}
 
+void Page::setupSymbolBounds(const mupdf::FzRect& boundPage)
+{
     fz_quad hits[1000];
     fz_point topLeft(boundPage.x0, boundPage.y0);
     fz_point bottomRight(boundPage.x1, boundPage.y1);
     int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal, topLeft,
                                              bottomRight, hits, 1000);
-    m_allTextQuads = std::vector<fz_quad>(hits, hits + n);
+    m_pageSymbolBounds = std::vector<fz_quad>(hits, hits + n);
 }
 
 QImage Page::renderPage()
 {
-    if(!m_pageImageInvalid)
+    if(!m_pageImageOutdated)
         return m_pageImage;
 
     auto pixmap = getEmptyPixmap();
@@ -52,16 +67,16 @@ QImage Page::renderPage()
         pixmap.fz_invert_pixmap();
 
     m_pageImage = imageFromPixmap(pixmap);
-    m_pageImageInvalid = false;
+    m_pageImageOutdated = false;
     return m_pageImage;
 }
 
 mupdf::FzPixmap Page::getEmptyPixmap() const
 {
     auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
-    bbox = bbox.fz_transform_rect(m_matrix);
+    auto scaledBbox = bbox.fz_transform_rect(m_matrix);
 
-    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, bbox,
+    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, scaledBbox,
                            mupdf::FzSeparations(), 0);
     pixmap.fz_clear_pixmap();
 
@@ -118,14 +133,15 @@ QList<QRectF>& Page::getBufferedHighlights()
 QPointF Page::scalePointToCurrentZoom(const QPointF& point, float oldZoom)
 {
     mupdf::FzPoint fzPoint(point.x(), point.y());
-
     auto oldMatrix = mupdf::FzMatrix();
     oldMatrix.a = oldZoom;
     oldMatrix.d = oldZoom;
 
+    // Normalize point
     auto invMatrix = oldMatrix.fz_invert_matrix();
     fzPoint = fzPoint.fz_transform_point(invMatrix);
 
+    // Transform point to the current matrix
     fzPoint = fzPoint.fz_transform_point(m_matrix);
 
     return QPointF(fzPoint.x, fzPoint.y);
@@ -138,7 +154,7 @@ void Page::setZoom(float newZoom)
 
     m_matrix.a = newZoom;
     m_matrix.d = newZoom;
-    m_pageImageInvalid = true;
+    m_pageImageOutdated = true;
 }
 
 void Page::setInvertColor(bool newInvertColor)
@@ -147,38 +163,45 @@ void Page::setInvertColor(bool newInvertColor)
         return;
 
     m_invertColor = newInvertColor;
-    m_pageImageInvalid = true;
+    m_pageImageOutdated = true;
 }
 
 void Page::setHighlight(QPointF start, QPointF end)
 {
     mupdf::FzPoint fzStart(start.x(), start.y());
     mupdf::FzPoint fzEnd(end.x(), end.y());
-    auto invMatrix = m_matrix.fz_invert_matrix();
-    fzStart = fzStart.fz_transform_point(invMatrix);
-    fzEnd = fzEnd.fz_transform_point(invMatrix);
 
-    fz_quad hits[1000];
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    auto normStart = fzStart.fz_transform_point(invMatrix);
+    auto normEnd = fzEnd.fz_transform_point(invMatrix);
+
+    const int max = 1000;
+    fz_quad hits[max];
     int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal,
-                                             *fzStart.internal(),
-                                             *fzEnd.internal(), hits, 1000);
+                                             *normStart.internal(),
+                                             *normEnd.internal(), hits, max);
 
     for(int i = 0; i < n; ++i)
     {
         fz_quad hit = hits[i];
         hit = mupdf::ll_fz_transform_quad(hit, *m_matrix.internal());
-        QRectF rect(hit.ul.x, hit.ul.y, hit.ur.x - hit.ul.x,
-                    hit.ll.y - hit.ul.y);
-        m_bufferedHighlights.append(rect);
+        m_bufferedHighlights.append(fzQuadToQRectF(hit));
     }
 }
 
-bool Page::textIsBelowPoint(const QPoint& point)
+QRectF Page::fzQuadToQRectF(const mupdf::FzQuad& rect)
+{
+    float width = rect.ur.x - rect.ul.x;
+    float height = rect.ll.y - rect.ul.y;
+    return QRectF(rect.ul.x, rect.ul.y, width, height);
+}
+
+bool Page::pointIsAboveText(const QPoint& point)
 {
     mupdf::FzPoint fzPoint(point.x(), point.y());
     fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
 
-    for(auto& quad : m_allTextQuads)
+    for(auto& quad : m_pageSymbolBounds)
     {
         if(fzPoint.fz_is_point_inside_quad(quad))
             return true;
@@ -195,9 +218,9 @@ QString Page::getTextFromCurrentHighlight(const QPointF& start,
     fzStart = fzStart.transform(m_matrix.fz_invert_matrix());
     fzEnd = fzEnd.transform(m_matrix.fz_invert_matrix());
 
-    auto result = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
+    auto text = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
 
-    return QString::fromStdString(result);
+    return QString::fromStdString(text);
 }
 
 }  // namespace application::core

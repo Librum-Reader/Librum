@@ -107,18 +107,24 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     }
 
     auto image = m_page->renderPage();
-    auto& bufferedHighlights = m_page->getBufferedHighlights();
-    for(auto rect : bufferedHighlights)
-    {
-        QColor highlightColor(134, 171, 175, 125);
-        QPainter painter(&image);
-        painter.setCompositionMode(QPainter::CompositionMode_Multiply);
-        painter.fillRect(rect, highlightColor);
-    }
+    QPainter painter(&image);
+
+    paintHighlightsOnPage(painter);
 
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
     return n;
+}
+
+void PageItem::paintHighlightsOnPage(QPainter& painter)
+{
+    auto& bufferedHighlights = m_page->getBufferedHighlights();
+    for(auto rect : bufferedHighlights)
+    {
+        QColor highlightColor(134, 171, 175, 125);
+        painter.setCompositionMode(QPainter::CompositionMode_Multiply);
+        painter.fillRect(rect, highlightColor);
+    }
 }
 
 void PageItem::setHighlight(int beginX, int beginY, int endX, int endY)
@@ -145,9 +151,9 @@ void PageItem::copyHighlightedText()
     clipboard->setText(text);
 }
 
-bool PageItem::textIsBelowPoint(int x, int y)
+bool PageItem::pointIsAboveText(int x, int y)
 {
-    return m_page->textIsBelowPoint(QPoint(x, y));
+    return m_page->pointIsAboveText(QPoint(x, y));
 }
 
 void PageItem::generateHighlights()

@@ -103,7 +103,7 @@ Pane
                     }
                     onPositionChanged:
                     {
-                        let textBelowCursor = page.textIsBelowPoint(mouseX, mouseY);
+                        let textBelowCursor = page.pointIsAboveText(mouseX, mouseY);
                         if(textBelowCursor)
                             cursorShape = Qt.IBeamCursor;
                         else
