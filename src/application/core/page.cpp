@@ -105,24 +105,28 @@ int Page::getHeight() const
     return (bbox.y1 - bbox.y0) * m_matrix.d;
 }
 
+float Page::getZoom() const
+{
+    return m_matrix.a;
+}
+
 QList<QRectF>& Page::getBufferedHighlights()
 {
     return m_bufferedHighlights;
 }
 
-QPointF Page::scalePointToZoom(const QPointF& point, float zoom)
+QPointF Page::scalePointToCurrentZoom(const QPointF& point, float oldZoom)
 {
     mupdf::FzPoint fzPoint(point.x(), point.y());
 
-    // Normalize
-    auto invMatrix = m_matrix.fz_invert_matrix();
+    auto oldMatrix = mupdf::FzMatrix();
+    oldMatrix.a = oldZoom;
+    oldMatrix.d = oldZoom;
+
+    auto invMatrix = oldMatrix.fz_invert_matrix();
     fzPoint = fzPoint.fz_transform_point(invMatrix);
 
-    // Apply new zoom
-    mupdf::FzMatrix newMatrix;
-    newMatrix.a = zoom;
-    newMatrix.d = zoom;
-    fzPoint = fzPoint.fz_transform_point(newMatrix);
+    fzPoint = fzPoint.fz_transform_point(m_matrix);
 
     return QPointF(fzPoint.x, fzPoint.y);
 }

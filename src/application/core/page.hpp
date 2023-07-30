@@ -17,14 +17,15 @@ class APPLICATION_LIBRARY Page
 public:
     Page(const Document* document, int pageNumber);
 
-    QImage renderPage();
     int getWidth() const;
     int getHeight() const;
-    QList<QRectF>& getBufferedHighlights();
 
-    QPointF scalePointToZoom(const QPointF& point, float zoom);
-
+    float getZoom() const;
     void setZoom(float newZoom);
+
+    QImage renderPage();
+    QList<QRectF>& getBufferedHighlights();
+    QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
     void setInvertColor(bool newInvertColor);
     void setHighlight(QPointF start, QPointF end);
     bool textIsBelowPoint(const QPoint& point);

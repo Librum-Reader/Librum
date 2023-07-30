@@ -64,14 +64,19 @@ void PageItem::setPageNumber(int newCurrentPage)
 
 void PageItem::updateZoom(float newZoom)
 {
+    auto oldZoom = m_page->getZoom();
+    m_page->setZoom(newZoom);
+
+    // Update highlight positions to match new zoom
     if(!m_highlightStart.isNull() && !m_highlightEnd.isNull())
     {
-        m_highlightStart = m_page->scalePointToZoom(m_highlightStart, newZoom);
-        m_highlightEnd = m_page->scalePointToZoom(m_highlightEnd, newZoom);
+        m_highlightStart =
+            m_page->scalePointToCurrentZoom(m_highlightStart, oldZoom);
+        m_highlightEnd =
+            m_page->scalePointToCurrentZoom(m_highlightEnd, oldZoom);
         generateHighlights();
     }
 
-    m_page->setZoom(newZoom);
     emit implicitWidthChanged();
     emit implicitHeightChanged();
 }
