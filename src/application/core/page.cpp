@@ -17,7 +17,7 @@ application::core::Page::Page(const Document* document, int pageNumber) :
 
     setupDisplayList(boundPage);
     setupTextPage(pageNumber);
-    setupSymbolBounds(boundPage);
+    setupSymbolBounds();
 }
 
 void Page::setupDisplayList(const mupdf::FzRect& boundPage)
@@ -40,15 +40,19 @@ void Page::setupTextPage(int pageNumber)
         std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
 }
 
-void Page::setupSymbolBounds(const mupdf::FzRect& boundPage)
+void Page::setupSymbolBounds()
 {
-    fz_quad hits[1000];
-    mupdf::FzPoint topLeft(boundPage.x0, boundPage.y0);
-    mupdf::FzPoint bottomRight(boundPage.x1, boundPage.y1);
-    int n = mupdf::ll_fz_highlight_selection(
-        m_textPage->m_internal, *topLeft.internal(), *bottomRight.internal(),
-        hits, 1000);
-    m_pageSymbolBounds = std::vector<fz_quad>(hits, hits + n);
+    auto curr = m_textPage->begin();
+    auto end = m_textPage->end();
+
+    m_pageSymbolBounds.resize(100);
+    while(curr != end)
+    {
+        auto symbol = curr;
+        fz_rect rect = symbol->m_internal->bbox;
+        m_pageSymbolBounds.emplace_back(rect);
+        ++curr;
+    }
 }
 
 QImage Page::renderPage()
@@ -217,9 +221,9 @@ bool Page::pointIsAboveText(const QPoint& point)
     mupdf::FzPoint fzPoint(point.x(), point.y());
     fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
 
-    for(auto& quad : m_pageSymbolBounds)
+    for(auto& rect : m_pageSymbolBounds)
     {
-        if(fzPoint.fz_is_point_inside_quad(quad))
+        if(fzPoint.fz_is_point_inside_rect(rect))
             return true;
     }
 

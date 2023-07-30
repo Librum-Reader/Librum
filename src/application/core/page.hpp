@@ -18,7 +18,7 @@ public:
     Page(const Document* document, int pageNumber);
     void setupDisplayList(const mupdf::FzRect& boundPage);
     void setupTextPage(int pageNumber);
-    void setupSymbolBounds(const mupdf::FzRect& boundPage);
+    void setupSymbolBounds();
 
     int getWidth() const;
     int getHeight() const;
@@ -47,7 +47,7 @@ private:
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
     QList<QRectF> m_bufferedSelectionRects;
-    std::vector<fz_quad> m_pageSymbolBounds;
+    std::vector<fz_rect> m_pageSymbolBounds;
     bool m_invertColor = false;
 
     bool m_pageImageOutdated = true;
