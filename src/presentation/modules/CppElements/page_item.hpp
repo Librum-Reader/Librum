@@ -37,6 +37,8 @@ public:
     void setColorInverted(bool newColorInverted);
     Q_INVOKABLE void setHighlight(int beginX, int beginY, int endX, int endY);
 
+    Q_INVOKABLE bool textIsBelowPoint(int x, int y);
+
 private slots:
     void updateZoom(float newZoom);
 

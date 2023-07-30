@@ -83,10 +83,28 @@ Pane
                     hoverEnabled: true
                     property var highlightStartPos
                     property var highlightEndPos
+
+                    onWheel:
+                    {
+                        NavigationLogic.handleWheel(wheel);
+                        wheel.accepted = true;
+                    }
+                    
+                    onClicked:
+                    {
+                        root.forceActiveFocus();
+                        mouse.accepted = false;
+                    }
                     
                     onPressed: highlightStartPos = Qt.point(mouseX, mouseY)
                     onPositionChanged:
                     {
+                        let textBelowCursor = page.textIsBelowPoint(mouseX, mouseY);
+                        if(textBelowCursor)
+                            cursorShape = Qt.IBeamCursor;
+                        else
+                            cursorShape = Qt.ArrowCursor;
+                        
                         if(!pressed)
                             return;
                         
@@ -101,29 +119,6 @@ Pane
             // Set the book's current page once the model is loaded
             onContentYChanged: NavigationLogic.updateCurrentPageCounter();
             Component.onCompleted: root.setPage(Globals.selectedBook.currentPage - 1);
-            
-            
-            MouseArea
-            {
-                id: wheelInterceptor
-                anchors.fill: parent
-                
-                onPressed: mouse.accepted = false
-                onReleased: mouse.accepted = false
-                
-                onWheel:
-                {
-                    NavigationLogic.handleWheel(wheel);
-                    wheel.accepted = true;
-                }
-                
-                // Take over focus when clicked
-                onClicked:
-                {
-                    root.forceActiveFocus();
-                    mouse.accepted = false;
-                }
-            }
             
             function getPageSpacing(zoom)
             {

@@ -123,6 +123,11 @@ void PageItem::setHighlight(int beginX, int beginY, int endX, int endY)
     update();
 }
 
+bool PageItem::textIsBelowPoint(int x, int y)
+{
+    return m_page->textIsBelowPoint(QPoint(x, y));
+}
+
 void PageItem::generateHighlights()
 {
     m_page->getBufferedHighlights().clear();

@@ -26,6 +26,13 @@ application::core::Page::Page(const Document* document, int pageNumber) :
         FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_PRESERVE_SPANS);
     m_textPage =
         std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
+
+    fz_quad hits[1000];
+    fz_point topLeft(boundPage.x0, boundPage.y0);
+    fz_point bottomRight(boundPage.x1, boundPage.y1);
+    int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal, topLeft,
+                                             bottomRight, hits, 1000);
+    m_allTextQuads = std::vector<fz_quad>(hits, hits + n);
 }
 
 QImage Page::renderPage()
@@ -160,6 +167,20 @@ void Page::setHighlight(QPointF start, QPointF end)
                     hit.ll.y - hit.ul.y);
         m_bufferedHighlights.append(rect);
     }
+}
+
+bool Page::textIsBelowPoint(const QPoint& point)
+{
+    mupdf::FzPoint fzPoint(point.x(), point.y());
+    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
+
+    for(auto& quad : m_allTextQuads)
+    {
+        if(fzPoint.fz_is_point_inside_quad(quad))
+            return true;
+    }
+
+    return false;
 }
 
 }  // namespace application::core

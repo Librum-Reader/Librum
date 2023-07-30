@@ -1,6 +1,7 @@
 #pragma once
 #include <QImage>
 #include <QList>
+#include <QPoint>
 #include <QPointF>
 #include <QRectF>
 #include "application_export.hpp"
@@ -25,6 +26,7 @@ public:
     void setZoom(float newZoom);
     void setInvertColor(bool newInvertColor);
     void setHighlight(QPointF start, QPointF end);
+    bool textIsBelowPoint(const QPoint& point);
 
 private:
     mupdf::FzPixmap getEmptyPixmap() const;
@@ -36,6 +38,7 @@ private:
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
     QList<QRectF> m_bufferedHighlights;
+    std::vector<fz_quad> m_allTextQuads;
     bool m_invertColor = false;
 
     bool m_pageImageInvalid = true;
