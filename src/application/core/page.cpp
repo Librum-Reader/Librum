@@ -43,10 +43,11 @@ void Page::setupTextPage(int pageNumber)
 void Page::setupSymbolBounds(const mupdf::FzRect& boundPage)
 {
     fz_quad hits[1000];
-    fz_point topLeft(boundPage.x0, boundPage.y0);
-    fz_point bottomRight(boundPage.x1, boundPage.y1);
-    int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal, topLeft,
-                                             bottomRight, hits, 1000);
+    mupdf::FzPoint topLeft(boundPage.x0, boundPage.y0);
+    mupdf::FzPoint bottomRight(boundPage.x1, boundPage.y1);
+    int n = mupdf::ll_fz_highlight_selection(
+        m_textPage->m_internal, *topLeft.internal(), *bottomRight.internal(),
+        hits, 1000);
     m_pageSymbolBounds = std::vector<fz_quad>(hits, hits + n);
 }
 
