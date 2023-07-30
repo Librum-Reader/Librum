@@ -27,7 +27,7 @@ endif()
 if(UNIX)
     string(CONCAT LIBRUM_WARNINGS "-Wall;-Wextra;-Wshadow;-Wnon-virtual-dtor;-Wold-style-cast;-Wcast-align;"
                                   "-Wunused;-Woverloaded-virtual;-Wpedantic;-Wmissing-include-dirs;"
-                                  "-Wnull-dereference;-Wdouble-promotion;-Wformat=2;-Wcast-qual;-Winit-self;"
+                                  "-Wnull-dereference;-Wformat=2;-Wcast-qual;-Winit-self;"
                                   "-Wswitch-enum;-Wunreachable-code;-Wredundant-decls;")
 
     # GCC specific warnings
