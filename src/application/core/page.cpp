@@ -190,6 +190,21 @@ void Page::generateSelectionRects(QPointF start, QPointF end)
     }
 }
 
+QRectF Page::getRectForWord(QPointF wordPos)
+{
+    mupdf::FzPoint fzPoint(wordPos.x(), wordPos.y());
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    auto normPoint = fzPoint.fz_transform_point(invMatrix);
+
+    auto quad = mupdf::ll_fz_snap_selection(
+        m_textPage->m_internal, normPoint.internal(), normPoint.internal(),
+        FZ_SELECT_WORDS);
+    mupdf::FzQuad fzQuad(quad);
+    fzQuad = fzQuad.fz_transform_quad(m_matrix);
+
+    return fzQuadToQRectF(fzQuad);
+}
+
 QRectF Page::fzQuadToQRectF(const mupdf::FzQuad& rect)
 {
     float width = rect.ur.x - rect.ul.x;

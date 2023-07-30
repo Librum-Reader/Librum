@@ -91,7 +91,7 @@ Pane
                         wheel.accepted = true;
                     }
                     
-                    onClicked: mouse.accepted = false;
+                    onDoubleClicked: page.selectWord(mouseX, mouseY);
                     
                     onPressed:
                     {

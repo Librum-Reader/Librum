@@ -136,6 +136,23 @@ void PageItem::select(int beginX, int beginY, int endX, int endY)
     update();
 }
 
+void PageItem::selectWord(int x, int y)
+{
+    QPointF wordPos = QPointF(x, y);
+
+
+    auto rect = m_page->getRectForWord(wordPos);
+    QPoint leftMiddle(rect.left(), rect.center().y());
+    QPoint rightMiddle(rect.right(), rect.center().y());
+
+    m_selectionStart = leftMiddle;
+    m_selectionEnd = rightMiddle;
+
+    m_page->getBufferedSelectionRects().clear();
+    generateSelection();
+    update();
+}
+
 void PageItem::removeSelection()
 {
     m_page->getBufferedSelectionRects().clear();
