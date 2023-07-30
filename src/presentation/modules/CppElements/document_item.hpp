@@ -3,8 +3,8 @@
 #include <QString>
 #include <memory>
 #include "document.hpp"
-#include "toc/filtered_toc_model.hpp"
 #include "presentation_export.hpp"
+#include "toc/filtered_toc_model.hpp"
 
 namespace cpp_elements
 {
@@ -34,6 +34,9 @@ public:
 
     application::core::FilteredTOCModel* getTableOfContents() const;
 
+    Q_INVOKABLE void search(const QString& text);
+    Q_INVOKABLE void clearSearch();
+
     const application::core::Document* internal() const;
 
 signals:
@@ -42,6 +45,8 @@ signals:
     void currentPageChanged(int currentPage);
     void zoomChanged(float newZoom);
     void tableOfContentsChanged();
+    void moveToNextHit(int pageNumber, int y);
+    void highlightText(int pageNumber, QRectF rect);
 
 private:
     std::unique_ptr<application::core::Document> m_document;

@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QPainter>
 #include <QQuickWindow>
+#include <QRectF>
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
 
@@ -14,6 +15,12 @@ namespace cpp_elements
 cpp_elements::PageItem::PageItem()
 {
     setFlag(QQuickItem::ItemHasContents, true);
+
+    connect(m_document, &DocumentItem::highlightText, this,
+            [](int pageNumber, QRectF rect)
+            {
+                qDebug() << "Highlighting: " << pageNumber;
+            });
 }
 
 int PageItem::getImplicitWidth() const

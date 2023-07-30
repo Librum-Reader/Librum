@@ -19,13 +19,23 @@ Pane
     
     padding: 0
     background: Rectangle { color: "transparent" }
+    Keys.onTabPressed: (event) => { event.accepted = true; } // Disable pressing tab to focus other elements
     
-    Component.onCompleted: 
+    Component.onCompleted:
     {
         root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
     }
+
     
-    Keys.onTabPressed: (event) => { event.accepted = true; } // Disable pressing tab to focus other elements
+    Connections
+    {
+        target: documentItem
+        function onMoveToNextHit(pageNumber, x, y, width, height)
+        {
+            root.setPage(pageNumber, y);
+        }
+    }
+    
     
     MouseArea
     {

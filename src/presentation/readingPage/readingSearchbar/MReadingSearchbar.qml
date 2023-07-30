@@ -9,7 +9,8 @@ import Librum.icons
 Item
 {
     id: root
-    signal textChanged(string newText)
+    signal searchQueried(string query)
+    signal clearQuery()
     signal nextButtonWasClicked
     signal previousButtonWasClicked
     
@@ -17,7 +18,18 @@ Item
     implicitWidth: 1000
     
     // Make sure to remove the focus from the textinput when the searchbar is closed
-    onVisibleChanged: visible ? inputField.forceActiveFocus() : root.forceActiveFocus()
+    onVisibleChanged:
+    {
+        if(visible)
+        {
+            inputField.forceActiveFocus()
+        }
+        else
+        {
+            root.clearQuery();
+            root.forceActiveFocus()
+        }
+    }
     
     // Close on pressing escape
     Keys.onPressed:
@@ -138,7 +150,7 @@ Item
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
-                            onTextChanged: root.textChanged(text)
+                            Keys.onReturnPressed: root.searchQueried(text)
                         }
                     }
                 }

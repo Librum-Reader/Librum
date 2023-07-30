@@ -66,6 +66,37 @@ FilteredTOCModel* Document::getFilteredTOCModel()
     return m_filteredTOCModel.get();
 }
 
+void Document::search(const QString& text)
+{
+    for(int i = 0; i < m_document.fz_count_pages(); ++i)
+    {
+        mupdf::FzStextOptions options;
+        mupdf::FzStextPage textPage(*this->internal(), i, options);
+        const int maxHits = 100;
+        int hitMarks[maxHits];
+        auto hits = textPage.search_stext_page(text.toStdString().c_str(),
+                                               hitMarks, maxHits);
+
+        m_searchHits.reserve(hits.size());
+        for(auto& hit : hits)
+        {
+            m_searchHits.emplace_back(i, fzQuadToQRectF(hit));
+        }
+    }
+}
+
+QRectF Document::fzQuadToQRectF(const mupdf::FzQuad& rect)
+{
+    float width = rect.ur.x - rect.ul.x;
+    float height = rect.ll.y - rect.ul.y;
+    return QRectF(rect.ul.x, rect.ul.y, width, height);
+}
+
+std::vector<SearchHit>& Document::getSearchHits()
+{
+    return m_searchHits;
+}
+
 const mupdf::FzDocument* Document::internal() const
 {
     return &m_document;

@@ -64,6 +64,24 @@ void DocumentItem::setZoom(float newZoom)
     emit zoomChanged(m_zoom);
 }
 
+void DocumentItem::search(const QString& text)
+{
+    clearSearch();
+    m_document->search(text);
+
+    if(!m_document->getSearchHits().empty())
+    {
+        auto hit = m_document->getSearchHits().front();
+        emit moveToNextHit(hit.pageNumber, hit.rect.y());
+        emit highlightText(hit.pageNumber, hit.rect);
+    }
+}
+
+void DocumentItem::clearSearch()
+{
+    m_document->getSearchHits().clear();
+}
+
 application::core::FilteredTOCModel* DocumentItem::getTableOfContents() const
 {
     if(m_document == nullptr)
