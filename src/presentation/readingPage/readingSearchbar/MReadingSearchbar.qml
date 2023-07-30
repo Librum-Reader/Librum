@@ -11,8 +11,8 @@ Item
     id: root
     signal searchQueried(string query)
     signal clearQuery()
-    signal nextButtonWasClicked
-    signal previousButtonWasClicked
+    signal nextButtonClicked
+    signal previousButtonClicked
     
     implicitHeight: 48
     implicitWidth: 1000
@@ -27,6 +27,7 @@ Item
         else
         {
             root.clearQuery();
+            inputField.clear();
             root.forceActiveFocus()
         }
     }
@@ -172,7 +173,7 @@ Item
                     imageSize: 13
                     imageSpacing: 10
                     
-                    onClicked: root.nextButtonWasClicked()
+                    onClicked: root.nextButtonClicked()
                 }
                 
                 MButton
@@ -192,7 +193,7 @@ Item
                     imageSize: 13
                     imageSpacing: 10
                     
-                    onClicked: root.previousButtonWasClicked()
+                    onClicked: root.previousButtonClicked()
                 }
             }
         }

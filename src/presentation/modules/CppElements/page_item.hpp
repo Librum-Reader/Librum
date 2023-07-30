@@ -52,6 +52,7 @@ protected:
 private:
     void paintSelectionOnPage(QPainter& painter);
     void generateSelection();
+    void selectPosition(QRectF rect);
 
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;

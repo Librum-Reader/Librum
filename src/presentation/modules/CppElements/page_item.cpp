@@ -15,12 +15,6 @@ namespace cpp_elements
 cpp_elements::PageItem::PageItem()
 {
     setFlag(QQuickItem::ItemHasContents, true);
-
-    connect(m_document, &DocumentItem::highlightText, this,
-            [](int pageNumber, QRectF rect)
-            {
-                qDebug() << "Highlighting: " << pageNumber;
-            });
 }
 
 int PageItem::getImplicitWidth() const
@@ -50,13 +44,22 @@ void PageItem::setDocument(DocumentItem* newDocument)
     m_page = std::make_unique<application::core::Page>(m_document->internal(),
                                                        m_currentPage);
 
-    connect(m_document, &DocumentItem::zoomChanged, this,
-            &PageItem::updateZoom);
-
     m_page->setZoom(m_document->getZoom());
     emit implicitWidthChanged();
     emit implicitHeightChanged();
     update();
+
+    connect(m_document, &DocumentItem::zoomChanged, this,
+            &PageItem::updateZoom);
+
+    connect(m_document, &DocumentItem::highlightText, this,
+            [this](int pageNumber, QRectF rect)
+            {
+                if(pageNumber != m_currentPage)
+                    return;
+
+                selectPosition(rect);
+            });
 }
 
 int PageItem::getPageNumber() const
@@ -184,6 +187,23 @@ void PageItem::generateSelection()
 {
     m_page->getBufferedSelectionRects().clear();
     m_page->generateSelectionRects(m_selectionStart, m_selectionEnd);
+}
+
+void PageItem::selectPosition(QRectF rect)
+{
+    mupdf::FzPoint leftMiddle(rect.left(), rect.center().y());
+    mupdf::FzPoint rightMiddle(rect.right(), rect.center().y());
+
+    // Make sure to apply the current zoom to the points since "select" expects
+    // them to be in the current zoom.
+    auto zoom = m_page->getZoom();
+    mupdf::FzMatrix matrix;
+    matrix = matrix.fz_scale(zoom, zoom);
+
+    leftMiddle = leftMiddle.fz_transform_point(matrix);
+    rightMiddle = rightMiddle.fz_transform_point(matrix);
+
+    select(leftMiddle.x, leftMiddle.y, rightMiddle.x, rightMiddle.y);
 }
 
 void PageItem::setColorInverted(bool newColorInverted)
