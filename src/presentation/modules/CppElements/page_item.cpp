@@ -1,10 +1,12 @@
 #include "page_item.hpp"
+#include <QClipboard>
 #include <QDebug>
 #include <QImage>
 #include <QObject>
 #include <QPainter>
 #include <QQuickWindow>
 #include <QSGSimpleTextureNode>
+#include <QtWidgets/QApplication>
 
 namespace cpp_elements
 {
@@ -127,6 +129,15 @@ void PageItem::removeHighlight()
 {
     m_page->getBufferedHighlights().clear();
     update();
+}
+
+void PageItem::copyHighlightedText()
+{
+    auto clipboard = QApplication::clipboard();
+    QString text =
+        m_page->getTextFromCurrentHighlight(m_highlightStart, m_highlightEnd);
+
+    clipboard->setText(text);
 }
 
 bool PageItem::textIsBelowPoint(int x, int y)

@@ -70,13 +70,21 @@ Pane
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
                 anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
                 
+                Keys.onPressed: (event) =>
+                                {
+                                    if(event.key === Qt.Key_C && (event.modifiers & Qt.ControlModifier))
+                                    {
+                                        page.copyHighlightedText();
+                                    }
+                                }
+                
                 MouseArea
                 {
                     anchors.fill: parent
                     hoverEnabled: true
                     property var highlightStartPos
                     property var highlightEndPos
-
+                    
                     onWheel:
                     {
                         NavigationLogic.handleWheel(wheel);
@@ -104,7 +112,8 @@ Pane
                         if(!pressed)
                             return;
                         
-                        highlightEndPos = Qt.point(mouseX, mouseY)
+                        highlightEndPos = Qt.point(mouseX, mouseY);
+                        page.forceActiveFocus();
                         page.setHighlight(highlightStartPos.x, highlightStartPos.y, 
                                           highlightEndPos.x, highlightEndPos.y)
                     }

@@ -4,6 +4,7 @@
 #include <QPoint>
 #include <QPointF>
 #include <QRectF>
+#include <QString>
 #include "application_export.hpp"
 #include "document.hpp"
 #include "mupdf/classes.h"
@@ -27,6 +28,8 @@ public:
     void setInvertColor(bool newInvertColor);
     void setHighlight(QPointF start, QPointF end);
     bool textIsBelowPoint(const QPoint& point);
+    QString getTextFromCurrentHighlight(const QPointF& start,
+                                        const QPointF& end);
 
 private:
     mupdf::FzPixmap getEmptyPixmap() const;

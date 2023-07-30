@@ -183,4 +183,17 @@ bool Page::textIsBelowPoint(const QPoint& point)
     return false;
 }
 
+QString Page::getTextFromCurrentHighlight(const QPointF& start,
+                                          const QPointF& end)
+{
+    mupdf::FzPoint fzStart(start.x(), start.y());
+    mupdf::FzPoint fzEnd(end.x(), end.y());
+    fzStart = fzStart.transform(m_matrix.fz_invert_matrix());
+    fzEnd = fzEnd.transform(m_matrix.fz_invert_matrix());
+
+    auto result = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
+
+    return QString::fromStdString(result);
+}
+
 }  // namespace application::core
