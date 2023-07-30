@@ -39,13 +39,6 @@ Pane
         onPressed: mouse.accepted = false
         onReleased: mouse.accepted = false
         
-        // Take over focus when clicked
-        onClicked:
-        {
-            root.forceActiveFocus();
-            mouse.accepted = false;
-        }
-        
         
         ListView
         {
@@ -90,13 +83,16 @@ Pane
                         wheel.accepted = true;
                     }
                     
-                    onClicked:
+                    onClicked: mouse.accepted = false;
+                    
+                    onPressed:
                     {
                         root.forceActiveFocus();
-                        mouse.accepted = false;
+                        page.removeHighlight();
+                        highlightStartPos = Qt.point(mouseX, mouseY)
+                        
+                        mouse.accepted = true;
                     }
-                    
-                    onPressed: highlightStartPos = Qt.point(mouseX, mouseY)
                     onPositionChanged:
                     {
                         let textBelowCursor = page.textIsBelowPoint(mouseX, mouseY);
