@@ -30,7 +30,7 @@ Pane
     Connections
     {
         target: documentItem
-        function onMoveToNextHit(pageNumber, x, y, width, height)
+        function onMoveToNextHit(pageNumber, y)
         {
             root.setPage(pageNumber, y);
         }
