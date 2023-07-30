@@ -36,7 +36,7 @@ private:
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
     QList<QRectF> m_bufferedHighlights;
-    bool m_invertColor;
+    bool m_invertColor = false;
 
     bool m_pageImageInvalid = true;
     QImage m_pageImage;
