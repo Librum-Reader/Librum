@@ -127,7 +127,7 @@ void PageItem::paintSelectionOnPage(QPainter& painter)
     }
 }
 
-void PageItem::setSelection(int beginX, int beginY, int endX, int endY)
+void PageItem::select(int beginX, int beginY, int endX, int endY)
 {
     m_selectionStart = QPointF(beginX, beginY);
     m_selectionEnd = QPointF(endX, endY);
@@ -159,7 +159,7 @@ bool PageItem::pointIsAboveText(int x, int y)
 void PageItem::generateSelection()
 {
     m_page->getBufferedSelectionRects().clear();
-    m_page->setSelection(m_selectionStart, m_selectionEnd);
+    m_page->generateSelectionRects(m_selectionStart, m_selectionEnd);
 }
 
 void PageItem::setColorInverted(bool newColorInverted)

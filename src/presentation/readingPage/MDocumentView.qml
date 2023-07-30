@@ -114,8 +114,8 @@ Pane
                         
                         selectionEndPos = Qt.point(mouseX, mouseY);
                         page.forceActiveFocus();
-                        page.setSelection(selectionStartPos.x, selectionStartPos.y, 
-                                          selectionEndPos.x, selectionEndPos.y)
+                        page.select(selectionStartPos.x, selectionStartPos.y, 
+                                    selectionEndPos.x, selectionEndPos.y)
                     }
                 }
             }

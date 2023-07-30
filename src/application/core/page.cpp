@@ -167,7 +167,7 @@ void Page::setInvertColor(bool newInvertColor)
     m_pageImageOutdated = true;
 }
 
-void Page::setSelection(QPointF start, QPointF end)
+void Page::generateSelectionRects(QPointF start, QPointF end)
 {
     mupdf::FzPoint fzStart(start.x(), start.y());
     mupdf::FzPoint fzEnd(end.x(), end.y());

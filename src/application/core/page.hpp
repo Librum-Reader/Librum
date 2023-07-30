@@ -31,7 +31,7 @@ public:
     QImage renderPage();
     QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
     void setInvertColor(bool newInvertColor);
-    void setSelection(QPointF start, QPointF end);
+    void generateSelectionRects(QPointF start, QPointF end);
     QString getTextFromSelection(const QPointF& start, const QPointF& end);
     bool pointIsAboveText(const QPoint& point);
 

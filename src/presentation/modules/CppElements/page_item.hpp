@@ -35,7 +35,7 @@ public:
     void setPageNumber(int newCurrentPage);
 
     void setColorInverted(bool newColorInverted);
-    Q_INVOKABLE void setSelection(int beginX, int beginY, int endX, int endY);
+    Q_INVOKABLE void select(int beginX, int beginY, int endX, int endY);
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE bool pointIsAboveText(int x, int y);
