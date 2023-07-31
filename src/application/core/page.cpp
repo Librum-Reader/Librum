@@ -32,8 +32,7 @@ void Page::setupDisplayList(const mupdf::FzRect& boundPage)
 
 void Page::setupTextPage(int pageNumber)
 {
-    mupdf::FzStextOptions options(FZ_STEXT_PRESERVE_LIGATURES |
-                                  FZ_STEXT_PRESERVE_IMAGES);
+    mupdf::FzStextOptions options;
     m_textPage =
         std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
 }
