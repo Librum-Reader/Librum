@@ -80,7 +80,11 @@ void Document::search(const QString& text)
         m_searchHits.reserve(hits.size());
         for(auto& hit : hits)
         {
-            m_searchHits.emplace_back(i, fzQuadToQRectF(hit));
+            SearchHit searchHit {
+                .pageNumber = i,
+                .rect = fzQuadToQRectF(hit),
+            };
+            m_searchHits.emplace_back(searchHit);
         }
     }
 }
