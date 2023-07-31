@@ -36,7 +36,9 @@ public:
 
     void setColorInverted(bool newColorInverted);
     Q_INVOKABLE void select(int beginX, int beginY, int endX, int endY);
-    Q_INVOKABLE void selectWord(int x, int y);
+    Q_INVOKABLE void selectSingleWord(int x, int y);
+    Q_INVOKABLE void selectMultipleWords(int beginX, int beginY, int endX,
+                                         int endY);
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE bool pointIsAboveText(int x, int y);

@@ -1,6 +1,7 @@
 #pragma once
 #include <QImage>
 #include <QList>
+#include <QPair>
 #include <QPoint>
 #include <QPointF>
 #include <QRectF>
@@ -32,7 +33,8 @@ public:
     QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
     void setInvertColor(bool newInvertColor);
     void generateSelectionRects(QPointF start, QPointF end);
-    QRectF getRectForWord(QPointF wordPos);
+    QPair<QPointF, QPointF> getPositionsForWordSelection(QPointF begin,
+                                                         QPointF end);
     QString getTextFromSelection(const QPointF& start, const QPointF& end);
     bool pointIsAboveText(const QPoint& point);
 

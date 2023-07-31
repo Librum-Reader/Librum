@@ -146,19 +146,27 @@ void PageItem::select(int beginX, int beginY, int endX, int endY)
     update();
 }
 
-void PageItem::selectWord(int x, int y)
+void PageItem::selectSingleWord(int x, int y)
 {
     QPointF wordPos = QPointF(x, y);
+    auto points = m_page->getPositionsForWordSelection(wordPos, wordPos);
 
+    m_selectionStart = points.first;
+    m_selectionEnd = points.second;
 
-    auto rect = m_page->getRectForWord(wordPos);
-    QPoint leftMiddle(rect.left(), rect.center().y());
-    QPoint rightMiddle(rect.right(), rect.center().y());
+    generateSelection();
+    update();
+}
 
-    m_selectionStart = leftMiddle;
-    m_selectionEnd = rightMiddle;
+void PageItem::selectMultipleWords(int beginX, int beginY, int endX, int endY)
+{
+    QPointF begin(beginX, beginY);
+    QPointF end(endX, endY);
 
-    m_page->getBufferedSelectionRects().clear();
+    auto positions = m_page->getPositionsForWordSelection(begin, end);
+    m_selectionStart = positions.first;
+    m_selectionEnd = positions.second;
+
     generateSelection();
     update();
 }

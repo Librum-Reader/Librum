@@ -25,7 +25,7 @@ Pane
     {
         root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
     }
-
+    
     
     Connections
     {
@@ -73,6 +73,8 @@ Pane
             delegate: PageItem
             {
                 id: page
+                property bool ctrlPressed: false
+                
                 pageNumber: modelData
                 document: documentItem
                 height: implicitHeight
@@ -86,7 +88,18 @@ Pane
                                     {
                                         page.copySelectedText();
                                     }
+                                    else if(event.modifiers & Qt.ControlModifier)
+                                    {
+                                        page.ctrlPressed = true;
+                                    }
                                 }
+                Keys.onReleased: (event) =>
+                                 {
+                                     if(event.key === Qt.Key_Control)
+                                     {
+                                         page.ctrlPressed = false;
+                                     }
+                                 }
                 
                 MouseArea
                 {
@@ -94,6 +107,7 @@ Pane
                     hoverEnabled: true
                     property var selectionStartPos
                     property var selectionEndPos
+                    property bool isDoubleClickHold: false
                     
                     onWheel:
                     {
@@ -101,7 +115,21 @@ Pane
                         wheel.accepted = true;
                     }
                     
-                    onDoubleClicked: page.selectWord(mouseX, mouseY);
+                    onDoubleClicked:
+                    {
+                        page.selectSingleWord(mouseX, mouseY);
+                        
+                        if(!page.ctrlPressed)
+                            isDoubleClickHold = true;
+                    }
+                    
+                    onReleased: 
+                    {
+                        if(isDoubleClickHold)
+                            isDoubleClickHold = false;
+                        
+                        mouse.accepted = true;
+                    }
                     
                     onPressed:
                     {
@@ -111,6 +139,7 @@ Pane
                         
                         mouse.accepted = true;
                     }
+                    
                     onPositionChanged:
                     {
                         let textBelowCursor = page.pointIsAboveText(mouseX, mouseY);
@@ -124,8 +153,17 @@ Pane
                         
                         selectionEndPos = Qt.point(mouseX, mouseY);
                         page.forceActiveFocus();
-                        page.select(selectionStartPos.x, selectionStartPos.y, 
-                                    selectionEndPos.x, selectionEndPos.y)
+                        
+                        if(page.ctrlPressed || isDoubleClickHold)
+                        {
+                            page.selectMultipleWords(selectionStartPos.x, selectionStartPos.y, 
+                                                     selectionEndPos.x, selectionEndPos.y)
+                        }
+                        else
+                        {
+                            page.select(selectionStartPos.x, selectionStartPos.y, 
+                                        selectionEndPos.x, selectionEndPos.y);
+                        }
                     }
                 }
             }

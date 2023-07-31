@@ -191,19 +191,24 @@ void Page::generateSelectionRects(QPointF start, QPointF end)
     }
 }
 
-QRectF Page::getRectForWord(QPointF wordPos)
+QPair<QPointF, QPointF> Page::getPositionsForWordSelection(QPointF begin,
+                                                           QPointF end)
 {
-    mupdf::FzPoint fzPoint(wordPos.x(), wordPos.y());
+    mupdf::FzPoint fzBegin(begin.x(), begin.y());
+    mupdf::FzPoint fzEnd(end.x(), end.y());
     auto invMatrix = m_matrix.fz_invert_matrix();
-    auto normPoint = fzPoint.fz_transform_point(invMatrix);
+    fzBegin = fzBegin.fz_transform_point(invMatrix);
+    fzEnd = fzEnd.fz_transform_point(invMatrix);
 
-    auto quad = mupdf::ll_fz_snap_selection(
-        m_textPage->m_internal, normPoint.internal(), normPoint.internal(),
-        FZ_SELECT_WORDS);
-    mupdf::FzQuad fzQuad(quad);
-    fzQuad = fzQuad.fz_transform_quad(m_matrix);
+    // This modifies the normBegin and fzEnd normEnd.
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
+                                fzEnd.internal(), FZ_SELECT_WORDS);
 
-    return fzQuadToQRectF(fzQuad);
+    fzBegin = fzBegin.fz_transform_point(m_matrix);
+    fzEnd = fzEnd.fz_transform_point(m_matrix);
+
+    return QPair<QPointF, QPointF>(QPointF(fzBegin.x, fzBegin.y),
+                                   QPointF(fzEnd.x, fzEnd.y));
 }
 
 QRectF Page::fzQuadToQRectF(const mupdf::FzQuad& rect)
