@@ -32,10 +32,8 @@ void Page::setupDisplayList(const mupdf::FzRect& boundPage)
 
 void Page::setupTextPage(int pageNumber)
 {
-    mupdf::FzStextOptions options(
-        FZ_STEXT_PRESERVE_LIGATURES | FZ_STEXT_PRESERVE_WHITESPACE |
-        FZ_STEXT_PRESERVE_IMAGES | FZ_STEXT_PRESERVE_SPANS);
-
+    mupdf::FzStextOptions options(FZ_STEXT_PRESERVE_LIGATURES |
+                                  FZ_STEXT_PRESERVE_IMAGES);
     m_textPage =
         std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
 }
@@ -238,7 +236,6 @@ QString Page::getTextFromSelection(const QPointF& start, const QPointF& end)
     fzEnd = fzEnd.transform(m_matrix.fz_invert_matrix());
 
     auto text = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
-
     return QString::fromStdString(text);
 }
 
