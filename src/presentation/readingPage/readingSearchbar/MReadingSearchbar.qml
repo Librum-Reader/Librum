@@ -140,6 +140,8 @@ Item
                         TextField
                         {
                             id: inputField
+                            property string previousText
+                            
                             Layout.fillWidth: true
                             Layout.fillHeight: true
                             Layout.alignment: Qt.AlignVCenter
@@ -151,7 +153,18 @@ Item
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
-                            Keys.onReturnPressed: root.searchQueried(text)
+                            Keys.onReturnPressed:
+                            {
+                                // When clicking Enter without changing the text, go to the next hit
+                                if(previousText == text)
+                                {
+                                    root.nextButtonClicked();
+                                    return;
+                                }
+                                
+                                root.searchQueried(text);
+                                previousText = text;
+                            }
                         }
                     }
                 }
