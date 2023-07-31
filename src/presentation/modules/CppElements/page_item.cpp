@@ -8,6 +8,7 @@
 #include <QRectF>
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
+#include "qnamespace.h"
 
 namespace cpp_elements
 {
@@ -15,6 +16,11 @@ namespace cpp_elements
 cpp_elements::PageItem::PageItem()
 {
     setFlag(QQuickItem::ItemHasContents, true);
+    setAcceptedMouseButtons(Qt::AllButtons);
+    setAcceptHoverEvents(true);
+
+    m_tripleClickTimer.setInterval(450);
+    m_tripleClickTimer.setSingleShot(true);
 }
 
 int PageItem::getImplicitWidth() const
@@ -126,6 +132,80 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     return n;
 }
 
+void PageItem::mouseDoubleClickEvent(QMouseEvent* event)
+{
+    m_selectionStart = QPointF(event->position().x(), event->position().y());
+    m_selectionEnd = QPointF(event->position().x(), event->position().y());
+    selectSingleWord();
+
+    m_tripleClickTimer.start();
+    m_doubleClickHold = true;
+}
+
+void PageItem::mousePressEvent(QMouseEvent* event)
+{
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+
+    forceActiveFocus();
+    removeSelection();
+
+    // Select line when left mouse button is pressed 3 times
+    if(m_tripleClickTimer.isActive())
+    {
+        m_selectionStart = QPointF(mouseX, mouseY);
+        selectLine();
+        m_tripleClickTimer.stop();
+        return;
+    }
+
+    m_selectionStart = QPointF(mouseX, mouseY);
+}
+
+void PageItem::mouseMoveEvent(QMouseEvent* event)
+{
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+    m_selectionEnd = QPointF(mouseX, mouseY);
+
+    if(m_doubleClickHold)
+    {
+        selectMultipleWords();
+    }
+    else
+    {
+        drawSelection();
+    }
+}
+
+void PageItem::hoverMoveEvent(QHoverEvent* event)
+{
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+
+    if(pointIsAboveText(mouseX, mouseY))
+    {
+        QApplication::setOverrideCursor(Qt::IBeamCursor);
+    }
+    else
+    {
+        QApplication::setOverrideCursor(Qt::ArrowCursor);
+    }
+}
+
+void PageItem::keyPressEvent(QKeyEvent* event)
+{
+    if(event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier)
+    {
+        copySelectedText();
+    }
+}
+
+void PageItem::mouseReleaseEvent(QMouseEvent* event)
+{
+    m_doubleClickHold = false;
+}
+
 void PageItem::paintSelectionOnPage(QPainter& painter)
 {
     auto& bufferedSelectionRects = m_page->getBufferedSelectionRects();
@@ -137,56 +217,52 @@ void PageItem::paintSelectionOnPage(QPainter& painter)
     }
 }
 
-void PageItem::select(int beginX, int beginY, int endX, int endY)
+void PageItem::drawSelection()
 {
-    m_selectionStart = QPointF(beginX, beginY);
-    m_selectionEnd = QPointF(endX, endY);
-
     generateSelection();
     update();
 }
 
-void PageItem::selectSingleWord(int x, int y)
+void PageItem::generateSelection()
 {
-    QPointF wordPos = QPointF(x, y);
-    auto points = m_page->getPositionsForWordSelection(wordPos, wordPos);
-
-    m_selectionStart = points.first;
-    m_selectionEnd = points.second;
-
-    generateSelection();
-    update();
-}
-
-void PageItem::selectMultipleWords(int beginX, int beginY, int endX, int endY)
-{
-    QPointF begin(beginX, beginY);
-    QPointF end(endX, endY);
-
-    auto positions = m_page->getPositionsForWordSelection(begin, end);
-    m_selectionStart = positions.first;
-    m_selectionEnd = positions.second;
-
-    generateSelection();
-    update();
-}
-
-void PageItem::selectLine(int x, int y)
-{
-    QPointF point(x, y);
-
-    auto positions = m_page->getPositionsForLineSelection(point);
-    m_selectionStart = positions.first;
-    m_selectionEnd = positions.second;
-
-    generateSelection();
-    update();
+    m_page->getBufferedSelectionRects().clear();
+    m_page->generateSelectionRects(m_selectionStart, m_selectionEnd);
 }
 
 void PageItem::removeSelection()
 {
     m_page->getBufferedSelectionRects().clear();
     update();
+}
+
+void PageItem::selectSingleWord()
+{
+    auto points =
+        m_page->getPositionsForWordSelection(m_selectionStart, m_selectionEnd);
+
+    m_selectionStart = points.first;
+    m_selectionEnd = points.second;
+
+    drawSelection();
+}
+
+void PageItem::selectMultipleWords()
+{
+    auto positions =
+        m_page->getPositionsForWordSelection(m_selectionStart, m_selectionEnd);
+    m_selectionStart = positions.first;
+    m_selectionEnd = positions.second;
+
+    drawSelection();
+}
+
+void PageItem::selectLine()
+{
+    auto positions = m_page->getPositionsForLineSelection(m_selectionStart);
+    m_selectionStart = positions.first;
+    m_selectionEnd = positions.second;
+
+    drawSelection();
 }
 
 void PageItem::copySelectedText()
@@ -203,19 +279,13 @@ bool PageItem::pointIsAboveText(int x, int y)
     return m_page->pointIsAboveText(QPoint(x, y));
 }
 
-void PageItem::generateSelection()
-{
-    m_page->getBufferedSelectionRects().clear();
-    m_page->generateSelectionRects(m_selectionStart, m_selectionEnd);
-}
-
 void PageItem::selectPosition(QRectF rect)
 {
     mupdf::FzPoint leftMiddle(rect.left(), rect.center().y());
     mupdf::FzPoint rightMiddle(rect.right(), rect.center().y());
 
-    // Make sure to apply the current zoom to the points since "select" expects
-    // them to be in the current zoom.
+    // Make sure to apply the current zoom to the points since "drawSelection"
+    // expects them to be in the current zoom.
     auto zoom = m_page->getZoom();
     mupdf::FzMatrix matrix;
     matrix = matrix.fz_scale(zoom, zoom);
@@ -223,7 +293,10 @@ void PageItem::selectPosition(QRectF rect)
     leftMiddle = leftMiddle.fz_transform_point(matrix);
     rightMiddle = rightMiddle.fz_transform_point(matrix);
 
-    select(leftMiddle.x, leftMiddle.y, rightMiddle.x, rightMiddle.y);
+    m_selectionStart = QPointF(leftMiddle.x, leftMiddle.y);
+    m_selectionEnd = QPointF(rightMiddle.x, rightMiddle.y);
+
+    drawSelection();
 }
 
 void PageItem::setColorInverted(bool newColorInverted)

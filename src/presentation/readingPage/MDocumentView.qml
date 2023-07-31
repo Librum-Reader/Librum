@@ -7,57 +7,56 @@ import Librum.globals
 import Librum.controllers
 import "DocumentNavigation.js" as NavigationLogic
 
+
 /*
   A view on the document's pages in a certain layout (e.g. vertical)
   */
-Pane
-{
+Pane {
     id: root
     property var document
     signal clicked
     signal zoomFactorChanged(real factor)
-    
+
     padding: 0
-    background: Rectangle { color: "transparent" }
-    Keys.onTabPressed: (event) => { event.accepted = true; } // Disable pressing tab to focus other elements
-    
-    Component.onCompleted:
-    {
-        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100;
+    background: Rectangle {
+        color: "transparent"
     }
-    
-    
-    Connections
-    {
+    Keys.onTabPressed: event => {
+                           event.accepted = true
+                       } // Disable pressing tab to focus other elements
+
+    Component.onCompleted: {
+        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
+    }
+
+    Connections {
         target: documentItem
-        function onMoveToNextHit(pageNumber, y)
-        {
-            root.setPage(pageNumber, y);
+        function onMoveToNextHit(pageNumber, y) {
+            root.setPage(pageNumber, y)
         }
     }
-    
-    
-    MouseArea
-    {
+
+    MouseArea {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        
+
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
-        
+
         onPressed: mouse.accepted = false
         onReleased: mouse.accepted = false
-        
-        
-        ListView
-        {
+
+        ListView {
             id: pageView
             readonly property int scrollSpeed: 5500
-            property int pageSpacing: pageView.getPageSpacing(root.document.zoom)
-            
+            property int pageSpacing: pageView.getPageSpacing(
+                                          root.document.zoom)
+
             height: parent.height
-            width: if(currentItem) currentItem.implicitWidth <= root.width ? currentItem.implicitWidth : root.width
+            width: if (currentItem)
+                       currentItem.implicitWidth
+                               <= root.width ? currentItem.implicitWidth : root.width
             contentWidth: currentItem.implicitWidth
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
@@ -70,135 +69,33 @@ Pane
             boundsBehavior: Flickable.StopAtBounds
             model: root.document.pageCount
             spacing: pageSpacing
-            delegate: PageItem
-            {
+            delegate: PageItem {
                 id: page
                 property bool ctrlPressed: false
-                
+
                 pageNumber: modelData
                 document: documentItem
                 height: implicitHeight
                 width: implicitWidth
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
-                anchors.horizontalCenter: if(parent != null) parent.horizontalCenter
-                
-                Keys.onPressed: (event) =>
-                                {
-                                    if(event.key === Qt.Key_C && (event.modifiers & Qt.ControlModifier))
-                                    {
-                                        page.copySelectedText();
-                                    }
-                                    else if(event.modifiers & Qt.ControlModifier)
-                                    {
-                                        page.ctrlPressed = true;
-                                    }
-                                }
-                Keys.onReleased: (event) =>
-                                 {
-                                     if(event.key === Qt.Key_Control)
-                                     {
-                                         page.ctrlPressed = false;
-                                     }
-                                 }
-                
-                MouseArea
-                {
-                    anchors.fill: parent
-                    hoverEnabled: true
-                    property var selectionStartPos
-                    property var selectionEndPos
-                    property bool isDoubleClickHold: false
-                    
-                    Timer
-                    {
-                        id: tripleClickTimer
-                        interval: 450
-                    }
-                    
-                    onWheel:
-                    {
-                        NavigationLogic.handleWheel(wheel);
-                        wheel.accepted = true;
-                    }
-                    
-                    onDoubleClicked:
-                    {
-                        page.selectSingleWord(mouseX, mouseY);
-                        
-                        tripleClickTimer.start();
-                        
-                        if(!page.ctrlPressed)
-                            isDoubleClickHold = true;
-                    }
-                    
-                    onReleased: 
-                    {
-                        if(isDoubleClickHold)
-                            isDoubleClickHold = false;
-                        
-                        mouse.accepted = true;
-                    }
-                    
-                    onPressed:
-                    {
-                        root.forceActiveFocus();
-                        page.removeSelection();
-                        
-                        if(tripleClickTimer.running)
-                        {
-                            tripleClickTimer.stop();
-                            page.selectLine(mouseX, mouseY);
-                        }
-                        else
-                        {
-                            selectionStartPos = Qt.point(mouseX, mouseY)
-                        }
-                            
-                        mouse.accepted = true;
-                    }
-                    
-                    onPositionChanged:
-                    {
-                        let textBelowCursor = page.pointIsAboveText(mouseX, mouseY);
-                        if(textBelowCursor)
-                            cursorShape = Qt.IBeamCursor;
-                        else
-                            cursorShape = Qt.ArrowCursor;
-                        
-                        if(!pressed)
-                            return;
-                        
-                        selectionEndPos = Qt.point(mouseX, mouseY);
-                        page.forceActiveFocus();
-                        
-                        if(page.ctrlPressed || isDoubleClickHold)
-                        {
-                            page.selectMultipleWords(selectionStartPos.x, selectionStartPos.y, 
-                                                     selectionEndPos.x, selectionEndPos.y)
-                        }
-                        else
-                        {
-                            page.select(selectionStartPos.x, selectionStartPos.y, 
-                                        selectionEndPos.x, selectionEndPos.y);
-                        }
-                    }
-                }
+                anchors.horizontalCenter: if (parent != null)
+                                              parent.horizontalCenter
             }
-            
-            
+
             // Set the book's current page once the model is loaded
-            onContentYChanged: NavigationLogic.updateCurrentPageCounter();
-            Component.onCompleted: root.setPage(Globals.selectedBook.currentPage - 1);
-            
-            function getPageSpacing(zoom)
-            {
-                return Math.round(SettingsController.appearanceSettings.PageSpacing * (zoom + 0.4 * (1 - zoom)));
+            onContentYChanged: NavigationLogic.updateCurrentPageCounter()
+            Component.onCompleted: root.setPage(
+                                       Globals.selectedBook.currentPage - 1)
+
+            function getPageSpacing(zoom) {
+                return Math.round(
+                            SettingsController.appearanceSettings.PageSpacing
+                            * (zoom + 0.4 * (1 - zoom)))
             }
         }
     }
-    
-    ScrollBar
-    {
+
+    ScrollBar {
         id: scrollbar
         width: hovered ? 14 : 12
         hoverEnabled: true
@@ -213,60 +110,51 @@ Pane
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         horizontalPadding: 4
-        
-        contentItem: Rectangle
-        {
+
+        contentItem: Rectangle {
             color: Style.colorScrollBarHandle
             opacity: scrollbar.pressed ? 0.8 : 1
             radius: 4
         }
-        
-        background: Rectangle
-        {
+
+        background: Rectangle {
             implicitWidth: 26
             implicitHeight: 200
             color: scrollbar.hovered ? Style.colorContainerBackground : "transparent"
         }
     }
-    
-    
-    function zoom(factor)
-    {
-        NavigationLogic.zoom(factor);
+
+    function zoom(factor) {
+        NavigationLogic.zoom(factor)
     }
-    
-    function changeZoomBy(factor)
-    {
-        let newZoomFactor = root.document.zoom * factor;
-        NavigationLogic.zoom(newZoomFactor);
+
+    function changeZoomBy(factor) {
+        let newZoomFactor = root.document.zoom * factor
+        NavigationLogic.zoom(newZoomFactor)
     }
-    
-    function flick(direction)
-    {
-        let up = direction === "up";
-        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1));
+
+    function flick(direction) {
+        let up = direction === "up"
+        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1))
     }
-    
-    function nextPage()
-    {
+
+    function nextPage() {
         // Prevent trying to go over the end
-        let newPage = root.document.currentPage + 1;
-        if(newPage > root.document.pageCount - 1)
-            return;
-        
-        NavigationLogic.setPage(root.document.currentPage + 1);
+        let newPage = root.document.currentPage + 1
+        if (newPage > root.document.pageCount - 1)
+            return
+
+        NavigationLogic.setPage(root.document.currentPage + 1)
     }
-    
-    function previousPage()
-    {
-        NavigationLogic.setPage(root.document.currentPage - 1);
+
+    function previousPage() {
+        NavigationLogic.setPage(root.document.currentPage - 1)
     }
-    
-    function setPage(pageNumber, yOffset = 0)
-    {
-        NavigationLogic.setPage(pageNumber);
-        
-        let space = 10;
-        pageView.contentY += yOffset * root.document.zoom - space;
+
+    function setPage(pageNumber, yOffset = 0) {
+        NavigationLogic.setPage(pageNumber)
+
+        let space = 10
+        pageView.contentY += yOffset * root.document.zoom - space
     }
 }
