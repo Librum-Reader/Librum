@@ -19,6 +19,10 @@ public:
     virtual const std::vector<domain::value_objects::FreeBook>&
         getFreeBooks() = 0;
 
+public slots:
+    virtual void setupUserData(const QString& token, const QString& email) = 0;
+    virtual void clearUserData() = 0;
+
 signals:
     void gettingBookFinished(const QString& filePath);
     void bookCoverDownloadFinished();

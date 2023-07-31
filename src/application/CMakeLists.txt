@@ -41,6 +41,7 @@ set(application_SRC
     
     utility/book_metadata_helper.cpp
     utility/book_metadata_helper.hpp
+    utility/save_book_helper.hpp
     utility/downloaded_books_tracker.cpp
     utility/downloaded_books_tracker.hpp
     utility/merge_status.hpp

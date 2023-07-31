@@ -1,6 +1,7 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
+#include <QApplication>
 #include <QDateTime>
 #include <QGuiApplication>
 #include <QLocale>
@@ -10,7 +11,6 @@
 #include <QString>
 #include <QTranslator>
 #include <memory>
-#include <QApplication>
 #include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -138,6 +138,13 @@ int main(int argc, char* argv[])
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         bookService, &application::IBookService::clearUserData);
 
+    QObject::connect(
+        authenticationService,
+        &application::IAuthenticationService::loggedIn,
+        freeBooksService, &application::IFreeBooksService::setupUserData);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+        freeBooksService, &application::IFreeBooksService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
         userService, &application::IUserService::setupUserData);

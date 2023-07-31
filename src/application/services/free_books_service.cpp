@@ -2,8 +2,10 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QUrl>
 #include <QUuid>
 #include "free_book.hpp"
+#include "save_book_helper.hpp"
 
 namespace application::services
 {
@@ -15,16 +17,16 @@ FreeBooksService::FreeBooksService(
     m_freeBooksStorageGateway(freeBooksStorageGateway)
 {
     connect(m_freeBooksStorageGateway,
-            &IFreeBooksStorageGateway::gettingBookMediaFinished, this,
-            &FreeBooksService::saveBookToFile);
-
-    connect(m_freeBooksStorageGateway,
             &IFreeBooksStorageGateway::gettingBooksMetaDataFinished, this,
             &FreeBooksService::saveBookMetaData);
 
     connect(m_freeBooksStorageGateway,
             &IFreeBooksStorageGateway::gettingBookCoverFinished, this,
             &FreeBooksService::setBookCover);
+
+    connect(m_freeBooksStorageGateway,
+            &IFreeBooksStorageGateway::gettingBookMediaChunkReady, this,
+            &FreeBooksService::saveDownloadedBookMediaChunkToFile);
 }
 
 void FreeBooksService::getBooksMetadata(const QString& author,
@@ -35,7 +37,21 @@ void FreeBooksService::getBooksMetadata(const QString& author,
 
 void FreeBooksService::getBookMedia(const QString& url)
 {
-    m_freeBooksStorageGateway->getBookMedia(url);
+    auto newBookUuid = QUuid::createUuid();
+
+    m_freeBooksStorageGateway->getBookMedia(url, newBookUuid);
+}
+
+void FreeBooksService::setupUserData(const QString& token, const QString& email)
+{
+    Q_UNUSED(token);
+
+    m_userEmail = email;
+}
+
+void FreeBooksService::clearUserData()
+{
+    m_userEmail.clear();
 }
 
 std::vector<FreeBook>& FreeBooksService::getFreeBooks()
@@ -58,22 +74,21 @@ void FreeBooksService::setBookCover(int bookId, const QImage& cover)
     emit dataChanged(getFreeBookIndexById(bookId));
 }
 
-void FreeBooksService::saveBookToFile(const QByteArray& data)
+void FreeBooksService::saveDownloadedBookMediaChunkToFile(
+    const QByteArray& data, bool isLastChunk, const QUuid& uuid,
+    const QString& format)
 {
-    auto currentDir = QDir::current().path();
-    auto folder = QDir(currentDir + "/" + m_freeBooksFolderName);
-    if(!folder.exists())
-        folder.mkpath(folder.path());
+    auto destDir = getLibraryDir();
+    QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
+    auto destination = destDir.filePath(fileName);
 
-    auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
-    QString bookFilePath = folder.path() + "/" + uuid + ".epub";
+    application::utility::saveDownloadedBookMediaChunkToFile(
+        data, isLastChunk, fileName, destination);
 
-    QFile file(bookFilePath);
-    file.open(QIODevice::WriteOnly);
-    file.write(data);
-    file.close();
-
-    emit gettingBookFinished(bookFilePath);
+    if(isLastChunk)
+    {
+        emit gettingBookFinished(QUrl::fromLocalFile(destination).toString());
+    }
 }
 
 void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books)
@@ -106,6 +121,18 @@ int FreeBooksService::getFreeBookIndexById(int id)
     }
 
     return -1;
+}
+
+QDir FreeBooksService::getLibraryDir()
+{
+    auto applicationPath = QDir::current().path();
+    auto hash = qHash(m_userEmail);
+    auto userLibName = QString::number(hash);
+
+    auto uniqueFolderName =
+        applicationPath + "/" + "librum_localLibraries" + "/" + userLibName;
+
+    return QDir(uniqueFolderName);
 }
 
 }  // namespace application::services

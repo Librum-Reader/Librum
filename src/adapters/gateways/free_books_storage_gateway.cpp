@@ -19,8 +19,8 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
             &FreeBooksStorageGateway::proccessBookCover);
 
     connect(m_freeBooksStorageAccess,
-            &IFreeBooksStorageAccess::gettingBookMediaFinished, this,
-            &FreeBooksStorageGateway::gettingBookMediaFinished);
+            &IFreeBooksStorageAccess::gettingBookMediaChunkReady, this,
+            &FreeBooksStorageGateway::gettingBookMediaChunkReady);
 }
 
 void FreeBooksStorageGateway::getBooksMetadata(const QString& author,
@@ -29,9 +29,10 @@ void FreeBooksStorageGateway::getBooksMetadata(const QString& author,
     m_freeBooksStorageAccess->getBooksMetadata(author, title);
 }
 
-void FreeBooksStorageGateway::getBookMedia(const QString& url)
+void FreeBooksStorageGateway::getBookMedia(const QString& url,
+                                           const QUuid& uuid)
 {
-    m_freeBooksStorageAccess->getBookMedia(url);
+    m_freeBooksStorageAccess->getBookMedia(url, uuid);
 }
 
 void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)

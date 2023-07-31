@@ -55,15 +55,13 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
             });
 }
 
-void FreeBooksStorageAccess::getBookMedia(const QString& url)
+void FreeBooksStorageAccess::getBookMedia(const QString& url, const QUuid& uuid)
 {
     auto request = createRequest(url);
-    request.setAttribute(QNetworkRequest::RedirectPolicyAttribute, true);
-
     auto reply = m_networkAccessManager.get(request);
 
-    connect(reply, &QNetworkReply::finished, this,
-            [this, reply]()
+    connect(reply, &QNetworkReply::readyRead, this,
+            [this, reply, uuid]()
             {
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
@@ -74,7 +72,15 @@ void FreeBooksStorageAccess::getBookMedia(const QString& url)
                     return;
                 }
 
-                emit gettingBookMediaFinished(reply->readAll());
+                emit gettingBookMediaChunkReady(reply->readAll(), false, uuid,
+                                                "epub");
+            });
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply, uuid]()
+            {
+                emit gettingBookMediaChunkReady(QByteArray(), true, uuid,
+                                                "epub");
 
                 reply->deleteLater();
             });
