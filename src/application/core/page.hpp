@@ -35,6 +35,7 @@ public:
     void generateSelectionRects(QPointF start, QPointF end);
     QPair<QPointF, QPointF> getPositionsForWordSelection(QPointF begin,
                                                          QPointF end);
+    QPair<QPointF, QPointF> getPositionsForLineSelection(QPointF point);
     QString getTextFromSelection(const QPointF& start, const QPointF& end);
     bool pointIsAboveText(const QPoint& point);
 

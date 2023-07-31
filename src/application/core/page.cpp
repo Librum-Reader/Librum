@@ -200,9 +200,28 @@ QPair<QPointF, QPointF> Page::getPositionsForWordSelection(QPointF begin,
     fzBegin = fzBegin.fz_transform_point(invMatrix);
     fzEnd = fzEnd.fz_transform_point(invMatrix);
 
-    // This modifies the normBegin and fzEnd normEnd.
+    // This modifies the fzBegin and fzEnd.
     mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
                                 fzEnd.internal(), FZ_SELECT_WORDS);
+
+    fzBegin = fzBegin.fz_transform_point(m_matrix);
+    fzEnd = fzEnd.fz_transform_point(m_matrix);
+
+    return QPair<QPointF, QPointF>(QPointF(fzBegin.x, fzBegin.y),
+                                   QPointF(fzEnd.x, fzEnd.y));
+}
+
+QPair<QPointF, QPointF> Page::getPositionsForLineSelection(QPointF point)
+{
+    mupdf::FzPoint fzBegin(point.x(), point.y());
+    mupdf::FzPoint fzEnd(point.x(), point.y());
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    fzBegin = fzBegin.fz_transform_point(invMatrix);
+    fzEnd = fzEnd.fz_transform_point(invMatrix);
+
+    // This modifies the fzPoint
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
+                                fzEnd.internal(), FZ_SELECT_LINES);
 
     fzBegin = fzBegin.fz_transform_point(m_matrix);
     fzEnd = fzEnd.fz_transform_point(m_matrix);

@@ -171,6 +171,18 @@ void PageItem::selectMultipleWords(int beginX, int beginY, int endX, int endY)
     update();
 }
 
+void PageItem::selectLine(int x, int y)
+{
+    QPointF point(x, y);
+
+    auto positions = m_page->getPositionsForLineSelection(point);
+    m_selectionStart = positions.first;
+    m_selectionEnd = positions.second;
+
+    generateSelection();
+    update();
+}
+
 void PageItem::removeSelection()
 {
     m_page->getBufferedSelectionRects().clear();

@@ -39,6 +39,7 @@ public:
     Q_INVOKABLE void selectSingleWord(int x, int y);
     Q_INVOKABLE void selectMultipleWords(int beginX, int beginY, int endX,
                                          int endY);
+    Q_INVOKABLE void selectLine(int x, int y);
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE bool pointIsAboveText(int x, int y);

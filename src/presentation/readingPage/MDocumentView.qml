@@ -109,6 +109,12 @@ Pane
                     property var selectionEndPos
                     property bool isDoubleClickHold: false
                     
+                    Timer
+                    {
+                        id: tripleClickTimer
+                        interval: 450
+                    }
+                    
                     onWheel:
                     {
                         NavigationLogic.handleWheel(wheel);
@@ -118,6 +124,8 @@ Pane
                     onDoubleClicked:
                     {
                         page.selectSingleWord(mouseX, mouseY);
+                        
+                        tripleClickTimer.start();
                         
                         if(!page.ctrlPressed)
                             isDoubleClickHold = true;
@@ -135,8 +143,17 @@ Pane
                     {
                         root.forceActiveFocus();
                         page.removeSelection();
-                        selectionStartPos = Qt.point(mouseX, mouseY)
                         
+                        if(tripleClickTimer.running)
+                        {
+                            tripleClickTimer.stop();
+                            page.selectLine(mouseX, mouseY);
+                        }
+                        else
+                        {
+                            selectionStartPos = Qt.point(mouseX, mouseY)
+                        }
+                            
                         mouse.accepted = true;
                     }
                     
