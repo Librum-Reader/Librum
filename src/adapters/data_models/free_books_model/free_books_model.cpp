@@ -55,6 +55,8 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
     }
     case DownloadLink:
         return freeBook.downloadLink;
+    case MediaDownloadProgressRole:
+        return freeBook.mediaDownloadProgress;
     default:
         return QVariant();
     }
@@ -63,10 +65,15 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
 QHash<int, QByteArray> FreeBooksModel::roleNames() const
 {
     static QHash<int, QByteArray> roles {
-        { IdRole, "id" },           { TitleRole, "title" },
-        { AuthorsRole, "authors" }, { LanguagesRole, "languages" },
-        { FormatsRole, "formats" }, { DownloadCountRole, "downloadCount" },
-        { CoverRole, "cover" },     { DownloadLink, "downloadLink" },
+        { IdRole, "id" },
+        { TitleRole, "title" },
+        { AuthorsRole, "authors" },
+        { LanguagesRole, "languages" },
+        { FormatsRole, "formats" },
+        { DownloadCountRole, "downloadCount" },
+        { CoverRole, "cover" },
+        { DownloadLink, "downloadLink" },
+        { MediaDownloadProgressRole, "mediaDownloadProgress" },
     };
 
     return roles;
@@ -107,6 +114,12 @@ void FreeBooksModel::startDeletingBook(int index)
 void FreeBooksModel::endDeletingBook()
 {
     endRemoveRows();
+}
+
+void FreeBooksModel::downloadingBookMediaProgressChanged(int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0),
+                     { MediaDownloadProgressRole });
 }
 
 QVector<int> FreeBooksModel::getAllRoles()

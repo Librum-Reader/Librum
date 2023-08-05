@@ -6,48 +6,43 @@ import Librum.controllers
 import Librum.style
 import Librum.icons
 
-
-Popup
-{
+Popup {
     id: root
+    property int bookId
     property string title
     property string authors
     property string languages
     property var cover
     property int downloadCount
     property string downloadLink
-    
+
     implicitWidth: 751
     implicitHeight: layout.height
     padding: 0
-    background: Rectangle { radius: 6; color: Style.colorPopupBackground }
-    
+    background: Rectangle {
+        radius: 6
+        color: Style.colorPopupBackground
+    }
+
     modal: true
-    Overlay.modal: Rectangle
-    {
+    Overlay.modal: Rectangle {
         color: Style.colorPopupDim
         opacity: 1
     }
-    
+
     onOpened: downloadButton.forceActiveFocus()
-    
-    
-    MFlickWrapper
-    {
+
+    MFlickWrapper {
         id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
-            
-            
-            MButton
-            {
+
+            MButton {
                 id: closePopupButton
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: 32
@@ -61,27 +56,26 @@ Popup
                 borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.closePopup
                 imageSize: 14
-                
+
                 onClicked: root.close()
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: content
                 Layout.fillWidth: true
                 horizontalPadding: 52
                 bottomPadding: 42
-                background: Rectangle { color: "transparent"; radius: 6 }
-                
-                
-                ColumnLayout
-                {
+                background: Rectangle {
+                    color: "transparent"
+                    radius: 6
+                }
+
+                ColumnLayout {
                     id: contentLayout
                     width: parent.width
                     spacing: 0
-                    
-                    Label
-                    {
+
+                    Label {
                         id: pageTitle
                         Layout.topMargin: 6
                         text: "Download book"
@@ -89,26 +83,22 @@ Popup
                         font.pointSize: 17
                         color: Style.colorTitle
                     }
-                    
-                    RowLayout
-                    {
+
+                    RowLayout {
                         id: bookInformationLayout
                         spacing: 28
                         Layout.fillWidth: true
                         Layout.topMargin: 32
-                        
-                        
-                        Rectangle
-                        {
+
+                        Rectangle {
                             id: bookCoverArea
                             Layout.preferredWidth: 198
                             Layout.preferredHeight: 258
                             color: Style.colorBookImageBackground
                             radius: 4
                             clip: true
-                            
-                            Image
-                            {
+
+                            Image {
                                 id: bookCover
                                 anchors.centerIn: parent
                                 Layout.alignment: Qt.AlignHCenter
@@ -117,9 +107,8 @@ Popup
                                 fillMode: Image.PreserveAspectFit
                             }
                         }
-                        
-                        ScrollView
-                        {
+
+                        ScrollView {
                             id: bookInformation
                             Layout.preferredHeight: 263
                             Layout.fillWidth: true
@@ -127,26 +116,21 @@ Popup
                             contentWidth: width
                             clip: true
                             ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-                            
+
                             // contentItem is the underlying flickable of ScrollView
-                            Component.onCompleted:
-                            {
+                            Component.onCompleted: {
                                 contentItem.boundsBehavior = Flickable.StopAtBounds
                                 contentItem.maximumFlickVelocity = 600
                             }
-                            
-                            
-                            ColumnLayout
-                            {
+
+                            ColumnLayout {
                                 id: bookDetails
                                 anchors.left: parent.left
                                 anchors.right: parent.right
                                 anchors.rightMargin: 16
                                 spacing: 16
-                                
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: titleField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -162,9 +146,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: authorField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -180,9 +163,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: languageField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -198,9 +180,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: publicationField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -216,9 +197,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: pagesField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -234,9 +214,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: sizeField
                                     Layout.fillWidth: true
                                     boxHeight: 34
@@ -252,9 +231,8 @@ Popup
                                     borderRadius: 4
                                     readOnly: true
                                 }
-                                
-                                MLabeledInputBox
-                                {
+
+                                MLabeledInputBox {
                                     id: formatField
                                     Layout.fillWidth: true
                                     Layout.bottomMargin: 3
@@ -274,17 +252,14 @@ Popup
                             }
                         }
                     }
-                    
-                    ColumnLayout
-                    {
+
+                    ColumnLayout {
                         id: bookDescriptionLayout
                         Layout.fillWidth: true
                         Layout.topMargin: 28
                         spacing: 3
-                        
-                        
-                        Label
-                        {
+
+                        Label {
                             id: bookDescriptionHeader
                             Layout.fillWidth: true
                             text: "Content"
@@ -292,9 +267,8 @@ Popup
                             font.weight: Font.Bold
                             color: Style.colorTitle
                         }
-                        
-                        Rectangle
-                        {
+
+                        Rectangle {
                             id: bookDescriptionField
                             Layout.fillWidth: true
                             Layout.preferredHeight: 78
@@ -302,10 +276,8 @@ Popup
                             radius: 5
                             border.width: 1
                             border.color: Style.colorContainerBorder
-                            
-                            
-                            TextArea
-                            {
+
+                            TextArea {
                                 id: bookDescriptionTextArea
                                 anchors.fill: parent
                                 leftPadding: 12
@@ -313,17 +285,15 @@ Popup
                                 topPadding: 8
                                 bottomPadding: 8
                                 selectByMouse: true
-                                text: "Your habits determine your character and later define" +
-                                      " your life. Don’t blame outside factors when you fail in life." +
-                                      " Also, don’t think that succeeding in one area of your life will" +
-                                      " mean that you’re destined for triumph."
+                                text: "Your habits determine your character and later define"
+                                      + " your life. Don’t blame outside factors when you fail in life." + " Also, don’t think that succeeding in one area of your life will"
+                                      + " mean that you’re destined for triumph."
                                 wrapMode: Text.WordWrap
                                 color: Style.colorReadOnlyInputText
                                 font.pointSize: 12
                                 readOnly: true
-                                
-                                background: Rectangle   
-                                {   
+
+                                background: Rectangle {
                                     anchors.fill: parent
                                     radius: bookDescriptionField.radius
                                     color: "transparent"
@@ -331,18 +301,17 @@ Popup
                             }
                         }
                     }
-                    
-                    RowLayout
-                    {
+
+                    RowLayout {
                         id: buttonsLayout
                         Layout.topMargin: 42
                         spacing: 16
-                        
+
+
                         /*
                           Download button, the color/border changes if the button is focused
                           */
-                        MButton
-                        {
+                        MButton {
                             id: downloadButton
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: 38
@@ -355,19 +324,18 @@ Popup
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             imagePath: active ? Icons.downloadSelected : Icons.download
                             imageSize: 18
-                            
-                            onClicked:
-                            {
-                                internal.downloadBook();
-                                root.close();
+
+                            onClicked: {
+                                internal.downloadBook()
+                                root.close()
                             }
                             Keys.onReturnPressed: internal.downloadBook()
                             Keys.onRightPressed: internal.giveFocusToCancelButton()
-                            Keys.onTabPressed: internal.giveFocusToCancelButton()
+                            Keys.onTabPressed: internal.giveFocusToCancelButton(
+                                                   )
                         }
-                        
-                        MButton
-                        {
+
+                        MButton {
                             id: cancelButton
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: 38
@@ -378,8 +346,8 @@ Popup
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: 12
-                            
-                            onClicked: root.close()                            
+
+                            onClicked: root.close()
                             Keys.onReturnPressed: root.close()
                             Keys.onLeftPressed: internal.giveFocusToDownloadButton()
                             Keys.onTabPressed: internal.giveFocusToDownloadButton()
@@ -389,28 +357,24 @@ Popup
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
-        
-        function downloadBook()
-        {
-            FreeBooksController.getBookMedia(root.downloadLink);
+
+        function downloadBook() {
+            FreeBooksController.getBookMedia(root.bookId, root.downloadLink)
         }
-        
-        function giveFocusToCancelButton()
-        {
-            downloadButton.active = false;
-            cancelButton.active = true;
-            cancelButton.giveFocus();
+
+        function giveFocusToCancelButton() {
+            downloadButton.active = false
+            cancelButton.active = true
+            cancelButton.giveFocus()
         }
-        
-        function giveFocusToDownloadButton()
-        {
-            cancelButton.active = false;
-            downloadButton.active = true;
-            downloadButton.giveFocus();
+
+        function giveFocusToDownloadButton() {
+            cancelButton.active = false
+            downloadButton.active = true
+            downloadButton.giveFocus()
         }
     }
 }

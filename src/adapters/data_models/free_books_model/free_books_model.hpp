@@ -23,6 +23,7 @@ public:
         DownloadCountRole,
         CoverRole,
         DownloadLink,
+        MediaDownloadProgressRole,
         Invalid
     };
 
@@ -41,6 +42,7 @@ public slots:
     void endInsertingRow();
     void startDeletingBook(int index);
     void endDeletingBook();
+    void downloadingBookMediaProgressChanged(int row);
 
 private:
     QVector<int> getAllRoles();

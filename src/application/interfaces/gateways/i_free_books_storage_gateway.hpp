@@ -15,7 +15,8 @@ public:
 
     virtual void getBooksMetadata(const QString& author,
                                   const QString& title) = 0;
-    virtual void getBookMedia(const QString& url, const QUuid& uuid) = 0;
+    virtual void getBookMedia(const int id, const QUuid& uuid,
+                              const QString& url) = 0;
 
 signals:
     void gettingBooksMetaDataFinished(
@@ -24,6 +25,8 @@ signals:
     void gettingBookMediaChunkReady(const QByteArray& data,
                                     const bool isChunkLast, const QUuid& uuid,
                                     const QString& format);
+    void gettingBookMediaProgressChanged(const int id, qint64 bytesReceived,
+                                         qint64 bytesTotal);
 };
 
 }  // namespace application

@@ -55,7 +55,8 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
             });
 }
 
-void FreeBooksStorageAccess::getBookMedia(const QString& url, const QUuid& uuid)
+void FreeBooksStorageAccess::getBookMedia(const int id, const QUuid& uuid,
+                                          const QString& url)
 {
     auto request = createRequest(url);
     auto reply = m_networkAccessManager.get(request);
@@ -83,6 +84,13 @@ void FreeBooksStorageAccess::getBookMedia(const QString& url, const QUuid& uuid)
                                                 "epub");
 
                 reply->deleteLater();
+            });
+
+    connect(reply, &QNetworkReply::downloadProgress, this,
+            [this, id](qint64 bytesReceived, qint64 bytesTotal)
+            {
+                emit gettingBookMediaProgressChanged(id, bytesReceived,
+                                                     bytesTotal);
             });
 }
 

@@ -15,7 +15,7 @@ public:
 
     virtual void getBooksMetadata(const QString& author,
                                   const QString& title) = 0;
-    virtual void getBookMedia(const QString& url) = 0;
+    virtual void getBookMedia(const int id, const QString& url) = 0;
     virtual const std::vector<domain::value_objects::FreeBook>&
         getFreeBooks() = 0;
 
@@ -35,6 +35,7 @@ signals:
     void bookClearingEnded();
     void tagsChanged(int index);
     void dataChanged(int index);
+    void downloadingBookMediaProgressChanged(int index);
 };
 
 }  // namespace application

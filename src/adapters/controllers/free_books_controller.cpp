@@ -45,6 +45,13 @@ FreeBooksController::FreeBooksController(
     // data changed
     connect(m_freeBooksService, &application::IFreeBooksService::dataChanged,
             &m_freeBooksModel, &data_models::FreeBooksModel::refreshBook);
+
+    // download book media progress changed
+    connect(
+        m_freeBooksService,
+        &application::IFreeBooksService::downloadingBookMediaProgressChanged,
+        &m_freeBooksModel,
+        &data_models::FreeBooksModel::downloadingBookMediaProgressChanged);
 }
 
 void FreeBooksController::getBooksMetadata(const QString& author,
@@ -53,9 +60,9 @@ void FreeBooksController::getBooksMetadata(const QString& author,
     m_freeBooksService->getBooksMetadata(author, title);
 }
 
-void FreeBooksController::getBookMedia(const QString& url)
+void FreeBooksController::getBookMedia(const int id, const QString& url)
 {
-    m_freeBooksService->getBookMedia(url);
+    m_freeBooksService->getBookMedia(id, url);
 }
 
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()

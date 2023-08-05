@@ -16,7 +16,7 @@ public:
 
     Q_INVOKABLE virtual void getBooksMetadata(const QString& author,
                                               const QString& title) = 0;
-    Q_INVOKABLE virtual void getBookMedia(const QString& url) = 0;
+    Q_INVOKABLE virtual void getBookMedia(const int id, const QString& url) = 0;
     virtual data_models::FreeBooksModel* getFreeBooksModel() = 0;
 
 signals:

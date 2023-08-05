@@ -27,6 +27,10 @@ FreeBooksService::FreeBooksService(
     connect(m_freeBooksStorageGateway,
             &IFreeBooksStorageGateway::gettingBookMediaChunkReady, this,
             &FreeBooksService::saveDownloadedBookMediaChunkToFile);
+
+    connect(m_freeBooksStorageGateway,
+            &IFreeBooksStorageGateway::gettingBookMediaProgressChanged, this,
+            &FreeBooksService::setMediaDownloadProgressForBook);
 }
 
 void FreeBooksService::getBooksMetadata(const QString& author,
@@ -35,11 +39,11 @@ void FreeBooksService::getBooksMetadata(const QString& author,
     m_freeBooksStorageGateway->getBooksMetadata(author, title);
 }
 
-void FreeBooksService::getBookMedia(const QString& url)
+void FreeBooksService::getBookMedia(const int id, const QString& url)
 {
-    auto newBookUuid = QUuid::createUuid();
+    auto uuid = QUuid::createUuid();
 
-    m_freeBooksStorageGateway->getBookMedia(url, newBookUuid);
+    m_freeBooksStorageGateway->getBookMedia(id, uuid, url);
 }
 
 void FreeBooksService::setupUserData(const QString& token, const QString& email)
@@ -99,6 +103,25 @@ void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books)
         m_freeBooks.emplace_back(book);
         emit bookInsertionEnded();
     }
+}
+
+void FreeBooksService::setMediaDownloadProgressForBook(const int id,
+                                                       qint64 bytesReceived,
+                                                       qint64 bytesTotal)
+{
+    auto* freeBook = getFreeBookById(id);
+    if(freeBook == nullptr)
+    {
+        qWarning()
+            << QString("Failed setting media download progress for free book "
+                       "with id: %1. No book with this id exists.")
+                   .arg(QString::number(id));
+        return;
+    }
+
+    auto progress = static_cast<double>(bytesReceived) / bytesTotal;
+    freeBook->mediaDownloadProgress = progress;
+    emit downloadingBookMediaProgressChanged(getFreeBookIndexById(id));
 }
 
 FreeBook* FreeBooksService::getFreeBookById(int id)

@@ -16,7 +16,7 @@ public:
     FreeBooksService(IFreeBooksStorageGateway* freeBooksStorageGateway);
 
     void getBooksMetadata(const QString& author, const QString& title) override;
-    void getBookMedia(const QString& url) override;
+    void getBookMedia(const int id, const QString& url) override;
     std::vector<domain::value_objects::FreeBook>& getFreeBooks() override;
 
 public slots:
@@ -31,6 +31,8 @@ private slots:
 
 private:
     void saveBookMetaData(std::vector<domain::value_objects::FreeBook>& books);
+    void setMediaDownloadProgressForBook(const int id, qint64 bytesReceived,
+                                         qint64 bytesTotal);
     domain::value_objects::FreeBook* getFreeBookById(int id);
     int getFreeBookIndexById(int id);
     QDir getLibraryDir();
