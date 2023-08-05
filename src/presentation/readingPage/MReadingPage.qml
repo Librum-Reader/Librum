@@ -337,6 +337,10 @@ Page
             Layout.fillWidth: true
             
             onVisibleChanged: toolbar.searchButton.active = visible;
+            onSearchQueried: if(query.length) documentItem.search(query)
+            onClearQuery: documentItem.clearSearch()
+            onNextButtonClicked: documentItem.goToNextSearchHit();
+            onPreviousButtonClicked: documentItem.goToPreviousSearchHit();
         }
     }
     
