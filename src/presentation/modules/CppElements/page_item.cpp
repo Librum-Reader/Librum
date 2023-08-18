@@ -185,11 +185,16 @@ void PageItem::hoverMoveEvent(QHoverEvent* event)
 
     if(pointIsAboveText(mouseX, mouseY))
     {
-        QApplication::setOverrideCursor(Qt::IBeamCursor);
+        if(QApplication::overrideCursor() == nullptr ||
+           *QApplication::overrideCursor() != Qt::IBeamCursor)
+        {
+            QApplication::setOverrideCursor(Qt::IBeamCursor);
+        }
     }
-    else
+    else if(QApplication::overrideCursor() != nullptr &&
+            *QApplication::overrideCursor() == Qt::IBeamCursor)
     {
-        QApplication::setOverrideCursor(Qt::ArrowCursor);
+        QApplication::restoreOverrideCursor();
     }
 }
 
