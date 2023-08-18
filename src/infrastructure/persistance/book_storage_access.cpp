@@ -114,10 +114,10 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
     auto bookCover = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     QString stringUuid = uuid.toString(QUuid::WithoutBraces);
 
-    QFile* file = new QFile(QUrl(path).path());
+    QFile* file = new QFile(path);
     if(!file->open(QIODevice::ReadOnly))
     {
-        qDebug() << QString("Could not open cover for book with uuid: %1")
+        qWarning() << QString("Could not open cover for book with uuid: %1")
                         .arg(stringUuid);
 
         bookCover->deleteLater();
@@ -346,12 +346,12 @@ void BookStorageAccess::uploadBookMedia(const QString& uuid,
 }
 
 bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
-                                               const QUrl& path)
+                                               const QString& path)
 {
-    QFile* file = new QFile(QUrl(path).path());
+    QFile* file = new QFile(path);
     if(!file->open(QIODevice::ReadOnly))
     {
-        qDebug() << "Could not open book data file";
+        qWarning() << "Could not open book data file";
         file->deleteLater();
         return false;
     }

@@ -36,7 +36,7 @@ private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
     void uploadBookMedia(const QString& uuid, const QString& filePath,
                          const QString& authToken);
-    bool addFilePartToMultiPart(QHttpMultiPart* bookData, const QUrl& path);
+    bool addFilePartToMultiPart(QHttpMultiPart* bookData, const QString& path);
 
 
     QNetworkAccessManager m_networkAccessManager;
