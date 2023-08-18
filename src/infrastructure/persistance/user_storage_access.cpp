@@ -331,7 +331,7 @@ void UserStorageAccess::renameTag(const QString& authToken,
 void UserStorageAccess::addImagePartToMultiPart(QHttpMultiPart* multiPart,
                                                 const QString& imagePath)
 {
-    QFile* file = new QFile(QUrl(imagePath).path(), multiPart);
+    QFile* file = new QFile(imagePath, multiPart);
     if(!file->open(QIODevice::ReadOnly))
     {
         qWarning() << "Could not open new profile picture file: "
