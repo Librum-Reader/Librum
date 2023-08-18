@@ -9,15 +9,28 @@ import Librum.icons
 Item
 {
     id: root
-    signal textChanged(string newText)
-    signal nextButtonWasClicked
-    signal previousButtonWasClicked
+    signal searchQueried(string query)
+    signal clearQuery()
+    signal nextButtonClicked
+    signal previousButtonClicked
     
     implicitHeight: 48
     implicitWidth: 1000
     
     // Make sure to remove the focus from the textinput when the searchbar is closed
-    onVisibleChanged: visible ? inputField.forceActiveFocus() : root.forceActiveFocus()
+    onVisibleChanged:
+    {
+        if(visible)
+        {
+            inputField.forceActiveFocus()
+        }
+        else
+        {
+            root.clearQuery();
+            inputField.clear();
+            root.forceActiveFocus()
+        }
+    }
     
     // Close on pressing escape
     Keys.onPressed:
@@ -127,6 +140,8 @@ Item
                         TextField
                         {
                             id: inputField
+                            property string previousText
+                            
                             Layout.fillWidth: true
                             Layout.fillHeight: true
                             Layout.alignment: Qt.AlignVCenter
@@ -138,7 +153,18 @@ Item
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
-                            onTextChanged: root.textChanged(text)
+                            Keys.onReturnPressed:
+                            {
+                                // When clicking Enter without changing the text, go to the next hit
+                                if(previousText == text)
+                                {
+                                    root.nextButtonClicked();
+                                    return;
+                                }
+                                
+                                root.searchQueried(text);
+                                previousText = text;
+                            }
                         }
                     }
                 }
@@ -160,7 +186,7 @@ Item
                     imageSize: 13
                     imageSpacing: 10
                     
-                    onClicked: root.nextButtonWasClicked()
+                    onClicked: root.nextButtonClicked()
                 }
                 
                 MButton
@@ -180,7 +206,7 @@ Item
                     imageSize: 13
                     imageSpacing: 10
                     
-                    onClicked: root.previousButtonWasClicked()
+                    onClicked: root.previousButtonClicked()
                 }
             }
         }

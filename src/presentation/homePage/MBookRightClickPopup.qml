@@ -16,10 +16,9 @@ MRightClickMenu
     signal saveToFilesClicked()
     signal manageTagsClicked()
     signal markAsReadClicked()
-    signal uninstallClicked()
-    signal deleteClicked()
+    signal removeClicked()
     
-    implicitHeight: internal.bookDownloaded ? 245 : 181 
+    implicitHeight: internal.bookDownloaded ? 213 : 181   // 32px per item
     
     onOpened: internal.bookDownloaded = Globals.selectedBook.downloaded
     
@@ -103,23 +102,11 @@ MRightClickMenu
         MRightClickMenuItem
         {
             width: root.width
-            height: internal.bookDownloaded ? implicitHeight : 0
-            visible: internal.bookDownloaded
-            imagePath: Icons.bookPopupUninstall
-            imageSize: 12
-            text: "Uninstall"
-            
-            onClicked: root.uninstallClicked()
-        }
-        
-        MRightClickMenuItem
-        {
-            width: root.width
             imagePath: Icons.bookPopupDelete
             imageSize: 16
-            text: "Delete book"
+            text: "Remove book"
             
-            onClicked: root.deleteClicked()
+            onClicked: root.removeClicked()
         }
     }
     

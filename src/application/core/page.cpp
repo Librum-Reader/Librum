@@ -1,6 +1,9 @@
 #include "page.hpp"
+#include <QDebug>
+#include <cmath>
 #include "mupdf/classes.h"
 #include "mupdf/classes2.h"
+#include "mupdf/functions.h"
 
 namespace application::core
 {
@@ -8,18 +11,52 @@ namespace application::core
 application::core::Page::Page(const Document* document, int pageNumber) :
     m_document(document->internal())
 {
-    m_page = m_document->fz_load_page(pageNumber);
-    auto boundPage = m_page.fz_bound_page();
+    m_page =
+        std::make_unique<mupdf::FzPage>(m_document->fz_load_page(pageNumber));
+    auto boundPage = m_page->fz_bound_page();
 
+    setupDisplayList(boundPage);
+    setupTextPage(pageNumber);
+    setupSymbolBounds();
+}
+
+void Page::setupDisplayList(const mupdf::FzRect& boundPage)
+{
     m_displayList = mupdf::FzDisplayList(boundPage);
+
     auto listDevice = m_displayList.fz_new_list_device();
     mupdf::FzCookie defaultCookie;
-    m_page.fz_run_page(listDevice, mupdf::FzMatrix(), defaultCookie);
+    m_page->fz_run_page(listDevice, mupdf::FzMatrix(), defaultCookie);
     listDevice.fz_close_device();
 }
 
-QImage Page::renderPage(bool invertColor)
+void Page::setupTextPage(int pageNumber)
 {
+    mupdf::FzStextOptions options;
+    m_textPage =
+        std::make_unique<mupdf::FzStextPage>(*m_document, pageNumber, options);
+}
+
+void Page::setupSymbolBounds()
+{
+    auto curr = m_textPage->begin();
+    auto end = m_textPage->end();
+
+    m_pageSymbolBounds.resize(100);
+    while(curr != end)
+    {
+        auto symbol = curr;
+        fz_rect rect = symbol->m_internal->bbox;
+        m_pageSymbolBounds.emplace_back(rect);
+        ++curr;
+    }
+}
+
+QImage Page::renderPage()
+{
+    if(!m_pageImageOutdated)
+        return m_pageImage;
+
     auto pixmap = getEmptyPixmap();
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
@@ -28,18 +65,20 @@ QImage Page::renderPage(bool invertColor)
     m_displayList.fz_run_display_list(drawDevice, m_matrix, rect, cookie);
     drawDevice.fz_close_device();
 
-    if(invertColor)
+    if(m_invertColor)
         pixmap.fz_invert_pixmap();
 
-    return imageFromPixmap(pixmap);
+    m_pageImage = imageFromPixmap(pixmap);
+    m_pageImageOutdated = false;
+    return m_pageImage;
 }
 
 mupdf::FzPixmap Page::getEmptyPixmap() const
 {
-    auto bbox = m_page.fz_bound_page_box(FZ_CROP_BOX);
-    bbox = bbox.fz_transform_rect(m_matrix);
+    auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
+    auto scaledBbox = bbox.fz_transform_rect(m_matrix);
 
-    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, bbox,
+    mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, scaledBbox,
                            mupdf::FzSeparations(), 0);
     pixmap.fz_clear_pixmap();
 
@@ -71,22 +110,156 @@ QImage Page::imageFromPixmap(mupdf::FzPixmap pixmap)
 
 int Page::getWidth() const
 {
-    auto bbox = m_page.fz_bound_page_box(FZ_CROP_BOX);
+    auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
 
     return (bbox.x1 - bbox.x0) * m_matrix.a;
 }
 
 int Page::getHeight() const
 {
-    auto bbox = m_page.fz_bound_page_box(FZ_CROP_BOX);
+    auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
 
     return (bbox.y1 - bbox.y0) * m_matrix.d;
 }
 
+float Page::getZoom() const
+{
+    return m_matrix.a;
+}
+
+QList<QRectF>& Page::getBufferedSelectionRects()
+{
+    return m_bufferedSelectionRects;
+}
+
+QPointF Page::scalePointToCurrentZoom(const QPointF& point, float oldZoom)
+{
+    mupdf::FzPoint fzPoint(point.x(), point.y());
+    auto oldMatrix = mupdf::FzMatrix();
+    oldMatrix.a = oldZoom;
+    oldMatrix.d = oldZoom;
+
+    // Normalize point
+    auto invMatrix = oldMatrix.fz_invert_matrix();
+    fzPoint = fzPoint.fz_transform_point(invMatrix);
+
+    // Transform point to the current matrix
+    fzPoint = fzPoint.fz_transform_point(m_matrix);
+
+    return QPointF(fzPoint.x, fzPoint.y);
+}
+
 void Page::setZoom(float newZoom)
 {
+    if(m_matrix.a == newZoom && m_matrix.d == newZoom)
+        return;
+
     m_matrix.a = newZoom;
     m_matrix.d = newZoom;
+    m_pageImageOutdated = true;
+}
+
+void Page::setInvertColor(bool newInvertColor)
+{
+    if(m_invertColor == newInvertColor)
+        return;
+
+    m_invertColor = newInvertColor;
+    m_pageImageOutdated = true;
+}
+
+void Page::generateSelectionRects(QPointF start, QPointF end)
+{
+    mupdf::FzPoint fzStart(start.x(), start.y());
+    mupdf::FzPoint fzEnd(end.x(), end.y());
+
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    auto normStart = fzStart.fz_transform_point(invMatrix);
+    auto normEnd = fzEnd.fz_transform_point(invMatrix);
+
+    const int max = 1000;
+    fz_quad hits[max];
+    int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal,
+                                             *normStart.internal(),
+                                             *normEnd.internal(), hits, max);
+
+    for(int i = 0; i < n; ++i)
+    {
+        fz_quad hit = hits[i];
+        hit = mupdf::ll_fz_transform_quad(hit, *m_matrix.internal());
+        m_bufferedSelectionRects.append(fzQuadToQRectF(hit));
+    }
+}
+
+QPair<QPointF, QPointF> Page::getPositionsForWordSelection(QPointF begin,
+                                                           QPointF end)
+{
+    mupdf::FzPoint fzBegin(begin.x(), begin.y());
+    mupdf::FzPoint fzEnd(end.x(), end.y());
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    fzBegin = fzBegin.fz_transform_point(invMatrix);
+    fzEnd = fzEnd.fz_transform_point(invMatrix);
+
+    // This modifies the fzBegin and fzEnd.
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
+                                fzEnd.internal(), FZ_SELECT_WORDS);
+
+    fzBegin = fzBegin.fz_transform_point(m_matrix);
+    fzEnd = fzEnd.fz_transform_point(m_matrix);
+
+    return QPair<QPointF, QPointF>(QPointF(fzBegin.x, fzBegin.y),
+                                   QPointF(fzEnd.x, fzEnd.y));
+}
+
+QPair<QPointF, QPointF> Page::getPositionsForLineSelection(QPointF point)
+{
+    mupdf::FzPoint fzBegin(point.x(), point.y());
+    mupdf::FzPoint fzEnd(point.x(), point.y());
+    auto invMatrix = m_matrix.fz_invert_matrix();
+    fzBegin = fzBegin.fz_transform_point(invMatrix);
+    fzEnd = fzEnd.fz_transform_point(invMatrix);
+
+    // This modifies the fzPoint
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
+                                fzEnd.internal(), FZ_SELECT_LINES);
+
+    fzBegin = fzBegin.fz_transform_point(m_matrix);
+    fzEnd = fzEnd.fz_transform_point(m_matrix);
+
+    return QPair<QPointF, QPointF>(QPointF(fzBegin.x, fzBegin.y),
+                                   QPointF(fzEnd.x, fzEnd.y));
+}
+
+QRectF Page::fzQuadToQRectF(const mupdf::FzQuad& rect)
+{
+    float width = rect.ur.x - rect.ul.x;
+    float height = rect.ll.y - rect.ul.y;
+    return QRectF(rect.ul.x, rect.ul.y, width, height);
+}
+
+bool Page::pointIsAboveText(const QPoint& point)
+{
+    mupdf::FzPoint fzPoint(point.x(), point.y());
+    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
+
+    for(auto& rect : m_pageSymbolBounds)
+    {
+        if(fzPoint.fz_is_point_inside_rect(rect))
+            return true;
+    }
+
+    return false;
+}
+
+QString Page::getTextFromSelection(const QPointF& start, const QPointF& end)
+{
+    mupdf::FzPoint fzStart(start.x(), start.y());
+    mupdf::FzPoint fzEnd(end.x(), end.y());
+    fzStart = fzStart.transform(m_matrix.fz_invert_matrix());
+    fzEnd = fzEnd.transform(m_matrix.fz_invert_matrix());
+
+    auto text = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
+    return QString::fromStdString(text);
 }
 
 }  // namespace application::core

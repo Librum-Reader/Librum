@@ -203,13 +203,7 @@ Page
                         close();
                     }
                     
-                    onUninstallClicked:
-                    {
-                        BookController.uninstallBook(Globals.selectedBook.uuid);
-                        close();
-                    }
-                    
-                    onDeleteClicked:
+                    onRemoveClicked:
                     {
                         acceptDeletionPopup.open();
                         close();
@@ -257,15 +251,17 @@ Page
         x: Math.round(root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
         visible: false
-        title: "Delete Book?"
+        title: "Remove Book?"
         message: "Deleting a book is a permanent action, no one will be\n able to restore it afterwards!"
-        leftButtonText: "No, Keep Book"
-        rightButtonText: "Yes, Delete Book"
-        buttonsWidth: 180
+        leftButtonText: "Remove from Device"
+        rightButtonText: "Delete Everywhere"
+        buttonsWidth: 200
         messageBottomSpacing: 10
+        rightButtonRed: true
         
         onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
+        onLeftButtonClicked: BookController.uninstallBook(Globals.selectedBook.uuid);
         onRightButtonClicked: BookController.deleteBook(Globals.selectedBook.uuid);
     }
     
