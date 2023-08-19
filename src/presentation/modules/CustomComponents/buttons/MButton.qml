@@ -75,14 +75,6 @@ Item
                 font.pointSize: root.fontSize
                 color: root.textColor
                 elide: Text.ElideRight
-                
-                Component.onCompleted:
-                {
-                    if((container.height/loginButtonText.implicitHeight) / 2 > 0.1)
-                    {
-                        loginButtonText.Layout.topMargin = loginButtonText.Layout.topMargin - 1;
-                    }
-                }
             }
             
             Image
