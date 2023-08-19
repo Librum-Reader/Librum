@@ -34,6 +34,26 @@ void UserStorageAccess::getUser(const QString& authToken)
             });
 }
 
+void UserStorageAccess::deleteUser(const QString& authToken)
+{
+    auto request = createRequest(data::userDeleteEndpoint, authToken);
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
+
+    connect(reply, &QNetworkReply::finished, this,
+            [reply]
+            {
+                if(api_error_helper::apiRequestFailed(reply, 204))
+                {
+                    api_error_helper::logErrorMessage(reply, "Deleting User");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                reply->deleteLater();
+            });
+}
+
 void UserStorageAccess::getProfilePicture(const QString& authToken)
 {
     QString endpoint = data::userProfilePictureEndpoint;

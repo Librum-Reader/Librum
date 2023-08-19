@@ -65,6 +65,19 @@ void UserService::loadUser(bool rememberUser)
     m_userStorageGateway->getUser(m_authenticationToken);
 }
 
+void UserService::deleteUser()
+{
+    // If the user has automatic login enabled, delete the data to avoid
+    // logging into a non-existing account.
+    auto userData = utility::AutomaticLoginHelper::tryAutomaticUserLoading();
+    if(userData.has_value() && userData.value().email == m_user.getEmail())
+    {
+        utility::AutomaticLoginHelper::clearAutomaticLoginData();
+    }
+
+    m_userStorageGateway->deleteUser(m_authenticationToken);
+}
+
 void UserService::downloadUser()
 {
     m_userStorageGateway->getUser(m_authenticationToken);

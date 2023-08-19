@@ -46,6 +46,11 @@ void UserController::loadUser(bool rememberUser)
     m_userService->loadUser(rememberUser);
 }
 
+void UserController::deleteUser()
+{
+    m_userService->deleteUser();
+}
+
 void UserController::syncWithServer()
 {
     m_userService->downloadUser();

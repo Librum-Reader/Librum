@@ -20,6 +20,7 @@ class UserServiceMock : public application::IUserService
 {
 public:
     MOCK_METHOD(void, loadUser, (bool), (override));
+    MOCK_METHOD(void, deleteUser, (), (override));
     MOCK_METHOD(void, downloadUser, (), (override));
     MOCK_METHOD(QString, getFirstName, (), (const, override));
     MOCK_METHOD(void, setFirstName, (const QString&), (override));

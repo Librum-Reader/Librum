@@ -1,9 +1,9 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
@@ -16,7 +16,7 @@ public:
     UserController(application::IUserService* userService);
 
     void loadUser(bool rememberUser) override;
-    
+    void deleteUser() override;
     void syncWithServer() override;
 
     QString getTagUuidForName(QString name) override;

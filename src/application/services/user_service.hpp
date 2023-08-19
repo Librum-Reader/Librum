@@ -1,12 +1,12 @@
 #pragma once
-#include <QtCore/QtGlobal>
 #include <QObject>
 #include <QTimer>
+#include <QtCore/QtGlobal>
+#include "application_export.hpp"
+#include "domain_export.hpp"
 #include "i_user_service.hpp"
 #include "i_user_storage_gateway.hpp"
 #include "user.hpp"
-#include "domain_export.hpp"
-#include "application_export.hpp"
 
 namespace application::services
 {
@@ -19,6 +19,7 @@ public:
     UserService(IUserStorageGateway* userStorageGateway);
 
     void loadUser(bool rememberUser) override;
+    void deleteUser() override;
     void downloadUser() override;
 
     QString getFirstName() const override;

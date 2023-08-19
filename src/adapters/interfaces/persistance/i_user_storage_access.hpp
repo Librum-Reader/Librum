@@ -20,6 +20,7 @@ public:
     virtual ~IUserStorageAccess() noexcept = default;
 
     virtual void getUser(const QString& authToken) = 0;
+    virtual void deleteUser(const QString& authToken) = 0;
     virtual void getProfilePicture(const QString& authToken) = 0;
     virtual void changeFirstName(const QString& authToken,
                                  const QString& newFirstName) = 0;

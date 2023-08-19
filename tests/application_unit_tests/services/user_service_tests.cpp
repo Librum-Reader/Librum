@@ -18,6 +18,7 @@ class UserStorageGatewayMock : public IUserStorageGateway
 {
 public:
     MOCK_METHOD(void, getUser, (const QString& authToken), (override));
+    MOCK_METHOD(void, deleteUser, (const QString& authToken), (override));
     MOCK_METHOD(void, getProfilePicture, (const QString& authToken),
                 (override));
     MOCK_METHOD(void, changeFirstName,

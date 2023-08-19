@@ -32,6 +32,7 @@ public:
     virtual ~IUserController() noexcept = default;
 
     Q_INVOKABLE virtual void loadUser(bool rememberUser) = 0;
+    Q_INVOKABLE virtual void deleteUser() = 0;
     Q_INVOKABLE virtual void syncWithServer() = 0;
     Q_INVOKABLE virtual void deleteProfilePicture() = 0;
 

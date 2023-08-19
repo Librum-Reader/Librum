@@ -5,8 +5,8 @@
 #include <QString>
 #include <QUuid>
 #include <vector>
-#include "tag.hpp"
 #include "application_export.hpp"
+#include "tag.hpp"
 
 namespace application
 {
@@ -22,6 +22,7 @@ public:
     virtual ~IUserService() noexcept = default;
 
     virtual void loadUser(bool rememberUser) = 0;
+    virtual void deleteUser() = 0;
     virtual void downloadUser() = 0;
 
     virtual QString getFirstName() const = 0;

@@ -2,8 +2,8 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
-#include "user.hpp"
 #include "application_export.hpp"
+#include "user.hpp"
 
 namespace application
 {
@@ -21,6 +21,7 @@ public:
     virtual ~IUserStorageGateway() noexcept = default;
 
     virtual void getUser(const QString& authToken) = 0;
+    virtual void deleteUser(const QString& authToken) = 0;
     virtual void getProfilePicture(const QString& authToken) = 0;
     virtual void changeFirstName(const QString& authToken,
                                  const QString& newFirstName) = 0;

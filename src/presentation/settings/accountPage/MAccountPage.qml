@@ -369,27 +369,44 @@ MFlickWrapper {
 
                     MButton {
                         id: deleteButton
-                        Layout.preferredWidth: 140
+                        Layout.preferredWidth: 240
                         Layout.preferredHeight: 38
                         Layout.topMargin: 22
                         borderWidth: 0
                         backgroundColor: Style.colorRed
                         opacityOnPressed: 0.7
-                        text: "Delete"
+                        text: "Delete Your Account"
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: 12
-                        imagePath: Icons.trashHighlighted
-                        imageSize: 17
-                        imageSpacing: 10
+                        
+                        onClicked: confirmAccountDeletionPopup.open()
                     }
                 }
             }
         }
     }
 
+    MConfirmAccountDeletionPopup
+    {
+        id: confirmAccountDeletionPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
+        visible: false
+        
+        onDeletionConfirmed:
+        {
+            UserController.deleteUser()
+            
+            AuthController.logoutUser();
+            loadPage(loginPage);
+        }
+    }
+    
     MWarningPopup {
-        id: acceptDeletionPopup
+        id: unsavedChangesPopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
         y: Math.round(
@@ -402,7 +419,7 @@ MFlickWrapper {
         buttonsWidth: 120
 
         onOpenedChanged: if (opened)
-                             acceptDeletionPopup.giveFocus()
+                             unsavedChangesPopup.giveFocus()
         onDecisionMade: close()
         onLeftButtonClicked: root.saveAccountSettings()
         onRightButtonClicked: internal.unsavedChanges = false
@@ -417,13 +434,13 @@ MFlickWrapper {
         id: pageCleanup
         savePageAction: () => {
                             if (internal.unsavedChanges) {
-                                acceptDeletionPopup.open()
+                                unsavedChangesPopup.open()
                                 return true
                             }
                             return false
                         }
 
-        savingPageFinishedSignal: acceptDeletionPopup.decisionMade
+        savingPageFinishedSignal: unsavedChangesPopup.decisionMade
     }
 
     QtObject {
