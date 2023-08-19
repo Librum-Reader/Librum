@@ -68,6 +68,7 @@ private:
     std::unique_ptr<application::core::Page> m_page;
     int m_currentPage = 0;
     bool m_firstTimeColorInverted = true;
+    bool m_startedMousePressOnLink = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;

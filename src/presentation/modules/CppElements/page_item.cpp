@@ -153,10 +153,7 @@ void PageItem::mousePressEvent(QMouseEvent* event)
     removeSelection();
 
     if(m_page->pointIsAboveLink(mousePoint))
-    {
-        auto link = m_page->getLinkAtPoint(mousePoint);
-        followLink(link);
-    }
+        m_startedMousePressOnLink = true;
 
     // Select line when left mouse button is pressed 3 times
     if(m_tripleClickTimer.isActive())
@@ -168,6 +165,23 @@ void PageItem::mousePressEvent(QMouseEvent* event)
     }
 
     m_selectionStart = mousePoint;
+}
+
+void PageItem::mouseReleaseEvent(QMouseEvent* event)
+{
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+    QPoint mousePoint(mouseX, mouseY);
+
+    if(m_startedMousePressOnLink && m_page->pointIsAboveLink(mousePoint))
+    {
+        auto link = m_page->getLinkAtPoint(mousePoint);
+        removeSelection();
+        followLink(link);
+    }
+    m_startedMousePressOnLink = false;
+
+    m_doubleClickHold = false;
 }
 
 void PageItem::mouseMoveEvent(QMouseEvent* event)
@@ -221,11 +235,6 @@ void PageItem::keyPressEvent(QKeyEvent* event)
     {
         copySelectedText();
     }
-}
-
-void PageItem::mouseReleaseEvent(QMouseEvent* event)
-{
-    m_doubleClickHold = false;
 }
 
 void PageItem::paintSelectionOnPage(QPainter& painter)
