@@ -188,16 +188,16 @@ void PageItem::mouseMoveEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
-    m_selectionEnd = QPointF(mouseX, mouseY);
 
+    // 'hoverMoveEvent' is not triggered when the left mouse button is pressed,
+    // thus the cursor will not change correctly. Make sure to handle it here.
+    setCorrectCursor(mouseX, mouseY);
+
+    m_selectionEnd = QPointF(mouseX, mouseY);
     if(m_doubleClickHold)
-    {
         selectMultipleWords();
-    }
     else
-    {
         drawSelection();
-    }
 }
 
 void PageItem::hoverMoveEvent(QHoverEvent* event)
@@ -205,28 +205,7 @@ void PageItem::hoverMoveEvent(QHoverEvent* event)
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
-    if(m_page->pointIsAboveLink(QPoint(mouseX, mouseY)))
-    {
-        if(QApplication::overrideCursor() == nullptr ||
-           *QApplication::overrideCursor() != Qt::PointingHandCursor)
-        {
-            resetCursorToDefault();
-            QApplication::setOverrideCursor(Qt::PointingHandCursor);
-        }
-    }
-    else if(m_page->pointIsAboveText(QPoint(mouseX, mouseY)))
-    {
-        if(QApplication::overrideCursor() == nullptr ||
-           *QApplication::overrideCursor() != Qt::IBeamCursor)
-        {
-            resetCursorToDefault();
-            QApplication::setOverrideCursor(Qt::IBeamCursor);
-        }
-    }
-    else
-    {
-        resetCursorToDefault();
-    }
+    setCorrectCursor(mouseX, mouseY);
 }
 
 void PageItem::keyPressEvent(QKeyEvent* event)
@@ -311,6 +290,32 @@ void PageItem::resetCursorToDefault()
           *QApplication::overrideCursor() != Qt::ArrowCursor)
     {
         QApplication::restoreOverrideCursor();
+    }
+}
+
+void PageItem::setCorrectCursor(int x, int y)
+{
+    if(m_page->pointIsAboveLink(QPoint(x, y)))
+    {
+        if(QApplication::overrideCursor() == nullptr ||
+           *QApplication::overrideCursor() != Qt::PointingHandCursor)
+        {
+            resetCursorToDefault();
+            QApplication::setOverrideCursor(Qt::PointingHandCursor);
+        }
+    }
+    else if(m_page->pointIsAboveText(QPoint(x, y)))
+    {
+        if(QApplication::overrideCursor() == nullptr ||
+           *QApplication::overrideCursor() != Qt::IBeamCursor)
+        {
+            resetCursorToDefault();
+            QApplication::setOverrideCursor(Qt::IBeamCursor);
+        }
+    }
+    else
+    {
+        resetCursorToDefault();
     }
 }
 

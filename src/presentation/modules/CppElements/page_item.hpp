@@ -62,6 +62,7 @@ private:
     void paintSelectionOnPage(QPainter& painter);
 
     void resetCursorToDefault();
+    void setCorrectCursor(int x, int y);
     void followLink(mupdf::FzLink& link);
 
     DocumentItem* m_document = nullptr;
