@@ -21,9 +21,10 @@ Pane {
     background: Rectangle {
         color: "transparent"
     }
+    // Disable pressing tab to focus other elements
     Keys.onTabPressed: event => {
                            event.accepted = true
-                       } // Disable pressing tab to focus other elements
+                       }
 
     Component.onCompleted: {
         root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
@@ -31,7 +32,7 @@ Pane {
 
     Connections {
         target: documentItem
-        function onMoveToNextHit(pageNumber, y) {
+        function onGoToPosition(pageNumber, y) {
             root.setPage(pageNumber, y)
         }
     }

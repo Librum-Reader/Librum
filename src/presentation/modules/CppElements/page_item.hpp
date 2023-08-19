@@ -48,7 +48,6 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent* event) override;
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void hoverMoveEvent(QHoverEvent* event) override;
-
     virtual void keyPressEvent(QKeyEvent* event) override;
 
 private:
@@ -62,7 +61,8 @@ private:
     void generateSelection();
     void paintSelectionOnPage(QPainter& painter);
 
-    bool pointIsAboveText(int x, int y);
+    void resetCursorToDefault();
+    void followLink(mupdf::FzLink& link);
 
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;

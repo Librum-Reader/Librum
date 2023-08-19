@@ -18,6 +18,7 @@ application::core::Page::Page(const Document* document, int pageNumber) :
     setupDisplayList(boundPage);
     setupTextPage(pageNumber);
     setupSymbolBounds();
+    setupLinks();
 }
 
 void Page::setupDisplayList(const mupdf::FzRect& boundPage)
@@ -42,12 +43,23 @@ void Page::setupSymbolBounds()
     auto curr = m_textPage->begin();
     auto end = m_textPage->end();
 
-    m_pageSymbolBounds.resize(100);
+    m_symbolBounds.resize(100);
     while(curr != end)
     {
         auto symbol = curr;
         fz_rect rect = symbol->m_internal->bbox;
-        m_pageSymbolBounds.emplace_back(rect);
+        m_symbolBounds.emplace_back(rect);
+        ++curr;
+    }
+}
+
+void Page::setupLinks()
+{
+    auto end = m_page->fz_load_links().end();
+    auto curr = m_page->fz_load_links().begin();
+    while(curr != end)
+    {
+        m_links.push_back(*curr);
         ++curr;
     }
 }
@@ -242,13 +254,41 @@ bool Page::pointIsAboveText(const QPoint& point)
     mupdf::FzPoint fzPoint(point.x(), point.y());
     fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
 
-    for(auto& rect : m_pageSymbolBounds)
+    for(auto& rect : m_symbolBounds)
     {
         if(fzPoint.fz_is_point_inside_rect(rect))
             return true;
     }
 
     return false;
+}
+
+bool Page::pointIsAboveLink(const QPoint& point)
+{
+    mupdf::FzPoint fzPoint(point.x(), point.y());
+    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
+
+    for(auto& link : m_links)
+    {
+        if(fzPoint.fz_is_point_inside_rect(link.rect()))
+            return true;
+    }
+
+    return false;
+}
+
+mupdf::FzLink Page::getLinkAtPoint(const QPoint& point)
+{
+    mupdf::FzPoint fzPoint(point.x(), point.y());
+    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
+
+    for(auto& link : m_links)
+    {
+        if(fzPoint.fz_is_point_inside_rect(link.rect()))
+            return link;
+    }
+
+    return mupdf::FzLink();
 }
 
 QString Page::getTextFromSelection(const QPointF& start, const QPointF& end)
