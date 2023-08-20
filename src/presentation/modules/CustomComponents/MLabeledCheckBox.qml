@@ -57,6 +57,17 @@ Item
             font.pointSize: root.fontSize
             color: root.fontColor
             wrapMode: Text.WordWrap
+            
+            MouseArea
+            {
+                width: text.implicitWidth
+                height: text.implicitHeight
+                
+                onClicked: {
+                    checkBox.toggle()
+                    root.clicked()
+                }
+            }
         }
     }
     
