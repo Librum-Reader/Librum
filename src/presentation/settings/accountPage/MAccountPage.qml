@@ -175,6 +175,7 @@ MFlickWrapper {
                             inputFontSize: 13
                             borderWidth: 1
                             borderRadius: 4
+                            readOnly: true
 
                             onEdited: internal.unsavedChanges = true
                         }
