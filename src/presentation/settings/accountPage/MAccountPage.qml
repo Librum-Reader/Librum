@@ -16,6 +16,25 @@ MFlickWrapper {
         width: 10
         policy: "AlwaysOn"
     }
+    
+    Connections
+    {
+        target: UserController
+        
+        function onPasswordChangeFinished(success, reason)
+        {
+            if(success)
+            {
+                passwordInput.text = ""
+                passwordConfirmationInput.text = ""
+            }
+            else
+            {
+                passwordInput.errorText = reason;
+                passwordInput.setError();
+            }
+        }
+    }
 
     Page {
         id: page
@@ -236,7 +255,14 @@ MFlickWrapper {
                             image: Icons.eyeOn
                             toggledImage: Icons.eyeOff
 
-                            onEdited: internal.unsavedChanges = true
+                            onEdited:
+                            {
+                                internal.unsavedChanges = true
+                                
+                                // Clear error for password confirmation input as well
+                                passwordConfirmationInput.errorText = "";
+                                passwordConfirmationInput.clearError();
+                            }
                         }
 
                         MLabeledInputBox {
@@ -251,7 +277,13 @@ MFlickWrapper {
                             image: Icons.eyeOn
                             toggledImage: Icons.eyeOff
 
-                            onEdited: internal.unsavedChanges = true
+                            onEdited: {
+                                internal.unsavedChanges = true
+                                
+                                // Clear error for password input as well
+                                passwordInput.errorText = "";
+                                passwordInput.clearError();
+                            }
                         }
                     }
                 }
@@ -447,11 +479,30 @@ MFlickWrapper {
         id: internal
         property bool unsavedChanges: false
         property int boxPadding: 40
+        
+        function changePassword()
+        {
+            if(passwordInput.text === passwordConfirmationInput.text)
+            {
+                UserController.changePassword(passwordInput.text)
+            }
+            else
+            {
+                passwordInput.errorText = "Passwords don't match!";
+                passwordInput.setError();
+                
+                passwordConfirmationInput.errorText = "Passwords don't match!";
+                passwordConfirmationInput.setError();
+            }
+        }
     }
 
     function saveAccountSettings() {
         UserController.firstName = firstNameInput.text
         UserController.lastName = lastNameInput.text
+        
+        if(passwordInput.text !== "")
+            internal.changePassword();
 
         if (profilePictureArea.currentImage == "!")
             UserController.deleteProfilePicture()

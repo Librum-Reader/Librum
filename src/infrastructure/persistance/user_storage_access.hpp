@@ -28,6 +28,8 @@ public:
                         const QString& newLastName) override;
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
+    void changePassword(const QString& authToken,
+                        const QString& newPassword) override;
     void changeProfilePicture(const QString& authToken,
                               const QString& path) override;
     void deleteProfilePicture(const QString& authToken) override;

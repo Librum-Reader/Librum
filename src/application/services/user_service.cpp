@@ -29,6 +29,10 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
                 updateProfilePictureUI(path);
             });
 
+    connect(m_userStorageGateway, &IUserStorageGateway::passwordChangeFinished,
+            this, &UserService::passwordChangeFinished);
+
+
     // Tag insertion
     connect(&m_user, &User::tagInsertionStarted, this,
             &UserService::tagInsertionStarted);
@@ -162,6 +166,11 @@ void UserService::deleteProfilePicture()
     m_userStorageGateway->changeProfilePictureLastUpdated(
         m_authenticationToken, newProfilePictureLastUpdated);
     m_userStorageGateway->changeHasProfilePicture(m_authenticationToken, false);
+}
+
+void UserService::changePassword(const QString& newPassword)
+{
+    m_userStorageGateway->changePassword(m_authenticationToken, newPassword);
 }
 
 QString UserService::saveProfilePictureToFile(QByteArray& data)

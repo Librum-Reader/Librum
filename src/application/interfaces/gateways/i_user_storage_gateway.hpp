@@ -29,6 +29,8 @@ public:
                                 const QString& newLastName) = 0;
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
+    virtual void changePassword(const QString& authToken,
+                                const QString& newPassword) = 0;
     virtual void changeProfilePicture(const QString& authToken,
                                       const QString& path) = 0;
     virtual void deleteProfilePicture(const QString& authToken) = 0;
@@ -43,6 +45,7 @@ public:
 signals:
     void finishedGettingUser(const domain::entities::User& user, bool success);
     void profilePictureReady(QByteArray& data);
+    void passwordChangeFinished(bool success, const QString& reason);
 };
 
 }  // namespace application

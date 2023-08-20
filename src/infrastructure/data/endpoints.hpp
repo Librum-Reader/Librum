@@ -30,6 +30,7 @@ inline const QString getUsedBookStorageEndpoint { domain +
 inline const QString userGetEndpoint { domain + "/api/user" };
 inline const QString userPatchEndpoint { domain + "/api/user" };
 inline const QString userDeleteEndpoint { domain + "/api/user" };
+inline const QString userChangePasswordEndpoint { domain + "/api/user" };
 inline const QString userProfilePictureEndpoint { domain +
                                                   "/api/user/profilePicture" };
 

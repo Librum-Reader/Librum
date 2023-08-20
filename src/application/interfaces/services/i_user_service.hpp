@@ -41,6 +41,7 @@ public:
     virtual void setProfilePicturePath(const QString& path) = 0;
 
     virtual void deleteProfilePicture() = 0;
+    virtual void changePassword(const QString& newPassword) = 0;
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
@@ -56,6 +57,7 @@ signals:
     void tagDeletionEnded();
     void tagsChanged(int index);
     void bookStorageDataUpdated(long usedStorage, long bookStorageLimit);
+    void passwordChangeFinished(bool success, const QString& reason);
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;
