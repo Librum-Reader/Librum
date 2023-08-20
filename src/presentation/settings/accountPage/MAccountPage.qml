@@ -336,11 +336,11 @@ MFlickWrapper {
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Anonymously share the fromats of books you read (e.g. Pdf), to help us improve Librum"
+                        text: "Anonymously share information about the books you read to help us improve Librum"
                         fontSize: 13
                         fontColor: Style.colorText
                         spacing: 12
-                        checked: true
+                        checked: false
 
                         onClicked: internal.unsavedChanges = true
                     }
@@ -350,7 +350,7 @@ MFlickWrapper {
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Collect data on application crashes, so we can prevent it from happening again"
+                        text: "Collect data on crashes so that we can prevent it from happening again"
                         fontSize: 13
                         fontColor: Style.colorText
                         spacing: 12
