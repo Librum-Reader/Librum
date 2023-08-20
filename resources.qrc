@@ -205,5 +205,6 @@
         <file>resources/images/dark_mode/reading_options_popup/invert_color_icon.svg</file>
         <file>resources/images/light_mode/utility/cloud_off_icon.svg</file>
         <file>resources/images/dark_mode/utility/cloud_off_icon.svg</file>
+        <file>resources/images/logo_42.svg</file>
     </qresource>
 </RCC>
