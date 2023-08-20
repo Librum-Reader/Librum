@@ -12,7 +12,7 @@ namespace adapters
  * The IAuthenticationAccess class makes the API calls to the authentication
  * server.
  */
-class ADAPTERS_LIBRARY IBookStorageAccess : public QObject
+class ADAPTERS_EXPORT IBookStorageAccess : public QObject
 {
     Q_OBJECT
 

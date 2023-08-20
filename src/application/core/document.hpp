@@ -18,7 +18,7 @@ struct SearchHit
     QRectF rect;
 };
 
-class APPLICATION_LIBRARY Document
+class APPLICATION_EXPORT Document
 {
 public:
     Document(const QString& filePath);

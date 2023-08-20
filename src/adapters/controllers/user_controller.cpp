@@ -21,6 +21,9 @@ UserController::UserController(application::IUserService* userService) :
     connect(m_userService, &application::IUserService::profilePictureChanged,
             this, &UserController::profilePictureChanged);
 
+    connect(m_userService, &application::IUserService::passwordChangeFinished,
+            this, &UserController::passwordChangeFinished);
+
 
     // Tag insertion
     connect(m_userService, &application::IUserService::tagInsertionStarted,
@@ -46,9 +49,19 @@ void UserController::loadUser(bool rememberUser)
     m_userService->loadUser(rememberUser);
 }
 
+void UserController::deleteUser()
+{
+    m_userService->deleteUser();
+}
+
 void UserController::syncWithServer()
 {
     m_userService->downloadUser();
+}
+
+void UserController::changePassword(const QString& newPassword)
+{
+    m_userService->changePassword(newPassword);
 }
 
 QString UserController::getTagUuidForName(QString name)

@@ -11,7 +11,7 @@
 namespace application::services
 {
 
-class APPLICATION_LIBRARY BookService : public IBookService
+class APPLICATION_EXPORT BookService : public IBookService
 {
     Q_OBJECT
 

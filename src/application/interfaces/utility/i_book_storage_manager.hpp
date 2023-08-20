@@ -16,7 +16,7 @@ namespace application
  * The BookStorageManager manages the book storage for the local and remote
  * library.
  */
-class APPLICATION_LIBRARY IBookStorageManager : public QObject
+class APPLICATION_EXPORT IBookStorageManager : public QObject
 {
     Q_OBJECT
 

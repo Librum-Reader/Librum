@@ -9,7 +9,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY DocumentItem : public QObject
+class PRESENTATION_EXPORT DocumentItem : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString filePath WRITE setFilePath NOTIFY filePathChanged)
@@ -47,7 +47,7 @@ signals:
     void currentPageChanged(int currentPage);
     void zoomChanged(float newZoom);
     void tableOfContentsChanged();
-    void moveToNextHit(int pageNumber, int y);
+    void goToPosition(int pageNumber, int y);
     void highlightText(int pageNumber, QRectF rect);
 
 private:

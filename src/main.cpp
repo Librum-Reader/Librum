@@ -1,8 +1,10 @@
 #include <qdiriterator.h>
 #include <qfontdatabase.h>
 #include <qqml.h>
+#include <QApplication>
 #include <QDateTime>
 #include <QGuiApplication>
+#include <QIcon>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -10,7 +12,6 @@
 #include <QString>
 #include <QTranslator>
 #include <memory>
-#include <QApplication>
 #include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
@@ -47,6 +48,9 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("Etovex.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
+
+    QIcon icon(":/src/logo.ico");
+    app.setWindowIcon(icon);
 
     qInstallMessageHandler(logging::messageHandler);
 

@@ -29,6 +29,10 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
                 updateProfilePictureUI(path);
             });
 
+    connect(m_userStorageGateway, &IUserStorageGateway::passwordChangeFinished,
+            this, &UserService::passwordChangeFinished);
+
+
     // Tag insertion
     connect(&m_user, &User::tagInsertionStarted, this,
             &UserService::tagInsertionStarted);
@@ -63,6 +67,19 @@ void UserService::loadUser(bool rememberUser)
     m_rememberUser = success ? true : rememberUser;
 
     m_userStorageGateway->getUser(m_authenticationToken);
+}
+
+void UserService::deleteUser()
+{
+    // If the user has automatic login enabled, delete the data to avoid
+    // logging into a non-existing account.
+    auto userData = utility::AutomaticLoginHelper::tryAutomaticUserLoading();
+    if(userData.has_value() && userData.value().email == m_user.getEmail())
+    {
+        utility::AutomaticLoginHelper::clearAutomaticLoginData();
+    }
+
+    m_userStorageGateway->deleteUser(m_authenticationToken);
 }
 
 void UserService::downloadUser()
@@ -149,6 +166,11 @@ void UserService::deleteProfilePicture()
     m_userStorageGateway->changeProfilePictureLastUpdated(
         m_authenticationToken, newProfilePictureLastUpdated);
     m_userStorageGateway->changeHasProfilePicture(m_authenticationToken, false);
+}
+
+void UserService::changePassword(const QString& newPassword)
+{
+    m_userStorageGateway->changePassword(m_authenticationToken, newPassword);
 }
 
 QString UserService::saveProfilePictureToFile(QByteArray& data)

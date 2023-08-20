@@ -5,7 +5,7 @@
 namespace adapters::data_models
 {
 
-class ADAPTERS_LIBRARY AppInformation : public QObject
+class ADAPTERS_EXPORT AppInformation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)

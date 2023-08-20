@@ -10,7 +10,7 @@ namespace adapters::data_models
 /**
  * The UserTagsModel represents the user's tags to the UI
  */
-class ADAPTERS_LIBRARY UserTagsModel : public QAbstractListModel
+class ADAPTERS_EXPORT UserTagsModel : public QAbstractListModel
 {
     Q_OBJECT
 

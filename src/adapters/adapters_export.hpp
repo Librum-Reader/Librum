@@ -2,7 +2,7 @@
 #include <QtCore/QtGlobal>
 
 #if defined(ADAPTERS_LIBRARY)
-    #  define ADAPTERS_LIBRARY Q_DECL_EXPORT
+    #  define ADAPTERS_EXPORT Q_DECL_EXPORT
 #else
-    #  define ADAPTERS_LIBRARY Q_DECL_IMPORT
+    #  define ADAPTERS_EXPORT Q_DECL_IMPORT
 #endif

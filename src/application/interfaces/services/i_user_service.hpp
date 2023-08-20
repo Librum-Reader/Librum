@@ -5,8 +5,8 @@
 #include <QString>
 #include <QUuid>
 #include <vector>
-#include "tag.hpp"
 #include "application_export.hpp"
+#include "tag.hpp"
 
 namespace application
 {
@@ -14,7 +14,7 @@ namespace application
 /**
  *  The BookService handles all the operations on the user.
  */
-class APPLICATION_LIBRARY IUserService : public QObject
+class APPLICATION_EXPORT IUserService : public QObject
 {
     Q_OBJECT
 
@@ -22,6 +22,7 @@ public:
     virtual ~IUserService() noexcept = default;
 
     virtual void loadUser(bool rememberUser) = 0;
+    virtual void deleteUser() = 0;
     virtual void downloadUser() = 0;
 
     virtual QString getFirstName() const = 0;
@@ -40,6 +41,7 @@ public:
     virtual void setProfilePicturePath(const QString& path) = 0;
 
     virtual void deleteProfilePicture() = 0;
+    virtual void changePassword(const QString& newPassword) = 0;
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
@@ -55,6 +57,7 @@ signals:
     void tagDeletionEnded();
     void tagsChanged(int index);
     void bookStorageDataUpdated(long usedStorage, long bookStorageLimit);
+    void passwordChangeFinished(bool success, const QString& reason);
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;

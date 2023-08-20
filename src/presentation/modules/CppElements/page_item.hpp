@@ -10,7 +10,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY PageItem : public QQuickItem
+class PRESENTATION_EXPORT PageItem : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(
@@ -48,7 +48,6 @@ protected:
     virtual void mouseReleaseEvent(QMouseEvent* event) override;
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void hoverMoveEvent(QHoverEvent* event) override;
-
     virtual void keyPressEvent(QKeyEvent* event) override;
 
 private:
@@ -62,12 +61,15 @@ private:
     void generateSelection();
     void paintSelectionOnPage(QPainter& painter);
 
-    bool pointIsAboveText(int x, int y);
+    void resetCursorToDefault();
+    void setCorrectCursor(int x, int y);
+    void followLink(mupdf::FzLink& link);
 
     DocumentItem* m_document = nullptr;
     std::unique_ptr<application::core::Page> m_page;
     int m_currentPage = 0;
     bool m_firstTimeColorInverted = true;
+    bool m_startedMousePressOnLink = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;

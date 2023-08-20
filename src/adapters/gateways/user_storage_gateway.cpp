@@ -19,11 +19,19 @@ UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess) :
 
     connect(m_userStorageAccess, &IUserStorageAccess::profilePictureReady, this,
             &UserStorageGateway::profilePictureReady);
+
+    connect(m_userStorageAccess, &IUserStorageAccess::passwordChangeFinished,
+            this, &UserStorageGateway::passwordChangeFinished);
 }
 
 void UserStorageGateway::getUser(const QString& authToken)
 {
     m_userStorageAccess->getUser(authToken);
+}
+
+void UserStorageGateway::deleteUser(const QString& authToken)
+{
+    m_userStorageAccess->deleteUser(authToken);
 }
 
 void UserStorageGateway::getProfilePicture(const QString& authToken)
@@ -47,6 +55,12 @@ void UserStorageGateway::changeEmail(const QString& authToken,
                                      const QString& newEmail)
 {
     m_userStorageAccess->changeEmail(authToken, newEmail);
+}
+
+void UserStorageGateway::changePassword(const QString& authToken,
+                                        const QString& newPassword)
+{
+    m_userStorageAccess->changePassword(authToken, newPassword);
 }
 
 void UserStorageGateway::changeProfilePicture(const QString& authToken,

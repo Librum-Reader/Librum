@@ -10,7 +10,7 @@ namespace adapters::data_models
 /**
  * The ShortcutsModel represents the shortcuts to the user
  */
-class ADAPTERS_LIBRARY ShortcutsModel : public QAbstractListModel
+class ADAPTERS_EXPORT ShortcutsModel : public QAbstractListModel
 {
     Q_OBJECT
 

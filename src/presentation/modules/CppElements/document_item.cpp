@@ -74,7 +74,7 @@ void DocumentItem::search(const QString& text)
         auto hit = m_document->getSearchHits().front();
         m_currentSearchHit = 0;
 
-        emit moveToNextHit(hit.pageNumber, hit.rect.y());
+        emit goToPosition(hit.pageNumber, hit.rect.y());
         emit highlightText(hit.pageNumber, hit.rect);
     }
 }
@@ -99,7 +99,7 @@ void DocumentItem::goToNextSearchHit()
 
     auto hit = m_document->getSearchHits().at(m_currentSearchHit);
 
-    emit moveToNextHit(hit.pageNumber, hit.rect.y());
+    emit goToPosition(hit.pageNumber, hit.rect.y());
     emit highlightText(hit.pageNumber, hit.rect);
 }
 
@@ -117,7 +117,7 @@ void DocumentItem::goToPreviousSearchHit()
 
     auto hit = m_document->getSearchHits().at(m_currentSearchHit);
 
-    emit moveToNextHit(hit.pageNumber, hit.rect.y());
+    emit goToPosition(hit.pageNumber, hit.rect.y());
     emit highlightText(hit.pageNumber, hit.rect);
 }
 

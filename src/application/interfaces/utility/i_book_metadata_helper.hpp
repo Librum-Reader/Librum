@@ -12,7 +12,7 @@ namespace application
 /**
  * The BookMetaDataHelper class extracts metadata from a book.
  */
-class APPLICATION_LIBRARY IBookMetadataHelper
+class APPLICATION_EXPORT IBookMetadataHelper
 {
 public:
     virtual ~IBookMetadataHelper() noexcept = default;

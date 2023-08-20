@@ -13,13 +13,10 @@
 namespace application::core
 {
 
-class APPLICATION_LIBRARY Page
+class APPLICATION_EXPORT Page
 {
 public:
     Page(const Document* document, int pageNumber);
-    void setupDisplayList(const mupdf::FzRect& boundPage);
-    void setupTextPage(int pageNumber);
-    void setupSymbolBounds();
 
     int getWidth() const;
     int getHeight() const;
@@ -38,8 +35,14 @@ public:
     QPair<QPointF, QPointF> getPositionsForLineSelection(QPointF point);
     QString getTextFromSelection(const QPointF& start, const QPointF& end);
     bool pointIsAboveText(const QPoint& point);
+    bool pointIsAboveLink(const QPoint& point);
+    mupdf::FzLink getLinkAtPoint(const QPoint& point);
 
 private:
+    void setupDisplayList(const mupdf::FzRect& boundPage);
+    void setupTextPage(int pageNumber);
+    void setupSymbolBounds();
+    void setupLinks();
     mupdf::FzPixmap getEmptyPixmap() const;
     QImage imageFromPixmap(mupdf::FzPixmap pixmap);
     QRectF fzQuadToQRectF(const mupdf::FzQuad& rect);
@@ -50,7 +53,8 @@ private:
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
     QList<QRectF> m_bufferedSelectionRects;
-    std::vector<fz_rect> m_pageSymbolBounds;
+    QList<mupdf::FzLink> m_links;
+    std::vector<fz_rect> m_symbolBounds;
     bool m_invertColor = false;
 
     bool m_pageImageOutdated = true;

@@ -41,10 +41,12 @@ add_subdirectory(presentation/)
 
 
 # Building
-add_executable(appLibrum
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/resources.rc")
+qt_add_executable(appLibrum
     main.cpp
     dependency_injection.hpp
     message_handler.hpp
+    ${app_icon_resource_windows}
 )
 
 target_compile_definitions(appLibrum

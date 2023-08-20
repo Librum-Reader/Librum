@@ -13,7 +13,7 @@
 namespace adapters::controllers
 {
 
-class ADAPTERS_LIBRARY SettingsController : public ISettingsController
+class ADAPTERS_EXPORT SettingsController : public ISettingsController
 {
     Q_OBJECT
 

@@ -12,7 +12,7 @@
 namespace domain::entities
 {
 
-class DOMAIN_LIBRARY Book
+class DOMAIN_EXPORT Book
 {
 public:
      Book(const QString& filePath, const value_objects::BookMetaData& metaData,

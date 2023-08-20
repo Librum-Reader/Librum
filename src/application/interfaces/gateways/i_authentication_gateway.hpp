@@ -14,7 +14,7 @@ namespace application
  * AuthenticationAccess class. It maps the data provided by the application to
  * the data type required for authentication API requests.
  */
-class APPLICATION_LIBRARY IAuthenticationGateway : public QObject
+class APPLICATION_EXPORT IAuthenticationGateway : public QObject
 {
     Q_OBJECT
 

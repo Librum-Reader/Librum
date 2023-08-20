@@ -6,7 +6,7 @@
 namespace adapters::dtos
 {
 
-struct ADAPTERS_LIBRARY TagDto
+struct ADAPTERS_EXPORT TagDto
 {
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)

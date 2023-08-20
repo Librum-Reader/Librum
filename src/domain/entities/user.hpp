@@ -8,7 +8,7 @@
 namespace domain::entities
 {
 
-class DOMAIN_LIBRARY User : public QObject
+class DOMAIN_EXPORT User : public QObject
 {
     Q_OBJECT
 

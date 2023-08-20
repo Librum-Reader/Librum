@@ -7,7 +7,7 @@
 namespace application::core
 {
 
-class APPLICATION_LIBRARY TOCModel : public QAbstractItemModel
+class APPLICATION_EXPORT TOCModel : public QAbstractItemModel
 {
     Q_OBJECT
 

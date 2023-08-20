@@ -11,7 +11,7 @@
 namespace application::book_operation_status
 {
 
-Q_NAMESPACE_EXPORT(APPLICATION_LIBRARY)
+Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 
 enum class BookOperationStatus
 {

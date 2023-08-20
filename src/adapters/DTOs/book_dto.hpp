@@ -12,7 +12,7 @@
 namespace adapters::dtos
 {
 
-struct ADAPTERS_LIBRARY BookDto
+struct ADAPTERS_EXPORT BookDto
 {
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)

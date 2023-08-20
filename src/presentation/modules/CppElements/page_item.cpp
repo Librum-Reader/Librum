@@ -1,6 +1,7 @@
 #include "page_item.hpp"
 #include <QClipboard>
 #include <QDebug>
+#include <QDesktopServices>
 #include <QImage>
 #include <QObject>
 #include <QPainter>
@@ -146,36 +147,57 @@ void PageItem::mousePressEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
+    QPoint mousePoint(mouseX, mouseY);
 
     forceActiveFocus();
     removeSelection();
 
+    if(m_page->pointIsAboveLink(mousePoint))
+        m_startedMousePressOnLink = true;
+
     // Select line when left mouse button is pressed 3 times
     if(m_tripleClickTimer.isActive())
     {
-        m_selectionStart = QPointF(mouseX, mouseY);
+        m_selectionStart = mousePoint;
         selectLine();
         m_tripleClickTimer.stop();
         return;
     }
 
-    m_selectionStart = QPointF(mouseX, mouseY);
+    m_selectionStart = mousePoint;
+}
+
+void PageItem::mouseReleaseEvent(QMouseEvent* event)
+{
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+    QPoint mousePoint(mouseX, mouseY);
+
+    if(m_startedMousePressOnLink && m_page->pointIsAboveLink(mousePoint))
+    {
+        auto link = m_page->getLinkAtPoint(mousePoint);
+        removeSelection();
+        followLink(link);
+    }
+    m_startedMousePressOnLink = false;
+
+    m_doubleClickHold = false;
 }
 
 void PageItem::mouseMoveEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
-    m_selectionEnd = QPointF(mouseX, mouseY);
 
+    // 'hoverMoveEvent' is not triggered when the left mouse button is pressed,
+    // thus the cursor will not change correctly. Make sure to handle it here.
+    setCorrectCursor(mouseX, mouseY);
+
+    m_selectionEnd = QPointF(mouseX, mouseY);
     if(m_doubleClickHold)
-    {
         selectMultipleWords();
-    }
     else
-    {
         drawSelection();
-    }
 }
 
 void PageItem::hoverMoveEvent(QHoverEvent* event)
@@ -183,14 +205,7 @@ void PageItem::hoverMoveEvent(QHoverEvent* event)
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
-    if(pointIsAboveText(mouseX, mouseY))
-    {
-        QApplication::setOverrideCursor(Qt::IBeamCursor);
-    }
-    else
-    {
-        QApplication::setOverrideCursor(Qt::ArrowCursor);
-    }
+    setCorrectCursor(mouseX, mouseY);
 }
 
 void PageItem::keyPressEvent(QKeyEvent* event)
@@ -199,11 +214,6 @@ void PageItem::keyPressEvent(QKeyEvent* event)
     {
         copySelectedText();
     }
-}
-
-void PageItem::mouseReleaseEvent(QMouseEvent* event)
-{
-    m_doubleClickHold = false;
 }
 
 void PageItem::paintSelectionOnPage(QPainter& painter)
@@ -274,9 +284,59 @@ void PageItem::copySelectedText()
     clipboard->setText(text);
 }
 
-bool PageItem::pointIsAboveText(int x, int y)
+void PageItem::resetCursorToDefault()
 {
-    return m_page->pointIsAboveText(QPoint(x, y));
+    while(QApplication::overrideCursor() != nullptr &&
+          *QApplication::overrideCursor() != Qt::ArrowCursor)
+    {
+        QApplication::restoreOverrideCursor();
+    }
+}
+
+void PageItem::setCorrectCursor(int x, int y)
+{
+    if(m_page->pointIsAboveLink(QPoint(x, y)))
+    {
+        if(QApplication::overrideCursor() == nullptr ||
+           *QApplication::overrideCursor() != Qt::PointingHandCursor)
+        {
+            resetCursorToDefault();
+            QApplication::setOverrideCursor(Qt::PointingHandCursor);
+        }
+    }
+    else if(m_page->pointIsAboveText(QPoint(x, y)))
+    {
+        if(QApplication::overrideCursor() == nullptr ||
+           *QApplication::overrideCursor() != Qt::IBeamCursor)
+        {
+            resetCursorToDefault();
+            QApplication::setOverrideCursor(Qt::IBeamCursor);
+        }
+    }
+    else
+    {
+        resetCursorToDefault();
+    }
+}
+
+void PageItem::followLink(mupdf::FzLink& link)
+{
+    auto uri = link.uri();
+
+    if(mupdf::fz_is_external_link(uri))
+    {
+        QDesktopServices::openUrl(QUrl(uri));
+    }
+    else
+    {
+        auto fzDocument = m_document->internal()->internal();
+        float xp, yp = 0;
+        auto location = fzDocument->fz_resolve_link(uri, &xp, &yp);
+
+        auto page =
+            fzDocument->fz_load_chapter_page(location.chapter, location.page);
+        emit m_document->goToPosition(page.m_internal->number, yp);
+    }
 }
 
 void PageItem::selectPosition(QRectF rect)
