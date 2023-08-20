@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 
-    QIcon icon(":/resources/images/logo_42.svg");
+    QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);
 
     qInstallMessageHandler(logging::messageHandler);

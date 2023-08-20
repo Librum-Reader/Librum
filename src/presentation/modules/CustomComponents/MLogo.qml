@@ -13,7 +13,7 @@ Item
         id: outerRect
         anchors.fill: parent
         color: Style.colorBasePurple
-        radius: 8
+        radius: 4
         antialiasing: true
         
         Rectangle
