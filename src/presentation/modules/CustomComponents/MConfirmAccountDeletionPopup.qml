@@ -22,6 +22,8 @@ Popup
     modal: true
     Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
     
+    onOpenedChanged: if(!opened) emailInput.text = ""
+    
     
     MFlickWrapper
     {
@@ -114,11 +116,7 @@ Popup
                     fontWeight: Font.Bold
                     fontSize: 12
                     
-                    onClicked:
-                    {
-                        emailInput.clear()
-                        root.close()
-                    }
+                    onClicked: root.close()
                 }
                 
                 MButton
@@ -148,7 +146,6 @@ Popup
                         }
                         
                         root.deletionConfirmed()
-                        emailInput.text = ""
                         root.close()
                     }
                 }
