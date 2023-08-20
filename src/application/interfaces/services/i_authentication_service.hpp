@@ -12,7 +12,7 @@ namespace application
 /**
  *  The AuthenticationService handles the authentication.
  */
-class APPLICATION_LIBRARY IAuthenticationService : public QObject
+class APPLICATION_EXPORT IAuthenticationService : public QObject
 {
     Q_OBJECT
 

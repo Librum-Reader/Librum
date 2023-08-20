@@ -13,7 +13,7 @@
 namespace application::core
 {
 
-class APPLICATION_LIBRARY Page
+class APPLICATION_EXPORT Page
 {
 public:
     Page(const Document* document, int pageNumber);

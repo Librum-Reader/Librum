@@ -9,7 +9,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY DocumentItem : public QObject
+class PRESENTATION_EXPORT DocumentItem : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString filePath WRITE setFilePath NOTIFY filePathChanged)

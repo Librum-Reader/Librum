@@ -9,7 +9,7 @@
 namespace application::core
 {
 
-class APPLICATION_LIBRARY FilteredTOCModel : public QSortFilterProxyModel
+class APPLICATION_EXPORT FilteredTOCModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString filterString READ getFilterString WRITE setFilterString

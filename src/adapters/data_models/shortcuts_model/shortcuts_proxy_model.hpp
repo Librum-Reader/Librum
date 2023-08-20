@@ -11,7 +11,7 @@ namespace adapters::data_models
  * The ShortcutsProxyModel class is a proxy class which acts as a wrapper around
  * the shortcuts model that is handling the sorting and filtering of elements.
  */
-class ADAPTERS_LIBRARY ShortcutsProxyModel : public QSortFilterProxyModel
+class ADAPTERS_EXPORT ShortcutsProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString filterString READ getFilterString WRITE setFilterString

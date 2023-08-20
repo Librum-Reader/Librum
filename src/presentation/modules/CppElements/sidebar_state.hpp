@@ -6,7 +6,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY SidebarState : public QObject
+class PRESENTATION_EXPORT SidebarState : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(State currentState READ currentState WRITE setCurrentState NOTIFY

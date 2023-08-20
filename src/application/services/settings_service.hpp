@@ -11,7 +11,7 @@ namespace application::services
 {
 
 // A wrapper class around QSettings which manages the application settings
-class APPLICATION_LIBRARY SettingsService : public ISettingsService
+class APPLICATION_EXPORT SettingsService : public ISettingsService
 {
     Q_OBJECT
 

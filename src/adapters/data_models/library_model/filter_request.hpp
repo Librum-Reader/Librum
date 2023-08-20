@@ -5,7 +5,7 @@
 namespace adapters::data_models
 {
 
-struct ADAPTERS_LIBRARY FilterRequest
+struct ADAPTERS_EXPORT FilterRequest
 {
     QString authors = "";
     QString format = "";

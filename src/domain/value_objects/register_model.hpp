@@ -5,7 +5,7 @@
 namespace domain::value_objects
 {
 
-class DOMAIN_LIBRARY RegisterModel
+class DOMAIN_EXPORT RegisterModel
 {
 public:
     RegisterModel(QString firstName, QString lastName, QString email,

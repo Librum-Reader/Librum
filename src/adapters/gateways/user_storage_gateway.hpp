@@ -7,7 +7,7 @@
 namespace adapters::gateways
 {
 
-class ADAPTERS_LIBRARY UserStorageGateway
+class ADAPTERS_EXPORT UserStorageGateway
     : public application::IUserStorageGateway
 {
     Q_OBJECT

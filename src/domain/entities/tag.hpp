@@ -10,7 +10,7 @@
 namespace domain::entities
 {
 
-class DOMAIN_LIBRARY Tag
+class DOMAIN_EXPORT Tag
 {
 public:
      explicit Tag(const QString& name, const QString& uuid = "");

@@ -14,7 +14,7 @@ namespace application
 /**
  *  The BookService handles all the operations on the user.
  */
-class APPLICATION_LIBRARY IUserService : public QObject
+class APPLICATION_EXPORT IUserService : public QObject
 {
     Q_OBJECT
 

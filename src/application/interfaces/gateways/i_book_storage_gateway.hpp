@@ -14,7 +14,7 @@ namespace application
  * BookStorageAccess class. It maps the data provided by the application to
  * the data type required for book storage API requests.
  */
-class APPLICATION_LIBRARY IBookStorageGateway : public QObject
+class APPLICATION_EXPORT IBookStorageGateway : public QObject
 {
     Q_OBJECT
 

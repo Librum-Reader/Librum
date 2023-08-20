@@ -10,7 +10,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY PageItem : public QQuickItem
+class PRESENTATION_EXPORT PageItem : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(

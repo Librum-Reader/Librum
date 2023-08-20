@@ -11,9 +11,9 @@
 namespace application::error_codes
 {
 
-Q_NAMESPACE_EXPORT(APPLICATION_LIBRARY)
+Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 
-enum class APPLICATION_LIBRARY ErrorCode
+enum class APPLICATION_EXPORT ErrorCode
 {
     NoError = -1,
     Unknown,

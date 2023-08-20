@@ -8,7 +8,7 @@
 namespace adapters::gateways
 {
 
-class ADAPTERS_LIBRARY BookStorageGateway : public application::IBookStorageGateway
+class ADAPTERS_EXPORT BookStorageGateway : public application::IBookStorageGateway
 {
     Q_OBJECT
 

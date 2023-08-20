@@ -7,7 +7,7 @@
 namespace adapters::controllers
 {
 
-class ADAPTERS_LIBRARY AuthenticationController : public IAuthenticationController
+class ADAPTERS_EXPORT AuthenticationController : public IAuthenticationController
 {
     Q_OBJECT
 

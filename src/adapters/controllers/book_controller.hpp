@@ -11,7 +11,7 @@
 namespace adapters::controllers
 {
 
-class ADAPTERS_LIBRARY BookController : public IBookController
+class ADAPTERS_EXPORT BookController : public IBookController
 {
     Q_OBJECT
 

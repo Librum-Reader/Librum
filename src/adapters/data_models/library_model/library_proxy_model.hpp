@@ -13,7 +13,7 @@ namespace adapters::data_models
  * The LibraryProxyModel class is a proxy class which acts as a wrapper around
  * the library model that is handling the sorting and filtering of elements
  */
-class ADAPTERS_LIBRARY LibraryProxyModel : public QSortFilterProxyModel
+class ADAPTERS_EXPORT LibraryProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
     Q_PROPERTY(QString sortString READ getSortString WRITE setSortString NOTIFY

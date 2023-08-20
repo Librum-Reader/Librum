@@ -13,7 +13,7 @@ namespace application
 /**
  *  The BookService handles all the operations on books.
  */
-class APPLICATION_LIBRARY IBookService : public QObject
+class APPLICATION_EXPORT IBookService : public QObject
 {
     Q_OBJECT
 

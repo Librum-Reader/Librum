@@ -8,7 +8,7 @@
 namespace adapters::controllers
 {
 
-class ADAPTERS_LIBRARY UserController : public IUserController
+class ADAPTERS_EXPORT UserController : public IUserController
 {
     Q_OBJECT
 

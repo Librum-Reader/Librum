@@ -11,7 +11,7 @@
 namespace application::services
 {
 
-class APPLICATION_LIBRARY UserService : public IUserService
+class APPLICATION_EXPORT UserService : public IUserService
 {
     Q_OBJECT
 
