@@ -67,9 +67,9 @@ public slots:
 
 
 private:
-    QString m_currentVersion { "v0.4.6" };
-    QString m_newestVersion { "v0.4.6" };
-    QString m_currentQtVersion { "v5.15.8" };
+    QString m_currentVersion { "v0.6.3" };
+    QString m_newestVersion { "v0.6.3" };
+    QString m_currentQtVersion { "v6.5.1" };
     QString m_companyName { "Librum-Reader" };
     QString m_productName { "Librum" };
     QString m_companyWebsite { "https://librumreader.com" };
