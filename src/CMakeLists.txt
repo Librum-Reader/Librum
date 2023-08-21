@@ -86,3 +86,13 @@ set(FONTS_OUT_DIR ${PROJECT_BINARY_DIR}/resources/fonts)
 file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
 message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
 copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS librum
+            DESTINATION bin
+            LIBRARY DESTINATION lib
+            RUNTIME DESTINATION bin
+            )
+endif()
