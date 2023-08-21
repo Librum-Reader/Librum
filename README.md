@@ -27,7 +27,8 @@ Setup and manage your own library
 
 Customize Librum to make it personal to you
 
-![image](https://github.com/Librum-Reader/Librum/assets/69865187/8d8615d4-fbba-420d-ad7e-2c3734097552)
+![settings_dark](https://github.com/Librum-Reader/Librum/assets/69865187/98b05963-6493-45dc-94f9-d6293ab6d431)
+
 
 
 <br>
