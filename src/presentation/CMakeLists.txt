@@ -43,3 +43,11 @@ target_include_directories(presentation
 
 target_compile_options(presentation PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-Wall;-O0;-g>")
 target_compile_options(presentation PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS presentation
+            DESTINATION lib
+            )
+endif()

@@ -50,7 +50,6 @@
         <file>readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
         <file>readingPage/readingSearchbar/MReadingSearchbar.qml</file>
         <file>registerPage/MAcceptPolicy.qml</file>
-        <file>registerPage/MKeepMeUpdated.qml</file>
         <file>registerPage/MRegisterPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
         <file>settings/MAboutPage.qml</file>

@@ -68,7 +68,8 @@ Item
             
             MouseArea
             {
-                anchors.fill: parent
+                width: parent.implicitWidth
+                height: parent.implicitHeight
                 
                 onClicked: root.clicked()
             }

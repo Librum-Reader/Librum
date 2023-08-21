@@ -218,6 +218,13 @@ MFlickWrapper
                             Layout.leftMargin: 4
                             font.pointSize: 11
                             color: Style.colorText
+                            
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                
+                                onClicked: rememberMeCheckBox.toggle()
+                            }
                         }
                         
                         Item

@@ -67,8 +67,9 @@ set(application_SRC
 
 # Build mupdf
 if(UNIX)
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so")
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so" PARENT_SCOPE)
+    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
     set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
 elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
@@ -165,4 +166,17 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
               EXECUTABLE application_unit_tests
               BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
               EXCLUDE ${PROJECT_BINARY_DIR}/* ${PROJECT_SOURCE_DIR}/libs/*)
+endif()
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS application
+            DESTINATION lib
+            )
+    
+    # Install mupdf's shared libraries
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so 
+                  ${MUPDF_OUTPUT_DIR}/libmupdf.so
+            DESTINATION lib)
 endif()

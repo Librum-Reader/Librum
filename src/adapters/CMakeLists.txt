@@ -99,3 +99,10 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
               BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
               EXCLUDE ${PROJECT_BINARY_DIR}/* ${PROJECT_SOURCE_DIR}/libs/*)
 endif()
+
+# Install rules
+if(UNIX)
+    install(TARGETS adapters
+            DESTINATION lib
+            )
+endif()

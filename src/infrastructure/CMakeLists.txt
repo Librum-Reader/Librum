@@ -39,3 +39,11 @@ target_link_libraries(infrastructure
 )
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS infrastructure
+            DESTINATION lib
+            )
+endif()

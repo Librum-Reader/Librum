@@ -42,19 +42,19 @@ add_subdirectory(presentation/)
 
 # Building
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/resources.rc")
-qt_add_executable(appLibrum
+qt_add_executable(librum
     main.cpp
     dependency_injection.hpp
     message_handler.hpp
     ${app_icon_resource_windows}
 )
 
-target_compile_definitions(appLibrum
+target_compile_definitions(librum
     PRIVATE
         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 
-target_link_libraries(appLibrum
+target_link_libraries(librum
     PRIVATE
         presentation
         adapters
@@ -66,17 +66,17 @@ target_link_libraries(appLibrum
         Qt6::QuickControls2
 )
 
-target_include_directories(appLibrum
+target_include_directories(librum
     PRIVATE
         ${ADAPTERS_INCLUDES}
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
 )
 
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+target_compile_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")
+target_compile_options(librum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
-target_link_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
+target_link_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
 
 
 
@@ -86,3 +86,13 @@ set(FONTS_OUT_DIR ${PROJECT_BINARY_DIR}/resources/fonts)
 file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
 message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
 copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS librum
+            DESTINATION bin
+            LIBRARY DESTINATION lib
+            RUNTIME DESTINATION bin
+            )
+endif()

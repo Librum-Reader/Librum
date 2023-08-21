@@ -13,37 +13,23 @@ An alpha release will be available soon, bringing the servers online and making 
 
 # Preview
 
-The login and starting page of Librum
+A simple and modern interface
 
-![login_screen](https://user-images.githubusercontent.com/69865187/218166838-c2cad42a-d1dd-4a2a-a110-411368f7ff65.png)
-
-
-<br>
-
-A simple and modern interface that removes any distractions and clutter
-
-![book_reading](https://user-images.githubusercontent.com/69865187/218166898-9054e579-8cbf-460e-9f35-6178e8666c71.png)
-
-
-<br>
-
-Customize Librum to make it personal to you
-
-![appearance_settings](https://user-images.githubusercontent.com/69865187/218166919-162da3ed-e5da-4db6-9c12-e9913c374c11.png)
-
-
-<br>
-
-Dark mode support. Need we say more?
-
-![about_settings_dark](https://user-images.githubusercontent.com/69865187/218176878-f621669f-9d20-4f92-a9d5-ebb75e877218.png)
-
+![image](https://github.com/Librum-Reader/Librum/assets/69865187/bf1d0401-62bd-4f4e-b008-523fb2efd275)
 
 <br>
 
 Setup and manage your own library
 
 ![HomeScreenDark](https://github.com/Librum-Reader/Librum/assets/69865187/ea94fc68-1bf0-4933-8d80-43a57c6590c5)
+
+<br>
+
+Customize Librum to make it personal to you
+
+![settings_dark](https://github.com/Librum-Reader/Librum/assets/69865187/98b05963-6493-45dc-94f9-d6293ab6d431)
+
+
 
 <br>
 
@@ -89,8 +75,8 @@ We support:
 - Windows
 - GNU/Linux
 - MacOS
-- IOS
-- Android
+- IOS (Coming Soon)
+- Android (Coming Soon)
 <br>
 
 ### Supported formats
@@ -230,6 +216,16 @@ To build Librum on windows, run the following commands in the Powershell:
     ```sh
     ./appLibrum
     ```
+
+### Additional Info
+Here are some things to keep in mind during the build process.
+<br>
+
+- Make sure to add cmake and the Qt binaries to the `PATH` environment variable
+- You need Visual Studio 2019, newer versions will **not** work
+- For the Qt installation, you **only** need to choose "MSVC 2019 64-bit", you can untick everything else to reduce the download size
+
+<br>
 
 ## For macOS
 Support coming soon!
