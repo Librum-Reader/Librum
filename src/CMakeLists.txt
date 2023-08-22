@@ -81,8 +81,11 @@ target_link_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
 
 
 # Move fonts into binary dir    
+if(UNIX)
+    set(FONTS_OUT_DIR "$ENV{HOME}/.local/share/Librum-Reader/Librum/resources/fonts")
+endif()
+
 include(CopyRecursive)
-set(FONTS_OUT_DIR ${PROJECT_BINARY_DIR}/resources/fonts)
 file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
 message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
 copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")

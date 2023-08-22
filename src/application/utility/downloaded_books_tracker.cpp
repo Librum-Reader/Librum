@@ -5,6 +5,7 @@
 #include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QStandardPaths>
 #include <iterator>
 
 
@@ -156,13 +157,19 @@ QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
 
 QDir DownloadedBooksTracker::getLibraryDir() const
 {
-    auto applicationPath = QDir::current().path();
-    auto userLibName = getUserLibraryName(m_libraryOwnerEmail);
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
 
-    auto uniqueFolderName =
-        applicationPath + "/" + "librum_localLibraries" + "/" + userLibName;
+    destDir.mkdir("local_libraries");
+    destDir.cd("local_libraries");
 
-    return QDir(uniqueFolderName);
+    auto userLibraryName = getUserLibraryName(m_libraryOwnerEmail);
+    destDir.mkdir(userLibraryName);
+    destDir.cd(userLibraryName);
+
+    return destDir.path();
 }
 
 QString DownloadedBooksTracker::getUserLibraryName(QString email) const

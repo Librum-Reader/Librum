@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QImageReader>
+#include <QStandardPaths>
 #include "automatic_login_helper.hpp"
 #include "tag.hpp"
 
@@ -453,14 +454,19 @@ void UserService::clearUserData()
 
 QDir UserService::getUserProfileDir() const
 {
-    auto applicationDir = QDir::current().path();
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
+
+    destDir.mkdir("profiles");
+    destDir.cd("profiles");
+
     auto userProfileHash = QString::number(qHash(m_user.getEmail()));
-    auto folder = QDir(applicationDir + "/userProfiles/" + userProfileHash);
+    destDir.mkdir(userProfileHash);
+    destDir.cd(userProfileHash);
 
-    if(!folder.exists())
-        folder.mkpath(folder.path());
-
-    return folder;
+    return destDir;
 }
 
 }  // namespace application::services

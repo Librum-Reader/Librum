@@ -4,6 +4,7 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QStandardPaths>
 #include <optional>
 #include <user.hpp>
 #include "login_model.hpp"
@@ -51,15 +52,22 @@ namespace
 {
 
 // Members
-const QString m_automaticLoginFile { "autologin.txt" };
+const QString m_automaticLoginFile { "auto_login.txt" };
+
+QString getAutomaticLoginFilePath()
+{
+    QDir configDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!configDir.exists())
+        configDir.mkpath(".");
+
+    return configDir.filePath(m_automaticLoginFile);
+}
 
 // Private functions
 std::optional<QJsonObject> getAutomaticLoginFileData()
 {
-    auto currentFolder = QDir::current();
-    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
-
-    QFile file(automaticLoginFilePath);
+    QFile file(getAutomaticLoginFilePath());
     if(!file.open(QFile::ReadOnly | QIODevice::Text))
         return std::nullopt;
 
@@ -96,10 +104,7 @@ void appendUserDataToJsonObject(QJsonObject& jsonObject, UserData userData)
 
 void saveDataToAutomaticLoginFile(const QJsonObject& data)
 {
-    auto currentFolder = QDir::current();
-    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
-
-    QFile file(automaticLoginFilePath);
+    QFile file(getAutomaticLoginFilePath());
     if(!file.open(QFile::WriteOnly | QIODevice::Text))
     {
         qDebug() << "Failed Opening automatic login file for saving data";
@@ -165,10 +170,7 @@ inline std::optional<UserData> tryAutomaticUserLoading()
 
 inline void clearAutomaticLoginData()
 {
-    auto currentFolder = QDir::current();
-    auto automaticLoginFilePath = currentFolder.filePath(m_automaticLoginFile);
-
-    QFile file(automaticLoginFilePath);
+    QFile file(getAutomaticLoginFilePath());
     file.resize(0);  // Delete all contents of the file
 }
 

@@ -9,6 +9,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QStandardPaths>
 #include <QString>
 #include <QTranslator>
 #include <memory>
@@ -44,8 +45,8 @@ int main(int argc, char* argv[])
     // clang-format off
     // App
     QApplication app(argc, argv);
-    QGuiApplication::setOrganizationName("Etovex");
-    QGuiApplication::setOrganizationDomain("Etovex.com");
+    QGuiApplication::setOrganizationName("Librum-Reader");
+    QGuiApplication::setOrganizationDomain("librumreader.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 
@@ -192,12 +193,17 @@ void addTranslations()
 
 void loadFonts()
 {
-    QString fontsPath =
-        QGuiApplication::applicationDirPath() + "/resources/fonts";
-    QDir fontsDir(fontsPath);
-    if(!fontsDir.isEmpty() && fontsDir.exists())
+    QDir fontsDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!fontsDir.exists())
+        fontsDir.mkpath(".");
+
+    fontsDir.cd("resources");
+    fontsDir.cd("fonts");
+
+    if(fontsDir.exists() && !fontsDir.isEmpty())
     {
-        QDirIterator it(fontsPath, QDir::Files);
+        QDirIterator it(fontsDir.path(), QDir::Files);
         while(it.hasNext())
         {
             int res = QFontDatabase::addApplicationFont(it.next());
@@ -209,7 +215,7 @@ void loadFonts()
     else
     {
         qWarning() << QString("Unable to load application fonts from %1")
-                          .arg(fontsPath);
+                          .arg(fontsDir.path());
     }
 
 
