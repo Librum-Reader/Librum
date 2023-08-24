@@ -101,5 +101,6 @@ if(UNIX)
 
     install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/logo.svg
             DESTINATION share/pixmaps
+            RENAME librum.svg
             )
 endif()
