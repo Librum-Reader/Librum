@@ -117,7 +117,7 @@ Want a new feature? Feel free to leave a feature request ticket!
 
 # Build Guide
 
-Here's how to get Librum up and running in your environment.
+Follow this guide to build Librum from source.
 <br>
 
 
@@ -150,20 +150,25 @@ The installation is straight forward, just follow the steps below:
     ```
 4. Run cmake.
     ```sh
-    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/<username>/Qt/<version>/gcc_64 ..
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/<username>/Qt/<version>/gcc_64 ..
     ```
     `CMAKE_PREFIX_PATH` needs to be set to the Qt install path. Qt is usually installed at /home/name/Qt, so an example might be:
     ```sh
-    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/john/Qt/6.5.1/gcc_64 ..
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/john/Qt/6.5.1/gcc_64 ..
     ```
 6. Build the project
     ```sh
     cmake --build .
     ```
-7. Run the app
-    ```sh
-    ./appLibrum
-    ```
+7. Install Librum
+  ```sh
+  cmake --install .
+  ```
+8. To create a shortcut, move the `librum.desktop` file to `/usr/share/applications/`
+  ```sh
+  cd ..
+  cp librum.desktop /usr/share/applications
+  ``` 
 <br>
 
 ### Troubleshooting
@@ -215,7 +220,7 @@ To build Librum on windows, run the following commands in the Powershell:
     ```
 7. Run the app
     ```sh
-    ./appLibrum
+    ./librum
     ```
 
 ### Additional Info
