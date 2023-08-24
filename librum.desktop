@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Librum
+GenericName=E-Book Reader
+Comment=A modern ebook reader and library manager
+Comment[fr]=Un lecteur de livres et un gestionnaire de bibliothèque moderne
+Comment[de]=Ein moderner E-Book-Reader und Bibliotheksmanager
+Exec=/usr/bin/librum
+Icon=librum
+Terminal=false
+Categories=E-Book;Library;Reader;Qt,C++;
+Keywords=Book;Library;Reader;E-Book;

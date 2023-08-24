@@ -98,4 +98,8 @@ if(UNIX)
             LIBRARY DESTINATION lib
             RUNTIME DESTINATION bin
             )
+
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/logo.svg
+            DESTINATION share/pixmaps
+            )
 endif()
