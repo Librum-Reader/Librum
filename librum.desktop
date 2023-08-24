@@ -8,5 +8,5 @@ Comment[de]=Ein moderner E-Book-Reader und Bibliotheksmanager
 Exec=/usr/bin/librum
 Icon=librum
 Terminal=false
-Categories=E-Book;Library;Reader;Qt,C++;
+Categories=Education;Viewer;Printing;Literature;Qt;
 Keywords=Book;Library;Reader;E-Book;
