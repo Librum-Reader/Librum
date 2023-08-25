@@ -1,13 +1,3 @@
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick)
-
-
 # Build tests
 add_executable(domain_unit_tests
                     main.cpp

@@ -18,6 +18,16 @@ option(BUILD_TESTS ON)
 option(ENABLE_COVERAGE OFF)
 option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
+
+# Qt
+find_package(Qt6 REQUIRED COMPONENTS Core Quick Widgets Network Gui QuickControls2 Test)
+
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+
+
+# Create a set of warnings for windows systems
 if(WIN32)
     add_compile_options(-Zc:rvalueCast -Zc:inline -Zc:strictStrings -Zc:throwingNew -permissive- -Zc:__cplusplus -Zc:externConstexpr -utf-8 -w34100 -w34189 -w44996 -w44456 -w44457 -w44458)
     set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)

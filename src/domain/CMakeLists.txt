@@ -1,11 +1,3 @@
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick QuickControls2)
-
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Build
