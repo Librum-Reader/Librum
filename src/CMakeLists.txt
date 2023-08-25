@@ -91,4 +91,8 @@ if(UNIX)
             DESTINATION share/pixmaps
             RENAME librum.svg
             )
+        
+    install(FILES ${PROJECT_SOURCE_DIR}/librum.desktop
+            DESTINATION share/applications
+            )
 endif()
