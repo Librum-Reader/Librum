@@ -1,17 +1,5 @@
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
-
 # Configuration
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
-
-
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
-
 
 
 # Language
