@@ -21,7 +21,7 @@ option(USE_SANITIZERS OFF) # Slows down program startup significantly
 
 
 # Qt
-find_package(Qt6 REQUIRED COMPONENTS Core Quick Widgets Network Gui QuickControls2 Test)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Widgets Network Gui QuickControls2 Test)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
