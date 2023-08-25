@@ -161,14 +161,14 @@ The installation is straight forward, just follow the steps below:
     cmake --build .
     ```
 7. Install Librum
-  ```sh
-  cmake --install .
-  ```
+    ```sh
+    cmake --install .
+    ```
 8. To create a shortcut, move the `librum.desktop` file to `/usr/share/applications/`
-  ```sh
-  cd ..
-  cp librum.desktop /usr/share/applications
-  ``` 
+    ```sh
+    cd ..
+    cp librum.desktop /usr/share/applications
+    ``` 
 <br>
 
 ### Troubleshooting
