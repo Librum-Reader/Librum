@@ -126,14 +126,16 @@ Page
                             Globals.selectedBook = BookController.getBook(model.uuid);
                             internal.openBook();
                         }
-                        else
+                        // Don't start downloading if downloading is already in progress.
+                        else if(!bookDelegate.downloading)
                         {
+                            bookDelegate.downloading = true;
                             BookController.downloadBookMedia(model.uuid);
                         }
                     }
                     
                     /*
-                      When right-clicking a book, open the bookOptions popup
+                      When right-clicking a book, open the bookOptions popup.
                       */
                     onRightButtonClicked:
                         (index, mouse) =>
