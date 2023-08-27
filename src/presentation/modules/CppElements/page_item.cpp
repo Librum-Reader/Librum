@@ -173,10 +173,17 @@ void PageItem::mouseReleaseEvent(QMouseEvent* event)
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
 
+    // This gets triggered when the user simply clicks on the page, without
+    // dragging the mouse, so on a normal click. In this case we want to reset
+    // the highlight.
+    if(m_selectionStart == QPointF(mouseX, mouseY))
+    {
+        removeSelection();
+    }
+
     if(m_startedMousePressOnLink && m_page->pointIsAboveLink(mousePoint))
     {
         auto link = m_page->getLinkAtPoint(mousePoint);
-        removeSelection();
         followLink(link);
     }
     m_startedMousePressOnLink = false;
@@ -243,6 +250,9 @@ void PageItem::removeSelection()
 {
     m_page->getBufferedSelectionRects().clear();
     update();
+
+    m_selectionStart = QPointF(0, 0);
+    m_selectionEnd = QPointF(0, 0);
 }
 
 void PageItem::selectSingleWord()
