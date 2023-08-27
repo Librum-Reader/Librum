@@ -18,7 +18,7 @@ Popup
     
     onOpenedChanged:
     {
-        let mappedPoint = focusedItem.mapToItem(baseRoot, 0, 0);
+        let mappedPoint = focusedItem.mapToItem(baseRoot.contentItem, 0, 0);
         y = mappedPoint.y - implicitHeight - 6;
         
         // Make sure to position the popup to the left or right of the focused item
