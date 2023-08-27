@@ -24,7 +24,7 @@ Popup
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
-    closePolicy: Popup.NoAutoClose | Popup.CloseOnEscape
+    closePolicy: Popup.NoAutoClose | Popup.CloseOnEscape | Popup.CloseOnReleaseOutside
     background: Rectangle { color: "transparent"; radius: 4 }
     modal: true
     Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
