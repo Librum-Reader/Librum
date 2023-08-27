@@ -32,8 +32,17 @@ Pane {
 
     Connections {
         target: documentItem
+        
         function onGoToPosition(pageNumber, y) {
             root.setPage(pageNumber, y)
+        }
+        
+        function onZoomChanged(newZoom)
+        {
+            let normMaxWidth = pageView.widestItem / pageView.prevZoom;
+            pageView.widestItem = normMaxWidth * root.document.zoom;
+            
+            pageView.prevZoom = root.document.zoom;
         }
     }
 
@@ -53,12 +62,12 @@ Pane {
             readonly property int scrollSpeed: 5500
             property int pageSpacing: pageView.getPageSpacing(
                                           root.document.zoom)
+            property int widestItem: 0
+            property real prevZoom: 1
 
             height: parent.height
-            width: if (currentItem)
-                       currentItem.implicitWidth
-                               <= root.width ? currentItem.implicitWidth : root.width
-            contentWidth: currentItem.implicitWidth
+            width: contentWidth <= root.width ? contentWidth : root.width
+            contentWidth: pageView.widestItem
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
             flickDeceleration: 100000
@@ -81,6 +90,11 @@ Pane {
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
                 anchors.horizontalCenter: if (parent != null)
                                               parent.horizontalCenter
+                
+                Component.onCompleted: {
+                    if(implicitWidth >= pageView.contentWidth)
+                        pageView.widestItem = page.implicitWidth;
+                }
             }
 
             // Set the book's current page once the model is loaded
@@ -95,9 +109,9 @@ Pane {
             }
         }
     }
-
+    
     ScrollBar {
-        id: scrollbar
+        id: verticalScrollbar
         width: hovered ? 14 : 12
         hoverEnabled: true
         active: true
@@ -111,17 +125,47 @@ Pane {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         horizontalPadding: 4
+    
+        contentItem: Rectangle {
+            color: Style.colorScrollBarHandle
+            opacity: verticalScrollbar.pressed ? 0.8 : 1
+            radius: 4
+        }
+    
+        background: Rectangle {
+            implicitWidth: 26
+            implicitHeight: 200
+            color: verticalScrollbar.hovered ? Style.colorContainerBackground : "transparent"
+        }
+    }
+    
+    ScrollBar {
+        id: horizontalScrollbar
+        height: hovered ? 12 : 10
+        hoverEnabled: true
+        active: true
+        policy: ScrollBar.AlwaysOn
+        visible: pageView.contentWidth > pageView.width
+        orientation: Qt.Horizontal
+        size: pageView.width / pageView.contentWidth
+        minimumSize: 0.04
+        position: (pageView.contentX - pageView.originX) / pageView.contentWidth
+        onPositionChanged: pageView.contentX = position * pageView.contentWidth + pageView.originX
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        horizontalPadding: 4
 
         contentItem: Rectangle {
             color: Style.colorScrollBarHandle
-            opacity: scrollbar.pressed ? 0.8 : 1
+            opacity: horizontalScrollbar.pressed ? 0.8 : 1
             radius: 4
         }
 
         background: Rectangle {
             implicitWidth: 26
             implicitHeight: 200
-            color: scrollbar.hovered ? Style.colorContainerBackground : "transparent"
+            color: "transparent"
         }
     }
 
@@ -136,7 +180,7 @@ Pane {
 
     function flick(direction) {
         let up = direction === "up"
-        NavigationLogic.flick((pageView.scrollSpeed / 1.4) * (up ? 1 : -1))
+        NavigationLogic.flick(0, (pageView.scrollSpeed / 1.4) * (up ? 1 : -1))
     }
 
     function nextPage() {
