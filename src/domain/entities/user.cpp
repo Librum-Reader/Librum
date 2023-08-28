@@ -181,6 +181,10 @@ void User::clearData()
     m_lastName = "y";
     m_email = "y";
     m_profilePicturePath = "";
+    m_hasProfilePicture = false;
+    m_profilePictureLastUpdated = QDateTime();
+    m_bookStorageLimit = 0;
+    m_usedBookStorage = 0;
     m_tags.clear();
 }
 
