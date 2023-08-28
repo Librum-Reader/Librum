@@ -45,6 +45,9 @@ domain::value_objects::BookMetaData BookMetadataHelper::getBookMetaData()
         .lastOpened = QDateTime(),
     };
 
+    if(metaData.format.isEmpty())
+        metaData.format = "Unknown";
+
     return metaData;
 }
 

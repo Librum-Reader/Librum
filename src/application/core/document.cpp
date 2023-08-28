@@ -111,6 +111,9 @@ QString Document::getDocumentInfo(const char* key)
     try
     {
         auto result = m_document.fz_lookup_metadata2(key);
+        if(result == "null")
+            result = "";
+
         return QString::fromStdString(result);
     }
     catch(...)

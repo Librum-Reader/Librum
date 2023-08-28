@@ -3,21 +3,28 @@
   */
 function handleWheel(wheel)
 {
-    let factor = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
+    let factorX = wheel.angleDelta.x > 0 ? 1.13 : 0.88;
+    let factorY = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
-        zoom(root.document.zoom * factor);
+        zoom(root.document.zoom * factorY);
     }
     // angleDelta.x is the "horizontal scroll" mode some mouses support by
-    // e.g. pushing the scroll button to the left/right. Make sure not to
-    // scroll vertically when a "horizontal scroll" is performed.
-    else if(wheel.angleDelta.x === 0)
+    // e.g. pushing the scroll button to the left/right.
+    else if(wheel.angleDelta.x !== 0)
     {
-        if(factor > 1)
-            flick(pageView.scrollSpeed);
+        if(factorX > 1)
+            flick(pageView.scrollSpeed / 3, 0);
         else
-            flick(-pageView.scrollSpeed);
+            flick(-pageView.scrollSpeed / 3, 0);
+    }
+    else
+    {
+        if(factorY > 1)
+            flick(0, pageView.scrollSpeed);
+        else
+            flick(0, -pageView.scrollSpeed);
     }
 }
 
@@ -47,12 +54,12 @@ function setMoveDirection(direction)
 {
     if(direction === "up")
     {
-        flick(-1000);
+        flick(0, -1000);
         pageView.cancelFlick();
     }
     else if(direction === "down")
     {
-        flick(1000);
+        flick(0, 1000);
         pageView.cancelFlick();
     }
 }
@@ -79,9 +86,9 @@ function zoom(newZoomFactor)
 }
 
 
-function flick(factor)
+function flick(x, y)
 {
-    pageView.flick(0, factor);
+    pageView.flick(x, y);
 }
 
 
