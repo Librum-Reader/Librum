@@ -340,12 +340,12 @@ void PageItem::followLink(mupdf::FzLink& link)
     else
     {
         auto fzDocument = m_document->internal()->internal();
-        float xp, yp = 0;
-        auto location = fzDocument->fz_resolve_link(uri, &xp, &yp);
+        float yp = 0;
 
-        auto page =
-            fzDocument->fz_load_chapter_page(location.chapter, location.page);
-        emit m_document->goToPosition(page.m_internal->number, yp);
+        auto location = fzDocument->fz_resolve_link(uri, nullptr, &yp);
+        int pageNumber = fzDocument->fz_page_number_from_location(location);
+
+        emit m_document->goToPosition(pageNumber, yp);
     }
 }
 
