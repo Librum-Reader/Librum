@@ -37,6 +37,11 @@ qt_add_executable(librum
     ${app_icon_resource_windows}
 )
 
+# Set WIN32 for windows to avoid console getting opened on start on windows
+if(WIN32)
+    set_target_properties(librum PROPERTIES WIN32_EXECUTABLE true)
+endif()
+
 target_compile_definitions(librum
     PRIVATE
         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
