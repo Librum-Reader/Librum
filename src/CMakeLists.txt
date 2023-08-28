@@ -71,6 +71,8 @@ target_link_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
 # Move fonts into binary dir    
 if(UNIX)
     set(FONTS_OUT_DIR "$ENV{HOME}/.local/share/Librum-Reader/Librum/resources/fonts")
+elseif(WIN32)
+   set(FONTS_OUT_DIR "$ENV{HOMEPATH}/AppData/Roaming/Librum-Reader/Librum/resources/fonts")
 endif()
 
 include(CopyRecursive)
