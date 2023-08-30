@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.librumreader.librum</id>
+  
+  <name>Librum</name>
+  <summary>A modern e-book reader and library manager</summary>
+  
+  <metadata_license>MIT</metadata_license>
+  <project_license>GPL-3.0-only</project_license>
+  
+  <description>
+    <p>
+      Librum is an application designed to make reading enjoyable and straightforward for everyone. It&apos;s not just an e-book reader. With Librum, you can manage your own online library and access it from any device anytime, anywhere. It has features like note-taking, bookmarking, and highlighting, while offering customization to make it as personal as you want! Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
+    </p>
+  </description>
+
+  <url type="homepage">https://librumreader.com</url>
+
+  <launchable type="desktop-id">librum.desktop</launchable>
+
+  <releases>
+    <release version="0.6.3" date="2023-08-20">
+    </release>
+  </releases>
+
+  <screenshots>
+    <screenshot type="default">
+      <image>https://user-images.githubusercontent.com/69865187/244929153-ea94fc68-1bf0-4933-8d80-43a57c6590c5.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://user-images.githubusercontent.com/69865187/261866073-bf1d0401-62bd-4f4e-b008-523fb2efd275.png</image>
+    </screenshot>
+    <screenshot>
+      <image>https://user-images.githubusercontent.com/69865187/262316821-b8995cf1-a0e6-4993-8c8b-92f7f8e79ebd.png</image>
+    </screenshot>
+  </screenshots>
+
+  <content_rating/>
+
+</component>
