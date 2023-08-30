@@ -34,6 +34,7 @@ qt_add_executable(librum
     main.cpp
     dependency_injection.hpp
     message_handler.hpp
+    ${PROJECT_SOURCE_DIR}/fonts.qrc
     ${app_icon_resource_windows}
 )
 
@@ -70,20 +71,6 @@ target_compile_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O
 target_compile_options(librum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
 target_link_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
-
-
-
-# Move fonts into binary dir    
-if(UNIX)
-    set(FONTS_OUT_DIR "$ENV{HOME}/.local/share/Librum-Reader/Librum/resources/fonts")
-elseif(WIN32)
-   set(FONTS_OUT_DIR "$ENV{HOMEPATH}/AppData/Roaming/Librum-Reader/Librum/resources/fonts")
-endif()
-
-include(CopyRecursive)
-file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
-message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
-copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
 
 
 # Install rules

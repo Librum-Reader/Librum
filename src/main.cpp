@@ -37,7 +37,7 @@ using namespace application::services;
 
 
 void registerTypes();
-void loadFonts();
+void setupFonts();
 void addTranslations();
 
 int main(int argc, char* argv[])
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
     qInstallMessageHandler(logging::messageHandler);
 
     addTranslations();
-    loadFonts();
+    setupFonts();
 
     // Register types
     qmlRegisterSingletonType(QUrl("qrc:/StyleSheet.qml"), "Librum.style", 1, 0, "Style");
@@ -191,35 +191,23 @@ void addTranslations()
     }
 }
 
-void loadFonts()
+void loadFont(const QString& path);
+
+void setupFonts()
 {
-    QDir fontsDir(
-        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
-    if(!fontsDir.exists())
-        fontsDir.mkpath(".");
-
-    fontsDir.cd("resources");
-    fontsDir.cd("fonts");
-
-    if(fontsDir.exists() && !fontsDir.isEmpty())
-    {
-        QDirIterator it(fontsDir.path(), QDir::Files);
-        while(it.hasNext())
-        {
-            int res = QFontDatabase::addApplicationFont(it.next());
-            if(res == -1)
-                qWarning() << QString("Loading font file: %1 failed.")
-                                  .arg(it.fileName());
-        }
-    }
-    else
-    {
-        qWarning() << QString("Unable to load application fonts from %1")
-                          .arg(fontsDir.path());
-    }
-
+    loadFont(":/resources/fonts/SF-Pro-Display-Bold.otf");
+    loadFont(":/resources/fonts/SF-Pro-Display-Medium.otf");
+    loadFont(":/resources/fonts/SF-Pro-Display-Regular.otf");
+    loadFont(":/resources/fonts/SF-Pro-Display-Semibold.otf");
 
     QFont defaultFont("SF Pro Display");
     defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
     QGuiApplication::setFont(defaultFont);
+}
+
+void loadFont(const QString& path)
+{
+    int result = QFontDatabase::addApplicationFont(path);
+    if(result == -1)
+        qWarning() << QString("Loading font file: %1 failed.").arg(path);
 }
