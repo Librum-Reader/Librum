@@ -76,7 +76,7 @@ Popup
                 Layout.leftMargin: 52
                 textFormat: Text.RichText
                 text: "Deleting your account is an irreversible action.<br>Once you delete your account, there is <b>no</b> going back. Please be certain."
-                font.pointSize: 13.5
+                font.pointSize: 14
                 color: Style.colorText
             }
             
