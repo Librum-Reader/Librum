@@ -8,6 +8,7 @@ import Librum.style
 import Librum.icons
 import Librum.controllers
 import Librum.globals
+import Librum.models
 import "toolbar"
 import "manageTagsPopup"
 
@@ -41,6 +42,57 @@ Page
         anchors.fill: parent
         spacing: 0
         
+        Rectangle
+        {
+            id: updateBanner
+            Layout.fillWidth: true
+            Layout.preferredHeight: 38
+            Layout.leftMargin: -root.horizontalPadding
+            Layout.rightMargin: -root.rightPadding
+            visible: baseRoot.notifyAboutUpdates 
+                     && AppInformation.newestVersion !== "-"
+                     & AppInformation.currentVersion !== AppInformation.newestVersion 
+            
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Style.colorBannerBackground
+                opacity: 0.8
+            }
+            
+            Label
+            {
+                id: loginText
+                anchors.centerIn: parent
+                text: "A new version is available! Make sure to update."
+                color: Style.colorBannerText
+                font.bold: true
+                font.pointSize: 12
+                
+            }
+            
+            MButton
+            {
+                id: closeButton
+                width: 32
+                height: 32
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                anchors.verticalCenter: parent.verticalCenter
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.7
+                borderColor: "transparent"
+                radius: 6
+                borderColorOnPressed: Style.colorButtonBorder
+                imagePath: Icons.closePopupWhite
+                imageSize: 12
+                
+                onClicked: {
+                    baseRoot.notifyAboutUpdates = false
+                    updateBanner.visible = false
+                }
+            }
+        }
         
         RowLayout
         {
@@ -48,11 +100,10 @@ Page
             Layout.fillWidth: true
             spacing: 0
             
-            
             MTitle
             {
                 id: pageTitle
-                Layout.topMargin: 44
+                Layout.topMargin: updateBanner.visible ? 24 : 44
                 titleText: "Home"
                 descriptionText: "You have " + BookController.bookCount + " books"
             }
@@ -339,7 +390,7 @@ Page
             "Text files (*.txt)",
             "MOBI files (*.mobi)",
         ]
-    
+        
         onAccepted:
         {
             for(let i = 0; i < files.length; ++i)

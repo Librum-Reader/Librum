@@ -13,6 +13,10 @@ inline const QString checkIfEmailConfirmedEndpoint {
     domain + "/api/checkIfEmailConfirmed"
 };
 
+// App Info
+inline const QString latestAppVersionEndpoint { domain +
+                                                "/api/appinfo/latest-version" };
+
 // Book storage
 inline const QString bookCreationEndpoint { domain + "/api/book" };
 inline const QString bookUpdateEndpoint { domain + "/api/book" };

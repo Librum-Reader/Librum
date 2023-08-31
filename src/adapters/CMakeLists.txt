@@ -10,6 +10,7 @@ add_library(adapters
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_book_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
+                    interfaces/persistance/i_app_info_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp

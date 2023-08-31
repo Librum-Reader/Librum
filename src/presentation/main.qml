@@ -24,6 +24,7 @@ ApplicationWindow
     property int defaultMinWidth: 650
     property int sidebarOpenedMinWidth: 810
     property int readingPageMinWidth: 550
+    property bool notifyAboutUpdates: true
     
     
     minimumHeight: 400

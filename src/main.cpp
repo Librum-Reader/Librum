@@ -18,6 +18,7 @@
 #include "book_operation_status.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
+#include "i_app_info_access.hpp"
 #include "i_book_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
@@ -132,26 +133,38 @@ int main(int argc, char* argv[])
         bookService, &application::IBookService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
-        bookService, &application::IBookService::clearUserData);
+                     bookService, &application::IBookService::clearUserData);
 
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
-        userService, &application::IUserService::setupUserData);
+                     userService, &application::IUserService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
-        userService, &application::IUserService::clearUserData);
+                     userService, &application::IUserService::clearUserData);
 
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
-        settingsService, &application::ISettingsService::loadUserSettings);
+                     settingsService, &application::ISettingsService::loadUserSettings);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
-        settingsService, &application::ISettingsService::clearUserData);
+                     settingsService, &application::ISettingsService::clearUserData);
 
 
     // Setup other connections
     QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
                      bookService, &application::IBookService::updateUsedBookStorage);
+
+
+
+    // Get newest app information from the server
+    auto* appInfoAccess =
+        config::diConfig().create<adapters::IAppInfoAccess*>();
+    
+    QObject::connect(appInfoAccess, &adapters::IAppInfoAccess::newestAppVersionReceived,
+                     appInfo.get(), &adapters::data_models::AppInformation::setNewestVersion);
+
+    appInfoAccess->getNewestAppVersion();
+
 
 
     // Startup

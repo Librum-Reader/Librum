@@ -15,6 +15,7 @@ Item {
     property string checkGreen
     property string checkWhite
     property string closePopup
+    property string closePopupWhite: "/resources/images/light_mode/decision/close_popup_white_icon.svg"
     property string cancelPurple
     property string addFirstBookPlus
     property string addWhite

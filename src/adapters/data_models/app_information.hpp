@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include "adapters_export.hpp"
+#include "qtversion.h"
 
 namespace adapters::data_models
 {
@@ -9,7 +10,8 @@ class ADAPTERS_EXPORT AppInformation : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)
-    Q_PROPERTY(QString newestVersion READ getNewestVersion CONSTANT)
+    Q_PROPERTY(QString newestVersion READ getNewestVersion WRITE
+                   setNewestVersion NOTIFY newestVersionChanged)
     Q_PROPERTY(QString currentQtVersion READ getCurrentQtVersion CONSTANT)
     Q_PROPERTY(QString productName READ getProductName CONSTANT)
     Q_PROPERTY(QString companyName READ getCompanyName CONSTANT)
@@ -28,6 +30,12 @@ public slots:
     QString getNewestVersion()
     {
         return m_newestVersion;
+    }
+
+    void setNewestVersion(const QString& newVersion)
+    {
+        m_newestVersion = newVersion;
+        newestVersionChanged();
     }
 
     QString getCurrentQtVersion()
@@ -65,11 +73,13 @@ public slots:
         return m_newsWebsite;
     }
 
+signals:
+    void newestVersionChanged();
 
 private:
-    QString m_currentVersion { "v0.6.3" };
-    QString m_newestVersion { "v0.6.3" };
-    QString m_currentQtVersion { "v6.5.1" };
+    QString m_currentVersion { "0.6.3" };
+    QString m_newestVersion { "-" };
+    QString m_currentQtVersion { qVersion() };
     QString m_companyName { "Librum-Reader" };
     QString m_productName { "Librum" };
     QString m_companyWebsite { "https://librumreader.com" };

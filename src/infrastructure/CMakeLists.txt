@@ -10,6 +10,8 @@ add_library(infrastructure
                     persistance/book_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
+                    persistance/app_info_access.cpp
+                    persistance/app_info_access.hpp
                     
                     persistance/api_error_helper.hpp
                     data/endpoints.hpp
