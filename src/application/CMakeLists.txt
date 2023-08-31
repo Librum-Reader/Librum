@@ -21,6 +21,8 @@ set(application_SRC
     services/user_service.hpp
     services/settings_service.cpp
     services/settings_service.hpp
+    services/app_info_service.cpp
+    services/app_info_service.hpp
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
@@ -105,6 +107,8 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
+                    interfaces/gateways/i_app_info_gateway.hpp
+                    interfaces/services/i_app_info_service.hpp
                     
 )
 

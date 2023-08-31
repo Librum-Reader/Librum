@@ -11,6 +11,7 @@ add_library(adapters
                     interfaces/persistance/i_book_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     interfaces/persistance/i_app_info_access.hpp
+                    interfaces/controllers/i_app_info_controller.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
@@ -20,15 +21,18 @@ add_library(adapters
                     controllers/user_controller.hpp
                     controllers/settings_controller.cpp
                     controllers/settings_controller.hpp
-                    
+                    controllers/app_info_controller.cpp
+                    controllers/app_info_controller.hpp
+
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
                     gateways/book_storage_gateway.cpp
                     gateways/book_storage_gateway.hpp
+                    gateways/app_info_gateway.cpp
+                    gateways/app_info_gateway.hpp
                     
-                    data_models/app_information.hpp
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp
                     data_models/library_model/library_proxy_model.cpp

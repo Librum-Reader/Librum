@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 MFlickWrapper
@@ -52,8 +52,8 @@ MFlickWrapper
             Loader
             {
                 id: contentLoader
-                property bool updatesAvailable: AppInformation.newestVersion !== "-" &&
-                                                AppInformation.currentVersion !== AppInformation.newestVersion
+                property bool updatesAvailable: AppInfoController.newestVersion !== "-" &&
+                                                AppInfoController.currentVersion !== AppInfoController.newestVersion
                 
                 Layout.fillWidth: true
                 Layout.fillHeight: true

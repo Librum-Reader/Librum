@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 MFlickWrapper
@@ -161,8 +161,8 @@ MFlickWrapper
                         Layout.topMargin: 40
                         text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
                               "feel free to check out our website at <a href=\"" + 
-                              AppInformation.companyWebsite + "/donate\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " + 
-                              AppInformation.companyWebsite + "/donate </a>"
+                              AppInfoController.website + "/donate\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " +
+                              AppInfoController.website + "/donate </a>"
                         onLinkActivated: Qt.openUrlExternally(link)
                         wrapMode: Text.WordWrap
                         textFormat: Text.RichText

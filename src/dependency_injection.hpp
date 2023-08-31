@@ -20,6 +20,10 @@
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
 #include "user_storage_gateway.hpp"
+#include "app_info_controller.hpp"
+#include "app_info_gateway.hpp"
+#include "app_info_service.hpp"
+#include "i_app_info_service.hpp"
 
 
 namespace di = boost::di;
@@ -45,6 +49,9 @@ const auto diConfig = []
             .to<persistence::AuthenticationAccess>(),
 
         // App Info
+        di::bind<IAppInfoController>().to<controllers::AppInfoController>(),
+        di::bind<IAppInfoService>().to<services::AppInfoService>(),
+        di::bind<IAppInfoGateway>().to<gateways::AppInfoGateway>(),
         di::bind<IAppInfoAccess>().to<persistence::AppInfoAccess>(),
 
         // Books

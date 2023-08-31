@@ -18,6 +18,7 @@ class ADAPTERS_EXPORT IAppInfoAccess : public QObject
 
 public:
     virtual ~IAppInfoAccess() noexcept = default;
+
     virtual void getNewestAppVersion() = 0;
 
 signals:

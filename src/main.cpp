@@ -13,17 +13,16 @@
 #include <QString>
 #include <QTranslator>
 #include <memory>
-#include "app_information.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
-#include "i_app_info_access.hpp"
 #include "i_book_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
+#include "app_info_controller.hpp"
 #include "page_item.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
@@ -72,7 +71,7 @@ int main(int argc, char* argv[])
     qRegisterMetaType<adapters::dtos::TagDto>();
 
 
-    // Authentication-Stack
+    // Authentication Stack
     auto* authenticationService =
         config::diConfig().create<application::IAuthenticationService*>();
     auto authenticationController =
@@ -80,28 +79,31 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AuthController",
                                  authenticationController.get());
 
-    // User-Stack
+    // App Info Stack
+    auto* appInfoService =
+        config::diConfig().create<application::IAppInfoService*>();
+    auto appInfoController =
+        std::make_unique<AppInfoController>(appInfoService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AppInfoController",
+                                 appInfoController.get());
+
+    // User Stack
     auto* userService = config::diConfig().create<application::IUserService*>();
     auto userController = std::make_unique<UserController>(userService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController",
                                  userController.get());
 
-    // Book-Stack
+    // Book Stack
     auto* bookService = config::diConfig().create<application::IBookService*>();
     auto bookController = std::make_unique<BookController>(bookService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
-    // Settings-Stack
+    // Settings Stack
     auto* settingsService = config::diConfig().create<application::ISettingsService*>();
     auto settingsController = std::make_unique<SettingsController>(settingsService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
-
-    // App info
-    auto appInfo = std::make_unique<adapters::data_models::AppInformation>();
-    qmlRegisterSingletonInstance("Librum.models", 1, 0, "AppInformation",
-                                 appInfo.get());
 
     // Sidebar
     auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
@@ -153,17 +155,6 @@ int main(int argc, char* argv[])
     // Setup other connections
     QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
                      bookService, &application::IBookService::updateUsedBookStorage);
-
-
-
-    // Get newest app information from the server
-    auto* appInfoAccess =
-        config::diConfig().create<adapters::IAppInfoAccess*>();
-    
-    QObject::connect(appInfoAccess, &adapters::IAppInfoAccess::newestAppVersionReceived,
-                     appInfo.get(), &adapters::data_models::AppInformation::setNewestVersion);
-
-    appInfoAccess->getNewestAppVersion();
 
 
 

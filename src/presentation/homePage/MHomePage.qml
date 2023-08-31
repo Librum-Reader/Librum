@@ -50,8 +50,8 @@ Page
             Layout.leftMargin: -root.horizontalPadding
             Layout.rightMargin: -root.rightPadding
             visible: baseRoot.notifyAboutUpdates 
-                     && AppInformation.newestVersion !== "-"
-                     & AppInformation.currentVersion !== AppInformation.newestVersion 
+                     && AppInfoController.newestVersion !== ""
+                     & AppInfoController.currentVersion !== AppInfoController.newestVersion
             
             Rectangle
             {

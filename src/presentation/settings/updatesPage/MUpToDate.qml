@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 Item
@@ -71,7 +71,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                text: AppInformation.newestVersion
+                text: AppInfoController.newestVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorBasePurple
                 font.pointSize: 14.2
@@ -104,7 +104,7 @@ Item
             {
                 Layout.preferredWidth: implicitWidth
                 Layout.minimumWidth: implicitWidth
-                text: AppInformation.newsWebsite
+                text: AppInfoController.newsWebsite
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
