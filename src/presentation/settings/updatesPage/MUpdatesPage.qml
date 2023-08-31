@@ -52,10 +52,13 @@ MFlickWrapper
             Loader
             {
                 id: contentLoader
+                property bool updatesAvailable: AppInformation.newestVersion !== "-" &&
+                                                AppInformation.currentVersion !== AppInformation.newestVersion
+                
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.topMargin: 32
-                sourceComponent: AppInformation.currentVersion === AppInformation.newestVersion ? upToDate : updatesAvailable
+                sourceComponent: updatesAvailable ? upToDate : updatesAvailable
             }
         }
     }
