@@ -184,7 +184,7 @@ MFlickWrapper
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
                                         
-                                        onClicked: Qt.openUrlExternally(AppInfoController.companyWebsite + "/whyTiers")
+                                        onClicked: Qt.openUrlExternally(AppInfoController.website + "/whyTiers")
                                     }
                                 }
                             }
