@@ -69,6 +69,7 @@ private:
     QDateTime deleteProfilePictureLocally();
     void setUserData(const domain::entities::User& user);
     void updateProfilePicture(const domain::entities::User& user);
+    void deleteAllLocalUserData();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

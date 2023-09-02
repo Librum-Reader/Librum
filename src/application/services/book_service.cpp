@@ -141,6 +141,12 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
+BookOperationStatus BookService::deleteAllBooks()
+{
+    m_bookStorageManager->deleteAllBooks();
+    return BookOperationStatus::Success;
+}
+
 BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
@@ -451,10 +457,10 @@ int BookService::getBookIndex(const QUuid& uuid) const
         return -1;
 
     auto bookPosition = std::ranges::find_if(m_books,
-                                            [&uuid](const Book& rhs)
-                                            {
-                                                return rhs.getUuid() == uuid;
-                                            });
+                                             [&uuid](const Book& rhs)
+                                             {
+                                                 return rhs.getUuid() == uuid;
+                                             });
     size_t index = bookPosition - m_books.begin();
 
     return index;

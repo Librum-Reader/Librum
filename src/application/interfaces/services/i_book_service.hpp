@@ -2,10 +2,10 @@
 #include <QObject>
 #include <QUuid>
 #include <vector>
+#include "application_export.hpp"
 #include "book.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
-#include "application_export.hpp"
 
 namespace application
 {
@@ -23,6 +23,7 @@ public:
     virtual void downloadBooks() = 0;
     virtual BookOperationStatus addBook(const QString& filePath) = 0;
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
+    virtual BookOperationStatus deleteAllBooks() = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus downloadBookMedia(const QUuid& uuid) = 0;
     virtual BookOperationStatus updateBook(
