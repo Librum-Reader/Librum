@@ -117,7 +117,7 @@ Item
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     
-                    onClicked: Qt.openUrlExternally(AppInformation.newsWebsite)
+                    onClicked: Qt.openUrlExternally(AppInfoController.newsWebsite)
                 }
             }
         }
