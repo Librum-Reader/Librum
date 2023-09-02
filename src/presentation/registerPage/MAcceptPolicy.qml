@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
-import Librum.models
+import Librum.controllers
 import CustomComponents
 
 
@@ -55,9 +55,9 @@ Item
             id: text
             Layout.fillWidth: true
             textFormat: Text.RichText
-            text: 'I accept the <a href="' + AppInformation.companyWebsite + '/TermsOfService " style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Terms of Service</a>' +
-                  ' and the <a href="' + AppInformation.companyWebsite + '/privacypolicy " style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Privacy Policy</a>' 
-            onLinkActivated: Qt.openUrlExternally(link)
+            text: 'I accept the <a href="' + AppInfoController.website + '/TermsOfService " style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Terms of Service</a>' +
+                  ' and the <a href="' + AppInfoController.website + '/privacypolicy " style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Privacy Policy</a>' 
+            onLinkActivated: (link) => Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
             font.pointSize: 11
             color: Style.colorText
