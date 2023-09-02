@@ -313,12 +313,12 @@ MFlickWrapper
                             id: thisAppText
                             Layout.fillWidth: true
                             Layout.leftMargin: 22
-                            text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
-                                  "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."
+                            text: "Librum is here for everyone who just wants to enjoy a good book.\n" +
+                                  "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
                             wrapMode: Text.WordWrap
                             color: Style.colorText
                             font.pointSize: 14.6
-                            lineHeight: 1.05
+                            lineHeight: 1.10
                         }
                     }
                 }
