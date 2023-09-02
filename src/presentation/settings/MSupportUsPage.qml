@@ -121,7 +121,7 @@ MFlickWrapper
                         Layout.fillWidth: true
                         Layout.topMargin: 40
                         text: "You can support us in many other ways as well, if you are a developer or a designer, feel free to <a href=\"" + 
-                              AppInformation.githubLink + "#contributing\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " + 
+                              AppInfoController.githubLink + "#contributing\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " + 
                               "contribute to Librum</a>.<br>If you are not, you can still help us by spreading the word about Librum."
                         onLinkActivated: (link) => Qt.openUrlExternally(link)
                         textFormat: Text.RichText
@@ -134,7 +134,7 @@ MFlickWrapper
                             id: mouseArea
                             anchors.fill: parent
                             acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
-                            cursorShape: otherPaymentsText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            cursorShape: otherSupportText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
                         }
                     }
                     

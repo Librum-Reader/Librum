@@ -61,6 +61,26 @@ Item
             wrapMode: Text.WordWrap
             font.pointSize: 11
             color: Style.colorText
+            
+            MouseArea
+            {
+                id: mouseArea
+                anchors.fill: parent
+                cursorShape: text.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                
+                onClicked: 
+                {
+                    if(text.hoveredLink != "")
+                    {
+                        console.log("x")
+                        Qt.openUrlExternally(text.hoveredLink);
+                    }
+                    else
+                    {
+                        acceptCheckBox.toggle()
+                    }
+                }
+            }
         }
     }
     
