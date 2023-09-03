@@ -67,7 +67,7 @@ Item
             {
                 Layout.fillWidth: true
                 Layout.topMargin: 7
-                text: "Download it and get the great new improvements"
+                text: "Download the new version to get great new improvements."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: 15
@@ -76,7 +76,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                Layout.topMargin: 26
+                Layout.topMargin: 32
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
@@ -96,8 +96,8 @@ Item
             MButton
             {
                 id: downloadButton
-                Layout.preferredWidth: 132
-                Layout.preferredHeight: 36
+                Layout.preferredWidth: 152
+                Layout.preferredHeight: 38
                 Layout.topMargin: 14
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
@@ -105,7 +105,7 @@ Item
                 imageSize: 16
                 imageSpacing: 8
                 text: "Update"
-                fontSize: 12
+                fontSize: 12.5
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8
@@ -117,13 +117,17 @@ Item
                         AppInfoController.updateApplication();
                         windowsUpdatingPopup.open()
                     }
+                    else
+                    {
+                        unixUpdatePopup.open();
+                    }
                 }
             }
             
             Label
             {
                 Layout.fillWidth: true
-                Layout.topMargin: 42
+                Layout.topMargin: 56
                 text: "See the exact changes on our website at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
@@ -158,6 +162,27 @@ Item
         id: windowsUpdatingPopup
         x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
         y: root.height / 2 - content.topPadding
+    }
+
+    MWarningPopup
+    {
+        id: unixUpdatePopup
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding - 70
+        visible: false
+        title: "Updating on Linux"
+        message: "Please use your package manager to update Librum or download the newest version from our " +
+                 '<a href="' + AppInfoController.website + '" style="text-decoration: none; color: '
+                 + Style.colorBasePurple + ';">website</a>.'
+        leftButtonText: "Close"
+        rightButtonText: "Email Us"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        richText: true
+
+        onOpenedChanged: if(opened) unixUpdatePopup.giveFocus()
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
+        onDecisionMade: close()
     }
 
     MWarningPopup
