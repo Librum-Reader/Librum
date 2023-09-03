@@ -26,6 +26,7 @@ Item
     property double fontWeight: Font.Normal
     property int verticalTextOffset: 0
     property color fontColor: Style.colorText
+    property alias enabled: checkBox.enabled
     signal clicked()
     
     implicitWidth: 100
