@@ -20,7 +20,7 @@ void DocumentItem::setFilePath(const QString& newFilePath)
         return;
     }
 
-    m_document = std::make_unique<Document>(QUrl(newFilePath).path());
+    m_document = std::make_unique<Document>(newFilePath);
 
     emit filePathChanged(newFilePath);
     emit pageCountChanged(m_document->getPageCount());
