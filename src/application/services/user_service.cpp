@@ -80,6 +80,8 @@ void UserService::deleteUser()
         utility::AutomaticLoginHelper::clearAutomaticLoginData();
     }
 
+    deleteAllLocalUserData();
+
     m_userStorageGateway->deleteUser(m_authenticationToken);
 }
 
@@ -387,6 +389,18 @@ void UserService::updateProfilePicture(const domain::entities::User& user)
     {
         m_userStorageGateway->getProfilePicture(m_authenticationToken);
     }
+}
+
+void UserService::deleteAllLocalUserData()
+{
+    QDir profileDir(getUserProfileDir());
+    if(!profileDir.exists())
+    {
+        qWarning() << "Can't delete user profile directory, no such directory.";
+        return;
+    }
+
+    profileDir.removeRecursively();
 }
 
 bool UserService::userIsLoggedIn()

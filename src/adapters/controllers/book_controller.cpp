@@ -90,6 +90,12 @@ int BookController::deleteBook(const QString& uuid)
     return static_cast<int>(result);
 }
 
+int BookController::deleteAllBooks()
+{
+    auto result = m_bookService->deleteAllBooks();
+    return static_cast<int>(result);
+}
+
 int BookController::uninstallBook(const QString& uuid)
 {
     auto result = m_bookService->uninstallBook(QUuid(uuid));
@@ -172,8 +178,8 @@ int BookController::updateBook(const QString& uuid, const QVariant& operations)
 
 int BookController::changeBookCover(const QString& uuid, const QString& path)
 {
-    auto result = m_bookService->changeBookCover(QUuid(uuid),
-                                                 QUrl(path).toLocalFile());
+    auto result =
+        m_bookService->changeBookCover(QUuid(uuid), QUrl(path).toLocalFile());
     return static_cast<int>(result);
 }
 
@@ -251,8 +257,8 @@ data_models::LibraryProxyModel* BookController::getLibraryModel()
 
 int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
 {
-    auto result = m_bookService->saveBookToFile(QUuid(uuid),
-                                                path.toLocalFile());
+    auto result =
+        m_bookService->saveBookToFile(QUuid(uuid), path.toLocalFile());
 
     return static_cast<int>(result);
 }

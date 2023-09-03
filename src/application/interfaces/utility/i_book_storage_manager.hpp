@@ -5,9 +5,9 @@
 #include <QUuid>
 #include <optional>
 #include <vector>
+#include "application_export.hpp"
 #include "book.hpp"
 #include "book_for_deletion.hpp"
-#include "application_export.hpp"
 
 namespace application
 {
@@ -26,6 +26,7 @@ public:
     virtual void addBook(const domain::entities::Book& bookToAdd) = 0;
     virtual void addBookLocally(const domain::entities::Book& bookToAdd) = 0;
     virtual void deleteBook(utility::BookForDeletion bookToDelete) = 0;
+    virtual void deleteAllBooks() = 0;
     virtual void deleteBookLocally(utility::BookForDeletion bookToDelete) = 0;
     virtual void uninstallBook(const domain::entities::Book& book) = 0;
     virtual void downloadBookMedia(const QUuid& uuid) = 0;

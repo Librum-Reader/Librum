@@ -324,7 +324,7 @@ MFlickWrapper
         messageBottomSpacing: 8
         
         onDecisionMade: close()
-        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
         onOpenedChanged: if(opened) inDevelopmentPopup.giveFocus()
     }
     

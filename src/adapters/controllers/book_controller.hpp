@@ -2,11 +2,11 @@
 #include <QImage>
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 #include "book_dto.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "library_model.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
@@ -20,6 +20,7 @@ public:
 
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
+    int deleteAllBooks() override;
     int uninstallBook(const QString& uuid) override;
     int downloadBookMedia(const QString& uuid) override;
     int updateBook(const QString& uuid, const QVariant& operations) override;
@@ -31,7 +32,7 @@ public:
     int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
-    
+
     void syncWithServer() override;
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
     data_models::LibraryProxyModel* getLibraryModel() override;

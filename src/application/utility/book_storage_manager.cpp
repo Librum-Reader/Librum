@@ -183,6 +183,13 @@ void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
+void BookStorageManager::deleteAllBooks()
+{
+    QDir localLibraryDir(m_downloadedBooksTracker->getLibraryDir());
+
+    localLibraryDir.removeRecursively();
+}
+
 void BookStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
 {
     m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);

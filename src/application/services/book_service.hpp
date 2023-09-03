@@ -2,11 +2,11 @@
 #include <QImage>
 #include <QTimer>
 #include <utility>
+#include "application_export.hpp"
 #include "book.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
 #include "i_book_storage_manager.hpp"
-#include "application_export.hpp"
 
 namespace application::services
 {
@@ -22,6 +22,7 @@ public:
     void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
+    BookOperationStatus deleteAllBooks() override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
     BookOperationStatus downloadBookMedia(const QUuid& uuid) override;
     BookOperationStatus updateBook(

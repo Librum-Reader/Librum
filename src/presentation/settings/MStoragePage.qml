@@ -184,7 +184,7 @@ MFlickWrapper
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
                                         
-                                        onClicked: Qt.openUrlExternally(AppInformation.companyWebsite + "/whyTiers")
+                                        onClicked: Qt.openUrlExternally(AppInfoController.website + "/whyTiers")
                                     }
                                 }
                             }
@@ -388,7 +388,7 @@ MFlickWrapper
         messageBottomSpacing: 10
         
         onOpenedChanged: if(opened) upgradePopup.giveFocus()
-        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
         onDecisionMade: close()
     }
     

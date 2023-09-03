@@ -7,8 +7,10 @@ namespace infrastructure::data
 inline const QString domain { "https://api.librumreader.com" };
 
 // Authentication
-inline const QString authenticationEndpoint { domain + "/authentication/login" };
-inline const QString registrationEndpoint { domain + "/authentication/register" };
+inline const QString authenticationEndpoint { domain +
+                                              "/authentication/login" };
+inline const QString registrationEndpoint { domain +
+                                            "/authentication/register" };
 inline const QString checkIfEmailConfirmedEndpoint {
     domain + "/authentication/checkIfEmailConfirmed"
 };
@@ -16,8 +18,9 @@ inline const QString checkIfEmailConfirmedEndpoint {
 // App Info
 inline const QString latestAppVersionEndpoint { domain +
                                                 "/appinfo/latest-version" };
-inline const QString binaryDownloadEndpoint
-    { "https://librumblobstorage.blob.core.windows.net/binaries" };
+inline const QString binaryDownloadEndpoint {
+    "https://librumstorageaccount.blob.core.windows.net/releases"
+};
 
 // Book storage
 inline const QString bookCreationEndpoint { domain + "/book" };

@@ -50,6 +50,7 @@ public:
     Q_INVOKABLE virtual void syncWithServer() = 0;
     Q_INVOKABLE virtual int addBook(const QString& path) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
+    Q_INVOKABLE virtual int deleteAllBooks() = 0;
     Q_INVOKABLE virtual int uninstallBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int downloadBookMedia(const QString& uuid) = 0;
     Q_INVOKABLE virtual int updateBook(const QString& uuid,
