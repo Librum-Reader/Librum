@@ -19,6 +19,7 @@ public:
     void deleteUser() override;
     void syncWithServer() override;
     void changePassword(const QString& newPassword) override;
+    void forgotPassword(const QString& email) override;
 
     QString getTagUuidForName(QString name) override;
     QString addTag(const QString& name) override;

@@ -34,6 +34,11 @@ void UserStorageGateway::deleteUser(const QString& authToken)
     m_userStorageAccess->deleteUser(authToken);
 }
 
+void UserStorageGateway::forgotPassword(const QString& email)
+{
+    m_userStorageAccess->forgotPassword(email);
+}
+
 void UserStorageGateway::getProfilePicture(const QString& authToken)
 {
     m_userStorageAccess->getProfilePicture(authToken);

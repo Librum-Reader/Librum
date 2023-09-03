@@ -39,6 +39,7 @@ public:
 
     void deleteProfilePicture() override;
     void changePassword(const QString& newPassword) override;
+    void forgotPassword(const QString& email) override;
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;

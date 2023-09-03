@@ -39,6 +39,8 @@ inline const QString getUsedBookStorageEndpoint { domain +
 inline const QString userGetEndpoint { domain + "/user" };
 inline const QString userPatchEndpoint { domain + "/user" };
 inline const QString userDeleteEndpoint { domain + "/user" };
+inline const QString userForgotPasswordEndpoint { domain +
+                                                  "/user/forgotPassword" };
 inline const QString userChangePasswordEndpoint { domain + "/user" };
 inline const QString userProfilePictureEndpoint { domain +
                                                   "/user/profilePicture" };

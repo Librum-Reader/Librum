@@ -64,6 +64,11 @@ void UserController::changePassword(const QString& newPassword)
     m_userService->changePassword(newPassword);
 }
 
+void UserController::forgotPassword(const QString& email)
+{
+    m_userService->forgotPassword(email);
+}
+
 QString UserController::getTagUuidForName(QString name)
 {
     // Tags are always capitalized, make sure to search for the correct one

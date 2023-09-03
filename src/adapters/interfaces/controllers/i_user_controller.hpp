@@ -1,6 +1,6 @@
 #include <QObject>
-#include "user_tags_model.hpp"
 #include "adapters_export.hpp"
+#include "user_tags_model.hpp"
 #pragma once
 
 namespace adapters
@@ -37,6 +37,7 @@ public:
     Q_INVOKABLE virtual void syncWithServer() = 0;
     Q_INVOKABLE virtual void deleteProfilePicture() = 0;
     Q_INVOKABLE virtual void changePassword(const QString& newPassword) = 0;
+    Q_INVOKABLE virtual void forgotPassword(const QString& email) = 0;
 
     Q_INVOKABLE virtual QString getTagUuidForName(QString name) = 0;
     Q_INVOKABLE virtual QString addTag(const QString& name) = 0;

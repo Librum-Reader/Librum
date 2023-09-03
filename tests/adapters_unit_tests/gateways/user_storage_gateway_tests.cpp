@@ -17,6 +17,7 @@ class UserStorageAccessMock : public IUserStorageAccess
 public:
     MOCK_METHOD(void, getUser, (const QString&), (override));
     MOCK_METHOD(void, deleteUser, (const QString&), (override));
+    MOCK_METHOD(void, forgotPassword, (const QString&), (override));
     MOCK_METHOD(void, getProfilePicture, (const QString&), (override));
     MOCK_METHOD(void, changeFirstName, (const QString&, const QString&),
                 (override));

@@ -176,6 +176,11 @@ void UserService::changePassword(const QString& newPassword)
     m_userStorageGateway->changePassword(m_authenticationToken, newPassword);
 }
 
+void UserService::forgotPassword(const QString& email)
+{
+    m_userStorageGateway->forgotPassword(email);
+}
+
 QString UserService::saveProfilePictureToFile(QByteArray& data)
 {
     auto userDir = getUserProfileDir();

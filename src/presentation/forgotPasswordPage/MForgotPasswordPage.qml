@@ -5,6 +5,7 @@ import QtQuick.Window
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
 MFlickWrapper
 {
@@ -124,20 +125,11 @@ MFlickWrapper
                         
                         Label
                         {
-                            id: errorText
-                            Layout.topMargin: 10
-                            visible: false
-                            text: "We couldn't find your email"
-                            color: Style.colorErrorText
-                            font.pointSize: 11.75
-                        }
-                        
-                        Label
-                        {
                             id: successText
                             Layout.topMargin: 10
+                            Layout.fillWidth: true
+                            wrapMode: Text.WordWrap
                             visible: false
-                            text: "Email sent to: " + "placeholder@librum.com"
                             color: Style.colorGreenText
                             font.pointSize: 11.75
                         }
@@ -147,7 +139,7 @@ MFlickWrapper
                             id: sendEmailButton
                             Layout.fillWidth: true
                             Layout.preferredHeight: 42
-                            Layout.topMargin: (errorText.visible || successText.visible ? 32 : 56)
+                            Layout.topMargin: successText.visible ? 32 : 56
                             Layout.alignment: Qt.AlignHCenter
                             borderWidth: 0
                             backgroundColor: Style.colorBasePurple
@@ -194,7 +186,12 @@ MFlickWrapper
         
         function sendPasswordResetEmail()
         {
-            successText.text = emailInput.text;
+            if(emailInput.text === "")
+                return;
+            
+            UserController.forgotPassword(emailInput.text);
+            
+            successText.text = "Email sent! Keep an eye on your inbox.";
             successText.visible = true;
             emailInput.clearText();
         }

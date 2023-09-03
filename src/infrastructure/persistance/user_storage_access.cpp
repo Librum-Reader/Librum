@@ -56,6 +56,13 @@ void UserStorageAccess::deleteUser(const QString& authToken)
             });
 }
 
+void UserStorageAccess::forgotPassword(const QString& email)
+{
+    auto endpoint = data::userForgotPasswordEndpoint + "/" + email;
+    auto request = createRequest(endpoint, "");
+    m_networkAccessManager.post(request, QByteArray());
+}
+
 void UserStorageAccess::getProfilePicture(const QString& authToken)
 {
     QString endpoint = data::userProfilePictureEndpoint;
@@ -358,8 +365,12 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setRawHeader(QByteArray("Authorization"),
-                        "Bearer " + authToken.toUtf8());
+
+    if(!authToken.isEmpty())
+    {
+        result.setRawHeader(QByteArray("Authorization"),
+                            "Bearer " + authToken.toUtf8());
+    }
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);
