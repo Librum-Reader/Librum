@@ -130,8 +130,6 @@ void UserStorageGateway::assignValuesToUser(User& user,
     user.setLastName(jsonObj["lastName"].toString());
     user.setUsedBookStorage(
         static_cast<qint64>(jsonObj["usedBookStorage"].toDouble()));
-    auto dub = jsonObj["bookStorageLimit"].toDouble();
-    auto num = static_cast<qint64>(dub);
     user.setBookStorageLimit(
         static_cast<qint64>(jsonObj["bookStorageLimit"].toDouble()));
     user.setProfilePictureLastUpdated(QDateTime::fromString(

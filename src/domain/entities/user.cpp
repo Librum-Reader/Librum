@@ -5,8 +5,9 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, qint64 usedBookStorage, qint64 bookStorageLimit,
-           const QDateTime& profilePictureLastUpdated, bool hasProfilePicture) :
+           const QString& email, qint64 usedBookStorage,
+           qint64 bookStorageLimit, const QDateTime& profilePictureLastUpdated,
+           bool hasProfilePicture) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
@@ -195,9 +196,9 @@ int User::getTagIndex(const QUuid& uuid) const
         return -1;
 
     auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&uuid](const Tag& tag)
+                                            [&uuid](const Tag& t)
                                             {
-                                                return tag.getUuid() == uuid;
+                                                return t.getUuid() == uuid;
                                             });
     size_t index = tagPosition - getTags().begin();
 

@@ -9,24 +9,25 @@ namespace adapters::controllers
 AppInfoController::AppInfoController(IAppInfoService* appInfoService) :
     m_appInfoService(appInfoService)
 {
-    connect(m_appInfoService, &IAppInfoService::newestVersionChanged,
-            this, &AppInfoController::newestVersionChanged);
+    connect(m_appInfoService, &IAppInfoService::newestVersionChanged, this,
+            &AppInfoController::newestVersionChanged);
 
-    connect(m_appInfoService, &IAppInfoService::downloadingBinariesProgressChanged,
-            this, &AppInfoController::downloadingBinariesProgressChanged);
+    connect(m_appInfoService,
+            &IAppInfoService::downloadingBinariesProgressChanged, this,
+            &AppInfoController::downloadingBinariesProgressChanged);
 
-    connect(m_appInfoService, &IAppInfoService::applicationUpdateFailed,
-            this, &AppInfoController::applicaitonUpdateFailed);
+    connect(m_appInfoService, &IAppInfoService::applicationUpdateFailed, this,
+            &AppInfoController::applicaitonUpdateFailed);
 }
 
 QString AppInfoController::getCurrentVersion() const
 {
-   return m_appInfoService->getInfo("currentVersion");
+    return m_appInfoService->getInfo("currentVersion");
 }
 
 QString AppInfoController::getNewestVersion() const
 {
-   return m_appInfoService->getInfo("newestVersion");
+    return m_appInfoService->getInfo("newestVersion");
 }
 
 QString AppInfoController::getApplicationName() const
@@ -70,7 +71,7 @@ QString AppInfoController::getOperatingSystem() const
     return "WIN";
 #elif Q_OS_MACOS
     return "MACOS";
-#else Q_OS_UNIX
+#else
     return "UNIX";
 #endif
 }
@@ -80,4 +81,4 @@ void AppInfoController::updateApplication()
     m_appInfoService->updateApplication();
 }
 
-} // namespace adapters::controllers
+}  // namespace adapters::controllers

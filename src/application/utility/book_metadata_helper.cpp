@@ -43,6 +43,8 @@ domain::value_objects::BookMetaData BookMetadataHelper::getBookMetaData()
         .pagesSize = "",
         .pageCount = m_document->getPageCount(),
         .lastOpened = QDateTime(),
+        .coverLastModified = QDateTime(),
+        .coverPath = "",
     };
 
     if(metaData.format.isEmpty())

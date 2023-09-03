@@ -1,4 +1,3 @@
-#pragma once
 #include "app_info_access.hpp"
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
@@ -31,7 +30,7 @@ void AppInfoAccess::getNewestAppVersion()
             });
 }
 
-void AppInfoAccess::downloadBinaries(const QString &packageName)
+void AppInfoAccess::downloadBinaries(const QString& packageName)
 {
     auto url = data::binaryDownloadEndpoint + "/" + packageName + ".zip";
     auto request = createRequest(url);
