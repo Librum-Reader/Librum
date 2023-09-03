@@ -145,6 +145,7 @@ target_link_libraries(application
                 PRIVATE
                     Qt6::Core
                     Qt6::Quick
+                    Qt6::Widgets
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain

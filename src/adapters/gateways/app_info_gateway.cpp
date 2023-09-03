@@ -5,16 +5,24 @@ using namespace application;
 namespace adapters::gateways
 {
 
-AppInfoGateway::AppInfoGateway(IAppInfoAccess *appInfoService) :
-    m_appInfoService(appInfoService)
+AppInfoGateway::AppInfoGateway(IAppInfoAccess *appInfoAccess) :
+    m_appInfoAccess(appInfoAccess)
 {
-    connect(m_appInfoService, &IAppInfoAccess::newestAppVersionReceived,
+    connect(m_appInfoAccess, &IAppInfoAccess::newestAppVersionReceived,
             this, &AppInfoGateway::newestAppVersionReceived);
+
+    connect(m_appInfoAccess, &IAppInfoAccess::downloadingBinariesFinished,
+            this, &AppInfoGateway::downloadingBinariesFinished);
 }
 
 void adapters::gateways::AppInfoGateway::getNewestAppVersion()
 {
-    m_appInfoService->getNewestAppVersion();
+    m_appInfoAccess->getNewestAppVersion();
+}
+
+void AppInfoGateway::downloadBinaries(const QString &packageName)
+{
+    m_appInfoAccess->downloadBinaries(packageName);
 }
 
 } // adapters::gateways

@@ -76,10 +76,14 @@ add_subdirectory(libs/rapidfuzz-cpp)
 add_subdirectory(src/)
 
 
-
 # Tests
 if(BUILD_TESTS)
     include(CTest)
     add_subdirectory(libs/googletest)
     add_subdirectory(tests/)
+endif()
+
+
+if(WIN32)
+    configure_file("${PROJECT_SOURCE_DIR}/unzip_and_move.bat" "${PROJECT_BINARY_DIR}/unzip_and_move.bat" COPYONLY)
 endif()

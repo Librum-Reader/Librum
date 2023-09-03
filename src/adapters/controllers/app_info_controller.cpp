@@ -1,4 +1,5 @@
 #include "app_info_controller.hpp"
+#include <QDir>
 
 using namespace application;
 
@@ -8,16 +9,8 @@ namespace adapters::controllers
 AppInfoController::AppInfoController(IAppInfoService* appInfoService) :
     m_appInfoService(appInfoService)
 {
-    connect(m_appInfoService, &IAppInfoService::newestAppVersionReceived,
-            this, &AppInfoController::setNewestVersion);
-
-    m_appInfoService->getNewestAppVersion();
-}
-
-void AppInfoController::setNewestVersion(const QString& newestVersion)
-{
-    m_newestVersion = newestVersion;
-    emit newestVersionChanged();
+    connect(m_appInfoService, &IAppInfoService::newestVersionChanged,
+            this, &AppInfoController::newestVersionChanged);
 }
 
 QString AppInfoController::getCurrentVersion() const
@@ -27,7 +20,7 @@ QString AppInfoController::getCurrentVersion() const
 
 QString AppInfoController::getNewestVersion() const
 {
-   return m_newestVersion;
+   return m_appInfoService->getInfo("newestVersion");
 }
 
 QString AppInfoController::getApplicationName() const
@@ -63,6 +56,22 @@ QString AppInfoController::getGithubLink() const
 QString AppInfoController::getCurrentQtVersion() const
 {
     return qVersion();
+}
+
+QString AppInfoController::getOperatingSystem() const
+{
+#ifdef Q_OS_WIN
+    return "WIN";
+#elif Q_OS_UNIX
+    return "UNIX";
+#elif Q_OS_MACOS
+    return "MACOS";
+#endif
+}
+
+void AppInfoController::updateApplication()
+{
+    m_appInfoService->updateApplication();
 }
 
 } // namespace adapters::controllers

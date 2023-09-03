@@ -14,9 +14,10 @@ public:
     AppInfoGateway(IAppInfoAccess* appInfoService);
 
     void getNewestAppVersion();
+    void downloadBinaries(const QString &packageName);
 
 private:
-    IAppInfoAccess* m_appInfoService;
+    IAppInfoAccess* m_appInfoAccess;
 };
 
 } // adapters::gateways

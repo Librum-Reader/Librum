@@ -52,13 +52,13 @@ MFlickWrapper
             Loader
             {
                 id: contentLoader
-                property bool updatesAvailable: AppInfoController.newestVersion !== "-" &&
-                                                AppInfoController.currentVersion !== AppInfoController.newestVersion
+                property bool versionsDontMatch: AppInfoController.currentVersion !== AppInfoController.newestVersion
+                                                 && AppInfoController.newestVersion !== ""
                 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.topMargin: 32
-                sourceComponent: updatesAvailable ? upToDate : updatesAvailable
+                sourceComponent: versionsDontMatch ? updatesAvailable : upToDate
             }
         }
     }

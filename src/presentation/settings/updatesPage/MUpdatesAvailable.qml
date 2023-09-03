@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 Item
@@ -33,7 +33,7 @@ Item
         
         ColumnLayout
         {
-            id: layout
+            id: mainLayout
             width: parent.width
             spacing: 0
             
@@ -71,7 +71,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                text: AppInformation.newestVersion
+                text: AppInfoController.newestVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: 14.2
@@ -89,11 +89,20 @@ Item
                 imagePath: Icons.downloadSelected
                 imageSize: 16
                 imageSpacing: 8
-                text: "Download"
+                text: "Update"
                 fontSize: 12
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8
+
+                onClicked:
+                {
+                    if(AppInfoController.operatingSystem === "WIN")
+                    {
+                        AppInfoController.updateApplication();
+                        windowsUpdatingPopup.open()
+                    }
+                }
             }
             
             Label
@@ -110,7 +119,7 @@ Item
             {
                 Layout.preferredWidth: implicitWidth
                 Layout.minimumWidth: implicitWidth
-                text: AppInformation.newsWebsite
+                text: AppInfoController.newsWebsite
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
@@ -123,7 +132,75 @@ Item
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     
-                    onClicked: Qt.openUrlExternally(AppInformation.newsWebsite)
+                    onClicked: Qt.openUrlExternally(AppInfoController.newsWebsite)
+                }
+            }
+        }
+    }
+
+    Popup
+    {
+        id: windowsUpdatingPopup
+        implicitWidth: 560
+        implicitHeight: layout.height
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding
+        padding: 0
+        horizontalPadding: 52
+        background: Rectangle
+        {
+            color: Style.colorPopupBackground
+            radius: 6
+        }
+        modal: true
+        Overlay.modal: Rectangle
+        {
+            color: Style.colorPopupDim
+            opacity: 1
+        }
+
+
+        MFlickWrapper
+        {
+            anchors.fill: parent
+            contentHeight: layout.height
+
+
+            ColumnLayout
+            {
+                id: layout
+                width: parent.width
+                spacing: 0
+
+
+                MButton
+                {
+                    id: closeButton
+                    Layout.preferredHeight: 32
+                    Layout.preferredWidth: 32
+                    Layout.topMargin: 12
+                    Layout.rightMargin: -38
+                    Layout.alignment: Qt.AlignTop | Qt.AlignRight
+                    backgroundColor: "transparent"
+                    opacityOnPressed: 0.7
+                    borderColor: "transparent"
+                    radius: 6
+                    borderColorOnPressed: Style.colorButtonBorder
+                    imagePath: Icons.closePopup
+                    imageSize: 14
+
+                    onClicked: windowsUpdatingPopup.close()
+                }
+
+                Label
+                {
+                    id: popupTitle
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.bottomMargin: 360
+                    text: "Updating..."
+                    font.weight: Font.Bold
+                    font.pointSize: 18
+                    color: Style.colorBasePurple
                 }
             }
         }

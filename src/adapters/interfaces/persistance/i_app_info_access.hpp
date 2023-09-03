@@ -2,8 +2,6 @@
 #include <QObject>
 #include <QString>
 #include "adapters_export.hpp"
-#include "login_dto.hpp"
-#include "register_dto.hpp"
 
 namespace adapters
 {
@@ -20,9 +18,11 @@ public:
     virtual ~IAppInfoAccess() noexcept = default;
 
     virtual void getNewestAppVersion() = 0;
+    virtual void downloadBinaries(const QString& packageName) = 0;
 
 signals:
     void newestAppVersionReceived(const QString& version);
+    void downloadingBinariesFinished(const QByteArray& data, bool success);
 };
 
 }  // namespace adapters

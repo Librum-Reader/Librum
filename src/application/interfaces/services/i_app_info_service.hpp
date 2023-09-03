@@ -17,10 +17,10 @@ public:
     virtual ~IAppInfoService() noexcept = default;
 
     virtual QString getInfo(const QString& key) = 0;
-    virtual void getNewestAppVersion() = 0;
+    virtual void updateApplication() = 0;
 
 signals:
-    void newestAppVersionReceived(const QString& newestAppVersion);
+    void newestVersionChanged();
 };
 
 }  // namespace application

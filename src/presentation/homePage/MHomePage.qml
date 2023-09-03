@@ -51,7 +51,7 @@ Page
             Layout.rightMargin: -root.rightPadding
             visible: baseRoot.notifyAboutUpdates 
                      && AppInfoController.newestVersion !== ""
-                     & AppInfoController.currentVersion !== AppInfoController.newestVersion
+                     && AppInfoController.currentVersion !== AppInfoController.newestVersion
             
             Rectangle
             {
@@ -62,13 +62,14 @@ Page
             
             Label
             {
-                id: loginText
+                id: updateBannerText
                 anchors.centerIn: parent
-                text: "A new version is available! Make sure to update."
+                text: 'A new version is available! <a href="update" style="color: #FFFFFF; text-decoration: underline;">Update Now</a>'
+                onLinkActivated: baseRoot.loadSettingsUpdatesPage()
+                textFormat: Text.RichText
                 color: Style.colorBannerText
                 font.bold: true
                 font.pointSize: 12
-                
             }
             
             MButton

@@ -131,6 +131,14 @@ ApplicationWindow
         let page = pageManager.currentItem;
         page.loadSettingsPage(page.appearancePage, page.settingsSidebar.appearanceItem);
     }
+
+    function loadSettingsUpdatesPage()
+    {
+        loadPage(settings, sidebar.settingsItem, false);
+
+        let page = pageManager.currentItem;
+        page.loadSettingsPage(page.updatesPage, page.settingsSidebar.updatesItem);
+    }
     
     
     QtObject

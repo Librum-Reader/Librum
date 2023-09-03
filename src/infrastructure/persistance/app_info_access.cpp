@@ -21,12 +21,38 @@ void AppInfoAccess::getNewestAppVersion()
                     api_error_helper::logErrorMessage(reply,
                                                       "Getting latest version");
 
-                    emit newestAppVersionReceived("-");
+                    emit newestAppVersionReceived("");
                     reply->deleteLater();
                     return;
                 }
 
                 emit newestAppVersionReceived(reply->readAll());
+                reply->deleteLater();
+            });
+}
+
+void AppInfoAccess::downloadBinaries(const QString &packageName)
+{
+    auto url = data::binaryDownloadEndpoint + "/" + packageName + ".zip";
+    auto request = createRequest(url);
+    auto reply = m_networkAccessManager.get(request);
+
+
+    // Handle authentication result and release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
+            {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(reply,
+                                                      "Getting binary package");
+
+                    emit downloadingBinariesFinished(QByteArray(), false);
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit downloadingBinariesFinished(reply->readAll(), true);
                 reply->deleteLater();
             });
 }

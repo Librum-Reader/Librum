@@ -15,9 +15,6 @@ public:
     AppInfoController(
         application::IAppInfoService* appInfoService);
 
-private slots:
-    void setNewestVersion(const QString& newestVersion);
-
 private:
     QString getCurrentVersion() const override;
     QString getNewestVersion() const override;
@@ -28,9 +25,10 @@ private:
     QString getCompanyEmail() const override;
     QString getGithubLink() const override;
     QString getCurrentQtVersion() const override;
+    QString getOperatingSystem() const override;
+    void updateApplication() override;
 
     application::IAppInfoService* m_appInfoService;
-    QString m_newestVersion = "";
 };
 
 } // namespace adapters::controllers

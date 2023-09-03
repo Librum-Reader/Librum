@@ -71,7 +71,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                text: AppInfoController.newestVersion
+                text: AppInfoController.currentVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorBasePurple
                 font.pointSize: 14.2
@@ -117,7 +117,7 @@ Item
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     
-                    onClicked: Qt.openUrlExternally(AppInformation.newsWebsite)
+                    onClicked: Qt.openUrlExternally(AppInfoController.newsWebsite)
                 }
             }
         }
