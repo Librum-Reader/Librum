@@ -102,9 +102,8 @@ void SettingsService::clearUserData()
 
 void SettingsService::setupSettings()
 {
-    auto format = QSettings::NativeFormat;
+    auto format = QSettings::IniFormat;
     m_settings = std::make_unique<QSettings>(getSettingsFilePath(), format);
-    auto x = m_settings->fileName();
 
     generateDefaultSettings();
 }
