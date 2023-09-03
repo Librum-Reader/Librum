@@ -158,7 +158,7 @@ The installation is straight forward, just follow the steps below:
     ```
 6. Build the project
     ```sh
-    cmake --build .
+    cmake --build . -j $(nproc)
     ```
 7. Install Librum
     ```sh
