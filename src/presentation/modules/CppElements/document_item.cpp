@@ -1,6 +1,7 @@
 #include "document_item.hpp"
 #include <QFile>
 #include <QUrl>
+#include <QtWidgets/QApplication>
 #include <memory>
 #include "document.hpp"
 
@@ -66,8 +67,12 @@ void DocumentItem::setZoom(float newZoom)
 
 void DocumentItem::search(const QString& text)
 {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
     clearSearch();
     m_document->search(text);
+
+    QApplication::restoreOverrideCursor();
 
     if(!m_document->getSearchHits().empty())
     {
