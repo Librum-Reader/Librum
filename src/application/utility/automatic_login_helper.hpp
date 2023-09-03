@@ -18,8 +18,8 @@ struct UserData
     QString firstName;
     QString lastName;
     QString email;
-    long usedBookStorage;
-    long bookStorageLimit;
+    qint64 usedBookStorage;
+    qint64 bookStorageLimit;
     QDateTime profilePictureLastUpdated;
     std::vector<domain::entities::Tag> tags;
 };
@@ -149,8 +149,8 @@ inline std::optional<UserData> tryAutomaticUserLoading()
         automaticLoginData["firstName"].toString(),
         automaticLoginData["lastName"].toString(),
         automaticLoginData["email"].toString(),
-        static_cast<long>(automaticLoginData["usedBookStorage"].toDouble()),
-        static_cast<long>(automaticLoginData["bookStorageLimit"].toDouble()),
+        static_cast<qint64>(automaticLoginData["usedBookStorage"].toDouble()),
+        static_cast<qint64>(automaticLoginData["bookStorageLimit"].toDouble()),
         QDateTime::fromString(
             automaticLoginData["profilePictureLastUpdated"].toString()),
         std::vector<Tag>(),

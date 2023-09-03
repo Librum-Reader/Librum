@@ -129,9 +129,11 @@ void UserStorageGateway::assignValuesToUser(User& user,
     user.setFirstName(jsonObj["firstName"].toString());
     user.setLastName(jsonObj["lastName"].toString());
     user.setUsedBookStorage(
-        static_cast<long>(jsonObj["usedBookStorage"].toDouble()));
+        static_cast<qint64>(jsonObj["usedBookStorage"].toDouble()));
+    auto dub = jsonObj["bookStorageLimit"].toDouble();
+    auto num = static_cast<qint64>(dub);
     user.setBookStorageLimit(
-        static_cast<long>(jsonObj["bookStorageLimit"].toDouble()));
+        static_cast<qint64>(jsonObj["bookStorageLimit"].toDouble()));
     user.setProfilePictureLastUpdated(QDateTime::fromString(
         jsonObj["profilePictureLastUpdated"].toString(), m_dateTimeFormat));
     user.setHasProfilePicture(jsonObj["hasProfilePicture"].toBool());

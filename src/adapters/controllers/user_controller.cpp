@@ -140,12 +140,12 @@ void UserController::setEmail(const QString& newEmail)
     emit emailChanged();
 }
 
-long UserController::getUsedBookStorage() const
+qint64 UserController::getUsedBookStorage() const
 {
     return m_userService->getUsedBookStorage();
 }
 
-long UserController::getBookStorageLimit() const
+qint64 UserController::getBookStorageLimit() const
 {
     return m_userService->getBookStorageLimit();
 }

@@ -125,12 +125,12 @@ void UserService::setEmail(const QString& newEmail)
     m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
 }
 
-long UserService::getUsedBookStorage() const
+qint64 UserService::getUsedBookStorage() const
 {
     return m_user.getUsedBookStorage();
 }
 
-long UserService::getBookStorageLimit() const
+qint64 UserService::getBookStorageLimit() const
 {
     return m_user.getBookStorageLimit();
 }
