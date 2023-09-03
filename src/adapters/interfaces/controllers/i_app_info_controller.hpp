@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 
 namespace adapters
 {
@@ -11,7 +12,7 @@ namespace adapters
  * acts as a layer of abstraction which maps the user data to a format usable
  * for the application.
  */
-class IAppInfoController : public QObject
+class ADAPTERS_EXPORT IAppInfoController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)

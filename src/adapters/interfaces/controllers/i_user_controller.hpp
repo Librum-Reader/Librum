@@ -1,5 +1,6 @@
 #include <QObject>
 #include "user_tags_model.hpp"
+#include "adapters_export.hpp"
 #pragma once
 
 namespace adapters
@@ -11,7 +12,7 @@ namespace adapters
  * layer of abstraction which maps the user data to a format usable for the
  * application.
  */
-class IUserController : public QObject
+class ADAPTERS_EXPORT IUserController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString firstName READ getFirstName WRITE setFirstName NOTIFY

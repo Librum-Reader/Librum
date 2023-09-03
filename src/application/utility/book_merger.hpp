@@ -3,6 +3,7 @@
 #include "book.hpp"
 #include "i_book_storage_manager.hpp"
 #include "merge_status.hpp"
+#include "application_export.hpp"
 
 namespace application::utility
 {
@@ -11,7 +12,7 @@ namespace application::utility
  * This class merges two books by comparing them and then updating the
  * appropriate one, locally or remotely.
  */
-class BookMerger : public QObject
+class APPLICATION_EXPORT BookMerger : public QObject
 {
     Q_OBJECT
 
