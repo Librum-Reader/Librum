@@ -6,10 +6,6 @@ It's not **just** an e-book reader. With Librum, you can manage your own online 
  
 Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
-<br>
-<b>Note</b>: Librum is still in development, the servers are <b>not</b> public. This means Librum is not yet available for public use.
-
-An alpha release will be available soon, bringing the servers online and making the application available to end users. 
 
 # Preview
 
@@ -30,7 +26,13 @@ Customize Librum to make it personal to you
 ![image](https://github.com/Librum-Reader/Librum/assets/69865187/b8995cf1-a0e6-4993-8c8b-92f7f8e79ebd)
 
 
+<br>
 
+# How can I get Librum?
+
+Simply go to https://librumreader.com to download Librum.
+
+If you want to build Librum from source, follow the instructions [here](#build-guide).
 
 <br>
 
