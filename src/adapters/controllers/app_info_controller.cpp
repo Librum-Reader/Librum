@@ -11,6 +11,12 @@ AppInfoController::AppInfoController(IAppInfoService* appInfoService) :
 {
     connect(m_appInfoService, &IAppInfoService::newestVersionChanged,
             this, &AppInfoController::newestVersionChanged);
+
+    connect(m_appInfoService, &IAppInfoService::downloadingBinariesProgressChanged,
+            this, &AppInfoController::downloadingBinariesProgressChanged);
+
+    connect(m_appInfoService, &IAppInfoService::applicationUpdateFailed,
+            this, &AppInfoController::applicaitonUpdateFailed);
 }
 
 QString AppInfoController::getCurrentVersion() const
@@ -62,10 +68,10 @@ QString AppInfoController::getOperatingSystem() const
 {
 #ifdef Q_OS_WIN
     return "WIN";
-#elif Q_OS_UNIX
-    return "UNIX";
 #elif Q_OS_MACOS
     return "MACOS";
+#else Q_OS_UNIX
+    return "UNIX";
 #endif
 }
 

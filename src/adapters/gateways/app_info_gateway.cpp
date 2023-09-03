@@ -13,6 +13,9 @@ AppInfoGateway::AppInfoGateway(IAppInfoAccess *appInfoAccess) :
 
     connect(m_appInfoAccess, &IAppInfoAccess::downloadingBinariesFinished,
             this, &AppInfoGateway::downloadingBinariesFinished);
+
+    connect(m_appInfoAccess, &IAppInfoAccess::downloadingBinariesProgressChanged,
+            this, &AppInfoGateway::downloadingBinariesProgressChanged);
 }
 
 void adapters::gateways::AppInfoGateway::getNewestAppVersion()

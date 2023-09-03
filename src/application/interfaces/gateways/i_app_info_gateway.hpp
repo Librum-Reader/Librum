@@ -25,6 +25,7 @@ public:
 signals:
     void newestAppVersionReceived(const QString& newestAppVersion);
     void downloadingBinariesFinished(const QByteArray& data, bool success);
+    void downloadingBinariesProgressChanged(qint64 received, qint64 total);
 };
 
 }  // namespace application

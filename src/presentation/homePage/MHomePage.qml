@@ -70,6 +70,15 @@ Page
                 color: Style.colorBannerText
                 font.bold: true
                 font.pointSize: 12
+
+                // Switch to the proper cursor when hovering above the link
+                MouseArea
+                {
+                    id: mouseArea
+                    acceptedButtons: Qt.NoButton    // Don't eat the mouse clicks
+                    anchors.fill: parent
+                    cursorShape: updateBannerText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
             
             MButton

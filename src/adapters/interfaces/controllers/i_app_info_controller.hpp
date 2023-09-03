@@ -45,6 +45,8 @@ private:
 
 signals:
     void newestVersionChanged();
+    void downloadingBinariesProgressChanged(double progress);
+    void applicaitonUpdateFailed();
 };
 
 }  // namespace adapters

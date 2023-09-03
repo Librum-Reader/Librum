@@ -13,6 +13,22 @@ Item
     id: root
     height: content.height
     
+    Connections
+    {
+        target: AppInfoController
+
+        function onDownloadingBinariesProgressChanged(progress)
+        {
+            progressBarFill.width = progressBar.width * progress
+        }
+
+        function onApplicaitonUpdateFailed()
+        {
+            progressBarFill.width = 0;
+            windowsUpdatingPopup.close()
+            updateFailedPopup.open()
+        }
+    }
     
     Pane
     {
@@ -138,6 +154,27 @@ Item
         }
     }
 
+    MWarningPopup
+    {
+        id: updateFailedPopup
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding - 70
+        visible: false
+        title: "The Update Failed"
+        message: "Please try again later or download the newest version from our " +
+                 '<a href="' + AppInfoController.website + '" style="text-decoration: none; color: '
+                 + Style.colorBasePurple + ';">website</a>.'
+        leftButtonText: "Close"
+        rightButtonText: "Email Us"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        richText: true
+
+        onOpenedChanged: if(opened) updateFailedPopup.giveFocus()
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
+        onDecisionMade: close()
+    }
+
     Popup
     {
         id: windowsUpdatingPopup
@@ -196,11 +233,35 @@ Item
                 {
                     id: popupTitle
                     Layout.alignment: Qt.AlignHCenter
-                    Layout.bottomMargin: 360
-                    text: "Updating..."
+                    Layout.bottomMargin: 100
+                    text: "Updating"
                     font.weight: Font.Bold
-                    font.pointSize: 18
+                    font.pointSize: 22
                     color: Style.colorBasePurple
+                }
+
+                Label
+                {
+                    text: "Downloading..."
+                    font.pointSize: 13
+                    color: Style.colorText
+                }
+
+                Rectangle
+                {
+                    id: progressBar
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 24
+                    Layout.topMargin: 4
+                    Layout.bottomMargin: 80
+
+                    Rectangle
+                    {
+                        id: progressBarFill
+                        width: 0
+                        height: parent.height
+                        color: Style.colorBasePurple
+                    }
                 }
             }
         }

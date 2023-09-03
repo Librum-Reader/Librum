@@ -55,6 +55,9 @@ void AppInfoAccess::downloadBinaries(const QString &packageName)
                 emit downloadingBinariesFinished(reply->readAll(), true);
                 reply->deleteLater();
             });
+
+    connect(reply, &QNetworkReply::downloadProgress, this,
+            &AppInfoAccess::downloadingBinariesProgressChanged);
 }
 
 QNetworkRequest AppInfoAccess::createRequest(QUrl url)

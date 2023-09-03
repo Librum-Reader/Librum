@@ -19,6 +19,14 @@ AppInfoService::AppInfoService(IAppInfoGateway *appInfoGateway)
     connect(m_appInfoGateway, &IAppInfoGateway::downloadingBinariesFinished,
             this, &AppInfoService::processDownloadedBinaryData);
 
+    connect(m_appInfoGateway, &IAppInfoGateway::downloadingBinariesProgressChanged,
+            this,
+            [this](qint64 received, qint64 total)
+            {
+                auto progress = static_cast<double>(received) / total;
+                emit downloadingBinariesProgressChanged(progress);
+            });
+
     m_appInfoGateway->getNewestAppVersion();
 }
 
@@ -110,6 +118,7 @@ void AppInfoService::processDownloadedBinaryData(const QByteArray &data,
     if(!success || data.isEmpty())
     {
         qWarning() << "Downloading binary data failed. Can't update.";
+        emit applicationUpdateFailed();
         return;
     }
 

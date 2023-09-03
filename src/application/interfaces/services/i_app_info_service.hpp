@@ -21,6 +21,8 @@ public:
 
 signals:
     void newestVersionChanged();
+    void downloadingBinariesProgressChanged(double progress);
+    void applicationUpdateFailed();
 };
 
 }  // namespace application
