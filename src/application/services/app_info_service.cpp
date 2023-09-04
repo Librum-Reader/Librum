@@ -95,8 +95,7 @@ void AppInfoService::unpackAndInstallBinaries(const QString& path)
 QString AppInfoService::getBinaryPackageName()
 {
     auto newestVersion = getInfo("newestVersion");
-    auto fixedVersionString = newestVersion.replace(".", "-");
-    auto binaryPackageName = fixedVersionString + "-windows-binaries";
+    auto binaryPackageName = "librum-windows-" + newestVersion + "-binaries";
 
     return binaryPackageName;
 }
