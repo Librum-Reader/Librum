@@ -27,8 +27,6 @@ MFlickWrapper
         // For some reason this prevents a SEGV. Directly calling the auto login
         // directly causes the application to crash on startup.
         autoLoginTimer.start();
-        
-        inDevelopmentPopup.open();
     }
     Timer
     {
@@ -308,24 +306,6 @@ MFlickWrapper
             }
             
         }
-    }
-    
-    MWarningPopup
-    {
-        id: inDevelopmentPopup
-        x: Math.round(root.width / 2 - implicitWidth / 2)
-        y: Math.round(root.height / 2 - implicitHeight / 2) - 75
-        visible: false
-        title: "In Development"
-        message: "Librum is currently in development and not yet released!\nThe servers are not yet publicly accessible but will be very soon. Please try again in a few days."
-        leftButtonText: "Ok"
-        rightButtonText: "Email Us"
-        buttonsWidth: 180
-        messageBottomSpacing: 8
-        
-        onDecisionMade: close()
-        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
-        onOpenedChanged: if(opened) inDevelopmentPopup.giveFocus()
     }
     
     MWarningPopup
