@@ -1,17 +1,17 @@
 #pragma once
 #include <QString>
-#include "i_book_storage_gateway.hpp"
-#include "i_book_storage_manager.hpp"
-#include "i_downloaded_books_tracker.hpp"
+#include "i_local_library_tracker.hpp"
+#include "i_library_storage_gateway.hpp"
+#include "i_library_storage_manager.hpp"
 
 namespace application::utility
 {
 
-class BookStorageManager : public IBookStorageManager
+class LibraryStorageManager : public ILibraryStorageManager
 {
 public:
-    BookStorageManager(IBookStorageGateway* bookStorageGateway,
-                       IDownloadedBooksTracker* downloadedBooksTracker);
+    LibraryStorageManager(ILibraryStorageGateway* bookStorageGateway,
+                          ILocalLibraryTracker* downloadedBooksTracker);
 
     void addBook(const domain::entities::Book& bookToAdd) override;
     void addBookLocally(const domain::entities::Book& bookToAdd) override;
@@ -49,8 +49,8 @@ private:
 
     QString m_bookCoverPrefix = "cover_";
     QString m_bookCoverType = "png";
-    IBookStorageGateway* m_bookStorageGateway;
-    IDownloadedBooksTracker* m_downloadedBooksTracker;
+    ILibraryStorageGateway* m_bookStorageGateway;
+    ILocalLibraryTracker* m_downloadedBooksTracker;
     QString m_authenticationToken;
 };
 

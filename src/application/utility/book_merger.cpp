@@ -6,7 +6,7 @@ namespace application::utility
 using domain::entities::Book;
 
 void BookMerger::mergeBooks(Book& localBook, const Book& remoteBook,
-                            IBookStorageManager* bookStorageManager)
+                            ILibraryStorageManager* bookStorageManager)
 {
     // We are separating the merging process into 3 separate parts, since all of
     // them are independent of each other.
@@ -109,7 +109,7 @@ MergeStatus BookMerger::mergeBookCover(Book& localBook, const Book& remoteBook)
 }
 
 void BookMerger::storeChangesToTheCover(CoverChanges coverChanges,
-                                        IBookStorageManager* bookStorageManager)
+                                        ILibraryStorageManager* bookStorageManager)
 {
     if(!coverChanges.newChangesExist())
         return;

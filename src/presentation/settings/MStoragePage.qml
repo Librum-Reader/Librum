@@ -351,7 +351,7 @@ MFlickWrapper
                                     id: bookCount
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: 78
-                                    text: BookController.bookCount
+                                    text: LibraryController.bookCount
                                     color: Style.colorMatteTitle
                                     font.weight: Font.Bold
                                     font.pointSize: 46

@@ -1,42 +1,47 @@
 #pragma once
-#include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include <QUuid>
 #include <vector>
-#include "adapters_export.hpp"
+#include "book.hpp"
+#include "application_export.hpp"
 
-namespace adapters
+namespace application
 {
 
 /**
- * The IAuthenticationAccess class makes the API calls to the authentication
- * server.
+ * The LibraryStorageGateway class acts as a layer of abstraction before the
+ * LibraryStorageAccess class. It maps the data provided by the application to
+ * the data type required for book storage API requests.
  */
-class ADAPTERS_EXPORT IBookStorageAccess : public QObject
+class APPLICATION_EXPORT ILibraryStorageGateway : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~IBookStorageAccess() noexcept = default;
+    virtual ~ILibraryStorageGateway() noexcept = default;
 
     virtual void createBook(const QString& authToken,
-                            const QJsonObject& jsonBook) = 0;
+                            const domain::entities::Book& book) = 0;
     virtual void deleteBook(const QString& authToken, const QUuid& uuid) = 0;
     virtual void updateBook(const QString& authToken,
-                            const QJsonObject& jsonBook) = 0;
-    virtual void uploadBookCover(const QString& authToken, const QUuid& uuid,
+                            const domain::entities::Book& book) = 0;
+    virtual void changeBookCover(const QString& authToken, const QUuid& uuid,
                                  const QString& path) = 0;
     virtual void deleteBookCover(const QString& authToken,
                                  const QUuid& uuid) = 0;
-    virtual void downloadCoverForBook(const QString& authToken,
-                                      const QUuid& uuid) = 0;
+    virtual void getCoverForBook(const QString& authToken,
+                                 const QUuid& uuid) = 0;
     virtual void getBooksMetaData(const QString& authToken) = 0;
     virtual void downloadBookMedia(const QString& authToken,
                                    const QUuid& uuid) = 0;
 
 signals:
+    void creatingBookFinished(bool success, const QString& reason);
     void deletingBookFinished(bool success, const QString& reason);
     void updatingBookFinished(bool success, const QString& reason);
+    void gettingBooksMetaDataFinished(
+        std::vector<domain::entities::Book>& books);
     void downloadingBookMediaChunkReady(const QByteArray& data,
                                         const bool isChunkLast,
                                         const QUuid& uuid,
@@ -44,12 +49,10 @@ signals:
     void downloadingBookMediaProgressChanged(const QUuid& uuid,
                                              qint64 bytesReceived,
                                              qint64 bytesTotal);
-    void gettingBooksMetaDataFinished(std::vector<QJsonObject>& metaData);
     void downloadingBookCoverFinished(const QByteArray& data,
                                       const QUuid& uuid);
-    void uploadLimitReached();
     void storageLimitExceeded();
     void bookUploadSucceeded(const QUuid& uuid);
 };
 
-}  // namespace adapters
+}  // namespace application

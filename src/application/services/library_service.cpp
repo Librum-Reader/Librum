@@ -1,4 +1,4 @@
-#include "book_service.hpp"
+#include "library_service.hpp"
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
@@ -17,42 +17,42 @@ using std::size_t;
 namespace application::services
 {
 
-BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
-                         IBookStorageManager* bookStorageManager) :
+LibraryService::LibraryService(IBookMetadataHelper* bookMetadataHelper,
+                         ILibraryStorageManager* bookStorageManager) :
     m_bookMetadataHelper(bookMetadataHelper),
     m_bookStorageManager(bookStorageManager)
 {
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
-            &IBookStorageManager::downloadRemoteBooks);
+            &ILibraryStorageManager::downloadRemoteBooks);
 
     // Getting books finished
     connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingRemoteBooks, this,
-            &BookService::updateLibrary);
+            &ILibraryStorageManager::finishedDownloadingRemoteBooks, this,
+            &LibraryService::updateLibrary);
 
     // Downloading book media progress
     connect(m_bookStorageManager,
-            &IBookStorageManager::downloadingBookMediaProgressChanged, this,
-            &BookService::setMediaDownloadProgressForBook);
+            &ILibraryStorageManager::downloadingBookMediaProgressChanged, this,
+            &LibraryService::setMediaDownloadProgressForBook);
 
     // Downloading book finished
     connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingBookMedia, this,
-            &BookService::processDownloadedBook);
+            &ILibraryStorageManager::finishedDownloadingBookMedia, this,
+            &LibraryService::processDownloadedBook);
 
     // Downloading book cover finished
     connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingBookCover, this,
-            &BookService::processDownloadedBookCover);
+            &ILibraryStorageManager::finishedDownloadingBookCover, this,
+            &LibraryService::processDownloadedBookCover);
 
     // Storage limit exceeded
-    connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
-            this, &BookService::storageLimitExceeded);
+    connect(m_bookStorageManager, &ILibraryStorageManager::storageLimitExceeded,
+            this, &LibraryService::storageLimitExceeded);
 
     // Book upload succeeded
-    connect(m_bookStorageManager, &IBookStorageManager::bookUploadSucceeded,
+    connect(m_bookStorageManager, &ILibraryStorageManager::bookUploadSucceeded,
             this,
             [this](const QUuid& uuid)
             {
@@ -63,12 +63,12 @@ BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
             });
 }
 
-void BookService::downloadBooks()
+void LibraryService::downloadBooks()
 {
     m_bookStorageManager->downloadRemoteBooks();
 }
 
-BookOperationStatus BookService::addBook(const QString& filePath)
+BookOperationStatus LibraryService::addBook(const QString& filePath)
 {
     auto success = m_bookMetadataHelper->setup(filePath);
     if(!success)
@@ -102,7 +102,7 @@ BookOperationStatus BookService::addBook(const QString& filePath)
     return BookOperationStatus::Success;
 }
 
-auto BookService::getBookPosition(const QUuid& uuid)
+auto LibraryService::getBookPosition(const QUuid& uuid)
 {
     auto bookPosition = std::ranges::find_if(m_books,
                                              [&uuid](const Book& book)
@@ -112,7 +112,7 @@ auto BookService::getBookPosition(const QUuid& uuid)
     return bookPosition;
 }
 
-BookOperationStatus BookService::deleteBook(const QUuid& uuid)
+BookOperationStatus LibraryService::deleteBook(const QUuid& uuid)
 {
     const auto* book = getBook(uuid);
     if(!book)
@@ -141,13 +141,13 @@ BookOperationStatus BookService::deleteBook(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::deleteAllBooks()
+BookOperationStatus LibraryService::deleteAllBooks()
 {
     m_bookStorageManager->deleteAllBooks();
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
+BookOperationStatus LibraryService::uninstallBook(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -165,7 +165,7 @@ BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::downloadBookMedia(const QUuid& uuid)
+BookOperationStatus LibraryService::downloadBookMedia(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -180,7 +180,7 @@ BookOperationStatus BookService::downloadBookMedia(const QUuid& uuid)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::updateBook(const Book& newBook)
+BookOperationStatus LibraryService::updateBook(const Book& newBook)
 {
     auto* book = getBook(newBook.getUuid());
     if(book == nullptr)
@@ -216,7 +216,7 @@ BookOperationStatus BookService::updateBook(const Book& newBook)
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
+BookOperationStatus LibraryService::changeBookCover(const QUuid& uuid,
                                                  const QString& filePath)
 {
     auto* book = getBook(uuid);
@@ -246,7 +246,7 @@ BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-void BookService::deleteBookCover(Book& book)
+void LibraryService::deleteBookCover(Book& book)
 {
     auto success = m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
     if(!success)
@@ -264,7 +264,7 @@ void BookService::deleteBookCover(Book& book)
     refreshUIForBook(book.getUuid());
 }
 
-bool BookService::setNewBookCover(Book& book, QString filePath)
+bool LibraryService::setNewBookCover(Book& book, QString filePath)
 {
     auto uuid = book.getUuid();
     QFileInfo newCoverFile(filePath);
@@ -308,14 +308,14 @@ bool BookService::setNewBookCover(Book& book, QString filePath)
     return true;
 }
 
-void BookService::addBookToLibrary(const Book& book)
+void LibraryService::addBookToLibrary(const Book& book)
 {
     emit bookInsertionStarted(m_books.size());
     m_books.emplace_back(book);
     emit bookInsertionEnded();
 }
 
-void BookService::setMediaDownloadProgressForBook(const QUuid& uuid,
+void LibraryService::setMediaDownloadProgressForBook(const QUuid& uuid,
                                                   qint64 bytesReceived,
                                                   qint64 bytesTotal)
 {
@@ -333,7 +333,7 @@ void BookService::setMediaDownloadProgressForBook(const QUuid& uuid,
     emit downloadingBookMediaProgressChanged(getBookIndex(uuid));
 }
 
-BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
+BookOperationStatus LibraryService::addTagToBook(const QUuid& uuid,
                                               const domain::entities::Tag& tag)
 {
     auto* book = getBook(uuid);
@@ -362,7 +362,7 @@ BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::removeTagFromBook(const QUuid& bookUuid,
+BookOperationStatus LibraryService::removeTagFromBook(const QUuid& bookUuid,
                                                    const QUuid& tagUuid)
 {
     auto* book = getBook(bookUuid);
@@ -391,7 +391,7 @@ BookOperationStatus BookService::removeTagFromBook(const QUuid& bookUuid,
     return BookOperationStatus::Success;
 }
 
-BookOperationStatus BookService::renameTagOfBook(const QUuid& bookUuid,
+BookOperationStatus LibraryService::renameTagOfBook(const QUuid& bookUuid,
                                                  const QUuid& tagUuid,
                                                  const QString& newName)
 {
@@ -423,12 +423,12 @@ BookOperationStatus BookService::renameTagOfBook(const QUuid& bookUuid,
     return BookOperationStatus::Success;
 }
 
-const std::vector<Book>& BookService::getBooks() const
+const std::vector<Book>& LibraryService::getBooks() const
 {
     return m_books;
 }
 
-const Book* BookService::getBook(const QUuid& uuid) const
+const Book* LibraryService::getBook(const QUuid& uuid) const
 {
     for(size_t i = 0; i < m_books.size(); ++i)
     {
@@ -439,7 +439,7 @@ const Book* BookService::getBook(const QUuid& uuid) const
     return nullptr;
 }
 
-Book* BookService::getBook(const QUuid& uuid)
+Book* LibraryService::getBook(const QUuid& uuid)
 {
     for(size_t i = 0; i < m_books.size(); ++i)
     {
@@ -450,7 +450,7 @@ Book* BookService::getBook(const QUuid& uuid)
     return nullptr;
 }
 
-int BookService::getBookIndex(const QUuid& uuid) const
+int LibraryService::getBookIndex(const QUuid& uuid) const
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -466,12 +466,12 @@ int BookService::getBookIndex(const QUuid& uuid) const
     return index;
 }
 
-int BookService::getBookCount() const
+int LibraryService::getBookCount() const
 {
     return m_books.size();
 }
 
-BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
+BookOperationStatus LibraryService::saveBookToFile(const QUuid& uuid,
                                                 const QString& pathToFolder)
 {
     auto* book = getBook(uuid);
@@ -500,7 +500,7 @@ BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
     return BookOperationStatus::Success;
 }
 
-bool BookService::refreshLastOpenedDateOfBook(const QUuid& uuid)
+bool LibraryService::refreshLastOpenedDateOfBook(const QUuid& uuid)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -513,7 +513,7 @@ bool BookService::refreshLastOpenedDateOfBook(const QUuid& uuid)
     return true;
 }
 
-void BookService::processDownloadedBook(const QUuid& uuid,
+void LibraryService::processDownloadedBook(const QUuid& uuid,
                                         const QString& filePath)
 {
     auto* book = getBook(uuid);
@@ -527,7 +527,7 @@ void BookService::processDownloadedBook(const QUuid& uuid,
     refreshUIForBook(uuid);
 }
 
-void BookService::processDownloadedBookCover(const QUuid& uuid,
+void LibraryService::processDownloadedBookCover(const QUuid& uuid,
                                              const QString& filePath)
 {
     auto* book = getBook(uuid);
@@ -539,13 +539,13 @@ void BookService::processDownloadedBookCover(const QUuid& uuid,
     refreshUIWithNewCover(uuid, filePath);
 }
 
-void BookService::updateUsedBookStorage(long usedStorage, long bookStorageLimit)
+void LibraryService::updateUsedBookStorage(long usedStorage, long bookStorageLimit)
 {
     m_usedBookStorage = usedStorage;
     m_bookStorageLimit = bookStorageLimit;
 }
 
-void BookService::setupUserData(const QString& token, const QString& email)
+void LibraryService::setupUserData(const QString& token, const QString& email)
 {
     m_bookStorageManager->setUserData(email, token);
 
@@ -555,7 +555,7 @@ void BookService::setupUserData(const QString& token, const QString& email)
     m_fetchChangesTimer.start();
 }
 
-void BookService::loadLocalBooks()
+void LibraryService::loadLocalBooks()
 {
     auto books = m_bookStorageManager->loadLocalBooks();
     for(auto book : books)
@@ -565,7 +565,7 @@ void BookService::loadLocalBooks()
     }
 }
 
-void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
+void LibraryService::uninstallBookIfTheBookFileIsInvalid(Book& book)
 {
     // The file might have been moved or deleted from the user's filesystem,
     // from the last time the application was used. This would mean that the
@@ -580,7 +580,7 @@ void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
     }
 }
 
-void BookService::clearUserData()
+void LibraryService::clearUserData()
 {
     m_bookStorageManager->clearUserData();
     m_fetchChangesTimer.stop();
@@ -590,7 +590,7 @@ void BookService::clearUserData()
     emit bookClearingEnded();
 }
 
-void BookService::updateLibrary(std::vector<Book>& books)
+void LibraryService::updateLibrary(std::vector<Book>& books)
 {
     // The remote library is the library fetched from the server and the
     // local library is the library on the client's PC. On startup we need
@@ -599,7 +599,7 @@ void BookService::updateLibrary(std::vector<Book>& books)
     mergeLocalLibraryIntoRemoteLibrary(books);
 }
 
-void BookService::mergeRemoteLibraryIntoLocalLibrary(
+void LibraryService::mergeRemoteLibraryIntoLocalLibrary(
     std::vector<Book>& remoteBooks)
 {
     for(auto& remoteBook : remoteBooks)
@@ -609,9 +609,9 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
         {
             utility::BookMerger bookMerger;
             connect(&bookMerger, &utility::BookMerger::localBookCoverDeleted,
-                    this, &BookService::refreshUIWithNewCover);
+                    this, &LibraryService::refreshUIWithNewCover);
             connect(&bookMerger, &utility::BookMerger::bookDataChanged, this,
-                    &BookService::refreshUIForBook);
+                    &LibraryService::refreshUIForBook);
 
             bookMerger.mergeBooks(*localBook, remoteBook, m_bookStorageManager);
             continue;
@@ -627,7 +627,7 @@ void BookService::mergeRemoteLibraryIntoLocalLibrary(
     }
 }
 
-void BookService::mergeLocalLibraryIntoRemoteLibrary(
+void LibraryService::mergeLocalLibraryIntoRemoteLibrary(
     const std::vector<Book>& remoteBooks)
 {
     int bytesOfDataUploaded = 0;
@@ -663,7 +663,7 @@ void BookService::mergeLocalLibraryIntoRemoteLibrary(
     }
 }
 
-void BookService::deleteBookLocally(const domain::entities::Book& book)
+void LibraryService::deleteBookLocally(const domain::entities::Book& book)
 {
     utility::BookForDeletion bookToDelete {
         .uuid = book.getUuid(),
@@ -681,7 +681,7 @@ void BookService::deleteBookLocally(const domain::entities::Book& book)
     m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
-void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
+void LibraryService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
 {
     auto book = getBook(uuid);
     auto index = getBookIndex(uuid);
@@ -697,7 +697,7 @@ void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
     emit dataChanged(index);
 }
 
-void BookService::refreshUIForBook(const QUuid& uuid)
+void LibraryService::refreshUIForBook(const QUuid& uuid)
 {
     // The dataChanged signal invalidates the book model, which then
     // causes the UI to refresh and show the new changes.

@@ -150,7 +150,7 @@ ApplicationWindow
         {
             if(spamStopper.available)
             {
-                BookController.syncWithServer();
+                LibraryController.syncWithServer();
                 UserController.syncWithServer();
                 spamStopper.available = false;
                 spamStopper.start();

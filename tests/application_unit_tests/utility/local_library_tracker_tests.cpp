@@ -4,7 +4,7 @@
 #include <ranges>
 #include "book.hpp"
 #include "book_meta_data.hpp"
-#include "downloaded_books_tracker.hpp"
+#include "local_library_tracker.hpp"
 
 
 using namespace testing;
@@ -16,7 +16,7 @@ namespace tests::application
 {
 
 
-struct ADownloadedBooksTracker : public ::testing::Test
+struct ALocalLibraryTracker : public ::testing::Test
 {
     void SetUp() override
     {
@@ -29,13 +29,13 @@ struct ADownloadedBooksTracker : public ::testing::Test
         libraryDir.removeRecursively();
     }
 
-    DownloadedBooksTracker downloadedBooksTracker;
+    LocalLibraryTracker downloadedBooksTracker;
 
 private:
     QString testLibraryName = "201xlibrum_local_library_testsatlibrum";
 };
 
-TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
+TEST_F(ALocalLibraryTracker, SucceedsTrackingABook)
 {
     // Arrange
     BookMetaData metaData {
@@ -66,7 +66,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsTrackingABook)
     EXPECT_EQ(expectedResultStatus, resultStatus);
 }
 
-TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
+TEST_F(ALocalLibraryTracker, FailsTrackingABookIfBookAlreadyExists)
 {
     // Arrange
     BookMetaData metaData {
@@ -99,7 +99,7 @@ TEST_F(ADownloadedBooksTracker, FailsTrackingABookIfBookAlreadyExists)
     EXPECT_EQ(expectedResultStatus, resultStatus);
 }
 
-TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
+TEST_F(ALocalLibraryTracker, SucceedsGettingATrackedBook)
 {
     // Arrange
     BookMetaData metaData {
@@ -135,7 +135,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingATrackedBook)
     EXPECT_EQ(expectedResult, result.value());
 }
 
-TEST_F(ADownloadedBooksTracker, FailsGettingUntrackedBook)
+TEST_F(ALocalLibraryTracker, FailsGettingUntrackedBook)
 {
     // Arrange
     auto uuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -148,7 +148,7 @@ TEST_F(ADownloadedBooksTracker, FailsGettingUntrackedBook)
     EXPECT_FALSE(result.has_value());
 }
 
-TEST_F(ADownloadedBooksTracker, SucceedsGettingAllTrackedBooks)
+TEST_F(ALocalLibraryTracker, SucceedsGettingAllTrackedBooks)
 {
     // Arrange
     BookMetaData metaData {
@@ -190,7 +190,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsGettingAllTrackedBooks)
     EXPECT_TRUE(result.size() == 3);
 }
 
-TEST_F(ADownloadedBooksTracker, FailsGettingAllTrackedBooksIfNoneExist)
+TEST_F(ALocalLibraryTracker, FailsGettingAllTrackedBooksIfNoneExist)
 {
     // Act
     auto result = downloadedBooksTracker.getTrackedBooks();
@@ -199,7 +199,7 @@ TEST_F(ADownloadedBooksTracker, FailsGettingAllTrackedBooksIfNoneExist)
     EXPECT_TRUE(result.empty());
 }
 
-TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
+TEST_F(ALocalLibraryTracker, SucceedsUntrackingATrackedBook)
 {
     // Arrange
     BookMetaData metaData {
@@ -233,7 +233,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUntrackingATrackedBook)
     EXPECT_FALSE(result.has_value());
 }
 
-TEST_F(ADownloadedBooksTracker, FailsUntrackingIfNoTrackedBookExists)
+TEST_F(ALocalLibraryTracker, FailsUntrackingIfNoTrackedBookExists)
 {
     // Arrange
     auto nonExistendUuid = QUuid::createUuid().toString(QUuid::WithoutBraces);
@@ -250,7 +250,7 @@ TEST_F(ADownloadedBooksTracker, FailsUntrackingIfNoTrackedBookExists)
     EXPECT_FALSE(result.has_value());
 }
 
-TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
+TEST_F(ALocalLibraryTracker, SucceedsUpdatingATrackedBook)
 {
     // Arrange
     BookMetaData metaData {
@@ -290,7 +290,7 @@ TEST_F(ADownloadedBooksTracker, SucceedsUpdatingATrackedBook)
     EXPECT_EQ(book.getFormat(), result.value().getFormat());
 }
 
-TEST_F(ADownloadedBooksTracker, FailsUpdatingAnUntrackedBook)
+TEST_F(ALocalLibraryTracker, FailsUpdatingAnUntrackedBook)
 {
     // Arrange
     BookMetaData metaData {

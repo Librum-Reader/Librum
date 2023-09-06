@@ -6,9 +6,9 @@
 #include "book.hpp"
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
-#include "book_service.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "i_book_storage_manager.hpp"
+#include "i_library_storage_manager.hpp"
+#include "library_service.hpp"
 #include "tag.hpp"
 
 
@@ -31,7 +31,7 @@ public:
     MOCK_METHOD(QImage, getBookCover, (), (override));
 };
 
-class BookStorageManagerMock : public IBookStorageManager
+class LibraryStorageManagerMock : public ILibraryStorageManager
 {
 public:
     MOCK_METHOD(void, addBook, (const Book&), (override));
@@ -57,12 +57,12 @@ public:
     MOCK_METHOD(void, clearUserData, (), (override));
 };
 
-struct ABookService : public ::testing::Test
+struct ALibraryService : public ::testing::Test
 {
     void SetUp() override
     {
-        bookService = std::make_unique<BookService>(&bookMetaDataHelperMock,
-                                                    &bookStorageManagerMock);
+        bookService = std::make_unique<LibraryService>(&bookMetaDataHelperMock,
+                                                       &bookStorageManagerMock);
 
         // Make sure that adding books succeeds by default
         EXPECT_CALL(bookMetaDataHelperMock, setup(_))
@@ -72,11 +72,11 @@ struct ABookService : public ::testing::Test
     }
 
     BookMetaDataHelperMock bookMetaDataHelperMock;
-    BookStorageManagerMock bookStorageManagerMock;
-    std::unique_ptr<BookService> bookService;
+    LibraryStorageManagerMock bookStorageManagerMock;
+    std::unique_ptr<LibraryService> bookService;
 };
 
-TEST_F(ABookService, SucceedsAddingABook)
+TEST_F(ALibraryService, SucceedsAddingABook)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -88,7 +88,7 @@ TEST_F(ABookService, SucceedsAddingABook)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsAddingABookIfOpeningDocumentFails)
+TEST_F(ALibraryService, FailsAddingABookIfOpeningDocumentFails)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::OpeningBookFailed;
@@ -106,7 +106,7 @@ TEST_F(ABookService, FailsAddingABookIfOpeningDocumentFails)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsDeletingABook)
+TEST_F(ALibraryService, SucceedsDeletingABook)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -128,7 +128,7 @@ TEST_F(ABookService, SucceedsDeletingABook)
     EXPECT_EQ(preDeleteBookCount - 1, bookService->getBookCount());
 }
 
-TEST_F(ABookService, FailsDeletingABookIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsDeletingABookIfBookDoesNotExist)
 {
     // Arrange
     auto nonExistentBookUuid = QUuid::createUuid();
@@ -145,10 +145,10 @@ TEST_F(ABookService, FailsDeletingABookIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsUninstallingABook)
+TEST_F(ALibraryService, SucceedsUninstallingABook)
 {
     // Arrange
-    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    QSignalSpy spy(bookService.get(), &LibraryService::dataChanged);
 
     bookService->addBook("some/path.pdf");
     bookService->addBook("some/other/path.pdf");
@@ -172,10 +172,10 @@ TEST_F(ABookService, SucceedsUninstallingABook)
     EXPECT_EQ(bookService->getBookIndex(bookUuid), arguments[0].toInt());
 }
 
-TEST_F(ABookService, FailsUninstallingABookIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsUninstallingABookIfBookDoesNotExist)
 {
     // Arrange
-    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    QSignalSpy spy(bookService.get(), &LibraryService::dataChanged);
 
     bookService->addBook("some/path.pdf");
     auto nonExistentBookUuid = QUuid::createUuid();
@@ -194,10 +194,10 @@ TEST_F(ABookService, FailsUninstallingABookIfBookDoesNotExist)
     EXPECT_EQ(0, spy.count());
 }
 
-TEST_F(ABookService, SucceedsUpdatingABook)
+TEST_F(ALibraryService, SucceedsUpdatingABook)
 {
     // Arrange
-    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    QSignalSpy spy(bookService.get(), &LibraryService::dataChanged);
 
     // Create book
     QString originalPath = "/some/path.pdf";
@@ -241,10 +241,10 @@ TEST_F(ABookService, SucceedsUpdatingABook)
               arguments[0].toInt());
 }
 
-TEST_F(ABookService, FailsUpdatingABookIfAPropertyIsTooLong)
+TEST_F(ALibraryService, FailsUpdatingABookIfAPropertyIsTooLong)
 {
     // Arrange
-    QSignalSpy spy(bookService.get(), &BookService::dataChanged);
+    QSignalSpy spy(bookService.get(), &LibraryService::dataChanged);
 
     // Create book
     BookMetaData bookMetaData { .title = "SomeBook", .authors = "SomeAuthor" };
@@ -271,7 +271,7 @@ TEST_F(ABookService, FailsUpdatingABookIfAPropertyIsTooLong)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsUpdatingABookIfBookDoesNotExist)
 {
     // Arrange
     QString bookUuid = "non-existend-uuid";
@@ -287,7 +287,7 @@ TEST_F(ABookService, FailsUpdatingABookIfBookDoesNotExist)
     EXPECT_EQ(expectedStatus, resultStatus);
 }
 
-TEST_F(ABookService, SucceedsGettingABook)
+TEST_F(ALibraryService, SucceedsGettingABook)
 {
     // Arrange
     QString path = "some/path.pdf";
@@ -312,7 +312,7 @@ TEST_F(ABookService, SucceedsGettingABook)
     EXPECT_EQ(expectedResult.getFilePath(), result->getFilePath());
 }
 
-TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsGettingABookIfBookDoesNotExist)
 {
     // Arrange
     QString bookUuid = "non-existend-uuid";
@@ -327,7 +327,7 @@ TEST_F(ABookService, FailsGettingABookIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsAddingATag)
+TEST_F(ALibraryService, SucceedsAddingATag)
 {
     // Arrange
     Tag firstTag("FirstTag");
@@ -352,7 +352,7 @@ TEST_F(ABookService, SucceedsAddingATag)
     EXPECT_EQ(secondTag, result->getTags()[1]);
 }
 
-TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
+TEST_F(ALibraryService, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
     Tag tag("FirstTag");
@@ -371,7 +371,7 @@ TEST_F(ABookService, FailsAddingATagIfTagAlreadyExists)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsAddingATagIfBookDoesNotExist)
 {
     // Arrange
     QUuid bookUuid = QUuid("non-existend-uuid");
@@ -386,7 +386,7 @@ TEST_F(ABookService, FailsAddingATagIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsRemovingATag)
+TEST_F(ALibraryService, SucceedsRemovingATag)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -405,7 +405,7 @@ TEST_F(ABookService, SucceedsRemovingATag)
     EXPECT_EQ(0, bookService->getBooks()[0].getTags().size());
 }
 
-TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
+TEST_F(ALibraryService, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -422,7 +422,7 @@ TEST_F(ABookService, FailsRemovingATagIfTagDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsRemovingATagIfBookDoesNotExist)
 {
     // Arrange
     QUuid bookUuid = QUuid("non-existend-uuid");
@@ -437,7 +437,7 @@ TEST_F(ABookService, FailsRemovingATagIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsRenamingATag)
+TEST_F(ALibraryService, SucceedsRenamingATag)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -457,7 +457,7 @@ TEST_F(ABookService, SucceedsRenamingATag)
     EXPECT_EQ(newName, bookService->getBook(bookUuid)->getTags()[0].getName());
 }
 
-TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
+TEST_F(ALibraryService, FailsRenamingATagIfTagDoesNotExist)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -475,7 +475,7 @@ TEST_F(ABookService, FailsRenamingATagIfTagDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsRenamingATagIfBookDoesNotExist)
 {
     // Arrange
     QUuid bookUuid = QUuid("non-existend-uuid");
@@ -491,7 +491,7 @@ TEST_F(ABookService, FailsRenamingATagIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsGettingAllBooks)
+TEST_F(ALibraryService, SucceedsGettingAllBooks)
 {
     // Arrange
     BookMetaData firstBookMetaData { .title = "FirstBook",
@@ -530,7 +530,7 @@ TEST_F(ABookService, SucceedsGettingAllBooks)
     }
 }
 
-TEST_F(ABookService, SucceedsGettingABookIndex)
+TEST_F(ALibraryService, SucceedsGettingABookIndex)
 {
     // Arrange
     BookMetaData firstBookMetaData { .title = "FirstBook",
@@ -562,7 +562,7 @@ TEST_F(ABookService, SucceedsGettingABookIndex)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsChangingABookCoverByDeletingIt)
+TEST_F(ALibraryService, SucceedsChangingABookCoverByDeletingIt)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
@@ -587,7 +587,7 @@ TEST_F(ABookService, SucceedsChangingABookCoverByDeletingIt)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsChangingABookCoverIfNewCoverDoesNotExist)
+TEST_F(ALibraryService, FailsChangingABookCoverIfNewCoverDoesNotExist)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
@@ -612,7 +612,7 @@ TEST_F(ABookService, FailsChangingABookCoverIfNewCoverDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsChangingABookCoverIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsChangingABookCoverIfBookDoesNotExist)
 {
     // Arrange
     auto nonExistentBook = QUuid::createUuid();
@@ -631,7 +631,7 @@ TEST_F(ABookService, FailsChangingABookCoverIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsDownloadingABook)
+TEST_F(ALibraryService, SucceedsDownloadingABook)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "FirstBook", .authors = "Author1" };
@@ -654,7 +654,7 @@ TEST_F(ABookService, SucceedsDownloadingABook)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsDownloadingBookIfItDoesNotExist)
+TEST_F(ALibraryService, FailsDownloadingBookIfItDoesNotExist)
 {
     // Arrange
     auto nonExistentBook = QUuid::createUuid();
@@ -672,7 +672,7 @@ TEST_F(ABookService, FailsDownloadingBookIfItDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, FailsGettingABookIndexIfBookDoesNotExist)
+TEST_F(ALibraryService, FailsGettingABookIndexIfBookDoesNotExist)
 {
     // Arrange
     QUuid nonExistentBook = QUuid::createUuid();
@@ -686,7 +686,7 @@ TEST_F(ABookService, FailsGettingABookIndexIfBookDoesNotExist)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsGettingTheBookCount)
+TEST_F(ALibraryService, SucceedsGettingTheBookCount)
 {
     // Arrange
     auto expectedResult = 2;
@@ -702,7 +702,7 @@ TEST_F(ABookService, SucceedsGettingTheBookCount)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookService, SucceedsRefreshingLastOpened)
+TEST_F(ALibraryService, SucceedsRefreshingLastOpened)
 {
     // Arrange
     bookService->addBook("some/path.pdf");
@@ -717,7 +717,7 @@ TEST_F(ABookService, SucceedsRefreshingLastOpened)
     EXPECT_NE(before, after);
 }
 
-TEST_F(ABookService, SucceedsMergingARemoteBookIntoALocalBook)
+TEST_F(ALibraryService, SucceedsMergingARemoteBookIntoALocalBook)
 {
     // Arrange
     BookMetaData localBookMetaData {
@@ -756,11 +756,12 @@ TEST_F(ABookService, SucceedsMergingARemoteBookIntoALocalBook)
     EXPECT_EQ(remoteBook, localBook);
 }
 
-TEST_F(ABookService, SucceedsAddingARemoteBookToALocalBook)
+TEST_F(ALibraryService, SucceedsAddingARemoteBookToALocalBook)
 {
     // Arrange
-    QSignalSpy startSpy(bookService.get(), &BookService::bookInsertionStarted);
-    QSignalSpy endSpy(bookService.get(), &BookService::bookInsertionEnded);
+    QSignalSpy startSpy(bookService.get(),
+                        &LibraryService::bookInsertionStarted);
+    QSignalSpy endSpy(bookService.get(), &LibraryService::bookInsertionEnded);
 
     BookMetaData remoteMetaData {
         .title = "SomeBook",
@@ -791,7 +792,7 @@ TEST_F(ABookService, SucceedsAddingARemoteBookToALocalBook)
     EXPECT_EQ(1, endSpy.count());
 }
 
-TEST_F(ABookService, SucceedsAddingALocalBookToRemoteServer)
+TEST_F(ALibraryService, SucceedsAddingALocalBookToRemoteServer)
 {
     // Arrange
     BookMetaData localBookMetaData {

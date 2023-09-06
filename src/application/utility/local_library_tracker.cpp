@@ -1,4 +1,4 @@
-#include "downloaded_books_tracker.hpp"
+#include "local_library_tracker.hpp"
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QFile>
@@ -14,7 +14,7 @@ using namespace domain::entities;
 namespace application::utility
 {
 
-std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
+std::vector<Book> LocalLibraryTracker::getTrackedBooks()
 {
     ensureUserLibraryExists();
 
@@ -49,7 +49,7 @@ std::vector<Book> DownloadedBooksTracker::getTrackedBooks()
     return books;
 }
 
-std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
+std::optional<Book> LocalLibraryTracker::getTrackedBook(const QUuid& uuid)
 {
     ensureUserLibraryExists();
 
@@ -72,7 +72,7 @@ std::optional<Book> DownloadedBooksTracker::getTrackedBook(const QUuid& uuid)
     return book;
 }
 
-bool DownloadedBooksTracker::trackBook(const Book& book)
+bool LocalLibraryTracker::trackBook(const Book& book)
 {
     ensureUserLibraryExists();
 
@@ -92,7 +92,7 @@ bool DownloadedBooksTracker::trackBook(const Book& book)
     return true;
 }
 
-bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
+bool LocalLibraryTracker::untrackBook(const QUuid& uuid)
 {
     ensureUserLibraryExists();
 
@@ -111,7 +111,7 @@ bool DownloadedBooksTracker::untrackBook(const QUuid& uuid)
     return success;
 }
 
-bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
+bool LocalLibraryTracker::updateTrackedBook(const Book& book)
 {
     ensureUserLibraryExists();
 
@@ -123,26 +123,26 @@ bool DownloadedBooksTracker::updateTrackedBook(const Book& book)
     return trackBook(book);
 }
 
-void DownloadedBooksTracker::setLibraryOwner(const QString& libraryOwnerEmail)
+void LocalLibraryTracker::setLibraryOwner(const QString& libraryOwnerEmail)
 {
     m_libraryOwnerEmail = libraryOwnerEmail;
     m_libraryFolder = getLibraryDir();
 }
 
-void DownloadedBooksTracker::clearLibraryOwner()
+void LocalLibraryTracker::clearLibraryOwner()
 {
     m_libraryOwnerEmail.clear();
     m_libraryFolder = QDir();
 }
 
-void DownloadedBooksTracker::ensureUserLibraryExists() const
+void LocalLibraryTracker::ensureUserLibraryExists() const
 {
     auto libraryDir = getLibraryDir();
 
     libraryDir.mkpath(libraryDir.path());
 }
 
-QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
+QJsonDocument LocalLibraryTracker::parseLibMetaFile(QByteArray&& data) const
 {
     QJsonParseError parseError;
     auto jsonDoc = QJsonDocument::fromJson(data, &parseError);
@@ -155,7 +155,7 @@ QJsonDocument DownloadedBooksTracker::parseLibMetaFile(QByteArray&& data) const
     return jsonDoc;
 }
 
-QDir DownloadedBooksTracker::getLibraryDir() const
+QDir LocalLibraryTracker::getLibraryDir() const
 {
     QDir destDir(
         QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
@@ -172,7 +172,7 @@ QDir DownloadedBooksTracker::getLibraryDir() const
     return destDir.path();
 }
 
-QString DownloadedBooksTracker::getUserLibraryName(QString email) const
+QString LocalLibraryTracker::getUserLibraryName(QString email) const
 {
     // Hash the email to get a unique user library name
     auto hash = qHash(email);

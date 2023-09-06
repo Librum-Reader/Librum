@@ -1,4 +1,4 @@
-#include "book_storage_manager.hpp"
+#include "library_storage_manager.hpp"
 #include <vector>
 
 using namespace domain::entities;
@@ -6,55 +6,55 @@ using namespace domain::entities;
 namespace application::utility
 {
 
-BookStorageManager::BookStorageManager(
-    IBookStorageGateway* bookStorageGateway,
-    IDownloadedBooksTracker* downloadedBooksTracker) :
+LibraryStorageManager::LibraryStorageManager(
+    ILibraryStorageGateway* bookStorageGateway,
+    ILocalLibraryTracker* downloadedBooksTracker) :
     m_bookStorageGateway(bookStorageGateway),
     m_downloadedBooksTracker(downloadedBooksTracker)
 {
     // Loading books
     connect(m_bookStorageGateway,
-            &IBookStorageGateway::gettingBooksMetaDataFinished, this,
-            &BookStorageManager::processBookMetadata);
+            &ILibraryStorageGateway::gettingBooksMetaDataFinished, this,
+            &LibraryStorageManager::processBookMetadata);
 
     // Save downloaded book
     connect(m_bookStorageGateway,
-            &IBookStorageGateway::downloadingBookMediaChunkReady, this,
-            &BookStorageManager::saveDownloadedBookMediaChunkToFile);
+            &ILibraryStorageGateway::downloadingBookMediaChunkReady, this,
+            &LibraryStorageManager::saveDownloadedBookMediaChunkToFile);
 
     // Downloading book media progress
     connect(m_bookStorageGateway,
-            &IBookStorageGateway::downloadingBookMediaProgressChanged, this,
-            &BookStorageManager::downloadingBookMediaProgressChanged);
+            &ILibraryStorageGateway::downloadingBookMediaProgressChanged, this,
+            &LibraryStorageManager::downloadingBookMediaProgressChanged);
 
     // Save book cover
     connect(m_bookStorageGateway,
-            &IBookStorageGateway::downloadingBookCoverFinished, this,
-            &BookStorageManager::saveDownloadedCoverToFile);
+            &ILibraryStorageGateway::downloadingBookCoverFinished, this,
+            &LibraryStorageManager::saveDownloadedCoverToFile);
 
     // Storage limit exceeded
-    connect(m_bookStorageGateway, &IBookStorageGateway::storageLimitExceeded,
-            this, &BookStorageManager::storageLimitExceeded);
+    connect(m_bookStorageGateway, &ILibraryStorageGateway::storageLimitExceeded,
+            this, &LibraryStorageManager::storageLimitExceeded);
 
     // Book upload succeeded
-    connect(m_bookStorageGateway, &IBookStorageGateway::bookUploadSucceeded,
-            this, &BookStorageManager::bookUploadSucceeded);
+    connect(m_bookStorageGateway, &ILibraryStorageGateway::bookUploadSucceeded,
+            this, &LibraryStorageManager::bookUploadSucceeded);
 }
 
-void BookStorageManager::setUserData(const QString& email,
-                                     const QString& authToken)
+void LibraryStorageManager::setUserData(const QString& email,
+                                        const QString& authToken)
 {
     m_authenticationToken = authToken;
     m_downloadedBooksTracker->setLibraryOwner(email);
 }
 
-void BookStorageManager::clearUserData()
+void LibraryStorageManager::clearUserData()
 {
     m_authenticationToken.clear();
     m_downloadedBooksTracker->clearLibraryOwner();
 }
 
-void BookStorageManager::saveDownloadedBookMediaChunkToFile(
+void LibraryStorageManager::saveDownloadedBookMediaChunkToFile(
     const QByteArray& data, bool isLastChunk, const QUuid& uuid,
     const QString& format)
 {
@@ -90,8 +90,8 @@ void BookStorageManager::saveDownloadedBookMediaChunkToFile(
     file->write(data);
 }
 
-void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
-                                                   const QUuid& uuid)
+void LibraryStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
+                                                      const QUuid& uuid)
 {
     QString destination = getBookCoverPath(uuid);
 
@@ -110,7 +110,7 @@ void BookStorageManager::saveDownloadedCoverToFile(const QByteArray& data,
     emit finishedDownloadingBookCover(uuid, destination);
 }
 
-void BookStorageManager::processBookMetadata(std::vector<Book>& books)
+void LibraryStorageManager::processBookMetadata(std::vector<Book>& books)
 {
     // Avoid storing books for logged out users by verifying login
     // status before adding books, else books might get loaded into
@@ -132,12 +132,12 @@ void BookStorageManager::processBookMetadata(std::vector<Book>& books)
     emit finishedDownloadingRemoteBooks(books);
 }
 
-bool BookStorageManager::userLoggedIn()
+bool LibraryStorageManager::userLoggedIn()
 {
     return !m_authenticationToken.isEmpty();
 }
 
-QString BookStorageManager::getBookCoverPath(const QUuid& uuid)
+QString LibraryStorageManager::getBookCoverPath(const QUuid& uuid)
 {
     auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
     auto fileName = QString("%1%2.%3").arg(m_bookCoverPrefix,
@@ -147,8 +147,8 @@ QString BookStorageManager::getBookCoverPath(const QUuid& uuid)
     return dir.filePath(fileName);
 }
 
-void BookStorageManager::deleteBookFile(const QUuid& uuid,
-                                        const QString& format)
+void LibraryStorageManager::deleteBookFile(const QUuid& uuid,
+                                           const QString& format)
 {
     auto dir = QDir(m_downloadedBooksTracker->getLibraryDir());
     auto fileName =
@@ -158,7 +158,7 @@ void BookStorageManager::deleteBookFile(const QUuid& uuid,
     bookFileToDelete.remove();
 }
 
-void BookStorageManager::addBook(const Book& bookToAdd)
+void LibraryStorageManager::addBook(const Book& bookToAdd)
 {
     // Prevent adding remote books to the local library unless "downloaded" is
     // set to true.
@@ -168,12 +168,13 @@ void BookStorageManager::addBook(const Book& bookToAdd)
     m_bookStorageGateway->createBook(m_authenticationToken, bookToAdd);
 }
 
-void BookStorageManager::addBookLocally(const domain::entities::Book& bookToAdd)
+void LibraryStorageManager::addBookLocally(
+    const domain::entities::Book& bookToAdd)
 {
     m_downloadedBooksTracker->trackBook(bookToAdd);
 }
 
-void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
+void LibraryStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
 {
     // Non-downloaded books aren't in the local library, thus can't be untracked
     if(bookToDelete.downloaded)
@@ -183,38 +184,39 @@ void BookStorageManager::deleteBook(utility::BookForDeletion bookToDelete)
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
-void BookStorageManager::deleteAllBooks()
+void LibraryStorageManager::deleteAllBooks()
 {
     QDir localLibraryDir(m_downloadedBooksTracker->getLibraryDir());
 
     localLibraryDir.removeRecursively();
 }
 
-void BookStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
+void LibraryStorageManager::deleteBookLocally(BookForDeletion bookToDelete)
 {
     m_downloadedBooksTracker->untrackBook(bookToDelete.uuid);
     deleteBookFile(bookToDelete.uuid, bookToDelete.format);
     deleteBookCoverLocally(bookToDelete.uuid);
 }
 
-void BookStorageManager::uninstallBook(const Book& book)
+void LibraryStorageManager::uninstallBook(const Book& book)
 {
     m_downloadedBooksTracker->untrackBook(book.getUuid());
     deleteBookFile(book.getUuid(), book.getFormat());
 }
 
-void BookStorageManager::downloadBookMedia(const QUuid& uuid)
+void LibraryStorageManager::downloadBookMedia(const QUuid& uuid)
 {
     m_bookStorageGateway->downloadBookMedia(m_authenticationToken, uuid);
 }
 
-void BookStorageManager::updateBook(const Book& book)
+void LibraryStorageManager::updateBook(const Book& book)
 {
     updateBookLocally(book);
     updateBookRemotely(book);
 }
 
-void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
+void LibraryStorageManager::updateBookLocally(
+    const domain::entities::Book& book)
 {
     // Prevent updating remote books in the local library unless the book is
     // downloaded. If its not downloaded, there is no local file to update.
@@ -222,13 +224,14 @@ void BookStorageManager::updateBookLocally(const domain::entities::Book& book)
         m_downloadedBooksTracker->updateTrackedBook(book);
 }
 
-void BookStorageManager::updateBookRemotely(const domain::entities::Book& book)
+void LibraryStorageManager::updateBookRemotely(
+    const domain::entities::Book& book)
 {
     m_bookStorageGateway->updateBook(m_authenticationToken, book);
 }
 
-void BookStorageManager::updateBookCoverRemotely(const QUuid& uuid,
-                                                 bool hasCover)
+void LibraryStorageManager::updateBookCoverRemotely(const QUuid& uuid,
+                                                    bool hasCover)
 {
     if(hasCover)
         m_bookStorageGateway->changeBookCover(m_authenticationToken, uuid,
@@ -237,8 +240,8 @@ void BookStorageManager::updateBookCoverRemotely(const QUuid& uuid,
         m_bookStorageGateway->deleteBookCover(m_authenticationToken, uuid);
 }
 
-QString BookStorageManager::saveBookCoverToFile(const QUuid& uuid,
-                                                const QImage& cover)
+QString LibraryStorageManager::saveBookCoverToFile(const QUuid& uuid,
+                                                   const QImage& cover)
 {
     QFile file(getBookCoverPath(uuid));
     if(!file.open(QFile::WriteOnly))
@@ -249,7 +252,7 @@ QString BookStorageManager::saveBookCoverToFile(const QUuid& uuid,
     return file.fileName();
 }
 
-bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
+bool LibraryStorageManager::deleteBookCoverLocally(const QUuid& uuid)
 {
     QFile file(getBookCoverPath(uuid));
     auto success = file.remove();
@@ -257,24 +260,24 @@ bool BookStorageManager::deleteBookCoverLocally(const QUuid& uuid)
     return success;
 }
 
-void BookStorageManager::downloadBookCover(const QUuid& uuid)
+void LibraryStorageManager::downloadBookCover(const QUuid& uuid)
 {
     m_bookStorageGateway->getCoverForBook(m_authenticationToken, uuid);
 }
 
-bool BookStorageManager::bookCoverExistsLocally(const QUuid& uuid)
+bool LibraryStorageManager::bookCoverExistsLocally(const QUuid& uuid)
 {
     QFile cover(getBookCoverPath(uuid));
     return cover.exists();
 }
 
-std::vector<Book> BookStorageManager::loadLocalBooks()
+std::vector<Book> LibraryStorageManager::loadLocalBooks()
 {
     auto m_localBooks = m_downloadedBooksTracker->getTrackedBooks();
     return m_localBooks;
 }
 
-void BookStorageManager::downloadRemoteBooks()
+void LibraryStorageManager::downloadRemoteBooks()
 {
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }

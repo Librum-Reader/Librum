@@ -2,13 +2,13 @@
 add_executable(application_unit_tests
                     main.cpp
                     ${PROJECT_SOURCE_DIR}/resources.qrc
-                    services/book_service_tests.cpp
+                    services/library_service_tests.cpp
                     services/user_service_tests.cpp
                     services/settings_service_tests.cpp
                     services/authentication_service_tests.cpp
                     
-                    utility/downloaded_books_tracker_tests.cpp
-                    utility/book_storage_manager_tests.cpp
+                    utility/local_library_tracker_tests.cpp
+                    utility/library_storage_manager_tests.cpp
                     utility/test_enum.hpp
                     utility/enum_utils_tests.cpp
                     utility/book_merger_tests.cpp

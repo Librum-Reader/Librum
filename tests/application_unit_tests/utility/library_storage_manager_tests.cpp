@@ -3,9 +3,9 @@
 #include <QString>
 #include "book.hpp"
 #include "book_for_deletion.hpp"
-#include "book_storage_manager.hpp"
-#include "i_book_storage_gateway.hpp"
-#include "i_downloaded_books_tracker.hpp"
+#include "i_library_storage_gateway.hpp"
+#include "i_local_library_tracker.hpp"
+#include "library_storage_manager.hpp"
 
 
 using namespace testing;
@@ -17,7 +17,7 @@ using namespace domain::value_objects;
 namespace tests::application
 {
 
-class BookStorageGatewayMock : public IBookStorageGateway
+class LibraryStorageGatewayMock : public ILibraryStorageGateway
 {
 public:
     MOCK_METHOD(void, createBook, (const QString&, const Book&), (override));
@@ -35,7 +35,7 @@ public:
                 (override));
 };
 
-class DownloadedBooksTrackerMock : public IDownloadedBooksTracker
+class LocalLibraryTrackerMock : public ILocalLibraryTracker
 {
 public:
     MOCK_METHOD(void, setLibraryOwner, (const QString&), (override));
@@ -49,20 +49,20 @@ public:
     MOCK_METHOD(bool, updateTrackedBook, (const Book&), (override));
 };
 
-struct ABookStorageManager : public ::testing::Test
+struct ALibraryStorageManager : public ::testing::Test
 {
     void SetUp() override
     {
-        bookStorageManager = std::make_unique<BookStorageManager>(
+        bookStorageManager = std::make_unique<LibraryStorageManager>(
             &bookStorageGatewayMock, &downloadedBooksTrackerMock);
     }
 
-    BookStorageGatewayMock bookStorageGatewayMock;
-    DownloadedBooksTrackerMock downloadedBooksTrackerMock;
-    std::unique_ptr<BookStorageManager> bookStorageManager;
+    LibraryStorageGatewayMock bookStorageGatewayMock;
+    LocalLibraryTrackerMock downloadedBooksTrackerMock;
+    std::unique_ptr<LibraryStorageManager> bookStorageManager;
 };
 
-TEST_F(ABookStorageManager, SucceedsAddingABook)
+TEST_F(ALibraryStorageManager, SucceedsAddingABook)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -75,7 +75,7 @@ TEST_F(ABookStorageManager, SucceedsAddingABook)
     bookStorageManager->addBook(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsAddingLocalBookToRemoteLibrary)
+TEST_F(ALibraryStorageManager, SucceedsAddingLocalBookToRemoteLibrary)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -89,7 +89,7 @@ TEST_F(ABookStorageManager, SucceedsAddingLocalBookToRemoteLibrary)
     bookStorageManager->addBook(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsDeletingABook)
+TEST_F(ALibraryStorageManager, SucceedsDeletingABook)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -107,7 +107,7 @@ TEST_F(ABookStorageManager, SucceedsDeletingABook)
     bookStorageManager->deleteBook(bookForDeletion);
 }
 
-TEST_F(ABookStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
+TEST_F(ALibraryStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -125,7 +125,7 @@ TEST_F(ABookStorageManager, SucceedsDeletingABookWhenBookIsNotDownloaded)
     bookStorageManager->deleteBook(bookForDeletion);
 }
 
-TEST_F(ABookStorageManager, SucceedsUninstallingABook)
+TEST_F(ALibraryStorageManager, SucceedsUninstallingABook)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData { .format = "pdf" });
@@ -137,7 +137,7 @@ TEST_F(ABookStorageManager, SucceedsUninstallingABook)
     bookStorageManager->uninstallBook(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsUpdatingABook)
+TEST_F(ALibraryStorageManager, SucceedsUpdatingABook)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -150,7 +150,7 @@ TEST_F(ABookStorageManager, SucceedsUpdatingABook)
     bookStorageManager->updateBook(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsUpdatingABookLocally)
+TEST_F(ALibraryStorageManager, SucceedsUpdatingABookLocally)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -163,7 +163,7 @@ TEST_F(ABookStorageManager, SucceedsUpdatingABookLocally)
     bookStorageManager->updateBookLocally(book);
 }
 
-TEST_F(ABookStorageManager, FailsUpdatingABookLocallyIfItsNotDownloaded)
+TEST_F(ALibraryStorageManager, FailsUpdatingABookLocallyIfItsNotDownloaded)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -176,7 +176,7 @@ TEST_F(ABookStorageManager, FailsUpdatingABookLocallyIfItsNotDownloaded)
     bookStorageManager->updateBookLocally(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsUpdatingABookRemotely)
+TEST_F(ALibraryStorageManager, SucceedsUpdatingABookRemotely)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -189,7 +189,7 @@ TEST_F(ABookStorageManager, SucceedsUpdatingABookRemotely)
     bookStorageManager->updateBookRemotely(book);
 }
 
-TEST_F(ABookStorageManager, SucceedsLoadingLocalBooks)
+TEST_F(ALibraryStorageManager, SucceedsLoadingLocalBooks)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -201,7 +201,7 @@ TEST_F(ABookStorageManager, SucceedsLoadingLocalBooks)
     bookStorageManager->loadLocalBooks();
 }
 
-TEST_F(ABookStorageManager, SucceedsLoadingRemoteBooks)
+TEST_F(ALibraryStorageManager, SucceedsLoadingRemoteBooks)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -213,7 +213,7 @@ TEST_F(ABookStorageManager, SucceedsLoadingRemoteBooks)
     bookStorageManager->downloadRemoteBooks();
 }
 
-TEST_F(ABookStorageManager, SucceedsDownloadingBook)
+TEST_F(ALibraryStorageManager, SucceedsDownloadingBook)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -225,7 +225,7 @@ TEST_F(ABookStorageManager, SucceedsDownloadingBook)
     bookStorageManager->downloadBookMedia(book.getUuid());
 }
 
-TEST_F(ABookStorageManager, SucceedsChangingBookCoverRemotely)
+TEST_F(ALibraryStorageManager, SucceedsChangingBookCoverRemotely)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -239,7 +239,7 @@ TEST_F(ABookStorageManager, SucceedsChangingBookCoverRemotely)
                                                 book.hasCover());
 }
 
-TEST_F(ABookStorageManager, SucceedsDeletingBookCoverRemotely)
+TEST_F(ALibraryStorageManager, SucceedsDeletingBookCoverRemotely)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});
@@ -253,7 +253,7 @@ TEST_F(ABookStorageManager, SucceedsDeletingBookCoverRemotely)
                                                 book.hasCover());
 }
 
-TEST_F(ABookStorageManager, SucceedsDownloadingBookCover)
+TEST_F(ALibraryStorageManager, SucceedsDownloadingBookCover)
 {
     // Arrange
     Book book("some/path.pdf", BookMetaData {});

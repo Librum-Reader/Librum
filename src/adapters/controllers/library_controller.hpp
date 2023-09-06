@@ -4,19 +4,19 @@
 #include <QString>
 #include "adapters_export.hpp"
 #include "book_dto.hpp"
-#include "i_book_controller.hpp"
-#include "i_book_service.hpp"
+#include "i_library_controller.hpp"
+#include "i_library_service.hpp"
 #include "library_model.hpp"
 
 namespace adapters::controllers
 {
 
-class ADAPTERS_EXPORT BookController : public IBookController
+class ADAPTERS_EXPORT LibraryController : public ILibraryController
 {
     Q_OBJECT
 
 public:
-    BookController(application::IBookService* bookService);
+    LibraryController(application::ILibraryService* bookService);
 
     int addBook(const QString& path) override;
     int deleteBook(const QString& uuid) override;
@@ -51,7 +51,7 @@ private:
     bool vectorContainsTag(const std::vector<domain::entities::Tag>& tags,
                            QUuid uuid);
 
-    application::IBookService* m_bookService;
+    application::ILibraryService* m_bookService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
 };

@@ -1,19 +1,20 @@
 #pragma once
 #include <QJsonObject>
 #include <QObject>
-#include "i_book_storage_access.hpp"
-#include "i_book_storage_gateway.hpp"
 #include "adapters_export.hpp"
+#include "i_library_storage_access.hpp"
+#include "i_library_storage_gateway.hpp"
 
 namespace adapters::gateways
 {
 
-class ADAPTERS_EXPORT BookStorageGateway : public application::IBookStorageGateway
+class ADAPTERS_EXPORT LibraryStorageGateway
+    : public application::ILibraryStorageGateway
 {
     Q_OBJECT
 
 public:
-    BookStorageGateway(IBookStorageAccess* bookStorageAccess);
+    LibraryStorageGateway(ILibraryStorageAccess* bookStorageAccess);
 
     void createBook(const QString& authToken,
                     const domain::entities::Book& book) override;
@@ -47,7 +48,7 @@ private:
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 
-    IBookStorageAccess* m_bookStorageAccess;
+    ILibraryStorageAccess* m_bookStorageAccess;
 };
 
 }  // namespace adapters::gateways

@@ -5,12 +5,12 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QString>
-#include "i_book_storage_access.hpp"
+#include "i_library_storage_access.hpp"
 
 namespace infrastructure::persistence
 {
 
-class BookStorageAccess : public adapters::IBookStorageAccess
+class LibraryStorageAccess : public adapters::ILibraryStorageAccess
 {
     Q_OBJECT
 

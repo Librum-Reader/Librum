@@ -17,7 +17,7 @@
 #include "book_operation_status.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
-#include "i_book_service.hpp"
+#include "i_library_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
@@ -94,9 +94,9 @@ int main(int argc, char* argv[])
                                  userController.get());
 
     // Book Stack
-    auto* bookService = config::diConfig().create<application::IBookService*>();
-    auto bookController = std::make_unique<BookController>(bookService);
-    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
+    auto* bookService = config::diConfig().create<application::ILibraryService*>();
+    auto bookController = std::make_unique<LibraryController>(bookService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "LibraryController",
                                  bookController.get());
 
     // Settings Stack
@@ -132,10 +132,10 @@ int main(int argc, char* argv[])
     QObject::connect(
         authenticationService,
         &application::IAuthenticationService::loggedIn,
-        bookService, &application::IBookService::setupUserData);
+        bookService, &application::ILibraryService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
-                     bookService, &application::IBookService::clearUserData);
+                     bookService, &application::ILibraryService::clearUserData);
 
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
@@ -154,7 +154,7 @@ int main(int argc, char* argv[])
 
     // Setup other connections
     QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
-                     bookService, &application::IBookService::updateUsedBookStorage);
+                     bookService, &application::ILibraryService::updateUsedBookStorage);
 
 
 

@@ -381,8 +381,8 @@ Page
         function saveCurrentPage()
         {
             var operationsMap = {};
-            operationsMap[BookController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
-            BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+            operationsMap[LibraryController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
+            LibraryController.updateBook(Globals.selectedBook.uuid, operationsMap);
         }
     }
 }

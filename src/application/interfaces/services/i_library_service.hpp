@@ -11,14 +11,14 @@ namespace application
 {
 
 /**
- *  The BookService handles all the operations on books.
+ *  The LibraryService handles all the operations on books.
  */
-class APPLICATION_EXPORT IBookService : public QObject
+class APPLICATION_EXPORT ILibraryService : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~IBookService() noexcept = default;
+    virtual ~ILibraryService() noexcept = default;
 
     virtual void downloadBooks() = 0;
     virtual BookOperationStatus addBook(const QString& filePath) = 0;

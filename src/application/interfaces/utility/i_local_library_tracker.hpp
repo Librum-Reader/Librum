@@ -11,17 +11,17 @@ namespace application
 {
 
 /**
- *  DownloadedBooksTracker maintains a set of files, where each file
+ *  LocalLibraryTracker maintains a set of files, where each file
  *  contains the data of one currently downloaded book. These files are
  *  used to keep track of books locally, so that "the local library"
  *  (The currently downloaded books) can also be used without an active
  *  internet connection. These local and tracked books, could then be synced
  *  with the server, when an internet connection is established.
  */
-class APPLICATION_EXPORT IDownloadedBooksTracker
+class APPLICATION_EXPORT ILocalLibraryTracker
 {
 public:
-    virtual ~IDownloadedBooksTracker() noexcept = default;
+    virtual ~ILocalLibraryTracker() noexcept = default;
 
     virtual std::vector<domain::entities::Book> getTrackedBooks() = 0;
     virtual std::optional<domain::entities::Book> getTrackedBook(

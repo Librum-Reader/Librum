@@ -1,10 +1,10 @@
 #pragma once
-#include "i_downloaded_books_tracker.hpp"
+#include "i_local_library_tracker.hpp"
 
 namespace application::utility
 {
 
-class DownloadedBooksTracker : public IDownloadedBooksTracker
+class LocalLibraryTracker : public ILocalLibraryTracker
 {
 public:
     std::vector<domain::entities::Book> getTrackedBooks() override;

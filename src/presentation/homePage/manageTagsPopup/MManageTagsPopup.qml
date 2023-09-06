@@ -99,7 +99,7 @@ Popup
                               UserController.addTag(name);
                               
                               let tagUuid = UserController.getTagUuidForName(name);
-                              BookController.addTag(Globals.selectedBook.uuid, name, tagUuid);
+                              LibraryController.addTag(Globals.selectedBook.uuid, name, tagUuid);
                           }
             }
             
@@ -149,7 +149,7 @@ Popup
                     
                     onRemoveTag: (index) => 
                                  {
-                                     BookController.removeTag(Globals.selectedBook.uuid,
+                                     LibraryController.removeTag(Globals.selectedBook.uuid,
                                                               Globals.bookTags[index].uuid);
                                  }
                     
@@ -166,7 +166,7 @@ Popup
                                       let success = UserController.renameTag(uuid, text);
                                       if(success)
                                       {
-                                          BookController.renameTags(listView.oldText, text);
+                                          LibraryController.renameTags(listView.oldText, text);
                                       }
                                   }
                 }

@@ -37,7 +37,7 @@ Item
         {
             id: sortByButton
             
-            onItemSelected: (role) => BookController.libraryModel.sortRole = role
+            onItemSelected: (role) => LibraryController.libraryModel.sortRole = role
         }
         
         MFilterByButton
@@ -47,7 +47,7 @@ Item
             onFilterSelected: (authors, format, date, onlyBooks, 
                                onlyFiles, read, unread) =>
                               {
-                                  BookController.libraryModel.setFilterRequest(authors, format, date, onlyBooks,
+                                  LibraryController.libraryModel.setFilterRequest(authors, format, date, onlyBooks,
                                                                                onlyFiles, read, unread)
                                   
                                   resetFiltersButton.visible = true;
@@ -107,7 +107,7 @@ Item
     
     function resetFilters()
     {
-        BookController.libraryModel.setFilterRequest("", "", "", false,
+        LibraryController.libraryModel.setFilterRequest("", "", "", false,
                                                      false, false, false);
         filterByButton.resetFilter();
         resetFiltersButton.visible = false;
@@ -115,7 +115,7 @@ Item
     
     function resetTags()
     {
-        BookController.libraryModel.clearFilterTags();
+        LibraryController.libraryModel.clearFilterTags();
         tagSelectorButton.clearSelections();
         resetTagsButton.visible = false;
     }

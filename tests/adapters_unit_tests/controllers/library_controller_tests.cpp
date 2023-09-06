@@ -6,12 +6,12 @@
 #include <memory>
 #include <utility>
 #include "book.hpp"
-#include "book_controller.hpp"
 #include "book_dto.hpp"
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
-#include "i_book_controller.hpp"
-#include "i_book_service.hpp"
+#include "i_library_controller.hpp"
+#include "i_library_service.hpp"
+#include "library_controller.hpp"
 #include "tag_dto.hpp"
 
 
@@ -25,7 +25,7 @@ using namespace application;
 namespace tests::adapters
 {
 
-class BookServiceMock : public IBookService
+class LibraryServiceMock : public ILibraryService
 {
 public:
     MOCK_METHOD(void, downloadBooks, (), (override));
@@ -63,9 +63,9 @@ public:
     MOCK_METHOD(void, updateUsedBookStorage, (long, long), (override));
 };
 
-struct ABookController : public ::testing::Test
+struct ALibraryController : public ::testing::Test
 {
-    ABookController()
+    ALibraryController()
     {
     }
 
@@ -75,15 +75,15 @@ struct ABookController : public ::testing::Test
             .WillOnce(ReturnRef(bookVector));
 
         bookController =
-            std::make_unique<controllers::BookController>(&bookServiceMock);
+            std::make_unique<controllers::LibraryController>(&bookServiceMock);
     }
 
     const std::vector<Book> bookVector;
-    BookServiceMock bookServiceMock;
-    std::unique_ptr<controllers::BookController> bookController;
+    LibraryServiceMock bookServiceMock;
+    std::unique_ptr<controllers::LibraryController> bookController;
 };
 
-TEST_F(ABookController, SucceedsAddingABook)
+TEST_F(ALibraryController, SucceedsAddingABook)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -101,7 +101,7 @@ TEST_F(ABookController, SucceedsAddingABook)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsDeletingABook)
+TEST_F(ALibraryController, SucceedsDeletingABook)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -119,7 +119,7 @@ TEST_F(ABookController, SucceedsDeletingABook)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
+TEST_F(ALibraryController, FailsDeletingABookIfTheBookDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -137,7 +137,7 @@ TEST_F(ABookController, FailsDeletingABookIfTheBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
+TEST_F(ALibraryController, SucceedsDeletingAllTagsWithAUuid)
 {
     // Arrange
     Book firstBook("some/path", {});
@@ -165,7 +165,7 @@ TEST_F(ABookController, SucceedsDeletingAllTagsWithAUuid)
     bookController->removeAllTagsWithUuid(firstTag.getUuid().toString());
 }
 
-TEST_F(ABookController, SucceedsNotDeletingTagsIfUuidDoesNotExist)
+TEST_F(ALibraryController, SucceedsNotDeletingTagsIfUuidDoesNotExist)
 {
     // Arrange
     Book firstBook("some/path", {});
@@ -193,7 +193,7 @@ TEST_F(ABookController, SucceedsNotDeletingTagsIfUuidDoesNotExist)
     bookController->removeAllTagsWithUuid(nonExistentUuid.toString());
 }
 
-TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfUuidIsInvalid)
+TEST_F(ALibraryController, FailsDeletingAllTagsWithAUuidIfUuidIsInvalid)
 {
     // Arrange
     QString invalidUuid = "Invalid uuid";
@@ -206,7 +206,7 @@ TEST_F(ABookController, FailsDeletingAllTagsWithAUuidIfUuidIsInvalid)
     bookController->removeAllTagsWithUuid(invalidUuid);
 }
 
-TEST_F(ABookController, SucceedsUninstallingABook)
+TEST_F(ALibraryController, SucceedsUninstallingABook)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -224,7 +224,7 @@ TEST_F(ABookController, SucceedsUninstallingABook)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsUninstallingABookIfTheBookDoesNotExist)
+TEST_F(ALibraryController, FailsUninstallingABookIfTheBookDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -242,7 +242,7 @@ TEST_F(ABookController, FailsUninstallingABookIfTheBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsRenamingTags)
+TEST_F(ALibraryController, SucceedsRenamingTags)
 {
     // Arrange
     Book firstBook("some/path", {});
@@ -271,7 +271,7 @@ TEST_F(ABookController, SucceedsRenamingTags)
     bookController->renameTags(firstTag.getName(), "NewName");
 }
 
-TEST_F(ABookController, FailsRenamingTagsIfNoTagsWithNameExist)
+TEST_F(ALibraryController, FailsRenamingTagsIfNoTagsWithNameExist)
 {
     // Arrange
     Book firstBook("some/path", {});
@@ -300,15 +300,16 @@ TEST_F(ABookController, FailsRenamingTagsIfNoTagsWithNameExist)
     bookController->renameTags("NonExistentTag", "NewName");
 }
 
-TEST_F(ABookController, SucceedsUpdatingABook)
+TEST_F(ALibraryController, SucceedsUpdatingABook)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
     Book bookToReturn("some/path.pdf", bookMetaData);
 
-    auto titleNumber = static_cast<int>(IBookController::MetaProperty::Title);
+    auto titleNumber =
+        static_cast<int>(ILibraryController::MetaProperty::Title);
     auto authorsNumber =
-        static_cast<int>(IBookController::MetaProperty::Authors);
+        static_cast<int>(ILibraryController::MetaProperty::Authors);
 
     QVariantMap operationsMap {
         { QString::number(titleNumber), "AnotherTitle" },
@@ -335,7 +336,7 @@ TEST_F(ABookController, SucceedsUpdatingABook)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
+TEST_F(ALibraryController, FailsUpdatingABookIfTheBookDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -351,7 +352,7 @@ TEST_F(ABookController, FailsUpdatingABookIfTheBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
+TEST_F(ALibraryController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
 {
     // Arrange
     BookMetaData bookMetaData { .title = "SomeTitle", .authors = "SomeAuthor" };
@@ -375,7 +376,7 @@ TEST_F(ABookController, FailsUpdatingABookIfGivenPropertyDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsDownloadingABook)
+TEST_F(ALibraryController, SucceedsDownloadingABook)
 {
     // Arrange
     QString bookUuid = QUuid::createUuid().toString();
@@ -396,7 +397,7 @@ TEST_F(ABookController, SucceedsDownloadingABook)
     EXPECT_EQ(static_cast<int>(expectedStatus), resultStatus);
 }
 
-TEST_F(ABookController, SucceedsGettingABook)
+TEST_F(ALibraryController, SucceedsGettingABook)
 {
     // Arrange
     QString title = "SomeBook";
@@ -442,7 +443,7 @@ TEST_F(ABookController, SucceedsGettingABook)
     }
 }
 
-TEST_F(ABookController, FailsGettingABookIfNoneExists)
+TEST_F(ALibraryController, FailsGettingABookIfNoneExists)
 {
     // Arrange
     std::vector<Book> booksToReturn { Book("some/path", {}) };
@@ -462,7 +463,7 @@ TEST_F(ABookController, FailsGettingABookIfNoneExists)
     EXPECT_EQ("", result.title);  // Empty book
 }
 
-TEST_F(ABookController, SucceedsGettingTheBookCount)
+TEST_F(ALibraryController, SucceedsGettingTheBookCount)
 {
     // Arrange
     std::vector<Book> booksToReturn;
@@ -483,7 +484,7 @@ TEST_F(ABookController, SucceedsGettingTheBookCount)
     EXPECT_EQ(expectedResult, result);
 }
 
-TEST_F(ABookController, SucceedsAddingATag)
+TEST_F(ALibraryController, SucceedsAddingATag)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -502,7 +503,7 @@ TEST_F(ABookController, SucceedsAddingATag)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
+TEST_F(ALibraryController, FailsAddingTagIfTagAlreadyExists)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::TagAlreadyExists;
@@ -522,7 +523,7 @@ TEST_F(ABookController, FailsAddingTagIfTagAlreadyExists)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsAddingTagIfTheUuidIsInvalid)
+TEST_F(ALibraryController, FailsAddingTagIfTheUuidIsInvalid)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::OperationFailed;
@@ -540,7 +541,7 @@ TEST_F(ABookController, FailsAddingTagIfTheUuidIsInvalid)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsRemovingATag)
+TEST_F(ALibraryController, SucceedsRemovingATag)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -558,7 +559,7 @@ TEST_F(ABookController, SucceedsRemovingATag)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
+TEST_F(ALibraryController, FailsRemovingATagIfTagDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::TagDoesNotExist;
@@ -576,7 +577,7 @@ TEST_F(ABookController, FailsRemovingATagIfTagDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsChangingBookCover)
+TEST_F(ALibraryController, SucceedsChangingBookCover)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::Success;
@@ -593,7 +594,7 @@ TEST_F(ABookController, SucceedsChangingBookCover)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsChangingBookCoverIfBookDoesNotExist)
+TEST_F(ALibraryController, FailsChangingBookCoverIfBookDoesNotExist)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::BookDoesNotExist;
@@ -610,7 +611,7 @@ TEST_F(ABookController, FailsChangingBookCoverIfBookDoesNotExist)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, FailsChangingBookCoverIfFilePathIsInvalid)
+TEST_F(ALibraryController, FailsChangingBookCoverIfFilePathIsInvalid)
 {
     // Arrange
     auto expectedResult = BookOperationStatus::OperationFailed;
@@ -627,7 +628,7 @@ TEST_F(ABookController, FailsChangingBookCoverIfFilePathIsInvalid)
     EXPECT_EQ(static_cast<int>(expectedResult), result);
 }
 
-TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
+TEST_F(ALibraryController, SucceedsRefreshingLastOpenedFlag)
 {
     // Arrange
     QString bookUuid = "some-book-uuid";
@@ -641,7 +642,7 @@ TEST_F(ABookController, SucceedsRefreshingLastOpenedFlag)
     bookController->refreshLastOpenedFlag(bookUuid);
 }
 
-TEST_F(ABookController, SucceedsSavingABookToAPath)
+TEST_F(ALibraryController, SucceedsSavingABookToAPath)
 {
     // Arrange
     QString bookUuid = "some-book-uuid";

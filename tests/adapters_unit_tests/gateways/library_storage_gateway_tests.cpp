@@ -5,8 +5,8 @@
 #include <QString>
 #include <QUuid>
 #include "book.hpp"
-#include "book_storage_gateway.hpp"
-#include "i_book_storage_access.hpp"
+#include "i_library_storage_access.hpp"
+#include "library_storage_gateway.hpp"
 
 
 using namespace testing;
@@ -17,7 +17,7 @@ using namespace domain;
 namespace tests::adapters
 {
 
-class BookStorageAccessMock : public IBookStorageAccess
+class LibraryStorageAccessMock : public ILibraryStorageAccess
 {
 public:
     MOCK_METHOD(void, createBook, (const QString&, const QJsonObject&),
@@ -36,19 +36,19 @@ public:
                 (override));
 };
 
-struct ABookStorageGateway : public ::testing::Test
+struct ALibraryStorageGateway : public ::testing::Test
 {
     void SetUp() override
     {
         bookStorageGateway =
-            std::make_unique<BookStorageGateway>(&bookStorageAccessMock);
+            std::make_unique<LibraryStorageGateway>(&bookStorageAccessMock);
     }
 
-    BookStorageAccessMock bookStorageAccessMock;
-    std::unique_ptr<BookStorageGateway> bookStorageGateway;
+    LibraryStorageAccessMock bookStorageAccessMock;
+    std::unique_ptr<LibraryStorageGateway> bookStorageGateway;
 };
 
-TEST_F(ABookStorageGateway, SucceedsCreatingABook)
+TEST_F(ALibraryStorageGateway, SucceedsCreatingABook)
 {
     // Arrange
     entities::Book book("some/path.pdf", {}, 0);
@@ -75,7 +75,7 @@ TEST_F(ABookStorageGateway, SucceedsCreatingABook)
     EXPECT_FALSE(argContent.contains("uuid"));
 }
 
-TEST_F(ABookStorageGateway, SucceedsDeletingABook)
+TEST_F(ALibraryStorageGateway, SucceedsDeletingABook)
 {
     // Arrange
     QUuid uuid;
@@ -88,7 +88,7 @@ TEST_F(ABookStorageGateway, SucceedsDeletingABook)
     bookStorageGateway->deleteBook("some_token", uuid);
 }
 
-TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
+TEST_F(ALibraryStorageGateway, SucceedsUpdatingABook)
 {
     // Arrange
     entities::Book book("some/path.pdf", {}, 0);
@@ -115,7 +115,7 @@ TEST_F(ABookStorageGateway, SucceedsUpdatingABook)
     EXPECT_FALSE(argContent.contains("uuid"));
 }
 
-TEST_F(ABookStorageGateway, SucceedsGettingBooksMetaData)
+TEST_F(ALibraryStorageGateway, SucceedsGettingBooksMetaData)
 {
     // Expect
     EXPECT_CALL(bookStorageAccessMock, getBooksMetaData(_)).Times(1);
@@ -124,7 +124,7 @@ TEST_F(ABookStorageGateway, SucceedsGettingBooksMetaData)
     bookStorageGateway->getBooksMetaData("some_token");
 }
 
-TEST_F(ABookStorageGateway, SucceedsChangingBookCover)
+TEST_F(ALibraryStorageGateway, SucceedsChangingBookCover)
 {
     // Arrange
     QUuid uuid;
@@ -138,7 +138,7 @@ TEST_F(ABookStorageGateway, SucceedsChangingBookCover)
                                         "path/to/cover.png");
 }
 
-TEST_F(ABookStorageGateway, SucceedsDeletingBookCover)
+TEST_F(ALibraryStorageGateway, SucceedsDeletingBookCover)
 {
     // Arrange
     QUuid uuid;
@@ -151,7 +151,7 @@ TEST_F(ABookStorageGateway, SucceedsDeletingBookCover)
     bookStorageGateway->deleteBookCover("some_token", uuid);
 }
 
-TEST_F(ABookStorageGateway, SucceedsGettingCoverForBook)
+TEST_F(ALibraryStorageGateway, SucceedsGettingCoverForBook)
 {
     // Arrange
     QUuid uuid;
@@ -164,7 +164,7 @@ TEST_F(ABookStorageGateway, SucceedsGettingCoverForBook)
     bookStorageGateway->getCoverForBook("some_token", uuid);
 }
 
-TEST_F(ABookStorageGateway, SucceedsDownloadingBook)
+TEST_F(ALibraryStorageGateway, SucceedsDownloadingBook)
 {
     // Arrange
     QUuid uuid;

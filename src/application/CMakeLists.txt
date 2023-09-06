@@ -3,20 +3,20 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Setup
 set(application_SRC
     interfaces/services/i_authentication_service.hpp
-    interfaces/services/i_book_service.hpp
+    interfaces/services/i_library_service.hpp
     interfaces/services/i_user_service.hpp
     interfaces/services/i_settings_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
-    interfaces/gateways/i_book_storage_gateway.hpp
+    interfaces/gateways/i_library_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_book_metadata_helper.hpp
-    interfaces/utility/i_downloaded_books_tracker.hpp
-    interfaces/utility/i_book_storage_manager.hpp
+    interfaces/utility/i_local_library_tracker.hpp
+    interfaces/utility/i_library_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
-    services/book_service.cpp
-    services/book_service.hpp
+    services/library_service.cpp
+    services/library_service.hpp
     services/user_service.cpp
     services/user_service.hpp
     services/settings_service.cpp
@@ -31,11 +31,11 @@ set(application_SRC
     
     utility/book_metadata_helper.cpp
     utility/book_metadata_helper.hpp
-    utility/downloaded_books_tracker.cpp
-    utility/downloaded_books_tracker.hpp
+    utility/local_library_tracker.cpp
+    utility/local_library_tracker.hpp
     utility/merge_status.hpp
-    utility/book_storage_manager.cpp
-    utility/book_storage_manager.hpp
+    utility/library_storage_manager.cpp
+    utility/library_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp

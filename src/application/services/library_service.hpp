@@ -5,19 +5,19 @@
 #include "application_export.hpp"
 #include "book.hpp"
 #include "i_book_metadata_helper.hpp"
-#include "i_book_service.hpp"
-#include "i_book_storage_manager.hpp"
+#include "i_library_service.hpp"
+#include "i_library_storage_manager.hpp"
 
 namespace application::services
 {
 
-class APPLICATION_EXPORT BookService : public IBookService
+class APPLICATION_EXPORT LibraryService : public ILibraryService
 {
     Q_OBJECT
 
 public:
-    BookService(IBookMetadataHelper* bookMetadataHelper,
-                IBookStorageManager* bookStorageManager);
+    LibraryService(IBookMetadataHelper* bookMetadataHelper,
+                ILibraryStorageManager* bookStorageManager);
 
     void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath) override;
@@ -77,7 +77,7 @@ private:
     void deleteBookLocally(const domain::entities::Book& book);
 
     IBookMetadataHelper* m_bookMetadataHelper;
-    IBookStorageManager* m_bookStorageManager;
+    ILibraryStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;

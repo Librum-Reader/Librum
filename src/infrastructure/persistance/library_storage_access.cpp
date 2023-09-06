@@ -1,4 +1,4 @@
-#include "book_storage_access.hpp"
+#include "library_storage_access.hpp"
 #include <QDebug>
 #include <QDir>
 #include <QEventLoop>
@@ -12,8 +12,8 @@
 namespace infrastructure::persistence
 {
 
-void BookStorageAccess::createBook(const QString& authToken,
-                                   const QJsonObject& jsonBook)
+void LibraryStorageAccess::createBook(const QString& authToken,
+                                      const QJsonObject& jsonBook)
 {
     auto request = createRequest(data::bookCreationEndpoint, authToken);
 
@@ -57,7 +57,8 @@ void BookStorageAccess::createBook(const QString& authToken,
         });
 }
 
-void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
+void LibraryStorageAccess::deleteBook(const QString& authToken,
+                                      const QUuid& uuid)
 {
     auto request = createRequest(data::bookDeletionEndpoint, authToken);
 
@@ -84,8 +85,8 @@ void BookStorageAccess::deleteBook(const QString& authToken, const QUuid& uuid)
             });
 }
 
-void BookStorageAccess::updateBook(const QString& authToken,
-                                   const QJsonObject& jsonBook)
+void LibraryStorageAccess::updateBook(const QString& authToken,
+                                      const QJsonObject& jsonBook)
 {
     auto request = createRequest(data::bookUpdateEndpoint, authToken);
 
@@ -108,8 +109,9 @@ void BookStorageAccess::updateBook(const QString& authToken,
             });
 }
 
-void BookStorageAccess::uploadBookCover(const QString& authToken,
-                                        const QUuid& uuid, const QString& path)
+void LibraryStorageAccess::uploadBookCover(const QString& authToken,
+                                           const QUuid& uuid,
+                                           const QString& path)
 {
     auto bookCover = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     QString stringUuid = uuid.toString(QUuid::WithoutBraces);
@@ -118,7 +120,7 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
     if(!file->open(QIODevice::ReadOnly))
     {
         qWarning() << QString("Could not open cover for book with uuid: %1")
-                        .arg(stringUuid);
+                          .arg(stringUuid);
 
         bookCover->deleteLater();
         file->deleteLater();
@@ -165,8 +167,8 @@ void BookStorageAccess::uploadBookCover(const QString& authToken,
             });
 }
 
-void BookStorageAccess::deleteBookCover(const QString& authToken,
-                                        const QUuid& uuid)
+void LibraryStorageAccess::deleteBookCover(const QString& authToken,
+                                           const QUuid& uuid)
 {
     QUrl endpoint = data::deleteBookCoverEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
@@ -191,7 +193,7 @@ void BookStorageAccess::deleteBookCover(const QString& authToken,
             });
 }
 
-void BookStorageAccess::getBooksMetaData(const QString& authToken)
+void LibraryStorageAccess::getBooksMetaData(const QString& authToken)
 {
     auto request = createRequest(data::booksMetadataGetEndpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
@@ -211,8 +213,8 @@ void BookStorageAccess::getBooksMetaData(const QString& authToken)
             });
 }
 
-void BookStorageAccess::downloadCoverForBook(const QString& authToken,
-                                             const QUuid& uuid)
+void LibraryStorageAccess::downloadCoverForBook(const QString& authToken,
+                                                const QUuid& uuid)
 {
     QString uuidString = uuid.toString(QUuid::WithoutBraces);
     QString endpoint = data::getBookCoverEndpoint + "/" + uuidString;
@@ -238,8 +240,8 @@ void BookStorageAccess::downloadCoverForBook(const QString& authToken,
             });
 }
 
-void BookStorageAccess::downloadBookMedia(const QString& authToken,
-                                          const QUuid& uuid)
+void LibraryStorageAccess::downloadBookMedia(const QString& authToken,
+                                             const QUuid& uuid)
 {
     auto endpoint = data::downloadBookDataEndpoint + "/" +
                     uuid.toString(QUuid::WithoutBraces);
@@ -282,7 +284,8 @@ void BookStorageAccess::downloadBookMedia(const QString& authToken,
             });
 }
 
-void BookStorageAccess::processGettingBooksMetaDataResult(QNetworkReply* reply)
+void LibraryStorageAccess::processGettingBooksMetaDataResult(
+    QNetworkReply* reply)
 {
     if(api_error_helper::apiRequestFailed(reply, 200))
     {
@@ -308,9 +311,9 @@ void BookStorageAccess::processGettingBooksMetaDataResult(QNetworkReply* reply)
     reply->deleteLater();
 }
 
-void BookStorageAccess::uploadBookMedia(const QString& uuid,
-                                        const QString& filePath,
-                                        const QString& authToken)
+void LibraryStorageAccess::uploadBookMedia(const QString& uuid,
+                                           const QString& filePath,
+                                           const QString& authToken)
 {
     auto bookData = new QHttpMultiPart(QHttpMultiPart::FormDataType);
     auto success = addFilePartToMultiPart(bookData, filePath);
@@ -345,8 +348,8 @@ void BookStorageAccess::uploadBookMedia(const QString& uuid,
             });
 }
 
-bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
-                                               const QString& path)
+bool LibraryStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
+                                                  const QString& path)
 {
     QFile* file = new QFile(path);
     if(!file->open(QIODevice::ReadOnly))
@@ -372,8 +375,8 @@ bool BookStorageAccess::addFilePartToMultiPart(QHttpMultiPart* bookData,
     return true;
 }
 
-QNetworkRequest BookStorageAccess::createRequest(const QUrl& url,
-                                                 const QString& authToken)
+QNetworkRequest LibraryStorageAccess::createRequest(const QUrl& url,
+                                                    const QString& authToken)
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");

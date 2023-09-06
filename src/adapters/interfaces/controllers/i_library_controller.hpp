@@ -14,12 +14,12 @@ namespace adapters
 {
 
 /**
- * The BookController class is exposed to the UI code and thus is the
+ * The LibraryController class is exposed to the UI code and thus is the
  * "entry point" to the application's backend for book operations. It acts as a
  * layer of abstraction which maps the user data to a format usable for the
  * application.
  */
-class ADAPTERS_EXPORT IBookController : public QObject
+class ADAPTERS_EXPORT ILibraryController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(adapters::data_models::LibraryProxyModel* libraryModel READ
@@ -27,7 +27,7 @@ class ADAPTERS_EXPORT IBookController : public QObject
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
 
 public:
-    virtual ~IBookController() noexcept = default;
+    virtual ~ILibraryController() noexcept = default;
 
     enum class MetaProperty
     {

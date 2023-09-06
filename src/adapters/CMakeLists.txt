@@ -4,19 +4,19 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
-                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_library_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
-                    interfaces/persistance/i_book_storage_access.hpp
+                    interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     interfaces/persistance/i_app_info_access.hpp
                     interfaces/controllers/i_app_info_controller.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
-                    controllers/book_controller.cpp
-                    controllers/book_controller.hpp
+                    controllers/library_controller.cpp
+                    controllers/library_controller.hpp
                     controllers/user_controller.cpp
                     controllers/user_controller.hpp
                     controllers/settings_controller.cpp
@@ -28,8 +28,8 @@ add_library(adapters
                     gateways/user_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
-                    gateways/book_storage_gateway.cpp
-                    gateways/book_storage_gateway.hpp
+                    gateways/library_storage_gateway.cpp
+                    gateways/library_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
                     gateways/app_info_gateway.hpp
                     

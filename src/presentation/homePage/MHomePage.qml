@@ -30,7 +30,7 @@ Page
     
     Connections
     {
-        target: BookController
+        target: LibraryController
         
         function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
     }
@@ -115,7 +115,7 @@ Page
                 id: pageTitle
                 Layout.topMargin: updateBanner.visible ? 24 : 44
                 titleText: "Home"
-                descriptionText: "You have " + BookController.bookCount + " books"
+                descriptionText: "You have " + LibraryController.bookCount + " books"
             }
             
             Item { Layout.fillWidth: true }
@@ -148,7 +148,7 @@ Page
             Layout.fillWidth: true
             z: 2
             
-            onSearchRequested: (query) => BookController.libraryModel.sortString = query
+            onSearchRequested: (query) => LibraryController.libraryModel.sortString = query
         }
         
         Pane
@@ -175,7 +175,7 @@ Page
                 flickDeceleration: 12500
                 maximumFlickVelocity: 3500
                 clip: true
-                model: BookController.libraryModel
+                model: LibraryController.libraryModel
                 delegate: MBook
                 {
                     id: bookDelegate
@@ -184,14 +184,14 @@ Page
                     {
                         if(model.downloaded)
                         {
-                            Globals.selectedBook = BookController.getBook(model.uuid);
+                            Globals.selectedBook = LibraryController.getBook(model.uuid);
                             internal.openBook();
                         }
                         // Don't start downloading if downloading is already in progress.
                         else if(!bookDelegate.downloading)
                         {
                             bookDelegate.downloading = true;
-                            BookController.downloadBookMedia(model.uuid);
+                            LibraryController.downloadBookMedia(model.uuid);
                         }
                     }
                     
@@ -292,7 +292,7 @@ Page
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
-            visible: bookGrid.count == 0 && BookController.bookCount !== 0
+            visible: bookGrid.count == 0 && LibraryController.bookCount !== 0
             
             onClearFilters:
             {
@@ -324,8 +324,8 @@ Page
         
         onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
-        onLeftButtonClicked: BookController.uninstallBook(Globals.selectedBook.uuid);
-        onRightButtonClicked: BookController.deleteBook(Globals.selectedBook.uuid);
+        onLeftButtonClicked: LibraryController.uninstallBook(Globals.selectedBook.uuid);
+        onRightButtonClicked: LibraryController.deleteBook(Globals.selectedBook.uuid);
     }
     
     MBookDetailsPopup
@@ -349,7 +349,7 @@ Page
         options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
-        onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
+        onAccepted: LibraryController.saveBookToFile(Globals.selectedBook.uuid, folder);
     }
     
     MWarningPopup
@@ -405,7 +405,7 @@ Page
         {
             for(let i = 0; i < files.length; ++i)
             {
-                let result =  BookController.addBook(files[i]);
+                let result =  LibraryController.addBook(files[i]);
                 if(result === BookOperationStatus.OpeningBookFailed)
                     unsupportedFilePopup.open();
             }
@@ -415,7 +415,7 @@ Page
     QtObject
     {
         id: internal
-        property bool libraryIsEmpty: BookController.bookCount === 0
+        property bool libraryIsEmpty: LibraryController.bookCount === 0
         
         property int bookWidth: 190
         property int bookHeight: 300
@@ -424,7 +424,7 @@ Page
         
         function openBookOptionsPopup(item)
         {
-            Globals.selectedBook = BookController.getBook(item.uuid);
+            Globals.selectedBook = LibraryController.getBook(item.uuid);
             Globals.bookTags = Qt.binding(function () { return item.tags; });
             bookOptionsPopup.open();
         }
@@ -434,7 +434,7 @@ Page
             if(bookOptionsPopup.opened)
                 bookOptionsPopup.close();
             
-            BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
+            LibraryController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
             loadPage(readingPage);
         }
     }

@@ -13,15 +13,15 @@ namespace application
 {
 
 /**
- * The BookStorageManager manages the book storage for the local and remote
+ * The LibraryStorageManager manages the book storage for the local and remote
  * library.
  */
-class APPLICATION_EXPORT IBookStorageManager : public QObject
+class APPLICATION_EXPORT ILibraryStorageManager : public QObject
 {
     Q_OBJECT
 
 public:
-    virtual ~IBookStorageManager() noexcept = default;
+    virtual ~ILibraryStorageManager() noexcept = default;
 
     virtual void addBook(const domain::entities::Book& bookToAdd) = 0;
     virtual void addBookLocally(const domain::entities::Book& bookToAdd) = 0;
