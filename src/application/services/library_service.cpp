@@ -18,7 +18,7 @@ namespace application::services
 {
 
 LibraryService::LibraryService(IBookMetadataHelper* bookMetadataHelper,
-                         ILibraryStorageManager* bookStorageManager) :
+                               ILibraryStorageManager* bookStorageManager) :
     m_bookMetadataHelper(bookMetadataHelper),
     m_bookStorageManager(bookStorageManager)
 {
@@ -217,7 +217,7 @@ BookOperationStatus LibraryService::updateBook(const Book& newBook)
 }
 
 BookOperationStatus LibraryService::changeBookCover(const QUuid& uuid,
-                                                 const QString& filePath)
+                                                    const QString& filePath)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -316,8 +316,8 @@ void LibraryService::addBookToLibrary(const Book& book)
 }
 
 void LibraryService::setMediaDownloadProgressForBook(const QUuid& uuid,
-                                                  qint64 bytesReceived,
-                                                  qint64 bytesTotal)
+                                                     qint64 bytesReceived,
+                                                     qint64 bytesTotal)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -333,8 +333,8 @@ void LibraryService::setMediaDownloadProgressForBook(const QUuid& uuid,
     emit downloadingBookMediaProgressChanged(getBookIndex(uuid));
 }
 
-BookOperationStatus LibraryService::addTagToBook(const QUuid& uuid,
-                                              const domain::entities::Tag& tag)
+BookOperationStatus LibraryService::addTagToBook(
+    const QUuid& uuid, const domain::entities::Tag& tag)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -363,7 +363,7 @@ BookOperationStatus LibraryService::addTagToBook(const QUuid& uuid,
 }
 
 BookOperationStatus LibraryService::removeTagFromBook(const QUuid& bookUuid,
-                                                   const QUuid& tagUuid)
+                                                      const QUuid& tagUuid)
 {
     auto* book = getBook(bookUuid);
     if(book == nullptr)
@@ -392,8 +392,8 @@ BookOperationStatus LibraryService::removeTagFromBook(const QUuid& bookUuid,
 }
 
 BookOperationStatus LibraryService::renameTagOfBook(const QUuid& bookUuid,
-                                                 const QUuid& tagUuid,
-                                                 const QString& newName)
+                                                    const QUuid& tagUuid,
+                                                    const QString& newName)
 {
     auto* book = getBook(bookUuid);
     if(book == nullptr)
@@ -472,7 +472,7 @@ int LibraryService::getBookCount() const
 }
 
 BookOperationStatus LibraryService::saveBookToFile(const QUuid& uuid,
-                                                const QString& pathToFolder)
+                                                   const QString& pathToFolder)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -514,7 +514,7 @@ bool LibraryService::refreshLastOpenedDateOfBook(const QUuid& uuid)
 }
 
 void LibraryService::processDownloadedBook(const QUuid& uuid,
-                                        const QString& filePath)
+                                           const QString& filePath)
 {
     auto* book = getBook(uuid);
 
@@ -528,7 +528,7 @@ void LibraryService::processDownloadedBook(const QUuid& uuid,
 }
 
 void LibraryService::processDownloadedBookCover(const QUuid& uuid,
-                                             const QString& filePath)
+                                                const QString& filePath)
 {
     auto* book = getBook(uuid);
 
@@ -539,7 +539,8 @@ void LibraryService::processDownloadedBookCover(const QUuid& uuid,
     refreshUIWithNewCover(uuid, filePath);
 }
 
-void LibraryService::updateUsedBookStorage(long usedStorage, long bookStorageLimit)
+void LibraryService::updateUsedBookStorage(long usedStorage,
+                                           long bookStorageLimit)
 {
     m_usedBookStorage = usedStorage;
     m_bookStorageLimit = bookStorageLimit;
@@ -681,7 +682,8 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
-void LibraryService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
+void LibraryService::refreshUIWithNewCover(const QUuid& uuid,
+                                           const QString& path)
 {
     auto book = getBook(uuid);
     auto index = getBookIndex(uuid);

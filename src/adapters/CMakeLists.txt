@@ -49,6 +49,8 @@ add_library(adapters
                     DTOs/register_dto.hpp
                     DTOs/book_dto.hpp
                     DTOs/tag_dto.hpp
+                    interfaces/controllers/i_book_controller.hpp
+                    controllers/book_controller.hpp controllers/book_controller.cpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)

@@ -13,8 +13,10 @@
 #include <QString>
 #include <QTranslator>
 #include <memory>
+#include "app_info_controller.hpp"
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
+#include "book_service.hpp"
 #include "dependency_injection.hpp"
 #include "document_item.hpp"
 #include "i_library_service.hpp"
@@ -22,7 +24,6 @@
 #include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
-#include "app_info_controller.hpp"
 #include "page_item.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
@@ -93,10 +94,16 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController",
                                  userController.get());
 
-    // Book Stack
-    auto* bookService = config::diConfig().create<application::ILibraryService*>();
-    auto bookController = std::make_unique<LibraryController>(bookService);
+    // Library Stack
+    auto* libraryService = config::diConfig().create<application::ILibraryService*>();
+    auto libraryController = std::make_unique<LibraryController>(libraryService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "LibraryController",
+                                 libraryController.get());
+
+    // Book Stack
+    auto bookService = std::make_unique<application::services::BookService>(libraryService);
+    auto bookController = std::make_unique<BookController>(bookService.get());
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
     // Settings Stack
@@ -132,10 +139,10 @@ int main(int argc, char* argv[])
     QObject::connect(
         authenticationService,
         &application::IAuthenticationService::loggedIn,
-        bookService, &application::ILibraryService::setupUserData);
+        libraryService, &application::ILibraryService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
-                     bookService, &application::ILibraryService::clearUserData);
+                     libraryService, &application::ILibraryService::clearUserData);
 
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
@@ -154,7 +161,7 @@ int main(int argc, char* argv[])
 
     // Setup other connections
     QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
-                     bookService, &application::ILibraryService::updateUsedBookStorage);
+                     libraryService, &application::ILibraryService::updateUsedBookStorage);
 
 
 

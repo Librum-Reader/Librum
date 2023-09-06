@@ -109,6 +109,8 @@ add_library(application
                     ${application_SRC}
                     interfaces/gateways/i_app_info_gateway.hpp
                     interfaces/services/i_app_info_service.hpp
+                    interfaces/services/i_book_service.hpp
+                    services/book_service.hpp services/book_service.cpp
                     
 )
 

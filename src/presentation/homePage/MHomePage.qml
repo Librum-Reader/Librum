@@ -434,6 +434,8 @@ Page
             if(bookOptionsPopup.opened)
                 bookOptionsPopup.close();
             
+            BookController.setUp(Globals.selectedBook.uuid);
+            
             LibraryController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
             loadPage(readingPage);
         }

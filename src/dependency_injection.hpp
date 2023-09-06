@@ -8,16 +8,18 @@
 #include "authentication_controller.hpp"
 #include "authentication_gateway.hpp"
 #include "authentication_service.hpp"
+#include "book_controller.hpp"
 #include "book_metadata_helper.hpp"
-#include "library_storage_access.hpp"
-#include "local_library_tracker.hpp"
+#include "book_service.hpp"
 #include "i_app_info_access.hpp"
 #include "i_app_info_service.hpp"
 #include "i_book_metadata_helper.hpp"
 #include "library_controller.hpp"
 #include "library_service.hpp"
+#include "library_storage_access.hpp"
 #include "library_storage_gateway.hpp"
 #include "library_storage_manager.hpp"
+#include "local_library_tracker.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
 #include "user_controller.hpp"
@@ -54,12 +56,17 @@ const auto diConfig = []
         di::bind<IAppInfoGateway>().to<gateways::AppInfoGateway>(),
         di::bind<IAppInfoAccess>().to<persistence::AppInfoAccess>(),
 
-        // Books
+        // Library
         di::bind<ILibraryController>().to<controllers::LibraryController>(),
         di::bind<ILibraryService>().to<services::LibraryService>(),
         di::bind<ILibraryStorageGateway>()
             .to<gateways::LibraryStorageGateway>(),
-        di::bind<ILibraryStorageAccess>().to<persistence::LibraryStorageAccess>(),
+        di::bind<ILibraryStorageAccess>()
+            .to<persistence::LibraryStorageAccess>(),
+
+        // Books
+        di::bind<IBookController>().to<controllers::BookController>(),
+        di::bind<IBookService>().to<services::BookService>(),
 
         // User
         di::bind<IUserController>().to<controllers::UserController>(),

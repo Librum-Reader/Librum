@@ -17,7 +17,7 @@ class APPLICATION_EXPORT LibraryService : public ILibraryService
 
 public:
     LibraryService(IBookMetadataHelper* bookMetadataHelper,
-                ILibraryStorageManager* bookStorageManager);
+                   ILibraryStorageManager* bookStorageManager);
 
     void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath) override;
@@ -82,7 +82,7 @@ private:
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 15'000;
+    const int m_fetchChangedInterval = 2'000;
 };
 
 }  // namespace application::services
