@@ -5,6 +5,7 @@
 #include <vector>
 #include "application_export.hpp"
 #include "mupdf/classes.h"
+#include "text_selector.hpp"
 
 namespace application::core
 {
@@ -22,15 +23,14 @@ public:
 
     void setInvertColor(bool newInvertColor);
 
-    QList<mupdf::FzQuad>& getBufferedSelectionRects();
-    void generateSelectionRects(mupdf::FzPoint start, mupdf::FzPoint end);
-
     mupdf::FzPixmap renderPage();
 
     bool pointIsAboveText(const mupdf::FzPoint& point);
     bool pointIsAboveLink(const mupdf::FzPoint& point);
     mupdf::FzLink getLinkAtPoint(const mupdf::FzPoint& point);
 
+    QList<mupdf::FzQuad>& getBufferedSelectionRects();
+    void generateSelectionRects(mupdf::FzPoint start, mupdf::FzPoint end);
     QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForWordSelection(
         mupdf::FzPoint begin, mupdf::FzPoint end);
     QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
@@ -50,6 +50,7 @@ private:
     std::unique_ptr<mupdf::FzStextPage> m_textPage;
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
+    utils::TextSelector m_textSelector;
     QList<mupdf::FzQuad> m_bufferedSelectionRects;
     QList<mupdf::FzLink> m_links;
     std::vector<fz_rect> m_symbolBounds;

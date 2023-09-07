@@ -61,6 +61,8 @@ set(application_SRC
     core/utils/book_searcher.hpp
     core/utils/book_searcher.cpp
     core/utils/fz_utils.hpp
+    core/utils/text_selector.hpp
+    core/utils/text_selector.cpp
 )
 
 
