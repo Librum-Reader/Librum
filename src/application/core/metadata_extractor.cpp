@@ -1,6 +1,7 @@
 #include "metadata_extractor.hpp"
 #include <QDebug>
 #include <QFileInfo>
+#include "fz_utils.hpp"
 #include "page_generator.hpp"
 
 
@@ -140,7 +141,7 @@ QImage MetadataExtractor::getCover()
     try
     {
         core::PageGenerator page(m_document.get(), 0);
-        return page.renderPage();
+        return utils::qImageFromPixmap(page.renderPage());
     }
     catch(...)
     {

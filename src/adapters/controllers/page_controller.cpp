@@ -1,5 +1,8 @@
 #include "page_controller.hpp"
+#include "fz_utils.hpp"
 #include "mupdf/classes.h"
+
+using namespace application::core;
 
 namespace adapters::controllers
 {
@@ -31,27 +34,39 @@ void PageController::setZoom(float newZoom)
 
 QImage PageController::renderPage()
 {
-    return m_pageGenerator.renderPage();
+    return utils::qImageFromPixmap(m_pageGenerator.renderPage());
 }
 
-bool PageController::pointIsAboveText(const QPoint& point)
+bool PageController::pointIsAboveText(const QPointF& point)
 {
-    return m_pageGenerator.pointIsAboveText(point);
+    auto fzPoint = utils::qPointToFzPoint(point);
+    return m_pageGenerator.pointIsAboveText(fzPoint);
 }
 
-bool PageController::pointIsAboveLink(const QPoint& point)
+bool PageController::pointIsAboveLink(const QPointF& point)
 {
-    return m_pageGenerator.pointIsAboveLink(point);
+    auto fzPoint = utils::qPointToFzPoint(point);
+    return m_pageGenerator.pointIsAboveLink(fzPoint);
 }
 
-const char* PageController::getLinkUriAtPoint(const QPoint& point)
+const char* PageController::getLinkUriAtPoint(const QPointF& point)
 {
-    return m_pageGenerator.getLinkAtPoint(point).uri();
+    auto fzPoint = utils::qPointToFzPoint(point);
+    return m_pageGenerator.getLinkAtPoint(fzPoint).uri();
 }
 
-QList<QRectF>& PageController::getBufferedSelectionRects()
+QList<QRectF> PageController::getBufferedSelectionRects()
 {
-    return m_pageGenerator.getBufferedSelectionRects();
+    QList<QRectF> result;
+
+    auto& rects = m_pageGenerator.getBufferedSelectionRects();
+    rects.reserve(rects.size());
+    for(auto& rect : rects)
+    {
+        result.append(utils::fzQuadToQRectF(rect));
+    }
+
+    return result;
 }
 
 void PageController::setInvertColor(bool newInvertColor)
@@ -62,25 +77,44 @@ void PageController::setInvertColor(bool newInvertColor)
 void PageController::generateSelectionRects(QPointF start, QPointF end)
 {
     m_pageGenerator.getBufferedSelectionRects().clear();
-    return m_pageGenerator.generateSelectionRects(start, end);
+    return m_pageGenerator.generateSelectionRects(utils::qPointToFzPoint(start),
+                                                  utils::qPointToFzPoint(end));
+}
+
+void PageController::clearBufferedSelectionRects()
+{
+    m_pageGenerator.getBufferedSelectionRects().clear();
 }
 
 QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(
-    QPointF begin, QPointF end)
+    QPointF start, QPointF end)
 {
-    return m_pageGenerator.getPositionsForWordSelection(begin, end);
+    auto fzStart = utils::qPointToFzPoint(start);
+    auto fzEnd = utils::qPointToFzPoint(end);
+
+    auto res = m_pageGenerator.getPositionsForWordSelection(fzStart, fzEnd);
+    return QPointFPair(utils::fzPointToQPoint(res.first),
+                       utils::fzPointToQPoint(res.second));
 }
 
 QPair<QPointF, QPointF> PageController::getPositionsForLineSelection(
     QPointF point)
 {
-    return m_pageGenerator.getPositionsForLineSelection(point);
+    auto fzPoint = utils::qPointToFzPoint(point);
+
+    auto res = m_pageGenerator.getPositionsForLineSelection(fzPoint);
+    return QPointFPair(utils::fzPointToQPoint(res.first),
+                       utils::fzPointToQPoint(res.second));
 }
 
 QString PageController::getTextFromSelection(const QPointF& start,
                                              const QPointF& end)
 {
-    return m_pageGenerator.getTextFromSelection(start, end);
+    auto fzStart = utils::qPointToFzPoint(start);
+    auto fzEnd = utils::qPointToFzPoint(end);
+    auto res = m_pageGenerator.getTextFromSelection(fzStart, fzEnd);
+
+    return QString::fromStdString(res);
 }
 
 }  // namespace adapters::controllers

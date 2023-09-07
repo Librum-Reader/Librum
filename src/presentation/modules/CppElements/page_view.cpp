@@ -224,8 +224,7 @@ void PageView::keyPressEvent(QKeyEvent* event)
 
 void PageView::paintSelectionOnPage(QPainter& painter)
 {
-    auto& bufferedSelectionRects =
-        m_pageController->getBufferedSelectionRects();
+    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
     for(auto rect : bufferedSelectionRects)
     {
         QColor selectionColor(134, 171, 175, 125);
@@ -242,7 +241,7 @@ void PageView::createSelection()
 
 void PageView::removeSelection()
 {
-    m_pageController->getBufferedSelectionRects().clear();
+    m_pageController->clearBufferedSelectionRects();
     update();
 
     m_selectionStart = QPointF(0, 0);

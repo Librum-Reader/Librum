@@ -20,8 +20,8 @@ void imageCleanupHandler(void* data)
 }  // namespace
 
 // Public
-QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
-                                float newZoom)
+inline QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
+                                       float newZoom)
 {
     mupdf::FzPoint fzPoint(point.x(), point.y());
     auto oldMatrix = mupdf::FzMatrix();
@@ -41,14 +41,14 @@ QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
     return QPointF(fzPoint.x, fzPoint.y);
 }
 
-QRectF fzQuadToQRectF(const mupdf::FzQuad& rect)
+inline QRectF fzQuadToQRectF(const mupdf::FzQuad& rect)
 {
     float width = rect.ur.x - rect.ul.x;
     float height = rect.ll.y - rect.ul.y;
     return QRectF(rect.ul.x, rect.ul.y, width, height);
 }
 
-QImage qImageFromPixmap(mupdf::FzPixmap pixmap)
+inline QImage qImageFromPixmap(mupdf::FzPixmap pixmap)
 {
     int width = pixmap.w();
     int height = pixmap.h();
@@ -63,6 +63,16 @@ QImage qImageFromPixmap(mupdf::FzPixmap pixmap)
     QImage image(destination, width, height, stride, QImage::Format_RGB888,
                  imageCleanupHandler, destination);
     return image;
+}
+
+inline mupdf::FzPoint qPointToFzPoint(const QPointF& qPoint)
+{
+    return mupdf::FzPoint(qPoint.x(), qPoint.y());
+}
+
+inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint)
+{
+    return QPointF(fzPoint.x, fzPoint.y);
 }
 
 }  // namespace application::core::utils

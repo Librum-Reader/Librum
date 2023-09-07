@@ -28,12 +28,13 @@ public:
 
     virtual QImage renderPage() = 0;
 
-    virtual bool pointIsAboveText(const QPoint& point) = 0;
-    virtual bool pointIsAboveLink(const QPoint& point) = 0;
+    virtual bool pointIsAboveText(const QPointF& point) = 0;
+    virtual bool pointIsAboveLink(const QPointF& point) = 0;
 
-    virtual const char* getLinkUriAtPoint(const QPoint& point) = 0;
+    virtual const char* getLinkUriAtPoint(const QPointF& point) = 0;
 
-    virtual QList<QRectF>& getBufferedSelectionRects() = 0;
+    virtual QList<QRectF> getBufferedSelectionRects() = 0;
+    virtual void clearBufferedSelectionRects() = 0;
     virtual void generateSelectionRects(QPointF start, QPointF end) = 0;
     virtual QPair<QPointF, QPointF> getPositionsForWordSelection(
         QPointF begin, QPointF end) = 0;

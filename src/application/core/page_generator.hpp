@@ -1,11 +1,8 @@
 #pragma once
-#include <QImage>
 #include <QList>
 #include <QPair>
-#include <QPoint>
-#include <QPointF>
-#include <QRectF>
-#include <QString>
+#include <string>
+#include <vector>
 #include "application_export.hpp"
 #include "mupdf/classes.h"
 
@@ -25,19 +22,21 @@ public:
 
     void setInvertColor(bool newInvertColor);
 
-    QList<QRectF>& getBufferedSelectionRects();
-    void generateSelectionRects(QPointF start, QPointF end);
+    QList<mupdf::FzQuad>& getBufferedSelectionRects();
+    void generateSelectionRects(mupdf::FzPoint start, mupdf::FzPoint end);
 
-    QImage renderPage();
+    mupdf::FzPixmap renderPage();
 
-    bool pointIsAboveText(const QPoint& point);
-    bool pointIsAboveLink(const QPoint& point);
-    mupdf::FzLink getLinkAtPoint(const QPoint& point);
+    bool pointIsAboveText(const mupdf::FzPoint& point);
+    bool pointIsAboveLink(const mupdf::FzPoint& point);
+    mupdf::FzLink getLinkAtPoint(const mupdf::FzPoint& point);
 
-    QPair<QPointF, QPointF> getPositionsForWordSelection(QPointF begin,
-                                                         QPointF end);
-    QPair<QPointF, QPointF> getPositionsForLineSelection(QPointF point);
-    QString getTextFromSelection(const QPointF& start, const QPointF& end);
+    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForWordSelection(
+        mupdf::FzPoint begin, mupdf::FzPoint end);
+    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
+        mupdf::FzPoint point);
+    std::string getTextFromSelection(const mupdf::FzPoint& start,
+                                     const mupdf::FzPoint& end);
 
 private:
     void setupDisplayList(const mupdf::FzRect& boundPage);
@@ -51,13 +50,13 @@ private:
     std::unique_ptr<mupdf::FzStextPage> m_textPage;
     mupdf::FzDisplayList m_displayList;
     mupdf::FzMatrix m_matrix;
-    QList<QRectF> m_bufferedSelectionRects;
+    QList<mupdf::FzQuad> m_bufferedSelectionRects;
     QList<mupdf::FzLink> m_links;
     std::vector<fz_rect> m_symbolBounds;
     bool m_invertColor = false;
 
-    bool m_pageImageOutdated = true;
-    QImage m_pageImage;
+    bool m_pixmapOutdated = true;
+    mupdf::FzPixmap m_pixmap;
 };
 
 }  // namespace application::core
