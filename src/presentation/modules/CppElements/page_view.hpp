@@ -61,11 +61,9 @@ private:
     void selectSingleWord();
     void selectMultipleWords();
     void selectLine();
-    void selectPosition(QRectF rect);
     void copySelectedText();
     void removeSelection();
-    void drawSelection();
-    void generateSelection();
+    void createSelection();
     void paintSelectionOnPage(QPainter& painter);
 
     void resetCursorToDefault();
@@ -73,7 +71,7 @@ private:
 
     std::unique_ptr<adapters::controllers::PageController> m_pageController;
     adapters::controllers::BookController* m_bookController = nullptr;
-    int m_currentPage = 0;
+    int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;
     QPointF m_selectionStart;

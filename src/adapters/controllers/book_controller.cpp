@@ -1,7 +1,8 @@
 #include "book_controller.hpp"
 #include <QUuid>
+#include "fz_utils.hpp"
 
-using application::core::FilteredTOCModel;
+using namespace application::core;
 
 namespace adapters::controllers
 {
@@ -15,8 +16,16 @@ BookController::BookController(application::IBookService* bookService) :
     connect(m_bookService, &application::IBookService::highlightText, this,
             [this](int pageNumber, mupdf::FzQuad quad)
             {
-                auto rect = fzQuadToQRectF(quad);
-                emit highlightText(pageNumber, rect);
+                auto rect = utils::fzQuadToQRectF(quad);
+                QPointF left(rect.left(), rect.center().y());
+                QPointF right(rect.right(), rect.center().y());
+
+                // The book service returns the position without the zoom aplied
+                // so we need to scale it to the current zoom.
+                left = utils::scalePointToCurrentZoom(left, 1, getZoom());
+                right = utils::scalePointToCurrentZoom(right, 1, getZoom());
+
+                emit highlightText(pageNumber, left, right);
             });
 }
 
@@ -90,13 +99,6 @@ void BookController::setZoom(float newZoom)
 FilteredTOCModel* BookController::getTableOfContents()
 {
     return m_bookService->getTableOfContents();
-}
-
-QRectF BookController::fzQuadToQRectF(const mupdf::FzQuad& rect)
-{
-    float width = rect.ur.x - rect.ul.x;
-    float height = rect.ll.y - rect.ul.y;
-    return QRectF(rect.ul.x, rect.ul.y, width, height);
 }
 
 }  // namespace adapters::controllers

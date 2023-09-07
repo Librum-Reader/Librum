@@ -36,9 +36,6 @@ public:
     application::core::FilteredTOCModel* getTableOfContents() override;
 
 private:
-    QRectF fzQuadToQRectF(const mupdf::FzQuad& rect);
-
-private:
     application::IBookService* m_bookService;
 };
 

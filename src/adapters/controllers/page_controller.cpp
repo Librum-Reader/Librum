@@ -34,12 +34,6 @@ QImage PageController::renderPage()
     return m_pageGenerator.renderPage();
 }
 
-QPointF PageController::scalePointToCurrentZoom(const QPointF& point,
-                                                float oldZoom)
-{
-    return m_pageGenerator.scalePointToCurrentZoom(point, oldZoom);
-}
-
 bool PageController::pointIsAboveText(const QPoint& point)
 {
     return m_pageGenerator.pointIsAboveText(point);
@@ -67,6 +61,7 @@ void PageController::setInvertColor(bool newInvertColor)
 
 void PageController::generateSelectionRects(QPointF start, QPointF end)
 {
+    m_pageGenerator.getBufferedSelectionRects().clear();
     return m_pageGenerator.generateSelectionRects(start, end);
 }
 

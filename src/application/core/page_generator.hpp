@@ -23,19 +23,21 @@ public:
     float getZoom() const;
     void setZoom(float newZoom);
 
+    void setInvertColor(bool newInvertColor);
+
     QList<QRectF>& getBufferedSelectionRects();
+    void generateSelectionRects(QPointF start, QPointF end);
 
     QImage renderPage();
-    QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom);
-    void setInvertColor(bool newInvertColor);
-    void generateSelectionRects(QPointF start, QPointF end);
+
+    bool pointIsAboveText(const QPoint& point);
+    bool pointIsAboveLink(const QPoint& point);
+    mupdf::FzLink getLinkAtPoint(const QPoint& point);
+
     QPair<QPointF, QPointF> getPositionsForWordSelection(QPointF begin,
                                                          QPointF end);
     QPair<QPointF, QPointF> getPositionsForLineSelection(QPointF point);
     QString getTextFromSelection(const QPointF& start, const QPointF& end);
-    bool pointIsAboveText(const QPoint& point);
-    bool pointIsAboveLink(const QPoint& point);
-    mupdf::FzLink getLinkAtPoint(const QPoint& point);
 
 private:
     void setupDisplayList(const mupdf::FzRect& boundPage);
@@ -43,8 +45,6 @@ private:
     void setupSymbolBounds();
     void setupLinks();
     mupdf::FzPixmap getEmptyPixmap() const;
-    QImage imageFromPixmap(mupdf::FzPixmap pixmap);
-    QRectF fzQuadToQRectF(const mupdf::FzQuad& rect);
 
     const mupdf::FzDocument* m_document;
     std::unique_ptr<mupdf::FzPage> m_page;

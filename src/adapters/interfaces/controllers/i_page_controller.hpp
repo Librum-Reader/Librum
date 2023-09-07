@@ -24,14 +24,16 @@ public:
     virtual float getZoom() = 0;
     virtual void setZoom(float newZoom) = 0;
 
-    Q_INVOKABLE virtual QImage renderPage() = 0;
-    virtual QPointF scalePointToCurrentZoom(const QPointF& point,
-                                            float oldZoom) = 0;
+    virtual void setInvertColor(bool newInvertColor) = 0;
+
+    virtual QImage renderPage() = 0;
+
     virtual bool pointIsAboveText(const QPoint& point) = 0;
     virtual bool pointIsAboveLink(const QPoint& point) = 0;
+
     virtual const char* getLinkUriAtPoint(const QPoint& point) = 0;
+
     virtual QList<QRectF>& getBufferedSelectionRects() = 0;
-    virtual void setInvertColor(bool newInvertColor) = 0;
     virtual void generateSelectionRects(QPointF start, QPointF end) = 0;
     virtual QPair<QPointF, QPointF> getPositionsForWordSelection(
         QPointF begin, QPointF end) = 0;

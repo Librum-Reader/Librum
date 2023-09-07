@@ -60,6 +60,7 @@ set(application_SRC
     core/toc/filtered_toc_model.cpp
     core/utils/book_searcher.hpp
     core/utils/book_searcher.cpp
+    core/utils/fz_utils.hpp
 )
 
 
@@ -131,6 +132,7 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )
 
 # Make sure to ignore warnings from mupdf by adding it as a system include directory

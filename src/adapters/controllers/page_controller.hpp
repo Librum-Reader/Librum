@@ -20,8 +20,6 @@ public:
     void setZoom(float newZoom) override;
 
     QImage renderPage() override;
-    QPointF scalePointToCurrentZoom(const QPointF& point,
-                                    float oldZoom) override;
     bool pointIsAboveText(const QPoint& point) override;
     bool pointIsAboveLink(const QPoint& point) override;
     const char* getLinkUriAtPoint(const QPoint& point) override;

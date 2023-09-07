@@ -4,6 +4,7 @@
 #include "mupdf/classes.h"
 #include "mupdf/classes2.h"
 #include "mupdf/functions.h"
+#include "utils/fz_utils.hpp"
 
 namespace application::core
 {
@@ -81,7 +82,7 @@ QImage PageGenerator::renderPage()
     if(m_invertColor)
         pixmap.fz_invert_pixmap();
 
-    m_pageImage = imageFromPixmap(pixmap);
+    m_pageImage = utils::qImageFromPixmap(pixmap);
     m_pageImageOutdated = false;
     return m_pageImage;
 }
@@ -102,23 +103,6 @@ void imageCleanupHandler(void* data)
 {
     unsigned char* samples = static_cast<unsigned char*>(data);
     delete[] samples;
-}
-
-QImage PageGenerator::imageFromPixmap(mupdf::FzPixmap pixmap)
-{
-    int width = pixmap.w();
-    int height = pixmap.h();
-    int stride = pixmap.stride();
-    auto samples = pixmap.samples();
-
-    // Copy samples
-    std::size_t length = stride * height;
-    unsigned char* destination = new unsigned char[length + 1];
-    std::copy(samples, samples + length + 1, destination);
-
-    QImage image(destination, width, height, stride, QImage::Format_RGB888,
-                 imageCleanupHandler, destination);
-    return image;
 }
 
 int PageGenerator::getWidth() const
@@ -143,24 +127,6 @@ float PageGenerator::getZoom() const
 QList<QRectF>& PageGenerator::getBufferedSelectionRects()
 {
     return m_bufferedSelectionRects;
-}
-
-QPointF PageGenerator::scalePointToCurrentZoom(const QPointF& point,
-                                               float oldZoom)
-{
-    mupdf::FzPoint fzPoint(point.x(), point.y());
-    auto oldMatrix = mupdf::FzMatrix();
-    oldMatrix.a = oldZoom;
-    oldMatrix.d = oldZoom;
-
-    // Normalize point
-    auto invMatrix = oldMatrix.fz_invert_matrix();
-    fzPoint = fzPoint.fz_transform_point(invMatrix);
-
-    // Transform point to the current matrix
-    fzPoint = fzPoint.fz_transform_point(m_matrix);
-
-    return QPointF(fzPoint.x, fzPoint.y);
 }
 
 void PageGenerator::setZoom(float newZoom)
@@ -201,7 +167,7 @@ void PageGenerator::generateSelectionRects(QPointF start, QPointF end)
     {
         fz_quad hit = hits[i];
         hit = mupdf::ll_fz_transform_quad(hit, *m_matrix.internal());
-        m_bufferedSelectionRects.append(fzQuadToQRectF(hit));
+        m_bufferedSelectionRects.append(utils::fzQuadToQRectF(hit));
     }
 }
 
@@ -243,13 +209,6 @@ QPair<QPointF, QPointF> PageGenerator::getPositionsForLineSelection(
 
     return QPair<QPointF, QPointF>(QPointF(fzBegin.x, fzBegin.y),
                                    QPointF(fzEnd.x, fzEnd.y));
-}
-
-QRectF PageGenerator::fzQuadToQRectF(const mupdf::FzQuad& rect)
-{
-    float width = rect.ur.x - rect.ul.x;
-    float height = rect.ll.y - rect.ul.y;
-    return QRectF(rect.ul.x, rect.ul.y, width, height);
 }
 
 bool PageGenerator::pointIsAboveText(const QPoint& point)

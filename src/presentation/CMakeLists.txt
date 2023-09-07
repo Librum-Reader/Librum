@@ -27,7 +27,6 @@ target_link_libraries(presentation
                     application
                     Qt6::Core
                     Qt6::Quick
-                    ${MUPDF_OUTPUT}
 )
 
 target_include_directories(presentation
