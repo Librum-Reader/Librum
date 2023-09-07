@@ -6,7 +6,7 @@
 
 using namespace domain::value_objects;
 
-namespace application::utility
+namespace application::core
 {
 
 bool MetadataExtractor::setup(const QString& filePath)
@@ -148,4 +148,4 @@ QImage MetadataExtractor::getCover()
     }
 }
 
-}  // namespace application::utility
+}  // namespace application::core

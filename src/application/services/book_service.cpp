@@ -4,8 +4,10 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <string>
+#include "utils/book_searcher.hpp"
 
 using namespace application::core;
+using namespace utils;
 
 namespace application::services
 {
@@ -19,8 +21,6 @@ void BookService::setUp(QUuid uuid)
 {
     // Clean up previous book data first
     m_TOCModel = nullptr;
-    m_searchHits.clear();
-    m_currentSearchHit = -1;
     m_book = nullptr;
 
     m_book = m_libraryService->getBook(uuid);
@@ -32,6 +32,8 @@ void BookService::setUp(QUuid uuid)
 
     auto stdFilePath = m_book->getFilePath().toStdString();
     m_fzDocument = std::make_unique<mupdf::FzDocument>(stdFilePath.c_str());
+
+    m_bookSearcher = std::make_unique<BookSearcher>(m_fzDocument.get());
 }
 
 mupdf::FzDocument* BookService::getFzDocument()
@@ -42,89 +44,40 @@ mupdf::FzDocument* BookService::getFzDocument()
 void BookService::search(const QString& text)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-
-    clearSearch();
-    extractSearchHitsFromBook(m_searchHits, text.toStdString().c_str());
-
+    m_bookSearcher->search(text);
     QApplication::restoreOverrideCursor();
 
-    if(!m_searchHits.empty())
-        goToFirstSearchHit();
-}
+    auto searchHit = m_bookSearcher->firstSearchHit();
+    if(searchHit.pageNumber == -1)
+        return;
 
-void BookService::extractSearchHitsFromBook(std::vector<SearchHit>& results,
-                                            const char* text) const
-{
-    mupdf::FzStextOptions options;
-    const int maxHits = 1000;
-
-    for(int i = 0; i < m_fzDocument->fz_count_pages(); ++i)
-    {
-        mupdf::FzStextPage textPage(*m_fzDocument, i, options);
-        int hitMarks[maxHits];
-        auto hits = textPage.search_stext_page(text, hitMarks, maxHits);
-
-        results.reserve(hits.size());
-        for(auto& hit : hits)
-        {
-            SearchHit searchHit {
-                .pageNumber = i,
-                .rect = hit,
-            };
-            results.emplace_back(searchHit);
-        }
-    }
-}
-
-void BookService::goToFirstSearchHit()
-{
-    auto hit = m_searchHits.front();
-    m_currentSearchHit = 0;
-
-    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
-    emit highlightText(hit.pageNumber, hit.rect);
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
 }
 
 void BookService::clearSearch()
 {
-    m_searchHits.clear();
-    m_currentSearchHit = -1;
+    m_bookSearcher->clearSearch();
 }
 
 void BookService::goToNextSearchHit()
 {
-    if(m_currentSearchHit == -1 || m_searchHits.empty())
+    auto searchHit = m_bookSearcher->nextSearchHit();
+    if(searchHit.pageNumber == -1)
         return;
 
-    // Wrap to the beginning once you are over the end
-    ++m_currentSearchHit;
-    if(m_currentSearchHit >= m_searchHits.size())
-    {
-        m_currentSearchHit = 0;
-    }
-
-    auto hit = m_searchHits.at(m_currentSearchHit);
-
-    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
-    emit highlightText(hit.pageNumber, hit.rect);
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
 }
 
 void BookService::goToPreviousSearchHit()
 {
-    if(m_currentSearchHit == -1 || m_searchHits.empty())
+    auto searchHit = m_bookSearcher->previousSearchHit();
+    if(searchHit.pageNumber == -1)
         return;
 
-    // Wrap to the beginning once you are over the end
-    --m_currentSearchHit;
-    if(m_currentSearchHit <= 0)
-    {
-        m_currentSearchHit = m_searchHits.size() - 1;
-    }
-
-    auto hit = m_searchHits.at(m_currentSearchHit);
-
-    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
-    emit highlightText(hit.pageNumber, hit.rect);
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
 }
 
 void BookService::followLink(const char* uri)

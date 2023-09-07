@@ -5,15 +5,10 @@
 #include "i_library_service.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
+#include "utils/book_searcher.hpp"
 
 namespace application::services
 {
-
-struct SearchHit
-{
-    int pageNumber;
-    mupdf::FzQuad rect;
-};
 
 class BookService : public IBookService
 {
@@ -40,16 +35,10 @@ public:
     core::FilteredTOCModel* getTableOfContents() override;
 
 private:
-    void extractSearchHitsFromBook(std::vector<SearchHit>& results,
-                                   const char* text) const;
-    void goToFirstSearchHit();
-
     ILibraryService* m_libraryService;
     domain::entities::Book* m_book = nullptr;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
-
-    std::vector<SearchHit> m_searchHits;
-    int m_currentSearchHit;
+    std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
     float m_zoom = 1;
 
     std::unique_ptr<core::TOCModel> m_TOCModel;

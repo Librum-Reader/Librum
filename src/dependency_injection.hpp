@@ -80,7 +80,7 @@ const auto diConfig = []
 
         // Utility
         di::bind<application::IMetadataExtractor>()
-            .to<application::utility::MetadataExtractor>(),
+            .to<application::core::MetadataExtractor>(),
         di::bind<application::ILocalLibraryTracker>()
             .to<application::utility::LocalLibraryTracker>(),
         di::bind<application::ILibraryStorageManager>()

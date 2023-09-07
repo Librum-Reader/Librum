@@ -12,6 +12,9 @@ set(application_SRC
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
     interfaces/utility/i_library_storage_manager.hpp
+    interfaces/gateways/i_app_info_gateway.hpp
+    interfaces/services/i_app_info_service.hpp
+    interfaces/services/i_book_service.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -23,6 +26,8 @@ set(application_SRC
     services/settings_service.hpp
     services/app_info_service.cpp
     services/app_info_service.hpp
+    services/book_service.hpp
+    services/book_service.cpp
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
@@ -53,6 +58,8 @@ set(application_SRC
     core/toc/toc_model.cpp
     core/toc/filtered_toc_model.hpp
     core/toc/filtered_toc_model.cpp
+    core/utils/book_searcher.hpp
+    core/utils/book_searcher.cpp
 )
 
 
@@ -105,10 +112,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    interfaces/gateways/i_app_info_gateway.hpp
-                    interfaces/services/i_app_info_service.hpp
-                    interfaces/services/i_book_service.hpp
-                    services/book_service.hpp services/book_service.cpp
                     
 )
 

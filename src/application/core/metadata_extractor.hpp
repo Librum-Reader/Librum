@@ -3,7 +3,7 @@
 #include "i_metadata_extractor.hpp"
 #include "mupdf/classes.h"
 
-namespace application::utility
+namespace application::core
 {
 
 class MetadataExtractor : public IMetadataExtractor
@@ -24,4 +24,4 @@ private:
     QString m_filePath;
 };
 
-}  // namespace application::utility
+}  // namespace application::core
