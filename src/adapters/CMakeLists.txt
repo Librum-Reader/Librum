@@ -23,6 +23,10 @@ add_library(adapters
                     controllers/settings_controller.hpp
                     controllers/app_info_controller.cpp
                     controllers/app_info_controller.hpp
+                    controllers/book_controller.cpp
+                    controllers/book_controller.hpp
+                    controllers/page_controller.cpp
+                    controllers/page_controller.hpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -50,7 +54,7 @@ add_library(adapters
                     DTOs/book_dto.hpp
                     DTOs/tag_dto.hpp
                     interfaces/controllers/i_book_controller.hpp
-                    controllers/book_controller.hpp controllers/book_controller.cpp
+                    interfaces/controllers/i_page_controller.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)

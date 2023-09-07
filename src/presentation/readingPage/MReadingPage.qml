@@ -84,12 +84,6 @@ Page
     }
     
     
-    DocumentItem
-    {
-        id: documentItem
-        filePath: Globals.selectedBook.filePath
-    }
-    
     /*
       An invisible component at the top of the screen, when hovering over it
       while the fullscreen mode is enabled, the fullscreen mode will be disabled.
@@ -121,9 +115,8 @@ Page
         {
             id: toolbar            
             Layout.fillWidth: true
-            currentPage: documentItem.currentPage
-            pageCount: documentItem.pageCount
-            document: documentItem
+            currentPage: BookController.currentPage
+            pageCount: BookController.pageCount
             bookTitle: Globals.selectedBook.title
             
             onBackButtonClicked:
@@ -238,7 +231,7 @@ Page
                     property bool active: false
                     anchors.fill: parent
                     visible: false
-                    model: documentItem.tableOfContents
+                    model: BookController.tableOfContents
                     
                     // Save the last width to restore it if re-enabled
                     onVisibleChanged: if(!visible) lastWidth = width
@@ -325,7 +318,6 @@ Page
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    document: documentItem
                 }
             }
         }
@@ -337,10 +329,10 @@ Page
             Layout.fillWidth: true
             
             onVisibleChanged: toolbar.searchButton.active = visible;
-            onSearchQueried: if(query.length) documentItem.search(query)
-            onClearQuery: documentItem.clearSearch()
-            onNextButtonClicked: documentItem.goToNextSearchHit();
-            onPreviousButtonClicked: documentItem.goToPreviousSearchHit();
+//            onSearchQueried: if(query.length) BookController.search(query)
+//            onClearQuery: BookController.clearSearch()
+//            onNextButtonClicked: BookController.goToNextSearchHit();
+//            onPreviousButtonClicked: BookController.goToPreviousSearchHit();
         }
     }
     
@@ -375,13 +367,13 @@ Page
         
         function goToEnd()
         {
-            documentView.setPage(documentItem.pageCount - 1);
+            documentView.setPage(BookController.pageCount - 1);
         }
         
         function saveCurrentPage()
         {
             var operationsMap = {};
-            operationsMap[LibraryController.MetaProperty.CurrentPage] = documentItem.currentPage + 1;
+            operationsMap[LibraryController.MetaProperty.CurrentPage] = BookController.currentPage + 1;
             LibraryController.updateBook(Globals.selectedBook.uuid, operationsMap);
         }
     }

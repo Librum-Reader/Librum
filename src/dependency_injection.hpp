@@ -9,17 +9,17 @@
 #include "authentication_gateway.hpp"
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
-#include "book_metadata_helper.hpp"
 #include "book_service.hpp"
 #include "i_app_info_access.hpp"
 #include "i_app_info_service.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_metadata_extractor.hpp"
 #include "library_controller.hpp"
 #include "library_service.hpp"
 #include "library_storage_access.hpp"
 #include "library_storage_gateway.hpp"
 #include "library_storage_manager.hpp"
 #include "local_library_tracker.hpp"
+#include "metadata_extractor.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
 #include "user_controller.hpp"
@@ -79,8 +79,8 @@ const auto diConfig = []
         di::bind<ISettingsService>().to<services::SettingsService>(),
 
         // Utility
-        di::bind<application::IBookMetadataHelper>()
-            .to<application::utility::BookMetadataHelper>(),
+        di::bind<application::IMetadataExtractor>()
+            .to<application::utility::MetadataExtractor>(),
         di::bind<application::ILocalLibraryTracker>()
             .to<application::utility::LocalLibraryTracker>(),
         di::bind<application::ILibraryStorageManager>()

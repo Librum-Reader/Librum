@@ -9,7 +9,7 @@
 #include "book_for_deletion.hpp"
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_metadata_extractor.hpp"
 
 using namespace domain::entities;
 using std::size_t;
@@ -17,7 +17,7 @@ using std::size_t;
 namespace application::services
 {
 
-LibraryService::LibraryService(IBookMetadataHelper* bookMetadataHelper,
+LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
                                ILibraryStorageManager* bookStorageManager) :
     m_bookMetadataHelper(bookMetadataHelper),
     m_bookStorageManager(bookStorageManager)

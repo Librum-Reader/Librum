@@ -13,7 +13,6 @@ import "DocumentNavigation.js" as NavigationLogic
   */
 Pane {
     id: root
-    property var document
     signal clicked
     signal zoomFactorChanged(real factor)
 
@@ -27,11 +26,15 @@ Pane {
                        }
 
     Component.onCompleted: {
-        root.document.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
+        BookController.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
+    }
+    
+    Component.onDestruction: {
+        BookController.zoom = 1
     }
 
     Connections {
-        target: documentItem
+        target: BookController
         
         function onGoToPosition(pageNumber, y) {
             root.setPage(pageNumber, y)
@@ -40,9 +43,9 @@ Pane {
         function onZoomChanged(newZoom)
         {
             let normMaxWidth = pageView.widestItem / pageView.prevZoom;
-            pageView.widestItem = normMaxWidth * root.document.zoom;
+            pageView.widestItem = normMaxWidth * BookController.zoom;
             
-            pageView.prevZoom = root.document.zoom;
+            pageView.prevZoom = BookController.zoom;
         }
     }
 
@@ -60,8 +63,7 @@ Pane {
         ListView {
             id: pageView
             readonly property int scrollSpeed: 5500
-            property int pageSpacing: pageView.getPageSpacing(
-                                          root.document.zoom)
+            property int pageSpacing: pageView.getPageSpacing(BookController.zoom)
             property int widestItem: 0
             property real prevZoom: 1
 
@@ -77,14 +79,14 @@ Pane {
             maximumFlickVelocity: scrollSpeed
             boundsMovement: Flickable.StopAtBounds
             boundsBehavior: Flickable.StopAtBounds
-            model: root.document.pageCount
+            model: BookController.pageCount
             spacing: pageSpacing
-            delegate: PageItem {
+            delegate: PageView {
                 id: page
                 property bool ctrlPressed: false
 
                 pageNumber: modelData
-                document: documentItem
+                bookController: BookController
                 height: implicitHeight
                 width: implicitWidth
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
@@ -92,7 +94,7 @@ Pane {
                                               parent.horizontalCenter
                 
                 Component.onCompleted: {
-                    if(implicitWidth >= pageView.contentWidth)
+                    if(implicitWidth > pageView.contentWidth)
                         pageView.widestItem = page.implicitWidth;
                 }
             }
@@ -174,7 +176,7 @@ Pane {
     }
 
     function changeZoomBy(factor) {
-        let newZoomFactor = root.document.zoom * factor
+        let newZoomFactor = BookController.zoom * factor
         NavigationLogic.zoom(newZoomFactor)
     }
 
@@ -185,21 +187,21 @@ Pane {
 
     function nextPage() {
         // Prevent trying to go over the end
-        let newPage = root.document.currentPage + 1
-        if (newPage > root.document.pageCount - 1)
+        let newPage = BookController.currentPage + 1
+        if (newPage > BookController.pageCount - 1)
             return
 
-        NavigationLogic.setPage(root.document.currentPage + 1)
+        NavigationLogic.setPage(BookController.currentPage + 1)
     }
 
     function previousPage() {
-        NavigationLogic.setPage(root.document.currentPage - 1)
+        NavigationLogic.setPage(BookController.currentPage - 1)
     }
 
     function setPage(pageNumber, yOffset = 0) {
         NavigationLogic.setPage(pageNumber)
 
         let space = 10
-        pageView.contentY += yOffset * root.document.zoom - space
+        pageView.contentY += yOffset * root.BookController.zoom - space
     }
 }

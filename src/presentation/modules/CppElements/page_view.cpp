@@ -1,20 +1,25 @@
-#include "page_item.hpp"
+#include "page_view.hpp"
 #include <QClipboard>
 #include <QDebug>
 #include <QDesktopServices>
 #include <QImage>
 #include <QObject>
 #include <QPainter>
+#include <QQuickItem>
 #include <QQuickWindow>
 #include <QRectF>
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
+#include "page_controller.hpp"
 #include "qnamespace.h"
+
+using adapters::controllers::BookController;
+using adapters::controllers::PageController;
 
 namespace cpp_elements
 {
 
-cpp_elements::PageItem::PageItem()
+cpp_elements::PageView::PageView()
 {
     setFlag(QQuickItem::ItemHasContents, true);
     setAcceptedMouseButtons(Qt::AllButtons);
@@ -24,73 +29,56 @@ cpp_elements::PageItem::PageItem()
     m_tripleClickTimer.setSingleShot(true);
 }
 
-int PageItem::getImplicitWidth() const
+void PageView::setBookController(BookController* newBookController)
 {
-    if(m_document == nullptr)
-        return 0;
+    m_bookController = newBookController;
 
-    return m_page->getWidth();
+    m_pageController = std::make_unique<PageController>(
+        m_bookController->getFzDocument(), m_currentPage);
+    m_pageController->setZoom(m_bookController->getZoom());
+
+    connect(m_bookController, &BookController::zoomChanged, this,
+            &PageView::updateZoom);
 }
 
-int PageItem::getImplicitHeight() const
+int PageView::getImplicitWidth() const
 {
-    if(m_document == nullptr)
-        return 0;
+    if(m_bookController == nullptr)
+        return 100;
 
-    return m_page->getHeight();
+    return m_pageController->getWidth();
 }
 
-DocumentItem* PageItem::getDocument() const
+int PageView::getImplicitHeight() const
 {
-    return m_document;
+    if(m_bookController == nullptr)
+        return 100;
+
+    return m_pageController->getHeight();
 }
 
-void PageItem::setDocument(DocumentItem* newDocument)
-{
-    m_document = newDocument;
-    m_page = std::make_unique<application::core::Page>(m_document->internal(),
-                                                       m_currentPage);
-
-    m_page->setZoom(m_document->getZoom());
-    emit implicitWidthChanged();
-    emit implicitHeightChanged();
-    update();
-
-    connect(m_document, &DocumentItem::zoomChanged, this,
-            &PageItem::updateZoom);
-
-    connect(m_document, &DocumentItem::highlightText, this,
-            [this](int pageNumber, QRectF rect)
-            {
-                if(pageNumber != m_currentPage)
-                    return;
-
-                selectPosition(rect);
-            });
-}
-
-int PageItem::getPageNumber() const
+int PageView::getPageNumber() const
 {
     return m_currentPage;
 }
 
-void PageItem::setPageNumber(int newCurrentPage)
+void PageView::setPageNumber(int newCurrentPage)
 {
     m_currentPage = newCurrentPage;
 }
 
-void PageItem::updateZoom(float newZoom)
+void PageView::updateZoom(float newZoom)
 {
-    auto oldZoom = m_page->getZoom();
-    m_page->setZoom(newZoom);
+    auto oldZoom = m_pageController->getZoom();
+    m_pageController->setZoom(newZoom);
 
     // Update selection positions to match new zoom
     if(!m_selectionStart.isNull() && !m_selectionEnd.isNull())
     {
-        m_selectionStart =
-            m_page->scalePointToCurrentZoom(m_selectionStart, oldZoom);
+        m_selectionStart = m_pageController->scalePointToCurrentZoom(
+            m_selectionStart, oldZoom);
         m_selectionEnd =
-            m_page->scalePointToCurrentZoom(m_selectionEnd, oldZoom);
+            m_pageController->scalePointToCurrentZoom(m_selectionEnd, oldZoom);
         generateSelection();
     }
 
@@ -98,7 +86,7 @@ void PageItem::updateZoom(float newZoom)
     emit implicitHeightChanged();
 }
 
-void PageItem::geometryChange(const QRectF& newGeometry,
+void PageView::geometryChange(const QRectF& newGeometry,
                               const QRectF& oldGeometry)
 {
     if(newGeometry.size().isEmpty())
@@ -113,7 +101,7 @@ void PageItem::geometryChange(const QRectF& newGeometry,
     QQuickItem::geometryChange(newGeometry, oldGeometry);
 }
 
-QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
+QSGNode* PageView::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
 {
     Q_UNUSED(nodeData);
     QSGSimpleTextureNode* n = static_cast<QSGSimpleTextureNode*>(node);
@@ -123,7 +111,7 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
         n->setOwnsTexture(true);
     }
 
-    auto image = m_page->renderPage();
+    auto image = m_pageController->renderPage();
     QPainter painter(&image);
 
     paintSelectionOnPage(painter);
@@ -133,7 +121,7 @@ QSGNode* PageItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     return n;
 }
 
-void PageItem::mouseDoubleClickEvent(QMouseEvent* event)
+void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 {
     m_selectionStart = QPointF(event->position().x(), event->position().y());
     m_selectionEnd = QPointF(event->position().x(), event->position().y());
@@ -143,7 +131,7 @@ void PageItem::mouseDoubleClickEvent(QMouseEvent* event)
     m_doubleClickHold = true;
 }
 
-void PageItem::mousePressEvent(QMouseEvent* event)
+void PageView::mousePressEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
@@ -152,7 +140,7 @@ void PageItem::mousePressEvent(QMouseEvent* event)
     forceActiveFocus();
     removeSelection();
 
-    if(m_page->pointIsAboveLink(mousePoint))
+    if(m_pageController->pointIsAboveLink(mousePoint))
         m_startedMousePressOnLink = true;
 
     // Select line when left mouse button is pressed 3 times
@@ -167,7 +155,7 @@ void PageItem::mousePressEvent(QMouseEvent* event)
     m_selectionStart = mousePoint;
 }
 
-void PageItem::mouseReleaseEvent(QMouseEvent* event)
+void PageView::mouseReleaseEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
@@ -181,17 +169,18 @@ void PageItem::mouseReleaseEvent(QMouseEvent* event)
         removeSelection();
     }
 
-    if(m_startedMousePressOnLink && m_page->pointIsAboveLink(mousePoint))
+    if(m_startedMousePressOnLink &&
+       m_pageController->pointIsAboveLink(mousePoint))
     {
-        auto link = m_page->getLinkAtPoint(mousePoint);
-        followLink(link);
+        auto uri = m_pageController->getLinkUriAtPoint(mousePoint);
+        m_bookController->followLink(uri);
     }
     m_startedMousePressOnLink = false;
 
     m_doubleClickHold = false;
 }
 
-void PageItem::mouseMoveEvent(QMouseEvent* event)
+void PageView::mouseMoveEvent(QMouseEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
@@ -207,7 +196,7 @@ void PageItem::mouseMoveEvent(QMouseEvent* event)
         drawSelection();
 }
 
-void PageItem::hoverMoveEvent(QHoverEvent* event)
+void PageView::hoverMoveEvent(QHoverEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
@@ -215,7 +204,7 @@ void PageItem::hoverMoveEvent(QHoverEvent* event)
     setCorrectCursor(mouseX, mouseY);
 }
 
-void PageItem::keyPressEvent(QKeyEvent* event)
+void PageView::keyPressEvent(QKeyEvent* event)
 {
     if(event->key() == Qt::Key_C && event->modifiers() == Qt::ControlModifier)
     {
@@ -223,9 +212,10 @@ void PageItem::keyPressEvent(QKeyEvent* event)
     }
 }
 
-void PageItem::paintSelectionOnPage(QPainter& painter)
+void PageView::paintSelectionOnPage(QPainter& painter)
 {
-    auto& bufferedSelectionRects = m_page->getBufferedSelectionRects();
+    auto& bufferedSelectionRects =
+        m_pageController->getBufferedSelectionRects();
     for(auto rect : bufferedSelectionRects)
     {
         QColor selectionColor(134, 171, 175, 125);
@@ -234,31 +224,31 @@ void PageItem::paintSelectionOnPage(QPainter& painter)
     }
 }
 
-void PageItem::drawSelection()
+void PageView::drawSelection()
 {
     generateSelection();
     update();
 }
 
-void PageItem::generateSelection()
+void PageView::generateSelection()
 {
-    m_page->getBufferedSelectionRects().clear();
-    m_page->generateSelectionRects(m_selectionStart, m_selectionEnd);
+    m_pageController->getBufferedSelectionRects().clear();
+    m_pageController->generateSelectionRects(m_selectionStart, m_selectionEnd);
 }
 
-void PageItem::removeSelection()
+void PageView::removeSelection()
 {
-    m_page->getBufferedSelectionRects().clear();
+    m_pageController->getBufferedSelectionRects().clear();
     update();
 
     m_selectionStart = QPointF(0, 0);
     m_selectionEnd = QPointF(0, 0);
 }
 
-void PageItem::selectSingleWord()
+void PageView::selectSingleWord()
 {
-    auto points =
-        m_page->getPositionsForWordSelection(m_selectionStart, m_selectionEnd);
+    auto points = m_pageController->getPositionsForWordSelection(
+        m_selectionStart, m_selectionEnd);
 
     m_selectionStart = points.first;
     m_selectionEnd = points.second;
@@ -266,35 +256,36 @@ void PageItem::selectSingleWord()
     drawSelection();
 }
 
-void PageItem::selectMultipleWords()
+void PageView::selectMultipleWords()
+{
+    auto positions = m_pageController->getPositionsForWordSelection(
+        m_selectionStart, m_selectionEnd);
+    m_selectionStart = positions.first;
+    m_selectionEnd = positions.second;
+
+    drawSelection();
+}
+
+void PageView::selectLine()
 {
     auto positions =
-        m_page->getPositionsForWordSelection(m_selectionStart, m_selectionEnd);
+        m_pageController->getPositionsForLineSelection(m_selectionStart);
     m_selectionStart = positions.first;
     m_selectionEnd = positions.second;
 
     drawSelection();
 }
 
-void PageItem::selectLine()
-{
-    auto positions = m_page->getPositionsForLineSelection(m_selectionStart);
-    m_selectionStart = positions.first;
-    m_selectionEnd = positions.second;
-
-    drawSelection();
-}
-
-void PageItem::copySelectedText()
+void PageView::copySelectedText()
 {
     auto clipboard = QApplication::clipboard();
-    QString text =
-        m_page->getTextFromSelection(m_selectionStart, m_selectionEnd);
+    QString text = m_pageController->getTextFromSelection(m_selectionStart,
+                                                          m_selectionEnd);
 
     clipboard->setText(text);
 }
 
-void PageItem::resetCursorToDefault()
+void PageView::resetCursorToDefault()
 {
     while(QApplication::overrideCursor() != nullptr &&
           *QApplication::overrideCursor() != Qt::ArrowCursor)
@@ -303,9 +294,9 @@ void PageItem::resetCursorToDefault()
     }
 }
 
-void PageItem::setCorrectCursor(int x, int y)
+void PageView::setCorrectCursor(int x, int y)
 {
-    if(m_page->pointIsAboveLink(QPoint(x, y)))
+    if(m_pageController->pointIsAboveLink(QPoint(x, y)))
     {
         if(QApplication::overrideCursor() == nullptr ||
            *QApplication::overrideCursor() != Qt::PointingHandCursor)
@@ -314,7 +305,7 @@ void PageItem::setCorrectCursor(int x, int y)
             QApplication::setOverrideCursor(Qt::PointingHandCursor);
         }
     }
-    else if(m_page->pointIsAboveText(QPoint(x, y)))
+    else if(m_pageController->pointIsAboveText(QPoint(x, y)))
     {
         if(QApplication::overrideCursor() == nullptr ||
            *QApplication::overrideCursor() != Qt::IBeamCursor)
@@ -329,34 +320,14 @@ void PageItem::setCorrectCursor(int x, int y)
     }
 }
 
-void PageItem::followLink(mupdf::FzLink& link)
-{
-    auto uri = link.uri();
-
-    if(mupdf::fz_is_external_link(uri))
-    {
-        QDesktopServices::openUrl(QUrl(uri));
-    }
-    else
-    {
-        auto fzDocument = m_document->internal()->internal();
-        float yp = 0;
-
-        auto location = fzDocument->fz_resolve_link(uri, nullptr, &yp);
-        int pageNumber = fzDocument->fz_page_number_from_location(location);
-
-        emit m_document->goToPosition(pageNumber, yp);
-    }
-}
-
-void PageItem::selectPosition(QRectF rect)
+void PageView::selectPosition(QRectF rect)
 {
     mupdf::FzPoint leftMiddle(rect.left(), rect.center().y());
     mupdf::FzPoint rightMiddle(rect.right(), rect.center().y());
 
     // Make sure to apply the current zoom to the points since "drawSelection"
     // expects them to be in the current zoom.
-    auto zoom = m_page->getZoom();
+    auto zoom = m_pageController->getZoom();
     mupdf::FzMatrix matrix;
     matrix = matrix.fz_scale(zoom, zoom);
 
@@ -369,11 +340,11 @@ void PageItem::selectPosition(QRectF rect)
     drawSelection();
 }
 
-void PageItem::setColorInverted(bool newColorInverted)
+void PageView::setColorInverted(bool newColorInverted)
 {
     // This method gets called on initialisation of the page item, but we don't
     // want to redraw it then, so we skip it if it's called for the first time.
-    m_page->setInvertColor(newColorInverted);
+    m_pageController->setInvertColor(newColorInverted);
     if(!m_firstTimeColorInverted)
         update();
 

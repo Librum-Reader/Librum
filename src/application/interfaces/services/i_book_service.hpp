@@ -5,6 +5,7 @@
 #include <QUuid>
 #include "application_export.hpp"
 #include "mupdf/classes.h"
+#include "toc/filtered_toc_model.hpp"
 
 namespace application
 {
@@ -22,6 +23,20 @@ public:
 
     virtual void setUp(QUuid uuid) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
+
+    virtual void followLink(const char* uri) = 0;
+
+    virtual QString getFilePath() const = 0;
+    virtual int getPageCount() const = 0;
+    virtual void setCurrentPage(int newCurrentPage) = 0;
+    virtual int getCurrentPage() const = 0;
+    virtual float getZoom() const = 0;
+    virtual void setZoom(float newZoom) = 0;
+
+    virtual core::FilteredTOCModel* getTableOfContents() = 0;
+
+signals:
+    void goToPosition(int pageNumber, int y);
 };
 
 }  // namespace application

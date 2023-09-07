@@ -3,18 +3,24 @@
 #include <QString>
 #include <QTimer>
 #include <memory>
-#include "document_item.hpp"
-#include "page.hpp"
+#include "book_controller.hpp"
+#include "page_controller.hpp"
 #include "presentation_export.hpp"
 
 namespace cpp_elements
 {
 
-class PRESENTATION_EXPORT PageItem : public QQuickItem
+/**
+ * This class is responsible for rendering a single page of the book.
+ * It derives from QQuickItem, which is the base class for all visual item
+ * types in Qml. It is a visual item that can be drawn on the screen and
+ * interacted with.
+ */
+class PRESENTATION_EXPORT PageView : public QQuickItem
 {
     Q_OBJECT
-    Q_PROPERTY(
-        DocumentItem* document READ getDocument WRITE setDocument CONSTANT)
+    Q_PROPERTY(adapters::controllers::BookController* bookController WRITE
+                   setBookController CONSTANT)
     Q_PROPERTY(
         int implicitWidth READ getImplicitWidth NOTIFY implicitWidthChanged)
     Q_PROPERTY(
@@ -24,16 +30,17 @@ class PRESENTATION_EXPORT PageItem : public QQuickItem
 
 
 public:
-    PageItem();
+    PageView();
 
     int getImplicitWidth() const;
     int getImplicitHeight() const;
 
-    DocumentItem* getDocument() const;
-    void setDocument(DocumentItem* newDocument);
     int getPageNumber() const;
     void setPageNumber(int newCurrentPage);
     void setColorInverted(bool newColorInverted);
+
+    void setBookController(
+        adapters::controllers::BookController* newBookController);
 
 private slots:
     void updateZoom(float newZoom);
@@ -63,10 +70,9 @@ private:
 
     void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
-    void followLink(mupdf::FzLink& link);
 
-    DocumentItem* m_document = nullptr;
-    std::unique_ptr<application::core::Page> m_page;
+    std::unique_ptr<adapters::controllers::PageController> m_pageController;
+    adapters::controllers::BookController* m_bookController = nullptr;
     int m_currentPage = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;

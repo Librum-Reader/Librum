@@ -7,16 +7,15 @@
 #include <QRectF>
 #include <QString>
 #include "application_export.hpp"
-#include "document.hpp"
 #include "mupdf/classes.h"
 
 namespace application::core
 {
 
-class APPLICATION_EXPORT Page
+class APPLICATION_EXPORT PageGenerator
 {
 public:
-    Page(const Document* document, int pageNumber);
+    PageGenerator(mupdf::FzDocument* document, int pageNumber);
 
     int getWidth() const;
     int getHeight() const;

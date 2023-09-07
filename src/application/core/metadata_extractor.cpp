@@ -1,7 +1,7 @@
-#include "book_metadata_helper.hpp"
+#include "metadata_extractor.hpp"
 #include <QDebug>
 #include <QFileInfo>
-#include "document.hpp"
+#include "page_generator.hpp"
 
 
 using namespace domain::value_objects;
@@ -9,12 +9,13 @@ using namespace domain::value_objects;
 namespace application::utility
 {
 
-bool BookMetadataHelper::setup(const QString& filePath)
+bool MetadataExtractor::setup(const QString& filePath)
 {
     m_filePath = filePath;
     try
     {
-        m_document = std::make_unique<core::Document>(filePath);
+        auto stdFilePath = filePath.toStdString();
+        m_document = std::make_unique<mupdf::FzDocument>(stdFilePath.c_str());
         return true;
     }
     catch(...)
@@ -24,9 +25,9 @@ bool BookMetadataHelper::setup(const QString& filePath)
     }
 }
 
-domain::value_objects::BookMetaData BookMetadataHelper::getBookMetaData()
+domain::value_objects::BookMetaData MetadataExtractor::getBookMetaData()
 {
-    auto title = m_document->getTitle();
+    auto title = getDocumentInfo("info:Title");
     if(title.isEmpty())
         title = getTitleFromPath();
 
@@ -34,14 +35,14 @@ domain::value_objects::BookMetaData BookMetadataHelper::getBookMetaData()
 
     BookMetaData metaData {
         .title = title,
-        .authors = m_document->getAuthors(),
-        .creator = m_document->getCreator(),
-        .creationDate = m_document->getCreationDate(),
-        .format = m_document->getFormat(),
+        .authors = getDocumentInfo("info:Author"),
+        .creator = getDocumentInfo("info:Creator"),
+        .creationDate = getDocumentInfo("info:CreationDate"),
+        .format = getDocumentInfo("format"),
         .language = "",
         .documentSize = documentSize,
         .pagesSize = "",
-        .pageCount = m_document->getPageCount(),
+        .pageCount = m_document->fz_count_pages(),
         .lastOpened = QDateTime(),
         .coverLastModified = QDateTime(),
         .coverPath = "",
@@ -53,7 +54,7 @@ domain::value_objects::BookMetaData BookMetadataHelper::getBookMetaData()
     return metaData;
 }
 
-QString BookMetadataHelper::getTitleFromPath()
+QString MetadataExtractor::getTitleFromPath()
 {
     auto indexOfLastSlash = m_filePath.lastIndexOf("/");
     auto indexOfLastDot = m_filePath.lastIndexOf(".");
@@ -67,7 +68,7 @@ QString BookMetadataHelper::getTitleFromPath()
     return result;
 }
 
-QString BookMetadataHelper::getDocumentSize()
+QString MetadataExtractor::getDocumentSize()
 {
     QFileInfo fileInfo(m_filePath);
     double fileSize = fileInfo.size();  // Needs to be double for divisions
@@ -100,20 +101,49 @@ QString BookMetadataHelper::getDocumentSize()
     return result;
 }
 
-double BookMetadataHelper::roundToPrecisionOf2(double raw)
+double MetadataExtractor::roundToPrecisionOf2(double raw)
 {
     return (static_cast<int>(raw * 100 + .5) / 100.0);
 };
 
-QImage BookMetadataHelper::getBookCover()
+QImage MetadataExtractor::getBookCover()
 {
     try
     {
-        return m_document->getCover();
+        return getCover();
     }
     catch(...)
     {
         qWarning() << "Failed loading book cover";
+        return QImage();
+    }
+}
+
+QString MetadataExtractor::getDocumentInfo(const char* key)
+{
+    try
+    {
+        auto result = m_document->fz_lookup_metadata2(key);
+        if(result == "null")
+            result = "";
+
+        return QString::fromStdString(result);
+    }
+    catch(...)
+    {
+        return "";
+    }
+}
+
+QImage MetadataExtractor::getCover()
+{
+    try
+    {
+        core::PageGenerator page(m_document.get(), 0);
+        return page.renderPage();
+    }
+    catch(...)
+    {
         return QImage();
     }
 }

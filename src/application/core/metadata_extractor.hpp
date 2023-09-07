@@ -1,12 +1,12 @@
 #pragma once
 #include <memory>
-#include "document.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_metadata_extractor.hpp"
+#include "mupdf/classes.h"
 
 namespace application::utility
 {
 
-class BookMetadataHelper : public IBookMetadataHelper
+class MetadataExtractor : public IMetadataExtractor
 {
 public:
     bool setup(const QString& filePath) override;
@@ -14,11 +14,13 @@ public:
     QImage getBookCover() override;
 
 private:
+    QString getDocumentInfo(const char* key);
+    QImage getCover();
     QString getTitleFromPath();
     QString getDocumentSize();
     double roundToPrecisionOf2(double raw);
 
-    std::unique_ptr<core::Document> m_document;
+    std::unique_ptr<mupdf::FzDocument> m_document;
     QString m_filePath;
 };
 

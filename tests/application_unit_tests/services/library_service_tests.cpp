@@ -6,7 +6,7 @@
 #include "book.hpp"
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_metadata_extractor.hpp"
 #include "i_library_storage_manager.hpp"
 #include "library_service.hpp"
 #include "tag.hpp"
@@ -23,7 +23,7 @@ using namespace domain::value_objects;
 namespace tests::application
 {
 
-class BookMetaDataHelperMock : public IBookMetadataHelper
+class BookMetaDataHelperMock : public IMetadataExtractor
 {
 public:
     MOCK_METHOD(bool, setup, (const QString&), (override));

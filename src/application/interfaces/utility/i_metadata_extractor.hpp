@@ -12,10 +12,10 @@ namespace application
 /**
  * The BookMetaDataHelper class extracts metadata from a book.
  */
-class APPLICATION_EXPORT IBookMetadataHelper
+class APPLICATION_EXPORT IMetadataExtractor
 {
 public:
-    virtual ~IBookMetadataHelper() noexcept = default;
+    virtual ~IMetadataExtractor() noexcept = default;
 
     virtual bool setup(const QString& filePath) = 0;
     virtual domain::value_objects::BookMetaData getBookMetaData() = 0;

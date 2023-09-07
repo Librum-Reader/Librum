@@ -4,7 +4,7 @@
 #include <utility>
 #include "application_export.hpp"
 #include "book.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_metadata_extractor.hpp"
 #include "i_library_service.hpp"
 #include "i_library_storage_manager.hpp"
 
@@ -16,7 +16,7 @@ class APPLICATION_EXPORT LibraryService : public ILibraryService
     Q_OBJECT
 
 public:
-    LibraryService(IBookMetadataHelper* bookMetadataHelper,
+    LibraryService(IMetadataExtractor* bookMetadataHelper,
                    ILibraryStorageManager* bookStorageManager);
 
     void downloadBooks() override;
@@ -75,8 +75,8 @@ private:
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
     void deleteBookLocally(const domain::entities::Book& book);
-
-    IBookMetadataHelper* m_bookMetadataHelper;
+    
+    IMetadataExtractor* m_bookMetadataHelper;
     ILibraryStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
     long m_usedBookStorage = 0;

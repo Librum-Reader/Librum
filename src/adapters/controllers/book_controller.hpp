@@ -4,6 +4,7 @@
 #include "adapters_export.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
+#include "toc/filtered_toc_model.hpp"
 
 namespace adapters::controllers
 {
@@ -17,6 +18,16 @@ public:
 
     void setUp(QString uuid) override;
     mupdf::FzDocument* getFzDocument() override;
+
+    void followLink(const char* uri) override;
+
+    QString getFilePath() const override;
+    int getPageCount() const override;
+    void setCurrentPage(int newCurrentPage) override;
+    int getCurrentPage() const override;
+    float getZoom() const override;
+    void setZoom(float newZoom) override;
+    application::core::FilteredTOCModel* getTableOfContents() override;
 
 private:
     application::IBookService* m_bookService;

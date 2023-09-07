@@ -9,7 +9,7 @@ set(application_SRC
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_library_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
-    interfaces/utility/i_book_metadata_helper.hpp
+    interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
     interfaces/utility/i_library_storage_manager.hpp
     
@@ -29,8 +29,6 @@ set(application_SRC
     common/enums/setting_groups.hpp
     common/enums/error_code.hpp
     
-    utility/book_metadata_helper.cpp
-    utility/book_metadata_helper.hpp
     utility/local_library_tracker.cpp
     utility/local_library_tracker.hpp
     utility/merge_status.hpp
@@ -45,10 +43,10 @@ set(application_SRC
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
     
-    core/document.hpp
-    core/document.cpp
-    core/page.hpp
-    core/page.cpp
+    core/page_generator.hpp
+    core/page_generator.cpp
+    core/metadata_extractor.cpp
+    core/metadata_extractor.hpp
     core/toc/toc_item.hpp
     core/toc/toc_item.cpp
     core/toc/toc_model.hpp

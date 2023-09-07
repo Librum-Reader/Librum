@@ -10,10 +10,8 @@ add_library(presentation
                     modules/CppElements/key_sequence_recorder.hpp
                     modules/CppElements/sidebar_state.cpp
                     modules/CppElements/sidebar_state.hpp
-                    modules/CppElements/document_item.cpp
-                    modules/CppElements/document_item.hpp
-                    modules/CppElements/page_item.cpp
-                    modules/CppElements/page_item.hpp
+                    modules/CppElements/page_view.cpp
+                    modules/CppElements/page_view.hpp
 )
 
 target_compile_definitions(presentation PRIVATE PRESENTATION_LIBRARY)
