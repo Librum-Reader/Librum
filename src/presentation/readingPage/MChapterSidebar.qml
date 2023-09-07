@@ -5,6 +5,7 @@ import Librum.elements
 import Librum.models
 import Librum.style
 import Librum.icons
+import Librum.controllers
 import Qt.labs.qmlmodels
 import QtQuick.Shapes
 
@@ -75,7 +76,7 @@ Item
                         color: "transparent"
                     }
                     
-                    onTextEdited: documentItem.tableOfContents.filterString = text
+                    onTextEdited: BookController.tableOfContents.filterString = text
                 }
             }
             

@@ -62,7 +62,7 @@ void BookController::setZoom(float newZoom)
 
 FilteredTOCModel* BookController::getTableOfContents()
 {
-    return nullptr;
+    return m_bookService->getTableOfContents();
 }
 
 }  // namespace adapters::controllers

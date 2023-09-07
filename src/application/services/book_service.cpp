@@ -16,6 +16,9 @@ BookService::BookService(ILibraryService* libraryService) :
 
 void BookService::setUp(QUuid uuid)
 {
+    // Clean up previous book data first
+    m_TOCModel = nullptr;
+
     m_book = m_libraryService->getBook(uuid);
     if(m_book == nullptr)
     {
