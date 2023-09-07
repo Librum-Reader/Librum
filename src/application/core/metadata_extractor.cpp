@@ -141,7 +141,7 @@ QImage MetadataExtractor::getCover()
     try
     {
         core::PageGenerator page(m_document.get(), 0);
-        return utils::qImageFromPixmap(page.renderPage());
+        return page.renderPage();
     }
     catch(...)
     {

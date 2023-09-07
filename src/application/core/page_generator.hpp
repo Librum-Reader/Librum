@@ -1,4 +1,5 @@
 #pragma once
+#include <QImage>
 #include <QList>
 #include <QPair>
 #include <string>
@@ -23,7 +24,7 @@ public:
 
     void setInvertColor(bool newInvertColor);
 
-    mupdf::FzPixmap renderPage();
+    QImage renderPage();
 
     bool pointIsAboveText(const mupdf::FzPoint& point);
     bool pointIsAboveLink(const mupdf::FzPoint& point);
@@ -56,8 +57,8 @@ private:
     std::vector<fz_rect> m_symbolBounds;
     bool m_invertColor = false;
 
-    bool m_pixmapOutdated = true;
-    mupdf::FzPixmap m_pixmap;
+    bool m_pageImageOutdated = true;
+    QImage m_pageImage;
 };
 
 }  // namespace application::core

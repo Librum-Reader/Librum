@@ -263,6 +263,7 @@ void PageView::selectMultipleWords()
 {
     auto positions = m_pageController->getPositionsForWordSelection(
         m_selectionStart, m_selectionEnd);
+
     m_selectionStart = positions.first;
     m_selectionEnd = positions.second;
 
@@ -273,6 +274,7 @@ void PageView::selectLine()
 {
     auto positions =
         m_pageController->getPositionsForLineSelection(m_selectionStart);
+
     m_selectionStart = positions.first;
     m_selectionEnd = positions.second;
 

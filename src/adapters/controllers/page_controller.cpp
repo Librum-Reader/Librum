@@ -34,7 +34,7 @@ void PageController::setZoom(float newZoom)
 
 QImage PageController::renderPage()
 {
-    return utils::qImageFromPixmap(m_pageGenerator.renderPage());
+    return m_pageGenerator.renderPage();
 }
 
 bool PageController::pointIsAboveText(const QPointF& point)

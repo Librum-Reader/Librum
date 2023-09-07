@@ -1,5 +1,6 @@
 #include "page_generator.hpp"
 #include <cmath>
+#include "fz_utils.hpp"
 #include "mupdf/classes.h"
 #include "mupdf/classes2.h"
 
@@ -66,13 +67,13 @@ void PageGenerator::setupLinks()
     }
 }
 
-mupdf::FzPixmap PageGenerator::renderPage()
+QImage PageGenerator::renderPage()
 {
-    if(!m_pixmapOutdated)
-        return m_pixmap;
+    if(!m_pageImageOutdated)
+        return m_pageImage;
 
-    m_pixmap = getEmptyPixmap();
-    auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), m_pixmap);
+    auto pixmap = getEmptyPixmap();
+    auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
     mupdf::FzCookie cookie;
     mupdf::FzRect rect = mupdf::FzRect::Fixed_INFINITE;
@@ -80,10 +81,11 @@ mupdf::FzPixmap PageGenerator::renderPage()
     drawDevice.fz_close_device();
 
     if(m_invertColor)
-        m_pixmap.fz_invert_pixmap();
+        pixmap.fz_invert_pixmap();
 
-    m_pixmapOutdated = false;
-    return m_pixmap;
+    m_pageImage = utils::qImageFromPixmap(pixmap);
+    m_pageImageOutdated = false;
+    return m_pageImage;
 }
 
 mupdf::FzPixmap PageGenerator::getEmptyPixmap() const
@@ -135,7 +137,7 @@ void PageGenerator::setZoom(float newZoom)
 
     m_matrix.a = newZoom;
     m_matrix.d = newZoom;
-    m_pixmapOutdated = true;
+    m_pageImageOutdated = true;
 }
 
 void PageGenerator::setInvertColor(bool newInvertColor)
@@ -144,7 +146,7 @@ void PageGenerator::setInvertColor(bool newInvertColor)
         return;
 
     m_invertColor = newInvertColor;
-    m_pixmapOutdated = true;
+    m_pageImageOutdated = true;
 }
 
 void PageGenerator::generateSelectionRects(mupdf::FzPoint start,
