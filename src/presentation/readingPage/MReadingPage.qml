@@ -329,10 +329,10 @@ Page
             Layout.fillWidth: true
             
             onVisibleChanged: toolbar.searchButton.active = visible;
-//            onSearchQueried: if(query.length) BookController.search(query)
-//            onClearQuery: BookController.clearSearch()
-//            onNextButtonClicked: BookController.goToNextSearchHit();
-//            onPreviousButtonClicked: BookController.goToPreviousSearchHit();
+            onSearchQueried: if(query.length) BookController.search(query)
+            onClearQuery: BookController.clearSearch()
+            onNextButtonClicked: BookController.goToNextSearchHit();
+            onPreviousButtonClicked: BookController.goToPreviousSearchHit();
         }
     }
     

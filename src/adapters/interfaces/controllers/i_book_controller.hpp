@@ -30,6 +30,11 @@ public:
     Q_INVOKABLE virtual void setUp(QString uuid) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
 
+    Q_INVOKABLE virtual void search(const QString& text) = 0;
+    Q_INVOKABLE virtual void clearSearch() = 0;
+    Q_INVOKABLE virtual void goToNextSearchHit() = 0;
+    Q_INVOKABLE virtual void goToPreviousSearchHit() = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;

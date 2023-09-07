@@ -24,6 +24,11 @@ public:
     virtual void setUp(QUuid uuid) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
 
+    virtual void search(const QString& text) = 0;
+    virtual void clearSearch() = 0;
+    virtual void goToNextSearchHit() = 0;
+    virtual void goToPreviousSearchHit() = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
@@ -37,6 +42,7 @@ public:
 
 signals:
     void goToPosition(int pageNumber, int y);
+    void highlightText(int pageNumber, mupdf::FzQuad quad);
 };
 
 }  // namespace application

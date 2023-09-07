@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QRectF>
 #include <QString>
 #include "adapters_export.hpp"
 #include "i_book_controller.hpp"
@@ -19,6 +20,11 @@ public:
     void setUp(QString uuid) override;
     mupdf::FzDocument* getFzDocument() override;
 
+    void search(const QString& text) override;
+    void clearSearch() override;
+    void goToNextSearchHit() override;
+    void goToPreviousSearchHit() override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
@@ -28,6 +34,9 @@ public:
     float getZoom() const override;
     void setZoom(float newZoom) override;
     application::core::FilteredTOCModel* getTableOfContents() override;
+
+private:
+    QRectF fzQuadToQRectF(const mupdf::FzQuad& rect);
 
 private:
     application::IBookService* m_bookService;

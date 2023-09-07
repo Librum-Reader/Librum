@@ -19,7 +19,7 @@ int PageController::getHeight()
     return m_pageGenerator.getHeight();
 }
 
-int PageController::getZoom()
+float PageController::getZoom()
 {
     return m_pageGenerator.getZoom();
 }

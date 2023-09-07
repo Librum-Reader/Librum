@@ -1,5 +1,6 @@
 #include "book_service.hpp"
 #include <mupdf/classes.h>
+#include <QApplication>
 #include <QDebug>
 #include <QDesktopServices>
 #include <string>
@@ -33,6 +34,85 @@ void BookService::setUp(QUuid uuid)
 mupdf::FzDocument* BookService::getFzDocument()
 {
     return m_fzDocument.get();
+}
+
+void BookService::search(const QString& text)
+{
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+
+    clearSearch();
+    for(int i = 0; i < m_fzDocument->fz_count_pages(); ++i)
+    {
+        mupdf::FzStextOptions options;
+        mupdf::FzStextPage textPage(*m_fzDocument, i, options);
+        const int maxHits = 100;
+        int hitMarks[maxHits];
+        auto hits = textPage.search_stext_page(text.toStdString().c_str(),
+                                               hitMarks, maxHits);
+
+        m_searchHits.reserve(hits.size());
+        for(auto& hit : hits)
+        {
+            SearchHit searchHit {
+                .pageNumber = i,
+                .rect = hit,
+            };
+            m_searchHits.emplace_back(searchHit);
+        }
+    }
+
+    QApplication::restoreOverrideCursor();
+
+    if(!m_searchHits.empty())
+    {
+        auto hit = m_searchHits.front();
+        m_currentSearchHit = 0;
+
+        emit goToPosition(hit.pageNumber, hit.rect.ul.y);
+        emit highlightText(hit.pageNumber, hit.rect);
+    }
+}
+
+void BookService::clearSearch()
+{
+    m_searchHits.clear();
+    m_currentSearchHit = -1;
+}
+
+void BookService::goToNextSearchHit()
+{
+    if(m_currentSearchHit == -1 || m_searchHits.empty())
+        return;
+
+    // Wrap to the beginning once you are over the end
+    ++m_currentSearchHit;
+    if(m_currentSearchHit >= m_searchHits.size())
+    {
+        m_currentSearchHit = 0;
+    }
+
+    auto hit = m_searchHits.at(m_currentSearchHit);
+
+    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
+    emit highlightText(hit.pageNumber, hit.rect);
+}
+
+void BookService::goToPreviousSearchHit()
+{
+    if(m_currentSearchHit == -1 || m_searchHits.empty())
+        return;
+
+    // Wrap to the beginning once you are over the end
+    --m_currentSearchHit;
+    if(m_currentSearchHit <= 0)
+    {
+        m_currentSearchHit = m_searchHits.size() - 1;
+    }
+
+    auto hit = m_searchHits.at(m_currentSearchHit);
+
+    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
+    emit highlightText(hit.pageNumber, hit.rect);
 }
 
 void BookService::followLink(const char* uri)

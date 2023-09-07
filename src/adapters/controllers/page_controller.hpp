@@ -16,7 +16,7 @@ public:
     int getWidth() override;
     int getHeight() override;
 
-    int getZoom() override;
+    float getZoom() override;
     void setZoom(float newZoom) override;
 
     QImage renderPage() override;

@@ -21,7 +21,7 @@ public:
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
 
-    virtual int getZoom() = 0;
+    virtual float getZoom() = 0;
     virtual void setZoom(float newZoom) = 0;
 
     Q_INVOKABLE virtual QImage renderPage() = 0;

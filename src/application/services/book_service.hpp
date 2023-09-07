@@ -9,6 +9,12 @@
 namespace application::services
 {
 
+struct SearchHit
+{
+    int pageNumber;
+    mupdf::FzQuad rect;
+};
+
 class BookService : public IBookService
 {
 public:
@@ -16,6 +22,11 @@ public:
 
     void setUp(QUuid uuid) override;
     mupdf::FzDocument* getFzDocument() override;
+
+    void search(const QString& text) override;
+    void clearSearch() override;
+    void goToNextSearchHit() override;
+    void goToPreviousSearchHit() override;
 
     void followLink(const char* uri) override;
 
@@ -26,13 +37,16 @@ public:
     float getZoom() const override;
     void setZoom(float newZoom) override;
 
-    application::core::FilteredTOCModel* getTableOfContents() override;
+    core::FilteredTOCModel* getTableOfContents() override;
 
 private:
     domain::entities::Book* m_book = nullptr;
     ILibraryService* m_libraryService;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
+    std::vector<SearchHit> m_searchHits;
+    int m_currentSearchHit;
     float m_zoom = 1;
+
     std::unique_ptr<core::TOCModel> m_TOCModel;
     std::unique_ptr<core::FilteredTOCModel> m_filteredTOCModel;
 };

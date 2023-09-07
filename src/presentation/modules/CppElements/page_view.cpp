@@ -37,23 +37,27 @@ void PageView::setBookController(BookController* newBookController)
         m_bookController->getFzDocument(), m_currentPage);
     m_pageController->setZoom(m_bookController->getZoom());
 
+    // Setup connections to the BookController
     connect(m_bookController, &BookController::zoomChanged, this,
             &PageView::updateZoom);
+
+    connect(m_bookController, &BookController::highlightText, this,
+            [this](int pageNumber, QRectF rect)
+            {
+                if(pageNumber != m_currentPage)
+                    return;
+
+                selectPosition(rect);
+            });
 }
 
 int PageView::getImplicitWidth() const
 {
-    if(m_bookController == nullptr)
-        return 100;
-
     return m_pageController->getWidth();
 }
 
 int PageView::getImplicitHeight() const
 {
-    if(m_bookController == nullptr)
-        return 100;
-
     return m_pageController->getHeight();
 }
 
