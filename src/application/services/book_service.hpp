@@ -40,9 +40,14 @@ public:
     core::FilteredTOCModel* getTableOfContents() override;
 
 private:
-    domain::entities::Book* m_book = nullptr;
+    void extractSearchHitsFromBook(std::vector<SearchHit>& results,
+                                   const char* text) const;
+    void goToFirstSearchHit();
+
     ILibraryService* m_libraryService;
+    domain::entities::Book* m_book = nullptr;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
+
     std::vector<SearchHit> m_searchHits;
     int m_currentSearchHit;
     float m_zoom = 1;

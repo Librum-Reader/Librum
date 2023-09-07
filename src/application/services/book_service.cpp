@@ -19,6 +19,9 @@ void BookService::setUp(QUuid uuid)
 {
     // Clean up previous book data first
     m_TOCModel = nullptr;
+    m_searchHits.clear();
+    m_currentSearchHit = -1;
+    m_book = nullptr;
 
     m_book = m_libraryService->getBook(uuid);
     if(m_book == nullptr)
@@ -41,36 +44,45 @@ void BookService::search(const QString& text)
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     clearSearch();
+    extractSearchHitsFromBook(m_searchHits, text.toStdString().c_str());
+
+    QApplication::restoreOverrideCursor();
+
+    if(!m_searchHits.empty())
+        goToFirstSearchHit();
+}
+
+void BookService::extractSearchHitsFromBook(std::vector<SearchHit>& results,
+                                            const char* text) const
+{
+    mupdf::FzStextOptions options;
+    const int maxHits = 1000;
+
     for(int i = 0; i < m_fzDocument->fz_count_pages(); ++i)
     {
-        mupdf::FzStextOptions options;
         mupdf::FzStextPage textPage(*m_fzDocument, i, options);
-        const int maxHits = 100;
         int hitMarks[maxHits];
-        auto hits = textPage.search_stext_page(text.toStdString().c_str(),
-                                               hitMarks, maxHits);
+        auto hits = textPage.search_stext_page(text, hitMarks, maxHits);
 
-        m_searchHits.reserve(hits.size());
+        results.reserve(hits.size());
         for(auto& hit : hits)
         {
             SearchHit searchHit {
                 .pageNumber = i,
                 .rect = hit,
             };
-            m_searchHits.emplace_back(searchHit);
+            results.emplace_back(searchHit);
         }
     }
+}
 
-    QApplication::restoreOverrideCursor();
+void BookService::goToFirstSearchHit()
+{
+    auto hit = m_searchHits.front();
+    m_currentSearchHit = 0;
 
-    if(!m_searchHits.empty())
-    {
-        auto hit = m_searchHits.front();
-        m_currentSearchHit = 0;
-
-        emit goToPosition(hit.pageNumber, hit.rect.ul.y);
-        emit highlightText(hit.pageNumber, hit.rect);
-    }
+    emit goToPosition(hit.pageNumber, hit.rect.ul.y);
+    emit highlightText(hit.pageNumber, hit.rect);
 }
 
 void BookService::clearSearch()
