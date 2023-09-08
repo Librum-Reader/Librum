@@ -36,8 +36,7 @@ public:
         mupdf::FzPoint begin, mupdf::FzPoint end);
     QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
         mupdf::FzPoint point);
-    std::string getTextFromSelection(const mupdf::FzPoint& start,
-                                     const mupdf::FzPoint& end);
+    std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
 
 private:
     void setupDisplayList(const mupdf::FzRect& boundPage);

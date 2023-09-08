@@ -15,8 +15,8 @@ void TextSelector::generateSelectionRects(QList<mupdf::FzQuad>& container,
                                           mupdf::FzPoint start,
                                           mupdf::FzPoint end)
 {
-    normalizePoint(start);
-    normalizePoint(end);
+    restorePoint(start);
+    restorePoint(end);
 
     const int max = 1000;
     fz_quad hits[max];
@@ -35,8 +35,8 @@ QPair<mupdf::FzPoint, mupdf::FzPoint>
     TextSelector::getPositionsForWordSelection(mupdf::FzPoint start,
                                                mupdf::FzPoint end)
 {
-    normalizePoint(start);
-    normalizePoint(end);
+    restorePoint(start);
+    restorePoint(end);
 
     // This modifies the fzBegin and fzEnd.
     mupdf::ll_fz_snap_selection(m_textPage->m_internal, start.internal(),
@@ -52,7 +52,7 @@ QPair<mupdf::FzPoint, mupdf::FzPoint>
 QPair<mupdf::FzPoint, mupdf::FzPoint>
     TextSelector::getPositionsForLineSelection(mupdf::FzPoint point)
 {
-    normalizePoint(point);
+    restorePoint(point);
     mupdf::FzPoint begin(point.x, point.y);
     mupdf::FzPoint end = begin;
 
@@ -67,19 +67,22 @@ QPair<mupdf::FzPoint, mupdf::FzPoint>
         mupdf::FzPoint(begin.x, begin.y), mupdf::FzPoint(end.x, end.y));
 }
 
-std::string TextSelector::getTextFromSelection(const mupdf::FzPoint& start,
-                                               const mupdf::FzPoint& end)
+std::string TextSelector::getTextFromSelection(mupdf::FzPoint start,
+                                               mupdf::FzPoint end)
 {
-    mupdf::FzPoint fzStart(start.x, start.y);
-    mupdf::FzPoint fzEnd(end.x, end.y);
-    fzStart = fzStart.transform(m_matrix->fz_invert_matrix());
-    fzEnd = fzEnd.transform(m_matrix->fz_invert_matrix());
+    restorePoint(start);
+    restorePoint(end);
 
-    auto text = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
+    auto text = m_textPage->fz_copy_selection(start, end, 1);
     return text;
 }
 
-void TextSelector::normalizePoint(mupdf::FzPoint& point)
+/**
+ * Restores the point to its original position by applying the inverse
+ * transformation matrix to it. This is necessary because mupdf expects
+ * arguments passed to be without any zooming or similar applied.
+ */
+void TextSelector::restorePoint(mupdf::FzPoint& point)
 {
     auto invMatrix = m_matrix->fz_invert_matrix();
     point = point.fz_transform_point(invMatrix);

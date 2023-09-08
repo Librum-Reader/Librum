@@ -168,8 +168,8 @@ QPair<mupdf::FzPoint, mupdf::FzPoint>
     return m_textSelector.getPositionsForLineSelection(point);
 }
 
-std::string PageGenerator::getTextFromSelection(const mupdf::FzPoint& start,
-                                                const mupdf::FzPoint& end)
+std::string PageGenerator::getTextFromSelection(mupdf::FzPoint start,
+                                                mupdf::FzPoint end)
 {
     return m_textSelector.getTextFromSelection(start, end);
 }

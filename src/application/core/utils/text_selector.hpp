@@ -16,11 +16,10 @@ public:
         mupdf::FzPoint start, mupdf::FzPoint end);
     QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
         mupdf::FzPoint point);
-    std::string getTextFromSelection(const mupdf::FzPoint& start,
-                                     const mupdf::FzPoint& end);
+    std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
 
 private:
-    void normalizePoint(mupdf::FzPoint& point);
+    void restorePoint(mupdf::FzPoint& point);
 
     mupdf::FzStextPage* m_textPage;
     mupdf::FzMatrix* m_matrix;
