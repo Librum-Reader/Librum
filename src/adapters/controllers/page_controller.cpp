@@ -28,6 +28,7 @@ void PageController::setZoom(float zoom)
     m_matrix.d = zoom;
 
     m_pageImageOutdated = true;
+    m_selectionRectsOutdated = true;
 }
 
 float PageController::getZoom()
@@ -48,6 +49,8 @@ QImage PageController::renderPage()
 
     auto zoom = m_matrix.a;
     m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
+
+    m_pageImageOutdated = false;
     return m_pageImage;
 }
 
@@ -77,17 +80,20 @@ const char* PageController::getLinkUriAtPoint(const QPointF& point)
 
 QList<QRectF> PageController::getBufferedSelectionRects()
 {
-    QList<QRectF> result;
+    if(!m_selectionRectsOutdated)
+        return m_selectionRects;
 
+    m_selectionRects.clear();
     auto& rects = m_pageGenerator.getBufferedSelectionRects();
     rects.reserve(rects.size());
     for(auto& rect : rects)
     {
         rect = rect.fz_transform_quad(m_matrix);
-        result.append(utils::fzQuadToQRectF(rect));
+        m_selectionRects.append(utils::fzQuadToQRectF(rect));
     }
 
-    return result;
+    m_selectionRectsOutdated = false;
+    return m_selectionRects;
 }
 
 void PageController::generateSelectionRects(QPointF start, QPointF end)
@@ -99,11 +105,14 @@ void PageController::generateSelectionRects(QPointF start, QPointF end)
 
     m_pageGenerator.getBufferedSelectionRects().clear();
     m_pageGenerator.generateSelectionRects(fzStart, fzEnd);
+
+    m_selectionRectsOutdated = true;
 }
 
 void PageController::clearBufferedSelectionRects()
 {
     m_pageGenerator.getBufferedSelectionRects().clear();
+    m_selectionRectsOutdated = true;
 }
 
 QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(

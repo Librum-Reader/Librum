@@ -1,5 +1,6 @@
 #include <QObject>
 #include "adapters_export.hpp"
+#include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 #pragma once
@@ -34,6 +35,10 @@ public:
     Q_INVOKABLE virtual void clearSearch() = 0;
     Q_INVOKABLE virtual void goToNextSearchHit() = 0;
     Q_INVOKABLE virtual void goToPreviousSearchHit() = 0;
+
+    virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
+    virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
+    virtual void removeHighlight(const QUuid& uuid) = 0;
 
     virtual void followLink(const char* uri) = 0;
 

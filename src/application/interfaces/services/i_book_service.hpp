@@ -4,6 +4,7 @@
 #include <QString>
 #include <QUuid>
 #include "application_export.hpp"
+#include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 
@@ -28,6 +29,10 @@ public:
     virtual void clearSearch() = 0;
     virtual void goToNextSearchHit() = 0;
     virtual void goToPreviousSearchHit() = 0;
+
+    virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
+    virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
+    virtual void removeHighlight(const QUuid& uuid) = 0;
 
     virtual void followLink(const char* uri) = 0;
 

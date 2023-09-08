@@ -43,6 +43,22 @@ inline QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
     return QPointF(fzPoint.x, fzPoint.y);
 }
 
+inline void scaleQRectFToZoom(QRectF& rect, float newZoom)
+{
+    auto fzRect = mupdf::FzRect(rect.topLeft().x(), rect.topLeft().y(),
+                                rect.bottomRight().x(), rect.bottomRight().y());
+
+    // Apply new zoom
+    auto newMatrix = mupdf::FzMatrix();
+    newMatrix.a = newZoom;
+    newMatrix.d = newZoom;
+    auto scaledFzRect = fzRect.fz_transform_rect(newMatrix);
+
+    rect = QRectF(scaledFzRect.x0, scaledFzRect.y0,
+                  scaledFzRect.x1 - scaledFzRect.x0,
+                  scaledFzRect.y1 - scaledFzRect.y0);
+}
+
 inline QRectF fzQuadToQRectF(const mupdf::FzQuad& rect)
 {
     float width = rect.ur.x - rect.ul.x;

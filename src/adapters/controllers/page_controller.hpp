@@ -47,6 +47,10 @@ private:
     bool m_pageImageOutdated = true;
     QImage m_pageImage;
 
+    // Selection rects outdated
+    bool m_selectionRectsOutdated = true;
+    QList<QRectF> m_selectionRects;
+
     using QPointFPair = QPair<QPointF, QPointF>;
 };
 

@@ -99,6 +99,30 @@ void Book::setMediaDownloadProgress(double newProgress)
     m_metaData.bookMediaDownloadProgress = newProgress;
 }
 
+const QList<Highlight>& Book::getHighlights() const
+{
+    return m_highlights;
+}
+
+void Book::setHighlights(QList<Highlight>&& highlights)
+{
+    m_highlights = std::move(highlights);
+}
+
+void Book::addHighlight(const Highlight& highlight)
+{
+    m_highlights.append(highlight);
+}
+
+void Book::removeHighlight(QUuid uuid)
+{
+    m_highlights.removeIf(
+        [&uuid](const Highlight& highlight)
+        {
+            return highlight.getUuid() == uuid;
+        });
+}
+
 const QDateTime& Book::getCoverLastModified() const
 {
     return m_metaData.coverLastModified;
@@ -490,6 +514,7 @@ QByteArray Book::toJson() const
         { "coverPath", getCoverPath() },
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
+        { "highlights", serializeHighlights() },
     };
 
     QJsonDocument doc(book);
@@ -510,6 +535,18 @@ QJsonArray Book::serializeTags() const
     return tags;
 }
 
+QJsonArray Book::serializeHighlights() const
+{
+    QJsonArray highlights;
+    for(const auto& highlight : m_highlights)
+    {
+        auto obj = QJsonDocument::fromJson(highlight.toJson()).object();
+        highlights.append(QJsonValue::fromVariant(obj));
+    }
+
+    return highlights;
+}
+
 Book Book::fromJson(const QJsonObject& jsonBook)
 {
     BookMetaData metaData = getBookMetaDataFromJson(jsonBook);
@@ -521,6 +558,7 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     Book book(filePath, metaData, currentPage, uuid);
     book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
+    addHighlightsToBook(book, jsonBook["highlights"].toArray());
 
     return book;
 }
@@ -566,6 +604,17 @@ void Book::addTagsToBook(Book& book, const QJsonArray& jsonTags)
         Tag tag = Tag::fromJson(tagObject);
 
         book.addTag(tag);
+    }
+}
+
+void Book::addHighlightsToBook(Book& book, const QJsonArray& jsonHighlights)
+{
+    for(const auto& jsonHighlight : jsonHighlights)
+    {
+        auto highlightObject = jsonHighlight.toObject();
+        Highlight highlight = Highlight::fromJson(highlightObject);
+
+        book.addHighlight(highlight);
     }
 }
 

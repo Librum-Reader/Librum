@@ -57,6 +57,21 @@ void BookController::goToPreviousSearchHit()
     m_bookService->goToPreviousSearchHit();
 }
 
+const QList<domain::entities::Highlight>& BookController::getHighlights() const
+{
+    return m_bookService->getHighlights();
+}
+
+void BookController::addHighlight(const domain::entities::Highlight& highlight)
+{
+    m_bookService->addHighlight(highlight);
+}
+
+void BookController::removeHighlight(const QUuid& uuid)
+{
+    m_bookService->removeHighlight(uuid);
+}
+
 void BookController::followLink(const char* uri)
 {
     return m_bookService->followLink(uri);

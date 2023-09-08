@@ -6,8 +6,9 @@
 #include <QUuid>
 #include <vector>
 #include "book_meta_data.hpp"
-#include "tag.hpp"
 #include "domain_export.hpp"
+#include "highlight.hpp"
+#include "tag.hpp"
 
 namespace domain::entities
 {
@@ -15,93 +16,97 @@ namespace domain::entities
 class DOMAIN_EXPORT Book
 {
 public:
-     Book(const QString& filePath, const value_objects::BookMetaData& metaData,
+    Book(const QString& filePath, const value_objects::BookMetaData& metaData,
          int currentPage = 0, const QString& uuid = "");
 
-     bool operator==(const Book& rhs) const;
+    bool operator==(const Book& rhs) const;
 
 
-     const QUuid& getUuid() const;
+    const QUuid& getUuid() const;
 
-     const QString& getTitle() const;
-     void setTitle(const QString& newTitle);
+    const QString& getTitle() const;
+    void setTitle(const QString& newTitle);
 
-     const QString& getAuthors() const;
-     void setAuthors(const QString& newAuthor);
+    const QString& getAuthors() const;
+    void setAuthors(const QString& newAuthor);
 
-     const QString& getCreator() const;
-     void setCreator(const QString& newCreator);
+    const QString& getCreator() const;
+    void setCreator(const QString& newCreator);
 
-     int getPageCount() const;
-     void setPageCount(int newPageCount);
+    int getPageCount() const;
+    void setPageCount(int newPageCount);
 
-     int getCurrentPage() const;
-     void setCurrentPage(int newCurrentPage);
+    int getCurrentPage() const;
+    void setCurrentPage(int newCurrentPage);
 
-     const QString& getCreationDate() const;
-     void setCreationDate(const QString& newCreationDate);
+    const QString& getCreationDate() const;
+    void setCreationDate(const QString& newCreationDate);
 
-     const QString& getFormat() const;
-     void setFormat(const QString& newFormat);
+    const QString& getFormat() const;
+    void setFormat(const QString& newFormat);
 
-     const QString& getLanguage() const;
-     void setLanguage(const QString& newLanguage);
+    const QString& getLanguage() const;
+    void setLanguage(const QString& newLanguage);
 
-     const QString& getDocumentSize() const;
-     void setDocumentSize(const QString& newDocumentSize);
+    const QString& getDocumentSize() const;
+    void setDocumentSize(const QString& newDocumentSize);
 
-     const QString& getPagesSize() const;
-     void setPagesSize(const QString& newPagesSize);
+    const QString& getPagesSize() const;
+    void setPagesSize(const QString& newPagesSize);
 
-     const QDateTime& getAddedToLibrary() const;
-     void setAddedToLibrary(const QDateTime& newAddedToLibrary);
+    const QDateTime& getAddedToLibrary() const;
+    void setAddedToLibrary(const QDateTime& newAddedToLibrary);
 
-     const QDateTime& getLastOpened() const;
-     void setLastOpened(const QDateTime& newLastOpened);
-     void updateLastOpened();
+    const QDateTime& getLastOpened() const;
+    void setLastOpened(const QDateTime& newLastOpened);
+    void updateLastOpened();
 
-     const QDateTime& getLastModified() const;
-     void setLastModified(const QDateTime& newLastModified);
-     void updateLastModified();
+    const QDateTime& getLastModified() const;
+    void setLastModified(const QDateTime& newLastModified);
+    void updateLastModified();
 
-     const QString& getFilePath() const;
-     void setFilePath(const QString& newLocalPath);
+    const QString& getFilePath() const;
+    void setFilePath(const QString& newLocalPath);
 
-     bool hasCover() const;
-     void setHasCover(bool hasCover);
+    bool hasCover() const;
+    void setHasCover(bool hasCover);
 
-     const QString& getCoverPath() const;
-     void setCoverPath(const QString& path);
+    const QString& getCoverPath() const;
+    void setCoverPath(const QString& path);
 
-     double getMediaDownloadProgress() const;
-     void setMediaDownloadProgress(double newProgress);
+    double getMediaDownloadProgress() const;
+    void setMediaDownloadProgress(double newProgress);
+
+    const QList<Highlight>& getHighlights() const;
+    void setHighlights(QList<Highlight>&& highlights);
+    void addHighlight(const Highlight& highlight);
+    void removeHighlight(QUuid uuid);
+
+    const QDateTime& getCoverLastModified() const;
+    void updateCoverLastModified();
+    void setCoverLastModified(const QDateTime& newTime);
+
+    bool isDownloaded() const;
+    void setDownloaded(bool newDownloaded);
+
+    bool existsOnlyOnClient() const;
+    void setExistsOnlyOnClient(bool newExistsOnlyOnClient);
+
+    int getBookReadingProgress() const;
 
 
-     const QDateTime& getCoverLastModified() const;
-     void updateCoverLastModified();
-     void setCoverLastModified(const QDateTime& newTime);
+    domain::entities::Tag* getTagByUuid(const QUuid& uuid);
+    domain::entities::Tag* getTagByName(const QString& name);
+    bool addTag(const Tag& tag);
+    bool removeTag(const QUuid& uuid);
+    bool renameTag(const QUuid& uuid, const QString& newName);
+    const std::vector<Tag>& getTags() const;
 
-     bool isDownloaded() const;
-     void setDownloaded(bool newDownloaded);
-
-     bool existsOnlyOnClient() const;
-     void setExistsOnlyOnClient(bool newExistsOnlyOnClient);
-
-     int getBookReadingProgress() const;
-
-
-     domain::entities::Tag* getTagByUuid(const QUuid& uuid);
-     domain::entities::Tag* getTagByName(const QString& name);
-     bool addTag(const Tag& tag);
-     bool removeTag(const QUuid& uuid);
-     bool renameTag(const QUuid& uuid, const QString& newName);
-     const std::vector<Tag>& getTags() const;
-
-     void update(const Book& other);
-     bool isValid() const;
-     long getSizeInBytes() const;
-     QByteArray toJson() const;
-     static Book fromJson(const QJsonObject& jsonBook);
+    void update(const Book& other);
+    bool isValid() const;
+    long getSizeInBytes() const;
+    QByteArray toJson() const;
+    static Book fromJson(const QJsonObject& jsonBook);
 
 
     static const int maxCoverWidth { 188 };
@@ -114,9 +119,11 @@ public:
 private:
     bool tagsAreTheSame(const std::vector<Tag>& other) const;
     QJsonArray serializeTags() const;
+    QJsonArray serializeHighlights() const;
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
+    static void addHighlightsToBook(Book& book, const QJsonArray& jsonTags);
     long getBytesFromSizeString(QString size) const;
     long getCoverSizeInBytes() const;
     QPair<long, QString> splitSizeStringInNumbersAndFormat(
@@ -124,6 +131,7 @@ private:
 
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;
+    QList<Highlight> m_highlights;
     QString m_filePath;
     bool m_isDownloaded = true;
     bool m_existsOnlyOnClient = true;

@@ -11,11 +11,13 @@
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
 #include "fz_utils.hpp"
+#include "highlight.hpp"
 #include "page_controller.hpp"
 #include "qnamespace.h"
 
 using adapters::controllers::BookController;
 using adapters::controllers::PageController;
+using domain::entities::Highlight;
 using namespace application::core;
 
 namespace cpp_elements
@@ -126,6 +128,7 @@ QSGNode* PageView::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     QPainter painter(&image);
 
     paintSelectionOnPage(painter);
+    paintHighlightsOnPage(painter);
 
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
@@ -134,6 +137,9 @@ QSGNode* PageView::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
 
 void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 {
+    if(event->button() == Qt::RightButton)
+        return;
+
     m_selectionStart = QPointF(event->position().x(), event->position().y());
     m_selectionEnd = QPointF(event->position().x(), event->position().y());
     selectSingleWord();
@@ -144,6 +150,9 @@ void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 
 void PageView::mousePressEvent(QMouseEvent* event)
 {
+    if(event->button() == Qt::RightButton)
+        return;
+
     int mouseX = event->position().x();
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
@@ -171,27 +180,40 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
 
-    // This gets triggered when the user simply clicks on the page, without
-    // dragging the mouse, so on a normal click. In this case we want to reset
-    // the highlight.
-    if(m_selectionStart == QPointF(mouseX, mouseY))
+    if(event->button() == Qt::LeftButton)
     {
-        removeSelection();
-    }
+        // This gets triggered when the user simply clicks on the page, without
+        // dragging the mouse, so on a normal click. In this case we want to
+        // reset the selection.
+        if(m_selectionStart == QPointF(mouseX, mouseY))
+        {
+            removeSelection();
+        }
 
-    if(m_startedMousePressOnLink &&
-       m_pageController->pointIsAboveLink(mousePoint))
+        if(m_startedMousePressOnLink &&
+           m_pageController->pointIsAboveLink(mousePoint))
+        {
+            auto uri = m_pageController->getLinkUriAtPoint(mousePoint);
+            m_bookController->followLink(uri);
+        }
+        m_startedMousePressOnLink = false;
+
+        m_doubleClickHold = false;
+    }
+    else if(event->button() == Qt::RightButton)
     {
-        auto uri = m_pageController->getLinkUriAtPoint(mousePoint);
-        m_bookController->followLink(uri);
+        if(mouseAboveSelection(mousePoint))
+        {
+            createHighlightFromCurrentSelection();
+        }
     }
-    m_startedMousePressOnLink = false;
-
-    m_doubleClickHold = false;
 }
 
 void PageView::mouseMoveEvent(QMouseEvent* event)
 {
+    if(event->button() == Qt::RightButton)
+        return;
+
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
@@ -231,6 +253,99 @@ void PageView::paintSelectionOnPage(QPainter& painter)
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
         painter.fillRect(rect, selectionColor);
     }
+}
+
+void PageView::paintHighlightsOnPage(QPainter& painter)
+{
+    for(auto& highlight : m_bookController->getHighlights())
+    {
+        for(auto rect : highlight.getRects())
+        {
+            painter.setCompositionMode(QPainter::CompositionMode_Multiply);
+            painter.fillRect(rect, highlight.getColor());
+        }
+    }
+}
+
+void PageView::removeConflictingHighlights(Highlight& highlight)
+{
+    bool existingHighlightRemoved = false;
+
+    auto& highlights = m_bookController->getHighlights();
+    for(int i = 0; i < highlights.size(); ++i)
+    {
+        auto& existingHighlight = highlights[i];
+
+        for(int u = 0; u < highlight.getRects().size(); ++u)
+        {
+            auto& rect = highlight.getRects()[u];
+
+            for(int k = 0; k < existingHighlight.getRects().size(); ++k)
+            {
+                auto& existingRect = existingHighlight.getRects()[k];
+
+                // New rect intersects with old rect
+                if(rect.intersects(existingRect))
+                {
+                    // Make sure that the rects are on the same line. With
+                    // some fonts, lines above eachother will intersect, but
+                    // its only an intersect when they are on the same line.
+                    auto shorterRect = rect.height() <= existingRect.height()
+                                           ? rect
+                                           : existingRect;
+                    auto intersectH = rect.intersected(existingRect).height();
+                    bool onSameLine = intersectH == shorterRect.height();
+
+                    if(onSameLine)
+                    {
+                        auto uuid = highlights[i].getUuid();
+                        m_bookController->removeHighlight(uuid);
+                        --i;
+                        existingHighlightRemoved = true;
+                        break;
+                    }
+                }
+            }
+
+            if(existingHighlightRemoved)
+            {
+                existingHighlightRemoved = false;
+                break;
+            }
+        }
+    }
+}
+
+bool PageView::mouseAboveSelection(const QPointF mouse)
+{
+    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
+    for(auto& rect : bufferedSelectionRects)
+    {
+        if(rect.contains(mouse))
+            return true;
+    }
+
+    return false;
+}
+
+void PageView::createHighlightFromCurrentSelection()
+{
+    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
+    removeSelection();
+
+    static int i = 0;
+    ++i;
+
+    auto pageNumber = m_pageNumber;
+    auto color = QColor(i % 2 == 0 ? 255 : 0, i % 2 == 0 ? 0 : 255, 0, 125);
+    auto rects = bufferedSelectionRects;
+    Highlight highlight(pageNumber, color);
+    highlight.setRects(rects);
+
+    removeConflictingHighlights(highlight);
+    m_bookController->addHighlight(highlight);
+
+    update();
 }
 
 void PageView::createSelection()

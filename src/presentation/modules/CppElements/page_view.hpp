@@ -66,6 +66,11 @@ private:
     void createSelection();
     void paintSelectionOnPage(QPainter& painter);
 
+    void createHighlightFromCurrentSelection();
+    void paintHighlightsOnPage(QPainter& painter);
+    void removeConflictingHighlights(domain::entities::Highlight& highlight);
+    bool mouseAboveSelection(const QPointF mouse);
+
     void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
 

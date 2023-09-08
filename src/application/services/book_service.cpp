@@ -80,6 +80,21 @@ void BookService::goToPreviousSearchHit()
     emit highlightText(searchHit.pageNumber, searchHit.rect);
 }
 
+const QList<domain::entities::Highlight>& BookService::getHighlights() const
+{
+    return m_book->getHighlights();
+}
+
+void BookService::addHighlight(const domain::entities::Highlight& highlight)
+{
+    m_book->addHighlight(highlight);
+}
+
+void BookService::removeHighlight(const QUuid& uuid)
+{
+    m_book->removeHighlight(uuid);
+}
+
 void BookService::followLink(const char* uri)
 {
     if(mupdf::ll_fz_is_external_link(uri))

@@ -23,6 +23,10 @@ public:
     void goToNextSearchHit() override;
     void goToPreviousSearchHit() override;
 
+    const QList<domain::entities::Highlight>& getHighlights() const override;
+    void addHighlight(const domain::entities::Highlight& highlight) override;
+    void removeHighlight(const QUuid& uuid) override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
