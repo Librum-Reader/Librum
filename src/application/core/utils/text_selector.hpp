@@ -1,5 +1,7 @@
 #pragma once
 #include <QList>
+#include <QPair>
+#include "fz_utils.hpp"
 #include "mupdf/classes.h"
 
 namespace application::core::utils
@@ -7,22 +9,19 @@ namespace application::core::utils
 
 class TextSelector
 {
+
 public:
-    TextSelector(mupdf::FzStextPage* textPage, mupdf::FzMatrix* matrix);
+    TextSelector(mupdf::FzStextPage* textPage);
 
     void generateSelectionRects(QList<mupdf::FzQuad>& container,
                                 mupdf::FzPoint start, mupdf::FzPoint end);
-    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForWordSelection(
-        mupdf::FzPoint start, mupdf::FzPoint end);
-    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
-        mupdf::FzPoint point);
+    FzPointPair getPositionsForWordSelection(mupdf::FzPoint start,
+                                             mupdf::FzPoint end);
+    FzPointPair getPositionsForLineSelection(mupdf::FzPoint point);
     std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
 
 private:
-    void restorePoint(mupdf::FzPoint& point);
-
     mupdf::FzStextPage* m_textPage;
-    mupdf::FzMatrix* m_matrix;
 };
 
 }  // namespace application::core::utils

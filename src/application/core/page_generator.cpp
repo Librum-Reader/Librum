@@ -7,10 +7,12 @@
 namespace application::core
 {
 
+using utils::FzPointPair;
+
 application::core::PageGenerator::PageGenerator(mupdf::FzDocument* document,
                                                 int pageNumber) :
     m_document(document),
-    m_textSelector(nullptr, nullptr)
+    m_textSelector(nullptr)
 {
     m_page =
         std::make_unique<mupdf::FzPage>(m_document->fz_load_page(pageNumber));
@@ -21,7 +23,7 @@ application::core::PageGenerator::PageGenerator(mupdf::FzDocument* document,
     setupSymbolBounds();
     setupLinks();
 
-    m_textSelector = utils::TextSelector(m_textPage.get(), &m_matrix);
+    m_textSelector = utils::TextSelector(m_textPage.get());
 }
 
 void PageGenerator::setupDisplayList(const mupdf::FzRect& boundPage)
@@ -67,31 +69,32 @@ void PageGenerator::setupLinks()
     }
 }
 
-QImage PageGenerator::renderPage()
+mupdf::FzPixmap PageGenerator::renderPage(float zoom)
 {
-    if(!m_pageImageOutdated)
-        return m_pageImage;
+    // Create matrix with zoom
+    mupdf::FzMatrix matrix;
+    matrix.a = zoom;
+    matrix.d = zoom;
 
-    auto pixmap = getEmptyPixmap();
+    auto pixmap = getEmptyPixmap(matrix);
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
     mupdf::FzCookie cookie;
     mupdf::FzRect rect = mupdf::FzRect::Fixed_INFINITE;
-    m_displayList.fz_run_display_list(drawDevice, m_matrix, rect, cookie);
+    m_displayList.fz_run_display_list(drawDevice, matrix, rect, cookie);
     drawDevice.fz_close_device();
 
     if(m_invertColor)
         pixmap.fz_invert_pixmap();
 
-    m_pageImage = utils::qImageFromPixmap(pixmap);
-    m_pageImageOutdated = false;
-    return m_pageImage;
+    return pixmap;
 }
 
-mupdf::FzPixmap PageGenerator::getEmptyPixmap() const
+mupdf::FzPixmap PageGenerator::getEmptyPixmap(
+    const mupdf::FzMatrix& matrix) const
 {
     auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
-    auto scaledBbox = bbox.fz_transform_rect(m_matrix);
+    auto scaledBbox = bbox.fz_transform_rect(matrix);
 
     mupdf::FzPixmap pixmap(mupdf::FzColorspace::Fixed_RGB, scaledBbox,
                            mupdf::FzSeparations(), 0);
@@ -110,34 +113,19 @@ int PageGenerator::getWidth() const
 {
     auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
 
-    return (bbox.x1 - bbox.x0) * m_matrix.a;
+    return (bbox.x1 - bbox.x0);
 }
 
 int PageGenerator::getHeight() const
 {
     auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
 
-    return (bbox.y1 - bbox.y0) * m_matrix.d;
-}
-
-float PageGenerator::getZoom() const
-{
-    return m_matrix.a;
+    return (bbox.y1 - bbox.y0);
 }
 
 QList<mupdf::FzQuad>& PageGenerator::getBufferedSelectionRects()
 {
     return m_bufferedSelectionRects;
-}
-
-void PageGenerator::setZoom(float newZoom)
-{
-    if(m_matrix.a == newZoom && m_matrix.d == newZoom)
-        return;
-
-    m_matrix.a = newZoom;
-    m_matrix.d = newZoom;
-    m_pageImageOutdated = true;
 }
 
 void PageGenerator::setInvertColor(bool newInvertColor)
@@ -146,7 +134,6 @@ void PageGenerator::setInvertColor(bool newInvertColor)
         return;
 
     m_invertColor = newInvertColor;
-    m_pageImageOutdated = true;
 }
 
 void PageGenerator::generateSelectionRects(mupdf::FzPoint start,
@@ -155,15 +142,13 @@ void PageGenerator::generateSelectionRects(mupdf::FzPoint start,
     m_textSelector.generateSelectionRects(m_bufferedSelectionRects, start, end);
 }
 
-QPair<mupdf::FzPoint, mupdf::FzPoint>
-    PageGenerator::getPositionsForWordSelection(mupdf::FzPoint begin,
-                                                mupdf::FzPoint end)
+FzPointPair PageGenerator::getPositionsForWordSelection(mupdf::FzPoint begin,
+                                                        mupdf::FzPoint end)
 {
     return m_textSelector.getPositionsForWordSelection(begin, end);
 }
 
-QPair<mupdf::FzPoint, mupdf::FzPoint>
-    PageGenerator::getPositionsForLineSelection(mupdf::FzPoint point)
+FzPointPair PageGenerator::getPositionsForLineSelection(mupdf::FzPoint point)
 {
     return m_textSelector.getPositionsForLineSelection(point);
 }
@@ -177,8 +162,6 @@ std::string PageGenerator::getTextFromSelection(mupdf::FzPoint start,
 bool PageGenerator::pointIsAboveText(const mupdf::FzPoint& point)
 {
     mupdf::FzPoint fzPoint(point.x, point.y);
-    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
-
     for(auto& rect : m_symbolBounds)
     {
         if(fzPoint.fz_is_point_inside_rect(rect))
@@ -191,8 +174,6 @@ bool PageGenerator::pointIsAboveText(const mupdf::FzPoint& point)
 bool PageGenerator::pointIsAboveLink(const mupdf::FzPoint& point)
 {
     mupdf::FzPoint fzPoint(point.x, point.y);
-    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
-
     for(auto& link : m_links)
     {
         if(fzPoint.fz_is_point_inside_rect(link.rect()))
@@ -205,8 +186,6 @@ bool PageGenerator::pointIsAboveLink(const mupdf::FzPoint& point)
 mupdf::FzLink PageGenerator::getLinkAtPoint(const mupdf::FzPoint& point)
 {
     mupdf::FzPoint fzPoint(point.x, point.y);
-    fzPoint = fzPoint.transform(m_matrix.fz_invert_matrix());
-
     for(auto& link : m_links)
     {
         if(fzPoint.fz_is_point_inside_rect(link.rect()))

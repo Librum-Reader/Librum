@@ -21,8 +21,8 @@ public:
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
 
+    virtual void setZoom(float zoom) = 0;
     virtual float getZoom() = 0;
-    virtual void setZoom(float newZoom) = 0;
 
     virtual void setInvertColor(bool newInvertColor) = 0;
 

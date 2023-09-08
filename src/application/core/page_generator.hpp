@@ -1,16 +1,23 @@
 #pragma once
-#include <QImage>
 #include <QList>
 #include <QPair>
 #include <string>
 #include <vector>
 #include "application_export.hpp"
+#include "fz_utils.hpp"
 #include "mupdf/classes.h"
 #include "text_selector.hpp"
 
 namespace application::core
 {
 
+/**
+ * The text generator is the low level class that is responsible to do any kind
+ * of computation directly on the text, such as rendering the page, getting
+ * positions of symbols, ...
+ * It expects all coordinates to be "restored" meaning without any applied
+ * transformations such as zooms.
+ */
 class APPLICATION_EXPORT PageGenerator
 {
 public:
@@ -19,12 +26,8 @@ public:
     int getWidth() const;
     int getHeight() const;
 
-    float getZoom() const;
-    void setZoom(float newZoom);
-
+    mupdf::FzPixmap renderPage(float zoom);
     void setInvertColor(bool newInvertColor);
-
-    QImage renderPage();
 
     bool pointIsAboveText(const mupdf::FzPoint& point);
     bool pointIsAboveLink(const mupdf::FzPoint& point);
@@ -32,10 +35,9 @@ public:
 
     QList<mupdf::FzQuad>& getBufferedSelectionRects();
     void generateSelectionRects(mupdf::FzPoint start, mupdf::FzPoint end);
-    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForWordSelection(
-        mupdf::FzPoint begin, mupdf::FzPoint end);
-    QPair<mupdf::FzPoint, mupdf::FzPoint> getPositionsForLineSelection(
-        mupdf::FzPoint point);
+    utils::FzPointPair getPositionsForWordSelection(mupdf::FzPoint begin,
+                                                    mupdf::FzPoint end);
+    utils::FzPointPair getPositionsForLineSelection(mupdf::FzPoint point);
     std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
 
 private:
@@ -43,21 +45,17 @@ private:
     void setupTextPage(int pageNumber);
     void setupSymbolBounds();
     void setupLinks();
-    mupdf::FzPixmap getEmptyPixmap() const;
+    mupdf::FzPixmap getEmptyPixmap(const mupdf::FzMatrix& matrix) const;
 
     const mupdf::FzDocument* m_document;
     std::unique_ptr<mupdf::FzPage> m_page;
     std::unique_ptr<mupdf::FzStextPage> m_textPage;
     mupdf::FzDisplayList m_displayList;
-    mupdf::FzMatrix m_matrix;
     utils::TextSelector m_textSelector;
     QList<mupdf::FzQuad> m_bufferedSelectionRects;
     QList<mupdf::FzLink> m_links;
     std::vector<fz_rect> m_symbolBounds;
     bool m_invertColor = false;
-
-    bool m_pageImageOutdated = true;
-    QImage m_pageImage;
 };
 
 }  // namespace application::core

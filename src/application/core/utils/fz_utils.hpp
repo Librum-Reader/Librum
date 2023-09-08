@@ -19,6 +19,8 @@ void imageCleanupHandler(void* data)
 
 }  // namespace
 
+using FzPointPair = QPair<mupdf::FzPoint, mupdf::FzPoint>;
+
 // Public
 inline QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
                                        float newZoom)
@@ -73,6 +75,17 @@ inline mupdf::FzPoint qPointToFzPoint(const QPointF& qPoint)
 inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint)
 {
     return QPointF(fzPoint.x, fzPoint.y);
+}
+
+/**
+ * Restores the point to its original position by applying the inverse
+ * transformation matrix to it. This is necessary because mupdf expects
+ * arguments passed to be without any zooming or similar applied.
+ */
+inline void restorePoint(mupdf::FzPoint& point, mupdf::FzMatrix& matrix)
+{
+    auto invMatrix = matrix.fz_invert_matrix();
+    point = point.fz_transform_point(invMatrix);
 }
 
 }  // namespace application::core::utils

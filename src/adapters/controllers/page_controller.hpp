@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include "i_page_controller.hpp"
+#include "mupdf/classes.h"
 #include "page_generator.hpp"
 
 namespace adapters::controllers
@@ -16,8 +17,8 @@ public:
     int getWidth() override;
     int getHeight() override;
 
+    void setZoom(float zoom) override;
     float getZoom() override;
-    void setZoom(float newZoom) override;
 
     void setInvertColor(bool newInvertColor) override;
 
@@ -40,6 +41,11 @@ public:
 
 private:
     application::core::PageGenerator m_pageGenerator;
+    mupdf::FzMatrix m_matrix;
+
+    // Image caching
+    bool m_pageImageOutdated = true;
+    QImage m_pageImage;
 
     using QPointFPair = QPair<QPointF, QPointF>;
 };

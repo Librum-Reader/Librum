@@ -14,44 +14,64 @@ PageController::PageController(mupdf::FzDocument* document, int pageNumber) :
 
 int PageController::getWidth()
 {
-    return m_pageGenerator.getWidth();
+    return m_pageGenerator.getWidth() * m_matrix.a;
 }
 
 int PageController::getHeight()
 {
-    return m_pageGenerator.getHeight();
+    return m_pageGenerator.getHeight() * m_matrix.d;
+}
+
+void PageController::setZoom(float zoom)
+{
+    m_matrix.a = zoom;
+    m_matrix.d = zoom;
+
+    m_pageImageOutdated = true;
 }
 
 float PageController::getZoom()
 {
-    return m_pageGenerator.getZoom();
+    return m_matrix.a;
 }
 
-void PageController::setZoom(float newZoom)
+void PageController::setInvertColor(bool newInvertColor)
 {
-    m_pageGenerator.setZoom(newZoom);
+    m_pageGenerator.setInvertColor(newInvertColor);
+    m_pageImageOutdated = true;
 }
 
 QImage PageController::renderPage()
 {
-    return m_pageGenerator.renderPage();
+    if(!m_pageImageOutdated)
+        return m_pageImage;
+
+    auto zoom = m_matrix.a;
+    m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
+    return m_pageImage;
 }
 
 bool PageController::pointIsAboveText(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
+    utils::restorePoint(fzPoint, m_matrix);
+
     return m_pageGenerator.pointIsAboveText(fzPoint);
 }
 
 bool PageController::pointIsAboveLink(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
+    utils::restorePoint(fzPoint, m_matrix);
+
     return m_pageGenerator.pointIsAboveLink(fzPoint);
 }
 
 const char* PageController::getLinkUriAtPoint(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
+    utils::restorePoint(fzPoint, m_matrix);
+
     return m_pageGenerator.getLinkAtPoint(fzPoint).uri();
 }
 
@@ -63,22 +83,22 @@ QList<QRectF> PageController::getBufferedSelectionRects()
     rects.reserve(rects.size());
     for(auto& rect : rects)
     {
+        rect = rect.fz_transform_quad(m_matrix);
         result.append(utils::fzQuadToQRectF(rect));
     }
 
     return result;
 }
 
-void PageController::setInvertColor(bool newInvertColor)
-{
-    m_pageGenerator.setInvertColor(newInvertColor);
-}
-
 void PageController::generateSelectionRects(QPointF start, QPointF end)
 {
+    auto fzStart = utils::qPointToFzPoint(start);
+    auto fzEnd = utils::qPointToFzPoint(end);
+    utils::restorePoint(fzStart, m_matrix);
+    utils::restorePoint(fzEnd, m_matrix);
+
     m_pageGenerator.getBufferedSelectionRects().clear();
-    return m_pageGenerator.generateSelectionRects(utils::qPointToFzPoint(start),
-                                                  utils::qPointToFzPoint(end));
+    m_pageGenerator.generateSelectionRects(fzStart, fzEnd);
 }
 
 void PageController::clearBufferedSelectionRects()
@@ -91,8 +111,13 @@ QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
+    utils::restorePoint(fzStart, m_matrix);
+    utils::restorePoint(fzEnd, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForWordSelection(fzStart, fzEnd);
+    res.first = res.first.fz_transform_point(m_matrix);
+    res.second = res.second.fz_transform_point(m_matrix);
+
     return QPointFPair(utils::fzPointToQPoint(res.first),
                        utils::fzPointToQPoint(res.second));
 }
@@ -101,8 +126,12 @@ QPair<QPointF, QPointF> PageController::getPositionsForLineSelection(
     QPointF point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
+    utils::restorePoint(fzPoint, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForLineSelection(fzPoint);
+    res.first = res.first.fz_transform_point(m_matrix);
+    res.second = res.second.fz_transform_point(m_matrix);
+
     return QPointFPair(utils::fzPointToQPoint(res.first),
                        utils::fzPointToQPoint(res.second));
 }
@@ -112,8 +141,10 @@ QString PageController::getTextFromSelection(const QPointF& start,
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    auto res = m_pageGenerator.getTextFromSelection(fzStart, fzEnd);
+    utils::restorePoint(fzStart, m_matrix);
+    utils::restorePoint(fzEnd, m_matrix);
 
+    auto res = m_pageGenerator.getTextFromSelection(fzStart, fzEnd);
     return QString::fromStdString(res);
 }
 
