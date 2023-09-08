@@ -68,7 +68,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     Layout.topMargin: -8
                     sourceSize.height: 241
-                    source: cover
+                    source: model.cover
                     fillMode: Image.PreserveAspectFit
                 }
             }

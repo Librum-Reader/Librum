@@ -11,8 +11,9 @@ class FreeBooksStorageAccess : public adapters::IFreeBooksStorageAccess
     Q_OBJECT
 
 public:
+    void getBooksMetadataPage(const QString& url) override;
     void getBooksMetadata(const QString& author, const QString& title) override;
-    void getCoverForBook(int bookId, const QString& coverUrl) override;
+    void getBookCover(int id, const QString& url) override;
     void getBookMedia(const int id, const QUuid& uuid,
                       const QString& url) override;
 

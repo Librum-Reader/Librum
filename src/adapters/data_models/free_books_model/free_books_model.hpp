@@ -22,7 +22,7 @@ public:
         FormatsRole,
         DownloadCountRole,
         CoverRole,
-        DownloadLink,
+        MediaDownloadLink,
         MediaDownloadProgressRole,
         Invalid
     };
@@ -35,6 +35,9 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
+    void setApiInfo(const int booksTotalCount,
+                    const QString& nextMetadataPageUrl,
+                    const QString& prevMetadataPageUrl);
     void refreshBook(int row);
     void startBookClearing();
     void endBookClearing();
@@ -44,10 +47,21 @@ public slots:
     void endDeletingBook();
     void downloadingBookMediaProgressChanged(int row);
 
-private:
-    QVector<int> getAllRoles();
+signals:
+    void getBooksMetadataPage(const QString& url);
 
+protected:
+    bool canFetchMore(const QModelIndex& parent) const override;
+    void fetchMore(const QModelIndex& parent) override;
+
+private:
     const std::vector<domain::value_objects::FreeBook>* m_data;
+    int m_booksLoadedCount = 0;
+    int m_booksTotalCount = 0;
+    QString m_prevMetadataPageUrl;
+    QString m_nextMetadataPageUrl;
+
+    QVector<int> getAllRoles();
 };
 
 }  // namespace adapters::data_models

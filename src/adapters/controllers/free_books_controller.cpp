@@ -8,6 +8,17 @@ FreeBooksController::FreeBooksController(
     m_freeBooksService(freeBooksService),
     m_freeBooksModel(&m_freeBooksService->getFreeBooks())
 {
+    // getting api info
+    connect(m_freeBooksService, &application::IFreeBooksService::apiInfoReady,
+            &m_freeBooksModel, &data_models::FreeBooksModel::setApiInfo);
+
+    // getting books metadata
+    connect(&m_freeBooksModel,
+            &adapters::data_models::FreeBooksModel::getBooksMetadataPage,
+            m_freeBooksService,
+            &application::IFreeBooksService::getBooksMetadataPage);
+
+    // getting book media
     connect(m_freeBooksService,
             &application::IFreeBooksService::gettingBookFinished, this,
             &FreeBooksController::gettingBookFinished);
@@ -63,6 +74,16 @@ void FreeBooksController::getBooksMetadata(const QString& author,
 void FreeBooksController::getBookMedia(const int id, const QString& url)
 {
     m_freeBooksService->getBookMedia(id, url);
+}
+
+void FreeBooksController::getBookCover(const int id)
+{
+    m_freeBooksService->getBookCover(id);
+}
+
+void FreeBooksController::deleteBookCover(const int id)
+{
+    m_freeBooksService->deleteBookCover(id);
 }
 
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()

@@ -7,14 +7,15 @@ namespace domain::value_objects
 
 struct FreeBook
 {
-    int id;
+    int id = 0;
     QString title;
     QString authors;
     QString languages;
     QString formats;
     QImage cover;
-    long downloadCount;
-    QString downloadLink;
+    QString coverDownloadLink;
+    long downloadCount = 0;
+    QString mediaDownloadLink;
     double mediaDownloadProgress = 0.0;
 };
 

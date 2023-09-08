@@ -17,20 +17,26 @@ public:
 
     void getBooksMetadata(const QString& author, const QString& title) override;
     void getBookMedia(const int id, const QString& url) override;
+    void getBookCover(const int id) override;
+    void deleteBookCover(const int id) override;
     std::vector<domain::value_objects::FreeBook>& getFreeBooks() override;
 
 public slots:
+    void getBooksMetadataPage(const QString& url) override;
     void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 
 private slots:
-    void setBookCover(int bookId, const QImage& cover);
+    void setBookCover(int id, const QImage& cover);
     void saveDownloadedBookMediaChunkToFile(const QByteArray& data,
                                             bool isLastChunk, const QUuid& uuid,
                                             const QString& format);
 
 private:
-    void saveBookMetaData(std::vector<domain::value_objects::FreeBook>& books);
+    void saveBookMetaData(std::vector<domain::value_objects::FreeBook>& books,
+                          const int booksTotalCount,
+                          const QString& nextMetadataPageUrl,
+                          const QString& prevMetadataPageUrl);
     void setMediaDownloadProgressForBook(const int id, qint64 bytesReceived,
                                          qint64 bytesTotal);
     domain::value_objects::FreeBook* getFreeBookById(int id);

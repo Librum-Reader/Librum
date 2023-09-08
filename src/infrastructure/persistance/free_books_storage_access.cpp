@@ -6,6 +6,30 @@
 namespace infrastructure::persistence
 {
 
+void FreeBooksStorageAccess::getBooksMetadataPage(const QString& url)
+{
+    auto request = createRequest(url);
+
+    auto reply = m_networkAccessManager.get(request);
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
+            {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Getting free books metadata");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit gettingBooksMetadataFinished(reply->readAll());
+
+                reply->deleteLater();
+            });
+}
+
 void FreeBooksStorageAccess::getBooksMetadata(const QString& author,
                                               const QString& title)
 {
@@ -31,15 +55,14 @@ void FreeBooksStorageAccess::getBooksMetadata(const QString& author,
             });
 }
 
-void FreeBooksStorageAccess::getCoverForBook(int bookId,
-                                             const QString& coverUrl)
+void FreeBooksStorageAccess::getBookCover(int id, const QString& url)
 {
-    auto request = createRequest(coverUrl);
+    auto request = createRequest(url);
 
     auto reply = m_networkAccessManager.get(request);
 
     connect(reply, &QNetworkReply::finished, this,
-            [this, bookId, reply]()
+            [this, id, reply]()
             {
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
@@ -50,7 +73,7 @@ void FreeBooksStorageAccess::getCoverForBook(int bookId,
                     return;
                 }
 
-                emit gettingBookCoverFinished(bookId, reply->readAll());
+                emit gettingBookCoverFinished(id, reply->readAll());
                 reply->deleteLater();
             });
 }

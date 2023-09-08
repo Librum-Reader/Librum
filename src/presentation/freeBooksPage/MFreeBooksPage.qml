@@ -13,7 +13,9 @@ Page {
         color: Style.colorPageBackground
     }
 
-    Component.onCompleted: FreeBooksController.getBooksMetadata("", "")
+    Component.onCompleted: {
+        FreeBooksController.getBooksMetadata("", "")
+    }
 
     ColumnLayout {
         id: layout
@@ -61,6 +63,7 @@ Page {
                 maximumFlickVelocity: 3300
                 clip: true
 
+                cacheBuffer: 1000
                 model: FreeBooksController.freeBooksModel
                 delegate: MFreeBook {
                     MouseArea {
@@ -77,6 +80,11 @@ Page {
                             downloadBookPopup.open()
                         }
                     }
+
+                    Component.onCompleted: FreeBooksController.getBookCover(
+                                               model.id)
+                    Component.onDestruction: FreeBooksController.deleteBookCover(
+                                                 model.id)
                 }
             }
         }

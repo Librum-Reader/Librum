@@ -27,6 +27,11 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
             &FreeBooksStorageGateway::gettingBookMediaProgressChanged);
 }
 
+void FreeBooksStorageGateway::getBooksMetadataPage(const QString& url)
+{
+    m_freeBooksStorageAccess->getBooksMetadataPage(url);
+}
+
 void FreeBooksStorageGateway::getBooksMetadata(const QString& author,
                                                const QString& title)
 {
@@ -37,6 +42,11 @@ void FreeBooksStorageGateway::getBookMedia(const int id, const QUuid& uuid,
                                            const QString& url)
 {
     m_freeBooksStorageAccess->getBookMedia(id, uuid, url);
+}
+
+void FreeBooksStorageGateway::getBookCover(const int id, const QString& url)
+{
+    m_freeBooksStorageAccess->getBookCover(id, url);
 }
 
 void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
@@ -55,10 +65,14 @@ void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
         auto book = getBookFromJson(resultObject);
 
         books.emplace_back(std::move(book));
-        getCoverForBook(resultObject);
     }
 
-    emit gettingBooksMetaDataFinished(books);
+    auto booksTotalCount = metadataObject["count"].toInt();
+    auto nextMetadataPageUrl = metadataObject["next"].toString();
+    auto prevMetadataPageUrl = metadataObject["previous"].toString();
+
+    emit gettingBooksMetaDataFinished(books, booksTotalCount,
+                                      nextMetadataPageUrl, prevMetadataPageUrl);
 }
 
 FreeBook FreeBooksStorageGateway::getBookFromJson(const QJsonObject& values)
@@ -73,8 +87,10 @@ FreeBook FreeBooksStorageGateway::getBookFromJson(const QJsonObject& values)
         .languages = languages,
         .formats = "",
         .cover = QImage(),
+        .coverDownloadLink = values["formats"]["image/jpeg"].toString(),
         .downloadCount = values["download_count"].toInt(),
-        .downloadLink = values["formats"]["application/epub+zip"].toString(),
+        .mediaDownloadLink =
+            values["formats"]["application/epub+zip"].toString(),
     };
     return result;
 }
@@ -111,20 +127,9 @@ QString FreeBooksStorageGateway::formatLanguages(QJsonArray languages)
     return result;
 }
 
-void FreeBooksStorageGateway::getCoverForBook(const QJsonObject& book)
+void FreeBooksStorageGateway::proccessBookCover(int id, const QByteArray& data)
 {
-    auto bookId = book["id"].toInt();
-
-    auto bookFormats = book["formats"].toObject();
-    auto bookCoverUrl = bookFormats["image/jpeg"].toString();
-
-    m_freeBooksStorageAccess->getCoverForBook(bookId, bookCoverUrl);
-}
-
-void FreeBooksStorageGateway::proccessBookCover(int bookId,
-                                                const QByteArray& data)
-{
-    emit gettingBookCoverFinished(bookId, QImage::fromData(data, "jpeg"));
+    emit gettingBookCoverFinished(id, QImage::fromData(data, "jpeg"));
 }
 
 }  // namespace adapters::gateways

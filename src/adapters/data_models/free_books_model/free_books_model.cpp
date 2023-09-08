@@ -53,8 +53,8 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
         QString base64 = QString::fromUtf8(byteArray.toBase64());
         return QString("data:image/jpeg;base64,") + base64;
     }
-    case DownloadLink:
-        return freeBook.downloadLink;
+    case MediaDownloadLink:
+        return freeBook.mediaDownloadLink;
     case MediaDownloadProgressRole:
         return freeBook.mediaDownloadProgress;
     default:
@@ -72,11 +72,20 @@ QHash<int, QByteArray> FreeBooksModel::roleNames() const
         { FormatsRole, "formats" },
         { DownloadCountRole, "downloadCount" },
         { CoverRole, "cover" },
-        { DownloadLink, "downloadLink" },
+        { MediaDownloadLink, "mediaDownloadLink" },
         { MediaDownloadProgressRole, "mediaDownloadProgress" },
     };
 
     return roles;
+}
+
+void FreeBooksModel::setApiInfo(const int booksTotalCount,
+                                const QString& nextMetadataPageUrl,
+                                const QString& prevMetadataPageUrl)
+{
+    m_booksTotalCount = booksTotalCount;
+    m_nextMetadataPageUrl = nextMetadataPageUrl;
+    m_prevMetadataPageUrl = prevMetadataPageUrl;
 }
 
 void FreeBooksModel::refreshBook(int row)
@@ -103,6 +112,7 @@ void FreeBooksModel::startInsertingRow(int index)
 
 void FreeBooksModel::endInsertingRow()
 {
+    m_booksLoadedCount++;
     endInsertRows();
 }
 
@@ -113,6 +123,7 @@ void FreeBooksModel::startDeletingBook(int index)
 
 void FreeBooksModel::endDeletingBook()
 {
+    m_booksLoadedCount--;
     endRemoveRows();
 }
 
@@ -120,6 +131,22 @@ void FreeBooksModel::downloadingBookMediaProgressChanged(int row)
 {
     emit dataChanged(index(row, 0), index(row, 0),
                      { MediaDownloadProgressRole });
+}
+
+bool FreeBooksModel::canFetchMore(const QModelIndex& parent) const
+{
+    if(parent.isValid())
+        return false;
+
+    return m_booksLoadedCount < m_booksTotalCount;
+}
+
+void FreeBooksModel::fetchMore(const QModelIndex& parent)
+{
+    if(parent.isValid())
+        return;
+
+    emit getBooksMetadataPage(m_nextMetadataPageUrl);
 }
 
 QVector<int> FreeBooksModel::getAllRoles()

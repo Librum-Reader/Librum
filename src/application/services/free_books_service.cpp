@@ -58,14 +58,41 @@ void FreeBooksService::clearUserData()
     m_userEmail.clear();
 }
 
+void FreeBooksService::getBookCover(const int id)
+{
+    for(auto& freeBook : m_freeBooks)
+    {
+        if(freeBook.id != id)
+            continue;
+
+        if(freeBook.cover.isNull())
+            m_freeBooksStorageGateway->getBookCover(freeBook.id,
+                                                    freeBook.coverDownloadLink);
+    }
+}
+
+void FreeBooksService::deleteBookCover(const int id)
+{
+    for(auto& freeBook : m_freeBooks)
+    {
+        if(freeBook.id == id)
+            freeBook.cover = QImage();
+    }
+}
+
 std::vector<FreeBook>& FreeBooksService::getFreeBooks()
 {
     return m_freeBooks;
 }
 
-void FreeBooksService::setBookCover(int bookId, const QImage& cover)
+void FreeBooksService::getBooksMetadataPage(const QString& url)
 {
-    auto freeBook = getFreeBookById(bookId);
+    m_freeBooksStorageGateway->getBooksMetadataPage(url);
+}
+
+void FreeBooksService::setBookCover(int id, const QImage& cover)
+{
+    auto freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
     {
         qDebug() << "Failed setting cover for free book. Book does not exist.";
@@ -75,7 +102,7 @@ void FreeBooksService::setBookCover(int bookId, const QImage& cover)
     freeBook->cover =
         cover.scaled(maxCoverWidth, maxCoverHeight, Qt::KeepAspectRatio,
                      Qt::SmoothTransformation);
-    emit dataChanged(getFreeBookIndexById(bookId));
+    emit dataChanged(getFreeBookIndexById(id));
 }
 
 void FreeBooksService::saveDownloadedBookMediaChunkToFile(
@@ -95,7 +122,10 @@ void FreeBooksService::saveDownloadedBookMediaChunkToFile(
     }
 }
 
-void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books)
+void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books,
+                                        const int booksTotalCount,
+                                        const QString& nextMetadataPageUrl,
+                                        const QString& prevMetadataPageUrl)
 {
     for(auto& book : books)
     {
@@ -103,6 +133,9 @@ void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books)
         m_freeBooks.emplace_back(book);
         emit bookInsertionEnded();
     }
+
+    emit apiInfoReady(booksTotalCount, nextMetadataPageUrl,
+                      prevMetadataPageUrl);
 }
 
 void FreeBooksService::setMediaDownloadProgressForBook(const int id,

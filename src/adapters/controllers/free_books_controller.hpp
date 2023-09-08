@@ -15,6 +15,8 @@ public:
 
     void getBooksMetadata(const QString& author, const QString& title) override;
     void getBookMedia(const int id, const QString& url) override;
+    void getBookCover(const int id) override;
+    void deleteBookCover(const int id) override;
     data_models::FreeBooksModel* getFreeBooksModel() override;
 
 private:

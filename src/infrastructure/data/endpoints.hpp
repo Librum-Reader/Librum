@@ -4,7 +4,7 @@
 namespace infrastructure::data
 {
 
-inline const QString domain { "https://librum-dev.azurewebsites.net" };
+inline const QString domain { "api.librumreader.com" };
 
 inline const QString freeBooksDomain { "https://gutendex.com" };
 
