@@ -246,8 +246,8 @@ void PageView::keyPressEvent(QKeyEvent* event)
 
 void PageView::paintSelectionOnPage(QPainter& painter)
 {
-    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
-    for(auto rect : bufferedSelectionRects)
+    auto& selectionRects = m_pageController->getBufferedSelectionRects();
+    for(auto rect : selectionRects)
     {
         QColor selectionColor(134, 171, 175, 125);
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
@@ -259,8 +259,15 @@ void PageView::paintHighlightsOnPage(QPainter& painter)
 {
     for(auto& highlight : m_bookController->getHighlights())
     {
+        if(highlight.getPageNumber() != m_pageNumber)
+            continue;
+
         for(auto rect : highlight.getRects())
         {
+            // We store the highlights zoom independent, so we need to scale
+            // them to the current zoom here.
+            utils::scaleQRectFToZoom(rect, m_pageController->getZoom());
+
             painter.setCompositionMode(QPainter::CompositionMode_Multiply);
             painter.fillRect(rect, highlight.getColor());
         }
@@ -318,8 +325,8 @@ void PageView::removeConflictingHighlights(Highlight& highlight)
 
 bool PageView::mouseAboveSelection(const QPointF mouse)
 {
-    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
-    for(auto& rect : bufferedSelectionRects)
+    auto& selectionRects = m_pageController->getBufferedSelectionRects();
+    for(auto& rect : selectionRects)
     {
         if(rect.contains(mouse))
             return true;
@@ -331,6 +338,14 @@ bool PageView::mouseAboveSelection(const QPointF mouse)
 void PageView::createHighlightFromCurrentSelection()
 {
     auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
+
+    // Make sure to restore the rects to their original size, since we want to
+    // store them, so they need to be zoom independent.
+    for(auto& rect : bufferedSelectionRects)
+    {
+        utils::restoreQRect(rect, m_pageController->getZoom());
+    }
+
     removeSelection();
 
     static int i = 0;
@@ -343,6 +358,7 @@ void PageView::createHighlightFromCurrentSelection()
     highlight.setRects(rects);
 
     removeConflictingHighlights(highlight);
+
     m_bookController->addHighlight(highlight);
 
     update();

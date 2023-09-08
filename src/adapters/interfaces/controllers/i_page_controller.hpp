@@ -33,7 +33,7 @@ public:
 
     virtual const char* getLinkUriAtPoint(const QPointF& point) = 0;
 
-    virtual QList<QRectF> getBufferedSelectionRects() = 0;
+    virtual const QList<QRectF>& getBufferedSelectionRects() = 0;
     virtual void clearBufferedSelectionRects() = 0;
     virtual void generateSelectionRects(QPointF start, QPointF end) = 0;
     virtual QPair<QPointF, QPointF> getPositionsForWordSelection(

@@ -78,7 +78,7 @@ const char* PageController::getLinkUriAtPoint(const QPointF& point)
     return m_pageGenerator.getLinkAtPoint(fzPoint).uri();
 }
 
-QList<QRectF> PageController::getBufferedSelectionRects()
+const QList<QRectF>& PageController::getBufferedSelectionRects()
 {
     if(!m_selectionRectsOutdated)
         return m_selectionRects;

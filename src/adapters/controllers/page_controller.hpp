@@ -28,7 +28,7 @@ public:
     bool pointIsAboveLink(const QPointF& point) override;
     const char* getLinkUriAtPoint(const QPointF& point) override;
 
-    QList<QRectF> getBufferedSelectionRects() override;
+    const QList<QRectF>& getBufferedSelectionRects() override;
     void generateSelectionRects(QPointF start, QPointF end) override;
     void clearBufferedSelectionRects() override;
 
