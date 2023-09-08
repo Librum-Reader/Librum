@@ -15,18 +15,13 @@ void TextSelector::generateSelectionRects(QList<mupdf::FzQuad>& container,
                                           mupdf::FzPoint start,
                                           mupdf::FzPoint end)
 {
-    mupdf::FzPoint fzStart(start.x, start.y);
-    mupdf::FzPoint fzEnd(end.x, end.y);
-
-    auto invMatrix = m_matrix->fz_invert_matrix();
-    auto normStart = fzStart.fz_transform_point(invMatrix);
-    auto normEnd = fzEnd.fz_transform_point(invMatrix);
+    normalizePoint(start);
+    normalizePoint(end);
 
     const int max = 1000;
     fz_quad hits[max];
-    int n = mupdf::ll_fz_highlight_selection(m_textPage->m_internal,
-                                             *normStart.internal(),
-                                             *normEnd.internal(), hits, max);
+    int n = mupdf::ll_fz_highlight_selection(
+        m_textPage->m_internal, *start.internal(), *end.internal(), hits, max);
 
     for(int i = 0; i < n; ++i)
     {
@@ -37,44 +32,39 @@ void TextSelector::generateSelectionRects(QList<mupdf::FzQuad>& container,
 }
 
 QPair<mupdf::FzPoint, mupdf::FzPoint>
-    TextSelector::getPositionsForWordSelection(mupdf::FzPoint begin,
+    TextSelector::getPositionsForWordSelection(mupdf::FzPoint start,
                                                mupdf::FzPoint end)
 {
-    mupdf::FzPoint fzBegin(begin.x, begin.y);
-    mupdf::FzPoint fzEnd(end.x, end.y);
-    auto invMatrix = m_matrix->fz_invert_matrix();
-    fzBegin = fzBegin.fz_transform_point(invMatrix);
-    fzEnd = fzEnd.fz_transform_point(invMatrix);
+    normalizePoint(start);
+    normalizePoint(end);
 
     // This modifies the fzBegin and fzEnd.
-    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
-                                fzEnd.internal(), FZ_SELECT_WORDS);
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, start.internal(),
+                                end.internal(), FZ_SELECT_WORDS);
 
-    fzBegin = fzBegin.fz_transform_point(*m_matrix);
-    fzEnd = fzEnd.fz_transform_point(*m_matrix);
+    start = start.fz_transform_point(*m_matrix);
+    end = end.fz_transform_point(*m_matrix);
 
     return QPair<mupdf::FzPoint, mupdf::FzPoint>(
-        mupdf::FzPoint(fzBegin.x, fzBegin.y), mupdf::FzPoint(fzEnd.x, fzEnd.y));
+        mupdf::FzPoint(start.x, start.y), mupdf::FzPoint(end.x, end.y));
 }
 
 QPair<mupdf::FzPoint, mupdf::FzPoint>
     TextSelector::getPositionsForLineSelection(mupdf::FzPoint point)
 {
-    mupdf::FzPoint fzBegin(point.x, point.y);
-    mupdf::FzPoint fzEnd(point.x, point.y);
-    auto invMatrix = m_matrix->fz_invert_matrix();
-    fzBegin = fzBegin.fz_transform_point(invMatrix);
-    fzEnd = fzEnd.fz_transform_point(invMatrix);
+    normalizePoint(point);
+    mupdf::FzPoint begin(point.x, point.y);
+    mupdf::FzPoint end = begin;
 
     // This modifies the fzPoint
-    mupdf::ll_fz_snap_selection(m_textPage->m_internal, fzBegin.internal(),
-                                fzEnd.internal(), FZ_SELECT_LINES);
+    mupdf::ll_fz_snap_selection(m_textPage->m_internal, begin.internal(),
+                                end.internal(), FZ_SELECT_LINES);
 
-    fzBegin = fzBegin.fz_transform_point(*m_matrix);
-    fzEnd = fzEnd.fz_transform_point(*m_matrix);
+    begin = begin.fz_transform_point(*m_matrix);
+    end = end.fz_transform_point(*m_matrix);
 
     return QPair<mupdf::FzPoint, mupdf::FzPoint>(
-        mupdf::FzPoint(fzBegin.x, fzBegin.y), mupdf::FzPoint(fzEnd.x, fzEnd.y));
+        mupdf::FzPoint(begin.x, begin.y), mupdf::FzPoint(end.x, end.y));
 }
 
 std::string TextSelector::getTextFromSelection(const mupdf::FzPoint& start,
@@ -87,6 +77,12 @@ std::string TextSelector::getTextFromSelection(const mupdf::FzPoint& start,
 
     auto text = m_textPage->fz_copy_selection(fzStart, fzEnd, 1);
     return text;
+}
+
+void TextSelector::normalizePoint(mupdf::FzPoint& point)
+{
+    auto invMatrix = m_matrix->fz_invert_matrix();
+    point = point.fz_transform_point(invMatrix);
 }
 
 }  // namespace application::core::utils
