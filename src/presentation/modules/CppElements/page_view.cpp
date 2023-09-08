@@ -211,7 +211,7 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
 
 void PageView::mouseMoveEvent(QMouseEvent* event)
 {
-    if(event->button() == Qt::RightButton)
+    if(event->buttons() == Qt::RightButton)
         return;
 
     int mouseX = event->position().x();
@@ -294,14 +294,14 @@ void PageView::removeConflictingHighlights(Highlight& highlight)
                 // New rect intersects with old rect
                 if(rect.intersects(existingRect))
                 {
-                    // Make sure that the rects are on the same line. With
-                    // some fonts, lines above eachother will intersect, but
-                    // its only an intersect when they are on the same line.
+                    // Make sure that the rects are on the same line. Depending
+                    // on the line height, lines above eachother will overlap,
+                    // but its only an intersect when they are on the same line.
                     auto shorterRect = rect.height() <= existingRect.height()
                                            ? rect
                                            : existingRect;
                     auto intersectH = rect.intersected(existingRect).height();
-                    bool onSameLine = intersectH == shorterRect.height();
+                    bool onSameLine = intersectH >= shorterRect.height() * 0.75;
 
                     if(onSameLine)
                     {
