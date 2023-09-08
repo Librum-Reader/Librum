@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 Item
@@ -13,6 +13,21 @@ Item
     id: root
     height: content.height
     
+    Connections
+    {
+        target: AppInfoController
+
+        function onDownloadingBinariesProgressChanged(progress)
+        {
+            windowsUpdatingPopup.setDownloadProgress(progress)
+        }
+
+        function onApplicaitonUpdateFailed()
+        {
+            windowsUpdatingPopup.close()
+            updateFailedPopup.open()
+        }
+    }
     
     Pane
     {
@@ -33,7 +48,7 @@ Item
         
         ColumnLayout
         {
-            id: layout
+            id: mainLayout
             width: parent.width
             spacing: 0
             
@@ -52,7 +67,7 @@ Item
             {
                 Layout.fillWidth: true
                 Layout.topMargin: 7
-                text: "Download it and get the great new improvements"
+                text: "Download the new version to get great new improvements."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: 15
@@ -61,7 +76,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                Layout.topMargin: 26
+                Layout.topMargin: 32
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
@@ -71,7 +86,7 @@ Item
             Label
             {
                 Layout.fillWidth: true
-                text: AppInformation.newestVersion
+                text: AppInfoController.newestVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: 14.2
@@ -81,25 +96,38 @@ Item
             MButton
             {
                 id: downloadButton
-                Layout.preferredWidth: 132
-                Layout.preferredHeight: 36
+                Layout.preferredWidth: 152
+                Layout.preferredHeight: 38
                 Layout.topMargin: 14
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 imagePath: Icons.downloadSelected
                 imageSize: 16
                 imageSpacing: 8
-                text: "Download"
-                fontSize: 12
+                text: "Update"
+                fontSize: 12.5
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8
+
+                onClicked:
+                {
+                    if(AppInfoController.operatingSystem === "WIN")
+                    {
+                        AppInfoController.updateApplication();
+                        windowsUpdatingPopup.open()
+                    }
+                    else
+                    {
+                        unixUpdatePopup.open();
+                    }
+                }
             }
             
             Label
             {
                 Layout.fillWidth: true
-                Layout.topMargin: 42
+                Layout.topMargin: 56
                 text: "See the exact changes on our website at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
@@ -110,7 +138,7 @@ Item
             {
                 Layout.preferredWidth: implicitWidth
                 Layout.minimumWidth: implicitWidth
-                text: AppInformation.newsWebsite
+                text: AppInfoController.newsWebsite
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
@@ -123,9 +151,58 @@ Item
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     
-                    onClicked: Qt.openUrlExternally(AppInformation.newsWebsite)
+                    onClicked: Qt.openUrlExternally(AppInfoController.newsWebsite)
                 }
             }
         }
+    }
+
+    MWindowsUpdatingPopup
+    {
+        id: windowsUpdatingPopup
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding
+    }
+
+    MWarningPopup
+    {
+        id: unixUpdatePopup
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding - 70
+        visible: false
+        title: "Updating on Linux"
+        message: "Please use your package manager to update Librum or download the newest version from our " +
+                 '<a href="' + AppInfoController.website + '" style="text-decoration: none; color: '
+                 + Style.colorBasePurple + ';">website</a>.'
+        leftButtonText: "Close"
+        rightButtonText: "Email Us"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        richText: true
+
+        onOpenedChanged: if(opened) unixUpdatePopup.giveFocus()
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
+        onDecisionMade: close()
+    }
+
+    MWarningPopup
+    {
+        id: updateFailedPopup
+        x: root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - content.horizontalPadding
+        y: root.height / 2 - content.topPadding - 70
+        visible: false
+        title: "The Update Failed"
+        message: "Please try again later or download the newest version from our " +
+                 '<a href="' + AppInfoController.website + '" style="text-decoration: none; color: '
+                 + Style.colorBasePurple + ';">website</a>.'
+        leftButtonText: "Close"
+        rightButtonText: "Email Us"
+        buttonsWidth: 180
+        messageBottomSpacing: 10
+        richText: true
+
+        onOpenedChanged: if(opened) updateFailedPopup.giveFocus()
+        onRightButtonClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
+        onDecisionMade: close()
     }
 }

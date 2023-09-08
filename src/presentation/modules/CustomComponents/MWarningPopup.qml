@@ -17,6 +17,7 @@ Popup
     property int messageBottomSpacing: 0
     property bool singleButton: false
     property bool rightButtonRed: false
+    property bool richText: false
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
@@ -24,7 +25,7 @@ Popup
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
-    closePolicy: Popup.NoAutoClose
+    closePolicy: Popup.NoAutoClose | Popup.CloseOnEscape | Popup.CloseOnReleaseOutside
     background: Rectangle { color: "transparent"; radius: 4 }
     modal: true
     Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
@@ -94,6 +95,17 @@ Popup
                         color: Style.colorLightText
                         font.weight: Font.Medium
                         font.pointSize: 15
+                        textFormat: root.richText ? Text.RichText : Text.AutoText
+                        onLinkActivated: (link) => Qt.openUrlExternally(link)
+
+                        // Switch to the proper cursor when hovering above the link
+                        MouseArea
+                        {
+                            id: mouseArea
+                            acceptedButtons: Qt.NoButton    // Don't eat the mouse clicks
+                            anchors.fill: parent
+                            cursorShape: message.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                        }
                     }
                     
                     RowLayout

@@ -4,14 +4,14 @@
 #include <QSettings>
 #include <memory>
 #include <optional>
-#include "i_settings_service.hpp"
 #include "application_export.hpp"
+#include "i_settings_service.hpp"
 
 namespace application::services
 {
 
 // A wrapper class around QSettings which manages the application settings
-class APPLICATION_LIBRARY SettingsService : public ISettingsService
+class APPLICATION_EXPORT SettingsService : public ISettingsService
 {
     Q_OBJECT
 
@@ -38,8 +38,6 @@ private:
     void loadSettings();
     std::vector<std::pair<QString, QVariant>> getSettingsForGroup(
         SettingGroups group);
-
-    QString getUniqueUserHash() const;
 
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =

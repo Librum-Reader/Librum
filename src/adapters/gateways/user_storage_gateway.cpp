@@ -19,11 +19,24 @@ UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess) :
 
     connect(m_userStorageAccess, &IUserStorageAccess::profilePictureReady, this,
             &UserStorageGateway::profilePictureReady);
+
+    connect(m_userStorageAccess, &IUserStorageAccess::passwordChangeFinished,
+            this, &UserStorageGateway::passwordChangeFinished);
 }
 
 void UserStorageGateway::getUser(const QString& authToken)
 {
     m_userStorageAccess->getUser(authToken);
+}
+
+void UserStorageGateway::deleteUser(const QString& authToken)
+{
+    m_userStorageAccess->deleteUser(authToken);
+}
+
+void UserStorageGateway::forgotPassword(const QString& email)
+{
+    m_userStorageAccess->forgotPassword(email);
 }
 
 void UserStorageGateway::getProfilePicture(const QString& authToken)
@@ -47,6 +60,12 @@ void UserStorageGateway::changeEmail(const QString& authToken,
                                      const QString& newEmail)
 {
     m_userStorageAccess->changeEmail(authToken, newEmail);
+}
+
+void UserStorageGateway::changePassword(const QString& authToken,
+                                        const QString& newPassword)
+{
+    m_userStorageAccess->changePassword(authToken, newPassword);
 }
 
 void UserStorageGateway::changeProfilePicture(const QString& authToken,
@@ -115,9 +134,9 @@ void UserStorageGateway::assignValuesToUser(User& user,
     user.setFirstName(jsonObj["firstName"].toString());
     user.setLastName(jsonObj["lastName"].toString());
     user.setUsedBookStorage(
-        static_cast<long>(jsonObj["usedBookStorage"].toDouble()));
+        static_cast<qint64>(jsonObj["usedBookStorage"].toDouble()));
     user.setBookStorageLimit(
-        static_cast<long>(jsonObj["bookStorageLimit"].toDouble()));
+        static_cast<qint64>(jsonObj["bookStorageLimit"].toDouble()));
     user.setProfilePictureLastUpdated(QDateTime::fromString(
         jsonObj["profilePictureLastUpdated"].toString(), m_dateTimeFormat));
     user.setHasProfilePicture(jsonObj["hasProfilePicture"].toBool());

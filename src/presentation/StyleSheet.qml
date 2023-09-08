@@ -23,6 +23,7 @@ Item
     property color colorErrorText
     property color colorTitle
     property color colorMatteTitle
+    property color colorBannerText
     
     // Subtitless
     property color colorSubtitle
@@ -61,6 +62,7 @@ Item
     property color colorPageBackground
     property color colorControlBackground
     property color colorSettingsSidebarBackground
+    property color colorBannerBackground
     
     // Borders
     property color colorGreenBorder
@@ -105,6 +107,7 @@ Item
             PropertyChanges { target: styleSheet; colorErrorText: "#F25E42" }
             PropertyChanges { target: styleSheet; colorTitle: "#32324D" }
             PropertyChanges { target: styleSheet; colorMatteTitle: "#545460" }
+            PropertyChanges { target: styleSheet; colorBannerText: "#F6F6F9" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#8A8AA0" }
@@ -143,6 +146,7 @@ Item
             PropertyChanges { target: styleSheet; colorPageBackground: "#F6F6F9" }
             PropertyChanges { target: styleSheet; colorControlBackground: "#FFFFFF" }
             PropertyChanges { target: styleSheet; colorSettingsSidebarBackground: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorBannerBackground: "#9861BE" }
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#C6F0C2" }
@@ -180,6 +184,7 @@ Item
             PropertyChanges { target: styleSheet; colorErrorText: "#DC4C31" }
             PropertyChanges { target: styleSheet; colorTitle: "#CBCBCB" }
             PropertyChanges { target: styleSheet; colorMatteTitle: "#B6B6C8" }
+            PropertyChanges { target: styleSheet; colorBannerText: "#FFFFFF" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#E5E5EF" }
@@ -218,6 +223,7 @@ Item
             PropertyChanges { target: styleSheet; colorPageBackground: "#212121" }
             PropertyChanges { target: styleSheet; colorControlBackground: "#2E2E2E" }
             PropertyChanges { target: styleSheet; colorSettingsSidebarBackground: "#262626" }
+            PropertyChanges { target: styleSheet; colorBannerBackground: "#583771" }
             
             // Borders
             PropertyChanges { target: styleSheet; colorGreenBorder: "#4B7947" }

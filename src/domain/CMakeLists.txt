@@ -1,11 +1,3 @@
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick QuickControls2)
-
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Build
@@ -56,4 +48,12 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
               EXECUTABLE domain_unit_tests
               BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
               EXCLUDE ${PROJECT_BINARY_DIR}/* ${PROJECT_SOURCE_DIR}/libs/*)
+endif()
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS domain
+            DESTINATION lib
+            )
 endif()

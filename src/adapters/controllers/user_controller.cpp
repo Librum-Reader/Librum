@@ -21,6 +21,9 @@ UserController::UserController(application::IUserService* userService) :
     connect(m_userService, &application::IUserService::profilePictureChanged,
             this, &UserController::profilePictureChanged);
 
+    connect(m_userService, &application::IUserService::passwordChangeFinished,
+            this, &UserController::passwordChangeFinished);
+
 
     // Tag insertion
     connect(m_userService, &application::IUserService::tagInsertionStarted,
@@ -46,9 +49,24 @@ void UserController::loadUser(bool rememberUser)
     m_userService->loadUser(rememberUser);
 }
 
+void UserController::deleteUser()
+{
+    m_userService->deleteUser();
+}
+
 void UserController::syncWithServer()
 {
     m_userService->downloadUser();
+}
+
+void UserController::changePassword(const QString& newPassword)
+{
+    m_userService->changePassword(newPassword);
+}
+
+void UserController::forgotPassword(const QString& email)
+{
+    m_userService->forgotPassword(email);
 }
 
 QString UserController::getTagUuidForName(QString name)
@@ -127,12 +145,12 @@ void UserController::setEmail(const QString& newEmail)
     emit emailChanged();
 }
 
-long UserController::getUsedBookStorage() const
+qint64 UserController::getUsedBookStorage() const
 {
     return m_userService->getUsedBookStorage();
 }
 
-long UserController::getBookStorageLimit() const
+qint64 UserController::getBookStorageLimit() const
 {
     return m_userService->getBookStorageLimit();
 }

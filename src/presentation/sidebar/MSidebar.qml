@@ -6,7 +6,7 @@ import CustomComponents
 import Librum.elements
 import Librum.style
 import Librum.icons
-import Librum.models
+import Librum.controllers
 
 Item
 {
@@ -115,7 +115,7 @@ Item
                     {
                         id: logoLabel
                         visible: false
-                        text: AppInformation.productName
+                        text: AppInfoController.applicationName
                         font.bold: true
                         font.pointSize: 16
                         color: Style.colorTitle

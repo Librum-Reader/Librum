@@ -3,7 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
 import Librum.elements
-import Librum.models
+import Librum.controllers
 import Librum.style
 import Librum.icons
 
@@ -86,7 +86,7 @@ MFlickWrapper
                     Label
                     {
                         Layout.topMargin: 1
-                        text: AppInformation.currentVersion
+                        text: AppInfoController.currentVersion
                         color: Style.colorText
                         font.pointSize: 13.5
                     }
@@ -103,7 +103,7 @@ MFlickWrapper
                     Label
                     {
                         Layout.topMargin: 1
-                        text: AppInformation.currentQtVersion
+                        text: AppInfoController.currentQtVersion
                         color: Style.colorText
                         font.pointSize: 13.5
                     }
@@ -172,7 +172,7 @@ MFlickWrapper
                     Label
                     {
                         Layout.topMargin: 1
-                        text: AppInformation.companyName
+                        text: AppInfoController.companyName
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
                     }
@@ -188,7 +188,7 @@ MFlickWrapper
                     
                     Label
                     {
-                        text: AppInformation.companyWebsite
+                        text: AppInfoController.website
                         color: Style.colorBasePurple
                         font.pointSize: 13.5
                         opacity: websiteLinkArea.pressed ? 0.8 : 1
@@ -199,7 +199,7 @@ MFlickWrapper
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
-                            onClicked: Qt.openUrlExternally(AppInformation.companyWebsite)
+                            onClicked: Qt.openUrlExternally(AppInfoController.website)
                         }
                     }
                     
@@ -215,7 +215,7 @@ MFlickWrapper
                     Label
                     {
                         Layout.topMargin: 1
-                        text: AppInformation.companyEmail
+                        text: AppInfoController.companyEmail
                         color: Style.colorBasePurple
                         opacity: emailLinkArea.pressed ? 0.8 : 1
                         font.pointSize: 13.5
@@ -226,7 +226,7 @@ MFlickWrapper
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
-                            onClicked: Qt.openUrlExternally("mailto:" + AppInformation.companyEmail)
+                            onClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
                         }
                     }
                     
@@ -242,9 +242,9 @@ MFlickWrapper
                     Label
                     {
                         Layout.topMargin: 1
-                        text: AppInformation.githubLink
+                        text: AppInfoController.githubLink
                         color: Style.colorBasePurple
-                        opacity: emailLinkArea.pressed ? 0.8 : 1
+                        opacity: githubLinkArea.pressed ? 0.8 : 1
                         font.pointSize: 13.5
                         
                         MouseArea
@@ -253,7 +253,7 @@ MFlickWrapper
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
                             
-                            onClicked: Qt.openUrlExternally(AppInformation.githubLink)
+                            onClicked: Qt.openUrlExternally(AppInfoController.githubLink)
                         }
                     }
                 }
@@ -313,12 +313,12 @@ MFlickWrapper
                             id: thisAppText
                             Layout.fillWidth: true
                             Layout.leftMargin: 22
-                            text: "This app is completely free for everyone who just wants to enjoy a book.\n" +
-                                  "We hope you enjoy using it! If you do, feel free to leave us a rating and some feedback."
+                            text: "Librum is here for everyone who just wants to enjoy a good book.\n" +
+                                  "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
                             wrapMode: Text.WordWrap
                             color: Style.colorText
                             font.pointSize: 14.6
-                            lineHeight: 1.05
+                            lineHeight: 1.10
                         }
                     }
                 }

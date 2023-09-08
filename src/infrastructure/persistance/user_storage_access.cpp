@@ -7,6 +7,8 @@
 #include <QVariant>
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
+#include "qjsondocument.h"
+#include "qjsonobject.h"
 
 namespace infrastructure::persistence
 {
@@ -32,6 +34,33 @@ void UserStorageAccess::getUser(const QString& authToken)
 
                 reply->deleteLater();
             });
+}
+
+void UserStorageAccess::deleteUser(const QString& authToken)
+{
+    auto request = createRequest(data::userDeleteEndpoint, authToken);
+    auto reply = m_networkAccessManager.sendCustomRequest(request, "DELETE");
+
+    connect(reply, &QNetworkReply::finished, this,
+            [reply]
+            {
+                if(api_error_helper::apiRequestFailed(reply, 204))
+                {
+                    api_error_helper::logErrorMessage(reply, "Deleting User");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                reply->deleteLater();
+            });
+}
+
+void UserStorageAccess::forgotPassword(const QString& email)
+{
+    auto endpoint = data::userForgotPasswordEndpoint + "/" + email;
+    auto request = createRequest(endpoint, "");
+    m_networkAccessManager.post(request, QByteArray());
 }
 
 void UserStorageAccess::getProfilePicture(const QString& authToken)
@@ -119,6 +148,38 @@ void UserStorageAccess::changeEmail(const QString& authToken,
     Q_UNUSED(authToken)
     Q_UNUSED(newEmail)
     // TODO: Implement
+}
+
+void UserStorageAccess::changePassword(const QString& authToken,
+                                       const QString& newPassword)
+{
+    auto request = createRequest(data::userChangePasswordEndpoint, authToken);
+    QJsonObject jsonObject;
+    jsonObject["Input"] = newPassword;
+    auto data = QJsonDocument(jsonObject).toJson();
+
+    auto reply = m_networkAccessManager.post(request, data);
+
+
+    // Make sure to release the reply's memory
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
+            {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    auto jsonReply =
+                        QJsonDocument::fromJson(reply->readAll()).object();
+                    auto message = jsonReply["message"].toString();
+                    qWarning() << "Changing password failed: " << message;
+
+                    emit passwordChangeFinished(false, message);
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit passwordChangeFinished(true, "");
+                reply->deleteLater();
+            });
 }
 
 void UserStorageAccess::changeProfilePicture(const QString& authToken,
@@ -277,7 +338,7 @@ void UserStorageAccess::renameTag(const QString& authToken,
 void UserStorageAccess::addImagePartToMultiPart(QHttpMultiPart* multiPart,
                                                 const QString& imagePath)
 {
-    QFile* file = new QFile(QUrl(imagePath).path(), multiPart);
+    QFile* file = new QFile(imagePath, multiPart);
     if(!file->open(QIODevice::ReadOnly))
     {
         qWarning() << "Could not open new profile picture file: "
@@ -304,8 +365,12 @@ QNetworkRequest UserStorageAccess::createRequest(const QUrl& url,
 {
     QNetworkRequest result { url };
     result.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-    result.setRawHeader(QByteArray("Authorization"),
-                        "Bearer " + authToken.toUtf8());
+
+    if(!authToken.isEmpty())
+    {
+        result.setRawHeader(QByteArray("Authorization"),
+                            "Bearer " + authToken.toUtf8());
+    }
 
     QSslConfiguration sslConfiguration = result.sslConfiguration();
     sslConfiguration.setProtocol(QSsl::AnyProtocol);

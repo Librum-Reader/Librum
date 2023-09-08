@@ -5,7 +5,7 @@
 namespace adapters::dtos
 {
 
-struct ADAPTERS_LIBRARY LoginDto
+struct ADAPTERS_EXPORT LoginDto
 {
     QString email;
     QString password;

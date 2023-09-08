@@ -24,6 +24,7 @@ ApplicationWindow
     property int defaultMinWidth: 650
     property int sidebarOpenedMinWidth: 810
     property int readingPageMinWidth: 550
+    property bool notifyAboutUpdates: true
     
     
     minimumHeight: 400
@@ -130,6 +131,14 @@ ApplicationWindow
         let page = pageManager.currentItem;
         page.loadSettingsPage(page.appearancePage, page.settingsSidebar.appearanceItem);
     }
+
+    function loadSettingsUpdatesPage()
+    {
+        loadPage(settings, sidebar.settingsItem, false);
+
+        let page = pageManager.currentItem;
+        page.loadSettingsPage(page.updatesPage, page.settingsSidebar.updatesItem);
+    }
     
     
     QtObject
@@ -141,7 +150,7 @@ ApplicationWindow
         {
             if(spamStopper.available)
             {
-                BookController.syncWithServer();
+                LibraryController.syncWithServer();
                 UserController.syncWithServer();
                 spamStopper.available = false;
                 spamStopper.start();

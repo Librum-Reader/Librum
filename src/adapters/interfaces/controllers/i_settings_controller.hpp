@@ -3,6 +3,7 @@
 #include <QStandardItemModel>
 #include <QVariant>
 #include "shortcuts_model/shortcuts_proxy_model.hpp"
+#include "adapters_export.hpp"
 #pragma once
 
 namespace adapters
@@ -24,7 +25,7 @@ namespace adapters
  * the maps with, it sends a signal up to the SettingsController, which then
  * uses the data sent to initialise the property maps.
  */
-class ISettingsController : public QObject
+class ADAPTERS_EXPORT ISettingsController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(

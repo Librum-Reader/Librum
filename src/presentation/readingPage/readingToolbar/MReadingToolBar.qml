@@ -22,7 +22,6 @@ Pane
     property alias currentPageSelection: currentPageSelection
     property alias fullScreenButton: fullScreenButton
     property alias optionsButton: optionsButton
-    property var document
     signal backButtonClicked
     signal chapterButtonClicked
     signal bookMarkButtonClicked
@@ -247,6 +246,7 @@ Pane
                 ListElement { text: "250%" }
                 ListElement { text: "300%" }
                 ListElement { text: "400%" }
+                ListElement { text: "500%" }
             }
             
             // Need to run a timer to create the binding, since the combobox does not set the text correctly
@@ -256,7 +256,7 @@ Pane
             {
                 id: zoomAssignment
                 interval: 5
-                onTriggered: zoomComboBox.text = Qt.binding(function () { return Math.round(root.document.zoom * 100) + "%" })
+                onTriggered: zoomComboBox.text = Qt.binding(function () { return Math.round(BookController.zoom * 100) + "%" })
             }
             
             // Remove % sign from text
@@ -265,7 +265,7 @@ Pane
                 if(text === "")
                     return;
                 
-                root.document.zoom = zoomComboBox.text.substring(0, zoomComboBox.text.length - 1) / 100;
+                BookController.zoom = zoomComboBox.text.substring(0, zoomComboBox.text.length - 1) / 100;
                 zoomAssignment.start();  // Force rebinding
             }
         }

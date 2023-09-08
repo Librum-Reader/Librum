@@ -6,7 +6,7 @@
 namespace adapters::gateways
 {
 
-class ADAPTERS_LIBRARY AuthenticationGateway : public application::IAuthenticationGateway
+class ADAPTERS_EXPORT AuthenticationGateway : public application::IAuthenticationGateway
 {
     Q_OBJECT
 

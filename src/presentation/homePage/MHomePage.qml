@@ -8,6 +8,7 @@ import Librum.style
 import Librum.icons
 import Librum.controllers
 import Librum.globals
+import Librum.models
 import "toolbar"
 import "manageTagsPopup"
 
@@ -29,7 +30,7 @@ Page
     
     Connections
     {
-        target: BookController
+        target: LibraryController
         
         function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
     }
@@ -41,6 +42,67 @@ Page
         anchors.fill: parent
         spacing: 0
         
+        Rectangle
+        {
+            id: updateBanner
+            Layout.fillWidth: true
+            Layout.preferredHeight: 38
+            Layout.leftMargin: -root.horizontalPadding
+            Layout.rightMargin: -root.rightPadding
+            visible: baseRoot.notifyAboutUpdates 
+                     && AppInfoController.newestVersion !== ""
+                     && AppInfoController.currentVersion !== AppInfoController.newestVersion
+            
+            Rectangle
+            {
+                anchors.fill: parent
+                color: Style.colorBannerBackground
+                opacity: 0.8
+            }
+            
+            Label
+            {
+                id: updateBannerText
+                anchors.centerIn: parent
+                text: 'A new version is available! <a href="update" style="color: #FFFFFF; text-decoration: underline;">Update Now</a>'
+                onLinkActivated: baseRoot.loadSettingsUpdatesPage()
+                textFormat: Text.RichText
+                color: Style.colorBannerText
+                font.bold: true
+                font.pointSize: 12
+
+                // Switch to the proper cursor when hovering above the link
+                MouseArea
+                {
+                    id: mouseArea
+                    acceptedButtons: Qt.NoButton    // Don't eat the mouse clicks
+                    anchors.fill: parent
+                    cursorShape: updateBannerText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
+            }
+            
+            MButton
+            {
+                id: closeButton
+                width: 32
+                height: 32
+                anchors.right: parent.right
+                anchors.rightMargin: 6
+                anchors.verticalCenter: parent.verticalCenter
+                backgroundColor: "transparent"
+                opacityOnPressed: 0.7
+                borderColor: "transparent"
+                radius: 6
+                borderColorOnPressed: Style.colorButtonBorder
+                imagePath: Icons.closePopupWhite
+                imageSize: 12
+                
+                onClicked: {
+                    baseRoot.notifyAboutUpdates = false
+                    updateBanner.visible = false
+                }
+            }
+        }
         
         RowLayout
         {
@@ -48,13 +110,12 @@ Page
             Layout.fillWidth: true
             spacing: 0
             
-            
             MTitle
             {
                 id: pageTitle
-                Layout.topMargin: 44
+                Layout.topMargin: updateBanner.visible ? 24 : 44
                 titleText: "Home"
-                descriptionText: "You have " + BookController.bookCount + " books"
+                descriptionText: "You have " + LibraryController.bookCount + " books"
             }
             
             Item { Layout.fillWidth: true }
@@ -87,7 +148,7 @@ Page
             Layout.fillWidth: true
             z: 2
             
-            onSearchRequested: (query) => BookController.libraryModel.sortString = query
+            onSearchRequested: (query) => LibraryController.libraryModel.sortString = query
         }
         
         Pane
@@ -114,7 +175,7 @@ Page
                 flickDeceleration: 12500
                 maximumFlickVelocity: 3500
                 clip: true
-                model: BookController.libraryModel
+                model: LibraryController.libraryModel
                 delegate: MBook
                 {
                     id: bookDelegate
@@ -123,17 +184,19 @@ Page
                     {
                         if(model.downloaded)
                         {
-                            Globals.selectedBook = BookController.getBook(model.uuid);
+                            Globals.selectedBook = LibraryController.getBook(model.uuid);
                             internal.openBook();
                         }
-                        else
+                        // Don't start downloading if downloading is already in progress.
+                        else if(!bookDelegate.downloading)
                         {
-                            BookController.downloadBookMedia(model.uuid);
+                            bookDelegate.downloading = true;
+                            LibraryController.downloadBookMedia(model.uuid);
                         }
                     }
                     
                     /*
-                      When right-clicking a book, open the bookOptions popup
+                      When right-clicking a book, open the bookOptions popup.
                       */
                     onRightButtonClicked:
                         (index, mouse) =>
@@ -229,7 +292,7 @@ Page
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
-            visible: bookGrid.count == 0 && BookController.bookCount !== 0
+            visible: bookGrid.count == 0 && LibraryController.bookCount !== 0
             
             onClearFilters:
             {
@@ -261,8 +324,8 @@ Page
         
         onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
-        onLeftButtonClicked: BookController.uninstallBook(Globals.selectedBook.uuid);
-        onRightButtonClicked: BookController.deleteBook(Globals.selectedBook.uuid);
+        onLeftButtonClicked: LibraryController.uninstallBook(Globals.selectedBook.uuid);
+        onRightButtonClicked: LibraryController.deleteBook(Globals.selectedBook.uuid);
     }
     
     MBookDetailsPopup
@@ -286,7 +349,7 @@ Page
         options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
-        onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
+        onAccepted: LibraryController.saveBookToFile(Globals.selectedBook.uuid, folder);
     }
     
     MWarningPopup
@@ -337,12 +400,12 @@ Page
             "Text files (*.txt)",
             "MOBI files (*.mobi)",
         ]
-    
+        
         onAccepted:
         {
             for(let i = 0; i < files.length; ++i)
             {
-                let result =  BookController.addBook(files[i]);
+                let result =  LibraryController.addBook(files[i]);
                 if(result === BookOperationStatus.OpeningBookFailed)
                     unsupportedFilePopup.open();
             }
@@ -352,7 +415,7 @@ Page
     QtObject
     {
         id: internal
-        property bool libraryIsEmpty: BookController.bookCount === 0
+        property bool libraryIsEmpty: LibraryController.bookCount === 0
         
         property int bookWidth: 190
         property int bookHeight: 300
@@ -361,7 +424,7 @@ Page
         
         function openBookOptionsPopup(item)
         {
-            Globals.selectedBook = BookController.getBook(item.uuid);
+            Globals.selectedBook = LibraryController.getBook(item.uuid);
             Globals.bookTags = Qt.binding(function () { return item.tags; });
             bookOptionsPopup.open();
         }
@@ -371,7 +434,9 @@ Page
             if(bookOptionsPopup.opened)
                 bookOptionsPopup.close();
             
-            BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
+            BookController.setUp(Globals.selectedBook.uuid);
+            
+            LibraryController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
             loadPage(readingPage);
         }
     }

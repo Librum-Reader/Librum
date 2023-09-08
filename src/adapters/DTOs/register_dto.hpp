@@ -5,7 +5,7 @@
 namespace adapters::dtos
 {
 
-struct ADAPTERS_LIBRARY RegisterDto
+struct ADAPTERS_EXPORT RegisterDto
 {
     QString firstName;
     QString lastName;

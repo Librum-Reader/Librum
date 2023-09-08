@@ -3,21 +3,28 @@
   */
 function handleWheel(wheel)
 {
-    let factor = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
+    let factorX = wheel.angleDelta.x > 0 ? 1.13 : 0.88;
+    let factorY = wheel.angleDelta.y > 0 ? 1.13 : 0.88;
     
     if (wheel.modifiers & Qt.ControlModifier)
     {
-        zoom(root.document.zoom * factor);
+        zoom(BookController.zoom * factorY);
     }
     // angleDelta.x is the "horizontal scroll" mode some mouses support by
-    // e.g. pushing the scroll button to the left/right. Make sure not to
-    // scroll vertically when a "horizontal scroll" is performed.
-    else if(wheel.angleDelta.x === 0)
+    // e.g. pushing the scroll button to the left/right.
+    else if(wheel.angleDelta.x !== 0)
     {
-        if(factor > 1)
-            flick(pageView.scrollSpeed);
+        if(factorX > 1)
+            flick(pageView.scrollSpeed / 3, 0);
         else
-            flick(-pageView.scrollSpeed);
+            flick(-pageView.scrollSpeed / 3, 0);
+    }
+    else
+    {
+        if(factorY > 1)
+            flick(0, pageView.scrollSpeed);
+        else
+            flick(0, -pageView.scrollSpeed);
     }
 }
 
@@ -29,8 +36,8 @@ function updateCurrentPageCounter()
     let currentPos = pageView.contentY - pageView.originY + pageView.height/2;
     let pageNumber = Math.floor(currentPos / pageHeight);
     
-    if(pageNumber !== root.document.currentPage)
-        root.document.currentPage = pageNumber;
+    if(pageNumber !== BookController.currentPage)
+        BookController.currentPage = pageNumber;
 }
 
 
@@ -47,12 +54,12 @@ function setMoveDirection(direction)
 {
     if(direction === "up")
     {
-        flick(-1000);
+        flick(0, -1000);
         pageView.cancelFlick();
     }
     else if(direction === "down")
     {
-        flick(1000);
+        flick(0, 1000);
         pageView.cancelFlick();
     }
 }
@@ -61,41 +68,41 @@ function setMoveDirection(direction)
 function zoom(newZoomFactor)
 {
     // Clamp to max / min zoom factors
-    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 4));
-    if (newZoomFactor === root.document.zoom)
+    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 5));
+    if (newZoomFactor === BookController.zoom)
         return;
     
-    let defaultPageHeight = Math.round(pageView.currentItem.height / root.document.zoom)
+    let defaultPageHeight = Math.round(pageView.currentItem.height / BookController.zoom)
     let newPageHeight = Math.round(defaultPageHeight * newZoomFactor) + pageView.getPageSpacing(newZoomFactor);
-    let currentPageHeight = pageView.currentItem.height + pageView.getPageSpacing(root.document.zoom);
-    let currentPageNumber = root.document.currentPage;
+    let currentPageHeight = pageView.currentItem.height + pageView.getPageSpacing(BookController.zoom);
+    let currentPageNumber = BookController.currentPage;
     let currentPos = pageView.contentY - pageView.originY;
     
     let pageOffset = currentPos - (currentPageHeight * currentPageNumber);
     
-    root.document.zoom = newZoomFactor;
+    BookController.zoom = newZoomFactor;
     pageView.forceLayout();
     pageView.contentY = newPageHeight * currentPageNumber + pageOffset + pageView.originY;
 }
 
 
-function flick(factor)
+function flick(x, y)
 {
-    pageView.flick(0, factor);
+    pageView.flick(x, y);
 }
 
 
 function setPage(newPageNumber)
 {
-    if(newPageNumber < 0 || newPageNumber > root.document.pageCount)
+    if(newPageNumber < 0 || newPageNumber > BookController.pageCount)
         return;
     
     pageView.currentIndex = newPageNumber;
     pageView.positionViewAtIndex(newPageNumber, ListView.Beginning);
-    root.document.currentPage = newPageNumber;
+    BookController.currentPage = newPageNumber;
     
-    if(newPageNumber > root.document.currentPage)
+    if(newPageNumber > BookController.currentPage)
         setMoveDirection("up");
-    else if(newPageNumber < root.document.currentPage)
+    else if(newPageNumber < BookController.currentPage)
         setMoveDirection("down");
 }

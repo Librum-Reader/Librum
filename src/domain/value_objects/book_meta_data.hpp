@@ -8,7 +8,7 @@
 namespace domain::value_objects
 {
 
-struct DOMAIN_LIBRARY BookMetaData
+struct DOMAIN_EXPORT BookMetaData
 {
     QString title;
     QString authors;

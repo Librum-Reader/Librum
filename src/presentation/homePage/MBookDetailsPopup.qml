@@ -550,7 +550,7 @@ Popup
         onDecisionMade: close()
         onRightButtonClicked:
         {
-            BookController.deleteBook(Globals.selectedBook.uuid);
+            LibraryController.deleteBook(Globals.selectedBook.uuid);
             root.close();
         }
     }
@@ -604,29 +604,29 @@ Popup
             var operationsMap = {};
             
             if(titleField.text !== Globals.selectedBook.title)
-                operationsMap[BookController.MetaProperty.Title] = titleField.text;
+                operationsMap[LibraryController.MetaProperty.Title] = titleField.text;
             
             if(authorsField.text !== Globals.selectedBook.authors)
-                operationsMap[BookController.MetaProperty.Authors] = authorsField.text;
+                operationsMap[LibraryController.MetaProperty.Authors] = authorsField.text;
             
             if(languageComboBox.text !== Globals.selectedBook.language && languageComboBox.text != "")
-                operationsMap[BookController.MetaProperty.Language] = languageComboBox.text;
+                operationsMap[LibraryController.MetaProperty.Language] = languageComboBox.text;
             
             if(documentCreatorField.text !== Globals.selectedBook.creator && documentCreatorField.text != "")
-                operationsMap[BookController.MetaProperty.Creator] = documentCreatorField.text;
+                operationsMap[LibraryController.MetaProperty.Creator] = documentCreatorField.text;
             
             if(creationDateField.text !== Globals.selectedBook.creationDate && creationDateField.text != internal.placeholderText)
-                operationsMap[BookController.MetaProperty.CreationDate] = creationDateField.text;
+                operationsMap[LibraryController.MetaProperty.CreationDate] = creationDateField.text;
             
             if(formatField.text !== Globals.selectedBook.format && formatField.text != internal.placeholderText)
-                operationsMap[BookController.MetaProperty.Format] = formatField.text;
+                operationsMap[LibraryController.MetaProperty.Format] = formatField.text;
             
-            BookController.updateBook(Globals.selectedBook.uuid, operationsMap);
+            LibraryController.updateBook(Globals.selectedBook.uuid, operationsMap);
             
             
             // Handle book cover specially
             if(bookCover.source != Globals.selectedBook.coverPath)   // Needs to be !=, the types are different (QUrl and QString)
-                BookController.changeBookCover(Globals.selectedBook.uuid, bookCover.source);
+                LibraryController.changeBookCover(Globals.selectedBook.uuid, bookCover.source);
         }
         
         function setupPopup()

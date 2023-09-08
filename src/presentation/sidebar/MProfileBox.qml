@@ -103,6 +103,7 @@ Item
                     sourceSize.height: 20
                     anchors.centerIn: parent
                     source: Icons.arrowheadNextIcon
+                    cache: false
                 }
                 
                 MouseArea

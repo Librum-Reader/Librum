@@ -2,8 +2,8 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
-#include "user.hpp"
 #include "application_export.hpp"
+#include "user.hpp"
 
 namespace application
 {
@@ -13,7 +13,7 @@ namespace application
  * UserStorageAccess class. It maps the data provided by the application to
  * the data type required for user storage API requests.
  */
-class APPLICATION_LIBRARY IUserStorageGateway : public QObject
+class APPLICATION_EXPORT IUserStorageGateway : public QObject
 {
     Q_OBJECT
 
@@ -21,6 +21,8 @@ public:
     virtual ~IUserStorageGateway() noexcept = default;
 
     virtual void getUser(const QString& authToken) = 0;
+    virtual void deleteUser(const QString& authToken) = 0;
+    virtual void forgotPassword(const QString& email) = 0;
     virtual void getProfilePicture(const QString& authToken) = 0;
     virtual void changeFirstName(const QString& authToken,
                                  const QString& newFirstName) = 0;
@@ -28,6 +30,8 @@ public:
                                 const QString& newLastName) = 0;
     virtual void changeEmail(const QString& authToken,
                              const QString& newEmail) = 0;
+    virtual void changePassword(const QString& authToken,
+                                const QString& newPassword) = 0;
     virtual void changeProfilePicture(const QString& authToken,
                                       const QString& path) = 0;
     virtual void deleteProfilePicture(const QString& authToken) = 0;
@@ -42,6 +46,7 @@ public:
 signals:
     void finishedGettingUser(const domain::entities::User& user, bool success);
     void profilePictureReady(QByteArray& data);
+    void passwordChangeFinished(bool success, const QString& reason);
 };
 
 }  // namespace application

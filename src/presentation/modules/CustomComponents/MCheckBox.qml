@@ -20,6 +20,7 @@ Item
     property string image: Icons.checkWhite
     property int imageSize: container.width - 10
     property bool checked: false
+    property bool enabled: true
     signal clicked()
     
     implicitWidth: 22
@@ -58,6 +59,9 @@ Item
     
     function toggle()
     {
+        if(!root.enabled)
+            return;
+        
         root.clicked();
         root.checked = !root.checked;
     }

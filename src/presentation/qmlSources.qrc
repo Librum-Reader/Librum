@@ -50,7 +50,6 @@
         <file>readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml</file>
         <file>readingPage/readingSearchbar/MReadingSearchbar.qml</file>
         <file>registerPage/MAcceptPolicy.qml</file>
-        <file>registerPage/MKeepMeUpdated.qml</file>
         <file>registerPage/MRegisterPage.qml</file>
         <file>statisticsPage/MStatisticsPage.qml</file>
         <file>settings/MAboutPage.qml</file>
@@ -94,5 +93,7 @@
         <file>modules/CustomComponents/MProgressBar.qml</file>
         <file>modules/CustomComponents/MWarningPopup.qml</file>
         <file>modules/CustomComponents/MToolTip.qml</file>
+        <file>modules/CustomComponents/MConfirmAccountDeletionPopup.qml</file>
+        <file>settings/updatesPage/MWindowsUpdatingPopup.qml</file>
     </qresource>
 </RCC>

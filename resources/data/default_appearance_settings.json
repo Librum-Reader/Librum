@@ -6,7 +6,7 @@
     "LayoutDirection": "Vertical",
     "DisplayMode": "Single Page",
     "PageTransition": "Instant",
-    "DefaultZoom": "100",
+    "DefaultZoom": "150",
     "SmoothScrolling": "false",
     "LoopAfterLastPage": "false",
     "CursorMode": "Hidden after delay"

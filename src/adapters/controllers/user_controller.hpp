@@ -1,14 +1,14 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 #include "i_user_controller.hpp"
 #include "i_user_service.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class ADAPTERS_LIBRARY UserController : public IUserController
+class ADAPTERS_EXPORT UserController : public IUserController
 {
     Q_OBJECT
 
@@ -16,8 +16,10 @@ public:
     UserController(application::IUserService* userService);
 
     void loadUser(bool rememberUser) override;
-    
+    void deleteUser() override;
     void syncWithServer() override;
+    void changePassword(const QString& newPassword) override;
+    void forgotPassword(const QString& email) override;
 
     QString getTagUuidForName(QString name) override;
     QString addTag(const QString& name) override;
@@ -33,8 +35,8 @@ public:
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
 
-    long getUsedBookStorage() const override;
-    long getBookStorageLimit() const override;
+    qint64 getUsedBookStorage() const override;
+    qint64 getBookStorageLimit() const override;
 
     QString getProfilePicturePath() const override;
     void setProfilePicture(const QString& path) override;

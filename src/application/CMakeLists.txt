@@ -1,52 +1,48 @@
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Quick Network)
-
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
-
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 
 # Setup
 set(application_SRC
     interfaces/services/i_authentication_service.hpp
-    interfaces/services/i_book_service.hpp
     interfaces/services/i_free_books_service.hpp
+    interfaces/gateways/i_free_books_storage_gateway.hpp
+    interfaces/services/i_library_service.hpp
     interfaces/services/i_user_service.hpp
     interfaces/services/i_settings_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
-    interfaces/gateways/i_book_storage_gateway.hpp
-    interfaces/gateways/i_free_books_storage_gateway.hpp
+    interfaces/gateways/i_library_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
-    interfaces/utility/i_book_metadata_helper.hpp
-    interfaces/utility/i_downloaded_books_tracker.hpp
-    interfaces/utility/i_book_storage_manager.hpp
+    interfaces/utility/i_metadata_extractor.hpp
+    interfaces/utility/i_local_library_tracker.hpp
+    interfaces/utility/i_library_storage_manager.hpp
+    interfaces/gateways/i_app_info_gateway.hpp
+    interfaces/services/i_app_info_service.hpp
+    interfaces/services/i_book_service.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
-    services/book_service.cpp
-    services/book_service.hpp
     services/free_books_service.cpp
     services/free_books_service.hpp
+    services/library_service.cpp
+    services/library_service.hpp
     services/user_service.cpp
     services/user_service.hpp
     services/settings_service.cpp
     services/settings_service.hpp
+    services/app_info_service.cpp
+    services/app_info_service.hpp
+    services/book_service.hpp
+    services/book_service.cpp
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
     common/enums/setting_groups.hpp
     common/enums/error_code.hpp
     
-    utility/book_metadata_helper.cpp
-    utility/book_metadata_helper.hpp
-    utility/save_book_helper.hpp
-    utility/downloaded_books_tracker.cpp
-    utility/downloaded_books_tracker.hpp
+    utility/local_library_tracker.cpp
+    utility/local_library_tracker.hpp
     utility/merge_status.hpp
-    utility/book_storage_manager.cpp
-    utility/book_storage_manager.hpp
+    utility/library_storage_manager.cpp
+    utility/library_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp
@@ -56,31 +52,43 @@ set(application_SRC
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
     
-    core/document.hpp
-    core/document.cpp
-    core/page.hpp
-    core/page.cpp
+    core/page_generator.hpp
+    core/page_generator.cpp
+    core/metadata_extractor.cpp
+    core/metadata_extractor.hpp
     core/toc/toc_item.hpp
     core/toc/toc_item.cpp
     core/toc/toc_model.hpp
     core/toc/toc_model.cpp
     core/toc/filtered_toc_model.hpp
     core/toc/filtered_toc_model.cpp
+    core/utils/book_searcher.hpp
+    core/utils/book_searcher.cpp
+    core/utils/fz_utils.hpp
+    core/utils/text_selector.hpp
+    core/utils/text_selector.cpp
 )
 
 
-
 # Build mupdf
+set(VENV_OPTION "")
+if(NOT ${NO_VENV})
+    set(VENV_OPTION "--venv")
+endif()
+
 if(UNIX)
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so")
-    set(MUPDF_OUTPUT "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>/libmupdfcpp.so" PARENT_SCOPE)
-    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
+    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
+    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
 elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
-    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py --venv -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
 endif()
+
+message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
 
 
 add_custom_command(
@@ -130,6 +138,7 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )
 
 # Make sure to ignore warnings from mupdf by adding it as a system include directory
@@ -147,6 +156,7 @@ target_link_libraries(application
                 PRIVATE
                     Qt6::Core
                     Qt6::Quick
+                    Qt6::Widgets
                     Qt6::Network
                     rapidfuzz::rapidfuzz
                     domain
@@ -170,4 +180,17 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
               EXECUTABLE application_unit_tests
               BASE_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
               EXCLUDE ${PROJECT_BINARY_DIR}/* ${PROJECT_SOURCE_DIR}/libs/*)
+endif()
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS application
+            DESTINATION lib
+            )
+    
+    # Install mupdf's shared libraries
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so 
+                  ${MUPDF_OUTPUT_DIR}/libmupdf.so
+            DESTINATION lib)
 endif()

@@ -7,7 +7,7 @@
 namespace cpp_elements
 {
 
-class PRESENTATION_LIBRARY KeySequenceRecorder : public QQuickItem
+class PRESENTATION_EXPORT KeySequenceRecorder : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(QString originalSequence READ originalSequence WRITE

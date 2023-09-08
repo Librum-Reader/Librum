@@ -1,17 +1,5 @@
-# Qt
-set(CMAKE_AUTOUIC ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
-
-
 # Configuration
 set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
-
-
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Widgets QuickControls2)
-
 
 
 # Language
@@ -41,18 +29,26 @@ add_subdirectory(presentation/)
 
 
 # Building
-add_executable(appLibrum
+set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/resources.rc")
+qt_add_executable(librum
     main.cpp
     dependency_injection.hpp
     message_handler.hpp
+    ${PROJECT_SOURCE_DIR}/fonts.qrc
+    ${app_icon_resource_windows}
 )
 
-target_compile_definitions(appLibrum
+# Set WIN32 for windows to avoid console getting opened on start on windows
+if(WIN32)
+    set_target_properties(librum PROPERTIES WIN32_EXECUTABLE true)
+endif()
+
+target_compile_definitions(librum
     PRIVATE
         $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>
 )
 
-target_link_libraries(appLibrum
+target_link_libraries(librum
     PRIVATE
         presentation
         adapters
@@ -64,23 +60,33 @@ target_link_libraries(appLibrum
         Qt6::QuickControls2
 )
 
-target_include_directories(appLibrum
+target_include_directories(librum
     PRIVATE
         ${ADAPTERS_INCLUDES}
         ${APPLICATION_INCLUDES}
         ${INFRASTRUCTURE_INCLUDES}
 )
 
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")
-target_compile_options(appLibrum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+target_compile_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS};-O0;-g>")
+target_compile_options(librum PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
 
-target_link_options(appLibrum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
+target_link_options(librum PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_SANITIZERS}>")
 
 
+# Install rules
+if(UNIX)
+    install(TARGETS librum
+            DESTINATION bin
+            LIBRARY DESTINATION lib
+            RUNTIME DESTINATION bin
+            )
 
-# Move fonts into binary dir    
-include(CopyRecursive)
-set(FONTS_OUT_DIR ${PROJECT_BINARY_DIR}/resources/fonts)
-file(MAKE_DIRECTORY ${FONTS_OUT_DIR})
-message(DEBUG "Folder created at ${FONTS_OUT_DIR}")
-copy_recursive(${PROJECT_SOURCE_DIR}/resources/fonts ${FONTS_OUT_DIR} "*.otf")
+    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/logo.svg
+            DESTINATION share/pixmaps
+            RENAME librum.svg
+            )
+        
+    install(FILES ${PROJECT_SOURCE_DIR}/librum.desktop
+            DESTINATION share/applications
+            )
+endif()

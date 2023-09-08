@@ -154,20 +154,20 @@ void TOCModel::setupModelData(fz_outline* outline)
 
 TOCItem* TOCModel::getTOCItemFromOutline(fz_outline* outline)
 {
-    int pageNumber = outline->page.page;
+    auto location = outline->page;
     float yOffset = outline->y;
 
-    // If the pageNumber is -1, it probably is an epub, which are parsed
-    // differently. We need to resolve the uri for it and then get the page
-    // number from the location.
-    if(pageNumber < 0)
+    // Outlines come with the page number set to -1 if they are reflowable
+    // documents (e.g. epub), because its quite expensive to get absolute page
+    // numbers for them. Since we need absolute page numbers, we need to resolve
+    // their links manually and then convert the location to page numbers.
+    if(location.page == -1)
     {
-        auto pos =
-            mupdf::fz_resolve_link(m_document, outline->uri, nullptr, &yOffset);
-
-        pageNumber = m_document.fz_page_number_from_location(pos) + 1;
+        location = *m_document.fz_resolve_link(outline->uri, nullptr, &yOffset)
+                        .internal();
     }
 
+    auto pageNumber = m_document.fz_page_number_from_location(location);
 
     TOCItemData data {
         .title = QString(outline->title),

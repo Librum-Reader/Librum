@@ -5,16 +5,16 @@
 #include <QString>
 #include <QUuid>
 #include <vector>
-#include "tag.hpp"
 #include "application_export.hpp"
+#include "tag.hpp"
 
 namespace application
 {
 
 /**
- *  The BookService handles all the operations on the user.
+ *  The UserService handles all the operations on the user.
  */
-class APPLICATION_LIBRARY IUserService : public QObject
+class APPLICATION_EXPORT IUserService : public QObject
 {
     Q_OBJECT
 
@@ -22,6 +22,7 @@ public:
     virtual ~IUserService() noexcept = default;
 
     virtual void loadUser(bool rememberUser) = 0;
+    virtual void deleteUser() = 0;
     virtual void downloadUser() = 0;
 
     virtual QString getFirstName() const = 0;
@@ -33,13 +34,15 @@ public:
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
 
-    virtual long getUsedBookStorage() const = 0;
-    virtual long getBookStorageLimit() const = 0;
+    virtual qint64 getUsedBookStorage() const = 0;
+    virtual qint64 getBookStorageLimit() const = 0;
 
     virtual QString getProfilePicturePath() const = 0;
     virtual void setProfilePicturePath(const QString& path) = 0;
 
     virtual void deleteProfilePicture() = 0;
+    virtual void changePassword(const QString& newPassword) = 0;
+    virtual void forgotPassword(const QString& email) = 0;
 
     virtual const std::vector<domain::entities::Tag>& getTags() const = 0;
     virtual QUuid addTag(const domain::entities::Tag& tag) = 0;
@@ -54,7 +57,8 @@ signals:
     void tagDeletionStarted(int index);
     void tagDeletionEnded();
     void tagsChanged(int index);
-    void bookStorageDataUpdated(long usedStorage, long bookStorageLimit);
+    void bookStorageDataUpdated(qint64 usedStorage, qint64 bookStorageLimit);
+    void passwordChangeFinished(bool success, const QString& reason);
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;

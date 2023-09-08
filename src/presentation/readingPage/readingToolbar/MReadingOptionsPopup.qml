@@ -129,6 +129,7 @@ Popup
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         spacing: 8
+                        enabled: false
                     }
                     
                     MLabeledCheckBox
@@ -144,6 +145,7 @@ Popup
                         fontColor: Style.colorText
                         checked: true
                         spacing: 8
+                        enabled: false
                     }
                     
                     MLabeledCheckBox
@@ -159,6 +161,7 @@ Popup
                         fontColor: Style.colorText
                         checked: true
                         spacing: 8
+                        enabled: false
                     }
                 }
                 

@@ -1,6 +1,3 @@
-# Dependencies
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Network Gui)
-
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 
@@ -9,12 +6,14 @@ add_library(infrastructure
                 SHARED
                     persistance/user_storage_access.cpp
                     persistance/user_storage_access.hpp
-                    persistance/book_storage_access.cpp
-                    persistance/book_storage_access.hpp
                     persistance/free_books_storage_access.cpp
                     persistance/free_books_storage_access.hpp
+                    persistance/library_storage_access.cpp
+                    persistance/library_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
+                    persistance/app_info_access.cpp
+                    persistance/app_info_access.hpp
                     
                     persistance/api_error_helper.hpp
                     data/endpoints.hpp
@@ -41,3 +40,11 @@ target_link_libraries(infrastructure
 )
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};-O0;-g>")
 target_compile_options(infrastructure PRIVATE "$<$<CONFIG:RELEASE>:-O3>")
+
+
+# Install rules
+if(UNIX)
+    install(TARGETS infrastructure
+            DESTINATION lib
+            )
+endif()

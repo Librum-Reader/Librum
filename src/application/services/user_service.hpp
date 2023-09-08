@@ -1,17 +1,16 @@
 #pragma once
-#include <QtCore/QtGlobal>
 #include <QObject>
 #include <QTimer>
+#include <QtCore/QtGlobal>
+#include "application_export.hpp"
 #include "i_user_service.hpp"
 #include "i_user_storage_gateway.hpp"
 #include "user.hpp"
-#include "domain_export.hpp"
-#include "application_export.hpp"
 
 namespace application::services
 {
 
-class APPLICATION_LIBRARY UserService : public IUserService
+class APPLICATION_EXPORT UserService : public IUserService
 {
     Q_OBJECT
 
@@ -19,6 +18,7 @@ public:
     UserService(IUserStorageGateway* userStorageGateway);
 
     void loadUser(bool rememberUser) override;
+    void deleteUser() override;
     void downloadUser() override;
 
     QString getFirstName() const override;
@@ -30,14 +30,16 @@ public:
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
 
-    long getUsedBookStorage() const override;
+    qint64 getUsedBookStorage() const override;
 
-    long getBookStorageLimit() const override;
+    qint64 getBookStorageLimit() const override;
 
     QString getProfilePicturePath() const override;
     void setProfilePicturePath(const QString& path) override;
 
     void deleteProfilePicture() override;
+    void changePassword(const QString& newPassword) override;
+    void forgotPassword(const QString& email) override;
 
     const std::vector<domain::entities::Tag>& getTags() const override;
     QUuid addTag(const domain::entities::Tag& tag) override;
@@ -67,6 +69,7 @@ private:
     QDateTime deleteProfilePictureLocally();
     void setUserData(const domain::entities::User& user);
     void updateProfilePicture(const domain::entities::User& user);
+    void deleteAllLocalUserData();
 
     IUserStorageGateway* m_userStorageGateway;
     domain::entities::User m_user;

@@ -7,7 +7,7 @@
 namespace application::services
 {
 
-class APPLICATION_LIBRARY AuthenticationService : public IAuthenticationService
+class APPLICATION_EXPORT AuthenticationService : public IAuthenticationService
 {
     Q_OBJECT
 

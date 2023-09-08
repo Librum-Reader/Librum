@@ -1,87 +1,48 @@
 #pragma once
-#include <QImage>
-#include <QTimer>
-#include <utility>
+#include <memory>
 #include "book.hpp"
-#include "i_book_metadata_helper.hpp"
 #include "i_book_service.hpp"
-#include "i_book_storage_manager.hpp"
-#include "application_export.hpp"
+#include "i_library_service.hpp"
+#include "mupdf/classes.h"
+#include "toc/filtered_toc_model.hpp"
+#include "utils/book_searcher.hpp"
 
 namespace application::services
 {
 
-class APPLICATION_LIBRARY BookService : public IBookService
+class BookService : public IBookService
 {
-    Q_OBJECT
-
 public:
-    BookService(IBookMetadataHelper* bookMetadataHelper,
-                IBookStorageManager* bookStorageManager);
+    BookService(ILibraryService* libraryService);
 
-    void downloadBooks() override;
-    BookOperationStatus addBook(const QString& filePath) override;
-    BookOperationStatus deleteBook(const QUuid& uuid) override;
-    BookOperationStatus uninstallBook(const QUuid& uuid) override;
-    BookOperationStatus downloadBookMedia(const QUuid& uuid) override;
-    BookOperationStatus updateBook(
-        const domain::entities::Book& newBook) override;
-    BookOperationStatus changeBookCover(const QUuid& uuid,
-                                        const QString& filePath) override;
-    BookOperationStatus saveBookToFile(const QUuid& uuid,
-                                       const QString& path) override;
+    void setUp(QUuid uuid) override;
+    mupdf::FzDocument* getFzDocument() override;
 
-    BookOperationStatus addTagToBook(const QUuid& uuid,
-                                     const domain::entities::Tag& tag) override;
-    BookOperationStatus removeTagFromBook(const QUuid& bookUuid,
-                                          const QUuid& tagUuid) override;
-    BookOperationStatus renameTagOfBook(const QUuid& bookUuid,
-                                        const QUuid& tagUuid,
-                                        const QString& newName) override;
+    void search(const QString& text) override;
+    void clearSearch() override;
+    void goToNextSearchHit() override;
+    void goToPreviousSearchHit() override;
 
-    const std::vector<domain::entities::Book>& getBooks() const override;
-    const domain::entities::Book* getBook(const QUuid& uuid) const override;
-    domain::entities::Book* getBook(const QUuid& uuid) override;
-    int getBookIndex(const QUuid& uuid) const override;
-    int getBookCount() const override;
+    void followLink(const char* uri) override;
 
-public slots:
-    bool refreshLastOpenedDateOfBook(const QUuid& uuid) override;
-    void setupUserData(const QString& token, const QString& email) override;
-    void clearUserData() override;
-    void updateUsedBookStorage(long usedStorage,
-                               long bookStorageLimit) override;
+    QString getFilePath() const override;
+    int getPageCount() const override;
+    int getCurrentPage() const override;
+    void setCurrentPage(int newCurrentPage) override;
+    float getZoom() const override;
+    void setZoom(float newZoom) override;
 
-private slots:
-    void updateLibrary(std::vector<domain::entities::Book>& books);
-    void processDownloadedBook(const QUuid& uuid, const QString& filePath);
-    void processDownloadedBookCover(const QUuid& uuid, const QString& filePath);
-    void refreshUIWithNewCover(const QUuid& uuid, const QString& path);
-    void refreshUIForBook(const QUuid& uuid);
+    core::FilteredTOCModel* getTableOfContents() override;
 
 private:
-    auto getBookPosition(const QUuid& uuid);
-    void loadLocalBooks();
-    void uninstallBookIfTheBookFileIsInvalid(domain::entities::Book& book);
-    void mergeRemoteLibraryIntoLocalLibrary(
-        std::vector<domain::entities::Book>& remoteBooks);
-    void mergeLocalLibraryIntoRemoteLibrary(
-        const std::vector<domain::entities::Book>& remoteBooks);
-    void deleteBookCover(domain::entities::Book& book);
-    bool setNewBookCover(domain::entities::Book& book, QString filePath);
-    void addBookToLibrary(const domain::entities::Book& book);
-    void setMediaDownloadProgressForBook(const QUuid& uuid,
-                                         qint64 bytesReceived,
-                                         qint64 bytesTotal);
-    void deleteBookLocally(const domain::entities::Book& book);
+    ILibraryService* m_libraryService;
+    domain::entities::Book* m_book = nullptr;
+    std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
+    std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
+    float m_zoom = 1;
 
-    IBookMetadataHelper* m_bookMetadataHelper;
-    IBookStorageManager* m_bookStorageManager;
-    std::vector<domain::entities::Book> m_books;
-    long m_usedBookStorage = 0;
-    long m_bookStorageLimit = 0;
-    QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 15'000;
+    std::unique_ptr<core::TOCModel> m_TOCModel;
+    std::unique_ptr<core::FilteredTOCModel> m_filteredTOCModel;
 };
 
 }  // namespace application::services

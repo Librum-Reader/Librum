@@ -5,7 +5,7 @@
 namespace domain::value_objects
 {
 
-class DOMAIN_LIBRARY LoginModel
+class DOMAIN_EXPORT LoginModel
 {
 public:
     LoginModel(QString email, QString password, bool rememberUser);

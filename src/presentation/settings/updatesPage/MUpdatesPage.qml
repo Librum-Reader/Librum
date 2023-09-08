@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 MFlickWrapper
@@ -52,10 +52,13 @@ MFlickWrapper
             Loader
             {
                 id: contentLoader
+                property bool versionsDontMatch: AppInfoController.currentVersion !== AppInfoController.newestVersion
+                                                 && AppInfoController.newestVersion !== ""
+                
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.topMargin: 32
-                sourceComponent: AppInformation.currentVersion === AppInformation.newestVersion ? upToDate : updatesAvailable
+                sourceComponent: versionsDontMatch ? updatesAvailable : upToDate
             }
         }
     }

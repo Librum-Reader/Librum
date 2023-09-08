@@ -8,13 +8,13 @@
 namespace domain::entities
 {
 
-class DOMAIN_LIBRARY User : public QObject
+class DOMAIN_EXPORT User : public QObject
 {
     Q_OBJECT
 
 public:
      User(const QString& firstName, const QString& lastName,
-         const QString& email, long usedBookStorage, long bookStorageLimit,
+         const QString& email, qint64 usedBookStorage, qint64 bookStorageLimit,
          const QDateTime& profilePictureLastUpdated = QDateTime(),
          bool hasProfilePicture = false);
 
@@ -27,11 +27,11 @@ public:
      const QString& getEmail() const;
      void setEmail(const QString& newEmail);
 
-     long getUsedBookStorage() const;
-     void setUsedBookStorage(long newUsedBookStorage);
+     qint64 getUsedBookStorage() const;
+     void setUsedBookStorage(qint64 newUsedBookStorage);
 
-     long getBookStorageLimit() const;
-     void setBookStorageLimit(long newBookStorageLimit);
+     qint64 getBookStorageLimit() const;
+     void setBookStorageLimit(qint64 newBookStorageLimit);
 
      bool hasProfilePicture() const;
      void setHasProfilePicture(bool newValue);
@@ -64,8 +64,8 @@ private:
     QString m_firstName;
     QString m_lastName;
     QString m_email;
-    long m_usedBookStorage;
-    long m_bookStorageLimit;
+    qint64 m_usedBookStorage;
+    qint64 m_bookStorageLimit;
     QDateTime m_profilePictureLastUpdated;
     bool m_hasProfilePicture;
     QString m_profilePicturePath;

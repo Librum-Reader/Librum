@@ -11,7 +11,7 @@
 namespace application::setting_keys
 {
 
-Q_NAMESPACE_EXPORT(APPLICATION_LIBRARY)
+Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 
 enum class SettingKeys
 {

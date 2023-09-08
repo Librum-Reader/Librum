@@ -9,12 +9,24 @@ import CustomComponents
 Item 
 {
     id: root
+    property bool downloading: false
     signal leftButtonClicked(int index)
     signal rightButtonClicked(int index, var mouse)
     signal moreOptionClicked(int index, var mouse)
     
     implicitWidth: 190
     implicitHeight: 322
+    
+    Connections
+    {
+        target: model
+        
+        function onDownloadedChanged()
+        {
+            if(model.downloaded)
+                root.downloading = false;
+        }
+    }
     
     
     ColumnLayout

@@ -26,6 +26,7 @@ Item
     property double fontWeight: Font.Normal
     property int verticalTextOffset: 0
     property color fontColor: Style.colorText
+    property alias enabled: checkBox.enabled
     signal clicked()
     
     implicitWidth: 100
@@ -57,6 +58,17 @@ Item
             font.pointSize: root.fontSize
             color: root.fontColor
             wrapMode: Text.WordWrap
+            
+            MouseArea
+            {
+                width: text.implicitWidth
+                height: text.implicitHeight
+                
+                onClicked: {
+                    checkBox.toggle()
+                    root.clicked()
+                }
+            }
         }
     }
     

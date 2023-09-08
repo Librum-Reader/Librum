@@ -203,7 +203,7 @@ MFlickWrapper
                                 onEdited: internal.clearLoginError()
                                 Keys.onPressed: (event) => internal.moveFocusToNextInput(event, 
                                                                                          passwordInput,
-                                                                                         keepMeUpdated)
+                                                                                         acceptPolicy)
                             }
                             
                             Label
@@ -214,23 +214,13 @@ MFlickWrapper
                                 color: Style.colorErrorText
                             }
                             
-                            MKeepMeUpdated
-                            {
-                                id: keepMeUpdated
-                                Layout.fillWidth: true
-                                Layout.topMargin: 28
-                                
-                                onKeyUp: passwordConfirmationInput.giveFocus();
-                                onKeyDown: acceptPolicy.giveFocus();
-                            }
-                            
                             MAcceptPolicy
                             {
                                 id: acceptPolicy
                                 Layout.fillWidth: true
-                                Layout.topMargin: 32
+                                Layout.topMargin: 24
                                 
-                                onKeyUp: keepMeUpdated.giveFocus();
+                                onKeyUp: passwordConfirmationInput.giveFocus();
                                 onKeyDown: registerButton.giveFocus();
                             }
                             
@@ -239,7 +229,7 @@ MFlickWrapper
                                 id: registerButton
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 40
-                                Layout.topMargin: 44
+                                Layout.topMargin: 46
                                 borderWidth: 0
                                 backgroundColor: Style.colorBasePurple
                                 fontSize: 12
@@ -325,7 +315,7 @@ MFlickWrapper
             
             AuthController.registerUser(firstNameInput.text, lastNameInput.text,
                                         emailInput.text, passwordInput.text,
-                                        keepMeUpdated.checked);
+                                        acceptPolicy.checked);
         }
         
         function passwordIsValid()

@@ -1,13 +1,14 @@
 #pragma once
 #include <QObject>
+#include "adapters_export.hpp"
 #include "i_user_storage_access.hpp"
 #include "i_user_storage_gateway.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::gateways
 {
 
-class ADAPTERS_LIBRARY UserStorageGateway : public application::IUserStorageGateway
+class ADAPTERS_EXPORT UserStorageGateway
+    : public application::IUserStorageGateway
 {
     Q_OBJECT
 
@@ -15,6 +16,8 @@ public:
     UserStorageGateway(IUserStorageAccess* userStorageAccess);
 
     void getUser(const QString& authToken) override;
+    void deleteUser(const QString& authToken) override;
+    void forgotPassword(const QString& email) override;
     void getProfilePicture(const QString& authToken) override;
     void changeFirstName(const QString& authToken,
                          const QString& newFirstName) override;
@@ -22,6 +25,8 @@ public:
                         const QString& newLastName) override;
     void changeEmail(const QString& authToken,
                      const QString& newEmail) override;
+    void changePassword(const QString& authToken,
+                        const QString& newPassword) override;
     void changeProfilePicture(const QString& authToken,
                               const QString& path) override;
     void deleteProfilePicture(const QString& authToken) override;

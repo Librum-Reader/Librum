@@ -225,6 +225,8 @@ Page
                             Layout.preferredWidth: 76
                             Layout.topMargin: 4
                             value: savedValue
+                            minVal: 0
+                            maxVal: 999
                             
                             // Need rebinding on reset
                             onSavedValueChanged: value = savedValue

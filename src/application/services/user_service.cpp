@@ -2,6 +2,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QImageReader>
+#include <QStandardPaths>
 #include "automatic_login_helper.hpp"
 #include "tag.hpp"
 
@@ -28,6 +29,10 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
                 m_user.setHasProfilePicture(true);
                 updateProfilePictureUI(path);
             });
+
+    connect(m_userStorageGateway, &IUserStorageGateway::passwordChangeFinished,
+            this, &UserService::passwordChangeFinished);
+
 
     // Tag insertion
     connect(&m_user, &User::tagInsertionStarted, this,
@@ -63,6 +68,21 @@ void UserService::loadUser(bool rememberUser)
     m_rememberUser = success ? true : rememberUser;
 
     m_userStorageGateway->getUser(m_authenticationToken);
+}
+
+void UserService::deleteUser()
+{
+    // If the user has automatic login enabled, delete the data to avoid
+    // logging into a non-existing account.
+    auto userData = utility::AutomaticLoginHelper::tryAutomaticUserLoading();
+    if(userData.has_value() && userData.value().email == m_user.getEmail())
+    {
+        utility::AutomaticLoginHelper::clearAutomaticLoginData();
+    }
+
+    deleteAllLocalUserData();
+
+    m_userStorageGateway->deleteUser(m_authenticationToken);
 }
 
 void UserService::downloadUser()
@@ -105,12 +125,12 @@ void UserService::setEmail(const QString& newEmail)
     m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
 }
 
-long UserService::getUsedBookStorage() const
+qint64 UserService::getUsedBookStorage() const
 {
     return m_user.getUsedBookStorage();
 }
 
-long UserService::getBookStorageLimit() const
+qint64 UserService::getBookStorageLimit() const
 {
     return m_user.getBookStorageLimit();
 }
@@ -149,6 +169,16 @@ void UserService::deleteProfilePicture()
     m_userStorageGateway->changeProfilePictureLastUpdated(
         m_authenticationToken, newProfilePictureLastUpdated);
     m_userStorageGateway->changeHasProfilePicture(m_authenticationToken, false);
+}
+
+void UserService::changePassword(const QString& newPassword)
+{
+    m_userStorageGateway->changePassword(m_authenticationToken, newPassword);
+}
+
+void UserService::forgotPassword(const QString& email)
+{
+    m_userStorageGateway->forgotPassword(email);
 }
 
 QString UserService::saveProfilePictureToFile(QByteArray& data)
@@ -366,6 +396,18 @@ void UserService::updateProfilePicture(const domain::entities::User& user)
     }
 }
 
+void UserService::deleteAllLocalUserData()
+{
+    QDir profileDir(getUserProfileDir());
+    if(!profileDir.exists())
+    {
+        qWarning() << "Can't delete user profile directory, no such directory.";
+        return;
+    }
+
+    profileDir.removeRecursively();
+}
+
 bool UserService::userIsLoggedIn()
 {
     return !m_authenticationToken.isEmpty();
@@ -431,14 +473,19 @@ void UserService::clearUserData()
 
 QDir UserService::getUserProfileDir() const
 {
-    auto applicationDir = QDir::current().path();
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
+
+    destDir.mkdir("profiles");
+    destDir.cd("profiles");
+
     auto userProfileHash = QString::number(qHash(m_user.getEmail()));
-    auto folder = QDir(applicationDir + "/userProfiles/" + userProfileHash);
+    destDir.mkdir(userProfileHash);
+    destDir.cd(userProfileHash);
 
-    if(!folder.exists())
-        folder.mkpath(folder.path());
-
-    return folder;
+    return destDir;
 }
 
 }  // namespace application::services

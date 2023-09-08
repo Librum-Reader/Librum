@@ -1,10 +1,12 @@
 #include "settings_service.hpp"
 #include <QDebug>
+#include <QDir>
 #include <QFile>
 #include <QHash>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMetaEnum>
+#include <QStandardPaths>
 #include "enum_utils.hpp"
 #include "setting_keys.hpp"
 
@@ -68,7 +70,19 @@ void SettingsService::resetSettingsGroupToDefault(SettingGroups group)
 
 QString SettingsService::getSettingsFilePath()
 {
-    return m_settings->fileName();
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
+
+    destDir.mkdir("profiles");
+    destDir.cd("profiles");
+
+    auto userProfileHash = QString::number(qHash(m_userEmail));
+    destDir.mkdir(userProfileHash);
+    destDir.cd(userProfileHash);
+
+    return destDir.filePath("settings");
 }
 
 void SettingsService::loadUserSettings(const QString& token,
@@ -88,19 +102,10 @@ void SettingsService::clearUserData()
 
 void SettingsService::setupSettings()
 {
-    // Setup the QSettings object
-    auto uniqueFileName = getUniqueUserHash();
-    auto format = QSettings::NativeFormat;
-    m_settings = std::make_unique<QSettings>(uniqueFileName, format);
+    auto format = QSettings::IniFormat;
+    m_settings = std::make_unique<QSettings>(getSettingsFilePath(), format);
 
     generateDefaultSettings();
-}
-
-QString SettingsService::getUniqueUserHash() const
-{
-    auto userHash = qHash(m_userEmail);
-
-    return QString::number(userHash);
 }
 
 QString SettingsService::getDefaultSettingsFilePathForEnum(SettingGroups group)

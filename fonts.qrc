@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/fonts/SF-Pro-Display-Bold.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Medium.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Regular.otf</file>
+        <file>resources/fonts/SF-Pro-Display-Semibold.otf</file>
+    </qresource>
+</RCC>

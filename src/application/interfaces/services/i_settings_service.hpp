@@ -14,7 +14,7 @@ namespace application
 /**
  *  The SettingsService handles storing and reading application settings.
  */
-class APPLICATION_LIBRARY ISettingsService : public QObject
+class APPLICATION_EXPORT ISettingsService : public QObject
 {
     Q_OBJECT
 

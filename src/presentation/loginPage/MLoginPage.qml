@@ -6,6 +6,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.models
 
 
 MFlickWrapper
@@ -218,6 +219,13 @@ MFlickWrapper
                             Layout.leftMargin: 4
                             font.pointSize: 11
                             color: Style.colorText
+                            
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                
+                                onClicked: rememberMeCheckBox.toggle()
+                            }
                         }
                         
                         Item
@@ -298,7 +306,6 @@ MFlickWrapper
             }
             
         }
-        
     }
     
     MWarningPopup

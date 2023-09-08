@@ -5,7 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.models
+import Librum.controllers
 
 
 MFlickWrapper
@@ -77,7 +77,7 @@ MFlickWrapper
                     {
                         Layout.fillWidth: true
                         Layout.topMargin: 15
-                        text: "We are a small team of freelancing developers creating free apps for the community. We love\n" +
+                        text: "We are a small team of opensource developers creating apps for the community. We love\n" +
                               "working on fun projects, supporting our community and trying to make the world a better place."
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
@@ -86,49 +86,10 @@ MFlickWrapper
                     
                     Label
                     {
-                        Layout.fillWidth: true
-                        Layout.topMargin: 18
-                        text: "We are working in our own name, so we are not getting paid in any way."
-                        wrapMode: Text.WordWrap
-                        color: Style.colorLightText
-                        font.pointSize: 14
-                    }
-                    
-                    // RowLayout needed to put icon next to text
-                    RowLayout
-                    {
-                        id: supportText
-                        Layout.fillWidth: true
-                        spacing: 0
-                        
-                        Label
-                        {
-                            text: "We are thankful for any support."
-                            wrapMode: Text.WordWrap
-                            color: Style.colorLightText
-                            font.pointSize: 14
-                        }
-                        
-                        Image
-                        {
-                            id: seedImage
-                            Layout.alignment: Qt.AlignBottom
-                            Layout.leftMargin: 2
-                            Layout.bottomMargin: 3
-                            source: Icons.seed
-                            sourceSize.width: 21
-                            fillMode: Image.PreserveAspectFit
-                        }
-                        
-                        Item { id: widthFiller; Layout.fillWidth: true }
-                    }
-                    
-                    Label
-                    {
                         id: supportOnPatreonText
                         Layout.fillWidth: true
                         Layout.topMargin: 36
-                        text: "If you feel like supporting us and our new projects, feel free to support us on patreon"
+                        text: "If you feel like supporting us and our projects, feel free to support us on patreon:"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: 14
@@ -156,16 +117,15 @@ MFlickWrapper
                     
                     Label
                     {
-                        id: otherPaymentsText
+                        id: otherSupportText
                         Layout.fillWidth: true
                         Layout.topMargin: 40
-                        text: "We also offer lots of different donation methods, from paypal, to crypto currencies. If you prefer any other method,<br>" + 
-                              "feel free to check out our website at <a href=\"" + 
-                              AppInformation.companyWebsite + "/donate\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " + 
-                              AppInformation.companyWebsite + "/donate </a>"
-                        onLinkActivated: Qt.openUrlExternally(link)
-                        wrapMode: Text.WordWrap
+                        text: "You can support us in many other ways as well, if you are a developer or a designer, feel free to <a href=\"" + 
+                              AppInfoController.githubLink + "#contributing\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> " + 
+                              "contribute to Librum</a>.<br>If you are not, you can still help us by spreading the word about Librum."
+                        onLinkActivated: (link) => Qt.openUrlExternally(link)
                         textFormat: Text.RichText
+                        wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: 14
                         
@@ -174,7 +134,7 @@ MFlickWrapper
                             id: mouseArea
                             anchors.fill: parent
                             acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
-                            cursorShape: otherPaymentsText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            cursorShape: otherSupportText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
                         }
                     }
                     
@@ -199,7 +159,7 @@ MFlickWrapper
                             id: leaveText
                             Layout.fillWidth: true                        
                             Layout.leftMargin: 16
-                            text: "If you dont, we hope you enjoy our app and wish you the best."
+                            text: "Thank you for your support. We hope you enjoy Librum!"
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText
                             font.pointSize: 14

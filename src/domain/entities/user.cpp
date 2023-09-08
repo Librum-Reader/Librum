@@ -5,8 +5,9 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, long usedBookStorage, long bookStorageLimit,
-           const QDateTime& profilePictureLastUpdated, bool hasProfilePicture) :
+           const QString& email, qint64 usedBookStorage,
+           qint64 bookStorageLimit, const QDateTime& profilePictureLastUpdated,
+           bool hasProfilePicture) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
@@ -47,22 +48,22 @@ void User::setEmail(const QString& newEmail)
     m_email = newEmail;
 }
 
-long User::getUsedBookStorage() const
+qint64 User::getUsedBookStorage() const
 {
     return m_usedBookStorage;
 }
 
-void User::setUsedBookStorage(long newUsedBookStorage)
+void User::setUsedBookStorage(qint64 newUsedBookStorage)
 {
     m_usedBookStorage = newUsedBookStorage;
 }
 
-long User::getBookStorageLimit() const
+qint64 User::getBookStorageLimit() const
 {
     return m_bookStorageLimit;
 }
 
-void User::setBookStorageLimit(long newBookStorageLimit)
+void User::setBookStorageLimit(qint64 newBookStorageLimit)
 {
     m_bookStorageLimit = newBookStorageLimit;
 }
@@ -181,6 +182,10 @@ void User::clearData()
     m_lastName = "y";
     m_email = "y";
     m_profilePicturePath = "";
+    m_hasProfilePicture = false;
+    m_profilePictureLastUpdated = QDateTime();
+    m_bookStorageLimit = 0;
+    m_usedBookStorage = 0;
     m_tags.clear();
 }
 
@@ -191,9 +196,9 @@ int User::getTagIndex(const QUuid& uuid) const
         return -1;
 
     auto tagPosition = std::ranges::find_if(m_tags,
-                                            [&uuid](const Tag& tag)
+                                            [&uuid](const Tag& t)
                                             {
-                                                return tag.getUuid() == uuid;
+                                                return t.getUuid() == uuid;
                                             });
     size_t index = tagPosition - getTags().begin();
 

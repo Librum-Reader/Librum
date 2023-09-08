@@ -1,702 +1,143 @@
 #include "book_service.hpp"
-#include <QDateTime>
+#include <mupdf/classes.h>
+#include <QApplication>
 #include <QDebug>
-#include <QFile>
-#include <QFileInfo>
-#include <QPixmap>
-#include <QTime>
-#include <ranges>
-#include "book_for_deletion.hpp"
-#include "book_merger.hpp"
-#include "book_operation_status.hpp"
-#include "i_book_metadata_helper.hpp"
+#include <QDesktopServices>
+#include <string>
+#include "utils/book_searcher.hpp"
 
-using namespace domain::entities;
-using std::size_t;
+using namespace application::core;
+using namespace utils;
 
 namespace application::services
 {
 
-BookService::BookService(IBookMetadataHelper* bookMetadataHelper,
-                         IBookStorageManager* bookStorageManager) :
-    m_bookMetadataHelper(bookMetadataHelper),
-    m_bookStorageManager(bookStorageManager)
+BookService::BookService(ILibraryService* libraryService) :
+    m_libraryService(libraryService)
 {
-    // Fetch changes timer
-    m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
-    connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
-            &IBookStorageManager::downloadRemoteBooks);
-
-    // Getting books finished
-    connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingRemoteBooks, this,
-            &BookService::updateLibrary);
-
-    // Downloading book media progress
-    connect(m_bookStorageManager,
-            &IBookStorageManager::downloadingBookMediaProgressChanged, this,
-            &BookService::setMediaDownloadProgressForBook);
-
-    // Downloading book finished
-    connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingBookMedia, this,
-            &BookService::processDownloadedBook);
-
-    // Downloading book cover finished
-    connect(m_bookStorageManager,
-            &IBookStorageManager::finishedDownloadingBookCover, this,
-            &BookService::processDownloadedBookCover);
-
-    // Storage limit exceeded
-    connect(m_bookStorageManager, &IBookStorageManager::storageLimitExceeded,
-            this, &BookService::storageLimitExceeded);
-
-    // Book upload succeeded
-    connect(m_bookStorageManager, &IBookStorageManager::bookUploadSucceeded,
-            this,
-            [this](const QUuid& uuid)
-            {
-                auto book = getBook(uuid);
-                book->setExistsOnlyOnClient(false);
-                m_bookStorageManager->updateBookLocally(*book);
-                refreshUIForBook(uuid);
-            });
 }
 
-void BookService::downloadBooks()
+void BookService::setUp(QUuid uuid)
 {
-    m_bookStorageManager->downloadRemoteBooks();
-}
+    // Clean up previous book data first
+    m_TOCModel = nullptr;
+    m_book = nullptr;
 
-BookOperationStatus BookService::addBook(const QString& filePath)
-{
-    auto success = m_bookMetadataHelper->setup(filePath);
-    if(!success)
+    m_book = m_libraryService->getBook(uuid);
+    if(m_book == nullptr)
     {
-        qWarning() << QString("Could not open book at path: %1 ").arg(filePath);
-        return BookOperationStatus::OpeningBookFailed;
-    }
-
-    auto bookMetaData = m_bookMetadataHelper->getBookMetaData();
-    Book book(filePath, bookMetaData);
-
-    auto cover = m_bookMetadataHelper->getBookCover();
-    cover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
-                         Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    auto coverPath =
-        m_bookStorageManager->saveBookCoverToFile(book.getUuid(), cover);
-    if(coverPath.isEmpty())
-    {
-        qWarning() << QString("Failed creating cover for book with uuid: %1.")
-                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
-        return BookOperationStatus::OperationFailed;
-    }
-
-    book.updateCoverLastModified();
-    book.setHasCover(true);
-    book.setCoverPath(coverPath);
-
-    addBookToLibrary(book);
-
-    m_bookStorageManager->addBook(book);
-    return BookOperationStatus::Success;
-}
-
-auto BookService::getBookPosition(const QUuid& uuid)
-{
-    auto bookPosition = std::ranges::find_if(m_books,
-                                             [&uuid](const Book& book)
-                                             {
-                                                 return book.getUuid() == uuid;
-                                             });
-    return bookPosition;
-}
-
-BookOperationStatus BookService::deleteBook(const QUuid& uuid)
-{
-    const auto* book = getBook(uuid);
-    if(!book)
-    {
-        qWarning() << QString("Could not delete book with uuid: %1. "
-                              "No book with this uuid exists.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-
-    utility::BookForDeletion bookToDelete {
-        .uuid = book->getUuid(),
-        .downloaded = book->isDownloaded(),
-        .format = book->getFormat(),
-    };
-
-    auto bookPosition = getBookPosition(uuid);
-    int index = getBookIndex(uuid);
-
-    emit bookDeletionStarted(index);
-    m_books.erase(bookPosition);
-    emit bookDeletionEnded();
-
-    m_bookStorageManager->deleteBook(std::move(bookToDelete));
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::uninstallBook(const QUuid& uuid)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Could not uninstall book with uuid: %1. "
-                              "No book with this uuid exists.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    m_bookStorageManager->uninstallBook(*book);
-    book->setDownloaded(false);
-
-    refreshUIForBook(uuid);
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::downloadBookMedia(const QUuid& uuid)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Could not download book media with uuid: %1. "
-                              "No book with this uuid exists.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    m_bookStorageManager->downloadBookMedia(uuid);
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::updateBook(const Book& newBook)
-{
-    auto* book = getBook(newBook.getUuid());
-    if(book == nullptr)
-    {
-        qWarning() << QString("Failed updating book with uuid: %1."
-                              "No book with this uuid exists.")
-                          .arg(newBook.getUuid().toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    if(!newBook.isValid())
-    {
-        qWarning() << QString("Failed updating book with uuid: %1. "
-                              "The new properties are invalid.")
-                          .arg(newBook.getUuid().toString());
-        return BookOperationStatus::OperationFailed;
-    }
-
-
-    // Manually handle changes to "current page" because we don't want
-    // "lastModified" to be updated on a "current page" change, since this
-    // would break the whole updating mechanism.
-    book->setCurrentPage(newBook.getCurrentPage());
-
-    if(*book != newBook)
-    {
-        book->update(newBook);
-        book->updateLastModified();
-    }
-
-    m_bookStorageManager->updateBook(*book);
-    refreshUIForBook(newBook.getUuid());
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::changeBookCover(const QUuid& uuid,
-                                                 const QString& filePath)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Failed changing cover for book with uuid: %1. "
-                              "No book with this uuid exists.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    // An empty file path indicates that the book cover shall be deleted.
-    if(filePath.isEmpty())
-    {
-        deleteBookCover(*book);
-    }
-    else
-    {
-        auto success = setNewBookCover(*book, filePath);
-        if(!success)
-            return BookOperationStatus::OperationFailed;
-    }
-
-    m_bookStorageManager->updateBook(*book);
-    m_bookStorageManager->updateBookCoverRemotely(book->getUuid(),
-                                                  book->hasCover());
-    return BookOperationStatus::Success;
-}
-
-void BookService::deleteBookCover(Book& book)
-{
-    auto success = m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
-    if(!success)
-    {
-        qWarning() << QString("Failed deleting the local book cover for book "
-                              "with uuid: %1. "
-                              "Deleting the file failed.")
-                          .arg(book.getUuid().toString(QUuid::WithoutBraces));
-    }
-
-    book.setCoverPath("");
-    book.setHasCover(false);
-    book.updateCoverLastModified();
-
-    refreshUIForBook(book.getUuid());
-}
-
-bool BookService::setNewBookCover(Book& book, QString filePath)
-{
-    auto uuid = book.getUuid();
-    QFileInfo newCoverFile(filePath);
-    if(!newCoverFile.exists() || !newCoverFile.isFile())
-    {
-        qWarning() << QString(
-                          "Failed setting new cover for book with uuid: %1. "
-                          "The given file at: %2 is invalid.")
-                          .arg(uuid.toString(), filePath);
-        return false;
-    }
-
-    QImage newCover(filePath);
-    if(newCover.isNull())
-    {
-        qWarning() << QString(
-                          "Failed setting new cover for book with uuid: %1. "
-                          "Can't open new cover image at: %2.")
-                          .arg(uuid.toString(), filePath);
-        return false;
-    }
-
-    // Scale the book cover to the correct size
-    newCover = newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
-                               Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
-    if(path.isEmpty())
-    {
-        qWarning() << QString(
-                          "Failed setting new cover for book with uuid: %1. "
-                          "Saving new cover image failed.")
-                          .arg(uuid.toString(), filePath);
-        return false;
-    }
-
-    book.setHasCover(true);
-    book.updateCoverLastModified();
-
-    refreshUIWithNewCover(uuid, path);
-    return true;
-}
-
-void BookService::addBookToLibrary(const Book& book)
-{
-    emit bookInsertionStarted(m_books.size());
-    m_books.emplace_back(book);
-    emit bookInsertionEnded();
-}
-
-void BookService::setMediaDownloadProgressForBook(const QUuid& uuid,
-                                                  qint64 bytesReceived,
-                                                  qint64 bytesTotal)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Failed setting media download progress for book "
-                              "with uuid: %1. No book with this uuid exists.")
-                          .arg(uuid.toString());
+        qDebug() << "Failed opening book with uuid: " << uuid;
         return;
     }
 
-    auto progress = static_cast<double>(bytesReceived) / bytesTotal;
-    book->setMediaDownloadProgress(progress);
-    emit downloadingBookMediaProgressChanged(getBookIndex(uuid));
+    auto stdFilePath = m_book->getFilePath().toStdString();
+    m_fzDocument = std::make_unique<mupdf::FzDocument>(stdFilePath.c_str());
+
+    m_bookSearcher = std::make_unique<BookSearcher>(m_fzDocument.get());
 }
 
-BookOperationStatus BookService::addTagToBook(const QUuid& uuid,
-                                              const domain::entities::Tag& tag)
+mupdf::FzDocument* BookService::getFzDocument()
 {
-    auto* book = getBook(uuid);
-    if(book == nullptr)
+    return m_fzDocument.get();
+}
+
+void BookService::search(const QString& text)
+{
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    m_bookSearcher->search(text);
+    QApplication::restoreOverrideCursor();
+
+    auto searchHit = m_bookSearcher->firstSearchHit();
+    if(searchHit.pageNumber == -1)
+        return;
+
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
+}
+
+void BookService::clearSearch()
+{
+    m_bookSearcher->clearSearch();
+}
+
+void BookService::goToNextSearchHit()
+{
+    auto searchHit = m_bookSearcher->nextSearchHit();
+    if(searchHit.pageNumber == -1)
+        return;
+
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
+}
+
+void BookService::goToPreviousSearchHit()
+{
+    auto searchHit = m_bookSearcher->previousSearchHit();
+    if(searchHit.pageNumber == -1)
+        return;
+
+    emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
+    emit highlightText(searchHit.pageNumber, searchHit.rect);
+}
+
+void BookService::followLink(const char* uri)
+{
+    if(mupdf::ll_fz_is_external_link(uri))
     {
-        qWarning() << QString("Adding tag to book with uuid: %1 failed. No "
-                              "book with this uuid exists.")
-                          .arg(uuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
+        QDesktopServices::openUrl(QUrl(uri));
     }
-
-    if(!book->addTag(tag))
+    else
     {
-        qWarning() << QString("Adding tag called: %1 to book with uuid: %2 "
-                              "failed. A tag with this name already exists.")
-                          .arg(tag.getName(), uuid.toString());
-        return BookOperationStatus::TagAlreadyExists;
-    }
+        float yp = 0;
+        auto location = m_fzDocument->fz_resolve_link(uri, nullptr, &yp);
+        int pageNumber = m_fzDocument->fz_page_number_from_location(location);
 
-    m_bookStorageManager->updateBook(*book);
-    book->updateLastModified();
-
-    int index = getBookIndex(uuid);
-    emit tagsChanged(index);
-
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::removeTagFromBook(const QUuid& bookUuid,
-                                                   const QUuid& tagUuid)
-{
-    auto* book = getBook(bookUuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Removing tag from book with uuid: %1 failed. No "
-                              "book with this uuid exists.")
-                          .arg(bookUuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    if(!book->removeTag(tagUuid))
-    {
-        qWarning() << QString("Removing tag with uuid: %1 from book with "
-                              "uuid: %2 failed. No tag with this uuid exists.")
-                          .arg(tagUuid.toString(), bookUuid.toString());
-        return BookOperationStatus::TagDoesNotExist;
-    }
-
-    m_bookStorageManager->updateBook(*book);
-    book->updateLastModified();
-
-    int index = getBookIndex(bookUuid);
-    emit tagsChanged(index);
-
-    return BookOperationStatus::Success;
-}
-
-BookOperationStatus BookService::renameTagOfBook(const QUuid& bookUuid,
-                                                 const QUuid& tagUuid,
-                                                 const QString& newName)
-{
-    auto* book = getBook(bookUuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Renaming tag from book with uuid: %1 failed. "
-                              "No book with this uuid exists.")
-                          .arg(bookUuid.toString());
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    if(!book->renameTag(tagUuid, newName))
-    {
-        qWarning() << QString("Renaming tag with uuid: %1 from book with "
-                              "uuid: %2 failed. No tag with this uuid exists "
-                              "or a tag with this name already exists.")
-                          .arg(tagUuid.toString(), bookUuid.toString());
-        return BookOperationStatus::TagDoesNotExist;
-    }
-
-    // User service renames the tag remotely, just apply it locally
-    m_bookStorageManager->updateBookLocally(*book);
-    book->updateLastModified();
-
-    int index = getBookIndex(bookUuid);
-    emit tagsChanged(index);
-
-    return BookOperationStatus::Success;
-}
-
-const std::vector<Book>& BookService::getBooks() const
-{
-    return m_books;
-}
-
-const Book* BookService::getBook(const QUuid& uuid) const
-{
-    for(size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).getUuid() == uuid)
-            return &(*(m_books.cbegin() + i));
-    }
-
-    return nullptr;
-}
-
-Book* BookService::getBook(const QUuid& uuid)
-{
-    for(size_t i = 0; i < m_books.size(); ++i)
-    {
-        if(m_books.at(i).getUuid() == uuid)
-            return &(*(m_books.begin() + i));
-    }
-
-    return nullptr;
-}
-
-int BookService::getBookIndex(const QUuid& uuid) const
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-        return -1;
-
-    auto bookPosition = std::ranges::find_if(m_books,
-                                            [&uuid](const Book& rhs)
-                                            {
-                                                return rhs.getUuid() == uuid;
-                                            });
-    size_t index = bookPosition - m_books.begin();
-
-    return index;
-}
-
-int BookService::getBookCount() const
-{
-    return m_books.size();
-}
-
-BookOperationStatus BookService::saveBookToFile(const QUuid& uuid,
-                                                const QString& pathToFolder)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-    {
-        qWarning() << QString("Saving book with uuid: %1 to folder %2 failed. "
-                              " No book with this uuid exists.")
-                          .arg(uuid.toString(), pathToFolder);
-        return BookOperationStatus::BookDoesNotExist;
-    }
-
-    QString currentBookPath = book->getFilePath();
-    QString destinaton = pathToFolder + "/" + QUrl(currentBookPath).fileName();
-
-    auto result = QFile::copy(book->getFilePath(), destinaton);
-    if(!result)
-    {
-        qWarning() << QString("Saving book with uuid: %1 to folder: %2 failed. "
-                              "No book with this uuid exists.")
-                          .arg(uuid.toString(), pathToFolder);
-
-        return BookOperationStatus::OperationFailed;
-    }
-
-
-    return BookOperationStatus::Success;
-}
-
-bool BookService::refreshLastOpenedDateOfBook(const QUuid& uuid)
-{
-    auto* book = getBook(uuid);
-    if(book == nullptr)
-        return false;
-
-    book->updateLastOpened();
-    m_bookStorageManager->updateBook(*book);
-
-    refreshUIForBook(uuid);
-    return true;
-}
-
-void BookService::processDownloadedBook(const QUuid& uuid,
-                                        const QString& filePath)
-{
-    auto* book = getBook(uuid);
-
-    book->setFilePath(filePath);
-    book->setDownloaded(true);
-
-    // The book meta-data file does not exist locally, so create it
-    m_bookStorageManager->addBookLocally(*book);
-
-    refreshUIForBook(uuid);
-}
-
-void BookService::processDownloadedBookCover(const QUuid& uuid,
-                                             const QString& filePath)
-{
-    auto* book = getBook(uuid);
-
-    book->setCoverPath(filePath);
-    book->setHasCover(true);
-    m_bookStorageManager->updateBookLocally(*book);
-
-    refreshUIWithNewCover(uuid, filePath);
-}
-
-void BookService::updateUsedBookStorage(long usedStorage, long bookStorageLimit)
-{
-    m_usedBookStorage = usedStorage;
-    m_bookStorageLimit = bookStorageLimit;
-}
-
-void BookService::setupUserData(const QString& token, const QString& email)
-{
-    m_bookStorageManager->setUserData(email, token);
-
-    loadLocalBooks();
-    m_bookStorageManager->downloadRemoteBooks();
-
-    m_fetchChangesTimer.start();
-}
-
-void BookService::loadLocalBooks()
-{
-    auto books = m_bookStorageManager->loadLocalBooks();
-    for(auto book : books)
-    {
-        uninstallBookIfTheBookFileIsInvalid(book);
-        addBookToLibrary(book);
+        emit goToPosition(pageNumber, yp);
     }
 }
 
-void BookService::uninstallBookIfTheBookFileIsInvalid(Book& book)
+QString BookService::getFilePath() const
 {
-    // The file might have been moved or deleted from the user's filesystem,
-    // from the last time the application was used. This would mean that the
-    // underlying book file would be invalid (since it does not exist
-    // anymore). If this happens, unsinstall the book, so that the user can
-    // redownload it from the server.
-    QFile bookFile(book.getFilePath());
-    if(!bookFile.exists())
+    return m_book->getFilePath();
+}
+
+int BookService::getPageCount() const
+{
+    return m_book->getPageCount();
+}
+
+int BookService::getCurrentPage() const
+{
+    return m_book->getCurrentPage();
+}
+
+void BookService::setCurrentPage(int newCurrentPage)
+{
+    m_book->setCurrentPage(newCurrentPage);
+}
+
+float BookService::getZoom() const
+{
+    return m_zoom;
+}
+
+void BookService::setZoom(float newZoom)
+{
+    m_zoom = newZoom;
+}
+
+core::FilteredTOCModel* BookService::getTableOfContents()
+{
+    if(m_TOCModel == nullptr)
     {
-        book.setFilePath("");
-        book.setDownloaded(false);
+        auto data = m_fzDocument->fz_load_outline();
+        m_TOCModel =
+            std::make_unique<TOCModel>(data.m_internal, *m_fzDocument.get());
+        m_filteredTOCModel = std::make_unique<FilteredTOCModel>();
+        m_filteredTOCModel->setSourceModel(m_TOCModel.get());
     }
-}
 
-void BookService::clearUserData()
-{
-    m_bookStorageManager->clearUserData();
-    m_fetchChangesTimer.stop();
-
-    emit bookClearingStarted();
-    m_books.clear();
-    emit bookClearingEnded();
-}
-
-void BookService::updateLibrary(std::vector<Book>& books)
-{
-    // The remote library is the library fetched from the server and the
-    // local library is the library on the client's PC. On startup we need
-    // to make sure that both libraries are synchronized.
-    mergeRemoteLibraryIntoLocalLibrary(books);
-    mergeLocalLibraryIntoRemoteLibrary(books);
-}
-
-void BookService::mergeRemoteLibraryIntoLocalLibrary(
-    std::vector<Book>& remoteBooks)
-{
-    for(auto& remoteBook : remoteBooks)
-    {
-        auto* localBook = getBook(remoteBook.getUuid());
-        if(localBook != nullptr)
-        {
-            utility::BookMerger bookMerger;
-            connect(&bookMerger, &utility::BookMerger::localBookCoverDeleted,
-                    this, &BookService::refreshUIWithNewCover);
-            connect(&bookMerger, &utility::BookMerger::bookDataChanged, this,
-                    &BookService::refreshUIForBook);
-
-            bookMerger.mergeBooks(*localBook, remoteBook, m_bookStorageManager);
-            continue;
-        }
-
-        addBookToLibrary(remoteBook);
-
-        // Get the cover for the remote book if it does not exist locally
-        if(remoteBook.hasCover() && remoteBook.getCoverPath().isEmpty())
-        {
-            m_bookStorageManager->downloadBookCover(remoteBook.getUuid());
-        }
-    }
-}
-
-void BookService::mergeLocalLibraryIntoRemoteLibrary(
-    const std::vector<Book>& remoteBooks)
-{
-    int bytesOfDataUploaded = 0;
-    for(const auto& localBook : m_books)
-    {
-        bool localBookExistsOnServer = std::ranges::any_of(
-            remoteBooks,
-            [&localBook](const Book& remoteBook)
-            {
-                return remoteBook.getUuid() == localBook.getUuid();
-            });
-
-        // When the book was uploaded to the server at some point, and it does
-        // not exist on the server anymore, it must have been deleted from
-        // another device. Make sure to delete the book locally as well.
-        if(!localBook.existsOnlyOnClient() && !localBookExistsOnServer)
-        {
-            deleteBookLocally(localBook);
-            return;
-        }
-
-        // Ensure that we are not trying to upload the local books even
-        // though we know that there is not enough space available. This would
-        // just lead to annoying error messages.
-        long bookSize = localBook.getSizeInBytes();
-        long totalStorageSpace = m_usedBookStorage + bytesOfDataUploaded;
-        bool enoughSpace = totalStorageSpace + bookSize < m_bookStorageLimit;
-        if(!localBookExistsOnServer && enoughSpace)
-        {
-            m_bookStorageManager->addBook(localBook);
-            bytesOfDataUploaded += bookSize;
-        }
-    }
-}
-
-void BookService::deleteBookLocally(const domain::entities::Book& book)
-{
-    utility::BookForDeletion bookToDelete {
-        .uuid = book.getUuid(),
-        .downloaded = book.isDownloaded(),
-        .format = book.getFormat(),
-    };
-
-    auto bookPosition = getBookPosition(book.getUuid());
-    int index = getBookIndex(book.getUuid());
-
-    emit bookDeletionStarted(index);
-    m_books.erase(bookPosition);
-    emit bookDeletionEnded();
-
-    m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
-}
-
-void BookService::refreshUIWithNewCover(const QUuid& uuid, const QString& path)
-{
-    auto book = getBook(uuid);
-    auto index = getBookIndex(uuid);
-
-    // To properly update the UI, we need to invalidate the current image
-    // first and then set the new one, else Qt doesn't see the changes. We
-    // do this by setting the path to an empty string first and then to the
-    // actual path. We emit 'dataChanged' in between to update the UI.
-    book->setCoverPath("");
-    emit dataChanged(index);
-
-    book->setCoverPath(path);
-    emit dataChanged(index);
-}
-
-void BookService::refreshUIForBook(const QUuid& uuid)
-{
-    // The dataChanged signal invalidates the book model, which then
-    // causes the UI to refresh and show the new changes.
-    int index = getBookIndex(uuid);
-    emit dataChanged(index);
+    return m_filteredTOCModel.get();
 }
 
 }  // namespace application::services

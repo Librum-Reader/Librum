@@ -1,7 +1,9 @@
 #pragma once
 #include <QDateTime>
 #include <QDebug>
+#include <QDir>
 #include <QFile>
+#include <QStandardPaths>
 #include <QString>
 #include <QUrl>
 
@@ -76,7 +78,13 @@ void logMessageToStdout(const QString& logLine)
 
 void logMessageToFile(const QString& logMessage)
 {
-    QFile file("librum_log.txt");
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
+
+    auto logFile = destDir.filePath("librum_log.txt");
+    QFile file(logFile);
     if(!file.open(QIODevice::WriteOnly | QIODevice::Append))
         logMessageToStdout(logMessage);  // Fallback
 

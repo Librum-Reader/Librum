@@ -11,9 +11,9 @@
 namespace application::setting_groups
 {
 
-Q_NAMESPACE_EXPORT(APPLICATION_LIBRARY)
+Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 
-enum class APPLICATION_LIBRARY SettingGroups
+enum class APPLICATION_EXPORT SettingGroups
 {
     Appearance = 0,
     General,
