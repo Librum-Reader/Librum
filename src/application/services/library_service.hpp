@@ -4,9 +4,9 @@
 #include <utility>
 #include "application_export.hpp"
 #include "book.hpp"
-#include "i_metadata_extractor.hpp"
 #include "i_library_service.hpp"
 #include "i_library_storage_manager.hpp"
+#include "i_metadata_extractor.hpp"
 
 namespace application::services
 {
@@ -75,14 +75,14 @@ private:
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
     void deleteBookLocally(const domain::entities::Book& book);
-    
+
     IMetadataExtractor* m_bookMetadataHelper;
     ILibraryStorageManager* m_bookStorageManager;
     std::vector<domain::entities::Book> m_books;
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 2'000;
+    const int m_fetchChangedInterval = 20'000;
 };
 
 }  // namespace application::services
