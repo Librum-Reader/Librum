@@ -2,8 +2,9 @@
 #include <vector>
 
 using namespace domain::entities;
+using application::utility::BookForDeletion;
 
-namespace application::utility
+namespace application::managers
 {
 
 LibraryStorageManager::LibraryStorageManager(
@@ -282,4 +283,4 @@ void LibraryStorageManager::downloadRemoteBooks()
     m_bookStorageGateway->getBooksMetaData(m_authenticationToken);
 }
 
-}  // namespace application::utility
+}  // namespace application::managers

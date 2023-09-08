@@ -2,6 +2,7 @@
 #include <memory>
 #include "book.hpp"
 #include "i_book_service.hpp"
+#include "i_highlight_storage_manager.hpp"
 #include "i_library_service.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
@@ -13,7 +14,8 @@ namespace application::services
 class BookService : public IBookService
 {
 public:
-    BookService(ILibraryService* libraryService);
+    BookService(ILibraryService* libraryService,
+                IHighlightStorageManager* highlightStorageManager);
 
     void setUp(QUuid uuid) override;
     mupdf::FzDocument* getFzDocument() override;
@@ -38,11 +40,16 @@ public:
 
     core::FilteredTOCModel* getTableOfContents() override;
 
+public slots:
+    void setupUserData(const QString& token, const QString& email) override;
+    void clearUserData() override;
+
 private:
     domain::entities::Book* getBook();
     const domain::entities::Book* getBook() const;
 
     ILibraryService* m_libraryService;
+    IHighlightStorageManager* m_highlightStorageManager;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
     std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
     float m_zoom = 1;

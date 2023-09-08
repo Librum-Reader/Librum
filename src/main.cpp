@@ -18,6 +18,7 @@
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "dependency_injection.hpp"
+#include "i_highlight_storage_manager.hpp"
 #include "i_library_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
@@ -99,7 +100,9 @@ int main(int argc, char* argv[])
                                  libraryController.get());
 
     // Book Stack
-    auto bookService = std::make_unique<application::services::BookService>(libraryService);
+    auto* highlightStorageManager = config::diConfig().create<application::IHighlightStorageManager*>();
+    auto bookService = std::make_unique<application::services::BookService>(libraryService,
+                                                                            highlightStorageManager);
     auto bookController = std::make_unique<BookController>(bookService.get());
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
@@ -134,13 +137,18 @@ int main(int argc, char* argv[])
 
 
     // Setup login connections
-    QObject::connect(
-        authenticationService,
-        &application::IAuthenticationService::loggedIn,
-        libraryService, &application::ILibraryService::setupUserData);
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     libraryService, &application::ILibraryService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);
+
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     bookService.get(), &application::IBookService::setupUserData);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+                     bookService.get(), &application::IBookService::clearUserData);    
 
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,

@@ -45,6 +45,10 @@ public:
 
     virtual core::FilteredTOCModel* getTableOfContents() = 0;
 
+public slots:
+    virtual void setupUserData(const QString& token, const QString& email) = 0;
+    virtual void clearUserData() = 0;
+
 signals:
     void goToPosition(int pageNumber, int y);
     void highlightText(int pageNumber, mupdf::FzQuad quad);

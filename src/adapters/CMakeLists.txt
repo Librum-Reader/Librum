@@ -10,6 +10,9 @@ add_library(adapters
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
+                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_page_controller.hpp
+                    interfaces/persistance/i_highlight_storage_access.hpp
                     interfaces/persistance/i_app_info_access.hpp
                     interfaces/controllers/i_app_info_controller.hpp
                     
@@ -34,6 +37,8 @@ add_library(adapters
                     gateways/authentication_gateway.hpp
                     gateways/library_storage_gateway.cpp
                     gateways/library_storage_gateway.hpp
+                    gateways/highlight_storage_gateway.cpp
+                    gateways/highlight_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
                     gateways/app_info_gateway.hpp
                     
@@ -53,8 +58,7 @@ add_library(adapters
                     DTOs/register_dto.hpp
                     DTOs/book_dto.hpp
                     DTOs/tag_dto.hpp
-                    interfaces/controllers/i_book_controller.hpp
-                    interfaces/controllers/i_page_controller.hpp
+                    DTOs/highlight_dto.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)

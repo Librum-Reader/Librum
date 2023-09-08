@@ -10,8 +10,14 @@
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
 #include "book_service.hpp"
+#include "highlight_storage_access.hpp"
+#include "highlight_storage_gateway.hpp"
+#include "highlight_storage_manager.hpp"
 #include "i_app_info_access.hpp"
 #include "i_app_info_service.hpp"
+#include "i_highlight_storage_access.hpp"
+#include "i_highlight_storage_gateway.hpp"
+#include "i_highlight_storage_manager.hpp"
 #include "i_metadata_extractor.hpp"
 #include "library_controller.hpp"
 #include "library_service.hpp"
@@ -68,6 +74,14 @@ const auto diConfig = []
         di::bind<IBookController>().to<controllers::BookController>(),
         di::bind<IBookService>().to<services::BookService>(),
 
+        // Highligts
+        di::bind<IHighlightStorageManager>()
+            .to<managers::HighlightStorageManager>(),
+        di::bind<IHighlightStorageGateway>()
+            .to<gateways::HighlightStorageGateway>(),
+        di::bind<IHighlightStorageAccess>()
+            .to<persistence::HighlightStorageAccess>(),
+
         // User
         di::bind<IUserController>().to<controllers::UserController>(),
         di::bind<IUserService>().to<services::UserService>(),
@@ -84,7 +98,7 @@ const auto diConfig = []
         di::bind<application::ILocalLibraryTracker>()
             .to<application::utility::LocalLibraryTracker>(),
         di::bind<application::ILibraryStorageManager>()
-            .to<application::utility::LibraryStorageManager>());
+            .to<application::managers::LibraryStorageManager>());
 };
 
 }  // namespace config

@@ -12,8 +12,10 @@ using namespace utils;
 namespace application::services
 {
 
-BookService::BookService(ILibraryService* libraryService) :
-    m_libraryService(libraryService)
+BookService::BookService(ILibraryService* libraryService,
+                         IHighlightStorageManager* highlightStorageManager) :
+    m_libraryService(libraryService),
+    m_highlightStorageManager(highlightStorageManager)
 {
 }
 
@@ -84,6 +86,8 @@ void BookService::addHighlight(const domain::entities::Highlight& highlight)
 {
     auto book = getBook();
     book->addHighlight(highlight);
+
+    m_highlightStorageManager->addHighlight(*book, highlight);
 }
 
 void BookService::removeHighlight(const QUuid& uuid)
@@ -154,6 +158,16 @@ core::FilteredTOCModel* BookService::getTableOfContents()
     }
 
     return m_filteredTOCModel.get();
+}
+
+void BookService::setupUserData(const QString& token, const QString& email)
+{
+    m_highlightStorageManager->setUserData(email, token);
+}
+
+void BookService::clearUserData()
+{
+    m_highlightStorageManager->clearUserData();
 }
 
 /**

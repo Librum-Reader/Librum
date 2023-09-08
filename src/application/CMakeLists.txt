@@ -11,10 +11,11 @@ set(application_SRC
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
-    interfaces/utility/i_library_storage_manager.hpp
+    interfaces/managers/i_library_storage_manager.hpp
     interfaces/gateways/i_app_info_gateway.hpp
     interfaces/services/i_app_info_service.hpp
     interfaces/services/i_book_service.hpp
+    interfaces/managers/i_highlight_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -37,8 +38,6 @@ set(application_SRC
     utility/local_library_tracker.cpp
     utility/local_library_tracker.hpp
     utility/merge_status.hpp
-    utility/library_storage_manager.cpp
-    utility/library_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp
@@ -47,6 +46,11 @@ set(application_SRC
     utility/book_merger.cpp
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
+    
+    managers/library_storage_manager.cpp
+    managers/library_storage_manager.hpp
+    managers/highlight_storage_manager.hpp
+    managers/highlight_storage_manager.cpp
     
     core/page_generator.hpp
     core/page_generator.cpp
@@ -115,6 +119,7 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
+                    interfaces/gateways/i_highlight_storage_gateway.hpp
                     
 )
 
@@ -130,9 +135,11 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
                     ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )

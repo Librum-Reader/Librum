@@ -53,13 +53,13 @@ struct ALibraryStorageManager : public ::testing::Test
 {
     void SetUp() override
     {
-        bookStorageManager = std::make_unique<LibraryStorageManager>(
+        bookStorageManager = std::make_unique<managers::LibraryStorageManager>(
             &bookStorageGatewayMock, &downloadedBooksTrackerMock);
     }
 
     LibraryStorageGatewayMock bookStorageGatewayMock;
     LocalLibraryTrackerMock downloadedBooksTrackerMock;
-    std::unique_ptr<LibraryStorageManager> bookStorageManager;
+    std::unique_ptr<managers::LibraryStorageManager> bookStorageManager;
 };
 
 TEST_F(ALibraryStorageManager, SucceedsAddingABook)
