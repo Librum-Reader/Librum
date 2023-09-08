@@ -20,8 +20,6 @@ BookController::BookController(application::IBookService* bookService) :
                 QPointF left(rect.left(), rect.center().y());
                 QPointF right(rect.right(), rect.center().y());
 
-                // The book service returns the position without the zoom aplied
-                // so we need to scale it to the current zoom.
                 left = utils::scalePointToCurrentZoom(left, 1, getZoom());
                 right = utils::scalePointToCurrentZoom(right, 1, getZoom());
 
