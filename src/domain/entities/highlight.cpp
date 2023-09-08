@@ -17,7 +17,7 @@ QByteArray Highlight::toJson() const
     QJsonObject book {
         { "uuid", m_uuid.toString(QUuid::WithoutBraces) },
         { "pageNumber", m_pageNumber },
-        { "color", m_color.name() },
+        { "color", m_color.name(QColor::HexArgb) },
         { "rects", serializeRects() },
     };
 
