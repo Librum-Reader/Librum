@@ -25,7 +25,7 @@ public:
 
 private:
     QUuid m_uuid;
-    int m_pageNumber;
+    int m_pageNumber = 0;
     QColor m_color;
     QList<QRectF> m_rects;
 

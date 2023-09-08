@@ -39,11 +39,14 @@ public:
     core::FilteredTOCModel* getTableOfContents() override;
 
 private:
+    domain::entities::Book* getBook();
+    const domain::entities::Book* getBook() const;
+
     ILibraryService* m_libraryService;
-    domain::entities::Book* m_book = nullptr;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
     std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
     float m_zoom = 1;
+    QUuid m_uuid;
 
     std::unique_ptr<core::TOCModel> m_TOCModel;
     std::unique_ptr<core::FilteredTOCModel> m_filteredTOCModel;
