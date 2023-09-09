@@ -11,7 +11,11 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
     m_freeBooksStorageAccess(freeBooksStorageAccess)
 {
     connect(m_freeBooksStorageAccess,
-            &IFreeBooksStorageAccess::gettingBooksMetadataFinished, this,
+            &IFreeBooksStorageAccess::fetchingFirstMetadataPageSuccessful, this,
+            &FreeBooksStorageGateway::fetchingFirstMetadataPageSuccessful);
+
+    connect(m_freeBooksStorageAccess,
+            &IFreeBooksStorageAccess::fetchingBooksMetaDataFinished, this,
             &FreeBooksStorageGateway::proccessBooksMetadata);
 
     connect(m_freeBooksStorageAccess,
@@ -27,15 +31,16 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
             &FreeBooksStorageGateway::gettingBookMediaProgressChanged);
 }
 
-void FreeBooksStorageGateway::getBooksMetadataPage(const QString& url)
+void FreeBooksStorageGateway::fetchFirstBooksMetadataPageWithFilter(
+    const QString& author, const QString& title)
 {
-    m_freeBooksStorageAccess->getBooksMetadataPage(url);
+    m_freeBooksStorageAccess->fetchFirstBooksMetadataPageWithFilter(author,
+                                                                    title);
 }
 
-void FreeBooksStorageGateway::getBooksMetadata(const QString& author,
-                                               const QString& title)
+void FreeBooksStorageGateway::fetchBooksMetadataPage(const QString& url)
 {
-    m_freeBooksStorageAccess->getBooksMetadata(author, title);
+    m_freeBooksStorageAccess->fetchBooksMetadataPage(url);
 }
 
 void FreeBooksStorageGateway::getBookMedia(const int id, const QUuid& uuid,
@@ -71,8 +76,8 @@ void FreeBooksStorageGateway::proccessBooksMetadata(const QByteArray& data)
     auto nextMetadataPageUrl = metadataObject["next"].toString();
     auto prevMetadataPageUrl = metadataObject["previous"].toString();
 
-    emit gettingBooksMetaDataFinished(books, booksTotalCount,
-                                      nextMetadataPageUrl, prevMetadataPageUrl);
+    emit fetchingBooksMetaDataFinished(
+        books, booksTotalCount, nextMetadataPageUrl, prevMetadataPageUrl);
 }
 
 FreeBook FreeBooksStorageGateway::getBookFromJson(const QJsonObject& values)

@@ -15,14 +15,15 @@ class FreeBooksService : public IFreeBooksService
 public:
     FreeBooksService(IFreeBooksStorageGateway* freeBooksStorageGateway);
 
-    void getBooksMetadata(const QString& author, const QString& title) override;
+    void fetchFirstBooksMetadataPageWithFilter(const QString& author,
+                                               const QString& title) override;
     void getBookMedia(const int id, const QString& url) override;
     void getBookCover(const int id) override;
     void deleteBookCover(const int id) override;
     std::vector<domain::value_objects::FreeBook>& getFreeBooks() override;
 
 public slots:
-    void getBooksMetadataPage(const QString& url) override;
+    void fetchBooksMetadataPage(const QString& url) override;
     void setupUserData(const QString& token, const QString& email) override;
     void clearUserData() override;
 

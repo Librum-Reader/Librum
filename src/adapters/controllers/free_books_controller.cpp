@@ -13,10 +13,15 @@ FreeBooksController::FreeBooksController(
             &m_freeBooksModel, &data_models::FreeBooksModel::setApiInfo);
 
     // getting books metadata
+    connect(
+        m_freeBooksService,
+        &application::IFreeBooksService::fetchingFirstMetadataPageSuccessful,
+        this, &FreeBooksController::setIsFirstBooksMetadataPageFetched);
+
     connect(&m_freeBooksModel,
-            &adapters::data_models::FreeBooksModel::getBooksMetadataPage,
+            &adapters::data_models::FreeBooksModel::fetchBooksMetadataPage,
             m_freeBooksService,
-            &application::IFreeBooksService::getBooksMetadataPage);
+            &application::IFreeBooksService::fetchBooksMetadataPage);
 
     // getting book media
     connect(m_freeBooksService,
@@ -65,10 +70,13 @@ FreeBooksController::FreeBooksController(
         &data_models::FreeBooksModel::downloadingBookMediaProgressChanged);
 }
 
-void FreeBooksController::getBooksMetadata(const QString& author,
-                                           const QString& title)
+void FreeBooksController::fetchFirstBooksMetadataPageWithFilter(
+    const QString& author, const QString& title)
 {
-    m_freeBooksService->getBooksMetadata(author, title);
+    if(m_isFirstBooksMetadataPageFetched)
+        return;
+
+    m_freeBooksService->fetchFirstBooksMetadataPageWithFilter(author, title);
 }
 
 void FreeBooksController::getBookMedia(const int id, const QString& url)
@@ -89,6 +97,11 @@ void FreeBooksController::deleteBookCover(const int id)
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()
 {
     return &m_freeBooksModel;
+}
+
+void FreeBooksController::setIsFirstBooksMetadataPageFetched(const bool value)
+{
+    m_isFirstBooksMetadataPageFetched = value;
 }
 
 }  // namespace adapters::controllers

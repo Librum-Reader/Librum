@@ -13,8 +13,8 @@ class IFreeBooksService : public QObject
 public:
     virtual ~IFreeBooksService() noexcept = default;
 
-    virtual void getBooksMetadata(const QString& author,
-                                  const QString& title) = 0;
+    virtual void fetchFirstBooksMetadataPageWithFilter(
+        const QString& author, const QString& title) = 0;
     virtual void getBookMedia(const int id, const QString& url) = 0;
     virtual void getBookCover(const int id) = 0;
     virtual void deleteBookCover(const int id) = 0;
@@ -22,11 +22,12 @@ public:
         getFreeBooks() = 0;
 
 public slots:
-    virtual void getBooksMetadataPage(const QString& url) = 0;
+    virtual void fetchBooksMetadataPage(const QString& url) = 0;
     virtual void setupUserData(const QString& token, const QString& email) = 0;
     virtual void clearUserData() = 0;
 
 signals:
+    void fetchingFirstMetadataPageSuccessful(const bool success);
     void apiInfoReady(const int booksTotalCount,
                       const QString& nextMetadataPageUrl,
                       const QString& prevMetadataPageUrl);

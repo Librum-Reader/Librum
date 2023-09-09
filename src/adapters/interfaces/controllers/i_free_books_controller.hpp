@@ -14,8 +14,8 @@ class IFreeBooksController : public QObject
 public:
     virtual ~IFreeBooksController() noexcept = default;
 
-    Q_INVOKABLE virtual void getBooksMetadata(const QString& author,
-                                              const QString& title) = 0;
+    Q_INVOKABLE virtual void fetchFirstBooksMetadataPageWithFilter(
+        const QString& author, const QString& title) = 0;
     Q_INVOKABLE virtual void getBookMedia(const int id, const QString& url) = 0;
     Q_INVOKABLE virtual void getBookCover(const int id) = 0;
     Q_INVOKABLE virtual void deleteBookCover(const int id) = 0;

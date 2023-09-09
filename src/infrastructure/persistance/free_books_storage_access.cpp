@@ -6,7 +6,35 @@
 namespace infrastructure::persistence
 {
 
-void FreeBooksStorageAccess::getBooksMetadataPage(const QString& url)
+void FreeBooksStorageAccess::fetchFirstBooksMetadataPageWithFilter(
+    const QString& author, const QString& title)
+{
+    auto request = createGetBooksMetadataRequest(author, title);
+
+    auto reply = m_networkAccessManager.get(request);
+
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
+            {
+                auto success = !api_error_helper::apiRequestFailed(reply, 200);
+                emit fetchingFirstMetadataPageSuccessful(success);
+
+                if(!success)
+                {
+                    api_error_helper::logErrorMessage(
+                        reply, "Fetching first free books metadata page");
+
+                    reply->deleteLater();
+                    return;
+                }
+
+                emit fetchingBooksMetaDataFinished(reply->readAll());
+
+                reply->deleteLater();
+            });
+}
+
+void FreeBooksStorageAccess::fetchBooksMetadataPage(const QString& url)
 {
     auto request = createRequest(url);
 
@@ -18,38 +46,13 @@ void FreeBooksStorageAccess::getBooksMetadataPage(const QString& url)
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(
-                        reply, "Getting free books metadata");
+                        reply, "Fetching free books metadata page");
 
                     reply->deleteLater();
                     return;
                 }
 
-                emit gettingBooksMetadataFinished(reply->readAll());
-
-                reply->deleteLater();
-            });
-}
-
-void FreeBooksStorageAccess::getBooksMetadata(const QString& author,
-                                              const QString& title)
-{
-    auto request = createGetBooksMetadataRequest(author, title);
-
-    auto reply = m_networkAccessManager.get(request);
-
-    connect(reply, &QNetworkReply::finished, this,
-            [this, reply]()
-            {
-                if(api_error_helper::apiRequestFailed(reply, 200))
-                {
-                    api_error_helper::logErrorMessage(
-                        reply, "Getting free books metadata");
-
-                    reply->deleteLater();
-                    return;
-                }
-
-                emit gettingBooksMetadataFinished(reply->readAll());
+                emit fetchingBooksMetaDataFinished(reply->readAll());
 
                 reply->deleteLater();
             });

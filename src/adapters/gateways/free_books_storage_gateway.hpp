@@ -14,8 +14,9 @@ class FreeBooksStorageGateway : public application::IFreeBooksStorageGateway
 public:
     FreeBooksStorageGateway(IFreeBooksStorageAccess* freeBooksStorageAccess);
 
-    void getBooksMetadataPage(const QString& url) override;
-    void getBooksMetadata(const QString& author, const QString& title) override;
+    void fetchFirstBooksMetadataPageWithFilter(const QString& author,
+                                               const QString& title) override;
+    void fetchBooksMetadataPage(const QString& url) override;
     void getBookMedia(const int id, const QUuid& uuid,
                       const QString& url) override;
     void getBookCover(const int id, const QString& url) override;

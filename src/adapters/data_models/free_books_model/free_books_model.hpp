@@ -48,7 +48,7 @@ public slots:
     void downloadingBookMediaProgressChanged(int row);
 
 signals:
-    void getBooksMetadataPage(const QString& url);
+    void fetchBooksMetadataPage(const QString& url);
 
 protected:
     bool canFetchMore(const QModelIndex& parent) const override;

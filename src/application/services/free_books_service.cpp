@@ -17,7 +17,11 @@ FreeBooksService::FreeBooksService(
     m_freeBooksStorageGateway(freeBooksStorageGateway)
 {
     connect(m_freeBooksStorageGateway,
-            &IFreeBooksStorageGateway::gettingBooksMetaDataFinished, this,
+            &IFreeBooksStorageGateway::fetchingFirstMetadataPageSuccessful,
+            this, &FreeBooksService::fetchingFirstMetadataPageSuccessful);
+
+    connect(m_freeBooksStorageGateway,
+            &IFreeBooksStorageGateway::fetchingBooksMetaDataFinished, this,
             &FreeBooksService::saveBookMetaData);
 
     connect(m_freeBooksStorageGateway,
@@ -33,10 +37,11 @@ FreeBooksService::FreeBooksService(
             &FreeBooksService::setMediaDownloadProgressForBook);
 }
 
-void FreeBooksService::getBooksMetadata(const QString& author,
-                                        const QString& title)
+void FreeBooksService::fetchFirstBooksMetadataPageWithFilter(
+    const QString& author, const QString& title)
 {
-    m_freeBooksStorageGateway->getBooksMetadata(author, title);
+    m_freeBooksStorageGateway->fetchFirstBooksMetadataPageWithFilter(author,
+                                                                     title);
 }
 
 void FreeBooksService::getBookMedia(const int id, const QString& url)
@@ -85,9 +90,9 @@ std::vector<FreeBook>& FreeBooksService::getFreeBooks()
     return m_freeBooks;
 }
 
-void FreeBooksService::getBooksMetadataPage(const QString& url)
+void FreeBooksService::fetchBooksMetadataPage(const QString& url)
 {
-    m_freeBooksStorageGateway->getBooksMetadataPage(url);
+    m_freeBooksStorageGateway->fetchBooksMetadataPage(url);
 }
 
 void FreeBooksService::setBookCover(int id, const QImage& cover)

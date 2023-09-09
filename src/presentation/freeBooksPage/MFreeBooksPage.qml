@@ -14,7 +14,7 @@ Page {
     }
 
     Component.onCompleted: {
-        FreeBooksController.getBooksMetadata("", "")
+        FreeBooksController.fetchFirstBooksMetadataPageWithFilter("", "")
     }
 
     ColumnLayout {

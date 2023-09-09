@@ -146,7 +146,7 @@ void FreeBooksModel::fetchMore(const QModelIndex& parent)
     if(parent.isValid())
         return;
 
-    emit getBooksMetadataPage(m_nextMetadataPageUrl);
+    emit fetchBooksMetadataPage(m_nextMetadataPageUrl);
 }
 
 QVector<int> FreeBooksModel::getAllRoles()
