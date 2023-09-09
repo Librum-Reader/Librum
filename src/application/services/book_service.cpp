@@ -94,6 +94,8 @@ void BookService::removeHighlight(const QUuid& uuid)
 {
     auto book = getBook();
     book->removeHighlight(uuid);
+
+    m_highlightStorageManager->deleteHighlight(*book, uuid);
 }
 
 void BookService::followLink(const char* uri)

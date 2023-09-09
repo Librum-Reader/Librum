@@ -282,6 +282,8 @@ void PageView::removeConflictingHighlights(Highlight& highlight)
     for(int i = 0; i < highlights.size(); ++i)
     {
         auto& existingHighlight = highlights[i];
+        if(existingHighlight.getPageNumber() != highlight.getPageNumber())
+            continue;
 
         for(int u = 0; u < highlight.getRects().size(); ++u)
         {

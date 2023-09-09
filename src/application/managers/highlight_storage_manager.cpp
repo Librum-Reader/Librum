@@ -1,4 +1,5 @@
 #include "highlight_storage_manager.hpp"
+#include <QDebug>
 
 namespace application::managers
 {
