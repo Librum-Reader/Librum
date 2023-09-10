@@ -86,6 +86,7 @@ void BookService::addHighlight(const domain::entities::Highlight& highlight)
 {
     auto book = getBook();
     book->addHighlight(highlight);
+    book->updateLastModified();
 
     m_highlightStorageManager->addHighlight(*book, highlight);
 }
