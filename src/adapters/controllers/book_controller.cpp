@@ -22,8 +22,8 @@ BookController::BookController(application::IBookService* bookService) :
 
                 left = utils::scalePointToCurrentZoom(left, 1, getZoom());
                 right = utils::scalePointToCurrentZoom(right, 1, getZoom());
-
-                emit highlightText(pageNumber, left, right);
+                
+                emit selectText(pageNumber, left, right);
             });
 }
 

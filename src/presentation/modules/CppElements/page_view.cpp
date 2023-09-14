@@ -44,8 +44,8 @@ void PageView::setBookController(BookController* newBookController)
     // Setup connections to the BookController
     connect(m_bookController, &BookController::zoomChanged, this,
             &PageView::updateZoom);
-
-    connect(m_bookController, &BookController::highlightText, this,
+    
+    connect(m_bookController, &BookController::selectText, this,
             [this](int pageNumber, QPointF left, QPointF right)
             {
                 if(pageNumber != m_pageNumber)

@@ -58,7 +58,7 @@ signals:
     void zoomChanged(float zoom);
     void tableOfContentsChanged();
     void goToPosition(int pageNumber, int y);
-    void highlightText(int pageNumber, QPointF left, QPointF right);
+    void selectText(int pageNumber, QPointF left, QPointF right);
 };
 
 }  // namespace adapters
