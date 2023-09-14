@@ -39,6 +39,7 @@ public:
     virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
     virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
     virtual void removeHighlight(const QUuid& uuid) = 0;
+    virtual void saveHighlights() = 0;
 
     virtual void followLink(const char* uri) = 0;
 

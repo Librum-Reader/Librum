@@ -4,7 +4,6 @@
 #include <QObject>
 #include <QString>
 #include <QUuid>
-#include <vector>
 #include "book_meta_data.hpp"
 #include "domain_export.hpp"
 #include "highlight.hpp"
@@ -20,7 +19,6 @@ public:
          int currentPage = 0, const QString& uuid = "");
 
     bool operator==(const Book& rhs) const;
-
 
     const QUuid& getUuid() const;
 
@@ -100,7 +98,7 @@ public:
     bool addTag(const Tag& tag);
     bool removeTag(const QUuid& uuid);
     bool renameTag(const QUuid& uuid, const QString& newName);
-    const std::vector<Tag>& getTags() const;
+    const QList<Tag>& getTags() const;
 
     void update(const Book& other);
     bool isValid() const;
@@ -117,7 +115,8 @@ public:
     };
 
 private:
-    bool tagsAreTheSame(const std::vector<Tag>& other) const;
+    bool tagsAreTheSame(const QList<Tag>& other) const;
+    bool highlightsAreTheSame(const QList<Highlight>& other) const;
     QJsonArray serializeTags() const;
     QJsonArray serializeHighlights() const;
     static value_objects::BookMetaData getBookMetaDataFromJson(
@@ -131,12 +130,12 @@ private:
 
     QUuid m_uuid;
     value_objects::BookMetaData m_metaData;
-    QList<Highlight> m_highlights;
     QString m_filePath;
     bool m_isDownloaded = true;
     bool m_existsOnlyOnClient = true;
     int m_currentPage = 0;
-    std::vector<Tag> m_tags;
+    QList<Tag> m_tags;
+    QList<Highlight> m_highlights;
 };
 
 }  // namespace domain::entities

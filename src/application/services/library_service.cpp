@@ -335,8 +335,8 @@ void LibraryService::setMediaDownloadProgressForBook(const QUuid& uuid,
     emit downloadingBookMediaProgressChanged(getBookIndex(uuid));
 }
 
-BookOperationStatus LibraryService::addTagToBook(
-    const QUuid& uuid, const domain::entities::Tag& tag)
+BookOperationStatus LibraryService::addTagToBook(const QUuid& uuid,
+                                                 const Tag& tag)
 {
     auto* book = getBook(uuid);
     if(book == nullptr)
@@ -356,7 +356,6 @@ BookOperationStatus LibraryService::addTagToBook(
     }
 
     m_bookStorageManager->updateBook(*book);
-    book->updateLastModified();
 
     int index = getBookIndex(uuid);
     emit tagsChanged(index);
@@ -385,7 +384,6 @@ BookOperationStatus LibraryService::removeTagFromBook(const QUuid& bookUuid,
     }
 
     m_bookStorageManager->updateBook(*book);
-    book->updateLastModified();
 
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);
@@ -417,7 +415,6 @@ BookOperationStatus LibraryService::renameTagOfBook(const QUuid& bookUuid,
 
     // User service renames the tag remotely, just apply it locally
     m_bookStorageManager->updateBookLocally(*book);
-    book->updateLastModified();
 
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);

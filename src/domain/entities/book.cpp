@@ -30,8 +30,11 @@ bool Book::operator==(const Book& rhs) const
     bool dataIsTheSame = m_uuid == rhs.m_uuid && m_filePath == rhs.m_filePath &&
                          m_isDownloaded == rhs.m_isDownloaded &&
                          m_currentPage == rhs.m_currentPage;
+    bool tagsAreTheSame = rhs.tagsAreTheSame(m_tags);
+    bool highlightsAreTheSame = rhs.highlightsAreTheSame(m_highlights);
 
-    return dataIsTheSame && m_metaData == rhs.m_metaData;
+    return tagsAreTheSame && highlightsAreTheSame && dataIsTheSame &&
+           m_metaData == rhs.m_metaData;
 }
 
 const QUuid& Book::getUuid() const
@@ -292,7 +295,7 @@ int Book::getBookReadingProgress() const
     return std::round(percentageInDecimal * 100);
 }
 
-const std::vector<Tag>& Book::getTags() const
+const QList<Tag>& Book::getTags() const
 {
     return m_tags;
 }
@@ -333,14 +336,28 @@ bool Book::renameTag(const QUuid& uuid, const QString& newName)
     return true;
 }
 
-bool Book::tagsAreTheSame(const std::vector<Tag>& other) const
+bool Book::tagsAreTheSame(const QList<Tag>& other) const
 {
     if(m_tags.size() != other.size())
         return false;
 
-    for(std::size_t i = 0; i < m_tags.size(); ++i)
+    for(int i = 0; i < m_tags.size(); ++i)
     {
         if(m_tags.at(i) != other.at(i))
+            return false;
+    }
+
+    return true;
+}
+
+bool Book::highlightsAreTheSame(const QList<Highlight>& other) const
+{
+    if(m_highlights.size() != other.size())
+        return false;
+
+    for(int i = 0; i < m_highlights.size(); ++i)
+    {
+        if(m_highlights.at(i) != other.at(i))
             return false;
     }
 
@@ -410,6 +427,8 @@ void Book::update(const Book& other)
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
+    if(!highlightsAreTheSame(other.getHighlights()))
+        m_highlights = other.getHighlights();
 }
 
 bool Book::isValid() const

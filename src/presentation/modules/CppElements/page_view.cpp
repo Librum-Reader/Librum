@@ -266,10 +266,12 @@ void PageView::paintHighlightsOnPage(QPainter& painter)
         {
             // We store the highlights zoom independent, so we need to scale
             // them to the current zoom here.
-            utils::scaleQRectFToZoom(rect, m_pageController->getZoom());
+            auto qRect = rect.getQRect();
+            utils::scaleQRectFToZoom(qRect, m_pageController->getZoom());
+            rect.setQRect(qRect);
 
             painter.setCompositionMode(QPainter::CompositionMode_Multiply);
-            painter.fillRect(rect, highlight.getColor());
+            painter.fillRect(rect.getQRect(), highlight.getColor());
         }
     }
 }
@@ -287,11 +289,11 @@ void PageView::removeConflictingHighlights(Highlight& highlight)
 
         for(int u = 0; u < highlight.getRects().size(); ++u)
         {
-            auto& rect = highlight.getRects()[u];
+            auto rect = highlight.getRects()[u].getQRect();
 
             for(int k = 0; k < existingHighlight.getRects().size(); ++k)
             {
-                auto& existingRect = existingHighlight.getRects()[k];
+                auto existingRect = existingHighlight.getRects()[k].getQRect();
 
                 // New rect intersects with old rect
                 if(rect.intersects(existingRect))
@@ -360,8 +362,8 @@ void PageView::createHighlightFromCurrentSelection()
     highlight.setRects(rects);
 
     removeConflictingHighlights(highlight);
-
     m_bookController->addHighlight(highlight);
+    m_bookController->saveHighlights();
 
     update();
 }

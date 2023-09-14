@@ -14,7 +14,8 @@ namespace adapters::controllers
 using namespace domain::entities;
 using namespace dtos;
 
-LibraryController::LibraryController(application::ILibraryService* bookService) :
+LibraryController::LibraryController(
+    application::ILibraryService* bookService) :
     m_bookService(bookService),
     m_libraryModel(m_bookService->getBooks())
 {
@@ -25,8 +26,8 @@ LibraryController::LibraryController(application::ILibraryService* bookService) 
     connect(m_bookService, &application::ILibraryService::bookInsertionEnded,
             &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
 
-    connect(m_bookService, &application::ILibraryService::bookInsertionEnded, this,
-            &LibraryController::bookCountChanged);
+    connect(m_bookService, &application::ILibraryService::bookInsertionEnded,
+            this, &LibraryController::bookCountChanged);
 
 
     // book deletion
@@ -36,8 +37,8 @@ LibraryController::LibraryController(application::ILibraryService* bookService) 
     connect(m_bookService, &application::ILibraryService::bookDeletionEnded,
             &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
 
-    connect(m_bookService, &application::ILibraryService::bookDeletionEnded, this,
-            &LibraryController::bookCountChanged);
+    connect(m_bookService, &application::ILibraryService::bookDeletionEnded,
+            this, &LibraryController::bookCountChanged);
 
 
     // book clearing
@@ -47,8 +48,8 @@ LibraryController::LibraryController(application::ILibraryService* bookService) 
     connect(m_bookService, &application::ILibraryService::bookClearingEnded,
             &m_libraryModel, &data_models::LibraryModel::endBookClearing);
 
-    connect(m_bookService, &application::ILibraryService::bookClearingEnded, this,
-            &LibraryController::bookCountChanged);
+    connect(m_bookService, &application::ILibraryService::bookClearingEnded,
+            this, &LibraryController::bookCountChanged);
 
     // Storage limit exceeded
     connect(m_bookService, &application::ILibraryService::storageLimitExceeded,
@@ -108,7 +109,8 @@ int LibraryController::downloadBookMedia(const QString& uuid)
     return static_cast<int>(result);
 }
 
-int LibraryController::updateBook(const QString& uuid, const QVariant& operations)
+int LibraryController::updateBook(const QString& uuid,
+                                  const QVariant& operations)
 {
     auto bookToUpdate = m_bookService->getBook(QUuid(uuid));
     if(!bookToUpdate)
@@ -184,7 +186,7 @@ int LibraryController::changeBookCover(const QString& uuid, const QString& path)
 }
 
 int LibraryController::addTag(const QString& bookUuid, const QString& tagName,
-                           const QString& tagUuid)
+                              const QString& tagUuid)
 {
     if(QUuid(tagUuid).isNull())
     {
@@ -208,14 +210,15 @@ void LibraryController::removeAllTagsWithUuid(const QString& tagUuid)
     auto& books = m_bookService->getBooks();
     for(const auto& book : books)
     {
-        if(vectorContainsTag(book.getTags(), QUuid(tagUuid)))
+        if(listContainsTag(book.getTags(), QUuid(tagUuid)))
         {
             m_bookService->removeTagFromBook(book.getUuid(), QUuid(tagUuid));
         }
     }
 }
 
-void LibraryController::renameTags(const QString& oldName, const QString& newName)
+void LibraryController::renameTags(const QString& oldName,
+                                   const QString& newName)
 {
     auto& books = m_bookService->getBooks();
     for(const auto& book : books)
@@ -226,7 +229,8 @@ void LibraryController::renameTags(const QString& oldName, const QString& newNam
     }
 }
 
-int LibraryController::removeTag(const QString& bookUuid, const QString& tagUuid)
+int LibraryController::removeTag(const QString& bookUuid,
+                                 const QString& tagUuid)
 {
     auto result =
         m_bookService->removeTagFromBook(QUuid(bookUuid), QUuid(tagUuid));
@@ -268,7 +272,8 @@ void LibraryController::refreshLastOpenedFlag(const QString& uuid)
     m_bookService->refreshLastOpenedDateOfBook(QUuid(uuid));
 }
 
-dtos::BookDto LibraryController::getDtoFromBook(const domain::entities::Book& book)
+dtos::BookDto LibraryController::getDtoFromBook(
+    const domain::entities::Book& book)
 {
     dtos::BookDto bookDto;
     addBookMetaDataToDto(book, bookDto);
@@ -328,7 +333,7 @@ void LibraryController::addBookTagsToDto(const Book& book, BookDto& bookDto)
     }
 }
 
-bool LibraryController::vectorContainsTag(const std::vector<Tag>& tags, QUuid uuid)
+bool LibraryController::listContainsTag(const QList<Tag>& tags, QUuid uuid)
 {
     return std::ranges::any_of(tags,
                                [&uuid](const Tag& tag)

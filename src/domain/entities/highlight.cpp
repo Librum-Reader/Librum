@@ -12,6 +12,12 @@ Highlight::Highlight(int pageNumber, QColor color, QUuid uuid) :
 {
 }
 
+bool Highlight::operator==(const Highlight& rhs) const
+{
+    return m_uuid == rhs.m_uuid && m_pageNumber == rhs.m_pageNumber &&
+           m_color == rhs.m_color && m_rects == rhs.m_rects;
+}
+
 QByteArray Highlight::toJson() const
 {
     QJsonObject book {
@@ -27,6 +33,18 @@ QByteArray Highlight::toJson() const
     return strJson.toUtf8();
 }
 
+QJsonArray Highlight::serializeRects() const
+{
+    QJsonArray result;
+    for(const auto& rect : m_rects)
+    {
+        auto obj = QJsonDocument::fromJson(rect.toJson()).object();
+        result.append(QJsonValue::fromVariant(obj));
+    }
+
+    return result;
+}
+
 Highlight Highlight::fromJson(const QJsonObject& jsonBook)
 {
     auto uuid = QUuid(jsonBook["uuid"].toString());
@@ -37,7 +55,7 @@ Highlight Highlight::fromJson(const QJsonObject& jsonBook)
     auto jsonRects = jsonBook["rects"].toArray();
     for(const auto& jsonRect : jsonRects)
     {
-        auto rect = qRectFFromJson(jsonRect.toObject());
+        auto rect = RectF::fromJson(jsonRect.toObject());
         highlight.m_rects.append(rect);
     }
 
@@ -59,52 +77,24 @@ QColor Highlight::getColor() const
     return m_color;
 }
 
-const QList<QRectF>& Highlight::getRects() const
+const QList<RectF>& Highlight::getRects() const
 {
     return m_rects;
 }
 
-void Highlight::setRects(const QList<QRectF>& rects)
+void Highlight::setRects(const QList<RectF>& rects)
 {
     m_rects = rects;
 }
 
-QJsonArray Highlight::serializeRects() const
+void Highlight::setRects(const QList<QRectF>& rects)
 {
-    QJsonArray result;
-    for(const auto& rect : m_rects)
+    m_rects.clear();
+    m_rects.reserve(rects.count());
+    for(const auto& rect : rects)
     {
-        auto obj = QJsonDocument::fromJson(qRectFToJson(rect)).object();
-        result.append(QJsonValue::fromVariant(obj));
+        m_rects.append(RectF(rect));
     }
-
-    return result;
-}
-
-QByteArray Highlight::qRectFToJson(const QRectF& rect) const
-{
-    QJsonObject jsonRect {
-        { "x", rect.x() },
-        { "y", rect.y() },
-        { "width", rect.width() },
-        { "height", rect.height() },
-    };
-
-    QJsonDocument jsonDoc(jsonRect);
-    QString jsonString = jsonDoc.toJson(QJsonDocument::Indented);
-
-    return jsonString.toUtf8();
-}
-
-QRectF Highlight::qRectFFromJson(const QJsonObject& jsonRect)
-{
-    float x = jsonRect["x"].toDouble();
-    float y = jsonRect["y"].toDouble();
-    float width = jsonRect["width"].toDouble();
-    float height = jsonRect["height"].toDouble();
-    QRectF rect(x, y, width, height);
-
-    return rect;
 }
 
 }  // namespace domain::entities

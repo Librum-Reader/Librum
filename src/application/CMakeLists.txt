@@ -11,11 +11,10 @@ set(application_SRC
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
-    interfaces/managers/i_library_storage_manager.hpp
     interfaces/gateways/i_app_info_gateway.hpp
     interfaces/services/i_app_info_service.hpp
     interfaces/services/i_book_service.hpp
-    interfaces/managers/i_highlight_storage_manager.hpp
+    interfaces/managers/i_library_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -29,6 +28,9 @@ set(application_SRC
     services/app_info_service.hpp
     services/book_service.hpp
     services/book_service.cpp
+    
+    managers/library_storage_manager.cpp
+    managers/library_storage_manager.hpp
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
@@ -46,11 +48,6 @@ set(application_SRC
     utility/book_merger.cpp
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
-    
-    managers/library_storage_manager.cpp
-    managers/library_storage_manager.hpp
-    managers/highlight_storage_manager.hpp
-    managers/highlight_storage_manager.cpp
     
     core/page_generator.hpp
     core/page_generator.cpp
@@ -119,8 +116,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    interfaces/gateways/i_highlight_storage_gateway.hpp
-                    
 )
 
 # Make sure to build mupdf before the application

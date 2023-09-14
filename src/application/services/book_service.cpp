@@ -12,10 +12,8 @@ using namespace utils;
 namespace application::services
 {
 
-BookService::BookService(ILibraryService* libraryService,
-                         IHighlightStorageManager* highlightStorageManager) :
-    m_libraryService(libraryService),
-    m_highlightStorageManager(highlightStorageManager)
+BookService::BookService(ILibraryService* libraryService) :
+    m_libraryService(libraryService)
 {
 }
 
@@ -86,17 +84,21 @@ void BookService::addHighlight(const domain::entities::Highlight& highlight)
 {
     auto book = getBook();
     book->addHighlight(highlight);
-    book->updateLastModified();
-
-    m_highlightStorageManager->addHighlight(*book, highlight);
 }
 
 void BookService::removeHighlight(const QUuid& uuid)
 {
     auto book = getBook();
     book->removeHighlight(uuid);
+}
 
-    m_highlightStorageManager->deleteHighlight(*book, uuid);
+void BookService::saveHighlights()
+{
+    // We need to have a extra method to save the highlights due to a
+    // concurrency error on the backend that occurs when we send multiple update
+    // requests in a short period of time.
+    auto book = getBook();
+    m_libraryService->updateBook(*book);
 }
 
 void BookService::followLink(const char* uri)
@@ -161,16 +163,6 @@ core::FilteredTOCModel* BookService::getTableOfContents()
     }
 
     return m_filteredTOCModel.get();
-}
-
-void BookService::setupUserData(const QString& token, const QString& email)
-{
-    m_highlightStorageManager->setUserData(email, token);
-}
-
-void BookService::clearUserData()
-{
-    m_highlightStorageManager->clearUserData();
 }
 
 /**

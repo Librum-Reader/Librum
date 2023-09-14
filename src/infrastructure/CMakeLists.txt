@@ -12,8 +12,6 @@ add_library(infrastructure
                     persistance/authentication_access.hpp
                     persistance/app_info_access.cpp
                     persistance/app_info_access.hpp
-                    persistance/highlight_storage_access.cpp
-                    persistance/highlight_storage_access.hpp
                     
                     persistance/api_error_helper.hpp
                     data/endpoints.hpp

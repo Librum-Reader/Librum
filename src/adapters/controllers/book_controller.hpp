@@ -28,6 +28,7 @@ public:
     const QList<domain::entities::Highlight>& getHighlights() const override;
     void addHighlight(const domain::entities::Highlight& highlight) override;
     void removeHighlight(const QUuid& uuid) override;
+    void saveHighlights() override;
 
     void followLink(const char* uri) override;
 

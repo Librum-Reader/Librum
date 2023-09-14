@@ -18,13 +18,10 @@ class APPLICATION_EXPORT IHighlightStorageManager : public QObject
 public:
     virtual ~IHighlightStorageManager() noexcept = default;
 
-    virtual void addHighlight(const domain::entities::Book& book,
+    virtual void addHighlight(domain::entities::Book& book,
                               const domain::entities::Highlight& highlight) = 0;
-    virtual void deleteHighlight(const domain::entities::Book& book,
+    virtual void deleteHighlight(domain::entities::Book& book,
                                  const QUuid& highlightUuid) = 0;
-
-    virtual void setUserData(const QString& email,
-                             const QString& authToken) = 0;
-    virtual void clearUserData() = 0;
 };
+
 }  // namespace application

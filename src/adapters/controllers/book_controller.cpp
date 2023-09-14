@@ -72,6 +72,11 @@ void BookController::removeHighlight(const QUuid& uuid)
     m_bookService->removeHighlight(uuid);
 }
 
+void BookController::saveHighlights()
+{
+    m_bookService->saveHighlights();
+}
+
 void BookController::followLink(const char* uri)
 {
     return m_bookService->followLink(uri);
