@@ -82,7 +82,9 @@ void BookController::saveHighlights()
 const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
                                                      int page) const
 {
-    return m_bookService->getHighlightAtPoint(point, page);
+    auto restoredPoint = utils::restoreQPoint(point, getZoom());
+
+    return m_bookService->getHighlightAtPoint(restoredPoint, page);
 }
 
 void BookController::followLink(const char* uri)

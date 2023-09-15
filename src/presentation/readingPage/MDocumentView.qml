@@ -109,7 +109,7 @@ Pane {
                         pageView.widestItem = page.implicitWidth;
                 }
                 
-                disableHoverEvents: selectionOptionArea1.containsMouse || selectionOptionArea2.containsMouse
+                disableHoverEvents: selectionOptionsPopup.containsMouse
             }
 
             // Set the book's current page once the model is loaded
@@ -192,6 +192,9 @@ Pane {
     {
         id: selectionOptionsPopup
         property string highlight: ""
+        property bool containsMouse: copyActionArea.containsMouse ||
+                                     highlightActionArea.containsMouse ||
+                                     removeActionArea.containsMouse
         
         width: selectionOptionsLayout.width
         height: 32
@@ -210,14 +213,15 @@ Pane {
             
             Rectangle
             {
+                id: copyAction
                 Layout.fillHeight: true
-                Layout.preferredWidth: action1.implicitWidth
+                Layout.preferredWidth: copyActionText.implicitWidth
                 color: "transparent"
-                opacity: selectionOptionArea1.pressed ? 0.8 : 1
+                opacity: copyActionArea.pressed ? 0.8 : 1
                 
                 Label
                 {
-                    id: action1
+                    id: copyActionText
                     height: parent.height
                     color:  Style.colorText
                     horizontalAlignment: Text.AlignHCenter
@@ -229,7 +233,7 @@ Pane {
                 
                 MouseArea
                 {
-                    id: selectionOptionArea1
+                    id: copyActionArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
@@ -255,14 +259,15 @@ Pane {
             
             Rectangle
             {
+                id: highlightAction
                 Layout.fillHeight: true
-                Layout.preferredWidth: action2.implicitWidth
+                Layout.preferredWidth: highlightActionText.implicitWidth
                 color: "transparent"
-                opacity: selectionOptionArea2.pressed ? 0.8 : 1
+                opacity: highlightActionArea.pressed ? 0.8 : 1
                 
                 Label
                 {
-                    id: action2
+                    id: highlightActionText
                     height: parent.height
                     color:  Style.colorText
                     horizontalAlignment: Text.AlignHCenter
@@ -274,7 +279,7 @@ Pane {
                 
                 MouseArea
                 {
-                    id: selectionOptionArea2
+                    id: highlightActionArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true
@@ -296,15 +301,16 @@ Pane {
             
             Rectangle
             {
+                id: removeAction
                 Layout.fillHeight: true
-                Layout.preferredWidth: action3.implicitWidth
+                Layout.preferredWidth: removeActionText.implicitWidth
                 color: "transparent"
-                opacity: selectionOptionArea3.pressed ? 0.8 : 1
-                visible: selectionOptionsPopup.highlight != ""
+                opacity: removeActionArea.pressed ? 0.8 : 1
+                visible: selectionOptionsPopup.highlight !== ""
                 
                 Label
                 {
-                    id: action3
+                    id: removeActionText
                     height: parent.height
                     color:  Style.colorErrorText
                     horizontalAlignment: Text.AlignHCenter
@@ -316,7 +322,7 @@ Pane {
                 
                 MouseArea
                 {
-                    id: selectionOptionArea3
+                    id: removeActionArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     hoverEnabled: true

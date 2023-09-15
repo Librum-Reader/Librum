@@ -162,17 +162,14 @@ void PageView::mousePressEvent(QMouseEvent* event)
 
     int mouseX = event->position().x();
     int mouseY = event->position().y();
-    QPoint mousePoint(mouseX, mouseY);
+    QPoint point(mouseX, mouseY);
 
     forceActiveFocus();
 
-    if(m_pageController->pointIsAboveLink(mousePoint))
+    if(m_pageController->pointIsAboveLink(point))
         m_startedMousePressOnLink = true;
 
-    QPointF restoredPoint =
-        utils::restoreQPoint(mousePoint, m_bookController->getZoom());
-    auto highlight =
-        m_bookController->getHighlightAtPoint(restoredPoint, m_pageNumber);
+    auto highlight = m_bookController->getHighlightAtPoint(point, m_pageNumber);
     if(highlight != nullptr)
     {
         // Convert the domain::entities::ReftFs to QRectFs and scale them
@@ -204,7 +201,7 @@ void PageView::mousePressEvent(QMouseEvent* event)
         m_tripleClickTimer.stop();
     }
 
-    m_selectionStart = mousePoint;
+    m_selectionStart = point;
 }
 
 void PageView::mouseReleaseEvent(QMouseEvent* event)
@@ -537,6 +534,10 @@ void PageView::resetCursorToDefault()
 void PageView::setCorrectCursor(int x, int y)
 {
     if(m_pageController->pointIsAboveLink(QPoint(x, y)))
+    {
+        setPointingCursor();
+    }
+    if(m_bookController->getHighlightAtPoint(QPointF(x, y), m_pageNumber))
     {
         setPointingCursor();
     }
