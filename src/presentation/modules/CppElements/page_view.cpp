@@ -166,6 +166,9 @@ void PageView::mousePressEvent(QMouseEvent* event)
 
     forceActiveFocus();
 
+    if(m_pageController->pointIsAboveLink(mousePoint))
+        m_startedMousePressOnLink = true;
+
     QPointF restoredPoint =
         utils::restoreQPoint(mousePoint, m_bookController->getZoom());
     auto highlight =
@@ -189,9 +192,6 @@ void PageView::mousePressEvent(QMouseEvent* event)
         m_bookController->highlightSelected(positions.first, positions.second,
                                             uuidAsString);
         m_startedMousePressOnHighlight = true;
-
-        if(m_pageController->pointIsAboveLink(mousePoint))
-            m_startedMousePressOnLink = true;
 
         return;
     }
