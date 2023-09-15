@@ -229,7 +229,10 @@ Pane {
                     hoverEnabled: true
                     onContainsMouseChanged: activeFocusItem.setPointingCursor()
                     
-                    onClicked: activeFocusItem.copySelectedText();
+                    onClicked: {
+                        activeFocusItem.copySelectedText();
+                        selectionOptionsPopup.close();
+                    }
                 }
             }
             
@@ -267,7 +270,10 @@ Pane {
                     hoverEnabled: true
                     onContainsMouseChanged: activeFocusItem.setPointingCursor()
                     
-                    onClicked: activeFocusItem.createHighlightFromCurrentSelection();
+                    onClicked: {
+                        activeFocusItem.createHighlightFromCurrentSelection();
+                        selectionOptionsPopup.close();
+                    }
                 }
             }
         }

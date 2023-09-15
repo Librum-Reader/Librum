@@ -31,37 +31,6 @@ cpp_elements::PageView::PageView()
 
     m_tripleClickTimer.setInterval(400);
     m_tripleClickTimer.setSingleShot(true);
-
-    // This timer is started after text was selected. We need to have a delay to
-    // make sure that the user really stopped the selection.
-    m_selectionFinishedTimer.setInterval(200);
-    m_selectionFinishedTimer.setSingleShot(true);
-    connect(
-        &m_selectionFinishedTimer, &QTimer::timeout, this,
-        [this]
-        {
-            if(!m_leftMouseButtonDown)
-            {
-                float mostLeft = 9999999;  // Very big default
-                float mostRight = 0;
-                float topY = 9999999;
-                for(auto& selectionRect :
-                    m_pageController->getBufferedSelectionRects())
-                {
-                    if(selectionRect.x() < mostLeft)
-                        mostLeft = selectionRect.x();
-
-                    if(selectionRect.x() + selectionRect.width() > mostRight)
-                        mostRight = selectionRect.x() + selectionRect.width();
-
-                    if(selectionRect.top() < topY)
-                        topY = selectionRect.top();
-                }
-
-                auto centerX = (mostLeft + mostRight) / 2;
-                emit m_bookController->textSelectionFinished(centerX, topY);
-            }
-        });
 }
 
 void PageView::setBookController(BookController* newBookController)
@@ -185,9 +154,6 @@ void PageView::mousePressEvent(QMouseEvent* event)
     if(event->button() == Qt::RightButton)
         return;
 
-    if(event->button() == Qt::LeftButton)
-        m_leftMouseButtonDown = true;
-
     int mouseX = event->position().x();
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
@@ -215,8 +181,6 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
 
-    m_leftMouseButtonDown = false;
-
     if(m_startedMousePressOnLink &&
        m_pageController->pointIsAboveLink(mousePoint))
     {
@@ -232,9 +196,9 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     {
         removeSelection();
     }
-    else if(!m_doubleClickHold)
+    else
     {
-        m_selectionFinishedTimer.start();
+        emitSelectionFinishedSignal();
     }
 
     m_doubleClickHold = false;
@@ -287,6 +251,27 @@ void PageView::paintSelectionOnPage(QPainter& painter)
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
         painter.fillRect(rect, selectionColor);
     }
+}
+
+void PageView::emitSelectionFinishedSignal()
+{
+    float mostLeft = 9999999;  // Very big default
+    float mostRight = 0;
+    float topY = 9999999;
+    for(auto& selectionRect : m_pageController->getBufferedSelectionRects())
+    {
+        if(selectionRect.x() < mostLeft)
+            mostLeft = selectionRect.x();
+
+        if(selectionRect.x() + selectionRect.width() > mostRight)
+            mostRight = selectionRect.x() + selectionRect.width();
+
+        if(selectionRect.top() < topY)
+            topY = selectionRect.top();
+    }
+
+    auto centerX = (mostLeft + mostRight) / 2;
+    emit m_bookController->textSelectionFinished(centerX, topY);
 }
 
 void PageView::paintHighlightsOnPage(QPainter& painter)
@@ -436,8 +421,6 @@ void PageView::selectSingleWord()
     m_selectionEnd = points.second;
 
     createSelection();
-
-    m_selectionFinishedTimer.start();
 }
 
 void PageView::selectMultipleWords()
@@ -449,9 +432,6 @@ void PageView::selectMultipleWords()
     m_selectionEnd = positions.second;
 
     createSelection();
-
-    if(!m_leftMouseButtonDown)
-        m_selectionFinishedTimer.start();
 }
 
 void PageView::selectLine()
@@ -463,9 +443,6 @@ void PageView::selectLine()
     m_selectionEnd = positions.second;
 
     createSelection();
-
-    if(!m_leftMouseButtonDown)
-        m_selectionFinishedTimer.start();
 }
 
 void PageView::copySelectedText()

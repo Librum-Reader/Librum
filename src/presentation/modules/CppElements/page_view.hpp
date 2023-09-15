@@ -53,6 +53,7 @@ public:
 
 private slots:
     void updateZoom(float newZoom);
+    void emitSelectionFinishedSignal();
 
 protected:
     void geometryChange(const QRectF& newGeometry,
@@ -86,11 +87,9 @@ private:
     int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;
-    bool m_leftMouseButtonDown = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;
-    QTimer m_selectionFinishedTimer;
     bool m_doubleClickHold = false;
     bool m_disableHoverEvents;
 };
