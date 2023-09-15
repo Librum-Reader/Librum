@@ -106,10 +106,22 @@ inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint)
  * transformation matrix to it. This is necessary because mupdf expects
  * arguments passed to be without any zooming or similar applied.
  */
-inline void restorePoint(mupdf::FzPoint& point, mupdf::FzMatrix& matrix)
+inline void restoreFzPoint(mupdf::FzPoint& point, mupdf::FzMatrix& matrix)
 {
     auto invMatrix = matrix.fz_invert_matrix();
     point = point.fz_transform_point(invMatrix);
+}
+
+inline QPointF restoreQPoint(const QPointF& point, float zoom)
+{
+    auto fzPoint = qPointToFzPoint(point);
+
+    mupdf::FzMatrix matrix;
+    matrix.a = zoom;
+    matrix.d = zoom;
+
+    restoreFzPoint(fzPoint, matrix);
+    return fzPointToQPoint(fzPoint);
 }
 
 /**

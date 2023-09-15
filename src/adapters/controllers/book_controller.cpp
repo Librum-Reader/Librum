@@ -1,8 +1,10 @@
 #include "book_controller.hpp"
 #include <QUuid>
 #include "fz_utils.hpp"
+#include "highlight.hpp"
 
 using namespace application::core;
+using domain::entities::Highlight;
 
 namespace adapters::controllers
 {
@@ -22,7 +24,7 @@ BookController::BookController(application::IBookService* bookService) :
 
                 left = utils::scalePointToCurrentZoom(left, 1, getZoom());
                 right = utils::scalePointToCurrentZoom(right, 1, getZoom());
-                
+
                 emit selectText(pageNumber, left, right);
             });
 }
@@ -75,6 +77,12 @@ void BookController::removeHighlight(const QUuid& uuid)
 void BookController::saveHighlights()
 {
     m_bookService->saveHighlights();
+}
+
+const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
+                                                     int page) const
+{
+    return m_bookService->getHighlightAtPoint(point, page);
 }
 
 void BookController::followLink(const char* uri)

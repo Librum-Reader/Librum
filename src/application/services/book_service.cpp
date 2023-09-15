@@ -4,10 +4,12 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <string>
+#include "highlight.hpp"
 #include "utils/book_searcher.hpp"
 
 using namespace application::core;
 using namespace utils;
+using domain::entities::Highlight;
 
 namespace application::services
 {
@@ -99,6 +101,25 @@ void BookService::saveHighlights()
     // requests in a short period of time.
     auto book = getBook();
     m_libraryService->updateBook(*book);
+}
+
+const Highlight* BookService::getHighlightAtPoint(const QPointF& point,
+                                                  int page) const
+{
+    auto book = getBook();
+    for(auto& highlight : book->getHighlights())
+    {
+        if(highlight.getPageNumber() != page)
+            continue;
+
+        for(auto& rect : highlight.getRects())
+        {
+            if(rect.getQRect().contains(point))
+                return &highlight;
+        }
+    }
+
+    return nullptr;
 }
 
 void BookService::followLink(const char* uri)

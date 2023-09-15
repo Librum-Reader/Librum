@@ -42,11 +42,15 @@ Pane {
         }
         
         function onTextSelectionFinished(centerX, topY)
+        {            
+            selectionOptionsPopup.highlight = "";
+            internal.openSelectionOptionsPopupAt(centerX, topY);
+        }
+        
+        function onHighlightSelected(centerX, topY, highlightUuid)
         {
-            let pageOffset = pageView.contentY - activeFocusItem.y;
-            selectionOptionsPopup.x = centerX + pageView.x - selectionOptionsPopup.width / 2;
-            selectionOptionsPopup.y = topY - selectionOptionsPopup.height - pageOffset - 6;
-            selectionOptionsPopup.open();
+            selectionOptionsPopup.highlight = highlightUuid;
+            internal.openSelectionOptionsPopupAt(centerX, topY);
         }
         
         function onZoomChanged(newZoom)
@@ -187,6 +191,8 @@ Pane {
     Popup
     {
         id: selectionOptionsPopup
+        property string highlight: ""
+        
         width: selectionOptionsLayout.width
         height: 32
         padding: 0
@@ -230,7 +236,11 @@ Pane {
                     onContainsMouseChanged: activeFocusItem.setPointingCursor()
                     
                     onClicked: {
-                        activeFocusItem.copySelectedText();
+                        if(selectionOptionsPopup.highlight == "")
+                            activeFocusItem.copySelectedText();
+                        else
+                            activeFocusItem.copyTextFromHighlight(selectionOptionsPopup.highlight);
+                            
                         selectionOptionsPopup.close();
                     }
                 }
@@ -276,6 +286,48 @@ Pane {
                     }
                 }
             }
+            
+            Rectangle
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: 2
+                color: Style.colorSeparator
+            }
+            
+            Rectangle
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: action3.implicitWidth
+                color: "transparent"
+                opacity: selectionOptionArea3.pressed ? 0.8 : 1
+                visible: selectionOptionsPopup.highlight != ""
+                
+                Label
+                {
+                    id: action3
+                    height: parent.height
+                    color:  Style.colorErrorText
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pointSize: 11
+                    padding: 8
+                    text: "Remove"
+                }
+                
+                MouseArea
+                {
+                    id: selectionOptionArea3
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onContainsMouseChanged: activeFocusItem.setPointingCursor()
+                    
+                    onClicked: {
+                        activeFocusItem.removeHighlight(selectionOptionsPopup.highlight);
+                        selectionOptionsPopup.close();
+                    }
+                }
+            }
         }
     }
 
@@ -311,5 +363,19 @@ Pane {
 
         let space = 10
         pageView.contentY += yOffset * root.BookController.zoom - space
+    }
+    
+    QtObject
+    {
+        id: internal
+        
+        function openSelectionOptionsPopupAt(centerX, topY)
+        {
+            let pageOffset = pageView.contentY - activeFocusItem.y;
+            selectionOptionsPopup.x = centerX + pageView.x - selectionOptionsPopup.width / 2;
+            selectionOptionsPopup.y = topY - selectionOptionsPopup.height - pageOffset - 6;
+            
+            selectionOptionsPopup.open()
+        }
     }
 }

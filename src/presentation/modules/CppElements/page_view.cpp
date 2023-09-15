@@ -10,10 +10,10 @@
 #include <QRectF>
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
+#include <limits>
 #include "fz_utils.hpp"
 #include "highlight.hpp"
 #include "page_controller.hpp"
-#include "qnamespace.h"
 
 using adapters::controllers::BookController;
 using adapters::controllers::PageController;
@@ -140,9 +140,15 @@ void PageView::mouseDoubleClickEvent(QMouseEvent* event)
     if(event->button() == Qt::RightButton)
         return;
 
-    m_selectionStart = QPointF(event->position().x(), event->position().y());
-    m_selectionEnd = QPointF(event->position().x(), event->position().y());
+    if(m_startedMousePressOnHighlight)
+        return;
 
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+    QPoint mousePoint(mouseX, mouseY);
+
+    m_selectionStart = mousePoint;
+    m_selectionEnd = mousePoint;
     selectSingleWord();
 
     m_tripleClickTimer.start();
@@ -160,16 +166,42 @@ void PageView::mousePressEvent(QMouseEvent* event)
 
     forceActiveFocus();
 
-    if(m_pageController->pointIsAboveLink(mousePoint))
-        m_startedMousePressOnLink = true;
+    QPointF restoredPoint =
+        utils::restoreQPoint(mousePoint, m_bookController->getZoom());
+    auto highlight =
+        m_bookController->getHighlightAtPoint(restoredPoint, m_pageNumber);
+    if(highlight != nullptr)
+    {
+        // Convert the domain::entities::ReftFs to QRectFs and scale them
+        auto rects = highlight->getRects();
+        QList<QRectF> qRects;
+        qRects.reserve(rects.size());
+        for(auto& rect : rects)
+        {
+            auto qRectF = rect.getQRect();
+            utils::scaleQRectFToZoom(qRectF, m_bookController->getZoom());
+            qRects.append(qRectF);
+        }
+
+        auto positions = getCenterXAndTopYFromRects(qRects);
+
+        auto uuidAsString = highlight->getUuid().toString(QUuid::WithoutBraces);
+        m_bookController->highlightSelected(positions.first, positions.second,
+                                            uuidAsString);
+        m_startedMousePressOnHighlight = true;
+
+        if(m_pageController->pointIsAboveLink(mousePoint))
+            m_startedMousePressOnLink = true;
+
+        return;
+    }
+    m_startedMousePressOnHighlight = false;
 
     // Select line when left mouse button is pressed 3 times
     if(m_tripleClickTimer.isActive())
     {
-        m_selectionStart = mousePoint;
         selectLine();
         m_tripleClickTimer.stop();
-        return;
     }
 
     m_selectionStart = mousePoint;
@@ -196,9 +228,13 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     {
         removeSelection();
     }
-    else
+    else if(!m_startedMousePressOnHighlight)
     {
-        emitSelectionFinishedSignal();
+        auto positions = getCenterXAndTopYFromRects(
+            m_pageController->getBufferedSelectionRects());
+
+        emit m_bookController->textSelectionFinished(positions.first,
+                                                     positions.second);
     }
 
     m_doubleClickHold = false;
@@ -207,6 +243,9 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
 void PageView::mouseMoveEvent(QMouseEvent* event)
 {
     if(event->buttons() == Qt::RightButton)
+        return;
+
+    if(m_startedMousePressOnHighlight)
         return;
 
     int mouseX = event->position().x();
@@ -253,25 +292,26 @@ void PageView::paintSelectionOnPage(QPainter& painter)
     }
 }
 
-void PageView::emitSelectionFinishedSignal()
+QPair<float, float> PageView::getCenterXAndTopYFromRects(
+    const QList<QRectF>& rects)
 {
-    float mostLeft = 9999999;  // Very big default
-    float mostRight = 0;
-    float topY = 9999999;
-    for(auto& selectionRect : m_pageController->getBufferedSelectionRects())
+    float mostLeftX = std::numeric_limits<float>::max();
+    float mostRightX = 0;
+    float topY = std::numeric_limits<float>::max();
+    for(auto& rect : rects)
     {
-        if(selectionRect.x() < mostLeft)
-            mostLeft = selectionRect.x();
+        if(rect.x() < mostLeftX)
+            mostLeftX = rect.x();
 
-        if(selectionRect.x() + selectionRect.width() > mostRight)
-            mostRight = selectionRect.x() + selectionRect.width();
+        if(rect.x() + rect.width() > mostRightX)
+            mostRightX = rect.x() + rect.width();
 
-        if(selectionRect.top() < topY)
-            topY = selectionRect.top();
+        if(rect.top() < topY)
+            topY = rect.top();
     }
 
-    auto centerX = (mostLeft + mostRight) / 2;
-    emit m_bookController->textSelectionFinished(centerX, topY);
+    auto centerX = (mostLeftX + mostRightX) / 2;
+    return { centerX, topY };
 }
 
 void PageView::paintHighlightsOnPage(QPainter& painter)
@@ -320,12 +360,7 @@ void PageView::removeConflictingHighlights(Highlight& highlight)
                     // Make sure that the rects are on the same line. Depending
                     // on the line height, lines above eachother will overlap,
                     // but its only an intersect when they are on the same line.
-                    auto shorterRect = rect.height() <= existingRect.height()
-                                           ? rect
-                                           : existingRect;
-                    auto intersectH = rect.intersected(existingRect).height();
-                    bool onSameLine = intersectH >= shorterRect.height() * 0.75;
-
+                    bool onSameLine = rectsAreOnSameLine(existingRect, rect);
                     if(onSameLine)
                     {
                         auto uuid = highlights[i].getUuid();
@@ -385,6 +420,42 @@ void PageView::createHighlightFromCurrentSelection()
     m_bookController->saveHighlights();
 
     update();
+}
+
+void PageView::removeHighlight(const QString& uuid)
+{
+    m_bookController->removeHighlight(QUuid(uuid));
+    m_bookController->saveHighlights();
+
+    update();
+}
+
+void PageView::copyTextFromHighlight(const QString& uuid)
+{
+    const Highlight* highlight = nullptr;
+    for(auto& h : m_bookController->getHighlights())
+    {
+        if(h.getUuid() == QUuid(uuid))
+        {
+            highlight = &h;
+            break;
+        }
+    }
+
+    QPointF start(highlight->getRects().first().getQRect().left(),
+                  highlight->getRects().first().getQRect().center().y());
+
+    QPointF end(highlight->getRects().last().getQRect().right(),
+                highlight->getRects().last().getQRect().center().y());
+
+    start =
+        utils::scalePointToCurrentZoom(start, 1, m_bookController->getZoom());
+    end = utils::scalePointToCurrentZoom(end, 1, m_bookController->getZoom());
+
+    QString text = m_pageController->getTextFromSelection(start, end);
+
+    auto clipboard = QApplication::clipboard();
+    clipboard->setText(text);
 }
 
 void PageView::setPointingCursor()
@@ -482,6 +553,17 @@ void PageView::setCorrectCursor(int x, int y)
     {
         resetCursorToDefault();
     }
+}
+
+bool PageView::rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2)
+{
+    auto shorterRect = rect1.height() <= rect2.height() ? rect1 : rect2;
+    auto intersectH = rect1.intersected(rect2).height();
+
+    float offsetTolerance = 0.75;
+    bool onSameLine = intersectH >= shorterRect.height() * offsetTolerance;
+
+    return onSameLine;
 }
 
 void PageView::setColorInverted(bool newColorInverted)

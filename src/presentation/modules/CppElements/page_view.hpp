@@ -49,11 +49,13 @@ public:
 
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE void createHighlightFromCurrentSelection();
+    Q_INVOKABLE void removeHighlight(const QString& uuid);
+    Q_INVOKABLE void copyTextFromHighlight(const QString& uuid);
     Q_INVOKABLE void setPointingCursor();
+
 
 private slots:
     void updateZoom(float newZoom);
-    void emitSelectionFinishedSignal();
 
 protected:
     void geometryChange(const QRectF& newGeometry,
@@ -82,11 +84,15 @@ private:
     void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
 
+    bool rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2);
+    QPair<float, float> getCenterXAndTopYFromRects(const QList<QRectF>& rects);
+
     std::unique_ptr<adapters::controllers::PageController> m_pageController;
     adapters::controllers::BookController* m_bookController = nullptr;
     int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;
+    bool m_startedMousePressOnHighlight = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;

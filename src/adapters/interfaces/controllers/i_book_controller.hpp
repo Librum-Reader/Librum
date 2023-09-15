@@ -40,6 +40,8 @@ public:
     virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
     virtual void removeHighlight(const QUuid& uuid) = 0;
     virtual void saveHighlights() = 0;
+    virtual const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const = 0;
 
     virtual void followLink(const char* uri) = 0;
 
@@ -60,6 +62,7 @@ signals:
     void goToPosition(int pageNumber, int y);
     void selectText(int pageNumber, QPointF left, QPointF right);
     void textSelectionFinished(float centerX, float topY);
+    void highlightSelected(float centerX, float topY, const QString& uuid);
 };
 
 }  // namespace adapters

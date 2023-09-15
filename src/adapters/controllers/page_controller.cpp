@@ -57,7 +57,7 @@ QImage PageController::renderPage()
 bool PageController::pointIsAboveText(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.pointIsAboveText(fzPoint);
 }
@@ -65,7 +65,7 @@ bool PageController::pointIsAboveText(const QPointF& point)
 bool PageController::pointIsAboveLink(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.pointIsAboveLink(fzPoint);
 }
@@ -73,7 +73,7 @@ bool PageController::pointIsAboveLink(const QPointF& point)
 const char* PageController::getLinkUriAtPoint(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.getLinkAtPoint(fzPoint).uri();
 }
@@ -100,8 +100,8 @@ void PageController::generateSelectionRects(QPointF start, QPointF end)
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     m_pageGenerator.getBufferedSelectionRects().clear();
     m_pageGenerator.generateSelectionRects(fzStart, fzEnd);
@@ -120,8 +120,8 @@ QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForWordSelection(fzStart, fzEnd);
     res.first = res.first.fz_transform_point(m_matrix);
@@ -135,7 +135,7 @@ QPair<QPointF, QPointF> PageController::getPositionsForLineSelection(
     QPointF point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForLineSelection(fzPoint);
     res.first = res.first.fz_transform_point(m_matrix);
@@ -150,8 +150,8 @@ QString PageController::getTextFromSelection(const QPointF& start,
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     auto res = m_pageGenerator.getTextFromSelection(fzStart, fzEnd);
     return QString::fromStdString(res);
