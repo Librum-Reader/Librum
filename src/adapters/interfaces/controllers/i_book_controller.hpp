@@ -59,6 +59,7 @@ signals:
     void tableOfContentsChanged();
     void goToPosition(int pageNumber, int y);
     void selectText(int pageNumber, QPointF left, QPointF right);
+    void textSelectionFinished(float centerX, float topY);
 };
 
 }  // namespace adapters

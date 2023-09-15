@@ -27,6 +27,8 @@ class PRESENTATION_EXPORT PageView : public QQuickItem
         int implicitHeight READ getImplicitHeight NOTIFY implicitHeightChanged)
     Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
     Q_PROPERTY(bool colorInverted WRITE setColorInverted)
+    Q_PROPERTY(bool disableHoverEvents READ disableHoverEvents WRITE
+                   setDisableHoverEvents)
 
 
 public:
@@ -35,12 +37,19 @@ public:
     int getImplicitWidth() const;
     int getImplicitHeight() const;
 
+    bool disableHoverEvents() const;
+    void setDisableHoverEvents(bool newDisableHoverEvents);
+
     int getPageNumber() const;
     void setPageNumber(int newCurrentPage);
     void setColorInverted(bool newColorInverted);
 
     void setBookController(
         adapters::controllers::BookController* newBookController);
+
+    Q_INVOKABLE void copySelectedText();
+    Q_INVOKABLE void createHighlightFromCurrentSelection();
+    Q_INVOKABLE void setPointingCursor();
 
 private slots:
     void updateZoom(float newZoom);
@@ -61,12 +70,10 @@ private:
     void selectSingleWord();
     void selectMultipleWords();
     void selectLine();
-    void copySelectedText();
     void removeSelection();
     void createSelection();
     void paintSelectionOnPage(QPainter& painter);
 
-    void createHighlightFromCurrentSelection();
     void paintHighlightsOnPage(QPainter& painter);
     void removeConflictingHighlights(domain::entities::Highlight& highlight);
     bool mouseAboveSelection(const QPointF mouse);
@@ -79,10 +86,13 @@ private:
     int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;
+    bool m_leftMouseButtonDown = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;
+    QTimer m_selectionFinishedTimer;
     bool m_doubleClickHold = false;
+    bool m_disableHoverEvents;
 };
 
 }  // namespace cpp_elements

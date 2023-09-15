@@ -29,8 +29,39 @@ cpp_elements::PageView::PageView()
     setAcceptedMouseButtons(Qt::AllButtons);
     setAcceptHoverEvents(true);
 
-    m_tripleClickTimer.setInterval(450);
+    m_tripleClickTimer.setInterval(400);
     m_tripleClickTimer.setSingleShot(true);
+
+    // This timer is started after text was selected. We need to have a delay to
+    // make sure that the user really stopped the selection.
+    m_selectionFinishedTimer.setInterval(200);
+    m_selectionFinishedTimer.setSingleShot(true);
+    connect(
+        &m_selectionFinishedTimer, &QTimer::timeout, this,
+        [this]
+        {
+            if(!m_leftMouseButtonDown)
+            {
+                float mostLeft = 9999999;  // Very big default
+                float mostRight = 0;
+                float topY = 9999999;
+                for(auto& selectionRect :
+                    m_pageController->getBufferedSelectionRects())
+                {
+                    if(selectionRect.x() < mostLeft)
+                        mostLeft = selectionRect.x();
+
+                    if(selectionRect.x() + selectionRect.width() > mostRight)
+                        mostRight = selectionRect.x() + selectionRect.width();
+
+                    if(selectionRect.top() < topY)
+                        topY = selectionRect.top();
+                }
+
+                auto centerX = (mostLeft + mostRight) / 2;
+                emit m_bookController->textSelectionFinished(centerX, topY);
+            }
+        });
 }
 
 void PageView::setBookController(BookController* newBookController)
@@ -44,7 +75,7 @@ void PageView::setBookController(BookController* newBookController)
     // Setup connections to the BookController
     connect(m_bookController, &BookController::zoomChanged, this,
             &PageView::updateZoom);
-    
+
     connect(m_bookController, &BookController::selectText, this,
             [this](int pageNumber, QPointF left, QPointF right)
             {
@@ -142,6 +173,7 @@ void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 
     m_selectionStart = QPointF(event->position().x(), event->position().y());
     m_selectionEnd = QPointF(event->position().x(), event->position().y());
+
     selectSingleWord();
 
     m_tripleClickTimer.start();
@@ -152,6 +184,9 @@ void PageView::mousePressEvent(QMouseEvent* event)
 {
     if(event->button() == Qt::RightButton)
         return;
+
+    if(event->button() == Qt::LeftButton)
+        m_leftMouseButtonDown = true;
 
     int mouseX = event->position().x();
     int mouseY = event->position().y();
@@ -180,33 +215,29 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
 
-    if(event->button() == Qt::LeftButton)
-    {
-        // This gets triggered when the user simply clicks on the page, without
-        // dragging the mouse, so on a normal click. In this case we want to
-        // reset the selection.
-        if(m_selectionStart == QPointF(mouseX, mouseY))
-        {
-            removeSelection();
-        }
+    m_leftMouseButtonDown = false;
 
-        if(m_startedMousePressOnLink &&
-           m_pageController->pointIsAboveLink(mousePoint))
-        {
-            auto uri = m_pageController->getLinkUriAtPoint(mousePoint);
-            m_bookController->followLink(uri);
-        }
-        m_startedMousePressOnLink = false;
-
-        m_doubleClickHold = false;
-    }
-    else if(event->button() == Qt::RightButton)
+    if(m_startedMousePressOnLink &&
+       m_pageController->pointIsAboveLink(mousePoint))
     {
-        if(mouseAboveSelection(mousePoint))
-        {
-            createHighlightFromCurrentSelection();
-        }
+        auto uri = m_pageController->getLinkUriAtPoint(mousePoint);
+        m_bookController->followLink(uri);
     }
+    m_startedMousePressOnLink = false;
+
+    // This gets triggered when the user simply clicks on the page, without
+    // dragging the mouse, so on a normal click. In this case we want to
+    // reset the selection.
+    if(m_selectionStart == QPointF(mouseX, mouseY))
+    {
+        removeSelection();
+    }
+    else if(!m_doubleClickHold)
+    {
+        m_selectionFinishedTimer.start();
+    }
+
+    m_doubleClickHold = false;
 }
 
 void PageView::mouseMoveEvent(QMouseEvent* event)
@@ -230,6 +261,9 @@ void PageView::mouseMoveEvent(QMouseEvent* event)
 
 void PageView::hoverMoveEvent(QHoverEvent* event)
 {
+    if(m_disableHoverEvents)
+        return;
+
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
@@ -368,6 +402,16 @@ void PageView::createHighlightFromCurrentSelection()
     update();
 }
 
+void PageView::setPointingCursor()
+{
+    if(QApplication::overrideCursor() == nullptr ||
+       *QApplication::overrideCursor() != Qt::PointingHandCursor)
+    {
+        resetCursorToDefault();
+        QApplication::setOverrideCursor(Qt::PointingHandCursor);
+    }
+}
+
 void PageView::createSelection()
 {
     m_pageController->generateSelectionRects(m_selectionStart, m_selectionEnd);
@@ -392,6 +436,8 @@ void PageView::selectSingleWord()
     m_selectionEnd = points.second;
 
     createSelection();
+
+    m_selectionFinishedTimer.start();
 }
 
 void PageView::selectMultipleWords()
@@ -403,6 +449,9 @@ void PageView::selectMultipleWords()
     m_selectionEnd = positions.second;
 
     createSelection();
+
+    if(!m_leftMouseButtonDown)
+        m_selectionFinishedTimer.start();
 }
 
 void PageView::selectLine()
@@ -414,6 +463,9 @@ void PageView::selectLine()
     m_selectionEnd = positions.second;
 
     createSelection();
+
+    if(!m_leftMouseButtonDown)
+        m_selectionFinishedTimer.start();
 }
 
 void PageView::copySelectedText()
@@ -438,12 +490,7 @@ void PageView::setCorrectCursor(int x, int y)
 {
     if(m_pageController->pointIsAboveLink(QPoint(x, y)))
     {
-        if(QApplication::overrideCursor() == nullptr ||
-           *QApplication::overrideCursor() != Qt::PointingHandCursor)
-        {
-            resetCursorToDefault();
-            QApplication::setOverrideCursor(Qt::PointingHandCursor);
-        }
+        setPointingCursor();
     }
     else if(m_pageController->pointIsAboveText(QPoint(x, y)))
     {
@@ -469,6 +516,16 @@ void PageView::setColorInverted(bool newColorInverted)
         update();
 
     m_firstTimeColorInverted = false;
+}
+
+bool PageView::disableHoverEvents() const
+{
+    return m_disableHoverEvents;
+}
+
+void PageView::setDisableHoverEvents(bool newDisableHoverEvents)
+{
+    m_disableHoverEvents = newDisableHoverEvents;
 }
 
 }  // namespace cpp_elements

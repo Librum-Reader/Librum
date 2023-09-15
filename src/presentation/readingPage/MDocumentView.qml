@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 import QtQuick.Window
 import Librum.elements
 import Librum.style
@@ -38,6 +39,14 @@ Pane {
         
         function onGoToPosition(pageNumber, y) {
             root.setPage(pageNumber, y)
+        }
+        
+        function onTextSelectionFinished(centerX, topY)
+        {
+            let pageOffset = pageView.contentY - activeFocusItem.y;
+            selectionOptionsPopup.x = centerX + pageView.x - selectionOptionsPopup.width / 2;
+            selectionOptionsPopup.y = topY - selectionOptionsPopup.height - pageOffset - 6;
+            selectionOptionsPopup.open();
         }
         
         function onZoomChanged(newZoom)
@@ -83,8 +92,6 @@ Pane {
             spacing: pageSpacing
             delegate: PageView {
                 id: page
-                property bool ctrlPressed: false
-
                 pageNumber: modelData
                 bookController: BookController
                 height: implicitHeight
@@ -97,10 +104,16 @@ Pane {
                     if(implicitWidth > pageView.contentWidth)
                         pageView.widestItem = page.implicitWidth;
                 }
+                
+                disableHoverEvents: selectionOptionArea1.containsMouse || selectionOptionArea2.containsMouse
             }
 
             // Set the book's current page once the model is loaded
-            onContentYChanged: NavigationLogic.updateCurrentPageCounter()
+            onContentYChanged: {
+                NavigationLogic.updateCurrentPageCounter()
+                selectionOptionsPopup.close();
+            }
+            
             Component.onCompleted: root.setPage(
                                        Globals.selectedBook.currentPage - 1)
 
@@ -168,6 +181,95 @@ Pane {
             implicitWidth: 26
             implicitHeight: 200
             color: "transparent"
+        }
+    }
+    
+    Popup
+    {
+        id: selectionOptionsPopup
+        width: selectionOptionsLayout.width
+        height: 32
+        padding: 0
+        background: Rectangle
+        {
+            color: Style.colorControlBackground
+            radius: 4
+        }
+        
+        RowLayout
+        {
+            id: selectionOptionsLayout
+            height: parent.height
+            spacing: 2
+            
+            Rectangle
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: action1.implicitWidth
+                color: "transparent"
+                opacity: selectionOptionArea1.pressed ? 0.8 : 1
+                
+                Label
+                {
+                    id: action1
+                    height: parent.height
+                    color:  Style.colorText
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pointSize: 11
+                    padding: 8
+                    text: "Copy"
+                }
+                
+                MouseArea
+                {
+                    id: selectionOptionArea1
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onContainsMouseChanged: activeFocusItem.setPointingCursor()
+                    
+                    onClicked: activeFocusItem.copySelectedText();
+                }
+            }
+            
+            Rectangle
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: 2
+                color: Style.colorSeparator
+            }
+            
+            Rectangle
+            {
+                Layout.fillHeight: true
+                Layout.preferredWidth: action2.implicitWidth
+                color: "transparent"
+                opacity: selectionOptionArea2.pressed ? 0.8 : 1
+                
+                Label
+                {
+                    id: action2
+                    height: parent.height
+                    color:  Style.colorText
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font.pointSize: 11
+                    padding: 8
+                    text: "Highlight"
+                }
+                
+                MouseArea
+                {
+                    id: selectionOptionArea2
+                    anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+                    hoverEnabled: true
+                    onContainsMouseChanged: activeFocusItem.setPointingCursor()
+                    
+                    onClicked: activeFocusItem.createHighlightFromCurrentSelection();
+                }
+            }
         }
     }
 
