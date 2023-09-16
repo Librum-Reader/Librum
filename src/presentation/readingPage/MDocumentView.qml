@@ -116,6 +116,8 @@ Pane {
                 selectionOptionsPopup.close();
             }
             
+            onContentXChanged: selectionOptionsPopup.close();
+            
             Component.onCompleted: root.setPage(
                                        Globals.selectedBook.currentPage - 1)
 
