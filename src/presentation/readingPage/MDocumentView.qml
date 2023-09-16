@@ -42,7 +42,7 @@ Pane {
         }
         
         function onTextSelectionFinished(centerX, topY)
-        {            
+        {
             selectionOptionsPopup.highlight = "";
             internal.openSelectionOptionsPopupAt(centerX, topY);
         }
@@ -377,9 +377,19 @@ Pane {
         
         function openSelectionOptionsPopupAt(centerX, topY)
         {
-            let pageOffset = pageView.contentY - activeFocusItem.y;
-            selectionOptionsPopup.x = centerX + pageView.x - selectionOptionsPopup.width / 2;
-            selectionOptionsPopup.y = topY - selectionOptionsPopup.height - pageOffset - 6;
+            let pageYOffset = pageView.contentY - activeFocusItem.y;
+            let pageXOffset = pageView.contentX - activeFocusItem.x;
+            let posX = centerX + pageView.x - selectionOptionsPopup.width / 2 - pageXOffset;
+            let posY = topY - selectionOptionsPopup.height - pageYOffset - 6;
+            
+            let spaceToRight = (pageView.x + pageView.width) - (posX + selectionOptionsPopup.width)
+            if(spaceToRight < 0)
+                posX = posX + spaceToRight;
+            
+            let spaceToLeft = (pageView.x + pageView.width) - (posX + selectionOptionsPopup.width)
+            
+            selectionOptionsPopup.x = posX;
+            selectionOptionsPopup.y = posY;
             
             selectionOptionsPopup.open()
         }
