@@ -19,6 +19,7 @@ public:
     QUuid getUuid() const;
     int getPageNumber() const;
     QColor getColor() const;
+    void setColor(const QColor& color);
     const QList<RectF>& getRects() const;
     void setRects(const QList<RectF>& rects);
     void setRects(const QList<QRectF>& rects);

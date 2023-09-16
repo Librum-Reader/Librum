@@ -117,6 +117,19 @@ void Book::addHighlight(const Highlight& highlight)
     m_highlights.append(highlight);
 }
 
+void Book::changeHighlightColor(const QUuid& uuid, const QColor& newColor)
+{
+    auto highlight =
+        std::ranges::find_if(m_highlights,
+                             [&uuid](const Highlight& highlight)
+                             {
+                                 return highlight.getUuid() == uuid;
+                             });
+
+    if(highlight != m_highlights.end())
+        highlight->setColor(newColor);
+}
+
 void Book::removeHighlight(QUuid uuid)
 {
     m_highlights.removeIf(

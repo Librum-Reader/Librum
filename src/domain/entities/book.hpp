@@ -78,6 +78,7 @@ public:
     const QList<Highlight>& getHighlights() const;
     void setHighlights(QList<Highlight>&& highlights);
     void addHighlight(const Highlight& highlight);
+    void changeHighlightColor(const QUuid& uuid, const QColor& newColor);
     void removeHighlight(QUuid uuid);
 
     const QDateTime& getCoverLastModified() const;

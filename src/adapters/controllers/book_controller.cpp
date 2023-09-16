@@ -74,6 +74,12 @@ void BookController::removeHighlight(const QUuid& uuid)
     m_bookService->removeHighlight(uuid);
 }
 
+void BookController::changeHighlightColor(const QUuid& uuid,
+                                          const QColor& color)
+{
+    m_bookService->changeHighlightColor(uuid, color);
+}
+
 void BookController::saveHighlights()
 {
     m_bookService->saveHighlights();

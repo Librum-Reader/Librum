@@ -6,8 +6,9 @@ import Librum.icons
 
 Popup
 {
-    id: selectionOptionsPopup
+    id: root
     property string highlight: ""
+    signal highlightOptionSelected(string uuid)
     
     width: selectionOptionsLayout.width
     height: 32
@@ -67,7 +68,7 @@ Popup
                 
                 onClicked: {
                     action.clickedFunction();
-                    selectionOptionsPopup.close();
+                    root.close();
                 }
             }
         }
@@ -83,10 +84,10 @@ Popup
         {
             text: "Copy"
             clickedFunction: function() {
-                if(selectionOptionsPopup.highlight == "")
+                if(root.highlight == "")
                     activeFocusItem.copySelectedText();
                 else
-                    activeFocusItem.copyTextFromHighlight(selectionOptionsPopup.highlight);
+                    activeFocusItem.copyTextFromHighlight(root.highlight);
             }
         }
         
@@ -96,7 +97,8 @@ Popup
         {
             text: "Highlight"
             clickedFunction: function() {
-                activeFocusItem.createHighlightFromCurrentSelection();
+                let uuid = activeFocusItem.createHighlightFromCurrentSelection("#F9D36B");
+                root.highlightOptionSelected(uuid);
             }
         }
         
@@ -107,9 +109,9 @@ Popup
             id: removeAction
             text: "Remove"
             textColor: Style.colorErrorText
-            visible: selectionOptionsPopup.highlight != ""
+            visible: root.highlight != ""
             clickedFunction: function() {
-                activeFocusItem.removeHighlight(selectionOptionsPopup.highlight);
+                activeFocusItem.removeHighlight(root.highlight);
             }
         }
     }

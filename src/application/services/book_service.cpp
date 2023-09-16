@@ -94,6 +94,12 @@ void BookService::removeHighlight(const QUuid& uuid)
     book->removeHighlight(uuid);
 }
 
+void BookService::changeHighlightColor(const QUuid& uuid, const QColor& color)
+{
+    auto book = getBook();
+    book->changeHighlightColor(uuid, color);
+}
+
 void BookService::saveHighlights()
 {
     // We need to have a extra method to save the highlights due to a

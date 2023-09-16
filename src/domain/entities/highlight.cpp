@@ -77,6 +77,11 @@ QColor Highlight::getColor() const
     return m_color;
 }
 
+void Highlight::setColor(const QColor& color)
+{
+    m_color = color;
+}
+
 const QList<RectF>& Highlight::getRects() const
 {
     return m_rects;
