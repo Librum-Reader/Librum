@@ -18,6 +18,14 @@ Popup
         radius: 4
     }
     
+    Image
+    {
+        id: triangleDecoration
+        x: parent.width / 2 - implicitWidth / 2
+        y: parent.y + parent.height - 1
+        source: Icons.popupDroplet
+        rotation: 180
+    }
     
     RowLayout
     {
