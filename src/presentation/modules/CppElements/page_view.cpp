@@ -387,7 +387,8 @@ bool PageView::mouseAboveSelection(const QPointF mouse)
     return false;
 }
 
-QString PageView::createHighlightFromCurrentSelection(const QString& hex)
+QString PageView::createHighlightFromCurrentSelection(const QString& hex,
+                                                      int alpha)
 {
     auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
 
@@ -402,6 +403,7 @@ QString PageView::createHighlightFromCurrentSelection(const QString& hex)
 
     auto pageNumber = m_pageNumber;
     auto color = QColor(hex);
+    color.setAlpha(alpha);
     auto rects = bufferedSelectionRects;
     Highlight highlight(pageNumber, color);
     highlight.setRects(rects);
@@ -422,9 +424,12 @@ void PageView::removeHighlight(const QString& uuid)
     update();
 }
 
-void PageView::changeHighlightColor(const QString& uuid, const QString& color)
+void PageView::changeHighlightColor(const QString& uuid, const QString& color,
+                                    int alpha)
 {
     QColor newColor(color);
+    newColor.setAlpha(alpha);
+
     m_bookController->changeHighlightColor(QUuid(uuid), newColor);
     m_bookController->saveHighlights();
 

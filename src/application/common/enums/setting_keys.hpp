@@ -28,6 +28,7 @@ enum class SettingKeys
     LoopAfterLastPage,
     CursorMode,
     DefaultHighlightColor,
+    HighlightOpacity,
 
     // General
     OpenBooksAfterCreation,

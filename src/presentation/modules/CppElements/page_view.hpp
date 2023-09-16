@@ -46,10 +46,11 @@ public:
 
     Q_INVOKABLE void copySelectedText();
     Q_INVOKABLE void setPointingCursor();
-    Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex);
+    Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
+                                                            int alpha);
     Q_INVOKABLE void removeHighlight(const QString& uuid);
     Q_INVOKABLE void changeHighlightColor(const QString& uuid,
-                                          const QString& color);
+                                          const QString& color, int alpha);
     Q_INVOKABLE void copyTextFromHighlight(const QString& uuid);
 
 
