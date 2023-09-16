@@ -27,7 +27,12 @@ enum class SettingKeys
     SmoothScrolling,
     LoopAfterLastPage,
     CursorMode,
-    DefaultHighlightColor,
+    DefaultHighlightColorName,
+    HighlightColorA,
+    HighlightColorB,
+    HighlightColorC,
+    HighlightColorD,
+    HighlightColorE,
     HighlightOpacity,
 
     // General

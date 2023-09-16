@@ -38,7 +38,7 @@ Popup
         component ColorItem: Rectangle
         {
             id: colorItem
-            property color probeColor
+            property string colorName
             
             Layout.fillHeight: true
             Layout.preferredWidth: 36
@@ -50,7 +50,7 @@ Popup
                 height: width
                 anchors.centerIn: parent
                 radius: width
-                color: colorItem.probeColor
+                color: SettingsController.appearanceSettings[colorItem.colorName]
             }
             
             MouseArea
@@ -61,12 +61,13 @@ Popup
                 
                 onClicked:
                 {
-                    root.colorSelected(colorItem.probeColor)
+                    root.colorSelected(SettingsController.appearanceSettings[colorItem.colorName]);
                     
                     // Remember the last color used
-                    SettingsController.setSetting(SettingKeys.DefaultHighlightColor, 
-                                                  colorItem.probeColor, 
+                    SettingsController.setSetting(SettingKeys.DefaultHighlightColorName, 
+                                                  colorItem.colorName, 
                                                   SettingGroups.Appearance);
+                    root.close();
                 }
             }
         }
@@ -80,35 +81,35 @@ Popup
         
         ColorItem
         {
-            probeColor: "#F9D36B"
+            colorName: "HighlightColorA"
         }
         
         Separator {}
         
         ColorItem
         {
-            probeColor: "#7CC767"
+            colorName: "HighlightColorB"
         }
         
         Separator {}
         
         ColorItem
         {
-            probeColor: "#69AFF2"
+            colorName: "HighlightColorC"
         }
         
         Separator {}
         
         ColorItem
         {
-            probeColor: "#F95C87"
+            colorName: "HighlightColorD"
         }
         
         Separator {}
         
         ColorItem
         {
-            probeColor: "#C786D7"
+            colorName: "HighlightColorE"
         }
     }
 }

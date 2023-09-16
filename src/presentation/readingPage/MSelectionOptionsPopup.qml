@@ -98,7 +98,8 @@ Popup
         {
             text: "Highlight"
             clickedFunction: function() {
-                let uuid = activeFocusItem.createHighlightFromCurrentSelection(SettingsController.appearanceSettings.DefaultHighlightColor,
+                let defaultColorName = SettingsController.appearanceSettings.DefaultHighlightColorName;
+                let uuid = activeFocusItem.createHighlightFromCurrentSelection(SettingsController.appearanceSettings[defaultColorName],
                                                                                SettingsController.appearanceSettings.HighlightOpacity);
                 root.highlightOptionSelected(uuid);
             }

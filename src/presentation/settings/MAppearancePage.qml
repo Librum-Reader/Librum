@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Dialogs
 import CustomComponents
 import Librum.style
 import Librum.icons
@@ -397,6 +398,154 @@ Page
                             // Need rebinding on reset
                             onSavedValueChanged: value = savedValue
                             onNewValueSelected: internal.saveSetting(SettingKeys.DefaultZoom, value)
+                        }
+                    }
+                }
+                
+                Pane
+                {
+                    id: highlightsBlock
+                    Layout.fillWidth: true
+                    Layout.topMargin: 24
+                    verticalPadding: 24
+                    horizontalPadding: internal.pagePadding
+                    background: Rectangle
+                    {
+                        color: Style.colorContainerBackground
+                        border.color: Style.colorContainerBorder
+                        radius: 4
+                        antialiasing: true
+                    }
+                    
+                    
+                    ColumnLayout
+                    {
+                        id: highlightsLayout
+                        anchors.fill: parent
+                        spacing: 0
+                        
+                        
+                        Label
+                        {
+                            id: highlightsTitle
+                            Layout.fillWidth: true
+                            text: "Highlights"
+                            font.pointSize: 17
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        Label
+                        {
+                            Layout.fillWidth: true
+                            Layout.topMargin: 24
+                            text: "Highlight colors"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        Pane
+                        {
+                            id: highlightColorBox
+                            property var currentColorButton
+                            
+                            Layout.preferredWidth: highlightColorBoxLayout.implicitWidth + leftPadding + rightPadding
+                            Layout.preferredHeight: 40
+                            Layout.topMargin: 8
+                            background: Rectangle
+                            {
+                                anchors.fill: parent
+                                border.width: 1
+                                border.color: Style.colorContainerBorder
+                                color: Style.colorControlBackground
+                            }
+                            leftPadding: 16
+                            rightPadding: 16
+                            verticalPadding: 0
+                            
+                            RowLayout
+                            {
+                                id: highlightColorBoxLayout
+                                height: parent.height
+                                spacing: 16
+                                
+                                component HighlightColorButton: Rectangle
+                                {
+                                    property string savedValue
+                                    property var settingKey
+                                    
+                                    implicitHeight: 18
+                                    implicitWidth: 18
+                                    Layout.alignment: Qt.AlignVCenter
+                                    radius: 16
+                                    color: savedValue
+                                    
+                                    MouseArea
+                                    {
+                                        anchors.fill: parent
+                                        
+                                        onClicked: {
+                                            highlightColorBox.currentColorButton = parent
+                                            colorDialog.selectedColor = savedValue
+                                            colorDialog.open()
+                                        }
+                                    }
+                                    
+                                    function changeColor(color)
+                                    {
+                                        internal.saveSetting(settingKey, color)
+                                    }
+                                    
+                                }
+                                
+                                component Separator: Rectangle
+                                {
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: 1
+                                    color: Style.colorSeparator
+                                }
+                                
+                                HighlightColorButton {
+                                    savedValue: SettingsController.appearanceSettings.HighlightColorA
+                                    settingKey: SettingKeys.HighlightColorA
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    savedValue: SettingsController.appearanceSettings.HighlightColorB
+                                    settingKey: SettingKeys.HighlightColorB
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    savedValue: SettingsController.appearanceSettings.HighlightColorC
+                                    settingKey: SettingKeys.HighlightColorC
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    savedValue: SettingsController.appearanceSettings.HighlightColorD
+                                    settingKey: SettingKeys.HighlightColorD
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    savedValue: SettingsController.appearanceSettings.HighlightColorE
+                                    settingKey: SettingKeys.HighlightColorE
+                                }
+                            }
+                        
+                            ColorDialog
+                            {
+                                id: colorDialog
+                                
+                                onAccepted: highlightColorBox.currentColorButton.changeColor(colorDialog.selectedColor)
+                            }
                         }
                     }
                 }

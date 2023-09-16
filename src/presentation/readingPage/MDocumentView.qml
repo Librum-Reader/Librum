@@ -218,7 +218,8 @@ Pane {
             (color) => {
                 if(colorSelectionPopup.highlight != "")
                 {
-                    activeFocusItem.changeHighlightColor(colorSelectionPopup.highlight, color,
+                    activeFocusItem.changeHighlightColor(colorSelectionPopup.highlight, 
+                                                         color,
                                                          SettingsController.appearanceSettings.HighlightOpacity);
                 }
             }

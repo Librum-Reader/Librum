@@ -10,6 +10,11 @@
     "SmoothScrolling": "false",
     "LoopAfterLastPage": "false",
     "CursorMode": "Hidden after delay",
-    "DefaultHighlightColor": "#F9D36B",
+    "DefaultHighlightColorName": "HighlightColorA",
+    "HighlightColorA": "#F9D36B",
+    "HighlightColorB": "#7CC767",
+    "HighlightColorC": "#946BDE",
+    "HighlightColorD": "#F95C87",
+    "HighlightColorE": "#69AFF2",
     "HighlightOpacity": "200"
 }
