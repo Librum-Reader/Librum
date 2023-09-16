@@ -20,133 +20,90 @@ Popup
         radius: 4
     }
     
+    
     RowLayout
     {
         id: selectionOptionsLayout
         height: parent.height
         spacing: 2
         
-        Rectangle
+        component SelectionOptionsPopupItem: Rectangle
         {
-            id: copyAction
+            id: action
+            property string text
+            property color textColor: Style.colorText
+            property var clickedFunction: function() {}
+            
             Layout.fillHeight: true
-            Layout.preferredWidth: copyActionText.implicitWidth
+            Layout.preferredWidth: actionText.implicitWidth
             color: "transparent"
-            opacity: copyActionArea.pressed ? 0.8 : 1
+            opacity: actionArea.pressed ? 0.8 : 1
             
             Label
             {
-                id: copyActionText
+                id: actionText
                 height: parent.height
-                color:  Style.colorText
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                font.pointSize: 11
                 padding: 8
-                text: "Copy"
+                text: action.text
+                color:  action.textColor
+                font.pointSize: 11
             }
             
             MouseArea
             {
-                id: copyActionArea
+                id: actionArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
                 onContainsMouseChanged: activeFocusItem.setPointingCursor()
                 
                 onClicked: {
-                    if(selectionOptionsPopup.highlight == "")
-                        activeFocusItem.copySelectedText();
-                    else
-                        activeFocusItem.copyTextFromHighlight(selectionOptionsPopup.highlight);
-                        
+                    action.clickedFunction();
                     selectionOptionsPopup.close();
                 }
             }
         }
         
-        Rectangle
+        component Separator: Rectangle
         {
             Layout.fillHeight: true
             Layout.preferredWidth: 2
             color: Style.colorSeparator
         }
         
-        Rectangle
+        SelectionOptionsPopupItem
         {
-            id: highlightAction
-            Layout.fillHeight: true
-            Layout.preferredWidth: highlightActionText.implicitWidth
-            color: "transparent"
-            opacity: highlightActionArea.pressed ? 0.8 : 1
-            
-            Label
-            {
-                id: highlightActionText
-                height: parent.height
-                color:  Style.colorText
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                font.pointSize: 11
-                padding: 8
-                text: "Highlight"
-            }
-            
-            MouseArea
-            {
-                id: highlightActionArea
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-                onContainsMouseChanged: activeFocusItem.setPointingCursor()
-                
-                onClicked: {
-                    activeFocusItem.createHighlightFromCurrentSelection();
-                    selectionOptionsPopup.close();
-                }
+            text: "Copy"
+            clickedFunction: function() {
+                if(selectionOptionsPopup.highlight == "")
+                    activeFocusItem.copySelectedText();
+                else
+                    activeFocusItem.copyTextFromHighlight(selectionOptionsPopup.highlight);
             }
         }
         
-        Rectangle
+        Separator {}
+        
+        SelectionOptionsPopupItem
         {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 2
-            color: Style.colorSeparator
+            text: "Highlight"
+            clickedFunction: function() {
+                activeFocusItem.createHighlightFromCurrentSelection();
+            }
         }
         
-        Rectangle
+        Separator {}
+        
+        SelectionOptionsPopupItem
         {
             id: removeAction
-            Layout.fillHeight: true
-            Layout.preferredWidth: removeActionText.implicitWidth
-            color: "transparent"
-            opacity: removeActionArea.pressed ? 0.8 : 1
-            visible: selectionOptionsPopup.highlight !== ""
-            
-            Label
-            {
-                id: removeActionText
-                height: parent.height
-                color:  Style.colorErrorText
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                font.pointSize: 11
-                padding: 8
-                text: "Remove"
-            }
-            
-            MouseArea
-            {
-                id: removeActionArea
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-                onContainsMouseChanged: activeFocusItem.setPointingCursor()
-                
-                onClicked: {
-                    activeFocusItem.removeHighlight(selectionOptionsPopup.highlight);
-                    selectionOptionsPopup.close();
-                }
+            text: "Remove"
+            textColor: Style.colorErrorText
+            visible: selectionOptionsPopup.highlight != ""
+            clickedFunction: function() {
+                activeFocusItem.removeHighlight(selectionOptionsPopup.highlight);
             }
         }
     }
