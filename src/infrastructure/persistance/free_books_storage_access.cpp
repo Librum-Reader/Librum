@@ -7,9 +7,9 @@ namespace infrastructure::persistence
 {
 
 void FreeBooksStorageAccess::fetchFirstBooksMetadataPageWithFilter(
-    const QString& author, const QString& title)
+    const QString& authorsAndTitle)
 {
-    auto request = createGetBooksMetadataRequest(author, title);
+    auto request = createGetBooksMetadataRequest(authorsAndTitle);
 
     auto reply = m_networkAccessManager.get(request);
 
@@ -121,18 +121,15 @@ void FreeBooksStorageAccess::getBookMedia(const int id, const QUuid& uuid,
 }
 
 QNetworkRequest FreeBooksStorageAccess::createGetBooksMetadataRequest(
-    const QString& author, const QString& title)
+    const QString& authorsAndTitle)
 {
-    if(!author.isEmpty() || !title.isEmpty())
+    if(!authorsAndTitle.isEmpty())
     {
-        QString formattedAuthor = author;
-        QString formattedTitle = title;
-        formattedAuthor.replace(" ", m_whitespaceCode);
-        formattedTitle.replace(" ", m_whitespaceCode);
+        QString formattedAuthorsAndTitle = authorsAndTitle;
+        formattedAuthorsAndTitle.replace(" ", m_whitespaceCode);
 
         return createRequest(data::getFreeBooksMetadataEndpoint +
-                             "?search=" + formattedAuthor + m_whitespaceCode +
-                             formattedTitle);
+                             "?search=" + formattedAuthorsAndTitle);
     }
 
     return createRequest(data::getFreeBooksMetadataEndpoint + "/");

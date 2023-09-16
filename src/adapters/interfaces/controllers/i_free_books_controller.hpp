@@ -14,11 +14,13 @@ class IFreeBooksController : public QObject
 public:
     virtual ~IFreeBooksController() noexcept = default;
 
-    Q_INVOKABLE virtual void fetchFirstBooksMetadataPageWithFilter(
-        const QString& author, const QString& title) = 0;
+    Q_INVOKABLE virtual void fetchFirstBooksMetadataPage() = 0;
     Q_INVOKABLE virtual void getBookMedia(const int id, const QString& url) = 0;
     Q_INVOKABLE virtual void getBookCover(const int id) = 0;
     Q_INVOKABLE virtual void deleteBookCover(const int id) = 0;
+    Q_INVOKABLE virtual void setFilterAuthorsAndTitle(
+        const QString& authorsAndTitle) = 0;
+    Q_INVOKABLE virtual void clearAllFilters() = 0;
     virtual data_models::FreeBooksModel* getFreeBooksModel() = 0;
 
 signals:

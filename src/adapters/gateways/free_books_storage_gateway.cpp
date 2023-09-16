@@ -32,10 +32,10 @@ FreeBooksStorageGateway::FreeBooksStorageGateway(
 }
 
 void FreeBooksStorageGateway::fetchFirstBooksMetadataPageWithFilter(
-    const QString& author, const QString& title)
+    const QString& authorsAndTitle)
 {
-    m_freeBooksStorageAccess->fetchFirstBooksMetadataPageWithFilter(author,
-                                                                    title);
+    m_freeBooksStorageAccess->fetchFirstBooksMetadataPageWithFilter(
+        authorsAndTitle);
 }
 
 void FreeBooksStorageGateway::fetchBooksMetadataPage(const QString& url)

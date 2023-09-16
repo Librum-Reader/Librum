@@ -16,7 +16,7 @@ FreeBooksController::FreeBooksController(
     connect(
         m_freeBooksService,
         &application::IFreeBooksService::fetchingFirstMetadataPageSuccessful,
-        this, &FreeBooksController::setIsFirstBooksMetadataPageFetched);
+        this, &FreeBooksController::proccessFetchingFirstMetadataPageResult);
 
     connect(&m_freeBooksModel,
             &adapters::data_models::FreeBooksModel::fetchBooksMetadataPage,
@@ -70,13 +70,14 @@ FreeBooksController::FreeBooksController(
         &data_models::FreeBooksModel::downloadingBookMediaProgressChanged);
 }
 
-void FreeBooksController::fetchFirstBooksMetadataPageWithFilter(
-    const QString& author, const QString& title)
+void FreeBooksController::fetchFirstBooksMetadataPage()
 {
-    if(m_isFirstBooksMetadataPageFetched)
+    if(!m_isFirstBooksMetadataPageFetchingAllowed)
         return;
 
-    m_freeBooksService->fetchFirstBooksMetadataPageWithFilter(author, title);
+    deleteAllBooks();
+    m_freeBooksService->fetchFirstBooksMetadataPageWithFilter(
+        m_filterAuthorsAndTitle);
 }
 
 void FreeBooksController::getBookMedia(const int id, const QString& url)
@@ -94,14 +95,34 @@ void FreeBooksController::deleteBookCover(const int id)
     m_freeBooksService->deleteBookCover(id);
 }
 
+void FreeBooksController::setFilterAuthorsAndTitle(
+    const QString& authorsAndTitle)
+{
+    m_filterAuthorsAndTitle = authorsAndTitle;
+    m_isFirstBooksMetadataPageFetchingAllowed = true;
+}
+
+void FreeBooksController::clearAllFilters()
+{
+    m_filterAuthorsAndTitle.clear();
+    m_isFirstBooksMetadataPageFetchingAllowed = true;
+}
+
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()
 {
     return &m_freeBooksModel;
 }
 
-void FreeBooksController::setIsFirstBooksMetadataPageFetched(const bool value)
+void FreeBooksController::proccessFetchingFirstMetadataPageResult(
+    const bool result)
 {
-    m_isFirstBooksMetadataPageFetched = value;
+    m_isFirstBooksMetadataPageFetchingAllowed = !result;
+}
+
+void FreeBooksController::deleteAllBooks()
+{
+    m_freeBooksService->deleteAllBooks();
+    m_freeBooksModel.clear();
 }
 
 }  // namespace adapters::controllers

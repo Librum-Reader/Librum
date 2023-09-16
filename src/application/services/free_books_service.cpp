@@ -38,10 +38,10 @@ FreeBooksService::FreeBooksService(
 }
 
 void FreeBooksService::fetchFirstBooksMetadataPageWithFilter(
-    const QString& author, const QString& title)
+    const QString& authorsAndTitle)
 {
-    m_freeBooksStorageGateway->fetchFirstBooksMetadataPageWithFilter(author,
-                                                                     title);
+    m_freeBooksStorageGateway->fetchFirstBooksMetadataPageWithFilter(
+        authorsAndTitle);
 }
 
 void FreeBooksService::getBookMedia(const int id, const QString& url)
@@ -88,6 +88,11 @@ void FreeBooksService::deleteBookCover(const int id)
 std::vector<FreeBook>& FreeBooksService::getFreeBooks()
 {
     return m_freeBooks;
+}
+
+void FreeBooksService::deleteAllBooks()
+{
+    m_freeBooks.clear();
 }
 
 void FreeBooksService::fetchBooksMetadataPage(const QString& url)

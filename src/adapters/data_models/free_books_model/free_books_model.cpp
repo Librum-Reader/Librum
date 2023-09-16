@@ -133,6 +133,18 @@ void FreeBooksModel::downloadingBookMediaProgressChanged(int row)
                      { MediaDownloadProgressRole });
 }
 
+void FreeBooksModel::clear()
+{
+    beginResetModel();
+
+    m_booksLoadedCount = 0;
+    m_booksTotalCount = 0;
+    m_prevMetadataPageUrl.clear();
+    m_nextMetadataPageUrl.clear();
+
+    endResetModel();
+}
+
 bool FreeBooksModel::canFetchMore(const QModelIndex& parent) const
 {
     if(parent.isValid())

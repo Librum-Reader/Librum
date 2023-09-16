@@ -5,88 +5,72 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 
-
-Popup
-{
+Popup {
     id: root
-    signal filterQuerySent
-    
+    signal filterQuerySent(string yearFrom, string yearTo, string language)
+
     padding: 0
     implicitWidth: 273
     implicitHeight: layout.height
-    background: Rectangle { color: "transparent" }
-    
-    
-    MFlickWrapper
-    {
+    background: Rectangle {
+        color: "transparent"
+    }
+
+    MFlickWrapper {
         anchors.fill: parent
         contentHeight: layout.height
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
-            
-            
-            Image
-            {
+
+            Image {
                 id: topTriangleDecoration
                 Layout.leftMargin: 14
                 Layout.bottomMargin: -1
                 source: Icons.popupDroplet
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: container
                 Layout.fillWidth: true
                 padding: 14
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorPopupBackground
                     border.width: 1
                     border.color: Style.colorContainerBorder
                     radius: 6
                     antialiasing: true
                 }
-                
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     id: inputLayout
                     width: parent.width
                     spacing: 11
-                    
-                    
-                    MLabeledInputBox
-                    {
-                        id: authorInput
-                        Layout.fillWidth: true
-                        boxHeight: 30
-                        headerToBoxSpacing: 2
-                        placeholderContent: "e.g. Uncle bob"
-                        inputFontSize: 11
-                        placeholderColor: Style.colorPlaceholderText
-                        headerText: "Authors"
-                        headerFontSize: 10.5
-                        headerFontWeight: Font.Bold
-                        headerFontColor: Style.colorLightText
-                        textPadding: 8
-                        borderWidth: 1
-                        borderRadius: 4
-                    }
-                    
-                    RowLayout
-                    {
+
+                    // MLabeledInputBox {
+                    //     id: authorsInput
+                    //     Layout.fillWidth: true
+                    //     boxHeight: 30
+                    //     headerToBoxSpacing: 2
+                    //     placeholderContent: "e.g. Uncle bob"
+                    //     inputFontSize: 11
+                    //     placeholderColor: Style.colorPlaceholderText
+                    //     headerText: "Authors"
+                    //     headerFontSize: 10.5
+                    //     headerFontWeight: Font.Bold
+                    //     headerFontColor: Style.colorLightText
+                    //     textPadding: 8
+                    //     borderWidth: 1
+                    //     borderRadius: 4
+                    // }
+                    RowLayout {
                         id: timeRange
                         Layout.fillWidth: true
                         spacing: 17
-                        
-                        
-                        MLabeledInputBox
-                        {
+
+                        MLabeledInputBox {
                             id: yearFromInput
                             Layout.fillWidth: true
                             boxHeight: 30
@@ -102,9 +86,8 @@ Popup
                             borderWidth: 1
                             borderRadius: 4
                         }
-                        
-                        MLabeledInputBox
-                        {
+
+                        MLabeledInputBox {
                             id: yearToInput
                             Layout.fillWidth: true
                             boxHeight: 30
@@ -121,43 +104,80 @@ Popup
                             borderRadius: 4
                         }
                     }
-                    
-                    MComboBox
-                    {
+
+                    MComboBox {
                         id: languagesComboBox
                         Layout.fillWidth: true
                         Layout.preferredHeight: 49
                         multiSelect: true
                         headerText: "Language"
                         dropdownIconSize: 9
-                        
-                        model: ListModel
-                        {
-                            ListElement { text: "English" }
-                            ListElement { text: "German"  }
-                            ListElement { text: "Italian" }
-                            ListElement { text: "French" }
-                            ListElement { text: "Romanian" }
-                            ListElement { text: "Spanish" }
-                            ListElement { text: "Mandarin" }
-                            ListElement { text: "Portugese" }
-                            ListElement { text: "Hindi" }
-                            ListElement { text: "Bengali" }
-                            ListElement { text: "Russian" }
-                            ListElement { text: "Arabic" }
-                            ListElement { text: "Japanese" }
-                            ListElement { text: "Indonesian" }
-                            ListElement { text: "Turkish" }
-                            ListElement { text: "Korean" }
-                            ListElement { text: "Hungarian" }
-                            ListElement { text: "Thai"  }
-                            ListElement { text: "Swahli" }
-                            ListElement { text: "Dutch" }
+
+                        model: ListModel {
+                            ListElement {
+                                text: "English"
+                            }
+                            ListElement {
+                                text: "German"
+                            }
+                            ListElement {
+                                text: "Italian"
+                            }
+                            ListElement {
+                                text: "French"
+                            }
+                            ListElement {
+                                text: "Romanian"
+                            }
+                            ListElement {
+                                text: "Spanish"
+                            }
+                            ListElement {
+                                text: "Mandarin"
+                            }
+                            ListElement {
+                                text: "Portugese"
+                            }
+                            ListElement {
+                                text: "Hindi"
+                            }
+                            ListElement {
+                                text: "Bengali"
+                            }
+                            ListElement {
+                                text: "Russian"
+                            }
+                            ListElement {
+                                text: "Arabic"
+                            }
+                            ListElement {
+                                text: "Japanese"
+                            }
+                            ListElement {
+                                text: "Indonesian"
+                            }
+                            ListElement {
+                                text: "Turkish"
+                            }
+                            ListElement {
+                                text: "Korean"
+                            }
+                            ListElement {
+                                text: "Hungarian"
+                            }
+                            ListElement {
+                                text: "Thai"
+                            }
+                            ListElement {
+                                text: "Swahli"
+                            }
+                            ListElement {
+                                text: "Dutch"
+                            }
                         }
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: applyButton
                         Layout.fillWidth: true
                         Layout.preferredHeight: 28
@@ -169,8 +189,10 @@ Popup
                         fontSize: 10.5
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
-                        
-                        onClicked: root.filterQuerySent()
+
+                        onClicked: root.filterQuerySent(yearFromInput.text,
+                                                        yearToInput.text,
+                                                        languagesComboBox.text)
                     }
                 }
             }

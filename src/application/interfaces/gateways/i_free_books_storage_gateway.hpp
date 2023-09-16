@@ -14,7 +14,7 @@ public:
     virtual ~IFreeBooksStorageGateway() noexcept = default;
 
     virtual void fetchFirstBooksMetadataPageWithFilter(
-        const QString& author, const QString& title) = 0;
+        const QString& authorsAndTitle) = 0;
     virtual void fetchBooksMetadataPage(const QString& url) = 0;
     virtual void getBookCover(const int id, const QString& url) = 0;
     virtual void getBookMedia(const int id, const QUuid& uuid,

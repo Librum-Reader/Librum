@@ -46,6 +46,7 @@ public slots:
     void startDeletingBook(int index);
     void endDeletingBook();
     void downloadingBookMediaProgressChanged(int row);
+    void clear();
 
 signals:
     void fetchBooksMetadataPage(const QString& url);

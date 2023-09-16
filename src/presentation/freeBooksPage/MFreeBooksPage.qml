@@ -14,7 +14,10 @@ Page {
     }
 
     Component.onCompleted: {
-        FreeBooksController.fetchFirstBooksMetadataPageWithFilter("", "")
+        FreeBooksController.fetchFirstBooksMetadataPage()
+    }
+    Component.onDestruction: {
+        FreeBooksController.clearAllFilters()
     }
 
     ColumnLayout {
@@ -37,6 +40,11 @@ Page {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignLeft
             Layout.topMargin: 45
+            onSearchForAuthorsAndTitleTriggered: authorsAndTitle => {
+                                                     FreeBooksController.setFilterAuthorsAndTitle(
+                                                         authorsAndTitle)
+                                                     FreeBooksController.fetchFirstBooksMetadataPage()
+                                                 }
         }
 
         Pane {

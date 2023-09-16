@@ -13,20 +13,24 @@ class FreeBooksController : public IFreeBooksController
 public:
     FreeBooksController(application::IFreeBooksService* bookService);
 
-    void fetchFirstBooksMetadataPageWithFilter(const QString& author,
-                                               const QString& title) override;
+    void fetchFirstBooksMetadataPage() override;
     void getBookMedia(const int id, const QString& url) override;
     void getBookCover(const int id) override;
     void deleteBookCover(const int id) override;
+    void setFilterAuthorsAndTitle(const QString& authorsAndTitle) override;
+    void clearAllFilters() override;
     data_models::FreeBooksModel* getFreeBooksModel() override;
 
 private slots:
-    void setIsFirstBooksMetadataPageFetched(const bool value);
+    void proccessFetchingFirstMetadataPageResult(const bool result);
 
 private:
     application::IFreeBooksService* m_freeBooksService;
     data_models::FreeBooksModel m_freeBooksModel;
-    bool m_isFirstBooksMetadataPageFetched = false;
+    QString m_filterAuthorsAndTitle;
+    bool m_isFirstBooksMetadataPageFetchingAllowed = true;
+
+    void deleteAllBooks();
 };
 
 }  // namespace adapters::controllers

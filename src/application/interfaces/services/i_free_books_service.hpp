@@ -14,12 +14,13 @@ public:
     virtual ~IFreeBooksService() noexcept = default;
 
     virtual void fetchFirstBooksMetadataPageWithFilter(
-        const QString& author, const QString& title) = 0;
+        const QString& authorsAndTitle) = 0;
     virtual void getBookMedia(const int id, const QString& url) = 0;
     virtual void getBookCover(const int id) = 0;
     virtual void deleteBookCover(const int id) = 0;
     virtual const std::vector<domain::value_objects::FreeBook>&
         getFreeBooks() = 0;
+    virtual void deleteAllBooks() = 0;
 
 public slots:
     virtual void fetchBooksMetadataPage(const QString& url) = 0;
