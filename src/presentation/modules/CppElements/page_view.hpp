@@ -97,7 +97,7 @@ private:
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;
     bool m_doubleClickHold = false;
-    bool m_disableHoverEvents;
+    bool m_disableHoverEvents = false;
 };
 
 }  // namespace cpp_elements

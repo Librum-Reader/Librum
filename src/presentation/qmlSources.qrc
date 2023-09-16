@@ -95,5 +95,6 @@
         <file>modules/CustomComponents/MToolTip.qml</file>
         <file>modules/CustomComponents/MConfirmAccountDeletionPopup.qml</file>
         <file>settings/updatesPage/MWindowsUpdatingPopup.qml</file>
+        <file>readingPage/MSelectionOptionsPopup.qml</file>
     </qresource>
 </RCC>
