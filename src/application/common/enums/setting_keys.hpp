@@ -27,6 +27,7 @@ enum class SettingKeys
     SmoothScrolling,
     LoopAfterLastPage,
     CursorMode,
+    DefaultHighlightColor,
 
     // General
     OpenBooksAfterCreation,

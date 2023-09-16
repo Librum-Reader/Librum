@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
 Popup
 {
@@ -58,7 +59,15 @@ Popup
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 
-                onClicked: root.colorSelected(colorItem.probeColor)
+                onClicked:
+                {
+                    root.colorSelected(colorItem.probeColor)
+                    
+                    // Remember the last color used
+                    SettingsController.setSetting(SettingKeys.DefaultHighlightColor, 
+                                                  colorItem.probeColor, 
+                                                  SettingGroups.Appearance);
+                }
             }
         }
         

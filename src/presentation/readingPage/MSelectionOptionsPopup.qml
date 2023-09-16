@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
 Popup
 {
@@ -97,7 +98,7 @@ Popup
         {
             text: "Highlight"
             clickedFunction: function() {
-                let uuid = activeFocusItem.createHighlightFromCurrentSelection("#F9D36B");
+                let uuid = activeFocusItem.createHighlightFromCurrentSelection(SettingsController.appearanceSettings.DefaultHighlightColor);
                 root.highlightOptionSelected(uuid);
             }
         }
