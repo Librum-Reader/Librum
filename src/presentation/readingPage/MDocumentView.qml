@@ -108,8 +108,6 @@ Pane {
                     if(implicitWidth > pageView.contentWidth)
                         pageView.widestItem = page.implicitWidth;
                 }
-                
-                disableHoverEvents: selectionOptionsPopup.containsMouse
             }
 
             // Set the book's current page once the model is loaded

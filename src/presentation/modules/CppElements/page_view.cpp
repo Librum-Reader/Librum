@@ -261,9 +261,6 @@ void PageView::mouseMoveEvent(QMouseEvent* event)
 
 void PageView::hoverMoveEvent(QHoverEvent* event)
 {
-    if(m_disableHoverEvents)
-        return;
-
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
@@ -576,16 +573,6 @@ void PageView::setColorInverted(bool newColorInverted)
         update();
 
     m_firstTimeColorInverted = false;
-}
-
-bool PageView::disableHoverEvents() const
-{
-    return m_disableHoverEvents;
-}
-
-void PageView::setDisableHoverEvents(bool newDisableHoverEvents)
-{
-    m_disableHoverEvents = newDisableHoverEvents;
 }
 
 }  // namespace cpp_elements

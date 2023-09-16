@@ -27,9 +27,6 @@ class PRESENTATION_EXPORT PageView : public QQuickItem
         int implicitHeight READ getImplicitHeight NOTIFY implicitHeightChanged)
     Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
     Q_PROPERTY(bool colorInverted WRITE setColorInverted)
-    Q_PROPERTY(bool disableHoverEvents READ disableHoverEvents WRITE
-                   setDisableHoverEvents)
-
 
 public:
     PageView();
@@ -97,7 +94,6 @@ private:
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;
     bool m_doubleClickHold = false;
-    bool m_disableHoverEvents = false;
 };
 
 }  // namespace cpp_elements

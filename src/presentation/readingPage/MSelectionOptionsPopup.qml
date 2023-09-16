@@ -2,14 +2,12 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.icons
 
 Popup
 {
     id: selectionOptionsPopup
     property string highlight: ""
-    property bool containsMouse: copyActionArea.containsMouse ||
-                                 highlightActionArea.containsMouse ||
-                                 removeActionArea.containsMouse
     
     width: selectionOptionsLayout.width
     height: 32
