@@ -213,16 +213,6 @@ Pane {
     
     MColorSelectionPopup {
         id: colorSelectionPopup
-        
-        onColorSelected: 
-            (color) => {
-                if(colorSelectionPopup.highlight != "")
-                {
-                    activeFocusItem.changeHighlightColor(colorSelectionPopup.highlight, 
-                                                         color,
-                                                         SettingsController.appearanceSettings.HighlightOpacity);
-                }
-            }
     }
     
     function zoom(factor) {

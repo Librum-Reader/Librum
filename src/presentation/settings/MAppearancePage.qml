@@ -439,7 +439,7 @@ Page
                         {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Highlight colors"
+                            text: "Colors"
                             font.pointSize: 13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -472,8 +472,8 @@ Page
                                 
                                 component HighlightColorButton: Rectangle
                                 {
-                                    property string savedValue
-                                    property var settingKey
+                                    property string settingName
+                                    property string savedValue: SettingsController.appearanceSettings[settingName]
                                     
                                     implicitHeight: 18
                                     implicitWidth: 18
@@ -494,9 +494,14 @@ Page
                                     
                                     function changeColor(color)
                                     {
-                                        internal.saveSetting(settingKey, color)
+                                        internal.saveSetting(SettingKeys[settingName], color)
                                     }
                                     
+                                    function rebind()
+                                    {
+                                        savedValue = Qt.binding(function() { return SettingsController.appearanceSettings[settingName]; })
+                                        color = savedValue;
+                                    }
                                 }
                                 
                                 component Separator: Rectangle
@@ -507,36 +512,31 @@ Page
                                 }
                                 
                                 HighlightColorButton {
-                                    savedValue: SettingsController.appearanceSettings.HighlightColorA
-                                    settingKey: SettingKeys.HighlightColorA
+                                    settingName: "HighlightColorA"
                                 }
                                 
                                 Separator {}
                                 
                                 HighlightColorButton {
-                                    savedValue: SettingsController.appearanceSettings.HighlightColorB
-                                    settingKey: SettingKeys.HighlightColorB
+                                    settingName: "HighlightColorB"
                                 }
                                 
                                 Separator {}
                                 
                                 HighlightColorButton {
-                                    savedValue: SettingsController.appearanceSettings.HighlightColorC
-                                    settingKey: SettingKeys.HighlightColorC
+                                    settingName: "HighlightColorC"
                                 }
                                 
                                 Separator {}
                                 
                                 HighlightColorButton {
-                                    savedValue: SettingsController.appearanceSettings.HighlightColorD
-                                    settingKey: SettingKeys.HighlightColorD
+                                    settingName: "HighlightColorD"
                                 }
                                 
                                 Separator {}
                                 
                                 HighlightColorButton {
-                                    savedValue: SettingsController.appearanceSettings.HighlightColorE
-                                    settingKey: SettingKeys.HighlightColorE
+                                    settingName: "HighlightColorE"
                                 }
                             }
                         
@@ -544,9 +544,25 @@ Page
                             {
                                 id: colorDialog
                                 
-                                onAccepted: highlightColorBox.currentColorButton.changeColor(colorDialog.selectedColor)
+                                onSelectedColorChanged: highlightColorBox.currentColorButton.color = selectedColor
+                                
+                                onAccepted: {
+                                    highlightColorBox.currentColorButton.changeColor(colorDialog.selectedColor)
+                                    highlightColorBox.currentColorButton.rebind()
+                                }
+                                onRejected: highlightColorBox.currentColorButton.rebind()
                             }
                         }
+                    
+//                        Label
+//                        {
+//                            Layout.fillWidth: true
+//                            Layout.topMargin: 24
+//                            text: "Opacity"
+//                            font.pointSize: 13
+//                            font.weight: Font.DemiBold
+//                            color: Style.colorText
+//                        }
                     }
                 }
                 

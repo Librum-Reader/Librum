@@ -61,7 +61,10 @@ Popup
                 
                 onClicked:
                 {
-                    root.colorSelected(SettingsController.appearanceSettings[colorItem.colorName]);
+                    // Change highlight color
+                    activeFocusItem.changeHighlightColor(colorSelectionPopup.highlight, 
+                                                         SettingsController.appearanceSettings[colorItem.colorName],
+                                                         SettingsController.appearanceSettings.HighlightOpacity);
                     
                     // Remember the last color used
                     SettingsController.setSetting(SettingKeys.DefaultHighlightColorName, 
