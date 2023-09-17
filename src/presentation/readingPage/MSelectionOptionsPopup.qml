@@ -29,6 +29,17 @@ Popup
         }
     }
     
+    Shortcut
+    {
+        sequence: SettingsController.shortcuts.RemoveHighlight
+        onActivated: {
+            if(root.highlight != "")
+                activeFocusItem.removeHighlight(root.highlight);
+            
+            root.close()
+        }
+    }
+    
     Image
     {
         id: triangleDecoration

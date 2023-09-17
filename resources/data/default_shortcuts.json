@@ -18,5 +18,6 @@
     "ToggleSpeaking": "F5",
     "ReloadApplication": "Ctrl+R",
     "AddBook": "Ctrl+N",
-    "CreateHighlight": "H"
+    "CreateHighlight": "H",
+    "RemoveHighlight": "Backspace"
 }

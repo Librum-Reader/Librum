@@ -59,6 +59,7 @@ enum class SettingKeys
     ReloadApplication,
     AddBook,
     CreateHighlight,
+    RemoveHighlight,
 
     SettingKeys_END
 };
