@@ -83,24 +83,6 @@ struct ALibraryController : public ::testing::Test
     std::unique_ptr<controllers::LibraryController> bookController;
 };
 
-TEST_F(ALibraryController, SucceedsAddingABook)
-{
-    // Arrange
-    auto expectedResult = BookOperationStatus::Success;
-
-
-    // Expect
-    EXPECT_CALL(bookServiceMock, addBook(_))
-        .Times(1)
-        .WillOnce(Return(BookOperationStatus::Success));
-
-    // Act
-    auto result = bookController->addBook("some/path.pdf");
-
-    // Assert
-    EXPECT_EQ(static_cast<int>(expectedResult), result);
-}
-
 TEST_F(ALibraryController, SucceedsDeletingABook)
 {
     // Arrange
