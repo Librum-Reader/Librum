@@ -51,6 +51,9 @@ Pane {
         
         function onHighlightSelected(centerX, topY, highlightUuid)
         {
+            // Remove selection if there is one when selecting a highlight
+            activeFocusItem.removeSelection()
+            
             selectionOptionsPopup.highlight = highlightUuid;
             
             selectionOptionsPopup.highlightCenterX = centerX;

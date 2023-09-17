@@ -45,6 +45,7 @@ public:
         adapters::controllers::BookController* newBookController);
 
     Q_INVOKABLE void copySelectedText();
+    Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void setPointingCursor();
     Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
                                                             int alpha);
@@ -73,7 +74,6 @@ private:
     void selectSingleWord();
     void selectMultipleWords();
     void selectLine();
-    void removeSelection();
     void createSelection();
     void paintSelectionOnPage(QPainter& painter);
 
