@@ -500,7 +500,7 @@ Page
                                     function rebind()
                                     {
                                         savedValue = Qt.binding(function() { return SettingsController.appearanceSettings[settingName]; })
-                                        color = savedValue;
+                                        color = Qt.binding(function() { return savedValue });
                                     }
                                 }
                                 
@@ -554,15 +554,50 @@ Page
                             }
                         }
                     
-//                        Label
-//                        {
-//                            Layout.fillWidth: true
-//                            Layout.topMargin: 24
-//                            text: "Opacity"
-//                            font.pointSize: 13
-//                            font.weight: Font.DemiBold
-//                            color: Style.colorText
-//                        }
+                        Label
+                        {
+                            Layout.fillWidth: true
+                            Layout.topMargin: 24
+                            text: "Opacity"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        RowLayout
+                        {
+                            spacing: 16
+                            
+                            MSlider
+                            {
+                                id: highlightOpacitySlider
+                                Layout.alignment: Qt.AlignVCenter
+                                value: SettingsController.appearanceSettings.HighlightOpacity
+                                
+                                onControlledValueChanged: (value) => internal.saveSetting(SettingKeys.HighlightOpacity, value)
+                            }
+                            
+                            MLabeledInputBox
+                            {
+                                Layout.preferredWidth: 72
+                                Layout.preferredHeight: implicitHeight
+                                boxHeight: 36
+                                hasHeader: false
+                                textPadding: 20
+                                text: highlightOpacitySlider.value
+                                validator: IntValidator { bottom: 0; top: 255 }
+                                
+                                onEdited:
+                                {
+                                    if(text > 255)
+                                        text = 255
+                                    else if(text < 0)
+                                        text = 0
+                                    
+                                    internal.saveSetting(SettingKeys.HighlightOpacity, text)
+                                }
+                            }
+                        }
                     }
                 }
                 

@@ -19,6 +19,7 @@ Item
     property bool clearErrorOnEdit: true
     property string errorText
     property double errorFontSize: 11
+    property bool hasHeader: true
     property string headerText
     property int headerFontWeight: Font.Medium
     property double headerFontSize: 10.5
@@ -32,6 +33,7 @@ Item
     property string image
     property string toggledImage
     property bool textHidden: toggledImage.length > 0 ? true : false
+    property var validator: null
     signal edited
     
     implicitWidth: 100
@@ -51,6 +53,7 @@ Item
         {
             id: header
             Layout.fillWidth: true
+            visible: root.hasHeader
             text: root.headerText
             font.pointSize: root.headerFontSize
             font.weight: root.headerFontWeight
@@ -95,6 +98,7 @@ Item
                     placeholderTextColor: root.placeholderColor
                     echoMode: root.textHidden ? TextInput.Password : TextInput.Normal
                     selectionColor: Style.colorTextSelection
+                    validator: root.validator
                     selectedTextColor: root.inputFontColor
                     background: Rectangle   
                     {
