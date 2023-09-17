@@ -198,7 +198,6 @@ void PageView::mousePressEvent(QMouseEvent* event)
     if(m_tripleClickTimer.isActive())
     {
         selectLine();
-        m_tripleClickTimer.stop();
     }
 
     m_selectionStart = point;
@@ -221,9 +220,14 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     // This gets triggered when the user simply clicks on the page, without
     // dragging the mouse, so on a normal click. In this case we want to
     // reset the selection.
-    if(m_selectionStart == QPointF(mouseX, mouseY))
+    if(m_selectionStart == QPointF(mouseX, mouseY) &&
+       !m_tripleClickTimer.isActive())
     {
         removeSelection();
+
+        // Restart it since some actions are checking if it is active to e.g.
+        // prevent removing the line select on mouse release
+        m_tripleClickTimer.start();
     }
     else if(!m_startedMousePressOnHighlight)
     {
