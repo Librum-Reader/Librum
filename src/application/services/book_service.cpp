@@ -45,7 +45,10 @@ void BookService::search(const QString& text)
 
     auto searchHit = m_bookSearcher->firstSearchHit();
     if(searchHit.pageNumber == -1)
+    {
+        emit noSearchHitsFound();
         return;
+    }
 
     emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
     emit highlightText(searchHit.pageNumber, searchHit.rect);

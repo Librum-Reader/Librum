@@ -54,6 +54,7 @@ public:
 signals:
     void goToPosition(int pageNumber, int y);
     void highlightText(int pageNumber, mupdf::FzQuad quad);
+    void noSearchHitsFound();
 };
 
 }  // namespace application

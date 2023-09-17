@@ -65,6 +65,7 @@ signals:
     void selectText(int pageNumber, QPointF left, QPointF right);
     void textSelectionFinished(float centerX, float topY);
     void highlightSelected(float centerX, float topY, const QString& uuid);
+    void noSearchHitsFound();
 };
 
 }  // namespace adapters

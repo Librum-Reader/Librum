@@ -27,6 +27,9 @@ BookController::BookController(application::IBookService* bookService) :
 
                 emit selectText(pageNumber, left, right);
             });
+
+    connect(m_bookService, &application::IBookService::noSearchHitsFound, this,
+            &IBookController::noSearchHitsFound);
 }
 
 void BookController::setUp(QString uuid)
