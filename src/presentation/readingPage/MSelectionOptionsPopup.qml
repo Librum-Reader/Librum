@@ -11,13 +11,22 @@ Popup
     property string highlight: ""
     signal highlightOptionSelected(string uuid)
     
-    width: getWidth()
+    width: internal.getWidth()
     height: 32
     padding: 0
     background: Rectangle
     {
         color: Style.colorControlBackground
         radius: 4
+    }
+    
+    Shortcut
+    {
+        sequence: SettingsController.shortcuts.CreateHighlight
+        onActivated: {
+            internal.createHighlight()
+            root.close()
+        }
     }
     
     Image
@@ -102,9 +111,7 @@ Popup
             id: highlightAction
             text: "Highlight"
             clickedFunction: function() {
-                let defaultColorName = SettingsController.appearanceSettings.DefaultHighlightColorName;
-                let uuid = activeFocusItem.createHighlightFromCurrentSelection(SettingsController.appearanceSettings[defaultColorName],
-                                                                               SettingsController.appearanceSettings.HighlightOpacity);
+                let uuid = internal.createHighlight();
                 root.highlightOptionSelected(uuid);
             }
         }
@@ -123,9 +130,23 @@ Popup
         }
     }
     
-    function getWidth()
+    QtObject
     {
-        return separator1.width * 2 + selectionOptionsLayout.spacing * 4 + 
-                copyAction.width + highlightAction.width + (root.highlight === "" ? 0 : removeAction.width);
+        id: internal
+        
+        function getWidth()
+        {
+            return separator1.width * 2 + selectionOptionsLayout.spacing * 4 + 
+                    copyAction.width + highlightAction.width + (root.highlight === "" ? 0 : removeAction.width);
+        }
+        
+        function createHighlight()
+        {
+            let defaultColorName = SettingsController.appearanceSettings.DefaultHighlightColorName;
+            let uuid = activeFocusItem.createHighlightFromCurrentSelection(SettingsController.appearanceSettings[defaultColorName],
+                                                                           SettingsController.appearanceSettings.HighlightOpacity);
+            
+            return uuid;
+        }
     }
 }

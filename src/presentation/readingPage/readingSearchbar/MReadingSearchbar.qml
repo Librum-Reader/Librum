@@ -169,6 +169,11 @@ Item
                     }
                 }
                 
+//                Rectangle
+//                {
+                    
+//                }
+                
                 MButton
                 {
                     id: nextButton

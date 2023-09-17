@@ -58,6 +58,7 @@ enum class SettingKeys
     ToggleSpeaking,
     ReloadApplication,
     AddBook,
+    CreateHighlight,
 
     SettingKeys_END
 };
