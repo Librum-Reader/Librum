@@ -87,6 +87,7 @@ target_link_libraries(adapters
                 PRIVATE
                     domain
                     application
+                    ${MUPDF_OUTPUT}
                     rapidfuzz::rapidfuzz
                     Qt6::Core
                     Qt6::Quick
