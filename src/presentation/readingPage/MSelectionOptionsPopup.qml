@@ -11,7 +11,7 @@ Popup
     property string highlight: ""
     signal highlightOptionSelected(string uuid)
     
-    width: selectionOptionsLayout.width
+    width: getWidth()
     height: 32
     padding: 0
     background: Rectangle
@@ -33,6 +33,8 @@ Popup
     {
         id: selectionOptionsLayout
         height: parent.height
+        // We need to manually calculate the width because QML bugs lead to the RowLayout not being
+        // updated properly when an item inside of it changes its visibility.
         spacing: 2
         
         component SelectionOptionsPopupItem: Rectangle
@@ -83,6 +85,7 @@ Popup
         
         SelectionOptionsPopupItem
         {
+            id: copyAction
             text: "Copy"
             clickedFunction: function() {
                 if(root.highlight == "")
@@ -92,10 +95,11 @@ Popup
             }
         }
         
-        Separator {}
+        Separator { id: separator1 }
         
         SelectionOptionsPopupItem
         {
+            id: highlightAction
             text: "Highlight"
             clickedFunction: function() {
                 let defaultColorName = SettingsController.appearanceSettings.DefaultHighlightColorName;
@@ -105,7 +109,7 @@ Popup
             }
         }
         
-        Separator {}
+        Separator { visible: root.highlight != "" }
         
         SelectionOptionsPopupItem
         {
@@ -117,5 +121,11 @@ Popup
                 activeFocusItem.removeHighlight(root.highlight);
             }
         }
+    }
+    
+    function getWidth()
+    {
+        return separator1.width * 2 + selectionOptionsLayout.spacing * 4 + 
+                copyAction.width + highlightAction.width + (root.highlight === "" ? 0 : removeAction.width);
     }
 }
