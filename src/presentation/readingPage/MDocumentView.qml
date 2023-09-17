@@ -119,9 +119,13 @@ Pane {
             onContentYChanged: {
                 NavigationLogic.updateCurrentPageCounter()
                 selectionOptionsPopup.close();
+                colorSelectionPopup.close();
             }
             
-            onContentXChanged: selectionOptionsPopup.close();
+            onContentXChanged: {
+                selectionOptionsPopup.close();
+                colorSelectionPopup.close();
+            }
             
             Component.onCompleted: root.setPage(
                                        Globals.selectedBook.currentPage - 1)
