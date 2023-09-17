@@ -41,7 +41,7 @@ Popup
             property string colorName
             
             Layout.fillHeight: true
-            Layout.preferredWidth: 36
+            Layout.preferredWidth: 38
             color: "transparent"
             
             Rectangle

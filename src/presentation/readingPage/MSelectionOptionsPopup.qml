@@ -53,10 +53,10 @@ Popup
                 height: parent.height
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
-                padding: 8
+                padding: 10
                 text: action.text
                 color:  action.textColor
-                font.pointSize: 11
+                font.pointSize: 12
             }
             
             MouseArea
