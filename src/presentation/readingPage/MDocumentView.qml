@@ -93,7 +93,7 @@ Pane {
             contentWidth: pageView.widestItem
             anchors.centerIn: parent
             flickableDirection: Flickable.AutoFlickDirection
-            flickDeceleration: 100000
+            flickDeceleration: 150000
             interactive: false
             clip: true
             cacheBuffer: 1000
@@ -143,7 +143,7 @@ Pane {
     
     ScrollBar {
         id: verticalScrollbar
-        width: hovered ? 14 : 12
+        width: pressed ? 14 : 12
         hoverEnabled: true
         active: true
         policy: ScrollBar.AlwaysOn
@@ -151,7 +151,7 @@ Pane {
         size: pageView.height / pageView.contentHeight
         minimumSize: 0.04
         position: (pageView.contentY - pageView.originY) / pageView.contentHeight
-        onPositionChanged: pageView.contentY = position * pageView.contentHeight + pageView.originY
+        onPositionChanged: if(pressed) pageView.contentY = position * pageView.contentHeight + pageView.originY
         anchors.top: parent.top
         anchors.right: parent.right
         anchors.bottom: parent.bottom
@@ -166,7 +166,7 @@ Pane {
         background: Rectangle {
             implicitWidth: 26
             implicitHeight: 200
-            color: verticalScrollbar.hovered ? Style.colorContainerBackground : "transparent"
+            color: verticalScrollbar.pressed || verticalScrollbar.hovered ? Style.colorContainerBackground : "transparent"
         }
     }
     
