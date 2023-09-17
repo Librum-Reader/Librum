@@ -50,8 +50,6 @@ void LibraryStorageAccess::createBook(const QString& authToken,
             uploadBookCover(authToken, QUuid(uuid),
                             jsonBook["coverPath"].toString());
 
-            emit bookUploadSucceeded(QUuid(uuid));
-
             // Make sure to release the reply's memory
             reply->deleteLater();
         });
@@ -335,14 +333,18 @@ void LibraryStorageAccess::uploadBookMedia(const QString& uuid,
 
     // Make sure to free the data used for uploading the book data.
     connect(reply, &QNetworkReply::finished, this,
-            [reply, bookData]()
+            [this, reply, bookData, uuid]()
             {
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(reply,
                                                       "Uploading book media");
+                    reply->deleteLater();
+                    bookData->deleteLater();
+                    return;
                 }
 
+                emit bookUploadSucceeded(QUuid(uuid));
                 reply->deleteLater();
                 bookData->deleteLater();
             });

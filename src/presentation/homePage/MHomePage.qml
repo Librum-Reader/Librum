@@ -35,9 +35,23 @@ Page
         function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
     }
     
-    
-    ColumnLayout
+    DropArea
     {
+        id: dropArea
+        anchors.fill: parent
+        
+        onDropped: 
+            (drop) => {
+                for(let i = 0; i < drop.urls.length; ++i)
+                {
+                    let result = LibraryController.addBook(drop.urls[i]);
+                    if(result === BookOperationStatus.OpeningBookFailed)
+                        unsupportedFilePopup.open();
+                }
+            }
+        
+        ColumnLayout
+        {
         id: layout
         anchors.fill: parent
         spacing: 0
@@ -306,6 +320,7 @@ Page
             id: bottomHeightFillter
             Layout.fillHeight: true
         }
+    }
     }
     
     MWarningPopup

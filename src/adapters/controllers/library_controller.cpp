@@ -1,8 +1,10 @@
 #include "library_controller.hpp"
 #include <QBuffer>
 #include <QDebug>
+#include <QFileInfo>
 #include <QUrl>
 #include <QVariant>
+#include <QtWidgets/QApplication>
 #include "book_dto.hpp"
 #include "book_operation_status.hpp"
 #include "tag.hpp"
@@ -81,7 +83,14 @@ void LibraryController::syncWithServer()
 int LibraryController::addBook(const QString& path)
 {
     auto localPath = QUrl(path).toLocalFile();
+    QFileInfo fileInfo(localPath);
+    if(!fileInfo.isFile())
+        return 0;
+
+    QApplication::setOverrideCursor(Qt::WaitCursor);
     auto result = m_bookService->addBook(localPath);
+    QApplication::restoreOverrideCursor();
+
     return static_cast<int>(result);
 }
 
