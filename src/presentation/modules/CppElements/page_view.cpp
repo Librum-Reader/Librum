@@ -546,11 +546,8 @@ void PageView::resetCursorToDefault()
 
 void PageView::setCorrectCursor(int x, int y)
 {
-    if(m_pageController->pointIsAboveLink(QPoint(x, y)))
-    {
-        setPointingCursor();
-    }
-    if(m_bookController->getHighlightAtPoint(QPointF(x, y), m_pageNumber))
+    if(m_pageController->pointIsAboveLink(QPoint(x, y)) ||
+       m_bookController->getHighlightAtPoint(QPointF(x, y), m_pageNumber))
     {
         setPointingCursor();
     }
