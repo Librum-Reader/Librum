@@ -198,6 +198,7 @@ void PageView::mousePressEvent(QMouseEvent* event)
     if(m_tripleClickTimer.isActive())
     {
         selectLine();
+        return;
     }
 
     m_selectionStart = point;
@@ -528,10 +529,10 @@ void PageView::selectLine()
 
 void PageView::copySelectedText()
 {
-    auto clipboard = QApplication::clipboard();
     QString text = m_pageController->getTextFromSelection(m_selectionStart,
                                                           m_selectionEnd);
 
+    auto clipboard = QApplication::clipboard();
     clipboard->setText(text);
 }
 
