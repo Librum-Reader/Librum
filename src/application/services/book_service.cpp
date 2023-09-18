@@ -109,6 +109,7 @@ void BookService::saveHighlights()
     // concurrency error on the backend that occurs when we send multiple update
     // requests in a short period of time.
     auto book = getBook();
+    book->updateLastModified();
     m_libraryService->updateBook(*book);
 }
 
