@@ -43,7 +43,8 @@ private:
                                          qint64 bytesTotal);
     domain::value_objects::FreeBook* getFreeBookById(int id);
     int getFreeBookIndexById(int id);
-    QDir getLibraryDir();
+    QDir getLibraryDir() const;
+    QString getUserLibraryName(const QString& email) const;
 
     IFreeBooksStorageGateway* m_freeBooksStorageGateway;
     std::vector<domain::value_objects::FreeBook> m_freeBooks;

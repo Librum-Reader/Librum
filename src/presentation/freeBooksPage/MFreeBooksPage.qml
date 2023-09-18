@@ -84,7 +84,7 @@ Page {
                             downloadBookPopup.languages = model.languages
                             downloadBookPopup.cover = model.cover
                             downloadBookPopup.downloadCount = model.downloadCount
-                            downloadBookPopup.downloadLink = model.downloadLink
+                            downloadBookPopup.downloadLink = model.mediaDownloadLink
                             downloadBookPopup.open()
                         }
                     }

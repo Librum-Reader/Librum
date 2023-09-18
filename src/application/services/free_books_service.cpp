@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QUuid>
 #include "free_book.hpp"
@@ -189,16 +190,29 @@ int FreeBooksService::getFreeBookIndexById(int id)
     return -1;
 }
 
-QDir FreeBooksService::getLibraryDir()
+QDir FreeBooksService::getLibraryDir() const
 {
-    auto applicationPath = QDir::current().path();
-    auto hash = qHash(m_userEmail);
-    auto userLibName = QString::number(hash);
+    QDir destDir(
+        QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
+    if(!destDir.exists())
+        destDir.mkpath(".");
 
-    auto uniqueFolderName =
-        applicationPath + "/" + "librum_localLibraries" + "/" + userLibName;
+    destDir.mkdir("local_libraries");
+    destDir.cd("local_libraries");
 
-    return QDir(uniqueFolderName);
+    auto userLibraryName = getUserLibraryName(m_userEmail);
+    destDir.mkdir(userLibraryName);
+    destDir.cd(userLibraryName);
+
+    return destDir.path();
+}
+
+QString FreeBooksService::getUserLibraryName(const QString& email) const
+{
+    // Hash the email to get a unique user library name
+    auto hash = qHash(email);
+
+    return QString::number(hash);
 }
 
 }  // namespace application::services
