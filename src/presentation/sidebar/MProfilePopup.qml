@@ -51,7 +51,7 @@ Popup
             
             onClicked: 
             {
-                BookController.syncWithServer();
+                LibraryController.syncWithServer();
                 UserController.syncWithServer();
                 root.close();
             }

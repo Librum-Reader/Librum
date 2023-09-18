@@ -453,7 +453,7 @@ MFlickWrapper {
         onDeletionConfirmed:
         {
             UserController.deleteUser()
-            BookController.deleteAllBooks();
+            LibraryController.deleteAllBooks();
             AuthController.logoutUser();
             loadPage(loginPage);
         }

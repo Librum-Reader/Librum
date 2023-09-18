@@ -1,85 +1,71 @@
-#pragma once
-#include <QList>
 #include <QObject>
-#include <QPixmap>
-#include <QString>
-#include <QUrl>
-#include <QUuid>
-#include <QVariantMap>
-#include "book_dto.hpp"
 #include "adapters_export.hpp"
-#include "library_proxy_model.hpp"
+#include "highlight.hpp"
+#include "mupdf/classes.h"
+#include "toc/filtered_toc_model.hpp"
+#pragma once
 
 namespace adapters
 {
 
 /**
- * The BookController class is exposed to the UI code and thus is the
- * "entry point" to the application's backend for book operations. It acts as a
- * layer of abstraction which maps the user data to a format usable for the
- * application.
+ * The BookController class is set up to work one one book at the time.
+ * It has access to the IBookService interface, which makes it possible to get
+ * information about a specific book such as getting its highlights, the
+ * underyling FzDocument and similar.
  */
 class ADAPTERS_EXPORT IBookController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(adapters::data_models::LibraryProxyModel* libraryModel READ
-                   getLibraryModel CONSTANT)
-    Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
+    Q_PROPERTY(QString filePath NOTIFY filePathChanged)
+    Q_PROPERTY(int pageCount READ getPageCount NOTIFY pageCountChanged)
+    Q_PROPERTY(int currentPage READ getCurrentPage WRITE setCurrentPage NOTIFY
+                   currentPageChanged)
+    Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
+    Q_PROPERTY(application::core::FilteredTOCModel* tableOfContents READ
+                   getTableOfContents NOTIFY tableOfContentsChanged)
 
 public:
     virtual ~IBookController() noexcept = default;
 
-    enum class MetaProperty
-    {
-        Title = 0,
-        Authors,
-        FilePath,
-        Creator,
-        CreationDate,
-        Format,
-        Language,
-        DocumentSize,
-        PagesSize,
-        PageCount,
-        CurrentPage,
-        AddedToLibrary,
-        LastModified,
-        Invalid
-    };
-    Q_ENUM(MetaProperty);
+    Q_INVOKABLE virtual void setUp(QString uuid) = 0;
+    virtual mupdf::FzDocument* getFzDocument() = 0;
 
-    Q_INVOKABLE virtual void syncWithServer() = 0;
-    Q_INVOKABLE virtual int addBook(const QString& path) = 0;
-    Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
-    Q_INVOKABLE virtual int deleteAllBooks() = 0;
-    Q_INVOKABLE virtual int uninstallBook(const QString& uuid) = 0;
-    Q_INVOKABLE virtual int downloadBookMedia(const QString& uuid) = 0;
-    Q_INVOKABLE virtual int updateBook(const QString& uuid,
-                                       const QVariant& operations) = 0;
-    Q_INVOKABLE virtual int changeBookCover(const QString& uuid,
-                                            const QString& path) = 0;
-    Q_INVOKABLE virtual int addTag(const QString& bookUuid,
-                                   const QString& tagName,
-                                   const QString& tagUuid) = 0;
-    Q_INVOKABLE virtual int removeTag(const QString& bookUuid,
-                                      const QString& tagUuid) = 0;
-    Q_INVOKABLE virtual void removeAllTagsWithUuid(const QString& tagUuid) = 0;
-    Q_INVOKABLE virtual void renameTags(const QString& oldName,
-                                        const QString& newName) = 0;
-    Q_INVOKABLE virtual adapters::dtos::BookDto getBook(
-        const QString& uuid) = 0;
-    Q_INVOKABLE virtual int getBookCount() const = 0;
+    Q_INVOKABLE virtual void search(const QString& text) = 0;
+    Q_INVOKABLE virtual void clearSearch() = 0;
+    Q_INVOKABLE virtual void goToNextSearchHit() = 0;
+    Q_INVOKABLE virtual void goToPreviousSearchHit() = 0;
 
-    Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
-                                           const QUrl& path) = 0;
-    virtual data_models::LibraryProxyModel* getLibraryModel() = 0;
+    virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
+    virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
+    virtual void removeHighlight(const QUuid& uuid) = 0;
+    virtual void changeHighlightColor(const QUuid& uuid,
+                                      const QColor& color) = 0;
+    virtual void saveHighlights() = 0;
+    virtual const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const = 0;
 
-public slots:
-    Q_INVOKABLE virtual void refreshLastOpenedFlag(const QString& uuid) = 0;
+    virtual void followLink(const char* uri) = 0;
+
+    virtual QString getFilePath() const = 0;
+    virtual int getPageCount() const = 0;
+    virtual int getCurrentPage() const = 0;
+    virtual void setCurrentPage(int newCurrentPage) = 0;
+    virtual float getZoom() const = 0;
+    virtual void setZoom(float newZoom) = 0;
+    virtual application::core::FilteredTOCModel* getTableOfContents() = 0;
 
 signals:
-    void bookCountChanged();
-    void storageLimitExceeded();
+    void filePathChanged(const QString& filePath);
+    void pageCountChanged(int pageCount);
+    void currentPageChanged(int currentPage);
+    void zoomChanged(float zoom);
+    void tableOfContentsChanged();
+    void goToPosition(int pageNumber, int y);
+    void selectText(int pageNumber, QPointF left, QPointF right);
+    void textSelectionFinished(float centerX, float topY);
+    void highlightSelected(float centerX, float topY, const QString& uuid);
+    void noSearchHitsFound();
 };
 
 }  // namespace adapters

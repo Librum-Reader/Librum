@@ -1,340 +1,141 @@
 #include "book_controller.hpp"
-#include <QBuffer>
-#include <QDebug>
-#include <QUrl>
-#include <QVariant>
-#include "book_dto.hpp"
-#include "book_operation_status.hpp"
-#include "tag.hpp"
-#include "tag_dto.hpp"
+#include <QUuid>
+#include "fz_utils.hpp"
+#include "highlight.hpp"
+
+using namespace application::core;
+using domain::entities::Highlight;
 
 namespace adapters::controllers
 {
 
-using namespace domain::entities;
-using namespace dtos;
-
 BookController::BookController(application::IBookService* bookService) :
-    m_bookService(bookService),
-    m_libraryModel(m_bookService->getBooks())
+    m_bookService(bookService)
 {
-    // book insertion
-    connect(m_bookService, &application::IBookService::bookInsertionStarted,
-            &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
+    connect(m_bookService, &application::IBookService::goToPosition, this,
+            &BookController::goToPosition);
 
-    connect(m_bookService, &application::IBookService::bookInsertionEnded,
-            &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
+    connect(m_bookService, &application::IBookService::highlightText, this,
+            [this](int pageNumber, mupdf::FzQuad quad)
+            {
+                auto rect = utils::fzQuadToQRectF(quad);
+                QPointF left(rect.left(), rect.center().y());
+                QPointF right(rect.right(), rect.center().y());
 
-    connect(m_bookService, &application::IBookService::bookInsertionEnded, this,
-            &BookController::bookCountChanged);
+                left = utils::scalePointToCurrentZoom(left, 1, getZoom());
+                right = utils::scalePointToCurrentZoom(right, 1, getZoom());
 
+                emit selectText(pageNumber, left, right);
+            });
 
-    // book deletion
-    connect(m_bookService, &application::IBookService::bookDeletionStarted,
-            &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
-
-    connect(m_bookService, &application::IBookService::bookDeletionEnded,
-            &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
-
-    connect(m_bookService, &application::IBookService::bookDeletionEnded, this,
-            &BookController::bookCountChanged);
-
-
-    // book clearing
-    connect(m_bookService, &application::IBookService::bookClearingStarted,
-            &m_libraryModel, &data_models::LibraryModel::startBookClearing);
-
-    connect(m_bookService, &application::IBookService::bookClearingEnded,
-            &m_libraryModel, &data_models::LibraryModel::endBookClearing);
-
-    connect(m_bookService, &application::IBookService::bookClearingEnded, this,
-            &BookController::bookCountChanged);
-
-    // Storage limit exceeded
-    connect(m_bookService, &application::IBookService::storageLimitExceeded,
-            this, &BookController::storageLimitExceeded);
-
-    // tags changed
-    connect(m_bookService, &application::IBookService::tagsChanged,
-            &m_libraryModel, &data_models::LibraryModel::refreshTags);
-
-    // data changed
-    connect(m_bookService, &application::IBookService::dataChanged,
-            &m_libraryModel, &data_models::LibraryModel::refreshBook);
-
-    // download book media progress changed
-    connect(m_bookService,
-            &application::IBookService::downloadingBookMediaProgressChanged,
-            &m_libraryModel,
-            &data_models::LibraryModel::downloadingBookMediaProgressChanged);
-
-
-    m_libraryProxyModel.setSourceModel(&m_libraryModel);
+    connect(m_bookService, &application::IBookService::noSearchHitsFound, this,
+            &IBookController::noSearchHitsFound);
 }
 
-void BookController::syncWithServer()
+void BookController::setUp(QString uuid)
 {
-    m_bookService->downloadBooks();
+    m_bookService->setUp(QUuid(uuid));
 }
 
-int BookController::addBook(const QString& path)
+mupdf::FzDocument* BookController::getFzDocument()
 {
-    auto localPath = QUrl(path).toLocalFile();
-    auto result = m_bookService->addBook(localPath);
-    return static_cast<int>(result);
+    return m_bookService->getFzDocument();
 }
 
-int BookController::deleteBook(const QString& uuid)
+void BookController::search(const QString& text)
 {
-    auto result = m_bookService->deleteBook(QUuid(uuid));
-    return static_cast<int>(result);
+    m_bookService->search(text);
 }
 
-int BookController::deleteAllBooks()
+void BookController::clearSearch()
 {
-    auto result = m_bookService->deleteAllBooks();
-    return static_cast<int>(result);
+    m_bookService->clearSearch();
 }
 
-int BookController::uninstallBook(const QString& uuid)
+void BookController::goToNextSearchHit()
 {
-    auto result = m_bookService->uninstallBook(QUuid(uuid));
-    return static_cast<int>(result);
+    m_bookService->goToNextSearchHit();
 }
 
-int BookController::downloadBookMedia(const QString& uuid)
+void BookController::goToPreviousSearchHit()
 {
-    auto result = m_bookService->downloadBookMedia(QUuid(uuid));
-    return static_cast<int>(result);
+    m_bookService->goToPreviousSearchHit();
 }
 
-int BookController::updateBook(const QString& uuid, const QVariant& operations)
+const QList<domain::entities::Highlight>& BookController::getHighlights() const
 {
-    auto bookToUpdate = m_bookService->getBook(QUuid(uuid));
-    if(!bookToUpdate)
-        return static_cast<int>(BookOperationStatus::BookDoesNotExist);
-
-    auto updatedBook = *bookToUpdate;
-
-    auto operationsMap = operations.toMap();
-    for(const auto& stringKey : operationsMap.keys())
-    {
-        int key = stringKey.toInt();
-
-        auto value = operationsMap.value(stringKey);
-        switch(static_cast<MetaProperty>(key))
-        {
-        case MetaProperty::Title:
-            updatedBook.setTitle(value.toString());
-            break;
-        case MetaProperty::Authors:
-            updatedBook.setAuthors(value.toString());
-            break;
-        case MetaProperty::FilePath:
-            updatedBook.setFilePath(value.toString());
-            break;
-        case MetaProperty::Creator:
-            updatedBook.setCreator(value.toString());
-            break;
-        case MetaProperty::CreationDate:
-            updatedBook.setCreationDate(value.toString());
-            break;
-        case MetaProperty::Format:
-            updatedBook.setFormat(value.toString());
-            break;
-        case MetaProperty::Language:
-            updatedBook.setLanguage(value.toString());
-            break;
-        case MetaProperty::DocumentSize:
-            updatedBook.setDocumentSize(value.toString());
-            break;
-        case MetaProperty::PagesSize:
-            updatedBook.setPagesSize(value.toString());
-            break;
-        case MetaProperty::PageCount:
-            updatedBook.setPageCount(value.toInt());
-            break;
-        case MetaProperty::CurrentPage:
-            updatedBook.setCurrentPage(value.toInt());
-            break;
-        case MetaProperty::AddedToLibrary:
-            updatedBook.setAddedToLibrary(
-                QDateTime::fromString(value.toString()));
-            break;
-        case MetaProperty::LastModified:
-            updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
-            break;
-        case MetaProperty::Invalid:
-            return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
-            break;
-        default:
-            return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
-        }
-    }
-
-    auto result = m_bookService->updateBook(updatedBook);
-    return static_cast<int>(result);
+    return m_bookService->getHighlights();
 }
 
-int BookController::changeBookCover(const QString& uuid, const QString& path)
+void BookController::addHighlight(const domain::entities::Highlight& highlight)
 {
-    auto result =
-        m_bookService->changeBookCover(QUuid(uuid), QUrl(path).toLocalFile());
-    return static_cast<int>(result);
+    m_bookService->addHighlight(highlight);
 }
 
-int BookController::addTag(const QString& bookUuid, const QString& tagName,
-                           const QString& tagUuid)
+void BookController::removeHighlight(const QUuid& uuid)
 {
-    if(QUuid(tagUuid).isNull())
-    {
-        qWarning() << QString("Adding tag with name: %1 to book with uuid: %2 "
-                              "failed. The given uuid was invalid.")
-                          .arg(tagName, bookUuid);
-        return static_cast<int>(BookOperationStatus::OperationFailed);
-    }
-
-    Tag tag(tagName, tagUuid);
-    auto result = m_bookService->addTagToBook(QUuid(bookUuid), tag);
-
-    return static_cast<int>(result);
+    m_bookService->removeHighlight(uuid);
 }
 
-void BookController::removeAllTagsWithUuid(const QString& tagUuid)
+void BookController::changeHighlightColor(const QUuid& uuid,
+                                          const QColor& color)
 {
-    if(QUuid(tagUuid).isNull())
-        return;
-
-    auto& books = m_bookService->getBooks();
-    for(const auto& book : books)
-    {
-        if(vectorContainsTag(book.getTags(), QUuid(tagUuid)))
-        {
-            m_bookService->removeTagFromBook(book.getUuid(), QUuid(tagUuid));
-        }
-    }
+    m_bookService->changeHighlightColor(uuid, color);
 }
 
-void BookController::renameTags(const QString& oldName, const QString& newName)
+void BookController::saveHighlights()
 {
-    auto& books = m_bookService->getBooks();
-    for(const auto& book : books)
-    {
-        auto tagUuid = getTagUuidByName(book, oldName);
-        if(!tagUuid.isNull())
-            m_bookService->renameTagOfBook(book.getUuid(), tagUuid, newName);
-    }
+    m_bookService->saveHighlights();
 }
 
-int BookController::removeTag(const QString& bookUuid, const QString& tagUuid)
+const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
+                                                     int page) const
 {
-    auto result =
-        m_bookService->removeTagFromBook(QUuid(bookUuid), QUuid(tagUuid));
-    return static_cast<int>(result);
+    auto restoredPoint = utils::restoreQPoint(point, getZoom());
+
+    return m_bookService->getHighlightAtPoint(restoredPoint, page);
 }
 
-dtos::BookDto BookController::getBook(const QString& uuid)
+void BookController::followLink(const char* uri)
 {
-    const auto& books = m_bookService->getBooks();
-    auto book = std::ranges::find_if(books,
-                                     [&uuid](const Book& b)
-                                     {
-                                         return b.getUuid() == QUuid(uuid);
-                                     });
-
-    return book == books.end() ? dtos::BookDto() : getDtoFromBook(*book);
+    return m_bookService->followLink(uri);
 }
 
-int BookController::getBookCount() const
+QString BookController::getFilePath() const
 {
-    return m_bookService->getBookCount();
+    return m_bookService->getFilePath();
 }
 
-data_models::LibraryProxyModel* BookController::getLibraryModel()
+int BookController::getPageCount() const
 {
-    return &m_libraryProxyModel;
+    return m_bookService->getPageCount();
 }
 
-int BookController::saveBookToFile(const QString& uuid, const QUrl& path)
+void BookController::setCurrentPage(int newCurrentPage)
 {
-    auto result =
-        m_bookService->saveBookToFile(QUuid(uuid), path.toLocalFile());
-
-    return static_cast<int>(result);
+    m_bookService->setCurrentPage(newCurrentPage);
+    emit currentPageChanged(newCurrentPage);
 }
 
-void BookController::refreshLastOpenedFlag(const QString& uuid)
+int BookController::getCurrentPage() const
 {
-    m_bookService->refreshLastOpenedDateOfBook(QUuid(uuid));
+    return m_bookService->getCurrentPage();
 }
 
-dtos::BookDto BookController::getDtoFromBook(const domain::entities::Book& book)
+float BookController::getZoom() const
 {
-    dtos::BookDto bookDto;
-    addBookMetaDataToDto(book, bookDto);
-    addBookTagsToDto(book, bookDto);
-
-    return bookDto;
+    return m_bookService->getZoom();
 }
 
-QUuid BookController::getTagUuidByName(const Book& book, const QString& name)
+void BookController::setZoom(float newZoom)
 {
-    for(const auto& tag : book.getTags())
-    {
-        if(tag.getName() == name)
-            return tag.getUuid();
-    }
-
-    return QUuid();
+    m_bookService->setZoom(newZoom);
+    emit zoomChanged(newZoom);
 }
 
-void BookController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
+FilteredTOCModel* BookController::getTableOfContents()
 {
-    auto pathWithScheme = QUrl::fromLocalFile(book.getCoverPath()).toString();
-
-    bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
-    bookDto.title = book.getTitle();
-    bookDto.authors = book.getAuthors();
-    bookDto.filePath = book.getFilePath();
-    bookDto.creator = book.getCreator();
-    bookDto.creationDate = book.getCreationDate();
-    bookDto.format = book.getFormat();
-    bookDto.language = book.getLanguage();
-    bookDto.documentSize = book.getDocumentSize();
-    bookDto.pagesSize = book.getPagesSize();
-    bookDto.pageCount = book.getPageCount();
-    bookDto.currentPage = book.getCurrentPage();
-    bookDto.bookReadingProgress = book.getBookReadingProgress();
-    bookDto.coverPath = pathWithScheme;
-    bookDto.downloaded = book.isDownloaded();
-
-    bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
-        Book::dateTimeStringFormat);
-
-    bookDto.lastOpened = book.getLastOpened().isNull()
-                             ? "Never"
-                             : book.getLastOpened().toLocalTime().toString(
-                                   Book::dateTimeStringFormat);
-}
-
-void BookController::addBookTagsToDto(const Book& book, BookDto& bookDto)
-{
-    for(const auto& tag : book.getTags())
-    {
-        dtos::TagDto tagDto;
-        tagDto.name = tag.getName();
-
-        bookDto.tags.push_back(tagDto);
-    }
-}
-
-bool BookController::vectorContainsTag(const std::vector<Tag>& tags, QUuid uuid)
-{
-    return std::ranges::any_of(tags,
-                               [&uuid](const Tag& tag)
-                               {
-                                   return tag.getUuid() == uuid;
-                               });
+    return m_bookService->getTableOfContents();
 }
 
 }  // namespace adapters::controllers

@@ -30,14 +30,28 @@ Page
     
     Connections
     {
-        target: BookController
+        target: LibraryController
         
         function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
     }
     
-    
-    ColumnLayout
+    DropArea
     {
+        id: dropArea
+        anchors.fill: parent
+        
+        onDropped: 
+            (drop) => {
+                for(let i = 0; i < drop.urls.length; ++i)
+                {
+                    let result = LibraryController.addBook(drop.urls[i]);
+                    if(result === BookOperationStatus.OpeningBookFailed)
+                        unsupportedFilePopup.open();
+                }
+            }
+        
+        ColumnLayout
+        {
         id: layout
         anchors.fill: parent
         spacing: 0
@@ -115,7 +129,7 @@ Page
                 id: pageTitle
                 Layout.topMargin: updateBanner.visible ? 24 : 44
                 titleText: "Home"
-                descriptionText: "You have " + BookController.bookCount + " books"
+                descriptionText: "You have " + LibraryController.bookCount + " books"
             }
             
             Item { Layout.fillWidth: true }
@@ -148,7 +162,7 @@ Page
             Layout.fillWidth: true
             z: 2
             
-            onSearchRequested: (query) => BookController.libraryModel.sortString = query
+            onSearchRequested: (query) => LibraryController.libraryModel.sortString = query
         }
         
         Pane
@@ -172,10 +186,10 @@ Page
                 rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
-                flickDeceleration: 12500
+                flickDeceleration: 15000
                 maximumFlickVelocity: 3500
                 clip: true
-                model: BookController.libraryModel
+                model: LibraryController.libraryModel
                 delegate: MBook
                 {
                     id: bookDelegate
@@ -184,14 +198,14 @@ Page
                     {
                         if(model.downloaded)
                         {
-                            Globals.selectedBook = BookController.getBook(model.uuid);
+                            Globals.selectedBook = LibraryController.getBook(model.uuid);
                             internal.openBook();
                         }
                         // Don't start downloading if downloading is already in progress.
                         else if(!bookDelegate.downloading)
                         {
                             bookDelegate.downloading = true;
-                            BookController.downloadBookMedia(model.uuid);
+                            LibraryController.downloadBookMedia(model.uuid);
                         }
                     }
                     
@@ -273,6 +287,38 @@ Page
                     }
                 }
             }
+            
+            ScrollBar {
+                id: verticalScrollbar
+                width: pressed ? 14 : 12
+                hoverEnabled: true
+                active: true
+                policy: ScrollBar.AlwaysOff
+                visible: bookGrid.contentHeight > bookGrid.height
+                orientation: Qt.Vertical
+                size: bookGrid.height / bookGrid.contentHeight
+                minimumSize: 0.04
+                position: (bookGrid.contentY - bookGrid.originY) / bookGrid.contentHeight
+                onPositionChanged: if(pressed) bookGrid.contentY = position * bookGrid.contentHeight + bookGrid.originY
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.rightMargin: -20
+                anchors.bottomMargin: 16
+                anchors.bottom: parent.bottom
+                horizontalPadding: 4
+                
+                contentItem: Rectangle {
+                    color: Style.colorScrollBarHandle
+                    opacity: verticalScrollbar.pressed ? 0.8 : 1
+                    radius: 4
+                }
+                
+                background: Rectangle {
+                    implicitWidth: 26
+                    implicitHeight: 200
+                    color: "transparent"
+                }
+            }
         }
         
         MEmptyScreenContent
@@ -292,7 +338,7 @@ Page
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
-            visible: bookGrid.count == 0 && BookController.bookCount !== 0
+            visible: bookGrid.count == 0 && LibraryController.bookCount !== 0
             
             onClearFilters:
             {
@@ -306,6 +352,7 @@ Page
             id: bottomHeightFillter
             Layout.fillHeight: true
         }
+    }
     }
     
     MWarningPopup
@@ -324,8 +371,8 @@ Page
         
         onOpenedChanged: if(opened) acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
-        onLeftButtonClicked: BookController.uninstallBook(Globals.selectedBook.uuid);
-        onRightButtonClicked: BookController.deleteBook(Globals.selectedBook.uuid);
+        onLeftButtonClicked: LibraryController.uninstallBook(Globals.selectedBook.uuid);
+        onRightButtonClicked: LibraryController.deleteBook(Globals.selectedBook.uuid);
     }
     
     MBookDetailsPopup
@@ -349,7 +396,7 @@ Page
         options: FolderDialog.ShowDirsOnly
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
         
-        onAccepted: BookController.saveBookToFile(Globals.selectedBook.uuid, folder);
+        onAccepted: LibraryController.saveBookToFile(Globals.selectedBook.uuid, folder);
     }
     
     MWarningPopup
@@ -405,7 +452,7 @@ Page
         {
             for(let i = 0; i < files.length; ++i)
             {
-                let result =  BookController.addBook(files[i]);
+                let result =  LibraryController.addBook(files[i]);
                 if(result === BookOperationStatus.OpeningBookFailed)
                     unsupportedFilePopup.open();
             }
@@ -415,7 +462,7 @@ Page
     QtObject
     {
         id: internal
-        property bool libraryIsEmpty: BookController.bookCount === 0
+        property bool libraryIsEmpty: LibraryController.bookCount === 0
         
         property int bookWidth: 190
         property int bookHeight: 300
@@ -424,7 +471,7 @@ Page
         
         function openBookOptionsPopup(item)
         {
-            Globals.selectedBook = BookController.getBook(item.uuid);
+            Globals.selectedBook = LibraryController.getBook(item.uuid);
             Globals.bookTags = Qt.binding(function () { return item.tags; });
             bookOptionsPopup.open();
         }
@@ -434,7 +481,9 @@ Page
             if(bookOptionsPopup.opened)
                 bookOptionsPopup.close();
             
-            BookController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
+            BookController.setUp(Globals.selectedBook.uuid);
+            
+            LibraryController.refreshLastOpenedFlag(Globals.selectedBook.uuid);
             loadPage(readingPage);
         }
     }

@@ -187,7 +187,7 @@ Popup
             if(success)
             {
                 let oldText = tagOptionsPopup.originalTextOfLastEdited;
-                BookController.renameTags(oldText, text);
+                LibraryController.renameTags(oldText, text);
             }
         }
         
@@ -201,7 +201,7 @@ Popup
             let success = UserController.deleteTag(uuid);
             if(success)
             {
-                BookController.removeAllTagsWithUuid(uuid);
+                LibraryController.removeAllTagsWithUuid(uuid);
             }
             
             tagOptionsPopup.close();
@@ -216,9 +216,9 @@ Popup
             listView.currentItem.selected = !listView.currentItem.selected;
             
             if(listView.itemAtIndex(index).selected)
-                BookController.libraryModel.addFilterTag(listView.currentItem.getContent());
+                LibraryController.libraryModel.addFilterTag(listView.currentItem.getContent());
             else
-                BookController.libraryModel.removeFilterTag(listView.currentItem.getContent());
+                LibraryController.libraryModel.removeFilterTag(listView.currentItem.getContent());
         }
         
         function stopRenamingCurrentTag(saveText = true)

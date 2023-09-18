@@ -3,39 +3,43 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Setup
 set(application_SRC
     interfaces/services/i_authentication_service.hpp
-    interfaces/services/i_book_service.hpp
+    interfaces/services/i_library_service.hpp
     interfaces/services/i_user_service.hpp
     interfaces/services/i_settings_service.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
-    interfaces/gateways/i_book_storage_gateway.hpp
+    interfaces/gateways/i_library_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
-    interfaces/utility/i_book_metadata_helper.hpp
-    interfaces/utility/i_downloaded_books_tracker.hpp
-    interfaces/utility/i_book_storage_manager.hpp
+    interfaces/utility/i_metadata_extractor.hpp
+    interfaces/utility/i_local_library_tracker.hpp
+    interfaces/gateways/i_app_info_gateway.hpp
+    interfaces/services/i_app_info_service.hpp
+    interfaces/services/i_book_service.hpp
+    interfaces/managers/i_library_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
-    services/book_service.cpp
-    services/book_service.hpp
+    services/library_service.cpp
+    services/library_service.hpp
     services/user_service.cpp
     services/user_service.hpp
     services/settings_service.cpp
     services/settings_service.hpp
     services/app_info_service.cpp
     services/app_info_service.hpp
+    services/book_service.hpp
+    services/book_service.cpp
+    
+    managers/library_storage_manager.cpp
+    managers/library_storage_manager.hpp
     
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
     common/enums/setting_groups.hpp
     common/enums/error_code.hpp
     
-    utility/book_metadata_helper.cpp
-    utility/book_metadata_helper.hpp
-    utility/downloaded_books_tracker.cpp
-    utility/downloaded_books_tracker.hpp
+    utility/local_library_tracker.cpp
+    utility/local_library_tracker.hpp
     utility/merge_status.hpp
-    utility/book_storage_manager.cpp
-    utility/book_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp
@@ -45,16 +49,21 @@ set(application_SRC
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
     
-    core/document.hpp
-    core/document.cpp
-    core/page.hpp
-    core/page.cpp
+    core/page_generator.hpp
+    core/page_generator.cpp
+    core/metadata_extractor.cpp
+    core/metadata_extractor.hpp
     core/toc/toc_item.hpp
     core/toc/toc_item.cpp
     core/toc/toc_model.hpp
     core/toc/toc_model.cpp
     core/toc/filtered_toc_model.hpp
     core/toc/filtered_toc_model.cpp
+    core/utils/book_searcher.hpp
+    core/utils/book_searcher.cpp
+    core/utils/fz_utils.hpp
+    core/utils/text_selector.hpp
+    core/utils/text_selector.cpp
 )
 
 
@@ -107,9 +116,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    interfaces/gateways/i_app_info_gateway.hpp
-                    interfaces/services/i_app_info_service.hpp
-                    
 )
 
 # Make sure to build mupdf before the application
@@ -124,10 +130,13 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
+                    ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )
 
 # Make sure to ignore warnings from mupdf by adding it as a system include directory

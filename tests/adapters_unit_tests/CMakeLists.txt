@@ -1,13 +1,13 @@
 # Build tests
 add_executable(adapters_unit_tests
                     main.cpp
-                    controllers/book_controller_tests.cpp
+                    controllers/library_controller_tests.cpp
                     controllers/authentication_controller_tests.cpp
                     controllers/user_controller_tests.cpp
                     controllers/settings_controller_tests.cpp
                     
                     gateways/user_storage_gateway_tests.cpp
-                    gateways/book_storage_gateway_tests.cpp
+                    gateways/library_storage_gateway_tests.cpp
                     gateways/authentication_gateway_tests.cpp
                     
                     data_models/library_proxy_model_tests.cpp

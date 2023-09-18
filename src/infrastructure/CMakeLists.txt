@@ -6,8 +6,8 @@ add_library(infrastructure
                 SHARED
                     persistance/user_storage_access.cpp
                     persistance/user_storage_access.hpp
-                    persistance/book_storage_access.cpp
-                    persistance/book_storage_access.hpp
+                    persistance/library_storage_access.cpp
+                    persistance/library_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
                     persistance/app_info_access.cpp

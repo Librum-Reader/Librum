@@ -17,5 +17,7 @@
     "CreateBookmarkHere": "Alt+3",
     "ToggleSpeaking": "F5",
     "ReloadApplication": "Ctrl+R",
-    "AddBook": "Ctrl+N"
+    "AddBook": "Ctrl+N",
+    "CreateHighlight": "H",
+    "RemoveHighlight": "Backspace"
 }

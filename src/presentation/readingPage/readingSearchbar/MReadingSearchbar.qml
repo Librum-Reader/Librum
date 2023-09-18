@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
 
 Item
@@ -42,6 +43,14 @@ Item
                 event.accepted = true;
             }
         }
+    
+    Connections
+    {
+        target: BookController
+        function onNoSearchHitsFound() {
+            internal.setSearchError();
+        }
+    }
     
     ColumnLayout
     {
@@ -153,6 +162,8 @@ Item
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle { anchors.fill: parent; color: "transparent" }
                             
+                            onTextEdited: internal.resetSearchError();
+                            
                             Keys.onReturnPressed:
                             {
                                 // When clicking Enter without changing the text, go to the next hit
@@ -219,6 +230,39 @@ Item
         y: -optionsPopup.height - 1
     }
     
+    QtObject
+    {
+        id: internal
+        property bool error: false
+        property color previousTextColor: inputField.color
+        property color previousBackgroundColor: inputFieldContainer.background.color
+        property color previousBorderColor: inputFieldContainer.background.border.color
+        
+        function setSearchError()
+        {
+            previousTextColor = inputField.color;
+            previousBackgroundColor = inputFieldContainer.background.color;
+            previousBorderColor = inputFieldContainer.background.border.color;
+            
+            inputField.color = Style.colorErrorText;
+            inputFieldContainer.background.color = Style.colorErrorBackground;
+            inputFieldContainer.background.border.color = Style.colorErrorBorder;
+            
+            error = true;
+        }
+        
+        function resetSearchError()
+        {
+            if(!error)
+                return;
+            
+            inputField.color = previousTextColor;
+            inputFieldContainer.background.color = previousBackgroundColor;
+            inputFieldContainer.background.border.color = previousBorderColor;
+            
+            error = false;
+        }
+    }
     
     function giveFocus()
     {

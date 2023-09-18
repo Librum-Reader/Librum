@@ -164,7 +164,7 @@ Popup
             if(success)
             {
                 let oldText = tagOptionsPopup.originalTextOfLastEdited;
-                BookController.renameTags(oldText, text);
+                LibraryController.renameTags(oldText, text);
             }
         }
         
@@ -176,7 +176,7 @@ Popup
             let success = UserController.deleteTag(uuid);
             if(success)
             {
-                BookController.removeAllTagsWithUuid(uuid);
+                LibraryController.removeAllTagsWithUuid(uuid);
             }
             
             tagOptionsPopup.close();

@@ -1,29 +1,31 @@
 #pragma once
 #include "../libs/di/include/boost/di.hpp"
 #include "app_info_access.hpp"
+#include "app_info_controller.hpp"
+#include "app_info_gateway.hpp"
+#include "app_info_service.hpp"
 #include "authentication_access.hpp"
 #include "authentication_controller.hpp"
 #include "authentication_gateway.hpp"
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
-#include "book_metadata_helper.hpp"
 #include "book_service.hpp"
-#include "book_storage_access.hpp"
-#include "book_storage_gateway.hpp"
-#include "book_storage_manager.hpp"
-#include "downloaded_books_tracker.hpp"
 #include "i_app_info_access.hpp"
-#include "i_book_metadata_helper.hpp"
+#include "i_app_info_service.hpp"
+#include "i_metadata_extractor.hpp"
+#include "library_controller.hpp"
+#include "library_service.hpp"
+#include "library_storage_access.hpp"
+#include "library_storage_gateway.hpp"
+#include "library_storage_manager.hpp"
+#include "local_library_tracker.hpp"
+#include "metadata_extractor.hpp"
 #include "settings_controller.hpp"
 #include "settings_service.hpp"
 #include "user_controller.hpp"
 #include "user_service.hpp"
 #include "user_storage_access.hpp"
 #include "user_storage_gateway.hpp"
-#include "app_info_controller.hpp"
-#include "app_info_gateway.hpp"
-#include "app_info_service.hpp"
-#include "i_app_info_service.hpp"
 
 
 namespace di = boost::di;
@@ -54,11 +56,17 @@ const auto diConfig = []
         di::bind<IAppInfoGateway>().to<gateways::AppInfoGateway>(),
         di::bind<IAppInfoAccess>().to<persistence::AppInfoAccess>(),
 
+        // Library
+        di::bind<ILibraryController>().to<controllers::LibraryController>(),
+        di::bind<ILibraryService>().to<services::LibraryService>(),
+        di::bind<ILibraryStorageGateway>()
+            .to<gateways::LibraryStorageGateway>(),
+        di::bind<ILibraryStorageAccess>()
+            .to<persistence::LibraryStorageAccess>(),
+
         // Books
         di::bind<IBookController>().to<controllers::BookController>(),
         di::bind<IBookService>().to<services::BookService>(),
-        di::bind<IBookStorageGateway>().to<gateways::BookStorageGateway>(),
-        di::bind<IBookStorageAccess>().to<persistence::BookStorageAccess>(),
 
         // User
         di::bind<IUserController>().to<controllers::UserController>(),
@@ -71,12 +79,12 @@ const auto diConfig = []
         di::bind<ISettingsService>().to<services::SettingsService>(),
 
         // Utility
-        di::bind<application::IBookMetadataHelper>()
-            .to<application::utility::BookMetadataHelper>(),
-        di::bind<application::IDownloadedBooksTracker>()
-            .to<application::utility::DownloadedBooksTracker>(),
-        di::bind<application::IBookStorageManager>()
-            .to<application::utility::BookStorageManager>());
+        di::bind<application::IMetadataExtractor>()
+            .to<application::core::MetadataExtractor>(),
+        di::bind<application::ILocalLibraryTracker>()
+            .to<application::utility::LocalLibraryTracker>(),
+        di::bind<application::ILibraryStorageManager>()
+            .to<application::managers::LibraryStorageManager>());
 };
 
 }  // namespace config

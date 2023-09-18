@@ -12,7 +12,7 @@ namespace application
 {
 
 /**
- *  The BookService handles all the operations on the user.
+ *  The UserService handles all the operations on the user.
  */
 class APPLICATION_EXPORT IUserService : public QObject
 {

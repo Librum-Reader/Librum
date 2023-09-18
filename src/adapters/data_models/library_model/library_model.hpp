@@ -4,10 +4,10 @@
 #include <QUuid>
 #include <QVariant>
 #include <vector>
+#include "adapters_export.hpp"
 #include "book.hpp"
 #include "tag.hpp"
 #include "tag_dto.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
@@ -65,7 +65,7 @@ public slots:
 
 private:
     QList<dtos::TagDto> convertTagsToDtos(
-        const std::vector<domain::entities::Tag>& tags) const;
+        const QList<domain::entities::Tag>& tags) const;
     QVector<int> getAllRoles();
 
     const std::vector<domain::entities::Book>& m_data;

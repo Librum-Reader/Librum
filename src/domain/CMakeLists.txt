@@ -9,6 +9,10 @@ add_library(domain
                     entities/tag.hpp
                     entities/user.cpp
                     entities/user.hpp
+                    entities/highlight.cpp
+                    entities/highlight.hpp
+                    entities/rectf.cpp
+                    entities/rectf.hpp
                     
                     value_objects/book_meta_data.hpp
                     value_objects/login_model.cpp

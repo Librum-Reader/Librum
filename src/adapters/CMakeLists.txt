@@ -4,32 +4,38 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
-                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_library_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
-                    interfaces/persistance/i_book_storage_access.hpp
+                    interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
+                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_page_controller.hpp
                     interfaces/persistance/i_app_info_access.hpp
                     interfaces/controllers/i_app_info_controller.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
-                    controllers/book_controller.cpp
-                    controllers/book_controller.hpp
+                    controllers/library_controller.cpp
+                    controllers/library_controller.hpp
                     controllers/user_controller.cpp
                     controllers/user_controller.hpp
                     controllers/settings_controller.cpp
                     controllers/settings_controller.hpp
                     controllers/app_info_controller.cpp
                     controllers/app_info_controller.hpp
+                    controllers/book_controller.cpp
+                    controllers/book_controller.hpp
+                    controllers/page_controller.cpp
+                    controllers/page_controller.hpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
-                    gateways/book_storage_gateway.cpp
-                    gateways/book_storage_gateway.hpp
+                    gateways/library_storage_gateway.cpp
+                    gateways/library_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
                     gateways/app_info_gateway.hpp
                     
@@ -49,6 +55,8 @@ add_library(adapters
                     DTOs/register_dto.hpp
                     DTOs/book_dto.hpp
                     DTOs/tag_dto.hpp
+                    DTOs/highlight_dto.hpp
+                    DTOs/rectf_dto.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)
@@ -79,6 +87,7 @@ target_link_libraries(adapters
                 PRIVATE
                     domain
                     application
+                    ${MUPDF_OUTPUT}
                     rapidfuzz::rapidfuzz
                     Qt6::Core
                     Qt6::Quick

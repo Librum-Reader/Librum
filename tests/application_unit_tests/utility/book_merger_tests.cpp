@@ -7,7 +7,7 @@
 #include "book_merger.hpp"
 #include "book_meta_data.hpp"
 #include "gmock/gmock.h"
-#include "i_book_storage_manager.hpp"
+#include "i_library_storage_manager.hpp"
 
 
 using namespace testing;
@@ -18,7 +18,7 @@ using domain::value_objects::BookMetaData;
 namespace tests::application
 {
 
-class BookStorageManagerMock : public ::application::IBookStorageManager
+class LibraryStorageManagerMock : public ::application::ILibraryStorageManager
 {
 public:
     MOCK_METHOD(void, addBook, (const Book&), (override));
@@ -51,7 +51,7 @@ struct ABookMerger : public ::testing::Test
         bookMerger = std::make_unique<BookMerger>();
     }
 
-    BookStorageManagerMock bookStorageManagerMock;
+    LibraryStorageManagerMock bookStorageManagerMock;
     std::unique_ptr<BookMerger> bookMerger;
 };
 

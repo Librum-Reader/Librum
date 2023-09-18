@@ -27,6 +27,13 @@ enum class SettingKeys
     SmoothScrolling,
     LoopAfterLastPage,
     CursorMode,
+    DefaultHighlightColorName,
+    HighlightColorA,
+    HighlightColorB,
+    HighlightColorC,
+    HighlightColorD,
+    HighlightColorE,
+    HighlightOpacity,
 
     // General
     OpenBooksAfterCreation,
@@ -51,6 +58,8 @@ enum class SettingKeys
     ToggleSpeaking,
     ReloadApplication,
     AddBook,
+    CreateHighlight,
+    RemoveHighlight,
 
     SettingKeys_END
 };
