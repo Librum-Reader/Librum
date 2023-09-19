@@ -24,6 +24,8 @@ public:
     virtual data_models::FreeBooksModel* getFreeBooksModel() = 0;
 
 signals:
+    void fetchingFirstMetadataPageSuccessful(const bool success);
+    void foundNoBooks();
     void gettingBookFinished(const QString& path);
 };
 

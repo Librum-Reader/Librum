@@ -23,7 +23,7 @@ FreeBooksService::FreeBooksService(
 
     connect(m_freeBooksStorageGateway,
             &IFreeBooksStorageGateway::fetchingBooksMetaDataFinished, this,
-            &FreeBooksService::saveBookMetaData);
+            &FreeBooksService::processBookMetadata);
 
     connect(m_freeBooksStorageGateway,
             &IFreeBooksStorageGateway::gettingBookCoverFinished, this,
@@ -133,10 +133,10 @@ void FreeBooksService::saveDownloadedBookMediaChunkToFile(
     }
 }
 
-void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books,
-                                        const int booksTotalCount,
-                                        const QString& nextMetadataPageUrl,
-                                        const QString& prevMetadataPageUrl)
+void FreeBooksService::processBookMetadata(std::vector<FreeBook>& books,
+                                           const int booksTotalCount,
+                                           const QString& nextMetadataPageUrl,
+                                           const QString& prevMetadataPageUrl)
 {
     for(auto& book : books)
     {
@@ -144,6 +144,9 @@ void FreeBooksService::saveBookMetaData(std::vector<FreeBook>& books,
         m_freeBooks.emplace_back(book);
         emit bookInsertionEnded();
     }
+
+    if(books.empty())
+        emit receivedNoMetadata();
 
     emit apiInfoReady(booksTotalCount, nextMetadataPageUrl,
                       prevMetadataPageUrl);

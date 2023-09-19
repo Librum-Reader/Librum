@@ -18,6 +18,10 @@ FreeBooksController::FreeBooksController(
         &application::IFreeBooksService::fetchingFirstMetadataPageSuccessful,
         this, &FreeBooksController::proccessFetchingFirstMetadataPageResult);
 
+    connect(m_freeBooksService,
+            &application::IFreeBooksService::receivedNoMetadata, this,
+            &FreeBooksController::foundNoBooks);
+
     connect(&m_freeBooksModel,
             &adapters::data_models::FreeBooksModel::fetchBooksMetadataPage,
             m_freeBooksService,
@@ -117,6 +121,8 @@ void FreeBooksController::proccessFetchingFirstMetadataPageResult(
     const bool result)
 {
     m_isFirstBooksMetadataPageFetchingAllowed = !result;
+
+    emit fetchingFirstMetadataPageSuccessful(result);
 }
 
 void FreeBooksController::deleteAllBooks()

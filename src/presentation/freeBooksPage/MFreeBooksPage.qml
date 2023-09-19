@@ -13,12 +13,25 @@ Page {
         color: Style.colorPageBackground
     }
 
-    Component.onCompleted: {
-        FreeBooksController.fetchFirstBooksMetadataPage()
+    Connections {
+        target: FreeBooksController
+
+        function onFoundNoBooks() {
+            centralMessageLabel.text = "No books were found"
+            centralMessageLabel.visible = true
+        }
+
+        function onFetchingFirstMetadataPageSuccessful(success) {
+            if (success === false) {
+                centralMessageLabel.text
+                        = "Couldn't load free books. Please, check your network connection"
+                centralMessageLabel.visible = true
+            }
+        }
     }
-    Component.onDestruction: {
-        FreeBooksController.clearAllFilters()
-    }
+
+    Component.onCompleted: FreeBooksController.fetchFirstBooksMetadataPage()
+    Component.onDestruction: FreeBooksController.clearAllFilters()
 
     ColumnLayout {
         id: layout
@@ -41,10 +54,22 @@ Page {
             Layout.alignment: Qt.AlignLeft
             Layout.topMargin: 45
             onSearchForAuthorsAndTitleTriggered: authorsAndTitle => {
+                                                     centralMessageLabel.visible = false
                                                      FreeBooksController.setFilterAuthorsAndTitle(
                                                          authorsAndTitle)
                                                      FreeBooksController.fetchFirstBooksMetadataPage()
                                                  }
+        }
+
+        Label {
+            id: centralMessageLabel
+            Layout.alignment: Qt.AlignHCenter
+            Layout.leftMargin: -sidebar.width
+            Layout.topMargin: Math.round(root.height / 3) - implicitHeight
+            color: Style.colorTitle
+            font.pointSize: 22
+            font.weight: Font.Medium
+            visible: false
         }
 
         Pane {

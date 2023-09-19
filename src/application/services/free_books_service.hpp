@@ -35,10 +35,10 @@ private slots:
                                             const QString& format);
 
 private:
-    void saveBookMetaData(std::vector<domain::value_objects::FreeBook>& books,
-                          const int booksTotalCount,
-                          const QString& nextMetadataPageUrl,
-                          const QString& prevMetadataPageUrl);
+    void processBookMetadata(
+        std::vector<domain::value_objects::FreeBook>& books,
+        const int booksTotalCount, const QString& nextMetadataPageUrl,
+        const QString& prevMetadataPageUrl);
     void setMediaDownloadProgressForBook(const int id, qint64 bytesReceived,
                                          qint64 bytesTotal);
     domain::value_objects::FreeBook* getFreeBookById(int id);

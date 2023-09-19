@@ -29,6 +29,7 @@ public slots:
 
 signals:
     void fetchingFirstMetadataPageSuccessful(const bool success);
+    void receivedNoMetadata();
     void apiInfoReady(const int booksTotalCount,
                       const QString& nextMetadataPageUrl,
                       const QString& prevMetadataPageUrl);
