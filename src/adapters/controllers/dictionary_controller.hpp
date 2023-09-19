@@ -4,6 +4,7 @@
 #include "adapters_export.hpp"
 #include "i_dictionary_controller.hpp"
 #include "i_dictionary_service.hpp"
+#include "word_definition_dto.hpp"
 
 namespace adapters::controllers
 {
@@ -16,9 +17,16 @@ public:
     DictionaryController(application::IDictionaryService* dictionaryService);
 
     void getDefinitionForWord(const QString& word) override;
+    dtos::DictionaryEntryDto definition() const override;
+
+private slots:
+    void processDefinition(bool success, const QJsonObject& definition);
 
 private:
+    dtos::DictionaryEntryDto parseDefinition(const QJsonObject& definition);
+
     application::IDictionaryService* m_dictionaryService;
+    dtos::DictionaryEntryDto m_definition;
 };
 
 }  // namespace adapters::controllers

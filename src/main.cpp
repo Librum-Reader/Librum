@@ -30,6 +30,7 @@
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
+#include "word_definition_dto.hpp"
 
 
 using namespace adapters::controllers;
@@ -68,6 +69,9 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
+    qRegisterMetaType<adapters::dtos::DictionaryEntryDto>();
+    qRegisterMetaType<adapters::dtos::WordTypeDto>();
+    qRegisterMetaType<adapters::dtos::WordDefinitionDto>();
 
 
     // Authentication Stack

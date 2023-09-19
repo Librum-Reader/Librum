@@ -1,4 +1,5 @@
 #pragma once
+#include <QJsonObject>
 #include <QObject>
 #include <QString>
 #include "adapters_export.hpp"
@@ -18,6 +19,9 @@ public:
     virtual ~IDictionaryAccess() noexcept = default;
 
     virtual void getDefinitionForWord(const QString& word) = 0;
+
+signals:
+    void definitionReceived(bool success, const QJsonObject& definition);
 };
 
 }  // namespace adapters

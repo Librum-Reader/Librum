@@ -18,6 +18,9 @@ public:
     virtual ~IDictionaryGateway() noexcept = default;
 
     virtual void getDefinitionForWord(const QString& word) = 0;
+
+signals:
+    void definitionReceived(bool success, const QJsonObject& definition);
 };
 
 }  // namespace application

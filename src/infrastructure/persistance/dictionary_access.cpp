@@ -16,20 +16,20 @@ void DictionaryAccess::getDefinitionForWord(const QString& word)
 
     // Handle authentication result and release the reply's memory
     connect(reply, &QNetworkReply::finished, this,
-            [reply]()
+            [this, reply]()
             {
-                QJsonObject jsonReply =
-                    QJsonDocument::fromJson(reply->readAll()).object();
-
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     api_error_helper::logErrorMessage(reply,
                                                       "Getting definition");
 
+                    emit definitionReceived(false, QJsonObject());
                     reply->deleteLater();
                     return;
                 }
 
+                emit definitionReceived(
+                    true, QJsonDocument::fromJson(reply->readAll()).object());
                 reply->deleteLater();
             });
 }
