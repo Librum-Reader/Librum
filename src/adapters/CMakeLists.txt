@@ -7,13 +7,15 @@ add_library(adapters
                     interfaces/controllers/i_library_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
+                    interfaces/controllers/i_page_controller.hpp
+                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_app_info_controller.hpp
+                    interfaces/controllers/i_dictionary_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
-                    interfaces/controllers/i_book_controller.hpp
-                    interfaces/controllers/i_page_controller.hpp
                     interfaces/persistance/i_app_info_access.hpp
-                    interfaces/controllers/i_app_info_controller.hpp
+                    interfaces/persistance/i_dictionary_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
@@ -29,6 +31,8 @@ add_library(adapters
                     controllers/book_controller.hpp
                     controllers/page_controller.cpp
                     controllers/page_controller.hpp
+                    controllers/dictionary_controller.cpp
+                    controllers/dictionary_controller.hpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -38,6 +42,8 @@ add_library(adapters
                     gateways/library_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
                     gateways/app_info_gateway.hpp
+                    gateways/dictionary_gateway.hpp
+                    gateways/dictionary_gateway.cpp
                     
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp

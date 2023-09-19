@@ -10,6 +10,10 @@
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
 #include "book_service.hpp"
+#include "dictionary_access.hpp"
+#include "dictionary_controller.hpp"
+#include "dictionary_gateway.hpp"
+#include "dictionary_service.hpp"
 #include "i_app_info_access.hpp"
 #include "i_app_info_service.hpp"
 #include "i_metadata_extractor.hpp"
@@ -73,6 +77,13 @@ const auto diConfig = []
         di::bind<IUserService>().to<services::UserService>(),
         di::bind<IUserStorageGateway>().to<gateways::UserStorageGateway>(),
         di::bind<IUserStorageAccess>().to<persistence::UserStorageAccess>(),
+
+        // Dictionary
+        di::bind<IDictionaryController>()
+            .to<controllers::DictionaryController>(),
+        di::bind<IDictionaryService>().to<services::DictionaryService>(),
+        di::bind<IDictionaryGateway>().to<gateways::DictionaryGateway>(),
+        di::bind<IDictionaryAccess>().to<persistence::DictionaryAccess>(),
 
         // Settings
         di::bind<ISettingsController>().to<controllers::SettingsController>(),

@@ -92,6 +92,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController",
                                  userController.get());
 
+    // Dictionary Stack
+    auto* dictionaryService = config::diConfig().create<application::IDictionaryService*>();
+    auto dictionaryController = std::make_unique<DictionaryController>(dictionaryService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "DictionaryController",
+                                 dictionaryController.get());
+
     // Library Stack
     auto* libraryService = config::diConfig().create<application::ILibraryService*>();
     auto libraryController = std::make_unique<LibraryController>(libraryService);
