@@ -17,6 +17,8 @@ class ADAPTERS_EXPORT IDictionaryController : public QObject
 
 public:
     virtual ~IDictionaryController() noexcept = default;
+
+    Q_INVOKABLE virtual void getDefinitionForWord(const QString& word) = 0;
 };
 
 }  // namespace adapters

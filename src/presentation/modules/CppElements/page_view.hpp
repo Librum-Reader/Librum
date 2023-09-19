@@ -45,6 +45,10 @@ public:
         adapters::controllers::BookController* newBookController);
 
     Q_INVOKABLE void copySelectedText();
+    Q_INVOKABLE void copyHighlightedText(const QString& uuid);
+    Q_INVOKABLE QString getSelectedText();
+    Q_INVOKABLE QString getHighlightedText(const QString& uuid);
+
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void setPointingCursor();
     Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
@@ -52,7 +56,6 @@ public:
     Q_INVOKABLE void removeHighlight(const QString& uuid);
     Q_INVOKABLE void changeHighlightColor(const QString& uuid,
                                           const QString& color, int alpha);
-    Q_INVOKABLE void copyTextFromHighlight(const QString& uuid);
 
 
 private slots:

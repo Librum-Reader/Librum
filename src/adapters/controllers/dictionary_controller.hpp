@@ -13,10 +13,12 @@ class ADAPTERS_EXPORT DictionaryController : public IDictionaryController
     Q_OBJECT
 
 public:
-    DictionaryController(application::IDictionaryService* userService);
+    DictionaryController(application::IDictionaryService* dictionaryService);
+
+    void getDefinitionForWord(const QString& word) override;
 
 private:
-    application::IDictionaryService* m_userService;
+    application::IDictionaryService* m_dictionaryService;
 };
 
 }  // namespace adapters::controllers

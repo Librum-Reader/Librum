@@ -16,6 +16,8 @@ class ADAPTERS_EXPORT IDictionaryAccess : public QObject
 
 public:
     virtual ~IDictionaryAccess() noexcept = default;
+
+    virtual void getDefinitionForWord(const QString& word) = 0;
 };
 
 }  // namespace adapters

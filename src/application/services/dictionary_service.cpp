@@ -8,4 +8,9 @@ DictionaryService::DictionaryService(IDictionaryGateway* dictionaryGateway) :
 {
 }
 
+void DictionaryService::getDefinitionForWord(const QString& word)
+{
+    m_dictionaryGateway->getDefinitionForWord(word);
+}
+
 }  // namespace application::services

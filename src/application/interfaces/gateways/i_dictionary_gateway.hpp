@@ -8,7 +8,7 @@ namespace application
 /**
  * The DictionaryGateway class acts as a layer of abstraction before the
  * DictionaryAccess class. It maps the data provided by the application to
- * the data type required for user storage API requests.
+ * the data type required for dictionary API requests.
  */
 class APPLICATION_EXPORT IDictionaryGateway : public QObject
 {
@@ -16,6 +16,8 @@ class APPLICATION_EXPORT IDictionaryGateway : public QObject
 
 public:
     virtual ~IDictionaryGateway() noexcept = default;
+
+    virtual void getDefinitionForWord(const QString& word) = 0;
 };
 
 }  // namespace application

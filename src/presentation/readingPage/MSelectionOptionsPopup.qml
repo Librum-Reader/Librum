@@ -111,7 +111,7 @@ Popup
                 if(root.highlight == "")
                     activeFocusItem.copySelectedText();
                 else
-                    activeFocusItem.copyTextFromHighlight(root.highlight);
+                    activeFocusItem.copyHighlightedText(root.highlight);
             }
         }
         
@@ -124,6 +124,27 @@ Popup
             clickedFunction: function() {
                 let uuid = internal.createHighlight();
                 root.highlightOptionSelected(uuid);
+            }
+        }
+        
+        Separator { }
+        
+        SelectionOptionsPopupItem
+        {
+            id: lookUpAction
+            text: "Look Up"
+            clickedFunction: function() {
+                let text = ""
+                if(root.highlight == "")
+                    text = activeFocusItem.getSelectedText();
+                else
+                    text = activeFocusItem.getHighlightedText(root.highlight);
+
+                // Return if the character count exceeds 100 because no word-entry will exist.
+                if(text.length > 100)
+                    return;
+                
+                DictionaryController.getDefinitionForWord(text);
             }
         }
         
@@ -147,8 +168,9 @@ Popup
         
         function getWidth()
         {
-            return separator1.width * 2 + selectionOptionsLayout.spacing * 4 + 
-                    copyAction.width + highlightAction.width + (root.highlight === "" ? 0 : removeAction.width);
+            return separator1.width * 3 + selectionOptionsLayout.spacing * 6 + 
+                    copyAction.width + highlightAction.width + lookUpAction.width
+                       + (root.highlight === "" ? 0 : removeAction.width);
         }
         
         function createHighlight()

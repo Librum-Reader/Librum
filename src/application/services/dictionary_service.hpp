@@ -13,6 +13,8 @@ class APPLICATION_EXPORT DictionaryService : public IDictionaryService
 public:
     DictionaryService(IDictionaryGateway* dictionaryGateway);
 
+    void getDefinitionForWord(const QString& word) override;
+
 private:
     IDictionaryGateway* m_dictionaryGateway;
 };

@@ -8,4 +8,9 @@ DictionaryGateway::DictionaryGateway(IDictionaryAccess* dictionaryAccess) :
 {
 }
 
+void DictionaryGateway::getDefinitionForWord(const QString& word)
+{
+    m_dictionaryAccess->getDefinitionForWord(word);
+}
+
 }  // namespace adapters::gateways

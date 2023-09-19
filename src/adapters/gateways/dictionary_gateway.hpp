@@ -14,6 +14,9 @@ class ADAPTERS_EXPORT DictionaryGateway : public application::IDictionaryGateway
 public:
     DictionaryGateway(IDictionaryAccess* dictionaryAccess);
 
+    void getDefinitionForWord(const QString& word) override;
+
+private:
     IDictionaryAccess* m_dictionaryAccess;
 };
 

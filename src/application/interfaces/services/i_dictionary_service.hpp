@@ -15,6 +15,8 @@ class APPLICATION_EXPORT IDictionaryService : public QObject
 
 public:
     virtual ~IDictionaryService() noexcept = default;
+
+    virtual void getDefinitionForWord(const QString& word) = 0;
 };
 
 }  // namespace application
