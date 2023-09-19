@@ -26,8 +26,6 @@
         <file>addOnsPage/MAddOnsPage.qml</file>
         <file>forgotPasswordPage/MForgotPasswordPage.qml</file>
         <file>freeBooksPage/MFreeBooksPage.qml</file>
-        <file>freeBooksPage/explorerToolbar/MExplorerFilterByButton.qml</file>
-        <file>freeBooksPage/explorerToolbar/MExplorerFilterByPopup.qml</file>
         <file>freeBooksPage/explorerToolbar/MExplorerToolbar.qml</file>
         <file>freeBooksPage/MDownloadBookPopup.qml</file>
         <file>freeBooksPage/MFreeBook.qml</file>
