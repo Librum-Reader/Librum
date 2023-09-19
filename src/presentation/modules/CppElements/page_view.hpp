@@ -51,12 +51,12 @@ public:
 
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void setPointingCursor();
+    Q_INVOKABLE void resetCursorToDefault();
     Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
                                                             int alpha);
     Q_INVOKABLE void removeHighlight(const QString& uuid);
     Q_INVOKABLE void changeHighlightColor(const QString& uuid,
                                           const QString& color, int alpha);
-
 
 private slots:
     void updateZoom(float newZoom);
@@ -84,7 +84,6 @@ private:
     void removeConflictingHighlights(domain::entities::Highlight& highlight);
     bool mouseAboveSelection(const QPointF mouse);
 
-    void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
 
     bool rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2);

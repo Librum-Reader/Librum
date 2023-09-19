@@ -548,11 +548,7 @@ void PageView::copySelectedText()
 
 void PageView::resetCursorToDefault()
 {
-    while(QApplication::overrideCursor() != nullptr &&
-          *QApplication::overrideCursor() != Qt::ArrowCursor)
-    {
-        QApplication::restoreOverrideCursor();
-    }
+    QApplication::restoreOverrideCursor();
 }
 
 void PageView::setCorrectCursor(int x, int y)

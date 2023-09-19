@@ -20,11 +20,6 @@ Popup
         radius: 4
     }
     
-    Component.onCompleted:
-    {
-        let x = DictionaryController.definition;
-    }
-    
     Shortcut
     {
         sequence: SettingsController.shortcuts.CreateHighlight

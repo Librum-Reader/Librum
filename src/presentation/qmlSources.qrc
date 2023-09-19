@@ -98,5 +98,6 @@
         <file>readingPage/MSelectionOptionsPopup.qml</file>
         <file>readingPage/MColorSelectionPopup.qml</file>
         <file>modules/CustomComponents/MSlider.qml</file>
+        <file>readingPage/MDictionaryPopup.qml</file>
     </qresource>
 </RCC>
