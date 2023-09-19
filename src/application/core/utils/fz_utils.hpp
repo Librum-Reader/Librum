@@ -17,6 +17,17 @@ void imageCleanupHandler(void* data)
     delete[] samples;
 }
 
+QRectF fzRectToQRectF(const mupdf::FzRect& rect)
+{
+    return QRectF(rect.x0, rect.y0, rect.x1 - rect.x0, rect.y1 - rect.y0);
+}
+
+mupdf::FzRect qRectFtoFzRect(const QRectF& rect)
+{
+    return mupdf::FzRect(rect.topLeft().x(), rect.topLeft().y(),
+                         rect.bottomRight().x(), rect.bottomRight().y());
+}
+
 }  // namespace
 
 using FzPointPair = QPair<mupdf::FzPoint, mupdf::FzPoint>;
@@ -41,6 +52,19 @@ inline QPointF scalePointToCurrentZoom(const QPointF& point, float oldZoom,
     fzPoint = fzPoint.fz_transform_point(newMatrix);
 
     return QPointF(fzPoint.x, fzPoint.y);
+}
+
+inline void scaleQRectFToZoom(QRectF& rect, float newZoom)
+{
+    auto fzRect = qRectFtoFzRect(rect);
+
+    // Apply new zoom
+    auto newMatrix = mupdf::FzMatrix();
+    newMatrix.a = newZoom;
+    newMatrix.d = newZoom;
+    auto scaledFzRect = fzRect.fz_transform_rect(newMatrix);
+
+    rect = fzRectToQRectF(scaledFzRect);
 }
 
 inline QRectF fzQuadToQRectF(const mupdf::FzQuad& rect)
@@ -82,10 +106,41 @@ inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint)
  * transformation matrix to it. This is necessary because mupdf expects
  * arguments passed to be without any zooming or similar applied.
  */
-inline void restorePoint(mupdf::FzPoint& point, mupdf::FzMatrix& matrix)
+inline void restoreFzPoint(mupdf::FzPoint& point, mupdf::FzMatrix& matrix)
 {
     auto invMatrix = matrix.fz_invert_matrix();
     point = point.fz_transform_point(invMatrix);
+}
+
+inline QPointF restoreQPoint(const QPointF& point, float zoom)
+{
+    auto fzPoint = qPointToFzPoint(point);
+
+    mupdf::FzMatrix matrix;
+    matrix.a = zoom;
+    matrix.d = zoom;
+
+    restoreFzPoint(fzPoint, matrix);
+    return fzPointToQPoint(fzPoint);
+}
+
+/**
+ * Restores a rect to its original position by applying the inverse
+ * transformation matrix to it. This is necessary because mupdf expects
+ * arguments passed to be without any zooming or similar applied.
+ */
+inline void restoreQRect(QRectF& rect, float zoom)
+{
+    auto fzRect = qRectFtoFzRect(rect);
+
+    mupdf::FzMatrix matrix;
+    matrix.a = zoom;
+    matrix.d = zoom;
+
+    auto invMatrix = matrix.fz_invert_matrix();
+    auto restoredFzRect = fzRect.fz_transform_rect(invMatrix);
+
+    rect = fzRectToQRectF(restoredFzRect);
 }
 
 }  // namespace application::core::utils

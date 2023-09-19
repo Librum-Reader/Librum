@@ -10,12 +10,14 @@
 #include <QRectF>
 #include <QSGSimpleTextureNode>
 #include <QtWidgets/QApplication>
+#include <limits>
 #include "fz_utils.hpp"
+#include "highlight.hpp"
 #include "page_controller.hpp"
-#include "qnamespace.h"
 
 using adapters::controllers::BookController;
 using adapters::controllers::PageController;
+using domain::entities::Highlight;
 using namespace application::core;
 
 namespace cpp_elements
@@ -27,7 +29,7 @@ cpp_elements::PageView::PageView()
     setAcceptedMouseButtons(Qt::AllButtons);
     setAcceptHoverEvents(true);
 
-    m_tripleClickTimer.setInterval(450);
+    m_tripleClickTimer.setInterval(400);
     m_tripleClickTimer.setSingleShot(true);
 }
 
@@ -43,7 +45,7 @@ void PageView::setBookController(BookController* newBookController)
     connect(m_bookController, &BookController::zoomChanged, this,
             &PageView::updateZoom);
 
-    connect(m_bookController, &BookController::highlightText, this,
+    connect(m_bookController, &BookController::selectText, this,
             [this](int pageNumber, QPointF left, QPointF right)
             {
                 if(pageNumber != m_pageNumber)
@@ -126,6 +128,7 @@ QSGNode* PageView::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
     QPainter painter(&image);
 
     paintSelectionOnPage(painter);
+    paintHighlightsOnPage(painter);
 
     n->setTexture(window()->createTextureFromImage(image));
     n->setRect(boundingRect());
@@ -134,8 +137,18 @@ QSGNode* PageView::updatePaintNode(QSGNode* node, UpdatePaintNodeData* nodeData)
 
 void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 {
-    m_selectionStart = QPointF(event->position().x(), event->position().y());
-    m_selectionEnd = QPointF(event->position().x(), event->position().y());
+    if(event->button() == Qt::RightButton)
+        return;
+
+    if(m_startedMousePressOnHighlight)
+        return;
+
+    int mouseX = event->position().x();
+    int mouseY = event->position().y();
+    QPoint mousePoint(mouseX, mouseY);
+
+    m_selectionStart = mousePoint;
+    m_selectionEnd = mousePoint;
     selectSingleWord();
 
     m_tripleClickTimer.start();
@@ -144,25 +157,51 @@ void PageView::mouseDoubleClickEvent(QMouseEvent* event)
 
 void PageView::mousePressEvent(QMouseEvent* event)
 {
+    if(event->button() == Qt::RightButton)
+        return;
+
     int mouseX = event->position().x();
     int mouseY = event->position().y();
-    QPoint mousePoint(mouseX, mouseY);
+    QPoint point(mouseX, mouseY);
 
     forceActiveFocus();
 
-    if(m_pageController->pointIsAboveLink(mousePoint))
+    if(m_pageController->pointIsAboveLink(point))
         m_startedMousePressOnLink = true;
+
+    auto highlight = m_bookController->getHighlightAtPoint(point, m_pageNumber);
+    if(highlight != nullptr)
+    {
+        // Convert the domain::entities::ReftFs to QRectFs and scale them
+        auto rects = highlight->getRects();
+        QList<QRectF> qRects;
+        qRects.reserve(rects.size());
+        for(auto& rect : rects)
+        {
+            auto qRectF = rect.getQRect();
+            utils::scaleQRectFToZoom(qRectF, m_bookController->getZoom());
+            qRects.append(qRectF);
+        }
+
+        auto positions = getCenterXAndTopYFromRects(qRects);
+
+        auto uuidAsString = highlight->getUuid().toString(QUuid::WithoutBraces);
+        m_bookController->highlightSelected(positions.first, positions.second,
+                                            uuidAsString);
+        m_startedMousePressOnHighlight = true;
+
+        return;
+    }
+    m_startedMousePressOnHighlight = false;
 
     // Select line when left mouse button is pressed 3 times
     if(m_tripleClickTimer.isActive())
     {
-        m_selectionStart = mousePoint;
         selectLine();
-        m_tripleClickTimer.stop();
         return;
     }
 
-    m_selectionStart = mousePoint;
+    m_selectionStart = point;
 }
 
 void PageView::mouseReleaseEvent(QMouseEvent* event)
@@ -170,14 +209,6 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     int mouseX = event->position().x();
     int mouseY = event->position().y();
     QPoint mousePoint(mouseX, mouseY);
-
-    // This gets triggered when the user simply clicks on the page, without
-    // dragging the mouse, so on a normal click. In this case we want to reset
-    // the highlight.
-    if(m_selectionStart == QPointF(mouseX, mouseY))
-    {
-        removeSelection();
-    }
 
     if(m_startedMousePressOnLink &&
        m_pageController->pointIsAboveLink(mousePoint))
@@ -187,11 +218,38 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     }
     m_startedMousePressOnLink = false;
 
+    // This gets triggered when the user simply clicks on the page, without
+    // dragging the mouse, so on a normal click. In this case we want to
+    // reset the selection.
+    if(m_selectionStart == QPointF(mouseX, mouseY) &&
+       !m_tripleClickTimer.isActive())
+    {
+        removeSelection();
+
+        // Restart it since some actions are checking if it is active to e.g.
+        // prevent removing the line select on mouse release
+        m_tripleClickTimer.start();
+    }
+    else if(!m_startedMousePressOnHighlight)
+    {
+        auto positions = getCenterXAndTopYFromRects(
+            m_pageController->getBufferedSelectionRects());
+
+        emit m_bookController->textSelectionFinished(positions.first,
+                                                     positions.second);
+    }
+
     m_doubleClickHold = false;
 }
 
 void PageView::mouseMoveEvent(QMouseEvent* event)
 {
+    if(event->buttons() == Qt::RightButton)
+        return;
+
+    if(m_startedMousePressOnHighlight)
+        return;
+
     int mouseX = event->position().x();
     int mouseY = event->position().y();
 
@@ -224,12 +282,200 @@ void PageView::keyPressEvent(QKeyEvent* event)
 
 void PageView::paintSelectionOnPage(QPainter& painter)
 {
-    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
-    for(auto rect : bufferedSelectionRects)
+    auto& selectionRects = m_pageController->getBufferedSelectionRects();
+    for(auto rect : selectionRects)
     {
         QColor selectionColor(134, 171, 175, 125);
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
         painter.fillRect(rect, selectionColor);
+    }
+}
+
+QPair<float, float> PageView::getCenterXAndTopYFromRects(
+    const QList<QRectF>& rects)
+{
+    float mostLeftX = std::numeric_limits<float>::max();
+    float mostRightX = 0;
+    float topY = std::numeric_limits<float>::max();
+    for(auto& rect : rects)
+    {
+        if(rect.x() < mostLeftX)
+            mostLeftX = rect.x();
+
+        if(rect.x() + rect.width() > mostRightX)
+            mostRightX = rect.x() + rect.width();
+
+        if(rect.top() < topY)
+            topY = rect.top();
+    }
+
+    auto centerX = (mostLeftX + mostRightX) / 2;
+    return { centerX, topY };
+}
+
+void PageView::paintHighlightsOnPage(QPainter& painter)
+{
+    for(auto& highlight : m_bookController->getHighlights())
+    {
+        if(highlight.getPageNumber() != m_pageNumber)
+            continue;
+
+        for(auto rect : highlight.getRects())
+        {
+            // We store the highlights zoom independent, so we need to scale
+            // them to the current zoom here.
+            auto qRect = rect.getQRect();
+            utils::scaleQRectFToZoom(qRect, m_pageController->getZoom());
+            rect.setQRect(qRect);
+
+            painter.setCompositionMode(QPainter::CompositionMode_Multiply);
+            painter.fillRect(rect.getQRect(), highlight.getColor());
+        }
+    }
+}
+
+void PageView::removeConflictingHighlights(Highlight& highlight)
+{
+    bool existingHighlightRemoved = false;
+
+    auto& highlights = m_bookController->getHighlights();
+    for(int i = 0; i < highlights.size(); ++i)
+    {
+        auto& existingHighlight = highlights[i];
+        if(existingHighlight.getPageNumber() != highlight.getPageNumber())
+            continue;
+
+        for(int u = 0; u < highlight.getRects().size(); ++u)
+        {
+            auto rect = highlight.getRects()[u].getQRect();
+
+            for(int k = 0; k < existingHighlight.getRects().size(); ++k)
+            {
+                auto existingRect = existingHighlight.getRects()[k].getQRect();
+
+                // New rect intersects with old rect
+                if(rect.intersects(existingRect))
+                {
+                    // Make sure that the rects are on the same line. Depending
+                    // on the line height, lines above eachother will overlap,
+                    // but its only an intersect when they are on the same line.
+                    bool onSameLine = rectsAreOnSameLine(existingRect, rect);
+                    if(onSameLine)
+                    {
+                        auto uuid = highlights[i].getUuid();
+                        m_bookController->removeHighlight(uuid);
+                        --i;
+                        existingHighlightRemoved = true;
+                        break;
+                    }
+                }
+            }
+
+            if(existingHighlightRemoved)
+            {
+                existingHighlightRemoved = false;
+                break;
+            }
+        }
+    }
+}
+
+bool PageView::mouseAboveSelection(const QPointF mouse)
+{
+    auto& selectionRects = m_pageController->getBufferedSelectionRects();
+    for(auto& rect : selectionRects)
+    {
+        if(rect.contains(mouse))
+            return true;
+    }
+
+    return false;
+}
+
+QString PageView::createHighlightFromCurrentSelection(const QString& hex,
+                                                      int alpha)
+{
+    auto bufferedSelectionRects = m_pageController->getBufferedSelectionRects();
+
+    // Make sure to restore the rects to their original size, since we want to
+    // store them, so they need to be zoom independent.
+    for(auto& rect : bufferedSelectionRects)
+    {
+        utils::restoreQRect(rect, m_pageController->getZoom());
+    }
+
+    removeSelection();
+
+    auto pageNumber = m_pageNumber;
+    auto color = QColor(hex);
+    color.setAlpha(alpha);
+    auto rects = bufferedSelectionRects;
+    Highlight highlight(pageNumber, color);
+    highlight.setRects(rects);
+
+    removeConflictingHighlights(highlight);
+    m_bookController->addHighlight(highlight);
+    m_bookController->saveHighlights();
+
+    update();
+    return highlight.getUuid().toString(QUuid::WithoutBraces);
+}
+
+void PageView::removeHighlight(const QString& uuid)
+{
+    m_bookController->removeHighlight(QUuid(uuid));
+    m_bookController->saveHighlights();
+
+    update();
+}
+
+void PageView::changeHighlightColor(const QString& uuid, const QString& color,
+                                    int alpha)
+{
+    QColor newColor(color);
+    newColor.setAlpha(alpha);
+
+    m_bookController->changeHighlightColor(QUuid(uuid), newColor);
+    m_bookController->saveHighlights();
+
+    update();
+}
+
+void PageView::copyTextFromHighlight(const QString& uuid)
+{
+    const Highlight* highlight = nullptr;
+    for(auto& h : m_bookController->getHighlights())
+    {
+        if(h.getUuid() == QUuid(uuid))
+        {
+            highlight = &h;
+            break;
+        }
+    }
+
+    QPointF start(highlight->getRects().first().getQRect().left(),
+                  highlight->getRects().first().getQRect().center().y());
+
+    QPointF end(highlight->getRects().last().getQRect().right(),
+                highlight->getRects().last().getQRect().center().y());
+
+    start =
+        utils::scalePointToCurrentZoom(start, 1, m_bookController->getZoom());
+    end = utils::scalePointToCurrentZoom(end, 1, m_bookController->getZoom());
+
+    QString text = m_pageController->getTextFromSelection(start, end);
+
+    auto clipboard = QApplication::clipboard();
+    clipboard->setText(text);
+}
+
+void PageView::setPointingCursor()
+{
+    if(QApplication::overrideCursor() == nullptr ||
+       *QApplication::overrideCursor() != Qt::PointingHandCursor)
+    {
+        resetCursorToDefault();
+        QApplication::setOverrideCursor(Qt::PointingHandCursor);
     }
 }
 
@@ -283,10 +529,10 @@ void PageView::selectLine()
 
 void PageView::copySelectedText()
 {
-    auto clipboard = QApplication::clipboard();
     QString text = m_pageController->getTextFromSelection(m_selectionStart,
                                                           m_selectionEnd);
 
+    auto clipboard = QApplication::clipboard();
     clipboard->setText(text);
 }
 
@@ -301,14 +547,10 @@ void PageView::resetCursorToDefault()
 
 void PageView::setCorrectCursor(int x, int y)
 {
-    if(m_pageController->pointIsAboveLink(QPoint(x, y)))
+    if(m_pageController->pointIsAboveLink(QPoint(x, y)) ||
+       m_bookController->getHighlightAtPoint(QPointF(x, y), m_pageNumber))
     {
-        if(QApplication::overrideCursor() == nullptr ||
-           *QApplication::overrideCursor() != Qt::PointingHandCursor)
-        {
-            resetCursorToDefault();
-            QApplication::setOverrideCursor(Qt::PointingHandCursor);
-        }
+        setPointingCursor();
     }
     else if(m_pageController->pointIsAboveText(QPoint(x, y)))
     {
@@ -323,6 +565,17 @@ void PageView::setCorrectCursor(int x, int y)
     {
         resetCursorToDefault();
     }
+}
+
+bool PageView::rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2)
+{
+    auto shorterRect = rect1.height() <= rect2.height() ? rect1 : rect2;
+    auto intersectH = rect1.intersected(rect2).height();
+
+    float offsetTolerance = 0.75;
+    bool onSameLine = intersectH >= shorterRect.height() * offsetTolerance;
+
+    return onSameLine;
 }
 
 void PageView::setColorInverted(bool newColorInverted)

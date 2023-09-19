@@ -96,7 +96,7 @@ const auto diConfig = []
         di::bind<application::ILocalLibraryTracker>()
             .to<application::utility::LocalLibraryTracker>(),
         di::bind<application::ILibraryStorageManager>()
-            .to<application::utility::LibraryStorageManager>());
+            .to<application::managers::LibraryStorageManager>());
 };
 
 }  // namespace config

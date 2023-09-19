@@ -48,8 +48,7 @@ private:
                               dtos::BookDto& bookDto);
     void addBookTagsToDto(const domain::entities::Book& book,
                           dtos::BookDto& bookDto);
-    bool vectorContainsTag(const std::vector<domain::entities::Tag>& tags,
-                           QUuid uuid);
+    bool listContainsTag(const QList<domain::entities::Tag>& tags, QUuid uuid);
 
     application::ILibraryService* m_bookService;
     data_models::LibraryModel m_libraryModel;

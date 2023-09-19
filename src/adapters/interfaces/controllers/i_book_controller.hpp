@@ -1,5 +1,6 @@
 #include <QObject>
 #include "adapters_export.hpp"
+#include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 #pragma once
@@ -35,6 +36,15 @@ public:
     Q_INVOKABLE virtual void goToNextSearchHit() = 0;
     Q_INVOKABLE virtual void goToPreviousSearchHit() = 0;
 
+    virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
+    virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
+    virtual void removeHighlight(const QUuid& uuid) = 0;
+    virtual void changeHighlightColor(const QUuid& uuid,
+                                      const QColor& color) = 0;
+    virtual void saveHighlights() = 0;
+    virtual const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
@@ -52,7 +62,10 @@ signals:
     void zoomChanged(float zoom);
     void tableOfContentsChanged();
     void goToPosition(int pageNumber, int y);
-    void highlightText(int pageNumber, QPointF left, QPointF right);
+    void selectText(int pageNumber, QPointF left, QPointF right);
+    void textSelectionFinished(float centerX, float topY);
+    void highlightSelected(float centerX, float topY, const QString& uuid);
+    void noSearchHitsFound();
 };
 
 }  // namespace adapters

@@ -28,7 +28,7 @@ public:
     bool pointIsAboveLink(const QPointF& point) override;
     const char* getLinkUriAtPoint(const QPointF& point) override;
 
-    QList<QRectF> getBufferedSelectionRects() override;
+    const QList<QRectF>& getBufferedSelectionRects() override;
     void generateSelectionRects(QPointF start, QPointF end) override;
     void clearBufferedSelectionRects() override;
 
@@ -46,6 +46,10 @@ private:
     // Image caching
     bool m_pageImageOutdated = true;
     QImage m_pageImage;
+
+    // Selection rects outdated
+    bool m_selectionRectsOutdated = true;
+    QList<QRectF> m_selectionRects;
 
     using QPointFPair = QPair<QPointF, QPointF>;
 };

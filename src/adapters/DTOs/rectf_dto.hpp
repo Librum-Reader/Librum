@@ -1,16 +1,15 @@
 #pragma once
 #include <QString>
+#include <QRect>
 #include "adapters_export.hpp"
 
 namespace adapters::dtos
 {
 
-struct ADAPTERS_EXPORT RegisterDto
+struct ADAPTERS_EXPORT RectFDto
 {
-    QString firstName;
-    QString lastName;
-    QString email;
-    QString password;
+    QString uuid;
+    QRectF rect;
 };
 
 }  // namespace adapters::dtos

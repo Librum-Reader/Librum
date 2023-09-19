@@ -11,7 +11,8 @@ using namespace domain::entities;
 namespace adapters::gateways
 {
 
-LibraryStorageGateway::LibraryStorageGateway(ILibraryStorageAccess* bookStorageAccess) :
+LibraryStorageGateway::LibraryStorageGateway(
+    ILibraryStorageAccess* bookStorageAccess) :
     m_bookStorageAccess(bookStorageAccess)
 {
     // Loading books
@@ -39,11 +40,12 @@ LibraryStorageGateway::LibraryStorageGateway(ILibraryStorageAccess* bookStorageA
             this, &LibraryStorageGateway::storageLimitExceeded);
 
     // Book upload succeeded
-    connect(m_bookStorageAccess, &ILibraryStorageAccess::bookUploadSucceeded, this,
-            &LibraryStorageGateway::bookUploadSucceeded);
+    connect(m_bookStorageAccess, &ILibraryStorageAccess::bookUploadSucceeded,
+            this, &LibraryStorageGateway::bookUploadSucceeded);
 }
 
-void LibraryStorageGateway::createBook(const QString& authToken, const Book& book)
+void LibraryStorageGateway::createBook(const QString& authToken,
+                                       const Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
@@ -53,12 +55,14 @@ void LibraryStorageGateway::createBook(const QString& authToken, const Book& boo
     m_bookStorageAccess->createBook(authToken, jsonBook);
 }
 
-void LibraryStorageGateway::deleteBook(const QString& authToken, const QUuid& uuid)
+void LibraryStorageGateway::deleteBook(const QString& authToken,
+                                       const QUuid& uuid)
 {
     m_bookStorageAccess->deleteBook(authToken, uuid);
 }
 
-void LibraryStorageGateway::updateBook(const QString& authToken, const Book& book)
+void LibraryStorageGateway::updateBook(const QString& authToken,
+                                       const Book& book)
 {
     auto jsonDoc = QJsonDocument::fromJson(book.toJson());
     auto jsonBook = jsonDoc.object();
@@ -69,13 +73,14 @@ void LibraryStorageGateway::updateBook(const QString& authToken, const Book& boo
 }
 
 void LibraryStorageGateway::changeBookCover(const QString& authToken,
-                                         const QUuid& uuid, const QString& path)
+                                            const QUuid& uuid,
+                                            const QString& path)
 {
     m_bookStorageAccess->uploadBookCover(authToken, uuid, path);
 }
 
 void LibraryStorageGateway::deleteBookCover(const QString& authToken,
-                                         const QUuid& uuid)
+                                            const QUuid& uuid)
 {
     m_bookStorageAccess->deleteBookCover(authToken, uuid);
 }
@@ -86,13 +91,13 @@ void LibraryStorageGateway::getBooksMetaData(const QString& authToken)
 }
 
 void LibraryStorageGateway::getCoverForBook(const QString& authToken,
-                                         const QUuid& uuid)
+                                            const QUuid& uuid)
 {
     m_bookStorageAccess->downloadCoverForBook(authToken, uuid);
 }
 
 void LibraryStorageGateway::downloadBookMedia(const QString& authToken,
-                                           const QUuid& uuid)
+                                              const QUuid& uuid)
 {
     m_bookStorageAccess->downloadBookMedia(authToken, uuid);
 }
@@ -108,9 +113,27 @@ void LibraryStorageGateway::proccessBooksMetadata(
 
         // Rename "guid"s to "uuid"s for tags as well
         auto tags = jsonBook["tags"].toArray();
-        auto fixedTags = renameTagProperties(tags, TagNamingStyle::ClientStyle);
+        auto fixedTags = renameProperties(tags, TagNamingStyle::ClientStyle);
         jsonBook["tags"] = fixedTags;
 
+        // Highlights
+        auto highlightsToFix = jsonBook["highlights"].toArray();
+        auto fixedHighlights =
+            renameProperties(highlightsToFix, TagNamingStyle::ClientStyle);
+
+        // Highlights' rects
+        for(auto highlight : fixedHighlights)
+        {
+            auto highlightObject = highlight.toObject();
+            auto rectsToFix = highlightObject["rects"].toArray();
+            auto fixedRects =
+                renameProperties(rectsToFix, TagNamingStyle::ClientStyle);
+            highlightObject["rects"] = fixedRects;
+
+            highlight = highlightObject;
+        }
+
+        jsonBook["highlights"] = fixedHighlights;
 
         auto book = Book::fromJson(jsonBook);
         book.setDownloaded(false);
@@ -127,33 +150,53 @@ void LibraryStorageGateway::convertJsonBookToApiFormat(QJsonObject& jsonBook)
     // requests
     renameJsonObjectKey(jsonBook, "uuid", "guid");
 
+    // Tags
     auto tagsToFix = jsonBook["tags"].toArray();
-    auto fixedTags = renameTagProperties(tagsToFix, TagNamingStyle::ApiStyle);
+    auto fixedTags = renameProperties(tagsToFix, TagNamingStyle::ApiStyle);
     jsonBook["tags"] = fixedTags;
+
+    // Highlights
+    auto highlightsToFix = jsonBook["highlights"].toArray();
+    auto fixedHighlights =
+        renameProperties(highlightsToFix, TagNamingStyle::ApiStyle);
+
+    // Highlights' rects
+    for(auto highlight : fixedHighlights)
+    {
+        auto highlightObject = highlight.toObject();
+        auto rectsToFix = highlightObject["rects"].toArray();
+        auto fixedRects =
+            renameProperties(rectsToFix, TagNamingStyle::ApiStyle);
+        highlightObject["rects"] = fixedRects;
+
+        highlight = highlightObject;
+    }
+
+    jsonBook["highlights"] = fixedHighlights;
 }
 
-QJsonArray LibraryStorageGateway::renameTagProperties(const QJsonArray& tags,
+QJsonArray LibraryStorageGateway::renameProperties(const QJsonArray& items,
                                                    TagNamingStyle namingStyle)
 {
-    QJsonArray newTags;
-    for(const QJsonValue& tag : tags)
+    QJsonArray newItems;
+    for(const QJsonValue& item : items)
     {
-        auto tagObject = tag.toObject();
+        auto tagObject = item.toObject();
 
         if(namingStyle == TagNamingStyle::ApiStyle)
             renameJsonObjectKey(tagObject, "uuid", "guid");
         else
             renameJsonObjectKey(tagObject, "guid", "uuid");
 
-        newTags.append(QJsonValue::fromVariant(tagObject));
+        newItems.append(QJsonValue::fromVariant(tagObject));
     }
 
-    return newTags;
+    return newItems;
 }
 
 void LibraryStorageGateway::renameJsonObjectKey(QJsonObject& jsonObject,
-                                             const QString& oldKeyName,
-                                             const QString& newKeyName)
+                                                const QString& oldKeyName,
+                                                const QString& newKeyName)
 {
     auto temp = jsonObject[oldKeyName].toString();
     jsonObject.remove(oldKeyName);

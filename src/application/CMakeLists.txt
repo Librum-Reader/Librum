@@ -13,10 +13,10 @@ set(application_SRC
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
-    interfaces/utility/i_library_storage_manager.hpp
     interfaces/gateways/i_app_info_gateway.hpp
     interfaces/services/i_app_info_service.hpp
     interfaces/services/i_book_service.hpp
+    interfaces/managers/i_library_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -33,6 +33,9 @@ set(application_SRC
     services/book_service.hpp
     services/book_service.cpp
     
+    managers/library_storage_manager.cpp
+    managers/library_storage_manager.hpp
+    
     common/enums/book_operation_status.hpp
     common/enums/setting_keys.hpp
     common/enums/setting_groups.hpp
@@ -41,8 +44,6 @@ set(application_SRC
     utility/local_library_tracker.cpp
     utility/local_library_tracker.hpp
     utility/merge_status.hpp
-    utility/library_storage_manager.cpp
-    utility/library_storage_manager.hpp
     utility/book_for_deletion.hpp
     utility/enum_utils.hpp
     utility/application_settings.hpp
@@ -119,7 +120,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    
 )
 
 # Make sure to build mupdf before the application
@@ -134,9 +134,11 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/interfaces/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/common/enums
                     ${CMAKE_CURRENT_SOURCE_DIR}/services
                     ${CMAKE_CURRENT_SOURCE_DIR}/utility
+                    ${CMAKE_CURRENT_SOURCE_DIR}/managers
                     ${CMAKE_CURRENT_SOURCE_DIR}/core
                     ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )

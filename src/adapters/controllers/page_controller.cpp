@@ -28,6 +28,7 @@ void PageController::setZoom(float zoom)
     m_matrix.d = zoom;
 
     m_pageImageOutdated = true;
+    m_selectionRectsOutdated = true;
 }
 
 float PageController::getZoom()
@@ -48,13 +49,15 @@ QImage PageController::renderPage()
 
     auto zoom = m_matrix.a;
     m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
+
+    m_pageImageOutdated = false;
     return m_pageImage;
 }
 
 bool PageController::pointIsAboveText(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.pointIsAboveText(fzPoint);
 }
@@ -62,7 +65,7 @@ bool PageController::pointIsAboveText(const QPointF& point)
 bool PageController::pointIsAboveLink(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.pointIsAboveLink(fzPoint);
 }
@@ -70,40 +73,46 @@ bool PageController::pointIsAboveLink(const QPointF& point)
 const char* PageController::getLinkUriAtPoint(const QPointF& point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     return m_pageGenerator.getLinkAtPoint(fzPoint).uri();
 }
 
-QList<QRectF> PageController::getBufferedSelectionRects()
+const QList<QRectF>& PageController::getBufferedSelectionRects()
 {
-    QList<QRectF> result;
+    if(!m_selectionRectsOutdated)
+        return m_selectionRects;
 
+    m_selectionRects.clear();
     auto& rects = m_pageGenerator.getBufferedSelectionRects();
     rects.reserve(rects.size());
     for(auto& rect : rects)
     {
         rect = rect.fz_transform_quad(m_matrix);
-        result.append(utils::fzQuadToQRectF(rect));
+        m_selectionRects.append(utils::fzQuadToQRectF(rect));
     }
 
-    return result;
+    m_selectionRectsOutdated = false;
+    return m_selectionRects;
 }
 
 void PageController::generateSelectionRects(QPointF start, QPointF end)
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     m_pageGenerator.getBufferedSelectionRects().clear();
     m_pageGenerator.generateSelectionRects(fzStart, fzEnd);
+
+    m_selectionRectsOutdated = true;
 }
 
 void PageController::clearBufferedSelectionRects()
 {
     m_pageGenerator.getBufferedSelectionRects().clear();
+    m_selectionRectsOutdated = true;
 }
 
 QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(
@@ -111,8 +120,8 @@ QPair<QPointF, QPointF> PageController::getPositionsForWordSelection(
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForWordSelection(fzStart, fzEnd);
     res.first = res.first.fz_transform_point(m_matrix);
@@ -126,7 +135,7 @@ QPair<QPointF, QPointF> PageController::getPositionsForLineSelection(
     QPointF point)
 {
     auto fzPoint = utils::qPointToFzPoint(point);
-    utils::restorePoint(fzPoint, m_matrix);
+    utils::restoreFzPoint(fzPoint, m_matrix);
 
     auto res = m_pageGenerator.getPositionsForLineSelection(fzPoint);
     res.first = res.first.fz_transform_point(m_matrix);
@@ -141,8 +150,8 @@ QString PageController::getTextFromSelection(const QPointF& start,
 {
     auto fzStart = utils::qPointToFzPoint(start);
     auto fzEnd = utils::qPointToFzPoint(end);
-    utils::restorePoint(fzStart, m_matrix);
-    utils::restorePoint(fzEnd, m_matrix);
+    utils::restoreFzPoint(fzStart, m_matrix);
+    utils::restoreFzPoint(fzEnd, m_matrix);
 
     auto res = m_pageGenerator.getTextFromSelection(fzStart, fzEnd);
     return QString::fromStdString(res);

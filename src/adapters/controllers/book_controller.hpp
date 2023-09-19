@@ -25,6 +25,14 @@ public:
     void goToNextSearchHit() override;
     void goToPreviousSearchHit() override;
 
+    const QList<domain::entities::Highlight>& getHighlights() const override;
+    void addHighlight(const domain::entities::Highlight& highlight) override;
+    void removeHighlight(const QUuid& uuid) override;
+    void changeHighlightColor(const QUuid& uuid, const QColor& color) override;
+    void saveHighlights() override;
+    const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;

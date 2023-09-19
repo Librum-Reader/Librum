@@ -144,7 +144,7 @@ void LibraryModel::processBookCover(int row)
 }
 
 QList<dtos::TagDto> LibraryModel::convertTagsToDtos(
-    const std::vector<Tag>& tags) const
+    const QList<Tag>& tags) const
 {
     QList<dtos::TagDto> tagDtos;
     for(const auto& tag : tags)

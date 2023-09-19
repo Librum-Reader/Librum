@@ -4,10 +4,12 @@
 #include <QDebug>
 #include <QDesktopServices>
 #include <string>
+#include "highlight.hpp"
 #include "utils/book_searcher.hpp"
 
 using namespace application::core;
 using namespace utils;
+using domain::entities::Highlight;
 
 namespace application::services
 {
@@ -21,16 +23,10 @@ void BookService::setUp(QUuid uuid)
 {
     // Clean up previous book data first
     m_TOCModel = nullptr;
-    m_book = nullptr;
 
-    m_book = m_libraryService->getBook(uuid);
-    if(m_book == nullptr)
-    {
-        qDebug() << "Failed opening book with uuid: " << uuid;
-        return;
-    }
-
-    auto stdFilePath = m_book->getFilePath().toStdString();
+    m_uuid = uuid;
+    auto book = getBook();
+    auto stdFilePath = book->getFilePath().toStdString();
     m_fzDocument = std::make_unique<mupdf::FzDocument>(stdFilePath.c_str());
 
     m_bookSearcher = std::make_unique<BookSearcher>(m_fzDocument.get());
@@ -49,7 +45,10 @@ void BookService::search(const QString& text)
 
     auto searchHit = m_bookSearcher->firstSearchHit();
     if(searchHit.pageNumber == -1)
+    {
+        emit noSearchHitsFound();
         return;
+    }
 
     emit goToPosition(searchHit.pageNumber, searchHit.rect.ul.y);
     emit highlightText(searchHit.pageNumber, searchHit.rect);
@@ -80,6 +79,59 @@ void BookService::goToPreviousSearchHit()
     emit highlightText(searchHit.pageNumber, searchHit.rect);
 }
 
+const QList<domain::entities::Highlight>& BookService::getHighlights() const
+{
+    auto book = getBook();
+    return book->getHighlights();
+}
+
+void BookService::addHighlight(const domain::entities::Highlight& highlight)
+{
+    auto book = getBook();
+    book->addHighlight(highlight);
+}
+
+void BookService::removeHighlight(const QUuid& uuid)
+{
+    auto book = getBook();
+    book->removeHighlight(uuid);
+}
+
+void BookService::changeHighlightColor(const QUuid& uuid, const QColor& color)
+{
+    auto book = getBook();
+    book->changeHighlightColor(uuid, color);
+}
+
+void BookService::saveHighlights()
+{
+    // We need to have a extra method to save the highlights due to a
+    // concurrency error on the backend that occurs when we send multiple update
+    // requests in a short period of time.
+    auto book = getBook();
+    book->updateLastModified();
+    m_libraryService->updateBook(*book);
+}
+
+const Highlight* BookService::getHighlightAtPoint(const QPointF& point,
+                                                  int page) const
+{
+    auto book = getBook();
+    for(auto& highlight : book->getHighlights())
+    {
+        if(highlight.getPageNumber() != page)
+            continue;
+
+        for(auto& rect : highlight.getRects())
+        {
+            if(rect.getQRect().contains(point))
+                return &highlight;
+        }
+    }
+
+    return nullptr;
+}
+
 void BookService::followLink(const char* uri)
 {
     if(mupdf::ll_fz_is_external_link(uri))
@@ -98,22 +150,26 @@ void BookService::followLink(const char* uri)
 
 QString BookService::getFilePath() const
 {
-    return m_book->getFilePath();
+    auto book = getBook();
+    return book->getFilePath();
 }
 
 int BookService::getPageCount() const
 {
-    return m_book->getPageCount();
+    auto book = getBook();
+    return book->getPageCount();
 }
 
 int BookService::getCurrentPage() const
 {
-    return m_book->getCurrentPage();
+    auto book = getBook();
+    return book->getCurrentPage();
 }
 
 void BookService::setCurrentPage(int newCurrentPage)
 {
-    m_book->setCurrentPage(newCurrentPage);
+    auto book = getBook();
+    book->setCurrentPage(newCurrentPage);
 }
 
 float BookService::getZoom() const
@@ -138,6 +194,29 @@ core::FilteredTOCModel* BookService::getTableOfContents()
     }
 
     return m_filteredTOCModel.get();
+}
+
+/**
+ * Everytime that we want to access data on the book we need to get the book
+ * directly from the library service. We can't store it because the library
+ * container can be resized at any time and thus invalidate the pointer.
+ */
+domain::entities::Book* BookService::getBook()
+{
+    auto* book = m_libraryService->getBook(m_uuid);
+    if(book == nullptr)
+        qWarning() << "Failed opening book with uuid: " << m_uuid;
+
+    return book;
+}
+
+const domain::entities::Book* BookService::getBook() const
+{
+    auto* book = m_libraryService->getBook(m_uuid);
+    if(book == nullptr)
+        qWarning() << "Failed opening book with uuid: " << m_uuid;
+
+    return book;
 }
 
 }  // namespace application::services

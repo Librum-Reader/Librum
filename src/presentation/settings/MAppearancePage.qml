@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
+import QtQuick.Dialogs
 import CustomComponents
 import Librum.style
 import Librum.icons
@@ -397,6 +398,205 @@ Page
                             // Need rebinding on reset
                             onSavedValueChanged: value = savedValue
                             onNewValueSelected: internal.saveSetting(SettingKeys.DefaultZoom, value)
+                        }
+                    }
+                }
+                
+                Pane
+                {
+                    id: highlightsBlock
+                    Layout.fillWidth: true
+                    Layout.topMargin: 24
+                    verticalPadding: 24
+                    horizontalPadding: internal.pagePadding
+                    background: Rectangle
+                    {
+                        color: Style.colorContainerBackground
+                        border.color: Style.colorContainerBorder
+                        radius: 4
+                        antialiasing: true
+                    }
+                    
+                    
+                    ColumnLayout
+                    {
+                        id: highlightsLayout
+                        anchors.fill: parent
+                        spacing: 0
+                        
+                        
+                        Label
+                        {
+                            id: highlightsTitle
+                            Layout.fillWidth: true
+                            text: "Highlights"
+                            font.pointSize: 17
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        Label
+                        {
+                            Layout.fillWidth: true
+                            Layout.topMargin: 24
+                            text: "Colors"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        Pane
+                        {
+                            id: highlightColorBox
+                            property var currentColorButton
+                            
+                            Layout.preferredWidth: highlightColorBoxLayout.implicitWidth + leftPadding + rightPadding
+                            Layout.preferredHeight: 40
+                            Layout.topMargin: 8
+                            background: Rectangle
+                            {
+                                anchors.fill: parent
+                                border.width: 1
+                                border.color: Style.colorContainerBorder
+                                color: Style.colorControlBackground
+                            }
+                            leftPadding: 16
+                            rightPadding: 16
+                            verticalPadding: 0
+                            
+                            RowLayout
+                            {
+                                id: highlightColorBoxLayout
+                                height: parent.height
+                                spacing: 16
+                                
+                                component HighlightColorButton: Rectangle
+                                {
+                                    property string settingName
+                                    property string savedValue: SettingsController.appearanceSettings[settingName]
+                                    
+                                    implicitHeight: 18
+                                    implicitWidth: 18
+                                    Layout.alignment: Qt.AlignVCenter
+                                    radius: 16
+                                    color: savedValue
+                                    
+                                    MouseArea
+                                    {
+                                        anchors.fill: parent
+                                        
+                                        onClicked: {
+                                            highlightColorBox.currentColorButton = parent
+                                            colorDialog.selectedColor = savedValue
+                                            colorDialog.open()
+                                        }
+                                    }
+                                    
+                                    function changeColor(color)
+                                    {
+                                        internal.saveSetting(SettingKeys[settingName], color)
+                                    }
+                                    
+                                    function rebind()
+                                    {
+                                        savedValue = Qt.binding(function() { return SettingsController.appearanceSettings[settingName]; })
+                                        color = Qt.binding(function() { return savedValue });
+                                    }
+                                }
+                                
+                                component Separator: Rectangle
+                                {
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: 1
+                                    color: Style.colorSeparator
+                                }
+                                
+                                HighlightColorButton {
+                                    settingName: "HighlightColorA"
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    settingName: "HighlightColorB"
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    settingName: "HighlightColorC"
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    settingName: "HighlightColorD"
+                                }
+                                
+                                Separator {}
+                                
+                                HighlightColorButton {
+                                    settingName: "HighlightColorE"
+                                }
+                            }
+                        
+                            ColorDialog
+                            {
+                                id: colorDialog
+                                
+                                onSelectedColorChanged: highlightColorBox.currentColorButton.color = selectedColor
+                                
+                                onAccepted: {
+                                    highlightColorBox.currentColorButton.changeColor(colorDialog.selectedColor)
+                                    highlightColorBox.currentColorButton.rebind()
+                                }
+                                onRejected: highlightColorBox.currentColorButton.rebind()
+                            }
+                        }
+                    
+                        Label
+                        {
+                            Layout.fillWidth: true
+                            Layout.topMargin: 24
+                            text: "Opacity"
+                            font.pointSize: 13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+                        
+                        RowLayout
+                        {
+                            spacing: 16
+                            
+                            MSlider
+                            {
+                                id: highlightOpacitySlider
+                                Layout.alignment: Qt.AlignVCenter
+                                value: SettingsController.appearanceSettings.HighlightOpacity
+                                
+                                onControlledValueChanged: (value) => internal.saveSetting(SettingKeys.HighlightOpacity, value)
+                            }
+                            
+                            MLabeledInputBox
+                            {
+                                Layout.preferredWidth: 72
+                                Layout.preferredHeight: implicitHeight
+                                boxHeight: 36
+                                hasHeader: false
+                                textPadding: 20
+                                text: highlightOpacitySlider.value
+                                validator: IntValidator { bottom: 0; top: 255 }
+                                
+                                onEdited:
+                                {
+                                    if(text > 255)
+                                        text = 255
+                                    else if(text < 0)
+                                        text = 0
+                                    
+                                    internal.saveSetting(SettingKeys.HighlightOpacity, text)
+                                }
+                            }
                         }
                     }
                 }

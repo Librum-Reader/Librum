@@ -143,10 +143,8 @@ int main(int argc, char* argv[])
 
 
     // Setup login connections
-    QObject::connect(
-        authenticationService,
-        &application::IAuthenticationService::loggedIn,
-        libraryService, &application::ILibraryService::setupUserData);
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     libraryService, &application::ILibraryService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);

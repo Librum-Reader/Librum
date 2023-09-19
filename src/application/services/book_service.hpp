@@ -23,6 +23,14 @@ public:
     void goToNextSearchHit() override;
     void goToPreviousSearchHit() override;
 
+    const QList<domain::entities::Highlight>& getHighlights() const override;
+    void addHighlight(const domain::entities::Highlight& highlight) override;
+    void removeHighlight(const QUuid& uuid) override;
+    void changeHighlightColor(const QUuid& uuid, const QColor& color) override;
+    void saveHighlights() override;
+    const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
@@ -35,11 +43,14 @@ public:
     core::FilteredTOCModel* getTableOfContents() override;
 
 private:
+    domain::entities::Book* getBook();
+    const domain::entities::Book* getBook() const;
+
     ILibraryService* m_libraryService;
-    domain::entities::Book* m_book = nullptr;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
     std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
     float m_zoom = 1;
+    QUuid m_uuid;
 
     std::unique_ptr<core::TOCModel> m_TOCModel;
     std::unique_ptr<core::FilteredTOCModel> m_filteredTOCModel;

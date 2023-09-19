@@ -28,12 +28,14 @@ class PRESENTATION_EXPORT PageView : public QQuickItem
     Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
     Q_PROPERTY(bool colorInverted WRITE setColorInverted)
 
-
 public:
     PageView();
 
     int getImplicitWidth() const;
     int getImplicitHeight() const;
+
+    bool disableHoverEvents() const;
+    void setDisableHoverEvents(bool newDisableHoverEvents);
 
     int getPageNumber() const;
     void setPageNumber(int newCurrentPage);
@@ -41,6 +43,17 @@ public:
 
     void setBookController(
         adapters::controllers::BookController* newBookController);
+
+    Q_INVOKABLE void copySelectedText();
+    Q_INVOKABLE void removeSelection();
+    Q_INVOKABLE void setPointingCursor();
+    Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
+                                                            int alpha);
+    Q_INVOKABLE void removeHighlight(const QString& uuid);
+    Q_INVOKABLE void changeHighlightColor(const QString& uuid,
+                                          const QString& color, int alpha);
+    Q_INVOKABLE void copyTextFromHighlight(const QString& uuid);
+
 
 private slots:
     void updateZoom(float newZoom);
@@ -61,19 +74,25 @@ private:
     void selectSingleWord();
     void selectMultipleWords();
     void selectLine();
-    void copySelectedText();
-    void removeSelection();
     void createSelection();
     void paintSelectionOnPage(QPainter& painter);
 
+    void paintHighlightsOnPage(QPainter& painter);
+    void removeConflictingHighlights(domain::entities::Highlight& highlight);
+    bool mouseAboveSelection(const QPointF mouse);
+
     void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
+
+    bool rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2);
+    QPair<float, float> getCenterXAndTopYFromRects(const QList<QRectF>& rects);
 
     std::unique_ptr<adapters::controllers::PageController> m_pageController;
     adapters::controllers::BookController* m_bookController = nullptr;
     int m_pageNumber = 0;
     bool m_firstTimeColorInverted = true;
     bool m_startedMousePressOnLink = false;
+    bool m_startedMousePressOnHighlight = false;
     QPointF m_selectionStart;
     QPointF m_selectionEnd;
     QTimer m_tripleClickTimer;

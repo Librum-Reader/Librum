@@ -1,9 +1,11 @@
 #pragma once
+#include <QColor>
 #include <QDir>
 #include <QObject>
 #include <QString>
 #include <QUuid>
 #include "application_export.hpp"
+#include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
 
@@ -29,6 +31,15 @@ public:
     virtual void goToNextSearchHit() = 0;
     virtual void goToPreviousSearchHit() = 0;
 
+    virtual const QList<domain::entities::Highlight>& getHighlights() const = 0;
+    virtual void addHighlight(const domain::entities::Highlight& highlight) = 0;
+    virtual void removeHighlight(const QUuid& uuid) = 0;
+    virtual void changeHighlightColor(const QUuid& uuid,
+                                      const QColor& color) = 0;
+    virtual void saveHighlights() = 0;
+    virtual const domain::entities::Highlight* getHighlightAtPoint(
+        const QPointF& point, int page) const = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
@@ -43,6 +54,7 @@ public:
 signals:
     void goToPosition(int pageNumber, int y);
     void highlightText(int pageNumber, mupdf::FzQuad quad);
+    void noSearchHitsFound();
 };
 
 }  // namespace application

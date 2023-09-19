@@ -30,8 +30,11 @@ bool Book::operator==(const Book& rhs) const
     bool dataIsTheSame = m_uuid == rhs.m_uuid && m_filePath == rhs.m_filePath &&
                          m_isDownloaded == rhs.m_isDownloaded &&
                          m_currentPage == rhs.m_currentPage;
+    bool tagsAreTheSame = rhs.tagsAreTheSame(m_tags);
+    bool highlightsAreTheSame = rhs.highlightsAreTheSame(m_highlights);
 
-    return dataIsTheSame && m_metaData == rhs.m_metaData;
+    return tagsAreTheSame && highlightsAreTheSame && dataIsTheSame &&
+           m_metaData == rhs.m_metaData;
 }
 
 const QUuid& Book::getUuid() const
@@ -97,6 +100,43 @@ double Book::getMediaDownloadProgress() const
 void Book::setMediaDownloadProgress(double newProgress)
 {
     m_metaData.bookMediaDownloadProgress = newProgress;
+}
+
+const QList<Highlight>& Book::getHighlights() const
+{
+    return m_highlights;
+}
+
+void Book::setHighlights(QList<Highlight>&& highlights)
+{
+    m_highlights = std::move(highlights);
+}
+
+void Book::addHighlight(const Highlight& highlight)
+{
+    m_highlights.append(highlight);
+}
+
+void Book::changeHighlightColor(const QUuid& uuid, const QColor& newColor)
+{
+    auto highlight =
+        std::ranges::find_if(m_highlights,
+                             [&uuid](const Highlight& highlight)
+                             {
+                                 return highlight.getUuid() == uuid;
+                             });
+
+    if(highlight != m_highlights.end())
+        highlight->setColor(newColor);
+}
+
+void Book::removeHighlight(QUuid uuid)
+{
+    m_highlights.removeIf(
+        [&uuid](const Highlight& highlight)
+        {
+            return highlight.getUuid() == uuid;
+        });
 }
 
 const QDateTime& Book::getCoverLastModified() const
@@ -268,7 +308,7 @@ int Book::getBookReadingProgress() const
     return std::round(percentageInDecimal * 100);
 }
 
-const std::vector<Tag>& Book::getTags() const
+const QList<Tag>& Book::getTags() const
 {
     return m_tags;
 }
@@ -309,14 +349,28 @@ bool Book::renameTag(const QUuid& uuid, const QString& newName)
     return true;
 }
 
-bool Book::tagsAreTheSame(const std::vector<Tag>& other) const
+bool Book::tagsAreTheSame(const QList<Tag>& other) const
 {
     if(m_tags.size() != other.size())
         return false;
 
-    for(std::size_t i = 0; i < m_tags.size(); ++i)
+    for(int i = 0; i < m_tags.size(); ++i)
     {
         if(m_tags.at(i) != other.at(i))
+            return false;
+    }
+
+    return true;
+}
+
+bool Book::highlightsAreTheSame(const QList<Highlight>& other) const
+{
+    if(m_highlights.size() != other.size())
+        return false;
+
+    for(int i = 0; i < m_highlights.size(); ++i)
+    {
+        if(m_highlights.at(i) != other.at(i))
             return false;
     }
 
@@ -386,6 +440,8 @@ void Book::update(const Book& other)
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
+    if(!highlightsAreTheSame(other.getHighlights()))
+        m_highlights = other.getHighlights();
 }
 
 bool Book::isValid() const
@@ -490,6 +546,7 @@ QByteArray Book::toJson() const
         { "coverPath", getCoverPath() },
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
+        { "highlights", serializeHighlights() },
     };
 
     QJsonDocument doc(book);
@@ -510,6 +567,18 @@ QJsonArray Book::serializeTags() const
     return tags;
 }
 
+QJsonArray Book::serializeHighlights() const
+{
+    QJsonArray highlights;
+    for(const auto& highlight : m_highlights)
+    {
+        auto obj = QJsonDocument::fromJson(highlight.toJson()).object();
+        highlights.append(QJsonValue::fromVariant(obj));
+    }
+
+    return highlights;
+}
+
 Book Book::fromJson(const QJsonObject& jsonBook)
 {
     BookMetaData metaData = getBookMetaDataFromJson(jsonBook);
@@ -521,6 +590,7 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     Book book(filePath, metaData, currentPage, uuid);
     book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
+    addHighlightsToBook(book, jsonBook["highlights"].toArray());
 
     return book;
 }
@@ -566,6 +636,17 @@ void Book::addTagsToBook(Book& book, const QJsonArray& jsonTags)
         Tag tag = Tag::fromJson(tagObject);
 
         book.addTag(tag);
+    }
+}
+
+void Book::addHighlightsToBook(Book& book, const QJsonArray& jsonHighlights)
+{
+    for(const auto& jsonHighlight : jsonHighlights)
+    {
+        auto highlightObject = jsonHighlight.toObject();
+        Highlight highlight = Highlight::fromJson(highlightObject);
+
+        book.addHighlight(highlight);
     }
 }
 

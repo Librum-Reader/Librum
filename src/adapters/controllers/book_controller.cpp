@@ -1,8 +1,10 @@
 #include "book_controller.hpp"
 #include <QUuid>
 #include "fz_utils.hpp"
+#include "highlight.hpp"
 
 using namespace application::core;
+using domain::entities::Highlight;
 
 namespace adapters::controllers
 {
@@ -23,8 +25,11 @@ BookController::BookController(application::IBookService* bookService) :
                 left = utils::scalePointToCurrentZoom(left, 1, getZoom());
                 right = utils::scalePointToCurrentZoom(right, 1, getZoom());
 
-                emit highlightText(pageNumber, left, right);
+                emit selectText(pageNumber, left, right);
             });
+
+    connect(m_bookService, &application::IBookService::noSearchHitsFound, this,
+            &IBookController::noSearchHitsFound);
 }
 
 void BookController::setUp(QString uuid)
@@ -55,6 +60,40 @@ void BookController::goToNextSearchHit()
 void BookController::goToPreviousSearchHit()
 {
     m_bookService->goToPreviousSearchHit();
+}
+
+const QList<domain::entities::Highlight>& BookController::getHighlights() const
+{
+    return m_bookService->getHighlights();
+}
+
+void BookController::addHighlight(const domain::entities::Highlight& highlight)
+{
+    m_bookService->addHighlight(highlight);
+}
+
+void BookController::removeHighlight(const QUuid& uuid)
+{
+    m_bookService->removeHighlight(uuid);
+}
+
+void BookController::changeHighlightColor(const QUuid& uuid,
+                                          const QColor& color)
+{
+    m_bookService->changeHighlightColor(uuid, color);
+}
+
+void BookController::saveHighlights()
+{
+    m_bookService->saveHighlights();
+}
+
+const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
+                                                     int page) const
+{
+    auto restoredPoint = utils::restoreQPoint(point, getZoom());
+
+    return m_bookService->getHighlightAtPoint(restoredPoint, page);
 }
 
 void BookController::followLink(const char* uri)

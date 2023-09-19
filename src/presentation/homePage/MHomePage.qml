@@ -35,9 +35,23 @@ Page
         function onStorageLimitExceeded() { uploadLimitReachedPopup.open() }
     }
     
-    
-    ColumnLayout
+    DropArea
     {
+        id: dropArea
+        anchors.fill: parent
+        
+        onDropped: 
+            (drop) => {
+                for(let i = 0; i < drop.urls.length; ++i)
+                {
+                    let result = LibraryController.addBook(drop.urls[i]);
+                    if(result === BookOperationStatus.OpeningBookFailed)
+                        unsupportedFilePopup.open();
+                }
+            }
+        
+        ColumnLayout
+        {
         id: layout
         anchors.fill: parent
         spacing: 0
@@ -172,7 +186,7 @@ Page
                 rightMargin: -internal.horizontalBookSpacing
                 interactive: true
                 boundsBehavior: Flickable.StopAtBounds
-                flickDeceleration: 12500
+                flickDeceleration: 15000
                 maximumFlickVelocity: 3500
                 clip: true
                 model: LibraryController.libraryModel
@@ -273,6 +287,38 @@ Page
                     }
                 }
             }
+            
+            ScrollBar {
+                id: verticalScrollbar
+                width: pressed ? 14 : 12
+                hoverEnabled: true
+                active: true
+                policy: ScrollBar.AlwaysOff
+                visible: bookGrid.contentHeight > bookGrid.height
+                orientation: Qt.Vertical
+                size: bookGrid.height / bookGrid.contentHeight
+                minimumSize: 0.04
+                position: (bookGrid.contentY - bookGrid.originY) / bookGrid.contentHeight
+                onPositionChanged: if(pressed) bookGrid.contentY = position * bookGrid.contentHeight + bookGrid.originY
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.rightMargin: -20
+                anchors.bottomMargin: 16
+                anchors.bottom: parent.bottom
+                horizontalPadding: 4
+                
+                contentItem: Rectangle {
+                    color: Style.colorScrollBarHandle
+                    opacity: verticalScrollbar.pressed ? 0.8 : 1
+                    radius: 4
+                }
+                
+                background: Rectangle {
+                    implicitWidth: 26
+                    implicitHeight: 200
+                    color: "transparent"
+                }
+            }
         }
         
         MEmptyScreenContent
@@ -306,6 +352,7 @@ Page
             id: bottomHeightFillter
             Layout.fillHeight: true
         }
+    }
     }
     
     MWarningPopup

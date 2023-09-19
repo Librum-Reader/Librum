@@ -1,10 +1,10 @@
 #pragma once
 #include <QString>
-#include "i_local_library_tracker.hpp"
 #include "i_library_storage_gateway.hpp"
 #include "i_library_storage_manager.hpp"
+#include "i_local_library_tracker.hpp"
 
-namespace application::utility
+namespace application::managers
 {
 
 class LibraryStorageManager : public ILibraryStorageManager
@@ -15,9 +15,9 @@ public:
 
     void addBook(const domain::entities::Book& bookToAdd) override;
     void addBookLocally(const domain::entities::Book& bookToAdd) override;
-    void deleteBook(BookForDeletion bookToDelete) override;
+    void deleteBook(utility::BookForDeletion bookToDelete) override;
     void deleteAllBooks() override;
-    void deleteBookLocally(BookForDeletion bookToDelete) override;
+    void deleteBookLocally(utility::BookForDeletion bookToDelete) override;
     void uninstallBook(const domain::entities::Book& book) override;
     void downloadBookMedia(const QUuid& uuid) override;
     void updateBook(const domain::entities::Book& book) override;
@@ -54,4 +54,4 @@ private:
     QString m_authenticationToken;
 };
 
-}  // namespace application::utility
+}  // namespace application::managers

@@ -25,6 +25,8 @@ target_link_libraries(presentation
                 PRIVATE
                     adapters
                     application
+                    domain
+                    ${MUPDF_OUTPUT}
                     Qt6::Core
                     Qt6::Quick
 )
