@@ -253,55 +253,6 @@ Popup {
                         }
                     }
 
-                    ColumnLayout {
-                        id: bookDescriptionLayout
-                        Layout.fillWidth: true
-                        Layout.topMargin: 28
-                        spacing: 3
-
-                        Label {
-                            id: bookDescriptionHeader
-                            Layout.fillWidth: true
-                            text: "Content"
-                            font.pointSize: 11.5
-                            font.weight: Font.Bold
-                            color: Style.colorTitle
-                        }
-
-                        Rectangle {
-                            id: bookDescriptionField
-                            Layout.fillWidth: true
-                            Layout.preferredHeight: 78
-                            color: "transparent"
-                            radius: 5
-                            border.width: 1
-                            border.color: Style.colorContainerBorder
-
-                            TextArea {
-                                id: bookDescriptionTextArea
-                                anchors.fill: parent
-                                leftPadding: 12
-                                rightPadding: 12
-                                topPadding: 8
-                                bottomPadding: 8
-                                selectByMouse: true
-                                text: "Your habits determine your character and later define"
-                                      + " your life. Don’t blame outside factors when you fail in life." + " Also, don’t think that succeeding in one area of your life will"
-                                      + " mean that you’re destined for triumph."
-                                wrapMode: Text.WordWrap
-                                color: Style.colorReadOnlyInputText
-                                font.pointSize: 12
-                                readOnly: true
-
-                                background: Rectangle {
-                                    anchors.fill: parent
-                                    radius: bookDescriptionField.radius
-                                    color: "transparent"
-                                }
-                            }
-                        }
-                    }
-
                     RowLayout {
                         id: buttonsLayout
                         Layout.topMargin: 42
