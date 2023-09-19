@@ -45,6 +45,7 @@ namespace adapters::dtos
 struct ADAPTERS_EXPORT DictionaryEntryDto
 {
     Q_GADGET
+    Q_PROPERTY(QVariantList wordTypes MEMBER wordTypes)
 
 public:
     QVariantList wordTypes;  // WordTypeDtos

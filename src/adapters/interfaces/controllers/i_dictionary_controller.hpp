@@ -28,6 +28,7 @@ signals:
     void definitionChanged();
     void definitionReceived(bool success, const QJsonObject& definition);
     void gettingDefinitionFailed();
+    void gettingDefinitionSucceeded(const QString& word);
 };
 
 }  // namespace adapters

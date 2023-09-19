@@ -21,6 +21,7 @@ DictionaryController::DictionaryController(
 void DictionaryController::getDefinitionForWord(const QString& word)
 {
     m_dictionaryService->getDefinitionForWord(word);
+    m_currentWord = word;
 }
 
 DictionaryEntryDto DictionaryController::definition() const
@@ -36,6 +37,7 @@ void DictionaryController::processDefinition(bool success,
 
     m_definition = parseDefinition(definition);
     emit definitionChanged();
+    emit gettingDefinitionSucceeded(m_currentWord);
 }
 
 DictionaryEntryDto DictionaryController::parseDefinition(

@@ -27,6 +27,7 @@ private:
 
     application::IDictionaryService* m_dictionaryService;
     dtos::DictionaryEntryDto m_definition;
+    QString m_currentWord;
 };
 
 }  // namespace adapters::controllers
