@@ -144,6 +144,15 @@ Popup
                 if(text.length > 100)
                     return;
                 
+                // Removing any . or , from the start and the end of the word
+                text = text.replace(/^[,.]+|[,.]+$/g, '');
+                
+                // Make the first letter lower case. When the word is at the start of a sentence, 
+                // the first letter will be upper case, which in turn causes the dictionary to fail.
+                const firstLetter = text.charAt(0).toLowerCase();
+                const restOfString = text.slice(1); // Get the rest of the string
+                text = firstLetter + restOfString;
+                
                 DictionaryController.getDefinitionForWord(text);
             }
         }
