@@ -20,6 +20,8 @@ Popup {
     background: Rectangle {
         color: Style.colorPopupBackground
         radius: 6
+        border.width: 1
+        border.color: Style.colorContainerBorder
     }
     
     onOpened: {
@@ -79,8 +81,8 @@ Popup {
                 id: backButton
                 Layout.preferredWidth: 32
                 Layout.preferredHeight: 32
-                backgroundColor: Style.colorReadingViewButtonBackground
-                borderWidth: 0
+                borderWidth: 1
+                borderColor: Style.colorButtonBorder
                 imagePath: Icons.readingViewBack
                 imageSize: 8
                 opacityOnPressed: 0.7

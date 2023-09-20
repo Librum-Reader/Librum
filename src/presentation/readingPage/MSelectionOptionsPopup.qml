@@ -19,6 +19,8 @@ Popup
     {
         color: Style.colorControlBackground
         radius: 4
+        border.width: 1
+        border.color: Style.colorContainerBorder
     }
     
     Shortcut
