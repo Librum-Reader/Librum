@@ -12,13 +12,14 @@ Popup {
     property string word
     property var previouslyFocusedPage
     
-    implicitWidth: 400
-    implicitHeight: 480
+    implicitWidth: 500
+    implicitHeight: 540
     padding: 16
-    bottomPadding: 26
+    bottomPadding: 28
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     background: Rectangle {
         color: Style.colorPopupBackground
+        radius: 6
     }
     
     onOpened: {
@@ -35,11 +36,23 @@ Popup {
         function onStartedGettingDefinition() {
             loadingAnimation.playing = true;
             loadingAnimation.visible = true;
+            
+            dictionaryList.visible = false;
+            notFound.visible = false;
+        }
+        
+        function onGettingDefinitionFailed() {
+            loadingAnimation.playing = false;
+            loadingAnimation.visible = false;
+            
+            notFound.visible = true;
         }
         
         function onGettingDefinitionSucceeded() {
             loadingAnimation.playing = false;
             loadingAnimation.visible = false;
+            
+            dictionaryList.visible = true;
         }
     }
     
@@ -158,14 +171,6 @@ Popup {
                 source: Icons.loadingAnimation
                 width: 110
                 fillMode: Image.PreserveAspectFit
-                
-                onPlayingChanged: {
-                    // Hide the ListView while the loading animation is running.
-                    if(playing)
-                        dictionaryList.visible = false;
-                    else
-                        dictionaryList.visible = true;
-                }
             }
             
             ListView
@@ -267,18 +272,23 @@ Popup {
                                         {
                                             id: mouseArea
                                             anchors.fill: parent
-                                            cursorShape: definitionText.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                            cursorShape: definitionText.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
                                             
                                             onClicked: followWiktionaryLink()
                                             
                                             function followWiktionaryLink() {
-                                                if(definitionText.hoveredLink != "")
+                                                if(definitionText.hoveredLink !== "")
                                                 {
                                                     let link = definitionText.hoveredLink;
                                                     if(link.startsWith("http"))
                                                     {
                                                         Qt.openUrlExternally(link);
                                                         return;
+                                                    }
+                                                    else if(link.startsWith("/wiki/Wiktionary"))
+                                                    {
+                                                        Qt.openUrlExternally("https://wiktionary.org/" + link);
+                                                        return
                                                     }
                                                     
                                                     // Some words have metadata pre/appended to the link
@@ -318,6 +328,62 @@ Popup {
                     }
                 }
             }
+            
+            Item
+            {
+                id: notFound
+                anchors.fill: parent
+                visible: false
+                
+                ColumnLayout
+                {
+                    width: parent.width
+                    anchors.centerIn: parent
+                    spacing: 4
+                    
+                    Image
+                    {
+                        id: warningIllustration
+                        z: 2
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: -18
+                        source: "file://home/creapermann/Downloads/458.svg"
+                        sourceSize.width: 180
+                        fillMode: Image.PreserveAspectFit
+                    }
+                    
+                    Label
+                    {
+                        color: Style.colorText
+                        Layout.alignment: Qt.AlignHCenter
+                        font.pointSize: 14
+                        text: "No definitions found"
+                    }
+                    
+                    Label {
+                        id: searchOnlineLink
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: 4
+                        text: '<a href="update" style="color: ' + Style.colorBasePurple + '; text-decoration: underline;">Search online</a>'
+                        textFormat: Text.RichText
+                        onLinkActivated: (link) => Qt.openUrlExternally(link)
+                        font.pointSize: 14
+                        color: Style.colorText
+                        
+                        MouseArea
+                        {
+                            anchors.fill: parent
+                            cursorShape: searchOnlineLink.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            
+                            onClicked: 
+                            {
+                                if(searchOnlineLink.hoveredLink !== "")
+                                    Qt.openUrlExternally("https://google.com/search?q=" + root.word);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -325,12 +391,11 @@ Popup {
         id: wiktionaryLink
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: -20
+        anchors.bottomMargin: -21
         anchors.rightMargin: 2
         horizontalAlignment: Text.AlignRight
-        text: 'Source: <a href="https://en.wiktionary.org" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Wiktionary</a>'
+        text: 'Source: <a href="https://wiktionary.org" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Wiktionary</a>'
         textFormat: Text.RichText
-        onLinkActivated: (link) => Qt.openUrlExternally(link)
         font.pointSize: 9
         color: Style.colorText
         
