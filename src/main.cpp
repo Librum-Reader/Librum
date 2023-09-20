@@ -159,10 +159,8 @@ int main(int argc, char* argv[])
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);
 
-    QObject::connect(
-        authenticationService,
-        &application::IAuthenticationService::loggedIn,
-        freeBooksService, &application::IFreeBooksService::setupUserData);
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     freeBooksService, &application::IFreeBooksService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         freeBooksService, &application::IFreeBooksService::clearUserData);

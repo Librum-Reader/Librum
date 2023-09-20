@@ -29,7 +29,6 @@ void FreeBooksStorageAccess::fetchFirstBooksMetadataPageWithFilter(
                 }
 
                 emit fetchingBooksMetaDataFinished(reply->readAll());
-
                 reply->deleteLater();
             });
 }
@@ -53,7 +52,6 @@ void FreeBooksStorageAccess::fetchBooksMetadataPage(const QString& url)
                 }
 
                 emit fetchingBooksMetaDataFinished(reply->readAll());
-
                 reply->deleteLater();
             });
 }

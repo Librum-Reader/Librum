@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.controllers
 import Librum.style
+import Librum.icons
 import CustomComponents
 import "explorerToolbar"
 
@@ -17,16 +18,24 @@ Page {
         target: FreeBooksController
 
         function onFoundNoBooks() {
-            centralMessageLabel.text = "No books were found"
-            centralMessageLabel.visible = true
+            errorMessageLabel.text = "No books were found"
+            errorMessageLabel.visible = true
         }
 
         function onFetchingFirstMetadataPageSuccessful(success) {
-            if (success === false) {
-                centralMessageLabel.text
+            if (!success) {
+                errorMessageLabel.text
                         = "Couldn't load free books. Please, check your network connection"
-                centralMessageLabel.visible = true
+                errorMessageLabel.visible = true
             }
+
+            loadingAnimation.playing = false
+            loadingAnimation.visible = false
+        }
+
+        function onStartedFetchingFistMetadataPage() {
+            loadingAnimation.playing = true
+            loadingAnimation.visible = true
         }
     }
 
@@ -36,6 +45,16 @@ Page {
             toolbar.searchingBarText = FreeBooksController.getFilterAuthorsAndTitle()
         }
         FreeBooksController.fetchFirstBooksMetadataPage()
+    }
+
+    AnimatedImage {
+        id: loadingAnimation
+        anchors.centerIn: parent
+        playing: false
+        visible: false
+        source: Icons.loadingAnimation
+        width: 120
+        fillMode: Image.PreserveAspectFit
     }
 
     ColumnLayout {
@@ -50,7 +69,7 @@ Page {
             id: pageTitle
             Layout.topMargin: 44
             titleText: "Free books"
-            descriptionText: "Choose from over 60,000 books"
+            descriptionText: "Choose from over 70,000 books"
         }
 
         MExplorerToolbar {
@@ -59,7 +78,7 @@ Page {
             Layout.alignment: Qt.AlignLeft
             Layout.topMargin: 45
             onSearchForAuthorsAndTitleTriggered: authorsAndTitle => {
-                                                     centralMessageLabel.visible = false
+                                                     errorMessageLabel.visible = false
                                                      FreeBooksController.setFilterAuthorsAndTitle(
                                                          authorsAndTitle)
                                                      FreeBooksController.fetchFirstBooksMetadataPage()
@@ -67,7 +86,7 @@ Page {
         }
 
         Label {
-            id: centralMessageLabel
+            id: errorMessageLabel
             Layout.alignment: Qt.AlignHCenter
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight

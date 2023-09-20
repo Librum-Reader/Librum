@@ -106,7 +106,8 @@ void FreeBooksService::setBookCover(int id, const QImage& cover)
     auto freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
     {
-        qDebug() << "Failed setting cover for free book. Book does not exist.";
+        qWarning()
+            << "Failed setting cover for free book. Book does not exist.";
         return;
     }
 

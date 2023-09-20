@@ -23,13 +23,13 @@ public:
     data_models::FreeBooksModel* getFreeBooksModel() override;
 
 private slots:
-    void proccessFetchingFirstMetadataPageResult(const bool result);
+    void proccessFetchingFirstMetadataPageResult(bool result);
 
 private:
     application::IFreeBooksService* m_freeBooksService;
     data_models::FreeBooksModel m_freeBooksModel;
     QString m_filterAuthorsAndTitle;
-    bool m_isFirstBooksMetadataPageFetchingAllowed = true;
+    bool m_firstPageIsLoaded = false;
 
     void deleteAllBooks();
 };

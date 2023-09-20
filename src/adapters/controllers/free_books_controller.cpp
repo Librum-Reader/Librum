@@ -76,12 +76,13 @@ FreeBooksController::FreeBooksController(
 
 void FreeBooksController::fetchFirstBooksMetadataPage()
 {
-    if(!m_isFirstBooksMetadataPageFetchingAllowed)
+    if(m_firstPageIsLoaded)
         return;
 
     deleteAllBooks();
     m_freeBooksService->fetchFirstBooksMetadataPageWithFilter(
         m_filterAuthorsAndTitle);
+    emit startedFetchingFistMetadataPage();
 }
 
 void FreeBooksController::getBookMedia(const int id, const QString& url)
@@ -103,7 +104,7 @@ void FreeBooksController::setFilterAuthorsAndTitle(
     const QString& authorsAndTitle)
 {
     m_filterAuthorsAndTitle = authorsAndTitle;
-    m_isFirstBooksMetadataPageFetchingAllowed = true;
+    m_firstPageIsLoaded = false;
 }
 
 QString FreeBooksController::getFilterAuthorsAndTitle()
@@ -114,7 +115,7 @@ QString FreeBooksController::getFilterAuthorsAndTitle()
 void FreeBooksController::clearAllFilters()
 {
     m_filterAuthorsAndTitle.clear();
-    m_isFirstBooksMetadataPageFetchingAllowed = true;
+    m_firstPageIsLoaded = false;
 }
 
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()
@@ -122,11 +123,9 @@ data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()
     return &m_freeBooksModel;
 }
 
-void FreeBooksController::proccessFetchingFirstMetadataPageResult(
-    const bool result)
+void FreeBooksController::proccessFetchingFirstMetadataPageResult(bool result)
 {
-    m_isFirstBooksMetadataPageFetchingAllowed = !result;
-
+    m_firstPageIsLoaded = result;
     emit fetchingFirstMetadataPageSuccessful(result);
 }
 
