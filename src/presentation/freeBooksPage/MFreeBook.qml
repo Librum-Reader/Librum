@@ -96,7 +96,7 @@ Item {
                     id: bookName
                     Layout.fillWidth: true
                     Layout.preferredHeight: 32
-                    Layout.topMargin: 4
+                    Layout.topMargin: 6
                     text: model.title
                     font.weight: Font.Medium
                     color: Style.colorTitle

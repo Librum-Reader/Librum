@@ -199,40 +199,6 @@ Popup {
                                 }
 
                                 MLabeledInputBox {
-                                    id: pagesField
-                                    Layout.fillWidth: true
-                                    boxHeight: 34
-                                    headerText: "Pages"
-                                    headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
-                                    text: "411"
-                                    headerToBoxSpacing: 3
-                                    inputFontSize: 12
-                                    inputFontColor: Style.colorReadOnlyInputText
-                                    textPadding: 12
-                                    borderWidth: 1
-                                    borderRadius: 4
-                                    readOnly: true
-                                }
-
-                                MLabeledInputBox {
-                                    id: sizeField
-                                    Layout.fillWidth: true
-                                    boxHeight: 34
-                                    headerText: "Size"
-                                    headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
-                                    text: "2.3 MB"
-                                    headerToBoxSpacing: 3
-                                    inputFontSize: 12
-                                    inputFontColor: Style.colorReadOnlyInputText
-                                    textPadding: 12
-                                    borderWidth: 1
-                                    borderRadius: 4
-                                    readOnly: true
-                                }
-
-                                MLabeledInputBox {
                                     id: formatField
                                     Layout.fillWidth: true
                                     Layout.bottomMargin: 3
@@ -240,7 +206,7 @@ Popup {
                                     headerText: "Format"
                                     headerFontWeight: Font.Bold
                                     headerFontSize: 11.5
-                                    text: "PDF"
+                                    text: "EPUB"
                                     headerToBoxSpacing: 3
                                     inputFontSize: 12
                                     inputFontColor: Style.colorReadOnlyInputText
