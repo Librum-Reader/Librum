@@ -18,6 +18,7 @@ public:
     void getBookCover(const int id) override;
     void deleteBookCover(const int id) override;
     void setFilterAuthorsAndTitle(const QString& authorsAndTitle) override;
+    QString getFilterAuthorsAndTitle() override;
     void clearAllFilters() override;
     data_models::FreeBooksModel* getFreeBooksModel() override;
 

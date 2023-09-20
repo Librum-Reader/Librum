@@ -30,8 +30,13 @@ Page {
         }
     }
 
-    Component.onCompleted: FreeBooksController.fetchFirstBooksMetadataPage()
-    Component.onDestruction: FreeBooksController.clearAllFilters()
+    Component.onCompleted: {
+        if (FreeBooksController.getFilterAuthorsAndTitle() !== "") {
+            toolbar.openSearchingBar()
+            toolbar.searchingBarText = FreeBooksController.getFilterAuthorsAndTitle()
+        }
+        FreeBooksController.fetchFirstBooksMetadataPage()
+    }
 
     ColumnLayout {
         id: layout

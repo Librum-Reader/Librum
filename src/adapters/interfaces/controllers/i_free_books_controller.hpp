@@ -20,6 +20,7 @@ public:
     Q_INVOKABLE virtual void deleteBookCover(const int id) = 0;
     Q_INVOKABLE virtual void setFilterAuthorsAndTitle(
         const QString& authorsAndTitle) = 0;
+    Q_INVOKABLE virtual QString getFilterAuthorsAndTitle() = 0;
     Q_INVOKABLE virtual void clearAllFilters() = 0;
     virtual data_models::FreeBooksModel* getFreeBooksModel() = 0;
 

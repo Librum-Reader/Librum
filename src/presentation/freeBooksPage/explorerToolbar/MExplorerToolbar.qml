@@ -5,6 +5,13 @@ import CustomComponents
 
 Item {
     id: root
+
+    property alias searchingBarText: searchButton.text
+
+    function openSearchingBar() {
+        searchButton.open()
+    }
+
     signal checkBoxClicked
     signal searchForAuthorsAndTitleTriggered(string authorsAndTitle)
 

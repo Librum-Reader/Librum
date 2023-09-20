@@ -106,6 +106,11 @@ void FreeBooksController::setFilterAuthorsAndTitle(
     m_isFirstBooksMetadataPageFetchingAllowed = true;
 }
 
+QString FreeBooksController::getFilterAuthorsAndTitle()
+{
+    return m_filterAuthorsAndTitle;
+}
+
 void FreeBooksController::clearAllFilters()
 {
     m_filterAuthorsAndTitle.clear();

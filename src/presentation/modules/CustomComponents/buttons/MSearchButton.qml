@@ -13,6 +13,9 @@ Item {
 
     property int imageSize: 16
     property bool opened: false
+
+    property alias text: inputField.text
+
     signal triggered(string query)
     signal textEditingFinished(string text)
 
