@@ -10,6 +10,7 @@ Popup
     id: root
     property string highlight: ""
     signal highlightOptionSelected(string uuid)
+    signal dictionaryOptionSelected(string word)
     
     width: internal.getWidth()
     height: 32
@@ -18,6 +19,8 @@ Popup
     {
         color: Style.colorControlBackground
         radius: 4
+        border.width: 1
+        border.color: Style.colorContainerBorder
     }
     
     Shortcut
@@ -111,7 +114,7 @@ Popup
                 if(root.highlight == "")
                     activeFocusItem.copySelectedText();
                 else
-                    activeFocusItem.copyTextFromHighlight(root.highlight);
+                    activeFocusItem.copyHighlightedText(root.highlight);
             }
         }
         
@@ -124,6 +127,33 @@ Popup
             clickedFunction: function() {
                 let uuid = internal.createHighlight();
                 root.highlightOptionSelected(uuid);
+            }
+        }
+        
+        Separator { }
+        
+        SelectionOptionsPopupItem
+        {
+            id: lookUpAction
+            text: "Look Up"
+            clickedFunction: function() {
+                let text = ""
+                if(root.highlight == "")
+                    text = activeFocusItem.getSelectedText();
+                else
+                    text = activeFocusItem.getHighlightedText(root.highlight);
+
+                // Removing any . or , from the start and the end of the word
+                text = text.replace(/^[,.]+|[,.]+$/g, '');
+                
+                // Make the first letter lower case. When the word is at the start of a sentence, 
+                // the first letter will be upper case, which in turn causes the dictionary to fail.
+                const firstLetter = text.charAt(0).toLowerCase();
+                const restOfString = text.slice(1); // Get the rest of the string
+                text = firstLetter + restOfString;
+                
+                DictionaryController.getDefinitionForWord(text);
+                root.dictionaryOptionSelected(text);
             }
         }
         
@@ -147,8 +177,9 @@ Popup
         
         function getWidth()
         {
-            return separator1.width * 2 + selectionOptionsLayout.spacing * 4 + 
-                    copyAction.width + highlightAction.width + (root.highlight === "" ? 0 : removeAction.width);
+            return separator1.width * 3 + selectionOptionsLayout.spacing * 6 + 
+                    copyAction.width + highlightAction.width + lookUpAction.width
+                       + (root.highlight === "" ? 0 : removeAction.width);
         }
         
         function createHighlight()

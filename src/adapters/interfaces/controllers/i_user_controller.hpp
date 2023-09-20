@@ -1,7 +1,7 @@
+#pragma once
 #include <QObject>
 #include "adapters_export.hpp"
 #include "user_tags_model.hpp"
-#pragma once
 
 namespace adapters
 {

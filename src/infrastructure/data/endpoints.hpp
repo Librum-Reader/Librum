@@ -51,6 +51,11 @@ inline const QString userChangePasswordEndpoint { domain + "/user" };
 inline const QString userProfilePictureEndpoint { domain +
                                                   "/user/profilePicture" };
 
+// Dictionary API
+inline const QString dictionaryDefinitionEndpoint {
+    "https://en.wiktionary.org/api/rest_v1/page/definition"
+};
+
 // Tag storage
 inline const QString tagUpdateEndpoint { domain + "/tag" };
 inline const QString tagDeletionEndpoint { domain + "/tag" };

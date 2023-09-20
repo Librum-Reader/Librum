@@ -32,6 +32,7 @@
 #include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
+#include "word_definition_dto.hpp"
 
 
 using namespace adapters::controllers;
@@ -71,6 +72,9 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
+    qRegisterMetaType<adapters::dtos::DictionaryEntryDto>();
+    qRegisterMetaType<adapters::dtos::WordTypeDto>();
+    qRegisterMetaType<adapters::dtos::WordDefinitionDto>();
 
 
     // Authentication Stack
@@ -94,6 +98,12 @@ int main(int argc, char* argv[])
     auto userController = std::make_unique<UserController>(userService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "UserController",
                                  userController.get());
+
+    // Dictionary Stack
+    auto* dictionaryService = config::diConfig().create<application::IDictionaryService*>();
+    auto dictionaryController = std::make_unique<DictionaryController>(dictionaryService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "DictionaryController",
+                                 dictionaryController.get());
 
     // Library Stack
     auto* libraryService = config::diConfig().create<application::ILibraryService*>();

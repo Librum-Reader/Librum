@@ -13,6 +13,7 @@ import "DocumentNavigation.js" as NavigationLogic
   */
 Pane {
     id: root
+    property var lastSelectedPage
     signal clicked
     signal zoomFactorChanged(real factor)
     
@@ -67,6 +68,25 @@ Pane {
             pageView.widestItem = normMaxWidth * BookController.zoom;
             
             pageView.prevZoom = BookController.zoom;
+        }
+    }
+    
+    Connections
+    {
+        target: DictionaryController
+        
+        function onGettingDefinitionFailed() {
+        }
+        
+        function onStartedGettingDefinition(word) {
+            if(!dictionaryPopup.opened)
+            {
+                dictionaryPopup.x = Qt.binding(function() { return root.width / 2 - dictionaryPopup.width / 2; });
+                dictionaryPopup.y = Qt.binding(function() { return root.height / 2 - dictionaryPopup.height / 2; });
+                dictionaryPopup.open();
+            }
+            
+            dictionaryPopup.word = word;
         }
     }
     
@@ -208,9 +228,9 @@ Pane {
         onHighlightOptionSelected: 
             (uuid) => {
                 if(selectionOptionsPopup.highlight == "")
-                    colorSelectionPopup.highlight = uuid;
+                colorSelectionPopup.highlight = uuid;
                 else
-                    colorSelectionPopup.highlight = selectionOptionsPopup.highlight
+                colorSelectionPopup.highlight = selectionOptionsPopup.highlight
                 
                 internal.openPopupAt(colorSelectionPopup, 
                                      selectionOptionsPopup.highlightCenterX, 
@@ -220,6 +240,11 @@ Pane {
     
     MColorSelectionPopup {
         id: colorSelectionPopup
+    }
+    
+    MDictionaryPopup
+    {
+        id: dictionaryPopup
     }
     
     function zoom(factor) {

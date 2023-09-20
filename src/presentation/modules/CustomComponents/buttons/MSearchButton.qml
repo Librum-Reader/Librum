@@ -50,7 +50,7 @@ Item {
                 leftPadding: 12
                 color: Style.colorBaseInputText
                 font.pointSize: 12
-                placeholderText: "Search for entries"
+                placeholderText: "Search for Book"
                 placeholderTextColor: Style.colorPlaceholderText
                 selectByMouse: true
                 background: Rectangle {
