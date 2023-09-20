@@ -15,6 +15,7 @@ Popup {
     implicitWidth: 400
     implicitHeight: 480
     padding: 16
+    bottomPadding: 26
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
     background: Rectangle {
         color: Style.colorPopupBackground
@@ -316,6 +317,32 @@ Popup {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    Label {
+        id: wiktionaryLink
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: -20
+        anchors.rightMargin: 2
+        horizontalAlignment: Text.AlignRight
+        text: 'Source: <a href="https://en.wiktionary.org" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Wiktionary</a>'
+        textFormat: Text.RichText
+        onLinkActivated: (link) => Qt.openUrlExternally(link)
+        font.pointSize: 9
+        color: Style.colorText
+        
+        MouseArea
+        {
+            anchors.fill: parent
+            cursorShape: wiktionaryLink.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+            
+            onClicked: 
+            {
+                if(wiktionaryLink.hoveredLink !== "")
+                    Qt.openUrlExternally(wiktionaryLink.hoveredLink);
             }
         }
     }
