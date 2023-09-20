@@ -75,12 +75,18 @@ Pane {
     {
         target: DictionaryController
         
-        function onGettingDefinitionSucceeded(word) {
-            dictionaryPopup.word = word;
+        function onGettingDefinitionFailed() {
+        }
+        
+        function onStartedGettingDefinition(word) {
+            if(!dictionaryPopup.opened)
+            {
+                dictionaryPopup.x = root.width / 2 - dictionaryPopup.width / 2;
+                dictionaryPopup.y = root.height / 2 - dictionaryPopup.height / 2;
+                dictionaryPopup.open();
+            }
             
-            dictionaryPopup.x = root.width / 2 - dictionaryPopup.width / 2;
-            dictionaryPopup.y = root.height / 2 - dictionaryPopup.height / 2;
-            dictionaryPopup.open();
+            dictionaryPopup.word = word;
         }
     }
     

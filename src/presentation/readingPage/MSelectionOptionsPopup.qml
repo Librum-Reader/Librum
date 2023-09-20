@@ -10,6 +10,7 @@ Popup
     id: root
     property string highlight: ""
     signal highlightOptionSelected(string uuid)
+    signal dictionaryOptionSelected(string word)
     
     width: internal.getWidth()
     height: 32
@@ -140,10 +141,6 @@ Popup
                 else
                     text = activeFocusItem.getHighlightedText(root.highlight);
 
-                // Return if the character count exceeds 100 because no word-entry will exist.
-                if(text.length > 100)
-                    return;
-                
                 // Removing any . or , from the start and the end of the word
                 text = text.replace(/^[,.]+|[,.]+$/g, '');
                 
@@ -154,6 +151,7 @@ Popup
                 text = firstLetter + restOfString;
                 
                 DictionaryController.getDefinitionForWord(text);
+                root.dictionaryOptionSelected(text);
             }
         }
         

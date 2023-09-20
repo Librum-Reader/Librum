@@ -23,8 +23,9 @@ Popup {
     onOpened: {
         previouslyFocusedPage = activeFocusItem;
         root.forceActiveFocus();
-        inputField.text = root.word;
     }
+    
+    onClosed: DictionaryController.clearData();
     
     MouseArea
     {
@@ -55,7 +56,7 @@ Popup {
                 imageSize: 8
                 opacityOnPressed: 0.7
                 
-                onClicked: root.backButtonClicked()
+                onClicked: DictionaryController.goToPreviousWord()
             }
             
             Pane
@@ -80,6 +81,7 @@ Popup {
                     verticalAlignment: Text.AlignVCenter
                     leftPadding: 12
                     color: Style.colorBaseInputText
+                    text: root.word
                     font.pointSize: 11
                     placeholderText: "Search"
                     placeholderTextColor: Style.colorPlaceholderText
@@ -100,11 +102,15 @@ Popup {
         {
             text: root.word.toUpperCase()
             Layout.fillWidth: true
+            Layout.maximumHeight: 30
             elide: Text.ElideRight
+            wrapMode: Text.NoWrap
             Layout.topMargin: 20
             color: Style.colorText
             font.pointSize: 20
             font.weight: Font.DemiBold
+            
+            clip: true
         }
         
         Label
@@ -240,13 +246,18 @@ Popup {
                                                     if(link.startsWith("http"))
                                                     {
                                                         Qt.openUrlExternally(link);
+                                                        return;
                                                     }
-                                                    else if(link.startsWith("/wiki/"))
-                                                    {
-                                                        let newWord = link.replace("/wiki/","");
-                                                        DictionaryController.getDefinitionForWord(newWord);
-                                                        inputField.text = newWord;
-                                                    }
+                                                    
+                                                    // Some words have metadata pre/appended to the link
+                                                    // which we need to remove before searching for the word.
+                                                    let fixedWord = link;
+                                                    if(link.startsWith("/wiki/"))
+                                                        fixedWord = link.replace("/wiki/","");
+                                                    if(fixedWord.startsWith("Appendix:Glossary#"))
+                                                        fixedWord = fixedWord.replace("Appendix:Glossary#", "");
+                                                    
+                                                    DictionaryController.getDefinitionForWord(fixedWord);
                                                 }
                                             }
                                         }

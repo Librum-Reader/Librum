@@ -20,8 +20,9 @@ DictionaryController::DictionaryController(
 
 void DictionaryController::getDefinitionForWord(const QString& word)
 {
+    emit startedGettingDefinition(word);
     m_dictionaryService->getDefinitionForWord(word);
-    m_currentWord = word;
+    m_searchedForWord = word;
 }
 
 DictionaryEntryDto DictionaryController::definition() const
@@ -29,15 +30,45 @@ DictionaryEntryDto DictionaryController::definition() const
     return m_definition;
 }
 
+void DictionaryController::clearData()
+{
+    m_definition = DictionaryEntryDto {};
+    m_previousDefinitions.clear();
+    m_currentWord.clear();
+    m_searchedForWord.clear();
+    emit definitionChanged();
+}
+
+void DictionaryController::goToPreviousWord()
+{
+    if(m_previousDefinitions.isEmpty())
+        return;
+
+    auto previous = m_previousDefinitions.pop();
+    m_currentWord = previous.first;
+    emit startedGettingDefinition(m_currentWord);
+
+    m_definition = previous.second;
+    emit definitionChanged();
+    gettingDefinitionSucceeded();
+}
+
 void DictionaryController::processDefinition(bool success,
                                              const QJsonObject& definition)
 {
     if(!success)
+    {
+        emit gettingDefinitionFailed();
         return;
+    }
+
+    if(!m_currentWord.isEmpty())
+        m_previousDefinitions.push({ m_currentWord, m_definition });
 
     m_definition = parseDefinition(definition);
+    m_currentWord = m_searchedForWord;
     emit definitionChanged();
-    emit gettingDefinitionSucceeded(m_currentWord);
+    gettingDefinitionSucceeded();
 }
 
 DictionaryEntryDto DictionaryController::parseDefinition(

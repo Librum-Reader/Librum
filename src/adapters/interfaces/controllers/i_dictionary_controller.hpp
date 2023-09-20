@@ -22,13 +22,15 @@ public:
     virtual ~IDictionaryController() noexcept = default;
 
     Q_INVOKABLE virtual void getDefinitionForWord(const QString& word) = 0;
+    Q_INVOKABLE virtual void clearData() = 0;
+    Q_INVOKABLE virtual void goToPreviousWord() = 0;
     virtual dtos::DictionaryEntryDto definition() const = 0;
 
 signals:
     void definitionChanged();
-    void definitionReceived(bool success, const QJsonObject& definition);
+    void startedGettingDefinition(const QString& word);
+    void gettingDefinitionSucceeded();
     void gettingDefinitionFailed();
-    void gettingDefinitionSucceeded(const QString& word);
 };
 
 }  // namespace adapters
