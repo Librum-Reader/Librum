@@ -27,6 +27,21 @@ Popup {
     
     onClosed: DictionaryController.clearData();
     
+    Connections
+    {
+        target: DictionaryController
+        
+        function onStartedGettingDefinition() {
+            loadingAnimation.playing = true;
+            loadingAnimation.visible = true;
+        }
+        
+        function onGettingDefinitionSucceeded() {
+            loadingAnimation.playing = false;
+            loadingAnimation.visible = false;
+        }
+    }
+    
     MouseArea
     {
         id: actionArea
@@ -134,6 +149,22 @@ Popup {
                 border.width: 1
                 border.color: Style.colorContainerBorder
                 radius: 5
+            }
+            
+            AnimatedImage {
+                id: loadingAnimation
+                anchors.centerIn: parent
+                source: Icons.loadingAnimation
+                width: 110
+                fillMode: Image.PreserveAspectFit
+                
+                onPlayingChanged: {
+                    // Hide the ListView while the loading animation is running.
+                    if(playing)
+                        dictionaryList.visible = false;
+                    else
+                        dictionaryList.visible = true;
+                }
             }
             
             ListView

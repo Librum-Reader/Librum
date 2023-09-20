@@ -208,5 +208,6 @@
         <file>src/logo.ico</file>
         <file>resources/images/light_mode/decision/close_popup_white_icon.svg</file>
         <file>app_info.json</file>
+        <file>resources/animations/loading_animation.gif</file>
     </qresource>
 </RCC>
