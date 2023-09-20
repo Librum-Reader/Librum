@@ -11,6 +11,7 @@ namespace adapters::dtos
  * An example of the JSON object:
  *  {
         "partOfSpeech": "Noun",
+        "language": "English"
         "definitions": [
             {
                 "definition": "First definiton of the noun"
@@ -55,10 +56,12 @@ struct ADAPTERS_EXPORT WordTypeDto
 {
     Q_GADGET
     Q_PROPERTY(QString partOfSpeech MEMBER partOfSpeech)
+    Q_PROPERTY(QString language MEMBER language)
     Q_PROPERTY(QVariantList definitions MEMBER definitions)
 
 public:
     QString partOfSpeech;
+    QString language;
     QVariantList definitions;  // WordDefinitionDtos
 };
 

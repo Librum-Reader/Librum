@@ -38,6 +38,7 @@ Popup {
         function onStartedGettingDefinition() {
             loadingAnimation.playing = true;
             loadingAnimation.visible = true;
+            language.text = ""
             
             dictionaryList.visible = false;
             notFound.visible = false;
@@ -53,6 +54,7 @@ Popup {
         function onGettingDefinitionSucceeded() {
             loadingAnimation.playing = false;
             loadingAnimation.visible = false;
+            language.text = DictionaryController.definition.wordTypes[0].language;
             
             dictionaryList.visible = true;
         }
@@ -146,7 +148,7 @@ Popup {
         
         Label
         {
-            text: "English"
+            id: language
             Layout.topMargin: -4
             color: Style.colorText
             font.pointSize: 11

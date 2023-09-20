@@ -58,6 +58,20 @@ void DictionaryController::processDefinition(bool success,
 {
     if(!success)
     {
+        // If the search failed for a word that starts with a lowercase letter,
+        // try again with the capitalized version of the word.
+        // The first letter can oftentimes cause problems because words start
+        // with an uppercase letter after a period, but the dictionary API is
+        // case-sensitive so we change it to lowercase by default. This can
+        // cause problems for names or different languages though.
+        if(!m_searchedForWord[0].isUpper())
+        {
+            auto capitalizedWord =
+                m_searchedForWord[0].toUpper() + m_searchedForWord.mid(1);
+            getDefinitionForWord(capitalizedWord);
+            return;
+        }
+
         emit gettingDefinitionFailed();
         return;
     }
@@ -75,7 +89,13 @@ DictionaryEntryDto DictionaryController::parseDefinition(
     const QJsonObject& dictionaryEntry)
 {
     QVariantList wordTypes;
-    for(auto wordType : dictionaryEntry["en"].toArray())
+    QString language;
+    if(dictionaryEntry.contains("en"))
+        language = "en";
+    else
+        language = dictionaryEntry.begin().key();
+
+    for(auto wordType : dictionaryEntry[language].toArray())
     {
         QVariantList definitions;
         for(auto definition : wordType.toObject()["definitions"].toArray())
@@ -96,6 +116,7 @@ DictionaryEntryDto DictionaryController::parseDefinition(
 
         WordTypeDto wordTypeValue {
             .partOfSpeech = wordType.toObject()["partOfSpeech"].toString(),
+            .language = wordType.toObject()["language"].toString(),
             .definitions = definitions,
         };
 
