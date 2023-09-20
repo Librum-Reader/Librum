@@ -112,8 +112,19 @@ void FreeBooksService::setBookCover(int id, const QImage& cover)
     }
 
     freeBook->cover =
-        cover.scaled(maxCoverWidth, maxCoverHeight, Qt::KeepAspectRatio,
-                     Qt::SmoothTransformation);
+        cover.scaledToHeight(maxCoverHeight, Qt::SmoothTransformation);
+
+    // scaledToHeight() will keep the aspect ratio, but will not prevent the
+    // cover getting wider than the actual maximal width. If this case occurs,
+    // and the image gets bigger than the maximal width, we don't have the
+    // option to keep the aspect ratio, we instead need to crop it.
+    if(freeBook->cover.width() > maxCoverWidth)
+    {
+        freeBook->cover =
+            cover.scaled(maxCoverWidth, maxCoverHeight, Qt::IgnoreAspectRatio,
+                         Qt::SmoothTransformation);
+    }
+
     emit dataChanged(getFreeBookIndexById(id));
 }
 
