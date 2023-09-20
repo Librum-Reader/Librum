@@ -18,6 +18,8 @@
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "dependency_injection.hpp"
+#include "free_books_model.hpp"
+#include "i_free_books_service.hpp"
 #include "i_library_service.hpp"
 #include "i_user_service.hpp"
 #include "key_sequence_recorder.hpp"
@@ -64,6 +66,7 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonType(QUrl("qrc:/IconSheet.qml"), "Librum.icons", 1, 0, "Icons");
     qmlRegisterSingletonType(QUrl("qrc:/Globals.qml"), "Librum.globals", 1, 0, "Globals");
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
+    qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
     qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
     qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
@@ -114,6 +117,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "BookController",
                                  bookController.get());
 
+    // Free books stack
+    auto* freeBooksService = config::diConfig().create<application::IFreeBooksService*>();
+    auto freeBooksController = std::make_unique<FreeBooksController>(freeBooksService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "FreeBooksController",
+                                 freeBooksController.get());
+
     // Settings Stack
     auto* settingsService = config::diConfig().create<application::ISettingsService*>();
     auto settingsController = std::make_unique<SettingsController>(settingsService);
@@ -150,6 +159,13 @@ int main(int argc, char* argv[])
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);
 
+    QObject::connect(
+        authenticationService,
+        &application::IAuthenticationService::loggedIn,
+        freeBooksService, &application::IFreeBooksService::setupUserData);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+        freeBooksService, &application::IFreeBooksService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      userService, &application::IUserService::setupUserData);

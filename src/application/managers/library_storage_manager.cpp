@@ -1,5 +1,6 @@
 #include "library_storage_manager.hpp"
 #include <vector>
+#include "save_book_helper.hpp"
 
 using namespace domain::entities;
 using application::utility::BookForDeletion;
@@ -63,32 +64,13 @@ void LibraryStorageManager::saveDownloadedBookMediaChunkToFile(
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
     auto destination = destDir.filePath(fileName);
 
-    static QMap<QString, QSharedPointer<QFile>> filesMap;
+    application::utility::saveDownloadedBookMediaChunkToFile(
+        data, isLastChunk, fileName, destination);
+
     if(isLastChunk)
     {
-        filesMap.remove(fileName);
         emit finishedDownloadingBookMedia(uuid, destination);
-        return;
     }
-
-    if(!filesMap.contains(fileName))
-    {
-        auto newFile = QSharedPointer<QFile>(new QFile(destination));
-        filesMap.insert(fileName, newFile);
-    }
-
-    QSharedPointer<QFile> file;
-    file = filesMap[fileName];
-    if(!file->isOpen())
-    {
-        if(!file->open(QIODevice::Append))
-        {
-            qWarning() << "Could not open new book file: %1" << destination;
-            return;
-        }
-    }
-
-    file->write(data);
 }
 
 void LibraryStorageManager::saveDownloadedCoverToFile(const QByteArray& data,

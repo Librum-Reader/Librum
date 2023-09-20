@@ -4,6 +4,8 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
+                    interfaces/controllers/i_free_books_controller.hpp
+                    interfaces/persistance/i_free_books_storage_access.hpp
                     interfaces/controllers/i_library_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
@@ -19,6 +21,8 @@ add_library(adapters
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    controllers/free_books_controller.cpp
+                    controllers/free_books_controller.hpp
                     controllers/library_controller.cpp
                     controllers/library_controller.hpp
                     controllers/user_controller.cpp
@@ -38,6 +42,8 @@ add_library(adapters
                     gateways/user_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
+                    gateways/free_books_storage_gateway.cpp
+                    gateways/free_books_storage_gateway.hpp
                     gateways/library_storage_gateway.cpp
                     gateways/library_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
@@ -50,6 +56,8 @@ add_library(adapters
                     data_models/library_model/library_proxy_model.cpp
                     data_models/library_model/library_proxy_model.hpp
                     data_models/library_model/filter_request.hpp
+                    data_models/free_books_model/free_books_model.cpp
+                    data_models/free_books_model/free_books_model.hpp
                     data_models/user_tags_model/user_tags_model.cpp
                     data_models/user_tags_model/user_tags_model.hpp
                     data_models/shortcuts_model/shortcuts_model.cpp
@@ -77,6 +85,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/library_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/free_books_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models

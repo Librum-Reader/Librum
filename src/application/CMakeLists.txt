@@ -3,6 +3,8 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 # Setup
 set(application_SRC
     interfaces/services/i_authentication_service.hpp
+    interfaces/services/i_free_books_service.hpp
+    interfaces/gateways/i_free_books_storage_gateway.hpp
     interfaces/services/i_library_service.hpp
     interfaces/services/i_user_service.hpp
     interfaces/services/i_settings_service.hpp
@@ -20,6 +22,8 @@ set(application_SRC
     
     services/authentication_service.cpp
     services/authentication_service.hpp
+    services/free_books_service.cpp
+    services/free_books_service.hpp
     services/library_service.cpp
     services/library_service.hpp
     services/user_service.cpp

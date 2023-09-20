@@ -10,6 +10,10 @@
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
 #include "book_service.hpp"
+#include "free_books_controller.hpp"
+#include "free_books_service.hpp"
+#include "free_books_storage_access.hpp"
+#include "free_books_storage_gateway.hpp"
 #include "dictionary_access.hpp"
 #include "dictionary_controller.hpp"
 #include "dictionary_gateway.hpp"
@@ -71,6 +75,14 @@ const auto diConfig = []
         // Books
         di::bind<IBookController>().to<controllers::BookController>(),
         di::bind<IBookService>().to<services::BookService>(),
+
+        // Free books
+        di::bind<IFreeBooksController>().to<controllers::FreeBooksController>(),
+        di::bind<IFreeBooksService>().to<services::FreeBooksService>(),
+        di::bind<IFreeBooksStorageGateway>()
+            .to<gateways::FreeBooksStorageGateway>(),
+        di::bind<IFreeBooksStorageAccess>()
+            .to<persistence::FreeBooksStorageAccess>(),
 
         // User
         di::bind<IUserController>().to<controllers::UserController>(),

@@ -5,6 +5,7 @@ add_library(domain
                 SHARED
                     entities/book.cpp
                     entities/book.hpp
+                    entities/free_book.hpp
                     entities/tag.cpp
                     entities/tag.hpp
                     entities/user.cpp

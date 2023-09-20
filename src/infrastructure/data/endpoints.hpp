@@ -6,6 +6,8 @@ namespace infrastructure::data
 
 inline const QString domain { "https://api.librumreader.com" };
 
+inline const QString freeBooksDomain { "https://gutendex.com" };
+
 // Authentication
 inline const QString authenticationEndpoint { domain +
                                               "/authentication/login" };
@@ -34,6 +36,10 @@ inline const QString changeBookCoverEndpoint { domain + "/book/cover" };
 inline const QString deleteBookCoverEndpoint { domain + "/book/cover" };
 inline const QString getUsedBookStorageEndpoint { domain +
                                                   "/book/usedBookStorage" };
+
+// Free books storage
+inline const QString getFreeBooksMetadataEndpoint { freeBooksDomain +
+                                                    "/books" };
 
 // User storage
 inline const QString userGetEndpoint { domain + "/user" };
