@@ -78,7 +78,7 @@ Popup {
             {
                 id: backButton
                 Layout.preferredWidth: 32
-                Layout.preferredHeight: 30
+                Layout.preferredHeight: 32
                 backgroundColor: Style.colorReadingViewButtonBackground
                 borderWidth: 0
                 imagePath: Icons.readingViewBack
@@ -92,7 +92,7 @@ Popup {
             {
                 id: container
                 Layout.fillWidth: true
-                Layout.preferredHeight: 30
+                Layout.preferredHeight: 32
                 padding: 0
                 background: Rectangle
                 {
@@ -258,48 +258,64 @@ Popup {
                                     id: defLayout
                                     width: parent.width
                                     
-                                    Label
+                                    RowLayout
                                     {
-                                        id: definitionText
                                         Layout.fillWidth: true
-                                        text: (modelData + 1) + ". " + DictionaryController.definition.wordTypes[type.index].definitions[modelData].definition
-                                        wrapMode: Text.WordWrap
-                                        color: Style.colorText
-                                        font.pointSize: 11
-                                        textFormat: Text.RichText
+                                        spacing: 4
                                         
-                                        MouseArea
+                                        Label
                                         {
-                                            id: mouseArea
-                                            anchors.fill: parent
-                                            cursorShape: definitionText.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                            text: (modelData + 1) + "."
+                                            Layout.alignment: Qt.AlignTop
+                                            wrapMode: Text.WordWrap
+                                            color: Style.colorText
+                                            font.pointSize: 11
+                                            textFormat: Text.RichText
+                                        }
+                                        
+                                        Label
+                                        {
+                                            id: definitionText
+                                            Layout.fillWidth: true
+                                            text: DictionaryController.definition.wordTypes[type.index].definitions[modelData].definition
+                                            wrapMode: Text.WordWrap
+                                            color: Style.colorText
+                                            font.pointSize: 11
+                                            textFormat: Text.RichText
                                             
-                                            onClicked: followWiktionaryLink()
-                                            
-                                            function followWiktionaryLink() {
-                                                if(definitionText.hoveredLink !== "")
-                                                {
-                                                    let link = definitionText.hoveredLink;
-                                                    if(link.startsWith("http"))
+                                            MouseArea
+                                            {
+                                                id: mouseArea
+                                                anchors.fill: parent
+                                                cursorShape: definitionText.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                                                
+                                                onClicked: followWiktionaryLink()
+                                                
+                                                function followWiktionaryLink() {
+                                                    if(definitionText.hoveredLink !== "")
                                                     {
-                                                        Qt.openUrlExternally(link);
-                                                        return;
+                                                        let link = definitionText.hoveredLink;
+                                                        if(link.startsWith("http"))
+                                                        {
+                                                            Qt.openUrlExternally(link);
+                                                            return;
+                                                        }
+                                                        else if(link.startsWith("/wiki/Wiktionary"))
+                                                        {
+                                                            Qt.openUrlExternally("https://wiktionary.org/" + link);
+                                                            return
+                                                        }
+                                                        
+                                                        // Some words have metadata pre/appended to the link
+                                                        // which we need to remove before searching for the word.
+                                                        let fixedWord = link;
+                                                        if(link.startsWith("/wiki/"))
+                                                            fixedWord = link.replace("/wiki/","");
+                                                        if(fixedWord.startsWith("Appendix:Glossary#"))
+                                                            fixedWord = fixedWord.replace("Appendix:Glossary#", "");
+                                                        
+                                                        DictionaryController.getDefinitionForWord(fixedWord);
                                                     }
-                                                    else if(link.startsWith("/wiki/Wiktionary"))
-                                                    {
-                                                        Qt.openUrlExternally("https://wiktionary.org/" + link);
-                                                        return
-                                                    }
-                                                    
-                                                    // Some words have metadata pre/appended to the link
-                                                    // which we need to remove before searching for the word.
-                                                    let fixedWord = link;
-                                                    if(link.startsWith("/wiki/"))
-                                                        fixedWord = link.replace("/wiki/","");
-                                                    if(fixedWord.startsWith("Appendix:Glossary#"))
-                                                        fixedWord = fixedWord.replace("Appendix:Glossary#", "");
-                                                    
-                                                    DictionaryController.getDefinitionForWord(fixedWord);
                                                 }
                                             }
                                         }
@@ -313,7 +329,7 @@ Popup {
                                         {
                                             id: example
                                             Layout.fillWidth: true
-                                            Layout.leftMargin: 12
+                                            Layout.leftMargin: 28
                                             text: DictionaryController.definition.wordTypes[type.index].definitions[definitionItem.index].examples[modelData]
                                             wrapMode: Text.WordWrap
                                             color: Style.colorLightText
