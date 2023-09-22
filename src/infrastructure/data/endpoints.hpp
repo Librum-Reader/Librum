@@ -6,7 +6,7 @@ namespace infrastructure::data
 
 inline const QString domain { "https://api.librumreader.com" };
 
-inline const QString freeBooksDomain { "https://gutendex.com" };
+inline const QString freeBooksDomain { "https://freebooks.librumreader.com" };
 
 // Authentication
 inline const QString authenticationEndpoint { domain +
