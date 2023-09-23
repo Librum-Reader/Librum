@@ -1,5 +1,9 @@
 #pragma once
 #include "../libs/di/include/boost/di.hpp"
+#include "ai_explanation_access.hpp"
+#include "ai_explanation_controller.hpp"
+#include "ai_explanation_gateway.hpp"
+#include "ai_explanation_service.hpp"
 #include "app_info_access.hpp"
 #include "app_info_controller.hpp"
 #include "app_info_gateway.hpp"
@@ -10,14 +14,14 @@
 #include "authentication_service.hpp"
 #include "book_controller.hpp"
 #include "book_service.hpp"
-#include "free_books_controller.hpp"
-#include "free_books_service.hpp"
-#include "free_books_storage_access.hpp"
-#include "free_books_storage_gateway.hpp"
 #include "dictionary_access.hpp"
 #include "dictionary_controller.hpp"
 #include "dictionary_gateway.hpp"
 #include "dictionary_service.hpp"
+#include "free_books_controller.hpp"
+#include "free_books_service.hpp"
+#include "free_books_storage_access.hpp"
+#include "free_books_storage_gateway.hpp"
 #include "i_app_info_access.hpp"
 #include "i_app_info_service.hpp"
 #include "i_metadata_extractor.hpp"
@@ -63,6 +67,13 @@ const auto diConfig = []
         di::bind<IAppInfoService>().to<services::AppInfoService>(),
         di::bind<IAppInfoGateway>().to<gateways::AppInfoGateway>(),
         di::bind<IAppInfoAccess>().to<persistence::AppInfoAccess>(),
+
+        // Ai explanation
+        di::bind<IAiExplanationController>()
+            .to<controllers::AiExplanationController>(),
+        di::bind<IAiExplanationService>().to<services::AiExplanationService>(),
+        di::bind<IAiExplanationGateway>().to<gateways::AiExplanationGateway>(),
+        di::bind<IAiExplanationAccess>().to<persistence::AiExplanationAccess>(),
 
         // Library
         di::bind<ILibraryController>().to<controllers::LibraryController>(),

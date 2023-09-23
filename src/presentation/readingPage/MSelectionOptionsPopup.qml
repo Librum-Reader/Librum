@@ -149,6 +149,23 @@ Popup {
             }
         }
 
+        Separator {}
+
+        SelectionOptionsPopupItem {
+            id: explainAction
+            text: "Explain"
+            clickedFunction: function () {
+                let text = ""
+                if (root.highlight == "")
+                    text = activeFocusItem.getSelectedText()
+                else
+                    text = activeFocusItem.getHighlightedText(root.highlight)
+
+                AiExplanationController.getExplanation(text)
+                // root.dictionaryOptionSelected(text)
+            }
+        }
+
         Separator {
             visible: root.highlight != ""
         }
@@ -168,9 +185,9 @@ Popup {
         id: internal
 
         function getWidth() {
-            return separator1.width * 3 + selectionOptionsLayout.spacing * 6
+            return separator1.width * 4 + selectionOptionsLayout.spacing * 7
                     + copyAction.width + highlightAction.width + lookUpAction.width
-                    + (root.highlight === "" ? 0 : removeAction.width)
+                    + explainAction.width + (root.highlight === "" ? 0 : removeAction.width)
         }
 
         function createHighlight() {
