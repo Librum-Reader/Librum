@@ -29,10 +29,13 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
                 {
                     api_error_helper::logErrorMessage(reply,
                                                       "Getting ai explanation");
+
+                    emit explanationReceived("");
+                    reply->deleteLater();
+                    return;
                 }
 
-                // emit
-                auto x = reply->readAll();
+                emit explanationReceived(reply->readAll());
                 reply->deleteLater();
             });
 }
