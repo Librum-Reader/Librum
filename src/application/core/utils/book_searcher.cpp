@@ -1,4 +1,5 @@
 #include "book_searcher.hpp"
+#include <QDebug>
 #include "qnumeric.h"
 
 namespace application::core::utils
@@ -84,6 +85,9 @@ void BookSearcher::extractSearchHitsFromBook(std::vector<SearchHit>& results,
             if(options.wholeWords && !isWholeWord(textPage, hit))
                 continue;
 
+            if(options.caseSensitive && !isCaseSensitive(textPage, hit, text))
+                continue;
+
             SearchHit searchHit {
                 .pageNumber = i,
                 .rect = hit,
@@ -107,6 +111,18 @@ bool BookSearcher::isWholeWord(const mupdf::FzStextPage& textPage,
     bool areTheSame = qFuzzyCompare(wholeWordQuadWidth, quadWidth);
 
     return areTheSame;
+}
+
+bool BookSearcher::isCaseSensitive(mupdf::FzStextPage& textPage,
+                                   const mupdf::FzQuad& quad,
+                                   const QString& needle) const
+{
+    int yMiddle = quad.ul.y + (quad.ll.y - quad.ul.y) / 2;
+    mupdf::FzPoint begin(quad.ul.x, yMiddle);
+    mupdf::FzPoint end(quad.ur.x, yMiddle);
+
+    auto text = textPage.fz_copy_selection(begin, end, 1);
+    return QString::fromStdString(text) == needle;
 }
 
 }  // namespace application::core::utils

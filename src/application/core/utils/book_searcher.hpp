@@ -33,6 +33,9 @@ private:
                                    SearchOptions options) const;
     bool isWholeWord(const mupdf::FzStextPage& textPage,
                      const mupdf::FzQuad& quad) const;
+    bool isCaseSensitive(mupdf::FzStextPage& textPage,
+                         const mupdf::FzQuad& quad,
+                         const QString& needle) const;
 
     mupdf::FzDocument* m_fzDocument;
     std::vector<SearchHit> m_searchHits;
