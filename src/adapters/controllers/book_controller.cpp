@@ -2,6 +2,7 @@
 #include <QUuid>
 #include "fz_utils.hpp"
 #include "highlight.hpp"
+#include "search_options.hpp"
 
 using namespace application::core;
 using domain::entities::Highlight;
@@ -44,7 +45,7 @@ mupdf::FzDocument* BookController::getFzDocument()
 
 void BookController::search(const QString& text)
 {
-    m_bookService->search(text);
+    m_bookService->search(text, m_searchOptions);
 }
 
 void BookController::clearSearch()
@@ -131,6 +132,26 @@ void BookController::setZoom(float newZoom)
 {
     m_bookService->setZoom(newZoom);
     emit zoomChanged(newZoom);
+}
+
+bool BookController::getSearchWholeWords() const
+{
+    return m_searchOptions.wholeWords;
+}
+
+void BookController::setSearchWholeWords(bool newSearchWholeWords)
+{
+    m_searchOptions.wholeWords = newSearchWholeWords;
+}
+
+bool BookController::getSearchCaseSensitive() const
+{
+    return m_searchOptions.caseSensitive;
+}
+
+void BookController::setSearchCaseSensitive(bool newCaseSensitive)
+{
+    m_searchOptions.caseSensitive = newCaseSensitive;
 }
 
 FilteredTOCModel* BookController::getTableOfContents()

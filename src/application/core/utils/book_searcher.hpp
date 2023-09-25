@@ -1,6 +1,7 @@
 #pragma once
 #include <mupdf/classes2.h>
 #include <QString>
+#include "search_options.hpp"
 
 namespace application::core::utils
 {
@@ -20,7 +21,7 @@ class BookSearcher
 public:
     BookSearcher(mupdf::FzDocument* fzDocument);
 
-    void search(const QString& text);
+    void search(const QString& text, SearchOptions options);
     void clearSearch();
     SearchHit firstSearchHit();
     SearchHit nextSearchHit();
@@ -28,7 +29,10 @@ public:
 
 private:
     void extractSearchHitsFromBook(std::vector<SearchHit>& results,
-                                   const char* text) const;
+                                   const char* text,
+                                   SearchOptions options) const;
+    bool isWholeWord(const mupdf::FzStextPage& textPage,
+                     const mupdf::FzQuad& quad) const;
 
     mupdf::FzDocument* m_fzDocument;
     std::vector<SearchHit> m_searchHits;

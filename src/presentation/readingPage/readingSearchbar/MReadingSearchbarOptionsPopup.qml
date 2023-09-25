@@ -4,51 +4,43 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.controllers
 
-
-Popup
-{
+Popup {
     id: root
+    signal settingsChanged
+
     implicitWidth: 190
-    closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
+    closePolicy: Popup.CloseOnReleaseOutside | Popup.CloseOnEscape
     padding: 0
-    background: Rectangle
-    {
+    background: Rectangle {
         color: "transparent"
     }
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: mainLayout
         width: parent.width
         spacing: 0
-        
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillWidth: true
             verticalPadding: 15
             horizontalPadding: 12
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorPopupBackground
                 border.color: Style.colorContainerBorder
                 border.width: 1
                 radius: 4
             }
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: itemLayout
                 anchors.fill: parent
                 spacing: 12
-                
-                
-                MLabeledCheckBox
-                {
+
+                MLabeledCheckBox {
+                    id: caseSensitiveBox
                     Layout.fillWidth: true
                     boxWidth: 18
                     boxHeight: 18
@@ -56,10 +48,12 @@ Popup
                     imageSize: 10
                     text: "Case sensitive"
                     fontSize: 12
+
+                    onCheckedChanged: internal.updateSearchOptions()
                 }
-                
-                MLabeledCheckBox
-                {
+
+                MLabeledCheckBox {
+                    id: highlightAllBox
                     Layout.fillWidth: true
                     boxWidth: 18
                     boxHeight: 18
@@ -67,23 +61,27 @@ Popup
                     imageSize: 10
                     text: "Highlight all"
                     fontSize: 12
+
+                    onCheckedChanged: internal.updateSearchOptions()
                 }
-                
-                MLabeledCheckBox
-                {
+
+                MLabeledCheckBox {
+                    id: wholeWordsBox
                     Layout.fillWidth: true
                     boxWidth: 18
                     boxHeight: 18
                     spacing: 8
                     imageSize: 10
+                    checked: BookController.searchWholeWords
                     text: "Whole words"
                     fontSize: 12
+
+                    onCheckedChanged: internal.updateSearchOptions()
                 }
             }
         }
-        
-        Image
-        {
+
+        Image {
             id: dropletIcon
             Layout.leftMargin: 13
             Layout.topMargin: -1
@@ -91,6 +89,16 @@ Popup
             sourceSize.width: 10
             fillMode: Image.PreserveAspectFit
             rotation: 180
+        }
+    }
+
+    QtObject {
+        id: internal
+
+        function updateSearchOptions() {
+            BookController.searchWholeWords = wholeWordsBox.checked
+            BookController.searchCaseSensitive = caseSensitiveBox.checked
+            root.settingsChanged()
         }
     }
 }
