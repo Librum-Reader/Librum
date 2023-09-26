@@ -6,12 +6,16 @@ add_library(infrastructure
                 SHARED
                     persistance/user_storage_access.cpp
                     persistance/user_storage_access.hpp
+                    persistance/free_books_storage_access.cpp
+                    persistance/free_books_storage_access.hpp
                     persistance/library_storage_access.cpp
                     persistance/library_storage_access.hpp
                     persistance/authentication_access.cpp
                     persistance/authentication_access.hpp
                     persistance/app_info_access.cpp
                     persistance/app_info_access.hpp
+                    persistance/dictionary_access.cpp
+                    persistance/dictionary_access.hpp
                     
                     persistance/api_error_helper.hpp
                     data/endpoints.hpp

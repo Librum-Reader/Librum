@@ -72,7 +72,6 @@ Item
                 {
                     if(text.hoveredLink != "")
                     {
-                        console.log("x")
                         Qt.openUrlExternally(text.hoveredLink);
                     }
                     else

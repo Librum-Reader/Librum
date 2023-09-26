@@ -6,85 +6,71 @@ import Librum.style
 import Librum.icons
 import Librum.controllers
 
-
-Item
-{
+Item {
     id: root
     signal searchQueried(string query)
-    signal clearQuery()
+    signal clearQuery
     signal nextButtonClicked
     signal previousButtonClicked
-    
+
     implicitHeight: 48
     implicitWidth: 1000
-    
+
     // Make sure to remove the focus from the textinput when the searchbar is closed
-    onVisibleChanged:
-    {
-        if(visible)
-        {
+    onVisibleChanged: {
+        if (visible) {
             inputField.forceActiveFocus()
-        }
-        else
-        {
-            root.clearQuery();
-            inputField.clear();
+        } else {
+            root.clearQuery()
+            inputField.clear()
+            inputField.previousText = ""
             root.forceActiveFocus()
+            optionsPopup.close()
         }
     }
-    
+
     // Close on pressing escape
-    Keys.onPressed:
-        (event) =>
-        {
-            if(event.key === Qt.Key_Escape)
-            {
-                root.visible = false;
-                event.accepted = true;
-            }
-        }
-    
-    Connections
-    {
+    Keys.onPressed: event => {
+                        if (event.key === Qt.Key_Escape) {
+                            root.visible = false
+                            event.accepted = true
+                        }
+                    }
+
+    Connections {
         target: BookController
         function onNoSearchHitsFound() {
-            internal.setSearchError();
+            internal.setSearchError()
         }
     }
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
-        
-        Rectangle
-        {
+
+        Rectangle {
             id: topBorder
             color: Style.colorDarkSeparator
             Layout.preferredHeight: 1
             Layout.fillWidth: true
         }
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillHeight: true
             Layout.fillWidth: true
             padding: 8
-            background: Rectangle { color: Style.colorContainerBackground }
-            
-            
-            RowLayout
-            {
+            background: Rectangle {
+                color: Style.colorContainerBackground
+            }
+
+            RowLayout {
                 id: contentLayout
                 spacing: 12
                 anchors.fill: parent
-                
-                
-                MButton
-                {
+
+                MButton {
                     id: closeButton
                     Layout.preferredWidth: 32
                     Layout.preferredHeight: 30
@@ -94,12 +80,11 @@ Item
                     radius: 4
                     imagePath: Icons.readingSearchbarCancel
                     imageSize: 12
-                    
+
                     onClicked: root.visible = false
                 }
-                
-                MButton
-                {
+
+                MButton {
                     id: optionsButton
                     Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
@@ -111,46 +96,40 @@ Item
                     opacityOnPressed: 0.8
                     borderWidth: 0
                     radius: 4
-                    
-                    onClicked: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open()
+
+                    onClicked: optionsPopup.opened ? optionsPopup.close(
+                                                         ) : optionsPopup.open()
                 }
-                
-                Pane
-                {
+
+                Pane {
                     id: inputFieldContainer
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
                     horizontalPadding: 12
                     verticalPadding: 0
-                    background: Rectangle
-                    {
+                    background: Rectangle {
                         color: Style.colorControlBackground
                         border.color: Style.colorContainerBorder
                         border.width: 1
                         radius: 4
                     }
-                    
-                    
-                    RowLayout
-                    {
+
+                    RowLayout {
                         id: inputFieldLayout
                         anchors.fill: parent
                         spacing: 6
-                        
-                        
-                        Image
-                        {
+
+                        Image {
                             id: searchIcon
                             source: Icons.readingSearchbarSearch
                             sourceSize.width: 14
                             fillMode: Image.PreserveAspectFit
                         }
-                        
-                        TextField
-                        {
+
+                        TextField {
                             id: inputField
                             property string previousText
-                            
+
                             Layout.fillWidth: true
                             Layout.fillHeight: true
                             Layout.alignment: Qt.AlignVCenter
@@ -160,28 +139,28 @@ Item
                             font.pointSize: 12
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorPlaceholderText
-                            background: Rectangle { anchors.fill: parent; color: "transparent" }
-                            
-                            onTextEdited: internal.resetSearchError();
-                            
-                            Keys.onReturnPressed:
-                            {
+                            background: Rectangle {
+                                anchors.fill: parent
+                                color: "transparent"
+                            }
+
+                            onTextEdited: internal.resetSearchError()
+
+                            Keys.onReturnPressed: {
                                 // When clicking Enter without changing the text, go to the next hit
-                                if(previousText == text)
-                                {
-                                    root.nextButtonClicked();
-                                    return;
+                                if (previousText === text) {
+                                    root.nextButtonClicked()
+                                    return
                                 }
-                                
-                                root.searchQueried(text);
-                                previousText = text;
+
+                                root.searchQueried(text)
+                                previousText = text
                             }
                         }
                     }
                 }
-                
-                MButton
-                {
+
+                MButton {
                     id: nextButton
                     Layout.preferredWidth: 81
                     Layout.preferredHeight: 30
@@ -196,12 +175,11 @@ Item
                     imagePath: Icons.readingSearchbarNext
                     imageSize: 13
                     imageSpacing: 10
-                    
+
                     onClicked: root.nextButtonClicked()
                 }
-                
-                MButton
-                {
+
+                MButton {
                     id: previousButton
                     Layout.preferredWidth: 110
                     Layout.preferredHeight: 30
@@ -216,56 +194,54 @@ Item
                     imagePath: Icons.readingSearchbarPrevious
                     imageSize: 13
                     imageSpacing: 10
-                    
+
                     onClicked: root.previousButtonClicked()
                 }
             }
         }
     }
-    
-    MReadingSearchbarOptionsPopup
-    {
+
+    MReadingSearchbarOptionsPopup {
         id: optionsPopup
         x: optionsButton.x + 8
         y: -optionsPopup.height - 1
+
+        onSettingsChanged: if (inputField.text !== "")
+                               root.searchQueried(inputField.text)
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property bool error: false
         property color previousTextColor: inputField.color
         property color previousBackgroundColor: inputFieldContainer.background.color
         property color previousBorderColor: inputFieldContainer.background.border.color
-        
-        function setSearchError()
-        {
-            previousTextColor = inputField.color;
-            previousBackgroundColor = inputFieldContainer.background.color;
-            previousBorderColor = inputFieldContainer.background.border.color;
-            
-            inputField.color = Style.colorErrorText;
-            inputFieldContainer.background.color = Style.colorErrorBackground;
-            inputFieldContainer.background.border.color = Style.colorErrorBorder;
-            
-            error = true;
+
+        function setSearchError() {
+            previousTextColor = inputField.color
+            previousBackgroundColor = inputFieldContainer.background.color
+            previousBorderColor = inputFieldContainer.background.border.color
+
+            inputField.color = Style.colorErrorText
+            inputFieldContainer.background.color = Style.colorErrorBackground
+            inputFieldContainer.background.border.color = Style.colorErrorBorder
+
+            error = true
         }
-        
-        function resetSearchError()
-        {
-            if(!error)
-                return;
-            
-            inputField.color = previousTextColor;
-            inputFieldContainer.background.color = previousBackgroundColor;
-            inputFieldContainer.background.border.color = previousBorderColor;
-            
-            error = false;
+
+        function resetSearchError() {
+            if (!error)
+                return
+
+            inputField.color = previousTextColor
+            inputFieldContainer.background.color = previousBackgroundColor
+            inputFieldContainer.background.border.color = previousBorderColor
+
+            error = false
         }
     }
-    
-    function giveFocus()
-    {
-        inputField.forceActiveFocus();
+
+    function giveFocus() {
+        inputField.forceActiveFocus()
     }
 }

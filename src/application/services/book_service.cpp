@@ -37,10 +37,10 @@ mupdf::FzDocument* BookService::getFzDocument()
     return m_fzDocument.get();
 }
 
-void BookService::search(const QString& text)
+void BookService::search(const QString& text, SearchOptions searchOptions)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    m_bookSearcher->search(text);
+    m_bookSearcher->search(text, searchOptions);
     QApplication::restoreOverrideCursor();
 
     auto searchHit = m_bookSearcher->firstSearchHit();

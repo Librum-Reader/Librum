@@ -26,11 +26,9 @@
         <file>addOnsPage/MAddOnsPage.qml</file>
         <file>forgotPasswordPage/MForgotPasswordPage.qml</file>
         <file>freeBooksPage/MFreeBooksPage.qml</file>
-        <file>freeBooksPage/explorerToolbar/MExplorerFilterByButton.qml</file>
-        <file>freeBooksPage/explorerToolbar/MExplorerFilterByPopup.qml</file>
         <file>freeBooksPage/explorerToolbar/MExplorerToolbar.qml</file>
         <file>freeBooksPage/MDownloadBookPopup.qml</file>
-        <file>freeBooksPage/MMinimalBook.qml</file>
+        <file>freeBooksPage/MFreeBook.qml</file>
         <file>homePage/MBook.qml</file>
         <file>homePage/MEmptyScreenContent.qml</file>
         <file>homePage/MHomePage.qml</file>
@@ -98,5 +96,6 @@
         <file>readingPage/MSelectionOptionsPopup.qml</file>
         <file>readingPage/MColorSelectionPopup.qml</file>
         <file>modules/CustomComponents/MSlider.qml</file>
+        <file>readingPage/MDictionaryPopup.qml</file>
     </qresource>
 </RCC>

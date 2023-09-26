@@ -4,19 +4,25 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_library(adapters
                 SHARED
                     interfaces/controllers/i_authentication_controller.hpp
+                    interfaces/controllers/i_free_books_controller.hpp
+                    interfaces/persistance/i_free_books_storage_access.hpp
                     interfaces/controllers/i_library_controller.hpp
                     interfaces/controllers/i_user_controller.hpp
                     interfaces/controllers/i_settings_controller.hpp
+                    interfaces/controllers/i_page_controller.hpp
+                    interfaces/controllers/i_book_controller.hpp
+                    interfaces/controllers/i_app_info_controller.hpp
+                    interfaces/controllers/i_dictionary_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
-                    interfaces/controllers/i_book_controller.hpp
-                    interfaces/controllers/i_page_controller.hpp
                     interfaces/persistance/i_app_info_access.hpp
-                    interfaces/controllers/i_app_info_controller.hpp
+                    interfaces/persistance/i_dictionary_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
+                    controllers/free_books_controller.cpp
+                    controllers/free_books_controller.hpp
                     controllers/library_controller.cpp
                     controllers/library_controller.hpp
                     controllers/user_controller.cpp
@@ -29,21 +35,29 @@ add_library(adapters
                     controllers/book_controller.hpp
                     controllers/page_controller.cpp
                     controllers/page_controller.hpp
+                    controllers/dictionary_controller.cpp
+                    controllers/dictionary_controller.hpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
                     gateways/authentication_gateway.cpp
                     gateways/authentication_gateway.hpp
+                    gateways/free_books_storage_gateway.cpp
+                    gateways/free_books_storage_gateway.hpp
                     gateways/library_storage_gateway.cpp
                     gateways/library_storage_gateway.hpp
                     gateways/app_info_gateway.cpp
                     gateways/app_info_gateway.hpp
+                    gateways/dictionary_gateway.hpp
+                    gateways/dictionary_gateway.cpp
                     
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp
                     data_models/library_model/library_proxy_model.cpp
                     data_models/library_model/library_proxy_model.hpp
                     data_models/library_model/filter_request.hpp
+                    data_models/free_books_model/free_books_model.cpp
+                    data_models/free_books_model/free_books_model.hpp
                     data_models/user_tags_model/user_tags_model.cpp
                     data_models/user_tags_model/user_tags_model.hpp
                     data_models/shortcuts_model/shortcuts_model.cpp
@@ -57,6 +71,8 @@ add_library(adapters
                     DTOs/tag_dto.hpp
                     DTOs/highlight_dto.hpp
                     DTOs/rectf_dto.hpp
+                    DTOs/word_definition_dto.hpp
+                    
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)
@@ -70,6 +86,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/gateways
                     ${CMAKE_CURRENT_SOURCE_DIR}/DTOs
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/library_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/free_books_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models

@@ -18,7 +18,8 @@ public:
     void setUp(QUuid uuid) override;
     mupdf::FzDocument* getFzDocument() override;
 
-    void search(const QString& text) override;
+    void search(const QString& text,
+                core::utils::SearchOptions searchOptions) override;
     void clearSearch() override;
     void goToNextSearchHit() override;
     void goToPreviousSearchHit() override;

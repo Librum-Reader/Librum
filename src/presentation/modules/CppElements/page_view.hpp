@@ -45,15 +45,18 @@ public:
         adapters::controllers::BookController* newBookController);
 
     Q_INVOKABLE void copySelectedText();
+    Q_INVOKABLE void copyHighlightedText(const QString& uuid);
+    Q_INVOKABLE QString getSelectedText();
+    Q_INVOKABLE QString getHighlightedText(const QString& uuid);
+
     Q_INVOKABLE void removeSelection();
     Q_INVOKABLE void setPointingCursor();
+    Q_INVOKABLE void resetCursorToDefault();
     Q_INVOKABLE QString createHighlightFromCurrentSelection(const QString& hex,
                                                             int alpha);
     Q_INVOKABLE void removeHighlight(const QString& uuid);
     Q_INVOKABLE void changeHighlightColor(const QString& uuid,
                                           const QString& color, int alpha);
-    Q_INVOKABLE void copyTextFromHighlight(const QString& uuid);
-
 
 private slots:
     void updateZoom(float newZoom);
@@ -69,6 +72,7 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void hoverMoveEvent(QHoverEvent* event) override;
     virtual void keyPressEvent(QKeyEvent* event) override;
+    virtual void hoverLeaveEvent(QHoverEvent* event) override;
 
 private:
     void selectSingleWord();
@@ -81,7 +85,6 @@ private:
     void removeConflictingHighlights(domain::entities::Highlight& highlight);
     bool mouseAboveSelection(const QPointF mouse);
 
-    void resetCursorToDefault();
     void setCorrectCursor(int x, int y);
 
     bool rectsAreOnSameLine(const QRectF& rect1, const QRectF& rect2);

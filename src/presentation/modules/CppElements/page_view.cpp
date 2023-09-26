@@ -280,6 +280,11 @@ void PageView::keyPressEvent(QKeyEvent* event)
     }
 }
 
+void PageView::hoverLeaveEvent(QHoverEvent* event)
+{
+    resetCursorToDefault();
+}
+
 void PageView::paintSelectionOnPage(QPainter& painter)
 {
     auto& selectionRects = m_pageController->getBufferedSelectionRects();
@@ -441,7 +446,21 @@ void PageView::changeHighlightColor(const QString& uuid, const QString& color,
     update();
 }
 
-void PageView::copyTextFromHighlight(const QString& uuid)
+void PageView::copyHighlightedText(const QString& uuid)
+{
+    auto text = getHighlightedText(uuid);
+
+    auto clipboard = QApplication::clipboard();
+    clipboard->setText(text);
+}
+
+QString PageView::getSelectedText()
+{
+    return m_pageController->getTextFromSelection(m_selectionStart,
+                                                  m_selectionEnd);
+}
+
+QString PageView::getHighlightedText(const QString& uuid)
 {
     const Highlight* highlight = nullptr;
     for(auto& h : m_bookController->getHighlights())
@@ -463,10 +482,7 @@ void PageView::copyTextFromHighlight(const QString& uuid)
         utils::scalePointToCurrentZoom(start, 1, m_bookController->getZoom());
     end = utils::scalePointToCurrentZoom(end, 1, m_bookController->getZoom());
 
-    QString text = m_pageController->getTextFromSelection(start, end);
-
-    auto clipboard = QApplication::clipboard();
-    clipboard->setText(text);
+    return m_pageController->getTextFromSelection(start, end);
 }
 
 void PageView::setPointingCursor()
@@ -529,8 +545,7 @@ void PageView::selectLine()
 
 void PageView::copySelectedText()
 {
-    QString text = m_pageController->getTextFromSelection(m_selectionStart,
-                                                          m_selectionEnd);
+    QString text = getSelectedText();
 
     auto clipboard = QApplication::clipboard();
     clipboard->setText(text);
@@ -538,11 +553,7 @@ void PageView::copySelectedText()
 
 void PageView::resetCursorToDefault()
 {
-    while(QApplication::overrideCursor() != nullptr &&
-          *QApplication::overrideCursor() != Qt::ArrowCursor)
-    {
-        QApplication::restoreOverrideCursor();
-    }
+    QApplication::restoreOverrideCursor();
 }
 
 void PageView::setCorrectCursor(int x, int y)
