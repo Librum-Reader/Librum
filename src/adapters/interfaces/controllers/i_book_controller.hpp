@@ -28,6 +28,8 @@ class ADAPTERS_EXPORT IBookController : public QObject
                    setSearchWholeWords CONSTANT)
     Q_PROPERTY(bool searchCaseSensitive READ getSearchCaseSensitive WRITE
                    setSearchCaseSensitive CONSTANT)
+    Q_PROPERTY(bool searchFromStart READ getSearchFromStart WRITE
+                   setSearchFromStart CONSTANT)
 
 public:
     virtual ~IBookController() noexcept = default;
@@ -65,6 +67,9 @@ public:
 
     virtual bool getSearchCaseSensitive() const = 0;
     virtual void setSearchCaseSensitive(bool newSearchCaseSensitive) = 0;
+
+    virtual bool getSearchFromStart() const = 0;
+    virtual void setSearchFromStart(bool newSearchFromStart) = 0;
 
     virtual application::core::FilteredTOCModel* getTableOfContents() = 0;
 

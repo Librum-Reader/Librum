@@ -40,26 +40,28 @@ Popup {
                 spacing: 12
 
                 MLabeledCheckBox {
-                    id: caseSensitiveBox
+                    id: fromStartBox
                     Layout.fillWidth: true
                     boxWidth: 18
                     boxHeight: 18
                     spacing: 8
                     imageSize: 10
-                    text: "Case sensitive"
+                    checked: BookController.searchFromStart
+                    text: "From start"
                     fontSize: 12
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }
 
                 MLabeledCheckBox {
-                    id: highlightAllBox
+                    id: caseSensitiveBox
                     Layout.fillWidth: true
                     boxWidth: 18
                     boxHeight: 18
                     spacing: 8
                     imageSize: 10
-                    text: "Highlight all"
+                    checked: BookController.searchCaseSensitive
+                    text: "Case sensitive"
                     fontSize: 12
 
                     onCheckedChanged: internal.updateSearchOptions()
@@ -98,6 +100,7 @@ Popup {
         function updateSearchOptions() {
             BookController.searchWholeWords = wholeWordsBox.checked
             BookController.searchCaseSensitive = caseSensitiveBox.checked
+            BookController.searchFromStart = fromStartBox.checked
             root.settingsChanged()
         }
     }

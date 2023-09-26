@@ -36,6 +36,8 @@ private:
     bool isCaseSensitive(mupdf::FzStextPage& textPage,
                          const mupdf::FzQuad& quad,
                          const QString& needle) const;
+    std::vector<SearchHit> sortHitsToStartFromCurrentPage(
+        const std::vector<SearchHit>& hits, int currentPage) const;
 
     mupdf::FzDocument* m_fzDocument;
     std::vector<SearchHit> m_searchHits;

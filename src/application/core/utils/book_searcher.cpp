@@ -95,6 +95,9 @@ void BookSearcher::extractSearchHitsFromBook(std::vector<SearchHit>& results,
             results.emplace_back(searchHit);
         }
     }
+
+    if(!options.fromStart)
+        results = sortHitsToStartFromCurrentPage(results, options.currentPage);
 }
 
 bool BookSearcher::isWholeWord(const mupdf::FzStextPage& textPage,
@@ -123,6 +126,27 @@ bool BookSearcher::isCaseSensitive(mupdf::FzStextPage& textPage,
 
     auto text = textPage.fz_copy_selection(begin, end, 1);
     return QString::fromStdString(text) == needle;
+}
+
+std::vector<SearchHit> BookSearcher::sortHitsToStartFromCurrentPage(
+    const std::vector<SearchHit>& hits, int currentPage) const
+{
+    std::vector<SearchHit> sortedHits;
+    // Hits at current page and after -> To the beginning
+    for(auto& hit : hits)
+    {
+        if(hit.pageNumber >= currentPage)
+            sortedHits.push_back(hit);
+    }
+
+    // Hits before the current page -> To the end
+    for(auto& hit : hits)
+    {
+        if(hit.pageNumber < currentPage)
+            sortedHits.push_back(hit);
+    }
+
+    return sortedHits;
 }
 
 }  // namespace application::core::utils

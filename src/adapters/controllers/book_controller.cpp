@@ -115,6 +115,8 @@ int BookController::getPageCount() const
 void BookController::setCurrentPage(int newCurrentPage)
 {
     m_bookService->setCurrentPage(newCurrentPage);
+    m_searchOptions.currentPage = m_bookService->getCurrentPage();
+
     emit currentPageChanged(newCurrentPage);
 }
 
@@ -152,6 +154,16 @@ bool BookController::getSearchCaseSensitive() const
 void BookController::setSearchCaseSensitive(bool newCaseSensitive)
 {
     m_searchOptions.caseSensitive = newCaseSensitive;
+}
+
+bool BookController::getSearchFromStart() const
+{
+    return m_searchOptions.fromStart;
+}
+
+void BookController::setSearchFromStart(bool newSearchFromStart)
+{
+    m_searchOptions.fromStart = newSearchFromStart;
 }
 
 FilteredTOCModel* BookController::getTableOfContents()

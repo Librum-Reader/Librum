@@ -6,6 +6,9 @@ namespace application::core::utils
 
 struct SearchOptions
 {
+    bool fromStart = false;
+    int currentPage = 0;
+
     bool wholeWords = false;
     bool caseSensitive = false;
 };

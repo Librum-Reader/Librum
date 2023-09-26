@@ -51,6 +51,9 @@ public:
     bool getSearchCaseSensitive() const override;
     void setSearchCaseSensitive(bool newCaseSensitive) override;
 
+    bool getSearchFromStart() const override;
+    void setSearchFromStart(bool newSearchFromStart) override;
+
     application::core::FilteredTOCModel* getTableOfContents() override;
 
 private:
