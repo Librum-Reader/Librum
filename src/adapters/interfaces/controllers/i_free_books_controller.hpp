@@ -1,11 +1,12 @@
 #pragma once
 #include <QObject>
+#include "adapters_export.hpp"
 #include "free_books_model.hpp"
 
 namespace adapters
 {
 
-class IFreeBooksController : public QObject
+class ADAPTERS_EXPORT IFreeBooksController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(adapters::data_models::FreeBooksModel* freeBooksModel READ

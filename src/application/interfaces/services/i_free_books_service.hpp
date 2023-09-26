@@ -2,11 +2,12 @@
 #include <QObject>
 #include <vector>
 #include "free_book.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
 
-class IFreeBooksService : public QObject
+class APPLICATION_EXPORT IFreeBooksService : public QObject
 {
     Q_OBJECT
 

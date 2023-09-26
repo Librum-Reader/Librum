@@ -2,13 +2,14 @@
 #include <QDir>
 #include <vector>
 #include "free_book.hpp"
+#include "application_export.hpp"
 #include "i_free_books_service.hpp"
 #include "i_free_books_storage_gateway.hpp"
 
 namespace application::services
 {
 
-class FreeBooksService : public IFreeBooksService
+class APPLICATION_EXPORT FreeBooksService : public IFreeBooksService
 {
     Q_OBJECT
 

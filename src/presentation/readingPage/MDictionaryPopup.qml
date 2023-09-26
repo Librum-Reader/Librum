@@ -212,7 +212,7 @@ Popup {
                                 color: Style.colorText
                                 font.pointSize: 13
                                 font.weight: Font.DemiBold
-                                textFormat: Text.RichText
+                                textFormat: Text.StyledText
                             }
                         }
 
@@ -243,7 +243,8 @@ Popup {
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
                                             font.pointSize: 11
-                                            textFormat: Text.RichText
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
                                         }
 
                                         Label {
@@ -253,7 +254,8 @@ Popup {
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
                                             font.pointSize: 11
-                                            textFormat: Text.RichText
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
 
                                             MouseArea {
                                                 id: mouseArea
@@ -313,7 +315,8 @@ Popup {
                                             color: Style.colorLightText
                                             font.pointSize: 10
                                             font.weight: Font.Light
-                                            textFormat: Text.RichText
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
                                         }
                                     }
                                 }
@@ -356,7 +359,7 @@ Popup {
                         Layout.topMargin: 4
                         text: '<a href="update" style="color: ' + Style.colorBasePurple
                               + '; text-decoration: underline;">Search online</a>'
-                        textFormat: Text.RichText
+                        textFormat: Text.StyledText
                         onLinkActivated: link => Qt.openUrlExternally(link)
                         font.pointSize: 14
                         color: Style.colorText
@@ -387,7 +390,7 @@ Popup {
         horizontalAlignment: Text.AlignRight
         text: 'Source: <a href="https://wiktionary.org" style="text-decoration: none; color: '
               + Style.colorBasePurple + ';">Wiktionary</a>'
-        textFormat: Text.RichText
+        textFormat: Text.StyledText
         font.pointSize: 9
         color: Style.colorText
 

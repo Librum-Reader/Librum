@@ -24,6 +24,7 @@ Item
     property color colorTitle
     property color colorMatteTitle
     property color colorBannerText
+    property color colorLinkText
     
     // Subtitless
     property color colorSubtitle
@@ -108,6 +109,7 @@ Item
             PropertyChanges { target: styleSheet; colorTitle: "#32324D" }
             PropertyChanges { target: styleSheet; colorMatteTitle: "#545460" }
             PropertyChanges { target: styleSheet; colorBannerText: "#F6F6F9" }
+            PropertyChanges { target: styleSheet; colorLinkText: "#246CA0" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#8A8AA0" }
@@ -185,6 +187,7 @@ Item
             PropertyChanges { target: styleSheet; colorTitle: "#CBCBCB" }
             PropertyChanges { target: styleSheet; colorMatteTitle: "#B6B6C8" }
             PropertyChanges { target: styleSheet; colorBannerText: "#FFFFFF" }
+            PropertyChanges { target: styleSheet; colorLinkText: "#52b6ff" }
             
             // Subtitless
             PropertyChanges { target: styleSheet; colorSubtitle: "#E5E5EF" }

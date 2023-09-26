@@ -1,10 +1,11 @@
 #pragma once
 #include <QObject>
+#include "adapters_export.hpp"
 
 namespace adapters
 {
 
-class IFreeBooksStorageAccess : public QObject
+class ADAPTERS_EXPORT IFreeBooksStorageAccess : public QObject
 {
     Q_OBJECT
 

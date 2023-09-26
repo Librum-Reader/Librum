@@ -2,11 +2,12 @@
 #include <QImage>
 #include <QObject>
 #include "free_book.hpp"
+#include "application_export.hpp"
 
 namespace application
 {
 
-class IFreeBooksStorageGateway : public QObject
+class APPLICATION_EXPORT IFreeBooksStorageGateway : public QObject
 {
     Q_OBJECT
 

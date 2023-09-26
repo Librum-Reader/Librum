@@ -1,13 +1,14 @@
 #pragma once
 #include <QJsonArray>
 #include <QJsonObject>
+#include "adapters_export.hpp"
 #include "i_free_books_storage_access.hpp"
 #include "i_free_books_storage_gateway.hpp"
 
 namespace adapters::gateways
 {
 
-class FreeBooksStorageGateway : public application::IFreeBooksStorageGateway
+class ADAPTERS_EXPORT FreeBooksStorageGateway : public application::IFreeBooksStorageGateway
 {
     Q_OBJECT
 
