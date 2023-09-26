@@ -341,7 +341,7 @@ Popup {
                         z: 2
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: -18
-                        source: "file://home/creapermann/Downloads/458.svg"
+                        source: Icons.notFoundIllustration
                         sourceSize.width: 180
                         fillMode: Image.PreserveAspectFit
                     }
