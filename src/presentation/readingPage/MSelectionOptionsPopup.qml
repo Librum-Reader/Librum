@@ -82,8 +82,6 @@ Popup {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
-                onContainsMouseChanged: if (typeof activeFocusItem.setPointingCursor === "function")
-                                            activeFocusItem.setPointingCursor()
 
                 onClicked: {
                     action.clickedFunction()

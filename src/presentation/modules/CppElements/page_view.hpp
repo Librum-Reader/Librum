@@ -72,6 +72,7 @@ protected:
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void hoverMoveEvent(QHoverEvent* event) override;
     virtual void keyPressEvent(QKeyEvent* event) override;
+    virtual void hoverLeaveEvent(QHoverEvent* event) override;
 
 private:
     void selectSingleWord();

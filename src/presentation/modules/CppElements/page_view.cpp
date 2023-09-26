@@ -280,6 +280,11 @@ void PageView::keyPressEvent(QKeyEvent* event)
     }
 }
 
+void PageView::hoverLeaveEvent(QHoverEvent* event)
+{
+    resetCursorToDefault();
+}
+
 void PageView::paintSelectionOnPage(QPainter& painter)
 {
     auto& selectionRects = m_pageController->getBufferedSelectionRects();
