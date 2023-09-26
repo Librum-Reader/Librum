@@ -144,6 +144,7 @@ bool BookController::getSearchWholeWords() const
 void BookController::setSearchWholeWords(bool newSearchWholeWords)
 {
     m_searchOptions.wholeWords = newSearchWholeWords;
+    emit searchWholeWordsChanged();
 }
 
 bool BookController::getSearchCaseSensitive() const
@@ -154,6 +155,7 @@ bool BookController::getSearchCaseSensitive() const
 void BookController::setSearchCaseSensitive(bool newCaseSensitive)
 {
     m_searchOptions.caseSensitive = newCaseSensitive;
+    emit searchCaseSensitiveChanged();
 }
 
 bool BookController::getSearchFromStart() const
@@ -164,6 +166,7 @@ bool BookController::getSearchFromStart() const
 void BookController::setSearchFromStart(bool newSearchFromStart)
 {
     m_searchOptions.fromStart = newSearchFromStart;
+    emit searchFromStartChanged();
 }
 
 FilteredTOCModel* BookController::getTableOfContents()

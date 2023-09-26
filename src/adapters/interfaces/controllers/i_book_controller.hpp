@@ -25,11 +25,11 @@ class ADAPTERS_EXPORT IBookController : public QObject
     Q_PROPERTY(application::core::FilteredTOCModel* tableOfContents READ
                    getTableOfContents NOTIFY tableOfContentsChanged)
     Q_PROPERTY(bool searchWholeWords READ getSearchWholeWords WRITE
-                   setSearchWholeWords CONSTANT)
+                   setSearchWholeWords NOTIFY searchWholeWordsChanged)
     Q_PROPERTY(bool searchCaseSensitive READ getSearchCaseSensitive WRITE
-                   setSearchCaseSensitive CONSTANT)
+                   setSearchCaseSensitive NOTIFY searchCaseSensitiveChanged)
     Q_PROPERTY(bool searchFromStart READ getSearchFromStart WRITE
-                   setSearchFromStart CONSTANT)
+                   setSearchFromStart NOTIFY searchFromStartChanged)
 
 public:
     virtual ~IBookController() noexcept = default;
@@ -84,6 +84,9 @@ signals:
     void textSelectionFinished(float centerX, float topY);
     void highlightSelected(float centerX, float topY, const QString& uuid);
     void noSearchHitsFound();
+    void searchWholeWordsChanged();
+    void searchCaseSensitiveChanged();
+    void searchFromStartChanged();
 };
 
 }  // namespace adapters

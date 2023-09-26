@@ -82,7 +82,7 @@ private:
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 20'000;
+    const int m_fetchChangedInterval = 30'000;
 };
 
 }  // namespace application::services
