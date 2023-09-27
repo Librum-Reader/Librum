@@ -71,6 +71,20 @@ Item {
                     source: model.cover
                     fillMode: Image.PreserveAspectFit
                 }
+
+
+                /*
+                  The item displaying when no book cover exists (usually a ".format" label)
+                 */
+                Label {
+                    id: noImageLabel
+                    Layout.alignment: Qt.AlignCenter
+                    visible: bookCover.source == ""
+                    text: ".jpeg"
+                    color: Style.colorNoImageLabel
+                    font.pointSize: 20
+                    font.bold: true
+                }
             }
         }
 
