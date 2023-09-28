@@ -72,14 +72,7 @@ Pane {
         target: AiExplanationController
 
         function onExplanationReady(explanation) {
-            explanationPopup.x = Qt.binding(function () {
-                return root.width / 2 - explanationPopup.width / 2
-            })
-            explanationPopup.y = Qt.binding(function () {
-                return root.height / 2 - explanationPopup.height / 2
-            })
-
-            explanationPopup.text = explanation
+            explanationPopup.answer = explanation
             explanationPopup.open()
         }
     }
@@ -255,6 +248,11 @@ Pane {
                                            selectionOptionsPopup.highlightCenterX,
                                            selectionOptionsPopup.highlightTopY)
                                    }
+
+        onExplanationOptionSelected: text => {
+                                         explanationPopup.open()
+                                         explanationPopup.question = text
+                                     }
     }
 
     MColorSelectionPopup {
@@ -265,32 +263,10 @@ Pane {
         id: dictionaryPopup
     }
 
-    Popup {
+    MExplanationPopup {
         id: explanationPopup
-        property string text
-
-        implicitWidth: 500
-        implicitHeight: 540
-        padding: 16
-        bottomPadding: 28
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutside
-        background: Rectangle {
-            color: Style.colorPopupBackground
-            radius: 6
-            border.width: 1
-            border.color: Style.colorContainerBorder
-        }
-
-        Label {
-            text: explanationPopup.text
-            anchors.centerIn: parent
-            width: parent.width
-            wrapMode: Text.WordWrap
-            Layout.topMargin: 20
-            color: Style.colorText
-            font.pointSize: 20
-            font.weight: Font.DemiBold
-        }
+        x: root.width / 2 - explanationPopup.width / 2
+        y: root.height / 2 - explanationPopup.height / 2
     }
 
     function zoom(factor) {

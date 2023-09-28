@@ -11,6 +11,7 @@ Popup {
     property string highlight: ""
     signal highlightOptionSelected(string uuid)
     signal dictionaryOptionSelected(string word)
+    signal explanationOptionSelected(string word)
 
     width: internal.getWidth()
     height: 32
@@ -160,7 +161,7 @@ Popup {
                     text = activeFocusItem.getHighlightedText(root.highlight)
 
                 AiExplanationController.getExplanation(text)
-                // root.dictionaryOptionSelected(text)
+                root.explanationOptionSelected(text)
             }
         }
 
