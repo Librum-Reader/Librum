@@ -64,7 +64,7 @@ void DictionaryController::processDefinition(bool success,
         // with an uppercase letter after a period, but the dictionary API is
         // case-sensitive so we change it to lowercase by default. This can
         // cause problems for names or different languages though.
-        if(!m_searchedForWord[0].isUpper())
+        if(!m_searchedForWord.isEmpty() && !m_searchedForWord[0].isUpper())
         {
             auto capitalizedWord =
                 m_searchedForWord[0].toUpper() + m_searchedForWord.mid(1);

@@ -139,7 +139,7 @@ The installation is straight forward, just follow the steps below:
 
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Etovex/Librum.git --recursive
+    git clone https://github.com/Librum-Reader/Librum.git --recursive
     ```
 2. Step into the cloned project folder.
     ```sh
@@ -192,7 +192,7 @@ To build Librum on windows, run the following commands in the Powershell:
 
 1. Clone the repository.
     ```sh
-    git clone https://github.com/Etovex/Librum.git --recursive
+    git clone https://github.com/Librum-Reader/Librum.git --recursive
     ```
 2. Step into the cloned project folder.
     ```sh

@@ -7,6 +7,7 @@
 #include "application_export.hpp"
 #include "highlight.hpp"
 #include "mupdf/classes.h"
+#include "search_options.hpp"
 #include "toc/filtered_toc_model.hpp"
 
 namespace application
@@ -26,7 +27,8 @@ public:
     virtual void setUp(QUuid uuid) = 0;
     virtual mupdf::FzDocument* getFzDocument() = 0;
 
-    virtual void search(const QString& text) = 0;
+    virtual void search(const QString& text,
+                        core::utils::SearchOptions searchOptions) = 0;
     virtual void clearSearch() = 0;
     virtual void goToNextSearchHit() = 0;
     virtual void goToPreviousSearchHit() = 0;

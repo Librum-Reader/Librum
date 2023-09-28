@@ -5,13 +5,13 @@ import CustomComponents
 import Librum.elements
 import Librum.style
 import Librum.icons
-import Librum.controllers 
+import Librum.controllers
 
 Popup {
     id: root
     property string word
     property var previouslyFocusedPage
-    
+
     implicitWidth: 500
     implicitHeight: 540
     padding: 16
@@ -23,63 +23,50 @@ Popup {
         border.width: 1
         border.color: Style.colorContainerBorder
     }
-    
+
     onOpened: {
-        previouslyFocusedPage = activeFocusItem;
-        root.forceActiveFocus();
+        previouslyFocusedPage = activeFocusItem
+        root.forceActiveFocus()
     }
-    
-    onClosed: DictionaryController.clearData();
-    
-    Connections
-    {
+
+    onClosed: DictionaryController.clearData()
+
+    Connections {
         target: DictionaryController
-        
+
         function onStartedGettingDefinition() {
-            loadingAnimation.playing = true;
-            loadingAnimation.visible = true;
+            loadingAnimation.playing = true
+            loadingAnimation.visible = true
             language.text = ""
-            
-            dictionaryList.visible = false;
-            notFound.visible = false;
+
+            dictionaryList.visible = false
+            notFound.visible = false
         }
-        
+
         function onGettingDefinitionFailed() {
-            loadingAnimation.playing = false;
-            loadingAnimation.visible = false;
-            
-            notFound.visible = true;
+            loadingAnimation.playing = false
+            loadingAnimation.visible = false
+
+            notFound.visible = true
         }
-        
+
         function onGettingDefinitionSucceeded() {
-            loadingAnimation.playing = false;
-            loadingAnimation.visible = false;
-            language.text = DictionaryController.definition.wordTypes[0].language;
-            
-            dictionaryList.visible = true;
+            loadingAnimation.playing = false
+            loadingAnimation.visible = false
+            language.text = DictionaryController.definition.wordTypes[0].language
+
+            dictionaryList.visible = true
         }
     }
-    
-    MouseArea
-    {
-        id: actionArea
+
+    ColumnLayout {
         anchors.fill: parent
-        cursorShape: Qt.ArrowCursor
-        hoverEnabled: true
-        onContainsMouseChanged: root.previouslyFocusedPage.resetCursorToDefault()
-    }
-    
-    ColumnLayout
-    {
-        anchors.fill: parent
-        
-        RowLayout
-        {
+
+        RowLayout {
             Layout.fillWidth: true
             spacing: 8
-            
-            MButton
-            {
+
+            MButton {
                 id: backButton
                 Layout.preferredWidth: 32
                 Layout.preferredHeight: 32
@@ -88,26 +75,23 @@ Popup {
                 imagePath: Icons.readingViewBack
                 imageSize: 8
                 opacityOnPressed: 0.7
-                
+
                 onClicked: DictionaryController.goToPreviousWord()
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: container
                 Layout.fillWidth: true
                 Layout.preferredHeight: 32
                 padding: 0
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorContainerBackground
                     border.width: 1
                     border.color: Style.colorContainerBorder
                     radius: 5
                 }
-                
-                TextField
-                {
+
+                TextField {
                     id: inputField
                     anchors.fill: parent
                     horizontalAlignment: Text.AlignLeft
@@ -119,20 +103,19 @@ Popup {
                     placeholderText: "Search"
                     placeholderTextColor: Style.colorPlaceholderText
                     selectByMouse: true
-                    background: Rectangle
-                    {
+                    background: Rectangle {
                         anchors.fill: parent
                         radius: 4
                         color: "transparent"
                     }
-                    
-                    onEditingFinished: DictionaryController.getDefinitionForWord(text);
+
+                    onEditingFinished: DictionaryController.getDefinitionForWord(
+                                           text)
                 }
             }
         }
-        
-        Label
-        {
+
+        Label {
             text: root.word.toUpperCase()
             Layout.fillWidth: true
             Layout.maximumHeight: 30
@@ -142,33 +125,30 @@ Popup {
             color: Style.colorText
             font.pointSize: 20
             font.weight: Font.DemiBold
-            
+
             clip: true
         }
-        
-        Label
-        {
+
+        Label {
             id: language
             Layout.topMargin: -4
             color: Style.colorText
             font.pointSize: 11
         }
-        
-        Pane
-        {
+
+        Pane {
             id: contentPane
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.topMargin: 22
             padding: 12
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorControlBackground
                 border.width: 1
                 border.color: Style.colorContainerBorder
                 radius: 5
             }
-            
+
             AnimatedImage {
                 id: loadingAnimation
                 anchors.centerIn: parent
@@ -176,9 +156,8 @@ Popup {
                 width: 110
                 fillMode: Image.PreserveAspectFit
             }
-            
-            ListView
-            {
+
+            ListView {
                 id: dictionaryList
                 anchors.fill: parent
                 model: DictionaryController.definition.wordTypes.length
@@ -186,39 +165,34 @@ Popup {
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 boundsMovement: Flickable.StopAtBounds
-                
+
                 ScrollBar.vertical: ScrollBar {
                     visible: dictionaryList.contentHeight > dictionaryList.height
                 }
-                
-                delegate: Item
-                {
+
+                delegate: Item {
                     id: type
                     property int index: modelData
-                    
+
                     width: dictionaryList.width
                     height: clmLayout.implicitHeight
-                    
-                    ColumnLayout
-                    {
+
+                    ColumnLayout {
                         id: clmLayout
                         width: parent.width
                         spacing: 2
-                        
-                        RowLayout
-                        {
+
+                        RowLayout {
                             width: parent.width
-                            
-                            Rectangle
-                            {
+
+                            Rectangle {
                                 id: numberCircle
                                 color: Style.colorBasePurple
                                 width: 22
                                 height: width
                                 radius: width
-                                
-                                Label
-                                {
+
+                                Label {
                                     anchors.centerIn: parent
                                     text: modelData + 1
                                     color: Style.colorBannerText
@@ -226,9 +200,8 @@ Popup {
                                     font.bold: true
                                 }
                             }
-                            
-                            Label
-                            {
+
+                            Label {
                                 id: partOfSpeech
                                 Layout.fillWidth: true
                                 Layout.leftMargin: 4
@@ -239,98 +212,101 @@ Popup {
                                 color: Style.colorText
                                 font.pointSize: 13
                                 font.weight: Font.DemiBold
-                                textFormat: Text.RichText
+                                textFormat: Text.StyledText
                             }
                         }
-                        
-                        Repeater
-                        {
+
+                        Repeater {
                             id: repeater
                             model: DictionaryController.definition.wordTypes[type.index].definitions.length
-                            
+
                             delegate: Item {
                                 id: definitionItem
                                 property int index: modelData
-                                
+
                                 Layout.topMargin: 6
                                 Layout.leftMargin: 32
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: defLayout.implicitHeight
-                                
-                                ColumnLayout
-                                {
+
+                                ColumnLayout {
                                     id: defLayout
                                     width: parent.width
-                                    
-                                    RowLayout
-                                    {
+
+                                    RowLayout {
                                         Layout.fillWidth: true
                                         spacing: 4
-                                        
-                                        Label
-                                        {
+
+                                        Label {
                                             text: (modelData + 1) + "."
                                             Layout.alignment: Qt.AlignTop
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
                                             font.pointSize: 11
-                                            textFormat: Text.RichText
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
                                         }
-                                        
-                                        Label
-                                        {
+
+                                        Label {
                                             id: definitionText
                                             Layout.fillWidth: true
                                             text: DictionaryController.definition.wordTypes[type.index].definitions[modelData].definition
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
                                             font.pointSize: 11
-                                            textFormat: Text.RichText
-                                            
-                                            MouseArea
-                                            {
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
+
+                                            MouseArea {
                                                 id: mouseArea
                                                 anchors.fill: parent
                                                 cursorShape: definitionText.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                                
-                                                onClicked: followWiktionaryLink()
-                                                
+
+                                                onClicked: followWiktionaryLink(
+                                                               )
+
                                                 function followWiktionaryLink() {
-                                                    if(definitionText.hoveredLink !== "")
-                                                    {
-                                                        let link = definitionText.hoveredLink;
-                                                        if(link.startsWith("http"))
-                                                        {
-                                                            Qt.openUrlExternally(link);
-                                                            return;
-                                                        }
-                                                        else if(link.startsWith("/wiki/Wiktionary"))
-                                                        {
-                                                            Qt.openUrlExternally("https://wiktionary.org/" + link);
+                                                    if (definitionText.hoveredLink !== "") {
+                                                        let link = definitionText.hoveredLink
+                                                        if (link.startsWith(
+                                                                    "http")) {
+                                                            Qt.openUrlExternally(
+                                                                        link)
+                                                            return
+                                                        } else if (link.startsWith(
+                                                                       "/wiki/Wiktionary")) {
+                                                            Qt.openUrlExternally(
+                                                                        "https://wiktionary.org/"
+                                                                        + link)
                                                             return
                                                         }
-                                                        
+
                                                         // Some words have metadata pre/appended to the link
                                                         // which we need to remove before searching for the word.
-                                                        let fixedWord = link;
-                                                        if(link.startsWith("/wiki/"))
-                                                            fixedWord = link.replace("/wiki/","");
-                                                        if(fixedWord.startsWith("Appendix:Glossary#"))
-                                                            fixedWord = fixedWord.replace("Appendix:Glossary#", "");
-                                                        
-                                                        DictionaryController.getDefinitionForWord(fixedWord);
+                                                        let fixedWord = link
+                                                        if (link.startsWith(
+                                                                    "/wiki/"))
+                                                            fixedWord = link.replace(
+                                                                        "/wiki/",
+                                                                        "")
+                                                        if (fixedWord.startsWith(
+                                                                    "Appendix:Glossary#"))
+                                                            fixedWord = fixedWord.replace(
+                                                                        "Appendix:Glossary#",
+                                                                        "")
+
+                                                        DictionaryController.getDefinitionForWord(
+                                                                    fixedWord)
                                                     }
                                                 }
                                             }
                                         }
                                     }
-                                    
-                                    Repeater
-                                    {
+
+                                    Repeater {
                                         model: DictionaryController.definition.wordTypes[type.index].definitions[definitionItem.index].examples.length
-                                        
-                                        delegate: Label
-                                        {
+
+                                        delegate: Label {
                                             id: example
                                             Layout.fillWidth: true
                                             Layout.leftMargin: 28
@@ -339,7 +315,8 @@ Popup {
                                             color: Style.colorLightText
                                             font.pointSize: 10
                                             font.weight: Font.Light
-                                            textFormat: Text.RichText
+                                            textFormat: Text.StyledText
+                                            linkColor: Style.colorLinkText
                                         }
                                     }
                                 }
@@ -348,57 +325,54 @@ Popup {
                     }
                 }
             }
-            
-            Item
-            {
+
+            Item {
                 id: notFound
                 anchors.fill: parent
                 visible: false
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     width: parent.width
                     anchors.centerIn: parent
                     spacing: 4
-                    
-                    Image
-                    {
+
+                    Image {
                         id: warningIllustration
                         z: 2
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: -18
-                        source: "file://home/creapermann/Downloads/458.svg"
+                        source: Icons.notFoundIllustration
                         sourceSize.width: 180
                         fillMode: Image.PreserveAspectFit
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         color: Style.colorText
                         Layout.alignment: Qt.AlignHCenter
                         font.pointSize: 14
                         text: "No definitions found"
                     }
-                    
+
                     Label {
                         id: searchOnlineLink
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 4
-                        text: '<a href="update" style="color: ' + Style.colorBasePurple + '; text-decoration: underline;">Search online</a>'
-                        textFormat: Text.RichText
-                        onLinkActivated: (link) => Qt.openUrlExternally(link)
+                        text: '<a href="update" style="color: ' + Style.colorBasePurple
+                              + '; text-decoration: underline;">Search online</a>'
+                        textFormat: Text.StyledText
+                        onLinkActivated: link => Qt.openUrlExternally(link)
                         font.pointSize: 14
                         color: Style.colorText
-                        
-                        MouseArea
-                        {
+
+                        MouseArea {
                             anchors.fill: parent
-                            cursorShape: searchOnlineLink.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
-                            
-                            onClicked: 
-                            {
-                                if(searchOnlineLink.hoveredLink !== "")
-                                    Qt.openUrlExternally("https://google.com/search?q=" + root.word);
+                            cursorShape: searchOnlineLink.hoveredLink
+                                         !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+
+                            onClicked: {
+                                if (searchOnlineLink.hoveredLink !== "")
+                                    Qt.openUrlExternally(
+                                                "https://google.com/search?q=" + root.word)
                             }
                         }
                     }
@@ -406,7 +380,7 @@ Popup {
             }
         }
     }
-    
+
     Label {
         id: wiktionaryLink
         anchors.right: parent.right
@@ -414,20 +388,19 @@ Popup {
         anchors.bottomMargin: -21
         anchors.rightMargin: 2
         horizontalAlignment: Text.AlignRight
-        text: 'Source: <a href="https://wiktionary.org" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Wiktionary</a>'
-        textFormat: Text.RichText
+        text: 'Source: <a href="https://wiktionary.org" style="text-decoration: none; color: '
+              + Style.colorBasePurple + ';">Wiktionary</a>'
+        textFormat: Text.StyledText
         font.pointSize: 9
         color: Style.colorText
-        
-        MouseArea
-        {
+
+        MouseArea {
             anchors.fill: parent
             cursorShape: wiktionaryLink.hoveredLink !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
-            
-            onClicked: 
-            {
-                if(wiktionaryLink.hoveredLink !== "")
-                    Qt.openUrlExternally(wiktionaryLink.hoveredLink);
+
+            onClicked: {
+                if (wiktionaryLink.hoveredLink !== "")
+                    Qt.openUrlExternally(wiktionaryLink.hoveredLink)
             }
         }
     }

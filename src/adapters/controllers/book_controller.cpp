@@ -2,6 +2,7 @@
 #include <QUuid>
 #include "fz_utils.hpp"
 #include "highlight.hpp"
+#include "search_options.hpp"
 
 using namespace application::core;
 using domain::entities::Highlight;
@@ -44,7 +45,7 @@ mupdf::FzDocument* BookController::getFzDocument()
 
 void BookController::search(const QString& text)
 {
-    m_bookService->search(text);
+    m_bookService->search(text, m_searchOptions);
 }
 
 void BookController::clearSearch()
@@ -114,6 +115,8 @@ int BookController::getPageCount() const
 void BookController::setCurrentPage(int newCurrentPage)
 {
     m_bookService->setCurrentPage(newCurrentPage);
+    m_searchOptions.currentPage = m_bookService->getCurrentPage();
+
     emit currentPageChanged(newCurrentPage);
 }
 
@@ -131,6 +134,39 @@ void BookController::setZoom(float newZoom)
 {
     m_bookService->setZoom(newZoom);
     emit zoomChanged(newZoom);
+}
+
+bool BookController::getSearchWholeWords() const
+{
+    return m_searchOptions.wholeWords;
+}
+
+void BookController::setSearchWholeWords(bool newSearchWholeWords)
+{
+    m_searchOptions.wholeWords = newSearchWholeWords;
+    emit searchWholeWordsChanged();
+}
+
+bool BookController::getSearchCaseSensitive() const
+{
+    return m_searchOptions.caseSensitive;
+}
+
+void BookController::setSearchCaseSensitive(bool newCaseSensitive)
+{
+    m_searchOptions.caseSensitive = newCaseSensitive;
+    emit searchCaseSensitiveChanged();
+}
+
+bool BookController::getSearchFromStart() const
+{
+    return m_searchOptions.fromStart;
+}
+
+void BookController::setSearchFromStart(bool newSearchFromStart)
+{
+    m_searchOptions.fromStart = newSearchFromStart;
+    emit searchFromStartChanged();
 }
 
 FilteredTOCModel* BookController::getTableOfContents()

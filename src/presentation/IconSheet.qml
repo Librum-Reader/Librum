@@ -7,7 +7,7 @@ Item {
 
     // Animations
     property string loadingAnimation: "/resources/animations/loading_animation.gif"
-    
+
     // Arrows-icons
     property string arrowheadBackIcon
     property string arrowheadNextIcon
@@ -57,6 +57,7 @@ Item {
     property string attentionPurple
     property string checkBubbleIllustration
     property string addFileIllustration
+    property string notFoundIllustration
 
     // Reading searchbar
     property string readingSearchbarCancel
@@ -293,6 +294,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 addFileIllustration: "/resources/images/light_mode/illustrations/add_file_illustration.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                notFoundIllustration: "/resources/images/light_mode/illustrations/not_found.svg"
             }
 
             // Reading searchbar
@@ -708,6 +713,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 addFileIllustration: "/resources/images/dark_mode/illustrations/add_file_illustration.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                notFoundIllustration: "/resources/images/dark_mode/illustrations/not_found.svg"
             }
 
             // Reading searchbar

@@ -128,6 +128,7 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
+                    core/utils/search_options.hpp
 )
 
 # Make sure to build mupdf before the application

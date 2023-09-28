@@ -1,12 +1,13 @@
 #pragma once
 #include "free_books_model.hpp"
 #include "i_free_books_controller.hpp"
+#include "adapters_export.hpp"
 #include "i_free_books_service.hpp"
 
 namespace adapters::controllers
 {
 
-class FreeBooksController : public IFreeBooksController
+class ADAPTERS_EXPORT FreeBooksController : public IFreeBooksController
 {
     Q_OBJECT
 

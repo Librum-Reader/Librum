@@ -4,11 +4,12 @@
 #include <QVariant>
 #include <vector>
 #include "free_book.hpp"
+#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {
 
-class FreeBooksModel : public QAbstractListModel
+class ADAPTERS_EXPORT FreeBooksModel : public QAbstractListModel
 {
     Q_OBJECT
 

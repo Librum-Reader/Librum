@@ -24,6 +24,12 @@ class ADAPTERS_EXPORT IBookController : public QObject
     Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
     Q_PROPERTY(application::core::FilteredTOCModel* tableOfContents READ
                    getTableOfContents NOTIFY tableOfContentsChanged)
+    Q_PROPERTY(bool searchWholeWords READ getSearchWholeWords WRITE
+                   setSearchWholeWords NOTIFY searchWholeWordsChanged)
+    Q_PROPERTY(bool searchCaseSensitive READ getSearchCaseSensitive WRITE
+                   setSearchCaseSensitive NOTIFY searchCaseSensitiveChanged)
+    Q_PROPERTY(bool searchFromStart READ getSearchFromStart WRITE
+                   setSearchFromStart NOTIFY searchFromStartChanged)
 
 public:
     virtual ~IBookController() noexcept = default;
@@ -48,11 +54,23 @@ public:
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
+    virtual void setCurrentPage(int newCurrentPage) = 0;
+
     virtual int getPageCount() const = 0;
     virtual int getCurrentPage() const = 0;
-    virtual void setCurrentPage(int newCurrentPage) = 0;
+
     virtual float getZoom() const = 0;
     virtual void setZoom(float newZoom) = 0;
+
+    virtual bool getSearchWholeWords() const = 0;
+    virtual void setSearchWholeWords(bool newSearchWholeWords) = 0;
+
+    virtual bool getSearchCaseSensitive() const = 0;
+    virtual void setSearchCaseSensitive(bool newSearchCaseSensitive) = 0;
+
+    virtual bool getSearchFromStart() const = 0;
+    virtual void setSearchFromStart(bool newSearchFromStart) = 0;
+
     virtual application::core::FilteredTOCModel* getTableOfContents() = 0;
 
 signals:
@@ -66,6 +84,9 @@ signals:
     void textSelectionFinished(float centerX, float topY);
     void highlightSelected(float centerX, float topY, const QString& uuid);
     void noSearchHitsFound();
+    void searchWholeWordsChanged();
+    void searchCaseSensitiveChanged();
+    void searchFromStartChanged();
 };
 
 }  // namespace adapters

@@ -209,5 +209,7 @@
         <file>resources/images/light_mode/decision/close_popup_white_icon.svg</file>
         <file>app_info.json</file>
         <file>resources/animations/loading_animation.gif</file>
+        <file>resources/images/dark_mode/illustrations/not_found.svg</file>
+        <file>resources/images/light_mode/illustrations/not_found.svg</file>
     </qresource>
 </RCC>

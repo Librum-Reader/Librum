@@ -5,6 +5,7 @@
 #include "adapters_export.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
+#include "search_options.hpp"
 #include "toc/filtered_toc_model.hpp"
 
 namespace adapters::controllers
@@ -37,14 +38,27 @@ public:
 
     QString getFilePath() const override;
     int getPageCount() const override;
+
     void setCurrentPage(int newCurrentPage) override;
     int getCurrentPage() const override;
+
     float getZoom() const override;
     void setZoom(float newZoom) override;
+
+    bool getSearchWholeWords() const override;
+    void setSearchWholeWords(bool newSearchWholeWords) override;
+
+    bool getSearchCaseSensitive() const override;
+    void setSearchCaseSensitive(bool newCaseSensitive) override;
+
+    bool getSearchFromStart() const override;
+    void setSearchFromStart(bool newSearchFromStart) override;
+
     application::core::FilteredTOCModel* getTableOfContents() override;
 
 private:
     application::IBookService* m_bookService;
+    application::core::utils::SearchOptions m_searchOptions;
 };
 
 }  // namespace adapters::controllers

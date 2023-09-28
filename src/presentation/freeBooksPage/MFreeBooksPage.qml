@@ -59,8 +59,7 @@ Page {
 
     ColumnLayout {
         id: layout
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors.fill: parent
         anchors.rightMargin: internal.windowRightMargin
         anchors.leftMargin: internal.windowLeftMargin
         spacing: 0
@@ -99,7 +98,7 @@ Page {
         Pane {
             id: bookGridContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: 759
+            Layout.fillHeight: true
             Layout.topMargin: 30
             visible: !root.empty
             padding: 0
