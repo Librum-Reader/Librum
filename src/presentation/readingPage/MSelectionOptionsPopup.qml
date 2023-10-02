@@ -160,7 +160,6 @@ Popup {
                 else
                     text = activeFocusItem.getHighlightedText(root.highlight)
 
-                AiExplanationController.getExplanation(text)
                 root.explanationOptionSelected(text)
             }
         }

@@ -18,7 +18,8 @@ class ADAPTERS_EXPORT IAiExplanationController : public QObject
 public:
     virtual ~IAiExplanationController() noexcept = default;
 
-    Q_INVOKABLE virtual void getExplanation(const QString& text) = 0;
+    Q_INVOKABLE virtual void getExplanation(const QString& text,
+                                            const QString& mode) = 0;
 
 signals:
     void explanationReady(const QString& explanation);

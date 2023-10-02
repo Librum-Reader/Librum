@@ -13,7 +13,7 @@ class APPLICATION_EXPORT IAiExplanationService : public QObject
 public:
     virtual ~IAiExplanationService() noexcept = default;
 
-    virtual void getExplanation(const QString& text) = 0;
+    virtual void getExplanation(const QString& text, const QString& mode) = 0;
 
 public slots:
     virtual void setupUserData(const QString& token, const QString& email) = 0;

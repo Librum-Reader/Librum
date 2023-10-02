@@ -17,8 +17,8 @@ class ADAPTERS_EXPORT IAiExplanationAccess : public QObject
 public:
     virtual ~IAiExplanationAccess() noexcept = default;
 
-    virtual void getExplanation(const QString& authToken,
-                                const QString& query) = 0;
+    virtual void getExplanation(const QString& authToken, const QString& query,
+                                const QString& mode) = 0;
 
 signals:
     void explanationReceived(const QString& explanation) const;

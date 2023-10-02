@@ -9,12 +9,14 @@ namespace infrastructure::persistence
 {
 
 void AiExplanationAccess::getExplanation(const QString& authToken,
-                                         const QString& query)
+                                         const QString& query,
+                                         const QString& mode)
 {
     auto request = createRequest(data::aiCompletionEndpoint, authToken);
 
     QJsonObject body;
     body.insert("text", query);
+    body.insert("mode", mode);
     QJsonDocument jsonDocument { body };
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 

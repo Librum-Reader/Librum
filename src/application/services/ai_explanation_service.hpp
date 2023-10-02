@@ -14,7 +14,7 @@ class AiExplanationService : public IAiExplanationService
 public:
     AiExplanationService(IAiExplanationGateway* aiExplanationGateway);
 
-    void getExplanation(const QString& text) override;
+    void getExplanation(const QString& text, const QString& mode) override;
 
 public slots:
     void setupUserData(const QString& token, const QString& email) override;

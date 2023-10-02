@@ -12,9 +12,10 @@ AiExplanationGateway::AiExplanationGateway(
 }
 
 void AiExplanationGateway::getExplanation(const QString& authToken,
-                                          const QString& text)
+                                          const QString& text,
+                                          const QString& mode)
 {
-    m_aiExplanationAccess->getExplanation(authToken, text);
+    m_aiExplanationAccess->getExplanation(authToken, text, mode);
 }
 
 }  // namespace adapters::gateways

@@ -19,8 +19,8 @@ class APPLICATION_EXPORT IAiExplanationGateway : public QObject
 public:
     virtual ~IAiExplanationGateway() noexcept = default;
 
-    virtual void getExplanation(const QString& authToken,
-                                const QString& text) = 0;
+    virtual void getExplanation(const QString& authToken, const QString& text,
+                                const QString& mode) = 0;
 
 signals:
     void explanationReady(const QString& explanation);

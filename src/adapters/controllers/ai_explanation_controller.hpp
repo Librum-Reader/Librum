@@ -15,7 +15,7 @@ public:
     AiExplanationController(
         application::IAiExplanationService* m_aiExplanationService);
 
-    void getExplanation(const QString& text) override;
+    void getExplanation(const QString& text, const QString& mode) override;
 
 private:
     application::IAiExplanationService* m_aiExplanationService;

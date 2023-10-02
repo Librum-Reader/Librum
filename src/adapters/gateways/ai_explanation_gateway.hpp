@@ -13,7 +13,8 @@ class AiExplanationGateway : public application::IAiExplanationGateway
 public:
     AiExplanationGateway(IAiExplanationAccess* aiExplanationService);
 
-    void getExplanation(const QString& authToken, const QString& text) override;
+    void getExplanation(const QString& authToken, const QString& text,
+                        const QString& mode) override;
 
 private:
     IAiExplanationAccess* m_aiExplanationAccess;

@@ -69,15 +69,6 @@ Pane {
     }
 
     Connections {
-        target: AiExplanationController
-
-        function onExplanationReady(explanation) {
-            explanationPopup.answer = explanation
-            explanationPopup.open()
-        }
-    }
-
-    Connections {
         target: DictionaryController
 
         function onGettingDefinitionFailed() {}
@@ -250,8 +241,8 @@ Pane {
                                    }
 
         onExplanationOptionSelected: text => {
-                                         explanationPopup.open()
                                          explanationPopup.question = text
+                                         explanationPopup.open()
                                      }
     }
 

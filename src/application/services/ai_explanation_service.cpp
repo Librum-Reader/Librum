@@ -11,9 +11,10 @@ AiExplanationService::AiExplanationService(
             this, &AiExplanationService::explanationReady);
 }
 
-void AiExplanationService::getExplanation(const QString& text)
+void AiExplanationService::getExplanation(const QString& text,
+                                          const QString& mode)
 {
-    m_aiExplanationGateway->getExplanation(m_authenticationToken, text);
+    m_aiExplanationGateway->getExplanation(m_authenticationToken, text, mode);
 }
 
 void AiExplanationService::setupUserData(const QString& token,

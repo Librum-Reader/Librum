@@ -15,8 +15,8 @@ class AiExplanationAccess : public adapters::IAiExplanationAccess
     Q_OBJECT
 
 public:
-    void getExplanation(const QString& authToken,
-                        const QString& query) override;
+    void getExplanation(const QString& authToken, const QString& query,
+                        const QString& mode) override;
 
 private:
     QNetworkRequest createRequest(QUrl url, QString authToken) const;

@@ -12,9 +12,10 @@ AiExplanationController::AiExplanationController(
             &AiExplanationController::explanationReady);
 }
 
-void AiExplanationController::getExplanation(const QString& text)
+void AiExplanationController::getExplanation(const QString& text,
+                                             const QString& mode)
 {
-    m_aiExplanationService->getExplanation(text);
+    m_aiExplanationService->getExplanation(text, mode);
 }
 
 }  // namespace adapters::controllers
