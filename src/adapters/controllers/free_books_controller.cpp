@@ -92,11 +92,7 @@ void FreeBooksController::getBookMedia(const int id, const QString& url)
 
 void FreeBooksController::getBookCover(const int id)
 {
-// There is a problem with book covers (jpegs) on linux with Qt 6.5.2, so don't
-// load them for now.
-#ifdef Q_OS_WIN
     m_freeBooksService->getBookCover(id);
-#endif
 }
 
 void FreeBooksController::deleteBookCover(const int id)
