@@ -2,6 +2,7 @@
 #include <QByteArray>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QNetworkRequest>
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
@@ -13,6 +14,8 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
                                          const QString& mode)
 {
     auto request = createRequest(data::aiCompletionEndpoint, authToken);
+    request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
+                         QNetworkRequest::AlwaysNetwork);
 
     QJsonObject body;
     body.insert("text", query);
@@ -22,24 +25,32 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
 
     auto reply = m_networkAccessManager.post(request, data);
 
+    connect(
+        reply, &QNetworkReply::readyRead, this,
+        [reply]()
+        {
+            qDebug()
+                << QString(reply->readAll()).simplified().replace("data: ", "");
+        });
 
-    // Handle api result and release the reply's memory
-    connect(reply, &QNetworkReply::finished, this,
-            [this, reply]()
-            {
-                if(api_error_helper::apiRequestFailed(reply, 200))
-                {
-                    api_error_helper::logErrorMessage(reply,
-                                                      "Getting ai explanation");
+    //    // Handle api result and release the reply's memory
+    //    connect(reply, &QNetworkReply::finished, this,
+    //            [this, reply]()
+    //            {
+    //                if(api_error_helper::apiRequestFailed(reply, 200))
+    //                {
+    //                    api_error_helper::logErrorMessage(reply,
+    //                                                      "Getting ai
+    //                                                      explanation");
 
-                    emit explanationReceived("");
-                    reply->deleteLater();
-                    return;
-                }
+    //                    emit explanationReceived("");
+    //                    reply->deleteLater();
+    //                    return;
+    //                }
 
-                emit explanationReceived(reply->readAll());
-                reply->deleteLater();
-            });
+    //                emit explanationReceived(reply->readAll());
+    //                reply->deleteLater();
+    //            });
 }
 
 QNetworkRequest AiExplanationAccess::createRequest(QUrl url,
