@@ -165,6 +165,8 @@ Popup {
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
                 boundsMovement: Flickable.StopAtBounds
+                flickDeceleration: 12000
+                maximumFlickVelocity: 1500
 
                 ScrollBar.vertical: ScrollBar {
                     visible: dictionaryList.contentHeight > dictionaryList.height
