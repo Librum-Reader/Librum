@@ -7,8 +7,8 @@ AiExplanationGateway::AiExplanationGateway(
     IAiExplanationAccess* aiExplanationService) :
     m_aiExplanationAccess(aiExplanationService)
 {
-    connect(m_aiExplanationAccess, &IAiExplanationAccess::explanationReceived,
-            this, &AiExplanationGateway::explanationReady);
+    connect(m_aiExplanationAccess, &IAiExplanationAccess::wordReceived, this,
+            &AiExplanationGateway::wordReady);
 }
 
 void AiExplanationGateway::getExplanation(const QString& authToken,

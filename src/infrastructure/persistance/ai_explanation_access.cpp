@@ -3,7 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkRequest>
-#include "api_error_helper.hpp"
+#include <QRegularExpression>
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -25,32 +25,33 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
 
     auto reply = m_networkAccessManager.post(request, data);
 
-    connect(
-        reply, &QNetworkReply::readyRead, this,
-        [reply]()
-        {
-            qDebug()
-                << QString(reply->readAll()).simplified().replace("data: ", "");
-        });
+    connect(reply, &QNetworkReply::readyRead, this,
+            [this, reply]()
+            {
+                QString word = reply->readAll().replace("data: ", "");
+                int i = 0;
+                int k = 1;
 
-    //    // Handle api result and release the reply's memory
-    //    connect(reply, &QNetworkReply::finished, this,
-    //            [this, reply]()
-    //            {
-    //                if(api_error_helper::apiRequestFailed(reply, 200))
-    //                {
-    //                    api_error_helper::logErrorMessage(reply,
-    //                                                      "Getting ai
-    //                                                      explanation");
+                while(k < word.length())
+                {
+                    if(word[i] == '\n' && word[k] == '\n')
+                    {
+                        word.removeAt(k);
+                        word.removeAt(i);
+                    }
 
-    //                    emit explanationReceived("");
-    //                    reply->deleteLater();
-    //                    return;
-    //                }
+                    i += 1;
+                    k += 1;
+                };
 
-    //                emit explanationReceived(reply->readAll());
-    //                reply->deleteLater();
-    //            });
+                emit wordReceived(word);
+            });
+
+    connect(reply, &QNetworkReply::finished, this,
+            [reply]()
+            {
+                reply->deleteLater();
+            });
 }
 
 QNetworkRequest AiExplanationAccess::createRequest(QUrl url,

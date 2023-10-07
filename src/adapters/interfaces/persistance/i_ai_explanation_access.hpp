@@ -21,7 +21,7 @@ public:
                                 const QString& mode) = 0;
 
 signals:
-    void explanationReceived(const QString& explanation) const;
+    void wordReceived(const QString& word) const;
 };
 
 }  // namespace adapters

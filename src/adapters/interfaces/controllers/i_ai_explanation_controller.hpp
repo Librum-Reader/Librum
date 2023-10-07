@@ -22,7 +22,7 @@ public:
                                             const QString& mode) = 0;
 
 signals:
-    void explanationReady(const QString& explanation);
+    void wordReady(const QString& word);
 };
 
 }  // namespace adapters

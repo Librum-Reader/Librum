@@ -25,19 +25,13 @@ Popup {
 
     onOpened: {
         internal.sendExplanationRequest()
-
-        loadingAnimation.visible = true
-        loadingAnimation.playing = true
     }
 
     Connections {
         target: AiExplanationController
 
-        function onExplanationReady(explanation) {
-            loadingAnimation.visible = false
-            loadingAnimation.playing = false
-
-            root.answer = explanation
+        function onWordReady(word) {
+            root.answer += word
         }
     }
 

@@ -8,8 +8,8 @@ AiExplanationController::AiExplanationController(
     m_aiExplanationService(m_aiExplanationService)
 {
     connect(m_aiExplanationService,
-            &application::IAiExplanationService::explanationReady, this,
-            &AiExplanationController::explanationReady);
+            &application::IAiExplanationService::wordReady, this,
+            &AiExplanationController::wordReady);
 }
 
 void AiExplanationController::getExplanation(const QString& text,

@@ -20,7 +20,7 @@ public slots:
     virtual void clearUserData() = 0;
 
 signals:
-    void explanationReady(const QString& explanation);
+    void wordReady(const QString& word);
 };
 
 }  // namespace application
