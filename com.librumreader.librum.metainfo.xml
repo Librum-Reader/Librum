@@ -48,6 +48,6 @@
     </screenshot>
   </screenshots>
 
-  <content_rating/>
+  <content_rating type="oars-1.1" />
 
 </component>
