@@ -44,7 +44,7 @@ Popup {
         }
         ListElement {
             name: "Explain like I'm five"
-            query: "Explain the following like I'm five years old: "
+            query: "Explain the following very simply: "
         }
         ListElement {
             name: "In-Depth"
@@ -145,16 +145,6 @@ Popup {
                 border.color: Style.colorContainerBorder
             }
 
-            AnimatedImage {
-                id: loadingAnimation
-                visible: false
-                anchors.centerIn: parent
-                playing: false
-                source: "file://home/creapermann/Downloads/ai_loading.gif"
-                width: 1700
-                fillMode: Image.PreserveAspectFit
-            }
-
             Flickable {
                 id: answerFlick
                 anchors.fill: parent
@@ -168,7 +158,6 @@ Popup {
                     id: answerField
                     width: answerContainer.width - 2 * answerContainer.padding
                     height: answerContainer.width
-                    visible: !loadingAnimation.visible
                     focus: true
                     text: root.answer
                     font.pointSize: 13
@@ -229,11 +218,8 @@ Popup {
 
             onClicked: {
                 if (internal.dataChanged) {
-                    internal.sendExplanationRequest()
                     root.answer = ""
-
-                    loadingAnimation.visible = true
-                    loadingAnimation.playing = true
+                    internal.sendExplanationRequest()
                 }
             }
         }
