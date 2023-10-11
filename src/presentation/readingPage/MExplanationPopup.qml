@@ -154,10 +154,11 @@ Popup {
                 boundsBehavior: Flickable.StopAtBounds
                 boundsMovement: Flickable.StopAtBounds
 
+                onContentHeightChanged: contentY = contentHeight - height
+
                 TextEdit {
                     id: answerField
                     width: answerContainer.width - 2 * answerContainer.padding
-                    height: answerContainer.width
                     focus: true
                     text: root.answer
                     font.pointSize: 13
