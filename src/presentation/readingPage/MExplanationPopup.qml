@@ -39,7 +39,7 @@ Popup {
         id: explanationModes
 
         ListElement {
-            name: "Default"
+            name: "Explain"
             query: "Explain the following: "
         }
         ListElement {
@@ -158,7 +158,7 @@ Popup {
 
                 TextEdit {
                     id: answerField
-                    width: answerContainer.width - 2 * answerContainer.padding
+                    width: answerFlick.width
                     focus: true
                     text: root.answer
                     font.pointSize: 13
