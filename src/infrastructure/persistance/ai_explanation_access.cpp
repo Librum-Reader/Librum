@@ -24,7 +24,7 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
     auto reply = m_networkAccessManager.post(request, data);
-    QDateTime requestStartTime = QDateTime::currentDateTimeUtc();
+    auto requestStartTime = QDateTime::currentDateTimeUtc();
     m_lastRequestStartTime = requestStartTime;
 
     connect(reply, &QNetworkReply::readyRead, this,

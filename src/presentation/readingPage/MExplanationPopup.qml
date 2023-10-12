@@ -55,10 +55,6 @@ Popup {
             query: "Shortly explain the following like I am a kid: "
         }
         ListElement {
-            name: "In-Depth"
-            query: "Shortly explain the following in depth: "
-        }
-        ListElement {
             name: "Summarize"
             query: "Shortly summarize the following: "
         }

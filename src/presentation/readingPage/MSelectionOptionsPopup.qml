@@ -59,6 +59,7 @@ Popup {
         orientation: ListView.Horizontal
         spacing: 2
         model: firstActionsPage
+        boundsBehavior: Flickable.StopAtBounds
 
         onModelChanged: {
             selectionOptionsListView.forceLayout()
