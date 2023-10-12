@@ -73,7 +73,7 @@ Popup {
         property var clickedFunction: function () {}
 
         height: selectionOptionsListView.height
-        width: actionText.implicitWidth
+        implicitWidth: actionText.implicitWidth
         color: "transparent"
         opacity: actionArea.pressed ? 0.8 : 1
 
@@ -105,7 +105,7 @@ Popup {
     component Separator: Rectangle {
         y: 1 // Move one down
         height: selectionOptionsListView.height - 2
-        width: 2
+        implicitWidth: 2
         color: Style.colorSeparator
     }
 
@@ -234,13 +234,18 @@ Popup {
             }
         }
 
-        Separator {}
+        Separator {
+            visible: root.highlight != ""
+            width: visible ? implicitWidth : 0
+        }
 
         SelectionOptionsPopupItem {
             id: removeAction
+            width: visible ? implicitWidth : 0
             text: "Remove"
             textColor: Style.colorErrorText
             visible: root.highlight != ""
+
             clickedFunction: function () {
                 activeFocusItem.removeHighlight(root.highlight)
             }
