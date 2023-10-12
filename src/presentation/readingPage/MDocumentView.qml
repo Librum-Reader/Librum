@@ -44,9 +44,7 @@ Pane {
         function onTextSelectionFinished(centerX, topY) {
             selectionOptionsPopup.highlight = ""
 
-            selectionOptionsPopup.highlightCenterX = centerX
-            selectionOptionsPopup.highlightTopY = topY
-            internal.openPopupAt(selectionOptionsPopup, centerX, topY)
+            internal.openSelectionOptionsPopup(centerX, topY)
         }
 
         function onHighlightSelected(centerX, topY, highlightUuid) {
@@ -55,9 +53,7 @@ Pane {
 
             selectionOptionsPopup.highlight = highlightUuid
 
-            selectionOptionsPopup.highlightCenterX = centerX
-            selectionOptionsPopup.highlightTopY = topY
-            internal.openPopupAt(selectionOptionsPopup, centerX, topY)
+            internal.openSelectionOptionsPopup(centerX, topY)
         }
 
         function onZoomChanged(newZoom) {
@@ -227,6 +223,8 @@ Pane {
         property real highlightCenterX
         property real highlightTopY
 
+        onNewWidth: internal.openSelectionOptionsPopup(-1, -1)
+
         onHighlightOptionSelected: uuid => {
                                        if (selectionOptionsPopup.highlight == "")
                                        colorSelectionPopup.highlight = uuid
@@ -296,6 +294,16 @@ Pane {
 
     QtObject {
         id: internal
+        function openSelectionOptionsPopup(centerX, topY) {
+            if (centerX === -1 && topY === -1) {
+                centerX = selectionOptionsPopup.highlightCenterX
+                topY = selectionOptionsPopup.highlightTopY
+            }
+            selectionOptionsPopup.highlightCenterX = centerX
+            selectionOptionsPopup.highlightTopY = topY
+
+            internal.openPopupAt(selectionOptionsPopup, centerX, topY)
+        }
 
         function openPopupAt(popup, centerX, topY) {
             let pageYOffset = pageView.contentY - activeFocusItem.y

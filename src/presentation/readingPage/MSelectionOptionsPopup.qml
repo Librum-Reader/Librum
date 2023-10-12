@@ -9,11 +9,12 @@ import Librum.controllers
 Popup {
     id: root
     property string highlight: ""
+    signal newWidth
     signal highlightOptionSelected(string uuid)
     signal dictionaryOptionSelected(string word)
     signal explanationOptionSelected(string word)
 
-    width: internal.getWidth()
+    width: selectionOptionsListView.width
     height: 32
     padding: 0
     background: Rectangle {
@@ -23,6 +24,7 @@ Popup {
         border.color: Style.colorContainerBorder
     }
 
+    onOpened: selectionOptionsListView.model = firstActionsPage
     Shortcut {
         sequence: SettingsController.shortcuts.CreateHighlight
         onActivated: {
@@ -49,53 +51,66 @@ Popup {
         rotation: 180
     }
 
-    RowLayout {
-        id: selectionOptionsLayout
+    ListView {
+        id: selectionOptionsListView
+
+        width: contentWidth
         height: parent.height
-        // We need to manually calculate the width because QML bugs lead to the RowLayout not being
-        // updated properly when an item inside of it changes its visibility.
+        orientation: ListView.Horizontal
         spacing: 2
+        model: firstActionsPage
 
-        component SelectionOptionsPopupItem: Rectangle {
-            id: action
-            property string text
-            property color textColor: Style.colorText
-            property var clickedFunction: function () {}
+        onModelChanged: {
+            selectionOptionsListView.forceLayout()
+            root.newWidth()
+        }
+    }
 
-            Layout.fillHeight: true
-            Layout.preferredWidth: actionText.implicitWidth
-            color: "transparent"
-            opacity: actionArea.pressed ? 0.8 : 1
+    component SelectionOptionsPopupItem: Rectangle {
+        id: action
+        property string text
+        property color textColor: Style.colorText
+        property var clickedFunction: function () {}
 
-            Label {
-                id: actionText
-                height: parent.height
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
-                padding: 10
-                text: action.text
-                color: action.textColor
-                font.pointSize: 12
-            }
+        height: selectionOptionsListView.height
+        width: actionText.implicitWidth
+        color: "transparent"
+        opacity: actionArea.pressed ? 0.8 : 1
 
-            MouseArea {
-                id: actionArea
-                anchors.fill: parent
-                cursorShape: Qt.PointingHandCursor
-                hoverEnabled: true
-
-                onClicked: {
-                    action.clickedFunction()
-                    root.close()
-                }
-            }
+        Label {
+            id: actionText
+            height: parent.height
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            padding: 10
+            text: action.text
+            color: action.textColor
+            font.pointSize: 12
         }
 
-        component Separator: Rectangle {
-            Layout.fillHeight: true
-            Layout.preferredWidth: 2
-            color: Style.colorSeparator
+        MouseArea {
+            id: actionArea
+            anchors.fill: parent
+            cursorShape: Qt.PointingHandCursor
+            hoverEnabled: true
+
+            onClicked: {
+                action.clickedFunction()
+
+                root.close()
+            }
         }
+    }
+
+    component Separator: Rectangle {
+        y: 1 // Move one down
+        height: selectionOptionsListView.height - 2
+        width: 2
+        color: Style.colorSeparator
+    }
+
+    ObjectModel {
+        id: firstActionsPage
 
         SelectionOptionsPopupItem {
             id: copyAction
@@ -108,9 +123,7 @@ Popup {
             }
         }
 
-        Separator {
-            id: separator1
-        }
+        Separator {}
 
         SelectionOptionsPopupItem {
             id: highlightAction
@@ -150,6 +163,63 @@ Popup {
 
         Separator {}
 
+        Rectangle {
+            height: selectionOptionsListView.height
+            width: 26
+            color: "transparent"
+
+            RowLayout {
+                anchors.fill: parent
+
+                Image {
+                    id: goToPage2Button
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.rightMargin: 4
+                    source: Icons.arrowheadNextIcon
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+
+                onClicked: selectionOptionsListView.model = secondActionsPage
+            }
+        }
+    }
+
+    ObjectModel {
+        id: secondActionsPage
+
+        Rectangle {
+            height: selectionOptionsListView.height
+            width: 26
+            color: "transparent"
+
+            RowLayout {
+                anchors.fill: parent
+
+                Image {
+                    id: goToPage1Button
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.leftMargin: 2
+                    rotation: 180
+                    source: Icons.arrowheadNextIcon
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
+
+                onClicked: selectionOptionsListView.model = firstActionsPage
+            }
+        }
+
+        Separator {}
+
         SelectionOptionsPopupItem {
             id: explainAction
             text: "Explain"
@@ -164,9 +234,7 @@ Popup {
             }
         }
 
-        Separator {
-            visible: root.highlight != ""
-        }
+        Separator {}
 
         SelectionOptionsPopupItem {
             id: removeAction
@@ -181,12 +249,6 @@ Popup {
 
     QtObject {
         id: internal
-
-        function getWidth() {
-            return separator1.width * 4 + selectionOptionsLayout.spacing * 7
-                    + copyAction.width + highlightAction.width + lookUpAction.width
-                    + explainAction.width + (root.highlight === "" ? 0 : removeAction.width)
-        }
 
         function createHighlight() {
             let defaultColorName = SettingsController.appearanceSettings.DefaultHighlightColorName
