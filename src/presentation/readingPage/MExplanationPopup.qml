@@ -24,7 +24,15 @@ Popup {
     }
 
     onOpened: {
+        root.answer = ""
         internal.sendExplanationRequest()
+    }
+
+    onClosed: {
+        root.answer = ""
+        root.question = ""
+
+        internal.dataChanged = false
     }
 
     Connections {
@@ -40,35 +48,28 @@ Popup {
 
         ListElement {
             name: "Explain"
-            query: "Explain the following: "
+            query: "Shortly explain the following: "
         }
         ListElement {
             name: "Explain like I'm five"
-            query: "Explain the following very simply: "
+            query: "Shortly explain the following like I am a kid: "
         }
         ListElement {
             name: "In-Depth"
-            query: "Explain the following in depth: "
+            query: "Shortly explain the following in depth: "
         }
         ListElement {
             name: "Summarize"
-            query: "Summarize the following: "
+            query: "Shortly summarize the following: "
         }
         ListElement {
             name: "Give more information"
-            query: "Give more information on the following: "
+            query: "Shortly give more information on the following: "
         }
         ListElement {
             name: "Explain visually"
-            query: "Explain the following visually: "
+            query: "Shortly explain the following visually: "
         }
-    }
-
-    onClosed: {
-        root.answer = ""
-        root.question = ""
-
-        internal.dataChanged = false
     }
 
     ColumnLayout {
@@ -221,6 +222,7 @@ Popup {
                 if (internal.dataChanged) {
                     root.answer = ""
                     internal.sendExplanationRequest()
+                    internal.dataChanged = false
                 }
             }
         }
@@ -228,7 +230,7 @@ Popup {
 
     QtObject {
         id: internal
-        property bool dataChanged
+        property bool dataChanged: false
 
         function sendExplanationRequest() {
             AiExplanationController.getExplanation(

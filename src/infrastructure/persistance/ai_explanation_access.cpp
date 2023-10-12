@@ -24,10 +24,18 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
     QByteArray data = jsonDocument.toJson(QJsonDocument::Compact);
 
     auto reply = m_networkAccessManager.post(request, data);
+    QDateTime requestStartTime = QDateTime::currentDateTimeUtc();
+    m_lastRequestStartTime = requestStartTime;
 
     connect(reply, &QNetworkReply::readyRead, this,
-            [this, reply]()
+            [this, reply, requestStartTime]()
             {
+                // Make sure to not process "old" requests. We can not abort the
+                // SSE so the server will continue sending data, we just need to
+                // ignore it.
+                if(m_lastRequestStartTime != requestStartTime)
+                    return;
+
                 QString word = reply->readAll().replace("data: ", "");
                 int i = 0;
                 int k = 1;

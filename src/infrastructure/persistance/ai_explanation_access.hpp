@@ -1,5 +1,6 @@
 #pragma once
 #include <QByteArray>
+#include <QDateTime>
 #include <QDebug>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
@@ -20,6 +21,7 @@ public:
 
 private:
     QNetworkRequest createRequest(QUrl url, QString authToken) const;
+    QDateTime m_lastRequestStartTime;
 
     QNetworkAccessManager m_networkAccessManager;
 };
