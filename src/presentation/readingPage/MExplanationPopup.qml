@@ -172,6 +172,7 @@ Popup {
 
             Item {
                 id: limitReachedWarning
+                visible: false
                 anchors.fill: parent
 
                 ColumnLayout {
