@@ -10,371 +10,346 @@ import Librum.globals
 import "readingToolbar"
 import "readingSearchbar"
 
-
-Page
-{
+Page {
     id: root
-    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
-    
+    background: Rectangle {
+        anchors.fill: parent
+        color: Style.colorPageBackground
+    }
+
     Component.onCompleted: root.forceActiveFocus()
     Component.onDestruction: internal.saveCurrentPage()
-    
-    Shortcut
-    {
+
+    // Save the current page every 15s automatically
+    Timer {
+        id: currentPageSaver
+        interval: 15000
+        repeat: true
+        running: true
+
+        onTriggered: internal.saveCurrentPage()
+    }
+
+    Shortcut {
         id: zoomIn
         sequences: [SettingsController.shortcuts.ZoomIn]
         onActivated: documentView.changeZoomBy(1.13)
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: zoomOut
         sequences: [SettingsController.shortcuts.ZoomOut]
         onActivated: documentView.changeZoomBy(0.87)
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: flickUp
         sequences: [SettingsController.shortcuts.MoveUp]
         onActivated: documentView.flick("up")
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: flickDown
         sequences: [SettingsController.shortcuts.MoveDown]
         onActivated: documentView.flick("down")
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: nextPage
         sequences: [SettingsController.shortcuts.NextPage]
         onActivated: documentView.nextPage()
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: previousPage
         sequences: [SettingsController.shortcuts.PreviousPage]
         onActivated: documentView.previousPage()
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: stopFullScreenMode
         sequences: [SettingsController.shortcuts.ExitFullScreenMode]
         onActivated: internal.stopFullScreenMode()
         enabled: internal.fullScreen
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: startOfDocument
         sequences: [SettingsController.shortcuts.StartOfDocument]
         onActivated: internal.goToStart()
     }
-    
-    Shortcut
-    {
+
+    Shortcut {
         id: endOfDocument
         sequences: [SettingsController.shortcuts.EndOfDocument]
         onActivated: internal.goToEnd()
     }
-    
-    
+
+
     /*
       An invisible component at the top of the screen, when hovering over it
       while the fullscreen mode is enabled, the fullscreen mode will be disabled.
       */
-    Item
-    {
+    Item {
         id: toolbarReactivationContainer
         width: parent.width
         height: toolbar.height
         z: 1
-        
-        HoverHandler
-        {
+
+        HoverHandler {
             id: toolbarReactivationArea
             enabled: true
-            onHoveredChanged: if(hovered) internal.stopFullScreenMode();
+            onHoveredChanged: if (hovered)
+                                  internal.stopFullScreenMode()
         }
     }
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
-        
-        MReadingToolBar
-        {
-            id: toolbar            
+
+        MReadingToolBar {
+            id: toolbar
             Layout.fillWidth: true
             currentPage: BookController.currentPage
             pageCount: BookController.pageCount
             bookTitle: Globals.selectedBook.title
-            
-            onBackButtonClicked:
-            {
-                loadPage(homePage, sidebar.homeItem, false);
+
+            onBackButtonClicked: {
+                loadPage(homePage, sidebar.homeItem, false)
             }
-            
-            onChapterButtonClicked:
-            {
-                if(chapterSidebar.active)
-                {
-                    chapterSidebar.close();
-                    return;
+
+            onChapterButtonClicked: {
+                if (chapterSidebar.active) {
+                    chapterSidebar.close()
+                    return
                 }
-                
-                if(bookmarksSidebar.active)
-                    bookmarksSidebar.close();
-                
-                chapterSidebar.open();
+
+                if (bookmarksSidebar.active)
+                    bookmarksSidebar.close()
+
+                chapterSidebar.open()
             }
-            
-            onBookMarkButtonClicked:
-            {
-                if(bookmarksSidebar.active)
-                {
-                    bookmarksSidebar.close();
-                    return;
+
+            onBookMarkButtonClicked: {
+                if (bookmarksSidebar.active) {
+                    bookmarksSidebar.close()
+                    return
                 }
-                
-                if(chapterSidebar.active)
-                    chapterSidebar.close();
-                
-                bookmarksSidebar.open();
+
+                if (chapterSidebar.active)
+                    chapterSidebar.close()
+
+                bookmarksSidebar.open()
             }
-            
-            onFullScreenButtonClicked:
-            {
-                if(internal.fullScreen)
-                    internal.stopFullScreenMode();
+
+            onFullScreenButtonClicked: {
+                if (internal.fullScreen)
+                    internal.stopFullScreenMode()
                 else
-                    internal.startFullScreenMode();
+                    internal.startFullScreenMode()
             }
-            
-            onSearchButtonClicked:
-            {
-                searchbar.visible = !searchbar.visible;
+
+            onSearchButtonClicked: {
+                searchbar.visible = !searchbar.visible
             }
-            
-            onOptionsPopupVisibileChanged:
-            {
+
+            onOptionsPopupVisibileChanged: {
                 optionsButton.active = !optionsButton.active
             }
-            
-            
-            PropertyAnimation
-            {
+
+            PropertyAnimation {
                 id: hideToolbar
                 target: toolbar
                 property: "opacity"
                 to: 0
                 duration: 100
-                
+
                 onFinished: toolbar.visible = false
             }
-            
-            PropertyAnimation
-            {
+
+            PropertyAnimation {
                 id: showToolbar
                 target: toolbar
                 property: "opacity"
                 to: 1
                 duration: 200
-                
+
                 onStarted: toolbar.visible = true
             }
         }
-        
-        
+
+
         /*
           Contains the reizeable sidebars, e.g. chapter or book-sidebar
           */
-        SplitView
-        {
+        SplitView {
             id: sidebarSplitView
             Layout.fillHeight: true
             Layout.fillWidth: true
             orientation: Qt.Horizontal
             padding: 0
             spacing: 10
-            handle: Rectangle { implicitWidth: 8; color: "transparent" }
+            handle: Rectangle {
+                implicitWidth: 8
+                color: "transparent"
+            }
             smooth: true
-            
+
+
             /*
               Need to combine sidebar items into one item, else rezising doesn't
               work properly, since the SplitView thinks they are 3 different items
               */
-            Item
-            {
+            Item {
                 id: sidebarItem
                 visible: chapterSidebar.active || bookmarksSidebar.active
                 // Load in the last width of the correct sidebar
-                SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth 
-                                                                 : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth : 0
-                SplitView.minimumWidth: chapterSidebar.visible || bookmarksSidebar.visible ? 140 : 0
+                SplitView.preferredWidth: chapterSidebar.visible ? chapterSidebar.lastWidth : bookmarksSidebar.visible ? bookmarksSidebar.lastWidth : 0
+                SplitView.minimumWidth: chapterSidebar.visible
+                                        || bookmarksSidebar.visible ? 140 : 0
                 SplitView.maximumWidth: 480
-                
-                
-                MChapterSidebar
-                {
+
+                MChapterSidebar {
                     id: chapterSidebar
                     property int lastWidth: 370
                     property bool active: false
                     anchors.fill: parent
                     visible: false
                     model: BookController.tableOfContents
-                    
+
                     // Save the last width to restore it if re-enabled
-                    onVisibleChanged: if(!visible) lastWidth = width
-                    onSwitchPage: (pageNumber, yOffset) => documentView.setPage(pageNumber, yOffset)
-                    
-                    
-                    Rectangle
-                    {
+                    onVisibleChanged: if (!visible)
+                                          lastWidth = width
+                    onSwitchPage: (pageNumber, yOffset) => documentView.setPage(
+                                      pageNumber, yOffset)
+
+                    Rectangle {
                         id: rightChaptersBorder
                         width: 1
                         height: parent.height
                         color: Style.colorDarkSeparator
                         anchors.right: parent.right
                     }
-                    
-                    
-                    function open()
-                    {
-                        chapterSidebar.active = true;
-                        chapterSidebar.visible = true;
-                        toolbar.chapterButton.active = true;
+
+                    function open() {
+                        chapterSidebar.active = true
+                        chapterSidebar.visible = true
+                        toolbar.chapterButton.active = true
                     }
-                    
-                    function close()
-                    {
-                        chapterSidebar.active = false;
-                        chapterSidebar.visible = false;
-                        toolbar.chapterButton.active = false;
-                        documentView.forceActiveFocus();
+
+                    function close() {
+                        chapterSidebar.active = false
+                        chapterSidebar.visible = false
+                        toolbar.chapterButton.active = false
+                        documentView.forceActiveFocus()
                     }
                 }
-                
-                MBookmarksSidebar
-                {
+
+                MBookmarksSidebar {
                     id: bookmarksSidebar
                     property int lastWidth: 300
                     property bool active: false
-                    
+
                     anchors.fill: parent
                     visible: false
-                    
+
                     // Save the last width to restore it if re-enabled
-                    onVisibleChanged: if(!visible) lastWidth = width
-                    
-                    
-                    Rectangle
-                    {
+                    onVisibleChanged: if (!visible)
+                                          lastWidth = width
+
+                    Rectangle {
                         id: rightBookmarksBorder
                         width: 1
                         height: parent.height
                         color: Style.colorDarkSeparator
                         anchors.right: parent.right
                     }
-                    
-                    
-                    function open()
-                    {
-                        bookmarksSidebar.active = true;
-                        bookmarksSidebar.visible = true;
-                        toolbar.bookmarksButton.active = true;
+
+                    function open() {
+                        bookmarksSidebar.active = true
+                        bookmarksSidebar.visible = true
+                        toolbar.bookmarksButton.active = true
                     }
-                    
-                    function close()
-                    {
-                        bookmarksSidebar.active = false;
-                        bookmarksSidebar.visible = false;
-                        toolbar.bookmarksButton.active = false;
+
+                    function close() {
+                        bookmarksSidebar.active = false
+                        bookmarksSidebar.visible = false
+                        toolbar.bookmarksButton.active = false
                     }
                 }
             }
-            
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: documentLayout
                 SplitView.fillWidth: true
                 SplitView.fillHeight: true
                 spacing: 0
                 clip: true
-                
-                
-                MDocumentView
-                {
+
+                MDocumentView {
                     id: documentView
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
             }
         }
-        
-        MReadingSearchbar
-        {
+
+        MReadingSearchbar {
             id: searchbar
             visible: false
             Layout.fillWidth: true
-            
-            onVisibleChanged: toolbar.searchButton.active = visible;
-            onSearchQueried: if(query.length) BookController.search(query)
+
+            onVisibleChanged: toolbar.searchButton.active = visible
+            onSearchQueried: if (query.length)
+                                 BookController.search(query)
             onClearQuery: BookController.clearSearch()
-            onNextButtonClicked: BookController.goToNextSearchHit();
-            onPreviousButtonClicked: BookController.goToPreviousSearchHit();
+            onNextButtonClicked: BookController.goToNextSearchHit()
+            onPreviousButtonClicked: BookController.goToPreviousSearchHit()
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property bool fullScreen: false
-        
-        
-        function startFullScreenMode()
-        {
-            if(internal.fullScreen)
-                return;
-            
-            internal.fullScreen = true;
-            hideToolbar.start();
+        property int prevCurrentPage: -1
+
+        function startFullScreenMode() {
+            if (internal.fullScreen)
+                return
+
+            internal.fullScreen = true
+            hideToolbar.start()
         }
-        
-        function stopFullScreenMode()
-        {
-            if(!internal.fullScreen)
-                return;
-            
-            internal.fullScreen = false;
-            showToolbar.start();
+
+        function stopFullScreenMode() {
+            if (!internal.fullScreen)
+                return
+
+            internal.fullScreen = false
+            showToolbar.start()
         }
-        
-        function goToStart()
-        {
-            documentView.setPage(0);
+
+        function goToStart() {
+            documentView.setPage(0)
         }
-        
-        function goToEnd()
-        {
-            documentView.setPage(BookController.pageCount - 1);
+
+        function goToEnd() {
+            documentView.setPage(BookController.pageCount - 1)
         }
-        
-        function saveCurrentPage()
-        {
-            var operationsMap = {};
-            operationsMap[LibraryController.MetaProperty.CurrentPage] = BookController.currentPage + 1;
-            LibraryController.updateBook(Globals.selectedBook.uuid, operationsMap);
+
+        function saveCurrentPage() {
+            let currentPage = BookController.currentPage + 1
+            if (currentPage == internal.prevCurrentPage)
+                return
+
+            var operationsMap = {}
+            operationsMap[LibraryController.MetaProperty.CurrentPage] = currentPage
+            LibraryController.updateBook(Globals.selectedBook.uuid,
+                                         operationsMap)
+
+            internal.prevCurrentPage = currentPage
         }
     }
 }
