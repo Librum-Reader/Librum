@@ -25,6 +25,7 @@ Popup {
     }
 
     onOpened: selectionOptionsListView.model = firstActionsPage
+
     Shortcut {
         sequence: SettingsController.shortcuts.CreateHighlight
         onActivated: {
@@ -53,6 +54,7 @@ Popup {
 
     ListView {
         id: selectionOptionsListView
+        property bool firstTimeOpened: true
 
         width: contentWidth
         height: parent.height
@@ -62,6 +64,12 @@ Popup {
         boundsBehavior: Flickable.StopAtBounds
 
         onModelChanged: {
+            // Prevent the selection popup being opened on initialization
+            if (firstTimeOpened) {
+                firstTimeOpened = false
+                return
+            }
+
             selectionOptionsListView.forceLayout()
             root.newWidth()
         }
