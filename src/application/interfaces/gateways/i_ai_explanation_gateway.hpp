@@ -24,6 +24,7 @@ public:
 
 signals:
     void wordReady(const QString& explanation);
+    void errorOccured(const int code);
 };
 
 }  // namespace application

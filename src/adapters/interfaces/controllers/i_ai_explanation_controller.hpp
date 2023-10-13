@@ -23,6 +23,7 @@ public:
 
 signals:
     void wordReady(const QString& word);
+    void limitReached();
 };
 
 }  // namespace adapters

@@ -9,6 +9,9 @@ AiExplanationGateway::AiExplanationGateway(
 {
     connect(m_aiExplanationAccess, &IAiExplanationAccess::wordReceived, this,
             &AiExplanationGateway::wordReady);
+
+    connect(m_aiExplanationAccess, &IAiExplanationAccess::errorOccured, this,
+            &AiExplanationGateway::errorOccured);
 }
 
 void AiExplanationGateway::getExplanation(const QString& authToken,

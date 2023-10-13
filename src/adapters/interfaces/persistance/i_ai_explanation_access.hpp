@@ -22,6 +22,7 @@ public:
 
 signals:
     void wordReceived(const QString& word) const;
+    void errorOccured(int errorCode) const;
 };
 
 }  // namespace adapters

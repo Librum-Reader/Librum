@@ -10,6 +10,10 @@ AiExplanationController::AiExplanationController(
     connect(m_aiExplanationService,
             &application::IAiExplanationService::wordReady, this,
             &AiExplanationController::wordReady);
+
+    connect(m_aiExplanationService,
+            &application::IAiExplanationService::limitReached, this,
+            &AiExplanationController::limitReached);
 }
 
 void AiExplanationController::getExplanation(const QString& text,

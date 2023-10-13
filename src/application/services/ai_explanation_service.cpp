@@ -1,4 +1,5 @@
 #include "ai_explanation_service.hpp"
+#include "error_code.hpp"
 
 namespace application::services
 {
@@ -7,8 +8,19 @@ AiExplanationService::AiExplanationService(
     IAiExplanationGateway* aiExplanationGateway) :
     m_aiExplanationGateway(aiExplanationGateway)
 {
-    connect(m_aiExplanationGateway, &IAiExplanationGateway::wordReady,
-            this, &AiExplanationService::wordReady);
+    connect(m_aiExplanationGateway, &IAiExplanationGateway::wordReady, this,
+            &AiExplanationService::wordReady);
+
+    connect(
+        m_aiExplanationGateway, &IAiExplanationGateway::errorOccured, this,
+        [this](int code)
+        {
+            if(code == static_cast<int>(
+                           error_codes::ErrorCode::AiExplanationLimitReached))
+            {
+                emit limitReached();
+            }
+        });
 }
 
 void AiExplanationService::getExplanation(const QString& text,

@@ -4,6 +4,7 @@
 #include <QJsonObject>
 #include <QNetworkRequest>
 #include <QRegularExpression>
+#include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
@@ -30,9 +31,15 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
     connect(reply, &QNetworkReply::readyRead, this,
             [this, reply, requestStartTime]()
             {
+                auto statusCode =
+                    reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                        .toInt();
+                if(statusCode != 200)
+                    return;
+
                 // Make sure to not process "old" requests. We can not abort the
                 // SSE so the server will continue sending data, we just need to
-                // ignore it.
+                // ignore old requests.
                 if(m_lastRequestStartTime != requestStartTime)
                     return;
 
@@ -56,8 +63,16 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
             });
 
     connect(reply, &QNetworkReply::finished, this,
-            [reply]()
+            [this, reply]()
             {
+                if(api_error_helper::apiRequestFailed(reply, 200))
+                {
+                    auto errorCode = api_error_helper::logErrorMessage(
+                        reply, "Ai explanation");
+
+                    emit errorOccured(errorCode);
+                }
+
                 reply->deleteLater();
             });
 }

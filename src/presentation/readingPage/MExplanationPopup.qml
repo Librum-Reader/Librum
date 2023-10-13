@@ -41,6 +41,10 @@ Popup {
         function onWordReady(word) {
             root.answer += word
         }
+
+        function onLimitReached() {
+            limitReachedWarning.visible = true
+        }
     }
 
     ListModel {
@@ -163,6 +167,47 @@ Popup {
                     readOnly: true
                     wrapMode: Text.WordWrap
                     selectionColor: Style.colorTextSelection
+                }
+            }
+
+            Item {
+                id: limitReachedWarning
+                anchors.fill: parent
+
+                ColumnLayout {
+                    width: parent.width
+                    anchors.centerIn: parent
+
+                    Image {
+                        id: limitReachedIllustration
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.topMargin: -30
+                        source: Icons.attentionPurple
+                        sourceSize.width: 270
+                        fillMode: Image.PreserveAspectFit
+                    }
+
+                    Label {
+                        id: limitReachedText
+                        Layout.alignment: Qt.AlignHCenter
+                        textFormat: Text.RichText
+                        text: 'You have reached your daily limit. Click <a href="update" style="color: ' + Style.colorBasePurple
+                              + '; text-decoration: none;">here</a> to learn more.'
+                        color: Style.colorTitle
+                        font.weight: Font.Medium
+                        font.pointSize: 14
+                        onLinkActivated: Qt.openUrlExternally(
+                                             AppInfoController.website + "/whyAiLimits")
+
+                        // Switch to the proper cursor when hovering above the link
+                        MouseArea {
+                            id: mouseArea
+                            acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
+                            anchors.fill: parent
+                            cursorShape: limitReachedText.hoveredLink
+                                         !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                        }
+                    }
                 }
             }
 

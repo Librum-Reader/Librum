@@ -16,26 +16,27 @@ Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 enum class APPLICATION_EXPORT ErrorCode
 {
     NoError = -1,
-    Unknown,
-    EmailOrPasswordIsWrong,
-    UserWithEmailAlreadyExists,
-    ProvidedDataIsInvalid,
-    NoBookWithThisIdWasFound,
-    InsufficientBookStorageSpace,
-    TagWithNameAlreadyExists,
-    NoTagWithThisNameExists,
-    InvalidEmailAddressFormat,
-    EmailAddressTooShort,
-    EmailAddressTooLong,
-    PasswordTooShort,
-    PasswordTooLong,
-    FirstNameTooShort,
-    FirstNameTooLong,
-    LastNameTooShort,
-    LastNameTooLong,
-    UserDoesNotExist,
-    AccountNotConfirmed,
-    TooManyRequests
+    Unknown,  // 0
+    EmailOrPasswordIsWrong,  // 1
+    UserWithEmailAlreadyExists,  // 2
+    ProvidedDataIsInvalid,  // 3
+    NoBookWithThisIdWasFound,  // 4
+    InsufficientBookStorageSpace,  // 5
+    TagWithNameAlreadyExists,  // 6
+    NoTagWithThisNameExists,  // 7
+    InvalidEmailAddressFormat,  // 8
+    EmailAddressTooShort,  // 9
+    EmailAddressTooLong,  // 10
+    PasswordTooShort,  // 11
+    PasswordTooLong,  // 12
+    FirstNameTooShort,  // 13
+    FirstNameTooLong,  // 14
+    LastNameTooShort,  // 15
+    LastNameTooLong,  // 16
+    UserDoesNotExist,  // 17
+    AccountNotConfirmed,  // 18
+    TooManyRequests,  // 19
+    AiExplanationLimitReached  // 20
 };
 
 Q_ENUM_NS(ErrorCode)
