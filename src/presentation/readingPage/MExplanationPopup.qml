@@ -200,11 +200,40 @@ Popup {
             }
         }
 
+        Item {
+            id: aiWarningItem
+            Layout.preferredWidth: warningLayout.width
+            Layout.preferredHeight: 20
+            Layout.alignment: Qt.AlignRight
+
+            RowLayout {
+                id: warningLayout
+                height: parent.height
+                spacing: 4
+
+                Image {
+                    id: actionImage
+                    Layout.alignment: Qt.AlignVCenter
+                    source: Icons.warningCircle
+                    sourceSize.width: 16
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Label {
+                    id: actionText
+                    Layout.topMargin: -1
+                    text: "Note: AI responses can be inaccurate"
+                    font.pointSize: 10
+                    color: Style.colorBasePurple
+                }
+            }
+        }
+
         MButton {
             id: askButton
             Layout.preferredWidth: 140
             Layout.preferredHeight: 38
-            Layout.topMargin: 16
+            Layout.topMargin: 4
             Layout.alignment: Qt.AlignLeft
             borderWidth: internal.dataChanged ? 0 : 1
             backgroundColor: internal.dataChanged ? Style.colorBasePurple : "transparent"
