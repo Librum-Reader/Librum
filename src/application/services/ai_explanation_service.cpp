@@ -20,6 +20,11 @@ AiExplanationService::AiExplanationService(
             {
                 emit limitReached();
             }
+            else if(code ==
+                    static_cast<int>(error_codes::ErrorCode::AiRequestTooLong))
+            {
+                emit requestTooLong();
+            }
         });
 }
 

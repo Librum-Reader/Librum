@@ -36,7 +36,8 @@ enum class APPLICATION_EXPORT ErrorCode
     UserDoesNotExist,  // 17
     AccountNotConfirmed,  // 18
     TooManyRequests,  // 19
-    AiExplanationLimitReached  // 20
+    AiExplanationLimitReached,  // 20
+    AiRequestTooLong,  // 21
 };
 
 Q_ENUM_NS(ErrorCode)

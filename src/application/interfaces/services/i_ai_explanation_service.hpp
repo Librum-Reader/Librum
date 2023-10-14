@@ -22,6 +22,7 @@ public slots:
 signals:
     void wordReady(const QString& word);
     void limitReached();
+    void requestTooLong();
 };
 
 }  // namespace application

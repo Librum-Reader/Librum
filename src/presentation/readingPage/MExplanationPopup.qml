@@ -43,7 +43,15 @@ Popup {
         }
 
         function onLimitReached() {
-            limitReachedWarning.visible = true
+            errorItem.visible = true
+            errorText.text
+                    = 'You have reached your daily limit. Click <a href="update" style="color: '
+                    + Style.colorBasePurple + '; text-decoration: none;">here</a> to learn more.'
+        }
+
+        function onRequestTooLong() {
+            errorItem.visible = true
+            errorText.text = 'Oops! The text is too long. Please shorten your selection.'
         }
     }
 
@@ -171,7 +179,7 @@ Popup {
             }
 
             Item {
-                id: limitReachedWarning
+                id: errorItem
                 visible: false
                 anchors.fill: parent
 
@@ -180,7 +188,7 @@ Popup {
                     anchors.centerIn: parent
 
                     Image {
-                        id: limitReachedIllustration
+                        id: errorIllustration
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: -30
                         source: Icons.attentionPurple
@@ -189,11 +197,10 @@ Popup {
                     }
 
                     Label {
-                        id: limitReachedText
+                        id: errorText
                         Layout.alignment: Qt.AlignHCenter
                         textFormat: Text.RichText
-                        text: 'You have reached your daily limit. Click <a href="update" style="color: ' + Style.colorBasePurple
-                              + '; text-decoration: none;">here</a> to learn more.'
+                        text: ""
                         color: Style.colorTitle
                         font.weight: Font.Medium
                         font.pointSize: 14
@@ -205,7 +212,7 @@ Popup {
                             id: mouseArea
                             acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
                             anchors.fill: parent
-                            cursorShape: limitReachedText.hoveredLink
+                            cursorShape: errorText.hoveredLink
                                          !== "" ? Qt.PointingHandCursor : Qt.ArrowCursor
                         }
                     }

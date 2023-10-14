@@ -14,6 +14,10 @@ AiExplanationController::AiExplanationController(
     connect(m_aiExplanationService,
             &application::IAiExplanationService::limitReached, this,
             &AiExplanationController::limitReached);
+
+    connect(m_aiExplanationService,
+            &application::IAiExplanationService::requestTooLong, this,
+            &AiExplanationController::requestTooLong);
 }
 
 void AiExplanationController::getExplanation(const QString& text,
