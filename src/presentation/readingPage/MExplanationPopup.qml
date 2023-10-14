@@ -33,6 +33,7 @@ Popup {
         root.question = ""
 
         internal.dataChanged = false
+        errorItem.visible = false
     }
 
     Connections {
