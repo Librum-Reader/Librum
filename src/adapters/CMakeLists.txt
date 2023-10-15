@@ -64,6 +64,10 @@ add_library(adapters
                     data_models/shortcuts_model/shortcuts_model.hpp
                     data_models/shortcuts_model/shortcuts_proxy_model.cpp
                     data_models/shortcuts_model/shortcuts_proxy_model.hpp
+                    data_models/bookmarks_model/bookmarks_model.cpp
+                    data_models/bookmarks_model/bookmarks_model.hpp
+                    data_models/bookmarks_model/bookmarks_proxy_model.cpp
+                    data_models/bookmarks_model/bookmarks_proxy_model.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -89,6 +93,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/free_books_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/bookmarks_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${DOMAIN_INCLUDES}

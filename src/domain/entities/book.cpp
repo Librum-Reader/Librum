@@ -32,9 +32,10 @@ bool Book::operator==(const Book& rhs) const
                          m_currentPage == rhs.m_currentPage;
     bool tagsAreTheSame = rhs.tagsAreTheSame(m_tags);
     bool highlightsAreTheSame = rhs.highlightsAreTheSame(m_highlights);
+    bool bookmarksAreTheSame = rhs.bookmarksAreTheSame(m_bookmarks);
 
     return tagsAreTheSame && highlightsAreTheSame && dataIsTheSame &&
-           m_metaData == rhs.m_metaData;
+           bookmarksAreTheSame && m_metaData == rhs.m_metaData;
 }
 
 const QUuid& Book::getUuid() const
@@ -136,6 +137,39 @@ void Book::removeHighlight(QUuid uuid)
         [&uuid](const Highlight& highlight)
         {
             return highlight.getUuid() == uuid;
+        });
+}
+
+const QList<Bookmark>& Book::getBookmarks() const
+{
+    return m_bookmarks;
+}
+
+void Book::setBookmarks(QList<Bookmark>&& bookmarks)
+{
+    m_bookmarks = std::move(bookmarks);
+}
+
+void Book::addBookmark(const Bookmark& bookmark)
+{
+    m_bookmarks.append(bookmark);
+}
+
+void Book::renameBookmark(const QUuid& uuid, const QString& newName)
+{
+    for(auto& bookmark : m_bookmarks)
+    {
+        if(bookmark.getUuid() == uuid)
+            bookmark.setName(newName);
+    }
+}
+
+void Book::removeBookmark(QUuid uuid)
+{
+    m_bookmarks.removeIf(
+        [&uuid](const Bookmark& bookmark)
+        {
+            return bookmark.getUuid() == uuid;
         });
 }
 
@@ -377,6 +411,20 @@ bool Book::highlightsAreTheSame(const QList<Highlight>& other) const
     return true;
 }
 
+bool Book::bookmarksAreTheSame(const QList<Bookmark>& other) const
+{
+    if(m_bookmarks.size() != other.size())
+        return false;
+
+    for(int i = 0; i < m_bookmarks.size(); ++i)
+    {
+        if(m_bookmarks.at(i) != other.at(i))
+            return false;
+    }
+
+    return true;
+}
+
 Tag* Book::getTagByUuid(const QUuid& uuid)
 {
     auto tagPosition = std::ranges::find_if(m_tags,
@@ -442,6 +490,8 @@ void Book::update(const Book& other)
         m_tags = other.getTags();
     if(!highlightsAreTheSame(other.getHighlights()))
         m_highlights = other.getHighlights();
+    if(!bookmarksAreTheSame(other.getBookmarks()))
+        m_bookmarks = other.getBookmarks();
 }
 
 bool Book::isValid() const
@@ -547,6 +597,7 @@ QByteArray Book::toJson() const
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
         { "highlights", serializeHighlights() },
+        { "bookmarks", serializeBookmarks() },
     };
 
     QJsonDocument doc(book);
@@ -579,6 +630,18 @@ QJsonArray Book::serializeHighlights() const
     return highlights;
 }
 
+QJsonArray Book::serializeBookmarks() const
+{
+    QJsonArray bookmarks;
+    for(const auto& bookmark : m_bookmarks)
+    {
+        auto obj = QJsonDocument::fromJson(bookmark.toJson()).object();
+        bookmarks.append(QJsonValue::fromVariant(obj));
+    }
+
+    return bookmarks;
+}
+
 Book Book::fromJson(const QJsonObject& jsonBook)
 {
     BookMetaData metaData = getBookMetaDataFromJson(jsonBook);
@@ -591,6 +654,7 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
     addHighlightsToBook(book, jsonBook["highlights"].toArray());
+    addBookmarksToBook(book, jsonBook["bookmarks"].toArray());
 
     return book;
 }
@@ -647,6 +711,17 @@ void Book::addHighlightsToBook(Book& book, const QJsonArray& jsonHighlights)
         Highlight highlight = Highlight::fromJson(highlightObject);
 
         book.addHighlight(highlight);
+    }
+}
+
+void Book::addBookmarksToBook(Book& book, const QJsonArray& jsonBookmarks)
+{
+    for(const auto& jsonBookmark : jsonBookmarks)
+    {
+        auto bookmarkObject = jsonBookmark.toObject();
+        auto bookmark = Bookmark::fromJson(bookmarkObject);
+
+        book.addBookmark(bookmark);
     }
 }
 

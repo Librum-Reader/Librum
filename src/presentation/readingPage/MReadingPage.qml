@@ -310,6 +310,13 @@ Page {
         }
     }
 
+    function getYOffset() {
+        let yOffset = documentView.getYOffset()
+        let restoredYOffset = yOffset / BookController.zoom
+
+        return restoredYOffset
+    }
+
     QtObject {
         id: internal
         property bool fullScreen: false

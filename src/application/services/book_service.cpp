@@ -132,6 +132,44 @@ const Highlight* BookService::getHighlightAtPoint(const QPointF& point,
     return nullptr;
 }
 
+const QList<domain::entities::Bookmark>& BookService::getBookmarks() const
+{
+    auto book = getBook();
+    return book->getBookmarks();
+}
+
+void BookService::addBookmark(const domain::entities::Bookmark& bookmark)
+{
+    auto book = getBook();
+
+    emit bookmarkInsertionStarted(book->getBookmarks().count());
+    book->addBookmark(bookmark);
+    emit bookmarkInsertionEnded();
+
+    m_libraryService->updateBook(*book);
+}
+
+void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
+{
+    auto book = getBook();
+
+    book->renameBookmark(uuid, newName);
+    emit bookmarkNameChanged(getIndexOfBookmark(uuid));
+
+    m_libraryService->updateBook(*book);
+}
+
+void BookService::removeBookmark(const QUuid& uuid)
+{
+    auto book = getBook();
+
+    emit bookmarkDeletionStarted(getIndexOfBookmark(uuid));
+    book->removeBookmark(uuid);
+    emit bookmarkDeletionEnded();
+
+    m_libraryService->updateBook(*book);
+}
+
 void BookService::followLink(const char* uri)
 {
     if(mupdf::ll_fz_is_external_link(uri))
@@ -217,6 +255,20 @@ const domain::entities::Book* BookService::getBook() const
         qWarning() << "Failed opening book with uuid: " << m_uuid;
 
     return book;
+}
+
+int BookService::getIndexOfBookmark(const QUuid& uuid) const
+{
+    auto book = getBook();
+
+    auto bookmarks = book->getBookmarks();
+    for(int i = 0; i < bookmarks.length(); ++i)
+    {
+        if(bookmarks.at(i).getUuid() == uuid)
+            return i;
+    }
+
+    return -1;
 }
 
 }  // namespace application::services

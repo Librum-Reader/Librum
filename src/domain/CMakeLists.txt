@@ -14,6 +14,8 @@ add_library(domain
                     entities/highlight.hpp
                     entities/rectf.cpp
                     entities/rectf.hpp
+                    entities/bookmark.cpp
+                    entities/bookmark.hpp
                     
                     value_objects/book_meta_data.hpp
                     value_objects/login_model.cpp

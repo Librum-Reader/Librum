@@ -5,6 +5,7 @@
 #include <QString>
 #include <QUuid>
 #include "book_meta_data.hpp"
+#include "bookmark.hpp"
 #include "domain_export.hpp"
 #include "highlight.hpp"
 #include "tag.hpp"
@@ -81,6 +82,12 @@ public:
     void changeHighlightColor(const QUuid& uuid, const QColor& newColor);
     void removeHighlight(QUuid uuid);
 
+    const QList<Bookmark>& getBookmarks() const;
+    void setBookmarks(QList<Bookmark>&& bookmarks);
+    void addBookmark(const Bookmark& bookmark);
+    void renameBookmark(const QUuid& uuid, const QString& newName);
+    void removeBookmark(QUuid uuid);
+
     const QDateTime& getCoverLastModified() const;
     void updateCoverLastModified();
     void setCoverLastModified(const QDateTime& newTime);
@@ -118,12 +125,16 @@ public:
 private:
     bool tagsAreTheSame(const QList<Tag>& other) const;
     bool highlightsAreTheSame(const QList<Highlight>& other) const;
+    bool bookmarksAreTheSame(const QList<Bookmark>& other) const;
     QJsonArray serializeTags() const;
     QJsonArray serializeHighlights() const;
+    QJsonArray serializeBookmarks() const;
     static value_objects::BookMetaData getBookMetaDataFromJson(
         const QJsonObject& jsonBook);
     static void addTagsToBook(Book& book, const QJsonArray& jsonTags);
-    static void addHighlightsToBook(Book& book, const QJsonArray& jsonTags);
+    static void addHighlightsToBook(Book& book,
+                                    const QJsonArray& jsonHighlights);
+    static void addBookmarksToBook(Book& book, const QJsonArray& jsonBookmarks);
     long getBytesFromSizeString(QString size) const;
     long getCoverSizeInBytes() const;
     QPair<long, QString> splitSizeStringInNumbersAndFormat(
@@ -137,6 +148,7 @@ private:
     int m_currentPage = 0;
     QList<Tag> m_tags;
     QList<Highlight> m_highlights;
+    QList<Bookmark> m_bookmarks;
 };
 
 }  // namespace domain::entities
