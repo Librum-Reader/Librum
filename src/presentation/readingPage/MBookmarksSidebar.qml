@@ -104,6 +104,8 @@ Item {
                         width: bookmarksView.width
 
                         onRightClicked: (mouse, index) => {
+                                            bookmarksView.currentIndex = index
+
                                             // Stop renaming current tag
 
                                             // Calculate tagOptionsPopup position
@@ -139,7 +141,7 @@ Item {
                         let uuid = BookController.addBookmark(
                                 "New Bookmark", BookController.currentPage,
                                 getYOffset())
-                        //                        bookmarksView.lastAddedUuid = uuid
+                        bookmarksView.lastAddedUuid = uuid
                     }
                 }
             }
@@ -161,6 +163,7 @@ Item {
                 text: "Go To"
 
                 onClicked: {
+                    bookmarksView.currentItem.goToBookmark()
                     bookmarkOptionsPopup.close()
                 }
             }
@@ -172,6 +175,7 @@ Item {
                 text: "Rename"
 
                 onClicked: {
+                    bookmarksView.currentItem.startRenaming()
                     bookmarkOptionsPopup.close()
                 }
             }
@@ -183,6 +187,8 @@ Item {
                 text: "Delete"
 
                 onClicked: {
+                    BookController.removeBookmark(
+                                bookmarksView.currentItem.uuid)
                     bookmarkOptionsPopup.close()
                 }
             }

@@ -153,12 +153,10 @@ void BookController::removeBookmark(const QString& uuid)
 
 void BookController::goToBookmark(const QString& uuid)
 {
-    qDebug() << "going to: " << uuid;
     for(auto& bookmark : m_bookService->getBookmarks())
     {
         if(bookmark.getUuid() == QUuid(uuid))
         {
-            qDebug() << "found";
             emit goToPosition(bookmark.getPageNumber(), bookmark.getYOffset());
             break;
         }
