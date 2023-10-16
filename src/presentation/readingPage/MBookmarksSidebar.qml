@@ -66,8 +66,10 @@ Item {
                 id: container
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.margins: 12
+                Layout.leftMargin: 12
+                Layout.rightMargin: 12
                 Layout.topMargin: 0
+                Layout.bottomMargin: 12
                 verticalPadding: 6
                 horizontalPadding: 4
                 background: Rectangle {
@@ -122,27 +124,26 @@ Item {
                 }
             }
 
-            Rectangle {
+            MButton {
+                id: addBookmarkButton
                 Layout.fillWidth: true
-                Layout.preferredHeight: 32
-                color: "green"
-                opacity: 0.5
+                Layout.preferredHeight: 36
+                Layout.leftMargin: 12
+                Layout.rightMargin: 12
+                Layout.bottomMargin: 12
+                backgroundColor: Style.colorContainerBackground
+                borderColor: Style.colorButtonBorder
+                opacityOnPressed: 0.7
+                radius: 4
+                text: "Add Bookmark"
 
-                Label {
-                    anchors.centerIn: parent
-                    text: "Add bookmark"
-                    color: Style.colorText
-                    font.pointSize: 11
-                }
-
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        let uuid = BookController.addBookmark(
-                                "New Bookmark", BookController.currentPage,
-                                getYOffset())
-                        bookmarksView.lastAddedUuid = uuid
-                    }
+                //                imagePath: Icons.closePopupWhite
+                //                imageSize: 12
+                onClicked: {
+                    let uuid = BookController.addBookmark(
+                            "New Bookmark", BookController.currentPage,
+                            getYOffset())
+                    bookmarksView.lastAddedUuid = uuid
                 }
             }
         }
