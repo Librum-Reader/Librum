@@ -1,7 +1,9 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import CustomComponents
 import Librum.style
+import Librum.icons
 import Librum.controllers
 
 Item {
@@ -61,7 +63,7 @@ Item {
             }
 
             Pane {
-                id: treeViewContainer
+                id: container
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.margins: 12
@@ -90,6 +92,7 @@ Item {
 
                 ListView {
                     id: bookmarksView
+                    property string lastAddedUuid
                     signal startRenaming(string uuid)
 
                     anchors.fill: parent
@@ -99,6 +102,20 @@ Item {
 
                     delegate: MBookmarkItem {
                         width: bookmarksView.width
+
+                        onRightClicked: (mouse, index) => {
+                                            // Stop renaming current tag
+
+                                            // Calculate tagOptionsPopup position
+                                            let mousePosition = mapToItem(
+                                                container, mouse.x, mouse.y)
+                                            bookmarkOptionsPopup.x = mousePosition.x + 1
+                                            bookmarkOptionsPopup.y = mousePosition.y + 1
+
+                                            // Open tagOptionsPopup
+                                            bookmarkOptionsPopup.index = index
+                                            bookmarkOptionsPopup.open()
+                                        }
                     }
                 }
             }
@@ -119,11 +136,54 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        print(getYOffset())
                         let uuid = BookController.addBookmark(
                                 "New Bookmark", BookController.currentPage,
                                 getYOffset())
+                        //                        bookmarksView.lastAddedUuid = uuid
                     }
+                }
+            }
+        }
+    }
+
+    MRightClickMenu {
+        id: bookmarkOptionsPopup
+        property int index: -1
+        property string originalTextOfLastEdited
+
+        visible: false
+
+        objectModel: ObjectModel {
+            MRightClickMenuItem {
+                width: bookmarkOptionsPopup.width
+                imagePath: Icons.checkCircle
+                imageSize: 17
+                text: "Go To"
+
+                onClicked: {
+                    bookmarkOptionsPopup.close()
+                }
+            }
+
+            MRightClickMenuItem {
+                width: bookmarkOptionsPopup.width
+                imagePath: Icons.edit
+                imageSize: 17
+                text: "Rename"
+
+                onClicked: {
+                    bookmarkOptionsPopup.close()
+                }
+            }
+
+            MRightClickMenuItem {
+                width: bookmarkOptionsPopup.width
+                imagePath: Icons.trash
+                imageSize: 16
+                text: "Delete"
+
+                onClicked: {
+                    bookmarkOptionsPopup.close()
                 }
             }
         }

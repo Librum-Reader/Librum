@@ -5,8 +5,10 @@ using domain::entities::Bookmark;
 namespace adapters::data_models
 {
 
-BookmarksModel::BookmarksModel(const QList<domain::entities::Bookmark>& data) :
-    m_data(data)
+BookmarksModel::BookmarksModel(const QUuid bookUuid,
+                               const application::IBookService* bookService) :
+    m_bookService(bookService),
+    m_bookUuid(bookUuid)
 {
 }
 
@@ -15,7 +17,7 @@ int BookmarksModel::rowCount(const QModelIndex& parent) const
     if(parent.isValid())
         return 0;
 
-    return m_data.size();
+    return m_bookService->getBookmarks().size();
 }
 
 QVariant BookmarksModel::data(const QModelIndex& index, int role) const
@@ -23,11 +25,12 @@ QVariant BookmarksModel::data(const QModelIndex& index, int role) const
     if(!index.isValid())
         return QVariant();
 
-    const Bookmark& bookmark = m_data.at(index.row());
+    auto bookmarks = m_bookService->getBookmarks();
+    const Bookmark& bookmark = bookmarks.at(index.row());
     switch(role)
     {
     case UuidRole:
-        return bookmark.getUuid();
+        return bookmark.getUuid().toString(QUuid::WithoutBraces);
     case NameRole:
         return bookmark.getName();
     case PageNumberRole:

@@ -3,6 +3,7 @@
 #include <QList>
 #include <bookmark.hpp>
 #include "adapters_export.hpp"
+#include "i_book_service.hpp"
 
 namespace adapters::data_models
 {
@@ -23,7 +24,8 @@ public:
         YOffsetRole
     };
 
-    BookmarksModel(const QList<domain::entities::Bookmark>& data);
+    BookmarksModel(const QUuid bookUuid,
+                   const application::IBookService* bookService);
 
     int rowCount(const QModelIndex& parent) const override;
     QVariant data(const QModelIndex& index, int role) const override;
@@ -37,7 +39,11 @@ public slots:
     void bookmarkNameChanged(int row);
 
 private:
-    const QList<domain::entities::Bookmark> m_data;
+    // We can not keep a reference to the book services books, since they
+    // are inside of a vector which can be relocated and thus lead to
+    // invalid pointers. Instead we keep a reference to the book service.
+    const application::IBookService* m_bookService;
+    QUuid m_bookUuid;
 };
 
 }  // namespace adapters::data_models

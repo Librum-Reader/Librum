@@ -56,8 +56,8 @@ public:
         const QPointF& point, int page) const = 0;
 
     virtual const QList<domain::entities::Bookmark>& getBookmark() const = 0;
-    Q_INVOKABLE virtual void addBookmark(const QString& name, int pageNumber,
-                                         float yOffset) = 0;
+    Q_INVOKABLE virtual QString addBookmark(const QString& name, int pageNumber,
+                                            float yOffset) = 0;
     Q_INVOKABLE virtual void renameBookmark(const QString& uuid,
                                             const QString& newName) = 0;
     Q_INVOKABLE virtual void removeBookmark(const QString& uuid) = 0;
@@ -101,7 +101,6 @@ signals:
     void searchCaseSensitiveChanged();
     void searchFromStartChanged();
     void bookmarksModelChanged();
-    void startRenamingBookmark(const QString& uuid);
 };
 
 }  // namespace adapters

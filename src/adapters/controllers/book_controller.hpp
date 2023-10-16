@@ -36,8 +36,8 @@ public:
         const QPointF& point, int page) const override;
 
     const QList<domain::entities::Bookmark>& getBookmark() const override;
-    void addBookmark(const QString& name, int pageNumber,
-                     float yOffset) override;
+    QString addBookmark(const QString& name, int pageNumber,
+                        float yOffset) override;
     void renameBookmark(const QString& uuid, const QString& newName) override;
     void removeBookmark(const QString& uuid) override;
     void goToBookmark(const QString& uuid) override;

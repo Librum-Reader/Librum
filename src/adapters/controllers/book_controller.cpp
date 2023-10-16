@@ -42,7 +42,7 @@ void BookController::setUp(QString uuid)
     m_bookService->setUp(QUuid(uuid));
 
     m_bookmarksModel = std::make_unique<data_models::BookmarksModel>(
-        m_bookService->getBookmarks());
+        QUuid(uuid), m_bookService);
     m_bookmarksProxyModel.setSourceModel(m_bookmarksModel.get());
 
 
@@ -132,14 +132,13 @@ const QList<Bookmark>& BookController::getBookmark() const
     return m_bookService->getBookmarks();
 }
 
-void BookController::addBookmark(const QString& name, int pageNumber,
-                                 float yOffset)
+QString BookController::addBookmark(const QString& name, int pageNumber,
+                                    float yOffset)
 {
     Bookmark bookmark(name, pageNumber, yOffset);
     m_bookService->addBookmark(bookmark);
 
-    emit startRenamingBookmark(
-        bookmark.getUuid().toString(QUuid::WithoutBraces));
+    return bookmark.getUuid().toString(QUuid::WithoutBraces);
 }
 
 void BookController::renameBookmark(const QString& uuid, const QString& newName)
@@ -154,10 +153,12 @@ void BookController::removeBookmark(const QString& uuid)
 
 void BookController::goToBookmark(const QString& uuid)
 {
+    qDebug() << "going to: " << uuid;
     for(auto& bookmark : m_bookService->getBookmarks())
     {
         if(bookmark.getUuid() == QUuid(uuid))
         {
+            qDebug() << "found";
             emit goToPosition(bookmark.getPageNumber(), bookmark.getYOffset());
             break;
         }

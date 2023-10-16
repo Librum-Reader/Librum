@@ -48,9 +48,10 @@ public:
 
     core::FilteredTOCModel* getTableOfContents() override;
 
-private:
     domain::entities::Book* getBook();
     const domain::entities::Book* getBook() const;
+
+private:
     int getIndexOfBookmark(const QUuid& uuid) const;
 
     ILibraryService* m_libraryService;
