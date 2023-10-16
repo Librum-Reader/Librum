@@ -56,7 +56,7 @@ Item {
                         color: "transparent"
                     }
 
-                    onTextEdited: BookController.tableOfContents.filterString = text
+                    onTextEdited: BookController.bookmarksModel.filterString = text
                 }
             }
 
