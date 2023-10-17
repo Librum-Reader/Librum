@@ -16,7 +16,6 @@ Rectangle {
     Component.onCompleted: {
         if (bookmarksView.lastAddedUuid === model.uuid) {
             startRenaming()
-
             bookmarksView.lastAddedUuid = ""
         }
     }
