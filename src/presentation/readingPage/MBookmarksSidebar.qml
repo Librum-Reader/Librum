@@ -8,7 +8,7 @@ import Librum.controllers
 
 Item {
     id: root
-    implicitWidth: 250
+    implicitWidth: 300
     implicitHeight: 600
 
     Rectangle {
@@ -108,16 +108,13 @@ Item {
                         onRightClicked: (mouse, index) => {
                                             bookmarksView.currentIndex = index
 
-                                            // Stop renaming current tag
-
                                             // Calculate tagOptionsPopup position
                                             let mousePosition = mapToItem(
                                                 container, mouse.x, mouse.y)
-                                            bookmarkOptionsPopup.x = mousePosition.x + 1
-                                            bookmarkOptionsPopup.y = mousePosition.y + 1
+                                            bookmarkOptionsPopup.x = mousePosition.x + 14
+                                            bookmarkOptionsPopup.y = mousePosition.y + 106
 
                                             // Open tagOptionsPopup
-                                            bookmarkOptionsPopup.index = index
                                             bookmarkOptionsPopup.open()
                                         }
                     }
@@ -127,18 +124,18 @@ Item {
             MButton {
                 id: addBookmarkButton
                 Layout.fillWidth: true
-                Layout.preferredHeight: 36
+                Layout.preferredHeight: 35
                 Layout.leftMargin: 12
                 Layout.rightMargin: 12
                 Layout.bottomMargin: 12
+                fontSize: 10.5
                 backgroundColor: Style.colorContainerBackground
                 borderColor: Style.colorButtonBorder
                 opacityOnPressed: 0.7
                 radius: 4
                 text: "Add Bookmark"
+                imageSize: 12
 
-                //                imagePath: Icons.closePopupWhite
-                //                imageSize: 12
                 onClicked: {
                     let uuid = BookController.addBookmark(
                             "New Bookmark", BookController.currentPage,
@@ -151,17 +148,14 @@ Item {
 
     MRightClickMenu {
         id: bookmarkOptionsPopup
-        property int index: -1
         property string originalTextOfLastEdited
-
-        visible: false
 
         objectModel: ObjectModel {
             MRightClickMenuItem {
                 width: bookmarkOptionsPopup.width
                 imagePath: Icons.checkCircle
                 imageSize: 17
-                text: "Go To"
+                text: "Follow"
 
                 onClicked: {
                     bookmarksView.currentItem.goToBookmark()
