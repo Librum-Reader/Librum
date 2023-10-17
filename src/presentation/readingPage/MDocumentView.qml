@@ -279,8 +279,7 @@ Pane {
     function setPage(pageNumber, yOffset = 0) {
         NavigationLogic.setPage(pageNumber)
 
-        let space = 10
-        pageView.contentY += yOffset * root.BookController.zoom - space
+        pageView.contentY += yOffset * root.BookController.zoom
     }
 
     function getYOffset() {
