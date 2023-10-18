@@ -10,6 +10,7 @@ Rectangle {
     property string uuid: model.uuid
     signal rightClicked(var mouse, int index)
 
+    opacity: area.pressed ? 0.78 : 1
     implicitHeight: 24
     color: "transparent"
 

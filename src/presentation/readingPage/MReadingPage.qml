@@ -249,7 +249,7 @@ Page {
 
                 MBookmarksSidebar {
                     id: bookmarksSidebar
-                    property int lastWidth: 300
+                    property int lastWidth: 370
                     property bool active: false
 
                     anchors.fill: parent
