@@ -29,8 +29,8 @@ bool BookmarksProxyModel::lessThan(const QModelIndex& left,
     QString leftName = sourceModel()->data(left, NameRole).toString();
     QString rightName = sourceModel()->data(right, NameRole).toString();
 
-    QString leftPageNr = sourceModel()->data(left, PageNumberRole).toString();
-    QString rightPageNr = sourceModel()->data(right, PageNumberRole).toString();
+    int leftPageNr = sourceModel()->data(left, PageNumberRole).toInt();
+    int rightPageNr = sourceModel()->data(right, PageNumberRole).toInt();
 
     // Sort alphabetically if no filter string is set
     if(m_filterString.isEmpty())
