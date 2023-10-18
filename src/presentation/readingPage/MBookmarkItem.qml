@@ -16,9 +16,20 @@ Rectangle {
 
     Component.onCompleted: {
         if (bookmarksView.lastAddedUuid === model.uuid) {
-            startRenaming()
             bookmarksView.lastAddedUuid = ""
+            renamingStartTimer.start()
         }
+    }
+
+    // For some reason qml sometimes forces the active focus to another item right
+    // after Component.onCompleted, which cancels the renaming. Using a timer with a
+    // minimal rename to trigger the start of the renaming fixes it.
+    Timer {
+        id: renamingStartTimer
+        interval: 10
+        repeat: false
+
+        onTriggered: startRenaming()
     }
 
     RowLayout {
