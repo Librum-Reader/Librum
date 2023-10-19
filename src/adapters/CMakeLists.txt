@@ -13,11 +13,13 @@ add_library(adapters
                     interfaces/controllers/i_book_controller.hpp
                     interfaces/controllers/i_app_info_controller.hpp
                     interfaces/controllers/i_dictionary_controller.hpp
+                    interfaces/controllers/i_ai_explanation_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     interfaces/persistance/i_app_info_access.hpp
                     interfaces/persistance/i_dictionary_access.hpp
+                    interfaces/persistance/i_ai_explanation_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
@@ -37,6 +39,8 @@ add_library(adapters
                     controllers/page_controller.hpp
                     controllers/dictionary_controller.cpp
                     controllers/dictionary_controller.hpp
+                    controllers/ai_explanation_controller.cpp
+                    controllers/ai_explanation_controller.hpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -50,6 +54,8 @@ add_library(adapters
                     gateways/app_info_gateway.hpp
                     gateways/dictionary_gateway.hpp
                     gateways/dictionary_gateway.cpp
+                    gateways/ai_explanation_gateway.cpp
+                    gateways/ai_explanation_gateway.hpp
                     
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp

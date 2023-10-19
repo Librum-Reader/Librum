@@ -47,6 +47,7 @@ Item {
     property string seed
     property string popupDroplet
     property string patreon
+    property string warningCircle
 
     // Illustrations
     property string addImage
@@ -260,6 +261,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 patreon: "/resources/images/light_mode/decoration/patreon_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                warningCircle: "/resources/images/light_mode/decoration/warning_circle_icon.svg"
             }
 
             // Illustrations
@@ -679,6 +684,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 patreon: "/resources/images/dark_mode/decoration/patreon_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                warningCircle: "/resources/images/dark_mode/decoration/warning_circle_icon.svg"
             }
 
             // Illustrations

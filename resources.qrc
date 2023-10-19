@@ -211,5 +211,7 @@
         <file>resources/animations/loading_animation.gif</file>
         <file>resources/images/dark_mode/illustrations/not_found.svg</file>
         <file>resources/images/light_mode/illustrations/not_found.svg</file>
+        <file>resources/images/light_mode/decoration/warning_circle_icon.svg</file>
+        <file>resources/images/dark_mode/decoration/warning_circle_icon.svg</file>
     </qresource>
 </RCC>

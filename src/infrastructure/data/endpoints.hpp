@@ -4,8 +4,7 @@
 namespace infrastructure::data
 {
 
-inline const QString domain { "https://api.librumreader.com" };
-
+inline const QString domain { "https://localhost:7084" };
 inline const QString freeBooksDomain { "https://freebooks.librumreader.com" };
 
 // Authentication
@@ -24,7 +23,10 @@ inline const QString binaryDownloadEndpoint {
     "https://librumstorageaccount.blob.core.windows.net/releases"
 };
 
-// Book storage
+// AI endpoint
+inline const QString aiCompletionEndpoint { domain + "/Ai/complete" };
+
+// Library storage
 inline const QString bookCreationEndpoint { domain + "/book" };
 inline const QString bookUpdateEndpoint { domain + "/book" };
 inline const QString bookDeletionEndpoint { domain + "/book" };
