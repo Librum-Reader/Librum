@@ -9,6 +9,11 @@ for %%A in ("%~dp0.") do set "currentDir=%%~fA"
 
 :: Create a temporary directory
 set "tempDir=%temp%\tempZipExtract"
+
+:: Check if tempDir exists, if so delete it
+if exist "%tempDir%\" rmdir /s /q "%tempDir%"
+
+:: Create tempDir
 mkdir "%tempDir%"
 
 echo %tempDir%
@@ -34,32 +39,50 @@ if errorlevel 1 (
     exit /b 1
 )
 
-:: Copy all immediate files from subfolders in the temporary directory to the current directory
+:: Copy files directly from the root of tempDir
+for %%F in ("%tempDir%\*.*") do (
+    copy "%%F" "%currentDir%\" /Y
+)
+
+:: Copy directories directly from the root of tempDir
+for /d %%E in ("%tempDir%\*") do (
+    xcopy "%%E" "%currentDir%\%%~nxE\" /E /I /Y
+)
+
+:: Copy files and directories from subfolders in tempDir
 for /d %%D in ("%tempDir%\*") do (
     pushd "%%D"
+    
+    :: Copy files from subdirectories
     for %%F in (*) do (
         copy "%%F" "%currentDir%\" /Y
     )
+
+    :: Copy directories from subdirectories
+    for /d %%E in ("*") do (
+        xcopy "%%E" "%currentDir%\%%E\" /E /I /Y
+    )
+
     popd
 )
 
 
-:: Copy files from the current directory
-xcopy "%tempDir%\*" "%currentDir%\" /I /Y
 
-:: Copy files from immediate subdirectories
-for /d %%D in ("%tempDir%\*") do (
-    xcopy "%%D\*" "%currentDir%\" /I /Y
-)
+
+
+:: Copy files from the current directory
+@REM xcopy "%tempDir%\*" "%currentDir%\" /I /Y
+
+@REM :: Copy files from immediate subdirectories
+@REM for /d %%D in ("%tempDir%\*") do (
+@REM     xcopy "%%D\*" "%currentDir%\" /I /Y
+@REM )
 
 
 :: Start librum once we are done
 start "" "%currentDir%\librum.exe"
 
-:: Clean up the temporary directory
+:: Clean up the temporary directory (optional)
 rmdir /s /q "%tempDir%"
-
-:: Delete the zip file
-del /f /q "%sourceZip%"
 
 endlocal
