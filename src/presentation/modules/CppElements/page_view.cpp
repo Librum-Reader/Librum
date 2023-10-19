@@ -188,24 +188,7 @@ void PageView::mousePressEvent(QMouseEvent* event)
     auto highlight = m_bookController->getHighlightAtPoint(point, m_pageNumber);
     if(highlight != nullptr)
     {
-        // Convert the domain::entities::ReftFs to QRectFs and scale them
-        auto rects = highlight->getRects();
-        QList<QRectF> qRects;
-        qRects.reserve(rects.size());
-        for(auto& rect : rects)
-        {
-            auto qRectF = rect.getQRect();
-            utils::scaleQRectFToZoom(qRectF, m_bookController->getZoom());
-            qRects.append(qRectF);
-        }
-
-        auto positions = getCenterXAndTopYFromRects(qRects);
-
-        auto uuidAsString = highlight->getUuid().toString(QUuid::WithoutBraces);
-        m_bookController->highlightSelected(positions.first, positions.second,
-                                            uuidAsString);
-        m_startedMousePressOnHighlight = true;
-
+        handleClickingOnHighlight(highlight);
         return;
     }
     m_startedMousePressOnHighlight = false;
@@ -218,6 +201,27 @@ void PageView::mousePressEvent(QMouseEvent* event)
     }
 
     m_selectionStart = point;
+}
+
+void PageView::handleClickingOnHighlight(const Highlight* highlight)
+{
+    // Scale the highlight rects (initially zoom of 1) to the current zoom and
+    // get the center x and top y position of the highlight.
+    auto rects = highlight->getRects();
+    QList<QRectF> qRects;
+    qRects.reserve(rects.size());
+    for(auto& rect : rects)
+    {
+        auto qRectF = rect.getQRect();
+        utils::scaleQRectFToZoom(qRectF, m_bookController->getZoom());
+        qRects.append(qRectF);
+    }
+    auto positions = getCenterXAndTopYFromRects(qRects);
+
+    auto uuidAsString = highlight->getUuid().toString(QUuid::WithoutBraces);
+    m_bookController->highlightSelected(positions.first, positions.second,
+                                        uuidAsString);
+    m_startedMousePressOnHighlight = true;
 }
 
 void PageView::mouseReleaseEvent(QMouseEvent* event)

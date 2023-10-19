@@ -4,7 +4,7 @@
 namespace infrastructure::data
 {
 
-inline const QString domain { "https://localhost:7084" };
+inline const QString domain { "https://api.librumreader.com" };
 inline const QString freeBooksDomain { "https://freebooks.librumreader.com" };
 
 // Authentication

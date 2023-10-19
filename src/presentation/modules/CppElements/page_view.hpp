@@ -85,6 +85,8 @@ private:
     void paintSelectionOnPage(QPainter& painter);
 
     void paintHighlightsOnPage(QPainter& painter);
+    void handleClickingOnHighlight(
+        const domain::entities::Highlight* highlight);
     void removeConflictingHighlights(domain::entities::Highlight& highlight);
     bool mouseAboveSelection(const QPointF mouse);
 
