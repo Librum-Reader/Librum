@@ -22,6 +22,8 @@
   <launchable type="desktop-id">librum.desktop</launchable>
 
   <releases>
+    <release version="0.10.0" date="2023-10-19">
+    </release>
     <release version="0.9.2" date="2023-10-02">
     </release>
     <release version="0.9.1" date="2023-09-27">
