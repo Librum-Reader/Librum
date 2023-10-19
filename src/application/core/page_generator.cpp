@@ -105,10 +105,7 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
             for(auto& link : m_links)
             {
                 auto newLinkRect =
-                    mupdf::fz_make_rect(link.rect().x0 - m_pageXOffset,
-                                        link.rect().y0 - m_pageYOffset,
-                                        link.rect().x1 - m_pageXOffset,
-                                        link.rect().y1 - m_pageYOffset);
+                    utils::moveRect(link.rect(), m_pageXOffset, m_pageYOffset);
                 link.fz_set_link_rect(newLinkRect);
             }
         }
