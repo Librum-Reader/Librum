@@ -51,8 +51,24 @@ void PageView::setBookController(BookController* newBookController)
                 if(pageNumber != m_pageNumber)
                     return;
 
-                m_selectionStart = QPointF(left.x(), left.y());
-                m_selectionEnd = QPointF(right.x(), right.y());
+                // The offsets are only valid once the page was rendered, make
+                // sure that it is always rendered first.
+                m_pageController->renderPage();
+
+                auto xOffset = m_pageController->getXOffset();
+                auto yOffset = m_pageController->getYOffset();
+                left = QPoint(left.x() - xOffset, left.y() - yOffset);
+                right = QPoint(right.x() - xOffset, right.y() - yOffset);
+
+                // The points received from this signal are relative to a zoom
+                // of 1, but all of the methods in this class handle points as
+                // if they have the currentZoom applied, so we need to scale it.
+                auto zoom = m_pageController->getZoom();
+                left = utils::scalePointToCurrentZoom(left, 1, zoom);
+                right = utils::scalePointToCurrentZoom(right, 1, zoom);
+
+                m_selectionStart = left;
+                m_selectionEnd = right;
 
                 createSelection();
             });
@@ -598,6 +614,11 @@ void PageView::setColorInverted(bool newColorInverted)
         update();
 
     m_firstTimeColorInverted = false;
+}
+
+float PageView::getYOffset() const
+{
+    return m_pageController->getYOffset();
 }
 
 }  // namespace cpp_elements

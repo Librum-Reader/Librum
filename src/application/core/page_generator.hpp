@@ -26,6 +26,9 @@ public:
     int getWidth() const;
     int getHeight() const;
 
+    int getPageXOffset() const;
+    int getPageYOffset() const;
+
     mupdf::FzPixmap renderPage(float zoom);
     void setInvertColor(bool newInvertColor);
 
@@ -46,6 +49,7 @@ private:
     void setupSymbolBounds();
     void setupLinks();
     mupdf::FzPixmap getEmptyPixmap(const mupdf::FzMatrix& matrix) const;
+    void setPageOffsets(int xOffset, int yOffset);
 
     const mupdf::FzDocument* m_document;
     std::unique_ptr<mupdf::FzPage> m_page;
@@ -56,6 +60,8 @@ private:
     QList<mupdf::FzLink> m_links;
     std::vector<fz_rect> m_symbolBounds;
     bool m_invertColor = false;
+    int m_pageXOffset = 0;
+    int m_pageYOffset = 0;
 };
 
 }  // namespace application::core

@@ -38,7 +38,7 @@ Pane {
         target: BookController
 
         function onGoToPosition(pageNumber, y) {
-            root.setPage(pageNumber, y)
+            root.setPage(pageNumber, y - pageView.currentItem.yOffset)
         }
 
         function onTextSelectionFinished(centerX, topY) {

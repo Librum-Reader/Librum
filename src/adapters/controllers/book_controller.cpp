@@ -27,9 +27,6 @@ BookController::BookController(application::IBookService* bookService) :
                 QPointF left(rect.left(), rect.center().y());
                 QPointF right(rect.right(), rect.center().y());
 
-                left = utils::scalePointToCurrentZoom(left, 1, getZoom());
-                right = utils::scalePointToCurrentZoom(right, 1, getZoom());
-
                 emit selectText(pageNumber, left, right);
             });
 

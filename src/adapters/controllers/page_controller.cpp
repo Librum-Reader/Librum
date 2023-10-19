@@ -1,6 +1,7 @@
 #include "page_controller.hpp"
 #include "fz_utils.hpp"
 #include "mupdf/classes.h"
+#include "mupdf/classes2.h"
 
 using namespace application::core;
 
@@ -20,6 +21,16 @@ int PageController::getWidth()
 int PageController::getHeight()
 {
     return m_pageGenerator.getHeight() * m_matrix.d;
+}
+
+int PageController::getXOffset() const
+{
+    return m_pageXOffset;
+}
+
+int PageController::getYOffset() const
+{
+    return m_pageYOffset;
 }
 
 void PageController::setZoom(float zoom)
@@ -49,6 +60,15 @@ QImage PageController::renderPage()
 
     auto zoom = m_matrix.a;
     m_pageImage = utils::qImageFromPixmap(m_pageGenerator.renderPage(zoom));
+
+    auto xOffset = m_pageGenerator.getPageXOffset();
+    auto yOffset = m_pageGenerator.getPageYOffset();
+    if(xOffset != m_pageXOffset || yOffset != m_pageYOffset)
+    {
+        m_pageXOffset = xOffset;
+        m_pageYOffset = yOffset;
+        emit pageOffsetsChanged(xOffset, yOffset);
+    }
 
     m_pageImageOutdated = false;
     return m_pageImage;
