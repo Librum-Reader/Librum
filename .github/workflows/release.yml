@@ -1,19 +1,13 @@
 ---
-name: Test
+name: Release
 
 on:
   workflow_dispatch:
   push:
+    tags:
+      - "v.[0-9]+.[0-9]+.[0-9]+"
     branches:
-      - dev*
       - main
-  pull_request:
-    branches:
-      - dev*
-      - main
-
-    
-    
     
 jobs:
   test:
@@ -45,14 +39,10 @@ jobs:
           cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DBUILD_TESTS=ON ..
           cmake --build .
           
-      - name: Run tests
-        run: |
-          cd build-Release
-          ctest
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3.1.3
+      - name: Publish release
+        uses: softprops/action-gh-release@v1
         with:
-          name: librum
+          name: ${{ github.ref_name }}
+          token: ${{ github.token }}
           path: |
              build-release/librum
