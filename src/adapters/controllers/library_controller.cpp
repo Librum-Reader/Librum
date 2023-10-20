@@ -71,6 +71,11 @@ LibraryController::LibraryController(
             &m_libraryModel,
             &data_models::LibraryModel::downloadingBookMediaProgressChanged);
 
+    // downloaded Project Gutenberg books
+    connect(
+        m_bookService,
+        &application::ILibraryService::downloadedProjectGutenbergBookIdsReady,
+        this, &LibraryController::downloadedProjectGutenbergBookIdsReady);
 
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
@@ -80,7 +85,7 @@ void LibraryController::syncWithServer()
     m_bookService->downloadBooks();
 }
 
-int LibraryController::addBook(const QString& path)
+int LibraryController::addBook(const QString& path, int projectGutenbergId)
 {
     auto localPath = QUrl(path).toLocalFile();
     QFileInfo fileInfo(localPath);
@@ -88,8 +93,12 @@ int LibraryController::addBook(const QString& path)
         return 0;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    auto result = m_bookService->addBook(localPath);
+    auto result = m_bookService->addBook(localPath, projectGutenbergId);
     QApplication::restoreOverrideCursor();
+
+    emit addingBookFinished(
+        projectGutenbergId,
+        result == BookOperationStatus::Success ? true : false);
 
     return static_cast<int>(result);
 }
@@ -307,6 +316,7 @@ void LibraryController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     auto pathWithScheme = QUrl::fromLocalFile(book.getCoverPath()).toString();
 
     bookDto.uuid = book.getUuid().toString(QUuid::WithoutBraces);
+    bookDto.projectGutenbergId = book.getProjectGutenbergId();
     bookDto.title = book.getTitle();
     bookDto.authors = book.getAuthors();
     bookDto.filePath = book.getFilePath();

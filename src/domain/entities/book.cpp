@@ -27,7 +27,9 @@ Book::Book(const QString& filePath, const BookMetaData& metaData,
 
 bool Book::operator==(const Book& rhs) const
 {
-    bool dataIsTheSame = m_uuid == rhs.m_uuid && m_filePath == rhs.m_filePath &&
+    bool dataIsTheSame = m_uuid == rhs.m_uuid &&
+                         m_projectGutenbergId == rhs.m_projectGutenbergId &&
+                         m_filePath == rhs.m_filePath &&
                          m_isDownloaded == rhs.m_isDownloaded &&
                          m_currentPage == rhs.m_currentPage;
     bool tagsAreTheSame = rhs.tagsAreTheSame(m_tags);
@@ -40,6 +42,16 @@ bool Book::operator==(const Book& rhs) const
 const QUuid& Book::getUuid() const
 {
     return m_uuid;
+}
+
+int Book::getProjectGutenbergId() const
+{
+    return m_projectGutenbergId;
+}
+
+void Book::setProjectGutenbergId(int newProjectGutenbergId)
+{
+    m_projectGutenbergId = newProjectGutenbergId;
 }
 
 const QString& Book::getTitle() const
@@ -525,6 +537,7 @@ QByteArray Book::toJson() const
 {
     QJsonObject book {
         { "uuid", getUuid().toString(QUuid::WithoutBraces) },
+        { "projectGutenbergId", getProjectGutenbergId() },
         { "title", getTitle() },
         { "authors", getAuthors() },
         { "creator", getCreator() },
@@ -585,14 +598,21 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     QString filePath = jsonBook["filePath"].toString();
     int currentPage = jsonBook["currentPage"].toInt();
     QString uuid = jsonBook["uuid"].toString();
+    int projectGutenbergId = jsonBook["projectGutenbergId"].toInt();
     bool existsOnlyOnClient = jsonBook["existsOnlyOnClient"].toBool(false);
 
     Book book(filePath, metaData, currentPage, uuid);
+    book.setProjectGutenbergId(projectGutenbergId);
     book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
     addHighlightsToBook(book, jsonBook["highlights"].toArray());
 
     return book;
+}
+
+bool Book::isFromProjectGutenberg() const
+{
+    return m_projectGutenbergId > 0;
 }
 
 BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)

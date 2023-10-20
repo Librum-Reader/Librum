@@ -72,6 +72,12 @@ FreeBooksController::FreeBooksController(
         &application::IFreeBooksService::downloadingBookMediaProgressChanged,
         &m_freeBooksModel,
         &data_models::FreeBooksModel::downloadingBookMediaProgressChanged);
+
+    // downloaded status changed
+    connect(m_freeBooksService,
+            &application::IFreeBooksService::bookIsDownloadedChanged,
+            &m_freeBooksModel,
+            &data_models::FreeBooksModel::bookIsDownloadedChanged);
 }
 
 void FreeBooksController::fetchFirstBooksMetadataPage()
@@ -116,6 +122,27 @@ void FreeBooksController::clearAllFilters()
 {
     m_filterAuthorsAndTitle.clear();
     m_firstPageIsLoaded = false;
+}
+
+bool FreeBooksController::isBookDownloaded(int id)
+{
+    return m_freeBooksService->isBookDownloaded(id);
+}
+
+void FreeBooksController::proccessDownloadedProjectGutenbergBookIds(
+    const std::set<int>& ids)
+{
+    m_freeBooksService->proccessDownloadedBookIds(ids);
+}
+
+void FreeBooksController::markBookAsDownloaded(int id)
+{
+    m_freeBooksService->markBookAsDownloaded(id);
+}
+
+void FreeBooksController::unmarkBookAsDownloaded(int id)
+{
+    m_freeBooksService->unmarkBookAsDownloaded(id);
 }
 
 data_models::FreeBooksModel* FreeBooksController::getFreeBooksModel()

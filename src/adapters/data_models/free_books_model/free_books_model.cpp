@@ -57,6 +57,8 @@ QVariant FreeBooksModel::data(const QModelIndex& index, int role) const
         return freeBook.mediaDownloadLink;
     case MediaDownloadProgressRole:
         return freeBook.mediaDownloadProgress;
+    case isDownloadedRole:
+        return freeBook.isDownloaded;
     default:
         return QVariant();
     }
@@ -74,6 +76,7 @@ QHash<int, QByteArray> FreeBooksModel::roleNames() const
         { CoverRole, "cover" },
         { MediaDownloadLink, "mediaDownloadLink" },
         { MediaDownloadProgressRole, "mediaDownloadProgress" },
+        { isDownloadedRole, "isDownloaded" },
     };
 
     return roles;
@@ -131,6 +134,11 @@ void FreeBooksModel::downloadingBookMediaProgressChanged(int row)
 {
     emit dataChanged(index(row, 0), index(row, 0),
                      { MediaDownloadProgressRole });
+}
+
+void FreeBooksModel::bookIsDownloadedChanged(int row)
+{
+    emit dataChanged(index(row, 0), index(row, 0), { isDownloadedRole });
 }
 
 void FreeBooksModel::clear()

@@ -23,9 +23,9 @@ signals:
     void fetchingFirstMetadataPageSuccessful(const bool success);
     void fetchingBooksMetaDataFinished(const QByteArray& data);
     void gettingBookCoverFinished(int id, const QByteArray& data);
-    void gettingBookMediaChunkReady(const QByteArray& data,
-                                    const bool isChunkLast, const QUuid& uuid,
-                                    const QString& format);
+    void gettingBookMediaChunkReady(int id, const QUuid& uuid,
+                                    const QByteArray& data,
+                                    const QString& format, bool isChunkLast);
     void gettingBookMediaProgressChanged(const int id, qint64 bytesReceived,
                                          qint64 bytesTotal);
 };

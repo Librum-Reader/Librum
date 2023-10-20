@@ -6,8 +6,8 @@
 #include <QString>
 #include <QUuid>
 #include <QVariant>
-#include "tag_dto.hpp"
 #include "adapters_export.hpp"
+#include "tag_dto.hpp"
 
 namespace adapters::dtos
 {
@@ -16,6 +16,7 @@ struct ADAPTERS_EXPORT BookDto
 {
     Q_GADGET
     Q_PROPERTY(QString uuid MEMBER uuid)
+    Q_PROPERTY(int projectGutenbergId MEMBER projectGutenbergId)
     Q_PROPERTY(QString title MEMBER title)
     Q_PROPERTY(QString authors MEMBER authors)
     Q_PROPERTY(QString filePath MEMBER filePath)
@@ -35,6 +36,7 @@ struct ADAPTERS_EXPORT BookDto
 
 public:
     QString uuid;
+    int projectGutenbergId;
     QString title;
     QString authors;
     QString filePath;

@@ -18,7 +18,7 @@ class ADAPTERS_EXPORT LibraryController : public ILibraryController
 public:
     LibraryController(application::ILibraryService* bookService);
 
-    int addBook(const QString& path) override;
+    int addBook(const QString& path, int projectGutenbergId = 0) override;
     int deleteBook(const QString& uuid) override;
     int deleteAllBooks() override;
     int uninstallBook(const QString& uuid) override;

@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <set>
 #include "adapters_export.hpp"
 #include "free_books_model.hpp"
 
@@ -23,13 +24,18 @@ public:
         const QString& authorsAndTitle) = 0;
     Q_INVOKABLE virtual QString getFilterAuthorsAndTitle() = 0;
     Q_INVOKABLE virtual void clearAllFilters() = 0;
+    Q_INVOKABLE virtual bool isBookDownloaded(int id) = 0;
+    Q_INVOKABLE virtual void proccessDownloadedProjectGutenbergBookIds(
+        const std::set<int>& ids) = 0;
+    Q_INVOKABLE virtual void markBookAsDownloaded(int id) = 0;
+    Q_INVOKABLE virtual void unmarkBookAsDownloaded(int id) = 0;
     virtual data_models::FreeBooksModel* getFreeBooksModel() = 0;
 
 signals:
     void startedFetchingFistMetadataPage();
     void fetchingFirstMetadataPageSuccessful(bool success);
     void foundNoBooks();
-    void gettingBookFinished(const QString& path);
+    void gettingBookFinished(const QString& path, int id);
 };
 
 }  // namespace adapters

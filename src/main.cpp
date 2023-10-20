@@ -183,7 +183,10 @@ int main(int argc, char* argv[])
     QObject::connect(userService, &application::IUserService::bookStorageDataUpdated,
                      libraryService, &application::ILibraryService::updateUsedBookStorage);
 
-
+    QObject::connect(libraryController.get(),
+                     &adapters::ILibraryController::downloadedProjectGutenbergBookIdsReady,
+                     freeBooksController.get(),
+                     &adapters::IFreeBooksController::proccessDownloadedProjectGutenbergBookIds);
 
     // Startup
     QQmlApplicationEngine engine;

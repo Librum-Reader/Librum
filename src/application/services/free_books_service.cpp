@@ -96,6 +96,62 @@ void FreeBooksService::deleteAllBooks()
     m_freeBooks.clear();
 }
 
+bool FreeBooksService::isBookDownloaded(int id)
+{
+    return m_downloadedFreeBookIds.contains(id);
+}
+
+void FreeBooksService::proccessDownloadedBookIds(const std::set<int>& newIds)
+{
+    QList<int> idsToDelete;
+    for(const auto& currentId : m_downloadedFreeBookIds)
+    {
+        if(!newIds.contains(currentId))
+            idsToDelete.append(currentId);
+    }
+
+    for(auto idToDelete : idsToDelete)
+        unmarkBookAsDownloaded(idToDelete);
+
+    for(const auto& newId : newIds)
+    {
+        if(!m_downloadedFreeBookIds.contains(newId))
+            markBookAsDownloaded(newId);
+    }
+
+    m_downloadedFreeBookIds = newIds;
+}
+
+void FreeBooksService::markBookAsDownloaded(int id)
+{
+    if(id <= invalidFreeBookId)
+        return;
+
+    auto* freeBook = getFreeBookById(id);
+    if(freeBook == nullptr)
+        return;
+
+    freeBook->isDownloaded = true;
+    m_downloadedFreeBookIds.insert(id);
+
+    emit bookIsDownloadedChanged(getFreeBookIndexById(id));
+}
+
+void FreeBooksService::unmarkBookAsDownloaded(int id)
+{
+    if(id <= invalidFreeBookId)
+        return;
+
+    auto* freeBook = getFreeBookById(id);
+    if(freeBook == nullptr)
+        return;
+
+    freeBook->isDownloaded = false;
+    m_downloadedFreeBookIds.erase(id);
+
+    emit bookIsDownloadedChanged(getFreeBookIndexById(id));
+}
+
 void FreeBooksService::fetchBooksMetadataPage(const QString& url)
 {
     m_freeBooksStorageGateway->fetchBooksMetadataPage(url);
@@ -115,9 +171,9 @@ void FreeBooksService::setBookCover(int id, const QImage& cover)
         cover.scaledToHeight(maxCoverHeight, Qt::SmoothTransformation);
 
     // scaledToHeight() will keep the aspect ratio, but will not prevent the
-    // cover getting wider than the actual maximal width. If this case occurs,
-    // and the image gets bigger than the maximal width, we don't have the
-    // option to keep the aspect ratio, we instead need to crop it.
+    // cover getting wider than the actual maximal width. If this case
+    // occurs, and the image gets bigger than the maximal width, we don't
+    // have the option to keep the aspect ratio, we instead need to crop it.
     if(freeBook->cover.width() > maxCoverWidth)
     {
         freeBook->cover =
@@ -129,8 +185,8 @@ void FreeBooksService::setBookCover(int id, const QImage& cover)
 }
 
 void FreeBooksService::saveDownloadedBookMediaChunkToFile(
-    const QByteArray& data, bool isLastChunk, const QUuid& uuid,
-    const QString& format)
+    int id, const QUuid& uuid, const QByteArray& data, const QString& format,
+    bool isLastChunk)
 {
     auto destDir = getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
@@ -141,7 +197,8 @@ void FreeBooksService::saveDownloadedBookMediaChunkToFile(
 
     if(isLastChunk)
     {
-        emit gettingBookFinished(QUrl::fromLocalFile(destination).toString());
+        emit gettingBookFinished(QUrl::fromLocalFile(destination).toString(),
+                                 id);
     }
 }
 

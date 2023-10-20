@@ -1,7 +1,7 @@
 #pragma once
+#include "adapters_export.hpp"
 #include "free_books_model.hpp"
 #include "i_free_books_controller.hpp"
-#include "adapters_export.hpp"
 #include "i_free_books_service.hpp"
 
 namespace adapters::controllers
@@ -21,6 +21,11 @@ public:
     void setFilterAuthorsAndTitle(const QString& authorsAndTitle) override;
     QString getFilterAuthorsAndTitle() override;
     void clearAllFilters() override;
+    bool isBookDownloaded(int id) override;
+    void proccessDownloadedProjectGutenbergBookIds(
+        const std::set<int>& ids) override;
+    void markBookAsDownloaded(int id) override;
+    void unmarkBookAsDownloaded(int id) override;
     data_models::FreeBooksModel* getFreeBooksModel() override;
 
 private slots:

@@ -6,8 +6,9 @@
 #include <QUrl>
 #include <QUuid>
 #include <QVariantMap>
-#include "book_dto.hpp"
+#include <set>
 #include "adapters_export.hpp"
+#include "book_dto.hpp"
 #include "library_proxy_model.hpp"
 
 namespace adapters
@@ -49,7 +50,8 @@ public:
     Q_ENUM(MetaProperty);
 
     Q_INVOKABLE virtual void syncWithServer() = 0;
-    Q_INVOKABLE virtual int addBook(const QString& path) = 0;
+    Q_INVOKABLE virtual int addBook(const QString& path,
+                                    int projectGutenbergId) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int deleteAllBooks() = 0;
     Q_INVOKABLE virtual int uninstallBook(const QString& uuid) = 0;
@@ -80,6 +82,8 @@ public slots:
 signals:
     void bookCountChanged();
     void storageLimitExceeded();
+    void addingBookFinished(int projectGutenbergId, bool result);
+    void downloadedProjectGutenbergBookIdsReady(const std::set<int>& ids);
 };
 
 }  // namespace adapters

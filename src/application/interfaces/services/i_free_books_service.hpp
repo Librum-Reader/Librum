@@ -1,8 +1,9 @@
 #pragma once
 #include <QObject>
+#include <set>
 #include <vector>
-#include "free_book.hpp"
 #include "application_export.hpp"
+#include "free_book.hpp"
 
 namespace application
 {
@@ -22,6 +23,10 @@ public:
     virtual const std::vector<domain::value_objects::FreeBook>&
         getFreeBooks() = 0;
     virtual void deleteAllBooks() = 0;
+    virtual bool isBookDownloaded(int id) = 0;
+    virtual void proccessDownloadedBookIds(const std::set<int>& newIds) = 0;
+    virtual void markBookAsDownloaded(int id) = 0;
+    virtual void unmarkBookAsDownloaded(int id) = 0;
 
 public slots:
     virtual void fetchBooksMetadataPage(const QString& url) = 0;
@@ -34,7 +39,7 @@ signals:
     void apiInfoReady(const int booksTotalCount,
                       const QString& nextMetadataPageUrl,
                       const QString& prevMetadataPageUrl);
-    void gettingBookFinished(const QString& filePath);
+    void gettingBookFinished(const QString& filePath, int id);
     void bookCoverDownloadFinished();
 
     void bookInsertionStarted(int index);
@@ -46,6 +51,7 @@ signals:
     void tagsChanged(int index);
     void dataChanged(int index);
     void downloadingBookMediaProgressChanged(int index);
+    void bookIsDownloadedChanged(int row);
 };
 
 }  // namespace application

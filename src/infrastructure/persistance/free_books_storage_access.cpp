@@ -86,7 +86,7 @@ void FreeBooksStorageAccess::getBookMedia(const int id, const QUuid& uuid,
     auto reply = m_networkAccessManager.get(request);
 
     connect(reply, &QNetworkReply::readyRead, this,
-            [this, reply, uuid]()
+            [this, reply, id, uuid]()
             {
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
@@ -97,15 +97,15 @@ void FreeBooksStorageAccess::getBookMedia(const int id, const QUuid& uuid,
                     return;
                 }
 
-                emit gettingBookMediaChunkReady(reply->readAll(), false, uuid,
-                                                "epub");
+                emit gettingBookMediaChunkReady(id, uuid, reply->readAll(),
+                                                "epub", false);
             });
 
     connect(reply, &QNetworkReply::finished, this,
-            [this, reply, uuid]()
+            [this, reply, id, uuid]()
             {
-                emit gettingBookMediaChunkReady(QByteArray(), true, uuid,
-                                                "epub");
+                emit gettingBookMediaChunkReady(id, uuid, QByteArray(), "epub",
+                                                true);
 
                 reply->deleteLater();
             });

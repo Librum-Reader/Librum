@@ -20,7 +20,8 @@ public:
                    ILibraryStorageManager* bookStorageManager);
 
     void downloadBooks() override;
-    BookOperationStatus addBook(const QString& filePath) override;
+    BookOperationStatus addBook(const QString& filePath,
+                                int projectGutenbergId = 0) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus deleteAllBooks() override;
     BookOperationStatus uninstallBook(const QUuid& uuid) override;
@@ -75,6 +76,7 @@ private:
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
     void deleteBookLocally(const domain::entities::Book& book);
+    std::set<int> getProjectGutenbergBookIds();
 
     IMetadataExtractor* m_bookMetadataHelper;
     ILibraryStorageManager* m_bookStorageManager;

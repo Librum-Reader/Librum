@@ -3,8 +3,8 @@
 #include <QByteArray>
 #include <QVariant>
 #include <vector>
-#include "free_book.hpp"
 #include "adapters_export.hpp"
+#include "free_book.hpp"
 
 namespace adapters::data_models
 {
@@ -25,6 +25,7 @@ public:
         CoverRole,
         MediaDownloadLink,
         MediaDownloadProgressRole,
+        isDownloadedRole,
         Invalid
     };
 
@@ -47,6 +48,7 @@ public slots:
     void startDeletingBook(int index);
     void endDeletingBook();
     void downloadingBookMediaProgressChanged(int row);
+    void bookIsDownloadedChanged(int row);
     void clear();
 
 signals:

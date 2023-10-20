@@ -1,8 +1,9 @@
 #pragma once
 #include <QDir>
+#include <set>
 #include <vector>
-#include "free_book.hpp"
 #include "application_export.hpp"
+#include "free_book.hpp"
 #include "i_free_books_service.hpp"
 #include "i_free_books_storage_gateway.hpp"
 
@@ -23,6 +24,10 @@ public:
     void deleteBookCover(const int id) override;
     std::vector<domain::value_objects::FreeBook>& getFreeBooks() override;
     void deleteAllBooks() override;
+    bool isBookDownloaded(int id) override;
+    void proccessDownloadedBookIds(const std::set<int>& newIds) override;
+    void markBookAsDownloaded(int id) override;
+    void unmarkBookAsDownloaded(int id) override;
 
 public slots:
     void fetchBooksMetadataPage(const QString& url) override;
@@ -31,9 +36,10 @@ public slots:
 
 private slots:
     void setBookCover(int id, const QImage& cover);
-    void saveDownloadedBookMediaChunkToFile(const QByteArray& data,
-                                            bool isLastChunk, const QUuid& uuid,
-                                            const QString& format);
+    void saveDownloadedBookMediaChunkToFile(int id, const QUuid& uuid,
+                                            const QByteArray& data,
+                                            const QString& format,
+                                            bool isLastChunk);
 
 private:
     void processBookMetadata(
@@ -49,6 +55,10 @@ private:
 
     IFreeBooksStorageGateway* m_freeBooksStorageGateway;
     std::vector<domain::value_objects::FreeBook> m_freeBooks;
+
+    // Use std::set for quicker searching
+    std::set<int> m_downloadedFreeBookIds;
+    static const int invalidFreeBookId = 0;
 
     QString m_userEmail;
     static const int maxCoverWidth { 188 };

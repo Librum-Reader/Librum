@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include <QUuid>
+#include <set>
 #include <vector>
 #include "application_export.hpp"
 #include "book.hpp"
@@ -21,7 +22,8 @@ public:
     virtual ~ILibraryService() noexcept = default;
 
     virtual void downloadBooks() = 0;
-    virtual BookOperationStatus addBook(const QString& filePath) = 0;
+    virtual BookOperationStatus addBook(const QString& filePath,
+                                        int projectGutenbergId) = 0;
     virtual BookOperationStatus deleteBook(const QUuid& uuid) = 0;
     virtual BookOperationStatus deleteAllBooks() = 0;
     virtual BookOperationStatus uninstallBook(const QUuid& uuid) = 0;
@@ -66,6 +68,7 @@ signals:
     void dataChanged(int index);
     void storageLimitExceeded();
     void downloadingBookMediaProgressChanged(int index);
+    void downloadedProjectGutenbergBookIdsReady(const std::set<int>& ids);
 };
 
 }  // namespace application

@@ -39,6 +39,16 @@ Page {
         }
     }
 
+    Connections {
+        target: LibraryController
+
+        function onAddingBookFinished(id, result) {
+            if (result) {
+                FreeBooksController.markBookAsDownloaded(id)
+            }
+        }
+    }
+
     Component.onCompleted: {
         if (FreeBooksController.getFilterAuthorsAndTitle() !== "") {
             toolbar.openSearchingBar()
@@ -137,8 +147,12 @@ Page {
                         }
                     }
 
-                    Component.onCompleted: FreeBooksController.getBookCover(
-                                               model.id)
+                    Component.onCompleted: {
+                        FreeBooksController.getBookCover(model.id)
+
+                        if (FreeBooksController.isBookDownloaded(model.id))
+                            FreeBooksController.markBookAsDownloaded(model.id)
+                    }
                     Component.onDestruction: FreeBooksController.deleteBookCover(
                                                  model.id)
                 }

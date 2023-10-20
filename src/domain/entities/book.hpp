@@ -22,6 +22,10 @@ public:
 
     const QUuid& getUuid() const;
 
+    int getProjectGutenbergId() const;
+    void setProjectGutenbergId(int newProjectGutenbergId);
+    bool isFromProjectGutenberg() const;
+
     const QString& getTitle() const;
     void setTitle(const QString& newTitle);
 
@@ -107,7 +111,6 @@ public:
     QByteArray toJson() const;
     static Book fromJson(const QJsonObject& jsonBook);
 
-
     static const int maxCoverWidth { 188 };
     static const int maxCoverHeight { 238 };
 
@@ -130,6 +133,7 @@ private:
         const QString& sizeString) const;
 
     QUuid m_uuid;
+    int m_projectGutenbergId = 0;
     value_objects::BookMetaData m_metaData;
     QString m_filePath;
     bool m_isDownloaded = true;

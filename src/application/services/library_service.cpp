@@ -70,7 +70,8 @@ void LibraryService::downloadBooks()
     m_bookStorageManager->downloadRemoteBooks();
 }
 
-BookOperationStatus LibraryService::addBook(const QString& filePath)
+BookOperationStatus LibraryService::addBook(const QString& filePath,
+                                            int projectGutenbergId)
 {
     auto success = m_bookMetadataHelper->setup(filePath);
     if(!success)
@@ -97,6 +98,8 @@ BookOperationStatus LibraryService::addBook(const QString& filePath)
     book.updateCoverLastModified();
     book.setHasCover(true);
     book.setCoverPath(coverPath);
+
+    book.setProjectGutenbergId(projectGutenbergId);
 
     addBookToLibrary(book);
 
@@ -597,6 +600,8 @@ void LibraryService::updateLibrary(std::vector<Book>& books)
     // to make sure that both libraries are synchronized.
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
+
+    emit downloadedProjectGutenbergBookIdsReady(getProjectGutenbergBookIds());
 }
 
 void LibraryService::mergeRemoteLibraryIntoLocalLibrary(
@@ -679,6 +684,17 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     emit bookDeletionEnded();
 
     m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
+}
+
+std::set<int> LibraryService::getProjectGutenbergBookIds()
+{
+    std::set<int> result;
+
+    for(const auto& book : m_books)
+        if(book.isFromProjectGutenberg())
+            result.insert(book.getProjectGutenbergId());
+
+    return result;
 }
 
 void LibraryService::refreshUIWithNewCover(const QUuid& uuid,
