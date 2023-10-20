@@ -48,15 +48,18 @@ Rectangle {
         TextInput {
             id: nameText
             Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
             Layout.leftMargin: 4
             text: model.name
             color: Style.colorText
             font.pointSize: 11
             selectionColor: Style.colorTextSelection
+            clip: true
 
             onAccepted: {
                 root.forceActiveFocus()
                 nameText.deselect()
+                cursorPosition = 0
                 BookController.renameBookmark(model.uuid, nameText.text)
 
                 nameText.text = Qt.binding(function () {
