@@ -20,8 +20,13 @@ public:
     FzPointPair getPositionsForLineSelection(mupdf::FzPoint point);
     std::string getTextFromSelection(mupdf::FzPoint start, mupdf::FzPoint end);
 
+    void setPageXOffset(int newXOffset);
+    void setPageYOffset(int newYOffset);
+
 private:
     mupdf::FzStextPage* m_textPage;
+    int m_pageXOffset = 0;
+    int m_pageYOffset = 0;
 };
 
 }  // namespace application::core::utils

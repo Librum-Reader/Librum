@@ -93,6 +93,14 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AppInfoController",
                                  appInfoController.get());
 
+    // Ai explanation
+    auto* aiExplanationService =
+        config::diConfig().create<application::IAiExplanationService*>();
+    auto aiExplanationController =
+        std::make_unique<AiExplanationController>(aiExplanationService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "AiExplanationController",
+                                 aiExplanationController.get());
+
     // User Stack
     auto* userService = config::diConfig().create<application::IUserService*>();
     auto userController = std::make_unique<UserController>(userService);
@@ -161,6 +169,12 @@ int main(int argc, char* argv[])
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      freeBooksService, &application::IFreeBooksService::setupUserData);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     aiExplanationService, &application::IAiExplanationService::setupUserData);
+
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+                     aiExplanationService, &application::IAiExplanationService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         freeBooksService, &application::IFreeBooksService::clearUserData);

@@ -1,10 +1,14 @@
 #include "book_controller.hpp"
 #include <QUuid>
+#include "bookmark.hpp"
+#include "bookmarks_model.hpp"
 #include "fz_utils.hpp"
 #include "highlight.hpp"
+#include "i_book_service.hpp"
 #include "search_options.hpp"
 
 using namespace application::core;
+using domain::entities::Bookmark;
 using domain::entities::Highlight;
 
 namespace adapters::controllers
@@ -23,9 +27,6 @@ BookController::BookController(application::IBookService* bookService) :
                 QPointF left(rect.left(), rect.center().y());
                 QPointF right(rect.right(), rect.center().y());
 
-                left = utils::scalePointToCurrentZoom(left, 1, getZoom());
-                right = utils::scalePointToCurrentZoom(right, 1, getZoom());
-
                 emit selectText(pageNumber, left, right);
             });
 
@@ -36,6 +37,32 @@ BookController::BookController(application::IBookService* bookService) :
 void BookController::setUp(QString uuid)
 {
     m_bookService->setUp(QUuid(uuid));
+
+    m_bookmarksModel = std::make_unique<data_models::BookmarksModel>(
+        QUuid(uuid), m_bookService);
+    m_bookmarksProxyModel.setSourceModel(m_bookmarksModel.get());
+
+
+    // Connections to bookmarks model
+    connect(m_bookService, &application::IBookService::bookmarkInsertionStarted,
+            m_bookmarksModel.get(),
+            &data_models::BookmarksModel::startInsertingBookmark);
+
+    connect(m_bookService, &application::IBookService::bookmarkInsertionEnded,
+            m_bookmarksModel.get(),
+            &data_models::BookmarksModel::endInsertingBookmark);
+
+    connect(m_bookService, &application::IBookService::bookmarkDeletionStarted,
+            m_bookmarksModel.get(),
+            &data_models::BookmarksModel::startDeletingBookmark);
+
+    connect(m_bookService, &application::IBookService::bookmarkDeletionStarted,
+            m_bookmarksModel.get(),
+            &data_models::BookmarksModel::endDeletingBookmark);
+
+    connect(m_bookService, &application::IBookService::bookmarkNameChanged,
+            m_bookmarksModel.get(),
+            &data_models::BookmarksModel::bookmarkNameChanged);
 }
 
 mupdf::FzDocument* BookController::getFzDocument()
@@ -63,12 +90,12 @@ void BookController::goToPreviousSearchHit()
     m_bookService->goToPreviousSearchHit();
 }
 
-const QList<domain::entities::Highlight>& BookController::getHighlights() const
+const QList<Highlight>& BookController::getHighlights() const
 {
     return m_bookService->getHighlights();
 }
 
-void BookController::addHighlight(const domain::entities::Highlight& highlight)
+void BookController::addHighlight(const Highlight& highlight)
 {
     m_bookService->addHighlight(highlight);
 }
@@ -95,6 +122,42 @@ const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
     auto restoredPoint = utils::restoreQPoint(point, getZoom());
 
     return m_bookService->getHighlightAtPoint(restoredPoint, page);
+}
+
+const QList<Bookmark>& BookController::getBookmark() const
+{
+    return m_bookService->getBookmarks();
+}
+
+QString BookController::addBookmark(const QString& name, int pageNumber,
+                                    float yOffset)
+{
+    Bookmark bookmark(name, pageNumber, yOffset);
+    m_bookService->addBookmark(bookmark);
+
+    return bookmark.getUuid().toString(QUuid::WithoutBraces);
+}
+
+void BookController::renameBookmark(const QString& uuid, const QString& newName)
+{
+    m_bookService->renameBookmark(QUuid(uuid), newName);
+}
+
+void BookController::removeBookmark(const QString& uuid)
+{
+    m_bookService->removeBookmark(QUuid(uuid));
+}
+
+void BookController::goToBookmark(const QString& uuid)
+{
+    for(auto& bookmark : m_bookService->getBookmarks())
+    {
+        if(bookmark.getUuid() == QUuid(uuid))
+        {
+            emit goToPosition(bookmark.getPageNumber(), bookmark.getYOffset());
+            break;
+        }
+    }
 }
 
 void BookController::followLink(const char* uri)
@@ -172,6 +235,11 @@ void BookController::setSearchFromStart(bool newSearchFromStart)
 FilteredTOCModel* BookController::getTableOfContents()
 {
     return m_bookService->getTableOfContents();
+}
+
+data_models::BookmarksProxyModel* BookController::getBookmarksModel()
+{
+    return &m_bookmarksProxyModel;
 }
 
 }  // namespace adapters::controllers

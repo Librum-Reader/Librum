@@ -1,8 +1,10 @@
 #include "page_generator.hpp"
+#include <math.h>
 #include <cmath>
 #include "fz_utils.hpp"
 #include "mupdf/classes.h"
 #include "mupdf/classes2.h"
+#include "mupdf/fitz/geometry.h"
 
 namespace application::core
 {
@@ -79,6 +81,36 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
     auto pixmap = getEmptyPixmap(matrix);
     auto drawDevice = mupdf::fz_new_draw_device(mupdf::FzMatrix(), pixmap);
 
+    // Determine the page offset the first time we render the page
+    if(m_pageXOffset == 0 && m_pageYOffset == 0)
+    {
+        int restoredXOffset = round(pixmap.x() / zoom);
+        int restoredYOffset = round(pixmap.y() / zoom);
+        if(restoredXOffset != 0 && restoredYOffset != 0)
+        {
+            setPageOffsets(restoredXOffset, restoredYOffset);
+
+            std::vector<fz_rect> newSymbolBounds;
+            for(auto& rect : m_symbolBounds)
+            {
+                auto newRect = fz_make_rect(
+                    rect.x0 - m_pageXOffset, rect.y0 - m_pageYOffset,
+                    rect.x1 - m_pageXOffset, rect.y1 - m_pageYOffset);
+
+                newSymbolBounds.emplace_back(newRect);
+            }
+            m_symbolBounds = newSymbolBounds;
+
+
+            for(auto& link : m_links)
+            {
+                auto newLinkRect =
+                    utils::moveRect(link.rect(), m_pageXOffset, m_pageYOffset);
+                link.fz_set_link_rect(newLinkRect);
+            }
+        }
+    }
+
     mupdf::FzCookie cookie;
     mupdf::FzRect rect = mupdf::FzRect::Fixed_INFINITE;
     m_displayList.fz_run_display_list(drawDevice, matrix, rect, cookie);
@@ -103,6 +135,15 @@ mupdf::FzPixmap PageGenerator::getEmptyPixmap(
     return pixmap;
 }
 
+void PageGenerator::setPageOffsets(int xOffset, int yOffset)
+{
+    m_pageXOffset = xOffset;
+    m_pageYOffset = yOffset;
+
+    m_textSelector.setPageXOffset(xOffset);
+    m_textSelector.setPageYOffset(yOffset);
+}
+
 void imageCleanupHandler(void* data)
 {
     unsigned char* samples = static_cast<unsigned char*>(data);
@@ -121,6 +162,16 @@ int PageGenerator::getHeight() const
     auto bbox = m_page->fz_bound_page_box(FZ_CROP_BOX);
 
     return (bbox.y1 - bbox.y0);
+}
+
+int PageGenerator::getPageXOffset() const
+{
+    return m_pageXOffset;
+}
+
+int PageGenerator::getPageYOffset() const
+{
+    return m_pageYOffset;
 }
 
 QList<mupdf::FzQuad>& PageGenerator::getBufferedSelectionRects()

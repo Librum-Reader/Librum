@@ -445,7 +445,7 @@ Page {
         acceptLabel: "Import"
         fileMode: FileDialog.FileMode.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: ["All files (*)", "PDF files (*.pdf)", "EPUB files (*.epub)", "HTML files (*.html *.htm)", "Text files (*.txt)", "MOBI files (*.mobi)"]
+        nameFilters: ["All files (*)", "PDF files (*.pdf)", "EPUB files (*.epub)", "MOBI files (*.mobi)", "HTML files (*.html *.htm)", "Text files (*.txt)"]
 
         onAccepted: {
             for (var i = 0; i < files.length; ++i) {

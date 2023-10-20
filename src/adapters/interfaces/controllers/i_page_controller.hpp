@@ -21,6 +21,9 @@ public:
     virtual int getWidth() = 0;
     virtual int getHeight() = 0;
 
+    virtual int getXOffset() const = 0;
+    virtual int getYOffset() const = 0;
+
     virtual void setZoom(float zoom) = 0;
     virtual float getZoom() = 0;
 
@@ -42,6 +45,9 @@ public:
         QPointF point) = 0;
     virtual QString getTextFromSelection(const QPointF& start,
                                          const QPointF& end) = 0;
+
+signals:
+    void pageOffsetsChanged(int xOffset, int yOffset);
 };
 
 }  // namespace adapters

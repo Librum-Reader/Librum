@@ -3,9 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
 
-
-Item
-{
+Item {
     id: root
     property alias text: inputField.text
     property int boxHeight: 40
@@ -35,22 +33,19 @@ Item
     property bool textHidden: toggledImage.length > 0 ? true : false
     property var validator: null
     signal edited
-    
+
     implicitWidth: 100
     implicitHeight: layout.height
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         width: parent.width
-        height: header.implicitHeight + inputBox.height + 
-                (errorText.visible && root.errorText != "" ? errorText.implicitHeight : 0)
+        height: header.implicitHeight + inputBox.height
+                + (errorText.visible
+                   && root.errorText != "" ? errorText.implicitHeight : 0)
         spacing: root.headerToBoxSpacing
-        
-        
-        Label
-        {
+
+        Label {
             id: header
             Layout.fillWidth: true
             visible: root.hasHeader
@@ -59,32 +54,26 @@ Item
             font.weight: root.headerFontWeight
             color: root.headerFontColor
         }
-        
-        Pane
-        {
+
+        Pane {
             id: inputBox
             Layout.fillWidth: true
             Layout.preferredHeight: root.boxHeight
             padding: 0
-            background: Rectangle
-            {
+            background: Rectangle {
                 id: backgroundRect
                 border.width: root.borderWidth
                 border.color: root.borderColor
                 radius: root.borderRadius
                 color: root.backgroundColor
             }
-            
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: inBoxLayout
                 anchors.fill: parent
                 spacing: 0
-                
-                
-                TextField
-                {
+
+                TextField {
                     id: inputField
                     Layout.fillWidth: true
                     leftPadding: root.textPadding
@@ -100,50 +89,46 @@ Item
                     selectionColor: Style.colorTextSelection
                     validator: root.validator
                     selectedTextColor: root.inputFontColor
-                    background: Rectangle   
-                    {
+                    background: Rectangle {
                         anchors.fill: parent
                         radius: root.borderRadius
                         color: "transparent"
                     }
-                    
+
                     // Make sure the cursor is at the start
                     onActiveFocusChanged: resetCursorPositionToStart()
                     onTextChanged: resetCursorPositionToStart()
-                    onTextEdited:
-                    {
-                        root.edited();
-                        
-                        if(clearErrorOnEdit)
-                            root.clearError();
+                    onTextEdited: {
+                        root.edited()
+
+                        if (clearErrorOnEdit)
+                            root.clearError()
                     }
-                    
+
+
                     /**
                      In certain text-size / container-height proportions the text position
                      is too low, this makes sure that the text is always centered
                      */
-                    Component.onCompleted:
-                    {
+                    Component.onCompleted: {
                         // If the size difference is too big, move the input field up by 1px
-                        if((inputBox.height/inputField.implicitHeight) > 0.2)
-                        {
-                            inputField.Layout.topMargin -= 1;
+                        if ((inputBox.height / inputField.implicitHeight) > 0.2) {
+                            inputField.Layout.topMargin -= 1
                         }
                     }
-                    
+
+
                     /**
                      If the text is longer than the container-width, the text is automatically
                      scrolled to the right. This resets the cursor to the start of the text
                      */
-                    function resetCursorPositionToStart()
-                    {
-                        if(!inputField.activeFocus)
-                            inputField.cursorPosition = 0;
+                    function resetCursorPositionToStart() {
+                        if (!inputField.activeFocus)
+                            inputField.cursorPosition = 0
                     }
                 }
-                
-                Image
-                {
+
+                Image {
                     id: passwordVisibilityTogglerIcon
                     Layout.preferredWidth: 20
                     Layout.preferredHeight: 18
@@ -152,20 +137,18 @@ Item
                     visible: root.image.length > 0
                     source: root.textHidden ? root.image : root.toggledImage
                     opacity: imageArea.pressed ? 0.75 : 1
-                    
-                    MouseArea
-                    {
+
+                    MouseArea {
                         id: imageArea
                         anchors.fill: parent
-                        
+
                         onClicked: root.textHidden = !root.textHidden
                     }
                 }
             }
         }
-        
-        Label
-        {
+
+        Label {
             id: errorText
             Layout.fillWidth: true
             Layout.topMargin: 2
@@ -175,31 +158,26 @@ Item
             color: Style.colorErrorText
         }
     }
-    
-    
-    function giveFocus()
-    {
-        inputField.forceActiveFocus();
+
+    function giveFocus() {
+        inputField.forceActiveFocus()
     }
-    
-    function clearText()
-    {
-        inputField.clear();
+
+    function clearText() {
+        inputField.clear()
     }
-    
-    function setError()
-    {
-        root.hasError = true;
-        backgroundRect.border.color = Style.colorErrorBorder;
-        backgroundRect.border.width = 2;
-        backgroundRect.color = Style.colorErrorBackground;
+
+    function setError() {
+        root.hasError = true
+        backgroundRect.border.color = Style.colorErrorBorder
+        backgroundRect.border.width = 2
+        backgroundRect.color = Style.colorErrorBackground
     }
-    
-    function clearError()
-    {
-        root.hasError = false;
-        backgroundRect.border.color = root.borderColor;
-        backgroundRect.border.width = root.borderWidth;
-        backgroundRect.color = root.backgroundColor;
+
+    function clearError() {
+        root.hasError = false
+        backgroundRect.border.color = root.borderColor
+        backgroundRect.border.width = root.borderWidth
+        backgroundRect.color = root.backgroundColor
     }
 }

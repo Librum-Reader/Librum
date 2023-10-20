@@ -249,7 +249,7 @@ Page {
 
                 MBookmarksSidebar {
                     id: bookmarksSidebar
-                    property int lastWidth: 300
+                    property int lastWidth: 370
                     property bool active: false
 
                     anchors.fill: parent
@@ -308,6 +308,13 @@ Page {
             onNextButtonClicked: BookController.goToNextSearchHit()
             onPreviousButtonClicked: BookController.goToPreviousSearchHit()
         }
+    }
+
+    function getYOffset() {
+        let yOffset = documentView.getYOffset()
+        let restoredYOffset = yOffset / BookController.zoom
+
+        return restoredYOffset
     }
 
     QtObject {

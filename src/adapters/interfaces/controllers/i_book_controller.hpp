@@ -1,5 +1,7 @@
 #include <QObject>
 #include "adapters_export.hpp"
+#include "bookmark.hpp"
+#include "bookmarks_proxy_model.hpp"
 #include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
@@ -24,6 +26,8 @@ class ADAPTERS_EXPORT IBookController : public QObject
     Q_PROPERTY(float zoom READ getZoom WRITE setZoom NOTIFY zoomChanged)
     Q_PROPERTY(application::core::FilteredTOCModel* tableOfContents READ
                    getTableOfContents NOTIFY tableOfContentsChanged)
+    Q_PROPERTY(adapters::data_models::BookmarksProxyModel* bookmarksModel READ
+                   getBookmarksModel NOTIFY bookmarksModelChanged)
     Q_PROPERTY(bool searchWholeWords READ getSearchWholeWords WRITE
                    setSearchWholeWords NOTIFY searchWholeWordsChanged)
     Q_PROPERTY(bool searchCaseSensitive READ getSearchCaseSensitive WRITE
@@ -51,6 +55,14 @@ public:
     virtual const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const = 0;
 
+    virtual const QList<domain::entities::Bookmark>& getBookmark() const = 0;
+    Q_INVOKABLE virtual QString addBookmark(const QString& name, int pageNumber,
+                                            float yOffset) = 0;
+    Q_INVOKABLE virtual void renameBookmark(const QString& uuid,
+                                            const QString& newName) = 0;
+    Q_INVOKABLE virtual void removeBookmark(const QString& uuid) = 0;
+    Q_INVOKABLE virtual void goToBookmark(const QString& uuid) = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
@@ -72,6 +84,7 @@ public:
     virtual void setSearchFromStart(bool newSearchFromStart) = 0;
 
     virtual application::core::FilteredTOCModel* getTableOfContents() = 0;
+    virtual adapters::data_models::BookmarksProxyModel* getBookmarksModel() = 0;
 
 signals:
     void filePathChanged(const QString& filePath);
@@ -87,6 +100,7 @@ signals:
     void searchWholeWordsChanged();
     void searchCaseSensitiveChanged();
     void searchFromStartChanged();
+    void bookmarksModelChanged();
 };
 
 }  // namespace adapters

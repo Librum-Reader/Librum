@@ -155,6 +155,12 @@ void LibraryStorageGateway::convertJsonBookToApiFormat(QJsonObject& jsonBook)
     auto fixedTags = renameProperties(tagsToFix, TagNamingStyle::ApiStyle);
     jsonBook["tags"] = fixedTags;
 
+    // Bookmarks
+    auto bookmarksToFix = jsonBook["bookmarks"].toArray();
+    auto fixedBookmarks =
+        renameProperties(bookmarksToFix, TagNamingStyle::ApiStyle);
+    jsonBook["bookmarks"] = fixedBookmarks;
+
     // Highlights
     auto highlightsToFix = jsonBook["highlights"].toArray();
     auto fixedHighlights =

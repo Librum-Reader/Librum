@@ -27,12 +27,15 @@ class PRESENTATION_EXPORT PageView : public QQuickItem
         int implicitHeight READ getImplicitHeight NOTIFY implicitHeightChanged)
     Q_PROPERTY(int pageNumber READ getPageNumber WRITE setPageNumber CONSTANT)
     Q_PROPERTY(bool colorInverted WRITE setColorInverted)
+    Q_PROPERTY(float yOffset READ getYOffset CONSTANT)
 
 public:
     PageView();
 
     int getImplicitWidth() const;
     int getImplicitHeight() const;
+
+    float getYOffset() const;
 
     bool disableHoverEvents() const;
     void setDisableHoverEvents(bool newDisableHoverEvents);
@@ -82,6 +85,8 @@ private:
     void paintSelectionOnPage(QPainter& painter);
 
     void paintHighlightsOnPage(QPainter& painter);
+    void handleClickingOnHighlight(
+        const domain::entities::Highlight* highlight);
     void removeConflictingHighlights(domain::entities::Highlight& highlight);
     bool mouseAboveSelection(const QPointF mouse);
 

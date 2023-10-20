@@ -1,5 +1,6 @@
 #include "book_searcher.hpp"
 #include <QDebug>
+#include "mupdf/fitz/geometry.h"
 #include "qnumeric.h"
 
 namespace application::core::utils

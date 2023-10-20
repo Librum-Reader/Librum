@@ -32,6 +32,11 @@ public:
     const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const override;
 
+    const QList<domain::entities::Bookmark>& getBookmarks() const override;
+    void addBookmark(const domain::entities::Bookmark& bookmark) override;
+    void renameBookmark(const QUuid& uuid, const QString& newName) override;
+    void removeBookmark(const QUuid& uuid) override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
@@ -43,9 +48,11 @@ public:
 
     core::FilteredTOCModel* getTableOfContents() override;
 
-private:
     domain::entities::Book* getBook();
     const domain::entities::Book* getBook() const;
+
+private:
+    int getIndexOfBookmark(const QUuid& uuid) const;
 
     ILibraryService* m_libraryService;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;

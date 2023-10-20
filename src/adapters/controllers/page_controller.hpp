@@ -17,6 +17,9 @@ public:
     int getWidth() override;
     int getHeight() override;
 
+    int getXOffset() const override;
+    int getYOffset() const override;
+
     void setZoom(float zoom) override;
     float getZoom() override;
 
@@ -42,6 +45,9 @@ public:
 private:
     application::core::PageGenerator m_pageGenerator;
     mupdf::FzMatrix m_matrix;
+
+    int m_pageXOffset = 0;
+    int m_pageYOffset = 0;
 
     // Image caching
     bool m_pageImageOutdated = true;

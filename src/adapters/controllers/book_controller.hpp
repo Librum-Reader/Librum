@@ -3,6 +3,7 @@
 #include <QRectF>
 #include <QString>
 #include "adapters_export.hpp"
+#include "bookmarks_model.hpp"
 #include "i_book_controller.hpp"
 #include "i_book_service.hpp"
 #include "search_options.hpp"
@@ -34,6 +35,13 @@ public:
     const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const override;
 
+    const QList<domain::entities::Bookmark>& getBookmark() const override;
+    QString addBookmark(const QString& name, int pageNumber,
+                        float yOffset) override;
+    void renameBookmark(const QString& uuid, const QString& newName) override;
+    void removeBookmark(const QString& uuid) override;
+    void goToBookmark(const QString& uuid) override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
@@ -55,10 +63,14 @@ public:
     void setSearchFromStart(bool newSearchFromStart) override;
 
     application::core::FilteredTOCModel* getTableOfContents() override;
+    data_models::BookmarksProxyModel* getBookmarksModel() override;
 
 private:
     application::IBookService* m_bookService;
     application::core::utils::SearchOptions m_searchOptions;
+
+    std::unique_ptr<data_models::BookmarksModel> m_bookmarksModel;
+    data_models::BookmarksProxyModel m_bookmarksProxyModel;
 };
 
 }  // namespace adapters::controllers

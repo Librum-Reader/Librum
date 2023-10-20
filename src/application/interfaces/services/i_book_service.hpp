@@ -5,6 +5,7 @@
 #include <QString>
 #include <QUuid>
 #include "application_export.hpp"
+#include "bookmark.hpp"
 #include "highlight.hpp"
 #include "mupdf/classes.h"
 #include "search_options.hpp"
@@ -42,6 +43,11 @@ public:
     virtual const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const = 0;
 
+    virtual const QList<domain::entities::Bookmark>& getBookmarks() const = 0;
+    virtual void addBookmark(const domain::entities::Bookmark& bookmark) = 0;
+    virtual void renameBookmark(const QUuid& uuid, const QString& newName) = 0;
+    virtual void removeBookmark(const QUuid& uuid) = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;
@@ -57,6 +63,12 @@ signals:
     void goToPosition(int pageNumber, int y);
     void highlightText(int pageNumber, mupdf::FzQuad quad);
     void noSearchHitsFound();
+
+    void bookmarkInsertionStarted(int index);
+    void bookmarkInsertionEnded();
+    void bookmarkDeletionStarted(int index);
+    void bookmarkDeletionEnded();
+    void bookmarkNameChanged(int index);
 };
 
 }  // namespace application

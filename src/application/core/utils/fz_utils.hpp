@@ -1,8 +1,10 @@
 #pragma once
 #include <mupdf/classes.h>
+#include <mupdf/classes2.h>
 #include <QImage>
 #include <QPointF>
 #include <QRectF>
+#include "mupdf/fitz/geometry.h"
 
 namespace application::core::utils
 {
@@ -141,6 +143,24 @@ inline void restoreQRect(QRectF& rect, float zoom)
     auto restoredFzRect = fzRect.fz_transform_rect(invMatrix);
 
     rect = fzRectToQRectF(restoredFzRect);
+}
+
+inline fz_quad moveQuad(const fz_quad& quad, int x, int y)
+{
+    return fz_make_quad(quad.ul.x - x, quad.ul.y - y, quad.ur.x - x,
+                        quad.ur.y - y, quad.ll.x - x, quad.ll.y - y,
+                        quad.lr.x - x, quad.lr.y - y);
+}
+
+inline mupdf::FzRect moveRect(const mupdf::FzRect& rect, int x, int y)
+{
+    return mupdf::fz_make_rect(rect.x0 - x, rect.y0 - y, rect.x1 - x,
+                               rect.y1 - y);
+}
+
+inline mupdf::FzPoint movePoint(const mupdf::FzPoint& point, int x, int y)
+{
+    return fz_make_point(point.x + x, point.y + y);
 }
 
 }  // namespace application::core::utils

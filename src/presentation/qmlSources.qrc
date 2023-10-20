@@ -97,5 +97,7 @@
         <file>readingPage/MColorSelectionPopup.qml</file>
         <file>modules/CustomComponents/MSlider.qml</file>
         <file>readingPage/MDictionaryPopup.qml</file>
+        <file>readingPage/MBookmarkItem.qml</file>
+        <file>readingPage/MExplanationPopup.qml</file>
     </qresource>
 </RCC>
