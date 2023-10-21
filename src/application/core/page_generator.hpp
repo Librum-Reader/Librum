@@ -32,9 +32,9 @@ public:
     mupdf::FzPixmap renderPage(float zoom);
     void setInvertColor(bool newInvertColor);
 
-    bool pointIsAboveText(const mupdf::FzPoint& point);
-    bool pointIsAboveLink(const mupdf::FzPoint& point);
-    mupdf::FzLink getLinkAtPoint(const mupdf::FzPoint& point);
+    bool pointIsAboveText(mupdf::FzPoint point);
+    bool pointIsAboveLink(mupdf::FzPoint point);
+    mupdf::FzLink getLinkAtPoint(mupdf::FzPoint point);
 
     QList<mupdf::FzQuad>& getBufferedSelectionRects();
     void generateSelectionRects(mupdf::FzPoint start, mupdf::FzPoint end);

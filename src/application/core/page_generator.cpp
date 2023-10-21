@@ -210,36 +210,33 @@ std::string PageGenerator::getTextFromSelection(mupdf::FzPoint start,
     return m_textSelector.getTextFromSelection(start, end);
 }
 
-bool PageGenerator::pointIsAboveText(const mupdf::FzPoint& point)
+bool PageGenerator::pointIsAboveText(mupdf::FzPoint point)
 {
-    mupdf::FzPoint fzPoint(point.x, point.y);
     for(auto& rect : m_symbolBounds)
     {
-        if(fzPoint.fz_is_point_inside_rect(rect))
+        if(point.fz_is_point_inside_rect(rect))
             return true;
     }
 
     return false;
 }
 
-bool PageGenerator::pointIsAboveLink(const mupdf::FzPoint& point)
+bool PageGenerator::pointIsAboveLink(mupdf::FzPoint point)
 {
-    mupdf::FzPoint fzPoint(point.x, point.y);
     for(auto& link : m_links)
     {
-        if(fzPoint.fz_is_point_inside_rect(link.rect()))
+        if(point.fz_is_point_inside_rect(link.rect()))
             return true;
     }
 
     return false;
 }
 
-mupdf::FzLink PageGenerator::getLinkAtPoint(const mupdf::FzPoint& point)
+mupdf::FzLink PageGenerator::getLinkAtPoint(mupdf::FzPoint point)
 {
-    mupdf::FzPoint fzPoint(point.x, point.y);
     for(auto& link : m_links)
     {
-        if(fzPoint.fz_is_point_inside_rect(link.rect()))
+        if(point.fz_is_point_inside_rect(link.rect()))
             return link;
     }
 
