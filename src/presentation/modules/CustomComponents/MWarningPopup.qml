@@ -4,10 +4,9 @@ import QtQuick.Layouts
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Popup
-{
+Popup {
     id: root
     property string leftButtonText: "Accept"
     property string rightButtonText: "Decline"
@@ -21,31 +20,32 @@ Popup
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
-    
+
     implicitWidth: 646
     implicitHeight: layout.height
     padding: 0
     closePolicy: Popup.NoAutoClose | Popup.CloseOnEscape | Popup.CloseOnReleaseOutside
-    background: Rectangle { color: "transparent"; radius: 4 }
+    background: Rectangle {
+        color: "transparent"
+        radius: 4
+    }
     modal: true
-    Overlay.modal: Rectangle { color: Style.colorPopupDim; opacity: 1 }
-    
-    
-    MFlickWrapper
-    {
+    Overlay.modal: Rectangle {
+        color: Style.colorPopupDim
+        opacity: 1
+    }
+
+    MFlickWrapper {
         id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.height
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: -92
-            
-            
-            Image
-            {
+
+            Image {
                 id: warningIllustration
                 z: 2
                 Layout.alignment: Qt.AlignHCenter
@@ -54,37 +54,34 @@ Popup
                 sourceSize.width: 250
                 fillMode: Image.PreserveAspectFit
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: backgroundRect
                 Layout.fillWidth: true
                 topPadding: 86
                 horizontalPadding: 62
                 bottomPadding: 62
-                background: Rectangle { color: Style.colorPopupBackground; radius: 6 }
-                
-                
-                ColumnLayout
-                {
+                background: Rectangle {
+                    color: Style.colorPopupBackground
+                    radius: 6
+                }
+
+                ColumnLayout {
                     id: inRectLayout
                     width: parent.width
                     spacing: 22
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: title
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 18
                         text: root.title
                         color: Style.colorTitle
                         font.weight: Font.Medium
-                        font.pointSize: 42
+                        font.pointSize: Fonts.baseHeaderSize
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         id: message
                         Layout.alignment: Qt.AlignHCenter
                         Layout.bottomMargin: root.messageBottomSpacing
@@ -94,31 +91,28 @@ Popup
                         horizontalAlignment: Qt.AlignHCenter
                         color: Style.colorLightText
                         font.weight: Font.Medium
-                        font.pointSize: 15
+                        font.pointSize: Fonts.modestTitleSize
                         textFormat: root.richText ? Text.RichText : Text.AutoText
-                        onLinkActivated: (link) => Qt.openUrlExternally(link)
+                        onLinkActivated: link => Qt.openUrlExternally(link)
 
                         // Switch to the proper cursor when hovering above the link
-                        MouseArea
-                        {
+                        MouseArea {
                             id: mouseArea
-                            acceptedButtons: Qt.NoButton    // Don't eat the mouse clicks
+                            acceptedButtons: Qt.NoButton // Don't eat the mouse clicks
                             anchors.fill: parent
-                            cursorShape: message.hoveredLink != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
+                            cursorShape: message.hoveredLink
+                                         != "" ? Qt.PointingHandCursor : Qt.ArrowCursor
                         }
                     }
-                    
-                    RowLayout
-                    {
+
+                    RowLayout {
                         id: buttonRow
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: leftButton.height
                         Layout.topMargin: 24
                         spacing: 42
-                        
-                        
-                        MButton
-                        {
+
+                        MButton {
                             id: leftButton
                             Layout.preferredWidth: root.singleButton ? parent.width : root.buttonsWidth
                             Layout.preferredHeight: 40
@@ -130,16 +124,15 @@ Popup
                             fontSize: 12.75
                             fontWeight: Font.Bold
                             textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
-                            
+
                             onClicked: internal.leftButtonClicked()
-                            
+
                             KeyNavigation.tab: rightButton
                             KeyNavigation.right: rightButton
                             Keys.onReturnPressed: internal.leftButtonClicked()
                         }
-                        
-                        MButton
-                        {
+
+                        MButton {
                             id: rightButton
                             visible: !root.singleButton
                             Layout.preferredWidth: root.buttonsWidth
@@ -152,9 +145,9 @@ Popup
                             fontSize: 12.75
                             fontWeight: Font.Bold
                             textColor: focus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
-                            
+
                             onClicked: internal.rightButtonClicked()
-                            
+
                             KeyNavigation.tab: leftButton
                             KeyNavigation.left: leftButton
                             Keys.onReturnPressed: internal.rightButtonClicked()
@@ -164,26 +157,22 @@ Popup
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
-        
-        function leftButtonClicked()
-        {
-            root.leftButtonClicked();
-            decisionMade();
+
+        function leftButtonClicked() {
+            root.leftButtonClicked()
+            decisionMade()
         }
-        
-        function rightButtonClicked()
-        {
-            root.rightButtonClicked();
-            decisionMade();
+
+        function rightButtonClicked() {
+            root.rightButtonClicked()
+            decisionMade()
         }
     }
-    
-    function giveFocus()
-    {
-        leftButton.forceActiveFocus();
+
+    function giveFocus() {
+        leftButton.forceActiveFocus()
     }
 }

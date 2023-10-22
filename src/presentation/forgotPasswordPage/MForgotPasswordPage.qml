@@ -7,49 +7,43 @@ import Librum.style
 import Librum.icons
 import Librum.controllers
 
-MFlickWrapper
-{
+MFlickWrapper {
     id: root
-    contentHeight: Window.height < layout.implicitHeight ?
-                       layout.implicitHeight + page.bottomPadding : Window.height
-    
+    contentHeight: Window.height < layout.implicitHeight ? layout.implicitHeight
+                                                           + page.bottomPadding : Window.height
+
     // Passing the focus to emailInput on Component.onCompleted() causes it
     // to pass controll back to root for some reason, this fixes the focus problem
-    onActiveFocusChanged: if(activeFocus) emailInput.giveFocus()
-    
+    onActiveFocusChanged: if (activeFocus)
+                              emailInput.giveFocus()
+
     // Focus the emailInput when page has loaded
     Component.onCompleted: emailInput.giveFocus()
-    
-    Page
-    {
+
+    Page {
         id: page
         anchors.fill: parent
         bottomPadding: 50
-        background: Rectangle { color: Style.colorAuthenticationPageBackground }
-        
-        
-        Shortcut
-        {
+        background: Rectangle {
+            color: Style.colorAuthenticationPageBackground
+        }
+
+        Shortcut {
             sequence: "Ctrl+Return"
             onActivated: internal.sendPasswordResetEmail()
         }
-        
-        Shortcut
-        {
+
+        Shortcut {
             sequence: "Ctrl+Backspace"
             onActivated: internal.backToLoginPage()
         }
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             anchors.centerIn: parent
             spacing: -92
-            
-            
-            Image
-            {
+
+            Image {
                 id: lockIllustration
                 z: 2
                 Layout.alignment: Qt.AlignHCenter
@@ -57,40 +51,33 @@ MFlickWrapper
                 sourceSize.width: 250
                 fillMode: Image.PreserveAspectFit
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: background
                 Layout.preferredWidth: 542
                 topPadding: 86
                 bottomPadding: 28
                 horizontalPadding: 0
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorContainerBackground
                     radius: 6
                 }
-                
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     id: backgroundLayout
                     width: parent.width
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: forgotPasswordText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 32
                         text: "Forgot Password"
                         color: Style.colorText
                         font.bold: true
-                        font.pointSize: 19
+                        font.pointSize: Fonts.bigTitleSize
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         id: resetPasswordText
                         Layout.preferredWidth: 450
                         Layout.topMargin: 8
@@ -101,11 +88,10 @@ MFlickWrapper
                         color: Style.colorSubtitle
                         lineHeight: 1.1
                         font.weight: Font.Medium
-                        font.pointSize: 12.5
+                        font.pointSize: Fonts.largeSize
                     }
-                    
-                    ColumnLayout
-                    {
+
+                    ColumnLayout {
                         id: inputColumn
                         Layout.fillWidth: true
                         Layout.leftMargin: internal.inWindowPadding
@@ -113,29 +99,26 @@ MFlickWrapper
                         Layout.topMargin: 12
                         Layout.alignment: Qt.AlignHCenter
                         spacing: 0
-                        
-                        MLabeledInputBox
-                        {
+
+                        MLabeledInputBox {
                             id: emailInput
                             Layout.fillWidth: true
                             placeholderContent: "kaidoe@gmail.com"
                             placeholderColor: Style.colorPlaceholderText
                             headerText: ""
                         }
-                        
-                        Label
-                        {
+
+                        Label {
                             id: successText
                             Layout.topMargin: 10
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             visible: false
                             color: Style.colorGreenText
-                            font.pointSize: 11.75
+                            font.pointSize: 12
                         }
-                        
-                        MButton
-                        {
+
+                        MButton {
                             id: sendEmailButton
                             Layout.fillWidth: true
                             Layout.preferredHeight: 42
@@ -147,13 +130,11 @@ MFlickWrapper
                             fontSize: 12.25
                             textColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
-                            
+
                             onClicked: internal.sendPasswordResetEmail()
                         }
-                        
-                        
-                        MButton
-                        {
+
+                        MButton {
                             id: backButton
                             Layout.preferredWidth: 145
                             Layout.preferredHeight: 42
@@ -170,7 +151,7 @@ MFlickWrapper
                             imagePath: Icons.arrowheadBackIcon
                             imageSize: 28
                             imageSpacing: 4
-                            
+
                             onClicked: internal.backToLoginPage()
                         }
                     }
@@ -178,27 +159,24 @@ MFlickWrapper
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int inWindowPadding: 71
-        
-        function sendPasswordResetEmail()
-        {
-            if(emailInput.text === "")
-                return;
-            
-            UserController.forgotPassword(emailInput.text);
-            
-            successText.text = "Email sent! Keep an eye on your inbox.";
-            successText.visible = true;
-            emailInput.clearText();
+
+        function sendPasswordResetEmail() {
+            if (emailInput.text === "")
+                return
+
+            UserController.forgotPassword(emailInput.text)
+
+            successText.text = "Email sent! Keep an eye on your inbox."
+            successText.visible = true
+            emailInput.clearText()
         }
-        
-        function backToLoginPage()
-        {
-            loadPage(loginPage);
+
+        function backToLoginPage() {
+            loadPage(loginPage)
         }
     }
 }

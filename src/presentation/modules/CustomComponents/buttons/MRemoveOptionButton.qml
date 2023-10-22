@@ -3,63 +3,53 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property string text
-    signal clicked()
-    
+    signal clicked
+
     implicitWidth: container.width
     implicitHeight: 36
-    
-    
-    Pane
-    {
+
+    Pane {
         id: container
         height: parent.height
         padding: 12
-        background: Rectangle
-        {
+        background: Rectangle {
             color: Style.colorLightHighlight
             border.width: 1
             border.color: Style.colorLightPurple
             radius: 5
         }
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             anchors.centerIn: parent
             spacing: 6
-            
-            Label
-            {
+
+            Label {
                 id: filterByLabel
                 Layout.topMargin: -1
                 color: Style.colorBasePurple
                 text: root.text
-                font.pointSize: 12
+                font.pointSize: Fonts.bigSize
                 font.weight: Font.Bold
             }
-            
-            Image
-            {
+
+            Image {
                 id: filterByArrowIcon
                 Layout.topMargin: 1
                 sourceSize.height: 11
                 source: Icons.cancelPurple
                 fillMode: Image.PreserveAspectFit
             }
-            
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         anchors.fill: parent
-        
+
         onClicked: root.clicked()
     }
 }

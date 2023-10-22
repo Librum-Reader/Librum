@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.controllers
 import Librum.style
 import Librum.icons
+import Librum.fonts
 import CustomComponents
 import "explorerToolbar"
 
@@ -90,7 +91,7 @@ Page {
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
             color: Style.colorTitle
-            font.pointSize: 22
+            font.pointSize: Fonts.largeTitleSize
             font.weight: Font.Medium
             visible: false
         }

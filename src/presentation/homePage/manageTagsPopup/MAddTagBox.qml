@@ -4,47 +4,37 @@ import QtQuick.Controls
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     signal addTag(string name)
-    
+
     implicitHeight: 36
     implicitWidth: 400
-    
-    
-    RowLayout
-    {
+
+    RowLayout {
         id: layout
         anchors.fill: parent
         spacing: 8
-        
-        
-        Pane
-        {
+
+        Pane {
             id: box
             Layout.fillWidth: true
             Layout.fillHeight: true
             padding: 0
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: "transparent"
                 border.color: Style.colorContainerBorder
                 radius: 4
             }
-            
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: inBoxLayout
                 anchors.fill: parent
                 spacing: 4
-                
-                
-                TextField
-                {
+
+                TextField {
                     id: inputField
                     Layout.fillWidth: true
                     Layout.fillHeight: true
@@ -53,48 +43,40 @@ Item
                     rightPadding: 4
                     selectByMouse: true
                     color: Style.colorText
-                    font.pointSize: 12
+                    font.pointSize: Fonts.bigSize
                     font.weight: Font.Normal
                     placeholderText: "Add a tag..."
                     placeholderTextColor: Style.colorPlaceholderText
-                    background: Rectangle
-                    {   
+                    background: Rectangle {
                         anchors.fill: parent
                         color: "transparent"
                         radius: 4
                     }
-                    
-                    
-                    Keys.onReturnPressed:
-                    {
-                        if(inputField.text !== "")
-                            root.addTag(inputField.text);
-                        
-                        inputField.clear();
+
+                    Keys.onReturnPressed: {
+                        if (inputField.text !== "")
+                            root.addTag(inputField.text)
+
+                        inputField.clear()
                     }
                 }
-                
-                Item
-                {
+
+                Item {
                     id: iconBlock
                     Layout.preferredWidth: icon.width + 18
                     Layout.preferredHeight: icon.height + 14
                     Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                     Layout.rightMargin: 6
-                    
-                    
-                    Image
-                    {
+
+                    Image {
                         id: icon
                         anchors.centerIn: parent
                         sourceSize.width: 10
                         source: Icons.dropdownLight
                         rotation: 180
                         fillMode: Image.PreserveAspectFit
-                        
-                        
-                        NumberAnimation
-                        {
+
+                        NumberAnimation {
                             id: closeAnim
                             target: icon
                             property: "rotation"
@@ -102,9 +84,8 @@ Item
                             duration: 175
                             easing.type: Easing.InOutQuad
                         }
-                        
-                        NumberAnimation
-                        {
+
+                        NumberAnimation {
                             id: openAnim
                             target: icon
                             property: "rotation"
@@ -113,79 +94,67 @@ Item
                             easing.type: Easing.InOutQuad
                         }
                     }
-                    
-                    MouseArea
-                    {
+
+                    MouseArea {
                         anchors.fill: parent
-                        
-                        onClicked:
-                        {
-                            if(popup.opened)
-                            {
-                                popup.close();
-                                return;
+
+                        onClicked: {
+                            if (popup.opened) {
+                                popup.close()
+                                return
                             }
-                                
-                            popup.open();
+
+                            popup.open()
                         }
                     }
                 }
             }
         }
-        
-        Label
-        {
+
+        Label {
             id: addLabel
             Layout.fillHeight: true
             verticalAlignment: Text.AlignVCenter
             text: "ADD"
             opacity: mouseArea.pressed ? 0.8 : 1
             color: Style.colorBasePurple
-            font.pointSize: 11.5
+            font.pointSize: Fonts.bigSize
             font.weight: Font.Bold
-            
-            
-            MouseArea
-            {
+
+            MouseArea {
                 id: mouseArea
                 anchors.fill: parent
-                
-                onClicked:
-                {
-                    if(inputField.text !== "")
-                        root.addTag(inputField.text);
-                    
-                    inputField.clear();
+
+                onClicked: {
+                    if (inputField.text !== "")
+                        root.addTag(inputField.text)
+
+                    inputField.clear()
                 }
             }
         }
     }
-    
-    
-    MAddTagBoxPopup
-    {
+
+    MAddTagBoxPopup {
         id: popup
         width: box.width
         y: root.height + 6
         closePolicy: Popup.CloseOnPressOutsideParent | Popup.CloseOnEscape
-        
+
         onItemSelected: root.addTag(currentlySelectedData)
-        onAboutToShow: openAnim.start();
-        onAboutToHide: closeAnim.start();
+        onAboutToShow: openAnim.start()
+        onAboutToHide: closeAnim.start()
     }
-    
-    function close()
-    {
-        popup.close();
+
+    function close() {
+        popup.close()
     }
-    
-    function clearInputField()
-    {
-        inputField.clear();
+
+    function clearInputField() {
+        inputField.clear()
     }
-    
-    function giveFocus()
-    {
-        inputField.forceActiveFocus();
+
+    function giveFocus() {
+        inputField.forceActiveFocus()
     }
 }

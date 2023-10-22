@@ -6,33 +6,28 @@ import Librum.elements
 import Librum.controllers
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-MFlickWrapper
-{
+MFlickWrapper {
     id: root
     contentHeight: page.implicitHeight
-    
-    
-    Page
-    {
+
+    Page {
         id: page
         width: parent.width
         horizontalPadding: 48
         bottomPadding: 22
-        background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
-        
-        
-        
-        ColumnLayout
-        {
+        background: Rectangle {
+            anchors.fill: parent
+            color: Style.colorPageBackground
+        }
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 26
-            
-            
-            MTitle
-            {
+
+            MTitle {
                 id: pageTitle
                 Layout.topMargin: 64
                 titleText: "About"
@@ -40,76 +35,65 @@ MFlickWrapper
                 titleSize: 25
                 descriptionSize: 13.25
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: details
                 Layout.fillWidth: true
                 Layout.topMargin: 6
                 topPadding: 24
                 horizontalPadding: internal.pagePadding
                 bottomPadding: 21
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }
-                
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     id: inDetailsLayout
                     anchors.fill: parent
                     spacing: 0
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: detailsTitle
                         text: "Details"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 15
                         text: "CURRENT VERSION"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 1
                         text: AppInfoController.currentVersion
                         color: Style.colorText
-                        font.pointSize: 13.5
+                        font.pointSize: 14
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 12
                         text: "QT VERSION"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 1
                         text: AppInfoController.currentQtVersion
                         color: Style.colorText
-                        font.pointSize: 13.5
+                        font.pointSize: 14
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         Layout.topMargin: 21
                         Layout.preferredWidth: 120
                         Layout.preferredHeight: 32
@@ -122,202 +106,178 @@ MFlickWrapper
                         textColor: Style.colorGreenText
                         imageSpacing: 6
                         opacityOnPressed: 0.8
-                        
-                        onClicked: loadSettingsPage(updatesPage, settingsSidebar.updatesItem)
+
+                        onClicked: loadSettingsPage(updatesPage,
+                                                    settingsSidebar.updatesItem)
                     }
                 }
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: creator
                 Layout.fillWidth: true
                 topPadding: 24
                 horizontalPadding: internal.pagePadding
                 bottomPadding: 30
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }
-                
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     id: inCreatorLayout
                     anchors.fill: parent
                     spacing: 0
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: creatorTitle
                         text: "Creator"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 18
                         text: "COMPANY NAME"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 1
                         text: AppInfoController.companyName
                         color: Style.colorBasePurple
-                        font.pointSize: 13.5
+                        font.pointSize: 14
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 12
                         text: "WEBSITE"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         text: AppInfoController.website
                         color: Style.colorBasePurple
-                        font.pointSize: 13.5
+                        font.pointSize: 14
                         opacity: websiteLinkArea.pressed ? 0.8 : 1
-                        
-                        MouseArea
-                        {
+
+                        MouseArea {
                             id: websiteLinkArea
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            
-                            onClicked: Qt.openUrlExternally(AppInfoController.website)
+
+                            onClicked: Qt.openUrlExternally(
+                                           AppInfoController.website)
                         }
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 12
                         text: "CONTACT"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 1
                         text: AppInfoController.companyEmail
                         color: Style.colorBasePurple
                         opacity: emailLinkArea.pressed ? 0.8 : 1
-                        font.pointSize: 13.5
-                        
-                        MouseArea
-                        {
+                        font.pointSize: 14
+
+                        MouseArea {
                             id: emailLinkArea
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            
-                            onClicked: Qt.openUrlExternally("mailto:" + AppInfoController.companyEmail)
+
+                            onClicked: Qt.openUrlExternally(
+                                           "mailto:" + AppInfoController.companyEmail)
                         }
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 12
                         text: "GITHUB"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.weight: Font.Bold
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         Layout.topMargin: 1
                         text: AppInfoController.githubLink
                         color: Style.colorBasePurple
                         opacity: githubLinkArea.pressed ? 0.8 : 1
-                        font.pointSize: 13.5
-                        
-                        MouseArea
-                        {
+                        font.pointSize: 14
+
+                        MouseArea {
                             id: githubLinkArea
                             anchors.fill: parent
                             cursorShape: Qt.PointingHandCursor
-                            
-                            onClicked: Qt.openUrlExternally(AppInfoController.githubLink)
+
+                            onClicked: Qt.openUrlExternally(
+                                           AppInfoController.githubLink)
                         }
                     }
                 }
             }
-            
-            Pane
-            {
+
+            Pane {
                 id: thisApp
                 Layout.fillWidth: true
                 Layout.minimumHeight: inThisAppLayout.height + 15
                 topPadding: 24
                 horizontalPadding: internal.pagePadding
                 bottomPadding: 56
-                background: Rectangle
-                {
+                background: Rectangle {
                     color: Style.colorContainerBackground
                     border.color: Style.colorContainerBorder
                     radius: 4
                     antialiasing: true
                 }
-                
-                
-                ColumnLayout
-                {
+
+                ColumnLayout {
                     id: inThisAppLayout
                     anchors.fill: parent
                     spacing: 0
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: thisAppTitle
                         text: "This App"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
-                    RowLayout
-                    {
+
+                    RowLayout {
                         id: heartRow
                         Layout.fillWidth: true
                         Layout.topMargin: 40
                         spacing: 0
-                        
-                        
-                        Image
-                        {
+
+                        Image {
                             id: heartImage
                             source: Icons.heart
                             fillMode: Image.PreserveAspectFit
                             sourceSize.width: 80
                         }
-                        
-                        Label
-                        {
+
+                        Label {
                             id: thisAppText
                             Layout.fillWidth: true
                             Layout.leftMargin: 22
-                            text: "Librum is here for everyone who just wants to enjoy a good book.\n" +
-                                  "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
+                            text: "Librum is here for everyone who just wants to enjoy a good book.\n" + "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
                             wrapMode: Text.WordWrap
                             color: Style.colorText
-                            font.pointSize: 14.6
+                            font.pointSize: Fonts.modestTitleSize
                             lineHeight: 1.10
                         }
                     }
@@ -325,9 +285,8 @@ MFlickWrapper
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int pagePadding: 40
     }

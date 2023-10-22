@@ -130,7 +130,7 @@ MFlickWrapper {
                             id: profileTitle
                             text: "Profile"
                             color: Style.colorText
-                            font.pointSize: 16.5
+                            font.pointSize: 17
                             font.weight: Font.DemiBold
                         }
                         
@@ -234,7 +234,7 @@ MFlickWrapper {
                         id: passwordTitle
                         text: "Change password"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
                     
@@ -313,7 +313,7 @@ MFlickWrapper {
                         id: yourDataTitle
                         text: "Your data"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
                     
@@ -396,7 +396,7 @@ MFlickWrapper {
                         id: yourAccountTitle
                         text: "Your Account"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
                     

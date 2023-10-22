@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.controllers
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
 Popup {
     id: root
@@ -80,7 +81,7 @@ Popup {
                         Layout.topMargin: 6
                         text: "Download book"
                         font.weight: Font.Bold
-                        font.pointSize: 17
+                        font.pointSize: Fonts.bigTitleSize
                         color: Style.colorTitle
                     }
 

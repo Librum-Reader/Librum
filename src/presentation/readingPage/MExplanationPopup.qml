@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -171,7 +172,7 @@ Popup {
                     width: answerFlick.width
                     focus: true
                     text: root.answer
-                    font.pointSize: 13
+                    font.pointSize: Fonts.hugeSize
                     color: Style.colorText
                     readOnly: true
                     wrapMode: Text.WordWrap
@@ -204,7 +205,7 @@ Popup {
                         text: ""
                         color: Style.colorTitle
                         font.weight: Font.Medium
-                        font.pointSize: 14
+                        font.pointSize: Fonts.smallTitleSize
                         onLinkActivated: Qt.openUrlExternally(
                                              AppInfoController.website + "/whyAiLimits")
 
@@ -277,7 +278,7 @@ Popup {
                     id: actionText
                     Layout.topMargin: -1
                     text: "Note: AI responses can be inaccurate"
-                    font.pointSize: 10
+                    font.pointSize: Fonts.smallSize
                     color: Style.colorBasePurple
                 }
             }

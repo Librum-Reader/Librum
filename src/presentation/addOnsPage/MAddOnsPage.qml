@@ -2,34 +2,37 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.fonts
 
-Page
-{
+Page {
     id: root
-    background: Rectangle { color: Style.colorPageBackground }
-    
-    Item { id: topSpacer; height: parent.height / 2.3 }
-    
-    Label
-    {
+    background: Rectangle {
+        color: Style.colorPageBackground
+    }
+
+    Item {
+        id: topSpacer
+        height: parent.height / 2.3
+    }
+
+    Label {
         id: title
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: topSpacer.bottom
         text: "Add-ons Page"
         color: Style.colorTitle
-        font.pointSize: 22
+        font.pointSize: Fonts.largeTitleSize
         font.bold: true
     }
-    
-    Label
-    {
+
+    Label {
         id: description
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: title.bottom
         anchors.topMargin: 6
         text: "Currently in Development"
         color: Style.colorPageSubtitle
-        font.pointSize: 16
+        font.pointSize: Fonts.baseTitleSize
         font.bold: true
     }
 }

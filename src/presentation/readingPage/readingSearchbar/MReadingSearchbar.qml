@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Item {
     id: root
@@ -136,7 +137,7 @@ Item {
                             leftPadding: 4
                             selectByMouse: true
                             color: Style.colorBaseInputText
-                            font.pointSize: 12
+                            font.pointSize: Fonts.bigSize
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle {

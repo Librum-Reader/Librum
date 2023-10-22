@@ -4,32 +4,29 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.icons
 import CustomComponents
+import Librum.fonts
 
-Item
-{
+Item {
     id: root
-    signal clearFilters()
-    
+    signal clearFilters
+
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 20
-        
-        Label
-        {
+
+        Label {
             id: text
             text: "No book satisfies the filter conditions"
             color: Style.colorTitle
-            font.pointSize: 22
+            font.pointSize: Fonts.largeTitleSize
             font.weight: Font.Medium
         }
-        
-        MButton
-        {
+
+        MButton {
             id: removeFiltersButton
             Layout.preferredWidth: 170
             Layout.preferredHeight: 38
@@ -44,7 +41,7 @@ Item
             imagePath: Icons.cancelPurple
             imageSize: 11
             imageToRight: true
-            
+
             onClicked: root.clearFilters()
         }
     }

@@ -17,6 +17,7 @@
         <file>sidebar/MSidebarItem.qml</file>
         <file>StyleSheet.qml</file>
         <file>IconSheet.qml</file>
+        <file>FontSheet.qml</file>
         <file>modules/CustomComponents/buttons/MButton.qml</file>
         <file>modules/CustomComponents/buttons/MRemoveOptionButton.qml</file>
         <file>modules/CustomComponents/buttons/MSearchButton.qml</file>

@@ -1,5 +1,6 @@
 #include "app_info_controller.hpp"
 #include <QDir>
+#include <QFontDatabase>
 
 using namespace application;
 
@@ -79,6 +80,11 @@ QString AppInfoController::getOperatingSystem() const
 void AppInfoController::updateApplication()
 {
     m_appInfoService->updateApplication();
+}
+
+int AppInfoController::getSystemFontSize() const
+{
+    return QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
 }
 
 }  // namespace adapters::controllers

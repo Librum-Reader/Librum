@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.icons
 import CustomComponents
+import Librum.fonts
 
 Item {
     id: root
@@ -82,7 +83,7 @@ Item {
                     visible: bookCover.source == ""
                     text: ".jpeg"
                     color: Style.colorNoImageLabel
-                    font.pointSize: 20
+                    font.pointSize: Fonts.veryBigTitleSize
                     font.bold: true
                 }
             }
@@ -114,7 +115,7 @@ Item {
                     text: model.title
                     font.weight: Font.Medium
                     color: Style.colorTitle
-                    font.pointSize: 11
+                    font.pointSize: Fonts.baseSize
                     lineHeight: 0.8
                     elide: Label.ElideRight
                     wrapMode: TextInput.WordWrap
@@ -126,7 +127,7 @@ Item {
                     Layout.topMargin: 5
                     text: model.authors
                     color: Style.colorLightText
-                    font.pointSize: 10
+                    font.pointSize: Fonts.smallSize
                     elide: Label.ElideRight
                 }
             }

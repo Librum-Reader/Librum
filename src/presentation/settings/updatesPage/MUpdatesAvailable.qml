@@ -6,6 +6,7 @@ import Librum.style
 import Librum.icons
 import Librum.elements
 import Librum.controllers
+import Librum.fonts
 
 Item {
     id: root
@@ -49,7 +50,7 @@ Item {
                 text: "A new update is available!"
                 wrapMode: Text.WordWrap
                 color: Style.colorText
-                font.pointSize: 23
+                font.pointSize: Fonts.hugeTitleSize
                 font.weight: Font.Bold
             }
 
@@ -59,7 +60,7 @@ Item {
                 text: "Download the new version to get great new improvements."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 15
+                font.pointSize: Fonts.modestTitleSize
             }
 
             Label {
@@ -68,7 +69,7 @@ Item {
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 14.5
+                font.pointSize: Fonts.hugeSize
             }
 
             Label {
@@ -76,7 +77,7 @@ Item {
                 text: AppInfoController.newestVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 14.2
+                font.pointSize: Fonts.smallTitleSize
                 font.bold: true
             }
 
@@ -112,7 +113,7 @@ Item {
                 text: "See the exact changes on our website at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 13.5
+                font.pointSize: 14
             }
 
             Label {
@@ -122,7 +123,7 @@ Item {
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
-                font.pointSize: 13.5
+                font.pointSize: 14
                 opacity: newsWebsiteLinkArea.pressed ? 0.8 : 1
 
                 MouseArea {

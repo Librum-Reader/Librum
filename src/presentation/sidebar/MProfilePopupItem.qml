@@ -2,53 +2,49 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property string image
     property int imageWidth: 15
     property string text
     property int textSpacing: 5
     signal clicked
-    
+
     implicitWidth: 125
     implicitHeight: layout.implicitHeight
-    
-    
-    RowLayout
-    {
+
+    RowLayout {
         id: layout
         anchors.fill: parent
         spacing: root.textSpacing
         opacity: mouseArea.pressed ? 0.8 : 1
-        
-        Image
-        {
+
+        Image {
             id: icon
             source: root.image
             fillMode: Image.PreserveAspectFit
             sourceSize.width: root.imageWidth
         }
-        
-        Label
-        {
+
+        Label {
             id: labels
             text: root.text
             color: Style.colorLightText
-            font.pointSize: 10.5
+            font.pointSize: Fonts.mediumSize
             font.weight: Font.Medium
         }
-        
-        Item { Layout.fillWidth: true }
+
+        Item {
+            Layout.fillWidth: true
+        }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         id: mouseArea
         anchors.fill: parent
-        
+
         onClicked: root.clicked()
     }
 }

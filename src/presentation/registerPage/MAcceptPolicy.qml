@@ -59,7 +59,7 @@ Item
                   ' and the <a href="' + AppInfoController.website + '/privacypolicy " style="text-decoration: none; color: ' + Style.colorBasePurple + ';">Privacy Policy</a>' 
             onLinkActivated: (link) => Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
-            font.pointSize: 11
+            font.pointSize: Fonts.baseSize
             color: Style.colorText
             
             MouseArea

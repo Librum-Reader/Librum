@@ -6,59 +6,46 @@ import Librum.style
 import Librum.icons
 import Librum.controllers
 import Librum.globals
+import Librum.fonts
 
-
-Popup
-{
+Popup {
     id: root
     implicitWidth: 516
     implicitHeight: layout.height
     padding: 0
     horizontalPadding: 52
-    background: Rectangle
-    {
+    background: Rectangle {
         color: Style.colorPopupBackground
         radius: 6
     }
     modal: true
-    Overlay.modal: Rectangle
-    {
+    Overlay.modal: Rectangle {
         color: Style.colorPopupDim
         opacity: 1
     }
-    
-    onOpenedChanged: 
-    {
-        if(opened)
-        {
-            addTagBox.giveFocus();
-            informationLabel.text = Qt.binding(function() {
-                return Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title;
-            });
-        }
-        else
-        {
-            addTagBox.close();
-            addTagBox.clearInputField();
+
+    onOpenedChanged: {
+        if (opened) {
+            addTagBox.giveFocus()
+            informationLabel.text = Qt.binding(function () {
+                return Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title
+            })
+        } else {
+            addTagBox.close()
+            addTagBox.clearInputField()
         }
     }
-    
-    
-    MFlickWrapper
-    {
+
+    MFlickWrapper {
         anchors.fill: parent
         contentHeight: layout.height
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
-            
-            
-            MButton
-            {
+
+            MButton {
                 id: closeButton
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: 32
@@ -72,40 +59,36 @@ Popup
                 borderColorOnPressed: Style.colorButtonBorder
                 imagePath: Icons.closePopup
                 imageSize: 14
-                
+
                 onClicked: root.close()
             }
-            
-            Label
-            {
+
+            Label {
                 id: popupTitle
                 Layout.topMargin: 20
                 text: "Manage Tags"
                 font.weight: Font.Bold
-                font.pointSize: 17
+                font.pointSize: Fonts.bigTitleSize
                 color: Style.colorTitle
             }
-            
-            
-            MAddTagBox
-            {
+
+            MAddTagBox {
                 id: addTagBox
                 Layout.topMargin: 46
                 Layout.fillWidth: true
-                
-                onAddTag: (name) => 
-                          {
+
+                onAddTag: name => {
                               // Cant use return value, bc. it is null if tag already exists
-                              UserController.addTag(name);
-                              
-                              let tagUuid = UserController.getTagUuidForName(name);
-                              LibraryController.addTag(Globals.selectedBook.uuid, name, tagUuid);
+                              UserController.addTag(name)
+
+                              let tagUuid = UserController.getTagUuidForName(
+                                  name)
+                              LibraryController.addTag(
+                                  Globals.selectedBook.uuid, name, tagUuid)
                           }
             }
-            
-            
-            Label
-            {
+
+            Label {
                 id: informationLabel
                 Layout.fillWidth: true
                 Layout.topMargin: 32
@@ -115,23 +98,20 @@ Popup
                 font.weight: Font.Medium
                 elide: Text.ElideRight
             }
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: separator
                 Layout.fillWidth: true
                 Layout.preferredHeight: 1
                 Layout.topMargin: 4
                 color: Style.colorDarkSeparator
             }
-            
-            
-            ListView
-            {
+
+            ListView {
                 id: listView
                 property var currentSelected
                 property string oldText
-                
+
                 Layout.fillWidth: true
                 Layout.preferredHeight: contentHeight
                 Layout.maximumHeight: 228
@@ -143,37 +123,36 @@ Popup
                 boundsBehavior: Flickable.StopAtBounds
                 ScrollBar.vertical: ScrollBar {}
                 model: Globals.bookTags
-                delegate: MTagItem
-                {
+                delegate: MTagItem {
                     width: listView.width
-                    
-                    onRemoveTag: (index) => 
-                                 {
-                                     LibraryController.removeTag(Globals.selectedBook.uuid,
-                                                              Globals.bookTags[index].uuid);
+
+                    onRemoveTag: index => {
+                                     LibraryController.removeTag(
+                                         Globals.selectedBook.uuid,
+                                         Globals.bookTags[index].uuid)
                                  }
-                    
-                    onStartedRenaming: (oldText) =>
-                                       {
-                                           listView.oldText = oldText;
+
+                    onStartedRenaming: oldText => {
+                                           listView.oldText = oldText
                                        }
-                    
-                    onRenamedTag: (index, text) =>
-                                  {
-                                      let currentItem = listView.itemAtIndex(index);
-                                      let uuid = UserController.getTagUuidForName(listView.oldText);
-                                      
-                                      let success = UserController.renameTag(uuid, text);
-                                      if(success)
-                                      {
-                                          LibraryController.renameTags(listView.oldText, text);
+
+                    onRenamedTag: (index, text) => {
+                                      let currentItem = listView.itemAtIndex(
+                                          index)
+                                      let uuid = UserController.getTagUuidForName(
+                                          listView.oldText)
+
+                                      let success = UserController.renameTag(
+                                          uuid, text)
+                                      if (success) {
+                                          LibraryController.renameTags(
+                                              listView.oldText, text)
                                       }
                                   }
                 }
             }
-            
-            MButton 
-            {
+
+            MButton {
                 id: doneButton
                 Layout.fillWidth: true
                 Layout.preferredHeight: 40
@@ -185,15 +164,13 @@ Popup
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 text: "Done"
-                
+
                 onClicked: root.close()
             }
         }
     }
-    
-    
-    function removeTag()
-    {
+
+    function removeTag() {
         ;
     }
 }

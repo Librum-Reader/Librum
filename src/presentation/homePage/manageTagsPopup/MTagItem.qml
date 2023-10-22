@@ -55,7 +55,7 @@ Item
                 leftPadding: 0
                 text: Globals.bookTags[root.index].name
                 font.weight: root.selected ? Font.Medium : Font.Normal
-                font.pointSize: 12
+                font.pointSize: Fonts.bigSize
                 color: Style.colorText
                 readOnly: true
                 background: Rectangle

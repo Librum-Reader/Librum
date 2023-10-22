@@ -4,50 +4,44 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.icons
 import CustomComponents
+import Librum.fonts
 
-
-Item 
-{
+Item {
     id: root
     property bool downloading: false
     signal leftButtonClicked(int index)
     signal rightButtonClicked(int index, var mouse)
     signal moreOptionClicked(int index, var mouse)
-    
+
     implicitWidth: 190
     implicitHeight: 322
-    
-    Connections
-    {
+
+    Connections {
         target: model
-        
-        function onDownloadedChanged()
-        {
-            if(model.downloaded)
-                root.downloading = false;
+
+        function onDownloadedChanged() {
+            if (model.downloaded)
+                root.downloading = false
         }
     }
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
+
+
         /**
           A Item with rounded corners which is overlapping with the top half of
           the book to create a rounded top, while the rest of the book is rectangluar
           */
-        Item
-        {
+        Item {
             id: upperBookRounding
             Layout.preferredHeight: 10
             Layout.fillWidth: true
             clip: true
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: upperRoundingFiller
                 height: parent.height + 4
                 width: parent.width
@@ -55,15 +49,15 @@ Item
                 color: Style.colorBookImageBackground
             }
         }
-        
+
+
         /**
           An overlay over the upper-book-rounding to get it to be transparent and modal,
           when the book is not currently downloaded. It leads to visual bugs to apply
           the properties directly to the upper-book-rounding item. Moving a separate object
           over it is working fine without any visual bugs
           */
-        Item
-        {
+        Item {
             id: upperBookRoundingDimmer
             Layout.topMargin: -upperBookRounding.height
             Layout.preferredHeight: 10
@@ -71,9 +65,8 @@ Item
             visible: !model.downloaded
             clip: true
             z: 2
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: dimmerRect
                 height: upperRoundingFiller.height
                 width: upperRoundingFiller.width
@@ -82,17 +75,14 @@ Item
                 radius: 4
             }
         }
-        
-        
-        Rectangle
-        {
+
+        Rectangle {
             id: upperBookPart
             Layout.fillWidth: true
             Layout.preferredHeight: 230
             color: Style.colorBookImageBackground
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: bookCoverDimmer
                 anchors.fill: parent
                 visible: !model.downloaded
@@ -100,9 +90,8 @@ Item
                 opacity: 0.5
                 z: 2
             }
-            
-            Image
-            {
+
+            Image {
                 id: downloadBookIcon
                 anchors.centerIn: bookCoverDimmer
                 visible: !model.downloaded && !downloadProgressBar.visible
@@ -112,16 +101,13 @@ Item
                 opacity: 1
                 z: 3
             }
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: upperPartLayout
                 anchors.centerIn: parent
                 spacing: 0
-                
-                Image
-                {
+
+                Image {
                     id: bookCover
                     visible: source != ""
                     Layout.alignment: Qt.AlignHCenter
@@ -129,24 +115,23 @@ Item
                     source: cover
                     cache: false
                 }
-                
+
+
                 /*
                   The item displaying when no book cover exists (usually a ".format" label)
                  */
-                Label
-                {
+                Label {
                     id: noImageLabel
                     Layout.alignment: Qt.AlignCenter
                     visible: bookCover.source == ""
                     text: "." + model.format
                     color: Style.colorNoImageLabel
-                    font.pointSize: 20
+                    font.pointSize: Fonts.veryBigTitleSize
                     font.bold: true
                 }
             }
-            
-            MProgressBar
-            {
+
+            MProgressBar {
                 id: downloadProgressBar
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
@@ -157,36 +142,30 @@ Item
                 visible: false
                 z: 3
                 progress: model.mediaDownloadProgress
-                onProgressChanged:
-                {
-                    if(progress === 1)
-                        visible = false;
+                onProgressChanged: {
+                    if (progress === 1)
+                        visible = false
                     else
-                        visible = true;
+                        visible = true
                 }
             }
         }
-        
-        
-        Rectangle
-        {
+
+        Rectangle {
             id: lowerBookPart
             Layout.fillWidth: true
             Layout.preferredHeight: 90
             color: Style.colorBookBackground
             border.width: 1
             border.color: Style.colorBookBorder
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: bottomPartLayout
                 width: parent.width - internal.lowerBookPartPadding * 2
                 anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 0
-                
-                Label
-                {
+
+                Label {
                     id: title
                     Layout.fillWidth: true
                     Layout.preferredHeight: 34
@@ -196,53 +175,48 @@ Item
                     font.weight: Font.Medium
                     verticalAlignment: Text.AlignVCenter
                     color: Style.colorTitle
-                    font.pointSize: 11
+                    font.pointSize: Fonts.baseSize
                     lineHeight: 0.8
                     wrapMode: TextInput.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
                 }
-                
-                Label
-                {
+
+                Label {
                     id: authors
                     Layout.fillWidth: true
                     Layout.topMargin: 4
                     clip: true
                     text: model.authors === "" ? "Unknown" : model.authors
                     color: Style.colorLightText
-                    font.pointSize: 10
+                    font.pointSize: Fonts.smallSize
                     elide: Text.ElideRight
                 }
-                
-                RowLayout
-                {
+
+                RowLayout {
                     id: statusRow
                     Layout.fillWidth: true
                     spacing: 0
-                    
-                    Rectangle
-                    {
+
+                    Rectangle {
                         id: readingProgressBox
                         Layout.preferredWidth: 46
                         Layout.preferredHeight: 18
                         Layout.topMargin: 4
                         color: Style.colorHighlight
                         radius: 2
-                        
-                        Label
-                        {
+
+                        Label {
                             id: readingProgressLabel
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignBottom
                             text: model.bookReadingProgress + "%"
                             font.weight: Font.DemiBold
                             color: Style.colorTitle
-                            font.pointSize: 10
+                            font.pointSize: Fonts.smallSize
                         }
                     }
-                    
-                    Image
-                    {
+
+                    Image {
                         id: existsOnlyOnClientIndicator
                         Layout.leftMargin: 8
                         Layout.topMargin: 4
@@ -251,29 +225,29 @@ Item
                         sourceSize.width: 18
                         fillMode: Image.PreserveAspectFit
                         source: Icons.cloudOff
-                        
-                        MouseArea
-                        {
+
+                        MouseArea {
                             id: existsOnlyOnClientIndicatorArea
                             anchors.fill: parent
                             hoverEnabled: true
-                            onContainsMouseChanged: containsMouse ? toolTip.open() : toolTip.close()
+                            onContainsMouseChanged: containsMouse ? toolTip.open(
+                                                                        ) : toolTip.close()
                         }
                     }
-                    
-                    Item { Layout.fillWidth: true }
-                    
-                    Image
-                    {
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    Image {
                         id: moreOptionsIcon
                         Layout.preferredHeight: 20
                         Layout.rightMargin: -2
                         source: Icons.dots
                         fillMode: Image.PreserveAspectFit
                         antialiasing: false
-                        
-                        MouseArea
-                        {
+
+                        MouseArea {
                             id: moreOptionsArea
                             anchors.fill: parent
                             hoverEnabled: true
@@ -283,48 +257,38 @@ Item
             }
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         anchors.fill: parent
         acceptedButtons: Qt.AllButtons
-        
+
         // Delegate mouse clicks events to parent
-        onClicked:
-            (mouse) =>
-            {
-                if(mouse.button === Qt.LeftButton)
-                {
-                    if(moreOptionsArea.containsMouse)
-                    {
-                        root.moreOptionClicked(root.index, mouse);
-                        return;
-                    }
-                    
-                    root.leftButtonClicked(root.index);
-                }
-                else if(mouse.button === Qt.RightButton)
-                {
-                    root.rightButtonClicked(root.index, mouse);
-                }
-            }
+        onClicked: mouse => {
+                       if (mouse.button === Qt.LeftButton) {
+                           if (moreOptionsArea.containsMouse) {
+                               root.moreOptionClicked(root.index, mouse)
+                               return
+                           }
+
+                           root.leftButtonClicked(root.index)
+                       } else if (mouse.button === Qt.RightButton) {
+                           root.rightButtonClicked(root.index, mouse)
+                       }
+                   }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int lowerBookPartPadding: 14
     }
-    
-    MToolTip
-    {
+
+    MToolTip {
         id: toolTip
         focusedItem: existsOnlyOnClientIndicator
         content: "Your book has not been uploaded to the cloud.\nEither you are offline, or your storage is full."
     }
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
+
+    function giveFocus() {
+        root.forceActiveFocus()
     }
 }

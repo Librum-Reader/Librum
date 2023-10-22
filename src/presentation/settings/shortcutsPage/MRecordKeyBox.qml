@@ -5,35 +5,29 @@ import CustomComponents
 import Librum.elements
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property var itemToRedirectFocusTo
     property bool recording: false
     property string originalSequence: ""
     property alias text: recordLabel.text
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 2
-        
-        
-        Label
-        {
+
+        Label {
             id: header
             text: "Key"
             font.weight: Font.DemiBold
-            font.pointSize: 12
+            font.pointSize: Fonts.bigSize
             color: Style.colorTitle
         }
-        
-        Rectangle
-        {
+
+        Rectangle {
             id: button
             Layout.fillWidth: true
             Layout.preferredHeight: 38
@@ -42,39 +36,33 @@ Item
             border.color: root.recording ? Style.colorRecordActiveBorder : Style.colorButtonBorder
             border.width: root.recording ? 2 : 1
             opacity: mouseArea.pressed ? 0.8 : 1
-            
-            onActiveFocusChanged: activeFocus ? root.startRecording() : root.stopRecording()
-            
-            
-            KeySequenceRecorder
-            {
+
+            onActiveFocusChanged: activeFocus ? root.startRecording(
+                                                    ) : root.stopRecording()
+
+            KeySequenceRecorder {
                 id: keySequenceRecorder
                 originalSequence: root.originalSequence
-                
+
                 onReturnPressed: stopRecording()
             }
-            
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: contentLayout
                 anchors.fill: parent
                 spacing: 4
-                
-                
-                Label
-                {
+
+                Label {
                     id: recordLabel
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
                     text: internal.getRecordText()
-                    font.pointSize: 12
+                    font.pointSize: Fonts.bigSize
                     color: Style.colorLightInputText
                     elide: Text.ElideLeft
                 }
-                
-                Image
-                {
+
+                Image {
                     id: microphoneIcon
                     Layout.alignment: Qt.AlignRight
                     Layout.rightMargin: 12
@@ -85,57 +73,47 @@ Item
             }
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         id: mouseArea
         anchors.fill: parent
-        
-        onClicked:
-        {
-            if(root.recording)
-            {
-                stopRecording();
-                root.forceActiveFocus();
-                return;
+
+        onClicked: {
+            if (root.recording) {
+                stopRecording()
+                root.forceActiveFocus()
+                return
             }
-            
-            startRecording();
+
+            startRecording()
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
-        
-        
-        function getRecordText()
-        {
-            if(keySequenceRecorder.currentSequence)
-                return keySequenceRecorder.currentSequence; 
-            
-            if(keySequenceRecorder.originalSequence)
-                return keySequenceRecorder.originalSequence;
-            
-            return "Press to record";
+
+        function getRecordText() {
+            if (keySequenceRecorder.currentSequence)
+                return keySequenceRecorder.currentSequence
+
+            if (keySequenceRecorder.originalSequence)
+                return keySequenceRecorder.originalSequence
+
+            return "Press to record"
         }
     }
-    
-    
-    function clear()
-    {
-        keySequenceRecorder.resetSequence();
+
+    function clear() {
+        keySequenceRecorder.resetSequence()
     }
-    
-    function startRecording()
-    {
-        keySequenceRecorder.forceActiveFocus();
-        root.recording = true;
+
+    function startRecording() {
+        keySequenceRecorder.forceActiveFocus()
+        root.recording = true
     }
-    
-    function stopRecording()
-    {
-        itemToRedirectFocusTo.forceActiveFocus();
-        root.recording = false;
+
+    function stopRecording() {
+        itemToRedirectFocusTo.forceActiveFocus()
+        root.recording = false
     }
 }

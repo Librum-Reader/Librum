@@ -146,6 +146,7 @@ void BookService::addBookmark(const domain::entities::Bookmark& bookmark)
     book->addBookmark(bookmark);
     emit bookmarkInsertionEnded();
 
+    book->updateLastModified();
     m_libraryService->updateBook(*book);
 }
 
@@ -156,6 +157,7 @@ void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
     book->renameBookmark(uuid, newName);
     emit bookmarkNameChanged(getIndexOfBookmark(uuid));
 
+    book->updateLastModified();
     m_libraryService->updateBook(*book);
 }
 
@@ -167,6 +169,7 @@ void BookService::removeBookmark(const QUuid& uuid)
     book->removeBookmark(uuid);
     emit bookmarkDeletionEnded();
 
+    book->updateLastModified();
     m_libraryService->updateBook(*book);
 }
 

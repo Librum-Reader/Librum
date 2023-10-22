@@ -6,6 +6,7 @@ import Librum.elements
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -99,7 +100,7 @@ Popup {
                     leftPadding: 12
                     color: Style.colorBaseInputText
                     text: root.word
-                    font.pointSize: 11
+                    font.pointSize: Fonts.baseSize
                     placeholderText: "Search"
                     placeholderTextColor: Style.colorPlaceholderText
                     selectByMouse: true
@@ -123,7 +124,7 @@ Popup {
             wrapMode: Text.NoWrap
             Layout.topMargin: 20
             color: Style.colorText
-            font.pointSize: 20
+            font.pointSize: Fonts.veryBigTitleSize
             font.weight: Font.DemiBold
 
             clip: true
@@ -133,7 +134,7 @@ Popup {
             id: language
             Layout.topMargin: -4
             color: Style.colorText
-            font.pointSize: 11
+            font.pointSize: Fonts.baseSize
         }
 
         Pane {
@@ -198,7 +199,7 @@ Popup {
                                     anchors.centerIn: parent
                                     text: modelData + 1
                                     color: Style.colorBannerText
-                                    font.pointSize: 10
+                                    font.pointSize: Fonts.smallSize
                                     font.bold: true
                                 }
                             }
@@ -212,7 +213,7 @@ Popup {
                                 wrapMode: Text.WordWrap
                                 text: DictionaryController.definition.wordTypes[modelData].partOfSpeech
                                 color: Style.colorText
-                                font.pointSize: 13
+                                font.pointSize: Fonts.hugeSize
                                 font.weight: Font.DemiBold
                                 textFormat: Text.StyledText
                             }
@@ -244,7 +245,7 @@ Popup {
                                             Layout.alignment: Qt.AlignTop
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
-                                            font.pointSize: 11
+                                            font.pointSize: Fonts.baseSize
                                             textFormat: Text.StyledText
                                             linkColor: Style.colorLinkText
                                         }
@@ -255,7 +256,7 @@ Popup {
                                             text: DictionaryController.definition.wordTypes[type.index].definitions[modelData].definition
                                             wrapMode: Text.WordWrap
                                             color: Style.colorText
-                                            font.pointSize: 11
+                                            font.pointSize: Fonts.baseSize
                                             textFormat: Text.StyledText
                                             linkColor: Style.colorLinkText
 
@@ -315,7 +316,7 @@ Popup {
                                             text: DictionaryController.definition.wordTypes[type.index].definitions[definitionItem.index].examples[modelData]
                                             wrapMode: Text.WordWrap
                                             color: Style.colorLightText
-                                            font.pointSize: 10
+                                            font.pointSize: Fonts.smallSize
                                             font.weight: Font.Light
                                             textFormat: Text.StyledText
                                             linkColor: Style.colorLinkText
@@ -351,7 +352,7 @@ Popup {
                     Label {
                         color: Style.colorText
                         Layout.alignment: Qt.AlignHCenter
-                        font.pointSize: 14
+                        font.pointSize: Fonts.smallTitleSize
                         text: "No definitions found"
                     }
 
@@ -363,7 +364,7 @@ Popup {
                               + '; text-decoration: underline;">Search online</a>'
                         textFormat: Text.StyledText
                         onLinkActivated: link => Qt.openUrlExternally(link)
-                        font.pointSize: 14
+                        font.pointSize: Fonts.smallTitleSize
                         color: Style.colorText
 
                         MouseArea {

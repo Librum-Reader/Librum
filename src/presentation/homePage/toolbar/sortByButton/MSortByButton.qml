@@ -3,65 +3,54 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     signal itemSelected(int role)
-    
+
     implicitWidth: 104
     implicitHeight: 36
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 4
-        
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillWidth: true
             Layout.fillHeight: true
             padding: 0
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorControlBackground
                 border.width: 1
                 border.color: Style.colorContainerBorder
                 radius: 5
             }
-            
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: inButtonLayout
                 anchors.centerIn: parent
                 spacing: 8
-                
-                Label
-                {
+
+                Label {
                     id: sortByLabel
                     Layout.topMargin: -1
                     color: Style.colorText
                     text: "Sort by"
-                    font.pointSize: 12
+                    font.pointSize: Fonts.bigSize
                     font.weight: Font.Bold
                 }
-                
-                Image
-                {
+
+                Image {
                     id: sortByArrowIcon
                     sourceSize.height: 6
                     source: Icons.dropdownLight
                     fillMode: Image.PreserveAspectFit
                     rotation: 180
-                    
-                    NumberAnimation
-                    {
+
+                    NumberAnimation {
                         id: closeAnim
                         target: sortByArrowIcon
                         property: "rotation"
@@ -69,9 +58,8 @@ Item
                         duration: 175
                         easing.type: Easing.InOutQuad
                     }
-                    
-                    NumberAnimation
-                    {
+
+                    NumberAnimation {
                         id: openAnim
                         target: sortByArrowIcon
                         property: "rotation"
@@ -83,28 +71,24 @@ Item
             }
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         anchors.fill: parent
-        
+
         onClicked: sortByPopup.opened ? sortByPopup.close() : sortByPopup.open()
     }
-    
-    MSortByPopup
-    {
+
+    MSortByPopup {
         id: sortByPopup
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-        
+
         onOpened: openAnim.start()
         onClosed: closeAnim.start()
-        onItemSelected: (role) => root.itemSelected(role)
+        onItemSelected: role => root.itemSelected(role)
     }
-    
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
+
+    function giveFocus() {
+        root.forceActiveFocus()
     }
 }

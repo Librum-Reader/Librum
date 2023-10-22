@@ -5,38 +5,33 @@ import Librum.elements
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property int currentSidebarWidth
     property int closedSidebarWidth
     property int arrowRotation
     signal clicked
-    
+
     implicitWidth: root.closedSidebarWidth
     implicitHeight: 60
-    
-    
-    Pane
-    {
+
+    Pane {
         id: container
         padding: 0
         anchors.fill: parent
-        background: Rectangle { color: "transparent" }
-        
-        
-        RowLayout
-        {
+        background: Rectangle {
+            color: "transparent"
+        }
+
+        RowLayout {
             // Make the button go over the sidebar border
             width: root.currentSidebarWidth + expandButton.width / 2.2
             height: parent.height
             spacing: 0
-            
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: profilePicture
                 Layout.preferredWidth: 36
                 Layout.preferredHeight: 36
@@ -45,22 +40,21 @@ Item
                 clip: true
                 radius: width
                 antialiasing: true
-                color: UserController.profilePicture.length === 0 ? Style.colorDefaultProfilePicture : "transparent"
-                
-                
-                Label
-                {
+                color: UserController.profilePicture.length
+                       === 0 ? Style.colorDefaultProfilePicture : "transparent"
+
+                Label {
                     id: initials
                     anchors.centerIn: parent
                     visible: UserController.profilePicture.length === 0
-                    text: UserController.firstName[0].toUpperCase() + UserController.lastName[0].toUpperCase()
-                    font.pointSize: 12
+                    text: UserController.firstName[0].toUpperCase(
+                              ) + UserController.lastName[0].toUpperCase()
+                    font.pointSize: Fonts.bigSize
                     font.bold: true
                     color: Style.colorFocusedButtonText
                 }
-                
-                Image
-                {
+
+                Image {
                     id: profileImage
                     visible: UserController.profilePicture.length > 0
                     anchors.centerIn: parent
@@ -70,20 +64,19 @@ Item
                     fillMode: Image.PreserveAspectFit
                     cache: false
                 }
-                
-                MouseArea
-                {
+
+                MouseArea {
                     anchors.fill: parent
-                    
+
                     onClicked: root.clicked()
                 }
             }
-            
+
+
             /*
               Button to expand the sidebar
               */
-            Rectangle
-            {
+            Rectangle {
                 id: expandButton
                 Layout.preferredWidth: 23
                 Layout.preferredHeight: 24
@@ -93,10 +86,8 @@ Item
                 radius: 2
                 border.width: 1
                 border.color: Style.colorButtonBorder
-                
-                
-                Image
-                {
+
+                Image {
                     id: rightArrowImage
                     rotation: root.arrowRotation
                     sourceSize.width: 20
@@ -105,27 +96,23 @@ Item
                     source: Icons.arrowheadNextIcon
                     cache: false
                 }
-                
-                MouseArea
-                {
+
+                MouseArea {
                     id: expandButtonMouseArea
                     anchors.fill: parent
-                    
-                    onClicked:
-                    {
-                        if(SidebarState.currentState === SidebarState.Opened)
-                            closeSidebar();
+
+                    onClicked: {
+                        if (SidebarState.currentState === SidebarState.Opened)
+                            closeSidebar()
                         else
-                            openSidebar();
+                            openSidebar()
                     }
                 }
             }
         }
     }
-    
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
+
+    function giveFocus() {
+        root.forceActiveFocus()
     }
 }

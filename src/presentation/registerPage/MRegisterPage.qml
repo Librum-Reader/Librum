@@ -88,7 +88,7 @@ MFlickWrapper
                         color: Style.colorText
                         text: "Welcome!"
                         font.bold: true
-                        font.pointSize: 26
+                        font.pointSize: Fonts.enormousTitleSize
                     }
                     
                     Label
@@ -100,7 +100,7 @@ MFlickWrapper
                         horizontalAlignment: Text.AlignHCenter
                         text: "Your credentials are only used to authenticate yourself. " + 
                               "Everything will be stored in a secure database."
-                        font.pointSize: 13
+                        font.pointSize: Fonts.hugeSize
                         color: Style.colorSubtitle
                         wrapMode: Text.WordWrap
                     }
@@ -261,7 +261,7 @@ MFlickWrapper
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
                 text: "Already have an account? Login"
-                font.pointSize: 10.5
+                font.pointSize: Fonts.mediumSize
                 opacity: loginRedirecitonLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
                 

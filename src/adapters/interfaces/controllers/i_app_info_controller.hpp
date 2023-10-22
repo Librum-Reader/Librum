@@ -8,16 +8,16 @@ namespace adapters
 
 /**
  * The AuthenticationController class is exposed to the UI code and thus is the
- * "entry point" to the application's backend for application info operations. It
- * acts as a layer of abstraction which maps the user data to a format usable
+ * "entry point" to the application's backend for application info operations.
+ * It acts as a layer of abstraction which maps the user data to a format usable
  * for the application.
  */
 class ADAPTERS_EXPORT IAppInfoController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString currentVersion READ getCurrentVersion CONSTANT)
-    Q_PROPERTY(QString newestVersion READ getNewestVersion
-                   NOTIFY newestVersionChanged)
+    Q_PROPERTY(
+        QString newestVersion READ getNewestVersion NOTIFY newestVersionChanged)
     Q_PROPERTY(QString applicationName READ getApplicationName CONSTANT)
     Q_PROPERTY(QString companyName READ getCompanyName CONSTANT)
     Q_PROPERTY(QString website READ getWebsite CONSTANT)
@@ -26,6 +26,7 @@ class ADAPTERS_EXPORT IAppInfoController : public QObject
     Q_PROPERTY(QString githubLink READ getGithubLink CONSTANT)
     Q_PROPERTY(QString currentQtVersion READ getCurrentQtVersion CONSTANT)
     Q_PROPERTY(QString operatingSystem READ getOperatingSystem CONSTANT)
+    Q_PROPERTY(int systemFontSize READ getSystemFontSize CONSTANT)
 
 public:
     virtual ~IAppInfoController() noexcept = default;
@@ -43,6 +44,7 @@ private:
     virtual QString getGithubLink() const = 0;
     virtual QString getCurrentQtVersion() const = 0;
     virtual QString getOperatingSystem() const = 0;
+    virtual int getSystemFontSize() const = 0;
 
 signals:
     void newestVersionChanged();
