@@ -69,7 +69,7 @@ Item {
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.hugeSize
+                font.pointSize: Fonts.smallTitleSize
             }
 
             Label {
@@ -92,7 +92,7 @@ Item {
                 imageSize: 16
                 imageSpacing: 8
                 text: "Update"
-                fontSize: 12.5
+                fontSize: Fonts.largeSize
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8

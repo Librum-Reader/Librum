@@ -53,7 +53,7 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Restore Defaults"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
 
@@ -93,7 +93,7 @@ MFlickWrapper {
                         Layout.fillWidth: true
                         Layout.topMargin: 24
                         text: "Open books after creation"
-                        font.pointSize: Fonts.hugeSize
+                        font.pointSize: Fonts.smallTitleSize
                         font.weight: Font.DemiBold
                         color: Style.colorText
                     }

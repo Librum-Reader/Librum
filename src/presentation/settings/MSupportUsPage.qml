@@ -94,7 +94,7 @@ MFlickWrapper {
                         imageSpacing: 10
                         text: "Support us"
                         fontWeight: Font.DemiBold
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         textColor: Style.colorFocusedButtonText
                         radius: 4
 

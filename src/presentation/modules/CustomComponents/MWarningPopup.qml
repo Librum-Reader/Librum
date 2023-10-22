@@ -121,7 +121,7 @@ Popup {
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: root.leftButtonText
-                            fontSize: 12.75
+                            fontSize: Fonts.largeSize
                             fontWeight: Font.Bold
                             textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
 
@@ -142,7 +142,7 @@ Popup {
                             backgroundColor: focus ? (root.rightButtonRed ? Style.colorRed : Style.colorBasePurple) : "transparent"
                             opacityOnPressed: 0.7
                             text: root.rightButtonText
-                            fontSize: 12.75
+                            fontSize: Fonts.largeSize
                             fontWeight: Font.Bold
                             textColor: focus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
 

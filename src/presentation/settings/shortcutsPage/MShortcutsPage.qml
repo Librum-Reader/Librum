@@ -57,7 +57,7 @@ Page {
                 text: "Edit shortcut"
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
-                fontSize: 13
+                fontSize: Fonts.largeSize
                 imagePath: Icons.addWhite
 
                 onClicked: {

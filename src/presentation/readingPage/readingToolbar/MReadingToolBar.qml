@@ -204,7 +204,7 @@ Pane {
                       SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
-            font.pointSize: Fonts.hugeSize
+            font.pointSize: Fonts.smallTitleSize
             elide: Text.ElideRight
         }
 

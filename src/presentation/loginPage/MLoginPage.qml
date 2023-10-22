@@ -105,7 +105,7 @@ MFlickWrapper {
                         Layout.alignment: Qt.AlignHCenter
                         text: "Log into your account"
                         color: Style.colorSubtitle
-                        font.pointSize: Fonts.hugeSize
+                        font.pointSize: Fonts.smallTitleSize
                     }
 
                     MLabeledInputBox {
@@ -198,7 +198,7 @@ MFlickWrapper {
                             text: "Forgot password?"
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 3
-                            font.pointSize: Fonts.mediumSize
+                            font.pointSize: Fonts.baseSize
                             opacity: forgotPasswordPageRedirection.pressed ? 0.8 : 1
                             color: Style.colorBasePurple
 
@@ -218,7 +218,7 @@ MFlickWrapper {
                         Layout.topMargin: 42
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         opacityOnPressed: 0.85
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
@@ -247,7 +247,7 @@ MFlickWrapper {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
                 text: "Don't have an account? Register"
-                font.pointSize: Fonts.mediumSize
+                font.pointSize: Fonts.baseSize
                 opacity: registerLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
 

@@ -53,7 +53,7 @@ Item {
                 text: "Add book"
                 textColor: Style.colorBasePurple
                 fontWeight: Font.Bold
-                fontSize: 13.5
+                fontSize: Fonts.smallTitleSize
                 imagePath: Icons.addFirstBookPlus
                 imageSize: 16
 

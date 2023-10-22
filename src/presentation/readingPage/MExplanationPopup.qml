@@ -108,11 +108,11 @@ Popup {
             itemHeight: 32
             selectedItemFontColor: Style.colorBaseInputText
             headerText: "Mode"
-            headerFontSize: 12
+            headerFontSize: Fonts.bigSize
             headerFontColor: Style.colorTitle
             headerFontWeight: Font.DemiBold
-            fontSize: 12
-            selectedItemFontSize: 13
+            fontSize: Fonts.bigSize
+            selectedItemFontSize: Fonts.largeSize
             selectedItemPadding: 3
             defaultIndex: 0
             emptyText: "None selected"
@@ -132,12 +132,12 @@ Popup {
             Layout.fillWidth: true
             Layout.topMargin: 24
             headerFontColor: Style.colorLightText
-            headerFontSize: 12
+            headerFontSize: Fonts.bigSize
             borderColor: Style.colorContainerBorder
             borderWidth: 1
             text: question
             backgroundColor: Style.colorContainerBackground
-            inputFontSize: 13
+            inputFontSize: Fonts.largeSize
             headerText: "Request"
             readOnly: true
         }
@@ -172,7 +172,7 @@ Popup {
                     width: answerFlick.width
                     focus: true
                     text: root.answer
-                    font.pointSize: Fonts.hugeSize
+                    font.pointSize: Fonts.smallTitleSize
                     color: Style.colorText
                     readOnly: true
                     wrapMode: Text.WordWrap
@@ -296,7 +296,7 @@ Popup {
             text: "Ask"
             textColor: internal.dataChanged ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
             fontWeight: Font.Bold
-            fontSize: 12
+            fontSize: Fonts.bigSize
 
             onClicked: {
                 if (internal.dataChanged) {

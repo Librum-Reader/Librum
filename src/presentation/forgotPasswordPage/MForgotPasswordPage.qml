@@ -3,9 +3,10 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
-import Librum.controllers
+import Librum.fonts
 
 MFlickWrapper {
     id: root
@@ -127,7 +128,7 @@ MFlickWrapper {
                             borderWidth: 0
                             backgroundColor: Style.colorBasePurple
                             text: "Send Email"
-                            fontSize: 12.25
+                            fontSize: Fonts.bigSize
                             textColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
 
@@ -145,7 +146,7 @@ MFlickWrapper {
                             backgroundColor: "transparent"
                             opacityOnPressed: 0.7
                             text: "Back to Login"
-                            fontSize: 12.20
+                            fontSize: Fonts.bigSize
                             fontWeight: Font.Medium
                             textColor: Style.colorUnfocusedButtonText
                             imagePath: Icons.arrowheadBackIcon

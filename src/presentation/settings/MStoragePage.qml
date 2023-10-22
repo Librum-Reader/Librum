@@ -57,7 +57,7 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Upgrade"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.heartHallow
@@ -111,7 +111,7 @@ MFlickWrapper {
                                     text: "YOUR TIER"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.mediumSize
+                                    font.pointSize: Fonts.baseSize
                                 }
 
                                 Label {
@@ -148,7 +148,7 @@ MFlickWrapper {
                                         borderWidth: 0
                                         backgroundColor: Style.colorBasePurple
                                         text: "Upgrade"
-                                        fontSize: 12
+                                        fontSize: Fonts.bigSize
                                         fontWeight: Font.Bold
                                         textColor: Style.colorFocusedButtonText
 
@@ -164,7 +164,7 @@ MFlickWrapper {
                                         opacityOnPressed: 0.75
                                         backgroundColor: "transparent"
                                         text: "See why we offer multiple tiers"
-                                        fontSize: 12
+                                        fontSize: Fonts.bigSize
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
 
@@ -198,7 +198,7 @@ MFlickWrapper {
                                     text: "USED STORAGE"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.mediumSize
+                                    font.pointSize: Fonts.baseSize
                                 }
 
                                 RowLayout {
@@ -313,7 +313,7 @@ MFlickWrapper {
                                     text: "YOUR BOOKS"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.mediumSize
+                                    font.pointSize: Fonts.baseSize
                                 }
 
                                 Label {

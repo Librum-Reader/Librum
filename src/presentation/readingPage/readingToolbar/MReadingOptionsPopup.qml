@@ -3,29 +3,27 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Qt.labs.platform
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
-import Librum.controllers
+import Librum.fonts
 
-
-Popup
-{
+Popup {
     id: root
     implicitWidth: 212
     padding: 0
     closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-    background: Rectangle { color: "transparent"; radius: 4 }
-    
-    
-    ColumnLayout
-    {
+    background: Rectangle {
+        color: "transparent"
+        radius: 4
+    }
+
+    ColumnLayout {
         id: layout
         width: parent.width
         spacing: 0
-        
-        
-        Image
-        {
+
+        Image {
             id: dropletIcon
             Layout.alignment: Qt.AlignRight
             Layout.topMargin: -1
@@ -34,40 +32,32 @@ Popup
             sourceSize.width: 10
             fillMode: Image.PreserveAspectFit
         }
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillWidth: true
             implicitWidth: parent.width
             padding: 0
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorPopupBackground
                 border.color: Style.colorContainerBorder
                 border.width: 1
                 radius: 4
             }
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: contentLayout
                 width: parent.width
                 spacing: 0
-                
-                
-                RowLayout
-                {
+
+                RowLayout {
                     id: actionRow
                     Layout.leftMargin: (parent.width - implicitWidth) / 2
                     Layout.topMargin: 9
                     Layout.bottomMargin: 9
                     spacing: 12
-                    
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: printButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
@@ -77,9 +67,8 @@ Popup
                         imagePath: Icons.readingOptionsPopupPrinter
                         imageSize: 22
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: downloadButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
@@ -88,12 +77,11 @@ Popup
                         borderWidth: 0
                         imagePath: Icons.readingOptionsPopupDownload
                         imageSize: 22
-                        
+
                         onClicked: downloadFileDialog.open()
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: shareButton
                         Layout.preferredWidth: 42
                         Layout.preferredHeight: 32
@@ -104,59 +92,58 @@ Popup
                         imageSize: 22
                     }
                 }
-                
-                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorDarkSeparator }
-                
-                
-                ColumnLayout
-                {
+
+                Rectangle {
+                    Layout.preferredHeight: 1
+                    Layout.fillWidth: true
+                    color: Style.colorDarkSeparator
+                }
+
+                ColumnLayout {
                     id: checkBoxLayout
                     Layout.fillWidth: true
                     Layout.topMargin: 14
                     Layout.leftMargin: 14
                     Layout.bottomMargin: 16
                     spacing: 10
-                    
-                    MLabeledCheckBox
-                    {
+
+                    MLabeledCheckBox {
                         id: ttsCheckbox
                         Layout.fillWidth: true
                         Layout.topMargin: 1
                         boxHeight: 19
                         boxWidth: 19
                         text: "Read out (TTS)"
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         spacing: 8
                         enabled: false
                     }
-                    
-                    MLabeledCheckBox
-                    {
+
+                    MLabeledCheckBox {
                         id: continuousPagesCheckbox
                         Layout.fillWidth: true
                         boxHeight: 19
                         boxWidth: 19
                         verticalTextOffset: 1
                         text: "Continuous pages"
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         checked: true
                         spacing: 8
                         enabled: false
                     }
-                    
-                    MLabeledCheckBox
-                    {
+
+                    MLabeledCheckBox {
                         id: displayVerticallyCheckbox
                         Layout.fillWidth: true
                         boxHeight: 19
                         boxWidth: 19
                         verticalTextOffset: 1
                         text: "Display vertically"
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         checked: true
@@ -164,22 +151,22 @@ Popup
                         enabled: false
                     }
                 }
-                
-                Rectangle { Layout.preferredHeight: 1; Layout.fillWidth: true; color: Style.colorDarkSeparator }
-                
-                
-                ColumnLayout
-                {
+
+                Rectangle {
+                    Layout.preferredHeight: 1
+                    Layout.fillWidth: true
+                    color: Style.colorDarkSeparator
+                }
+
+                ColumnLayout {
                     id: buttonLayout
                     Layout.fillWidth: true
                     Layout.topMargin: 14
                     Layout.leftMargin: 14
                     Layout.bottomMargin: 16
                     spacing: 10
-                    
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: invertColorsButton
                         Layout.fillWidth: true
                         Layout.preferredHeight: 21
@@ -189,29 +176,29 @@ Popup
                         borderWidth: 0
                         text: "Invert colors"
                         textColor: Style.colorText
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsInvertColor
                         imageSize: 24
                         imageSpacing: 6
                         imageLeftMargin: -1
-                        
-                        onClicked:
-                        {
-                            let value = "";
-                            
-                            let current = SettingsController.appearanceSettings.PageColorMode;
-                            if(current === "Normal")
-                                value = "Inverted";
+
+                        onClicked: {
+                            let value = ""
+
+                            let current = SettingsController.appearanceSettings.PageColorMode
+                            if (current === "Normal")
+                                value = "Inverted"
                             else
-                                value = "Normal";
-                            
-                            SettingsController.setSetting(SettingKeys.PageColorMode, value, SettingGroups.Appearance);
+                                value = "Normal"
+
+                            SettingsController.setSetting(
+                                        SettingKeys.PageColorMode, value,
+                                        SettingGroups.Appearance)
                         }
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: syncButton
                         Layout.fillWidth: true
                         Layout.preferredHeight: 21
@@ -221,16 +208,15 @@ Popup
                         borderWidth: 0
                         text: "Sync book"
                         textColor: Style.colorText
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsPopupSync
                         imageSize: 16
                         imageLeftMargin: 2
                         imageSpacing: 11
                     }
-                    
-                    MButton
-                    {
+
+                    MButton {
                         id: moreButton
                         Layout.fillWidth: true
                         Layout.preferredHeight: 21
@@ -240,27 +226,24 @@ Popup
                         borderWidth: 0
                         text: "More options"
                         textColor: Style.colorText
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsSettings
                         imageSize: 20
                         imageLeftMargin: 1
                         imageSpacing: 8
-                        
-                        
-                        onClicked:
-                        {
-                            loadSettingsAppearancePage();
-                            root.close();
-                        }                   
+
+                        onClicked: {
+                            loadSettingsAppearancePage()
+                            root.close()
+                        }
                     }
                 }
             }
         }
     }
-    
-    FileDialog
-    {
+
+    FileDialog {
         id: downloadFileDialog
         acceptLabel: "Save"
         fileMode: FileDialog.SaveFile

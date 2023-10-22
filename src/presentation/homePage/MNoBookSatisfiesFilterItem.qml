@@ -37,7 +37,7 @@ Item {
             text: "Remove Filters"
             textColor: Style.colorBasePurple
             fontWeight: Font.Bold
-            fontSize: 12.5
+            fontSize: Fonts.largeSize
             imagePath: Icons.cancelPurple
             imageSize: 11
             imageToRight: true

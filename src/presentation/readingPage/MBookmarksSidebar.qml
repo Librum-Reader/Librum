@@ -129,7 +129,7 @@ Item {
                 Layout.leftMargin: 12
                 Layout.rightMargin: 12
                 Layout.bottomMargin: 12
-                fontSize: 10.5
+                fontSize: Fonts.baseSize
                 backgroundColor: Style.colorContainerBackground
                 borderColor: Style.colorButtonBorder
                 opacityOnPressed: 0.7

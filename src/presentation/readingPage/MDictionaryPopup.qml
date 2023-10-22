@@ -213,7 +213,7 @@ Popup {
                                 wrapMode: Text.WordWrap
                                 text: DictionaryController.definition.wordTypes[modelData].partOfSpeech
                                 color: Style.colorText
-                                font.pointSize: Fonts.hugeSize
+                                font.pointSize: Fonts.smallTitleSize
                                 font.weight: Font.DemiBold
                                 textFormat: Text.StyledText
                             }

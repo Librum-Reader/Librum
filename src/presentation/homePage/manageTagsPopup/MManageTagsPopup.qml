@@ -160,7 +160,7 @@ Popup {
                 Layout.bottomMargin: 42
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                fontSize: 12
+                fontSize: Fonts.bigSize
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 text: "Done"

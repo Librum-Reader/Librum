@@ -138,7 +138,7 @@ Page {
                     text: "Add books"
                     textColor: Style.colorFocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 13
+                    fontSize: Fonts.largeSize
                     imagePath: Icons.addWhite
 
                     onClicked: importFilesDialog.open()

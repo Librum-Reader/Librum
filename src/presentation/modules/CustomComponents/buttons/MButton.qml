@@ -2,19 +2,18 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property bool active: false
     property bool currentlyHovered: mouseArea.containsMouse
     property bool currentlyPressed: mouseArea.pressed
-    
+
     property string text
     property color textColor: Style.colorUnfocusedButtonText
     property int fontWeight: Font.Bold
-    property double fontSize: 11
+    property double fontSize: Fonts.baseSize
     property color backgroundColor: Style.colorControlBackground
     property double opacityOnPressed: 0.9
     property int borderWidth: 1
@@ -29,14 +28,12 @@ Item
     property bool imageToRight: false
     property bool centerContentVertically: true
     property bool centerContentHorizontally: true
-    
+
     implicitHeight: 30
-    
-    signal clicked()
-        
-    
-    Rectangle
-    {
+
+    signal clicked
+
+    Rectangle {
         id: container
         anchors.fill: parent
         color: root.backgroundColor
@@ -45,17 +42,14 @@ Item
         radius: root.radius
         opacity: mouseArea.pressed ? root.opacityOnPressed : 1
         antialiasing: true
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             id: layout
             anchors.verticalCenter: root.centerContentVertically ? parent.verticalCenter : undefined
             anchors.horizontalCenter: root.centerContentHorizontally ? parent.horizontalCenter : undefined
             spacing: root.imageSpacing
-            
-            Image
-            {
+
+            Image {
                 id: imageToLeft
                 Layout.leftMargin: root.imageLeftMargin
                 visible: root.imagePath.length > 0 && !root.imageToRight
@@ -64,21 +58,20 @@ Item
                 fillMode: Image.PreserveAspectFit
                 rotation: root.imageRotation
             }
-            
-            Label
-            {
+
+            Label {
                 id: loginButtonText
                 visible: text.length > 0
-                Layout.preferredWidth: container.width < implicitWidth ? container.width : implicitWidth
+                Layout.preferredWidth: container.width
+                                       < implicitWidth ? container.width : implicitWidth
                 text: root.text
                 font.weight: root.fontWeight
                 font.pointSize: root.fontSize
                 color: root.textColor
                 elide: Text.ElideRight
             }
-            
-            Image
-            {
+
+            Image {
                 id: imageToRight
                 visible: root.imagePath.length > 0 && root.imageToRight
                 source: root.imagePath
@@ -86,20 +79,17 @@ Item
                 fillMode: Image.PreserveAspectFit
             }
         }
-        
-        MouseArea
-        {
+
+        MouseArea {
             id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
-            
+
             onClicked: root.clicked()
         }
     }
-    
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
-    }    
+
+    function giveFocus() {
+        root.forceActiveFocus()
+    }
 }

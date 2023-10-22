@@ -90,7 +90,7 @@ Item {
                     Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
                     text: "Options"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
@@ -166,7 +166,7 @@ Item {
                     Layout.preferredWidth: 81
                     Layout.preferredHeight: 30
                     text: "Next"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
@@ -185,7 +185,7 @@ Item {
                     Layout.preferredWidth: 110
                     Layout.preferredHeight: 30
                     text: "Previous"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight

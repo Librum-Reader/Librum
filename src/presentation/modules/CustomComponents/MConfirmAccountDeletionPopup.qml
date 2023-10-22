@@ -84,7 +84,7 @@ Popup {
                 Layout.topMargin: 28
                 Layout.leftMargin: 52
                 Layout.rightMargin: 52
-                headerFontSize: 11
+                headerFontSize: Fonts.baseSize
                 placeholderContent: "Your Email"
                 placeholderColor: Style.colorPlaceholderText
                 headerText: "Confirm the deletion by entering your Account's email."
@@ -109,7 +109,7 @@ Popup {
                     text: "Cancel"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onClicked: root.close()
                 }
@@ -125,7 +125,7 @@ Popup {
                     text: "Delete"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     imagePath: active ? Icons.trashHighlighted : Icons.trash
                     imageSize: 17
                     imageSpacing: 10

@@ -102,7 +102,7 @@ MFlickWrapper {
                         imagePath: Icons.checkGreen
                         imageSize: 20
                         text: "Up-to date"
-                        fontSize: 10.5
+                        fontSize: Fonts.baseSize
                         textColor: Style.colorGreenText
                         imageSpacing: 6
                         opacityOnPressed: 0.8

@@ -11,11 +11,9 @@ import Librum.controllers
 Item {
     id: fontSheet
 
-    property int hugeSize: AppInfoController.systemFontSize + 4.5
     property int largeSize: AppInfoController.systemFontSize + 4
     property int bigSize: AppInfoController.systemFontSize + 3
     property int baseSize: AppInfoController.systemFontSize + 2
-    property int mediumSize: AppInfoController.systemFontSize + 1.5
     property int smallSize: AppInfoController.systemFontSize + 1
     property int tinySize: AppInfoController.systemFontSize
 

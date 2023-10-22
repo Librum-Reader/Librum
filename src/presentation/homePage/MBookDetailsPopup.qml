@@ -172,7 +172,7 @@ Popup {
                                 text: "Change"
                                 textColor: Style.colorText
                                 fontWeight: Font.DemiBold
-                                fontSize: 11.5
+                                fontSize: Fonts.bigSize
 
                                 onClicked: chooseImageDialog.open()
                             }
@@ -187,7 +187,7 @@ Popup {
                                 text: "Delete"
                                 textColor: Style.colorText
                                 fontWeight: Font.DemiBold
-                                fontSize: 11.5
+                                fontSize: Fonts.bigSize
 
                                 onClicked: bookCover.source = ""
                             }
@@ -230,13 +230,13 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Title"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.title : ""
                                 placeholderContent: "Unknown"
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -249,13 +249,13 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Authors"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.authors : ""
                                 placeholderContent: "Unknown"
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -268,10 +268,10 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Pages"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.pageCount : internal.placeholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -285,7 +285,7 @@ Popup {
                                 Layout.preferredHeight: 53
                                 multiSelect: false
                                 headerText: "Language"
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 headerFontColor: Style.colorTitle
                                 dropdownIconSize: 9
                                 maxHeight: 200
@@ -359,13 +359,13 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Document creator"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creator : ""
                                 placeholderContent: "Unknown"
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -378,13 +378,13 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Creation date"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creationDate : ""
                                 placeholderContent: "Unknown"
                                 placeholderColor: Style.colorPlaceholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -397,11 +397,11 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Format"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook !== null
                                       && Globals.selectedBook.format !== "" ? Globals.selectedBook.format : internal.placeholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -415,12 +415,12 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Document size"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook !== null
                                       && Globals.selectedBook.documentSize
                                       !== "" ? Globals.selectedBook.documentSize : internal.placeholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -434,10 +434,10 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Added"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.addedToLibrary : internal.placeholderText
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -452,11 +452,11 @@ Popup {
                                 boxHeight: 34
                                 headerText: "Last opened"
                                 headerFontWeight: Font.Bold
-                                headerFontSize: 11.5
+                                headerFontSize: Fonts.bigSize
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.lastOpened : internal.placeholderText
 
                                 headerToBoxSpacing: 3
-                                inputFontSize: 12
+                                inputFontSize: Fonts.bigSize
                                 inputFontColor: Style.colorLightInputText
                                 textPadding: 12
                                 borderWidth: 1
@@ -487,7 +487,7 @@ Popup {
                     text: "Apply"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onClicked: {
                         internal.saveData()
@@ -512,7 +512,7 @@ Popup {
                     text: "Cancel"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onClicked: root.close()
                     Keys.onReturnPressed: root.close()
@@ -537,7 +537,7 @@ Popup {
                     text: "Delete"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     imagePath: active ? Icons.trashHighlighted : Icons.trash
                     imageSize: 17
                     imageSpacing: 10

@@ -22,7 +22,7 @@ Item
     property alias checked: checkBox.checked
     property int spacing: 5
     property string text
-    property double fontSize: 12
+    property double fontSize: Fonts.bigSize
     property double fontWeight: Font.Normal
     property int verticalTextOffset: 0
     property color fontColor: Style.colorText

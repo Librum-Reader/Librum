@@ -113,17 +113,17 @@ Popup {
                         Layout.preferredHeight: 60
                         itemHeight: 32
                         headerText: "Action"
-                        headerFontSize: 12
+                        headerFontSize: Fonts.bigSize
                         headerFontColor: Style.colorTitle
                         headerFontWeight: Font.DemiBold
                         selectedItemFontColor: Style.colorReadOnlyInputText
-                        selectedItemFontSize: 12
+                        selectedItemFontSize: Fonts.bigSize
                         selectedItemPadding: 3
                         emptyText: "None selected"
                         dropdownIconSize: 11
                         contentPropertyName: "shortcut"
 
-                        fontSize: 11.5
+                        fontSize: Fonts.bigSize
                         checkBoxStyle: false
                         model: SettingsController.shortcutsModel
                     }
@@ -177,7 +177,7 @@ Popup {
                         text: "Apply"
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         KeyNavigation.right: cancelButton
                         KeyNavigation.tab: cancelButton
 
@@ -211,7 +211,7 @@ Popup {
                         text: "Cancel"
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: 12
+                        fontSize: Fonts.bigSize
                         KeyNavigation.left: applyButton
                         KeyNavigation.tab: applyButton
 

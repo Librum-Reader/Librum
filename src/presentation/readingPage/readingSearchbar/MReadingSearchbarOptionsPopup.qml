@@ -2,9 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
-import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -48,7 +49,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchFromStart
                     text: "From start"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }
@@ -62,7 +63,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchCaseSensitive
                     text: "Case sensitive"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }
@@ -76,7 +77,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchWholeWords
                     text: "Whole words"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }

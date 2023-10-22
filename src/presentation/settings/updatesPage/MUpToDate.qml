@@ -56,7 +56,7 @@ Item {
                 text: "Your current version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.hugeSize
+                font.pointSize: Fonts.smallTitleSize
             }
 
             Label {

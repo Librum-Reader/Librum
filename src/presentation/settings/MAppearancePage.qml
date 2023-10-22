@@ -48,7 +48,7 @@ Page {
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 text: "Restore Defaults"
-                fontSize: 12
+                fontSize: Fonts.bigSize
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
 
@@ -112,7 +112,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Theme"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -139,7 +139,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Page Color Mode"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -196,7 +196,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Page spacing"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -223,7 +223,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Display book title in titlebar"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -248,7 +248,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Layout direction"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -276,7 +276,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Display mode"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -304,7 +304,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Page transition"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -317,12 +317,12 @@ Page {
                             Layout.preferredHeight: 36
                             Layout.fillWidth: true
                             Layout.maximumWidth: 380
-                            selectedItemFontSize: 12
+                            selectedItemFontSize: Fonts.bigSize
                             selectedItemPadding: 4
                             defaultIndex: calculateDefaultIndex()
                             dropdownIconSize: 9
                             itemHeight: 32
-                            fontSize: 12
+                            fontSize: Fonts.bigSize
                             checkBoxStyle: false
                             maxHeight: 200
                             model: ListModel {
@@ -366,7 +366,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Default Zoom"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -421,7 +421,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Colors"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -540,7 +540,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Opacity"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -617,7 +617,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
                             text: "Smooth scrolling"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -642,7 +642,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Loop after last page"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }
@@ -667,7 +667,7 @@ Page {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             text: "Cursor mode"
-                            font.pointSize: Fonts.hugeSize
+                            font.pointSize: Fonts.smallTitleSize
                             font.weight: Font.DemiBold
                             color: Style.colorText
                         }

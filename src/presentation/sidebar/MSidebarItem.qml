@@ -64,7 +64,7 @@ Item {
                 opacity: root.textOpacity
                 text: root.text
                 font.weight: Font.Medium
-                font.pointSize: Fonts.hugeSize
+                font.pointSize: Fonts.smallTitleSize
                 color: Style.colorLightText
             }
         }
