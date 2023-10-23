@@ -108,32 +108,8 @@ add_custom_target(mupdf
 )
 
 
-###### Copy the mupdf shared libraries to the build directory ######
-if(LINUX)
-    add_custom_command(
-      TARGET mupdf POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy
-              "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so"
-              "${PROJECT_BINARY_DIR}/libmupdfcpp.so"
-      COMMAND ${CMAKE_COMMAND} -E copy
-              "${MUPDF_OUTPUT_DIR}/libmupdf.so"
-              "${PROJECT_BINARY_DIR}/libmupdf.so"
-      BYPRODUCTS "${PROJECT_BINARY_DIR}/libmupdfcpp.so" "${PROJECT_BINARY_DIR}/libmupdf.so"
-      DEPENDS ${MUPDF_OUTPUT}
-    )
-elseif(APPLE)
-    add_custom_command(
-      TARGET mupdf POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy
-              "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so"
-              "${PROJECT_BINARY_DIR}/libmupdfcpp.so"
-      COMMAND ${CMAKE_COMMAND} -E copy
-              "${MUPDF_OUTPUT_DIR}/libmupdf.dylib"
-              "${PROJECT_BINARY_DIR}/libmupdf.dylib"
-      BYPRODUCTS "${PROJECT_BINARY_DIR}/libmupdfcpp.so" "${PROJECT_BINARY_DIR}/libmupdf.dylib"
-      DEPENDS ${MUPDF_OUTPUT}
-    )
-elseif(WIN32)
+###### Copy the mupdf dlls to the build directory for windows ######
+if(WIN32)
     add_custom_command(
       TARGET mupdf POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy
@@ -152,9 +128,6 @@ add_library(application
                     ${application_SRC}
                     core/utils/search_options.hpp
 )
-
-# Make sure to build mupdf before the application
-add_dependencies(application mupdf)
 
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
