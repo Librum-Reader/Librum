@@ -111,8 +111,48 @@ add_custom_target(mupdf ALL
    DEPENDS ${MUPDF_OUTPUT}
 )
 
-# Copy the mupdf dll into the binary folder for windows
-if(WIN32)
+###### Copy the mupdf shared libraries to the build directory ######
+if(LINUX)
+    # Copy libmupdfcpp.so
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/libmupdfcpp.so
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+              ${PROJECT_BINARY_DIR}/libmupdfcpp.so
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+    add_custom_target(libmupdfcpp_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/libmupdfcpp.so)
+    
+    # Copy libmupdf.so
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/libmupdf.so
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/libmupdf.so
+              ${PROJECT_BINARY_DIR}/libmupdf.so
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+    add_custom_target(libmupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/libmupdf.so)
+elseif(APPLE)
+    # Copy libmupdfcpp.so
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/libmupdfcpp.so
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+              ${PROJECT_BINARY_DIR}/libmupdfcpp.so
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+    add_custom_target(libmupdfcpp_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/libmupdfcpp.so)
+    
+    # Copy libmupdf.dylib
+    add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/libmupdf.dylib
+      COMMAND ${CMAKE_COMMAND} -E copy
+              ${MUPDF_OUTPUT_DIR}/libmupdf.dylib
+              ${PROJECT_BINARY_DIR}/libmupdf.dylib
+      DEPENDS ${MUPDF_OUTPUT}
+    )
+    add_custom_target(libmupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/libmupdf.dylib)
+elseif(WIN32)
     add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
       COMMAND ${CMAKE_COMMAND} -E copy
@@ -122,6 +162,7 @@ if(WIN32)
     )
     add_custom_target(mupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/mupdfcpp64.dll)
 endif()
+
 
 
 # Build application
@@ -194,14 +235,23 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
 endif()
 
 
-# Install rules
-if(UNIX)
+###### Install rules ######
+if(LINUX)
     install(TARGETS application
             DESTINATION lib
             )
     
     # Install mupdf's shared libraries
-    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so 
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
                   ${MUPDF_OUTPUT_DIR}/libmupdf.so
+            DESTINATION lib)
+elseif(APPLE)
+    install(TARGETS application
+            DESTINATION lib
+            )
+    
+    # Install mupdf's shared libraries
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+                  ${MUPDF_OUTPUT_DIR}/libmupdf.dylib
             DESTINATION lib)
 endif()
