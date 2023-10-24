@@ -12,6 +12,10 @@
 #include <QStandardPaths>
 #include <QString>
 #include <QTranslator>
+#include <QSettings>
+#include <QStandardPaths>
+#include <QTextStream>
+#include <QFile>
 #include <memory>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
@@ -52,6 +56,15 @@ int main(int argc, char* argv[])
     QGuiApplication::setOrganizationDomain("librumreader.com");
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
+		
+	// store host Url to settings
+	QSettings settings;
+	QString cfgFile = settings.value("serverHost",QVariant(QString()) ).toString();
+	if (cfgFile.isEmpty()){	 	
+		settings.setValue("serverHost","https://api.librumreader.com");
+	} 	 	
+	QTextStream(stdout)<< "Host value is " << settings.value("serverHost").toString() << Qt::endl;
+	
 
     QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);

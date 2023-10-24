@@ -4,54 +4,47 @@
 namespace infrastructure::data
 {
 
-inline const QString domain { "https://api.librumreader.com" };
+//inline const QString domain { "https://api.librumreader.com" };
 inline const QString freeBooksDomain { "https://freebooks.librumreader.com" };
 
 // Authentication
-inline const QString authenticationEndpoint { domain +
-                                              "/authentication/login" };
-inline const QString registrationEndpoint { domain +
-                                            "/authentication/register" };
-inline const QString checkIfEmailConfirmedEndpoint {
-    domain + "/authentication/checkIfEmailConfirmed"
-};
+inline const QString authenticationEndpoint { "/authentication/login" };
+inline const QString registrationEndpoint {"/authentication/register" };
+inline const QString checkIfEmailConfirmedEndpoint {"/authentication/checkIfEmailConfirmed"};
 
 // App Info
-inline const QString latestAppVersionEndpoint { domain +
-                                                "/appinfo/latest-version" };
+inline const QString latestAppVersionEndpoint {"/appinfo/latest-version" };
+
 inline const QString binaryDownloadEndpoint {
     "https://librumstorageaccount.blob.core.windows.net/releases"
 };
 
 // AI endpoint
-inline const QString aiCompletionEndpoint { domain + "/Ai/complete" };
+inline const QString aiCompletionEndpoint { "/Ai/complete" };
 
 // Library storage
-inline const QString bookCreationEndpoint { domain + "/book" };
-inline const QString bookUpdateEndpoint { domain + "/book" };
-inline const QString bookDeletionEndpoint { domain + "/book" };
-inline const QString booksMetadataGetEndpoint { domain + "/book" };
-inline const QString uploadBookDataEndpoint { domain + "/book/bookData" };
-inline const QString downloadBookDataEndpoint { domain + "/book/bookData" };
-inline const QString getBookCoverEndpoint { domain + "/book/cover" };
-inline const QString changeBookCoverEndpoint { domain + "/book/cover" };
-inline const QString deleteBookCoverEndpoint { domain + "/book/cover" };
-inline const QString getUsedBookStorageEndpoint { domain +
-                                                  "/book/usedBookStorage" };
+inline const QString bookCreationEndpoint {"/book" };
+inline const QString bookUpdateEndpoint {"/book" };
+inline const QString bookDeletionEndpoint {"/book" };
+inline const QString booksMetadataGetEndpoint {"/book" };
+inline const QString uploadBookDataEndpoint {"/book/bookData" };
+inline const QString downloadBookDataEndpoint {"/book/bookData" };
+inline const QString getBookCoverEndpoint {"/book/cover" };
+inline const QString changeBookCoverEndpoint {"/book/cover" };
+inline const QString deleteBookCoverEndpoint { "/book/cover" };
+inline const QString getUsedBookStorageEndpoint {"/book/usedBookStorage" };
 
 // Free books storage
 inline const QString getFreeBooksMetadataEndpoint { freeBooksDomain +
                                                     "/books" };
 
 // User storage
-inline const QString userGetEndpoint { domain + "/user" };
-inline const QString userPatchEndpoint { domain + "/user" };
-inline const QString userDeleteEndpoint { domain + "/user" };
-inline const QString userForgotPasswordEndpoint { domain +
-                                                  "/user/forgotPassword" };
-inline const QString userChangePasswordEndpoint { domain + "/user" };
-inline const QString userProfilePictureEndpoint { domain +
-                                                  "/user/profilePicture" };
+inline const QString userGetEndpoint { "/user" };
+inline const QString userPatchEndpoint { "/user" };
+inline const QString userDeleteEndpoint { "/user" };
+inline const QString userForgotPasswordEndpoint {"/user/forgotPassword" };
+inline const QString userChangePasswordEndpoint { "/user" };
+inline const QString userProfilePictureEndpoint { "/user/profilePicture" };
 
 // Dictionary API
 inline const QString dictionaryDefinitionEndpoint {
@@ -59,7 +52,7 @@ inline const QString dictionaryDefinitionEndpoint {
 };
 
 // Tag storage
-inline const QString tagUpdateEndpoint { domain + "/tag" };
-inline const QString tagDeletionEndpoint { domain + "/tag" };
+inline const QString tagUpdateEndpoint { "/tag" };
+inline const QString tagDeletionEndpoint { "/tag" };
 
 }  // namespace infrastructure::data

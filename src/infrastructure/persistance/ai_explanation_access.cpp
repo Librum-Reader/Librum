@@ -9,12 +9,18 @@
 
 namespace infrastructure::persistence
 {
-
+	
+AiExplanationAccess::AiExplanationAccess(){
+	QSettings settings;
+	domain=settings.value("serverHost").toString();
+}
+	
+	
 void AiExplanationAccess::getExplanation(const QString& authToken,
                                          const QString& query,
                                          const QString& mode)
 {
-    auto request = createRequest(data::aiCompletionEndpoint, authToken);
+    auto request = createRequest(domain+ data::aiCompletionEndpoint, authToken);
     request.setAttribute(QNetworkRequest::CacheLoadControlAttribute,
                          QNetworkRequest::AlwaysNetwork);
 
@@ -51,8 +57,8 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
                 {
                     if(word[i] == '\n' && word[k] == '\n')
                     {
-                        word.removeAt(k);
-                        word.removeAt(i);
+                        word.remove(k,1);
+                        word.remove(i,1);
                     }
 
                     i += 1;

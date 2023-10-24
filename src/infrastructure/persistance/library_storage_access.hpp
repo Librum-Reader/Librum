@@ -5,6 +5,7 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QString>
+#include <QSettings>
 #include "i_library_storage_access.hpp"
 
 namespace infrastructure::persistence
@@ -28,6 +29,7 @@ public:
                               const QUuid& uuid) override;
     void downloadBookMedia(const QString& authToken,
                            const QUuid& uuid) override;
+	LibraryStorageAccess();					   
 
 private slots:
     void processGettingBooksMetaDataResult(QNetworkReply* reply);
@@ -40,6 +42,7 @@ private:
 
 
     QNetworkAccessManager m_networkAccessManager;
+	QString domain; // server domain
 };
 
 }  // namespace infrastructure::persistence
