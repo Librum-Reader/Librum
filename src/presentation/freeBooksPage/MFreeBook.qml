@@ -24,10 +24,34 @@ Item {
           */
         Rectangle {
             id: upperBookPartRounding
-            Layout.fillWidth: true
             Layout.preferredHeight: 16
+            Layout.fillWidth: true
             radius: 4
             color: Style.colorBookImageBackground
+        }
+
+
+        /**
+          An overlay over the upper-book-rounding to get it to be transparent and modal,
+          when the book is already downloaded.
+          */
+        Item {
+            id: upperBookRoundingDimmer
+            Layout.topMargin: -upperBookPartRounding.height - 6
+            Layout.preferredHeight: 12
+            Layout.fillWidth: true
+            visible: model.isDownloaded
+            clip: true
+            z: 2
+
+            Rectangle {
+                id: dimmerRect
+                height: upperBookPartRounding.height
+                width: upperBookPartRounding.width
+                color: Style.colorBookCoverDim
+                opacity: 0.5
+                radius: 4
+            }
         }
 
 
@@ -70,7 +94,7 @@ Item {
             }
 
             Image {
-                id: alreadyDownloaded
+                id: alreadyDownloadedIndicator
                 anchors.centerIn: bookCoverDimmer
                 visible: model.isDownloaded
                 sourceSize.width: 52
