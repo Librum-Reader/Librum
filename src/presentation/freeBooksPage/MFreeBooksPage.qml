@@ -134,9 +134,18 @@ Page {
                 model: FreeBooksController.freeBooksModel
                 delegate: MFreeBook {
                     MouseArea {
+                        id: clickArea
                         anchors.fill: parent
+                        hoverEnabled: true
+
+                        onContainsMouseChanged: containsMouse
+                                                && model.isDownloaded ? toolTip.open(
+                                                                            ) : toolTip.close()
 
                         onClicked: {
+                            if (model.isDownloaded)
+                                return
+
                             downloadBookPopup.bookId = model.id
                             downloadBookPopup.title = model.title
                             downloadBookPopup.authors = model.authors
@@ -156,6 +165,12 @@ Page {
                     }
                     Component.onDestruction: FreeBooksController.deleteBookCover(
                                                  model.id)
+
+                    MToolTip {
+                        id: toolTip
+                        focusedItem: clickArea
+                        content: "You have already downloaded this book."
+                    }
                 }
             }
 

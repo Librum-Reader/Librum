@@ -60,6 +60,26 @@ Item {
                 }
             }
 
+            Rectangle {
+                id: bookCoverDimmer
+                anchors.fill: parent
+                visible: model.isDownloaded
+                color: Style.colorBookCoverDim
+                opacity: 0.5
+                z: 2
+            }
+
+            Image {
+                id: alreadyDownloaded
+                anchors.centerIn: bookCoverDimmer
+                visible: model.isDownloaded
+                sourceSize.width: 52
+                fillMode: Image.PreserveAspectFit
+                source: Icons.checkWhite
+                opacity: 1
+                z: 3
+            }
+
             ColumnLayout {
                 anchors.centerIn: parent
                 spacing: 0

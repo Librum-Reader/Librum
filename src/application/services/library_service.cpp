@@ -10,10 +10,8 @@
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
 #include "i_metadata_extractor.hpp"
-#include "library_storage_manager.hpp"
 
 using namespace domain::entities;
-using namespace application::managers;
 using std::size_t;
 
 namespace application::services
