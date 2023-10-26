@@ -129,6 +129,8 @@ add_library(application
                     core/utils/search_options.hpp
 )
 
+add_dependencies(application mupdf)
+
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
 target_include_directories(application
