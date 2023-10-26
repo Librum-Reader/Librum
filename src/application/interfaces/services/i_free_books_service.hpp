@@ -24,7 +24,7 @@ public:
         getFreeBooks() = 0;
     virtual void deleteAllBooks() = 0;
     virtual bool isBookDownloaded(int id) = 0;
-    virtual void proccessDownloadedBookIds(const std::set<int>& newIds) = 0;
+    virtual void proccessDownloadedIds(const std::set<int>& newIds) = 0;
     virtual void markBookAsDownloaded(int id) = 0;
     virtual void unmarkBookAsDownloaded(int id) = 0;
 

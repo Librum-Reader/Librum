@@ -17,7 +17,7 @@ struct FreeBook
     long downloadCount = 0;
     QString mediaDownloadLink;
     double mediaDownloadProgress = 0.0;
-    bool isDownloaded = false;
+    bool downloaded = false;
 };
 
 }  // namespace domain::value_objects

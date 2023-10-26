@@ -96,7 +96,6 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
     book.updateCoverLastModified();
     book.setHasCover(true);
     book.setCoverPath(coverPath);
-
     book.setProjectGutenbergId(projectGutenbergId);
 
     addBookToLibrary(book);
@@ -599,7 +598,7 @@ void LibraryService::updateLibrary(std::vector<Book>& books)
     mergeRemoteLibraryIntoLocalLibrary(books);
     mergeLocalLibraryIntoRemoteLibrary(books);
 
-    emit downloadedProjectGutenbergBookIdsReady(getProjectGutenbergBookIds());
+    emit downloadedProjectGutenbergIdsReady(getProjectGutenbergIds());
 }
 
 void LibraryService::mergeRemoteLibraryIntoLocalLibrary(
@@ -684,7 +683,7 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
-std::set<int> LibraryService::getProjectGutenbergBookIds()
+std::set<int> LibraryService::getProjectGutenbergIds()
 {
     std::set<int> result;
 

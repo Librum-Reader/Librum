@@ -83,7 +83,7 @@ signals:
     void bookCountChanged();
     void storageLimitExceeded();
     void addingBookFinished(int projectGutenbergId, bool result);
-    void downloadedProjectGutenbergBookIdsReady(const std::set<int>& ids);
+    void downloadedProjectGutenbergIdsReady(const std::set<int>& ids);
 };
 
 }  // namespace adapters

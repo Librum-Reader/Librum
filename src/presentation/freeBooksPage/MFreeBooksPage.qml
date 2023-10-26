@@ -139,7 +139,7 @@ Page {
                         hoverEnabled: true
 
                         onClicked: {
-                            if (model.isDownloaded)
+                            if (model.downloaded)
                                 return
 
                             downloadBookPopup.bookId = model.id

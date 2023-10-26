@@ -28,7 +28,7 @@ signals:
         const int booksTotalCount, const QString& nextMetadataPageUrl,
         const QString& prevMetadataPageUrl);
     void gettingBookCoverFinished(int id, const QImage& cover);
-    void gettingBookMediaChunkReady(int id, const QUuid& uuid,
+    void gettingBookMediaChunkReady(int gutenbergId, const QUuid& uuid,
                                     const QByteArray& data,
                                     const QString& format, bool isChunkLast);
     void gettingBookMediaProgressChanged(const int id, qint64 bytesReceived,

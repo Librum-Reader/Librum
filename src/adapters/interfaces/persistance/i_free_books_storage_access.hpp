@@ -26,7 +26,8 @@ signals:
     void gettingBookMediaChunkReady(int id, const QUuid& uuid,
                                     const QByteArray& data,
                                     const QString& format, bool isChunkLast);
-    void gettingBookMediaProgressChanged(const int id, qint64 bytesReceived,
+    void gettingBookMediaProgressChanged(const int gutenbergId,
+                                         qint64 bytesReceived,
                                          qint64 bytesTotal);
 };
 

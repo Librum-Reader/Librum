@@ -76,7 +76,7 @@ private:
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
     void deleteBookLocally(const domain::entities::Book& book);
-    std::set<int> getProjectGutenbergBookIds();
+    std::set<int> getProjectGutenbergIds();
 
     IMetadataExtractor* m_bookMetadataHelper;
     ILibraryStorageManager* m_bookStorageManager;
@@ -84,7 +84,7 @@ private:
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 30'000;
+    const int m_fetchChangedInterval = 60'000;
 };
 
 }  // namespace application::services

@@ -25,7 +25,7 @@ public:
         CoverRole,
         MediaDownloadLink,
         MediaDownloadProgressRole,
-        isDownloadedRole,
+        DownloadedRole,
         Invalid
     };
 

@@ -129,10 +129,10 @@ bool FreeBooksController::isBookDownloaded(int id)
     return m_freeBooksService->isBookDownloaded(id);
 }
 
-void FreeBooksController::proccessDownloadedProjectGutenbergBookIds(
+void FreeBooksController::proccessDownloadedProjectGutenbergIds(
     const std::set<int>& ids)
 {
-    m_freeBooksService->proccessDownloadedBookIds(ids);
+    m_freeBooksService->proccessDownloadedIds(ids);
 }
 
 void FreeBooksController::markBookAsDownloaded(int id)

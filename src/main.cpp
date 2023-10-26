@@ -199,9 +199,9 @@ int main(int argc, char* argv[])
                      libraryService, &application::ILibraryService::updateUsedBookStorage);
 
     QObject::connect(libraryController.get(),
-                     &adapters::ILibraryController::downloadedProjectGutenbergBookIdsReady,
+                     &adapters::ILibraryController::downloadedProjectGutenbergIdsReady,
                      freeBooksController.get(),
-                     &adapters::IFreeBooksController::proccessDownloadedProjectGutenbergBookIds);
+                     &adapters::IFreeBooksController::proccessDownloadedProjectGutenbergIds);
 
     // Startup
     QQmlApplicationEngine engine;

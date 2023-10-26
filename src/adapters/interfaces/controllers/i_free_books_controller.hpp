@@ -25,7 +25,7 @@ public:
     Q_INVOKABLE virtual QString getFilterAuthorsAndTitle() = 0;
     Q_INVOKABLE virtual void clearAllFilters() = 0;
     Q_INVOKABLE virtual bool isBookDownloaded(int id) = 0;
-    Q_INVOKABLE virtual void proccessDownloadedProjectGutenbergBookIds(
+    Q_INVOKABLE virtual void proccessDownloadedProjectGutenbergIds(
         const std::set<int>& ids) = 0;
     Q_INVOKABLE virtual void markBookAsDownloaded(int id) = 0;
     Q_INVOKABLE virtual void unmarkBookAsDownloaded(int id) = 0;

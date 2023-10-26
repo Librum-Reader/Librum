@@ -101,7 +101,7 @@ bool FreeBooksService::isBookDownloaded(int id)
     return m_downloadedFreeBookIds.contains(id);
 }
 
-void FreeBooksService::proccessDownloadedBookIds(const std::set<int>& newIds)
+void FreeBooksService::proccessDownloadedIds(const std::set<int>& newIds)
 {
     QList<int> idsToDelete;
     for(const auto& currentId : m_downloadedFreeBookIds)
@@ -130,8 +130,8 @@ void FreeBooksService::markBookAsDownloaded(int id)
     auto* freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
         return;
-
-    freeBook->isDownloaded = true;
+    
+    freeBook->downloaded = true;
     m_downloadedFreeBookIds.insert(id);
 
     emit bookIsDownloadedChanged(getFreeBookIndexById(id));
@@ -145,8 +145,8 @@ void FreeBooksService::unmarkBookAsDownloaded(int id)
     auto* freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
         return;
-
-    freeBook->isDownloaded = false;
+    
+    freeBook->downloaded = false;
     m_downloadedFreeBookIds.erase(id);
 
     emit bookIsDownloadedChanged(getFreeBookIndexById(id));
@@ -185,8 +185,8 @@ void FreeBooksService::setBookCover(int id, const QImage& cover)
 }
 
 void FreeBooksService::saveDownloadedBookMediaChunkToFile(
-    int id, const QUuid& uuid, const QByteArray& data, const QString& format,
-    bool isLastChunk)
+    int gutenbergId, const QUuid& uuid, const QByteArray& data,
+    const QString& format, bool isLastChunk)
 {
     auto destDir = getLibraryDir();
     QString fileName = uuid.toString(QUuid::WithoutBraces) + "." + format;
@@ -198,7 +198,7 @@ void FreeBooksService::saveDownloadedBookMediaChunkToFile(
     if(isLastChunk)
     {
         emit gettingBookFinished(QUrl::fromLocalFile(destination).toString(),
-                                 id);
+                                 gutenbergId);
     }
 }
 

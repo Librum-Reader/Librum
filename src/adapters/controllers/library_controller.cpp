@@ -74,8 +74,8 @@ LibraryController::LibraryController(
     // downloaded Project Gutenberg books
     connect(
         m_bookService,
-        &application::ILibraryService::downloadedProjectGutenbergBookIdsReady,
-        this, &LibraryController::downloadedProjectGutenbergBookIdsReady);
+        &application::ILibraryService::downloadedProjectGutenbergIdsReady,
+        this, &LibraryController::downloadedProjectGutenbergIdsReady);
 
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }

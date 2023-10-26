@@ -40,7 +40,7 @@ Item {
             Layout.topMargin: -upperBookPartRounding.height - 6
             Layout.preferredHeight: 12
             Layout.fillWidth: true
-            visible: model.isDownloaded
+            visible: model.downloaded
             clip: true
             z: 2
 
@@ -87,7 +87,7 @@ Item {
             Rectangle {
                 id: bookCoverDimmer
                 anchors.fill: parent
-                visible: model.isDownloaded
+                visible: model.downloaded
                 color: Style.colorBookCoverDim
                 opacity: 0.5
                 z: 2
@@ -96,7 +96,7 @@ Item {
             Image {
                 id: alreadyDownloadedIndicator
                 anchors.centerIn: bookCoverDimmer
-                visible: model.isDownloaded
+                visible: model.downloaded
                 sourceSize.width: 52
                 fillMode: Image.PreserveAspectFit
                 source: Icons.checkWhite

@@ -25,7 +25,7 @@ public:
     std::vector<domain::value_objects::FreeBook>& getFreeBooks() override;
     void deleteAllBooks() override;
     bool isBookDownloaded(int id) override;
-    void proccessDownloadedBookIds(const std::set<int>& newIds) override;
+    void proccessDownloadedIds(const std::set<int>& newIds) override;
     void markBookAsDownloaded(int id) override;
     void unmarkBookAsDownloaded(int id) override;
 
@@ -36,7 +36,7 @@ public slots:
 
 private slots:
     void setBookCover(int id, const QImage& cover);
-    void saveDownloadedBookMediaChunkToFile(int id, const QUuid& uuid,
+    void saveDownloadedBookMediaChunkToFile(int gutenbergId, const QUuid& uuid,
                                             const QByteArray& data,
                                             const QString& format,
                                             bool isLastChunk);

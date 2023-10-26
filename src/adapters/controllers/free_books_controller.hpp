@@ -22,7 +22,7 @@ public:
     QString getFilterAuthorsAndTitle() override;
     void clearAllFilters() override;
     bool isBookDownloaded(int id) override;
-    void proccessDownloadedProjectGutenbergBookIds(
+    void proccessDownloadedProjectGutenbergIds(
         const std::set<int>& ids) override;
     void markBookAsDownloaded(int id) override;
     void unmarkBookAsDownloaded(int id) override;

@@ -68,7 +68,7 @@ signals:
     void dataChanged(int index);
     void storageLimitExceeded();
     void downloadingBookMediaProgressChanged(int index);
-    void downloadedProjectGutenbergBookIdsReady(const std::set<int>& ids);
+    void downloadedProjectGutenbergIdsReady(const std::set<int>& ids);
 };
 
 }  // namespace application
