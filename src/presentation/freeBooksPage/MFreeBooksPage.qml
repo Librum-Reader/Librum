@@ -138,10 +138,6 @@ Page {
                         anchors.fill: parent
                         hoverEnabled: true
 
-                        onContainsMouseChanged: containsMouse
-                                                && model.isDownloaded ? toolTip.open(
-                                                                            ) : toolTip.close()
-
                         onClicked: {
                             if (model.isDownloaded)
                                 return
@@ -165,12 +161,6 @@ Page {
                     }
                     Component.onDestruction: FreeBooksController.deleteBookCover(
                                                  model.id)
-
-                    MToolTip {
-                        id: toolTip
-                        focusedItem: clickArea
-                        content: "You have already downloaded this book."
-                    }
                 }
             }
 
