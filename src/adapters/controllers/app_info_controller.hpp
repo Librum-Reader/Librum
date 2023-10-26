@@ -1,8 +1,8 @@
 #pragma once
 #include <QObject>
-#include "i_app_info_service.hpp"
-#include "i_app_info_controller.hpp"
 #include "adapters_export.hpp"
+#include "i_app_info_controller.hpp"
+#include "i_app_info_service.hpp"
 
 namespace adapters::controllers
 {
@@ -12,8 +12,7 @@ class ADAPTERS_EXPORT AppInfoController : public IAppInfoController
     Q_OBJECT
 
 public:
-    AppInfoController(
-        application::IAppInfoService* appInfoService);
+    AppInfoController(application::IAppInfoService* appInfoService);
 
 private:
     QString getCurrentVersion() const override;
@@ -27,8 +26,9 @@ private:
     QString getCurrentQtVersion() const override;
     QString getOperatingSystem() const override;
     void updateApplication() override;
+    int getSystemFontSize() const override;
 
     application::IAppInfoService* m_appInfoService;
 };
 
-} // namespace adapters::controllers
+}  // namespace adapters::controllers

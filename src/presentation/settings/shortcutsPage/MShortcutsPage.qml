@@ -5,51 +5,48 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
-
-Page
-{
+Page {
     id: root
     topPadding: 64
     horizontalPadding: 48
-    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
-    
-    onWidthChanged: if(searchButton.opened) searchButton.close()
-    
-    
-    Shortcut
-    {
+    background: Rectangle {
+        anchors.fill: parent
+        color: Style.colorPageBackground
+    }
+
+    onWidthChanged: if (searchButton.opened)
+                        searchButton.close()
+
+    Shortcut {
         sequence: StandardKey.New
         onActivated: addShortcutPopup.open()
     }
-    
-    
-    ColumnLayout
-    {
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             id: pageTitleRow
             Layout.fillWidth: true
             spacing: 0
-            
-            MTitle
-            {
+
+            MTitle {
                 id: pageTitle
                 titleText: "Shortcuts"
                 descriptionText: "Make your own experience"
                 titleSize: 25
                 descriptionSize: 13.25
             }
-            
-            Item { Layout.fillWidth: true }
-            
-            MButton
-            {
+
+            Item {
+                Layout.fillWidth: true
+            }
+
+            MButton {
                 id: addShortcutButton
                 Layout.preferredWidth: 164
                 Layout.preferredHeight: 38
@@ -60,19 +57,17 @@ Page
                 text: "Edit shortcut"
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
-                fontSize: 13
+                fontSize: Fonts.largeSize
                 imagePath: Icons.addWhite
-                
-                onClicked:
-                {
-                    addShortcutPopup.preselectedSettingIndex = -1;
-                    addShortcutPopup.open();
+
+                onClicked: {
+                    addShortcutPopup.preselectedSettingIndex = -1
+                    addShortcutPopup.open()
                 }
             }
         }
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -82,82 +77,77 @@ Page
             leftPadding: internal.containerPadding
             padding: 0
             clip: true
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorContainerBackground
                 border.color: Style.colorContainerBorder
                 radius: 4
                 antialiasing: true
             }
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: containerLayout
                 anchors.fill: parent
                 spacing: 0
-                
-                
+
+
                 /*
                   The shortcuts header labeling the different columns
                   */
-                RowLayout
-                {
+                RowLayout {
                     id: headerLayout
                     Layout.fillWidth: true
                     Layout.rightMargin: internal.containerPadding
                     spacing: 0
-                    
-                    
-                    Label
-                    {
+
+                    Label {
                         id: actionsLabel
                         Layout.leftMargin: 12
                         text: "ACTION"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.bold: true
                     }
-                    
-                    Item
-                    { 
+
+                    Item {
                         id: headerLabelSpacer
                         Layout.preferredWidth: internal.verticalSettingSpacing + 90
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         id: shortcutsLabel
                         text: "SHORTCUTS"
                         color: Style.colorLightText
-                        font.pointSize: 10.25
+                        font.pointSize: Fonts.smallSize
                         font.bold: true
                     }
-                    
-                    Item { Layout.fillWidth: true }
-                    
-                    MSearchButton
-                    {
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    MSearchButton {
                         id: searchButton
                         implicitWidth: 34
                         implicitHeight: 32
                         imageSize: 14
                         // Make sure that the searchButton does not overlap other items
-                        expansionWidth: (headerLabelSpacer.width <= 445 ? headerLabelSpacer.width : 445)
-                        
-                        onTriggered: (query) => SettingsController.shortcutsModel.filterString = query
-                        
+                        expansionWidth: (headerLabelSpacer.width
+                                         <= 445 ? headerLabelSpacer.width : 445)
+
+                        onTriggered: query => SettingsController.shortcutsModel.filterString = query
+
                         // Reset filter when closing or leaving the page
                         Component.onDestruction: SettingsController.shortcutsModel.filterString = ""
-                        onOpenedChanged: if(!opened) SettingsController.shortcutsModel.filterString = ""
+                        onOpenedChanged: if (!opened)
+                                             SettingsController.shortcutsModel.filterString = ""
                     }
                 }
-                
+
+
                 /*
                   The actual shortcuts view
                   */
-                ScrollView
-                {
+                ScrollView {
                     id: shortcutScrollArea
                     Layout.topMargin: 20
                     Layout.rightMargin: 20
@@ -165,10 +155,8 @@ Page
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                    
-                    
-                    ListView
-                    {
+
+                    ListView {
                         id: listView
                         anchors.rightMargin: 28
                         anchors.fill: parent
@@ -177,47 +165,45 @@ Page
                         flickDeceleration: 15000
                         maximumFlickVelocity: 1600
                         boundsBehavior: Flickable.StopAtBounds
-                        delegate: MShortcutDelegate
-                        {
-                            onGapWidthChanged: (spacing) => internal.verticalSettingSpacing = spacing
-                            onEditClicked:
-                                (index) =>
-                                {
-                                    addShortcutPopup.preselectedSettingIndex = index;
-                                    addShortcutPopup.open();
-                                }
-                            
-                            onDeleteClicked: (shortcut) => SettingsController.setSetting(shortcut, "", SettingGroups.Shortcuts);
+                        delegate: MShortcutDelegate {
+                            onGapWidthChanged: spacing => internal.verticalSettingSpacing = spacing
+                            onEditClicked: index => {
+                                               addShortcutPopup.preselectedSettingIndex = index
+                                               addShortcutPopup.open()
+                                           }
+
+                            onDeleteClicked: shortcut => SettingsController.setSetting(
+                                                 shortcut, "",
+                                                 SettingGroups.Shortcuts)
                         }
-                        
-                        MouseArea
-                        {
+
+                        MouseArea {
                             id: mouseEventInterceptor
                             anchors.fill: parent
                             propagateComposedEvents: true
-                            
+
                             // Propagate click/pressed signals to lower MouseAreas
-                            onWheel: (wheel) => wheel.accepted = false
-                            onClicked: (mouse) => mouse.accepted = false
-                            onPressed: (mouse) => mouse.accepted = false
+                            onWheel: wheel => wheel.accepted = false
+                            onClicked: mouse => mouse.accepted = false
+                            onPressed: mouse => mouse.accepted = false
                         }
                     }
                 }
             }
         }
     }
-    
-    MAddShortcutPopup
-    {
+
+    MAddShortcutPopup {
         id: addShortcutPopup
-        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2 - root.horizontalPadding)
+        x: Math.round(root.width / 2 - implicitWidth / 2 - settingsSidebar.width
+                      / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(root.height / 2 - implicitHeight / 2 - 115)
-        
-        onApplied: (shortcut, value) => SettingsController.setSetting(shortcut, value, SettingGroups.Shortcuts)
+
+        onApplied: (shortcut, value) => SettingsController.setSetting(
+                       shortcut, value, SettingGroups.Shortcuts)
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int containerPadding: 48
         property int verticalSettingSpacing: 340

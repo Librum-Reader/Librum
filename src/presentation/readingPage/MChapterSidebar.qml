@@ -5,6 +5,7 @@ import Librum.elements
 import Librum.models
 import Librum.style
 import Librum.icons
+import Librum.fonts
 import Librum.controllers
 import Qt.labs.qmlmodels
 import QtQuick.Shapes
@@ -32,7 +33,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
                 text: "Contents"
-                font.pointSize: 14
+                font.pointSize: Fonts.smallTitleSize
                 font.weight: Font.Medium
                 color: Style.colorText
             }
@@ -54,7 +55,7 @@ Item {
                     rightPadding: 15
                     selectByMouse: true
                     color: Style.colorText
-                    font.pointSize: 11
+                    font.pointSize: Fonts.baseSize
                     font.weight: Font.Normal
                     placeholderText: "Search..."
                     placeholderTextColor: Style.colorPlaceholderText

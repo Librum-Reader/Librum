@@ -2,10 +2,9 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property bool selected: false
     property string text
@@ -17,77 +16,67 @@ Item
     property alias closeAnimation: closeAnim
     property alias labelVisibility: label.visible
     property real textOpacity: 0
-    signal clicked()
-    
+    signal clicked
+
     implicitWidth: (labelVisibility ? internal.openedWidth : internal.closedWidth)
     implicitHeight: 44
-    
-    
-    Pane
-    {
+
+    Pane {
         id: container
         anchors.fill: parent
         padding: 0
-        background: Rectangle
-        {
+        background: Rectangle {
             color: root.selected ? Style.colorLightHighlight : "transparent"
             radius: 4
         }
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             id: layout
             height: parent.height
             spacing: 0
-            
+
+
             /*
               Needs a container because the actual item is bigger than just the icon
               */
-            Rectangle
-            {
+            Rectangle {
                 id: iconContainer
                 Layout.preferredWidth: 52
                 Layout.preferredHeight: 44
                 radius: 4
                 color: "transparent"
-                
-                Image
-                {
+
+                Image {
                     id: icon
                     sourceSize.width: root.imageWidth
                     sourceSize.height: root.imageHeight
                     fillMode: root.preserveImageFit ? Image.PreserveAspectFit : Image.Stretch
                     anchors.centerIn: parent
                     source: root.image
-                    antialiasing: false                    
+                    antialiasing: false
                 }
             }
-            
-            Label
-            {
+
+            Label {
                 id: label
                 Layout.leftMargin: 10
                 visible: false
                 opacity: root.textOpacity
                 text: root.text
                 font.weight: Font.Medium
-                font.pointSize: 13
+                font.pointSize: Fonts.smallTitleSize
                 color: Style.colorLightText
             }
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         anchors.fill: parent
-        
-        onClicked: root.clicked();
+
+        onClicked: root.clicked()
     }
-    
-    
-    PropertyAnimation
-    {
+
+    PropertyAnimation {
         id: openAnim
         target: container
         property: "width"
@@ -95,9 +84,8 @@ Item
         duration: 250
         easing.type: Easing.InOutQuad
     }
-    
-    PropertyAnimation
-    {
+
+    PropertyAnimation {
         id: closeAnim
         target: container
         property: "width"
@@ -105,17 +93,14 @@ Item
         duration: 250
         easing.type: Easing.InOutQuad
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int closedWidth: 52
         property int openedWidth: 177
     }
-    
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
-    }    
+
+    function giveFocus() {
+        root.forceActiveFocus()
+    }
 }

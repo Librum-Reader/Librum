@@ -6,6 +6,7 @@ import CustomComponents
 import Librum.elements
 import Librum.style
 import Librum.icons
+import Librum.fonts
 import Librum.controllers
 import Librum.globals
 import Librum.models
@@ -76,7 +77,7 @@ Page {
                     textFormat: Text.RichText
                     color: Style.colorBannerText
                     font.bold: true
-                    font.pointSize: 12
+                    font.pointSize: Fonts.bigSize
 
                     // Switch to the proper cursor when hovering above the link
                     MouseArea {
@@ -137,7 +138,7 @@ Page {
                     text: "Add books"
                     textColor: Style.colorFocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: 13
+                    fontSize: Fonts.largeSize
                     imagePath: Icons.addWhite
 
                     onClicked: importFilesDialog.open()

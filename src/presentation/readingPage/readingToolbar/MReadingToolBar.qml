@@ -6,10 +6,9 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
-
-Pane
-{
+Pane {
     id: root
     property bool fullScreenMode: false
     property string bookTitle: "Unknown name"
@@ -29,55 +28,49 @@ Pane
     signal currentPageButtonClicked
     signal fullScreenButtonClicked
     signal optionsPopupVisibileChanged
-    
+
     implicitHeight: 48
     padding: 8
-    background: Rectangle { color: Style.colorReadingToolbarBackground; radius: 4 }
-    
-    onVisibleChanged: if(optionsPopup.opened) optionsPopup.close()
-    
-    
-    Shortcut
-    {
+    background: Rectangle {
+        color: Style.colorReadingToolbarBackground
+        radius: 4
+    }
+
+    onVisibleChanged: if (optionsPopup.opened)
+                          optionsPopup.close()
+
+    Shortcut {
         id: openChapterSidebar
         sequences: [SettingsController.shortcuts.OpenChapters]
         onActivated: root.chapterButtonClicked()
     }
-    Shortcut
-    {
+    Shortcut {
         id: openBookmarks
         sequences: [SettingsController.shortcuts.OpenBookmarks]
         onActivated: root.bookMarkButtonClicked()
     }
-    Shortcut
-    {
+    Shortcut {
         id: search
         sequences: [SettingsController.shortcuts.Search]
         onActivated: root.searchButtonClicked()
     }
-    Shortcut
-    {
+    Shortcut {
         id: startFullScreenMode
         sequences: [SettingsController.shortcuts.StartFullScreenMode]
         onActivated: root.fullScreenButtonClicked()
     }
-    Shortcut
-    {
+    Shortcut {
         id: goBackToHome
         sequences: [SettingsController.shortcuts.GoToHome]
         onActivated: root.backButtonClicked()
     }
-    
-    
-    RowLayout
-    {
+
+    RowLayout {
         id: layout
         anchors.fill: parent
         spacing: 8
-        
-        
-        MButton
-        {
+
+        MButton {
             id: backButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -86,12 +79,11 @@ Pane
             imagePath: Icons.readingViewBack
             imageSize: 11
             opacityOnPressed: 0.7
-            
+
             onClicked: root.backButtonClicked()
         }
-        
-        MButton
-        {
+
+        MButton {
             id: chapterButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -100,12 +92,11 @@ Pane
             imagePath: active ? Icons.readingViewChaptersSelected : Icons.readingViewChapters
             imageSize: 18
             opacityOnPressed: 0.7
-            
+
             onClicked: root.chapterButtonClicked()
         }
-        
-        MButton
-        {
+
+        MButton {
             id: bookmarksButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -114,41 +105,36 @@ Pane
             imagePath: active ? Icons.readingViewBookmarkSelected : Icons.readingViewBookmark
             imageSize: 14
             opacityOnPressed: 0.7
-            
+
             onClicked: root.bookMarkButtonClicked()
         }
-        
-        Item
-        {
+
+        Item {
             id: currentPageSelection
-            Layout.preferredWidth: inputBox.width + pageInputLayout.spacing + totalPageText.implicitWidth
+            Layout.preferredWidth: inputBox.width + pageInputLayout.spacing
+                                   + totalPageText.implicitWidth
             Layout.preferredHeight: 34
-            
-            RowLayout
-            {
+
+            RowLayout {
                 id: pageInputLayout
                 anchors.fill: parent
                 spacing: 8
-                
-                Pane
-                {
+
+                Pane {
                     id: inputBox
                     Layout.preferredWidth: 66
                     Layout.fillHeight: true
                     padding: 0
                     horizontalPadding: 2
-                    background: Rectangle
-                    {
+                    background: Rectangle {
                         id: backgroundRect
                         border.width: 2
                         border.color: Style.colorContainerBorder
                         radius: 5
                         color: Style.colorControlBackground
                     }
-                    
-                    
-                    TextField
-                    {
+
+                    TextField {
                         id: inputField
                         anchors.fill: parent
                         anchors.rightMargin: 2
@@ -158,69 +144,71 @@ Pane
                         selectByMouse: true
                         text: root.currentPage + 1
                         color: Style.colorBaseInputText
-                        font.pointSize: 12
+                        font.pointSize: Fonts.bigSize
                         font.weight: Font.Normal
-                        validator: IntValidator { bottom: 0; top: 99999 } // No upper border
-                        background: Rectangle   
-                        {
+                        validator: IntValidator {
+                            bottom: 0
+                            top: 99999
+                        } // No upper border
+                        background: Rectangle {
                             anchors.fill: parent
                             radius: 5
                             color: "transparent"
                         }
-                        
+
                         // Select all the text when clicking it
-                        onActiveFocusChanged: if(activeFocus) inputField.selectAll();
-                        
+                        onActiveFocusChanged: if (activeFocus)
+                                                  inputField.selectAll()
+
                         // Keep in mind that the pages actually go from 0 to pageCount - 1 (zero indexed),
                         // but we present them as 1 to pageCount to the user.
-                        onEditingFinished:
-                        {
-                            let newPage = Number(inputField.text);
-                            if(root.currentPage == newPage - 1)
-                                return;
-                            
-                            if(newPage < 1 || newPage > root.pageCount)
-                            {
-                                inputField.text = Qt.binding(() => root.currentPage + 1);
-                                return;
+                        onEditingFinished: {
+                            let newPage = Number(inputField.text)
+                            if (root.currentPage == newPage - 1)
+                                return
+
+                            if (newPage < 1 || newPage > root.pageCount) {
+                                inputField.text = Qt.binding(
+                                            () => root.currentPage + 1)
+                                return
                             }
-                            
-                            documentView.setPage(newPage - 1);
-                            documentView.forceActiveFocus(); // Discard focus when finished
+
+                            documentView.setPage(newPage - 1)
+                            documentView.forceActiveFocus(
+                                        ) // Discard focus when finished
                         }
                     }
                 }
-                
-                Label
-                {
+
+                Label {
                     id: totalPageText
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     text: "of " + root.pageCount.toString()
-                    font.pointSize: 12
+                    font.pointSize: Fonts.bigSize
                     font.weight: Font.Normal
                     color: Style.colorText
                 }
             }
         }
-        
-        Label
-        {
+
+        Label {
             id: bookTitle
             Layout.fillWidth: true
-            Component.onCompleted: Layout.rightMargin = (Math.ceil(x + width/2) - Math.ceil(root.width / 2)) * 4
-            Layout.alignment: Qt.AlignVCenter 
+            Component.onCompleted: Layout.rightMargin = (Math.ceil(
+                                                             x + width / 2) - Math.ceil(
+                                                             root.width / 2)) * 4
+            Layout.alignment: Qt.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
-            text: JSON.parse(SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
+            text: JSON.parse(
+                      SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
-            font.pointSize: 13
+            font.pointSize: Fonts.smallTitleSize
             elide: Text.ElideRight
         }
-        
-        
-        MComboBox
-        {
+
+        MComboBox {
             id: zoomComboBox
             Layout.preferredHeight: 32
             Layout.preferredWidth: 92
@@ -231,47 +219,74 @@ Pane
             dropdownIcon: Icons.dropdownDark
             dropdownIconSize: 9
             checkBoxStyle: false
-            model: ListModel
-            {
-                ListElement { text: "15%" }
-                ListElement { text: "25%" }
-                ListElement { text: "33%" }
-                ListElement { text: "50%" }
-                ListElement { text: "66%" }
-                ListElement { text: "75%" }
-                ListElement { text: "100%" }
-                ListElement { text: "125%" }
-                ListElement { text: "150%" }
-                ListElement { text: "175%" }
-                ListElement { text: "250%" }
-                ListElement { text: "300%" }
-                ListElement { text: "400%" }
-                ListElement { text: "500%" }
+            model: ListModel {
+                ListElement {
+                    text: "15%"
+                }
+                ListElement {
+                    text: "25%"
+                }
+                ListElement {
+                    text: "33%"
+                }
+                ListElement {
+                    text: "50%"
+                }
+                ListElement {
+                    text: "66%"
+                }
+                ListElement {
+                    text: "75%"
+                }
+                ListElement {
+                    text: "100%"
+                }
+                ListElement {
+                    text: "125%"
+                }
+                ListElement {
+                    text: "150%"
+                }
+                ListElement {
+                    text: "175%"
+                }
+                ListElement {
+                    text: "250%"
+                }
+                ListElement {
+                    text: "300%"
+                }
+                ListElement {
+                    text: "400%"
+                }
+                ListElement {
+                    text: "500%"
+                }
             }
-            
+
             // Need to run a timer to create the binding, since the combobox does not set the text correctly
             // when trying to just assign it during onCompleted
             Component.onCompleted: zoomAssignment.start()
-            Timer
-            {
+            Timer {
                 id: zoomAssignment
                 interval: 5
-                onTriggered: zoomComboBox.text = Qt.binding(function () { return Math.round(BookController.zoom * 100) + "%" })
+                onTriggered: zoomComboBox.text = Qt.binding(function () {
+                    return Math.round(BookController.zoom * 100) + "%"
+                })
             }
-            
+
             // Remove % sign from text
-            onItemChanged:
-            {
-                if(text === "")
-                    return;
-                
-                BookController.zoom = zoomComboBox.text.substring(0, zoomComboBox.text.length - 1) / 100;
-                zoomAssignment.start();  // Force rebinding
+            onItemChanged: {
+                if (text === "")
+                    return
+
+                BookController.zoom = zoomComboBox.text.substring(
+                            0, zoomComboBox.text.length - 1) / 100
+                zoomAssignment.start() // Force rebinding
             }
         }
-        
-        MButton
-        {
+
+        MButton {
             id: fullScreenButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -280,12 +295,11 @@ Pane
             imagePath: active ? Icons.readingViewMaximizeSelected : Icons.readingViewMaximize
             imageSize: 20
             opacityOnPressed: 0.7
-            
+
             onClicked: root.fullScreenButtonClicked()
         }
-        
-        MButton
-        {
+
+        MButton {
             id: searchButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -294,12 +308,11 @@ Pane
             imagePath: active ? Icons.readingViewSearchSelected : Icons.readingViewSearch
             imageSize: 18
             opacityOnPressed: 0.7
-            
+
             onClicked: root.searchButtonClicked()
         }
-        
-        MButton
-        {
+
+        MButton {
             id: optionsButton
             Layout.preferredWidth: 40
             Layout.preferredHeight: 32
@@ -308,17 +321,17 @@ Pane
             imagePath: active ? Icons.readingViewOptionsPurple : Icons.readingViewOptions
             imageSize: 20
             opacityOnPressed: 0.7
-            
-            onClicked: optionsPopup.opened ? optionsPopup.close() : optionsPopup.open();
+
+            onClicked: optionsPopup.opened ? optionsPopup.close(
+                                                 ) : optionsPopup.open()
         }
     }
-    
-    MReadingOptionsPopup
-    {
+
+    MReadingOptionsPopup {
         id: optionsPopup
         x: optionsButton.x - width + optionsButton.width
         y: optionsButton.height + 12
-        
+
         onOpenedChanged: root.optionsPopupVisibileChanged()
     }
 }

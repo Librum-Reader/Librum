@@ -5,10 +5,9 @@ import QtQuick.Window
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     property MSettingsSidebarItem aboutItem: aboutItem
     property MSettingsSidebarItem appearanceItem: appearanceItem
@@ -18,23 +17,21 @@ Item
     property MSettingsSidebarItem accountItem: accountItem
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
-    property MSettingsSidebarItem currentItem : aboutItem
-    
+    property MSettingsSidebarItem currentItem: aboutItem
+
     implicitWidth: 238
     implicitHeight: Window.height
-    
-    
+
+
     /*
       Adds a border to the whole settings sidebar
       */
-    Rectangle
-    {
+    Rectangle {
         id: background
         anchors.fill: parent
         color: Style.colorSettingsSidebarBackground
-        
-        Rectangle
-        {
+
+        Rectangle {
             id: rightBorder
             width: 1
             height: parent.height
@@ -42,32 +39,26 @@ Item
             color: Style.colorContainerBorder
         }
     }
-    
-    MFlickWrapper
-    {
+
+    MFlickWrapper {
         id: flickWrapper
         anchors.fill: parent
         contentHeight: layout.implicitHeight
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             spacing: 0
-            
-            
-            Label
-            {
+
+            Label {
                 Layout.topMargin: 28
                 Layout.leftMargin: 25
                 text: "Settings"
-                font.pointSize: 19
+                font.pointSize: Fonts.bigTitleSize
                 font.bold: true
                 color: Style.colorTitle
             }
-            
-            Rectangle
-            {
+
+            Rectangle {
                 id: titleSeparator
                 Layout.preferredWidth: 56
                 Layout.preferredHeight: 2
@@ -75,20 +66,17 @@ Item
                 Layout.leftMargin: 26
                 color: Style.colorDarkSeparator
             }
-            
-            Label
-            {
+
+            Label {
                 Layout.topMargin: 38
                 Layout.leftMargin: 25
                 text: "GLOBAL SETTINGS"
-                font.pointSize: 10.2
+                font.pointSize: Fonts.smallSize
                 font.weight: Font.Bold
                 color: Style.colorLightText
             }
-            
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: aboutItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -101,12 +89,11 @@ Item
                 textContent: "About"
                 defaultIcon: Icons.settingsSidebarAbout
                 selectedIcon: Icons.settingsSidebarAboutSelected
-                
-                onClicked: loadSettingsPage(aboutPage, root.aboutItem);
+
+                onClicked: loadSettingsPage(aboutPage, root.aboutItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: appearanceItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -117,13 +104,12 @@ Item
                 labelLeftMargin: 8
                 textContent: "Appearance"
                 defaultIcon: Icons.settingsSidebarAppearance
-                selectedIcon: Icons.settingsSidebarAppearanceSelected           
-                
+                selectedIcon: Icons.settingsSidebarAppearanceSelected
+
                 onClicked: loadSettingsPage(appearancePage, root.appearanceItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: shortcutsItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -135,12 +121,11 @@ Item
                 textContent: "Shortcuts"
                 defaultIcon: Icons.settingsSidebarShortcuts
                 selectedIcon: Icons.settingsSidebarShortcutsSelected
-                
+
                 onClicked: loadSettingsPage(shortcutsPage, root.shortcutsItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: updatesItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -152,12 +137,11 @@ Item
                 textContent: "Updates"
                 defaultIcon: Icons.settingsSidebarUpdates
                 selectedIcon: Icons.settingsSidebarUpdatesSelected
-                
+
                 onClicked: loadSettingsPage(updatesPage, root.updatesItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: generalSettingsItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -169,23 +153,21 @@ Item
                 textContent: "General Settings"
                 defaultIcon: Icons.settingsSidebarSettings
                 selectedIcon: Icons.settingsSidebarSettingsSelected
-                
-                onClicked: loadSettingsPage(generalSettingsPage, root.generalSettingsItem)
+
+                onClicked: loadSettingsPage(generalSettingsPage,
+                                            root.generalSettingsItem)
             }
-            
-            
-            Label
-            {
+
+            Label {
                 Layout.topMargin: 25
                 Layout.leftMargin: 25
                 text: "USER & ACCOUNT"
-                font.pointSize: 10.2
+                font.pointSize: Fonts.smallSize
                 font.bold: true
                 color: Style.colorLightText
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: accountItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -198,13 +180,11 @@ Item
                 textContent: "Account"
                 defaultIcon: Icons.settingsSidebarAccount
                 selectedIcon: Icons.settingsSidebarAccountSelected
-                
-                onClicked:
-                    loadSettingsPage(accountPage, root.accountItem)
+
+                onClicked: loadSettingsPage(accountPage, root.accountItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: storageItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -216,12 +196,11 @@ Item
                 textContent: "Storage"
                 defaultIcon: Icons.settingsSidebarStorage
                 selectedIcon: Icons.settingsSidebarStorageSelected
-                
+
                 onClicked: loadSettingsPage(storagePage, root.storageItem)
             }
-            
-            MSettingsSidebarItem
-            {
+
+            MSettingsSidebarItem {
                 id: supportUsItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -234,23 +213,20 @@ Item
                 textContent: "Support us"
                 defaultIcon: Icons.settingsSidebarSupportUs
                 selectedIcon: Icons.settingsSidebarSupportUsSelected
-                
+
                 onClicked: loadSettingsPage(supportUsPage, root.supportUsItem)
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int sidebarItemWidth: root.width - 2
     }
-    
-    
-    function changeSelectedSettingsItem(newItem)
-    {
-        root.currentItem.selected = false;
-        root.currentItem = newItem;
-        root.currentItem.selected = true;
+
+    function changeSelectedSettingsItem(newItem) {
+        root.currentItem.selected = false
+        root.currentItem = newItem
+        root.currentItem.selected = true
     }
 }

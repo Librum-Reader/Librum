@@ -2,48 +2,40 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
 import Librum.elements
-import Librum.controllers
+import Librum.fonts
 
-Popup
-{
+Popup {
     id: windowsUpdatingPopup
     implicitWidth: 560
     implicitHeight: layout.height
     padding: 0
     horizontalPadding: 52
-    background: Rectangle
-    {
+    background: Rectangle {
         color: Style.colorPopupBackground
         radius: 6
     }
     modal: true
-    Overlay.modal: Rectangle
-    {
+    Overlay.modal: Rectangle {
         color: Style.colorPopupDim
         opacity: 1
     }
 
     onClosed: progressBarFill.width = 0
 
-
-    MFlickWrapper
-    {
+    MFlickWrapper {
         anchors.fill: parent
         contentHeight: layout.height
 
-
-        ColumnLayout
-        {
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
 
-
-            MButton
-            {
+            MButton {
                 id: closeButton
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: 32
@@ -61,34 +53,30 @@ Popup
                 onClicked: windowsUpdatingPopup.close()
             }
 
-            Label
-            {
+            Label {
                 id: popupTitle
                 Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: 100
                 text: "Updating"
                 font.weight: Font.Bold
-                font.pointSize: 22
+                font.pointSize: Fonts.largeTitleSize
                 color: Style.colorBasePurple
             }
 
-            Label
-            {
+            Label {
                 text: "Downloading..."
-                font.pointSize: 13
+                font.pointSize: Fonts.smallTitleSize
                 color: Style.colorText
             }
 
-            Rectangle
-            {
+            Rectangle {
                 id: progressBar
                 Layout.fillWidth: true
                 Layout.preferredHeight: 24
                 Layout.topMargin: 4
                 Layout.bottomMargin: 80
 
-                Rectangle
-                {
+                Rectangle {
                     id: progressBarFill
                     width: 0
                     height: parent.height
@@ -98,8 +86,7 @@ Popup
         }
     }
 
-    function setDownloadProgress(progress)
-    {
+    function setDownloadProgress(progress) {
         progressBarFill.width = progressBar.width * progress
     }
 }

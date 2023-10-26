@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.fonts
 
 Item {
     id: root
@@ -9,18 +10,18 @@ Item {
     property int boxHeight: 40
     property string placeholderContent
     property color placeholderColor: Style.colorPlaceholderText
-    property double inputFontSize: 12
+    property double inputFontSize: Fonts.bigSize
     property color inputFontColor: Style.colorBaseInputText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
     property bool hasError: false
     property bool clearErrorOnEdit: true
     property string errorText
-    property double errorFontSize: 11
+    property double errorFontSize: Fonts.baseSize
     property bool hasHeader: true
     property string headerText
     property int headerFontWeight: Font.Medium
-    property double headerFontSize: 10.5
+    property double headerFontSize: Fonts.baseSize
     property color headerFontColor: Style.colorTitle
     property int headerToBoxSpacing: 2
     property color borderColor: Style.colorContainerBorder

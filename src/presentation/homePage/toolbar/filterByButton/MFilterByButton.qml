@@ -3,89 +3,75 @@ import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
-    property bool opened : false
-    signal filterSelected(string authors, string format, string date, 
-                          bool onlyBooks, bool onlyFiles, bool read, bool unread)
-    
+    property bool opened: false
+    signal filterSelected(string authors, string format, string date, bool onlyBooks, bool onlyFiles, bool read, bool unread)
+
     implicitWidth: 104
     implicitHeight: 36
-    
-    
-    Pane
-    {
+
+    Pane {
         id: container
         anchors.fill: parent
         padding: 0
-        background: Rectangle
-        {
+        background: Rectangle {
             color: Style.colorControlBackground
             border.width: 1
             border.color: Style.colorContainerBorder
             radius: 5
         }
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             id: layout
             anchors.centerIn: parent
             spacing: 5
-            
-            Image
-            {
+
+            Image {
                 id: filterByArrowIcon
                 sourceSize.height: 14
                 source: Icons.filter
                 fillMode: Image.PreserveAspectFit
             }
-            
-            Label
-            {
+
+            Label {
                 id: filterByLabel
                 Layout.topMargin: -1
                 color: Style.colorText
                 text: "Filters"
-                font.pointSize: 12
+                font.pointSize: Fonts.bigSize
                 font.weight: Font.Bold
             }
         }
     }
-    
-    MouseArea
-    {
+
+    MouseArea {
         id: mouseArea
         anchors.fill: parent
-        
-        onClicked: selectionPopup.opened ? selectionPopup.close() : selectionPopup.open()
+
+        onClicked: selectionPopup.opened ? selectionPopup.close(
+                                               ) : selectionPopup.open()
     }
-    
-    MFilterByPopup
-    {
+
+    MFilterByPopup {
         id: selectionPopup
         y: root.height + 6
         closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
-        
-        onFilterQuerySent:
-        {
-            close();
-            root.filterSelected(authors, format, date, onlyBooks, 
-                                onlyFiles, read, unread);
+
+        onFilterQuerySent: {
+            close()
+            root.filterSelected(authors, format, date, onlyBooks, onlyFiles,
+                                read, unread)
         }
     }
-    
-    
-    function resetFilter()
-    {
-        selectionPopup.resetFilter();
+
+    function resetFilter() {
+        selectionPopup.resetFilter()
     }
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
+
+    function giveFocus() {
+        root.forceActiveFocus()
     }
 }

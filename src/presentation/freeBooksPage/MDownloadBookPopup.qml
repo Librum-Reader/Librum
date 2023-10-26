@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.controllers
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
 Popup {
     id: root
@@ -80,7 +81,7 @@ Popup {
                         Layout.topMargin: 6
                         text: "Download book"
                         font.weight: Font.Bold
-                        font.pointSize: 17
+                        font.pointSize: Fonts.bigTitleSize
                         color: Style.colorTitle
                     }
 
@@ -136,10 +137,10 @@ Popup {
                                     boxHeight: 34
                                     headerText: "Title"
                                     headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
+                                    headerFontSize: Fonts.bigSize
                                     text: root.title
                                     headerToBoxSpacing: 3
-                                    inputFontSize: 12
+                                    inputFontSize: Fonts.bigSize
                                     inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
@@ -153,10 +154,10 @@ Popup {
                                     boxHeight: 34
                                     headerText: "Authors"
                                     headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
+                                    headerFontSize: Fonts.bigSize
                                     text: root.authors
                                     headerToBoxSpacing: 3
-                                    inputFontSize: 12
+                                    inputFontSize: Fonts.bigSize
                                     inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
@@ -170,10 +171,10 @@ Popup {
                                     boxHeight: 34
                                     headerText: "Language"
                                     headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
+                                    headerFontSize: Fonts.bigSize
                                     text: root.languages
                                     headerToBoxSpacing: 3
-                                    inputFontSize: 12
+                                    inputFontSize: Fonts.bigSize
                                     inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
@@ -187,10 +188,10 @@ Popup {
                                     boxHeight: 34
                                     headerText: "Downloads"
                                     headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
+                                    headerFontSize: Fonts.bigSize
                                     text: root.downloadCount
                                     headerToBoxSpacing: 3
-                                    inputFontSize: 12
+                                    inputFontSize: Fonts.bigSize
                                     inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
@@ -205,10 +206,10 @@ Popup {
                                     boxHeight: 34
                                     headerText: "Format"
                                     headerFontWeight: Font.Bold
-                                    headerFontSize: 11.5
+                                    headerFontSize: Fonts.bigSize
                                     text: "EPUB"
                                     headerToBoxSpacing: 3
-                                    inputFontSize: 12
+                                    inputFontSize: Fonts.bigSize
                                     inputFontColor: Style.colorReadOnlyInputText
                                     textPadding: 12
                                     borderWidth: 1
@@ -236,7 +237,7 @@ Popup {
                             text: "Download"
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
-                            fontSize: 12
+                            fontSize: Fonts.bigSize
                             borderWidth: active ? 0 : 1
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             imagePath: active ? Icons.downloadSelected : Icons.download
@@ -262,7 +263,7 @@ Popup {
                             text: "Cancel"
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
-                            fontSize: 12
+                            fontSize: Fonts.bigSize
 
                             onClicked: root.close()
                             Keys.onReturnPressed: root.close()

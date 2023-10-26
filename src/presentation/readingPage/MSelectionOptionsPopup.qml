@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -94,7 +95,7 @@ Popup {
             padding: 10
             text: action.text
             color: action.textColor
-            font.pointSize: 12
+            font.pointSize: Fonts.bigSize
         }
 
         MouseArea {

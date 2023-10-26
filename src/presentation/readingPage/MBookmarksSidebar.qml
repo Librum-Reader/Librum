@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Item {
     id: root
@@ -26,7 +27,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
                 text: "Bookmarks"
-                font.pointSize: 14
+                font.pointSize: Fonts.smallTitleSize
                 font.weight: Font.Medium
                 color: Style.colorText
             }
@@ -48,7 +49,7 @@ Item {
                     rightPadding: 15
                     selectByMouse: true
                     color: Style.colorText
-                    font.pointSize: 11
+                    font.pointSize: Fonts.baseSize
                     font.weight: Font.Normal
                     placeholderText: "Search..."
                     placeholderTextColor: Style.colorPlaceholderText
@@ -128,7 +129,7 @@ Item {
                 Layout.leftMargin: 12
                 Layout.rightMargin: 12
                 Layout.bottomMargin: 12
-                fontSize: 10.5
+                fontSize: Fonts.baseSize
                 backgroundColor: Style.colorContainerBackground
                 borderColor: Style.colorButtonBorder
                 opacityOnPressed: 0.7

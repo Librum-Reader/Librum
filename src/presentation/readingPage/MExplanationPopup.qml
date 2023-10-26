@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -107,11 +108,11 @@ Popup {
             itemHeight: 32
             selectedItemFontColor: Style.colorBaseInputText
             headerText: "Mode"
-            headerFontSize: 12
+            headerFontSize: Fonts.bigSize
             headerFontColor: Style.colorTitle
             headerFontWeight: Font.DemiBold
-            fontSize: 12
-            selectedItemFontSize: 13
+            fontSize: Fonts.bigSize
+            selectedItemFontSize: Fonts.largeSize
             selectedItemPadding: 3
             defaultIndex: 0
             emptyText: "None selected"
@@ -131,12 +132,12 @@ Popup {
             Layout.fillWidth: true
             Layout.topMargin: 24
             headerFontColor: Style.colorLightText
-            headerFontSize: 12
+            headerFontSize: Fonts.bigSize
             borderColor: Style.colorContainerBorder
             borderWidth: 1
             text: question
             backgroundColor: Style.colorContainerBackground
-            inputFontSize: 13
+            inputFontSize: Fonts.largeSize
             headerText: "Request"
             readOnly: true
         }
@@ -171,7 +172,7 @@ Popup {
                     width: answerFlick.width
                     focus: true
                     text: root.answer
-                    font.pointSize: 13
+                    font.pointSize: Fonts.smallTitleSize
                     color: Style.colorText
                     readOnly: true
                     wrapMode: Text.WordWrap
@@ -204,7 +205,7 @@ Popup {
                         text: ""
                         color: Style.colorTitle
                         font.weight: Font.Medium
-                        font.pointSize: 14
+                        font.pointSize: Fonts.smallTitleSize
                         onLinkActivated: Qt.openUrlExternally(
                                              AppInfoController.website + "/whyAiLimits")
 
@@ -277,7 +278,7 @@ Popup {
                     id: actionText
                     Layout.topMargin: -1
                     text: "Note: AI responses can be inaccurate"
-                    font.pointSize: 10
+                    font.pointSize: Fonts.smallSize
                     color: Style.colorBasePurple
                 }
             }
@@ -295,7 +296,7 @@ Popup {
             text: "Ask"
             textColor: internal.dataChanged ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
             fontWeight: Font.Bold
-            fontSize: 12
+            fontSize: Fonts.bigSize
 
             onClicked: {
                 if (internal.dataChanged) {

@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
 Item {
     id: root
@@ -49,7 +50,7 @@ Item {
                 visible: false
                 leftPadding: 12
                 color: Style.colorBaseInputText
-                font.pointSize: 12
+                font.pointSize: Fonts.bigSize
                 placeholderText: "Search for Book"
                 placeholderTextColor: Style.colorPlaceholderText
                 selectByMouse: true

@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Rectangle {
     id: root
@@ -52,7 +53,7 @@ Rectangle {
             Layout.leftMargin: 4
             text: model.name
             color: Style.colorText
-            font.pointSize: 11
+            font.pointSize: Fonts.baseSize
             selectionColor: Style.colorTextSelection
             clip: true
 
@@ -89,7 +90,7 @@ Rectangle {
             Layout.rightMargin: 6
             text: model.pageNumber + 1
             color: Style.colorText
-            font.pointSize: 11
+            font.pointSize: Fonts.baseSize
         }
     }
 

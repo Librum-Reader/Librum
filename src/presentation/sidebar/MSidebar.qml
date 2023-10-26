@@ -7,9 +7,9 @@ import Librum.elements
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
-Item
-{
+Item {
     id: root
     property alias freeBooksItem: freeBooksItem
     property alias homeItem: homeItem
@@ -18,133 +18,114 @@ Item
     property alias settingsItem: settingsItem
     property MSidebarItem currentItem: internal.defaultItem
     property bool open: false
-    
+
     implicitWidth: internal.closedWidth
     implicitHeight: Window.height
-    
-    
+
+
     /*
       Shortcuts to switch between pages
       */
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+O"
-        onActivated: SidebarState.currentState === SidebarState.Opened ? root.closeSidebar() : root.openSidebar()
+        onActivated: SidebarState.currentState
+                     === SidebarState.Opened ? root.closeSidebar(
+                                                   ) : root.openSidebar()
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+1"
         onActivated: loadPage(freeBooksPage, root.freeBooksItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+2"
         onActivated: loadPage(homePage, root.homeItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+3"
         onActivated: loadPage(statisticsPage, root.statisticsItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+4"
         onActivated: loadPage(addOnsPage, root.addOnsItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Ctrl+5"
         onActivated: loadPage(settings, root.settingsItem)
     }
-    
-    
-    Pane
-    {
+
+    Pane {
         id: container
         anchors.fill: parent
         padding: 0
-        background: RowLayout
-        {
+        background: RowLayout {
             spacing: 0
-            
-            Rectangle
-            {
+
+            Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 color: Style.colorContainerBackground
             }
-            
-            Rectangle
-            {
-                Layout.preferredWidth:  1
+
+            Rectangle {
+                Layout.preferredWidth: 1
                 Layout.fillHeight: true
                 color: Style.colorContainerBorder
             }
         }
-        
-        
-        MFlickWrapper
-        {
+
+        MFlickWrapper {
             id: flickWrapper
             anchors.fill: parent
             contentHeight: layout.implicitHeight
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 id: layout
                 width: parent.width
                 height: container.height
                 spacing: 0
-                
-                RowLayout
-                {
+
+                RowLayout {
                     id: logo
                     Layout.topMargin: 14
                     Layout.leftMargin: 14
                     spacing: 20
-                    
-                    MLogo
-                    {
+
+                    MLogo {
                         id: logoIcon
                         Layout.preferredWidth: 44
                         Layout.preferredHeight: 44
                     }
-                    
-                    Label
-                    {
+
+                    Label {
                         id: logoLabel
                         visible: false
                         text: AppInfoController.applicationName
                         font.bold: true
-                        font.pointSize: 16
+                        font.pointSize: Fonts.baseTitleSize
                         color: Style.colorTitle
                     }
                 }
-                
-                Rectangle
-                {
+
+                Rectangle {
                     id: topSeparator
                     Layout.fillWidth: true
                     Layout.preferredHeight: 2
                     Layout.topMargin: 15
                     color: Style.colorSeparator
                 }
-                
-                MSidebarItem
-                {
+
+                MSidebarItem {
                     id: freeBooksItem
                     Layout.topMargin: 16
                     Layout.leftMargin: 10
                     imageWidth: 31
                     image: Icons.sidebarDownload
                     text: "Free books"
-                    
+
                     onClicked: loadPage(freeBooksPage, root.freeBooksItem)
-                }            
-                
-                Rectangle
-                {
+                }
+
+                Rectangle {
                     id: smallSeperator1
                     Layout.preferredWidth: parent.width * 0.61
                     Layout.preferredHeight: 2
@@ -152,9 +133,8 @@ Item
                     Layout.topMargin: 16
                     color: Style.colorSeparator
                 }
-                
-                MSidebarItem
-                {
+
+                MSidebarItem {
                     id: homeItem
                     Layout.topMargin: 15
                     Layout.leftMargin: 10
@@ -163,24 +143,22 @@ Item
                     imageHeight: 28
                     image: Icons.sidebarHome
                     text: "Home"
-                    
+
                     onClicked: loadPage(homePage, root.homeItem)
                 }
-                
-                MSidebarItem
-                {
+
+                MSidebarItem {
                     id: statisticsItem
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 28
                     image: Icons.sidebarPieChart
                     text: "Statistics"
-                    
+
                     onClicked: loadPage(statisticsPage, root.statisticsItem)
                 }
-                
-                Rectangle
-                {
+
+                Rectangle {
                     id: smallSeperator2
                     Layout.preferredWidth: parent.width * 0.61
                     Layout.preferredHeight: 2
@@ -188,130 +166,115 @@ Item
                     Layout.topMargin: 15
                     color: Style.colorSeparator
                 }
-                
-                MSidebarItem
-                {
+
+                MSidebarItem {
                     id: addOnsItem
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 30
                     image: Icons.sidebarAddOns
                     text: "Add-ons"
-                    
+
                     onClicked: loadPage(addOnsPage, root.addOnsItem)
                 }
-                
-                MSidebarItem
-                {
+
+                MSidebarItem {
                     id: settingsItem
                     Layout.topMargin: 13
                     Layout.leftMargin: 10
                     imageWidth: 36
                     image: Icons.sidebarSettings
                     text: "Settings"
-                    
+
                     onClicked: loadPage(settings, root.settingsItem)
                 }
-                
-                Item
-                {
+
+                Item {
                     id: heightFiller
                     Layout.fillHeight: true
                     Layout.minimumHeight: 30
                 }
-                
-                Rectangle
-                {
+
+                Rectangle {
                     id: bottomSeparator
                     Layout.fillWidth: true
                     Layout.preferredHeight: 2
                     color: Style.colorSeparator
                 }
-                
-                
+
+
                 /*
                   Box which contains the profile picture
                   */
-                MProfileBox
-                {
+                MProfileBox {
                     id: profileBox
                     currentSidebarWidth: root.width
                     closedSidebarWidth: internal.closedWidth
                     Layout.alignment: Qt.AlignBottom
                     Layout.topMargin: 2
-                    
-                    onClicked:
-                    {
-                        if(profilePopup.opened)
-                            profilePopup.close();
+
+                    onClicked: {
+                        if (profilePopup.opened)
+                            profilePopup.close()
                         else
-                            profilePopup.open();
+                            profilePopup.open()
                     }
                 }
-                
+
+
                 /*
                   Popup which is spawned after clicking the profile picture
                   */
-                MProfilePopup
-                {
+                MProfilePopup {
                     id: profilePopup
                     x: 12
                     y: profileBox.y - implicitHeight + 6
                 }
             }
-            
         }
-    
-        MSidebarAnimations
-        {
+
+        MSidebarAnimations {
             id: animations
             sidebar: root
             closedSidebarWidth: internal.closedWidth
             openedSidebarWidth: internal.openedWidth
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
         property int closedWidth: 72
         property int openedWidth: 232
         property bool isOpened: false
-        
+
         property MSidebarItem defaultItem: homeItem
     }
-    
-    
-    function changeSelectedItem(newItem)
-    {
-        root.currentItem.selected = false;
-        root.currentItem = newItem;
-        root.currentItem.selected = true;
+
+    function changeSelectedItem(newItem) {
+        root.currentItem.selected = false
+        root.currentItem = newItem
+        root.currentItem.selected = true
     }
-    
-    function openSidebar()
-    {
-        animations.openAnimation.start();
-        root.currentItem.openAnimation.start();
-        root.open = true;
+
+    function openSidebar() {
+        animations.openAnimation.start()
+        root.currentItem.openAnimation.start()
+        root.open = true
     }
-    
-    function closeSidebar()
-    {
-        animations.closeAnimation.start();
-        root.currentItem.closeAnimation.start();
-        root.open = false;
+
+    function closeSidebar() {
+        animations.closeAnimation.start()
+        root.currentItem.closeAnimation.start()
+        root.open = false
     }
-    
-    function resetSidebar()
-    {
-        closeSidebar();
-        changeSelectedItem(internal.defaultItem);
-        root.open = false;
+
+    function resetSidebar() {
+        closeSidebar()
+        changeSelectedItem(internal.defaultItem)
+        root.open = false
     }
-    
-    function giveFocus()
-    {
-        root.forceActiveFocus();
-    }    
+
+    function giveFocus() {
+        root.forceActiveFocus()
+    }
 }

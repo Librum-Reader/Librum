@@ -2,40 +2,36 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import CustomComponents
+import Librum.controllers
 import Librum.style
 import Librum.icons
 import Librum.globals
-import Librum.controllers
+import Librum.fonts
 
 MFlickWrapper {
     id: root
     property alias pageCleanup: pageCleanup
-    
+
     contentHeight: page.implicitHeight
     ScrollBar.vertical: ScrollBar {
         width: 10
         policy: "AlwaysOn"
     }
-    
-    Connections
-    {
+
+    Connections {
         target: UserController
-        
-        function onPasswordChangeFinished(success, reason)
-        {
-            if(success)
-            {
+
+        function onPasswordChangeFinished(success, reason) {
+            if (success) {
                 passwordInput.text = ""
                 passwordConfirmationInput.text = ""
-            }
-            else
-            {
-                passwordInput.errorText = reason;
-                passwordInput.setError();
+            } else {
+                passwordInput.errorText = reason
+                passwordInput.setError()
             }
         }
     }
-    
+
     Page {
         id: page
         anchors.fill: parent
@@ -46,27 +42,27 @@ MFlickWrapper {
             anchors.fill: parent
             color: Style.colorPageBackground
         }
-        
+
         Component.onCompleted: {
             UserController.syncWithServer()
         }
-        
+
         Shortcut {
             id: saveSettings
             sequence: StandardKey.Save
             onActivated: root.saveAccountSettings()
         }
-        
+
         ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
-            
+
             RowLayout {
                 id: titleRow
                 Layout.fillWidth: true
                 spacing: 0
-                
+
                 MTitle {
                     id: pageTitle
                     titleText: "Account"
@@ -74,11 +70,11 @@ MFlickWrapper {
                     titleSize: 25
                     descriptionSize: 13.25
                 }
-                
+
                 Item {
                     Layout.fillWidth: true
                 }
-                
+
                 MButton {
                     id: saveButton
                     Layout.preferredWidth: 90
@@ -87,16 +83,16 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Save"
-                    fontSize: 12
+                    fontSize: Fonts.bigSize
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.checkWhite
                     imageSize: 14
-                    
+
                     onClicked: root.saveAccountSettings()
                 }
             }
-            
+
             Pane {
                 id: profileBox
                 Layout.fillWidth: true
@@ -110,14 +106,14 @@ MFlickWrapper {
                     radius: 4
                     antialiasing: true
                 }
-                
+
                 RowLayout {
                     id: profileLayout
                     property int horizontalSpacing: 32
-                    
+
                     anchors.fill: parent
                     spacing: 0
-                    
+
                     ColumnLayout {
                         id: profileInputLayout
                         Layout.maximumWidth: Math.round(
@@ -125,15 +121,15 @@ MFlickWrapper {
                                                  - profileLayout.horizontalSpacing) / 2
                         Layout.fillWidth: true
                         spacing: 0
-                        
+
                         Label {
                             id: profileTitle
                             text: "Profile"
                             color: Style.colorText
-                            font.pointSize: 16.5
+                            font.pointSize: 17
                             font.weight: Font.DemiBold
                         }
-                        
+
                         MLabeledInputBox {
                             id: firstNameInput
                             Layout.fillWidth: true
@@ -142,13 +138,13 @@ MFlickWrapper {
                             headerText: "First name"
                             text: internal.unsavedChanges ? text : UserController.firstName
                             headerToBoxSpacing: 3
-                            inputFontSize: 13
+                            inputFontSize: Fonts.largeSize
                             borderWidth: 1
                             borderRadius: 4
-                            
+
                             onEdited: internal.unsavedChanges = true
                         }
-                        
+
                         MLabeledInputBox {
                             id: lastNameInput
                             Layout.fillWidth: true
@@ -157,13 +153,13 @@ MFlickWrapper {
                             headerText: "Last name"
                             text: internal.unsavedChanges ? text : UserController.lastName
                             headerToBoxSpacing: 3
-                            inputFontSize: 13
+                            inputFontSize: Fonts.largeSize
                             borderWidth: 1
                             borderRadius: 4
-                            
+
                             onEdited: internal.unsavedChanges = true
                         }
-                        
+
                         MLabeledInputBox {
                             id: emailInput
                             Layout.fillWidth: true
@@ -172,15 +168,15 @@ MFlickWrapper {
                             headerText: "Email"
                             text: internal.unsavedChanges ? text : UserController.email
                             headerToBoxSpacing: 3
-                            inputFontSize: 13
+                            inputFontSize: Fonts.largeSize
                             borderWidth: 1
                             borderRadius: 4
                             readOnly: true
-                            
+
                             onEdited: internal.unsavedChanges = true
                         }
                     }
-                    
+
                     MSelectProfilePictureArea {
                         id: profilePictureArea
                         Layout.fillWidth: true
@@ -189,7 +185,7 @@ MFlickWrapper {
                         Layout.topMargin: 76
                         Layout.rightMargin: 40
                         Layout.leftMargin: 32
-                        
+
                         onCurrentImageChanged: {
                             // Make sure that if we DELETE the picture, and no profile picture exists,
                             // we say that there are no unsaved changes. The only situation where this happens,
@@ -200,17 +196,17 @@ MFlickWrapper {
                                 internal.unsavedChanges = false
                                 return
                             }
-                            
+
                             internal.unsavedChanges = true
                         }
                     }
-                    
+
                     Item {
                         Layout.fillWidth: true
                     }
                 }
             }
-            
+
             Pane {
                 id: changePasswordBox
                 Layout.fillWidth: true
@@ -224,72 +220,71 @@ MFlickWrapper {
                     radius: 4
                     antialiasing: true
                 }
-                
+
                 ColumnLayout {
                     id: passwordLayout
                     anchors.fill: parent
                     spacing: 0
-                    
+
                     Label {
                         id: passwordTitle
                         text: "Change password"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
+
                     RowLayout {
                         id: changePasswordInputLayout
                         Layout.fillWidth: true
                         spacing: profileLayout.horizontalSpacing
                         Layout.topMargin: 30
-                        
+
                         MLabeledInputBox {
                             id: passwordInput
                             Layout.fillWidth: true
                             boxHeight: 40
                             headerText: "Password"
                             headerToBoxSpacing: 3
-                            inputFontSize: 13
+                            inputFontSize: Fonts.largeSize
                             borderWidth: 1
                             borderRadius: 4
                             image: Icons.eyeOn
                             toggledImage: Icons.eyeOff
-                            
-                            onEdited:
-                            {
+
+                            onEdited: {
                                 internal.unsavedChanges = true
-                                
+
                                 // Clear error for password confirmation input as well
-                                passwordConfirmationInput.errorText = "";
-                                passwordConfirmationInput.clearError();
+                                passwordConfirmationInput.errorText = ""
+                                passwordConfirmationInput.clearError()
                             }
                         }
-                        
+
                         MLabeledInputBox {
                             id: passwordConfirmationInput
                             Layout.fillWidth: true
                             boxHeight: 40
                             headerText: "Password confirmation"
                             headerToBoxSpacing: 3
-                            inputFontSize: 13
+                            inputFontSize: Fonts.largeSize
                             borderWidth: 1
                             borderRadius: 4
                             image: Icons.eyeOn
                             toggledImage: Icons.eyeOff
-                            
+
                             onEdited: {
                                 internal.unsavedChanges = true
-                                
+
                                 // Clear error for password input as well
-                                passwordInput.errorText = "";
-                                passwordInput.clearError();
+                                passwordInput.errorText = ""
+                                passwordInput.clearError()
                             }
                         }
                     }
                 }
             }
-            
+
             Pane {
                 id: yourDataBox
                 Layout.fillWidth: true
@@ -303,76 +298,76 @@ MFlickWrapper {
                     radius: 4
                     antialiasing: true
                 }
-                
+
                 ColumnLayout {
                     id: yourDataContentColumn
                     anchors.fill: parent
                     spacing: 0
-                    
+
                     Label {
                         id: yourDataTitle
                         text: "Your data"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
+
                     MLabeledCheckBox {
                         Layout.fillWidth: true
                         Layout.topMargin: 30
                         boxWidth: 21
                         boxHeight: 21
                         text: "Analyse your reading to make better recommendations"
-                        fontSize: 13
+                        fontSize: Fonts.largeSize
                         fontColor: Style.colorText
                         spacing: 12
                         checked: true
-                        
+
                         onClicked: internal.unsavedChanges = true
                     }
-                    
+
                     MLabeledCheckBox {
                         Layout.fillWidth: true
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
                         text: "Anonymously share information about the books you read to help us improve Librum"
-                        fontSize: 13
+                        fontSize: Fonts.largeSize
                         fontColor: Style.colorText
                         spacing: 12
                         checked: false
-                        
+
                         onClicked: internal.unsavedChanges = true
                     }
-                    
+
                     MLabeledCheckBox {
                         Layout.fillWidth: true
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
                         text: "Collect data on crashes so that we can prevent it from happening again"
-                        fontSize: 13
+                        fontSize: Fonts.largeSize
                         fontColor: Style.colorText
                         spacing: 12
-                        
+
                         onClicked: internal.unsavedChanges = true
                     }
-                    
+
                     MLabeledCheckBox {
                         Layout.fillWidth: true
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
                         text: "Collect data to display in your statistics"
-                        fontSize: 13
+                        fontSize: Fonts.largeSize
                         fontColor: Style.colorText
                         spacing: 12
-                        
+
                         onClicked: internal.unsavedChanges = true
                     }
                 }
             }
-            
+
             Pane {
                 id: deleteAccount
                 Layout.fillWidth: true
@@ -386,20 +381,20 @@ MFlickWrapper {
                     radius: 4
                     antialiasing: true
                 }
-                
+
                 ColumnLayout {
                     id: yourAccountColumn
                     anchors.fill: parent
                     spacing: 0
-                    
+
                     Label {
                         id: yourAccountTitle
                         text: "Your Account"
                         color: Style.colorText
-                        font.pointSize: 16.5
+                        font.pointSize: 17
                         font.weight: Font.DemiBold
                     }
-                    
+
                     MButton {
                         id: logOut
                         Layout.preferredWidth: 240
@@ -412,14 +407,14 @@ MFlickWrapper {
                         text: "Logout"
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: 12
-                        
+                        fontSize: Fonts.bigSize
+
                         onClicked: {
-                            AuthController.logoutUser();
-                            loadPage(loginPage);
+                            AuthController.logoutUser()
+                            loadPage(loginPage)
                         }
                     }
-                    
+
                     MButton {
                         id: deleteButton
                         Layout.preferredWidth: 240
@@ -432,33 +427,31 @@ MFlickWrapper {
                         text: "Delete Your Account"
                         textColor: Style.colorErrorText
                         fontWeight: Font.Bold
-                        fontSize: 12
-                        
+                        fontSize: Fonts.bigSize
+
                         onClicked: confirmAccountDeletionPopup.open()
                     }
                 }
             }
         }
     }
-    
-    MConfirmAccountDeletionPopup
-    {
+
+    MConfirmAccountDeletionPopup {
         id: confirmAccountDeletionPopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - settingsSidebar.width / 2 - sidebar.width / 2)
         y: Math.round(
                root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
         visible: false
-        
-        onDeletionConfirmed:
-        {
+
+        onDeletionConfirmed: {
             UserController.deleteUser()
-            LibraryController.deleteAllBooks();
-            AuthController.logoutUser();
-            loadPage(loginPage);
+            LibraryController.deleteAllBooks()
+            AuthController.logoutUser()
+            loadPage(loginPage)
         }
     }
-    
+
     MWarningPopup {
         id: unsavedChangesPopup
         x: Math.round(
@@ -471,15 +464,15 @@ MFlickWrapper {
         leftButtonText: "Save"
         rightButtonText: "Don't save"
         buttonsWidth: 120
-        
+
         onOpenedChanged: if (opened)
                              unsavedChangesPopup.giveFocus()
         onDecisionMade: close()
         onLeftButtonClicked: root.saveAccountSettings()
         onRightButtonClicked: internal.unsavedChanges = false
     }
-    
-    
+
+
     /*
       Since MAccountPage can have unsaved change, it needs MPageCleanup to
       ensure correct saving of data on page switching.
@@ -493,44 +486,40 @@ MFlickWrapper {
                             }
                             return false
                         }
-        
+
         savingPageFinishedSignal: unsavedChangesPopup.decisionMade
     }
-    
+
     QtObject {
         id: internal
         property bool unsavedChanges: false
         property int boxPadding: 40
-        
-        function changePassword()
-        {
-            if(passwordInput.text === passwordConfirmationInput.text)
-            {
+
+        function changePassword() {
+            if (passwordInput.text === passwordConfirmationInput.text) {
                 UserController.changePassword(passwordInput.text)
-            }
-            else
-            {
-                passwordInput.errorText = "Passwords don't match!";
-                passwordInput.setError();
-                
-                passwordConfirmationInput.errorText = "Passwords don't match!";
-                passwordConfirmationInput.setError();
+            } else {
+                passwordInput.errorText = "Passwords don't match!"
+                passwordInput.setError()
+
+                passwordConfirmationInput.errorText = "Passwords don't match!"
+                passwordConfirmationInput.setError()
             }
         }
     }
-    
+
     function saveAccountSettings() {
         UserController.firstName = firstNameInput.text
         UserController.lastName = lastNameInput.text
-        
-        if(passwordInput.text !== "")
-            internal.changePassword();
-        
+
+        if (passwordInput.text !== "")
+            internal.changePassword()
+
         if (profilePictureArea.currentImage == "!")
             UserController.deleteProfilePicture()
         else
             UserController.profilePicture = profilePictureArea.currentImage
-        
+
         profilePictureArea.currentImage = ""
         internal.unsavedChanges = false
     }

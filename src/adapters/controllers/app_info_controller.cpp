@@ -1,5 +1,6 @@
 #include "app_info_controller.hpp"
 #include <QDir>
+#include <QFontDatabase>
 
 using namespace application;
 
@@ -69,7 +70,7 @@ QString AppInfoController::getOperatingSystem() const
 {
 #ifdef Q_OS_WIN
     return "WIN";
-#elif Q_OS_MACOS
+#elif defined(Q_OS_MAC)
     return "MACOS";
 #else
     return "UNIX";
@@ -79,6 +80,11 @@ QString AppInfoController::getOperatingSystem() const
 void AppInfoController::updateApplication()
 {
     m_appInfoService->updateApplication();
+}
+
+int AppInfoController::getSystemFontSize() const
+{
+    return QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
 }
 
 }  // namespace adapters::controllers

@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.style
+import Librum.fonts
 
 
 /**
@@ -53,7 +54,7 @@ Item {
             Layout.maximumWidth: 200
             Layout.alignment: Qt.AlignVCenter
             text: root.text
-            font.pointSize: 12
+            font.pointSize: Fonts.bigSize
             font.weight: root.selected ? Font.Medium : Font.Normal
             color: Style.colorText
 

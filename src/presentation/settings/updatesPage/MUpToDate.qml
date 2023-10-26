@@ -6,80 +6,69 @@ import Librum.style
 import Librum.icons
 import Librum.elements
 import Librum.controllers
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
     height: content.height
-    
-    
-    Pane
-    {
+
+    Pane {
         id: content
         anchors.left: parent.left
         anchors.right: parent.right
         horizontalPadding: 40
         topPadding: 32
         bottomPadding: 42
-        background: Rectangle
-        {
+        background: Rectangle {
             color: Style.colorContainerBackground
             border.color: Style.colorContainerBorder
             radius: 4
             antialiasing: true
         }
-        
-        
-        ColumnLayout
-        {
+
+        ColumnLayout {
             id: layout
             width: parent.width
             spacing: 0
-            
-            Label
-            {
+
+            Label {
                 id: newUpdateTitle
                 Layout.fillWidth: true
                 text: "You are up to date!"
                 wrapMode: Text.WordWrap
                 color: Style.colorText
-                font.pointSize: 23
+                font.pointSize: Fonts.hugeTitleSize
                 font.weight: Font.Bold
             }
-            
-            Label
-            {
+
+            Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 7
                 text: "Make sure to check for updates regularly, so you dont miss out on any great features."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 15
+                font.pointSize: Fonts.modestTitleSize
             }
-            
-            Label
-            {
+
+            Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 24
                 text: "Your current version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 14.5
+                font.pointSize: Fonts.smallTitleSize
             }
-            
-            Label
-            {
+
+            Label {
                 Layout.fillWidth: true
                 text: AppInfoController.currentVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorBasePurple
-                font.pointSize: 14.2
+                font.pointSize: Fonts.smallTitleSize
                 font.bold: true
             }
-            
-            Image
-            {
+
+            Image {
                 id: checkIllustration
                 z: -1
                 Layout.topMargin: 8
@@ -88,36 +77,33 @@ Item
                 sourceSize.width: 320
                 fillMode: Image.PreserveAspectFit
             }
-            
-            
-            Label
-            {
+
+            Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 text: "See our latest changes at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 13.5
+                font.pointSize: 14
             }
-            
-            Label
-            {
+
+            Label {
                 Layout.preferredWidth: implicitWidth
                 Layout.minimumWidth: implicitWidth
                 text: AppInfoController.newsWebsite
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
-                font.pointSize: 13.5
+                font.pointSize: 14
                 opacity: newsWebsiteLinkArea.pressed ? 0.8 : 1
-                
-                MouseArea
-                {
+
+                MouseArea {
                     id: newsWebsiteLinkArea
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
-                    
-                    onClicked: Qt.openUrlExternally(AppInfoController.newsWebsite)
+
+                    onClicked: Qt.openUrlExternally(
+                                   AppInfoController.newsWebsite)
                 }
             }
         }

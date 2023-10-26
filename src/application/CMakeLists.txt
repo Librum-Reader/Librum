@@ -100,28 +100,26 @@ endif()
 message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
 
 
-add_custom_command(
-    OUTPUT ${MUPDF_OUTPUT}
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-    COMMAND ${MUPDF_BUILD_COMMAND}
-    COMMENT "Building mupdf (This takes a while) ..."
+add_custom_target(mupdf
+   COMMAND ${MUPDF_BUILD_COMMAND}
+   BYPRODUCTS ${MUPDF_OUTPUT}
+   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+   COMMENT "Building mupdf (This takes a while) ..."
 )
 
-add_custom_target(mupdf ALL
-   DEPENDS ${MUPDF_OUTPUT}
-)
 
-# Copy the mupdf dll into the binary folder for windows
+###### Copy the mupdf dlls to the build directory for windows ######
 if(WIN32)
     add_custom_command(
-      OUTPUT ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
+      TARGET mupdf POST_BUILD
       COMMAND ${CMAKE_COMMAND} -E copy
-              ${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll
-              ${PROJECT_BINARY_DIR}/mupdfcpp64.dll
+              "${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll"
+              "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
+      BYPRODUCTS "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
       DEPENDS ${MUPDF_OUTPUT}
     )
-    add_custom_target(mupdf_copy_target ALL DEPENDS ${PROJECT_BINARY_DIR}/mupdfcpp64.dll)
 endif()
+
 
 
 # Build application
@@ -130,9 +128,6 @@ add_library(application
                     ${application_SRC}
                     core/utils/search_options.hpp
 )
-
-# Make sure to build mupdf before the application
-add_dependencies(application mupdf)
 
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
@@ -194,14 +189,23 @@ if (ENABLE_COVERAGE AND CMAKE_CXX_COMPILER_ID STREQUAL "GNU") # Only works when 
 endif()
 
 
-# Install rules
-if(UNIX)
+###### Install rules ######
+if(LINUX)
     install(TARGETS application
             DESTINATION lib
             )
     
     # Install mupdf's shared libraries
-    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so 
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
                   ${MUPDF_OUTPUT_DIR}/libmupdf.so
+            DESTINATION lib)
+elseif(APPLE)
+    install(TARGETS application
+            DESTINATION lib
+            )
+    
+    # Install mupdf's shared libraries
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+                  ${MUPDF_OUTPUT_DIR}/libmupdf.dylib
             DESTINATION lib)
 endif()

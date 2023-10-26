@@ -175,6 +175,9 @@ Here are solutions to some common errors. If your error is not listed here, plea
 - Error: `Failed to find required Qt component "Quick".`<br>
 - Solution: Install the libGL mesa dev package, on ubuntu its `sudo apt install libgl1-mesa-dev` and on fedora its `sudo dnf install mesa-libGL-devel`.
 
+- Error: `Could not load the qt platform plugin "xcb" even though it was found`
+- Solution: Install the libxcb-cursor-dev, on ubuntu its `sudo apt install libxcb-cursor-dev`
+
 <br>
 
 

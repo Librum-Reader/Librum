@@ -2,12 +2,11 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 import Librum.style
+import Librum.fonts
 
-
-Item
-{
+Item {
     id: root
-    property bool selected : false
+    property bool selected: false
     property int imageLeftMargin: 0
     property int imageWidth: 0
     property int labelLeftMargin: 0
@@ -17,50 +16,45 @@ Item
     property string defaultIcon
     property string selectedIcon
     signal clicked
-    
+
     implicitWidth: 235
     implicitHeight: 32
-    
-    
-    Rectangle
-    {
+
+    Rectangle {
         id: container
         anchors.fill: parent
         color: root.selected ? Style.colorLightHighlight : "transparent"
-        
-        
-        RowLayout
-        {
+
+        RowLayout {
             id: layout
             anchors.fill: parent
             spacing: 0
-            
-            
-            Image
-            {
+
+            Image {
                 id: icon
                 Layout.leftMargin: root.imageLeftMargin
                 source: root.selected ? root.selectedIcon : root.defaultIcon
                 fillMode: Image.PreserveAspectFit
                 sourceSize.width: root.selected ? root.imageWidth + 1 : root.imageWidth
             }
-            
-            Label
-            {
+
+            Label {
                 id: text
                 Layout.topMargin: root.labelTopMargin
                 Layout.leftMargin: root.labelLeftMargin
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
                 color: root.selected ? Style.colorBasePurple : Style.colorText
-                font.pointSize: 13
+                font.pointSize: Fonts.smallTitleSize
                 font.weight: root.selected ? Font.DemiBold : Font.Normal
             }
-            
-            Item { id: widthFiller; Layout.fillWidth: true }
-            
-            Rectangle
-            {
+
+            Item {
+                id: widthFiller
+                Layout.fillWidth: true
+            }
+
+            Rectangle {
                 id: sideBorder
                 visible: root.selected
                 Layout.preferredWidth: 2
@@ -68,11 +62,10 @@ Item
                 color: Style.colorBasePurple
             }
         }
-       
-        MouseArea
-        {
+
+        MouseArea {
             anchors.fill: parent
-            
+
             onClicked: root.clicked()
         }
     }
