@@ -3,19 +3,18 @@
 #include <qqml.h>
 #include <QApplication>
 #include <QDateTime>
+#include <QFile>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
-#include <QStandardPaths>
-#include <QString>
-#include <QTranslator>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QString>
 #include <QTextStream>
-#include <QFile>
+#include <QTranslator>
 #include <memory>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
@@ -57,13 +56,11 @@ int main(int argc, char* argv[])
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 		
-	// store host Url to settings
-	QSettings settings;
-	QString cfgFile = settings.value("serverHost",QVariant(QString()) ).toString();
-	if (cfgFile.isEmpty()){	 	
-		settings.setValue("serverHost","https://api.librumreader.com");
-	} 	 	
-	QTextStream(stdout)<< "Host value is " << settings.value("serverHost").toString() << Qt::endl;
+    // store host Url to settings
+    QSettings settings;
+    QString cfgFile = settings.value("serverHost", QVariant(QString())).toString();
+    if(cfgFile.isEmpty())
+       settings.setValue("serverHost", "https://api.librumreader.com");
 	
 
     QIcon icon(":/src/logo.ico");

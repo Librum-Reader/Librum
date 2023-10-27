@@ -4,8 +4,8 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <QString>
 #include <QSettings>
+#include <QString>
 #include "i_library_storage_access.hpp"
 
 namespace infrastructure::persistence
@@ -16,6 +16,8 @@ class LibraryStorageAccess : public adapters::ILibraryStorageAccess
     Q_OBJECT
 
 public:
+    LibraryStorageAccess();
+
     void createBook(const QString& authToken,
                     const QJsonObject& jsonBook) override;
     void deleteBook(const QString& authToken, const QUuid& uuid) override;
@@ -29,7 +31,6 @@ public:
                               const QUuid& uuid) override;
     void downloadBookMedia(const QString& authToken,
                            const QUuid& uuid) override;
-	LibraryStorageAccess();					   
 
 private slots:
     void processGettingBooksMetaDataResult(QNetworkReply* reply);
@@ -42,7 +43,7 @@ private:
 
 
     QNetworkAccessManager m_networkAccessManager;
-	QString domain; // server domain
+    QString domain;
 };
 
 }  // namespace infrastructure::persistence

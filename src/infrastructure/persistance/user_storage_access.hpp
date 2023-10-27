@@ -7,8 +7,8 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QObject>
-#include <QVariantMap>
 #include <QSettings>
+#include <QVariantMap>
 #include <memory>
 #include "i_user_storage_access.hpp"
 
@@ -20,7 +20,8 @@ class UserStorageAccess : public adapters::IUserStorageAccess
     Q_OBJECT
 
 public:
-	UserStorageAccess();
+    UserStorageAccess();
+
     void getUser(const QString& authToken) override;
     void deleteUser(const QString& authToken) override;
     void forgotPassword(const QString& email) override;
@@ -50,7 +51,7 @@ private:
     QNetworkRequest createRequest(const QUrl& url, const QString& authToken);
 
     QNetworkAccessManager m_networkAccessManager;
-	QString domain; // server domain
+    QString domain;
 };
 
 }  // namespace infrastructure::persistence

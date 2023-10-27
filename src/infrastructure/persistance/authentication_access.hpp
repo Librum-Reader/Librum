@@ -19,16 +19,17 @@ class AuthenticationAccess : public adapters::IAuthenticationAccess
     Q_OBJECT
 
 public:
+    AuthenticationAccess();
+
     void authenticateUser(const adapters::dtos::LoginDto& loginDto) override;
     void registerUser(const adapters::dtos::RegisterDto& registerDto) override;
     void checkIfEmailConfirmed(const QString& email) override;
-	AuthenticationAccess();
 
 private:
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;
-	QString domain; // server domain
+    QString domain;
 };
 
 }  // namespace infrastructure::persistence
