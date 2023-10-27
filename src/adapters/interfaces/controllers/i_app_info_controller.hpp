@@ -27,6 +27,7 @@ class ADAPTERS_EXPORT IAppInfoController : public QObject
     Q_PROPERTY(QString currentQtVersion READ getCurrentQtVersion CONSTANT)
     Q_PROPERTY(QString operatingSystem READ getOperatingSystem CONSTANT)
     Q_PROPERTY(int systemFontSize READ getSystemFontSize CONSTANT)
+    Q_PROPERTY(bool online READ isOnline NOTIFY isOnlineChanged)
 
 public:
     virtual ~IAppInfoController() noexcept = default;
@@ -45,11 +46,13 @@ private:
     virtual QString getCurrentQtVersion() const = 0;
     virtual QString getOperatingSystem() const = 0;
     virtual int getSystemFontSize() const = 0;
+    virtual bool isOnline() const = 0;
 
 signals:
     void newestVersionChanged();
     void downloadingBinariesProgressChanged(double progress);
     void applicaitonUpdateFailed();
+    void isOnlineChanged();
 };
 
 }  // namespace adapters

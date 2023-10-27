@@ -32,6 +32,7 @@ public:
     int removeTag(const QString& bookUuid, const QString& tagUuid) override;
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
+    bool isSyncing() const override;
 
     void syncWithServer() override;
     int saveBookToFile(const QString& uuid, const QUrl& path) override;
@@ -53,6 +54,7 @@ private:
     application::ILibraryService* m_bookService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
+    bool m_currentlySyncing = false;
 };
 
 }  // namespace adapters::controllers

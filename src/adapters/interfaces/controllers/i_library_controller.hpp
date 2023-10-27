@@ -26,6 +26,7 @@ class ADAPTERS_EXPORT ILibraryController : public QObject
     Q_PROPERTY(adapters::data_models::LibraryProxyModel* libraryModel READ
                    getLibraryModel CONSTANT)
     Q_PROPERTY(int bookCount READ getBookCount NOTIFY bookCountChanged)
+    Q_PROPERTY(bool isSyncing READ isSyncing NOTIFY isSyncingChanged)
 
 public:
     virtual ~ILibraryController() noexcept = default;
@@ -71,6 +72,7 @@ public:
     Q_INVOKABLE virtual adapters::dtos::BookDto getBook(
         const QString& uuid) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
+    Q_INVOKABLE virtual bool isSyncing() const = 0;
 
     Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;
@@ -81,6 +83,7 @@ public slots:
 
 signals:
     void bookCountChanged();
+    void isSyncingChanged();
     void storageLimitExceeded();
     void addingBookFinished(int projectGutenbergId, bool result);
     void downloadedProjectGutenbergIdsReady(const std::set<int>& ids);

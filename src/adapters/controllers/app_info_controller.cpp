@@ -1,4 +1,5 @@
 #include "app_info_controller.hpp"
+#include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
 
@@ -19,6 +20,16 @@ AppInfoController::AppInfoController(IAppInfoService* appInfoService) :
 
     connect(m_appInfoService, &IAppInfoService::applicationUpdateFailed, this,
             &AppInfoController::applicaitonUpdateFailed);
+
+
+    // Setup network info
+    auto success = QNetworkInformation::loadDefaultBackend();
+    if(!success)
+        qWarning() << "Failed loading QNetworkInformation backend";
+
+    m_networkInfo = QNetworkInformation::instance();
+    connect(m_networkInfo, &QNetworkInformation::reachabilityChanged, this,
+            &AppInfoController::isOnlineChanged);
 }
 
 QString AppInfoController::getCurrentVersion() const
@@ -85,6 +96,17 @@ void AppInfoController::updateApplication()
 int AppInfoController::getSystemFontSize() const
 {
     return QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
+}
+
+bool AppInfoController::isOnline() const
+{
+    if(m_networkInfo->reachability() ==
+       QNetworkInformation::Reachability::Online)
+    {
+        return true;
+    }
+
+    return false;
 }
 
 }  // namespace adapters::controllers

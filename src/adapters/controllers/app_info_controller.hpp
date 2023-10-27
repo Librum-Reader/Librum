@@ -1,5 +1,7 @@
 #pragma once
+#include <QNetworkInformation>
 #include <QObject>
+#include <QTimer>
 #include "adapters_export.hpp"
 #include "i_app_info_controller.hpp"
 #include "i_app_info_service.hpp"
@@ -27,8 +29,10 @@ private:
     QString getOperatingSystem() const override;
     void updateApplication() override;
     int getSystemFontSize() const override;
+    bool isOnline() const override;
 
     application::IAppInfoService* m_appInfoService;
+    QNetworkInformation* m_networkInfo;
 };
 
 }  // namespace adapters::controllers

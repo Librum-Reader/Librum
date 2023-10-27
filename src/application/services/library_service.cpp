@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
+#include <QNetworkInformation>
 #include <QPixmap>
 #include <QTime>
 #include <ranges>
@@ -24,8 +25,22 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
 {
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
-    connect(&m_fetchChangesTimer, &QTimer::timeout, m_bookStorageManager,
-            &ILibraryStorageManager::downloadRemoteBooks);
+    connect(&m_fetchChangesTimer, &QTimer::timeout, this,
+            [this]()
+            {
+                m_bookStorageManager->downloadRemoteBooks();
+
+                auto success = QNetworkInformation::loadDefaultBackend();
+                if(!success)
+                    qWarning() << "Failed loading QNetworkInformation backend";
+
+                auto networkInfo = QNetworkInformation::instance();
+                if(networkInfo->reachability() ==
+                   QNetworkInformation::Reachability::Online)
+                {
+                    emit syncingLibraryStarted();
+                }
+            });
 
     // Getting books finished
     connect(m_bookStorageManager,
@@ -550,9 +565,9 @@ void LibraryService::setupUserData(const QString& token, const QString& email)
     m_bookStorageManager->setUserData(email, token);
 
     loadLocalBooks();
-    m_bookStorageManager->downloadRemoteBooks();
-
     m_fetchChangesTimer.start();
+    // Trigger a timeout manually at the start for the initial book loading
+    QMetaObject::invokeMethod(&m_fetchChangesTimer, "timeout");
 }
 
 void LibraryService::loadLocalBooks()
@@ -599,6 +614,7 @@ void LibraryService::updateLibrary(std::vector<Book>& books)
     mergeLocalLibraryIntoRemoteLibrary(books);
 
     emit downloadedProjectGutenbergIdsReady(getProjectGutenbergIds());
+    emit syncingLibraryFinished();
 }
 
 void LibraryService::mergeRemoteLibraryIntoLocalLibrary(

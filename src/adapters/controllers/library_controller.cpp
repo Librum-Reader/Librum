@@ -31,6 +31,22 @@ LibraryController::LibraryController(
     connect(m_bookService, &application::ILibraryService::bookInsertionEnded,
             this, &LibraryController::bookCountChanged);
 
+    // Library syncing
+    connect(m_bookService, &application::ILibraryService::syncingLibraryStarted,
+            [this]()
+            {
+                m_currentlySyncing = true;
+                emit isSyncingChanged();
+            });
+
+    connect(m_bookService,
+            &application::ILibraryService::syncingLibraryFinished,
+            [this]()
+            {
+                m_currentlySyncing = false;
+                emit isSyncingChanged();
+            });
+
 
     // book deletion
     connect(m_bookService, &application::ILibraryService::bookDeletionStarted,
@@ -72,10 +88,9 @@ LibraryController::LibraryController(
             &data_models::LibraryModel::downloadingBookMediaProgressChanged);
 
     // downloaded Project Gutenberg books
-    connect(
-        m_bookService,
-        &application::ILibraryService::downloadedProjectGutenbergIdsReady,
-        this, &LibraryController::downloadedProjectGutenbergIdsReady);
+    connect(m_bookService,
+            &application::ILibraryService::downloadedProjectGutenbergIdsReady,
+            this, &LibraryController::downloadedProjectGutenbergIdsReady);
 
     m_libraryProxyModel.setSourceModel(&m_libraryModel);
 }
@@ -270,6 +285,11 @@ dtos::BookDto LibraryController::getBook(const QString& uuid)
 int LibraryController::getBookCount() const
 {
     return m_bookService->getBookCount();
+}
+
+bool LibraryController::isSyncing() const
+{
+    return m_currentlySyncing;
 }
 
 data_models::LibraryProxyModel* LibraryController::getLibraryModel()

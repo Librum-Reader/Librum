@@ -67,6 +67,8 @@ signals:
     void tagsChanged(int index);
     void dataChanged(int index);
     void storageLimitExceeded();
+    void syncingLibraryStarted();
+    void syncingLibraryFinished();
     void downloadingBookMediaProgressChanged(int index);
     void downloadedProjectGutenbergIdsReady(const std::set<int>& ids);
 };

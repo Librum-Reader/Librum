@@ -10,6 +10,7 @@ Popup {
     property var focusedItem
     property alias content: text.text
     property int triangleOffset: 4
+    property int xOffset: 0
 
     implicitWidth: text.implicitWidth + 2 * container.horizontalPadding
     padding: 0
@@ -24,12 +25,12 @@ Popup {
 
         // Make sure to position the popup to the left or right of the focused item
         // depending on where it is on the screen and if there is enough space
-        if (mappedPoint.x + implicitWidth < baseRoot.width) {
+        if ((mappedPoint.x + implicitWidth + xOffset) < baseRoot.width) {
             internal.leftAligned = false
-            x = mappedPoint.x
+            x = mappedPoint.x + xOffset
         } else {
             internal.leftAligned = true
-            x = mappedPoint.x - implicitWidth + focusedItem.width
+            x = mappedPoint.x - implicitWidth + focusedItem.width - xOffset
         }
     }
 
