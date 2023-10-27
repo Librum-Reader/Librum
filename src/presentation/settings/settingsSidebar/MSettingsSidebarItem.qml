@@ -45,7 +45,7 @@ Item {
                 verticalAlignment: textVerticalAlignment
                 text: root.textContent
                 color: root.selected ? Style.colorBasePurple : Style.colorText
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.largeSize
                 font.weight: root.selected ? Font.DemiBold : Font.Normal
             }
 
