@@ -53,7 +53,7 @@ Rectangle {
             Layout.leftMargin: 4
             text: model.name
             color: Style.colorText
-            font.pointSize: Fonts.baseSize
+            font.pointSize: Fonts.size11
             selectionColor: Style.colorTextSelection
             clip: true
 
@@ -90,7 +90,7 @@ Rectangle {
             Layout.rightMargin: 6
             text: model.pageNumber + 1
             color: Style.colorText
-            font.pointSize: Fonts.baseSize
+            font.pointSize: Fonts.size11
         }
     }
 

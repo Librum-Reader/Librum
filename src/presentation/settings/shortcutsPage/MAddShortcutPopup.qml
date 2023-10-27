@@ -97,7 +97,7 @@ Popup {
                     id: popupTitle
                     text: "Edit Shortcuts"
                     font.weight: Font.Bold
-                    font.pointSize: Fonts.mediumTitleSize
+                    font.pointSize: Fonts.size17
                     color: Style.colorTitle
                 }
 
@@ -113,17 +113,17 @@ Popup {
                         Layout.preferredHeight: 60
                         itemHeight: 32
                         headerText: "Action"
-                        headerFontSize: Fonts.bigSize
+                        headerFontSize: Fonts.size12
                         headerFontColor: Style.colorTitle
                         headerFontWeight: Font.DemiBold
                         selectedItemFontColor: Style.colorReadOnlyInputText
-                        selectedItemFontSize: Fonts.bigSize
+                        selectedItemFontSize: Fonts.size12
                         selectedItemPadding: 3
                         emptyText: "None selected"
                         dropdownIconSize: 11
                         contentPropertyName: "shortcut"
 
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         checkBoxStyle: false
                         model: SettingsController.shortcutsModel
                     }
@@ -158,7 +158,7 @@ Popup {
                     text: "The shortcut '" + recordKeyBox.text
                           + "' is already used for '" + conflictingShortcut + "'."
                     wrapMode: Text.WordWrap
-                    font.pointSize: Fonts.baseSize
+                    font.pointSize: Fonts.size11
                     color: Style.colorErrorText
                 }
 
@@ -177,7 +177,7 @@ Popup {
                         text: "Apply"
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         KeyNavigation.right: cancelButton
                         KeyNavigation.tab: cancelButton
 
@@ -211,7 +211,7 @@ Popup {
                         text: "Cancel"
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         KeyNavigation.left: applyButton
                         KeyNavigation.tab: applyButton
 

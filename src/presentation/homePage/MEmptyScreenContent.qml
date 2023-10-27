@@ -35,7 +35,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 text: "Quite empty here, what about adding your first book?"
                 horizontalAlignment: Text.AlignHCenter
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 font.weight: Font.DemiBold
                 color: Style.colorLightText
                 wrapMode: Text.WordWrap
@@ -53,7 +53,7 @@ Item {
                 text: "Add book"
                 textColor: Style.colorBasePurple
                 fontWeight: Font.Bold
-                fontSize: Fonts.smallTitleSize
+                fontSize: Fonts.size14
                 imagePath: Icons.addFirstBookPlus
                 imageSize: 16
 

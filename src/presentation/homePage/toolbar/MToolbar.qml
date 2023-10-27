@@ -143,14 +143,14 @@ Item {
     MToolTip {
         id: offlineToolTip
         focusedItem: isOfflineIndicator
-        content: "You are offline."
+        content: "You are offline"
     }
 
     MToolTip {
         id: librarySyncingToolTip
         focusedItem: loadingAnimation
         xOffset: 16
-        content: "Your library is being synchronized with the cloud."
+        content: "Your library is being synchronized with the cloud"
     }
 
     function resetFilters() {

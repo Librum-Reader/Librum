@@ -56,7 +56,7 @@ Item {
                 Layout.topMargin: -1
                 text: root.text
                 font.weight: Font.Medium
-                font.pointSize: Fonts.baseSize
+                font.pointSize: Fonts.size11
                 color: Style.colorLightText
                 elide: Text.ElideRight
             }

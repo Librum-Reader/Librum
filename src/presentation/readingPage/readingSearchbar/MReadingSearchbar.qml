@@ -90,7 +90,7 @@ Item {
                     Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
                     text: "Options"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
@@ -137,7 +137,7 @@ Item {
                             leftPadding: 4
                             selectByMouse: true
                             color: Style.colorBaseInputText
-                            font.pointSize: Fonts.bigSize
+                            font.pointSize: Fonts.size12
                             placeholderText: "Find"
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle {
@@ -166,7 +166,7 @@ Item {
                     Layout.preferredWidth: 81
                     Layout.preferredHeight: 30
                     text: "Next"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight
@@ -185,7 +185,7 @@ Item {
                     Layout.preferredWidth: 110
                     Layout.preferredHeight: 30
                     text: "Previous"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
                     backgroundColor: Style.colorHighlight

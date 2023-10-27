@@ -32,7 +32,7 @@ Item {
             id: labels
             text: root.text
             color: Style.colorLightText
-            font.pointSize: Fonts.baseSize
+            font.pointSize: Fonts.size10dot5
             font.weight: Font.Medium
         }
 

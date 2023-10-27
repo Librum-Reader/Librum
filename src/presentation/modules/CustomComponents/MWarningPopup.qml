@@ -78,7 +78,7 @@ Popup {
                         text: root.title
                         color: Style.colorTitle
                         font.weight: Font.Medium
-                        font.pointSize: Fonts.baseHeaderSize
+                        font.pointSize: Fonts.size42
                     }
 
                     Label {
@@ -91,7 +91,7 @@ Popup {
                         horizontalAlignment: Qt.AlignHCenter
                         color: Style.colorLightText
                         font.weight: Font.Medium
-                        font.pointSize: Fonts.modestTitleSize
+                        font.pointSize: Fonts.size15
                         textFormat: root.richText ? Text.RichText : Text.AutoText
                         onLinkActivated: link => Qt.openUrlExternally(link)
 
@@ -121,7 +121,7 @@ Popup {
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
                             text: root.leftButtonText
-                            fontSize: Fonts.largeSize
+                            fontSize: Fonts.size13
                             fontWeight: Font.Bold
                             textColor: activeFocus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
 
@@ -142,7 +142,7 @@ Popup {
                             backgroundColor: focus ? (root.rightButtonRed ? Style.colorRed : Style.colorBasePurple) : "transparent"
                             opacityOnPressed: 0.7
                             text: root.rightButtonText
-                            fontSize: Fonts.largeSize
+                            fontSize: Fonts.size13
                             fontWeight: Font.Bold
                             textColor: focus ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
 

@@ -126,7 +126,7 @@ Item {
                     visible: bookCover.source == ""
                     text: "." + model.format
                     color: Style.colorNoImageLabel
-                    font.pointSize: Fonts.veryBigTitleSize
+                    font.pointSize: Fonts.size20
                     font.bold: true
                 }
             }
@@ -175,7 +175,7 @@ Item {
                     font.weight: Font.Medium
                     verticalAlignment: Text.AlignVCenter
                     color: Style.colorTitle
-                    font.pointSize: Fonts.baseSize
+                    font.pointSize: Fonts.size11
                     lineHeight: 0.8
                     wrapMode: TextInput.WrapAtWordBoundaryOrAnywhere
                     elide: Text.ElideRight
@@ -188,7 +188,7 @@ Item {
                     clip: true
                     text: model.authors === "" ? "Unknown" : model.authors
                     color: Style.colorLightText
-                    font.pointSize: Fonts.smallSize
+                    font.pointSize: Fonts.size10
                     elide: Text.ElideRight
                 }
 
@@ -212,7 +212,7 @@ Item {
                             text: model.bookReadingProgress + "%"
                             font.weight: Font.DemiBold
                             color: Style.colorTitle
-                            font.pointSize: Fonts.smallSize
+                            font.pointSize: Fonts.size10
                         }
                     }
 

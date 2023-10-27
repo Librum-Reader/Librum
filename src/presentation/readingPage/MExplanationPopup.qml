@@ -108,11 +108,11 @@ Popup {
             itemHeight: 32
             selectedItemFontColor: Style.colorBaseInputText
             headerText: "Mode"
-            headerFontSize: Fonts.bigSize
+            headerFontSize: Fonts.size12
             headerFontColor: Style.colorTitle
             headerFontWeight: Font.DemiBold
-            fontSize: Fonts.bigSize
-            selectedItemFontSize: Fonts.largeSize
+            fontSize: Fonts.size12
+            selectedItemFontSize: Fonts.size13
             selectedItemPadding: 3
             defaultIndex: 0
             emptyText: "None selected"
@@ -132,12 +132,12 @@ Popup {
             Layout.fillWidth: true
             Layout.topMargin: 24
             headerFontColor: Style.colorLightText
-            headerFontSize: Fonts.bigSize
+            headerFontSize: Fonts.size12
             borderColor: Style.colorContainerBorder
             borderWidth: 1
             text: question
             backgroundColor: Style.colorContainerBackground
-            inputFontSize: Fonts.largeSize
+            inputFontSize: Fonts.size13
             headerText: "Request"
             readOnly: true
         }
@@ -172,7 +172,7 @@ Popup {
                     width: answerFlick.width
                     focus: true
                     text: root.answer
-                    font.pointSize: Fonts.smallTitleSize
+                    font.pointSize: Fonts.size13
                     color: Style.colorText
                     readOnly: true
                     wrapMode: Text.WordWrap
@@ -205,7 +205,7 @@ Popup {
                         text: ""
                         color: Style.colorTitle
                         font.weight: Font.Medium
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size14
                         onLinkActivated: Qt.openUrlExternally(
                                              AppInfoController.website + "/whyAiLimits")
 
@@ -278,7 +278,7 @@ Popup {
                     id: actionText
                     Layout.topMargin: -1
                     text: "Note: AI responses can be inaccurate"
-                    font.pointSize: Fonts.smallSize
+                    font.pointSize: Fonts.size10
                     color: Style.colorBasePurple
                 }
             }
@@ -296,7 +296,7 @@ Popup {
             text: "Ask"
             textColor: internal.dataChanged ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
             fontWeight: Font.Bold
-            fontSize: Fonts.bigSize
+            fontSize: Fonts.size12
 
             onClicked: {
                 if (internal.dataChanged) {

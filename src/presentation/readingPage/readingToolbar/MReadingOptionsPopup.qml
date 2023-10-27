@@ -114,7 +114,7 @@ Popup {
                         boxHeight: 19
                         boxWidth: 19
                         text: "Read out (TTS)"
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         spacing: 8
@@ -128,7 +128,7 @@ Popup {
                         boxWidth: 19
                         verticalTextOffset: 1
                         text: "Continuous pages"
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         checked: true
@@ -143,7 +143,7 @@ Popup {
                         boxWidth: 19
                         verticalTextOffset: 1
                         text: "Display vertically"
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
                         checked: true
@@ -176,7 +176,7 @@ Popup {
                         borderWidth: 0
                         text: "Invert colors"
                         textColor: Style.colorText
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsInvertColor
                         imageSize: 24
@@ -208,7 +208,7 @@ Popup {
                         borderWidth: 0
                         text: "Sync book"
                         textColor: Style.colorText
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsPopupSync
                         imageSize: 16
@@ -226,7 +226,7 @@ Popup {
                         borderWidth: 0
                         text: "More options"
                         textColor: Style.colorText
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         imagePath: Icons.readingOptionsSettings
                         imageSize: 20

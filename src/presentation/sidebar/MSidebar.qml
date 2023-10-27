@@ -101,7 +101,7 @@ Item {
                         visible: false
                         text: AppInfoController.applicationName
                         font.bold: true
-                        font.pointSize: Fonts.baseTitleSize
+                        font.pointSize: Fonts.size16
                         color: Style.colorTitle
                     }
                 }

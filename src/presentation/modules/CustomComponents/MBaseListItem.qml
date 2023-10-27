@@ -10,7 +10,7 @@ Item {
     property ListView containingListview
     property int index
     property bool selected: false
-    property double fontSize: Fonts.baseSize
+    property double fontSize: Fonts.size10dot75
     property color fontColor: Style.colorLightText
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9

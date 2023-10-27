@@ -53,7 +53,7 @@ Item {
                 Layout.topMargin: 28
                 Layout.leftMargin: 25
                 text: "Settings"
-                font.pointSize: Fonts.bigTitleSize
+                font.pointSize: Fonts.size19
                 font.bold: true
                 color: Style.colorTitle
             }
@@ -71,7 +71,7 @@ Item {
                 Layout.topMargin: 38
                 Layout.leftMargin: 25
                 text: "GLOBAL SETTINGS"
-                font.pointSize: Fonts.smallSize
+                font.pointSize: Fonts.size10
                 font.weight: Font.Bold
                 color: Style.colorLightText
             }
@@ -162,7 +162,7 @@ Item {
                 Layout.topMargin: 25
                 Layout.leftMargin: 25
                 text: "USER & ACCOUNT"
-                font.pointSize: Fonts.smallSize
+                font.pointSize: Fonts.size10
                 font.bold: true
                 color: Style.colorLightText
             }

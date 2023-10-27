@@ -75,7 +75,7 @@ MFlickWrapper {
                         text: "Forgot Password"
                         color: Style.colorText
                         font.bold: true
-                        font.pointSize: Fonts.bigTitleSize
+                        font.pointSize: Fonts.size19
                     }
 
                     Label {
@@ -89,7 +89,7 @@ MFlickWrapper {
                         color: Style.colorSubtitle
                         lineHeight: 1.1
                         font.weight: Font.Medium
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13
                     }
 
                     ColumnLayout {
@@ -116,7 +116,7 @@ MFlickWrapper {
                             wrapMode: Text.WordWrap
                             visible: false
                             color: Style.colorGreenText
-                            font.pointSize: 12
+                            font.pointSize: Fonts.size11dot75
                         }
 
                         MButton {
@@ -128,7 +128,7 @@ MFlickWrapper {
                             borderWidth: 0
                             backgroundColor: Style.colorBasePurple
                             text: "Send Email"
-                            fontSize: Fonts.bigSize
+                            fontSize: Fonts.size12dot25
                             textColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
 
@@ -146,7 +146,7 @@ MFlickWrapper {
                             backgroundColor: "transparent"
                             opacityOnPressed: 0.7
                             text: "Back to Login"
-                            fontSize: Fonts.bigSize
+                            fontSize: Fonts.size12
                             fontWeight: Font.Medium
                             textColor: Style.colorUnfocusedButtonText
                             imagePath: Icons.arrowheadBackIcon

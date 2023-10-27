@@ -127,7 +127,7 @@ Item {
                     visible: bookCover.source == ""
                     text: ".jpeg"
                     color: Style.colorNoImageLabel
-                    font.pointSize: Fonts.veryBigTitleSize
+                    font.pointSize: Fonts.size20
                     font.bold: true
                 }
             }
@@ -159,7 +159,7 @@ Item {
                     text: model.title
                     font.weight: Font.Medium
                     color: Style.colorTitle
-                    font.pointSize: Fonts.baseSize
+                    font.pointSize: Fonts.size11
                     lineHeight: 0.8
                     elide: Label.ElideRight
                     wrapMode: TextInput.WordWrap
@@ -171,7 +171,7 @@ Item {
                     Layout.topMargin: 5
                     text: model.authors
                     color: Style.colorLightText
-                    font.pointSize: Fonts.smallSize
+                    font.pointSize: Fonts.size10
                     elide: Label.ElideRight
                 }
             }

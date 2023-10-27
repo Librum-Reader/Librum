@@ -52,7 +52,7 @@ Item {
                   + Style.colorBasePurple + ';">Privacy Policy</a>'
             onLinkActivated: link => Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
-            font.pointSize: Fonts.baseSize
+            font.pointSize: Fonts.size11
             color: Style.colorText
 
             MouseArea {

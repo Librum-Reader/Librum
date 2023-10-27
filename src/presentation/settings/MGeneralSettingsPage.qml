@@ -37,8 +37,8 @@ MFlickWrapper {
                     Layout.topMargin: 64
                     titleText: "General settings"
                     descriptionText: "Change the way Librum works"
-                    titleSize: 25
-                    descriptionSize: 13.25
+                    titleSize: Fonts.size25
+                    descriptionSize: Fonts.size13dot25
                 }
 
                 Item {
@@ -53,7 +53,7 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Restore Defaults"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
 
@@ -83,7 +83,7 @@ MFlickWrapper {
                         id: downloadTitle
                         Layout.fillWidth: true
                         text: "Books"
-                        font.pointSize: Fonts.mediumTitleSize
+                        font.pointSize: Fonts.size17
                         font.weight: Font.DemiBold
                         color: Style.colorText
                     }
@@ -93,7 +93,7 @@ MFlickWrapper {
                         Layout.fillWidth: true
                         Layout.topMargin: 24
                         text: "Open books after creation"
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size13
                         font.weight: Font.DemiBold
                         color: Style.colorText
                     }

@@ -67,8 +67,8 @@ MFlickWrapper {
                     id: pageTitle
                     titleText: "Account"
                     descriptionText: UserController.firstName + " " + UserController.lastName
-                    titleSize: 25
-                    descriptionSize: 13.25
+                    titleSize: Fonts.size25
+                    descriptionSize: Fonts.size13dot25
                 }
 
                 Item {
@@ -83,7 +83,7 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Save"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.checkWhite
@@ -126,7 +126,7 @@ MFlickWrapper {
                             id: profileTitle
                             text: "Profile"
                             color: Style.colorText
-                            font.pointSize: 17
+                            font.pointSize: Fonts.size16dot5
                             font.weight: Font.DemiBold
                         }
 
@@ -138,7 +138,7 @@ MFlickWrapper {
                             headerText: "First name"
                             text: internal.unsavedChanges ? text : UserController.firstName
                             headerToBoxSpacing: 3
-                            inputFontSize: Fonts.largeSize
+                            inputFontSize: Fonts.size13
                             borderWidth: 1
                             borderRadius: 4
 
@@ -153,7 +153,7 @@ MFlickWrapper {
                             headerText: "Last name"
                             text: internal.unsavedChanges ? text : UserController.lastName
                             headerToBoxSpacing: 3
-                            inputFontSize: Fonts.largeSize
+                            inputFontSize: Fonts.size13
                             borderWidth: 1
                             borderRadius: 4
 
@@ -168,7 +168,7 @@ MFlickWrapper {
                             headerText: "Email"
                             text: internal.unsavedChanges ? text : UserController.email
                             headerToBoxSpacing: 3
-                            inputFontSize: Fonts.largeSize
+                            inputFontSize: Fonts.size13
                             borderWidth: 1
                             borderRadius: 4
                             readOnly: true
@@ -230,7 +230,7 @@ MFlickWrapper {
                         id: passwordTitle
                         text: "Change password"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -246,7 +246,7 @@ MFlickWrapper {
                             boxHeight: 40
                             headerText: "Password"
                             headerToBoxSpacing: 3
-                            inputFontSize: Fonts.largeSize
+                            inputFontSize: Fonts.size13
                             borderWidth: 1
                             borderRadius: 4
                             image: Icons.eyeOn
@@ -267,7 +267,7 @@ MFlickWrapper {
                             boxHeight: 40
                             headerText: "Password confirmation"
                             headerToBoxSpacing: 3
-                            inputFontSize: Fonts.largeSize
+                            inputFontSize: Fonts.size13
                             borderWidth: 1
                             borderRadius: 4
                             image: Icons.eyeOn
@@ -308,7 +308,7 @@ MFlickWrapper {
                         id: yourDataTitle
                         text: "Your data"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -318,7 +318,7 @@ MFlickWrapper {
                         boxWidth: 21
                         boxHeight: 21
                         text: "Analyse your reading to make better recommendations"
-                        fontSize: Fonts.largeSize
+                        fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
                         checked: true
@@ -332,7 +332,7 @@ MFlickWrapper {
                         boxWidth: 21
                         boxHeight: 21
                         text: "Anonymously share information about the books you read to help us improve Librum"
-                        fontSize: Fonts.largeSize
+                        fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
                         checked: false
@@ -346,7 +346,7 @@ MFlickWrapper {
                         boxWidth: 21
                         boxHeight: 21
                         text: "Collect data on crashes so that we can prevent it from happening again"
-                        fontSize: Fonts.largeSize
+                        fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
 
@@ -359,7 +359,7 @@ MFlickWrapper {
                         boxWidth: 21
                         boxHeight: 21
                         text: "Collect data to display in your statistics"
-                        fontSize: Fonts.largeSize
+                        fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
 
@@ -391,7 +391,7 @@ MFlickWrapper {
                         id: yourAccountTitle
                         text: "Your Account"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -407,7 +407,7 @@ MFlickWrapper {
                         text: "Logout"
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
 
                         onClicked: {
                             AuthController.logoutUser()
@@ -427,7 +427,7 @@ MFlickWrapper {
                         text: "Delete Your Account"
                         textColor: Style.colorErrorText
                         fontWeight: Font.Bold
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
 
                         onClicked: confirmAccountDeletionPopup.open()
                     }

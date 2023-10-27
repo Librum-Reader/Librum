@@ -21,7 +21,7 @@ Page {
         anchors.top: topSpacer.bottom
         text: "Statistics Page"
         color: Style.colorTitle
-        font.pointSize: Fonts.largeTitleSize
+        font.pointSize: Fonts.size22
         font.bold: true
     }
 
@@ -32,7 +32,7 @@ Page {
         anchors.topMargin: 6
         text: "Currently in Development"
         color: Style.colorPageSubtitle
-        font.pointSize: Fonts.baseTitleSize
+        font.pointSize: Fonts.size16
         font.bold: true
     }
 }

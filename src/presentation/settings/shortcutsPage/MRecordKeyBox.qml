@@ -23,7 +23,7 @@ Item {
             id: header
             text: "Key"
             font.weight: Font.DemiBold
-            font.pointSize: Fonts.bigSize
+            font.pointSize: Fonts.size12
             color: Style.colorTitle
         }
 
@@ -57,7 +57,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.leftMargin: 12
                     text: internal.getRecordText()
-                    font.pointSize: Fonts.bigSize
+                    font.pointSize: Fonts.size12
                     color: Style.colorLightInputText
                     elide: Text.ElideLeft
                 }

@@ -22,7 +22,7 @@ Item {
             id: text
             text: "No book satisfies the filter conditions"
             color: Style.colorTitle
-            font.pointSize: Fonts.largeTitleSize
+            font.pointSize: Fonts.size22
             font.weight: Font.Medium
         }
 
@@ -37,7 +37,7 @@ Item {
             text: "Remove Filters"
             textColor: Style.colorBasePurple
             fontWeight: Font.Bold
-            fontSize: Fonts.largeSize
+            fontSize: Fonts.size13
             imagePath: Icons.cancelPurple
             imageSize: 11
             imageToRight: true

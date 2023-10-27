@@ -64,7 +64,7 @@ Popup {
                 Layout.leftMargin: 52
                 text: "Confirm Account Deletion"
                 font.weight: Font.Bold
-                font.pointSize: Fonts.bigTitleSize
+                font.pointSize: Fonts.size19
                 color: Style.colorTitle
             }
 
@@ -74,7 +74,7 @@ Popup {
                 Layout.leftMargin: 52
                 textFormat: Text.RichText
                 text: "Deleting your account is an irreversible action.<br>Once you delete your account, there is <b>no</b> going back. Please be certain."
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 color: Style.colorText
             }
 
@@ -84,7 +84,7 @@ Popup {
                 Layout.topMargin: 28
                 Layout.leftMargin: 52
                 Layout.rightMargin: 52
-                headerFontSize: Fonts.baseSize
+                headerFontSize: Fonts.size11
                 placeholderContent: "Your Email"
                 placeholderColor: Style.colorPlaceholderText
                 headerText: "Confirm the deletion by entering your Account's email."
@@ -109,7 +109,7 @@ Popup {
                     text: "Cancel"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
 
                     onClicked: root.close()
                 }
@@ -125,7 +125,7 @@ Popup {
                     text: "Delete"
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     imagePath: active ? Icons.trashHighlighted : Icons.trash
                     imageSize: 17
                     imageSpacing: 10

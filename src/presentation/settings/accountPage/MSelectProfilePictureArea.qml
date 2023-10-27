@@ -108,7 +108,7 @@ Item {
                         horizontalAlignment: Qt.AlignHCenter
                         wrapMode: Text.WordWrap
                         color: Style.colorSubtitle
-                        font.pointSize: Fonts.bigSize
+                        font.pointSize: Fonts.size12
                         font.weight: Font.DemiBold
                         lineHeight: 0.9
                     }

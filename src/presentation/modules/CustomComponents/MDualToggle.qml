@@ -43,7 +43,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 text: root.leftText
                 color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 font.weight: root.leftSelected ? Font.Bold : Font.DemiBold
                 font.letterSpacing: root.leftSelected ? -0.4 : 0
                 background: Rectangle {
@@ -95,7 +95,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 text: root.rightText
                 color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 font.weight: root.rightSelected ? Font.Bold : Font.DemiBold
                 font.letterSpacing: root.rightSelected ? -0.4 : 0
                 background: Rectangle {

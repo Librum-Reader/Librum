@@ -47,7 +47,7 @@ Item {
                 horizontalAlignment: Text.AlignHCenter
                 selectByMouse: true
                 color: Style.colorLightInputText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 font.weight: Font.Bold
                 validator: IntValidator {
                     bottom: root.minVal

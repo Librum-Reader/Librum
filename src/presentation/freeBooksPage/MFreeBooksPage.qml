@@ -101,7 +101,7 @@ Page {
             Layout.leftMargin: -sidebar.width
             Layout.topMargin: Math.round(root.height / 3) - implicitHeight
             color: Style.colorTitle
-            font.pointSize: Fonts.largeTitleSize
+            font.pointSize: Fonts.size22
             font.weight: Font.Medium
             visible: false
         }

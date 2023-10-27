@@ -70,10 +70,10 @@ Popup {
                         boxHeight: 30
                         headerToBoxSpacing: 2
                         placeholderContent: "e.g. Uncle bob"
-                        inputFontSize: Fonts.baseSize
+                        inputFontSize: Fonts.size11
                         placeholderColor: Style.colorPlaceholderText
                         headerText: "Authors"
-                        headerFontSize: Fonts.baseSize
+                        headerFontSize: Fonts.size10dot5
                         headerFontWeight: Font.Bold
                         headerFontColor: Style.colorLightText
                         textPadding: 8
@@ -97,10 +97,10 @@ Popup {
                                 boxHeight: 30
                                 headerToBoxSpacing: 2
                                 placeholderContent: "e.g. 2d ago"
-                                inputFontSize: Fonts.baseSize
+                                inputFontSize: Fonts.size11
                                 placeholderColor: Style.colorPlaceholderText
                                 headerText: "Added"
-                                headerFontSize: Fonts.baseSize
+                                headerFontSize: Fonts.size10dot5
                                 headerFontWeight: Font.Bold
                                 headerFontColor: Style.colorLightText
                                 textPadding: 8
@@ -116,7 +116,7 @@ Popup {
                                 boxHeight: 17
                                 spacing: 7
                                 text: "Read"
-                                fontSize: Fonts.baseSize
+                                fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
                                 imageSize: 9
@@ -134,7 +134,7 @@ Popup {
                                 boxHeight: 17
                                 spacing: 7
                                 text: "Unread"
-                                fontSize: Fonts.baseSize
+                                fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
                                 imageSize: 9
@@ -162,7 +162,7 @@ Popup {
                                 checkBoxSize: 17
                                 checkBoxImageSize: 9
                                 itemHeight: 29
-                                fontSize: Fonts.baseSize
+                                fontSize: Fonts.size11
                                 model: ListModel {
                                     ListElement {
                                         text: "Pdf"
@@ -189,7 +189,7 @@ Popup {
                                 boxHeight: 17
                                 spacing: 7
                                 text: "Only Books"
-                                fontSize: Fonts.baseSize
+                                fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
                                 imageSize: 9
@@ -207,7 +207,7 @@ Popup {
                                 boxHeight: 17
                                 spacing: 7
                                 text: "Only Files"
-                                fontSize: Fonts.baseSize
+                                fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
                                 imageSize: 9
@@ -228,7 +228,7 @@ Popup {
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
                         text: "Apply Filter"
-                        fontSize: Fonts.baseSize
+                        fontSize: Fonts.size10dot5
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
 

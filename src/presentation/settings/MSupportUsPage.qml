@@ -32,8 +32,8 @@ MFlickWrapper {
                 id: pageTitle
                 titleText: "Support us"
                 descriptionText: "Thanks for considering"
-                titleSize: 25
-                descriptionSize: 13.25
+                titleSize: Fonts.size25
+                descriptionSize: Fonts.size13dot25
             }
 
             Pane {
@@ -59,7 +59,7 @@ MFlickWrapper {
                         id: contentTitle
                         text: "Us"
                         color: Style.colorText
-                        font.pointSize: Fonts.veryBigTitleSize
+                        font.pointSize: Fonts.size20
                         font.weight: Font.DemiBold
                     }
 
@@ -69,7 +69,7 @@ MFlickWrapper {
                         text: "We are a small team of opensource developers creating apps for the community. We love\n" + "working on fun projects, supporting our community and trying to make the world a better place."
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size14
                     }
 
                     Label {
@@ -79,7 +79,7 @@ MFlickWrapper {
                         text: "If you feel like supporting us and our projects, feel free to support us on patreon:"
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size14
                     }
 
                     MButton {
@@ -94,7 +94,7 @@ MFlickWrapper {
                         imageSpacing: 10
                         text: "Support us"
                         fontWeight: Font.DemiBold
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         textColor: Style.colorFocusedButtonText
                         radius: 4
 
@@ -114,7 +114,7 @@ MFlickWrapper {
                         textFormat: Text.RichText
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size14
 
                         MouseArea {
                             id: mouseArea
@@ -146,7 +146,7 @@ MFlickWrapper {
                             text: "Thank you for your support. We hope you enjoy Librum!"
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText
-                            font.pointSize: Fonts.smallTitleSize
+                            font.pointSize: Fonts.size14
                         }
                     }
                 }

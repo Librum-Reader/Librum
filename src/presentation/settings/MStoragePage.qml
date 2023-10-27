@@ -41,8 +41,8 @@ MFlickWrapper {
                     Layout.topMargin: 64
                     titleText: "Storage"
                     descriptionText: "Your storage"
-                    titleSize: 25
-                    descriptionSize: 13.25
+                    titleSize: Fonts.size25
+                    descriptionSize: Fonts.size13dot25
                 }
 
                 Item {
@@ -57,7 +57,7 @@ MFlickWrapper {
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: "Upgrade"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
                     imagePath: Icons.heartHallow
@@ -111,7 +111,7 @@ MFlickWrapper {
                                     text: "YOUR TIER"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.baseSize
+                                    font.pointSize: Fonts.size10dot5
                                 }
 
                                 Label {
@@ -121,7 +121,7 @@ MFlickWrapper {
                                     text: "BASIC"
                                     color: Style.colorSubtitle
                                     font.weight: Font.Medium
-                                    font.pointSize: Fonts.largeTitleSize
+                                    font.pointSize: Fonts.size22
                                 }
 
                                 Label {
@@ -132,7 +132,7 @@ MFlickWrapper {
                                               UserController.bookStorageLimit) + "GB"
                                     color: Style.colorMatteTitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.bigHeaderSize
+                                    font.pointSize: Fonts.size46
                                 }
 
                                 RowLayout {
@@ -148,7 +148,7 @@ MFlickWrapper {
                                         borderWidth: 0
                                         backgroundColor: Style.colorBasePurple
                                         text: "Upgrade"
-                                        fontSize: Fonts.bigSize
+                                        fontSize: Fonts.size12
                                         fontWeight: Font.Bold
                                         textColor: Style.colorFocusedButtonText
 
@@ -164,7 +164,7 @@ MFlickWrapper {
                                         opacityOnPressed: 0.75
                                         backgroundColor: "transparent"
                                         text: "See why we offer multiple tiers"
-                                        fontSize: Fonts.bigSize
+                                        fontSize: Fonts.size12
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
 
@@ -198,7 +198,7 @@ MFlickWrapper {
                                     text: "USED STORAGE"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.baseSize
+                                    font.pointSize: Fonts.size10dot5
                                 }
 
                                 RowLayout {
@@ -220,7 +220,7 @@ MFlickWrapper {
                                                       2) + "GB"
                                             color: Style.colorBasePurple
                                             font.weight: Font.Bold
-                                            font.pointSize: Fonts.baseHeaderSize
+                                            font.pointSize: Fonts.size42
                                         }
 
                                         Label {
@@ -230,7 +230,7 @@ MFlickWrapper {
                                             anchors.topMargin: 2
                                             text: "Used Storage"
                                             color: Style.colorLightText
-                                            font.pointSize: Fonts.baseSize
+                                            font.pointSize: Fonts.size11
                                         }
                                     }
 
@@ -247,7 +247,7 @@ MFlickWrapper {
                                                       UserController.bookStorageLimit) + "GB"
                                             color: Style.colorLightText
                                             font.weight: Font.Bold
-                                            font.pointSize: Fonts.baseHeaderSize
+                                            font.pointSize: Fonts.size42
                                         }
 
                                         Label {
@@ -257,7 +257,7 @@ MFlickWrapper {
                                             anchors.topMargin: 2
                                             text: "Remaining Storage"
                                             color: Style.colorLightText
-                                            font.pointSize: Fonts.baseSize
+                                            font.pointSize: Fonts.size11
                                         }
                                     }
                                 }
@@ -313,7 +313,7 @@ MFlickWrapper {
                                     text: "YOUR BOOKS"
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.baseSize
+                                    font.pointSize: Fonts.size10dot5
                                 }
 
                                 Label {
@@ -323,7 +323,7 @@ MFlickWrapper {
                                     text: LibraryController.bookCount
                                     color: Style.colorMatteTitle
                                     font.weight: Font.Bold
-                                    font.pointSize: Fonts.bigHeaderSize
+                                    font.pointSize: Fonts.size46
                                 }
 
                                 Label {
@@ -331,7 +331,7 @@ MFlickWrapper {
                                     Layout.alignment: Qt.AlignHCenter
                                     text: "Books in your Library"
                                     color: Style.colorLightText
-                                    font.pointSize: Fonts.bigSize
+                                    font.pointSize: Fonts.size12
                                 }
                             }
                         }

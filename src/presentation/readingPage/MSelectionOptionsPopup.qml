@@ -95,7 +95,7 @@ Popup {
             padding: 10
             text: action.text
             color: action.textColor
-            font.pointSize: Fonts.bigSize
+            font.pointSize: Fonts.size12
         }
 
         MouseArea {

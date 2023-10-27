@@ -144,7 +144,7 @@ Pane {
                         selectByMouse: true
                         text: root.currentPage + 1
                         color: Style.colorBaseInputText
-                        font.pointSize: Fonts.bigSize
+                        font.pointSize: Fonts.size12
                         font.weight: Font.Normal
                         validator: IntValidator {
                             bottom: 0
@@ -185,7 +185,7 @@ Pane {
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
                     text: "of " + root.pageCount.toString()
-                    font.pointSize: Fonts.bigSize
+                    font.pointSize: Fonts.size12
                     font.weight: Font.Normal
                     color: Style.colorText
                 }
@@ -204,7 +204,7 @@ Pane {
                       SettingsController.appearanceSettings.DisplayBookTitleInTitlebar) ? root.bookTitle : ""
             color: Style.colorTitle
             font.weight: Font.DemiBold
-            font.pointSize: Fonts.smallTitleSize
+            font.pointSize: Fonts.size13
             elide: Text.ElideRight
         }
 

@@ -33,7 +33,7 @@ Item {
                 Layout.topMargin: -1
                 color: Style.colorBasePurple
                 text: root.text
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 font.weight: Font.Bold
             }
 

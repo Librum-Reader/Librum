@@ -96,7 +96,7 @@ MFlickWrapper {
                         text: "Welcome back!"
                         color: Style.colorText
                         font.bold: true
-                        font.pointSize: Fonts.enormousTitleSize
+                        font.pointSize: Fonts.size26
                     }
 
                     Label {
@@ -105,7 +105,7 @@ MFlickWrapper {
                         Layout.alignment: Qt.AlignHCenter
                         text: "Log into your account"
                         color: Style.colorSubtitle
-                        font.pointSize: Fonts.smallTitleSize
+                        font.pointSize: Fonts.size13
                     }
 
                     MLabeledInputBox {
@@ -178,7 +178,7 @@ MFlickWrapper {
                             text: "Remember me"
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 4
-                            font.pointSize: Fonts.baseSize
+                            font.pointSize: Fonts.size11
                             color: Style.colorText
 
                             MouseArea {
@@ -198,7 +198,7 @@ MFlickWrapper {
                             text: "Forgot password?"
                             Layout.alignment: Qt.AlignVCenter
                             Layout.leftMargin: 3
-                            font.pointSize: Fonts.baseSize
+                            font.pointSize: Fonts.size10dot5
                             opacity: forgotPasswordPageRedirection.pressed ? 0.8 : 1
                             color: Style.colorBasePurple
 
@@ -218,7 +218,7 @@ MFlickWrapper {
                         Layout.topMargin: 42
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
-                        fontSize: Fonts.bigSize
+                        fontSize: Fonts.size12
                         opacityOnPressed: 0.85
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
@@ -247,7 +247,7 @@ MFlickWrapper {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
                 text: "Don't have an account? Register"
-                font.pointSize: Fonts.baseSize
+                font.pointSize: Fonts.size10dot5
                 opacity: registerLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
 

@@ -13,7 +13,7 @@ Item {
     property string text
     property color textColor: Style.colorUnfocusedButtonText
     property int fontWeight: Font.Bold
-    property double fontSize: Fonts.baseSize
+    property double fontSize: Fonts.size11
     property color backgroundColor: Style.colorControlBackground
     property double opacityOnPressed: 0.9
     property int borderWidth: 1

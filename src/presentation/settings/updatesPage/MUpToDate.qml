@@ -37,7 +37,7 @@ Item {
                 text: "You are up to date!"
                 wrapMode: Text.WordWrap
                 color: Style.colorText
-                font.pointSize: Fonts.hugeTitleSize
+                font.pointSize: Fonts.size23
                 font.weight: Font.Bold
             }
 
@@ -47,7 +47,7 @@ Item {
                 text: "Make sure to check for updates regularly, so you dont miss out on any great features."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.modestTitleSize
+                font.pointSize: Fonts.size15
             }
 
             Label {
@@ -56,7 +56,7 @@ Item {
                 text: "Your current version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
             }
 
             Label {
@@ -64,7 +64,7 @@ Item {
                 text: AppInfoController.currentVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorBasePurple
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 font.bold: true
             }
 
@@ -84,7 +84,7 @@ Item {
                 text: "See our latest changes at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 14
+                font.pointSize: Fonts.size13dot5
             }
 
             Label {
@@ -94,7 +94,7 @@ Item {
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
-                font.pointSize: 14
+                font.pointSize: Fonts.size13dot5
                 opacity: newsWebsiteLinkArea.pressed ? 0.8 : 1
 
                 MouseArea {

@@ -50,7 +50,7 @@ Item {
                 visible: false
                 leftPadding: 12
                 color: Style.colorBaseInputText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 placeholderText: "Search for Book"
                 placeholderTextColor: Style.colorPlaceholderText
                 selectByMouse: true

@@ -10,18 +10,18 @@ Item {
     property int boxHeight: 40
     property string placeholderContent
     property color placeholderColor: Style.colorPlaceholderText
-    property double inputFontSize: Fonts.bigSize
+    property double inputFontSize: Fonts.size12
     property color inputFontColor: Style.colorBaseInputText
     property bool readOnly: false
     property int inputFontWeight: Font.Normal
     property bool hasError: false
     property bool clearErrorOnEdit: true
     property string errorText
-    property double errorFontSize: Fonts.baseSize
+    property double errorFontSize: Fonts.size11
     property bool hasHeader: true
     property string headerText
     property int headerFontWeight: Font.Medium
-    property double headerFontSize: Fonts.baseSize
+    property double headerFontSize: Fonts.size10dot5
     property color headerFontColor: Style.colorTitle
     property int headerToBoxSpacing: 2
     property color borderColor: Style.colorContainerBorder

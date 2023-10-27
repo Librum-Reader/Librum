@@ -46,7 +46,7 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 text: root.shortcut
                 color: Style.colorText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: 12
                 font.weight: Font.DemiBold
             }
 
@@ -65,7 +65,7 @@ Item {
                 text: root.value.length > 0 ? root.value : "None"
                 color: Style.colorText
                 opacity: valueLabelArea.pressed ? 0.6 : 1
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
                 font.weight: Font.DemiBold
 
                 MouseArea {

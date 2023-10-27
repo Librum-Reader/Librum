@@ -50,7 +50,7 @@ Item {
                 text: "A new update is available!"
                 wrapMode: Text.WordWrap
                 color: Style.colorText
-                font.pointSize: Fonts.hugeTitleSize
+                font.pointSize: Fonts.size23
                 font.weight: Font.Bold
             }
 
@@ -60,7 +60,7 @@ Item {
                 text: "Download the new version to get great new improvements."
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.modestTitleSize
+                font.pointSize: Fonts.size15
             }
 
             Label {
@@ -69,7 +69,7 @@ Item {
                 text: "The newest version is:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
             }
 
             Label {
@@ -77,7 +77,7 @@ Item {
                 text: AppInfoController.newestVersion
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 font.bold: true
             }
 
@@ -92,7 +92,7 @@ Item {
                 imageSize: 16
                 imageSpacing: 8
                 text: "Update"
-                fontSize: Fonts.largeSize
+                fontSize: Fonts.size13
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
                 opacityOnPressed: 0.8
@@ -113,7 +113,7 @@ Item {
                 text: "See the exact changes on our website at:"
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
-                font.pointSize: 14
+                font.pointSize: Fonts.size14
             }
 
             Label {
@@ -123,7 +123,7 @@ Item {
                 wrapMode: Text.WordWrap
                 font.underline: true
                 color: Style.colorBasePurple
-                font.pointSize: 14
+                font.pointSize: Fonts.size14
                 opacity: newsWebsiteLinkArea.pressed ? 0.8 : 1
 
                 MouseArea {

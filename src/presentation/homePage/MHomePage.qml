@@ -77,7 +77,7 @@ Page {
                     textFormat: Text.RichText
                     color: Style.colorBannerText
                     font.bold: true
-                    font.pointSize: Fonts.bigSize
+                    font.pointSize: Fonts.size12
 
                     // Switch to the proper cursor when hovering above the link
                     MouseArea {
@@ -138,7 +138,7 @@ Page {
                     text: "Add books"
                     textColor: Style.colorFocusedButtonText
                     fontWeight: Font.Bold
-                    fontSize: Fonts.largeSize
+                    fontSize: Fonts.size13
                     imagePath: Icons.addWhite
 
                     onClicked: importFilesDialog.open()

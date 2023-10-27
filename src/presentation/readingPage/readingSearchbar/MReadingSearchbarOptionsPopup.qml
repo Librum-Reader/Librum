@@ -49,7 +49,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchFromStart
                     text: "From start"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }
@@ -63,7 +63,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchCaseSensitive
                     text: "Case sensitive"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }
@@ -77,7 +77,7 @@ Popup {
                     imageSize: 10
                     checked: BookController.searchWholeWords
                     text: "Whole words"
-                    fontSize: Fonts.bigSize
+                    fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()
                 }

@@ -19,7 +19,7 @@ Popup {
     property int checkBoxSize: 18
     property int checkBoxImageSize: 9
     property bool multiSelect: false
-    property double fontSize: Fonts.baseSize
+    property double fontSize: Fonts.size11
     property int fontWeight: Font.Normal
     signal itemChanged
 

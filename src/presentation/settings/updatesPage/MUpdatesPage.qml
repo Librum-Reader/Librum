@@ -6,6 +6,7 @@ import Librum.style
 import Librum.icons
 import Librum.elements
 import Librum.controllers
+import Librum.fonts
 
 MFlickWrapper {
     id: root
@@ -31,8 +32,8 @@ MFlickWrapper {
                 Layout.topMargin: 64
                 titleText: "Updates"
                 descriptionText: "Any new update?"
-                titleSize: 25
-                descriptionSize: 13.25
+                titleSize: Fonts.size25
+                descriptionSize: Fonts.size13dot25
             }
 
             // Pages to render

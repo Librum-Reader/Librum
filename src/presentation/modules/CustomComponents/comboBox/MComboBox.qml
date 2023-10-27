@@ -25,11 +25,11 @@ Item {
 
     property string headerText
     property int headerFontWeight: Font.Bold
-    property double headerFontSize: Fonts.baseSize
+    property double headerFontSize: Fonts.size10dot5
     property color headerFontColor: Style.colorLightText
 
     property string emptyText: "Any"
-    property double selectedItemFontSize: Fonts.baseSize
+    property double selectedItemFontSize: Fonts.size11
     property color selectedItemFontColor: Style.colorText
     property int selectedItemPadding: 0
 

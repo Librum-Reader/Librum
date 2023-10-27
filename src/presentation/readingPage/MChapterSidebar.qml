@@ -33,7 +33,7 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
                 text: "Contents"
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 font.weight: Font.Medium
                 color: Style.colorText
             }
@@ -55,7 +55,7 @@ Item {
                     rightPadding: 15
                     selectByMouse: true
                     color: Style.colorText
-                    font.pointSize: Fonts.baseSize
+                    font.pointSize: Fonts.size11
                     font.weight: Font.Normal
                     placeholderText: "Search..."
                     placeholderTextColor: Style.colorPlaceholderText

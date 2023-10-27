@@ -32,8 +32,8 @@ MFlickWrapper {
                 Layout.topMargin: 64
                 titleText: "About"
                 descriptionText: "About this application"
-                titleSize: 25
-                descriptionSize: 13.25
+                titleSize: Fonts.size25
+                descriptionSize: Fonts.size13dot25
             }
 
             Pane {
@@ -59,7 +59,7 @@ MFlickWrapper {
                         id: detailsTitle
                         text: "Details"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -67,7 +67,7 @@ MFlickWrapper {
                         Layout.topMargin: 15
                         text: "CURRENT VERSION"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
@@ -75,14 +75,14 @@ MFlickWrapper {
                         Layout.topMargin: 1
                         text: AppInfoController.currentVersion
                         color: Style.colorText
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
                     }
 
                     Label {
                         Layout.topMargin: 12
                         text: "QT VERSION"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
@@ -90,7 +90,7 @@ MFlickWrapper {
                         Layout.topMargin: 1
                         text: AppInfoController.currentQtVersion
                         color: Style.colorText
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
                     }
 
                     MButton {
@@ -102,7 +102,7 @@ MFlickWrapper {
                         imagePath: Icons.checkGreen
                         imageSize: 20
                         text: "Up-to date"
-                        fontSize: Fonts.mediumSize
+                        fontSize: Fonts.size10dot5
                         textColor: Style.colorGreenText
                         imageSpacing: 6
                         opacityOnPressed: 0.8
@@ -135,7 +135,7 @@ MFlickWrapper {
                         id: creatorTitle
                         text: "Creator"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -143,7 +143,7 @@ MFlickWrapper {
                         Layout.topMargin: 18
                         text: "COMPANY NAME"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
@@ -151,21 +151,21 @@ MFlickWrapper {
                         Layout.topMargin: 1
                         text: AppInfoController.companyName
                         color: Style.colorBasePurple
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
                     }
 
                     Label {
                         Layout.topMargin: 12
                         text: "WEBSITE"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
                     Label {
                         text: AppInfoController.website
                         color: Style.colorBasePurple
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
                         opacity: websiteLinkArea.pressed ? 0.8 : 1
 
                         MouseArea {
@@ -182,7 +182,7 @@ MFlickWrapper {
                         Layout.topMargin: 12
                         text: "CONTACT"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
@@ -191,7 +191,7 @@ MFlickWrapper {
                         text: AppInfoController.companyEmail
                         color: Style.colorBasePurple
                         opacity: emailLinkArea.pressed ? 0.8 : 1
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
 
                         MouseArea {
                             id: emailLinkArea
@@ -207,7 +207,7 @@ MFlickWrapper {
                         Layout.topMargin: 12
                         text: "GITHUB"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.mediumSize
+                        font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
                     }
 
@@ -216,7 +216,7 @@ MFlickWrapper {
                         text: AppInfoController.githubLink
                         color: Style.colorBasePurple
                         opacity: githubLinkArea.pressed ? 0.8 : 1
-                        font.pointSize: Fonts.largeSize
+                        font.pointSize: Fonts.size13dot5
 
                         MouseArea {
                             id: githubLinkArea
@@ -253,7 +253,7 @@ MFlickWrapper {
                         id: thisAppTitle
                         text: "This App"
                         color: Style.colorText
-                        font.pointSize: 17
+                        font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
                     }
 
@@ -277,7 +277,7 @@ MFlickWrapper {
                             text: "Librum is here for everyone who just wants to enjoy a good book.\n" + "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
                             wrapMode: Text.WordWrap
                             color: Style.colorText
-                            font.pointSize: Fonts.smallTitleSize
+                            font.pointSize: Fonts.size14
                             lineHeight: 1.10
                         }
                     }

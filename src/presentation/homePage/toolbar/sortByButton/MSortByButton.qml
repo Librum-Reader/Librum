@@ -39,7 +39,7 @@ Item {
                     Layout.topMargin: -1
                     color: Style.colorText
                     text: "Sort by"
-                    font.pointSize: Fonts.bigSize
+                    font.pointSize: Fonts.size12
                     font.weight: Font.Bold
                 }
 

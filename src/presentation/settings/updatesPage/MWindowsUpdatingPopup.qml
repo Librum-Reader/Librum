@@ -59,13 +59,13 @@ Popup {
                 Layout.bottomMargin: 100
                 text: "Updating"
                 font.weight: Font.Bold
-                font.pointSize: Fonts.largeTitleSize
+                font.pointSize: Fonts.size22
                 color: Style.colorBasePurple
             }
 
             Label {
                 text: "Downloading..."
-                font.pointSize: Fonts.smallTitleSize
+                font.pointSize: Fonts.size14
                 color: Style.colorText
             }
 

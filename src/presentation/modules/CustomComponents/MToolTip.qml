@@ -56,7 +56,7 @@ Popup {
                 id: text
                 width: parent.width
                 color: Style.colorText
-                font.pointSize: Fonts.bigSize
+                font.pointSize: Fonts.size12
             }
         }
 

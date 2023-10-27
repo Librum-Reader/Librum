@@ -43,7 +43,7 @@ Item {
                     rightPadding: 4
                     selectByMouse: true
                     color: Style.colorText
-                    font.pointSize: Fonts.bigSize
+                    font.pointSize: Fonts.size12
                     font.weight: Font.Normal
                     placeholderText: "Add a tag..."
                     placeholderTextColor: Style.colorPlaceholderText
@@ -118,7 +118,7 @@ Item {
             text: "ADD"
             opacity: mouseArea.pressed ? 0.8 : 1
             color: Style.colorBasePurple
-            font.pointSize: Fonts.bigSize
+            font.pointSize: Fonts.size12
             font.weight: Font.Bold
 
             MouseArea {

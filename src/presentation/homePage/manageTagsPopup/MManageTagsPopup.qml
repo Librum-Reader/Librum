@@ -68,7 +68,7 @@ Popup {
                 Layout.topMargin: 20
                 text: "Manage Tags"
                 font.weight: Font.Bold
-                font.pointSize: Fonts.bigTitleSize
+                font.pointSize: Fonts.size17
                 color: Style.colorTitle
             }
 
@@ -94,7 +94,7 @@ Popup {
                 Layout.topMargin: 32
                 Layout.leftMargin: 1
                 color: Style.colorSubtitle
-                font.pointSize: 9.5
+                font.pointSize: Fonts.size9dot5
                 font.weight: Font.Medium
                 elide: Text.ElideRight
             }
@@ -160,7 +160,7 @@ Popup {
                 Layout.bottomMargin: 42
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                fontSize: Fonts.bigSize
+                fontSize: Fonts.size12
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 text: "Done"

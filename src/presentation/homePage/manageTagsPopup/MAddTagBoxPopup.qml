@@ -6,6 +6,7 @@ import QtQml.Models
 import Librum.style
 import Librum.icons
 import Librum.controllers
+import Librum.fonts
 
 Popup {
     id: root
@@ -51,7 +52,7 @@ Popup {
                 width: listView.width
                 height: 32
                 containingListview: listView
-                fontSize: Fonts.bigSize
+                fontSize: Fonts.size12
                 fontColor: Style.colorLightText
                 checkBoxStyle: false
 

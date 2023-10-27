@@ -38,8 +38,8 @@ Page {
                 id: pageTitle
                 titleText: "Shortcuts"
                 descriptionText: "Make your own experience"
-                titleSize: 25
-                descriptionSize: 13.25
+                titleSize: Fonts.size25
+                descriptionSize: Fonts.size13dot25
             }
 
             Item {
@@ -57,7 +57,7 @@ Page {
                 text: "Edit shortcut"
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
-                fontSize: Fonts.largeSize
+                fontSize: Fonts.size13
                 imagePath: Icons.addWhite
 
                 onClicked: {
@@ -104,7 +104,7 @@ Page {
                         Layout.leftMargin: 12
                         text: "ACTION"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.smallSize
+                        font.pointSize: Fonts.size10dot25
                         font.bold: true
                     }
 
@@ -117,7 +117,7 @@ Page {
                         id: shortcutsLabel
                         text: "SHORTCUTS"
                         color: Style.colorLightText
-                        font.pointSize: Fonts.smallSize
+                        font.pointSize: Fonts.size10dot25
                         font.bold: true
                     }
 
