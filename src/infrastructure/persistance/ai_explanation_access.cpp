@@ -58,8 +58,8 @@ void AiExplanationAccess::getExplanation(const QString& authToken,
                 {
                     if(word[i] == '\n' && word[k] == '\n')
                     {
-                        word.remove(k, 1);
-                        word.remove(i, 1);
+                        word.removeAt(k);
+                        word.removeAt(i);
                     }
 
                     i += 1;
