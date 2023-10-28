@@ -95,7 +95,13 @@ void AppInfoController::updateApplication()
 
 int AppInfoController::getSystemFontSize() const
 {
-    return QFontDatabase::systemFont(QFontDatabase::GeneralFont).pointSize();
+#ifdef defined(Q_OS_MAC)
+    int size = 13;
+#else
+    int size = 9;
+#endif
+
+    return size;
 }
 
 bool AppInfoController::isOnline() const
