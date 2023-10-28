@@ -53,7 +53,6 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
                     if(book == nullptr)
                         continue;
 
-                    qDebug() << "Updating: " << book->getTitle();
                     m_libraryStorageManager->updateBookRemotely(*book);
                 }
 

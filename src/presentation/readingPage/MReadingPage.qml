@@ -20,10 +20,10 @@ Page {
     Component.onCompleted: root.forceActiveFocus()
     Component.onDestruction: internal.saveCurrentPage()
 
-    // Save the current page every 15s automatically
+    // Save the current page every 5s automatically
     Timer {
         id: currentPageSaver
-        interval: 15000
+        interval: 5000
         repeat: true
         running: true
 
@@ -322,6 +322,9 @@ Page {
         property bool fullScreen: false
         property int prevCurrentPage: -1
 
+        // Just assign it once (no binding)
+        Component.onCompleted: prevCurrentPage = BookController.currentPage
+
         function startFullScreenMode() {
             if (internal.fullScreen)
                 return
@@ -347,15 +350,14 @@ Page {
         }
 
         function saveCurrentPage() {
-            let currentPage = BookController.currentPage + 1
-            if (currentPage == internal.prevCurrentPage)
+            let currentPage = BookController.currentPage
+            if (currentPage === internal.prevCurrentPage)
                 return
 
             var operationsMap = {}
             operationsMap[LibraryController.MetaProperty.CurrentPage] = currentPage
             LibraryController.updateBook(Globals.selectedBook.uuid,
                                          operationsMap)
-
             internal.prevCurrentPage = currentPage
         }
     }
