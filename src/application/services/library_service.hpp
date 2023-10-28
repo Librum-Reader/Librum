@@ -79,12 +79,19 @@ private:
     std::set<int> getProjectGutenbergIds();
 
     IMetadataExtractor* m_bookMetadataHelper;
-    ILibraryStorageManager* m_bookStorageManager;
+    ILibraryStorageManager* m_libraryStorageManager;
     std::vector<domain::entities::Book> m_books;
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    const int m_fetchChangedInterval = 60'000;
+    int m_fetchChangedInterval = 60'000;
+
+    // We record all changes made to books and apply them every
+    // m_applyUpdatesInterval seconds. This is done to reduce the
+    // traffic on the server and to avoid concurrency problems.
+    QTimer m_applyUpdatesTimer;
+    QList<QUuid> m_outdatedBooks;
+    int m_applyUpdatesInterval = 6'000;
 };
 
 }  // namespace application::services

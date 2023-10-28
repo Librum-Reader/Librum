@@ -21,14 +21,14 @@ namespace application::services
 LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
                                ILibraryStorageManager* bookStorageManager) :
     m_bookMetadataHelper(bookMetadataHelper),
-    m_bookStorageManager(bookStorageManager)
+    m_libraryStorageManager(bookStorageManager)
 {
     // Fetch changes timer
     m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {
-                m_bookStorageManager->downloadRemoteBooks();
+                m_libraryStorageManager->downloadRemoteBooks();
 
                 auto success = QNetworkInformation::loadDefaultBackend();
                 if(!success)
@@ -42,45 +42,64 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
                 }
             });
 
+    // Apply updates timer
+    m_applyUpdatesTimer.setInterval(m_applyUpdatesInterval);
+    connect(&m_applyUpdatesTimer, &QTimer::timeout, this,
+            [this]()
+            {
+                for(auto& uuid : m_outdatedBooks)
+                {
+                    auto* book = getBook(uuid);
+                    if(book == nullptr)
+                        continue;
+
+                    qDebug() << "Updating: " << book->getTitle();
+                    m_libraryStorageManager->updateBookRemotely(*book);
+                }
+
+                m_outdatedBooks.clear();
+            });
+
     // Getting books finished
-    connect(m_bookStorageManager,
+    connect(m_libraryStorageManager,
             &ILibraryStorageManager::finishedDownloadingRemoteBooks, this,
             &LibraryService::updateLibrary);
 
     // Downloading book media progress
-    connect(m_bookStorageManager,
+    connect(m_libraryStorageManager,
             &ILibraryStorageManager::downloadingBookMediaProgressChanged, this,
             &LibraryService::setMediaDownloadProgressForBook);
 
     // Downloading book finished
-    connect(m_bookStorageManager,
+    connect(m_libraryStorageManager,
             &ILibraryStorageManager::finishedDownloadingBookMedia, this,
             &LibraryService::processDownloadedBook);
 
     // Downloading book cover finished
-    connect(m_bookStorageManager,
+    connect(m_libraryStorageManager,
             &ILibraryStorageManager::finishedDownloadingBookCover, this,
             &LibraryService::processDownloadedBookCover);
 
     // Storage limit exceeded
-    connect(m_bookStorageManager, &ILibraryStorageManager::storageLimitExceeded,
-            this, &LibraryService::storageLimitExceeded);
+    connect(m_libraryStorageManager,
+            &ILibraryStorageManager::storageLimitExceeded, this,
+            &LibraryService::storageLimitExceeded);
 
     // Book upload succeeded
-    connect(m_bookStorageManager, &ILibraryStorageManager::bookUploadSucceeded,
-            this,
+    connect(m_libraryStorageManager,
+            &ILibraryStorageManager::bookUploadSucceeded, this,
             [this](const QUuid& uuid)
             {
                 auto book = getBook(uuid);
                 book->setExistsOnlyOnClient(false);
-                m_bookStorageManager->updateBookLocally(*book);
+                m_libraryStorageManager->updateBookLocally(*book);
                 refreshUIForBook(uuid);
             });
 }
 
 void LibraryService::downloadBooks()
 {
-    m_bookStorageManager->downloadRemoteBooks();
+    m_libraryStorageManager->downloadRemoteBooks();
 }
 
 BookOperationStatus LibraryService::addBook(const QString& filePath,
@@ -100,7 +119,7 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
     cover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
                          Qt::KeepAspectRatio, Qt::SmoothTransformation);
     auto coverPath =
-        m_bookStorageManager->saveBookCoverToFile(book.getUuid(), cover);
+        m_libraryStorageManager->saveBookCoverToFile(book.getUuid(), cover);
     if(coverPath.isEmpty())
     {
         qWarning() << QString("Failed creating cover for book with uuid: %1.")
@@ -115,7 +134,7 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
 
     addBookToLibrary(book);
 
-    m_bookStorageManager->addBook(book);
+    m_libraryStorageManager->addBook(book);
     return BookOperationStatus::Success;
 }
 
@@ -154,13 +173,13 @@ BookOperationStatus LibraryService::deleteBook(const QUuid& uuid)
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
 
-    m_bookStorageManager->deleteBook(std::move(bookToDelete));
+    m_libraryStorageManager->deleteBook(std::move(bookToDelete));
     return BookOperationStatus::Success;
 }
 
 BookOperationStatus LibraryService::deleteAllBooks()
 {
-    m_bookStorageManager->deleteAllBooks();
+    m_libraryStorageManager->deleteAllBooks();
     return BookOperationStatus::Success;
 }
 
@@ -175,7 +194,7 @@ BookOperationStatus LibraryService::uninstallBook(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    m_bookStorageManager->uninstallBook(*book);
+    m_libraryStorageManager->uninstallBook(*book);
     book->setDownloaded(false);
 
     refreshUIForBook(uuid);
@@ -193,7 +212,7 @@ BookOperationStatus LibraryService::downloadBookMedia(const QUuid& uuid)
         return BookOperationStatus::BookDoesNotExist;
     }
 
-    m_bookStorageManager->downloadBookMedia(uuid);
+    m_libraryStorageManager->downloadBookMedia(uuid);
     return BookOperationStatus::Success;
 }
 
@@ -221,6 +240,7 @@ BookOperationStatus LibraryService::updateBook(const Book& newBook)
     // "lastModified" to be updated on a "current page" change, since this
     // would break the whole updating mechanism.
     book->setCurrentPage(newBook.getCurrentPage());
+    book->setLastOpened(newBook.getLastOpened());
 
     if(*book != newBook)
     {
@@ -228,7 +248,16 @@ BookOperationStatus LibraryService::updateBook(const Book& newBook)
         book->updateLastModified();
     }
 
-    m_bookStorageManager->updateBook(*book);
+    // Add book to outdated books if it is not already in there
+    auto bookPos = std::ranges::find_if(m_outdatedBooks,
+                                        [book](auto& uuid)
+                                        {
+                                            return book->getUuid() == uuid;
+                                        });
+    if(bookPos == m_outdatedBooks.end())
+        m_outdatedBooks.push_back(book->getUuid());
+
+    m_libraryStorageManager->updateBookLocally(*book);
     refreshUIForBook(newBook.getUuid());
     return BookOperationStatus::Success;
 }
@@ -257,15 +286,16 @@ BookOperationStatus LibraryService::changeBookCover(const QUuid& uuid,
             return BookOperationStatus::OperationFailed;
     }
 
-    m_bookStorageManager->updateBook(*book);
-    m_bookStorageManager->updateBookCoverRemotely(book->getUuid(),
-                                                  book->hasCover());
+    m_libraryStorageManager->updateBook(*book);
+    m_libraryStorageManager->updateBookCoverRemotely(book->getUuid(),
+                                                     book->hasCover());
     return BookOperationStatus::Success;
 }
 
 void LibraryService::deleteBookCover(Book& book)
 {
-    auto success = m_bookStorageManager->deleteBookCoverLocally(book.getUuid());
+    auto success =
+        m_libraryStorageManager->deleteBookCoverLocally(book.getUuid());
     if(!success)
     {
         qWarning() << QString("Failed deleting the local book cover for book "
@@ -308,7 +338,7 @@ bool LibraryService::setNewBookCover(Book& book, QString filePath)
     newCover = newCover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
                                Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
-    auto path = m_bookStorageManager->saveBookCoverToFile(uuid, newCover);
+    auto path = m_libraryStorageManager->saveBookCoverToFile(uuid, newCover);
     if(path.isEmpty())
     {
         qWarning() << QString(
@@ -370,7 +400,7 @@ BookOperationStatus LibraryService::addTagToBook(const QUuid& uuid,
         return BookOperationStatus::TagAlreadyExists;
     }
 
-    m_bookStorageManager->updateBook(*book);
+    m_libraryStorageManager->updateBook(*book);
 
     int index = getBookIndex(uuid);
     emit tagsChanged(index);
@@ -398,7 +428,7 @@ BookOperationStatus LibraryService::removeTagFromBook(const QUuid& bookUuid,
         return BookOperationStatus::TagDoesNotExist;
     }
 
-    m_bookStorageManager->updateBook(*book);
+    m_libraryStorageManager->updateBook(*book);
 
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);
@@ -429,7 +459,7 @@ BookOperationStatus LibraryService::renameTagOfBook(const QUuid& bookUuid,
     }
 
     // User service renames the tag remotely, just apply it locally
-    m_bookStorageManager->updateBookLocally(*book);
+    m_libraryStorageManager->updateBookLocally(*book);
 
     int index = getBookIndex(bookUuid);
     emit tagsChanged(index);
@@ -521,10 +551,9 @@ bool LibraryService::refreshLastOpenedDateOfBook(const QUuid& uuid)
         return false;
 
     book->updateLastOpened();
-    m_bookStorageManager->updateBook(*book);
+    auto result = updateBook(*book);
 
-    refreshUIForBook(uuid);
-    return true;
+    return result == BookOperationStatus::Success;
 }
 
 void LibraryService::processDownloadedBook(const QUuid& uuid,
@@ -536,7 +565,7 @@ void LibraryService::processDownloadedBook(const QUuid& uuid,
     book->setDownloaded(true);
 
     // The book meta-data file does not exist locally, so create it
-    m_bookStorageManager->addBookLocally(*book);
+    m_libraryStorageManager->addBookLocally(*book);
 
     refreshUIForBook(uuid);
 }
@@ -548,7 +577,7 @@ void LibraryService::processDownloadedBookCover(const QUuid& uuid,
 
     book->setCoverPath(filePath);
     book->setHasCover(true);
-    m_bookStorageManager->updateBookLocally(*book);
+    m_libraryStorageManager->updateBookLocally(*book);
 
     refreshUIWithNewCover(uuid, filePath);
 }
@@ -562,9 +591,10 @@ void LibraryService::updateUsedBookStorage(long usedStorage,
 
 void LibraryService::setupUserData(const QString& token, const QString& email)
 {
-    m_bookStorageManager->setUserData(email, token);
+    m_libraryStorageManager->setUserData(email, token);
 
     loadLocalBooks();
+    m_applyUpdatesTimer.start();
     m_fetchChangesTimer.start();
     // Trigger a timeout manually at the start for the initial book loading
     QMetaObject::invokeMethod(&m_fetchChangesTimer, "timeout");
@@ -572,7 +602,7 @@ void LibraryService::setupUserData(const QString& token, const QString& email)
 
 void LibraryService::loadLocalBooks()
 {
-    auto books = m_bookStorageManager->loadLocalBooks();
+    auto books = m_libraryStorageManager->loadLocalBooks();
     for(auto book : books)
     {
         uninstallBookIfTheBookFileIsInvalid(book);
@@ -597,7 +627,7 @@ void LibraryService::uninstallBookIfTheBookFileIsInvalid(Book& book)
 
 void LibraryService::clearUserData()
 {
-    m_bookStorageManager->clearUserData();
+    m_libraryStorageManager->clearUserData();
     m_fetchChangesTimer.stop();
 
     emit bookClearingStarted();
@@ -631,7 +661,8 @@ void LibraryService::mergeRemoteLibraryIntoLocalLibrary(
             connect(&bookMerger, &utility::BookMerger::bookDataChanged, this,
                     &LibraryService::refreshUIForBook);
 
-            bookMerger.mergeBooks(*localBook, remoteBook, m_bookStorageManager);
+            bookMerger.mergeBooks(*localBook, remoteBook,
+                                  m_libraryStorageManager);
             continue;
         }
 
@@ -640,7 +671,7 @@ void LibraryService::mergeRemoteLibraryIntoLocalLibrary(
         // Get the cover for the remote book if it does not exist locally
         if(remoteBook.hasCover() && remoteBook.getCoverPath().isEmpty())
         {
-            m_bookStorageManager->downloadBookCover(remoteBook.getUuid());
+            m_libraryStorageManager->downloadBookCover(remoteBook.getUuid());
         }
     }
 }
@@ -675,7 +706,7 @@ void LibraryService::mergeLocalLibraryIntoRemoteLibrary(
         bool enoughSpace = totalStorageSpace + bookSize < m_bookStorageLimit;
         if(!localBookExistsOnServer && enoughSpace)
         {
-            m_bookStorageManager->addBook(localBook);
+            m_libraryStorageManager->addBook(localBook);
             bytesOfDataUploaded += bookSize;
         }
     }
@@ -696,7 +727,7 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     m_books.erase(bookPosition);
     emit bookDeletionEnded();
 
-    m_bookStorageManager->deleteBookLocally(std::move(bookToDelete));
+    m_libraryStorageManager->deleteBookLocally(std::move(bookToDelete));
 }
 
 std::set<int> LibraryService::getProjectGutenbergIds()
