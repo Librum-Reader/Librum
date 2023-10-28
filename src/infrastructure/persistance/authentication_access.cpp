@@ -36,7 +36,7 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
                     qWarning() << errors[i].errorString();
                 }
                 QSettings settings;
-                if (settings.value(IGNORE_SSL_ERRORS).toString() == "true")
+                if (settings.value("IGNORE_SSL_ERRORS").toString() == "true")
                     reply->ignoreSslErrors();
             });
 
