@@ -35,7 +35,9 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
                 {
                     qWarning() << errors[i].errorString();
                 }
-                reply->ignoreSslErrors();
+                QSettings settings;
+                if (settings.value(IGNORE_SSL_ERRORS).toString() == "true")
+                    reply->ignoreSslErrors();
             });
 
     connect(reply, &QNetworkReply::errorOccurred, this,

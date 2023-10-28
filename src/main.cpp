@@ -61,7 +61,9 @@ int main(int argc, char* argv[])
     QString cfgFile = settings.value("serverHost", QVariant(QString())).toString();
     if(cfgFile.isEmpty())
        settings.setValue("serverHost", "https://api.librumreader.com");
-	
+    QString sslSettings = settings.value("IGNORE_SSL_ERRORS", QVariant(QString())).toString();
+	if(sslSettings.isEmpty())
+       settings.setValue("IGNORE_SSL_ERRORS", "false");
 
     QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);
