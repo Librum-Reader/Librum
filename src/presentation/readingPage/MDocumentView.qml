@@ -145,7 +145,7 @@ Pane {
             }
 
             Component.onCompleted: root.setPage(
-                                       Globals.selectedBook.currentPage - 1)
+                                       Globals.selectedBook.currentPage)
 
             function getPageSpacing(zoom) {
                 return Math.round(
