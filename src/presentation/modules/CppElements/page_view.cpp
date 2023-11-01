@@ -38,7 +38,8 @@ void PageView::setBookController(BookController* newBookController)
     m_bookController = newBookController;
 
     m_pageController = std::make_unique<PageController>(
-        m_bookController->getFzDocument(), m_pageNumber);
+        m_bookController->getFzDocument(), m_pageNumber,
+        window()->devicePixelRatio());
     m_pageController->setZoom(m_bookController->getZoom());
 
     // Setup connections to the BookController
@@ -63,9 +64,14 @@ void PageView::setBookController(BookController* newBookController)
                 // The points received from this signal are relative to a zoom
                 // of 1, but all of the methods in this class handle points as
                 // if they have the currentZoom applied, so we need to scale it.
+                // We need to divide by the dpr since the lower level methods
+                // expect the caller not to know anything about the dpr, but the
+                // current zoom we get from the page controller is zoom * dpr.
+                // Thus we need to reset it to the zoom without the dpr.
                 auto zoom = m_pageController->getZoom();
-                left = utils::scalePointToCurrentZoom(left, 1, zoom);
-                right = utils::scalePointToCurrentZoom(right, 1, zoom);
+                auto dpr = window()->devicePixelRatio();
+                left = utils::scalePointToCurrentZoom(left, 1, zoom / dpr);
+                right = utils::scalePointToCurrentZoom(right, 1, zoom / dpr);
 
                 m_selectionStart = left;
                 m_selectionEnd = right;
@@ -213,7 +219,8 @@ void PageView::handleClickingOnHighlight(const Highlight* highlight)
     for(auto& rect : rects)
     {
         auto qRectF = rect.getQRect();
-        utils::scaleQRectFToZoom(qRectF, m_bookController->getZoom());
+        utils::scaleQRectFToZoom(
+            qRectF, m_pageController->getZoom() / window()->devicePixelRatio());
         qRects.append(qRectF);
     }
     auto positions = getCenterXAndTopYFromRects(qRects);
@@ -252,14 +259,46 @@ void PageView::mouseReleaseEvent(QMouseEvent* event)
     }
     else if(!m_startedMousePressOnHighlight)
     {
-        auto positions = getCenterXAndTopYFromRects(
-            m_pageController->getBufferedSelectionRects());
+        auto rects = m_pageController->getBufferedSelectionRects();
+        QList<QRectF> restoredRects;
+        restoredRects.reserve(rects.size());
+        for(auto rect : rects)
+        {
+            utils::restoreQRect(rect, m_pageController->getZoom());
+            utils::scaleQRectFToZoom(rect, m_pageController->getZoom() /
+                                               window()->devicePixelRatio());
+            restoredRects.push_back(rect);
+        }
+
+        auto positions = getCenterXAndTopYFromRects(restoredRects);
 
         emit m_bookController->textSelectionFinished(positions.first,
                                                      positions.second);
     }
 
     m_doubleClickHold = false;
+}
+
+QPair<float, float> PageView::getCenterXAndTopYFromRects(
+    const QList<QRectF>& rects)
+{
+    float mostLeftX = std::numeric_limits<float>::max();
+    float mostRightX = 0;
+    float topY = std::numeric_limits<float>::max();
+    for(auto& rect : rects)
+    {
+        if(rect.x() < mostLeftX)
+            mostLeftX = rect.x();
+
+        if(rect.x() + rect.width() > mostRightX)
+            mostRightX = rect.x() + rect.width();
+
+        if(rect.top() < topY)
+            topY = rect.top();
+    }
+
+    auto centerX = (mostLeftX + mostRightX) / 2;
+    return { centerX, topY };
 }
 
 void PageView::mouseMoveEvent(QMouseEvent* event)
@@ -314,28 +353,6 @@ void PageView::paintSelectionOnPage(QPainter& painter)
         painter.setCompositionMode(QPainter::CompositionMode_Multiply);
         painter.fillRect(rect, selectionColor);
     }
-}
-
-QPair<float, float> PageView::getCenterXAndTopYFromRects(
-    const QList<QRectF>& rects)
-{
-    float mostLeftX = std::numeric_limits<float>::max();
-    float mostRightX = 0;
-    float topY = std::numeric_limits<float>::max();
-    for(auto& rect : rects)
-    {
-        if(rect.x() < mostLeftX)
-            mostLeftX = rect.x();
-
-        if(rect.x() + rect.width() > mostRightX)
-            mostRightX = rect.x() + rect.width();
-
-        if(rect.top() < topY)
-            topY = rect.top();
-    }
-
-    auto centerX = (mostLeftX + mostRightX) / 2;
-    return { centerX, topY };
 }
 
 void PageView::paintHighlightsOnPage(QPainter& painter)

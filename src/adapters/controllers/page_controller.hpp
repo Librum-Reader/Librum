@@ -12,7 +12,7 @@ class PageController : public IPageController
     Q_OBJECT
 
 public:
-    PageController(mupdf::FzDocument* document, int pageNumber);
+    PageController(mupdf::FzDocument* document, int pageNumber, double dpr);
 
     int getWidth() override;
     int getHeight() override;
@@ -48,6 +48,13 @@ private:
 
     int m_pageXOffset = 0;
     int m_pageYOffset = 0;
+
+    // The dpr is the "device pixel ratio" which is a ratio (e.g. 1.25) between
+    // the device pixels and the logical pixels. For example, if the screen is
+    // scaled by 125% via software, the dpr will be 1.25.
+    // We need to make sure that the page is rendered with the correct dpr so
+    // that the page is not blurry.
+    double m_dpr = 1.0;
 
     // Image caching
     bool m_pageImageOutdated = true;

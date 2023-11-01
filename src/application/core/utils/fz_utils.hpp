@@ -93,14 +93,15 @@ inline QImage qImageFromPixmap(mupdf::FzPixmap pixmap)
     return image;
 }
 
-inline mupdf::FzPoint qPointToFzPoint(const QPointF& qPoint)
+inline mupdf::FzPoint qPointToFzPoint(const QPointF& qPoint, double scaler = 1)
 {
-    return mupdf::FzPoint(qPoint.x(), qPoint.y());
+    return mupdf::FzPoint(qPoint.x() * scaler, qPoint.y() * scaler);
 }
 
-inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint)
+inline QPointF fzPointToQPoint(const mupdf::FzPoint& fzPoint,
+                               double invScaler = 1)
 {
-    return QPointF(fzPoint.x, fzPoint.y);
+    return QPointF(fzPoint.x / invScaler, fzPoint.y / invScaler);
 }
 
 /**
