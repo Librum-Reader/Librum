@@ -52,9 +52,6 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     connect(reply, &QNetworkReply::finished, this,
             [this, reply]()
             {
-                reply->setReadBufferSize(1000);
-                QString token = QString::fromUtf8(reply->readAll());
-
                 if(api_error_helper::apiRequestFailed(reply, 200))
                 {
                     auto errorCode = api_error_helper::logErrorMessage(
@@ -64,7 +61,8 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
                     reply->deleteLater();
                     return;
                 }
-
+				reply->setReadBufferSize(1000);
+                QString token = QString::fromUtf8(reply->readAll());
                 emit authenticationFinished(token);
                 reply->deleteLater();
             });
