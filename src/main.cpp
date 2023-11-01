@@ -43,6 +43,7 @@ using namespace application::services;
 
 
 void registerTypes();
+void setupGlobalSettings();
 void setupFonts();
 void addTranslations();
 
@@ -56,14 +57,7 @@ int main(int argc, char* argv[])
     QGuiApplication::setApplicationName("Librum");
     QQuickStyle::setStyle(QStringLiteral("Default"));
 		
-    // store host Url to settings
-    QSettings settings;
-    QString cfgFile = settings.value("serverHost", QVariant(QString())).toString();
-    if(cfgFile.isEmpty())
-       settings.setValue("serverHost", "https://api.librumreader.com");
-    QString sslSettings = settings.value("IGNORE_SSL_ERRORS", QVariant(QString())).toString();
-	if(sslSettings.isEmpty())
-       settings.setValue("IGNORE_SSL_ERRORS", "false");
+    setupGlobalSettings();
 
     QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);
@@ -71,6 +65,7 @@ int main(int argc, char* argv[])
     qInstallMessageHandler(logging::messageHandler);
 
     addTranslations();
+    setupGlobalSettings();
     setupFonts();
 
     // Register types
@@ -252,7 +247,24 @@ void addTranslations()
     }
 }
 
-void loadFont(const QString& path);
+void setupGlobalSettings()
+{
+    QSettings settings;
+    QString cfgFile = settings.value("serverHost", QVariant("")).toString();
+    if(cfgFile.isEmpty())
+        settings.setValue("serverHost", "https://api.librumreader.com");
+
+    QString sslSettings = settings.value("selfHosted", QVariant("")).toString();
+    if(sslSettings.isEmpty())
+        settings.setValue("selfHosted", "false");
+}
+
+void loadFont(const QString& path)
+{
+    int result = QFontDatabase::addApplicationFont(path);
+    if(result == -1)
+        qWarning() << QString("Loading font file: %1 failed.").arg(path);
+}
 
 void setupFonts()
 {
@@ -264,11 +276,4 @@ void setupFonts()
     QFont defaultFont("SF Pro Display");
     defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
     QGuiApplication::setFont(defaultFont);
-}
-
-void loadFont(const QString& path)
-{
-    int result = QFontDatabase::addApplicationFont(path);
-    if(result == -1)
-        qWarning() << QString("Loading font file: %1 failed.").arg(path);
 }

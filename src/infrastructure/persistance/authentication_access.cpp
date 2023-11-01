@@ -30,13 +30,14 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
     connect(reply, &QNetworkReply::sslErrors, this,
             [reply](const QList<QSslError>& errors)
             {
-                qWarning() << "Error SSL " << reply->errorString();
+                qWarning() << "SSL Errors: " << reply->errorString();
                 for(int i = 0; i < errors.count(); ++i)
                 {
                     qWarning() << errors[i].errorString();
                 }
+
                 QSettings settings;
-                if (settings.value("IGNORE_SSL_ERRORS").toString() == "true")
+                if(settings.value("selfHosted").toString() == "true")
                     reply->ignoreSslErrors();
             });
 
