@@ -61,7 +61,8 @@ void AuthenticationAccess::authenticateUser(const LoginDto& loginDto)
                     reply->deleteLater();
                     return;
                 }
-				reply->setReadBufferSize(1000);
+
+                reply->setReadBufferSize(1000);
                 QString token = QString::fromUtf8(reply->readAll());
                 emit authenticationFinished(token);
                 reply->deleteLater();
