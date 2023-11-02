@@ -61,15 +61,6 @@ jobs:
         uses: jurplel/install-qt-action@v3
         with:
           version: '6.5.3'
-
-      - name: Install MSVC 2019
-        uses: ilammy/msvc-dev-cmd@v1
-        with:
-          arch: x64
-          vsversion: "2019" # Mupdf requires VS2019
-
-      - name: Install Python
-        uses: actions/setup-python@v4
           
       - name: Build
         run: |
