@@ -51,7 +51,7 @@ jobs:
 
   test_windows:
     name: run on windows
-    runs-on: windows-latest
+    runs-on: windows-2019
     steps:
       - uses: actions/checkout@v3
         with:
@@ -65,7 +65,8 @@ jobs:
       - name: Install MSVC 2019
         uses: ilammy/msvc-dev-cmd@v1
         with:
-          vsversion: 2019 # Mupdf requires VS2019
+          arch: x64
+          vsversion: "2019" # Mupdf requires VS2019
 
       - name: Install Python
         uses: actions/setup-python@v4
