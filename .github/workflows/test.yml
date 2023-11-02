@@ -16,9 +16,9 @@ on:
     
     
 jobs:
-  test:
+  test_linux:
+    name: run on linux
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
         with:
@@ -45,4 +45,39 @@ jobs:
       - name: Run tests
         run: |
           cd build-Release
+          ctest
+
+
+
+  test_windows:
+    name: run on windows
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.3'
+
+      - name: Install MSVC 2019
+      - uses: ilammy/msvc-dev-cmd@v1
+        with:
+          vsversion: 2019 # Mupdf requires VS2019
+
+      - name: Install Python
+      - uses: actions/setup-python@v4
+          
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake -DBUILD_TESTS=On ..
+          cmake --build . --config Release
+          
+      - name: Run tests
+        run: |
+          cd build
           ctest
