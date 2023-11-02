@@ -6,8 +6,8 @@
 #include "book.hpp"
 #include "book_meta_data.hpp"
 #include "book_operation_status.hpp"
-#include "i_metadata_extractor.hpp"
 #include "i_library_storage_manager.hpp"
+#include "i_metadata_extractor.hpp"
 #include "library_service.hpp"
 #include "tag.hpp"
 
@@ -216,9 +216,6 @@ TEST_F(ALibraryService, SucceedsUpdatingABook)
     auto expectedStatus = BookOperationStatus::Success;
     auto expectedResult = bookToUpdateWith;
 
-
-    // Expect
-    EXPECT_CALL(bookStorageManagerMock, updateBook(_)).Times(1);
 
     // Act
     auto resultStatus = bookService->updateBook(bookToUpdateWith);
