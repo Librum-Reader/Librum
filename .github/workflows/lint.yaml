@@ -1,4 +1,5 @@
-name: clang-format Check
+# Runs clang-format to ensure the style is correct
+name: Lint
 on:
   workflow_dispatch:
   push:
