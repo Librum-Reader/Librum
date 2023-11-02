@@ -108,8 +108,8 @@ MergeStatus BookMerger::mergeBookCover(Book& localBook, const Book& remoteBook)
     return MergeStatus { .remoteLibraryOutdated = true };
 }
 
-void BookMerger::storeChangesToTheCover(CoverChanges coverChanges,
-                                        ILibraryStorageManager* bookStorageManager)
+void BookMerger::storeChangesToTheCover(
+    CoverChanges coverChanges, ILibraryStorageManager* bookStorageManager)
 {
     if(!coverChanges.newChangesExist())
         return;

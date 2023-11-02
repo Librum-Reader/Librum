@@ -3,8 +3,8 @@
 #include <QString>
 #include <login_model.hpp>
 #include <register_model.hpp>
-#include "error_code.hpp"
 #include "application_export.hpp"
+#include "error_code.hpp"
 
 namespace application
 {

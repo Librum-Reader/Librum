@@ -2,13 +2,13 @@
 #include <QObject>
 #include <QVariant>
 #include <memory>
+#include "adapters_export.hpp"
 #include "application_settings.hpp"
 #include "i_settings_controller.hpp"
 #include "i_settings_service.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_model.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {

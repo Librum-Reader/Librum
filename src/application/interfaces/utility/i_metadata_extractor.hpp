@@ -3,8 +3,8 @@
 #include <QObject>
 #include <QString>
 #include <optional>
-#include "book_meta_data.hpp"
 #include "application_export.hpp"
+#include "book_meta_data.hpp"
 
 namespace application
 {

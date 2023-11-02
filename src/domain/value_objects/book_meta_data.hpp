@@ -4,7 +4,6 @@
 #include <QString>
 #include "domain_export.hpp"
 
-
 namespace domain::value_objects
 {
 

@@ -1,8 +1,8 @@
 #pragma once
 #include <QDir>
 #include <QObject>
-#include "i_app_info_service.hpp"
 #include "i_app_info_gateway.hpp"
+#include "i_app_info_service.hpp"
 
 namespace application::services
 {
@@ -14,7 +14,7 @@ class AppInfoService : public IAppInfoService
 public:
     AppInfoService(IAppInfoGateway* appInfoGateway);
 
-    QString getInfo(const QString &key) override;
+    QString getInfo(const QString& key) override;
     void updateApplication() override;
 
 private slots:
@@ -22,7 +22,8 @@ private slots:
     void processDownloadedBinaryData(const QByteArray& data, bool success);
 
 private:
-    QString saveBinaryDataToFile(const QDir& destFolder, const QByteArray& data);
+    QString saveBinaryDataToFile(const QDir& destFolder,
+                                 const QByteArray& data);
     void unpackAndInstallBinaries(const QString& path);
     QString getBinaryPackageName();
     void stopApplication();

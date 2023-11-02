@@ -1,15 +1,16 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "adapters_export.hpp"
 #include "login_dto.hpp"
 #include "register_dto.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters
 {
 
 /**
- * The LibraryStorageAccess class makes the API calls to the book storage server.
+ * The LibraryStorageAccess class makes the API calls to the book storage
+ * server.
  */
 class ADAPTERS_EXPORT IAuthenticationAccess : public QObject
 {

@@ -1,8 +1,8 @@
 #pragma once
 #include <QAbstractItemModel>
+#include "application_export.hpp"
 #include "mupdf/classes2.h"
 #include "toc_item.hpp"
-#include "application_export.hpp"
 
 namespace application::core
 {

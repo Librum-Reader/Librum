@@ -2,8 +2,8 @@
 #include <QQmlPropertyMap>
 #include <QStandardItemModel>
 #include <QVariant>
-#include "shortcuts_model/shortcuts_proxy_model.hpp"
 #include "adapters_export.hpp"
+#include "shortcuts_model/shortcuts_proxy_model.hpp"
 #pragma once
 
 namespace adapters

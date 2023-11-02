@@ -44,7 +44,7 @@ private:
     // E.g. the client calls IDs "uuid"s where as the api calls them "guid"s
     void convertJsonBookToApiFormat(QJsonObject& jsonBook);
     QJsonArray renameProperties(const QJsonArray& tags,
-                                   TagNamingStyle namingStyle);
+                                TagNamingStyle namingStyle);
     void renameJsonObjectKey(QJsonObject& jsonObject, const QString& oldKeyName,
                              const QString& newKeyName);
 

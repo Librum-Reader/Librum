@@ -130,7 +130,7 @@ void FreeBooksService::markBookAsDownloaded(int id)
     auto* freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
         return;
-    
+
     freeBook->downloaded = true;
     m_downloadedFreeBookIds.insert(id);
 
@@ -145,7 +145,7 @@ void FreeBooksService::unmarkBookAsDownloaded(int id)
     auto* freeBook = getFreeBookById(id);
     if(freeBook == nullptr)
         return;
-    
+
     freeBook->downloaded = false;
     m_downloadedFreeBookIds.erase(id);
 

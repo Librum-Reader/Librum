@@ -1,10 +1,10 @@
 #pragma once
 #include <QObject>
 #include <QString>
+#include "application_export.hpp"
 #include "error_code.hpp"
 #include "login_model.hpp"
 #include "register_model.hpp"
-#include "application_export.hpp"
 
 namespace application
 {

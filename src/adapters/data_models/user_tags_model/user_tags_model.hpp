@@ -1,8 +1,8 @@
 #pragma once
 #include <QAbstractListModel>
 #include <vector>
-#include "tag.hpp"
 #include "adapters_export.hpp"
+#include "tag.hpp"
 
 namespace adapters::data_models
 {

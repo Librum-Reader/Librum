@@ -1,8 +1,8 @@
 #pragma once
 #include <QObject>
+#include "application_export.hpp"
 #include "i_authentication_gateway.hpp"
 #include "i_authentication_service.hpp"
-#include "application_export.hpp"
 
 namespace application::services
 {

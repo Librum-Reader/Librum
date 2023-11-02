@@ -1,9 +1,9 @@
 #pragma once
 #include <QObject>
+#include "application_export.hpp"
 #include "book.hpp"
 #include "i_library_storage_manager.hpp"
 #include "merge_status.hpp"
-#include "application_export.hpp"
 
 namespace application::utility
 {

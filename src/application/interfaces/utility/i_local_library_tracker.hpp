@@ -4,8 +4,8 @@
 #include <QUuid>
 #include <optional>
 #include <vector>
-#include "book.hpp"
 #include "application_export.hpp"
+#include "book.hpp"
 
 namespace application
 {

@@ -1,6 +1,6 @@
 #pragma once
-#include <QString>
 #include <QRect>
+#include <QString>
 #include "adapters_export.hpp"
 
 namespace adapters::dtos

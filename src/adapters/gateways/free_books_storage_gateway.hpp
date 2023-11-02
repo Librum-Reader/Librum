@@ -8,7 +8,8 @@
 namespace adapters::gateways
 {
 
-class ADAPTERS_EXPORT FreeBooksStorageGateway : public application::IFreeBooksStorageGateway
+class ADAPTERS_EXPORT FreeBooksStorageGateway
+    : public application::IFreeBooksStorageGateway
 {
     Q_OBJECT
 

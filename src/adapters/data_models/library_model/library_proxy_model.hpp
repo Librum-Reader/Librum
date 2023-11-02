@@ -2,9 +2,9 @@
 #include <QSortFilterProxyModel>
 #include <optional>
 #include <vector>
+#include "adapters_export.hpp"
 #include "filter_request.hpp"
 #include "tag_dto.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::data_models
 {

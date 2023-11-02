@@ -101,7 +101,6 @@ mupdf::FzPixmap PageGenerator::renderPage(float zoom)
             }
             m_symbolBounds = newSymbolBounds;
 
-
             for(auto& link : m_links)
             {
                 auto newLinkRect =

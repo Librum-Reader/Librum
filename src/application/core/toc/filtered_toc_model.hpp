@@ -2,9 +2,9 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 #include <QString>
+#include "application_export.hpp"
 #include "toc_item.hpp"
 #include "toc_model.hpp"
-#include "application_export.hpp"
 
 namespace application::core
 {

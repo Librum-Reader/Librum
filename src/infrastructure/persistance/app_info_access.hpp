@@ -16,7 +16,7 @@ class AppInfoAccess : public adapters::IAppInfoAccess
 
 public:
     void getNewestAppVersion() override;
-    void downloadBinaries(const QString &packageName) override;
+    void downloadBinaries(const QString& packageName) override;
 
 private:
     QNetworkRequest createRequest(QUrl url);

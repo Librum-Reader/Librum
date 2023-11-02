@@ -3,10 +3,10 @@
 #include <QVariant>
 #include <utility>
 #include <vector>
+#include "application_export.hpp"
 #include "application_settings.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
-#include "application_export.hpp"
 
 namespace application
 {

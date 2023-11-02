@@ -5,8 +5,7 @@
 namespace string_utils
 {
 
-inline double fuzzCompare(const QString& lhs,
-                          const QString& rhs)
+inline double fuzzCompare(const QString& lhs, const QString& rhs)
 {
     // If rhs is a sub-string of lhs, return a high ratio
     auto substringPos = lhs.toLower().indexOf(rhs.toLower());
@@ -16,23 +15,22 @@ inline double fuzzCompare(const QString& lhs,
         double ratio = 100 - substringPos;
         // A difference in length of the strings should reduce the score
         ratio -= std::abs(lhs.length() - rhs.length()) * 0.1;
-        
+
         return ratio;
     }
-    
-    return rapidfuzz::fuzz::ratio(rhs.toStdString(),
-                                  lhs.toStdString());
+
+    return rapidfuzz::fuzz::ratio(rhs.toStdString(), lhs.toStdString());
 }
 
 inline bool lexicographicallyLess(const QString& left, const QString& right)
 {
     if(left.isEmpty())
         return false;
-    
+
     if(right.isEmpty())
         return true;
-    
+
     return left.toLower() < right.toLower();
 }
 
-}
+}  // namespace string_utils

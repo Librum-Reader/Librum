@@ -1,13 +1,14 @@
 #pragma once
 #include <QObject>
+#include "adapters_export.hpp"
 #include "i_authentication_controller.hpp"
 #include "i_authentication_service.hpp"
-#include "adapters_export.hpp"
 
 namespace adapters::controllers
 {
 
-class ADAPTERS_EXPORT AuthenticationController : public IAuthenticationController
+class ADAPTERS_EXPORT AuthenticationController
+    : public IAuthenticationController
 {
     Q_OBJECT
 

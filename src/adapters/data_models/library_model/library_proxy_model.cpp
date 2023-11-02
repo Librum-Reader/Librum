@@ -213,8 +213,7 @@ bool LibraryProxyModel::addedToLibraryAfter(const QModelIndex& left,
 bool LibraryProxyModel::hasHigherReadingProgress(const QModelIndex& left,
                                                  const QModelIndex& right) const
 {
-    auto lhs =
-        sourceModel()->data(left, LibraryModel::BookReadingProgressRole);
+    auto lhs = sourceModel()->data(left, LibraryModel::BookReadingProgressRole);
     auto rhs =
         sourceModel()->data(right, LibraryModel::BookReadingProgressRole);
 
@@ -283,10 +282,10 @@ bool LibraryProxyModel::filterAcceptsFormat(const QModelIndex& bookIndex) const
     auto format = formatData.toString().toLower();
     // Remove the version details from the format
     int firstSpaceIndex = format.indexOf(' ');
-    if (firstSpaceIndex != -1)
+    if(firstSpaceIndex != -1)
         format = format.left(firstSpaceIndex);
-    
-    
+
+
     if(m_filterRequest.format.isEmpty() && !m_filterRequest.onlyFiles &&
        !m_filterRequest.onlyBooks)
         return true;

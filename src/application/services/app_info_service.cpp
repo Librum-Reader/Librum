@@ -1,26 +1,26 @@
 #include "app_info_service.hpp"
-#include <QJsonDocument>
-#include <QJsonObject>
-#include <QFile>
+#include <QApplication>
 #include <QDebug>
 #include <QDir>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
 #include <QProcess>
-#include <QApplication>
 
 namespace application::services
 {
 
-AppInfoService::AppInfoService(IAppInfoGateway *appInfoGateway)
-    : m_appInfoGateway(appInfoGateway)
+AppInfoService::AppInfoService(IAppInfoGateway* appInfoGateway) :
+    m_appInfoGateway(appInfoGateway)
 {
-    connect(m_appInfoGateway, &IAppInfoGateway::newestAppVersionReceived,
-            this, &AppInfoService::setNewestVersion);
+    connect(m_appInfoGateway, &IAppInfoGateway::newestAppVersionReceived, this,
+            &AppInfoService::setNewestVersion);
 
     connect(m_appInfoGateway, &IAppInfoGateway::downloadingBinariesFinished,
             this, &AppInfoService::processDownloadedBinaryData);
 
-    connect(m_appInfoGateway, &IAppInfoGateway::downloadingBinariesProgressChanged,
-            this,
+    connect(m_appInfoGateway,
+            &IAppInfoGateway::downloadingBinariesProgressChanged, this,
             [this](qint64 received, qint64 total)
             {
                 auto progress = static_cast<double>(received) / total;
@@ -30,7 +30,7 @@ AppInfoService::AppInfoService(IAppInfoGateway *appInfoGateway)
     m_appInfoGateway->getNewestAppVersion();
 }
 
-QString AppInfoService::getInfo(const QString &key)
+QString AppInfoService::getInfo(const QString& key)
 {
     if(key == "newestVersion")
         return m_newestVersion;
@@ -49,8 +49,8 @@ QString AppInfoService::getInfo(const QString &key)
     auto value = jsonObject[key].toString();
     if(value.isEmpty())
     {
-        qWarning() << QString("Failed getting invalid app info key: %1")
-                          .arg(key);
+        qWarning()
+            << QString("Failed getting invalid app info key: %1").arg(key);
         return "";
     }
 
@@ -78,11 +78,12 @@ void AppInfoService::unpackAndInstallBinaries(const QString& path)
     }
 
     QProcess* process = new QProcess;
-    connect(process, &QProcess::errorOccurred,
-            this, [process](QProcess::ProcessError error) {
-        qWarning() << error;
-        process->deleteLater();
-    });
+    connect(process, &QProcess::errorOccurred, this,
+            [process](QProcess::ProcessError error)
+            {
+                qWarning() << error;
+                process->deleteLater();
+            });
 
     QStringList arguments;
     arguments << path;
@@ -111,7 +112,7 @@ void AppInfoService::setNewestVersion(const QString& newestVersion)
     emit newestVersionChanged();
 }
 
-void AppInfoService::processDownloadedBinaryData(const QByteArray &data,
+void AppInfoService::processDownloadedBinaryData(const QByteArray& data,
                                                  bool success)
 {
     if(!success || data.isEmpty())
@@ -129,7 +130,7 @@ void AppInfoService::processDownloadedBinaryData(const QByteArray &data,
 }
 
 QString AppInfoService::saveBinaryDataToFile(const QDir& destFolder,
-                                             const QByteArray &data)
+                                             const QByteArray& data)
 {
     auto binaryPackageName = getBinaryPackageName();
     auto dest = destFolder.filePath(binaryPackageName + ".zip");
