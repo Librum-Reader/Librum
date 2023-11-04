@@ -205,12 +205,9 @@ To build Librum on windows, run the following commands in the Powershell:
     ```
 4. Run cmake.
     ```sh
-    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<Drive>\\Qt\\<version>\\msvc2019_64 ..
+    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/qt> ..
     ```
-    `CMAKE_PREFIX_PATH` needs to be set to the Qt install path, for example:
-    ```sh
-    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=C:\\Qt\\6.5.1\\msvc2019_64 ..
-    ```
+    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `<Drive>\\Qt\\<version>\\msvc2019_64`
 6. Build the project
     ```sh
     cmake --build . --config Release
