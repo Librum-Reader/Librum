@@ -39,7 +39,7 @@ public:
     virtual void removeHighlight(const QUuid& uuid) = 0;
     virtual void changeHighlightColor(const QUuid& uuid,
                                       const QColor& color) = 0;
-    virtual void saveHighlights() = 0;
+    virtual void updateBook() = 0;
     virtual const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const = 0;
 

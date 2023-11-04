@@ -28,7 +28,7 @@ public:
     void addHighlight(const domain::entities::Highlight& highlight) override;
     void removeHighlight(const QUuid& uuid) override;
     void changeHighlightColor(const QUuid& uuid, const QColor& color) override;
-    void saveHighlights() override;
+    void updateBook() override;
     const domain::entities::Highlight* getHighlightAtPoint(
         const QPointF& point, int page) const override;
 

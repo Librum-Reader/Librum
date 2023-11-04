@@ -111,11 +111,6 @@ void BookController::changeHighlightColor(const QUuid& uuid,
     m_bookService->changeHighlightColor(uuid, color);
 }
 
-void BookController::saveHighlights()
-{
-    m_bookService->saveHighlights();
-}
-
 const Highlight* BookController::getHighlightAtPoint(const QPointF& point,
                                                      int page) const
 {

@@ -89,25 +89,28 @@ void BookService::addHighlight(const domain::entities::Highlight& highlight)
 {
     auto book = getBook();
     book->addHighlight(highlight);
+
+    updateBook();
 }
 
 void BookService::removeHighlight(const QUuid& uuid)
 {
     auto book = getBook();
     book->removeHighlight(uuid);
+
+    updateBook();
 }
 
 void BookService::changeHighlightColor(const QUuid& uuid, const QColor& color)
 {
     auto book = getBook();
     book->changeHighlightColor(uuid, color);
+
+    updateBook();
 }
 
-void BookService::saveHighlights()
+void BookService::updateBook()
 {
-    // We need to have a extra method to save the highlights due to a
-    // concurrency error on the backend that occurs when we send multiple update
-    // requests in a short period of time.
     auto book = getBook();
     book->updateLastModified();
     m_libraryService->updateBook(*book);
@@ -146,8 +149,7 @@ void BookService::addBookmark(const domain::entities::Bookmark& bookmark)
     book->addBookmark(bookmark);
     emit bookmarkInsertionEnded();
 
-    book->updateLastModified();
-    m_libraryService->updateBook(*book);
+    updateBook();
 }
 
 void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
@@ -157,8 +159,7 @@ void BookService::renameBookmark(const QUuid& uuid, const QString& newName)
     book->renameBookmark(uuid, newName);
     emit bookmarkNameChanged(getIndexOfBookmark(uuid));
 
-    book->updateLastModified();
-    m_libraryService->updateBook(*book);
+    updateBook();
 }
 
 void BookService::removeBookmark(const QUuid& uuid)
@@ -169,8 +170,7 @@ void BookService::removeBookmark(const QUuid& uuid)
     book->removeBookmark(uuid);
     emit bookmarkDeletionEnded();
 
-    book->updateLastModified();
-    m_libraryService->updateBook(*book);
+    updateBook();
 }
 
 void BookService::followLink(const char* uri)

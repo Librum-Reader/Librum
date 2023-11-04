@@ -26,6 +26,7 @@ Popup {
     }
 
     onOpened: selectionOptionsListView.model = firstActionsPage
+    onClosed: root.highlight = ""
 
     Shortcut {
         sequence: SettingsController.shortcuts.CreateHighlight
@@ -139,7 +140,13 @@ Popup {
             id: highlightAction
             text: "Highlight"
             clickedFunction: function () {
-                let uuid = internal.createHighlight()
+                // We do not want to create a new highlight when clicking on
+                // one and selecting the "Highlight" option to edit it.
+                let uuid = root.highlight
+                if (root.highlight == "") {
+                    uuid = internal.createHighlight()
+                }
+
                 root.highlightOptionSelected(uuid)
             }
         }

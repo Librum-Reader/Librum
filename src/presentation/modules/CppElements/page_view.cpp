@@ -457,7 +457,6 @@ QString PageView::createHighlightFromCurrentSelection(const QString& hex,
 
     removeConflictingHighlights(highlight);
     m_bookController->addHighlight(highlight);
-    m_bookController->saveHighlights();
 
     update();
     return highlight.getUuid().toString(QUuid::WithoutBraces);
@@ -466,7 +465,6 @@ QString PageView::createHighlightFromCurrentSelection(const QString& hex,
 void PageView::removeHighlight(const QString& uuid)
 {
     m_bookController->removeHighlight(QUuid(uuid));
-    m_bookController->saveHighlights();
 
     update();
 }
@@ -478,7 +476,6 @@ void PageView::changeHighlightColor(const QString& uuid, const QString& color,
     newColor.setAlpha(alpha);
 
     m_bookController->changeHighlightColor(QUuid(uuid), newColor);
-    m_bookController->saveHighlights();
 
     update();
 }
