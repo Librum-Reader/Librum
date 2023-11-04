@@ -152,12 +152,9 @@ The installation is straight forward, just follow the steps below:
     ```
 4. Run cmake.
     ```sh
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/<username>/Qt/<version>/gcc_64 ..
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/Qt> ..
     ```
-    `CMAKE_PREFIX_PATH` needs to be set to the Qt install path. Qt is usually installed at /home/name/Qt, so an example might be:
-    ```sh
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=/home/john/Qt/6.5.1/gcc_64 ..
-    ```
+    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `/home/<name>/Qt/<version>/gcc_64`
 6. Build the project
     ```sh
     cmake --build . -j $(nproc)
@@ -208,12 +205,9 @@ To build Librum on windows, run the following commands in the Powershell:
     ```
 4. Run cmake.
     ```sh
-    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<Drive>\\Qt\\<version>\\msvc2019_64 ..
+    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/qt> ..
     ```
-    `CMAKE_PREFIX_PATH` needs to be set to the Qt install path, for example:
-    ```sh
-    cmake -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=C:\\Qt\\6.5.1\\msvc2019_64 ..
-    ```
+    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `<Drive>\\Qt\\<version>\\msvc2019_64`
 6. Build the project
     ```sh
     cmake --build . --config Release

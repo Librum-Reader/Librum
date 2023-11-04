@@ -16,13 +16,20 @@ on:
     
     
 jobs:
-  test:
+  test_linux:
+    name: run on linux
     runs-on: ubuntu-latest
-    
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
+
+      - name: WORKAROUND FOR https://github.com/actions/runner-images/issues/8659
+        run: |
+          echo "TEMPORARY WORKAROUND FOR GITHUB RUNNER BUG #8659\n\nRemoving GCC 13 as it breaks Clang14"
+          sudo rm -f /etc/apt/sources.list.d/ubuntu-toolchain-r-ubuntu-test-jammy.list
+          sudo apt-get update
+          sudo apt-get install -y --allow-downgrades libc6=2.35-0ubuntu3.4 libc6-dev=2.35-0ubuntu3.4 libstdc++6=12.3.0-1ubuntu1~22.04 libgcc-s1=12.3.0-1ubuntu1~22.04
       
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
@@ -46,3 +53,30 @@ jobs:
         run: |
           cd build-Release
           ctest
+
+
+
+  test_windows:
+    name: run on windows
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v3
+        with:
+          version: '6.5.3'
+          
+      - name: Build
+        run: |
+          mkdir build
+          cd build
+          cmake -DBUILD_TESTS=On ..
+          cmake --build . --config Release
+          
+      - name: Run tests
+        run: |
+          cd build
+          ctest -C Release
