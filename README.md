@@ -227,5 +227,44 @@ Here are some things to keep in mind during the build process.
 
 <br>
 
-## For macOS
-Support coming soon!
+## For MacOS
+
+### Prerequisites
+- cmake                             (https://cmake.org/download)
+- make                              (http://ftp.gnu.org/gnu/make)
+- g++                               (https://gcc.gnu.org)
+- python3                           (https://www.python.org/downloads)
+- Qt 6.5                            (https://www.qt.io/download-open-source)
+
+### Installation
+The installation is straight forward, just follow the steps below:
+
+<br>
+
+1. Clone the repository.
+    ```sh
+    git clone https://github.com/Librum-Reader/Librum.git --recursive
+    ```
+2. Step into the cloned project folder.
+    ```sh
+    cd Librum
+    ```
+3. Create the build folder and step into it.
+    ```sh
+    mkdir build-Release
+    cd build-Release
+    ```
+4. Run cmake.
+    ```sh
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=Off -DCMAKE_PREFIX_PATH=<path/to/Qt> ..
+    ```
+    Set `CMAKE_PREFIX_PATH` to your Qt installation path. Installing Qt via the online installer usually installs it to `/Users/<name>/Qt/<version>/macos`
+6. Build the project
+    ```sh
+    cmake --build . -j $(nproc)
+    ```
+7. Install Librum
+    ```sh
+    cmake --install .
+    ```
+<br>
