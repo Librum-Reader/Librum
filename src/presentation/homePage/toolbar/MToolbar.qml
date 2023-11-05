@@ -91,8 +91,8 @@ Item {
             AnimatedImage {
                 id: loadingAnimation
                 anchors.centerIn: parent
-                sourceSize.width: 60
-                sourceSize.height: 60
+                width: 60
+                height: 60
                 visible: AppInfoController.online && LibraryController.isSyncing
                 playing: AppInfoController.online && LibraryController.isSyncing
                 source: Icons.loadingAnimation
