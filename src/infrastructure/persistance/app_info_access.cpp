@@ -1,13 +1,20 @@
 #include "app_info_access.hpp"
+#include <QSettings>
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
 
 namespace infrastructure::persistence
 {
 
+AppInfoAccess::AppInfoAccess()
+{
+    QSettings settings;
+    domain = settings.value("serverHost").toString();
+}
+
 void AppInfoAccess::getNewestAppVersion()
 {
-    auto request = createRequest(data::latestAppVersionEndpoint);
+    auto request = createRequest(domain + data::latestAppVersionEndpoint);
     auto reply = m_networkAccessManager.get(request);
 
 

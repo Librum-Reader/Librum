@@ -15,6 +15,8 @@ class AppInfoAccess : public adapters::IAppInfoAccess
     Q_OBJECT
 
 public:
+    AppInfoAccess();
+
     void getNewestAppVersion() override;
     void downloadBinaries(const QString& packageName) override;
 
@@ -22,6 +24,7 @@ private:
     QNetworkRequest createRequest(QUrl url);
 
     QNetworkAccessManager m_networkAccessManager;
+    QString domain;
 };
 
 }  // namespace infrastructure::persistence
