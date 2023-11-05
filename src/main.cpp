@@ -3,14 +3,17 @@
 #include <qqml.h>
 #include <QApplication>
 #include <QDateTime>
+#include <QFile>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QSettings>
 #include <QStandardPaths>
 #include <QString>
+#include <QTextStream>
 #include <QTranslator>
 #include <memory>
 #include "app_info_controller.hpp"
@@ -40,6 +43,7 @@ using namespace application::services;
 
 
 void registerTypes();
+void setupGlobalSettings();
 void setupFonts();
 void addTranslations();
 
@@ -59,6 +63,7 @@ int main(int argc, char* argv[])
     qInstallMessageHandler(logging::messageHandler);
 
     addTranslations();
+    setupGlobalSettings();
     setupFonts();
 
     // Register types
@@ -240,7 +245,24 @@ void addTranslations()
     }
 }
 
-void loadFont(const QString& path);
+void setupGlobalSettings()
+{
+    QSettings settings;
+    QString cfgFile = settings.value("serverHost", QVariant("")).toString();
+    if(cfgFile.isEmpty())
+        settings.setValue("serverHost", "https://api.librumreader.com");
+
+    QString sslSettings = settings.value("selfHosted", QVariant("")).toString();
+    if(sslSettings.isEmpty())
+        settings.setValue("selfHosted", "false");
+}
+
+void loadFont(const QString& path)
+{
+    int result = QFontDatabase::addApplicationFont(path);
+    if(result == -1)
+        qWarning() << QString("Loading font file: %1 failed.").arg(path);
+}
 
 void setupFonts()
 {
@@ -252,11 +274,4 @@ void setupFonts()
     QFont defaultFont("SF Pro Display");
     defaultFont.setLetterSpacing(QFont::AbsoluteSpacing, 0.1);
     QGuiApplication::setFont(defaultFont);
-}
-
-void loadFont(const QString& path)
-{
-    int result = QFontDatabase::addApplicationFont(path);
-    if(result == -1)
-        qWarning() << QString("Loading font file: %1 failed.").arg(path);
 }
