@@ -46,7 +46,7 @@ Item {
                 Layout.alignment: Qt.AlignVCenter
                 text: root.shortcut
                 color: Style.colorText
-                font.pointSize: 12
+                font.pointSize: Fonts.size12
                 font.weight: Font.DemiBold
             }
 

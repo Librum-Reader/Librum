@@ -9,7 +9,7 @@ Item {
     property string titleText: "Title"
     property string descriptionText: "Description"
     property double titleSize: Fonts.size28
-    property double descriptionSize: 14
+    property double descriptionSize: Fonts.size14
 
     implicitWidth: layout.implicitWidth
     implicitHeight: layout.implicitHeight

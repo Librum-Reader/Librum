@@ -93,15 +93,13 @@ void AppInfoController::updateApplication()
     m_appInfoService->updateApplication();
 }
 
-int AppInfoController::getSystemFontSize() const
+double AppInfoController::getSystemFontSize() const
 {
-#ifdef defined(Q_OS_MAC)
-    int size = 13;
-#else
-    int size = 9;
-#endif
+    auto os = getOperatingSystem();
+    if(os == "MACOS")
+        return 12.5;
 
-    return size;
+    return 9;
 }
 
 bool AppInfoController::isOnline() const

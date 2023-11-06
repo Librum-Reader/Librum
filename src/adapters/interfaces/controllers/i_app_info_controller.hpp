@@ -45,7 +45,7 @@ private:
     virtual QString getGithubLink() const = 0;
     virtual QString getCurrentQtVersion() const = 0;
     virtual QString getOperatingSystem() const = 0;
-    virtual int getSystemFontSize() const = 0;
+    virtual double getSystemFontSize() const = 0;
     virtual bool isOnline() const = 0;
 
 signals:
