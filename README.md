@@ -44,13 +44,20 @@ For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/
 
 # Donations
 
-If you like the Librum project, consider donating to the opensource developers at https://www.patreon.com/librumreader.<br><br>
-As a team of opensource developers we rely on donations to continue working on projects like Librum. All help is greatly appreciated.
+Donations make it possible for us to cover our server costs and allow us to make investments into new areas of development.
+<br>
+If you would like to support us, check out: https://librumreader.com/contribute/donate or become a github sponsor! 
+<br>
+<br>
+As a team of opensource developers we rely on donations to continue working on projects like Librum. Your help is greatly appreciated.
 
 <br>
 
 # Contributing
 
+If you'd like to contribute, check out: https://librumreader.com/contribute
+<br>
+<br>
 If you are interested in contributing, feel free to contact us on either:<br>
 1. Discord (m_david#0631)
 2. Email (contact@librumreader.com)
