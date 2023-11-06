@@ -35,10 +35,17 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
                     qWarning() << "Failed loading QNetworkInformation backend";
 
                 auto networkInfo = QNetworkInformation::instance();
-                if(networkInfo->reachability() ==
-                   QNetworkInformation::Reachability::Online)
+                if(networkInfo == nullptr)
                 {
-                    emit syncingLibraryStarted();
+                    qWarning() << "Failed loading QNetworkInformation instance";
+                }
+                else
+                {
+                    if(networkInfo->reachability() ==
+                       QNetworkInformation::Reachability::Online)
+                    {
+                        emit syncingLibraryStarted();
+                    }
                 }
             });
 
