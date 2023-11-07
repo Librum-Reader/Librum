@@ -268,11 +268,6 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <source>Add a tag...</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../homePage/manageTagsPopup/MAddTagBox.qml" line="118"/>
-        <source>ADD</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MAddTagBoxPopup</name>
@@ -792,6 +787,41 @@ Either you are offline, or your storage is full.</source>
         <source>Download book</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="138"/>
+        <source>Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="155"/>
+        <source>Authors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="172"/>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="189"/>
+        <source>Downloads</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="207"/>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="237"/>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="263"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MDualToggle</name>
@@ -1103,6 +1133,11 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="123"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="124"/>
+        <source>You have %1 books</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1683,7 +1718,7 @@ Confirm your email by clicking the link we sent you.</source>
     <name>MSortByButton</name>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="41"/>
-        <source>Sort by</source>
+        <source>Sort</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

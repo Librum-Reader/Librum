@@ -135,7 +135,7 @@ Popup {
                                     id: titleField
                                     Layout.fillWidth: true
                                     boxHeight: 34
-                                    headerText: "Title"
+                                    headerText: qsTr("Title")
                                     headerFontWeight: Font.Bold
                                     headerFontSize: Fonts.size11dot5
                                     text: root.title
@@ -152,7 +152,7 @@ Popup {
                                     id: authorField
                                     Layout.fillWidth: true
                                     boxHeight: 34
-                                    headerText: "Authors"
+                                    headerText: qsTr("Authors")
                                     headerFontWeight: Font.Bold
                                     headerFontSize: Fonts.size11dot5
                                     text: root.authors
@@ -169,7 +169,7 @@ Popup {
                                     id: languageField
                                     Layout.fillWidth: true
                                     boxHeight: 34
-                                    headerText: "Language"
+                                    headerText: qsTr("Language")
                                     headerFontWeight: Font.Bold
                                     headerFontSize: Fonts.size11dot5
                                     text: root.languages
@@ -186,7 +186,7 @@ Popup {
                                     id: publicationField
                                     Layout.fillWidth: true
                                     boxHeight: 34
-                                    headerText: "Downloads"
+                                    headerText: qsTr("Downloads")
                                     headerFontWeight: Font.Bold
                                     headerFontSize: Fonts.size11dot5
                                     text: root.downloadCount
@@ -204,7 +204,7 @@ Popup {
                                     Layout.fillWidth: true
                                     Layout.bottomMargin: 3
                                     boxHeight: 34
-                                    headerText: "Format"
+                                    headerText: qsTr("Format")
                                     headerFontWeight: Font.Bold
                                     headerFontSize: Fonts.size11dot5
                                     text: "EPUB"
@@ -234,7 +234,7 @@ Popup {
                             Layout.preferredWidth: 140
                             Layout.preferredHeight: 38
                             active: true
-                            text: "Download"
+                            text: qsTr("Download")
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: Fonts.size12
@@ -260,7 +260,7 @@ Popup {
                             borderWidth: active ? 0 : 1
                             backgroundColor: active ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
-                            text: "Cancel"
+                            text: qsTr("Cancel")
                             textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                             fontWeight: Font.Bold
                             fontSize: Fonts.size12

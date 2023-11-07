@@ -121,7 +121,7 @@ Page {
                     Layout.topMargin: updateBanner.visible ? 24 : 44
                     //: As in 'Home Page', might be closer to 'Start' in other languages
                     titleText: qsTr("Home")
-                    descriptionText: qsTr("You have " + LibraryController.bookCount + " books")
+                    descriptionText: qsTr("You have %1 books").arg(LibraryController.bookCount)
                 }
 
                 Item {

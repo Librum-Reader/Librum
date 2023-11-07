@@ -115,7 +115,7 @@ Item {
             id: addLabel
             Layout.fillHeight: true
             verticalAlignment: Text.AlignVCenter
-            text: qsTr("ADD")
+            text: "ADD"
             opacity: mouseArea.pressed ? 0.8 : 1
             color: Style.colorBasePurple
             font.pointSize: Fonts.size12

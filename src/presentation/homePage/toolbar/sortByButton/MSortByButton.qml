@@ -38,7 +38,7 @@ Item {
                     id: sortByLabel
                     Layout.topMargin: -1
                     color: Style.colorText
-                    text: qsTr("Sort by")
+                    text: qsTr("Sort")
                     font.pointSize: Fonts.size12
                     font.weight: Font.Bold
                 }
