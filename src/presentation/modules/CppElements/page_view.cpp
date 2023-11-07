@@ -327,8 +327,9 @@ void PageView::hoverMoveEvent(QHoverEvent* event)
 {
     int mouseX = event->position().x();
     int mouseY = event->position().y();
-
     setCorrectCursor(mouseX, mouseY);
+
+    emit mouseHoverMoved();
 }
 
 void PageView::keyPressEvent(QKeyEvent* event)

@@ -83,6 +83,15 @@ Pane {
         }
     }
 
+    Timer {
+        id: hideCursorTimer
+
+        interval: 3000
+        running: true
+
+        onTriggered: mouseArea.cursorShape = Qt.BlankCursor
+    }
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
@@ -90,6 +99,8 @@ Pane {
 
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
+
+        onPositionChanged: internal.showCursor()
 
         onPressed: mouse.accepted = false
         onReleased: mouse.accepted = false
@@ -130,6 +141,8 @@ Pane {
                     if (implicitWidth > pageView.contentWidth)
                         pageView.widestItem = page.implicitWidth
                 }
+
+                onMouseHoverMoved: internal.showCursor()
             }
 
             // Set the book's current page once the model is loaded
@@ -327,6 +340,11 @@ Pane {
             popup.y = posY
 
             popup.open()
+        }
+
+        function showCursor() {
+            mouseArea.cursorShape = Qt.ArrowCursor
+            hideCursorTimer.start()
         }
     }
 }
