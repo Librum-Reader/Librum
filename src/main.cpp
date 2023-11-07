@@ -13,8 +13,8 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QString>
-#include <QTextStream>
 #include <QTranslator>
+#include <QTextStream>
 #include <memory>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
@@ -45,7 +45,7 @@ using namespace application::services;
 void registerTypes();
 void setupGlobalSettings();
 void setupFonts();
-void addTranslations();
+void addTranslations(QTranslator& translator);
 
 int main(int argc, char* argv[])
 {
@@ -62,7 +62,11 @@ int main(int argc, char* argv[])
 
     qInstallMessageHandler(logging::messageHandler);
 
-    addTranslations();
+
+    QTranslator translator;
+    addTranslations(translator);
+
+
     setupGlobalSettings();
     setupFonts();
 
@@ -230,21 +234,6 @@ int main(int argc, char* argv[])
     // clang-format on
 }
 
-void addTranslations()
-{
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for(const QString& locale : uiLanguages)
-    {
-        const QString baseName = "Librum_" + QLocale(locale).name();
-        if(translator.load(":/i18n/" + baseName))
-        {
-            QGuiApplication::installTranslator(&translator);
-            break;
-        }
-    }
-}
-
 void setupGlobalSettings()
 {
     QSettings settings;
@@ -255,6 +244,20 @@ void setupGlobalSettings()
     QString sslSettings = settings.value("selfHosted", QVariant("")).toString();
     if(sslSettings.isEmpty())
         settings.setValue("selfHosted", "false");
+}
+
+void addTranslations(QTranslator& translator)
+{
+    const QStringList uiLanguages = QLocale::system().uiLanguages();
+    for(const QString& locale : uiLanguages)
+    {
+        const QString baseName = "librum_" + QLocale(locale).name();
+        if(translator.load(":/i18n/" + baseName))
+        {
+            QGuiApplication::installTranslator(&translator);
+            break;
+        }
+    }
 }
 
 void loadFont(const QString& path)

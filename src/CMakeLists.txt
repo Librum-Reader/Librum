@@ -36,6 +36,7 @@ qt_add_executable(librum
     message_handler.hpp
     ${PROJECT_SOURCE_DIR}/fonts.qrc
     ${app_icon_resource_windows}
+    ${QM_FILES}
 )
 
 # Set WIN32 for windows to avoid console getting opened on start on windows
