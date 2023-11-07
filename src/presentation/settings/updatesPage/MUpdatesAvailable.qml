@@ -47,7 +47,7 @@ Item {
             Label {
                 id: newUpdateTitle
                 Layout.fillWidth: true
-                text: "A new update is available!"
+                text: qsTr("A new update is available!")
                 wrapMode: Text.WordWrap
                 color: Style.colorText
                 font.pointSize: Fonts.size23
@@ -57,7 +57,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 7
-                text: "Download the new version to get great new improvements."
+                text: qsTr("Download the new version to get great new improvements.")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size15
@@ -66,7 +66,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 32
-                text: "The newest version is:"
+                text: qsTr("The newest version is:")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size14
@@ -91,7 +91,7 @@ Item {
                 imagePath: Icons.downloadSelected
                 imageSize: 16
                 imageSpacing: 8
-                text: "Update"
+                text: qsTr("Update")
                 fontSize: Fonts.size13
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
@@ -110,7 +110,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 56
-                text: "See the exact changes on our website at:"
+                text: qsTr("See the exact changes on our website at:")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size14
@@ -151,12 +151,12 @@ Item {
            - content.horizontalPadding
         y: baseRoot.height / 2 - height / 2 - 160
         visible: false
-        title: "Updating on Linux"
-        message: "Please use your package manager to update Librum or download the newest version from our " + '<a href="'
+        title: qsTr("Updating on Linux")
+        message: qsTr("Please use your package manager to update Librum or download the newest version from our") + " " + '<a href="'
                  + AppInfoController.website + '" style="text-decoration: none; color: '
-                 + Style.colorBasePurple + ';">website</a>.'
-        leftButtonText: "Close"
-        rightButtonText: "Email Us"
+                 + Style.colorBasePurple + ';">' + qsTr('website') + '</a>.'
+        leftButtonText: qsTr("Close")
+        rightButtonText: qsTr("Email Us")
         buttonsWidth: 180
         messageBottomSpacing: 10
         richText: true
@@ -174,12 +174,12 @@ Item {
            - content.horizontalPadding
         y: baseRoot.height / 2 - height / 2 - 160
         visible: false
-        title: "The Update Failed"
-        message: "Please try again later or download the newest version from our " + '<a href="'
+        title: qsTr("The Update Failed")
+        message: qsTr("Please try again later or download the newest version from our") + " " + '<a href="'
                  + AppInfoController.website + '" style="text-decoration: none; color: '
-                 + Style.colorBasePurple + ';">website</a>.'
-        leftButtonText: "Close"
-        rightButtonText: "Email Us"
+                 + Style.colorBasePurple + ';">' + qsTr('website') + '</a>.'
+        leftButtonText: qsTr("Close")
+        rightButtonText: qsTr("Email Us")
         buttonsWidth: 180
         messageBottomSpacing: 10
         richText: true

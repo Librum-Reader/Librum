@@ -11,7 +11,7 @@ import Librum.fonts
 Pane {
     id: root
     property bool fullScreenMode: false
-    property string bookTitle: "Unknown name"
+    property string bookTitle: qsTr("Unknown name")
     property int currentPage: 0
     property int lastPage: 0
     property int pageCount: 0
@@ -184,7 +184,8 @@ Pane {
                     id: totalPageText
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter
-                    text: "of " + root.pageCount.toString()
+                    //: As in 21 "of" 400
+                    text: qsTr("of") + " " + root.pageCount.toString()
                     font.pointSize: Fonts.size12
                     font.weight: Font.Normal
                     color: Style.colorText

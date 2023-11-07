@@ -28,7 +28,7 @@ Popup {
         if (opened) {
             addTagBox.giveFocus()
             informationLabel.text = Qt.binding(function () {
-                return Globals.bookTags.length + " TAGS  -  " + Globals.selectedBook.title
+                return Globals.bookTags.length + " " + qsTr("TAGS") + "  -  " + Globals.selectedBook.title
             })
         } else {
             addTagBox.close()
@@ -66,7 +66,7 @@ Popup {
             Label {
                 id: popupTitle
                 Layout.topMargin: 20
-                text: "Manage Tags"
+                text: qsTr("Manage Tags")
                 font.weight: Font.Bold
                 font.pointSize: Fonts.size17
                 color: Style.colorTitle
@@ -163,7 +163,7 @@ Popup {
                 fontSize: Fonts.size12
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
-                text: "Done"
+                text: qsTr("Done")
 
                 onClicked: root.close()
             }

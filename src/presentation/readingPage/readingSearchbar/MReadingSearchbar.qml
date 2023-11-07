@@ -89,7 +89,7 @@ Item {
                     id: optionsButton
                     Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
-                    text: "Options"
+                    text: qsTr("Options")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
@@ -138,7 +138,7 @@ Item {
                             selectByMouse: true
                             color: Style.colorBaseInputText
                             font.pointSize: Fonts.size12
-                            placeholderText: "Find"
+                            placeholderText: qsTr("Find")
                             placeholderTextColor: Style.colorPlaceholderText
                             background: Rectangle {
                                 anchors.fill: parent
@@ -165,7 +165,7 @@ Item {
                     id: nextButton
                     Layout.preferredWidth: 81
                     Layout.preferredHeight: 30
-                    text: "Next"
+                    text: qsTr("Next")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal
@@ -184,7 +184,7 @@ Item {
                     id: previousButton
                     Layout.preferredWidth: 110
                     Layout.preferredHeight: 30
-                    text: "Previous"
+                    text: qsTr("Previous")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
                     fontWeight: Font.Normal

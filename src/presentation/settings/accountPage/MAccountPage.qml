@@ -65,7 +65,7 @@ MFlickWrapper {
 
                 MTitle {
                     id: pageTitle
-                    titleText: "Account"
+                    titleText: qsTr("Account")
                     descriptionText: UserController.firstName + " " + UserController.lastName
                     titleSize: Fonts.size25
                     descriptionSize: Fonts.size13dot25
@@ -82,7 +82,7 @@ MFlickWrapper {
                     Layout.alignment: Qt.AlignBottom
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
-                    text: "Save"
+                    text: qsTr("Save")
                     fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
@@ -124,7 +124,7 @@ MFlickWrapper {
 
                         Label {
                             id: profileTitle
-                            text: "Profile"
+                            text: qsTr("Profile")
                             color: Style.colorText
                             font.pointSize: Fonts.size16dot5
                             font.weight: Font.DemiBold
@@ -135,7 +135,7 @@ MFlickWrapper {
                             Layout.fillWidth: true
                             Layout.topMargin: 26
                             boxHeight: 40
-                            headerText: "First name"
+                            headerText: qsTr("First name")
                             text: internal.unsavedChanges ? text : UserController.firstName
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
@@ -150,7 +150,7 @@ MFlickWrapper {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             boxHeight: 40
-                            headerText: "Last name"
+                            headerText: qsTr("Last name")
                             text: internal.unsavedChanges ? text : UserController.lastName
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
@@ -165,7 +165,7 @@ MFlickWrapper {
                             Layout.fillWidth: true
                             Layout.topMargin: 18
                             boxHeight: 40
-                            headerText: "Email"
+                            headerText: qsTr("Email")
                             text: internal.unsavedChanges ? text : UserController.email
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
@@ -228,7 +228,7 @@ MFlickWrapper {
 
                     Label {
                         id: passwordTitle
-                        text: "Change password"
+                        text: qsTr("Change password")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -244,7 +244,7 @@ MFlickWrapper {
                             id: passwordInput
                             Layout.fillWidth: true
                             boxHeight: 40
-                            headerText: "Password"
+                            headerText: qsTr("Password")
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
                             borderWidth: 1
@@ -265,7 +265,7 @@ MFlickWrapper {
                             id: passwordConfirmationInput
                             Layout.fillWidth: true
                             boxHeight: 40
-                            headerText: "Password confirmation"
+                            headerText: qsTr("Password confirmation")
                             headerToBoxSpacing: 3
                             inputFontSize: Fonts.size13
                             borderWidth: 1
@@ -306,7 +306,7 @@ MFlickWrapper {
 
                     Label {
                         id: yourDataTitle
-                        text: "Your data"
+                        text: qsTr("Your data")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -317,7 +317,7 @@ MFlickWrapper {
                         Layout.topMargin: 30
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Analyse your reading to make better recommendations"
+                        text: qsTr("Analyse your reading to make better recommendations")
                         fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
@@ -331,7 +331,7 @@ MFlickWrapper {
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Anonymously share information about the books you read to help us improve Librum"
+                        text: qsTr("Anonymously share information about the books you read to help us improve Librum")
                         fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
@@ -345,7 +345,7 @@ MFlickWrapper {
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Collect data on crashes so that we can prevent it from happening again"
+                        text: qsTr("Collect data on crashes so that we can prevent it from happening again")
                         fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
@@ -358,7 +358,7 @@ MFlickWrapper {
                         Layout.topMargin: 16
                         boxWidth: 21
                         boxHeight: 21
-                        text: "Collect data to display in your statistics"
+                        text: qsTr("Collect data to display in your statistics")
                         fontSize: Fonts.size13
                         fontColor: Style.colorText
                         spacing: 12
@@ -389,7 +389,7 @@ MFlickWrapper {
 
                     Label {
                         id: yourAccountTitle
-                        text: "Your Account"
+                        text: qsTr("Your Account")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -404,7 +404,7 @@ MFlickWrapper {
                         borderColor: Style.colorButtonBorder
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
-                        text: "Logout"
+                        text: qsTr("Logout")
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: Fonts.size12
@@ -424,7 +424,7 @@ MFlickWrapper {
                         borderColor: Style.colorErrorBorder
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
-                        text: "Delete Your Account"
+                        text: qsTr("Delete Your Account")
                         textColor: Style.colorErrorText
                         fontWeight: Font.Bold
                         fontSize: Fonts.size12
@@ -459,10 +459,10 @@ MFlickWrapper {
         y: Math.round(
                root.height / 2 - implicitHeight / 2 - (root.height > implicitHeight + 80 ? 80 : 0))
         visible: false
-        title: "Whoops"
-        message: "It looks like you forgot to save your changes, are you sure that you dont want to save them?"
-        leftButtonText: "Save"
-        rightButtonText: "Don't save"
+        title: qsTr("Whoops")
+        message: qsTr("It looks like you forgot to save your changes, are you sure that you dont want to save them?")
+        leftButtonText: qsTr("Save")
+        rightButtonText: qsTr("Don't save")
         buttonsWidth: 120
 
         onOpenedChanged: if (opened)
@@ -499,10 +499,10 @@ MFlickWrapper {
             if (passwordInput.text === passwordConfirmationInput.text) {
                 UserController.changePassword(passwordInput.text)
             } else {
-                passwordInput.errorText = "Passwords don't match!"
+                passwordInput.errorText = qsTr("Passwords don't match!")
                 passwordInput.setError()
 
-                passwordConfirmationInput.errorText = "Passwords don't match!"
+                passwordConfirmationInput.errorText = qsTr("Passwords don't match!")
                 passwordConfirmationInput.setError()
             }
         }

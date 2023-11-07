@@ -30,6 +30,7 @@ Item {
     property bool centerContentHorizontally: true
 
     implicitHeight: 30
+    implicitWidth: layout.implicitWidth
 
     signal clicked
 

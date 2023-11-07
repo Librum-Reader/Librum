@@ -45,7 +45,7 @@ Item {
                     color: Style.colorText
                     font.pointSize: Fonts.size12
                     font.weight: Font.Normal
-                    placeholderText: "Add a tag..."
+                    placeholderText: qsTr("Add a tag...")
                     placeholderTextColor: Style.colorPlaceholderText
                     background: Rectangle {
                         anchors.fill: parent
@@ -115,7 +115,7 @@ Item {
             id: addLabel
             Layout.fillHeight: true
             verticalAlignment: Text.AlignVCenter
-            text: "ADD"
+            text: qsTr("ADD")
             opacity: mouseArea.pressed ? 0.8 : 1
             color: Style.colorBasePurple
             font.pointSize: Fonts.size12

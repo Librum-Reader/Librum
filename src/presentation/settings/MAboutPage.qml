@@ -30,8 +30,8 @@ MFlickWrapper {
             MTitle {
                 id: pageTitle
                 Layout.topMargin: 64
-                titleText: "About"
-                descriptionText: "About this application"
+                titleText: qsTr("About")
+                descriptionText: qsTr("About this application")
                 titleSize: Fonts.size25
                 descriptionSize: Fonts.size13dot25
             }
@@ -57,7 +57,7 @@ MFlickWrapper {
 
                     Label {
                         id: detailsTitle
-                        text: "Details"
+                        text: qsTr("Details")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -65,7 +65,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 15
-                        text: "CURRENT VERSION"
+                        //: Keep it capitalized
+                        text: qsTr("CURRENT VERSION")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -80,7 +81,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 12
-                        text: "QT VERSION"
+                        //: Keep it capitalized
+                        text: qsTr("QT VERSION")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -101,7 +103,7 @@ MFlickWrapper {
                         backgroundColor: Style.colorGreenBackground
                         imagePath: Icons.checkGreen
                         imageSize: 20
-                        text: "Up-to date"
+                        text: qsTr("Up-to date")
                         fontSize: Fonts.size10dot5
                         textColor: Style.colorGreenText
                         imageSpacing: 6
@@ -133,7 +135,7 @@ MFlickWrapper {
 
                     Label {
                         id: creatorTitle
-                        text: "Creator"
+                        text: qsTr("Creator")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -141,7 +143,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 18
-                        text: "COMPANY NAME"
+                        //: Keep it capitalized
+                        text: qsTr("COMPANY NAME")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -156,7 +159,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 12
-                        text: "WEBSITE"
+                        //: Keep it capitalized
+                        text: qsTr("WEBSITE")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -180,7 +184,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 12
-                        text: "CONTACT"
+                        //: Keep it capitalized
+                        text: qsTr("CONTACT")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -205,7 +210,8 @@ MFlickWrapper {
 
                     Label {
                         Layout.topMargin: 12
-                        text: "GITHUB"
+                        //: Keep it capitalized
+                        text: qsTr("GITHUB")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.weight: Font.Bold
@@ -251,7 +257,7 @@ MFlickWrapper {
 
                     Label {
                         id: thisAppTitle
-                        text: "This App"
+                        text: qsTr("This App")
                         color: Style.colorText
                         font.pointSize: Fonts.size16dot5
                         font.weight: Font.DemiBold
@@ -274,7 +280,7 @@ MFlickWrapper {
                             id: thisAppText
                             Layout.fillWidth: true
                             Layout.leftMargin: 22
-                            text: "Librum is here for everyone who just wants to enjoy a good book.\n" + "We hope you have a great time using it! Feel free to leave us a rating and some feedback."
+                            text: qsTr("Librum is here for everyone who just wants to enjoy a good book.\n" + "We hope you have a great time using it! Feel free to leave us a rating and some feedback.")
                             wrapMode: Text.WordWrap
                             color: Style.colorText
                             font.pointSize: Fonts.size14

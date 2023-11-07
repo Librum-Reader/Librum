@@ -57,14 +57,14 @@ Popup {
                 id: popupTitle
                 Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: 100
-                text: "Updating"
+                text: qsTr("Updating")
                 font.weight: Font.Bold
                 font.pointSize: Fonts.size22
                 color: Style.colorBasePurple
             }
 
             Label {
-                text: "Downloading..."
+                text: qsTr("Downloading") + "..."
                 font.pointSize: Fonts.size14
                 color: Style.colorText
             }

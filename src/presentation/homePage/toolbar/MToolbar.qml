@@ -64,7 +64,7 @@ Item {
         MRemoveOptionButton {
             id: resetFiltersButton
             visible: false
-            text: "Remove Filters"
+            text: qsTr("Remove Filters")
 
             onClicked: root.resetFilters()
         }
@@ -77,7 +77,7 @@ Item {
         MRemoveOptionButton {
             id: resetTagsButton
             visible: false
-            text: "Remove Tags"
+            text: qsTr("Remove Tags")
 
             onClicked: root.resetTags()
         }
@@ -143,14 +143,14 @@ Item {
     MToolTip {
         id: offlineToolTip
         focusedItem: isOfflineIndicator
-        content: "You are offline"
+        content: qsTr("You are offline")
     }
 
     MToolTip {
         id: librarySyncingToolTip
         focusedItem: loadingAnimation
         xOffset: 16
-        content: "Your library is being synchronized with the cloud"
+        content: qsTr("Your library is being synchronized with the cloud")
     }
 
     function resetFilters() {

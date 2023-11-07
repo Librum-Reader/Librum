@@ -36,8 +36,8 @@ Page {
 
             MTitle {
                 id: pageTitle
-                titleText: "Shortcuts"
-                descriptionText: "Make your own experience"
+                titleText: qsTr("Shortcuts")
+                descriptionText: qsTr("Make your own experience")
                 titleSize: Fonts.size25
                 descriptionSize: Fonts.size13dot25
             }
@@ -54,7 +54,7 @@ Page {
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                text: "Edit shortcut"
+                text: qsTr("Edit shortcut")
                 textColor: Style.colorFocusedButtonText
                 fontWeight: Font.Bold
                 fontSize: Fonts.size13
@@ -102,7 +102,8 @@ Page {
                     Label {
                         id: actionsLabel
                         Layout.leftMargin: 12
-                        text: "ACTION"
+                        //: Keep it capitalized
+                        text: qsTr("ACTION")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.bold: true
@@ -115,7 +116,8 @@ Page {
 
                     Label {
                         id: shortcutsLabel
-                        text: "SHORTCUTS"
+                        //: Keep it capitalized
+                        text: qsTr("SHORTCUTS")
                         color: Style.colorLightText
                         font.pointSize: Fonts.size10dot25
                         font.bold: true

@@ -30,8 +30,8 @@ Page {
             MTitle {
                 id: pageTitle
                 Layout.topMargin: 64
-                titleText: "Appearance"
-                descriptionText: "Make your own experience"
+                titleText: qsTr("Appearance")
+                descriptionText: qsTr("Make your own experience")
                 titleSize: Fonts.size25
                 descriptionSize: Fonts.size13dot25
             }
@@ -47,7 +47,7 @@ Page {
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
-                text: "Restore Defaults"
+                text: qsTr("Restore Defaults")
                 fontSize: Fonts.size12
                 fontWeight: Font.Bold
                 textColor: Style.colorFocusedButtonText
@@ -70,7 +70,7 @@ Page {
 
             ScrollBar.vertical: ScrollBar {
                 width: 10
-                policy: "AlwaysOn"
+                policy: ScrollBar.AlwaysOn
             }
 
             ColumnLayout {
@@ -101,7 +101,7 @@ Page {
                         Label {
                             id: displayTitle
                             Layout.fillWidth: true
-                            text: "Display"
+                            text: qsTr("Display")
                             font.pointSize: Fonts.size17
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -111,7 +111,7 @@ Page {
                             id: themeTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Theme"
+                            text: qsTr("Theme")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -122,8 +122,8 @@ Page {
                             property string savedValue: SettingsController.appearanceSettings.Theme
 
                             Layout.topMargin: 4
-                            leftText: "Dark"
-                            rightText: "Light"
+                            leftText: qsTr("Dark")
+                            rightText: qsTr("Light")
                             leftSelected: savedValue === leftText
                             rightSelected: savedValue === rightText
 
@@ -138,7 +138,7 @@ Page {
                             id: pageColorModeTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Page Color Mode"
+                            text: qsTr("Page Color Mode")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -149,8 +149,8 @@ Page {
                             property string savedValue: SettingsController.appearanceSettings.PageColorMode
 
                             Layout.topMargin: 4
-                            leftText: "Normal"
-                            rightText: "Inverted"
+                            leftText: qsTr("Normal")
+                            rightText: qsTr("Inverted")
                             leftSelected: savedValue === leftText
                             rightSelected: savedValue === rightText
 
@@ -185,7 +185,7 @@ Page {
                         Label {
                             id: readingTitle
                             Layout.fillWidth: true
-                            text: "Reading"
+                            text: qsTr("Reading")
                             font.pointSize: Fonts.size17
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -195,7 +195,7 @@ Page {
                             id: pageSpacingTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Page spacing"
+                            text: qsTr("Page spacing")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -222,7 +222,7 @@ Page {
                             id: docTitleDisplayTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Display book title in titlebar"
+                            text: qsTr("Display book title in titlebar")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -247,7 +247,7 @@ Page {
                             id: layoutDirectionTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Layout direction"
+                            text: qsTr("Layout direction")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -259,7 +259,7 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: ["Vertical", "Horizontal"]
+                            options: [qsTr("Vertical"), qsTr("Horizontal")]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -275,7 +275,7 @@ Page {
                             id: displayModeTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Display mode"
+                            text: qsTr("Display mode")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -287,7 +287,7 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: ["Single Page", "Double Page"]
+                            options: [qsTr("Single Page"), qsTr("Double Page")]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -303,7 +303,7 @@ Page {
                             id: pageTransitionTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Page transition"
+                            text: qsTr("Page transition")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -327,16 +327,16 @@ Page {
                             maxHeight: 200
                             model: ListModel {
                                 ListElement {
-                                    text: "Instant"
+                                    text: qsTr("Instant")
                                 }
                                 ListElement {
-                                    text: "Fading"
+                                    text: qsTr("Fading")
                                 }
                                 ListElement {
-                                    text: "Swipe"
+                                    text: qsTr("Swipe")
                                 }
                                 ListElement {
-                                    text: "Swap"
+                                    text: qsTr("Swap")
                                 }
                             }
 
@@ -365,7 +365,7 @@ Page {
                             id: defaultZoomTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Default Zoom"
+                            text: qsTr("Default Zoom")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -411,7 +411,7 @@ Page {
                         Label {
                             id: highlightsTitle
                             Layout.fillWidth: true
-                            text: "Highlights"
+                            text: qsTr("Highlights")
                             font.pointSize: Fonts.size17
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -420,7 +420,7 @@ Page {
                         Label {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Colors"
+                            text: qsTr("Colors")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -539,7 +539,7 @@ Page {
                         Label {
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Opacity"
+                            text: qsTr("Opacity")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -606,7 +606,7 @@ Page {
                         Label {
                             id: behaviorTitle
                             Layout.fillWidth: true
-                            text: "Behavior"
+                            text: qsTr("Behavior")
                             font.pointSize: Fonts.size17
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -616,7 +616,7 @@ Page {
                             id: smoothScrollingTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 24
-                            text: "Smooth scrolling"
+                            text: qsTr("Smooth scrolling")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -641,7 +641,7 @@ Page {
                             id: loopAfterLastTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Loop after last page"
+                            text: qsTr("Loop after last page")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -666,7 +666,7 @@ Page {
                             id: cursorModeTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Cursor mode"
+                            text: qsTr("Cursor mode")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -678,7 +678,7 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: ["Hidden after delay", "Always visible"]
+                            options: [qsTr("Hidden after delay"), qsTr("Always visible")]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -702,10 +702,10 @@ Page {
         y: Math.round(
                root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
         visible: false
-        title: "Reset settings?"
-        message: "Resetting your settings is a permanent action, there\n will be no way to restore them!"
-        leftButtonText: "No, Keep"
-        rightButtonText: "Yes, Reset"
+        title: qsTr("Reset settings?")
+        message: qsTr("Resetting your settings is a permanent action, there\n will be no way to restore them!")
+        leftButtonText: qsTr("No, Keep")
+        rightButtonText: qsTr("Yes, Reset")
         buttonsWidth: 180
         messageBottomSpacing: 10
 

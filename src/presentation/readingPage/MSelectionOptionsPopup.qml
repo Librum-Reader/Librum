@@ -125,7 +125,7 @@ Popup {
 
         SelectionOptionsPopupItem {
             id: copyAction
-            text: "Copy"
+            text: qsTr("Copy")
             clickedFunction: function () {
                 if (root.highlight == "")
                     activeFocusItem.copySelectedText()
@@ -138,7 +138,7 @@ Popup {
 
         SelectionOptionsPopupItem {
             id: highlightAction
-            text: "Highlight"
+            text: qsTr("Highlight")
             clickedFunction: function () {
                 // We do not want to create a new highlight when clicking on
                 // one and selecting the "Highlight" option to edit it.
@@ -155,7 +155,7 @@ Popup {
 
         SelectionOptionsPopupItem {
             id: lookUpAction
-            text: "Look Up"
+            text: qsTr("Look Up")
             clickedFunction: function () {
                 let text = ""
                 if (root.highlight == "")
@@ -239,7 +239,7 @@ Popup {
 
         SelectionOptionsPopupItem {
             id: explainAction
-            text: "Explain"
+            text: qsTr("Explain")
             clickedFunction: function () {
                 let text = ""
                 if (root.highlight == "")
@@ -259,7 +259,7 @@ Popup {
         SelectionOptionsPopupItem {
             id: removeAction
             width: visible ? implicitWidth : 0
-            text: "Remove"
+            text: qsTr("Remove")
             textColor: Style.colorErrorText
             visible: root.highlight != ""
 

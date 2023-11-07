@@ -6,8 +6,8 @@ import Librum.fonts
 
 Item {
     id: root
-    property string titleText: "Title"
-    property string descriptionText: "Description"
+    property string titleText: qsTr("Title")
+    property string descriptionText: qsTr("Description")
     property double titleSize: Fonts.size28
     property double descriptionSize: Fonts.size14
 

@@ -28,7 +28,7 @@ Item {
     property double headerFontSize: Fonts.size10dot5
     property color headerFontColor: Style.colorLightText
 
-    property string emptyText: "Any"
+    property string emptyText: qsTr("Any")
     property double selectedItemFontSize: Fonts.size11
     property color selectedItemFontColor: Style.colorText
     property int selectedItemPadding: 0

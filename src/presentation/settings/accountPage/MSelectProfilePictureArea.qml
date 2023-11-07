@@ -104,7 +104,7 @@ Item {
                         Layout.fillWidth: true
                         Layout.maximumWidth: 237
                         Layout.alignment: Qt.AlignCenter
-                        text: "Click to select an image or drop it into in this area"
+                        text: qsTr("Click to select an image or drop it into in this area")
                         horizontalAlignment: Qt.AlignHCenter
                         wrapMode: Text.WordWrap
                         color: Style.colorSubtitle
@@ -152,7 +152,7 @@ Item {
         id: fileDialog
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
-        nameFilters: ["All files (*)", "png files (*.png)", "jpg files (*.jpg)", "jpeg files (*.jpeg)"]
+        nameFilters: [qsTr("All files")+ " (*)", "png " + qsTr("files") + " (*.png)", "jpeg " + qsTr("files") + " (*.jpeg)"]
 
         onAccepted: root.currentImage = file
     }

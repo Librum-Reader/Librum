@@ -35,8 +35,8 @@ MFlickWrapper {
                 MTitle {
                     id: pageTitle
                     Layout.topMargin: 64
-                    titleText: "General settings"
-                    descriptionText: "Change the way Librum works"
+                    titleText: qsTr("General settings")
+                    descriptionText: qsTr("Change the way Librum works")
                     titleSize: Fonts.size25
                     descriptionSize: Fonts.size13dot25
                 }
@@ -52,7 +52,7 @@ MFlickWrapper {
                     Layout.alignment: Qt.AlignBottom
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
-                    text: "Restore Defaults"
+                    text: qsTr("Restore Defaults")
                     fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
@@ -82,7 +82,7 @@ MFlickWrapper {
                     Label {
                         id: downloadTitle
                         Layout.fillWidth: true
-                        text: "Books"
+                        text: qsTr("Books")
                         font.pointSize: Fonts.size17
                         font.weight: Font.DemiBold
                         color: Style.colorText
@@ -92,7 +92,7 @@ MFlickWrapper {
                         id: openBookAfterCreationTitle
                         Layout.fillWidth: true
                         Layout.topMargin: 24
-                        text: "Open books after creation"
+                        text: qsTr("Open books after creation")
                         font.pointSize: Fonts.size13
                         font.weight: Font.DemiBold
                         color: Style.colorText
@@ -124,10 +124,10 @@ MFlickWrapper {
         y: Math.round(
                root.height / 2 - implicitHeight / 2 - page.topPadding - 50)
         visible: false
-        title: "Reset settings?"
-        message: "Resetting your settings is a permanent action, there\n will be no way to restore them!"
-        leftButtonText: "No, Keep"
-        rightButtonText: "Yes, Reset"
+        title: qsTr("Reset settings?")
+        message: qsTr("Resetting your settings is a permanent action, there\n will be no way to restore them!")
+        leftButtonText: qsTr("No, Keep")
+        rightButtonText: qsTr("Yes, Reset")
         buttonsWidth: 180
         messageBottomSpacing: 10
 

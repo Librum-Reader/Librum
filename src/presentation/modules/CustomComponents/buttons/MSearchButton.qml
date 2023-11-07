@@ -51,7 +51,7 @@ Item {
                 leftPadding: 12
                 color: Style.colorBaseInputText
                 font.pointSize: Fonts.size12
-                placeholderText: "Search for Book"
+                placeholderText: qsTr("Search for Book")
                 placeholderTextColor: Style.colorPlaceholderText
                 selectByMouse: true
                 background: Rectangle {

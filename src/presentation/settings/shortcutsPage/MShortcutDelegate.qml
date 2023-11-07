@@ -62,7 +62,7 @@ Item {
                 id: shortcutValue
                 Layout.preferredWidth: 172
                 Layout.alignment: Qt.AlignVCenter
-                text: root.value.length > 0 ? root.value : "None"
+                text: root.value.length > 0 ? root.value : qsTr("None")
                 color: Style.colorText
                 opacity: valueLabelArea.pressed ? 0.6 : 1
                 font.pointSize: Fonts.size12

@@ -113,7 +113,7 @@ Popup {
                         Layout.topMargin: 1
                         boxHeight: 19
                         boxWidth: 19
-                        text: "Read out (TTS)"
+                        text: qsTr("Read out (TTS)")
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
@@ -127,7 +127,7 @@ Popup {
                         boxHeight: 19
                         boxWidth: 19
                         verticalTextOffset: 1
-                        text: "Continuous pages"
+                        text: qsTr("Continuous pages")
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
@@ -142,7 +142,7 @@ Popup {
                         boxHeight: 19
                         boxWidth: 19
                         verticalTextOffset: 1
-                        text: "Display vertically"
+                        text: qsTr("Display vertically")
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
                         fontColor: Style.colorText
@@ -174,7 +174,7 @@ Popup {
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
                         borderWidth: 0
-                        text: "Invert colors"
+                        text: qsTr("Invert colors")
                         textColor: Style.colorText
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
@@ -187,10 +187,10 @@ Popup {
                             let value = ""
 
                             let current = SettingsController.appearanceSettings.PageColorMode
-                            if (current === "Normal")
-                                value = "Inverted"
+                            if (current === qsTr("Normal"))
+                                value = qsTr("Inverted")
                             else
-                                value = "Normal"
+                                value = qsTr("Normal")
 
                             SettingsController.setSetting(
                                         SettingKeys.PageColorMode, value,
@@ -206,7 +206,7 @@ Popup {
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
                         borderWidth: 0
-                        text: "Sync book"
+                        text: qsTr("Sync book")
                         textColor: Style.colorText
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
@@ -224,7 +224,7 @@ Popup {
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
                         borderWidth: 0
-                        text: "More options"
+                        text: qsTr("More options")
                         textColor: Style.colorText
                         fontSize: Fonts.size12
                         fontWeight: Font.Medium
@@ -245,7 +245,7 @@ Popup {
 
     FileDialog {
         id: downloadFileDialog
-        acceptLabel: "Save"
+        acceptLabel: qsTr("Save")
         fileMode: FileDialog.SaveFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
     }

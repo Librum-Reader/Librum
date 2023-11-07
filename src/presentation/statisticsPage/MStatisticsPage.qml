@@ -19,7 +19,7 @@ Page {
         id: title
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: topSpacer.bottom
-        text: "Statistics Page"
+        text: qsTr("Statistics Page")
         color: Style.colorTitle
         font.pointSize: Fonts.size22
         font.bold: true
@@ -30,7 +30,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: title.bottom
         anchors.topMargin: 6
-        text: "Currently in Development"
+        text: qsTr("Currently in Development")
         color: Style.colorPageSubtitle
         font.pointSize: Fonts.size16
         font.bold: true

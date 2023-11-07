@@ -21,8 +21,8 @@ Item
     {
         id: dualToggle
         anchors.fill: parent
-        leftText: "OFF"
-        rightText: "ON"
+        leftText: qsTr("OFF")
+        rightText: qsTr("ON")
         leftSelected: !onByDefault
         rightSelected: onByDefault
         

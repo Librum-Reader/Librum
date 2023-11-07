@@ -34,7 +34,7 @@ Item {
             Label {
                 id: newUpdateTitle
                 Layout.fillWidth: true
-                text: "You are up to date!"
+                text: qsTr("You are up to date!")
                 wrapMode: Text.WordWrap
                 color: Style.colorText
                 font.pointSize: Fonts.size23
@@ -44,7 +44,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 7
-                text: "Make sure to check for updates regularly, so you dont miss out on any great features."
+                text: qsTr("Make sure to check for updates regularly, so you dont miss out on any great features.")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size15
@@ -53,7 +53,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 24
-                text: "Your current version is:"
+                text: qsTr("Your current version is:")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size14
@@ -81,7 +81,7 @@ Item {
             Label {
                 Layout.fillWidth: true
                 Layout.topMargin: 32
-                text: "See our latest changes at:"
+                text: qsTr("See our latest changes at:")
                 wrapMode: Text.WordWrap
                 color: Style.colorLightText
                 font.pointSize: Fonts.size13dot5

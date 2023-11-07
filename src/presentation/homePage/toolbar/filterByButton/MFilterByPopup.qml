@@ -69,10 +69,10 @@ Popup {
                         Layout.fillWidth: true
                         boxHeight: 30
                         headerToBoxSpacing: 2
-                        placeholderContent: "e.g. Uncle bob"
+                        placeholderContent: qsTr("e.g. Uncle bob")
                         inputFontSize: Fonts.size11
                         placeholderColor: Style.colorPlaceholderText
-                        headerText: "Authors"
+                        headerText: qsTr("Authors")
                         headerFontSize: Fonts.size10dot5
                         headerFontWeight: Font.Bold
                         headerFontColor: Style.colorLightText
@@ -96,10 +96,10 @@ Popup {
                                 Layout.topMargin: 2
                                 boxHeight: 30
                                 headerToBoxSpacing: 2
-                                placeholderContent: "e.g. 2d ago"
+                                placeholderContent: qsTr("e.g. 2d ago")
                                 inputFontSize: Fonts.size11
                                 placeholderColor: Style.colorPlaceholderText
-                                headerText: "Added"
+                                headerText: qsTr("Added")
                                 headerFontSize: Fonts.size10dot5
                                 headerFontWeight: Font.Bold
                                 headerFontColor: Style.colorLightText
@@ -115,7 +115,7 @@ Popup {
                                 boxWidth: 17
                                 boxHeight: 17
                                 spacing: 7
-                                text: "Read"
+                                text: qsTr("Read")
                                 fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
@@ -133,7 +133,7 @@ Popup {
                                 boxWidth: 17
                                 boxHeight: 17
                                 spacing: 7
-                                text: "Unread"
+                                text: qsTr("Unread")
                                 fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
@@ -154,8 +154,8 @@ Popup {
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 49
                                 Layout.topMargin: 2
-                                headerText: "Format"
-                                emptyText: "Any"
+                                headerText: qsTr("Format")
+                                emptyText: qsTr("Any")
                                 dropdownIconSize: 9
 
                                 checkBoxStyle: false
@@ -165,16 +165,16 @@ Popup {
                                 fontSize: Fonts.size11
                                 model: ListModel {
                                     ListElement {
-                                        text: "Pdf"
+                                        text: qsTr("Pdf")
                                     }
                                     ListElement {
-                                        text: "Epub"
+                                        text: qsTr("Epub")
                                     }
                                     ListElement {
-                                        text: "Mobi"
+                                        text: qsTr("Mobi")
                                     }
                                     ListElement {
-                                        text: "Txt"
+                                        text: qsTr("Txt")
                                     }
                                 }
 
@@ -188,7 +188,7 @@ Popup {
                                 boxWidth: 17
                                 boxHeight: 17
                                 spacing: 7
-                                text: "Only Books"
+                                text: qsTr("Only Books")
                                 fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
@@ -206,7 +206,7 @@ Popup {
                                 boxWidth: 17
                                 boxHeight: 17
                                 spacing: 7
-                                text: "Only Files"
+                                text: qsTr("Only Files")
                                 fontSize: Fonts.size10dot5
                                 fontWeight: Font.Normal
                                 fontColor: Style.colorLightText
@@ -227,7 +227,7 @@ Popup {
                         radius: 3
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
-                        text: "Apply Filter"
+                        text: qsTr("Apply Filter")
                         fontSize: Fonts.size10dot5
                         textColor: Style.colorFocusedButtonText
                         fontWeight: Font.Bold

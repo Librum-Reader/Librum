@@ -101,7 +101,7 @@ Popup {
                     color: Style.colorBaseInputText
                     text: root.word
                     font.pointSize: Fonts.size11
-                    placeholderText: "Search"
+                    placeholderText: qsTr("Search")
                     placeholderTextColor: Style.colorPlaceholderText
                     selectByMouse: true
                     background: Rectangle {
@@ -353,7 +353,7 @@ Popup {
                         color: Style.colorText
                         Layout.alignment: Qt.AlignHCenter
                         font.pointSize: Fonts.size14
-                        text: "No definitions found"
+                        text: qsTr("No definitions found")
                     }
 
                     Label {
@@ -361,7 +361,7 @@ Popup {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 4
                         text: '<a href="update" style="color: ' + Style.colorBasePurple
-                              + '; text-decoration: underline;">Search online</a>'
+                              + '; text-decoration: underline;">' + qsTr('Search online') + '</a>'
                         textFormat: Text.StyledText
                         onLinkActivated: link => Qt.openUrlExternally(link)
                         font.pointSize: Fonts.size14
@@ -391,7 +391,8 @@ Popup {
         anchors.bottomMargin: -21
         anchors.rightMargin: 2
         horizontalAlignment: Text.AlignRight
-        text: 'Source: <a href="https://wiktionary.org" style="text-decoration: none; color: '
+        // Context: The "source" of a translation. So like "Source: https://wiktionaty.org/..."
+        text: qsTr('Source') + ': <a href="https://wiktionary.org" style="text-decoration: none; color: '
               + Style.colorBasePurple + ';">Wiktionary</a>'
         textFormat: Text.StyledText
         font.pointSize: Fonts.size9

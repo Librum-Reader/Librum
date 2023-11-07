@@ -32,7 +32,8 @@ Item {
                 id: header
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
-                text: "Contents"
+                //: Context: Contents of the book, also known as outline
+                text: qsTr("Contents")
                 font.pointSize: Fonts.size14
                 font.weight: Font.Medium
                 color: Style.colorText
@@ -57,7 +58,7 @@ Item {
                     color: Style.colorText
                     font.pointSize: Fonts.size11
                     font.weight: Font.Normal
-                    placeholderText: "Search..."
+                    placeholderText: qsTr("Search") + "..."
                     placeholderTextColor: Style.colorPlaceholderText
                     background: Rectangle {
                         anchors.fill: parent

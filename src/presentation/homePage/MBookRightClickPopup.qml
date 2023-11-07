@@ -32,7 +32,7 @@ MRightClickMenu
             visible: !internal.bookDownloaded
             imagePath: Icons.bookPopupDownload
             imageSize: 18
-            text: "Download"
+            text: qsTr("Download")
             
             onClicked: root.downloadClicked()
         }
@@ -44,7 +44,7 @@ MRightClickMenu
             visible: internal.bookDownloaded
             imagePath: Icons.bookPopupRead
             imageSize: 17
-            text: "Read book"
+            text: qsTr("Read book")
             
             onClicked: root.readBookClicked()
         }
@@ -54,7 +54,7 @@ MRightClickMenu
             width: root.width
             imagePath: Icons.bookPopupDetails
             imageSize: 14
-            text: "Book details"
+            text: qsTr("Book details")
             
             onClicked: root.bookDetailsClicked()
         }
@@ -67,7 +67,7 @@ MRightClickMenu
             Layout.bottomMargin: 4
             imagePath: Icons.bookPopupSave
             imageSize: 14
-            text: "Save to files"
+            text: qsTr("Save to files")
             
             onClicked: root.saveToFilesClicked()
         }
@@ -84,7 +84,7 @@ MRightClickMenu
             Layout.topMargin: 4
             imagePath: Icons.bookPopupTags
             imageSize: 16
-            text: "Manage tags"
+            text: qsTr("Manage tags")
             
             onClicked: root.manageTagsClicked()
         }
@@ -94,7 +94,7 @@ MRightClickMenu
             width: root.width
             imagePath: Icons.bookPopupMarkAsRead
             imageSize: 17
-            text: "Mark as read"
+            text: qsTr("Mark as read")
             
             onClicked: root.markAsReadClicked()
         }
@@ -104,7 +104,7 @@ MRightClickMenu
             width: root.width
             imagePath: Icons.bookPopupDelete
             imageSize: 16
-            text: "Remove book"
+            text: qsTr("Remove book")
             
             onClicked: root.removeClicked()
         }

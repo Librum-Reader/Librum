@@ -45,7 +45,7 @@ Popup
             Layout.topMargin: 15
             Layout.leftMargin: 18
             image: Icons.sidebarSync
-            text: "Sync"
+            text: qsTr("Sync")
             imageWidth: 16
             textSpacing: 12
             
@@ -65,7 +65,7 @@ Popup
             Layout.topMargin: 15
             Layout.leftMargin: 16
             image: Icons.sidebarEmptyProfile
-            text: "Manage Profile"
+            text: qsTr("Manage Profile")
             imageWidth: 19
             textSpacing: 11
             
@@ -84,7 +84,7 @@ Popup
             Layout.topMargin: 15
             Layout.leftMargin: 15
             image: Icons.sidebarLogout
-            text: "Logout"
+            text: qsTr("Logout")
             imageWidth: 20
             textSpacing: 11
             

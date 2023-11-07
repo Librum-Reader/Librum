@@ -11,8 +11,8 @@ import Librum.fonts
  */
 Item {
     id: root
-    property string leftText: "Left"
-    property string rightText: "Right"
+    property string leftText: qsTr("Left")
+    property string rightText: qsTr("Right")
     property bool leftSelected: false
     property bool rightSelected: true // default
     signal toggled(string newSelected)

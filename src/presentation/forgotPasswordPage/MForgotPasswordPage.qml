@@ -72,7 +72,7 @@ MFlickWrapper {
                         id: forgotPasswordText
                         Layout.alignment: Qt.AlignHCenter
                         Layout.topMargin: 32
-                        text: "Forgot Password"
+                        text: qsTr("Forgot Password")
                         color: Style.colorText
                         font.bold: true
                         font.pointSize: Fonts.size19
@@ -84,7 +84,7 @@ MFlickWrapper {
                         Layout.topMargin: 8
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Qt.AlignHCenter
-                        text: "Enter your email and we'll send you a link to reset your password"
+                        text: qsTr("Enter your email and we'll send you a link to reset your password")
                         wrapMode: Text.WordWrap
                         color: Style.colorSubtitle
                         lineHeight: 1.1
@@ -127,7 +127,7 @@ MFlickWrapper {
                             Layout.alignment: Qt.AlignHCenter
                             borderWidth: 0
                             backgroundColor: Style.colorBasePurple
-                            text: "Send Email"
+                            text: qsTr("Send Email")
                             fontSize: Fonts.size12dot25
                             textColor: Style.colorFocusedButtonText
                             fontWeight: Font.Bold
@@ -137,7 +137,6 @@ MFlickWrapper {
 
                         MButton {
                             id: backButton
-                            Layout.preferredWidth: 145
                             Layout.preferredHeight: 42
                             Layout.alignment: Qt.AlignHCenter
                             Layout.topMargin: 18
@@ -145,7 +144,7 @@ MFlickWrapper {
                             borderWidth: 0
                             backgroundColor: "transparent"
                             opacityOnPressed: 0.7
-                            text: "Back to Login"
+                            text: qsTr("Back to Login")
                             fontSize: Fonts.size12
                             fontWeight: Font.Medium
                             textColor: Style.colorUnfocusedButtonText
@@ -171,7 +170,7 @@ MFlickWrapper {
 
             UserController.forgotPassword(emailInput.text)
 
-            successText.text = "Email sent! Keep an eye on your inbox."
+            successText.text = qsTr("Email sent! Keep an eye on your inbox")
             successText.visible = true
             emailInput.clearText()
         }

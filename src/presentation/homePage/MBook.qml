@@ -171,7 +171,7 @@ Item {
                     Layout.preferredHeight: 34
                     Layout.topMargin: 5
                     clip: true
-                    text: model.title === "" ? "Unknown" : model.title
+                    text: model.title === "" ? qsTr("Unknown") : model.title
                     font.weight: Font.Medium
                     verticalAlignment: Text.AlignVCenter
                     color: Style.colorTitle
@@ -186,7 +186,7 @@ Item {
                     Layout.fillWidth: true
                     Layout.topMargin: 4
                     clip: true
-                    text: model.authors === "" ? "Unknown" : model.authors
+                    text: model.authors === "" ? qsTr("Unknown") : model.authors
                     color: Style.colorLightText
                     font.pointSize: Fonts.size10
                     elide: Text.ElideRight
@@ -285,7 +285,7 @@ Item {
     MToolTip {
         id: toolTip
         focusedItem: existsOnlyOnClientIndicator
-        content: "Your book has not been uploaded to the cloud.\nEither you are offline, or your storage is full."
+        content: qsTr("Your book has not been uploaded to the cloud.\nEither you are offline, or your storage is full.")
     }
 
     function giveFocus() {

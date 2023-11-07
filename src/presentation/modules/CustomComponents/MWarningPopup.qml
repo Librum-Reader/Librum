@@ -8,10 +8,10 @@ import Librum.fonts
 
 Popup {
     id: root
-    property string leftButtonText: "Accept"
-    property string rightButtonText: "Decline"
-    property string title: "Do you Accept?"
-    property string message: "This is a message"
+    property string leftButtonText: qsTr("Accept")
+    property string rightButtonText: qsTr("Decline")
+    property string title: qsTr("Do you Accept?")
+    property string message: qsTr("Message")
     property int buttonsWidth: 120
     property int messageBottomSpacing: 0
     property bool singleButton: false

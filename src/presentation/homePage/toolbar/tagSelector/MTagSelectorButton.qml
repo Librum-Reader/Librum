@@ -40,7 +40,7 @@ Item {
                 id: tagLabel
                 Layout.topMargin: -1
                 color: Style.colorText
-                text: "Tags"
+                text: qsTr("Tags")
                 font.pointSize: Fonts.size12
                 font.weight: Font.Bold
             }

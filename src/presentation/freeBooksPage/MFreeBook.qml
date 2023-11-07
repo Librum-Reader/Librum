@@ -125,7 +125,7 @@ Item {
                     id: noImageLabel
                     Layout.alignment: Qt.AlignCenter
                     visible: bookCover.source == ""
-                    text: ".jpeg"
+                    text: qsTr(".jpeg")
                     color: Style.colorNoImageLabel
                     font.pointSize: Fonts.size20
                     font.bold: true

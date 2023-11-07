@@ -26,7 +26,7 @@ Item {
                 id: header
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 26
-                text: "Bookmarks"
+                text: qsTr("Bookmarks")
                 font.pointSize: Fonts.size14
                 font.weight: Font.Medium
                 color: Style.colorText
@@ -51,7 +51,7 @@ Item {
                     color: Style.colorText
                     font.pointSize: Fonts.size11
                     font.weight: Font.Normal
-                    placeholderText: "Search..."
+                    placeholderText: qsTr("Search") + "..."
                     placeholderTextColor: Style.colorPlaceholderText
                     background: Rectangle {
                         anchors.fill: parent
@@ -134,12 +134,12 @@ Item {
                 borderColor: Style.colorButtonBorder
                 opacityOnPressed: 0.7
                 radius: 4
-                text: "Add Bookmark"
+                text: qsTr("Add Bookmark")
                 imageSize: 12
 
                 onClicked: {
                     let uuid = BookController.addBookmark(
-                            "New Bookmark", BookController.currentPage,
+                            qsTr("New Bookmark"), BookController.currentPage,
                             getYOffset())
                     bookmarksView.lastAddedUuid = uuid
                 }
@@ -156,7 +156,8 @@ Item {
                 width: bookmarkOptionsPopup.width
                 imagePath: Icons.checkCircle
                 imageSize: 17
-                text: "Follow"
+                //: Context: "Follow" the bookmark (go to its page)
+                text: qsTr("Follow")
 
                 onClicked: {
                     bookmarksView.currentItem.goToBookmark()
@@ -168,7 +169,7 @@ Item {
                 width: bookmarkOptionsPopup.width
                 imagePath: Icons.edit
                 imageSize: 17
-                text: "Rename"
+                text: qsTr("Rename")
 
                 onClicked: {
                     bookmarksView.currentItem.startRenaming()
@@ -180,7 +181,7 @@ Item {
                 width: bookmarkOptionsPopup.width
                 imagePath: Icons.trash
                 imageSize: 16
-                text: "Delete"
+                text: qsTr("Delete")
 
                 onClicked: {
                     BookController.removeBookmark(

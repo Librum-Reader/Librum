@@ -30,8 +30,8 @@ MFlickWrapper {
             MTitle {
                 id: pageTitle
                 Layout.topMargin: 64
-                titleText: "Updates"
-                descriptionText: "Any new update?"
+                titleText: qsTr("Updates")
+                descriptionText: qsTr("Any new update?")
                 titleSize: Fonts.size25
                 descriptionSize: Fonts.size13dot25
             }

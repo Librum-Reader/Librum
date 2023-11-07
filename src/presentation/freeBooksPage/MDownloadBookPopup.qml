@@ -79,7 +79,7 @@ Popup {
                     Label {
                         id: pageTitle
                         Layout.topMargin: 6
-                        text: "Download book"
+                        text: qsTr("Download book")
                         font.weight: Font.Bold
                         font.pointSize: Fonts.size19
                         color: Style.colorTitle

@@ -21,7 +21,8 @@ Item {
 
         Label {
             id: header
-            text: "Key"
+            //: As in key on the keyboard
+            text: qsTr("Key")
             font.weight: Font.DemiBold
             font.pointSize: Fonts.size12
             color: Style.colorTitle
@@ -99,7 +100,8 @@ Item {
             if (keySequenceRecorder.originalSequence)
                 return keySequenceRecorder.originalSequence
 
-            return "Press to record"
+            //: As in recording a key that is pressed on the keyboard
+            return qsTr("Press to record")
         }
     }
 

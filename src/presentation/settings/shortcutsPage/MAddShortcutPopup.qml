@@ -95,7 +95,7 @@ Popup {
 
                 Label {
                     id: popupTitle
-                    text: "Edit Shortcuts"
+                    text: qsTr("Edit Shortcuts")
                     font.weight: Font.Bold
                     font.pointSize: Fonts.size17
                     color: Style.colorTitle
@@ -112,14 +112,14 @@ Popup {
                         Layout.fillWidth: true
                         Layout.preferredHeight: 60
                         itemHeight: 32
-                        headerText: "Action"
+                        headerText: qsTr("Action")
                         headerFontSize: Fonts.size12
                         headerFontColor: Style.colorTitle
                         headerFontWeight: Font.DemiBold
                         selectedItemFontColor: Style.colorReadOnlyInputText
                         selectedItemFontSize: Fonts.size12
                         selectedItemPadding: 3
-                        emptyText: "None selected"
+                        emptyText: qsTr("None selected")
                         dropdownIconSize: 11
                         contentPropertyName: "shortcut"
 
@@ -155,8 +155,8 @@ Popup {
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 16
                     visible: false
-                    text: "The shortcut '" + recordKeyBox.text
-                          + "' is already used for '" + conflictingShortcut + "'."
+                    text: qsTr("The shortcut") + " '" + recordKeyBox.text
+                          + "' " + qsTr("is already used for") + " '" + conflictingShortcut + "'."
                     wrapMode: Text.WordWrap
                     font.pointSize: Fonts.size11
                     color: Style.colorErrorText
@@ -174,7 +174,7 @@ Popup {
                         active: true
                         borderWidth: active ? 0 : 1
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
-                        text: "Apply"
+                        text: qsTr("Apply")
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: Fonts.size12
@@ -208,7 +208,7 @@ Popup {
                         borderWidth: active ? 0 : 1
                         backgroundColor: active ? Style.colorBasePurple : "transparent"
                         opacityOnPressed: 0.7
-                        text: "Cancel"
+                        text: qsTr("Cancel")
                         textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: Fonts.size12

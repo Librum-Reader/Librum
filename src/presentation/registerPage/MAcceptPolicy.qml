@@ -44,12 +44,13 @@ Item {
             id: text
             Layout.fillWidth: true
             textFormat: Text.RichText
-            text: 'I accept the <a href="' + AppInfoController.website
+            //: Make sure to translate the following words together to make a logical sentence
+            text: qsTr('I accept the') + '<a href="' + AppInfoController.website
                   + '/TermsOfService " style="text-decoration: none; color: '
-                  + Style.colorBasePurple + ';">Terms of Service</a>'
-                  + ' and the <a href="' + AppInfoController.website
+                  + Style.colorBasePurple + ';"> ' + qsTr('Terms of Service') + '</a>'
+                  + ' ' + qsTr('and the') + ' <a href="' + AppInfoController.website
                   + '/privacypolicy " style="text-decoration: none; color: '
-                  + Style.colorBasePurple + ';">Privacy Policy</a>'
+                  + Style.colorBasePurple + ';">' + qsTr('Privacy Policy') + '</a>'
             onLinkActivated: link => Qt.openUrlExternally(link)
             wrapMode: Text.WordWrap
             font.pointSize: Fonts.size11

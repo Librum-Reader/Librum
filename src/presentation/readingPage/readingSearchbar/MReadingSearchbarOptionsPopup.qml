@@ -48,7 +48,7 @@ Popup {
                     spacing: 8
                     imageSize: 10
                     checked: BookController.searchFromStart
-                    text: "From start"
+                    text: qsTr("From start")
                     fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()
@@ -62,7 +62,7 @@ Popup {
                     spacing: 8
                     imageSize: 10
                     checked: BookController.searchCaseSensitive
-                    text: "Case sensitive"
+                    text: qsTr("Case sensitive")
                     fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()
@@ -76,7 +76,7 @@ Popup {
                     spacing: 8
                     imageSize: 10
                     checked: BookController.searchWholeWords
-                    text: "Whole words"
+                    text: qsTr("Whole words")
                     fontSize: Fonts.size12
 
                     onCheckedChanged: internal.updateSearchOptions()

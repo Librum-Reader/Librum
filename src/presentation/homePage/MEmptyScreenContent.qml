@@ -33,7 +33,7 @@ Item {
                 id: addBooksQuestion
                 Layout.preferredWidth: 250
                 Layout.alignment: Qt.AlignHCenter
-                text: "Quite empty here, what about adding your first book?"
+                text: qsTr("Quite empty here, what about adding your first book?")
                 horizontalAlignment: Text.AlignHCenter
                 font.pointSize: Fonts.size14
                 font.weight: Font.DemiBold
@@ -50,7 +50,7 @@ Item {
                 backgroundColor: Style.colorLightHighlight
                 opacityOnPressed: 0.75
                 borderColor: Style.colorContainerBorder
-                text: "Add book"
+                text: qsTr("Add book")
                 textColor: Style.colorBasePurple
                 fontWeight: Font.Bold
                 fontSize: Fonts.size14

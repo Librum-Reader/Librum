@@ -52,7 +52,7 @@ Item {
             Label {
                 Layout.topMargin: 28
                 Layout.leftMargin: 25
-                text: "Settings"
+                text: qsTr("Settings")
                 font.pointSize: Fonts.size19
                 font.bold: true
                 color: Style.colorTitle
@@ -70,7 +70,8 @@ Item {
             Label {
                 Layout.topMargin: 38
                 Layout.leftMargin: 25
-                text: "GLOBAL SETTINGS"
+                //: Keep it capitalized
+                text: qsTr("GLOBAL SETTINGS")
                 font.pointSize: Fonts.size10
                 font.weight: Font.Bold
                 color: Style.colorLightText
@@ -86,7 +87,7 @@ Item {
                 imageLeftMargin: 26
                 imageWidth: 14
                 labelLeftMargin: 12
-                textContent: "About"
+                textContent: qsTr("About")
                 defaultIcon: Icons.settingsSidebarAbout
                 selectedIcon: Icons.settingsSidebarAboutSelected
 
@@ -102,7 +103,7 @@ Item {
                 imageLeftMargin: 25
                 imageWidth: 18
                 labelLeftMargin: 8
-                textContent: "Appearance"
+                textContent: qsTr("Appearance")
                 defaultIcon: Icons.settingsSidebarAppearance
                 selectedIcon: Icons.settingsSidebarAppearanceSelected
 
@@ -118,7 +119,7 @@ Item {
                 imageLeftMargin: 26
                 imageWidth: 16
                 labelLeftMargin: 9
-                textContent: "Shortcuts"
+                textContent: qsTr("Shortcuts")
                 defaultIcon: Icons.settingsSidebarShortcuts
                 selectedIcon: Icons.settingsSidebarShortcutsSelected
 
@@ -134,7 +135,7 @@ Item {
                 imageLeftMargin: 25
                 imageWidth: 16
                 labelLeftMargin: 10
-                textContent: "Updates"
+                textContent: qsTr("Updates")
                 defaultIcon: Icons.settingsSidebarUpdates
                 selectedIcon: Icons.settingsSidebarUpdatesSelected
 
@@ -150,7 +151,7 @@ Item {
                 imageLeftMargin: 24
                 imageWidth: 19
                 labelLeftMargin: 8
-                textContent: "General Settings"
+                textContent: qsTr("General Settings")
                 defaultIcon: Icons.settingsSidebarSettings
                 selectedIcon: Icons.settingsSidebarSettingsSelected
 
@@ -161,7 +162,8 @@ Item {
             Label {
                 Layout.topMargin: 25
                 Layout.leftMargin: 25
-                text: "USER & ACCOUNT"
+                //: Keep it capitalized
+                text: qsTr("USER & ACCOUNT")
                 font.pointSize: Fonts.size10
                 font.bold: true
                 color: Style.colorLightText
@@ -177,7 +179,7 @@ Item {
                 imageWidth: 13
                 labelTopMargin: 2
                 labelLeftMargin: 13
-                textContent: "Account"
+                textContent: qsTr("Account")
                 defaultIcon: Icons.settingsSidebarAccount
                 selectedIcon: Icons.settingsSidebarAccountSelected
 
@@ -193,7 +195,7 @@ Item {
                 imageLeftMargin: 26
                 imageWidth: 14
                 labelLeftMargin: 11
-                textContent: "Storage"
+                textContent: qsTr("Storage")
                 defaultIcon: Icons.settingsSidebarStorage
                 selectedIcon: Icons.settingsSidebarStorageSelected
 
@@ -210,7 +212,7 @@ Item {
                 imageLeftMargin: 25
                 imageWidth: 18
                 labelLeftMargin: 8
-                textContent: "Support us"
+                textContent: qsTr("Support us")
                 defaultIcon: Icons.settingsSidebarSupportUs
                 selectedIcon: Icons.settingsSidebarSupportUsSelected
 

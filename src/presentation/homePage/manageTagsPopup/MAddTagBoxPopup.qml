@@ -95,7 +95,7 @@ Popup {
                 width: tagOptionsPopup.width
                 imagePath: Icons.plusSquare
                 imageSize: 17
-                text: "Add"
+                text: qsTr("Add")
 
                 onClicked: {
                     internal.selectItem(tagOptionsPopup.index)
@@ -107,7 +107,7 @@ Popup {
                 width: tagOptionsPopup.width
                 imagePath: Icons.edit
                 imageSize: 17
-                text: "Rename"
+                text: qsTr("Rename")
 
                 onClicked: internal.startRenamingTag(tagOptionsPopup.index)
             }
@@ -116,7 +116,7 @@ Popup {
                 width: tagOptionsPopup.width
                 imagePath: Icons.trash
                 imageSize: 16
-                text: "Delete"
+                text: qsTr("Delete")
 
                 onClicked: internal.deleteTag(tagOptionsPopup.index)
             }

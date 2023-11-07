@@ -46,14 +46,15 @@ Popup {
 
         function onLimitReached() {
             errorItem.visible = true
+            //: Make sure that the words make a valid sentence
             errorText.text
-                    = 'You have reached your daily limit. Click <a href="update" style="color: '
-                    + Style.colorBasePurple + '; text-decoration: none;">here</a> to learn more.'
+                    = qsTr('You have reached your daily limit.') + ' ' + qsTr('Click') + ' <a href="update" style="color: '
+                    + Style.colorBasePurple + '; text-decoration: none;">' + qsTr('here') + '</a> ' + qsTr('to learn more.')
         }
 
         function onRequestTooLong() {
             errorItem.visible = true
-            errorText.text = 'Oops! The text is too long. Please shorten your selection.'
+            errorText.text = qsTr('Oops! The text is too long. Please shorten your selection.')
         }
     }
 
@@ -61,23 +62,23 @@ Popup {
         id: explanationModes
 
         ListElement {
-            name: "Explain"
+            name: qsTr("Explain")
             query: "Shortly explain the following: "
         }
         ListElement {
-            name: "Explain like I'm five"
+            name: qsTr("Explain like I'm five")
             query: "Shortly explain the following like I am a kid: "
         }
         ListElement {
-            name: "Summarize"
+            name: qsTr("Summarize")
             query: "Shortly summarize the following: "
         }
         ListElement {
-            name: "Give more information"
+            name: qsTr("Give more information")
             query: "Shortly give more information on the following: "
         }
         ListElement {
-            name: "Explain visually"
+            name: qsTr("Explain visually")
             query: "Shortly explain the following visually: "
         }
     }
@@ -107,7 +108,7 @@ Popup {
             Layout.preferredHeight: 60
             itemHeight: 32
             selectedItemFontColor: Style.colorBaseInputText
-            headerText: "Mode"
+            headerText: qsTr("Mode")
             headerFontSize: Fonts.size12
             headerFontColor: Style.colorTitle
             headerFontWeight: Font.DemiBold
@@ -115,7 +116,7 @@ Popup {
             selectedItemFontSize: Fonts.size13
             selectedItemPadding: 3
             defaultIndex: 0
-            emptyText: "None selected"
+            emptyText: qsTr("None selected")
             dropdownIconSize: 11
             contentPropertyName: "name"
             checkBoxStyle: false
@@ -138,7 +139,7 @@ Popup {
             text: question
             backgroundColor: Style.colorContainerBackground
             inputFontSize: Fonts.size13
-            headerText: "Request"
+            headerText: qsTr("Request")
             readOnly: true
         }
 
@@ -277,7 +278,7 @@ Popup {
                 Label {
                     id: actionText
                     Layout.topMargin: -1
-                    text: "Note: AI responses can be inaccurate"
+                    text: qsTr("Note: AI responses can be inaccurate")
                     font.pointSize: Fonts.size10
                     color: Style.colorBasePurple
                 }

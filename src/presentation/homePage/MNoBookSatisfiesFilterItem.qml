@@ -20,7 +20,7 @@ Item {
 
         Label {
             id: text
-            text: "No book satisfies the filter conditions"
+            text: qsTr("No book satisfies the filter conditions")
             color: Style.colorTitle
             font.pointSize: Fonts.size22
             font.weight: Font.Medium
@@ -34,7 +34,7 @@ Item {
             backgroundColor: Style.colorLightHighlight
             opacityOnPressed: 0.75
             borderColor: Style.colorLightPurple
-            text: "Remove Filters"
+            text: qsTr("Remove Filters")
             textColor: Style.colorBasePurple
             fontWeight: Font.Bold
             fontSize: Fonts.size13

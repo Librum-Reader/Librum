@@ -40,7 +40,7 @@ Item {
                 id: filterByLabel
                 Layout.topMargin: -1
                 color: Style.colorText
-                text: "Filters"
+                text: qsTr("Filters")
                 font.pointSize: Fonts.size12
                 font.weight: Font.Bold
             }

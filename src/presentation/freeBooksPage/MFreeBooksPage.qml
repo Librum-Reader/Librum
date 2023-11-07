@@ -19,14 +19,14 @@ Page {
         target: FreeBooksController
 
         function onFoundNoBooks() {
-            errorMessageLabel.text = "No books were found"
+            errorMessageLabel.text = qsTr("No books were found")
             errorMessageLabel.visible = true
         }
 
         function onFetchingFirstMetadataPageSuccessful(success) {
             if (!success) {
                 errorMessageLabel.text
-                        = "Couldn't load free books. Please, check your network connection"
+                        = qsTr("Couldn't load free books. Please, check your network connection")
                 errorMessageLabel.visible = true
             }
 
@@ -78,8 +78,8 @@ Page {
         MTitle {
             id: pageTitle
             Layout.topMargin: 44
-            titleText: "Free books"
-            descriptionText: "Choose from over 70,000 books"
+            titleText: qsTr("Free books")
+            descriptionText: qsTr("Choose from over 70,000 books")
         }
 
         MExplorerToolbar {

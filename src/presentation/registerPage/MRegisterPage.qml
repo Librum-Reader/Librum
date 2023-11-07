@@ -76,7 +76,7 @@ MFlickWrapper {
                         Layout.topMargin: 24
                         Layout.alignment: Qt.AlignHCenter
                         color: Style.colorText
-                        text: "Welcome!"
+                        text: qsTr("Welcome!")
                         font.bold: true
                         font.pointSize: Fonts.size26
                     }
@@ -87,8 +87,7 @@ MFlickWrapper {
                         Layout.topMargin: 8
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHCenter
-                        text: "Your credentials are only used to authenticate yourself. "
-                              + "Everything will be stored in a secure database."
+                        text: qsTr("Your credentials are only used to authenticate yourself. Everything will be stored in a secure database.")
                         font.pointSize: Fonts.size13
                         color: Style.colorSubtitle
                         wrapMode: Text.WordWrap
@@ -118,7 +117,7 @@ MFlickWrapper {
                                 MLabeledInputBox {
                                     id: firstNameInput
                                     Layout.fillWidth: true
-                                    headerText: 'First name'
+                                    headerText: qsTr("First name")
                                     placeholderContent: "Kai"
                                     placeholderColor: Style.colorPlaceholderText
 
@@ -131,7 +130,7 @@ MFlickWrapper {
                                 MLabeledInputBox {
                                     id: lastNameInput
                                     Layout.fillWidth: true
-                                    headerText: "Last name"
+                                    headerText: qsTr("Last name")
                                     placeholderContent: "Doe"
                                     placeholderColor: Style.colorPlaceholderText
 
@@ -146,7 +145,7 @@ MFlickWrapper {
                                 id: emailInput
                                 Layout.fillWidth: true
                                 Layout.topMargin: 19
-                                headerText: 'Email'
+                                headerText: qsTr("Email")
                                 placeholderContent: "kaidoe@gmail.com"
                                 placeholderColor: Style.colorPlaceholderText
 
@@ -160,7 +159,7 @@ MFlickWrapper {
                                 id: passwordInput
                                 Layout.fillWidth: true
                                 Layout.topMargin: 16
-                                headerText: 'Password'
+                                headerText: qsTr("Password")
                                 placeholderColor: Style.colorPlaceholderText
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
@@ -175,7 +174,7 @@ MFlickWrapper {
                                 id: passwordConfirmationInput
                                 Layout.fillWidth: true
                                 Layout.topMargin: 16
-                                headerText: 'Confirmation password'
+                                headerText: qsTr("Confirmation password")
                                 placeholderColor: Style.colorPlaceholderText
                                 image: Icons.eyeOn
                                 toggledImage: Icons.eyeOff
@@ -213,7 +212,7 @@ MFlickWrapper {
                                 opacityOnPressed: 0.85
                                 textColor: Style.colorFocusedButtonText
                                 fontWeight: Font.Bold
-                                text: "Let's start"
+                                text: qsTr("Let's start")
 
                                 onClicked: internal.registerUser()
                                 onFocusChanged: {
@@ -235,7 +234,7 @@ MFlickWrapper {
                 id: loginRedirectionLabel
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 14
-                text: "Already have an account? Login"
+                text: qsTr("Already have an account? Login")
                 font.pointSize: Fonts.size10dot5
                 opacity: loginRedirecitonLinkArea.pressed ? 0.8 : 1
                 color: Style.colorBasePurple
@@ -261,9 +260,9 @@ MFlickWrapper {
         visible: false
         singleButton: true
         messageBottomSpacing: 12
-        title: "Confirm Your Email"
-        message: "You're are almost ready to go!\nConfirm your email by clicking the link we sent you."
-        leftButtonText: "Resend"
+        title: qsTr("Confirm Your Email")
+        message: qsTr("You're are almost ready to go!\nConfirm your email by clicking the link we sent you.")
+        leftButtonText: qsTr("Resend")
 
         onOpened: fetchEmailConfirmationTimer.start()
         onLeftButtonClicked: console.log("resend!")
@@ -294,7 +293,7 @@ MFlickWrapper {
             if (passwordInput.text === passwordConfirmationInput.text)
                 return true
 
-            passwordConfirmationInput.errorText = "Passwords don't match"
+            passwordConfirmationInput.errorText = qsTr("Passwords don't match")
             passwordConfirmationInput.setError()
             return false
         }

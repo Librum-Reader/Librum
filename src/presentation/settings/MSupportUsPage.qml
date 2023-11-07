@@ -30,8 +30,8 @@ MFlickWrapper {
 
             MTitle {
                 id: pageTitle
-                titleText: "Support us"
-                descriptionText: "Thanks for considering"
+                titleText: qsTr("Support us")
+                descriptionText: qsTr("Thanks for considering")
                 titleSize: Fonts.size25
                 descriptionSize: Fonts.size13dot25
             }
@@ -66,7 +66,7 @@ MFlickWrapper {
                     Label {
                         Layout.fillWidth: true
                         Layout.topMargin: 15
-                        text: "We are a small team of opensource developers creating apps for the community. We love\n" + "working on fun projects, supporting our community and trying to make the world a better place."
+                        text: qsTr("We are a small team of opensource developers creating apps for the community. We love\n" + "working on fun projects, supporting our community and trying to make the world a better place.")
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: Fonts.size14
@@ -76,7 +76,7 @@ MFlickWrapper {
                         id: supportOnPatreonText
                         Layout.fillWidth: true
                         Layout.topMargin: 36
-                        text: "If you feel like supporting us and our projects, feel free to support us on patreon:"
+                        text: qsTr("If you feel like supporting us and our projects, feel free to support us:")
                         wrapMode: Text.WordWrap
                         color: Style.colorLightText
                         font.pointSize: Fonts.size14
@@ -92,24 +92,23 @@ MFlickWrapper {
                         imagePath: Icons.patreon
                         imageSize: 18
                         imageSpacing: 10
-                        text: "Support us"
+                        text: qsTr("Support us")
                         fontWeight: Font.DemiBold
                         fontSize: Fonts.size12
                         textColor: Style.colorFocusedButtonText
                         radius: 4
 
                         onClicked: Qt.openUrlExternally(
-                                       "https://www.patreon.com/librumreader")
+                                       "https://librumreader.com/contribute/donate")
                     }
 
                     Label {
                         id: otherSupportText
                         Layout.fillWidth: true
                         Layout.topMargin: 40
-                        text: "You can support us in many other ways as well, if you are a developer or a designer, feel free to <a href=\""
-                              + AppInfoController.githubLink + "#contributing\" style=\"color: "
-                              + Style.colorBasePurple + "; text-decoration: none;\"> "
-                              + "contribute to Librum</a>.<br>If you are not, you can still help us by spreading the word about Librum."
+                        text: qsTr("You can support us in many other ways as well, if you are a developer or a designer, feel free to") + " <a href=\""
+                              + "https://librumreader.com/contribute\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> "
+                              + qsTr("contribute to Librum") + "</a>.<br>" + qsTr("If you are not, you can still help us by spreading the word about Librum.")
                         onLinkActivated: link => Qt.openUrlExternally(link)
                         textFormat: Text.RichText
                         wrapMode: Text.WordWrap
@@ -143,7 +142,7 @@ MFlickWrapper {
                             id: leaveText
                             Layout.fillWidth: true
                             Layout.leftMargin: 16
-                            text: "Thank you for your support. We hope you enjoy Librum!"
+                            text: qsTr("Thank you for your support. We hope you enjoy Librum!")
                             wrapMode: Text.WordWrap
                             color: Style.colorLightText
                             font.pointSize: Fonts.size14

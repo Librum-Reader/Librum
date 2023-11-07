@@ -39,8 +39,8 @@ MFlickWrapper {
                 MTitle {
                     id: pageTitle
                     Layout.topMargin: 64
-                    titleText: "Storage"
-                    descriptionText: "Your storage"
+                    titleText: qsTr("Storage")
+                    descriptionText: qsTr("Your storage")
                     titleSize: Fonts.size25
                     descriptionSize: Fonts.size13dot25
                 }
@@ -56,7 +56,7 @@ MFlickWrapper {
                     Layout.alignment: Qt.AlignBottom
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
-                    text: "Upgrade"
+                    text: qsTr("Upgrade")
                     fontSize: Fonts.size12
                     fontWeight: Font.Bold
                     textColor: Style.colorFocusedButtonText
@@ -108,7 +108,8 @@ MFlickWrapper {
                                     id: tierTitle
                                     Layout.alignment: Qt.AlignLeft
                                     Layout.topMargin: 6
-                                    text: "YOUR TIER"
+                                    //: Keep capitalized ("TIER" as in subscription)
+                                    text: qsTr("YOUR TIER")
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
                                     font.pointSize: Fonts.size10dot5
@@ -118,7 +119,8 @@ MFlickWrapper {
                                     id: tierName
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: 46
-                                    text: "BASIC"
+                                    //: Keep capitalized ("BASIC" is the name of the tier)
+                                    text: qsTr("BASIC")
                                     color: Style.colorSubtitle
                                     font.weight: Font.Medium
                                     font.pointSize: Fonts.size22
@@ -147,7 +149,7 @@ MFlickWrapper {
                                         Layout.preferredHeight: 38
                                         borderWidth: 0
                                         backgroundColor: Style.colorBasePurple
-                                        text: "Upgrade"
+                                        text: qsTr("Upgrade")
                                         fontSize: Fonts.size12
                                         fontWeight: Font.Bold
                                         textColor: Style.colorFocusedButtonText
@@ -163,7 +165,7 @@ MFlickWrapper {
                                         borderColor: Style.colorCheckboxBorder
                                         opacityOnPressed: 0.75
                                         backgroundColor: "transparent"
-                                        text: "See why we offer multiple tiers"
+                                        text: qsTr("See why we offer multiple tiers")
                                         fontSize: Fonts.size12
                                         fontWeight: Font.Medium
                                         textColor: Style.colorText
@@ -195,7 +197,8 @@ MFlickWrapper {
                                     id: usedStorageTitle
                                     Layout.alignment: Qt.AlignLeft
                                     Layout.topMargin: 6
-                                    text: "USED STORAGE"
+                                    //: Keep capitalized
+                                    text: qsTr("USED STORAGE")
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
                                     font.pointSize: Fonts.size10dot5
@@ -228,7 +231,7 @@ MFlickWrapper {
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             anchors.top: usedStorageText.bottom
                                             anchors.topMargin: 2
-                                            text: "Used Storage"
+                                            text: qsTr("Used Storage")
                                             color: Style.colorLightText
                                             font.pointSize: Fonts.size11
                                         }
@@ -255,7 +258,7 @@ MFlickWrapper {
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             anchors.top: remainingStorageText.bottom
                                             anchors.topMargin: 2
-                                            text: "Remaining Storage"
+                                            text: qsTr("Remaining Storage")
                                             color: Style.colorLightText
                                             font.pointSize: Fonts.size11
                                         }
@@ -310,7 +313,8 @@ MFlickWrapper {
                                     id: yourBooksTitle
                                     Layout.alignment: Qt.AlignLeft
                                     Layout.topMargin: 6
-                                    text: "YOUR BOOKS"
+                                    //: Keep capitalized
+                                    text: qsTr("YOUR BOOKS")
                                     color: Style.colorPageSubtitle
                                     font.weight: Font.Bold
                                     font.pointSize: Fonts.size10dot5
@@ -329,7 +333,7 @@ MFlickWrapper {
                                 Label {
                                     id: bookCountDescription
                                     Layout.alignment: Qt.AlignHCenter
-                                    text: "Books in your Library"
+                                    text: qsTr("Books in your Library")
                                     color: Style.colorLightText
                                     font.pointSize: Fonts.size12
                                 }

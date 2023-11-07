@@ -62,7 +62,7 @@ Popup {
                 id: popupTitle
                 Layout.topMargin: 20
                 Layout.leftMargin: 52
-                text: "Confirm Account Deletion"
+                text: qsTr("Confirm Account Deletion")
                 font.weight: Font.Bold
                 font.pointSize: Fonts.size19
                 color: Style.colorTitle
@@ -73,7 +73,7 @@ Popup {
                 Layout.topMargin: 20
                 Layout.leftMargin: 52
                 textFormat: Text.RichText
-                text: "Deleting your account is an irreversible action.<br>Once you delete your account, there is <b>no</b> going back. Please be certain."
+                text: qsTr("Deleting your account is an irreversible action.<br>Once you delete your account, there is <b>no</b> going back. Please be certain.")
                 font.pointSize: Fonts.size14
                 color: Style.colorText
             }
@@ -85,9 +85,9 @@ Popup {
                 Layout.leftMargin: 52
                 Layout.rightMargin: 52
                 headerFontSize: Fonts.size11
-                placeholderContent: "Your Email"
+                placeholderContent: qsTr("Your Email")
                 placeholderColor: Style.colorPlaceholderText
-                headerText: "Confirm the deletion by entering your Account's email."
+                headerText: qsTr("Confirm the deletion by entering your Account's email.")
             }
 
             RowLayout {
@@ -106,7 +106,7 @@ Popup {
                     borderWidth: active ? 0 : 1
                     backgroundColor: active ? Style.colorBasePurple : "transparent"
                     opacityOnPressed: 0.7
-                    text: "Cancel"
+                    text: qsTr("Cancel")
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: Fonts.size12
@@ -122,7 +122,7 @@ Popup {
                     borderWidth: active ? 0 : 1
                     backgroundColor: active ? Style.colorRed : "transparent"
                     opacityOnPressed: 0.7
-                    text: "Delete"
+                    text: qsTr("Delete")
                     textColor: active ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
                     fontWeight: Font.Bold
                     fontSize: Fonts.size12
@@ -132,7 +132,7 @@ Popup {
 
                     onClicked: {
                         if (emailInput.text !== UserController.email) {
-                            emailInput.errorText = "Your email is wrong."
+                            emailInput.errorText = qsTr("Your email is wrong")
                             emailInput.setError()
                             return
                         }
