@@ -83,8 +83,7 @@ Item {
     property color colorScrollBarHandle
 
     state: (SettingsController.appearanceSettings.Theme
-            === undefined ? lastRunSettings.theme // default
-                          : SettingsController.appearanceSettings.Theme)
+            === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
 
     states: [
         State {

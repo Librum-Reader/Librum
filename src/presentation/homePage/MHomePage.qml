@@ -72,7 +72,9 @@ Page {
                 Label {
                     id: updateBannerText
                     anchors.centerIn: parent
-                    text: qsTr('A new version is available!') + ' <a href="update" style="color: #FFFFFF; text-decoration: underline;">' + qsTr('Update Now') + '</a>'
+                    text: qsTr('A new version is available!')
+                          + ' <a href="update" style="color: #FFFFFF; text-decoration: underline;">'
+                          + qsTr('Update Now') + '</a>'
                     onLinkActivated: baseRoot.loadSettingsUpdatesPage()
                     textFormat: Text.RichText
                     color: Style.colorBannerText
@@ -121,7 +123,8 @@ Page {
                     Layout.topMargin: updateBanner.visible ? 24 : 44
                     //: As in 'Home Page', might be closer to 'Start' in other languages
                     titleText: qsTr("Home")
-                    descriptionText: qsTr("You have %1 books").arg(LibraryController.bookCount)
+                    descriptionText: qsTr("You have %1 books").arg(
+                                         LibraryController.bookCount)
                 }
 
                 Item {
@@ -447,9 +450,10 @@ Page {
         acceptLabel: qsTr("Import")
         fileMode: FileDialog.FileMode.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: [qsTr("All files") + " (*)", "PDF " + qsTr("files") + " (*.pdf)",
-                      "EPUB " + qsTr("files") + " (*.epub)", "MOBI " + qsTr("files") + " (*.mobi)",
-                      "HTML " + qsTr("files") + " (*.html *.htm)", "Text " + qsTr("files") + " (*.txt)"]
+        nameFilters: [qsTr(
+                "All files") + " (*)", "PDF " + qsTr("files") + " (*.pdf)", "EPUB " + qsTr(
+                "files") + " (*.epub)", "MOBI " + qsTr("files") + " (*.mobi)", "HTML " + qsTr(
+                "files") + " (*.html *.htm)", "Text " + qsTr("files") + " (*.txt)"]
 
         onAccepted: {
             for (var i = 0; i < files.length; ++i) {

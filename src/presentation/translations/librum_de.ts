@@ -324,6 +324,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="125"/>
+        <location filename="../settings/MAppearancePage.qml" line="135"/>
         <source>Dark</source>
         <translation>Dunkel</translation>
     </message>
@@ -333,159 +334,159 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Hell</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="141"/>
+        <location filename="../settings/MAppearancePage.qml" line="143"/>
         <source>Page Color Mode</source>
         <translation>Seiten Farben Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="152"/>
+        <location filename="../settings/MAppearancePage.qml" line="154"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="153"/>
+        <location filename="../settings/MAppearancePage.qml" line="155"/>
         <source>Inverted</source>
         <translation>Umgekehrt</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="188"/>
+        <location filename="../settings/MAppearancePage.qml" line="190"/>
         <source>Reading</source>
         <translation>Lesen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="198"/>
+        <location filename="../settings/MAppearancePage.qml" line="200"/>
         <source>Page spacing</source>
         <translation>Seiten Abstand</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="225"/>
+        <location filename="../settings/MAppearancePage.qml" line="227"/>
         <source>Display book title in titlebar</source>
         <translation>Den Buchtitel in der Titelleiste anzeigen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="250"/>
+        <location filename="../settings/MAppearancePage.qml" line="252"/>
         <source>Layout direction</source>
         <translation>Layoutrichtung</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="262"/>
+        <location filename="../settings/MAppearancePage.qml" line="264"/>
         <source>Vertical</source>
         <translation>Vertikal</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="262"/>
+        <location filename="../settings/MAppearancePage.qml" line="264"/>
         <source>Horizontal</source>
         <translation>Horizontal</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="278"/>
+        <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Display mode</source>
         <translation>Darstellungs Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="290"/>
+        <location filename="../settings/MAppearancePage.qml" line="292"/>
         <source>Single Page</source>
         <translation>Einzelseite</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="290"/>
+        <location filename="../settings/MAppearancePage.qml" line="292"/>
         <source>Double Page</source>
         <translation>Doppelseite</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="306"/>
+        <location filename="../settings/MAppearancePage.qml" line="308"/>
         <source>Page transition</source>
         <translation>Seitenübergang</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="330"/>
+        <location filename="../settings/MAppearancePage.qml" line="332"/>
         <source>Instant</source>
         <translation>Sofort</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="333"/>
+        <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Fading</source>
         <translation>Verblassen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="336"/>
+        <location filename="../settings/MAppearancePage.qml" line="338"/>
         <source>Swipe</source>
         <translation>Wischen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="339"/>
+        <location filename="../settings/MAppearancePage.qml" line="341"/>
         <source>Swap</source>
         <translation>Tauschen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="368"/>
+        <location filename="../settings/MAppearancePage.qml" line="370"/>
         <source>Default Zoom</source>
         <translation>Standard-Zoom</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="414"/>
+        <location filename="../settings/MAppearancePage.qml" line="416"/>
         <source>Highlights</source>
         <translation>Markierungen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="423"/>
+        <location filename="../settings/MAppearancePage.qml" line="425"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="542"/>
+        <location filename="../settings/MAppearancePage.qml" line="544"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="609"/>
+        <location filename="../settings/MAppearancePage.qml" line="611"/>
         <source>Behavior</source>
         <translation>Verhalten</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="619"/>
+        <location filename="../settings/MAppearancePage.qml" line="621"/>
         <source>Smooth scrolling</source>
         <translation>Sanftes Scrollen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="644"/>
+        <location filename="../settings/MAppearancePage.qml" line="646"/>
         <source>Loop after last page</source>
         <translation>Nach letzter Seite wiederholen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="669"/>
+        <location filename="../settings/MAppearancePage.qml" line="671"/>
         <source>Cursor mode</source>
         <translation>Mauszeiger-Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="681"/>
+        <location filename="../settings/MAppearancePage.qml" line="683"/>
         <source>Hidden after delay</source>
         <translation>Versteckt nach Verzögerung</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="681"/>
+        <location filename="../settings/MAppearancePage.qml" line="683"/>
         <source>Always visible</source>
         <translation>Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="705"/>
+        <location filename="../settings/MAppearancePage.qml" line="708"/>
         <source>Reset settings?</source>
         <translation>Einstellungen zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="706"/>
+        <location filename="../settings/MAppearancePage.qml" line="709"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion, es
 wird keine Möglichkeit geben sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="707"/>
+        <location filename="../settings/MAppearancePage.qml" line="710"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="708"/>
+        <location filename="../settings/MAppearancePage.qml" line="711"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
     </message>
@@ -1141,100 +1142,100 @@ wird keine Möglichkeit geben sie wiederherzustellen!</translation>
         <translation>Eine neue Version ist verfügbar!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="75"/>
+        <location filename="../homePage/MHomePage.qml" line="77"/>
         <source>Update Now</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="123"/>
+        <location filename="../homePage/MHomePage.qml" line="125"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="124"/>
+        <location filename="../homePage/MHomePage.qml" line="126"/>
         <source>You have %1 books</source>
         <translation>Du hast %1 Bücher</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="139"/>
+        <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>Add books</source>
         <translation>Bücher hunzufügen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="358"/>
+        <location filename="../homePage/MHomePage.qml" line="361"/>
         <source>Remove Book?</source>
         <translation>Buch Löschen?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="359"/>
+        <location filename="../homePage/MHomePage.qml" line="362"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Das Löschen eines Buchs ist eine dauerhafte Aktion, niemand
 wird es danach wiederherstellen können!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="360"/>
+        <location filename="../homePage/MHomePage.qml" line="363"/>
         <source>Remove from Device</source>
         <translation>Buch von Gerät entfernen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="361"/>
+        <location filename="../homePage/MHomePage.qml" line="364"/>
         <source>Delete Everywhere</source>
         <translation>Überall Löschen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="399"/>
+        <location filename="../homePage/MHomePage.qml" line="402"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="414"/>
+        <location filename="../homePage/MHomePage.qml" line="417"/>
         <source>Limit Reached</source>
         <translation>Limit erreicht</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="415"/>
+        <location filename="../homePage/MHomePage.qml" line="418"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Du hast dein Upload-Limit erreicht.
 Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="416"/>
-        <location filename="../homePage/MHomePage.qml" line="435"/>
+        <location filename="../homePage/MHomePage.qml" line="419"/>
+        <location filename="../homePage/MHomePage.qml" line="438"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="417"/>
+        <location filename="../homePage/MHomePage.qml" line="420"/>
         <source>Upgrade</source>
         <translation>Upgrade</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="433"/>
+        <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Unsupported File</source>
         <translation>Nicht unterstütztes Format</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="434"/>
+        <location filename="../homePage/MHomePage.qml" line="437"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Oops! Dieses Format wird von Librum nicht unterstützt.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="447"/>
+        <location filename="../homePage/MHomePage.qml" line="450"/>
         <source>Import</source>
         <translation>Importieren</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="450"/>
+        <location filename="../homePage/MHomePage.qml" line="453"/>
         <source>All files</source>
         <translation>Alle Dokumente</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="450"/>
-        <location filename="../homePage/MHomePage.qml" line="451"/>
-        <location filename="../homePage/MHomePage.qml" line="452"/>
+        <location filename="../homePage/MHomePage.qml" line="454"/>
+        <location filename="../homePage/MHomePage.qml" line="455"/>
+        <location filename="../homePage/MHomePage.qml" line="456"/>
         <source>files</source>
         <translation>Dokumente</translation>
     </message>

@@ -124,14 +124,16 @@ Page {
                             Layout.topMargin: 4
                             leftText: qsTr("Dark")
                             rightText: qsTr("Light")
-                            leftSelected: savedValue === leftText
-                            rightSelected: savedValue === rightText
+                            leftSelected: savedValue === "Dark"
+                            rightSelected: savedValue === "Light"
 
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue === leftText ? selectLeft(
-                                                                               ) : selectRight()
+                            onSavedValueChanged: savedValue === "Dark" ? selectLeft(
+                                                                             ) : selectRight()
                             onToggled: newSelected => internal.saveSetting(
-                                           SettingKeys.Theme, newSelected)
+                                           SettingKeys.Theme,
+                                           (newSelected === qsTr(
+                                                "Dark") ? "Dark" : "Light"))
                         }
 
                         Label {
@@ -678,7 +680,8 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: [qsTr("Hidden after delay"), qsTr("Always visible")]
+                            options: [qsTr("Hidden after delay"), qsTr(
+                                    "Always visible")]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 

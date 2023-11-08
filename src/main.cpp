@@ -13,8 +13,8 @@
 #include <QSettings>
 #include <QStandardPaths>
 #include <QString>
-#include <QTranslator>
 #include <QTextStream>
+#include <QTranslator>
 #include <memory>
 #include "app_info_controller.hpp"
 #include "book_dto.hpp"
