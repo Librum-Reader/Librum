@@ -51,9 +51,9 @@ MFlickWrapper {
 
                 MButton {
                     id: upgradeButton
-                    Layout.preferredWidth: 118
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignBottom
+                    horizontalMargins: 12
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: qsTr("Upgrade")
@@ -352,12 +352,12 @@ MFlickWrapper {
         y: Math.round(
                page.height / 2 - implicitHeight / 2 - page.topPadding - 50)
         visible: false
-        title: "Upgrade Your Tier"
-        message: "We don't offer upgrading options at the moment.\n"
-                 + "If you require additional storage, please contact us at: "
-                 + AppInfoController.companyEmail
-        leftButtonText: "Close"
-        rightButtonText: "Email Us"
+        title: qsTr("Upgrade Your Account")
+        message: qsTr("We don't offer upgrading options at the moment.") + "\n" + qsTr(
+                     "If you require additional storage, please contact us at")
+                 + ": " + AppInfoController.companyEmail
+        leftButtonText: qsTr("Close")
+        rightButtonText: qsTr("Email Us")
         buttonsWidth: 180
         messageBottomSpacing: 10
 

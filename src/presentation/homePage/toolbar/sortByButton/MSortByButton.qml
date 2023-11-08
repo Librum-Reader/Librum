@@ -9,17 +9,23 @@ Item {
     id: root
     signal itemSelected(int role)
 
-    implicitWidth: 104
+    implicitWidth: layout.width
     implicitHeight: 36
 
     ColumnLayout {
         id: layout
-        anchors.fill: parent
+        height: parent.height
+        width: container.width
         spacing: 4
 
         Pane {
             id: container
-            Layout.fillWidth: true
+            property int hPadding: 12
+            property int minWidth: 104
+
+            Layout.preferredWidth: (inButtonLayout.implicitWidth + hPadding * 2)
+                                   < minWidth ? minWidth : (inButtonLayout.implicitWidth
+                                                            + hPadding * 2)
             Layout.fillHeight: true
             padding: 0
             background: Rectangle {
@@ -36,7 +42,6 @@ Item {
 
                 Label {
                     id: sortByLabel
-                    Layout.topMargin: -1
                     color: Style.colorText
                     text: qsTr("Sort")
                     font.pointSize: Fonts.size12

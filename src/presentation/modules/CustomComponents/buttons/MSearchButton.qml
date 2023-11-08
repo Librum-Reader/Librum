@@ -11,7 +11,7 @@ Item {
     property int expansionWidth: 445
     property int openAnimationDuration: 300
     property int closeAnimationDuration: 200
-
+    property string placeholderText: qsTr("Search for books")
     property int imageSize: 16
     property bool opened: false
 
@@ -51,7 +51,7 @@ Item {
                 leftPadding: 12
                 color: Style.colorBaseInputText
                 font.pointSize: Fonts.size12
-                placeholderText: qsTr("Search for Book")
+                placeholderText: root.placeholderText
                 placeholderTextColor: Style.colorPlaceholderText
                 selectByMouse: true
                 background: Rectangle {

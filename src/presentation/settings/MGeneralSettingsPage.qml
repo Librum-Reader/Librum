@@ -47,9 +47,9 @@ MFlickWrapper {
 
                 MButton {
                     id: resetButton
-                    Layout.preferredWidth: 160
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignBottom
+                    horizontalMargins: 12
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: qsTr("Restore Defaults")

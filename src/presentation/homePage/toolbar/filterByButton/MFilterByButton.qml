@@ -10,12 +10,16 @@ Item {
     property bool opened: false
     signal filterSelected(string authors, string format, string date, bool onlyBooks, bool onlyFiles, bool read, bool unread)
 
-    implicitWidth: 104
+    implicitWidth: container.width
     implicitHeight: 36
 
     Pane {
         id: container
-        anchors.fill: parent
+        property int hPadding: 12
+        property int minWidth: 104
+
+        height: parent.height
+        width: (layout.width + hPadding * 2) < minWidth ? minWidth : layout.width + hPadding * 2
         padding: 0
         background: Rectangle {
             color: Style.colorControlBackground
@@ -38,7 +42,6 @@ Item {
 
             Label {
                 id: filterByLabel
-                Layout.topMargin: -1
                 color: Style.colorText
                 text: qsTr("Filters")
                 font.pointSize: Fonts.size12

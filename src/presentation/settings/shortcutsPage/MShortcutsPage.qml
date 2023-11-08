@@ -48,10 +48,10 @@ Page {
 
             MButton {
                 id: addShortcutButton
-                Layout.preferredWidth: 164
                 Layout.preferredHeight: 38
                 Layout.topMargin: 22
                 Layout.alignment: Qt.AlignBottom
+                horizontalMargins: 12
                 borderWidth: 0
                 backgroundColor: Style.colorBasePurple
                 text: qsTr("Edit shortcut")
@@ -132,6 +132,8 @@ Page {
                         implicitWidth: 34
                         implicitHeight: 32
                         imageSize: 14
+                        placeholderText: qsTr("Search for shortcuts")
+
                         // Make sure that the searchButton does not overlap other items
                         expansionWidth: (headerLabelSpacer.width
                                          <= 445 ? headerLabelSpacer.width : 445)

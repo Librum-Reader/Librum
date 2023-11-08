@@ -43,10 +43,10 @@ Item {
 
             MButton {
                 id: addBooksButton
-                Layout.preferredWidth: 134
                 Layout.preferredHeight: 42
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 20
+                horizontalMargins: 12
                 backgroundColor: Style.colorLightHighlight
                 opacityOnPressed: 0.75
                 borderColor: Style.colorContainerBorder

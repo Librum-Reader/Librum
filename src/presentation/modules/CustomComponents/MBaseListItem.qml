@@ -8,6 +8,7 @@ import Librum.fonts
 Item {
     id: root
     property ListView containingListview
+    property int actualWidth: checkBox.implicitWidth + layout.spacing + content.implicitWidth
     property int index
     property bool selected: false
     property double fontSize: Fonts.size10dot75
@@ -21,9 +22,12 @@ Item {
     signal rightClicked(var mouse, int index)
     signal hovered(int index)
     signal renamed(int index, string text)
+    signal completed(int index, int actualWidth)
 
     implicitWidth: 137
     implicitHeight: 36
+
+    Component.onCompleted: root.completed(model.index, root.actualWidth)
 
     Pane {
         id: container

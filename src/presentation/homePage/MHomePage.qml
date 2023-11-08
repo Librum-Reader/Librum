@@ -133,10 +133,10 @@ Page {
 
                 MButton {
                     id: addBooksButton
-                    Layout.preferredWidth: 140
                     Layout.preferredHeight: 40
                     Layout.topMargin: 22
                     Layout.alignment: Qt.AlignBottom
+                    horizontalMargins: 12
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: qsTr("Add books")
@@ -362,7 +362,7 @@ Page {
         message: qsTr("Deleting a book is a permanent action, no one will be\n able to restore it afterwards!")
         leftButtonText: qsTr("Remove from Device")
         rightButtonText: qsTr("Delete Everywhere")
-        buttonsWidth: 200
+        buttonsWidth: -1
         messageBottomSpacing: 10
         rightButtonRed: true
 

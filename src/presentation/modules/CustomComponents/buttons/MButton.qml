@@ -25,12 +25,13 @@ Item {
     property int imageSize: 15
     property int imageLeftMargin: 0
     property int imageRotation: 0
+    property int horizontalMargins: 1
     property bool imageToRight: false
     property bool centerContentVertically: true
     property bool centerContentHorizontally: true
 
     implicitHeight: 30
-    implicitWidth: layout.implicitWidth
+    implicitWidth: layout.implicitWidth + 2 * horizontalMargins
 
     signal clicked
 

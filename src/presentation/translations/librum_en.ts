@@ -624,37 +624,38 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookRightClickPopup</name>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="35"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="31"/>
         <source>Download</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="47"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="42"/>
         <source>Read book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="57"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="51"/>
         <source>Book details</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="70"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
         <source>Save to files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="87"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="97"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
+        <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="107"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
         <source>Remove book</source>
         <translation type="unfinished"></translation>
     </message>
@@ -927,7 +928,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFilterByButton</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="43"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
         <source>Filters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1538,8 +1539,8 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSearchButton</name>
     <message>
-        <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="54"/>
-        <source>Search for Book</source>
+        <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
+        <source>Search for books</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1686,6 +1687,11 @@ Confirm your email by clicking the link we sent you.</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
+        <source>Search for shortcuts</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MSidebar</name>
@@ -1718,7 +1724,7 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSortByButton</name>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="41"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1726,17 +1732,17 @@ Confirm your email by clicking the link we sent you.</source>
 <context>
     <name>MSortByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="74"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
         <source>Recently added</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="75"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
         <source>Recently read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="76"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
         <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1746,7 +1752,7 @@ Confirm your email by clicking the link we sent you.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="78"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
         <source>Authors (A-Z)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1826,6 +1832,31 @@ Confirm your email by clicking the link we sent you.</source>
         <source>Books in your Library</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="355"/>
+        <source>Upgrade Your Account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="356"/>
+        <source>We don&apos;t offer upgrading options at the moment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="356"/>
+        <source>If you require additional storage, please contact us at</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="359"/>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="360"/>
+        <source>Email Us</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MSupportUsPage</name>
@@ -1862,12 +1893,12 @@ working on fun projects, supporting our community and trying to make the world a
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="111"/>
+        <location filename="../settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="145"/>
+        <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1875,7 +1906,7 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MTagSelectorButton</name>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="43"/>
+        <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
         <source>Tags</source>
         <translation type="unfinished"></translation>
     </message>

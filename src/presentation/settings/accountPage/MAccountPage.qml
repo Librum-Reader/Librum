@@ -77,9 +77,9 @@ MFlickWrapper {
 
                 MButton {
                     id: saveButton
-                    Layout.preferredWidth: 90
                     Layout.preferredHeight: 38
                     Layout.alignment: Qt.AlignBottom
+                    horizontalMargins: 12
                     borderWidth: 0
                     backgroundColor: Style.colorBasePurple
                     text: qsTr("Save")
@@ -502,7 +502,8 @@ MFlickWrapper {
                 passwordInput.errorText = qsTr("Passwords don't match!")
                 passwordInput.setError()
 
-                passwordConfirmationInput.errorText = qsTr("Passwords don't match!")
+                passwordConfirmationInput.errorText = qsTr(
+                            "Passwords don't match!")
                 passwordConfirmationInput.setError()
             }
         }

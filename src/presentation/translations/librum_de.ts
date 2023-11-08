@@ -73,7 +73,8 @@
         <location filename="../settings/MAboutPage.qml" line="283"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
-        <translation>Librum ist hier für alle, die einfach nur ein gutes Buch genießen möchten. Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</translation>
+        <translation>Librum ist hier für alle, die einfach nur ein gutes Buch genießen möchten.
+Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</translation>
     </message>
 </context>
 <context>
@@ -346,7 +347,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MAppearancePage.qml" line="155"/>
         <source>Inverted</source>
-        <translation>Umgekehrt</translation>
+        <translation>Invers</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="190"/>
@@ -635,37 +636,38 @@ wird es danach wiederherstellen können!</translation>
 <context>
     <name>MBookRightClickPopup</name>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="35"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="31"/>
         <source>Download</source>
         <translation>Download</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="47"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="42"/>
         <source>Read book</source>
         <translation>Buch lesen</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="57"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="51"/>
         <source>Book details</source>
         <translation>Buch details</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="70"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
         <source>Save to files</source>
-        <translation>In Dateien speichern</translation>
+        <translation>Datei speichern</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="87"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
         <translation>Tags verwalten</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="97"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
-        <translation>Als gelesen markieren</translation>
+        <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
+        <translation>Gelesen</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookRightClickPopup.qml" line="107"/>
+        <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
         <source>Remove book</source>
         <translation>Buch löschen</translation>
     </message>
@@ -853,7 +855,7 @@ wird es danach wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="36"/>
         <source>Quite empty here, what about adding your first book?</source>
-        <translation>Ziemlich leer hier, wie wäre es, dein erstes Buch hinzuzufügen?</translation>
+        <translation>Ganz schön leer hier. Bereit für dein erstes Buch?</translation>
     </message>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
@@ -938,7 +940,7 @@ wird es danach wiederherstellen können!</translation>
 <context>
     <name>MFilterByButton</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="43"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
         <source>Filters</source>
         <translation>Filter</translation>
     </message>
@@ -1089,7 +1091,7 @@ wird es danach wiederherstellen können!</translation>
     <message>
         <location filename="../settings/MGeneralSettingsPage.qml" line="38"/>
         <source>General settings</source>
-        <translation>Generelle Einstellungen</translation>
+        <translation>Systemeinstellungen</translation>
     </message>
     <message>
         <location filename="../settings/MGeneralSettingsPage.qml" line="39"/>
@@ -1109,12 +1111,12 @@ wird es danach wiederherstellen können!</translation>
     <message>
         <location filename="../settings/MGeneralSettingsPage.qml" line="95"/>
         <source>Open books after creation</source>
-        <translation>Öffne Bücher nach erstellung</translation>
+        <translation>Öffne Bücher nach Erstellung</translation>
     </message>
     <message>
         <location filename="../settings/MGeneralSettingsPage.qml" line="127"/>
         <source>Reset settings?</source>
-        <translation>Einstellungen zurücksetzen?</translation>
+        <translation>Zurücksetzen?</translation>
     </message>
     <message>
         <location filename="../settings/MGeneralSettingsPage.qml" line="128"/>
@@ -1160,7 +1162,7 @@ wird keine Möglichkeit geben sie wiederherzustellen!</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>Add books</source>
-        <translation>Bücher hunzufügen</translation>
+        <translation>Bücher hinzufügen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="361"/>
@@ -1171,13 +1173,13 @@ wird keine Möglichkeit geben sie wiederherzustellen!</translation>
         <location filename="../homePage/MHomePage.qml" line="362"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation>Das Löschen eines Buchs ist eine dauerhafte Aktion, niemand
-wird es danach wiederherstellen können!</translation>
+        <translation>Das Löschen eines Buches ist eine dauerhafte Aktion,
+niemand wird es wiederherstellen können!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="363"/>
         <source>Remove from Device</source>
-        <translation>Buch von Gerät entfernen</translation>
+        <translation>Vom Gerät entfernen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="364"/>
@@ -1396,7 +1398,7 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="191"/>
         <source>Inverted</source>
-        <translation>Umgekehrt</translation>
+        <translation>Invers</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="209"/>
@@ -1557,9 +1559,13 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 <context>
     <name>MSearchButton</name>
     <message>
-        <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="54"/>
         <source>Search for Book</source>
-        <translation>Suche nach Buch</translation>
+        <translation type="vanished">Suche nach Buch</translation>
+    </message>
+    <message>
+        <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
+        <source>Search for books</source>
+        <translation>Suche nach Büchern</translation>
     </message>
 </context>
 <context>
@@ -1644,7 +1650,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="154"/>
         <source>General Settings</source>
-        <translation>Generelle Einstellungen</translation>
+        <translation>Systemeinstellungen</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
@@ -1705,6 +1711,11 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <extracomment>Keep it capitalized</extracomment>
         <translation>TASTENKÜRZEL</translation>
     </message>
+    <message>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
+        <source>Search for shortcuts</source>
+        <translation>Suche nach Tastenkürzel</translation>
+    </message>
 </context>
 <context>
     <name>MSidebar</name>
@@ -1741,7 +1752,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <translation type="vanished">Sortieren nach</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="41"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
         <translation>Sortieren</translation>
     </message>
@@ -1749,17 +1760,17 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 <context>
     <name>MSortByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="74"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
         <source>Recently added</source>
         <translation>Kürzlich hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="75"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
         <source>Recently read</source>
-        <translation>Vor kurzem gelesen</translation>
+        <translation>Kürzlich gelesen</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="76"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
         <source>Progress</source>
         <translation>Fortschritt</translation>
     </message>
@@ -1769,7 +1780,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <translation>Bücher (A-Z)</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="78"/>
+        <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
         <source>Authors (A-Z)</source>
         <translation>Autoren (A-Z)</translation>
     </message>
@@ -1820,18 +1831,18 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Sieh, warum wir mehrere Stufen anbieten</translation>
+        <translation>Warum wir mehrere Abos anbieten</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
         <source>USED STORAGE</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation>BENUTZTER SPEICHER</translation>
+        <translation>BENUTZTER SPEICHERPLATZ</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="234"/>
         <source>Used Storage</source>
-        <translation>Benutzter Speicher</translation>
+        <translation>Benutzter Speicherplatz</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="261"/>
@@ -1848,6 +1859,31 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <location filename="../settings/MStoragePage.qml" line="336"/>
         <source>Books in your Library</source>
         <translation>Bücher in deiner Bibliothek</translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="355"/>
+        <source>Upgrade Your Account</source>
+        <translation>Upgrade dein Konto</translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="356"/>
+        <source>We don&apos;t offer upgrading options at the moment.</source>
+        <translation>Wir bieten derzeit keine upgrade Optionen an.</translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="356"/>
+        <source>If you require additional storage, please contact us at</source>
+        <translation>Wenn du mehr Speicher benötigst, schreib uns unter</translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="359"/>
+        <source>Close</source>
+        <translation>Schließen</translation>
+    </message>
+    <message>
+        <location filename="../settings/MStoragePage.qml" line="360"/>
+        <source>Email Us</source>
+        <translation>Schreib uns</translation>
     </message>
 </context>
 <context>
@@ -1868,8 +1904,8 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <location filename="../settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
-        <translation>Wir sind ein kleines Team von Open-Source-Entwicklern, die Apps für die Community erstellen. Wir lieben
-es, an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu einem besseren Ort zu machen.</translation>
+        <translation>Wir sind ein kleines Team von Open-Source-Entwicklern, die Apps für die Community erstellen. Wir lieben es,
+an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu einem besseren Ort zu machen.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
@@ -1879,20 +1915,20 @@ es, an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Wel
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation>&quot;Du kannst uns auch auf viele andere Arten unterstützen. Wenn du Entwickler oder Designer bist</translation>
+        <translation>Du kannst uns auch auf viele andere Arten unterstützen. Wenn du Entwickler oder Designer bist</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
         <source>contribute to Librum</source>
-        <translation>Zu Librum beitragen</translation>
+        <translation>trage zu Librum bei</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="111"/>
+        <location filename="../settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
         <translation>Falls nicht kannst du trotzdem helfen indem du das Wort über Librum verbreitest.</translation>
     </message>
     <message>
-        <location filename="../settings/MSupportUsPage.qml" line="145"/>
+        <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
         <translation>Danke für deine Unterstützung. Wir hoffen Librum gefällt dir!</translation>
     </message>
@@ -1900,7 +1936,7 @@ es, an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Wel
 <context>
     <name>MTagSelectorButton</name>
     <message>
-        <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="43"/>
+        <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
         <source>Tags</source>
         <translation>Tags</translation>
     </message>

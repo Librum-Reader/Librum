@@ -6,58 +6,49 @@ import Librum.style
 import Librum.icons
 import Librum.models
 
-
-Popup
-{
+Popup {
     id: root
     signal itemSelected(int role)
     property int maxHeight: 200
-    
+
     padding: 0
     implicitWidth: 176
-    background: Rectangle { color: "transparent" }
-    
-    onOpenedChanged: if(opened) listView.forceActiveFocus();
-    
-    
-    ColumnLayout
-    {
+    background: Rectangle {
+        color: "transparent"
+    }
+
+    onOpenedChanged: if (opened)
+                         listView.forceActiveFocus()
+
+    ColumnLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
-        
-        Image
-        {
+
+        Image {
             id: triangleDecorator
             Layout.leftMargin: 14
             Layout.bottomMargin: -1
             source: Icons.popupDroplet
         }
-        
-        Pane
-        {
+
+        Pane {
             id: container
             Layout.fillHeight: true
             Layout.fillWidth: true
             padding: 6
-            background: Rectangle
-            {
+            background: Rectangle {
                 color: Style.colorPopupBackground
                 border.width: 1
                 border.color: Style.colorContainerBorder
                 radius: 6
                 antialiasing: true
             }
-            
-            
-            ColumnLayout
-            {
+
+            ColumnLayout {
                 width: parent.width
-                
-                
-                ListView
-                {
+
+                ListView {
                     id: listView
                     Layout.fillWidth: true
                     Layout.preferredHeight: contentHeight
@@ -67,55 +58,72 @@ Popup
                     keyNavigationEnabled: true
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
-                    ScrollBar.vertical: ScrollBar { }
-                    
-                    model: ListModel
-                    {
-                        ListElement { text: qsTr("Recently added"); role: LibraryProxyModel.RecentlyAdded }
-                        ListElement { text: qsTr("Recently read"); role: LibraryProxyModel.LastOpened }
-                        ListElement { text: qsTr("Progress"); role: LibraryProxyModel.Progress }
-                        ListElement { text: qsTr("Book (A-Z)"); role: LibraryProxyModel.Title }
-                        ListElement { text: qsTr("Authors (A-Z)"); role: LibraryProxyModel.Authors }
+                    ScrollBar.vertical: ScrollBar {}
+
+                    model: ListModel {
+                        ListElement {
+                            text: qsTr("Recently added")
+                            role: LibraryProxyModel.RecentlyAdded
+                        }
+                        ListElement {
+                            text: qsTr("Recently read")
+                            role: LibraryProxyModel.LastOpened
+                        }
+                        ListElement {
+                            text: qsTr("Progress")
+                            role: LibraryProxyModel.Progress
+                        }
+                        ListElement {
+                            text: qsTr("Book (A-Z)")
+                            role: LibraryProxyModel.Title
+                        }
+                        ListElement {
+                            text: qsTr("Authors (A-Z)")
+                            role: LibraryProxyModel.Authors
+                        }
                     }
-                    
-                    delegate: MBaseListItem
-                    {
+
+                    delegate: MBaseListItem {
                         width: parent.width
                         containingListview: listView
-                        
-                        
-                        onClicked: (mouse, index) =>
-                                   {
+
+                        onClicked: (mouse, index) => {
                                        // Disable unselecting items
-                                       if(listView.itemAtIndex(index).selected)
-                                       {
-                                           return;
+                                       if (listView.itemAtIndex(
+                                               index).selected) {
+                                           return
                                        }
-                                       
-                                       internal.changeSelectedItem(index);
-                                       let role = listView.itemAtIndex(index).getRole();
-                                       root.itemSelected(role);
+
+                                       internal.changeSelectedItem(index)
+                                       let role = listView.itemAtIndex(
+                                           index).getRole()
+                                       root.itemSelected(role)
                                    }
+
+                        // Make sure to dynamically adjust the popup width based on the contents
+                        onCompleted: (index, width) => {
+                                         if (root.width < (width + container.padding * 2 + 16)) {
+                                             root.width = (width + container.padding * 2 + 16)
+                                         }
+                                     }
                     }
-                    
-                    Keys.onReturnPressed: internal.changeSelectedItem(listView.currentIndex)
-                    Component.onCompleted: internal.changeSelectedItem(0);
+
+                    Keys.onReturnPressed: internal.changeSelectedItem(
+                                              listView.currentIndex)
+                    Component.onCompleted: internal.changeSelectedItem(0)
                 }
             }
         }
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
-        
-        
-        function changeSelectedItem(index)
-        {
-            listView.currentItem.selected = false;
-            
-            listView.currentIndex = index;
-            listView.currentItem.selected = true;
+
+        function changeSelectedItem(index) {
+            listView.currentItem.selected = false
+
+            listView.currentIndex = index
+            listView.currentItem.selected = true
         }
     }
 }

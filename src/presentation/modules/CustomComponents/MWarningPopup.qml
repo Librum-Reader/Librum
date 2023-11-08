@@ -12,7 +12,7 @@ Popup {
     property string rightButtonText: qsTr("Decline")
     property string title: qsTr("Do you Accept?")
     property string message: qsTr("Message")
-    property int buttonsWidth: 120
+    property int buttonsWidth: -1
     property int messageBottomSpacing: 0
     property bool singleButton: false
     property bool rightButtonRed: false
@@ -20,6 +20,7 @@ Popup {
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
+    property bool keepButtonsSameWidth: true
 
     implicitWidth: 646
     implicitHeight: layout.height
@@ -114,9 +115,13 @@ Popup {
 
                         MButton {
                             id: leftButton
-                            Layout.preferredWidth: root.singleButton ? parent.width : root.buttonsWidth
+                            property int actualWidth: root.singleButton ? parent.width : (root.buttonsWidth == -1 ? implicitWidth : root.buttonsWidth)
+
+                            Layout.preferredWidth: root.keepButtonsSameWidth
+                                                   && actualWidth < rightButton.actualWidth ? rightButton.actualWidth : actualWidth
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                            horizontalMargins: 16
                             borderWidth: activeFocus ? 0 : 1
                             backgroundColor: activeFocus ? Style.colorBasePurple : "transparent"
                             opacityOnPressed: 0.7
@@ -134,9 +139,14 @@ Popup {
 
                         MButton {
                             id: rightButton
+                            property int actualWidth: root.buttonsWidth
+                                                      == -1 ? implicitWidth : root.buttonsWidth
+
                             visible: !root.singleButton
-                            Layout.preferredWidth: root.buttonsWidth
+                            Layout.preferredWidth: root.keepButtonsSameWidth
+                                                   && actualWidth < leftButton.actualWidth ? leftButton.actualWidth : actualWidth
                             Layout.preferredHeight: 40
+                            horizontalMargins: 20
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
                             borderWidth: focus ? 0 : 1
                             backgroundColor: focus ? (root.rightButtonRed ? Style.colorRed : Style.colorBasePurple) : "transparent"

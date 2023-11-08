@@ -84,12 +84,12 @@ MFlickWrapper {
 
                     MButton {
                         id: patreonButton
-                        Layout.preferredWidth: 146
                         Layout.preferredHeight: 38
                         Layout.topMargin: 10
+                        horizontalMargins: 12
                         borderWidth: 0
                         backgroundColor: Style.colorBasePurple
-                        imagePath: Icons.patreon
+                        imagePath: Icons.heartHallow
                         imageSize: 18
                         imageSpacing: 10
                         text: qsTr("Support us")
@@ -107,8 +107,10 @@ MFlickWrapper {
                         Layout.fillWidth: true
                         Layout.topMargin: 40
                         text: qsTr("You can support us in many other ways as well, if you are a developer or a designer, feel free to") + " <a href=\""
-                              + "https://librumreader.com/contribute\" style=\"color: " + Style.colorBasePurple + "; text-decoration: none;\"> "
-                              + qsTr("contribute to Librum") + "</a>.<br>" + qsTr("If you are not, you can still help us by spreading the word about Librum.")
+                              + "https://librumreader.com/contribute\" style=\"color: "
+                              + Style.colorBasePurple + "; text-decoration: none;\"> " + qsTr(
+                                  "contribute to Librum") + "</a>.<br>" + qsTr(
+                                  "If you are not, you can still help us by spreading the word about Librum.")
                         onLinkActivated: link => Qt.openUrlExternally(link)
                         textFormat: Text.RichText
                         wrapMode: Text.WordWrap
