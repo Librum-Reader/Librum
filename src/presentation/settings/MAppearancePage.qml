@@ -678,7 +678,7 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: ["Hidden after delay", "Always visible"]
+                            options: [internal.optionNameCursorModeHiddenAfterDelay, internal.optionNameCursorModeAlwaysVisible]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -688,6 +688,53 @@ Page {
                             onNewCurrentSelected: internal.saveSetting(
                                                       SettingKeys.CursorMode,
                                                       currentSelected)
+                        }
+
+                        ColumnLayout {
+                            id: hideCursorAfterDelayFieldLayout
+                            visible: cursorModeSelector.currentSelected
+                                     === internal.optionNameCursorModeHiddenAfterDelay ? true : false
+
+                            Label {
+                                id: hideCursorAfterDelayTitle
+                                Layout.fillWidth: true
+                                Layout.topMargin: 18
+                                text: "Hide cursor after delay"
+                                font.pointSize: Fonts.size13
+                                font.weight: Font.DemiBold
+                                color: Style.colorText
+                            }
+
+                            RowLayout {
+                                id: hideCursorAfterDelaySpinBoxLayout
+
+                                MSpinbox {
+                                    id: hideCursorAfterDelaySpinBox
+                                    property string savedValue: SettingsController.appearanceSettings.HideCursorAfterDelay
+                                    Layout.preferredWidth: 110
+                                    Layout.topMargin: 4
+                                    value: savedValue
+                                    minVal: 1
+                                    maxVal: 999999
+
+                                    onSavedValueChanged: value = savedValue
+                                    onNewValueSelected: internal.saveSetting(
+                                                            SettingKeys.HideCursorAfterDelay,
+                                                            value)
+                                }
+
+                                Text {
+                                    text: "ms"
+                                    font.pointSize: Fonts.size13
+                                    font.weight: Font.DemiBold
+                                    color: Style.colorText
+                                }
+                            }
+
+                            onVisibleChanged: {
+                                if (visible)
+                                    flickWrapper.flick(0, -2000)
+                            }
                         }
                     }
                 }
@@ -720,6 +767,8 @@ Page {
         id: internal
         property int pagePadding: 40
         property int scrollbarOffset: 22
+        property string optionNameCursorModeHiddenAfterDelay: "Hidden after delay"
+        property string optionNameCursorModeAlwaysVisible: "Always visible"
 
 
         /*

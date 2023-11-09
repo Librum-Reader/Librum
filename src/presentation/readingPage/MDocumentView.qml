@@ -86,8 +86,9 @@ Pane {
     Timer {
         id: hideCursorTimer
 
-        interval: 3000
-        running: true
+        interval: SettingsController.appearanceSettings.HideCursorAfterDelay
+        running: SettingsController.appearanceSettings.CursorMode
+                 === internal.optionNameCursorModeHiddenAfterDelay
 
         onTriggered: mouseArea.cursorShape = Qt.BlankCursor
     }
@@ -312,6 +313,7 @@ Pane {
 
     QtObject {
         id: internal
+        property string optionNameCursorModeHiddenAfterDelay: "Hidden after delay"
 
         function openSelectionOptionsPopup(centerX, topY) {
             if (centerX === -1 && topY === -1) {
@@ -344,7 +346,10 @@ Pane {
 
         function showCursor() {
             mouseArea.cursorShape = Qt.ArrowCursor
-            hideCursorTimer.start()
+
+            if (SettingsController.appearanceSettings.CursorMode
+                    === internal.optionNameCursorModeHiddenAfterDelay)
+                hideCursorTimer.start()
         }
     }
 }
