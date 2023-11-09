@@ -28,7 +28,7 @@ private:
     QString getCurrentQtVersion() const override;
     QString getOperatingSystem() const override;
     void updateApplication() override;
-    int getSystemFontSize() const override;
+    double getSystemFontSize() const override;
     bool isOnline() const override;
 
     application::IAppInfoService* m_appInfoService;

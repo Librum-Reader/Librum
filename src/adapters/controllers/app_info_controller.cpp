@@ -28,8 +28,15 @@ AppInfoController::AppInfoController(IAppInfoService* appInfoService) :
         qWarning() << "Failed loading QNetworkInformation backend";
 
     m_networkInfo = QNetworkInformation::instance();
-    connect(m_networkInfo, &QNetworkInformation::reachabilityChanged, this,
-            &AppInfoController::isOnlineChanged);
+    if(m_networkInfo == nullptr)
+    {
+        qWarning() << "Failed loading QNetworkInformation instance";
+    }
+    else
+    {
+        connect(m_networkInfo, &QNetworkInformation::reachabilityChanged, this,
+                &AppInfoController::isOnlineChanged);
+    }
 }
 
 QString AppInfoController::getCurrentVersion() const
@@ -93,19 +100,20 @@ void AppInfoController::updateApplication()
     m_appInfoService->updateApplication();
 }
 
-int AppInfoController::getSystemFontSize() const
+double AppInfoController::getSystemFontSize() const
 {
-#ifdef defined(Q_OS_MAC)
-    int size = 13;
-#else
-    int size = 9;
-#endif
+    auto os = getOperatingSystem();
+    if(os == "MACOS")
+        return 12.5;
 
-    return size;
+    return 9;
 }
 
 bool AppInfoController::isOnline() const
 {
+    if(m_networkInfo == nullptr)
+        return true;
+
     if(m_networkInfo->reachability() ==
        QNetworkInformation::Reachability::Online)
     {
