@@ -11,8 +11,10 @@ import Librum.fonts
  */
 Item {
     id: root
-    property string leftText: qsTr("Left")
-    property string rightText: qsTr("Right")
+    property string leftText: "Left"
+    property string leftDisplayText: qsTr("Left")
+    property string rightText: "Right"
+    property string rightDisplayText: qsTr("Right")
     property bool leftSelected: false
     property bool rightSelected: true // default
     signal toggled(string newSelected)
@@ -41,7 +43,7 @@ Item {
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: root.leftText
+                text: root.leftDisplayText
                 color: root.leftSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: Fonts.size12
                 font.weight: root.leftSelected ? Font.Bold : Font.DemiBold
@@ -93,7 +95,7 @@ Item {
                 Layout.preferredWidth: (root.width - separator.width) / 2
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: root.rightText
+                text: root.rightDisplayText
                 color: root.rightSelected ? Style.colorBasePurple : Style.colorLightText
                 font.pointSize: Fonts.size12
                 font.weight: root.rightSelected ? Font.Bold : Font.DemiBold

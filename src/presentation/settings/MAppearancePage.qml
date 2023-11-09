@@ -122,18 +122,18 @@ Page {
                             property string savedValue: SettingsController.appearanceSettings.Theme
 
                             Layout.topMargin: 4
-                            leftText: qsTr("Dark")
-                            rightText: qsTr("Light")
-                            leftSelected: savedValue === "Dark"
-                            rightSelected: savedValue === "Light"
+                            leftText: "Dark"
+                            leftDisplayText: qsTr("Dark")
+                            rightText: "Light"
+                            rightDisplayText: qsTr("Light")
+                            leftSelected: savedValue === leftText
+                            rightSelected: savedValue === rightText
 
                             // Need rebinding on reset
-                            onSavedValueChanged: savedValue === "Dark" ? selectLeft(
-                                                                             ) : selectRight()
+                            onSavedValueChanged: savedValue === leftText ? selectLeft(
+                                                                               ) : selectRight()
                             onToggled: newSelected => internal.saveSetting(
-                                           SettingKeys.Theme,
-                                           (newSelected === qsTr(
-                                                "Dark") ? "Dark" : "Light"))
+                                           SettingKeys.Theme, newSelected)
                         }
 
                         Label {
@@ -151,8 +151,10 @@ Page {
                             property string savedValue: SettingsController.appearanceSettings.PageColorMode
 
                             Layout.topMargin: 4
-                            leftText: qsTr("Normal")
-                            rightText: qsTr("Inverted")
+                            leftText: "Normal"
+                            leftDisplayText: qsTr("Normal")
+                            rightText: "Inverted"
+                            rightDisplayText: qsTr("Inverted")
                             leftSelected: savedValue === leftText
                             rightSelected: savedValue === rightText
 
@@ -261,7 +263,9 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: [qsTr("Vertical"), qsTr("Horizontal")]
+                            displayOptions: [qsTr("Vertical"), qsTr(
+                                    "Horizontal")]
+                            options: ["Vertical", "Horizontal"]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -289,7 +293,9 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: [qsTr("Single Page"), qsTr("Double Page")]
+                            displayOptions: [qsTr("Single Page"), qsTr(
+                                    "Double Page")]
+                            options: ["Single Page", "Double Page"]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 
@@ -680,8 +686,9 @@ Page {
 
                             Layout.fillWidth: true
                             Layout.topMargin: 6
-                            options: [qsTr("Hidden after delay"), qsTr(
+                            displayOptions: [qsTr("Hidden after delay"), qsTr(
                                     "Always visible")]
+                            options: ["Hidden after delay", "Always visible"]
                             currentSelected: changeSelected(options.indexOf(
                                                                 savedValue))
 

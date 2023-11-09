@@ -315,13 +315,12 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="125"/>
-        <location filename="../settings/MAppearancePage.qml" line="135"/>
+        <location filename="../settings/MAppearancePage.qml" line="126"/>
         <source>Dark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="126"/>
+        <location filename="../settings/MAppearancePage.qml" line="128"/>
         <source>Light</source>
         <translation type="unfinished"></translation>
     </message>
@@ -331,153 +330,153 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="154"/>
+        <location filename="../settings/MAppearancePage.qml" line="155"/>
         <source>Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="155"/>
+        <location filename="../settings/MAppearancePage.qml" line="157"/>
         <source>Inverted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="190"/>
+        <location filename="../settings/MAppearancePage.qml" line="192"/>
         <source>Reading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="200"/>
+        <location filename="../settings/MAppearancePage.qml" line="202"/>
         <source>Page spacing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="227"/>
+        <location filename="../settings/MAppearancePage.qml" line="229"/>
         <source>Display book title in titlebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="252"/>
+        <location filename="../settings/MAppearancePage.qml" line="254"/>
         <source>Layout direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="264"/>
+        <location filename="../settings/MAppearancePage.qml" line="266"/>
         <source>Vertical</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="264"/>
+        <location filename="../settings/MAppearancePage.qml" line="266"/>
         <source>Horizontal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="280"/>
+        <location filename="../settings/MAppearancePage.qml" line="284"/>
         <source>Display mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="292"/>
+        <location filename="../settings/MAppearancePage.qml" line="296"/>
         <source>Single Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="292"/>
+        <location filename="../settings/MAppearancePage.qml" line="296"/>
         <source>Double Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="308"/>
+        <location filename="../settings/MAppearancePage.qml" line="314"/>
         <source>Page transition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="332"/>
+        <location filename="../settings/MAppearancePage.qml" line="338"/>
         <source>Instant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="335"/>
+        <location filename="../settings/MAppearancePage.qml" line="341"/>
         <source>Fading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="338"/>
+        <location filename="../settings/MAppearancePage.qml" line="344"/>
         <source>Swipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="341"/>
+        <location filename="../settings/MAppearancePage.qml" line="347"/>
         <source>Swap</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="370"/>
+        <location filename="../settings/MAppearancePage.qml" line="376"/>
         <source>Default Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="416"/>
+        <location filename="../settings/MAppearancePage.qml" line="422"/>
         <source>Highlights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="425"/>
+        <location filename="../settings/MAppearancePage.qml" line="431"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="544"/>
+        <location filename="../settings/MAppearancePage.qml" line="550"/>
         <source>Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="611"/>
+        <location filename="../settings/MAppearancePage.qml" line="617"/>
         <source>Behavior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="621"/>
+        <location filename="../settings/MAppearancePage.qml" line="627"/>
         <source>Smooth scrolling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="646"/>
+        <location filename="../settings/MAppearancePage.qml" line="652"/>
         <source>Loop after last page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="671"/>
+        <location filename="../settings/MAppearancePage.qml" line="677"/>
         <source>Cursor mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="683"/>
+        <location filename="../settings/MAppearancePage.qml" line="689"/>
         <source>Hidden after delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="683"/>
+        <location filename="../settings/MAppearancePage.qml" line="689"/>
         <source>Always visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="708"/>
+        <location filename="../settings/MAppearancePage.qml" line="715"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="709"/>
+        <location filename="../settings/MAppearancePage.qml" line="716"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="710"/>
+        <location filename="../settings/MAppearancePage.qml" line="717"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="711"/>
+        <location filename="../settings/MAppearancePage.qml" line="718"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -828,12 +827,12 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MDualToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MDualToggle.qml" line="14"/>
+        <location filename="../modules/CustomComponents/MDualToggle.qml" line="15"/>
         <source>Left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MDualToggle.qml" line="15"/>
+        <location filename="../modules/CustomComponents/MDualToggle.qml" line="17"/>
         <source>Right</source>
         <translation type="unfinished"></translation>
     </message>

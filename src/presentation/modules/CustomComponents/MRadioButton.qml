@@ -12,6 +12,8 @@ Item {
     id: root
     property bool selected: false
     property string text
+    // To display the text differently, e.g. due to translations
+    property string displayText
     signal clicked
 
     implicitHeight: 22
@@ -53,7 +55,7 @@ Item {
             Layout.fillWidth: true
             Layout.maximumWidth: 200
             Layout.alignment: Qt.AlignVCenter
-            text: root.text
+            text: root.displayText
             font.pointSize: Fonts.size12
             font.weight: root.selected ? Font.Medium : Font.Normal
             color: Style.colorText
