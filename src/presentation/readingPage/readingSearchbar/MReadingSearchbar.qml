@@ -87,8 +87,8 @@ Item {
 
                 MButton {
                     id: optionsButton
-                    Layout.preferredWidth: 82
                     Layout.preferredHeight: 30
+                    horizontalMargins: 8
                     text: qsTr("Options")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
@@ -163,8 +163,8 @@ Item {
 
                 MButton {
                     id: nextButton
-                    Layout.preferredWidth: 81
                     Layout.preferredHeight: 30
+                    horizontalMargins: 10
                     text: qsTr("Next")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
@@ -182,8 +182,8 @@ Item {
 
                 MButton {
                     id: previousButton
-                    Layout.preferredWidth: 110
                     Layout.preferredHeight: 30
+                    horizontalMargins: 10
                     text: qsTr("Previous")
                     fontSize: Fonts.size12
                     textColor: Style.colorUnfocusedButtonText
