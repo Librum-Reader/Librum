@@ -1,8 +1,8 @@
 pragma Singleton
+
 import QtQuick
 
-Item
-{
+Item {
     property var selectedBook: null
     property var bookTags: []
 }

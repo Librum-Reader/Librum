@@ -5,6 +5,7 @@ import QtQuick.Dialogs
 import CustomComponents
 import Librum.style
 import Librum.icons
+import Librum.models
 import Librum.fonts
 import Librum.controllers
 
@@ -164,6 +165,59 @@ Page {
                             onToggled: newSelected => internal.saveSetting(
                                            SettingKeys.PageColorMode,
                                            newSelected)
+                        }
+
+                        Label {
+                            id: languageTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: qsTr("Language")
+                            font.pointSize: Fonts.size13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+
+                        MComboBox {
+                            id: languageComboBox
+                            Layout.topMargin: 4
+                            Layout.preferredHeight: 36
+                            Layout.fillWidth: true
+                            Layout.maximumWidth: 380
+                            selectedItemFontSize: Fonts.size12
+                            selectedItemPadding: 4
+                            defaultIndex: calculateDefaultIndex()
+                            dropdownIconSize: 9
+                            itemHeight: 32
+                            fontSize: Fonts.size12
+                            checkBoxStyle: false
+                            maxHeight: 200
+                            model: LanguageModel
+
+                            onItemChanged: index => {
+                                               AppInfoController.switchToLanguage(
+                                                   model.get(index).code)
+
+                                               languageComboBox.closePopup()
+                                           }
+
+                            Component.onCompleted: {
+                                let defaultIndex = calculateDefaultIndex()
+                                if (listView.currentIndex === defaultIndex)
+                                    return
+
+                                deselectCurrenItem()
+                                selectItem(defaultIndex, true)
+                            }
+
+                            function calculateDefaultIndex() {
+                                let selectedLanguage = AppInfoController.language
+                                for (var i = 0; i < model.count; ++i) {
+                                    if (model.get(i).text === selectedLanguage)
+                                        return i
+                                }
+
+                                return -1
+                            }
                         }
                     }
                 }

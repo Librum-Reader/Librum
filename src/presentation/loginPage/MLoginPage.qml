@@ -88,20 +88,7 @@ MFlickWrapper {
             popupSpacing: 14
             borderWidth: 0
 
-            model: ListModel {
-                ListElement {
-                    text: "English"
-                    code: "en"
-                }
-                ListElement {
-                    text: "Deutsch"
-                    code: "de"
-                }
-                //                ListElement {
-                //                    text: "Русский"
-                //                    code: "ru"
-                //                }
-            }
+            model: LanguageModel
 
             onItemChanged: index => AppInfoController.switchToLanguage(
                                model.get(index).code)
