@@ -152,13 +152,14 @@ Item {
         y: baseRoot.height / 2 - height / 2 - 160
         visible: false
         title: qsTr("Updating on Linux")
-        message: qsTr("Please use your package manager to update Librum or download the newest version from our") + " " + '<a href="'
-                 + AppInfoController.website + '" style="text-decoration: none; color: '
-                 + Style.colorBasePurple + ';">' + qsTr('website') + '</a>.'
+        message: qsTr("Please use your package manager to update Librum or download the newest version from our")
+                 + " " + '<a href="' + AppInfoController.website
+                 + '" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">' + qsTr(
+                     'website') + '</a>.'
         leftButtonText: qsTr("Close")
         rightButtonText: qsTr("Email Us")
-        buttonsWidth: 180
         messageBottomSpacing: 10
+        minButtonWidth: 180
         richText: true
 
         onOpenedChanged: if (opened)
@@ -175,13 +176,14 @@ Item {
         y: baseRoot.height / 2 - height / 2 - 160
         visible: false
         title: qsTr("The Update Failed")
-        message: qsTr("Please try again later or download the newest version from our") + " " + '<a href="'
-                 + AppInfoController.website + '" style="text-decoration: none; color: '
-                 + Style.colorBasePurple + ';">' + qsTr('website') + '</a>.'
+        message: qsTr("Please try again later or download the newest version from our")
+                 + " " + '<a href="' + AppInfoController.website
+                 + '" style="text-decoration: none; color: ' + Style.colorBasePurple + ';">' + qsTr(
+                     'website') + '</a>.'
         leftButtonText: qsTr("Close")
         rightButtonText: qsTr("Email Us")
-        buttonsWidth: 180
         messageBottomSpacing: 10
+        minButtonWidth: 180
         richText: true
 
         onOpenedChanged: if (opened)

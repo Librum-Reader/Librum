@@ -716,7 +716,6 @@ Page {
         message: qsTr("Resetting your settings is a permanent action, there\n will be no way to restore them!")
         leftButtonText: qsTr("No, Keep")
         rightButtonText: qsTr("Yes, Reset")
-        buttonsWidth: 180
         messageBottomSpacing: 10
 
         onOpenedChanged: if (opened)

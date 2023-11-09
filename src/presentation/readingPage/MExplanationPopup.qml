@@ -47,14 +47,16 @@ Popup {
         function onLimitReached() {
             errorItem.visible = true
             //: Make sure that the words make a valid sentence
-            errorText.text
-                    = qsTr('You have reached your daily limit.') + ' ' + qsTr('Click') + ' <a href="update" style="color: '
-                    + Style.colorBasePurple + '; text-decoration: none;">' + qsTr('here') + '</a> ' + qsTr('to learn more.')
+            errorText.text = qsTr('You have reached your daily limit.') + ' ' + qsTr(
+                        'Click') + ' <a href="update" style="color: '
+                    + Style.colorBasePurple + '; text-decoration: none;">'
+                    + qsTr('here') + '</a> ' + qsTr('to learn more.')
         }
 
         function onRequestTooLong() {
             errorItem.visible = true
-            errorText.text = qsTr('Oops! The text is too long. Please shorten your selection.')
+            errorText.text = qsTr(
+                        'Oops! The text is too long. Please shorten your selection.')
         }
     }
 
@@ -287,14 +289,14 @@ Popup {
 
         MButton {
             id: askButton
-            Layout.preferredWidth: 140
             Layout.preferredHeight: 38
             Layout.topMargin: 4
             Layout.alignment: Qt.AlignLeft
+            horizontalMargins: 46
             borderWidth: internal.dataChanged ? 0 : 1
             backgroundColor: internal.dataChanged ? Style.colorBasePurple : "transparent"
             opacityOnPressed: 0.7
-            text: "Ask"
+            text: qsTr("Ask")
             textColor: internal.dataChanged ? Style.colorFocusedButtonText : Style.colorUnfocusedButtonText
             fontWeight: Font.Bold
             fontSize: Fonts.size12

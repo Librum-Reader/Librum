@@ -187,10 +187,10 @@ Popup {
                             let value = ""
 
                             let current = SettingsController.appearanceSettings.PageColorMode
-                            if (current === qsTr("Normal"))
-                                value = qsTr("Inverted")
+                            if (current === "Normal")
+                                value = "Inverted"
                             else
-                                value = qsTr("Normal")
+                                value = "Normal"
 
                             SettingsController.setSetting(
                                         SettingKeys.PageColorMode, value,

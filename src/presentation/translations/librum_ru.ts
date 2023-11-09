@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.1" language="ru">
 <context>
     <name>MAboutPage</name>
     <message>
@@ -504,118 +504,99 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="172"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
         <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="187"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="541"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="188"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="542"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="235"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="236"/>
         <source>Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="240"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="259"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="369"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="388"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="592"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="241"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="260"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="370"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="389"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="574"/>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="254"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
         <source>Authors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="273"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="274"/>
         <source>Pages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="291"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="292"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="364"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
         <source>Document creator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="383"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
         <source>Creation date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="402"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="403"/>
         <source>Format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="420"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
         <source>Document size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="439"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="440"/>
         <source>Added</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="457"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="458"/>
         <source>Last opened</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="491"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="492"/>
         <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="516"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="517"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="563"/>
-        <source>Delete Book?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
-        <source>Deleting a book is a permanent action, no one will be
- able to restore it afterwards!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
-        <source>No, Keep Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
-        <source>Yes, Delete Book</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="581"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="584"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="585"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
         <source>files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -853,74 +834,79 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MExplanationPopup</name>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="51"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>You have reached your daily limit.</source>
         <extracomment>Make sure that the words make a valid sentence</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="51"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="52"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to learn more.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="57"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
         <source>Oops! The text is too long. Please shorten your selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="65"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="67"/>
         <source>Explain</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="69"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="71"/>
         <source>Explain like I&apos;m five</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="73"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="75"/>
         <source>Summarize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="77"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="79"/>
         <source>Give more information</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="81"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="83"/>
         <source>Explain visually</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="111"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="113"/>
         <source>Mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="119"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="121"/>
         <source>None selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="142"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="144"/>
         <source>Request</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MExplanationPopup.qml" line="281"/>
+        <location filename="../readingPage/MExplanationPopup.qml" line="283"/>
         <source>Note: AI responses can be inaccurate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../readingPage/MExplanationPopup.qml" line="299"/>
+        <source>Ask</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1168,56 +1154,56 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="402"/>
+        <location filename="../homePage/MHomePage.qml" line="401"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="417"/>
+        <location filename="../homePage/MHomePage.qml" line="416"/>
         <source>Limit Reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="418"/>
+        <location filename="../homePage/MHomePage.qml" line="417"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="419"/>
-        <location filename="../homePage/MHomePage.qml" line="438"/>
+        <location filename="../homePage/MHomePage.qml" line="418"/>
+        <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="420"/>
+        <location filename="../homePage/MHomePage.qml" line="419"/>
         <source>Upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="436"/>
+        <location filename="../homePage/MHomePage.qml" line="434"/>
         <source>Unsupported File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="437"/>
+        <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="450"/>
+        <location filename="../homePage/MHomePage.qml" line="447"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="453"/>
+        <location filename="../homePage/MHomePage.qml" line="450"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="454"/>
-        <location filename="../homePage/MHomePage.qml" line="455"/>
-        <location filename="../homePage/MHomePage.qml" line="456"/>
+        <location filename="../homePage/MHomePage.qml" line="451"/>
+        <location filename="../homePage/MHomePage.qml" line="452"/>
+        <location filename="../homePage/MHomePage.qml" line="453"/>
         <source>files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1324,7 +1310,7 @@ Delete unused books to free up space or upgrade.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
         <source>ON</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1370,17 +1356,6 @@ Delete unused books to free up space or upgrade.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="190"/>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="193"/>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="191"/>
-        <source>Inverted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="209"/>
         <source>Sync book</source>
         <translation type="unfinished"></translation>
@@ -1422,17 +1397,17 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingSearchbarOptionsPopup</name>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="51"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="52"/>
         <source>From start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="65"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="79"/>
+        <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
         <source>Whole words</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2026,29 +2001,29 @@ working on fun projects, supporting our community and trying to make the world a
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="157"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="180"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="181"/>
         <source>website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="158"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="181"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="159"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="183"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="159"/>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="182"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
         <source>Email Us</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="177"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="178"/>
         <source>The Update Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="178"/>
+        <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>Please try again later or download the newest version from our</source>
         <translation type="unfinished"></translation>
     </message>

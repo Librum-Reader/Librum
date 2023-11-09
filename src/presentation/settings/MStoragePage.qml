@@ -358,7 +358,7 @@ MFlickWrapper {
                  + ": " + AppInfoController.companyEmail
         leftButtonText: qsTr("Close")
         rightButtonText: qsTr("Email Us")
-        buttonsWidth: 180
+        minButtonWidth: 180
         messageBottomSpacing: 10
 
         onOpenedChanged: if (opened)

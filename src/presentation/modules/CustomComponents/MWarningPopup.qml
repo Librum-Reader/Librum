@@ -12,15 +12,15 @@ Popup {
     property string rightButtonText: qsTr("Decline")
     property string title: qsTr("Do you Accept?")
     property string message: qsTr("Message")
-    property int buttonsWidth: -1
     property int messageBottomSpacing: 0
     property bool singleButton: false
     property bool rightButtonRed: false
     property bool richText: false
+    property bool keepButtonsSameWidth: true
+    property int minButtonWidth: 30
     signal leftButtonClicked
     signal rightButtonClicked
     signal decisionMade
-    property bool keepButtonsSameWidth: true
 
     implicitWidth: 646
     implicitHeight: layout.height
@@ -115,10 +115,11 @@ Popup {
 
                         MButton {
                             id: leftButton
-                            property int actualWidth: root.singleButton ? parent.width : (root.buttonsWidth == -1 ? implicitWidth : root.buttonsWidth)
+                            property int actualWidth: root.singleButton ? parent.width : implicitWidth
 
                             Layout.preferredWidth: root.keepButtonsSameWidth
                                                    && actualWidth < rightButton.actualWidth ? rightButton.actualWidth : actualWidth
+                            Layout.minimumWidth: root.minButtonWidth
                             Layout.preferredHeight: 40
                             Layout.alignment: Qt.AlignBottom | Qt.AlignRight
                             horizontalMargins: 16
@@ -139,12 +140,12 @@ Popup {
 
                         MButton {
                             id: rightButton
-                            property int actualWidth: root.buttonsWidth
-                                                      == -1 ? implicitWidth : root.buttonsWidth
+                            property int actualWidth: implicitWidth
 
                             visible: !root.singleButton
                             Layout.preferredWidth: root.keepButtonsSameWidth
                                                    && actualWidth < leftButton.actualWidth ? leftButton.actualWidth : actualWidth
+                            Layout.minimumWidth: root.minButtonWidth
                             Layout.preferredHeight: 40
                             horizontalMargins: 20
                             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft

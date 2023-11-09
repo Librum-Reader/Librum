@@ -17,6 +17,7 @@ Popup {
     background: Rectangle {
         color: "transparent"
     }
+    clip: true
 
     ColumnLayout {
         id: mainLayout

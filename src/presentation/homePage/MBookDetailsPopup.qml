@@ -118,6 +118,7 @@ Popup {
                   */
                 Item {
                     id: bookCoverSide
+                    SplitView.preferredHeight: parent.height
                     SplitView.preferredWidth: 218
                     SplitView.minimumWidth: 80
                     SplitView.maximumWidth: 246
@@ -555,34 +556,15 @@ Popup {
         }
     }
 
-    MWarningPopup {
-        id: acceptDeletionPopup
-        x: root.width / 2 - implicitWidth / 2
-        y: root.height / 2 - implicitHeight / 2 - 30
-        visible: false
-        title: qsTr("Delete Book?")
-        message: qsTr("Deleting a book is a permanent action, no one will be\n able to restore it afterwards!")
-        leftButtonText: qsTr("No, Keep Book")
-        rightButtonText: qsTr("Yes, Delete Book")
-        buttonsWidth: 180
-        messageBottomSpacing: 10
-
-        onOpenedChanged: if (opened)
-                             acceptDeletionPopup.giveFocus()
-        onDecisionMade: close()
-        onRightButtonClicked: {
-            LibraryController.deleteBook(Globals.selectedBook.uuid)
-            root.close()
-        }
-    }
-
     FileDialog {
         id: chooseImageDialog
         acceptLabel: qsTr("Select")
         fileMode: FileDialog.OpenFile
         folder: StandardPaths.writableLocation(StandardPaths.DocumentsLocation)
-        nameFilters: [qsTr("All files") + "(*.png *.jpg *.jpg *.jpeg)",
-                     "png " + qsTr("files") + " (*.png)", "jpg " + qsTr("files") + " (*.jpg)", "jpeg " + qsTr("files") + " (*.jpeg)"]
+        nameFilters: [qsTr(
+                "All files") + "(*.png *.jpg *.jpg *.jpeg)", "png " + qsTr(
+                "files") + " (*.png)", "jpg " + qsTr(
+                "files") + " (*.jpg)", "jpeg " + qsTr("files") + " (*.jpeg)"]
 
         onAccepted: bookCover.source = file
     }

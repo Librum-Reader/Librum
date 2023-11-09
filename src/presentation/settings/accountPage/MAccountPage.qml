@@ -463,7 +463,7 @@ MFlickWrapper {
         message: qsTr("It looks like you forgot to save your changes, are you sure that you dont want to save them?")
         leftButtonText: qsTr("Save")
         rightButtonText: qsTr("Don't save")
-        buttonsWidth: 120
+        minButtonWidth: 180
 
         onOpenedChanged: if (opened)
                              unsavedChangesPopup.giveFocus()

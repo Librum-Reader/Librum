@@ -362,7 +362,6 @@ Page {
         message: qsTr("Deleting a book is a permanent action, no one will be\n able to restore it afterwards!")
         leftButtonText: qsTr("Remove from Device")
         rightButtonText: qsTr("Delete Everywhere")
-        buttonsWidth: -1
         messageBottomSpacing: 10
         rightButtonRed: true
 
@@ -418,9 +417,8 @@ Page {
         message: qsTr("You have reached your upload limit.\nDelete unused books to free up space or upgrade.")
         leftButtonText: qsTr("Ok")
         rightButtonText: qsTr("Upgrade")
-        buttonsWidth: 180
         messageBottomSpacing: 16
-
+        minButtonWidth: 180
         onOpenedChanged: if (opened)
                              uploadLimitReachedPopup.giveFocus()
         onDecisionMade: close()
@@ -436,7 +434,6 @@ Page {
         title: qsTr("Unsupported File")
         message: qsTr("Oops! This file is not supported by Librum.")
         leftButtonText: qsTr("Ok")
-        buttonsWidth: 180
         messageBottomSpacing: 24
         singleButton: true
 
