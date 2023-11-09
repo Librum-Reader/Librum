@@ -36,6 +36,12 @@ If you want to build Librum from source, follow the instructions [here](#build-g
 
 <br>
 
+# Translations
+
+Do you want to translate Librum into your language? If so, then feel free to reach out to us at contact@librumreader.com and we can work on making that happen together!
+
+<br>
+
 # Documentation
 
 For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/Librum/wiki)
