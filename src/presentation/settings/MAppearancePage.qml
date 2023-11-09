@@ -711,11 +711,11 @@ Page {
                                 MSpinbox {
                                     id: hideCursorAfterDelaySpinBox
                                     property string savedValue: SettingsController.appearanceSettings.HideCursorAfterDelay
-                                    Layout.preferredWidth: 110
+                                    Layout.preferredWidth: 100
                                     Layout.topMargin: 4
                                     value: savedValue
                                     minVal: 1
-                                    maxVal: 999999
+                                    maxVal: 99999
 
                                     onSavedValueChanged: value = savedValue
                                     onNewValueSelected: internal.saveSetting(
