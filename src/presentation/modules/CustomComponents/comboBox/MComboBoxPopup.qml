@@ -21,7 +21,7 @@ Popup {
     property bool multiSelect: false
     property double fontSize: Fonts.size11
     property int fontWeight: Font.Normal
-    signal itemChanged
+    signal itemChanged(int index)
 
     padding: 8
     closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
@@ -91,7 +91,7 @@ Popup {
 
         Logic.selectItem(index)
         if (!initialSelect)
-            root.itemChanged()
+            root.itemChanged(index)
     }
 
     function deselectCurrenItem() {

@@ -22,6 +22,10 @@ Item {
     property alias defaultIndex: selectionPopup.defaultIndex
     property alias fontSize: selectionPopup.fontSize
     property alias fontWeight: selectionPopup.fontWeight
+    property alias popupSpacing: selectionPopup.popupSpacing
+    property bool dropDownIconLeft: false
+    property int spacing: 4
+    property int borderWidth: 1
 
     property string headerText
     property int headerFontWeight: Font.Bold
@@ -35,7 +39,7 @@ Item {
 
     property string dropdownIcon: Icons.dropdownLight
     property int dropdownIconSize: 6
-    signal itemChanged
+    signal itemChanged(int index)
 
     implicitHeight: 47
 
@@ -62,7 +66,7 @@ Item {
             horizontalPadding: 10
             background: Rectangle {
                 color: root.boxBackgroundColor
-                border.width: 1
+                border.width: root.borderWidth
                 border.color: Style.colorContainerBorder
                 radius: 4
             }
@@ -71,7 +75,35 @@ Item {
                 id: contentLayout
                 width: parent.width
                 anchors.centerIn: parent
-                spacing: 4
+                spacing: root.spacing
+
+                Image {
+                    id: dropDownIconLeft
+                    visible: root.dropDownIconLeft
+                    Layout.alignment: Qt.AlignRight
+                    sourceSize.width: root.dropdownIconSize
+                    source: root.dropdownIcon
+                    rotation: -180
+                    fillMode: Image.PreserveAspectFit
+
+                    NumberAnimation {
+                        id: closeAnimLeft
+                        target: dropDownIconLeft
+                        property: "rotation"
+                        to: -180
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
+
+                    NumberAnimation {
+                        id: openAnimLeft
+                        target: dropDownIconLeft
+                        property: "rotation"
+                        to: 0
+                        duration: 175
+                        easing.type: Easing.InOutQuad
+                    }
+                }
 
                 Label {
                     id: selectedItem
@@ -86,7 +118,8 @@ Item {
                 }
 
                 Image {
-                    id: dropDownIcon
+                    id: dropDownIconRight
+                    visible: !root.dropDownIconLeft
                     Layout.alignment: Qt.AlignRight
                     sourceSize.width: root.dropdownIconSize
                     source: root.dropdownIcon
@@ -94,8 +127,8 @@ Item {
                     fillMode: Image.PreserveAspectFit
 
                     NumberAnimation {
-                        id: closeAnim
-                        target: dropDownIcon
+                        id: closeAnimRight
+                        target: dropDownIconRight
                         property: "rotation"
                         to: -180
                         duration: 175
@@ -103,8 +136,8 @@ Item {
                     }
 
                     NumberAnimation {
-                        id: openAnim
-                        target: dropDownIcon
+                        id: openAnimRight
+                        target: dropDownIconRight
                         property: "rotation"
                         to: 0
                         duration: 175
@@ -134,11 +167,12 @@ Item {
         width: parent.width
         multiSelect: root.multiSelect
 
-        onClosed: closeAnim.start()
-        onItemChanged: root.itemChanged()
+        onClosed: root.dropDownIconLeft ? closeAnimLeft.start(
+                                              ) : closeAnimRight.start()
+        onItemChanged: index => root.itemChanged(index)
         onAboutToShow: {
             fitsToBottom = internal.popupFitsBelowComboBox()
-            openAnim.start()
+            root.dropDownIconLeft ? openAnimLeft.start() : openAnimRight.start()
         }
     }
 

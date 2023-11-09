@@ -728,7 +728,7 @@ wird es danach wiederherstellen können!</translation>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="31"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
         <source>Any</source>
         <translation>Beliebig</translation>
     </message>
@@ -1245,62 +1245,62 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
 <context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="96"/>
+        <location filename="../loginPage/MLoginPage.qml" line="150"/>
         <source>Welcome back!</source>
         <translation>Willkommen zurrück!</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="106"/>
+        <location filename="../loginPage/MLoginPage.qml" line="160"/>
         <source>Log into your account</source>
         <translation>Melde dich in deinem Konto an</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="117"/>
+        <location filename="../loginPage/MLoginPage.qml" line="171"/>
         <source>Email</source>
         <translation>Email</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="132"/>
+        <location filename="../loginPage/MLoginPage.qml" line="186"/>
         <source>Password</source>
         <translation>Passwort</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="178"/>
+        <location filename="../loginPage/MLoginPage.qml" line="232"/>
         <source>Remember me</source>
         <translation>Angemeldet bleiben</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="198"/>
+        <location filename="../loginPage/MLoginPage.qml" line="252"/>
         <source>Forgot password?</source>
         <translation>Passwort vergessen?</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="225"/>
+        <location filename="../loginPage/MLoginPage.qml" line="279"/>
         <source>Login</source>
         <translation>Login</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="249"/>
+        <location filename="../loginPage/MLoginPage.qml" line="304"/>
         <source>Don&apos;t have an account? Register</source>
         <translation>Noch kein Konto? Registrieren</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="268"/>
+        <location filename="../loginPage/MLoginPage.qml" line="323"/>
         <source>We&apos;re Sorry</source>
         <translation>Es tut uns leid</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="269"/>
+        <location filename="../loginPage/MLoginPage.qml" line="324"/>
         <source>Logging you in failed, please try again later.</source>
         <translation>Die Anmeldung ist fehlgeschlagen, bitte versuche es später erneut.</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="270"/>
+        <location filename="../loginPage/MLoginPage.qml" line="325"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="271"/>
+        <location filename="../loginPage/MLoginPage.qml" line="326"/>
         <source>Report</source>
         <translation>Melden</translation>
     </message>

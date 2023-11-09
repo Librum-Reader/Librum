@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QQmlApplicationEngine>
 #include <QString>
 #include "adapters_export.hpp"
 
@@ -28,11 +29,15 @@ class ADAPTERS_EXPORT IAppInfoController : public QObject
     Q_PROPERTY(QString operatingSystem READ getOperatingSystem CONSTANT)
     Q_PROPERTY(int systemFontSize READ getSystemFontSize CONSTANT)
     Q_PROPERTY(bool online READ isOnline NOTIFY isOnlineChanged)
+    Q_PROPERTY(QString language READ getLanguage NOTIFY languageChanged)
 
 public:
     virtual ~IAppInfoController() noexcept = default;
 
     Q_INVOKABLE virtual void updateApplication() = 0;
+    Q_INVOKABLE virtual bool switchToLanguage(const QString& language) = 0;
+    Q_INVOKABLE virtual void setQmlApplicationEngine(
+        QQmlApplicationEngine* engine) = 0;
 
 private:
     virtual QString getCurrentVersion() const = 0;
@@ -47,12 +52,14 @@ private:
     virtual QString getOperatingSystem() const = 0;
     virtual double getSystemFontSize() const = 0;
     virtual bool isOnline() const = 0;
+    virtual QString getLanguage() const = 0;
 
 signals:
     void newestVersionChanged();
     void downloadingBinariesProgressChanged(double progress);
     void applicaitonUpdateFailed();
     void isOnlineChanged();
+    void languageChanged();
 };
 
 }  // namespace adapters

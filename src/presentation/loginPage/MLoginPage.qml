@@ -1,4 +1,5 @@
 import QtQuick
+import QtCore
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Window
@@ -25,7 +26,12 @@ MFlickWrapper {
         // For some reason this prevents a SEGV. Directly calling the auto login
         // directly causes the application to crash on startup.
         autoLoginTimer.start()
+
+        // Determine the index of the language used in the combobox
+        let index = languageComboBox.getIndexByText(AppInfoController.language)
+        languageComboBox.defaultIndex = index
     }
+
     Timer {
         id: autoLoginTimer
         interval: 0
@@ -62,6 +68,54 @@ MFlickWrapper {
         bottomPadding: 22
         background: Rectangle {
             color: Style.colorAuthenticationPageBackground
+        }
+
+        MComboBox {
+            id: languageComboBox
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.leftMargin: 12
+            width: 160
+            height: 12
+            dropDownIconLeft: true
+            boxBackgroundColor: "transparent"
+            checkBoxStyle: false
+            fontSize: Fonts.size12
+            selectedItemFontSize: Fonts.size12
+            maxHeight: 200
+            spacing: 14
+            dropdownIconSize: 10
+            popupSpacing: 14
+            borderWidth: 0
+
+            model: ListModel {
+                ListElement {
+                    text: "English"
+                    code: "en"
+                }
+                ListElement {
+                    text: "Deutsch"
+                    code: "de"
+                }
+                //                ListElement {
+                //                    text: "Русский"
+                //                    code: "ru"
+                //                }
+            }
+
+            onItemChanged: index => AppInfoController.switchToLanguage(
+                               model.get(index).code)
+
+            function getIndexByText(searchText) {
+                for (var i = 0; i < model.count; ++i) {
+                    if (model.get(i).text.toLocaleLowerCase(
+                                ) === searchText.toLocaleLowerCase()) {
+                        return i
+                    }
+                }
+
+                return -1
+            }
         }
 
         ColumnLayout {
@@ -225,6 +279,7 @@ MFlickWrapper {
                         text: qsTr("Login")
 
                         onClicked: internal.login()
+
                         onFocusChanged: {
                             if (focus)
                                 opacity = opacityOnPressed

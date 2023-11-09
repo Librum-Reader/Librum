@@ -2,6 +2,11 @@
 #include <QDebug>
 #include <QDir>
 #include <QFontDatabase>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QSettings>
 
 using namespace application;
 
@@ -121,6 +126,45 @@ bool AppInfoController::isOnline() const
     }
 
     return false;
+}
+
+QString AppInfoController::getLanguage() const
+{
+    return m_language;
+}
+
+bool AppInfoController::switchToLanguage(const QString& language)
+{
+    if(!m_translator.isEmpty())
+        QGuiApplication::removeTranslator(&m_translator);
+
+    auto success = m_translator.load(":/i18n/librum_" + language);
+    if(!success)
+    {
+        qWarning() << "Failed switching to language: " << language;
+        return false;
+    }
+
+    QGuiApplication::installTranslator(&m_translator);
+    emit languageChanged();
+
+    // Use "English" for all kinds of English variants like American English
+    if(QLocale(language).language() == QLocale::Language::English)
+        m_language = "English";
+    else
+        m_language = QLocale(language).nativeLanguageName();
+
+
+    QSettings settings;
+    settings.setValue("language", language);
+
+    m_engine->retranslate();
+    return true;
+}
+
+void AppInfoController::setQmlApplicationEngine(QQmlApplicationEngine* engine)
+{
+    m_engine = engine;
 }
 
 }  // namespace adapters::controllers

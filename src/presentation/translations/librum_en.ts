@@ -716,7 +716,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="31"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
         <source>Any</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1226,62 +1226,62 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MLoginPage</name>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="96"/>
+        <location filename="../loginPage/MLoginPage.qml" line="150"/>
         <source>Welcome back!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="106"/>
+        <location filename="../loginPage/MLoginPage.qml" line="160"/>
         <source>Log into your account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="117"/>
+        <location filename="../loginPage/MLoginPage.qml" line="171"/>
         <source>Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="132"/>
+        <location filename="../loginPage/MLoginPage.qml" line="186"/>
         <source>Password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="178"/>
+        <location filename="../loginPage/MLoginPage.qml" line="232"/>
         <source>Remember me</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="198"/>
+        <location filename="../loginPage/MLoginPage.qml" line="252"/>
         <source>Forgot password?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="225"/>
+        <location filename="../loginPage/MLoginPage.qml" line="279"/>
         <source>Login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="249"/>
+        <location filename="../loginPage/MLoginPage.qml" line="304"/>
         <source>Don&apos;t have an account? Register</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="268"/>
+        <location filename="../loginPage/MLoginPage.qml" line="323"/>
         <source>We&apos;re Sorry</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="269"/>
+        <location filename="../loginPage/MLoginPage.qml" line="324"/>
         <source>Logging you in failed, please try again later.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="270"/>
+        <location filename="../loginPage/MLoginPage.qml" line="325"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../loginPage/MLoginPage.qml" line="271"/>
+        <location filename="../loginPage/MLoginPage.qml" line="326"/>
         <source>Report</source>
         <translation type="unfinished"></translation>
     </message>

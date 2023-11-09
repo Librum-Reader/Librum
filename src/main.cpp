@@ -45,7 +45,6 @@ using namespace application::services;
 void registerTypes();
 void setupGlobalSettings();
 void setupFonts();
-void addTranslations(QTranslator& translator);
 
 int main(int argc, char* argv[])
 {
@@ -61,12 +60,6 @@ int main(int argc, char* argv[])
     app.setWindowIcon(icon);
 
     qInstallMessageHandler(logging::messageHandler);
-
-
-    QTranslator translator;
-    addTranslations(translator);
-
-
     setupGlobalSettings();
     setupFonts();
 
@@ -214,10 +207,33 @@ int main(int argc, char* argv[])
 
     // Startup
     QQmlApplicationEngine engine;
+    QQuickStyle::setStyle("Basic");
     engine.addImportPath("qrc:/modules");
     engine.addImportPath(QCoreApplication::applicationDirPath() + "/src/presentation/qt_tree_view/qml/");
+    appInfoController->setQmlApplicationEngine(&engine);
 
-    QQuickStyle::setStyle("Basic");
+
+    // Setup translations
+    QSettings settings;
+    auto storedLanguage = settings.value("language", QVariant("")).toString();
+    if(storedLanguage.isEmpty())
+    {
+        // If no language was specified in the settings, deduce the system language
+        const QStringList uiLanguages = QLocale::system().uiLanguages();
+        for(const QString& locale : uiLanguages)
+        {
+            const QString name = QLocale(locale).name();
+            if(appInfoController->switchToLanguage(name))
+            {
+                break;
+            }
+        }
+    }
+    else
+    {
+        appInfoController->switchToLanguage(storedLanguage);
+    }
+
 
     const QUrl url("qrc:/main.qml");
     QObject::connect(
@@ -244,20 +260,6 @@ void setupGlobalSettings()
     QString sslSettings = settings.value("selfHosted", QVariant("")).toString();
     if(sslSettings.isEmpty())
         settings.setValue("selfHosted", "false");
-}
-
-void addTranslations(QTranslator& translator)
-{
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for(const QString& locale : uiLanguages)
-    {
-        const QString baseName = "librum_" + QLocale(locale).name();
-        if(translator.load(":/i18n/" + baseName))
-        {
-            QGuiApplication::installTranslator(&translator);
-            break;
-        }
-    }
 }
 
 void loadFont(const QString& path)
