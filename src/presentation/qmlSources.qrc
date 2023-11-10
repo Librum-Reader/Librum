@@ -70,7 +70,7 @@
         <file>Globals.qml</file>
         <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
-        <file>settings/MGeneralSettingsPage.qml</file>
+        <file>settings/MBehaviorPage.qml</file>
         <file>modules/CustomComponents/MDualToggle.qml</file>
         <file>modules/CustomComponents/MSpinbox.qml</file>
         <file>modules/CustomComponents/MRadioButton.qml</file>

@@ -12,7 +12,7 @@ struct ApplicationSettings
 {
     // Each setting has a key (QString) and value (QVariant)
     std::vector<std::pair<QString, QVariant>> appearanceSettings;
-    std::vector<std::pair<QString, QVariant>> generalSettings;
+    std::vector<std::pair<QString, QVariant>> behaviorSettings;
     std::vector<std::pair<QString, QVariant>> shortcuts;
 };
 

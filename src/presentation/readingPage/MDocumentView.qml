@@ -85,12 +85,14 @@ Pane {
 
     Timer {
         id: hideCursorTimer
-
-        interval: SettingsController.appearanceSettings.HideCursorAfterDelay
-        running: SettingsController.appearanceSettings.CursorMode
-                 === internal.optionNameCursorModeHiddenAfterDelay
+        interval: SettingsController.behaviorSettings.HideCursorAfterDelay
 
         onTriggered: {
+            if (SettingsController.behaviorSettings.CursorMode
+                    !== internal.optionNameCursorModeHiddenAfterDelay) {
+                return
+            }
+
             pageView.currentItem.resetCursorToDefault()
             mouseArea.cursorShape = Qt.BlankCursor
         }

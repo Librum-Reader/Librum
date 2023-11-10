@@ -380,43 +380,82 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="549"/>
-        <source>Behavior</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="559"/>
-        <source>Cursor mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="571"/>
-        <source>Hidden after delay</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="571"/>
-        <source>Always visible</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="646"/>
+        <location filename="../settings/MAppearancePage.qml" line="538"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="647"/>
+        <location filename="../settings/MAppearancePage.qml" line="539"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="648"/>
+        <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="649"/>
+        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <source>Yes, Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MBehaviorPage</name>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="38"/>
+        <source>Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="39"/>
+        <source>Change the way Librum works</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="55"/>
+        <source>Restore Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="85"/>
+        <source>Books</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="95"/>
+        <source>Cursor mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <source>Hidden after delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <source>Always visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="176"/>
+        <source>Reset settings?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="177"/>
+        <source>Resetting your settings is a permanent action, there
+ will be no way to restore them!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="178"/>
+        <source>No, Keep</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="179"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -996,55 +1035,6 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
-    <name>MGeneralSettingsPage</name>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="38"/>
-        <source>General settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="39"/>
-        <source>Change the way Librum works</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="55"/>
-        <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="85"/>
-        <source>Books</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="95"/>
-        <source>Open books after creation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="127"/>
-        <source>Reset settings?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="128"/>
-        <source>Resetting your settings is a permanent action, there
- will be no way to restore them!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="129"/>
-        <source>No, Keep</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="130"/>
-        <source>Yes, Reset</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>MHomePage</name>
     <message>
         <location filename="../homePage/MHomePage.qml" line="75"/>
@@ -1514,17 +1504,17 @@ Confirm your email by clicking the link we sent you.</source>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
+        <source>Behavior</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
         <source>Shortcuts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="138"/>
+        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
         <source>Updates</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="154"/>
-        <source>General Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

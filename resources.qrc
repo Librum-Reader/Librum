@@ -22,7 +22,6 @@
         <file>resources/images/light_mode/illustrations/attention_purple_illustration.svg</file>
         <file>resources/images/light_mode/decision/plus_square_icon.svg</file>
         <file>resources/data/default_appearance_settings.json</file>
-        <file>resources/data/default_general_settings.json</file>
         <file>resources/data/default_shortcuts.json</file>
         <file>resources/images/light_mode/arrows/arrowhead_back_icon.svg</file>
         <file>resources/images/light_mode/arrows/arrowhead_next_icon.svg</file>
@@ -120,7 +119,6 @@
         <file>resources/images/dark_mode/illustrations/attention_purple_illustration.svg</file>
         <file>resources/images/dark_mode/decision/plus_square_icon.svg</file>
         <file>resources/data/default_appearance_settings.json</file>
-        <file>resources/data/default_general_settings.json</file>
         <file>resources/data/default_shortcuts.json</file>
         <file>resources/images/dark_mode/arrows/arrowhead_back_icon.svg</file>
         <file>resources/images/dark_mode/arrows/arrowhead_next_icon.svg</file>
@@ -213,5 +211,6 @@
         <file>resources/images/light_mode/illustrations/not_found.svg</file>
         <file>resources/images/light_mode/decoration/warning_circle_icon.svg</file>
         <file>resources/images/dark_mode/decoration/warning_circle_icon.svg</file>
+        <file>resources/data/default_behavior_settings.json</file>
     </qresource>
 </RCC>

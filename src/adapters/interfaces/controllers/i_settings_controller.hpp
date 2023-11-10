@@ -31,7 +31,7 @@ class ADAPTERS_EXPORT ISettingsController : public QObject
     Q_PROPERTY(
         QQmlPropertyMap* appearanceSettings READ getAppearanceSettings CONSTANT)
     Q_PROPERTY(
-        QQmlPropertyMap* generalSettings READ getGeneralSettings CONSTANT)
+        QQmlPropertyMap* behaviorSettings READ getBehaviorSettings CONSTANT)
     Q_PROPERTY(QQmlPropertyMap* shortcuts READ getShortcuts CONSTANT)
     Q_PROPERTY(adapters::data_models::ShortcutsProxyModel* shortcutsModel READ
                    getShortcutsModel CONSTANT)
@@ -48,7 +48,7 @@ public:
     Q_INVOKABLE virtual QString checkIfShortcutIsInUse(QString) = 0;
 
     virtual QQmlPropertyMap* getAppearanceSettings() = 0;
-    virtual QQmlPropertyMap* getGeneralSettings() = 0;
+    virtual QQmlPropertyMap* getBehaviorSettings() = 0;
     virtual QQmlPropertyMap* getShortcuts() = 0;
     virtual data_models::ShortcutsProxyModel* getShortcutsModel() = 0;
 };

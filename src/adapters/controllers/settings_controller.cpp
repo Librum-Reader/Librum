@@ -77,9 +77,9 @@ QQmlPropertyMap* SettingsController::getAppearanceSettings()
     return &m_appearanceSettingsMap;
 }
 
-QQmlPropertyMap* SettingsController::getGeneralSettings()
+QQmlPropertyMap* SettingsController::getBehaviorSettings()
 {
-    return &m_generalSettingsMap;
+    return &m_behaviorSettingsMap;
 }
 
 QQmlPropertyMap* SettingsController::getShortcuts()
@@ -102,8 +102,8 @@ void SettingsController::updateChangedSetting(SettingKeys key, QVariant value,
     case SettingGroups::Appearance:
         m_appearanceSettingsMap.insert(keyAsString, value.toString());
         break;
-    case SettingGroups::General:
-        m_generalSettingsMap.insert(keyAsString, value.toString());
+    case SettingGroups::Behavior:
+        m_behaviorSettingsMap.insert(keyAsString, value.toString());
         break;
     case SettingGroups::Shortcuts:
         m_shortcutsMap.insert(keyAsString, value.toString());
@@ -124,8 +124,8 @@ void SettingsController::initialiseSettings(ApplicationSettings settings)
     for(auto& elem : settings.appearanceSettings)
         m_appearanceSettingsMap.insert(elem.first, elem.second);
 
-    for(auto& elem : settings.generalSettings)
-        m_generalSettingsMap.insert(elem.first, elem.second);
+    for(auto& elem : settings.behaviorSettings)
+        m_behaviorSettingsMap.insert(elem.first, elem.second);
 
     for(auto& elem : settings.shortcuts)
         m_shortcutsMap.insert(elem.first, elem.second);

@@ -13,7 +13,7 @@ Item {
     property MSettingsSidebarItem appearanceItem: appearanceItem
     property MSettingsSidebarItem shortcutsItem: shortcutsItem
     property MSettingsSidebarItem updatesItem: updatesItem
-    property MSettingsSidebarItem generalSettingsItem: generalSettingsItem
+    property MSettingsSidebarItem behaviorSettingsItem: behaviorSettingsItem
     property MSettingsSidebarItem accountItem: accountItem
     property MSettingsSidebarItem storageItem: storageItem
     property MSettingsSidebarItem supportUsItem: supportUsItem
@@ -111,6 +111,23 @@ Item {
             }
 
             MSettingsSidebarItem {
+                id: behaviorSettingsItem
+                Layout.preferredHeight: 32
+                Layout.preferredWidth: internal.sidebarItemWidth
+                Layout.topMargin: 5
+                Layout.leftMargin: 1
+                imageLeftMargin: 24
+                imageWidth: 19
+                labelLeftMargin: 8
+                textContent: qsTr("Behavior")
+                defaultIcon: Icons.settingsSidebarSettings
+                selectedIcon: Icons.settingsSidebarSettingsSelected
+
+                onClicked: loadSettingsPage(behaviorSettingsPage,
+                                            root.behaviorSettingsItem)
+            }
+
+            MSettingsSidebarItem {
                 id: shortcutsItem
                 Layout.preferredHeight: 32
                 Layout.preferredWidth: internal.sidebarItemWidth
@@ -140,23 +157,6 @@ Item {
                 selectedIcon: Icons.settingsSidebarUpdatesSelected
 
                 onClicked: loadSettingsPage(updatesPage, root.updatesItem)
-            }
-
-            MSettingsSidebarItem {
-                id: generalSettingsItem
-                Layout.preferredHeight: 32
-                Layout.preferredWidth: internal.sidebarItemWidth
-                Layout.topMargin: 5
-                Layout.leftMargin: 1
-                imageLeftMargin: 24
-                imageWidth: 19
-                labelLeftMargin: 8
-                textContent: qsTr("General Settings")
-                defaultIcon: Icons.settingsSidebarSettings
-                selectedIcon: Icons.settingsSidebarSettingsSelected
-
-                onClicked: loadSettingsPage(generalSettingsPage,
-                                            root.generalSettingsItem)
             }
 
             Label {

@@ -35,7 +35,7 @@ MFlickWrapper {
                 MTitle {
                     id: pageTitle
                     Layout.topMargin: 64
-                    titleText: qsTr("General settings")
+                    titleText: qsTr("Behavior")
                     descriptionText: qsTr("Change the way Librum works")
                     titleSize: Fonts.size25
                     descriptionSize: Fonts.size13dot25
@@ -62,7 +62,7 @@ MFlickWrapper {
             }
 
             Pane {
-                id: downloadBlock
+                id: behaviorBlock
                 Layout.fillWidth: true
                 Layout.topMargin: 32
                 verticalPadding: 24
@@ -75,12 +75,12 @@ MFlickWrapper {
                 }
 
                 ColumnLayout {
-                    id: downloadColumn
+                    id: behaviorLayout
                     anchors.fill: parent
                     spacing: 0
 
                     Label {
-                        id: downloadTitle
+                        id: behaviorTitle
                         Layout.fillWidth: true
                         text: qsTr("Books")
                         font.pointSize: Fonts.size17
@@ -89,28 +89,77 @@ MFlickWrapper {
                     }
 
                     Label {
-                        id: openBookAfterCreationTitle
+                        id: cursorModeTitle
                         Layout.fillWidth: true
                         Layout.topMargin: 24
-                        text: qsTr("Open books after creation")
+                        text: qsTr("Cursor mode")
                         font.pointSize: Fonts.size13
                         font.weight: Font.DemiBold
                         color: Style.colorText
                     }
 
-                    MOnOffToggle {
-                        id: openBookAfterCreationToggle
-                        property bool savedValue: JSON.parse(
-                                                      SettingsController.generalSettings.OpenBooksAfterCreation)
+                    MRadioButtonSelector {
+                        id: cursorModeSelector
+                        property string savedValue: SettingsController.behaviorSettings.CursorMode
 
-                        Layout.topMargin: 4
-                        onByDefault: savedValue
+                        Layout.fillWidth: true
+                        Layout.topMargin: 6
+                        displayOptions: [qsTr("Hidden after delay"), qsTr(
+                                "Always visible")]
+                        options: ["Hidden after delay", "Always visible"]
+                        currentSelected: changeSelected(options.indexOf(
+                                                            savedValue))
 
                         // Need rebinding on reset
-                        onSavedValueChanged: savedValue ? setOn() : setOff()
-                        onToggled: value => internal.saveSetting(
-                                       SettingKeys.OpenBooksAfterCreation,
-                                       value === onText ? true : false)
+                        onSavedValueChanged: {
+                            if (currentSelected !== savedValue)
+                                changeSelected(options.indexOf(savedValue))
+                        }
+                        onNewCurrentSelected: internal.saveSetting(
+                                                  SettingKeys.CursorMode,
+                                                  currentSelected)
+                    }
+
+                    ColumnLayout {
+                        id: hideCursorAfterDelayFieldLayout
+                        visible: cursorModeSelector.currentSelected
+                                 === "Hidden after delay" ? true : false
+
+                        Label {
+                            id: hideCursorAfterDelayTitle
+                            Layout.fillWidth: true
+                            Layout.topMargin: 18
+                            text: "Hide cursor after delay"
+                            font.pointSize: Fonts.size13
+                            font.weight: Font.DemiBold
+                            color: Style.colorText
+                        }
+
+                        RowLayout {
+                            id: hideCursorAfterDelaySpinBoxLayout
+
+                            MSpinbox {
+                                id: hideCursorAfterDelaySpinBox
+                                property string savedValue: SettingsController.behaviorSettings.HideCursorAfterDelay
+                                Layout.preferredWidth: 100
+                                Layout.topMargin: 4
+                                value: savedValue
+                                minVal: 1
+                                maxVal: 99999
+
+                                onSavedValueChanged: value = savedValue
+                                onNewValueSelected: internal.saveSetting(
+                                                        SettingKeys.HideCursorAfterDelay,
+                                                        value)
+                            }
+
+                            Text {
+                                text: "ms"
+                                font.pointSize: Fonts.size13
+                                font.weight: Font.DemiBold
+                                color: Style.colorText
+                            }
+                        }
                     }
                 }
             }
@@ -135,7 +184,7 @@ MFlickWrapper {
                              resetSettingsPopup.giveFocus()
         onDecisionMade: close()
         onRightButtonClicked: SettingsController.resetSettingGroup(
-                                  SettingGroups.General)
+                                  SettingGroups.Behavior)
     }
 
     QtObject {
@@ -147,7 +196,7 @@ MFlickWrapper {
           Higher order functions to simplify the call on the SettingsController
           */
         function saveSetting(key, value) {
-            SettingsController.setSetting(key, value, SettingGroups.General)
+            SettingsController.setSetting(key, value, SettingGroups.Behavior)
         }
     }
 }

@@ -433,9 +433,8 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Transparenz</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="549"/>
         <source>Behavior</source>
-        <translation>Verhalten</translation>
+        <translation type="vanished">Verhalten</translation>
     </message>
     <message>
         <source>Smooth scrolling</source>
@@ -446,41 +445,98 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation type="vanished">Nach letzter Seite wiederholen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="559"/>
         <source>Cursor mode</source>
-        <translation>Mauszeiger-Modus</translation>
+        <translation type="vanished">Mauszeiger-Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="571"/>
         <source>Hidden after delay</source>
-        <translation>Versteckt nach Verzögerung</translation>
+        <translation type="vanished">Versteckt nach Verzögerung</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="571"/>
         <source>Always visible</source>
-        <translation>Immer sichtbar</translation>
+        <translation type="vanished">Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="646"/>
+        <location filename="../settings/MAppearancePage.qml" line="538"/>
         <source>Reset settings?</source>
         <translation>Einstellungen zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="647"/>
+        <location filename="../settings/MAppearancePage.qml" line="539"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="648"/>
+        <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="649"/>
+        <location filename="../settings/MAppearancePage.qml" line="541"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
+    </message>
+</context>
+<context>
+    <name>MBehaviorPage</name>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="38"/>
+        <source>Behavior</source>
+        <translation type="unfinished">Verhalten</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="39"/>
+        <source>Change the way Librum works</source>
+        <translation type="unfinished">Ändere die Arbeitsweise von Librum</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="55"/>
+        <source>Restore Defaults</source>
+        <translation type="unfinished">Zurücksetzen</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="85"/>
+        <source>Books</source>
+        <translation type="unfinished">Bücher</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="95"/>
+        <source>Cursor mode</source>
+        <translation type="unfinished">Mauszeiger-Modus</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <source>Hidden after delay</source>
+        <translation type="unfinished">Versteckt nach Verzögerung</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="107"/>
+        <source>Always visible</source>
+        <translation type="unfinished">Immer sichtbar</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="176"/>
+        <source>Reset settings?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="177"/>
+        <source>Resetting your settings is a permanent action, there
+ will be no way to restore them!</source>
+        <translation type="unfinished">Einstellungen zurückzusetzen ist eine endgültige Aktion,
+es gibt keine Möglichkeit sie wiederherzustellen!</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="178"/>
+        <source>No, Keep</source>
+        <translation type="unfinished">Nein, behalte</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="179"/>
+        <source>Yes, Reset</source>
+        <translation type="unfinished">Ja, zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -1083,51 +1139,58 @@ niemand wird es wiederherstellen können!</translation>
 <context>
     <name>MGeneralSettingsPage</name>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="38"/>
         <source>General settings</source>
-        <translation>Systemeinstellungen</translation>
+        <translation type="vanished">Systemeinstellungen</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="39"/>
         <source>Change the way Librum works</source>
-        <translation>Ändere die Arbeitsweise von Librum</translation>
+        <translation type="vanished">Ändere die Arbeitsweise von Librum</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="55"/>
         <source>Restore Defaults</source>
-        <translation>Zurücksetzen</translation>
+        <translation type="vanished">Zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="85"/>
         <source>Books</source>
-        <translation>Bücher</translation>
+        <translation type="vanished">Bücher</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="95"/>
         <source>Open books after creation</source>
-        <translation>Öffne Bücher nach Erstellung</translation>
+        <translation type="vanished">Öffne Bücher nach Erstellung</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="127"/>
+        <source>Behavior</source>
+        <translation type="obsolete">Verhalten</translation>
+    </message>
+    <message>
+        <source>Cursor mode</source>
+        <translation type="obsolete">Mauszeiger-Modus</translation>
+    </message>
+    <message>
+        <source>Hidden after delay</source>
+        <translation type="obsolete">Versteckt nach Verzögerung</translation>
+    </message>
+    <message>
+        <source>Always visible</source>
+        <translation type="obsolete">Immer sichtbar</translation>
+    </message>
+    <message>
         <source>Reset settings?</source>
-        <translation>Zurücksetzen?</translation>
+        <translation type="vanished">Zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="128"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
+        <translation type="vanished">Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="129"/>
         <source>No, Keep</source>
-        <translation>Nein, behalte</translation>
+        <translation type="vanished">Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MGeneralSettingsPage.qml" line="130"/>
         <source>Yes, Reset</source>
-        <translation>Ja, zurücksetzen</translation>
+        <translation type="vanished">Ja, zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -1627,18 +1690,22 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
+        <source>Behavior</source>
+        <translation type="unfinished">Verhalten</translation>
+    </message>
+    <message>
+        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
         <source>Shortcuts</source>
         <translation>Tastenkürzel</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="138"/>
+        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
         <source>Updates</source>
         <translation>Updates</translation>
     </message>
     <message>
-        <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="154"/>
         <source>General Settings</source>
-        <translation>Systemeinstellungen</translation>
+        <translation type="vanished">Systemeinstellungen</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>

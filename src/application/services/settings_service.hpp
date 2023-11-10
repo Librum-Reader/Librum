@@ -42,8 +42,8 @@ private:
     std::unique_ptr<QSettings> m_settings;
     QString m_defaultAppearanceSettingsFilePath =
         ":/resources/data/default_appearance_settings.json";
-    QString m_defaultGeneralSettingsFilePath =
-        ":/resources/data/default_general_settings.json";
+    QString m_defaultBehaviorSettingsFilePath =
+        ":/resources/data/default_behavior_settings.json";
     QString m_defaultShortcutsFilePath =
         ":/resources/data/default_shortcuts.json";
     QString m_userEmail;

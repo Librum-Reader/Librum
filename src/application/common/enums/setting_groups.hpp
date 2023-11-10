@@ -16,7 +16,7 @@ Q_NAMESPACE_EXPORT(APPLICATION_EXPORT)
 enum class APPLICATION_EXPORT SettingGroups
 {
     Appearance = 0,
-    General,
+    Behavior,
     Shortcuts,
     SettingGroups_END
 };

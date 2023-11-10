@@ -115,8 +115,8 @@ QString SettingsService::getDefaultSettingsFilePathForEnum(SettingGroups group)
     case SettingGroups::Appearance:
         return m_defaultAppearanceSettingsFilePath;
         break;
-    case SettingGroups::General:
-        return m_defaultGeneralSettingsFilePath;
+    case SettingGroups::Behavior:
+        return m_defaultBehaviorSettingsFilePath;
         break;
     case SettingGroups::Shortcuts:
         return m_defaultShortcutsFilePath;
@@ -132,7 +132,7 @@ QString SettingsService::getDefaultSettingsFilePathForEnum(SettingGroups group)
 void SettingsService::generateDefaultSettings()
 {
     loadDefaultSettingsGroup(SettingGroups::Appearance);
-    loadDefaultSettingsGroup(SettingGroups::General);
+    loadDefaultSettingsGroup(SettingGroups::Behavior);
     loadDefaultSettingsGroup(SettingGroups::Shortcuts);
 }
 
@@ -201,7 +201,7 @@ void SettingsService::loadSettings()
     ApplicationSettings result;
 
     result.appearanceSettings = getSettingsForGroup(SettingGroups::Appearance);
-    result.generalSettings = getSettingsForGroup(SettingGroups::General);
+    result.behaviorSettings = getSettingsForGroup(SettingGroups::Behavior);
     result.shortcuts = getSettingsForGroup(SettingGroups::Shortcuts);
 
     emit settingsLoaded(result);

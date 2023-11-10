@@ -26,7 +26,7 @@ public:
     QString checkIfShortcutIsInUse(QString valueToCheck) override;
 
     QQmlPropertyMap* getAppearanceSettings() override;
-    QQmlPropertyMap* getGeneralSettings() override;
+    QQmlPropertyMap* getBehaviorSettings() override;
     QQmlPropertyMap* getShortcuts() override;
     data_models::ShortcutsProxyModel* getShortcutsModel() override;
 
@@ -41,7 +41,7 @@ private:
     bool groupIsValid(int group);
 
     QQmlPropertyMap m_appearanceSettingsMap;
-    QQmlPropertyMap m_generalSettingsMap;
+    QQmlPropertyMap m_behaviorSettingsMap;
     QQmlPropertyMap m_shortcutsMap;
     std::unique_ptr<data_models::ShortcutsModel> m_shortcutsModel;
     std::unique_ptr<data_models::ShortcutsProxyModel> m_shortcutsProxyModel;

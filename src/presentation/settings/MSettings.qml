@@ -8,91 +8,84 @@ import "shortcutsPage"
 import "updatesPage"
 import "accountPage"
 
-
-Page
-{
+Page {
     id: settingsManager
     property alias settingsSidebar: settingsSidebar
     property alias aboutPage: aboutPage
     property alias appearancePage: appearancePage
     property alias shortcutsPage: shortcutsPage
     property alias updatesPage: updatesPage
-    property alias generalSettingsPage: generalSettingsPage
+    property alias behaviorSettingsPage: behaviorSettingsPage
     property alias accountPage: accountPage
     property alias storagePage: storagePage
     property alias supportUsPage: supportUsPage
-    
-    background: Rectangle { anchors.fill: parent; color: Style.colorPageBackground }
-    
-    
+
+    background: Rectangle {
+        anchors.fill: parent
+        color: Style.colorPageBackground
+    }
+
+
     /*
       Settings navigation shortcuts
       */
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+1"
         onActivated: loadSettingsPage(aboutPage, settingsSidebar.aboutItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+2"
-        onActivated: loadSettingsPage(appearancePage, settingsSidebar.appearanceItem)
+        onActivated: loadSettingsPage(appearancePage,
+                                      settingsSidebar.appearanceItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+3"
-        onActivated: loadSettingsPage(shortcutsPage, settingsSidebar.shortcutsItem)
+        onActivated: loadSettingsPage(shortcutsPage,
+                                      settingsSidebar.shortcutsItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+4"
         onActivated: loadSettingsPage(updatesPage, settingsSidebar.updatesItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+5"
-        onActivated: loadSettingsPage(generalSettingsPage, settingsSidebar.generalSettingsItem)
+        onActivated: loadSettingsPage(behaviorSettingsPage,
+                                      settingsSidebar.generalSettingsItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+6"
         onActivated: loadSettingsPage(accountPage, settingsSidebar.accountItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+7"
         onActivated: loadSettingsPage(storagePage, settingsSidebar.storageItem)
     }
-    Shortcut
-    {
+    Shortcut {
         sequence: "Shift+8"
-        onActivated: loadSettingsPage(supportUsPage, settingsSidebar.supportUsItem)
+        onActivated: loadSettingsPage(supportUsPage,
+                                      settingsSidebar.supportUsItem)
     }
-    
-    
-    RowLayout
-    {
+
+    RowLayout {
         id: layout
         anchors.fill: parent
         spacing: 0
-        
-        
-        MSettingsSidebar
-        {
+
+        MSettingsSidebar {
             id: settingsSidebar
             height: parent.height
         }
-        
+
+
         /*
           The StackView is managing the switching of setting pages
           */
-        StackView
-        {
+        StackView {
             id: settingsPageManager
             Layout.fillWidth: true
             Layout.fillHeight: true
             initialItem: aboutPage
-            
+
             popEnter: null
             popExit: null
             pushEnter: null
@@ -101,62 +94,80 @@ Page
             replaceExit: null
         }
     }
-    
-    
+
     // Pages
-    Component { id: aboutPage; MAboutPage{} }
-    Component { id: appearancePage; MAppearancePage{} }
-    Component { id: shortcutsPage; MShortcutsPage{} }
-    Component { id: updatesPage; MUpdatesPage{} }
-    Component { id: generalSettingsPage; MGeneralSettingsPage{} }
-    Component { id: accountPage; MAccountPage {} }
-    Component { id: storagePage; MStoragePage{} }
-    Component { id: supportUsPage; MSupportUsPage{} }
-    
-    
+    Component {
+        id: aboutPage
+        MAboutPage {}
+    }
+    Component {
+        id: appearancePage
+        MAppearancePage {}
+    }
+    Component {
+        id: shortcutsPage
+        MShortcutsPage {}
+    }
+    Component {
+        id: updatesPage
+        MUpdatesPage {}
+    }
+    Component {
+        id: behaviorSettingsPage
+        MBehaviorPage {}
+    }
+    Component {
+        id: accountPage
+        MAccountPage {}
+    }
+    Component {
+        id: storagePage
+        MStoragePage {}
+    }
+    Component {
+        id: supportUsPage
+        MSupportUsPage {}
+    }
+
+
     /*
       loadPage() manages the page switching through out the settings
       */
-    function loadSettingsPage(page, sidebarItem)
-    {
-        if(settingsSidebar.currentItem === sidebarItem)
-            return;
-        
-        if(!saveSettingsPage(internal.switchSettingsPage, page, sidebarItem))
-            return;
-        
-        internal.switchSettingsPage(page, sidebarItem);
+    function loadSettingsPage(page, sidebarItem) {
+        if (settingsSidebar.currentItem === sidebarItem)
+            return
+
+        if (!saveSettingsPage(internal.switchSettingsPage, page, sidebarItem))
+            return
+
+        internal.switchSettingsPage(page, sidebarItem)
     }
-    
+
+
     /*
       saveSettingsPage() saves the given settings page
-      
-      @param "switchPageFunction" is a callback for continuing page switching 
+
+      @param "switchPageFunction" is a callback for continuing page switching
       after the page was saved successfully. This can be a switch between settings pages,
       but also a switch between main pages.
       */
-    function saveSettingsPage(switchPageFunction, page, sidebarItem)
-    {
-        if(settingsPageManager.currentItem.pageCleanup)
-        {
-            settingsPageManager.currentItem.pageCleanup.callbackFunction = 
-                    () => switchPageFunction(page, sidebarItem);
-            
-            return settingsPageManager.currentItem.pageCleanup.cleanUp();
+    function saveSettingsPage(switchPageFunction, page, sidebarItem) {
+        if (settingsPageManager.currentItem.pageCleanup) {
+            settingsPageManager.currentItem.pageCleanup.callbackFunction = () => switchPageFunction(
+                        page, sidebarItem)
+
+            return settingsPageManager.currentItem.pageCleanup.cleanUp()
         }
-        
-        return true;
+
+        return true
     }
-    
-    QtObject
-    {
+
+    QtObject {
         id: internal
-        
-        
-        function switchSettingsPage(page, sidebarItem)
-        {
-            settingsPageManager.replace(page);
-            settingsSidebar.changeSelectedSettingsItem(sidebarItem);
+
+        function switchSettingsPage(page, sidebarItem) {
+            settingsPageManager.replace(page)
+            settingsSidebar.changeSelectedSettingsItem(sidebarItem)
         }
     }
 }
