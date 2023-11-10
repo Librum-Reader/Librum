@@ -474,24 +474,24 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="827"/>
+        <location filename="../settings/MAppearancePage.qml" line="824"/>
         <source>Reset settings?</source>
         <translation>Einstellungen zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="828"/>
+        <location filename="../settings/MAppearancePage.qml" line="825"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="829"/>
+        <location filename="../settings/MAppearancePage.qml" line="826"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="830"/>
+        <location filename="../settings/MAppearancePage.qml" line="827"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
     </message>

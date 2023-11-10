@@ -465,23 +465,23 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="827"/>
+        <location filename="../settings/MAppearancePage.qml" line="824"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="828"/>
+        <location filename="../settings/MAppearancePage.qml" line="825"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="829"/>
+        <location filename="../settings/MAppearancePage.qml" line="826"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="830"/>
+        <location filename="../settings/MAppearancePage.qml" line="827"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
