@@ -324,8 +324,11 @@ Page {
                                                                 savedValue))
 
                             // Need rebinding on reset
-                            onSavedValueChanged: changeSelected(options.indexOf(
-                                                                    savedValue))
+                            onSavedValueChanged: {
+                                if (currentSelected !== savedValue)
+                                    changeSelected(options.indexOf(savedValue))
+                            }
+
                             onNewCurrentSelected: internal.saveSetting(
                                                       SettingKeys.LayoutDirection,
                                                       currentSelected)
@@ -354,8 +357,11 @@ Page {
                                                                 savedValue))
 
                             // Need rebinding on reset
-                            onSavedValueChanged: changeSelected(options.indexOf(
-                                                                    savedValue))
+                            onSavedValueChanged: {
+                                if (currentSelected !== savedValue)
+                                    changeSelected(options.indexOf(savedValue))
+                            }
+
                             onNewCurrentSelected: internal.saveSetting(
                                                       SettingKeys.DisplayMode,
                                                       currentSelected)
@@ -747,8 +753,10 @@ Page {
                                                                 savedValue))
 
                             // Need rebinding on reset
-                            onSavedValueChanged: changeSelected(options.indexOf(
-                                                                    savedValue))
+                            onSavedValueChanged: {
+                                if (currentSelected !== savedValue)
+                                    changeSelected(options.indexOf(savedValue))
+                            }
                             onNewCurrentSelected: internal.saveSetting(
                                                       SettingKeys.CursorMode,
                                                       currentSelected)

@@ -384,114 +384,114 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Horizontal</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="338"/>
+        <location filename="../settings/MAppearancePage.qml" line="341"/>
         <source>Display mode</source>
         <translation>Darstellungs Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="350"/>
+        <location filename="../settings/MAppearancePage.qml" line="353"/>
         <source>Single Page</source>
         <translation>Einzelseite</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="350"/>
+        <location filename="../settings/MAppearancePage.qml" line="353"/>
         <source>Double Page</source>
         <translation>Doppelseite</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="368"/>
+        <location filename="../settings/MAppearancePage.qml" line="374"/>
         <source>Page transition</source>
         <translation>Seitenübergang</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="392"/>
+        <location filename="../settings/MAppearancePage.qml" line="398"/>
         <source>Instant</source>
         <translation>Sofort</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="395"/>
+        <location filename="../settings/MAppearancePage.qml" line="401"/>
         <source>Fading</source>
         <translation>Verblassen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="398"/>
+        <location filename="../settings/MAppearancePage.qml" line="404"/>
         <source>Swipe</source>
         <translation>Wischen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="401"/>
+        <location filename="../settings/MAppearancePage.qml" line="407"/>
         <source>Swap</source>
         <translation>Tauschen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="430"/>
+        <location filename="../settings/MAppearancePage.qml" line="436"/>
         <source>Default Zoom</source>
         <translation>Standard-Zoom</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="476"/>
+        <location filename="../settings/MAppearancePage.qml" line="482"/>
         <source>Highlights</source>
         <translation>Markierungen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="485"/>
+        <location filename="../settings/MAppearancePage.qml" line="491"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="604"/>
+        <location filename="../settings/MAppearancePage.qml" line="610"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="671"/>
+        <location filename="../settings/MAppearancePage.qml" line="677"/>
         <source>Behavior</source>
         <translation>Verhalten</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="681"/>
+        <location filename="../settings/MAppearancePage.qml" line="687"/>
         <source>Smooth scrolling</source>
         <translation>Sanftes Scrollen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="706"/>
+        <location filename="../settings/MAppearancePage.qml" line="712"/>
         <source>Loop after last page</source>
         <translation>Nach letzter Seite wiederholen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="731"/>
+        <location filename="../settings/MAppearancePage.qml" line="737"/>
         <source>Cursor mode</source>
         <translation>Mauszeiger-Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="743"/>
+        <location filename="../settings/MAppearancePage.qml" line="749"/>
         <source>Hidden after delay</source>
         <translation>Versteckt nach Verzögerung</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="743"/>
+        <location filename="../settings/MAppearancePage.qml" line="749"/>
         <source>Always visible</source>
         <translation>Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="769"/>
+        <location filename="../settings/MAppearancePage.qml" line="827"/>
         <source>Reset settings?</source>
         <translation>Einstellungen zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="770"/>
+        <location filename="../settings/MAppearancePage.qml" line="828"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="771"/>
+        <location filename="../settings/MAppearancePage.qml" line="829"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="772"/>
+        <location filename="../settings/MAppearancePage.qml" line="830"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
     </message>

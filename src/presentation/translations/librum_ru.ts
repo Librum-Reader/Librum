@@ -375,113 +375,113 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="338"/>
+        <location filename="../settings/MAppearancePage.qml" line="341"/>
         <source>Display mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="350"/>
+        <location filename="../settings/MAppearancePage.qml" line="353"/>
         <source>Single Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="350"/>
+        <location filename="../settings/MAppearancePage.qml" line="353"/>
         <source>Double Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="368"/>
+        <location filename="../settings/MAppearancePage.qml" line="374"/>
         <source>Page transition</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="392"/>
+        <location filename="../settings/MAppearancePage.qml" line="398"/>
         <source>Instant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="395"/>
+        <location filename="../settings/MAppearancePage.qml" line="401"/>
         <source>Fading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="398"/>
+        <location filename="../settings/MAppearancePage.qml" line="404"/>
         <source>Swipe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="401"/>
+        <location filename="../settings/MAppearancePage.qml" line="407"/>
         <source>Swap</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="430"/>
+        <location filename="../settings/MAppearancePage.qml" line="436"/>
         <source>Default Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="476"/>
+        <location filename="../settings/MAppearancePage.qml" line="482"/>
         <source>Highlights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="485"/>
+        <location filename="../settings/MAppearancePage.qml" line="491"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="604"/>
+        <location filename="../settings/MAppearancePage.qml" line="610"/>
         <source>Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="671"/>
+        <location filename="../settings/MAppearancePage.qml" line="677"/>
         <source>Behavior</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="681"/>
+        <location filename="../settings/MAppearancePage.qml" line="687"/>
         <source>Smooth scrolling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="706"/>
+        <location filename="../settings/MAppearancePage.qml" line="712"/>
         <source>Loop after last page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="731"/>
+        <location filename="../settings/MAppearancePage.qml" line="737"/>
         <source>Cursor mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="743"/>
+        <location filename="../settings/MAppearancePage.qml" line="749"/>
         <source>Hidden after delay</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="743"/>
+        <location filename="../settings/MAppearancePage.qml" line="749"/>
         <source>Always visible</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="769"/>
+        <location filename="../settings/MAppearancePage.qml" line="827"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="770"/>
+        <location filename="../settings/MAppearancePage.qml" line="828"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="771"/>
+        <location filename="../settings/MAppearancePage.qml" line="829"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="772"/>
+        <location filename="../settings/MAppearancePage.qml" line="830"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
