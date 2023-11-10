@@ -90,7 +90,10 @@ Pane {
         running: SettingsController.appearanceSettings.CursorMode
                  === internal.optionNameCursorModeHiddenAfterDelay
 
-        onTriggered: mouseArea.cursorShape = Qt.BlankCursor
+        onTriggered: {
+            pageView.currentItem.resetCursorToDefault()
+            mouseArea.cursorShape = Qt.BlankCursor
+        }
     }
 
     MouseArea {
