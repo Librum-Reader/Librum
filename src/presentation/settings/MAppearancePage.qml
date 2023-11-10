@@ -753,6 +753,53 @@ Page {
                                                       SettingKeys.CursorMode,
                                                       currentSelected)
                         }
+
+                        ColumnLayout {
+                            id: hideCursorAfterDelayFieldLayout
+                            visible: cursorModeSelector.currentSelected
+                                     === "Hidden after delay" ? true : false
+
+                            Label {
+                                id: hideCursorAfterDelayTitle
+                                Layout.fillWidth: true
+                                Layout.topMargin: 18
+                                text: "Hide cursor after delay"
+                                font.pointSize: Fonts.size13
+                                font.weight: Font.DemiBold
+                                color: Style.colorText
+                            }
+
+                            RowLayout {
+                                id: hideCursorAfterDelaySpinBoxLayout
+
+                                MSpinbox {
+                                    id: hideCursorAfterDelaySpinBox
+                                    property string savedValue: SettingsController.appearanceSettings.HideCursorAfterDelay
+                                    Layout.preferredWidth: 100
+                                    Layout.topMargin: 4
+                                    value: savedValue
+                                    minVal: 1
+                                    maxVal: 99999
+
+                                    onSavedValueChanged: value = savedValue
+                                    onNewValueSelected: internal.saveSetting(
+                                                            SettingKeys.HideCursorAfterDelay,
+                                                            value)
+                                }
+
+                                Text {
+                                    text: "ms"
+                                    font.pointSize: Fonts.size13
+                                    font.weight: Font.DemiBold
+                                    color: Style.colorText
+                                }
+                            }
+
+                            onVisibleChanged: {
+                                if (visible)
+                                    flickWrapper.flick(0, -2000)
+                            }
+                        }
                     }
                 }
             }

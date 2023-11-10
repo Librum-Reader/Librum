@@ -61,6 +61,9 @@ public:
     Q_INVOKABLE void changeHighlightColor(const QString& uuid,
                                           const QString& color, int alpha);
 
+signals:
+    void mouseHoverMoved();
+
 private slots:
     void updateZoom(float newZoom);
 

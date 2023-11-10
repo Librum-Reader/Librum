@@ -83,6 +83,16 @@ Pane {
         }
     }
 
+    Timer {
+        id: hideCursorTimer
+
+        interval: SettingsController.appearanceSettings.HideCursorAfterDelay
+        running: SettingsController.appearanceSettings.CursorMode
+                 === internal.optionNameCursorModeHiddenAfterDelay
+
+        onTriggered: mouseArea.cursorShape = Qt.BlankCursor
+    }
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
@@ -90,6 +100,8 @@ Pane {
 
         // Handle scrolling customly
         onWheel: NavigationLogic.handleWheel(wheel)
+
+        onPositionChanged: internal.showCursor()
 
         onPressed: mouse.accepted = false
         onReleased: mouse.accepted = false
@@ -130,6 +142,8 @@ Pane {
                     if (implicitWidth > pageView.contentWidth)
                         pageView.widestItem = page.implicitWidth
                 }
+
+                onMouseHoverMoved: internal.showCursor()
             }
 
             // Set the book's current page once the model is loaded
@@ -299,6 +313,7 @@ Pane {
 
     QtObject {
         id: internal
+        property string optionNameCursorModeHiddenAfterDelay: "Hidden after delay"
 
         function openSelectionOptionsPopup(centerX, topY) {
             if (centerX === -1 && topY === -1) {
@@ -327,6 +342,14 @@ Pane {
             popup.y = posY
 
             popup.open()
+        }
+
+        function showCursor() {
+            mouseArea.cursorShape = Qt.ArrowCursor
+
+            if (SettingsController.appearanceSettings.CursorMode
+                    === internal.optionNameCursorModeHiddenAfterDelay)
+                hideCursorTimer.start()
         }
     }
 }
