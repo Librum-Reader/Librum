@@ -1276,37 +1276,22 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MReadingOptionsPopup</name>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="116"/>
-        <source>Read out (TTS)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="130"/>
-        <source>Continuous pages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="145"/>
-        <source>Display vertically</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="177"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="209"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
         <source>Sync book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="227"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
         <source>More options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="248"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>

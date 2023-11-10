@@ -1364,22 +1364,19 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
 <context>
     <name>MReadingOptionsPopup</name>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="116"/>
         <source>Read out (TTS)</source>
-        <translation>Laut lesen (TTS)</translation>
+        <translation type="vanished">Laut lesen (TTS)</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="130"/>
         <source>Continuous pages</source>
-        <translation>Kontinuierliche Seiten</translation>
+        <translation type="vanished">Kontinuierliche Seiten</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="145"/>
         <source>Display vertically</source>
-        <translation>Vertikal anzeigen</translation>
+        <translation type="vanished">Vertikal anzeigen</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="177"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
         <translation>Farben umkehren</translation>
     </message>
@@ -1392,17 +1389,17 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
         <translation type="vanished">Invers</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="209"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
         <source>Sync book</source>
         <translation>Buch synchronisieren</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="227"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
         <source>More options</source>
         <translation>Mehr Optionen</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="248"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>

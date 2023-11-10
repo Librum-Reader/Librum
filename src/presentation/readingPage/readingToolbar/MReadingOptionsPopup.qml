@@ -10,7 +10,7 @@ import Librum.fonts
 
 Popup {
     id: root
-    implicitWidth: 212
+    implicitWidth: 220
     padding: 0
     closePolicy: Popup.CloseOnReleaseOutsideParent | Popup.CloseOnEscape
     background: Rectangle {
@@ -90,65 +90,6 @@ Popup {
                         borderWidth: 0
                         imagePath: Icons.readingOptionsPopupShare
                         imageSize: 22
-                    }
-                }
-
-                Rectangle {
-                    Layout.preferredHeight: 1
-                    Layout.fillWidth: true
-                    color: Style.colorDarkSeparator
-                }
-
-                ColumnLayout {
-                    id: checkBoxLayout
-                    Layout.fillWidth: true
-                    Layout.topMargin: 14
-                    Layout.leftMargin: 14
-                    Layout.bottomMargin: 16
-                    spacing: 10
-
-                    MLabeledCheckBox {
-                        id: ttsCheckbox
-                        Layout.fillWidth: true
-                        Layout.topMargin: 1
-                        boxHeight: 19
-                        boxWidth: 19
-                        text: qsTr("Read out (TTS)")
-                        fontSize: Fonts.size12
-                        fontWeight: Font.Medium
-                        fontColor: Style.colorText
-                        spacing: 8
-                        enabled: false
-                    }
-
-                    MLabeledCheckBox {
-                        id: continuousPagesCheckbox
-                        Layout.fillWidth: true
-                        boxHeight: 19
-                        boxWidth: 19
-                        verticalTextOffset: 1
-                        text: qsTr("Continuous pages")
-                        fontSize: Fonts.size12
-                        fontWeight: Font.Medium
-                        fontColor: Style.colorText
-                        checked: true
-                        spacing: 8
-                        enabled: false
-                    }
-
-                    MLabeledCheckBox {
-                        id: displayVerticallyCheckbox
-                        Layout.fillWidth: true
-                        boxHeight: 19
-                        boxWidth: 19
-                        verticalTextOffset: 1
-                        text: qsTr("Display vertically")
-                        fontSize: Fonts.size12
-                        fontWeight: Font.Medium
-                        fontColor: Style.colorText
-                        checked: true
-                        spacing: 8
-                        enabled: false
                     }
                 }
 
