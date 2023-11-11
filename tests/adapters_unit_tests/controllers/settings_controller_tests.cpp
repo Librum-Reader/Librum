@@ -169,13 +169,6 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     auto pageSpacing = utility::getNameForEnumValue(SettingKeys::PageSpacing);
     auto pageSpacingValue = QVariant::fromValue(25);
 
-    auto cursorMode = utility::getNameForEnumValue(SettingKeys::CursorMode);
-    auto cursorModeValue = QVariant::fromValue(QString("Hidden"));
-
-    auto openBooksAfterCreation =
-        utility::getNameForEnumValue(SettingKeys::OpenBooksAfterCreation);
-    auto openBooksAfterCreationValue = QVariant::fromValue(true);
-
     auto upKey = utility::getNameForEnumValue(SettingKeys::MoveUp);
     auto upKeyValue = QVariant::fromValue(QString("ALT+4"));
 
@@ -183,11 +176,8 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     ApplicationSettings settings {
         {
             { pageSpacing, pageSpacingValue },
-            { cursorMode, cursorModeValue },
         },
-        {
-            { openBooksAfterCreation, openBooksAfterCreationValue },
-        },
+        {},
         {
             { upKey, upKeyValue },
         },
@@ -202,11 +192,6 @@ TEST_F(ASettingsController, SuceedsInitialisingPropertyMaps)
     // Assert
     auto appearanceMap = settingsController->getAppearanceSettings();
     EXPECT_EQ(pageSpacingValue, appearanceMap->value("PageSpacing").toInt());
-    EXPECT_EQ(cursorModeValue, appearanceMap->value("CursorMode").toString());
-
-    auto generalMap = settingsController->getGeneralSettings();
-    EXPECT_EQ(openBooksAfterCreationValue,
-              generalMap->value("OpenBooksAfterCreation").toBool());
 
     auto shortcutsMap = settingsController->getShortcuts();
     EXPECT_EQ(upKeyValue, shortcutsMap->value("MoveUp").toString());
