@@ -6,74 +6,75 @@
     <message>
         <location filename="../settings/MAboutPage.qml" line="33"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="34"/>
         <source>About this application</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="60"/>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробно</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="69"/>
         <source>CURRENT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ТЕКУЩАЯ ВЕРСИЯ</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="85"/>
         <source>QT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ВЕРСИЯ QT</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="106"/>
         <source>Up-to date</source>
-        <translation type="unfinished"></translation>
+        <translation>Актульная</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="138"/>
         <source>Creator</source>
-        <translation type="unfinished"></translation>
+        <translation>Создатель</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="147"/>
         <source>COMPANY NAME</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>НАЗВАНИЕ КОМПАНИИ</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="163"/>
         <source>WEBSITE</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ВЕБ-САЙТ</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="188"/>
         <source>CONTACT</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Связаться</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="214"/>
         <source>GITHUB</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>GITHUB</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="260"/>
         <source>This App</source>
-        <translation type="unfinished"></translation>
+        <translation>Это приложение</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="283"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
-        <translation type="unfinished"></translation>
+        <translation>Librum создан для тех, кто просто хочет насладиться хорошей книгой.
+Мы надеемся, что Вы прекрасно проведёте время за нашим приложением! Не стесняйтесь оставлять нам оценки и отзывы.</translation>
     </message>
 </context>
 <context>
@@ -82,22 +83,22 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../registerPage/MAcceptPolicy.qml" line="48"/>
         <source>I accept the</source>
         <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Я принимаю</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="50"/>
         <source>Terms of Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Условия Обслуживания</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="51"/>
         <source>and the</source>
-        <translation type="unfinished"></translation>
+        <translation>и</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="53"/>
         <source>Privacy Policy</source>
-        <translation type="unfinished"></translation>
+        <translation>Политику Конфиденциальности</translation>
     </message>
 </context>
 <context>
@@ -105,109 +106,109 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="68"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="85"/>
         <location filename="../settings/accountPage/MAccountPage.qml" line="464"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="127"/>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
         <source>First name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
         <source>Last name</source>
-        <translation type="unfinished"></translation>
+        <translation>Фамилия</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="168"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="231"/>
         <source>Change password</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить пароль</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="247"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="268"/>
         <source>Password confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтверждение пароля</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="309"/>
         <source>Your data</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваши данные</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="320"/>
         <source>Analyse your reading to make better recommendations</source>
-        <translation type="unfinished"></translation>
+        <translation>Анализировать, что Вы читаете, чтобы выдавать улучшенные рекомендации</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
-        <translation type="unfinished"></translation>
+        <translation>Анонимно делиться информацией о книгах, которые Вы читаете, чтобы помочь нам улучшить Librum</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="348"/>
         <source>Collect data on crashes so that we can prevent it from happening again</source>
-        <translation type="unfinished"></translation>
+        <translation>Собирать данные о вылетах программы, чтобы мы могли их исправить</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="361"/>
         <source>Collect data to display in your statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Собирать данные, чтобы отображать их в Вашей статистике</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="392"/>
         <source>Your Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваш Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="407"/>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="427"/>
         <source>Delete Your Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить Ваш Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="462"/>
         <source>Whoops</source>
-        <translation type="unfinished"></translation>
+        <translation>Ой</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="463"/>
         <source>It looks like you forgot to save your changes, are you sure that you dont want to save them?</source>
-        <translation type="unfinished"></translation>
+        <translation>Похоже, Вы забыли сохранить Ваши изменения, Вы уверены, что не хотите сохранить их?</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="465"/>
         <source>Don&apos;t save</source>
-        <translation type="unfinished"></translation>
+        <translation>Не сохранять</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="502"/>
         <location filename="../settings/accountPage/MAccountPage.qml" line="505"/>
         <source>Passwords don&apos;t match!</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароли не совпадают!</translation>
     </message>
 </context>
 <context>
@@ -215,12 +216,12 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../addOnsPage/MAddOnsPage.qml" line="22"/>
         <source>Add-ons Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница с Расширениями</translation>
     </message>
     <message>
         <location filename="../addOnsPage/MAddOnsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation type="unfinished"></translation>
+        <translation>В настоящий момент в Разработке</translation>
     </message>
 </context>
 <context>
@@ -228,37 +229,37 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="98"/>
         <source>Edit Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить Сочетания Клавиш</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="115"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Действие</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="122"/>
         <source>None selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ни одно не выбрано</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="158"/>
         <source>The shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Сочетание клавиш</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="159"/>
         <source>is already used for</source>
-        <translation type="unfinished"></translation>
+        <translation>уже используется для</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="177"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="211"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -266,7 +267,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBox.qml" line="48"/>
         <source>Add a tag...</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить тег...</translation>
     </message>
 </context>
 <context>
@@ -274,17 +275,17 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="98"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="110"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="119"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -292,113 +293,181 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MAppearancePage.qml" line="34"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Внешний вид</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="35"/>
         <source>Make your own experience</source>
-        <translation type="unfinished"></translation>
+        <translation>Создайте свой собственный опыт</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="51"/>
         <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="105"/>
         <source>Display</source>
-        <translation type="unfinished"></translation>
+        <translation>Экран</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="115"/>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Тема</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="127"/>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Тёмная</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="129"/>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлая</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Page Color Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Цветовой Режим Страницы</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="156"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормальный</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="158"/>
         <source>Inverted</source>
-        <translation type="unfinished"></translation>
+        <translation>Инвертированный</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="174"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="246"/>
         <source>Reading</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтение</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="256"/>
         <source>Page spacing</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние между страницами</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="283"/>
         <source>Display book title in titlebar</source>
-        <translation type="unfinished"></translation>
+        <translation>Отображать название книги в строке с названием</translation>
+    </message>
+    <message>
+        <source>Layout direction</source>
+        <translation type="vanished">Направление макета</translation>
+    </message>
+    <message>
+        <source>Vertical</source>
+        <translation type="vanished">Вертикально</translation>
+    </message>
+    <message>
+        <source>Horizontal</source>
+        <translation type="vanished">Горизонтально</translation>
+    </message>
+    <message>
+        <source>Display mode</source>
+        <translation type="vanished">Режим отображения</translation>
+    </message>
+    <message>
+        <source>Single Page</source>
+        <translation type="vanished">Одна страница</translation>
+    </message>
+    <message>
+        <source>Double Page</source>
+        <translation type="vanished">Разворот</translation>
+    </message>
+    <message>
+        <source>Page transition</source>
+        <translation type="vanished">Переход страницы</translation>
+    </message>
+    <message>
+        <source>Instant</source>
+        <translation type="vanished">Мнгновенно</translation>
+    </message>
+    <message>
+        <source>Fading</source>
+        <translation type="vanished">Исчезающий</translation>
+    </message>
+    <message>
+        <source>Swipe</source>
+        <translation type="vanished">Перелистывание</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation type="vanished">Замена</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="308"/>
         <source>Default Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Увеличение по-умолчанию</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="354"/>
         <source>Highlights</source>
-        <translation type="unfinished"></translation>
+        <translation>Выделение</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="363"/>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвета</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="482"/>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрозрачность</translation>
+    </message>
+    <message>
+        <source>Behavior</source>
+        <translation type="vanished">Поведение</translation>
+    </message>
+    <message>
+        <source>Smooth scrolling</source>
+        <translation type="vanished">Плавная прокрутка</translation>
+    </message>
+    <message>
+        <source>Loop after last page</source>
+        <translation type="vanished">Зациклить после последней страницы</translation>
+    </message>
+    <message>
+        <source>Cursor mode</source>
+        <translation type="vanished">Режим курсора</translation>
+    </message>
+    <message>
+        <source>Hidden after delay</source>
+        <translation type="vanished">Спрятать после задержки</translation>
+    </message>
+    <message>
+        <source>Always visible</source>
+        <translation type="vanished">Всегда виден</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="538"/>
         <source>Reset settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить настройки?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="539"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс настроек необратим, Вы не сможете потом их восстановить!</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>No, Keep</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет, Оставить</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="541"/>
         <source>Yes, Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Да, Сбросить</translation>
     </message>
 </context>
 <context>
@@ -406,58 +475,59 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="38"/>
         <source>Behavior</source>
-        <translation type="unfinished"></translation>
+        <translation>Поведение</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="39"/>
         <source>Change the way Librum works</source>
-        <translation type="unfinished"></translation>
+        <translation>Измените то, как работает Librum</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="55"/>
         <source>Restore Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="85"/>
         <source>Books</source>
-        <translation type="unfinished"></translation>
+        <translation>Книги</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="95"/>
         <source>Cursor mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим курсора</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Hidden after delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Спрятать после задержки</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Всегда виден</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="176"/>
         <source>Reset settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить настройки?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="177"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс настроек необратим,
+Вы не сможете восстановить их!</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="178"/>
         <source>No, Keep</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет, Оставить</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="179"/>
         <source>Yes, Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Да, Сбросить</translation>
     </message>
 </context>
 <context>
@@ -466,13 +536,14 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../homePage/MBook.qml" line="174"/>
         <location filename="../homePage/MBook.qml" line="189"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../homePage/MBook.qml" line="288"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выша книга не была загружена в облако.
+Либо Вы не в сети, либо Ваше хранилище заполнено.</translation>
     </message>
 </context>
 <context>
@@ -480,23 +551,23 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="70"/>
         <source>Book details</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация о книге</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="188"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="542"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="236"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="241"/>
@@ -505,79 +576,79 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookDetailsPopup.qml" line="389"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="574"/>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестно</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторы</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="274"/>
         <source>Pages</source>
-        <translation type="unfinished"></translation>
+        <translation>Страницы</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="292"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Языки</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
         <source>Document creator</source>
-        <translation type="unfinished"></translation>
+        <translation>Создатель документа</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
         <source>Creation date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата создания</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="403"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
         <source>Document size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер документа</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="440"/>
         <source>Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="458"/>
         <source>Last opened</source>
-        <translation type="unfinished"></translation>
+        <translation>Последнее открытие</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="492"/>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="517"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
         <source>files</source>
-        <translation type="unfinished"></translation>
+        <translation>файлы</translation>
     </message>
 </context>
 <context>
@@ -585,38 +656,38 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="31"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="42"/>
         <source>Read book</source>
-        <translation type="unfinished"></translation>
+        <translation>Читать</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="51"/>
         <source>Book details</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
         <source>Save to files</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Теги</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Прочитано</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
         <source>Remove book</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -624,38 +695,38 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="29"/>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Закладки</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="54"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="137"/>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Закладку</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="142"/>
         <source>New Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая Закладка</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="160"/>
         <source>Follow</source>
         <extracomment>Context: &quot;Follow&quot; the bookmark (go to its page)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Отслеживать</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="172"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="184"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -664,12 +735,12 @@ Either you are offline, or your storage is full.</source>
         <location filename="../readingPage/MChapterSidebar.qml" line="36"/>
         <source>Contents</source>
         <extracomment>Context: Contents of the book, also known as outline</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Содержание</translation>
     </message>
     <message>
         <location filename="../readingPage/MChapterSidebar.qml" line="61"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти</translation>
     </message>
 </context>
 <context>
@@ -677,7 +748,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
 </context>
 <context>
@@ -685,37 +756,37 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="65"/>
         <source>Confirm Account Deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердить Удаление Аккаунта</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="76"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление Вашего аккаунта необратимо.&lt;br&gt;После удаления аккаунта пути назад уже &lt;br&gt;не&lt;br&gt; будет. Пожалуйста, будьте уверены.</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="88"/>
         <source>Your Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша Почта</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердите удаление, введя почту Аккаунта.</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="109"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="125"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="135"/>
         <source>Your email is wrong</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша почта неправильная</translation>
     </message>
 </context>
 <context>
@@ -723,22 +794,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="104"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="356"/>
         <source>No definitions found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего не найдено</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="364"/>
         <source>Search online</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать онлайн</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="395"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Источник</translation>
     </message>
 </context>
 <context>
@@ -746,42 +817,42 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="82"/>
         <source>Download book</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать книгу</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="138"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="155"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторы</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="172"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Язык</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="189"/>
         <source>Downloads</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачиваний</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="207"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="237"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="263"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
@@ -789,12 +860,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../modules/CustomComponents/MDualToggle.qml" line="15"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Левый</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MDualToggle.qml" line="17"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Правый</translation>
     </message>
 </context>
 <context>
@@ -802,12 +873,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="36"/>
         <source>Quite empty here, what about adding your first book?</source>
-        <translation type="unfinished"></translation>
+        <translation>Здесь пустовато, не хотите добавить свою первую книгу?</translation>
     </message>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
         <source>Add book</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить кингу</translation>
     </message>
 </context>
 <context>
@@ -816,77 +887,77 @@ Either you are offline, or your storage is full.</source>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>You have reached your daily limit.</source>
         <extracomment>Make sure that the words make a valid sentence</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Вы достигли своего дневного лимита.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation type="unfinished"></translation>
+        <translation>сюда</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to learn more.</source>
-        <translation type="unfinished"></translation>
+        <translation>, чтобы узнать больше.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
         <source>Oops! The text is too long. Please shorten your selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ой! Текст слишком длинный. Пожалуйста, сократите выделенную область.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="67"/>
         <source>Explain</source>
-        <translation type="unfinished"></translation>
+        <translation>Объяснить</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="71"/>
         <source>Explain like I&apos;m five</source>
-        <translation type="unfinished"></translation>
+        <translation>Объяснить как ребёнку</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="75"/>
         <source>Summarize</source>
-        <translation type="unfinished"></translation>
+        <translation>Подытожить</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="79"/>
         <source>Give more information</source>
-        <translation type="unfinished"></translation>
+        <translation>Дать больше информации</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="83"/>
         <source>Explain visually</source>
-        <translation type="unfinished"></translation>
+        <translation>Объяснить визуально</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="113"/>
         <source>Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="121"/>
         <source>None selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего не выбрано</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="144"/>
         <source>Request</source>
-        <translation type="unfinished"></translation>
+        <translation>Запрос</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="283"/>
         <source>Note: AI responses can be inaccurate</source>
-        <translation type="unfinished"></translation>
+        <translation>Примечание: ответы ИИ могут быть неточными</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="299"/>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Спросить</translation>
     </message>
 </context>
 <context>
@@ -894,7 +965,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
         <source>Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтры</translation>
     </message>
 </context>
 <context>
@@ -902,77 +973,77 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="72"/>
         <source>e.g. Uncle bob</source>
-        <translation type="unfinished"></translation>
+        <translation>Например, Uncle Bob</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="75"/>
         <source>Authors</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторы</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>e.g. 2d ago</source>
-        <translation type="unfinished"></translation>
+        <translation>Например, 2d ago</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="102"/>
         <source>Added</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлено</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="118"/>
         <source>Read</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитано</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="136"/>
         <source>Unread</source>
-        <translation type="unfinished"></translation>
+        <translation>Непрочитано</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="157"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Формат</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="158"/>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Все</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="168"/>
         <source>Pdf</source>
-        <translation type="unfinished"></translation>
+        <translation>Pdf</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
         <source>Epub</source>
-        <translation type="unfinished"></translation>
+        <translation>Epub</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
         <source>Mobi</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobi</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
         <source>Txt</source>
-        <translation type="unfinished"></translation>
+        <translation>Txt</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="191"/>
         <source>Only Books</source>
-        <translation type="unfinished"></translation>
+        <translation>Только Книги</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="209"/>
         <source>Only Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Только Файлы</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="230"/>
         <source>Apply Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить Фильтр</translation>
     </message>
 </context>
 <context>
@@ -980,27 +1051,27 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="75"/>
         <source>Forgot Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Забыли пароль</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="87"/>
         <source>Enter your email and we&apos;ll send you a link to reset your password</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите Вашу почту и мы вышлем Вам ссылку для сброса пароля</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="130"/>
         <source>Send Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить Почту</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="147"/>
         <source>Back to Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад на страницу входа</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="173"/>
         <source>Email sent! Keep an eye on your inbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта отправлена! Проверьте Ваши входящие письма</translation>
     </message>
 </context>
 <context>
@@ -1008,7 +1079,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../freeBooksPage/MFreeBook.qml" line="128"/>
         <source>.jpeg</source>
-        <translation type="unfinished"></translation>
+        <translation>.jpeg</translation>
     </message>
 </context>
 <context>
@@ -1016,22 +1087,63 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="22"/>
         <source>No books were found</source>
-        <translation type="unfinished"></translation>
+        <translation>Книги не найдены</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="29"/>
         <source>Couldn&apos;t load free books. Please, check your network connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить бесплатные книги. Пожалуйста, проверьте интернет-подключение</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="81"/>
         <source>Free books</source>
-        <translation type="unfinished"></translation>
+        <translation>Бесплатные книги</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="82"/>
         <source>Choose from over 70,000 books</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбирайте среди более 70,000 книг</translation>
+    </message>
+</context>
+<context>
+    <name>MGeneralSettingsPage</name>
+    <message>
+        <source>General settings</source>
+        <translation type="vanished">Общие настройки</translation>
+    </message>
+    <message>
+        <source>Change the way Librum works</source>
+        <translation type="vanished">Измените то, как работает Librum</translation>
+    </message>
+    <message>
+        <source>Restore Defaults</source>
+        <translation type="vanished">Сбросить по-умолчанию</translation>
+    </message>
+    <message>
+        <source>Books</source>
+        <translation type="vanished">Книги</translation>
+    </message>
+    <message>
+        <source>Open books after creation</source>
+        <translation type="vanished">Открывать книги после создания</translation>
+    </message>
+    <message>
+        <source>Reset settings?</source>
+        <translation type="vanished">Сбросить настройки?</translation>
+    </message>
+    <message>
+        <source>Resetting your settings is a permanent action, there
+ will be no way to restore them!</source>
+        <translation type="vanished">Сброс настроек необратим,
+вернуть их нельзя!</translation>
+    </message>
+    <message>
+        <source>No, Keep</source>
+        <translation type="vanished">Нет, оставить</translation>
+    </message>
+    <message>
+        <source>Yes, Reset</source>
+        <translation type="vanished">Да, сбросить</translation>
     </message>
 </context>
 <context>
@@ -1039,103 +1151,105 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="75"/>
         <source>A new version is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступна новая версия!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="77"/>
         <source>Update Now</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить Сейчас</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="125"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Главная</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="126"/>
         <source>You have %1 books</source>
-        <translation type="unfinished"></translation>
+        <translation>У Вас %1 книг</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="142"/>
         <source>Add books</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить книги</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="361"/>
         <source>Remove Book?</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить Книгу?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="362"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление книги необратимо,
+после этого её нельзя будет восстановить!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="363"/>
         <source>Remove from Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить с Устройства</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="364"/>
         <source>Delete Everywhere</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить Везде</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="401"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="416"/>
         <source>Limit Reached</source>
-        <translation type="unfinished"></translation>
+        <translation>Достигнут Лимит</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="417"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы достигли лимита загрузок на сервер.
+Удалите ненужные книги или приобретите улучшение для аккаунта.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="418"/>
         <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Хорошо</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="419"/>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Приобрести улучшение</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="434"/>
         <source>Unsupported File</source>
-        <translation type="unfinished"></translation>
+        <translation>Неподдерживаемый Файл</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Oops! This file is not supported by Librum.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ой! Librum не поддерживает этот файл.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="447"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="450"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="451"/>
         <location filename="../homePage/MHomePage.qml" line="452"/>
         <location filename="../homePage/MHomePage.qml" line="453"/>
         <source>files</source>
-        <translation type="unfinished"></translation>
+        <translation>файлы</translation>
     </message>
 </context>
 <context>
@@ -1143,62 +1257,62 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="137"/>
         <source>Welcome back!</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро пожаловать!</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="147"/>
         <source>Log into your account</source>
-        <translation type="unfinished"></translation>
+        <translation>Войдите в Ваш аккаунт</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="158"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="173"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="219"/>
         <source>Remember me</source>
-        <translation type="unfinished"></translation>
+        <translation>Запомнить меня</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="239"/>
         <source>Forgot password?</source>
-        <translation type="unfinished"></translation>
+        <translation>Забыли пароль?</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="266"/>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Войти</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="291"/>
         <source>Don&apos;t have an account? Register</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет аккаунта? Зарегистрируйтесь</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="310"/>
         <source>We&apos;re Sorry</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="311"/>
         <source>Logging you in failed, please try again later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось войти, пожалуйста, повторите позже.</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="312"/>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Хорошо</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="313"/>
         <source>Report</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщить</translation>
     </message>
 </context>
 <context>
@@ -1206,17 +1320,17 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="31"/>
         <source>TAGS</source>
-        <translation type="unfinished"></translation>
+        <translation>ТЕГИ</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="69"/>
         <source>Manage Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Теги</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово</translation>
     </message>
 </context>
 <context>
@@ -1224,12 +1338,12 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="23"/>
         <source>No book satisfies the filter conditions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ни одна книга не удовлетворяет условиям фильтра</translation>
     </message>
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="37"/>
         <source>Remove Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить фильтры</translation>
     </message>
 </context>
 <context>
@@ -1237,12 +1351,12 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
         <source>OFF</source>
-        <translation type="unfinished"></translation>
+        <translation>ВЫКЛ</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
         <source>ON</source>
-        <translation type="unfinished"></translation>
+        <translation>ВКЛ</translation>
     </message>
 </context>
 <context>
@@ -1250,17 +1364,17 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="48"/>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="68"/>
         <source>Manage Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль</translation>
     </message>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="87"/>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Выйти</translation>
     </message>
 </context>
 <context>
@@ -1268,22 +1382,22 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Поменять цвета</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
         <source>Sync book</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
         <source>More options</source>
-        <translation type="unfinished"></translation>
+        <translation>Ещё</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить</translation>
     </message>
 </context>
 <context>
@@ -1291,22 +1405,22 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="92"/>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="141"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Найти</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="168"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующий</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="187"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущий</translation>
     </message>
 </context>
 <context>
@@ -1314,17 +1428,17 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="52"/>
         <source>From start</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>С учётом регистра</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
         <source>Whole words</source>
-        <translation type="unfinished"></translation>
+        <translation>Целые слова</translation>
     </message>
 </context>
 <context>
@@ -1332,13 +1446,13 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="14"/>
         <source>Unknown name</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестное имя</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="188"/>
         <source>of</source>
         <extracomment>As in 21 &quot;of&quot; 400</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>из</translation>
     </message>
 </context>
 <context>
@@ -1347,13 +1461,13 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="25"/>
         <source>Key</source>
         <extracomment>As in key on the keyboard</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Клавиша</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="104"/>
         <source>Press to record</source>
         <extracomment>As in recording a key that is pressed on the keyboard</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Нажать для записи</translation>
     </message>
 </context>
 <context>
@@ -1361,68 +1475,69 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="79"/>
         <source>Welcome!</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро Пожаловать!</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="90"/>
         <source>Your credentials are only used to authenticate yourself. Everything will be stored in a secure database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваши учетные данные используются только для входа в Ваш аккаунт. Они будут сохранены в защищенной базе данных.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="120"/>
         <source>First name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="133"/>
         <source>Last name</source>
-        <translation type="unfinished"></translation>
+        <translation>Фамилия</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="148"/>
         <source>Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="162"/>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="177"/>
         <source>Confirmation password</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтверждение пароля</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="215"/>
         <source>Let&apos;s start</source>
-        <translation type="unfinished"></translation>
+        <translation>Давайте начнем</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="237"/>
         <source>Already have an account? Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Уже есть аккаунт? Войти</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="263"/>
         <source>Confirm Your Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтвердите Вашу Почту</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="264"/>
         <source>You&apos;re are almost ready to go!
 Confirm your email by clicking the link we sent you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Почти готово!
+Подтвердите Вашу почту, перейдя по ссылке, которую мы Вам отправили.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="265"/>
         <source>Resend</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить снова</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="296"/>
         <source>Passwords don&apos;t match</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароли не совпадают</translation>
     </message>
 </context>
 <context>
@@ -1430,7 +1545,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать книги</translation>
     </message>
 </context>
 <context>
@@ -1438,17 +1553,17 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
         <source>Click to select an image or drop it into in this area</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы выбрать изображение, или перенесите его в эту область</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="155"/>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="155"/>
         <source>files</source>
-        <translation type="unfinished"></translation>
+        <translation>файлы</translation>
     </message>
 </context>
 <context>
@@ -1456,27 +1571,27 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="128"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="141"/>
         <source>Highlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Выделить</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="158"/>
         <source>Look Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="242"/>
         <source>Explain</source>
-        <translation type="unfinished"></translation>
+        <translation>Объяснить</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="262"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -1484,59 +1599,59 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="55"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="74"/>
         <source>GLOBAL SETTINGS</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ГЛОБАЛЬНЫЕ НАСТРОЙКИ</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="90"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="106"/>
         <source>Appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Внешний вид</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
         <source>Behavior</source>
-        <translation type="unfinished"></translation>
+        <translation>Поведение</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Сочетания клавиш</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
         <source>Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновления</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
         <source>USER &amp; ACCOUNT</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ПОЛЬЗОВАТЕЛЬ И АККАУНТ</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="182"/>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="198"/>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="215"/>
         <source>Support us</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержать нас</translation>
     </message>
 </context>
 <context>
@@ -1544,7 +1659,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutDelegate.qml" line="65"/>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничего</translation>
     </message>
 </context>
 <context>
@@ -1552,34 +1667,34 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="39"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Сочетания клавиш</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="40"/>
         <source>Make your own experience</source>
-        <translation type="unfinished"></translation>
+        <translation>Создайте свой собственный опыт</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="57"/>
         <source>Edit shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить сочетания клавиш</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="106"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ДЕЙСТВИЕ</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="120"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>СОЧЕТАНИЯ КЛАВИШ</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
         <source>Search for shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать сочетания клавиш</translation>
     </message>
 </context>
 <context>
@@ -1587,27 +1702,27 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="123"/>
         <source>Free books</source>
-        <translation type="unfinished"></translation>
+        <translation>Бесплатные</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="145"/>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Главная</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="156"/>
         <source>Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Статистика</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="176"/>
         <source>Add-ons</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширения</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="187"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
 </context>
 <context>
@@ -1615,7 +1730,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
-        <translation type="unfinished"></translation>
+        <translation>Сортировать</translation>
     </message>
 </context>
 <context>
@@ -1623,27 +1738,27 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
         <source>Recently added</source>
-        <translation type="unfinished"></translation>
+        <translation>Недавно добавленные</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
         <source>Recently read</source>
-        <translation type="unfinished"></translation>
+        <translation>Недавно прочитанные</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Прогресс</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="77"/>
         <source>Book (A-Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Книга (A-Z)</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
         <source>Authors (A-Z)</source>
-        <translation type="unfinished"></translation>
+        <translation>Авторы (A-Z)</translation>
     </message>
 </context>
 <context>
@@ -1651,12 +1766,12 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../statisticsPage/MStatisticsPage.qml" line="22"/>
         <source>Statistics Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница со Статистикой</translation>
     </message>
     <message>
         <location filename="../statisticsPage/MStatisticsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation type="unfinished"></translation>
+        <translation>В настоящий момент в Разработке</translation>
     </message>
 </context>
 <context>
@@ -1664,87 +1779,87 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="42"/>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="43"/>
         <source>Your storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваше хранилище</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="59"/>
         <location filename="../settings/MStoragePage.qml" line="152"/>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Приобрести улучшение</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="112"/>
         <source>YOUR TIER</source>
         <extracomment>Keep capitalized (&quot;TIER&quot; as in subscription)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ВАШ УРОВЕНЬ</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="123"/>
         <source>BASIC</source>
         <extracomment>Keep capitalized (&quot;BASIC&quot; is the name of the tier)</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>БАЗОВЫЙ</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотрите, почему мы предоставляем несколько уровней</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
         <source>USED STORAGE</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ЗАНЯТО МЕСТА</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="234"/>
         <source>Used Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Занято Места</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="261"/>
         <source>Remaining Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Осталось Места</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="317"/>
         <source>YOUR BOOKS</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>ВАШИ КНИГИ</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="336"/>
         <source>Books in your Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Книги в Вашей Библиотеке</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="355"/>
         <source>Upgrade Your Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Улучшите Ваш Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>We don&apos;t offer upgrading options at the moment.</source>
-        <translation type="unfinished"></translation>
+        <translation>В настоящий момент мы не предоставляем опции для улучшения.</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>If you require additional storage, please contact us at</source>
-        <translation type="unfinished"></translation>
+        <translation>Если Вам нужно дополнительное место в хранилище, пожалуйста, свяжитесь с нами</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="359"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="360"/>
         <source>Email Us</source>
-        <translation type="unfinished"></translation>
+        <translation>Написать Нам</translation>
     </message>
 </context>
 <context>
@@ -1753,43 +1868,44 @@ Confirm your email by clicking the link we sent you.</source>
         <location filename="../settings/MSupportUsPage.qml" line="33"/>
         <location filename="../settings/MSupportUsPage.qml" line="95"/>
         <source>Support us</source>
-        <translation type="unfinished"></translation>
+        <translation>Поддержать нас</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="34"/>
         <source>Thanks for considering</source>
-        <translation type="unfinished"></translation>
+        <translation>Спасибо за поддержку</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
-        <translation type="unfinished"></translation>
+        <translation>Мы небольшая команда open-source разработчиков, которая создает приложения для сообщества.
+Мы любим работать над интересными проектами, поддерживать наше сообщество и пытаться сделать мир лучше.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
         <source>If you feel like supporting us and our projects, feel free to support us:</source>
-        <translation type="unfinished"></translation>
+        <translation>Если Вы захотите поддержать нас и наши проекты - не стесняйтесь это делать:</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы можете поддержать нас многими другими способами, если Вы разработчик или дизайнер, то не стесняйтесь</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
         <source>contribute to Librum</source>
-        <translation type="unfinished"></translation>
+        <translation>учавствовать в разработке Librum</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
-        <translation type="unfinished"></translation>
+        <translation>Также Вы можете помочь нам, рассказывая другим людям о Librum.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
-        <translation type="unfinished"></translation>
+        <translation>Спасибо Вам за поддержку. Мы надеемся, что Вам нравится Librum!</translation>
     </message>
 </context>
 <context>
@@ -1797,7 +1913,7 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
         <source>Tags</source>
-        <translation type="unfinished"></translation>
+        <translation>Теги</translation>
     </message>
 </context>
 <context>
@@ -1805,17 +1921,17 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="119"/>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="131"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="140"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -1823,12 +1939,12 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../modules/CustomComponents/MTitle.qml" line="9"/>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Название</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MTitle.qml" line="10"/>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
 </context>
 <context>
@@ -1836,22 +1952,22 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../homePage/toolbar/MToolbar.qml" line="67"/>
         <source>Remove Filters</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить фильтры</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/MToolbar.qml" line="80"/>
         <source>Remove Tags</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/MToolbar.qml" line="146"/>
         <source>You are offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы не в сети</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/MToolbar.qml" line="153"/>
         <source>Your library is being synchronized with the cloud</source>
-        <translation type="unfinished"></translation>
+        <translation>Сейчас Ваша библиотека синхронизируется с облаком</translation>
     </message>
 </context>
 <context>
@@ -1859,22 +1975,22 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="37"/>
         <source>You are up to date!</source>
-        <translation type="unfinished"></translation>
+        <translation>У Вас последняя версия!</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
-        <translation type="unfinished"></translation>
+        <translation>Регулярно проверяйте наличие обновлений, чтобы не пропустить интересный новый функционал.</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>
         <source>Your current version is:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ваша текущая версия:</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
         <source>See our latest changes at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотрите последние изменения здесь:</translation>
     </message>
 </context>
 <context>
@@ -1882,65 +1998,65 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="50"/>
         <source>A new update is available!</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступно новое обноление!</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
         <source>Download the new version to get great new improvements.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузите новую версию, чтобы получить новые замечательные улучшения.</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="69"/>
         <source>The newest version is:</source>
-        <translation type="unfinished"></translation>
+        <translation>Новейшая версия:</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="94"/>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="113"/>
         <source>See the exact changes on our website at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Посмотрите подробные изменения на нашем сайте:</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="154"/>
         <source>Updating on Linux</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновление на Linux</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
         <source>Please use your package manager to update Librum or download the newest version from our</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, используйте Ваш менеджер пакетов, чтобы обновить Librum, или загрузите новейшую версию с нашего</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="157"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="181"/>
         <source>website</source>
-        <translation type="unfinished"></translation>
+        <translation>сайта</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="159"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="183"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
         <source>Email Us</source>
-        <translation type="unfinished"></translation>
+        <translation>Написать Нам</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="178"/>
         <source>The Update Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не Удалось Обновить</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>Please try again later or download the newest version from our</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста, повторите снова или загрузите новейшую версию с нашего</translation>
     </message>
 </context>
 <context>
@@ -1948,12 +2064,12 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MUpdatesPage.qml" line="33"/>
         <source>Updates</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновления</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesPage.qml" line="34"/>
         <source>Any new update?</source>
-        <translation type="unfinished"></translation>
+        <translation>Есть новое обновление?</translation>
     </message>
 </context>
 <context>
@@ -1961,22 +2077,22 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="11"/>
         <source>Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>Принять</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="12"/>
         <source>Decline</source>
-        <translation type="unfinished"></translation>
+        <translation>Отклонить</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="13"/>
         <source>Do you Accept?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы Принимаете?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="14"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Сообщение</translation>
     </message>
 </context>
 <context>
@@ -1984,12 +2100,12 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="60"/>
         <source>Updating</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс обновления</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="67"/>
         <source>Downloading</source>
-        <translation type="unfinished"></translation>
+        <translation>Процесс загрузки</translation>
     </message>
 </context>
 <context>
@@ -1997,7 +2113,7 @@ working on fun projects, supporting our community and trying to make the world a
     <message>
         <location filename="../main.qml" line="31"/>
         <source>Librum - Your ebook reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Librum - Ваше приложение для чтения электронных книг</translation>
     </message>
 </context>
 </TS>
