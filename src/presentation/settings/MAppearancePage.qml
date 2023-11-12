@@ -43,10 +43,10 @@ Page {
 
             MButton {
                 id: resetButton
-                Layout.preferredWidth: 160
                 Layout.preferredHeight: 38
                 Layout.alignment: Qt.AlignBottom
                 borderWidth: 0
+                horizontalMargins: 12
                 backgroundColor: Style.colorBasePurple
                 text: qsTr("Restore Defaults")
                 fontSize: Fonts.size12
