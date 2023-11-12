@@ -13,8 +13,8 @@ ListModel {
         text: "Deutsch"
         code: "de"
     }
-    //                ListElement {
-    //                    text: "Русский"
-    //                    code: "ru"
-    //                }
+    ListElement {
+        text: "Русский"
+        code: "ru"
+    }
 }

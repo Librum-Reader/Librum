@@ -212,7 +212,9 @@ Page {
                             function calculateDefaultIndex() {
                                 let selectedLanguage = AppInfoController.language
                                 for (var i = 0; i < model.count; ++i) {
-                                    if (model.get(i).text === selectedLanguage)
+                                    if (model.get(i).text.toLowerCase(
+                                                ) === selectedLanguage.toLowerCase(
+                                                ))
                                         return i
                                 }
 

@@ -354,17 +354,17 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="246"/>
+        <location filename="../settings/MAppearancePage.qml" line="248"/>
         <source>Reading</source>
         <translation>Lesen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="256"/>
+        <location filename="../settings/MAppearancePage.qml" line="258"/>
         <source>Page spacing</source>
         <translation>Seiten Abstand</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="283"/>
+        <location filename="../settings/MAppearancePage.qml" line="285"/>
         <source>Display book title in titlebar</source>
         <translation>Den Buchtitel in der Titelleiste anzeigen</translation>
     </message>
@@ -413,22 +413,22 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation type="vanished">Tauschen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="308"/>
+        <location filename="../settings/MAppearancePage.qml" line="310"/>
         <source>Default Zoom</source>
         <translation>Standard-Zoom</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="354"/>
+        <location filename="../settings/MAppearancePage.qml" line="356"/>
         <source>Highlights</source>
         <translation>Markierungen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="363"/>
+        <location filename="../settings/MAppearancePage.qml" line="365"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="482"/>
+        <location filename="../settings/MAppearancePage.qml" line="484"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
@@ -457,24 +457,24 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation type="vanished">Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="538"/>
+        <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>Reset settings?</source>
         <translation>Einstellungen zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="539"/>
+        <location filename="../settings/MAppearancePage.qml" line="541"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="542"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="543"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
     </message>
@@ -515,6 +515,16 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
         <translation type="unfinished">Immer sichtbar</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="132"/>
+        <source>Hide cursor after delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="157"/>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="176"/>
@@ -786,32 +796,32 @@ niemand wird es wiederherstellen können!</translation>
         <translation>Bestätige Konto Löschung</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="76"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
         <translation>Das Löschen deines Kontos ist eine endgültige Aktion.&lt;br&gt;Nachdem du dein Konto gelöscht hast, gibt es &lt;b&gt;keinen&lt;/b&gt; Weg zurück.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="88"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
         <source>Your Email</source>
         <translation>Deine Email</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="92"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
         <translation>Bestätige die Löschung deines Accounts indem du deine Email eingibst.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="109"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="111"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="125"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="127"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="135"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
         <source>Your email is wrong</source>
         <translation>Deine Email ist falsch</translation>
     </message>

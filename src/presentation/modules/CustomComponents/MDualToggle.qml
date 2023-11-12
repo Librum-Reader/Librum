@@ -17,10 +17,16 @@ Item {
     property string rightDisplayText: qsTr("Right")
     property bool leftSelected: false
     property bool rightSelected: true // default
+    property int minWidth: 178
     signal toggled(string newSelected)
 
     implicitHeight: 38
-    implicitWidth: 178
+    implicitWidth: {
+        let biggestText = Math.max(leftLabel.implicitWidth,
+                                   rightLabel.implicitWidth)
+
+        return Math.max(minWidth, biggestText * 2 + 42)
+    }
 
     Pane {
         id: container

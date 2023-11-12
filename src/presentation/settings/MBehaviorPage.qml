@@ -129,7 +129,7 @@ MFlickWrapper {
                             id: hideCursorAfterDelayTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18
-                            text: "Hide cursor after delay"
+                            text: qsTr("Hide cursor after delay")
                             font.pointSize: Fonts.size13
                             font.weight: Font.DemiBold
                             color: Style.colorText
@@ -154,7 +154,7 @@ MFlickWrapper {
                             }
 
                             Text {
-                                text: "ms"
+                                text: qsTr("ms")
                                 font.pointSize: Fonts.size13
                                 font.weight: Font.DemiBold
                                 color: Style.colorText

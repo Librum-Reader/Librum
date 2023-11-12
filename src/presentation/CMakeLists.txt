@@ -19,7 +19,7 @@ set(translation_files
     translations/librum_en.ts
     translations/librum_de.ts
     translations/librum_ru.ts
-    translations/librum_it.ts
+    translations/librum_pt.ts
 )
 
 # Translations for the application
