@@ -345,58 +345,58 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="246"/>
+        <location filename="../settings/MAppearancePage.qml" line="248"/>
         <source>Reading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="256"/>
+        <location filename="../settings/MAppearancePage.qml" line="258"/>
         <source>Page spacing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="283"/>
+        <location filename="../settings/MAppearancePage.qml" line="285"/>
         <source>Display book title in titlebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="308"/>
+        <location filename="../settings/MAppearancePage.qml" line="310"/>
         <source>Default Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="354"/>
+        <location filename="../settings/MAppearancePage.qml" line="356"/>
         <source>Highlights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="363"/>
+        <location filename="../settings/MAppearancePage.qml" line="365"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="482"/>
+        <location filename="../settings/MAppearancePage.qml" line="484"/>
         <source>Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="538"/>
+        <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="539"/>
+        <location filename="../settings/MAppearancePage.qml" line="541"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="542"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="543"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
@@ -436,6 +436,16 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="132"/>
+        <source>Hide cursor after delay</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="157"/>
+        <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -688,32 +698,32 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="76"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="88"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
         <source>Your Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="92"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="109"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="111"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="125"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="127"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="135"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
         <source>Your email is wrong</source>
         <translation type="unfinished"></translation>
     </message>

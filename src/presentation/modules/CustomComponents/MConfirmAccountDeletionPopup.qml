@@ -72,6 +72,8 @@ Popup {
                 id: infoText
                 Layout.topMargin: 20
                 Layout.leftMargin: 52
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
                 textFormat: Text.RichText
                 text: qsTr("Deleting your account is an irreversible action.<br>Once you delete your account, there is <b>no</b> going back. Please be certain.")
                 font.pointSize: Fonts.size14

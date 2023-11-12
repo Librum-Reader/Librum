@@ -346,17 +346,17 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="246"/>
+        <location filename="../settings/MAppearancePage.qml" line="248"/>
         <source>Reading</source>
         <translation>Чтение</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="256"/>
+        <location filename="../settings/MAppearancePage.qml" line="258"/>
         <source>Page spacing</source>
         <translation>Расстояние между страницами</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="283"/>
+        <location filename="../settings/MAppearancePage.qml" line="285"/>
         <source>Display book title in titlebar</source>
         <translation>Отображать название книги в строке с названием</translation>
     </message>
@@ -405,22 +405,22 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="vanished">Замена</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="308"/>
+        <location filename="../settings/MAppearancePage.qml" line="310"/>
         <source>Default Zoom</source>
         <translation>Увеличение по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="354"/>
+        <location filename="../settings/MAppearancePage.qml" line="356"/>
         <source>Highlights</source>
         <translation>Выделение</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="363"/>
+        <location filename="../settings/MAppearancePage.qml" line="365"/>
         <source>Colors</source>
         <translation>Цвета</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="482"/>
+        <location filename="../settings/MAppearancePage.qml" line="484"/>
         <source>Opacity</source>
         <translation>Непрозрачность</translation>
     </message>
@@ -449,23 +449,23 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="vanished">Всегда виден</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="538"/>
+        <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>Reset settings?</source>
         <translation>Сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="539"/>
+        <location filename="../settings/MAppearancePage.qml" line="541"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Сброс настроек необратим, Вы не сможете потом их восстановить!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="542"/>
         <source>No, Keep</source>
         <translation>Нет, Оставить</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="543"/>
         <source>Yes, Reset</source>
         <translation>Да, Сбросить</translation>
     </message>
@@ -506,6 +506,16 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
         <translation>Всегда виден</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="132"/>
+        <source>Hide cursor after delay</source>
+        <translation>Спрятать курсор после задержки</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="157"/>
+        <source>ms</source>
+        <translation>мс</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="176"/>
@@ -759,32 +769,32 @@ Either you are offline, or your storage is full.</source>
         <translation>Подтвердить Удаление Аккаунта</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="76"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
-        <translation>Удаление Вашего аккаунта необратимо.&lt;br&gt;После удаления аккаунта пути назад уже &lt;br&gt;не&lt;br&gt; будет. Пожалуйста, будьте уверены.</translation>
+        <translation>Удаление Вашего аккаунта необратимо.&lt;br&gt;После удаления аккаунта пути назад уже &lt;b&gt;не&lt;/b&gt; будет. Пожалуйста, будьте уверены.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="88"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
         <source>Your Email</source>
         <translation>Ваша Почта</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="92"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
         <translation>Подтвердите удаление, введя почту Аккаунта.</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="109"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="111"/>
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="125"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="127"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="135"/>
+        <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
         <source>Your email is wrong</source>
         <translation>Ваша почта неправильная</translation>
     </message>
@@ -1227,7 +1237,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="434"/>
         <source>Unsupported File</source>
-        <translation>Неподдерживаемый Файл</translation>
+        <translation>Неподдерживаемый</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="435"/>
@@ -1790,7 +1800,7 @@ Confirm your email by clicking the link we sent you.</source>
         <location filename="../settings/MStoragePage.qml" line="59"/>
         <location filename="../settings/MStoragePage.qml" line="152"/>
         <source>Upgrade</source>
-        <translation>Приобрести улучшение</translation>
+        <translation>Улучшить</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="112"/>
@@ -1807,7 +1817,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Посмотрите, почему мы предоставляем несколько уровней</translation>
+        <translation>Об уровнях</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
@@ -1839,7 +1849,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="355"/>
         <source>Upgrade Your Account</source>
-        <translation>Улучшите Ваш Аккаунт</translation>
+        <translation>Улучшите Аккаунт</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
