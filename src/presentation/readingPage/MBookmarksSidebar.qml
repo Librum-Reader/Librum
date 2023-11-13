@@ -137,12 +137,7 @@ Item {
                 text: qsTr("Add Bookmark")
                 imageSize: 12
 
-                onClicked: {
-                    let uuid = BookController.addBookmark(
-                            qsTr("New Bookmark"), BookController.currentPage,
-                            getYOffset())
-                    bookmarksView.lastAddedUuid = uuid
-                }
+                onClicked: createNewBookmark()
             }
         }
     }
@@ -190,5 +185,12 @@ Item {
                 }
             }
         }
+    }
+
+    function createNewBookmark() {
+        let uuid = BookController.addBookmark(qsTr("New Bookmark"),
+                                              BookController.currentPage,
+                                              getYOffset())
+        bookmarksView.lastAddedUuid = uuid
     }
 }

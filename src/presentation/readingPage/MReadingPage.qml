@@ -85,6 +85,20 @@ Page {
         onActivated: internal.goToEnd()
     }
 
+    Shortcut {
+        id: createBookmark
+        sequences: [SettingsController.shortcuts.CreateBookmarkHere]
+        onActivated: {
+            if (chapterSidebar.active)
+                chapterSidebar.close()
+
+            if (!bookmarksSidebar.active)
+                bookmarksSidebar.open()
+
+            bookmarksSidebar.createNewBookmark()
+        }
+    }
+
 
     /*
       An invisible component at the top of the screen, when hovering over it

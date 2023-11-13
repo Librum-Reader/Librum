@@ -14,7 +14,7 @@
     "StartOfDocument": "Ctrl+Home",
     "EndOfDocument": "Ctrl+End",
     "PrintPage": "Ctrl+P",
-    "CreateBookmarkHere": "Alt+3",
+    "CreateBookmarkHere": "B",
     "ToggleSpeaking": "F5",
     "ReloadApplication": "Ctrl+R",
     "AddBook": "Ctrl+N",

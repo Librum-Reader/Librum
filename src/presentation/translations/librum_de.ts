@@ -745,23 +745,23 @@ niemand wird es wiederherstellen können!</translation>
         <translation>Lesezeichen hinzufügen</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="142"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="191"/>
         <source>New Bookmark</source>
         <translation>Neues Lesezeichen</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="160"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="155"/>
         <source>Follow</source>
         <extracomment>Context: &quot;Follow&quot; the bookmark (go to its page)</extracomment>
         <translation>Folgen</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="172"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="167"/>
         <source>Rename</source>
         <translation>Umbenennen</translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="184"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="179"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>

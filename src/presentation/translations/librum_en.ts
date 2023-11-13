@@ -647,23 +647,23 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="142"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="191"/>
         <source>New Bookmark</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="160"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="155"/>
         <source>Follow</source>
         <extracomment>Context: &quot;Follow&quot; the bookmark (go to its page)</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="172"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="167"/>
         <source>Rename</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/MBookmarksSidebar.qml" line="184"/>
+        <location filename="../readingPage/MBookmarksSidebar.qml" line="179"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
