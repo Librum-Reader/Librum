@@ -3,6 +3,7 @@
 #include <optional>
 #include <vector>
 #include "adapters_export.hpp"
+#include <rapidfuzz/fuzz.hpp>
 
 namespace adapters::data_models
 {
@@ -32,6 +33,7 @@ signals:
     void filterStringUpdated();
 
 private:
+    std::optional<rapidfuzz::fuzz::CachedRatio> m_filterScorer;
     QString m_filterString;
 };
 

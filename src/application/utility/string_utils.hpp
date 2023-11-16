@@ -5,7 +5,7 @@
 namespace string_utils
 {
 
-inline double fuzzCompare(const QString& lhs, const QString& rhs)
+inline double substringCompare(const QString& lhs, const QString& rhs)
 {
     // If rhs is a sub-string of lhs, return a high ratio
     auto substringPos = lhs.toLower().indexOf(rhs.toLower());
@@ -18,6 +18,15 @@ inline double fuzzCompare(const QString& lhs, const QString& rhs)
 
         return ratio;
     }
+
+    return 0.0;
+}
+
+inline double fuzzCompare(const QString& lhs, const QString& rhs)
+{
+    double ratio = substringCompare(lhs, rhs);
+    if(ratio > 0)
+        return ratio;
 
     return rapidfuzz::fuzz::ratio(rhs.toStdString(), lhs.toStdString());
 }

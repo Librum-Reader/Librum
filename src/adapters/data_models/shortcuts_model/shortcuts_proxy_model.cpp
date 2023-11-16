@@ -30,19 +30,25 @@ bool ShortcutsProxyModel::lessThan(const QModelIndex& left,
     QString rightName = sourceModel()->data(right, ShortcutRole).toString();
 
     // Sort alphabetically if no filter string is set
-    if(m_filterString.isEmpty())
+    if(!m_filterScorer)
         return leftName < rightName;
 
     // Sort by the highest similarity if filter string is set
-    auto lSimilarity = string_utils::fuzzCompare(leftName, m_filterString);
-    auto rSimilarity = string_utils::fuzzCompare(rightName, m_filterString);
+    auto lSimilarity = string_utils::substringCompare(leftName, m_filterString);
+    if(lSimilarity == 0.0)
+        lSimilarity = m_filterScorer.similarity(leftName.toUcs4());
+
+    auto rSimilarity = string_utils::substringCompare(rightName, m_filterString);
+    if(rSimilarity == 0.0)
+        rSimilarity = m_filterScorer.similarity(rightName.toUcs4());
+
     return lSimilarity >= rSimilarity;
 }
 
 bool ShortcutsProxyModel::filterAcceptsRow(
     int source_row, const QModelIndex& source_parent) const
 {
-    if(m_filterString.isEmpty())
+    if(!m_filterScorer)
         return true;
 
     auto index = sourceModel()->index(source_row, 0, source_parent);
@@ -58,6 +64,10 @@ bool ShortcutsProxyModel::filterAcceptsRow(
 void ShortcutsProxyModel::setFilterString(QString newFilterString)
 {
     m_filterString = newFilterString;
+    if(newFilterString.isEmpty())
+        m_filterScorer = std::nullopt;
+    else
+        m_filterScorer = rapidfuzz::fuzz::CachedRatio(m_filterString.toUcs4());
     emit filterStringUpdated();
     invalidate();
 }
