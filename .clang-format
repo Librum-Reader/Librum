@@ -44,7 +44,6 @@ BraceWrapping:
   SplitEmptyRecord: true
   SplitEmptyNamespace: true
 
-BreakConstructorInitializers: BeforeColon
 PackConstructorInitializers: Never
 BreakInheritanceList: AfterComma
 BreakStringLiterals: 'true'
@@ -85,7 +84,6 @@ SpaceBeforeCpp11BracedList: 'true'
 SpaceBeforeCtorInitializerColon: 'true'
 SpaceBeforeInheritanceColon: 'true'
 SpaceBeforeParens: Never
-SpaceBeforeRangeBasedForLoopColon: 'false'
 SpaceInEmptyParentheses: 'false'
 SpacesBeforeTrailingComments: '2'
 SpacesInAngles: 'false'
