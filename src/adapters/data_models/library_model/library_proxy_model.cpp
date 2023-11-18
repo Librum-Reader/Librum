@@ -79,10 +79,10 @@ std::optional<bool> LibraryProxyModel::leftBookIsCloserToSortString(
     auto leftTitle = sourceModel()->data(left, LibraryModel::TitleRole);
     auto rightTitle = sourceModel()->data(right, LibraryModel::TitleRole);
 
-    double leftRatio =
-        string_utils::fuzzCompare(leftTitle.toString(), m_sortString);
-    double rightRatio =
-        string_utils::fuzzCompare(rightTitle.toString(), m_sortString);
+    double leftRatio = string_utils::similarity(
+        leftTitle.toString(), m_sortString, m_filterScorer.get());
+    double rightRatio = string_utils::similarity(
+        rightTitle.toString(), m_sortString, m_filterScorer.get());
 
     if(leftRatio > rightRatio)
         return true;
@@ -139,6 +139,13 @@ int LibraryProxyModel::getSortRole()
 void LibraryProxyModel::setSortString(QString newSortString)
 {
     m_sortString = newSortString;
+    if(!newSortString.isEmpty())
+    {
+        m_filterScorer =
+            std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
+                newSortString.toUcs4());
+    }
+
     emit sortStringUpdated();
     invalidate();
 }

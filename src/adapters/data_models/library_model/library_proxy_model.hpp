@@ -1,6 +1,7 @@
 #pragma once
 #include <QSortFilterProxyModel>
 #include <optional>
+#include <rapidfuzz/fuzz.hpp>
 #include <vector>
 #include "adapters_export.hpp"
 #include "filter_request.hpp"
@@ -75,6 +76,7 @@ private:
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";
+    std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
     std::vector<QString> m_tags;
     SortRole m_sortRole = SortRole::RecentlyAdded;
 };

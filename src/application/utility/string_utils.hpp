@@ -1,13 +1,19 @@
 #pragma once
 #include <QString>
 #include <rapidfuzz/fuzz.hpp>
+#include <QList>
 
 namespace string_utils
 {
 
-inline double fuzzCompare(const QString& lhs, const QString& rhs)
+
+// Private
+namespace
 {
-    // If rhs is a sub-string of lhs, return a high ratio
+
+// Return a high similarity if rhs is a substring of lhs, else return 0.0
+inline double substringCompare(const QString& lhs, const QString& rhs)
+{
     auto substringPos = lhs.toLower().indexOf(rhs.toLower());
     if(substringPos != -1)
     {
@@ -19,7 +25,22 @@ inline double fuzzCompare(const QString& lhs, const QString& rhs)
         return ratio;
     }
 
-    return rapidfuzz::fuzz::ratio(rhs.toStdString(), lhs.toStdString());
+    return 0.0;
+}
+
+}
+
+inline double similarity(const QString& str, const QString& aim,
+                         rapidfuzz::fuzz::CachedRatio<unsigned int>* scorer)
+{
+    // First check if str is a substring of aim
+    auto similarity = string_utils::substringCompare(str, aim);
+
+    // If it isn't a substring, calculate the similarity
+    if(qFuzzyCompare(similarity, 0))
+        similarity = scorer->similarity(str.toUcs4());
+
+    return similarity;
 }
 
 inline bool lexicographicallyLess(const QString& left, const QString& right)

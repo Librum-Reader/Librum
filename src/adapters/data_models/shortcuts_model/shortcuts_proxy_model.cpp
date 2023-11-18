@@ -1,8 +1,6 @@
 #include "shortcuts_proxy_model.hpp"
 #include <QAbstractItemModel>
 #include <QDebug>
-#include <algorithm>
-#include <numeric>
 #include "book.hpp"
 #include "shortcuts_model.hpp"
 #include "string_utils.hpp"
@@ -30,25 +28,26 @@ bool ShortcutsProxyModel::lessThan(const QModelIndex& left,
     QString rightName = sourceModel()->data(right, ShortcutRole).toString();
 
     // Sort alphabetically if no filter string is set
-    if(m_filterString.isEmpty())
+    if(!m_filterScorer)
         return leftName < rightName;
 
-    // Sort by the highest similarity if filter string is set
-    auto lSimilarity = string_utils::fuzzCompare(leftName, m_filterString);
-    auto rSimilarity = string_utils::fuzzCompare(rightName, m_filterString);
+    auto lSimilarity = string_utils::similarity(leftName, m_filterString,
+                                                m_filterScorer.get());
+    auto rSimilarity = string_utils::similarity(rightName, m_filterString,
+                                                m_filterScorer.get());
     return lSimilarity >= rSimilarity;
 }
 
 bool ShortcutsProxyModel::filterAcceptsRow(
     int source_row, const QModelIndex& source_parent) const
 {
-    if(m_filterString.isEmpty())
+    if(!m_filterScorer)
         return true;
 
     auto index = sourceModel()->index(source_row, 0, source_parent);
     auto shortcut = sourceModel()->data(index, ShortcutRole).toString();
-    auto shortcutSimilarityToFilterString =
-        string_utils::fuzzCompare(shortcut, m_filterString);
+    auto shortcutSimilarityToFilterString = string_utils::similarity(
+        shortcut, m_filterString, m_filterScorer.get());
     if(shortcutSimilarityToFilterString >= 60)
         return true;
 
@@ -58,6 +57,13 @@ bool ShortcutsProxyModel::filterAcceptsRow(
 void ShortcutsProxyModel::setFilterString(QString newFilterString)
 {
     m_filterString = newFilterString;
+    if(!newFilterString.isEmpty())
+    {
+        m_filterScorer =
+            std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
+                m_filterString.toUcs4());
+    }
+
     emit filterStringUpdated();
     invalidate();
 }

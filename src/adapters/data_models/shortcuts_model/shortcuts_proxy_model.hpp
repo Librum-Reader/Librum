@@ -1,7 +1,7 @@
 #pragma once
 #include <QSortFilterProxyModel>
-#include <optional>
-#include <vector>
+#include <memory>
+#include <rapidfuzz/fuzz.hpp>
 #include "adapters_export.hpp"
 
 namespace adapters::data_models
@@ -32,6 +32,7 @@ signals:
     void filterStringUpdated();
 
 private:
+    std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
     QString m_filterString;
 };
 

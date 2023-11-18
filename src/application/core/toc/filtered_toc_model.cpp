@@ -28,6 +28,13 @@ bool FilteredTOCModel::filterAcceptsRow(int row,
 void FilteredTOCModel::setFilterString(QString filterString)
 {
     m_filterString = filterString;
+    if(!filterString.isEmpty())
+    {
+        m_filterScorer =
+            std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
+                filterString.toUcs4());
+    }
+
     invalidateFilter();
 }
 
@@ -50,8 +57,8 @@ bool FilteredTOCModel::hasChildrenMatchingTheFilter(const TOCItem* item) const
 
 bool FilteredTOCModel::itemPassesFilter(const TOCItem* item) const
 {
-    auto similarity =
-        string_utils::fuzzCompare(item->data().title, m_filterString);
+    auto similarity = string_utils::similarity(
+        item->data().title, m_filterString, m_filterScorer.get());
     double minSimilarity = 70;
 
     return similarity >= minSimilarity;

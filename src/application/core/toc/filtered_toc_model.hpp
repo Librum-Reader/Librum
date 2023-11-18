@@ -2,9 +2,10 @@
 #include <QObject>
 #include <QSortFilterProxyModel>
 #include <QString>
+#include <memory>
+#include <rapidfuzz/fuzz.hpp>
 #include "application_export.hpp"
 #include "toc_item.hpp"
-#include "toc_model.hpp"
 
 namespace application::core
 {
@@ -31,6 +32,7 @@ private:
     bool itemPassesFilter(const TOCItem* item) const;
 
     QString m_filterString;
+    std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
 };
 
 }  // namespace application::core

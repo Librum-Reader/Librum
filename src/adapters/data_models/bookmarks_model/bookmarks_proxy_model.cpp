@@ -1,8 +1,6 @@
 #include "bookmarks_proxy_model.hpp"
 #include <QAbstractItemModel>
 #include <QDebug>
-#include <algorithm>
-#include <numeric>
 #include "book.hpp"
 #include "bookmarks_model.hpp"
 #include "string_utils.hpp"
@@ -37,8 +35,10 @@ bool BookmarksProxyModel::lessThan(const QModelIndex& left,
         return leftPageNr < rightPageNr;
 
     // Sort by the highest similarity if filter string is set
-    auto lSimilarity = string_utils::fuzzCompare(leftName, m_filterString);
-    auto rSimilarity = string_utils::fuzzCompare(rightName, m_filterString);
+    auto lSimilarity = string_utils::similarity(leftName, m_filterString,
+                                                m_filterScorer.get());
+    auto rSimilarity = string_utils::similarity(rightName, m_filterString,
+                                                m_filterScorer.get());
     return lSimilarity >= rSimilarity;
 }
 
@@ -50,8 +50,8 @@ bool BookmarksProxyModel::filterAcceptsRow(
 
     auto index = sourceModel()->index(source_row, 0, source_parent);
     auto shortcut = sourceModel()->data(index, NameRole).toString();
-    auto bookmarkSimilarityToFilterString =
-        string_utils::fuzzCompare(shortcut, m_filterString);
+    auto bookmarkSimilarityToFilterString = string_utils::similarity(
+        shortcut, m_filterString, m_filterScorer.get());
     if(bookmarkSimilarityToFilterString >= 60)
         return true;
 

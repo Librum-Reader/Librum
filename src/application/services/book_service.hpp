@@ -5,6 +5,7 @@
 #include "i_library_service.hpp"
 #include "mupdf/classes.h"
 #include "toc/filtered_toc_model.hpp"
+#include "toc/toc_model.hpp"
 #include "utils/book_searcher.hpp"
 
 namespace application::services

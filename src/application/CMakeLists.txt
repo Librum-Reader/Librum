@@ -76,6 +76,7 @@ set(application_SRC
     core/utils/fz_utils.hpp
     core/utils/text_selector.hpp
     core/utils/text_selector.cpp
+    core/utils/search_options.hpp
 )
 
 
@@ -126,7 +127,6 @@ endif()
 add_library(application
                 SHARED
                     ${application_SRC}
-                    core/utils/search_options.hpp
 )
 
 add_dependencies(application mupdf)
@@ -161,12 +161,13 @@ target_compile_definitions(application
 )
 
 target_link_libraries(application
+                PUBLIC
+                    rapidfuzz::rapidfuzz
                 PRIVATE
                     Qt6::Core
                     Qt6::Quick
                     Qt6::Widgets
                     Qt6::Network
-                    rapidfuzz::rapidfuzz
                     domain
                     ${MUPDF_OUTPUT}
 )
