@@ -484,84 +484,84 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="38"/>
         <source>Behavior</source>
-        <translation type="unfinished">Verhalten</translation>
+        <translation>Verhalten</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="39"/>
         <source>Change the way Librum works</source>
-        <translation type="unfinished">Ändere die Arbeitsweise von Librum</translation>
+        <translation>Ändere die Arbeitsweise von Librum</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="55"/>
         <source>Restore Defaults</source>
-        <translation type="unfinished">Zurücksetzen</translation>
+        <translation>Zurücksetzen</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="85"/>
         <source>Books</source>
-        <translation type="unfinished">Bücher</translation>
+        <translation>Bücher</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="95"/>
         <source>Cursor mode</source>
-        <translation type="unfinished">Mauszeiger-Modus</translation>
+        <translation>Mauszeiger-Modus</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Hidden after delay</source>
-        <translation type="unfinished">Versteckt nach Verzögerung</translation>
+        <translation>Versteckt nach Verzögerung</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
-        <translation type="unfinished">Immer sichtbar</translation>
+        <translation>Immer sichtbar</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="132"/>
         <source>Hide cursor after delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Mauszeiger Verstecken</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="157"/>
         <source>ms</source>
-        <translation type="unfinished"></translation>
+        <translation>ms</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="169"/>
         <source>Include new lines in copied text</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Zeilen im kopierten Text beibehalten</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="181"/>
         <source>ON</source>
-        <translation type="unfinished">AN</translation>
+        <translation>AN</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="183"/>
         <source>OFF</source>
-        <translation type="unfinished">AUS</translation>
+        <translation>AUS</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurücksetzen?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation type="unfinished">Einstellungen zurückzusetzen ist eine endgültige Aktion,
+        <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="207"/>
         <source>No, Keep</source>
-        <translation type="unfinished">Nein, behalte</translation>
+        <translation>Nein, behalte</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="208"/>
         <source>Yes, Reset</source>
-        <translation type="unfinished">Ja, zurücksetzen</translation>
+        <translation>Ja, zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -1716,7 +1716,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
         <source>Behavior</source>
-        <translation type="unfinished">Verhalten</translation>
+        <translation>Verhalten</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
