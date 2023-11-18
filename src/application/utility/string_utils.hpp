@@ -1,7 +1,7 @@
 #pragma once
+#include <QList>
 #include <QString>
 #include <rapidfuzz/fuzz.hpp>
-#include <QList>
 
 namespace string_utils
 {
@@ -28,7 +28,7 @@ inline double substringCompare(const QString& lhs, const QString& rhs)
     return 0.0;
 }
 
-}
+}  // namespace
 
 inline double similarity(const QString& str, const QString& aim,
                          rapidfuzz::fuzz::CachedRatio<unsigned int>* scorer)
