@@ -459,7 +459,7 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>Reset settings?</source>
-        <translation>Einstellungen zurücksetzen?</translation>
+        <translation>Zurücksetzen?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="541"/>
