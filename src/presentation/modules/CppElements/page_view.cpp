@@ -581,6 +581,11 @@ void PageView::selectLine()
 void PageView::copySelectedText()
 {
     QString text = getSelectedText();
+    if(!m_includeNewLinesInCopiedText)
+    {
+        text.replace("\n", "");
+        text.replace("\r", "");
+    }
 
     auto clipboard = QApplication::clipboard();
     clipboard->setText(text);
@@ -633,6 +638,12 @@ void PageView::setColorInverted(bool newColorInverted)
         update();
 
     m_firstTimeColorInverted = false;
+}
+
+void PageView::setIncludeNewLinesInCopiedText(
+    bool newIncludeNewLinesInCopiedText)
+{
+    m_includeNewLinesInCopiedText = newIncludeNewLinesInCopiedText;
 }
 
 float PageView::getYOffset() const

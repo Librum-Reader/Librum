@@ -161,6 +161,35 @@ MFlickWrapper {
                             }
                         }
                     }
+
+                    Label {
+                        id: includeNewlinesInCopiedText
+                        Layout.fillWidth: true
+                        Layout.topMargin: 24
+                        text: qsTr("Include new lines in copied text")
+                        font.pointSize: Fonts.size13
+                        font.weight: Font.DemiBold
+                        color: Style.colorText
+                    }
+
+                    MDualToggle {
+                        id: includeNewlinesInCopiedTextToggle
+
+                        property string savedValue: SettingsController.behaviorSettings.IncludeNewLinesInCopiedText
+                        Layout.topMargin: 4
+                        leftText: "ON"
+                        leftDisplayText: qsTr("ON")
+                        rightText: "OFF"
+                        rightDisplayText: qsTr("OFF")
+                        leftSelected: savedValue === leftText
+                        rightSelected: savedValue === rightText
+
+                        onSavedValueChanged: savedValue === leftText ? selectLeft(
+                                                                           ) : selectRight()
+                        onToggled: newSelected => internal.saveSetting(
+                                       SettingKeys.IncludeNewLinesInCopiedText,
+                                       newSelected)
+                    }
                 }
             }
         }

@@ -140,6 +140,7 @@ Pane {
                 height: implicitHeight
                 width: implicitWidth
                 colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
+                includeNewLinesInCopiedText: SettingsController.behaviorSettings.IncludeNewLinesInCopiedText === "ON"
                 anchors.horizontalCenter: if (parent != null)
                                               parent.horizontalCenter
 
