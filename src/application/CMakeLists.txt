@@ -101,8 +101,20 @@ endif()
 message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
 
 
+
+# On linux, we want to use the system provided libjpeg,
+# since the one that comes with mupdf is not compatible with the one that comes with Qt.
+if(LINUX)
+    set(USE_SYSTEM_LIBJPEG_VALUE yes)
+else()
+    set(USE_SYSTEM_LIBJPEG_VALUE no)
+endif()
+
+
 add_custom_target(mupdf
-   COMMAND ${MUPDF_BUILD_COMMAND}
+   COMMAND ${CMAKE_COMMAND} -E env
+        "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
+        ${MUPDF_BUILD_COMMAND}
    BYPRODUCTS ${MUPDF_OUTPUT}
    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
    COMMENT "Building mupdf (This takes a while) ..."
