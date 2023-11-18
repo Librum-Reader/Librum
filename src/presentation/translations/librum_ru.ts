@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>MAboutPage</name>
     <message>
@@ -518,24 +518,39 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>мс</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="176"/>
+        <location filename="../settings/MBehaviorPage.qml" line="169"/>
+        <source>Include new lines in copied text</source>
+        <translation>Скопированный текст будет содержать переходы на новую строку</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="181"/>
+        <source>ON</source>
+        <translation>ВКЛ</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="183"/>
+        <source>OFF</source>
+        <translation>ВЫКЛ</translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
         <translation>Сбросить настройки?</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="177"/>
+        <location filename="../settings/MBehaviorPage.qml" line="206"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Сброс настроек необратим,
 Вы не сможете восстановить их!</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="178"/>
+        <location filename="../settings/MBehaviorPage.qml" line="207"/>
         <source>No, Keep</source>
         <translation>Нет, Оставить</translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="179"/>
+        <location filename="../settings/MBehaviorPage.qml" line="208"/>
         <source>Yes, Reset</source>
         <translation>Да, Сбросить</translation>
     </message>

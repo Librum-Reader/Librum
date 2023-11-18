@@ -449,23 +449,38 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="176"/>
+        <location filename="../settings/MBehaviorPage.qml" line="169"/>
+        <source>Include new lines in copied text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="181"/>
+        <source>ON</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="183"/>
+        <source>OFF</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="177"/>
+        <location filename="../settings/MBehaviorPage.qml" line="206"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="178"/>
+        <location filename="../settings/MBehaviorPage.qml" line="207"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MBehaviorPage.qml" line="179"/>
+        <location filename="../settings/MBehaviorPage.qml" line="208"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>

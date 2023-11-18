@@ -32,6 +32,7 @@ enum class SettingKeys
     // Behavior
     CursorMode,
     HideCursorAfterDelay,
+    IncludeNewLinesInCopiedText,
 
     // Shortcuts
     MoveUp,
