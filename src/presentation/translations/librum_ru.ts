@@ -451,7 +451,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MAppearancePage.qml" line="540"/>
         <source>Reset settings?</source>
-        <translation>Сбросить настройки?</translation>
+        <translation>Сбросить?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="541"/>
@@ -535,7 +535,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation>Сбросить настройки?</translation>
+        <translation>Сбросить?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
