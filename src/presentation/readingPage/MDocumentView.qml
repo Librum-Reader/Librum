@@ -86,6 +86,8 @@ Pane {
     Timer {
         id: hideCursorTimer
         interval: SettingsController.behaviorSettings.HideCursorAfterDelay
+        repeat: true
+        running: true
 
         onTriggered: {
             if (SettingsController.behaviorSettings.CursorMode
@@ -352,10 +354,7 @@ Pane {
 
         function showCursor() {
             mouseArea.cursorShape = Qt.ArrowCursor
-
-            if (SettingsController.appearanceSettings.CursorMode
-                    === internal.optionNameCursorModeHiddenAfterDelay)
-                hideCursorTimer.start()
+            hideCursorTimer.restart()
         }
     }
 }
