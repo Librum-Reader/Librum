@@ -1990,7 +1990,7 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
         <source>If you feel like supporting us and our projects, feel free to support us:</source>
-        <translation>Wenn du uns und unsere Projekte unterstützen möchtest, unterstütze und hier:</translation>
+        <translation>Wenn du uns und unsere Projekte unterstützen möchtest, unterstütze uns hier:</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
