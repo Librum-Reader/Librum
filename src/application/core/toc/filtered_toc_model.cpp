@@ -32,7 +32,7 @@ void FilteredTOCModel::setFilterString(QString filterString)
     {
         m_filterScorer =
             std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
-                filterString.toUcs4());
+                filterString.toUtf8());
     }
 
     invalidateFilter();

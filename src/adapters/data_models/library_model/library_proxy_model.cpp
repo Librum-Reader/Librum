@@ -143,7 +143,7 @@ void LibraryProxyModel::setSortString(QString newSortString)
     {
         m_filterScorer =
             std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
-                newSortString.toUcs4());
+                newSortString.toUtf8());
     }
 
     emit sortStringUpdated();

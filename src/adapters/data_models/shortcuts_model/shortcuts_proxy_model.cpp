@@ -61,7 +61,7 @@ void ShortcutsProxyModel::setFilterString(QString newFilterString)
     {
         m_filterScorer =
             std::make_unique<rapidfuzz::fuzz::CachedRatio<unsigned int>>(
-                m_filterString.toUcs4());
+                m_filterString.toUtf8());
     }
 
     emit filterStringUpdated();
