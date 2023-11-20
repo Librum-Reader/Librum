@@ -145,7 +145,13 @@ bool AppInfoController::switchToLanguage(const QString& language)
         return false;
     }
 
-    QGuiApplication::installTranslator(&m_translator);
+    if(!QGuiApplication::installTranslator(&m_translator))
+    {
+        qWarning() << "Failed installing translator for language: " << language;
+        return false;
+    }
+
+
     emit languageChanged();
 
     // Use "English" for all kinds of English variants like American English
