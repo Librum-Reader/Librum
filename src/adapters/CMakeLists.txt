@@ -115,11 +115,12 @@ target_link_libraries(adapters
                 PRIVATE
                     domain
                     application
-                    ${MUPDF_OUTPUT}
                     rapidfuzz::rapidfuzz
                     Qt6::Core
                     Qt6::Quick
                     Qt6::Network
+                    $<$<BOOL:${BUILD_MUPDF}>:${MUPDF_OUTPUT}>
+                    $<$<NOT:$<BOOL:${BUILD_MUPDF}>>:test>
 )
 
 target_compile_options(adapters PRIVATE "$<$<CONFIG:DEBUG>:${LIBRUM_WARNINGS};${LIBRUM_SANITIZERS};${COVERAGE_COMPILE_OPTIONS};-O0;-g>")

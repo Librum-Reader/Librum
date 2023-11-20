@@ -79,58 +79,61 @@ set(application_SRC
     core/utils/search_options.hpp
 )
 
-
 # Build mupdf
-set(VENV_OPTION "")
-if(NOT ${NO_VENV})
-    set(VENV_OPTION "--venv")
-endif()
+if(BUILD_MUPDF)
+    message("Building mupdf")
 
-if(UNIX)
-    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
-    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
-    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
-    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
-elseif(WIN32)
-    set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
-    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
-    set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
-    set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
-endif()
+    set(VENV_OPTION "")
+    if(NOT ${NO_VENV})
+        set(VENV_OPTION "--venv")
+    endif()
 
-message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
+    if(UNIX)
+        set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
+        set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
+        set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
+        set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    elseif(WIN32)
+        set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
+        set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
+        set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib")
+        set(MUPDF_BUILD_COMMAND python scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    endif()
 
-
-
-# On linux, we want to use the system provided libjpeg,
-# since the one that comes with mupdf is not compatible with the one that comes with Qt.
-if(LINUX)
-    set(USE_SYSTEM_LIBJPEG_VALUE yes)
-else()
-    set(USE_SYSTEM_LIBJPEG_VALUE no)
-endif()
+    message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
 
 
-add_custom_target(mupdf
-   COMMAND ${CMAKE_COMMAND} -E env
-        "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
-        ${MUPDF_BUILD_COMMAND}
-   BYPRODUCTS ${MUPDF_OUTPUT}
-   WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
-   COMMENT "Building mupdf (This takes a while) ..."
-)
+    # On linux, we want to use the system provided libjpeg,
+    # since the one that comes with mupdf is not compatible with the one that comes with Qt.
+    if(LINUX)
+        set(USE_SYSTEM_LIBJPEG_VALUE yes)
+    else()
+        set(USE_SYSTEM_LIBJPEG_VALUE no)
+    endif()
 
 
-###### Copy the mupdf dlls to the build directory for windows ######
-if(WIN32)
-    add_custom_command(
-      TARGET mupdf POST_BUILD
-      COMMAND ${CMAKE_COMMAND} -E copy
-              "${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll"
-              "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
-      BYPRODUCTS "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
-      DEPENDS ${MUPDF_OUTPUT}
+    add_custom_target(mupdf
+       COMMAND ${CMAKE_COMMAND} -E env
+            "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
+            ${MUPDF_BUILD_COMMAND}
+       BYPRODUCTS ${MUPDF_OUTPUT}
+       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
+       COMMENT "Building mupdf (This takes a while) ..."
     )
+
+    ###### Copy the mupdf dlls to the build directory for windows ######
+    if(WIN32)
+        add_custom_command(
+          TARGET mupdf POST_BUILD
+          COMMAND ${CMAKE_COMMAND} -E copy
+                  "${MUPDF_OUTPUT_DIR}/mupdfcpp64.dll"
+                  "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
+          BYPRODUCTS "${PROJECT_BINARY_DIR}/mupdfcpp64.dll"
+          DEPENDS ${MUPDF_OUTPUT}
+        )
+    endif()
+else()
+    message("NOT building mupdf")
 endif()
 
 
@@ -141,7 +144,15 @@ add_library(application
                     ${application_SRC}
 )
 
-add_dependencies(application mupdf)
+if(BUILD_MUPDF)
+    add_dependencies(application mupdf)
+
+    # Make sure to ignore warnings from mupdf by adding it as a system include directory
+    target_include_directories(application SYSTEM PUBLIC
+                        ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/c++/include
+                        ${PROJECT_SOURCE_DIR}/libs/mupdf/include
+    )
+endif()
 
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
@@ -161,11 +172,6 @@ target_include_directories(application
                     ${CMAKE_CURRENT_SOURCE_DIR}/core/utils
 )
 
-# Make sure to ignore warnings from mupdf by adding it as a system include directory
-target_include_directories(application SYSTEM PUBLIC
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/platform/c++/include
-                    ${PROJECT_SOURCE_DIR}/libs/mupdf/include
-)
 
 target_compile_definitions(application
                 PRIVATE
@@ -181,7 +187,8 @@ target_link_libraries(application
                     Qt6::Widgets
                     Qt6::Network
                     domain
-                    ${MUPDF_OUTPUT}
+                    $<$<BOOL:${BUILD_MUPDF}>:${MUPDF_OUTPUT}>
+                    $<$<NOT:$<BOOL:${BUILD_MUPDF}>>:test>
 )
 
 
@@ -207,20 +214,23 @@ endif()
 ###### Install rules ######
 if(LINUX)
     install(TARGETS application
-            DESTINATION lib
-            )
-    
-    # Install mupdf's shared libraries
-    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
-                  ${MUPDF_OUTPUT_DIR}/libmupdf.so
             DESTINATION lib)
+
+
+    # Install mupdf's shared libraries
+    if(BUILD_MUPDF)
+        install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+                      ${MUPDF_OUTPUT_DIR}/libmupdf.so
+                DESTINATION lib)
+    endif()
 elseif(APPLE)
     install(TARGETS application
-            DESTINATION lib
-            )
-    
-    # Install mupdf's shared libraries
-    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
-                  ${MUPDF_OUTPUT_DIR}/libmupdf.dylib
             DESTINATION lib)
+
+    # Install mupdf's shared libraries
+    if(BUILD_MUPDF)
+        install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
+                      ${MUPDF_OUTPUT_DIR}/libmupdf.dylib
+                DESTINATION lib)
+    endif()
 endif()
