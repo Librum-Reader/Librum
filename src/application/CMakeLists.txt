@@ -214,6 +214,15 @@ if(LINUX)
     install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so
                   ${MUPDF_OUTPUT_DIR}/libmupdf.so
             DESTINATION lib)
+
+    # Install links with correct permissions
+    install(FILES ${MUPDF_OUTPUT_DIR}/libmupdfcpp.so.24.0
+                  ${MUPDF_OUTPUT_DIR}/libmupdf.so.24.0
+            PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                        GROUP_READ GROUP_EXECUTE
+                        WORLD_READ WORLD_EXECUTE
+            DESTINATION lib)
+
 elseif(APPLE)
     install(TARGETS application
             DESTINATION lib
