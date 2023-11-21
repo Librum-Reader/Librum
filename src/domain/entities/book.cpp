@@ -354,6 +354,16 @@ int Book::getBookReadingProgress() const
     return std::round(percentageInDecimal * 100);
 }
 
+QString Book::getColorTheme() const
+{
+    return m_metaData.colorTheme;
+}
+
+void Book::setColorTheme(const QString& newColorTheme)
+{
+    m_metaData.colorTheme = newColorTheme;
+}
+
 const QList<Tag>& Book::getTags() const
 {
     return m_tags;
@@ -607,6 +617,7 @@ QByteArray Book::toJson() const
           getCoverLastModified().toString(dateTimeStringFormat) },
         { "hasCover", hasCover() },
         { "coverPath", getCoverPath() },
+        { "colorTheme", getColorTheme() },
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
         { "highlights", serializeHighlights() },
@@ -667,6 +678,7 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     Book book(filePath, metaData, currentPage, uuid);
     book.setProjectGutenbergId(projectGutenbergId);
     book.setExistsOnlyOnClient(existsOnlyOnClient);
+    book.setColorTheme(jsonBook["colorTheme"].toString());
     addTagsToBook(book, jsonBook["tags"].toArray());
     addHighlightsToBook(book, jsonBook["highlights"].toArray());
     addBookmarksToBook(book, jsonBook["bookmarks"].toArray());
