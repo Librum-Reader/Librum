@@ -104,6 +104,8 @@ public:
 
     int getBookReadingProgress() const;
 
+    QString getColorTheme() const;
+    void setColorTheme(const QString& newColorTheme);
 
     domain::entities::Tag* getTagByUuid(const QUuid& uuid);
     domain::entities::Tag* getTagByName(const QString& name);
