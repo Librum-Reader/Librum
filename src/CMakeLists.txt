@@ -55,11 +55,10 @@ target_link_libraries(librum
         adapters
         application
         infrastructure
+        ${MUPDF_OUTPUT}
         Qt6::Quick
         Qt6::Widgets
         Qt6::QuickControls2
-        $<$<BOOL:${BUILD_MUPDF}>:${MUPDF_OUTPUT}>
-        $<$<NOT:$<BOOL:${BUILD_MUPDF}>>:test>
 )
 
 target_include_directories(librum

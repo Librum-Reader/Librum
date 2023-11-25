@@ -41,10 +41,9 @@ target_link_libraries(presentation
                     adapters
                     application
                     domain
+                    ${MUPDF_OUTPUT}
                     Qt6::Core
                     Qt6::Quick
-                    $<$<BOOL:${BUILD_MUPDF}>:${MUPDF_OUTPUT}>
-                    $<$<NOT:$<BOOL:${BUILD_MUPDF}>>:test>
 )
 
 target_include_directories(presentation

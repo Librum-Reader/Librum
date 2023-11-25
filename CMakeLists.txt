@@ -15,11 +15,11 @@ SET(CMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE "${PROJECT_BINARY_DIR}")
 # Configuration
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
-option(BUILD_TESTS ON)
-option(NO_VENV OFF)
-option(BUILD_MUPDF ON)
-option(ENABLE_COVERAGE OFF)
-option(USE_SANITIZERS OFF) # Slows down program startup significantly
+option(BUILD_TESTS "Build tests" ON)
+option(BUILD_MUPDF "Build mupdf from source or use the system provided library" ON)
+option(NO_VENV "Build the cpp wrappers in a virtual environment" OFF)
+option(ENABLE_COVERAGE "Enable test coverage" OFF)
+option(USE_SANITIZERS "Use cpp sanitizers" OFF) # Slows down program startup significantly
 
 
 # Qt
