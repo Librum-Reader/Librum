@@ -678,7 +678,6 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     Book book(filePath, metaData, currentPage, uuid);
     book.setProjectGutenbergId(projectGutenbergId);
     book.setExistsOnlyOnClient(existsOnlyOnClient);
-    book.setColorTheme(jsonBook["colorTheme"].toString());
     addTagsToBook(book, jsonBook["tags"].toArray());
     addHighlightsToBook(book, jsonBook["highlights"].toArray());
     addBookmarksToBook(book, jsonBook["bookmarks"].toArray());
@@ -713,6 +712,7 @@ BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
             jsonBook["coverLastModified"].toString(), dateTimeStringFormat),
         .hasCover = jsonBook["hasCover"].toBool(),
         .coverPath = jsonBook["coverPath"].toString(),
+        .colorTheme = jsonBook["colorTheme"].toString(),
     };
 
     // Specify that the dates are UTC, else Qt thinks its local time
