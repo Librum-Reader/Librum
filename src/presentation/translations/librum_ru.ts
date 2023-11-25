@@ -1410,17 +1410,17 @@ Delete unused books to free up space or upgrade.</source>
         <translation>Поменять цвета</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="152"/>
         <source>Sync book</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="170"/>
         <source>More options</source>
         <translation>Ещё</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="191"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>

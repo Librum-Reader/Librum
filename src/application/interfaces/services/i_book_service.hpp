@@ -57,6 +57,8 @@ public:
     virtual float getZoom() const = 0;
     virtual void setZoom(float newZoom) = 0;
 
+    virtual void setColorTheme(const QString& colorTheme) = 0;
+
     virtual core::FilteredTOCModel* getTableOfContents() = 0;
 
 signals:

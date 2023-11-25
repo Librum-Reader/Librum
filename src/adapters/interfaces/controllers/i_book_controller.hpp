@@ -62,6 +62,8 @@ public:
     Q_INVOKABLE virtual void removeBookmark(const QString& uuid) = 0;
     Q_INVOKABLE virtual void goToBookmark(const QString& uuid) = 0;
 
+    Q_INVOKABLE virtual void setColorTheme(const QString& colorTheme) = 0;
+
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;

@@ -41,6 +41,8 @@ public:
     void removeBookmark(const QString& uuid) override;
     void goToBookmark(const QString& uuid) override;
 
+    void setColorTheme(const QString& colorTheme) override;
+
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;

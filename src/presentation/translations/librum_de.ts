@@ -1477,17 +1477,17 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
         <translation type="vanished">Invers</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="152"/>
         <source>Sync book</source>
         <translation>Buch synchronisieren</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="170"/>
         <source>More options</source>
         <translation>Mehr Optionen</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="191"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>

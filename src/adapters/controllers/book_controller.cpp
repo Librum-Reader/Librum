@@ -155,6 +155,11 @@ void BookController::goToBookmark(const QString& uuid)
     }
 }
 
+void BookController::setColorTheme(const QString& colorTheme)
+{
+    m_bookService->setColorTheme(colorTheme);
+}
+
 void BookController::followLink(const char* uri)
 {
     return m_bookService->followLink(uri);

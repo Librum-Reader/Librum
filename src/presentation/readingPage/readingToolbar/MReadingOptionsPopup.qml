@@ -136,6 +136,8 @@ Popup {
                             SettingsController.setSetting(
                                         SettingKeys.PageColorMode, value,
                                         SettingGroups.Appearance)
+
+                            BookController.setColorTheme(value)
                         }
                     }
 

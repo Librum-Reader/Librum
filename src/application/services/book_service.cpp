@@ -223,6 +223,13 @@ void BookService::setZoom(float newZoom)
     m_zoom = newZoom;
 }
 
+void BookService::setColorTheme(const QString& colorTheme)
+{
+    auto book = getBook();
+    book->setColorTheme(colorTheme);
+    m_libraryService->updateBook(*book);
+}
+
 core::FilteredTOCModel* BookService::getTableOfContents()
 {
     if(m_TOCModel == nullptr)
