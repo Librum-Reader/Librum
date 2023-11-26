@@ -334,37 +334,34 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Hell</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Page Color Mode</source>
-        <translation>Seiten Farben Modus</translation>
+        <translation type="vanished">Seiten Farben Modus</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="156"/>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation type="vanished">Normal</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="158"/>
         <source>Inverted</source>
-        <translation>Invers</translation>
+        <translation type="vanished">Invers</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="174"/>
+        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="248"/>
+        <location filename="../settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
         <translation>Lesen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="258"/>
+        <location filename="../settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
         <translation>Seiten Abstand</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="285"/>
+        <location filename="../settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
         <translation>Den Buchtitel in der Titelleiste anzeigen</translation>
     </message>
@@ -413,22 +410,22 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation type="vanished">Tauschen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="310"/>
+        <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>Standard-Zoom</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="356"/>
+        <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
         <translation>Markierungen</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="365"/>
+        <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
         <translation>Farben</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="484"/>
+        <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
@@ -457,24 +454,24 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation type="vanished">Immer sichtbar</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
         <translation>Zurücksetzen?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="511"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
 es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="542"/>
+        <location filename="../settings/MAppearancePage.qml" line="512"/>
         <source>No, Keep</source>
         <translation>Nein, behalte</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="543"/>
+        <location filename="../settings/MAppearancePage.qml" line="513"/>
         <source>Yes, Reset</source>
         <translation>Ja, zurücksetzen</translation>
     </message>

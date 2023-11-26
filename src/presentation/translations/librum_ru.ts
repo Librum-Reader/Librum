@@ -326,37 +326,34 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Светлая</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Page Color Mode</source>
-        <translation>Цветовой Режим Страницы</translation>
+        <translation type="vanished">Цветовой Режим Страницы</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="156"/>
         <source>Normal</source>
-        <translation>Нормальный</translation>
+        <translation type="vanished">Нормальный</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="158"/>
         <source>Inverted</source>
-        <translation>Инвертированный</translation>
+        <translation type="vanished">Инвертированный</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="174"/>
+        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="248"/>
+        <location filename="../settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
         <translation>Чтение</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="258"/>
+        <location filename="../settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
         <translation>Расстояние между страницами</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="285"/>
+        <location filename="../settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
         <translation>Отображать название книги в строке с названием</translation>
     </message>
@@ -405,22 +402,22 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="vanished">Замена</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="310"/>
+        <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>Увеличение по-умолчанию</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="356"/>
+        <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
         <translation>Выделение</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="365"/>
+        <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
         <translation>Цвета</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="484"/>
+        <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation>Непрозрачность</translation>
     </message>
@@ -449,23 +446,23 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="vanished">Всегда виден</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
         <translation>Сбросить?</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="511"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>Сброс настроек необратим, Вы не сможете потом их восстановить!</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="542"/>
+        <location filename="../settings/MAppearancePage.qml" line="512"/>
         <source>No, Keep</source>
         <translation>Нет, Оставить</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="543"/>
+        <location filename="../settings/MAppearancePage.qml" line="513"/>
         <source>Yes, Reset</source>
         <translation>Да, Сбросить</translation>
     </message>

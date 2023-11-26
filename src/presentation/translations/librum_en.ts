@@ -326,77 +326,62 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="144"/>
-        <source>Page Color Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="156"/>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="158"/>
-        <source>Inverted</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../settings/MAppearancePage.qml" line="174"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="248"/>
+        <location filename="../settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="258"/>
+        <location filename="../settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="285"/>
+        <location filename="../settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="310"/>
+        <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="356"/>
+        <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="365"/>
+        <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="484"/>
+        <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="511"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="542"/>
+        <location filename="../settings/MAppearancePage.qml" line="512"/>
         <source>No, Keep</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="543"/>
+        <location filename="../settings/MAppearancePage.qml" line="513"/>
         <source>Yes, Reset</source>
         <translation type="unfinished"></translation>
     </message>
