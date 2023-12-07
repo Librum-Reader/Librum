@@ -223,6 +223,12 @@ void BookService::setZoom(float newZoom)
     m_zoom = newZoom;
 }
 
+QString BookService::getColorTheme()
+{
+    auto book = getBook();
+    return book->getColorTheme();
+}
+
 void BookService::setColorTheme(const QString& colorTheme)
 {
     auto book = getBook();

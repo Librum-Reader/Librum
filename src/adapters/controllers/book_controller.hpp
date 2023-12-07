@@ -41,8 +41,6 @@ public:
     void removeBookmark(const QString& uuid) override;
     void goToBookmark(const QString& uuid) override;
 
-    void setColorTheme(const QString& colorTheme) override;
-
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;
@@ -62,6 +60,9 @@ public:
 
     bool getSearchFromStart() const override;
     void setSearchFromStart(bool newSearchFromStart) override;
+
+    QString getColorTheme() override;
+    void setColorTheme(const QString& colorTheme) override;
 
     application::core::FilteredTOCModel* getTableOfContents() override;
     data_models::BookmarksProxyModel* getBookmarksModel() override;

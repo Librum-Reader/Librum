@@ -141,7 +141,7 @@ Pane {
                 bookController: BookController
                 height: implicitHeight
                 width: implicitWidth
-                colorInverted: SettingsController.appearanceSettings.PageColorMode === "Inverted"
+                colorInverted: BookController.colorTheme === "Inverted"
                 includeNewLinesInCopiedText: SettingsController.behaviorSettings.IncludeNewLinesInCopiedText === "ON"
                 anchors.horizontalCenter: if (parent != null)
                                               parent.horizontalCenter

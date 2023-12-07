@@ -507,6 +507,8 @@ void Book::update(const Book& other)
         m_metaData.hasCover = other.hasCover();
     if(m_metaData.coverPath != other.getCoverPath())
         m_metaData.coverPath = other.getCoverPath();
+    if(m_metaData.colorTheme != other.getColorTheme())
+        m_metaData.colorTheme = other.getColorTheme();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();

@@ -1281,17 +1281,17 @@ Delete unused books to free up space or upgrade.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="152"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="148"/>
         <source>Sync book</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="170"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="166"/>
         <source>More options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="191"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="187"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
