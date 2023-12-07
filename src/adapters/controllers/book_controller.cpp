@@ -155,11 +155,6 @@ void BookController::goToBookmark(const QString& uuid)
     }
 }
 
-void BookController::setColorTheme(const QString& colorTheme)
-{
-    m_bookService->setColorTheme(colorTheme);
-}
-
 void BookController::followLink(const char* uri)
 {
     return m_bookService->followLink(uri);
@@ -230,6 +225,17 @@ void BookController::setSearchFromStart(bool newSearchFromStart)
 {
     m_searchOptions.fromStart = newSearchFromStart;
     emit searchFromStartChanged();
+}
+
+QString BookController::getColorTheme()
+{
+    return m_bookService->getColorTheme();
+}
+
+void BookController::setColorTheme(const QString& colorTheme)
+{
+    m_bookService->setColorTheme(colorTheme);
+    emit colorThemeChanged(colorTheme);
 }
 
 FilteredTOCModel* BookController::getTableOfContents()
