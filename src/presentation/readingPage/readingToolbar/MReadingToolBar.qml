@@ -255,13 +255,13 @@ Pane {
                     text: "250%"
                 }
                 ListElement {
-                    text: "300%"
-                }
-                ListElement {
-                    text: "400%"
-                }
-                ListElement {
                     text: "500%"
+                }
+                ListElement {
+                    text: "750%"
+                }
+                ListElement {
+                    text: "1000%"
                 }
             }
 

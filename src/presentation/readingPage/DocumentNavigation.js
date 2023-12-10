@@ -56,7 +56,7 @@ function setMoveDirection(direction) {
 
 function zoom(newZoomFactor) {
     // Clamp to max / min zoom factors
-    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 5))
+    newZoomFactor = Math.max(0.15, Math.min(newZoomFactor, 10))
     if (newZoomFactor === BookController.zoom)
         return
 
