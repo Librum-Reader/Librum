@@ -38,7 +38,28 @@ If you want to build Librum from source, follow the instructions [here](#build-g
 
 # Translations
 
-Do you want to translate Librum into your language? If so, then feel free to reach out to us at contact@librumreader.com and we can work on making that happen together!
+Librum is currently available in:
+- English
+- German
+- Russian
+- Mandarin
+
+If you want to translate Librum to another language, follow the steps below:
+- Download the file at: https://github.com/Librum-Reader/Librum/blob/main/src/presentation/translations/librum_en.ts
+- Rename the file to contain your language's suffix, e.g. "librum_ru.ts" for Russian or "librum_de.ts" for German
+- Download the translation software (Qt Linguist) either for Windows from https://github.com/thurask/Qt-Linguist or using the Qt Installer at https://www.qt.io/download-open-source
+- Now start Qt Linguist, open the downloaded file, set the target language to the language you want to translate to and start translating.
+(For a quick guide on Qt Linguist, check out: https://youtu.be/xNIz78IPBu0?t=347)
+
+Once you are done, create a pull request or an issue with your new translation file!<br>
+If you run into any problems, need guidance or have questions, feel free to reach out to us at: contact@librumreader.com
+
+<br>
+
+Notes:
+- Make sure that your translations are approximately the same length as the original text
+- Make sure that you keep to the punctuation and capitalisation
+- Make sure that your translations make sense in the context they are in
 
 <br>
 
