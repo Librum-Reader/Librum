@@ -233,7 +233,7 @@ void BookService::setColorTheme(const QString& colorTheme)
 {
     auto book = getBook();
     book->setColorTheme(colorTheme);
-    m_libraryService->updateBook(*book);
+    updateBook();
 }
 
 core::FilteredTOCModel* BookService::getTableOfContents()
