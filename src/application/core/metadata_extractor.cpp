@@ -49,6 +49,7 @@ domain::value_objects::BookMetaData MetadataExtractor::getBookMetaData()
         .lastOpened = QDateTime(),
         .coverLastModified = QDateTime(),
         .coverPath = "",
+        .colorTheme = "Normal",
         .fileHash = utility::generateFileHash(m_filePath),
     };
 
