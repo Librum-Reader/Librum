@@ -29,7 +29,7 @@ class LibraryServiceMock : public ILibraryService
 {
 public:
     MOCK_METHOD(void, downloadBooks, (), (override));
-    MOCK_METHOD(BookOperationStatus, addBook, (const QString&, int),
+    MOCK_METHOD(BookOperationStatus, addBook, (const QString&, bool, int),
                 (override));
     MOCK_METHOD(BookOperationStatus, deleteBook, (const QUuid&), (override));
     MOCK_METHOD(BookOperationStatus, deleteAllBooks, (), (override));

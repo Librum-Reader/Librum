@@ -326,78 +326,75 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>明亮</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Page Color Mode</source>
-        <translation>页面颜色模式</translation>
+        <translation type="vanished">页面颜色模式</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="156"/>
         <source>Normal</source>
-        <translation>常规</translation>
+        <translation type="vanished">常规</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="158"/>
         <source>Inverted</source>
-        <translation>反转</translation>
+        <translation type="vanished">反转</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="174"/>
+        <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>语言</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="248"/>
+        <location filename="../settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
         <translation>阅读</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="258"/>
+        <location filename="../settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
         <translation>页间距</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="285"/>
+        <location filename="../settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
         <translation>在标题栏显示书名</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="310"/>
+        <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>默认缩放</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="356"/>
+        <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
         <translation>高亮</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="365"/>
+        <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
         <translation>颜色</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="484"/>
+        <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation>不透明度</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="540"/>
+        <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
         <translation>重置设置？</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="541"/>
+        <location filename="../settings/MAppearancePage.qml" line="511"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
         <translation>重置您的设置是一个永久性的操作，您将无法恢复！</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="542"/>
+        <location filename="../settings/MAppearancePage.qml" line="512"/>
         <source>No, Keep</source>
         <translation>保持</translation>
     </message>
     <message>
-        <location filename="../settings/MAppearancePage.qml" line="543"/>
+        <location filename="../settings/MAppearancePage.qml" line="513"/>
         <source>Yes, Reset</source>
         <translation>重置</translation>
     </message>
@@ -1063,103 +1060,124 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="75"/>
+        <location filename="../homePage/MHomePage.qml" line="80"/>
         <source>A new version is available!</source>
         <translation>有新版本可用！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="77"/>
+        <location filename="../homePage/MHomePage.qml" line="82"/>
         <source>Update Now</source>
         <translation>立即更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="125"/>
+        <location filename="../homePage/MHomePage.qml" line="130"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="126"/>
+        <location filename="../homePage/MHomePage.qml" line="131"/>
         <source>You have %1 books</source>
         <translation>您有 %1 本书</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="142"/>
+        <location filename="../homePage/MHomePage.qml" line="147"/>
         <source>Add books</source>
         <translation>添加书籍</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="361"/>
+        <location filename="../homePage/MHomePage.qml" line="366"/>
         <source>Remove Book?</source>
         <translation>移除此书？</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="362"/>
+        <location filename="../homePage/MHomePage.qml" line="367"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>删除书籍是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="363"/>
+        <location filename="../homePage/MHomePage.qml" line="368"/>
         <source>Remove from Device</source>
         <translation>从设备上移除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="364"/>
+        <location filename="../homePage/MHomePage.qml" line="369"/>
         <source>Delete Everywhere</source>
         <translation>从所有地方删除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="401"/>
+        <location filename="../homePage/MHomePage.qml" line="406"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="416"/>
+        <location filename="../homePage/MHomePage.qml" line="421"/>
         <source>Limit Reached</source>
         <translation>到达限制</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="417"/>
+        <location filename="../homePage/MHomePage.qml" line="422"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>您已达到您的上传限制。删除未使用的书籍以释放空间或更新。</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="418"/>
-        <location filename="../homePage/MHomePage.qml" line="436"/>
+        <location filename="../homePage/MHomePage.qml" line="423"/>
+        <location filename="../homePage/MHomePage.qml" line="462"/>
         <source>Ok</source>
         <translation>好</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="419"/>
+        <location filename="../homePage/MHomePage.qml" line="424"/>
         <source>Upgrade</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="434"/>
+        <location filename="../homePage/MHomePage.qml" line="439"/>
+        <source>Book already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="440"/>
+        <source>It looks like this book is already in your library.
+Are you sure you want to add it again?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="441"/>
+        <source>Add</source>
+        <translation type="unfinished">添加</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="442"/>
+        <source>Don&apos;t add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="460"/>
         <source>Unsupported File</source>
         <translation>不支持的文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="435"/>
+        <location filename="../homePage/MHomePage.qml" line="461"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>哎呀！Librum 不支持这个文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="447"/>
+        <location filename="../homePage/MHomePage.qml" line="473"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="450"/>
+        <location filename="../homePage/MHomePage.qml" line="476"/>
         <source>All files</source>
         <translation>所有文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="451"/>
-        <location filename="../homePage/MHomePage.qml" line="452"/>
-        <location filename="../homePage/MHomePage.qml" line="453"/>
+        <location filename="../homePage/MHomePage.qml" line="477"/>
+        <location filename="../homePage/MHomePage.qml" line="478"/>
+        <location filename="../homePage/MHomePage.qml" line="479"/>
         <source>files</source>
         <translation>文件</translation>
     </message>
@@ -1297,17 +1315,17 @@ Delete unused books to free up space or upgrade.</source>
         <translation>反转颜色</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="150"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
         <source>Sync book</source>
         <translation>同步书籍</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="168"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="165"/>
         <source>More options</source>
         <translation>更多选项</translation>
     </message>
     <message>
-        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="189"/>
+        <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="186"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>

@@ -1,7 +1,6 @@
 #pragma once
 #include <QImage>
 #include <QTimer>
-#include <utility>
 #include "application_export.hpp"
 #include "book.hpp"
 #include "i_library_service.hpp"
@@ -21,6 +20,7 @@ public:
 
     void downloadBooks() override;
     BookOperationStatus addBook(const QString& filePath,
+                                bool allowDuplicates = false,
                                 int projectGutenbergId = 0) override;
     BookOperationStatus deleteBook(const QUuid& uuid) override;
     BookOperationStatus deleteAllBooks() override;
@@ -76,6 +76,7 @@ private:
                                          qint64 bytesReceived,
                                          qint64 bytesTotal);
     void deleteBookLocally(const domain::entities::Book& book);
+    bool bookWithFileHashAlreadyExists(const QString& fileHash) const;
     std::set<int> getProjectGutenbergIds();
 
     IMetadataExtractor* m_bookMetadataHelper;

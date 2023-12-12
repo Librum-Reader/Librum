@@ -19,6 +19,7 @@ private:
     QString getTitleFromPath();
     QString getDocumentSize();
     double roundToPrecisionOf2(double raw);
+    QString generateFileHash();
 
     std::unique_ptr<mupdf::FzDocument> m_document;
     QString m_filePath;

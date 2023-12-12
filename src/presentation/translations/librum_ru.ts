@@ -1171,105 +1171,126 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="75"/>
+        <location filename="../homePage/MHomePage.qml" line="80"/>
         <source>A new version is available!</source>
         <translation>Доступна новая версия!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="77"/>
+        <location filename="../homePage/MHomePage.qml" line="82"/>
         <source>Update Now</source>
         <translation>Обновить Сейчас</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="125"/>
+        <location filename="../homePage/MHomePage.qml" line="130"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="126"/>
+        <location filename="../homePage/MHomePage.qml" line="131"/>
         <source>You have %1 books</source>
         <translation>У Вас %1 книг</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="142"/>
+        <location filename="../homePage/MHomePage.qml" line="147"/>
         <source>Add books</source>
         <translation>Добавить книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="361"/>
+        <location filename="../homePage/MHomePage.qml" line="366"/>
         <source>Remove Book?</source>
         <translation>Удалить Книгу?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="362"/>
+        <location filename="../homePage/MHomePage.qml" line="367"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Удаление книги необратимо,
 после этого её нельзя будет восстановить!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="363"/>
+        <location filename="../homePage/MHomePage.qml" line="368"/>
         <source>Remove from Device</source>
         <translation>Удалить с Устройства</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="364"/>
+        <location filename="../homePage/MHomePage.qml" line="369"/>
         <source>Delete Everywhere</source>
         <translation>Удалить Везде</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="401"/>
+        <location filename="../homePage/MHomePage.qml" line="406"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="416"/>
+        <location filename="../homePage/MHomePage.qml" line="421"/>
         <source>Limit Reached</source>
         <translation>Достигнут Лимит</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="417"/>
+        <location filename="../homePage/MHomePage.qml" line="422"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Вы достигли лимита загрузок на сервер.
 Удалите ненужные книги или приобретите улучшение для аккаунта.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="418"/>
-        <location filename="../homePage/MHomePage.qml" line="436"/>
+        <location filename="../homePage/MHomePage.qml" line="423"/>
+        <location filename="../homePage/MHomePage.qml" line="462"/>
         <source>Ok</source>
         <translation>Хорошо</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="419"/>
+        <location filename="../homePage/MHomePage.qml" line="424"/>
         <source>Upgrade</source>
         <translation>Приобрести улучшение</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="434"/>
+        <location filename="../homePage/MHomePage.qml" line="439"/>
+        <source>Book already exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="440"/>
+        <source>It looks like this book is already in your library.
+Are you sure you want to add it again?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="441"/>
+        <source>Add</source>
+        <translation type="unfinished">Добавить</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="442"/>
+        <source>Don&apos;t add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="460"/>
         <source>Unsupported File</source>
         <translation>Не поддерживается</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="435"/>
+        <location filename="../homePage/MHomePage.qml" line="461"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Ой! Librum не поддерживает этот файл.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="447"/>
+        <location filename="../homePage/MHomePage.qml" line="473"/>
         <source>Import</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="450"/>
+        <location filename="../homePage/MHomePage.qml" line="476"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="451"/>
-        <location filename="../homePage/MHomePage.qml" line="452"/>
-        <location filename="../homePage/MHomePage.qml" line="453"/>
+        <location filename="../homePage/MHomePage.qml" line="477"/>
+        <location filename="../homePage/MHomePage.qml" line="478"/>
+        <location filename="../homePage/MHomePage.qml" line="479"/>
         <source>files</source>
         <translation>файлы</translation>
     </message>

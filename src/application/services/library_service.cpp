@@ -6,7 +6,6 @@
 #include <QNetworkInformation>
 #include <QPixmap>
 #include <QTime>
-#include <ranges>
 #include "book_for_deletion.hpp"
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
@@ -109,6 +108,7 @@ void LibraryService::downloadBooks()
 }
 
 BookOperationStatus LibraryService::addBook(const QString& filePath,
+                                            bool allowDuplicates,
                                             int projectGutenbergId)
 {
     auto success = m_bookMetadataHelper->setup(filePath);
@@ -120,6 +120,12 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
 
     auto bookMetaData = m_bookMetadataHelper->getBookMetaData();
     Book book(filePath, bookMetaData);
+    if(!allowDuplicates && bookWithFileHashAlreadyExists(book.getFileHash()))
+    {
+        qWarning() << QString("Book with file hash: %1 already exists.")
+                          .arg(book.getFileHash());
+        return BookOperationStatus::BookAlreadyExists;
+    }
 
     auto cover = m_bookMetadataHelper->getBookCover();
     cover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
@@ -734,6 +740,18 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     emit bookDeletionEnded();
 
     m_libraryStorageManager->deleteBookLocally(std::move(bookToDelete));
+}
+
+bool LibraryService::bookWithFileHashAlreadyExists(
+    const QString& fileHash) const
+{
+    auto bookPosition =
+        std::ranges::find_if(m_books,
+                             [&fileHash](const Book& book)
+                             {
+                                 return book.getFileHash() == fileHash;
+                             });
+    return bookPosition != m_books.end();
 }
 
 std::set<int> LibraryService::getProjectGutenbergIds()

@@ -100,7 +100,8 @@ void LibraryController::syncWithServer()
     m_bookService->downloadBooks();
 }
 
-int LibraryController::addBook(const QString& path, int projectGutenbergId)
+int LibraryController::addBook(const QString& path, bool allowDuplicates,
+                               int projectGutenbergId)
 {
     auto localPath = QUrl(path).toLocalFile();
     QFileInfo fileInfo(localPath);
@@ -108,7 +109,8 @@ int LibraryController::addBook(const QString& path, int projectGutenbergId)
         return 0;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    auto result = m_bookService->addBook(localPath, projectGutenbergId);
+    auto result =
+        m_bookService->addBook(localPath, allowDuplicates, projectGutenbergId);
     QApplication::restoreOverrideCursor();
 
     emit addingBookFinished(

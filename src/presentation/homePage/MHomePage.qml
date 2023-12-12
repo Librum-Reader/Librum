@@ -42,9 +42,14 @@ Page {
 
         onDropped: drop => {
                        for (var i = 0; i < drop.urls.length; ++i) {
-                           let result = LibraryController.addBook(drop.urls[i])
-                           if (result === BookOperationStatus.OpeningBookFailed)
-                           unsupportedFilePopup.open()
+                           internal.lastAddedBookPath = drop.urls[i]
+                           let result = LibraryController.addBook(
+                               internal.lastAddedBookPath)
+                           if (result === BookOperationStatus.OpeningBookFailed) {
+                               unsupportedFilePopup.open()
+                           } else if (result === BookOperationStatus.BookAlreadyExists) {
+                               bookAlreadyExistsPopup.open()
+                           }
                        }
                    }
 
@@ -425,6 +430,27 @@ Page {
     }
 
     MWarningPopup {
+        id: bookAlreadyExistsPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Book already exists")
+        message: qsTr("It looks like this book is already in your library.\nAre you sure you want to add it again?")
+        leftButtonText: qsTr("Add")
+        rightButtonText: qsTr("Don't add")
+        messageBottomSpacing: 16
+        minButtonWidth: 180
+        onOpenedChanged: if (opened)
+                             bookAlreadyExistsPopup.giveFocus()
+        onDecisionMade: close()
+
+        onLeftButtonClicked: LibraryController.addBook(
+                                 internal.lastAddedBookPath, true)
+    }
+
+    MWarningPopup {
         id: unsupportedFilePopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
@@ -454,9 +480,13 @@ Page {
 
         onAccepted: {
             for (var i = 0; i < files.length; ++i) {
-                let result = LibraryController.addBook(files[i])
+                internal.lastAddedBookPath = files[i]
+                let result = LibraryController.addBook(
+                        internal.lastAddedBookPath)
                 if (result === BookOperationStatus.OpeningBookFailed)
                     unsupportedFilePopup.open()
+                else if (result === BookOperationStatus.BookAlreadyExists)
+                    bookAlreadyExistsPopup.open()
             }
         }
     }
@@ -464,7 +494,7 @@ Page {
     QtObject {
         id: internal
         property bool libraryIsEmpty: LibraryController.bookCount === 0
-
+        property string lastAddedBookPath: ""
         property int bookWidth: 190
         property int bookHeight: 300
         property int horizontalBookSpacing: 64

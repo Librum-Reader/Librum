@@ -80,6 +80,12 @@ public:
     double getMediaDownloadProgress() const;
     void setMediaDownloadProgress(double newProgress);
 
+    QString getColorTheme() const;
+    void setColorTheme(const QString& newColorTheme);
+
+    QString getFileHash() const;
+    void setFileHash(const QString& newFileHash);
+
     const QList<Highlight>& getHighlights() const;
     void setHighlights(QList<Highlight>&& highlights);
     void addHighlight(const Highlight& highlight);
@@ -103,9 +109,6 @@ public:
     void setExistsOnlyOnClient(bool newExistsOnlyOnClient);
 
     int getBookReadingProgress() const;
-
-    QString getColorTheme() const;
-    void setColorTheme(const QString& newColorTheme);
 
     domain::entities::Tag* getTagByUuid(const QUuid& uuid);
     domain::entities::Tag* getTagByName(const QString& name);
