@@ -1060,124 +1060,129 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="80"/>
+        <location filename="../homePage/MHomePage.qml" line="69"/>
         <source>A new version is available!</source>
         <translation>有新版本可用！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="82"/>
+        <location filename="../homePage/MHomePage.qml" line="71"/>
         <source>Update Now</source>
         <translation>立即更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="130"/>
+        <location filename="../homePage/MHomePage.qml" line="119"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>主页</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="131"/>
+        <location filename="../homePage/MHomePage.qml" line="120"/>
         <source>You have %1 books</source>
         <translation>您有 %1 本书</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="147"/>
+        <location filename="../homePage/MHomePage.qml" line="136"/>
         <source>Add books</source>
         <translation>添加书籍</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="366"/>
+        <location filename="../homePage/MHomePage.qml" line="355"/>
         <source>Remove Book?</source>
         <translation>移除此书？</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="367"/>
+        <location filename="../homePage/MHomePage.qml" line="356"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>删除书籍是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="368"/>
+        <location filename="../homePage/MHomePage.qml" line="357"/>
         <source>Remove from Device</source>
         <translation>从设备上移除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="369"/>
+        <location filename="../homePage/MHomePage.qml" line="358"/>
         <source>Delete Everywhere</source>
         <translation>从所有地方删除</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="406"/>
+        <location filename="../homePage/MHomePage.qml" line="395"/>
         <source>Save</source>
         <translation>保存</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="421"/>
+        <location filename="../homePage/MHomePage.qml" line="410"/>
         <source>Limit Reached</source>
         <translation>到达限制</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="422"/>
+        <location filename="../homePage/MHomePage.qml" line="411"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>您已达到您的上传限制。删除未使用的书籍以释放空间或更新。</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="423"/>
-        <location filename="../homePage/MHomePage.qml" line="462"/>
+        <location filename="../homePage/MHomePage.qml" line="412"/>
+        <location filename="../homePage/MHomePage.qml" line="459"/>
         <source>Ok</source>
         <translation>好</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="424"/>
+        <location filename="../homePage/MHomePage.qml" line="413"/>
         <source>Upgrade</source>
         <translation>更新</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="439"/>
+        <location filename="../homePage/MHomePage.qml" line="428"/>
         <source>Book already exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="440"/>
-        <source>It looks like this book is already in your library.
-Are you sure you want to add it again?</source>
+        <location filename="../homePage/MHomePage.qml" line="429"/>
+        <source>It looks like this book already exists in your library:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="441"/>
+        <location filename="../homePage/MHomePage.qml" line="432"/>
+        <source>Are you sure you that want to add it again?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Add</source>
         <translation type="unfinished">添加</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="442"/>
+        <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Don&apos;t add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="460"/>
+        <location filename="../homePage/MHomePage.qml" line="457"/>
         <source>Unsupported File</source>
         <translation>不支持的文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="461"/>
+        <location filename="../homePage/MHomePage.qml" line="458"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>哎呀！Librum 不支持这个文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="473"/>
+        <location filename="../homePage/MHomePage.qml" line="474"/>
         <source>Import</source>
         <translation>导入</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="476"/>
+        <location filename="../homePage/MHomePage.qml" line="477"/>
         <source>All files</source>
         <translation>所有文件</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="477"/>
         <location filename="../homePage/MHomePage.qml" line="478"/>
         <location filename="../homePage/MHomePage.qml" line="479"/>
+        <location filename="../homePage/MHomePage.qml" line="480"/>
         <source>files</source>
         <translation>文件</translation>
     </message>

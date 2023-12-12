@@ -2,6 +2,7 @@
 #include <QCryptographicHash>
 #include <QDebug>
 #include <QFileInfo>
+#include "book_utils.hpp"
 #include "fz_utils.hpp"
 #include "page_generator.hpp"
 
@@ -48,7 +49,7 @@ domain::value_objects::BookMetaData MetadataExtractor::getBookMetaData()
         .lastOpened = QDateTime(),
         .coverLastModified = QDateTime(),
         .coverPath = "",
-        .fileHash = generateFileHash(),
+        .fileHash = utility::generateFileHash(m_filePath),
     };
 
     if(metaData.format.isEmpty())
@@ -108,27 +109,6 @@ double MetadataExtractor::roundToPrecisionOf2(double raw)
 {
     return (static_cast<int>(raw * 100 + .5) / 100.0);
 }
-
-QString MetadataExtractor::generateFileHash()
-{
-    QFile file(m_filePath);
-    if(!file.open(QIODevice::ReadOnly))
-    {
-        qWarning() << QString(
-                          "Could not open book at path: %1 for hash generation")
-                          .arg(m_filePath);
-    }
-
-    QCryptographicHash hashGen(QCryptographicHash::Sha1);
-    if(hashGen.addData(&file))
-    {
-        return hashGen.result().toHex();
-    }
-
-    qWarning() << "Error reading file for hash calculation:"
-               << file.errorString();
-    return "";
-};
 
 QImage MetadataExtractor::getBookCover()
 {
