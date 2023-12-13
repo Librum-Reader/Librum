@@ -277,6 +277,15 @@ Item {
                    }
     }
 
+    MCheckBox {
+        id: checkBox
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.topMargin: 10
+        anchors.leftMargin: 10
+        visible: false
+    }
+
     QtObject {
         id: internal
         property int lowerBookPartPadding: 14
