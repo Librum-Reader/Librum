@@ -61,6 +61,7 @@ set(application_SRC
     utility/automatic_login_helper.hpp
     utility/error_code_converter.hpp
     utility/book_utils.hpp
+    utility/save_book_helper.hpp
     
     core/page_generator.hpp
     core/page_generator.cpp

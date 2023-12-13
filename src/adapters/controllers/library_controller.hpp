@@ -52,7 +52,7 @@ private:
                           dtos::BookDto& bookDto);
     bool listContainsTag(const QList<domain::entities::Tag>& tags, QUuid uuid);
 
-    application::ILibraryService* m_bookService;
+    application::ILibraryService* m_libraryService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
     bool m_currentlySyncing = false;
