@@ -162,6 +162,8 @@ Page {
                 z: 2
 
                 onSearchRequested: query => LibraryController.libraryModel.sortString = query
+
+                onCheckBoxActivated: activated => Globals.bookSelectionModeEnabled = activated
             }
 
             Pane {
@@ -460,6 +462,20 @@ Page {
             }
         }
     }
+
+    Keys.onPressed: event => {
+                        if (event.key === Qt.Key_Control) {
+                            toolbar.selectBooksCheckBoxActivated = true
+                            event.accepted = true
+                        }
+                    }
+
+    Keys.onReleased: event => {
+                         if (event.key === Qt.Key_Control) {
+                             toolbar.selectBooksCheckBoxActivated = false
+                             event.accepted = true
+                         }
+                     }
 
     QtObject {
         id: internal

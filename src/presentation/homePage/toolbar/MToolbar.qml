@@ -11,8 +11,9 @@ import "tagSelector"
 
 Item {
     id: root
+    property alias selectBooksCheckBoxActivated: selectBooksCheckBox.activated
     signal searchRequested(string query)
-    signal checkBoxClicked
+    signal checkBoxActivated(bool activated)
 
     implicitWidth: 1714
     implicitHeight: 36
@@ -28,7 +29,8 @@ Item {
         MWrappedCheckBox {
             id: selectBooksCheckBox
 
-            onChecked: checkBoxClicked()
+            onActivatedChanged: root.checkBoxActivated(
+                                    selectBooksCheckBox.activated)
         }
 
         MSortByButton {

@@ -5,6 +5,7 @@ import Librum.style
 import Librum.icons
 import CustomComponents
 import Librum.fonts
+import Librum.globals
 
 Item {
     id: root
@@ -283,7 +284,7 @@ Item {
         anchors.left: root.left
         anchors.topMargin: 10
         anchors.leftMargin: 10
-        visible: false
+        visible: Globals.bookSelectionModeEnabled
     }
 
     QtObject {
