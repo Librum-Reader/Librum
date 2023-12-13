@@ -120,7 +120,9 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
 
     auto bookMetaData = m_bookMetadataHelper->getBookMetaData();
     Book book(filePath, bookMetaData);
-    if(!allowDuplicates && bookWithFileHashAlreadyExists(book.getFileHash()))
+    auto hash = book.getFileHash();
+    if(!allowDuplicates && !hash.isEmpty() &&
+       bookWithFileHashAlreadyExists(hash))
     {
         qWarning() << QString("Book with file hash: %1 already exists.")
                           .arg(book.getFileHash());
