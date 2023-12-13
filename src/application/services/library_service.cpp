@@ -27,25 +27,7 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {
-                m_libraryStorageManager->downloadRemoteBooks();
-
-                auto success = QNetworkInformation::loadDefaultBackend();
-                if(!success)
-                    qWarning() << "Failed loading QNetworkInformation backend";
-
-                auto networkInfo = QNetworkInformation::instance();
-                if(networkInfo == nullptr)
-                {
-                    qWarning() << "Failed loading QNetworkInformation instance";
-                }
-                else
-                {
-                    if(networkInfo->reachability() ==
-                       QNetworkInformation::Reachability::Online)
-                    {
-                        emit syncingLibraryStarted();
-                    }
-                }
+                downloadBooks();
             });
 
     // Apply updates timer
@@ -105,6 +87,26 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
 void LibraryService::downloadBooks()
 {
     m_libraryStorageManager->downloadRemoteBooks();
+
+    auto success = QNetworkInformation::loadDefaultBackend();
+    if(!success)
+        qWarning() << "Failed loading QNetworkInformation backend";
+
+    // We only want to emit the library sync signal if we know that we are
+    // online. Else the loading indicator would be spinning forever.
+    auto networkInfo = QNetworkInformation::instance();
+    if(networkInfo == nullptr)
+    {
+        qWarning() << "Failed loading QNetworkInformation instance";
+    }
+    else
+    {
+        if(networkInfo->reachability() ==
+           QNetworkInformation::Reachability::Online)
+        {
+            emit syncingLibraryStarted();
+        }
+    }
 }
 
 BookOperationStatus LibraryService::addBook(const QString& filePath,
