@@ -266,6 +266,11 @@ Item {
         // Delegate mouse clicks events to parent
         onClicked: mouse => {
                        if (mouse.button === Qt.LeftButton) {
+                           if (Globals.bookSelectionModeEnabled) {
+                               checkBox.checked = checkBox.checked ? false : true
+                               return
+                           }
+
                            if (moreOptionsArea.containsMouse) {
                                root.moreOptionClicked(root.index, mouse)
                                return
