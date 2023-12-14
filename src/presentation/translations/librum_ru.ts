@@ -564,7 +564,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="303"/>
+        <location filename="../homePage/MBook.qml" line="305"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation>Выша книга не была загружена в облако.

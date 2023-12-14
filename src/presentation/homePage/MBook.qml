@@ -290,6 +290,7 @@ Item {
         anchors.topMargin: 10
         anchors.leftMargin: 10
         visible: Globals.bookSelectionModeEnabled
+        uncheckedBackgroundColor: Style.colorControlBackground
     }
 
     QtObject {

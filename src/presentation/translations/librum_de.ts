@@ -573,7 +573,7 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="303"/>
+        <location filename="../homePage/MBook.qml" line="305"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation>Dein Buch wurde nicht in die Cloud geladen.
