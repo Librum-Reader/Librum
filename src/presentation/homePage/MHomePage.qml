@@ -477,6 +477,8 @@ Page {
                          }
                      }
 
+    Component.onDestruction: toolbar.selectBooksCheckBoxActivated = false
+
     QtObject {
         id: internal
         property bool libraryIsEmpty: LibraryController.bookCount === 0
