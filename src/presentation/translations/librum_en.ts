@@ -494,7 +494,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="305"/>
+        <location filename="../homePage/MBook.qml" line="311"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>

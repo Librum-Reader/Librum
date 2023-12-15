@@ -296,6 +296,13 @@ Item {
     QtObject {
         id: internal
         property int lowerBookPartPadding: 14
+        property var bookSelectionModeEnabled: Globals.bookSelectionModeEnabled
+
+        onBookSelectionModeEnabledChanged: {
+            if (bookSelectionModeEnabled === false) {
+                checkBox.checked = false
+            }
+        }
     }
 
     MToolTip {
