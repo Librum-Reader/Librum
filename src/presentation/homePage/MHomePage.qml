@@ -467,6 +467,9 @@ Page {
                         if (event.key === Qt.Key_Control) {
                             toolbar.selectBooksCheckBoxActivated = true
                             event.accepted = true
+                        } else if (event.key === Qt.Key_Escape) {
+                            toolbar.selectBooksCheckBoxActivated = false
+                            event.accepted = true
                         }
                     }
 
