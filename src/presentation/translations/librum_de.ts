@@ -1296,28 +1296,29 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../homePage/MHomePage.qml" line="428"/>
         <source>Book already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Buch existiert bereits</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="429"/>
         <source>It looks like this book already exists in your library:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Buch ist bereits in deiner Bibliothek:</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="432"/>
         <source>Are you sure you that want to add it again?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Willst du es erneut hinzufügen?
+</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Add</source>
-        <translation type="unfinished">Hinzufügen</translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Don&apos;t add</source>
-        <translation type="unfinished"></translation>
+        <translation>Nicht hinzufügen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>

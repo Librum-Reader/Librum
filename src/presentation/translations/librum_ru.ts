@@ -1249,28 +1249,29 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="428"/>
         <source>Book already exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Книга уже есть</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="429"/>
         <source>It looks like this book already exists in your library:</source>
-        <translation type="unfinished"></translation>
+        <translation>Похоже, эта книга уже есть в Вашей библиотеке:</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="432"/>
         <source>Are you sure you that want to add it again?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Вы уверены, что хотите добавить её снова?
+</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Add</source>
-        <translation type="unfinished">Добавить</translation>
+        <translation>Добавить</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Don&apos;t add</source>
-        <translation type="unfinished"></translation>
+        <translation>Не добавлять</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>
