@@ -101,5 +101,6 @@
         <file>readingPage/MBookmarkItem.qml</file>
         <file>readingPage/MExplanationPopup.qml</file>
         <file>LanguageModel.qml</file>
+        <file>homePage/MBookMultiSelectRightClickPopup.qml</file>
     </qresource>
 </RCC>

@@ -5,6 +5,7 @@ import Librum.style
 import Librum.icons
 import CustomComponents
 import Librum.fonts
+import Librum.globals
 
 Item {
     id: root
@@ -265,6 +266,12 @@ Item {
         // Delegate mouse clicks events to parent
         onClicked: mouse => {
                        if (mouse.button === Qt.LeftButton) {
+                           if (Globals.bookSelectionModeEnabled) {
+                               checkBox.checked = checkBox.checked ? false : true
+                               Globals.selectedBooks.push(model.uuid)
+                               return
+                           }
+
                            if (moreOptionsArea.containsMouse) {
                                root.moreOptionClicked(root.index, mouse)
                                return
@@ -277,9 +284,26 @@ Item {
                    }
     }
 
+    MCheckBox {
+        id: checkBox
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.topMargin: 10
+        anchors.leftMargin: 10
+        visible: Globals.bookSelectionModeEnabled
+        uncheckedBackgroundColor: Style.colorControlBackground
+    }
+
     QtObject {
         id: internal
         property int lowerBookPartPadding: 14
+        property var bookSelectionModeEnabled: Globals.bookSelectionModeEnabled
+
+        onBookSelectionModeEnabledChanged: {
+            if (bookSelectionModeEnabled === false) {
+                checkBox.checked = false
+            }
+        }
     }
 
     MToolTip {

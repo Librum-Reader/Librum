@@ -555,13 +555,13 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
 <context>
     <name>MBook</name>
     <message>
-        <location filename="../homePage/MBook.qml" line="174"/>
-        <location filename="../homePage/MBook.qml" line="189"/>
+        <location filename="../homePage/MBook.qml" line="175"/>
+        <location filename="../homePage/MBook.qml" line="190"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="288"/>
+        <location filename="../homePage/MBook.qml" line="312"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation>Выша книга не была загружена в облако.
@@ -671,6 +671,41 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
         <source>files</source>
         <translation>файлы</translation>
+    </message>
+</context>
+<context>
+    <name>MBookMultiSelectRightClickPopup</name>
+    <message>
+        <source>Save to files</source>
+        <translation type="obsolete">Сохранить</translation>
+    </message>
+    <message>
+        <source>Read book</source>
+        <translation type="obsolete">Читать</translation>
+    </message>
+    <message>
+        <source>Manage tags</source>
+        <translation type="obsolete">Теги</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
+        <source>Mark as read</source>
+        <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
+        <translation type="unfinished">Прочитано</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
+        <source>Uninstall books</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
+        <source>Delete books</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove book</source>
+        <translation type="obsolete">Удалить</translation>
     </message>
 </context>
 <context>
@@ -1999,22 +2034,22 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MToolbar</name>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="67"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="75"/>
         <source>Remove Filters</source>
         <translation>Удалить фильтры</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="80"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="88"/>
         <source>Remove Tags</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="146"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="154"/>
         <source>You are offline</source>
         <translation>Вы не в сети</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="153"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="161"/>
         <source>Your library is being synchronized with the cloud</source>
         <translation>Сейчас Ваша библиотека синхронизируется с облаком</translation>
     </message>

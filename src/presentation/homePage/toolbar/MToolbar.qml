@@ -5,20 +5,27 @@ import CustomComponents
 import Librum.controllers
 import Librum.models
 import Librum.icons
+import Librum.globals
 import "filterByButton"
 import "sortByButton"
 import "tagSelector"
 
 Item {
     id: root
+    property alias selectBooksCheckBoxActivated: selectBooksCheckBox.activated
     signal searchRequested(string query)
-    signal checkBoxClicked
+    signal checkBoxActivated(bool activated)
 
     implicitWidth: 1714
     implicitHeight: 36
 
     onWidthChanged: if (searchButton.opened)
                         searchButton.close()
+
+    onSelectBooksCheckBoxActivatedChanged: {
+        if (!selectBooksCheckBoxActivated)
+            Globals.selectedBooks = []
+    }
 
     RowLayout {
         id: layout
@@ -28,7 +35,8 @@ Item {
         MWrappedCheckBox {
             id: selectBooksCheckBox
 
-            onChecked: checkBoxClicked()
+            onActivatedChanged: root.checkBoxActivated(
+                                    selectBooksCheckBox.activated)
         }
 
         MSortByButton {

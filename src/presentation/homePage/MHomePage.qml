@@ -156,6 +156,8 @@ Page {
                 z: 2
 
                 onSearchRequested: query => LibraryController.libraryModel.sortString = query
+
+                onCheckBoxActivated: activated => Globals.bookSelectionModeEnabled = activated
             }
 
             Pane {
@@ -208,10 +210,18 @@ Page {
                                                       mouse.x, mouse.y)
                                                   let absoluteMousePosition = mapToItem(
                                                       root, mouse.x, mouse.y)
-                                                  bookOptionsPopup.setSpawnPosition(
-                                                      currentMousePosition,
-                                                      absoluteMousePosition,
-                                                      root)
+
+                                                  if (Globals.bookSelectionModeEnabled) {
+                                                      bookMultiSelectOptionsPopup.setSpawnPosition(
+                                                          currentMousePosition,
+                                                          absoluteMousePosition,
+                                                          root)
+                                                  } else {
+                                                      bookOptionsPopup.setSpawnPosition(
+                                                          currentMousePosition,
+                                                          absoluteMousePosition,
+                                                          root)
+                                                  }
 
                                                   // Open the bookOptions
                                                   internal.openBookOptionsPopup(
@@ -227,6 +237,7 @@ Page {
                                                  let currentMousePosition = mapToItem(
                                                      bookGridContainer,
                                                      mouse.x, mouse.y)
+
                                                  bookOptionsPopup.x = currentMousePosition.x
                                                  - bookOptionsPopup.implicitWidth / 2
                                                  bookOptionsPopup.y = currentMousePosition.y
@@ -274,6 +285,40 @@ Page {
 
                         onRemoveClicked: {
                             acceptDeletionPopup.open()
+                            close()
+                        }
+                    }
+
+
+                    /*
+                  The options menu when e.g. right-clicking a book while multi selection is enabled
+                  */
+                    MBookMultiSelectRightClickPopup {
+                        id: bookMultiSelectOptionsPopup
+
+                        onMarkAsReadClicked: {
+
+                            toolbar.selectBooksCheckBoxActivated = false
+                            close()
+                        }
+
+                        onUninstallClicked: {
+                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
+                                LibraryController.uninstallBook(
+                                            Globals.selectedBooks[i])
+                            }
+
+                            toolbar.selectBooksCheckBoxActivated = false
+                            close()
+                        }
+
+                        onDeleteClicked: {
+                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
+                                LibraryController.deleteBook(
+                                            Globals.selectedBooks[i])
+                            }
+
+                            toolbar.selectBooksCheckBoxActivated = false
                             close()
                         }
                     }
@@ -482,6 +527,25 @@ Page {
         onAccepted: internal.addBooks(files)
     }
 
+    Keys.onPressed: event => {
+                        if (event.key === Qt.Key_Control) {
+                            toolbar.selectBooksCheckBoxActivated = true
+                            event.accepted = true
+                        } else if (event.key === Qt.Key_Escape) {
+                            toolbar.selectBooksCheckBoxActivated = false
+                            event.accepted = true
+                        }
+                    }
+
+    Keys.onReleased: event => {
+                         if (event.key === Qt.Key_Control) {
+                             toolbar.selectBooksCheckBoxActivated = false
+                             event.accepted = true
+                         }
+                     }
+
+    Component.onDestruction: toolbar.selectBooksCheckBoxActivated = false
+
     QtObject {
         id: internal
         property bool libraryIsEmpty: LibraryController.bookCount === 0
@@ -497,12 +561,18 @@ Page {
             Globals.bookTags = Qt.binding(function () {
                 return item.tags
             })
-            bookOptionsPopup.open()
+
+            if (Globals.bookSelectionModeEnabled)
+                bookMultiSelectOptionsPopup.open()
+            else
+                bookOptionsPopup.open()
         }
 
         function openBook() {
             if (bookOptionsPopup.opened)
                 bookOptionsPopup.close()
+            else if (bookMultiSelectOptionsPopup.opened)
+                bookMultiSelectOptionsPopup.close()
 
             BookController.setUp(Globals.selectedBook.uuid)
 
