@@ -268,6 +268,7 @@ Item {
                        if (mouse.button === Qt.LeftButton) {
                            if (Globals.bookSelectionModeEnabled) {
                                checkBox.checked = checkBox.checked ? false : true
+                               Globals.selectedBooks.push(model.uuid)
                                return
                            }
 

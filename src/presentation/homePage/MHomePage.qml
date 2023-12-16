@@ -216,10 +216,18 @@ Page {
                                                       mouse.x, mouse.y)
                                                   let absoluteMousePosition = mapToItem(
                                                       root, mouse.x, mouse.y)
-                                                  bookOptionsPopup.setSpawnPosition(
-                                                      currentMousePosition,
-                                                      absoluteMousePosition,
-                                                      root)
+
+                                                  if (Globals.bookSelectionModeEnabled) {
+                                                      bookMultiSelectOptionsPopup.setSpawnPosition(
+                                                          currentMousePosition,
+                                                          absoluteMousePosition,
+                                                          root)
+                                                  } else {
+                                                      bookOptionsPopup.setSpawnPosition(
+                                                          currentMousePosition,
+                                                          absoluteMousePosition,
+                                                          root)
+                                                  }
 
                                                   // Open the bookOptions
                                                   internal.openBookOptionsPopup(
@@ -235,6 +243,7 @@ Page {
                                                  let currentMousePosition = mapToItem(
                                                      bookGridContainer,
                                                      mouse.x, mouse.y)
+
                                                  bookOptionsPopup.x = currentMousePosition.x
                                                  - bookOptionsPopup.implicitWidth / 2
                                                  bookOptionsPopup.y = currentMousePosition.y
@@ -282,6 +291,40 @@ Page {
 
                         onRemoveClicked: {
                             acceptDeletionPopup.open()
+                            close()
+                        }
+                    }
+
+
+                    /*
+                  The options menu when e.g. right-clicking a book while multi selection is enabled
+                  */
+                    MBookMultiSelectRightClickPopup {
+                        id: bookMultiSelectOptionsPopup
+
+                        onMarkAsReadClicked: {
+
+                            toolbar.selectBooksCheckBoxActivated = false
+                            close()
+                        }
+
+                        onUninstallClicked: {
+                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
+                                LibraryController.uninstallBook(
+                                            Globals.selectedBooks[i])
+                            }
+
+                            toolbar.selectBooksCheckBoxActivated = false
+                            close()
+                        }
+
+                        onDeleteClicked: {
+                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
+                                LibraryController.deleteBook(
+                                            Globals.selectedBooks[i])
+                            }
+
+                            toolbar.selectBooksCheckBoxActivated = false
                             close()
                         }
                     }
@@ -496,12 +539,18 @@ Page {
             Globals.bookTags = Qt.binding(function () {
                 return item.tags
             })
-            bookOptionsPopup.open()
+
+            if (Globals.bookSelectionModeEnabled)
+                bookMultiSelectOptionsPopup.open()
+            else
+                bookOptionsPopup.open()
         }
 
         function openBook() {
             if (bookOptionsPopup.opened)
                 bookOptionsPopup.close()
+            else if (bookMultiSelectOptionsPopup.opened)
+                bookMultiSelectOptionsPopup.close()
 
             BookController.setUp(Globals.selectedBook.uuid)
 

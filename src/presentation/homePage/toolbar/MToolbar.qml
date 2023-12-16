@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.controllers
 import Librum.models
 import Librum.icons
+import Librum.globals
 import "filterByButton"
 import "sortByButton"
 import "tagSelector"
@@ -20,6 +21,11 @@ Item {
 
     onWidthChanged: if (searchButton.opened)
                         searchButton.close()
+
+    onSelectBooksCheckBoxActivatedChanged: {
+        if (!selectBooksCheckBoxActivated)
+            Globals.selectedBooks = []
+    }
 
     RowLayout {
         id: layout

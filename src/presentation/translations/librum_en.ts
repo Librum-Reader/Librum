@@ -494,7 +494,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="311"/>
+        <location filename="../homePage/MBook.qml" line="312"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
@@ -602,6 +602,25 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
         <source>files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MBookMultiSelectRightClickPopup</name>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
+        <source>Mark as read</source>
+        <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
+        <source>Uninstall books</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
+        <source>Delete books</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1088,77 +1107,77 @@ Either you are offline, or your storage is full.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="363"/>
+        <location filename="../homePage/MHomePage.qml" line="406"/>
         <source>Remove Book?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="364"/>
+        <location filename="../homePage/MHomePage.qml" line="407"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="365"/>
+        <location filename="../homePage/MHomePage.qml" line="408"/>
         <source>Remove from Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="366"/>
+        <location filename="../homePage/MHomePage.qml" line="409"/>
         <source>Delete Everywhere</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="403"/>
+        <location filename="../homePage/MHomePage.qml" line="446"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="418"/>
+        <location filename="../homePage/MHomePage.qml" line="461"/>
         <source>Limit Reached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="419"/>
+        <location filename="../homePage/MHomePage.qml" line="462"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="420"/>
-        <location filename="../homePage/MHomePage.qml" line="438"/>
+        <location filename="../homePage/MHomePage.qml" line="463"/>
+        <location filename="../homePage/MHomePage.qml" line="481"/>
         <source>Ok</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="421"/>
+        <location filename="../homePage/MHomePage.qml" line="464"/>
         <source>Upgrade</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="436"/>
+        <location filename="../homePage/MHomePage.qml" line="479"/>
         <source>Unsupported File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="437"/>
+        <location filename="../homePage/MHomePage.qml" line="480"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="449"/>
+        <location filename="../homePage/MHomePage.qml" line="492"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="452"/>
+        <location filename="../homePage/MHomePage.qml" line="495"/>
         <source>All files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="453"/>
-        <location filename="../homePage/MHomePage.qml" line="454"/>
-        <location filename="../homePage/MHomePage.qml" line="455"/>
+        <location filename="../homePage/MHomePage.qml" line="496"/>
+        <location filename="../homePage/MHomePage.qml" line="497"/>
+        <location filename="../homePage/MHomePage.qml" line="498"/>
         <source>files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1859,22 +1878,22 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>MToolbar</name>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="69"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="75"/>
         <source>Remove Filters</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="82"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="88"/>
         <source>Remove Tags</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="148"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="154"/>
         <source>You are offline</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="155"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="161"/>
         <source>Your library is being synchronized with the cloud</source>
         <translation type="unfinished"></translation>
     </message>
