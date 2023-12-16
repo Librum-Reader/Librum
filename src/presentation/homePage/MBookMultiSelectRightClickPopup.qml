@@ -13,7 +13,7 @@ MRightClickMenu {
     signal deleteClicked
     signal uninstallClicked
 
-    implicitHeight: 110 // 32px per item
+    implicitHeight: 108 // 32px per item
 
     objectModel: ObjectModel {
 
