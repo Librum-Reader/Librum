@@ -52,6 +52,7 @@ public:
 
     Q_INVOKABLE virtual void syncWithServer() = 0;
     Q_INVOKABLE virtual int addBook(const QString& path,
+                                    bool allowDuplicates = false,
                                     int projectGutenbergId = 0) = 0;
     Q_INVOKABLE virtual int deleteBook(const QString& uuid) = 0;
     Q_INVOKABLE virtual int deleteAllBooks() = 0;

@@ -15,18 +15,14 @@ add_library(presentation
 )
 
 
+# Translations
 set(translation_files
     translations/librum_en.ts
     translations/librum_de.ts
     translations/librum_ru.ts
+    translations/librum_zh.ts
 )
-
-# Translations for the application
 qt_add_translations(presentation TS_FILES ${translation_files})
-add_dependencies(presentation presentation_lupdate)
-add_dependencies(presentation presentation_lrelease)
-add_dependencies(presentation update_translations)
-
 
 
 target_compile_definitions(presentation PRIVATE PRESENTATION_LIBRARY)

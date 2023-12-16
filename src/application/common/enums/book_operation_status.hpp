@@ -21,6 +21,7 @@ enum class BookOperationStatus
     PropertyDoesNotExist,
     TagDoesNotExist,
     TagAlreadyExists,
+    BookAlreadyExists,
     OperationFailed
 };
 

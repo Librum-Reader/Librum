@@ -1,6 +1,8 @@
 #include "metadata_extractor.hpp"
+#include <QCryptographicHash>
 #include <QDebug>
 #include <QFileInfo>
+#include "book_utils.hpp"
 #include "fz_utils.hpp"
 #include "page_generator.hpp"
 
@@ -47,6 +49,8 @@ domain::value_objects::BookMetaData MetadataExtractor::getBookMetaData()
         .lastOpened = QDateTime(),
         .coverLastModified = QDateTime(),
         .coverPath = "",
+        .colorTheme = "Normal",
+        .fileHash = utility::generateFileHash(m_filePath),
     };
 
     if(metaData.format.isEmpty())
@@ -105,7 +109,7 @@ QString MetadataExtractor::getDocumentSize()
 double MetadataExtractor::roundToPrecisionOf2(double raw)
 {
     return (static_cast<int>(raw * 100 + .5) / 100.0);
-};
+}
 
 QImage MetadataExtractor::getBookCover()
 {

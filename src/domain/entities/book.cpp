@@ -354,6 +354,26 @@ int Book::getBookReadingProgress() const
     return std::round(percentageInDecimal * 100);
 }
 
+QString Book::getColorTheme() const
+{
+    return m_metaData.colorTheme;
+}
+
+void Book::setColorTheme(const QString& newColorTheme)
+{
+    m_metaData.colorTheme = newColorTheme;
+}
+
+QString Book::getFileHash() const
+{
+    return m_metaData.fileHash;
+}
+
+void Book::setFileHash(const QString& newFileHash)
+{
+    m_metaData.fileHash = newFileHash;
+}
+
 const QList<Tag>& Book::getTags() const
 {
     return m_tags;
@@ -497,6 +517,10 @@ void Book::update(const Book& other)
         m_metaData.hasCover = other.hasCover();
     if(m_metaData.coverPath != other.getCoverPath())
         m_metaData.coverPath = other.getCoverPath();
+    if(m_metaData.colorTheme != other.getColorTheme())
+        m_metaData.colorTheme = other.getColorTheme();
+    if(m_metaData.fileHash != other.getFileHash())
+        m_metaData.fileHash = other.getFileHash();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
@@ -607,6 +631,8 @@ QByteArray Book::toJson() const
           getCoverLastModified().toString(dateTimeStringFormat) },
         { "hasCover", hasCover() },
         { "coverPath", getCoverPath() },
+        { "colorTheme", getColorTheme() },
+        { "fileHash", getFileHash() },
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
         { "highlights", serializeHighlights() },
@@ -701,6 +727,8 @@ BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
             jsonBook["coverLastModified"].toString(), dateTimeStringFormat),
         .hasCover = jsonBook["hasCover"].toBool(),
         .coverPath = jsonBook["coverPath"].toString(),
+        .colorTheme = jsonBook["colorTheme"].toString(),
+        .fileHash = jsonBook["fileHash"].toString(),
     };
 
     // Specify that the dates are UTC, else Qt thinks its local time

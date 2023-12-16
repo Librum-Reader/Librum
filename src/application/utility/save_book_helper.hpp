@@ -1,4 +1,8 @@
 #pragma once
+#include <QByteArray>
+#include <QDebug>
+#include <QFile>
+#include <QString>
 
 namespace application::utility
 {

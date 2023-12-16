@@ -40,13 +40,7 @@ Page {
         id: dropArea
         anchors.fill: parent
 
-        onDropped: drop => {
-                       for (var i = 0; i < drop.urls.length; ++i) {
-                           let result = LibraryController.addBook(drop.urls[i])
-                           if (result === BookOperationStatus.OpeningBookFailed)
-                           unsupportedFilePopup.open()
-                       }
-                   }
+        onDropped: drop => internal.addBooks(drop.urls)
 
         ColumnLayout {
             id: layout
@@ -470,6 +464,35 @@ Page {
     }
 
     MWarningPopup {
+        id: bookAlreadyExistsPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Book already exists")
+        message: qsTr("It looks like this book already exists in your library:")
+                 + "<br>" + "<font color='" + Style.colorBasePurple + "'>"
+                 + internal.lastAddedBookPath.split("/").slice(
+                     -1)[0] + "</font> <br>" + qsTr(
+                     "Are you sure you that want to add it again?\n")
+        richText: true
+        leftButtonText: qsTr("Add")
+        rightButtonText: qsTr("Don't add")
+        messageBottomSpacing: 16
+        minButtonWidth: 180
+        onOpenedChanged: if (opened)
+                             bookAlreadyExistsPopup.giveFocus()
+        onDecisionMade: {
+            close()
+            internal.continueAddingBooks()
+        }
+
+        onLeftButtonClicked: LibraryController.addBook(
+                                 internal.lastAddedBookPath, true)
+    }
+
+    MWarningPopup {
         id: unsupportedFilePopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
@@ -484,7 +507,11 @@ Page {
 
         onOpenedChanged: if (opened)
                              giveFocus()
-        onDecisionMade: close()
+
+        onDecisionMade: {
+            close()
+            internal.continueAddingBooks()
+        }
     }
 
     FileDialog {
@@ -497,13 +524,7 @@ Page {
                 "files") + " (*.epub)", "MOBI " + qsTr("files") + " (*.mobi)", "HTML " + qsTr(
                 "files") + " (*.html *.htm)", "Text " + qsTr("files") + " (*.txt)"]
 
-        onAccepted: {
-            for (var i = 0; i < files.length; ++i) {
-                let result = LibraryController.addBook(files[i])
-                if (result === BookOperationStatus.OpeningBookFailed)
-                    unsupportedFilePopup.open()
-            }
-        }
+        onAccepted: internal.addBooks(files)
     }
 
     Keys.onPressed: event => {
@@ -528,11 +549,12 @@ Page {
     QtObject {
         id: internal
         property bool libraryIsEmpty: LibraryController.bookCount === 0
-
         property int bookWidth: 190
         property int bookHeight: 300
         property int horizontalBookSpacing: 64
         property int verticalBookSpacing: 48
+        property var booksCurrentlyAdding: []
+        property string lastAddedBookPath: ""
 
         function openBookOptionsPopup(item) {
             Globals.selectedBook = LibraryController.getBook(item.uuid)
@@ -556,6 +578,37 @@ Page {
 
             LibraryController.refreshLastOpenedFlag(Globals.selectedBook.uuid)
             loadPage(readingPage)
+        }
+
+        // This function adds books to the library. When errors happen in the process,
+        // it interrupts the adding and shows a popup. After the popup is closed, the
+        // adding is resumed by calling continueAddingBooks().
+        function addBooks(container) {
+            internal.booksCurrentlyAdding = container
+            for (var i = container.length - 1; i >= 0; i--) {
+                internal.lastAddedBookPath = container[i]
+                let result = LibraryController.addBook(
+                        internal.lastAddedBookPath)
+
+                // Remove the already added book
+                container.splice(i, 1)
+
+                if (result === BookOperationStatus.OpeningBookFailed) {
+                    unsupportedFilePopup.open()
+                    return
+                }
+
+                if (result === BookOperationStatus.BookAlreadyExists) {
+                    bookAlreadyExistsPopup.open()
+                    return
+                }
+            }
+        }
+
+        // When an error occurs while adding multiple books, this method is called
+        // after the error was dealt with to continue adding the rest of the books.
+        function continueAddingBooks() {
+            internal.addBooks(internal.booksCurrentlyAdding)
         }
     }
 }

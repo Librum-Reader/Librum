@@ -34,6 +34,8 @@ class ADAPTERS_EXPORT IBookController : public QObject
                    setSearchCaseSensitive NOTIFY searchCaseSensitiveChanged)
     Q_PROPERTY(bool searchFromStart READ getSearchFromStart WRITE
                    setSearchFromStart NOTIFY searchFromStartChanged)
+    Q_PROPERTY(QString colorTheme READ getColorTheme WRITE setColorTheme NOTIFY
+                   colorThemeChanged)
 
 public:
     virtual ~IBookController() noexcept = default;
@@ -82,6 +84,9 @@ public:
     virtual bool getSearchFromStart() const = 0;
     virtual void setSearchFromStart(bool newSearchFromStart) = 0;
 
+    virtual QString getColorTheme() = 0;
+    virtual void setColorTheme(const QString& colorTheme) = 0;
+
     virtual application::core::FilteredTOCModel* getTableOfContents() = 0;
     virtual adapters::data_models::BookmarksProxyModel* getBookmarksModel() = 0;
 
@@ -100,6 +105,7 @@ signals:
     void searchCaseSensitiveChanged();
     void searchFromStartChanged();
     void bookmarksModelChanged();
+    void colorThemeChanged(const QString& colorTheme);
 };
 
 }  // namespace adapters

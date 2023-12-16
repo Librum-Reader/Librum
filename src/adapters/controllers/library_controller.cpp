@@ -18,28 +18,30 @@ using namespace dtos;
 
 LibraryController::LibraryController(
     application::ILibraryService* bookService) :
-    m_bookService(bookService),
-    m_libraryModel(m_bookService->getBooks())
+    m_libraryService(bookService),
+    m_libraryModel(m_libraryService->getBooks())
 {
     // book insertion
-    connect(m_bookService, &application::ILibraryService::bookInsertionStarted,
+    connect(m_libraryService,
+            &application::ILibraryService::bookInsertionStarted,
             &m_libraryModel, &data_models::LibraryModel::startInsertingRow);
 
-    connect(m_bookService, &application::ILibraryService::bookInsertionEnded,
+    connect(m_libraryService, &application::ILibraryService::bookInsertionEnded,
             &m_libraryModel, &data_models::LibraryModel::endInsertingRow);
 
-    connect(m_bookService, &application::ILibraryService::bookInsertionEnded,
+    connect(m_libraryService, &application::ILibraryService::bookInsertionEnded,
             this, &LibraryController::bookCountChanged);
 
     // Library syncing
-    connect(m_bookService, &application::ILibraryService::syncingLibraryStarted,
+    connect(m_libraryService,
+            &application::ILibraryService::syncingLibraryStarted,
             [this]()
             {
                 m_currentlySyncing = true;
                 emit isSyncingChanged();
             });
 
-    connect(m_bookService,
+    connect(m_libraryService,
             &application::ILibraryService::syncingLibraryFinished,
             [this]()
             {
@@ -49,46 +51,49 @@ LibraryController::LibraryController(
 
 
     // book deletion
-    connect(m_bookService, &application::ILibraryService::bookDeletionStarted,
-            &m_libraryModel, &data_models::LibraryModel::startDeletingBook);
+    connect(m_libraryService,
+            &application::ILibraryService::bookDeletionStarted, &m_libraryModel,
+            &data_models::LibraryModel::startDeletingBook);
 
-    connect(m_bookService, &application::ILibraryService::bookDeletionEnded,
+    connect(m_libraryService, &application::ILibraryService::bookDeletionEnded,
             &m_libraryModel, &data_models::LibraryModel::endDeletingBook);
 
-    connect(m_bookService, &application::ILibraryService::bookDeletionEnded,
+    connect(m_libraryService, &application::ILibraryService::bookDeletionEnded,
             this, &LibraryController::bookCountChanged);
 
 
     // book clearing
-    connect(m_bookService, &application::ILibraryService::bookClearingStarted,
-            &m_libraryModel, &data_models::LibraryModel::startBookClearing);
+    connect(m_libraryService,
+            &application::ILibraryService::bookClearingStarted, &m_libraryModel,
+            &data_models::LibraryModel::startBookClearing);
 
-    connect(m_bookService, &application::ILibraryService::bookClearingEnded,
+    connect(m_libraryService, &application::ILibraryService::bookClearingEnded,
             &m_libraryModel, &data_models::LibraryModel::endBookClearing);
 
-    connect(m_bookService, &application::ILibraryService::bookClearingEnded,
+    connect(m_libraryService, &application::ILibraryService::bookClearingEnded,
             this, &LibraryController::bookCountChanged);
 
     // Storage limit exceeded
-    connect(m_bookService, &application::ILibraryService::storageLimitExceeded,
-            this, &LibraryController::storageLimitExceeded);
+    connect(m_libraryService,
+            &application::ILibraryService::storageLimitExceeded, this,
+            &LibraryController::storageLimitExceeded);
 
     // tags changed
-    connect(m_bookService, &application::ILibraryService::tagsChanged,
+    connect(m_libraryService, &application::ILibraryService::tagsChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshTags);
 
     // data changed
-    connect(m_bookService, &application::ILibraryService::dataChanged,
+    connect(m_libraryService, &application::ILibraryService::dataChanged,
             &m_libraryModel, &data_models::LibraryModel::refreshBook);
 
     // download book media progress changed
-    connect(m_bookService,
+    connect(m_libraryService,
             &application::ILibraryService::downloadingBookMediaProgressChanged,
             &m_libraryModel,
             &data_models::LibraryModel::downloadingBookMediaProgressChanged);
 
     // downloaded Project Gutenberg books
-    connect(m_bookService,
+    connect(m_libraryService,
             &application::ILibraryService::downloadedProjectGutenbergIdsReady,
             this, &LibraryController::downloadedProjectGutenbergIdsReady);
 
@@ -97,10 +102,11 @@ LibraryController::LibraryController(
 
 void LibraryController::syncWithServer()
 {
-    m_bookService->downloadBooks();
+    m_libraryService->downloadBooks();
 }
 
-int LibraryController::addBook(const QString& path, int projectGutenbergId)
+int LibraryController::addBook(const QString& path, bool allowDuplicates,
+                               int projectGutenbergId)
 {
     auto localPath = QUrl(path).toLocalFile();
     QFileInfo fileInfo(localPath);
@@ -108,7 +114,8 @@ int LibraryController::addBook(const QString& path, int projectGutenbergId)
         return 0;
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    auto result = m_bookService->addBook(localPath, projectGutenbergId);
+    auto result = m_libraryService->addBook(localPath, allowDuplicates,
+                                            projectGutenbergId);
     QApplication::restoreOverrideCursor();
 
     emit addingBookFinished(
@@ -120,32 +127,32 @@ int LibraryController::addBook(const QString& path, int projectGutenbergId)
 
 int LibraryController::deleteBook(const QString& uuid)
 {
-    auto result = m_bookService->deleteBook(QUuid(uuid));
+    auto result = m_libraryService->deleteBook(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int LibraryController::deleteAllBooks()
 {
-    auto result = m_bookService->deleteAllBooks();
+    auto result = m_libraryService->deleteAllBooks();
     return static_cast<int>(result);
 }
 
 int LibraryController::uninstallBook(const QString& uuid)
 {
-    auto result = m_bookService->uninstallBook(QUuid(uuid));
+    auto result = m_libraryService->uninstallBook(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int LibraryController::downloadBookMedia(const QString& uuid)
 {
-    auto result = m_bookService->downloadBookMedia(QUuid(uuid));
+    auto result = m_libraryService->downloadBookMedia(QUuid(uuid));
     return static_cast<int>(result);
 }
 
 int LibraryController::updateBook(const QString& uuid,
                                   const QVariant& operations)
 {
-    auto bookToUpdate = m_bookService->getBook(QUuid(uuid));
+    auto bookToUpdate = m_libraryService->getBook(QUuid(uuid));
     if(!bookToUpdate)
         return static_cast<int>(BookOperationStatus::BookDoesNotExist);
 
@@ -207,14 +214,14 @@ int LibraryController::updateBook(const QString& uuid,
         }
     }
 
-    auto result = m_bookService->updateBook(updatedBook);
+    auto result = m_libraryService->updateBook(updatedBook);
     return static_cast<int>(result);
 }
 
 int LibraryController::changeBookCover(const QString& uuid, const QString& path)
 {
-    auto result =
-        m_bookService->changeBookCover(QUuid(uuid), QUrl(path).toLocalFile());
+    auto result = m_libraryService->changeBookCover(QUuid(uuid),
+                                                    QUrl(path).toLocalFile());
     return static_cast<int>(result);
 }
 
@@ -230,7 +237,7 @@ int LibraryController::addTag(const QString& bookUuid, const QString& tagName,
     }
 
     Tag tag(tagName, tagUuid);
-    auto result = m_bookService->addTagToBook(QUuid(bookUuid), tag);
+    auto result = m_libraryService->addTagToBook(QUuid(bookUuid), tag);
 
     return static_cast<int>(result);
 }
@@ -240,12 +247,12 @@ void LibraryController::removeAllTagsWithUuid(const QString& tagUuid)
     if(QUuid(tagUuid).isNull())
         return;
 
-    auto& books = m_bookService->getBooks();
+    auto& books = m_libraryService->getBooks();
     for(const auto& book : books)
     {
         if(listContainsTag(book.getTags(), QUuid(tagUuid)))
         {
-            m_bookService->removeTagFromBook(book.getUuid(), QUuid(tagUuid));
+            m_libraryService->removeTagFromBook(book.getUuid(), QUuid(tagUuid));
         }
     }
 }
@@ -253,12 +260,12 @@ void LibraryController::removeAllTagsWithUuid(const QString& tagUuid)
 void LibraryController::renameTags(const QString& oldName,
                                    const QString& newName)
 {
-    auto& books = m_bookService->getBooks();
+    auto& books = m_libraryService->getBooks();
     for(const auto& book : books)
     {
         auto tagUuid = getTagUuidByName(book, oldName);
         if(!tagUuid.isNull())
-            m_bookService->renameTagOfBook(book.getUuid(), tagUuid, newName);
+            m_libraryService->renameTagOfBook(book.getUuid(), tagUuid, newName);
     }
 }
 
@@ -266,13 +273,13 @@ int LibraryController::removeTag(const QString& bookUuid,
                                  const QString& tagUuid)
 {
     auto result =
-        m_bookService->removeTagFromBook(QUuid(bookUuid), QUuid(tagUuid));
+        m_libraryService->removeTagFromBook(QUuid(bookUuid), QUuid(tagUuid));
     return static_cast<int>(result);
 }
 
 dtos::BookDto LibraryController::getBook(const QString& uuid)
 {
-    const auto& books = m_bookService->getBooks();
+    const auto& books = m_libraryService->getBooks();
     auto book = std::ranges::find_if(books,
                                      [&uuid](const Book& b)
                                      {
@@ -284,7 +291,7 @@ dtos::BookDto LibraryController::getBook(const QString& uuid)
 
 int LibraryController::getBookCount() const
 {
-    return m_bookService->getBookCount();
+    return m_libraryService->getBookCount();
 }
 
 bool LibraryController::isSyncing() const
@@ -300,14 +307,14 @@ data_models::LibraryProxyModel* LibraryController::getLibraryModel()
 int LibraryController::saveBookToFile(const QString& uuid, const QUrl& path)
 {
     auto result =
-        m_bookService->saveBookToFile(QUuid(uuid), path.toLocalFile());
+        m_libraryService->saveBookToFile(QUuid(uuid), path.toLocalFile());
 
     return static_cast<int>(result);
 }
 
 void LibraryController::refreshLastOpenedFlag(const QString& uuid)
 {
-    m_bookService->refreshLastOpenedDateOfBook(QUuid(uuid));
+    m_libraryService->refreshLastOpenedDateOfBook(QUuid(uuid));
 }
 
 dtos::BookDto LibraryController::getDtoFromBook(

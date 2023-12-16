@@ -138,36 +138,6 @@ Page {
                         }
 
                         Label {
-                            id: pageColorModeTitle
-                            Layout.fillWidth: true
-                            Layout.topMargin: 18
-                            text: qsTr("Page Color Mode")
-                            font.pointSize: Fonts.size13
-                            font.weight: Font.DemiBold
-                            color: Style.colorText
-                        }
-
-                        MDualToggle {
-                            id: pageColorModeSwitch
-                            property string savedValue: SettingsController.appearanceSettings.PageColorMode
-
-                            Layout.topMargin: 4
-                            leftText: "Normal"
-                            leftDisplayText: qsTr("Normal")
-                            rightText: "Inverted"
-                            rightDisplayText: qsTr("Inverted")
-                            leftSelected: savedValue === leftText
-                            rightSelected: savedValue === rightText
-
-                            // Need rebinding on reset
-                            onSavedValueChanged: savedValue === leftText ? selectLeft(
-                                                                               ) : selectRight()
-                            onToggled: newSelected => internal.saveSetting(
-                                           SettingKeys.PageColorMode,
-                                           newSelected)
-                        }
-
-                        Label {
                             id: languageTitle
                             Layout.fillWidth: true
                             Layout.topMargin: 18

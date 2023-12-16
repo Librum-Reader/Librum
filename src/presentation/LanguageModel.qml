@@ -17,4 +17,8 @@ ListModel {
         text: "Русский"
         code: "ru"
     }
+    ListElement {
+        text: "中文"
+        code: "zh"
+    }
 }

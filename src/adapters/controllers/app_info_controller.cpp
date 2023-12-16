@@ -145,7 +145,9 @@ bool AppInfoController::switchToLanguage(const QString& language)
         return false;
     }
 
-    if(!QGuiApplication::installTranslator(&m_translator))
+    // The english translation is empty since it is the default language. Thus
+    // it causes an error when trying to switch to english. Ignore it.
+    if(!QGuiApplication::installTranslator(&m_translator) && language != "en")
     {
         qWarning() << "Failed installing translator for language: " << language;
         return false;

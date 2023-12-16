@@ -227,6 +227,17 @@ void BookController::setSearchFromStart(bool newSearchFromStart)
     emit searchFromStartChanged();
 }
 
+QString BookController::getColorTheme()
+{
+    return m_bookService->getColorTheme();
+}
+
+void BookController::setColorTheme(const QString& colorTheme)
+{
+    m_bookService->setColorTheme(colorTheme);
+    emit colorThemeChanged(colorTheme);
+}
+
 FilteredTOCModel* BookController::getTableOfContents()
 {
     return m_bookService->getTableOfContents();

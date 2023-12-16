@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1" language="zh_CN">
 <context>
     <name>MAboutPage</name>
     <message>
         <location filename="../settings/MAboutPage.qml" line="33"/>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="34"/>
         <source>About this application</source>
-        <translation>Über dieses Programm</translation>
+        <translation>关于此应用</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="60"/>
         <source>Details</source>
-        <translation>Details</translation>
+        <translation>详细信息</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="69"/>
         <source>CURRENT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>AKTUELLE VERSION</translation>
+        <translation>当前版本</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="85"/>
         <source>QT VERSION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>QT VERSION</translation>
+        <translation>QT 版本</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="106"/>
         <source>Up-to date</source>
-        <translation>Aktuell</translation>
+        <translation>已为最新</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="138"/>
         <source>Creator</source>
-        <translation>Ersteller</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="147"/>
         <source>COMPANY NAME</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>FIRMEN NAME</translation>
+        <translation>公司名称</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="163"/>
         <source>WEBSITE</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>WEBSITE</translation>
+        <translation>官方网站</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="188"/>
         <source>CONTACT</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>KONTAKT</translation>
+        <translation>联系我们</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="214"/>
@@ -67,14 +67,14 @@
     <message>
         <location filename="../settings/MAboutPage.qml" line="260"/>
         <source>This App</source>
-        <translation>Dieses Programm</translation>
+        <translation>此应用</translation>
     </message>
     <message>
         <location filename="../settings/MAboutPage.qml" line="283"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
-        <translation>Librum ist hier für alle, die einfach nur ein gutes Buch genießen möchten.
-Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</translation>
+        <translation>Librum 为每个想享受一本好书的人而存在。
+我们希望您在使用时度过一段美好的时光！不妨给我们留下评价和一些反馈。</translation>
     </message>
 </context>
 <context>
@@ -83,26 +83,22 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <location filename="../registerPage/MAcceptPolicy.qml" line="48"/>
         <source>I accept the</source>
         <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
-        <translation>Ich akzeptiere die</translation>
-    </message>
-    <message>
-        <source> Terms of Service</source>
-        <translation type="vanished">AGB</translation>
+        <translation>我同意</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="50"/>
         <source>Terms of Service</source>
-        <translation>AGB</translation>
+        <translation>服务条款</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="51"/>
         <source>and the</source>
-        <translation>und</translation>
+        <translation>和</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="53"/>
         <source>Privacy Policy</source>
-        <translation>Datenschutzrichtlinien</translation>
+        <translation>隐私政策</translation>
     </message>
 </context>
 <context>
@@ -110,109 +106,109 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="68"/>
         <source>Account</source>
-        <translation>Konto</translation>
+        <translation>账户</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="85"/>
         <location filename="../settings/accountPage/MAccountPage.qml" line="464"/>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="127"/>
         <source>Profile</source>
-        <translation>Profil</translation>
+        <translation>个人资料</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="138"/>
         <source>First name</source>
-        <translation>Vorname</translation>
+        <translation>名</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="153"/>
         <source>Last name</source>
-        <translation>Nachname</translation>
+        <translation>姓</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="168"/>
         <source>Email</source>
-        <translation>Email</translation>
+        <translation>电子邮箱</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="231"/>
         <source>Change password</source>
-        <translation>Passwort ändern</translation>
+        <translation>更改密码</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="247"/>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>密码</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="268"/>
         <source>Password confirmation</source>
-        <translation>Passwort Bestätigung</translation>
+        <translation>确认密码</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="309"/>
         <source>Your data</source>
-        <translation>Deine Daten</translation>
+        <translation>您的数据</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="320"/>
         <source>Analyse your reading to make better recommendations</source>
-        <translation>Deine Lesevorlieben analysieren, um bessere Empfehlungen zu erstellen</translation>
+        <translation>分析您的阅读以提供更好的推荐</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
-        <translation>Anonym Informationen über die Bücher, die du liest teilen, um uns bei der Verbesserung von Librum zu helfen</translation>
+        <translation>匿名分享您阅读的书籍信息以帮助我们改进 Librum</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="348"/>
         <source>Collect data on crashes so that we can prevent it from happening again</source>
-        <translation>Daten bei Abstürzen erfassen um sie in Zukunft zu verhindern</translation>
+        <translation>收集崩溃信息以避免再次发生</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="361"/>
         <source>Collect data to display in your statistics</source>
-        <translation>Daten erfassen um sie in deinen Statistiken anzuzeigen</translation>
+        <translation>收集信息以在您的统计数据中展示</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="392"/>
         <source>Your Account</source>
-        <translation>Dein Konto</translation>
+        <translation>您的账户</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="407"/>
         <source>Logout</source>
-        <translation>Abmelden</translation>
+        <translation>登出</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="427"/>
         <source>Delete Your Account</source>
-        <translation>Lösche dein Konto</translation>
+        <translation>删除您的账户</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="462"/>
         <source>Whoops</source>
-        <translation>Whoops</translation>
+        <translation>哎呀</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="463"/>
         <source>It looks like you forgot to save your changes, are you sure that you dont want to save them?</source>
-        <translation>Du hast vergessen deine Änderungen zu speichern. Bist du sicher, dass du sie verwerfen möchtest?</translation>
+        <translation>看起来您忘记了保存您的修改，是否放弃修改？</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="465"/>
         <source>Don&apos;t save</source>
-        <translation>Nicht speichern</translation>
+        <translation>不保存</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="502"/>
         <location filename="../settings/accountPage/MAccountPage.qml" line="505"/>
         <source>Passwords don&apos;t match!</source>
-        <translation>Passwörter stimmen nicht überein!</translation>
+        <translation>密码不匹配！</translation>
     </message>
 </context>
 <context>
@@ -220,12 +216,12 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../addOnsPage/MAddOnsPage.qml" line="22"/>
         <source>Add-ons Page</source>
-        <translation>Erweiterungen Seite</translation>
+        <translation>插件页面</translation>
     </message>
     <message>
         <location filename="../addOnsPage/MAddOnsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation>Derzeit in Entwicklung</translation>
+        <translation>正在开发中</translation>
     </message>
 </context>
 <context>
@@ -233,37 +229,37 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="98"/>
         <source>Edit Shortcuts</source>
-        <translation>Tastenkürzel bearbeiten</translation>
+        <translation>编辑快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="115"/>
         <source>Action</source>
-        <translation>Aktion</translation>
+        <translation>动作</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="122"/>
         <source>None selected</source>
-        <translation>Keine ausgewählt</translation>
+        <translation>未选择</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="158"/>
         <source>The shortcut</source>
-        <translation>Das Tastenkürzel</translation>
+        <translation>快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="159"/>
         <source>is already used for</source>
-        <translation>wird bereits benutzt für</translation>
+        <translation>已被此动作使用：</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="177"/>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="211"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -271,11 +267,7 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBox.qml" line="48"/>
         <source>Add a tag...</source>
-        <translation>Füge einen Tag hinzu...</translation>
-    </message>
-    <message>
-        <source>ADD</source>
-        <translation type="vanished">ADD</translation>
+        <translation>添加一个标签...</translation>
     </message>
 </context>
 <context>
@@ -283,17 +275,17 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="98"/>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation>添加</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="110"/>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MAddTagBoxPopup.qml" line="119"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -301,179 +293,110 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../settings/MAppearancePage.qml" line="34"/>
         <source>Appearance</source>
-        <translation>Aussehen</translation>
+        <translation>外观</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="35"/>
         <source>Make your own experience</source>
-        <translation>Erstelle deine eigene Erfahrung</translation>
+        <translation>定制您的体验</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="51"/>
         <source>Restore Defaults</source>
-        <translation>Zurücksetzen</translation>
+        <translation>恢复默认</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="105"/>
         <source>Display</source>
-        <translation>Darstellung</translation>
+        <translation>显示</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="115"/>
         <source>Theme</source>
-        <translation>Thema</translation>
+        <translation>主题</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="127"/>
         <source>Dark</source>
-        <translation>Dunkel</translation>
+        <translation>黑暗</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="129"/>
         <source>Light</source>
-        <translation>Hell</translation>
+        <translation>明亮</translation>
     </message>
     <message>
         <source>Page Color Mode</source>
-        <translation type="vanished">Seiten Farben Modus</translation>
+        <translation type="vanished">页面颜色模式</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="vanished">Normal</translation>
+        <translation type="vanished">常规</translation>
     </message>
     <message>
         <source>Inverted</source>
-        <translation type="vanished">Invers</translation>
+        <translation type="vanished">反转</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="218"/>
         <source>Reading</source>
-        <translation>Lesen</translation>
+        <translation>阅读</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="228"/>
         <source>Page spacing</source>
-        <translation>Seiten Abstand</translation>
+        <translation>页间距</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="255"/>
         <source>Display book title in titlebar</source>
-        <translation>Den Buchtitel in der Titelleiste anzeigen</translation>
-    </message>
-    <message>
-        <source>Layout direction</source>
-        <translation type="vanished">Layoutrichtung</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="vanished">Vertikal</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="vanished">Horizontal</translation>
-    </message>
-    <message>
-        <source>Display mode</source>
-        <translation type="vanished">Darstellungs Modus</translation>
-    </message>
-    <message>
-        <source>Single Page</source>
-        <translation type="vanished">Einzelseite</translation>
-    </message>
-    <message>
-        <source>Double Page</source>
-        <translation type="vanished">Doppelseite</translation>
-    </message>
-    <message>
-        <source>Page transition</source>
-        <translation type="vanished">Seitenübergang</translation>
-    </message>
-    <message>
-        <source>Instant</source>
-        <translation type="vanished">Sofort</translation>
-    </message>
-    <message>
-        <source>Fading</source>
-        <translation type="vanished">Verblassen</translation>
-    </message>
-    <message>
-        <source>Swipe</source>
-        <translation type="vanished">Wischen</translation>
-    </message>
-    <message>
-        <source>Swap</source>
-        <translation type="vanished">Tauschen</translation>
+        <translation>在标题栏显示书名</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
-        <translation>Standard-Zoom</translation>
+        <translation>默认缩放</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
-        <translation>Markierungen</translation>
+        <translation>高亮</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="335"/>
         <source>Colors</source>
-        <translation>Farben</translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
-        <translation>Transparenz</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="vanished">Verhalten</translation>
-    </message>
-    <message>
-        <source>Smooth scrolling</source>
-        <translation type="vanished">Sanftes Scrollen</translation>
-    </message>
-    <message>
-        <source>Loop after last page</source>
-        <translation type="vanished">Nach letzter Seite wiederholen</translation>
-    </message>
-    <message>
-        <source>Cursor mode</source>
-        <translation type="vanished">Mauszeiger-Modus</translation>
-    </message>
-    <message>
-        <source>Hidden after delay</source>
-        <translation type="vanished">Versteckt nach Verzögerung</translation>
-    </message>
-    <message>
-        <source>Always visible</source>
-        <translation type="vanished">Immer sichtbar</translation>
+        <translation>不透明度</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
-        <translation>Zurücksetzen?</translation>
+        <translation>重置设置？</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="511"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
-es gibt keine Möglichkeit sie wiederherzustellen!</translation>
+        <translation>重置您的设置是一个永久性的操作，您将无法恢复！</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="512"/>
         <source>No, Keep</source>
-        <translation>Nein, behalte</translation>
+        <translation>保持</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="513"/>
         <source>Yes, Reset</source>
-        <translation>Ja, zurücksetzen</translation>
+        <translation>重置</translation>
     </message>
 </context>
 <context>
@@ -481,42 +404,42 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="38"/>
         <source>Behavior</source>
-        <translation>Verhalten</translation>
+        <translation>行为</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="39"/>
         <source>Change the way Librum works</source>
-        <translation>Ändere die Arbeitsweise von Librum</translation>
+        <translation>修改 Librum 的工作方式</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="55"/>
         <source>Restore Defaults</source>
-        <translation>Zurücksetzen</translation>
+        <translation>恢复默认</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="85"/>
         <source>Books</source>
-        <translation>Bücher</translation>
+        <translation>书籍</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="95"/>
         <source>Cursor mode</source>
-        <translation>Mauszeiger-Modus</translation>
+        <translation>鼠标</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Hidden after delay</source>
-        <translation>Versteckt nach Verzögerung</translation>
+        <translation>超时后隐藏</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="107"/>
         <source>Always visible</source>
-        <translation>Immer sichtbar</translation>
+        <translation>总是可见</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="132"/>
         <source>Hide cursor after delay</source>
-        <translation>Mauszeiger Verstecken</translation>
+        <translation>超时时间</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="157"/>
@@ -526,55 +449,53 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="169"/>
         <source>Include new lines in copied text</source>
-        <translation>Neue Zeilen im kopierten Text beibehalten</translation>
+        <translation>在复制的文本中包含新行</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="181"/>
         <source>ON</source>
-        <translation>AN</translation>
+        <translation>开</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="183"/>
         <source>OFF</source>
-        <translation>AUS</translation>
+        <translation>关</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation>Zurücksetzen?</translation>
+        <translation>重置设置？</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
         <source>Resetting your settings is a permanent action, there
  will be no way to restore them!</source>
-        <translation>Einstellungen zurückzusetzen ist eine endgültige Aktion,
-es gibt keine Möglichkeit sie wiederherzustellen!</translation>
+        <translation>重置您的设置是一个永久性的操作，您将无法恢复！</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="207"/>
         <source>No, Keep</source>
-        <translation>Nein, behalte</translation>
+        <translation>保持</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="208"/>
         <source>Yes, Reset</source>
-        <translation>Ja, zurücksetzen</translation>
+        <translation>重置</translation>
     </message>
 </context>
 <context>
     <name>MBook</name>
     <message>
-        <location filename="../homePage/MBook.qml" line="175"/>
-        <location filename="../homePage/MBook.qml" line="190"/>
+        <location filename="../homePage/MBook.qml" line="174"/>
+        <location filename="../homePage/MBook.qml" line="189"/>
         <source>Unknown</source>
-        <translation>Unbekannt</translation>
+        <translation>未知</translation>
     </message>
     <message>
-        <location filename="../homePage/MBook.qml" line="312"/>
+        <location filename="../homePage/MBook.qml" line="288"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
-        <translation>Dein Buch wurde nicht in die Cloud geladen.
-Entweder bist du offline oder dein Speicher ist voll.</translation>
+        <translation>您的书籍未上传到云端，您已离线或您的储存空间已满。</translation>
     </message>
 </context>
 <context>
@@ -582,23 +503,23 @@ Entweder bist du offline oder dein Speicher ist voll.</translation>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="70"/>
         <source>Book details</source>
-        <translation>Buch details</translation>
+        <translation>详细信息</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
         <source>Change</source>
-        <translation>Ändern</translation>
+        <translation>修改</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="188"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="542"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="236"/>
         <source>Title</source>
-        <translation>Titel</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="241"/>
@@ -607,136 +528,79 @@ Entweder bist du offline oder dein Speicher ist voll.</translation>
         <location filename="../homePage/MBookDetailsPopup.qml" line="389"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="574"/>
         <source>Unknown</source>
-        <translation>Unbekannt</translation>
+        <translation>未知</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
         <source>Authors</source>
-        <translation>Autoren</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="274"/>
         <source>Pages</source>
-        <translation>Seiten</translation>
+        <translation>页数</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="292"/>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
         <source>Document creator</source>
-        <translation>Dokument Ersteller</translation>
+        <translation>创作者</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
         <source>Creation date</source>
-        <translation>Erstellungsdatum</translation>
+        <translation>创建日期</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="403"/>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
         <source>Document size</source>
-        <translation>Dokument Größe</translation>
+        <translation>文件大小</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="440"/>
         <source>Added</source>
-        <translation>Hinzugefügt</translation>
+        <translation>添加日期</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="458"/>
         <source>Last opened</source>
-        <translation>Zuletzt geöffnet</translation>
+        <translation>最后打开</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="492"/>
         <source>Apply</source>
-        <translation>Anwenden</translation>
+        <translation>应用</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="517"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Delete Book?</source>
-        <translation type="vanished">Buch Löschen?</translation>
-    </message>
-    <message>
-        <source>Deleting a book is a permanent action, no one will be
- able to restore it afterwards!</source>
-        <translation type="vanished">Das Löschen eines Buches ist eine dauerhafte Aktion,
-niemand wird es wiederherstellen können!</translation>
-    </message>
-    <message>
-        <source>No, Keep Book</source>
-        <translation type="vanished">Nein, Buch behalten</translation>
-    </message>
-    <message>
-        <source>Yes, Delete Book</source>
-        <translation type="vanished">Ja, Buch löschen</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
         <source>Select</source>
-        <translation>Auswählen</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
         <source>All files</source>
-        <translation>Alle Dokumente</translation>
+        <translation>全部文件</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
         <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
         <source>files</source>
-        <translation>Dokumente</translation>
-    </message>
-</context>
-<context>
-    <name>MBookMultiSelectRightClickPopup</name>
-    <message>
-        <source>Save to files</source>
-        <translation type="obsolete">Datei speichern</translation>
-    </message>
-    <message>
-        <source>Read book</source>
-        <translation type="obsolete">Buch lesen</translation>
-    </message>
-    <message>
-        <source>Book details</source>
-        <translation type="obsolete">Buch details</translation>
-    </message>
-    <message>
-        <source>Manage tags</source>
-        <translation type="obsolete">Tags verwalten</translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
-        <source>Mark as read</source>
-        <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation type="unfinished">Gelesen</translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
-        <source>Uninstall books</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
-        <source>Delete books</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove book</source>
-        <translation type="obsolete">Buch löschen</translation>
+        <translation>文件</translation>
     </message>
 </context>
 <context>
@@ -744,38 +608,38 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="31"/>
         <source>Download</source>
-        <translation>Download</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="42"/>
         <source>Read book</source>
-        <translation>Buch lesen</translation>
+        <translation>阅读此书</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="51"/>
         <source>Book details</source>
-        <translation>Buch details</translation>
+        <translation>详细信息</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
         <source>Save to files</source>
-        <translation>Datei speichern</translation>
+        <translation>保存到文件</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
-        <translation>Tags verwalten</translation>
+        <translation>管理标签</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation>Gelesen</translation>
+        <translation>标记为已读</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
         <source>Remove book</source>
-        <translation>Buch löschen</translation>
+        <translation>移除此书</translation>
     </message>
 </context>
 <context>
@@ -783,38 +647,38 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="29"/>
         <source>Bookmarks</source>
-        <translation>Lesezeichen</translation>
+        <translation>书签</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="54"/>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="137"/>
         <source>Add Bookmark</source>
-        <translation>Lesezeichen hinzufügen</translation>
+        <translation>添加书签</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="191"/>
         <source>New Bookmark</source>
-        <translation>Neues Lesezeichen</translation>
+        <translation>新书签</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="155"/>
         <source>Follow</source>
         <extracomment>Context: &quot;Follow&quot; the bookmark (go to its page)</extracomment>
-        <translation>Folgen</translation>
+        <translation>前往</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="167"/>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="179"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -823,12 +687,12 @@ niemand wird es wiederherstellen können!</translation>
         <location filename="../readingPage/MChapterSidebar.qml" line="36"/>
         <source>Contents</source>
         <extracomment>Context: Contents of the book, also known as outline</extracomment>
-        <translation>Inhalte</translation>
+        <translation>目录</translation>
     </message>
     <message>
         <location filename="../readingPage/MChapterSidebar.qml" line="61"/>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>搜索</translation>
     </message>
 </context>
 <context>
@@ -836,7 +700,7 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
         <source>Any</source>
-        <translation>Beliebig</translation>
+        <translation>任意</translation>
     </message>
 </context>
 <context>
@@ -844,37 +708,37 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="65"/>
         <source>Confirm Account Deletion</source>
-        <translation>Bestätige Konto Löschung</translation>
+        <translation>确认删除账户</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
-        <translation>Das Löschen deines Kontos ist eine endgültige Aktion.&lt;br&gt;Nachdem du dein Konto gelöscht hast, gibt es &lt;b&gt;keinen&lt;/b&gt; Weg zurück.</translation>
+        <translation>删除您的账户是不可逆的操作。&lt;br&gt;一旦您删除了您的账户，将&lt;b&gt;无法&lt;/b&gt;挽回，请确认。</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
         <source>Your Email</source>
-        <translation>Deine Email</translation>
+        <translation>您的邮箱</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="92"/>
         <source>Confirm the deletion by entering your Account&apos;s email.</source>
-        <translation>Bestätige die Löschung deines Accounts indem du deine Email eingibst.</translation>
+        <translation>输入您的邮箱以确认删除。</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="111"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="127"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>删除</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
         <source>Your email is wrong</source>
-        <translation>Deine Email ist falsch</translation>
+        <translation>邮箱错误</translation>
     </message>
 </context>
 <context>
@@ -882,22 +746,22 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="104"/>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>搜索</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="356"/>
         <source>No definitions found</source>
-        <translation>Keine Definition gefunden</translation>
+        <translation>未找到定义</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="364"/>
         <source>Search online</source>
-        <translation>Suche online</translation>
+        <translation>在线搜索</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="395"/>
         <source>Source</source>
-        <translation>Quelle</translation>
+        <translation>来源</translation>
     </message>
 </context>
 <context>
@@ -905,42 +769,42 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="82"/>
         <source>Download book</source>
-        <translation>Buch Download</translation>
+        <translation>下载此书</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="138"/>
         <source>Title</source>
-        <translation>Titel</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="155"/>
         <source>Authors</source>
-        <translation>Autoren</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="172"/>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="189"/>
         <source>Downloads</source>
-        <translation>Downloads</translation>
+        <translation>下载次数</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="207"/>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="237"/>
         <source>Download</source>
-        <translation>Download</translation>
+        <translation>下载</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MDownloadBookPopup.qml" line="263"/>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation>取消</translation>
     </message>
 </context>
 <context>
@@ -948,12 +812,12 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../modules/CustomComponents/MDualToggle.qml" line="15"/>
         <source>Left</source>
-        <translation>Links</translation>
+        <translation>左</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MDualToggle.qml" line="17"/>
         <source>Right</source>
-        <translation>Rechts</translation>
+        <translation>右</translation>
     </message>
 </context>
 <context>
@@ -961,12 +825,12 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="36"/>
         <source>Quite empty here, what about adding your first book?</source>
-        <translation>Ganz schön leer hier. Bereit für dein erstes Buch?</translation>
+        <translation>这里空无一物，尝试添加您的第一本书？</translation>
     </message>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
         <source>Add book</source>
-        <translation>Buch hinzufügen</translation>
+        <translation>添加书籍</translation>
     </message>
 </context>
 <context>
@@ -975,77 +839,77 @@ niemand wird es wiederherstellen können!</translation>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>You have reached your daily limit.</source>
         <extracomment>Make sure that the words make a valid sentence</extracomment>
-        <translation>Du hast dein tägliches Limit erreicht.</translation>
+        <translation>您已到达当日限制。</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>Click</source>
-        <translation>Klick</translation>
+        <translation>点击</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>here</source>
-        <translation>hier</translation>
+        <translation>此处</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="53"/>
         <source>to learn more.</source>
-        <translation>um mehr zu lernen.</translation>
+        <translation>发现更多。</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
         <source>Oops! The text is too long. Please shorten your selection.</source>
-        <translation>Oops! Der Text ist zu lang. Bitte kürze deine Auswahl.</translation>
+        <translation>哎呀！文本太长了，请少选一些。</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="67"/>
         <source>Explain</source>
-        <translation>Erklären</translation>
+        <translation>解释</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="71"/>
         <source>Explain like I&apos;m five</source>
-        <translation>Ekläre als wäre ich Fünf</translation>
+        <translation>通俗解释</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="75"/>
         <source>Summarize</source>
-        <translation>Zusammenfassen</translation>
+        <translation>总结</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="79"/>
         <source>Give more information</source>
-        <translation>Gib mehr Informationen</translation>
+        <translation>提供更多信息</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="83"/>
         <source>Explain visually</source>
-        <translation>Visuell erklären</translation>
+        <translation>直观解释</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="113"/>
         <source>Mode</source>
-        <translation>Modus</translation>
+        <translation>模式</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="121"/>
         <source>None selected</source>
-        <translation>Keins ausgewählt</translation>
+        <translation>未选中内容</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="144"/>
         <source>Request</source>
-        <translation>Anfrage</translation>
+        <translation>请求</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="283"/>
         <source>Note: AI responses can be inaccurate</source>
-        <translation>Achtung: KI-Antworten können ungenau sein</translation>
+        <translation>注意：AI的回答可能并不完全准确</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="299"/>
         <source>Ask</source>
-        <translation>Fragen</translation>
+        <translation>回答</translation>
     </message>
 </context>
 <context>
@@ -1053,7 +917,7 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByButton.qml" line="46"/>
         <source>Filters</source>
-        <translation>Filter</translation>
+        <translation>过滤</translation>
     </message>
 </context>
 <context>
@@ -1061,42 +925,42 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="72"/>
         <source>e.g. Uncle bob</source>
-        <translation>z.B. Onkel Bob</translation>
+        <translation>例：Uncle bob</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="75"/>
         <source>Authors</source>
-        <translation>Autoren</translation>
+        <translation>作者</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>e.g. 2d ago</source>
-        <translation>z.B. vor 2d</translation>
+        <translation>例：2d ago</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="102"/>
         <source>Added</source>
-        <translation>Hinzugefügt</translation>
+        <translation>添加日期</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="118"/>
         <source>Read</source>
-        <translation>Gelesen</translation>
+        <translation>已读完</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="136"/>
         <source>Unread</source>
-        <translation>Nicht gelesen</translation>
+        <translation>未读完</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="157"/>
         <source>Format</source>
-        <translation>Format</translation>
+        <translation>格式</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="158"/>
         <source>Any</source>
-        <translation>Beliebig</translation>
+        <translation>任意</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="168"/>
@@ -1121,17 +985,17 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="191"/>
         <source>Only Books</source>
-        <translation>Nur Bücher</translation>
+        <translation>仅书籍</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="209"/>
         <source>Only Files</source>
-        <translation>Nur Dateien</translation>
+        <translation>仅文件</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="230"/>
         <source>Apply Filter</source>
-        <translation>Filter Anwenden</translation>
+        <translation>应用</translation>
     </message>
 </context>
 <context>
@@ -1139,31 +1003,27 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="75"/>
         <source>Forgot Password</source>
-        <translation>Passwort Vergessen</translation>
+        <translation>忘记密码</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="87"/>
         <source>Enter your email and we&apos;ll send you a link to reset your password</source>
-        <translation>Gib deine E-Mail-Adresse ein und wir sicken dir einen Link um dein Passwort zurückzusetzen</translation>
+        <translation>输入您的邮箱，我们将向您发送一条链接来重设您的密码</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="130"/>
         <source>Send Email</source>
-        <translation>Email senden</translation>
+        <translation>发送邮件</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="147"/>
         <source>Back to Login</source>
-        <translation>Zurrück zum Login</translation>
+        <translation>登录</translation>
     </message>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="173"/>
         <source>Email sent! Keep an eye on your inbox</source>
-        <translation>Email gesendet! Behalte dein Postfach im Auge</translation>
-    </message>
-    <message>
-        <source>Email sent! Keep an eye on your inbox.</source>
-        <translation type="vanished">Email gesendet! Behalte dein Postfach im Auge</translation>
+        <translation>邮件已发送，请注意查收</translation>
     </message>
 </context>
 <context>
@@ -1179,79 +1039,22 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="22"/>
         <source>No books were found</source>
-        <translation>Keine Bücher wurden gefunden</translation>
+        <translation>未找到任何书籍</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="29"/>
         <source>Couldn&apos;t load free books. Please, check your network connection</source>
-        <translation>Bücher konnten nicht geladen werden. Bitte überprüfe deine Netzwerkverbindung</translation>
+        <translation>无法加载免费书籍。请检查您的网络连接</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="81"/>
         <source>Free books</source>
-        <translation>Kostenlose Bücher</translation>
+        <translation>免费书籍</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="82"/>
         <source>Choose from over 70,000 books</source>
-        <translation>Wähle aus über 70.000 Büchern</translation>
-    </message>
-</context>
-<context>
-    <name>MGeneralSettingsPage</name>
-    <message>
-        <source>General settings</source>
-        <translation type="vanished">Systemeinstellungen</translation>
-    </message>
-    <message>
-        <source>Change the way Librum works</source>
-        <translation type="vanished">Ändere die Arbeitsweise von Librum</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation type="vanished">Zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Books</source>
-        <translation type="vanished">Bücher</translation>
-    </message>
-    <message>
-        <source>Open books after creation</source>
-        <translation type="vanished">Öffne Bücher nach Erstellung</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="obsolete">Verhalten</translation>
-    </message>
-    <message>
-        <source>Cursor mode</source>
-        <translation type="obsolete">Mauszeiger-Modus</translation>
-    </message>
-    <message>
-        <source>Hidden after delay</source>
-        <translation type="obsolete">Versteckt nach Verzögerung</translation>
-    </message>
-    <message>
-        <source>Always visible</source>
-        <translation type="obsolete">Immer sichtbar</translation>
-    </message>
-    <message>
-        <source>Reset settings?</source>
-        <translation type="vanished">Zurücksetzen?</translation>
-    </message>
-    <message>
-        <source>Resetting your settings is a permanent action, there
- will be no way to restore them!</source>
-        <translation type="vanished">Einstellungen zurückzusetzen ist eine endgültige Aktion,
-es gibt keine Möglichkeit sie wiederherzustellen!</translation>
-    </message>
-    <message>
-        <source>No, Keep</source>
-        <translation type="vanished">Nein, behalte</translation>
-    </message>
-    <message>
-        <source>Yes, Reset</source>
-        <translation type="vanished">Ja, zurücksetzen</translation>
+        <translation>在超过 7,0000 本书中选择</translation>
     </message>
 </context>
 <context>
@@ -1259,132 +1062,129 @@ es gibt keine Möglichkeit sie wiederherzustellen!</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="69"/>
         <source>A new version is available!</source>
-        <translation>Eine neue Version ist verfügbar!</translation>
+        <translation>有新版本可用！</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="71"/>
         <source>Update Now</source>
-        <translation>Aktualisieren</translation>
+        <translation>立即更新</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="119"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
-        <translation>Start</translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="120"/>
         <source>You have %1 books</source>
-        <translation>Du hast %1 Bücher</translation>
+        <translation>您有 %1 本书</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="136"/>
         <source>Add books</source>
-        <translation>Bücher hinzufügen</translation>
+        <translation>添加书籍</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="355"/>
         <source>Remove Book?</source>
-        <translation>Buch Löschen?</translation>
+        <translation>移除此书？</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="356"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation>Das Löschen eines Buches ist eine dauerhafte Aktion,
-niemand wird es wiederherstellen können!</translation>
+        <translation>删除书籍是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="357"/>
         <source>Remove from Device</source>
-        <translation>Vom Gerät entfernen</translation>
+        <translation>从设备上移除</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="358"/>
         <source>Delete Everywhere</source>
-        <translation>Überall Löschen</translation>
+        <translation>从所有地方删除</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="395"/>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>保存</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="410"/>
         <source>Limit Reached</source>
-        <translation>Limit erreicht</translation>
+        <translation>到达限制</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="411"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
-        <translation>Du hast dein Upload-Limit erreicht.
-Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.</translation>
+        <translation>您已达到您的上传限制。删除未使用的书籍以释放空间或更新。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="412"/>
         <location filename="../homePage/MHomePage.qml" line="459"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>好</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="413"/>
         <source>Upgrade</source>
-        <translation>Upgrade</translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="428"/>
         <source>Book already exists</source>
-        <translation>Buch existiert bereits</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="429"/>
         <source>It looks like this book already exists in your library:</source>
-        <translation>Dieses Buch ist bereits in deiner Bibliothek:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="432"/>
         <source>Are you sure you that want to add it again?
 </source>
-        <translation>Willst du es erneut hinzufügen?
-</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="435"/>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation type="unfinished">添加</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="436"/>
         <source>Don&apos;t add</source>
-        <translation>Nicht hinzufügen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>
         <source>Unsupported File</source>
-        <translation>Nicht unterstützt</translation>
+        <translation>不支持的文件</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="458"/>
         <source>Oops! This file is not supported by Librum.</source>
-        <translation>Oops! Dieses Format wird von Librum nicht unterstützt.</translation>
+        <translation>哎呀！Librum 不支持这个文件</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="474"/>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation>导入</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="477"/>
         <source>All files</source>
-        <translation>Alle Dokumente</translation>
+        <translation>所有文件</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="478"/>
         <location filename="../homePage/MHomePage.qml" line="479"/>
         <location filename="../homePage/MHomePage.qml" line="480"/>
         <source>files</source>
-        <translation>Dokumente</translation>
+        <translation>文件</translation>
     </message>
 </context>
 <context>
@@ -1392,62 +1192,62 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="137"/>
         <source>Welcome back!</source>
-        <translation>Willkommen zurrück!</translation>
+        <translation>欢迎回来！</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="147"/>
         <source>Log into your account</source>
-        <translation>Melde dich in deinem Konto an</translation>
+        <translation>登录您的账户</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="158"/>
         <source>Email</source>
-        <translation>Email</translation>
+        <translation>电子邮箱</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="173"/>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>密码</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="219"/>
         <source>Remember me</source>
-        <translation>Angemeldet bleiben</translation>
+        <translation>记住我</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="239"/>
         <source>Forgot password?</source>
-        <translation>Passwort vergessen?</translation>
+        <translation>忘记密码？</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="266"/>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation>登录</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="291"/>
         <source>Don&apos;t have an account? Register</source>
-        <translation>Noch kein Konto? Registrieren</translation>
+        <translation>还没有账户？注册</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="310"/>
         <source>We&apos;re Sorry</source>
-        <translation>Es tut uns leid</translation>
+        <translation>未尝抱歉</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="311"/>
         <source>Logging you in failed, please try again later.</source>
-        <translation>Die Anmeldung ist fehlgeschlagen, bitte versuche es später erneut.</translation>
+        <translation>登录失败，请稍候重试。</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="312"/>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>好</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="313"/>
         <source>Report</source>
-        <translation>Melden</translation>
+        <translation>报告</translation>
     </message>
 </context>
 <context>
@@ -1455,17 +1255,17 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="31"/>
         <source>TAGS</source>
-        <translation>TAGS</translation>
+        <translation>标签</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="69"/>
         <source>Manage Tags</source>
-        <translation>Tags verwalten</translation>
+        <translation>管理标签</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
         <source>Done</source>
-        <translation>Fertig</translation>
+        <translation>完成</translation>
     </message>
 </context>
 <context>
@@ -1473,12 +1273,12 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="23"/>
         <source>No book satisfies the filter conditions</source>
-        <translation>Kein Buch erfüllt die Filterbedingungen</translation>
+        <translation>没有书籍满足过滤条件</translation>
     </message>
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="37"/>
         <source>Remove Filters</source>
-        <translation>Filter entfernen</translation>
+        <translation>移除过滤</translation>
     </message>
 </context>
 <context>
@@ -1486,12 +1286,12 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
         <source>OFF</source>
-        <translation>AUS</translation>
+        <translation>关</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
         <source>ON</source>
-        <translation>AN</translation>
+        <translation>开</translation>
     </message>
 </context>
 <context>
@@ -1499,60 +1299,40 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="48"/>
         <source>Sync</source>
-        <translation>Sync</translation>
+        <translation>同步</translation>
     </message>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="68"/>
         <source>Manage Profile</source>
-        <translation>Profil verwalten</translation>
+        <translation>管理个人资料</translation>
     </message>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="87"/>
         <source>Logout</source>
-        <translation>Abmelden</translation>
+        <translation>登出</translation>
     </message>
 </context>
 <context>
     <name>MReadingOptionsPopup</name>
     <message>
-        <source>Read out (TTS)</source>
-        <translation type="vanished">Laut lesen (TTS)</translation>
-    </message>
-    <message>
-        <source>Continuous pages</source>
-        <translation type="vanished">Kontinuierliche Seiten</translation>
-    </message>
-    <message>
-        <source>Display vertically</source>
-        <translation type="vanished">Vertikal anzeigen</translation>
-    </message>
-    <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
-        <translation>Farben umkehren</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Inverted</source>
-        <translation type="vanished">Invers</translation>
+        <translation>反转颜色</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
         <source>Sync book</source>
-        <translation>Buch synchronisieren</translation>
+        <translation>同步书籍</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="165"/>
         <source>More options</source>
-        <translation>Mehr Optionen</translation>
+        <translation>更多选项</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="186"/>
         <source>Save</source>
-        <translation>Speichern</translation>
+        <translation>保存</translation>
     </message>
 </context>
 <context>
@@ -1560,22 +1340,22 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="92"/>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation>选项</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="141"/>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation>查找</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="168"/>
         <source>Next</source>
-        <translation>Nächstes</translation>
+        <translation>下一个</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbar.qml" line="187"/>
         <source>Previous</source>
-        <translation>Zurück</translation>
+        <translation>上一个</translation>
     </message>
 </context>
 <context>
@@ -1583,17 +1363,17 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="52"/>
         <source>From start</source>
-        <translation>Vom Start</translation>
+        <translation>从开始处</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
-        <translation>Groß-/Kleinschreibung beachten</translation>
+        <translation>匹配大小写</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
         <source>Whole words</source>
-        <translation>Ganze Wörter</translation>
+        <translation>全字匹配</translation>
     </message>
 </context>
 <context>
@@ -1601,13 +1381,13 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="14"/>
         <source>Unknown name</source>
-        <translation>Unbekannter Name</translation>
+        <translation>未知名称</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingToolBar.qml" line="188"/>
         <source>of</source>
         <extracomment>As in 21 &quot;of&quot; 400</extracomment>
-        <translation>von</translation>
+        <translation>/</translation>
     </message>
 </context>
 <context>
@@ -1616,13 +1396,13 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
         <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="25"/>
         <source>Key</source>
         <extracomment>As in key on the keyboard</extracomment>
-        <translation>Taste</translation>
+        <translation>快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MRecordKeyBox.qml" line="104"/>
         <source>Press to record</source>
         <extracomment>As in recording a key that is pressed on the keyboard</extracomment>
-        <translation>Drücke zum Aufnehmen</translation>
+        <translation>按下以输入</translation>
     </message>
 </context>
 <context>
@@ -1630,81 +1410,76 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="79"/>
         <source>Welcome!</source>
-        <translation>Willkommen!</translation>
+        <translation>欢迎！</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="90"/>
         <source>Your credentials are only used to authenticate yourself. Everything will be stored in a secure database.</source>
-        <translation>Deine Daten werden nur zur Authentifizierung verwendet. Alles wird sicher gespeichert.</translation>
+        <translation>您的凭证仅用于验证您的身份。所有信息都将被存储在一个安全的数据库中。</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="120"/>
         <source>First name</source>
-        <translation>Vorname</translation>
+        <translation>名</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="133"/>
         <source>Last name</source>
-        <translation>Nachname</translation>
+        <translation>姓</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="148"/>
         <source>Email</source>
-        <translation>Email</translation>
+        <translation>电子邮箱</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="162"/>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>密码</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="177"/>
         <source>Confirmation password</source>
-        <translation>Passwort erneut eingeben</translation>
+        <translation>确认密码</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="215"/>
         <source>Let&apos;s start</source>
-        <translation>Lass uns loslegen</translation>
+        <translation>让我们开始</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="237"/>
         <source>Already have an account? Login</source>
-        <translation>Du hast bereits ein Konto? Einloggen</translation>
+        <translation>已有账户？登录</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="263"/>
         <source>Confirm Your Email</source>
-        <translation>Email bestätigen</translation>
+        <translation>确认您的邮箱</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="264"/>
         <source>You&apos;re are almost ready to go!
 Confirm your email by clicking the link we sent you.</source>
-        <translation>Du bist fast bereit loszulegen!
-Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</translation>
+        <translation>已经快好了！点击我们发送给您的链接以确认你的邮箱。</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="265"/>
         <source>Resend</source>
-        <translation>Nochmal</translation>
+        <translation>重新发送</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="296"/>
         <source>Passwords don&apos;t match</source>
-        <translation>Passwörter stimmen nicht überein</translation>
+        <translation>密码不匹配</translation>
     </message>
 </context>
 <context>
     <name>MSearchButton</name>
     <message>
-        <source>Search for Book</source>
-        <translation type="vanished">Suche nach Buch</translation>
-    </message>
-    <message>
         <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
-        <translation>Suche nach Büchern</translation>
+        <translation>搜索书籍</translation>
     </message>
 </context>
 <context>
@@ -1712,17 +1487,17 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
         <source>Click to select an image or drop it into in this area</source>
-        <translation>Klicke, um ein Bild auszuwählen, oder ziehe es in diesen Bereich</translation>
+        <translation>点击选择一张图片或拖动图片到此区域</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="155"/>
         <source>All files</source>
-        <translation>Alle Dokumente</translation>
+        <translation>全部文件</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="155"/>
         <source>files</source>
-        <translation>Dokumente</translation>
+        <translation>文件</translation>
     </message>
 </context>
 <context>
@@ -1730,27 +1505,27 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="128"/>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation>复制</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="141"/>
         <source>Highlight</source>
-        <translation>Markieren</translation>
+        <translation>高亮</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="158"/>
         <source>Look Up</source>
-        <translation>Nachgucken</translation>
+        <translation>查找</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="242"/>
         <source>Explain</source>
-        <translation>Erklären</translation>
+        <translation>解释</translation>
     </message>
     <message>
         <location filename="../readingPage/MSelectionOptionsPopup.qml" line="262"/>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation>移除</translation>
     </message>
 </context>
 <context>
@@ -1758,63 +1533,59 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="55"/>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>设置</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="74"/>
         <source>GLOBAL SETTINGS</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>GLOBALE EINSTELLUNGEN</translation>
+        <translation>全局设置</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="90"/>
         <source>About</source>
-        <translation>Über</translation>
+        <translation>关于</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="106"/>
         <source>Appearance</source>
-        <translation>Aussehen</translation>
+        <translation>外观</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="122"/>
         <source>Behavior</source>
-        <translation>Verhalten</translation>
+        <translation>行为</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="139"/>
         <source>Shortcuts</source>
-        <translation>Tastenkürzel</translation>
+        <translation>快捷键</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="155"/>
         <source>Updates</source>
-        <translation>Updates</translation>
-    </message>
-    <message>
-        <source>General Settings</source>
-        <translation type="vanished">Systemeinstellungen</translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
         <source>USER &amp; ACCOUNT</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>BENUTZER &amp; KONTO</translation>
+        <translation>用户和账户</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="182"/>
         <source>Account</source>
-        <translation>Konto</translation>
+        <translation>账户</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="198"/>
         <source>Storage</source>
-        <translation>Speicher</translation>
+        <translation>存储</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="215"/>
         <source>Support us</source>
-        <translation>Unterstütze uns</translation>
+        <translation>支持我们</translation>
     </message>
 </context>
 <context>
@@ -1822,7 +1593,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/shortcutsPage/MShortcutDelegate.qml" line="65"/>
         <source>None</source>
-        <translation>Keins</translation>
+        <translation>无</translation>
     </message>
 </context>
 <context>
@@ -1830,34 +1601,34 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="39"/>
         <source>Shortcuts</source>
-        <translation>Tastenkürzel</translation>
+        <translation>快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="40"/>
         <source>Make your own experience</source>
-        <translation>Erstelle deine eigene Erfahrung</translation>
+        <translation>定制您的体验</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="57"/>
         <source>Edit shortcut</source>
-        <translation>Tastenkürzel bearbeiten</translation>
+        <translation>编辑快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="106"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>AKTION</translation>
+        <translation>动作</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="120"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
-        <translation>TASTENKÜRZEL</translation>
+        <translation>快捷键</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
         <source>Search for shortcuts</source>
-        <translation>Suche nach Tastenkürzel</translation>
+        <translation>搜索快捷键</translation>
     </message>
 </context>
 <context>
@@ -1865,39 +1636,35 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../sidebar/MSidebar.qml" line="123"/>
         <source>Free books</source>
-        <translation>Gratis Bücher</translation>
+        <translation>免费书籍</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="145"/>
         <source>Home</source>
-        <translation>Start</translation>
+        <translation>主页</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="156"/>
         <source>Statistics</source>
-        <translation>Statistiken</translation>
+        <translation>统计数据</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="176"/>
         <source>Add-ons</source>
-        <translation>Erweiterungen</translation>
+        <translation>插件</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="187"/>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>设置</translation>
     </message>
 </context>
 <context>
     <name>MSortByButton</name>
     <message>
-        <source>Sort by</source>
-        <translation type="vanished">Sortieren nach</translation>
-    </message>
-    <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
-        <translation>Sortieren</translation>
+        <translation>排序</translation>
     </message>
 </context>
 <context>
@@ -1905,27 +1672,27 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="65"/>
         <source>Recently added</source>
-        <translation>Kürzlich hinzugefügt</translation>
+        <translation>最近添加</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="69"/>
         <source>Recently read</source>
-        <translation>Kürzlich gelesen</translation>
+        <translation>最近阅读</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="73"/>
         <source>Progress</source>
-        <translation>Fortschritt</translation>
+        <translation>进度</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="77"/>
         <source>Book (A-Z)</source>
-        <translation>Bücher (A-Z)</translation>
+        <translation>书名 (A-Z)</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
         <source>Authors (A-Z)</source>
-        <translation>Autoren (A-Z)</translation>
+        <translation>作者 (A-Z)</translation>
     </message>
 </context>
 <context>
@@ -1933,12 +1700,12 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../statisticsPage/MStatisticsPage.qml" line="22"/>
         <source>Statistics Page</source>
-        <translation>Statistikseite</translation>
+        <translation>统计数据页面</translation>
     </message>
     <message>
         <location filename="../statisticsPage/MStatisticsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation>Derzeit in Entwicklung</translation>
+        <translation>正在开发中</translation>
     </message>
 </context>
 <context>
@@ -1946,87 +1713,87 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../settings/MStoragePage.qml" line="42"/>
         <source>Storage</source>
-        <translation>Speicher</translation>
+        <translation>存储</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="43"/>
         <source>Your storage</source>
-        <translation>Dein Speicher</translation>
+        <translation>您的存储空间</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="59"/>
         <location filename="../settings/MStoragePage.qml" line="152"/>
         <source>Upgrade</source>
-        <translation>Upgrade</translation>
+        <translation>升级</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="112"/>
         <source>YOUR TIER</source>
         <extracomment>Keep capitalized (&quot;TIER&quot; as in subscription)</extracomment>
-        <translation>DEIN ABO</translation>
+        <translation>您的套餐</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="123"/>
         <source>BASIC</source>
         <extracomment>Keep capitalized (&quot;BASIC&quot; is the name of the tier)</extracomment>
-        <translation>Basis</translation>
+        <translation>基础</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Warum wir mehrere Abos anbieten</translation>
+        <translation>了解我们为什么提供多个套餐</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
         <source>USED STORAGE</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation>BENUTZTER SPEICHERPLATZ</translation>
+        <translation>已用存储空间</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="234"/>
         <source>Used Storage</source>
-        <translation>Benutzter Speicherplatz</translation>
+        <translation>已用存储空间</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="261"/>
         <source>Remaining Storage</source>
-        <translation>Verfügbarer Speicherplatz</translation>
+        <translation>剩余存储空间</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="317"/>
         <source>YOUR BOOKS</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation>DEINE BÜCHER</translation>
+        <translation>您的书籍</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="336"/>
         <source>Books in your Library</source>
-        <translation>Bücher in deiner Bibliothek</translation>
+        <translation>您的书籍</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="355"/>
         <source>Upgrade Your Account</source>
-        <translation>Upgrade dein Konto</translation>
+        <translation>升级您的账户</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>We don&apos;t offer upgrading options at the moment.</source>
-        <translation>Wir bieten derzeit keine upgrade Optionen an.</translation>
+        <translation>我们当前不提供升级选项。</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>If you require additional storage, please contact us at</source>
-        <translation>Wenn du mehr Speicher benötigst, schreib uns unter</translation>
+        <translation>如果您需要额外的额外的存储空间，请联系我们</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="359"/>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="360"/>
         <source>Email Us</source>
-        <translation>Schreib uns</translation>
+        <translation>发送邮件</translation>
     </message>
 </context>
 <context>
@@ -2035,45 +1802,43 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <location filename="../settings/MSupportUsPage.qml" line="33"/>
         <location filename="../settings/MSupportUsPage.qml" line="95"/>
         <source>Support us</source>
-        <translation>Unterstütze uns</translation>
+        <translation>支持我们</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="34"/>
         <source>Thanks for considering</source>
-        <translatorcomment>Danke, dass du es in Betracht ziehst</translatorcomment>
-        <translation>Danke fü</translation>
+        <translation>感谢您的考虑</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
-        <translation>Wir sind ein kleines Team von Open-Source-Entwicklern, die Apps für die Community erstellen. Wir lieben es,
-an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu einem besseren Ort zu machen.</translation>
+        <translation>我们是一个由开源工作者组成的小团队，为社区开发应用程序。我们喜欢做有趣的项目以支持我们的社区，并努力让世界变得更美好。</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
         <source>If you feel like supporting us and our projects, feel free to support us:</source>
-        <translation>Wenn du uns und unsere Projekte unterstützen möchtest, unterstütze uns hier:</translation>
+        <translation>如果您想支持我们和我们的项目，请随意支持我们：</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation>Du kannst uns auch auf viele andere Arten unterstützen. Wenn du Entwickler oder Designer bist</translation>
+        <translation>如果您是开发者或设计师，您也可以通过其他的方式支持我们。</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
         <source>contribute to Librum</source>
-        <translation>trage zu Librum bei</translation>
+        <translation>捐助 Librum</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
-        <translation>Falls nicht kannst du trotzdem helfen indem du das Wort über Librum verbreitest.</translation>
+        <translation>如果不，您仍然可以通过宣传 Librum 以帮助我们。</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
-        <translation>Danke für deine Unterstützung. Wir hoffen Librum gefällt dir!</translation>
+        <translation>感谢您的支持。希望您可以享受 Librum！</translation>
     </message>
 </context>
 <context>
@@ -2081,7 +1846,7 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorButton.qml" line="46"/>
         <source>Tags</source>
-        <translation>Tags</translation>
+        <translation>标签</translation>
     </message>
 </context>
 <context>
@@ -2089,17 +1854,17 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="119"/>
         <source>Select</source>
-        <translation>Auswählen</translation>
+        <translation>选择</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="131"/>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation>重命名</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/tagSelector/MTagSelectorPopup.qml" line="140"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -2107,35 +1872,35 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../modules/CustomComponents/MTitle.qml" line="9"/>
         <source>Title</source>
-        <translation>Titel</translation>
+        <translation>标题</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MTitle.qml" line="10"/>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation>描述</translation>
     </message>
 </context>
 <context>
     <name>MToolbar</name>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="75"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="67"/>
         <source>Remove Filters</source>
-        <translation>Filter entfernen</translation>
+        <translation>移除过滤</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="88"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="80"/>
         <source>Remove Tags</source>
-        <translation>Tags entfernen</translation>
+        <translation>移除标签</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="154"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="146"/>
         <source>You are offline</source>
-        <translation>Du bist offline</translation>
+        <translation>您已离线</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/MToolbar.qml" line="161"/>
+        <location filename="../homePage/toolbar/MToolbar.qml" line="153"/>
         <source>Your library is being synchronized with the cloud</source>
-        <translation>Deine Bibliothek wird mit der cloud synchronisiert</translation>
+        <translation>您的书库正在和云端同步</translation>
     </message>
 </context>
 <context>
@@ -2143,22 +1908,22 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="37"/>
         <source>You are up to date!</source>
-        <translation>Du bist auf dem neusten Stand!</translation>
+        <translation>您已经更新到最新版本了！</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
-        <translation>Stelle sicher, regelmäßig nach Updates zu gucken, um keine neuen Funktionen zu verpassen.</translation>
+        <translation>请定期检查更新，这样您就不会错过任何好用的功能</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>
         <source>Your current version is:</source>
-        <translation>Deine aktuelle verson ist:</translation>
+        <translation>您当前的版本为：</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
         <source>See our latest changes at:</source>
-        <translation>Siehe unsere letzten Änderungen unter:</translation>
+        <translation>查看最新变化：</translation>
     </message>
 </context>
 <context>
@@ -2166,65 +1931,65 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="50"/>
         <source>A new update is available!</source>
-        <translation>Ein neues Update ist verfügbar!</translation>
+        <translation>有新版本可用！</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
         <source>Download the new version to get great new improvements.</source>
-        <translation>Downloade die neue Version um tolle Verbesserungen zu erhalten.</translation>
+        <translation>下载最新版本以获得重大改进</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="69"/>
         <source>The newest version is:</source>
-        <translation>Die neuste version ist:</translation>
+        <translation>最新版本为：</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="94"/>
         <source>Update</source>
-        <translation>Update</translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="113"/>
         <source>See the exact changes on our website at:</source>
-        <translation>Sehe die genauen Änderungen auf unserer Website unter:</translation>
+        <translation>请查看我们网站上的具体变化：</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="154"/>
         <source>Updating on Linux</source>
-        <translation>Updaten auf Linux</translation>
+        <translation>Linux 版本更新</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
         <source>Please use your package manager to update Librum or download the newest version from our</source>
-        <translation>Bitte benutze deien package-manager um Librum zu updaten oder downloade die neuste Version von unserer</translation>
+        <translation>请使用您的包管理器更新 Librum 或下载最新版本</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="157"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="181"/>
         <source>website</source>
-        <translation>Website</translation>
+        <translation>网站</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="159"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="183"/>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>关闭</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="160"/>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="184"/>
         <source>Email Us</source>
-        <translation>Schreib uns</translation>
+        <translation>使用邮箱联系我们</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="178"/>
         <source>The Update Failed</source>
-        <translation>Das Update ist fehlgeschlagen</translation>
+        <translation>更新失败</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>Please try again later or download the newest version from our</source>
-        <translation>Versuche es später erneut oder downloade die neuste Version von unserer</translation>
+        <translation>请稍候重试或下载最新版本</translation>
     </message>
 </context>
 <context>
@@ -2232,12 +1997,12 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../settings/updatesPage/MUpdatesPage.qml" line="33"/>
         <source>Updates</source>
-        <translation>Updates</translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesPage.qml" line="34"/>
         <source>Any new update?</source>
-        <translation>Neue Updates?</translation>
+        <translation>有新的更新吗？</translation>
     </message>
 </context>
 <context>
@@ -2245,22 +2010,22 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="11"/>
         <source>Accept</source>
-        <translation>Akzeptiere</translation>
+        <translation>接受</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="12"/>
         <source>Decline</source>
-        <translation>Ablehnen</translation>
+        <translation>拒绝</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="13"/>
         <source>Do you Accept?</source>
-        <translation>Akzeptierst du?</translation>
+        <translation>您是否接受？</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MWarningPopup.qml" line="14"/>
         <source>Message</source>
-        <translation>Nachricht</translation>
+        <translation>消息</translation>
     </message>
 </context>
 <context>
@@ -2268,12 +2033,12 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="60"/>
         <source>Updating</source>
-        <translation>Am updaten</translation>
+        <translation>更新中</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MWindowsUpdatingPopup.qml" line="67"/>
         <source>Downloading</source>
-        <translation>Am downloaden</translation>
+        <translation>下载中</translation>
     </message>
 </context>
 <context>
@@ -2281,7 +2046,7 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
     <message>
         <location filename="../main.qml" line="31"/>
         <source>Librum - Your ebook reader</source>
-        <translation>Librum - Dein e-Buch leser</translation>
+        <translation>Librum - 电子书阅读器</translation>
     </message>
 </context>
 </TS>

@@ -47,6 +47,9 @@ public:
     float getZoom() const override;
     void setZoom(float newZoom) override;
 
+    QString getColorTheme() override;
+    void setColorTheme(const QString& colorTheme) override;
+
     core::FilteredTOCModel* getTableOfContents() override;
 
     domain::entities::Book* getBook();

@@ -18,7 +18,8 @@ class ADAPTERS_EXPORT LibraryController : public ILibraryController
 public:
     LibraryController(application::ILibraryService* bookService);
 
-    int addBook(const QString& path, int projectGutenbergId = 0) override;
+    int addBook(const QString& path, bool allowDuplicates = false,
+                int projectGutenbergId = 0) override;
     int deleteBook(const QString& uuid) override;
     int deleteAllBooks() override;
     int uninstallBook(const QString& uuid) override;
@@ -51,7 +52,7 @@ private:
                           dtos::BookDto& bookDto);
     bool listContainsTag(const QList<domain::entities::Tag>& tags, QUuid uuid);
 
-    application::ILibraryService* m_bookService;
+    application::ILibraryService* m_libraryService;
     data_models::LibraryModel m_libraryModel;
     data_models::LibraryProxyModel m_libraryProxyModel;
     bool m_currentlySyncing = false;

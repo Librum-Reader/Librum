@@ -61,6 +61,9 @@ public:
     bool getSearchFromStart() const override;
     void setSearchFromStart(bool newSearchFromStart) override;
 
+    QString getColorTheme() override;
+    void setColorTheme(const QString& colorTheme) override;
+
     application::core::FilteredTOCModel* getTableOfContents() override;
     data_models::BookmarksProxyModel* getBookmarksModel() override;
 

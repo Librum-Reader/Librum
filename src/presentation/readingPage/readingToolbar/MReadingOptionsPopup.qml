@@ -126,16 +126,13 @@ Popup {
 
                         onClicked: {
                             let value = ""
-
-                            let current = SettingsController.appearanceSettings.PageColorMode
-                            if (current === "Normal")
-                                value = "Inverted"
-                            else
+                            let current = BookController.colorTheme
+                            if (current === "Inverted")
                                 value = "Normal"
+                            else
+                                value = "Inverted"
 
-                            SettingsController.setSetting(
-                                        SettingKeys.PageColorMode, value,
-                                        SettingGroups.Appearance)
+                            BookController.colorTheme = value
                         }
                     }
 

@@ -6,7 +6,6 @@
 #include <QNetworkInformation>
 #include <QPixmap>
 #include <QTime>
-#include <ranges>
 #include "book_for_deletion.hpp"
 #include "book_merger.hpp"
 #include "book_operation_status.hpp"
@@ -28,25 +27,7 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {
-                m_libraryStorageManager->downloadRemoteBooks();
-
-                auto success = QNetworkInformation::loadDefaultBackend();
-                if(!success)
-                    qWarning() << "Failed loading QNetworkInformation backend";
-
-                auto networkInfo = QNetworkInformation::instance();
-                if(networkInfo == nullptr)
-                {
-                    qWarning() << "Failed loading QNetworkInformation instance";
-                }
-                else
-                {
-                    if(networkInfo->reachability() ==
-                       QNetworkInformation::Reachability::Online)
-                    {
-                        emit syncingLibraryStarted();
-                    }
-                }
+                downloadBooks();
             });
 
     // Apply updates timer
@@ -106,9 +87,30 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
 void LibraryService::downloadBooks()
 {
     m_libraryStorageManager->downloadRemoteBooks();
+
+    auto success = QNetworkInformation::loadDefaultBackend();
+    if(!success)
+        qWarning() << "Failed loading QNetworkInformation backend";
+
+    // We only want to emit the library sync signal if we know that we are
+    // online. Else the loading indicator would be spinning forever.
+    auto networkInfo = QNetworkInformation::instance();
+    if(networkInfo == nullptr)
+    {
+        qWarning() << "Failed loading QNetworkInformation instance";
+    }
+    else
+    {
+        if(networkInfo->reachability() ==
+           QNetworkInformation::Reachability::Online)
+        {
+            emit syncingLibraryStarted();
+        }
+    }
 }
 
 BookOperationStatus LibraryService::addBook(const QString& filePath,
+                                            bool allowDuplicates,
                                             int projectGutenbergId)
 {
     auto success = m_bookMetadataHelper->setup(filePath);
@@ -120,6 +122,14 @@ BookOperationStatus LibraryService::addBook(const QString& filePath,
 
     auto bookMetaData = m_bookMetadataHelper->getBookMetaData();
     Book book(filePath, bookMetaData);
+    auto hash = book.getFileHash();
+    if(!allowDuplicates && !hash.isEmpty() &&
+       bookWithFileHashAlreadyExists(hash))
+    {
+        qWarning() << QString("Book with file hash: %1 already exists.")
+                          .arg(book.getFileHash());
+        return BookOperationStatus::BookAlreadyExists;
+    }
 
     auto cover = m_bookMetadataHelper->getBookCover();
     cover = cover.scaled(Book::maxCoverWidth, Book::maxCoverHeight,
@@ -734,6 +744,18 @@ void LibraryService::deleteBookLocally(const domain::entities::Book& book)
     emit bookDeletionEnded();
 
     m_libraryStorageManager->deleteBookLocally(std::move(bookToDelete));
+}
+
+bool LibraryService::bookWithFileHashAlreadyExists(
+    const QString& fileHash) const
+{
+    auto bookPosition =
+        std::ranges::find_if(m_books,
+                             [&fileHash](const Book& book)
+                             {
+                                 return book.getFileHash() == fileHash;
+                             });
+    return bookPosition != m_books.end();
 }
 
 std::set<int> LibraryService::getProjectGutenbergIds()
