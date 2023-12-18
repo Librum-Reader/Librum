@@ -564,7 +564,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../homePage/MBook.qml" line="312"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
-        <translation>Выша книга не была загружена в облако.
+        <translation>Ваша книга не была загружена в облако.
 Либо Вы не в сети, либо Ваше хранилище заполнено.</translation>
     </message>
 </context>
