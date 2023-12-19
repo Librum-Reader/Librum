@@ -10,7 +10,7 @@ Popup {
     id: root
     property alias authors: authorsInput.text
     property alias format: formatInputComboBox.text
-    property alias date: addedInput.text
+    property alias language: languageInputComboBox.text
     property alias onlyBooks: onlyBooksBox.checked
     property alias onlyFiles: onlyFilesBox.checked
     property alias read: readBox.checked
@@ -90,22 +90,20 @@ Popup {
                             id: leftColumnLayout
                             Layout.fillWidth: true
 
-                            MLabeledInputBox {
-                                id: addedInput
+                            MComboBox {
+                                id: languageInputComboBox
                                 Layout.fillWidth: true
+                                Layout.preferredHeight: 49
                                 Layout.topMargin: 2
-                                boxHeight: 30
-                                headerToBoxSpacing: 2
-                                placeholderContent: qsTr("e.g. 2d ago")
-                                inputFontSize: Fonts.size11
-                                placeholderColor: Style.colorPlaceholderText
-                                headerText: qsTr("Added")
-                                headerFontSize: Fonts.size10dot5
-                                headerFontWeight: Font.Bold
-                                headerFontColor: Style.colorLightText
-                                textPadding: 8
-                                borderWidth: 1
-                                borderRadius: 4
+                                headerText: qsTr("Language")
+                                emptyText: qsTr("Any")
+                                dropdownIconSize: 9
+
+                                checkBoxStyle: false
+                                checkBoxSize: 17
+                                checkBoxImageSize: 9
+                                itemHeight: 29
+                                fontSize: Fonts.size11
                             }
 
                             MLabeledCheckBox {
