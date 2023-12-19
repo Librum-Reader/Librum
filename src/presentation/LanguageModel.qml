@@ -25,4 +25,8 @@ ListModel {
         text: "Português"
         code: "pt"
     }
+    ListElement {
+        text: "Bahasa Indonesia"
+        code: "id"
+    }
 }
