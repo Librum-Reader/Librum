@@ -19,7 +19,6 @@ Item {
 
     MDualToggle {
         id: dualToggle
-        anchors.fill: parent
         leftText: "OFF"
         leftDisplayText: qsTr("OFF")
         rightText: "ON"

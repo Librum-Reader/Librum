@@ -21,6 +21,8 @@ set(translation_files
     translations/librum_de.ts
     translations/librum_ru.ts
     translations/librum_zh.ts
+    translations/librum_pt.ts
+    translations/librum_id.ts
 )
 qt_add_translations(presentation TS_FILES ${translation_files})
 
