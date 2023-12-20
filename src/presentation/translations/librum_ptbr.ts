@@ -74,7 +74,7 @@
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translation>O Librum está aqui para todos que desejam apenas desfrutar de um bom livro.
-Esperamos que você tenha um ótimo tempo usando-o! Sinta-se à vontade para nos deixar uma avaliação e alguns comentários.</translation>
+Tenha uma ótima experiência! Deixe sua avaliação e alguns comentários.</translation>
     </message>
 </context>
 <context>
@@ -157,12 +157,12 @@ Esperamos que você tenha um ótimo tempo usando-o! Sinta-se à vontade para nos
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="320"/>
         <source>Analyse your reading to make better recommendations</source>
-        <translation>Analisar suas leituras para obter melhores recomendações</translation>
+        <translation>Analisar suas leituras para melhores recomendações</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
-        <translation>Compartilhar anonimamente informações sobre os livros que você lê para nos ajudar a melhorar o Librum</translation>
+        <translation>Compartilhar anonimamente dados sobre sua leitura para nos ajudar a melhorar o Librum</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="348"/>
@@ -221,7 +221,7 @@ Esperamos que você tenha um ótimo tempo usando-o! Sinta-se à vontade para nos
     <message>
         <location filename="../addOnsPage/MAddOnsPage.qml" line="33"/>
         <source>Currently in Development</source>
-        <translation>Atualmente em Desenvolvimento</translation>
+        <translation>Em Desenvolvimento</translation>
     </message>
 </context>
 <context>
@@ -368,7 +368,7 @@ Esperamos que você tenha um ótimo tempo usando-o! Sinta-se à vontade para nos
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
-        <translation>Redefinir configurações?</translation>
+        <translation>Voltar ao padrão?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="511"/>
@@ -396,7 +396,7 @@ Esperamos que você tenha um ótimo tempo usando-o! Sinta-se à vontade para nos
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="39"/>
         <source>Change the way Librum works</source>
-        <translation>Alterar a forma como o Librum funciona</translation>
+        <translation>Alterar o funcionamento do Librum</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="55"/>
@@ -744,7 +744,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="137"/>
         <source>Your email is wrong</source>
-        <translation>Seu email está incorreto</translation>
+        <translation>Email está incorreto</translation>
     </message>
 </context>
 <context>
@@ -757,7 +757,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="356"/>
         <source>No definitions found</source>
-        <translation>Nenhuma definição encontrada</translation>
+        <translation>Definição não encontrada</translation>
     </message>
     <message>
         <location filename="../readingPage/MDictionaryPopup.qml" line="364"/>
@@ -831,7 +831,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="36"/>
         <source>Quite empty here, what about adding your first book?</source>
-        <translation>Está bem vazio aqui, que tal adicionar seu primeiro livro?</translation>
+        <translation>Está bem vazio aqui, que tal adicionar um livro?</translation>
     </message>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
@@ -865,7 +865,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="58"/>
         <source>Oops! The text is too long. Please shorten your selection.</source>
-        <translation>Ops! O texto está muito longo. Por favor, reduza sua seleção.</translation>
+        <translation>Ops! O texto está muito longo. Favor, reduza sua seleção.</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="67"/>
@@ -875,7 +875,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="71"/>
         <source>Explain like I&apos;m five</source>
-        <translation>Explicar como se eu tivesse cinco anos</translation>
+        <translation>Simplifique a explicação</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="75"/>
@@ -910,7 +910,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="283"/>
         <source>Note: AI responses can be inaccurate</source>
-        <translation>Nota: As respostas da IA podem ser imprecisas</translation>
+        <translation>Nota: Respostas da IA podem ser imprecisas</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="299"/>
@@ -1029,7 +1029,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../forgotPasswordPage/MForgotPasswordPage.qml" line="173"/>
         <source>Email sent! Keep an eye on your inbox</source>
-        <translation>E-mail enviado! Fique de olho na sua caixa de entrada</translation>
+        <translation>Email enviado! Confira sua caixa de entrada</translation>
     </message>
 </context>
 <context>
@@ -1045,12 +1045,12 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="22"/>
         <source>No books were found</source>
-        <translation>Nenhum livro foi encontrado</translation>
+        <translation>Nenhum livro encontrado</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="29"/>
         <source>Couldn&apos;t load free books. Please, check your network connection</source>
-        <translation>Não foi possível carregar os livros gratuitos. Por favor, verifique sua conexão de rede</translation>
+        <translation>Não foi possível carregar os livros gratuitos. Favor, verifique sua conexão</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="81"/>
@@ -1068,7 +1068,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="69"/>
         <source>A new version is available!</source>
-        <translation>Uma nova versão está disponível!</translation>
+        <translation>Nova versão está disponível!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="71"/>
@@ -1109,7 +1109,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="403"/>
         <source>Delete Everywhere</source>
-        <translation>Excluir em Todos os Lugares</translation>
+        <translation>Apagar em toda parte</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="440"/>
@@ -1124,7 +1124,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="456"/>
         <source>You have reached your upload limit. Delete unused books to free up space or upgrade.</source>
-        <translation>Você atingiu seu limite de upload. Exclua livros não utilizados para liberar espaço ou faça um upgrade.</translation>
+        <translation>Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>
@@ -1150,7 +1150,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="477"/>
         <source>Are you sure you want to add it again?</source>
-        <translation>Você tem certeza de que deseja adicioná-lo novamente?</translation>
+        <translation>Tem certeza de quer adicioná-lo novamente?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="480"/>
@@ -1240,7 +1240,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="311"/>
         <source>Logging you in failed, please try again later.</source>
-        <translation>Falha ao fazer login, por favor, tente novamente mais tarde.</translation>
+        <translation>Erro ao entrar. Tente novamente mais tarde.</translation>
     </message>
     <message>
         <location filename="../loginPage/MLoginPage.qml" line="312"/>
@@ -1371,7 +1371,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
-        <translation>Diferenciar maiúsculas/minúsculas</translation>
+        <translation>Diferenciar maiúscula/minúscula</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
@@ -1785,7 +1785,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>If you require additional storage, please contact us at</source>
-        <translation>Se você precisar de armazenamento adicional, entre em contato conosco em</translation>
+        <translation>Se precisar de mais armazenamento, contate-nos em</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="359"/>
@@ -1815,18 +1815,18 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
-        <translation>Nós somos uma pequena equipe de desenvolvedores de código aberto criando aplicativos para a comunidade. Amamos
-trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mundo um lugar melhor.</translation>
+        <translation>Somos uma pequena equipe de desenvolvedores de código aberto criando aplicativos para a comunidade. Amamos 
+projetos divertidos, apoie nossa comunidade para tentar tornar o mundo um lugar melhor.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
         <source>If you feel like supporting us and our projects, feel free to support us:</source>
-        <translation>Se você quiser nos apoiar e aos nossos projetos, sinta-se à vontade para nos ajudar:</translation>
+        <translation>Se você quiser nos apoiar e nossos projetos. Sinta-se à vontade para ajudar:</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation>Você também pode nos apoiar de muitas outras maneiras, se você for um desenvolvedor ou um designer, sinta-se à vontade para</translation>
+        <translation>Você, desenvolvedor ou designer, pode nos apoiar de várias formas. Sinta-se à vontade para.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
@@ -1841,7 +1841,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
-        <translation>Obrigado pelo seu apoio. Esperamos que você aproveite o Librum!</translation>
+        <translation>Obrigado pelo seu apoio. Aproveite o Librum!</translation>
     </message>
 </context>
 <context>
@@ -1916,7 +1916,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
-        <translation>Certifique-se de verificar as atualizações regularmente para não perder nenhuma funcionalidade incrível.</translation>
+        <translation>Verifique atualizações regularmente para não perder funcionalidades incríveis.</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>
@@ -1926,7 +1926,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
         <source>See our latest changes at:</source>
-        <translation>Veja nossas últimas alterações em:</translation>
+        <translation>Veja as últimas alterações em:</translation>
     </message>
 </context>
 <context>
@@ -1934,7 +1934,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="50"/>
         <source>A new update is available!</source>
-        <translation>Uma nova atualização está disponível!</translation>
+        <translation>Nova atualização está disponível!</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="60"/>
@@ -1964,7 +1964,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="155"/>
         <source>Please use your package manager to update Librum or download the newest version from our</source>
-        <translation>Por favor, use o gerenciador de pacotes para atualizar o Librum ou baixe a versão mais recente do nosso</translation>
+        <translation>Por favor, use o gerenciador de pacotes para atualizar o Librum ou baixe a ultima versão do nosso</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="157"/>
@@ -1992,7 +1992,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpdatesAvailable.qml" line="179"/>
         <source>Please try again later or download the newest version from our</source>
-        <translation>Por favor, tente novamente mais tarde ou baixe a versão mais recente do nosso</translation>
+        <translation>Por favor, tente novamente mais tarde ou baixe a ultima versão do nosso</translation>
     </message>
 </context>
 <context>
@@ -2005,7 +2005,7 @@ trabalhar em projetos divertidos, apoiar nossa comunidade e tentar tornar o mund
     <message>
         <location filename="../settings/updatesPage/MUpdatesPage.qml" line="34"/>
         <source>Any new update?</source>
-        <translation>Há alguma atualização nova?</translation>
+        <translation>Tem novas atualizações?</translation>
     </message>
 </context>
 <context>
