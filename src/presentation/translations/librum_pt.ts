@@ -629,7 +629,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
         <source>Save to files</source>
-        <translation>Salvar nos arquivos</translation>
+        <translation>Salvar arquivo</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
@@ -1743,7 +1743,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Veja por que oferecemos vários níveis</translation>
+        <translation>Por que temos vários níveis?</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
