@@ -8,6 +8,7 @@ import Librum.icons
 import Librum.controllers
 import Librum.globals
 import Librum.fonts
+import Librum.models
 
 Popup {
     id: root
@@ -288,74 +289,17 @@ Popup {
                                 id: languageComboBox
                                 Layout.fillWidth: true
                                 Layout.preferredHeight: 53
-                                multiSelect: false
                                 headerText: qsTr("Language")
+                                emptyText: qsTr("Unknown")
                                 headerFontSize: Fonts.size11dot5
                                 headerFontColor: Style.colorTitle
                                 dropdownIconSize: 9
+
+                                checkBoxStyle: false
                                 maxHeight: 200
-                                model: ListModel {
-                                    ListElement {
-                                        text: "English"
-                                    }
-                                    ListElement {
-                                        text: "German"
-                                    }
-                                    ListElement {
-                                        text: "Italian"
-                                    }
-                                    ListElement {
-                                        text: "French"
-                                    }
-                                    ListElement {
-                                        text: "Romanian"
-                                    }
-                                    ListElement {
-                                        text: "Spanish"
-                                    }
-                                    ListElement {
-                                        text: "Mandarin"
-                                    }
-                                    ListElement {
-                                        text: "Portugese"
-                                    }
-                                    ListElement {
-                                        text: "Hindi"
-                                    }
-                                    ListElement {
-                                        text: "Bengali"
-                                    }
-                                    ListElement {
-                                        text: "Russian"
-                                    }
-                                    ListElement {
-                                        text: "Arabic"
-                                    }
-                                    ListElement {
-                                        text: "Japanese"
-                                    }
-                                    ListElement {
-                                        text: "Indonesian"
-                                    }
-                                    ListElement {
-                                        text: "Turkish"
-                                    }
-                                    ListElement {
-                                        text: "Korean"
-                                    }
-                                    ListElement {
-                                        text: "Hungarian"
-                                    }
-                                    ListElement {
-                                        text: "Thai"
-                                    }
-                                    ListElement {
-                                        text: "Swahli"
-                                    }
-                                    ListElement {
-                                        text: "Dutch"
-                                    }
-                                }
+                                model: MLanguageModel
+
+                                onItemChanged: languageComboBox.closePopup()
                             }
 
                             MLabeledInputBox {

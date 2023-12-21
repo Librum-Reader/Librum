@@ -5,6 +5,7 @@ import CustomComponents
 import Librum.style
 import Librum.icons
 import Librum.fonts
+import Librum.models
 
 Popup {
     id: root
@@ -104,6 +105,10 @@ Popup {
                                 checkBoxImageSize: 9
                                 itemHeight: 29
                                 fontSize: Fonts.size11
+                                model: MLanguageModel
+
+                                onItemChanged: languageInputComboBox.closePopup(
+                                                   )
                             }
 
                             MLabeledCheckBox {
