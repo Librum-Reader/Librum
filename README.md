@@ -73,7 +73,7 @@ For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/
 
 Donations make it possible for us to cover our server costs and allow us to make investments into new areas of development.
 <br>
-If you would like to support us, check out: https://librumreader.com/contribute/donate or become a github sponsor! 
+If you would like to support us, check out: https://librumreader.com/contribute/donate or become a GitHub sponsor! 
 <br>
 <br>
 As a team of opensource developers we rely on donations to continue working on projects like Librum. Your help is greatly appreciated.
