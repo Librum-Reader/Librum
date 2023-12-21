@@ -18,6 +18,10 @@ ListModel {
         code: "ru"
     }
     ListElement {
+        text: "Українська"
+        code: "uk"
+    }
+    ListElement {
         text: "中文"
         code: "zh"
     }
