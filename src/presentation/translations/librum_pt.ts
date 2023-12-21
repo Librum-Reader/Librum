@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="pt_br">
+<TS version="2.1" language="pt_BR">
 <context>
     <name>MAboutPage</name>
     <message>
@@ -451,7 +451,7 @@ Tenha uma ótima experiência! Deixe sua avaliação e alguns comentários.</tra
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation>Redefinir configurações?</translation>
+        <translation type="unfinished">Voltar ao padrão?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
@@ -1078,7 +1078,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="119"/>
         <source>Home</source>
-        <extracomment>Como em 'Página Inicial', pode ser próximo a 'Início' em outros idiomas</extracomment>
+        <extracomment>Como em &apos;Página Inicial&apos;, pode ser próximo a &apos;Início&apos; em outros idiomas</extracomment>
         <translation>Início</translation>
     </message>
     <message>
@@ -1447,7 +1447,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="215"/>
-        <source>Let's start</source>
+        <source>Let&apos;s start</source>
         <translation>Vamos começar</translation>
     </message>
     <message>
@@ -1462,7 +1462,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="264"/>
-        <source>You're are almost ready to go! Confirm your email by clicking the link we sent you.</source>
+        <source>You&apos;re are almost ready to go! Confirm your email by clicking the link we sent you.</source>
         <translation>Você está quase pronto! Confirme seu email clicando no link que enviamos para você.</translation>
     </message>
     <message>
@@ -1472,7 +1472,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="296"/>
-        <source>Passwords don't match</source>
+        <source>Passwords don&apos;t match</source>
         <translation>As senhas não coincidem</translation>
     </message>
 </context>
@@ -1731,13 +1731,13 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../settings/MStoragePage.qml" line="112"/>
         <source>YOUR TIER</source>
-        <extracomment>Keep capitalized ("TIER" as in subscription)</extracomment>
+        <extracomment>Keep capitalized (&quot;TIER&quot; as in subscription)</extracomment>
         <translation>SUA TIER</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="123"/>
         <source>BASIC</source>
-        <extracomment>Keep capitalized ("BASIC" is the name of the tier)</extracomment>
+        <extracomment>Keep capitalized (&quot;BASIC&quot; is the name of the tier)</extracomment>
         <translation>BÁSICO</translation>
     </message>
     <message>
@@ -1779,7 +1779,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
-        <source>We don't offer upgrading options at the moment.</source>
+        <source>We don&apos;t offer upgrading options at the moment.</source>
         <translation>No momento, não oferecemos opções de atualização.</translation>
     </message>
     <message>
