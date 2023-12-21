@@ -490,7 +490,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="70"/>
         <source>Book details</source>
-        <translation>Detalhes do livro</translation>
+        <translation>Detalhes</translation>
     </message>
     <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
@@ -596,7 +596,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation>Marcar como lido</translation>
+        <translation>Marcar c/ lido</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
@@ -624,7 +624,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="51"/>
         <source>Book details</source>
-        <translation>Detalhes do livro</translation>
+        <translation>Detalhes</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="63"/>
@@ -640,7 +640,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation>Marcar como lido</translation>
+        <translation>Marcar c/ lido</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
@@ -931,7 +931,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="72"/>
         <source>e.g. Uncle bob</source>
-        <translation>por exemplo, Tio Bob</translation>
+        <translation>Ex: Tio Bob</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="75"/>
@@ -941,7 +941,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>e.g. 2d ago</source>
-        <translation>por exemplo, 2 dias atrás</translation>
+        <translation>Ex: 2d atrás</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="102"/>
@@ -991,12 +991,12 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="191"/>
         <source>Only Books</source>
-        <translation>Apenas Livros</translation>
+        <translation>Livros</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="209"/>
         <source>Only Files</source>
-        <translation>Apenas Arquivos</translation>
+        <translation>Arquivos</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="230"/>
@@ -1371,7 +1371,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
-        <translation>Diferenciar maiúscula/minúscula</translation>
+        <translation>Diferenciar maiúscula e minúscula</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
