@@ -691,17 +691,17 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation type="unfinished">Прочитано</translation>
+        <translation>Прочитано</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
         <source>Uninstall books</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
         <source>Delete books</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить везде</translation>
     </message>
     <message>
         <source>Remove book</source>
