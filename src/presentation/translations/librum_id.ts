@@ -1295,12 +1295,12 @@ Hapus buku tak terpakai untuk membersihkan penyimpanan atau upgrade.</translatio
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>OFF</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>ON</translation>
     </message>

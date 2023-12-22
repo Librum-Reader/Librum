@@ -1484,12 +1484,12 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>AUS</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>AN</translation>
     </message>

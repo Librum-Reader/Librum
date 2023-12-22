@@ -372,7 +372,8 @@ Tenha uma ótima experiência! Deixe sua avaliação e alguns comentários.</tra
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="511"/>
-        <source>Resetting your settings is a permanent action, there will be no way to restore them!</source>
+        <source>Resetting your settings is a permanent action, there
+ will be no way to restore them!</source>
         <translation>Redefinir suas configurações é uma ação permanente, não haverá como restaurá-las!</translation>
     </message>
     <message>
@@ -451,12 +452,17 @@ Tenha uma ótima experiência! Deixe sua avaliação e alguns comentários.</tra
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation type="unfinished">Voltar ao padrão?</translation>
+        <translation>Voltar ao padrão?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
-        <source>Resetting your settings is a permanent action, there will be no way to restore them!</source>
+        <source>Resetting your settings is a permanent action, there
+ will be no way to restore them!</source>
         <translation>Redefinir suas configurações é uma ação permanente, não haverá como restaurá-las!</translation>
+    </message>
+    <message>
+        <source>Resetting your settings is a permanent action, there will be no way to restore them!</source>
+        <translation type="vanished">Redefinir suas configurações é uma ação permanente, não haverá como restaurá-las!</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="207"/>
@@ -1078,7 +1084,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="119"/>
         <source>Home</source>
-        <extracomment>Como em &apos;Página Inicial&apos;, pode ser próximo a &apos;Início&apos; em outros idiomas</extracomment>
+        <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Início</translation>
     </message>
     <message>
@@ -1097,9 +1103,8 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation>Remover Livro?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="401"/>
         <source>Deleting a book is a permanent action, no one will be able to restore it afterwards!</source>
-        <translation>Excluir um livro é uma ação permanente, ninguém poderá restaurá-lo depois!</translation>
+        <translation type="vanished">Excluir um livro é uma ação permanente, ninguém poderá restaurá-lo depois!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="402"/>
@@ -1122,9 +1127,8 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation>Limite Atingido</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="456"/>
         <source>You have reached your upload limit. Delete unused books to free up space or upgrade.</source>
-        <translation>Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
+        <translation type="vanished">Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>
@@ -1148,9 +1152,27 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <translation>Parece que este livro já existe na sua biblioteca:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="477"/>
         <source>Are you sure you want to add it again?</source>
-        <translation>Tem certeza de quer adicioná-lo novamente?</translation>
+        <translation type="vanished">Tem certeza de quer adicioná-lo novamente?</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="401"/>
+        <source>Deleting a book is a permanent action, no one will be
+ able to restore it afterwards!</source>
+        <translation>Excluir um livro é uma ação permanente, ninguém poderá restaurá-lo depois!</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="456"/>
+        <source>You have reached your upload limit.
+Delete unused books to free up space or upgrade.</source>
+        <translation>Limite de upload atingido. Exclua livros para liberar espaço ou faça um upgrade.</translation>
+    </message>
+    <message>
+        <location filename="../homePage/MHomePage.qml" line="477"/>
+        <source>Are you sure you that want to add it again?
+</source>
+        <translation>Tem certeza de quer adicioná-lo novamente?
+</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="480"/>
@@ -1287,12 +1309,12 @@ Você está offline ou seu armazenamento está cheio.</translation>
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>DESLIGADO</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>LIGADO</translation>
     </message>
@@ -1462,8 +1484,13 @@ Você está offline ou seu armazenamento está cheio.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="264"/>
-        <source>You&apos;re are almost ready to go! Confirm your email by clicking the link we sent you.</source>
+        <source>You&apos;re are almost ready to go!
+Confirm your email by clicking the link we sent you.</source>
         <translation>Você está quase pronto! Confirme seu email clicando no link que enviamos para você.</translation>
+    </message>
+    <message>
+        <source>You&apos;re are almost ready to go! Confirm your email by clicking the link we sent you.</source>
+        <translation type="vanished">Você está quase pronto! Confirme seu email clicando no link que enviamos para você.</translation>
     </message>
     <message>
         <location filename="../registerPage/MRegisterPage.qml" line="265"/>
@@ -1487,8 +1514,12 @@ Você está offline ou seu armazenamento está cheio.</translation>
 <context>
     <name>MSelectProfilePictureArea</name>
     <message>
-        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
         <source>Click to select an image or drop it into this area</source>
+        <translation type="vanished">Clique para selecionar uma imagem ou arraste para esta área</translation>
+    </message>
+    <message>
+        <location filename="../settings/accountPage/MSelectProfilePictureArea.qml" line="107"/>
+        <source>Click to select an image or drop it into in this area</source>
         <translation>Clique para selecionar uma imagem ou arraste para esta área</translation>
     </message>
     <message>
@@ -1826,7 +1857,7 @@ projetos divertidos, apoie nossa comunidade para tentar tornar o mundo um lugar 
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="109"/>
         <source>You can support us in many other ways as well, if you are a developer or a designer, feel free to</source>
-        <translation>Você, desenvolvedor ou designer, pode nos apoiar de várias formas. Sinta-se à vontade para.</translation>
+        <translation>Você, desenvolvedor ou designer, pode nos apoiar de várias formas. Sinta-se à vontade para</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>

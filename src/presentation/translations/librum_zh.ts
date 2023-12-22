@@ -1303,12 +1303,12 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>关</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>开</translation>
     </message>
