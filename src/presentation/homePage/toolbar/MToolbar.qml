@@ -48,9 +48,9 @@ Item {
         MFilterByButton {
             id: filterByButton
 
-            onFilterSelected: (authors, format, date, onlyBooks, onlyFiles, read, unread) => {
+            onFilterSelected: (authors, format, language, onlyBooks, onlyFiles, read, unread) => {
                                   LibraryController.libraryModel.setFilterRequest(
-                                      authors, format, date, onlyBooks,
+                                      authors, format, language, onlyBooks,
                                       onlyFiles, read, unread)
 
                                   resetFiltersButton.visible = true

@@ -8,7 +8,7 @@ import Librum.fonts
 Item {
     id: root
     property bool opened: false
-    signal filterSelected(string authors, string format, string date, bool onlyBooks, bool onlyFiles, bool read, bool unread)
+    signal filterSelected(string authors, string format, string language, bool onlyBooks, bool onlyFiles, bool read, bool unread)
 
     implicitWidth: container.width
     implicitHeight: 36
@@ -65,7 +65,7 @@ Item {
 
         onFilterQuerySent: {
             close()
-            root.filterSelected(authors, format, date, onlyBooks, onlyFiles,
+            root.filterSelected(authors, format, language, onlyBooks, onlyFiles,
                                 read, unread)
         }
     }
