@@ -43,7 +43,7 @@ public:
                           const QModelIndex& source_parent) const override;
 
     Q_INVOKABLE void setFilterRequest(QString authors, QString format,
-                                      QString date, bool onlyBooks,
+                                      QString language, bool onlyBooks,
                                       bool onlyFiles, bool read, bool unread);
     Q_INVOKABLE void addFilterTag(QString tag);
     Q_INVOKABLE void removeFilterTag(QString tag);
@@ -73,6 +73,7 @@ private:
     bool filterAcceptsAuthors(const QModelIndex& bookIndex) const;
     bool filterAcceptsFormat(const QModelIndex& bookIndex) const;
     bool filterAcceptsStatus(const QModelIndex& bookIndex) const;
+    bool filterAcceptsLanguage(const QModelIndex& bookIndex) const;
 
     FilterRequest m_filterRequest;
     QString m_sortString = "";

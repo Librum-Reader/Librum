@@ -93,13 +93,13 @@ std::optional<bool> LibraryProxyModel::leftBookIsCloserToSortString(
 }
 
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,
-                                         QString date, bool onlyBooks,
+                                         QString language, bool onlyBooks,
                                          bool onlyFiles, bool read, bool unread)
 {
     m_filterRequest = FilterRequest {
         .authors = authors.toLower(),
         .format = format.toLower(),
-        .date = date.toLower(),
+        .language = language.toLower(),
         .onlyBooks = onlyBooks,
         .onlyFiles = onlyFiles,
         .read = read,
@@ -115,7 +115,8 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
     return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
-           filterAcceptsFormat(index) && filterAcceptsStatus(index);
+           filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
+           filterAcceptsLanguage(index);
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -323,6 +324,20 @@ bool LibraryProxyModel::filterAcceptsStatus(const QModelIndex& bookIndex) const
         return false;
 
     return true;
+}
+
+bool LibraryProxyModel::filterAcceptsLanguage(
+    const QModelIndex& bookIndex) const
+{
+    bool requestIsEmpty = m_filterRequest.language.isEmpty();
+    if(requestIsEmpty)
+        return true;
+
+    auto rawLanguage =
+        sourceModel()->data(bookIndex, LibraryModel::LanguageRole);
+    auto language = rawLanguage.toString().toLower();
+
+    return language == m_filterRequest.language;
 }
 
 }  // namespace adapters::data_models

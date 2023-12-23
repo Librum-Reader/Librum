@@ -9,7 +9,7 @@ struct ADAPTERS_EXPORT FilterRequest
 {
     QString authors = "";
     QString format = "";
-    QString date = "";
+    QString language = "";
     bool onlyBooks = false;
     bool onlyFiles = false;
     bool read = false;

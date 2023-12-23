@@ -244,7 +244,7 @@ Popup {
 
     function resetFilter() {
         authorsInput.clearText()
-        addedInput.clearText()
+        languageInputComboBox.deselectCurrenItem()
         formatInputComboBox.deselectCurrenItem()
         unreadBox.checked = false
         readBox.checked = false
