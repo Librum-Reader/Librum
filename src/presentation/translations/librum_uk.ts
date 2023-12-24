@@ -368,7 +368,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
-        <translation>Скинути налаштування?</translation>
+        <translation>Скинути параметри?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="511"/>
@@ -1755,7 +1755,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Чому ми пропонуємо декілька рівнів</translation>
+        <translation>Дізнатись про рівні</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
