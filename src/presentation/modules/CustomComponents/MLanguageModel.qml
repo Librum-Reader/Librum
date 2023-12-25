@@ -7,288 +7,270 @@ ListModel {
         text: "English"
     }
     ListElement {
-        text: "Spanish"
+        text: "Español" // Spanish
     }
     ListElement {
-        text: "French"
+        text: "Français" // French
     }
     ListElement {
-        text: "German"
+        text: "Deutsch" // German
     }
     ListElement {
-        text: "Italian"
+        text: "Italiano" // Italian
     }
     ListElement {
-        text: "Portuguese"
+        text: "Português" // Portuguese
     }
     ListElement {
-        text: "Dutch"
+        text: "Nederlands" // Dutch
     }
     ListElement {
-        text: "Russian"
+        text: "Русский" // Russian
     }
     ListElement {
-        text: "Chinese"
+        text: "中文" // Chinese
     }
     ListElement {
-        text: "Japanese"
+        text: "日本語" // Japanese
     }
     ListElement {
-        text: "Korean"
+        text: "한국어" // Korean
     }
     ListElement {
-        text: "Arabic"
+        text: "العربية" // Arabic
     }
     ListElement {
-        text: "Turkish"
+        text: "Türkçe" // Turkish
     }
     ListElement {
-        text: "Hindi"
+        text: "हिन्दी" // Hindi
     }
     ListElement {
-        text: "Bengali"
+        text: "বাংলা" // Bengali
     }
     ListElement {
-        text: "Urdu"
+        text: "اردو" // Urdu
     }
     ListElement {
-        text: "Punjabi"
+        text: "ਪੰਜਾਬੀ" // Punjabi
     }
     ListElement {
-        text: "Indonesian"
+        text: "Bahasa Indonesia" // Indonesian
     }
     ListElement {
-        text: "Malay"
+        text: "Bahasa Melayu" // Malay
     }
     ListElement {
-        text: "Thai"
+        text: "ไทย" // Thai
     }
     ListElement {
-        text: "Vietnamese"
+        text: "Tiếng Việt" // Vietnamese
     }
     ListElement {
-        text: "Greek"
+        text: "Ελληνικά" // Greek
     }
     ListElement {
-        text: "Hebrew"
+        text: "עִבְרִית" // Hebrew
     }
     ListElement {
-        text: "Swedish"
+        text: "Svenska" // Swedish
     }
     ListElement {
-        text: "Norwegian"
+        text: "Norsk" // Norwegian
     }
     ListElement {
-        text: "Danish"
+        text: "Dansk" // Danish
     }
     ListElement {
-        text: "Finnish"
+        text: "Suomi" // Finnish
     }
     ListElement {
-        text: "Polish"
+        text: "Polski" // Polish
     }
     ListElement {
-        text: "Czech"
+        text: "Čeština" // Czech
     }
     ListElement {
-        text: "Hungarian"
+        text: "Magyar" // Hungarian
     }
     ListElement {
-        text: "Romanian"
+        text: "Română" // Romanian
     }
     ListElement {
-        text: "Bulgarian"
+        text: "Български" // Bulgarian
     }
     ListElement {
-        text: "Serbian"
+        text: "Српски" // Serbian
     }
     ListElement {
-        text: "Croatian"
+        text: "Hrvatski" // Croatian
     }
     ListElement {
-        text: "Slovak"
+        text: "Slovenčina" // Slovak
     }
     ListElement {
-        text: "Slovenian"
+        text: "Slovenščina" // Slovenian
     }
     ListElement {
-        text: "Macedonian"
+        text: "Македонски" // Macedonian
     }
     ListElement {
-        text: "Albanian"
+        text: "Shqip" // Albanian
     }
     ListElement {
-        text: "Bosnian"
+        text: "Bosanski" // Bosnian
     }
     ListElement {
-        text: "Montenegrin"
+        text: "Crnogorski" // Montenegrin
     }
     ListElement {
-        text: "Kurdish"
+        text: "Kurdî" // Kurdish
     }
     ListElement {
-        text: "Georgian"
+        text: "ქართული" // Georgian
     }
     ListElement {
-        text: "Armenian"
+        text: "Հայերեն" // Armenian
     }
     ListElement {
-        text: "Azerbaijani"
+        text: "Azərbaycan dili" // Azerbaijani
     }
     ListElement {
-        text: "Uzbek"
+        text: "O‘zbek" // Uzbek
     }
     ListElement {
-        text: "Kazakh"
+        text: "Қазақ тілі" // Kazakh
     }
     ListElement {
-        text: "Kyrgyz"
+        text: "Кыргызча" // Kyrgyz
     }
     ListElement {
-        text: "Turkmen"
+        text: "Түркмен" // Turkmen
     }
     ListElement {
-        text: "Mongolian"
+        text: "Монгол хэл" // Mongolian
     }
     ListElement {
-        text: "Tajik"
+        text: "Тоҷикӣ" // Tajik
     }
     ListElement {
-        text: "Farsi (Persian)"
+        text: "فارسی" // Farsi (Persian)
     }
     ListElement {
-        text: "Pashto"
+        text: "پښتو" // Pashto
     }
     ListElement {
-        text: "Urdu"
+        text: "অসমীয়া" //  Assamese
     }
     ListElement {
-        text: "Hindi"
+        text: "ગુજરાતી" //  Gujarati
     }
     ListElement {
-        text: "Bengali"
+        text: "ಕನ್ನಡ" //  Kannada
     }
     ListElement {
-        text: "Assamese"
+        text: "മലയാളം" // Malayalam
     }
     ListElement {
-        text: "Gujarati"
+        text: "मराठी" //  Marathi
     }
     ListElement {
-        text: "Kannada"
+        text: "ଓଡ଼ିଆ" //  Odia
     }
     ListElement {
-        text: "Malayalam"
+        text: "தமிழ்" //  Tamil
     }
     ListElement {
-        text: "Marathi"
+        text: "తెలుగు" //  Telugu
     }
     ListElement {
-        text: "Odia"
+        text: "नेपाली" //  Nepali
     }
     ListElement {
-        text: "Punjabi"
+        text: "සිංහල" //  Sinhala
     }
     ListElement {
-        text: "Tamil"
+        text: "မြန်မာစာ" // Burmese
     }
     ListElement {
-        text: "Telugu"
+        text: "ខ្មែរ" //  Khmer
     }
     ListElement {
-        text: "Nepali"
+        text: "ພາສາລາວ" // Lao
     }
     ListElement {
-        text: "Sinhala"
+        text: "Tagalog" // Tagalog
     }
     ListElement {
-        text: "Burmese"
+        text: "Hausa" // Hausa
     }
     ListElement {
-        text: "Khmer"
+        text: "Yorùbá" // Yoruba
     }
     ListElement {
-        text: "Lao"
+        text: "Igbo" // Igbo
     }
     ListElement {
-        text: "Tagalog"
+        text: "Kiswahili" // Swahili
     }
     ListElement {
-        text: "Malay"
+        text: "isiZulu" // Zulu
     }
     ListElement {
-        text: "Indonesian"
+        text: "isiXhosa" // Xhosa
     }
     ListElement {
-        text: "Hausa"
+        text: "Sesotho" // Sotho
     }
     ListElement {
-        text: "Yoruba"
+        text: "Setswana" // Tswana
     }
     ListElement {
-        text: "Igbo"
+        text: "Chichewa" // Chichewa
     }
     ListElement {
-        text: "Swahili"
+        text: "አማርኛ" // Amharic
     }
     ListElement {
-        text: "Zulu"
+        text: "Afaan Oromoo" // Oromo
     }
     ListElement {
-        text: "Xhosa"
+        text: "ትግርኛ" // Tigrinya
     }
     ListElement {
-        text: "Sotho"
+        text: "الصومالية" // Somali
     }
     ListElement {
-        text: "Tswana"
+        text: "Te Reo Māori" // Maori
     }
     ListElement {
-        text: "Chichewa"
+        text: "Gagana fa'a Sāmoa" // Samoan
     }
     ListElement {
-        text: "Amharic"
+        text: "lea fakatonga" // Tongan
     }
     ListElement {
-        text: "Oromo"
+        text: "vosa Vakaviti" // Fijian
     }
     ListElement {
-        text: "Tigrinya"
+        text: "ʻŌlelo Hawaiʻi" // Hawaiian
     }
     ListElement {
-        text: "Somali"
+        text: "Kajin M̧ajeļ" // Marshallese
     }
     ListElement {
-        text: "Maori"
+        text: "Chamoru" // Chamorro
     }
     ListElement {
-        text: "Samoan"
+        text: "a tekoi er a Belau" // Palauan
     }
     ListElement {
-        text: "Tongan"
+        text: "Dorerin Naoero" // Nauruan
     }
     ListElement {
-        text: "Fijian"
+        text: "Taetae ni Kiribati" // Kiribati
     }
     ListElement {
-        text: "Hawaiian"
-    }
-    ListElement {
-        text: "Marshallese"
-    }
-    ListElement {
-        text: "Chamorro"
-    }
-    ListElement {
-        text: "Palauan"
-    }
-    ListElement {
-        text: "Nauruan"
-    }
-    ListElement {
-        text: "Kiribati"
-    }
-    ListElement {
-        text: "Tuvaluan"
+        text: "Te Ggana Tuuvalu" // Tuvaluan
     }
 }
