@@ -638,7 +638,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
-        <translation>Керувати тегами</translation>
+        <translation>Змінити теги</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
@@ -649,7 +649,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
         <source>Remove book</source>
-        <translation>Видалити книгу</translation>
+        <translation>Видалити</translation>
     </message>
 </context>
 <context>
@@ -1787,7 +1787,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../settings/MStoragePage.qml" line="355"/>
         <source>Upgrade Your Account</source>
-        <translation>Покращіть Ваш акаунт</translation>
+        <translation>Апгрейд</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
