@@ -683,7 +683,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="167"/>
         <source>Rename</source>
-        <translation>Перейменувати</translation>
+        <translation>Ред. назву</translation>
     </message>
     <message>
         <location filename="../readingPage/MBookmarksSidebar.qml" line="179"/>
