@@ -83,7 +83,11 @@ Item {
                 }
 
                 MouseArea {
+                    id: mouseArea
                     anchors.fill: parent
+                    hoverEnabled: true
+
+                    onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
 
                     onClicked: {
                         if (root.opened)

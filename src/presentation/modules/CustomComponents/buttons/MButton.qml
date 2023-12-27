@@ -87,6 +87,8 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
 
+            onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
+
             onClicked: root.clicked()
         }
     }
