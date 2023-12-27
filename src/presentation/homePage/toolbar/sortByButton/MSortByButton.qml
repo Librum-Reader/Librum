@@ -78,7 +78,11 @@ Item {
     }
 
     MouseArea {
+        id: mouseArea
         anchors.fill: parent
+        hoverEnabled: true
+
+        onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
 
         onClicked: sortByPopup.opened ? sortByPopup.close() : sortByPopup.open()
     }
