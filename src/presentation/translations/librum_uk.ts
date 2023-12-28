@@ -453,7 +453,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation>Скинути налаштування?</translation>
+        <translation>Скинути параметри?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
