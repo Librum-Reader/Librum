@@ -100,5 +100,6 @@ Popup {
 
         listView.currentIndex = -1
         root.selectedContent = ""
+        Logic.deselectCurrentItem()
     }
 }
