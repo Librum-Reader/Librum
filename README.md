@@ -2,7 +2,7 @@
 
 Librum is an application designed to make reading <b>enjoyable</b> and <b>straightforward</b> for everyone.
 
-It's not **just** an e-book reader. With Librum, you can manage your own online library and access it from any device anytime, anywhere. It has features like note-taking, bookmarking, and highlighting, while offering customization to make it as personal as you want!
+It's not **just** an e-book reader. With Librum, you can manage your own online library and access it from any device anytime, anywhere. It has features like note-taking, AI tooling, and highlighting, while offering customization to make it as personal as you want!
  
 Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
@@ -28,11 +28,22 @@ Customize Librum to make it personal to you
 
 <br>
 
-# How can I get Librum?
+# Where can I get Librum?
 
 Simply go to https://librumreader.com to download Librum.
 
 If you want to build Librum from source, follow the instructions [here](#build-guide).
+
+<br>
+
+# Donations
+
+Donations make it possible for us to cover our server costs and allow us to make investments into new areas of development.
+<br>
+If you would like to support us, check out: https://librumreader.com/contribute/donate or become a Github sponsor! 
+<br>
+<br>
+As a team of opensource developers we rely on donations to continue working on projects like Librum. Your help is greatly appreciated.
 
 <br>
 
@@ -59,24 +70,12 @@ If you run into any problems, need guidance or have questions, feel free to reac
 Notes:
 - Make sure that your translations are approximately the same length as the original text
 - Make sure that you keep to the punctuation and capitalisation
-- Make sure that your translations make sense in the context they are in
 
 <br>
 
 # Documentation
 
 For documentation go to [Librum's GitHub-wiki](https://github.com/Librum-Reader/Librum/wiki)
-
-<br>
-
-# Donations
-
-Donations make it possible for us to cover our server costs and allow us to make investments into new areas of development.
-<br>
-If you would like to support us, check out: https://librumreader.com/contribute/donate or become a github sponsor! 
-<br>
-<br>
-As a team of opensource developers we rely on donations to continue working on projects like Librum. Your help is greatly appreciated.
 
 <br>
 
@@ -97,10 +96,18 @@ Please make sure to run clang format, keep to the conventions used throughout th
 
 # Contact
 
-
 For questions, you can reach us under: help@librumreader.com
 <br>
 For business related contact, reach out to us here: contact@librumreader.com
+
+<br>
+
+# Self-hosting
+To self-host Librum you need to run [Librum-Server](https://github.com/Librum-Reader/Librum-Server) locally (instructions can be found [here](https://github.com/Librum-Reader/Librum-Server#self-hosting)) and tell the client to use your self-hosted server by:
+- (Linux) Editing ~/.config/Librum-Reader/Librum.conf and setting `selfHosted=true` and `serverHost` to your server's url (e.g. `serverHost=https://127.0.0.1:5001`)
+- (Windows) Opening the registry editor (Press `Win + R` and search for `regedit`), navigating to `HKEY_CURRENT_USER\Software\Librum-Reader\Librum` and setting `selfHosted=true` and `serverHost` to your server's url
+
+Make sure to run the application before following the steps above, to generate the required files.
 
 <br>
 
