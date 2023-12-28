@@ -96,7 +96,11 @@ Item {
                     }
 
                     MouseArea {
+                        id: iconBlockMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+
+                        onEntered: iconBlockMouseArea.cursorShape = Qt.PointingHandCursor
 
                         onClicked: {
                             if (popup.opened) {
@@ -124,6 +128,9 @@ Item {
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent
+                hoverEnabled: true
+
+                onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
 
                 onClicked: {
                     if (inputField.text !== "")
