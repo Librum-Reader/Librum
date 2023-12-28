@@ -12,7 +12,11 @@ Item {
     property string boxBackgroundColor: Style.colorContainerBackground
 
     property alias model: selectionPopup.model
+
+    // Not all models have their property called "text", thus we can't use model.get(i).text or similar,
+    // this allows us to specify the property name by which we can get the content
     property alias contentPropertyName: selectionPopup.contentPropertyName
+
     property alias listView: selectionPopup.listView
     property alias checkBoxStyle: selectionPopup.checkBoxStyle
     property alias checkBoxSize: selectionPopup.checkBoxSize
@@ -209,8 +213,10 @@ Item {
 
     function setDefaultItem(itemName) {
         for (var i = 0; i < selectionPopup.model.count; i++) {
-            if (selectionPopup.model.get(i).text === itemName)
+            if (selectionPopup.model.get(i)[contentPropertyName] === itemName) {
                 selectItem(i)
+                return
+            }
         }
 
         selectionPopup.defaultIndex = -1
