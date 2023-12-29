@@ -372,7 +372,12 @@ Page {
                                     color: savedValue
 
                                     MouseArea {
+                                        id: highlightColorBoxMouseArea
                                         anchors.fill: parent
+                                        hoverEnabled: true
+
+                                        onEntered: highlightColorBoxMouseArea.cursorShape
+                                                   = Qt.PointingHandCursor
 
                                         onClicked: {
                                             highlightColorBox.currentColorButton = parent

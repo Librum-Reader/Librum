@@ -87,7 +87,11 @@ Item {
                     rotation: 180
 
                     MouseArea {
+                        id: upArrowMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+
+                        onEntered: upArrowMouseArea.cursorShape = Qt.PointingHandCursor
 
                         onClicked: internal.increaseValue()
                     }
@@ -100,7 +104,11 @@ Item {
                     fillMode: Image.PreserveAspectFit
 
                     MouseArea {
+                        id: downArrowMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
+
+                        onEntered: downArrowMouseArea.cursorShape = Qt.PointingHandCursor
 
                         onClicked: internal.decreaseValue()
                     }
