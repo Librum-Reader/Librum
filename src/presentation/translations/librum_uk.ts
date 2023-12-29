@@ -1317,7 +1317,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="68"/>
         <source>Manage Profile</source>
-        <translation>Керування профілем</translation>
+        <translation>Профіль</translation>
     </message>
     <message>
         <location filename="../sidebar/MProfilePopup.qml" line="87"/>
