@@ -136,7 +136,7 @@ These features include:
 - A modern e-reader
 - A personalized and customizable library
 - Book meta-data editing
-- A free in-app bookstore with more than 70.000 books
+- A free in-app bookstore with more than 70,000 books
 - Book syncing across all of your devices
 - Highlighting
 - Bookmarking
