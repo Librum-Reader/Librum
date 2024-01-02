@@ -52,8 +52,6 @@ Item {
                                   LibraryController.libraryModel.setFilterRequest(
                                       authors, format, language, onlyBooks,
                                       onlyFiles, read, unread)
-
-                                  resetFiltersButton.visible = true
                               }
         }
 
@@ -71,7 +69,7 @@ Item {
           */
         MRemoveOptionButton {
             id: resetFiltersButton
-            visible: false
+            visible: LibraryController.libraryModel.isFiltering
             text: qsTr("Remove Filters")
 
             onClicked: root.resetFilters()
@@ -165,7 +163,6 @@ Item {
         LibraryController.libraryModel.setFilterRequest("", "", "", false,
                                                         false, false, false)
         filterByButton.resetFilter()
-        resetFiltersButton.visible = false
     }
 
     function resetTags() {

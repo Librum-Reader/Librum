@@ -106,7 +106,17 @@ void LibraryProxyModel::setFilterRequest(QString authors, QString format,
         .unread = unread,
     };
 
+    emit filterUpdated();
     invalidateFilter();
+}
+
+bool LibraryProxyModel::getIsFiltering()
+{
+    return !m_filterRequest.authors.isEmpty() ||
+           !m_filterRequest.format.isEmpty() ||
+           !m_filterRequest.language.isEmpty() || m_filterRequest.onlyBooks ||
+           m_filterRequest.onlyFiles || m_filterRequest.read ||
+           m_filterRequest.unread;
 }
 
 bool LibraryProxyModel::filterAcceptsRow(int source_row,
@@ -159,6 +169,8 @@ QString LibraryProxyModel::getSortString()
 void LibraryProxyModel::addFilterTag(QString tag)
 {
     m_tags.emplace_back(tag);
+
+    emit filterUpdated();
     invalidateFilter();
 }
 
@@ -169,12 +181,16 @@ void LibraryProxyModel::removeFilterTag(QString tagToRemove)
         return;
 
     m_tags.erase(pos);
+
+    emit filterUpdated();
     invalidateFilter();
 }
 
 void LibraryProxyModel::clearFilterTags()
 {
     m_tags.clear();
+
+    emit filterUpdated();
     invalidateFilter();
 }
 

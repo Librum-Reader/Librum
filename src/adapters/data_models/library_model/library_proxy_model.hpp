@@ -21,6 +21,7 @@ class ADAPTERS_EXPORT LibraryProxyModel : public QSortFilterProxyModel
                    sortStringUpdated)
     Q_PROPERTY(
         int sortRole READ getSortRole WRITE setSortRole NOTIFY sortRoleUpdated)
+    Q_PROPERTY(bool isFiltering READ getIsFiltering NOTIFY filterUpdated)
 
 public:
     enum SortRole
@@ -45,6 +46,7 @@ public:
     Q_INVOKABLE void setFilterRequest(QString authors, QString format,
                                       QString language, bool onlyBooks,
                                       bool onlyFiles, bool read, bool unread);
+    Q_INVOKABLE bool getIsFiltering();
     Q_INVOKABLE void addFilterTag(QString tag);
     Q_INVOKABLE void removeFilterTag(QString tag);
     Q_INVOKABLE void clearFilterTags();
@@ -58,6 +60,7 @@ public:
 signals:
     void sortStringUpdated();
     void sortRoleUpdated();
+    void filterUpdated();
 
 private:
     std::optional<bool> leftBookIsCloserToSortString(
