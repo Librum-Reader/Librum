@@ -79,7 +79,7 @@
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translatorcomment>About last phrase: the correct term for feedback is &quot;riscontro&quot;, but it isn&apos;t very used, feedback is quite understandable.</translatorcomment>
         <translation>Librum è per chiunque voglia gustarsi un buon libro.
-Speriamo che vi piacia usarlo! Se volete, lasciateci una valutazione ed un feedback.</translation>
+Speriamo che vi piaccia usarlo! Se volete, lasciate una valutazione ed un feedback.</translation>
     </message>
 </context>
 <context>
@@ -103,7 +103,7 @@ Speriamo che vi piacia usarlo! Se volete, lasciateci una valutazione ed un feedb
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="53"/>
         <source>Privacy Policy</source>
-        <translation>Politica sulla Privacy</translation>
+        <translation>Privacy Policy</translation>
     </message>
 </context>
 <context>
@@ -162,7 +162,7 @@ Speriamo che vi piacia usarlo! Se volete, lasciateci una valutazione ed un feedb
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="320"/>
         <source>Analyse your reading to make better recommendations</source>
-        <translation>Analizza le tue letture per fornirti suggerimenti migliori</translation>
+        <translation type="unfinished">Analizza le tue letture per fornirti migliori suggerimenti</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
@@ -252,12 +252,12 @@ Speriamo che vi piacia usarlo! Se volete, lasciateci una valutazione ed un feedb
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="158"/>
         <source>The shortcut</source>
-        <translation>Le scorciatoie</translation>
+        <translation>La scorciatoia</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="159"/>
         <source>is already used for</source>
-        <translation>è già usato per</translation>
+        <translation>è già usata per</translation>
     </message>
     <message>
         <location filename="../settings/shortcutsPage/MAddShortcutPopup.qml" line="177"/>
@@ -364,7 +364,7 @@ Speriamo che vi piacia usarlo! Se volete, lasciateci una valutazione ed un feedb
     <message>
         <location filename="../settings/MAppearancePage.qml" line="326"/>
         <source>Highlights</source>
-        <translation>Evidenziazione</translation>
+        <translation>Evidenzia</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="335"/>
@@ -501,43 +501,44 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookDetailsPopup</name>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="70"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="71"/>
         <source>Book details</source>
         <translation>Dettagli libro</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="174"/>
         <source>Change</source>
         <translation>Cambia</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="188"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="542"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="189"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="486"/>
         <source>Delete</source>
         <translatorcomment>See &quot;cancel&quot;. Literaly is cancella, so as not to cause confusion I used &quot;Elimina&quot; as &quot;eliminate&quot;</translatorcomment>
         <translation>Elimina</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="236"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="237"/>
         <source>Title</source>
         <translation>Titolo</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="241"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="260"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="370"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="389"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="574"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="242"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="261"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="293"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="314"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="333"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="518"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="256"/>
         <source>Authors</source>
         <translation>Autori</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="274"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="275"/>
         <source>Pages</source>
         <translation>Pagina</translation>
     </message>
@@ -547,61 +548,61 @@ Either you are offline, or your storage is full.</source>
         <translation>Lingua</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="309"/>
         <source>Document creator</source>
         <translatorcomment>creator is really not used in Italian for documents; we always refer as Author</translatorcomment>
         <translation>Autore documento</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="328"/>
         <source>Creation date</source>
         <translation>Data di creazione</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="403"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="347"/>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
         <source>Document size</source>
         <translation>Dimensione documento</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="440"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
         <source>Added</source>
         <translation>Aggiunto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="458"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="402"/>
         <source>Last opened</source>
         <translation>Ultimo aperto</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="492"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="436"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="517"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="461"/>
         <source>Cancel</source>
         <translatorcomment>Literaly translation is &quot;cancella&quot; but usually is used as &quot;delete&quot;.  &quot;Annulla&quot; is best suite for &quot;go back&quot; as I interpretate it</translatorcomment>
         <translation>Annulla</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="505"/>
         <source>Select</source>
         <translation>Selezionare</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="508"/>
         <source>All files</source>
         <translation>Tutti i files</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="509"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="510"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="511"/>
         <source>files</source>
         <translatorcomment>Are you sure about the absence of capital?</translatorcomment>
         <translation>files</translation>
@@ -613,8 +614,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translatorcomment>Idk if that is too long, you can use &quot;Letto&quot;</translatorcomment>
-        <translation>Segna come letto</translation>
+        <translation>Letto</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
@@ -652,14 +652,13 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="91"/>
         <source>Manage tags</source>
-        <translatorcomment>tags is quite readable also in talian, so if for aesthetic reasons you prefer &quot;tags&quot;, it&apos;s possible to switch it</translatorcomment>
-        <translation>Gestisci etichette</translation>
+        <translation>Gestisci tags</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="101"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
-        <translation>Segna come letto</translation>
+        <translation>Letto</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="110"/>
@@ -724,7 +723,7 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
         <source>Any</source>
         <translation>Qualunque</translation>
     </message>
@@ -740,7 +739,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="78"/>
         <source>Deleting your account is an irreversible action.&lt;br&gt;Once you delete your account, there is &lt;b&gt;no&lt;/b&gt; going back. Please be certain.</source>
         <translatorcomment>Please be certain in italian is &quot;per favore sii certo&quot;. Too formal, unused. I used &quot;are you sure?&quot; instead.</translatorcomment>
-        <translation type="unfinished">L&apos;eliminazione dell&apos;account è irreversibile..&lt;br&gt;Una volta eliminato&lt;b&gt;non&lt;/b&gt; è possibile ripristinarlo. Sei sicuro?</translation>
+        <translation>L&apos;eliminazione dell&apos;account è irreversibile.&lt;br&gt;Una volta eliminato &lt;b&gt;non&lt;/b&gt; è possibile ripristinarlo. Sei sicuro?</translation>
     </message>
     <message>
         <location filename="../modules/CustomComponents/MConfirmAccountDeletionPopup.qml" line="90"/>
@@ -950,79 +949,83 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MFilterByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="72"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="73"/>
         <source>e.g. Uncle bob</source>
         <translatorcomment>Since it&apos;s latin (exempli gratia) you could use e.g.</translatorcomment>
         <translation>es. Zio Bob</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="75"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="76"/>
         <source>Authors</source>
         <translation>Autori</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>e.g. 2d ago</source>
         <translatorcomment>Since it&apos;s latin (exempli gratia) you could use e.g.</translatorcomment>
-        <translation>es. 2g fa</translation>
+        <translation type="vanished">es. 2g fa</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="102"/>
         <source>Added</source>
-        <translation>Aggiunto</translation>
+        <translation type="vanished">Aggiunto</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="118"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="121"/>
         <source>Read</source>
         <translation>Letto</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="136"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="139"/>
         <source>Unread</source>
         <translation>Non letto</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="157"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="160"/>
         <source>Format</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="158"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="100"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="161"/>
         <source>Any</source>
         <translation>Qualsiasi</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="168"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
+        <source>Language</source>
+        <translation>Lingua</translation>
+    </message>
+    <message>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
         <source>Pdf</source>
         <translation>Pdf</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
         <source>Epub</source>
         <translation>Epub</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
         <source>Mobi</source>
         <translation>Mobi</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="180"/>
         <source>Txt</source>
         <translation>Txt</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="191"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="194"/>
         <source>Only Books</source>
         <translation>Solo Libri</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="209"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="212"/>
         <source>Only Files</source>
         <translation>Solo Files</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="230"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="233"/>
         <source>Apply Filter</source>
         <translation>Applica Filtro</translation>
     </message>
@@ -1084,7 +1087,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="82"/>
         <source>Choose from over 70,000 books</source>
         <translatorcomment>Yes, we use dot instead of comma. Like normal people.</translatorcomment>
-        <translation>Segli fra più di 70.000 libri</translation>
+        <translation>Scegli fra più di 70.000 libri</translation>
     </message>
 </context>
 <context>
@@ -1114,7 +1117,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="136"/>
         <source>Add books</source>
-        <translation>Aggiungere libri</translation>
+        <translation>Aggiungi libri</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="400"/>
@@ -1125,7 +1128,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="401"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation>Eliminare un libro è irreversibile, nessuno poptrà recuperarlo dopo!</translation>
+        <translation>Eliminare un libro è irreversibile, nessuno potrà recuperarlo dopo!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="402"/>
@@ -1151,7 +1154,8 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="456"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
-        <translation>Hai raggiunto il tuo limite di upload. Cancella libri non usati per liberare spazio o fai l&apos;upgrade.</translation>
+        <translation>Hai raggiunto il tuo limite di upload.
+Cancella libri non usati per liberare spazio o fai l&apos;upgrade.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="457"/>
@@ -1195,7 +1199,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="502"/>
         <source>Unsupported File</source>
-        <translation>Formato non supportato</translation>
+        <translation>Non supportato</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="503"/>
@@ -1296,7 +1300,7 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="69"/>
         <source>Manage Tags</source>
         <translatorcomment>tags is quite readable also in talian, so if for aesthetic reasons you prefer &quot;tags&quot;, it&apos;s possible to switch with it</translatorcomment>
-        <translation>Gestisci etichette</translation>
+        <translation>Gestisci tags</translation>
     </message>
     <message>
         <location filename="../homePage/manageTagsPopup/MManageTagsPopup.qml" line="166"/>
@@ -1320,12 +1324,12 @@ Delete unused books to free up space or upgrade.</source>
 <context>
     <name>MOnOffToggle</name>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="24"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="23"/>
         <source>OFF</source>
         <translation>OFF</translation>
     </message>
     <message>
-        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="26"/>
+        <location filename="../modules/CustomComponents/MOnOffToggle.qml" line="25"/>
         <source>ON</source>
         <translation>ON</translation>
     </message>
@@ -1407,7 +1411,7 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="66"/>
         <source>Case sensitive</source>
         <translatorcomment>This is an hard one. You can shorten it with &quot;Distingui maiusc. e minusc.&quot;, or mantain &quot;Case sensitive&quot;. In the last case I am not sure everyone understands.</translatorcomment>
-        <translation>Distingui maiuscole e minuscole</translation>
+        <translation>Maiuscole e minuscole</translation>
     </message>
     <message>
         <location filename="../readingPage/readingSearchbar/MReadingSearchbarOptionsPopup.qml" line="80"/>
@@ -1520,7 +1524,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
-        <translation>Cerca per libri</translation>
+        <translation>Cerca libri</translation>
     </message>
 </context>
 <context>
@@ -1575,7 +1579,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="55"/>
         <source>Settings</source>
-        <translation>Settaggi</translation>
+        <translation>Impostazioni</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="74"/>
@@ -1622,7 +1626,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="198"/>
         <source>Storage</source>
-        <translation>Archiviazione</translation>
+        <translation>Archivio</translation>
     </message>
     <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="215"/>
@@ -1699,7 +1703,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="187"/>
         <source>Settings</source>
-        <translation>Settaggi</translation>
+        <translation>Impostazioni</translation>
     </message>
 </context>
 <context>
@@ -1730,7 +1734,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="77"/>
         <source>Book (A-Z)</source>
-        <translation>Libro (A-Z)</translation>
+        <translation>Libri (A-Z)</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByPopup.qml" line="81"/>
@@ -1784,7 +1788,7 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../settings/MStoragePage.qml" line="168"/>
         <source>See why we offer multiple tiers</source>
-        <translation>Guarda perché offriamo diversi livelli</translation>
+        <translation>Perché offriamo diversi livelli?</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="201"/>
@@ -1816,12 +1820,12 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
     <message>
         <location filename="../settings/MStoragePage.qml" line="355"/>
         <source>Upgrade Your Account</source>
-        <translation>Upregrade il tuo account</translation>
+        <translation>Aggiorna account</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
         <source>We don&apos;t offer upgrading options at the moment.</source>
-        <translation>Al momento nonoffriamo opzioni di upgrade.</translation>
+        <translation>Al momento non offriamo opzioni di upgrade.</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="356"/>
@@ -1856,8 +1860,8 @@ Conferma la tua email cliccando il link che ti abbiamo inviato.</translation>
         <location filename="../settings/MSupportUsPage.qml" line="69"/>
         <source>We are a small team of opensource developers creating apps for the community. We love
 working on fun projects, supporting our community and trying to make the world a better place.</source>
-        <translation>Siamo un piccolo team di sviluppatori opensource, che creano app per la comunità. Amiamo
-lavorare su progetti divertenti, supportare la comunità e cercare di rendere il mondo un posto migliore.</translation>
+        <translation>Siamo un piccolo team di sviluppatori opensource, che creano app per la comunità.
+Amiamo lavorare su progetti divertenti, supportare la comunità e cercare di rendere il mondo un posto migliore.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="79"/>
@@ -1872,17 +1876,17 @@ lavorare su progetti divertenti, supportare la comunità e cercare di rendere il
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="111"/>
         <source>contribute to Librum</source>
-        <translation>contribuisci a Librum</translation>
+        <translation>contribuire a Librum</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="112"/>
         <source>If you are not, you can still help us by spreading the word about Librum.</source>
-        <translation>Se non lo sei, puoi comunque aiutarci parlando di LIbrum.</translation>
+        <translation>Se non lo sei, puoi comunque aiutarci parlando di Librum.</translation>
     </message>
     <message>
         <location filename="../settings/MSupportUsPage.qml" line="147"/>
         <source>Thank you for your support. We hope you enjoy Librum!</source>
-        <translation>razie per il tuo supporto. Speriamo che ti piacia Librum!</translation>
+        <translation>Grazie per il tuo supporto. Speriamo che ti piaccia Librum!</translation>
     </message>
 </context>
 <context>
@@ -1957,7 +1961,7 @@ lavorare su progetti divertenti, supportare la comunità e cercare di rendere il
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="47"/>
         <source>Make sure to check for updates regularly, so you dont miss out on any great features.</source>
-        <translation>Controlla glia aggiornamenti regolarmente, così non perderai nessuna nuova funzionalità.</translation>
+        <translation>Controlla gli aggiornamenti regolarmente, così non perderai nessuna nuova funzionalità.</translation>
     </message>
     <message>
         <location filename="../settings/updatesPage/MUpToDate.qml" line="56"/>

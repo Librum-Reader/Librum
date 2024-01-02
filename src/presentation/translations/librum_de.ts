@@ -580,42 +580,43 @@ Entweder bist du offline oder dein Speicher ist voll.</translation>
 <context>
     <name>MBookDetailsPopup</name>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="70"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="71"/>
         <source>Book details</source>
         <translation>Buch details</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="173"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="174"/>
         <source>Change</source>
         <translation>Ändern</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="188"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="542"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="189"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="486"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="236"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="237"/>
         <source>Title</source>
         <translation>Titel</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="241"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="260"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="370"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="389"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="574"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="242"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="261"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="293"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="314"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="333"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="518"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="255"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="256"/>
         <source>Authors</source>
         <translation>Autoren</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="274"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="275"/>
         <source>Pages</source>
         <translation>Seiten</translation>
     </message>
@@ -625,42 +626,42 @@ Entweder bist du offline oder dein Speicher ist voll.</translation>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="309"/>
         <source>Document creator</source>
         <translation>Dokument Ersteller</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="328"/>
         <source>Creation date</source>
         <translation>Erstellungsdatum</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="403"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="347"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="421"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="365"/>
         <source>Document size</source>
         <translation>Dokument Größe</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="440"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="384"/>
         <source>Added</source>
         <translation>Hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="458"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="402"/>
         <source>Last opened</source>
         <translation>Zuletzt geöffnet</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="492"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="436"/>
         <source>Apply</source>
         <translation>Anwenden</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="517"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="461"/>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -683,19 +684,19 @@ niemand wird es wiederherstellen können!</translation>
         <translation type="vanished">Ja, Buch löschen</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="505"/>
         <source>Select</source>
         <translation>Auswählen</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="564"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="508"/>
         <source>All files</source>
         <translation>Alle Dokumente</translation>
     </message>
     <message>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="565"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="566"/>
-        <location filename="../homePage/MBookDetailsPopup.qml" line="567"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="509"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="510"/>
+        <location filename="../homePage/MBookDetailsPopup.qml" line="511"/>
         <source>files</source>
         <translation>Dokumente</translation>
     </message>
@@ -834,7 +835,7 @@ niemand wird es wiederherstellen können!</translation>
 <context>
     <name>MComboBox</name>
     <message>
-        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="35"/>
+        <location filename="../modules/CustomComponents/comboBox/MComboBox.qml" line="39"/>
         <source>Any</source>
         <translation>Beliebig</translation>
     </message>
@@ -1059,77 +1060,81 @@ niemand wird es wiederherstellen können!</translation>
 <context>
     <name>MFilterByPopup</name>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="72"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="73"/>
         <source>e.g. Uncle bob</source>
         <translation>z.B. Onkel Bob</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="75"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="76"/>
         <source>Authors</source>
         <translation>Autoren</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>e.g. 2d ago</source>
-        <translation>z.B. vor 2d</translation>
+        <translation type="vanished">z.B. vor 2d</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="102"/>
         <source>Added</source>
-        <translation>Hinzugefügt</translation>
+        <translation type="vanished">Hinzugefügt</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="118"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="121"/>
         <source>Read</source>
         <translation>Gelesen</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="136"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="139"/>
         <source>Unread</source>
         <translation>Nicht gelesen</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="157"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="160"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="158"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="100"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="161"/>
         <source>Any</source>
         <translation>Beliebig</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="168"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
+        <source>Language</source>
+        <translation type="unfinished">Sprache</translation>
+    </message>
+    <message>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
         <source>Pdf</source>
         <translation>Pdf</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
         <source>Epub</source>
         <translation>Epub</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="174"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
         <source>Mobi</source>
         <translation>Mobi</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="177"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="180"/>
         <source>Txt</source>
         <translation>Txt</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="191"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="194"/>
         <source>Only Books</source>
         <translation>Nur Bücher</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="209"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="212"/>
         <source>Only Files</source>
         <translation>Nur Dateien</translation>
     </message>
     <message>
-        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="230"/>
+        <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="233"/>
         <source>Apply Filter</source>
         <translation>Filter Anwenden</translation>
     </message>
