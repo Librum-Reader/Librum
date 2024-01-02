@@ -131,6 +131,7 @@ Item {
     property string trashHighlighted
     property string trashRed
     property string cloudOff
+    property string folder
 
     state: "Light"
     states: [
@@ -556,6 +557,10 @@ Item {
                 target: iconSheet
                 cloudOff: "/resources/images/light_mode/utility/cloud_off_icon.svg"
             }
+            PropertyChanges {
+                target: iconSheet
+                folder: "/resources/images/light_mode/utility/folder_icon.svg"
+            }
         },
         State {
             name: "Dark"
@@ -978,6 +983,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 cloudOff: "/resources/images/dark_mode/utility/cloud_off_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                folder: "/resources/images/dark_mode/utility/folder_icon.svg"
             }
         }
     ]

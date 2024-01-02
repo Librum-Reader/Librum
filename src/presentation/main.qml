@@ -44,9 +44,6 @@ ApplicationWindow {
             id: sidebar
             z: 1
             visible: pageManager.pageHasSidebar
-
-            onOpenChanged: open ? baseRoot.minimumWidth
-                                  = sidebarOpenedMinWidth : baseRoot.minimumWidth = defaultMinWidth
         }
 
 

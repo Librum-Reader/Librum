@@ -13,7 +13,6 @@
         <file>sidebar/MProfilePopup.qml</file>
         <file>sidebar/MProfilePopupItem.qml</file>
         <file>sidebar/MSidebar.qml</file>
-        <file>sidebar/MSidebarAnimations.qml</file>
         <file>sidebar/MSidebarItem.qml</file>
         <file>StyleSheet.qml</file>
         <file>IconSheet.qml</file>

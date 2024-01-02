@@ -17,21 +17,14 @@ Item {
     property alias addOnsItem: addOnsItem
     property alias settingsItem: settingsItem
     property MSidebarItem currentItem: internal.defaultItem
-    property bool open: false
 
-    implicitWidth: internal.closedWidth
+    implicitWidth: 72
     implicitHeight: Window.height
 
 
     /*
       Shortcuts to switch between pages
       */
-    Shortcut {
-        sequence: "Ctrl+O"
-        onActivated: SidebarState.currentState
-                     === SidebarState.Opened ? root.closeSidebar(
-                                                   ) : root.openSidebar()
-    }
     Shortcut {
         sequence: "Ctrl+1"
         onActivated: loadPage(freeBooksPage, root.freeBooksItem)
@@ -208,8 +201,7 @@ Item {
                   */
                 MProfileBox {
                     id: profileBox
-                    currentSidebarWidth: root.width
-                    closedSidebarWidth: internal.closedWidth
+                    sidebarWidth: 72
                     Layout.alignment: Qt.AlignBottom
                     Layout.topMargin: 2
 
@@ -232,21 +224,10 @@ Item {
                 }
             }
         }
-
-        MSidebarAnimations {
-            id: animations
-            sidebar: root
-            closedSidebarWidth: internal.closedWidth
-            openedSidebarWidth: internal.openedWidth
-        }
     }
 
     QtObject {
         id: internal
-        property int closedWidth: 72
-        property int openedWidth: 232
-        property bool isOpened: false
-
         property MSidebarItem defaultItem: homeItem
     }
 
@@ -256,22 +237,8 @@ Item {
         root.currentItem.selected = true
     }
 
-    function openSidebar() {
-        animations.openAnimation.start()
-        root.currentItem.openAnimation.start()
-        root.open = true
-    }
-
-    function closeSidebar() {
-        animations.closeAnimation.start()
-        root.currentItem.closeAnimation.start()
-        root.open = false
-    }
-
     function resetSidebar() {
-        closeSidebar()
         changeSelectedItem(internal.defaultItem)
-        root.open = false
     }
 
     function giveFocus() {

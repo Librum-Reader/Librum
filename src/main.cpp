@@ -32,7 +32,6 @@
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
-#include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
@@ -141,11 +140,6 @@ int main(int argc, char* argv[])
     auto settingsController = std::make_unique<SettingsController>(settingsService);
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
-
-    // Sidebar
-    auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
-    qmlRegisterSingletonInstance("Librum.elements", 1, 0, "SidebarState",
-                                 sidebarState.get());
 
     // Enums
     qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",
