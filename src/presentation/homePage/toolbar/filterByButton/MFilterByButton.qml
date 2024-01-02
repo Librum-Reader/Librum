@@ -55,7 +55,7 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
 
-        onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
+        cursorShape: Qt.PointingHandCursor
 
         onClicked: selectionPopup.opened ? selectionPopup.close(
                                                ) : selectionPopup.open()

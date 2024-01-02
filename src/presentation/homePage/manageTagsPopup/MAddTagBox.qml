@@ -99,8 +99,7 @@ Item {
                         id: iconBlockMouseArea
                         anchors.fill: parent
                         hoverEnabled: true
-
-                        onEntered: iconBlockMouseArea.cursorShape = Qt.PointingHandCursor
+                        cursorShape: Qt.PointingHandCursor
 
                         onClicked: {
                             if (popup.opened) {
@@ -129,8 +128,9 @@ Item {
                 id: mouseArea
                 anchors.fill: parent
                 hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
 
-                onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
+                ed: mouseArea.cursorShape = Qt.PointingHandCursor
 
                 onClicked: {
                     if (inputField.text !== "")

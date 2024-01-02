@@ -67,14 +67,10 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
-        onEntered: {
-            mouseArea.cursorShape = Qt.PointingHandCursor
-            root.selected = true
-        }
-
+        onEntered: root.selected = true
         onExited: root.selected = false
-
         onClicked: root.clicked()
     }
 }
