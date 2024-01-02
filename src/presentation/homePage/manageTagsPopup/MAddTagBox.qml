@@ -130,8 +130,6 @@ Item {
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
 
-                ed: mouseArea.cursorShape = Qt.PointingHandCursor
-
                 onClicked: {
                     if (inputField.text !== "")
                         root.addTag(inputField.text)
