@@ -232,11 +232,10 @@ Page {
                         /*
                       When clicking more options, open the bookOptions popup
                       */
-                        onMoreOptionClicked: (index, mouse) => {
+                        onMoreOptionClicked: (index, point) => {
                                                  // Calculate where to spawn the bookOptions popup and set its position
                                                  let currentMousePosition = mapToItem(
-                                                     bookGridContainer,
-                                                     mouse.x, mouse.y)
+                                                     bookGridContainer, point)
 
                                                  bookOptionsPopup.x = currentMousePosition.x
                                                  - bookOptionsPopup.implicitWidth / 2
