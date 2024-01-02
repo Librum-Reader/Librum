@@ -12,7 +12,7 @@ Item {
     property bool downloading: false
     signal leftButtonClicked(int index)
     signal rightButtonClicked(int index, var mouse)
-    signal moreOptionClicked(int index, var mouse)
+    signal moreOptionClicked(int index, var point)
 
     implicitWidth: 190
     implicitHeight: 322
@@ -222,8 +222,10 @@ Item {
     }
 
     MouseArea {
+        id: bookArea
         anchors.fill: parent
         acceptedButtons: Qt.AllButtons
+        cursorShape: Qt.PointingHandCursor
 
         // Delegate mouse clicks events to parent
         onClicked: mouse => {
@@ -283,10 +285,14 @@ Item {
                 id: moreOptionsArea
                 anchors.fill: parent
                 hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: mouse => {
                                if (mouse.button === Qt.LeftButton) {
-                                   root.moreOptionClicked(root.index, mouse)
+                                   let point = mapToItem(bookArea,
+                                                         Qt.point(mouse.x,
+                                                                  mouse.y))
+                                   root.moreOptionClicked(root.index, point)
                                }
                            }
             }
