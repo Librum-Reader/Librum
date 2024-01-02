@@ -216,44 +216,6 @@ Item {
                             font.pointSize: Fonts.size10
                         }
                     }
-
-                    Image {
-                        id: existsOnlyOnClientIndicator
-                        Layout.leftMargin: 8
-                        Layout.topMargin: 4
-                        Layout.alignment: Qt.AlignVCenter
-                        visible: model.existsOnlyOnClient
-                        sourceSize.width: 18
-                        fillMode: Image.PreserveAspectFit
-                        source: Icons.cloudOff
-
-                        MouseArea {
-                            id: existsOnlyOnClientIndicatorArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            onContainsMouseChanged: containsMouse ? toolTip.open(
-                                                                        ) : toolTip.close()
-                        }
-                    }
-
-                    Item {
-                        Layout.fillWidth: true
-                    }
-
-                    Image {
-                        id: moreOptionsIcon
-                        Layout.preferredHeight: 20
-                        Layout.rightMargin: -2
-                        source: Icons.dots
-                        fillMode: Image.PreserveAspectFit
-                        antialiasing: false
-
-                        MouseArea {
-                            id: moreOptionsArea
-                            anchors.fill: parent
-                            hoverEnabled: true
-                        }
-                    }
                 }
             }
         }
@@ -272,16 +234,63 @@ Item {
                                return
                            }
 
-                           if (moreOptionsArea.containsMouse) {
-                               root.moreOptionClicked(root.index, mouse)
-                               return
-                           }
-
                            root.leftButtonClicked(root.index)
                        } else if (mouse.button === Qt.RightButton) {
                            root.rightButtonClicked(root.index, mouse)
                        }
                    }
+    }
+
+    RowLayout {
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        width: title.width
+        spacing: 0
+
+        Image {
+            id: existsOnlyOnClientIndicator
+            Layout.leftMargin: readingProgressBox.width - 5
+            Layout.topMargin: 4
+            Layout.bottomMargin: 2
+            Layout.alignment: Qt.AlignVCenter
+            visible: model.existsOnlyOnClient
+            sourceSize.width: 18
+            fillMode: Image.PreserveAspectFit
+            source: Icons.cloudOff
+
+            MouseArea {
+                id: existsOnlyOnClientIndicatorArea
+                anchors.fill: parent
+                hoverEnabled: true
+                onContainsMouseChanged: containsMouse ? toolTip.open(
+                                                            ) : toolTip.close()
+            }
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        Image {
+            id: moreOptionsIcon
+            Layout.preferredHeight: 20
+            Layout.rightMargin: 12
+            source: Icons.dots
+            fillMode: Image.PreserveAspectFit
+            antialiasing: false
+
+            MouseArea {
+                id: moreOptionsArea
+                anchors.fill: parent
+                hoverEnabled: true
+
+                onClicked: mouse => {
+                               if (mouse.button === Qt.LeftButton) {
+                                   root.moreOptionClicked(root.index, mouse)
+                               }
+                           }
+            }
+        }
     }
 
     MCheckBox {
