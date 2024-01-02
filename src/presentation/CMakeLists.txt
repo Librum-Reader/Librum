@@ -19,6 +19,7 @@ add_library(presentation
 set(translation_files
     translations/librum_en.ts
     translations/librum_de.ts
+    translations/librum_it.ts
     translations/librum_ru.ts
     translations/librum_zh.ts
     translations/librum_pt.ts
