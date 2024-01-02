@@ -22,6 +22,7 @@ set(translation_files
     translations/librum_it.ts
     translations/librum_ru.ts
     translations/librum_zh.ts
+    translations/librum_uk.ts
     translations/librum_pt.ts
     translations/librum_id.ts
 )
