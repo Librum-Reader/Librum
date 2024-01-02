@@ -1175,7 +1175,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="502"/>
         <source>Unsupported File</source>
-        <translation>Файл не підтримується</translation>
+        <translation>Не підтримується</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="503"/>
