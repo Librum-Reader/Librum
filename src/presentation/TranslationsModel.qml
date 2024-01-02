@@ -14,6 +14,10 @@ ListModel {
         code: "de"
     }
     ListElement {
+        text: "Italiano"
+        code: "it"
+    }
+    ListElement {
         text: "Русский"
         code: "ru"
     }
