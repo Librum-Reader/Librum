@@ -48,8 +48,7 @@ Item {
             id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
-
-            onEntered: mouseArea.cursorShape = Qt.PointingHandCursor
+            cursorShape: Qt.PointingHandCursor
 
             onClicked: root.toggle()
         }

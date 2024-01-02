@@ -85,8 +85,7 @@ Item {
                     id: leftMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-
-                    onEntered: leftMouseArea.cursorShape = Qt.PointingHandCursor
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: root.selectLeft()
                 }
@@ -141,8 +140,7 @@ Item {
                     id: rightMouseArea
                     anchors.fill: parent
                     hoverEnabled: true
-
-                    onEntered: rightMouseArea.cursorShape = Qt.PointingHandCursor
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: root.selectRight()
                 }

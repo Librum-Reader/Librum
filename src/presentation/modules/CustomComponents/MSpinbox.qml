@@ -90,8 +90,7 @@ Item {
                         id: upArrowMouseArea
                         anchors.fill: parent
                         hoverEnabled: true
-
-                        onEntered: upArrowMouseArea.cursorShape = Qt.PointingHandCursor
+                        cursorShape: Qt.PointingHandCursor
 
                         onClicked: internal.increaseValue()
                     }
@@ -107,8 +106,7 @@ Item {
                         id: downArrowMouseArea
                         anchors.fill: parent
                         hoverEnabled: true
-
-                        onEntered: downArrowMouseArea.cursorShape = Qt.PointingHandCursor
+                        cursorShape: Qt.PointingHandCursor
 
                         onClicked: internal.decreaseValue()
                     }

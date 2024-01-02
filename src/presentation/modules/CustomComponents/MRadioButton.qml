@@ -47,8 +47,7 @@ Item {
                 id: buttonMouseArea
                 anchors.fill: parent
                 hoverEnabled: true
-
-                onEntered: buttonMouseArea.cursorShape = Qt.PointingHandCursor
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: root.clicked()
             }
@@ -69,8 +68,7 @@ Item {
                 width: parent.implicitWidth
                 height: parent.implicitHeight
                 hoverEnabled: true
-
-                onEntered: labelMouseArea.cursorShape = Qt.PointingHandCursor
+                cursorShape: Qt.PointingHandCursor
 
                 onClicked: root.clicked()
             }
