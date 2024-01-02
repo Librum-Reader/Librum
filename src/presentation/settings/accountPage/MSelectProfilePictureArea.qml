@@ -135,6 +135,7 @@ Item {
             id: deletePictureArea
             anchors.fill: parent
             hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
 
             onClicked: root.currentImage = "!"
         }
@@ -144,6 +145,7 @@ Item {
         id: mainArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
         onClicked: fileDialog.open()
     }
@@ -152,7 +154,8 @@ Item {
         id: fileDialog
         fileMode: FileDialog.OpenFiles
         folder: StandardPaths.writableLocation(StandardPaths.PicturesLocation)
-        nameFilters: [qsTr("All files")+ " (*)", "png " + qsTr("files") + " (*.png)", "jpeg " + qsTr("files") + " (*.jpeg)"]
+        nameFilters: [qsTr("All files") + " (*)", "png " + qsTr(
+                "files") + " (*.png)", "jpeg " + qsTr("files") + " (*.jpeg)"]
 
         onAccepted: root.currentImage = file
     }

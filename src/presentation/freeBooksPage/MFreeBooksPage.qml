@@ -25,8 +25,8 @@ Page {
 
         function onFetchingFirstMetadataPageSuccessful(success) {
             if (!success) {
-                errorMessageLabel.text
-                        = qsTr("Couldn't load free books. Please, check your network connection")
+                errorMessageLabel.text = qsTr(
+                            "Couldn't load free books. Please, check your network connection")
                 errorMessageLabel.visible = true
             }
 
@@ -137,6 +137,7 @@ Page {
                         id: clickArea
                         anchors.fill: parent
                         hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
 
                         onClicked: {
                             if (model.downloaded)

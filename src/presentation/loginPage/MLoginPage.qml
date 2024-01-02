@@ -225,6 +225,7 @@ MFlickWrapper {
 
                             MouseArea {
                                 anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
 
                                 onClicked: rememberMeCheckBox.toggle()
                             }
@@ -247,6 +248,7 @@ MFlickWrapper {
                             MouseArea {
                                 id: forgotPasswordPageRedirection
                                 anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
 
                                 onClicked: loadPage(forgotPasswordPage)
                             }
@@ -297,6 +299,8 @@ MFlickWrapper {
                 MouseArea {
                     id: registerLinkArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
+
                     onClicked: loadPage(registerPage)
                 }
             }

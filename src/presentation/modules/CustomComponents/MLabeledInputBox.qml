@@ -142,6 +142,7 @@ Item {
                     MouseArea {
                         id: imageArea
                         anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
 
                         onClicked: root.textHidden = !root.textHidden
                     }

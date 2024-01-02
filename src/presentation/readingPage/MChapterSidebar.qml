@@ -145,6 +145,7 @@ Item {
                                         id: indicatorArea
                                         anchors.fill: parent
                                         hoverEnabled: true
+                                        cursorShape: Qt.PointingHandCursor
 
                                         onClicked: treeView.toggleExpanded(row)
                                     }
@@ -165,6 +166,7 @@ Item {
                                     MouseArea {
                                         id: pageSwitchTrigger
                                         anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
 
                                         // NaN check: x !== x
                                         onClicked: root.switchPage(

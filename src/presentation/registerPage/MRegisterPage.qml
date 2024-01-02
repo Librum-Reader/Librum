@@ -242,6 +242,7 @@ MFlickWrapper {
                 MouseArea {
                     id: loginRedirecitonLinkArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: loadPage(loginPage)
                 }
