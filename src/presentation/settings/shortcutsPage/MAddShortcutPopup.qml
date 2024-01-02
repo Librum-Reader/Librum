@@ -53,6 +53,18 @@ Popup {
                          root.close()
     }
 
+    MouseArea {
+        anchors.fill: parent
+
+        propagateComposedEvents: true
+        // If clicking anywhere on the popup, stop the recordKeyBox
+        onClicked: mouse => {
+                       recordKeyBox.stopRecording()
+                       applyButton.forceActiveFocus()
+                       mouse.accepted = false
+                   }
+    }
+
     ColumnLayout {
         id: layout
         width: parent.width
@@ -155,8 +167,8 @@ Popup {
                     Layout.preferredWidth: parent.width
                     Layout.topMargin: 16
                     visible: false
-                    text: qsTr("The shortcut") + " '" + recordKeyBox.text
-                          + "' " + qsTr("is already used for") + " '" + conflictingShortcut + "'."
+                    text: qsTr("The shortcut") + " '" + recordKeyBox.text + "' " + qsTr(
+                              "is already used for") + " '" + conflictingShortcut + "'."
                     wrapMode: Text.WordWrap
                     font.pointSize: Fonts.size11
                     color: Style.colorErrorText
@@ -231,18 +243,6 @@ Popup {
                 }
             }
         }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-
-        propagateComposedEvents: true
-        // If clicking anywhere on the popup, stop the recordKeyBox
-        onClicked: mouse => {
-                       recordKeyBox.stopRecording()
-                       applyButton.forceActiveFocus()
-                       mouse.accepted = false
-                   }
     }
 
     QtObject {

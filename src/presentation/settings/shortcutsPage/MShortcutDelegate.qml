@@ -71,6 +71,7 @@ Item {
                 MouseArea {
                     id: valueLabelArea
                     anchors.fill: parent
+                    cursorShape: Qt.PointingHandCursor
 
                     onClicked: root.editClicked(root.index)
                 }

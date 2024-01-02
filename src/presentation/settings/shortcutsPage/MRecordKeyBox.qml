@@ -78,6 +78,7 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
 
         onClicked: {
             if (root.recording) {

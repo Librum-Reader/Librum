@@ -180,17 +180,6 @@ Page {
                                                  shortcut, "",
                                                  SettingGroups.Shortcuts)
                         }
-
-                        MouseArea {
-                            id: mouseEventInterceptor
-                            anchors.fill: parent
-                            propagateComposedEvents: true
-
-                            // Propagate click/pressed signals to lower MouseAreas
-                            onWheel: wheel => wheel.accepted = false
-                            onClicked: mouse => mouse.accepted = false
-                            onPressed: mouse => mouse.accepted = false
-                        }
                     }
                 }
             }
