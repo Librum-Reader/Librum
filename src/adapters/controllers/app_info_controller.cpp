@@ -159,6 +159,9 @@ bool AppInfoController::switchToLanguage(const QString& language)
     // Use "English" for all kinds of English variants like American English
     if(QLocale(language).language() == QLocale::Language::English)
         m_language = "English";
+    // Use "Bahasa Indonesia" instead of "Indonesian"
+    else if(QLocale(language).language() == QLocale::Language::Indonesian)
+        m_language = "Bahasa Indonesia";
     else
         m_language = QLocale(language).nativeLanguageName();
 

@@ -28,6 +28,7 @@ MFlickWrapper {
         autoLoginTimer.start()
 
         // Determine the index of the language used in the combobox
+        print("Lang: " + AppInfoController.language)
         let index = languageComboBox.getIndexByText(AppInfoController.language)
         languageComboBox.defaultIndex = index
     }
@@ -75,7 +76,7 @@ MFlickWrapper {
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.leftMargin: 12
-            width: 160
+            width: 200
             height: 12
             dropDownIconLeft: true
             boxBackgroundColor: "transparent"
@@ -88,7 +89,7 @@ MFlickWrapper {
             popupSpacing: 14
             borderWidth: 0
 
-            model: LanguageModel
+            model: TranslationsModel
 
             onItemChanged: index => AppInfoController.switchToLanguage(
                                model.get(index).code)

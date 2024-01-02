@@ -100,7 +100,7 @@
         <file>readingPage/MDictionaryPopup.qml</file>
         <file>readingPage/MBookmarkItem.qml</file>
         <file>readingPage/MExplanationPopup.qml</file>
-        <file>LanguageModel.qml</file>
+        <file>TranslationsModel.qml</file>
         <file>homePage/MBookMultiSelectRightClickPopup.qml</file>
         <file>modules/CustomComponents/MLanguageModel.qml</file>
     </qresource>

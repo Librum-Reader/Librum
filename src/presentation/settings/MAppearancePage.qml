@@ -161,7 +161,7 @@ Page {
                             fontSize: Fonts.size12
                             checkBoxStyle: false
                             maxHeight: 200
-                            model: LanguageModel
+                            model: TranslationsModel
 
                             onItemChanged: index => {
                                                AppInfoController.switchToLanguage(
