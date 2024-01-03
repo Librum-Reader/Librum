@@ -1,6 +1,7 @@
 #pragma once
 #include <QAbstractListModel>
 #include <QByteArray>
+#include <QList>
 #include <QUuid>
 #include <QVariant>
 #include <vector>

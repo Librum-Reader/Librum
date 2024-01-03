@@ -31,7 +31,7 @@ Qt::ItemFlags FoldersModel::flags(const QModelIndex& index) const
     if(!index.isValid())
         return Qt::NoItemFlags;
 
-    return QAbstractItemModel::flags(index);
+    return Qt::ItemIsEditable | QAbstractItemModel::flags(index);
 }
 
 QModelIndex FoldersModel::index(int row, int column,
@@ -94,6 +94,52 @@ int FoldersModel::columnCount(const QModelIndex& parent) const
     Q_UNUSED(parent)
 
     return roleNames().count();
+}
+
+void FoldersModel::beginInsertFolder(Folder* parent, int row)
+{
+    QModelIndex parentIndex;
+    // This occurs when the this item is the root item
+    if(parent->getParent() == nullptr)
+        parentIndex = QModelIndex();
+    else
+        parentIndex = createIndex(parent->getIndexInParent(), 0, parent);
+
+    beginInsertRows(parentIndex, row, row);
+}
+
+void FoldersModel::endInsertFolder()
+{
+    endInsertRows();
+}
+
+void FoldersModel::beginRemoveFolder(Folder* parent, int row)
+{
+    beginRemoveRows(QModelIndex(), row, row);
+}
+
+void FoldersModel::endRemoveFolder()
+{
+    endRemoveRows();
+}
+
+void FoldersModel::refreshFolder(Folder* parent, int row)
+{
+    auto allRoles = getAllRoles();
+
+    emit dataChanged(index(row, 0), index(row, 0), allRoles);
+}
+
+QList<int> FoldersModel::getAllRoles()
+{
+    QList<int> allRoles;
+    int lastRole = Invalid;
+    for(int i = Roles::NameRole; i < lastRole; ++i)
+    {
+        allRoles.push_back(i);
+    }
+
+    return allRoles;
 }
 
 }  // namespace adapters::data_models

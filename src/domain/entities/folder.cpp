@@ -4,10 +4,9 @@
 namespace domain::entities
 {
 
-Folder::Folder(QString name, int indexInParent, QUuid uuid) :
+Folder::Folder(QString name, QUuid uuid) :
     m_uuid(uuid),
-    m_name(name),
-    m_indexInParent(indexInParent)
+    m_name(name)
 {
 }
 
@@ -44,12 +43,18 @@ void Folder::setParent(Folder* parent)
 
 int Folder::getIndexInParent() const
 {
-    return m_indexInParent;
+    return m_parent->getIndexOfChild(m_uuid);
 }
 
-void Folder::setIndexInParent(int newIndexInParent)
+int Folder::getIndexOfChild(const QUuid& uuid)
 {
-    m_indexInParent = newIndexInParent;
+    for(std::size_t i = 0; i < m_children.size(); ++i)
+    {
+        if(m_children[i]->getUuid() == uuid)
+            return i;
+    }
+
+    return -1;
 }
 
 const std::vector<std::unique_ptr<Folder> >& Folder::getChildren() const
@@ -92,7 +97,6 @@ QByteArray Folder::toJson() const
     QJsonObject folder {
         { "uuid", m_uuid.toString(QUuid::WithoutBraces) },
         { "name", m_name },
-        { "indexInParent", m_indexInParent },
         { "children", serializeChildren() },
     };
 
@@ -118,8 +122,7 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
 {
     auto uuid = QUuid(jsonFolder["uuid"].toString());
     auto name = jsonFolder["name"].toString();
-    auto indexInParent = jsonFolder["indexInParent"].toInt();
-    Folder folder(name, indexInParent, uuid);
+    Folder folder(name, uuid);
     folder.setParent(parent);
 
     auto jsonChildren = jsonFolder["children"].toArray();

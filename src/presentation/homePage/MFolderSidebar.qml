@@ -128,7 +128,8 @@ Item {
                                     anchors.fill: parent
 
                                     onClicked: {
-
+                                        FolderController.createFolder(
+                                                    "Test folder", "")
                                     }
                                 }
                             }

@@ -22,6 +22,11 @@ public:
     virtual ~IFolderController() noexcept = default;
 
     virtual data_models::FoldersProxyModel* getFoldersModel() = 0;
+
+    Q_INVOKABLE virtual bool createFolder(QString name,
+                                          QString parent = "") = 0;
+    Q_INVOKABLE virtual bool deleteFolder(QString uuid) = 0;
+    Q_INVOKABLE virtual void renameFolder(QString uuid, QString newName) = 0;
 };
 
 }  // namespace adapters

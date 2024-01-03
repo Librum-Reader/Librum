@@ -17,6 +17,9 @@ public:
     FolderController(application::IFolderService* folderService);
 
     data_models::FoldersProxyModel* getFoldersModel() override;
+    bool createFolder(QString name, QString parent = "");
+    bool deleteFolder(QString uuid);
+    void renameFolder(QString uuid, QString newName);
 
 private:
     application::IFolderService* m_folderService;

@@ -18,6 +18,7 @@ public:
     enum Roles
     {
         NameRole = Qt::DisplayRole,
+        Invalid
     };
 
     QVariant data(const QModelIndex& index, int role) const override;
@@ -29,7 +30,16 @@ public:
     QHash<int, QByteArray> roleNames() const override;
     int columnCount(const QModelIndex& parent) const override;
 
+public slots:
+    void beginInsertFolder(domain::entities::Folder* parent, int row);
+    void endInsertFolder();
+    void beginRemoveFolder(domain::entities::Folder* parent, int row);
+    void endRemoveFolder();
+    void refreshFolder(domain::entities::Folder* parent, int row);
+
 private:
+    QList<int> getAllRoles();
+
     domain::entities::Folder* m_root;
 };
 
