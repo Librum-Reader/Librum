@@ -4,11 +4,12 @@ import QtQuick.Layouts
 import Librum.controllers
 import Librum.style
 import Librum.icons
+import Librum.fonts
 
 Item {
-    id: foldersSidebar
+    id: root
     property bool opened: false
-    property int openedWidth: 260
+    property int openedWidth: 280
 
     width: 0
 
@@ -34,6 +35,99 @@ Item {
         id: layout
         anchors.fill: parent
         spacing: 0
+        visible: root.opened
+
+        Label {
+            Layout.topMargin: 28
+            Layout.leftMargin: 25
+            text: qsTr("Organize")
+            font.pointSize: Fonts.size19
+            font.bold: true
+            color: Style.colorTitle
+        }
+
+        Rectangle {
+            id: titleSeparator
+            Layout.preferredWidth: 56
+            Layout.preferredHeight: 2
+            Layout.topMargin: 18
+            Layout.leftMargin: 26
+            color: Style.colorDarkSeparator
+        }
+
+        MFolderSidebarItem {
+            Layout.fillWidth: true
+            Layout.leftMargin: 10
+            Layout.rightMargin: 12
+            Layout.topMargin: 18
+            title: qsTr("All Books")
+            icon: Icons.bookClosed
+        }
+
+        MFolderSidebarItem {
+            Layout.fillWidth: true
+            Layout.leftMargin: 10
+            Layout.rightMargin: 12
+            title: qsTr("Unsorted")
+            icon: Icons.unsorted
+        }
+
+        Rectangle {
+            id: sidebarItemSeparator
+            Layout.fillWidth: true
+            Layout.preferredHeight: 2
+            Layout.topMargin: 18
+            Layout.leftMargin: 26
+            Layout.rightMargin: 26
+            color: Style.colorDarkSeparator
+        }
+
+        RowLayout {
+            Layout.preferredWidth: parent.width
+            Layout.preferredHeight: 20
+            Layout.topMargin: 18
+
+            Label {
+                id: foldersTitle
+                Layout.leftMargin: 26
+                Layout.alignment: Qt.AlignLeft
+                text: qsTr("Folders")
+                font.pointSize: Fonts.size10dot5
+                font.weight: Font.Bold
+                color: Style.colorTitle
+            }
+
+            Item {
+                Layout.preferredHeight: 21
+                Layout.preferredWidth: 21
+                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                Layout.rightMargin: 26
+                opacity: addFolderButtonArea.pressed ? 0.6 : 1
+
+                Rectangle {
+                    anchors.fill: parent
+                    radius: height
+                    color: "white"
+                    opacity: 0.08
+                }
+
+                Image {
+                    anchors.centerIn: parent
+                    source: Icons.addFolderPlus
+                    sourceSize.width: 15
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                MouseArea {
+                    id: addFolderButtonArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: addFolderPopup.open()
+                }
+            }
+        }
 
         Pane {
             id: treeViewContainer
@@ -72,6 +166,7 @@ Item {
                     delegate: Rectangle {
                         id: treeNode
                         required property string name
+                        required property string uuid
                         required property TreeView treeView
                         required property bool expanded
                         required property int hasChildren
@@ -79,13 +174,15 @@ Item {
 
                         implicitWidth: treeView.width - 2 // L/R margins
                         width: implicitWidth
-                        implicitHeight: treeNodeLabel.height
+                        implicitHeight: 30
                         color: "transparent"
 
                         RowLayout {
                             id: nodeLayout
                             anchors.left: parent.left
                             anchors.right: parent.right
+                            anchors.leftMargin: 4
+                            anchors.rightMargin: 4
                             anchors.verticalCenter: parent.verticalCenter
                             spacing: 0
 
@@ -98,7 +195,7 @@ Item {
                                 opacity: pageSwitchTrigger.pressed
                                          || indicatorArea.pressed ? 0.7 : 1
                                 source: Icons.arrowheadNextIcon
-                                sourceSize.width: 20
+                                sourceSize.width: 22
                                 fillMode: Image.PreserveAspectFit
                                 rotation: treeNode.expanded ? 90 : 0
 
@@ -106,26 +203,55 @@ Item {
                                     id: indicatorArea
                                     anchors.fill: parent
                                     hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
 
                                     onClicked: treeView.toggleExpanded(row)
+                                }
+                            }
+
+                            Image {
+                                id: icon
+                                Layout.preferredWidth: implicitWidth
+                                Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 4
+                                Layout.alignment: Qt.AlignVCenter
+                                opacity: pageSwitchTrigger.pressed
+                                         || indicatorArea.pressed
+                                         || iconArea.pressed ? 0.7 : 1
+                                source: Icons.folder
+                                sourceSize.width: 17
+                                fillMode: Image.PreserveAspectFit
+
+                                MouseArea {
+                                    id: iconArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: {
+
+                                    }
                                 }
                             }
 
                             Text {
                                 id: treeNodeLabel
                                 Layout.fillWidth: true
-                                Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent
+                                Layout.leftMargin: 6
+                                Layout.topMargin: 1
                                 Layout.alignment: Qt.AlignVCenter
                                 clip: true
                                 color: Style.colorText
                                 opacity: pageSwitchTrigger.pressed ? 0.7 : 1
-                                font.pixelSize: 14
+                                font.pointSize: Fonts.size10dot25
+                                font.weight: Font.Medium
                                 elide: Text.ElideRight
                                 text: treeNode.name
 
                                 MouseArea {
                                     id: pageSwitchTrigger
                                     anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
 
                                     onClicked: {
                                         FolderController.createFolder(
@@ -146,6 +272,13 @@ Item {
                 }
             }
         }
+    }
+
+    MAddFolderPopup {
+        id: addFolderPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 50)
+        visible: false
     }
 
     function open() {

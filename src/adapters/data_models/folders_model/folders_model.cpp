@@ -21,6 +21,8 @@ QVariant FoldersModel::data(const QModelIndex& index, int role) const
     {
     case NameRole:
         return item->getName();
+    case UuidRole:
+        return item->getUuid().toString(QUuid::WithoutBraces);
     }
 
     return QVariant();
@@ -84,6 +86,7 @@ QHash<int, QByteArray> FoldersModel::roleNames() const
 {
     static QHash<int, QByteArray> roles {
         { NameRole, "name" },
+        { UuidRole, "uuid" },
     };
 
     return roles;
@@ -98,13 +101,7 @@ int FoldersModel::columnCount(const QModelIndex& parent) const
 
 void FoldersModel::beginInsertFolder(Folder* parent, int row)
 {
-    QModelIndex parentIndex;
-    // This occurs when the this item is the root item
-    if(parent->getParent() == nullptr)
-        parentIndex = QModelIndex();
-    else
-        parentIndex = createIndex(parent->getIndexInParent(), 0, parent);
-
+    auto parentIndex = createModelIndexFromFolder(parent);
     beginInsertRows(parentIndex, row, row);
 }
 
@@ -115,7 +112,8 @@ void FoldersModel::endInsertFolder()
 
 void FoldersModel::beginRemoveFolder(Folder* parent, int row)
 {
-    beginRemoveRows(QModelIndex(), row, row);
+    auto parentIndex = createModelIndexFromFolder(parent);
+    beginRemoveRows(parentIndex, row, row);
 }
 
 void FoldersModel::endRemoveFolder()
@@ -126,8 +124,10 @@ void FoldersModel::endRemoveFolder()
 void FoldersModel::refreshFolder(Folder* parent, int row)
 {
     auto allRoles = getAllRoles();
+    auto parentIndex = createModelIndexFromFolder(parent);
 
-    emit dataChanged(index(row, 0), index(row, 0), allRoles);
+    auto thisIndex = index(row, 0, parentIndex);
+    emit dataChanged(thisIndex, thisIndex, allRoles);
 }
 
 QList<int> FoldersModel::getAllRoles()
@@ -140,6 +140,15 @@ QList<int> FoldersModel::getAllRoles()
     }
 
     return allRoles;
+}
+
+QModelIndex FoldersModel::createModelIndexFromFolder(Folder* folder)
+{
+    // This occurs when the this item is the root item
+    if(folder->getParent() == nullptr)
+        return QModelIndex();
+
+    return createIndex(folder->getIndexInParent(), 0, folder);
 }
 
 }  // namespace adapters::data_models

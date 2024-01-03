@@ -102,6 +102,8 @@
         <file>TranslationsModel.qml</file>
         <file>homePage/MBookMultiSelectRightClickPopup.qml</file>
         <file>modules/CustomComponents/MLanguageModel.qml</file>
-        <file>homePage/MFolderSidebar.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebarItem.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebar.qml</file>
+        <file>homePage/folderSidebar/MAddFolderPopup.qml</file>
     </qresource>
 </RCC>

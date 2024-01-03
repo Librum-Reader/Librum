@@ -18,6 +18,7 @@ public:
     enum Roles
     {
         NameRole = Qt::DisplayRole,
+        UuidRole,
         Invalid
     };
 
@@ -39,6 +40,7 @@ public slots:
 
 private:
     QList<int> getAllRoles();
+    QModelIndex createModelIndexFromFolder(domain::entities::Folder* folder);
 
     domain::entities::Folder* m_root;
 };

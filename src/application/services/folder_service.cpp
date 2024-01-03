@@ -37,9 +37,6 @@ Folder* FolderService::getRootFolder()
 
 bool FolderService::createFolder(QString name, QUuid parent)
 {
-    if(name.isEmpty())
-        return false;
-
     Folder* parentFolder = nullptr;
     // This means that the folder should be created in the root folder.
     if(parent.isNull())
@@ -63,6 +60,10 @@ bool FolderService::deleteFolder(QUuid uuid)
 
 void FolderService::renameFolder(QUuid uuid, QString newName)
 {
+    auto folder = getFolder(uuid);
+    folder->setName(newName);
+
+    emit refreshFolder(folder->getParent(), folder->getIndexInParent());
 }
 
 Folder* FolderService::getFolder(const QUuid& uuid)

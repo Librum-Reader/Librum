@@ -12,6 +12,7 @@ import Librum.globals
 import Librum.models
 import "toolbar"
 import "manageTagsPopup"
+import "folderSidebar"
 
 Page {
     id: root

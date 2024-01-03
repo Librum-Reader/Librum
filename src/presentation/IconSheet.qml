@@ -132,6 +132,9 @@ Item {
     property string trashRed
     property string cloudOff
     property string folder
+    property string unsorted
+    property string addFolderPlus
+    property string bookClosed
 
     state: "Light"
     states: [
@@ -561,6 +564,18 @@ Item {
                 target: iconSheet
                 folder: "/resources/images/light_mode/utility/folder_icon.svg"
             }
+            PropertyChanges {
+                target: iconSheet
+                unsorted: "/resources/images/light_mode/utility/unsorted_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                addFolderPlus: "/resources/images/light_mode/utility/add_folder_plus_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                bookClosed: "/resources/images/light_mode/utility/book_closed_icon.svg"
+            }
         },
         State {
             name: "Dark"
@@ -987,6 +1002,18 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 folder: "/resources/images/dark_mode/utility/folder_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                unsorted: "/resources/images/dark_mode/utility/unsorted_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                addFolderPlus: "/resources/images/dark_mode/utility/add_folder_plus_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                bookClosed: "/resources/images/dark_mode/utility/book_closed_icon.svg"
             }
         }
     ]

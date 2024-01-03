@@ -214,5 +214,11 @@
         <file>resources/data/default_behavior_settings.json</file>
         <file>resources/images/light_mode/utility/folder_icon.svg</file>
         <file>resources/images/dark_mode/utility/folder_icon.svg</file>
+        <file>resources/images/light_mode/utility/unsorted_icon.svg</file>
+        <file>resources/images/dark_mode/utility/unsorted_icon.svg</file>
+        <file>resources/images/dark_mode/utility/add_folder_plus_icon.svg</file>
+        <file>resources/images/light_mode/utility/add_folder_plus_icon.svg</file>
+        <file>resources/images/light_mode/utility/book_closed_icon.svg</file>
+        <file>resources/images/dark_mode/utility/book_closed_icon.svg</file>
     </qresource>
 </RCC>
