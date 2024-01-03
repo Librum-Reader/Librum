@@ -117,6 +117,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "DictionaryController",
                                  dictionaryController.get());
 
+    // Folder Stack
+    auto* folderService = config::diConfig().create<application::IFolderService*>();
+    auto folderController = std::make_unique<FolderController>(folderService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "FolderController",
+                                 folderController.get());
+
     // Library Stack
     auto* libraryService = config::diConfig().create<application::ILibraryService*>();
     auto libraryController = std::make_unique<LibraryController>(libraryService);
