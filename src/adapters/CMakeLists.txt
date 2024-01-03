@@ -80,6 +80,10 @@ add_library(adapters
                     data_models/bookmarks_model/bookmarks_model.hpp
                     data_models/bookmarks_model/bookmarks_proxy_model.cpp
                     data_models/bookmarks_model/bookmarks_proxy_model.hpp
+                    data_models/folders_model/folders_model.hpp
+                    data_models/folders_model/folders_model.cpp
+                    data_models/folders_model/folders_proxy_model.hpp
+                    data_models/folders_model/folders_proxy_model.cpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -105,6 +109,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/bookmarks_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/folders_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${DOMAIN_INCLUDES}

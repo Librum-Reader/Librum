@@ -12,7 +12,7 @@ namespace domain::entities
 class Folder
 {
 public:
-    Folder(QString name, QUuid uuid = QUuid::createUuid());
+    Folder(QString name, int indexInParent, QUuid uuid = QUuid::createUuid());
 
     bool operator==(const Folder& rhs) const;
 
@@ -24,8 +24,14 @@ public:
     Folder* getParent() const;
     void setParent(Folder* parent);
 
+    int getIndexInParent() const;
+    void setIndexInParent(int newIndexInParent);
+
+    const std::vector<std::unique_ptr<Folder>>& getChildren() const;
     void addChild(std::unique_ptr<Folder> child);
     void removeChild(const QUuid& uuid);
+    Folder* getChildAtIndex(int index);
+    int childCount() const;
 
     QByteArray toJson() const;
     static Folder fromJson(const QJsonObject& jsonFolder, Folder* parent);
@@ -36,6 +42,7 @@ private:
     QUuid m_uuid;
     QString m_name;
     Folder* m_parent = nullptr;
+    int m_indexInParent;
     std::vector<std::unique_ptr<Folder>> m_children;
 };
 

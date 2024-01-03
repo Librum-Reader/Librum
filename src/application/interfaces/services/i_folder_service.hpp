@@ -2,6 +2,7 @@
 #include <QObject>
 #include <QString>
 #include "application_export.hpp"
+#include "folder.hpp"
 
 namespace application
 {
@@ -15,6 +16,8 @@ class APPLICATION_EXPORT IFolderService : public QObject
 
 public:
     virtual ~IFolderService() noexcept = default;
+
+    virtual domain::entities::Folder* getRootFolder() = 0;
 };
 
 }  // namespace application

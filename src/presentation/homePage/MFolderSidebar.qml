@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import Librum.controllers
 import Librum.style
+import Librum.icons
 
 Item {
     id: foldersSidebar
@@ -67,10 +68,10 @@ Item {
                     clip: true
                     focus: true
 
+                    model: FolderController.foldersModel
                     delegate: Rectangle {
                         id: treeNode
-                        required property string title
-                        required property int pageNumber
+                        required property string name
                         required property TreeView treeView
                         required property bool expanded
                         required property int hasChildren
@@ -120,30 +121,16 @@ Item {
                                 opacity: pageSwitchTrigger.pressed ? 0.7 : 1
                                 font.pixelSize: 14
                                 elide: Text.ElideRight
-                                text: treeNode.title
+                                text: treeNode.name
 
                                 MouseArea {
                                     id: pageSwitchTrigger
                                     anchors.fill: parent
 
-                                    // NaN check: x !== x
-                                    onClicked: root.switchPage(
-                                                   model.pageNumber,
-                                                   model.yOffset
-                                                   !== model.yOffset ? 1 : model.yOffset - 10)
-                                }
-                            }
+                                    onClicked: {
 
-                            Text {
-                                id: pageNumberLabel
-                                Layout.preferredWidth: implicitWidth
-                                Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                                Layout.leftMargin: 6
-                                color: Style.colorText
-                                opacity: pageSwitchTrigger.pressed ? 0.7 : 1
-                                font.pixelSize: 14
-                                text: treeNode.pageNumber
-                                      + 1 // Convert from 0-indexed to normal numbers
+                                    }
+                                }
                             }
                         }
                     }
