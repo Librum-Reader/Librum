@@ -18,9 +18,10 @@ public:
     virtual ~IFolderService() noexcept = default;
 
     virtual domain::entities::Folder* getRootFolder() = 0;
-    virtual bool createFolder(QString name, QUuid parent) = 0;
-    virtual bool deleteFolder(QUuid uuid) = 0;
-    virtual void renameFolder(QUuid uuid, QString newName) = 0;
+    virtual domain::entities::Folder* getFolder(const QUuid& uuid) = 0;
+    virtual bool createFolder(const QString& name, const QUuid& parent) = 0;
+    virtual bool deleteFolder(const QUuid& uuid) = 0;
+    virtual void updateFolder(const domain::entities::Folder& folder) = 0;
 
 signals:
     void beginInsertFolder(domain::entities::Folder* parent, int index);

@@ -21,6 +21,7 @@
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "dependency_injection.hpp"
+#include "folder_dto.hpp"
 #include "free_books_model.hpp"
 #include "i_free_books_service.hpp"
 #include "i_library_service.hpp"
@@ -76,6 +77,7 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
+    qRegisterMetaType<adapters::dtos::FolderDto>();
     qRegisterMetaType<adapters::dtos::DictionaryEntryDto>();
     qRegisterMetaType<adapters::dtos::WordTypeDto>();
     qRegisterMetaType<adapters::dtos::WordDefinitionDto>();

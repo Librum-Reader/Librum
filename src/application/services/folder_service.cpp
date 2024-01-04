@@ -16,7 +16,12 @@ Folder* FolderService::getRootFolder()
     return m_rootFolder.get();
 }
 
-bool FolderService::createFolder(QString name, QUuid parent)
+Folder* FolderService::getFolder(const QUuid& uuid)
+{
+    return getFolderHelper(uuid, m_rootFolder.get());
+}
+
+bool FolderService::createFolder(const QString& name, const QUuid& parent)
 {
     Folder* parentFolder = nullptr;
     // This means that the folder should be created in the root folder.
@@ -35,21 +40,16 @@ bool FolderService::createFolder(QString name, QUuid parent)
     return true;
 }
 
-bool FolderService::deleteFolder(QUuid uuid)
+bool FolderService::deleteFolder(const QUuid& uuid)
 {
 }
 
-void FolderService::renameFolder(QUuid uuid, QString newName)
+void FolderService::updateFolder(const domain::entities::Folder& folder)
 {
-    auto folder = getFolder(uuid);
-    folder->setName(newName);
+    auto realFolder = getFolder(folder.getUuid());
+    realFolder->setName(folder.getName());
 
-    emit refreshFolder(folder->getParent(), folder->getIndexInParent());
-}
-
-Folder* FolderService::getFolder(const QUuid& uuid)
-{
-    return getFolderHelper(uuid, m_rootFolder.get());
+    emit refreshFolder(realFolder->getParent(), realFolder->getIndexInParent());
 }
 
 Folder* FolderService::getFolderHelper(const QUuid& uuid,

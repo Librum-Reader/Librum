@@ -17,9 +17,11 @@ public:
     FolderController(application::IFolderService* folderService);
 
     data_models::FoldersProxyModel* getFoldersModel() override;
-    bool createFolder(QString name, QString parent = "");
-    bool deleteFolder(QString uuid);
-    void renameFolder(QString uuid, QString newName);
+    dtos::FolderDto getFolder(QString uuid) override;
+    bool createFolder(QString name, QString parent = "") override;
+    bool deleteFolder(QString uuid) override;
+    void updateFolder(QString uuid, QString name, QString icon,
+                      QString description) override;
 
 private:
     application::IFolderService* m_folderService;

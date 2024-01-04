@@ -176,7 +176,7 @@ Item {
 
                         implicitWidth: treeView.width
                         width: implicitWidth
-                        implicitHeight: 30
+                        implicitHeight: 32
                         padding: 0
 
                         background: Rectangle {
@@ -239,12 +239,14 @@ Item {
                                 }
                             }
 
-                            Text {
+                            Label {
                                 id: treeNodeLabel
                                 Layout.fillWidth: true
+                                Layout.fillHeight: true
                                 Layout.leftMargin: 6
-                                Layout.topMargin: 1
-                                Layout.alignment: Qt.AlignVCenter
+                                verticalAlignment: Text.AlignVCenter
+                                horizontalAlignment: Text.AlignLeft
+                                topPadding: 1
                                 clip: true
                                 color: Style.colorText
                                 opacity: nodeLabelTrigger.pressed ? 0.7 : 1
@@ -275,6 +277,7 @@ Item {
                                                            - rightclickPopup.height - 5
                                                        }
 
+                                                       rightclickPopup.uuid = treeNode.uuid
                                                        rightclickPopup.open()
                                                    }
                                                }
@@ -313,6 +316,7 @@ Item {
                                             rightclickPopup.y = point.y - rightclickPopup.height - 2
                                         }
 
+                                        rightclickPopup.uuid = treeNode.uuid
                                         rightclickPopup.open()
                                     }
                                 }

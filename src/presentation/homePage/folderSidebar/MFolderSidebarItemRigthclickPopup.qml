@@ -10,6 +10,8 @@ import Librum.fonts
 
 Popup {
     id: root
+    property string uuid
+
     implicitWidth: 164
     height: mainLayout.height + 2 * padding
     padding: 8
@@ -32,6 +34,7 @@ Popup {
             id: menuItemRoot
             property string text
             property string textColor: Style.colorText
+            signal clicked
 
             Layout.fillWidth: true
             Layout.preferredHeight: 32
@@ -58,6 +61,9 @@ Popup {
                 id: menuItemArea
                 anchors.fill: parent
                 hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+
+                onClicked: menuItemRoot.clicked()
             }
         }
 
@@ -67,6 +73,14 @@ Popup {
 
         MenuItem {
             text: "Edit"
+
+            onClicked: {
+                addFolderPopup.updateMode = true
+                addFolderPopup.uuid = root.uuid
+                addFolderPopup.open()
+
+                root.close()
+            }
         }
 
         MenuItem {

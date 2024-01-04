@@ -92,6 +92,7 @@ add_library(adapters
                     DTOs/highlight_dto.hpp
                     DTOs/rectf_dto.hpp
                     DTOs/word_definition_dto.hpp
+                    DTOs/folder_dto.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)

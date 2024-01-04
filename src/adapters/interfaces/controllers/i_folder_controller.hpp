@@ -1,6 +1,7 @@
 #pragma once
 #include <QObject>
 #include "adapters_export.hpp"
+#include "folder_dto.hpp"
 #include "folders_proxy_model.hpp"
 
 namespace adapters
@@ -23,10 +24,13 @@ public:
 
     virtual data_models::FoldersProxyModel* getFoldersModel() = 0;
 
+    Q_INVOKABLE virtual dtos::FolderDto getFolder(QString uuid) = 0;
     Q_INVOKABLE virtual bool createFolder(QString name,
                                           QString parent = "") = 0;
     Q_INVOKABLE virtual bool deleteFolder(QString uuid) = 0;
-    Q_INVOKABLE virtual void renameFolder(QString uuid, QString newName) = 0;
+    Q_INVOKABLE virtual void updateFolder(QString uuid, QString name,
+                                          QString icon,
+                                          QString description) = 0;
 };
 
 }  // namespace adapters

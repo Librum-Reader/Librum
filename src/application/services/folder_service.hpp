@@ -15,12 +15,12 @@ public:
     FolderService(IFolderStorageGateway* folderStorageGateway);
 
     domain::entities::Folder* getRootFolder() override;
-    bool createFolder(QString name, QUuid parent) override;
-    bool deleteFolder(QUuid uuid) override;
-    void renameFolder(QUuid uuid, QString newName) override;
+    domain::entities::Folder* getFolder(const QUuid& uuid) override;
+    bool createFolder(const QString& name, const QUuid& parent) override;
+    bool deleteFolder(const QUuid& uuid) override;
+    void updateFolder(const domain::entities::Folder& folder) override;
 
 private:
-    domain::entities::Folder* getFolder(const QUuid& uuid);
     domain::entities::Folder* getFolderHelper(const QUuid& uuid,
                                               domain::entities::Folder* parent);
 

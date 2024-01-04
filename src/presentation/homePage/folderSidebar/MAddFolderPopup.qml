@@ -9,6 +9,10 @@ import CustomComponents
 
 Popup {
     id: root
+    property bool updateMode: false
+    // Only needed in update mode
+    property string uuid
+
     implicitWidth: 340
     implicitHeight: layout.height + 28
     horizontalPadding: 20
@@ -21,8 +25,21 @@ Popup {
         antialiasing: true
     }
 
-    onOpened: nameInput.giveFocus()
-    onClosed: nameInput.clearText()
+    onOpened: {
+        nameInput.giveFocus()
+
+        // Load the folder when in update mode
+        if (root.updateMode) {
+            let folder = FolderController.getFolder(uuid)
+
+            nameInput.text = folder.name
+        }
+    }
+    onClosed: {
+        nameInput.clearText()
+        updateMode = false
+        uuid = ""
+    }
 
     ColumnLayout {
         id: layout
@@ -36,7 +53,8 @@ Popup {
             Label {
                 id: popupTitle
                 Layout.alignment: Qt.AlignLeft
-                text: qsTr("Create Folder")
+                text: root.updateMode ? qsTr("Edit Folder") : qsTr(
+                                            "Create Folder")
                 font.weight: Font.Medium
                 font.pointSize: Fonts.size16
                 color: Style.colorTitle
@@ -196,7 +214,7 @@ Popup {
             opacityOnPressed: 0.85
             textColor: Style.colorFocusedButtonText
             fontWeight: Font.Bold
-            text: qsTr("Create")
+            text: root.updateMode ? qsTr("Update") : qsTr("Create")
 
             onClicked: internal.createFolder()
         }
@@ -206,7 +224,12 @@ Popup {
         id: internal
 
         function createFolder() {
-            FolderController.createFolder(nameInput.text)
+            if (!root.updateMode) {
+                FolderController.createFolder(nameInput.text)
+            } else {
+                FolderController.updateFolder(uuid, nameInput.text, "", "")
+            }
+
             root.close()
         }
     }
