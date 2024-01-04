@@ -1,4 +1,4 @@
-﻿# Librum
+# Librum
 
 Librum is an application designed to make reading <b>enjoyable</b> and <b>straightforward</b> for everyone.
 
@@ -306,6 +306,8 @@ The installation is straight forward, just follow the steps below:
     ```
 7. Install Librum
     ```sh
-    cmake --install .
+    cmake --install
     ```
+Note: Make sure to add `/usr/local/lib` to your DYLIB path, for MacOS to find the installed libraries by exporting `DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:/usr/local/lib`.
+
 <br>
