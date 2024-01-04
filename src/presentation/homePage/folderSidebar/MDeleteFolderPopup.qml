@@ -72,14 +72,14 @@ Popup {
             Layout.topMargin: 22
             font.pointSize: Fonts.size10dot75
             color: Style.colorText
-            text: "Books inside the folder will not be deleted."
+            text: qsTr("Books inside the folder will not be deleted.")
         }
 
         RowLayout {
             Layout.fillWidth: true
             Layout.topMargin: 22
             height: cancelButton.height
-            spacing: 8
+            spacing: 12
 
             MButton {
                 id: cancelButton
