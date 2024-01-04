@@ -254,8 +254,7 @@ Item {
                                     cursorShape: Qt.PointingHandCursor
 
                                     onClicked: {
-                                        FolderController.createFolder(
-                                                    "Test folder", "")
+
                                     }
                                 }
                             }
@@ -277,7 +276,7 @@ Item {
     MAddFolderPopup {
         id: addFolderPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
-        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 50)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
         visible: false
     }
 

@@ -220,5 +220,7 @@
         <file>resources/images/light_mode/utility/add_folder_plus_icon.svg</file>
         <file>resources/images/light_mode/utility/book_closed_icon.svg</file>
         <file>resources/images/dark_mode/utility/book_closed_icon.svg</file>
+        <file>resources/images/light_mode/utility/pen_icon.svg</file>
+        <file>resources/images/dark_mode/utility/pen_icon.svg</file>
     </qresource>
 </RCC>

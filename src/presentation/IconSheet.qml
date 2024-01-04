@@ -135,6 +135,7 @@ Item {
     property string unsorted
     property string addFolderPlus
     property string bookClosed
+    property string pen
 
     state: "Light"
     states: [
@@ -576,6 +577,10 @@ Item {
                 target: iconSheet
                 bookClosed: "/resources/images/light_mode/utility/book_closed_icon.svg"
             }
+            PropertyChanges {
+                target: iconSheet
+                pen: "/resources/images/light_mode/utility/pen_icon.svg"
+            }
         },
         State {
             name: "Dark"
@@ -1014,6 +1019,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 bookClosed: "/resources/images/dark_mode/utility/book_closed_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                pen: "/resources/images/dark_mode/utility/pen_icon.svg"
             }
         }
     ]
