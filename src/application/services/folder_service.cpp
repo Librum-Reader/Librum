@@ -1,4 +1,5 @@
 #include "folder_service.hpp"
+#include <ranges>
 
 namespace application::services
 {
@@ -42,6 +43,17 @@ bool FolderService::createFolder(const QString& name, const QUuid& parent)
 
 bool FolderService::deleteFolder(const QUuid& uuid)
 {
+    auto folder = getFolder(uuid);
+    if(folder == nullptr)
+        return false;
+
+    auto parent = folder->getParent();
+
+    emit beginRemoveFolder(parent, folder->getIndexInParent());
+    parent->removeChild(uuid);
+    emit endRemoveFolder();
+
+    return true;
 }
 
 void FolderService::updateFolder(const domain::entities::Folder& folder)

@@ -242,7 +242,8 @@ Item {
                             Label {
                                 id: treeNodeLabel
                                 Layout.fillWidth: true
-                                Layout.fillHeight: true
+                                // To have a bigger clickable area
+                                Layout.preferredHeight: treeNode.height
                                 Layout.leftMargin: 6
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignLeft
@@ -346,6 +347,13 @@ Item {
 
     MAddFolderPopup {
         id: addFolderPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
+        visible: false
+    }
+
+    MDeleteFolderPopup {
+        id: deleteFolderPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
         visible: false

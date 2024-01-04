@@ -99,6 +99,13 @@ Popup {
             Layout.topMargin: 6
             text: "Delete"
             textColor: Style.colorRed
+
+            onClicked: {
+                deleteFolderPopup.uuid = root.uuid
+                deleteFolderPopup.open()
+
+                root.close()
+            }
         }
     }
 }

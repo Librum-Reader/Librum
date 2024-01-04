@@ -52,6 +52,7 @@ bool FolderController::createFolder(QString name, QString parent)
 
 bool FolderController::deleteFolder(QString uuid)
 {
+    return m_folderService->deleteFolder(QUuid(uuid));
 }
 
 void FolderController::updateFolder(QString uuid, QString name, QString icon,
