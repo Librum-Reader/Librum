@@ -67,7 +67,7 @@ Item {
         MFolderSidebarItem {
             Layout.fillWidth: true
             Layout.leftMargin: 10
-            Layout.rightMargin: 12
+            Layout.rightMargin: 10
             title: qsTr("Unsorted")
             icon: Icons.unsorted
         }
@@ -133,6 +133,7 @@ Item {
             id: treeViewContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.topMargin: 4
             verticalPadding: 6
             horizontalPadding: 4
             background: Rectangle {
@@ -158,12 +159,13 @@ Item {
 
                     anchors.fill: parent
                     anchors.margins: 1
-                    anchors.rightMargin: scrollBar.isEnabled ? 18 : 1
+                    anchors.rightMargin: scrollBar.isEnabled ? 18 : 6
+                    anchors.leftMargin: 6
                     clip: true
                     focus: true
 
                     model: FolderController.foldersModel
-                    delegate: Rectangle {
+                    delegate: Pane {
                         id: treeNode
                         required property string name
                         required property string uuid
@@ -172,27 +174,32 @@ Item {
                         required property int hasChildren
                         required property int depth
 
-                        implicitWidth: treeView.width - 2 // L/R margins
+                        implicitWidth: treeView.width
                         width: implicitWidth
                         implicitHeight: 30
-                        color: "transparent"
+                        padding: 0
+
+                        background: Rectangle {
+                            anchors.fill: parent
+                            color: backgroundArea.containsMouse ? "white" : "transparent"
+                            opacity: 0.08
+                            radius: 4
+                        }
 
                         RowLayout {
                             id: nodeLayout
                             anchors.left: parent.left
                             anchors.right: parent.right
-                            anchors.leftMargin: 4
-                            anchors.rightMargin: 4
                             anchors.verticalCenter: parent.verticalCenter
                             spacing: 0
 
                             Image {
                                 id: indicator
                                 Layout.preferredWidth: implicitWidth
-                                Layout.leftMargin: treeNode.depth * treeView.indent
+                                Layout.leftMargin: treeNode.depth * treeView.indent + 2
                                 Layout.alignment: Qt.AlignVCenter
                                 visible: treeNode.hasChildren
-                                opacity: pageSwitchTrigger.pressed
+                                opacity: nodeLabelTrigger.pressed
                                          || indicatorArea.pressed ? 0.7 : 1
                                 source: Icons.arrowheadNextIcon
                                 sourceSize.width: 22
@@ -212,10 +219,9 @@ Item {
                             Image {
                                 id: icon
                                 Layout.preferredWidth: implicitWidth
-                                Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 4
+                                Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 2
                                 Layout.alignment: Qt.AlignVCenter
-                                opacity: pageSwitchTrigger.pressed
-                                         || indicatorArea.pressed
+                                opacity: nodeLabelTrigger.pressed
                                          || iconArea.pressed ? 0.7 : 1
                                 source: Icons.folder
                                 sourceSize.width: 17
@@ -241,14 +247,14 @@ Item {
                                 Layout.alignment: Qt.AlignVCenter
                                 clip: true
                                 color: Style.colorText
-                                opacity: pageSwitchTrigger.pressed ? 0.7 : 1
+                                opacity: nodeLabelTrigger.pressed ? 0.7 : 1
                                 font.pointSize: Fonts.size10dot25
                                 font.weight: Font.Medium
                                 elide: Text.ElideRight
                                 text: treeNode.name
 
                                 MouseArea {
-                                    id: pageSwitchTrigger
+                                    id: nodeLabelTrigger
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
@@ -258,6 +264,37 @@ Item {
                                     }
                                 }
                             }
+
+                            Image {
+                                id: threeDotsIcon
+                                Layout.preferredWidth: implicitWidth
+                                Layout.rightMargin: 18
+                                Layout.alignment: Qt.AlignVCenter
+                                opacity: threeDotsIconArea.pressed ? 0.7 : 1
+                                source: Icons.dots
+                                sourceSize.width: 16
+                                fillMode: Image.PreserveAspectFit
+                                visible: backgroundArea.containsMouse
+
+                                MouseArea {
+                                    id: threeDotsIconArea
+                                    anchors.fill: parent
+                                    hoverEnabled: true
+                                    cursorShape: Qt.PointingHandCursor
+
+                                    onClicked: {
+
+                                    }
+                                }
+                            }
+                        }
+
+                        MouseArea {
+                            id: backgroundArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            acceptedButtons: Qt.NoButton
                         }
                     }
                 }
