@@ -258,10 +258,26 @@ Item {
                                     anchors.fill: parent
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
+                                    acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                                    onClicked: {
+                                    onClicked: mouse => {
+                                                   if (mouse.button === Qt.RightButton) {
+                                                       let point = mapToItem(
+                                                           root, mouse.x,
+                                                           mouse.y)
 
-                                    }
+                                                       rightclickPopup.x = point.x
+                                                       rightclickPopup.y = point.y + 5
+
+                                                       if (point.y + 5 + rightclickPopup.height
+                                                           > baseRoot.height) {
+                                                           rightclickPopup.y = point.y
+                                                           - rightclickPopup.height - 5
+                                                       }
+
+                                                       rightclickPopup.open()
+                                                   }
+                                               }
                                 }
                             }
 
@@ -283,7 +299,21 @@ Item {
                                     cursorShape: Qt.PointingHandCursor
 
                                     onClicked: {
+                                        let point = mapToItem(
+                                                root, threeDotsIconArea.x,
+                                                threeDotsIconArea.y)
 
+                                        rightclickPopup.x = point.x + threeDotsIconArea.width / 2
+                                                - rightclickPopup.implicitWidth / 2
+                                        rightclickPopup.y = point.y + threeDotsIconArea.height + 2
+
+                                        // If the popup is outside the window, move it up
+                                        if (point.y + 5 + rightclickPopup.height
+                                                > baseRoot.height) {
+                                            rightclickPopup.y = point.y - rightclickPopup.height - 2
+                                        }
+
+                                        rightclickPopup.open()
                                     }
                                 }
                             }
@@ -314,6 +344,11 @@ Item {
         id: addFolderPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
+        visible: false
+    }
+
+    MFolderSidebarItemRigthclickPopup {
+        id: rightclickPopup
         visible: false
     }
 

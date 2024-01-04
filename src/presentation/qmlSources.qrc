@@ -105,5 +105,6 @@
         <file>homePage/folderSidebar/MFolderSidebarItem.qml</file>
         <file>homePage/folderSidebar/MFolderSidebar.qml</file>
         <file>homePage/folderSidebar/MAddFolderPopup.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml</file>
     </qresource>
 </RCC>

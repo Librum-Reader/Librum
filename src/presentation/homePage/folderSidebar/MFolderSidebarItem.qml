@@ -6,6 +6,7 @@ import Librum.style
 
 Item {
     id: root
+    property string uuid
     property string icon
     property string title
 
