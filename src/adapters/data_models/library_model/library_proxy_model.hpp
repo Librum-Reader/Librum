@@ -5,6 +5,7 @@
 #include <vector>
 #include "adapters_export.hpp"
 #include "filter_request.hpp"
+#include "folder_filter_request.hpp"
 #include "tag_dto.hpp"
 
 namespace adapters::data_models
@@ -50,6 +51,9 @@ public:
     Q_INVOKABLE void addFilterTag(QString tag);
     Q_INVOKABLE void removeFilterTag(QString tag);
     Q_INVOKABLE void clearFilterTags();
+    Q_INVOKABLE void setFolderFilterRequest(QString folderUuid, bool allBooks,
+                                            bool onlyUnsorted);
+    Q_INVOKABLE void clearFolderFilterRequest();
 
     void setSortRole(int newRole);
     int getSortRole();
@@ -77,8 +81,11 @@ private:
     bool filterAcceptsFormat(const QModelIndex& bookIndex) const;
     bool filterAcceptsStatus(const QModelIndex& bookIndex) const;
     bool filterAcceptsLanguage(const QModelIndex& bookIndex) const;
+    bool filterAcceptsFolder(const QModelIndex& bookIndex) const;
 
     FilterRequest m_filterRequest;
+    FolderFilterRequest m_folderFilterRequest;
+    QString m_folder = "";
     QString m_sortString = "";
     std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
     std::vector<QString> m_tags;

@@ -92,6 +92,16 @@ std::optional<bool> LibraryProxyModel::leftBookIsCloserToSortString(
     return std::nullopt;
 }
 
+bool LibraryProxyModel::filterAcceptsRow(int source_row,
+                                         const QModelIndex& source_parent) const
+{
+    auto index = sourceModel()->index(source_row, 0, source_parent);
+
+    return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
+           filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
+           filterAcceptsLanguage(index) && filterAcceptsFolder(index);
+}
+
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,
                                          QString language, bool onlyBooks,
                                          bool onlyFiles, bool read, bool unread)
@@ -117,16 +127,6 @@ bool LibraryProxyModel::getIsFiltering()
            !m_filterRequest.language.isEmpty() || m_filterRequest.onlyBooks ||
            m_filterRequest.onlyFiles || m_filterRequest.read ||
            m_filterRequest.unread;
-}
-
-bool LibraryProxyModel::filterAcceptsRow(int source_row,
-                                         const QModelIndex& source_parent) const
-{
-    auto index = sourceModel()->index(source_row, 0, source_parent);
-
-    return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
-           filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
-           filterAcceptsLanguage(index);
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -191,6 +191,29 @@ void LibraryProxyModel::clearFilterTags()
     m_tags.clear();
 
     emit filterUpdated();
+    invalidateFilter();
+}
+
+void LibraryProxyModel::setFolderFilterRequest(QString folderUuid,
+                                               bool allBooks, bool onlyUnsorted)
+{
+    m_folderFilterRequest = FolderFilterRequest {
+        .uuid = folderUuid,
+        .allBooks = allBooks,
+        .onlyUnsorted = onlyUnsorted,
+    };
+
+    invalidateFilter();
+}
+
+void LibraryProxyModel::clearFolderFilterRequest()
+{
+    m_folderFilterRequest = FolderFilterRequest {
+        .uuid = "",
+        .allBooks = false,
+        .onlyUnsorted = false,
+    };
+
     invalidateFilter();
 }
 
@@ -354,6 +377,22 @@ bool LibraryProxyModel::filterAcceptsLanguage(
     auto language = rawLanguage.toString().toLower();
 
     return language == m_filterRequest.language;
+}
+
+bool LibraryProxyModel::filterAcceptsFolder(const QModelIndex& bookIndex) const
+{
+    if(m_folderFilterRequest.allBooks)
+        return true;
+
+    auto uuid = sourceModel()
+                    ->data(bookIndex, LibraryModel::ParentFolderIdRole)
+                    .toString();
+
+    auto emptyUuidString = QUuid().toString(QUuid::WithoutBraces);
+    if(m_folderFilterRequest.onlyUnsorted && uuid == emptyUuidString)
+        return true;
+
+    return uuid == m_folderFilterRequest.uuid;
 }
 
 }  // namespace adapters::data_models

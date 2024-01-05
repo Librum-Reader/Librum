@@ -73,6 +73,11 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
 {
     auto currFolder = getFolder(uuid);
     auto destFolder = getFolder(destUuid);
+
+    // We don't need to do anything if dest is already the parent
+    if(currFolder->getParent()->getUuid() == destFolder->getUuid())
+        return false;
+
     if(destFolder->isChildOf(*currFolder))
     {
         qWarning() << "Folder move operation failed. Attempted to move folder "

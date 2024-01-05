@@ -38,6 +38,7 @@ public:
         CurrentPageRole,
         AddedToLibraryRole,
         LastOpenedRole,
+        ParentFolderIdRole,
         CoverRole,
         TagsRole,
         DownloadedRole,

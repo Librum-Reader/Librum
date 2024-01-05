@@ -62,6 +62,9 @@ Item {
             Layout.topMargin: 18
             title: qsTr("All Books")
             icon: Icons.bookClosed
+
+            onClicked: LibraryController.libraryModel.setFolderFilterRequest(
+                           "", true, false)
         }
 
         MFolderSidebarItem {
@@ -70,6 +73,9 @@ Item {
             Layout.rightMargin: 10
             title: qsTr("Unsorted")
             icon: Icons.unsorted
+
+            onClicked: LibraryController.libraryModel.setFolderFilterRequest(
+                           "", false, true)
         }
 
         Rectangle {
@@ -289,6 +295,10 @@ Item {
 
                                                        rightclickPopup.uuid = treeNode.uuid
                                                        rightclickPopup.open()
+                                                   } else if (mouse.button === Qt.LeftButton) {
+                                                       LibraryController.libraryModel.setFolderFilterRequest(
+                                                           treeNode.uuid,
+                                                           false, false)
                                                    }
                                                }
                                 }

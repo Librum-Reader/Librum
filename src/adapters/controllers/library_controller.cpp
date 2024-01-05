@@ -203,6 +203,8 @@ int LibraryController::updateBook(const QString& uuid,
             updatedBook.setAddedToLibrary(
                 QDateTime::fromString(value.toString()));
             break;
+        case MetaProperty::ParentFolderId:
+            updatedBook.setParentFolderId(QUuid(value.toString()));
         case MetaProperty::LastModified:
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
@@ -356,6 +358,8 @@ void LibraryController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
     bookDto.bookReadingProgress = book.getBookReadingProgress();
+    bookDto.parentFolderId =
+        book.getParentFolderId().toString(QUuid::WithoutBraces);
     bookDto.coverPath = pathWithScheme;
     bookDto.downloaded = book.isDownloaded();
 

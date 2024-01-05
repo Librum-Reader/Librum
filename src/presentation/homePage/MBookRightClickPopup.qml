@@ -3,6 +3,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import CustomComponents
 import QtQml.Models
+import Librum.controllers
 import Librum.globals
 import Librum.icons
 import Librum.style
@@ -14,7 +15,7 @@ MRightClickMenu {
     signal bookDetailsClicked
     signal saveToFilesClicked
     signal manageTagsClicked
-    signal markAsReadClicked
+    signal addToFolderClicked
     signal removeClicked
 
     implicitHeight: internal.bookDownloaded ? 213 : 181 // 32px per item
@@ -95,12 +96,12 @@ MRightClickMenu {
 
         MRightClickMenuItem {
             width: root.width
-            imagePath: Icons.bookPopupMarkAsRead
+            imagePath: Icons.folder
             imageSize: 17
-            //: If this is too long in any language, use "Read" (past form) instead
-            text: qsTr("Mark as read")
+            //: If this is too long, use "To Folder" instead
+            text: qsTr("Add to Folder")
 
-            onClicked: root.markAsReadClicked()
+            onClicked: root.addToFolderClicked()
         }
 
         MRightClickMenuItem {

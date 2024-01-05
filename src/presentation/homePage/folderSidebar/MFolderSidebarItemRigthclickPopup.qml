@@ -96,6 +96,7 @@ Popup {
 
             onClicked: {
                 moveFolderToFolderPopup.folderUuid = root.uuid
+                moveFolderToFolderPopup.headerItemText = "Root"
                 moveFolderToFolderPopup.open()
 
                 root.close()

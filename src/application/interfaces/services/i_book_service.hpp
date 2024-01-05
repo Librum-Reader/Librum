@@ -48,9 +48,6 @@ public:
     virtual void renameBookmark(const QUuid& uuid, const QString& newName) = 0;
     virtual void removeBookmark(const QUuid& uuid) = 0;
 
-    virtual void addToFolder(const QUuid& folderId) = 0;
-    virtual void removeFromCurrentFolder() = 0;
-
     virtual void followLink(const char* uri) = 0;
 
     virtual QString getFilePath() const = 0;

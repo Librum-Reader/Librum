@@ -46,6 +46,7 @@ public:
         CurrentPage,
         AddedToLibrary,
         LastModified,
+        ParentFolderId,
         Invalid
     };
     Q_ENUM(MetaProperty);

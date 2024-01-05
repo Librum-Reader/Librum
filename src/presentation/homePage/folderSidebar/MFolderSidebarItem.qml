@@ -10,6 +10,8 @@ Item {
     property string icon
     property string title
 
+    signal clicked
+
     implicitHeight: 32
 
     Rectangle {
@@ -46,5 +48,7 @@ Item {
         anchors.fill: parent
         hoverEnabled: true
         cursorShape: Qt.PointingHandCursor
+
+        onClicked: root.clicked()
     }
 }

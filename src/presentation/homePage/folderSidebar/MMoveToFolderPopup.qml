@@ -12,6 +12,7 @@ Popup {
     // We can either move a book or a folder to some folder
     property string bookUuid
     property string folderUuid
+    property string headerItemText: "None"
 
     implicitWidth: 400
     implicitHeight: layout.implicitHeight + 28
@@ -26,6 +27,11 @@ Popup {
     }
 
     onOpened: root.forceActiveFocus()
+    onClosed: {
+        root.bookUuid = ""
+        root.folderUuid = ""
+        root.headerItemText = "None"
+    }
 
     ColumnLayout {
         id: layout
@@ -72,15 +78,90 @@ Popup {
             color: Style.colorSeparator
         }
 
+        Pane {
+            id: headerItem
+            implicitWidth: treeView.width
+            width: implicitWidth
+            implicitHeight: 32
+            padding: 0
+
+            Layout.topMargin: 16
+            background: Rectangle {
+                anchors.fill: parent
+                color: headerArea.containsMouse
+                       || internal.selectedFolder === headerItem.uuid ? "white" : "transparent"
+                opacity: 0.08
+                radius: 4
+            }
+
+            RowLayout {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 0
+
+                Image {
+                    Layout.preferredWidth: implicitWidth
+                    Layout.leftMargin: 22 * 1.1 + 2
+                    Layout.alignment: Qt.AlignVCenter
+                    opacity: headerArea.pressed ? 0.7 : 1
+                    source: Icons.folder
+                    sourceSize.width: 17
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Label {
+                    Layout.fillWidth: true
+                    // To have a bigger clickable area
+                    Layout.preferredHeight: headerItem.height
+                    Layout.leftMargin: 6
+                    verticalAlignment: Text.AlignVCenter
+                    horizontalAlignment: Text.AlignLeft
+                    topPadding: 1
+                    clip: true
+                    color: Style.colorText
+                    opacity: headerArea.pressed ? 0.7 : 1
+                    font.pointSize: Fonts.size10dot25
+                    font.weight: Font.Medium
+                    elide: Text.ElideRight
+                    text: root.headerItemText
+                }
+            }
+
+            MouseArea {
+                id: headerArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.PointingHandCursor
+
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: internal.selectedFolder = "header"
+                    onDoubleClicked: {
+                        internal.selectedFolder = "header"
+
+                        if (root.folderUuid !== ""
+                                && internal.selectedFolder !== root.folderUuid)
+                            internal.moveFolder()
+                        else
+                            internal.moveBook()
+
+                        root.close()
+                    }
+                }
+            }
+        }
+
         ScrollView {
             id: scrollBar
             property bool isEnabled: contentHeight > height
 
-            Layout.topMargin: 16
             Layout.fillWidth: true
             Layout.preferredHeight: Math.min(implicitHeight, 480)
             Layout.minimumHeight: 180
-
             ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
             onIsEnabledChanged: {
                 if (isEnabled)
@@ -182,20 +263,17 @@ Popup {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
 
-                        MouseArea {
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
+                        onClicked: internal.selectedFolder = treeNode.uuid
+                        onDoubleClicked: {
+                            internal.selectedFolder = treeNode.uuid
 
-                            onClicked: internal.selectedFolder = treeNode.uuid
-                            onDoubleClicked: {
-                                internal.selectedFolder = treeNode.uuid
+                            if (root.folderUuid !== ""
+                                    && internal.selectedFolder !== root.folderUuid)
+                                internal.moveFolder()
+                            else
+                                internal.moveBook()
 
-                                if (internal.selectedFolder !== root.folderUuid)
-                                    internal.moveFolder()
-
-                                root.close()
-                            }
+                            root.close()
                         }
                     }
                 }
@@ -256,7 +334,11 @@ Popup {
                     if (!enabled)
                         return
 
-                    internal.moveFolder()
+                    if (root.folderUuid !== "")
+                        internal.moveFolder()
+                    else
+                        internal.moveBook()
+
                     root.close()
                 }
             }
@@ -271,10 +353,22 @@ Popup {
             if (selectedFolder === "" || selectedFolder === root.folderUuid)
                 return
 
-            let success = FolderController.moveFolder(root.folderUuid,
-                                                      selectedFolder)
-            if (!success)
-                print("Failed")
+            if (selectedFolder === "header") {
+                FolderController.moveFolder(root.folderUuid, "")
+                return
+            }
+
+            FolderController.moveFolder(root.folderUuid, selectedFolder)
+        }
+
+        function moveBook() {
+            var operationsMap = {}
+            if (selectedFolder === "header")
+                operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
+            else
+                operationsMap[LibraryController.MetaProperty.ParentFolderId] = selectedFolder
+
+            LibraryController.updateBook(root.bookUuid, operationsMap)
         }
     }
 }

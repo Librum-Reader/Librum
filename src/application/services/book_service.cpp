@@ -173,24 +173,6 @@ void BookService::removeBookmark(const QUuid& uuid)
     updateBook();
 }
 
-void BookService::addToFolder(const QUuid& folderId)
-{
-    auto book = getBook();
-
-    book->setParentFolderId(folderId);
-
-    updateBook();
-}
-
-void BookService::removeFromCurrentFolder()
-{
-    auto book = getBook();
-
-    book->setParentFolderId(QUuid());
-
-    updateBook();
-}
-
 void BookService::followLink(const char* uri)
 {
     if(mupdf::ll_fz_is_external_link(uri))

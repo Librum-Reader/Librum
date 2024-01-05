@@ -38,9 +38,6 @@ public:
     void renameBookmark(const QUuid& uuid, const QString& newName) override;
     void removeBookmark(const QUuid& uuid) override;
 
-    void addToFolder(const QUuid& folderId) override;
-    void removeFromCurrentFolder() override;
-
     void followLink(const char* uri) override;
 
     QString getFilePath() const override;

@@ -326,7 +326,9 @@ Page {
                             close()
                         }
 
-                        onMarkAsReadClicked: {
+                        onAddToFolderClicked: {
+                            moveBookToFolderPopup.bookUuid = Globals.selectedBook.uuid
+                            moveBookToFolderPopup.open()
                             close()
                         }
 

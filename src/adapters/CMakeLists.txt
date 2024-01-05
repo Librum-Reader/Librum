@@ -68,6 +68,7 @@ add_library(adapters
                     data_models/library_model/library_proxy_model.cpp
                     data_models/library_model/library_proxy_model.hpp
                     data_models/library_model/filter_request.hpp
+                    data_models/library_model/folder_filter_request.hpp
                     data_models/free_books_model/free_books_model.cpp
                     data_models/free_books_model/free_books_model.hpp
                     data_models/user_tags_model/user_tags_model.cpp

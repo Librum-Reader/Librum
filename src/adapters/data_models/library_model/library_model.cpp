@@ -83,6 +83,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
                    : book.getLastOpened().toLocalTime().toString(
                          Book::dateTimeStringFormat);
         break;
+    case ParentFolderIdRole:
+        return book.getParentFolderId().toString(QUuid::WithoutBraces);
     case CoverRole:
     {
         auto pathWithScheme =
@@ -126,6 +128,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { BookReadingProgressRole, "bookReadingProgress" },
         { AddedToLibraryRole, "addedToLibrary" },
         { LastOpenedRole, "lastOpened" },
+        { ParentFolderIdRole, "parentFolderId" },
         { CoverRole, "cover" },
         { TagsRole, "tags" },
         { DownloadedRole, "downloaded" },

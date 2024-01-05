@@ -531,6 +531,8 @@ void Book::update(const Book& other)
         m_metaData.colorTheme = other.getColorTheme();
     if(m_metaData.fileHash != other.getFileHash())
         m_metaData.fileHash = other.getFileHash();
+    if(m_parentFolderId != other.getParentFolderId())
+        m_parentFolderId = other.getParentFolderId();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
