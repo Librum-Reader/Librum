@@ -13,6 +13,7 @@ class Folder
 {
 public:
     Folder(QString name, QUuid uuid = QUuid::createUuid());
+    Folder(const Folder& folder);
 
     bool operator==(const Folder& rhs) const;
 
@@ -25,8 +26,8 @@ public:
     void setParent(Folder* parent);
 
     int getIndexInParent() const;
-
     int getIndexOfChild(const QUuid& uuid);
+    bool isChildOf(const Folder& folder) const;
 
     const std::vector<std::unique_ptr<Folder>>& getChildren() const;
     void addChild(std::unique_ptr<Folder> child);

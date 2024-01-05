@@ -10,6 +10,20 @@ Folder::Folder(QString name, QUuid uuid) :
 {
 }
 
+Folder::Folder(const Folder& folder)
+{
+    m_uuid = folder.m_uuid;
+    m_name = folder.m_name;
+    m_parent = nullptr;
+
+    for(const auto& child : folder.m_children)
+    {
+        auto newChild = std::make_unique<Folder>(*child);
+        newChild->setParent(this);
+        m_children.emplace_back(std::move(newChild));
+    }
+}
+
 bool Folder::operator==(const Folder& rhs) const
 {
     return m_uuid == rhs.m_uuid && m_name == rhs.m_name &&
@@ -55,6 +69,22 @@ int Folder::getIndexOfChild(const QUuid& uuid)
     }
 
     return -1;
+}
+
+bool Folder::isChildOf(const Folder& folder) const
+{
+    QUuid rootUuid = QUuid();
+
+    auto currFolder = this;
+    while(currFolder->getUuid() != rootUuid)
+    {
+        if(currFolder->getUuid() == folder.getUuid())
+            return true;
+
+        currFolder = currFolder->getParent();
+    }
+
+    return false;
 }
 
 const std::vector<std::unique_ptr<Folder> >& Folder::getChildren() const

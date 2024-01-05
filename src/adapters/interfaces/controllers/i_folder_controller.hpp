@@ -31,6 +31,7 @@ public:
     Q_INVOKABLE virtual void updateFolder(QString uuid, QString name,
                                           QString icon,
                                           QString description) = 0;
+    Q_INVOKABLE virtual bool moveFolder(QString uuid, QString destUuid) = 0;
 };
 
 }  // namespace adapters

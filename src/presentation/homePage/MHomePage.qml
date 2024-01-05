@@ -38,7 +38,7 @@ Page {
 
     MFolderSidebar {
         id: folderSidebar
-        height: parent.height
+        height: parent.height + root.bottomPadding
     }
 
     // Left spacing for the content
@@ -476,6 +476,14 @@ Page {
 
     MManageTagsPopup {
         id: manageTagsPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
+    }
+
+    MMoveToFolderPopup {
+        id: moveBookToFolderPopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(

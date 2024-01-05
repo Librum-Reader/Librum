@@ -175,8 +175,9 @@ Item {
                         required property int depth
 
                         onHasChildrenChanged: {
-                            if (hasChildren)
-                                rowExpander.start()
+
+                            // if (hasChildren)
+                            // rowExpander.start()
                         }
 
                         Timer {
@@ -353,6 +354,7 @@ Item {
                     contentItem.maximumFlickVelocity = 2000
                     contentItem.boundsBehavior = Flickable.StopAtBounds
                     contentItem.boundsMovement = Flickable.StopAtBounds
+                    contentItem.flickableDirection = Flickable.VerticalFlick
                 }
             }
         }
@@ -362,14 +364,18 @@ Item {
         id: addFolderPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
-        visible: false
     }
 
     MDeleteFolderPopup {
         id: deleteFolderPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
-        visible: false
+    }
+
+    MMoveToFolderPopup {
+        id: moveFolderToFolderPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
     }
 
     MFolderSidebarItemRigthclickPopup {

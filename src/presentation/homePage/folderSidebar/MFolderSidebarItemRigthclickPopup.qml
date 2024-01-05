@@ -93,6 +93,13 @@ Popup {
         MenuItem {
             text: "Move to"
             Layout.bottomMargin: 6
+
+            onClicked: {
+                moveFolderToFolderPopup.folderUuid = root.uuid
+                moveFolderToFolderPopup.open()
+
+                root.close()
+            }
         }
 
         Rectangle {

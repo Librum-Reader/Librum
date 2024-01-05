@@ -19,6 +19,7 @@ public:
     bool createFolder(const QString& name, const QUuid& parent) override;
     bool deleteFolder(const QUuid& uuid) override;
     void updateFolder(const domain::entities::Folder& folder) override;
+    bool moveFolder(const QUuid& uuid, const QUuid& destUuid) override;
 
 private:
     domain::entities::Folder* getFolderHelper(const QUuid& uuid,

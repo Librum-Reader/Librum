@@ -22,6 +22,7 @@ public:
     bool deleteFolder(QString uuid) override;
     void updateFolder(QString uuid, QString name, QString icon,
                       QString description) override;
+    bool moveFolder(QString uuid, QString destUuid) override;
 
 private:
     application::IFolderService* m_folderService;

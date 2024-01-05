@@ -1,5 +1,5 @@
 #include "folder_service.hpp"
-#include <ranges>
+#include <QDebug>
 
 namespace application::services
 {
@@ -62,6 +62,33 @@ void FolderService::updateFolder(const domain::entities::Folder& folder)
     realFolder->setName(folder.getName());
 
     emit refreshFolder(realFolder->getParent(), realFolder->getIndexInParent());
+}
+
+bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
+{
+    auto currFolder = getFolder(uuid);
+    auto destFolder = getFolder(destUuid);
+    if(destFolder->isChildOf(*currFolder))
+    {
+        qWarning() << "Folder move operation failed. Attempted to move folder "
+                      "into child";
+        return false;
+    }
+
+    // Make copy since we delete the currFolder from its parent which frees
+    // it's memory.
+    auto currFolderCopy = std::make_unique<Folder>(*currFolder);
+
+    emit beginRemoveFolder(currFolder->getParent(),
+                           currFolder->getIndexInParent());
+    currFolder->getParent()->removeChild(uuid);
+    emit endRemoveFolder();
+
+    emit beginInsertFolder(destFolder, destFolder->childCount());
+    destFolder->addChild(std::move(currFolderCopy));
+    emit endInsertFolder();
+
+    return true;
 }
 
 Folder* FolderService::getFolderHelper(const QUuid& uuid,

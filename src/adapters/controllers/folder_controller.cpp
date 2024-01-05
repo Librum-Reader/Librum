@@ -62,4 +62,9 @@ void FolderController::updateFolder(QString uuid, QString name, QString icon,
     m_folderService->updateFolder(folder);
 }
 
+bool FolderController::moveFolder(QString uuid, QString destUuid)
+{
+    return m_folderService->moveFolder(QUuid(uuid), QUuid(destUuid));
+}
+
 }  // namespace adapters::controllers

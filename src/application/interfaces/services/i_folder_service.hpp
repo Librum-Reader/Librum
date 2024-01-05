@@ -22,6 +22,7 @@ public:
     virtual bool createFolder(const QString& name, const QUuid& parent) = 0;
     virtual bool deleteFolder(const QUuid& uuid) = 0;
     virtual void updateFolder(const domain::entities::Folder& folder) = 0;
+    virtual bool moveFolder(const QUuid& uuid, const QUuid& destUuid) = 0;
 
 signals:
     void beginInsertFolder(domain::entities::Folder* parent, int index);
