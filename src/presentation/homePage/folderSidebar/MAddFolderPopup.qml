@@ -9,9 +9,12 @@ import CustomComponents
 
 Popup {
     id: root
-    property bool updateMode: false
     // Only needed in update mode
+    property bool updateMode: false
     property string uuid
+
+    // Only needed in creation mode
+    property string parentUuid
 
     implicitWidth: 340
     implicitHeight: layout.height + 28
@@ -39,6 +42,8 @@ Popup {
         nameInput.clearText()
         updateMode = false
         uuid = ""
+
+        parentUuid = ""
     }
 
     ColumnLayout {
@@ -225,7 +230,7 @@ Popup {
 
         function createFolder() {
             if (!root.updateMode) {
-                FolderController.createFolder(nameInput.text)
+                FolderController.createFolder(nameInput.text, root.parentUuid)
             } else {
                 FolderController.updateFolder(uuid, nameInput.text, "", "")
             }

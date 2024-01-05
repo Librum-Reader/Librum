@@ -174,6 +174,19 @@ Item {
                         required property int hasChildren
                         required property int depth
 
+                        onHasChildrenChanged: {
+                            if (hasChildren)
+                                rowExpander.start()
+                        }
+
+                        Timer {
+                            id: rowExpander
+                            interval: 20
+                            repeat: false
+
+                            onTriggered: treeView.expand(row)
+                        }
+
                         implicitWidth: treeView.width
                         width: implicitWidth
                         implicitHeight: 32

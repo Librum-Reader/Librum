@@ -69,6 +69,13 @@ Popup {
 
         MenuItem {
             text: "Create subfolder"
+
+            onClicked: {
+                addFolderPopup.parentUuid = root.uuid
+                addFolderPopup.open()
+
+                root.close()
+            }
         }
 
         MenuItem {
