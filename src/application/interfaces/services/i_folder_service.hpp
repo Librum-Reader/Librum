@@ -24,6 +24,10 @@ public:
     virtual void updateFolder(const domain::entities::Folder& folder) = 0;
     virtual bool moveFolder(const QUuid& uuid, const QUuid& destUuid) = 0;
 
+public slots:
+    virtual void setupUserData(const QString& token, const QString& email) = 0;
+    virtual void clearUserData() = 0;
+
 signals:
     void beginInsertFolder(domain::entities::Folder* parent, int index);
     void endInsertFolder();

@@ -170,32 +170,31 @@ int main(int argc, char* argv[])
     // Setup login connections
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      libraryService, &application::ILibraryService::setupUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
-                     freeBooksService, &application::IFreeBooksService::setupUserData);
+                     folderService, &application::IFolderService::setupUserData);
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+                     folderService, &application::IFolderService::clearUserData);
 
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     freeBooksService, &application::IFreeBooksService::setupUserData);
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      aiExplanationService, &application::IAiExplanationService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      aiExplanationService, &application::IAiExplanationService::clearUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         freeBooksService, &application::IFreeBooksService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      userService, &application::IUserService::setupUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      userService, &application::IUserService::clearUserData);
 
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      settingsService, &application::ISettingsService::loadUserSettings);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      settingsService, &application::ISettingsService::clearUserData);
 

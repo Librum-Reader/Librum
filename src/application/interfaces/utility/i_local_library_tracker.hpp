@@ -6,6 +6,7 @@
 #include <vector>
 #include "application_export.hpp"
 #include "book.hpp"
+#include "folder.hpp"
 
 namespace application
 {
@@ -29,6 +30,9 @@ public:
     virtual bool trackBook(const domain::entities::Book& book) = 0;
     virtual bool untrackBook(const QUuid& uuid) = 0;
     virtual bool updateTrackedBook(const domain::entities::Book& book) = 0;
+
+    virtual void saveFolders(const domain::entities::Folder& folder) = 0;
+    virtual domain::entities::Folder loadFolders() = 0;
 
     // Setup methods that need to be called first to setup filesystem paths
     virtual void setLibraryOwner(const QString& libraryOwnerEmail) = 0;

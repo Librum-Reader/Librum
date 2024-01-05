@@ -6,8 +6,10 @@ namespace application::services
 
 using domain::entities::Folder;
 
-FolderService::FolderService(IFolderStorageGateway* folderStorageGateway) :
+FolderService::FolderService(IFolderStorageGateway* folderStorageGateway,
+                             ILocalLibraryTracker* localLibraryTracker) :
     m_folderStorageGateway(folderStorageGateway),
+    m_localLibraryTracker(localLibraryTracker),
     m_rootFolder(std::make_unique<Folder>("ROOT", QUuid()))
 {
 }
@@ -38,6 +40,7 @@ bool FolderService::createFolder(const QString& name, const QUuid& parent)
     parentFolder->addChild(std::make_unique<Folder>(name));
     emit endInsertFolder();
 
+    saveChanges();
     return true;
 }
 
@@ -53,6 +56,7 @@ bool FolderService::deleteFolder(const QUuid& uuid)
     parent->removeChild(uuid);
     emit endRemoveFolder();
 
+    saveChanges();
     return true;
 }
 
@@ -61,6 +65,7 @@ void FolderService::updateFolder(const domain::entities::Folder& folder)
     auto realFolder = getFolder(folder.getUuid());
     realFolder->setName(folder.getName());
 
+    saveChanges();
     emit refreshFolder(realFolder->getParent(), realFolder->getIndexInParent());
 }
 
@@ -88,7 +93,35 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
     destFolder->addChild(std::move(currFolderCopy));
     emit endInsertFolder();
 
+    saveChanges();
     return true;
+}
+
+void FolderService::setupUserData(const QString& token, const QString& email)
+{
+    Q_UNUSED(token)
+    m_localLibraryTracker->setLibraryOwner(email);
+
+    auto folder = m_localLibraryTracker->loadFolders();
+
+    // This occurs when the user has no library yet. If this occurs, we want to
+    // create a default folder under the root folder for them.
+    if(folder.getName() == "invalid")
+    {
+        m_rootFolder->addChild(std::make_unique<Folder>("Archive"));
+        return;
+    }
+
+    // We need to add the folder's children to the current root element, since a
+    // pointer of the root element was already passed to the model, so we can't
+    // simply overwrite it, else we'd invalidate the pointer.
+    for(auto& child : folder.getChildren())
+        m_rootFolder->addChild(std::move(child));
+}
+
+void FolderService::clearUserData()
+{
+    m_localLibraryTracker->clearLibraryOwner();
 }
 
 Folder* FolderService::getFolderHelper(const QUuid& uuid,
@@ -105,6 +138,11 @@ Folder* FolderService::getFolderHelper(const QUuid& uuid,
     }
 
     return nullptr;
+}
+
+void FolderService::saveChanges()
+{
+    m_localLibraryTracker->saveFolders(*m_rootFolder);
 }
 
 }  // namespace application::services

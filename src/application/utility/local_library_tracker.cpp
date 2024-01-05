@@ -123,6 +123,47 @@ bool LocalLibraryTracker::updateTrackedBook(const Book& book)
     return trackBook(book);
 }
 
+void LocalLibraryTracker::saveFolders(const domain::entities::Folder& folder)
+{
+    ensureUserLibraryExists();
+
+    QDir libraryDir = getLibraryDir();
+    QFile file(libraryDir.path() + "/" + m_rootFolderFileName);
+
+    if(!file.open(QFile::WriteOnly))
+    {
+        qWarning() << QString("Tracking root folder failed. "
+                              "Failed opening file at: %1")
+                          .arg(file.fileName());
+    }
+
+    file.write(folder.toJson());
+}
+
+Folder LocalLibraryTracker::loadFolders()
+{
+    ensureUserLibraryExists();
+
+    QDir libraryDir = getLibraryDir();
+    QFile file(libraryDir.path() + "/" + m_rootFolderFileName);
+
+    if(!file.open(QFile::ReadOnly))
+    {
+        qWarning() << QString("Loading root folder failed. "
+                              "Failed opening file at: %1")
+                          .arg(file.fileName());
+    }
+
+    auto jsonDoc = QJsonDocument::fromJson(file.readAll());
+    if(jsonDoc.isEmpty())
+        return Folder("invalid");
+
+    auto folderObject = jsonDoc.object();
+    auto folder = Folder::fromJson(folderObject, nullptr);
+
+    return folder;
+}
+
 void LocalLibraryTracker::setLibraryOwner(const QString& libraryOwnerEmail)
 {
     m_libraryOwnerEmail = libraryOwnerEmail;

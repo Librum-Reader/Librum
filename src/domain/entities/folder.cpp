@@ -10,18 +10,68 @@ Folder::Folder(QString name, QUuid uuid) :
 {
 }
 
-Folder::Folder(const Folder& folder)
+Folder::Folder(const Folder& folder) :
+    m_uuid(folder.m_uuid),
+    m_name(folder.m_name),
+    m_parent(nullptr)
 {
-    m_uuid = folder.m_uuid;
-    m_name = folder.m_name;
-    m_parent = nullptr;
-
     for(const auto& child : folder.m_children)
     {
         auto newChild = std::make_unique<Folder>(*child);
         newChild->setParent(this);
         m_children.emplace_back(std::move(newChild));
     }
+}
+
+Folder::Folder(Folder&& folder) :
+    m_uuid(std::move(folder.m_uuid)),
+    m_name(std::move(folder.m_name)),
+    m_parent(nullptr)
+{
+    for(const auto& child : folder.m_children)
+    {
+        auto newChild = std::make_unique<Folder>(std::move(*child));
+        newChild->setParent(this);
+        m_children.emplace_back(std::move(newChild));
+    }
+}
+
+Folder& Folder::operator=(const Folder& rhs)
+{
+    if(this == &rhs)
+        return *this;
+
+    m_uuid = rhs.m_uuid;
+    m_name = rhs.m_name;
+    m_parent = nullptr;
+
+    for(const auto& child : rhs.m_children)
+    {
+        auto newChild = std::make_unique<Folder>(*child);
+        newChild->setParent(this);
+        m_children.emplace_back(std::move(newChild));
+    }
+
+    return *this;
+}
+
+Folder& Folder::operator=(Folder&& rhs)
+{
+    if(this == &rhs)
+        return *this;
+
+    m_uuid = std::move(rhs.m_uuid);
+    m_name = std::move(rhs.m_name);
+    m_parent = nullptr;
+
+    for(const auto& child : rhs.m_children)
+    {
+        auto newChild = std::make_unique<Folder>(std::move(*child));
+        newChild->setParent(this);
+        m_children.emplace_back(std::move(newChild));
+    }
+
+    return *this;
 }
 
 bool Folder::operator==(const Folder& rhs) const
@@ -88,6 +138,11 @@ bool Folder::isChildOf(const Folder& folder) const
 }
 
 const std::vector<std::unique_ptr<Folder> >& Folder::getChildren() const
+{
+    return m_children;
+}
+
+std::vector<std::unique_ptr<Folder> >& Folder::getChildren()
 {
     return m_children;
 }
@@ -159,7 +214,10 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
     for(const auto& jsonChild : jsonChildren)
     {
         // Recursively fill up all children
-        auto rect = Folder::fromJson(jsonChild.toObject(), &folder);
+        auto childFolder = Folder::fromJson(jsonChild.toObject(), &folder);
+        folder.addChild(std::make_unique<Folder>(std::move(childFolder)));
+        int x = 0;
+        ++x;
     }
 
     return folder;
