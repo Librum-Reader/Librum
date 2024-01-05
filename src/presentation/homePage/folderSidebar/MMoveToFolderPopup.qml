@@ -13,7 +13,7 @@ Popup {
     property string bookUuid
     property string folderUuid
 
-    implicitWidth: 360
+    implicitWidth: 400
     implicitHeight: layout.implicitHeight + 28
     horizontalPadding: 24
     closePolicy: Popup.CloseOnPressOutside | Popup.CloseOnEscape
@@ -24,6 +24,8 @@ Popup {
         radius: 6
         antialiasing: true
     }
+
+    onOpened: root.forceActiveFocus()
 
     ColumnLayout {
         id: layout
@@ -94,6 +96,7 @@ Popup {
                 anchors.fill: parent
                 anchors.margins: 1
                 anchors.rightMargin: scrollBar.isEnabled ? 12 : 0
+                reuseItems: false
                 clip: true
                 focus: true
 
@@ -107,26 +110,12 @@ Popup {
                     required property int hasChildren
                     required property int depth
 
-                    onHasChildrenChanged: {
-                        if (hasChildren)
-                            rowExpander.start()
-                    }
-
-                    // Ensure all items are expanded by default
-                    Component.onCompleted: treeView.expand(row)
-
-                    Timer {
-                        id: rowExpander
-                        interval: 20
-                        repeat: false
-
-                        onTriggered: treeView.expand(row)
-                    }
-
                     implicitWidth: treeView.width
                     width: implicitWidth
                     implicitHeight: 32
                     padding: 0
+
+                    Component.onCompleted: treeView.expand(row)
 
                     background: Rectangle {
                         anchors.fill: parent
