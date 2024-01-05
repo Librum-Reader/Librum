@@ -83,6 +83,12 @@ public:
     QString getColorTheme() const;
     void setColorTheme(const QString& newColorTheme);
 
+    int getZoom() const;
+    void setZoom(int newZoom);
+
+    float getYOffset() const;
+    void setYOffset(float newYOffset);
+
     QString getFileHash() const;
     void setFileHash(const QString& newFileHash);
 

@@ -27,6 +27,8 @@ struct DOMAIN_EXPORT BookMetaData
     QString coverPath;
     QString colorTheme;
     QString fileHash;
+    int zoom;
+    float yOffset;
 
     bool operator==(const BookMetaData& rhs) const
     {
@@ -48,7 +50,8 @@ struct DOMAIN_EXPORT BookMetaData
                coverLastModified.toSecsSinceEpoch() ==
                    rhs.coverLastModified.toSecsSinceEpoch() &&
                hasCover == rhs.hasCover && coverPath == coverPath &&
-               colorTheme == rhs.colorTheme && fileHash == rhs.fileHash;
+               colorTheme == rhs.colorTheme && fileHash == rhs.fileHash &&
+               zoom == rhs.zoom && yOffset == rhs.yOffset;
     }
 };
 

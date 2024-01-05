@@ -364,6 +364,26 @@ void Book::setColorTheme(const QString& newColorTheme)
     m_metaData.colorTheme = newColorTheme;
 }
 
+int Book::getZoom() const
+{
+    return m_metaData.zoom;
+}
+
+void Book::setZoom(int newZoom)
+{
+    m_metaData.zoom = newZoom;
+}
+
+float Book::getYOffset() const
+{
+    return m_metaData.yOffset;
+}
+
+void Book::setYOffset(float newYOffset)
+{
+    m_metaData.yOffset = newYOffset;
+}
+
 QString Book::getFileHash() const
 {
     return m_metaData.fileHash;
