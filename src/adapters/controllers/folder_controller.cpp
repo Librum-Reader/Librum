@@ -47,7 +47,11 @@ dtos::FolderDto FolderController::getFolder(QString uuid)
 
 bool FolderController::createFolder(QString name, QString parent)
 {
-    return m_folderService->createFolder(name, QUuid(parent));
+    auto success = m_folderService->createFolder(name, QUuid(parent));
+    if(success && !parent.isEmpty())
+        emit expandFolder(parent);
+
+    return success;
 }
 
 bool FolderController::deleteFolder(QString uuid)

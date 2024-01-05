@@ -32,6 +32,9 @@ public:
                                           QString icon,
                                           QString description) = 0;
     Q_INVOKABLE virtual bool moveFolder(QString uuid, QString destUuid) = 0;
+
+signals:
+    void expandFolder(const QString& uuid);
 };
 
 }  // namespace adapters

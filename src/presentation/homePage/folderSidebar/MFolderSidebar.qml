@@ -174,18 +174,13 @@ Item {
                         required property int hasChildren
                         required property int depth
 
-                        onHasChildrenChanged: {
+                        Connections {
+                            target: FolderController
 
-                            // if (hasChildren)
-                            // rowExpander.start()
-                        }
-
-                        Timer {
-                            id: rowExpander
-                            interval: 20
-                            repeat: false
-
-                            onTriggered: treeView.expand(row)
+                            function onExpandFolder(uuid) {
+                                if (uuid === treeNode.uuid)
+                                    treeView.toggleExpanded(row)
+                            }
                         }
 
                         implicitWidth: treeView.width
