@@ -107,7 +107,7 @@ Item {
                 Layout.preferredHeight: 21
                 Layout.preferredWidth: 21
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                Layout.rightMargin: 26
+                Layout.rightMargin: 24
                 opacity: addFolderButtonArea.pressed ? 0.6 : 1
 
                 Rectangle {
@@ -175,6 +175,7 @@ Item {
                         id: treeNode
                         required property string name
                         required property string uuid
+                        required property string childCount
                         required property TreeView treeView
                         required property bool expanded
                         required property int hasChildren
@@ -304,10 +305,29 @@ Item {
                                 }
                             }
 
+                            Label {
+                                id: childCountLabel
+                                visible: !backgroundArea.containsMouse
+                                Layout.rightMargin: {
+                                    let spacing = text.length == 1 ? 20 : text.length == 2 ? 16 : 12
+                                    if (scrollBar.isEnabled)
+                                        spacing -= 12
+
+                                    return spacing
+                                }
+                                Layout.leftMargin: 20
+                                Layout.alignment: Qt.AlignVCenter
+                                color: Style.colorText
+                                opacity: 0.5
+                                font.pointSize: Fonts.size10
+                                text: treeNode.childCount
+                            }
+
                             Image {
                                 id: threeDotsIcon
                                 Layout.preferredWidth: implicitWidth
                                 Layout.rightMargin: 18
+                                Layout.leftMargin: 20
                                 Layout.alignment: Qt.AlignVCenter
                                 opacity: threeDotsIconArea.pressed ? 0.7 : 1
                                 source: Icons.dots

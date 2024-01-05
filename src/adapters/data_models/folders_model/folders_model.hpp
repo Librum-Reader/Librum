@@ -19,6 +19,7 @@ public:
     {
         NameRole = Qt::DisplayRole,
         UuidRole,
+        ChildCountRole,
         Invalid
     };
 
