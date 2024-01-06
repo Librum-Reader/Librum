@@ -84,7 +84,7 @@ public:
     void setColorTheme(const QString& newColorTheme);
 
     int getZoom() const;
-    void setZoom(int newZoom);
+    void setZoom(float newZoom);
 
     float getYOffset() const;
     void setYOffset(float newYOffset);

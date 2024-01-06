@@ -369,7 +369,7 @@ int Book::getZoom() const
     return m_metaData.zoom;
 }
 
-void Book::setZoom(int newZoom)
+void Book::setZoom(float newZoom)
 {
     m_metaData.zoom = newZoom;
 }
