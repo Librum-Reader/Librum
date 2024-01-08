@@ -27,8 +27,8 @@ struct DOMAIN_EXPORT BookMetaData
     QString coverPath;
     QString colorTheme;
     QString fileHash;
-    float zoom;
-    float yOffset;
+    float zoom = 1.0;
+    float yOffset = 0.0;
 
     bool operator==(const BookMetaData& rhs) const
     {

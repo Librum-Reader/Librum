@@ -18,7 +18,7 @@ Page {
     }
 
     Component.onCompleted: root.forceActiveFocus()
-    Component.onDestruction: internal.saveCurrentPage()
+    Component.onDestruction: internal.saveCurrentBookState()
 
     // Save the current page every 5s automatically
     Timer {
@@ -27,7 +27,7 @@ Page {
         repeat: true
         running: true
 
-        onTriggered: internal.saveCurrentPage()
+        onTriggered: internal.saveCurrentBookState()
     }
 
     Shortcut {
@@ -363,13 +363,15 @@ Page {
             documentView.setPage(BookController.pageCount - 1)
         }
 
-        function saveCurrentPage() {
+        function saveCurrentBookState() {
             let currentPage = BookController.currentPage
             if (currentPage === internal.prevCurrentPage)
                 return
 
             var operationsMap = {}
             operationsMap[LibraryController.MetaProperty.CurrentPage] = currentPage
+            operationsMap[LibraryController.MetaProperty.Zoom] = BookController.zoom
+            operationsMap[LibraryController.MetaProperty.YOffset] = documentView.getYOffset()
             LibraryController.updateBook(Globals.selectedBook.uuid,
                                          operationsMap)
             internal.prevCurrentPage = currentPage

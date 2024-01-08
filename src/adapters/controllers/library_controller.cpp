@@ -206,6 +206,12 @@ int LibraryController::updateBook(const QString& uuid,
         case MetaProperty::LastModified:
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
+        case MetaProperty::Zoom:
+            updatedBook.setZoom(static_cast<float>(value.toDouble()));
+            break;
+        case MetaProperty::YOffset:
+            updatedBook.setYOffset(static_cast<float>(value.toDouble()));
+            break;
         case MetaProperty::Invalid:
             return static_cast<int>(BookOperationStatus::PropertyDoesNotExist);
             break;

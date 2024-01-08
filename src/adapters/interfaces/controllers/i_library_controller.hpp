@@ -46,6 +46,8 @@ public:
         CurrentPage,
         AddedToLibrary,
         LastModified,
+        Zoom,
+        YOffset,
         Invalid
     };
     Q_ENUM(MetaProperty);
