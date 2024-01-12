@@ -31,19 +31,27 @@ Popup {
     onOpened: {
         nameInput.giveFocus()
 
+        if (internal.avoidReset)
+            return
+
         // Load the folder when in update mode
         if (root.updateMode) {
             let folder = FolderController.getFolder(uuid)
 
             nameInput.text = folder.name
+            colorSelection.value = folder.color
         }
     }
     onClosed: {
+        if (internal.avoidReset)
+            return
+
         nameInput.clearText()
         updateMode = false
         uuid = ""
-
         parentUuid = ""
+
+        colorSelection.value = "default"
     }
 
     ColumnLayout {
@@ -90,7 +98,8 @@ Popup {
             borderWidth: 1
             inputFontSize: Fonts.size10dot5
 
-            onReturnPressed: internal.createFolder()
+            onReturnPressed: if (nameInput.text.length > 0)
+                                 internal.createFolder()
         }
 
         Pane {
@@ -116,7 +125,9 @@ Popup {
                     id: optionButtonRoot
                     property string optionButtonText
                     property string optionButtonIcon
+                    property bool mouseAbove
                     property int iconSize
+                    property string iconColor: Style.colorDefaultFolderIcon
 
                     Layout.fillWidth: true
                     Layout.preferredHeight: 32
@@ -124,7 +135,7 @@ Popup {
                     Rectangle {
                         id: optionHoverIndicator
                         anchors.fill: parent
-                        color: optionButtonArea.containsMouse ? "white" : "transparent"
+                        color: optionButtonRoot.mouseAbove ? "white" : "transparent"
                         opacity: 0.08
                         radius: 4
                     }
@@ -147,12 +158,13 @@ Popup {
                             Layout.preferredHeight: 1
                         }
 
-                        Image {
+                        IconImage {
                             Layout.alignment: Qt.AlignVCenter
                             visible: optionButtonRoot.optionButtonIcon !== ""
                             source: optionButtonRoot.optionButtonIcon
                             sourceSize.width: optionButtonRoot.iconSize
                             fillMode: Image.PreserveAspectFit
+                            color: optionButtonRoot.iconColor
                         }
 
                         Image {
@@ -161,17 +173,6 @@ Popup {
                             source: Icons.arrowheadNextIcon
                             sourceSize.width: 18
                             fillMode: Image.PreserveAspectFit
-                        }
-                    }
-
-                    MouseArea {
-                        id: optionButtonArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-
-                        onClicked: {
-                            console.log("clicked")
                         }
                     }
                 }
@@ -184,6 +185,7 @@ Popup {
                 }
 
                 IOptionButton {
+                    id: iconSelection
                     optionButtonText: qsTr("Icon")
                     optionButtonIcon: Icons.folder
                     iconSize: 14
@@ -192,14 +194,47 @@ Popup {
                 ISeparator {}
 
                 IOptionButton {
+                    id: colorSelection
+                    property string value: "default"
+                    iconColor: value === "default" ? Style.colorDefaultFolderIcon : value
+
                     optionButtonText: qsTr("Color")
                     optionButtonIcon: Icons.settingsSidebarAppearance
+                    mouseAbove: colorSelectionButtonArea.containsMouse
                     iconSize: 16
+
+                    MouseArea {
+                        id: colorSelectionButtonArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onClicked: selectColorPopup.open()
+
+                        Connections {
+                            target: selectColorPopup
+
+                            function onOpenedChanged() {
+                                if (selectColorPopup.opened) {
+                                    internal.avoidReset = true
+                                    root.visible = false
+                                } else {
+                                    root.visible = true
+                                    internal.avoidReset = false
+                                }
+                            }
+
+                            function onColorSelected(selectedColor) {
+                                colorSelection.value = selectedColor
+                            }
+                        }
+                    }
                 }
 
                 ISeparator {}
 
                 IOptionButton {
+                    id: descriptionSelection
                     optionButtonText: qsTr("Description")
                     optionButtonIcon: Icons.pen
                     iconSize: 15
@@ -221,18 +256,23 @@ Popup {
             fontWeight: Font.Bold
             text: root.updateMode ? qsTr("Update") : qsTr("Create")
 
-            onClicked: internal.createFolder()
+            onClicked: if (nameInput.text.length > 0)
+                           internal.createFolder()
         }
     }
 
     QtObject {
         id: internal
+        property bool avoidReset: false
 
         function createFolder() {
             if (!root.updateMode) {
-                FolderController.createFolder(nameInput.text, root.parentUuid)
+                FolderController.createFolder(nameInput.text,
+                                              colorSelection.value, "", "",
+                                              root.parentUuid)
             } else {
-                FolderController.updateFolder(uuid, nameInput.text, "", "")
+                FolderController.updateFolder(uuid, nameInput.text,
+                                              colorSelection.value, "", "")
             }
 
             root.close()

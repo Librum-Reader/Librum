@@ -25,11 +25,12 @@ public:
     virtual data_models::FoldersProxyModel* getFoldersModel() = 0;
 
     Q_INVOKABLE virtual dtos::FolderDto getFolder(QString uuid) = 0;
-    Q_INVOKABLE virtual bool createFolder(QString name,
+    Q_INVOKABLE virtual bool createFolder(QString name, QString color,
+                                          QString icon, QString description,
                                           QString parent = "") = 0;
     Q_INVOKABLE virtual bool deleteFolder(QString uuid) = 0;
     Q_INVOKABLE virtual void updateFolder(QString uuid, QString name,
-                                          QString icon,
+                                          QString color, QString icon,
                                           QString description) = 0;
     Q_INVOKABLE virtual bool moveFolder(QString uuid, QString destUuid) = 0;
 

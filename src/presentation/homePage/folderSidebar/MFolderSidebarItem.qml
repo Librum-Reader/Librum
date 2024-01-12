@@ -9,6 +9,7 @@ Item {
     property string uuid
     property string icon
     property string title
+    property bool selected: false
 
     signal clicked
 
@@ -16,7 +17,8 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: unsortedArea.containsMouse ? "white" : "transparent"
+        color: unsortedArea.containsMouse
+               || root.selected ? "white" : "transparent"
         opacity: 0.08
         radius: 4
     }

@@ -18,7 +18,8 @@ public:
 
     domain::entities::Folder* getRootFolder() override;
     domain::entities::Folder* getFolder(const QUuid& uuid) override;
-    bool createFolder(const QString& name, const QUuid& parent) override;
+    bool createFolder(const QString& name, QString color, QString icon,
+                      QString description, const QUuid& parent) override;
     bool deleteFolder(const QUuid& uuid) override;
     void updateFolder(const domain::entities::Folder& folder) override;
     bool moveFolder(const QUuid& uuid, const QUuid& destUuid) override;

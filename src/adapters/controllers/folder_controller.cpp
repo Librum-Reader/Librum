@@ -42,12 +42,17 @@ dtos::FolderDto FolderController::getFolder(QString uuid)
     return dtos::FolderDto {
         .uuid = folder->getUuid().toString(QUuid::WithoutBraces),
         .name = folder->getName(),
+        .color = folder->getColor(),
+        .icon = folder->getIcon(),
+        .description = folder->getDescription(),
     };
 }
 
-bool FolderController::createFolder(QString name, QString parent)
+bool FolderController::createFolder(QString name, QString color, QString icon,
+                                    QString description, QString parent)
 {
-    auto success = m_folderService->createFolder(name, QUuid(parent));
+    auto success = m_folderService->createFolder(name, color, icon, description,
+                                                 QUuid(parent));
     if(success && !parent.isEmpty())
         emit expandFolder(parent);
 
@@ -59,10 +64,10 @@ bool FolderController::deleteFolder(QString uuid)
     return m_folderService->deleteFolder(QUuid(uuid));
 }
 
-void FolderController::updateFolder(QString uuid, QString name, QString icon,
-                                    QString description)
+void FolderController::updateFolder(QString uuid, QString name, QString color,
+                                    QString icon, QString description)
 {
-    Folder folder(name, QUuid(uuid));
+    Folder folder(name, color, icon, description, QUuid(uuid));
     m_folderService->updateFolder(folder);
 }
 

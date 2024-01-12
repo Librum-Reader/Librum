@@ -12,7 +12,8 @@ namespace domain::entities
 class Folder
 {
 public:
-    Folder(QString name, QUuid uuid = QUuid::createUuid());
+    Folder(QString name, QString color, QString icon, QString description,
+           QUuid uuid = QUuid::createUuid());
     Folder(const Folder& folder);
     Folder(Folder&& folder);
 
@@ -24,6 +25,15 @@ public:
 
     QString getName() const;
     void setName(const QString& name);
+
+    QString getColor() const;
+    void setColor(const QString& color);
+
+    QString getIcon() const;
+    void setIcon(const QString& icon);
+
+    QString getDescription() const;
+    void setDescription(const QString& description);
 
     Folder* getParent() const;
     void setParent(Folder* parent);
@@ -47,6 +57,9 @@ private:
 
     QUuid m_uuid;
     QString m_name;
+    QString m_color;
+    QString m_icon;
+    QString m_description;
     Folder* m_parent = nullptr;
     std::vector<std::unique_ptr<Folder>> m_children;
 };

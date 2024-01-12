@@ -43,7 +43,9 @@ Popup {
             Label {
                 id: popupTitle
                 Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
                 text: qsTr("Delete ") + internal.folderName
+                elide: Text.ElideRight
                 font.weight: Font.Medium
                 font.pointSize: Fonts.size16
                 color: Style.colorTitle

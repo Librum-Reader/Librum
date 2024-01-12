@@ -124,7 +124,7 @@ Popup {
                     font.pointSize: Fonts.size10dot25
                     font.weight: Font.Medium
                     elide: Text.ElideRight
-                    text: root.headerItemText
+                    text: "~ " + root.headerItemText
                 }
             }
 

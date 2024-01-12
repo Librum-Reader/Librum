@@ -4,15 +4,22 @@
 namespace domain::entities
 {
 
-Folder::Folder(QString name, QUuid uuid) :
+Folder::Folder(QString name, QString color, QString icon, QString description,
+               QUuid uuid) :
     m_uuid(uuid),
-    m_name(name)
+    m_name(name),
+    m_color(color),
+    m_icon(icon),
+    m_description(description)
 {
 }
 
 Folder::Folder(const Folder& folder) :
     m_uuid(folder.m_uuid),
     m_name(folder.m_name),
+    m_color(folder.m_color),
+    m_icon(folder.m_icon),
+    m_description(folder.m_description),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -26,6 +33,9 @@ Folder::Folder(const Folder& folder) :
 Folder::Folder(Folder&& folder) :
     m_uuid(std::move(folder.m_uuid)),
     m_name(std::move(folder.m_name)),
+    m_color(std::move(folder.m_color)),
+    m_icon(std::move(folder.m_icon)),
+    m_description(std::move(folder.m_description)),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -43,6 +53,9 @@ Folder& Folder::operator=(const Folder& rhs)
 
     m_uuid = rhs.m_uuid;
     m_name = rhs.m_name;
+    m_color = rhs.m_color;
+    m_icon = rhs.m_icon;
+    m_description = rhs.m_description;
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -62,6 +75,9 @@ Folder& Folder::operator=(Folder&& rhs)
 
     m_uuid = std::move(rhs.m_uuid);
     m_name = std::move(rhs.m_name);
+    m_color = std::move(rhs.m_color);
+    m_icon = std::move(rhs.m_icon);
+    m_description = std::move(rhs.m_description);
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -77,7 +93,9 @@ Folder& Folder::operator=(Folder&& rhs)
 bool Folder::operator==(const Folder& rhs) const
 {
     return m_uuid == rhs.m_uuid && m_name == rhs.m_name &&
-           m_parent == rhs.m_parent && m_children == rhs.m_children;
+           m_color == rhs.m_color && m_icon == rhs.m_icon &&
+           m_description == rhs.m_description && m_parent == rhs.m_parent &&
+           m_children == rhs.m_children;
 }
 
 QUuid Folder::getUuid() const
@@ -93,6 +111,36 @@ QString Folder::getName() const
 void Folder::setName(const QString& name)
 {
     m_name = name;
+}
+
+QString Folder::getColor() const
+{
+    return m_color;
+}
+
+void Folder::setColor(const QString& color)
+{
+    m_color = color;
+}
+
+QString Folder::getIcon() const
+{
+    return m_icon;
+}
+
+void Folder::setIcon(const QString& icon)
+{
+    m_icon = icon;
+}
+
+QString Folder::getDescription() const
+{
+    return m_description;
+}
+
+void Folder::setDescription(const QString& description)
+{
+    m_description = description;
 }
 
 Folder* Folder::getParent() const
@@ -182,6 +230,9 @@ QByteArray Folder::toJson() const
     QJsonObject folder {
         { "uuid", m_uuid.toString(QUuid::WithoutBraces) },
         { "name", m_name },
+        { "color", m_color },
+        { "icon", m_icon },
+        { "description", m_description },
         { "children", serializeChildren() },
     };
 
@@ -207,7 +258,10 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
 {
     auto uuid = QUuid(jsonFolder["uuid"].toString());
     auto name = jsonFolder["name"].toString();
-    Folder folder(name, uuid);
+    auto color = jsonFolder["color"].toString();
+    auto icon = jsonFolder["icon"].toString();
+    auto description = jsonFolder["description"].toString();
+    Folder folder(name, color, icon, description, uuid);
     folder.setParent(parent);
 
     auto jsonChildren = jsonFolder["children"].toArray();
@@ -216,8 +270,6 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
         // Recursively fill up all children
         auto childFolder = Folder::fromJson(jsonChild.toObject(), &folder);
         folder.addChild(std::make_unique<Folder>(std::move(childFolder)));
-        int x = 0;
-        ++x;
     }
 
     return folder;

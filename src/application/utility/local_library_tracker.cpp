@@ -156,7 +156,7 @@ Folder LocalLibraryTracker::loadFolders()
 
     auto jsonDoc = QJsonDocument::fromJson(file.readAll());
     if(jsonDoc.isEmpty())
-        return Folder("invalid");
+        return Folder("invalid", "", "", "");
 
     auto folderObject = jsonDoc.object();
     auto folder = Folder::fromJson(folderObject, nullptr);

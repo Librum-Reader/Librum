@@ -23,8 +23,12 @@ QVariant FoldersModel::data(const QModelIndex& index, int role) const
         return item->getName();
     case UuidRole:
         return item->getUuid().toString(QUuid::WithoutBraces);
-    case ChildCountRole:
-        return item->childCount();
+    case ColorRole:
+        return item->getColor();
+    case IconRole:
+        return item->getIcon();
+    case DescriptionRole:
+        return item->getDescription();
     }
 
     return QVariant();
@@ -89,7 +93,9 @@ QHash<int, QByteArray> FoldersModel::roleNames() const
     static QHash<int, QByteArray> roles {
         { NameRole, "name" },
         { UuidRole, "uuid" },
-        { ChildCountRole, "childCount" },
+        { ColorRole, "color" },
+        { IconRole, "icon" },
+        { DescriptionRole, "description" },
     };
 
     return roles;

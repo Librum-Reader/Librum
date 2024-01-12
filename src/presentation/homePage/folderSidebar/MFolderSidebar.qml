@@ -9,25 +9,64 @@ import Librum.fonts
 Item {
     id: root
     property bool opened: false
-    property int openedWidth: 280
 
-    width: 0
+    // This way the right, draggable border is correctly placed in the middle of the border
+    width: rightBorder.x + (opened ? rightBorder.width / 2 : 0)
 
+    onOpenedChanged: {
+        if (opened) {
+            rightBorder.x = internal.prevSidebarWidth
+            return
+        }
 
-    /*
-      Adds a border to the whole settings sidebar
-     */
+        internal.prevSidebarWidth = width
+        rightBorder.x = 0
+    }
+
     Rectangle {
         id: background
         anchors.fill: parent
+        visible: root.opened
         color: Style.colorSettingsSidebarBackground
 
-        Rectangle {
+        Item {
             id: rightBorder
-            width: 1
+            width: 13
             height: parent.height
-            anchors.right: parent.right
-            color: Style.colorContainerBorder
+
+            Item {
+                id: leftBorderArea
+                width: 6
+                height: parent.height
+                anchors.left: parent.left
+            }
+
+            Rectangle {
+                id: visibleBorder
+                anchors.left: leftBorderArea.right
+                anchors.right: rightBorderArea.left
+                height: parent.height
+                color: Style.colorContainerBorder
+            }
+
+            Item {
+                id: rightBorderArea
+                width: 6
+                height: parent.height
+                anchors.right: parent.right
+            }
+
+            // The border should be pullable to resize the sidebar
+            MouseArea {
+                id: borderResizeArea
+                anchors.fill: parent
+                hoverEnabled: true
+                cursorShape: Qt.SizeHorCursor
+                drag.target: rightBorder
+                drag.axis: Drag.XAxis
+                drag.minimumX: 180
+                drag.maximumX: 440
+            }
         }
     }
 
@@ -62,9 +101,9 @@ Item {
             Layout.topMargin: 18
             title: qsTr("All Books")
             icon: Icons.bookClosed
+            selected: LibraryController.libraryModel.folder === "all"
 
-            onClicked: LibraryController.libraryModel.setFolderFilterRequest(
-                           "", true, false)
+            onClicked: LibraryController.libraryModel.folder = "all"
         }
 
         MFolderSidebarItem {
@@ -73,9 +112,9 @@ Item {
             Layout.rightMargin: 10
             title: qsTr("Unsorted")
             icon: Icons.unsorted
+            selected: LibraryController.libraryModel.folder === "unsorted"
 
-            onClicked: LibraryController.libraryModel.setFolderFilterRequest(
-                           "", false, true)
+            onClicked: LibraryController.libraryModel.folder = "unsorted"
         }
 
         Rectangle {
@@ -108,7 +147,7 @@ Item {
                 Layout.preferredWidth: 21
                 Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
                 Layout.rightMargin: 24
-                opacity: addFolderButtonArea.pressed ? 0.6 : 1
+                opacity: addFolderButtonArea.pressed ? 0.5 : 1
 
                 Rectangle {
                     anchors.fill: parent
@@ -173,9 +212,11 @@ Item {
                     model: FolderController.foldersModel
                     delegate: Pane {
                         id: treeNode
-                        required property string name
                         required property string uuid
-                        required property string childCount
+                        required property string name
+                        required property string color
+                        required property string icon
+                        required property string description
                         required property TreeView treeView
                         required property bool expanded
                         required property int hasChildren
@@ -186,7 +227,7 @@ Item {
 
                             function onExpandFolder(uuid) {
                                 if (uuid === treeNode.uuid)
-                                    treeView.toggleExpanded(row)
+                                    treeView.expand(row)
                             }
                         }
 
@@ -197,7 +238,9 @@ Item {
 
                         background: Rectangle {
                             anchors.fill: parent
-                            color: backgroundArea.containsMouse ? "white" : "transparent"
+                            color: backgroundArea.containsMouse
+                                   || LibraryController.libraryModel.folder
+                                   === treeNode.uuid ? "white" : "transparent"
                             opacity: 0.08
                             radius: 4
                         }
@@ -232,7 +275,7 @@ Item {
                                 }
                             }
 
-                            Image {
+                            IconImage {
                                 id: icon
                                 Layout.preferredWidth: implicitWidth
                                 Layout.leftMargin: treeNode.hasChildren ? indicator.width * 0.1 : indicator.width * 1.1 + depth * treeView.indent + 2
@@ -242,6 +285,8 @@ Item {
                                 source: Icons.folder
                                 sourceSize.width: 17
                                 fillMode: Image.PreserveAspectFit
+                                color: treeNode.color
+                                       === "default" ? Style.colorDefaultFolderIcon : treeNode.color
 
                                 MouseArea {
                                     id: iconArea
@@ -261,6 +306,7 @@ Item {
                                 // To have a bigger clickable area
                                 Layout.preferredHeight: treeNode.height
                                 Layout.leftMargin: 6
+                                Layout.rightMargin: threeDotsIcon.visible ? 8 : 18
                                 verticalAlignment: Text.AlignVCenter
                                 horizontalAlignment: Text.AlignLeft
                                 topPadding: 1
@@ -297,37 +343,17 @@ Item {
                                                        rightclickPopup.uuid = treeNode.uuid
                                                        rightclickPopup.open()
                                                    } else if (mouse.button === Qt.LeftButton) {
-                                                       LibraryController.libraryModel.setFolderFilterRequest(
-                                                           treeNode.uuid,
-                                                           false, false)
+                                                       LibraryController.libraryModel.folder
+                                                       = treeNode.uuid
                                                    }
                                                }
                                 }
-                            }
-
-                            Label {
-                                id: childCountLabel
-                                visible: !backgroundArea.containsMouse
-                                Layout.rightMargin: {
-                                    let spacing = text.length == 1 ? 20 : text.length == 2 ? 16 : 12
-                                    if (scrollBar.isEnabled)
-                                        spacing -= 12
-
-                                    return spacing
-                                }
-                                Layout.leftMargin: 20
-                                Layout.alignment: Qt.AlignVCenter
-                                color: Style.colorText
-                                opacity: 0.5
-                                font.pointSize: Fonts.size10
-                                text: treeNode.childCount
                             }
 
                             Image {
                                 id: threeDotsIcon
                                 Layout.preferredWidth: implicitWidth
                                 Layout.rightMargin: 18
-                                Layout.leftMargin: 20
                                 Layout.alignment: Qt.AlignVCenter
                                 opacity: threeDotsIconArea.pressed ? 0.7 : 1
                                 source: Icons.dots
@@ -408,14 +434,18 @@ Item {
         visible: false
     }
 
+    MSelectColorPopup {
+        id: selectColorPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
+    }
+
     function open() {
         opened = true
-        width = openedWidth
     }
 
     function close() {
         opened = false
-        width = 0
     }
 
     function toggle() {
@@ -423,5 +453,10 @@ Item {
             close()
         else
             open()
+    }
+
+    QtObject {
+        id: internal
+        property int prevSidebarWidth: 280
     }
 }

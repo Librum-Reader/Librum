@@ -19,7 +19,9 @@ public:
     {
         NameRole = Qt::DisplayRole,
         UuidRole,
-        ChildCountRole,
+        ColorRole,
+        IconRole,
+        DescriptionRole,
         Invalid
     };
 

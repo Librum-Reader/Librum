@@ -10,7 +10,7 @@ FolderService::FolderService(IFolderStorageGateway* folderStorageGateway,
                              ILocalLibraryTracker* localLibraryTracker) :
     m_folderStorageGateway(folderStorageGateway),
     m_localLibraryTracker(localLibraryTracker),
-    m_rootFolder(std::make_unique<Folder>("ROOT", QUuid()))
+    m_rootFolder(std::make_unique<Folder>("ROOT", "", "", "", QUuid()))
 {
 }
 
@@ -24,7 +24,9 @@ Folder* FolderService::getFolder(const QUuid& uuid)
     return getFolderHelper(uuid, m_rootFolder.get());
 }
 
-bool FolderService::createFolder(const QString& name, const QUuid& parent)
+bool FolderService::createFolder(const QString& name, QString color,
+                                 QString icon, QString description,
+                                 const QUuid& parent)
 {
     Folder* parentFolder = nullptr;
     // This means that the folder should be created in the root folder.
@@ -37,7 +39,8 @@ bool FolderService::createFolder(const QString& name, const QUuid& parent)
         return false;
 
     emit beginInsertFolder(parentFolder, parentFolder->childCount());
-    parentFolder->addChild(std::make_unique<Folder>(name));
+    parentFolder->addChild(
+        std::make_unique<Folder>(name, color, icon, description));
     emit endInsertFolder();
 
     saveChanges();
@@ -64,6 +67,9 @@ void FolderService::updateFolder(const domain::entities::Folder& folder)
 {
     auto realFolder = getFolder(folder.getUuid());
     realFolder->setName(folder.getName());
+    realFolder->setColor(folder.getColor());
+    realFolder->setIcon(folder.getIcon());
+    realFolder->setDescription(folder.getDescription());
 
     saveChanges();
     emit refreshFolder(realFolder->getParent(), realFolder->getIndexInParent());
@@ -113,7 +119,8 @@ void FolderService::setupUserData(const QString& token, const QString& email)
     // create a default folder under the root folder for them.
     if(folder.getName() == "invalid")
     {
-        m_rootFolder->addChild(std::make_unique<Folder>("Archive"));
+        m_rootFolder->addChild(std::make_unique<Folder>(
+            "Archive", "default", "folder", "Unused books"));
         return;
     }
 
