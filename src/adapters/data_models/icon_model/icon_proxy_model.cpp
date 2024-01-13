@@ -7,6 +7,23 @@ namespace adapters::data_models
 
 IconProxyModel::IconProxyModel()
 {
+    sort(0);
+}
+
+bool IconProxyModel::lessThan(const QModelIndex& left,
+                              const QModelIndex& right) const
+{
+    Q_UNUSED(right)
+
+    auto rawName = sourceModel()->data(left, IconModel::NameRole);
+    auto name = rawName.toString().toLower();
+
+    // We want to ensure that the folder is always the first item, we don't care
+    // about the ordering of the rest.
+    if(name == "folder")
+        return true;
+
+    return false;
 }
 
 bool IconProxyModel::filterAcceptsRow(int source_row,
@@ -16,6 +33,13 @@ bool IconProxyModel::filterAcceptsRow(int source_row,
         return true;
 
     auto index = sourceModel()->index(source_row, 0, source_parent);
+
+    // The folder icon should always be visible
+    auto name =
+        sourceModel()->data(index, IconModel::NameRole).toString().toLower();
+    if(name == "folder")
+        return true;
+
     auto keywords =
         sourceModel()->data(index, IconModel::KeywordsRole).toList();
 
@@ -50,6 +74,7 @@ void IconProxyModel::setSortString(const QString& newSortString)
     m_sortString = newSortString.toLower();
     emit sortStringUpdated();
     invalidateFilter();
+    sort(0);
 }
 
 }  // namespace adapters::data_models

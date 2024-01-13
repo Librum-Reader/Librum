@@ -17,11 +17,13 @@ class ADAPTERS_EXPORT IconProxyModel : public QSortFilterProxyModel
 public:
     IconProxyModel();
 
+    bool lessThan(const QModelIndex& left,
+                  const QModelIndex& right) const override;
     bool filterAcceptsRow(int source_row,
-                          const QModelIndex& source_parent) const;
+                          const QModelIndex& source_parent) const override;
 
     QString getSortString() const;
-    void setSortString(const QString &newSortString);
+    void setSortString(const QString& newSortString);
 
 signals:
     void sortStringUpdated();
