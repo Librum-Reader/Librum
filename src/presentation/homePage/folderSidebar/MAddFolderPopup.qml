@@ -40,6 +40,7 @@ Popup {
 
             nameInput.text = folder.name
             colorSelection.value = folder.color
+            descriptionPopup.setDescription(folder.description)
         }
     }
     onClosed: {
@@ -52,6 +53,7 @@ Popup {
         parentUuid = ""
 
         colorSelection.value = "default"
+        description.value = ""
     }
 
     ColumnLayout {
@@ -196,8 +198,8 @@ Popup {
                 IOptionButton {
                     id: colorSelection
                     property string value: "default"
-                    iconColor: value === "default" ? Style.colorDefaultFolderIcon : value
 
+                    iconColor: value === "default" ? Style.colorDefaultFolderIcon : value
                     optionButtonText: qsTr("Color")
                     optionButtonIcon: Icons.settingsSidebarAppearance
                     mouseAbove: colorSelectionButtonArea.containsMouse
@@ -234,10 +236,39 @@ Popup {
                 ISeparator {}
 
                 IOptionButton {
-                    id: descriptionSelection
+                    id: description
+                    property string value: ""
+
                     optionButtonText: qsTr("Description")
                     optionButtonIcon: Icons.pen
+                    mouseAbove: descriptionButtonArea.containsMouse
                     iconSize: 15
+
+                    MouseArea {
+                        id: descriptionButtonArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: descriptionPopup.open()
+
+                        Connections {
+                            target: descriptionPopup
+
+                            function onOpenedChanged() {
+                                if (descriptionPopup.opened) {
+                                    internal.avoidReset = true
+                                    root.visible = false
+                                } else {
+                                    root.visible = true
+                                    internal.avoidReset = false
+                                }
+                            }
+
+                            function onDescriptionFinished(text) {
+                                description.value = text
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -268,11 +299,13 @@ Popup {
         function createFolder() {
             if (!root.updateMode) {
                 FolderController.createFolder(nameInput.text,
-                                              colorSelection.value, "", "",
+                                              colorSelection.value, "",
+                                              description.value,
                                               root.parentUuid)
             } else {
                 FolderController.updateFolder(uuid, nameInput.text,
-                                              colorSelection.value, "", "")
+                                              colorSelection.value, "",
+                                              description.value)
             }
 
             root.close()

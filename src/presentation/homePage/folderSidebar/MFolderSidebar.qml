@@ -440,6 +440,12 @@ Item {
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
     }
 
+    MDescriptionPopup {
+        id: descriptionPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
+    }
+
     function open() {
         opened = true
     }
