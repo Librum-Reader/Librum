@@ -425,6 +425,7 @@ Page {
                 Layout.topMargin: Math.round(root.height / 3) - implicitHeight
                 visible: bookGrid.count == 0
                          && LibraryController.bookCount !== 0
+                         && LibraryController.libraryModel.isFiltering
 
                 onClearFilters: {
                     toolbar.resetFilters()
