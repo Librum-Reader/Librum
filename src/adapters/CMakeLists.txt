@@ -84,6 +84,11 @@ add_library(adapters
                     data_models/folders_model/folders_model.cpp
                     data_models/folders_model/folders_proxy_model.hpp
                     data_models/folders_model/folders_proxy_model.cpp
+                    data_models/icon_model/icon_model.hpp
+                    data_models/icon_model/icon_model.cpp
+                    data_models/icon_model/icon_proxy_model.hpp
+                    data_models/icon_model/icon_proxy_model.cpp
+                    data_models/icon_model/icon_item.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -111,6 +116,7 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/bookmarks_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/folders_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/icon_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${DOMAIN_INCLUDES}

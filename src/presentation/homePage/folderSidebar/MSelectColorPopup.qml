@@ -100,7 +100,7 @@ Popup {
             }
 
             ColorRect {
-                color: "#32Df4B"
+                color: "#1B992D"
             }
 
             ColorRect {

@@ -10,6 +10,7 @@ FolderController::FolderController(application::IFolderService* folderService) :
     m_foldersModel(m_folderService->getRootFolder())
 {
     m_foldersProxyModel.setSourceModel(&m_foldersModel);
+    m_iconProxyModel.setSourceModel(&m_iconModel);
 
     // Insertion signals
     connect(m_folderService, &application::IFolderService::beginInsertFolder,
@@ -33,6 +34,11 @@ FolderController::FolderController(application::IFolderService* folderService) :
 data_models::FoldersProxyModel* FolderController::getFoldersModel()
 {
     return &m_foldersProxyModel;
+}
+
+data_models::IconProxyModel* FolderController::getIconModel()
+{
+    return &m_iconProxyModel;
 }
 
 dtos::FolderDto FolderController::getFolder(QString uuid)

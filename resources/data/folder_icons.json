@@ -1,0 +1,694 @@
+ [
+  {
+    "name": "gesture",
+    "keywords": ["gesture", "line"]
+  },
+  {
+    "name": "alarm",
+    "keywords": ["alarm", "clock", "sleep"]
+  },
+  {
+    "name": "album",
+    "keywords": ["album", "music", "disc"]
+  },
+  {
+    "name": "anchor",
+    "keywords": ["anchor", "ship", "sea"]
+  },
+  {
+    "name": "api",
+    "keywords": ["api", "program"]
+  },
+  {
+    "name": "architecture",
+    "keywords": ["architecture", "compass"]
+  },
+  {
+    "name": "artist",
+    "keywords": ["artist", "music", "author"]
+  },
+  {
+    "name": "asterisk",
+    "keywords": ["asterisk", "symbol"]
+  },
+  {
+    "name": "backup",
+    "keywords": ["backup", "cloud", "internet"]
+  },
+  {
+    "name": "badge",
+    "keywords": ["badge", "card", "security"]
+  },
+  {
+    "name": "bank",
+    "keywords": ["bank", "money"]
+  },
+  {
+    "name": "basketball",
+    "keywords": ["basketball", "sports", "game", "ball"]
+  },
+  {
+    "name": "biotech",
+    "keywords": ["biotech", "biology", "genes"]
+  },
+  {
+    "name": "bolt",
+    "keywords": ["bolt", "energy", "electric"]
+  },
+  {
+    "name": "bomb",
+    "keywords": ["bomb", "explosion", "explosive", "atom"]
+  },
+  {
+    "name": "bone",
+    "keywords": ["bone", "dog"]
+  },
+  {
+    "name": "book",
+    "keywords": ["book", "read", "reading"]
+  },
+  {
+    "name": "bookmarks",
+    "keywords": ["bookmarks", "mark", "read", "reading"]
+  },
+  {
+    "name": "brain_network",
+    "keywords": ["brain", "network", "neuro"]
+  },
+  {
+    "name": "brush",
+    "keywords": ["brush", "paint", "draw"]
+  },
+  {
+    "name": "bug",
+    "keywords": ["bug", "program", "code", "error"]
+  },
+  {
+    "name": "build",
+    "keywords": ["build", "craft", "tool", "wrench"]
+  },
+  {
+    "name": "calculate",
+    "keywords": ["calculate", "math", "calculator"]
+  },
+  {
+    "name": "calendar",
+    "keywords": ["calendar", "time", "appointment"]
+  },
+  {
+    "name": "call",
+    "keywords": ["call", "phone", "talk"]
+  },
+  {
+    "name": "camera",
+    "keywords": ["camera", "picture", "photo"]
+  },
+  {
+    "name": "car",
+    "keywords": ["car", "drive", "transport"]
+  },
+  {
+    "name": "cardiology",
+    "keywords": ["cardiology", "heart", "medicine"]
+  },
+  {
+    "name": "cards",
+    "keywords": ["cards", "game", "play", "trick"]
+  },
+  {
+    "name": "cart",
+    "keywords": ["cart", "shop", "shopping"]
+  },
+  {
+    "name": "chart",
+    "keywords": ["chart", "math", "data"]
+  },
+  {
+    "name": "chess",
+    "keywords": ["chess", "game", "logic"]
+  },
+  {
+    "name": "child",
+    "keywords": ["child", "boy", "girl", "baby"]
+  },
+  {
+    "name": "code",
+    "keywords": ["code", "coding", "programming", "program"]
+  },
+  {
+    "name": "code_block",
+    "keywords": ["code", "block", "coding", "programming", "program"]
+  },
+  {
+    "name": "code_off",
+    "keywords": ["code", "off", "coding", "programming", "program"]
+  },
+  {
+    "name": "colors",
+    "keywords": ["colors", "bucket", "paint", "draw"]
+  },
+  {
+    "name": "commit",
+    "keywords": ["commit", "git", "github", "version", "control"]
+  },
+  {
+    "name": "construction",
+    "keywords": ["construction", "build", "construct", "tools"]
+  },
+  {
+    "name": "controller",
+    "keywords": ["controller", "gaming", "game", "play"]
+  },
+  {
+    "name": "cpu",
+    "keywords": ["cpu", "computer", "memory", "hardware"]
+  },
+  {
+    "name": "cut",
+    "keywords": ["cut", "scissors"]
+  },
+  {
+    "name": "dashboard",
+    "keywords": ["dashboard", "board"]
+  },
+  {
+    "name": "data_thresholding",
+    "keywords": ["data thresholding", "data", "chart"]
+  },
+  {
+    "name": "database",
+    "keywords": ["database", "data", "code", "program", "cloud", "server"]
+  },
+  {
+    "name": "datasheet",
+    "keywords": ["datasheet", "data", "table"]
+  },
+  {
+    "name": "deployed_code",
+    "keywords": ["deployed", "code", "deploy"]
+  },
+  {
+    "name": "detector",
+    "keywords": ["detector", "signal"]
+  },
+  {
+    "name": "diamond",
+    "keywords": ["diamond", "money", "rich"]
+  },
+  {
+    "name": "dns",
+    "keywords": ["dns", "server", "cloud", "computer"]
+  },
+  {
+    "name": "dollar",
+    "keywords": ["dollar", "money", "cash"]
+  },
+  {
+    "name": "ecg_heart",
+    "keywords": ["ecg", "heart", "ECG", "health"]
+  },
+  {
+    "name": "eco",
+    "keywords": ["eco", "plant", "leaf"]
+  },
+  {
+    "name": "energy_saving",
+    "keywords": ["energy", "saving", "eco"]
+  },
+  {
+    "name": "engineering",
+    "keywords": ["engineering", "build", "engineer", "code", "robot"]
+  },
+  {
+    "name": "eraser",
+    "keywords": ["eraser", "school"]
+  },
+  {
+    "name": "euro",
+    "keywords": ["euro", "money", "cash"]
+  },
+  {
+    "name": "experiment",
+    "keywords": ["experiment", "science", "lab", "chemistry"]
+  },
+  {
+    "name": "extension",
+    "keywords": ["extension", "plugin"]
+  },
+  {
+    "name": "eye",
+    "keywords": ["eye", "watch"]
+  },
+  {
+    "name": "face",
+    "keywords": ["face", "human", "girl", "boy"]
+  },
+  {
+    "name": "factory",
+    "keywords": ["factory"]
+  },
+  {
+    "name": "favorite",
+    "keywords": ["favorite", "heart", "love"]
+  },
+  {
+    "name": "finance",
+    "keywords": ["finance", "bar", "chart"]
+  },
+  {
+    "name": "fingerprint",
+    "keywords": ["fingerprint", "finger", "print", "police"]
+  },
+  {
+    "name": "fitness",
+    "keywords": ["fitness", "dumbell", "weight", "fit"]
+  },
+  {
+    "name": "flutter",
+    "keywords": ["flutter", "code", "language"]
+  },
+  {
+    "name": "folder",
+    "keywords": ["folder"]
+  },
+  {
+    "name": "food",
+    "keywords": ["food", "fastfood", "fast", "burger"]
+  },
+  {
+    "name": "football",
+    "keywords": ["football", "game", "play"]
+  },
+  {
+    "name": "forest",
+    "keywords": ["forest", "tree", "nature"]
+  },
+  {
+    "name": "genetics",
+    "keywords": ["genetics", "biology", "science"]
+  },
+  {
+    "name": "globe",
+    "keywords": ["globe", "world", "international", "languages"]
+  },
+  {
+    "name": "group",
+    "keywords": ["group", "social", "people"]
+  },
+  {
+    "name": "half_star",
+    "keywords": ["half", "star"]
+  },
+  {
+    "name": "hard_drive",
+    "keywords": ["hard", "drive"]
+  },
+  {
+    "name": "healing",
+    "keywords": ["healing", "plaster", "health", "medicine"]
+  },
+  {
+    "name": "health",
+    "keywords": ["health", "shield", "healing", "medicine"]
+  },
+  {
+    "name": "heat",
+    "keywords": ["heat", "hot"]
+  },
+  {
+    "name": "helicopter",
+    "keywords": ["helicopter", "fly"]
+  },
+  {
+    "name": "home",
+    "keywords": ["home", "house", "appartment"]
+  },
+  {
+    "name": "home_health",
+    "keywords": ["home", "health", "house", "medicine", "hospital"]
+  },
+  {
+    "name": "hourglass",
+    "keywords": ["hourglass", "time"]
+  },
+  {
+    "name": "hub",
+    "keywords": ["hub", "group", "network"]
+  },
+  {
+    "name": "image",
+    "keywords": ["image", "picture", "photo"]
+  },
+  {
+    "name": "inbox",
+    "keywords": ["inbox", "e-mail", "email", "mail", "message"]
+  },
+  {
+    "name": "info",
+    "keywords": ["info", "information", "help"]
+  },
+  {
+    "name": "infrared",
+    "keywords": ["infrared", "signal", "wave"]
+  },
+  {
+    "name": "key",
+    "keywords": ["key"]
+  },
+  {
+    "name": "lan",
+    "keywords": ["lan", "network", "local"]
+  },
+  {
+    "name": "library",
+    "keywords": ["library", "music", "sound"]
+  },
+  {
+    "name": "license",
+    "keywords": ["license", "award"]
+  },
+  {
+    "name": "lightbulb",
+    "keywords": ["lightbulb", "light", "bulb"]
+  },
+  {
+    "name": "list",
+    "keywords": ["list", "todo"]
+  },
+  {
+    "name": "location",
+    "keywords": ["location", "position"]
+  },
+  {
+    "name": "lock",
+    "keywords": ["lock"]
+  },
+  {
+    "name": "lung",
+    "keywords": ["lung", "breath", "air"]
+  },
+  {
+    "name": "mail",
+    "keywords": ["mail", "email", "e-mail", "message"]
+  },
+  {
+    "name": "mask",
+    "keywords": ["mask", "medicine", "doctor"]
+  },
+  {
+    "name": "me",
+    "keywords": ["me", "position", "location"]
+  },
+  {
+    "name": "measure",
+    "keywords": ["measure", "size", "math"]
+  },
+  {
+    "name": "medical",
+    "keywords": ["medical", "medicine"]
+  },
+  {
+    "name": "medical_services",
+    "keywords": ["medical", "services", "medicine"]
+  },
+  {
+    "name": "mindfull",
+    "keywords": ["mindfull", "smart", "thought", "think", "head"]
+  },
+  {
+    "name": "money",
+    "keywords": ["money", "cash"]
+  },
+  {
+    "name": "monitoring",
+    "keywords": ["monitoring", "graph"]
+  },
+  {
+    "name": "moon",
+    "keywords": ["moon", "night"]
+  },
+  {
+    "name": "mouse",
+    "keywords": ["mouse", "computer"]
+  },
+  {
+    "name": "neurology",
+    "keywords": ["neurology", "brain", "health"]
+  },
+  {
+    "name": "notification",
+    "keywords": ["notification", "message", "bell"]
+  },
+  {
+    "name": "object",
+    "keywords": ["object", "code", "program"]
+  },
+  {
+    "name": "palette",
+    "keywords": ["palette", "colors", "paint"]
+  },
+  {
+    "name": "passkey",
+    "keywords": ["passkey", "key", "pass", "secure", "security"]
+  },
+  {
+    "name": "person",
+    "keywords": ["person", "human", "guy", "man"]
+  },
+  {
+    "name": "pets",
+    "keywords": ["pets", "dog", "animal"]
+  },
+  {
+    "name": "phone",
+    "keywords": ["phone", "call"]
+  },
+  {
+    "name": "piano",
+    "keywords": ["piano", "music", "play"]
+  },
+  {
+    "name": "pill",
+    "keywords": ["pill", "medicine", "medical"]
+  },
+  {
+    "name": "plane_takeoff",
+    "keywords": ["plane", "takeoff", "fly", "flight"]
+  },
+  {
+    "name": "pottet_plant",
+    "keywords": ["potted", "plant", "pot", "nature"]
+  },
+  {
+    "name": "power",
+    "keywords": ["power", "electric", "electricity", "cable"]
+  },
+  {
+    "name": "printer",
+    "keywords": ["printer", "print", "paper"]
+  },
+  {
+    "name": "problem",
+    "keywords": ["problem", "bug", "error"]
+  },
+  {
+    "name": "psychology",
+    "keywords": ["psychology", "brain", "think", "thought", "head"]
+  },
+  {
+    "name": "public",
+    "keywords": ["public", "planet", "world", "globe"]
+  },
+  {
+    "name": "qrcode",
+    "keywords": ["qr", "code", "QR"]
+  },
+  {
+    "name": "qrcode_2",
+    "keywords": ["qr", "code", "QR"]
+  },
+  {
+    "name": "radio",
+    "keywords": ["radio", "sound", "music", "technology"]
+  },
+  {
+    "name": "rating_18",
+    "keywords": ["rating", "18", "movie", "age", "eighteen"]
+  },
+  {
+    "name": "rebase",
+    "keywords": ["rebase", "git", "version", "control"]
+  },
+  {
+    "name": "remote",
+    "keywords": ["remote", "command", "tv", "TV"]
+  },
+  {
+    "name": "robot",
+    "keywords": ["robot", "technology", "engineer"]
+  },
+  {
+    "name": "rocket",
+    "keywords": ["rocket", "fly", "start"]
+  },
+  {
+    "name": "rocket_still",
+    "keywords": ["rocket", "still", "start"]
+  },
+  {
+    "name": "scan",
+    "keywords": ["scan", "paper", "document", "scanner"]
+  },
+  {
+    "name": "school",
+    "keywords": ["school", "graduate", "graduation", "university"]
+  },
+  {
+    "name": "science",
+    "keywords": ["science", "chemistry"]
+  },
+  {
+    "name": "sdk",
+    "keywords": ["sdk", "code", "program", "programming"]
+  },
+  {
+    "name": "seed",
+    "keywords": ["seed", "plant", "nature"]
+  },
+  {
+    "name": "sensors",
+    "keywords": ["sensors", "signal", "hardware", "embedded"]
+  },
+  {
+    "name": "shield",
+    "keywords": ["shield", "protect"]
+  },
+  {
+    "name": "signpost",
+    "keywords": ["signpost", "sign", "post", "way"]
+  },
+  {
+    "name": "sim_card",
+    "keywords": ["sim", "card", "phone"]
+  },
+  {
+    "name": "sound",
+    "keywords": ["sound", "music", "loud"]
+  },
+  {
+    "name": "speed",
+    "keywords": ["speed", "fast", "race"]
+  },
+  {
+    "name": "sports_score",
+    "keywords": ["sports", "score", "flag", "goal"]
+  },
+  {
+    "name": "star",
+    "keywords": ["star", "goal", "favorite"]
+  },
+  {
+    "name": "superscript",
+    "keywords": ["superscript", "math"]
+  },
+  {
+    "name": "surgery",
+    "keywords": ["surgery", "medicine", "medical", "hospital", "doctor"]
+  },
+  {
+    "name": "sync",
+    "keywords": ["sync", "synchronize", "load", "reload"]
+  },
+  {
+    "name": "tag",
+    "keywords": ["tag", "etiquette", "price"]
+  },
+  {
+    "name": "terminal",
+    "keywords": ["terminal", "linux", "command", "line"]
+  },
+  {
+    "name": "text",
+    "keywords": ["text", "letter", "language", "translate"]
+  },
+  {
+    "name": "theater",
+    "keywords": ["theater", "play", "comedy"]
+  },
+  {
+    "name": "thermometer",
+    "keywords": ["thermometer", "temperature", "hot", "cold"]
+  },
+  {
+    "name": "thunderstorm",
+    "keywords": ["thunderstorm", "lighting", "cloud"]
+  },
+  {
+    "name": "timeline",
+    "keywords": ["timeline", "plan", "time"]
+  },
+  {
+    "name": "timer",
+    "keywords": ["timer", "time", "plan"]
+  },
+  {
+    "name": "token",
+    "keywords": ["token", "cube"]
+  },
+  {
+    "name": "tooth",
+    "keywords": ["tooth", "medicine"]
+  },
+  {
+    "name": "topic",
+    "keywords": ["topic", "folder"]
+  },
+  {
+    "name": "traffic",
+    "keywords": ["traffic", "car"]
+  },
+  {
+    "name": "train",
+    "keywords": ["train", "transport", "drive"]
+  },
+  {
+    "name": "transcribe",
+    "keywords": ["transcribe", "listen", "talk"]
+  },
+  {
+    "name": "translate",
+    "keywords": ["translate", "translation"]
+  },
+  {
+    "name": "trophy",
+    "keywords": ["trophy", "goal", "archivment"]
+  },
+  {
+    "name": "truck",
+    "keywords": ["truck", "drive"]
+  },
+  {
+    "name": "warning",
+    "keywords": ["warning", "danger", "warn"]
+  },
+  {
+    "name": "watch",
+    "keywords": ["watch", "time", "clock"]
+  },
+  {
+    "name": "water",
+    "keywords": ["water", "drop", "fluid", "liquid"]
+  },
+  {
+    "name": "water_bottle",
+    "keywords": ["water", "bottle", "liquid"]
+  },
+  {
+    "name": "web",
+    "keywords": ["web", "site", "internet", "net", "code", "program", "ui"]
+  },
+  {
+    "name": "work",
+    "keywords": ["work", "bag"]
+  }
+]

@@ -110,5 +110,6 @@
         <file>homePage/folderSidebar/MMoveToFolderPopup.qml</file>
         <file>homePage/folderSidebar/MSelectColorPopup.qml</file>
         <file>homePage/folderSidebar/MDescriptionPopup.qml</file>
+        <file>homePage/folderSidebar/MSelectIconPopup.qml</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@
 #include "adapters_export.hpp"
 #include "folder_dto.hpp"
 #include "folders_proxy_model.hpp"
+#include "icon_proxy_model.hpp"
 
 namespace adapters
 {
@@ -18,11 +19,14 @@ class ADAPTERS_EXPORT IFolderController : public QObject
     Q_OBJECT
     Q_PROPERTY(adapters::data_models::FoldersProxyModel* foldersModel READ
                    getFoldersModel CONSTANT)
+    Q_PROPERTY(adapters::data_models::IconProxyModel* iconModel READ
+                   getIconModel CONSTANT)
 
 public:
     virtual ~IFolderController() noexcept = default;
 
     virtual data_models::FoldersProxyModel* getFoldersModel() = 0;
+    virtual data_models::IconProxyModel* getIconModel() = 0;
 
     Q_INVOKABLE virtual dtos::FolderDto getFolder(QString uuid) = 0;
     Q_INVOKABLE virtual bool createFolder(QString name, QString color,

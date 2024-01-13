@@ -40,6 +40,7 @@ Popup {
 
             nameInput.text = folder.name
             colorSelection.value = folder.color
+            iconSelection.value = folder.icon
             descriptionPopup.setDescription(folder.description)
         }
     }
@@ -54,6 +55,7 @@ Popup {
 
         colorSelection.value = "default"
         description.value = ""
+        iconSelection.value = "folder"
     }
 
     ColumnLayout {
@@ -188,9 +190,40 @@ Popup {
 
                 IOptionButton {
                     id: iconSelection
+                    property string value: "folder"
+
                     optionButtonText: qsTr("Icon")
-                    optionButtonIcon: Icons.folder
-                    iconSize: 14
+                    optionButtonIcon: "qrc:/resources/images/folder_icons/" + value + ".svg"
+                    iconColor: colorSelection.value
+                               === "default" ? Style.colorDefaultFolderIcon : colorSelection.value
+                    mouseAbove: iconButtonArea.containsMouse
+                    iconSize: 16
+
+                    MouseArea {
+                        id: iconButtonArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: selectIconPopup.open()
+
+                        Connections {
+                            target: selectIconPopup
+
+                            function onOpenedChanged() {
+                                if (selectIconPopup.opened) {
+                                    internal.avoidReset = true
+                                    root.visible = false
+                                } else {
+                                    root.visible = true
+                                    internal.avoidReset = false
+                                }
+                            }
+
+                            function onIconSelected(name) {
+                                iconSelection.value = name
+                            }
+                        }
+                    }
                 }
 
                 ISeparator {}
@@ -299,12 +332,14 @@ Popup {
         function createFolder() {
             if (!root.updateMode) {
                 FolderController.createFolder(nameInput.text,
-                                              colorSelection.value, "",
+                                              colorSelection.value,
+                                              iconSelection.value,
                                               description.value,
                                               root.parentUuid)
             } else {
                 FolderController.updateFolder(uuid, nameInput.text,
-                                              colorSelection.value, "",
+                                              colorSelection.value,
+                                              iconSelection.value,
                                               description.value)
             }
 

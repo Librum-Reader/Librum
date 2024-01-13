@@ -282,8 +282,9 @@ Item {
                                 Layout.alignment: Qt.AlignVCenter
                                 opacity: nodeLabelTrigger.pressed
                                          || iconArea.pressed ? 0.7 : 1
-                                source: Icons.folder
-                                sourceSize.width: 17
+                                source: "qrc:/resources/images/folder_icons/"
+                                        + treeNode.icon + ".svg"
+                                sourceSize.width: 20
                                 fillMode: Image.PreserveAspectFit
                                 color: treeNode.color
                                        === "default" ? Style.colorDefaultFolderIcon : treeNode.color
@@ -442,6 +443,12 @@ Item {
 
     MDescriptionPopup {
         id: descriptionPopup
+        x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
+        y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
+    }
+
+    MSelectIconPopup {
+        id: selectIconPopup
         x: Math.round(baseRoot.width / 2 - implicitWidth / 2 - sidebar.width)
         y: Math.round(baseRoot.height / 2 - implicitHeight / 2 - 30)
     }
