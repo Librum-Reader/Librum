@@ -27,11 +27,10 @@ Pane {
                        }
 
     Component.onCompleted: {
-        BookController.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
-    }
-
-    Component.onDestruction: {
-        BookController.zoom = 1
+        if (BookController.zoom === 0) {
+            BookController.zoom = SettingsController.appearanceSettings.DefaultZoom / 100
+        }
+        zoom(BookController.zoom)
     }
 
     Connections {

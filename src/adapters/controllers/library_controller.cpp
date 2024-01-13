@@ -364,6 +364,8 @@ void LibraryController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.bookReadingProgress = book.getBookReadingProgress();
     bookDto.coverPath = pathWithScheme;
     bookDto.downloaded = book.isDownloaded();
+    bookDto.zoom = book.getZoom();
+    bookDto.yOffset = book.getYOffset();
 
     bookDto.addedToLibrary = book.getAddedToLibrary().toLocalTime().toString(
         Book::dateTimeStringFormat);
