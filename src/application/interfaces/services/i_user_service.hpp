@@ -34,6 +34,8 @@ public:
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
 
+    virtual QString getRole() const = 0;
+
     virtual qint64 getUsedBookStorage() const = 0;
     virtual qint64 getBookStorageLimit() const = 0;
 

@@ -18,6 +18,7 @@ struct UserData
     QString firstName;
     QString lastName;
     QString email;
+    QString role;
     qint64 usedBookStorage;
     qint64 bookStorageLimit;
     QDateTime profilePictureLastUpdated;
@@ -86,6 +87,7 @@ void appendUserDataToJsonObject(QJsonObject& jsonObject, UserData userData)
     jsonObject.insert("firstName", userData.firstName);
     jsonObject.insert("lastName", userData.lastName);
     jsonObject.insert("email", userData.email);
+    jsonObject.insert("role", userData.role);
     jsonObject.insert("usedBookStorage",
                       static_cast<qint64>(userData.usedBookStorage));
     jsonObject.insert("bookStorageLimit",
@@ -149,6 +151,7 @@ inline std::optional<UserData> tryAutomaticUserLoading()
         automaticLoginData["firstName"].toString(),
         automaticLoginData["lastName"].toString(),
         automaticLoginData["email"].toString(),
+        automaticLoginData["role"].toString(),
         static_cast<qint64>(automaticLoginData["usedBookStorage"].toDouble()),
         static_cast<qint64>(automaticLoginData["bookStorageLimit"].toDouble()),
         QDateTime::fromString(

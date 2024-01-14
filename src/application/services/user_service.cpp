@@ -14,7 +14,7 @@ namespace application::services
 
 UserService::UserService(IUserStorageGateway* userStorageGateway) :
     m_userStorageGateway(userStorageGateway),
-    m_user("x", "y", "z", 0, 0)
+    m_user("x", "y", "z", "s", 0, 0)
 {
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
@@ -123,6 +123,11 @@ void UserService::setEmail(const QString& newEmail)
 {
     m_user.setEmail(newEmail);
     m_userStorageGateway->changeEmail(m_authenticationToken, m_user.getEmail());
+}
+
+QString UserService::getRole() const
+{
+    return m_user.getRole();
 }
 
 qint64 UserService::getUsedBookStorage() const
@@ -373,6 +378,7 @@ void UserService::setUserData(const User& user)
     m_user.setFirstName(user.getFirstName());
     m_user.setLastName(user.getLastName());
     m_user.setEmail(user.getEmail());
+    m_user.setRole(user.getRole());
     m_user.setUsedBookStorage(user.getUsedBookStorage());
     m_user.setBookStorageLimit(user.getBookStorageLimit());
     m_user.setProfilePictureLastUpdated(user.getProfilePictureLastUpdated());
@@ -420,7 +426,8 @@ bool UserService::tryLoadingUserFromFile()
     {
         utility::UserData userData = result.value();
         User user(userData.firstName, userData.lastName, userData.email,
-                  userData.usedBookStorage, userData.bookStorageLimit);
+                  userData.role, userData.usedBookStorage,
+                  userData.bookStorageLimit);
         user.setProfilePictureLastUpdated(userData.profilePictureLastUpdated);
         for(auto& tag : userData.tags)
             user.addTag(tag);
@@ -446,6 +453,7 @@ void UserService::saveUserToFile(const domain::entities::User& user)
         user.getFirstName(),
         user.getLastName(),
         user.getEmail(),
+        user.getRole(),
         user.getUsedBookStorage(),
         user.getBookStorageLimit(),
         user.getProfilePictureLastUpdated(),

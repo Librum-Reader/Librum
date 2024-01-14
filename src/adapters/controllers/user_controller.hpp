@@ -35,6 +35,8 @@ public:
     QString getEmail() const override;
     void setEmail(const QString& newEmail) override;
 
+    QString getRole() const override;
+
     qint64 getUsedBookStorage() const override;
     qint64 getBookStorageLimit() const override;
 

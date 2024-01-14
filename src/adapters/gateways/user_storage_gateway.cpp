@@ -112,7 +112,7 @@ void UserStorageGateway::renameTag(const QString& authToken, const QUuid& uuid,
 
 void UserStorageGateway::proccessUserData(const QByteArray& data)
 {
-    User user("x", "y", "z", 0, 0);
+    User user("x", "y", "z", "s", 0, 0);
 
     assignValuesToUser(user, data);
 
@@ -121,7 +121,7 @@ void UserStorageGateway::proccessUserData(const QByteArray& data)
 
 void UserStorageGateway::reportFailureGettingUser()
 {
-    User emptyUser("invalid", "invalid", "invalid@email.x", 0, 0);
+    User emptyUser("invalid", "invalid", "invalid@email.x", "Some", 0, 0);
     emit finishedGettingUser(emptyUser, false);
 }
 
@@ -133,6 +133,7 @@ void UserStorageGateway::assignValuesToUser(User& user,
 
     user.setFirstName(jsonObj["firstName"].toString());
     user.setLastName(jsonObj["lastName"].toString());
+    user.setRole(jsonObj["role"].toString());
     user.setUsedBookStorage(
         static_cast<qint64>(jsonObj["usedBookStorage"].toDouble()));
     user.setBookStorageLimit(

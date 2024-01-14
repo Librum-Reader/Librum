@@ -145,6 +145,11 @@ void UserController::setEmail(const QString& newEmail)
     emit emailChanged();
 }
 
+QString UserController::getRole() const
+{
+    return m_userService->getRole();
+}
+
 qint64 UserController::getUsedBookStorage() const
 {
     return m_userService->getUsedBookStorage();
@@ -201,6 +206,7 @@ void UserController::proccessUserLoadingResult(bool success)
     emit emailChanged();
     emit usedBookStorageChanged();
     emit bookStorageLimitChanged();
+    emit roleChanged();
 
     emit finishedLoadingUser(success);
 }
