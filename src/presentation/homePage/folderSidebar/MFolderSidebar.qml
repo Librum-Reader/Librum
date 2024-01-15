@@ -15,12 +15,12 @@ Item {
 
     onOpenedChanged: {
         if (opened) {
-            rightBorder.x = internal.prevSidebarWidth
+            openAnim.start()
             return
         }
 
         internal.prevSidebarWidth = width
-        rightBorder.x = 0
+        closeAnim.start()
     }
 
     Rectangle {
@@ -73,8 +73,9 @@ Item {
     ColumnLayout {
         id: layout
         anchors.fill: parent
+        visible: false
+        opacity: 0
         spacing: 0
-        visible: root.opened
 
         Label {
             Layout.topMargin: 28
@@ -409,6 +410,64 @@ Item {
                     contentItem.flickableDirection = Flickable.VerticalFlick
                 }
             }
+        }
+    }
+
+    ParallelAnimation {
+        id: openAnim
+
+        NumberAnimation {
+            target: rightBorder
+            to: internal.prevSidebarWidth
+            property: "x"
+            duration: 260
+            easing.type: Easing.InOutQuad
+        }
+
+        NumberAnimation {
+            target: layout
+            from: 0
+            to: 1
+            property: "opacity"
+            duration: 320
+            easing.type: Easing.InOutQuad
+        }
+
+        PropertyAnimation {
+            target: layout
+            to: true
+            property: "visible"
+            duration: 200
+            easing.type: Easing.InOutQuad
+        }
+    }
+
+    ParallelAnimation {
+        id: closeAnim
+
+        NumberAnimation {
+            target: rightBorder
+            to: 0
+            property: "x"
+            duration: 240
+            easing.type: Easing.InOutQuad
+        }
+
+        NumberAnimation {
+            target: layout
+            from: 1
+            to: 0
+            property: "opacity"
+            duration: 180
+            easing.type: Easing.InOutQuad
+        }
+
+        PropertyAnimation {
+            target: layout
+            to: false
+            property: "visible"
+            duration: 300
+            easing.type: Easing.InOutQuad
         }
     }
 
