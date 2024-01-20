@@ -166,6 +166,11 @@ int main(int argc, char* argv[])
                                      1, 0, "ErrorCode",
                                      "This is an uncreatable enum!");
 
+    // Connect the user service's loggedOut with the authentication service's loggedOut
+    // signal, since both services need to be able to log out the user.
+    QObject::connect(userService, &application::IUserService::logoutUser,
+                     authenticationService, &application::IAuthenticationService::logoutUser);
+
 
     // Setup login connections
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,

@@ -52,6 +52,7 @@ public:
     virtual bool renameTag(const QUuid& uuid, const QString& newName) = 0;
 
 signals:
+    void logoutUser();
     void finishedLoadingUser(bool success);
     void profilePictureChanged();
     void tagInsertionStarted(int index);

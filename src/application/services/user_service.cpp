@@ -16,6 +16,9 @@ UserService::UserService(IUserStorageGateway* userStorageGateway) :
     m_userStorageGateway(userStorageGateway),
     m_user("x", "y", "z", "s", 0, 0)
 {
+    connect(m_userStorageGateway, &IUserStorageGateway::authTokenExpired, this,
+            &UserService::logoutUser);
+
     connect(m_userStorageGateway, &IUserStorageGateway::finishedGettingUser,
             this, &UserService::proccessUserInformation);
 

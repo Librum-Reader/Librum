@@ -11,6 +11,9 @@ namespace adapters::gateways
 UserStorageGateway::UserStorageGateway(IUserStorageAccess* userStorageAccess) :
     m_userStorageAccess(userStorageAccess)
 {
+    connect(m_userStorageAccess, &IUserStorageAccess::authTokenExpired, this,
+            &UserStorageGateway::authTokenExpired);
+
     connect(m_userStorageAccess, &IUserStorageAccess::userReady, this,
             &UserStorageGateway::proccessUserData);
 
