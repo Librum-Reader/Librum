@@ -24,20 +24,13 @@ jobs:
         with:
           submodules: recursive
 
-      - name: WORKAROUND FOR https://github.com/actions/runner-images/issues/8659
-        run: |
-          echo "TEMPORARY WORKAROUND FOR GITHUB RUNNER BUG #8659\n\nRemoving GCC 13 as it breaks Clang14"
-          sudo rm -f /etc/apt/sources.list.d/ubuntu-toolchain-r-ubuntu-test-jammy.list
-          sudo apt-get update
-          sudo apt-get install -y --allow-downgrades libc6=2.35-0ubuntu3.5 libc6-dev=2.35-0ubuntu3.5 libstdc++6=12.3.0-1ubuntu1~22.04 libgcc-s1=12.3.0-1ubuntu1~22.04
-      
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
           version: '6.5.3'
       
       - name: Install tools
-        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build clang
+        run: sudo apt-get update && sudo apt-get install -y cmake ninja-build clang-15 clang++-15
           
       - name: Install dependencies
         run: sudo apt-get install -y python3-venv
