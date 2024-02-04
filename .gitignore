@@ -68,3 +68,6 @@ compile_commands.json
 
 # Custom
 todo.txt
+
+# add MacOS DS_Store file
+.DS_Store

@@ -26,6 +26,10 @@ ListModel {
         code: "uk"
     }
     ListElement {
+        text: "한국어"
+        code: "ko"
+    }
+    ListElement {
         text: "中文"
         code: "zh"
     }
