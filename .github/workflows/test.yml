@@ -39,7 +39,7 @@ jobs:
         run: |
           mkdir build-Release
           cd build-Release
-          cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++ -DBUILD_TESTS=ON ..
+          cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang++-15 -DBUILD_TESTS=ON ..
           cmake --build .
           
       - name: Run tests
