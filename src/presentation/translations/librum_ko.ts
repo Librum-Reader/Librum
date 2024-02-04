@@ -84,7 +84,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <source>I accept the</source>
         <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
         <translatorcomment>한국어 배치 유지를 위한 의역 포함</translatorcomment>
-        <translation>나는 다음 조항에 동의합니다.</translation>
+        <translation>나는 다음 조항에 동의합니다</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="50"/>
@@ -369,7 +369,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
         <source>Reset settings?</source>
-        <translation>설정을 초기화 하시겠습니까?</translation>
+        <translation>재설정?</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="511"/>
@@ -454,7 +454,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="205"/>
         <source>Reset settings?</source>
-        <translation>설정을 초기화 하시겠습니까?</translation>
+        <translation>재설정?</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="206"/>
