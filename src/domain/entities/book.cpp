@@ -364,6 +364,26 @@ void Book::setColorTheme(const QString& newColorTheme)
     m_metaData.colorTheme = newColorTheme;
 }
 
+float Book::getZoom() const
+{
+    return m_metaData.zoom;
+}
+
+void Book::setZoom(float newZoom)
+{
+    m_metaData.zoom = newZoom;
+}
+
+float Book::getYOffset() const
+{
+    return m_metaData.yOffset;
+}
+
+void Book::setYOffset(float newYOffset)
+{
+    m_metaData.yOffset = newYOffset;
+}
+
 QString Book::getFileHash() const
 {
     return m_metaData.fileHash;
@@ -521,6 +541,10 @@ void Book::update(const Book& other)
         m_metaData.colorTheme = other.getColorTheme();
     if(m_metaData.fileHash != other.getFileHash())
         m_metaData.fileHash = other.getFileHash();
+    if(m_metaData.zoom != other.getZoom())
+        m_metaData.zoom = other.getZoom();
+    if(m_metaData.yOffset != other.getYOffset())
+        m_metaData.yOffset = other.getYOffset();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
@@ -633,6 +657,8 @@ QByteArray Book::toJson() const
         { "coverPath", getCoverPath() },
         { "colorTheme", getColorTheme() },
         { "fileHash", getFileHash() },
+        { "zoom", getZoom() },
+        { "yOffset", getYOffset() },
         { "existsOnlyOnClient", existsOnlyOnClient() },
         { "tags", serializeTags() },
         { "highlights", serializeHighlights() },
@@ -729,6 +755,8 @@ BookMetaData Book::getBookMetaDataFromJson(const QJsonObject& jsonBook)
         .coverPath = jsonBook["coverPath"].toString(),
         .colorTheme = jsonBook["colorTheme"].toString(),
         .fileHash = jsonBook["fileHash"].toString(),
+        .zoom = static_cast<float>(jsonBook["zoom"].toDouble()),
+        .yOffset = static_cast<float>(jsonBook["yOffset"].toDouble()),
     };
 
     // Specify that the dates are UTC, else Qt thinks its local time

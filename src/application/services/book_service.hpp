@@ -61,7 +61,6 @@ private:
     ILibraryService* m_libraryService;
     std::unique_ptr<mupdf::FzDocument> m_fzDocument = nullptr;
     std::unique_ptr<core::utils::BookSearcher> m_bookSearcher = nullptr;
-    float m_zoom = 1;
     QUuid m_uuid;
 
     std::unique_ptr<core::TOCModel> m_TOCModel;

@@ -33,6 +33,8 @@ struct ADAPTERS_EXPORT BookDto
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
     Q_PROPERTY(QString coverPath MEMBER coverPath)
     Q_PROPERTY(bool downloaded MEMBER downloaded)
+    Q_PROPERTY(float zoom MEMBER zoom)
+    Q_PROPERTY(float yOffset MEMBER yOffset)
 
 public:
     QString uuid;
@@ -53,6 +55,8 @@ public:
     QString lastOpened;
     QString coverPath;
     bool downloaded;
+    float zoom;
+    float yOffset;
     QList<TagDto> tags;
 };
 

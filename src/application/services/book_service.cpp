@@ -215,12 +215,14 @@ void BookService::setCurrentPage(int newCurrentPage)
 
 float BookService::getZoom() const
 {
-    return m_zoom;
+    auto book = getBook();
+    return book->getZoom();
 }
 
 void BookService::setZoom(float newZoom)
 {
-    m_zoom = newZoom;
+    auto book = getBook();
+    book->setZoom(newZoom);
 }
 
 QString BookService::getColorTheme()
