@@ -38,14 +38,23 @@ public:
     Folder* getParent() const;
     void setParent(Folder* parent);
 
+    const QDateTime& getLastModified() const;
+    void setLastModified(const QDateTime& newLastModified);
+    void updateLastModified();
+
+    void updateProperties(const Folder& folder);
+
     int getIndexInParent() const;
-    int getIndexOfChild(const QUuid& uuid);
+    int getIndexOfChild(const QUuid& uuid) const;
     bool isChildOf(const Folder& folder) const;
 
     const std::vector<std::unique_ptr<Folder>>& getChildren() const;
     std::vector<std::unique_ptr<Folder>>& getChildren();
+    const Folder* getChild(const QUuid& uuid) const;
+    Folder* getChild(const QUuid& uuid);
     void addChild(std::unique_ptr<Folder> child);
     void removeChild(const QUuid& uuid);
+    const Folder* getChildAtIndex(int index) const;
     Folder* getChildAtIndex(int index);
     int childCount() const;
 
@@ -60,8 +69,13 @@ private:
     QString m_color;
     QString m_icon;
     QString m_description;
+    QDateTime m_lastModified;
     Folder* m_parent = nullptr;
     std::vector<std::unique_ptr<Folder>> m_children;
+
+    inline static const QString dateTimeStringFormat {
+        "hh:mm:ss - dd.MM.yyyy"
+    };
 };
 
 }  // namespace domain::entities

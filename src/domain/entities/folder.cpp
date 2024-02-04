@@ -10,7 +10,8 @@ Folder::Folder(QString name, QString color, QString icon, QString description,
     m_name(name),
     m_color(color),
     m_icon(icon),
-    m_description(description)
+    m_description(description),
+    m_lastModified(QDateTime::currentDateTimeUtc())
 {
 }
 
@@ -153,12 +154,36 @@ void Folder::setParent(Folder* parent)
     m_parent = parent;
 }
 
+const QDateTime& Folder::getLastModified() const
+{
+    return m_lastModified;
+}
+
+void Folder::setLastModified(const QDateTime& newLastModified)
+{
+    m_lastModified = newLastModified;
+}
+
+void Folder::updateLastModified()
+{
+    m_lastModified = QDateTime::currentDateTimeUtc();
+}
+
+void Folder::updateProperties(const Folder& folder)
+{
+    m_name = folder.m_name;
+    m_color = folder.m_color;
+    m_icon = folder.m_icon;
+    m_description = folder.m_description;
+    m_lastModified = folder.m_lastModified;
+}
+
 int Folder::getIndexInParent() const
 {
     return m_parent->getIndexOfChild(m_uuid);
 }
 
-int Folder::getIndexOfChild(const QUuid& uuid)
+int Folder::getIndexOfChild(const QUuid& uuid) const
 {
     for(std::size_t i = 0; i < m_children.size(); ++i)
     {
@@ -195,6 +220,16 @@ std::vector<std::unique_ptr<Folder> >& Folder::getChildren()
     return m_children;
 }
 
+const Folder* Folder::getChild(const QUuid& uuid) const
+{
+    return getChildAtIndex(getIndexOfChild(uuid));
+}
+
+Folder* Folder::getChild(const QUuid& uuid)
+{
+    return getChildAtIndex(getIndexOfChild(uuid));
+}
+
 void Folder::addChild(std::unique_ptr<Folder> child)
 {
     child->setParent(this);
@@ -215,9 +250,14 @@ void Folder::removeChild(const QUuid& uuid)
     }
 }
 
+const Folder* Folder::getChildAtIndex(int index) const
+{
+    return m_children.at(index).get();
+}
+
 Folder* Folder::getChildAtIndex(int index)
 {
-    return m_children[index].get();
+    return m_children.at(index).get();
 }
 
 int Folder::childCount() const
@@ -233,6 +273,7 @@ QByteArray Folder::toJson() const
         { "color", m_color },
         { "icon", m_icon },
         { "description", m_description },
+        { "lastModified", m_lastModified.toString(dateTimeStringFormat) },
         { "children", serializeChildren() },
     };
 
@@ -261,8 +302,11 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
     auto color = jsonFolder["color"].toString();
     auto icon = jsonFolder["icon"].toString();
     auto description = jsonFolder["description"].toString();
+    auto dateTime = jsonFolder["lastModified"].toString();
     Folder folder(name, color, icon, description, uuid);
     folder.setParent(parent);
+    folder.setLastModified(
+        QDateTime::fromString(dateTime, dateTimeStringFormat));
 
     auto jsonChildren = jsonFolder["children"].toArray();
     for(const auto& jsonChild : jsonChildren)

@@ -38,6 +38,7 @@ enum class APPLICATION_EXPORT ErrorCode
     TooManyRequests,  // 19
     AiExplanationLimitReached,  // 20
     AiRequestTooLong,  // 21
+    UserHasNoRootFolder,  // 22
 };
 
 Q_ENUM_NS(ErrorCode)

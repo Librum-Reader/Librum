@@ -10,8 +10,21 @@ FolderService::FolderService(IFolderStorageGateway* folderStorageGateway,
                              ILocalLibraryTracker* localLibraryTracker) :
     m_folderStorageGateway(folderStorageGateway),
     m_localLibraryTracker(localLibraryTracker),
-    m_rootFolder(std::make_unique<Folder>("ROOT", "", "", "", QUuid()))
+    m_rootFolder(std::make_unique<Folder>("ROOT", "", "", ""))
 {
+    connect(m_folderStorageGateway, &IFolderStorageGateway::foldersFetched,
+            this, &FolderService::processFetchedFolders);
+
+    // Fetch changes timer
+    m_fetchChangesTimer.setInterval(m_fetchChangesInterval);
+    connect(&m_fetchChangesTimer, &QTimer::timeout, this,
+            [this]()
+            {
+                m_folderStorageGateway->fetchFolders(m_authenticationToken);
+            });
+
+    // Fetch changes at start
+    m_folderStorageGateway->fetchFolders(m_authenticationToken);
 }
 
 Folder* FolderService::getRootFolder()
@@ -43,6 +56,7 @@ bool FolderService::createFolder(const QString& name, QString color,
         std::make_unique<Folder>(name, color, icon, description));
     emit endInsertFolder();
 
+    parentFolder->updateLastModified();
     saveChanges();
     return true;
 }
@@ -59,6 +73,7 @@ bool FolderService::deleteFolder(const QUuid& uuid)
     parent->removeChild(uuid);
     emit endRemoveFolder();
 
+    parent->updateLastModified();
     saveChanges();
     return true;
 }
@@ -71,6 +86,7 @@ void FolderService::updateFolder(const domain::entities::Folder& folder)
     realFolder->setIcon(folder.getIcon());
     realFolder->setDescription(folder.getDescription());
 
+    realFolder->updateLastModified();
     saveChanges();
     emit refreshFolder(realFolder->getParent(), realFolder->getIndexInParent());
 }
@@ -95,22 +111,25 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
     // it's memory.
     auto currFolderCopy = std::make_unique<Folder>(*currFolder);
 
+    auto currentParent = currFolder->getParent();
     emit beginRemoveFolder(currFolder->getParent(),
                            currFolder->getIndexInParent());
-    currFolder->getParent()->removeChild(uuid);
+    currentParent->removeChild(uuid);
+    currentParent->updateLastModified();
     emit endRemoveFolder();
 
     emit beginInsertFolder(destFolder, destFolder->childCount());
     destFolder->addChild(std::move(currFolderCopy));
     emit endInsertFolder();
 
+    destFolder->updateLastModified();
     saveChanges();
     return true;
 }
 
 void FolderService::setupUserData(const QString& token, const QString& email)
 {
-    Q_UNUSED(token)
+    m_authenticationToken = token;
     m_localLibraryTracker->setLibraryOwner(email);
 
     auto folder = m_localLibraryTracker->loadFolders();
@@ -120,7 +139,7 @@ void FolderService::setupUserData(const QString& token, const QString& email)
     if(folder.getName() == "invalid")
     {
         m_rootFolder->addChild(std::make_unique<Folder>(
-            "Archive", "default", "folder", "Unused books"));
+            "Archive", "default", "folder", "A folder for archived books"));
         return;
     }
 
@@ -155,6 +174,83 @@ Folder* FolderService::getFolderHelper(const QUuid& uuid,
 void FolderService::saveChanges()
 {
     m_localLibraryTracker->saveFolders(*m_rootFolder);
+    m_folderStorageGateway->updateFolder(m_authenticationToken, *m_rootFolder);
+}
+
+void FolderService::processFetchedFolders(Folder& remoteFolder)
+{
+    // This occurs when there is no folder on the server yet. We want to create
+    // a default folder for the user.
+    if(remoteFolder.getUuid() == QUuid())
+    {
+        m_folderStorageGateway->updateFolder(m_authenticationToken,
+                                             *m_rootFolder);
+        return;
+    }
+
+    auto realFolder = getFolder(remoteFolder.getUuid());
+    if(realFolder == nullptr)
+    {
+        qWarning() << "Root folder with uuid: "
+                   << remoteFolder.getUuid().toString() << " not found";
+        return;
+    }
+
+    updateFoldersRecursively(realFolder, remoteFolder);
+    saveChanges();
+}
+
+void FolderService::updateFoldersRecursively(Folder* current,
+                                             Folder& remoteRoot)
+{
+    auto remoteFolder = remoteRoot.getChild(current->getUuid());
+
+    auto currLastModified = current->getLastModified().toSecsSinceEpoch();
+    auto remoteLastModified =
+        remoteFolder->getLastModified().toSecsSinceEpoch();
+    if(remoteLastModified > currLastModified)
+    {
+        current->updateProperties(*remoteFolder);
+        emit refreshFolder(current->getParent(), current->getIndexInParent());
+
+        addMissingChildrenToFolder(current, *remoteFolder);
+        removeNonExistentChildrenFromFolder(current, *remoteFolder);
+    }
+
+    for(auto& child : current->getChildren())
+    {
+        updateFoldersRecursively(child.get(), remoteRoot);
+    }
+}
+
+void FolderService::addMissingChildrenToFolder(Folder* current,
+                                               Folder& remoteFolder)
+{
+    for(auto& remoteChild : remoteFolder.getChildren())
+    {
+        auto localIndex = current->getIndexOfChild(remoteChild->getUuid());
+        if(localIndex == -1)
+        {
+            emit beginInsertFolder(current, current->childCount());
+            current->addChild(std::move(remoteChild));
+            emit endInsertFolder();
+        }
+    }
+}
+
+void FolderService::removeNonExistentChildrenFromFolder(Folder* current,
+                                                        Folder& remoteFolder)
+{
+    for(auto& localChild : current->getChildren())
+    {
+        auto remoteIndex = remoteFolder.getIndexOfChild(localChild->getUuid());
+        if(remoteIndex == -1)
+        {
+            emit beginRemoveFolder(current, localChild->getIndexInParent());
+            current->removeChild(localChild->getUuid());
+            emit endRemoveFolder();
+        }
+    }
 }
 
 }  // namespace application::services

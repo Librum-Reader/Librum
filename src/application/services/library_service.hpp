@@ -85,7 +85,7 @@ private:
     long m_usedBookStorage = 0;
     long m_bookStorageLimit = 0;
     QTimer m_fetchChangesTimer;
-    int m_fetchChangedInterval = 60'000;
+    int m_fetchChangesInterval = 60'000;
 
     // We record all changes made to books and apply them every
     // m_applyUpdatesInterval seconds. This is done to reduce the

@@ -23,7 +23,7 @@ LibraryService::LibraryService(IMetadataExtractor* bookMetadataHelper,
     m_libraryStorageManager(bookStorageManager)
 {
     // Fetch changes timer
-    m_fetchChangesTimer.setInterval(m_fetchChangedInterval);
+    m_fetchChangesTimer.setInterval(m_fetchChangesInterval);
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {

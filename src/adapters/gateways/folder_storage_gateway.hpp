@@ -15,7 +15,16 @@ class ADAPTERS_EXPORT FolderStorageGateway
 public:
     FolderStorageGateway(IFolderStorageAccess* folderStorageAccess);
 
+    void updateFolder(const QString& authToken,
+                      const domain::entities::Folder& folder) override;
+    void fetchFolders(const QString& authToken) override;
+
+private slots:
+    void processFetchedFolders(const QByteArray& jsonFolders);
+
 private:
+    void assignParentsToFolders(domain::entities::Folder& folder);
+
     IFolderStorageAccess* m_folderStorageAccess;
 };
 

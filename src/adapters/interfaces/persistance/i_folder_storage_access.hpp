@@ -1,5 +1,5 @@
 #pragma once
-#include <QJsonObject>
+#include <QByteArray>
 #include <QObject>
 #include <QString>
 #include "adapters_export.hpp"
@@ -17,6 +17,14 @@ class ADAPTERS_EXPORT IFolderStorageAccess : public QObject
 
 public:
     virtual ~IFolderStorageAccess() noexcept = default;
+
+    virtual void updateFolder(const QString& authToken,
+                              const QByteArray& folder) = 0;
+    virtual void fetchFolders(const QString& authToken) = 0;
+
+signals:
+    void foldersFetched(const QByteArray& folders);
+    void noFolderExistsForUser();
 };
 
 }  // namespace adapters
