@@ -21,8 +21,7 @@ public:
         UuidRole,
         ColorRole,
         IconRole,
-        DescriptionRole,
-        Invalid
+        DescriptionRole
     };
 
     QVariant data(const QModelIndex& index, int role) const override;
@@ -40,9 +39,10 @@ public slots:
     void beginRemoveFolder(domain::entities::Folder* parent, int row);
     void endRemoveFolder();
     void refreshFolder(domain::entities::Folder* parent, int row);
+    void beginModelReset();
+    void endModelReset();
 
 private:
-    QList<int> getAllRoles();
     QModelIndex createModelIndexFromFolder(domain::entities::Folder* folder);
 
     domain::entities::Folder* m_root;

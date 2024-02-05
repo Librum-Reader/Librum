@@ -35,6 +35,8 @@ signals:
     void beginRemoveFolder(domain::entities::Folder* parent, int index);
     void endRemoveFolder();
     void refreshFolder(domain::entities::Folder* parent, int index);
+    void beginModelReset();
+    void endModelReset();
 };
 
 }  // namespace application

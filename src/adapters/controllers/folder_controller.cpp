@@ -29,6 +29,13 @@ FolderController::FolderController(application::IFolderService* folderService) :
     // Refresh signals
     connect(m_folderService, &application::IFolderService::refreshFolder,
             &m_foldersModel, &data_models::FoldersModel::refreshFolder);
+
+    // Reset signals
+    connect(m_folderService, &application::IFolderService::beginModelReset,
+            &m_foldersModel, &data_models::FoldersModel::beginModelReset);
+
+    connect(m_folderService, &application::IFolderService::endModelReset,
+            &m_foldersModel, &data_models::FoldersModel::endModelReset);
 }
 
 data_models::FoldersProxyModel* FolderController::getFoldersModel()

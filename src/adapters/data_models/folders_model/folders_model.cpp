@@ -132,23 +132,20 @@ void FoldersModel::endRemoveFolder()
 
 void FoldersModel::refreshFolder(Folder* parent, int row)
 {
-    auto allRoles = getAllRoles();
     auto parentIndex = createModelIndexFromFolder(parent);
 
     auto thisIndex = index(row, 0, parentIndex);
-    emit dataChanged(thisIndex, thisIndex, allRoles);
+    emit dataChanged(thisIndex, thisIndex);
 }
 
-QList<int> FoldersModel::getAllRoles()
+void FoldersModel::beginModelReset()
 {
-    QList<int> allRoles;
-    int lastRole = Invalid;
-    for(int i = Roles::NameRole; i < lastRole; ++i)
-    {
-        allRoles.push_back(i);
-    }
+    emit beginResetModel();
+}
 
-    return allRoles;
+void FoldersModel::endModelReset()
+{
+    emit endResetModel();
 }
 
 QModelIndex FoldersModel::createModelIndexFromFolder(Folder* folder)

@@ -206,14 +206,10 @@ void FolderService::processFetchedFolders(Folder& remoteRoot)
         m_rootFolder->setUuid(remoteRoot.getUuid());
         m_rootFolder->removeChild(m_rootFolder->getChildAtIndex(0)->getUuid());
 
-        int index = 0;
+        emit beginModelReset();
         for(auto& child : remoteRoot.getChildren())
-        {
             m_rootFolder->addChild(std::move(child));
-
-            emit refreshFolder(nullptr, index);
-            ++index;
-        }
+        emit endModelReset();
     }
     // We don't need update the local folders if we copy over everything from
     // the server since local and server will be exactly the same.
