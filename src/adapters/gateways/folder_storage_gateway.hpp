@@ -20,7 +20,7 @@ public:
     void fetchFolders(const QString& authToken) override;
 
 private slots:
-    void processFetchedFolders(const QByteArray& jsonFolders);
+    void processFetchedFolders(QByteArray jsonFolders);
 
 private:
     void assignParentsToFolders(domain::entities::Folder& folder);

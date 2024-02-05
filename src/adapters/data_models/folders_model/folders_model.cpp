@@ -154,7 +154,7 @@ QList<int> FoldersModel::getAllRoles()
 QModelIndex FoldersModel::createModelIndexFromFolder(Folder* folder)
 {
     // This occurs when the this item is the root item
-    if(folder->getParent() == nullptr)
+    if(folder == nullptr || folder->getParent() == nullptr)
         return QModelIndex();
 
     return createIndex(folder->getIndexInParent(), 0, folder);

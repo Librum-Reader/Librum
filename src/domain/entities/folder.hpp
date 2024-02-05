@@ -22,6 +22,7 @@ public:
     Folder& operator=(Folder&& rhs);
 
     QUuid getUuid() const;
+    void setUuid(const QUuid& uuid);
 
     QString getName() const;
     void setName(const QString& name);
@@ -46,12 +47,13 @@ public:
 
     int getIndexInParent() const;
     int getIndexOfChild(const QUuid& uuid) const;
-    bool isChildOf(const Folder& folder) const;
+    bool isDescendentOf(const Folder& folder, const QUuid& rootUuid) const;
 
     const std::vector<std::unique_ptr<Folder>>& getChildren() const;
     std::vector<std::unique_ptr<Folder>>& getChildren();
     const Folder* getChild(const QUuid& uuid) const;
     Folder* getChild(const QUuid& uuid);
+    Folder* getDescendant(const QUuid& uuid);
     void addChild(std::unique_ptr<Folder> child);
     void removeChild(const QUuid& uuid);
     const Folder* getChildAtIndex(int index) const;

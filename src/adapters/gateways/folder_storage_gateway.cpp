@@ -22,7 +22,7 @@ void FolderStorageGateway::updateFolder(const QString& authToken,
     auto jsonFolder = folder.toJson();
 
     // The server expects uuid to be called guid, so replace all occurences
-    jsonFolder.replace("uuid", "guid");
+    jsonFolder.replace("\"uuid\":", "\"guid\":");
 
     m_folderStorageAccess->updateFolder(authToken, jsonFolder);
 }
@@ -32,7 +32,7 @@ void FolderStorageGateway::fetchFolders(const QString& authToken)
     m_folderStorageAccess->fetchFolders(authToken);
 }
 
-void FolderStorageGateway::processFetchedFolders(const QByteArray& jsonFolder)
+void FolderStorageGateway::processFetchedFolders(QByteArray jsonFolder)
 {
     if(jsonFolder.isEmpty())
     {
@@ -40,6 +40,9 @@ void FolderStorageGateway::processFetchedFolders(const QByteArray& jsonFolder)
         emit foldersFetched(empty);
         return;
     }
+
+    // The client expects guid to be called uuid, so replace all occurences
+    jsonFolder.replace("\"guid\":", "\"uuid\":");
 
     auto folderObj = QJsonDocument::fromJson(jsonFolder).object();
     auto folder = Folder::fromJson(folderObj, nullptr);

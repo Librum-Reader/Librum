@@ -32,6 +32,7 @@ target_include_directories(infrastructure
                     ${CMAKE_CURRENT_SOURCE_DIR}/data
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${ADAPTERS_INCLUDES}
+                    ${APPLICATION_INCLUDES}
 )
 target_compile_definitions(infrastructure
                 PRIVATE

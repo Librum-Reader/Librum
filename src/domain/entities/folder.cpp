@@ -21,6 +21,7 @@ Folder::Folder(const Folder& folder) :
     m_color(folder.m_color),
     m_icon(folder.m_icon),
     m_description(folder.m_description),
+    m_lastModified(folder.m_lastModified),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -37,6 +38,7 @@ Folder::Folder(Folder&& folder) :
     m_color(std::move(folder.m_color)),
     m_icon(std::move(folder.m_icon)),
     m_description(std::move(folder.m_description)),
+    m_lastModified(std::move(folder.m_lastModified)),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -57,6 +59,7 @@ Folder& Folder::operator=(const Folder& rhs)
     m_color = rhs.m_color;
     m_icon = rhs.m_icon;
     m_description = rhs.m_description;
+    m_lastModified = rhs.m_lastModified;
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -79,6 +82,7 @@ Folder& Folder::operator=(Folder&& rhs)
     m_color = std::move(rhs.m_color);
     m_icon = std::move(rhs.m_icon);
     m_description = std::move(rhs.m_description);
+    m_lastModified = std::move(rhs.m_lastModified);
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -102,6 +106,11 @@ bool Folder::operator==(const Folder& rhs) const
 QUuid Folder::getUuid() const
 {
     return m_uuid;
+}
+
+void Folder::setUuid(const QUuid& uuid)
+{
+    m_uuid = uuid;
 }
 
 QString Folder::getName() const
@@ -194,10 +203,8 @@ int Folder::getIndexOfChild(const QUuid& uuid) const
     return -1;
 }
 
-bool Folder::isChildOf(const Folder& folder) const
+bool Folder::isDescendentOf(const Folder& folder, const QUuid& rootUuid) const
 {
-    QUuid rootUuid = QUuid();
-
     auto currFolder = this;
     while(currFolder->getUuid() != rootUuid)
     {
@@ -227,7 +234,26 @@ const Folder* Folder::getChild(const QUuid& uuid) const
 
 Folder* Folder::getChild(const QUuid& uuid)
 {
-    return getChildAtIndex(getIndexOfChild(uuid));
+    auto index = getIndexOfChild(uuid);
+    if(index == -1)
+        return nullptr;
+
+    return getChildAtIndex(index);
+}
+
+Folder* Folder::getDescendant(const QUuid& uuid)
+{
+    for(auto& child : m_children)
+    {
+        if(child->getUuid() == uuid)
+            return child.get();
+
+        auto descendant = child->getDescendant(uuid);
+        if(descendant != nullptr)
+            return descendant;
+    }
+
+    return nullptr;
 }
 
 void Folder::addChild(std::unique_ptr<Folder> child)

@@ -22,9 +22,6 @@ FolderService::FolderService(IFolderStorageGateway* folderStorageGateway,
             {
                 m_folderStorageGateway->fetchFolders(m_authenticationToken);
             });
-
-    // Fetch changes at start
-    m_folderStorageGateway->fetchFolders(m_authenticationToken);
 }
 
 Folder* FolderService::getRootFolder()
@@ -100,7 +97,7 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
     if(currFolder->getParent()->getUuid() == destFolder->getUuid())
         return false;
 
-    if(destFolder->isChildOf(*currFolder))
+    if(destFolder->isDescendentOf(*currFolder, m_rootFolder->getUuid()))
     {
         qWarning() << "Folder move operation failed. Attempted to move folder "
                       "into child";
@@ -140,14 +137,22 @@ void FolderService::setupUserData(const QString& token, const QString& email)
     {
         m_rootFolder->addChild(std::make_unique<Folder>(
             "Archive", "default", "folder", "A folder for archived books"));
-        return;
+    }
+    else
+    {
+        // Update the root folder's uuid with the stored uuid
+        m_rootFolder->setUuid(folder.getUuid());
+
+        // We need to add the folder's children to the current root element,
+        // since a pointer of the root element was already passed to the model,
+        // so we can't simply overwrite it, else we'd invalidate the pointer.
+        for(auto& child : folder.getChildren())
+            m_rootFolder->addChild(std::move(child));
     }
 
-    // We need to add the folder's children to the current root element, since a
-    // pointer of the root element was already passed to the model, so we can't
-    // simply overwrite it, else we'd invalidate the pointer.
-    for(auto& child : folder.getChildren())
-        m_rootFolder->addChild(std::move(child));
+    // Trigger a timeout manually at the start for the initial folder loading
+    m_fetchChangesTimer.start();
+    QMetaObject::invokeMethod(&m_fetchChangesTimer, "timeout");
 }
 
 void FolderService::clearUserData()
@@ -177,33 +182,57 @@ void FolderService::saveChanges()
     m_folderStorageGateway->updateFolder(m_authenticationToken, *m_rootFolder);
 }
 
-void FolderService::processFetchedFolders(Folder& remoteFolder)
+void FolderService::processFetchedFolders(Folder& remoteRoot)
 {
     // This occurs when there is no folder on the server yet. We want to create
     // a default folder for the user.
-    if(remoteFolder.getUuid() == QUuid())
+    if(remoteRoot.getName().isEmpty())
     {
         m_folderStorageGateway->updateFolder(m_authenticationToken,
                                              *m_rootFolder);
         return;
     }
 
-    auto realFolder = getFolder(remoteFolder.getUuid());
-    if(realFolder == nullptr)
+    // This occurs when there is folder data on the server, but there is no
+    // local folder data on the client yet. E.g. when starting the application
+    // for the first time from a new machine, while folders already exist on the
+    // server.
+    // In this case we want to just take all of the data from the server by
+    // setting the rootFolder's uuid, removing the child created by default and
+    // assigning the server folder's children to the root folder.
+    auto localRoot = getFolder(remoteRoot.getUuid());
+    if(localRoot == nullptr)
     {
-        qWarning() << "Root folder with uuid: "
-                   << remoteFolder.getUuid().toString() << " not found";
-        return;
+        m_rootFolder->setUuid(remoteRoot.getUuid());
+        m_rootFolder->removeChild(m_rootFolder->getChildAtIndex(0)->getUuid());
+
+        int index = 0;
+        for(auto& child : remoteRoot.getChildren())
+        {
+            m_rootFolder->addChild(std::move(child));
+
+            emit refreshFolder(nullptr, index);
+            ++index;
+        }
+    }
+    // We don't need update the local folders if we copy over everything from
+    // the server since local and server will be exactly the same.
+    else
+    {
+        updateFoldersRecursively(localRoot, remoteRoot);
     }
 
-    updateFoldersRecursively(realFolder, remoteFolder);
     saveChanges();
 }
 
 void FolderService::updateFoldersRecursively(Folder* current,
                                              Folder& remoteRoot)
 {
-    auto remoteFolder = remoteRoot.getChild(current->getUuid());
+    Folder* remoteFolder;
+    if(current == m_rootFolder.get())
+        remoteFolder = &remoteRoot;
+    else
+        remoteFolder = remoteRoot.getDescendant(current->getUuid());
 
     auto currLastModified = current->getLastModified().toSecsSinceEpoch();
     auto remoteLastModified =

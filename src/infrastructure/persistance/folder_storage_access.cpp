@@ -3,9 +3,12 @@
 #include <QSettings>
 #include "api_error_helper.hpp"
 #include "endpoints.hpp"
+#include "error_code.hpp"
 
 namespace infrastructure::persistence
 {
+
+using application::error_codes::ErrorCode;
 
 FolderStorageAccess::FolderStorageAccess()
 {
@@ -32,29 +35,27 @@ void FolderStorageAccess::fetchFolders(const QString& authToken)
     auto request = createRequest(domain + data::folderGetEndpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
-    connect(
-        reply, &QNetworkReply::finished, this,
-        [this, reply]()
-        {
-            if(api_error_helper::apiRequestFailed(reply, 200))
+    connect(reply, &QNetworkReply::finished, this,
+            [this, reply]()
             {
-                api_error_helper::logErrorMessage(reply, "Fetching folders");
-
-                // Manually handle "Storage limit exceeded" error
-                if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
-                       .toInt() == 404)
+                if(api_error_helper::apiRequestFailed(reply, 200))
                 {
-                    emit noFolderExistsForUser();
+                    auto code = api_error_helper::logErrorMessage(
+                        reply, "Fetching folders");
+
+                    if(code == static_cast<int>(ErrorCode::UserHasNoRootFolder))
+                    {
+                        emit foldersFetched(QByteArray());
+                    }
+
+                    reply->deleteLater();
+                    return;
                 }
 
+                auto data = reply->readAll();
+                emit foldersFetched(data);
                 reply->deleteLater();
-                return;
-            }
-
-            auto data = reply->readAll();
-            emit foldersFetched(data);
-            reply->deleteLater();
-        });
+            });
 }
 
 QNetworkRequest FolderStorageAccess::createRequest(QUrl url,

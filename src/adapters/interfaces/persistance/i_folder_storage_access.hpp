@@ -24,7 +24,6 @@ public:
 
 signals:
     void foldersFetched(const QByteArray& folders);
-    void noFolderExistsForUser();
 };
 
 }  // namespace adapters
