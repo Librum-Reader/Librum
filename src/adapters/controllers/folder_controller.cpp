@@ -79,7 +79,18 @@ void FolderController::updateFolder(QString uuid, QString name, QString color,
 
 bool FolderController::moveFolder(QString uuid, QString destUuid)
 {
-    return m_folderService->moveFolder(QUuid(uuid), QUuid(destUuid));
+    bool destinationIsRoot = false;
+    if(destUuid == "")
+    {
+        destUuid = m_folderService->getRootFolder()->getUuid().toString();
+        destinationIsRoot = true;
+    }
+
+    auto success = m_folderService->moveFolder(QUuid(uuid), QUuid(destUuid));
+    if(success && !destinationIsRoot)
+        emit expandFolder(destUuid);
+
+    return success;
 }
 
 }  // namespace adapters::controllers
