@@ -142,6 +142,7 @@ void FolderService::setupUserData(const QString& token, const QString& email)
     {
         // Update the root folder's uuid with the stored uuid
         m_rootFolder->setUuid(folder.getUuid());
+        m_rootFolder->setLastModified(folder.getLastModified());
 
         // We need to add the folder's children to the current root element,
         // since a pointer of the root element was already passed to the model,
@@ -224,11 +225,16 @@ void FolderService::processFetchedFolders(Folder& remoteRoot)
 void FolderService::updateFoldersRecursively(Folder* current,
                                              Folder& remoteRoot)
 {
-    Folder* remoteFolder;
+    Folder* remoteFolder = nullptr;
     if(current == m_rootFolder.get())
         remoteFolder = &remoteRoot;
     else
         remoteFolder = remoteRoot.getDescendant(current->getUuid());
+
+    // This occurs when the remote folder was added, and thus moved from, during
+    // the 'addMissingChildrenToFolder' step. We just skip it.
+    if(remoteFolder == nullptr)
+        return;
 
     auto currLastModified = current->getLastModified().toSecsSinceEpoch();
     auto remoteLastModified =
@@ -236,7 +242,13 @@ void FolderService::updateFoldersRecursively(Folder* current,
     if(remoteLastModified > currLastModified)
     {
         current->updateProperties(*remoteFolder);
-        emit refreshFolder(current->getParent(), current->getIndexInParent());
+
+        // We don't want to emit refreshFolder for the root folder
+        if(current->getName() != "ROOT")
+        {
+            emit refreshFolder(current->getParent(),
+                               current->getIndexInParent());
+        }
 
         addMissingChildrenToFolder(current, *remoteFolder);
         removeNonExistentChildrenFromFolder(current, *remoteFolder);
@@ -266,15 +278,43 @@ void FolderService::addMissingChildrenToFolder(Folder* current,
 void FolderService::removeNonExistentChildrenFromFolder(Folder* current,
                                                         Folder& remoteFolder)
 {
+    std::vector<QUuid> foldersToRemove;
     for(auto& localChild : current->getChildren())
     {
-        auto remoteIndex = remoteFolder.getIndexOfChild(localChild->getUuid());
-        if(remoteIndex == -1)
+        int remoteFolderIndex = -1;
+        for(std::size_t i = 0; i < remoteFolder.getChildren().size(); ++i)
         {
-            emit beginRemoveFolder(current, localChild->getIndexInParent());
-            current->removeChild(localChild->getUuid());
-            emit endRemoveFolder();
+            auto& remoteChild = remoteFolder.getChildren()[i];
+
+            // The remoteChild is nullptr when it was moved from the
+            // remoteFolder's children in the 'addMissingChildrenToFolder' step.
+            if(remoteChild == nullptr)
+            {
+                remoteFolderIndex = -2;
+                continue;
+            }
+
+            if(remoteChild->getUuid() == localChild->getUuid())
+            {
+                remoteFolderIndex = i;
+                break;
+            }
         }
+
+        // When remoteFolderIndex is -2, we just want to skip it and continue,
+        // since a child that was just added can not need to be removed.
+        if(remoteFolderIndex == -2)
+            continue;
+
+        if(remoteFolderIndex == -1)
+            foldersToRemove.emplace_back(localChild->getUuid());
+    }
+
+    for(auto& uuid : foldersToRemove)
+    {
+        emit beginRemoveFolder(current, current->getIndexOfChild(uuid));
+        current->removeChild(uuid);
+        emit endRemoveFolder();
     }
 }
 

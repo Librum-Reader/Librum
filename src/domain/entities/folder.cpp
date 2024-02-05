@@ -245,6 +245,9 @@ Folder* Folder::getDescendant(const QUuid& uuid)
 {
     for(auto& child : m_children)
     {
+        if(child == nullptr)
+            continue;
+
         if(child->getUuid() == uuid)
             return child.get();
 
