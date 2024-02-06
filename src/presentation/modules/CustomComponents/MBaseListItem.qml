@@ -29,6 +29,9 @@ Item {
 
     Component.onCompleted: root.completed(model.index, root.actualWidth)
 
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
+
     Pane {
         id: container
         property bool renameable: false

@@ -18,6 +18,8 @@ Page {
     horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 20
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
     background: Rectangle {
         anchors.fill: parent
         color: Style.colorPageBackground
@@ -178,6 +180,9 @@ Page {
                     cellWidth: internal.bookWidth + internal.horizontalBookSpacing
                     cellHeight: internal.bookHeight + internal.verticalBookSpacing
                     rightMargin: -internal.horizontalBookSpacing
+                    layoutDirection: Qt.LeftToRight
+                    LayoutMirroring.enabled: false
+                    LayoutMirroring.childrenInherit: true
                     interactive: true
                     boundsBehavior: Flickable.StopAtBounds
                     flickDeceleration: 15000

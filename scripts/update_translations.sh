@@ -8,4 +8,3 @@ TRANSLATION_FILES=$(find "$SCRIPT_DIR/../src/presentation/translations" -name "l
 
 # Use lupdate with the list of translation files
 lupdate "$SCRIPT_DIR/../src/presentation" -ts $TRANSLATION_FILES
-

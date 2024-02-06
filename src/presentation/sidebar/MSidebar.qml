@@ -227,7 +227,12 @@ Item {
                   */
                 MProfilePopup {
                     id: profilePopup
-                    x: 12
+                    x: {
+                        if (baseRoot.rightAlign)
+                            return -106
+                        else
+                            return 12
+                    }
                     y: profileBox.y - implicitHeight + 6
                 }
             }

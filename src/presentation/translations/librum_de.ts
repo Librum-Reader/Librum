@@ -70,7 +70,7 @@
         <translation>Dieses Programm</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="283"/>
+        <location filename="../settings/MAboutPage.qml" line="282"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translation>Librum ist hier für alle, die einfach nur ein gutes Buch genießen möchten.
@@ -84,10 +84,6 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <source>I accept the</source>
         <extracomment>Make sure to translate the following words together to make a logical sentence</extracomment>
         <translation>Ich akzeptiere die</translation>
-    </message>
-    <message>
-        <source> Terms of Service</source>
-        <translation type="vanished">AGB</translation>
     </message>
     <message>
         <location filename="../registerPage/MAcceptPolicy.qml" line="50"/>
@@ -273,10 +269,6 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <source>Add a tag...</source>
         <translation>Füge einen Tag hinzu...</translation>
     </message>
-    <message>
-        <source>ADD</source>
-        <translation type="vanished">ADD</translation>
-    </message>
 </context>
 <context>
     <name>MAddTagBoxPopup</name>
@@ -334,18 +326,6 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Hell</translation>
     </message>
     <message>
-        <source>Page Color Mode</source>
-        <translation type="vanished">Seiten Farben Modus</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Inverted</source>
-        <translation type="vanished">Invers</translation>
-    </message>
-    <message>
         <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>Sprache</translation>
@@ -366,50 +346,6 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <translation>Den Buchtitel in der Titelleiste anzeigen</translation>
     </message>
     <message>
-        <source>Layout direction</source>
-        <translation type="vanished">Layoutrichtung</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="vanished">Vertikal</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="vanished">Horizontal</translation>
-    </message>
-    <message>
-        <source>Display mode</source>
-        <translation type="vanished">Darstellungs Modus</translation>
-    </message>
-    <message>
-        <source>Single Page</source>
-        <translation type="vanished">Einzelseite</translation>
-    </message>
-    <message>
-        <source>Double Page</source>
-        <translation type="vanished">Doppelseite</translation>
-    </message>
-    <message>
-        <source>Page transition</source>
-        <translation type="vanished">Seitenübergang</translation>
-    </message>
-    <message>
-        <source>Instant</source>
-        <translation type="vanished">Sofort</translation>
-    </message>
-    <message>
-        <source>Fading</source>
-        <translation type="vanished">Verblassen</translation>
-    </message>
-    <message>
-        <source>Swipe</source>
-        <translation type="vanished">Wischen</translation>
-    </message>
-    <message>
-        <source>Swap</source>
-        <translation type="vanished">Tauschen</translation>
-    </message>
-    <message>
         <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>Standard-Zoom</translation>
@@ -428,30 +364,6 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
         <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="vanished">Verhalten</translation>
-    </message>
-    <message>
-        <source>Smooth scrolling</source>
-        <translation type="vanished">Sanftes Scrollen</translation>
-    </message>
-    <message>
-        <source>Loop after last page</source>
-        <translation type="vanished">Nach letzter Seite wiederholen</translation>
-    </message>
-    <message>
-        <source>Cursor mode</source>
-        <translation type="vanished">Mauszeiger-Modus</translation>
-    </message>
-    <message>
-        <source>Hidden after delay</source>
-        <translation type="vanished">Versteckt nach Verzögerung</translation>
-    </message>
-    <message>
-        <source>Always visible</source>
-        <translation type="vanished">Immer sichtbar</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
@@ -665,24 +577,6 @@ Entweder bist du offline oder dein Speicher ist voll.</translation>
         <translation>Abbrechen</translation>
     </message>
     <message>
-        <source>Delete Book?</source>
-        <translation type="vanished">Buch Löschen?</translation>
-    </message>
-    <message>
-        <source>Deleting a book is a permanent action, no one will be
- able to restore it afterwards!</source>
-        <translation type="vanished">Das Löschen eines Buches ist eine dauerhafte Aktion,
-niemand wird es wiederherstellen können!</translation>
-    </message>
-    <message>
-        <source>No, Keep Book</source>
-        <translation type="vanished">Nein, Buch behalten</translation>
-    </message>
-    <message>
-        <source>Yes, Delete Book</source>
-        <translation type="vanished">Ja, Buch löschen</translation>
-    </message>
-    <message>
         <location filename="../homePage/MBookDetailsPopup.qml" line="561"/>
         <source>Select</source>
         <translation>Auswählen</translation>
@@ -703,22 +597,6 @@ niemand wird es wiederherstellen können!</translation>
 <context>
     <name>MBookMultiSelectRightClickPopup</name>
     <message>
-        <source>Save to files</source>
-        <translation type="obsolete">Datei speichern</translation>
-    </message>
-    <message>
-        <source>Read book</source>
-        <translation type="obsolete">Buch lesen</translation>
-    </message>
-    <message>
-        <source>Book details</source>
-        <translation type="obsolete">Buch details</translation>
-    </message>
-    <message>
-        <source>Manage tags</source>
-        <translation type="obsolete">Tags verwalten</translation>
-    </message>
-    <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
@@ -733,10 +611,6 @@ niemand wird es wiederherstellen können!</translation>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
         <source>Delete books</source>
         <translation>Bücher löschen</translation>
-    </message>
-    <message>
-        <source>Remove book</source>
-        <translation type="obsolete">Buch löschen</translation>
     </message>
 </context>
 <context>
@@ -1161,10 +1035,6 @@ niemand wird es wiederherstellen können!</translation>
         <source>Email sent! Keep an eye on your inbox</source>
         <translation>Email gesendet! Behalte dein Postfach im Auge</translation>
     </message>
-    <message>
-        <source>Email sent! Keep an eye on your inbox.</source>
-        <translation type="vanished">Email gesendet! Behalte dein Postfach im Auge</translation>
-    </message>
 </context>
 <context>
     <name>MFreeBook</name>
@@ -1198,191 +1068,134 @@ niemand wird es wiederherstellen können!</translation>
     </message>
 </context>
 <context>
-    <name>MGeneralSettingsPage</name>
-    <message>
-        <source>General settings</source>
-        <translation type="vanished">Systemeinstellungen</translation>
-    </message>
-    <message>
-        <source>Change the way Librum works</source>
-        <translation type="vanished">Ändere die Arbeitsweise von Librum</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation type="vanished">Zurücksetzen</translation>
-    </message>
-    <message>
-        <source>Books</source>
-        <translation type="vanished">Bücher</translation>
-    </message>
-    <message>
-        <source>Open books after creation</source>
-        <translation type="vanished">Öffne Bücher nach Erstellung</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="obsolete">Verhalten</translation>
-    </message>
-    <message>
-        <source>Cursor mode</source>
-        <translation type="obsolete">Mauszeiger-Modus</translation>
-    </message>
-    <message>
-        <source>Hidden after delay</source>
-        <translation type="obsolete">Versteckt nach Verzögerung</translation>
-    </message>
-    <message>
-        <source>Always visible</source>
-        <translation type="obsolete">Immer sichtbar</translation>
-    </message>
-    <message>
-        <source>Reset settings?</source>
-        <translation type="vanished">Zurücksetzen?</translation>
-    </message>
-    <message>
-        <source>Resetting your settings is a permanent action, there
- will be no way to restore them!</source>
-        <translation type="vanished">Einstellungen zurückzusetzen ist eine endgültige Aktion,
-es gibt keine Möglichkeit sie wiederherzustellen!</translation>
-    </message>
-    <message>
-        <source>No, Keep</source>
-        <translation type="vanished">Nein, behalte</translation>
-    </message>
-    <message>
-        <source>Yes, Reset</source>
-        <translation type="vanished">Ja, zurücksetzen</translation>
-    </message>
-</context>
-<context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="69"/>
+        <location filename="../homePage/MHomePage.qml" line="71"/>
         <source>A new version is available!</source>
         <translation>Eine neue Version ist verfügbar!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="71"/>
+        <location filename="../homePage/MHomePage.qml" line="73"/>
         <source>Update Now</source>
         <translation>Aktualisieren</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="119"/>
+        <location filename="../homePage/MHomePage.qml" line="121"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Start</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="120"/>
+        <location filename="../homePage/MHomePage.qml" line="122"/>
         <source>You have %1 books</source>
         <translation>Du hast %1 Bücher</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="136"/>
+        <location filename="../homePage/MHomePage.qml" line="138"/>
         <source>Add books</source>
         <translation>Bücher hinzufügen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="400"/>
+        <location filename="../homePage/MHomePage.qml" line="402"/>
         <source>Remove Book?</source>
         <translation>Buch Löschen?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="401"/>
+        <location filename="../homePage/MHomePage.qml" line="403"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Das Löschen eines Buches ist eine dauerhafte Aktion,
 niemand wird es wiederherstellen können!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="402"/>
+        <location filename="../homePage/MHomePage.qml" line="404"/>
         <source>Remove from Device</source>
         <translation>Vom Gerät entfernen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="403"/>
+        <location filename="../homePage/MHomePage.qml" line="405"/>
         <source>Delete Everywhere</source>
         <translation>Überall Löschen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="440"/>
+        <location filename="../homePage/MHomePage.qml" line="442"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="455"/>
+        <location filename="../homePage/MHomePage.qml" line="457"/>
         <source>Limit Reached</source>
         <translation>Limit erreicht</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="456"/>
+        <location filename="../homePage/MHomePage.qml" line="458"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Du hast dein Upload-Limit erreicht.
 Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="457"/>
-        <location filename="../homePage/MHomePage.qml" line="504"/>
+        <location filename="../homePage/MHomePage.qml" line="459"/>
+        <location filename="../homePage/MHomePage.qml" line="506"/>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="458"/>
+        <location filename="../homePage/MHomePage.qml" line="460"/>
         <source>Upgrade</source>
         <translation>Upgrade</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="473"/>
+        <location filename="../homePage/MHomePage.qml" line="475"/>
         <source>Book already exists</source>
         <translation>Buch existiert bereits</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="474"/>
+        <location filename="../homePage/MHomePage.qml" line="476"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Dieses Buch ist bereits in deiner Bibliothek:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="477"/>
+        <location filename="../homePage/MHomePage.qml" line="479"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Willst du es erneut hinzufügen?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="480"/>
+        <location filename="../homePage/MHomePage.qml" line="482"/>
         <source>Add</source>
         <translation>Hinzufügen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="481"/>
+        <location filename="../homePage/MHomePage.qml" line="483"/>
         <source>Don&apos;t add</source>
         <translation>Nicht hinzufügen</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="504"/>
         <source>Unsupported File</source>
         <translation>Nicht unterstützt</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="505"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Oops! Dieses Format wird von Librum nicht unterstützt.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="519"/>
+        <location filename="../homePage/MHomePage.qml" line="521"/>
         <source>Import</source>
         <translation>Importieren</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="522"/>
+        <location filename="../homePage/MHomePage.qml" line="524"/>
         <source>All files</source>
         <translation>Alle Dokumente</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="523"/>
-        <location filename="../homePage/MHomePage.qml" line="524"/>
         <location filename="../homePage/MHomePage.qml" line="525"/>
+        <location filename="../homePage/MHomePage.qml" line="526"/>
+        <location filename="../homePage/MHomePage.qml" line="527"/>
         <source>files</source>
         <translation>Dokumente</translation>
     </message>
@@ -1515,29 +1328,9 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
 <context>
     <name>MReadingOptionsPopup</name>
     <message>
-        <source>Read out (TTS)</source>
-        <translation type="vanished">Laut lesen (TTS)</translation>
-    </message>
-    <message>
-        <source>Continuous pages</source>
-        <translation type="vanished">Kontinuierliche Seiten</translation>
-    </message>
-    <message>
-        <source>Display vertically</source>
-        <translation type="vanished">Vertikal anzeigen</translation>
-    </message>
-    <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="118"/>
         <source>Invert colors</source>
         <translation>Farben umkehren</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Normal</translation>
-    </message>
-    <message>
-        <source>Inverted</source>
-        <translation type="vanished">Invers</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
@@ -1698,10 +1491,6 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 <context>
     <name>MSearchButton</name>
     <message>
-        <source>Search for Book</source>
-        <translation type="vanished">Suche nach Buch</translation>
-    </message>
-    <message>
         <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
         <translation>Suche nach Büchern</translation>
@@ -1792,10 +1581,6 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <translation>Updates</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation type="vanished">Systemeinstellungen</translation>
-    </message>
-    <message>
         <location filename="../settings/settingsSidebar/MSettingsSidebar.qml" line="166"/>
         <source>USER &amp; ACCOUNT</source>
         <extracomment>Keep it capitalized</extracomment>
@@ -1843,19 +1628,19 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
         <translation>Tastenkürzel bearbeiten</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="106"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="110"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>AKTION</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="120"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="124"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>TASTENKÜRZEL</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="139"/>
         <source>Search for shortcuts</source>
         <translation>Suche nach Tastenkürzel</translation>
     </message>
@@ -1890,10 +1675,6 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
 </context>
 <context>
     <name>MSortByButton</name>
-    <message>
-        <source>Sort by</source>
-        <translation type="vanished">Sortieren nach</translation>
-    </message>
     <message>
         <location filename="../homePage/toolbar/sortByButton/MSortByButton.qml" line="46"/>
         <source>Sort</source>
@@ -2156,7 +1937,7 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
         <translation>Deine aktuelle verson ist:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
+        <location filename="../settings/updatesPage/MUpToDate.qml" line="85"/>
         <source>See our latest changes at:</source>
         <translation>Siehe unsere letzten Änderungen unter:</translation>
     </message>
@@ -2279,7 +2060,7 @@ an Projekten zu arbeiten, unserer Community zu helfen und versuchen, die Welt zu
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="31"/>
+        <location filename="../main.qml" line="32"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - Dein e-Buch leser</translation>
     </message>

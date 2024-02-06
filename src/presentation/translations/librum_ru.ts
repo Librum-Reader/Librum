@@ -70,7 +70,7 @@
         <translation>Это приложение</translation>
     </message>
     <message>
-        <location filename="../settings/MAboutPage.qml" line="283"/>
+        <location filename="../settings/MAboutPage.qml" line="282"/>
         <source>Librum is here for everyone who just wants to enjoy a good book.
 We hope you have a great time using it! Feel free to leave us a rating and some feedback.</source>
         <translation>Librum создан для тех, кто просто хочет насладиться хорошей книгой.
@@ -326,18 +326,6 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Светлая</translation>
     </message>
     <message>
-        <source>Page Color Mode</source>
-        <translation type="vanished">Цветовой Режим Страницы</translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="vanished">Нормальный</translation>
-    </message>
-    <message>
-        <source>Inverted</source>
-        <translation type="vanished">Инвертированный</translation>
-    </message>
-    <message>
         <location filename="../settings/MAppearancePage.qml" line="144"/>
         <source>Language</source>
         <translation>Язык</translation>
@@ -358,50 +346,6 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <translation>Отображать название книги в строке с названием</translation>
     </message>
     <message>
-        <source>Layout direction</source>
-        <translation type="vanished">Направление макета</translation>
-    </message>
-    <message>
-        <source>Vertical</source>
-        <translation type="vanished">Вертикально</translation>
-    </message>
-    <message>
-        <source>Horizontal</source>
-        <translation type="vanished">Горизонтально</translation>
-    </message>
-    <message>
-        <source>Display mode</source>
-        <translation type="vanished">Режим отображения</translation>
-    </message>
-    <message>
-        <source>Single Page</source>
-        <translation type="vanished">Одна страница</translation>
-    </message>
-    <message>
-        <source>Double Page</source>
-        <translation type="vanished">Разворот</translation>
-    </message>
-    <message>
-        <source>Page transition</source>
-        <translation type="vanished">Переход страницы</translation>
-    </message>
-    <message>
-        <source>Instant</source>
-        <translation type="vanished">Мнгновенно</translation>
-    </message>
-    <message>
-        <source>Fading</source>
-        <translation type="vanished">Исчезающий</translation>
-    </message>
-    <message>
-        <source>Swipe</source>
-        <translation type="vanished">Перелистывание</translation>
-    </message>
-    <message>
-        <source>Swap</source>
-        <translation type="vanished">Замена</translation>
-    </message>
-    <message>
         <location filename="../settings/MAppearancePage.qml" line="280"/>
         <source>Default Zoom</source>
         <translation>Увеличение по-умолчанию</translation>
@@ -420,30 +364,6 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../settings/MAppearancePage.qml" line="454"/>
         <source>Opacity</source>
         <translation>Непрозрачность</translation>
-    </message>
-    <message>
-        <source>Behavior</source>
-        <translation type="vanished">Поведение</translation>
-    </message>
-    <message>
-        <source>Smooth scrolling</source>
-        <translation type="vanished">Плавная прокрутка</translation>
-    </message>
-    <message>
-        <source>Loop after last page</source>
-        <translation type="vanished">Зациклить после последней страницы</translation>
-    </message>
-    <message>
-        <source>Cursor mode</source>
-        <translation type="vanished">Режим курсора</translation>
-    </message>
-    <message>
-        <source>Hidden after delay</source>
-        <translation type="vanished">Спрятать после задержки</translation>
-    </message>
-    <message>
-        <source>Always visible</source>
-        <translation type="vanished">Всегда виден</translation>
     </message>
     <message>
         <location filename="../settings/MAppearancePage.qml" line="510"/>
@@ -676,18 +596,6 @@ Either you are offline, or your storage is full.</source>
 <context>
     <name>MBookMultiSelectRightClickPopup</name>
     <message>
-        <source>Save to files</source>
-        <translation type="obsolete">Сохранить</translation>
-    </message>
-    <message>
-        <source>Read book</source>
-        <translation type="obsolete">Читать</translation>
-    </message>
-    <message>
-        <source>Manage tags</source>
-        <translation type="obsolete">Теги</translation>
-    </message>
-    <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="25"/>
         <source>Mark as read</source>
         <extracomment>If this is too long in any language, use &quot;Read&quot; (past form) instead</extracomment>
@@ -702,10 +610,6 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="43"/>
         <source>Delete books</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove book</source>
-        <translation type="obsolete">Удалить</translation>
     </message>
 </context>
 <context>
@@ -1163,175 +1067,134 @@ Either you are offline, or your storage is full.</source>
     </message>
 </context>
 <context>
-    <name>MGeneralSettingsPage</name>
-    <message>
-        <source>General settings</source>
-        <translation type="vanished">Общие настройки</translation>
-    </message>
-    <message>
-        <source>Change the way Librum works</source>
-        <translation type="vanished">Измените то, как работает Librum</translation>
-    </message>
-    <message>
-        <source>Restore Defaults</source>
-        <translation type="vanished">Сбросить по-умолчанию</translation>
-    </message>
-    <message>
-        <source>Books</source>
-        <translation type="vanished">Книги</translation>
-    </message>
-    <message>
-        <source>Open books after creation</source>
-        <translation type="vanished">Открывать книги после создания</translation>
-    </message>
-    <message>
-        <source>Reset settings?</source>
-        <translation type="vanished">Сбросить настройки?</translation>
-    </message>
-    <message>
-        <source>Resetting your settings is a permanent action, there
- will be no way to restore them!</source>
-        <translation type="vanished">Сброс настроек необратим,
-вернуть их нельзя!</translation>
-    </message>
-    <message>
-        <source>No, Keep</source>
-        <translation type="vanished">Нет, оставить</translation>
-    </message>
-    <message>
-        <source>Yes, Reset</source>
-        <translation type="vanished">Да, сбросить</translation>
-    </message>
-</context>
-<context>
     <name>MHomePage</name>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="69"/>
+        <location filename="../homePage/MHomePage.qml" line="71"/>
         <source>A new version is available!</source>
         <translation>Доступна новая версия!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="71"/>
+        <location filename="../homePage/MHomePage.qml" line="73"/>
         <source>Update Now</source>
         <translation>Обновить Сейчас</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="119"/>
+        <location filename="../homePage/MHomePage.qml" line="121"/>
         <source>Home</source>
         <extracomment>As in &apos;Home Page&apos;, might be closer to &apos;Start&apos; in other languages</extracomment>
         <translation>Главная</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="120"/>
+        <location filename="../homePage/MHomePage.qml" line="122"/>
         <source>You have %1 books</source>
         <translation>У Вас %1 книг</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="136"/>
+        <location filename="../homePage/MHomePage.qml" line="138"/>
         <source>Add books</source>
         <translation>Добавить книги</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="400"/>
+        <location filename="../homePage/MHomePage.qml" line="402"/>
         <source>Remove Book?</source>
         <translation>Удалить Книгу?</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="401"/>
+        <location filename="../homePage/MHomePage.qml" line="403"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
         <translation>Удаление книги необратимо,
 после этого её нельзя будет восстановить!</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="402"/>
+        <location filename="../homePage/MHomePage.qml" line="404"/>
         <source>Remove from Device</source>
         <translation>Удалить с Устройства</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="403"/>
+        <location filename="../homePage/MHomePage.qml" line="405"/>
         <source>Delete Everywhere</source>
         <translation>Удалить Везде</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="440"/>
+        <location filename="../homePage/MHomePage.qml" line="442"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="455"/>
+        <location filename="../homePage/MHomePage.qml" line="457"/>
         <source>Limit Reached</source>
         <translation>Достигнут Лимит</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="456"/>
+        <location filename="../homePage/MHomePage.qml" line="458"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
         <translation>Вы достигли лимита загрузок на сервер.
 Удалите ненужные книги или приобретите улучшение для аккаунта.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="457"/>
-        <location filename="../homePage/MHomePage.qml" line="504"/>
+        <location filename="../homePage/MHomePage.qml" line="459"/>
+        <location filename="../homePage/MHomePage.qml" line="506"/>
         <source>Ok</source>
         <translation>Хорошо</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="458"/>
+        <location filename="../homePage/MHomePage.qml" line="460"/>
         <source>Upgrade</source>
         <translation>Приобрести улучшение</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="473"/>
+        <location filename="../homePage/MHomePage.qml" line="475"/>
         <source>Book already exists</source>
         <translation>Книга уже есть</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="474"/>
+        <location filename="../homePage/MHomePage.qml" line="476"/>
         <source>It looks like this book already exists in your library:</source>
         <translation>Похоже, эта книга уже есть в Вашей библиотеке:</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="477"/>
+        <location filename="../homePage/MHomePage.qml" line="479"/>
         <source>Are you sure you that want to add it again?
 </source>
         <translation>Вы уверены, что хотите добавить её снова?
 </translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="480"/>
+        <location filename="../homePage/MHomePage.qml" line="482"/>
         <source>Add</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="481"/>
+        <location filename="../homePage/MHomePage.qml" line="483"/>
         <source>Don&apos;t add</source>
         <translation>Не добавлять</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="502"/>
+        <location filename="../homePage/MHomePage.qml" line="504"/>
         <source>Unsupported File</source>
         <translation>Не поддерживается</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="503"/>
+        <location filename="../homePage/MHomePage.qml" line="505"/>
         <source>Oops! This file is not supported by Librum.</source>
         <translation>Ой! Librum не поддерживает этот файл.</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="519"/>
+        <location filename="../homePage/MHomePage.qml" line="521"/>
         <source>Import</source>
         <translation>Добавить</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="522"/>
+        <location filename="../homePage/MHomePage.qml" line="524"/>
         <source>All files</source>
         <translation>Все файлы</translation>
     </message>
     <message>
-        <location filename="../homePage/MHomePage.qml" line="523"/>
-        <location filename="../homePage/MHomePage.qml" line="524"/>
         <location filename="../homePage/MHomePage.qml" line="525"/>
+        <location filename="../homePage/MHomePage.qml" line="526"/>
+        <location filename="../homePage/MHomePage.qml" line="527"/>
         <source>files</source>
         <translation>файлы</translation>
     </message>
@@ -1764,19 +1627,19 @@ Confirm your email by clicking the link we sent you.</source>
         <translation>Изменить сочетания клавиш</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="106"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="110"/>
         <source>ACTION</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>ДЕЙСТВИЕ</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="120"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="124"/>
         <source>SHORTCUTS</source>
         <extracomment>Keep it capitalized</extracomment>
         <translation>СОЧЕТАНИЯ КЛАВИШ</translation>
     </message>
     <message>
-        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="135"/>
+        <location filename="../settings/shortcutsPage/MShortcutsPage.qml" line="139"/>
         <source>Search for shortcuts</source>
         <translation>Искать сочетания клавиш</translation>
     </message>
@@ -2072,7 +1935,7 @@ working on fun projects, supporting our community and trying to make the world a
         <translation>Ваша текущая версия:</translation>
     </message>
     <message>
-        <location filename="../settings/updatesPage/MUpToDate.qml" line="84"/>
+        <location filename="../settings/updatesPage/MUpToDate.qml" line="85"/>
         <source>See our latest changes at:</source>
         <translation>Посмотрите последние изменения здесь:</translation>
     </message>
@@ -2195,7 +2058,7 @@ working on fun projects, supporting our community and trying to make the world a
 <context>
     <name>main</name>
     <message>
-        <location filename="../main.qml" line="31"/>
+        <location filename="../main.qml" line="32"/>
         <source>Librum - Your ebook reader</source>
         <translation>Librum - Ваше приложение для чтения электронных книг</translation>
     </message>

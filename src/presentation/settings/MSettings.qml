@@ -20,6 +20,9 @@ Page {
     property alias storagePage: storagePage
     property alias supportUsPage: supportUsPage
 
+    LayoutMirroring.enabled: baseRoot.rightAlign
+    LayoutMirroring.childrenInherit: true
+
     background: Rectangle {
         anchors.fill: parent
         color: Style.colorPageBackground
