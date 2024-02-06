@@ -296,9 +296,8 @@ Item {
                                     hoverEnabled: true
                                     cursorShape: Qt.PointingHandCursor
 
-                                    onClicked: {
-
-                                    }
+                                    onClicked: mouse => nodeLayout.clickAction(
+                                                   mouse)
                                 }
                             }
 
@@ -327,28 +326,27 @@ Item {
                                     cursorShape: Qt.PointingHandCursor
                                     acceptedButtons: Qt.LeftButton | Qt.RightButton
 
-                                    onClicked: mouse => {
-                                                   if (mouse.button === Qt.RightButton) {
-                                                       let point = mapToItem(
-                                                           root, mouse.x,
-                                                           mouse.y)
+                                    onClicked: mouse => nodeLayout.clickAction(
+                                                   mouse)
+                                }
+                            }
 
-                                                       rightclickPopup.x = point.x
-                                                       rightclickPopup.y = point.y + 5
+                            function clickAction(mouse) {
+                                if (mouse.button === Qt.RightButton) {
+                                    let point = mapToItem(root,
+                                                          mouse.x, mouse.y)
 
-                                                       if (point.y + 5 + rightclickPopup.height
-                                                           > baseRoot.height) {
-                                                           rightclickPopup.y = point.y
-                                                           - rightclickPopup.height - 5
-                                                       }
+                                    rightclickPopup.x = point.x
+                                    rightclickPopup.y = point.y + 5
 
-                                                       rightclickPopup.uuid = treeNode.uuid
-                                                       rightclickPopup.open()
-                                                   } else if (mouse.button === Qt.LeftButton) {
-                                                       LibraryController.libraryModel.folder
-                                                       = treeNode.uuid
-                                                   }
-                                               }
+                                    if (point.y + 5 + rightclickPopup.height > baseRoot.height) {
+                                        rightclickPopup.y = point.y - rightclickPopup.height - 5
+                                    }
+
+                                    rightclickPopup.uuid = treeNode.uuid
+                                    rightclickPopup.open()
+                                } else if (mouse.button === Qt.LeftButton) {
+                                    LibraryController.libraryModel.folder = treeNode.uuid
                                 }
                             }
 
