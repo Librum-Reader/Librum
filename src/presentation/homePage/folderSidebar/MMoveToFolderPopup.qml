@@ -89,7 +89,7 @@ Popup {
             background: Rectangle {
                 anchors.fill: parent
                 color: headerArea.containsMouse
-                       || internal.selectedFolder === headerItem.uuid ? "white" : "transparent"
+                       || internal.selectedFolder === "header" ? "white" : "transparent"
                 opacity: 0.08
                 radius: 4
             }
