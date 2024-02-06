@@ -48,9 +48,13 @@ bool FolderService::createFolder(const QString& name, QString color,
     if(parentFolder == nullptr)
         return false;
 
+    // Set the index in parent to the current child count, since we're adding
+    // the folder to the end of the parent's children.
+    auto child = std::make_unique<Folder>(name, color, icon, description);
+    child->setIndexInParent(parentFolder->childCount());
+
     emit beginInsertFolder(parentFolder, parentFolder->childCount());
-    parentFolder->addChild(
-        std::make_unique<Folder>(name, color, icon, description));
+    parentFolder->addChild(std::move(child));
     emit endInsertFolder();
 
     parentFolder->updateLastModified();
@@ -65,11 +69,13 @@ bool FolderService::deleteFolder(const QUuid& uuid)
         return false;
 
     auto parent = folder->getParent();
+    auto indexInParent = folder->getIndexInParent();
 
-    emit beginRemoveFolder(parent, folder->getIndexInParent());
+    emit beginRemoveFolder(parent, indexInParent);
     parent->removeChild(uuid);
     emit endRemoveFolder();
 
+    parent->decreaseChildIndiciesIfBiggerThan(indexInParent);
     parent->updateLastModified();
     saveChanges();
     return true;
@@ -93,7 +99,7 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
     auto currFolder = getFolder(uuid);
     auto destFolder = getFolder(destUuid);
 
-    // We don't need to do anything if dest is already the parent
+    // We don't need to do anything if dest already is the parent.
     if(currFolder->getParent()->getUuid() == destFolder->getUuid())
         return false;
 
@@ -109,12 +115,18 @@ bool FolderService::moveFolder(const QUuid& uuid, const QUuid& destUuid)
     auto currFolderCopy = std::make_unique<Folder>(*currFolder);
 
     auto currentParent = currFolder->getParent();
+    // Since we remove the child from it's old parent, all other children's
+    // indecies need to be adjusted.
+    currentParent->decreaseChildIndiciesIfBiggerThan(
+        currFolderCopy->getIndexInParent());
+
     emit beginRemoveFolder(currFolder->getParent(),
                            currFolder->getIndexInParent());
     currentParent->removeChild(uuid);
     currentParent->updateLastModified();
     emit endRemoveFolder();
 
+    currFolderCopy->setIndexInParent(destFolder->childCount());
     emit beginInsertFolder(destFolder, destFolder->childCount());
     destFolder->addChild(std::move(currFolderCopy));
     emit endInsertFolder();
@@ -135,8 +147,11 @@ void FolderService::setupUserData(const QString& token, const QString& email)
     // create a default folder under the root folder for them.
     if(folder.getName() == "invalid")
     {
-        m_rootFolder->addChild(std::make_unique<Folder>(
-            "Archive", "default", "folder", "A folder for archived books"));
+        auto defaultFolder = std::make_unique<Folder>(
+            "Archive", "default", "folder", "A folder for archived books");
+        defaultFolder->setIndexInParent(0);
+
+        m_rootFolder->addChild(std::move(defaultFolder));
     }
     else
     {
@@ -149,6 +164,9 @@ void FolderService::setupUserData(const QString& token, const QString& email)
         // so we can't simply overwrite it, else we'd invalidate the pointer.
         for(auto& child : folder.getChildren())
             m_rootFolder->addChild(std::move(child));
+
+        // JSON format does not guarantee that the children are sorted.
+        m_rootFolder->sortDescendents();
     }
 
     // Trigger a timeout manually at the start for the initial folder loading
@@ -210,6 +228,8 @@ void FolderService::processFetchedFolders(Folder& remoteRoot)
         emit beginModelReset();
         for(auto& child : remoteRoot.getChildren())
             m_rootFolder->addChild(std::move(child));
+
+        m_rootFolder->sortDescendents();
         emit endModelReset();
     }
     // We don't need update the local folders if we copy over everything from
@@ -217,6 +237,7 @@ void FolderService::processFetchedFolders(Folder& remoteRoot)
     else
     {
         updateFoldersRecursively(localRoot, remoteRoot);
+        m_rootFolder->sortDescendents();
     }
 
     saveChanges();

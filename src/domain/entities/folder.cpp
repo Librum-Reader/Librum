@@ -22,6 +22,7 @@ Folder::Folder(const Folder& folder) :
     m_icon(folder.m_icon),
     m_description(folder.m_description),
     m_lastModified(folder.m_lastModified),
+    m_indexInParent(folder.m_indexInParent),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -39,6 +40,7 @@ Folder::Folder(Folder&& folder) :
     m_icon(std::move(folder.m_icon)),
     m_description(std::move(folder.m_description)),
     m_lastModified(std::move(folder.m_lastModified)),
+    m_indexInParent(folder.m_indexInParent),
     m_parent(nullptr)
 {
     for(const auto& child : folder.m_children)
@@ -60,6 +62,7 @@ Folder& Folder::operator=(const Folder& rhs)
     m_icon = rhs.m_icon;
     m_description = rhs.m_description;
     m_lastModified = rhs.m_lastModified;
+    m_indexInParent = rhs.m_indexInParent;
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -83,6 +86,7 @@ Folder& Folder::operator=(Folder&& rhs)
     m_icon = std::move(rhs.m_icon);
     m_description = std::move(rhs.m_description);
     m_lastModified = std::move(rhs.m_lastModified);
+    m_indexInParent = rhs.m_indexInParent;
     m_parent = nullptr;
 
     for(const auto& child : rhs.m_children)
@@ -100,6 +104,7 @@ bool Folder::operator==(const Folder& rhs) const
     return m_uuid == rhs.m_uuid && m_name == rhs.m_name &&
            m_color == rhs.m_color && m_icon == rhs.m_icon &&
            m_description == rhs.m_description && m_parent == rhs.m_parent &&
+           m_indexInParent == rhs.m_indexInParent &&
            m_children == rhs.m_children;
 }
 
@@ -189,7 +194,12 @@ void Folder::updateProperties(const Folder& folder)
 
 int Folder::getIndexInParent() const
 {
-    return m_parent->getIndexOfChild(m_uuid);
+    return m_indexInParent;
+}
+
+void Folder::setIndexInParent(int index)
+{
+    m_indexInParent = index;
 }
 
 int Folder::getIndexOfChild(const QUuid& uuid) const
@@ -215,6 +225,38 @@ bool Folder::isDescendentOf(const Folder& folder, const QUuid& rootUuid) const
     }
 
     return false;
+}
+
+void Folder::decreaseChildIndiciesIfBiggerThan(int index)
+{
+    for(auto& child : m_children)
+    {
+        if(child->getIndexInParent() > index)
+            child->setIndexInParent(child->getIndexInParent() - 1);
+    }
+}
+
+void Folder::increaseChildIndiciesIfBiggerThan(int index)
+{
+    for(auto& child : m_children)
+    {
+        if(child->getIndexInParent() > index)
+            child->setIndexInParent(child->getIndexInParent() + 1);
+    }
+}
+
+void Folder::sortDescendents()
+{
+    std::sort(m_children.begin(), m_children.end(),
+              [](const auto& lhs, const auto& rhs)
+              {
+                  return lhs->getIndexInParent() < rhs->getIndexInParent();
+              });
+
+    for(auto& child : m_children)
+    {
+        child->sortDescendents();
+    }
 }
 
 const std::vector<std::unique_ptr<Folder> >& Folder::getChildren() const
@@ -304,6 +346,7 @@ QByteArray Folder::toJson() const
         { "description", m_description },
         { "lastModified", m_lastModified.toString(dateTimeStringFormat) },
         { "children", serializeChildren() },
+        { "indexInParent", m_indexInParent },
     };
 
     QJsonDocument doc(folder);
@@ -332,10 +375,12 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
     auto icon = jsonFolder["icon"].toString();
     auto description = jsonFolder["description"].toString();
     auto dateTime = jsonFolder["lastModified"].toString();
+    auto indexInParent = jsonFolder["indexInParent"].toInt();
     Folder folder(name, color, icon, description, uuid);
     folder.setParent(parent);
     folder.setLastModified(
         QDateTime::fromString(dateTime, dateTimeStringFormat));
+    folder.setIndexInParent(indexInParent);
 
     auto jsonChildren = jsonFolder["children"].toArray();
     for(const auto& jsonChild : jsonChildren)

@@ -46,8 +46,15 @@ public:
     void updateProperties(const Folder& folder);
 
     int getIndexInParent() const;
+    void setIndexInParent(int index);
+
     int getIndexOfChild(const QUuid& uuid) const;
     bool isDescendentOf(const Folder& folder, const QUuid& rootUuid) const;
+
+    void decreaseChildIndiciesIfBiggerThan(int index);
+    void increaseChildIndiciesIfBiggerThan(int index);
+
+    void sortDescendents();
 
     const std::vector<std::unique_ptr<Folder>>& getChildren() const;
     std::vector<std::unique_ptr<Folder>>& getChildren();
@@ -72,6 +79,7 @@ private:
     QString m_icon;
     QString m_description;
     QDateTime m_lastModified;
+    int m_indexInParent = -1;
     Folder* m_parent = nullptr;
     std::vector<std::unique_ptr<Folder>> m_children;
 
