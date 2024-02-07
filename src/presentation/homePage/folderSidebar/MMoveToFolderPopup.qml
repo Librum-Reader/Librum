@@ -29,7 +29,12 @@ Popup {
         antialiasing: true
     }
 
-    onOpened: root.forceActiveFocus()
+    onOpened: {
+        root.forceActiveFocus()
+
+        // Make sure all tree nodes are expanded
+        treeView.expandRecursively(-1)
+    }
     onClosed: {
         root.bookUuid = ""
         root.books = []
@@ -204,9 +209,6 @@ Popup {
                     width: implicitWidth
                     implicitHeight: 32
                     padding: 0
-
-                    Component.onCompleted: treeView.expand(row)
-
                     background: Rectangle {
                         anchors.fill: parent
                         color: backgroundArea.containsMouse
