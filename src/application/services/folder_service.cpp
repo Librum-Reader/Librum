@@ -272,12 +272,16 @@ void FolderService::updateFoldersRecursively(Folder* current,
         }
 
         // If the remote folder has changed, we treat it as the source of
-        // through and replace the whole subtree of the current folder with the
+        // truth and replace the whole subtree of the current folder with the
         // remote subtree.
+        QList<QUuid> foldersToRemove;
         for(auto& child : current->getChildren())
+            foldersToRemove.push_back(child->getUuid());
+
+        for(auto& uuid : foldersToRemove)
         {
-            emit beginRemoveFolder(current, child->getIndexInParent());
-            current->removeChild(child->getUuid());
+            emit beginRemoveFolder(current, current->getIndexOfChild(uuid));
+            current->removeChild(uuid);
             emit endRemoveFolder();
         }
 
