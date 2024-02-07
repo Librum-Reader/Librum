@@ -333,7 +333,11 @@ Page {
                         }
 
                         onRemoveClicked: {
-                            acceptDeletionPopup.open()
+                            if (!internal.inFolderMode)
+                                acceptDeletionPopup.open()
+                            else
+                                acceptRemoveFromFolderPopup.open()
+
                             close()
                         }
                     }
@@ -351,21 +355,21 @@ Page {
                             close()
                         }
 
-                        onUninstallClicked: {
-                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
-                                LibraryController.uninstallBook(
-                                            Globals.selectedBooks[i])
+                        onRemoveClicked: {
+                            if (!internal.inFolderMode) {
+                                acceptMultiDeletionPopup.selectedBooks = Globals.selectedBooks
+                                acceptMultiDeletionPopup.open()
+                            } else {
+                                acceptRemoveFromFolderPopup.open()
                             }
 
                             toolbar.selectBooksCheckBoxActivated = false
                             close()
                         }
 
-                        onDeleteClicked: {
-                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
-                                LibraryController.deleteBook(
-                                            Globals.selectedBooks[i])
-                            }
+                        onAddToFolderClicked: {
+                            moveBookToFolderPopup.moveMultipleBooks = true
+                            moveBookToFolderPopup.open()
 
                             toolbar.selectBooksCheckBoxActivated = false
                             close()
@@ -440,6 +444,10 @@ Page {
         }
     }
 
+
+    /*
+     The popup opened when deleting a single book.
+     */
     MWarningPopup {
         id: acceptDeletionPopup
         x: Math.round(
@@ -457,15 +465,59 @@ Page {
         onOpenedChanged: if (opened)
                              acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
-        onLeftButtonClicked: LibraryController.uninstallBook(
-                                 Globals.selectedBook.uuid)
-        onRightButtonClicked: {
-            let uuid = Globals.selectedBook.uuid
-            let projectGutenbergId = Globals.selectedBook.projectGutenbergId
-            let status = LibraryController.deleteBook(uuid)
-            if (status === BookOperationStatus.Success) {
-                FreeBooksController.unmarkBookAsDownloaded(projectGutenbergId)
+
+        onLeftButtonClicked: internal.uninstallBook(Globals.selectedBook.uuid)
+        onRightButtonClicked: internal.deleteBook(
+                                  Globals.selectedBook.uuid,
+                                  Globals.selectedBook.projectGutenbergId)
+    }
+
+
+    /*
+     The popup opened when deleting multiple books at the same time via e.g.
+     the multi selection rightclick popup
+     */
+    MWarningPopup {
+        id: acceptMultiDeletionPopup
+        property var selectedBooks: []
+
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove Books?")
+        message: qsTr("Deleting books is a permanent action, no one will be\n able to restore it afterwards!")
+        leftButtonText: qsTr("Remove from Device")
+        rightButtonText: qsTr("Delete Everywhere")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+
+        onOpenedChanged: if (opened)
+                             acceptMultiDeletionPopup.giveFocus()
+        onDecisionMade: close()
+
+        onLeftButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                internal.uninstallBook(selectedBooks[i])
             }
+
+            clearState()
+        }
+
+        onRightButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                let uuid = selectedBooks[i]
+                let book = LibraryController.getBook(uuid)
+
+                internal.deleteBook(uuid, book.projectGutenbergId)
+            }
+
+            clearState()
+        }
+
+        function clearState() {
+            selectedBooks = []
         }
     }
 
@@ -613,6 +665,8 @@ Page {
         property int verticalBookSpacing: 48
         property var booksCurrentlyAdding: []
         property string lastAddedBookPath: ""
+        property bool inFolderMode: LibraryController.libraryModel.folder !== "all"
+                                    && LibraryController.libraryModel.folder !== "unsorted"
 
         function openBookOptionsPopup(item) {
             Globals.selectedBook = LibraryController.getBook(item.uuid)
@@ -667,6 +721,17 @@ Page {
         // after the error was dealt with to continue adding the rest of the books.
         function continueAddingBooks() {
             internal.addBooks(internal.booksCurrentlyAdding)
+        }
+
+        function uninstallBook(uuid) {
+            LibraryController.uninstallBook(uuid)
+        }
+
+        function deleteBook(uuid, gutenbergId) {
+            let status = LibraryController.deleteBook(uuid)
+            if (status === BookOperationStatus.Success) {
+                FreeBooksController.unmarkBookAsDownloaded(gutenbergId)
+            }
         }
     }
 }

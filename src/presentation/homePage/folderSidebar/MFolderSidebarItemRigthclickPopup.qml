@@ -68,7 +68,7 @@ Popup {
         }
 
         MenuItem {
-            text: "Create subfolder"
+            text: qsTr("Create subfolder")
 
             onClicked: {
                 addFolderPopup.parentUuid = root.uuid
@@ -79,7 +79,7 @@ Popup {
         }
 
         MenuItem {
-            text: "Edit"
+            text: qsTr("Edit")
 
             onClicked: {
                 addFolderPopup.updateMode = true
@@ -91,7 +91,7 @@ Popup {
         }
 
         MenuItem {
-            text: "Move to"
+            text: qsTr("Move to")
             Layout.bottomMargin: 6
 
             onClicked: {
@@ -112,7 +112,7 @@ Popup {
 
         MenuItem {
             Layout.topMargin: 6
-            text: "Delete"
+            text: qsTr("Delete")
             textColor: Style.colorRed
 
             onClicked: {

@@ -99,7 +99,7 @@ MRightClickMenu {
             imagePath: Icons.folder
             imageSize: 17
             //: If this is too long, use "To Folder" instead
-            text: qsTr("Add to Folder")
+            text: qsTr("Move to Folder")
 
             onClicked: root.addToFolderClicked()
         }

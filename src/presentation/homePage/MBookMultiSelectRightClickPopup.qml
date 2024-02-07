@@ -10,8 +10,8 @@ import Librum.style
 MRightClickMenu {
     id: root
     signal markAsReadClicked
-    signal deleteClicked
-    signal uninstallClicked
+    signal removeClicked
+    signal addToFolderClicked
 
     implicitHeight: 108 // 32px per item
 
@@ -29,20 +29,21 @@ MRightClickMenu {
 
         MRightClickMenuItem {
             width: root.width
-            imagePath: Icons.bookPopupUninstall
-            imageSize: 13
-            text: qsTr("Uninstall books")
+            imagePath: Icons.bookPopupDelete
+            imageSize: 16
+            text: qsTr("Remove books")
 
-            onClicked: root.uninstallClicked()
+            onClicked: root.removeClicked()
         }
 
         MRightClickMenuItem {
             width: root.width
-            imagePath: Icons.bookPopupDelete
-            imageSize: 16
-            text: qsTr("Delete books")
+            imagePath: Icons.folder
+            imageSize: 17
+            //: If this is too long, use "To Folder" instead
+            text: qsTr("Move to Folder")
 
-            onClicked: root.deleteClicked()
+            onClicked: root.addToFolderClicked()
         }
     }
 }
