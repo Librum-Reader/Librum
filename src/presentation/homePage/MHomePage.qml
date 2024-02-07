@@ -75,6 +75,8 @@ Page {
 
         MouseArea {
             id: foldersButtonMouseArea
+            hoverEnabled: true
+            cursorShape: Qt.PointingHandCursor
             anchors.fill: parent
 
             onClicked: {
