@@ -10,7 +10,7 @@ namespace tests::domain
 TEST(AUser, SucceedsAddingATag)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("SomeTag");
     auto tagAmountBeforeAdding = user.getTags().size();
 
@@ -29,7 +29,7 @@ TEST(AUser, SucceedsAddingATag)
 TEST(AUser, FailsAddingATagIfTagAlreadyExists)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("SomeTag");
     user.addTag(tag);  // First time
 
@@ -43,7 +43,7 @@ TEST(AUser, FailsAddingATagIfTagAlreadyExists)
 TEST(AUser, FailsAddingATagIfTagIsInvalid)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("T");  // Name too short
 
     // Act
@@ -56,7 +56,7 @@ TEST(AUser, FailsAddingATagIfTagIsInvalid)
 TEST(AUser, SucceedsDeletingATag)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("SomeTag");
     user.addTag(tag);
     auto tagAmountBeforeRemoving = user.getTags().size();
@@ -76,7 +76,7 @@ TEST(AUser, SucceedsDeletingATag)
 TEST(AUser, FailsDeletingATagIfTagDoesNotExist)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     auto tagAmountBeforeRemoving = user.getTags().size();
 
     // Act
@@ -91,7 +91,7 @@ TEST(AUser, FailsDeletingATagIfTagDoesNotExist)
 TEST(AUser, SucceedsRenamingATag)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     QString tagName = "SomeTag";
     Tag tag(tagName);
     QString newTagName = "SomeNewTag";
@@ -109,7 +109,7 @@ TEST(AUser, SucceedsRenamingATag)
 TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     QString newTagName = "NewTagName";
 
     // Act
@@ -124,7 +124,7 @@ TEST(AUser, FailsRenamingATagIfTagDoesNotExist)
 TEST(AUser, FailsRenamingATagIfNewNameAlreadyExists)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag firstTag("SomeName");
     Tag secondTag("AnotherName");
     user.addTag(firstTag);
@@ -140,7 +140,7 @@ TEST(AUser, FailsRenamingATagIfNewNameAlreadyExists)
 TEST(AUser, SucceedsGettingTags)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     user.addTag(Tag("SomeTag1"));
     user.addTag(Tag("SomeTag2"));
     user.addTag(Tag("SomeTag3"));
@@ -155,7 +155,7 @@ TEST(AUser, SucceedsGettingTags)
 TEST(AUser, SucceedsGettingATagByName)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("SomeTag");
     user.addTag(tag);
 
@@ -169,7 +169,7 @@ TEST(AUser, SucceedsGettingATagByName)
 TEST(AUser, FailsGettingATagByNameIfTagDoesNotExist)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
 
     // Act
     auto* result = user.getTagByName("NonExistentTag");
@@ -181,7 +181,7 @@ TEST(AUser, FailsGettingATagByNameIfTagDoesNotExist)
 TEST(AUser, SucceedsGettingATagByUuid)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
     Tag tag("SomeTag");
     user.addTag(tag);
 
@@ -195,7 +195,7 @@ TEST(AUser, SucceedsGettingATagByUuid)
 TEST(AUser, FailsGettingATagByUuidIfTagDoesNotExist)
 {
     // Arrange
-    User user("first", "last", "email@librum.com", 0, 0);
+    User user("first", "last", "email@librum.com", "Basic", 0, 0);
 
     // Act
     auto* result = user.getTagByUuid(QUuid::createUuid());

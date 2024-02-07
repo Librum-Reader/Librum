@@ -47,6 +47,8 @@ public:
     MOCK_METHOD(bool, trackBook, (const Book& book), (override));
     MOCK_METHOD(bool, untrackBook, (const QUuid&), (override));
     MOCK_METHOD(bool, updateTrackedBook, (const Book&), (override));
+    MOCK_METHOD(void, saveFolders, (const Folder&), (override));
+    MOCK_METHOD(Folder, loadFolders, (), (override));
 };
 
 struct ALibraryStorageManager : public ::testing::Test

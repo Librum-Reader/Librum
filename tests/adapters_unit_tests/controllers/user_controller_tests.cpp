@@ -21,17 +21,22 @@ class UserServiceMock : public application::IUserService
 public:
     MOCK_METHOD(void, loadUser, (bool), (override));
     MOCK_METHOD(void, deleteUser, (), (override));
-    MOCK_METHOD(void, forgotPassword, (const QString&), (override));
     MOCK_METHOD(void, downloadUser, (), (override));
+
     MOCK_METHOD(QString, getFirstName, (), (const, override));
     MOCK_METHOD(void, setFirstName, (const QString&), (override));
+
     MOCK_METHOD(QString, getLastName, (), (const, override));
     MOCK_METHOD(void, setLastName, (const QString&), (override));
+
     MOCK_METHOD(QString, getEmail, (), (const, override));
     MOCK_METHOD(void, setEmail, (const QString&), (override));
-    MOCK_METHOD(void, changePassword, (const QString&), (override));
+
+    MOCK_METHOD(QString, getRole, (), (const, override));
+
     MOCK_METHOD(qint64, getUsedBookStorage, (), (const, override));
     MOCK_METHOD(qint64, getBookStorageLimit, (), (const, override));
+
     MOCK_METHOD(QString, getProfilePicturePath, (), (const, override));
     MOCK_METHOD(void, setProfilePicturePath, (const QString&), (override));
     MOCK_METHOD(void, deleteProfilePicture, (), (override));
@@ -43,6 +48,9 @@ public:
     MOCK_METHOD(QUuid, addTag, (const domain::entities::Tag&), (override));
     MOCK_METHOD(bool, deleteTag, (const QUuid&), (override));
     MOCK_METHOD(bool, renameTag, (const QUuid&, const QString&), (override));
+
+    MOCK_METHOD(void, forgotPassword, (const QString&), (override));
+    MOCK_METHOD(void, changePassword, (const QString&), (override));
 };
 
 struct AUserController : public ::testing::Test
