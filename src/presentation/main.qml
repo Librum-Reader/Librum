@@ -158,6 +158,7 @@ ApplicationWindow {
             if (spamStopper.available) {
                 LibraryController.syncWithServer()
                 UserController.syncWithServer()
+                FolderController.syncWithServer()
                 spamStopper.available = false
                 spamStopper.start()
             }

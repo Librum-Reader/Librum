@@ -28,6 +28,8 @@ public:
     virtual data_models::FoldersProxyModel* getFoldersModel() = 0;
     virtual data_models::IconProxyModel* getIconModel() = 0;
 
+    Q_INVOKABLE virtual void syncWithServer() = 0;
+
     Q_INVOKABLE virtual dtos::FolderDto getFolder(QString uuid) = 0;
     Q_INVOKABLE virtual bool createFolder(QString name, QString color,
                                           QString icon, QString description,

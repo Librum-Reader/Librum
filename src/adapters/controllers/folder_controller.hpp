@@ -21,6 +21,8 @@ public:
     data_models::FoldersProxyModel* getFoldersModel() override;
     data_models::IconProxyModel* getIconModel() override;
 
+    void syncWithServer() override;
+
     dtos::FolderDto getFolder(QString uuid) override;
     bool createFolder(QString name, QString color, QString icon,
                       QString description, QString parent = "") override;

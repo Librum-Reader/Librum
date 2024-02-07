@@ -17,6 +17,7 @@ class APPLICATION_EXPORT IFolderService : public QObject
 public:
     virtual ~IFolderService() noexcept = default;
 
+    virtual void syncWithServer() = 0;
     virtual domain::entities::Folder* getRootFolder() = 0;
     virtual domain::entities::Folder* getFolder(const QUuid& uuid) = 0;
     virtual bool createFolder(const QString& name, QString color, QString icon,

@@ -48,6 +48,11 @@ data_models::IconProxyModel* FolderController::getIconModel()
     return &m_iconProxyModel;
 }
 
+void FolderController::syncWithServer()
+{
+    m_folderService->syncWithServer();
+}
+
 dtos::FolderDto FolderController::getFolder(QString uuid)
 {
     auto folder = m_folderService->getFolder(QUuid(uuid));

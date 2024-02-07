@@ -20,8 +20,13 @@ FolderService::FolderService(IFolderStorageGateway* folderStorageGateway,
     connect(&m_fetchChangesTimer, &QTimer::timeout, this,
             [this]()
             {
-                m_folderStorageGateway->fetchFolders(m_authenticationToken);
+                syncWithServer();
             });
+}
+
+void FolderService::syncWithServer()
+{
+    m_folderStorageGateway->fetchFolders(m_authenticationToken);
 }
 
 Folder* FolderService::getRootFolder()

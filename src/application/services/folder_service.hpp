@@ -17,6 +17,7 @@ public:
     FolderService(IFolderStorageGateway* folderStorageGateway,
                   ILocalLibraryTracker* localLibraryTracker);
 
+    void syncWithServer() override;
     domain::entities::Folder* getRootFolder() override;
     domain::entities::Folder* getFolder(const QUuid& uuid) override;
     bool createFolder(const QString& name, QString color, QString icon,
@@ -47,7 +48,7 @@ private:
     std::unique_ptr<domain::entities::Folder> m_rootFolder;
 
     QTimer m_fetchChangesTimer;
-    int m_fetchChangesInterval = 200'000;
+    int m_fetchChangesInterval = 120'000;  // Auto sync every 2 mins
 };
 
 }  // namespace application::services
