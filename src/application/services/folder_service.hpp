@@ -38,11 +38,6 @@ private:
     void saveChanges();
     void updateFoldersRecursively(domain::entities::Folder* current,
                                   domain::entities::Folder& remoteFolder);
-    void addMissingChildrenToFolder(domain::entities::Folder* current,
-                                    domain::entities::Folder& remoteRoot);
-    void removeNonExistentChildrenFromFolder(
-        domain::entities::Folder* current,
-        domain::entities::Folder& remoteFolder);
 
     IFolderStorageGateway* m_folderStorageGateway;
     ILocalLibraryTracker* m_localLibraryTracker;

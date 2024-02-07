@@ -271,71 +271,30 @@ void FolderService::updateFoldersRecursively(Folder* current,
                                current->getIndexInParent());
         }
 
-        addMissingChildrenToFolder(current, *remoteFolder);
-        removeNonExistentChildrenFromFolder(current, *remoteFolder);
+        // If the remote folder has changed, we treat it as the source of
+        // through and replace the whole subtree of the current folder with the
+        // remote subtree.
+        for(auto& child : current->getChildren())
+        {
+            emit beginRemoveFolder(current, child->getIndexInParent());
+            current->removeChild(child->getUuid());
+            emit endRemoveFolder();
+        }
+
+        for(auto& child : remoteFolder->getChildren())
+        {
+            child->setParent(current);
+            emit beginInsertFolder(current, current->childCount());
+            current->addChild(std::move(child));
+            emit endInsertFolder();
+        }
+
+        return;
     }
 
     for(auto& child : current->getChildren())
     {
         updateFoldersRecursively(child.get(), remoteRoot);
-    }
-}
-
-void FolderService::addMissingChildrenToFolder(Folder* current,
-                                               Folder& remoteFolder)
-{
-    for(auto& remoteChild : remoteFolder.getChildren())
-    {
-        auto localIndex = current->getIndexOfChild(remoteChild->getUuid());
-        if(localIndex == -1)
-        {
-            emit beginInsertFolder(current, current->childCount());
-            current->addChild(std::move(remoteChild));
-            emit endInsertFolder();
-        }
-    }
-}
-
-void FolderService::removeNonExistentChildrenFromFolder(Folder* current,
-                                                        Folder& remoteFolder)
-{
-    std::vector<QUuid> foldersToRemove;
-    for(auto& localChild : current->getChildren())
-    {
-        int remoteFolderIndex = -1;
-        for(std::size_t i = 0; i < remoteFolder.getChildren().size(); ++i)
-        {
-            auto& remoteChild = remoteFolder.getChildren()[i];
-
-            // The remoteChild is nullptr when it was moved from the
-            // remoteFolder's children in the 'addMissingChildrenToFolder' step.
-            if(remoteChild == nullptr)
-            {
-                remoteFolderIndex = -2;
-                continue;
-            }
-
-            if(remoteChild->getUuid() == localChild->getUuid())
-            {
-                remoteFolderIndex = i;
-                break;
-            }
-        }
-
-        // When remoteFolderIndex is -2, we just want to skip it and continue,
-        // since a child that was just added can not need to be removed.
-        if(remoteFolderIndex == -2)
-            continue;
-
-        if(remoteFolderIndex == -1)
-            foldersToRemove.emplace_back(localChild->getUuid());
-    }
-
-    for(auto& uuid : foldersToRemove)
-    {
-        emit beginRemoveFolder(current, current->getIndexOfChild(uuid));
-        current->removeChild(uuid);
-        emit endRemoveFolder();
     }
 }
 
