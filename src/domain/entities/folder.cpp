@@ -378,9 +378,11 @@ Folder Folder::fromJson(const QJsonObject& jsonFolder, Folder* parent)
     auto indexInParent = jsonFolder["indexInParent"].toInt();
     Folder folder(name, color, icon, description, uuid);
     folder.setParent(parent);
-    folder.setLastModified(
-        QDateTime::fromString(dateTime, dateTimeStringFormat));
     folder.setIndexInParent(indexInParent);
+
+    auto lastModified = QDateTime::fromString(dateTime, dateTimeStringFormat);
+    lastModified.setTimeSpec(Qt::UTC);
+    folder.setLastModified(lastModified);
 
     auto jsonChildren = jsonFolder["children"].toArray();
     for(const auto& jsonChild : jsonChildren)
