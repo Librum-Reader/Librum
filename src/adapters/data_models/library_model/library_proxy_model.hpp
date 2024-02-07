@@ -22,6 +22,8 @@ class ADAPTERS_EXPORT LibraryProxyModel : public QSortFilterProxyModel
     Q_PROPERTY(
         int sortRole READ getSortRole WRITE setSortRole NOTIFY sortRoleUpdated)
     Q_PROPERTY(bool isFiltering READ getIsFiltering NOTIFY filterUpdated)
+    Q_PROPERTY(QString folder READ getFolderFilter WRITE setFolderFilter NOTIFY
+                   folderFilterChanged)
 
 public:
     enum SortRole
@@ -57,10 +59,14 @@ public:
     void setSortString(QString newSortString);
     QString getSortString();
 
+    QString getFolderFilter() const;
+    void setFolderFilter(const QString& newFolder);
+
 signals:
     void sortStringUpdated();
     void sortRoleUpdated();
     void filterUpdated();
+    void folderFilterChanged();
 
 private:
     std::optional<bool> leftBookIsCloserToSortString(
@@ -77,8 +83,10 @@ private:
     bool filterAcceptsFormat(const QModelIndex& bookIndex) const;
     bool filterAcceptsStatus(const QModelIndex& bookIndex) const;
     bool filterAcceptsLanguage(const QModelIndex& bookIndex) const;
+    bool filterAcceptsFolder(const QModelIndex& bookIndex) const;
 
     FilterRequest m_filterRequest;
+    QString m_folder = "all";
     QString m_sortString = "";
     std::unique_ptr<rapidfuzz::fuzz::CachedRatio<unsigned int>> m_filterScorer;
     std::vector<QString> m_tags;

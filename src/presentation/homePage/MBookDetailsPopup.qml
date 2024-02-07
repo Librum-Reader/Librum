@@ -209,7 +209,6 @@ Popup {
                     ScrollView {
                         id: dataSideScrollView
                         anchors.fill: parent
-                        anchors.topMargin: 0
                         anchors.rightMargin: -10
                         anchors.leftMargin: 26
                         contentWidth: width
@@ -230,58 +229,37 @@ Popup {
                             anchors.rightMargin: 8
                             spacing: 13
 
-                            MLabeledInputBox {
+                            component InputBox: MLabeledInputBox {
                                 id: titleField
                                 Layout.fillWidth: true
                                 boxHeight: 34
-                                headerText: qsTr("Title")
                                 headerFontWeight: Font.Bold
                                 headerFontSize: Fonts.size11dot5
+                                placeholderContent: qsTr("Unknown")
+                                placeholderColor: Style.colorPlaceholderText
+                                headerToBoxSpacing: 3
+                                inputFontSize: Fonts.size12
+                                inputFontColor: Style.colorLightInputText
+                                textPadding: 12
+                                borderWidth: 1
+                                borderRadius: 4
+                            }
+
+                            InputBox {
+                                headerText: qsTr("Title")
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.title : ""
-                                placeholderContent: qsTr("Unknown")
-                                placeholderColor: Style.colorPlaceholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                             }
 
-                            MLabeledInputBox {
-                                id: authorsField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Authors")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.authors : ""
-                                placeholderContent: qsTr("Unknown")
-                                placeholderColor: Style.colorPlaceholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                             }
 
-                            MLabeledInputBox {
-                                id: pagesField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Pages")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.pageCount : internal.placeholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                                 readOnly: true
                             }
 
@@ -302,114 +280,44 @@ Popup {
                                 onItemChanged: languageComboBox.closePopup()
                             }
 
-                            MLabeledInputBox {
-                                id: documentCreatorField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Document creator")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creator : ""
-                                placeholderContent: qsTr("Unknown")
-                                placeholderColor: Style.colorPlaceholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                             }
 
-                            MLabeledInputBox {
-                                id: creationDateField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Creation date")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creationDate : ""
-                                placeholderContent: qsTr("Unknown")
-                                placeholderColor: Style.colorPlaceholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
-                            }
-
-                            MLabeledInputBox {
-                                id: formatField
-                                Layout.fillWidth: true
-                                boxHeight: 34
-                                headerText: qsTr("Format")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
-                                text: Globals.selectedBook !== null
-                                      && Globals.selectedBook.format !== "" ? Globals.selectedBook.format : internal.placeholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                                 readOnly: true
                             }
 
-                            MLabeledInputBox {
-                                id: sizeField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
+                                headerText: qsTr("Format")
+                                text: Globals.selectedBook !== null
+                                      && Globals.selectedBook.format !== "" ? Globals.selectedBook.format : internal.placeholderText
+                                readOnly: true
+                            }
+
+                            InputBox {
                                 headerText: qsTr("Document size")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook !== null
                                       && Globals.selectedBook.documentSize
                                       !== "" ? Globals.selectedBook.documentSize : internal.placeholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                                 readOnly: true
                             }
 
-                            MLabeledInputBox {
-                                id: addedField
-                                Layout.fillWidth: true
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Added")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.addedToLibrary : internal.placeholderText
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                                 readOnly: true
                             }
 
-                            MLabeledInputBox {
-                                id: lastOpenedField
-                                Layout.fillWidth: true
-                                Layout.bottomMargin: 3
-                                boxHeight: 34
+                            InputBox {
                                 headerText: qsTr("Last opened")
-                                headerFontWeight: Font.Bold
-                                headerFontSize: Fonts.size11dot5
+                                Layout.bottomMargin: 3
                                 text: Globals.selectedBook !== null ? Globals.selectedBook.lastOpened : internal.placeholderText
-
-                                headerToBoxSpacing: 3
-                                inputFontSize: Fonts.size12
-                                inputFontColor: Style.colorLightInputText
-                                textPadding: 12
-                                borderWidth: 1
-                                borderRadius: 4
                                 readOnly: true
                             }
                         }

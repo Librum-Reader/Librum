@@ -18,6 +18,10 @@
 #include "dictionary_controller.hpp"
 #include "dictionary_gateway.hpp"
 #include "dictionary_service.hpp"
+#include "folder_controller.hpp"
+#include "folder_service.hpp"
+#include "folder_storage_access.hpp"
+#include "folder_storage_gateway.hpp"
 #include "free_books_controller.hpp"
 #include "free_books_service.hpp"
 #include "free_books_storage_access.hpp"
@@ -107,6 +111,12 @@ const auto diConfig = []
         di::bind<IDictionaryService>().to<services::DictionaryService>(),
         di::bind<IDictionaryGateway>().to<gateways::DictionaryGateway>(),
         di::bind<IDictionaryAccess>().to<persistence::DictionaryAccess>(),
+
+        // Folders
+        di::bind<IFolderController>().to<controllers::FolderController>(),
+        di::bind<IFolderService>().to<services::FolderService>(),
+        di::bind<IFolderStorageGateway>().to<gateways::FolderStorageGateway>(),
+        di::bind<IFolderStorageAccess>().to<persistence::FolderStorageAccess>(),
 
         // Settings
         di::bind<ISettingsController>().to<controllers::SettingsController>(),

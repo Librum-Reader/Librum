@@ -18,8 +18,10 @@ add_library(infrastructure
                     persistance/dictionary_access.hpp
                     persistance/ai_explanation_access.cpp
                     persistance/ai_explanation_access.hpp
-                    
+                    persistance/folder_storage_access.hpp
+                    persistance/folder_storage_access.cpp
                     persistance/api_error_helper.hpp
+
                     data/endpoints.hpp
 )
 
@@ -30,6 +32,7 @@ target_include_directories(infrastructure
                     ${CMAKE_CURRENT_SOURCE_DIR}/data
                     ${CMAKE_CURRENT_SOURCE_DIR}
                     ${ADAPTERS_INCLUDES}
+                    ${APPLICATION_INCLUDES}
 )
 target_compile_definitions(infrastructure
                 PRIVATE

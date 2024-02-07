@@ -197,6 +197,7 @@ Item {
                         contentItem.maximumFlickVelocity = 2000
                         contentItem.boundsBehavior = Flickable.StopAtBounds
                         contentItem.boundsMovement = Flickable.StopAtBounds
+                        contentItem.flickableDirection = Flickable.VerticalFlick
                     }
                 }
             }

@@ -4,7 +4,6 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 set(application_SRC
     interfaces/services/i_authentication_service.hpp
     interfaces/services/i_free_books_service.hpp
-    interfaces/gateways/i_free_books_storage_gateway.hpp
     interfaces/services/i_library_service.hpp
     interfaces/services/i_user_service.hpp
     interfaces/services/i_settings_service.hpp
@@ -12,15 +11,18 @@ set(application_SRC
     interfaces/services/i_book_service.hpp
     interfaces/services/i_dictionary_service.hpp
     interfaces/services/i_ai_explanation_service.hpp
+    interfaces/services/i_folder_service.hpp
+    interfaces/gateways/i_free_books_storage_gateway.hpp
     interfaces/gateways/i_user_storage_gateway.hpp
     interfaces/gateways/i_library_storage_gateway.hpp
     interfaces/gateways/i_authentication_gateway.hpp
     interfaces/gateways/i_app_info_gateway.hpp
     interfaces/gateways/i_dictionary_gateway.hpp
     interfaces/gateways/i_ai_explanation_gateway.hpp
+    interfaces/gateways/i_folder_storage_gateway.hpp
+    interfaces/managers/i_library_storage_manager.hpp
     interfaces/utility/i_metadata_extractor.hpp
     interfaces/utility/i_local_library_tracker.hpp
-    interfaces/managers/i_library_storage_manager.hpp
     
     services/authentication_service.cpp
     services/authentication_service.hpp
@@ -40,6 +42,8 @@ set(application_SRC
     services/dictionary_service.hpp
     services/ai_explanation_service.cpp
     services/ai_explanation_service.hpp
+    services/folder_service.hpp
+    services/folder_service.cpp
     
     managers/library_storage_manager.cpp
     managers/library_storage_manager.hpp

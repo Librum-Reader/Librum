@@ -17,12 +17,12 @@ public:
     void loginUser(
         const domain::value_objects::LoginModel& loginModel) override;
     void tryAutomaticLogin() override;
-    void logoutUser() override;
     void registerUser(
         const domain::value_objects::RegisterModel& registerModel) override;
     void checkIfEmailConfirmed(const QString& email) override;
 
 public slots:
+    void logoutUser() override;
     void processAuthenticationResult(const QString& token,
                                      ErrorCode errorCode) override;
     void processRegistrationResult(ErrorCode errorCode) override;

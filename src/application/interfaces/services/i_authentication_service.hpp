@@ -21,10 +21,12 @@ public:
     virtual void loginUser(
         const domain::value_objects::LoginModel& loginModel) = 0;
     virtual void tryAutomaticLogin() = 0;
-    virtual void logoutUser() = 0;
     virtual void registerUser(
         const domain::value_objects::RegisterModel& registerModel) = 0;
     virtual void checkIfEmailConfirmed(const QString& email) = 0;
+
+public slots:
+    virtual void logoutUser() = 0;
 
 signals:
     void loginFinished(ErrorCode errorCode, const QString& message = "");

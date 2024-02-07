@@ -43,6 +43,7 @@ public:
                            const QJsonObject& bookForUpdate) = 0;
 
 signals:
+    void authTokenExpired();
     void userReady(const QByteArray& data);
     void gettingUserFailed();
     void profilePictureReady(QByteArray& data);

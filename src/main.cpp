@@ -21,6 +21,7 @@
 #include "book_operation_status.hpp"
 #include "book_service.hpp"
 #include "dependency_injection.hpp"
+#include "folder_dto.hpp"
 #include "free_books_model.hpp"
 #include "i_free_books_service.hpp"
 #include "i_library_service.hpp"
@@ -32,7 +33,6 @@
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
-#include "sidebar_state.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
@@ -77,6 +77,7 @@ int main(int argc, char* argv[])
     qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
+    qRegisterMetaType<adapters::dtos::FolderDto>();
     qRegisterMetaType<adapters::dtos::DictionaryEntryDto>();
     qRegisterMetaType<adapters::dtos::WordTypeDto>();
     qRegisterMetaType<adapters::dtos::WordDefinitionDto>();
@@ -118,6 +119,12 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "DictionaryController",
                                  dictionaryController.get());
 
+    // Folder Stack
+    auto* folderService = config::diConfig().create<application::IFolderService*>();
+    auto folderController = std::make_unique<FolderController>(folderService);
+    qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "FolderController",
+                                 folderController.get());
+
     // Library Stack
     auto* libraryService = config::diConfig().create<application::ILibraryService*>();
     auto libraryController = std::make_unique<LibraryController>(libraryService);
@@ -142,11 +149,6 @@ int main(int argc, char* argv[])
     qmlRegisterSingletonInstance("Librum.controllers", 1, 0, "SettingsController",
                                  settingsController.get());
 
-    // Sidebar
-    auto sidebarState = std::make_unique<cpp_elements::SidebarState>();
-    qmlRegisterSingletonInstance("Librum.elements", 1, 0, "SidebarState",
-                                 sidebarState.get());
-
     // Enums
     qmlRegisterUncreatableMetaObject(application::book_operation_status::staticMetaObject, "Librum.controllers",
                                      1, 0, "BookOperationStatus",
@@ -164,36 +166,40 @@ int main(int argc, char* argv[])
                                      1, 0, "ErrorCode",
                                      "This is an uncreatable enum!");
 
+    // Connect the user service's loggedOut with the authentication service's loggedOut
+    // signal, since both services need to be able to log out the user.
+    QObject::connect(userService, &application::IUserService::logoutUser,
+                     authenticationService, &application::IAuthenticationService::logoutUser);
+
 
     // Setup login connections
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      libraryService, &application::ILibraryService::setupUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      libraryService, &application::ILibraryService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
-                     freeBooksService, &application::IFreeBooksService::setupUserData);
+                     folderService, &application::IFolderService::setupUserData);
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
+                     folderService, &application::IFolderService::clearUserData);
 
+    QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
+                     freeBooksService, &application::IFreeBooksService::setupUserData);
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      aiExplanationService, &application::IAiExplanationService::setupUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      aiExplanationService, &application::IAiExplanationService::clearUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
         freeBooksService, &application::IFreeBooksService::clearUserData);
 
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      userService, &application::IUserService::setupUserData);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      userService, &application::IUserService::clearUserData);
 
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedIn,
                      settingsService, &application::ISettingsService::loadUserSettings);
-
     QObject::connect(authenticationService, &application::IAuthenticationService::loggedOut,
                      settingsService, &application::ISettingsService::clearUserData);
 

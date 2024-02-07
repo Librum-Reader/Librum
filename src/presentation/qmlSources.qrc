@@ -13,7 +13,6 @@
         <file>sidebar/MProfilePopup.qml</file>
         <file>sidebar/MProfilePopupItem.qml</file>
         <file>sidebar/MSidebar.qml</file>
-        <file>sidebar/MSidebarAnimations.qml</file>
         <file>sidebar/MSidebarItem.qml</file>
         <file>StyleSheet.qml</file>
         <file>IconSheet.qml</file>
@@ -103,5 +102,14 @@
         <file>TranslationsModel.qml</file>
         <file>homePage/MBookMultiSelectRightClickPopup.qml</file>
         <file>modules/CustomComponents/MLanguageModel.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebarItem.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebar.qml</file>
+        <file>homePage/folderSidebar/MAddFolderPopup.qml</file>
+        <file>homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml</file>
+        <file>homePage/folderSidebar/MDeleteFolderPopup.qml</file>
+        <file>homePage/folderSidebar/MMoveToFolderPopup.qml</file>
+        <file>homePage/folderSidebar/MSelectColorPopup.qml</file>
+        <file>homePage/folderSidebar/MDescriptionPopup.qml</file>
+        <file>homePage/folderSidebar/MSelectIconPopup.qml</file>
     </qresource>
 </RCC>

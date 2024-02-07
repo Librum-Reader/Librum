@@ -1,6 +1,7 @@
 #pragma once
 #include <QAbstractListModel>
 #include <QByteArray>
+#include <QList>
 #include <QUuid>
 #include <QVariant>
 #include <vector>
@@ -37,12 +38,12 @@ public:
         CurrentPageRole,
         AddedToLibraryRole,
         LastOpenedRole,
+        ParentFolderIdRole,
         CoverRole,
         TagsRole,
         DownloadedRole,
         MediaDownloadProgressRole,
-        ExistsOnlyOnClientRole,
-        Invalid
+        ExistsOnlyOnClientRole
     };
 
     explicit LibraryModel(const std::vector<domain::entities::Book>& data);
@@ -66,7 +67,6 @@ public slots:
 private:
     QList<dtos::TagDto> convertTagsToDtos(
         const QList<domain::entities::Tag>& tags) const;
-    QVector<int> getAllRoles();
 
     const std::vector<domain::entities::Book>& m_data;
 };

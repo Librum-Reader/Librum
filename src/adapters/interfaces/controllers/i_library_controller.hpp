@@ -46,6 +46,7 @@ public:
         CurrentPage,
         AddedToLibrary,
         LastModified,
+        ParentFolderId,
         Invalid
     };
     Q_ENUM(MetaProperty);
@@ -74,6 +75,8 @@ public:
         const QString& uuid) = 0;
     Q_INVOKABLE virtual int getBookCount() const = 0;
     Q_INVOKABLE virtual bool isSyncing() const = 0;
+    Q_INVOKABLE virtual void removeAllBooksFromFolderWithId(
+        const QString& folderId) = 0;
 
     Q_INVOKABLE virtual int saveBookToFile(const QString& uuid,
                                            const QUrl& path) = 0;

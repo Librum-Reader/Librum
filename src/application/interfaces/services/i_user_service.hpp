@@ -34,6 +34,8 @@ public:
     virtual QString getEmail() const = 0;
     virtual void setEmail(const QString& newEmail) = 0;
 
+    virtual QString getRole() const = 0;
+
     virtual qint64 getUsedBookStorage() const = 0;
     virtual qint64 getBookStorageLimit() const = 0;
 
@@ -50,6 +52,7 @@ public:
     virtual bool renameTag(const QUuid& uuid, const QString& newName) = 0;
 
 signals:
+    void logoutUser();
     void finishedLoadingUser(bool success);
     void profilePictureChanged();
     void tagInsertionStarted(int index);

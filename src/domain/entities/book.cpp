@@ -27,11 +27,11 @@ Book::Book(const QString& filePath, const BookMetaData& metaData,
 
 bool Book::operator==(const Book& rhs) const
 {
-    bool dataIsTheSame = m_uuid == rhs.m_uuid &&
-                         m_projectGutenbergId == rhs.m_projectGutenbergId &&
-                         m_filePath == rhs.m_filePath &&
-                         m_isDownloaded == rhs.m_isDownloaded &&
-                         m_currentPage == rhs.m_currentPage;
+    bool dataIsTheSame =
+        m_uuid == rhs.m_uuid && m_parentFolderId == rhs.m_parentFolderId &&
+        m_projectGutenbergId == rhs.m_projectGutenbergId &&
+        m_filePath == rhs.m_filePath && m_isDownloaded == rhs.m_isDownloaded &&
+        m_currentPage == rhs.m_currentPage;
     bool tagsAreTheSame = rhs.tagsAreTheSame(m_tags);
     bool highlightsAreTheSame = rhs.highlightsAreTheSame(m_highlights);
     bool bookmarksAreTheSame = rhs.bookmarksAreTheSame(m_bookmarks);
@@ -43,6 +43,16 @@ bool Book::operator==(const Book& rhs) const
 const QUuid& Book::getUuid() const
 {
     return m_uuid;
+}
+
+const QUuid& Book::getParentFolderId() const
+{
+    return m_parentFolderId;
+}
+
+void Book::setParentFolderId(const QUuid& newParentFolderId)
+{
+    m_parentFolderId = newParentFolderId;
 }
 
 int Book::getProjectGutenbergId() const
@@ -521,6 +531,8 @@ void Book::update(const Book& other)
         m_metaData.colorTheme = other.getColorTheme();
     if(m_metaData.fileHash != other.getFileHash())
         m_metaData.fileHash = other.getFileHash();
+    if(m_parentFolderId != other.getParentFolderId())
+        m_parentFolderId = other.getParentFolderId();
 
     if(!tagsAreTheSame(other.getTags()))
         m_tags = other.getTags();
@@ -611,6 +623,8 @@ QByteArray Book::toJson() const
 {
     QJsonObject book {
         { "uuid", getUuid().toString(QUuid::WithoutBraces) },
+        { "parentFolderId",
+          getParentFolderId().toString(QUuid::WithoutBraces) },
         { "projectGutenbergId", getProjectGutenbergId() },
         { "title", getTitle() },
         { "authors", getAuthors() },
@@ -687,11 +701,13 @@ Book Book::fromJson(const QJsonObject& jsonBook)
     QString filePath = jsonBook["filePath"].toString();
     int currentPage = jsonBook["currentPage"].toInt();
     QString uuid = jsonBook["uuid"].toString();
+    QString parentFolderId = jsonBook["parentFolderId"].toString();
     int projectGutenbergId = jsonBook["projectGutenbergId"].toInt();
     bool existsOnlyOnClient = jsonBook["existsOnlyOnClient"].toBool(false);
 
     Book book(filePath, metaData, currentPage, uuid);
     book.setProjectGutenbergId(projectGutenbergId);
+    book.setParentFolderId(QUuid(parentFolderId));
     book.setExistsOnlyOnClient(existsOnlyOnClient);
     addTagsToBook(book, jsonBook["tags"].toArray());
     addHighlightsToBook(book, jsonBook["highlights"].toArray());

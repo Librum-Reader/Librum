@@ -44,6 +44,7 @@ public:
                            const QString& newName) = 0;
 
 signals:
+    void authTokenExpired();
     void finishedGettingUser(const domain::entities::User& user, bool success);
     void profilePictureReady(QByteArray& data);
     void passwordChangeFinished(bool success, const QString& reason);

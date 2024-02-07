@@ -2,7 +2,6 @@
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <algorithm>
-#include <numeric>
 #include "book.hpp"
 #include "library_model.hpp"
 #include "string_utils.hpp"
@@ -92,6 +91,16 @@ std::optional<bool> LibraryProxyModel::leftBookIsCloserToSortString(
     return std::nullopt;
 }
 
+bool LibraryProxyModel::filterAcceptsRow(int source_row,
+                                         const QModelIndex& source_parent) const
+{
+    auto index = sourceModel()->index(source_row, 0, source_parent);
+
+    return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
+           filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
+           filterAcceptsLanguage(index) && filterAcceptsFolder(index);
+}
+
 void LibraryProxyModel::setFilterRequest(QString authors, QString format,
                                          QString language, bool onlyBooks,
                                          bool onlyFiles, bool read, bool unread)
@@ -117,16 +126,6 @@ bool LibraryProxyModel::getIsFiltering()
            !m_filterRequest.language.isEmpty() || m_filterRequest.onlyBooks ||
            m_filterRequest.onlyFiles || m_filterRequest.read ||
            m_filterRequest.unread;
-}
-
-bool LibraryProxyModel::filterAcceptsRow(int source_row,
-                                         const QModelIndex& source_parent) const
-{
-    auto index = sourceModel()->index(source_row, 0, source_parent);
-
-    return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
-           filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
-           filterAcceptsLanguage(index);
 }
 
 void LibraryProxyModel::setSortRole(int newRole)
@@ -354,6 +353,38 @@ bool LibraryProxyModel::filterAcceptsLanguage(
     auto language = rawLanguage.toString().toLower();
 
     return language == m_filterRequest.language;
+}
+
+bool LibraryProxyModel::filterAcceptsFolder(const QModelIndex& bookIndex) const
+{
+    if(m_folder == "all")
+        return true;
+
+    auto uuid = sourceModel()
+                    ->data(bookIndex, LibraryModel::ParentFolderIdRole)
+                    .toString();
+
+    auto emptyUuidString = QUuid().toString(QUuid::WithoutBraces);
+    if(m_folder == "unsorted" && uuid == emptyUuidString)
+        return true;
+
+    return uuid == m_folder;
+}
+
+QString LibraryProxyModel::getFolderFilter() const
+{
+    return m_folder;
+}
+
+void LibraryProxyModel::setFolderFilter(const QString& newFolder)
+{
+    if(m_folder == newFolder)
+        return;
+
+    m_folder = newFolder;
+
+    invalidateFilter();
+    emit folderFilterChanged();
 }
 
 }  // namespace adapters::data_models

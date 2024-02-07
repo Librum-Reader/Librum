@@ -14,7 +14,8 @@ class DOMAIN_EXPORT User : public QObject
 
 public:
     User(const QString& firstName, const QString& lastName,
-         const QString& email, qint64 usedBookStorage, qint64 bookStorageLimit,
+         const QString& email, const QString& role, qint64 usedBookStorage,
+         qint64 bookStorageLimit,
          const QDateTime& profilePictureLastUpdated = QDateTime(),
          bool hasProfilePicture = false);
 
@@ -26,6 +27,9 @@ public:
 
     const QString& getEmail() const;
     void setEmail(const QString& newEmail);
+
+    const QString& getRole() const;
+    void setRole(const QString& newRole);
 
     qint64 getUsedBookStorage() const;
     void setUsedBookStorage(qint64 newUsedBookStorage);
@@ -64,6 +68,7 @@ private:
     QString m_firstName;
     QString m_lastName;
     QString m_email;
+    QString m_role;
     qint64 m_usedBookStorage;
     qint64 m_bookStorageLimit;
     QDateTime m_profilePictureLastUpdated;

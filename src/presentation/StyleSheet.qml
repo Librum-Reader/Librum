@@ -81,6 +81,7 @@ Item {
     property color colorDefaultProfilePicture
     property color colorTextSelection
     property color colorScrollBarHandle
+    property color colorDefaultFolderIcon
 
     state: (SettingsController.appearanceSettings.Theme
             === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
@@ -324,6 +325,10 @@ Item {
                 target: styleSheet
                 colorScrollBarHandle: "#999999"
             }
+            PropertyChanges {
+                target: styleSheet
+                colorDefaultFolderIcon: "#8E8EA9"
+            }
         },
         State {
             name: "Dark"
@@ -562,6 +567,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorScrollBarHandle: "#999999"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorDefaultFolderIcon: "#989898"
             }
         }
     ]

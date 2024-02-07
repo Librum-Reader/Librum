@@ -83,6 +83,8 @@ QVariant LibraryModel::data(const QModelIndex& index, int role) const
                    : book.getLastOpened().toLocalTime().toString(
                          Book::dateTimeStringFormat);
         break;
+    case ParentFolderIdRole:
+        return book.getParentFolderId().toString(QUuid::WithoutBraces);
     case CoverRole:
     {
         auto pathWithScheme =
@@ -126,6 +128,7 @@ QHash<int, QByteArray> LibraryModel::roleNames() const
         { BookReadingProgressRole, "bookReadingProgress" },
         { AddedToLibraryRole, "addedToLibrary" },
         { LastOpenedRole, "lastOpened" },
+        { ParentFolderIdRole, "parentFolderId" },
         { CoverRole, "cover" },
         { TagsRole, "tags" },
         { DownloadedRole, "downloaded" },
@@ -159,18 +162,6 @@ QList<dtos::TagDto> LibraryModel::convertTagsToDtos(
     return tagDtos;
 }
 
-QVector<int> LibraryModel::getAllRoles()
-{
-    QVector<int> allRoles;
-    int lastRole = Invalid;
-    for(int i = TitleRole; i < lastRole; ++i)
-    {
-        allRoles.push_back(i);
-    }
-
-    return allRoles;
-}
-
 void LibraryModel::refreshTags(int row)
 {
     emit dataChanged(index(row, 0), index(row, 0), { TagsRole });
@@ -178,9 +169,7 @@ void LibraryModel::refreshTags(int row)
 
 void LibraryModel::refreshBook(int row)
 {
-    auto allRoles = getAllRoles();
-
-    emit dataChanged(index(row, 0), index(row, 0), allRoles);
+    emit dataChanged(index(row, 0), index(row, 0));
 }
 
 void LibraryModel::startBookClearing()

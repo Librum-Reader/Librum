@@ -12,16 +12,18 @@ import Librum.globals
 import Librum.models
 import "toolbar"
 import "manageTagsPopup"
+import "folderSidebar"
 
 Page {
     id: root
-    horizontalPadding: 64
     rightPadding: 70
     bottomPadding: 20
     background: Rectangle {
         anchors.fill: parent
         color: Style.colorPageBackground
     }
+
+    Component.onCompleted: LibraryController.libraryModel.folder = "all"
 
     Shortcut {
         sequence: SettingsController.shortcuts.AddBook
@@ -36,14 +38,61 @@ Page {
         }
     }
 
+    MFolderSidebar {
+        id: folderSidebar
+        height: parent.height + root.bottomPadding
+    }
+
+    // Left spacing for the content
+    Item {
+        id: contentLeftSpacing
+        anchors.left: folderSidebar.right
+        height: parent.height
+        width: 64
+    }
+
+    Rectangle {
+        id: foldersButton
+        x: -16 + folderSidebar.width
+        z: -1
+        y: root.height / 2 + 36
+        width: 52
+        height: 42
+        color: Style.colorControlBackground
+        radius: width
+        border.width: 1
+        border.color: Style.colorButtonBorder
+        opacity: foldersButtonMouseArea.pressed ? 0.8 : 1
+
+        Image {
+            id: folderImage
+            x: parent.width / 2 - width / 2 + 5
+            anchors.verticalCenter: parent.verticalCenter
+            sourceSize.width: folderSidebar.opened ? 25 : 20
+            sourceSize.height: folderSidebar.opened ? 25 : 20
+            source: folderSidebar.opened ? Icons.arrowheadBackIcon : Icons.folder
+        }
+
+        MouseArea {
+            id: foldersButtonMouseArea
+            anchors.fill: parent
+
+            onClicked: {
+                folderSidebar.toggle()
+            }
+        }
+    }
+
     DropArea {
         id: dropArea
-        anchors.fill: parent
+        anchors.left: contentLeftSpacing.right
+        anchors.right: parent.right
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
 
         onDropped: drop => internal.addBooks(drop.urls)
 
         ColumnLayout {
-            id: layout
             anchors.fill: parent
             spacing: 0
 
@@ -278,12 +327,18 @@ Page {
                             close()
                         }
 
-                        onMarkAsReadClicked: {
+                        onAddToFolderClicked: {
+                            moveBookToFolderPopup.bookUuid = Globals.selectedBook.uuid
+                            moveBookToFolderPopup.open()
                             close()
                         }
 
                         onRemoveClicked: {
-                            acceptDeletionPopup.open()
+                            if (!internal.inFolderMode)
+                                acceptDeletionPopup.open()
+                            else
+                                acceptRemoveFromFolderPopup.open()
+
                             close()
                         }
                     }
@@ -301,21 +356,24 @@ Page {
                             close()
                         }
 
-                        onUninstallClicked: {
-                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
-                                LibraryController.uninstallBook(
-                                            Globals.selectedBooks[i])
+                        onRemoveClicked: {
+                            if (!internal.inFolderMode) {
+                                acceptMultiDeletionPopup.selectedBooks = Globals.selectedBooks
+                                acceptMultiDeletionPopup.open()
+                            } else {
+                                acceptMultiRemoveFromFolderPopup.selectedBooks
+                                        = Globals.selectedBooks
+                                acceptMultiRemoveFromFolderPopup.open()
                             }
 
                             toolbar.selectBooksCheckBoxActivated = false
                             close()
                         }
 
-                        onDeleteClicked: {
-                            for (var i = 0; i < Globals.selectedBooks.length; i++) {
-                                LibraryController.deleteBook(
-                                            Globals.selectedBooks[i])
-                            }
+                        onAddToFolderClicked: {
+                            moveBookToFolderPopup.moveMultipleBooks = true
+                            moveBookToFolderPopup.books = Globals.selectedBooks
+                            moveBookToFolderPopup.open()
 
                             toolbar.selectBooksCheckBoxActivated = false
                             close()
@@ -375,6 +433,7 @@ Page {
                 Layout.topMargin: Math.round(root.height / 3) - implicitHeight
                 visible: bookGrid.count == 0
                          && LibraryController.bookCount !== 0
+                         && LibraryController.libraryModel.isFiltering
 
                 onClearFilters: {
                     toolbar.resetFilters()
@@ -389,6 +448,10 @@ Page {
         }
     }
 
+
+    /*
+     The popup opened when deleting a single book.
+     */
     MWarningPopup {
         id: acceptDeletionPopup
         x: Math.round(
@@ -406,15 +469,125 @@ Page {
         onOpenedChanged: if (opened)
                              acceptDeletionPopup.giveFocus()
         onDecisionMade: close()
-        onLeftButtonClicked: LibraryController.uninstallBook(
-                                 Globals.selectedBook.uuid)
-        onRightButtonClicked: {
-            let uuid = Globals.selectedBook.uuid
-            let projectGutenbergId = Globals.selectedBook.projectGutenbergId
-            let status = LibraryController.deleteBook(uuid)
-            if (status === BookOperationStatus.Success) {
-                FreeBooksController.unmarkBookAsDownloaded(projectGutenbergId)
+
+        onLeftButtonClicked: internal.uninstallBook(Globals.selectedBook.uuid)
+        onRightButtonClicked: internal.deleteBook(
+                                  Globals.selectedBook.uuid,
+                                  Globals.selectedBook.projectGutenbergId)
+    }
+
+
+    /*
+     The popup opened when deleting multiple books at the same time via e.g.
+     the multi selection rightclick popup
+     */
+    MWarningPopup {
+        id: acceptMultiDeletionPopup
+        property var selectedBooks: []
+
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove Books?")
+        message: qsTr("Deleting books is a permanent action, no one will be\n able to restore it afterwards!")
+        leftButtonText: qsTr("Remove from Device")
+        rightButtonText: qsTr("Delete Everywhere")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+
+        onOpenedChanged: if (opened)
+                             acceptMultiDeletionPopup.giveFocus()
+        onDecisionMade: close()
+
+        onLeftButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                internal.uninstallBook(selectedBooks[i])
             }
+
+            clearState()
+        }
+
+        onRightButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                let uuid = selectedBooks[i]
+                let book = LibraryController.getBook(uuid)
+
+                internal.deleteBook(uuid, book.projectGutenbergId)
+            }
+
+            clearState()
+        }
+
+        function clearState() {
+            selectedBooks = []
+        }
+    }
+
+
+    /*
+     The popup opened when removing a single book from it's folder.
+     */
+    MWarningPopup {
+        id: acceptRemoveFromFolderPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove from Folder?")
+        message: qsTr("This action will not delete the original book.")
+        leftButtonText: qsTr("Cancel")
+        rightButtonText: qsTr("Remove")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+        minButtonWidth: 180
+
+        onOpenedChanged: if (opened)
+                             acceptRemoveFromFolderPopup.giveFocus()
+        onDecisionMade: close()
+
+        onRightButtonClicked: internal.removeBookFromItsFolder(
+                                  Globals.selectedBook.uuid)
+    }
+
+
+    /*
+     The popup opened when removing multiple books from their folder at the
+     same time via e.g. the multi selection rightclick popup
+     */
+    MWarningPopup {
+        id: acceptMultiRemoveFromFolderPopup
+        property var selectedBooks: []
+
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove from Folder?")
+        message: qsTr("This action will not delete the original books.")
+        leftButtonText: qsTr("Cancel")
+        rightButtonText: qsTr("Remove")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+        minButtonWidth: 180
+
+        onOpenedChanged: if (opened)
+                             acceptMultiRemoveFromFolderPopup.giveFocus()
+        onDecisionMade: close()
+
+        onRightButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                internal.removeBookFromItsFolder(selectedBooks[i])
+            }
+
+            clearState()
+        }
+
+        function clearState() {
+            selectedBooks = []
         }
     }
 
@@ -428,6 +601,14 @@ Page {
 
     MManageTagsPopup {
         id: manageTagsPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 30)
+    }
+
+    MMoveToFolderPopup {
+        id: moveBookToFolderPopup
         x: Math.round(
                root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
         y: Math.round(
@@ -554,6 +735,8 @@ Page {
         property int verticalBookSpacing: 48
         property var booksCurrentlyAdding: []
         property string lastAddedBookPath: ""
+        property bool inFolderMode: LibraryController.libraryModel.folder !== "all"
+                                    && LibraryController.libraryModel.folder !== "unsorted"
 
         function openBookOptionsPopup(item) {
             Globals.selectedBook = LibraryController.getBook(item.uuid)
@@ -608,6 +791,24 @@ Page {
         // after the error was dealt with to continue adding the rest of the books.
         function continueAddingBooks() {
             internal.addBooks(internal.booksCurrentlyAdding)
+        }
+
+        function uninstallBook(uuid) {
+            LibraryController.uninstallBook(uuid)
+        }
+
+        function deleteBook(uuid, gutenbergId) {
+            let status = LibraryController.deleteBook(uuid)
+            if (status === BookOperationStatus.Success) {
+                FreeBooksController.unmarkBookAsDownloaded(gutenbergId)
+            }
+        }
+
+        function removeBookFromItsFolder(uuid) {
+            var operationsMap = {}
+            operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
+
+            LibraryController.updateBook(uuid, operationsMap)
         }
     }
 }

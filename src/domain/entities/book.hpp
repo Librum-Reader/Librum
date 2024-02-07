@@ -23,6 +23,9 @@ public:
 
     const QUuid& getUuid() const;
 
+    const QUuid& getParentFolderId() const;
+    void setParentFolderId(const QUuid& newParentFolderId);
+
     int getProjectGutenbergId() const;
     void setProjectGutenbergId(int newProjectGutenbergId);
     bool isFromProjectGutenberg() const;
@@ -149,6 +152,7 @@ private:
         const QString& sizeString) const;
 
     QUuid m_uuid;
+    QUuid m_parentFolderId;
     int m_projectGutenbergId = 0;
     value_objects::BookMetaData m_metaData;
     QString m_filePath;

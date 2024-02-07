@@ -5,12 +5,13 @@ namespace domain::entities
 {
 
 User::User(const QString& firstName, const QString& lastName,
-           const QString& email, qint64 usedBookStorage,
+           const QString& email, const QString& role, qint64 usedBookStorage,
            qint64 bookStorageLimit, const QDateTime& profilePictureLastUpdated,
            bool hasProfilePicture) :
     m_firstName(firstName),
     m_lastName(lastName),
     m_email(email),
+    m_role(role),
     m_usedBookStorage(usedBookStorage),
     m_bookStorageLimit(bookStorageLimit),
     m_profilePictureLastUpdated(profilePictureLastUpdated),
@@ -46,6 +47,16 @@ const QString& User::getEmail() const
 void User::setEmail(const QString& newEmail)
 {
     m_email = newEmail;
+}
+
+const QString& User::getRole() const
+{
+    return m_role;
+}
+
+void User::setRole(const QString& newRole)
+{
+    m_role = newRole;
 }
 
 qint64 User::getUsedBookStorage() const

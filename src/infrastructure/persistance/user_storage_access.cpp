@@ -25,22 +25,32 @@ void UserStorageAccess::getUser(const QString& authToken)
     auto request = createRequest(domain + data::userGetEndpoint, authToken);
     auto reply = m_networkAccessManager.get(request);
 
-    connect(reply, &QNetworkReply::finished, this,
-            [this, reply]
+    connect(
+        reply, &QNetworkReply::finished, this,
+        [this, reply]
+        {
+            if(api_error_helper::apiRequestFailed(reply, 200))
             {
-                if(api_error_helper::apiRequestFailed(reply, 200))
-                {
-                    api_error_helper::logErrorMessage(reply, "Getting User");
+                api_error_helper::logErrorMessage(reply, "Getting User");
 
-                    emit gettingUserFailed();
+                // Manually handle the case when the JWT token expires.
+                if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute)
+                       .toInt() == 401)
+                {
+                    emit authTokenExpired();
                     reply->deleteLater();
                     return;
                 }
 
-                emit userReady(reply->readAll());
-
+                emit gettingUserFailed();
                 reply->deleteLater();
-            });
+                return;
+            }
+
+            emit userReady(reply->readAll());
+
+            reply->deleteLater();
+        });
 }
 
 void UserStorageAccess::deleteUser(const QString& authToken)

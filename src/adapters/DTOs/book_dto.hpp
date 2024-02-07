@@ -31,6 +31,7 @@ struct ADAPTERS_EXPORT BookDto
     Q_PROPERTY(int bookReadingProgress MEMBER bookReadingProgress)
     Q_PROPERTY(QString addedToLibrary MEMBER addedToLibrary)
     Q_PROPERTY(QString lastOpened MEMBER lastOpened)
+    Q_PROPERTY(QString parentFolderId MEMBER parentFolderId)
     Q_PROPERTY(QString coverPath MEMBER coverPath)
     Q_PROPERTY(bool downloaded MEMBER downloaded)
 
@@ -51,6 +52,7 @@ public:
     int bookReadingProgress;
     QString addedToLibrary;
     QString lastOpened;
+    QString parentFolderId;
     QString coverPath;
     bool downloaded;
     QList<TagDto> tags;

@@ -63,7 +63,8 @@ MFlickWrapper {
                     imagePath: Icons.heartHallow
                     imageSize: 18
 
-                    onClicked: upgradePopup.open()
+                    onClicked: Qt.openUrlExternally(
+                                   AppInfoController.website + "/pricing")
                 }
             }
 
@@ -119,8 +120,7 @@ MFlickWrapper {
                                     id: tierName
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.topMargin: 46
-                                    //: Keep capitalized ("BASIC" is the name of the tier)
-                                    text: qsTr("BASIC")
+                                    text: UserController.role.toUpperCase()
                                     color: Style.colorSubtitle
                                     font.weight: Font.Medium
                                     font.pointSize: Fonts.size22
@@ -154,7 +154,8 @@ MFlickWrapper {
                                         fontWeight: Font.Bold
                                         textColor: Style.colorFocusedButtonText
 
-                                        onClicked: upgradePopup.open()
+                                        onClicked: Qt.openUrlExternally(
+                                                       AppInfoController.website + "/pricing")
                                     }
 
                                     MButton {
@@ -343,29 +344,6 @@ MFlickWrapper {
                 }
             }
         }
-    }
-
-    MWarningPopup {
-        id: upgradePopup
-        x: Math.round(page.width / 2 - implicitWidth / 2 - settingsSidebar.width
-                      / 2 - page.horizontalPadding)
-        y: Math.round(
-               page.height / 2 - implicitHeight / 2 - page.topPadding - 50)
-        visible: false
-        title: qsTr("Upgrade Your Account")
-        message: qsTr("We don't offer upgrading options at the moment.") + "\n" + qsTr(
-                     "If you require additional storage, please contact us at")
-                 + ": " + AppInfoController.companyEmail
-        leftButtonText: qsTr("Close")
-        rightButtonText: qsTr("Email Us")
-        minButtonWidth: 180
-        messageBottomSpacing: 10
-
-        onOpenedChanged: if (opened)
-                             upgradePopup.giveFocus()
-        onRightButtonClicked: Qt.openUrlExternally(
-                                  "mailto:" + AppInfoController.companyEmail)
-        onDecisionMade: close()
     }
 
     QtObject {

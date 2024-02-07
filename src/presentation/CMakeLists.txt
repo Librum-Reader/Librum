@@ -8,8 +8,6 @@ add_library(presentation
                     qmlSources.qrc
                     modules/CppElements/key_sequence_recorder.cpp
                     modules/CppElements/key_sequence_recorder.hpp
-                    modules/CppElements/sidebar_state.cpp
-                    modules/CppElements/sidebar_state.hpp
                     modules/CppElements/page_view.cpp
                     modules/CppElements/page_view.hpp
 )

@@ -203,6 +203,8 @@ int LibraryController::updateBook(const QString& uuid,
             updatedBook.setAddedToLibrary(
                 QDateTime::fromString(value.toString()));
             break;
+        case MetaProperty::ParentFolderId:
+            updatedBook.setParentFolderId(QUuid(value.toString()));
         case MetaProperty::LastModified:
             updatedBook.setLastOpened(QDateTime::fromString(value.toString()));
             break;
@@ -299,6 +301,18 @@ bool LibraryController::isSyncing() const
     return m_currentlySyncing;
 }
 
+void LibraryController::removeAllBooksFromFolderWithId(const QString& folderId)
+{
+    for(auto book : m_libraryService->getBooks())
+    {
+        if(book.getParentFolderId() != QUuid(folderId))
+            continue;
+
+        book.setParentFolderId(QUuid());
+        m_libraryService->updateBook(book);
+    }
+}
+
 data_models::LibraryProxyModel* LibraryController::getLibraryModel()
 {
     return &m_libraryProxyModel;
@@ -356,6 +370,8 @@ void LibraryController::addBookMetaDataToDto(const Book& book, BookDto& bookDto)
     bookDto.pageCount = book.getPageCount();
     bookDto.currentPage = book.getCurrentPage();
     bookDto.bookReadingProgress = book.getBookReadingProgress();
+    bookDto.parentFolderId =
+        book.getParentFolderId().toString(QUuid::WithoutBraces);
     bookDto.coverPath = pathWithScheme;
     bookDto.downloaded = book.isDownloaded();
 

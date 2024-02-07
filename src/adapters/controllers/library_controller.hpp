@@ -34,6 +34,7 @@ public:
     dtos::BookDto getBook(const QString& uuid) override;
     int getBookCount() const override;
     bool isSyncing() const override;
+    void removeAllBooksFromFolderWithId(const QString& folderId) override;
 
     void syncWithServer() override;
     int saveBookToFile(const QString& uuid, const QUrl& path) override;

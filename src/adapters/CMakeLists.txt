@@ -14,12 +14,14 @@ add_library(adapters
                     interfaces/controllers/i_app_info_controller.hpp
                     interfaces/controllers/i_dictionary_controller.hpp
                     interfaces/controllers/i_ai_explanation_controller.hpp
+                    interfaces/controllers/i_folder_controller.hpp
                     interfaces/persistance/i_user_storage_access.hpp
                     interfaces/persistance/i_library_storage_access.hpp
                     interfaces/persistance/i_authentication_access.hpp
                     interfaces/persistance/i_app_info_access.hpp
                     interfaces/persistance/i_dictionary_access.hpp
                     interfaces/persistance/i_ai_explanation_access.hpp
+                    interfaces/persistance/i_folder_storage_access.hpp
                     
                     controllers/authentication_controller.cpp
                     controllers/authentication_controller.hpp
@@ -41,6 +43,8 @@ add_library(adapters
                     controllers/dictionary_controller.hpp
                     controllers/ai_explanation_controller.cpp
                     controllers/ai_explanation_controller.hpp
+                    controllers/folder_controller.hpp
+                    controllers/folder_controller.cpp
 
                     gateways/user_storage_gateway.cpp
                     gateways/user_storage_gateway.hpp
@@ -56,6 +60,8 @@ add_library(adapters
                     gateways/dictionary_gateway.cpp
                     gateways/ai_explanation_gateway.cpp
                     gateways/ai_explanation_gateway.hpp
+                    gateways/folder_storage_gateway.hpp
+                    gateways/folder_storage_gateway.cpp
                     
                     data_models/library_model/library_model.cpp
                     data_models/library_model/library_model.hpp
@@ -74,6 +80,15 @@ add_library(adapters
                     data_models/bookmarks_model/bookmarks_model.hpp
                     data_models/bookmarks_model/bookmarks_proxy_model.cpp
                     data_models/bookmarks_model/bookmarks_proxy_model.hpp
+                    data_models/folders_model/folders_model.hpp
+                    data_models/folders_model/folders_model.cpp
+                    data_models/folders_model/folders_proxy_model.hpp
+                    data_models/folders_model/folders_proxy_model.cpp
+                    data_models/icon_model/icon_model.hpp
+                    data_models/icon_model/icon_model.cpp
+                    data_models/icon_model/icon_proxy_model.hpp
+                    data_models/icon_model/icon_proxy_model.cpp
+                    data_models/icon_model/icon_item.hpp
                     
                     DTOs/login_dto.hpp
                     DTOs/register_dto.hpp
@@ -82,7 +97,7 @@ add_library(adapters
                     DTOs/highlight_dto.hpp
                     DTOs/rectf_dto.hpp
                     DTOs/word_definition_dto.hpp
-                    
+                    DTOs/folder_dto.hpp
 )
 
 target_compile_definitions(adapters PRIVATE ADAPTERS_LIBRARY)
@@ -100,6 +115,8 @@ target_include_directories(adapters
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/user_tags_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/shortcuts_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models/bookmarks_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/folders_model
+                    ${CMAKE_CURRENT_SOURCE_DIR}/data_models/icon_model
                     ${CMAKE_CURRENT_SOURCE_DIR}/data_models
                 PRIVATE
                     ${DOMAIN_INCLUDES}

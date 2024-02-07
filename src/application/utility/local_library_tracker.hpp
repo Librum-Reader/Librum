@@ -14,6 +14,9 @@ public:
     bool untrackBook(const QUuid& uuid) override;
     bool updateTrackedBook(const domain::entities::Book& book) override;
 
+    void saveFolders(const domain::entities::Folder& folder) override;
+    domain::entities::Folder loadFolders() override;
+
     // Setup methods
     void setLibraryOwner(const QString& libraryOwnerEmail) override;
     void clearLibraryOwner() override;
@@ -27,6 +30,7 @@ private:
     QString m_libraryOwnerEmail;
     QDir m_libraryFolder;
     const QString m_fileExtension = ".libmeta";
+    const QString m_rootFolderFileName = "folders.json";
 };
 
 }  // namespace application::utility

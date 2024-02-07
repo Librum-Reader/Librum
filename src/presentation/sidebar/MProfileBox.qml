@@ -9,12 +9,11 @@ import Librum.fonts
 
 Item {
     id: root
-    property int currentSidebarWidth
-    property int closedSidebarWidth
+    property int sidebarWidth
     property int arrowRotation
     signal clicked
 
-    implicitWidth: root.closedSidebarWidth
+    implicitWidth: 72
     implicitHeight: 60
 
     Pane {
@@ -26,8 +25,7 @@ Item {
         }
 
         RowLayout {
-            // Make the button go over the sidebar border
-            width: root.currentSidebarWidth + expandButton.width / 2.2
+            width: root.sidebarWidth
             height: parent.height
             spacing: 0
 
@@ -70,44 +68,6 @@ Item {
                     cursorShape: Qt.PointingHandCursor
 
                     onClicked: root.clicked()
-                }
-            }
-
-
-            /*
-              Button to expand the sidebar
-              */
-            Rectangle {
-                id: expandButton
-                Layout.preferredWidth: 23
-                Layout.preferredHeight: 24
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                color: Style.colorControlBackground
-                opacity: expandButtonMouseArea.pressed ? 0.8 : 1
-                radius: 2
-                border.width: 1
-                border.color: Style.colorButtonBorder
-
-                Image {
-                    id: rightArrowImage
-                    rotation: root.arrowRotation
-                    sourceSize.width: 20
-                    sourceSize.height: 20
-                    anchors.centerIn: parent
-                    source: Icons.arrowheadNextIcon
-                    cache: false
-                }
-
-                MouseArea {
-                    id: expandButtonMouseArea
-                    anchors.fill: parent
-
-                    onClicked: {
-                        if (SidebarState.currentState === SidebarState.Opened)
-                            closeSidebar()
-                        else
-                            openSidebar()
-                    }
                 }
             }
         }

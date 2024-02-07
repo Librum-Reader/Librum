@@ -34,6 +34,7 @@ Item {
     property bool textHidden: toggledImage.length > 0 ? true : false
     property var validator: null
     signal edited
+    signal returnPressed
 
     implicitWidth: 100
     implicitHeight: layout.height
@@ -95,6 +96,8 @@ Item {
                         radius: root.borderRadius
                         color: "transparent"
                     }
+
+                    Keys.onReturnPressed: root.returnPressed()
 
                     // Make sure the cursor is at the start
                     onActiveFocusChanged: resetCursorPositionToStart()

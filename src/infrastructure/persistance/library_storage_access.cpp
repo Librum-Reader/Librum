@@ -208,13 +208,6 @@ void LibraryStorageAccess::getBooksMetaData(const QString& authToken)
     connect(reply, &QNetworkReply::finished, this,
             [this, reply]()
             {
-                if(api_error_helper::apiRequestFailed(reply, 200))
-                {
-                    api_error_helper::logErrorMessage(reply, "Getting books");
-                    reply->deleteLater();
-                    return;
-                }
-
                 processGettingBooksMetaDataResult(reply);
                 reply->deleteLater();
             });

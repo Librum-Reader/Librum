@@ -44,9 +44,6 @@ ApplicationWindow {
             id: sidebar
             z: 1
             visible: pageManager.pageHasSidebar
-
-            onOpenChanged: open ? baseRoot.minimumWidth
-                                  = sidebarOpenedMinWidth : baseRoot.minimumWidth = defaultMinWidth
         }
 
 
@@ -161,6 +158,7 @@ ApplicationWindow {
             if (spamStopper.available) {
                 LibraryController.syncWithServer()
                 UserController.syncWithServer()
+                FolderController.syncWithServer()
                 spamStopper.available = false
                 spamStopper.start()
             }

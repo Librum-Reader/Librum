@@ -35,6 +35,10 @@ inline const QString changeBookCoverEndpoint { "/book/cover" };
 inline const QString deleteBookCoverEndpoint { "/book/cover" };
 inline const QString getUsedBookStorageEndpoint { "/book/usedBookStorage" };
 
+// Folder storage
+inline const QString folderGetEndpoint { "/folder" };
+inline const QString folderUpdateEndpoint { "/folder/update" };
+
 // Free books storage
 inline const QString getFreeBooksMetadataEndpoint { freeBooksDomain +
                                                     "/books" };
