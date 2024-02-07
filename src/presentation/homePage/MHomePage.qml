@@ -23,6 +23,8 @@ Page {
         color: Style.colorPageBackground
     }
 
+    Component.onCompleted: LibraryController.libraryModel.folder = "all"
+
     Shortcut {
         sequence: SettingsController.shortcuts.AddBook
         onActivated: importFilesDialog.open()

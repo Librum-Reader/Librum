@@ -112,6 +112,7 @@ Popup {
 
                 onClicked: {
                     FolderController.deleteFolder(uuid)
+                    LibraryController.removeAllBooksFromFolderWithId(uuid)
                     root.close()
                 }
             }
