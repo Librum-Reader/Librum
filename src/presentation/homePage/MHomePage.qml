@@ -360,7 +360,9 @@ Page {
                                 acceptMultiDeletionPopup.selectedBooks = Globals.selectedBooks
                                 acceptMultiDeletionPopup.open()
                             } else {
-                                acceptRemoveFromFolderPopup.open()
+                                acceptMultiRemoveFromFolderPopup.selectedBooks
+                                        = Globals.selectedBooks
+                                acceptMultiRemoveFromFolderPopup.open()
                             }
 
                             toolbar.selectBooksCheckBoxActivated = false
@@ -369,6 +371,7 @@ Page {
 
                         onAddToFolderClicked: {
                             moveBookToFolderPopup.moveMultipleBooks = true
+                            moveBookToFolderPopup.books = Globals.selectedBooks
                             moveBookToFolderPopup.open()
 
                             toolbar.selectBooksCheckBoxActivated = false
@@ -511,6 +514,72 @@ Page {
                 let book = LibraryController.getBook(uuid)
 
                 internal.deleteBook(uuid, book.projectGutenbergId)
+            }
+
+            clearState()
+        }
+
+        function clearState() {
+            selectedBooks = []
+        }
+    }
+
+
+    /*
+     The popup opened when removing a single book from it's folder.
+     */
+    MWarningPopup {
+        id: acceptRemoveFromFolderPopup
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove from Folder?")
+        message: qsTr("This action will not delete the original book.")
+        leftButtonText: qsTr("Cancel")
+        rightButtonText: qsTr("Remove")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+        minButtonWidth: 180
+
+        onOpenedChanged: if (opened)
+                             acceptRemoveFromFolderPopup.giveFocus()
+        onDecisionMade: close()
+
+        onRightButtonClicked: internal.removeBookFromItsFolder(
+                                  Globals.selectedBook.uuid)
+    }
+
+
+    /*
+     The popup opened when removing multiple books from their folder at the
+     same time via e.g. the multi selection rightclick popup
+     */
+    MWarningPopup {
+        id: acceptMultiRemoveFromFolderPopup
+        property var selectedBooks: []
+
+        x: Math.round(
+               root.width / 2 - implicitWidth / 2 - sidebar.width / 2 - root.horizontalPadding)
+        y: Math.round(
+               root.height / 2 - implicitHeight / 2 - root.topPadding - 50)
+        visible: false
+        title: qsTr("Remove from Folder?")
+        message: qsTr("This action will not delete the original books.")
+        leftButtonText: qsTr("Cancel")
+        rightButtonText: qsTr("Remove")
+        messageBottomSpacing: 10
+        rightButtonRed: true
+        minButtonWidth: 180
+
+        onOpenedChanged: if (opened)
+                             acceptMultiRemoveFromFolderPopup.giveFocus()
+        onDecisionMade: close()
+
+        onRightButtonClicked: {
+            for (var i = 0; i < selectedBooks.length; i++) {
+                internal.removeBookFromItsFolder(selectedBooks[i])
             }
 
             clearState()
@@ -732,6 +801,13 @@ Page {
             if (status === BookOperationStatus.Success) {
                 FreeBooksController.unmarkBookAsDownloaded(gutenbergId)
             }
+        }
+
+        function removeBookFromItsFolder(uuid) {
+            var operationsMap = {}
+            operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
+
+            LibraryController.updateBook(uuid, operationsMap)
         }
     }
 }

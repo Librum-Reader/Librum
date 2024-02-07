@@ -10,8 +10,9 @@ import Librum.globals
 
 Popup {
     id: root
-    // We can either move a book or a folder to some folder
+    // We can either move a book, multiple books or a folder to some folder
     property string bookUuid
+    property var books: []
     property string folderUuid
     property string headerItemText: "None"
     property bool moveMultipleBooks: false
@@ -31,8 +32,9 @@ Popup {
     onOpened: root.forceActiveFocus()
     onClosed: {
         root.bookUuid = ""
-        root.moveMultipleBooks = false
+        root.books = []
         root.folderUuid = ""
+        root.moveMultipleBooks = false
         root.headerItemText = "None"
     }
 
@@ -371,11 +373,11 @@ Popup {
         }
 
         function moveBook() {
-            // When root.moveMultipleBooks == true, we want to move all books from Globals.selectedBooks
-            // to the selected folder.
+            // When root.moveMultipleBooks == true, we want to move all books from
+            // root.books to the selected folder.
             if (root.moveMultipleBooks) {
-                for (var i = 0; i < Globals.selectedBooks.length; i++) {
-                    moveSingleBookHelper(Globals.selectedBooks[i])
+                for (var i = 0; i < root.books.length; i++) {
+                    moveSingleBookHelper(root.books[i])
                 }
             } else {
                 moveSingleBookHelper(root.bookUuid)
@@ -383,8 +385,6 @@ Popup {
         }
 
         function moveSingleBookHelper(uuid) {
-            print("moving: " + uuid)
-
             var operationsMap = {}
             if (selectedFolder === "header")
                 operationsMap[LibraryController.MetaProperty.ParentFolderId] = ""
