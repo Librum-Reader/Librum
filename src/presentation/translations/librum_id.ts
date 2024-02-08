@@ -808,7 +808,7 @@ Mungkin karena kamu offline, atau penyimpananmu penuh.</translation>
     <name>MDeleteFolderPopup</name>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
-        <source>Delete </source>
+        <source>Delete %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -793,7 +793,7 @@ Either you are offline, or your storage is full.</source>
     <name>MDeleteFolderPopup</name>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
-        <source>Delete </source>
+        <source>Delete %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
