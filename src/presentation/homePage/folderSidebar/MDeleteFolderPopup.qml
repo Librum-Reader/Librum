@@ -111,8 +111,14 @@ Popup {
                 text: qsTr("Delete")
 
                 onClicked: {
-                    FolderController.deleteFolder(uuid)
-                    LibraryController.removeAllBooksFromFolderWithId(uuid)
+                    // Since all the sub folders of the deleted folder will also be deleted,
+                    // we need to un-assign their books as well.
+                    let deletedFolders = FolderController.deleteFolder(uuid)
+                    for (var i = 0; i < deletedFolders.length; i++) {
+                        LibraryController.removeAllBooksFromFolderWithId(
+                                    deletedFolders[i])
+                    }
+
                     root.close()
                 }
             }

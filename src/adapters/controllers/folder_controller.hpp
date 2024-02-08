@@ -26,7 +26,7 @@ public:
     dtos::FolderDto getFolder(QString uuid) override;
     bool createFolder(QString name, QString color, QString icon,
                       QString description, QString parent = "") override;
-    bool deleteFolder(QString uuid) override;
+    QVariantList deleteFolder(QString uuid) override;
     void updateFolder(QString uuid, QString name, QString color, QString icon,
                       QString description) override;
     bool moveFolder(QString uuid, QString destUuid) override;

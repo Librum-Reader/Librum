@@ -22,7 +22,7 @@ public:
     domain::entities::Folder* getFolder(const QUuid& uuid) override;
     bool createFolder(const QString& name, QString color, QString icon,
                       QString description, const QUuid& parent) override;
-    bool deleteFolder(const QUuid& uuid) override;
+    QList<QString> deleteFolder(const QUuid& uuid) override;
     void updateFolder(const domain::entities::Folder& folder) override;
     bool moveFolder(const QUuid& uuid, const QUuid& destUuid) override;
 
@@ -39,6 +39,8 @@ private:
     void saveChanges();
     void updateFoldersRecursively(domain::entities::Folder* current,
                                   domain::entities::Folder& remoteFolder);
+    QList<QString> getUuidsOfAllDescendents(
+        const domain::entities::Folder& folder);
 
     IFolderStorageGateway* m_folderStorageGateway;
     ILocalLibraryTracker* m_localLibraryTracker;

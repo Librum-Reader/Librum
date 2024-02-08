@@ -1,5 +1,6 @@
 #pragma once
 #include <QObject>
+#include <QVariantList>
 #include "adapters_export.hpp"
 #include "folder_dto.hpp"
 #include "folders_proxy_model.hpp"
@@ -34,7 +35,7 @@ public:
     Q_INVOKABLE virtual bool createFolder(QString name, QString color,
                                           QString icon, QString description,
                                           QString parent = "") = 0;
-    Q_INVOKABLE virtual bool deleteFolder(QString uuid) = 0;
+    Q_INVOKABLE virtual QVariantList deleteFolder(QString uuid) = 0;
     Q_INVOKABLE virtual void updateFolder(QString uuid, QString name,
                                           QString color, QString icon,
                                           QString description) = 0;

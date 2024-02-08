@@ -1,4 +1,5 @@
 #pragma once
+#include <QList>
 #include <QObject>
 #include <QString>
 #include "application_export.hpp"
@@ -22,7 +23,7 @@ public:
     virtual domain::entities::Folder* getFolder(const QUuid& uuid) = 0;
     virtual bool createFolder(const QString& name, QString color, QString icon,
                               QString description, const QUuid& parent) = 0;
-    virtual bool deleteFolder(const QUuid& uuid) = 0;
+    virtual QList<QString> deleteFolder(const QUuid& uuid) = 0;
     virtual void updateFolder(const domain::entities::Folder& folder) = 0;
     virtual bool moveFolder(const QUuid& uuid, const QUuid& destUuid) = 0;
 

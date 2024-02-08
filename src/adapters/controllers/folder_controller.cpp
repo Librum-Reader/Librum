@@ -77,9 +77,15 @@ bool FolderController::createFolder(QString name, QString color, QString icon,
     return success;
 }
 
-bool FolderController::deleteFolder(QString uuid)
+QVariantList FolderController::deleteFolder(QString uuid)
 {
-    return m_folderService->deleteFolder(QUuid(uuid));
+    auto uuids = m_folderService->deleteFolder(QUuid(uuid));
+
+    QVariantList list;
+    for(auto& id : uuids)
+        list.append(QVariant::fromValue(id));
+
+    return list;
 }
 
 void FolderController::updateFolder(QString uuid, QString name, QString color,

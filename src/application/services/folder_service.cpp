@@ -67,14 +67,19 @@ bool FolderService::createFolder(const QString& name, QString color,
     return true;
 }
 
-bool FolderService::deleteFolder(const QUuid& uuid)
+QList<QString> FolderService::deleteFolder(const QUuid& uuid)
 {
     auto folder = getFolder(uuid);
     if(folder == nullptr)
-        return false;
+        return {};
 
     auto parent = folder->getParent();
     auto indexInParent = folder->getIndexInParent();
+
+    // We return a list of all the folders that are deleted (since all
+    // descendents of the folder are also deleted).
+    auto listOfDescendents = getUuidsOfAllDescendents(*folder);
+    listOfDescendents.push_front(uuid.toString(QUuid::WithoutBraces));
 
     emit beginRemoveFolder(parent, indexInParent);
     parent->removeChild(uuid);
@@ -83,7 +88,7 @@ bool FolderService::deleteFolder(const QUuid& uuid)
     parent->decreaseChildIndiciesIfBiggerThan(indexInParent);
     parent->updateLastModified();
     saveChanges();
-    return true;
+    return listOfDescendents;
 }
 
 void FolderService::updateFolder(const domain::entities::Folder& folder)
@@ -305,6 +310,19 @@ void FolderService::updateFoldersRecursively(Folder* current,
     {
         updateFoldersRecursively(child.get(), remoteRoot);
     }
+}
+
+QList<QString> FolderService::getUuidsOfAllDescendents(const Folder& folder)
+{
+    QList<QString> uuids;
+    for(auto& child : folder.getChildren())
+    {
+        uuids.push_back(child->getUuid().toString(QUuid::WithoutBraces));
+        auto childUuids = getUuidsOfAllDescendents(*child);
+        uuids.append(childUuids);
+    }
+
+    return uuids;
 }
 
 }  // namespace application::services
