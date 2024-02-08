@@ -220,42 +220,42 @@ Wir hoffen, dass du eine tolle Zeit hast! Lass uns doch eine Bewertung da.</tran
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Edit Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner Bearbeiten</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Create Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner Erstellen</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="100"/>
         <source>Folder Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner Name</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="195"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="236"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Update</source>
-        <translation type="unfinished">Update</translation>
+        <translation>Update</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellen</translation>
     </message>
 </context>
 <context>
@@ -768,13 +768,13 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
         <source>Remove books</source>
-        <translation type="unfinished"></translation>
+        <translation>Bücher löschen</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <source>Uninstall books</source>
@@ -820,7 +820,7 @@ niemand wird es wiederherstellen können!</translation>
         <location filename="../homePage/MBookRightClickPopup.qml" line="102"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <source>Mark as read</source>
@@ -936,23 +936,23 @@ niemand wird es wiederherstellen können!</translation>
     <name>MDeleteFolderPopup</name>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
-        <source>Delete </source>
-        <translation type="unfinished"></translation>
+        <source>Delete %1</source>
+        <translation>%1 Löschen</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="77"/>
         <source>Books inside the folder will not be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bücher im Ordner werden nicht gelöscht.</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="96"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="111"/>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
@@ -960,17 +960,17 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="45"/>
         <source>Describe this folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibe diesen Ordner</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="99"/>
         <source>This folder is about...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieser Ordner handelt von...</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="135"/>
         <source>Done</source>
-        <translation type="unfinished">Fertig</translation>
+        <translation>Fertig</translation>
     </message>
 </context>
 <context>
@@ -1196,7 +1196,7 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>Language</source>
-        <translation type="unfinished">Sprache</translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
@@ -1239,22 +1239,22 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="83"/>
         <source>Organize</source>
-        <translation type="unfinished"></translation>
+        <translation>Organisieren</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="103"/>
         <source>All Books</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Bücher</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="114"/>
         <source>Unsorted</source>
-        <translation type="unfinished"></translation>
+        <translation>Unsortiert</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="140"/>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordner</translation>
     </message>
 </context>
 <context>
@@ -1262,22 +1262,22 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="71"/>
         <source>Create subfolder</source>
-        <translation type="unfinished"></translation>
+        <translation>Unterordner erstellen</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="82"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="94"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="115"/>
         <source>Delete</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
@@ -1455,41 +1455,42 @@ niemand wird es wiederherstellen können!</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="495"/>
         <source>Remove Books?</source>
-        <translation type="unfinished"></translation>
+        <translation>Bücher löschen?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="496"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Löschen von Büchern ist eine dauerhafte Aktion,
+niemand wird sie wiederherstellen können!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <location filename="../homePage/MHomePage.qml" line="571"/>
         <source>Remove from Folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aus Ordner entfernen?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="542"/>
         <source>This action will not delete the original book.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Aktion löscht das originale Buch nicht.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="543"/>
         <location filename="../homePage/MHomePage.qml" line="573"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="544"/>
         <location filename="../homePage/MHomePage.qml" line="574"/>
         <source>Remove</source>
-        <translation type="unfinished">Entfernen</translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="572"/>
         <source>This action will not delete the original books.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Aktion löscht die originalen Bücher nicht.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="622"/>
@@ -1660,17 +1661,17 @@ Lösche alte Bücher um Speicherplatzu freizugeben oder upgrade deinen Account.<
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="60"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschieben</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="325"/>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="344"/>
         <source>Select</source>
-        <translation type="unfinished">Auswählen</translation>
+        <translation>Auswählen</translation>
     </message>
 </context>
 <context>
@@ -1917,7 +1918,7 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="39"/>
         <source>Pick a color</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle eine Farbe</translation>
     </message>
 </context>
 <context>
@@ -1925,12 +1926,12 @@ Bestätige deine E-Mail, indem du auf den von uns gesendeten Link klickst.</tran
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="43"/>
         <source>Pick an icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle ein Symbol</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="98"/>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Suchen</translation>
     </message>
 </context>
 <context>
