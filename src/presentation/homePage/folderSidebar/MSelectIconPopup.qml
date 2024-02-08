@@ -80,10 +80,10 @@ Popup {
 
             RowLayout {
                 anchors.fill: parent
-                spacing: 4
+                spacing: 1
 
                 Image {
-                    Layout.leftMargin: 8
+                    Layout.leftMargin: 12
                     Layout.preferredWidth: implicitWidth
                     Layout.alignment: Qt.AlignVCenter
                     source: Icons.search
