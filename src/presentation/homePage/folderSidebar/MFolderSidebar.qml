@@ -153,7 +153,7 @@ Item {
                 Rectangle {
                     anchors.fill: parent
                     radius: height
-                    color: "white"
+                    color: Style.colorTransparentHighlight
                     opacity: 0.08
                 }
 
@@ -241,7 +241,7 @@ Item {
                             anchors.fill: parent
                             color: backgroundArea.containsMouse
                                    || LibraryController.libraryModel.folder
-                                   === treeNode.uuid ? "white" : "transparent"
+                                   === treeNode.uuid ? Style.colorTransparentHighlight : "transparent"
                             opacity: 0.08
                             radius: 4
                         }

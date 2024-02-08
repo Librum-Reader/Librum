@@ -98,8 +98,8 @@ Popup {
             Layout.topMargin: 16
             background: Rectangle {
                 anchors.fill: parent
-                color: headerArea.containsMouse
-                       || internal.selectedFolder === "header" ? "white" : "transparent"
+                color: headerArea.containsMouse || internal.selectedFolder
+                       === "header" ? Style.colorTransparentHighlight : "transparent"
                 opacity: 0.08
                 radius: 4
             }
@@ -213,7 +213,7 @@ Popup {
                         anchors.fill: parent
                         color: backgroundArea.containsMouse
                                || internal.selectedFolder
-                               === treeNode.uuid ? "white" : "transparent"
+                               === treeNode.uuid ? Style.colorTransparentHighlight : "transparent"
                         opacity: 0.08
                         radius: 4
                     }

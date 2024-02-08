@@ -43,7 +43,7 @@ Popup {
 
             background: Rectangle {
                 anchors.fill: parent
-                color: menuItemArea.containsMouse ? "white" : "transparent"
+                color: menuItemArea.containsMouse ? Style.colorTransparentHighlight : "transparent"
                 opacity: menuItemArea.containsMouse ? 0.08 : 1
                 radius: 4
             }

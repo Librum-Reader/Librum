@@ -18,7 +18,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: unsortedArea.containsMouse
-               || root.selected ? "white" : "transparent"
+               || root.selected ? Style.colorTransparentHighlight : "transparent"
         opacity: 0.08
         radius: 4
     }

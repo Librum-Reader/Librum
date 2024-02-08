@@ -212,8 +212,6 @@
         <file>resources/images/light_mode/decoration/warning_circle_icon.svg</file>
         <file>resources/images/dark_mode/decoration/warning_circle_icon.svg</file>
         <file>resources/data/default_behavior_settings.json</file>
-        <file>resources/images/light_mode/utility/folder_icon.svg</file>
-        <file>resources/images/dark_mode/utility/folder_icon.svg</file>
         <file>resources/images/light_mode/utility/unsorted_icon.svg</file>
         <file>resources/images/dark_mode/utility/unsorted_icon.svg</file>
         <file>resources/images/dark_mode/utility/add_folder_plus_icon.svg</file>
@@ -396,5 +394,7 @@
         <file>resources/images/folder_icons/heat.svg</file>
         <file>resources/images/folder_icons/engineering.svg</file>
         <file>resources/images/folder_icons/fingerprint.svg</file>
+        <file>resources/images/light_mode/book_popup/folder_icon.svg</file>
+        <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
     </qresource>
 </RCC>

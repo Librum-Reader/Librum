@@ -64,6 +64,7 @@ Item {
     property color colorControlBackground
     property color colorSettingsSidebarBackground
     property color colorBannerBackground
+    property color colorTransparentHighlight
 
     // Borders
     property color colorGreenBorder
@@ -82,6 +83,7 @@ Item {
     property color colorTextSelection
     property color colorScrollBarHandle
     property color colorDefaultFolderIcon
+    property color colorFolderIconSelection
 
     state: (SettingsController.appearanceSettings.Theme
             === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
@@ -269,6 +271,10 @@ Item {
                 target: styleSheet
                 colorBannerBackground: "#9861BE"
             }
+            PropertyChanges {
+                target: styleSheet
+                colorTransparentHighlight: "#424242"
+            }
 
             // Borders
             PropertyChanges {
@@ -327,7 +333,11 @@ Item {
             }
             PropertyChanges {
                 target: styleSheet
-                colorDefaultFolderIcon: "#8E8EA9"
+                colorDefaultFolderIcon: "#78788E"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorFolderIconSelection: "#67677B"
             }
         },
         State {
@@ -512,6 +522,10 @@ Item {
                 target: styleSheet
                 colorBannerBackground: "#583771"
             }
+            PropertyChanges {
+                target: styleSheet
+                colorTransparentHighlight: "#FFFFFF"
+            }
 
             // Borders
             PropertyChanges {
@@ -571,6 +585,10 @@ Item {
             PropertyChanges {
                 target: styleSheet
                 colorDefaultFolderIcon: "#989898"
+            }
+            PropertyChanges {
+                target: styleSheet
+                colorFolderIconSelection: "#E2E2E2"
             }
         }
     ]

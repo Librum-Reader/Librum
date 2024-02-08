@@ -245,6 +245,10 @@ Item {
                 target: iconSheet
                 bookPopupDelete: "/resources/images/light_mode/book_popup/delete_icon.svg"
             }
+            PropertyChanges {
+                target: iconSheet
+                folder: "/resources/images/light_mode/book_popup/folder_icon.svg"
+            }
 
             // Decoration
             PropertyChanges {
@@ -563,10 +567,6 @@ Item {
             }
             PropertyChanges {
                 target: iconSheet
-                folder: "/resources/images/light_mode/utility/folder_icon.svg"
-            }
-            PropertyChanges {
-                target: iconSheet
                 unsorted: "/resources/images/light_mode/utility/unsorted_icon.svg"
             }
             PropertyChanges {
@@ -687,6 +687,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 bookPopupDelete: "/resources/images/dark_mode/book_popup/delete_icon.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                folder: "/resources/images/dark_mode/book_popup/folder_icon.svg"
             }
 
             // Decoration
@@ -1003,10 +1007,6 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 cloudOff: "/resources/images/dark_mode/utility/cloud_off_icon.svg"
-            }
-            PropertyChanges {
-                target: iconSheet
-                folder: "/resources/images/dark_mode/utility/folder_icon.svg"
             }
             PropertyChanges {
                 target: iconSheet

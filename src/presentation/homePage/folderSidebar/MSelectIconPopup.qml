@@ -145,6 +145,7 @@ Popup {
                     anchors.centerIn: parent
                     sourceSize.width: 26
                     fillMode: Image.PreserveAspectFit
+                    color: Style.colorFolderIconSelection
                     source: "qrc:/resources/images/folder_icons/" + iconRect.name + ".svg"
                 }
 

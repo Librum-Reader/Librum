@@ -139,7 +139,7 @@ Popup {
                     Rectangle {
                         id: optionHoverIndicator
                         anchors.fill: parent
-                        color: optionButtonRoot.mouseAbove ? "white" : "transparent"
+                        color: optionButtonRoot.mouseAbove ? Style.colorTransparentHighlight : "transparent"
                         opacity: 0.08
                         radius: 4
                     }
