@@ -313,7 +313,7 @@ Popup {
             Layout.topMargin: 14
             borderWidth: 0
             backgroundColor: Style.colorBasePurple
-            opacity: nameInput.text.length > 0 ? 1 : 0.4
+            opacity: nameInput.text.length > 0 ? 1 : 0.5
             fontSize: Fonts.size10dot5
             opacityOnPressed: 0.85
             textColor: Style.colorFocusedButtonText

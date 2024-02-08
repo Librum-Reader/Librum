@@ -12,7 +12,7 @@ Popup {
     id: root
     property string uuid
 
-    implicitWidth: 164
+    width: Math.max(internal.minWidth, internal.dynamicWidth)
     height: mainLayout.height + 2 * padding
     padding: 8
     focus: true
@@ -34,6 +34,7 @@ Popup {
             id: menuItemRoot
             property string text
             property string textColor: Style.colorText
+            property int implWidth: menuItemLabel.implicitWidth + 2 * horizontalPadding
             signal clicked
 
             Layout.fillWidth: true
@@ -68,6 +69,7 @@ Popup {
         }
 
         MenuItem {
+            id: first
             text: qsTr("Create subfolder")
 
             onClicked: {
@@ -79,6 +81,7 @@ Popup {
         }
 
         MenuItem {
+            id: second
             text: qsTr("Edit")
 
             onClicked: {
@@ -91,6 +94,7 @@ Popup {
         }
 
         MenuItem {
+            id: third
             text: qsTr("Move to")
             Layout.bottomMargin: 6
 
@@ -111,6 +115,7 @@ Popup {
         }
 
         MenuItem {
+            id: fourth
             Layout.topMargin: 6
             text: qsTr("Delete")
             textColor: Style.colorRed
@@ -122,5 +127,13 @@ Popup {
                 root.close()
             }
         }
+    }
+
+    QtObject {
+        id: internal
+        property int minWidth: 164
+        property int dynamicWidth: Math.max(first.implWidth, second.implWidth,
+                                            third.implWidth,
+                                            fourth.implWidth) + 2 * root.padding
     }
 }
