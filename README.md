@@ -4,7 +4,7 @@ Librum is an application designed to make reading <b>enjoyable</b> and <b>straig
 
 It's not **just** an e-book reader. With Librum, you can manage your own online library and access it from any device anytime, anywhere. It has features like note-taking, AI tooling, and highlighting, while offering customization to make it as personal as you want!
  
-Librum also provides free access to over 70.000 books and personal reading statistics while being free and completely open source.
+Librum also provides free access to over 70,000 books and personal reading statistics while being free and completely open source.
 
 
 # Preview
@@ -156,7 +156,7 @@ These features include:
 - A modern e-reader
 - A personalized and customizable online library
 - Book meta-data editing
-- A free in-app bookstore with more than 70.000 books
+- A free in-app bookstore with more than 70,000 books
 - Book syncing across all of your devices
 - Highlighting
 - Bookmarking
