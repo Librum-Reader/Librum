@@ -62,7 +62,7 @@ public:
     Folder* getChild(const QUuid& uuid);
     Folder* getDescendant(const QUuid& uuid);
     void addChild(std::unique_ptr<Folder> child);
-    void removeChild(const QUuid& uuid);
+    bool removeChild(const QUuid& uuid);
     const Folder* getChildAtIndex(int index) const;
     Folder* getChildAtIndex(int index);
     int childCount() const;

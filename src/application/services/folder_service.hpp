@@ -41,6 +41,11 @@ private:
                                   domain::entities::Folder& remoteFolder);
     QList<QString> getUuidsOfAllDescendents(
         const domain::entities::Folder& folder);
+    void createFolderHelper(std::unique_ptr<domain::entities::Folder> folder,
+                            domain::entities::Folder* parent);
+    void deleteFolderHelper(domain::entities::Folder* folder);
+    void createDefaultFolder();
+    void overwriteRootFolderWith(domain::entities::Folder& folder);
 
     IFolderStorageGateway* m_folderStorageGateway;
     ILocalLibraryTracker* m_localLibraryTracker;

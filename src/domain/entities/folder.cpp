@@ -307,7 +307,7 @@ void Folder::addChild(std::unique_ptr<Folder> child)
     m_children.emplace_back(std::move(child));
 }
 
-void Folder::removeChild(const QUuid& uuid)
+bool Folder::removeChild(const QUuid& uuid)
 {
     auto it = std::find_if(m_children.begin(), m_children.end(),
                            [uuid](const auto& child)
@@ -318,7 +318,10 @@ void Folder::removeChild(const QUuid& uuid)
     if(it != m_children.end())
     {
         m_children.erase(it);
+        return true;
     }
+
+    return false;
 }
 
 const Folder* Folder::getChildAtIndex(int index) const

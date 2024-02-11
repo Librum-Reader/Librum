@@ -6,6 +6,7 @@ add_executable(application_unit_tests
                     services/user_service_tests.cpp
                     services/settings_service_tests.cpp
                     services/authentication_service_tests.cpp
+                    services/folder_service_tests.cpp
                     
                     utility/local_library_tracker_tests.cpp
                     utility/library_storage_manager_tests.cpp
