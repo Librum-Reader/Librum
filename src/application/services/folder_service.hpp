@@ -55,7 +55,7 @@ private:
     std::unique_ptr<domain::entities::Folder> m_rootFolder;
 
     QTimer m_fetchChangesTimer;
-    int m_fetchChangesInterval = 120'000;  // Auto sync every 2 mins
+    int m_fetchChangesInterval = 900'000;  // Auto sync every 15 mins
 };
 
 }  // namespace application::services
