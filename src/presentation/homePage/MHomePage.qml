@@ -102,7 +102,7 @@ Page {
                 id: updateBanner
                 Layout.fillWidth: true
                 Layout.preferredHeight: 38
-                Layout.leftMargin: -root.horizontalPadding
+                Layout.leftMargin: -root.horizontalPadding - contentLeftSpacing.width
                 Layout.rightMargin: -root.rightPadding
                 visible: baseRoot.notifyAboutUpdates
                          && AppInfoController.newestVersion !== ""
