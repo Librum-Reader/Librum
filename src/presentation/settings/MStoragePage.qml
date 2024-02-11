@@ -137,43 +137,20 @@ MFlickWrapper {
                                     font.pointSize: Fonts.size46
                                 }
 
-                                RowLayout {
-                                    id: upgradeButtonRow
+                                MButton {
+                                    id: inlineUpgradeButton
                                     Layout.fillWidth: true
-                                    Layout.topMargin: 36
-                                    spacing: 12
+                                    Layout.preferredHeight: 38
+                                    Layout.topMargin: 39
+                                    borderWidth: 0
+                                    backgroundColor: Style.colorBasePurple
+                                    text: qsTr("Upgrade Now")
+                                    fontSize: Fonts.size12
+                                    fontWeight: Font.Bold
+                                    textColor: Style.colorFocusedButtonText
 
-                                    MButton {
-                                        id: inlineUpgradeButton
-                                        Layout.preferredWidth: 110
-                                        Layout.preferredHeight: 38
-                                        borderWidth: 0
-                                        backgroundColor: Style.colorBasePurple
-                                        text: qsTr("Upgrade")
-                                        fontSize: Fonts.size12
-                                        fontWeight: Font.Bold
-                                        textColor: Style.colorFocusedButtonText
-
-                                        onClicked: Qt.openUrlExternally(
-                                                       AppInfoController.website + "/pricing")
-                                    }
-
-                                    MButton {
-                                        id: whyOfferingTiersButton
-                                        Layout.fillWidth: true
-                                        Layout.preferredHeight: 38
-                                        borderWidth: 1
-                                        borderColor: Style.colorCheckboxBorder
-                                        opacityOnPressed: 0.75
-                                        backgroundColor: "transparent"
-                                        text: qsTr("See why we offer multiple tiers")
-                                        fontSize: Fonts.size12
-                                        fontWeight: Font.Medium
-                                        textColor: Style.colorText
-
-                                        onClicked: Qt.openUrlExternally(
-                                                       AppInfoController.website + "/whyTiers")
-                                    }
+                                    onClicked: Qt.openUrlExternally(
+                                                   AppInfoController.website + "/pricing")
                                 }
                             }
                         }

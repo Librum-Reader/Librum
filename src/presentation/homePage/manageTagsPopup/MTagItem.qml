@@ -104,6 +104,7 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
         propagateComposedEvents: true
 
         onPressed: mouse => mouse.accepted = false
