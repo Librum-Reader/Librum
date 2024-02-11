@@ -97,7 +97,7 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
     if(!getIsFiltering())
-        return filterAcceptsFolder(index);
+        return filterAcceptsFolder(index) && filterAcceptsTags(index);
 
     return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
            filterAcceptsFormat(index) && filterAcceptsStatus(index) &&

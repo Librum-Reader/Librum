@@ -230,7 +230,6 @@ Popup {
                             spacing: 13
 
                             component InputBox: MLabeledInputBox {
-                                id: titleField
                                 Layout.fillWidth: true
                                 boxHeight: 34
                                 headerFontWeight: Font.Bold
@@ -246,12 +245,14 @@ Popup {
                             }
 
                             InputBox {
+                                id: titleField
                                 headerText: qsTr("Title")
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.title : ""
                             }
 
                             InputBox {
+                                id: authorsField
                                 headerText: qsTr("Authors")
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.authors : ""
@@ -281,12 +282,14 @@ Popup {
                             }
 
                             InputBox {
+                                id: documentCreatorField
                                 headerText: qsTr("Document creator")
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creator : ""
                             }
 
                             InputBox {
+                                id: creationDateField
                                 headerText: qsTr("Creation date")
                                 text: Globals.selectedBook
                                       !== null ? Globals.selectedBook.creationDate : ""
@@ -294,6 +297,7 @@ Popup {
                             }
 
                             InputBox {
+                                id: formatField
                                 headerText: qsTr("Format")
                                 text: Globals.selectedBook !== null
                                       && Globals.selectedBook.format !== "" ? Globals.selectedBook.format : internal.placeholderText
