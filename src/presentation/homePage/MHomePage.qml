@@ -636,13 +636,16 @@ Page {
         visible: false
         title: qsTr("Limit Reached")
         message: qsTr("You have reached your upload limit.\nDelete unused books to free up space or upgrade.")
-        leftButtonText: qsTr("Ok")
-        rightButtonText: qsTr("Upgrade")
+        leftButtonText: qsTr("Upgrade")
+        rightButtonText: qsTr("Cancel")
         messageBottomSpacing: 16
         minButtonWidth: 180
         onOpenedChanged: if (opened)
                              uploadLimitReachedPopup.giveFocus()
         onDecisionMade: close()
+
+        onLeftButtonClicked: Qt.openUrlExternally(
+                                 AppInfoController.website + "/pricing")
     }
 
     MWarningPopup {
