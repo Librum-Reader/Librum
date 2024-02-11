@@ -48,7 +48,7 @@ public:
     Q_INVOKABLE void setFilterRequest(QString authors, QString format,
                                       QString language, bool onlyBooks,
                                       bool onlyFiles, bool read, bool unread);
-    Q_INVOKABLE bool getIsFiltering();
+    Q_INVOKABLE bool getIsFiltering() const;
     Q_INVOKABLE void addFilterTag(QString tag);
     Q_INVOKABLE void removeFilterTag(QString tag);
     Q_INVOKABLE void clearFilterTags();

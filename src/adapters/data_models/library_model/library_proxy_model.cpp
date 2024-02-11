@@ -96,6 +96,9 @@ bool LibraryProxyModel::filterAcceptsRow(int source_row,
 {
     auto index = sourceModel()->index(source_row, 0, source_parent);
 
+    if(!getIsFiltering())
+        return filterAcceptsFolder(index);
+
     return filterAcceptsTags(index) && filterAcceptsAuthors(index) &&
            filterAcceptsFormat(index) && filterAcceptsStatus(index) &&
            filterAcceptsLanguage(index) && filterAcceptsFolder(index);
@@ -119,7 +122,7 @@ void LibraryProxyModel::setFilterRequest(QString authors, QString format,
     invalidateFilter();
 }
 
-bool LibraryProxyModel::getIsFiltering()
+bool LibraryProxyModel::getIsFiltering() const
 {
     return !m_filterRequest.authors.isEmpty() ||
            !m_filterRequest.format.isEmpty() ||
@@ -383,8 +386,8 @@ void LibraryProxyModel::setFolderFilter(const QString& newFolder)
 
     m_folder = newFolder;
 
-    invalidateFilter();
     emit folderFilterChanged();
+    invalidateFilter();
 }
 
 }  // namespace adapters::data_models
