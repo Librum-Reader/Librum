@@ -162,7 +162,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="334"/>
         <source>Anonymously share information about the books you read to help us improve Librum</source>
-        <translation>匿名分享您阅读的书籍信息以帮助我们改进 Librum</translation>
+        <translation>匿名分享您阅读的图书信息以帮助我们改进 Librum</translation>
     </message>
     <message>
         <location filename="../settings/accountPage/MAccountPage.qml" line="348"/>
@@ -216,42 +216,42 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Edit Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑文件夹</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Create Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>创建文件夹</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="100"/>
         <source>Folder Name</source>
-        <translation type="unfinished"></translation>
+        <translation>文件夹名</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="195"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>图标</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="236"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>颜色</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
         <source>Description</source>
-        <translation type="unfinished">描述</translation>
+        <translation>描述</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Update</source>
-        <translation type="unfinished">更新</translation>
+        <translation>更新</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>创建</translation>
     </message>
 </context>
 <context>
@@ -462,7 +462,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="85"/>
         <source>Books</source>
-        <translation>书籍</translation>
+        <translation>图书</translation>
     </message>
     <message>
         <location filename="../settings/MBehaviorPage.qml" line="95"/>
@@ -538,7 +538,7 @@ We hope you have a great time using it! Feel free to leave us a rating and some 
         <location filename="../homePage/MBook.qml" line="327"/>
         <source>Your book has not been uploaded to the cloud.
 Either you are offline, or your storage is full.</source>
-        <translation>您的书籍未上传到云端，您已离线或您的储存空间已满。</translation>
+        <translation>您的图书未上传到云端，您已离线或您的储存空间已满。</translation>
     </message>
 </context>
 <context>
@@ -655,13 +655,13 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
         <source>Remove books</source>
-        <translation type="unfinished"></translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>移动至文件夹</translation>
     </message>
     <message>
         <source>Uninstall books</source>
@@ -687,12 +687,12 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="52"/>
         <source>Book details</source>
-        <translation>详细信息</translation>
+        <translation>图书详情</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="64"/>
         <source>Save to files</source>
-        <translation>保存到文件</translation>
+        <translation>保存至文件</translation>
     </message>
     <message>
         <location filename="../homePage/MBookRightClickPopup.qml" line="92"/>
@@ -703,7 +703,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MBookRightClickPopup.qml" line="102"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>移动至文件夹</translation>
     </message>
     <message>
         <source>Mark as read</source>
@@ -820,22 +820,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
         <source>Delete %1</source>
-        <translation type="unfinished"></translation>
+        <translation>删除 %1</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="77"/>
         <source>Books inside the folder will not be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>文件夹中的图书不会被删除。</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="96"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="111"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -843,17 +843,17 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="45"/>
         <source>Describe this folder</source>
-        <translation type="unfinished"></translation>
+        <translation>描述此文件夹</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="99"/>
         <source>This folder is about...</source>
-        <translation type="unfinished"></translation>
+        <translation>这个文件夹是用来...</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="135"/>
         <source>Done</source>
-        <translation type="unfinished">完成</translation>
+        <translation>完成</translation>
     </message>
 </context>
 <context>
@@ -945,7 +945,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MEmptyScreenContent.qml" line="53"/>
         <source>Add book</source>
-        <translation>添加书籍</translation>
+        <translation>添加图书</translation>
     </message>
 </context>
 <context>
@@ -954,7 +954,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
         <source>You have reached your daily limit.</source>
         <extracomment>Make sure that the words make a valid sentence</extracomment>
-        <translation>您已到达当日限制。</translation>
+        <translation>您已到达您的当日上限。</translation>
     </message>
     <message>
         <location filename="../readingPage/MExplanationPopup.qml" line="50"/>
@@ -1079,7 +1079,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>Language</source>
-        <translation type="unfinished">语言</translation>
+        <translation>语言</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
@@ -1104,7 +1104,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="194"/>
         <source>Only Books</source>
-        <translation>仅书籍</translation>
+        <translation>仅图书</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="212"/>
@@ -1122,22 +1122,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="83"/>
         <source>Organize</source>
-        <translation type="unfinished"></translation>
+        <translation>组织</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="103"/>
         <source>All Books</source>
-        <translation type="unfinished"></translation>
+        <translation>全部图书</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="114"/>
         <source>Unsorted</source>
-        <translation type="unfinished"></translation>
+        <translation>未排序</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="140"/>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>文件夹</translation>
     </message>
 </context>
 <context>
@@ -1145,22 +1145,22 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="71"/>
         <source>Create subfolder</source>
-        <translation type="unfinished"></translation>
+        <translation>创建子文件夹</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="82"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>编辑</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="94"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>移动至</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="115"/>
         <source>Delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
     </message>
 </context>
 <context>
@@ -1204,17 +1204,17 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="22"/>
         <source>No books were found</source>
-        <translation>未找到任何书籍</translation>
+        <translation>未找到任何图书</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="28"/>
         <source>Couldn&apos;t load free books. Please, check your network connection</source>
-        <translation>无法加载免费书籍。请检查您的网络连接</translation>
+        <translation>无法加载免费图书。请检查您的网络连接</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="81"/>
         <source>Free books</source>
-        <translation>免费书籍</translation>
+        <translation>免费图书</translation>
     </message>
     <message>
         <location filename="../freeBooksPage/MFreeBooksPage.qml" line="82"/>
@@ -1248,7 +1248,7 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="187"/>
         <source>Add books</source>
-        <translation>添加书籍</translation>
+        <translation>添加图书</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="464"/>
@@ -1259,7 +1259,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="465"/>
         <source>Deleting a book is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation>删除书籍是永久性操作，删除后将无法恢复！</translation>
+        <translation>删除图书是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="466"/>
@@ -1276,41 +1276,41 @@ Either you are offline, or your storage is full.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="495"/>
         <source>Remove Books?</source>
-        <translation type="unfinished"></translation>
+        <translation>移除这些图书？</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="496"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation type="unfinished"></translation>
+        <translation>删除图书是永久性操作，删除后将无法恢复！</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <location filename="../homePage/MHomePage.qml" line="571"/>
         <source>Remove from Folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>从文件夹中移除？</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="542"/>
         <source>This action will not delete the original book.</source>
-        <translation type="unfinished"></translation>
+        <translation>这个动作不会删除原始图书。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="543"/>
         <location filename="../homePage/MHomePage.qml" line="573"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="544"/>
         <location filename="../homePage/MHomePage.qml" line="574"/>
         <source>Remove</source>
-        <translation type="unfinished">移除</translation>
+        <translation>移除</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="572"/>
         <source>This action will not delete the original books.</source>
-        <translation type="unfinished"></translation>
+        <translation>这个动作不会删除原始图书。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="622"/>
@@ -1326,7 +1326,7 @@ Either you are offline, or your storage is full.</source>
         <location filename="../homePage/MHomePage.qml" line="638"/>
         <source>You have reached your upload limit.
 Delete unused books to free up space or upgrade.</source>
-        <translation>您已达到您的上传限制。删除未使用的书籍以释放空间或更新。</translation>
+        <translation>您已达到您的上传上限。删除未使用的图书以释放空间或更新。</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="639"/>
@@ -1342,7 +1342,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MHomePage.qml" line="655"/>
         <source>Book already exists</source>
-        <translation>书籍已存在</translation>
+        <translation>图书已存在</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="656"/>
@@ -1353,7 +1353,7 @@ Delete unused books to free up space or upgrade.</source>
         <location filename="../homePage/MHomePage.qml" line="659"/>
         <source>Are you sure you that want to add it again?
 </source>
-        <translation>您确定想再次添加这本书吗？</translation>
+        <translation>您确定想再次添加这本图书吗？</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="662"/>
@@ -1479,17 +1479,17 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="60"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>移动至</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="325"/>
         <source>Cancel</source>
-        <translation type="unfinished">取消</translation>
+        <translation>取消</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="344"/>
         <source>Select</source>
-        <translation type="unfinished">选择</translation>
+        <translation>选择</translation>
     </message>
 </context>
 <context>
@@ -1497,7 +1497,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="23"/>
         <source>No book satisfies the filter conditions</source>
-        <translation>没有书籍满足过滤条件</translation>
+        <translation>没有图书满足过滤条件</translation>
     </message>
     <message>
         <location filename="../homePage/MNoBookSatisfiesFilterItem.qml" line="37"/>
@@ -1546,7 +1546,7 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="147"/>
         <source>Sync book</source>
-        <translation>同步书籍</translation>
+        <translation>同步图书</translation>
     </message>
     <message>
         <location filename="../readingPage/readingToolbar/MReadingOptionsPopup.qml" line="165"/>
@@ -1703,7 +1703,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../modules/CustomComponents/buttons/MSearchButton.qml" line="14"/>
         <source>Search for books</source>
-        <translation>搜索书籍</translation>
+        <translation>搜索图书</translation>
     </message>
 </context>
 <context>
@@ -1711,7 +1711,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="39"/>
         <source>Pick a color</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个颜色</translation>
     </message>
 </context>
 <context>
@@ -1719,12 +1719,12 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="43"/>
         <source>Pick an icon</source>
-        <translation type="unfinished"></translation>
+        <translation>选择一个图标</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="98"/>
         <source>Search</source>
-        <translation type="unfinished">搜索</translation>
+        <translation>搜索</translation>
     </message>
 </context>
 <context>
@@ -1882,7 +1882,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="116"/>
         <source>Free books</source>
-        <translation>免费书籍</translation>
+        <translation>免费图书</translation>
     </message>
     <message>
         <location filename="../sidebar/MSidebar.qml" line="138"/>
@@ -2008,12 +2008,12 @@ Confirm your email by clicking the link we sent you.</source>
         <location filename="../settings/MStoragePage.qml" line="318"/>
         <source>YOUR BOOKS</source>
         <extracomment>Keep capitalized</extracomment>
-        <translation>您的书籍</translation>
+        <translation>您的图书</translation>
     </message>
     <message>
         <location filename="../settings/MStoragePage.qml" line="337"/>
         <source>Books in your Library</source>
-        <translation>您的书籍</translation>
+        <translation>图书馆内的图书</translation>
     </message>
     <message>
         <source>Upgrade Your Account</source>
