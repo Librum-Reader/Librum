@@ -3,6 +3,7 @@
   <id>com.librumreader.librum</id>
   
   <name>Librum</name>
+  <developer_name>Librum-Reader</developer_name>
   <summary>A modern e-book reader and library manager</summary>
   
   <metadata_license>MIT</metadata_license>
