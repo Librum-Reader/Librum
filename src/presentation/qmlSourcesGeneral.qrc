@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Globals.qml</file>
+        <file>TranslationsModel.qml</file>
+        <file>FontSheet.qml</file>
+        <file>StyleSheet.qml</file>
+        <file>IconSheet.qml</file>
+    </qresource>
+</RCC>

@@ -14,9 +14,6 @@
         <file>sidebar/MProfilePopupItem.qml</file>
         <file>sidebar/MSidebar.qml</file>
         <file>sidebar/MSidebarItem.qml</file>
-        <file>StyleSheet.qml</file>
-        <file>IconSheet.qml</file>
-        <file>FontSheet.qml</file>
         <file>modules/CustomComponents/buttons/MButton.qml</file>
         <file>modules/CustomComponents/buttons/MRemoveOptionButton.qml</file>
         <file>modules/CustomComponents/buttons/MSearchButton.qml</file>
@@ -66,7 +63,6 @@
         <file>settings/shortcutsPage/MRecordKeyBox.qml</file>
         <file>settings/accountPage/MAccountPage.qml</file>
         <file>settings/accountPage/MSelectProfilePictureArea.qml</file>
-        <file>Globals.qml</file>
         <file>modules/CustomComponents/comboBox/ComboBoxLogic.js</file>
         <file>modules/CustomComponents/MFlickWrapper.qml</file>
         <file>settings/MBehaviorPage.qml</file>
@@ -99,7 +95,6 @@
         <file>readingPage/MDictionaryPopup.qml</file>
         <file>readingPage/MBookmarkItem.qml</file>
         <file>readingPage/MExplanationPopup.qml</file>
-        <file>TranslationsModel.qml</file>
         <file>homePage/MBookMultiSelectRightClickPopup.qml</file>
         <file>modules/CustomComponents/MLanguageModel.qml</file>
         <file>homePage/folderSidebar/MFolderSidebarItem.qml</file>

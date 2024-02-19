@@ -26,16 +26,19 @@
 #include "i_free_books_service.hpp"
 #include "i_library_service.hpp"
 #include "i_user_service.hpp"
-#include "key_sequence_recorder.hpp"
 #include "library_proxy_model.hpp"
 #include "message_handler.hpp"
-#include "page_view.hpp"
 #include "setting_groups.hpp"
 #include "setting_keys.hpp"
 #include "shortcuts_proxy_model.hpp"
 #include "tag_dto.hpp"
 #include "user_controller.hpp"
 #include "word_definition_dto.hpp"
+
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
+    #include "key_sequence_recorder.hpp"
+    #include "page_view.hpp"
+#endif
 
 
 using namespace adapters::controllers;
@@ -73,8 +76,6 @@ int main(int argc, char* argv[])
     qmlRegisterType<adapters::data_models::LibraryProxyModel>("Librum.models", 1, 0, "LibraryProxyModel");
     qmlRegisterType<adapters::data_models::FreeBooksModel>("Librum.models", 1, 0, "FreeBooksModel");
     qmlRegisterType<adapters::data_models::ShortcutsProxyModel>("Librum.models", 1, 0, "ShortcutsProxyModel");
-    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
-    qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
     qRegisterMetaType<adapters::dtos::BookDto>();
     qRegisterMetaType<adapters::dtos::TagDto>();
     qRegisterMetaType<adapters::dtos::FolderDto>();
@@ -82,6 +83,10 @@ int main(int argc, char* argv[])
     qRegisterMetaType<adapters::dtos::WordTypeDto>();
     qRegisterMetaType<adapters::dtos::WordDefinitionDto>();
 
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
+    qmlRegisterType<cpp_elements::KeySequenceRecorder>("Librum.elements", 1, 0, "KeySequenceRecorder");
+    qmlRegisterType<cpp_elements::PageView>("Librum.elements", 1, 0, "PageView");
+#endif
 
     // Authentication Stack
     auto* authenticationService =

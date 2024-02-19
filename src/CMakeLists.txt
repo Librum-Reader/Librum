@@ -1,6 +1,9 @@
 # Configuration
-set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
-
+if(ANDROID)
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/android/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
+else()
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/desktop/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
+endif()
 
 # Language
 set(CMAKE_CXX_STANDARD 20)
