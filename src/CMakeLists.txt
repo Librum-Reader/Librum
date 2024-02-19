@@ -25,9 +25,6 @@ get_target_property(ADAPTERS_BIN_DIR adapters CMAKE_BINARY_DIR)
 
 add_subdirectory(presentation/)
 
-
-
-
 # Building
 set(app_icon_resource_windows "${CMAKE_CURRENT_SOURCE_DIR}/resources.rc")
 qt_add_executable(librum
@@ -42,6 +39,19 @@ qt_add_executable(librum
 # Set WIN32 for windows to avoid console getting opened on start on windows
 if(WIN32)
     set_target_properties(librum PROPERTIES WIN32_EXECUTABLE true)
+endif()
+
+# On android, we need to manually move the mupdf and openssl libraries to the apk
+# by setting QT_ANDROID_EXTRA_LIBS
+if(ANDROID)
+    list(APPEND CUSTOM_ANDROID_EXTRA_LIBS "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdf.so")
+    list(APPEND CUSTOM_ANDROID_EXTRA_LIBS "${PROJECT_SOURCE_DIR}/libs/mupdf/build/shared-debug/libmupdfcpp.so")
+    string(REPLACE ";" "," CUSTOM_ANDROID_EXTRA_LIBS_STRING "${CUSTOM_ANDROID_EXTRA_LIBS}")
+
+    set_property(TARGET librum PROPERTY QT_ANDROID_EXTRA_LIBS
+        ${ANDROID_SDK_ROOT}/android_openssl/ssl_3/arm64-v8a/libcrypto_3.so
+        ${ANDROID_SDK_ROOT}/android_openssl/ssl_3/arm64-v8a/libssl_3.so
+        ${CUSTOM_ANDROID_EXTRA_LIBS_STRING})
 endif()
 
 target_compile_definitions(librum

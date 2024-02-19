@@ -86,17 +86,22 @@ set(application_SRC
 )
 
 
-# Build mupdf
+
+########## Build mupdf ##########
 set(VENV_OPTION "")
 if(NOT ${NO_VENV})
     set(VENV_OPTION "--venv")
+endif()
+
+if(ANDROID)
+    set(EXTRA_MAKE_AGRS --m-vars 'HAVE_OBJCOPY=no HAVE_LIBCRYPTO=no')
 endif()
 
 if(UNIX)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/libmupdfcpp.so" PARENT_SCOPE)
-    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b -j 0 m01)
+    set(MUPDF_BUILD_COMMAND ./scripts/mupdfwrap.py ${VENV_OPTION} -d build/$<IF:$<CONFIG:Debug>,shared-debug,shared-release> -b --m-target libs ${EXTRA_MAKE_AGRS} -j 0 m01)
 elseif(WIN32)
     set(MUPDF_OUTPUT_DIR "${PROJECT_SOURCE_DIR}/libs/mupdf/platform/win32/x64/$<IF:$<CONFIG:Debug>,Debug,Release>")
     set(MUPDF_OUTPUT "${MUPDF_OUTPUT_DIR}/mupdfcpp64.lib" PARENT_SCOPE)
@@ -106,6 +111,14 @@ endif()
 
 message("MuPdf build command: " ${MUPDF_BUILD_COMMAND})
 
+
+set(CC_COMMAND "${CMAKE_C_COMPILER}")
+set(CXX_COMMAND "${CMAKE_CXX_COMPILER}")
+
+if(ANDROID)
+    string(APPEND CC_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
+    string(APPEND CXX_COMMAND " --target=aarch64-none-linux-android23 --sysroot=/home/creapermann/Android/Sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/linux-x86_64/sysroot")
+endif()
 
 
 # On linux, we want to use the system provided libjpeg,
@@ -119,6 +132,8 @@ endif()
 
 add_custom_target(mupdf
    COMMAND ${CMAKE_COMMAND} -E env
+        "CC=${CC_COMMAND}"
+        "CXX=${CXX_COMMAND}"
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
         ${MUPDF_BUILD_COMMAND}
    BYPRODUCTS ${MUPDF_OUTPUT}
@@ -127,7 +142,7 @@ add_custom_target(mupdf
 )
 
 
-###### Copy the mupdf dlls to the build directory for windows ######
+#Copy the mupdf dlls to the build directory for windows
 if(WIN32)
     add_custom_command(
       TARGET mupdf POST_BUILD
@@ -141,13 +156,13 @@ endif()
 
 
 
-# Build application
+########## Build application ##########
 add_library(application
                 SHARED
                     ${application_SRC}
 )
 
-add_dependencies(application mupdf)
+add_dependencies(application mupdf) # Ensure the mupdf target is built before the application target
 
 target_compile_definitions(application PRIVATE APPLICATION_LIBRARY)
 
