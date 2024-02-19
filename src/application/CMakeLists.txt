@@ -135,6 +135,7 @@ add_custom_target(mupdf
         "CC=${CC_COMMAND}"
         "CXX=${CXX_COMMAND}"
         "USE_SYSTEM_LIBJPEG=${USE_SYSTEM_LIBJPEG_VALUE}"
+        "USE_SONAME=no"
         ${MUPDF_BUILD_COMMAND}
    BYPRODUCTS ${MUPDF_OUTPUT}
    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/mupdf
