@@ -405,7 +405,7 @@ MFlickWrapper {
                         backgroundColor: "transparent"
                         opacityOnPressed: 0.7
                         text: qsTr("Logout")
-                        textColor: Style.colorFocusedButtonText
+                        textColor: Style.colorUnfocusedButtonText
                         fontWeight: Font.Bold
                         fontSize: Fonts.size12
 
