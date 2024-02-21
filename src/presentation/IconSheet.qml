@@ -138,6 +138,12 @@ Item {
     property string bookClosed
     property string pen
 
+    // Mobile
+    property string mobileHome: "/resources/images/mobile/home.svg"
+    property string mobileExplore: "/resources/images/mobile/explore.svg"
+    property string mobileProfile: "/resources/images/mobile/profile.svg"
+    property string mobileFolder: "/resources/images/mobile/folder.svg"
+
     state: "Light"
     states: [
         State {

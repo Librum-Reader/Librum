@@ -56,8 +56,8 @@ Item {
             readOnly: root.readOnly
             color: root.inputFontColor
             font.pointSize: root.inputFontSize
-            leftPadding: 12
-            rightPadding: 12
+            leftPadding: 16
+            rightPadding: 16
             echoMode: root.textHidden ? TextInput.Password : TextInput.Normal
             selectionColor: Style.colorTextSelection
             selectedTextColor: root.inputFontColor
@@ -80,7 +80,7 @@ Item {
                 id: moveablePlaceholder
                 property int centeredPosition: 0
 
-                x: input.leftPadding + 4
+                x: input.leftPadding
                 font.pointSize: root.inputFontSize
                 y: centeredPosition
                 color: root.placeholderColor
@@ -101,7 +101,7 @@ Item {
                 property int centeredPosition: (parent.height - implicitHeight) / 2
 
                 visible: false
-                x: input.leftPadding + 4
+                x: input.leftPadding
                 y: centeredPosition
                 font.pointSize: internal.headerPlaceholderSize
                 text: root.placeHolderText

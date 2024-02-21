@@ -28,7 +28,6 @@ MFlickWrapper {
         autoLoginTimer.start()
 
         // Determine the index of the language used in the combobox
-        print("Lang: " + AppInfoController.language)
         let index = languageComboBox.getIndexByText(AppInfoController.language)
         languageComboBox.defaultIndex = index
     }

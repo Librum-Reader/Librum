@@ -8,5 +8,11 @@
         <file>modules/CustomComponents/MLabeledInputBox.qml</file>
         <file>registerPage/MRegisterPage.qml</file>
         <file>modules/CustomComponents/MLogo.qml</file>
+        <file>modules/CustomComponents/MCheckBox.qml</file>
+        <file>homePage/MHomePage.qml</file>
+        <file>navbar/MNavbar.qml</file>
+        <file>navbar/MNavbarItem.qml</file>
+        <file>explorePage/MExplorePage.qml</file>
+        <file>profilePage/MProfilePage.qml</file>
     </qresource>
 </RCC>

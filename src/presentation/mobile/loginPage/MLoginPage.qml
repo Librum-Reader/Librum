@@ -3,13 +3,33 @@ import QtQuick.Controls.Material
 import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
+import Librum.controllers
 import CustomComponents
 
 Page {
-    id: page
+    id: root
     horizontalPadding: 18
     background: Rectangle {
         color: Style.colorPageBackground
+    }
+
+    Connections {
+        id: proccessLoginResult
+        target: AuthController
+        function onLoginFinished(errorCode, message) {
+            internal.processLoginResult(errorCode, message)
+        }
+    }
+
+    Connections {
+        id: proccessLoadingUserResult
+        target: UserController
+        function onFinishedLoadingUser(success) {
+            if (success)
+                loadPage(homePage, navbar.homeItem)
+            else
+                loginFailedPopup.open()
+        }
     }
 
     ColumnLayout {
@@ -42,7 +62,7 @@ Page {
 
         Label {
             id: loginText
-            Layout.topMargin: 6
+            Layout.topMargin: 4
             Layout.alignment: Qt.AlignHCenter
             text: qsTr("Log into your account")
             color: Style.colorSubtitle
@@ -61,7 +81,7 @@ Page {
             id: passwordInput
             Layout.fillWidth: true
             Layout.preferredHeight: 54
-            Layout.topMargin: 10
+            Layout.topMargin: 8
             isPassword: true
             placeHolderText: qsTr("Password")
             textHidden: true
@@ -71,7 +91,7 @@ Page {
             id: signInButton
             Layout.fillWidth: true
             Layout.preferredHeight: 54
-            Layout.topMargin: 22
+            Layout.topMargin: 20
             borderWidth: 0
             radius: 8
             backgroundColor: Style.colorBasePurple
@@ -81,9 +101,7 @@ Page {
             fontWeight: Font.Bold
             text: qsTr("Sign in")
 
-            onClicked: {
-
-            }
+            onClicked: internal.login()
         }
 
         Label {
@@ -108,7 +126,7 @@ Page {
         Item {
             id: registerLinkContainer
             Layout.alignment: Qt.AlignHCenter
-            Layout.bottomMargin: 20
+            Layout.bottomMargin: 12
             implicitHeight: registerLinkRow.implicitHeight + 8
             implicitWidth: registerLinkRow.implicitWidth + 8
 
@@ -138,6 +156,61 @@ Page {
                 id: registerLinkArea
                 onTapped: loadPage(registerPage)
             }
+        }
+    }
+
+    QtObject {
+        id: internal
+        property color previousBorderColor: emailInput.borderColor
+
+        function login() {
+            AuthController.loginUser(emailInput.text, passwordInput.text, true)
+        }
+
+        function processLoginResult(errorCode, message) {
+            if (errorCode === ErrorCode.NoError) {
+                UserController.loadUser(true)
+            } else {
+                internal.setLoginError(errorCode, message)
+            }
+        }
+
+        function setLoginError(errorCode, message) {
+            switch (errorCode) {
+            case ErrorCode.EmailOrPasswordIsWrong:
+                emailInput.setError()
+                passwordInput.errorText = message
+                passwordInput.setError()
+                break
+            case ErrorCode.EmailAddressTooLong:
+                // Fall through
+            case ErrorCode.EmailAddressTooShort:
+                // Fall through
+            case ErrorCode.InvalidEmailAddressFormat:
+                emailInput.errorText = message
+                emailInput.setError()
+                break
+            case ErrorCode.PasswordTooLong:
+                // Fall through
+            case ErrorCode.PasswordTooShort:
+
+                passwordInput.errorText = message
+                passwordInput.setError()
+                break
+            default:
+                generalErrorText.text = message
+                generalErrorText.visible = true
+            }
+        }
+
+        function clearLoginError() {
+            emailInput.errorText = ""
+            emailInput.clearError()
+            passwordInput.errorText = ""
+            passwordInput.clearError()
+
+            generalErrorText.visible = false
+            generalErrorText.text = ""
         }
     }
 }

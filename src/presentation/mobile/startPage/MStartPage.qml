@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Librum.style
 import Librum.fonts
 import Librum.icons
+import Librum.controllers
 import CustomComponents
 
 Page {
@@ -11,6 +12,35 @@ Page {
     padding: 0
     background: Rectangle {
         color: Style.colorPageBackground
+    }
+
+    Connections {
+        id: proccessLoginResult
+        target: AuthController
+        function onLoginFinished(errorCode, message) {
+            UserController.loadUser(true)
+        }
+    }
+
+    Connections {
+        id: proccessLoadingUserResult
+        target: UserController
+        function onFinishedLoadingUser(success) {
+            if (success)
+                loadPage(homePage, navbar.homeItem)
+        }
+    }
+
+    Component.onCompleted: {
+        // For some reason this prevents a SEGV. Directly calling the auto login
+        // directly causes the application to crash on startup.
+        autoLoginTimer.start()
+    }
+
+    Timer {
+        id: autoLoginTimer
+        interval: 0
+        onTriggered: AuthController.tryAutomaticLogin()
     }
 
     ColumnLayout {

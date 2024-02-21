@@ -231,23 +231,21 @@ int main(int argc, char* argv[])
     // Setup translations
     QSettings settings;
     auto storedLanguage = settings.value("language", QVariant("")).toString();
-    if(storedLanguage.isEmpty())
-    {
-        // If no language was specified in the settings, deduce the system language
-        const QStringList uiLanguages = QLocale::system().uiLanguages();
-        for(const QString& locale : uiLanguages)
-        {
-            const QString name = QLocale(locale).name();
-            if(appInfoController->switchToLanguage(name))
-            {
-                break;
-            }
-        }
-    }
-    else
-    {
-        appInfoController->switchToLanguage(storedLanguage);
-    }
+    // if(storedLanguage.isEmpty())
+    // {
+    //     // If no language was specified in the settings, deduce the system language
+    //     const QStringList uiLanguages = QLocale::system().uiLanguages();
+    //     for(const QString& locale : uiLanguages)
+    //     {
+    //         const QString name = QLocale(locale).name();
+    //         if(appInfoController->switchToLanguage(name))
+    //             break;
+    //     }
+    // }
+    // else
+    // {
+    //     appInfoController->switchToLanguage(storedLanguage);
+    // }
 
 
     const QUrl url("qrc:/main.qml");

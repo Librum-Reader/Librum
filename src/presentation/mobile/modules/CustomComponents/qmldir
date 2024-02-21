@@ -2,3 +2,4 @@ module CustomComponents
 MButton 1.0 buttons/MButton.qml
 MLabeledInputBox 1.0 MLabeledInputBox.qml
 MLogo 1.0 MLogo.qml
+MCheckBox 1.0 MCheckBox.qml
