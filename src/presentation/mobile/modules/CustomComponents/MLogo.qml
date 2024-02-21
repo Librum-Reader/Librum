@@ -11,7 +11,7 @@ Item {
         id: outerRect
         anchors.fill: parent
         color: Style.colorBasePurple
-        radius: Math.round(width / 18)
+        radius: 4
         antialiasing: true
 
         Rectangle {

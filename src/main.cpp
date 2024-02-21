@@ -62,7 +62,9 @@ int main(int argc, char* argv[])
     QIcon icon(":/src/logo.ico");
     app.setWindowIcon(icon);
 
+#if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     qInstallMessageHandler(logging::messageHandler);
+#endif
     setupGlobalSettings();
     setupFonts();
 

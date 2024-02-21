@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>loginPage/MLoginPage.qml</file>
+        <file>startPage/MStartPage.qml</file>
+        <file>modules/CustomComponents/buttons/MButton.qml</file>
+        <file>modules/CustomComponents/qmldir</file>
+        <file>modules/CustomComponents/MLabeledInputBox.qml</file>
+        <file>registerPage/MRegisterPage.qml</file>
+        <file>modules/CustomComponents/MLogo.qml</file>
+    </qresource>
+</RCC>

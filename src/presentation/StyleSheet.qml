@@ -85,9 +85,10 @@ Item {
     property color colorDefaultFolderIcon
     property color colorFolderIconSelection
 
-    state: (SettingsController.appearanceSettings.Theme
-            === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
+    state: "Light"
 
+    // state: (SettingsController.appearanceSettings.Theme
+    //         === undefined ? lastRunSettings.theme : SettingsController.appearanceSettings.Theme)
     states: [
         State {
             name: "Light"

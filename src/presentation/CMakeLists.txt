@@ -3,13 +3,13 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
 # Build
 if(ANDROID)
-    set(QML_SOURCE_QRC_PATH "android/qmlSourcesAndroid.qrc")
+    set(QML_SOURCE_QRC_PATH "mobile/qmlSourcesMobile.qrc")
 else()
     set(QML_SOURCE_QRC_PATH "desktop/qmlSourcesDesktop.qrc")
 endif()
 
 if(ANDROID)
-    set(CPP_SOURCE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/android/modules/CppElements")
+    set(CPP_SOURCE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/mobile/modules/CppElements")
     set(CPP_FILES)
 else()
     set(CPP_SOURCE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/desktop/modules/CppElements")

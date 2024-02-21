@@ -59,6 +59,7 @@ Item {
     property string checkBubbleIllustration
     property string addFileIllustration
     property string notFoundIllustration
+    property string readingTimeIllustration
 
     // Reading searchbar
     property string readingSearchbarCancel
@@ -312,6 +313,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 notFoundIllustration: "/resources/images/light_mode/illustrations/not_found.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                readingTimeIllustration: "/resources/images/light_mode/illustrations/reading_time_illustration.svg"
             }
 
             // Reading searchbar
@@ -755,6 +760,10 @@ Item {
             PropertyChanges {
                 target: iconSheet
                 notFoundIllustration: "/resources/images/dark_mode/illustrations/not_found.svg"
+            }
+            PropertyChanges {
+                target: iconSheet
+                readingTimeIllustration: "/resources/images/dark_mode/illustrations/reading_time_illustration.svg"
             }
 
             // Reading searchbar

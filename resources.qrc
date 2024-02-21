@@ -396,5 +396,6 @@
         <file>resources/images/folder_icons/fingerprint.svg</file>
         <file>resources/images/light_mode/book_popup/folder_icon.svg</file>
         <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
+        <file>resources/images/light_mode/illustrations/reading_time_illustration.svg</file>
     </qresource>
 </RCC>

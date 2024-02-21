@@ -1,8 +1,8 @@
 # Configuration
 if(ANDROID)
-    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/android/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/mobile/modules CACHE STRING "Qml modules" FORCE)
 else()
-    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/desktop/modules ${CMAKE_CURRENT_BINARY_DIR}/" CACHE STRING "Qml modules")
+    set(QML_IMPORT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/presentation/desktop/modules CACHE STRING "Qml modules" FORCE)
 endif()
 
 # Language
