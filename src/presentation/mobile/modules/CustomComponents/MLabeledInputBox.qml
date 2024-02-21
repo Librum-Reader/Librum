@@ -16,6 +16,7 @@ Item {
     property string placeHolderText: "Input"
     property color placeholderColor: Style.colorPlaceholderText
     property int fontWeight: Font.Normal
+    property bool isPassword: false
 
     implicitWidth: 200
     implicitHeight: 56
@@ -106,6 +107,29 @@ Item {
                 text: root.placeHolderText
             }
         }
+
+        Item {
+            Layout.preferredWidth: 42
+            Layout.rightMargin: 8
+            Layout.fillHeight: true
+            visible: root.isPassword
+
+            IconImage {
+                id: passwordVisibilityTogglerIcon
+                anchors.centerIn: parent
+                Layout.alignment: Qt.AlignVCenter
+                source: root.textHidden ? Icons.eyeOn : Icons.eyeOff
+                opacity: imageArea.pressed ? 0.75 : 1
+                sourceSize.width: 22
+                fillMode: Image.PreserveAspectFit
+                color: "#9999A0"
+            }
+
+            TapHandler {
+                id: imageArea
+                onTapped: root.textHidden = !root.textHidden
+            }
+        }
     }
 
     TapHandler {
@@ -194,5 +218,6 @@ Item {
     QtObject {
         id: internal
         property int headerPlaceholderSize: 11
+        property bool textHiden: root.isPassword
     }
 }

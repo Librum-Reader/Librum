@@ -62,6 +62,7 @@ Page {
             Layout.fillWidth: true
             Layout.preferredHeight: 54
             Layout.topMargin: 10
+            isPassword: true
             placeHolderText: qsTr("Password")
             textHidden: true
         }

@@ -14,7 +14,6 @@ Page {
 
     ColumnLayout {
         id: layout
-        anchors.centerIn: parent
-        width: parent.width
+        anchors.fill: parent
     }
 }
