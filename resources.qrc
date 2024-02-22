@@ -398,8 +398,8 @@
         <file>resources/images/dark_mode/book_popup/folder_icon.svg</file>
         <file>resources/images/light_mode/illustrations/reading_time_illustration.svg</file>
         <file>resources/images/mobile/profile.svg</file>
-        <file>resources/images/mobile/home.svg</file>
         <file>resources/images/mobile/explore.svg</file>
         <file>resources/images/mobile/folder.svg</file>
+        <file>resources/images/mobile/library.svg</file>
     </qresource>
 </RCC>

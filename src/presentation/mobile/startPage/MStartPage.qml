@@ -27,7 +27,7 @@ Page {
         target: UserController
         function onFinishedLoadingUser(success) {
             if (success)
-                loadPage(homePage, navbar.homeItem)
+                loadPage(homePage, navbar.libraryItem)
         }
     }
 

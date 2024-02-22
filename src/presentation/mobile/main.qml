@@ -6,7 +6,7 @@ import "startPage"
 import "loginPage"
 import "registerPage"
 import "navbar"
-import "homePage"
+import "libraryPage"
 import "explorePage"
 import "profilePage"
 
@@ -60,7 +60,7 @@ ApplicationWindow {
     }
     Component {
         id: homePage
-        MHomePage {}
+        MLibraryPage {}
     }
     Component {
         id: explorePage

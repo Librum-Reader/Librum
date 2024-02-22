@@ -9,9 +9,9 @@ Item {
     id: root
     property alias text: label.text
     property alias icon: icon.source
-    property int iconWidth: 22
-    property int topAdjustment: 0
     property bool selected: false
+    property int topMargin: 0
+    property int iconHeight: 20
     signal clicked
 
     implicitHeight: 66
@@ -24,9 +24,9 @@ Item {
         IconImage {
             id: icon
             Layout.alignment: Qt.AlignHCenter
-            Layout.topMargin: root.topAdjustment
+            Layout.topMargin: root.topMargin
             opacity: tapHandler.pressed ? 0.75 : 1
-            sourceSize.width: root.iconWidth
+            sourceSize.height: root.iconHeight
             fillMode: Image.PreserveAspectFit
             color: root.selected ? Style.colorBasePurple : "#9F9F9F"
         }
