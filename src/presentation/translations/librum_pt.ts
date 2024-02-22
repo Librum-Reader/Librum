@@ -216,42 +216,42 @@ Tenha uma ótima experiência! Deixe sua avaliação e alguns comentários.</tra
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Edit Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Pasta</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="73"/>
         <source>Create Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar Pasta</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="100"/>
         <source>Folder Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome da Pasta</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="195"/>
         <source>Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Icone</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="236"/>
         <source>Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="275"/>
         <source>Description</source>
-        <translation type="unfinished">Descrição</translation>
+        <translation>Descrição</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Update</source>
-        <translation type="unfinished">Atualizar</translation>
+        <translation>Atualizar</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MAddFolderPopup.qml" line="321"/>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar</translation>
     </message>
 </context>
 <context>
@@ -648,13 +648,13 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="34"/>
         <source>Remove books</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover livros</translation>
     </message>
     <message>
         <location filename="../homePage/MBookMultiSelectRightClickPopup.qml" line="44"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Mover para pasta</translation>
     </message>
     <message>
         <source>Uninstall books</source>
@@ -696,7 +696,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
         <location filename="../homePage/MBookRightClickPopup.qml" line="102"/>
         <source>Move to Folder</source>
         <extracomment>If this is too long, use &quot;To Folder&quot; instead</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Mover para pasta</translation>
     </message>
     <message>
         <source>Mark as read</source>
@@ -813,22 +813,22 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="47"/>
         <source>Delete %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar %1</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="77"/>
         <source>Books inside the folder will not be deleted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Os livros dentro da pasta não serão excluídos.</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="96"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDeleteFolderPopup.qml" line="111"/>
         <source>Delete</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
 </context>
 <context>
@@ -836,17 +836,17 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="45"/>
         <source>Describe this folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Descreva esta pasta</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="99"/>
         <source>This folder is about...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta pasta é sobre...</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MDescriptionPopup.qml" line="135"/>
         <source>Done</source>
-        <translation type="unfinished">Concluído</translation>
+        <translation>Feito</translation>
     </message>
 </context>
 <context>
@@ -1072,7 +1072,7 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="99"/>
         <source>Language</source>
-        <translation type="unfinished">Idioma</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <location filename="../homePage/toolbar/filterByButton/MFilterByPopup.qml" line="171"/>
@@ -1115,22 +1115,22 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="83"/>
         <source>Organize</source>
-        <translation type="unfinished"></translation>
+        <translation>Organizar</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="103"/>
         <source>All Books</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos os livros</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="114"/>
         <source>Unsorted</source>
-        <translation type="unfinished"></translation>
+        <translation>Não classificado</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebar.qml" line="140"/>
         <source>Folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastas</translation>
     </message>
 </context>
 <context>
@@ -1138,22 +1138,22 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="71"/>
         <source>Create subfolder</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar subpasta</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="82"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="94"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover para</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MFolderSidebarItemRigthclickPopup.qml" line="115"/>
         <source>Delete</source>
-        <translation type="unfinished">Excluir</translation>
+        <translation>Excluir</translation>
     </message>
 </context>
 <context>
@@ -1312,41 +1312,41 @@ Você está offline ou seu armazenamento está cheio.</translation>
     <message>
         <location filename="../homePage/MHomePage.qml" line="495"/>
         <source>Remove Books?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover livros?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="496"/>
         <source>Deleting books is a permanent action, no one will be
  able to restore it afterwards!</source>
-        <translation type="unfinished"></translation>
+        <translation>Excluir livros é uma ação permanente, ninguém será capaz de restaurá-la posteriormente!</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="541"/>
         <location filename="../homePage/MHomePage.qml" line="571"/>
         <source>Remove from Folder?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover da pasta?</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="542"/>
         <source>This action will not delete the original book.</source>
-        <translation type="unfinished"></translation>
+        <translation>Essa ação não irá excluir o livro original.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="543"/>
         <location filename="../homePage/MHomePage.qml" line="573"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="544"/>
         <location filename="../homePage/MHomePage.qml" line="574"/>
         <source>Remove</source>
-        <translation type="unfinished">Remover</translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="572"/>
         <source>This action will not delete the original books.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta ação não irá excluir os livros originais.</translation>
     </message>
     <message>
         <location filename="../homePage/MHomePage.qml" line="638"/>
@@ -1485,17 +1485,17 @@ Delete unused books to free up space or upgrade.</source>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="60"/>
         <source>Move to</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover para</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="325"/>
         <source>Cancel</source>
-        <translation type="unfinished">Cancelar</translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MMoveToFolderPopup.qml" line="344"/>
         <source>Select</source>
-        <translation type="unfinished">Selecionar</translation>
+        <translation>Selecionar</translation>
     </message>
 </context>
 <context>
@@ -1721,7 +1721,7 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/folderSidebar/MSelectColorPopup.qml" line="39"/>
         <source>Pick a color</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha uma cor</translation>
     </message>
 </context>
 <context>
@@ -1729,12 +1729,12 @@ Confirm your email by clicking the link we sent you.</source>
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="43"/>
         <source>Pick an icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha um icone</translation>
     </message>
     <message>
         <location filename="../homePage/folderSidebar/MSelectIconPopup.qml" line="98"/>
         <source>Search</source>
-        <translation type="unfinished">Pesquisar</translation>
+        <translation>Pesquisar</translation>
     </message>
 </context>
 <context>
